@@ -48,8 +48,8 @@ module.exports = {
     this.setInitialSearchFields(state);
     // wait for our filters to load
     I.waitForVisible(this.fields.caseName, 30);
-    I.fillField(this.fields.caseName, caseName);
-    I.click(this.fields.search);
+    I.fillField(this.fields.caseName, caseName,30);
+    I.click(this.fields.search,30);
   },
 
   setInitialSearchFields(state = 'Any') {
