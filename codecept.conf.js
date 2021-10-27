@@ -69,7 +69,7 @@ exports.config = {
 
   include: {
     config: './src/test/e2e/config.js',
-    I: './src/test/e2e/actors/base.js',
+    I: './src/test/e2e/actors/main.js',
     loginPage: './src/test/e2e/pages/login.page.js',
     openApplicationEventPage: './src/test/e2e/pages/events/openApplicationEvent.page.js',
     caseListPage: './src/test/e2e/pages/caseList.page.js',
