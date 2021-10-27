@@ -79,6 +79,6 @@ function cleanCircularReferences(obj) {
       }
 
       return value;
-    })
+    }),
   );
 }

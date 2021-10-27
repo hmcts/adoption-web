@@ -1,7 +1,6 @@
 const output = require('codeceptjs').output;
 const lodash = require('lodash');
 const config = require('../config');
-const moment = require('moment');
 const loginPage = require('../pages/login.page');
 const caseListPage = require('../pages/caseList.page');
 const openApplicationEventPage = require('../pages/events/openApplicationEvent.page');
@@ -291,26 +290,9 @@ module.exports = {
       .withText('Remove'));
   },
 
-  async submitNewCaseWithData(data = mandatorySubmissionFields) {
-    const caseId = await this.submitNewCase(config.swanseaLocalAuthorityUserOne);
-    await apiHelper.populateWithData(caseId, data);
-    if (this.isPuppeteer()) {
-      await this.refreshPage();
-    }
-    output.print(`Case #${caseId} has been populated with data`);
 
-    return caseId;
-  },
 
-  async submitNewCase(user, name) {
-    const caseName = name || `Test case (${moment().format('YYYY-MM-DD HH:MM')})`;
-    const creator = user || config.swanseaLocalAuthorityUserOne;
-    const caseData = await apiHelper.createCase(creator, caseName);
-    const caseId = caseData.id;
-    output.print(`Case #${caseId} has been created`);
 
-    return caseId;
-  },
 
   async goToNextPage(label = 'Continue', maxNumberOfTries = maxRetries) {
     const originalUrl = await this.grabCurrentUrl();

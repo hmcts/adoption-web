@@ -40,11 +40,11 @@ exports.config = {
   },
   helpers: {
     Puppeteer: {
-      show: process.env.SHOW_BROWSER_WINDOW || true,
+      show: process.env.SHOW_BROWSER_WINDOW || false,
       waitForTimeout: parseInt(process.env.WAIT_FOR_TIMEOUT || '20000'),
       chrome: {
         ignoreHTTPSErrors: true,
-        args: process.env.DISABLE_WEB_SECURITY === 'true' ? [`--disable-web-security`,] : [],
+        args: process.env.DISABLE_WEB_SECURITY === 'true' ? ['--disable-web-security'] : [],
         devtools: process.env.SHOW_BROWSER_WINDOW || false,
       },
       windowSize: '1280x960',
