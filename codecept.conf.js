@@ -44,7 +44,7 @@ exports.config = {
       waitForTimeout: parseInt(process.env.WAIT_FOR_TIMEOUT || '20000'),
       chrome: {
         ignoreHTTPSErrors: true,
-        args: process.env.DISABLE_WEB_SECURITY === 'true' ? [`--disable-web-security`,] : [],
+        args: process.env.DISABLE_WEB_SECURITY === 'true' ? ['--disable-web-security'] : [],
         devtools: process.env.SHOW_BROWSER_WINDOW || false,
       },
       windowSize: '1280x960',
