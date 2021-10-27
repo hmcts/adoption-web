@@ -1,6 +1,3 @@
-const testConfig = require('../config');
-
-
 module.exports = class BrowserHelpers extends Helper {
 
   getHelper() {
