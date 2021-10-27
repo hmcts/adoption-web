@@ -2,7 +2,7 @@ nodejs:
   applicationPort: 3000
   aadIdentityName: adoption-web
   ingressHost: adoption-web.{{ .Values.global.environment }}.platform.hmcts.net
-  image: 'hmctspublic.azurecr.io/adoption-web/adoption-web:latest'
+  image: 'hmctspublic.azurecr.io/adoption/web:latest'
 #  Uncomment once the vault containing the app insights key has been set up
 #  keyVaults:
 #    adoption-web:
