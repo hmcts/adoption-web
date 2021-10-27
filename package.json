@@ -11,14 +11,15 @@
     "lint": "sass-lint -v -q && eslint . --ext .js,.jsx,.ts,.tsx",
     "build": "yarn webpack --config webpack.config.js",
     "build:prod": "NODE_ENV=production yarn webpack --mode production --config webpack.config.js",
-    "test": "jest",
+    "test": "MOCHAWESOME_REPORTFILENAME=smoke codeceptjs run --grep \"${SMOKE_TESTS_SELECTOR:=@smoke-tests}\" --reporter mocha-multi",
     "test:coverage": "jest --coverage",
     "test:routes": "jest -c jest.routes.config.js",
     "test:a11y": "jest -c jest.a11y.config.js --maxWorkers 15",
     "sonar-scan": "sonar-scanner",
-    "test:smoke": "echo 'TODO add smoke tests' && exit 1",
-    "test:functional": "echo 'TODO add functional tests' && exit 1",
-    "cichecks": "yarn && yarn build && yarn lint  && yarn test && yarn test:routes &&  yarn test:a11y"
+    "test:smoke": "MOCHAWESOME_REPORTFILENAME=smoke codeceptjs run --grep \"${SMOKE_TESTS_SELECTOR:=@smoke-tests}\" --reporter mocha-multi",
+    "test:functional": "codeceptjs run --steps -c test/e2e/codecept.conf.js",
+    "cichecks": "yarn && yarn build && yarn lint  && yarn test && yarn test:routes &&  yarn test:a11y",
+    "typings": "codeceptjs def && mv steps.d.ts typings/codeceptjs.d.ts"
   },
   "dependencies": {
     "@hmcts/info-provider": "^1.0.0",
@@ -97,6 +98,16 @@
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11",
     "webpack-dev-middleware": "^5.2.1",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-node-externals": "^1.7.2",
+    "codeceptjs": "^3.0.7",
+    "mocha-junit-reporter": "^2.0.0",
+    "mocha-multi": "^1.1.3",
+    "mochawesome": "^6.2.2",
+    "puppeteer": "10.1.0",
+    "webdriverio": "^7.12.5",
+    "moment": "2.29.1",
+    "eslint-plugin-codeceptjs": "^1.3.0",
+    "html_codesniffer": "^2.5.1",
+    "node-fetch": "^2.6.1"
   }
 }
