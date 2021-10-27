@@ -40,7 +40,7 @@ exports.config = {
   },
   helpers: {
     Puppeteer: {
-      show: process.env.SHOW_BROWSER_WINDOW || true,
+      show: process.env.SHOW_BROWSER_WINDOW || false,
       waitForTimeout: parseInt(process.env.WAIT_FOR_TIMEOUT || '20000'),
       chrome: {
         ignoreHTTPSErrors: true,
@@ -69,7 +69,7 @@ exports.config = {
 
   include: {
     config: './src/test/e2e/config.js',
-    I: './src/test/e2e/actors/main.js',
+    I: './src/test/e2e/actors/base.js',
     loginPage: './src/test/e2e/pages/login.page.js',
     openApplicationEventPage: './src/test/e2e/pages/events/openApplicationEvent.page.js',
     caseListPage: './src/test/e2e/pages/caseList.page.js',
