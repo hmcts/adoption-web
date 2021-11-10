@@ -12,5 +12,4 @@ RUN yarn install && yarn build:prod
 FROM base as runtime
 RUN rm -rf webpack/ webpack.config.js
 COPY --from=build $WORKDIR/src/main ./src/main
-# TODO: expose the right port for your application
 EXPOSE 3000
