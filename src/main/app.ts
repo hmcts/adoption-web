@@ -1,5 +1,3 @@
-import { glob } from 'glob';
-
 const { Logger } = require('@hmcts/nodejs-logging');
 
 import * as bodyParser from 'body-parser';
@@ -13,6 +11,12 @@ import { HTTPError } from './HttpError';
 import { Nunjucks } from './modules/nunjucks';
 import { PropertiesVolume } from './modules/properties-volume';
 import { AppInsights } from './modules/appinsights';
+import home from './routes/home';
+import health from './routes/health';
+import info from './routes/info';
+import landing from './routes/landing';
+import receiver from './routes/receiver';
+
 const { setupDev } = require('./development');
 
 const env = process.env.NODE_ENV || 'development';
@@ -30,22 +34,30 @@ new Helmet(config.get('security')).enableFor(app);
 
 app.use(favicon(path.join(__dirname, '/public/assets/images/favicon.ico')));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: true,
+  limit: '10mb'
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
   res.setHeader(
     'Cache-Control',
-    'no-cache, max-age=0, must-revalidate, no-store',
+    'no-cache, max-age=0, must-revalidate, no-store'
   );
   next();
 });
 
-glob.sync(__dirname + '/routes/**/*.+(ts|js)')
-  .map(filename => require(filename))
-  .forEach(route => route.default(app));
+health(app);
+info(app);
 
-setupDev(app,developmentMode);
+logger.info('Configuring base routes');
+app.use('/', home);
+app.all('/receiver', receiver);
+app.all('/landing', landing);
+// app.use('/', RouterFinder.findAll(path.join(__dirname, 'routes')))
+
+setupDev(app, developmentMode);
 // returning "not found" page for requests with paths not resolved by the router
 app.use((req, res) => {
   res.status(404);
