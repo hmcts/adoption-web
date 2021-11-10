@@ -1,13 +1,6 @@
 {
   "compilerOptions": {
     "alwaysStrict": true,
-    "outDir": "./dist/",
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "es2017",
-    "noImplicitAny": true,
-    "moduleResolution": "node",
     "noUnusedLocals": true,
     "experimentalDecorators": true,
     "skipLibCheck": true,
@@ -17,7 +10,15 @@
       "es2017.object",
       "dom"
     ],
-    "baseUrl": "src",
+    "target": "es2017",
+    "module": "commonjs",
+    "baseUrl": "src" ,
+
+    "outDir": "./dist/",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "moduleResolution": "node",
     "paths": {
       "client/*": [
         "main/app/client/*"
@@ -28,12 +29,21 @@
       "logging/*": [
         "main/app/logging/*"
       ],
+      "paths": [
+        "main/app/paths"
+      ],
       "router/*": [
         "router/*"
       ],
       "routes/*": [
         "routes/*"
-      ]
+      ],
+      "shared/*": [
+        "main/common/*"
+      ],
+      "utils/*": [
+        "main/app/utils/*"
+      ],
     },
     "typeRoots": [
       "./node_modules/@types",
