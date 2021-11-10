@@ -1,0 +1,43 @@
+{
+  "security": {
+    "referrerPolicy": "SECURITY_REFERRER_POLICY",
+    "hpkp": {
+      "maxAge": "SECURITY_HPKP_MAX_AGE",
+      "pins": "SECURITY_HPKP_PINS"
+    }
+  },
+  "idam": {
+    "authentication-web": {
+      "url": "IDAM_AUTHENTICATION_WEB_URL"
+    },
+    "api": {
+      "url": "IDAM_API_URL"
+    },
+    "service-2-service-auth": {
+      "url": "IDAM_S2S_AUTH"
+    }
+  },
+  "session": {
+    "cookieName": "JWT_COOKIE_NAME"
+  },
+  "http": {
+    "timeout": "HTTP_TIMEOUT"
+  },
+  "requestRetry": {
+    "maxAttempts": "REQUEST_RETRY_MAX_ATTEMPTS"
+  },
+  "oauth": {
+    "clientId": "OAUTH_CLIENT_ID"
+  },
+  "appInsights": {
+    "roleName": "APPINSIGHTS_ROLE_NAME"
+  },
+  "secrets": {
+    "cmc": {
+      "cmc-s2s-secret": "IDAM_S2S_TOTP_SECRET",
+      "citizen-oauth-client-secret": "OAUTH_CLIENT_SECRET",
+      "encryptionKey": "COOKIE_ENCRYPTION_KEY",
+      "AppInsightsInstrumentationKey": "app_insights_instrumental_key"
+    }
+  }
+}

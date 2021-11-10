@@ -204,7 +204,7 @@ module.exports = {
       date = {
         day: date.getDate(),
         month: date.getMonth() + 1,
-        year: date.getFullYear(),
+        year: date.getFullYear()
       };
     }
 
@@ -225,7 +225,7 @@ module.exports = {
         year: date.getFullYear(),
         hour: date.getHours(),
         minute: date.getMinutes(),
-        second: date.getSeconds(),
+        second: date.getSeconds()
       };
     }
 
@@ -364,5 +364,5 @@ module.exports = {
         throw new Error(`Maximum number of tries (${maxNumberOfTries}) has been reached in search for ${locator}`);
       }
     }
-  },
+  }
 };

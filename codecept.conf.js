@@ -35,8 +35,8 @@ exports.config = {
         console.log(chunks);
 
         return chunks;
-      },
-    },
+      }
+    }
   },
   helpers: {
     Puppeteer: {
@@ -45,25 +45,25 @@ exports.config = {
       chrome: {
         ignoreHTTPSErrors: true,
         args: process.env.DISABLE_WEB_SECURITY === 'true' ? ['--disable-web-security'] : [],
-        devtools: process.env.SHOW_BROWSER_WINDOW || false,
+        devtools: process.env.SHOW_BROWSER_WINDOW || false
       },
-      windowSize: '1280x960',
+      windowSize: '1280x960'
     },
     HooksHelper: {
-      require: './src/test/e2e/helpers/hooks_helper.js',
+      require: './src/test/e2e/helpers/hooks_helper.js'
     },
     BrowserHelpers: {
-      require: './src/test/e2e/helpers/browser_helper.js',
+      require: './src/test/e2e/helpers/browser_helper.js'
     },
     DumpBrowserLogsHelper: {
-      require: './src/test/e2e/helpers/dump_browser_logs_helper.js',
+      require: './src/test/e2e/helpers/dump_browser_logs_helper.js'
     },
     StepListener: {
-      require: './src/test/e2e/helpers/stepListener.js',
+      require: './src/test/e2e/helpers/stepListener.js'
     },
     Mochawesome: {
-      uniqueScreenshotNames: true,
-    },
+      uniqueScreenshotNames: true
+    }
 
   },
 
@@ -73,16 +73,16 @@ exports.config = {
     loginPage: './src/test/e2e/pages/login.page.js',
     openApplicationEventPage: './src/test/e2e/pages/events/openApplicationEvent.page.js',
     caseListPage: './src/test/e2e/pages/caseList.page.js',
-    eventSummaryPage: './e2e/pages/eventSummary.page.js',
+    eventSummaryPage: './e2e/pages/eventSummary.page.js'
   },
   plugins: {
     retryFailedStep: {
-      enabled: true,
+      enabled: true
     },
     screenshotOnFail: {
       enabled: true,
-      fullPageScreenshots: true,
-    },
+      fullPageScreenshots: true
+    }
   },
   tests: './src/test/tests/*.js',
   teardownAll: require('./src/test/e2e/hooks/aggregate-metrics'),
@@ -91,26 +91,26 @@ exports.config = {
       'codeceptjs-cli-reporter': {
         stdout: '-',
         options: {
-          steps: false,
-        },
+          steps: false
+        }
       },
       'mocha-junit-reporter': {
         stdout: '-',
         options: {
-          mochaFile: 'test-results/result.xml',
-        },
+          mochaFile: 'test-results/result.xml'
+        }
       },
       'mochawesome': {
         stdout: '-',
         options: {
           reportDir: './output',
           inlineAssets: true,
-          json: false,
-        },
+          json: false
+        }
       },
       '../../src/test/e2e/reporters/json-file-reporter/reporter': {
-        stdout: '-',
-      },
-    },
-  },
+        stdout: '-'
+      }
+    }
+  }
 };

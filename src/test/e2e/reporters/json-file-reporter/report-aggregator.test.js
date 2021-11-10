@@ -20,11 +20,11 @@ describe('ReportAggregator', () => {
         failures: 0,
         start: undefined,
         end: undefined,
-        duration: 0,
+        duration: 0
       },
       passes: [],
       pending: [],
-      failures: [],
+      failures: []
     });
   });
 
@@ -38,14 +38,14 @@ describe('ReportAggregator', () => {
         failures: 0,
         start: '2019-12-31T23:59:59.000Z',
         end: '2019-12-31T23:59:59.999Z',
-        duration: 100,
+        duration: 100
       },
       passes: [{
         title: 'Negative equality test',
-        code: 'notEqual(true, false);',
+        code: 'notEqual(true, false);'
       }],
       pending: [],
-      failures: [],
+      failures: []
     }];
 
     deepEqual(ReportAggregator.aggregate(metrics), {
@@ -57,14 +57,14 @@ describe('ReportAggregator', () => {
         failures: 0,
         start: '2019-12-31T23:59:59.000Z',
         end: '2019-12-31T23:59:59.999Z',
-        duration: 100,
+        duration: 100
       },
       passes: [{
         title: 'Negative equality test',
-        code: 'notEqual(true, false);',
+        code: 'notEqual(true, false);'
       }],
       pending: [],
-      failures: [],
+      failures: []
     });
   });
 
@@ -78,11 +78,11 @@ describe('ReportAggregator', () => {
         failures: 0,
         start: '2019-12-31T23:59:59.001Z',
         end: '2019-12-31T23:59:59.998Z',
-        duration: 0,
+        duration: 0
       },
       passes: [],
       pending: [],
-      failures: [],
+      failures: []
     }, {
       stats: {
         suites: 1,
@@ -92,14 +92,14 @@ describe('ReportAggregator', () => {
         failures: 0,
         start: '2019-12-31T23:59:59.000Z',
         end: '2019-12-31T23:59:59.999Z',
-        duration: 100,
+        duration: 100
       },
       passes: [{
         title: 'Negative equality test',
-        code: 'notEqual(true, false);',
+        code: 'notEqual(true, false);'
       }],
       pending: [],
-      failures: [],
+      failures: []
     }, {
       stats: {
         suites: 1,
@@ -109,11 +109,11 @@ describe('ReportAggregator', () => {
         failures: 1,
         start: '2019-12-31T23:59:59.001Z',
         end: '2019-12-31T23:59:59.998Z',
-        duration: 199,
+        duration: 199
       },
       passes: [{
         title: 'Positive equality test',
-        code: 'equal(true, true);',
+        code: 'equal(true, true);'
       }],
       pending: [],
       failures: [{
@@ -121,9 +121,9 @@ describe('ReportAggregator', () => {
         code: 'equal(0, 0.0);',
         error: {
           message: 'Unexpected error',
-          stack: '...',
-        },
-      }],
+          stack: '...'
+        }
+      }]
     }];
 
     deepEqual(ReportAggregator.aggregate(metrics), {
@@ -135,14 +135,14 @@ describe('ReportAggregator', () => {
         failures: 1,
         start: '2019-12-31T23:59:59.000Z',
         end: '2019-12-31T23:59:59.999Z',
-        duration: 299,
+        duration: 299
       },
       passes: [{
         title: 'Negative equality test',
-        code: 'notEqual(true, false);',
+        code: 'notEqual(true, false);'
       }, {
         title: 'Positive equality test',
-        code: 'equal(true, true);',
+        code: 'equal(true, true);'
       }],
       pending: [],
       failures: [{
@@ -150,9 +150,9 @@ describe('ReportAggregator', () => {
         code: 'equal(0, 0.0);',
         error: {
           message: 'Unexpected error',
-          stack: '...',
-        },
-      }],
+          stack: '...'
+        }
+      }]
     });
   });
 });

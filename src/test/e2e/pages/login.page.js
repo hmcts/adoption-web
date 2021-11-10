@@ -4,7 +4,7 @@ module.exports = {
 
   fields: {
     username: '#username',
-    password: '#password',
+    password: '#password'
   },
   submitButton: 'input[value="Sign in"]',
 
@@ -15,6 +15,6 @@ module.exports = {
 
     await I.waitForSelector(this.submitButton);
     I.click(this.submitButton);
-  },
+  }
 
 };

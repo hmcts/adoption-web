@@ -8,5 +8,5 @@ function stringify(value) {
 }
 
 module.exports = {
-  stringify,
+  stringify
 };

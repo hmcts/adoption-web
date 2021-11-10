@@ -9,7 +9,7 @@ const delays = {
   'selectOption': 300,
   'fillField': 100,
   'checkOption': 300,
-  'attachFile': 2000,
+  'attachFile': 2000
 };
 
 module.exports = function() {

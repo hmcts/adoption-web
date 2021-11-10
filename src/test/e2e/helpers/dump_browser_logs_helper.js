@@ -35,7 +35,7 @@ module.exports = class HooksHelpers extends Helper {
         return {
           type: log.type(),
           message: log.text(),
-          location: log.location().url,
+          location: log.location().url
         };
       });
 
