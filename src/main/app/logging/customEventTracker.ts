@@ -3,6 +3,7 @@ const { Logger } = require('@hmcts/nodejs-logging');
 
 const logger = Logger.getLogger('customEventTracker');
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function trackCustomEvent (eventName: string, trackingProperties: {}) {
   try {
     if (appInsights.defaultClient) {

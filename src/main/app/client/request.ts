@@ -7,6 +7,7 @@ const requestRetry = require('@hmcts/requestretry');
 const timeout: number = config.get<number>('http.timeout');
 const maxAttempts: number = config.get<number>('requestRetry.maxAttempts');
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type RequestPromiseAPI = requestBase.RequestAPI<requestPromise.RequestPromise, requestPromise.RequestPromiseOptions, any>
 export type RequestAPI = RequestPromiseAPI
 

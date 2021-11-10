@@ -49,6 +49,7 @@ async function getAuthToken(req: express.Request,
   return authenticationToken;
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function loginErrorHandler(req: express.Request,
   res: express.Response,
   cookies: Cookies,
@@ -64,6 +65,7 @@ function loginErrorHandler(req: express.Request,
   return next(err);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function retrieveRedirectForLandingPage(req: express.Request, res: express.Response): Promise<string> {
   // const user: User = res.locals.user;
   return AppPaths.landingPage.uri;

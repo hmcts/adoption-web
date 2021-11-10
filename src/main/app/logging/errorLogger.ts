@@ -6,6 +6,7 @@ export class ErrorLogger {
     this.logger = logger;
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-explicit-any
   log (err: any) {
     if (err) {
       const logMessage = `${err.stack || err}`;

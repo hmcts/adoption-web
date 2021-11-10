@@ -1,6 +1,7 @@
 const Base64 = require('js-base64');
 
 export class JwtUtils {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static decodePayload (jwt: string): {[key: string]: any} {
     try {
       const payload = jwt.substring(jwt.indexOf('.'), jwt.lastIndexOf('.'));

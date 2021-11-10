@@ -17,6 +17,7 @@ const logger = Logger.getLogger('middleware/authorization');
  * But most likely if we get 401 or 403 then the user's token has expired
  * So make them login again
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-function-return-type
 export function hasTokenExpired (err: any) {
   return (err.statusCode === HttpStatus.FORBIDDEN || err.statusCode === HttpStatus.UNAUTHORIZED);
 }
@@ -28,6 +29,7 @@ export class AuthorizationMiddleware {
       return unprotectedPaths.some((unprotectedPath: string) => unprotectedPath === path);
     }
 
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     return (req: express.Request, res: express.Response, next: express.NextFunction) => {
       const jwt: string = JwtExtractor.extract(req);
 

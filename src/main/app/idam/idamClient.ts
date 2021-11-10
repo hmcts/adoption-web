@@ -39,17 +39,19 @@ export class IdamClient {
       headers: {
         Authorization: `Bearer ${jwt}`
       }
-    }).then((response: any) => {
-      return new User(
-        response.uid.toString(),
-        response.sub,
-        response.given_name,
-        response.family_name,
-        response.roles,
-        response.group,
-        jwt
-      );
-    });
+    })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .then((response: any) => {
+        return new User(
+          response.uid.toString(),
+          response.sub,
+          response.given_name,
+          response.family_name,
+          response.roles,
+          response.group,
+          jwt
+        );
+      });
   }
 
   static exchangeCode (code: string, redirectUri: string): Promise<AuthToken> {
@@ -63,8 +65,10 @@ export class IdamClient {
         username: clientId,
         password: clientSecret
       },
+      // eslint-disable-next-line @typescript-eslint/camelcase
       form: { grant_type: 'authorization_code', code: code, redirect_uri: redirectUri }
     })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .then((response: any) => {
         return new AuthToken(
           response.access_token,
@@ -72,6 +76,7 @@ export class IdamClient {
           response.expires_in
         );
       })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .catch((error: any) => {
         trackCustomEvent('failed to exchange code',{
           errorValue: {

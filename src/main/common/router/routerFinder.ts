@@ -11,6 +11,7 @@ const options: object = {
   rename: (name: string) => {
     return `${name}-${uuid.v4()}`;
   },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   visit: (obj: any) => {
     return (typeof obj === 'object' && obj.default !== undefined) ? obj.default : obj;
   }

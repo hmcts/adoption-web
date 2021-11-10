@@ -1,5 +1,6 @@
 import { StringUtils } from 'utils/stringUtils';
 
+// eslint-disable-next-line no-useless-escape
 const pathParameterRegex = /\/:[^\/]+/g;
 
 /**
@@ -65,7 +66,7 @@ export class RoutablePath {
 
     const missingParameters = path.match(pathParameterRegex);
     if (missingParameters) {
-      const removeLeadingSlash = (value: string) => value.substring(1);
+      const removeLeadingSlash = (value: string): string => value.substring(1);
       throw new Error(`Path parameter substitutions for ${missingParameters.map(removeLeadingSlash).join(', ')} are missing`);
     }
 
