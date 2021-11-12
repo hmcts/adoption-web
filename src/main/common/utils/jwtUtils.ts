@@ -1,4 +1,4 @@
-const Base64 = require('js-base64');
+import Base64 from 'js-base64';
 
 export class JwtUtils {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

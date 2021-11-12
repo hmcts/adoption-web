@@ -1,11 +1,36 @@
 nodejs:
+  image: 'hmctspublic.azurecr.io/adoption/web:latest'
   applicationPort: 3000
+  memoryRequests: 512Mi
+  cpuRequests: 1000m
+  memoryLimits: 1024Mi
+  cpuLimits: 2500m
+  devmemoryRequests: 512Mi
+  devcpuRequests: 1000m
+  devmemoryLimits: 1024Mi
+  devcpuLimits: 2500m
+  readinessDelay: 130
+  livenessDelay: 130
+  autoscaling:        # Default is false
+    enabled: true
+    maxReplicas: 5    # Required setting
+    targetCPUUtilizationPercentage: 80 # Default is 80% target CPU utilization
   aadIdentityName: adoption-web
   ingressHost: adoption-web.{{ .Values.global.environment }}.platform.hmcts.net
-  image: 'hmctspublic.azurecr.io/adoption/web:latest'
-#  Uncomment once the vault containing the app insights key has been set up
-#  keyVaults:
-#    adoption-web:
-#      secrets:
-#        - AppInsightsInstrumentationKey
+  
   environment:
+    NODE_ENV: production
+    REFORM_TEAM: adoption
+    REFORM_SERVICE_NAME: adoption-web
+
+    IDAM_API_URL: https://idam-api.{{ .Values.global.environment }}.platform.hmcts.net
+    IDAM_AUTHENTICATION_WEB_URL: https://idam-web-public.{{ .Values.global.environment }}.platform.hmcts.net
+
+  keyVaults:
+   adoption-kv:
+     secrets:
+       - citizen-oauth-client-secret
+      #  - AppInsightsInstrumentationKey
+  
+idam-pr:
+  enabled: false

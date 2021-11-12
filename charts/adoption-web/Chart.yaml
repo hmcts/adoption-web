@@ -8,4 +8,8 @@ dependencies:
   - name: nodejs
     version: 2.3.8
     repository: '@hmctspublic'
+  - name: idam-pr
+    version: 2.2.7
+    repository: '@hmctspublic'
+    condition: idam-pr.enabled
 

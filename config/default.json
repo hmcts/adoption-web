@@ -16,7 +16,7 @@
     "maxAttempts": 3
   },
   "oauth": {
-    "clientId": "cmc_citizen"
+    "clientId": "adoption-web"
   },
   "idam": {
     "authentication-web": {
@@ -24,18 +24,11 @@
     },
     "api": {
       "url": "http://localhost:5000"
-    },
-    "service-2-service-auth": {
-      "url": "http://localhost:4552",
-      "microservice": "cmc"
     }
   },
   "secrets": {
-    "cmc": {
-      "cmc-s2s-secret": "AAAAAAAAAAAAAAAA",
-      "staff-email": "CONTACT_EMAIL",
+    "adoption": {
       "citizen-oauth-client-secret": "12345678",
-      "encryptionKey": "not-a-real-32-bit-encryption-key",
       "AppInsightsInstrumentationKey": "app_insights_instrumental_key"
     }
   }

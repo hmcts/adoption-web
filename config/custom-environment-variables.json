@@ -33,10 +33,8 @@
     "roleName": "APPINSIGHTS_ROLE_NAME"
   },
   "secrets": {
-    "cmc": {
-      "cmc-s2s-secret": "IDAM_S2S_TOTP_SECRET",
+    "adoption": {
       "citizen-oauth-client-secret": "OAUTH_CLIENT_SECRET",
-      "encryptionKey": "COOKIE_ENCRYPTION_KEY",
       "AppInsightsInstrumentationKey": "app_insights_instrumental_key"
     }
   }
