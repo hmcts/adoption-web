@@ -15,7 +15,7 @@ nodejs:
     enabled: true
     maxReplicas: 5    # Required setting
     targetCPUUtilizationPercentage: 80 # Default is 80% target CPU utilization
-  aadIdentityName: adoption-web
+  aadIdentityName: adoption
   ingressHost: adoption-web.{{ .Values.global.environment }}.platform.hmcts.net
   
   environment:
