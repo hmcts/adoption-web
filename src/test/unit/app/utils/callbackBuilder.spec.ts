@@ -26,8 +26,8 @@ describe('CallbackBuilder', () => {
     });
 
     test('for non SSL request ', () => {
-      const path = 'my/service/path';
-      const expected = `https://localhost/${path}`;
+      const path = '/my/service/path';
+      const expected = `https://localhost${path}`;
       mockRequest.secure = false;
       mockRequest.headers = { host: 'localhost' };
 

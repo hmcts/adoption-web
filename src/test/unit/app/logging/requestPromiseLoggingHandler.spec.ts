@@ -26,7 +26,7 @@ describe('RequestLoggingHandler', () => {
     // eslint-disable-next-line
     logResponse: (responseData: any) => { }
   };
-  
+
   beforeEach(() => {
     options = {};
     handler = new RequestLoggingHandler(requestPromise, apiLogger as ApiLogger);
