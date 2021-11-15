@@ -1,8 +1,8 @@
-import { ErrorLogger } from "logging/errorLogger";
+import { ErrorLogger } from 'logging/errorLogger';
 
 describe('errorLogger', () => {
-  let logger = { debug: jest.fn(), error: jest.fn() };
-  let errorLogger = new ErrorLogger(logger);
+  const logger = { debug: jest.fn(), error: jest.fn() };
+  const errorLogger = new ErrorLogger(logger);
 
   describe('constructor', () => {
     test('should set logger instance in constructor', () => {
@@ -42,7 +42,7 @@ describe('errorLogger', () => {
     describe('when error object is missing', () => {
       test('should log error', () => {
         errorLogger.log(null);
-        expect(logger.debug).toHaveBeenCalledWith("Received error was blank");
+        expect(logger.debug).toHaveBeenCalledWith('Received error was blank');
       });
     });
   });

@@ -38,9 +38,9 @@ describe('authToken', () => {
 
   describe('getLetterHolderIdList', () => {
     test('should return roles with letter holder id ', () => {
-      user.roles = ['letter-holder-1', 'letter-holder', 'letter-holder-loa1']
+      user.roles = ['letter-holder-1', 'letter-holder', 'letter-holder-loa1'];
       const result = user.getLetterHolderIdList();
-      expect(result).toEqual(["holder-1"]);
+      expect(result).toEqual(['holder-1']);
     });
   });
 });

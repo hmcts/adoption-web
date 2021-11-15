@@ -61,7 +61,7 @@ describe('ApiLogger', () => {
 
   describe('logResponse', () => {
     beforeEach(() => {
-      apiLogger._logLevelFor = jest.fn().mockReturnValue(() => { });
+      apiLogger._logLevelFor = jest.fn().mockReturnValue(() => console.log('empty'));
     });
 
     afterEach(() => {
@@ -129,7 +129,7 @@ describe('ApiLogger', () => {
   describe('_stringifyObject', () => {
     test('should stringify object', () => {
       const stringifiedObject = apiLogger._stringifyObject({ 'MOCK_KEY': 'MOCK_VALUE' });
-      expect(stringifiedObject).toEqual("{\"MOCK_KEY\":\"MOCK_VALUE\"}");
+      expect(stringifiedObject).toEqual('{"MOCK_KEY":"MOCK_VALUE"}');
     });
 
     test('should hide pdf output', () => {
@@ -220,20 +220,20 @@ describe('ApiLogger', () => {
     });
 
     test('should not include responseBody if LOG_LEVEL is WARN', () => {
-      process.env.LOG_LEVEL = 'WARN'
+      process.env.LOG_LEVEL = 'WARN';
       responseData.responseBody = { field: 'value' };
       const logEntry = apiLogger._buildResponseEntry(responseData);
       // Reset LOG_LEVEL
-      process.env.LOG_LEVEL = 'DEBUG'
+      process.env.LOG_LEVEL = 'DEBUG';
       expect(logEntry).not.toContain('Body');
     });
 
     test('should not include responseBody if LOG_LEVEL is missing', () => {
-      process.env.LOG_LEVEL = ''
+      process.env.LOG_LEVEL = '';
       responseData.responseBody = { field: 'value' };
       const logEntry = apiLogger._buildResponseEntry(responseData);
       // Reset LOG_LEVEL
-      process.env.LOG_LEVEL = 'DEBUG'
+      process.env.LOG_LEVEL = 'DEBUG';
       expect(logEntry).not.toContain('Body');
     });
   });

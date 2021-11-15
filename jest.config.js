@@ -18,7 +18,7 @@ module.exports = {
     //utils name clashes with one of the internal jest modules hence need to map individual files
     "utils/callbackBuilder": "<rootDir>/src/main/app/utils/callbackBuilder",
     "utils/stringUtils": "<rootDir>/src/main/app/utils/stringUtils",
-    // "paths": "<rootDir>/src/main/app/paths",
+    "paths": "<rootDir>/src/main/app/paths",
     // "router/(.*)": "router/$1",
     // "routes/(.*)": "routes/$1",
   }

@@ -1,0 +1,1 @@
+import {RouterFinder} from 'shared/router/routerFinder';
