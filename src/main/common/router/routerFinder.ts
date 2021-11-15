@@ -26,7 +26,6 @@ export class RouterFinder {
       
       return Object.values(value).reduce((routes: Router[], value: Router | object) => {
         const type: string = typeof value;
-        console.log(value, type);
         switch (type) {
           case 'function':
             routes.push(value as Router);

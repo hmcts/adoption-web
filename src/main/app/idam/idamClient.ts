@@ -33,14 +33,14 @@ export class IdamClient {
   //   });
   // }
 
-  static retrieveUserFor (jwt: string): Promise<User> {
+  static retrieveUserFor(jwt: string): Promise<User> {
     return request.get({
       uri: `${idamApiUrl}/o/userinfo`,
       headers: {
         Authorization: `Bearer ${jwt}`
       }
     })
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .then((response: any) => {
         return new User(
           response.uid.toString(),
@@ -54,9 +54,11 @@ export class IdamClient {
       });
   }
 
-  static exchangeCode (code: string, redirectUri: string): Promise<AuthToken> {
+  static exchangeCode(code: string, redirectUri: string): Promise<AuthToken> {
     const clientId = config.get<string>('oauth.clientId');
     const clientSecret = config.get<string>('secrets.adoption.citizen-oauth-client-secret');
+    console.log('clientId', clientId);
+    console.log('clientSecret', clientSecret ? 'secret' : 'missing');
     const url = `${config.get('idam.api.url')}/oauth2/token`;
 
     return request.post({
@@ -68,7 +70,7 @@ export class IdamClient {
       // eslint-disable-next-line @typescript-eslint/camelcase
       form: { grant_type: 'authorization_code', code: code, redirect_uri: redirectUri }
     })
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .then((response: any) => {
         return new AuthToken(
           response.access_token,
@@ -78,7 +80,7 @@ export class IdamClient {
       })
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .catch((error: any) => {
-        trackCustomEvent('failed to exchange code',{
+        trackCustomEvent('failed to exchange code', {
           errorValue: {
             message: error.name,
             code: error.statusCode
@@ -88,7 +90,7 @@ export class IdamClient {
       });
   }
 
-  static invalidateSession (jwt: string, bearerToken: string): Promise<void> {
+  static invalidateSession(jwt: string, bearerToken: string): Promise<void> {
     if (!jwt) {
       return Promise.reject(new Error('JWT is required'));
     }
