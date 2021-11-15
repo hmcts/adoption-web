@@ -58,7 +58,7 @@ export class IdamClient {
     const clientId = config.get<string>('oauth.clientId');
     const clientSecret = config.get<string>('secrets.adoption.citizen-oauth-client-secret');
     console.log('clientId', clientId);
-    console.log('clientSecret', clientSecret ? 'secret' : 'missing');
+    console.log('clientSecret', clientSecret);
     const url = `${config.get('idam.api.url')}/oauth2/token`;
 
     return request.post({
