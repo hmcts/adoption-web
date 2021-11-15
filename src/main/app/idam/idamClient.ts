@@ -10,7 +10,7 @@ import { trackCustomEvent } from 'logging/customEventTracker';
 
 // const s2sUrl = config.get<string>('idam.service-2-service-auth.url');
 const idamApiUrl = config.get<string>('idam.api.url');
-// const totpSecret = config.get<string>('secrets.adoption.adoption-s2s-secret');
+// const totpSecret = config.get<string>('secrets.adoption-kv.adoption-s2s-secret');
 // const microserviceName = config.get<string>('idam.service-2-service-auth.microservice');
 
 // class ServiceAuthRequest {
@@ -56,9 +56,9 @@ export class IdamClient {
 
   static exchangeCode(code: string, redirectUri: string): Promise<AuthToken> {
     const clientId = config.get<string>('oauth.clientId');
-    const clientSecret = config.get<string>('secrets.adoption.citizen-oauth-client-secret');
+    const clientSecret = config.get<string>('secrets.adoption-kv.citizen-oauth-client-secret');
     console.log('clientId', clientId);
-    console.log('clientSecret is', clientSecret);
+    console.log('clientSecret', clientSecret);
     const url = `${config.get('idam.api.url')}/oauth2/token`;
 
     return request.post({
