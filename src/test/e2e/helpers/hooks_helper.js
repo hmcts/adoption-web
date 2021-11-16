@@ -23,7 +23,7 @@ module.exports = class HooksHelpers extends Helper {
     recorder.retry({
       retries: 10,
       minTimeout: 1000,
-      when: err => lodash.some(retryableErrors, retryableError => err.message.indexOf(retryableError) > -1),
+      when: err => lodash.some(retryableErrors, retryableError => err.message.indexOf(retryableError) > -1)
     });
   }
 

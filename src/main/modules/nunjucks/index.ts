@@ -16,15 +16,15 @@ export class Nunjucks {
       '..',
       '..',
       'node_modules',
-      'govuk-frontend',
+      'govuk-frontend'
     );
     nunjucks.configure(
       [path.join(__dirname, '..', '..', 'views'), govUkFrontendPath],
       {
         autoescape: true,
         watch: this.developmentMode,
-        express: app,
-      },
+        express: app
+      }
     );
 
     app.use((req, res, next) => {

@@ -8,7 +8,7 @@ const miniCss = new MiniCssExtractPlugin({
   // Options similar to the same options in webpackOptions.output
   // both options are optional
   filename,
-  chunkFilename: '[id].css',
+  chunkFilename: '[id].css'
 });
 
 module.exports = {
@@ -19,9 +19,9 @@ module.exports = {
         'style-loader',
         MiniCssExtractPlugin.loader,
         'css-loader',
-        'sass-loader',
-      ],
-    },
+        'sass-loader'
+      ]
+    }
   ],
-  plugins: [miniCss],
+  plugins: [miniCss]
 };

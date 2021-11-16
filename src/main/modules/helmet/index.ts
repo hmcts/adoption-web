@@ -32,9 +32,9 @@ export class Helmet {
           imgSrc: [self, googleAnalyticsDomain],
           objectSrc: [self],
           scriptSrc: [self, googleAnalyticsDomain, "'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU='"],
-          styleSrc: [self],
-        },
-      }),
+          styleSrc: [self]
+        }
+      })
     );
   }
 

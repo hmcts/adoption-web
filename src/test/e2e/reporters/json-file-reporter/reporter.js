@@ -28,7 +28,7 @@ exports = module.exports = function JSONReporter(runner, options) {
       stats: this.stats,
       passes: passes.map(convert),
       pending: pending.map(convert),
-      failures: failures.map(convert),
+      failures: failures.map(convert)
     };
 
     runner.testResults = outcome;
@@ -48,7 +48,7 @@ function convert(test) {
   return {
     title: test.fullTitle(),
     code: test.body,
-    error: cleanCircularReferences(error),
+    error: cleanCircularReferences(error)
   };
 }
 
@@ -79,6 +79,6 @@ function cleanCircularReferences(obj) {
       }
 
       return value;
-    }),
+    })
   );
 }

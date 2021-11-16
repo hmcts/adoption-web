@@ -4,7 +4,7 @@ module.exports = {
 
   fields: {
     summary: '#field-trigger-summary',
-    description: '#field-trigger-description',
+    description: '#field-trigger-description'
   },
 
   async provideSummary(summary, description) {
@@ -14,5 +14,5 @@ module.exports = {
 
   async submit(button, locator = '.hmcts-banner--success') {
     await I.retryUntilExists(() => I.click(button), locator);
-  },
+  }
 };

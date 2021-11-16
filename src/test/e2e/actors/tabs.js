@@ -218,5 +218,5 @@ module.exports = {
 
   async dontSeeTab(tab){
     this.dontSeeElement(getTabSelector(tab));
-  },
+  }
 };

@@ -29,7 +29,7 @@ function ensurePageCallWillSucceed(url: string): Promise<void> {
   return agent.get(url).then((res: supertest.Response) => {
     if (res.redirect) {
       throw new Error(
-        `Call to ${url} resulted in a redirect to ${res.get('Location')}`,
+        `Call to ${url} resulted in a redirect to ${res.get('Location')}`
       );
     }
     if (res.serverError) {
@@ -40,7 +40,7 @@ function ensurePageCallWillSucceed(url: string): Promise<void> {
 
 function runPally(url: string): Pa11yResult {
   return pa11y(url, {
-    hideElements: '.govuk-footer__licence-logo, .govuk-header__logotype-crown',
+    hideElements: '.govuk-footer__licence-logo, .govuk-header__logotype-crown'
   });
 }
 

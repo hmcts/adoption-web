@@ -13,7 +13,7 @@ module.exports = {
     caseName: '#caseName',
     search: 'Apply',
     caseList: 'Case list',
-    spinner: 'xuilib-loading-spinner',
+    spinner: 'xuilib-loading-spinner'
   },
 
   navigate() {
@@ -81,6 +81,6 @@ module.exports = {
     this.searchForCasesWithId(caseId);
     I.waitForInvisible(this.fields.spinner, 20);
     I.see('No cases found. Try using different filters.');
-  },
+  }
 
 };
