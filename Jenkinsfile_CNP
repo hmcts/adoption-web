@@ -6,13 +6,33 @@ def type = "nodejs"
 def product = "adoption"
 def component = "web"
 
+static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
+  [ $class: 'AzureKeyVaultSecret',
+    secretType: 'Secret',
+    name: secretName,
+    version: '',
+    envVariable: envVar
+  ]
+}
+
+def secrets = [
+  'adoption-kv-${env}': [
+      secret('citizen-oauth-client-secret', 'OAUTH_CLIENT_SECRET')
+  ]
+]
+
+env.IDAM_URL = 'https://idam-api.aat.platform.hmcts.net'
+
 def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
 
 withPipeline(type, product, component) {
+  enableAksStagingDeployment()
   disableLegacyDeployment()
 
   enableSlackNotifications('#adoption-tech')
 
+  loadVaultSecrets(secrets)
+  
   after('build') {
     yarnBuilder.yarn('build')
   }

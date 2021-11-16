@@ -5,5 +5,31 @@
   },
   "appInsights": {
     "instrumentationKey": false
+  },
+  "session": {
+    "cookieName": "SESSION_ID"
+  },
+  "http": {
+    "timeout": 60000
+  },
+  "requestRetry": {
+    "maxAttempts": 3
+  },
+  "oauth": {
+    "clientId": "adoption-web"
+  },
+  "idam": {
+    "authentication-web": {
+      "url": "http://localhost:9002"
+    },
+    "api": {
+      "url": "http://localhost:5000"
+    }
+  },
+  "secrets": {
+    "adoption-kv": {
+      "citizen-oauth-client-secret": "12345678",
+      "AppInsightsInstrumentationKey": "app_insights_instrumental_key"
+    }
   }
 }
