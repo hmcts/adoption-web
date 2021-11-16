@@ -14,7 +14,7 @@ import { Nunjucks } from './modules/nunjucks';
 import { PropertiesVolume } from './modules/properties-volume';
 import { AppInsights } from './modules/appinsights';
 const { setupDev } = require('./development');
-const content = require('locale/content');
+const content = require('./locale/content');
 const i18next = require('i18next');
 
 const env = process.env.NODE_ENV || 'development';
