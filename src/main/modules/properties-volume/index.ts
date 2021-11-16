@@ -10,8 +10,9 @@ export class PropertiesVolume {
     if (server.locals.ENV !== 'development') {
       const result = propertiesVolume.addTo({});
       console.log(result);
-      set(config, 'secrets', { ...get(config, 'secrets'), ...result });
+      const result2 = set(config, 'secrets', { ...get(config, 'secrets'), ...result });
       console.log(config.secrets);
+      console.log(result2);
       this.setSecret('secrets.adoption-kv.AppInsightsInstrumentationKey', 'appInsights.instrumentationKey');
     }
   }
