@@ -8,16 +8,16 @@ const cssWebPackPlugin = new HtmlWebpackPlugin({
   template:  cssPath,
   publicPath: '/',
   filename: cssPath.replace('-template', ''),
-  inject: false,
+  inject: false
 });
 
 const jsWebPackPlugin = new HtmlWebpackPlugin({
   template: jsPath,
   publicPath: '/',
   filename: jsPath.replace('-template', ''),
-  inject: false,
+  inject: false
 });
 
 module.exports = {
-  plugins: [cssWebPackPlugin, jsWebPackPlugin],
+  plugins: [cssWebPackPlugin, jsWebPackPlugin]
 };

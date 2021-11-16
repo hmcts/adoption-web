@@ -14,11 +14,11 @@ module.exports = {
   entry: path.resolve(sourcePath, 'index.js') ,
   mode: devMode ? 'development': 'production',
   module: {
-    rules: [...scss.rules],
+    rules: [...scss.rules]
   },
   output: {
     path: path.resolve(__dirname, 'src/main/public/'),
     publicPath: '',
-    filename,
-  },
+    filename
+  }
 };

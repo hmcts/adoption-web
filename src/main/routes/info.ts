@@ -10,12 +10,12 @@ export default function(app: Router): void {
       extraBuildInfo: {
         host: os.hostname(),
         name: 'expressjs-template',
-        uptime: process.uptime(),
+        uptime: process.uptime()
       },
       info: {
         // TODO: add downstream info endpoints if your app has any
-      },
-    }),
+      }
+    })
   );
 
 }
