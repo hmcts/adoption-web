@@ -1,7 +1,7 @@
 import { glob } from 'glob';
+const setLanguage = require('./app/server/setLanguage');
 
 const { Logger } = require('@hmcts/nodejs-logging');
-
 import * as bodyParser from 'body-parser';
 import config = require('config');
 import cookieParser from 'cookie-parser';
@@ -14,6 +14,8 @@ import { Nunjucks } from './modules/nunjucks';
 import { PropertiesVolume } from './modules/properties-volume';
 import { AppInsights } from './modules/appinsights';
 const { setupDev } = require('./development');
+const content = require('locale/content');
+const i18next = require('i18next');
 
 const env = process.env.NODE_ENV || 'development';
 const developmentMode = env === 'development';
@@ -40,6 +42,17 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+i18next.init({
+  resources: content,
+  supportedLngs: config.get('languages'),
+  lng: 'en'
+});
+
+app.locals.i18n = i18next;
+app.locals.content = content;
+
+app.use(setLanguage)
 
 glob.sync(__dirname + '/routes/**/*.+(ts|js)')
   .map(filename => require(filename))

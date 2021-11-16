@@ -1,0 +1,30 @@
+{
+    "en": {
+      "common": {
+        "headline": "Adoption application",
+        "standardText": "To view or progress your case click on your adoption case number. Most recently created applications are listed first.",
+        "phaseBanner": {
+            "new": "This is a new service – your ",
+            "report": "feedback (opens in a new window)",
+            "improve": "will help us improve it.",
+            "languageToggle": "<a href=\"{currentUrl}{languageFlag}\" class=\"govuk-link language\">Cymraeg</a>"
+          
+        }
+      }
+    }
+      ,
+      "cy": {
+        "common": {
+          "headline": "Welsh language",
+          "standardText": "To view or progress your case click on your adoption case number. Most recently created applications are listed first but in Welsh.",
+          "phaseBanner": {
+            "new": "Mae hwn yn wasanaeth newydd - bydd eich ",
+            "report": "adborth",
+            "improve": "yn ein helpu ni i'w wella (agor mewn ffenestr newydd).",
+            "languageToggle": "<a href=\"{currentUrl}{languageFlag}\" class=\"govuk-link language\">English</a>"
+        }
+    }
+
+
+    }
+}
