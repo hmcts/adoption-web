@@ -8,8 +8,7 @@ jest.mock('applicationinsights', () => {
     ...originalModule,
     defaultClient: {
       trackEvent: jest.fn()
-    },
-    foo: 'mocked foo'
+    }
   };
 });
 
