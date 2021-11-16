@@ -9,7 +9,7 @@ export default function(app: Router): void {
     infoRequestHandler({
       extraBuildInfo: {
         host: os.hostname(),
-        name: 'adoption-web',
+        name: 'adoption-template',
         uptime: process.uptime()
       },
       info: {
