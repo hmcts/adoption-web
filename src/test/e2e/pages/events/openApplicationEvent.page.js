@@ -7,10 +7,10 @@ module.exports = {
     jurisdiction: '#cc-jurisdiction',
     caseType: '#cc-case-type',
     event: '#cc-event',
-    outsourcingLAs: '#outsourcingLAs',
+    outsourcingLAs: '#outsourcingLAs'
   },
   enterCaseNamePage: {
-    caseName: '#caseName',
+    caseName: '#caseName'
   },
   startButton: 'Start',
   continueButton: 'Continue',
@@ -29,5 +29,5 @@ module.exports = {
   enterCaseName(caseName = 'Barnet Council v Smith') {
     I.waitForElement(this.enterCaseNamePage.caseName, 5);
     I.fillField(this.enterCaseNamePage.caseName, caseName);
-  },
+  }
 };
