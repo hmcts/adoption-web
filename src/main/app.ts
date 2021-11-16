@@ -52,7 +52,7 @@ i18next.init({
 app.locals.i18n = i18next;
 app.locals.content = content;
 
-app.use(setLanguage)
+app.use(setLanguage);
 
 glob.sync(__dirname + '/routes/**/*.+(ts|js)')
   .map(filename => require(filename))

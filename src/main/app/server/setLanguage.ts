@@ -4,8 +4,8 @@ const cookieParser = require ('cookie-parser');
 const languages = require('config').languages;
 
 router.get('*', (req, res, next) => {
-    if (!req.cookies.language){
-      req.cookies.language = 'en';
+  if (!req.cookies.language){
+    req.cookies.language = 'en';
   } else if (req.query && req.query.lng && languages.includes(req.query.lng)) {
     req.cookies.language = req.query.lng;
     i18next.changeLanguage(req.query.lng);
