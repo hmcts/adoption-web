@@ -55,11 +55,8 @@ export class IdamClient {
   }
 
   static exchangeCode(code: string, redirectUri: string): Promise<AuthToken> {
-    console.log(process.env.OAUTH_CLIENT_SECRET);
     const clientId = config.get<string>('oauth.clientId');
     const clientSecret = config.get<string>('secrets.adoption-kv.citizen-oauth-client-secret');
-    console.log('clientId', clientId);
-    console.log('clientSecret', clientSecret);
     const url = `${config.get('idam.api.url')}/oauth2/token`;
 
     return request.post({
