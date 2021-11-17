@@ -31,5 +31,6 @@
       "citizen-oauth-client-secret": "12345678",
       "AppInsightsInstrumentationKey": "app_insights_instrumental_key"
     }
-  }
+  },
+  "languages": ["en", "cy"]
 }

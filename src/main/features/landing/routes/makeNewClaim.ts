@@ -9,6 +9,7 @@ function accessDeniedCallback(req: express.Request, res: express.Response): void
 }
 
 export default express.Router()
-  .get(AppPaths.landingPage.uri, AuthorizationMiddleware.requestHandler(['citizen'], accessDeniedCallback, []), function (req, res) {
-    res.render('home');
-  });
+  .get(AppPaths.makeNewClaim.uri, AuthorizationMiddleware.requestHandler(['citizen'], accessDeniedCallback, []), (req, res) => {
+    res.render('makenewclaim');
+  });;
+

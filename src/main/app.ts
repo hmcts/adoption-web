@@ -1,5 +1,4 @@
 const { Logger } = require('@hmcts/nodejs-logging');
-
 import * as bodyParser from 'body-parser';
 import config from 'config';
 import cookieParser from 'cookie-parser';
@@ -15,8 +14,11 @@ import { AppInsights } from './modules/appinsights';
 import { Feature as LandingFeature } from 'features/landing/index';
 
 import { RouterFinder } from 'common/router/routerFinder';
+// import setLocale from 'modules/i18n/setLocale';
 
 const { setupDev } = require('./development');
+const content = require('./locale/content');
+const i18next = require('i18next');
 
 const env = process.env.NODE_ENV || 'development';
 const developmentMode = env === 'development';
@@ -44,6 +46,27 @@ app.use((req, res, next) => {
     'Cache-Control',
     'no-cache, max-age=0, must-revalidate, no-store'
   );
+  next();
+});
+
+i18next.init({
+  resources: content,
+  supportedLngs: config.get('languages'),
+  lng: 'en'
+});
+
+app.locals.i18n = i18next;
+app.locals.content = content;
+
+app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
+  if (req.query?.locale && config.get<string []>('languages').includes(`${req.query.locale}`)) {
+    res.cookie('locale', req.query.locale);
+    i18next.changeLanguage(req.query.locale);
+  } else {
+    const locale = req.cookies.locale || 'en';
+    res.cookie('locale', locale);
+    i18next.changeLanguage(req.cookies.language);
+  }
   next();
 });
 

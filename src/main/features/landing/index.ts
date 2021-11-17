@@ -25,6 +25,6 @@ export class Feature {
     }
 
     // app.use(/^\/landing.*$/, requestHandler())
-    app.all('/landing', RouterFinder.findAll(path.join(__dirname, 'routes')));
+    app.all(/^\/landing.*$/, RouterFinder.findAll(path.join(__dirname, 'routes')));
   }
 }
