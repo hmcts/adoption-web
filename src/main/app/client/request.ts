@@ -1,4 +1,4 @@
-import { RequestLoggingHandler } from 'logging/requestPromiseLoggingHandler';
+import { RequestLoggingHandler } from 'app/logging/requestPromiseLoggingHandler';
 import config from 'config';
 import * as requestBase from 'request';
 import * as requestPromise from 'request-promise-native';

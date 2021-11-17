@@ -1,4 +1,4 @@
-import { StringUtils } from 'utils/stringUtils';
+import { StringUtils } from 'app/utils/stringUtils';
 
 // eslint-disable-next-line no-useless-escape
 const pathParameterRegex = /\/:[^\/]+/g;
@@ -8,26 +8,26 @@ const pathParameterRegex = /\/:[^\/]+/g;
  *  And empty, null, undefined, string literal 'null' and 'undefined' are invalid values.
  *  This prevents undefined being passed to urls like: `/case/undefined/claim/receipt`
  */
-function isValidParameterValue (parameterValue: string): boolean {
+function isValidParameterValue(parameterValue: string): boolean {
   return !(StringUtils.isBlank(parameterValue) || parameterValue === 'undefined' || parameterValue === 'null');
 }
 
 export class RoutablePath {
   private _uri: string
 
-  constructor (uri: string, public feature: boolean = true) {
+  constructor(uri: string, public feature: boolean = true) {
     if (!uri || uri.trim() === '') {
       throw new Error('URI is missing');
     }
     this._uri = uri;
   }
 
-  get uri (): string {
+  get uri(): string {
     return this._uri
       .replace(/\/index$/, ''); // remove /index from uri's
   }
 
-  get associatedView (): string {
+  get associatedView(): string {
     if (!this.feature) {
       return this._uri
         .replace(pathParameterRegex, '') // remove path params
@@ -45,7 +45,7 @@ export class RoutablePath {
     return `${featureName}/views/${viewPath}`;
   }
 
-  evaluateUri (substitutions: { [key: string]: string }): string {
+  evaluateUri(substitutions: { [key: string]: string }): string {
     if (substitutions === undefined || Object.keys(substitutions).length === 0) {
       throw new Error('Path parameter substitutions are required');
     }

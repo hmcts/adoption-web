@@ -1,4 +1,4 @@
-import { StringUtils } from 'utils/stringUtils';
+import { StringUtils } from 'app/utils/stringUtils';
 
 describe('StringUtils', () => {
   describe('trimToUndefined', () => {

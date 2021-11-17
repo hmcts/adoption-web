@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { buildURL } from 'utils/callbackBuilder';
+import { buildURL } from 'app/utils/callbackBuilder';
 
 const mockRequest = {
   body: {

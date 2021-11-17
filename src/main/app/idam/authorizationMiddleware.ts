@@ -3,9 +3,9 @@ import config from 'config';
 import * as HttpStatus from 'http-status-codes';
 import Cookies from 'cookies';
 
-import { JwtExtractor } from 'idam/jwtExtractor';
-import { IdamClient } from 'idam/idamClient';
-import { User } from 'idam/user';
+import { JwtExtractor } from './jwtExtractor';
+import { IdamClient } from './idamClient';
+import { User } from './user';
 const { Logger } = require('@hmcts/nodejs-logging');
 
 const sessionCookieName = config.get<string>('session.cookieName');

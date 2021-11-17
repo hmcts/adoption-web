@@ -1,6 +1,6 @@
-import { ApiLogger } from 'logging/apiLogger';
-import { HttpProxyCallInterceptor } from 'logging/httpProxyCallInterceptor';
-import { RequestAPI } from 'client/request';
+import { ApiLogger } from './apiLogger';
+import { HttpProxyCallInterceptor } from './httpProxyCallInterceptor';
+import { RequestAPI } from 'app/client/request';
 
 export class RequestLoggingHandler {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

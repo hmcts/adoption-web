@@ -1,17 +1,18 @@
 import * as express from 'express';
 
-import { Paths as AppPaths } from 'paths';
-import { ErrorHandling } from 'shared/errorHandling';
+import { Paths as AppPaths } from 'app/paths';
+import { Paths as LandingPaths } from 'features/landing/paths';
+import { ErrorHandling } from 'common/errorHandling';
 import Cookies from 'cookies';
-import { AuthToken } from 'idam/authToken';
+import { AuthToken } from 'app/idam/authToken';
 import config from 'config';
-import { IdamClient } from 'idam/idamClient';
-import { buildURL } from 'utils/callbackBuilder';
-import { JwtExtractor } from 'idam/jwtExtractor';
-import { RoutablePath } from 'shared/router/routablePath';
-import { hasTokenExpired } from 'idam/authorizationMiddleware';
-import { OAuthHelper } from 'idam/oAuthHelper';
-import { trackCustomEvent } from 'logging/customEventTracker';
+import { IdamClient } from 'app/idam/idamClient';
+import { buildURL } from 'app/utils/callbackBuilder';
+import { JwtExtractor } from 'app/idam/jwtExtractor';
+import { RoutablePath } from 'common/router/routablePath';
+import { hasTokenExpired } from 'app/idam/authorizationMiddleware';
+import { OAuthHelper } from 'app/idam/oAuthHelper';
+import { trackCustomEvent } from 'app/logging/customEventTracker';
 const { Logger } = require('@hmcts/nodejs-logging');
 
 const logger = Logger.getLogger('router/receiver');
@@ -68,7 +69,7 @@ function loginErrorHandler(req: express.Request,
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function retrieveRedirectForLandingPage(req: express.Request, res: express.Response): Promise<string> {
   // const user: User = res.locals.user;
-  return AppPaths.landingPage.uri;
+  return LandingPaths.landingPage.uri;
 }
 
 function setAuthCookie(cookies: Cookies, authenticationToken: string): void {

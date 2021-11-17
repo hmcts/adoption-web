@@ -1,7 +1,7 @@
 const { Logger } = require('@hmcts/nodejs-logging');
 
 import * as bodyParser from 'body-parser';
-import config = require('config');
+import config from 'config';
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import { Helmet } from './modules/helmet';
@@ -11,11 +11,10 @@ import { HTTPError } from './HttpError';
 import { Nunjucks } from './modules/nunjucks';
 import { PropertiesVolume } from './modules/properties-volume';
 import { AppInsights } from './modules/appinsights';
-import home from './routes/home';
-import health from './routes/health';
-import info from './routes/info';
-import landing from './routes/landing';
-import receiver from './routes/receiver';
+
+import { Feature as LandingFeature } from 'features/landing/index';
+
+import { RouterFinder } from 'common/router/routerFinder';
 
 const { setupDev } = require('./development');
 
@@ -48,14 +47,11 @@ app.use((req, res, next) => {
   next();
 });
 
-health(app);
-info(app);
+logger.info('Configuring landing routes');
+new LandingFeature().enableFor(app);
 
 logger.info('Configuring base routes');
-app.use('/', home);
-app.all('/receiver', receiver);
-app.all('/landing', landing);
-// app.use('/', RouterFinder.findAll(path.join(__dirname, 'routes')))
+app.use('/', RouterFinder.findAll(path.join(__dirname, 'routes')));
 
 setupDev(app, developmentMode);
 // returning "not found" page for requests with paths not resolved by the router

@@ -1,4 +1,4 @@
-import { OAuthHelper } from 'idam/oAuthHelper';
+import { OAuthHelper } from 'app/idam/oAuthHelper';
 import * as express from 'express';
 import uuid from 'uuid';
 

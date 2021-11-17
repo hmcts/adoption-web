@@ -1,36 +1,33 @@
 {
   "compilerOptions": {
-    "alwaysStrict": true,
+    "outDir": "./dist/",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es6",
+    "noImplicitAny": true,
+    "moduleResolution": "node",
     "noUnusedLocals": true,
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "lib": [
       "es6",
-      "es2016.array.include",
       "es2017.object",
       "dom"
     ],
-    "target": "es2017",
-    "module": "commonjs",
-    "baseUrl": "src" ,
-
-    "outDir": "./dist/",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "noImplicitAny": true,
-    "moduleResolution": "node",
+    "baseUrl": "src/main",
     "paths": {
       "client/*": [
-        "main/app/client/*"
+        "app/client/*"
       ],
       "idam/*": [
-        "main/app/idam/*"
+        "app/idam/*"
       ],
       "logging/*": [
-        "main/app/logging/*"
+        "app/logging/*"
       ],
       "paths": [
-        "main/app/paths"
+        "app/paths"
       ],
       "router/*": [
         "router/*"
@@ -38,16 +35,15 @@
       "routes/*": [
         "routes/*"
       ],
-      "shared/*": [
-        "main/common/*"
+      "common/*": [
+        "common/*"
       ],
       "utils/*": [
-        "main/app/utils/*"
+        "app/utils/*"
       ],
     },
     "typeRoots": [
-      "./node_modules/@types",
-      "./types"
+      "./node_modules/@types"
     ]
   }
 }

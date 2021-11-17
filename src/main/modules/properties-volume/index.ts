@@ -7,7 +7,7 @@ export class PropertiesVolume {
 
   enableFor(server: Application): void {
     if (server.locals.ENV !== 'development') {
-      propertiesVolume.addTo(config);
+      propertiesVolume.addTo(config, { mountPoint: './dummy/secrets' });
       console.log(config);
       this.setSecret('secrets.adoption-web.AppInsightsInstrumentationKey', 'appInsights.instrumentationKey');
     }

@@ -2,11 +2,11 @@ import config from 'config';
 // import OTP from 'otp';
 
 
-import { request } from 'client/request';
-import { User } from 'idam/user';
+import { request } from 'app/client/request';
+import { User } from './user';
 // import { ServiceAuthToken } from 'idam/serviceAuthToken';
-import { AuthToken } from 'idam/authToken';
-import { trackCustomEvent } from 'logging/customEventTracker';
+import { AuthToken } from './authToken';
+import { trackCustomEvent } from 'app/logging/customEventTracker';
 
 // const s2sUrl = config.get<string>('idam.service-2-service-auth.url');
 const idamApiUrl = config.get<string>('idam.api.url');

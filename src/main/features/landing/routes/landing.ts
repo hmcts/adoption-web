@@ -1,0 +1,15 @@
+import { AuthorizationMiddleware } from 'app/idam/authorizationMiddleware';
+import { OAuthHelper } from 'app/idam/oAuthHelper';
+import * as express from 'express';
+
+import { Paths as AppPaths } from '../paths';
+
+/* tslint:disable:no-default-export */
+function accessDeniedCallback(req: express.Request, res: express.Response): void {
+  res.redirect(OAuthHelper.forLogin(req, res));
+}
+
+export default express.Router()
+  .get(AppPaths.landingPage.uri, AuthorizationMiddleware.requestHandler(['citizen'], accessDeniedCallback, []), function (req, res) {
+    res.render('home');
+  });
