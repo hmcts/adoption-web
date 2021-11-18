@@ -9,6 +9,6 @@ function accessDeniedCallback(req: express.Request, res: express.Response): void
 }
 
 export default express.Router()
-  .get(AppPaths.makeNewClaim.uri, AuthorizationMiddleware.requestHandler(['citizen'], accessDeniedCallback, []), (req, res) => {
-    res.render('makenewclaim');
+  .get(AppPaths.makeNewApplication.uri, AuthorizationMiddleware.requestHandler(['citizen'], accessDeniedCallback), (req, res) => {
+    res.render('make-new-applcation');
   });

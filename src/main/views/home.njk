@@ -5,23 +5,26 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
 {% block content %}
-<a class="govuk-link" href="*">govuk-link</a>
-<h1 class="govuk-heading-l">{{content[i18n.language].common.headline | safe}}</h1>
-<p class="govuk-body">{{content[i18n.language].common.standardText | safe}} </p>
+  <a class="govuk-link" href="*">govuk-link</a>
+  <h1 class="govuk-heading-l">{{content[i18n.language].common.headline | safe}}</h1>
+  <p class="govuk-body">{{content[i18n.language].common.standardText | safe}}
+  </p>
 
-{{ govukButton({
-  text: "Make a new adoption claim",
-  href: "/landing/make-a-new-claim",
-  isStartButton: true
-}) }}
+  {{ 
+    govukButton({
+      text: "Make a new adoption application",
+      href: "/landing/make-a-new-application",
+      isStartButton: true
+    }) 
+  }}
 
-{{ govukTable({
-  caption: "Adoption claims",
+  {{ govukTable({
+  caption: "Adoption applications",
   captionClasses: "govuk-table__caption--m",
   firstCellIsHeader: true,
   head: [
     {
-      text: "Adoption number"
+      text: "Application number"
       },
     {
       text: "Child name"
@@ -45,7 +48,7 @@
         text: "Dilip Samra"
       },
       {
-        text: "Complete adoption form"
+        text: "Complete application form"
       },
       {
         text: "12/02/2022"
@@ -62,7 +65,7 @@
         text: "John Smith"
       },
       {
-        text: "Complete HW1 form"
+        text: "Complete application form"
       },
       {
         text: "13/02/2022"
@@ -79,7 +82,7 @@
         text: "Dil Samra"
       },
       {
-        text: "Complete adoption form"
+        text: "Complete application form"
       },
       {
         text: "15/02/2022"
@@ -90,7 +93,4 @@
     ]
   ]
 }) }}
-
-    </div>
-  </div>
 {% endblock %}

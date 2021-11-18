@@ -18,14 +18,14 @@ const logger = Logger.getLogger('middleware/authorization');
  * So make them login again
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-function-return-type
-export function hasTokenExpired (err: any) {
+export function hasTokenExpired(err: any) {
   return (err.statusCode === HttpStatus.FORBIDDEN || err.statusCode === HttpStatus.UNAUTHORIZED);
 }
 
 export class AuthorizationMiddleware {
 
-  static requestHandler (requiredRoles: string[], accessDeniedCallback: (req: express.Request, res: express.Response) => void, unprotectedPaths?: string[]): express.RequestHandler {
-    function isPathUnprotected (path: string): boolean {
+  static requestHandler(requiredRoles: string[], accessDeniedCallback: (req: express.Request, res: express.Response) => void, unprotectedPaths: string[] = []): express.RequestHandler {
+    function isPathUnprotected(path: string): boolean {
       return unprotectedPaths.some((unprotectedPath: string) => unprotectedPath === path);
     }
 
