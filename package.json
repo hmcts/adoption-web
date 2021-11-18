@@ -104,7 +104,7 @@
     "mocha-multi": "^1.1.3",
     "mochawesome": "^6.2.2",
     "moment": "^2.29.1",
-    "nock": "^13.0.4",
+    "nock": "^13.2.1",
     "node-fetch": "^2.6.1",
     "node-sass": "^6.0.1",
     "nodemon": "^2.0.2",
