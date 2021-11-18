@@ -27,10 +27,12 @@ nodejs:
     IDAM_AUTHENTICATION_WEB_URL: https://idam-web-public.{{ .Values.global.environment }}.platform.hmcts.net
 
   keyVaults:
-   adoption-kv:
-     secrets:
-       - citizen-oauth-client-secret
-      #  - AppInsightsInstrumentationKey
+    adoption-kv:
+      resourceGroup: adoption
+      usePodIdentity: true
+      secrets:
+        - citizen-oauth-client-secret
+        #  - AppInsightsInstrumentationKey
   
 idam-pr:
   enabled: false
