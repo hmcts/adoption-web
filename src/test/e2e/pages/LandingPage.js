@@ -5,7 +5,6 @@ module.exports = {
     headerName: 'h1'
   },
   async seeTheLandingPage() {
-  console.log('I am here');
-   await I.seeElement(this.fields.headerName);
+    await I.seeElement(this.fields.headerName);
   }
 };
