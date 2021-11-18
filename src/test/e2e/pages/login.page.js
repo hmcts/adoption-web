@@ -12,7 +12,6 @@ module.exports = {
     await I.waitForSelector(this.fields.username);
     I.fillField(this.fields.username, user.email);
     I.fillField(this.fields.password, user.password);
-
     await I.waitForSelector(this.submitButton);
     I.click(this.submitButton);
   }

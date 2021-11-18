@@ -32,9 +32,26 @@ withPipeline(type, product, component) {
   enableSlackNotifications('#adoption-tech')
 
   loadVaultSecrets(secrets)
-  
+
   after('build') {
     yarnBuilder.yarn('build')
   }
-  
+
+  before('functionalTest:preview') {
+
+    env.ADOP_WEB_URL="https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/landing"
+
+  }
+
+  after('functionalTest:preview') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'test/functional/output/mochawesome.html'
+
+    yarnBuilder.yarn('test:functional')
+  }
+
+  before('smoketest:preview') {
+    env.ADOP_WEB_URL="https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/landing"
+  }
+
+
 }

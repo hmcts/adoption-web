@@ -73,7 +73,8 @@ exports.config = {
     loginPage: './src/test/e2e/pages/login.page.js',
     openApplicationEventPage: './src/test/e2e/pages/events/openApplicationEvent.page.js',
     caseListPage: './src/test/e2e/pages/caseList.page.js',
-    eventSummaryPage: './e2e/pages/eventSummary.page.js'
+    eventSummaryPage: './src/test/e2e/pages/eventSummary.page.js',
+    landingPage: './src/test/e2e/pages/LandingPage.js'
   },
   plugins: {
     retryFailedStep: {
