@@ -9,7 +9,7 @@ const eventSummaryPage = require('../pages/eventSummary.page');
 const normalizeCaseId = caseId => caseId.toString().replace(/\D/g, '');
 
 const baseUrl = config.baseUrl;
-const signedInSelector = 'exui-header';
+const signedInSelector = 'h1';
 const signedOutSelector = '#global-header';
 const maxRetries = 5;
 let currentUser = {};
@@ -28,10 +28,6 @@ module.exports = {
 
         if (await this.waitForAnySelector([signedOutSelector, signedInSelector], 30) == null) {
           return;
-        }
-
-        if (await this.hasSelector(signedInSelector)) {
-          await this.retryUntilExists(() => this.click('Sign out'), signedOutSelector, false, 10);
         }
 
         await this.retryUntilExists(() =>  loginPage.signIn(user), signedInSelector, false, 10);

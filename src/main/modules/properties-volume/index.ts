@@ -1,14 +1,13 @@
-import config from 'config';
+
 import * as propertiesVolume from '@hmcts/properties-volume';
 import { Application } from 'express';
 import { get, set } from 'lodash';
-
+import config from 'config';
 export class PropertiesVolume {
 
   enableFor(server: Application): void {
     if (server.locals.ENV !== 'development') {
       propertiesVolume.addTo(config);
-      console.log(config);
       this.setSecret('secrets.adoption-web.AppInsightsInstrumentationKey', 'appInsights.instrumentationKey');
     }
   }

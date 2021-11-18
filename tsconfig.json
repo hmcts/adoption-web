@@ -5,7 +5,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "target": "es6",
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "moduleResolution": "node",
     "noUnusedLocals": true,
     "experimentalDecorators": true,
@@ -17,12 +17,30 @@
     ],
     "baseUrl": "src/main",
     "paths": {
+      "client/*": [
+        "app/client/*"
+      ],
+      "idam/*": [
+        "app/idam/*"
+      ],
+      "logging/*": [
+        "app/logging/*"
+      ],
+      "paths": [
+        "app/paths"
+      ],
       "router/*": [
         "router/*"
       ],
       "routes/*": [
         "routes/*"
-      ]
+      ],
+      "common/*": [
+        "common/*"
+      ],
+      "utils/*": [
+        "app/utils/*"
+      ],
     },
     "typeRoots": [
       "./node_modules/@types"

@@ -1,9 +1,10 @@
-import { Application } from 'express';
+import * as express from 'express';
 
-export default function(app: Application): void {
 
-  app.get('/', (req, res) => {
-    res.render('home');
+import { Paths as AppPaths } from 'app/paths';
+
+/* tslint:disable:no-default-export */
+export default express.Router()
+  .get('/', function (req, res) {
+    res.redirect(AppPaths.receiver.uri);
   });
-
-}
