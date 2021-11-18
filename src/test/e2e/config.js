@@ -2,11 +2,11 @@ const defaultPassword = 'Password12';
 
 module.exports = {
   legalProfessionalUserOne: {
-    email: 'kurt@swansea.gov.uk',
+    email: 'citizen.automation@mailinator.com',
     password: defaultPassword
   },
 
-  baseUrl: process.env.URL || 'https://manage-case.aat.platform.hmcts.net/cases',
+  baseUrl: process.env.ADOP_WEB_URL || 'https://adoption-web.aat.platform.hmcts.net/',
 
   definition: {
     jurisdiction: 'PUBLICLAW',

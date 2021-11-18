@@ -3,10 +3,9 @@ const moment = require('moment');
 
 Feature('Smoke tests @smoke-tests');
 
-Scenario('Sign in as local authority and create a case', async ({I}) => {
-
-  await I.goToPage(config.baseUrl);
-  const caseName = `Smoke test case (${moment().format('YYYY-MM-DD HH:MM')})`;
-  await I.logInAndCreateCase(config.legalProfessionalUserOne, caseName);
-  I.navigateToCaseList();
+Scenario('Sign in as citizen and create a case', async ({I,landingPage}) => {
+  console.log(`${process.env.ADOP_WEB_URL}`);
+  await I.goToPage(`${process.env.ADOP_WEB_URL}`);
+  await I.signIn(config.legalProfessionalUserOne);
+  await landingPage.seeTheLandingPage();
 });
