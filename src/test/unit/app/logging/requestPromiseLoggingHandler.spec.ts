@@ -154,6 +154,6 @@ describe('RequestLoggingHandler', () => {
       }));
 
       expect(res).toBeInstanceOf(Function);
-    })
-  })
+    });
+  });
 });

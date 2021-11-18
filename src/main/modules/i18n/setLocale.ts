@@ -1,10 +1,10 @@
 const i18next = require('i18next');
-import express from "express";
-import config from "config";
+import express from 'express';
+import config from 'config';
 
 const languages: string[] = config.get('languages');
 
-export default (req: express.Request, res: express.Response, next: express.NextFunction) => {
+export default (req: express.Request, res: express.Response, next: express.NextFunction): void => {
   if (req.query?.locale && languages.includes(`${req.query.locale}`)) {
     res.cookie('locale', req.query.locale);
     i18next.changeLanguage(req.query.locale);
