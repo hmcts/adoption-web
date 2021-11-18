@@ -1,5 +1,4 @@
 const config = require('../e2e/config');
-const moment = require('moment');
 
 Feature('Smoke tests @smoke-tests');
 

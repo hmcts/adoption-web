@@ -1,7 +1,6 @@
 const {I} = inject();
 
 module.exports = {
-
   fields: {
     headerName: 'h1'
   },
@@ -9,5 +8,4 @@ module.exports = {
   console.log('I am here');
    await I.seeElement(this.fields.headerName);
   }
-
 };
