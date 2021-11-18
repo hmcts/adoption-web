@@ -1,5 +1,6 @@
 import { RequestLoggingHandler } from 'logging/requestPromiseLoggingHandler';
 import { ApiLogger } from 'logging/apiLogger';
+const requestRetry = require('@hmcts/requestretry');
 
 describe('RequestLoggingHandler', () => {
   let handler: RequestLoggingHandler;
@@ -126,5 +127,33 @@ describe('RequestLoggingHandler', () => {
 
       expect(originalCallback).toHaveBeenCalled();
     });
+
+    test('should call the original callback defined in options object with correct statusCode', () => {
+      options.callback = originalCallback;
+      handler.handleLogging('any', options);
+      options.callback(null, { statusCode: 200 });
+
+      expect(originalCallback).toHaveBeenCalled();
+    });
   });
+
+  describe('proxy', () => {
+    test('.......', () => {
+      const defaultOptions = {
+        json: true,
+        timeout: 60000
+      };
+      const defaultRequestRetryOptions = {
+        fullResponse: false,
+        maxAttempts: 3
+      };
+      //const spy = jest.spyOn(Proxy, "");
+      const res = RequestLoggingHandler.proxy(requestRetry.defaults({
+        ...defaultOptions,
+        ...defaultRequestRetryOptions
+      }));
+
+      expect(res).toBeInstanceOf(Function);
+    })
+  })
 });
