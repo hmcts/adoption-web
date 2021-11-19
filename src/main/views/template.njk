@@ -4,6 +4,10 @@
   {% include "webpack/css.njk" %}
 {% endblock %}
 
+{% block proposition_header %}
+  {% include "includes/propositional_navigation.njk" %}
+{% endblock %}
+
 {% block content %}
     {% set phaseBarHtml = content[i18n.language].phaseBanner.new + '<a class="govuk-link" href="'+ content[i18n.language].general.exitLink + pageHeader + '" target="_blank">' + content[i18n.language].phaseBanner.report + "</a> " + content[i18n.language].phaseBanner.improve %}
     {% if welshEnabled %}
