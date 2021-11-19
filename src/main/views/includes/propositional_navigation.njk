@@ -3,7 +3,7 @@
 <div class="header-proposition">
   <div class="content">
         {% if isLoggedIn === true and isFirstContactPath === false %}
-          <li>{{ internalLink(t('Sign out'), AppPaths.logoutReceiver.uri) }}</li>
-        {% endif %}
+          <a href="/logout" class="govuk-header__link">Sign out</a>
+          {% endif %}
   </div>
 </div>

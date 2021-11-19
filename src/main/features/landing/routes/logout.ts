@@ -7,8 +7,8 @@ import { Logger } from '@hmcts/nodejs-logging';
 
 import { Paths } from 'paths';
 import { JwtExtractor } from 'idam/jwtExtractor';
-import { JwtUtils } from '../common/utils/jwtUtils';
-import { ErrorHandling } from '../common/errorHandling';
+import { JwtUtils } from '../../../common/utils/jwtUtils';
+import { ErrorHandling } from '../../../common/errorHandling';
 import { User } from 'idam/user';
 
 const sessionCookie = config.get<string>('session.cookieName');
