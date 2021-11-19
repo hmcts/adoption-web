@@ -16,7 +16,7 @@
     "maxAttempts": 3
   },
   "oauth": {
-    "clientId": "adoption-web"
+    "clientId": "cmc-citizen"
   },
   "idam": {
     "authentication-web": {
