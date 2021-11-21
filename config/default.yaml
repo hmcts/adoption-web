@@ -1,0 +1,53 @@
+security:
+  referrerPolicy: 'origin'
+port: 3000
+timeout: 30000
+fees:
+  applicationFee: £593
+  alternativeService: £50
+  consentOrder: £50
+  financialOrder: £255
+  courtBailiffService: £110
+  deemedService: £50
+  dispensedService: £50
+  searchForAddress: £50
+services:
+  authProvider:
+    url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'
+    microservice: 'divorce_frontend' #TODO change this
+    secret: 'NEED TO INSERT SECRET'
+  idam:
+    authorizationURL: 'https://idam-web-public.aat.platform.hmcts.net/login'
+    tokenURL: 'https://idam-api.aat.platform.hmcts.net/o/token'
+    clientID: 'adoption-web'
+    clientSecret: 'NEED TO INSERT SECRET'
+    systemUsername: 'dummy_user'
+    systemPassword: 'dummy_password'
+  case:
+    url: 'http://ccd-data-store-api-aat.service.core-compute-aat.internal'
+    # url: 'http://ccd-data-store-api-nfdiv-case-api-pr-863.service.core-compute-preview.internal'
+  postcodeLookup:
+    url: 'https://api.os.uk/search/places/v1'
+    token: 'NEED TO INSERT SECRET'
+  documentManagement:
+    url: http://dm-store-aat.service.core-compute-aat.internal
+  payments:
+    url: http://payment-api-aat.service.core-compute-aat.internal
+  equalityAndDiversity:
+    name: 'Equality and Diversity Service'
+    url: 'https://pcq.aat.platform.hmcts.net'
+    path: '/service-endpoint'
+    port: 4000
+    tokenKey: 'SERVICE_TOKEN_KEY'
+health:
+  timeout: 5000
+  deadline: 15000
+session:
+  secret: 'local'
+  redis:
+    host:
+    key:
+e2e:
+  userTestPassword: ''
+appInsights:
+  instrumentationKey:

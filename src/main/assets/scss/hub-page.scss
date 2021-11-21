@@ -1,0 +1,24 @@
+.govuk-panel--outstanding {
+  background-color: #f2f8f5;
+  text-align: left;
+  div {
+    color: govuk-colour('black');
+  }
+}
+
+.govuk-section-break--additional {
+  height: 5px;
+  color: govuk-colour('blue');
+  background-color: govuk-colour('blue');
+}
+
+.hub-progress-bar {
+  padding-bottom: 10px;
+  .hmcts-progress-bar__list-item {
+    max-width: 15%;
+  }
+}
+
+.hub-right-column {
+  padding-top: 95px;
+}

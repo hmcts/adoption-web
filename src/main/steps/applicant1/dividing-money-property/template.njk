@@ -1,0 +1,17 @@
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+
+{% extends "common/page.njk" %}
+
+{% block page_content %}
+  <h1 class="govuk-heading-l">{{ title }}</h1>
+  <p class="govuk-body">{{ line1 }}</p>
+  <h2 class="govuk-heading-m">{{ agreeOnDividingAssets }}</h2>
+  <p class="govuk-body">{{ agreeOnDividingAssetsDetails }}</p>
+  <h2 class="govuk-heading-m">{{ disagreeOnDividingAssets }}</h2>
+  <p class="govuk-body">{{ disagreeOnDividingAssetsDetails }}</p>
+  {{ govukDetails({
+    summaryText: readMore,
+    html: readMoreContent
+  }) }}
+  <p class="govuk-body">{{ costs }}</p>
+{% endblock %}

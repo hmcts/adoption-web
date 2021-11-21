@@ -1,10 +1,12 @@
 #!groovy
 
-@Library("Infrastructure")
+@Library('Infrastructure')
 
-def type = "nodejs"
-def product = "adoption"
-def component = "web"
+import uk.gov.hmcts.contino.AppPipelineConfig
+
+def type = 'nodejs'
+def product = 'adoption'
+def component = 'web'
 
 static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
   [ $class: 'AzureKeyVaultSecret',
@@ -17,13 +19,17 @@ static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
 
 def secrets = [
   'adoption-kv-${env}': [
-      secret('citizen-oauth-client-secret', 'OAUTH_CLIENT_SECRET')
+    secret('citizen-oauth-client-secret', 'OAUTH_CLIENT_SECRET')
   ]
 ]
 
-env.IDAM_URL = 'https://idam-api.aat.platform.hmcts.net'
-
 def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
+def branchesToSync = ['demo', 'perftest', 'ithc']
+
+def pipelineConf = new AppPipelineConfig()
+pipelineConf.vaultSecrets = secrets
+
+env.IDAM_URL = 'https://idam-api.aat.platform.hmcts.net'
 
 withPipeline(type, product, component) {
   enableAksStagingDeployment()
@@ -38,9 +44,7 @@ withPipeline(type, product, component) {
   }
 
   before('functionalTest:preview') {
-
-    env.ADOP_WEB_URL="https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/landing"
-
+    env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/landing"
   }
 
   after('functionalTest:preview') {
@@ -50,8 +54,6 @@ withPipeline(type, product, component) {
   }
 
   before('smoketest:preview') {
-    env.ADOP_WEB_URL="https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/landing"
+    env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/landing"
   }
-
-
 }

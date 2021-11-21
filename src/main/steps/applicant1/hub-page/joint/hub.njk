@@ -1,0 +1,12 @@
+{% if progressionIndex == 0 and not hasApplicantConfirmedReceipt %}
+  {% for property, line in applicationSubmittedLatestUpdate %}
+    <p class="govuk-body">{{ line }}</p>
+  {% endfor %}
+  {% block form %}
+    {% include "../form.njk" %}
+  {% endblock %}
+{% else %}
+  {% for property, line in applicantConfirmedReceiptLatestUpdate %}
+    <p class="govuk-body">{{ line }}</p>
+  {% endfor %}
+{% endif %}

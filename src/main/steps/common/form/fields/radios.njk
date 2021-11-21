@@ -1,0 +1,21 @@
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+{{ govukRadios({
+    classes: field.classes,
+    idPrefix: field.id if field.id else fieldName,
+    name: fieldName,
+    fieldset: {
+      legend: {
+        text: getContent(field.label),
+        classes: "hidden" if field.labelHidden else "govuk-fieldset__legend--m"
+      }
+    },
+    hint: {
+      html: getContent(field.hint)
+    },
+    items: formItems(field.values, userCase[fieldName]),
+    errorMessage: getError(fieldName),
+    formGroup: {
+      classes: "hidden " + field.id if field.hidden else field.id
+    }
+  }) }}

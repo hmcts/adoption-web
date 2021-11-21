@@ -11,26 +11,27 @@ nodejs:
   devcpuLimits: 2500m
   readinessDelay: 130
   livenessDelay: 130
-  autoscaling:        # Default is false
+  autoscaling: # Default is false
     enabled: true
-    maxReplicas: 5    # Required setting
+    maxReplicas: 5 # Required setting
     targetCPUUtilizationPercentage: 80 # Default is 80% target CPU utilization
   aadIdentityName: adoption
   ingressHost: adoption-web.{{ .Values.global.environment }}.platform.hmcts.net
-  
+
   environment:
     NODE_ENV: production
     REFORM_TEAM: adoption
     REFORM_SERVICE_NAME: adoption-web
 
-    IDAM_API_URL: https://idam-api.{{ .Values.global.environment }}.platform.hmcts.net
-    IDAM_AUTHENTICATION_WEB_URL: https://idam-web-public.{{ .Values.global.environment }}.platform.hmcts.net
+    SERVICE_AUTH_PROVIDER_URL: 'http://rpe-service-auth-provider-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal'
+    IDAM_WEB_URL: 'https://idam-web-public.{{ .Values.global.environment }}.platform.hmcts.net/login'
+    IDAM_API_URL: 'https://idam-api.{{ .Values.global.environment }}.platform.hmcts.net/o/token'
 
   keyVaults:
-   adoption-kv:
-     secrets:
-       - citizen-oauth-client-secret
-      #  - AppInsightsInstrumentationKey
-  
+    adoption-kv:
+      secrets:
+        - citizen-oauth-client-secret
+        #  - AppInsightsInstrumentationKey
+
 idam-pr:
   enabled: false

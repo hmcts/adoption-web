@@ -1,0 +1,8 @@
+{% extends "common/page.njk" %}
+
+{% block page_content %}
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
+  <p class="govuk-body">{{ line1 }}</p>
+  <p class="govuk-body">{{ line2 }}</p>
+  <p class="govuk-body"><a href="/save-and-sign-out?lng={{language}}" class="govuk-link">{{ signOut }}</a></p>
+{% endblock %}

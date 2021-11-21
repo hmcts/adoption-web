@@ -1,25 +1,13 @@
 module.exports = {
-  roots: ['<rootDir>/src/test/unit'],
-  "testRegex": "(/src/test/.*|\\.(test|spec))\\.(ts|js)$",
-  "moduleFileExtensions": [
-    "ts",
-    "js"
-  ],
-  "testEnvironment": "node",
+  roots: ['<rootDir>/src/main'],
+  testRegex: '(/src/test/.*|\\.test)\\.(ts|js)$',
+  testEnvironment: 'node',
   transform: {
-    '^.+\\.ts?$': 'ts-jest',
+    '^.+\\.ts$': 'ts-jest',
   },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  moduleFileExtensions: ['ts', 'js', 'json'],
+  setupFilesAfterEnv: ['jest-extended'],
   moduleNameMapper: {
-    "client/(.*)": "<rootDir>/src/main/app/client/$1",
-    "common/(.*)": "<rootDir>/src/main/common/$1",
-    "idam/(.*)": "<rootDir>/src/main/app/idam/$1",
-    "logging/(.*)": "<rootDir>/src/main/app/logging/$1",
-    //utils name clashes with one of the internal jest modules hence need to map individual files
-    "utils/callbackBuilder": "<rootDir>/src/main/app/utils/callbackBuilder",
-    "utils/stringUtils": "<rootDir>/src/main/app/utils/stringUtils",
-    "paths": "<rootDir>/src/main/app/paths",
-    // "router/(.*)": "router/$1",
-    // "routes/(.*)": "routes/$1",
-  }
-}
+    '@hmcts/nodejs-logging': '<rootDir>/src/test/unit/mocks/hmcts/nodejs-logging',
+  },
+};

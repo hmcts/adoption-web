@@ -1,0 +1,14 @@
+<hr class="govuk-section-break govuk-section-break--l govuk-section-break--additional">
+<h2 class="govuk-heading-s">{{ iWantTo }}</h2>
+
+<p class="govuk-body">{{ applicationDownloadLink | safe }}</p>
+{% if aosSubmitted %}
+  <p class="govuk-body">{{ respondentAnswersDownloadLink | safe }}</p>
+{% endif %}
+<p class="govuk-body">{{ reviewContactDetails | safe }}</p>
+<hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+<h3 class="govuk-heading-s">{{ gettingHelp }}</h3>
+<p class="govuk-body">{{ telephone | safe }}</p>
+<p class="govuk-body">{{ email | safe }}</p>
+<p class="govuk-body">{{ post | safe}}</p>

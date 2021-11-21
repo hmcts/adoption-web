@@ -1,0 +1,35 @@
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+
+{{ govukErrorSummary({
+  titleText: errorSummaryHeading,
+  classes: "hidden",
+  attributes: {
+    id: "addressErrorSummary"
+  },
+  errorList: [
+    {
+      text: errors.addressPostcode.required,
+      href: "#postcode",
+      attributes: {
+        id: "errorPostCodeRequired",
+        class: "hidden"
+      }
+    },
+    {
+      text: errors.addressPostcode.invalid,
+      href: "#postcode",
+      attributes: {
+        id: "errorPostCodeInvalid",
+        class: "hidden"
+      }
+    },
+    {
+      text: errors.addressPostcode.notSelected,
+      href: "#selectAddressInput",
+      attributes: {
+        id: "errorAddressNotSelected",
+        class: "hidden"
+      }
+    }
+  ]
+}) }}

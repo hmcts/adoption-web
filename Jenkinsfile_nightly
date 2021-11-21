@@ -1,16 +1,62 @@
 #!groovy
 
 properties([
-// H allow predefined but random minute see https://en.wikipedia.org/wiki/Cron#Non-standard_characters
-pipelineTriggers([cron('H 05 * * *')])
+  // H allow predefined but random minute see https://en.wikipedia.org/wiki/Cron#Non-standard_characters
+  pipelineTriggers([cron('H 04 * * *')]),
+  parameters([
+    string(name: 'TEST_URL', defaultValue: 'https://adoption-web.aat.platform.hmcts.net', description: 'The URL you want to run tests against'),
+  ])
 ])
 
 @Library("Infrastructure")
+
+import uk.gov.hmcts.contino.AppPipelineConfig
 
 def type = "nodejs"
 def product = "adoption"
 def component = "web"
 
-withNightlyPipeline(type, product, component) {
+// SAUCELABS config - configured on Jenkins
+env.SAUCE_USERNAME = 'username'
+env.SAUCE_ACCESS_KEY = 'privatekey'
+env.SAUCE_TUNNEL_IDENTIFIER = 'reformtunnel'
 
+def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
+
+static Map<String, Object> secret(String secretName, String envVariable) {
+  [$class     : 'AzureKeyVaultSecret',
+   secretType : 'Secret',
+   name       : secretName,
+   envVariable: envVariable
+  ]
+}
+
+def secrets = [
+  'adoption-kv-${env}'    :[
+    secret('e2e-test-user-password', 'TEST_PASSWORD'),
+    secret('frontend-secret', 'SERVICE_AUTH_SECRET'),
+    secret('idam-secret', 'IDAM_SECRET'),
+    secret('pcq-token-key', 'PCQ_TOKEN')
+  ]
+]
+
+def pipelineConf = new AppPipelineConfig()
+pipelineConf.vaultSecrets = secrets
+
+withNightlyPipeline(type, product, component) {
+  enableCrossBrowserTest()
+  enableFullFunctionalTest()
+  loadVaultSecrets(secrets)
+
+  before('crossBrowserTest') {
+    yarnBuilder.smokeTest()
+  }
+
+  after('crossBrowserTest') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/crossbrowser/reports/**/*'
+  }
+
+  after('fullFunctionalTest') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/functional/reports/**/*'
+  }
 }

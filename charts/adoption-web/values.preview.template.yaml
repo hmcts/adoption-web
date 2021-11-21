@@ -4,6 +4,8 @@ nodejs:
   ingressHost: ${SERVICE_FQDN}
   ingressIP: ${INGRESS_IP}
   consulIP: ${CONSUL_LB_IP}
+  autoscaling:
+    enabled: false
 idam-pr:
   enabled: true
   redirect_uris:

@@ -1,0 +1,35 @@
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% extends "../../applicant1/hub-page/template.njk" %}
+
+{% block soleLatestUpdate %}
+  {% if progressionIndex == 5 %}
+    <p class="govuk-body">{{ dispute.line1 }}</p>
+    <p class="govuk-body">{{ dispute.line2 }}</p>
+    <h4 class="govuk-heading-s">{{ whatHappensNext }}</h4>
+    <p class="govuk-body">{{ dispute.line3 }}</p>
+    <p class="govuk-body">{{ dispute.line4 }}</p>
+  {% elif progressionIndex == 4 %}
+    <p class="govuk-body">{{ pendingDispute.line1 }}</p>
+    <p class="govuk-body">{{ pendingDispute.line2 | safe }}</p>
+    <p class="govuk-body">{{ pendingDispute.line3 | safe }}</p>
+    <p class="govuk-body">{{ pendingDispute.line4 | safe }}</p>
+    <p class="govuk-body">{{ pendingDispute.line5 | safe }}</p>
+    <p class="govuk-body">{{ pendingDispute.line6 }}</p>
+  {% elif progressionIndex == 3 %}
+    <p class="govuk-body">{{ holding.line1 }}</p>
+    <p class="govuk-body">{{ holding.line2 }}</p>
+    <p class="govuk-body">{{ holding.line3 }}</p>
+    <p class="govuk-body">{{ holding.line4 }}</p>
+    <p class="govuk-body">{{ holding.line5 | safe }}</p>
+  {% elif progressionIndex == 0 %}
+    {% for property, line in awaitingAos %}
+      <p class="govuk-body">{{ line }}</p>
+      {{ govukButton({
+        text: 'Respond to the application',
+        href: '/respondent/review-the-application',
+        preventDoubleClick: true
+      }) }}
+    {% endfor %}
+  {% endif %}
+{% endblock %}

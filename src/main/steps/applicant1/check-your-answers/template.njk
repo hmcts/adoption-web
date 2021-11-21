@@ -1,0 +1,55 @@
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% extends "common/page.njk" %}
+
+{% set nextIncompleteStep = getNextIncompleteStepUrl() %}
+{% set isApplicationReadyToSubmit =
+        '/check-your-answers' in nextIncompleteStep or
+        nextIncompleteStep === '/' or
+        nextIncompleteStep.startsWith('/pay') or
+        nextIncompleteStep.startsWith('/application-submitted')
+%}
+{% set title = titleSubmit if isApplicationReadyToSubmit else titleSoFar %}
+
+{% block backLink %}{% endblock %}
+
+{% block content %}
+  {% block error_summary %}
+    {% include "common/error/summary.njk" %}
+  {% endblock %}
+
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
+
+  {% for key, section in sections %}
+    {% set rows = getAnswerRows(section) %}
+    {% if rows | length %}
+      <h2 class="govuk-heading-m">{{ sectionTitles[section] }}</h2>
+
+      {{ govukSummaryList({
+        classes: 'govuk-!-margin-bottom-9',
+        rows: rows
+      }) }}
+    {% endif %}
+  {% endfor %}
+
+  {% if isApplicationReadyToSubmit and not isJointApplication %}
+    {% block form %}
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          {% include "./form.njk" %}
+        </div>
+      </div>
+    {% endblock %}
+  {% elif not isApplicant2 and isApplicationReadyToSubmit and isJointApplication %}
+    {% include "./joint-form.njk" %}
+  {% else %}
+    {{ govukButton({
+      text: continueApplication,
+      href: nextIncompleteStep,
+      preventDoubleClick: true
+    }) }}
+  {% endif %}
+
+  {% include "common/contact-us.njk" %}
+{% endblock %}

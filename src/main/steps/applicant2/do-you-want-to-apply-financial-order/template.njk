@@ -1,0 +1,24 @@
+{% extends "common/page.njk" %}
+
+{% block page_content %}
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
+  <p class="govuk-body">{{ line1 }}</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>{{ point1 }}</li>
+    <li>{{ point2 }}</li>
+    <li>{{ point3 }}</li>
+  </ul>
+
+  <p class="govuk-body">{{ line2 }}</p>
+
+  <h2 class="govuk-heading-s">{{ selectYes }}</h2>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>{{ yesPoint1 }}</li>
+    <li>{{ yesPoint2 }}</li>
+  </ul>
+
+  <h2 class="govuk-heading-s">{{ selectNo }}</h2>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>{{ noPoint1 }}</li>
+  </ul>
+{% endblock %}

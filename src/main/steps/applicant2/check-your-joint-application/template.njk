@@ -1,0 +1,40 @@
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% extends "common/page.njk" %}
+
+{% set overrideStepsContent = 1 %}
+{% set showActions = false %}
+{% set isCompleteCase = false %}
+
+{% block backLink %}{% endblock %}
+
+{% block content %}
+  {% block error_summary %}
+    {% include "common/error/summary.njk" %}
+  {% endblock %}
+
+  <h1 class="govuk-heading-xl">{{ title }}</h1>
+  <p class="govuk-body">{{ line1 }}</p>
+
+  {% for key, section in sections %}
+    {% set rows = getAnswerRows(section, isCompleteCase, showActions, overrideStepsContent) %}
+    {% if rows | length %}
+      <h2 class="govuk-heading-m">{{ sectionTitles[section] }}</h2>
+
+      {{ govukSummaryList({
+        classes: 'govuk-!-margin-bottom-9',
+        rows: rows
+      }) }}
+    {% endif %}
+  {% endfor %}
+  {% block form %}
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          {% include "common/form/form.njk"%}
+        </div>
+      </div>
+  {% endblock %}
+
+  {% include "common/contact-us.njk" %}
+{% endblock %}
