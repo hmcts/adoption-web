@@ -14,7 +14,6 @@ export const APPLICANT_1: PageLink = '/applicant1';
 export const APPLICANT_2: PageLink = '/applicant2';
 export const RESPONDENT: PageLink = '/respondent';
 
-export const COOKIES_URL: PageLink = '/cookies';
 export const CHECK_ANSWERS_URL: PageLink = '/check-your-answers';
 
 export const APPLICATION_ENDED: PageLink = '/application-ended';

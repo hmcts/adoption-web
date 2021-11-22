@@ -13,14 +13,12 @@ import { stepsWithContent } from './steps';
 import { PostcodeLookupPostController } from './steps/applicant1/postcode-lookup/post';
 import * as applicant2AccessCodeContent from './steps/applicant2/enter-your-access-code/content';
 import { Applicant2AccessCodeGetController } from './steps/applicant2/enter-your-access-code/get';
-import { CookiesGetController } from './steps/cookies/get';
 import { ErrorController } from './steps/error/error.controller';
 import { HomeGetController } from './steps/home/get';
 import { SaveSignOutGetController } from './steps/save-sign-out/get';
 import { TimedOutGetController } from './steps/timed-out/get';
 import {
   APPLICANT_2,
-  COOKIES_URL,
   CSRF_TOKEN_ERROR_URL,
   DOCUMENT_MANAGER,
   ENTER_YOUR_ACCESS_CODE,
@@ -42,7 +40,6 @@ export class Routes {
     app.get([HOME_URL, APPLICANT_2], errorHandler(new HomeGetController().get));
     app.get(SAVE_AND_SIGN_OUT, errorHandler(new SaveSignOutGetController().get));
     app.get(TIMED_OUT_URL, errorHandler(new TimedOutGetController().get));
-    app.get(COOKIES_URL, errorHandler(new CookiesGetController().get));
     app.post(POSTCODE_LOOKUP, errorHandler(new PostcodeLookupPostController().post));
 
     const documentManagerController = new DocumentManagerController();
