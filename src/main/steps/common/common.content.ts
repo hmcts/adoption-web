@@ -1,6 +1,6 @@
 import { capitalize } from 'lodash';
 
-import { CaseWithId, Checkbox } from '../../app/case/case';
+import { CaseWithId } from '../../app/case/case';
 import { ApplicationType, Gender } from '../../app/case/definition';
 import { PageContent, TranslationFn } from '../../app/controller/GetController';
 
@@ -180,20 +180,18 @@ export const generatePageContent = ({
   language,
   pageContent,
   isDivorce = true,
-  isApplicant2 = false,
   userCase,
   userEmail,
 }: {
   language: Language;
   pageContent?: TranslationFn;
   isDivorce?: boolean;
-  isApplicant2?: boolean;
   userCase?: Partial<CaseWithId>;
   userEmail?: string;
 }): PageContent => {
   const commonTranslations: typeof en = language === 'en' ? en : cy;
   const serviceName = getServiceName(commonTranslations, isDivorce);
-  const selectedGender = getSelectedGender(userCase as Partial<CaseWithId>, isApplicant2);
+  const selectedGender = getSelectedGender(userCase as Partial<CaseWithId>);
   const partner = getPartnerContent(commonTranslations, selectedGender, isDivorce);
   const contactEmail = isDivorce ? 'contactdivorce@justice.gov.uk' : 'civilpartnership.case@justice.gov.uk';
   const isJointApplication = userCase?.applicationType === ApplicationType.JOINT_APPLICATION;
@@ -205,7 +203,6 @@ export const generatePageContent = ({
     partner,
     language,
     isDivorce,
-    isApplicant2,
     userCase,
     userEmail,
     contactEmail,
@@ -224,10 +221,7 @@ const getServiceName = (translations: typeof en, isDivorce: boolean): string => 
   return capitalize(serviceName);
 };
 
-const getSelectedGender = (userCase: Partial<CaseWithId>, isApplicant2: boolean): Gender => {
-  if (isApplicant2 && userCase?.sameSex === Checkbox.Unchecked) {
-    return userCase?.gender === Gender.MALE ? (Gender.FEMALE as Gender) : (Gender.MALE as Gender);
-  }
+const getSelectedGender = (userCase: Partial<CaseWithId>): Gender => {
   return userCase?.gender as Gender;
 };
 
@@ -249,7 +243,6 @@ export type CommonContent = typeof en & {
   serviceName: string;
   pageContent?: TranslationFn;
   isDivorce: boolean;
-  isApplicant2: boolean;
   userCase?: Partial<CaseWithId>;
   partner: string;
   userEmail?: string;

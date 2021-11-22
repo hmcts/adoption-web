@@ -70,7 +70,6 @@ describe('getAnswerRows()', () => {
         applicant2: 'husband',
         userCase: {},
         userEmail: 'test@example.com',
-        isApplicant2: false,
         isJointApplication: false,
       },
     })(Sections.AboutPartnership);
@@ -78,7 +77,6 @@ describe('getAnswerRows()', () => {
     expect(generatePageContentSpy).toHaveBeenCalledWith({
       userCase: {},
       isDivorce: true,
-      isApplicant2: false,
       language: 'en',
       pageContent: mockGenerateContent,
       userEmail: 'test@example.com',
@@ -170,7 +168,6 @@ describe('getAnswerRows()', () => {
       mockCtx = {
         language: 'en',
         isDivorce: true,
-        isApplicant2: false,
         isJointApplication: false,
         partner: 'husband',
         userCase: mockUserCase,
@@ -212,7 +209,10 @@ describe('getAnswerRows()', () => {
     it('converts steps into the correct check answers rows for applicant 2', () => {
       const actual = getAnswerRows.bind({
         ...mockNunjucksEnv,
-        ctx: { ...mockCtx, isApplicant2: true, isJointApplication: true },
+        ctx: {
+          ...mockCtx,
+          isJointApplication: true,
+        },
       })(Sections.AboutPartnership);
 
       expect(actual).toEqual([
@@ -411,7 +411,6 @@ describe('getAnswerRows()', () => {
         ...mockNunjucksEnv,
         ctx: {
           ...mockCtx,
-          isApplicant2: true,
           isJointApplication: true,
           stepQuestions: { pickThisOne: { mockField: 'Custom question text' } },
           stepAnswers: { pickThisOne: { mockField: () => 'Custom answer text. Original answer: example response' } },
@@ -448,7 +447,6 @@ describe('getAnswerRows()', () => {
         ...mockNunjucksEnv,
         ctx: {
           ...mockCtx,
-          isApplicant2: true,
           isJointApplication: true,
           stepQuestions: { pickThisOne: { mockField: 'Custom question text' } },
           stepAnswers: { pickThisOne: { mockField: () => 'Custom answer text. Original answer: example response' } },
@@ -506,7 +504,10 @@ describe('getAnswerRows()', () => {
     it('converts steps into the correct check answers rows for confirm joint application page', () => {
       const actual = getAnswerRows.bind({
         ...mockNunjucksEnv,
-        ctx: { ...mockCtx, isApplicant2: true, isJointApplication: true },
+        ctx: {
+          ...mockCtx,
+          isJointApplication: true,
+        },
       })(Sections.AboutPartnership, true, false);
 
       expect(actual).toEqual([
@@ -586,7 +587,10 @@ describe('getAnswerRows()', () => {
 
       const actual = getAnswerRows.bind({
         ...mockNunjucksEnv,
-        ctx: { ...mockCtx, isApplicant2: true, isJointApplication: true },
+        ctx: {
+          ...mockCtx,
+          isJointApplication: true,
+        },
       })(Sections.DividingAssets, true, false);
 
       expect(actual).toEqual([
@@ -629,7 +633,10 @@ describe('getAnswerRows()', () => {
 
       const actual = getAnswerRows.bind({
         ...mockNunjucksEnv,
-        ctx: { ...mockCtx, isApplicant2: true, isJointApplication: true },
+        ctx: {
+          ...mockCtx,
+          isJointApplication: true,
+        },
       })(Sections.AboutApplicant1, true, false);
 
       expect(actual).toEqual([
@@ -672,7 +679,10 @@ describe('getAnswerRows()', () => {
 
       const actual = getAnswerRows.bind({
         ...mockNunjucksEnv,
-        ctx: { ...mockCtx, isApplicant2: true, isJointApplication: true },
+        ctx: {
+          ...mockCtx,
+          isJointApplication: true,
+        },
       })(Sections.AboutApplicant2, true, false);
 
       expect(actual).toEqual([

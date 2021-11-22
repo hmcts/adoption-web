@@ -5,7 +5,7 @@ import { UserDetails } from '../controller/AppRequest';
 import { PaymentModel } from '../payment/PaymentModel';
 
 import { CaseApi, getCaseApi } from './CaseApi';
-import { CITIZEN_ADD_PAYMENT, CITIZEN_UPDATE, DivorceOrDissolution, State, UserRole } from './definition';
+import { CITIZEN_ADD_PAYMENT, CITIZEN_UPDATE, DivorceOrDissolution, State } from './definition';
 
 jest.mock('axios');
 
@@ -277,13 +277,6 @@ describe('CaseApi', () => {
     );
 
     expect(mockLogger.error).toHaveBeenCalledWith('API Error GET https://example.com/case-users');
-  });
-
-  test('isApplicant2() returns true if the case role contains applicant 2', async () => {
-    mockedAxios.get.mockResolvedValue({ data: { case_users: [{ case_role: UserRole.APPLICANT_2 }] } });
-
-    const isApplicant2 = await api.isApplicant2('1234123412341234', userDetails.id);
-    expect(isApplicant2).toBe(true);
   });
 
   test('Should catch all errors', async () => {

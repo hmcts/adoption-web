@@ -115,10 +115,6 @@ export class CaseApi {
     }
   }
 
-  // public async isApplicant2(caseId: string, userId: string): Promise<boolean> {
-  //   return (await this.getCaseUserRoles(caseId, userId)).case_users[0].case_role.includes(UserRole.APPLICANT_2);
-  // }
-
   private async sendEvent(caseId: string, data: Partial<CaseData>, eventName: string): Promise<CaseWithId> {
     try {
       //TODO uncomment this

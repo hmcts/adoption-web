@@ -8,7 +8,7 @@ import { connectionBulletPointsTextForRespondent } from '../../../app/jurisdicti
 import { jurisdictionMoreDetailsContent } from '../../../steps/applicant1/connection-summary/content';
 import { CommonContent } from '../../common/common.content';
 
-const en = ({ isDivorce, userCase, partner, userEmail, isApplicant2 }: CommonContent) => ({
+const en = ({ isDivorce, userCase, partner, userEmail }: CommonContent) => ({
   title: `Review the ${isDivorce ? 'divorce application' : 'application to end your civil partnership'}`,
   line1: `Review this application ${
     isDivorce ? 'for divorce' : 'to end your civil partnership'
@@ -85,7 +85,7 @@ const en = ({ isDivorce, userCase, partner, userEmail, isApplicant2 }: CommonCon
   subHeading6: 'Financial order application',
   financialOrderYes: 'The applicant intends to apply to the court for financial orders',
   financialOrderNo: 'The applicant is not intending to apply to the court for financial orders.',
-  financialOrderMoreDetails: `${isApplicant2 ? `Your ${partner} was asked if they` : 'You were asked if you'}
+  financialOrderMoreDetails: `${'You were asked if you'}
    want the court to decide how your money, property, pensions and other assets will be split.
    These decisions are called ‘financial orders’. Financial orders can be made between you and your ${partner} and any children that you may have.
    <br><br>A financial order can be made if you agree about dividing money and property, and you want to make the decision legally binding.
@@ -133,11 +133,7 @@ const en = ({ isDivorce, userCase, partner, userEmail, isApplicant2 }: CommonCon
   line22: `${userCase?.applicant2EmailAddress}`,
   subHeading11: 'Statement of truth',
   line23: 'I believe that the facts stated in this application are true.',
-  applicantName: `<em>${
-    isApplicant2
-      ? userCase?.applicant2FirstNames + ' ' + userCase?.applicant2LastNames
-      : userCase?.applicant1FirstNames + ' ' + userCase?.applicant1LastNames
-  }</em>`,
+  applicantName: `<em>${userCase?.applicant1FirstNames + ' ' + userCase?.applicant1LastNames}</em>`,
   subHeading12: 'Your acknowledgement',
   confirmReadPetition: `I have read the application ${isDivorce ? 'for divorce' : 'to end our civil partnership'}`,
   errors: {

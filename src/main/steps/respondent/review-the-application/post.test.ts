@@ -21,7 +21,7 @@ describe('ReviewTheApplicationPostController', () => {
     } as unknown as FormContent;
     const reviewTheApplicationPostController = new ReviewTheApplicationPostController(mockFormContent.fields);
 
-    const req = mockRequest({ body, session: { isApplicant2: true } });
+    const req = mockRequest({ body, session: {} });
     const res = mockResponse();
     await reviewTheApplicationPostController.post(req, res);
 

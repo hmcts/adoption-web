@@ -84,7 +84,6 @@ describe('DocumentManagerController', () => {
 
     it('handles applicant 2 file uploads', async () => {
       const req = mockRequest({
-        isApplicant2: true,
         userCase: {
           state: State.AwaitingApplicant2Response,
           applicant2DocumentsUploaded: ['an-existing-doc'],
@@ -176,7 +175,6 @@ describe('DocumentManagerController', () => {
 
     it("redirects if browser doesn't accept JSON/has JavaScript disabled - Applicant 2", async () => {
       const req = mockRequest({
-        isApplicant2: true,
         userCase: {
           state: State.AwaitingApplicant2Response,
           applicant2DocumentsUploaded: ['an-existing-doc'],
@@ -221,7 +219,6 @@ describe('DocumentManagerController', () => {
 
     it("uploading throws an error if the case isn't in a awaiting applicant 2 response state as applicant 2", async () => {
       const req = mockRequest({
-        isApplicant2: true,
         userCase: {
           state: State.Submitted,
           applicant1DocumentsUploaded: ['an-existing-doc'],
@@ -254,7 +251,6 @@ describe('DocumentManagerController', () => {
 
     it('throws an error if no files were uploaded as applicant 2', async () => {
       const req = mockRequest({
-        isApplicant2: true,
         userCase: {
           state: State.AwaitingApplicant2Response,
         },
@@ -289,7 +285,6 @@ describe('DocumentManagerController', () => {
 
     it('redirects if no files were uploaded & JavaScript is disabled - Applicant 2', async () => {
       const req = mockRequest({
-        isApplicant2: true,
         userCase: {
           state: State.AwaitingApplicant2Response,
         },
@@ -325,7 +320,6 @@ describe('DocumentManagerController', () => {
 
   it('redirects if deleting & JavaScript is disabled - Applicant 2', async () => {
     const req = mockRequest({
-      isApplicant2: true,
       userCase: {
         state: State.AwaitingApplicant2Response,
       },
@@ -394,7 +388,6 @@ describe('DocumentManagerController', () => {
 
     it('deletes an existing file as applicant 2', async () => {
       const req = mockRequest({
-        isApplicant2: true,
         userCase: {
           state: State.AwaitingApplicant2Response,
           applicant2DocumentsUploaded: [
@@ -470,7 +463,6 @@ describe('DocumentManagerController', () => {
 
     it("redirects if browser doesn't accept JSON/has JavaScript disabled - Applicant 2", async () => {
       const req = mockRequest({
-        isApplicant2: true,
         userCase: {
           state: State.AwaitingApplicant2Response,
           applicant2DocumentsUploaded: [
@@ -536,7 +528,6 @@ describe('DocumentManagerController', () => {
 
     it("deleting throws an error if the case isn't in awaiting applicant 2 response state when logged in as applicant 2", async () => {
       const req = mockRequest({
-        isApplicant2: true,
         userCase: {
           state: State.Submitted,
           applicant1DocumentsUploaded: [

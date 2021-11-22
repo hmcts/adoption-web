@@ -72,7 +72,6 @@ describe('HomeGetController', () => {
           divorceOrDissolution: DivorceOrDissolution.DIVORCE,
           mockQuestion: 'mockExistingAnswer',
         },
-        isApplicant2: true,
       },
     });
     const res = mockResponse();
@@ -89,7 +88,6 @@ describe('HomeGetController', () => {
           divorceOrDissolution: DivorceOrDissolution.DIVORCE,
           applicant2ScreenHasUnionBroken: YesOrNo.YES,
         },
-        isApplicant2: true,
       },
     });
     const res = mockResponse();
@@ -108,7 +106,6 @@ describe('HomeGetController', () => {
           ...jointApplicant2CompleteCase,
           applicant2WhoIsFinancialOrderFor: [],
         },
-        isApplicant2: true,
       },
     });
     const res = mockResponse();
@@ -125,7 +122,6 @@ describe('HomeGetController', () => {
           divorceOrDissolution: DivorceOrDissolution.DIVORCE,
           state: State.Applicant2Approved,
         },
-        isApplicant2: true,
       },
     });
     const res = mockResponse();
@@ -142,7 +138,6 @@ describe('HomeGetController', () => {
           divorceOrDissolution: DivorceOrDissolution.DIVORCE,
           state: State.Holding,
         },
-        isApplicant2: true,
       },
     });
     const res = mockResponse();
@@ -258,7 +253,6 @@ describe('HomeGetController', () => {
           disputeApplication: YesOrNo.NO,
           state: State.AosDrafted,
         },
-        isApplicant2: true,
       },
     });
     const res = mockResponse();
@@ -276,7 +270,6 @@ describe('HomeGetController', () => {
           applicationType: ApplicationType.SOLE_APPLICATION,
           state: State.Holding,
         },
-        isApplicant2: true,
       },
     });
     const res = mockResponse();
@@ -294,7 +287,6 @@ describe('HomeGetController', () => {
           applicationType: ApplicationType.SOLE_APPLICATION,
           state: State.AosDrafted,
         },
-        isApplicant2: true,
       },
     });
     const res = mockResponse();

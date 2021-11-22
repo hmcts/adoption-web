@@ -17,7 +17,7 @@ describe('HubPagePostController', () => {
     } as unknown as FormContent;
     const hubPagePostController = new HubPagePostController(mockFormContent.fields);
 
-    const req = mockRequest({ body, session: { isApplicant2: true } });
+    const req = mockRequest({ body, session: {} });
     const res = mockResponse();
     await hubPagePostController.post(req, res);
 

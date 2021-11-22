@@ -4,13 +4,7 @@ import { Gender, YesOrNo } from '../app/case/definition';
 import { AppRequest } from '../app/controller/AppRequest';
 
 import { applicant1Sequence } from './applicant1Sequence';
-import {
-  APPLICANT_2,
-  ENTER_YOUR_ACCESS_CODE,
-  HAS_RELATIONSHIP_BROKEN_URL,
-  RELATIONSHIP_NOT_BROKEN_URL,
-  YOUR_DETAILS_URL,
-} from './urls';
+import { HAS_RELATIONSHIP_BROKEN_URL, RELATIONSHIP_NOT_BROKEN_URL, YOUR_DETAILS_URL } from './urls';
 
 import { getNextIncompleteStepUrl, getNextStepUrl } from './index';
 
@@ -80,15 +74,6 @@ describe('Steps', () => {
       mockReq.session.userCase.sameSex = Checkbox.Unchecked;
       const actual = getNextIncompleteStepUrl(mockReq);
       expect(actual).toBe(YOUR_DETAILS_URL);
-    });
-
-    it("uses applicant 2's sequence if they are logged in as applicant 2", () => {
-      mockReq.originalUrl = `${APPLICANT_2}${ENTER_YOUR_ACCESS_CODE}`;
-      mockReq.session.isApplicant2 = true;
-      mockReq.session.userCase.caseReference = '1234123412341234';
-      mockReq.session.userCase.accessCode = 'QWERTY78';
-      const actual = getNextIncompleteStepUrl(mockReq);
-      expect(actual).toBe(`${APPLICANT_2}${HAS_RELATIONSHIP_BROKEN_URL}`);
     });
   });
 });

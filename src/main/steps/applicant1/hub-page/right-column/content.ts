@@ -1,9 +1,9 @@
 import { State } from '../../../../app/case/definition';
 import { TranslationFn } from '../../../../app/controller/GetController';
 import { CommonContent } from '../../../common/common.content';
-import { APPLICANT_2, REVIEW_CONTACT_DETAILS } from '../../../urls';
+import { REVIEW_CONTACT_DETAILS } from '../../../urls';
 
-const en = ({ isDivorce, isApplicant2 }: CommonContent) => ({
+const en = ({ isDivorce }: CommonContent) => ({
   applicationDownloadLink: `<a class="govuk-link" href="/downloads/${
     isDivorce ? 'divorce-application' : 'application-to-end-civil-partnership'
   }"
@@ -14,9 +14,7 @@ const en = ({ isDivorce, isApplicant2 }: CommonContent) => ({
   download="Respondent-answers">View the response to the ${
     isDivorce ? 'divorce application' : 'application to end your civil partnership'
   } (PDF)</a>`,
-  reviewContactDetails: `<a class="govuk-link" href="${
-    (isApplicant2 ? APPLICANT_2 : '') + REVIEW_CONTACT_DETAILS
-  }">Review your contact details</a>`,
+  reviewContactDetails: `<a class="govuk-link" href="${REVIEW_CONTACT_DETAILS}">Review your contact details</a>`,
   iWantTo: 'I want to...',
   gettingHelp: 'Getting help',
   telephone: '<strong>Phone</strong></br> 0300 303 0642</br> (Monday to Friday, 8am to 8PM, Saturday 8AM to 2PM)',

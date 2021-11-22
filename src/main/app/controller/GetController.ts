@@ -25,13 +25,11 @@ export class GetController {
 
     const language = this.getPreferredLanguage(req) as Language;
     const isDivorce = res.locals.serviceType === DivorceOrDissolution.DIVORCE;
-    const isApplicant2 = req.session?.isApplicant2;
     const userCase = req.session?.userCase;
     const content = generatePageContent({
       language,
       pageContent: this.content,
       isDivorce,
-      isApplicant2,
       userCase,
       userEmail: req.session?.user.email,
     });

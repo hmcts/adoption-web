@@ -27,7 +27,7 @@ export class StateRedirectMiddleware {
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
         if (
-          this.hasPartnerNotResponded(req.session.userCase, req.session.isApplicant2) &&
+          this.hasPartnerNotResponded(req.session.userCase) &&
           ![NO_RESPONSE_YET, SWITCH_TO_SOLE_APPLICATION].includes(req.path as PageLink)
         ) {
           return res.redirect(NO_RESPONSE_YET);
@@ -57,11 +57,9 @@ export class StateRedirectMiddleware {
     );
   }
 
-  private hasPartnerNotResponded(userCase: CaseWithId, isApplicant2: boolean) {
+  private hasPartnerNotResponded(userCase: CaseWithId) {
     return (
-      ((isApplicant2 && [State.AwaitingApplicant1Response, State.Applicant2Approved].includes(userCase?.state)) ||
-        (!isApplicant2 && userCase?.state === State.AwaitingApplicant2Response)) &&
-      dayjs(userCase.dueDate, 'D MMMM YYYY').diff(dayjs()) < 0
+      userCase?.state === State.AwaitingApplicant2Response && dayjs(userCase.dueDate, 'D MMMM YYYY').diff(dayjs()) < 0
     );
   }
 }

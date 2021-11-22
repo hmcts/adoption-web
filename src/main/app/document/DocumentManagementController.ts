@@ -3,10 +3,10 @@ import config from 'config';
 import type { Response } from 'express';
 import { v4 as generateUuid } from 'uuid';
 
-import { APPLICANT_2, UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
+import { UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
 import { CaseWithId } from '../case/case';
-import { CITIZEN_APPLICANT2_UPDATE, CITIZEN_UPDATE, DivorceDocument, ListValue, State } from '../case/definition';
+import { CITIZEN_UPDATE, DivorceDocument, ListValue, State } from '../case/definition';
 import type { AppRequest, UserDetails } from '../controller/AppRequest';
 
 import { Classification, DocumentManagementClient } from './DocumentManagementClient';
@@ -18,19 +18,15 @@ export class DocumentManagerController {
   }
 
   public async post(req: AppRequest, res: Response): Promise<void> {
-    const isApplicant2 = req.session.isApplicant2;
-    if (!isApplicant2 && req.session.userCase.state !== State.Draft) {
+    if (req.session.userCase.state !== State.Draft) {
       throw new Error('Cannot upload new documents as case is not in draft state');
-    }
-    if (isApplicant2 && req.session.userCase.state !== State.AwaitingApplicant2Response) {
-      throw new Error('Cannot upload new documents as case is not in AwaitingApplicant2Response state');
     }
 
     if (!req.files?.length) {
       if (req.headers.accept?.includes('application/json')) {
         throw new Error('No files were uploaded');
       } else {
-        return res.redirect(isApplicant2 ? `${APPLICANT_2}${UPLOAD_YOUR_DOCUMENTS}` : UPLOAD_YOUR_DOCUMENTS);
+        return res.redirect(UPLOAD_YOUR_DOCUMENTS);
       }
     }
 
@@ -54,35 +50,31 @@ export class DocumentManagerController {
       },
     }));
 
-    const documentsKey = isApplicant2 ? 'applicant2DocumentsUploaded' : 'applicant1DocumentsUploaded';
+    const documentsKey = 'applicant1DocumentsUploaded';
     const updatedDocumentsUploaded = newUploads.concat(req.session.userCase[documentsKey] || []);
 
     req.session.userCase = await req.locals.api.triggerEvent(
       req.session.userCase.id,
       { [documentsKey]: updatedDocumentsUploaded },
-      isApplicant2 ? CITIZEN_APPLICANT2_UPDATE : CITIZEN_UPDATE
+      CITIZEN_UPDATE
     );
 
     req.session.save(() => {
       if (req.headers.accept?.includes('application/json')) {
         res.json(newUploads.map(file => ({ id: file.id, name: file.value?.documentFileName })));
       } else {
-        res.redirect(isApplicant2 ? `${APPLICANT_2}${UPLOAD_YOUR_DOCUMENTS}` : UPLOAD_YOUR_DOCUMENTS);
+        res.redirect(UPLOAD_YOUR_DOCUMENTS);
       }
     });
   }
 
   public async delete(req: AppRequest<Partial<CaseWithId>>, res: Response): Promise<void> {
-    const isApplicant2 = req.session.isApplicant2;
-    const documentsUploadedKey = isApplicant2 ? 'applicant2DocumentsUploaded' : 'applicant1DocumentsUploaded';
+    const documentsUploadedKey = 'applicant1DocumentsUploaded';
     const documentsUploaded =
       (req.session.userCase[documentsUploadedKey] as ListValue<Partial<DivorceDocument> | null>[]) ?? [];
 
-    if (!isApplicant2 && req.session.userCase.state !== State.Draft) {
+    if (req.session.userCase.state !== State.Draft) {
       throw new Error('Cannot delete uploaded documents as case is not in draft state');
-    }
-    if (isApplicant2 && req.session.userCase.state !== State.AwaitingApplicant2Response) {
-      throw new Error('Cannot delete uploaded documents as case is not in AwaitingApplicant2Response state');
     }
 
     const documentIndexToDelete = documentsUploaded.findIndex(i => i.id === req.params.id) ?? -1;
@@ -91,7 +83,7 @@ export class DocumentManagerController {
       if (req.headers.accept?.includes('application/json')) {
         res.json({ deletedId: null });
       } else {
-        res.redirect(isApplicant2 ? `${APPLICANT_2}${UPLOAD_YOUR_DOCUMENTS}` : UPLOAD_YOUR_DOCUMENTS);
+        res.redirect(UPLOAD_YOUR_DOCUMENTS);
       }
       return;
     }
@@ -102,7 +94,7 @@ export class DocumentManagerController {
     req.session.userCase = await req.locals.api.triggerEvent(
       req.session.userCase.id,
       { [documentsUploadedKey]: documentsUploaded },
-      isApplicant2 ? CITIZEN_APPLICANT2_UPDATE : CITIZEN_UPDATE
+      CITIZEN_UPDATE
     );
 
     const documentManagementClient = this.getDocumentManagementClient(req.session.user);
@@ -117,7 +109,7 @@ export class DocumentManagerController {
       if (req.headers.accept?.includes('application/json')) {
         res.json({ deletedId: req.params.id });
       } else {
-        res.redirect(isApplicant2 ? `${APPLICANT_2}${UPLOAD_YOUR_DOCUMENTS}` : UPLOAD_YOUR_DOCUMENTS);
+        res.redirect(UPLOAD_YOUR_DOCUMENTS);
       }
     });
   }

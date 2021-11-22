@@ -8,7 +8,6 @@ export const defaultViewArgs = {
   isDraft: expect.any(Boolean),
   isAwaitingApplicant2Response: expect.any(Boolean),
   isDivorce: expect.any(Boolean),
-  isApplicant2: expect.any(Boolean),
   partner: expect.any(String),
   userCase: expect.any(Object),
   language: expect.any(String),

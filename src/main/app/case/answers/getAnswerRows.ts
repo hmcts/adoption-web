@@ -17,14 +17,12 @@ export const getAnswerRows = function (
   const {
     language,
     isDivorce,
-    isApplicant2,
     userCase,
     userEmail,
     isJointApplication,
   }: {
     language: 'en' | 'cy';
     isDivorce: boolean;
-    isApplicant2: boolean;
     userCase: Partial<Case>;
     userEmail: string;
     isJointApplication: boolean;
@@ -33,7 +31,6 @@ export const getAnswerRows = function (
   const { stepsWithContent, processedUserCase } = setUpSteps(
     userCase,
     isCompleteCase,
-    isApplicant2,
     isJointApplication,
     overrideStepsContent
   );
@@ -53,7 +50,6 @@ export const getAnswerRows = function (
             language,
             pageContent: step.generateContent,
             isDivorce,
-            isApplicant2,
             userCase: processedUserCase,
             userEmail,
           }),
@@ -167,11 +163,10 @@ const getSelectedRadioLabel = (answer, field, stepContent) => {
 const setUpSteps = (
   userCase: Partial<Case>,
   isCompleteCase: boolean,
-  isApplicant2: boolean,
   isJointApplication: boolean,
   overrideStepsContent?: number
 ) => {
-  if ((!isCompleteCase && !isApplicant2 && overrideStepsContent !== 2) || overrideStepsContent === 1) {
+  if ((!isCompleteCase && overrideStepsContent !== 2) || overrideStepsContent === 1) {
     const stepsWithContent = stepsWithContentApplicant1;
     const processedUserCase = omitUnreachableAnswers(userCase, stepsWithContentApplicant1);
 

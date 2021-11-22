@@ -20,7 +20,7 @@ describe('ConfirmYourAnswersPostController', () => {
     } as unknown as FormContent;
     const confirmYourAnswerPostController = new ConfirmYourJointApplicationPostController(mockFormContent.fields);
 
-    const req = mockRequest({ body, session: { isApplicant2: false } });
+    const req = mockRequest({ body, session: {} });
     const res = mockResponse();
     await confirmYourAnswerPostController.post(req, res);
 

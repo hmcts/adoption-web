@@ -4,13 +4,7 @@ import { Response } from 'express';
 import { getNextStepUrl } from '../../steps';
 import { SAVE_AND_SIGN_OUT } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
-import {
-  ApplicationType,
-  CITIZEN_APPLICANT2_UPDATE,
-  CITIZEN_SAVE_AND_CLOSE,
-  CITIZEN_UPDATE,
-  UPDATE_AOS,
-} from '../case/definition';
+import { CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
 
 import { AppRequest } from './AppRequest';
@@ -48,7 +42,7 @@ export class PostController<T extends AnyObject> {
 
   private async saveBeforeSessionTimeout(req: AppRequest<T>, res: Response, formData: Partial<Case>): Promise<void> {
     try {
-      await this.save(req, formData, this.getEventName(req));
+      await this.save(req, formData, this.getEventName());
     } catch {
       // ignore
     }
@@ -61,7 +55,7 @@ export class PostController<T extends AnyObject> {
 
     if (req.session.errors.length === 0) {
       try {
-        req.session.userCase = await this.save(req, formData, this.getEventName(req));
+        req.session.userCase = await this.save(req, formData, this.getEventName());
       } catch (err) {
         req.locals.logger.error('Error saving', err);
         req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
@@ -82,14 +76,8 @@ export class PostController<T extends AnyObject> {
     return req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
   }
 
-  protected getEventName(req: AppRequest<T>): string {
-    if (req.session.userCase.applicationType === ApplicationType.SOLE_APPLICATION && req.session.isApplicant2) {
-      return UPDATE_AOS;
-    } else if (req.session.isApplicant2) {
-      return CITIZEN_APPLICANT2_UPDATE;
-    } else {
-      return CITIZEN_UPDATE;
-    }
+  protected getEventName(): string {
+    return CITIZEN_UPDATE;
   }
 }
 

@@ -45,14 +45,10 @@ export const generateContent: TranslationFn = content => {
     State.AwaitingPronouncement,
     State.FinalOrderComplete,
   ].indexOf(content.userCase?.state as State);
-  const hasApplicantConfirmedReceipt = content.isApplicant2
-    ? content.userCase?.applicant2ConfirmReceipt === YesOrNo.YES
-    : content.userCase?.applicant1ConfirmReceipt === YesOrNo.YES;
-  const isApplicant2 = content.isApplicant2;
+  const hasApplicantConfirmedReceipt = content.userCase?.applicant1ConfirmReceipt === YesOrNo.YES;
   return {
     ...languages[content.language](content),
     progressionIndex,
     hasApplicantConfirmedReceipt,
-    isApplicant2,
   };
 };

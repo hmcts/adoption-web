@@ -8,7 +8,6 @@ export const mockRequest = ({
   cookies = {},
   userCase = {},
   appLocals = {},
-  isApplicant2 = false,
 } = {}): AppRequest =>
   ({
     headers: { 'accept-language': 'en', ...headers },
@@ -39,7 +38,6 @@ export const mockRequest = ({
         divorceOrDissolution: DivorceOrDissolution.DIVORCE,
         ...userCase,
       },
-      isApplicant2,
       save: jest.fn(done => done()),
       destroy: jest.fn(done => done()),
       ...session,

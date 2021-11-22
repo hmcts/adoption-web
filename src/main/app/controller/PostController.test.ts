@@ -247,7 +247,6 @@ describe('PostController', () => {
     const controller = new PostController(mockFormContent.fields);
 
     const req = mockRequest({ body });
-    req.session.isApplicant2 = true;
     const res = mockResponse();
     await controller.post(req, res);
 
@@ -262,7 +261,6 @@ describe('PostController', () => {
     const controller = new PostController(mockFormContent.fields);
 
     const req = mockRequest({ body });
-    req.session.isApplicant2 = true;
     req.session.userCase.applicationType = ApplicationType.SOLE_APPLICATION;
     const res = mockResponse();
     await controller.post(req, res);
