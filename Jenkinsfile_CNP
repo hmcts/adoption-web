@@ -44,13 +44,18 @@ withPipeline(type, product, component) {
   }
 
   after('functionalTest:preview') {
-    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'test/functional/output/mochawesome.html'
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
 
     yarnBuilder.yarn('test:functional')
   }
 
   before('smoketest:preview') {
     env.ADOP_WEB_URL="https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/landing"
+  }
+
+  before('smoketest:aat') {
+    env.ADOP_WEB_URL = "https://adoption-web.aat.platform.hmcts.net/"
+    env.SMOKE_TESTS_SELECTOR = "@skip-smoke-test"
   }
 
 
