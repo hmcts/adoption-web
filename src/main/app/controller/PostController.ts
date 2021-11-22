@@ -42,7 +42,7 @@ export class PostController<T extends AnyObject> {
 
   private async saveBeforeSessionTimeout(req: AppRequest<T>, res: Response, formData: Partial<Case>): Promise<void> {
     try {
-      await this.save(req, formData, this.getEventName());
+      await this.save(req, formData, this.getEventName(req));
     } catch {
       // ignore
     }
@@ -55,7 +55,7 @@ export class PostController<T extends AnyObject> {
 
     if (req.session.errors.length === 0) {
       try {
-        req.session.userCase = await this.save(req, formData, this.getEventName());
+        req.session.userCase = await this.save(req, formData, this.getEventName(req));
       } catch (err) {
         req.locals.logger.error('Error saving', err);
         req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
@@ -76,7 +76,8 @@ export class PostController<T extends AnyObject> {
     return req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
   }
 
-  protected getEventName(): string {
+  protected getEventName(req: AppRequest): string {
+    console.log(req.sessionID);
     return CITIZEN_UPDATE;
   }
 }
