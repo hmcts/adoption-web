@@ -17,9 +17,7 @@ import { Applicant2AccessCodeGetController } from './steps/applicant2/enter-your
 import { CookiesGetController } from './steps/cookies/get';
 import { ErrorController } from './steps/error/error.controller';
 import { HomeGetController } from './steps/home/get';
-import { PrivacyPolicyGetController } from './steps/privacy-policy/get';
 import { SaveSignOutGetController } from './steps/save-sign-out/get';
-import { TermsAndConditionsGetController } from './steps/terms-and-conditions/get';
 import { TimedOutGetController } from './steps/timed-out/get';
 import {
   ACCESSIBILITY_STATEMENT_URL,
@@ -30,10 +28,8 @@ import {
   ENTER_YOUR_ACCESS_CODE,
   HOME_URL,
   POSTCODE_LOOKUP,
-  PRIVACY_POLICY_URL,
   SAVE_AND_SIGN_OUT,
   SIGN_OUT_URL,
-  TERMS_AND_CONDITIONS_URL,
   TIMED_OUT_URL,
 } from './steps/urls';
 
@@ -48,8 +44,6 @@ export class Routes {
     app.get([HOME_URL, APPLICANT_2], errorHandler(new HomeGetController().get));
     app.get(SAVE_AND_SIGN_OUT, errorHandler(new SaveSignOutGetController().get));
     app.get(TIMED_OUT_URL, errorHandler(new TimedOutGetController().get));
-    app.get(PRIVACY_POLICY_URL, errorHandler(new PrivacyPolicyGetController().get));
-    app.get(TERMS_AND_CONDITIONS_URL, errorHandler(new TermsAndConditionsGetController().get));
     app.get(COOKIES_URL, errorHandler(new CookiesGetController().get));
     app.get(ACCESSIBILITY_STATEMENT_URL, errorHandler(new AccessibilityStatementGetController().get));
     app.post(POSTCODE_LOOKUP, errorHandler(new PostcodeLookupPostController().post));
