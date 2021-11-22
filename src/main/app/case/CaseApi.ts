@@ -17,7 +17,7 @@ import {
   ListValue,
   Payment,
   State,
-  UserRole,
+  // UserRole,
 } from './definition';
 import { fromApiFormat } from './from-api-format';
 import { toApiFormat } from './to-api-format';
@@ -115,22 +115,24 @@ export class CaseApi {
     }
   }
 
-  public async isApplicant2(caseId: string, userId: string): Promise<boolean> {
-    return (await this.getCaseUserRoles(caseId, userId)).case_users[0].case_role.includes(UserRole.APPLICANT_2);
-  }
+  // public async isApplicant2(caseId: string, userId: string): Promise<boolean> {
+  //   return (await this.getCaseUserRoles(caseId, userId)).case_users[0].case_role.includes(UserRole.APPLICANT_2);
+  // }
 
   private async sendEvent(caseId: string, data: Partial<CaseData>, eventName: string): Promise<CaseWithId> {
     try {
-      const tokenResponse = await this.axios.get<CcdTokenResponse>(`/cases/${caseId}/event-triggers/${eventName}`);
-      const token = tokenResponse.data.token;
-      const event = { id: eventName };
-      const response: AxiosResponse<CcdV2Response> = await this.axios.post(`/cases/${caseId}/events`, {
-        event,
-        data,
-        event_token: token,
-      });
-
-      return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
+      //TODO uncomment this
+      // const tokenResponse = await this.axios.get<CcdTokenResponse>(`/cases/${caseId}/event-triggers/${eventName}`);
+      // const token = tokenResponse.data.token;
+      // const event = { id: eventName };
+      // const response: AxiosResponse<CcdV2Response> = await this.axios.post(`/cases/${caseId}/events`, {
+      //   event,
+      //   data,
+      //   event_token: token,
+      // });
+      console.log(eventName);
+      //TODO uncomment this
+      return data as CaseWithId; //{ id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
     } catch (err) {
       this.logError(err);
       throw new Error('Case could not be updated.');

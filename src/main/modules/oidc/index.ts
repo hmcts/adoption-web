@@ -3,21 +3,10 @@ import { Application, NextFunction, Response } from 'express';
 
 import { getRedirectUrl, getUserDetails } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
+import { DivorceOrDissolution, State, YesOrNo } from '../../app/case/definition';
 // import { ApplicationType, State } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
-import {
-  APPLICANT_2,
-  APPLICANT_2_CALLBACK_URL,
-  APPLICANT_2_SIGN_IN_URL,
-  CALLBACK_URL,
-  ENTER_YOUR_ACCESS_CODE,
-  // HOME_URL,
-  PageLink,
-  RESPONDENT,
-  SIGN_IN_URL,
-  SIGN_OUT_URL,
-  // SWITCH_TO_SOLE_APPLICATION,
-} from '../../steps/urls';
+import { CALLBACK_URL, ENTER_YOUR_ACCESS_CODE, SIGN_IN_URL, SIGN_OUT_URL } from '../../steps/urls';
 
 //TODO remove applicant2 related stuff
 /**
@@ -32,10 +21,9 @@ export class OidcMiddleware {
     app.get(SIGN_IN_URL, (req, res) =>
       res.redirect(getRedirectUrl(`${protocol}${res.locals.host}${port}`, CALLBACK_URL))
     );
-    app.get(APPLICANT_2_SIGN_IN_URL, (req, res) =>
-      res.redirect(getRedirectUrl(`${protocol}${res.locals.host}${port}`, APPLICANT_2_CALLBACK_URL))
-    );
+
     app.get(SIGN_OUT_URL, (req, res) => req.session.destroy(() => res.redirect('/')));
+
     app.get(
       CALLBACK_URL,
       errorHandler(async (req, res) => {
@@ -47,21 +35,6 @@ export class OidcMiddleware {
         }
       })
     );
-    app.get(
-      APPLICANT_2_CALLBACK_URL,
-      errorHandler(async (req, res) => {
-        if (typeof req.query.code === 'string') {
-          req.session.user = await getUserDetails(
-            `${protocol}${res.locals.host}${port}`,
-            req.query.code,
-            APPLICANT_2_CALLBACK_URL
-          );
-          req.session.save(() => res.redirect(`${APPLICANT_2}${ENTER_YOUR_ACCESS_CODE}`));
-        } else {
-          res.redirect(APPLICANT_2_SIGN_IN_URL);
-        }
-      })
-    );
 
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
@@ -69,26 +42,27 @@ export class OidcMiddleware {
           res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
 
-          // if (!req.path.endsWith(ENTER_YOUR_ACCESS_CODE)) {
-          //   req.session.userCase =
-          //     req.session.userCase || (await req.locals.api.getOrCreateCase(res.locals.serviceType, req.session.user));
-          //   req.session.isApplicant2 =
-          //     req.session.isApplicant2 ??
-          //     (await req.locals.api.isApplicant2(req.session.userCase.id, req.session.user.id));
-          // }
-
-          // if (
-          //   req.path.endsWith(SWITCH_TO_SOLE_APPLICATION) &&
-          //   req.session.userCase.state !== State.Applicant2Approved &&
-          //   req.session.userCase.applicationType !== ApplicationType.JOINT_APPLICATION &&
-          //   req.session.isApplicant2
-          // ) {
-          //   res.redirect(HOME_URL);
-          // }
+          if (!req.path.endsWith(ENTER_YOUR_ACCESS_CODE)) {
+            req.session.userCase = {
+              id: '123',
+              state: State.Draft,
+              divorceOrDissolution: DivorceOrDissolution.DIVORCE,
+              applicant1ConfirmReceipt: YesOrNo.NO,
+              applicant2ConfirmReceipt: YesOrNo.NO,
+              connections: [],
+              applicant1AddressPrivate: YesOrNo.NO,
+              applicant2AddressPrivate: YesOrNo.NO,
+              documentsGenerated: [],
+              payments: [],
+              applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },
+              applicant2Confirmation: YesOrNo.NO,
+              applicant2Explanation: YesOrNo.NO,
+            };
+            // req.session.userCase =
+            //   req.session.userCase || (await req.locals.api.getOrCreateCase(res.locals.serviceType, req.session.user));
+          }
 
           return next();
-        } else if ([APPLICANT_2, RESPONDENT].includes(req.url as PageLink)) {
-          res.redirect(APPLICANT_2_SIGN_IN_URL);
         } else {
           res.redirect(SIGN_IN_URL);
         }
