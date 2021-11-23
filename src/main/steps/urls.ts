@@ -78,8 +78,6 @@ export const SENT_TO_APPLICANT2_FOR_REVIEW: PageLink = '/application-sent-for-re
 export const PAY_YOUR_FEE: PageLink = '/pay-your-fee';
 export const PAY_AND_SUBMIT: PageLink = '/pay-and-submit';
 
-export const ENTER_YOUR_ACCESS_CODE: PageLink = '/enter-your-access-code';
-
 export const YOU_NEED_TO_REVIEW_YOUR_APPLICATION: PageLink = '/you-need-to-review-your-application';
 export const NOT_CONFIRMED_JOINT_APPLICATION: PageLink = '/you-have-not-confirmed-joint-application';
 export const YOUR_SPOUSE_NEEDS_TO_CONFIRM_YOUR_JOINT_APPLICATION: PageLink = '/needs-to-confirm-joint-application';

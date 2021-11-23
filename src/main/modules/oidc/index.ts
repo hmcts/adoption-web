@@ -6,7 +6,7 @@ import { getCaseApi } from '../../app/case/CaseApi';
 import { DivorceOrDissolution, State, YesOrNo } from '../../app/case/definition';
 // import { ApplicationType, State } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
-import { CALLBACK_URL, ENTER_YOUR_ACCESS_CODE, SIGN_IN_URL, SIGN_OUT_URL } from '../../steps/urls';
+import { CALLBACK_URL, SIGN_IN_URL, SIGN_OUT_URL } from '../../steps/urls';
 
 //TODO remove applicant2 related stuff
 /**
@@ -41,27 +41,24 @@ export class OidcMiddleware {
         if (req.session?.user) {
           res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
-
-          if (!req.path.endsWith(ENTER_YOUR_ACCESS_CODE)) {
-            req.session.userCase = {
-              id: '123',
-              state: State.Draft,
-              divorceOrDissolution: DivorceOrDissolution.DIVORCE,
-              applicant1ConfirmReceipt: YesOrNo.NO,
-              applicant2ConfirmReceipt: YesOrNo.NO,
-              connections: [],
-              applicant1AddressPrivate: YesOrNo.NO,
-              applicant2AddressPrivate: YesOrNo.NO,
-              documentsGenerated: [],
-              payments: [],
-              applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },
-              applicant2Confirmation: YesOrNo.NO,
-              applicant2Explanation: YesOrNo.NO,
-            };
-            // req.session.userCase =
-            //   req.session.userCase || (await req.locals.api.getOrCreateCase(res.locals.serviceType, req.session.user));
-          }
-
+          //TODO remove hardcoding instead get or create case
+          req.session.userCase = {
+            id: '123',
+            state: State.Draft,
+            divorceOrDissolution: DivorceOrDissolution.DIVORCE,
+            applicant1ConfirmReceipt: YesOrNo.NO,
+            applicant2ConfirmReceipt: YesOrNo.NO,
+            connections: [],
+            applicant1AddressPrivate: YesOrNo.NO,
+            applicant2AddressPrivate: YesOrNo.NO,
+            documentsGenerated: [],
+            payments: [],
+            applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },
+            applicant2Confirmation: YesOrNo.NO,
+            applicant2Explanation: YesOrNo.NO,
+          };
+          // req.session.userCase =
+          //   req.session.userCase || (await req.locals.api.getOrCreateCase(res.locals.serviceType, req.session.user));
           return next();
         } else {
           res.redirect(SIGN_IN_URL);

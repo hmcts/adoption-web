@@ -6,13 +6,11 @@ import { TranslationFn } from '../app/controller/GetController';
 import { Form, FormContent } from '../app/form/Form';
 
 import { Step, applicant1Sequence } from './applicant1Sequence';
-import { applicant2Sequence } from './applicant2Sequence';
-import { respondentSequence } from './respondentSequence';
 import { CHECK_ANSWERS_URL } from './urls';
 
 const stepForms: Record<string, Form> = {};
 
-[applicant1Sequence, applicant2Sequence, respondentSequence].forEach((sequence: Step[], i: number) => {
+[applicant1Sequence].forEach((sequence: Step[], i: number) => {
   const dir = __dirname + (i === 0 ? '/applicant1' : '');
   for (const step of sequence) {
     const stepContentFile = `${dir}${step.url}/content.ts`;
@@ -67,7 +65,7 @@ export const getNextIncompleteStepUrl = (req: AppRequest): string => {
 
 export const getNextStepUrl = (req: AppRequest, data: Partial<Case>): string => {
   const { path, queryString } = getPathAndQueryString(req);
-  const nextStep = [...applicant1Sequence, ...applicant2Sequence, ...respondentSequence].find(s => s.url === path);
+  const nextStep = [...applicant1Sequence].find(s => s.url === path);
   const url = nextStep ? nextStep.getNextStep(data) : CHECK_ANSWERS_URL;
 
   return `${url}${queryString}`;
@@ -112,10 +110,4 @@ const getStepsWithContent = (sequence: Step[], isApplicant1 = false): StepWithCo
 };
 
 export const stepsWithContentApplicant1 = getStepsWithContent(applicant1Sequence, true);
-export const stepsWithContentApplicant2 = getStepsWithContent(applicant2Sequence);
-export const stepsWithContentRespondent = getStepsWithContent(respondentSequence);
-export const stepsWithContent = [
-  ...stepsWithContentApplicant1,
-  ...stepsWithContentApplicant2,
-  ...stepsWithContentRespondent,
-];
+export const stepsWithContent = [...stepsWithContentApplicant1];

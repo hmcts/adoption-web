@@ -3,7 +3,6 @@ import fs from 'fs';
 import { Application, RequestHandler, Response } from 'express';
 import multer from 'multer';
 
-import { AccessCodePostController } from './app/access-code/AccessCodePostController';
 import { AppRequest } from './app/controller/AppRequest';
 import { GetController } from './app/controller/GetController';
 import { PostController } from './app/controller/PostController';
@@ -11,8 +10,6 @@ import { DocumentManagerController } from './app/document/DocumentManagementCont
 import { cookieMaxAge } from './modules/session';
 import { stepsWithContent } from './steps';
 import { PostcodeLookupPostController } from './steps/applicant1/postcode-lookup/post';
-import * as applicant2AccessCodeContent from './steps/applicant2/enter-your-access-code/content';
-import { Applicant2AccessCodeGetController } from './steps/applicant2/enter-your-access-code/get';
 import { ErrorController } from './steps/error/error.controller';
 import { HomeGetController } from './steps/home/get';
 import { SaveSignOutGetController } from './steps/save-sign-out/get';
@@ -21,7 +18,6 @@ import {
   APPLICANT_2,
   CSRF_TOKEN_ERROR_URL,
   DOCUMENT_MANAGER,
-  ENTER_YOUR_ACCESS_CODE,
   HOME_URL,
   POSTCODE_LOOKUP,
   SAVE_AND_SIGN_OUT,
@@ -60,12 +56,6 @@ export class Routes {
         app.post(step.url, errorHandler(new postController(step.form.fields).post));
       }
     }
-
-    app.get(`${APPLICANT_2}${ENTER_YOUR_ACCESS_CODE}`, errorHandler(new Applicant2AccessCodeGetController().get));
-    app.post(
-      `${APPLICANT_2}${ENTER_YOUR_ACCESS_CODE}`,
-      errorHandler(new AccessCodePostController(applicant2AccessCodeContent.form.fields).post)
-    );
 
     app.get(
       '/active',
