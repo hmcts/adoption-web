@@ -1,7 +1,7 @@
 import { StepWithContent } from '../../../steps';
 import { Sections } from '../../../steps/applicant1Sequence';
 import * as commonContent from '../../../steps/common/common.content';
-import { APPLICANT_2, APPLY_FINANCIAL_ORDER, YOUR_NAME } from '../../../steps/urls';
+import { APPLY_FINANCIAL_ORDER } from '../../../steps/urls';
 import { Checkbox } from '../case';
 import { YesOrNo } from '../definition';
 
@@ -559,32 +559,6 @@ describe('getAnswerRows()', () => {
         },
       ]);
 
-      mockStepsWithContentApplicant2.mockReturnValue([
-        {
-          stepDir: '/',
-          url: APPLICANT_2 + APPLY_FINANCIAL_ORDER,
-          showInCompleteSection: Sections.DividingAssets,
-          getNextStep: () => '/',
-          generateContent: mockGenerateContent,
-          form: {
-            fields: {
-              applyForFinancialOrder: {
-                type: 'radios',
-                label: l => l.title,
-                values: [
-                  {
-                    label: l => l.yes,
-                    value: YesOrNo.YES,
-                  },
-                ],
-              },
-            },
-            submit: { text: '' },
-          },
-          view: '/template',
-        },
-      ]);
-
       const actual = getAnswerRows.bind({
         ...mockNunjucksEnv,
         ctx: {
@@ -656,52 +630,6 @@ describe('getAnswerRows()', () => {
           },
           value: {
             html: 'Sarah Smith',
-          },
-        },
-      ]);
-    });
-
-    it('converts steps into the correct check answers rows for confirm joint application page with additional aboutApplicant2 questions', () => {
-      mockStepsWithContentApplicant1.mockReturnValue([
-        {
-          stepDir: '/',
-          url: APPLICANT_2 + YOUR_NAME,
-          showInCompleteSection: Sections.AboutApplicant2,
-          getNextStep: () => '/',
-          generateContent: mockGenerateContent,
-          form: {
-            fields: { applicant2FullNameOnCertificate: { type: 'text', label: l => l.title } },
-            submit: { text: '' },
-          },
-          view: '/template',
-        },
-      ]);
-
-      const actual = getAnswerRows.bind({
-        ...mockNunjucksEnv,
-        ctx: {
-          ...mockCtx,
-          isJointApplication: true,
-        },
-      })(Sections.AboutApplicant2, true, false);
-
-      expect(actual).toEqual([
-        {
-          key: {
-            classes: 'govuk-!-width-two-thirds',
-            html: 'Mock question title',
-          },
-          value: {
-            html: 'newlineToBr(escaped(Billy Bob))',
-          },
-        },
-        {
-          key: {
-            classes: 'govuk-!-width-two-thirds',
-            html: 'Full name on the marriage certificate',
-          },
-          value: {
-            html: 'Billy Bob',
           },
         },
       ]);

@@ -2,10 +2,9 @@ import axios from 'axios';
 import { LoggerInstance } from 'winston';
 
 import { UserDetails } from '../controller/AppRequest';
-import { PaymentModel } from '../payment/PaymentModel';
 
 import { CaseApi, getCaseApi } from './CaseApi';
-import { CITIZEN_ADD_PAYMENT, CITIZEN_UPDATE, DivorceOrDissolution, State } from './definition';
+import { CITIZEN_UPDATE, DivorceOrDissolution, State } from './definition';
 
 jest.mock('axios');
 
@@ -178,23 +177,6 @@ describe('CaseApi', () => {
     const expectedRequest = {
       data: caseData,
       event: { id: CITIZEN_UPDATE },
-      event_token: '123',
-    };
-
-    expect(mockedAxios.post).toBeCalledWith('/cases/1234/events', expectedRequest);
-  });
-
-  test('Should update the case with a new payment', async () => {
-    mockedAxios.get.mockResolvedValue({ data: { token: '123' } });
-    mockedAxios.post.mockResolvedValue({
-      data: { data: { id: '1234', divorceOrDissolution: DivorceOrDissolution.DIVORCE } },
-    });
-    const payments = new PaymentModel([]);
-    await api.addPayment('1234', payments.list);
-
-    const expectedRequest = {
-      data: { applicationPayments: payments.list },
-      event: { id: CITIZEN_ADD_PAYMENT },
       event_token: '123',
     };
 
