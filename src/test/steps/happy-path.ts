@@ -2,7 +2,6 @@ import { State } from '../../main/app/case/definition';
 import { APPLY_FINANCIAL_ORDER } from '../../main/steps/urls';
 
 import { checkOptionFor, iAmOnPage, iClearTheForm, iClick, iSetTheUsersCaseTo } from './common';
-import { iEnterTheUkAddress } from './postcode';
 
 const { I } = inject();
 
@@ -112,10 +111,6 @@ Given("I've completed all happy path questions correctly", async () => {
   iClick('I do not need my contact details kept private');
   iClick('Continue');
 
-  iAmOnPage('/enter-your-address');
-  await iEnterTheUkAddress('BUCKINGHAM PALACE, LONDON, SW1A 1AA');
-  iClick('Continue');
-
   I.waitInUrl('/their-email-address');
   iClearTheForm();
   iClick("Your husband's email address");
@@ -124,10 +119,6 @@ Given("I've completed all happy path questions correctly", async () => {
 
   I.waitInUrl('/do-you-have-address');
   iClick('Yes, I have their address');
-  iClick('Continue');
-
-  I.waitInUrl('/enter-their-address');
-  await iEnterTheUkAddress('MINISTRY OF JUSTICE, SEVENTH FLOOR, 102, PETTY FRANCE, LONDON, SW1H 9AJ');
   iClick('Continue');
 
   I.waitInUrl('/other-court-cases');
