@@ -4,14 +4,7 @@ import { FormContent } from '../../app/form/Form';
 import * as steps from '../../steps';
 import { SAVE_AND_SIGN_OUT } from '../../steps/urls';
 import { Checkbox } from '../case/case';
-import {
-  ApplicationType,
-  CITIZEN_APPLICANT2_UPDATE,
-  CITIZEN_SAVE_AND_CLOSE,
-  CITIZEN_UPDATE,
-  Gender,
-  UPDATE_AOS,
-} from '../case/definition';
+import { ApplicationType, CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE, Gender } from '../case/definition';
 import { isPhoneNoValid } from '../form/validation';
 
 import { PostController } from './PostController';
@@ -250,7 +243,7 @@ describe('PostController', () => {
     const res = mockResponse();
     await controller.post(req, res);
 
-    expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { gender: 'female' }, CITIZEN_APPLICANT2_UPDATE);
+    expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { gender: 'female' }, CITIZEN_UPDATE);
 
     expect(res.redirect).toHaveBeenCalledWith('/next-step-url');
   });
@@ -265,7 +258,7 @@ describe('PostController', () => {
     const res = mockResponse();
     await controller.post(req, res);
 
-    expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { gender: 'female' }, UPDATE_AOS);
+    expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { gender: 'female' }, CITIZEN_UPDATE);
 
     expect(res.redirect).toHaveBeenCalledWith('/next-step-url');
   });

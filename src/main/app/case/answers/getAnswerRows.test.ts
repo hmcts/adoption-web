@@ -1,7 +1,6 @@
 import { StepWithContent } from '../../../steps';
 import { Sections } from '../../../steps/applicant1Sequence';
 import * as commonContent from '../../../steps/common/common.content';
-import { APPLY_FINANCIAL_ORDER } from '../../../steps/urls';
 import { Checkbox } from '../case';
 import { YesOrNo } from '../definition';
 
@@ -220,7 +219,7 @@ describe('getAnswerRows()', () => {
           actions: {
             items: [
               {
-                href: 'pickThisOne-applicant2',
+                href: 'pickThisOne',
                 text: 'Change',
                 visuallyHiddenText: 'Mock question title',
               },
@@ -465,171 +464,6 @@ describe('getAnswerRows()', () => {
           },
           value: {
             html: 'newlineToBr(escaped(Custom answer text. Original answer: example response))<div>test</div>',
-          },
-        },
-      ]);
-    });
-
-    it('converts steps into the correct check answers rows with overridden values to show applicant 2', () => {
-      const actual = getAnswerRows.bind({
-        ...mockNunjucksEnv,
-        ctx: {
-          ...mockCtx,
-          isJointApplication: true,
-        },
-      })(Sections.AboutPartnership, false, true, 2);
-
-      expect(actual).toEqual([
-        {
-          actions: {
-            items: [
-              {
-                href: 'pickThisOne-applicant2',
-                text: 'Change',
-                visuallyHiddenText: 'Mock question title',
-              },
-            ],
-          },
-          key: {
-            classes: 'govuk-!-width-two-thirds',
-            html: 'Mock question title',
-          },
-          value: {
-            html: 'newlineToBr(escaped(example response))',
-          },
-        },
-      ]);
-    });
-
-    it('converts steps into the correct check answers rows for confirm joint application page', () => {
-      const actual = getAnswerRows.bind({
-        ...mockNunjucksEnv,
-        ctx: {
-          ...mockCtx,
-          isJointApplication: true,
-        },
-      })(Sections.AboutPartnership, true, false);
-
-      expect(actual).toEqual([
-        {
-          key: {
-            classes: 'govuk-!-width-two-thirds',
-            html: 'Mock question title',
-          },
-          value: {
-            html: 'newlineToBr(escaped(example response))',
-          },
-        },
-        {
-          key: {
-            classes: 'govuk-!-width-two-thirds',
-            html: 'Mock question title',
-          },
-          value: {
-            html: 'newlineToBr(escaped(example response))',
-          },
-        },
-      ]);
-    });
-
-    it('converts steps into the correct check answers rows for confirm joint application page with additional dividingAssets questions', () => {
-      mockStepsWithContentApplicant1.mockReturnValue([
-        {
-          stepDir: '/',
-          url: APPLY_FINANCIAL_ORDER,
-          showInCompleteSection: Sections.DividingAssets,
-          getNextStep: () => '/',
-          generateContent: mockGenerateContent,
-          form: {
-            fields: {
-              applyForFinancialOrder: {
-                type: 'radios',
-                label: l => l.title,
-                values: [
-                  {
-                    label: l => l.yes,
-                    value: YesOrNo.YES,
-                  },
-                ],
-              },
-            },
-            submit: { text: '' },
-          },
-          view: '/template',
-        },
-      ]);
-
-      const actual = getAnswerRows.bind({
-        ...mockNunjucksEnv,
-        ctx: {
-          ...mockCtx,
-          isJointApplication: true,
-        },
-      })(Sections.DividingAssets, true, false);
-
-      expect(actual).toEqual([
-        {
-          key: {
-            classes: 'govuk-!-width-two-thirds',
-            html: 'Mock question title',
-          },
-          value: {
-            html: 'newlineToBr(escaped(Yes))',
-          },
-        },
-        {
-          key: {
-            classes: 'govuk-!-width-two-thirds',
-            html: 'Mock question title',
-          },
-          value: {
-            html: 'newlineToBr(escaped(Yes))',
-          },
-        },
-      ]);
-    });
-
-    it('converts steps into the correct check answers rows for confirm joint application page with additional aboutApplicant1 questions', () => {
-      mockStepsWithContentApplicant1.mockReturnValue([
-        {
-          stepDir: '/',
-          url: '/enter-your-name',
-          showInCompleteSection: Sections.AboutApplicant1,
-          getNextStep: () => '/',
-          generateContent: mockGenerateContent,
-          form: {
-            fields: { applicant1FullNameOnCertificate: { type: 'text', label: l => l.title } },
-            submit: { text: '' },
-          },
-          view: '/template',
-        },
-      ]);
-
-      const actual = getAnswerRows.bind({
-        ...mockNunjucksEnv,
-        ctx: {
-          ...mockCtx,
-          isJointApplication: true,
-        },
-      })(Sections.AboutApplicant1, true, false);
-
-      expect(actual).toEqual([
-        {
-          key: {
-            classes: 'govuk-!-width-two-thirds',
-            html: 'Mock question title',
-          },
-          value: {
-            html: 'newlineToBr(escaped(Sarah Smith))',
-          },
-        },
-        {
-          key: {
-            classes: 'govuk-!-width-two-thirds',
-            html: 'Full name on the marriage certificate',
-          },
-          value: {
-            html: 'Sarah Smith',
           },
         },
       ]);
