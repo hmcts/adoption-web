@@ -71,13 +71,7 @@ export const config = {
   },
   Gherkin: {
     features: './features/**/*.feature',
-    steps: [
-      '../steps/common.ts',
-      '../steps/date.ts',
-      '../steps/check-your-answers.ts',
-      '../steps/happy-path.ts',
-      '../steps/you-need-to-review-your-application.ts',
-    ],
+    steps: ['../steps/common.ts', '../steps/date.ts', '../steps/check-your-answers.ts', '../steps/happy-path.ts'],
   },
   bootstrap: async (): Promise<void> => idamUserManager.createUser(TestUser, TestPass),
   teardown: async (): Promise<void> => idamUserManager.deleteAll(),
