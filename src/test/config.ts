@@ -30,11 +30,11 @@ export const autoLogin = {
     I.fillField('username', username);
     I.fillField('password', password);
     I.click('Sign in');
-    I.waitForText('Apply for a divorce', 30);
+    I.waitForText('Apply for adoption', 30);
   },
   check: (I: CodeceptJS.I): void => {
     I.amOnPage(`${YOUR_DETAILS_URL}?lng=en`);
-    I.waitForText('Apply for a divorce');
+    I.waitForText('Apply for adoption');
   },
   restore: (I: CodeceptJS.I, cookies: CodeceptJS.Cookie[]): void => {
     I.amOnPage('/info');

@@ -6,7 +6,7 @@ import { PageContent, TranslationFn } from '../../app/controller/GetController';
 
 const en = {
   phase: 'Beta',
-  applyForDivorce: 'apply for a divorce',
+  applyForDivorce: 'apply for adoption',
   applyForDissolution: 'apply to end a civil partnership',
   feedback:
     'This is a new service – your <a class="govuk-link" aria-label="Feedback link, This will open a new tab. You’ll need to return to this tab and continue with your application within 60 mins so you don’t lose your progress." href="https://www.smartsurvey.co.uk/s/Divorce_Feedback" target="_blank">feedback</a> will help us to improve it.',
