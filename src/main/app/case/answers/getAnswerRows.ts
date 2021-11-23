@@ -1,4 +1,4 @@
-import { stepsWithContentApplicant1, stepsWithContentApplicant2, stepsWithContentRespondent } from '../../../steps';
+import { stepsWithContentApplicant1 } from '../../../steps';
 import { Sections } from '../../../steps/applicant1Sequence';
 import { generatePageContent } from '../../../steps/common/common.content';
 import { APPLICANT_2, PageLink, YOUR_NAME } from '../../../steps/urls';
@@ -172,9 +172,7 @@ const setUpSteps = (
 
     return { stepsWithContent, processedUserCase };
   } else {
-    const stepsWithContent = isCompleteCase
-      ? [...stepsWithContentApplicant1, ...stepsWithContentApplicant2]
-      : getApplicant2Steps(isJointApplication);
+    const stepsWithContent = isCompleteCase ? [...stepsWithContentApplicant1] : getApplicant2Steps(isJointApplication);
 
     const applicant2ProcessedUserCase = omitUnreachableAnswers(userCase, getApplicant2Steps(isJointApplication));
     const applicant1ProcessedUserCase = omitUnreachableAnswers(userCase, stepsWithContentApplicant1);
@@ -187,7 +185,7 @@ const setUpSteps = (
 };
 
 const getApplicant2Steps = (isJointApplication: boolean) => {
-  return isJointApplication ? stepsWithContentApplicant2 : stepsWithContentRespondent;
+  return isJointApplication ? [] : [];
 };
 
 const getCompleteQuestionAnswers = (stepUrl: string, processedUserCase: Partial<Case>): [string, string] => {
