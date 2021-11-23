@@ -19,7 +19,10 @@ static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
 
 def secrets = [
   'adoption-kv-${env}': [
-    secret('citizen-oauth-client-secret', 'OAUTH_CLIENT_SECRET')
+    secret('idam-secret', 'IDAM_SECRET')
+  ],
+  's2s-${env}': [
+    secret('microservicekey-adoption-web', 'SERVICE_AUTH_SECRET')
   ]
 ]
 

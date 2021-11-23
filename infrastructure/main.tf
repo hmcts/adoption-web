@@ -26,8 +26,18 @@ data "azurerm_key_vault" "adoption_key_vault" {
   resource_group_name = "${var.raw_product}-${var.env}"
 }
 
-data "azurerm_key_vault_secret" "oauth_client_secret" {
-  name = "citizen-oauth-client-secret"
+data "azurerm_key_vault_secret" "idam-secret" {
+  name = "idam-secret"
+  key_vault_id = "${data.azurerm_key_vault.adoption_key_vault.id}"
+}
+
+data "azurerm_key_vault_secret" "idam-system-user-name" {
+  name = "idam-system-user-name"
+  key_vault_id = "${data.azurerm_key_vault.adoption_key_vault.id}"
+}
+
+data "azurerm_key_vault_secret" "idam-system-user-password" {
+  name = "idam-system-user-password"
   key_vault_id = "${data.azurerm_key_vault.adoption_key_vault.id}"
 }
 
