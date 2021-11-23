@@ -1,9 +1,13 @@
-{% from "internalLink.njk" import internalLink %}
+{% from "../macros/internalLink.njk" import internalLink %}
 
 <div class="header-proposition">
   <div class="content">
+      <nav id="proposition-menu">
+        <ul id="proposition-links" class="pull-right">
         {% if isLoggedIn === true and isFirstContactPath === false %}
-          <a href="/logout" class="govuk-header__link">Sign out</a>
-          {% endif %}
+          <li>{{ internalLink(t('Sign out'), AppPaths.logoutReceiver.uri) }}</li>
+        {% endif %}
+      </ul>
+          </nav>
   </div>
 </div>

@@ -4,8 +4,24 @@
   {% include "webpack/css.njk" %}
 {% endblock %}
 
-{% block proposition_header %}
-  {% include "includes/propositional_navigation.njk" %}
+{% block header %}
+  {{ govukHeader({
+    homepageUrl: "/landing",
+    containerClasses: "app-width-container",
+    serviceName: "Adoption account",
+    serviceUrl: "/landing",    
+    navigation: [
+      {
+        href: "/my-account",
+        text: "My account",
+        active: true
+      },
+      {
+        href: "/logout",
+        text: "Sign out"
+      }
+    ]
+  }) }}
 {% endblock %}
 
 {% block content %}

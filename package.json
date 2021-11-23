@@ -52,7 +52,7 @@
     "express-nunjucks": "^2.2.5",
     "express-session": "^1.17.2",
     "glob": "^7.1.6",
-    "govuk-frontend": "^3.9.1",
+    "govuk-frontend": "^3.14.0",
     "helmet": "^4.2.0",
     "http-status-codes": "^1.4.0",
     "i18next": "^21.5.0",

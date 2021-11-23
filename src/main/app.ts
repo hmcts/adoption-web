@@ -30,7 +30,7 @@ const logger = Logger.getLogger('app');
 
 new PropertiesVolume().enableFor(app);
 new AppInsights().enable();
-new Nunjucks(developmentMode).enableFor(app);
+new Nunjucks(developmentMode, i18next).enableFor(app);
 new Helmet(config.get('security')).enableFor(app);
 
 app.use(favicon(path.join(__dirname, '/public/assets/images/favicon.ico')));

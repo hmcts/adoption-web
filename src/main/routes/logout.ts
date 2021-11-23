@@ -1,5 +1,5 @@
 import * as express from 'express';
-import * as config from 'config';
+import config from 'config';
 import Cookies from 'cookies';
 
 import { IdamClient } from 'idam/idamClient';
