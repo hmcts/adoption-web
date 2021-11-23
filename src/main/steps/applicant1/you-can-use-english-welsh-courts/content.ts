@@ -7,14 +7,14 @@ const en = (
   {
     isDivorce,
     partner,
-    applyForDivorce,
+    applyForAdoption,
     applyForDissolution,
     habitualResidentHelpText1,
     habitualResidentHelpText2,
   }: CommonContent,
   connections: JurisdictionConnections[]
 ) => {
-  const apply = isDivorce ? applyForDivorce : applyForDissolution;
+  const apply = isDivorce ? applyForAdoption : applyForDissolution;
   const enHabitualResident = {
     helpText1:
       "If your life is mainly based in England or Wales then you’re what is legally known as 'habitually resident'.",
