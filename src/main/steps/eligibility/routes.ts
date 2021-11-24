@@ -1,13 +1,13 @@
 import { Application } from 'express';
 
-import { START_PLACEMENT } from '../../steps/urls';
+import { START_ELIGIBILITY_URL } from '../../steps/urls';
 
-import { StartPlacementGetController } from './start-placement/get';
+import { StartEligibilityGetController } from './start-eligibility/get';
 
 export class Routes {
   public enableFor(app: Application): void {
     const { errorHandler } = app.locals;
 
-    app.get(START_PLACEMENT, errorHandler(new StartPlacementGetController().get));
+    app.get(START_ELIGIBILITY_URL, errorHandler(new StartEligibilityGetController().get));
   }
 }
