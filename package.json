@@ -27,7 +27,7 @@
     "@hmcts/nodejs-logging": "^3.0.1",
     "@hmcts/properties-volume": "^0.0.9",
     "@hmcts/requestretry": "^1.1.2",
-    "@types/config": "^0.0.36",
+    "@types/config": "^0.0.40",
     "@types/cookie-parser": "^1.4.2",
     "@types/cookies": "^0.7.6",
     "@types/csurf": "^1.9.36",
