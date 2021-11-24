@@ -5,7 +5,6 @@ import { Application, NextFunction, Response } from 'express';
 import { CaseWithId } from '../../app/case/case';
 import { State } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
-import { PaymentModel } from '../../app/payment/PaymentModel';
 import {
   APPLICATION_SUBMITTED,
   NO_RESPONSE_YET,
@@ -45,11 +44,6 @@ export class StateRedirectMiddleware {
           [PAY_YOUR_FEE, PAY_AND_SUBMIT, PAYMENT_CALLBACK_URL].includes(req.path as PageLink)
         ) {
           return next();
-        }
-
-        const payments = new PaymentModel(req.session.userCase.payments);
-        if (payments.hasPayment) {
-          return res.redirect(PAYMENT_CALLBACK_URL);
         }
 
         return next();

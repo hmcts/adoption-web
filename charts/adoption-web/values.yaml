@@ -30,7 +30,11 @@ nodejs:
   keyVaults:
     adoption-kv:
       secrets:
-        - citizen-oauth-client-secret
+        - idam-secret
+        - idam-system-user-name
+        - idam-system-user-password
+        - redis-access-key
+        - s2s-secret
         #  - AppInsightsInstrumentationKey
 
 idam-pr:

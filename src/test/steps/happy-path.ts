@@ -1,8 +1,7 @@
 import { State } from '../../main/app/case/definition';
-import { APPLICANT_2, APPLY_FINANCIAL_ORDER, HAS_RELATIONSHIP_BROKEN_URL } from '../../main/steps/urls';
+import { APPLY_FINANCIAL_ORDER } from '../../main/steps/urls';
 
-import { checkOptionFor, iAmOnPage, iClearTheForm, iClick, iSetApp2UsersCaseTo, iSetTheUsersCaseTo } from './common';
-import { iEnterTheUkAddress } from './postcode';
+import { checkOptionFor, iAmOnPage, iClearTheForm, iClick, iSetTheUsersCaseTo } from './common';
 
 const { I } = inject();
 
@@ -21,17 +20,6 @@ Given('I set the case state to {string}', async (state: State) => {
   iSetTheUsersCaseTo({
     state,
   });
-});
-
-Given("I've already completed the form using the fixture {string} for applicant 2", async (fixture: string) => {
-  const fixtureJson = require(`../functional/fixtures/${fixture}`)[fixture];
-
-  await iSetApp2UsersCaseTo(fixtureJson);
-
-  const url = await I.grabCurrentUrl();
-  I.amOnPage(APPLICANT_2 + HAS_RELATIONSHIP_BROKEN_URL);
-  iClick('Continue');
-  I.amOnPage(url);
 });
 
 Given("I've completed all happy path questions correctly", async () => {
@@ -123,10 +111,6 @@ Given("I've completed all happy path questions correctly", async () => {
   iClick('I do not need my contact details kept private');
   iClick('Continue');
 
-  iAmOnPage('/enter-your-address');
-  await iEnterTheUkAddress('BUCKINGHAM PALACE, LONDON, SW1A 1AA');
-  iClick('Continue');
-
   I.waitInUrl('/their-email-address');
   iClearTheForm();
   iClick("Your husband's email address");
@@ -135,10 +119,6 @@ Given("I've completed all happy path questions correctly", async () => {
 
   I.waitInUrl('/do-you-have-address');
   iClick('Yes, I have their address');
-  iClick('Continue');
-
-  I.waitInUrl('/enter-their-address');
-  await iEnterTheUkAddress('MINISTRY OF JUSTICE, SEVENTH FLOOR, 102, PETTY FRANCE, LONDON, SW1H 9AJ');
   iClick('Continue');
 
   I.waitInUrl('/other-court-cases');

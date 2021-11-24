@@ -18,9 +18,8 @@ describe('Routes', () => {
 
     expect(appMock.locals.errorHandler).toHaveBeenCalled();
 
-    expect(appMock.get).toHaveBeenCalledWith(['/', '/applicant2'], undefined);
+    expect(appMock.get).toHaveBeenCalledWith('/', undefined);
     expect(appMock.get).toHaveBeenCalledWith('/your-details', undefined);
-    expect(appMock.get).toHaveBeenCalledWith('/document-manager/delete/:id', undefined);
 
     expect(appMock.use).toHaveBeenCalled();
   });

@@ -33,10 +33,11 @@ static Map<String, Object> secret(String secretName, String envVariable) {
 
 def secrets = [
   'adoption-kv-${env}'    :[
-    secret('e2e-test-user-password', 'TEST_PASSWORD'),
-    secret('frontend-secret', 'SERVICE_AUTH_SECRET'),
     secret('idam-secret', 'IDAM_SECRET'),
-    secret('pcq-token-key', 'PCQ_TOKEN')
+    secret('idam-system-user-password', 'TEST_PASSWORD'),
+  ],
+  's2s-${env}': [
+    secret('microservicekey-adoption-web', 'SERVICE_AUTH_SECRET')
   ]
 ]
 

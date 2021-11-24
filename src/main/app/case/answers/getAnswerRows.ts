@@ -1,7 +1,7 @@
 import { stepsWithContentApplicant1 } from '../../../steps';
 import { Sections } from '../../../steps/applicant1Sequence';
 import { generatePageContent } from '../../../steps/common/common.content';
-import { APPLICANT_2, PageLink, YOUR_NAME } from '../../../steps/urls';
+import { PageLink, YOUR_NAME } from '../../../steps/urls';
 import type { FormOptions } from '../../form/Form';
 import { Case, Checkbox } from '../case';
 
@@ -196,11 +196,6 @@ const getCompleteQuestionAnswers = (stepUrl: string, processedUserCase: Partial<
     case YOUR_NAME: {
       question = 'Full name on the marriage certificate';
       answer = processedUserCase.applicant1FullNameOnCertificate;
-      break;
-    }
-    case APPLICANT_2 + YOUR_NAME: {
-      question = 'Full name on the marriage certificate';
-      answer = processedUserCase.applicant2FullNameOnCertificate;
       break;
     }
   }

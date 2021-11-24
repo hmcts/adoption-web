@@ -1,5 +1,3 @@
-/* global describe, it */
-
 const { strictEqual, deepEqual } = require('assert');
 
 const ReportAggregator = require('./report-aggregator');
@@ -20,33 +18,37 @@ describe('ReportAggregator', () => {
         failures: 0,
         start: undefined,
         end: undefined,
-        duration: 0
+        duration: 0,
       },
       passes: [],
       pending: [],
-      failures: []
+      failures: [],
     });
   });
 
   it('returns same metrics when input array has only one element', () => {
-    const metrics = [{
-      stats: {
-        suites: 1,
-        tests: 0,
-        passes: 1,
-        pending: 0,
-        failures: 0,
-        start: '2019-12-31T23:59:59.000Z',
-        end: '2019-12-31T23:59:59.999Z',
-        duration: 100
+    const metrics = [
+      {
+        stats: {
+          suites: 1,
+          tests: 0,
+          passes: 1,
+          pending: 0,
+          failures: 0,
+          start: '2019-12-31T23:59:59.000Z',
+          end: '2019-12-31T23:59:59.999Z',
+          duration: 100,
+        },
+        passes: [
+          {
+            title: 'Negative equality test',
+            code: 'notEqual(true, false);',
+          },
+        ],
+        pending: [],
+        failures: [],
       },
-      passes: [{
-        title: 'Negative equality test',
-        code: 'notEqual(true, false);'
-      }],
-      pending: [],
-      failures: []
-    }];
+    ];
 
     deepEqual(ReportAggregator.aggregate(metrics), {
       stats: {
@@ -57,74 +59,86 @@ describe('ReportAggregator', () => {
         failures: 0,
         start: '2019-12-31T23:59:59.000Z',
         end: '2019-12-31T23:59:59.999Z',
-        duration: 100
+        duration: 100,
       },
-      passes: [{
-        title: 'Negative equality test',
-        code: 'notEqual(true, false);'
-      }],
+      passes: [
+        {
+          title: 'Negative equality test',
+          code: 'notEqual(true, false);',
+        },
+      ],
       pending: [],
-      failures: []
+      failures: [],
     });
   });
 
   it('returns aggregated metrics when input array has more than one element', () => {
-    const metrics = [{
-      stats: {
-        suites: 0,
-        tests: 0,
-        passes: 0,
-        pending: 0,
-        failures: 0,
-        start: '2019-12-31T23:59:59.001Z',
-        end: '2019-12-31T23:59:59.998Z',
-        duration: 0
+    const metrics = [
+      {
+        stats: {
+          suites: 0,
+          tests: 0,
+          passes: 0,
+          pending: 0,
+          failures: 0,
+          start: '2019-12-31T23:59:59.001Z',
+          end: '2019-12-31T23:59:59.998Z',
+          duration: 0,
+        },
+        passes: [],
+        pending: [],
+        failures: [],
       },
-      passes: [],
-      pending: [],
-      failures: []
-    }, {
-      stats: {
-        suites: 1,
-        tests: 0,
-        passes: 1,
-        pending: 0,
-        failures: 0,
-        start: '2019-12-31T23:59:59.000Z',
-        end: '2019-12-31T23:59:59.999Z',
-        duration: 100
+      {
+        stats: {
+          suites: 1,
+          tests: 0,
+          passes: 1,
+          pending: 0,
+          failures: 0,
+          start: '2019-12-31T23:59:59.000Z',
+          end: '2019-12-31T23:59:59.999Z',
+          duration: 100,
+        },
+        passes: [
+          {
+            title: 'Negative equality test',
+            code: 'notEqual(true, false);',
+          },
+        ],
+        pending: [],
+        failures: [],
       },
-      passes: [{
-        title: 'Negative equality test',
-        code: 'notEqual(true, false);'
-      }],
-      pending: [],
-      failures: []
-    }, {
-      stats: {
-        suites: 1,
-        tests: 0,
-        passes: 1,
-        pending: 0,
-        failures: 1,
-        start: '2019-12-31T23:59:59.001Z',
-        end: '2019-12-31T23:59:59.998Z',
-        duration: 199
+      {
+        stats: {
+          suites: 1,
+          tests: 0,
+          passes: 1,
+          pending: 0,
+          failures: 1,
+          start: '2019-12-31T23:59:59.001Z',
+          end: '2019-12-31T23:59:59.998Z',
+          duration: 199,
+        },
+        passes: [
+          {
+            title: 'Positive equality test',
+            code: 'equal(true, true);',
+          },
+        ],
+        pending: [],
+        failures: [
+          {
+            title: 'Non zero test',
+            code: 'equal(0, 0.0);',
+            error: {
+              message: 'Unexpected error',
+              stack: '...',
+            },
+          },
+        ],
       },
-      passes: [{
-        title: 'Positive equality test',
-        code: 'equal(true, true);'
-      }],
-      pending: [],
-      failures: [{
-        title: 'Non zero test',
-        code: 'equal(0, 0.0);',
-        error: {
-          message: 'Unexpected error',
-          stack: '...'
-        }
-      }]
-    }];
+    ];
 
     deepEqual(ReportAggregator.aggregate(metrics), {
       stats: {
@@ -135,24 +149,29 @@ describe('ReportAggregator', () => {
         failures: 1,
         start: '2019-12-31T23:59:59.000Z',
         end: '2019-12-31T23:59:59.999Z',
-        duration: 299
+        duration: 299,
       },
-      passes: [{
-        title: 'Negative equality test',
-        code: 'notEqual(true, false);'
-      }, {
-        title: 'Positive equality test',
-        code: 'equal(true, true);'
-      }],
+      passes: [
+        {
+          title: 'Negative equality test',
+          code: 'notEqual(true, false);',
+        },
+        {
+          title: 'Positive equality test',
+          code: 'equal(true, true);',
+        },
+      ],
       pending: [],
-      failures: [{
-        title: 'Non zero test',
-        code: 'equal(0, 0.0);',
-        error: {
-          message: 'Unexpected error',
-          stack: '...'
-        }
-      }]
+      failures: [
+        {
+          title: 'Non zero test',
+          code: 'equal(0, 0.0);',
+          error: {
+            message: 'Unexpected error',
+            stack: '...',
+          },
+        },
+      ],
     });
   });
 });

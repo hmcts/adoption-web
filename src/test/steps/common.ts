@@ -8,13 +8,7 @@ import { CaseApi, getCaseApi } from '../../main/app/case/CaseApi';
 import { Case } from '../../main/app/case/case';
 import { DivorceOrDissolution, State } from '../../main/app/case/definition';
 import { UserDetails } from '../../main/app/controller/AppRequest';
-import {
-  APPLICANT_2,
-  HAS_RELATIONSHIP_BROKEN_URL,
-  RELATIONSHIP_DATE_URL,
-  WHERE_YOUR_LIVES_ARE_BASED_URL,
-  YOUR_NAME,
-} from '../../main/steps/urls';
+import { RELATIONSHIP_DATE_URL, WHERE_YOUR_LIVES_ARE_BASED_URL } from '../../main/steps/urls';
 import { autoLogin, config as testConfig } from '../config';
 
 const { I, login } = inject();
@@ -266,9 +260,6 @@ export const iGetTheCaseApi = (testUser: UserDetails): CaseApi => {
 
 export const iSetTheUsersCaseTo = async (userCaseObj: Partial<BrowserCase>): Promise<void> =>
   executeUserCaseScript(userCaseObj, RELATIONSHIP_DATE_URL, WHERE_YOUR_LIVES_ARE_BASED_URL);
-
-export const iSetApp2UsersCaseTo = async (userCaseObj: Partial<BrowserCase>): Promise<void> =>
-  executeUserCaseScript(userCaseObj, APPLICANT_2 + HAS_RELATIONSHIP_BROKEN_URL, APPLICANT_2 + YOUR_NAME);
 
 const executeUserCaseScript = (userCaseObj, requestPageLink: string, redirectPageLink: string) =>
   I.executeScript(

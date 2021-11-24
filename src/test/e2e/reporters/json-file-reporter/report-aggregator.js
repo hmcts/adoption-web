@@ -49,11 +49,11 @@ class ReportAggregator {
         failures: metrics.map(value => value.stats.failures).reduce(sum, 0),
         start: metrics.map(value => value.stats.start).reduce(min, undefined),
         end: metrics.map(value => value.stats.end).reduce(max, undefined),
-        duration: metrics.map(value => value.stats.duration).reduce(sum, 0)
+        duration: metrics.map(value => value.stats.duration).reduce(sum, 0),
       },
       passes: metrics.map(value => value.passes).reduce(flatten, []),
       pending: metrics.map(value => value.pending).reduce(flatten, []),
-      failures: metrics.map(value => value.failures).reduce(flatten, [])
+      failures: metrics.map(value => value.failures).reduce(flatten, []),
     };
   }
 }

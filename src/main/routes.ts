@@ -1,33 +1,17 @@
 import fs from 'fs';
 
 import { Application, RequestHandler, Response } from 'express';
-import multer from 'multer';
 
 import { AppRequest } from './app/controller/AppRequest';
 import { GetController } from './app/controller/GetController';
 import { PostController } from './app/controller/PostController';
-import { DocumentManagerController } from './app/document/DocumentManagementController';
 import { cookieMaxAge } from './modules/session';
 import { stepsWithContent } from './steps';
-import { PostcodeLookupPostController } from './steps/applicant1/postcode-lookup/post';
-import { StartPlacementGetController } from './steps/eligibility/start-placement/get';
 import { ErrorController } from './steps/error/error.controller';
 import { HomeGetController } from './steps/home/get';
 import { SaveSignOutGetController } from './steps/save-sign-out/get';
 import { TimedOutGetController } from './steps/timed-out/get';
-import {
-  APPLICANT_2,
-  CSRF_TOKEN_ERROR_URL,
-  DOCUMENT_MANAGER,
-  HOME_URL,
-  POSTCODE_LOOKUP,
-  SAVE_AND_SIGN_OUT,
-  SIGN_OUT_URL,
-  START_PLACEMENT,
-  TIMED_OUT_URL,
-} from './steps/urls';
-
-const handleUploads = multer();
+import { CSRF_TOKEN_ERROR_URL, HOME_URL, SAVE_AND_SIGN_OUT, SIGN_OUT_URL, TIMED_OUT_URL } from './steps/urls';
 
 export class Routes {
   public enableFor(app: Application): void {
@@ -35,15 +19,9 @@ export class Routes {
     const errorController = new ErrorController();
 
     app.get(CSRF_TOKEN_ERROR_URL, errorHandler(errorController.CSRFTokenError));
-    app.get([HOME_URL, APPLICANT_2], errorHandler(new HomeGetController().get));
+    app.get(HOME_URL, errorHandler(new HomeGetController().get));
     app.get(SAVE_AND_SIGN_OUT, errorHandler(new SaveSignOutGetController().get));
     app.get(TIMED_OUT_URL, errorHandler(new TimedOutGetController().get));
-    app.post(POSTCODE_LOOKUP, errorHandler(new PostcodeLookupPostController().post));
-
-    app.get(START_PLACEMENT, errorHandler(new StartPlacementGetController().get));
-    const documentManagerController = new DocumentManagerController();
-    app.post(DOCUMENT_MANAGER, handleUploads.array('files[]', 5), errorHandler(documentManagerController.post));
-    app.get(`${DOCUMENT_MANAGER}/delete/:id`, errorHandler(documentManagerController.delete));
 
     for (const step of stepsWithContent) {
       const getController = fs.existsSync(`${step.stepDir}/get.ts`)

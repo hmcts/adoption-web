@@ -2,9 +2,9 @@ const config = require('../e2e/config');
 
 Feature('Smoke tests @smoke-tests');
 
-Scenario('Sign in as citizen and create a case', async ({I,landingPage}) => {
-  console.log(`${process.env.ADOP_WEB_URL}`);
-  await I.goToPage(`${process.env.ADOP_WEB_URL}`);
-  await I.signIn(config.legalProfessionalUserOne);
+Scenario('Sign in as citizen and create a case', async ({ I, landingPage }) => {
+  console.log(config.baseUrl);
+  await I.goToPage(config.baseUrl);
+  await I.signIn(config.citizenUserOne);
   await landingPage.seeTheLandingPage();
 });

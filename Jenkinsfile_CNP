@@ -19,7 +19,10 @@ static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
 
 def secrets = [
   'adoption-kv-${env}': [
-    secret('citizen-oauth-client-secret', 'OAUTH_CLIENT_SECRET')
+    secret('idam-secret', 'IDAM_SECRET')
+  ],
+  's2s-${env}': [
+    secret('microservicekey-adoption-web', 'SERVICE_AUTH_SECRET')
   ]
 ]
 
@@ -48,7 +51,7 @@ withPipeline(type, product, component) {
   }
 
   after('functionalTest:preview') {
-    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'test/functional/output/mochawesome.html'
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
 
     yarnBuilder.yarn('test:functional')
   }
@@ -56,4 +59,9 @@ withPipeline(type, product, component) {
   before('smoketest:preview') {
     env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/landing"
   }
+
+  before('smoketest:aat') {
+    env.ADOP_WEB_URL = "https://adoption-web-staging.service.core-compute-aat.internal/"
+  }
+
 }
