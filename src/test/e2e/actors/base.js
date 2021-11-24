@@ -2,7 +2,6 @@ const output = require('codeceptjs').output;
 const lodash = require('lodash');
 const config = require('../config');
 const loginPage = require('../pages/login.page');
-const caseListPage = require('../pages/caseList.page');
 const openApplicationEventPage = require('../pages/events/openApplicationEvent.page');
 const eventSummaryPage = require('../pages/eventSummary.page');
 
@@ -14,25 +13,29 @@ const signedOutSelector = '#global-header';
 const maxRetries = 5;
 let currentUser = {};
 
-'use strict';
+('use strict');
 
 module.exports = {
   async signIn(user) {
-    if (!(this.isPuppeteer() &&  (currentUser === user))) {
+    if (!(this.isPuppeteer() && currentUser === user)) {
       output.debug(`Logging in as ${user.email}`);
       currentUser = {}; // reset in case the login fails
 
-      await this.retryUntilExists(async () => {
-        //To mitigate situation when idam response with blank page
-        await this.goToPage(baseUrl);
+      await this.retryUntilExists(
+        async () => {
+          //To mitigate situation when idam response with blank page
+          await this.goToPage(baseUrl);
 
-        if (await this.waitForAnySelector([signedOutSelector, signedInSelector], 30) == null) {
-          return;
-        }
+          if ((await this.waitForAnySelector([signedOutSelector, signedInSelector], 30)) == null) {
+            return;
+          }
 
-        await this.retryUntilExists(() =>  loginPage.signIn(user), signedInSelector, false, 10);
-
-      }, signedInSelector, false, 10);
+          await this.retryUntilExists(() => loginPage.signIn(user), signedInSelector, false, 10);
+        },
+        signedInSelector,
+        false,
+        10
+      );
       await this.rejectCookies();
       output.debug(`Logged in as ${user.email}`);
       currentUser = user;
@@ -51,7 +54,9 @@ module.exports = {
 
     if (await this.hasSelector(hmctsLoginIn)) {
       if (!config.hmctsUser.email || !config.hmctsUser.password) {
-        throw new Error('For environment requiring hmcts authentication please provide HMCTS_USER_USERNAME and HMCTS_USER_PASSWORD environment variables');
+        throw new Error(
+          'For environment requiring hmcts authentication please provide HMCTS_USER_USERNAME and HMCTS_USER_PASSWORD environment variables'
+        );
       }
       await within(hmctsLoginIn, () => {
         this.fillField('//input[@type="email"]', config.hmctsUser.email);
@@ -118,7 +123,7 @@ module.exports = {
 
   async seeAvailableEvents(expectedEvents) {
     const actualEvents = await this.grabTextFrom('//ccd-event-trigger//select')
-      .then(options => Array.isArray(options) ? options : options.split('\n'))
+      .then(options => (Array.isArray(options) ? options : options.split('\n')))
       .then(options => {
         return lodash.without(options, 'Select action');
       });
@@ -174,7 +179,9 @@ module.exports = {
 
   seeEndStateForEvent(eventName, state) {
     this.click(`//table[@class="EventLogTable"]//tr[td[contains(., "${eventName}")]][1]`);
-    this.seeElement(`//table[@class="EventLogDetails"]//tr[.//span[text()="End state"] and .//span[text()="${state}"]]`);
+    this.seeElement(
+      `//table[@class="EventLogDetails"]//tr[.//span[text()="End state"] and .//span[text()="${state}"]]`
+    );
   },
 
   async navigateToCaseDetails(caseId) {
@@ -200,7 +207,7 @@ module.exports = {
       date = {
         day: date.getDate(),
         month: date.getMonth() + 1,
-        year: date.getFullYear()
+        year: date.getFullYear(),
       };
     }
 
@@ -221,7 +228,7 @@ module.exports = {
         year: date.getFullYear(),
         hour: date.getHours(),
         minute: date.getMinutes(),
-        second: date.getSeconds()
+        second: date.getSeconds(),
       };
     }
 
@@ -252,7 +259,7 @@ module.exports = {
   async addElementToCollection(index = 0) {
     const numberOfElements = await this.grabNumberOfVisibleElements('.collection-title');
 
-    for(let i = numberOfElements; i <= index; i++){
+    for (let i = numberOfElements; i <= index; i++) {
       this.click('Add new');
       this.waitNumberOfVisibleElements('.collection-title', i + 1);
       this.wait(0.5);
@@ -262,9 +269,11 @@ module.exports = {
   async addAnotherElementToCollection(collectionName) {
     const numberOfElements = await this.grabNumberOfVisibleElements('.collection-title');
     if (collectionName) {
-      this.click(locate('button')
-        .inside(locate('div').withChild(locate('h2').withText(collectionName)))
-        .withText('Add new'));
+      this.click(
+        locate('button')
+          .inside(locate('div').withChild(locate('h2').withText(collectionName)))
+          .withText('Add new')
+      );
     } else {
       this.click('Add new');
     }
@@ -274,21 +283,17 @@ module.exports = {
 
   async removeElementFromCollection(collectionName, index = 1) {
     if (collectionName) {
-      await this.click(locate('button')
-        .inside(locate('div').withChild(locate('h2').withText(collectionName)))
-        .withText('Remove')
-        .at(index));
+      await this.click(
+        locate('button')
+          .inside(locate('div').withChild(locate('h2').withText(collectionName)))
+          .withText('Remove')
+          .at(index)
+      );
     } else {
       await this.click('Remove');
     }
-    this.click(locate('button')
-      .inside('.mat-dialog-container')
-      .withText('Remove'));
+    this.click(locate('button').inside('.mat-dialog-container').withText('Remove'));
   },
-
-
-
-
 
   async goToNextPage(label = 'Continue', maxNumberOfTries = maxRetries) {
     const originalUrl = await this.grabCurrentUrl();
@@ -317,7 +322,7 @@ module.exports = {
   },
 
   async getActiveElementIndex() {
-    return await this.grabNumberOfVisibleElements('//button[text()="Remove"]') - 1;
+    return (await this.grabNumberOfVisibleElements('//button[text()="Remove"]')) - 1;
   },
   /**
    * Retries defined action util element described by the locator is present. If element is not present
@@ -337,12 +342,12 @@ module.exports = {
 
     for (let tryNumber = 1; tryNumber <= maxNumberOfTries; tryNumber++) {
       output.log(`retryUntilExists(${locator}): starting try #${tryNumber}`);
-      if (tryNumber > 1 && await this.hasSelector(locator)) {
+      if (tryNumber > 1 && (await this.hasSelector(locator))) {
         output.log(`retryUntilExists(${locator}): element found before try #${tryNumber} was executed`);
         break;
       }
       try {
-        if (checkUrlChanged && (originalUrl !== await this.grabCurrentUrl())) {
+        if (checkUrlChanged && originalUrl !== (await this.grabCurrentUrl())) {
           output.print('Url changed, action skipped');
         } else {
           await action();
@@ -350,7 +355,7 @@ module.exports = {
       } catch (error) {
         output.error(error);
       }
-      if (await this.waitForSelector(locator) != null) {
+      if ((await this.waitForSelector(locator)) != null) {
         output.log(`retryUntilExists(${locator}): element found after try #${tryNumber} was executed`);
         break;
       } else {
@@ -360,5 +365,5 @@ module.exports = {
         throw new Error(`Maximum number of tries (${maxNumberOfTries}) has been reached in search for ${locator}`);
       }
     }
-  }
+  },
 };
