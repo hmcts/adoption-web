@@ -32,7 +32,7 @@ data "azurerm_key_vault" "s2s_vault" {
 }
 
 data "azurerm_key_vault_secret" "microservicekey_adoption_web" {
-  name         = "microservicekey-adoption-web" # update key name e.g. microservicekey-your-name
+  name         = "microservicekey-adoption-web"
   key_vault_id = data.azurerm_key_vault.s2s_vault.id
 }
 
@@ -62,7 +62,6 @@ resource "azurerm_key_vault_secret" "redis_access_key" {
   value        = module.adoption-web-session-storage.access_key
   key_vault_id = data.azurerm_key_vault.adoption_key_vault.id
 }
-
 
 # data "azurerm_key_vault_secret" "app_insights_instrumental_key" {
 #   name = "AppInsightsInstrumentationKey"
