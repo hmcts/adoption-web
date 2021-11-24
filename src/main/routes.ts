@@ -10,6 +10,7 @@ import { DocumentManagerController } from './app/document/DocumentManagementCont
 import { cookieMaxAge } from './modules/session';
 import { stepsWithContent } from './steps';
 import { PostcodeLookupPostController } from './steps/applicant1/postcode-lookup/post';
+import { StartPlacementGetController } from './steps/eligibility/start-placement/get';
 import { ErrorController } from './steps/error/error.controller';
 import { HomeGetController } from './steps/home/get';
 import { SaveSignOutGetController } from './steps/save-sign-out/get';
@@ -22,6 +23,7 @@ import {
   POSTCODE_LOOKUP,
   SAVE_AND_SIGN_OUT,
   SIGN_OUT_URL,
+  START_PLACEMENT,
   TIMED_OUT_URL,
 } from './steps/urls';
 
@@ -38,6 +40,7 @@ export class Routes {
     app.get(TIMED_OUT_URL, errorHandler(new TimedOutGetController().get));
     app.post(POSTCODE_LOOKUP, errorHandler(new PostcodeLookupPostController().post));
 
+    app.get(START_PLACEMENT, errorHandler(new StartPlacementGetController().get));
     const documentManagerController = new DocumentManagerController();
     app.post(DOCUMENT_MANAGER, handleUploads.array('files[]', 5), errorHandler(documentManagerController.post));
     app.get(`${DOCUMENT_MANAGER}/delete/:id`, errorHandler(documentManagerController.delete));

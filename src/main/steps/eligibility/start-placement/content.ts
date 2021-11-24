@@ -20,6 +20,17 @@ const en = () => ({
   heading2: 'Other things your might need to apply',
   line8: "You'll need to upload each applicant's:",
   bulletPoint6: 'passport photo page',
+  bulletPoint7: 'driving licence',
+  line9: "If relevant, you'll also need to upload:",
+  bulletPoint8: 'your marriage or civil partnership certificate, in English or Welsh',
+  bulletPoint9: "your spouse or civil partner's death certificate",
+  bulletPoint10: 'a decree absolute of divorce or decree of nullity of your marriage',
+  bulletPoint11: 'a dissolution order or nullity order of your civil partnership',
+  bulletPoint12: 'a decree of judicial separation',
+  bulletPoint13:
+    "if you're using a different name from the one on your marriage or civil partnership certificate, evidence to explain the difference – for example, your deed poll",
+  bulletPoint14: 'a copy of your UK visa',
+  bulletPoint15: 'any passport pages that have UK immigration entry stamps',
 });
 
 const cy: typeof en = () => ({
@@ -42,6 +53,16 @@ const cy: typeof en = () => ({
   heading2: 'Other things your might need to apply',
   line8: "You'll need to upload each applicant's:",
   bulletPoint6: 'passport photo page',
+  bulletPoint7: 'driving licence',
+  line9: "If relevant, you'll also need to upload:",
+  bulletPoint8: 'birth parents, such as name, address and occupation',
+  bulletPoint9: 'birth parents, such as name, address and occupation',
+  bulletPoint10: 'birth parents, such as name, address and occupation',
+  bulletPoint11: 'birth parents, such as name, address and occupation',
+  bulletPoint12: 'birth parents, such as name, address and occupation',
+  bulletPoint13: 'birth parents, such as name, address and occupation',
+  bulletPoint14: 'birth parents, such as name, address and occupation',
+  bulletPoint15: 'birth parents, such as name, address and occupation',
 });
 
 const languages = {

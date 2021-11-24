@@ -25,6 +25,7 @@ import { LoadTimeouts } from './modules/timeouts';
 import { TooBusy } from './modules/too-busy';
 import { Webpack } from './modules/webpack';
 import { Routes } from './routes';
+import { Routes as EligibilityRoutes } from './steps/eligibility/routes';
 
 const { Logger } = require('@hmcts/nodejs-logging');
 const logger: LoggerInstance = Logger.getLogger('server');
@@ -55,6 +56,7 @@ new CSRFToken().enableFor(app);
 new DocumentDownloadMiddleware().enableFor(app);
 new LanguageToggle().enableFor(app);
 new AuthProvider().enable();
+new EligibilityRoutes().enableFor(app);
 new OidcMiddleware().enableFor(app);
 new StateRedirectMiddleware().enableFor(app);
 new Routes().enableFor(app);

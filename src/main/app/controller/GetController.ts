@@ -31,7 +31,7 @@ export class GetController {
       pageContent: this.content,
       isDivorce,
       userCase,
-      userEmail: req.session?.user.email,
+      userEmail: req.session?.user?.email,
     });
 
     const sessionErrors = req.session?.errors || [];
