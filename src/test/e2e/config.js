@@ -3,7 +3,7 @@ const defaultPassword = 'Password12';
 module.exports = {
   citizenUserOne: {
     email: 'citizen.automation@mailinator.com',
-    password: defaultPassword
+    password: defaultPassword,
   },
 
   baseUrl: process.env.ADOP_WEB_URL || 'https://adoption-web-staging.service.core-compute-aat.internal/',
@@ -12,6 +12,6 @@ module.exports = {
     jurisdiction: 'PUBLICLAW',
     jurisdictionFullDesc: 'Public Law',
     caseType: 'CARE_SUPERVISION_EPO',
-    caseTypeFullDesc: 'Care, supervision and EPOs'
-  }
+    caseTypeFullDesc: 'Care, supervision and EPOs',
+  },
 };

@@ -1,10 +1,9 @@
 const { I } = inject();
 
 module.exports = {
-
   fields: {
     username: '#username',
-    password: '#password'
+    password: '#password',
   },
   submitButton: 'input[value="Sign in"]',
 
@@ -14,6 +13,5 @@ module.exports = {
     I.fillField(this.fields.password, user.password);
     await I.waitForSelector(this.submitButton);
     I.click(this.submitButton);
-  }
-
+  },
 };

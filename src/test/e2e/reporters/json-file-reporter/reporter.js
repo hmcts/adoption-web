@@ -11,15 +11,15 @@ exports = module.exports = function JSONReporter(runner, options) {
   const failures = [];
   const passes = [];
 
-  runner.on('pass', (test) => {
+  runner.on('pass', test => {
     passes.push(test);
   });
 
-  runner.on('pending', (test) => {
+  runner.on('pending', test => {
     pending.push(test);
   });
 
-  runner.on('fail', (test) => {
+  runner.on('fail', test => {
     failures.push(test);
   });
 
@@ -28,7 +28,7 @@ exports = module.exports = function JSONReporter(runner, options) {
       stats: this.stats,
       passes: passes.map(convert),
       pending: pending.map(convert),
-      failures: failures.map(convert)
+      failures: failures.map(convert),
     };
 
     runner.testResults = outcome;
@@ -48,7 +48,7 @@ function convert(test) {
   return {
     title: test.fullTitle(),
     code: test.body,
-    error: cleanCircularReferences(error)
+    error: cleanCircularReferences(error),
   };
 }
 
@@ -57,7 +57,7 @@ function convert(test) {
  */
 function convertToJSON(error) {
   const outcome = {};
-  Object.getOwnPropertyNames(error).forEach((key) => {
+  Object.getOwnPropertyNames(error).forEach(key => {
     outcome[key] = error[key];
   });
   return outcome;

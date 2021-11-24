@@ -4,46 +4,22 @@
     "module": "commonjs",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "target": "es6",
+    "target": "ES2020",
+    "strict": true,
     "noImplicitAny": false,
+    "noImplicitThis": false,
     "moduleResolution": "node",
     "noUnusedLocals": true,
     "experimentalDecorators": true,
+    "useUnknownInCatchVariables": false,
     "skipLibCheck": true,
-    "lib": [
-      "es6",
-      "es2017.object",
-      "dom"
-    ],
+    "lib": ["es2020", "dom", "dom.iterable"],
     "baseUrl": "src/main",
     "paths": {
-      "client/*": [
-        "app/client/*"
-      ],
-      "idam/*": [
-        "app/idam/*"
-      ],
-      "logging/*": [
-        "app/logging/*"
-      ],
-      "paths": [
-        "app/paths"
-      ],
-      "router/*": [
-        "router/*"
-      ],
-      "routes/*": [
-        "routes/*"
-      ],
-      "common/*": [
-        "common/*"
-      ],
-      "utils/*": [
-        "app/utils/*"
-      ],
+      "router/*": ["router/*"],
+      "routes/*": ["routes/*"]
     },
-    "typeRoots": [
-      "./node_modules/@types"
-    ]
-  }
+    "typeRoots": ["./node_modules/@types"]
+  },
+  "exclude": ["**/*.test.ts"]
 }

@@ -6,7 +6,7 @@ RUN yarn install --production \
 
 # ---- Build image ----
 FROM base as build
-RUN yarn install && yarn build:prod
+RUN PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=true yarn install && yarn build:prod
 
 # ---- Runtime image ----
 FROM base as runtime

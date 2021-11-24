@@ -8,7 +8,7 @@ const miniCss = new MiniCssExtractPlugin({
   // Options similar to the same options in webpackOptions.output
   // both options are optional
   filename,
-  chunkFilename: '[id].css'
+  chunkFilename: '[id].css',
 });
 
 module.exports = {
@@ -17,11 +17,21 @@ module.exports = {
       test: /\.scss$/,
       use: [
         'style-loader',
-        MiniCssExtractPlugin.loader,
-        'css-loader',
-        'sass-loader'
-      ]
-    }
+        {
+          loader: MiniCssExtractPlugin.loader,
+          options: {
+            esModule: false,
+          },
+        },
+        {
+          loader: 'css-loader',
+          options: {
+            url: false,
+          },
+        },
+        'sass-loader',
+      ],
+    },
   ],
-  plugins: [miniCss]
+  plugins: [miniCss],
 };
