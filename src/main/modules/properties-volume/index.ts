@@ -15,10 +15,10 @@ export class PropertiesVolume {
       this.setSecret('secrets.adoption-kv.idam-system-user-password', 'services.idam.systemPassword');
       this.setSecret('secrets.adoption-kv.redis-access-key', 'session.redis.key');
       this.setSecret('secrets.adoption-kv.redis-access-key', 'session.secret');
-      this.setSecret('secrets.s2s.microservicekey-adoption-web', 'services.authProvider.secret');
+      this.setSecret('secrets.adoption-kv.s2s-secret', 'services.authProvider.secret');
     } else {
       this.setLocalSecret('idam-secret', 'services.idam.clientSecret');
-      this.setLocalSecret('microservicekey-adoption-web', 'services.authProvider.secret', 's2s-aat');
+      this.setLocalSecret('s2s-secret', 'services.authProvider.secret');
       // this.setLocalSecret('idam-systemupdate-username', 'services.idam.systemUsername');
       // this.setLocalSecret('idam-systemupdate-password', 'services.idam.systemPassword');
       // this.setLocalSecret('e2e-test-user-password', 'e2e.userTestPassword');
@@ -34,8 +34,10 @@ export class PropertiesVolume {
   /**
    * Load a secret from the AAT vault using azure cli
    */
-  private setLocalSecret(secret: string, toPath: string, vaultName = 'adoption-kv-aat'): void {
-    const result = execSync(`az keyvault secret show --vault-name ${vaultName} -o tsv --query value --name ${secret}`);
+  private setLocalSecret(secret: string, toPath: string): void {
+    const result = execSync(
+      `az keyvault secret show --vault-name adoption-kv-aat -o tsv --query value --name ${secret}`
+    );
 
     set(config, toPath, result.toString().replace('\n', ''));
   }
