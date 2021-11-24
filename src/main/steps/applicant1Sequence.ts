@@ -5,11 +5,11 @@ import { isLessThanAYear } from '../app/form/validation';
 import {
   CERTIFICATE_URL,
   HAS_RELATIONSHIP_BROKEN_URL,
+  NUMBER_OF_CHILDREN_URL,
   PageLink,
   RELATIONSHIP_DATE_URL,
   RELATIONSHIP_NOT_BROKEN_URL,
   RELATIONSHIP_NOT_LONG_ENOUGH_URL,
-  YOUR_DETAILS_URL,
 } from './urls';
 
 export enum Sections {
@@ -37,7 +37,7 @@ export interface Step {
 
 export const applicant1Sequence: Step[] = [
   {
-    url: YOUR_DETAILS_URL,
+    url: NUMBER_OF_CHILDREN_URL,
     showInSection: Sections.AboutPartnership,
     getNextStep: () => HAS_RELATIONSHIP_BROKEN_URL,
   },

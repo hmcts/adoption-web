@@ -9,7 +9,7 @@ const en = {
   applyForAdoption: 'apply for adoption',
   applyForDissolution: 'apply to end a civil partnership',
   feedback:
-    'This is a new service – your <a class="govuk-link" aria-label="Feedback link, This will open a new tab. You’ll need to return to this tab and continue with your application within 60 mins so you don’t lose your progress." href="https://www.smartsurvey.co.uk/s/Divorce_Feedback" target="_blank">feedback</a> will help us to improve it.',
+    'This is a new service – your <a class="govuk-link" aria-label="Feedback link, This will open a new tab. You’ll need to return to this tab and continue with your application within 60 mins so you don’t lose your progress." href="#" target="_blank">feedback</a> will help us to improve it.',
   languageToggle: '<a href="?lng=cy" class="govuk-link language">Cymraeg</a>',
   govUk: 'GOV.UK',
   back: 'Back',
@@ -106,14 +106,14 @@ const en = {
 const cy: typeof en = {
   ...en, // @TODO delete me to get a list of missing translations
   phase: 'Beta',
-  applyForAdoption: 'gwneud cais am ysgariad',
+  applyForAdoption: 'Apply for adoption (in welsh)',
   applyForDissolution: 'gwneud cais i ddod â phartneriaeth sifil i ben',
   feedback:
-    'Mae hwn yn wasanaeth newydd - <a class="govuk-link" aria-label="Dolen adborth, Bydd hyn yn agor tab newydd. Bydd angen ichi ddod yn ôl at y tab hwn a pharhau â’ch cais o fewn 60 munud fel na fyddwch yn colli’r gwaith yr ydych wedi ei wneud yn barod." href="https://www.smartsurvey.co.uk/s/Divorce_Feedback" target="_blank">bydd eich sylwadau</a> yn ein helpu i wella’r gwasanaeth.',
+    'This is a new service – your <a class="govuk-link" aria-label="Feedback link, This will open a new tab. You’ll need to return to this tab and continue with your application within 60 mins so you don’t lose your progress." href="#" target="_blank">feedback</a> will help us to improve it.(in welsh)',
   languageToggle: '<a href="?lng=en" class="govuk-link language">English</a>',
   govUk: 'GOV.UK',
-  back: 'Yn ôl',
-  continue: 'Parhau',
+  back: 'Back (in welsh)',
+  continue: 'Continue (in welsh)',
   change: 'Newid',
   upload: 'Uwchlwytho',
   download: 'Llwytho i lawr',
@@ -126,8 +126,8 @@ const cy: typeof en = {
   ogl: 'Mae’r holl gynnwys ar gael o dan <a class="govuk-link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license" >Drwydded Agored y Llywodraeth f3.0</a>, oni nodir fel arall',
   errorSummaryHeading: 'Roedd yna broblem',
   saveAndSignOut: 'Cadw ac allgofnodi',
-  signOut: 'Allgofnodi',
-  signIn: 'Mewngofnodi',
+  signOut: 'Sign out (in welsh)',
+  signIn: 'Sign in (in welsh)',
   accessibility: 'Datganiad Hygyrchedd',
   cookies: 'Cwcis',
   privacyPolicy: 'Polisi Preifatrwydd',
