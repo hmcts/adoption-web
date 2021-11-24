@@ -39,7 +39,7 @@ export const applicant1Sequence: Step[] = [
   {
     url: NUMBER_OF_CHILDREN_URL,
     showInSection: Sections.AboutPartnership,
-    getNextStep: () => HAS_RELATIONSHIP_BROKEN_URL,
+    getNextStep: () => NUMBER_OF_CHILDREN_URL,
   },
   {
     url: HAS_RELATIONSHIP_BROKEN_URL,
