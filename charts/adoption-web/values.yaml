@@ -34,10 +34,8 @@ nodejs:
         - idam-system-user-name
         - idam-system-user-password
         - redis-access-key
+        - s2s-secret
         #  - AppInsightsInstrumentationKey
-    s2s:
-      secrets:
-        - microservicekey-adoption-web
 
 idam-pr:
   enabled: false
