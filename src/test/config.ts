@@ -7,7 +7,7 @@ if (!process.env.TEST_PASSWORD) {
 
 import sysConfig from 'config';
 import { getTokenFromApi } from '../main/app/auth/service/get-service-auth-token';
-import { YOUR_DETAILS_URL } from '../main/steps/urls';
+import { NUMBER_OF_CHILDREN_URL } from '../main/steps/urls';
 
 import { IdamUserManager } from './steps/IdamUserManager';
 
@@ -25,16 +25,16 @@ const idamUserManager = new IdamUserManager(sysConfig.get('services.idam.tokenUR
 
 export const autoLogin = {
   login: (I: CodeceptJS.I, username = TestUser, password = TestPass): void => {
-    I.amOnPage(`${YOUR_DETAILS_URL}?lng=en`);
+    I.amOnPage(`${NUMBER_OF_CHILDREN_URL}?lng=en`);
     I.waitForText('Sign in or create an account');
     I.fillField('username', username);
     I.fillField('password', password);
     I.click('Sign in');
-    I.waitForText('Apply for a divorce', 30);
+    I.waitForText('Apply for adoption', 30);
   },
   check: (I: CodeceptJS.I): void => {
-    I.amOnPage(`${YOUR_DETAILS_URL}?lng=en`);
-    I.waitForText('Apply for a divorce');
+    I.amOnPage(`${NUMBER_OF_CHILDREN_URL}?lng=en`);
+    I.waitForText('Apply for adoption');
   },
   restore: (I: CodeceptJS.I, cookies: CodeceptJS.Cookie[]): void => {
     I.amOnPage('/info');

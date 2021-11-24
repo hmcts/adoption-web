@@ -7,8 +7,8 @@ import {
   CHECK_ANSWERS_URL,
   CONFIRM_JOINT_APPLICATION,
   HUB_PAGE,
+  NUMBER_OF_CHILDREN_URL,
   SENT_TO_APPLICANT2_FOR_REVIEW,
-  YOUR_DETAILS_URL,
 } from '../urls';
 
 import { HomeGetController } from './get';
@@ -29,7 +29,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(YOUR_DETAILS_URL);
+    expect(res.redirect).toBeCalledWith(NUMBER_OF_CHILDREN_URL);
   });
 
   test('redirects to the check your answers page for existing users', () => {
@@ -45,7 +45,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(CHECK_ANSWERS_URL);
+    expect(res.redirect).toBeCalledWith(NUMBER_OF_CHILDREN_URL);
   });
 
   test('throws an error if the user switches service type', () => {

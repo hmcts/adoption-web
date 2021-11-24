@@ -139,7 +139,7 @@ Given("I've said I'm applying as a joint application", () => {
 });
 
 Given("I've said I'm divorcing my husband", () => {
-  I.amOnPage('/your-details');
+  I.amOnPage('/number-of-children');
   iClearTheForm();
   I.checkOption('My husband');
   I.click('Continue');

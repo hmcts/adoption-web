@@ -23,7 +23,7 @@ Given('I set the case state to {string}', async (state: State) => {
 });
 
 Given("I've completed all happy path questions correctly", async () => {
-  iAmOnPage('/your-details');
+  iAmOnPage('/number-of-children');
   iClearTheForm();
   iClick('My husband');
   iClick('Continue');

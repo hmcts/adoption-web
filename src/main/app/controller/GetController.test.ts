@@ -27,7 +27,7 @@ describe('GetController', () => {
     expect(res.render).toBeCalledWith('page', {
       ...defaultViewArgs,
       language: 'en',
-      serviceName: 'Apply for a divorce',
+      serviceName: 'Apply for adoption',
       isDraft: true,
       isDivorce: true,
       text: 'english',
