@@ -128,6 +128,7 @@ export interface FormOptions {
   id?: string;
   type: string;
   label?: Label;
+  section?: Label;
   labelHidden?: boolean;
   labelSize?: string | null;
   hideError?: boolean;

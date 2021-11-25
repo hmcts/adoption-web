@@ -5,6 +5,7 @@ import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = ({ required }) => ({
+  section: 'Applicant details',
   title: 'How many children are you applying to adopt?',
   one: '1',
   two: '2',
@@ -34,6 +35,7 @@ export const form: FormContent = {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.title,
+      section: l => l.section,
       labelHidden: true,
       values: [
         { label: l => l.one, value: '1' },
