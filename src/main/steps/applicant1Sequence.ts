@@ -5,6 +5,7 @@ import { isLessThanAYear } from '../app/form/validation';
 import {
   CERTIFICATE_URL,
   HAS_RELATIONSHIP_BROKEN_URL,
+  NUMBER_OF_APPLICANTS_URL,
   NUMBER_OF_CHILDREN_URL,
   PageLink,
   RELATIONSHIP_DATE_URL,
@@ -39,7 +40,12 @@ export const applicant1Sequence: Step[] = [
   {
     url: NUMBER_OF_CHILDREN_URL,
     showInSection: Sections.AboutPartnership,
-    getNextStep: () => NUMBER_OF_CHILDREN_URL,
+    getNextStep: () => NUMBER_OF_APPLICANTS_URL,
+  },
+  {
+    url: NUMBER_OF_APPLICANTS_URL,
+    showInSection: Sections.AboutPartnership,
+    getNextStep: () => NUMBER_OF_APPLICANTS_URL,
   },
   {
     url: HAS_RELATIONSHIP_BROKEN_URL,

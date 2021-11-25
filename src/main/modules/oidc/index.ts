@@ -42,7 +42,7 @@ export class OidcMiddleware {
           res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
           //TODO remove hardcoding instead get or create case
-          req.session.userCase = {
+          req.session.userCase = req.session.userCase || {
             id: '123',
             state: State.Draft,
             divorceOrDissolution: DivorceOrDissolution.DIVORCE,
