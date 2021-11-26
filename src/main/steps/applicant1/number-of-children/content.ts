@@ -18,6 +18,7 @@ const en = ({ required }) => ({
 });
 
 const cy = ({ required }) => ({
+  section: 'Applicant details (in welsh)',
   title: 'How many children are you applying to adopt? (in welsh)',
   one: '1',
   two: '2',

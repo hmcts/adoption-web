@@ -16,11 +16,11 @@ const en = ({ required }) => ({
 });
 
 const cy = ({ required }) => ({
-  section: 'Applicant details (but in welsh)',
+  section: 'Applicant details (in welsh)',
   title: 'Are you applying on your own, or with someone else?(in welsh)',
-  one: "I'm applying on my own",
-  two: "I'm applying with my spouse or civil partner",
-  three: "I'm applying with someone who is not my spouse or civil partner",
+  one: "I'm applying on my own (in welsh)",
+  two: "I'm applying with my spouse or civil partner (in welsh)",
+  three: "I'm applying with someone who is not my spouse or civil partner (in welsh)",
   errors: {
     noOfApplicants: {
       required,
@@ -37,9 +37,9 @@ export const form: FormContent = {
       section: l => l.section,
       labelHidden: true,
       values: [
-        { label: l => l.one, value: "I'm applying on my own" },
-        { label: l => l.two, value: "I'm applying with my spouse or civil partner" },
-        { label: l => l.three, value: "I'm applying with someone who is not my spouse or civil partner" },
+        { label: l => l.one, value: 'alone' },
+        { label: l => l.two, value: 'withSpouseOrCivilPartner' },
+        { label: l => l.three, value: 'withSomeoneElse' },
       ],
       validator: value => isFieldFilledIn(value),
     },
