@@ -65,8 +65,7 @@ describe('PostController', () => {
       id: '1234',
       divorceOrDissolution: 'divorce',
       gender: 'female',
-      sameSex: Checkbox.Unchecked,
-      addedByAPI: 'adds new data to the session returned from API',
+      sameSex: undefined,
     };
 
     const req = mockRequest({ body });
@@ -74,6 +73,7 @@ describe('PostController', () => {
     const res = mockResponse();
     await controller.post(req, res);
 
+    console.log(req.session.userCase);
     expect(req.session.userCase).toEqual(expectedUserCase);
     expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { ...body }, CITIZEN_UPDATE);
 
@@ -164,9 +164,12 @@ describe('PostController', () => {
     const controller = new PostController(mockFormContent.fields);
 
     const expectedUserCase = {
-      divorceOrDissolution: 'divorce',
-      date: { day: '1', month: '1', year: '2000' },
       id: '1234',
+      divorceOrDissolution: 'divorce',
+      day: '1',
+      month: '1',
+      year: '2000',
+      sameSex: undefined,
     };
 
     const req = mockRequest({ body });
