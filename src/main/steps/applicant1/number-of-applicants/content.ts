@@ -1,17 +1,15 @@
-// import { Checkbox } from '../../../app/case/case';
-// import { Gender } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = ({ required }) => ({
   section: 'Applicant details',
-  title: 'How many children are you applying to adopt?',
-  one: '1',
-  two: '2',
-  threeOrMore: '3 or more',
+  title: 'Are you applying on your own, or with someone else?',
+  one: "I'm applying on my own",
+  two: "I'm applying with my spouse or civil partner",
+  three: "I'm applying with someone who is not my spouse or civil partner",
   errors: {
-    noOfChildren: {
+    noOfApplicants: {
       required,
     },
   },
@@ -19,12 +17,12 @@ const en = ({ required }) => ({
 
 const cy = ({ required }) => ({
   section: 'Applicant details (in welsh)',
-  title: 'How many children are you applying to adopt? (in welsh)',
-  one: '1',
-  two: '2',
-  threeOrMore: '3 or more (in welsh)',
+  title: 'Are you applying on your own, or with someone else?(in welsh)',
+  one: "I'm applying on my own (in welsh)",
+  two: "I'm applying with my spouse or civil partner (in welsh)",
+  three: "I'm applying with someone who is not my spouse or civil partner (in welsh)",
   errors: {
-    noOfChildren: {
+    noOfApplicants: {
       required,
     },
   },
@@ -32,16 +30,16 @@ const cy = ({ required }) => ({
 
 export const form: FormContent = {
   fields: {
-    noOfChildren: {
+    noOfApplicants: {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.title,
       section: l => l.section,
       labelHidden: true,
       values: [
-        { label: l => l.one, value: '1' },
-        { label: l => l.two, value: '2' },
-        { label: l => l.threeOrMore, value: '3+' },
+        { label: l => l.one, value: 'alone' },
+        { label: l => l.two, value: 'withSpouseOrCivilPartner' },
+        { label: l => l.three, value: 'withSomeoneElse' },
       ],
       validator: value => isFieldFilledIn(value),
     },

@@ -4,7 +4,12 @@ import { Gender, YesOrNo } from '../app/case/definition';
 import { AppRequest } from '../app/controller/AppRequest';
 
 import { applicant1Sequence } from './applicant1Sequence';
-import { HAS_RELATIONSHIP_BROKEN_URL, NUMBER_OF_CHILDREN_URL, RELATIONSHIP_NOT_BROKEN_URL } from './urls';
+import {
+  HAS_RELATIONSHIP_BROKEN_URL,
+  NUMBER_OF_APPLICANTS_URL,
+  NUMBER_OF_CHILDREN_URL,
+  RELATIONSHIP_NOT_BROKEN_URL,
+} from './urls';
 
 import { getNextIncompleteStepUrl, getNextStepUrl } from './index';
 
@@ -18,7 +23,7 @@ describe('Steps', () => {
     it('returns the next step when correct details a passed', () => {
       mockReq.originalUrl = NUMBER_OF_CHILDREN_URL;
       const data = { gender: Gender.MALE };
-      expect(getNextStepUrl(mockReq, data)).toBe(NUMBER_OF_CHILDREN_URL);
+      expect(getNextStepUrl(mockReq, data)).toBe(NUMBER_OF_APPLICANTS_URL);
     });
 
     it('moves into a dead end when the response matches', () => {
@@ -31,7 +36,7 @@ describe('Steps', () => {
     it('keeps the query string', () => {
       mockReq.originalUrl = `${NUMBER_OF_CHILDREN_URL}?customQueryString`;
       const data = { gender: Gender.MALE };
-      expect(getNextStepUrl(mockReq, data)).toBe(`${NUMBER_OF_CHILDREN_URL}?customQueryString`);
+      expect(getNextStepUrl(mockReq, data)).toBe(`${NUMBER_OF_APPLICANTS_URL}?customQueryString`);
     });
   });
 

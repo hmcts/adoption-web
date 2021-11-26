@@ -16,7 +16,7 @@
     serviceUrl: (globals.basePath if globals.basePath) + "/",
     navigation: [
       {
-        href: "/logout" if isLoggedIn else "/login",
+        href: "/logout" if isLoggedIn else "/",
         text: signOut if isLoggedIn else signIn
       }
     ]
@@ -51,7 +51,7 @@
           <h1 class="govuk-heading-l">{{ title }}</h1>
         {% endif %}
       {% endblock %}
-
+      
       {% if form %}
         {% block form %}
           {% include "common/form/form.njk"%}
