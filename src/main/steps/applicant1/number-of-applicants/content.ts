@@ -3,6 +3,7 @@ import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = ({ required }) => ({
+  section: 'Applicant details',
   title: 'Are you applying on your own, or with someone else?',
   one: "I'm applying on my own",
   two: "I'm applying with my spouse or civil partner",
@@ -15,6 +16,7 @@ const en = ({ required }) => ({
 });
 
 const cy = ({ required }) => ({
+  section: 'Applicant details (but in welsh)',
   title: 'Are you applying on your own, or with someone else?(in welsh)',
   one: "I'm applying on my own",
   two: "I'm applying with my spouse or civil partner",
@@ -32,6 +34,7 @@ export const form: FormContent = {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.title,
+      section: l => l.section,
       labelHidden: true,
       values: [
         { label: l => l.one, value: "I'm applying on my own" },
