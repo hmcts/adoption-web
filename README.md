@@ -6,17 +6,27 @@
 
 Running the application requires the following tools to be installed in your environment:
 
-  * [Node.js](https://nodejs.org/) v12.0.0 or later
-  * [yarn](https://yarnpkg.com/)
-  * [Docker](https://www.docker.com)
+- [Node.js](https://nodejs.org/) v12.0.0 or later
+- [yarn](https://yarnpkg.com/)
+- [Docker](https://www.docker.com)
 
 ### Running the application
 
+Log in to azure from the same terminal where you are going to launch the application. Run below command and follow the instructions (this is needed bacause we load secrets from `adoption-kv-aat` while running the application locally)
+
+```bash
+az login --use-device-code
+```
+
+Connect to VPN<br>
+Go to the webpage https://portal.platform.hmcts.net/ and follow the instruction to connect to F5 VPN (this is needed because we connect to APIs deployed in AAT environment while running the application locally)
+
 Install dependencies by executing the following command:
 
- ```bash
+```bash
 $ yarn install
- ```
+```
+
 Bundle:
 
 ```bash
@@ -26,10 +36,10 @@ $ yarn webpack
 Run:
 
 ```bash
-$ yarn start
+$ yarn start:dev
 ```
 
-The applications's home page will be available at https://localhost:3000
+The applications's home page will be available at http://localhost:3000
 
 ### Running with Docker
 
@@ -59,6 +69,7 @@ We use [ESLint](https://github.com/typescript-eslint/typescript-eslint)
 alongside [sass-lint](https://github.com/sasstools/sass-lint)
 
 Running the linting with auto fix:
+
 ```bash
 $ yarn lint --fix
 ```
@@ -111,12 +122,12 @@ included in this template app. Your njk file would look like this:
 This application uses [Helmet](https://helmetjs.github.io/), which adds various security-related HTTP headers
 to the responses. Apart from default Helmet functions, following headers are set:
 
-* [Referrer-Policy](https://helmetjs.github.io/docs/referrer-policy/)
-* [Content-Security-Policy](https://helmetjs.github.io/docs/csp/)
+- [Referrer-Policy](https://helmetjs.github.io/docs/referrer-policy/)
+- [Content-Security-Policy](https://helmetjs.github.io/docs/csp/)
 
 There is a configuration section related with those headers, where you can specify:
-* `referrerPolicy` - value of the `Referrer-Policy` header
 
+- `referrerPolicy` - value of the `Referrer-Policy` header
 
 Here's an example setup:
 
