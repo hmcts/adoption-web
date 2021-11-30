@@ -2,7 +2,7 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 
-const en = ({ required }) => ({
+const en = () => ({
   section: 'Applicant details',
   title: 'Are you applying on your own, or with someone else?',
   one: "I'm applying on my own",
@@ -10,12 +10,12 @@ const en = ({ required }) => ({
   three: "I'm applying with someone who is not my spouse or civil partner",
   errors: {
     noOfApplicants: {
-      required,
+      required: 'Select the number of people applying to adopt',
     },
   },
 });
 
-const cy = ({ required }) => ({
+const cy = () => ({
   section: 'Applicant details (in welsh)',
   title: 'Are you applying on your own, or with someone else?(in welsh)',
   one: "I'm applying on my own (in welsh)",
@@ -23,7 +23,7 @@ const cy = ({ required }) => ({
   three: "I'm applying with someone who is not my spouse or civil partner (in welsh)",
   errors: {
     noOfApplicants: {
-      required,
+      required: 'Select the number of people applying to adopt (in welsh)',
     },
   },
 });
@@ -47,6 +47,9 @@ export const form: FormContent = {
   submit: {
     text: l => l.continue,
   },
+  saveAsDraft: {
+    text: l => l.saveAsDraft,
+  },
 };
 
 const languages = {
@@ -55,7 +58,7 @@ const languages = {
 };
 
 export const generateContent: TranslationFn = content => {
-  const translations = languages[content.language](content);
+  const translations = languages[content.language]();
   return {
     ...translations,
     form,

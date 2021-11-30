@@ -38,6 +38,9 @@ describe('Form', () => {
     submit: {
       text: l => l.continue,
     },
+    saveAsDraft: {
+      text: l => l.saveAsDraft,
+    },
   };
 
   const form = new Form(<FormFields>mockForm.fields);
@@ -114,6 +117,9 @@ describe('Form', () => {
       },
       submit: {
         text: l => l.continue,
+      },
+      saveAsDraft: {
+        text: l => l.saveAsDraft,
       },
     };
 
@@ -209,6 +215,9 @@ describe('Form', () => {
       }),
       submit: {
         text: l => l.continue,
+      },
+      saveAsDraft: {
+        text: l => l.saveAsDraft,
       },
     };
     mockFieldFnForm.fields = mockFieldFnForm.fields as FormFieldsFn;
