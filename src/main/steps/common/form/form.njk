@@ -9,23 +9,38 @@
   {% block after_fields %}{% endblock %}
 
   <div class="govuk-form-group">
-    {{ govukButton({
-      text: getContent(form.submit.text),
-      classes: form.submit.classes,
-      type: "submit",
-      preventDoubleClick: true,
-      attributes: {
-        id: 'main-form-submit'
-      }
-    }) }}
+    <div class="govuk-button-group">
+      {{ 
+        govukButton({
+          text: getContent(form.submit.text),
+          classes: form.submit.classes,
+          type: "submit",
+          preventDoubleClick: true,
+          attributes: {
+            id: 'main-form-submit'
+          }
+        }) 
+      }}
+
+      {{ 
+        govukButton({
+          text: getContent(form.saveAsDraft.text),
+          classes: "govuk-button--secondary",
+          preventDoubleClick: true,
+          attributes: {
+            id: 'main-form-save-as-draft'
+          }
+        })
+      }}
+    </div>
 
     {% block after_form %}{% endblock %}
 
     {# TODO uncomment this once we have save as draft fuctionality #}
     {# <p class="govuk-body">
-      <button class="hmcts-button-link" type="submit" name="saveAndSignOut" value="true" data-prevent-double-click="true" data-module="govuk-button" />
-        {{ saveAndSignOut }}
-      </button>
-    </p> #}
-  </div>
+      <button class="hmcts-button-link" type="submit" name="saveandsignout" value="true" data-prevent-double-click="true" data-module="govuk-button"/>
+      {{ saveAsDraft }}
+    </button> #}
+  </p>
+</div>
 </form>

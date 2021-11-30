@@ -4,10 +4,10 @@ import { DivorceOrDissolution, State, YesOrNo } from '../../app/case/definition'
 import {
   APPLICATION_ENDED,
   APPLICATION_SUBMITTED,
+  APPLYING_WITH_URL,
   CHECK_ANSWERS_URL,
   CONFIRM_JOINT_APPLICATION,
   HUB_PAGE,
-  NUMBER_OF_CHILDREN_URL,
   SENT_TO_APPLICANT2_FOR_REVIEW,
 } from '../urls';
 
@@ -29,7 +29,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(NUMBER_OF_CHILDREN_URL);
+    expect(res.redirect).toBeCalledWith(APPLYING_WITH_URL);
   });
 
   test('redirects to the check your answers page for existing users', () => {
@@ -45,7 +45,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(NUMBER_OF_CHILDREN_URL);
+    expect(res.redirect).toBeCalledWith(APPLYING_WITH_URL);
   });
 
   test('throws an error if the user switches service type', () => {

@@ -74,6 +74,9 @@ export const form: FormContent = {
   submit: {
     text: l => l.continue,
   },
+  saveAsDraft: {
+    text: l => l.saveAsDraft,
+  },
 };
 
 const languages = {
