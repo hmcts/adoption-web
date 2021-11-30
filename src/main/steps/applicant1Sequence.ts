@@ -3,9 +3,9 @@ import { YesOrNo } from '../app/case/definition';
 import { isLessThanAYear } from '../app/form/validation';
 
 import {
+  APPLYING_WITH_URL,
   CERTIFICATE_URL,
   HAS_RELATIONSHIP_BROKEN_URL,
-  NUMBER_OF_APPLICANTS_URL,
   PageLink,
   RELATIONSHIP_DATE_URL,
   RELATIONSHIP_NOT_BROKEN_URL,
@@ -37,9 +37,9 @@ export interface Step {
 
 export const applicant1Sequence: Step[] = [
   {
-    url: NUMBER_OF_APPLICANTS_URL,
+    url: APPLYING_WITH_URL,
     showInSection: Sections.AboutPartnership,
-    getNextStep: () => NUMBER_OF_APPLICANTS_URL,
+    getNextStep: () => APPLYING_WITH_URL,
   },
   {
     url: HAS_RELATIONSHIP_BROKEN_URL,

@@ -8,10 +8,10 @@ import { form as applicant1FirstQuestionForm } from '../applicant1/applying-with
 import {
   APPLICATION_ENDED,
   APPLICATION_SUBMITTED,
+  APPLYING_WITH_URL,
   CHECK_ANSWERS_URL,
   CONFIRM_JOINT_APPLICATION,
   HUB_PAGE,
-  NUMBER_OF_APPLICANTS_URL,
   SENT_TO_APPLICANT2_FOR_REVIEW,
 } from '../urls';
 
@@ -54,7 +54,7 @@ const applicant1RedirectPageSwitch = (caseState: State, userCase: Partial<Case>,
       return HUB_PAGE;
     }
     default: {
-      return isFirstQuestionComplete ? NUMBER_OF_APPLICANTS_URL : NUMBER_OF_APPLICANTS_URL;
+      return isFirstQuestionComplete ? APPLYING_WITH_URL : APPLYING_WITH_URL;
     }
   }
 };
