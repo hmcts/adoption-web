@@ -14,8 +14,7 @@ export const RESPONDENT: PageLink = '/respondent';
 export const CHECK_ANSWERS_URL: PageLink = '/check-your-answers';
 
 export const APPLICATION_ENDED: PageLink = '/application-ended';
-export const NUMBER_OF_CHILDREN_URL: PageLink = '/number-of-children';
-export const NUMBER_OF_APPLICANTS_URL: PageLink = '/number-of-applicants';
+export const NUMBER_OF_APPLICANTS_URL: PageLink = '/applying-with';
 export const HAS_RELATIONSHIP_BROKEN_URL: PageLink = '/irretrievable-breakdown';
 export const RELATIONSHIP_NOT_BROKEN_URL: PageLink = '/relationship-not-broken';
 

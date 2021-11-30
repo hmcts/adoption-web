@@ -4,14 +4,14 @@ import { Case } from '../../app/case/case';
 import { State, YesOrNo } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
 import { Form, FormFields } from '../../app/form/Form';
-import { form as applicant1FirstQuestionForm } from '../applicant1/number-of-children/content';
+import { form as applicant1FirstQuestionForm } from '../applicant1/applying-with/content';
 import {
   APPLICATION_ENDED,
   APPLICATION_SUBMITTED,
   CHECK_ANSWERS_URL,
   CONFIRM_JOINT_APPLICATION,
   HUB_PAGE,
-  NUMBER_OF_CHILDREN_URL,
+  NUMBER_OF_APPLICANTS_URL,
   SENT_TO_APPLICANT2_FOR_REVIEW,
 } from '../urls';
 
@@ -54,7 +54,7 @@ const applicant1RedirectPageSwitch = (caseState: State, userCase: Partial<Case>,
       return HUB_PAGE;
     }
     default: {
-      return isFirstQuestionComplete ? CHECK_ANSWERS_URL : NUMBER_OF_CHILDREN_URL;
+      return isFirstQuestionComplete ? NUMBER_OF_APPLICANTS_URL : NUMBER_OF_APPLICANTS_URL;
     }
   }
 };

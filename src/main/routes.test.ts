@@ -19,7 +19,7 @@ describe('Routes', () => {
     expect(appMock.locals.errorHandler).toHaveBeenCalled();
 
     expect(appMock.get).toHaveBeenCalledWith('/', undefined);
-    expect(appMock.get).toHaveBeenCalledWith('/number-of-children', undefined);
+    expect(appMock.get).toHaveBeenCalledWith('/applying-with', undefined);
 
     expect(appMock.use).toHaveBeenCalled();
   });
