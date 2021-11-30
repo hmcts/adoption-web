@@ -46,7 +46,7 @@ describe('getAnswerRows()', () => {
         url: 'dont-pickThisOne',
         showInSection: Sections.AboutPartners,
         getNextStep: () => '/pickThisOne',
-        form: { fields: {}, submit: { text: '' } },
+        form: { fields: {}, submit: { text: '' }, saveAsDraft: { text: '' } },
         generateContent: () => ({}),
         view: '/template',
       },
@@ -56,7 +56,7 @@ describe('getAnswerRows()', () => {
         showInSection: Sections.AboutPartnership,
         getNextStep: () => '/',
         generateContent: mockGenerateContent,
-        form: { fields: {}, submit: { text: '' } },
+        form: { fields: {}, submit: { text: '' }, saveAsDraft: { text: '' } },
         view: '/template',
       },
     ]);
@@ -95,7 +95,11 @@ describe('getAnswerRows()', () => {
           showInCompleteSection: Sections.AboutPartners,
           getNextStep: () => '/pickThisOne',
           generateContent: () => ({}),
-          form: { fields: { mockField: { type: 'text', label: l => l.title } }, submit: { text: '' } },
+          form: {
+            fields: { mockField: { type: 'text', label: l => l.title } },
+            submit: { text: '' },
+            saveAsDraft: { text: '' },
+          },
           view: '/template',
         },
         {
@@ -105,7 +109,11 @@ describe('getAnswerRows()', () => {
           showInCompleteSection: Sections.AboutPartnership,
           getNextStep: () => '/',
           generateContent: mockGenerateContent,
-          form: { fields: { mockField: { type: 'text', label: l => l.title } }, submit: { text: '' } },
+          form: {
+            fields: { mockField: { type: 'text', label: l => l.title } },
+            submit: { text: '' },
+            saveAsDraft: { text: '' },
+          },
           view: '/template',
         },
       ]);
@@ -117,7 +125,11 @@ describe('getAnswerRows()', () => {
           showInCompleteSection: Sections.AboutPartners,
           getNextStep: () => '/pickThisOne',
           generateContent: () => ({}),
-          form: { fields: { mockField: { type: 'text', label: l => l.title } }, submit: { text: '' } },
+          form: {
+            fields: { mockField: { type: 'text', label: l => l.title } },
+            submit: { text: '' },
+            saveAsDraft: { text: '' },
+          },
           view: '/template',
         },
         {
@@ -127,7 +139,11 @@ describe('getAnswerRows()', () => {
           showInCompleteSection: Sections.AboutPartnership,
           getNextStep: () => '/',
           generateContent: mockGenerateContent,
-          form: { fields: { mockField: { type: 'text', label: l => l.title } }, submit: { text: '' } },
+          form: {
+            fields: { mockField: { type: 'text', label: l => l.title } },
+            submit: { text: '' },
+            saveAsDraft: { text: '' },
+          },
           view: '/template',
         },
       ]);
@@ -139,7 +155,11 @@ describe('getAnswerRows()', () => {
           showInCompleteSection: Sections.AboutPartners,
           getNextStep: () => '/pickThisOne',
           generateContent: () => ({}),
-          form: { fields: { mockField: { type: 'text', label: l => l.title } }, submit: { text: '' } },
+          form: {
+            fields: { mockField: { type: 'text', label: l => l.title } },
+            submit: { text: '' },
+            saveAsDraft: { text: '' },
+          },
           view: '/template',
         },
         {
@@ -149,7 +169,11 @@ describe('getAnswerRows()', () => {
           showInCompleteSection: Sections.AboutPartnership,
           getNextStep: () => '/',
           generateContent: mockGenerateContent,
-          form: { fields: { mockField: { type: 'text', label: l => l.title } }, submit: { text: '' } },
+          form: {
+            fields: { mockField: { type: 'text', label: l => l.title } },
+            submit: { text: '' },
+            saveAsDraft: { text: '' },
+          },
           view: '/template',
         },
       ]);
@@ -246,7 +270,11 @@ describe('getAnswerRows()', () => {
           generateContent: () => {
             throw new Error('You cannot see this page');
           },
-          form: { fields: { mockField: { type: 'text', label: l => l.title } }, submit: { text: '' } },
+          form: {
+            fields: { mockField: { type: 'text', label: l => l.title } },
+            submit: { text: '' },
+            saveAsDraft: { text: '' },
+          },
           view: '/template',
         },
         {
@@ -255,7 +283,11 @@ describe('getAnswerRows()', () => {
           showInSection: Sections.AboutPartnership,
           getNextStep: () => '/',
           generateContent: mockGenerateContent,
-          form: { fields: { mockField: { type: 'text', label: l => l.title } }, submit: { text: '' } },
+          form: {
+            fields: { mockField: { type: 'text', label: l => l.title } },
+            submit: { text: '' },
+            saveAsDraft: { text: '' },
+          },
           view: '/template',
         },
       ]);
@@ -370,6 +402,9 @@ describe('getAnswerRows()', () => {
               },
             },
             submit: { text: '' },
+            saveAsDraft: {
+              text: '',
+            },
           },
           view: '/template',
         },

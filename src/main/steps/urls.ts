@@ -42,6 +42,7 @@ export const ADOPTION_CONTACTS_SOLICITOR: PageLink = '/adoption-contacts/solicit
 export const ADOPTION_DECLARE_PAYMENTS: PageLink = '/declare-payments';
 export const ADOPTION_REVIEW_APPLICATION: PageLink = '/review-application';
 
+export const APPLYING_WITH_URL: PageLink = '/applying-with';
 export const HAS_RELATIONSHIP_BROKEN_URL: PageLink = '/irretrievable-breakdown';
 export const RELATIONSHIP_NOT_BROKEN_URL: PageLink = '/relationship-not-broken';
 

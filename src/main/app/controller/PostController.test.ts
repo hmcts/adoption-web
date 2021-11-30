@@ -73,7 +73,6 @@ describe('PostController', () => {
     const res = mockResponse();
     await controller.post(req, res);
 
-    console.log(req.session.userCase);
     expect(req.session.userCase).toEqual(expectedUserCase);
     expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { ...body }, CITIZEN_UPDATE);
 
