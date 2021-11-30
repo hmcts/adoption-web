@@ -11,6 +11,7 @@ import {
   RELATIONSHIP_DATE_URL,
   RELATIONSHIP_NOT_BROKEN_URL,
   RELATIONSHIP_NOT_LONG_ENOUGH_URL,
+  TASK_LIST_URL,
 } from './urls';
 
 export enum Sections {
@@ -45,7 +46,7 @@ export const applicant1Sequence: Step[] = [
   {
     url: NUMBER_OF_APPLICANTS_URL,
     showInSection: Sections.AboutPartnership,
-    getNextStep: () => NUMBER_OF_APPLICANTS_URL,
+    getNextStep: () => TASK_LIST_URL,
   },
   {
     url: HAS_RELATIONSHIP_BROKEN_URL,
