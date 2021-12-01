@@ -12,7 +12,7 @@ Running the application requires the following tools to be installed in your env
 
 ### Running the application
 
-Log in to azure from the same terminal where you are going to launch the application. Run below command and follow the instructions (this is needed bacause we load secrets from `adoption-kv-aat` while running the application locally)
+Log in to azure from the same terminal where you are going to launch the application. Run below command and follow the instructions (this is needed bacause we load secrets from `adoption-aat` while running the application locally)
 
 ```bash
 az login --use-device-code

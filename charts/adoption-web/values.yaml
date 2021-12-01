@@ -29,7 +29,7 @@ nodejs:
     REDIS_HOST: 'adoption-web-session-storage-{{ .Values.global.environment }}.redis.cache.windows.net'
 
   keyVaults:
-    adoption-kv:
+    adoption:
       secrets:
         - idam-secret
         - idam-system-user-name
