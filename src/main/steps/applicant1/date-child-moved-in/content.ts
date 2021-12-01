@@ -1,15 +1,9 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 
-const en = () => ({
-  section: 'Applicant details',
-  title: 'Date child moved in?',
-});
+const en = () => ({});
 
-const cy = () => ({
-  section: 'Applicant details (in welsh)',
-  title: 'Date child moved in?(in welsh)',
-});
+const cy = () => ({});
 
 export const form: FormContent = {
   fields: {},
