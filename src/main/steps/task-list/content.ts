@@ -1,5 +1,3 @@
-// import { Checkbox } from '../../../app/case/case';
-// import { Gender } from '../../../app/case/definition';
 import { TranslationFn } from '../../app/controller/GetController';
 import { FormContent } from '../../app/form/Form';
 
