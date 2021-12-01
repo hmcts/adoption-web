@@ -4,7 +4,12 @@ import { Gender, YesOrNo } from '../app/case/definition';
 import { AppRequest } from '../app/controller/AppRequest';
 
 import { applicant1Sequence } from './applicant1Sequence';
-import { APPLYING_WITH_URL, HAS_RELATIONSHIP_BROKEN_URL, RELATIONSHIP_NOT_BROKEN_URL } from './urls';
+import {
+  APPLYING_WITH_URL,
+  DATE_CHILD_MOVED_IN_URL,
+  HAS_RELATIONSHIP_BROKEN_URL,
+  RELATIONSHIP_NOT_BROKEN_URL,
+} from './urls';
 
 import { getNextIncompleteStepUrl, getNextStepUrl } from './index';
 
@@ -18,7 +23,7 @@ describe('Steps', () => {
     it('returns the next step when correct details a passed', () => {
       mockReq.originalUrl = APPLYING_WITH_URL;
       const data = { gender: Gender.MALE };
-      expect(getNextStepUrl(mockReq, data)).toBe(APPLYING_WITH_URL);
+      expect(getNextStepUrl(mockReq, data)).toBe(DATE_CHILD_MOVED_IN_URL);
     });
 
     it('moves into a dead end when the response matches', () => {
@@ -31,7 +36,7 @@ describe('Steps', () => {
     it('keeps the query string', () => {
       mockReq.originalUrl = `${APPLYING_WITH_URL}?customQueryString`;
       const data = { gender: Gender.MALE };
-      expect(getNextStepUrl(mockReq, data)).toBe(`${APPLYING_WITH_URL}?customQueryString`);
+      expect(getNextStepUrl(mockReq, data)).toBe(`${DATE_CHILD_MOVED_IN_URL}?customQueryString`);
     });
   });
 
