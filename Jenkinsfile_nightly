@@ -32,7 +32,7 @@ static Map<String, Object> secret(String secretName, String envVariable) {
 }
 
 def secrets = [
-  'adoption-kv-${env}'    :[
+  'adoption-${env}'    :[
     secret('idam-secret', 'IDAM_SECRET'),
     secret('idam-system-user-password', 'TEST_PASSWORD'),
   ],
