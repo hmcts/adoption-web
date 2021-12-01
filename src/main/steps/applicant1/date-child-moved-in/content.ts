@@ -8,10 +8,10 @@ const cy = () => ({});
 export const form: FormContent = {
   fields: {},
   submit: {
-    text: l => l.continue,
+    text: '',
   },
   saveAsDraft: {
-    text: l => l.saveAsDraft,
+    text: '',
   },
 };
 
