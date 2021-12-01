@@ -15,13 +15,12 @@ export const CHECK_ANSWERS_URL: PageLink = '/check-your-answers';
 
 export const APPLICATION_ENDED: PageLink = '/application-ended';
 export const NUMBER_OF_CHILDREN_URL: PageLink = '/number-of-children';
-export const NUMBER_OF_APPLICANTS_URL: PageLink = '/number-of-applicants';
 export const TASK_LIST_URL: PageLink = '/task-list';
 
 export const DATE_CHILD_MOVED_IN_URL: PageLink = '/date-child-moved-in';
-export const APPLICANT_1_PERSONAL_DETAILS: PageLink = '/applicant1/your-personal-details';
-export const APPLICANT_1_CONTACT_DETAILS: PageLink = '/applicant1/your-contact-details';
-export const APPLICANT_1_IDENTITY_DOCUMENTS: PageLink = '/applicant1/your-identity-documents';
+export const APPLICANT_1_PERSONAL_DETAILS: PageLink = '/your-personal-details';
+export const APPLICANT_1_CONTACT_DETAILS: PageLink = '/your-contact-details';
+export const APPLICANT_1_IDENTITY_DOCUMENTS: PageLink = '/your-identity-documents';
 
 export const APPLICANT_2_PERSONAL_DETAILS: PageLink = '/applicant2-personal-details';
 export const APPLICANT_2_CONTACT_DETAILS: PageLink = '/applicant2-contact-details';

@@ -2,7 +2,6 @@
 // import { Gender } from '../../../app/case/definition';
 import { TranslationFn } from '../../app/controller/GetController';
 import { FormContent } from '../../app/form/Form';
-import { isFieldFilledIn } from '../../app/form/validation';
 
 const en = ({ required }) => ({
   title: 'Apply to adopt a child placed in your care',
@@ -103,23 +102,12 @@ const cy = ({ required }) => ({
 });
 
 export const form: FormContent = {
-  fields: {
-    noOfChildren: {
-      type: 'radios',
-      classes: 'govuk-radios',
-      label: l => l.title,
-      section: l => l.section,
-      labelHidden: true,
-      values: [
-        { label: l => l.one, value: '1' },
-        { label: l => l.two, value: '2' },
-        { label: l => l.threeOrMore, value: '3+' },
-      ],
-      validator: value => isFieldFilledIn(value),
-    },
-  },
+  fields: {},
   submit: {
     text: l => l.continue,
+  },
+  saveAsDraft: {
+    text: l => l.saveAsDraft,
   },
 };
 

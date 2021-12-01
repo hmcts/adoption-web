@@ -4,7 +4,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
   section: 'Applicant details',
-  title: 'Your personal details?',
+  title: 'Date child moved in?',
   one: "I'm applying on my own",
   two: "I'm applying with my spouse or civil partner",
   three: "I'm applying with someone who is not my spouse or civil partner",
@@ -17,7 +17,7 @@ const en = () => ({
 
 const cy = () => ({
   section: 'Applicant details (in welsh)',
-  title: 'Your personal details?(in welsh)',
+  title: 'Date child moved in?(in welsh)',
   one: "I'm applying on my own (in welsh)",
   two: "I'm applying with my spouse or civil partner (in welsh)",
   three: "I'm applying with someone who is not my spouse or civil partner (in welsh)",
