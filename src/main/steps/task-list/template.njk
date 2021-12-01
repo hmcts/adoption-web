@@ -38,7 +38,7 @@
                                         </a>
                                     </span>
 
-                                    {% if (data['number-of-applicants']) %}
+                                    {% if status.applyingWith %}
                                         <strong class="govuk-tag app-task-list__tag" id="eligibility-completed">completed</strong>
                                     {% else %}
                                         <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
@@ -114,7 +114,7 @@
                         <!-- Second applicant - personal details -->
                         <li class="app-task-list__item">
                             <span class="app-task-list__task-name">
-                                <a href="/applicant2/your-personal-details" class="govuk-link" aria-describedby="eligibility-completed">
+                                <a href="#" class="govuk-link" aria-describedby="eligibility-completed">
                                     {{section2subheading3line1}}
                                 </a>
                             </a>
@@ -131,7 +131,7 @@
                     <!-- Second applicant - contact details -->
                     <li class="app-task-list__item">
                         <span class="app-task-list__task-name">
-                            <a href="/applicant2/your-personal-details" class="govuk-link" aria-describedby="eligibility-completed">
+                            <a href="#" class="govuk-link" aria-describedby="eligibility-completed">
                                 {{section2subheading3line2}}
                             </a>
                         </a>
@@ -148,7 +148,7 @@
                 <!-- Second applicant - upload identity documents -->
                 <li class="app-task-list__item">
                     <span class="app-task-list__task-name">
-                        <a href="/applicant2/identity-documents" class="govuk-link" aria-describedby="eligibility-completed">
+                        <a href="#" class="govuk-link" aria-describedby="eligibility-completed">
                             {{section2subheading3line3}}
                         </a>
                     </a>
@@ -179,7 +179,7 @@
             <!-- <p><strong>First child</strong></p><-->
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a href="/child/birth-certificate" class="govuk-link" aria-describedby="eligibility-completed">
+                    <a href="#" class="govuk-link" aria-describedby="eligibility-completed">
                         {{section3link1}}
                     </a>
                 </span>
@@ -193,7 +193,7 @@
             </li>
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a href="/child/adoption-certificate" class="govuk-link" aria-describedby="eligibility-completed">
+                    <a href="#" class="govuk-link" aria-describedby="eligibility-completed">
                         {{section3link2}}
                     </a>
                 </span>
@@ -210,7 +210,7 @@
 
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a href="/child/placement-order" class="govuk-link" aria-describedby="eligibility-completed">
+                    <a href="#" class="govuk-link" aria-describedby="eligibility-completed">
                         {{section3link3}}
                     </a>
                 </span>
@@ -224,7 +224,7 @@
             </li>
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a href="/child/birth-mother" class="govuk-link" aria-describedby="eligibility-completed">
+                    <a href="#" class="govuk-link" aria-describedby="eligibility-completed">
                         {{section3link4}}
                     </a>
                 </span>
@@ -236,7 +236,7 @@
             </li>
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a href="/child/birth-other-parent" class="govuk-link" aria-describedby="eligibility-completed">
+                    <a href="#" class="govuk-link" aria-describedby="eligibility-completed">
                         {{section3link5}}
                     </a>
                 </span>
@@ -248,7 +248,7 @@
             </li>
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a href="/child/previous-court-orders" class="govuk-link" aria-describedby="eligibility-completed">
+                    <a href="#" class="govuk-link" aria-describedby="eligibility-completed">
                         {{section3link6}}
                     </a>
                 </span>
@@ -260,7 +260,7 @@
             </li>
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a href="/child/court-order-details-siblings" class="govuk-link" aria-describedby="eligibility-completed">
+                    <a href="#" class="govuk-link" aria-describedby="eligibility-completed">
                         {{section3link7}}
                     </a>
                 </span>
@@ -279,7 +279,7 @@
         <ul class="app-task-list__items">
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a href="/adoption-contacts/your-agency" class="govuk-link"> 
+                    <a href="#" class="govuk-link"> 
                         {{section4link1}}
                     </a>
                 </span>
@@ -291,7 +291,7 @@
             </li>
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a href="/adoption-contacts/child-agency" class="govuk-link">
+                    <a href="#" class="govuk-link">
                         {{section4link2}}
                     </a>
                 </span>
@@ -304,7 +304,7 @@
 
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a href="/adoption-contacts/solicitor" class="govuk-link">
+                    <a href="#" class="govuk-link">
                         {{section4link3}}
                     </a>
                 </span>
@@ -325,7 +325,7 @@
         <ul class="app-task-list__items">
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a href="/declare-payments" class="govuk-link">
+                    <a href="#" class="govuk-link">
                         {{section5link1}}
                     </a>
                 </span>
@@ -351,7 +351,7 @@
 
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a href="/review-application" class="govuk-link">
+                    <a href="#" class="govuk-link">
                         {{section6link1}}
                     </a>
                 </span>

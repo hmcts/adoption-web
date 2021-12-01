@@ -9,7 +9,7 @@ const en = () => ({
   two: "I'm applying with my spouse or civil partner",
   three: "I'm applying with someone who is not my spouse or civil partner",
   errors: {
-    noOfApplicants: {
+    applyingWith: {
       required: 'Select the number of people applying to adopt',
     },
   },
@@ -22,7 +22,7 @@ const cy = () => ({
   two: "I'm applying with my spouse or civil partner (in welsh)",
   three: "I'm applying with someone who is not my spouse or civil partner (in welsh)",
   errors: {
-    noOfApplicants: {
+    applyingWith: {
       required: 'Select the number of people applying to adopt (in welsh)',
     },
   },
@@ -30,7 +30,7 @@ const cy = () => ({
 
 export const form: FormContent = {
   fields: {
-    noOfApplicants: {
+    applyingWith: {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.title,

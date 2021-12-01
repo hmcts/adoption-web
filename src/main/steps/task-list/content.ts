@@ -1,7 +1,9 @@
 import { TranslationFn } from '../../app/controller/GetController';
 import { FormContent } from '../../app/form/Form';
 
-const en = ({ required }) => ({
+import { isApplyingWithComplete } from './utils';
+
+const en = content => ({
   title: 'Apply to adopt a child placed in your care',
   section1: 'Add your details',
   insetTextLine1: 'You will need:',
@@ -43,14 +45,12 @@ const en = ({ required }) => ({
   section6: 'Review application, pay and send',
   insetTextLine11: "You'll need your credit or debit card.",
   section6link1: 'Review application, pay and send',
-  errors: {
-    noOfChildren: {
-      required,
-    },
+  status: {
+    applyingWith: isApplyingWithComplete(content.userCase),
   },
 });
 
-const cy = ({ required }) => ({
+const cy = content => ({
   title: 'Apply to adopt a child placed in your care (in welsh) ',
   section1: 'Add your details (in welsh) ',
   insetTextLine1: 'You will need: (in welsh) ',
@@ -92,10 +92,8 @@ const cy = ({ required }) => ({
   section6: 'Review application, pay and send (in welsh) ',
   insetTextLine11: "You'll need your credit or debit card. (in welsh) ",
   section6link1: 'Review application, pay and send (in welsh) ',
-  errors: {
-    noOfChildren: {
-      required,
-    },
+  status: {
+    applyingWith: isApplyingWithComplete(content.userCase),
   },
 });
 

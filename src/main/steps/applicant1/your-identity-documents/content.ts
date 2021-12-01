@@ -1,23 +1,17 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 
-const en = () => ({
-  section: 'Applicant details',
-  title: 'Please upload your identity documents',
-});
+const en = () => ({});
 
-const cy = () => ({
-  section: 'Applicant details (in welsh)',
-  title: 'Please upload your identity documents(in welsh)',
-});
+const cy = () => ({});
 
 export const form: FormContent = {
   fields: {},
   submit: {
-    text: l => l.continue,
+    text: '',
   },
   saveAsDraft: {
-    text: l => l.saveAsDraft,
+    text: '',
   },
 };
 

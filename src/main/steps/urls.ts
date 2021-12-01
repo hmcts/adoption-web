@@ -22,25 +22,6 @@ export const APPLICANT_1_PERSONAL_DETAILS: PageLink = '/your-personal-details';
 export const APPLICANT_1_CONTACT_DETAILS: PageLink = '/your-contact-details';
 export const APPLICANT_1_IDENTITY_DOCUMENTS: PageLink = '/your-identity-documents';
 
-export const APPLICANT_2_PERSONAL_DETAILS: PageLink = '/applicant2-personal-details';
-export const APPLICANT_2_CONTACT_DETAILS: PageLink = '/applicant2-contact-details';
-export const APPLICANT_2_IDENTITY_DOCUMENTS: PageLink = '/applicant2-identity-documents';
-
-export const CHILD_1_BIRTH_CERTIFICATE: PageLink = '/child/birth-certificate';
-export const CHILD_1_ADOPTION_CERTIFICATE: PageLink = '/child/adoption-certificate';
-export const CHILD_1_PLACEMENT_ORDER: PageLink = '/child/placement-order';
-export const CHILD_1_BIRTH_MOTHER: PageLink = '/child/birth-mother';
-export const CHILD_1_BIRTH_OTHER_PARENT: PageLink = '/child/birth-other-parent';
-export const CHILD_1_PREVIOUS_COURT_ORDERS: PageLink = '/child/previous-court-orders';
-export const CHILD_1_COURT_ORDER_OTHER_SIBLINGS: PageLink = '/child/court-order-details-siblings';
-
-export const ADOPTION_CONTACTS_YOUR_AGENCY: PageLink = '/adoption-contacts/your-agency';
-export const ADOPTION_CONTACTS_CHILD_AGENCY: PageLink = '/adoption-contacts/child-agency';
-export const ADOPTION_CONTACTS_SOLICITOR: PageLink = '/adoption-contacts/solicitor';
-
-export const ADOPTION_DECLARE_PAYMENTS: PageLink = '/declare-payments';
-export const ADOPTION_REVIEW_APPLICATION: PageLink = '/review-application';
-
 export const APPLYING_WITH_URL: PageLink = '/applying-with';
 export const HAS_RELATIONSHIP_BROKEN_URL: PageLink = '/irretrievable-breakdown';
 export const RELATIONSHIP_NOT_BROKEN_URL: PageLink = '/relationship-not-broken';
