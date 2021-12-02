@@ -26,7 +26,7 @@ describe('utils', () => {
     });
 
     test('Should return true if applyingWith is present', async () => {
-      userCase.applyingWith = 'true';
+      userCase.applyingWith = 'alone';
       const isValid = isApplyingWithComplete(userCase);
 
       expect(isValid).toStrictEqual(true);
