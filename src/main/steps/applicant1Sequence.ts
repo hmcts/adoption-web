@@ -3,13 +3,18 @@ import { YesOrNo } from '../app/case/definition';
 import { isLessThanAYear } from '../app/form/validation';
 
 import {
+  APPLICANT_1_CONTACT_DETAILS,
+  APPLICANT_1_IDENTITY_DOCUMENTS,
+  APPLICANT_1_PERSONAL_DETAILS,
   APPLYING_WITH_URL,
   CERTIFICATE_URL,
+  DATE_CHILD_MOVED_IN_URL,
   HAS_RELATIONSHIP_BROKEN_URL,
   PageLink,
   RELATIONSHIP_DATE_URL,
   RELATIONSHIP_NOT_BROKEN_URL,
   RELATIONSHIP_NOT_LONG_ENOUGH_URL,
+  TASK_LIST_URL,
 } from './urls';
 
 export enum Sections {
@@ -39,7 +44,27 @@ export const applicant1Sequence: Step[] = [
   {
     url: APPLYING_WITH_URL,
     showInSection: Sections.AboutPartnership,
-    getNextStep: () => APPLYING_WITH_URL,
+    getNextStep: () => DATE_CHILD_MOVED_IN_URL,
+  },
+  {
+    url: DATE_CHILD_MOVED_IN_URL,
+    showInSection: Sections.AboutPartnership,
+    getNextStep: () => APPLICANT_1_PERSONAL_DETAILS,
+  },
+  {
+    url: APPLICANT_1_PERSONAL_DETAILS,
+    showInSection: Sections.AboutPartnership,
+    getNextStep: () => APPLICANT_1_CONTACT_DETAILS,
+  },
+  {
+    url: APPLICANT_1_CONTACT_DETAILS,
+    showInSection: Sections.AboutPartnership,
+    getNextStep: () => APPLICANT_1_IDENTITY_DOCUMENTS,
+  },
+  {
+    url: APPLICANT_1_IDENTITY_DOCUMENTS,
+    showInSection: Sections.AboutPartnership,
+    getNextStep: () => TASK_LIST_URL,
   },
   {
     url: HAS_RELATIONSHIP_BROKEN_URL,
