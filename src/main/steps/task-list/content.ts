@@ -97,6 +97,7 @@ const cy = content => ({
   status: {
     applyingWith: isApplyingWithComplete(content.userCase),
   },
+  urls,
 });
 
 export const form: FormContent = {
