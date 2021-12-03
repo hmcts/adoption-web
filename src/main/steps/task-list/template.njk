@@ -33,7 +33,7 @@
                                 <!-- Number of applicants -->
                                 <li class="app-task-list__item">
                                     <span class="app-task-list__task-name">
-                                        <a href="/applying-with" class="govuk-link">
+                                        <a href="{{urls.APPLYING_WITH_URL}}" class="govuk-link">
                                             {{section1details1}}
                                         </a>
                                     </span>
@@ -48,7 +48,7 @@
                                 <!-- Choose family court -->
                                 <li class="app-task-list__item">
                                     <span class="app-task-list__task-name">
-                                        <a href="/date-child-moved-in" class="govuk-link">{{section1details2}}</a>
+                                        <a href="{{urls.DATE_CHILD_MOVED_IN_URL}}" class="govuk-link">{{section1details2}}</a>
                                     </span>
                                     {% if data['court-finder'] %}
                                         <strong class="govuk-tag  app-task-list__tag" id="eligibility-completed">Completed</strong>
@@ -66,7 +66,7 @@
                                 <!-- First applicant - personal details -->
                                 <li class="app-task-list__item">
                                     <span class="app-task-list__task-name">
-                                        <a href="/your-personal-details" class="govuk-link" aria-describedby="eligibility-completed">
+                                        <a href="{{urls.APPLICANT_1_PERSONAL_DETAILS}}" class="govuk-link" aria-describedby="eligibility-completed">
                                             {{section2subheading2line1}}
                                         </a>
                                     </a>
@@ -83,7 +83,7 @@
                             <!-- First applicant - contact details -->
                             <li class="app-task-list__item">
                                 <span class="app-task-list__task-name">
-                                    <a href="/your-contact-details" class="govuk-link" aria-describedby="eligibility-completed">
+                                    <a href="{{urls.APPLICANT_1_CONTACT_DETAILS}}" class="govuk-link" aria-describedby="eligibility-completed">
                                         {{section2subheading2line2}}
                                     </a>
                                 </a>
@@ -100,7 +100,7 @@
                         <!-- First applicant - upload identity documents -->
                         <li class="app-task-list__item">
                             <span class="app-task-list__task-name">
-                                <a href="/your-identity-documents" class="govuk-link" aria-describedby="eligibility-completed">{{section2subheading2line3}}</a>
+                                <a href="{{urls.APPLICANT_1_IDENTITY_DOCUMENTS}}" class="govuk-link" aria-describedby="eligibility-completed">{{section2subheading2line3}}</a>
                             </span>
                             {% if data['personal-photo'] %}
                                 <strong class="govuk-tag  app-task-list__tag" id="eligibility-completed">Completed</strong>
