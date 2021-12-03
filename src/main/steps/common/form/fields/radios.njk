@@ -7,13 +7,13 @@
     fieldset: {
       legend: {
         text: getContent(field.label),
-        isPageHeading: true,
+        isPageHeading: true if not title,
         classes: "hidden" if field.labelHidden else "govuk-fieldset__legend--l"
       }
     },
     hint: {
       text: getContent(field.hint)
-    } if field.hint else null,
+    } if field.hint else undefined,
     items: formItems(field.values, userCase[fieldName]),
     errorMessage: getError(fieldName),
     formGroup: {
