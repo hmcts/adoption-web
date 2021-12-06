@@ -4,7 +4,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
   section: 'Applicant details',
-  title: 'Are you applying on your own, or with someone else?',
+  label: 'Are you applying on your own, or with someone else?',
   one: "I'm applying on my own",
   two: "I'm applying with my spouse or civil partner",
   three: "I'm applying with someone who is not my spouse or civil partner",
@@ -33,9 +33,8 @@ export const form: FormContent = {
     applyingWith: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.title,
+      label: l => l.label,
       section: l => l.section,
-      labelHidden: false,
       values: [
         { label: l => l.one, value: 'alone' },
         { label: l => l.two, value: 'withSpouseOrCivilPartner' },

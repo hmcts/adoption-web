@@ -17,12 +17,12 @@ export const APPLICATION_ENDED: PageLink = '/application-ended';
 export const NUMBER_OF_CHILDREN_URL: PageLink = '/number-of-children';
 export const TASK_LIST_URL: PageLink = '/task-list';
 
-export const DATE_CHILD_MOVED_IN_URL: PageLink = '/date-child-moved-in';
-export const APPLICANT_1_PERSONAL_DETAILS: PageLink = '/your-personal-details';
-export const APPLICANT_1_CONTACT_DETAILS: PageLink = '/your-contact-details';
-export const APPLICANT_1_IDENTITY_DOCUMENTS: PageLink = '/your-identity-documents';
-
 export const APPLYING_WITH_URL: PageLink = '/applying-with';
+export const DATE_CHILD_MOVED_IN_URL: PageLink = '/date-child-moved-in';
+export const APPLICANT_1_PERSONAL_DETAILS: PageLink = '/applicant1/personal-details';
+export const APPLICANT_1_CONTACT_DETAILS: PageLink = '/applicant1/contact-details';
+export const APPLICANT_1_IDENTITY_DOCUMENTS: PageLink = '/applicant1/identity-documents';
+
 export const HAS_RELATIONSHIP_BROKEN_URL: PageLink = '/irretrievable-breakdown';
 export const RELATIONSHIP_NOT_BROKEN_URL: PageLink = '/relationship-not-broken';
 
