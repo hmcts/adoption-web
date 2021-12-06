@@ -97,17 +97,17 @@ export type StepWithContent = Step & {
   view: string;
 };
 
-const getStepsWithContent = (sequence: Step[], isApplicant1 = false): StepWithContent[] => {
-  const dir = __dirname + (isApplicant1 ? '/applicant1' : '');
+const getStepsWithContent = (sequence: Step[], subDir = ''): StepWithContent[] => {
+  const dir = __dirname;
 
   const results: StepWithContent[] = [];
   for (const step of sequence) {
-    const stepDir = `${dir}${step.url}`;
+    const stepDir = `${dir}${step.url.startsWith(subDir) ? step.url : `${subDir}${step.url}`}`;
     const { content, view } = getStepFiles(stepDir);
     results.push({ stepDir, ...step, ...content, view });
   }
   return results;
 };
 
-export const stepsWithContentApplicant1 = getStepsWithContent(applicant1Sequence, true);
+export const stepsWithContentApplicant1 = getStepsWithContent(applicant1Sequence, '/applicant1');
 export const stepsWithContent = [...stepsWithContentApplicant1];
