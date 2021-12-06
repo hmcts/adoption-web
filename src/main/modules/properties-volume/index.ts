@@ -16,9 +16,11 @@ export class PropertiesVolume {
       this.setSecret('secrets.adoption.redis-access-key', 'session.redis.key');
       this.setSecret('secrets.adoption.redis-access-key', 'session.secret');
       this.setSecret('secrets.adoption.s2s-secret', 'services.authProvider.secret');
+      this.setSecret('secrets.adoption.postcode-lookup-token', 'services.postcodeLookup.token');
     } else {
       this.setLocalSecret('idam-secret', 'services.idam.clientSecret');
       this.setLocalSecret('s2s-secret', 'services.authProvider.secret');
+      this.setLocalSecret('postcode-lookup-token', 'services.postcodeLookup.token');
       // this.setLocalSecret('idam-systemupdate-username', 'services.idam.systemUsername');
       // this.setLocalSecret('idam-systemupdate-password', 'services.idam.systemPassword');
       // this.setLocalSecret('e2e-test-user-password', 'e2e.userTestPassword');
@@ -36,7 +38,6 @@ export class PropertiesVolume {
    */
   private setLocalSecret(secret: string, toPath: string): void {
     const result = execSync(`az keyvault secret show --vault-name adoption-aat -o tsv --query value --name ${secret}`);
-
     set(config, toPath, result.toString().replace('\n', ''));
   }
 }
