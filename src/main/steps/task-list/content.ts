@@ -1,5 +1,4 @@
 import { TranslationFn } from '../../app/controller/GetController';
-import { FormContent } from '../../app/form/Form';
 import * as urls from '../urls';
 
 import { isApplyingWithComplete } from './utils';
@@ -100,16 +99,6 @@ const cy = content => ({
   urls,
 });
 
-export const form: FormContent = {
-  fields: {},
-  submit: {
-    text: l => l.continue,
-  },
-  saveAsDraft: {
-    text: l => l.saveAsDraft,
-  },
-};
-
 const languages = {
   en,
   cy,
@@ -119,6 +108,5 @@ export const generateContent: TranslationFn = content => {
   const translations = languages[content.language](content);
   return {
     ...translations,
-    form,
   };
 };
