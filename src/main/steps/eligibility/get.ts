@@ -1,6 +1,6 @@
-import { GetController } from '../../../app/controller/GetController';
+import { GetController } from '../../app/controller/GetController';
 
-import { generateContent } from './content';
+import { generateContent } from './start-eligibility/content';
 
 export class StartEligibilityGetController extends GetController {
   constructor() {

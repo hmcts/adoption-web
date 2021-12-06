@@ -60,3 +60,5 @@ export const HUB_PAGE: PageLink = '/hub-page';
 export const HOW_DO_YOU_WANT_TO_RESPOND: PageLink = '/how-do-you-want-to-respond';
 
 export const START_ELIGIBILITY_URL: PageLink = '/eligibility';
+export const CHECK_ELIGIBILITY_URL_UNDER_18: PageLink = '/under-18';
+export const CHECK_ELIGIBILITY_URL_MARRIED: PageLink = '/married';

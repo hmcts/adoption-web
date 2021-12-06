@@ -2,7 +2,7 @@ import { Application } from 'express';
 
 import { START_ELIGIBILITY_URL } from '../../steps/urls';
 
-import { StartEligibilityGetController } from './start-eligibility/get';
+import { StartEligibilityGetController } from './get';
 
 export class Routes {
   public enableFor(app: Application): void {
