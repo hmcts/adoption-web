@@ -6,7 +6,7 @@ const en = () => {
   const invalid = 'You have entered an invalid character, like a number. Enter your name using letters only.';
   return {
     section: 'Primary applicant',
-    title: 'What is your full name?',
+    title: "What's your full name?",
     fullName: 'Your full name',
     errors: {
       applicant1FullName: {
@@ -22,7 +22,7 @@ const cy = () => {
     'You have entered an invalid character, like a number. Enter your name using letters only. (in Welsh)';
   return {
     section: 'Primary applicant (in Welsh)',
-    title: 'What is your full name? (in Welsh)',
+    title: "What's your full name? (in Welsh)",
     FullName: 'Your full name (in Welsh)',
     errors: {
       applicant1FullName: {
