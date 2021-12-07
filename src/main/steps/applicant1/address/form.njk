@@ -1,0 +1,7 @@
+{% extends "common/form/form.njk"%}
+
+{% block after_fields %}
+  <p id="enterUkPostcode" class="govuk-body hidden">
+    <a href="#" data-link="resetPostcodeLookup" class="govuk-link">{{ enterUkPostcode }}</a>
+  </p>
+{% endblock %}

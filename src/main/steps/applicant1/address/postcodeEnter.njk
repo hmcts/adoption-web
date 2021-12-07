@@ -1,0 +1,50 @@
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+<div id="enterPostcode" class="hidden">
+  <form id="postcodeLookup">
+    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+
+    {{ govukInput({
+      id: "postcode",
+      name: "postcode",
+      classes: "govuk-input--width-10",
+      label: {
+        text: enterPostcode
+      }
+    }) }}
+
+    {{ govukButton({
+      attributes: {
+        id: "findAddressButton"
+      },
+      text: findAddress,
+      type: "submit",
+      preventDoubleClick: true
+    }) }}
+  </form>
+
+  {# TODO uncomment this when international address fields to be captured #}
+  {# <p class="govuk-body">
+    <a href="?postcode=" id="cannot-enter-uk-postcode" class="govuk-link">{{ notUK }}</a>
+  </p> #}
+</div>
+
+<script id="addressFieldLabels" type="application/json">
+{
+  "uk": {
+    "line1": "{{ buildingStreet | safe }}",
+    "line2": "",
+    "town": "{{ town | safe }}",
+    "county": "{{ county | safe }}",
+    "postcode": "{{ postcode | safe }}"
+  },
+  "international": {
+    "line1": "{{ line1 | safe }}",
+    "line2": "{{ line2Optional | safe }}",
+    "town": "{{ townOptional | safe }}",
+    "county": "{{ countyOptional | safe }}",
+    "postcode": "{{ postcodeOptional | safe }}"
+  }
+}
+</script>

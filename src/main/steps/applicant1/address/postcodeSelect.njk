@@ -1,0 +1,26 @@
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+
+<div id="selectAddress" class="hidden">
+  <h2 class="govuk-heading-m">{{ postcode }}</h2>
+  <p class="govuk-body">
+    <strong id="userPostcode" class="govuk-label govuk-!-font-weight-bold">{{ userCase.applicant1AddressPostcode }}</strong>
+    <a href="#" data-link="resetPostcodeLookup" class="govuk-link" aria-label="{{ change }} {{ postcode }}">{{ change }}</a>
+  </p>
+
+  {{ govukSelect({
+    id: "selectAddressInput",
+    name: "selectAddress",
+    classes: "govuk-!-width-three-quarters",
+    label: {
+      text: selectAddress
+    },
+    items: [{attributes: {id:"totalAddressesFound"}, value: -1, text: addressesFound(0), selected: true}],
+    attributes: {
+      autocomplete: "off"
+    }
+  }) }}
+
+  <p class="govuk-body">
+    <a href="#" id="cannotFindAddress" class="govuk-link">{{ cannotFindAddress }}</a>
+  </p>
+</div>
