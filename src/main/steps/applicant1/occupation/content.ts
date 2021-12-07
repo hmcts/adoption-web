@@ -60,7 +60,21 @@ const languages = {
 
 export const generateContent: TranslationFn = content => {
   const translations = languages[content.language]();
+  const warningText = {
+    text: 'This information will appear on the adoption certificate.',
+    iconFallbackText: 'Warning',
+  };
+  const details = {
+    summaryText: "I'm not working at the moment",
+    text: `If you’re unemployed, say what your occupation was when you were working. For example, 'Unemployed administrative assistant'.
+    
+    If you’re retired, say that you’re retired and what your occupation was when you were working. For example, ‘Retired hairdresser’.
+    
+    If you’re a full time parent, enter ‘Full time parent’.`,
+  };
   return {
+    warningText,
+    details,
     ...translations,
     form,
   };
