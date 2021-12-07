@@ -119,7 +119,7 @@ export interface FormContent {
     text: Label;
     classes?: string;
   };
-  saveAsDraft: {
+  saveAsDraft?: {
     text: Label;
     classes?: string;
   };
