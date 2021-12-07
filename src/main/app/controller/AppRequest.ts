@@ -20,7 +20,7 @@ export interface AppRequest<T = Partial<Case>> extends Request {
 export interface AppSession extends Session {
   user: UserDetails;
   userCase: CaseWithId;
-  // eligibility: CaseWithId create new interface object below and store answers in that object;
+  eligibility: Eligibility;
   lang: string | undefined;
   errors: FormError[] | undefined;
 }
@@ -31,4 +31,9 @@ export interface UserDetails {
   email: string;
   givenName: string;
   familyName: string;
+}
+
+export interface Eligibility {
+  under18Eligible?: string;
+  marriedEligible?: string;
 }

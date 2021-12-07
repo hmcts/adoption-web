@@ -8,19 +8,19 @@ const en = () => ({
   one: 'Yes',
   two: 'No',
   errors: {
-    checkEligible: {
+    marriedEligible: {
       required: 'Select whether the child has ever been married or in a civil partnership',
     },
   },
 });
 
 const cy = () => ({
-  section: 'Applicant details (in welsh)',
+  section: "Check you're eligible to adopt (in welsh)",
   title: 'Has the child ever been married or in a civil partnership? (in welsh)',
   one: 'Yes (in welsh)',
   two: 'No (in welsh)',
   errors: {
-    checkEligible: {
+    marriedEligible: {
       required: 'Select whether the child has ever been married or in a civil partnership (in welsh)',
     },
   },
@@ -28,10 +28,10 @@ const cy = () => ({
 
 export const form: FormContent = {
   fields: {
-    checkEligible: {
+    marriedEligible: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.title,
+      label: l => l.label,
       section: l => l.section,
       labelHidden: false,
       values: [

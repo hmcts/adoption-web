@@ -2,6 +2,7 @@ import { capitalize } from 'lodash';
 
 import { CaseWithId } from '../../app/case/case';
 import { ApplicationType, Gender } from '../../app/case/definition';
+import { Eligibility } from '../../app/controller/AppRequest';
 import { PageContent, TranslationFn } from '../../app/controller/GetController';
 
 const en = {
@@ -252,6 +253,7 @@ export type CommonContent = typeof en & {
   selectedGender: Gender;
   isJointApplication: boolean;
   referenceNumber?: string;
+  eligibility?: Eligibility;
 };
 
 export type Language = 'en' | 'cy';

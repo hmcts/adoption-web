@@ -3,43 +3,40 @@ import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
-  section: 'Applicant details',
-  title: 'Are you applying on your own, or with someone else?',
-  one: "I'm applying on my own",
-  two: "I'm applying with my spouse or civil partner",
-  three: "I'm applying with someone who is not my spouse or civil partner",
+  section: "Check you're eligible to adopt",
+  title: 'Will the child be under 18 years old on the date you submit your application?',
+  one: 'Yes',
+  two: 'No',
   errors: {
-    applyingWith: {
-      required: 'Select the number of people applying to adopt',
+    under18Eligible: {
+      required: 'Select whether the child will be under 18 when you submit the application',
     },
   },
 });
 
 const cy = () => ({
-  section: 'Applicant details (in welsh)',
-  title: 'Are you applying on your own, or with someone else?(in welsh)',
-  one: "I'm applying on my own (in welsh)",
-  two: "I'm applying with my spouse or civil partner (in welsh)",
-  three: "I'm applying with someone who is not my spouse or civil partner (in welsh)",
+  section: "Check you're eligible to adopt (in welsh)",
+  title: 'Will the child be under 18 years old on the date you submit your application? (in welsh)',
+  one: 'Yes (in welsh)',
+  two: 'No (in welsh)',
   errors: {
-    applyingWith: {
-      required: 'Select the number of people applying to adopt (in welsh)',
+    under18Eligible: {
+      required: 'Select whether the child will be under 18 when you submit the application (in welsh)',
     },
   },
 });
 
 export const form: FormContent = {
   fields: {
-    applyingWith: {
+    under18Eligible: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.title,
+      label: l => l.label,
       section: l => l.section,
       labelHidden: false,
       values: [
-        { label: l => l.one, value: 'alone' },
-        { label: l => l.two, value: 'withSpouseOrCivilPartner' },
-        { label: l => l.three, value: 'withSomeoneElse' },
+        { label: l => l.one, value: 'yes' },
+        { label: l => l.two, value: 'no' },
       ],
       validator: value => isFieldFilledIn(value),
     },
@@ -48,7 +45,7 @@ export const form: FormContent = {
     text: l => l.continue,
   },
   saveAsDraft: {
-    text: l => l.saveAsDraft,
+    text: '',
   },
 };
 
