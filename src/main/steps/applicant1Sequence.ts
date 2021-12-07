@@ -4,8 +4,12 @@ import { isLessThanAYear } from '../app/form/validation';
 
 import {
   APPLICANT_1_CONTACT_DETAILS,
+  APPLICANT_1_DOB,
+  APPLICANT_1_FULL_NAME,
   APPLICANT_1_IDENTITY_DOCUMENTS,
-  APPLICANT_1_PERSONAL_DETAILS,
+  APPLICANT_1_NATIONALITY,
+  APPLICANT_1_OCCUPATION,
+  APPLICANT_1_OTHER_NAMES,
   APPLYING_WITH_URL,
   CERTIFICATE_URL,
   DATE_CHILD_MOVED_IN_URL,
@@ -49,10 +53,30 @@ export const applicant1Sequence: Step[] = [
   {
     url: DATE_CHILD_MOVED_IN_URL,
     showInSection: Sections.AboutPartnership,
-    getNextStep: () => APPLICANT_1_PERSONAL_DETAILS,
+    getNextStep: () => APPLICANT_1_FULL_NAME,
   },
   {
-    url: APPLICANT_1_PERSONAL_DETAILS,
+    url: APPLICANT_1_FULL_NAME,
+    showInSection: Sections.AboutPartnership,
+    getNextStep: () => APPLICANT_1_OTHER_NAMES,
+  },
+  {
+    url: APPLICANT_1_OTHER_NAMES,
+    showInSection: Sections.AboutPartnership,
+    getNextStep: () => APPLICANT_1_DOB,
+  },
+  {
+    url: APPLICANT_1_DOB,
+    showInSection: Sections.AboutPartnership,
+    getNextStep: () => APPLICANT_1_NATIONALITY,
+  },
+  {
+    url: APPLICANT_1_NATIONALITY,
+    showInSection: Sections.AboutPartnership,
+    getNextStep: () => APPLICANT_1_OCCUPATION,
+  },
+  {
+    url: APPLICANT_1_OCCUPATION,
     showInSection: Sections.AboutPartnership,
     getNextStep: () => APPLICANT_1_CONTACT_DETAILS,
   },

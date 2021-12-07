@@ -19,7 +19,11 @@ export const TASK_LIST_URL: PageLink = '/task-list';
 
 export const APPLYING_WITH_URL: PageLink = '/applying-with';
 export const DATE_CHILD_MOVED_IN_URL: PageLink = '/date-child-moved-in';
-export const APPLICANT_1_PERSONAL_DETAILS: PageLink = '/applicant1/personal-details';
+export const APPLICANT_1_FULL_NAME: PageLink = '/applicant1/full-name';
+export const APPLICANT_1_OTHER_NAMES: PageLink = '/applicant1/other-names';
+export const APPLICANT_1_DOB: PageLink = '/applicant1/dob';
+export const APPLICANT_1_NATIONALITY: PageLink = '/applicant1/nationality';
+export const APPLICANT_1_OCCUPATION: PageLink = '/applicant1/occupation';
 export const APPLICANT_1_CONTACT_DETAILS: PageLink = '/applicant1/contact-details';
 export const APPLICANT_1_IDENTITY_DOCUMENTS: PageLink = '/applicant1/identity-documents';
 
