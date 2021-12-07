@@ -6,11 +6,12 @@ const en = () => {
   const invalid = 'You have entered an invalid character, like a number. Enter your name using letters only.';
   return {
     section: 'Primary applicant',
-    title: "What's your full name?",
-    fullName: 'Your full name',
+    title: "What's your occupation?",
+    occupation:
+      'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’.',
     errors: {
-      applicant1FullName: {
-        required: 'You have not entered your full name. Enter it before continuing.',
+      applicant1Occupation: {
+        required: 'You have not entered your occupation. Enter it before continuing.',
         invalid,
       },
     },
@@ -22,11 +23,12 @@ const cy = () => {
     'You have entered an invalid character, like a number. Enter your name using letters only. (in Welsh)';
   return {
     section: 'Primary applicant (in Welsh)',
-    title: "What's your full name? (in Welsh)",
-    FullName: 'Your full name (in Welsh)',
+    title: "What's your occupation? (in Welsh)",
+    occupation:
+      'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’. (in Welsh)',
     errors: {
-      applicant1FullName: {
-        required: 'You have not entered your full name. Enter it before continuing. (in Welsh)',
+      applicant1Occupation: {
+        required: 'You have not entered your occupation. Enter it before continuing. (in Welsh)',
         invalid,
       },
     },
@@ -35,9 +37,9 @@ const cy = () => {
 
 export const form: FormContent = {
   fields: {
-    applicant1FullName: {
+    applicant1Occupation: {
       type: 'text',
-      label: l => l.FullName,
+      label: l => l.occupation,
       labelSize: 'normal',
       classes: 'govuk-input--width-20',
       validator: input => isFieldFilledIn(input) || isFieldLetters(input),
