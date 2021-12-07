@@ -9,7 +9,7 @@ const en = () => {
     title: "What's your full name?",
     fullName: 'Your full name',
     errors: {
-      applicant1FullName: {
+      applicantFullName: {
         required: 'You have not entered your full name. Enter it before continuing.',
         invalid,
       },
@@ -23,9 +23,9 @@ const cy = () => {
   return {
     section: 'Primary applicant (in Welsh)',
     title: "What's your full name? (in Welsh)",
-    FullName: 'Your full name (in Welsh)',
+    fullName: 'Your full name (in Welsh)',
     errors: {
-      applicant1FullName: {
+      applicantFullName: {
         required: 'You have not entered your full name. Enter it before continuing. (in Welsh)',
         invalid,
       },
@@ -35,9 +35,9 @@ const cy = () => {
 
 export const form: FormContent = {
   fields: {
-    applicant1FullName: {
+    applicantFullName: {
       type: 'text',
-      label: l => l.FullName,
+      label: l => l.fullName,
       labelSize: 'normal',
       classes: 'govuk-input--width-20',
       validator: input => isFieldFilledIn(input) || isFieldLetters(input),
