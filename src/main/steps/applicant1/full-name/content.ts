@@ -2,36 +2,29 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn, isFieldLetters } from '../../../app/form/validation';
 
-const en = () => {
-  const invalid = 'You have entered an invalid character, like a number. Enter your name using letters only.';
-  return {
-    section: 'Primary applicant',
-    title: "What's your full name?",
-    fullName: 'Your full name',
-    errors: {
-      applicantFullName: {
-        required: 'You have not entered your full name. Enter it before continuing.',
-        invalid,
-      },
+const en = () => ({
+  section: 'Primary applicant',
+  title: "What's your full name?",
+  fullName: 'Your full name',
+  errors: {
+    applicantFullName: {
+      required: 'You have not entered your full name. Enter it before continuing.',
+      invalid: 'You have entered an invalid character, like a number. Enter your name using letters only.',
     },
-  };
-};
+  },
+});
 
-const cy = () => {
-  const invalid =
-    'You have entered an invalid character, like a number. Enter your name using letters only. (in Welsh)';
-  return {
-    section: 'Primary applicant (in Welsh)',
-    title: "What's your full name? (in Welsh)",
-    fullName: 'Your full name (in Welsh)',
-    errors: {
-      applicantFullName: {
-        required: 'You have not entered your full name. Enter it before continuing. (in Welsh)',
-        invalid,
-      },
+const cy = () => ({
+  section: 'Primary applicant (in Welsh)',
+  title: "What's your full name? (in Welsh)",
+  fullName: 'Your full name (in Welsh)',
+  errors: {
+    applicantFullName: {
+      required: 'You have not entered your full name. Enter it before continuing. (in Welsh)',
+      invalid: 'You have entered an invalid character, like a number. Enter your name using letters only. (in Welsh)',
     },
-  };
-};
+  },
+});
 
 export const form: FormContent = {
   fields: {
@@ -56,10 +49,7 @@ const languages = {
   cy,
 };
 
-export const generateContent: TranslationFn = content => {
-  const translations = languages[content.language]();
-  return {
-    ...translations,
-    form,
-  };
-};
+export const generateContent: TranslationFn = content => ({
+  ...languages[content.language](),
+  form,
+});

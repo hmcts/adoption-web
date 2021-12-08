@@ -58,26 +58,21 @@ const languages = {
   cy,
 };
 
-export const generateContent: TranslationFn = content => {
-  const translations = languages[content.language]();
-  const warningText = {
+export const generateContent: TranslationFn = content => ({
+  warningText: {
     text: 'This information will appear on the adoption certificate.',
     iconFallbackText: 'Warning',
-  };
-  const details = {
+  },
+  details: {
     summaryText: "I'm not working at the moment",
     html: `If you’re unemployed, say what your occupation was when you were working. For example, 'Unemployed administrative assistant'.
-    <br>
-    <br>
-    If you’re retired, say that you’re retired and what your occupation was when you were working. For example, ‘Retired hairdresser’.
-    <br>
-    <br>
-    If you’re a full time parent, enter ‘Full time parent’.`,
-  };
-  return {
-    warningText,
-    details,
-    ...translations,
-    form,
-  };
-};
+      <br>
+      <br>
+      If you’re retired, say that you’re retired and what your occupation was when you were working. For example, ‘Retired hairdresser’.
+      <br>
+      <br>
+      If you’re a full time parent, enter ‘Full time parent’.`,
+  },
+  ...languages[content.language](),
+  form,
+});
