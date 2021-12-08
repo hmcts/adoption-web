@@ -28,3 +28,14 @@ section {
 .hidden {
   display: none;
 }
+
+.float-left {
+  margin-bottom: 10px !important;
+  p {
+    float: left;
+  }
+  a {
+    float: left;
+    padding-left: 20px;
+  }
+}

@@ -26,12 +26,14 @@ export class GetController {
     const language = this.getPreferredLanguage(req) as Language;
     const isDivorce = res.locals.serviceType === DivorceOrDissolution.DIVORCE;
     const userCase = req.session?.userCase;
+    const addresses = req.session?.addresses;
     const content = generatePageContent({
       language,
       pageContent: this.content,
       isDivorce,
       userCase,
       userEmail: req.session?.user?.email,
+      addresses,
     });
 
     const sessionErrors = req.session?.errors || [];

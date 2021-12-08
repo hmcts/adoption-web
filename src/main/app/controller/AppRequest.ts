@@ -22,6 +22,7 @@ export interface AppSession extends Session {
   userCase: CaseWithId;
   lang: string | undefined;
   errors: FormError[] | undefined;
+  addresses: [];
 }
 
 export interface UserDetails {
