@@ -38,7 +38,7 @@ export const applicant1Sequence: Step[] = [
   {
     url: APPLYING_WITH_URL,
     showInSection: Sections.AboutApplicant1,
-    getNextStep: () => APPLICANT_1_ADDRESS,
+    getNextStep: () => TASK_LIST_URL,
   },
   {
     url: DATE_CHILD_MOVED_IN_URL,
