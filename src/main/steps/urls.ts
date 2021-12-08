@@ -63,5 +63,4 @@ export const ELIGIBILITY_URL: PageLink = '/eligibility';
 export const START_ELIGIBILITY_URL: PageLink = `${ELIGIBILITY_URL}/start`;
 export const CHECK_ELIGIBILITY_URL_UNDER_18: PageLink = `${ELIGIBILITY_URL}/under-18`;
 export const CHECK_ELIGIBILITY_URL_MARRIED: PageLink = `${ELIGIBILITY_URL}/married`;
-export const INELIGIBLE_TO_ADOPT_OVER_18: PageLink = `${ELIGIBILITY_URL}/cannot-apply-over-18`;
-export const INELIGIBLE_TO_ADOPT_ALREADY_MARRIED: PageLink = `${ELIGIBILITY_URL}/cannot-apply-married`;
+export const INELIGIBLE_TO_ADOPT: PageLink = `${ELIGIBILITY_URL}/cannot-apply`;

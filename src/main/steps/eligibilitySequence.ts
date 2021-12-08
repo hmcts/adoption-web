@@ -4,8 +4,7 @@ import { Eligibility as appRequestEligibility } from '../app/controller/AppReque
 import {
   CHECK_ELIGIBILITY_URL_MARRIED,
   CHECK_ELIGIBILITY_URL_UNDER_18,
-  INELIGIBLE_TO_ADOPT_ALREADY_MARRIED,
-  INELIGIBLE_TO_ADOPT_OVER_18,
+  INELIGIBLE_TO_ADOPT,
   PageLink,
   SIGN_IN_URL,
   START_ELIGIBILITY_URL,
@@ -44,12 +43,16 @@ export const eligibilitySequence: Step[] = [
   {
     url: CHECK_ELIGIBILITY_URL_UNDER_18,
     showInSection: Sections.Eligibility,
-    getNextStep: data =>
-      data.under18Eligible === YesOrNo.YES ? CHECK_ELIGIBILITY_URL_MARRIED : INELIGIBLE_TO_ADOPT_OVER_18,
+    getNextStep: data => (data.under18Eligible === YesOrNo.YES ? CHECK_ELIGIBILITY_URL_MARRIED : INELIGIBLE_TO_ADOPT),
   },
   {
     url: CHECK_ELIGIBILITY_URL_MARRIED,
     showInSection: Sections.Eligibility,
-    getNextStep: data => (data.marriedEligible === YesOrNo.NO ? SIGN_IN_URL : INELIGIBLE_TO_ADOPT_ALREADY_MARRIED),
+    getNextStep: data => (data.marriedEligible === YesOrNo.NO ? SIGN_IN_URL : INELIGIBLE_TO_ADOPT),
+  },
+  {
+    url: INELIGIBLE_TO_ADOPT,
+    showInSection: Sections.Eligibility,
+    getNextStep: () => SIGN_IN_URL,
   },
 ];

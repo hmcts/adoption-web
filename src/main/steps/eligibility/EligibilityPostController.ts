@@ -20,9 +20,9 @@ export default class EligibilityPostController<T extends AnyObject> {
     if (!req.session.eligibility) {
       req.session.eligibility = {};
     }
-    console.log(req.session.eligibility);
     console.log(formData);
     Object.assign(req.session.eligibility, formData);
+    console.log(req.session.eligibility);
     req.session.errors = form.getErrors(formData);
 
     const nextUrl = req.session.errors.length > 0 ? req.url : getNextEligibilityStepUrl(req, req.session.eligibility);
