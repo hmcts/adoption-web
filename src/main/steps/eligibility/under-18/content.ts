@@ -1,3 +1,4 @@
+import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -7,6 +8,8 @@ const en = () => ({
   title: 'Will the child be under 18 years old on the date you submit your application?',
   one: 'Yes',
   two: 'No',
+  under18No:
+    'You can only apply to adopt a child if they are under 18 years old on the date your application is submitted.',
   errors: {
     under18Eligible: {
       required: 'Select whether the child will be under 18 when you submit the application',
@@ -19,6 +22,8 @@ const cy = () => ({
   title: 'Will the child be under 18 years old on the date you submit your application? (in welsh)',
   one: 'Yes (in welsh)',
   two: 'No (in welsh)',
+  under18No:
+    'You can only apply to adopt a child if they are under 18 years old on the date your application is submitted. (in welsh)',
   errors: {
     under18Eligible: {
       required: 'Select whether the child will be under 18 when you submit the application (in welsh)',
@@ -35,8 +40,8 @@ export const form: FormContent = {
       section: l => l.section,
       labelHidden: false,
       values: [
-        { label: l => l.one, value: 'yes' },
-        { label: l => l.two, value: 'no' },
+        { label: l => l.one, value: YesOrNo.YES },
+        { label: l => l.two, value: YesOrNo.NO, conditionalText: l => `<p class="govuk-label">${l.under18No}</p>` },
       ],
       validator: value => isFieldFilledIn(value),
     },

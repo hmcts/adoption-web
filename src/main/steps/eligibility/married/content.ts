@@ -1,3 +1,4 @@
+import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -7,6 +8,7 @@ const en = () => ({
   title: 'Has the child ever been married or in a civil partnership?',
   one: 'Yes',
   two: 'No',
+  marriedYes: "You can only apply to adopt a child if they've not been married or in a civil partnership.",
   errors: {
     marriedEligible: {
       required: 'Select whether the child has ever been married or in a civil partnership',
@@ -19,6 +21,7 @@ const cy = () => ({
   title: 'Has the child ever been married or in a civil partnership? (in welsh)',
   one: 'Yes (in welsh)',
   two: 'No (in welsh)',
+  marriedYes: "You can only apply to adopt a child if they've not been married or in a civil partnership. (in welsh)",
   errors: {
     marriedEligible: {
       required: 'Select whether the child has ever been married or in a civil partnership (in welsh)',
@@ -35,8 +38,8 @@ export const form: FormContent = {
       section: l => l.section,
       labelHidden: false,
       values: [
-        { label: l => l.one, value: 'yes' },
-        { label: l => l.two, value: 'no' },
+        { label: l => l.one, value: YesOrNo.YES, conditionalText: l => `<p class="govuk-label">${l.marriedYes}</p>` },
+        { label: l => l.two, value: YesOrNo.NO },
       ],
       validator: value => isFieldFilledIn(value),
     },
