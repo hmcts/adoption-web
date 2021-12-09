@@ -6,7 +6,7 @@ import { getCaseApi } from '../../app/case/CaseApi';
 import { DivorceOrDissolution, State, YesOrNo } from '../../app/case/definition';
 // import { ApplicationType, State } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
-import { CALLBACK_URL, SIGN_IN_URL, SIGN_OUT_URL } from '../../steps/urls';
+import { CALLBACK_URL, ELIGIBILITY_URL, SIGN_IN_URL, SIGN_OUT_URL } from '../../steps/urls';
 
 //TODO remove applicant2 related stuff
 /**
@@ -38,6 +38,9 @@ export class OidcMiddleware {
 
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
+        if (req.path.startsWith(ELIGIBILITY_URL)) {
+          return next();
+        }
         if (req.session?.user) {
           res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
@@ -60,9 +63,8 @@ export class OidcMiddleware {
           // req.session.userCase =
           //   req.session.userCase || (await req.locals.api.getOrCreateCase(res.locals.serviceType, req.session.user));
           return next();
-        } else {
-          res.redirect(SIGN_IN_URL);
         }
+        res.redirect(SIGN_IN_URL);
       })
     );
   }
