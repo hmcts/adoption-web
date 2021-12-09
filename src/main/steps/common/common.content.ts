@@ -2,7 +2,6 @@ import { capitalize } from 'lodash';
 
 import { CaseWithId } from '../../app/case/case';
 import { ApplicationType, Gender } from '../../app/case/definition';
-import { Eligibility } from '../../app/controller/AppRequest';
 import { PageContent, TranslationFn } from '../../app/controller/GetController';
 
 const en = {
@@ -185,14 +184,12 @@ export const generatePageContent = ({
   isDivorce = true,
   userCase,
   userEmail,
-  eligibility,
 }: {
   language: Language;
   pageContent?: TranslationFn;
   isDivorce?: boolean;
   userCase?: Partial<CaseWithId>;
   userEmail?: string;
-  eligibility?: Eligibility;
 }): PageContent => {
   const commonTranslations: typeof en = language === 'en' ? en : cy;
   const serviceName = getServiceName(commonTranslations, isDivorce);
@@ -212,7 +209,6 @@ export const generatePageContent = ({
     userEmail,
     contactEmail,
     isJointApplication,
-    eligibility,
   };
 
   if (pageContent) {
@@ -256,7 +252,6 @@ export type CommonContent = typeof en & {
   selectedGender: Gender;
   isJointApplication: boolean;
   referenceNumber?: string;
-  eligibility?: Eligibility;
 };
 
 export type Language = 'en' | 'cy';
