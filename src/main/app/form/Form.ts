@@ -99,7 +99,7 @@ export class Form {
   }
 }
 
-type LanguageLookup = (lang: Record<string, never>) => string;
+export type LanguageLookup = (lang: Record<string, never>) => string;
 
 type Parser = (value: Record<string, unknown> | string[]) => void;
 
@@ -133,6 +133,7 @@ export interface FormOptions {
   type: string;
   label?: Label;
   section?: Label;
+  classes?: string;
   labelHidden?: boolean;
   labelSize?: string | null;
   hideError?: boolean;
@@ -145,7 +146,9 @@ export interface FormOptions {
 export interface FormInput {
   id?: string;
   name?: string;
+  type?: string;
   label: Label;
+  section?: Label;
   hint?: Label;
   subtext?: Label;
   classes?: string;
