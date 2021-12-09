@@ -30,7 +30,6 @@ export default class FindAddressPostController extends PostController<AnyObject>
           req.session.userCase.additionalName = '';
         }
       }
-      console.log(formData);
     }
 
     const nextUrl =
