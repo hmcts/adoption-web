@@ -1,12 +1,82 @@
+import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
+import { isFieldFilledIn } from '../../../app/form/validation';
 
-const en = () => ({});
+const en = () => ({
+  section: 'Primary applicant',
+  title: 'Have you ever legally been known by any other names?',
+  example: 'For example, your name before marriage.',
+  yes: 'Yes',
+  no: 'No',
+  errors: {
+    otherNames: {
+      required: 'Enter a name or choose no',
+    },
+    additionalName: {
+      required: 'Name cannot be empty',
+    },
+  },
+});
 
-const cy = () => ({});
+const cy = () => ({
+  section: 'Primary applicant (in Welsh)',
+  title: 'Have you ever legally been known by any other names? (in Welsh)',
+  example: 'For example, your name before marriage. (in Welsh)',
+  yes: 'Yes (in Welsh)',
+  no: 'No (in Welsh)',
+  errors: {
+    otherNames: {
+      required: 'Enter a name or choose no (in Welsh)',
+    },
+    additionalName: {
+      required: 'Name cannot be empty (in Welsh)',
+    },
+  },
+});
 
 export const form: FormContent = {
-  fields: {},
+  fields: {
+    otherNames: {
+      type: 'radios',
+      classes: 'govuk-radios',
+      label: l => l.example,
+      labelSize: 's',
+      section: l => l.section,
+      values: [
+        {
+          label: l => l.yes,
+          value: YesOrNo.YES,
+          subFields: {
+            nameList: {
+              type: 'summarylist',
+              values: [],
+            },
+            additionalName: {
+              type: 'input',
+              label: 'Add your previous full name',
+              labelSize: 'small',
+              validator: value => isFieldFilledIn(value),
+              subtext: 'aa',
+            },
+            addButton: {
+              type: 'button',
+              label: 'Add',
+              classes: 'govuk-button--secondary',
+              value: 'addButton',
+            },
+            addAnotherName: {
+              type: 'details',
+              label: 'Add another name',
+              subtext: 'Example',
+            },
+          },
+        },
+        { label: l => l.no, value: YesOrNo.NO },
+      ],
+      validator: value => isFieldFilledIn(value),
+    },
+  },
   submit: {
     text: l => l.continue,
   },

@@ -158,6 +158,7 @@ export interface FormInput {
   warning?: Warning;
   conditionalText?: Label;
   subFields?: Record<string, FormField>;
+  items?: string[];
 }
 
 function isFormOptions(field: FormField): field is FormOptions {
