@@ -6,9 +6,9 @@ const en = content => ({
   title: 'You cannot apply to adopt',
   line1: `${
     content.eligibility.under18Eligible === YesOrNo.NO
-      ? "You cannot apply to adopt the child because they've been married or in a civil partnership."
+      ? 'You cannot apply to adopt the child because they’re 18 or over.'
       : content.eligibility.marriedEligible === YesOrNo.YES
-      ? 'another error'
+      ? "You cannot apply to adopt the child because they've been married or in a civil partnership."
       : 'some other error'
   }`,
 });
@@ -18,10 +18,10 @@ const cy = content => ({
   title: 'You cannot apply to adopt (in welsh)',
   line1: `${
     content.eligibility.under18Eligible === YesOrNo.NO
-      ? "You cannot apply to adopt the child because they've been married or in a civil partnership. (in welsh)"
+      ? 'You cannot apply to adopt the child because they’re 18 or over. (in welsh)'
       : content.eligibility.marriedEligible === YesOrNo.YES
-      ? 'another error (in welsh)'
-      : 'some other error (in welsh)'
+      ? "You cannot apply to adopt the child because they've been married or in a civil partnership. (in welsh)"
+      : 'some other error'
   }`,
 });
 
