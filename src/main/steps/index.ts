@@ -1,11 +1,12 @@
 import * as fs from 'fs';
 
 import { Case, CaseWithId } from '../app/case/case';
-import { AppRequest } from '../app/controller/AppRequest';
+import { AppRequest, Eligibility } from '../app/controller/AppRequest';
 import { TranslationFn } from '../app/controller/GetController';
 import { Form, FormContent } from '../app/form/Form';
 
 import { Step, applicant1Sequence } from './applicant1Sequence';
+import { Step as EligibilityStep, eligibilitySequence } from './eligibilitySequence';
 import { CHECK_ANSWERS_URL } from './urls';
 
 const stepForms: Record<string, Form> = {};
@@ -71,6 +72,14 @@ export const getNextStepUrl = (req: AppRequest, data: Partial<Case>): string => 
   return `${url}${queryString}`;
 };
 
+export const getNextEligibilityStepUrl = (req: AppRequest, data: Eligibility): string => {
+  const { path, queryString } = getPathAndQueryString(req);
+  const nextStep = [...eligibilitySequence].find(s => s.url === path);
+  const url = nextStep ? nextStep.getNextStep(data) : CHECK_ANSWERS_URL;
+
+  return `${url}${queryString}`;
+};
+
 const getUserSequence = () => {
   return applicant1Sequence;
 };
@@ -97,7 +106,7 @@ export type StepWithContent = Step & {
   view: string;
 };
 
-const getStepsWithContent = (sequence: Step[], subDir = ''): StepWithContent[] => {
+const getStepsWithContent = (sequence: Step[] | EligibilityStep[], subDir = ''): StepWithContent[] => {
   const dir = __dirname;
 
   const results: StepWithContent[] = [];
@@ -110,4 +119,5 @@ const getStepsWithContent = (sequence: Step[], subDir = ''): StepWithContent[] =
 };
 
 export const stepsWithContentApplicant1 = getStepsWithContent(applicant1Sequence, '/applicant1');
-export const stepsWithContent = [...stepsWithContentApplicant1];
+export const stepsWithContentEligibility = getStepsWithContent(eligibilitySequence, '/eligibility');
+export const stepsWithContent = [...stepsWithContentApplicant1, ...stepsWithContentEligibility];
