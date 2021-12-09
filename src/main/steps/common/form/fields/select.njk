@@ -2,8 +2,8 @@
 
 {{ 
   govukSelect({
+    id: field.id if field.id else fieldName,
     classes: field.classes or "govuk-!-width-three-quarters",
-    idPrefix: field.id if field.id else fieldName,
     name: fieldName,
     label: {
       text: selectAddress,

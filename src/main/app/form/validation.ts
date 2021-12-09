@@ -144,7 +144,6 @@ export const isValidAccessCode: Validator = value => {
 };
 
 export const isAddressSelected: Validator = value => {
-  console.log(value);
   if ((value as string).trim() === '-1') {
     return 'notSelected';
   }

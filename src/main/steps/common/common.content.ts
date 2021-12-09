@@ -115,7 +115,7 @@ const cy: typeof en = {
   govUk: 'GOV.UK',
   back: 'Back (in welsh)',
   continue: 'Save and continue (in welsh)',
-  change: 'Newid',
+  change: 'Change  (in welsh)',
   upload: 'Uwchlwytho',
   download: 'Llwytho i lawr',
   delete: 'Dileu',
