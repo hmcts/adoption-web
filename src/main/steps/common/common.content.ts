@@ -185,12 +185,14 @@ export const generatePageContent = ({
   isDivorce = true,
   userCase,
   userEmail,
+  eligibility,
 }: {
   language: Language;
   pageContent?: TranslationFn;
   isDivorce?: boolean;
   userCase?: Partial<CaseWithId>;
   userEmail?: string;
+  eligibility?: Eligibility;
 }): PageContent => {
   const commonTranslations: typeof en = language === 'en' ? en : cy;
   const serviceName = getServiceName(commonTranslations, isDivorce);
@@ -210,6 +212,7 @@ export const generatePageContent = ({
     userEmail,
     contactEmail,
     isJointApplication,
+    eligibility,
   };
 
   if (pageContent) {
