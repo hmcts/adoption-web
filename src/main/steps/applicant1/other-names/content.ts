@@ -48,16 +48,31 @@ export const form: FormContent = {
           label: l => l.yes,
           value: YesOrNo.YES,
           subFields: {
-            nameList: {
+            applicant1AdditionalNames: {
               type: 'summarylist',
-              values: [],
+              values: [{ label: 'aa', value: 'ee pet' }],
+              rows: {
+                rows: [
+                  {
+                    value: {
+                      text: 'Sarah Philips',
+                    },
+                    actions: {
+                      items: [
+                        {
+                          href: '#',
+                          text: 'Remove',
+                        },
+                      ],
+                    },
+                  },
+                ],
+              },
             },
             additionalName: {
               type: 'input',
               label: 'Add your previous full name',
               labelSize: 'small',
-              validator: value => isFieldFilledIn(value),
-              subtext: 'aa',
             },
             addButton: {
               type: 'button',

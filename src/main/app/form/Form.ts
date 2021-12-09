@@ -1,3 +1,4 @@
+import { SummaryListContent } from '../../steps/common/models/summaryListContent';
 import { Case, CaseDate, CaseWithId } from '../case/case';
 import { AnyObject } from '../controller/PostController';
 
@@ -158,7 +159,7 @@ export interface FormInput {
   warning?: Warning;
   conditionalText?: Label;
   subFields?: Record<string, FormField>;
-  items?: string[];
+  rows?: SummaryListContent;
 }
 
 function isFormOptions(field: FormField): field is FormOptions {
