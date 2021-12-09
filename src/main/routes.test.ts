@@ -48,15 +48,6 @@ jest.mock('./steps/task-list/get', () => {
   };
 });
 
-const mockPostcodeLookupController = jest.fn();
-jest.mock('./app/postcode/PostcodeLookupController', () => {
-  return {
-    PostcodeLookupController: jest.fn().mockImplementation(() => {
-      return { post: mockPostcodeLookupController };
-    }),
-  };
-});
-
 const mockKeepAliveController = jest.fn();
 jest.mock('./app/keepalive/KeepAliveController', () => {
   return {
@@ -88,7 +79,6 @@ describe('Routes', () => {
     expect(appMock.get).toHaveBeenCalledWith('/save-and-sign-out', mockSaveAndSignOutGetController);
     expect(appMock.get).toHaveBeenCalledWith('/timed-out', mockTimedOutGetController);
     expect(appMock.get).toHaveBeenCalledWith('/task-list', mockTaskListGetController);
-    expect(appMock.post).toHaveBeenCalledWith('/postcode-lookup', mockPostcodeLookupController);
     expect(appMock.get).toHaveBeenCalledWith('/keep-alive', mockKeepAliveController);
     expect(appMock.use).toHaveBeenCalledWith(mockNotFound);
   });

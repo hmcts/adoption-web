@@ -1,7 +1,6 @@
 import { CaseWithId } from '../app/case/case';
 
 import {
-  APPLICANT_1_ADDRESS,
   APPLICANT_1_CONTACT_DETAILS,
   APPLICANT_1_FIND_ADDRESS,
   APPLICANT_1_IDENTITY_DOCUMENTS,
@@ -60,11 +59,6 @@ export const applicant1Sequence: Step[] = [
   },
   {
     url: APPLICANT_1_IDENTITY_DOCUMENTS,
-    showInSection: Sections.AboutApplicant1,
-    getNextStep: () => TASK_LIST_URL,
-  },
-  {
-    url: APPLICANT_1_ADDRESS,
     showInSection: Sections.AboutApplicant1,
     getNextStep: () => TASK_LIST_URL,
   },
