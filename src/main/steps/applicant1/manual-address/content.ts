@@ -11,14 +11,14 @@ const en = () => ({
   postcode: 'Postcode',
   errors: {
     applicant1Address1: {
-      required: 'Enter your building and street address before continuing.',
+      required: 'Enter the first line of the address',
     },
     applicant1AddressTown: {
-      required: 'Enter your town or city before continuing.',
+      required: 'Enter the town or city',
     },
     applicant1AddressPostcode: {
-      required: 'You have not entered your postcode. Enter your postcode before continuing.',
-      invalid: 'You have not entered a valid UK postcode. Enter a valid UK postcode before continuing.',
+      required: 'Enter a valid postcode',
+      invalid: 'Enter a valid postcode',
     },
   },
 });
