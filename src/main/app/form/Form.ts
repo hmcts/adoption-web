@@ -52,11 +52,13 @@ export class Form {
       errors.push(...valuesErrors);
     }
     // if there are subfields and the current field is selected then check for errors in the subfields
-    else if (field.subFields && body[id] === field.value) {
-      const subFields = Object.entries(field.subFields);
-      const subFieldErrors = subFields.flatMap(([subId, subField]) => this.getErrorsFromField(body, subId, subField));
+    else if (field.subFields) {
+      if (body[id] === field.value || (body[id] && body[id].includes(field.value))) {
+        const subFields = Object.entries(field.subFields);
+        const subFieldErrors = subFields.flatMap(([subId, subField]) => this.getErrorsFromField(body, subId, subField));
 
-      errors.push(...subFieldErrors);
+        errors.push(...subFieldErrors);
+      }
     }
 
     return errors;

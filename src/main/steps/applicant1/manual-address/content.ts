@@ -56,7 +56,7 @@ export const form: FormContent = {
     applicant1Address2: {
       type: 'text',
       classes: 'govuk-label',
-      label: l => l.line2Optional,
+      label: '',
       labelSize: null,
     },
     applicant1AddressTown: {

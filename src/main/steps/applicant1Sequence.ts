@@ -55,7 +55,7 @@ export const applicant1Sequence: Step[] = [
   {
     url: APPLICANT_1_CONTACT_DETAILS,
     showInSection: Sections.AboutApplicant1,
-    getNextStep: () => APPLICANT_1_IDENTITY_DOCUMENTS,
+    getNextStep: () => TASK_LIST_URL,
   },
   {
     url: APPLICANT_1_IDENTITY_DOCUMENTS,
@@ -70,11 +70,11 @@ export const applicant1Sequence: Step[] = [
   {
     url: APPLICANT_1_SELECT_ADDRESS,
     showInSection: Sections.AboutApplicant1,
-    getNextStep: () => TASK_LIST_URL,
+    getNextStep: () => APPLICANT_1_CONTACT_DETAILS,
   },
   {
     url: APPLICANT_1_MANUAL_ADDRESS,
     showInSection: Sections.AboutApplicant1,
-    getNextStep: () => TASK_LIST_URL,
+    getNextStep: () => APPLICANT_1_CONTACT_DETAILS,
   },
 ];
