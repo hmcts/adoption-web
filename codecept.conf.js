@@ -83,7 +83,7 @@ exports.config = {
       fullPageScreenshots: true,
     },
   },
-  tests: './src/test/tests/*.js',
+  tests: './src/test/e2e/tests/*_test.js',
   teardownAll: require('./src/test/e2e/hooks/aggregate-metrics'),
   mocha: {
     reporterOptions: {

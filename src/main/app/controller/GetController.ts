@@ -27,6 +27,7 @@ export class GetController {
     const isDivorce = res.locals.serviceType === DivorceOrDissolution.DIVORCE;
     const userCase = req.session?.userCase;
     const addresses = req.session?.addresses;
+    const eligibility = req.session?.eligibility;
     const content = generatePageContent({
       language,
       pageContent: this.content,
@@ -34,6 +35,7 @@ export class GetController {
       userCase,
       userEmail: req.session?.user?.email,
       addresses,
+      eligibility,
     });
 
     const sessionErrors = req.session?.errors || [];
