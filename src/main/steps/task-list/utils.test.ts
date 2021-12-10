@@ -1,7 +1,7 @@
 import { CaseWithId } from '../../app/case/case';
 import { DivorceOrDissolution, State, YesOrNo } from '../../app/case/definition';
 
-import { isApplyingWithComplete } from './utils';
+import { getContactDetailsStatus, isApplyingWithComplete } from './utils';
 const userCase: CaseWithId = {
   id: '123',
   state: State.Draft,
@@ -30,6 +30,52 @@ describe('utils', () => {
       const isValid = isApplyingWithComplete(userCase);
 
       expect(isValid).toStrictEqual(true);
+    });
+  });
+
+  describe('getContactDetailsStatus', () => {
+    test.each([
+      { data: { applicant1Address1: 'MOCK_ADDRESS_1' }, expected: 'NOT_STARTED' },
+      { data: { applicant1Address1: 'MOCK_ADDRESS_1', applicant1AddressTown: ' MOCK_TOWN' }, expected: 'NOT_STARTED' },
+      {
+        data: {
+          applicant1Address1: 'MOCK_ADDRESS_1',
+          applicant1AddressTown: ' MOCK_TOWN',
+          applicant1AddressPostcode: 'MOCK_POSTCODE',
+        },
+        expected: 'IN_PROGRESS',
+      },
+      {
+        data: {
+          applicant1Address1: 'MOCK_ADDRESS_1',
+          applicant1AddressTown: ' MOCK_TOWN',
+          applicant1AddressPostcode: 'MOCK_POSTCODE',
+          applicant1ContactDetails: undefined,
+        },
+        expected: 'IN_PROGRESS',
+      },
+      {
+        data: {
+          applicant1Address1: 'MOCK_ADDRESS_1',
+          applicant1AddressTown: ' MOCK_TOWN',
+          applicant1AddressPostcode: 'MOCK_POSTCODE',
+          applicant1ContactDetails: ['email'],
+          applicant1EmailAddress: 'MOCK_EMAIL',
+        },
+        expected: 'COMPLETED',
+      },
+      {
+        data: {
+          applicant1Address1: 'MOCK_ADDRESS_1',
+          applicant1AddressTown: ' MOCK_TOWN',
+          applicant1AddressPostcode: 'MOCK_POSTCODE',
+          applicant1ContactDetails: ['phone'],
+          applicant1PhoneNumber: 'MOCK_PHONE',
+        },
+        expected: 'COMPLETED',
+      },
+    ])('should return correct status %o', async ({ data, expected }) => {
+      expect(getContactDetailsStatus({ ...userCase, ...data })).toBe(expected);
     });
   });
 });

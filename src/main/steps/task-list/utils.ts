@@ -23,7 +23,7 @@ export const getContactDetailsStatus = (userCase: CaseWithId): SectionStatus => 
   let contactDetailsAvailable = false;
   if (applicant1ContactDetails.length === 0) {
     contactDetailsAvailable = false;
-  } else {
+  } else if (applicant1ContactDetails) {
     contactDetailsAvailable = applicant1ContactDetails.every(
       item =>
         (item === ContactDetails.EMAIL && applicant1EmailAddress) ||
