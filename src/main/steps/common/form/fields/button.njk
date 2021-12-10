@@ -4,7 +4,7 @@
     id: field.id if field.id else fieldName,
     name: fieldName,   
     text: getContent(field.label),
-    classes: field.classes,
+    classes: field.classes + " govuk-!-margin-top-5",
     type: "submit",
     preventDoubleClick: true,
     value: field.value if field.value !== undefined

@@ -2,6 +2,7 @@ import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
+import { mapSummaryListRows } from '../../common/functions/mapsummarylistrows';
 
 const en = () => ({
   section: 'Primary applicant',
@@ -9,6 +10,10 @@ const en = () => ({
   example: 'For example, your name before marriage.',
   yes: 'Yes',
   no: 'No',
+  additionalName: 'Add your previous full name',
+  add: 'Add',
+  another: 'Add another name',
+  remove: 'Remove',
   errors: {
     otherNames: {
       required: 'Enter a name or choose no',
@@ -25,6 +30,10 @@ const cy = () => ({
   example: 'For example, your name before marriage. (in Welsh)',
   yes: 'Yes (in Welsh)',
   no: 'No (in Welsh)',
+  additionalName: 'Add your previous full name (in Welsh)',
+  add: 'Add (in Welsh)',
+  another: 'Add another name (in Welsh)',
+  remove: 'Remove (in Welsh)',
   errors: {
     otherNames: {
       required: 'Enter a name or choose no (in Welsh)',
@@ -50,40 +59,36 @@ export const form: FormContent = {
           subFields: {
             applicant1AdditionalNames: {
               type: 'summarylist',
-              values: [{ label: 'aa', value: 'ee pet' }],
-              rows: {
-                rows: [
-                  {
-                    value: {
-                      text: 'Sarah Philips',
-                    },
-                    actions: {
-                      items: [
-                        {
-                          href: '#',
-                          text: 'Remove',
-                        },
-                      ],
-                    },
-                  },
-                ],
-              },
+              values: [],
+              rows: mapSummaryListRows(['Name1', 'Name2'], ['Remove']),
             },
             additionalName: {
               type: 'input',
-              label: 'Add your previous full name',
+              label: l => l.additionalName,
               labelSize: 'small',
             },
             addButton: {
               type: 'button',
-              label: 'Add',
+              label: l => l.add,
               classes: 'govuk-button--secondary',
               value: 'addButton',
             },
             addAnotherName: {
               type: 'details',
-              label: 'Add another name',
-              subtext: 'Example',
+              label: l => l.another,
+              subFields: {
+                additionalName: {
+                  type: 'input',
+                  label: l => l.additionalName,
+                  labelSize: 'small',
+                },
+                addButton: {
+                  type: 'button',
+                  label: l => l.add,
+                  classes: 'govuk-button--secondary',
+                  value: 'addButton',
+                },
+              },
             },
           },
         },

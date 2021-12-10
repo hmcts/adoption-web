@@ -141,6 +141,7 @@ export interface FormOptions {
   attributes?: Partial<HTMLInputElement | HTMLTextAreaElement>;
   validator?: ValidationCheck;
   parser?: Parser;
+  rows?: SummaryListContent;
 }
 
 export interface FormInput {
@@ -159,7 +160,6 @@ export interface FormInput {
   warning?: Warning;
   conditionalText?: Label;
   subFields?: Record<string, FormField>;
-  rows?: SummaryListContent;
 }
 
 function isFormOptions(field: FormField): field is FormOptions {

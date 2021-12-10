@@ -1,13 +1,18 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
+import { mapSummaryListRows } from '../../common/functions/mapsummarylistrows';
 
 const en = () => ({
   section: 'Primary applicant',
   title: 'What is your nationality?',
   label: 'Select all options that are relevant to you.',
   british: 'British',
+  britishSubtext: 'including English, Scottish, Welsh and Northern Irish',
   irish: 'Irish',
   differentCountry: 'Citizen of a different country',
+  countryName: 'Country name',
+  add: 'Add',
+  another: 'Add another country',
   errors: {
     nationality: {
       required: 'Enter a name or choose no',
@@ -20,8 +25,12 @@ const cy = () => ({
   title: 'What is your nationality? (in Welsh)',
   label: 'Select all options that are relevant to you. (in Welsh)',
   british: 'British (in Welsh)',
+  britishSubtext: 'including English, Scottish, Welsh and Northern Irish (in Welsh)',
   irish: 'Irish (in Welsh)',
   differentCountry: 'Citizen of a different country (in Welsh)',
+  countryName: 'Country name (in Welsh)',
+  add: 'Add',
+  another: 'Add another country (in Welsh)',
   errors: {
     nationality: {
       required: 'Enter a name or choose no (in Welsh)',
@@ -39,7 +48,7 @@ export const form: FormContent = {
         {
           label: l => l.british,
           value: 'British',
-          hint: 'this should be below British',
+          hint: l => l.britishSubtext,
         },
         {
           label: l => l.irish,
@@ -47,7 +56,42 @@ export const form: FormContent = {
         },
         {
           label: l => l.differentCountry,
-          value: 'Other',
+          value: 'other',
+          subFields: {
+            applicant1AdditionalNames: {
+              type: 'summarylist',
+              values: [],
+              rows: mapSummaryListRows(['Country1', 'Country2'], ['Remove']),
+            },
+            countryName: {
+              type: 'text',
+              label: l => l.countryName,
+              labelSize: 'small',
+            },
+            addButton: {
+              type: 'button',
+              label: l => l.add,
+              classes: 'govuk-button--secondary',
+              value: 'addButton',
+            },
+            addAnotherCountry: {
+              type: 'details',
+              label: l => l.another,
+              subFields: {
+                countryName2: {
+                  type: 'text',
+                  label: l => l.countryName,
+                  labelSize: 'small',
+                },
+                addButton2: {
+                  type: 'button',
+                  label: l => l.add,
+                  classes: 'govuk-button--secondary',
+                  value: 'addButton',
+                },
+              },
+            },
+          },
         },
       ],
     },
