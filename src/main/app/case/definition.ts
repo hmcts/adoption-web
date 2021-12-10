@@ -878,6 +878,17 @@ export const enum YesOrNo {
   NO = 'No',
 }
 
+export const enum ContactDetails {
+  EMAIL = 'email',
+  PHONE = 'phone',
+}
+
+export const enum SectionStatus {
+  NOT_STARTED = 'NOT_STARTED',
+  IN_PROGRESS = 'IN_PROGRESS',
+  COMPLETED = 'COMPLETED',
+}
+
 export const enum AlternativeServiceMediumType {
   TEXT = 'text',
   EMAIL = 'email',

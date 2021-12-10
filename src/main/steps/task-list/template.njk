@@ -88,12 +88,12 @@
                                     </a>
                                 </a>
                             </span>
-                            {% if data['first-applicant-contact-options'] %}
-                                <strong class="govuk-tag  app-task-list__tag" id="eligibility-completed">Completed</strong>
-                            {% elseif data['first-applicant-address'] %}
-                                <strong class="govuk-tag govuk-tag--blue app-task-list__tag">in progress</strong>
+                            {% if status.contactDetails == 'COMPLETED' %}
+                                <strong class="govuk-tag  app-task-list__tag" id="eligibility-completed">{{completed}}</strong>
+                            {% elseif status.contactDetails == 'IN_PROGRESS' %}
+                                <strong class="govuk-tag govuk-tag--blue app-task-list__tag">{{inProgress}}</strong>
                             {% else %}
-                                <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
+                                <strong class="govuk-tag govuk-tag--grey app-task-list__tag">{{notStarted}}</strong>
                             {% endif %}
                         </li>
 
