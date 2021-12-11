@@ -10,4 +10,12 @@ module.exports = {
   moduleNameMapper: {
     '@hmcts/nodejs-logging': '<rootDir>/src/test/unit/mocks/hmcts/nodejs-logging',
   },
+  coverageThreshold: {
+    global: {
+      branches: 78,
+      functions: 82,
+      lines: 90,
+      statements: 90,
+    },
+  },
 };
