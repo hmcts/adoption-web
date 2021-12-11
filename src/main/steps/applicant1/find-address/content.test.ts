@@ -1,6 +1,5 @@
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isInvalidPostcode } from '../../../app/form/validation';
-// import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent } from '../../common/common.content';
 
 import { generateContent } from './content';
@@ -10,9 +9,13 @@ jest.mock('../../../app/form/validation');
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('find-address content', () => {
   const commonContent = { language: 'en', userCase: {} } as CommonContent;
+  let generatedContent;
+
+  beforeEach(() => {
+    generatedContent = generateContent(commonContent);
+  });
 
   test('should return correct english content', () => {
-    const generatedContent = generateContent(commonContent);
     expect(generatedContent.section).toEqual('Primary applicant');
     expect(generatedContent.title).toEqual("What's your home address?");
     expect(generatedContent.line1).toEqual("We'll send all court papers to this address.");
@@ -27,7 +30,7 @@ describe('find-address content', () => {
   });
 
   test('should return correct welsh content', () => {
-    const generatedContent = generateContent({ ...commonContent, language: 'cy' });
+    generatedContent = generateContent({ ...commonContent, language: 'cy' });
     expect(generatedContent.section).toEqual('Primary applicant (in welsh)');
     expect(generatedContent.title).toEqual("What's your home address? (in welsh)");
     expect(generatedContent.line1).toEqual("We'll send all court papers to this address. (in welsh)");
@@ -46,7 +49,6 @@ describe('find-address content', () => {
   });
 
   test('should contain applicant1AddressPostcode field', () => {
-    const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const applicant1AddressPostcodeField = fields.applicant1AddressPostcode as FormOptions;
@@ -60,7 +62,6 @@ describe('find-address content', () => {
   });
 
   test('should contain find address button', () => {
-    const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     expect((form.submit.text as Function)(generatedContent)).toBe('Find address');
   });

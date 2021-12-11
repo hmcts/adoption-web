@@ -259,7 +259,8 @@ export type CommonContent = typeof en & {
   selectedGender: Gender;
   isJointApplication: boolean;
   referenceNumber?: string;
-  addresses?: [];
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
+  addresses?: any[];
   eligibility?: Eligibility;
 };
 

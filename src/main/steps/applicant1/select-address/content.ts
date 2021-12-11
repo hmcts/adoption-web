@@ -6,7 +6,7 @@ import { APPLICANT_1_FIND_ADDRESS, APPLICANT_1_MANUAL_ADDRESS } from '../../../s
 const getAddressItems = addresses => addresses.map((item, index) => ({ text: item.fullAddress, value: index }));
 
 const en = content => {
-  const addresses = content.addresses;
+  const addresses = content.addresses || [];
   const items = [
     {
       attributes: { id: 'totalAddressesFound' },
@@ -15,6 +15,7 @@ const en = content => {
       selected: true,
     },
   ];
+
   items.push(...getAddressItems(addresses));
 
   return {
@@ -36,15 +37,16 @@ const en = content => {
 };
 
 const cy = content => {
-  const addresses = content.addresses;
+  const addresses = content.addresses || [];
   const items = [
     {
       attributes: { id: 'totalAddressesFound' },
       value: -1,
-      text: `${addresses?.length} address${addresses?.length !== 1 ? 'es' : ''} found (in welsh)`,
+      text: `${addresses.length} address${addresses?.length !== 1 ? 'es' : ''} found (in welsh)`,
       selected: true,
     },
   ];
+
   items.push(...getAddressItems(addresses));
 
   return {
