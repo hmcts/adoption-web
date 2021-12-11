@@ -32,14 +32,14 @@ const cy = () => ({
   postcode: 'Postcode (in welsh)',
   errors: {
     applicant1Address1: {
-      required: 'Enter your building and street address before continuing. (in welsh)',
+      required: 'Enter the first line of the address (in welsh)',
     },
     applicant1AddressTown: {
-      required: 'Enter your town or city before continuing. (in welsh)',
+      required: 'Enter the town or city (in welsh)',
     },
     applicant1AddressPostcode: {
-      required: 'You have not entered your postcode. Enter your postcode before continuing. (in welsh)',
-      invalid: 'You have not entered a valid UK postcode. Enter a valid UK postcode before continuing. (in welsh)',
+      required: 'Enter a valid postcode (in welsh)',
+      invalid: 'Enter a valid postcode (in welsh)',
     },
   },
 });
