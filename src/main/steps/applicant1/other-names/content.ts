@@ -1,6 +1,6 @@
 import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent } from '../../../app/form/Form';
+import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { mapSummaryListRows } from '../../common/functions/mapsummarylistrows';
 
@@ -10,7 +10,7 @@ const en = () => ({
   example: 'For example, your name before marriage.',
   yes: 'Yes',
   no: 'No',
-  additionalName: 'Add your previous full name',
+  applicant1AdditionalName: 'Add your previous full name',
   add: 'Add',
   another: 'Add another name',
   remove: 'Remove',
@@ -18,7 +18,7 @@ const en = () => ({
     otherNames: {
       required: 'Enter a name or choose no',
     },
-    additionalName: {
+    applicant1AdditionalName: {
       required: 'Name cannot be empty',
     },
   },
@@ -30,7 +30,7 @@ const cy = () => ({
   example: 'For example, your name before marriage. (in Welsh)',
   yes: 'Yes (in Welsh)',
   no: 'No (in Welsh)',
-  additionalName: 'Add your previous full name (in Welsh)',
+  applicant1AdditionalName: 'Add your previous full name (in Welsh)',
   add: 'Add (in Welsh)',
   another: 'Add another name (in Welsh)',
   remove: 'Remove (in Welsh)',
@@ -38,64 +38,66 @@ const cy = () => ({
     otherNames: {
       required: 'Enter a name or choose no (in Welsh)',
     },
-    additionalName: {
+    applicant1AdditionalName: {
       required: 'Name cannot be empty (in Welsh)',
     },
   },
 });
 
 export const form: FormContent = {
-  fields: {
-    otherNames: {
-      type: 'radios',
-      classes: 'govuk-radios',
-      label: l => l.example,
-      labelSize: 's',
-      section: l => l.section,
-      values: [
-        {
-          label: l => l.yes,
-          value: YesOrNo.YES,
-          subFields: {
-            applicant1AdditionalNames: {
-              type: 'summarylist',
-              values: [],
-              rows: mapSummaryListRows(['Name1', 'Name2'], ['Remove']),
-            },
-            additionalName: {
-              type: 'input',
-              label: l => l.additionalName,
-              labelSize: 'small',
-            },
-            addButton: {
-              type: 'button',
-              label: l => l.add,
-              classes: 'govuk-button--secondary',
-              value: 'addButton',
-            },
-            addAnotherName: {
-              type: 'details',
-              label: l => l.another,
-              subFields: {
-                additionalName: {
-                  type: 'input',
-                  label: l => l.additionalName,
-                  labelSize: 'small',
-                },
-                addButton: {
-                  type: 'button',
-                  label: l => l.add,
-                  classes: 'govuk-button--secondary',
-                  value: 'addButton',
-                },
+  fields: userCase => {
+    return {
+      otherNames: {
+        type: 'radios',
+        classes: 'govuk-radios',
+        label: l => l.example,
+        labelSize: 's',
+        section: l => l.section,
+        values: [
+          {
+            label: l => l.yes,
+            value: YesOrNo.YES,
+            subFields: {
+              applicant1AdditionalNames: {
+                type: 'summarylist',
+                values: [],
+                rows: mapSummaryListRows(userCase.applicant1AdditionalNames || [], ['Remove']),
               },
+              applicant1AdditionalName: {
+                type: 'input',
+                label: l => l.applicant1AdditionalName,
+                labelSize: 'small',
+              },
+              addButton: {
+                type: 'button',
+                label: l => l.add,
+                classes: 'govuk-button--secondary',
+                value: 'addButton',
+              },
+              // addAnotherName: {
+              //   type: 'details',
+              //   label: l => l.another,
+              //   subFields: {
+              //     applicant1AdditionalName: {
+              //       type: 'input',
+              //       label: l => l.applicant1AdditionalName,
+              //       labelSize: 'small',
+              //     },
+              //     addButton: {
+              //       type: 'button',
+              //       label: l => l.add,
+              //       classes: 'govuk-button--secondary',
+              //       value: 'addButton',
+              //     },
+              //   },
+              // },
             },
           },
-        },
-        { label: l => l.no, value: YesOrNo.NO },
-      ],
-      validator: value => isFieldFilledIn(value),
-    },
+          { label: l => l.no, value: YesOrNo.NO },
+        ],
+        validator: value => isFieldFilledIn(value),
+      },
+    };
   },
   submit: {
     text: l => l.continue,
@@ -112,5 +114,5 @@ const languages = {
 
 export const generateContent: TranslationFn = content => ({
   ...languages[content.language](),
-  form,
+  form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}) },
 });

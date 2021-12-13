@@ -254,6 +254,10 @@ export interface Bailiff {
 }
 
 export interface CaseData {
+  applicant1AdditionalName: string;
+  applicant1AdditionalNames: string[];
+  applicant1Country: string;
+  applicant1Countries: string[];
   applicationType: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
   labelContentApplicant2: string;

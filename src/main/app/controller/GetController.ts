@@ -18,7 +18,7 @@ export class GetController {
 
   public async get(req: AppRequest, res: Response): Promise<void> {
     if (res.locals.isError || res.headersSent) {
-      // If there's an async error, it wil have already rendered an error page upstream,
+      // If there's an async error, it will have already rendered an error page upstream,
       // so we don't want to call render again
       return;
     }

@@ -1,5 +1,5 @@
 import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent } from '../../../app/form/Form';
+import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { mapSummaryListRows } from '../../common/functions/mapsummarylistrows';
 
 const en = () => ({
@@ -39,62 +39,64 @@ const cy = () => ({
 });
 
 export const form: FormContent = {
-  fields: {
-    nationality: {
-      type: 'checkboxes',
-      label: l => l.label,
-      labelSize: 'small',
-      values: [
-        {
-          label: l => l.british,
-          value: 'British',
-          hint: l => l.britishSubtext,
-        },
-        {
-          label: l => l.irish,
-          value: 'Irish',
-        },
-        {
-          label: l => l.differentCountry,
-          value: 'other',
-          subFields: {
-            applicant1AdditionalNames: {
-              type: 'summarylist',
-              values: [],
-              rows: mapSummaryListRows(['Country1', 'Country2'], ['Remove']),
-            },
-            countryName: {
-              type: 'text',
-              label: l => l.countryName,
-              labelSize: 'small',
-            },
-            addButton: {
-              type: 'button',
-              label: l => l.add,
-              classes: 'govuk-button--secondary',
-              value: 'addButton',
-            },
-            addAnotherCountry: {
-              type: 'details',
-              label: l => l.another,
-              subFields: {
-                countryName2: {
-                  type: 'text',
-                  label: l => l.countryName,
-                  labelSize: 'small',
-                },
-                addButton2: {
-                  type: 'button',
-                  label: l => l.add,
-                  classes: 'govuk-button--secondary',
-                  value: 'addButton',
-                },
+  fields: userCase => {
+    return {
+      nationality: {
+        type: 'checkboxes',
+        label: l => l.label,
+        labelSize: 'small',
+        values: [
+          {
+            label: l => l.british,
+            value: 'British',
+            hint: l => l.britishSubtext,
+          },
+          {
+            label: l => l.irish,
+            value: 'Irish',
+          },
+          {
+            label: l => l.differentCountry,
+            value: 'other',
+            subFields: {
+              applicant1Countries: {
+                type: 'summarylist',
+                values: [],
+                rows: mapSummaryListRows(userCase.applicant1Countries || [], ['Remove']),
               },
+              applicant1Country: {
+                type: 'text',
+                label: l => l.countryName,
+                labelSize: 'small',
+              },
+              addButton: {
+                type: 'button',
+                label: l => l.add,
+                classes: 'govuk-button--secondary',
+                value: 'addButton',
+              },
+              // addAnotherCountry: {
+              //   type: 'details',
+              //   label: l => l.another,
+              //   subFields: {
+              //     countryName2: {
+              //       type: 'text',
+              //       label: l => l.countryName,
+              //       labelSize: 'small',
+              //     },
+              //     addButton2: {
+              //       type: 'button',
+              //       label: l => l.add,
+              //       classes: 'govuk-button--secondary',
+              //       value: 'addButton',
+              //     },
+              //   },
+              // },
             },
           },
-        },
-      ],
-    },
+        ],
+      },
+    };
   },
   submit: {
     text: l => l.continue,
@@ -111,5 +113,5 @@ const languages = {
 
 export const generateContent: TranslationFn = content => ({
   ...languages[content.language](),
-  form,
+  form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}) },
 });
