@@ -10,6 +10,7 @@ const en = () => ({
   one: 'Yes',
   two: 'No',
   livedUKNo: 'You cannot apply to adopt a child unless you have a permanent home here.',
+  hint: 'You can answer yes if your permanent home is here.',
   errors: {
     livedUKEligible: {
       required: 'Select whether you have lived in the UK, Channel Islands or Isle of Man for at least 12 months',
@@ -24,6 +25,7 @@ const cy = () => ({
   one: 'Yes (in welsh)',
   two: 'No (in welsh)',
   livedUKNo: 'You cannot apply to adopt a child unless you have a permanent home here. (in welsh)',
+  hint: 'You can answer yes if your permanent home is here. (in welsh)',
   errors: {
     livedUKEligible: {
       required:
@@ -37,14 +39,15 @@ export const form: FormContent = {
     livedUKEligible: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.title,
       section: l => l.section,
+      hint: l => l.hint,
       labelHidden: false,
       values: [
         { label: l => l.one, value: YesOrNo.YES },
         { label: l => l.two, value: YesOrNo.NO, conditionalText: l => `<p class="govuk-label">${l.livedUKNo}</p>` },
       ],
-      validator: value => isFieldFilledIn(value),
+      validator: isFieldFilledIn,
     },
   },
   submit: {

@@ -15,6 +15,7 @@ const en = content => ({
       ? 'You cannot apply to adopt the child until you, and your partner if applicable, are 21.'
       : ''
   }`,
+  line2: 'More about adoption',
 });
 
 const cy = content => ({
@@ -31,6 +32,7 @@ const cy = content => ({
       ? 'You cannot apply to adopt the child until you, and your partner if applicable, are 21. (in welsh)'
       : ''
   }`,
+  line2: 'More about adoption (in welsh)',
 });
 
 const languages = {

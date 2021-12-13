@@ -6,12 +6,14 @@ import { AppRequest } from '../app/controller/AppRequest';
 import { applicant1Sequence } from './applicant1Sequence';
 import {
   APPLYING_WITH_URL,
+  CHECK_ELIGIBILITY_URL_UNDER_18,
   DATE_CHILD_MOVED_IN_URL,
   HAS_RELATIONSHIP_BROKEN_URL,
   RELATIONSHIP_NOT_BROKEN_URL,
+  START_ELIGIBILITY_URL,
 } from './urls';
 
-import { getNextIncompleteStepUrl, getNextStepUrl } from './index';
+import { getNextEligibilityStepUrl, getNextIncompleteStepUrl, getNextStepUrl } from './index';
 
 describe('Steps', () => {
   describe('getNextStep()', () => {
@@ -24,6 +26,14 @@ describe('Steps', () => {
       mockReq.originalUrl = APPLYING_WITH_URL;
       const data = { gender: Gender.MALE };
       expect(getNextStepUrl(mockReq, data)).toBe(DATE_CHILD_MOVED_IN_URL);
+    });
+
+    it('returns next eligibility step url when correctly called', () => {
+      mockReq.originalUrl = START_ELIGIBILITY_URL;
+      const data = {
+        eligibility: { under18Eligible: 'yes', marriedEligible: 'no', livedUKEligible: 'yes', under21Eligible: 'yes' },
+      };
+      expect(getNextEligibilityStepUrl(mockReq, data.eligibility)).toBe(CHECK_ELIGIBILITY_URL_UNDER_18);
     });
 
     it('moves into a dead end when the response matches', () => {

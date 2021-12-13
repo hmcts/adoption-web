@@ -36,14 +36,14 @@ export const form: FormContent = {
     under18Eligible: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.title,
       section: l => l.section,
       labelHidden: false,
       values: [
         { label: l => l.one, value: YesOrNo.YES },
         { label: l => l.two, value: YesOrNo.NO, conditionalText: l => `<p class="govuk-label">${l.under18No}</p>` },
       ],
-      validator: value => isFieldFilledIn(value),
+      validator: isFieldFilledIn,
     },
   },
   submit: {

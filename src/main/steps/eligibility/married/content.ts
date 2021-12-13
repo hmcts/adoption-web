@@ -34,14 +34,14 @@ export const form: FormContent = {
     marriedEligible: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.title,
       section: l => l.section,
       labelHidden: false,
       values: [
         { label: l => l.one, value: YesOrNo.YES, conditionalText: l => `<p class="govuk-label">${l.marriedYes}</p>` },
         { label: l => l.two, value: YesOrNo.NO },
       ],
-      validator: value => isFieldFilledIn(value),
+      validator: isFieldFilledIn,
     },
   },
   submit: {
