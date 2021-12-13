@@ -21,8 +21,10 @@ export default class SelectAddressPostController extends PostController<AnyObjec
     Object.assign(req.session.userCase, formData);
 
     if (req.session.errors.length === 0) {
-      if (formData.applicant1SelectAddress) {
-        const selectedAddress = req.session.addresses[formData.applicant1SelectAddress];
+      const selectedAddressIndex = Number(formData.applicant1SelectAddress);
+      if (selectedAddressIndex >= 0) {
+        //eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const selectedAddress = req.session.addresses[selectedAddressIndex] as any;
         req.session.userCase.applicant1Address1 = selectedAddress.street1;
         req.session.userCase.applicant1Address2 = selectedAddress.street2;
         req.session.userCase.applicant1AddressTown = selectedAddress.town;

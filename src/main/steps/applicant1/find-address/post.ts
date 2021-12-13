@@ -19,7 +19,7 @@ export default class FindAddressPostController extends PostController<AnyObject>
     let addresses;
 
     const form = new Form(<FormFields>this.fields);
-    const { ...formData } = form.getParsedBody(req.body);
+    const { saveAndSignOut, saveBeforeSessionTimeout, _csrf, ...formData } = form.getParsedBody(req.body);
 
     req.session.errors = form.getErrors(formData);
 
