@@ -17,7 +17,7 @@ const en = () => ({
 
 const cy = () => ({
   section: 'Applicant details (in welsh)',
-  title: 'Are you applying on your own, or with someone else?(in welsh)',
+  label: 'Are you applying on your own, or with someone else?(in welsh)',
   one: "I'm applying on my own (in welsh)",
   two: "I'm applying with my spouse or civil partner (in welsh)",
   three: "I'm applying with someone who is not my spouse or civil partner (in welsh)",
@@ -40,7 +40,7 @@ export const form: FormContent = {
         { label: l => l.two, value: 'withSpouseOrCivilPartner' },
         { label: l => l.three, value: 'withSomeoneElse' },
       ],
-      validator: value => isFieldFilledIn(value),
+      validator: isFieldFilledIn,
     },
   },
   submit: {

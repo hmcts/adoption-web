@@ -1,11 +1,10 @@
 import fs from 'fs';
 
-import { Application, RequestHandler, Response } from 'express';
+import { Application, RequestHandler } from 'express';
 
-import { AppRequest } from './app/controller/AppRequest';
 import { GetController } from './app/controller/GetController';
 import { PostController } from './app/controller/PostController';
-import { cookieMaxAge } from './modules/session';
+import { KeepAliveController } from './app/keepalive/KeepAliveController';
 import { stepsWithContent } from './steps';
 import { ErrorController } from './steps/error/error.controller';
 import { HomeGetController } from './steps/home/get';
@@ -15,8 +14,8 @@ import { TimedOutGetController } from './steps/timed-out/get';
 import {
   CSRF_TOKEN_ERROR_URL,
   HOME_URL,
+  KEEP_ALIVE_URL,
   SAVE_AND_SIGN_OUT,
-  SIGN_OUT_URL,
   TASK_LIST_URL,
   TIMED_OUT_URL,
 } from './steps/urls';
@@ -47,22 +46,7 @@ export class Routes {
       }
     }
 
-    app.get(
-      '/active',
-      errorHandler((req: AppRequest, res: Response) => {
-        if (!req.session.user) {
-          return res.redirect(SIGN_OUT_URL);
-        }
-        req.session.cookie.expires = new Date(Date.now() + cookieMaxAge);
-        req.session.cookie.maxAge = cookieMaxAge;
-        req.session.save(err => {
-          if (err) {
-            throw err;
-          }
-          res.end();
-        });
-      })
-    );
+    app.get(KEEP_ALIVE_URL, errorHandler(new KeepAliveController().get));
 
     app.use(errorController.notFound as unknown as RequestHandler);
   }

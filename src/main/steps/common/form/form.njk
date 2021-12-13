@@ -2,6 +2,9 @@
 
 <form class="form" id="main-form" method="post" action="" novalidate="novalidate">
   <input type="hidden" name="_csrf" id="csrfToken" value="{{ csrfToken }}">
+  
+  {% block before_fields %}{% endblock %}
+
   {% block form_content %}
     {% include "./fields.njk" %}
   {% endblock %}

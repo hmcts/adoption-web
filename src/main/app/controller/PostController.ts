@@ -79,8 +79,8 @@ export class PostController<T extends AnyObject> {
     return req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
   }
 
+  //eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected getEventName(req: AppRequest): string {
-    console.log(req.sessionID);
     return CITIZEN_UPDATE;
   }
 }
