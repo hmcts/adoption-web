@@ -8,7 +8,7 @@ module.exports = {
   },
   submitButton: 'input[value="Sign in"]',
 
-  async verifyTaskListPage() {
+  async goToTaskListPage() {
     await I.goToPage(config.baseUrl + 'task-list');
   },
   async selectTaskNameFromTaskList(taskName) {
