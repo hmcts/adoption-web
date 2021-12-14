@@ -116,7 +116,7 @@ const cy: typeof en = {
   govUk: 'GOV.UK',
   back: 'Back (in welsh)',
   continue: 'Save and continue (in welsh)',
-  change: 'Newid',
+  change: 'Change  (in welsh)',
   upload: 'Uwchlwytho',
   download: 'Llwytho i lawr',
   delete: 'Dileu',
@@ -185,6 +185,7 @@ export const generatePageContent = ({
   isDivorce = true,
   userCase,
   userEmail,
+  addresses = [],
   eligibility,
 }: {
   language: Language;
@@ -192,6 +193,7 @@ export const generatePageContent = ({
   isDivorce?: boolean;
   userCase?: Partial<CaseWithId>;
   userEmail?: string;
+  addresses?: [];
   eligibility?: Eligibility;
 }): PageContent => {
   const commonTranslations: typeof en = language === 'en' ? en : cy;
@@ -212,6 +214,7 @@ export const generatePageContent = ({
     userEmail,
     contactEmail,
     isJointApplication,
+    addresses,
     eligibility,
   };
 
@@ -256,6 +259,8 @@ export type CommonContent = typeof en & {
   selectedGender: Gender;
   isJointApplication: boolean;
   referenceNumber?: string;
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
+  addresses?: any[];
   eligibility?: Eligibility;
 };
 

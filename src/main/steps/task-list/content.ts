@@ -1,7 +1,7 @@
 import { TranslationFn } from '../../app/controller/GetController';
 import * as urls from '../urls';
 
-import { isApplyingWithComplete } from './utils';
+import { getContactDetailsStatus, isApplyingWithComplete } from './utils';
 
 const en = content => ({
   title: 'Apply to adopt a child placed in your care',
@@ -45,8 +45,12 @@ const en = content => ({
   section6: 'Review application, pay and send',
   insetTextLine11: "You'll need your credit or debit card.",
   section6link1: 'Review application, pay and send',
+  completed: 'Completed',
+  inProgress: 'In Progress',
+  notStarted: 'Not Started',
   status: {
     applyingWith: isApplyingWithComplete(content.userCase),
+    contactDetails: getContactDetailsStatus(content.userCase),
   },
   urls,
 });
@@ -93,8 +97,12 @@ const cy = content => ({
   section6: 'Review application, pay and send (in welsh) ',
   insetTextLine11: "You'll need your credit or debit card. (in welsh) ",
   section6link1: 'Review application, pay and send (in welsh) ',
+  completed: 'Completed',
+  inProgress: 'In Progress',
+  notStarted: 'Not Started',
   status: {
     applyingWith: isApplyingWithComplete(content.userCase),
+    contactDetails: getContactDetailsStatus(content.userCase),
   },
   urls,
 });

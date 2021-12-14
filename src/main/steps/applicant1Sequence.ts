@@ -1,19 +1,15 @@
 import { CaseWithId } from '../app/case/case';
-import { YesOrNo } from '../app/case/definition';
-import { isLessThanAYear } from '../app/form/validation';
 
 import {
   APPLICANT_1_CONTACT_DETAILS,
+  APPLICANT_1_FIND_ADDRESS,
   APPLICANT_1_IDENTITY_DOCUMENTS,
+  APPLICANT_1_MANUAL_ADDRESS,
   APPLICANT_1_PERSONAL_DETAILS,
+  APPLICANT_1_SELECT_ADDRESS,
   APPLYING_WITH_URL,
-  CERTIFICATE_URL,
   DATE_CHILD_MOVED_IN_URL,
-  HAS_RELATIONSHIP_BROKEN_URL,
   PageLink,
-  RELATIONSHIP_DATE_URL,
-  RELATIONSHIP_NOT_BROKEN_URL,
-  RELATIONSHIP_NOT_LONG_ENOUGH_URL,
   TASK_LIST_URL,
 } from './urls';
 
@@ -43,49 +39,42 @@ export interface Step {
 export const applicant1Sequence: Step[] = [
   {
     url: APPLYING_WITH_URL,
-    showInSection: Sections.AboutPartnership,
-    getNextStep: () => DATE_CHILD_MOVED_IN_URL,
+    showInSection: Sections.AboutApplicant1,
+    getNextStep: () => TASK_LIST_URL,
   },
   {
     url: DATE_CHILD_MOVED_IN_URL,
-    showInSection: Sections.AboutPartnership,
+    showInSection: Sections.AboutApplicant1,
     getNextStep: () => APPLICANT_1_PERSONAL_DETAILS,
   },
   {
     url: APPLICANT_1_PERSONAL_DETAILS,
-    showInSection: Sections.AboutPartnership,
+    showInSection: Sections.AboutApplicant1,
     getNextStep: () => APPLICANT_1_CONTACT_DETAILS,
   },
   {
     url: APPLICANT_1_CONTACT_DETAILS,
-    showInSection: Sections.AboutPartnership,
-    getNextStep: () => APPLICANT_1_IDENTITY_DOCUMENTS,
-  },
-  {
-    url: APPLICANT_1_IDENTITY_DOCUMENTS,
-    showInSection: Sections.AboutPartnership,
+    showInSection: Sections.AboutApplicant1,
     getNextStep: () => TASK_LIST_URL,
   },
   {
-    url: HAS_RELATIONSHIP_BROKEN_URL,
-    showInSection: Sections.AboutPartnership,
-    showInCompleteSection: Sections.AboutPartnership,
-    getNextStep: data =>
-      data.applicant1ScreenHasUnionBroken === YesOrNo.NO ? RELATIONSHIP_NOT_BROKEN_URL : RELATIONSHIP_DATE_URL,
+    url: APPLICANT_1_IDENTITY_DOCUMENTS,
+    showInSection: Sections.AboutApplicant1,
+    getNextStep: () => TASK_LIST_URL,
   },
   {
-    url: RELATIONSHIP_NOT_BROKEN_URL,
-    getNextStep: () => HAS_RELATIONSHIP_BROKEN_URL,
+    url: APPLICANT_1_FIND_ADDRESS,
+    showInSection: Sections.AboutApplicant1,
+    getNextStep: () => APPLICANT_1_SELECT_ADDRESS,
   },
   {
-    url: RELATIONSHIP_DATE_URL,
-    showInSection: Sections.AboutPartnership,
-    showInCompleteSection: Sections.AboutPartnership,
-    getNextStep: data =>
-      isLessThanAYear(data.relationshipDate) === 'lessThanAYear' ? RELATIONSHIP_NOT_LONG_ENOUGH_URL : CERTIFICATE_URL,
+    url: APPLICANT_1_SELECT_ADDRESS,
+    showInSection: Sections.AboutApplicant1,
+    getNextStep: () => APPLICANT_1_CONTACT_DETAILS,
   },
   {
-    url: RELATIONSHIP_NOT_LONG_ENOUGH_URL,
-    getNextStep: () => RELATIONSHIP_DATE_URL,
+    url: APPLICANT_1_MANUAL_ADDRESS,
+    showInSection: Sections.AboutApplicant1,
+    getNextStep: () => APPLICANT_1_CONTACT_DETAILS,
   },
 ];

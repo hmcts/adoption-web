@@ -5,6 +5,9 @@ properties([
   pipelineTriggers([cron('H 04 * * *')]),
   parameters([
     string(name: 'TEST_URL', defaultValue: 'https://adoption-web.aat.platform.hmcts.net', description: 'The URL you want to run tests against'),
+    string(name: 'FUNCTIONAL_TESTS_WORKERS',
+      defaultValue: '2',
+      description: 'Number of workers running functional tests'),
   ])
 ])
 
@@ -57,7 +60,12 @@ withNightlyPipeline(type, product, component) {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/crossbrowser/reports/**/*'
   }
 
+  before('fullFunctionalTest') {
+    env.PARALLEL_CHUNKS = params.FUNCTIONAL_TESTS_WORKERS
+    env.TEST_RETRIES = 2
+  }
+
   after('fullFunctionalTest') {
-    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/functional/reports/**/*'
+    archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
   }
 }

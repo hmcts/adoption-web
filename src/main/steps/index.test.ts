@@ -25,7 +25,7 @@ describe('Steps', () => {
     it('returns the next step when correct details a passed', () => {
       mockReq.originalUrl = APPLYING_WITH_URL;
       const data = { gender: Gender.MALE };
-      expect(getNextStepUrl(mockReq, data)).toBe(DATE_CHILD_MOVED_IN_URL);
+      expect(getNextStepUrl(mockReq, data)).toBe(TASK_LIST_URL);
     });
 
     it('returns next eligibility step url when correctly called', () => {
@@ -40,13 +40,13 @@ describe('Steps', () => {
       mockReq.originalUrl = HAS_RELATIONSHIP_BROKEN_URL;
       const data = { applicant1ScreenHasUnionBroken: YesOrNo.NO };
       const actual = getNextStepUrl(mockReq, data);
-      expect(actual).toBe(RELATIONSHIP_NOT_BROKEN_URL);
+      expect(actual).toBe(CHECK_ANSWERS_URL);
     });
 
     it('keeps the query string', () => {
       mockReq.originalUrl = `${APPLYING_WITH_URL}?customQueryString`;
       const data = { gender: Gender.MALE };
-      expect(getNextStepUrl(mockReq, data)).toBe(`${DATE_CHILD_MOVED_IN_URL}?customQueryString`);
+      expect(getNextStepUrl(mockReq, data)).toBe(`${TASK_LIST_URL}?customQueryString`);
     });
   });
 

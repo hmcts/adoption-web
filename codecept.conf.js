@@ -73,6 +73,8 @@ exports.config = {
     caseListPage: './src/test/e2e/pages/caseList.page.js',
     eventSummaryPage: './src/test/e2e/pages/eventSummary.page.js',
     landingPage: './src/test/e2e/pages/LandingPage.js',
+    primaryApplicantDetailsPage: './src/test/e2e/pages/primaryApplicant.page.js',
+    taskListPage: './src/test/e2e/pages/taskList.page.js',
   },
   plugins: {
     retryFailedStep: {
@@ -83,7 +85,7 @@ exports.config = {
       fullPageScreenshots: true,
     },
   },
-  tests: './src/test/tests/*.js',
+  tests: './src/test/e2e/tests/*_test.js',
   teardownAll: require('./src/test/e2e/hooks/aggregate-metrics'),
   mocha: {
     reporterOptions: {

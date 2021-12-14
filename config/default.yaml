@@ -16,6 +16,9 @@ services:
     systemPassword: 'dummy_password'
   case:
     url: 'http://ccd-data-store-api-aat.service.core-compute-aat.internal'
+  postcodeLookup:
+    url: 'https://api.os.uk/search/places/v1'
+    token: 'NEED TO INSERT SECRET'
 health:
   timeout: 5000
   deadline: 15000
