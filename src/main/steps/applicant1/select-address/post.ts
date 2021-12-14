@@ -31,7 +31,6 @@ export default class SelectAddressPostController extends PostController<AnyObjec
         req.session.userCase.applicant1AddressCounty = selectedAddress.county;
         req.session.userCase.applicant1AddressPostcode = selectedAddress.postcode;
       }
-      req.session.addresses = [];
     }
 
     const nextUrl = req.session.errors.length > 0 ? req.url : getNextStepUrl(req, req.session.userCase);

@@ -70,11 +70,6 @@ describe('SelectAddressPostController', () => {
         expect(req.session.userCase.applicant1AddressCounty).toBe('CITY OF WESTMINSTER');
         expect(req.session.userCase.applicant1AddressPostcode).toBe('SW1H 9AJ');
       });
-
-      test('should reset the addresses array in session', async () => {
-        await controller.post(req, res);
-        expect(req.session.addresses).toEqual([]);
-      });
     });
 
     describe('and when there is no selected address', () => {
@@ -91,11 +86,6 @@ describe('SelectAddressPostController', () => {
         expect(req.session.userCase.applicant1AddressTown).toBe(undefined);
         expect(req.session.userCase.applicant1AddressCounty).toBe(undefined);
         expect(req.session.userCase.applicant1AddressPostcode).toBe(undefined);
-      });
-
-      test('should reset the addresses array in session', async () => {
-        await controller.post(req, res);
-        expect(req.session.addresses).toEqual([]);
       });
     });
 
