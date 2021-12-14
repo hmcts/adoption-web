@@ -1,5 +1,6 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
+import { doesArrayHaveValues } from '../../../app/form/validation';
 import { mapSummaryListRows } from '../../common/functions/mapsummarylistrows';
 
 const en = () => ({
@@ -57,12 +58,12 @@ export const form: FormContent = {
           },
           {
             label: l => l.differentCountry,
-            value: 'other',
             subFields: {
               applicant1Countries: {
                 type: 'summarylist',
                 values: [],
                 rows: mapSummaryListRows(userCase.applicant1Countries || [], ['Remove']),
+                validator: doesArrayHaveValues(userCase.applicant1Countries),
               },
               applicant1Country: {
                 type: 'text',

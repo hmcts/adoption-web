@@ -7,7 +7,7 @@ import { Form, FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { getNextStepUrl } from '../../../steps';
 
 @autobind
-export default class FindAddressPostController extends PostController<AnyObject> {
+export default class OtherNamesPostController extends PostController<AnyObject> {
   constructor(protected readonly fields: FormFields | FormFieldsFn) {
     super(fields);
   }

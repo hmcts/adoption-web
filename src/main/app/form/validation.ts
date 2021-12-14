@@ -33,6 +33,12 @@ export const areDateFieldsFilledIn: DateValidator = fields => {
   }
 };
 
+export const doesArrayHaveValues: Validator = value => {
+  if (!value || !(value as string[])?.length) {
+    return 'required';
+  }
+};
+
 export const isDateInputInvalid: DateValidator = date => {
   const invalid = 'invalidDate';
   if (!date) {
