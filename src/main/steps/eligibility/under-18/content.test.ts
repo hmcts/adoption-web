@@ -8,7 +8,7 @@ import { generateContent } from './content';
 jest.mock('../../../app/form/validation');
 
 /* eslint-disable @typescript-eslint/ban-types */
-describe('eligibility content', () => {
+describe('under-18 content', () => {
   const commonContent = { language: 'en' } as CommonContent;
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
