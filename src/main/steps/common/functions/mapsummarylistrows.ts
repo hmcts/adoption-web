@@ -7,6 +7,7 @@ export const mapSummaryListRows = (values: string[], actionItems: string[]): Rec
       items: actionItems.map(actionItem => ({
         href: `/applicant1/other-names?remove=${v}`,
         text: actionItem,
+        visuallyHiddenText: v,
       })),
     },
   })),

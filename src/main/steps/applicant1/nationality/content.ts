@@ -58,6 +58,7 @@ export const form: FormContent = {
           },
           {
             label: l => l.differentCountry,
+            value: 'Other',
             subFields: {
               applicant1Countries: {
                 type: 'summarylist',
