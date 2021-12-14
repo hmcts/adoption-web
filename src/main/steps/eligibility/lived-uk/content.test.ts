@@ -11,7 +11,7 @@ describe('eligibility content', () => {
   const commonContent = { language: 'en' } as CommonContent;
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
-    expect(generatedContent.title).toEqual(
+    expect(generatedContent.label).toEqual(
       'Have you and any other applicant if relevant, lived in the UK, Channel Islands or Isle of Man for at least 12 months?'
     );
     expect(generatedContent.section).toEqual("Check you're eligible to adopt");
@@ -25,7 +25,7 @@ describe('eligibility content', () => {
 
   test('should return correct welsh content', () => {
     const generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.title).toEqual(
+    expect(generatedContent.label).toEqual(
       'Have you and any other applicant if relevant, lived in the UK, Channel Islands or Isle of Man for at least 12 months? (in welsh)'
     );
     expect(generatedContent.section).toEqual("Check you're eligible to adopt (in welsh)");

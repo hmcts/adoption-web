@@ -5,7 +5,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
   section: "Check you're eligible to adopt",
-  title:
+  label:
     'Have you and any other applicant if relevant, lived in the UK, Channel Islands or Isle of Man for at least 12 months?',
   one: 'Yes',
   two: 'No',
@@ -20,7 +20,7 @@ const en = () => ({
 
 const cy = () => ({
   section: "Check you're eligible to adopt (in welsh)",
-  title:
+  label:
     'Have you and any other applicant if relevant, lived in the UK, Channel Islands or Isle of Man for at least 12 months? (in welsh)',
   one: 'Yes (in welsh)',
   two: 'No (in welsh)',
@@ -39,7 +39,7 @@ export const form: FormContent = {
     livedUKEligible: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.title,
+      label: l => l.label,
       section: l => l.section,
       hint: l => l.hint,
       labelHidden: false,

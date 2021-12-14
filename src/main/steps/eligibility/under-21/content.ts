@@ -5,7 +5,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
   section: "Check you're eligible to adopt",
-  title: 'Are you, and the other applicant if relevant, both aged 21 or over?',
+  label: 'Are you, and the other applicant if relevant, both aged 21 or over?',
   one: 'Yes',
   two: 'No',
   under21Yes: 'You must be 21 or over to adopt a child. This includes any other applicant.',
@@ -18,7 +18,7 @@ const en = () => ({
 
 const cy = () => ({
   section: "Check you're eligible to adopt (in welsh)",
-  title: 'Are you, and the other applicant if relevant, both aged 21 or over? (in welsh)',
+  label: 'Are you, and the other applicant if relevant, both aged 21 or over? (in welsh)',
   one: 'Yes (in welsh)',
   two: 'No (in welsh)',
   under21Yes: 'You must be 21 or over to adopt a child. This includes any other applicant. (in welsh)',
@@ -34,7 +34,7 @@ export const form: FormContent = {
     under21Eligible: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.title,
+      label: l => l.label,
       section: l => l.section,
       labelHidden: false,
       values: [

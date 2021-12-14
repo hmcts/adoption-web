@@ -5,7 +5,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
   section: "Check you're eligible to adopt",
-  title: 'Will the child be under 18 years old on the date you submit your application?',
+  label: 'Will the child be under 18 years old on the date you submit your application?',
   one: 'Yes',
   two: 'No',
   under18No:
@@ -19,7 +19,7 @@ const en = () => ({
 
 const cy = () => ({
   section: "Check you're eligible to adopt (in welsh)",
-  title: 'Will the child be under 18 years old on the date you submit your application? (in welsh)',
+  label: 'Will the child be under 18 years old on the date you submit your application? (in welsh)',
   one: 'Yes (in welsh)',
   two: 'No (in welsh)',
   under18No:
@@ -36,7 +36,7 @@ export const form: FormContent = {
     under18Eligible: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.title,
+      label: l => l.label,
       section: l => l.section,
       labelHidden: false,
       values: [

@@ -13,7 +13,7 @@ describe('eligibility content', () => {
   const commonContent = { language: 'en' } as CommonContent;
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
-    expect(generatedContent.title).toEqual('Are you, and the other applicant if relevant, both aged 21 or over?');
+    expect(generatedContent.label).toEqual('Are you, and the other applicant if relevant, both aged 21 or over?');
     expect(generatedContent.section).toEqual("Check you're eligible to adopt");
     expect(generatedContent.under21Yes).toEqual(
       'You must be 21 or over to adopt a child. This includes any other applicant.'
@@ -24,7 +24,7 @@ describe('eligibility content', () => {
 
   test('should return correct welsh content', () => {
     const generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.title).toEqual(
+    expect(generatedContent.label).toEqual(
       'Are you, and the other applicant if relevant, both aged 21 or over? (in welsh)'
     );
     expect(generatedContent.section).toEqual("Check you're eligible to adopt (in welsh)");

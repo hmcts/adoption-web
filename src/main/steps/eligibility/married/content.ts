@@ -5,7 +5,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
   section: "Check you're eligible to adopt",
-  title: 'Has the child ever been married or in a civil partnership?',
+  label: 'Has the child ever been married or in a civil partnership?',
   one: 'Yes',
   two: 'No',
   marriedYes: "You can only apply to adopt a child if they've not been married or in a civil partnership.",
@@ -18,7 +18,7 @@ const en = () => ({
 
 const cy = () => ({
   section: "Check you're eligible to adopt (in welsh)",
-  title: 'Has the child ever been married or in a civil partnership? (in welsh)',
+  label: 'Has the child ever been married or in a civil partnership? (in welsh)',
   one: 'Yes (in welsh)',
   two: 'No (in welsh)',
   marriedYes: "You can only apply to adopt a child if they've not been married or in a civil partnership. (in welsh)",
@@ -34,7 +34,7 @@ export const form: FormContent = {
     marriedEligible: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.title,
+      label: l => l.label,
       section: l => l.section,
       labelHidden: false,
       values: [

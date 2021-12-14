@@ -12,7 +12,7 @@ describe('eligibility content', () => {
   const commonContent = { language: 'en' } as CommonContent;
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
-    expect(generatedContent.title).toEqual(
+    expect(generatedContent.label).toEqual(
       'Will the child be under 18 years old on the date you submit your application?'
     );
     expect(generatedContent.section).toEqual("Check you're eligible to adopt");
@@ -25,7 +25,7 @@ describe('eligibility content', () => {
 
   test('should return correct welsh content', () => {
     const generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.title).toEqual(
+    expect(generatedContent.label).toEqual(
       'Will the child be under 18 years old on the date you submit your application? (in welsh)'
     );
     expect(generatedContent.section).toEqual("Check you're eligible to adopt (in welsh)");

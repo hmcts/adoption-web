@@ -13,7 +13,7 @@ describe('eligibility content', () => {
   const commonContent = { language: 'en' } as CommonContent;
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
-    expect(generatedContent.title).toEqual('Has the child ever been married or in a civil partnership?');
+    expect(generatedContent.label).toEqual('Has the child ever been married or in a civil partnership?');
     expect(generatedContent.section).toEqual("Check you're eligible to adopt");
     expect(generatedContent.marriedYes).toEqual(
       "You can only apply to adopt a child if they've not been married or in a civil partnership."
@@ -24,7 +24,7 @@ describe('eligibility content', () => {
 
   test('should return correct welsh content', () => {
     const generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.title).toEqual('Has the child ever been married or in a civil partnership? (in welsh)');
+    expect(generatedContent.label).toEqual('Has the child ever been married or in a civil partnership? (in welsh)');
     expect(generatedContent.section).toEqual("Check you're eligible to adopt (in welsh)");
     expect(generatedContent.marriedYes).toEqual(
       "You can only apply to adopt a child if they've not been married or in a civil partnership. (in welsh)"
