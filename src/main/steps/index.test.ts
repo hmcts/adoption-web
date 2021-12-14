@@ -6,11 +6,11 @@ import { AppRequest } from '../app/controller/AppRequest';
 import { applicant1Sequence } from './applicant1Sequence';
 import {
   APPLYING_WITH_URL,
+  CHECK_ANSWERS_URL,
   CHECK_ELIGIBILITY_URL_UNDER_18,
-  DATE_CHILD_MOVED_IN_URL,
   HAS_RELATIONSHIP_BROKEN_URL,
-  RELATIONSHIP_NOT_BROKEN_URL,
   START_ELIGIBILITY_URL,
+  TASK_LIST_URL,
 } from './urls';
 
 import { getNextEligibilityStepUrl, getNextIncompleteStepUrl, getNextStepUrl } from './index';
