@@ -1,8 +1,8 @@
 import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
-import { isFieldFilledIn } from '../../../app/form/validation';
-import { mapSummaryListRows } from '../../common/functions/mapsummarylistrows';
+import { doesArrayHaveValues, isFieldFilledIn } from '../../../app/form/validation';
+import { mapSummaryListContent } from '../../common/functions/mapSummaryListContent';
 
 const en = () => ({
   section: 'Primary applicant',
@@ -61,7 +61,7 @@ export const form: FormContent = {
               applicant1AdditionalNames: {
                 type: 'summarylist',
                 values: [],
-                rows: mapSummaryListRows(userCase.applicant1AdditionalNames || [], ['Remove']),
+                rows: mapSummaryListContent(userCase.applicant1AdditionalNames || [], ['Remove']),
               },
               applicant1AdditionalName: {
                 type: 'input',
@@ -74,24 +74,25 @@ export const form: FormContent = {
                 classes: 'govuk-button--secondary',
                 value: 'addButton',
               },
-              // addAnotherName: {
-              //   type: 'details',
-              //   label: l => l.another,
-              //   subFields: {
-              //     applicant1AdditionalName: {
-              //       type: 'input',
-              //       label: l => l.applicant1AdditionalName,
-              //       labelSize: 'small',
-              //     },
-              //     addButton: {
-              //       type: 'button',
-              //       label: l => l.add,
-              //       classes: 'govuk-button--secondary',
-              //       value: 'addButton',
-              //     },
-              //   },
-              // },
+              addAnotherName: {
+                type: 'details',
+                label: l => l.another,
+                subFields: {
+                  applicant1AdditionalName: {
+                    type: 'input',
+                    label: l => l.applicant1AdditionalName,
+                    labelSize: 'small',
+                  },
+                  addButton: {
+                    type: 'button',
+                    label: l => l.add,
+                    classes: 'govuk-button--secondary',
+                    value: 'addButton',
+                  },
+                },
+              },
             },
+            validator: doesArrayHaveValues(userCase.applicant1AdditionalNames),
           },
           { label: l => l.no, value: YesOrNo.NO },
         ],

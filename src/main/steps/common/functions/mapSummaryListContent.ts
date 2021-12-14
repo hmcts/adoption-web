@@ -1,4 +1,6 @@
-export const mapSummaryListRows = (values: string[], actionItems: string[]): Record<string, unknown> => ({
+import { SummaryListContent } from '../models/summaryListContent';
+
+export const mapSummaryListContent = (values: string[], actionItems: string[]): SummaryListContent => ({
   rows: values.map(v => ({
     key: {
       text: v,

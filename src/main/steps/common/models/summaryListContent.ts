@@ -13,8 +13,8 @@ export type ActionsObject = {
 };
 
 export type SummaryListRow = {
-  key?: TextObject;
-  value: TextObject;
+  key: TextObject;
+  value?: TextObject;
   actions: ActionsObject;
 };
 

@@ -1,7 +1,7 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
-import { doesArrayHaveValues } from '../../../app/form/validation';
-import { mapSummaryListRows } from '../../common/functions/mapsummarylistrows';
+import { doesArrayHaveValues, isFieldFilledIn } from '../../../app/form/validation';
+import { mapSummaryListContent } from '../../common/functions/mapSummaryListContent';
 
 const en = () => ({
   section: 'Primary applicant',
@@ -14,9 +14,10 @@ const en = () => ({
   countryName: 'Country name',
   add: 'Add',
   another: 'Add another country',
+  actions: ['Remove'],
   errors: {
     nationality: {
-      required: 'Enter a name or choose no',
+      required: 'Select if you are British, Irish or a citizen of a different country',
     },
   },
 });
@@ -32,9 +33,10 @@ const cy = () => ({
   countryName: 'Country name (in Welsh)',
   add: 'Add',
   another: 'Add another country (in Welsh)',
+  actions: ['Remove (in Welsh)'],
   errors: {
     nationality: {
-      required: 'Enter a name or choose no (in Welsh)',
+      required: 'Select if you are British, Irish or a citizen of a different country (in Welsh)',
     },
   },
 });
@@ -46,6 +48,7 @@ export const form: FormContent = {
         type: 'checkboxes',
         label: l => l.label,
         labelSize: 'small',
+        validator: isFieldFilledIn,
         values: [
           {
             label: l => l.british,
@@ -59,12 +62,13 @@ export const form: FormContent = {
           {
             label: l => l.differentCountry,
             value: 'Other',
+            validator: doesArrayHaveValues(userCase.applicant1Countries),
             subFields: {
               applicant1Countries: {
                 type: 'summarylist',
                 values: [],
-                rows: mapSummaryListRows(userCase.applicant1Countries || [], ['Remove']),
-                validator: doesArrayHaveValues(userCase.applicant1Countries),
+                rows: (l: { actions: string[] }) =>
+                  mapSummaryListContent(userCase.applicant1Countries || [], l.actions),
               },
               applicant1Country: {
                 type: 'text',
@@ -77,23 +81,23 @@ export const form: FormContent = {
                 classes: 'govuk-button--secondary',
                 value: 'addButton',
               },
-              // addAnotherCountry: {
-              //   type: 'details',
-              //   label: l => l.another,
-              //   subFields: {
-              //     countryName2: {
-              //       type: 'text',
-              //       label: l => l.countryName,
-              //       labelSize: 'small',
-              //     },
-              //     addButton2: {
-              //       type: 'button',
-              //       label: l => l.add,
-              //       classes: 'govuk-button--secondary',
-              //       value: 'addButton',
-              //     },
-              //   },
-              // },
+              addAnotherCountry: {
+                type: 'details',
+                label: l => l.another,
+                subFields: {
+                  countryName2: {
+                    type: 'text',
+                    label: l => l.countryName,
+                    labelSize: 'small',
+                  },
+                  addButton2: {
+                    type: 'button',
+                    label: l => l.add,
+                    classes: 'govuk-button--secondary',
+                    value: 'addButton',
+                  },
+                },
+              },
             },
           },
         ],
