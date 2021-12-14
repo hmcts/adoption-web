@@ -23,6 +23,7 @@ export interface AppSession extends Session {
   eligibility: Eligibility;
   lang: string | undefined;
   errors: FormError[] | undefined;
+  addresses: [];
 }
 
 export interface UserDetails {

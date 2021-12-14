@@ -53,11 +53,13 @@ export class Form {
       errors.push(...valuesErrors);
     }
     // if there are subfields and the current field is selected then check for errors in the subfields
-    else if (field.subFields && body[id] === field.value) {
-      const subFields = Object.entries(field.subFields);
-      const subFieldErrors = subFields.flatMap(([subId, subField]) => this.getErrorsFromField(body, subId, subField));
+    else if (field.subFields) {
+      if (body[id] === field.value || (body[id] && body[id].includes(field.value))) {
+        const subFields = Object.entries(field.subFields);
+        const subFieldErrors = subFields.flatMap(([subId, subField]) => this.getErrorsFromField(body, subId, subField));
 
-      errors.push(...subFieldErrors);
+        errors.push(...subFieldErrors);
+      }
     }
 
     return errors;
@@ -100,7 +102,7 @@ export class Form {
   }
 }
 
-type LanguageLookup = (lang: Record<string, never>) => string;
+export type LanguageLookup = (lang: Record<string, never>) => string;
 
 type Parser = (value: Record<string, unknown> | string[]) => void;
 
@@ -120,7 +122,7 @@ export interface FormContent {
     text: Label;
     classes?: string;
   };
-  saveAsDraft: {
+  saveAsDraft?: {
     text: Label;
     classes?: string;
   };
@@ -134,6 +136,7 @@ export interface FormOptions {
   type: string;
   label?: Label;
   section?: Label;
+  classes?: string;
   labelHidden?: boolean;
   labelSize?: string | null;
   hideError?: boolean;
@@ -147,7 +150,9 @@ export interface FormOptions {
 export interface FormInput {
   id?: string;
   name?: string;
+  type?: string;
   label: Label;
+  section?: Label;
   hint?: Label;
   subtext?: Label;
   classes?: string;

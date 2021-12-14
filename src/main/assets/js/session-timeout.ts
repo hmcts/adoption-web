@@ -1,6 +1,6 @@
 import { throttle } from 'lodash';
 
-import { TIMED_OUT_URL } from '../../steps/urls';
+import { KEEP_ALIVE_URL, TIMED_OUT_URL } from '../../steps/urls';
 
 const eventTimer = 5 * 60 * 1000; // 5 minutes
 const sessionTimeoutInterval = 20 * 60 * 1000; // 20 minutes
@@ -34,7 +34,7 @@ const setSaveTimeout = () => {
 
 const pingUserActive = throttle(
   () => {
-    fetch('/active').then(() => {
+    fetch(KEEP_ALIVE_URL).then(() => {
       setSaveTimeout();
     });
   },

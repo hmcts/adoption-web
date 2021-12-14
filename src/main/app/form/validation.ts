@@ -148,3 +148,9 @@ export const isValidAccessCode: Validator = value => {
     return 'invalid';
   }
 };
+
+export const isAddressSelected: Validator = value => {
+  if ((value as string)?.trim() === '-1') {
+    return 'notSelected';
+  }
+};

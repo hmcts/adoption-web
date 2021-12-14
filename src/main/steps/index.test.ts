@@ -4,12 +4,7 @@ import { Gender, YesOrNo } from '../app/case/definition';
 import { AppRequest } from '../app/controller/AppRequest';
 
 import { applicant1Sequence } from './applicant1Sequence';
-import {
-  APPLYING_WITH_URL,
-  DATE_CHILD_MOVED_IN_URL,
-  HAS_RELATIONSHIP_BROKEN_URL,
-  RELATIONSHIP_NOT_BROKEN_URL,
-} from './urls';
+import { APPLYING_WITH_URL, CHECK_ANSWERS_URL, HAS_RELATIONSHIP_BROKEN_URL, TASK_LIST_URL } from './urls';
 
 import { getNextIncompleteStepUrl, getNextStepUrl } from './index';
 
@@ -23,20 +18,20 @@ describe('Steps', () => {
     it('returns the next step when correct details a passed', () => {
       mockReq.originalUrl = APPLYING_WITH_URL;
       const data = { gender: Gender.MALE };
-      expect(getNextStepUrl(mockReq, data)).toBe(DATE_CHILD_MOVED_IN_URL);
+      expect(getNextStepUrl(mockReq, data)).toBe(TASK_LIST_URL);
     });
 
     it('moves into a dead end when the response matches', () => {
       mockReq.originalUrl = HAS_RELATIONSHIP_BROKEN_URL;
       const data = { applicant1ScreenHasUnionBroken: YesOrNo.NO };
       const actual = getNextStepUrl(mockReq, data);
-      expect(actual).toBe(RELATIONSHIP_NOT_BROKEN_URL);
+      expect(actual).toBe(CHECK_ANSWERS_URL);
     });
 
     it('keeps the query string', () => {
       mockReq.originalUrl = `${APPLYING_WITH_URL}?customQueryString`;
       const data = { gender: Gender.MALE };
-      expect(getNextStepUrl(mockReq, data)).toBe(`${DATE_CHILD_MOVED_IN_URL}?customQueryString`);
+      expect(getNextStepUrl(mockReq, data)).toBe(`${TASK_LIST_URL}?customQueryString`);
     });
   });
 

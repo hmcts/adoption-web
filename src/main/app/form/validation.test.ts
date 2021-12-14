@@ -3,6 +3,7 @@ import { CaseDate } from '../case/case';
 import {
   areDateFieldsFilledIn,
   atLeastOneFieldIsChecked,
+  isAddressSelected,
   isDateInputInvalid,
   isEmailValid,
   isFieldFilledIn,
@@ -60,8 +61,11 @@ describe('Validation', () => {
         month: dateObj.getUTCMonth().toString(),
         year: (dateObj.getUTCFullYear() - 1).toString(),
       };
-      let isValid = isFutureDate(date);
 
+      let isValid = isFutureDate(undefined);
+      expect(isValid).toStrictEqual(undefined);
+
+      isValid = isFutureDate(date);
       expect(isValid).toStrictEqual(undefined);
 
       date.year += '1';
@@ -79,8 +83,10 @@ describe('Validation', () => {
         month: (dateObj.getUTCMonth() - 6).toString(),
         year: dateObj.getUTCFullYear().toString(),
       };
-      let isValid = isLessThanAYear(date);
+      let isValid = isLessThanAYear(undefined);
+      expect(isValid).toStrictEqual(undefined);
 
+      isValid = isLessThanAYear(date);
       expect(isValid).toStrictEqual('lessThanAYear');
 
       date.year = (+date.year - 1).toString();
@@ -104,6 +110,7 @@ describe('Validation', () => {
       { date: { day: 'no', month: '!%', year: 'way' }, expected: 'invalidDate' },
       { date: { day: '29', month: '2', year: '2000' }, expected: undefined },
       { date: { day: '31', month: '2', year: '2000' }, expected: 'invalidDate' },
+      { expected: 'invalidDate' },
     ])('checks dates validity when %o', ({ date, expected }) => {
       const isValid = isDateInputInvalid(date as unknown as CaseDate);
 
@@ -253,6 +260,18 @@ describe('Validation', () => {
     test('Should reject empty access code', async () => {
       const isValid = isValidAccessCode('');
       expect(isValid).toStrictEqual('invalid');
+    });
+  });
+
+  describe('isAddressSelected()', () => {
+    test('Should accept when the selection is other than -1', async () => {
+      const isValid = isAddressSelected('1');
+      expect(isValid).toStrictEqual(undefined);
+    });
+
+    test('Should reject when the selection is -1', async () => {
+      const isValid = isAddressSelected('-1');
+      expect(isValid).toStrictEqual('notSelected');
     });
   });
 });

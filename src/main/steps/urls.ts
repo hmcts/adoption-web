@@ -6,6 +6,7 @@ export const SIGN_IN_URL: PageLink = '/login';
 export const SIGN_OUT_URL: PageLink = '/logout';
 export const SAVE_AND_SIGN_OUT: PageLink = '/save-and-sign-out';
 export const TIMED_OUT_URL: PageLink = '/timed-out';
+export const KEEP_ALIVE_URL: PageLink = '/keep-alive';
 export const CSRF_TOKEN_ERROR_URL: PageLink = '/csrf-token-error';
 
 export const APPLICANT_1: PageLink = '/applicant1';
@@ -25,6 +26,9 @@ export const APPLICANT_1_DOB: PageLink = '/applicant1/dob';
 export const APPLICANT_1_NATIONALITY: PageLink = '/applicant1/nationality';
 export const APPLICANT_1_OCCUPATION: PageLink = '/applicant1/occupation';
 export const APPLICANT_1_CONTACT_DETAILS: PageLink = '/applicant1/contact-details';
+export const APPLICANT_1_FIND_ADDRESS: PageLink = '/applicant1/find-address';
+export const APPLICANT_1_SELECT_ADDRESS: PageLink = '/applicant1/select-address';
+export const APPLICANT_1_MANUAL_ADDRESS: PageLink = '/applicant1/manual-address';
 export const APPLICANT_1_IDENTITY_DOCUMENTS: PageLink = '/applicant1/identity-documents';
 
 export const HAS_RELATIONSHIP_BROKEN_URL: PageLink = '/irretrievable-breakdown';

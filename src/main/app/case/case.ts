@@ -120,6 +120,9 @@ export interface Case {
   applicant1AdditionalNames?: string[];
   applicant1Country?: string;
   applicant1Countries?: string[];
+  applicant1SelectAddress?: string;
+  applicant1EmailAddress?: string;
+  applicant1ContactDetails?: string[];
   applicationType?: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
   issueDate?: DateAsString;

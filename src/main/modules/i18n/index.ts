@@ -1,4 +1,4 @@
-import { Express } from 'express';
+import { Application } from 'express';
 
 /**
  * Module that enables toggling between languages
@@ -6,7 +6,7 @@ import { Express } from 'express';
 export class LanguageToggle {
   static supportedLanguages = ['en', 'cy'];
 
-  public enableFor(app: Express): void {
+  public enableFor(app: Application): void {
     app.use((req, res, next) => {
       if (req.method === 'GET' && req.query['lng']) {
         const requestedLanguage = req.query['lng'] as string;
