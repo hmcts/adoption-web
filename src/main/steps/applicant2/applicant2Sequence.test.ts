@@ -2,7 +2,7 @@ import { applicant2Sequence } from './applicant2Sequence';
 
 describe('applicant2Sequence', () => {
   test('should contain 4 entries in applicant 2 screen sequence', () => {
-    expect(applicant2Sequence).toHaveLength(8);
+    expect(applicant2Sequence).toHaveLength(4);
 
     expect(applicant2Sequence[0].url).toBe('/applicant2/find-address');
     expect(applicant2Sequence[0].showInSection).toBe('aboutApplicant2');
