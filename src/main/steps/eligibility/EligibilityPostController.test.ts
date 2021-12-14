@@ -6,9 +6,9 @@ import * as steps from '../../steps';
 
 import EligibilityPostController from './EligibilityPostController';
 
-const getNextStepUrlMock = jest.spyOn(steps, 'getNextStepUrl');
+const getNextStepUrlMock = jest.spyOn(steps, 'getNextEligibilityStepUrl');
 
-describe('PostController', () => {
+describe('EligibilityPostController', () => {
   afterEach(() => {
     getNextStepUrlMock.mockClear();
   });
