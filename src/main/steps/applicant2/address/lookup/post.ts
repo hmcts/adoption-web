@@ -1,11 +1,11 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
-import { AppRequest } from '../../../app/controller/AppRequest';
-import { AnyObject, PostController } from '../../../app/controller/PostController';
-import { Form, FormFields, FormFieldsFn } from '../../../app/form/Form';
-import { Address, getAddressesFromPostcode } from '../../../app/postcode/postcode-lookup-api';
-import { getNextStepUrl } from '../../../steps';
+import { getNextStepUrl } from '../../..';
+import { AppRequest } from '../../../../app/controller/AppRequest';
+import { AnyObject, PostController } from '../../../../app/controller/PostController';
+import { Form, FormFields, FormFieldsFn } from '../../../../app/form/Form';
+import { Address, getAddressesFromPostcode } from '../../../../app/postcode/postcode-lookup-api';
 
 @autobind
 export default class FindAddressPostController extends PostController<AnyObject> {

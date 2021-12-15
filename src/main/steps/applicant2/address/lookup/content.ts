@@ -1,7 +1,7 @@
-import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent } from '../../../app/form/Form';
-import { isInvalidPostcode } from '../../../app/form/validation';
-import { APPLICANT_2_MANUAL_ADDRESS } from '../../../steps/urls';
+import { TranslationFn } from '../../../../app/controller/GetController';
+import { FormContent } from '../../../../app/form/Form';
+import { isInvalidPostcode } from '../../../../app/form/validation';
+import { APPLICANT_2_MANUAL_ADDRESS } from '../../../urls';
 
 const en = () => ({
   section: 'Second applicant',

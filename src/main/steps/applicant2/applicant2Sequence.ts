@@ -1,4 +1,5 @@
 import { CaseWithId } from '../../app/case/case';
+import { YesOrNo } from '../../app/case/definition';
 import * as Urls from '../urls';
 
 export enum Sections {
@@ -14,6 +15,14 @@ export interface Step {
 }
 
 export const applicant2Sequence: Step[] = [
+  {
+    url: Urls.APPLICANT_2_SAME_ADDRESS,
+    showInSection: Sections.AboutApplicant2,
+    getNextStep: data =>
+      data.applicant2AddressSameAsApplicant1 === YesOrNo.YES
+        ? Urls.APPLICANT_2_CONTACT_DETAILS
+        : Urls.APPLICANT_2_FIND_ADDRESS,
+  },
   {
     url: Urls.APPLICANT_2_FIND_ADDRESS,
     showInSection: Sections.AboutApplicant2,

@@ -1,10 +1,10 @@
-import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
-import { isInvalidPostcode } from '../../../app/form/validation';
-import { CommonContent } from '../../common/common.content';
+import { FormContent, FormFields, FormOptions } from '../../../../app/form/Form';
+import { isInvalidPostcode } from '../../../../app/form/validation';
+import { CommonContent } from '../../../common/common.content';
 
 import { generateContent } from './content';
 
-jest.mock('../../../app/form/validation');
+jest.mock('../../../../app/form/validation');
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('find-address content', () => {
@@ -16,7 +16,7 @@ describe('find-address content', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual('Primary applicant');
+    expect(generatedContent.section).toEqual('Second applicant');
     expect(generatedContent.title).toEqual("What's your home address?");
     expect(generatedContent.line1).toEqual("We'll send all court papers to this address.");
     expect(generatedContent.postcode).toEqual('Postcode');
@@ -26,12 +26,12 @@ describe('find-address content', () => {
     expect((generatedContent.errors as any).applicant2AddressPostcode.required).toEqual('Enter a valid postcode');
     expect((generatedContent.errors as any).applicant2AddressPostcode.invalid).toEqual('Enter a valid postcode');
 
-    expect(generatedContent.manualAddressUrl).toEqual('/applicant2/manual-address');
+    expect(generatedContent.manualAddressUrl).toEqual('/applicant2/address/manual');
   });
 
   test('should return correct welsh content', () => {
     generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual('Primary applicant (in welsh)');
+    expect(generatedContent.section).toEqual('Second applicant (in welsh)');
     expect(generatedContent.title).toEqual("What's your home address? (in welsh)");
     expect(generatedContent.line1).toEqual("We'll send all court papers to this address. (in welsh)");
     expect(generatedContent.postcode).toEqual('Postcode (in welsh)');
@@ -45,7 +45,7 @@ describe('find-address content', () => {
       'Enter a valid postcode (in welsh)'
     );
 
-    expect(generatedContent.manualAddressUrl).toEqual('/applicant2/manual-address');
+    expect(generatedContent.manualAddressUrl).toEqual('/applicant2/address/manual');
   });
 
   test('should contain applicant2AddressPostcode field', () => {

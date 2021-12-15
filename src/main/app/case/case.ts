@@ -114,6 +114,7 @@ export interface Case {
   applicant1SelectAddress?: string;
   applicant1EmailAddress?: string;
   applicant1ContactDetails?: string[];
+  applicant2AddressSameAsApplicant1?: YesOrNo;
   applicationType?: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
   issueDate?: DateAsString;
