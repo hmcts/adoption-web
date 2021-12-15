@@ -5,43 +5,47 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
   section: "Check you're eligible to adopt",
-  label: 'Will the child be under 18 years old on the date you submit your application?',
+  label:
+    'Have you and any other applicant if relevant, lived in the UK, Channel Islands or Isle of Man for at least 12 months?',
   one: 'Yes',
   two: 'No',
-  under18No:
-    'You can only apply to adopt a child if they are under 18 years old on the date your application is submitted.',
+  livedUKNo: 'You cannot apply to adopt a child unless you have a permanent home here.',
+  hint: 'You can answer yes if your permanent home is here.',
   errors: {
-    under18Eligible: {
-      required: 'Select whether the child will be under 18 when you submit the application',
+    livedUKEligible: {
+      required: 'Select whether you have lived in the UK, Channel Islands or Isle of Man for at least 12 months',
     },
   },
 });
 
 const cy = () => ({
   section: "Check you're eligible to adopt (in welsh)",
-  label: 'Will the child be under 18 years old on the date you submit your application? (in welsh)',
+  label:
+    'Have you and any other applicant if relevant, lived in the UK, Channel Islands or Isle of Man for at least 12 months? (in welsh)',
   one: 'Yes (in welsh)',
   two: 'No (in welsh)',
-  under18No:
-    'You can only apply to adopt a child if they are under 18 years old on the date your application is submitted. (in welsh)',
+  livedUKNo: 'You cannot apply to adopt a child unless you have a permanent home here. (in welsh)',
+  hint: 'You can answer yes if your permanent home is here. (in welsh)',
   errors: {
-    under18Eligible: {
-      required: 'Select whether the child will be under 18 when you submit the application (in welsh)',
+    livedUKEligible: {
+      required:
+        'Select whether you have lived in the UK, Channel Islands or Isle of Man for at least 12 months (in welsh)',
     },
   },
 });
 
 export const form: FormContent = {
   fields: {
-    under18Eligible: {
+    livedUKEligible: {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.label,
       section: l => l.section,
+      hint: l => l.hint,
       labelHidden: false,
       values: [
         { label: l => l.one, value: YesOrNo.YES },
-        { label: l => l.two, value: YesOrNo.NO, conditionalText: l => `<p class="govuk-label">${l.under18No}</p>` },
+        { label: l => l.two, value: YesOrNo.NO, conditionalText: l => `<p class="govuk-label">${l.livedUKNo}</p>` },
       ],
       validator: isFieldFilledIn,
     },

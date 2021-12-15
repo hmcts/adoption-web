@@ -9,14 +9,14 @@ jest.mock('../../../app/form/validation');
 
 /* eslint-disable @typescript-eslint/ban-types */
 
-describe('married content', () => {
+describe('under-21 content', () => {
   const commonContent = { language: 'en' } as CommonContent;
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
-    expect(generatedContent.label).toEqual('Has the child ever been married or in a civil partnership?');
+    expect(generatedContent.label).toEqual('Are you, and the other applicant if relevant, both aged 21 or over?');
     expect(generatedContent.section).toEqual("Check you're eligible to adopt");
-    expect(generatedContent.marriedYes).toEqual(
-      "You can only apply to adopt a child if they've not been married or in a civil partnership."
+    expect(generatedContent.under21Yes).toEqual(
+      'You must be 21 or over to adopt a child. This includes any other applicant.'
     );
     expect(generatedContent.one).toEqual('Yes');
     expect(generatedContent.two).toEqual('No');
@@ -24,10 +24,12 @@ describe('married content', () => {
 
   test('should return correct welsh content', () => {
     const generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.label).toEqual('Has the child ever been married or in a civil partnership? (in welsh)');
+    expect(generatedContent.label).toEqual(
+      'Are you, and the other applicant if relevant, both aged 21 or over? (in welsh)'
+    );
     expect(generatedContent.section).toEqual("Check you're eligible to adopt (in welsh)");
-    expect(generatedContent.marriedYes).toEqual(
-      "You can only apply to adopt a child if they've not been married or in a civil partnership. (in welsh)"
+    expect(generatedContent.under21Yes).toEqual(
+      'You must be 21 or over to adopt a child. This includes any other applicant. (in welsh)'
     );
     expect(generatedContent.one).toEqual('Yes (in welsh)');
     expect(generatedContent.two).toEqual('No (in welsh)');
@@ -39,23 +41,23 @@ describe('married content', () => {
     expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
   });
 
-  test('should contain marriedEligible field', () => {
+  test('should contain under21Eligible field', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const marriedEligibleField = fields.marriedEligible as FormOptions;
-    expect(marriedEligibleField.type).toBe('radios');
-    expect((marriedEligibleField as FormInput).classes).toBe('govuk-radios');
-    expect((marriedEligibleField.label as Function)(generatedContent)).toBe(
-      'Has the child ever been married or in a civil partnership?'
+    const under21Eligible = fields.under21Eligible as FormOptions;
+    expect(under21Eligible.type).toBe('radios');
+    expect((under21Eligible as FormInput).classes).toBe('govuk-radios');
+    expect((under21Eligible.label as Function)(generatedContent)).toBe(
+      'Are you, and the other applicant if relevant, both aged 21 or over?'
     );
-    expect((marriedEligibleField.section as Function)(generatedContent)).toBe("Check you're eligible to adopt");
-    expect((marriedEligibleField.values[0].label as Function)(generatedContent)).toBe(YesOrNo.YES);
-    expect((marriedEligibleField.values[1].label as Function)(generatedContent)).toBe(YesOrNo.NO);
-    expect(marriedEligibleField.validator).toBe(isFieldFilledIn);
-    expect((marriedEligibleField.values[0].conditionalText as Function)(generatedContent)).toEqual(
-      '<p class="govuk-label">You can only apply to adopt a child if they\'ve not been married or in a civil partnership.</p>'
+    expect((under21Eligible.section as Function)(generatedContent)).toBe("Check you're eligible to adopt");
+    expect((under21Eligible.values[0].label as Function)(generatedContent)).toBe(YesOrNo.YES);
+    expect((under21Eligible.values[1].label as Function)(generatedContent)).toBe(YesOrNo.NO);
+    expect((under21Eligible.values[1].conditionalText as Function)(generatedContent)).toBe(
+      '<p class="govuk-label">You must be 21 or over to adopt a child. This includes any other applicant.</p>'
     );
+    expect(under21Eligible.validator).toBe(isFieldFilledIn);
   });
 });
 /* eslint-disable @typescript-eslint/ban-types */
