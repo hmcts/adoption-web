@@ -23,7 +23,7 @@ describe('select-address content', () => {
     expect(generatedContent.selectAddress).toEqual('Select an address');
     expect(generatedContent.cannotFindAddress).toEqual('I cannot find the address in the list');
 
-    expect((generatedContent.errors as any).applicant1SelectAddress.notSelected).toEqual('Select an address');
+    expect((generatedContent.errors as any).applicant2SelectAddress.notSelected).toEqual('Select an address');
 
     expect(generatedContent.items).toEqual([
       { attributes: { id: 'totalAddressesFound' }, selected: true, text: '0 addresses found', value: -1 },
@@ -42,7 +42,7 @@ describe('select-address content', () => {
     expect(generatedContent.selectAddress).toEqual('Select an address (in welsh)');
     expect(generatedContent.cannotFindAddress).toEqual('I cannot find the address in the list (in welsh)');
 
-    expect((generatedContent.errors as any).applicant1SelectAddress.notSelected).toEqual(
+    expect((generatedContent.errors as any).applicant2SelectAddress.notSelected).toEqual(
       'Select an address (in welsh)'
     );
 
@@ -92,15 +92,15 @@ describe('select-address content', () => {
     });
   });
 
-  test('should contain applicant1SelectAddress field', () => {
+  test('should contain applicant2SelectAddress field', () => {
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const applicant1SelectAddressField = fields.applicant1SelectAddress as FormOptions;
+    const applicant2SelectAddressField = fields.applicant2SelectAddress as FormOptions;
 
-    expect(applicant1SelectAddressField.type).toBe('select');
-    expect((applicant1SelectAddressField.label as Function)(generatedContent)).toBe('Select an address');
-    expect(applicant1SelectAddressField.labelSize).toBe('m');
-    expect(applicant1SelectAddressField.validator).toBe(isAddressSelected);
+    expect(applicant2SelectAddressField.type).toBe('select');
+    expect((applicant2SelectAddressField.label as Function)(generatedContent)).toBe('Select an address');
+    expect(applicant2SelectAddressField.labelSize).toBe('m');
+    expect(applicant2SelectAddressField.validator).toBe(isAddressSelected);
   });
 
   test('should contain submit button', () => {

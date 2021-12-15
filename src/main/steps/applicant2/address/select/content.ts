@@ -26,7 +26,7 @@ const en = content => {
     selectAddress: 'Select an address',
     cannotFindAddress: 'I cannot find the address in the list',
     errors: {
-      applicant1SelectAddress: {
+      applicant2SelectAddress: {
         notSelected: 'Select an address',
       },
     },
@@ -57,7 +57,7 @@ const cy = content => {
     selectAddress: 'Select an address (in welsh)',
     cannotFindAddress: 'I cannot find the address in the list (in welsh)',
     errors: {
-      applicant1SelectAddress: {
+      applicant2SelectAddress: {
         notSelected: 'Select an address (in welsh)',
       },
     },
@@ -69,7 +69,7 @@ const cy = content => {
 
 export const form: FormContent = {
   fields: {
-    applicant1SelectAddress: {
+    applicant2SelectAddress: {
       type: 'select',
       label: l => l.selectAddress,
       labelSize: 'm',
