@@ -2,8 +2,10 @@ import { YesOrNo } from '../app/case/definition';
 import { Eligibility as appRequestEligibility } from '../app/controller/AppRequest';
 
 import {
+  CHECK_ELIGIBILITY_URL_LIVED_UK,
   CHECK_ELIGIBILITY_URL_MARRIED,
   CHECK_ELIGIBILITY_URL_UNDER_18,
+  CHECK_ELIGIBILITY_URL_UNDER_21,
   INELIGIBLE_TO_ADOPT,
   PageLink,
   SIGN_IN_URL,
@@ -11,18 +13,6 @@ import {
 } from './urls';
 
 export enum Sections {
-  AboutApplicant1 = 'aboutApplicant1',
-  AboutApplicant2 = 'aboutApplicant2',
-  AboutApplication = 'aboutApplication',
-  AboutPartnership = 'aboutPartnership',
-  HelpWithFees = 'helpWithFees',
-  ConnectionsToEnglandWales = 'connectionsToEnglandWales',
-  AboutPartners = 'aboutPartners',
-  ContactYou = 'contactYou',
-  ContactThem = 'contactThem',
-  OtherCourtCases = 'otherCourtCases',
-  DividingAssets = 'dividingAssets',
-  Documents = 'documents',
   Eligibility = 'eligibility',
 }
 
@@ -48,7 +38,17 @@ export const eligibilitySequence: Step[] = [
   {
     url: CHECK_ELIGIBILITY_URL_MARRIED,
     showInSection: Sections.Eligibility,
-    getNextStep: data => (data.marriedEligible === YesOrNo.NO ? SIGN_IN_URL : INELIGIBLE_TO_ADOPT),
+    getNextStep: data => (data.marriedEligible === YesOrNo.NO ? CHECK_ELIGIBILITY_URL_UNDER_21 : INELIGIBLE_TO_ADOPT),
+  },
+  {
+    url: CHECK_ELIGIBILITY_URL_UNDER_21,
+    showInSection: Sections.Eligibility,
+    getNextStep: data => (data.under21Eligible === YesOrNo.NO ? INELIGIBLE_TO_ADOPT : CHECK_ELIGIBILITY_URL_LIVED_UK),
+  },
+  {
+    url: CHECK_ELIGIBILITY_URL_LIVED_UK,
+    showInSection: Sections.Eligibility,
+    getNextStep: data => (data.livedUKEligible === YesOrNo.NO ? INELIGIBLE_TO_ADOPT : SIGN_IN_URL),
   },
   {
     url: INELIGIBLE_TO_ADOPT,

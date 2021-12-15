@@ -26,7 +26,7 @@ function readFiles(expression) {
 module.exports = function () {
   output.log('Generating aggregated metrics...');
 
-  const config = require('../../codecept.conf').config;
+  const config = require('../../../../codecept.conf').config;
 
   const metrics = readFiles(`${config.output}/**/metrics.json`).map(content => JSON.parse(content));
   const aggregate = ReportAggregator.aggregate(metrics);
