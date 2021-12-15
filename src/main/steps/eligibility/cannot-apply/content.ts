@@ -9,8 +9,13 @@ const en = content => ({
       ? 'You cannot apply to adopt the child because they’re 18 or over.'
       : content.eligibility.marriedEligible === YesOrNo.YES
       ? "You cannot apply to adopt the child because they've been married or in a civil partnership."
-      : 'some other error'
+      : content.eligibility.livedUKEligible === YesOrNo.NO
+      ? 'You cannot apply to adopt the child until you, and the other applicant if relevant, have been living in the UK, Channel Islands or Isle of Man for at least 12 months.'
+      : content.eligibility.under21Eligible === YesOrNo.NO
+      ? 'You cannot apply to adopt the child until you, and your partner if applicable, are 21.'
+      : ''
   }`,
+  line2: 'More about adoption',
 });
 
 const cy = content => ({
@@ -21,8 +26,13 @@ const cy = content => ({
       ? 'You cannot apply to adopt the child because they’re 18 or over. (in welsh)'
       : content.eligibility.marriedEligible === YesOrNo.YES
       ? "You cannot apply to adopt the child because they've been married or in a civil partnership. (in welsh)"
-      : 'some other error'
+      : content.eligibility.livedUKEligible === YesOrNo.NO
+      ? 'You cannot apply to adopt the child until you, and the other applicant if relevant, have been living in the UK, Channel Islands or Isle of Man for at least 12 months. (in welsh)'
+      : content.eligibility.under21Eligible === YesOrNo.NO
+      ? 'You cannot apply to adopt the child until you, and your partner if applicable, are 21. (in welsh)'
+      : ''
   }`,
+  line2: 'More about adoption (in welsh)',
 });
 
 const languages = {
