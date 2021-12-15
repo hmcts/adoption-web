@@ -4,13 +4,13 @@ import * as urls from '../urls';
 
 import { getContactDetailsStatus, isApplyingWithComplete } from './utils';
 
-const getSectionStatusLabel = (status, statuses) => {
+const getSectionStatusLabel = (status, statuses, id) => {
   if (status === SectionStatus.COMPLETED) {
-    return `<strong class="govuk-tag  app-task-list__tag" id="eligibility-completed">${statuses.completed}</strong>`;
+    return `<strong id="${id}" class="govuk-tag  app-task-list__tag" id="eligibility-completed">${statuses.completed}</strong>`;
   } else if (status === SectionStatus.IN_PROGRESS) {
-    return `<strong class="govuk-tag govuk-tag--blue app-task-list__tag">${statuses.inProgress}</strong>`;
+    return `<strong id="${id}" class="govuk-tag govuk-tag--blue app-task-list__tag">${statuses.inProgress}</strong>`;
   } else {
-    return `<strong class="govuk-tag govuk-tag--grey app-task-list__tag">${statuses.notStarted}</strong>`;
+    return `<strong id="${id}" class="govuk-tag govuk-tag--grey app-task-list__tag">${statuses.notStarted}</strong>`;
   }
 };
 
@@ -67,11 +67,13 @@ const en = content => {
       applyingWith: isApplyingWithComplete(content.userCase),
       applicant1ContactDetails: getSectionStatusLabel(
         getContactDetailsStatus(content.userCase, 'applicant1'),
-        statuses
+        statuses,
+        'applicant1-contact-details-status'
       ),
       applicant2ContactDetails: getSectionStatusLabel(
         getContactDetailsStatus(content.userCase, 'applicant2'),
-        statuses
+        statuses,
+        'applicant2-contact-details-status'
       ),
     },
     urls,
@@ -131,11 +133,13 @@ const cy = content => {
       applyingWith: isApplyingWithComplete(content.userCase),
       applicant1ContactDetails: getSectionStatusLabel(
         getContactDetailsStatus(content.userCase, 'applicant1'),
-        statuses
+        statuses,
+        'applicant1-contact-details-status'
       ),
       applicant2ContactDetails: getSectionStatusLabel(
         getContactDetailsStatus(content.userCase, 'applicant2'),
-        statuses
+        statuses,
+        'applicant2-contact-details-status'
       ),
     },
     urls,

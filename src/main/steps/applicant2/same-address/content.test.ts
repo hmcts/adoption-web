@@ -7,11 +7,10 @@ import { generateContent } from './content';
 jest.mock('../../../app/form/validation');
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('applying-with content', () => {
+describe('same-address content', () => {
   const commonContent = {
     language: 'en',
     userCase: {
-      applyingWith: 'alone',
       applicant1Address1: 'MOCK_ADDRESS_LINE_1',
       applicant1AddressTown: 'MOCK_ADDRESS_TOWN',
       applicant1AddressPostcode: 'MOCK_ADDRESS_POSTCODE',
@@ -39,7 +38,7 @@ describe('applying-with content', () => {
     );
   });
 
-  test('should contain applyingWith field', () => {
+  test('should contain applicant2AddressSameAsApplicant1 field', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
