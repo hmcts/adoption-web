@@ -187,6 +187,7 @@ export const generatePageContent = ({
   userEmail,
   addresses = [],
   eligibility,
+  fee,
 }: {
   language: Language;
   pageContent?: TranslationFn;
@@ -195,6 +196,7 @@ export const generatePageContent = ({
   userEmail?: string;
   addresses?: [];
   eligibility?: Eligibility;
+  fee?: string;
 }): PageContent => {
   const commonTranslations: typeof en = language === 'en' ? en : cy;
   const serviceName = getServiceName(commonTranslations, isDivorce);
@@ -216,6 +218,7 @@ export const generatePageContent = ({
     isJointApplication,
     addresses,
     eligibility,
+    fee,
   };
 
   if (pageContent) {
@@ -262,6 +265,7 @@ export type CommonContent = typeof en & {
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   addresses?: any[];
   eligibility?: Eligibility;
+  fee?: string;
 };
 
 export type Language = 'en' | 'cy';

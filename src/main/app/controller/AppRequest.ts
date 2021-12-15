@@ -24,6 +24,7 @@ export interface AppSession extends Session {
   lang: string | undefined;
   errors: FormError[] | undefined;
   addresses: [];
+  fee: string;
 }
 
 export interface UserDetails {
