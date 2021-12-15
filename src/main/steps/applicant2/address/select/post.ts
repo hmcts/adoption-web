@@ -1,10 +1,10 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
-import { AppRequest } from '../../../app/controller/AppRequest';
-import { AnyObject, PostController } from '../../../app/controller/PostController';
-import { Form, FormFields, FormFieldsFn } from '../../../app/form/Form';
-import { getNextStepUrl } from '../../../steps';
+import { AppRequest } from '../../../../app/controller/AppRequest';
+import { AnyObject, PostController } from '../../../../app/controller/PostController';
+import { Form, FormFields, FormFieldsFn } from '../../../../app/form/Form';
+import { getNextStepUrl } from '../../../../steps';
 
 @autobind
 export default class SelectAddressPostController extends PostController<AnyObject> {
@@ -21,15 +21,15 @@ export default class SelectAddressPostController extends PostController<AnyObjec
     Object.assign(req.session.userCase, formData);
 
     if (req.session.errors.length === 0) {
-      const selectedAddressIndex = Number(formData.applicant1SelectAddress);
+      const selectedAddressIndex = Number(formData.applicant2SelectAddress);
       if (selectedAddressIndex >= 0) {
         //eslint-disable-next-line @typescript-eslint/no-explicit-any
         const selectedAddress = req.session.addresses[selectedAddressIndex] as any;
-        req.session.userCase.applicant1Address1 = selectedAddress.street1;
-        req.session.userCase.applicant1Address2 = selectedAddress.street2;
-        req.session.userCase.applicant1AddressTown = selectedAddress.town;
-        req.session.userCase.applicant1AddressCounty = selectedAddress.county;
-        req.session.userCase.applicant1AddressPostcode = selectedAddress.postcode;
+        req.session.userCase.applicant2Address1 = selectedAddress.street1;
+        req.session.userCase.applicant2Address2 = selectedAddress.street2;
+        req.session.userCase.applicant2AddressTown = selectedAddress.town;
+        req.session.userCase.applicant2AddressCounty = selectedAddress.county;
+        req.session.userCase.applicant2AddressPostcode = selectedAddress.postcode;
       }
     }
 

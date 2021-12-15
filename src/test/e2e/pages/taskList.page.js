@@ -2,16 +2,18 @@ const config = require('../config');
 const { I } = inject();
 
 module.exports = {
-  fields: {
-    username: '#username',
-    password: '#password',
+  secondApplicant: {
+    contactDetailsLink: 'a[href="/applicant2/same-address"]',
   },
-  submitButton: 'input[value="Sign in"]',
 
   async goToTaskListPage() {
     await I.goToPage(config.baseUrl + 'task-list');
   },
   async selectTaskNameFromTaskList(taskName) {
     await I.click(taskName);
+  },
+
+  async selectOtherApplicantContactDetails() {
+    await I.click(this.secondApplicant.contactDetailsLink);
   },
 };
