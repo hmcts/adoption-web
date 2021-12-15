@@ -1,33 +1,32 @@
 import { CaseWithId } from '../../app/case/case';
-import { ContactDetails, SectionStatus } from '../../app/case/definition';
+import { ContactDetails, SectionStatus, YesOrNo } from '../../app/case/definition';
 
 export const isApplyingWithComplete = (userCase: CaseWithId): boolean => {
   return !!userCase.applyingWith;
 };
 
-export const getContactDetailsStatus = (userCase: CaseWithId): SectionStatus => {
-  const {
-    applicant1Address1 = '',
-    applicant1AddressTown = '',
-    applicant1AddressPostcode = '',
-    applicant1ContactDetails = [],
-    applicant1EmailAddress = '',
-    applicant1PhoneNumber = '',
-  } = userCase;
+export const getContactDetailsStatus = (userCase: CaseWithId, userType: 'applicant1' | 'applicant2'): SectionStatus => {
+  const address1 = userCase[`${userType}Address1`];
+  const addressTown = userCase[`${userType}AddressTown`];
+  const addressPostcode = userCase[`${userType}AddressPostcode`];
+  const contactDetails = userCase[`${userType}ContactDetails`] || [];
+  const emailAddress = userCase[`${userType}EmailAddress`];
+  const phoneNumber = userCase[`${userType}PhoneNumber`];
+  const applicant2AddressSameAsApplicant1 = userCase[`${userType}AddressSameAsApplicant1`];
 
   let addressAvailable = false;
-  if (applicant1Address1 && applicant1AddressTown && applicant1AddressPostcode) {
+  if (address1 && addressTown && addressPostcode) {
+    addressAvailable = true;
+  } else if (userType === 'applicant2' && applicant2AddressSameAsApplicant1 === YesOrNo.YES) {
     addressAvailable = true;
   }
 
   let contactDetailsAvailable = false;
-  if (applicant1ContactDetails.length === 0) {
+  if (contactDetails.length === 0) {
     contactDetailsAvailable = false;
-  } else if (applicant1ContactDetails) {
-    contactDetailsAvailable = applicant1ContactDetails.every(
-      item =>
-        (item === ContactDetails.EMAIL && applicant1EmailAddress) ||
-        (item === ContactDetails.PHONE && applicant1PhoneNumber)
+  } else if (contactDetails) {
+    contactDetailsAvailable = contactDetails.every(
+      item => (item === ContactDetails.EMAIL && emailAddress) || (item === ContactDetails.PHONE && phoneNumber)
     );
   }
   if (addressAvailable && contactDetailsAvailable) {

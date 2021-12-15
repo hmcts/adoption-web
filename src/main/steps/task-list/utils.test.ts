@@ -35,14 +35,19 @@ describe('utils', () => {
 
   describe('getContactDetailsStatus', () => {
     test.each([
-      { data: { applicant1Address1: 'MOCK_ADDRESS_1' }, expected: 'NOT_STARTED' },
-      { data: { applicant1Address1: 'MOCK_ADDRESS_1', applicant1AddressTown: ' MOCK_TOWN' }, expected: 'NOT_STARTED' },
+      { data: { applicant1Address1: 'MOCK_ADDRESS_1' }, userType: 'applicant1', expected: 'NOT_STARTED' },
+      {
+        data: { applicant1Address1: 'MOCK_ADDRESS_1', applicant1AddressTown: ' MOCK_TOWN' },
+        userType: 'applicant1',
+        expected: 'NOT_STARTED',
+      },
       {
         data: {
           applicant1Address1: 'MOCK_ADDRESS_1',
           applicant1AddressTown: ' MOCK_TOWN',
           applicant1AddressPostcode: 'MOCK_POSTCODE',
         },
+        userType: 'applicant1',
         expected: 'IN_PROGRESS',
       },
       {
@@ -52,6 +57,7 @@ describe('utils', () => {
           applicant1AddressPostcode: 'MOCK_POSTCODE',
           applicant1ContactDetails: undefined,
         },
+        userType: 'applicant1',
         expected: 'IN_PROGRESS',
       },
       {
@@ -62,6 +68,7 @@ describe('utils', () => {
           applicant1ContactDetails: ['email'],
           applicant1EmailAddress: 'MOCK_EMAIL',
         },
+        userType: 'applicant1',
         expected: 'COMPLETED',
       },
       {
@@ -72,10 +79,29 @@ describe('utils', () => {
           applicant1ContactDetails: ['phone'],
           applicant1PhoneNumber: 'MOCK_PHONE',
         },
+        userType: 'applicant1',
         expected: 'COMPLETED',
       },
-    ])('should return correct status %o', async ({ data, expected }) => {
-      expect(getContactDetailsStatus({ ...userCase, ...data })).toBe(expected);
+      {
+        data: {
+          applicant2AddressSameAsApplicant1: YesOrNo.YES,
+          applicant2ContactDetails: ['phone'],
+          applicant2PhoneNumber: 'MOCK_PHONE',
+        },
+        userType: 'applicant2',
+        expected: 'COMPLETED',
+      },
+      {
+        data: {
+          applicant2AddressSameAsApplicant1: YesOrNo.NO,
+          applicant2ContactDetails: ['phone'],
+          applicant2PhoneNumber: 'MOCK_PHONE',
+        },
+        userType: 'applicant2',
+        expected: 'IN_PROGRESS',
+      },
+    ])('should return correct status %o', async ({ data, userType, expected }) => {
+      expect(getContactDetailsStatus({ ...userCase, ...data }, <'applicant1' | 'applicant2'>userType)).toBe(expected);
     });
   });
 });

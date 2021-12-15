@@ -65,8 +65,14 @@ const en = content => {
     section6link1: 'Review application, pay and send',
     status: {
       applyingWith: isApplyingWithComplete(content.userCase),
-      applicant1ContactDetails: getSectionStatusLabel(getContactDetailsStatus(content.userCase), statuses),
-      applicant2ContactDetails: getSectionStatusLabel(getContactDetailsStatus(content.userCase), statuses),
+      applicant1ContactDetails: getSectionStatusLabel(
+        getContactDetailsStatus(content.userCase, 'applicant1'),
+        statuses
+      ),
+      applicant2ContactDetails: getSectionStatusLabel(
+        getContactDetailsStatus(content.userCase, 'applicant2'),
+        statuses
+      ),
     },
     urls,
   };
@@ -123,8 +129,14 @@ const cy = content => {
     section6link1: 'Review application, pay and send (in welsh) ',
     status: {
       applyingWith: isApplyingWithComplete(content.userCase),
-      applicant1ContactDetails: getSectionStatusLabel(getContactDetailsStatus(content.userCase), statuses),
-      applicant2ContactDetails: getSectionStatusLabel(getContactDetailsStatus(content.userCase), statuses),
+      applicant1ContactDetails: getSectionStatusLabel(
+        getContactDetailsStatus(content.userCase, 'applicant1'),
+        statuses
+      ),
+      applicant2ContactDetails: getSectionStatusLabel(
+        getContactDetailsStatus(content.userCase, 'applicant2'),
+        statuses
+      ),
     },
     urls,
   };
