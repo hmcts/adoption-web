@@ -112,8 +112,10 @@ export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;
 export interface Case {
   applyingWith?: string;
   applicant1SelectAddress?: string;
+  applicant2SelectAddress?: string;
   applicant1EmailAddress?: string;
   applicant1ContactDetails?: string[];
+  applicant2AddressSameAsApplicant1?: YesOrNo;
   applicationType?: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
   issueDate?: DateAsString;

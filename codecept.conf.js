@@ -75,6 +75,7 @@ exports.config = {
     landingPage: './src/test/e2e/pages/LandingPage.js',
     primaryApplicantDetailsPage: './src/test/e2e/pages/primaryApplicant.page.js',
     taskListPage: './src/test/e2e/pages/taskList.page.js',
+    otherApplicantDetailsPage: './src/test/e2e/pages/otherApplicant.page.js',
   },
   plugins: {
     retryFailedStep: {
