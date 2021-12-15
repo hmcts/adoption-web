@@ -5,35 +5,33 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
   section: "Check you're eligible to adopt",
-  label: 'Will the child be under 18 years old on the date you submit your application?',
+  label: 'Are you, and the other applicant if relevant, both aged 21 or over?',
   one: 'Yes',
   two: 'No',
-  under18No:
-    'You can only apply to adopt a child if they are under 18 years old on the date your application is submitted.',
+  under21Yes: 'You must be 21 or over to adopt a child. This includes any other applicant.',
   errors: {
-    under18Eligible: {
-      required: 'Select whether the child will be under 18 when you submit the application',
+    under21Eligible: {
+      required: 'Select whether you and the other applicant are aged 21 or over',
     },
   },
 });
 
 const cy = () => ({
   section: "Check you're eligible to adopt (in welsh)",
-  label: 'Will the child be under 18 years old on the date you submit your application? (in welsh)',
+  label: 'Are you, and the other applicant if relevant, both aged 21 or over? (in welsh)',
   one: 'Yes (in welsh)',
   two: 'No (in welsh)',
-  under18No:
-    'You can only apply to adopt a child if they are under 18 years old on the date your application is submitted. (in welsh)',
+  under21Yes: 'You must be 21 or over to adopt a child. This includes any other applicant. (in welsh)',
   errors: {
-    under18Eligible: {
-      required: 'Select whether the child will be under 18 when you submit the application (in welsh)',
+    under21Eligible: {
+      required: 'Select whether you and the other applicant are aged 21 or over (in welsh)',
     },
   },
 });
 
 export const form: FormContent = {
   fields: {
-    under18Eligible: {
+    under21Eligible: {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.label,
@@ -41,7 +39,7 @@ export const form: FormContent = {
       labelHidden: false,
       values: [
         { label: l => l.one, value: YesOrNo.YES },
-        { label: l => l.two, value: YesOrNo.NO, conditionalText: l => `<p class="govuk-label">${l.under18No}</p>` },
+        { label: l => l.two, value: YesOrNo.NO, conditionalText: l => `<p class="govuk-label">${l.under21Yes}</p>` },
       ],
       validator: isFieldFilledIn,
     },

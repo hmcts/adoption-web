@@ -38,4 +38,6 @@ export interface UserDetails {
 export interface Eligibility {
   under18Eligible?: string;
   marriedEligible?: string;
+  livedUKEligible?: string;
+  under21Eligible?: string;
 }
