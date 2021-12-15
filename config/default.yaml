@@ -20,7 +20,7 @@ services:
     url: 'https://api.os.uk/search/places/v1'
     token: 'NEED TO INSERT SECRET'
   feeLookup:
-    url: 'http://fees-register-api-demo.service.core-compute-demo.internal/fees-register/fees/lookup'
+    url: 'http://fees-register-api-aat.service.core-compute-aat.internal/fees-register/fees/lookup'
 health:
   timeout: 5000
   deadline: 15000

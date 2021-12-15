@@ -4,6 +4,7 @@ import { CaseWithId } from '../../app/case/case';
 import { ApplicationType, Gender } from '../../app/case/definition';
 import { Eligibility } from '../../app/controller/AppRequest';
 import { PageContent, TranslationFn } from '../../app/controller/GetController';
+import { Fee } from '../../app/fee/fee-lookup-api';
 
 const en = {
   phase: 'Beta',
@@ -196,7 +197,7 @@ export const generatePageContent = ({
   userEmail?: string;
   addresses?: [];
   eligibility?: Eligibility;
-  fee?: string;
+  fee?: Fee;
 }): PageContent => {
   const commonTranslations: typeof en = language === 'en' ? en : cy;
   const serviceName = getServiceName(commonTranslations, isDivorce);
@@ -265,7 +266,7 @@ export type CommonContent = typeof en & {
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   addresses?: any[];
   eligibility?: Eligibility;
-  fee?: string;
+  fee?: Fee;
 };
 
 export type Language = 'en' | 'cy';
