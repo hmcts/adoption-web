@@ -8,12 +8,7 @@ const en = content => ({
   label: 'Do you also live at this address?',
   yes: 'Yes',
   no: 'No',
-  applicant1Address: `<div class="govuk-inset-text">
-  ${content.userCase.applicant1Address1}
-  <br>
-  ${content.userCase.applicant1AddressTown}
-  <br>
-  ${content.userCase.applicant1AddressPostcode}</div>`,
+  applicant1Address: `<div class="govuk-inset-text">${content.userCase.applicant1Address1}<br>${content.userCase.applicant1AddressTown}<br>${content.userCase.applicant1AddressPostcode}</div>`,
   errors: {
     applicant2AddressSameAsApplicant1: {
       required: 'Please answer the question',
