@@ -12,7 +12,7 @@
       }
     },
     hint: {
-      text: getContent(field.hint)
+      html: getContent(field.hint)
     } if field.hint else undefined,
     items: formItems(field.values, userCase[fieldName]),
     errorMessage: getError(fieldName),
