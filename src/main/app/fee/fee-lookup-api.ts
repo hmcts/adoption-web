@@ -30,7 +30,6 @@ export const getFee = async (logger: LoggerInstance): Promise<Fee> => {
       return <Fee>{};
     }
 
-    console.log('pankaj '+response.data);
     return response.data;
 
   } catch (err) {

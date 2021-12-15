@@ -9,10 +9,10 @@ const en = (content) => ({
 });
 
 const cy = (content) => ({
-  title: 'Pay adoption fee',
-  line1: `The adoption application fee is ${content.fee}`,
-  line2: 'You’ll need a valid debit or credit card. If you cannot pay now, save the application and return to it when you are ready.',
-  continue: 'Pay and submit application',
+  title: 'Pay adoption fee (in welsh)',
+  line1: `The adoption application fee is £${content.fee} (in welsh)`,
+  line2: 'You’ll need a valid debit or credit card. If you cannot pay now, save the application and return to it when you are ready. (in welsh)',
+  continue: 'Pay and submit application (in welsh)',
 });
 
 export const form: FormContent = {
