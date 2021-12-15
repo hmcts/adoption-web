@@ -9,9 +9,9 @@ import {
   APPLICANT_1_SELECT_ADDRESS,
   APPLYING_WITH_URL,
   DATE_CHILD_MOVED_IN_URL,
+  FEE_LOOKUP_URL,
   PageLink,
   TASK_LIST_URL,
-  FEE_LOOKUP_URL,
 } from './urls';
 
 export enum Sections {
