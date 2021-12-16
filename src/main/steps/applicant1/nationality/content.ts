@@ -21,7 +21,7 @@ const en = () => ({
       required: 'Select if you are British, Irish or a citizen of a different country',
     },
     applicant1Nationality: {
-      required: 'Select if you are British, Irish or a citizen of a different country',
+      required: 'This is not a valid entry',
     },
   },
 });
@@ -41,6 +41,9 @@ const cy = () => ({
   errors: {
     nationality: {
       required: 'Select if you are British, Irish or a citizen of a different country (in Welsh)',
+    },
+    applicant1Nationality: {
+      required: 'This is not a valid entry (in Welsh)',
     },
   },
 });
