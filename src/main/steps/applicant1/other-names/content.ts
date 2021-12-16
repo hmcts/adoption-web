@@ -6,7 +6,7 @@ import { mapSummaryListContent } from '../../common/functions/mapSummaryListCont
 
 const en = () => ({
   section: 'Primary applicant',
-  title: 'Have you ever legally been known by any other names?',
+  label: 'Have you ever legally been known by any other names?',
   example: 'For example, your name before marriage.',
   yes: 'Yes',
   no: 'No',
@@ -56,7 +56,8 @@ export const form: FormContent = {
       otherNames: {
         type: 'radios',
         classes: 'govuk-radios',
-        label: l => l.example,
+        label: l => l.label,
+        hint: l => l.example,
         labelSize: 's',
         section: l => l.section,
         values: [
@@ -78,7 +79,6 @@ export const form: FormContent = {
                           type: 'text',
                           label: l => l.applicant1AdditionalName,
                           labelSize: 'small',
-                          validator: isFieldFilledIn,
                         },
                         addButton: {
                           type: 'button',
