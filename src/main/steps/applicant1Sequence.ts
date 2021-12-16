@@ -54,28 +54,28 @@ export const applicant1Sequence: Step[] = [
   },
   {
     url: APPLICANT_1_FULL_NAME,
-    showInSection: Sections.AboutPartnership,
+    showInSection: Sections.AboutApplicant1,
     getNextStep: () => APPLICANT_1_OTHER_NAMES,
   },
   {
     url: APPLICANT_1_OTHER_NAMES,
-    showInSection: Sections.AboutPartnership,
+    showInSection: Sections.AboutApplicant1,
     getNextStep: () => APPLICANT_1_DOB,
   },
   {
     url: APPLICANT_1_DOB,
-    showInSection: Sections.AboutPartnership,
+    showInSection: Sections.AboutApplicant1,
     getNextStep: () => APPLICANT_1_NATIONALITY,
   },
   {
     url: APPLICANT_1_NATIONALITY,
-    showInSection: Sections.AboutPartnership,
+    showInSection: Sections.AboutApplicant1,
     getNextStep: () => APPLICANT_1_OCCUPATION,
   },
   {
     url: APPLICANT_1_OCCUPATION,
-    showInSection: Sections.AboutPartnership,
-    getNextStep: () => APPLICANT_1_CONTACT_DETAILS,
+    showInSection: Sections.AboutApplicant1,
+    getNextStep: () => TASK_LIST_URL,
   },
   {
     url: APPLICANT_1_CONTACT_DETAILS,
