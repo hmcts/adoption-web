@@ -80,3 +80,4 @@ export const CHECK_ELIGIBILITY_URL_MARRIED: PageLink = `${ELIGIBILITY_URL}/marri
 export const CHECK_ELIGIBILITY_URL_UNDER_21: PageLink = `${ELIGIBILITY_URL}/under-21`;
 export const CHECK_ELIGIBILITY_URL_LIVED_UK: PageLink = `${ELIGIBILITY_URL}/lived-uk`;
 export const INELIGIBLE_TO_ADOPT: PageLink = `${ELIGIBILITY_URL}/cannot-apply`;
+export const FEE_LOOKUP_URL: PageLink = '/fee-lookup';
