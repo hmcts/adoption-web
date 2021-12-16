@@ -20,6 +20,9 @@ const en = () => ({
     nationality: {
       required: 'Select if you are British, Irish or a citizen of a different country',
     },
+    applicant1Nationality: {
+      required: 'Select if you are British, Irish or a citizen of a different country',
+    },
   },
 });
 
