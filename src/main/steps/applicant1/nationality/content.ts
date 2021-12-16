@@ -1,6 +1,6 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
-import { atLeastOneFieldIsChecked, doesArrayHaveValues, isFieldFilledIn } from '../../../app/form/validation';
+import { atLeastOneFieldIsChecked, isFieldFilledIn } from '../../../app/form/validation';
 import { mapSummaryListContent } from '../../common/functions/mapSummaryListContent';
 import { APPLICANT_1_NATIONALITY } from '../../urls';
 
@@ -66,7 +66,6 @@ export const form: FormContent = {
             name: 'nationality',
             label: l => l.differentCountry,
             value: 'Other',
-            validator: doesArrayHaveValues(userCase.applicant1Nationalities),
             subFields: {
               applicant1Nationalities: {
                 type: 'summarylist',
