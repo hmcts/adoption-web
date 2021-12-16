@@ -3,6 +3,7 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { mapSummaryListContent } from '../../common/functions/mapSummaryListContent';
+import { APPLICANT_1_OTHER_NAMES } from '../../urls';
 
 const en = () => ({
   section: 'Primary applicant',
@@ -67,7 +68,11 @@ export const form: FormContent = {
             subFields: {
               applicant1AdditionalNames: {
                 type: 'summarylist',
-                rows: mapSummaryListContent(userCase.applicant1AdditionalNames || [], ['Remove']),
+                rows: mapSummaryListContent(
+                  userCase.applicant1AdditionalNames || [],
+                  ['Remove'],
+                  APPLICANT_1_OTHER_NAMES
+                ),
               },
               ...(userCase.applicant1AdditionalNames?.length
                 ? {

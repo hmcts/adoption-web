@@ -10,6 +10,7 @@ export default class OtherNamesGetController extends GetController {
     const names = req.session.userCase.applicant1AdditionalNames;
     const remove = req.query.remove;
 
+    let removed = false;
     if (remove && names?.length) {
       const index = names.indexOf(remove as string);
 
@@ -19,14 +20,19 @@ export default class OtherNamesGetController extends GetController {
 
       req.session.userCase.applicant1AdditionalNames = names;
       delete req.query.remove;
+      req.url = req.url.substring(0, req.url.indexOf('?'));
+      removed = true;
     }
 
     req.session.save(err => {
       if (err) {
         throw err;
       }
-
-      super.get(req, res);
+      if (removed) {
+        res.redirect(req.url);
+      } else {
+        super.get(req, res);
+      }
     });
   }
 }
