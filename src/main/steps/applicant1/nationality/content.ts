@@ -62,15 +62,15 @@ export const form: FormContent = {
           {
             label: l => l.differentCountry,
             value: 'Other',
-            validator: doesArrayHaveValues(userCase.applicant1Countries),
+            validator: doesArrayHaveValues(userCase.applicant1Nationalities),
             subFields: {
-              applicant1Countries: {
+              applicant1Nationalities: {
                 type: 'summarylist',
                 values: [],
                 rows: (l: { actions: string[] }) =>
-                  mapSummaryListContent(userCase.applicant1Countries || [], l.actions),
+                  mapSummaryListContent(userCase.applicant1Nationalities || [], l.actions),
               },
-              applicant1Country: {
+              applicant1Nationality: {
                 type: 'text',
                 label: l => l.countryName,
                 labelSize: 'small',

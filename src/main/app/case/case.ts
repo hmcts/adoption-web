@@ -20,8 +20,8 @@ import {
 export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {
   applicant1AdditionalName: 'applicant1AdditionalName',
   applicant1AdditionalNames: 'applicant1AdditionalNames',
-  applicant1Country: 'applicant1Country',
-  applicant1Countries: 'applicant1Countries',
+  applicant1Nationality: 'applicant1Nationality',
+  applicant1Nationalities: 'applicant1Nationalities',
   applicationType: 'applicationType',
   divorceOrDissolution: 'divorceOrDissolution',
   gender: 'applicant2Gender',
@@ -118,8 +118,8 @@ export interface Case {
   addButton?: string;
   applicant1AdditionalName?: string;
   applicant1AdditionalNames?: string[];
-  applicant1Country?: string;
-  applicant1Countries?: string[];
+  applicant1Nationality?: string;
+  applicant1Nationalities?: string[];
   applicant1SelectAddress?: string;
   applicant2SelectAddress?: string;
   applicant1EmailAddress?: string;

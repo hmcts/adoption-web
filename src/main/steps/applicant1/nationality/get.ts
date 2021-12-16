@@ -7,7 +7,7 @@ import { GetController } from '../../../app/controller/GetController';
 @autobind
 export default class NationalityGetController extends GetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
-    const countries = req.session.userCase.applicant1Countries;
+    const countries = req.session.userCase.applicant1Nationalities;
     const remove = req.query.remove;
 
     if (remove && countries?.length) {
@@ -17,7 +17,7 @@ export default class NationalityGetController extends GetController {
         countries.splice(index, 1);
       }
 
-      req.session.userCase.applicant1Countries = countries;
+      req.session.userCase.applicant1Nationalities = countries;
       delete req.query.remove;
     }
 

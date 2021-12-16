@@ -22,12 +22,12 @@ export default class FindAddressPostController extends PostController<AnyObject>
 
     if (req.session.errors.length === 0) {
       if (formData.addButton) {
-        if (!req.session.userCase.applicant1Countries) {
-          req.session.userCase.applicant1Countries = [];
+        if (!req.session.userCase.applicant1Nationalities) {
+          req.session.userCase.applicant1Nationalities = [];
         }
-        if (formData.applicant1Country) {
-          req.session.userCase.applicant1Countries.push(formData.applicant1Country);
-          req.session.userCase.applicant1Country = '';
+        if (formData.applicant1Nationality) {
+          req.session.userCase.applicant1Nationalities.push(formData.applicant1Nationality);
+          req.session.userCase.applicant1Nationality = '';
         }
       }
     }

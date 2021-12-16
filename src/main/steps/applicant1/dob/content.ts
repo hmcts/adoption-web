@@ -15,7 +15,7 @@ const en = () => ({
       invalidYear: 'You have entered the year in an invalid format. Enter the whole year, for example 2002.',
       invalidDateInFuture:
         'You have entered a date that is in the future. Enter a date that is in the past before continuing.',
-      invalidDateTooFarInPast: 'You have entered a year which is too far in the past. Enter the year you got married.',
+      invalidDateTooFarInPast: 'You have entered a year which is too far in the past.',
     },
   },
 });
@@ -23,15 +23,15 @@ const en = () => ({
 const cy: typeof en = () => ({
   section: 'Primary applicant (in Welsh)',
   title: "What's your date of birth? (in Welsh)",
-  hint: 'Er enghraifft, 28 6 1997',
+  hint: 'For example, 28 6 1997 (in Welsh)',
   errors: {
     dateOfBirth: {
-      required: 'Nid ydych wedi nodi dyddiad. Nodwch ddyddiad i barhau.',
-      invalidDate: 'Rydych chi wedi rhoi nod annilys. Nodwch y dyddiad gan ddefnyddio rhifau.',
-      invalidYear: 'Rydych chi wedi rhoi nod annilys. Nodwch y dyddiad gan ddefnyddio rhifau.',
+      required: 'You have not entered a date. Enter a date to continue. (in Welsh)',
+      invalidDate: 'You have entered an invalid date. Enter the date using the following format: 28 6 1997. (in Welsh)',
+      invalidYear: 'You have entered the year in an invalid format. Enter the whole year, for example 2002. (in Welsh)',
       invalidDateInFuture:
-        'Rydych wedi nodi dyddiad sydd yn y dyfodol. Nodwch ddyddiad sydd yn y gorffennol cyn parhau.',
-      invalidDateTooFarInPast: 'Rydych chi wedi rhoi nod annilys. Nodwch y dyddiad gan ddefnyddio rhifau.',
+        'You have entered a date that is in the future. Enter a date that is in the past before continuing. (in Welsh)',
+      invalidDateTooFarInPast: 'You have entered a year which is too far in the past. (in Welsh)',
     },
   },
 });
