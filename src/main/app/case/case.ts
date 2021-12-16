@@ -121,8 +121,10 @@ export interface Case {
   applicant1Country?: string;
   applicant1Countries?: string[];
   applicant1SelectAddress?: string;
+  applicant2SelectAddress?: string;
   applicant1EmailAddress?: string;
   applicant1ContactDetails?: string[];
+  applicant2AddressSameAsApplicant1?: YesOrNo;
   applicationType?: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
   issueDate?: DateAsString;
