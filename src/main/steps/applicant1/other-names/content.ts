@@ -1,7 +1,7 @@
 import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
-import { doesArrayHaveValues, isFieldFilledIn } from '../../../app/form/validation';
+import { isFieldFilledIn } from '../../../app/form/validation';
 import { mapSummaryListContent } from '../../common/functions/mapSummaryListContent';
 
 const en = () => ({
@@ -19,6 +19,9 @@ const en = () => ({
       required: 'Enter a name or choose no',
     },
     applicant1AdditionalName: {
+      required: 'Name cannot be empty',
+    },
+    addAnotherName: {
       required: 'Name cannot be empty',
     },
   },
@@ -41,6 +44,9 @@ const cy = () => ({
     applicant1AdditionalName: {
       required: 'Name cannot be empty (in Welsh)',
     },
+    addAnotherName: {
+      required: 'Name cannot be empty (in Welsh)',
+    },
   },
 });
 
@@ -60,43 +66,49 @@ export const form: FormContent = {
             subFields: {
               applicant1AdditionalNames: {
                 type: 'summarylist',
-                values: [],
                 rows: mapSummaryListContent(userCase.applicant1AdditionalNames || [], ['Remove']),
               },
-              applicant1AdditionalName: {
-                type: 'input',
-                label: l => l.applicant1AdditionalName,
-                labelSize: 'small',
-              },
-              addButton: {
-                type: 'button',
-                label: l => l.add,
-                classes: 'govuk-button--secondary',
-                value: 'addButton',
-              },
-              addAnotherName: {
-                type: 'details',
-                label: l => l.another,
-                subFields: {
-                  applicant1AdditionalName: {
-                    type: 'input',
-                    label: l => l.applicant1AdditionalName,
-                    labelSize: 'small',
-                  },
-                  addButton: {
-                    type: 'button',
-                    label: l => l.add,
-                    classes: 'govuk-button--secondary',
-                    value: 'addButton',
-                  },
-                },
-              },
+              ...(userCase.applicant1AdditionalNames?.length
+                ? {
+                    addAnotherName: {
+                      type: 'details',
+                      label: l => l.another,
+                      subFields: {
+                        applicant1AdditionalName: {
+                          type: 'text',
+                          label: l => l.applicant1AdditionalName,
+                          labelSize: 'small',
+                          validator: isFieldFilledIn,
+                        },
+                        addButton: {
+                          type: 'button',
+                          label: l => l.add,
+                          classes: 'govuk-button--secondary',
+                          value: 'addButton',
+                        },
+                      },
+                      // validator: () => doesArrayHaveValues(userCase.applicant1AdditionalNames),
+                    },
+                  }
+                : {
+                    applicant1AdditionalName: {
+                      type: 'text',
+                      label: l => l.applicant1AdditionalName,
+                      labelSize: 'small',
+                      validator: isFieldFilledIn,
+                    },
+                    addButton: {
+                      type: 'button',
+                      label: l => l.add,
+                      classes: 'govuk-button--secondary',
+                      value: 'addButton',
+                    },
+                  }),
             },
-            validator: doesArrayHaveValues(userCase.applicant1AdditionalNames),
           },
           { label: l => l.no, value: YesOrNo.NO },
         ],
-        validator: value => isFieldFilledIn(value),
+        validator: isFieldFilledIn,
       },
     };
   },
@@ -113,7 +125,10 @@ const languages = {
   cy,
 };
 
-export const generateContent: TranslationFn = content => ({
-  ...languages[content.language](),
-  form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}) },
-});
+export const generateContent: TranslationFn = content => {
+  const fields = (form.fields as FormFieldsFn)(content.userCase || {});
+  return {
+    ...languages[content.language](),
+    form: { ...form, fields },
+  };
+};

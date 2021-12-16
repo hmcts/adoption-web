@@ -74,6 +74,13 @@ export class Nunjucks {
       }));
     });
 
+    env.addGlobal('summaryDetailsHtml', function (subFields: FormInput) {
+      return env.render(`${__dirname}/../../steps/common/form/fields.njk`, {
+        ...this.ctx,
+        form: { fields: subFields },
+      });
+    });
+
     env.addFilter('json', function (value, spaces) {
       if (value instanceof nunjucks.runtime.SafeString) {
         value = value.toString();

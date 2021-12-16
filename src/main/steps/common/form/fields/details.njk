@@ -2,5 +2,7 @@
 
 {{ govukDetails({
   summaryText: getContent(field.label),
-  text: getContent(field.subtext)
+  html: summaryDetailsHtml(field.subFields, userCase[fieldName])
 }) }}
+
+{# {{summaryDetailsHtml(field.subFields, userCase[fieldName]) | dump}} #}
