@@ -2,6 +2,7 @@ import autobind from 'autobind-decorator';
 import { Response } from 'express';
 import Negotiator from 'negotiator';
 
+import { Fee } from '../../app/fee/fee-lookup-api';
 import { LanguageToggle } from '../../modules/i18n';
 import { getNextIncompleteStepUrl } from '../../steps';
 import { CommonContent, Language, generatePageContent } from '../../steps/common/common.content';
@@ -28,6 +29,7 @@ export class GetController {
     const userCase = req.session?.userCase;
     const addresses = req.session?.addresses;
     const eligibility = req.session?.eligibility;
+    const fee = req.session?.fee as Fee;
     const content = generatePageContent({
       language,
       pageContent: this.content,
@@ -36,6 +38,7 @@ export class GetController {
       userEmail: req.session?.user?.email,
       addresses,
       eligibility,
+      fee,
     });
 
     const sessionErrors = req.session?.errors || [];
