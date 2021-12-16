@@ -15,7 +15,6 @@ export const RESPONDENT: PageLink = '/respondent';
 export const CHECK_ANSWERS_URL: PageLink = '/check-your-answers';
 
 export const APPLICATION_ENDED: PageLink = '/application-ended';
-export const NUMBER_OF_CHILDREN_URL: PageLink = '/number-of-children';
 export const TASK_LIST_URL: PageLink = '/task-list';
 
 export const APPLYING_WITH_URL: PageLink = '/applying-with';
@@ -33,13 +32,7 @@ export const APPLICANT_2_SELECT_ADDRESS: PageLink = '/applicant2/address/select'
 export const APPLICANT_2_MANUAL_ADDRESS: PageLink = '/applicant2/address/manual';
 export const APPLICANT_2_CONTACT_DETAILS: PageLink = '/applicant2/contact-details';
 
-export const HAS_RELATIONSHIP_BROKEN_URL: PageLink = '/irretrievable-breakdown';
-export const RELATIONSHIP_NOT_BROKEN_URL: PageLink = '/relationship-not-broken';
-
 export const RELATIONSHIP_DATE_URL: PageLink = '/date-from-certificate';
-export const RELATIONSHIP_NOT_LONG_ENOUGH_URL: PageLink = '/not-long-enough-to-apply';
-
-export const CERTIFICATE_URL: PageLink = '/do-you-have-your-certificate';
 
 export const CHECK_JURISDICTION: PageLink = '/check-jurisdiction';
 export const WHERE_YOUR_LIVES_ARE_BASED_URL: PageLink = '/where-your-lives-are-based';
@@ -76,4 +69,5 @@ export const CHECK_ELIGIBILITY_URL_MARRIED: PageLink = `${ELIGIBILITY_URL}/marri
 export const CHECK_ELIGIBILITY_URL_UNDER_21: PageLink = `${ELIGIBILITY_URL}/under-21`;
 export const CHECK_ELIGIBILITY_URL_LIVED_UK: PageLink = `${ELIGIBILITY_URL}/lived-uk`;
 export const INELIGIBLE_TO_ADOPT: PageLink = `${ELIGIBILITY_URL}/cannot-apply`;
+
 export const FEE_LOOKUP_URL: PageLink = '/fee-lookup';
