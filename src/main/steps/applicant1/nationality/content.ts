@@ -1,6 +1,6 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
-import { doesArrayHaveValues, isFieldFilledIn } from '../../../app/form/validation';
+import { atLeastOneFieldIsChecked, doesArrayHaveValues, isFieldFilledIn } from '../../../app/form/validation';
 import { mapSummaryListContent } from '../../common/functions/mapSummaryListContent';
 
 const en = () => ({
@@ -48,18 +48,21 @@ export const form: FormContent = {
         type: 'checkboxes',
         label: l => l.label,
         labelSize: 'small',
-        validator: isFieldFilledIn,
+        validator: atLeastOneFieldIsChecked,
         values: [
           {
+            name: 'nationality',
             label: l => l.british,
             value: 'British',
             hint: l => l.britishSubtext,
           },
           {
+            name: 'nationality',
             label: l => l.irish,
             value: 'Irish',
           },
           {
+            name: 'nationality',
             label: l => l.differentCountry,
             value: 'Other',
             validator: doesArrayHaveValues(userCase.applicant1Nationalities),
@@ -69,34 +72,40 @@ export const form: FormContent = {
                 values: [],
                 rows: mapSummaryListContent(userCase.applicant1Nationalities || [], ['Remove']),
               },
-              applicant1Nationality: {
-                type: 'text',
-                label: l => l.countryName,
-                labelSize: 'small',
-              },
-              addButton: {
-                type: 'button',
-                label: l => l.add,
-                classes: 'govuk-button--secondary',
-                value: 'addButton',
-              },
-              addAnotherCountry: {
-                type: 'details',
-                label: l => l.another,
-                subFields: {
-                  countryName2: {
-                    type: 'text',
-                    label: l => l.countryName,
-                    labelSize: 'small',
-                  },
-                  addButton2: {
-                    type: 'button',
-                    label: l => l.add,
-                    classes: 'govuk-button--secondary',
-                    value: 'addButton',
-                  },
-                },
-              },
+              ...(userCase.applicant1Nationalities?.length
+                ? {
+                    addAnotherCountry: {
+                      type: 'details',
+                      label: l => l.another,
+                      subFields: {
+                        applicant1Nationality: {
+                          type: 'text',
+                          label: l => l.countryName,
+                          labelSize: 'small',
+                        },
+                        addButton: {
+                          type: 'button',
+                          label: l => l.add,
+                          classes: 'govuk-button--secondary',
+                          value: 'addButton',
+                        },
+                      },
+                    },
+                  }
+                : {
+                    applicant1Nationality: {
+                      type: 'text',
+                      label: l => l.countryName,
+                      labelSize: 'small',
+                      validator: isFieldFilledIn,
+                    },
+                    addButton: {
+                      type: 'button',
+                      label: l => l.add,
+                      classes: 'govuk-button--secondary',
+                      value: 'addButton',
+                    },
+                  }),
             },
           },
         ],
