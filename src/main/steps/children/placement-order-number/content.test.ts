@@ -54,7 +54,7 @@ describe('placement-order-number content', () => {
   });
 
   test('should contain submit button', () => {
-    const generatedContent = generateContent({ ...commonContent, userCase: null });
+    const generatedContent = generateContent({ ...commonContent, userCase: undefined });
     const form = generatedContent.form as FormContent;
     expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
   });
