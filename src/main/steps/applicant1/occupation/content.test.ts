@@ -22,8 +22,9 @@ const langAssertions = (language, content) => {
   expect(generatedContent.errors).toEqual(errors);
 };
 
+const commonContent = { language: EN } as CommonContent;
+
 describe('occupation content', () => {
-  const commonContent = { language: EN } as CommonContent;
   it('should return the correct content for language = en', () => {
     langAssertions(EN, enContent);
   });

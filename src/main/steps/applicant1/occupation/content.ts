@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn, isFieldLetters } from '../../../app/form/validation';
 
-export const en = () => ({
+export const en = (): Record<string, unknown> => ({
   section: 'Primary applicant',
   title: "What's your occupation?",
   occupation:
@@ -30,7 +29,7 @@ export const en = () => ({
   },
 });
 
-export const cy = () => ({
+export const cy = (): Record<string, unknown> => ({
   section: 'Primary applicant (in Welsh)',
   title: "What's your occupation? (in Welsh)",
   occupation:

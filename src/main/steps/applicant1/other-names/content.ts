@@ -5,7 +5,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 import { mapSummaryListContent } from '../../common/functions/mapSummaryListContent';
 import { APPLICANT_1_OTHER_NAMES } from '../../urls';
 
-const en = () => ({
+export const en = (): Record<string, unknown> => ({
   section: 'Primary applicant',
   label: 'Have you ever legally been known by any other names?',
   example: 'For example, your name before marriage.',
@@ -28,7 +28,7 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
+export const cy = (): Record<string, unknown> => ({
   section: 'Primary applicant (in Welsh)',
   title: 'Have you ever legally been known by any other names? (in Welsh)',
   example: 'For example, your name before marriage. (in Welsh)',
@@ -81,9 +81,9 @@ export const form: FormContent = {
                       label: l => l.another,
                       subFields: {
                         applicant1AdditionalName: {
-                          type: 'text',
+                          type: 'input',
                           label: l => l.applicant1AdditionalName,
-                          labelSize: 'small',
+                          labelSize: 's',
                         },
                         addButton: {
                           type: 'button',
@@ -97,9 +97,9 @@ export const form: FormContent = {
                   }
                 : {
                     applicant1AdditionalName: {
-                      type: 'text',
+                      type: 'input',
                       label: l => l.applicant1AdditionalName,
-                      labelSize: 'small',
+                      labelSize: 's',
                       validator: isFieldFilledIn,
                     },
                     addButton: {
