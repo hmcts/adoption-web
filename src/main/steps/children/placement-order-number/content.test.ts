@@ -1,4 +1,4 @@
-import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
+import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -7,8 +7,14 @@ import { generateContent } from './content';
 jest.mock('../../../app/form/validation');
 
 /* eslint-disable @typescript-eslint/ban-types */
-describe('applying-with content', () => {
-  const commonContent = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
+describe('placement-order-number content', () => {
+  const commonContent = {
+    language: 'en',
+    userCase: {
+      placementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderNumber: '1234' }],
+      selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+    },
+  } as CommonContent;
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
     expect(generatedContent.section).toEqual("The child's details");
@@ -27,29 +33,28 @@ describe('applying-with content', () => {
     );
   });
 
-  test('should contain applyingWith field', () => {
+  test('should contain placementOrderNumber field', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const applyingWithField = fields.applyingWith as FormOptions;
-    expect(applyingWithField.type).toBe('radios');
-    expect(applyingWithField.classes).toBe('govuk-radios');
-    expect((applyingWithField.label as Function)(generatedContent)).toBe(
-      'Are you applying on your own, or with someone else?'
+    const placementOrderNumberField = fields.placementOrderNumber as FormOptions;
+    expect(placementOrderNumberField.type).toBe('text');
+    expect(placementOrderNumberField.classes).toBe('govuk-label govuk-input--width-10');
+    expect((placementOrderNumberField.label as Function)(generatedContent)).toBe(
+      'What is the serial or case number on the placement order?'
     );
-    expect((applyingWithField.section as Function)(generatedContent)).toBe('Applicant details');
-    expect((applyingWithField.values[0].label as Function)(generatedContent)).toBe("I'm applying on my own");
-    expect((applyingWithField.values[1].label as Function)(generatedContent)).toBe(
-      "I'm applying with my spouse or civil partner"
+    expect(((placementOrderNumberField as FormInput).hint as Function)(generatedContent)).toBe(
+      "This is on the top right of the order. Ask the adoption agency or social worker if you're not sure."
     );
-    expect((applyingWithField.values[2].label as Function)(generatedContent)).toBe(
-      "I'm applying with someone who is not my spouse or civil partner"
-    );
-    expect(applyingWithField.validator).toBe(isFieldFilledIn);
+    expect((placementOrderNumberField as FormInput).value).toBe('1234');
+    expect(placementOrderNumberField.labelSize).toBe('l');
+    expect(placementOrderNumberField.attributes).toEqual({ spellcheck: false });
+
+    expect(placementOrderNumberField.validator).toBe(isFieldFilledIn);
   });
 
   test('should contain submit button', () => {
-    const generatedContent = generateContent(commonContent);
+    const generatedContent = generateContent({ ...commonContent, userCase: null });
     const form = generatedContent.form as FormContent;
     expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
   });

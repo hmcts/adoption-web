@@ -16,7 +16,7 @@ const en = () => ({
 const cy = () => ({
   section: "The child's details (in welsh)",
   label: 'What is the serial or case number on the placement order? (in welsh)',
-  hint: "This is on the top right of the order. Ask the adoption agency or social worker if you're not sure.",
+  hint: "This is on the top right of the order. Ask the adoption agency or social worker if you're not sure. (in welsh)",
   errors: {
     placementOrderNumber: {
       required: 'Enter the serial or case number (in welsh)',
