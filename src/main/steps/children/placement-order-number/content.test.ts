@@ -6,7 +6,7 @@ import { generateContent } from './content';
 
 jest.mock('../../../app/form/validation');
 
-/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('placement-order-number content', () => {
   const commonContent = {
     language: 'en',
@@ -22,6 +22,7 @@ describe('placement-order-number content', () => {
     expect(generatedContent.hint).toEqual(
       "This is on the top right of the order. Ask the adoption agency or social worker if you're not sure."
     );
+    expect((generatedContent.errors as any).placementOrderNumber.required).toBe('Enter the serial or case number');
   });
 
   test('should return correct welsh content', () => {
@@ -30,6 +31,9 @@ describe('placement-order-number content', () => {
     expect(generatedContent.label).toEqual('What is the serial or case number on the placement order? (in welsh)');
     expect(generatedContent.hint).toEqual(
       "This is on the top right of the order. Ask the adoption agency or social worker if you're not sure. (in welsh)"
+    );
+    expect((generatedContent.errors as any).placementOrderNumber.required).toBe(
+      'Enter the serial or case number (in welsh)'
     );
   });
 
@@ -65,4 +69,4 @@ describe('placement-order-number content', () => {
     expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save as draft');
   });
 });
-/* eslint-enable @typescript-eslint/ban-types */
+/* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

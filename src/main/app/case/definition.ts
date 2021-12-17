@@ -257,7 +257,7 @@ export interface PlacementOrder {
   placementOrderId: string;
   placementOrderType?: string;
   placementOrderNumber?: string;
-  placementOrdeCourt?: string;
+  placementOrderCourt?: string;
   placementOrderDate?: DateAsString;
 }
 

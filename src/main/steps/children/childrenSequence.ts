@@ -19,4 +19,9 @@ export const childrenSequence: Step[] = [
     showInSection: Sections.AboutChildren,
     getNextStep: () => Urls.CHILDREN_PLACEMENT_ORDER_COURT,
   },
+  {
+    url: Urls.CHILDREN_PLACEMENT_ORDER_COURT,
+    showInSection: Sections.AboutChildren,
+    getNextStep: () => Urls.TASK_LIST_URL,
+  },
 ];
