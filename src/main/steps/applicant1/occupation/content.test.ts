@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable jest/expect-expect */
 import { FormContent, FormFields } from '../../../app/form/Form';
+import { isFieldFilledIn, isFieldLetters } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { cy as cyFunction, en as enFunction, generateContent } from './content';
@@ -37,13 +38,13 @@ describe('occupation content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const field = fields.applicant1Occupation;
+    const applicant1Occupation = fields.applicant1Occupation;
 
-    expect(field.type).toBe('input');
-    expect(field.classes).toBe('govuk-input--width-20');
-    expect(field).toHaveProperty('label');
-    expect(field).toHaveProperty('labelSize');
-    expect(field).toHaveProperty('validator');
+    expect(applicant1Occupation.type).toBe('input');
+    expect((applicant1Occupation.label as Function)(generateContent(commonContent))).toBe(enContent.occupation);
+    expect(applicant1Occupation.labelSize).toBe('normal');
+    expect(applicant1Occupation.classes).toBe('govuk-input--width-20');
+    expect(applicant1Occupation.validator).toBe(isFieldFilledIn || isFieldLetters);
   });
 
   it('should contain submit button', () => {
