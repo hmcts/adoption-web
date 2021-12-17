@@ -4,14 +4,7 @@ import { Gender, YesOrNo } from '../app/case/definition';
 import { AppRequest } from '../app/controller/AppRequest';
 
 import { applicant1Sequence } from './applicant1Sequence';
-import {
-  APPLYING_WITH_URL,
-  CHECK_ANSWERS_URL,
-  CHECK_ELIGIBILITY_URL_UNDER_18,
-  HAS_RELATIONSHIP_BROKEN_URL,
-  START_ELIGIBILITY_URL,
-  TASK_LIST_URL,
-} from './urls';
+import { APPLYING_WITH_URL, CHECK_ELIGIBILITY_URL_UNDER_18, START_ELIGIBILITY_URL, TASK_LIST_URL } from './urls';
 
 import { getNextEligibilityStepUrl, getNextIncompleteStepUrl, getNextStepUrl } from './index';
 
@@ -37,10 +30,10 @@ describe('Steps', () => {
     });
 
     it('moves into a dead end when the response matches', () => {
-      mockReq.originalUrl = HAS_RELATIONSHIP_BROKEN_URL;
+      mockReq.originalUrl = APPLYING_WITH_URL;
       const data = { applicant1ScreenHasUnionBroken: YesOrNo.NO };
       const actual = getNextStepUrl(mockReq, data);
-      expect(actual).toBe(CHECK_ANSWERS_URL);
+      expect(actual).toBe('/task-list');
     });
 
     it('keeps the query string', () => {
@@ -56,14 +49,18 @@ describe('Steps', () => {
       mockReq = mockRequest();
     });
 
+    it('returns the next step url when step does not have a form', () => {
+      mockReq.originalUrl = '/non-existent-url';
+      expect(getNextIncompleteStepUrl(mockReq)).toBe(APPLYING_WITH_URL);
+    });
+
     it('returns the first url that fails validation', () => {
       expect(getNextIncompleteStepUrl(mockReq)).toBe(APPLYING_WITH_URL);
     });
 
     it('returns the next incomplete step if previous is valid', () => {
-      mockReq.session.userCase.gender = Gender.MALE;
-      mockReq.session.userCase.sameSex = Checkbox.Unchecked;
-      expect(getNextIncompleteStepUrl(mockReq)).toBe(APPLYING_WITH_URL);
+      mockReq.session.userCase.applyingWith = 'alone';
+      expect(getNextIncompleteStepUrl(mockReq)).toBe('/check-your-answers');
     });
 
     it('returns the previous step if its a dead end', () => {
@@ -84,7 +81,7 @@ describe('Steps', () => {
     it('goes back one page if the step is incomplete & excluded from continue application', () => {
       applicant1Sequence[1].excludeFromContinueApplication = true;
 
-      mockReq.originalUrl = HAS_RELATIONSHIP_BROKEN_URL;
+      mockReq.originalUrl = APPLYING_WITH_URL;
       mockReq.session.userCase.gender = Gender.MALE;
       mockReq.session.userCase.sameSex = Checkbox.Unchecked;
       const actual = getNextIncompleteStepUrl(mockReq);
