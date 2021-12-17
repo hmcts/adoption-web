@@ -13,6 +13,7 @@ import {
   ListValue,
   OrderSummary,
   Payment,
+  PlacementOrder,
   State,
   YesOrNo,
 } from './definition';
@@ -116,6 +117,9 @@ export interface Case {
   applicant1EmailAddress?: string;
   applicant1ContactDetails?: string[];
   applicant2AddressSameAsApplicant1?: YesOrNo;
+  placementOrders?: PlacementOrder[];
+  selectedPlacementOrderId?: string;
+  placementOrderNumber?: string;
   applicationType?: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
   issueDate?: DateAsString;

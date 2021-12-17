@@ -253,6 +253,14 @@ export interface Bailiff {
   reasonFailureToServeByBailiff: string;
 }
 
+export interface PlacementOrder {
+  placementOrderId: string;
+  placementOrderType?: string;
+  placementOrderNumber?: string;
+  placementOrdeCrourt?: string;
+  placementOrderDate?: DateAsString;
+}
+
 export interface CaseData {
   applicationType: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
