@@ -9,8 +9,12 @@ const en = () => ({
   label: 'What date is on the placement order?',
   hint: 'For example, 31 3 2020',
   errors: {
-    placementOrderNumber: {
-      required: 'Enter the serial or case number',
+    placementOrderDate: {
+      required: 'Enter the placement order date',
+      invalidDate: 'Date must include a [day/month/year]',
+      invalidYear: 'You have entered the year in an invalid format. Enter the whole year, for example 2002.',
+      invalidDateInFuture: 'Date must be in the past',
+      invalidDateTooFarInPast: 'You have entered a year which is too far in the past. Enter the year you got married.',
     },
   },
 });
@@ -28,14 +32,15 @@ const cy = () => ({
 
 export const form: FormContent = {
   fields: userCase => {
+    const placementOrderDate = userCase.placementOrders?.find(
+      item => item.placementOrderId === userCase.selectedPlacementOrderId
+    )?.placementOrderDate;
     return {
       placementOrderDate: {
         type: 'date',
         classes: 'govuk-date-input',
         label: l => l.label,
         hint: l => l.hint,
-        value: userCase.placementOrders?.find(item => item.placementOrderId === userCase.selectedPlacementOrderId)
-          ?.placementOrderDate,
         labelSize: 'l',
         attributes: {
           spellcheck: false,
@@ -46,18 +51,21 @@ export const form: FormContent = {
             name: 'day',
             classes: 'govuk-input--width-2',
             attributes: { maxLength: 2 },
+            value: placementOrderDate?.day,
           },
           {
             label: l => l.dateFormat['month'],
             name: 'month',
             classes: 'govuk-input--width-2',
             attributes: { maxLength: 2 },
+            value: placementOrderDate?.month,
           },
           {
             label: l => l.dateFormat['year'],
             name: 'year',
             classes: 'govuk-input--width-4',
             attributes: { maxLength: 4 },
+            value: placementOrderDate?.year,
           },
         ],
         parser: body => covertToDateObject('placementOrderDate', body as Record<string, unknown>),
