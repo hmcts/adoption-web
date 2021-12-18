@@ -36,6 +36,7 @@ export const APPLICANT_2_CONTACT_DETAILS: PageLink = `${APPLICANT_2}/contact-det
 export const CHILDREN: PageLink = '/children';
 export const CHILDREN_PLACEMENT_ORDER_NUMBER: PageLink = `${CHILDREN}/placement-order-number`;
 export const CHILDREN_PLACEMENT_ORDER_COURT: PageLink = `${CHILDREN}/placement-order-court`;
+export const CHILDREN_PLACEMENT_ORDER_DATE: PageLink = `${CHILDREN}/placement-order-date`;
 
 export const RELATIONSHIP_DATE_URL: PageLink = '/date-from-certificate';
 
