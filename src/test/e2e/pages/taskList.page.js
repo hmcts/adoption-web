@@ -2,6 +2,9 @@ const config = require('../config');
 const { I } = inject();
 
 module.exports = {
+  primaryApplicant: {
+    contactDetailsLink: 'a[id$="applicant1-contact-details"]',
+  },
   secondApplicant: {
     contactDetailsLink: 'a[id$="applicant2-contact-details"]',
     childrenPlacementOrderLink: 'a[id$="children-placement-order"]',
@@ -12,6 +15,10 @@ module.exports = {
   },
   async selectTaskNameFromTaskList(taskName) {
     await I.click(taskName);
+  },
+
+  async selectPrimaryApplicantContactDetails() {
+    await I.click(this.primaryApplicant.contactDetailsLink);
   },
 
   async selectOtherApplicantContactDetails() {
