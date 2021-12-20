@@ -4,6 +4,7 @@ const { I } = inject();
 module.exports = {
   secondApplicant: {
     contactDetailsLink: 'a[href="/applicant2/same-address"]',
+    childrenPlacementOrderLink: 'a[id$="children-placement-order"]',
   },
 
   async goToTaskListPage() {
@@ -15,5 +16,9 @@ module.exports = {
 
   async selectOtherApplicantContactDetails() {
     await I.click(this.secondApplicant.contactDetailsLink);
+  },
+
+  async selectChildPlacementOrderDetails() {
+    await I.click(this.secondApplicant.childrenPlacementOrderLink);
   },
 };
