@@ -7,7 +7,7 @@ import { generateContent } from './content';
 jest.mock('../../../app/form/validation');
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('placement-order-number content', () => {
+describe('children > placement-order-number content', () => {
   const commonContent = {
     language: 'en',
     userCase: {
