@@ -2,6 +2,9 @@ const config = require('../config');
 const { I } = inject();
 
 module.exports = {
+  firstApplicant: {
+    personalDetailsLink: '#applicant1-personal-details',
+  },
   secondApplicant: {
     contactDetailsLink: 'a[href="/applicant2/same-address"]',
   },
@@ -15,5 +18,9 @@ module.exports = {
 
   async selectOtherApplicantContactDetails() {
     await I.click(this.secondApplicant.contactDetailsLink);
+  },
+
+  async selectFirstApplicantPersonalDetails() {
+    await I.click(this.firstApplicant.personalDetailsLink);
   },
 };
