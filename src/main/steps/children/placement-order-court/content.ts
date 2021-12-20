@@ -24,13 +24,15 @@ const cy = () => ({
 
 export const form: FormContent = {
   fields: userCase => {
+    const placementOrder = userCase.placementOrders?.find(
+      item => item.placementOrderId === userCase.selectedPlacementOrderId
+    );
     return {
       placementOrderCourt: {
         type: 'text',
         classes: 'govuk-label',
         label: l => l.label,
-        value: userCase.placementOrders?.find(item => item.placementOrderId === userCase.selectedPlacementOrderId)
-          ?.placementOrderCourt,
+        value: placementOrder?.placementOrderCourt,
         labelSize: 'l',
         attributes: {
           spellcheck: false,
