@@ -63,7 +63,7 @@ export const form: FormContent = {
       label: l => l.occupation,
       labelSize: 'normal',
       classes: 'govuk-input--width-20',
-      validator: isFieldFilledIn || isFieldLetters,
+      validator: input => isFieldFilledIn(input) || isFieldLetters(input),
     },
   },
   submit: {

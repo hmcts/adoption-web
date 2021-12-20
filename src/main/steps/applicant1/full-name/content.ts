@@ -2,7 +2,7 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn, isFieldLetters } from '../../../app/form/validation';
 
-const en = () => ({
+export const en = (): Record<string, unknown> => ({
   section: 'Primary applicant',
   title: "What's your full name?",
   fullName: 'Your full name',
@@ -14,7 +14,7 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
+export const cy = (): Record<string, unknown> => ({
   section: 'Primary applicant (in Welsh)',
   title: "What's your full name? (in Welsh)",
   fullName: 'Your full name (in Welsh)',
@@ -29,7 +29,7 @@ const cy = () => ({
 export const form: FormContent = {
   fields: {
     applicantFullName: {
-      type: 'text',
+      type: 'input',
       label: l => l.fullName,
       labelSize: 'normal',
       classes: 'govuk-input--width-20',
