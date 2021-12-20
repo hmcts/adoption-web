@@ -99,9 +99,9 @@ describe('nationality content', () => {
     const otherCountrySubFields = nationality.values[2].subFields;
     const applicant1Nationalities = otherCountrySubFields?.applicant1Nationalities as FormOptions;
     const rows = applicant1Nationalities?.rows?.rows;
-    const addAnotherNationality = otherCountrySubFields?.addAnotherNationality as FormInput;
-    const applicant1Nationality = addAnotherNationality?.subFields?.applicant1Nationality;
-    const addButton = addAnotherNationality?.subFields?.addButton as FormInput;
+    const addAnotherNationalityDetails = otherCountrySubFields?.addAnotherNationalityDetails as FormInput;
+    const addAnotherNationality = addAnotherNationalityDetails?.subFields?.addAnotherNationality;
+    const addButton = addAnotherNationalityDetails?.subFields?.addButton as FormInput;
 
     expect(applicant1Nationalities?.type).toBe('summarylist');
     expect(rows).toHaveLength(2);
@@ -111,14 +111,16 @@ describe('nationality content', () => {
     expect(rows?.[0].actions.items[0].text).toStrictEqual('Remove');
     expect(rows?.[0].actions.items[0].visuallyHiddenText).toStrictEqual(populatedArray[0]);
 
-    expect(addAnotherNationality.type).toBe('details');
-    expect((addAnotherNationality.label as Function)(generateContent(commonContent([])))).toBe(enContent.another);
+    expect(addAnotherNationalityDetails.type).toBe('details');
+    expect((addAnotherNationalityDetails.label as Function)(generateContent(commonContent([])))).toBe(
+      enContent.another
+    );
 
-    expect(applicant1Nationality?.type).toBe('input');
-    expect((applicant1Nationality?.label as Function)(generateContent(commonContent([])))).toBe(
+    expect(addAnotherNationality?.type).toBe('input');
+    expect((addAnotherNationality?.label as Function)(generateContent(commonContent([])))).toBe(
       enContent.applicant1Nationality
     );
-    expect(applicant1Nationality?.labelSize).toBe('s');
+    expect(addAnotherNationality?.labelSize).toBe('s');
 
     expect(addButton?.type).toBe('button');
     expect((addButton?.label as Function)(generateContent(commonContent([])))).toBe(enContent.add);
