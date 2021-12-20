@@ -17,6 +17,7 @@ import {
 export enum Sections {
   AboutApplicant1 = 'aboutApplicant1',
   AboutApplicant2 = 'aboutApplicant2',
+  AboutChildren = 'aboutChildren',
   AboutApplication = 'aboutApplication',
   AboutPartnership = 'aboutPartnership',
   HelpWithFees = 'helpWithFees',

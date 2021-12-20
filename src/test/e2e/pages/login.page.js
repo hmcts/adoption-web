@@ -21,6 +21,17 @@ module.exports = {
     await I.wait('3');
   },
 
+  async signInWithCitizenUser(user) {
+    await I.amOnPage(config.baseUrl);
+    await I.wait('5');
+    await I.waitForSelector(this.fields.username);
+    await I.fillField(this.fields.username, user.email);
+    await I.fillField(this.fields.password, user.password);
+    await I.waitForSelector(this.submitButton);
+    I.click(this.submitButton);
+    await I.wait('3');
+  },
+
   async signInFromEligibility(user) {
     await I.goToPage(config.baseUrl + 'eligibility/start');
     await I.wait('2');
