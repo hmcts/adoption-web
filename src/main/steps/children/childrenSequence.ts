@@ -22,7 +22,7 @@ export const childrenSequence: Step[] = [
   {
     url: Urls.CHILDREN_PLACEMENT_ORDER_COURT,
     showInSection: Sections.AboutChildren,
-    getNextStep: () => Urls.CHILDREN_PLACEMENT_ORDER_DATE,
+    getNextStep: () => Urls.TASK_LIST_URL,
   },
   {
     url: Urls.CHILDREN_PLACEMENT_ORDER_DATE,
