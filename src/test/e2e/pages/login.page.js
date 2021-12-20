@@ -15,8 +15,8 @@ module.exports = {
   async signIn(user) {
     await I.wait('5');
     await I.waitForSelector(this.fields.username);
-    I.fillField(this.fields.username, user.email);
-    I.fillField(this.fields.password, user.password);
+    await I.fillField(this.fields.username, user.email);
+    await I.fillField(this.fields.password, user.password);
     await I.waitForSelector(this.submitButton);
     I.click(this.submitButton);
     await I.wait('3');
