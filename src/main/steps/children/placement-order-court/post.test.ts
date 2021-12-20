@@ -4,7 +4,7 @@ import PlacementOrderPostController from '../placement-order/post';
 
 import PostController from './post';
 
-describe('placement-order-number post', () => {
+describe('children > placement-order-court post', () => {
   test('should re-export placement-order post controller', () => {
     expect(PostController).toBe(PlacementOrderPostController);
   });
