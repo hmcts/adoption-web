@@ -48,8 +48,9 @@ export const cy = (): Record<string, unknown> => ({
 
 export const form: FormContent = {
   fields: userCase => {
+    console.log(userCase);
     return {
-      nationality: {
+      applicant1Nationality: {
         type: 'checkboxes',
         label: l => l.label,
         labelSize: 's',
@@ -79,7 +80,7 @@ export const form: FormContent = {
               },
               ...(userCase.applicant1Nationalities?.length
                 ? {
-                    addAnotherCountry: {
+                    addAnotherNationality: {
                       type: 'details',
                       label: l => l.another,
                       subFields: {
@@ -98,7 +99,7 @@ export const form: FormContent = {
                     },
                   }
                 : {
-                    applicant1Nationality: {
+                    addAnotherNationality: {
                       type: 'input',
                       label: l => l.applicant1Nationality,
                       labelSize: 's',

@@ -36,3 +36,7 @@ export const getContactDetailsStatus = (userCase: CaseWithId, userType: 'applica
   }
   return SectionStatus.NOT_STARTED;
 };
+
+// export const getPersonalDetailsStatus = (userCase: CaseWithId, userType: 'applicant1' | 'applicant2'): SectionStatus => {
+
+// }

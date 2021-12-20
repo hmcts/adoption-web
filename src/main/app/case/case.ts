@@ -116,6 +116,7 @@ export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;
 export interface Case {
   applyingWith?: string;
   addButton?: string;
+  addAnotherNationality: string;
   applicant1AdditionalName?: string;
   applicant1AdditionalNames?: string[];
   applicant1Nationality?: string;

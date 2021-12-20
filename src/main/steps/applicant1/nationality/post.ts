@@ -22,9 +22,8 @@ export default class FindAddressPostController extends PostController<AnyObject>
         if (!req.session.userCase.applicant1Nationalities) {
           req.session.userCase.applicant1Nationalities = [];
         }
-        if (formData.applicant1Nationality) {
-          req.session.userCase.applicant1Nationalities.push(formData.applicant1Nationality);
-          req.session.userCase.applicant1Nationality = '';
+        if (formData.addAnotherNationality) {
+          req.session.userCase.applicant1Nationalities.push(formData.addAnotherNationality);
         }
       }
     }
