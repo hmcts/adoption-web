@@ -48,7 +48,6 @@ export const cy = (): Record<string, unknown> => ({
 
 export const form: FormContent = {
   fields: userCase => {
-    console.log(userCase);
     return {
       applicant1Nationality: {
         type: 'checkboxes',

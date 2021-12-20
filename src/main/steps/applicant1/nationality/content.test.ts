@@ -47,7 +47,7 @@ describe('nationality content', () => {
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
 
-    const { type, label, labelSize, values, validator } = fields.nationality as FormOptions;
+    const { type, label, labelSize, values, validator } = fields.applicant1Nationality as FormOptions;
 
     expect(type).toBe('checkboxes');
     expect((label as Function)(generateContent(commonContent([])))).toBe(enContent.label);
@@ -68,21 +68,21 @@ describe('nationality content', () => {
     const generatedContent = generateContent(commonContent(emptyArray));
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const nationality = fields.nationality as FormOptions;
+    const nationality = fields.applicant1Nationality as FormOptions;
     const otherCountrySubFields = nationality.values[2].subFields;
     const applicant1Nationalities = otherCountrySubFields?.applicant1Nationalities as FormOptions;
-    const applicant1Nationality = otherCountrySubFields?.applicant1Nationality;
+    const addAnotherNationality = otherCountrySubFields?.addAnotherNationality;
     const addButton = otherCountrySubFields?.addButton as FormInput;
 
     expect(applicant1Nationalities.type).toBe('summarylist');
     expect(applicant1Nationalities.rows?.rows).toStrictEqual(emptyArray);
 
-    expect(applicant1Nationality?.type).toBe('input');
-    expect((applicant1Nationality?.label as Function)(generateContent(commonContent([])))).toBe(
+    expect(addAnotherNationality?.type).toBe('input');
+    expect((addAnotherNationality?.label as Function)(generateContent(commonContent([])))).toBe(
       enContent.applicant1Nationality
     );
-    expect(applicant1Nationality?.labelSize).toBe('s');
-    expect(applicant1Nationality?.validator).toBe(isFieldFilledIn);
+    expect(addAnotherNationality?.labelSize).toBe('s');
+    expect(addAnotherNationality?.validator).toBe(isFieldFilledIn);
 
     expect(addButton?.type).toBe('button');
     expect((addButton?.label as Function)(generateContent(commonContent([])))).toBe(enContent.add);
@@ -95,13 +95,13 @@ describe('nationality content', () => {
     const generatedContent = generateContent(commonContent(populatedArray));
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const nationality = fields.nationality as FormOptions;
+    const nationality = fields.applicant1Nationality as FormOptions;
     const otherCountrySubFields = nationality.values[2].subFields;
     const applicant1Nationalities = otherCountrySubFields?.applicant1Nationalities as FormOptions;
     const rows = applicant1Nationalities?.rows?.rows;
-    const addAnotherCountry = otherCountrySubFields?.addAnotherCountry as FormInput;
-    const applicant1Nationality = addAnotherCountry?.subFields?.applicant1Nationality;
-    const addButton = addAnotherCountry?.subFields?.addButton as FormInput;
+    const addAnotherNationality = otherCountrySubFields?.addAnotherNationality as FormInput;
+    const applicant1Nationality = addAnotherNationality?.subFields?.applicant1Nationality;
+    const addButton = addAnotherNationality?.subFields?.addButton as FormInput;
 
     expect(applicant1Nationalities?.type).toBe('summarylist');
     expect(rows).toHaveLength(2);
@@ -111,8 +111,8 @@ describe('nationality content', () => {
     expect(rows?.[0].actions.items[0].text).toStrictEqual('Remove');
     expect(rows?.[0].actions.items[0].visuallyHiddenText).toStrictEqual(populatedArray[0]);
 
-    expect(addAnotherCountry.type).toBe('details');
-    expect((addAnotherCountry.label as Function)(generateContent(commonContent([])))).toBe(enContent.another);
+    expect(addAnotherNationality.type).toBe('details');
+    expect((addAnotherNationality.label as Function)(generateContent(commonContent([])))).toBe(enContent.another);
 
     expect(applicant1Nationality?.type).toBe('input');
     expect((applicant1Nationality?.label as Function)(generateContent(commonContent([])))).toBe(
