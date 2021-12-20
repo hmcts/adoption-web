@@ -3,22 +3,20 @@
 import { FormContent, FormFields } from '../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
-import { cy as cyFunction, en as enFunction, generateContent } from './content';
+import { cy, en, generateContent } from './content';
 
 const CY = 'cy';
 const EN = 'en';
-const cyContent = cyFunction();
-const enContent = enFunction();
+const cyContent = cy();
+const enContent = en();
 
 const langAssertions = (language, content) => {
   const generatedContent = generateContent({ language, userCase: {} } as CommonContent);
-  const { section, title, occupation, warningText, details, errors } = content;
+  const { section, title, fullName, errors } = content;
 
   expect(generatedContent.section).toEqual(section);
   expect(generatedContent.title).toEqual(title);
-  expect(generatedContent.occupation).toEqual(occupation);
-  expect(generatedContent.warningText).toEqual(warningText);
-  expect(generatedContent.details).toEqual(details);
+  expect(generatedContent.fullName).toEqual(fullName);
   expect(generatedContent.errors).toEqual(errors);
 };
 
@@ -33,16 +31,16 @@ describe('occupation content', () => {
     langAssertions(CY, cyContent);
   });
 
-  it('should have an occupation text input field', () => {
+  it('should have an full name text input field', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const applicant1Occupation = fields.applicant1Occupation;
+    const fullName = fields.applicantFullName;
 
-    expect(applicant1Occupation.type).toBe('input');
-    expect((applicant1Occupation.label as Function)(generateContent(commonContent))).toBe(enContent.occupation);
-    expect(applicant1Occupation.labelSize).toBe('normal');
-    expect(applicant1Occupation.classes).toBe('govuk-input--width-20');
+    expect(fullName.type).toBe('input');
+    expect((fullName.label as Function)(generateContent(commonContent))).toBe(enContent.fullName);
+    expect(fullName.labelSize).toBe('normal');
+    expect(fullName.classes).toBe('govuk-input--width-20');
   });
 
   it('should contain submit button', () => {

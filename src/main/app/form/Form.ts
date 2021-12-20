@@ -136,6 +136,7 @@ export interface FormOptions {
   type: string;
   label?: Label;
   section?: Label;
+  hint?: Label;
   classes?: string;
   labelHidden?: boolean;
   labelSize?: string | null;
@@ -152,6 +153,7 @@ export interface FormInput {
   name?: string;
   type?: string;
   label: Label;
+  labelSize?: string | null;
   section?: Label;
   hint?: Label;
   subtext?: Label;

@@ -4,7 +4,7 @@ import { atLeastOneFieldIsChecked, isFieldFilledIn } from '../../../app/form/val
 import { mapSummaryListContent } from '../../common/functions/mapSummaryListContent';
 import { APPLICANT_1_NATIONALITY } from '../../urls';
 
-const en = () => ({
+export const en = (): Record<string, unknown> => ({
   section: 'Primary applicant',
   title: 'What is your nationality?',
   label: 'Select all options that are relevant to you.',
@@ -12,10 +12,9 @@ const en = () => ({
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish',
   irish: 'Irish',
   differentCountry: 'Citizen of a different country',
-  countryName: 'Country name',
+  applicant1Nationality: 'Country name',
   add: 'Add',
   another: 'Add another country',
-  actions: ['Remove'],
   errors: {
     nationality: {
       required: 'Select if you are British, Irish or a citizen of a different country',
@@ -26,7 +25,7 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
+export const cy = (): Record<string, unknown> => ({
   section: 'Primary applicant (in Welsh)',
   title: 'What is your nationality? (in Welsh)',
   label: 'Select all options that are relevant to you. (in Welsh)',
@@ -34,10 +33,9 @@ const cy = () => ({
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish (in Welsh)',
   irish: 'Irish (in Welsh)',
   differentCountry: 'Citizen of a different country (in Welsh)',
-  countryName: 'Country name (in Welsh)',
+  applicant1Nationality: 'Country name (in Welsh)',
   add: 'Add',
   another: 'Add another country (in Welsh)',
-  actions: ['Remove (in Welsh)'],
   errors: {
     nationality: {
       required: 'Select if you are British, Irish or a citizen of a different country (in Welsh)',
@@ -54,22 +52,19 @@ export const form: FormContent = {
       nationality: {
         type: 'checkboxes',
         label: l => l.label,
-        labelSize: 'small',
+        labelSize: 's',
         validator: atLeastOneFieldIsChecked,
         values: [
           {
-            name: 'nationality',
             label: l => l.british,
             value: 'British',
             hint: l => l.britishSubtext,
           },
           {
-            name: 'nationality',
             label: l => l.irish,
             value: 'Irish',
           },
           {
-            name: 'nationality',
             label: l => l.differentCountry,
             value: 'Other',
             subFields: {
@@ -89,9 +84,9 @@ export const form: FormContent = {
                       label: l => l.another,
                       subFields: {
                         applicant1Nationality: {
-                          type: 'text',
-                          label: l => l.countryName,
-                          labelSize: 'small',
+                          type: 'input',
+                          label: l => l.applicant1Nationality,
+                          labelSize: 's',
                         },
                         addButton: {
                           type: 'button',
@@ -104,9 +99,9 @@ export const form: FormContent = {
                   }
                 : {
                     applicant1Nationality: {
-                      type: 'text',
-                      label: l => l.countryName,
-                      labelSize: 'small',
+                      type: 'input',
+                      label: l => l.applicant1Nationality,
+                      labelSize: 's',
                       validator: isFieldFilledIn,
                     },
                     addButton: {
