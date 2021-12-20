@@ -20,22 +20,7 @@ module.exports = {
     if (!(this.isPuppeteer() && currentUser === user)) {
       output.debug(`Logging in as ${user.email}`);
       currentUser = {}; // reset in case the login fails
-
-      await this.retryUntilExists(
-        async () => {
-          //To mitigate situation when idam response with blank page
-          await this.goToPage(baseUrl);
-
-          if ((await this.waitForAnySelector([signedOutSelector, signedInSelector], 30)) == null) {
-            return;
-          }
-
-          await this.retryUntilExists(() => loginPage.signIn(user), signedInSelector, false, 10);
-        },
-        signedInSelector,
-        false,
-        10
-      );
+      await this.retryUntilExists(() => loginPage.signIn(user), signedInSelector, false, 10);
       await this.rejectCookies();
       output.debug(`Logged in as ${user.email}`);
       currentUser = user;
@@ -46,29 +31,6 @@ module.exports = {
 
   async goToPage(url) {
     this.amOnPage(url);
-    await this.logWithHmctsAccount();
-  },
-
-  async logWithHmctsAccount() {
-    const hmctsLoginIn = 'div.win-scroll';
-
-    if (await this.hasSelector(hmctsLoginIn)) {
-      if (!config.hmctsUser.email || !config.hmctsUser.password) {
-        throw new Error(
-          'For environment requiring hmcts authentication please provide HMCTS_USER_USERNAME and HMCTS_USER_PASSWORD environment variables'
-        );
-      }
-      await within(hmctsLoginIn, () => {
-        this.fillField('//input[@type="email"]', config.hmctsUser.email);
-        this.wait(0.2);
-        this.click('Next');
-        this.wait(0.2);
-        this.fillField('//input[@type="password"]', config.hmctsUser.password);
-        this.wait(0.2);
-        this.click('Sign in');
-        this.click('Yes');
-      });
-    }
   },
 
   async rejectCookies() {
