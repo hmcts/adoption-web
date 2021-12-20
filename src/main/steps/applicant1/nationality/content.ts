@@ -56,15 +56,18 @@ export const form: FormContent = {
         validator: atLeastOneFieldIsChecked,
         values: [
           {
+            name: 'applicant1Nationality',
             label: l => l.british,
             value: 'British',
             hint: l => l.britishSubtext,
           },
           {
+            name: 'applicant1Nationality',
             label: l => l.irish,
             value: 'Irish',
           },
           {
+            name: 'applicant1Nationality',
             label: l => l.differentCountry,
             value: 'Other',
             subFields: {
@@ -79,11 +82,11 @@ export const form: FormContent = {
               },
               ...(userCase.applicant1Nationalities?.length
                 ? {
-                    addAnotherNationality: {
+                    addAnotherNationalityDetails: {
                       type: 'details',
                       label: l => l.another,
                       subFields: {
-                        applicant1Nationality: {
+                        addAnotherNationality: {
                           type: 'input',
                           label: l => l.applicant1Nationality,
                           labelSize: 's',

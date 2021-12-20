@@ -119,7 +119,7 @@ export interface Case {
   addAnotherNationality: string;
   applicant1AdditionalName?: string;
   applicant1AdditionalNames?: string[];
-  applicant1Nationality?: string;
+  applicant1Nationality?: string[];
   applicant1Nationalities?: string[];
   applicant1SelectAddress?: string;
   applicant2SelectAddress?: string;
