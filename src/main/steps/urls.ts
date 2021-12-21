@@ -30,11 +30,17 @@ export const APPLICANT_1_SELECT_ADDRESS: PageLink = '/applicant1/select-address'
 export const APPLICANT_1_MANUAL_ADDRESS: PageLink = '/applicant1/manual-address';
 export const APPLICANT_1_IDENTITY_DOCUMENTS: PageLink = '/applicant1/identity-documents';
 
-export const APPLICANT_2_SAME_ADDRESS: PageLink = '/applicant2/same-address';
-export const APPLICANT_2_FIND_ADDRESS: PageLink = '/applicant2/address/lookup';
-export const APPLICANT_2_SELECT_ADDRESS: PageLink = '/applicant2/address/select';
-export const APPLICANT_2_MANUAL_ADDRESS: PageLink = '/applicant2/address/manual';
-export const APPLICANT_2_CONTACT_DETAILS: PageLink = '/applicant2/contact-details';
+export const APPLICANT_2: PageLink = '/applicant2';
+export const APPLICANT_2_SAME_ADDRESS: PageLink = `${APPLICANT_2}/same-address`;
+export const APPLICANT_2_FIND_ADDRESS: PageLink = `${APPLICANT_2}/address/lookup`;
+export const APPLICANT_2_SELECT_ADDRESS: PageLink = `${APPLICANT_2}/address/select`;
+export const APPLICANT_2_MANUAL_ADDRESS: PageLink = `${APPLICANT_2}/address/manual`;
+export const APPLICANT_2_CONTACT_DETAILS: PageLink = `${APPLICANT_2}/contact-details`;
+
+export const CHILDREN: PageLink = '/children';
+export const CHILDREN_PLACEMENT_ORDER_NUMBER: PageLink = `${CHILDREN}/placement-order-number`;
+export const CHILDREN_PLACEMENT_ORDER_COURT: PageLink = `${CHILDREN}/placement-order-court`;
+export const CHILDREN_PLACEMENT_ORDER_DATE: PageLink = `${CHILDREN}/placement-order-date`;
 
 export const RELATIONSHIP_DATE_URL: PageLink = '/date-from-certificate';
 
