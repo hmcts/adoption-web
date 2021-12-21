@@ -9,7 +9,7 @@ export const en = (): Record<string, unknown> => ({
   title: "What's your date of birth?",
   hint: 'For example, 28 6 1997',
   errors: {
-    dateOfBirth: {
+    applicant1DateOfBirth: {
       required: 'You have not entered a date. Enter a date to continue.',
       invalidDate: 'You have entered an invalid date. Enter the date using the following format: 28 6 1997.',
       invalidYear: 'You have entered the year in an invalid format. Enter the whole year, for example 2002.',
@@ -25,7 +25,7 @@ export const cy = (): Record<string, unknown> => ({
   title: "What's your date of birth? (in Welsh)",
   hint: 'For example, 28 6 1997 (in Welsh)',
   errors: {
-    dateOfBirth: {
+    applicant1DateOfBirth: {
       required: 'You have not entered a date. Enter a date to continue. (in Welsh)',
       invalidDate: 'You have entered an invalid date. Enter the date using the following format: 28 6 1997. (in Welsh)',
       invalidYear: 'You have entered the year in an invalid format. Enter the whole year, for example 2002. (in Welsh)',
@@ -38,7 +38,7 @@ export const cy = (): Record<string, unknown> => ({
 
 export const form: FormContent = {
   fields: {
-    dateOfBirth: {
+    applicant1DateOfBirth: {
       type: 'date',
       classes: 'govuk-date-input',
       label: l => l.title,
@@ -64,7 +64,7 @@ export const form: FormContent = {
           attributes: { maxLength: 4 },
         },
       ],
-      parser: body => covertToDateObject('dateOfBirth', body as Record<string, unknown>),
+      parser: body => covertToDateObject('applicant1DateOfBirth', body as Record<string, unknown>),
       validator: value =>
         areDateFieldsFilledIn(value as CaseDate) ||
         isDateInputInvalid(value as CaseDate) ||

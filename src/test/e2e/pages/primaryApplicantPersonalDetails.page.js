@@ -2,24 +2,24 @@ const { I } = inject();
 
 module.exports = {
   fields: {
-    applicantFullName: 'input[id$="applicantFullName"]',
-    otherNames: 'input[id$="otherNames"]',
+    applicant1FullName: 'input[id$="applicant1FullName"]',
+    applicant1HasOtherNames: 'input[id$="applicant1HasOtherNames"]',
     applicant1AdditionalName: 'input[id$="applicant1AdditionalName"]',
-    dateOfBirthDay: 'input[id$="dateOfBirth-day"]',
-    dateOfBirthMonth: 'input[id$="dateOfBirth-month"]',
-    dateOfBirthYear: 'input[id$="dateOfBirth-year"]',
-    britishCitizen: 'input[id$="nationality"]',
-    citizenOfDifferentCountry: 'input[id$="nationality-3"]',
-    applicant1Nationality: 'input[id$="applicant1Nationality"]',
+    dateOfBirthDay: 'input[id$="applicant1DateOfBirth-day"]',
+    dateOfBirthMonth: 'input[id$="applicant1DateOfBirth-month"]',
+    dateOfBirthYear: 'input[id$="applicant1DateOfBirth-year"]',
+    britishCitizen: 'input[id$="applicant1Nationality"]',
+    citizenOfDifferentCountry: 'input[id$="applicant1Nationality-3"]',
+    addAnotherNationality: 'input[id$="addAnotherNationality"]',
     applicant1Occupation: 'input[id$="applicant1Occupation"]',
   },
 
   primaryApplicantPersonalDetailsSection() {
-    I.fillField(this.fields.applicantFullName, 'Joe Bloggs');
+    I.fillField(this.fields.applicant1FullName, 'Joe Bloggs');
     I.click('Save and continue');
     I.wait('2');
     I.waitForText('Have you ever legally been known by any other names?');
-    I.click(this.fields.otherNames);
+    I.click(this.fields.applicant1HasOtherNames);
     I.fillField(this.fields.applicant1AdditionalName, 'Wayne Best');
     I.click('Add');
     I.wait('2');
@@ -32,7 +32,7 @@ module.exports = {
     I.click('Save and continue');
     I.click(this.fields.britishCitizen);
     I.click(this.fields.citizenOfDifferentCountry);
-    I.fillField(this.fields.applicant1Nationality, 'India');
+    I.fillField(this.fields.addAnotherNationality, 'India');
     I.click('Add');
     I.wait('2');
     I.click('Save and continue');

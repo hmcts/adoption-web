@@ -31,7 +31,7 @@ const langAssertions = (language, content) => {
 };
 
 const commonContent = (countries: string[]) =>
-  ({ language: EN, userCase: { applicant1Nationalities: countries } } as CommonContent);
+  ({ language: EN, userCase: { applicant1AdditionalNationalities: countries } } as CommonContent);
 
 describe('nationality content', () => {
   it('should return the correct content for language = en', () => {
@@ -70,12 +70,12 @@ describe('nationality content', () => {
     const fields = form.fields as FormFields;
     const nationality = fields.applicant1Nationality as FormOptions;
     const otherCountrySubFields = nationality.values[2].subFields;
-    const applicant1Nationalities = otherCountrySubFields?.applicant1Nationalities as FormOptions;
+    const applicant1AdditionalNationalities = otherCountrySubFields?.applicant1AdditionalNationalities as FormOptions;
     const addAnotherNationality = otherCountrySubFields?.addAnotherNationality;
     const addButton = otherCountrySubFields?.addButton as FormInput;
 
-    expect(applicant1Nationalities.type).toBe('summarylist');
-    expect(applicant1Nationalities.rows?.rows).toStrictEqual(emptyArray);
+    expect(applicant1AdditionalNationalities.type).toBe('summarylist');
+    expect(applicant1AdditionalNationalities.rows?.rows).toStrictEqual(emptyArray);
 
     expect(addAnotherNationality?.type).toBe('input');
     expect((addAnotherNationality?.label as Function)(generateContent(commonContent([])))).toBe(
@@ -97,13 +97,13 @@ describe('nationality content', () => {
     const fields = form.fields as FormFields;
     const nationality = fields.applicant1Nationality as FormOptions;
     const otherCountrySubFields = nationality.values[2].subFields;
-    const applicant1Nationalities = otherCountrySubFields?.applicant1Nationalities as FormOptions;
-    const rows = applicant1Nationalities?.rows?.rows;
+    const applicant1AdditionalNationalities = otherCountrySubFields?.applicant1AdditionalNationalities as FormOptions;
+    const rows = applicant1AdditionalNationalities?.rows?.rows;
     const addAnotherNationalityDetails = otherCountrySubFields?.addAnotherNationalityDetails as FormInput;
     const addAnotherNationality = addAnotherNationalityDetails?.subFields?.addAnotherNationality;
     const addButton = addAnotherNationalityDetails?.subFields?.addButton as FormInput;
 
-    expect(applicant1Nationalities?.type).toBe('summarylist');
+    expect(applicant1AdditionalNationalities?.type).toBe('summarylist');
     expect(rows).toHaveLength(2);
     expect(rows?.[0].key.text).toStrictEqual(populatedArray[0]);
     expect(rows?.[1].key.text).toStrictEqual(populatedArray[1]);

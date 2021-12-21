@@ -5,9 +5,9 @@ import { isFieldFilledIn, isFieldLetters } from '../../../app/form/validation';
 export const en = (): Record<string, unknown> => ({
   section: 'Primary applicant',
   title: "What's your full name?",
-  fullName: 'Your full name',
+  applicant1FullName: 'Your full name',
   errors: {
-    applicantFullName: {
+    applicant1FullName: {
       required: 'You have not entered your full name. Enter it before continuing.',
       invalid: 'You have entered an invalid character, like a number. Enter your name using letters only.',
     },
@@ -17,9 +17,9 @@ export const en = (): Record<string, unknown> => ({
 export const cy = (): Record<string, unknown> => ({
   section: 'Primary applicant (in Welsh)',
   title: "What's your full name? (in Welsh)",
-  fullName: 'Your full name (in Welsh)',
+  applicant1FullName: 'Your full name (in Welsh)',
   errors: {
-    applicantFullName: {
+    applicant1FullName: {
       required: 'You have not entered your full name. Enter it before continuing. (in Welsh)',
       invalid: 'You have entered an invalid character, like a number. Enter your name using letters only. (in Welsh)',
     },
@@ -28,9 +28,9 @@ export const cy = (): Record<string, unknown> => ({
 
 export const form: FormContent = {
   fields: {
-    applicantFullName: {
+    applicant1FullName: {
       type: 'input',
-      label: l => l.fullName,
+      label: l => l.applicant1FullName,
       labelSize: 'normal',
       classes: 'govuk-input--width-20',
       validator: input => isFieldFilledIn(input) || isFieldLetters(input),

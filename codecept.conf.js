@@ -31,8 +31,6 @@ exports.config = {
           chunks = splitFiles(files, Math.ceil(files.length / buckets));
         }
 
-        console.log(chunks);
-
         return chunks;
       },
     },

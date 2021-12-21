@@ -257,7 +257,7 @@ export interface CaseData {
   applicant1AdditionalName: string;
   applicant1AdditionalNames: string[];
   applicant1Nationality: string;
-  applicant1Nationalities: string[];
+  applicant1AdditionalNationalities: string[];
   applicationType: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
   labelContentApplicant2: string;

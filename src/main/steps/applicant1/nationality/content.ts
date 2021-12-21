@@ -71,16 +71,16 @@ export const form: FormContent = {
             label: l => l.differentCountry,
             value: 'Other',
             subFields: {
-              applicant1Nationalities: {
+              applicant1AdditionalNationalities: {
                 type: 'summarylist',
                 values: [],
                 rows: mapSummaryListContent(
-                  userCase.applicant1Nationalities || [],
+                  userCase.applicant1AdditionalNationalities || [],
                   ['Remove'],
                   APPLICANT_1_NATIONALITY
                 ),
               },
-              ...(userCase.applicant1Nationalities?.length
+              ...(userCase.applicant1AdditionalNationalities?.length
                 ? {
                     addAnotherNationalityDetails: {
                       type: 'details',

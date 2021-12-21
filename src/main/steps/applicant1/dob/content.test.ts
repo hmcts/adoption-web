@@ -55,7 +55,7 @@ describe('dob-content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const dobField = fields.dateOfBirth as FormOptions;
+    const dobField = fields.applicant1DateOfBirth as FormOptions;
 
     expect(dobField.type).toBe('date');
     expect(dobField.classes).toBe('govuk-date-input');

@@ -45,7 +45,8 @@ describe('other names content', () => {
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
 
-    const { type, classes, label, hint, labelSize, section, values, validator } = fields.otherNames as FormOptions;
+    const { type, classes, label, hint, labelSize, section, values, validator } =
+      fields.applicant1HasOtherNames as FormOptions;
 
     expect(type).toBe('radios');
     expect(classes).toBe('govuk-radios');
@@ -66,8 +67,8 @@ describe('other names content', () => {
     const generatedContent = generateContent(commonContent(emptyArray));
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const otherNames = fields.otherNames as FormOptions;
-    const yesRadioSubFields = otherNames.values[0].subFields;
+    const applicant1HasOtherNames = fields.applicant1HasOtherNames as FormOptions;
+    const yesRadioSubFields = applicant1HasOtherNames.values[0].subFields;
     const applicant1AdditionalNames = yesRadioSubFields?.applicant1AdditionalNames as FormOptions;
     const applicant1AdditionalName = yesRadioSubFields?.applicant1AdditionalName;
     const addButton = yesRadioSubFields?.addButton as FormInput;
@@ -93,8 +94,8 @@ describe('other names content', () => {
     const generatedContent = generateContent(commonContent(populatedArray));
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const otherNames = fields.otherNames as FormOptions;
-    const yesRadioSubFields = otherNames.values[0].subFields;
+    const applicant1HasOtherNames = fields.applicant1HasOtherNames as FormOptions;
+    const yesRadioSubFields = applicant1HasOtherNames.values[0].subFields;
     const applicant1AdditionalNames = yesRadioSubFields?.applicant1AdditionalNames as FormOptions;
     const rows = applicant1AdditionalNames?.rows?.rows;
     const addAnotherName = yesRadioSubFields?.addAnotherName as FormInput;

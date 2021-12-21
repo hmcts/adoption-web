@@ -16,7 +16,7 @@ export const en = (): Record<string, unknown> => ({
   another: 'Add another name',
   remove: 'Remove',
   errors: {
-    otherNames: {
+    applicant1HasOtherNames: {
       required: 'Enter a name or choose no',
     },
     applicant1AdditionalName: {
@@ -39,7 +39,7 @@ export const cy = (): Record<string, unknown> => ({
   another: 'Add another name (in Welsh)',
   remove: 'Remove (in Welsh)',
   errors: {
-    otherNames: {
+    applicant1HasOtherNames: {
       required: 'Enter a name or choose no (in Welsh)',
     },
     applicant1AdditionalName: {
@@ -54,7 +54,7 @@ export const cy = (): Record<string, unknown> => ({
 export const form: FormContent = {
   fields: userCase => {
     return {
-      otherNames: {
+      applicant1HasOtherNames: {
         type: 'radios',
         classes: 'govuk-radios',
         label: l => l.label,
