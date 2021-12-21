@@ -49,10 +49,10 @@ export const getPersonalDetailsStatus = (
   const nationalities: string[] = userCase[`${userType}AdditionalNationalities`] || [];
   const occupation = userCase[`${userType}Occupation`];
 
-  const dateOfBirthComplete = !!dateOfBirth.year && !!dateOfBirth.month && !!dateOfBirth.day;
+  const dateOfBirthComplete = dateOfBirth && !!dateOfBirth.year && !!dateOfBirth.month && !!dateOfBirth.day;
 
   const otherNamesComplete: boolean =
-    hasOtherNames === YesOrNo.NO || (hasOtherNames === YesOrNo.YES && additionalNames.length);
+    hasOtherNames === YesOrNo.NO || (hasOtherNames === YesOrNo.YES && !!additionalNames.length);
   const nationalityComplete =
     !!nationality.length &&
     (!nationality.includes('Other') || (!!nationalities.length && nationality.includes('Other')));
