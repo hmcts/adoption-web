@@ -119,6 +119,7 @@ export interface Case {
   applicant2AddressSameAsApplicant1?: YesOrNo;
   placementOrders?: PlacementOrder[];
   selectedPlacementOrderId?: string;
+  childrenDateOfBirth: CaseDate;
   applicationType?: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
   issueDate?: DateAsString;

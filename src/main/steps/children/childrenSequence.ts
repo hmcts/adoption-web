@@ -29,4 +29,19 @@ export const childrenSequence: Step[] = [
     showInSection: Sections.AboutChildren,
     getNextStep: () => Urls.TASK_LIST_URL,
   },
+  {
+    url: Urls.CHILDREN_FULL_NAME,
+    showInSection: Sections.AboutChildren,
+    getNextStep: () => Urls.CHILDREN_DATE_OF_BIRTH,
+  },
+  {
+    url: Urls.CHILDREN_DATE_OF_BIRTH,
+    showInSection: Sections.AboutChildren,
+    getNextStep: () => Urls.TASK_LIST_URL,
+  },
+  {
+    url: Urls.CHILDREN_SEX_AT_BIRTH,
+    showInSection: Sections.AboutChildren,
+    getNextStep: () => Urls.TASK_LIST_URL,
+  },
 ];
