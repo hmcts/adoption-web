@@ -16,10 +16,10 @@ export const en = (): Record<string, unknown> => ({
   add: 'Add',
   another: 'Add another country',
   errors: {
-    nationality: {
+    applicant2Nationality: {
       required: 'Select if you are British, Irish or a citizen of a different country',
     },
-    applicant2Nationality: {
+    addAnotherNationality: {
       required: 'This is not a valid entry',
     },
   },
@@ -37,10 +37,10 @@ export const cy = (): Record<string, unknown> => ({
   add: 'Add',
   another: 'Add another country (in Welsh)',
   errors: {
-    nationality: {
+    applicant2Nationality: {
       required: 'Select if you are British, Irish or a citizen of a different country (in Welsh)',
     },
-    applicant2Nationality: {
+    addAnotherNationality: {
       required: 'This is not a valid entry (in Welsh)',
     },
   },
