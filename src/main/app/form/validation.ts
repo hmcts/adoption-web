@@ -25,11 +25,15 @@ export const areDateFieldsFilledIn: DateValidator = fields => {
   if (typeof fields !== 'object' || Object.keys(fields).length !== 3) {
     return 'required';
   }
+  const values = Object.values(fields);
+  const allFieldsMissing = values.every(value => !value);
+  if (allFieldsMissing) {
+    return 'required';
+  }
 
-  for (const field in fields) {
-    if (!fields[field]) {
-      return 'required';
-    }
+  const someFieldsMissing = values.some(value => !value);
+  if (someFieldsMissing) {
+    return 'incomplete';
   }
 };
 
@@ -82,6 +86,19 @@ export const isLessThanAYear: DateValidator = date => {
   oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
   if (!(enteredDate < oneYearAgo)) {
     return 'lessThanAYear';
+  }
+};
+
+export const isMoreThan18Years: DateValidator = date => {
+  if (!date) {
+    return;
+  }
+
+  const enteredDate = new Date(+date.year, +date.month - 1, +date.day);
+  const eighteenYearAgo = new Date();
+  eighteenYearAgo.setFullYear(eighteenYearAgo.getFullYear() - 18);
+  if (enteredDate < eighteenYearAgo) {
+    return 'invalidDateOver18';
   }
 };
 

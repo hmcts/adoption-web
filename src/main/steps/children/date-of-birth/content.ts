@@ -2,7 +2,12 @@ import { CaseDate } from '../../../app/case/case';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { covertToDateObject } from '../../../app/form/parser';
-import { areDateFieldsFilledIn, isDateInputInvalid, isFutureDate } from '../../../app/form/validation';
+import {
+  areDateFieldsFilledIn,
+  isDateInputInvalid,
+  isFutureDate,
+  isMoreThan18Years,
+} from '../../../app/form/validation';
 
 const en = () => ({
   section: "The child's details",
@@ -10,11 +15,12 @@ const en = () => ({
   hint: "For example, 31 3 2012. This should be on their birth certificate. Ask the adoption agency or social worker if you're not sure.",
   errors: {
     childrenDateOfBirth: {
-      required: 'Enter the placement order date',
-      invalidDate: 'Date must include a [day/month/year]',
-      invalidYear: 'You have entered the year in an invalid format. Enter the whole year, for example 2002.',
-      invalidDateInFuture: 'Date must be in the past',
-      invalidDateTooFarInPast: 'You have entered a year which is too far in the past. Enter the year you got married.',
+      required: 'Enter their date of birth',
+      incomplete: 'Date of birth must include a [day/month/year]',
+      invalidDate: 'Date of birth must be a real date',
+      invalidDateInFuture: 'Date of birth must be in the past',
+      invalidDateTooFarInPast: 'Date of birth must be a real date',
+      invalidDateOver18: 'Child is 18 or over and cannot be adopted',
     },
   },
 });
@@ -25,12 +31,12 @@ const cy = () => ({
   hint: "For example, 31 3 2012. This should be on their birth certificate. Ask the adoption agency or social worker if you're not sure. (in welsh)",
   errors: {
     childrenDateOfBirth: {
-      required: 'Enter the placement order date (in welsh)',
-      invalidDate: 'Date must include a [day/month/year] (in welsh)',
-      invalidYear: 'You have entered the year in an invalid format. Enter the whole year, for example 2002. (in welsh)',
-      invalidDateInFuture: 'Date must be in the past (in welsh)',
-      invalidDateTooFarInPast:
-        'You have entered a year which is too far in the past. Enter the year you got married. (in welsh)',
+      required: 'Enter their date of birth (in welsh)',
+      incomplete: 'Date of birth must include a [day/month/year] (in welsh)',
+      invalidDate: 'Date of birth must be a real date (in welsh)',
+      invalidDateInFuture: 'Date of birth must be in the past (in welsh)',
+      invalidDateTooFarInPast: 'Date of birth must be a real date (in welsh)',
+      invalidDateOver18: 'Child is 18 or over and cannot be adopted (in welsh)',
     },
   },
 });
@@ -70,7 +76,8 @@ export const form: FormContent = {
       validator: value =>
         areDateFieldsFilledIn(value as CaseDate) ||
         isDateInputInvalid(value as CaseDate) ||
-        isFutureDate(value as CaseDate),
+        isFutureDate(value as CaseDate) ||
+        isMoreThan18Years(value as CaseDate),
     },
   },
   submit: {

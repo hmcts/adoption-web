@@ -1,3 +1,4 @@
+import { Gender } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -11,20 +12,21 @@ const en = () => ({
   intersex: 'Intersex',
   errors: {
     childrenSexAtBirth: {
-      required: 'Select the number of people applying to adopt',
+      required: 'Please select an answer',
     },
   },
 });
 
 const cy = () => ({
-  section: 'Applicant details (in welsh)',
+  section: "The child's details (in welsh)",
   label: "What was the child's sex at birth? (in welsh)",
-  male: "I'm applying on my own (in welsh)",
-  two: "I'm applying with my spouse or civil partner (in welsh)",
-  three: "I'm applying with someone who is not my spouse or civil partner (in welsh)",
+  hint: "You should state exactly what is listed on the birth certificate. If the child's sex is listed as 'diverse', which means their biological sex could not be determined, you should choose the 'intersex' option. (in welsh)",
+  male: 'Male (in welsh)',
+  female: 'Female (in welsh)',
+  intersex: 'Intersex (in welsh)',
   errors: {
     childrenSexAtBirth: {
-      required: 'Select the number of people applying to adopt (in welsh)',
+      required: 'Please select an answer (in welsh)',
     },
   },
 });
@@ -38,9 +40,9 @@ export const form: FormContent = {
       section: l => l.section,
       hint: l => l.hint,
       values: [
-        { label: l => l.male, value: 'male' },
-        { label: l => l.female, value: 'female' },
-        { label: l => l.intersex, value: 'intersex' },
+        { label: l => l.male, value: Gender.MALE },
+        { label: l => l.female, value: Gender.FEMALE },
+        { label: l => l.intersex, value: Gender.INTERSEX },
       ],
       validator: isFieldFilledIn,
     },

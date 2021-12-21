@@ -37,7 +37,7 @@ export const childrenSequence: Step[] = [
   {
     url: Urls.CHILDREN_DATE_OF_BIRTH,
     showInSection: Sections.AboutChildren,
-    getNextStep: () => Urls.TASK_LIST_URL,
+    getNextStep: () => Urls.CHILDREN_SEX_AT_BIRTH,
   },
   {
     url: Urls.CHILDREN_SEX_AT_BIRTH,
