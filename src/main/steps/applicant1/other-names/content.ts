@@ -1,7 +1,7 @@
 import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
-import { isFieldFilledIn } from '../../../app/form/validation';
+import { doesArrayHaveValues, isFieldFilledIn } from '../../../app/form/validation';
 import { mapSummaryListContent } from '../../common/functions/mapSummaryListContent';
 import { APPLICANT_1_OTHER_NAMES } from '../../urls';
 
@@ -92,7 +92,7 @@ export const form: FormContent = {
                           value: 'addButton',
                         },
                       },
-                      // validator: () => doesArrayHaveValues(userCase.applicant1AdditionalNames),
+                      validator: () => doesArrayHaveValues(userCase.applicant1AdditionalNames),
                     },
                   }
                 : {
