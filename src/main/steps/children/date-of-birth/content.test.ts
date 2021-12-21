@@ -39,9 +39,6 @@ describe('children date-of-birth content', () => {
     expect((generatedContent.errors as any).childrenDateOfBirth.invalidDateInFuture).toEqual(
       'Date of birth must be in the past'
     );
-    expect((generatedContent.errors as any).childrenDateOfBirth.invalidDateTooFarInPast).toEqual(
-      'Date of birth must be a real date'
-    );
     expect((generatedContent.errors as any).childrenDateOfBirth.invalidDateOver18).toEqual(
       'Child is 18 or over and cannot be adopted'
     );
@@ -65,9 +62,6 @@ describe('children date-of-birth content', () => {
     );
     expect((generatedContent.errors as any).childrenDateOfBirth.invalidDateInFuture).toEqual(
       'Date of birth must be in the past (in welsh)'
-    );
-    expect((generatedContent.errors as any).childrenDateOfBirth.invalidDateTooFarInPast).toEqual(
-      'Date of birth must be a real date (in welsh)'
     );
     expect((generatedContent.errors as any).childrenDateOfBirth.invalidDateOver18).toEqual(
       'Child is 18 or over and cannot be adopted (in welsh)'

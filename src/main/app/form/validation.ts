@@ -53,15 +53,7 @@ export const isDateInputInvalid: DateValidator = date => {
   const month = parseInt(date.month, 10) || 0;
   const day = parseInt(date.day, 10) || 0;
   if (!dayjs(`${year}-${month}-${day}`, 'YYYY-M-D', true).isValid()) {
-    if (year < 1000) {
-      return 'invalidYear';
-    } else {
-      return invalid;
-    }
-  }
-
-  if (year < 1900) {
-    return 'invalidDateTooFarInPast';
+    return invalid;
   }
 };
 
