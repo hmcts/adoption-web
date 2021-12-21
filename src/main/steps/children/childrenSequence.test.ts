@@ -10,7 +10,7 @@ describe('childrenSequence', () => {
 
     expect(childrenSequence[1].url).toBe('/children/placement-order-court');
     expect(childrenSequence[1].showInSection).toBe('aboutChildren');
-    expect(childrenSequence[1].getNextStep({})).toBe('/task-list');
+    expect(childrenSequence[1].getNextStep({})).toBe('/children/placement-order-date');
 
     expect(childrenSequence[2].url).toBe('/children/placement-order-date');
     expect(childrenSequence[2].showInSection).toBe('aboutChildren');

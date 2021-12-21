@@ -23,17 +23,15 @@ describe('children > placement-order-date content', () => {
     expect(generatedContent.section).toEqual("The child's details");
     expect(generatedContent.label).toEqual('What date is on the placement order?');
     expect(generatedContent.hint).toEqual('For example, 31 3 2020');
+    /**
+     * incomplete: 'Date must include a [day/month/year]',
+      invalidDate: 'Enter a real date',
+      invalidDateInFuture: 'Date must be in the past',
+     */
     expect((generatedContent.errors as any).placementOrderDate.required).toBe('Enter the placement order date');
-    expect((generatedContent.errors as any).placementOrderDate.invalidDate).toBe(
-      'Date must include a [day/month/year]'
-    );
-    expect((generatedContent.errors as any).placementOrderDate.invalidYear).toBe(
-      'You have entered the year in an invalid format. Enter the whole year, for example 2002.'
-    );
+    expect((generatedContent.errors as any).placementOrderDate.incomplete).toBe('Date must include a [day/month/year]');
+    expect((generatedContent.errors as any).placementOrderDate.invalidDate).toBe('Enter a real date');
     expect((generatedContent.errors as any).placementOrderDate.invalidDateInFuture).toBe('Date must be in the past');
-    expect((generatedContent.errors as any).placementOrderDate.invalidDateTooFarInPast).toBe(
-      'You have entered a year which is too far in the past. Enter the year you got married.'
-    );
   });
 
   test('should return correct welsh content', () => {
@@ -44,17 +42,12 @@ describe('children > placement-order-date content', () => {
     expect((generatedContent.errors as any).placementOrderDate.required).toBe(
       'Enter the placement order date (in welsh)'
     );
-    expect((generatedContent.errors as any).placementOrderDate.invalidDate).toBe(
+    expect((generatedContent.errors as any).placementOrderDate.incomplete).toBe(
       'Date must include a [day/month/year] (in welsh)'
     );
-    expect((generatedContent.errors as any).placementOrderDate.invalidYear).toBe(
-      'You have entered the year in an invalid format. Enter the whole year, for example 2002. (in welsh)'
-    );
+    expect((generatedContent.errors as any).placementOrderDate.invalidDate).toBe('Enter a real date (in welsh)');
     expect((generatedContent.errors as any).placementOrderDate.invalidDateInFuture).toBe(
       'Date must be in the past (in welsh)'
-    );
-    expect((generatedContent.errors as any).placementOrderDate.invalidDateTooFarInPast).toBe(
-      'You have entered a year which is too far in the past. Enter the year you got married. (in welsh)'
     );
   });
 

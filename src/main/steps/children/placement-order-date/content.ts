@@ -11,10 +11,9 @@ const en = () => ({
   errors: {
     placementOrderDate: {
       required: 'Enter the placement order date',
-      invalidDate: 'Date must include a [day/month/year]',
-      invalidYear: 'You have entered the year in an invalid format. Enter the whole year, for example 2002.',
+      incomplete: 'Date must include a [day/month/year]',
+      invalidDate: 'Enter a real date',
       invalidDateInFuture: 'Date must be in the past',
-      invalidDateTooFarInPast: 'You have entered a year which is too far in the past. Enter the year you got married.',
     },
   },
 });
@@ -26,11 +25,9 @@ const cy = () => ({
   errors: {
     placementOrderDate: {
       required: 'Enter the placement order date (in welsh)',
-      invalidDate: 'Date must include a [day/month/year] (in welsh)',
-      invalidYear: 'You have entered the year in an invalid format. Enter the whole year, for example 2002. (in welsh)',
+      incomplete: 'Date must include a [day/month/year] (in welsh)',
+      invalidDate: 'Enter a real date (in welsh)',
       invalidDateInFuture: 'Date must be in the past (in welsh)',
-      invalidDateTooFarInPast:
-        'You have entered a year which is too far in the past. Enter the year you got married. (in welsh)',
     },
   },
 });
