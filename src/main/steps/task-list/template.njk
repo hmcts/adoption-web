@@ -71,13 +71,8 @@
                                         </a>
                                     </a>
                                 </span>
-                                {% if data['first-applicant-occupation'] %}
-                                    <strong class="govuk-tag  app-task-list__tag" id="eligibility-completed">Completed</strong>
-                                {% elseif data['first-applicant-name'] %}
-                                    <strong class="govuk-tag govuk-tag--blue app-task-list__tag">in progress</strong>
-                                {% else %}
-                                    <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
-                                {% endif %}
+                            <p class="govuk-body">{{ status.applicant1PersonalDetails | safe }}</p>
+
                             </li>
 
                             <!-- First applicant - contact details -->

@@ -37,15 +37,29 @@ export const getContactDetailsStatus = (userCase: CaseWithId, userType: 'applica
   return SectionStatus.NOT_STARTED;
 };
 
-// export const getPersonalDetailsStatus = (
-//   userCase: CaseWithId,
-//   userType: 'applicant1' | 'applicant2'
-// ): SectionStatus => {
-//   const fullName = userCase[`${userType}FullName`];
-//   const hasOtherNames = userCase[`${userType}HasOtherNames`];
-//   const additionalNames = userCase[`${userType}AdditionalNames`];
-//   const dateOfBirth = userCase[`${userType}DateOfBirth`];
-//   const nationality = userCase[`${userType}Nationality`];
-//   const nationalities = userCase[`${userType}AdditionalNationalities`];
-//   const occupation = userCase[`${userType}Occupation`];
-// };
+export const getPersonalDetailsStatus = (
+  userCase: CaseWithId,
+  userType: 'applicant1' | 'applicant2'
+): SectionStatus => {
+  const fullName = userCase[`${userType}FullName`];
+  const hasOtherNames = userCase[`${userType}HasOtherNames`];
+  const additionalNames = userCase[`${userType}AdditionalNames`] || [];
+  const dateOfBirth = userCase[`${userType}DateOfBirth`];
+  const nationality: string[] = userCase[`${userType}Nationality`] || [];
+  const nationalities: string[] = userCase[`${userType}AdditionalNationalities`] || [];
+  const occupation = userCase[`${userType}Occupation`];
+
+  const dateOfBirthComplete = !!dateOfBirth.year && !!dateOfBirth.month && !!dateOfBirth.day;
+
+  const otherNamesComplete: boolean =
+    hasOtherNames === YesOrNo.NO || (hasOtherNames === YesOrNo.YES && additionalNames.length);
+  const nationalityComplete =
+    !!nationality.length &&
+    (!nationality.includes('Other') || (!!nationalities.length && nationality.includes('Other')));
+
+  return fullName && otherNamesComplete && dateOfBirthComplete && nationalityComplete && occupation
+    ? SectionStatus.COMPLETED
+    : !fullName && !otherNamesComplete && !dateOfBirthComplete && !nationalityComplete && !occupation
+    ? SectionStatus.NOT_STARTED
+    : SectionStatus.IN_PROGRESS;
+};
