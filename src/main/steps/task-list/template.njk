@@ -103,12 +103,12 @@
                         <!-- Second applicant - personal details -->
                         <li class="app-task-list__item">
                             <span class="app-task-list__task-name">
-                                <a href="#" class="govuk-link" aria-describedby="eligibility-completed">
+                                <a id="applicant2-personal-details" href="{{urls.APPLICANT_2_FULL_NAME}}" class="govuk-link" aria-describedby="eligibility-completed">
                                     {{section2subheading3line1}}
                                 </a>
                             </a>
                         </span>
-                        <p class="govuk-body">{{ status.applicant1PersonalDetails | safe }}</p>
+                        <p class="govuk-body">{{ status.applicant2PersonalDetails | safe }}</p>
                     </li>
 
                     <!-- Second applicant - contact details -->
