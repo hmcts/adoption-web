@@ -12,32 +12,24 @@ const EN = 'en';
 const cyContent = cyFunction();
 const enContent = enFunction();
 
-const langAssertions = (language, content) => {
-  const generatedContent = generateContent({ language, userCase: {} } as CommonContent);
-  const { section, label, example, yes, no, applicant2AdditionalName, add, another, remove, errors } = content;
-
-  expect(generatedContent.section).toEqual(section);
-  expect(generatedContent.label).toEqual(label);
-  expect(generatedContent.example).toEqual(example);
-  expect(generatedContent.yes).toEqual(yes);
-  expect(generatedContent.no).toEqual(no);
-  expect(generatedContent.applicant2AdditionalName).toEqual(applicant2AdditionalName);
-  expect(generatedContent.add).toEqual(add);
-  expect(generatedContent.another).toEqual(another);
-  expect(generatedContent.remove).toEqual(remove);
-  expect(generatedContent.errors).toEqual(errors);
-};
-
 const commonContent = (names: string[]) =>
   ({ language: EN, userCase: { applicant2AdditionalNames: names } } as CommonContent);
 
+const langAssertions = (language, content, generateFn) => {
+  const generatedContent = generateFn({ language } as CommonContent);
+
+  Object.entries(content).forEach(([key, value]) => {
+    expect(generatedContent[key]).toEqual(value);
+  });
+};
+
 describe('other names content', () => {
   it('should return the correct content for language = en', () => {
-    langAssertions(EN, enContent);
+    langAssertions(EN, enContent, generateContent);
   });
 
   it('should return the correct content for language = cy', () => {
-    langAssertions(CY, cyContent);
+    langAssertions(CY, cyContent, generateContent);
   });
 
   it('should have a yes-no radio button', () => {

@@ -11,23 +11,12 @@ const EN = 'en';
 const cyContent = cyFunction();
 const enContent = enFunction();
 
-const langAssertions = (language, content) => {
-  const generatedContent = generateContent({ language, userCase: {} } as CommonContent);
-  const { section, title, label, british, britishSubtext, irish, differentCountry, countryName, add, another, errors } =
-    content;
+const langAssertions = (language, content, generateFn) => {
+  const generatedContent = generateFn({ language } as CommonContent);
 
-  expect(generatedContent.section).toEqual(section);
-  expect(generatedContent.title).toEqual(title);
-  expect(generatedContent.label).toEqual(label);
-  expect(generatedContent.british).toEqual(british);
-  expect(generatedContent.britishSubtext).toEqual(britishSubtext);
-  expect(generatedContent.irish).toEqual(irish);
-  expect(generatedContent.differentCountry).toEqual(differentCountry);
-  expect(generatedContent.countryName).toEqual(countryName);
-  expect(generatedContent.differentCountry).toEqual(differentCountry);
-  expect(generatedContent.add).toEqual(add);
-  expect(generatedContent.another).toEqual(another);
-  expect(generatedContent.errors).toEqual(errors);
+  Object.entries(content).forEach(([key, value]) => {
+    expect(generatedContent[key]).toEqual(value);
+  });
 };
 
 const commonContent = (countries: string[]) =>
@@ -35,11 +24,11 @@ const commonContent = (countries: string[]) =>
 
 describe('nationality content', () => {
   it('should return the correct content for language = en', () => {
-    langAssertions(EN, enContent);
+    langAssertions(EN, enContent, generateContent);
   });
 
   it('should return the correct content for language = cy', () => {
-    langAssertions(CY, cyContent);
+    langAssertions(CY, cyContent, generateContent);
   });
 
   it('should display a checkbox with nationality options', () => {

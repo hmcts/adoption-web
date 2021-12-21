@@ -3,7 +3,7 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { doesArrayHaveValues, isFieldFilledIn } from '../../../app/form/validation';
 import { mapSummaryListContent } from '../../common/functions/mapSummaryListContent';
-import { APPLICANT_1_OTHER_NAMES } from '../../urls';
+import { APPLICANT_2_OTHER_NAMES } from '../../urls';
 
 export const en = (): Record<string, unknown> => ({
   section: 'Second applicant',
@@ -71,7 +71,7 @@ export const form: FormContent = {
                 rows: mapSummaryListContent(
                   userCase.applicant2AdditionalNames || [],
                   ['Remove'],
-                  APPLICANT_1_OTHER_NAMES
+                  APPLICANT_2_OTHER_NAMES
                 ),
               },
               ...(userCase.applicant2AdditionalNames?.length

@@ -10,27 +10,23 @@ const EN = 'en';
 const cyContent = cyFunction();
 const enContent = enFunction();
 
-const langAssertions = (language, content) => {
-  const generatedContent = generateContent({ language, userCase: {} } as CommonContent);
-  const { section, title, occupation, warningText, details, errors } = content;
+const langAssertions = (language, content, generateFn) => {
+  const generatedContent = generateFn({ language } as CommonContent);
 
-  expect(generatedContent.section).toEqual(section);
-  expect(generatedContent.title).toEqual(title);
-  expect(generatedContent.occupation).toEqual(occupation);
-  expect(generatedContent.warningText).toEqual(warningText);
-  expect(generatedContent.details).toEqual(details);
-  expect(generatedContent.errors).toEqual(errors);
+  Object.entries(content).forEach(([key, value]) => {
+    expect(generatedContent[key]).toEqual(value);
+  });
 };
 
 const commonContent = { language: EN } as CommonContent;
 
 describe('occupation content', () => {
   it('should return the correct content for language = en', () => {
-    langAssertions(EN, enContent);
+    langAssertions(EN, enContent, generateContent);
   });
 
   it('should return the correct content for language = cy', () => {
-    langAssertions(CY, cyContent);
+    langAssertions(CY, cyContent, generateContent);
   });
 
   it('should have an occupation text input field', () => {

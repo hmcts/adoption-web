@@ -2,7 +2,7 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { atLeastOneFieldIsChecked, isFieldFilledIn } from '../../../app/form/validation';
 import { mapSummaryListContent } from '../../common/functions/mapSummaryListContent';
-import { APPLICANT_1_NATIONALITY } from '../../urls';
+import { APPLICANT_2_NATIONALITY } from '../../urls';
 
 export const en = (): Record<string, unknown> => ({
   section: 'Second applicant',
@@ -77,7 +77,7 @@ export const form: FormContent = {
                 rows: mapSummaryListContent(
                   userCase.applicant2AdditionalNationalities || [],
                   ['Remove'],
-                  APPLICANT_1_NATIONALITY
+                  APPLICANT_2_NATIONALITY
                 ),
               },
               ...(userCase.applicant2AdditionalNationalities?.length

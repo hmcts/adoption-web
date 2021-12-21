@@ -10,8 +10,8 @@ const EN = 'en';
 const cyContent = cy();
 const enContent = en();
 
-const langAssertions = (language, content) => {
-  const generatedContent = generateContent({ language, userCase: {} } as CommonContent);
+const langAssertions = (language, content, generateFn) => {
+  const generatedContent = generateFn({ language } as CommonContent);
 
   Object.entries(content).forEach(([key, value]) => {
     expect(generatedContent[key]).toEqual(value);
@@ -22,11 +22,11 @@ const commonContent = { language: EN } as CommonContent;
 
 describe('occupation content', () => {
   it('should return the correct content for language = en', () => {
-    langAssertions(EN, enContent);
+    langAssertions(EN, enContent, generateContent);
   });
 
   it('should return the correct content for language = cy', () => {
-    langAssertions(CY, cyContent);
+    langAssertions(CY, cyContent, generateContent);
   });
 
   it('should have an full name text input field', () => {
