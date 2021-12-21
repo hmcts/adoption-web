@@ -37,10 +37,7 @@ export const getContactDetailsStatus = (userCase: CaseWithId, userType: 'applica
   return SectionStatus.NOT_STARTED;
 };
 
-export const getPersonalDetailsStatus = (
-  userCase: CaseWithId,
-  userType: 'applicant1' | 'applicant2'
-): SectionStatus => {
+export const getPersonalDetailsStatus = (userCase: CaseWithId, userType: `applicant${1 | 2}`): SectionStatus => {
   const fullName = userCase[`${userType}FullName`];
   const hasOtherNames = userCase[`${userType}HasOtherNames`];
   const additionalNames = userCase[`${userType}AdditionalNames`] || [];
