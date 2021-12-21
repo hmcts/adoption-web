@@ -52,7 +52,7 @@ export const getPersonalDetailsStatus = (
   const dateOfBirthComplete = dateOfBirth && !!dateOfBirth.year && !!dateOfBirth.month && !!dateOfBirth.day;
 
   const otherNamesComplete: boolean =
-    hasOtherNames === YesOrNo.NO || (hasOtherNames === YesOrNo.YES && additionalNames.length);
+    hasOtherNames === YesOrNo.NO || (hasOtherNames === YesOrNo.YES && !!additionalNames.length);
   const nationalityComplete =
     !!nationality.length &&
     (!nationality.includes('Other') || (!!nationalities.length && nationality.includes('Other')));
