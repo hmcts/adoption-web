@@ -5,9 +5,12 @@ import { isFieldFilledIn, isFieldLetters } from '../../../app/form/validation';
 export const en = (): Record<string, unknown> => ({
   section: 'Second applicant',
   title: "What's your full name?",
-  applicant2FullName: 'Your full name',
+  firstNames: 'First names',
+  firstHint: '(Include any given or middle names)',
+  lastNames: 'Last names',
+  lastHint: '(Include surname or family names)',
   errors: {
-    applicant2FullName: {
+    applicant2FirstNames: {
       required: 'You have not entered your full name. Enter it before continuing.',
       invalid: 'You have entered an invalid character, like a number. Enter your name using letters only.',
     },
@@ -17,9 +20,12 @@ export const en = (): Record<string, unknown> => ({
 export const cy = (): Record<string, unknown> => ({
   section: 'Second applicant (in Welsh)',
   title: "What's your full name? (in Welsh)",
-  applicant2FullName: 'Your full name (in Welsh)',
+  firstNames: 'First names (in Welsh)',
+  firstHint: '(Include any given or middle names) (in Welsh)',
+  lastNames: 'Last names (in Welsh)',
+  lastHint: '(Include surname or family names) (in Welsh)',
   errors: {
-    applicant2FullName: {
+    applicant2FirstNames: {
       required: 'You have not entered your full name. Enter it before continuing. (in Welsh)',
       invalid: 'You have entered an invalid character, like a number. Enter your name using letters only. (in Welsh)',
     },
@@ -28,11 +34,18 @@ export const cy = (): Record<string, unknown> => ({
 
 export const form: FormContent = {
   fields: {
-    applicant2FullName: {
+    applicant2FirstNames: {
       type: 'input',
-      label: l => l.applicant2FullName,
+      label: l => l.firstNames,
+      hint: l => l.firstHint,
       labelSize: 'normal',
-      classes: 'govuk-input--width-20',
+      validator: input => isFieldFilledIn(input) || isFieldLetters(input),
+    },
+    applicant2LastNames: {
+      type: 'input',
+      label: l => l.lastNames,
+      hint: l => l.lastHint,
+      labelSize: 'normal',
       validator: input => isFieldFilledIn(input) || isFieldLetters(input),
     },
   },
