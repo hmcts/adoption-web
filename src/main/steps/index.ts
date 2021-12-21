@@ -7,8 +7,9 @@ import { Form, FormContent } from '../app/form/Form';
 
 import { Step, applicant1Sequence } from './applicant1Sequence';
 import { applicant2Sequence } from './applicant2/applicant2Sequence';
+import { childrenSequence } from './children/childrenSequence';
 import { Step as EligibilityStep, eligibilitySequence } from './eligibilitySequence';
-import { CHECK_ANSWERS_URL } from './urls';
+import { APPLICANT_1, APPLICANT_2, CHECK_ANSWERS_URL, CHILDREN } from './urls';
 
 const stepForms: Record<string, Form> = {};
 
@@ -67,7 +68,7 @@ export const getNextIncompleteStepUrl = (req: AppRequest): string => {
 
 export const getNextStepUrl = (req: AppRequest, data: Partial<Case>): string => {
   const { path, queryString } = getPathAndQueryString(req);
-  const nextStep = [...applicant1Sequence, ...applicant2Sequence].find(s => s.url === path);
+  const nextStep = [...applicant1Sequence, ...applicant2Sequence, ...childrenSequence].find(s => s.url === path);
   const url = nextStep ? nextStep.getNextStep(data) : CHECK_ANSWERS_URL;
 
   return `${url}${queryString}`;
@@ -119,11 +120,13 @@ const getStepsWithContent = (sequence: Step[] | EligibilityStep[], subDir = ''):
   return results;
 };
 
-export const stepsWithContentApplicant1 = getStepsWithContent(applicant1Sequence, '/applicant1');
-export const stepsWithContentApplicant2 = getStepsWithContent(applicant2Sequence, '/applicant2');
 export const stepsWithContentEligibility = getStepsWithContent(eligibilitySequence, '/eligibility');
+export const stepsWithContentApplicant1 = getStepsWithContent(applicant1Sequence, APPLICANT_1);
+export const stepsWithContentApplicant2 = getStepsWithContent(applicant2Sequence, APPLICANT_2);
+export const stepsWithContentChildren = getStepsWithContent(childrenSequence, CHILDREN);
 export const stepsWithContent = [
   ...stepsWithContentEligibility,
   ...stepsWithContentApplicant1,
   ...stepsWithContentApplicant2,
+  ...stepsWithContentChildren,
 ];

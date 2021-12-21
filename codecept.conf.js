@@ -31,6 +31,8 @@ exports.config = {
           chunks = splitFiles(files, Math.ceil(files.length / buckets));
         }
 
+        console.log(chunks);
+
         return chunks;
       },
     },
@@ -74,6 +76,7 @@ exports.config = {
     primaryApplicantDetailsPage: './src/test/e2e/pages/primaryApplicant.page.js',
     taskListPage: './src/test/e2e/pages/taskList.page.js',
     otherApplicantDetailsPage: './src/test/e2e/pages/otherApplicant.page.js',
+    childDetailsPlacementOrderPage: './src/test/e2e/pages/childDetailsPlacementOrder.page.js',
     primaryApplicantPersonalDetailsPage: './src/test/e2e/pages/primaryApplicantPersonalDetails.page.js',
   },
   plugins: {

@@ -2,11 +2,12 @@ const config = require('../config');
 const { I } = inject();
 
 module.exports = {
-  firstApplicant: {
-    personalDetailsLink: '#applicant1-personal-details',
+  primaryApplicant: {
+    contactDetailsLink: 'a[id$="applicant1-contact-details"]',
   },
   secondApplicant: {
-    contactDetailsLink: 'a[href="/applicant2/same-address"]',
+    contactDetailsLink: 'a[id$="applicant2-contact-details"]',
+    childrenPlacementOrderLink: 'a[id$="children-placement-order"]',
   },
 
   async goToTaskListPage() {
@@ -16,8 +17,16 @@ module.exports = {
     await I.click(taskName);
   },
 
+  async selectPrimaryApplicantContactDetails() {
+    await I.click(this.primaryApplicant.contactDetailsLink);
+  },
+
   async selectOtherApplicantContactDetails() {
     await I.click(this.secondApplicant.contactDetailsLink);
+  },
+
+  async selectChildPlacementOrderDetails() {
+    await I.click(this.secondApplicant.childrenPlacementOrderLink);
   },
 
   async selectFirstApplicantPersonalDetails() {
