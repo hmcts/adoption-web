@@ -75,6 +75,11 @@ const en = content => {
         statuses,
         'applicant1-contact-details-status'
       ),
+      applicant2PersonalDetails: getSectionStatusLabel(
+        getPersonalDetailsStatus(content.userCase, 'applicant2'),
+        statuses,
+        'applicant1-personal-details-status'
+      ),
       applicant2ContactDetails: getSectionStatusLabel(
         getContactDetailsStatus(content.userCase, 'applicant2'),
         statuses,
@@ -145,6 +150,11 @@ const cy = content => {
         getContactDetailsStatus(content.userCase, 'applicant1'),
         statuses,
         'applicant1-contact-details-status'
+      ),
+      applicant2PersonalDetails: getSectionStatusLabel(
+        getPersonalDetailsStatus(content.userCase, 'applicant2'),
+        statuses,
+        'applicant1-personal-details-status'
       ),
       applicant2ContactDetails: getSectionStatusLabel(
         getContactDetailsStatus(content.userCase, 'applicant2'),

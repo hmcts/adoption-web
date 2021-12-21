@@ -30,6 +30,11 @@ export const APPLICANT_1_SELECT_ADDRESS: PageLink = '/applicant1/select-address'
 export const APPLICANT_1_MANUAL_ADDRESS: PageLink = '/applicant1/manual-address';
 export const APPLICANT_1_IDENTITY_DOCUMENTS: PageLink = '/applicant1/identity-documents';
 
+export const APPLICANT_2_FULL_NAME: PageLink = '/applicant2/full-name';
+export const APPLICANT_2_OTHER_NAMES: PageLink = '/applicant2/other-names';
+export const APPLICANT_2_DOB: PageLink = '/applicant2/dob';
+export const APPLICANT_2_NATIONALITY: PageLink = '/applicant2/nationality';
+export const APPLICANT_2_OCCUPATION: PageLink = '/applicant2/occupation';
 export const APPLICANT_2_SAME_ADDRESS: PageLink = '/applicant2/same-address';
 export const APPLICANT_2_FIND_ADDRESS: PageLink = '/applicant2/address/lookup';
 export const APPLICANT_2_SELECT_ADDRESS: PageLink = '/applicant2/address/select';

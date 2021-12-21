@@ -118,9 +118,12 @@ export interface Case {
   addButton?: string;
   addAnotherNationality: string;
   applicant1AdditionalName?: string;
+  applicant2AdditionalName?: string;
   applicant1AdditionalNames?: string[];
+  applicant2AdditionalNames?: string[];
   applicant1Nationality?: string[];
   applicant1AdditionalNationalities?: string[];
+  applicant2AdditionalNationalities?: string[];
   applicant1SelectAddress?: string;
   applicant2SelectAddress?: string;
   applicant1EmailAddress?: string;
