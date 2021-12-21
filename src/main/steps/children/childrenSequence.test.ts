@@ -22,7 +22,7 @@ describe('childrenSequence', () => {
 
     expect(childrenSequence[4].url).toBe('/children/date-of-birth');
     expect(childrenSequence[4].showInSection).toBe('aboutChildren');
-    expect(childrenSequence[4].getNextStep({})).toBe('/task-list');
+    expect(childrenSequence[4].getNextStep({})).toBe('/children/sex-at-birth');
 
     expect(childrenSequence[5].url).toBe('/children/sex-at-birth');
     expect(childrenSequence[5].showInSection).toBe('aboutChildren');
