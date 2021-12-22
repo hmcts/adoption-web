@@ -17,28 +17,46 @@ const commonContent = {
   },
 } as CommonContent;
 
+const enContent = {
+  section: 'Primary applicant',
+  title: "What's your date of birth?",
+  hint: 'For example, 28 6 1997',
+  errors: {
+    applicant1DateOfBirth: {
+      required: 'Enter your date of birth',
+      invalidDate: 'Date of birth must be a real date',
+      incompleteDay: 'Your date of birth must include a day',
+      incompleteMonth: 'Your date of birth must include a month',
+      incompleteYear: 'Your date of birth must include a year',
+      invalidDateInFuture: 'Your date of birth must be in the past',
+    },
+  },
+};
+
+const cyContent = {
+  section: 'Primary applicant (in Welsh)',
+  title: "What's your date of birth? (in Welsh)",
+  hint: 'For example, 28 6 1997 (in Welsh)',
+  errors: {
+    applicant1DateOfBirth: {
+      required: 'Enter your date of birth (in Welsh)',
+      invalidDate: 'Date of birth must be a real date (in Welsh)',
+      incompleteDay: 'Your date of birth must include a day (in Welsh)',
+      incompleteMonth: 'Your date of birth must include a month (in Welsh)',
+      incompleteYear: 'Your date of birth must include a year (in Welsh)',
+      invalidDateInFuture: 'Your date of birth must be in the past (in Welsh)',
+    },
+  },
+};
+
 describe('appllicant1 > dob-content', () => {
   test('should return correct english content', () => {
     const generatedContent = generateContent({ ...commonContent });
 
-    expect(generatedContent.title).toEqual("What's your date of birth?");
-    expect(generatedContent.section).toEqual('Primary applicant');
-    expect(generatedContent.hint).toEqual('For example, 28 6 1997');
-
-    const errors = generatedContent.errors as any;
-    expect(errors.applicant1DateOfBirth.required).toEqual('You have not entered a date. Enter a date to continue.');
-    expect(errors.applicant1DateOfBirth.invalidDate).toEqual(
-      'You have entered an invalid date. Enter the date using the following format: 28 6 1997.'
-    );
-    expect(errors.applicant1DateOfBirth.invalidYear).toEqual(
-      'You have entered the year in an invalid format. Enter the whole year, for example 2002.'
-    );
-    expect(errors.applicant1DateOfBirth.invalidDateInFuture).toEqual(
-      'You have entered a date that is in the future. Enter a date that is in the past before continuing.'
-    );
-    expect(errors.applicant1DateOfBirth.invalidDateTooFarInPast).toEqual(
-      'You have entered a year which is too far in the past.'
-    );
+    expect(generatedContent.title).toEqual(enContent.title);
+    expect(generatedContent.section).toEqual(enContent.section);
+    expect(generatedContent.hint).toEqual(enContent.hint);
+    expect(generatedContent.errors).toEqual(enContent.errors);
   });
 
   test("should return correct welsh content for cannot adopt page because they're 18 or over", () => {
@@ -47,26 +65,10 @@ describe('appllicant1 > dob-content', () => {
       language: CY,
     });
 
-    expect(generatedContent.title).toEqual("What's your date of birth? (in Welsh)");
-    expect(generatedContent.section).toEqual('Primary applicant (in Welsh)');
-    expect(generatedContent.hint).toEqual('For example, 28 6 1997 (in Welsh)');
-
-    const errors = generatedContent.errors as any;
-    expect(errors.applicant1DateOfBirth.required).toEqual(
-      'You have not entered a date. Enter a date to continue. (in Welsh)'
-    );
-    expect(errors.applicant1DateOfBirth.invalidDate).toEqual(
-      'You have entered an invalid date. Enter the date using the following format: 28 6 1997. (in Welsh)'
-    );
-    expect(errors.applicant1DateOfBirth.invalidYear).toEqual(
-      'You have entered the year in an invalid format. Enter the whole year, for example 2002. (in Welsh)'
-    );
-    expect(errors.applicant1DateOfBirth.invalidDateInFuture).toEqual(
-      'You have entered a date that is in the future. Enter a date that is in the past before continuing. (in Welsh)'
-    );
-    expect(errors.applicant1DateOfBirth.invalidDateTooFarInPast).toEqual(
-      'You have entered a year which is too far in the past. (in Welsh)'
-    );
+    expect(generatedContent.title).toEqual(cyContent.title);
+    expect(generatedContent.section).toEqual(cyContent.section);
+    expect(generatedContent.hint).toEqual(cyContent.hint);
+    expect(generatedContent.errors).toEqual(cyContent.errors);
   });
 
   test('should contain submit button', () => {
