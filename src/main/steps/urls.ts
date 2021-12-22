@@ -41,6 +41,7 @@ export const CHILDREN: PageLink = '/children';
 export const CHILDREN_PLACEMENT_ORDER_NUMBER: PageLink = `${CHILDREN}/placement-order-number`;
 export const CHILDREN_PLACEMENT_ORDER_COURT: PageLink = `${CHILDREN}/placement-order-court`;
 export const CHILDREN_PLACEMENT_ORDER_DATE: PageLink = `${CHILDREN}/placement-order-date`;
+export const CHILDREN_PLACEMENT_ORDER_SUMMARY: PageLink = `${CHILDREN}/placement-order-summary`;
 
 export const CHILDREN_FULL_NAME: PageLink = `${CHILDREN}/full-name`;
 export const CHILDREN_DATE_OF_BIRTH: PageLink = `${CHILDREN}/date-of-birth`;
