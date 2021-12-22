@@ -6,6 +6,34 @@ import { generateContent } from './content';
 
 jest.mock('../../../app/form/validation');
 
+const enContent = {
+  section: "The child's details",
+  label: 'What date is on the placement order?',
+  hint: 'For example, 31 3 2020',
+  errors: {
+    placementOrderDate: {
+      required: 'Enter the placement order date',
+      incomplete: 'Date must include a [day/month/year]',
+      invalidDate: 'Enter a real date',
+      invalidDateInFuture: 'Date must be in the past',
+    },
+  },
+};
+
+const cyContent = {
+  section: "The child's details (in welsh)",
+  label: 'What date is on the placement order? (in welsh)',
+  hint: 'For example, 31 3 2020 (in welsh)',
+  errors: {
+    placementOrderDate: {
+      required: 'Enter the placement order date (in welsh)',
+      incomplete: 'Date must include a [day/month/year] (in welsh)',
+      invalidDate: 'Enter a real date (in welsh)',
+      invalidDateInFuture: 'Date must be in the past (in welsh)',
+    },
+  },
+};
+
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('children > placement-order-date content', () => {
   const commonContent = {
@@ -20,35 +48,18 @@ describe('children > placement-order-date content', () => {
 
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
-    expect(generatedContent.section).toEqual("The child's details");
-    expect(generatedContent.label).toEqual('What date is on the placement order?');
-    expect(generatedContent.hint).toEqual('For example, 31 3 2020');
-    /**
-     * incomplete: 'Date must include a [day/month/year]',
-      invalidDate: 'Enter a real date',
-      invalidDateInFuture: 'Date must be in the past',
-     */
-    expect((generatedContent.errors as any).placementOrderDate.required).toBe('Enter the placement order date');
-    expect((generatedContent.errors as any).placementOrderDate.incomplete).toBe('Date must include a [day/month/year]');
-    expect((generatedContent.errors as any).placementOrderDate.invalidDate).toBe('Enter a real date');
-    expect((generatedContent.errors as any).placementOrderDate.invalidDateInFuture).toBe('Date must be in the past');
+    expect(generatedContent.section).toEqual(enContent.section);
+    expect(generatedContent.label).toEqual(enContent.label);
+    expect(generatedContent.hint).toEqual(enContent.hint);
+    expect(generatedContent.errors).toEqual(enContent.errors);
   });
 
   test('should return correct welsh content', () => {
     const generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual("The child's details (in welsh)");
-    expect(generatedContent.label).toEqual('What date is on the placement order? (in welsh)');
-    expect(generatedContent.hint).toEqual('For example, 31 3 2020 (in welsh)');
-    expect((generatedContent.errors as any).placementOrderDate.required).toBe(
-      'Enter the placement order date (in welsh)'
-    );
-    expect((generatedContent.errors as any).placementOrderDate.incomplete).toBe(
-      'Date must include a [day/month/year] (in welsh)'
-    );
-    expect((generatedContent.errors as any).placementOrderDate.invalidDate).toBe('Enter a real date (in welsh)');
-    expect((generatedContent.errors as any).placementOrderDate.invalidDateInFuture).toBe(
-      'Date must be in the past (in welsh)'
-    );
+    expect(generatedContent.section).toEqual(cyContent.section);
+    expect(generatedContent.label).toEqual(cyContent.label);
+    expect(generatedContent.hint).toEqual(cyContent.hint);
+    expect(generatedContent.errors).toEqual(cyContent.errors);
   });
 
   test('should contain placementOrderDate field', () => {
@@ -59,8 +70,8 @@ describe('children > placement-order-date content', () => {
 
     expect(placementOrderDateField.type).toBe('date');
     expect(placementOrderDateField.classes).toBe('govuk-date-input');
-    expect((placementOrderDateField.label as Function)(generatedContent)).toBe('What date is on the placement order?');
-    expect(((placementOrderDateField as FormInput).hint as Function)(generatedContent)).toBe('For example, 31 3 2020');
+    expect((placementOrderDateField.label as Function)(generatedContent)).toBe(enContent.label);
+    expect(((placementOrderDateField as FormInput).hint as Function)(generatedContent)).toBe(enContent.hint);
     expect(placementOrderDateField.labelSize).toBe('l');
     expect(placementOrderDateField.attributes).toEqual({ spellcheck: false });
 
