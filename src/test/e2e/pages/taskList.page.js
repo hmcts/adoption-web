@@ -9,6 +9,9 @@ module.exports = {
     contactDetailsLink: 'a[id$="applicant2-contact-details"]',
     childrenPlacementOrderLink: 'a[id$="children-placement-order"]',
   },
+  childDetails: {
+    childrenBirthCertificateLink: 'a[id$="children-birth-certificate"]',
+  },
 
   async goToTaskListPage() {
     await I.goToPage(config.baseUrl + 'task-list');
@@ -31,5 +34,8 @@ module.exports = {
 
   async selectFirstApplicantPersonalDetails() {
     await I.click(this.firstApplicant.personalDetailsLink);
+  },
+  async selectChildrenBirthCertificate() {
+    await I.click(this.childDetails.childrenBirthCertificateLink);
   },
 };
