@@ -4,6 +4,9 @@ module.exports = {
   fields: {
     placementOrderNumber: 'input[id$="placementOrderNumber"]',
     placementOrderCourt: 'input[id$="placementOrderCourt"]',
+    placementOrderDateDay: 'input[id$="placementOrderDate-day"]',
+    placementOrderDateMonth: 'input[id$="placementOrderDate-month"]',
+    placementOrderDateYear: 'input[id$="placementOrderDate-year"]',
   },
 
   childDetailsPlacementOrderSection() {
@@ -14,5 +17,13 @@ module.exports = {
     I.waitForText('Which court made the placement order?');
     I.fillField(this.fields.placementOrderCourt, 'Swansea');
     I.click('Save and continue');
+    I.waitForText('What date is on the placement order?');
+    I.fillField(this.fields.placementOrderDateDay, '21');
+    I.fillField(this.fields.placementOrderDateMonth, '12');
+    I.wait('2');
+    I.fillField(this.fields.placementOrderDateYear, '2021');
+    I.click('Save and continue');
+    I.see('Orders already in place');
+    I.see('Do you want to add another order?');
   },
 };

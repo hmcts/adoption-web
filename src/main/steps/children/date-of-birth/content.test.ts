@@ -97,17 +97,17 @@ describe('children date-of-birth content', () => {
     expect((values[0].label as Function)({ dateFormat: { day: 'Day' } })).toBe('Day');
     expect(values[0].name).toBe('day');
     expect(values[0].classes).toBe('govuk-input--width-2');
-    expect(values[0].attributes?.maxLength).toBe(2);
+    expect(values[0].attributes).toEqual({ maxLength: 2, pattern: '[0-9]*', inputMode: 'numeric' });
 
     expect((values[1].label as Function)({ dateFormat: { month: 'Month' } })).toBe('Month');
     expect(values[1].name).toBe('month');
     expect(values[1].classes).toBe('govuk-input--width-2');
-    expect(values[1].attributes?.maxLength).toBe(2);
+    expect(values[1].attributes).toEqual({ maxLength: 2, pattern: '[0-9]*', inputMode: 'numeric' });
 
     expect((values[2].label as Function)({ dateFormat: { year: 'Year' } })).toBe('Year');
     expect(values[2].name).toBe('year');
     expect(values[2].classes).toBe('govuk-input--width-4');
-    expect(values[2].attributes?.maxLength).toBe(4);
+    expect(values[2].attributes).toEqual({ maxLength: 4, pattern: '[0-9]*', inputMode: 'numeric' });
   });
 
   test('should contain submit button', () => {
