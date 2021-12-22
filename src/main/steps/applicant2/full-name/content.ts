@@ -11,7 +11,11 @@ export const en = (): Record<string, unknown> => ({
   lastHint: '(Include surname or family names)',
   errors: {
     applicant2FirstNames: {
-      required: 'You have not entered your full name. Enter it before continuing.',
+      required: 'Enter your first names',
+      invalid: 'You have entered an invalid character, like a number. Enter your name using letters only.',
+    },
+    applicant2LastNames: {
+      required: 'Enter your last names',
       invalid: 'You have entered an invalid character, like a number. Enter your name using letters only.',
     },
   },
@@ -26,6 +30,10 @@ export const cy = (): Record<string, unknown> => ({
   lastHint: '(Include surname or family names) (in Welsh)',
   errors: {
     applicant2FirstNames: {
+      required: 'You have not entered your full name. Enter it before continuing. (in Welsh)',
+      invalid: 'You have entered an invalid character, like a number. Enter your name using letters only. (in Welsh)',
+    },
+    applicant2LastNames: {
       required: 'You have not entered your full name. Enter it before continuing. (in Welsh)',
       invalid: 'You have entered an invalid character, like a number. Enter your name using letters only. (in Welsh)',
     },
