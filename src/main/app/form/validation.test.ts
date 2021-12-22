@@ -12,6 +12,7 @@ import {
   isInvalidHelpWithFeesRef,
   isInvalidPostcode,
   isLessThanAYear,
+  isMoreThan18Years,
   isPhoneNoValid,
   isValidAccessCode,
   isValidCaseReference,
@@ -42,13 +43,21 @@ describe('Validation', () => {
   describe('areFieldsFilledIn()', () => {
     test('Should check if values in object exist', async () => {
       const isValid = areDateFieldsFilledIn({ day: '1', month: '1', year: '1' });
-
       expect(isValid).toStrictEqual(undefined);
     });
 
-    test('Should check if values in object does not exist', async () => {
+    test('Should check if all values in object does not exist', async () => {
       const isValid = areDateFieldsFilledIn({ day: '', month: '', year: '' });
+      expect(isValid).toStrictEqual('required');
+    });
 
+    test('Should check if some values in object does not exist', async () => {
+      const isValid = areDateFieldsFilledIn({ day: '20', month: '12', year: '' });
+      expect(isValid).toStrictEqual('incomplete');
+    });
+
+    test('Should check if object does not exist', async () => {
+      const isValid = areDateFieldsFilledIn(undefined);
       expect(isValid).toStrictEqual('required');
     });
   });
@@ -91,6 +100,27 @@ describe('Validation', () => {
 
       date.year = (+date.year - 1).toString();
       isValid = isLessThanAYear(date);
+
+      expect(isValid).toStrictEqual(undefined);
+    });
+  });
+
+  describe('isMoreThan18Years()', () => {
+    test('Should check if date entered is more than 18 years', async () => {
+      const dateObj = new Date();
+      const date = {
+        day: dateObj.getUTCDate().toString(),
+        month: dateObj.getUTCMonth().toString(),
+        year: (dateObj.getUTCFullYear() - 19).toString(),
+      };
+      let isValid = isMoreThan18Years(undefined);
+      expect(isValid).toStrictEqual(undefined);
+
+      isValid = isMoreThan18Years(date);
+      expect(isValid).toStrictEqual('invalidDateOver18');
+
+      date.year = (+date.year + 2).toString();
+      isValid = isMoreThan18Years(date);
 
       expect(isValid).toStrictEqual(undefined);
     });
