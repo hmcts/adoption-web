@@ -78,6 +78,7 @@ exports.config = {
     otherApplicantDetailsPage: './src/test/e2e/pages/otherApplicant.page.js',
     childDetailsPlacementOrderPage: './src/test/e2e/pages/childDetailsPlacementOrder.page.js',
     primaryApplicantPersonalDetailsPage: './src/test/e2e/pages/primaryApplicantPersonalDetails.page.js',
+    childrenBirthCertificatePage: './src/test/e2e/pages/childrenBirthCertificate.page.js',
   },
   plugins: {
     retryFailedStep: {

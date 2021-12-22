@@ -100,9 +100,8 @@ describe('Validation', () => {
     test.each([
       { date: { day: 1, month: 1, year: 1970 }, expected: undefined },
       { date: { day: 31, month: 12, year: 2000 }, expected: undefined },
-      { date: { day: 31, month: 12, year: 123 }, expected: 'invalidYear' },
-      { date: { day: 31, month: 12, year: 1800 }, expected: 'invalidDateTooFarInPast' },
-      { date: { day: 1, month: 1, year: 1 }, expected: 'invalidYear' },
+      { date: { day: 31, month: 12, year: 123 }, expected: 'invalidDate' },
+      { date: { day: 1, month: 1, year: 1 }, expected: 'invalidDate' },
       { date: { day: -31, month: 12, year: 2000 }, expected: 'invalidDate' },
       { date: { day: 31, month: -12, year: 2000 }, expected: 'invalidDate' },
       { date: { day: 32, month: 12, year: 2000 }, expected: 'invalidDate' },
