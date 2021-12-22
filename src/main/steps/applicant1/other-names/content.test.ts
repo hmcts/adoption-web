@@ -2,15 +2,59 @@
 /* eslint-disable jest/expect-expect */
 import { YesOrNo } from '../../../app/case/definition';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
-import { isFieldFilledIn } from '../../../app/form/validation';
+import { doesArrayHaveValues, isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
-import { cy as cyFunction, en as enFunction, generateContent } from './content';
+import { generateContent } from './content';
+
+jest.mock('../../../app/form/validation');
 
 const CY = 'cy';
 const EN = 'en';
-const cyContent = cyFunction();
-const enContent = enFunction();
+const enContent = {
+  section: 'Primary applicant',
+  label: 'Have you ever legally been known by any other names?',
+  example: 'For example, your name before marriage.',
+  yes: 'Yes',
+  no: 'No',
+  applicant1AdditionalName: 'Add your previous full name',
+  add: 'Add',
+  another: 'Add another name',
+  remove: 'Remove',
+  errors: {
+    applicant1HasOtherNames: {
+      required: 'Enter a name or choose no',
+    },
+    applicant1AdditionalName: {
+      required: 'Enter a name or choose no',
+    },
+    addAnotherName: {
+      required: 'Name cannot be empty',
+    },
+  },
+};
+const cyContent = {
+  section: 'Primary applicant (in Welsh)',
+  title: 'Have you ever legally been known by any other names? (in Welsh)',
+  example: 'For example, your name before marriage. (in Welsh)',
+  yes: 'Yes (in Welsh)',
+  no: 'No (in Welsh)',
+  applicant1AdditionalName: 'Add your previous full name (in Welsh)',
+  add: 'Add (in Welsh)',
+  another: 'Add another name (in Welsh)',
+  remove: 'Remove (in Welsh)',
+  errors: {
+    applicant1HasOtherNames: {
+      required: 'Enter a name or choose no (in Welsh)',
+    },
+    applicant1AdditionalName: {
+      required: 'Enter a name or choose no (in Welsh)',
+    },
+    addAnotherName: {
+      required: 'Name cannot be empty (in Welsh)',
+    },
+  },
+};
 
 const langAssertions = (language, content) => {
   const generatedContent = generateContent({ language, userCase: {} } as CommonContent);
@@ -112,6 +156,8 @@ describe('other names content', () => {
 
     expect(addAnotherName.type).toBe('details');
     expect((addAnotherName.label as Function)(generateContent(commonContent([])))).toBe(enContent.another);
+    (addAnotherName.validator as Function)();
+    expect(doesArrayHaveValues).toHaveBeenCalled();
 
     expect(applicant1AdditionalName?.type).toBe('input');
     expect((applicant1AdditionalName?.label as Function)(generateContent(commonContent([])))).toBe(
@@ -126,7 +172,7 @@ describe('other names content', () => {
   });
 
   it('should contain submit button', () => {
-    const generatedContent = generateContent(commonContent([]));
+    const generatedContent = generateContent({ ...commonContent([]), userCase: undefined });
     const form = generatedContent.form as FormContent;
     expect((form.submit.text as Function)(generatePageContent({ language: EN }))).toBe('Save and continue');
   });

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -17,13 +17,46 @@ const commonContent = {
   },
 } as CommonContent;
 
-describe('dob-content', () => {
+const enContent = {
+  section: 'Primary applicant',
+  title: "What's your date of birth?",
+  hint: 'For example, 28 6 1997',
+  errors: {
+    applicant1DateOfBirth: {
+      required: 'Enter your date of birth',
+      invalidDate: 'Date of birth must be a real date',
+      incompleteDay: 'Your date of birth must include a day',
+      incompleteMonth: 'Your date of birth must include a month',
+      incompleteYear: 'Your date of birth must include a year',
+      invalidDateInFuture: 'Your date of birth must be in the past',
+    },
+  },
+};
+
+const cyContent = {
+  section: 'Primary applicant (in Welsh)',
+  title: "What's your date of birth? (in Welsh)",
+  hint: 'For example, 28 6 1997 (in Welsh)',
+  errors: {
+    applicant1DateOfBirth: {
+      required: 'Enter your date of birth (in Welsh)',
+      invalidDate: 'Date of birth must be a real date (in Welsh)',
+      incompleteDay: 'Your date of birth must include a day (in Welsh)',
+      incompleteMonth: 'Your date of birth must include a month (in Welsh)',
+      incompleteYear: 'Your date of birth must include a year (in Welsh)',
+      invalidDateInFuture: 'Your date of birth must be in the past (in Welsh)',
+    },
+  },
+};
+
+describe('appllicant1 > dob-content', () => {
   test('should return correct english content', () => {
     const generatedContent = generateContent({ ...commonContent });
 
-    expect(generatedContent.title).toEqual("What's your date of birth?");
-    expect(generatedContent.section).toEqual('Primary applicant');
-    expect(generatedContent.hint).toEqual('For example, 28 6 1997');
+    expect(generatedContent.title).toEqual(enContent.title);
+    expect(generatedContent.section).toEqual(enContent.section);
+    expect(generatedContent.hint).toEqual(enContent.hint);
+    expect(generatedContent.errors).toEqual(enContent.errors);
   });
 
   test("should return correct welsh content for cannot adopt page because they're 18 or over", () => {
@@ -32,9 +65,10 @@ describe('dob-content', () => {
       language: CY,
     });
 
-    expect(generatedContent.title).toEqual("What's your date of birth? (in Welsh)");
-    expect(generatedContent.section).toEqual('Primary applicant (in Welsh)');
-    expect(generatedContent.hint).toEqual('For example, 28 6 1997 (in Welsh)');
+    expect(generatedContent.title).toEqual(cyContent.title);
+    expect(generatedContent.section).toEqual(cyContent.section);
+    expect(generatedContent.hint).toEqual(cyContent.hint);
+    expect(generatedContent.errors).toEqual(cyContent.errors);
   });
 
   test('should contain submit button', () => {
@@ -63,17 +97,29 @@ describe('dob-content', () => {
     expect(dobField.labelHidden).toBe(true);
     expect((dobField.hint as Function)(generatedContent)).toBe('For example, 28 6 1997');
 
-    // expect((dobField.values[0].label as Function)(generatedContent)).toBe('Day');
+    expect((dobField.values[0].label as Function)(commonContent)).toBe('Day');
     expect(dobField.values[0].name).toBe('day');
     expect(dobField.values[0].classes).toBe('govuk-input--width-2');
     expect(dobField.values[0].attributes?.maxLength).toBe(2);
-    // expect((dobField.values[1].label as Function)(generatedContent)).toBe('Month');
+
+    expect((dobField.values[1].label as Function)(commonContent)).toBe('Month');
     expect(dobField.values[1].name).toBe('month');
     expect(dobField.values[1].classes).toBe('govuk-input--width-2');
     expect(dobField.values[1].attributes?.maxLength).toBe(2);
-    // expect((dobField.values[2].label as Function)(generatedContent)).toBe('Year');
+
+    expect((dobField.values[2].label as Function)(commonContent)).toBe('Year');
     expect(dobField.values[2].name).toBe('year');
     expect(dobField.values[2].classes).toBe('govuk-input--width-4');
     expect(dobField.values[2].attributes?.maxLength).toBe(4);
+
+    expect(
+      (dobField.parser as Function)({
+        'applicant1DateOfBirth-day': '21',
+        'applicant1DateOfBirth-month': '12',
+        'applicant1DateOfBirth-year': '2018',
+      })
+    ).toEqual({ day: '21', month: '12', year: '2018' });
+    expect((dobField.validator as Function)({ day: '21', month: '12', year: '2018' })).toBe(undefined);
   });
 });
+/* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

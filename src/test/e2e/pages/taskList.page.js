@@ -4,6 +4,7 @@ const { I } = inject();
 module.exports = {
   primaryApplicant: {
     contactDetailsLink: 'a[id$="applicant1-contact-details"]',
+    personalDetailsLink: 'a[id$="applicant1-personal-details"]',
   },
   secondApplicant: {
     contactDetailsLink: 'a[id$="applicant2-contact-details"]',
@@ -37,8 +38,13 @@ module.exports = {
   async selectFirstApplicantPersonalDetails() {
     await I.click(this.primaryApplicant.contactDetailsLink);
   },
+
   async selectChildrenBirthCertificate() {
     await I.click(this.childDetails.childrenBirthCertificateLink);
+  },
+
+  async selectFirstApplicantPersonalDetails() {
+    await I.click(this.primaryApplicant.personalDetailsLink);
   },
   async selectOtherApplicantPersonalDetails() {
     await I.click(this.secondApplicant.personalDetailsLink);

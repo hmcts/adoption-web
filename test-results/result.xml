@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="23.9360" tests="2" failures="0" skipped="1">
+  <testsuite name="Root Suite" timestamp="2021-12-21T17:17:48" tests="0" time="0.0000" failures="0">
+  </testsuite>
+  <testsuite name="Child Details" timestamp="2021-12-21T17:17:48" tests="2" file="/Users/hajoras/Documents/adoption-web/src/test/e2e/tests/childDetails_test.js" time="23.9340" failures="0">
+    <testcase name="Child Details: Child Details Birth certificate details details event" time="21.7630" classname="Child Details Birth certificate details details event">
+    </testcase>
+  </testsuite>
+</testsuites>

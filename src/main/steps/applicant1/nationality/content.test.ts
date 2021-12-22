@@ -4,12 +4,50 @@ import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/fo
 import { atLeastOneFieldIsChecked, isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
-import { cy as cyFunction, en as enFunction, generateContent } from './content';
+import { generateContent } from './content';
 
 const CY = 'cy';
 const EN = 'en';
-const cyContent = cyFunction();
-const enContent = enFunction();
+const enContent = {
+  section: 'Primary applicant',
+  title: 'What is your nationality?',
+  label: 'Select all options that are relevant to you.',
+  british: 'British',
+  britishSubtext: 'including English, Scottish, Welsh and Northern Irish',
+  irish: 'Irish',
+  differentCountry: 'Citizen of a different country',
+  applicant1Nationality: 'Country name',
+  add: 'Add',
+  another: 'Add another country',
+  errors: {
+    applicant1Nationality: {
+      required: 'Select if you are British, Irish or a citizen of a different country',
+    },
+    addAnotherNationality: {
+      required: 'This is not a valid entry',
+    },
+  },
+};
+const cyContent = {
+  section: 'Primary applicant (in Welsh)',
+  title: 'What is your nationality? (in Welsh)',
+  label: 'Select all options that are relevant to you. (in Welsh)',
+  british: 'British (in Welsh)',
+  britishSubtext: 'including English, Scottish, Welsh and Northern Irish (in Welsh)',
+  irish: 'Irish (in Welsh)',
+  differentCountry: 'Citizen of a different country (in Welsh)',
+  applicant1Nationality: 'Country name (in Welsh)',
+  add: 'Add (in Welsh)',
+  another: 'Add another country (in Welsh)',
+  errors: {
+    applicant1Nationality: {
+      required: 'Select if you are British, Irish or a citizen of a different country (in Welsh)',
+    },
+    addAnotherNationality: {
+      required: 'This is not a valid entry (in Welsh)',
+    },
+  },
+};
 
 const langAssertions = (language, content) => {
   const generatedContent = generateContent({ language, userCase: {} } as CommonContent);
@@ -135,7 +173,7 @@ describe('nationality content', () => {
   });
 
   it('should contain saveAsDraft button', () => {
-    const generatedContent = generateContent(commonContent([]));
+    const generatedContent = generateContent({ ...commonContent([]), userCase: undefined });
     const form = generatedContent.form as FormContent;
     expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: EN }))).toBe('Save as draft');
   });
