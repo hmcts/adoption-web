@@ -2,7 +2,7 @@ import { SectionStatus } from '../../app/case/definition';
 import { TranslationFn } from '../../app/controller/GetController';
 import * as urls from '../urls';
 
-import { getContactDetailsStatus, isApplyingWithComplete } from './utils';
+import { getContactDetailsStatus, getPersonalDetailsStatus, isApplyingWithComplete } from './utils';
 
 const getSectionStatusLabel = (status, statuses, id) => {
   if (status === SectionStatus.COMPLETED) {
@@ -65,6 +65,11 @@ const en = content => {
     section6link1: 'Review application, pay and send',
     status: {
       applyingWith: isApplyingWithComplete(content.userCase),
+      applicant1PersonalDetails: getSectionStatusLabel(
+        getPersonalDetailsStatus(content.userCase, 'applicant1'),
+        statuses,
+        'applicant1-personal-details-status'
+      ),
       applicant1ContactDetails: getSectionStatusLabel(
         getContactDetailsStatus(content.userCase, 'applicant1'),
         statuses,
@@ -131,6 +136,11 @@ const cy = content => {
     section6link1: 'Review application, pay and send (in welsh) ',
     status: {
       applyingWith: isApplyingWithComplete(content.userCase),
+      applicant1PersonalDetails: getSectionStatusLabel(
+        getPersonalDetailsStatus(content.userCase, 'applicant1'),
+        statuses,
+        'applicant1-personal-details-status'
+      ),
       applicant1ContactDetails: getSectionStatusLabel(
         getContactDetailsStatus(content.userCase, 'applicant1'),
         statuses,

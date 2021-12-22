@@ -21,8 +21,7 @@
   } if field.hint,
   items: formItems(field.values, userCase),
   errorMessage: getError(fieldName),
-  formGroup: {
-    classes: "hidden " + field.id if field.hidden else field.id
+  formGroup: {    classes: "hidden " + field.id if field.hidden else field.id
   }
 }) }}
 

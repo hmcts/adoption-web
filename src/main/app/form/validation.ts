@@ -33,7 +33,18 @@ export const areDateFieldsFilledIn: DateValidator = fields => {
 
   const someFieldsMissing = values.some(value => !value);
   if (someFieldsMissing) {
-    return 'incomplete';
+    if (!fields.day) {
+      return 'incompleteDay';
+    } else if (!fields.month) {
+      return 'incompleteMonth';
+    }
+    return 'incompleteYear';
+  }
+};
+
+export const doesArrayHaveValues: Validator = value => {
+  if (!value || !(value as string[])?.length) {
+    return 'required';
   }
 };
 

@@ -1,3 +1,4 @@
+import { SummaryListContent } from '../../steps/common/models/summaryListContent';
 import { Case, CaseDate, CaseWithId } from '../case/case';
 import { AnyObject } from '../controller/PostController';
 
@@ -135,6 +136,7 @@ export interface FormOptions {
   type: string;
   label?: Label;
   section?: Label;
+  hint?: Label;
   classes?: string;
   labelHidden?: boolean;
   labelSize?: string | null;
@@ -143,6 +145,7 @@ export interface FormOptions {
   attributes?: Partial<HTMLInputElement | HTMLTextAreaElement>;
   validator?: ValidationCheck;
   parser?: Parser;
+  rows?: SummaryListContent;
 }
 
 export interface FormInput {
@@ -150,6 +153,7 @@ export interface FormInput {
   name?: string;
   type?: string;
   label: Label;
+  labelSize?: string | null;
   section?: Label;
   hint?: Label;
   subtext?: Label;

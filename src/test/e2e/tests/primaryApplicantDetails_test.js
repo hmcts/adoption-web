@@ -11,3 +11,13 @@ Scenario(
     await primaryApplicantDetailsPage.primaryApplicantContactDetailsSection();
   }
 );
+
+Scenario(
+  'Enter primary applicant personal details',
+  async ({ loginPage, primaryApplicantPersonalDetailsPage, taskListPage }) => {
+    await loginPage.signInWithCitizenUser(config.citizenUserOne);
+    await taskListPage.goToTaskListPage();
+    await taskListPage.selectFirstApplicantPersonalDetails();
+    await primaryApplicantPersonalDetailsPage.primaryApplicantPersonalDetailsSection();
+  }
+);

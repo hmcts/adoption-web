@@ -16,6 +16,7 @@ const userCase: CaseWithId = {
   applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },
   applicant2Confirmation: YesOrNo.NO,
   applicant2Explanation: YesOrNo.NO,
+  addAnotherNationality: YesOrNo.NO,
 };
 describe('utils', () => {
   describe('isApplyingWithComplete()', () => {

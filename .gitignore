@@ -24,3 +24,5 @@ coverage/
 .env
 functional-output/
 tsconfig.lint.json
+
+output/
