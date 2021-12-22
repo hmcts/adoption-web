@@ -50,7 +50,7 @@ export const applicant1Sequence: Step[] = [
   },
   {
     url: DATE_CHILD_MOVED_IN_URL,
-    showInSection: Sections.AboutPartnership,
+    showInSection: Sections.AboutApplicant1,
     getNextStep: () => APPLICANT_1_FULL_NAME,
   },
   {

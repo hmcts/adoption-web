@@ -3,6 +3,7 @@ import { CaseDate } from '../case/case';
 import {
   areDateFieldsFilledIn,
   atLeastOneFieldIsChecked,
+  doesArrayHaveValues,
   isAddressSelected,
   isDateInputInvalid,
   isEmailValid,
@@ -51,9 +52,19 @@ describe('Validation', () => {
       expect(isValid).toStrictEqual('required');
     });
 
-    test('Should check if some values in object does not exist', async () => {
-      const isValid = areDateFieldsFilledIn({ day: '20', month: '12', year: '' });
-      expect(isValid).toStrictEqual('incomplete');
+    test('Should check if day does not exist', async () => {
+      const isValid = areDateFieldsFilledIn({ day: '', month: '12', year: '' });
+      expect(isValid).toStrictEqual('incompleteDay');
+    });
+
+    test('Should check if month does not exist', async () => {
+      const isValid = areDateFieldsFilledIn({ day: '12', month: '', year: '' });
+      expect(isValid).toStrictEqual('incompleteMonth');
+    });
+
+    test('Should check if year does not exist', async () => {
+      const isValid = areDateFieldsFilledIn({ day: '21', month: '12', year: '' });
+      expect(isValid).toStrictEqual('incompleteYear');
     });
 
     test('Should check if object does not exist', async () => {
@@ -102,6 +113,17 @@ describe('Validation', () => {
       isValid = isLessThanAYear(date);
 
       expect(isValid).toStrictEqual(undefined);
+    });
+  });
+
+  describe('doesArrayHaveValues', () => {
+    test.each([
+      { value: undefined, expected: 'required' },
+      { value: [], expected: 'required' },
+      { value: ['MOCK_VALUE'], expected: undefined },
+    ])('checks array of string validity when %o', ({ value, expected }) => {
+      const isValid = doesArrayHaveValues(value);
+      expect(isValid).toStrictEqual(expected);
     });
   });
 

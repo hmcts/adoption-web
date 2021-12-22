@@ -1,6 +1,6 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { isFieldFilledIn, isFieldLetters } from '../../../app/form/validation';
+import { isFieldFilledIn } from '../../../app/form/validation';
 
 export const en = (): Record<string, unknown> => ({
   section: 'Primary applicant',
@@ -23,8 +23,7 @@ export const en = (): Record<string, unknown> => ({
   },
   errors: {
     applicant1Occupation: {
-      required: 'You have not entered your occupation. Enter it before continuing.',
-      invalid: 'You have entered an invalid character, like a number. Enter your name using letters only.',
+      required: 'Enter your occupation',
     },
   },
 });
@@ -50,8 +49,7 @@ export const cy = (): Record<string, unknown> => ({
   },
   errors: {
     applicant1Occupation: {
-      required: 'You have not entered your occupation. Enter it before continuing. (in Welsh)',
-      invalid: 'You have entered an invalid character, like a number. Enter your name using letters only. (in Welsh)',
+      required: 'Enter your occupation (in Welsh)',
     },
   },
 });
@@ -63,7 +61,7 @@ export const form: FormContent = {
       label: l => l.occupation,
       labelSize: 'normal',
       classes: 'govuk-input--width-20',
-      validator: input => isFieldFilledIn(input) || isFieldLetters(input),
+      validator: isFieldFilledIn,
     },
   },
   submit: {

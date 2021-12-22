@@ -1,14 +1,37 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable jest/expect-expect */
-import { FormContent, FormFields } from '../../../app/form/Form';
+import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
+import { isFieldFilledIn, isFieldLetters } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
-import { cy, en, generateContent } from './content';
+import { generateContent } from './content';
+
+jest.mock('../../../app/form/validation');
 
 const CY = 'cy';
 const EN = 'en';
-const cyContent = cy();
-const enContent = en();
+const enContent = {
+  section: 'Primary applicant',
+  title: "What's your full name?",
+  applicant1FullName: 'Your full name',
+  errors: {
+    applicant1FullName: {
+      required: 'You have not entered your full name. Enter it before continuing.',
+      invalid: 'You have entered an invalid character, like a number. Enter your name using letters only.',
+    },
+  },
+};
+const cyContent = {
+  section: 'Primary applicant (in Welsh)',
+  title: "What's your full name? (in Welsh)",
+  applicant1FullName: 'Your full name (in Welsh)',
+  errors: {
+    applicant1FullName: {
+      required: 'You have not entered your full name. Enter it before continuing. (in Welsh)',
+      invalid: 'You have entered an invalid character, like a number. Enter your name using letters only. (in Welsh)',
+    },
+  },
+};
 
 const langAssertions = (language, content) => {
   const generatedContent = generateContent({ language, userCase: {} } as CommonContent);
@@ -22,7 +45,7 @@ const langAssertions = (language, content) => {
 
 const commonContent = { language: EN } as CommonContent;
 
-describe('occupation content', () => {
+describe('applicant1 > full-name content', () => {
   it('should return the correct content for language = en', () => {
     langAssertions(EN, enContent);
   });
@@ -39,8 +62,12 @@ describe('occupation content', () => {
 
     expect(fullName.type).toBe('input');
     expect((fullName.label as Function)(generateContent(commonContent))).toBe(enContent.applicant1FullName);
-    expect(fullName.labelSize).toBe('normal');
+    expect((fullName as FormOptions).labelSize).toBe('normal');
     expect(fullName.classes).toBe('govuk-input--width-20');
+
+    (fullName.validator as Function)('MockName');
+    expect(isFieldFilledIn).toHaveBeenCalledWith('MockName');
+    expect(isFieldLetters).toHaveBeenCalledWith('MockName');
   });
 
   it('should contain submit button', () => {
