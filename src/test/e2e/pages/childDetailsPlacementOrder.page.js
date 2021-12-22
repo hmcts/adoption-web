@@ -23,5 +23,7 @@ module.exports = {
     I.wait('2');
     I.fillField(this.fields.placementOrderDateYear, '2021');
     I.click('Save and continue');
+    I.see('Orders already in place');
+    I.see('Do you want to add another order?');
   },
 };
