@@ -26,7 +26,7 @@ const enContent = {
       required: 'Enter a name or choose no',
     },
     applicant1AdditionalName: {
-      required: 'Name cannot be empty',
+      required: 'Enter a name or choose no',
     },
     addAnotherName: {
       required: 'Name cannot be empty',
@@ -48,7 +48,7 @@ const cyContent = {
       required: 'Enter a name or choose no (in Welsh)',
     },
     applicant1AdditionalName: {
-      required: 'Name cannot be empty (in Welsh)',
+      required: 'Enter a name or choose no (in Welsh)',
     },
     addAnotherName: {
       required: 'Name cannot be empty (in Welsh)',

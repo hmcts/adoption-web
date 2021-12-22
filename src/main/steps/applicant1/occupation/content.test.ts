@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable jest/expect-expect */
 import { FormContent, FormFields } from '../../../app/form/Form';
-import { isFieldFilledIn, isFieldLetters } from '../../../app/form/validation';
+import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
@@ -31,8 +31,7 @@ const enContent = {
   },
   errors: {
     applicant1Occupation: {
-      required: 'You have not entered your occupation. Enter it before continuing.',
-      invalid: 'You have entered an invalid character, like a number. Enter your name using letters only.',
+      required: 'Enter your occupation',
     },
   },
 };
@@ -57,8 +56,7 @@ const cyContent = {
   },
   errors: {
     applicant1Occupation: {
-      required: 'You have not entered your occupation. Enter it before continuing. (in Welsh)',
-      invalid: 'You have entered an invalid character, like a number. Enter your name using letters only. (in Welsh)',
+      required: 'Enter your occupation (in Welsh)',
     },
   },
 };
@@ -99,7 +97,6 @@ describe('occupation content', () => {
 
     (applicant1Occupation.validator as Function)('MockOccupation');
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockOccupation');
-    expect(isFieldLetters).toHaveBeenCalledWith('MockOccupation');
   });
 
   it('should contain submit button', () => {
