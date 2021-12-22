@@ -3,6 +3,7 @@ import { CaseDate } from '../case/case';
 import {
   areDateFieldsFilledIn,
   atLeastOneFieldIsChecked,
+  doesArrayHaveValues,
   isAddressSelected,
   isDateInputInvalid,
   isEmailValid,
@@ -93,6 +94,18 @@ describe('Validation', () => {
       isValid = isLessThanAYear(date);
 
       expect(isValid).toStrictEqual(undefined);
+    });
+  });
+
+  describe('doesArrayHaveValues', () => {
+    test.each([
+      { value: undefined, expected: 'required' },
+      { value: [], expected: 'required' },
+      { value: ['MOCK_VALUE'], expected: undefined },
+    ])('checks array of string validity when %o', ({ value, expected }) => {
+      const isValid = doesArrayHaveValues(value);
+
+      expect(isValid).toStrictEqual(expected);
     });
   });
 

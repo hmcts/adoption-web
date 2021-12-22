@@ -34,14 +34,14 @@ export const cy = (): Record<string, unknown> => ({
   irish: 'Irish (in Welsh)',
   differentCountry: 'Citizen of a different country (in Welsh)',
   applicant1Nationality: 'Country name (in Welsh)',
-  add: 'Add',
+  add: 'Add (in Welsh)',
   another: 'Add another country (in Welsh)',
   errors: {
     applicant1Nationality: {
-      required: 'Select if you are British, Irish or a citizen of a different country',
+      required: 'Select if you are British, Irish or a citizen of a different country (in Welsh)',
     },
     addAnotherNationality: {
-      required: 'This is not a valid entry',
+      required: 'This is not a valid entry (in Welsh)',
     },
   },
 });
