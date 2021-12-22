@@ -38,7 +38,20 @@ const cyContent = {
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('children > placement-order-summary content', () => {
-  const commonContent = { language: 'en', userCase: { addAnotherPlacementOrder: 'Yes' } } as CommonContent;
+  const commonContent = {
+    language: 'en',
+    userCase: {
+      addAnotherPlacementOrder: 'Yes',
+      placementOrders: [
+        {
+          placementOrderId: 'MOCK_ID',
+          placementOrderNumber: 'MOCK_NUMBER',
+          placementOrderCourt: 'MOCK_COURT',
+          placementOrderDate: {},
+        },
+      ],
+    },
+  } as CommonContent;
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
     expect(generatedContent.section).toEqual(enContent.section);
@@ -49,6 +62,14 @@ describe('children > placement-order-summary content', () => {
     expect(generatedContent.label).toEqual(enContent.label);
     expect(generatedContent.hint).toEqual(enContent.hint);
     expect(generatedContent.errors).toEqual(enContent.errors);
+    expect(generatedContent.placementOrderListItems).toEqual([
+      {
+        key: { text: 'Placement Order', classes: 'font-normal' },
+        actions: {
+          items: [{ href: '#', text: 'Change', visuallyHiddenText: 'name' }],
+        },
+      },
+    ]);
   });
 
   test('should return correct welsh content', () => {
