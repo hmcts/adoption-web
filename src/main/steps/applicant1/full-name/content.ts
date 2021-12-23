@@ -9,7 +9,6 @@ export const en = (): Record<string, unknown> => ({
   errors: {
     applicant1FullName: {
       required: 'You have not entered your full name. Enter it before continuing.',
-      invalid: 'You have entered an invalid character, like a number. Enter your name using letters only.',
     },
   },
 });
@@ -21,7 +20,6 @@ export const cy = (): Record<string, unknown> => ({
   errors: {
     applicant1FullName: {
       required: 'You have not entered your full name. Enter it before continuing. (in Welsh)',
-      invalid: 'You have entered an invalid character, like a number. Enter your name using letters only. (in Welsh)',
     },
   },
 });
