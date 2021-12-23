@@ -56,7 +56,7 @@ const langAssertions = (language, content, generateFn) => {
   });
 };
 
-describe('dob content', () => {
+describe('applicant2 > dob content', () => {
   it('should return the correct content for language = en', () => {
     langAssertions(EN, enContent, generateContent);
   });

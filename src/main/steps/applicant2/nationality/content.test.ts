@@ -4,12 +4,50 @@ import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/fo
 import { atLeastOneFieldIsChecked, isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
-import { cy as cyFunction, en as enFunction, generateContent } from './content';
+import { generateContent } from './content';
 
 const CY = 'cy';
 const EN = 'en';
-const cyContent = cyFunction();
-const enContent = enFunction();
+const enContent = {
+  section: 'Second applicant',
+  title: 'What is your nationality?',
+  label: 'Select all options that are relevant to you.',
+  british: 'British',
+  britishSubtext: 'including English, Scottish, Welsh and Northern Irish',
+  irish: 'Irish',
+  differentCountry: 'Citizen of a different country',
+  applicant2Nationality: 'Country name',
+  add: 'Add',
+  another: 'Add another country',
+  errors: {
+    applicant2Nationality: {
+      required: 'Select if you are British, Irish or a citizen of a different country',
+    },
+    addAnotherNationality: {
+      required: 'This is not a valid entry',
+    },
+  },
+};
+const cyContent = {
+  section: 'Second applicant (in Welsh)',
+  title: 'What is your nationality? (in Welsh)',
+  label: 'Select all options that are relevant to you. (in Welsh)',
+  british: 'British (in Welsh)',
+  britishSubtext: 'including English, Scottish, Welsh and Northern Irish (in Welsh)',
+  irish: 'Irish (in Welsh)',
+  differentCountry: 'Citizen of a different country (in Welsh)',
+  applicant2Nationality: 'Country name (in Welsh)',
+  add: 'Add',
+  another: 'Add another country (in Welsh)',
+  errors: {
+    applicant2Nationality: {
+      required: 'Select if you are British, Irish or a citizen of a different country (in Welsh)',
+    },
+    addAnotherNationality: {
+      required: 'This is not a valid entry (in Welsh)',
+    },
+  },
+};
 
 const langAssertions = (language, content, generateFn) => {
   const generatedContent = generateFn({ language } as CommonContent);
@@ -22,7 +60,7 @@ const langAssertions = (language, content, generateFn) => {
 const commonContent = (countries: string[]) =>
   ({ language: EN, userCase: { applicant2AdditionalNationalities: countries } } as CommonContent);
 
-describe('nationality content', () => {
+describe('applicant2 > nationality content', () => {
   it('should return the correct content for language = en', () => {
     langAssertions(EN, enContent, generateContent);
   });

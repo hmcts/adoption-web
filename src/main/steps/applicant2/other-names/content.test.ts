@@ -2,11 +2,12 @@
 /* eslint-disable jest/expect-expect */
 import { YesOrNo } from '../../../app/case/definition';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
-import { isFieldFilledIn } from '../../../app/form/validation';
+import { doesArrayHaveValues, isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { cy as cyFunction, en as enFunction, generateContent } from './content';
 
+jest.mock('../../../app/form/validation');
 const CY = 'cy';
 const EN = 'en';
 const cyContent = cyFunction();
@@ -23,7 +24,7 @@ const langAssertions = (language, content, generateFn) => {
   });
 };
 
-describe('other names content', () => {
+describe('applicant2 > other-names content', () => {
   it('should return the correct content for language = en', () => {
     langAssertions(EN, enContent, generateContent);
   });
@@ -104,6 +105,8 @@ describe('other names content', () => {
 
     expect(addAnotherName.type).toBe('details');
     expect((addAnotherName.label as Function)(generateContent(commonContent([])))).toBe(enContent.another);
+    (addAnotherName.validator as Function)();
+    expect(doesArrayHaveValues).toHaveBeenCalled();
 
     expect(applicant2AdditionalName?.type).toBe('input');
     expect((applicant2AdditionalName?.label as Function)(generateContent(commonContent([])))).toBe(

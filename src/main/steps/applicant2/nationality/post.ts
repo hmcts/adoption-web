@@ -7,7 +7,7 @@ import { Form } from '../../../app/form/Form';
 import { getNextStepUrl } from '../../../steps';
 
 @autobind
-export default class FindAddressPostController extends PostController<AnyObject> {
+export default class NationalityPostController extends PostController<AnyObject> {
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
     const form = new Form(fields);

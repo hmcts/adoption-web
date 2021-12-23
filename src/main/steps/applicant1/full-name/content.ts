@@ -1,6 +1,6 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { isFieldFilledIn, isFieldLetters } from '../../../app/form/validation';
+import { isFieldFilledIn } from '../../../app/form/validation';
 
 export const en = (): Record<string, unknown> => ({
   section: 'Primary applicant',
@@ -33,7 +33,7 @@ export const form: FormContent = {
       label: l => l.applicant1FullName,
       labelSize: 'normal',
       classes: 'govuk-input--width-20',
-      validator: input => isFieldFilledIn(input) || isFieldLetters(input),
+      validator: input => isFieldFilledIn(input),
     },
   },
   submit: {

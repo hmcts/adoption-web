@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable jest/expect-expect */
 import { FormContent, FormFields } from '../../../app/form/Form';
-import { isFieldFilledIn, isFieldLetters } from '../../../app/form/validation';
+import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
@@ -56,7 +56,7 @@ const langAssertions = (language, content, generateFn) => {
 
 const commonContent = { language: EN } as CommonContent;
 
-describe('occupation content', () => {
+describe('applicant2 > full-name content', () => {
   it('should return the correct content for language = en', () => {
     langAssertions(EN, enContent, generateContent);
   });
@@ -78,7 +78,6 @@ describe('occupation content', () => {
 
     (firstNames.validator as Function)('MockFirstName');
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockFirstName');
-    expect(isFieldLetters).toHaveBeenCalledWith('MockFirstName');
   });
 
   it('should contain applicant2LastNames text input field', () => {
@@ -94,7 +93,6 @@ describe('occupation content', () => {
 
     (lastNames.validator as Function)('MockFirstName');
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockFirstName');
-    expect(isFieldLetters).toHaveBeenCalledWith('MockFirstName');
   });
 
   it('should contain submit button', () => {

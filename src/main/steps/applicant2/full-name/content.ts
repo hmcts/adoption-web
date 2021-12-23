@@ -1,6 +1,6 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { isFieldFilledIn, isFieldLetters } from '../../../app/form/validation';
+import { isFieldFilledIn } from '../../../app/form/validation';
 
 export const en = (): Record<string, unknown> => ({
   section: 'Second applicant',
@@ -47,14 +47,14 @@ export const form: FormContent = {
       label: l => l.firstNames,
       hint: l => l.firstHint,
       labelSize: 'normal',
-      validator: input => isFieldFilledIn(input) || isFieldLetters(input),
+      validator: input => isFieldFilledIn(input),
     },
     applicant2LastNames: {
       type: 'input',
       label: l => l.lastNames,
       hint: l => l.lastHint,
       labelSize: 'normal',
-      validator: input => isFieldFilledIn(input) || isFieldLetters(input),
+      validator: input => isFieldFilledIn(input),
     },
   },
   submit: {

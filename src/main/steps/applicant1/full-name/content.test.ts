@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable jest/expect-expect */
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
-import { isFieldFilledIn, isFieldLetters } from '../../../app/form/validation';
+import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
@@ -67,7 +67,6 @@ describe('applicant1 > full-name content', () => {
 
     (fullName.validator as Function)('MockName');
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockName');
-    expect(isFieldLetters).toHaveBeenCalledWith('MockName');
   });
 
   it('should contain submit button', () => {
