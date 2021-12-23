@@ -129,6 +129,8 @@ export interface Case {
 
   childrenDateOfBirth?: CaseDate;
   childrenSexAtBirth?: Gender;
+  childrenNationality?: string[];
+  childrenAdditionalNationalities?: string[];
 
   applicationType?: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
