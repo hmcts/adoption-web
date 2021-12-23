@@ -60,6 +60,7 @@ describe('applicant1 > full-name content', () => {
 
     expect(fullName.type).toBe('input');
     expect((fullName.label as Function)(generateContent(commonContent))).toBe(enContent.label);
+    expect((fullName.hint as Function)(generateContent(commonContent))).toBe(enContent.hint);
     expect((fullName as FormOptions).labelSize).toBe('l');
     expect(fullName.classes).toBe('govuk-input--width-20');
 
