@@ -35,5 +35,4 @@ export const getFee = async (logger: LoggerInstance): Promise<Fee> => {
     logger.error('Fee lookup error occurred', err);
     return <Fee>{};
   }
-  return <Fee>{};
 };
