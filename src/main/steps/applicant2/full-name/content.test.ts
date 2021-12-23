@@ -19,11 +19,9 @@ const enContent = {
   errors: {
     applicant2FirstNames: {
       required: 'Enter your first names',
-      invalid: 'You have entered an invalid character, like a number. Enter your name using letters only.',
     },
     applicant2LastNames: {
       required: 'Enter your last names',
-      invalid: 'You have entered an invalid character, like a number. Enter your name using letters only.',
     },
   },
 };
@@ -36,12 +34,10 @@ const cyContent = {
   lastHint: '(Include surname or family names) (in Welsh)',
   errors: {
     applicant2FirstNames: {
-      required: 'You have not entered your full name. Enter it before continuing. (in Welsh)',
-      invalid: 'You have entered an invalid character, like a number. Enter your name using letters only. (in Welsh)',
+      required: 'Enter your first names (in Welsh)',
     },
     applicant2LastNames: {
-      required: 'You have not entered your full name. Enter it before continuing. (in Welsh)',
-      invalid: 'You have entered an invalid character, like a number. Enter your name using letters only. (in Welsh)',
+      required: 'Enter your last names (in Welsh)',
     },
   },
 };

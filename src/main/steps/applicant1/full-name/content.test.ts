@@ -16,8 +16,7 @@ const enContent = {
   applicant1FullName: 'Your full name',
   errors: {
     applicant1FullName: {
-      required: 'You have not entered your full name. Enter it before continuing.',
-      invalid: 'You have entered an invalid character, like a number. Enter your name using letters only.',
+      required: 'Enter your full name',
     },
   },
 };
@@ -27,8 +26,7 @@ const cyContent = {
   applicant1FullName: 'Your full name (in Welsh)',
   errors: {
     applicant1FullName: {
-      required: 'You have not entered your full name. Enter it before continuing. (in Welsh)',
-      invalid: 'You have entered an invalid character, like a number. Enter your name using letters only. (in Welsh)',
+      required: 'Enter your full name (in Welsh)',
     },
   },
 };

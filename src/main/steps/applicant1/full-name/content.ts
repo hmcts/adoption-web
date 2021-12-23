@@ -8,7 +8,7 @@ export const en = (): Record<string, unknown> => ({
   applicant1FullName: 'Your full name',
   errors: {
     applicant1FullName: {
-      required: 'You have not entered your full name. Enter it before continuing.',
+      required: 'Enter your full name',
     },
   },
 });
@@ -19,7 +19,7 @@ export const cy = (): Record<string, unknown> => ({
   applicant1FullName: 'Your full name (in Welsh)',
   errors: {
     applicant1FullName: {
-      required: 'You have not entered your full name. Enter it before continuing. (in Welsh)',
+      required: 'Enter your full name (in Welsh)',
     },
   },
 });
