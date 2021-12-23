@@ -266,7 +266,7 @@ export type CommonContent = typeof en & {
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   addresses?: any[];
   eligibility?: Eligibility;
-  fee?: Fee;
+  fee?: string | Fee;
 };
 
 export type Language = 'en' | 'cy';
