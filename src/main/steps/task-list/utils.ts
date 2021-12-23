@@ -1,4 +1,4 @@
-import { CaseWithId } from '../../app/case/case';
+import { CaseDate, CaseWithId } from '../../app/case/case';
 import { ContactDetails, SectionStatus, YesOrNo } from '../../app/case/definition';
 
 export const isApplyingWithComplete = (userCase: CaseWithId): boolean => {
@@ -60,6 +60,46 @@ export const getPersonalDetailsStatus = (
   return fullName && otherNamesComplete && dateOfBirthComplete && nationalityComplete && occupation
     ? SectionStatus.COMPLETED
     : !fullName && !otherNamesComplete && !dateOfBirthComplete && !nationalityComplete && !occupation
+    ? SectionStatus.NOT_STARTED
+    : SectionStatus.IN_PROGRESS;
+};
+
+export const getChildrenPlacementOrderStatus = (userCase: CaseWithId): SectionStatus => {
+  const childrenFirstName = userCase.childrenFirstName;
+  const childrenLastName = userCase.childrenLastName;
+  const childrenDateOfBirth = userCase.childrenDateOfBirth as CaseDate;
+  const dateOfBirthComplete = childrenDateOfBirth?.day && childrenDateOfBirth?.month && childrenDateOfBirth?.year;
+  const childrenSexAtBirth = userCase.childrenSexAtBirth;
+
+  const nationality: string[] = userCase['childrenNationality'] || [];
+  const nationalities: string[] = userCase['childrenAdditionalNationalities'] || [];
+  const nationalityComplete =
+    !!nationality.length &&
+    (!nationality.includes('Other') || (!!nationalities.length && nationality.includes('Other')));
+
+  return childrenFirstName && childrenLastName && dateOfBirthComplete && childrenSexAtBirth && nationalityComplete
+    ? SectionStatus.COMPLETED
+    : !childrenFirstName && !childrenLastName && !dateOfBirthComplete && !childrenSexAtBirth && !nationalityComplete
+    ? SectionStatus.NOT_STARTED
+    : SectionStatus.IN_PROGRESS;
+};
+
+export const getChildrenBirthCertificateStatus = (userCase: CaseWithId): SectionStatus => {
+  const childrenFirstName = userCase.childrenFirstName;
+  const childrenLastName = userCase.childrenLastName;
+  const childrenDateOfBirth = userCase.childrenDateOfBirth as CaseDate;
+  const dateOfBirthComplete = childrenDateOfBirth?.day && childrenDateOfBirth?.month && childrenDateOfBirth?.year;
+  const childrenSexAtBirth = userCase.childrenSexAtBirth;
+
+  const nationality: string[] = userCase['childrenNationality'] || [];
+  const nationalities: string[] = userCase['childrenAdditionalNationalities'] || [];
+  const nationalityComplete =
+    !!nationality.length &&
+    (!nationality.includes('Other') || (!!nationalities.length && nationality.includes('Other')));
+
+  return childrenFirstName && childrenLastName && dateOfBirthComplete && childrenSexAtBirth && nationalityComplete
+    ? SectionStatus.COMPLETED
+    : !childrenFirstName && !childrenLastName && !dateOfBirthComplete && !childrenSexAtBirth && !nationalityComplete
     ? SectionStatus.NOT_STARTED
     : SectionStatus.IN_PROGRESS;
 };

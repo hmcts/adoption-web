@@ -24,7 +24,7 @@ export const atLeastOneFieldIsChecked: Validator = fields => {
 export const notSure: Validator = fields => {
   if (!fields || (fields as []).length === 0) {
     console.log(fields);
-    
+
     return 'required';
   }
 };

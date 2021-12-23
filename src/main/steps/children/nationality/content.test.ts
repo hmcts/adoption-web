@@ -144,7 +144,6 @@
 //     const addAnotherNationality = addAnotherNationalityDetails?.subFields?.addAnotherNationality;
 //     const addButton = addAnotherNationalityDetails?.subFields?.addButton as FormInput;
 
-    
 //     expect(childrenAdditionalNationalities?.type).toBe('summarylist');
 //     expect(rows).toHaveLength(2);
 //     expect(rows?.[0].key.text).toStrictEqual(populatedArray[0]);

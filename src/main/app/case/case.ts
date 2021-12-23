@@ -127,6 +127,8 @@ export interface Case {
   selectedPlacementOrderId?: string;
   addAnotherPlacementOrder?: YesOrNo;
 
+  childrenFirstName?: string;
+  childrenLastName?: string;
   childrenDateOfBirth?: CaseDate;
   childrenSexAtBirth?: Gender;
   childrenNationality?: string[];
