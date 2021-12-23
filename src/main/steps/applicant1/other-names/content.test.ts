@@ -29,7 +29,7 @@ const enContent = {
       required: 'Enter a name or choose no',
     },
     addAnotherName: {
-      required: 'Name cannot be empty',
+      required: 'Enter a name or choose no',
     },
   },
 };
@@ -51,7 +51,7 @@ const cyContent = {
       required: 'Enter a name or choose no (in Welsh)',
     },
     addAnotherName: {
-      required: 'Name cannot be empty (in Welsh)',
+      required: 'Enter a name or choose no (in Welsh)',
     },
   },
 };
@@ -89,14 +89,12 @@ describe('other names content', () => {
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
 
-    const { type, classes, label, hint, labelSize, section, values, validator } =
-      fields.applicant1HasOtherNames as FormOptions;
+    const { type, classes, label, hint, section, values, validator } = fields.applicant1HasOtherNames as FormOptions;
 
     expect(type).toBe('radios');
     expect(classes).toBe('govuk-radios');
     expect((label as Function)(generateContent(commonContent([])))).toBe(enContent.label);
     expect((hint as Function)(generateContent(commonContent([])))).toBe(enContent.example);
-    expect(labelSize).toBe('s');
     expect((section as Function)(generateContent(commonContent([])))).toBe(enContent.section);
     expect(values).toHaveLength(2);
     expect((values[0].label as Function)(generateContent(commonContent([])))).toBe(enContent.yes);
@@ -117,14 +115,13 @@ describe('other names content', () => {
     const applicant1AdditionalName = yesRadioSubFields?.applicant1AdditionalName;
     const addButton = yesRadioSubFields?.addButton as FormInput;
 
-    expect(applicant1AdditionalNames.type).toBe('summarylist');
-    expect(applicant1AdditionalNames.rows?.rows).toStrictEqual(emptyArray);
+    expect(applicant1AdditionalNames).toBeUndefined();
 
     expect(applicant1AdditionalName?.type).toBe('input');
     expect((applicant1AdditionalName?.label as Function)(generateContent(commonContent([])))).toBe(
       enContent.applicant1AdditionalName
     );
-    expect(applicant1AdditionalName?.labelSize).toBe('s');
+    expect(applicant1AdditionalName?.labelSize).toBe(null);
     expect(applicant1AdditionalName?.validator).toBe(isFieldFilledIn);
 
     expect(addButton?.type).toBe('button');
@@ -163,7 +160,7 @@ describe('other names content', () => {
     expect((applicant1AdditionalName?.label as Function)(generateContent(commonContent([])))).toBe(
       enContent.applicant1AdditionalName
     );
-    expect(applicant1AdditionalName?.labelSize).toBe('s');
+    expect(applicant1AdditionalName?.labelSize).toBe(null);
 
     expect(addButton?.type).toBe('button');
     expect((addButton?.label as Function)(generateContent(commonContent([])))).toBe(enContent.add);

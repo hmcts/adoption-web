@@ -3,7 +3,7 @@ import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 
 export const en = (): Record<string, unknown> => ({
-  section: 'Primary applicant',
+  section: 'Second applicant',
   label: "What's your occupation?",
   hint: 'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’.',
   warningText: {
@@ -21,14 +21,14 @@ export const en = (): Record<string, unknown> => ({
   If you’re a full time parent, enter ‘Full time parent’.`,
   },
   errors: {
-    applicant1Occupation: {
+    applicant2Occupation: {
       required: 'Enter your occupation',
     },
   },
 });
 
 export const cy = (): Record<string, unknown> => ({
-  section: 'Primary applicant (in Welsh)',
+  section: 'Second applicant (in Welsh)',
   label: "What's your occupation? (in Welsh)",
   hint: 'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’. (in Welsh)',
   warningText: {
@@ -46,7 +46,7 @@ export const cy = (): Record<string, unknown> => ({
     If you’re a full time parent, enter ‘Full time parent’. (in Welsh)`,
   },
   errors: {
-    applicant1Occupation: {
+    applicant2Occupation: {
       required: 'Enter your occupation (in Welsh)',
     },
   },
@@ -54,7 +54,7 @@ export const cy = (): Record<string, unknown> => ({
 
 export const form: FormContent = {
   fields: {
-    applicant1Occupation: {
+    applicant2Occupation: {
       type: 'input',
       label: l => l.label,
       labelSize: 'l',

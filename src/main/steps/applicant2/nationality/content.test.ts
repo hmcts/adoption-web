@@ -9,18 +9,18 @@ import { generateContent } from './content';
 const CY = 'cy';
 const EN = 'en';
 const enContent = {
-  section: 'Primary applicant',
+  section: 'Second applicant',
   label: 'What is your nationality?',
   hint: 'Select all options that are relevant to you.',
   british: 'British',
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish',
   irish: 'Irish',
   differentCountry: 'Citizen of a different country',
-  applicant1Nationality: 'Country name',
+  applicant2Nationality: 'Country name',
   add: 'Add',
   another: 'Add another country',
   errors: {
-    applicant1Nationality: {
+    applicant2Nationality: {
       required: 'Select if you are British, Irish or a citizen of a different country',
     },
     addAnotherNationality: {
@@ -29,18 +29,18 @@ const enContent = {
   },
 };
 const cyContent = {
-  section: 'Primary applicant (in Welsh)',
+  section: 'Second applicant (in Welsh)',
   label: 'What is your nationality? (in Welsh)',
   hint: 'Select all options that are relevant to you. (in Welsh)',
   british: 'British (in Welsh)',
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish (in Welsh)',
   irish: 'Irish (in Welsh)',
   differentCountry: 'Citizen of a different country (in Welsh)',
-  applicant1Nationality: 'Country name (in Welsh)',
-  add: 'Add (in Welsh)',
+  applicant2Nationality: 'Country name (in Welsh)',
+  add: 'Add',
   another: 'Add another country (in Welsh)',
   errors: {
-    applicant1Nationality: {
+    applicant2Nationality: {
       required: 'Select if you are British, Irish or a citizen of a different country (in Welsh)',
     },
     addAnotherNationality: {
@@ -49,35 +49,24 @@ const cyContent = {
   },
 };
 
-const langAssertions = (language, content) => {
-  const generatedContent = generateContent({ language, userCase: {} } as CommonContent);
-  const { section, title, label, british, britishSubtext, irish, differentCountry, countryName, add, another, errors } =
-    content;
+const langAssertions = (language, content, generateFn) => {
+  const generatedContent = generateFn({ language } as CommonContent);
 
-  expect(generatedContent.section).toEqual(section);
-  expect(generatedContent.title).toEqual(title);
-  expect(generatedContent.label).toEqual(label);
-  expect(generatedContent.british).toEqual(british);
-  expect(generatedContent.britishSubtext).toEqual(britishSubtext);
-  expect(generatedContent.irish).toEqual(irish);
-  expect(generatedContent.differentCountry).toEqual(differentCountry);
-  expect(generatedContent.countryName).toEqual(countryName);
-  expect(generatedContent.differentCountry).toEqual(differentCountry);
-  expect(generatedContent.add).toEqual(add);
-  expect(generatedContent.another).toEqual(another);
-  expect(generatedContent.errors).toEqual(errors);
+  Object.entries(content).forEach(([key, value]) => {
+    expect(generatedContent[key]).toEqual(value);
+  });
 };
 
 const commonContent = (countries: string[]) =>
-  ({ language: EN, userCase: { applicant1AdditionalNationalities: countries } } as CommonContent);
+  ({ language: EN, userCase: { applicant2AdditionalNationalities: countries } } as CommonContent);
 
-describe('nationality content', () => {
+describe('applicant2 > nationality content', () => {
   it('should return the correct content for language = en', () => {
-    langAssertions(EN, enContent);
+    langAssertions(EN, enContent, generateContent);
   });
 
   it('should return the correct content for language = cy', () => {
-    langAssertions(CY, cyContent);
+    langAssertions(CY, cyContent, generateContent);
   });
 
   it('should display a checkbox with nationality options', () => {
@@ -85,7 +74,7 @@ describe('nationality content', () => {
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
 
-    const { type, label, labelSize, values, validator } = fields.applicant1Nationality as FormOptions;
+    const { type, label, labelSize, values, validator } = fields.applicant2Nationality as FormOptions;
 
     expect(type).toBe('checkboxes');
     expect((label as Function)(generateContent(commonContent([])))).toBe(enContent.label);
@@ -106,17 +95,17 @@ describe('nationality content', () => {
     const generatedContent = generateContent(commonContent(emptyArray));
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const nationality = fields.applicant1Nationality as FormOptions;
+    const nationality = fields.applicant2Nationality as FormOptions;
     const otherCountrySubFields = nationality.values[2].subFields;
-    const applicant1AdditionalNationalities = otherCountrySubFields?.applicant1AdditionalNationalities as FormOptions;
+    const applicant2AdditionalNationalities = otherCountrySubFields?.applicant2AdditionalNationalities as FormOptions;
     const addAnotherNationality = otherCountrySubFields?.addAnotherNationality;
     const addButton = otherCountrySubFields?.addButton as FormInput;
 
-    expect(applicant1AdditionalNationalities).toBeUndefined();
+    expect(applicant2AdditionalNationalities).toBeUndefined();
 
     expect(addAnotherNationality?.type).toBe('input');
     expect((addAnotherNationality?.label as Function)(generateContent(commonContent([])))).toBe(
-      enContent.applicant1Nationality
+      enContent.applicant2Nationality
     );
     expect(addAnotherNationality?.labelSize).toBe(null);
     expect(addAnotherNationality?.validator).toBe(isFieldFilledIn);
@@ -132,19 +121,19 @@ describe('nationality content', () => {
     const generatedContent = generateContent(commonContent(populatedArray));
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const nationality = fields.applicant1Nationality as FormOptions;
+    const nationality = fields.applicant2Nationality as FormOptions;
     const otherCountrySubFields = nationality.values[2].subFields;
-    const applicant1AdditionalNationalities = otherCountrySubFields?.applicant1AdditionalNationalities as FormOptions;
-    const rows = applicant1AdditionalNationalities?.rows?.rows;
+    const applicant2AdditionalNationalities = otherCountrySubFields?.applicant2AdditionalNationalities as FormOptions;
+    const rows = applicant2AdditionalNationalities?.rows?.rows;
     const addAnotherNationalityDetails = otherCountrySubFields?.addAnotherNationalityDetails as FormInput;
     const addAnotherNationality = addAnotherNationalityDetails?.subFields?.addAnotherNationality;
     const addButton = addAnotherNationalityDetails?.subFields?.addButton as FormInput;
 
-    expect(applicant1AdditionalNationalities?.type).toBe('summarylist');
+    expect(applicant2AdditionalNationalities?.type).toBe('summarylist');
     expect(rows).toHaveLength(2);
     expect(rows?.[0].key.text).toStrictEqual(populatedArray[0]);
     expect(rows?.[1].key.text).toStrictEqual(populatedArray[1]);
-    expect(rows?.[0].actions.items[0].href).toStrictEqual(`/applicant1/nationality?remove=${populatedArray[0]}`);
+    expect(rows?.[0].actions.items[0].href).toStrictEqual(`/applicant2/nationality?remove=${populatedArray[0]}`);
     expect(rows?.[0].actions.items[0].text).toStrictEqual('Remove');
     expect(rows?.[0].actions.items[0].visuallyHiddenText).toStrictEqual(populatedArray[0]);
 
@@ -155,7 +144,7 @@ describe('nationality content', () => {
 
     expect(addAnotherNationality?.type).toBe('input');
     expect((addAnotherNationality?.label as Function)(generateContent(commonContent([])))).toBe(
-      enContent.applicant1Nationality
+      enContent.applicant2Nationality
     );
     expect(addAnotherNationality?.labelSize).toBe(null);
 
@@ -172,7 +161,7 @@ describe('nationality content', () => {
   });
 
   it('should contain saveAsDraft button', () => {
-    const generatedContent = generateContent({ ...commonContent([]), userCase: undefined });
+    const generatedContent = generateContent(commonContent([]));
     const form = generatedContent.form as FormContent;
     expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: EN }))).toBe('Save as draft');
   });

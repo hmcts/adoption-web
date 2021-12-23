@@ -103,18 +103,12 @@
                         <!-- Second applicant - personal details -->
                         <li class="app-task-list__item">
                             <span class="app-task-list__task-name">
-                                <a href="#" class="govuk-link" aria-describedby="eligibility-completed">
+                                <a id="applicant2-personal-details" href="{{urls.APPLICANT_2_FULL_NAME}}" class="govuk-link" aria-describedby="eligibility-completed">
                                     {{section2subheading3line1}}
                                 </a>
                             </a>
                         </span>
-                        {% if data['second-applicant-occupation'] %}
-                            <strong class="govuk-tag  app-task-list__tag" id="eligibility-completed">Completed</strong>
-                        {% elseif data['second-applicant-name'] %}
-                            <strong class="govuk-tag govuk-tag--blue app-task-list__tag">in progress</strong>
-                        {% else %}
-                            <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
-                        {% endif %}
+                        <p class="govuk-body">{{ status.applicant2PersonalDetails | safe }}</p>
                     </li>
 
                     <!-- Second applicant - contact details -->

@@ -3,23 +3,23 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { doesArrayHaveValues, isFieldFilledIn } from '../../../app/form/validation';
 import { mapSummaryListContent } from '../../common/functions/mapSummaryListContent';
-import { APPLICANT_1_OTHER_NAMES } from '../../urls';
+import { APPLICANT_2_OTHER_NAMES } from '../../urls';
 
 export const en = (): Record<string, unknown> => ({
-  section: 'Primary applicant',
+  section: 'Second applicant',
   label: 'Have you ever legally been known by any other names?',
   example: 'For example, your name before marriage.',
   yes: 'Yes',
   no: 'No',
-  applicant1AdditionalName: 'Add your previous full name',
+  applicant2AdditionalName: 'Add your previous full name',
   add: 'Add',
   another: 'Add another name',
   remove: 'Remove',
   errors: {
-    applicant1HasOtherNames: {
+    applicant2HasOtherNames: {
       required: 'Enter a name or choose no',
     },
-    applicant1AdditionalName: {
+    applicant2AdditionalName: {
       required: 'Enter a name or choose no',
     },
     addAnotherName: {
@@ -29,20 +29,20 @@ export const en = (): Record<string, unknown> => ({
 });
 
 export const cy = (): Record<string, unknown> => ({
-  section: 'Primary applicant (in Welsh)',
+  section: 'Second applicant (in Welsh)',
   title: 'Have you ever legally been known by any other names? (in Welsh)',
   example: 'For example, your name before marriage. (in Welsh)',
   yes: 'Yes (in Welsh)',
   no: 'No (in Welsh)',
-  applicant1AdditionalName: 'Add your previous full name (in Welsh)',
+  applicant2AdditionalName: 'Add your previous full name (in Welsh)',
   add: 'Add (in Welsh)',
   another: 'Add another name (in Welsh)',
   remove: 'Remove (in Welsh)',
   errors: {
-    applicant1HasOtherNames: {
+    applicant2HasOtherNames: {
       required: 'Enter a name or choose no (in Welsh)',
     },
-    applicant1AdditionalName: {
+    applicant2AdditionalName: {
       required: 'Enter a name or choose no (in Welsh)',
     },
     addAnotherName: {
@@ -54,7 +54,7 @@ export const cy = (): Record<string, unknown> => ({
 export const form: FormContent = {
   fields: userCase => {
     return {
-      applicant1HasOtherNames: {
+      applicant2HasOtherNames: {
         type: 'radios',
         classes: 'govuk-radios',
         label: l => l.label,
@@ -65,28 +65,28 @@ export const form: FormContent = {
             label: l => l.yes,
             value: YesOrNo.YES,
             subFields: {
-              ...(userCase.applicant1AdditionalNames?.length
+              ...(userCase.applicant2AdditionalNames?.length
                 ? {
-                    applicant1AdditionalNames: {
+                    applicant2AdditionalNames: {
                       type: 'summarylist',
                       rows: mapSummaryListContent(
-                        userCase.applicant1AdditionalNames || [],
+                        userCase.applicant2AdditionalNames || [],
                         ['Remove'],
-                        APPLICANT_1_OTHER_NAMES
+                        APPLICANT_2_OTHER_NAMES
                       ),
                     },
                   }
                 : {}),
-              ...(userCase.applicant1AdditionalNames?.length
+              ...(userCase.applicant2AdditionalNames?.length
                 ? {
                     addAnotherName: {
                       type: 'details',
                       label: l => l.another,
                       subFields: {
-                        applicant1AdditionalName: {
+                        applicant2AdditionalName: {
                           type: 'input',
                           classes: 'govuk-!-width-two-thirds',
-                          label: l => l.applicant1AdditionalName,
+                          label: l => l.applicant2AdditionalName,
                           labelSize: null,
                         },
                         addButton: {
@@ -96,14 +96,14 @@ export const form: FormContent = {
                           value: 'addButton',
                         },
                       },
-                      validator: () => doesArrayHaveValues(userCase.applicant1AdditionalNames),
+                      validator: () => doesArrayHaveValues(userCase.applicant2AdditionalNames),
                     },
                   }
                 : {
-                    applicant1AdditionalName: {
+                    applicant2AdditionalName: {
                       type: 'input',
                       classes: 'govuk-!-width-two-thirds',
-                      label: l => l.applicant1AdditionalName,
+                      label: l => l.applicant2AdditionalName,
                       labelSize: null,
                       validator: isFieldFilledIn,
                     },

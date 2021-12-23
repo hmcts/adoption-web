@@ -16,6 +16,31 @@ export interface Step {
 
 export const applicant2Sequence: Step[] = [
   {
+    url: Urls.APPLICANT_2_FULL_NAME,
+    showInSection: Sections.AboutApplicant2,
+    getNextStep: () => Urls.APPLICANT_2_OTHER_NAMES,
+  },
+  {
+    url: Urls.APPLICANT_2_OTHER_NAMES,
+    showInSection: Sections.AboutApplicant2,
+    getNextStep: () => Urls.APPLICANT_2_DOB,
+  },
+  {
+    url: Urls.APPLICANT_2_DOB,
+    showInSection: Sections.AboutApplicant2,
+    getNextStep: () => Urls.APPLICANT_2_NATIONALITY,
+  },
+  {
+    url: Urls.APPLICANT_2_NATIONALITY,
+    showInSection: Sections.AboutApplicant2,
+    getNextStep: () => Urls.APPLICANT_2_OCCUPATION,
+  },
+  {
+    url: Urls.APPLICANT_2_OCCUPATION,
+    showInSection: Sections.AboutApplicant2,
+    getNextStep: () => Urls.TASK_LIST_URL,
+  },
+  {
     url: Urls.APPLICANT_2_SAME_ADDRESS,
     showInSection: Sections.AboutApplicant2,
     getNextStep: data =>
