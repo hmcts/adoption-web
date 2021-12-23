@@ -10,7 +10,7 @@ module.exports = {
     contactDetailsLink: 'a[id$="applicant2-contact-details"]',
     childrenPlacementOrderLink: 'a[id$="children-placement-order"]',
     personalDetailsLink: 'a[id$="applicant2-personal-details"]',
-    personalDetailsLinkStatus: 'strong[id$="applicant1-personal-details-status"]',
+    personalDetailsLinkStatus: 'strong[id$="applicant2-personal-details-status"]',
   },
   childDetails: {
     childrenBirthCertificateLink: 'a[id$="children-birth-certificate"]',
