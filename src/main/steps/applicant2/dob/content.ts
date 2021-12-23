@@ -10,12 +10,12 @@ export const en = (): Record<string, unknown> => ({
   hint: 'For example, 28 6 1997',
   errors: {
     applicant2DateOfBirth: {
-      required: 'You have not entered a date. Enter a date to continue.',
-      invalidDate: 'You have entered an invalid date. Enter the date using the following format: 28 6 1997.',
-      invalidYear: 'You have entered the year in an invalid format. Enter the whole year, for example 2002.',
-      invalidDateInFuture:
-        'You have entered a date that is in the future. Enter a date that is in the past before continuing.',
-      invalidDateTooFarInPast: 'You have entered a year which is too far in the past.',
+      required: 'Enter your date of birth',
+      invalidDate: 'Date of birth must be a real date',
+      incompleteDay: 'Your date of birth must include a day',
+      incompleteMonth: 'Your date of birth must include a month',
+      incompleteYear: 'Your date of birth must include a year',
+      invalidDateInFuture: 'Your date of birth must be in the past',
     },
   },
 });
@@ -26,12 +26,12 @@ export const cy = (): Record<string, unknown> => ({
   hint: 'For example, 28 6 1997 (in Welsh)',
   errors: {
     applicant2DateOfBirth: {
-      required: 'You have not entered a date. Enter a date to continue. (in Welsh)',
-      invalidDate: 'You have entered an invalid date. Enter the date using the following format: 28 6 1997. (in Welsh)',
-      invalidYear: 'You have entered the year in an invalid format. Enter the whole year, for example 2002. (in Welsh)',
-      invalidDateInFuture:
-        'You have entered a date that is in the future. Enter a date that is in the past before continuing. (in Welsh)',
-      invalidDateTooFarInPast: 'You have entered a year which is too far in the past. (in Welsh)',
+      required: 'Enter your date of birth (in Welsh)',
+      invalidDate: 'Date of birth must be a real date (in Welsh)',
+      incompleteDay: 'Your date of birth must include a day (in Welsh)',
+      incompleteMonth: 'Your date of birth must include a month (in Welsh)',
+      incompleteYear: 'Your date of birth must include a year (in Welsh)',
+      invalidDateInFuture: 'Your date of birth must be in the past (in Welsh)',
     },
   },
 });
