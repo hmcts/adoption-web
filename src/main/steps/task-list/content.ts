@@ -78,7 +78,7 @@ const en = content => {
       applicant2PersonalDetails: getSectionStatusLabel(
         getPersonalDetailsStatus(content.userCase, 'applicant2'),
         statuses,
-        'applicant1-personal-details-status'
+        'applicant2-personal-details-status'
       ),
       applicant2ContactDetails: getSectionStatusLabel(
         getContactDetailsStatus(content.userCase, 'applicant2'),
