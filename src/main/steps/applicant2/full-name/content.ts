@@ -28,10 +28,10 @@ export const cy = (): Record<string, unknown> => ({
   lastHint: '(Include surname or family names) (in Welsh)',
   errors: {
     applicant2FirstNames: {
-      required: 'You have not entered your full name. Enter it before continuing. (in Welsh)',
+      required: 'Enter your first names (in Welsh)',
     },
     applicant2LastNames: {
-      required: 'You have not entered your full name. Enter it before continuing. (in Welsh)',
+      required: 'Enter your last names (in Welsh)',
     },
   },
 });

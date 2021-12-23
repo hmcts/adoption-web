@@ -28,8 +28,7 @@ const enContent = {
   },
   errors: {
     applicant2Occupation: {
-      required: 'You have not entered your occupation. Enter it before continuing.',
-      invalid: 'You have entered an invalid character, like a number. Enter your name using letters only.',
+      required: 'Enter your occupation',
     },
   },
 };
@@ -54,8 +53,7 @@ const cyContent = {
   },
   errors: {
     applicant2Occupation: {
-      required: 'You have not entered your occupation. Enter it before continuing. (in Welsh)',
-      invalid: 'You have entered an invalid character, like a number. Enter your name using letters only. (in Welsh)',
+      required: 'Enter your occupation (in Welsh)',
     },
   },
 };

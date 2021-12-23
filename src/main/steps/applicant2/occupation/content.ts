@@ -23,7 +23,7 @@ export const en = (): Record<string, unknown> => ({
   },
   errors: {
     applicant2Occupation: {
-      required: 'You have not entered your occupation. Enter it before continuing.',
+      required: 'Enter your occupation',
     },
   },
 });
@@ -49,7 +49,7 @@ export const cy = (): Record<string, unknown> => ({
   },
   errors: {
     applicant2Occupation: {
-      required: 'You have not entered your occupation. Enter it before continuing. (in Welsh)',
+      required: 'Enter your occupation (in Welsh)',
     },
   },
 });
