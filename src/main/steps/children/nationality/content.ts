@@ -15,7 +15,6 @@ export const en = (): Record<string, unknown> => ({
   childrenNationality: 'Country name',
   add: 'Add',
   another: 'Add another country',
-  //or: 'or',
   notSure: 'Not Sure',
   errors: {
     childrenNationality: {
@@ -38,7 +37,6 @@ export const cy = (): Record<string, unknown> => ({
   childrenNationality: 'Country name (in Welsh)',
   add: 'Add (in Welsh)',
   another: 'Add another country (in Welsh)',
-  //or: 'or (in Welsh)',
   notSure: 'Not Sure (in Welsh)',
   errors: {
     childrenNationality: {
