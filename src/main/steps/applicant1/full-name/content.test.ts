@@ -12,8 +12,8 @@ const CY = 'cy';
 const EN = 'en';
 const enContent = {
   section: 'Primary applicant',
-  title: "What's your full name?",
-  applicant1FullName: 'Your full name',
+  label: "What's your full name?",
+  hint: 'Your full name',
   errors: {
     applicant1FullName: {
       required: 'Enter your full name',
@@ -22,8 +22,8 @@ const enContent = {
 };
 const cyContent = {
   section: 'Primary applicant (in Welsh)',
-  title: "What's your full name? (in Welsh)",
-  applicant1FullName: 'Your full name (in Welsh)',
+  label: "What's your full name? (in Welsh)",
+  hint: 'Your full name (in Welsh)',
   errors: {
     applicant1FullName: {
       required: 'Enter your full name (in Welsh)',
@@ -59,8 +59,8 @@ describe('applicant1 > full-name content', () => {
     const fullName = fields.applicant1FullName;
 
     expect(fullName.type).toBe('input');
-    expect((fullName.label as Function)(generateContent(commonContent))).toBe(enContent.applicant1FullName);
-    expect((fullName as FormOptions).labelSize).toBe('normal');
+    expect((fullName.label as Function)(generateContent(commonContent))).toBe(enContent.label);
+    expect((fullName as FormOptions).labelSize).toBe('l');
     expect(fullName.classes).toBe('govuk-input--width-20');
 
     (fullName.validator as Function)('MockName');

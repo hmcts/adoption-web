@@ -4,9 +4,8 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 export const en = (): Record<string, unknown> => ({
   section: 'Second applicant',
-  title: "What's your occupation?",
-  occupation:
-    'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’.',
+  label: "What's your occupation?",
+  hint: 'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’.',
   warningText: {
     text: 'This information will appear on the adoption certificate.',
     iconFallbackText: 'Warning',
@@ -30,9 +29,8 @@ export const en = (): Record<string, unknown> => ({
 
 export const cy = (): Record<string, unknown> => ({
   section: 'Second applicant (in Welsh)',
-  title: "What's your occupation? (in Welsh)",
-  occupation:
-    'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’. (in Welsh)',
+  label: "What's your occupation? (in Welsh)",
+  hint: 'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’. (in Welsh)',
   warningText: {
     text: 'This information will appear on the adoption certificate. (in Welsh)',
     iconFallbackText: 'Warning (in Welsh)',
@@ -58,10 +56,10 @@ export const form: FormContent = {
   fields: {
     applicant2Occupation: {
       type: 'input',
-      label: l => l.occupation,
-      labelSize: 'normal',
-      classes: 'govuk-input--width-20',
-      validator: input => isFieldFilledIn(input),
+      label: l => l.label,
+      labelSize: 'l',
+      hint: l => l.hint,
+      validator: isFieldFilledIn,
     },
   },
   submit: {

@@ -6,8 +6,8 @@ import { APPLICANT_1_NATIONALITY } from '../../urls';
 
 export const en = (): Record<string, unknown> => ({
   section: 'Primary applicant',
-  title: 'What is your nationality?',
-  label: 'Select all options that are relevant to you.',
+  label: 'What is your nationality?',
+  hint: 'Select all options that are relevant to you.',
   british: 'British',
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish',
   irish: 'Irish',
@@ -27,8 +27,8 @@ export const en = (): Record<string, unknown> => ({
 
 export const cy = (): Record<string, unknown> => ({
   section: 'Primary applicant (in Welsh)',
-  title: 'What is your nationality? (in Welsh)',
-  label: 'Select all options that are relevant to you. (in Welsh)',
+  label: 'What is your nationality? (in Welsh)',
+  hint: 'Select all options that are relevant to you. (in Welsh)',
   british: 'British (in Welsh)',
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish (in Welsh)',
   irish: 'Irish (in Welsh)',
@@ -52,7 +52,8 @@ export const form: FormContent = {
       applicant1Nationality: {
         type: 'checkboxes',
         label: l => l.label,
-        labelSize: 's',
+        labelSize: 'l',
+        hint: l => l.hint,
         validator: atLeastOneFieldIsChecked,
         values: [
           {
@@ -71,15 +72,19 @@ export const form: FormContent = {
             label: l => l.differentCountry,
             value: 'Other',
             subFields: {
-              applicant1AdditionalNationalities: {
-                type: 'summarylist',
-                values: [],
-                rows: mapSummaryListContent(
-                  userCase.applicant1AdditionalNationalities || [],
-                  ['Remove'],
-                  APPLICANT_1_NATIONALITY
-                ),
-              },
+              ...(userCase.applicant1AdditionalNationalities?.length
+                ? {
+                    applicant1AdditionalNationalities: {
+                      type: 'summarylist',
+                      values: [],
+                      rows: mapSummaryListContent(
+                        userCase.applicant1AdditionalNationalities || [],
+                        ['Remove'],
+                        APPLICANT_1_NATIONALITY
+                      ),
+                    },
+                  }
+                : {}),
               ...(userCase.applicant1AdditionalNationalities?.length
                 ? {
                     addAnotherNationalityDetails: {
@@ -88,8 +93,9 @@ export const form: FormContent = {
                       subFields: {
                         addAnotherNationality: {
                           type: 'input',
+                          classes: 'govuk-!-width-two-thirds',
                           label: l => l.applicant1Nationality,
-                          labelSize: 's',
+                          labelSize: null,
                         },
                         addButton: {
                           type: 'button',
@@ -103,8 +109,9 @@ export const form: FormContent = {
                 : {
                     addAnotherNationality: {
                       type: 'input',
+                      classes: 'govuk-!-width-two-thirds',
                       label: l => l.applicant1Nationality,
-                      labelSize: 's',
+                      labelSize: null,
                       validator: isFieldFilledIn,
                     },
                     addButton: {

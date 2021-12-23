@@ -9,9 +9,8 @@ const CY = 'cy';
 const EN = 'en';
 const enContent = {
   section: 'Second applicant',
-  title: "What's your occupation?",
-  occupation:
-    'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’.',
+  label: "What's your occupation?",
+  hint: 'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’.',
   warningText: {
     text: 'This information will appear on the adoption certificate.',
     iconFallbackText: 'Warning',
@@ -34,9 +33,8 @@ const enContent = {
 };
 const cyContent = {
   section: 'Second applicant (in Welsh)',
-  title: "What's your occupation? (in Welsh)",
-  occupation:
-    'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’. (in Welsh)',
+  label: "What's your occupation? (in Welsh)",
+  hint: 'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’. (in Welsh)',
   warningText: {
     text: 'This information will appear on the adoption certificate. (in Welsh)',
     iconFallbackText: 'Warning (in Welsh)',
@@ -84,9 +82,9 @@ describe('applicant2 > occupation content', () => {
     const applicant2Occupation = fields.applicant2Occupation;
 
     expect(applicant2Occupation.type).toBe('input');
-    expect((applicant2Occupation.label as Function)(generateContent(commonContent))).toBe(enContent.occupation);
-    expect(applicant2Occupation.labelSize).toBe('normal');
-    expect(applicant2Occupation.classes).toBe('govuk-input--width-20');
+    expect((applicant2Occupation.label as Function)(generateContent(commonContent))).toBe(enContent.label);
+    expect((applicant2Occupation.hint as Function)(generateContent(commonContent))).toBe(enContent.hint);
+    expect(applicant2Occupation.labelSize).toBe('l');
 
     (applicant2Occupation.validator as Function)('MockOccupation');
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockOccupation');

@@ -38,14 +38,12 @@ describe('applicant2 > other-names content', () => {
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
 
-    const { type, classes, label, hint, labelSize, section, values, validator } =
-      fields.applicant2HasOtherNames as FormOptions;
+    const { type, classes, label, hint, section, values, validator } = fields.applicant2HasOtherNames as FormOptions;
 
     expect(type).toBe('radios');
     expect(classes).toBe('govuk-radios');
     expect((label as Function)(generateContent(commonContent([])))).toBe(enContent.label);
     expect((hint as Function)(generateContent(commonContent([])))).toBe(enContent.example);
-    expect(labelSize).toBe('s');
     expect((section as Function)(generateContent(commonContent([])))).toBe(enContent.section);
     expect(values).toHaveLength(2);
     expect((values[0].label as Function)(generateContent(commonContent([])))).toBe(enContent.yes);
@@ -66,14 +64,13 @@ describe('applicant2 > other-names content', () => {
     const applicant2AdditionalName = yesRadioSubFields?.applicant2AdditionalName;
     const addButton = yesRadioSubFields?.addButton as FormInput;
 
-    expect(applicant2AdditionalNames.type).toBe('summarylist');
-    expect(applicant2AdditionalNames.rows?.rows).toStrictEqual(emptyArray);
+    expect(applicant2AdditionalNames).toBeUndefined();
 
     expect(applicant2AdditionalName?.type).toBe('input');
     expect((applicant2AdditionalName?.label as Function)(generateContent(commonContent([])))).toBe(
       enContent.applicant2AdditionalName
     );
-    expect(applicant2AdditionalName?.labelSize).toBe('s');
+    expect(applicant2AdditionalName?.labelSize).toBe(null);
     expect(applicant2AdditionalName?.validator).toBe(isFieldFilledIn);
 
     expect(addButton?.type).toBe('button');
@@ -112,7 +109,7 @@ describe('applicant2 > other-names content', () => {
     expect((applicant2AdditionalName?.label as Function)(generateContent(commonContent([])))).toBe(
       enContent.applicant2AdditionalName
     );
-    expect(applicant2AdditionalName?.labelSize).toBe('s');
+    expect(applicant2AdditionalName?.labelSize).toBe(null);
 
     expect(addButton?.type).toBe('button');
     expect((addButton?.label as Function)(generateContent(commonContent([])))).toBe(enContent.add);

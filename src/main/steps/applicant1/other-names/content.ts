@@ -23,7 +23,7 @@ export const en = (): Record<string, unknown> => ({
       required: 'Enter a name or choose no',
     },
     addAnotherName: {
-      required: 'Name cannot be empty',
+      required: 'Enter a name or choose no',
     },
   },
 });
@@ -46,7 +46,7 @@ export const cy = (): Record<string, unknown> => ({
       required: 'Enter a name or choose no (in Welsh)',
     },
     addAnotherName: {
-      required: 'Name cannot be empty (in Welsh)',
+      required: 'Enter a name or choose no (in Welsh)',
     },
   },
 });
@@ -59,21 +59,24 @@ export const form: FormContent = {
         classes: 'govuk-radios',
         label: l => l.label,
         hint: l => l.example,
-        labelSize: 's',
         section: l => l.section,
         values: [
           {
             label: l => l.yes,
             value: YesOrNo.YES,
             subFields: {
-              applicant1AdditionalNames: {
-                type: 'summarylist',
-                rows: mapSummaryListContent(
-                  userCase.applicant1AdditionalNames || [],
-                  ['Remove'],
-                  APPLICANT_1_OTHER_NAMES
-                ),
-              },
+              ...(userCase.applicant1AdditionalNames?.length
+                ? {
+                    applicant1AdditionalNames: {
+                      type: 'summarylist',
+                      rows: mapSummaryListContent(
+                        userCase.applicant1AdditionalNames || [],
+                        ['Remove'],
+                        APPLICANT_1_OTHER_NAMES
+                      ),
+                    },
+                  }
+                : {}),
               ...(userCase.applicant1AdditionalNames?.length
                 ? {
                     addAnotherName: {
@@ -82,8 +85,9 @@ export const form: FormContent = {
                       subFields: {
                         applicant1AdditionalName: {
                           type: 'input',
+                          classes: 'govuk-!-width-two-thirds',
                           label: l => l.applicant1AdditionalName,
-                          labelSize: 's',
+                          labelSize: null,
                         },
                         addButton: {
                           type: 'button',
@@ -98,8 +102,9 @@ export const form: FormContent = {
                 : {
                     applicant1AdditionalName: {
                       type: 'input',
+                      classes: 'govuk-!-width-two-thirds',
                       label: l => l.applicant1AdditionalName,
-                      labelSize: 's',
+                      labelSize: null,
                       validator: isFieldFilledIn,
                     },
                     addButton: {
