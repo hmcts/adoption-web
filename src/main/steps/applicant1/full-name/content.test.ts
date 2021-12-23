@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable jest/expect-expect */
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
-import { isFieldFilledIn, isFieldLetters } from '../../../app/form/validation';
+import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
@@ -12,23 +12,21 @@ const CY = 'cy';
 const EN = 'en';
 const enContent = {
   section: 'Primary applicant',
-  title: "What's your full name?",
-  applicant1FullName: 'Your full name',
+  label: "What's your full name?",
+  hint: 'Your full name',
   errors: {
     applicant1FullName: {
-      required: 'You have not entered your full name. Enter it before continuing.',
-      invalid: 'You have entered an invalid character, like a number. Enter your name using letters only.',
+      required: 'Enter your full name',
     },
   },
 };
 const cyContent = {
   section: 'Primary applicant (in Welsh)',
-  title: "What's your full name? (in Welsh)",
-  applicant1FullName: 'Your full name (in Welsh)',
+  label: "What's your full name? (in Welsh)",
+  hint: 'Your full name (in Welsh)',
   errors: {
     applicant1FullName: {
-      required: 'You have not entered your full name. Enter it before continuing. (in Welsh)',
-      invalid: 'You have entered an invalid character, like a number. Enter your name using letters only. (in Welsh)',
+      required: 'Enter your full name (in Welsh)',
     },
   },
 };
@@ -61,13 +59,12 @@ describe('applicant1 > full-name content', () => {
     const fullName = fields.applicant1FullName;
 
     expect(fullName.type).toBe('input');
-    expect((fullName.label as Function)(generateContent(commonContent))).toBe(enContent.applicant1FullName);
-    expect((fullName as FormOptions).labelSize).toBe('normal');
+    expect((fullName.label as Function)(generateContent(commonContent))).toBe(enContent.label);
+    expect((fullName as FormOptions).labelSize).toBe('l');
     expect(fullName.classes).toBe('govuk-input--width-20');
 
     (fullName.validator as Function)('MockName');
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockName');
-    expect(isFieldLetters).toHaveBeenCalledWith('MockName');
   });
 
   it('should contain submit button', () => {

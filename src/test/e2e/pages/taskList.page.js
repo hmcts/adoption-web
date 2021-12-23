@@ -9,6 +9,8 @@ module.exports = {
   secondApplicant: {
     contactDetailsLink: 'a[id$="applicant2-contact-details"]',
     childrenPlacementOrderLink: 'a[id$="children-placement-order"]',
+    personalDetailsLink: 'a[id$="applicant2-personal-details"]',
+    personalDetailsLinkStatus: 'strong[id$="applicant2-personal-details-status"]',
   },
   childDetails: {
     childrenBirthCertificateLink: 'a[id$="children-birth-certificate"]',
@@ -32,11 +34,22 @@ module.exports = {
   async selectChildPlacementOrderDetails() {
     await I.click(this.secondApplicant.childrenPlacementOrderLink);
   },
+
+  async selectFirstApplicantPersonalDetails() {
+    await I.click(this.primaryApplicant.contactDetailsLink);
+  },
+
   async selectChildrenBirthCertificate() {
     await I.click(this.childDetails.childrenBirthCertificateLink);
   },
 
   async selectFirstApplicantPersonalDetails() {
     await I.click(this.primaryApplicant.personalDetailsLink);
+  },
+  async selectOtherApplicantPersonalDetails() {
+    await I.click(this.secondApplicant.personalDetailsLink);
+  },
+  async verifyOtherApplicantPersonalDetailsStatus() {
+    await I.see('COMPLETED', this.secondApplicant.personalDetailsLinkStatus);
   },
 };

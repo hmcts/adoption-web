@@ -37,11 +37,10 @@ export const getContactDetailsStatus = (userCase: CaseWithId, userType: 'applica
   return SectionStatus.NOT_STARTED;
 };
 
-export const getPersonalDetailsStatus = (
-  userCase: CaseWithId,
-  userType: 'applicant1' | 'applicant2'
-): SectionStatus => {
-  const fullName = userCase[`${userType}FullName`];
+export const getPersonalDetailsStatus = (userCase: CaseWithId, userType: `applicant${1 | 2}`): SectionStatus => {
+  //TODO full name logic should be changed after applicant1 name field is split into 2
+  const fullName =
+    userCase[`${userType}FullName`] || (userCase[`${userType}FirstNames`] && userCase[`${userType}LastNames`]);
   const hasOtherNames = userCase[`${userType}HasOtherNames`];
   const additionalNames = userCase[`${userType}AdditionalNames`] || [];
   const dateOfBirth = userCase[`${userType}DateOfBirth`];
@@ -49,7 +48,7 @@ export const getPersonalDetailsStatus = (
   const nationalities: string[] = userCase[`${userType}AdditionalNationalities`] || [];
   const occupation = userCase[`${userType}Occupation`];
 
-  const dateOfBirthComplete = dateOfBirth && !!dateOfBirth.year && !!dateOfBirth.month && !!dateOfBirth.day;
+  const dateOfBirthComplete = dateOfBirth ? !!dateOfBirth.year && !!dateOfBirth.month && !!dateOfBirth.day : false;
 
   const otherNamesComplete: boolean =
     hasOtherNames === YesOrNo.NO || (hasOtherNames === YesOrNo.YES && !!additionalNames.length);
