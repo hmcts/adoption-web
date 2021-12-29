@@ -78,7 +78,7 @@ export const form: FormContent = {
                       type: 'summarylist',
                       values: [],
                       rows: mapSummaryListContent(
-                        userCase.applicant1AdditionalNationalities || [],
+                        userCase.applicant1AdditionalNationalities,
                         ['Remove'],
                         APPLICANT_1_NATIONALITY
                       ),

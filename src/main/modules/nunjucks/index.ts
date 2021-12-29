@@ -48,7 +48,7 @@ export class Nunjucks {
         hint: i.hint && {
           html: this.env.globals.getContent.call(this, i.hint),
         },
-        divider: i.divider,
+        divider: this.env.globals.getContent.call(this, i.divider),
         conditional: (() => {
           if (i.warning) {
             return {

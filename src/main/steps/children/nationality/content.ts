@@ -6,8 +6,8 @@ import { CHILDREN_NATIONALITY } from '../../urls';
 
 export const en = (): Record<string, unknown> => ({
   section: "The child's details",
-  title: 'What is their nationality?',
-  label: 'Select all options that are relevant to you.',
+  label: 'What is their nationality?',
+  hint: 'Select all options that are relevant to you.',
   british: 'British',
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish',
   irish: 'Irish',
@@ -29,8 +29,8 @@ export const en = (): Record<string, unknown> => ({
 
 export const cy = (): Record<string, unknown> => ({
   section: "The child's details (in Welsh)",
-  title: 'What is their nationality? (in Welsh)',
-  label: 'Select all options that are relevant to you. (in Welsh)',
+  label: 'What is their nationality? (in Welsh)',
+  hint: 'Select all options that are relevant to you. (in Welsh)',
   british: 'British (in Welsh)',
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish (in Welsh)',
   irish: 'Irish (in Welsh)',
@@ -56,7 +56,8 @@ export const form: FormContent = {
       childrenNationality: {
         type: 'checkboxes',
         label: l => l.label,
-        labelSize: 's',
+        labelSize: 'l',
+        hint: l => l.hint,
         validator: value => atLeastOneFieldIsChecked(value) || notSure(value),
         values: [
           {
@@ -96,8 +97,9 @@ export const form: FormContent = {
                       subFields: {
                         addAnotherNationality: {
                           type: 'input',
+                          classes: 'govuk-!-width-two-thirds',
                           label: l => l.childrenNationality,
-                          labelSize: 's',
+                          labelSize: null,
                         },
                         addButton: {
                           type: 'button',
@@ -111,8 +113,9 @@ export const form: FormContent = {
                 : {
                     addAnotherNationality: {
                       type: 'input',
+                      classes: 'govuk-!-width-two-thirds',
                       label: l => l.childrenNationality,
-                      labelSize: 's',
+                      labelSize: null,
                       validator: isFieldFilledIn,
                     },
                     addButton: {

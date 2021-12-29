@@ -12,8 +12,8 @@ const CY = 'cy';
 const EN = 'en';
 const enContent = {
   section: "The child's details",
-  title: 'What is their nationality?',
-  label: 'Select all options that are relevant to you.',
+  label: 'What is their nationality?',
+  hint: 'Select all options that are relevant to you.',
   british: 'British',
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish',
   irish: 'Irish',
@@ -34,8 +34,8 @@ const enContent = {
 };
 const cyContent = {
   section: "The child's details (in Welsh)",
-  title: 'What is their nationality? (in Welsh)',
-  label: 'Select all options that are relevant to you. (in Welsh)',
+  label: 'What is their nationality? (in Welsh)',
+  hint: 'Select all options that are relevant to you. (in Welsh)',
   british: 'British (in Welsh)',
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish (in Welsh)',
   irish: 'Irish (in Welsh)',
@@ -91,10 +91,11 @@ describe('nationality content', () => {
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
 
-    const { type, label, labelSize, values, validator } = fields.childrenNationality as FormOptions;
+    const { type, label, labelSize, hint, values, validator } = fields.childrenNationality as FormOptions;
     expect(type).toBe('checkboxes');
     expect((label as Function)(generatedContent)).toBe(enContent.label);
-    expect(labelSize).toBe('s');
+    expect(labelSize).toBe('l');
+    expect((hint as Function)(generatedContent)).toBe(enContent.hint);
     expect(values).toHaveLength(5);
     expect((values[0].label as Function)(generatedContent)).toBe(enContent.british);
     expect(values[0].value).toBe('British');
@@ -129,7 +130,7 @@ describe('nationality content', () => {
     expect((addAnotherNationality?.label as Function)(generateContent(commonContent([])))).toBe(
       enContent.childrenNationality
     );
-    expect(addAnotherNationality?.labelSize).toBe('s');
+    expect(addAnotherNationality?.labelSize).toBe(null);
     expect(addAnotherNationality?.validator).toBe(isFieldFilledIn);
 
     expect(addButton?.type).toBe('button');
@@ -168,7 +169,7 @@ describe('nationality content', () => {
     expect((addAnotherNationality?.label as Function)(generateContent(commonContent([])))).toBe(
       enContent.childrenNationality
     );
-    expect(addAnotherNationality?.labelSize).toBe('s');
+    expect(addAnotherNationality?.labelSize).toBe(null);
 
     expect(addButton?.type).toBe('button');
     expect((addButton?.label as Function)(generateContent(commonContent([])))).toBe(enContent.add);
