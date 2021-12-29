@@ -4,7 +4,7 @@ import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { generateContent } from './content';
 import NationalityGetController from './get';
 
-describe('children > NationalityGetController', () => {
+describe('applicant1 > NationalityGetController', () => {
   let controller;
   let req;
   let res;
@@ -22,7 +22,7 @@ describe('children > NationalityGetController', () => {
     });
   });
 
-  describe('when there is no childrenAdditionalNationalities in userCase', () => {
+  describe('when there is no applicant1AdditionalNationalities in userCase', () => {
     test('should not redirect', async () => {
       req.query.remove = 'MOCK_COUNTRY';
       await controller.get(req, res);
@@ -30,15 +30,15 @@ describe('children > NationalityGetController', () => {
     });
   });
 
-  describe('when there is remove param in req.query and childrenAdditionalNationalities in userCase', () => {
+  describe('when there is remove param in req.query and applicant1AdditionalNationalities in userCase', () => {
     test('should redirect to same url', async () => {
       req = mockRequest({
         query: { remove: 'MOCK_COUNTRY' },
-        session: { userCase: { childrenAdditionalNationalities: ['MOCK_COUNTRY', 'MOCK_COUNTRY2'] } },
+        session: { userCase: { applicant1AdditionalNationalities: ['MOCK_COUNTRY', 'MOCK_COUNTRY2'] } },
       });
       req.url = '/request?remove=MOCK_COUNTRY';
       await controller.get(req, res);
-      expect(req.session.userCase.childrenAdditionalNationalities).toEqual(['MOCK_COUNTRY2']);
+      expect(req.session.userCase.applicant1AdditionalNationalities).toEqual(['MOCK_COUNTRY2']);
       expect(res.redirect).toHaveBeenCalledWith('/request');
     });
   });
