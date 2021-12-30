@@ -11,7 +11,7 @@ const en = () => ({
   under21Yes: 'You must be 21 or over to adopt a child. This includes any other applicant.',
   errors: {
     under21Eligible: {
-      required: 'Select whether you and the other applicant are aged 21 or over',
+      required: 'Select whether you and the other applicant are aged 21 or over.',
     },
   },
 });
