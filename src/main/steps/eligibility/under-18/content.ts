@@ -12,7 +12,7 @@ const en = () => ({
     'You can only apply to adopt a child if they are under 18 years old on the date your application is submitted.',
   errors: {
     under18Eligible: {
-      required: 'Select whether the child will be under 18 when you submit the application',
+      required: 'Please answer the question',
     },
   },
 });
@@ -26,7 +26,7 @@ const cy = () => ({
     'You can only apply to adopt a child if they are under 18 years old on the date your application is submitted. (in welsh)',
   errors: {
     under18Eligible: {
-      required: 'Select whether the child will be under 18 when you submit the application (in welsh)',
+      required: 'Please answer the question (in welsh)',
     },
   },
 });

@@ -11,7 +11,7 @@ const en = () => ({
   under21Yes: 'You must be 21 or over to adopt a child. This includes any other applicant.',
   errors: {
     under21Eligible: {
-      required: 'Select whether you and the other applicant are aged 21 or over.',
+      required: 'Please answer the question',
     },
   },
 });
@@ -24,7 +24,7 @@ const cy = () => ({
   under21Yes: 'You must be 21 or over to adopt a child. This includes any other applicant. (in welsh)',
   errors: {
     under21Eligible: {
-      required: 'Select whether you and the other applicant are aged 21 or over (in welsh)',
+      required: 'Please answer the question (in welsh)',
     },
   },
 });
