@@ -2,7 +2,12 @@ import { SectionStatus } from '../../app/case/definition';
 import { TranslationFn } from '../../app/controller/GetController';
 import * as urls from '../urls';
 
-import { getContactDetailsStatus, getPersonalDetailsStatus, isApplyingWithComplete } from './utils';
+import {
+  getAdoptionCertificateDetailsStatus,
+  getContactDetailsStatus,
+  getPersonalDetailsStatus,
+  isApplyingWithComplete,
+} from './utils';
 
 const getSectionStatusLabel = (status, statuses, id) => {
   if (status === SectionStatus.COMPLETED) {
@@ -84,6 +89,11 @@ const en = content => {
         getContactDetailsStatus(content.userCase, 'applicant2'),
         statuses,
         'applicant2-contact-details-status'
+      ),
+      adoptionCertificateDetails: getSectionStatusLabel(
+        getAdoptionCertificateDetailsStatus(content.userCase),
+        statuses,
+        'adoption-certificate-details-status'
       ),
     },
     urls,

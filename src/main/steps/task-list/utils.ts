@@ -62,3 +62,14 @@ export const getPersonalDetailsStatus = (userCase: CaseWithId, userType: `applic
     ? SectionStatus.NOT_STARTED
     : SectionStatus.IN_PROGRESS;
 };
+
+export const getAdoptionCertificateDetailsStatus = (userCase: CaseWithId): SectionStatus => {
+  const firstName = userCase['childrenFirstNameAfterAdoption'];
+  const lastName = userCase['childrenLastNameAfterAdoption'];
+
+  return firstName && lastName
+    ? SectionStatus.COMPLETED
+    : !firstName && !lastName
+    ? SectionStatus.NOT_STARTED
+    : SectionStatus.IN_PROGRESS;
+};
