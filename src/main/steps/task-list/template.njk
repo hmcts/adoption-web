@@ -160,29 +160,15 @@
                         {{section3link1}}
                     </a>
                 </span>
-                {% if data['child-nationality'] %}
-                    <strong class="govuk-tag  app-task-list__tag" id="eligibility-completed">Completed</strong>
-                {% else %}
-                    <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
-                {% endif %}
-                <br>
-
+                <p class="govuk-body">{{ status.childrenBirthCertificate | safe }}</p>
             </li>
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a href="#" class="govuk-link" aria-describedby="eligibility-completed">
+                    <a id="adoption-certificate-details" href="{{urls.CHILDREN_FULL_NAME_AFTER_ADOPTION}}" class="govuk-link" aria-describedby="eligibility-completed">
                         {{section3link2}}
                     </a>
                 </span>
-
-                {% if data['adoption-cert'] %}
-                    <strong class="govuk-tag  app-task-list__tag" id="eligibility-completed">Completed</strong>
-                {% else %}
-                    <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
-                {% endif %}
-
-                <br>
-
+                <p class="govuk-body">{{ status.adoptionCertificateDetails | safe }}</p>
             </li>
 
             <li class="app-task-list__item">

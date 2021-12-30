@@ -47,6 +47,16 @@ export const childrenSequence: Step[] = [
   {
     url: Urls.CHILDREN_SEX_AT_BIRTH,
     showInSection: Sections.AboutChildren,
+    getNextStep: () => Urls.CHILDREN_NATIONALITY,
+  },
+  {
+    url: Urls.CHILDREN_NATIONALITY,
+    showInSection: Sections.AboutChildren,
+    getNextStep: () => Urls.TASK_LIST_URL,
+  },
+  {
+    url: Urls.CHILDREN_FULL_NAME_AFTER_ADOPTION,
+    showInSection: Sections.AboutChildren,
     getNextStep: () => Urls.TASK_LIST_URL,
   },
 ];

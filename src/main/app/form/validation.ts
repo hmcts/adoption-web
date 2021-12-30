@@ -21,6 +21,13 @@ export const atLeastOneFieldIsChecked: Validator = fields => {
   }
 };
 
+export const notSure: Validator = fields => {
+  const arr = fields as string[];
+  if (arr.length > 1 && arr.find(s => s === 'Not sure')) {
+    return 'required';
+  }
+};
+
 export const areDateFieldsFilledIn: DateValidator = fields => {
   if (typeof fields !== 'object' || Object.keys(fields).length !== 3) {
     return 'required';
