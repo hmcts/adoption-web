@@ -75,6 +75,23 @@ describe('PlacementOrderGetController', () => {
     });
   });
 
+  describe('when there is "change" query param', () => {
+    beforeEach(() => {
+      req = mockRequest({ query: { change: 'MOCK_ID' }, session: { userCase: { placementOrders: [] } } });
+      req.url = '/request?change=MOCK_ID';
+    });
+
+    test('should set the selectedPlacementOrderId in userCase', async () => {
+      await controller.get(req, res);
+      expect(req.session.userCase.selectedPlacementOrderId).toBe('MOCK_ID');
+    });
+
+    test('should remove the query param and redirect', async () => {
+      await controller.get(req, res);
+      expect(res.redirect).toHaveBeenCalledWith('/request');
+    });
+  });
+
   test('saves the placementOrders and selectedPlacementOrderId in session', async () => {
     await controller.get(req, res);
     expect(req.session.save).toHaveBeenCalled();

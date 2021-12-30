@@ -44,6 +44,11 @@ export const childrenSequence: Step[] = [
         : Urls.TASK_LIST_URL,
   },
   {
+    url: Urls.CHILDREN_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS,
+    showInSection: Sections.AboutChildren,
+    getNextStep: () => Urls.CHILDREN_PLACEMENT_ORDER_SUMMARY,
+  },
+  {
     url: Urls.CHILDREN_FULL_NAME,
     showInSection: Sections.AboutChildren,
     getNextStep: () => Urls.CHILDREN_DATE_OF_BIRTH,

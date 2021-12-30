@@ -66,7 +66,13 @@ describe('children > placement-order-summary content', () => {
       {
         key: { text: 'Placement Order', classes: 'font-normal' },
         actions: {
-          items: [{ href: '#', text: 'Change', visuallyHiddenText: 'name' }],
+          items: [
+            {
+              href: '/children/placement-order-check-your-answers?change=MOCK_ID',
+              text: 'Change',
+              visuallyHiddenText: 'change',
+            },
+          ],
         },
       },
     ]);

@@ -9,13 +9,18 @@ export default class PlacementOrderGetController extends GetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
     const placementOrders = req.session.userCase.placementOrders || [];
 
-    let addedNewPlacementOrder = false;
+    let redirect = false;
     if (req.query.add) {
       req.session.userCase.selectedPlacementOrderId = `${req.query.add}`;
       req.session.userCase.addAnotherPlacementOrder = undefined;
       delete req.query.add;
       req.url = req.url.substring(0, req.url.indexOf('?'));
-      addedNewPlacementOrder = true;
+      redirect = true;
+    } else if (req.query.change) {
+      req.session.userCase.selectedPlacementOrderId = `${req.query.change}`;
+      delete req.query.change;
+      req.url = req.url.substring(0, req.url.indexOf('?'));
+      redirect = true;
     } else if (!req.session.userCase.selectedPlacementOrderId) {
       //generate random id for placement order
       req.session.userCase.selectedPlacementOrderId = `${Date.now()}`;
@@ -38,7 +43,7 @@ export default class PlacementOrderGetController extends GetController {
         throw err;
       }
 
-      if (addedNewPlacementOrder) {
+      if (redirect) {
         res.redirect(req.url);
       } else {
         super.get(req, res);

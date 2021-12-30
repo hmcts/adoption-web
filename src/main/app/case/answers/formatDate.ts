@@ -1,7 +1,10 @@
 import dayjs from 'dayjs';
+import 'dayjs/locale/cy';
 
 import { isDateInputInvalid } from '../../form/validation';
 import type { CaseDate } from '../case';
 
-export const getFormattedDate = (date: CaseDate | undefined): string | false =>
-  date && !isDateInputInvalid(date) ? dayjs(Object.values(date).join('-')).format('D MMMM YYYY') : false;
+export const getFormattedDate = (date: CaseDate | undefined, locale = 'en'): string | false =>
+  date && !isDateInputInvalid(date)
+    ? dayjs(`${date.day}-${date.month}-${date.year}`, 'D-M-YYYY').locale(locale).format('D MMMM YYYY')
+    : false;

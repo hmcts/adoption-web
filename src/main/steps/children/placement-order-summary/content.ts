@@ -2,6 +2,7 @@ import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
+import { CHILDREN_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS } from '../../../steps/urls';
 
 const placementOrderListItems = (userCase, content) => {
   return userCase.placementOrders?.map(item => {
@@ -13,9 +14,9 @@ const placementOrderListItems = (userCase, content) => {
       actions: {
         items: [
           {
-            href: '#',
+            href: `${CHILDREN_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS}?change=${item.placementOrderId}`,
             text: content.change,
-            visuallyHiddenText: 'name',
+            visuallyHiddenText: 'change',
           },
         ],
       },
