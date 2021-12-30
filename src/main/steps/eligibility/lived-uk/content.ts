@@ -13,7 +13,7 @@ const en = () => ({
   hint: 'You can answer yes if your permanent home is here.',
   errors: {
     livedUKEligible: {
-      required: 'Select whether you have lived in the UK, Channel Islands or Isle of Man for at least 12 months',
+      required: 'Please answer the question',
     },
   },
 });
@@ -28,8 +28,7 @@ const cy = () => ({
   hint: 'You can answer yes if your permanent home is here. (in welsh)',
   errors: {
     livedUKEligible: {
-      required:
-        'Select whether you have lived in the UK, Channel Islands or Isle of Man for at least 12 months (in welsh)',
+      required: 'Please answer the question (in welsh)',
     },
   },
 });
