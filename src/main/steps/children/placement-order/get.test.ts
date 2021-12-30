@@ -53,7 +53,29 @@ describe('PlacementOrderGetController', () => {
     });
   });
 
-  it('saves the placementOrders and selectedPlacementOrderId in session', async () => {
+  describe('when there is "add" query param', () => {
+    beforeEach(() => {
+      req = mockRequest({ query: { add: 'MOCK_ID' }, session: { userCase: { placementOrders: [] } } });
+      req.url = '/request?add=MOCK_ID';
+    });
+
+    test('should create a blank placementOrder with "add" query param\'s value as placementOrderId', async () => {
+      await controller.get(req, res);
+      expect(req.session.userCase.placementOrders).toEqual([{ placementOrderId: 'MOCK_ID' }]);
+    });
+
+    test('should reset the addAnotherPlacementOrder in userCase', async () => {
+      await controller.get(req, res);
+      expect(req.session.userCase.addAnotherPlacementOrder).toBeUndefined();
+    });
+
+    test('should remove the query param and redirect', async () => {
+      await controller.get(req, res);
+      expect(res.redirect).toHaveBeenCalledWith('/request');
+    });
+  });
+
+  test('saves the placementOrders and selectedPlacementOrderId in session', async () => {
     await controller.get(req, res);
     expect(req.session.save).toHaveBeenCalled();
   });
