@@ -13,7 +13,9 @@ const enContent = {
   errors: {
     placementOrderDate: {
       required: 'Enter the placement order date',
-      incomplete: 'Date must include a [day/month/year]',
+      incompleteDay: 'Date must include a day',
+      incompleteMonth: 'Date must include a month',
+      incompleteYear: 'Date must include a year',
       invalidDate: 'Enter a real date',
       invalidDateInFuture: 'Date must be in the past',
     },
@@ -27,8 +29,10 @@ const cyContent = {
   errors: {
     placementOrderDate: {
       required: 'Enter the placement order date (in welsh)',
-      incomplete: 'Date must include a [day/month/year] (in welsh)',
-      invalidDate: 'Enter a real date (in welsh)',
+      incompleteDay: 'Date must include a day (in welsh)',
+      incompleteMonth: 'Date must include a month (in welsh)',
+      incompleteYear: 'Date must include a year (in welsh)',
+      invalidDate: 'Enter a real date (in welsh) (in welsh)',
       invalidDateInFuture: 'Date must be in the past (in welsh)',
     },
   },

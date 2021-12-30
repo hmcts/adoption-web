@@ -11,6 +11,40 @@ import { generateContent } from './content';
 
 jest.mock('../../../app/form/validation');
 
+const enContent = {
+  section: "The child's details",
+  label: "What is the child's date of birth?",
+  hint: "For example, 31 3 2012. This should be on their birth certificate. Ask the adoption agency or social worker if you're not sure.",
+  errors: {
+    childrenDateOfBirth: {
+      required: 'Enter their date of birth',
+      incompleteDay: 'Date of birth must include a day',
+      incompleteMonth: 'Date of birth must include a month',
+      incompleteYear: 'Date of birth must include a year',
+      invalidDate: 'Date of birth must be a real date',
+      invalidDateInFuture: 'Date of birth must be in the past',
+      invalidDateOver18: 'Child is 18 or over and cannot be adopted',
+    },
+  },
+};
+
+const cyContent = {
+  section: "The child's details (in welsh)",
+  label: "What is the child's date of birth? (in welsh)",
+  hint: "For example, 31 3 2012. This should be on their birth certificate. Ask the adoption agency or social worker if you're not sure. (in welsh)",
+  errors: {
+    childrenDateOfBirth: {
+      required: 'Enter their date of birth (in welsh)',
+      incompleteDay: 'Date of birth must include a day (in welsh)',
+      incompleteMonth: 'Date of birth must include a month (in welsh)',
+      incompleteYear: 'Date of birth must include a year (in welsh)',
+      invalidDate: 'Date of birth must be a real date (in welsh)',
+      invalidDateInFuture: 'Date of birth must be in the past (in welsh)',
+      invalidDateOver18: 'Child is 18 or over and cannot be adopted (in welsh)',
+    },
+  },
+};
+
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('children date-of-birth content', () => {
   const commonContent = { language: 'en', userCase: {} } as CommonContent;
@@ -24,48 +58,18 @@ describe('children date-of-birth content', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual("The child's details");
-    expect(generatedContent.label).toEqual("What is the child's date of birth?");
-    expect(generatedContent.hint).toEqual(
-      "For example, 31 3 2012. This should be on their birth certificate. Ask the adoption agency or social worker if you're not sure."
-    );
-    expect((generatedContent.errors as any).childrenDateOfBirth.required).toEqual('Enter their date of birth');
-    expect((generatedContent.errors as any).childrenDateOfBirth.incomplete).toEqual(
-      'Date of birth must include a [day/month/year]'
-    );
-    expect((generatedContent.errors as any).childrenDateOfBirth.invalidDate).toEqual(
-      'Date of birth must be a real date'
-    );
-    expect((generatedContent.errors as any).childrenDateOfBirth.invalidDateInFuture).toEqual(
-      'Date of birth must be in the past'
-    );
-    expect((generatedContent.errors as any).childrenDateOfBirth.invalidDateOver18).toEqual(
-      'Child is 18 or over and cannot be adopted'
-    );
+    expect(generatedContent.section).toEqual(enContent.section);
+    expect(generatedContent.label).toEqual(enContent.label);
+    expect(generatedContent.hint).toEqual(enContent.hint);
+    expect(generatedContent.errors).toEqual(enContent.errors);
   });
 
   test('should return correct welsh content', () => {
     generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual("The child's details (in welsh)");
-    expect(generatedContent.label).toEqual("What is the child's date of birth? (in welsh)");
-    expect(generatedContent.hint).toEqual(
-      "For example, 31 3 2012. This should be on their birth certificate. Ask the adoption agency or social worker if you're not sure. (in welsh)"
-    );
-    expect((generatedContent.errors as any).childrenDateOfBirth.required).toEqual(
-      'Enter their date of birth (in welsh)'
-    );
-    expect((generatedContent.errors as any).childrenDateOfBirth.incomplete).toEqual(
-      'Date of birth must include a [day/month/year] (in welsh)'
-    );
-    expect((generatedContent.errors as any).childrenDateOfBirth.invalidDate).toEqual(
-      'Date of birth must be a real date (in welsh)'
-    );
-    expect((generatedContent.errors as any).childrenDateOfBirth.invalidDateInFuture).toEqual(
-      'Date of birth must be in the past (in welsh)'
-    );
-    expect((generatedContent.errors as any).childrenDateOfBirth.invalidDateOver18).toEqual(
-      'Child is 18 or over and cannot be adopted (in welsh)'
-    );
+    expect(generatedContent.section).toEqual(cyContent.section);
+    expect(generatedContent.label).toEqual(cyContent.label);
+    expect(generatedContent.hint).toEqual(cyContent.hint);
+    expect(generatedContent.errors).toEqual(cyContent.errors);
   });
 
   test('should contain childrenDateOfBirth field', () => {

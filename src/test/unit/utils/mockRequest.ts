@@ -8,6 +8,7 @@ export const mockRequest = ({
   cookies = {},
   userCase = {},
   appLocals = {},
+  query = {},
 } = {}): AppRequest =>
   ({
     headers: { 'accept-language': 'en', ...headers },
@@ -23,7 +24,7 @@ export const mockRequest = ({
         error: jest.fn(),
       },
     },
-    query: {},
+    query: { ...query },
     session: {
       user: {
         id: '123456',

@@ -4,6 +4,8 @@ import * as urls from '../urls';
 
 import {
   getAdoptionCertificateDetailsStatus,
+  getChildrenBirthCertificateStatus,
+  getChildrenPlacementOrderStatus,
   getContactDetailsStatus,
   getPersonalDetailsStatus,
   isApplyingWithComplete,
@@ -90,6 +92,16 @@ const en = content => {
         statuses,
         'applicant2-contact-details-status'
       ),
+      childrenBirthCertificate: getSectionStatusLabel(
+        getChildrenBirthCertificateStatus(content.userCase),
+        statuses,
+        'children-birth-certificate-details-status'
+      ),
+      childrenPlacementOrder: getSectionStatusLabel(
+        getChildrenPlacementOrderStatus(content.userCase),
+        statuses,
+        'children-placement-order-details-status'
+      ),
       adoptionCertificateDetails: getSectionStatusLabel(
         getAdoptionCertificateDetailsStatus(content.userCase),
         statuses,
@@ -170,6 +182,21 @@ const cy = content => {
         getContactDetailsStatus(content.userCase, 'applicant2'),
         statuses,
         'applicant2-contact-details-status'
+      ),
+      childrenBirthCertificate: getSectionStatusLabel(
+        getChildrenBirthCertificateStatus(content.userCase),
+        statuses,
+        'children-birth-certificate-details-status'
+      ),
+      childrenPlacementOrder: getSectionStatusLabel(
+        getChildrenPlacementOrderStatus(content.userCase),
+        statuses,
+        'children-placement-order-details-status'
+      ),
+      adoptionCertificateDetails: getSectionStatusLabel(
+        getAdoptionCertificateDetailsStatus(content.userCase),
+        statuses,
+        'adoption-certificate-details-status'
       ),
     },
     urls,

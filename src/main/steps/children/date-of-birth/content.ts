@@ -16,7 +16,9 @@ const en = () => ({
   errors: {
     childrenDateOfBirth: {
       required: 'Enter their date of birth',
-      incomplete: 'Date of birth must include a [day/month/year]',
+      incompleteDay: 'Date of birth must include a day',
+      incompleteMonth: 'Date of birth must include a month',
+      incompleteYear: 'Date of birth must include a year',
       invalidDate: 'Date of birth must be a real date',
       invalidDateInFuture: 'Date of birth must be in the past',
       invalidDateOver18: 'Child is 18 or over and cannot be adopted',
@@ -31,7 +33,9 @@ const cy = () => ({
   errors: {
     childrenDateOfBirth: {
       required: 'Enter their date of birth (in welsh)',
-      incomplete: 'Date of birth must include a [day/month/year] (in welsh)',
+      incompleteDay: 'Date of birth must include a day (in welsh)',
+      incompleteMonth: 'Date of birth must include a month (in welsh)',
+      incompleteYear: 'Date of birth must include a year (in welsh)',
       invalidDate: 'Date of birth must be a real date (in welsh)',
       invalidDateInFuture: 'Date of birth must be in the past (in welsh)',
       invalidDateOver18: 'Child is 18 or over and cannot be adopted (in welsh)',

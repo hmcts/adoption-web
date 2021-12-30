@@ -85,11 +85,12 @@ describe('nationality content', () => {
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
 
-    const { type, label, labelSize, values, validator } = fields.applicant1Nationality as FormOptions;
+    const { type, label, labelSize, hint, values, validator } = fields.applicant1Nationality as FormOptions;
 
     expect(type).toBe('checkboxes');
     expect((label as Function)(generateContent(commonContent([])))).toBe(enContent.label);
     expect(labelSize).toBe('l');
+    expect((hint as Function)(generatedContent)).toBe(enContent.hint);
     expect(values).toHaveLength(3);
     expect((values[0].label as Function)(generateContent(commonContent([])))).toBe(enContent.british);
     expect(values[0].value).toBe('British');
