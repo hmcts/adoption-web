@@ -3,7 +3,7 @@ import path from 'path';
 import express from 'express';
 import nunjucks from 'nunjucks';
 
-import { DivorceOrDissolution } from '../../app/case/definition'; //TODO correct this
+import { Adoption } from '../../app/case/definition'; //TODO correct this//DivorceOrDissolution
 import { FormInput } from '../../app/form/Form';
 
 export class Nunjucks {
@@ -93,10 +93,8 @@ export class Nunjucks {
     app.use((req, res, next) => {
       res.locals.host = req.headers['x-forwarded-host'] || req.hostname;
       res.locals.pagePath = req.path;
-      res.locals.serviceType =
-        res.locals.host.includes('civil') || 'forceCivilMode' in req.query //TODO correct this
-          ? DivorceOrDissolution.DISSOLUTION
-          : DivorceOrDissolution.DIVORCE;
+      console.log("index.ts 97 es.locals.host: "+res.locals.host+" req.query: "+req.query);
+      res.locals.serviceType =Adoption.ADOPTION;
       next();
     });
   }

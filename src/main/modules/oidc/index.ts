@@ -3,7 +3,7 @@ import { Application, NextFunction, Response } from 'express';
 
 import { getRedirectUrl, getUserDetails } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
-import { DivorceOrDissolution, State, YesOrNo } from '../../app/case/definition';
+//import { DivorceOrDissolution, State, YesOrNo } from '../../app/case/definition';
 // import { ApplicationType, State } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
 import { CALLBACK_URL, ELIGIBILITY_URL, SIGN_IN_URL, SIGN_OUT_URL } from '../../steps/urls';
@@ -38,30 +38,34 @@ export class OidcMiddleware {
 
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
+        console.log("index.ts 41 "+req.path);
         if (req.path.startsWith(ELIGIBILITY_URL)) {
           return next();
         }
         if (req.session?.user) {
           res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
+
           //TODO remove hardcoding instead get or create case
-          req.session.userCase = req.session.userCase || {
-            id: '123',
-            state: State.Draft,
-            divorceOrDissolution: DivorceOrDissolution.DIVORCE,
-            applicant1ConfirmReceipt: YesOrNo.NO,
-            applicant2ConfirmReceipt: YesOrNo.NO,
-            connections: [],
-            applicant1AddressPrivate: YesOrNo.NO,
-            applicant2AddressPrivate: YesOrNo.NO,
-            documentsGenerated: [],
-            payments: [],
-            applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },
-            applicant2Confirmation: YesOrNo.NO,
-            applicant2Explanation: YesOrNo.NO,
-          };
-          // req.session.userCase =
-          //   req.session.userCase || (await req.locals.api.getOrCreateCase(res.locals.serviceType, req.session.user));
+          // req.session.userCase = req.session.userCase || {
+          //   id: '123',
+          //   state: State.Draft,
+          //   divorceOrDissolution: DivorceOrDissolution.DIVORCE,
+          //   applicant1ConfirmReceipt: YesOrNo.NO,
+          //   applicant2ConfirmReceipt: YesOrNo.NO,
+          //   connections: [],
+          //   applicant1AddressPrivate: YesOrNo.NO,
+          //   applicant2AddressPrivate: YesOrNo.NO,
+          //   documentsGenerated: [],
+          //   payments: [],
+          //   applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },
+          //   applicant2Confirmation: YesOrNo.NO,
+          //   applicant2Explanation: YesOrNo.NO,
+          // };
+          console.log("index.ts 65 req.session.userCase "+ req.session.userCase);
+          req.session.userCase =
+          req.session.userCase || (await req.locals.api.getOrCreateCase(res.locals.serviceType, req.session.user));
+          console.log("index.ts 68");
           return next();
         }
         res.redirect(SIGN_IN_URL);

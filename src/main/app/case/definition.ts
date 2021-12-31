@@ -131,6 +131,7 @@ export interface Applicant {
   FirstName: string;
   MiddleName: string;
   LastName: string;
+  FullName: string;
   Email: string;
   AgreedToReceiveEmails: YesOrNo;
   ConfirmReceipt: YesOrNo;
@@ -265,6 +266,7 @@ export interface PlacementOrder {
 
 export interface CaseData {
   applicationType: ApplicationType;
+  applyingWith: ApplyingWith;
   divorceOrDissolution: DivorceOrDissolution;
   labelContentApplicant2: string;
   labelContentTheApplicant2: string;
@@ -276,6 +278,7 @@ export interface CaseData {
   applicant1FirstName: string;
   applicant1MiddleName: string;
   applicant1LastName: string;
+  applicant1FullName: string;
   applicant1Email: string;
   applicant1AgreedToReceiveEmails: YesOrNo;
   applicant1ConfirmReceipt: YesOrNo;
@@ -655,6 +658,7 @@ export interface LabelContent {
   UnionType: string;
   UnionTypeUC: string;
   ApplicationType: ApplicationType;
+  ApplyingWith: ApplyingWith;
 }
 
 export interface MarriageDetails {
@@ -917,6 +921,11 @@ export const enum ApplicationType {
   JOINT_APPLICATION = 'jointApplication',
 }
 
+export const enum ApplyingWith {
+  ALONE = "alone",
+  WITH_SPOUSE_OR_CIVIL_PARTNER = "withSpouseOrCivilPartner",
+}
+
 export const enum ChangedNameHow {
   MARRIAGE_CERTIFICATE = 'marriageCertificate',
   DEED_POLL = 'deedPoll',
@@ -956,6 +965,10 @@ export const enum Court {
   SOUTH_WEST = 'southWest',
   NORTH_WEST = 'northWest',
   BURY_ST_EDMUNDS = 'buryStEdmunds',
+}
+
+export const enum Adoption {
+  ADOPTION = 'adoption',
 }
 
 export const enum DivorceOrDissolution {
@@ -1469,8 +1482,8 @@ export const enum HttpStatus {
   NOT_EXTENDED = 'NOT_EXTENDED',
   NETWORK_AUTHENTICATION_REQUIRED = 'NETWORK_AUTHENTICATION_REQUIRED',
 }
-export const CASE_TYPE = 'NFD';
-export const JURISDICTION = 'DIVORCE';
+export const CASE_TYPE = 'A58';
+export const JURISDICTION = 'ADOPTION';
 export const CITIZEN_SUBMIT = 'citizen-submit-application';
 export const CITIZEN_INVITE_APPLICANT_2 = 'citizen-invite-applicant2';
 export const CITIZEN_CREATE = 'citizen-create-application';

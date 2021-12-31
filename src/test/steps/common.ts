@@ -6,7 +6,7 @@ import { Logger, transports } from 'winston';
 import { OidcResponse } from '../../main/app/auth/user/oidc';
 import { CaseApi, getCaseApi } from '../../main/app/case/CaseApi';
 import { Case } from '../../main/app/case/case';
-import { DivorceOrDissolution, State } from '../../main/app/case/definition';
+import { Adoption, State } from '../../main/app/case/definition';
 import { UserDetails } from '../../main/app/controller/AppRequest';
 import { RELATIONSHIP_DATE_URL, WHERE_YOUR_LIVES_ARE_BASED_URL } from '../../main/steps/urls';
 import { autoLogin, config as testConfig } from '../config';
@@ -181,7 +181,7 @@ When('I enter my valid case reference and valid access code', async () => {
   const user = testConfig.GetCurrentUser();
   const testUser = await iGetTheTestUser(user);
   const caseApi = iGetTheCaseApi(testUser);
-  const userCase = await caseApi.getOrCreateCase(DivorceOrDissolution.DIVORCE, testUser);
+  const userCase = await caseApi.getOrCreateCase(Adoption.ADOPTION, testUser);
   const fetchedCase = await caseApi.getCaseById(userCase.id);
 
   const caseReference = userCase.id;
@@ -210,7 +210,7 @@ When('a case worker issues the application', async () => {
   const user = testConfig.GetCurrentUser();
   const testUser = await iGetTheTestUser(user);
   const caseApi = iGetTheCaseApi(testUser);
-  const userCase = await caseApi.getOrCreateCase(DivorceOrDissolution.DIVORCE, testUser);
+  const userCase = await caseApi.getOrCreateCase(Adoption.ADOPTION, testUser);
   const caseReference = userCase.id;
 
   if (!caseReference) {
