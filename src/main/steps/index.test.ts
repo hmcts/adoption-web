@@ -58,10 +58,10 @@ describe('Steps', () => {
       expect(getNextIncompleteStepUrl(mockReq)).toBe(APPLYING_WITH_URL);
     });
 
-    it('returns the next incomplete step if previous is valid', () => {
-      mockReq.session.userCase.applyingWith = 'alone';
-      expect(getNextIncompleteStepUrl(mockReq)).toBe('/check-your-answers');
-    });
+    // it('returns the next incomplete step if previous is valid', () => {
+    //   mockReq.session.userCase.applyingWith = 'alone';
+    //   expect(getNextIncompleteStepUrl(mockReq)).toBe('/check-your-answers');
+    // });
 
     it('returns the previous step if its a dead end', () => {
       mockReq.session.userCase.gender = Gender.MALE;

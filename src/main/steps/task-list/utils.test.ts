@@ -1,9 +1,10 @@
 import { CaseWithId } from '../../app/case/case';
-import { DivorceOrDissolution, State, YesOrNo } from '../../app/case/definition';
+import { Adoption, ApplyingWith, DivorceOrDissolution, State, YesOrNo } from '../../app/case/definition';
 
 import { getContactDetailsStatus, isApplyingWithComplete } from './utils';
 const userCase: CaseWithId = {
   id: '123',
+  adoption: Adoption.ADOPTION,
   state: State.Draft,
   divorceOrDissolution: DivorceOrDissolution.DIVORCE,
   applicant1ConfirmReceipt: YesOrNo.NO,
@@ -27,7 +28,7 @@ describe('utils', () => {
     });
 
     test('Should return true if applyingWith is present', async () => {
-      userCase.applyingWith = 'alone';
+      userCase.applyingWith = ApplyingWith.ALONE;
       const isValid = isApplyingWithComplete(userCase);
 
       expect(isValid).toStrictEqual(true);
