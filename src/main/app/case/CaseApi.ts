@@ -8,11 +8,11 @@ import { UserDetails } from '../controller/AppRequest';
 import { Case, CaseWithId } from './case';
 import { CaseAssignedUserRoles } from './case-roles';
 import {
+  Adoption,
   CASE_TYPE,
   CITIZEN_ADD_PAYMENT,
   CITIZEN_CREATE,
   CaseData,
-  Adoption,
   JURISDICTION,
   ListValue,
   Payment,
@@ -37,17 +37,16 @@ export class CaseApi {
   private async getCase(serviceType: Adoption): Promise<CaseWithId | false> {
     const cases = await this.getCases();
 
-    const serviceCases = cases;//cases.filter(c => c.case_data.divorceOrDissolution === serviceType);
-
-    if(serviceCases.length==0){
+    const serviceCases = cases; //cases.filter(c => c.case_data.divorceOrDissolution === serviceType);
+    console.log('caseapi.ts 41' + serviceType);
+    if (serviceCases.length === 0) {
       return false;
-    }
-    else if(serviceCases.length>0){
-        const { id, state, case_data: caseData } = serviceCases[0];
-        return { ...fromApiFormat(caseData), id: id.toString(), state };
-    }else{
+    } else if (serviceCases.length > 0) {
+      const { id, state, case_data: caseData } = serviceCases[0];
+      return { ...fromApiFormat(caseData), id: id.toString(), state };
+    } else {
       throw new Error('Too many cases assigned to user.');
-    }    
+    }
     // switch (serviceCases.length) {
     //   case 0: {
     //     return false;
@@ -90,6 +89,7 @@ export class CaseApi {
     const tokenResponse: AxiosResponse<CcdTokenResponse> = await this.axios.get(
       `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
     );
+    console.log('caseapi.ts ' + serviceType);
     const token = tokenResponse.data.token;
     const event = { id: CITIZEN_CREATE };
     const data = {

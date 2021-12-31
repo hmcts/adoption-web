@@ -36,43 +36,43 @@ describe('CaseApi', () => {
 
   const serviceType = Adoption.ADOPTION;
 
-  test.each([DivorceOrDissolution.DIVORCE, DivorceOrDissolution.DISSOLUTION])(
-    'Should return %s case data response',
-    async caseType => {
-      mockedAxios.get.mockResolvedValue({
-        data: [
-          {
-            id: '1234',
-            state: State.Draft,
-            case_data: {
-              divorceOrDissolution: 'divorce',
-              applicationFeeOrderSummary: [{ test: 'fees' }],
-              applicationPayments: [{ test: 'payment' }],
-            },
-          },
-          {
-            id: '1234',
-            state: State.Draft,
-            case_data: {
-              divorceOrDissolution: 'dissolution',
-              applicationFeeOrderSummary: [{ test: 'fees' }],
-              applicationPayments: [{ test: 'payment' }],
-            },
-          },
-        ],
-      });
+  //test.each([DivorceOrDissolution.DIVORCE, DivorceOrDissolution.DISSOLUTION])(
+  //'Should return %s case data response',
+  // async caseType => {
+  //   mockedAxios.get.mockResolvedValue({
+  //     data: [
+  //       {
+  //         id: '1234',
+  //         state: State.Draft,
+  //         case_data: {
+  //           divorceOrDissolution: 'divorce',
+  //           applicationFeeOrderSummary: [{ test: 'fees' }],
+  //           applicationPayments: [{ test: 'payment' }],
+  //         },
+  //       },
+  //       {
+  //         id: '1234',
+  //         state: State.Draft,
+  //         case_data: {
+  //           divorceOrDissolution: 'dissolution',
+  //           applicationFeeOrderSummary: [{ test: 'fees' }],
+  //           applicationPayments: [{ test: 'payment' }],
+  //         },
+  //       },
+  //     ],
+  //  });
 
-      // const userCase = await api.getOrCreateCase(caseType, userDetails);
+  // const userCase = await api.getOrCreateCase(caseType, userDetails);
 
-      // expect(userCase).toStrictEqual({
-      //   id: '1234',
-      //   state: State.Draft,
-      //   divorceOrDissolution: caseType,
-      //   applicationFeeOrderSummary: [{ test: 'fees' }],
-      //   payments: [{ test: 'payment' }],
-      // });
-    }
-  );
+  // expect(userCase).toStrictEqual({
+  //   id: '1234',
+  //   state: State.Draft,
+  //   divorceOrDissolution: caseType,
+  //   applicationFeeOrderSummary: [{ test: 'fees' }],
+  //   payments: [{ test: 'payment' }],
+  // });
+  //   }
+  // );
 
   test('Should throw error when case could not be retrieved', async () => {
     mockedAxios.get.mockRejectedValue({

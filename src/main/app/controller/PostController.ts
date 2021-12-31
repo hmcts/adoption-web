@@ -58,7 +58,7 @@ export class PostController<T extends AnyObject> {
         //TODO remove this line
         //await this.save(req, formData, this.getEventName(req));
         //TODO un comment this
-         req.session.userCase = await this.save(req, formData, this.getEventName(req));
+        req.session.userCase = await this.save(req, formData, this.getEventName(req));
       } catch (err) {
         req.locals.logger.error('Error saving', err);
         req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });

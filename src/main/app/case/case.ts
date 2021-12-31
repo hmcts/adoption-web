@@ -1,9 +1,9 @@
 import { AnyObject } from '../controller/PostController';
 
-import {  
+import {
   Adoption,
   ApplicationType,
-  ApplyingWith,  
+  ApplyingWith,
   CaseData,
   ChangedNameHow,
   DateAsString,
@@ -108,7 +108,7 @@ export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data
       result[value] = data[field];
     }
   }
-  console.log("case.ts 111"+JSON.stringify(result));
+  console.log('case.ts 111' + JSON.stringify(result));
   return result as OutputFormat;
 }
 
