@@ -15,7 +15,7 @@ const enContent = {
   label: 'Do you want to add another order?',
   hint: 'We need details of all orders already in place. Your social worker or adoption agency can help provide these details.',
   errors: {
-    addAnotherOrder: {
+    addAnotherPlacementOrder: {
       required: 'Please select an answer',
     },
   },
@@ -30,7 +30,7 @@ const cyContent = {
   label: 'Do you want to add another order? (in welsh)',
   hint: 'We need details of all orders already in place. Your social worker or adoption agency can help provide these details. (in welsh)',
   errors: {
-    addAnotherOrder: {
+    addAnotherPlacementOrder: {
       required: 'Please select an answer (in welsh)',
     },
   },
@@ -49,9 +49,17 @@ describe('children > placement-order-summary content', () => {
           placementOrderCourt: 'MOCK_COURT',
           placementOrderDate: {},
         },
+        {
+          placementOrderId: 'MOCK_ID2',
+          placementOrderType: 'MOCK_TYPE',
+          placementOrderNumber: 'MOCK_NUMBER2',
+          placementOrderCourt: 'MOCK_COURT2',
+          placementOrderDate: { day: '12', month: '10', year: '' },
+        },
       ],
     },
   } as CommonContent;
+
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
     expect(generatedContent.section).toEqual(enContent.section);
@@ -65,12 +73,31 @@ describe('children > placement-order-summary content', () => {
     expect(generatedContent.placementOrderListItems).toEqual([
       {
         key: { text: 'Placement Order', classes: 'font-normal' },
+        value: { html: '' },
         actions: {
           items: [
             {
               href: '/children/placement-order-check-your-answers?change=MOCK_ID',
               text: 'Change',
               visuallyHiddenText: 'change',
+            },
+          ],
+        },
+      },
+      {
+        key: { text: 'MOCK_TYPE', classes: 'font-normal' },
+        value: { html: '<strong class="govuk-tag govuk-tag--yellow">Incomplete</strong>' },
+        actions: {
+          items: [
+            {
+              href: '/children/placement-order-check-your-answers?change=MOCK_ID2',
+              text: 'Change',
+              visuallyHiddenText: 'change',
+            },
+            {
+              href: '/children/placement-order-summary?remove=MOCK_ID2',
+              text: 'Remove',
+              visuallyHiddenText: 'remove',
             },
           ],
         },

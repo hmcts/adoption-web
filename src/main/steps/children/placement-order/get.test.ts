@@ -92,6 +92,49 @@ describe('PlacementOrderGetController', () => {
     });
   });
 
+  describe('when there is "remove" query param', () => {
+    beforeEach(() => {
+      req = mockRequest({
+        query: { remove: 'MOCK_ID2' },
+        session: {
+          userCase: {
+            addAnotherPlacementOrder: 'Yes',
+            selectedPlacementOrderId: 'MOCK_ID2',
+            placementOrders: [
+              { placementOrderId: 'MOCK_ID' },
+              { placementOrderId: 'MOCK_ID2' },
+              { placementOrderId: 'MOCK_ID3' },
+            ],
+          },
+        },
+      });
+      req.url = '/request?change=MOCK_ID2';
+    });
+
+    test('should remove the placementOrder from userCase placementOrders list', async () => {
+      await controller.get(req, res);
+      expect(req.session.userCase.placementOrders).toEqual([
+        { placementOrderId: 'MOCK_ID' },
+        { placementOrderId: 'MOCK_ID3' },
+      ]);
+    });
+
+    test('should set the selectedPlacementOrderId in userCase', async () => {
+      await controller.get(req, res);
+      expect(req.session.userCase.selectedPlacementOrderId).toBe('MOCK_ID');
+    });
+
+    test('should reset the addAnotherPlacementOrder in userCase', async () => {
+      await controller.get(req, res);
+      expect(req.session.userCase.addAnotherPlacementOrder).toBeUndefined();
+    });
+
+    test('should remove the query param and redirect', async () => {
+      await controller.get(req, res);
+      expect(res.redirect).toHaveBeenCalledWith('/request');
+    });
+  });
+
   test('saves the placementOrders and selectedPlacementOrderId in session', async () => {
     await controller.get(req, res);
     expect(req.session.save).toHaveBeenCalled();

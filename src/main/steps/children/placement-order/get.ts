@@ -7,7 +7,7 @@ import { GetController } from '../../../app/controller/GetController';
 @autobind
 export default class PlacementOrderGetController extends GetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
-    const placementOrders = req.session.userCase.placementOrders || [];
+    let placementOrders = req.session.userCase.placementOrders || [];
 
     let redirect = false;
     if (req.query.add) {
@@ -21,9 +21,16 @@ export default class PlacementOrderGetController extends GetController {
       delete req.query.change;
       req.url = req.url.substring(0, req.url.indexOf('?'));
       redirect = true;
+    } else if (req.query.remove) {
+      placementOrders = placementOrders.filter(item => item.placementOrderId !== `${req.query.remove}`);
+      req.session.userCase.selectedPlacementOrderId = placementOrders[0].placementOrderId;
+      req.session.userCase.addAnotherPlacementOrder = undefined;
+      delete req.query.remove;
+      req.url = req.url.substring(0, req.url.indexOf('?'));
+      redirect = true;
     } else if (!req.session.userCase.selectedPlacementOrderId) {
-      //generate random id for placement order
-      req.session.userCase.selectedPlacementOrderId = `${Date.now()}`;
+      //generate random id for placement order if there are no placement orders
+      req.session.userCase.selectedPlacementOrderId = placementOrders[0]?.placementOrderId || `${Date.now()}`;
     }
 
     let placementOrder = placementOrders.find(

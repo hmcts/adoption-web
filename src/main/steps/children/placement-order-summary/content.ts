@@ -1,15 +1,30 @@
 import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { isFieldFilledIn } from '../../../app/form/validation';
-import { CHILDREN_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS } from '../../../steps/urls';
+import { isDateInputInvalid, isFieldFilledIn } from '../../../app/form/validation';
+import { CHILDREN_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS, CHILDREN_PLACEMENT_ORDER_SUMMARY } from '../../../steps/urls';
+
+const isPlacementOrderComplete = placementOrder => {
+  return (
+    placementOrder.placementOrderType &&
+    placementOrder.placementOrderNumber &&
+    placementOrder.placementOrderCourt &&
+    isDateInputInvalid(placementOrder.placementOrderDate)
+  );
+};
 
 const placementOrderListItems = (userCase, content) => {
-  return userCase.placementOrders?.map(item => {
+  return userCase.placementOrders?.map((item, index) => {
     return {
       key: {
         text: item.placementOrderType || content.placementOrder,
         classes: 'font-normal',
+      },
+      value: {
+        html:
+          index === 0 || isPlacementOrderComplete(item)
+            ? ''
+            : '<strong class="govuk-tag govuk-tag--yellow">Incomplete</strong>',
       },
       actions: {
         items: [
@@ -18,6 +33,15 @@ const placementOrderListItems = (userCase, content) => {
             text: content.change,
             visuallyHiddenText: 'change',
           },
+          ...(index === 0
+            ? []
+            : [
+                {
+                  href: `${CHILDREN_PLACEMENT_ORDER_SUMMARY}?remove=${item.placementOrderId}`,
+                  text: content.remove,
+                  visuallyHiddenText: 'remove',
+                },
+              ]),
         ],
       },
     };
@@ -34,7 +58,7 @@ const en = content => {
     label: 'Do you want to add another order?',
     hint: 'We need details of all orders already in place. Your social worker or adoption agency can help provide these details.',
     errors: {
-      addAnotherOrder: {
+      addAnotherPlacementOrder: {
         required: 'Please select an answer',
       },
     },
@@ -55,7 +79,7 @@ const cy = content => {
     label: 'Do you want to add another order? (in welsh)',
     hint: 'We need details of all orders already in place. Your social worker or adoption agency can help provide these details. (in welsh)',
     errors: {
-      addAnotherOrder: {
+      addAnotherPlacementOrder: {
         required: 'Please select an answer (in welsh)',
       },
     },
