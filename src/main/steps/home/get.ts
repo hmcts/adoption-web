@@ -17,7 +17,6 @@ import {
 
 export class HomeGetController {
   public get(req: AppRequest, res: Response): void {
-    +    console.log("get.ts 21 "+res.locals.serviceType +" - "+req.session.userCase);
     // if (req.session.userCase.divorceOrDissolution !== res.locals.serviceType) {
     //   throw new Error('Invalid case type');
     // }

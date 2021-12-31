@@ -38,7 +38,6 @@ export class OidcMiddleware {
 
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
-        console.log("index.ts 41 "+req.path);
         if (req.path.startsWith(ELIGIBILITY_URL)) {
           return next();
         }
