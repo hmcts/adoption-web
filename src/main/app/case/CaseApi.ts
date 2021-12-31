@@ -31,7 +31,6 @@ export class CaseApi {
 
   public async getOrCreateCase(serviceType: Adoption, userDetails: UserDetails): Promise<CaseWithId> {
     const userCase = await this.getCase(serviceType);
-    console.log("caseapi.ts 35 serviceType: " +serviceType+" "+ JSON.stringify(userCase,null,2)); 
     return userCase || this.createCase(serviceType, userDetails);
   }
 
@@ -39,7 +38,6 @@ export class CaseApi {
     const cases = await this.getCases();
 
     const serviceCases = cases;//cases.filter(c => c.case_data.divorceOrDissolution === serviceType);
-    console.log(" caseapi.ts 42 "+serviceType+" "+serviceCases.length);
 
     if(serviceCases.length==0){
       return false;
@@ -70,7 +68,6 @@ export class CaseApi {
       const response = await this.axios.get<CcdV1Response[]>(
         `/citizens/${this.userDetails.id}/jurisdictions/${JURISDICTION}/case-types/${CASE_TYPE}/cases`
       );
-      console.log("caseapi.ts 63 "+`/citizens/${this.userDetails.id}/jurisdictions/${JURISDICTION}/case-types/${CASE_TYPE}/cases`);
       return response.data;
     } catch (err) {
       this.logError(err);
@@ -90,7 +87,6 @@ export class CaseApi {
   }
 
   private async createCase(serviceType: Adoption, userDetails: UserDetails): Promise<CaseWithId> {
-    console.log("caseapi.ts 92 Creating new case");
     const tokenResponse: AxiosResponse<CcdTokenResponse> = await this.axios.get(
       `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
     );
@@ -103,14 +99,12 @@ export class CaseApi {
       applicant1Email: userDetails.email,
     };
 
-    console.log("case0 95: "+userDetails.givenName+" "+ userDetails.familyName+" "+userDetails.email+ " id"+userDetails.id);
     try {
       const response = await this.axios.post<CcdV2Response>(`/case-types/${CASE_TYPE}/cases`, {
         data,
         event,
         event_token: token,
       });
-      console.log("caseapi.ts 105 " + JSON.stringify(response.data,null,2)); 
       return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
     } catch (err) {
       this.logError(err);
@@ -138,7 +132,6 @@ export class CaseApi {
         data,
         event_token: token,
       });
-      console.log("caseapi.ts 139 eventName: "+eventName);
       return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
     } catch (err) {
       this.logError(err);

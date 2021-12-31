@@ -658,7 +658,6 @@ export interface LabelContent {
   UnionType: string;
   UnionTypeUC: string;
   ApplicationType: ApplicationType;
-  ApplyingWith: ApplyingWith;
 }
 
 export interface MarriageDetails {

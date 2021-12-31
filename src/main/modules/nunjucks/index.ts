@@ -93,7 +93,6 @@ export class Nunjucks {
     app.use((req, res, next) => {
       res.locals.host = req.headers['x-forwarded-host'] || req.hostname;
       res.locals.pagePath = req.path;
-      console.log("index.ts 97 es.locals.host: "+res.locals.host+" req.query: "+req.query);
       res.locals.serviceType =Adoption.ADOPTION;
       next();
     });

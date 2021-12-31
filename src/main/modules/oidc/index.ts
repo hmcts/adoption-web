@@ -62,10 +62,8 @@ export class OidcMiddleware {
           //   applicant2Confirmation: YesOrNo.NO,
           //   applicant2Explanation: YesOrNo.NO,
           // };
-          console.log("index.ts 65 req.session.userCase "+ req.session.userCase);
           req.session.userCase =
           req.session.userCase || (await req.locals.api.getOrCreateCase(res.locals.serviceType, req.session.user));
-          console.log("index.ts 68");
           return next();
         }
         res.redirect(SIGN_IN_URL);

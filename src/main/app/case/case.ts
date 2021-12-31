@@ -51,7 +51,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant1FirstNames: 'applicant1FirstName',
   applicant1MiddleNames: 'applicant1MiddleName',
   applicant1LastNames: 'applicant1LastName',
-  applicant1FullNames: 'applicant1FullName',
+  applicant1FullName: 'applicant1FullName',
   applicant2FirstNames: 'applicant2FirstName',
   applicant2MiddleNames: 'applicant2MiddleName',
   applicant2LastNames: 'applicant2LastName',
@@ -108,14 +108,13 @@ export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data
       result[value] = data[field];
     }
   }
-
+  console.log("case.ts 111"+JSON.stringify(result));
   return result as OutputFormat;
 }
 
 export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;
 
 export interface Case {
-  //applyingWith?: string;
   addButton?: string;
   applicant1AdditionalName?: string;
   applicant2AdditionalName?: string;
@@ -180,7 +179,7 @@ export interface Case {
   applicant1FirstNames?: string;
   applicant1MiddleNames?: string;
   applicant1LastNames?: string;
-  applicant1FullNames?: string;
+  applicant1FullName?: string;
   applicant1Address1?: string;
   applicant1Address2?: string;
   applicant1Address3?: string;
