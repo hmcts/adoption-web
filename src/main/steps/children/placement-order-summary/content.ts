@@ -1,52 +1,9 @@
 import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { isDateInputInvalid, isFieldFilledIn } from '../../../app/form/validation';
-import { CHILDREN_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS, CHILDREN_PLACEMENT_ORDER_SUMMARY } from '../../../steps/urls';
+import { isFieldFilledIn } from '../../../app/form/validation';
 
-const isPlacementOrderComplete = placementOrder => {
-  return (
-    placementOrder.placementOrderType &&
-    placementOrder.placementOrderNumber &&
-    placementOrder.placementOrderCourt &&
-    isDateInputInvalid(placementOrder.placementOrderDate)
-  );
-};
-
-const placementOrderListItems = (userCase, content) => {
-  return userCase.placementOrders?.map((item, index) => {
-    return {
-      key: {
-        text: item.placementOrderType || content.placementOrder,
-        classes: 'font-normal',
-      },
-      value: {
-        html:
-          index === 0 || isPlacementOrderComplete(item)
-            ? ''
-            : '<strong class="govuk-tag govuk-tag--yellow">Incomplete</strong>',
-      },
-      actions: {
-        items: [
-          {
-            href: `${CHILDREN_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS}?change=${item.placementOrderId}`,
-            text: content.change,
-            visuallyHiddenText: 'change',
-          },
-          ...(index === 0
-            ? []
-            : [
-                {
-                  href: `${CHILDREN_PLACEMENT_ORDER_SUMMARY}?remove=${item.placementOrderId}`,
-                  text: content.remove,
-                  visuallyHiddenText: 'remove',
-                },
-              ]),
-        ],
-      },
-    };
-  });
-};
+import { placementOrderListItems } from './placement-order-summary';
 
 const en = content => {
   const enContent = {

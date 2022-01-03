@@ -47,14 +47,7 @@ describe('children > placement-order-summary content', () => {
           placementOrderId: 'MOCK_ID',
           placementOrderNumber: 'MOCK_NUMBER',
           placementOrderCourt: 'MOCK_COURT',
-          placementOrderDate: {},
-        },
-        {
-          placementOrderId: 'MOCK_ID2',
-          placementOrderType: 'MOCK_TYPE',
-          placementOrderNumber: 'MOCK_NUMBER2',
-          placementOrderCourt: 'MOCK_COURT2',
-          placementOrderDate: { day: '12', month: '10', year: '' },
+          placementOrderDate: { day: '12', month: '10', year: '2021' },
         },
       ],
     },
@@ -80,24 +73,6 @@ describe('children > placement-order-summary content', () => {
               href: '/children/placement-order-check-your-answers?change=MOCK_ID',
               text: 'Change',
               visuallyHiddenText: 'change',
-            },
-          ],
-        },
-      },
-      {
-        key: { text: 'MOCK_TYPE', classes: 'font-normal' },
-        value: { html: '<strong class="govuk-tag govuk-tag--yellow">Incomplete</strong>' },
-        actions: {
-          items: [
-            {
-              href: '/children/placement-order-check-your-answers?change=MOCK_ID2',
-              text: 'Change',
-              visuallyHiddenText: 'change',
-            },
-            {
-              href: '/children/placement-order-summary?remove=MOCK_ID2',
-              text: 'Remove',
-              visuallyHiddenText: 'remove',
             },
           ],
         },
