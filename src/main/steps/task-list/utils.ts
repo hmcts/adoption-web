@@ -81,11 +81,11 @@ export const getChildrenPlacementOrderStatus = (userCase: CaseWithId): SectionSt
     userCase.placementOrders?.length &&
     userCase.placementOrders.some((item, index) => {
       return (
-        index === 0 ||
         item.placementOrderType ||
         item.placementOrderNumber ||
         item.placementOrderCourt ||
-        !isDateInputInvalid(item.placementOrderDate)
+        !isDateInputInvalid(item.placementOrderDate) ||
+        index === 0
       );
     });
 
