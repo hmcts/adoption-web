@@ -14,6 +14,9 @@ module.exports = {
   },
   childDetails: {
     childrenBirthCertificateLink: 'a[id$="children-birth-certificate"]',
+    adoptionCertificateDetailsLink: 'a[id$="adoption-certificate-details"]',
+    childrenBirthCertificateDetailsStatus: 'strong[id$="children-birth-certificate-details-status"]',
+    adoptionCertificateDetails: 'strong[id$="adoption-certificate-details-status"]',
   },
 
   async goToTaskListPage() {
@@ -51,5 +54,16 @@ module.exports = {
   },
   async verifyOtherApplicantPersonalDetailsStatus() {
     await I.see('COMPLETED', this.secondApplicant.personalDetailsLinkStatus);
+  },
+  async verifyChildBirthCertificateDetailsStatus() {
+    await I.see('COMPLETED', this.childDetails.childrenBirthCertificateDetailsStatus);
+  },
+
+  async selectChildAdoptionCertificateDetails() {
+    await I.click(this.childDetails.adoptionCertificateDetailsLink);
+  },
+
+  async verifyAdoptionCertificateDetailStatus() {
+    await I.see('COMPLETED', this.childDetails.adoptionCertificateDetails);
   },
 };

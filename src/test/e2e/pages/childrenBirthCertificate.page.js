@@ -8,9 +8,13 @@ module.exports = {
     childrenDateOfBirthMonth: 'input[id$="childrenDateOfBirth-month"]',
     childrenDateOfBirthYear: 'input[id$="childrenDateOfBirth-year"]',
     childrenSexAtBirth: 'input[id$="childrenSexAtBirth"]',
+    britishCitizen: 'input[id$="childrenNationality"]',
+    citizenOfDifferentCountry: 'input[id$="childrenNationality-3"]',
+    addAnotherNationality: 'input[id$="addAnotherNationality"]',
   },
 
   childDetailsBirthCertificaterSection() {
+    I.waitForText("What is the child's full name?");
     I.fillField(this.fields.childrenFirstName, 'William');
     I.fillField(this.fields.childrenLastName, 'Jacob');
     I.click('Save and continue');
@@ -23,5 +27,12 @@ module.exports = {
     I.wait('2');
     I.click(this.fields.childrenSexAtBirth);
     I.click('Save and continue');
+    I.click(this.fields.britishCitizen);
+    I.click(this.fields.citizenOfDifferentCountry);
+    I.fillField(this.fields.addAnotherNationality, 'India');
+    I.click('Add');
+    I.wait('2');
+    I.click('Save and continue');
+    I.wait('2');
   },
 };
