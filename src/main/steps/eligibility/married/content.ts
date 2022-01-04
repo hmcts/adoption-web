@@ -11,7 +11,7 @@ const en = () => ({
   marriedYes: "You can only apply to adopt a child if they've not been married or in a civil partnership.",
   errors: {
     marriedEligible: {
-      required: 'Select whether the child has ever been married or in a civil partnership',
+      required: 'Please answer the question',
     },
   },
 });
@@ -24,7 +24,7 @@ const cy = () => ({
   marriedYes: "You can only apply to adopt a child if they've not been married or in a civil partnership. (in welsh)",
   errors: {
     marriedEligible: {
-      required: 'Select whether the child has ever been married or in a civil partnership (in welsh)',
+      required: 'Please answer the question (in welsh)',
     },
   },
 });
