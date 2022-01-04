@@ -247,6 +247,9 @@ export interface Case {
   jurisdictionAgree?: YesOrNo;
   reasonCourtsOfEnglandAndWalesHaveNoJurisdiction?: string;
   inWhichCountryIsYourLifeMainlyBased?: string;
+  isFathersNameOnCertificate?: string;
+  isFatherStillAlive?: string;
+  isFathersAddressKnown?: string;
 }
 
 export interface CaseWithId extends Case {
