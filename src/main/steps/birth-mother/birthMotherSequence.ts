@@ -19,4 +19,9 @@ export const birthMotherSequence: Step[] = [
     showInSection: Sections.AboutBirthMother,
     getNextStep: () => Urls.TASK_LIST_URL,
   },
+  {
+    url: Urls.BIRTH_MOTHER_OCCUPATION,
+    showInSection: Sections.AboutBirthMother,
+    getNextStep: () => Urls.TASK_LIST_URL,
+  },
 ];
