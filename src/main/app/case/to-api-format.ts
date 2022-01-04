@@ -40,9 +40,22 @@ const fields: ToApiConverters = {
 
     return { applicant1Gender, applicant2Gender };
   },
-  relationshipDate: data => ({
-    marriageDate: toApiDate(data.relationshipDate),
+  applicant1DateOfBirth: data => ({
+    applicant1DateOfBirth: toApiDate(data.applicant1DateOfBirth),
   }),
+  applicant2DateOfBirth: data => ({
+    applicant2DateOfBirth: toApiDate(data.applicant2DateOfBirth),
+  }),
+  childrenDateOfBirth: data => ({
+    childrenDateOfBirth: toApiDate(data.childrenDateOfBirth),
+  }),
+  placementOrderDate: data => ({
+    placementOrderDate: toApiDate(data.placementOrderDate),
+  }),
+  // applicant1AdditionalNames: data => ({
+  //   applicant1AdditionalNames: (data.applicant1HasOtherNames === YesOrNo.YES ?
+  //     (data.applicant1AdditionalNames || []).map(item => ({ name: `${item}` })) : [])
+  // }),
   jurisdictionResidualEligible: data => ({
     jurisdictionResidualEligible: checkboxConverter(data.jurisdictionResidualEligible),
   }),

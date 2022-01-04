@@ -1,3 +1,4 @@
+//import { YesOrNo } from 'app/case/definition';
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
@@ -15,15 +16,23 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
 
     req.session.errors = form.getErrors(formData);
     Object.assign(req.session.userCase, formData);
-
+    console.log("post.ts 19");
     if (req.session.errors.length === 0) {
+      console.log("post.ts 21");
+      try {
+        req.session.userCase = await this.save(req, formData, this.getEventName(req));
+      } catch (err) {
+        req.locals.logger.error('Error saving', err);
+        req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+      }
+
       if (formData.addButton) {
         if (!req.session.userCase.applicant1AdditionalNames) {
           req.session.userCase.applicant1AdditionalNames = [];
         }
-        if (formData.applicant1AdditionalName) {
-          req.session.userCase.applicant1AdditionalNames.push(formData.applicant1AdditionalName);
-          req.session.userCase.applicant1AdditionalName = '';
+        if (formData.applicant1AdditionalNames) {
+          req.session.userCase.applicant1AdditionalNames.push(formData.applicant1AdditionalNames[0]);
+          //req.session.userCase.applicant1AdditionalNames = '';
         }
       }
     }

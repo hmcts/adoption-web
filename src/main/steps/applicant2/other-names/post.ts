@@ -17,6 +17,15 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
     Object.assign(req.session.userCase, formData);
 
     if (req.session.errors.length === 0) {
+
+      console.log("post.ts applicant2 16");
+      try {
+        req.session.userCase = await this.save(req, formData, this.getEventName(req));
+      } catch (err) {
+        req.locals.logger.error('Error saving', err);
+        req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+      }
+
       if (formData.addButton) {
         if (!req.session.userCase.applicant2AdditionalNames) {
           req.session.userCase.applicant2AdditionalNames = [];

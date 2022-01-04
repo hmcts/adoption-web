@@ -132,6 +132,14 @@ export interface Applicant {
   MiddleName: string;
   LastName: string;
   FullName: string;
+  HasOtherNames: YesOrNo;
+  AdditionalNames: string[];//OtherName[];
+  DateOfBirth: DateAsString;
+  Occupation: string;
+  EmailAddress: string;
+  PhoneNumber: string;
+  Nationality: Nationality[];
+
   Email: string;
   AgreedToReceiveEmails: YesOrNo;
   ConfirmReceipt: YesOrNo;
@@ -141,7 +149,6 @@ export interface Applicant {
   NameChangedHow: ChangedNameHow[];
   NameChangedHowOtherDetails: string;
   HomeAddress: AddressGlobalUK;
-  PhoneNumber: string;
   KeepContactDetailsConfidential: YesOrNo;
   Gender: Gender;
   CorrespondenceAddress: AddressGlobalUK;
@@ -264,6 +271,13 @@ export interface PlacementOrder {
   placementOrderDate?: CaseDate;
 }
 
+export const enum Nationality {
+  BRITHISH = "British",
+  IRISH = "Irish",
+  OTHER = "Other",
+  NOT_SURE = "Not sure",
+}
+
 export interface CaseData {
   applicationType: ApplicationType;
   applyingWith: ApplyingWith;
@@ -275,10 +289,19 @@ export interface CaseData {
   labelContentUnionType: string;
   labelContentUnionTypeUC: string;
   labelContentApplicationType: ApplicationType;
+  applicant1Nationality: Nationality[];
+
   applicant1FirstName: string;
   applicant1MiddleName: string;
   applicant1LastName: string;
   applicant1FullName: string;
+  applicant1HasOtherNames: YesOrNo;
+  applicant1AdditionalNames?: string[];//(string | OtherName)[];
+  applicant1DateOfBirth: DateAsString;
+  applicant1Occupation: string;
+  applicant1EmailAddress: string;
+  applicant1PhoneNumber: string;
+
   applicant1Email: string;
   applicant1AgreedToReceiveEmails: YesOrNo;
   applicant1ConfirmReceipt: YesOrNo;
@@ -288,7 +311,6 @@ export interface CaseData {
   applicant1NameChangedHow: ChangedNameHow[];
   applicant1NameChangedHowOtherDetails: string;
   applicant1HomeAddress: AddressGlobalUK;
-  applicant1PhoneNumber: string;
   applicant1KeepContactDetailsConfidential: YesOrNo;
   applicant1Gender: Gender;
   applicant1CorrespondenceAddress: AddressGlobalUK;
@@ -305,9 +327,30 @@ export interface CaseData {
   applicant1LegalProceedings: YesOrNo;
   applicant1LegalProceedingsDetails: string;
   applicant1PcqId: string;
+
   applicant2FirstName: string;
-  applicant2MiddleName: string;
   applicant2LastName: string;
+  applicant2HasOtherNames: YesOrNo;
+  applicant2AdditionalNames?: string[];//(string | OtherName)[];
+  applicant2DateOfBirth: DateAsString;
+  applicant2Occupation: string;
+  applicant2EmailAddress: string;
+  applicant2PhoneNumber: string;
+  applicant2Nationality: Nationality[];
+
+  childrenFirstName: string;
+  childrenLastName: string;
+  childrenDateOfBirth: DateAsString;
+  childrenNationality: Nationality[];
+  childrenFirstNameAfterAdoption: string;
+  childrenLastNameAfterAdoption: string;
+  childrenSexAtBirth: Gender;
+  placementOrderNumber: string;
+  placementOrderCourt: string;
+  placementOrderDate: DateAsString;
+  addAnotherPlacementOrder: YesOrNo;
+
+  applicant2MiddleName: string;
   applicant2Email: string;
   applicant2AgreedToReceiveEmails: YesOrNo;
   applicant2ConfirmReceipt: YesOrNo;
@@ -317,7 +360,6 @@ export interface CaseData {
   applicant2NameChangedHow: ChangedNameHow[];
   applicant2NameChangedHowOtherDetails: string;
   applicant2HomeAddress: AddressGlobalUK;
-  applicant2PhoneNumber: string;
   applicant2KeepContactDetailsConfidential: YesOrNo;
   applicant2Gender: Gender;
   applicant2CorrespondenceAddress: AddressGlobalUK;
@@ -542,6 +584,23 @@ export interface CaseData {
   coDocumentsUploaded: ListValue<DivorceDocument>[];
   coIsEverythingInPetitionTrue: YesOrNo;
 }
+
+export interface Children {
+  FirstName: string;
+  LastName: string;
+  DateOfBirth: DateAsString;
+  Nationality: Nationality[];
+  FirstNameAfterAdoption: string;
+  LastNameAfterAdoption: string;
+  SexAtBirth: Gender;
+}
+
+
+// export interface PlacementOrder {
+//   Number: string;
+//   Court: string;
+//   Date: DateAsString;
+// }
 
 export interface CaseInvite {
   applicant2InviteEmailAddress: string;
@@ -923,6 +982,10 @@ export const enum ApplicationType {
 export const enum ApplyingWith {
   ALONE = "alone",
   WITH_SPOUSE_OR_CIVIL_PARTNER = "withSpouseOrCivilPartner",
+}
+
+export interface OtherName {
+  name: string;
 }
 
 export const enum ChangedNameHow {

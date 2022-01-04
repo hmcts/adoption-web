@@ -27,8 +27,17 @@ const fields: FromApiConverters = {
   marriageIsSameSexCouple: data => ({
     sameSex: checkboxConverter(data.marriageIsSameSexCouple),
   }),
-  marriageDate: data => ({
-    relationshipDate: fromApiDate(data.marriageDate),
+  applicant1DateOfBirth: data => ({
+    applicant1DateOfBirth: fromApiDate(data.applicant1DateOfBirth),
+  }),
+  applicant2DateOfBirth: data => ({
+    applicant2DateOfBirth: fromApiDate(data.applicant2DateOfBirth),
+  }),
+  childrenDateOfBirth: data => ({
+    childrenDateOfBirth: fromApiDate(data.childrenDateOfBirth),
+  }),
+  placementOrderDate: data => ({
+    placementOrderDate: fromApiDate(data.placementOrderDate),
   }),
   jurisdictionResidualEligible: data => ({
     jurisdictionResidualEligible: checkboxConverter(data.jurisdictionResidualEligible),
