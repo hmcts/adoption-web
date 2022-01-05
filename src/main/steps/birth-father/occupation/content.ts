@@ -1,35 +1,33 @@
-import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent } from '../../../app/form/Form';
+import { isFieldFilledIn } from '../../../app/form/validation';
+import { Input } from '../../../steps/common/components/input';
 import { SECTION, SECTION_IN_WELSH } from '../constants';
 
-export const en = (): Record<string, unknown> => ({
+const fieldName = 'fathersOccupation';
+
+const enContent = {
   section: SECTION,
-  title: 'occupation',
-  errors: {},
-});
+  title: "What is the occupation of the child's birth father?",
+  hint: "Ask the adoption agency or social worker if you’re not sure. If the occupation is not known, you can type 'unknown'.",
+  errors: {
+    [fieldName]: {
+      required: 'Enter an occupation',
+    },
+  },
+};
 
-export const cy = (): Record<string, unknown> => ({
+const cyContent = {
   section: SECTION_IN_WELSH,
-  title: 'title (in Welsh)',
-  errors: {},
-});
-
-export const form: FormContent = {
-  fields: {},
-  submit: {
-    text: l => l.continue,
-  },
-  saveAsDraft: {
-    text: l => l.saveAsDraft,
+  title: "What is the occupation of the child's birth father? (in Welsh)",
+  hint: "Ask the adoption agency or social worker if you’re not sure. If the occupation is not known, you can type 'unknown'. (in Welsh)",
+  errors: {
+    [fieldName]: {
+      required: 'Enter an occupation (in Welsh)',
+    },
   },
 };
 
-const languages = {
-  en,
-  cy,
-};
+const validator = isFieldFilledIn;
 
-export const generateContent: TranslationFn = content => ({
-  ...languages[content.language](),
-  form,
-});
+const labelSize = 'm';
+
+export const { form, generateContent } = new Input(enContent, cyContent, fieldName, validator, labelSize);

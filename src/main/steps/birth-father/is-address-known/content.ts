@@ -1,35 +1,21 @@
-import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent } from '../../../app/form/Form';
+import { Radios } from '../../../steps/common/components/radios';
 import { SECTION, SECTION_IN_WELSH } from '../constants';
 
-export const en = (): Record<string, unknown> => ({
+const enContent = {
   section: SECTION,
-  title: 'is-address-known',
-  errors: {},
-});
+  title: 'Do you have the birth father’s last known address?',
+};
 
-export const cy = (): Record<string, unknown> => ({
+const cyContent = {
   section: SECTION_IN_WELSH,
-  title: 'title (in Welsh)',
-  errors: {},
-});
-
-export const form: FormContent = {
-  fields: {},
-  submit: {
-    text: l => l.continue,
-  },
-  saveAsDraft: {
-    text: l => l.saveAsDraft,
-  },
+  title: 'Do you have the birth father’s last known address? (in Welsh)',
 };
 
-const languages = {
-  en,
-  cy,
+const fieldName = 'isFathersAddressKnown';
+
+const values = {
+  yes: 'Yes',
+  no: 'No',
 };
 
-export const generateContent: TranslationFn = content => ({
-  ...languages[content.language](),
-  form,
-});
+export const { form, generateContent } = new Radios(enContent, cyContent, fieldName, values);
