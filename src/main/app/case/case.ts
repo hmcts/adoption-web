@@ -137,6 +137,22 @@ export interface Case {
   childrenNationality?: string[];
   childrenAdditionalNationalities?: string[];
 
+  birthMotherFirstNames?: string;
+  birthMotherLastNames?: string;
+  birthMotherStillAlive?: YesOrNo;
+  birthMotherNotAliveReason?: string;
+  birthMotherNationality?: string[];
+  birthMotherAdditionalNationalities?: string[];
+  birthMotherOccupation?: string;
+  birthMotherAddressKnown?: YesOrNo;
+  birthMotherAddress1?: string;
+  birthMotherAddress2?: string;
+  birthMotherAddress3?: string;
+  birthMotherAddressTown?: string;
+  birthMotherAddressCounty?: string;
+  birthMotherAddressPostcode?: string;
+  birthMotherAddressCountry?: string;
+
   applicationType?: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
   issueDate?: DateAsString;
