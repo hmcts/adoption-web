@@ -20,15 +20,15 @@ export const en = (): Record<string, unknown> => ({
 
 export const cy = (): Record<string, unknown> => ({
   section: SECTION_IN_WELSH,
-  title: "What is the full name of the child's birth father? (in welsh)",
+  title: "What is the full name of the child's birth father? (in Welsh)",
   line1:
-    "This will be on the child's full birth certificate. Ask the adoption agency or social worker if you're not sure. (in welsh)",
+    "This will be on the child's full birth certificate. Ask the adoption agency or social worker if you're not sure. (in Welsh)",
   errors: {
     birthFatherFirstNames: {
-      required: 'Enter their first names (in welsh)',
+      required: 'Enter their first names (in Welsh)',
     },
     birthFatherLastNames: {
-      required: 'Enter their last names (in welsh)',
+      required: 'Enter their last names (in Welsh)',
     },
   },
 });

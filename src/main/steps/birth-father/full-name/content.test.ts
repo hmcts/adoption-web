@@ -22,16 +22,16 @@ const enContent = {
 };
 
 const cyContent = {
-  section: "Birth father's details (in welsh)",
-  title: "What is the full name of the child's birth father? (in welsh)",
+  section: "Birth father's details (in Welsh)",
+  title: "What is the full name of the child's birth father? (in Welsh)",
   line1:
-    "This will be on the child's full birth certificate. Ask the adoption agency or social worker if you're not sure. (in welsh)",
+    "This will be on the child's full birth certificate. Ask the adoption agency or social worker if you're not sure. (in Welsh)",
   errors: {
     birthFatherFirstNames: {
-      required: 'Enter their first names (in welsh)',
+      required: 'Enter their first names (in Welsh)',
     },
     birthFatherLastNames: {
-      required: 'Enter their last names (in welsh)',
+      required: 'Enter their last names (in Welsh)',
     },
   },
 };
@@ -56,7 +56,7 @@ describe('common > components > full-name', () => {
     expect(generatedContent.errors).toEqual(enContent.errors);
   });
 
-  test('should return correct welsh content', () => {
+  test('should return correct Welsh content', () => {
     generatedContent = generateContent({ ...commonContent, language: 'cy' });
     expect(generatedContent.section).toEqual(cyContent.section);
     expect(generatedContent.title).toEqual(cyContent.title);

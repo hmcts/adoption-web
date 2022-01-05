@@ -23,29 +23,30 @@ export class Radios {
     this.form = this.generateForm();
   }
 
-  en = (): Record<string, unknown> => ({
-    ...this.enContent,
-    yes: 'Yes',
-    no: 'No',
-    unsure: 'Not sure',
-    errors: {
-      [this.fieldName]: {
-        required: 'Please answer the question',
+  languages = {
+    en: (): Record<string, unknown> => ({
+      ...this.enContent,
+      yes: 'Yes',
+      no: 'No',
+      unsure: 'Not sure',
+      errors: {
+        [this.fieldName]: {
+          required: 'Please answer the question',
+        },
       },
-    },
-  });
-
-  cy = (): Record<string, unknown> => ({
-    ...this.cyContent,
-    yes: 'Yes (in Welsh)',
-    no: 'No (in Welsh)',
-    unsure: 'Not sure (in Welsh)',
-    errors: {
-      [this.fieldName]: {
-        required: 'Please answer the question (in Welsh)',
+    }),
+    cy: (): Record<string, unknown> => ({
+      ...this.cyContent,
+      yes: 'Yes (in Welsh)',
+      no: 'No (in Welsh)',
+      unsure: 'Not sure (in Welsh)',
+      errors: {
+        [this.fieldName]: {
+          required: 'Please answer the question (in Welsh)',
+        },
       },
-    },
-  });
+    }),
+  };
 
   generateForm = (): FormContent => ({
     fields: {
@@ -67,11 +68,6 @@ export class Radios {
       text: l => l.saveAsDraft,
     },
   });
-
-  languages = {
-    en: this.en,
-    cy: this.cy,
-  };
 
   generateContent: TranslationFn = (content: CommonContent) => ({
     ...this.languages[content.language](),

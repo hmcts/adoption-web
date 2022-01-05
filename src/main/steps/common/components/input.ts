@@ -29,13 +29,10 @@ export class Input {
     this.form = this.generateForm();
   }
 
-  en = (): Record<string, unknown> => ({
-    ...this.enContent,
-  });
-
-  cy = (): Record<string, unknown> => ({
-    ...this.cyContent,
-  });
+  languages = {
+    en: (): Record<string, unknown> => this.enContent,
+    cy: (): Record<string, unknown> => this.cyContent,
+  };
 
   generateForm = (): FormContent => ({
     fields: {
@@ -54,11 +51,6 @@ export class Input {
       text: l => l.saveAsDraft,
     },
   });
-
-  languages = {
-    en: this.en,
-    cy: this.cy,
-  };
 
   generateContent: TranslationFn = (content: CommonContent) => ({
     ...this.languages[content.language](),
