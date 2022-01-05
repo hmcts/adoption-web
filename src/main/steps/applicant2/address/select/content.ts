@@ -19,7 +19,7 @@ const en = content => {
   items.push(...getAddressItems(addresses));
 
   return {
-    section: 'Primary applicant',
+    section: 'Second applicant',
     title: "What's your home address?",
     line1: "We'll send all court papers to this address.",
     postcode: 'Postcode',
@@ -50,7 +50,7 @@ const cy = content => {
   items.push(...getAddressItems(addresses));
 
   return {
-    section: 'Primary applicant (in welsh)',
+    section: 'Second applicant (in welsh)',
     title: "What's your home address? (in welsh)",
     line1: "We'll send all court papers to this address. (in welsh)",
     postcode: 'Postcode (in welsh)',

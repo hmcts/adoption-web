@@ -7,7 +7,7 @@ import { generateContent } from './content';
 jest.mock('../../../../app/form/validation');
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('select-address content', () => {
+describe('applicant2 > address > select > content', () => {
   const commonContent = { language: 'en', userCase: {}, addresses: [] as any[] } as CommonContent;
   let generatedContent;
 
@@ -16,7 +16,7 @@ describe('select-address content', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual('Primary applicant');
+    expect(generatedContent.section).toEqual('Second applicant');
     expect(generatedContent.title).toEqual("What's your home address?");
     expect(generatedContent.line1).toEqual("We'll send all court papers to this address.");
     expect(generatedContent.postcode).toEqual('Postcode');
@@ -35,7 +35,7 @@ describe('select-address content', () => {
 
   test('should return correct welsh content', () => {
     generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual('Primary applicant (in welsh)');
+    expect(generatedContent.section).toEqual('Second applicant (in welsh)');
     expect(generatedContent.title).toEqual("What's your home address? (in welsh)");
     expect(generatedContent.line1).toEqual("We'll send all court papers to this address. (in welsh)");
     expect(generatedContent.postcode).toEqual('Postcode (in welsh)');
