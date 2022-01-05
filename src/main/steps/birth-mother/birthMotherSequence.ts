@@ -1,4 +1,5 @@
 import { CaseWithId } from '../../app/case/case';
+import { YesOrNo } from '../../app/case/definition';
 import * as Urls from '../urls';
 
 export enum Sections {
@@ -37,7 +38,8 @@ export const birthMotherSequence: Step[] = [
   {
     url: Urls.BIRTH_MOTHER_ADDRESS_KNOWN,
     showInSection: Sections.AboutBirthMother,
-    getNextStep: () => Urls.TASK_LIST_URL,
+    getNextStep: data =>
+      data.birthMotherAddressKnown === YesOrNo.YES ? Urls.BIRTH_MOTHER_FIND_ADDRESS : Urls.TASK_LIST_URL,
   },
   {
     url: Urls.BIRTH_MOTHER_FIND_ADDRESS,
