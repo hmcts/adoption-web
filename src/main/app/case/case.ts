@@ -13,12 +13,12 @@ import {
   Gender,
   JurisdictionConnections,
   ListValue,
+  Nationality,
   OrderSummary,
   Payment,
   PlacementOrder,
   State,
   YesOrNo,
-  Nationality,
   //Children,
   //OtherName,
 } from './definition';
@@ -207,7 +207,7 @@ export interface Case {
   applicant1LastNames?: string;
   applicant1FullName?: string;
   applicant1HasOtherNames?: YesOrNo;
-  applicant1AdditionalNames?: string[];//(string | OtherName)[]
+  applicant1AdditionalNames?: string[]; //(string | OtherName)[]
   applicant1EmailAddress?: string;
   applicant1PhoneNumber?: string;
   applicant1DateOfBirth?: CaseDate;
@@ -234,13 +234,12 @@ export interface Case {
   applicant2LastNames?: string;
   applicant2AdditionalName?: string;
   applicant2HasOtherNames?: YesOrNo;
-  applicant2AdditionalNames?: string[];//(string | OtherName)[]
+  applicant2AdditionalNames?: string[]; //(string | OtherName)[]
   applicant2DateOfBirth?: CaseDate;
   applicant2Occupation?: string;
   applicant2EmailAddress?: string;
   applicant2PhoneNumber?: string;
   applicant2Nationality?: Nationality[];
-
 
   childrenFirstName?: string;
   childrenLastName?: string;

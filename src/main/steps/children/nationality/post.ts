@@ -18,14 +18,13 @@ export default class NationalityPostController extends PostController<AnyObject>
     Object.assign(req.session.userCase, formData);
 
     if (req.session.errors.length === 0) {
-
       try {
         req.session.userCase = await this.save(req, formData, this.getEventName(req));
       } catch (err) {
         req.locals.logger.error('Error saving', err);
         req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
       }
-      
+
       if (formData.addButton) {
         if (!req.session.userCase.childrenAdditionalNationalities) {
           req.session.userCase.childrenAdditionalNationalities = [];

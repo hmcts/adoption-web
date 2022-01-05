@@ -31,7 +31,7 @@ export default class SelectAddressPostController extends PostController<AnyObjec
         req.session.userCase.applicant1AddressCounty = selectedAddress.county;
         req.session.userCase.applicant1AddressPostcode = selectedAddress.postcode;
 
-        formData.applicant1Address1=selectedAddress.street1;
+        formData.applicant1Address1 = selectedAddress.street1;
         formData.applicant1Address2 = selectedAddress.street2;
         formData.applicant1AddressTown = selectedAddress.town;
         formData.applicant1AddressCounty = selectedAddress.county;
@@ -43,8 +43,6 @@ export default class SelectAddressPostController extends PostController<AnyObjec
           req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
         }
       }
-
-
     }
 
     const nextUrl = req.session.errors.length > 0 ? req.url : getNextStepUrl(req, req.session.userCase);
