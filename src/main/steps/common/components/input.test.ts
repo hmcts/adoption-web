@@ -24,6 +24,8 @@ const enContent = {
       required: 'Required',
     },
   },
+  continue: 'Save and continue',
+  saveAsDraft: 'Save as draft',
 };
 
 const cyContent = {
@@ -36,6 +38,8 @@ const cyContent = {
       required: 'Required (in Welsh)',
     },
   },
+  continue: 'Save and continue (in Welsh)',
+  saveAsDraft: 'Save as draft (in Welsh)',
 };
 
 const { generateForm, generateContent } = new Input(enContent, cyContent, fieldName, validator, labelSize);
@@ -63,5 +67,17 @@ describe('input class', () => {
 
     (field.validator as Function)(fieldInputValue);
     expect(isFieldFilledIn).toHaveBeenCalledWith(fieldInputValue);
+  });
+
+  it('should contain submit button', () => {
+    const { submit } = generateForm();
+
+    expect((submit.text as Function)(generateContent(commonContent))).toBe('Save and continue');
+  });
+
+  it('should contain saveAsDraft button', () => {
+    const { saveAsDraft } = generateForm();
+
+    expect((saveAsDraft?.text as Function)(generateContent(commonContent))).toBe('Save as draft');
   });
 });
