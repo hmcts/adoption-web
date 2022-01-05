@@ -53,8 +53,10 @@ const fields: ToApiConverters = {
     placementOrderDate: toApiDate(data.placementOrderDate),
   }),
   applicant1AdditionalNames: data => ({
-    applicant1AdditionalNames: (data.applicant1HasOtherNames === YesOrNo.YES ?
-      (data.applicant1AdditionalNames || []).map(item => ({ name: `${item}` })) : [])
+    applicant1AdditionalNames:
+      data.applicant1HasOtherNames === YesOrNo.YES
+        ? (data.applicant1AdditionalNames || []).map(item => ({ name: `${item}` }))
+        : [],
   }),
   jurisdictionResidualEligible: data => ({
     jurisdictionResidualEligible: checkboxConverter(data.jurisdictionResidualEligible),
