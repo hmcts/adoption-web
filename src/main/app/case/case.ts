@@ -62,6 +62,11 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant1EmailAddress: 'applicant1EmailAddress',
   applicant1PhoneNumber: 'applicant1PhoneNumber',
   applicant1Nationality: 'applicant1Nationality',
+  applicant1Address1: 'applicant1Address1',
+  applicant1Address2: 'applicant1Address2',
+  applicant1Town: 'applicant1Town',
+  applicant1Country: 'applicant1Country',
+  applicant1PostCode: 'applicant1PostCode',
 
   applicant2FirstNames: 'applicant2FirstName',
   applicant2LastNames: 'applicant2LastName',
@@ -72,6 +77,11 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant2EmailAddress: 'applicant2EmailAddress',
   applicant2PhoneNumber: 'applicant2PhoneNumber',
   applicant2Nationality: 'applicant2Nationality',
+  applicant2Address1: 'applicant2Address1',
+  applicant2Address2: 'applicant2Address2',
+  applicant2Town: 'applicant2Town',
+  applicant2Country: 'applicant2Country',
+  applicant2PostCode: 'applicant2PostCode',
 
   childrenFirstName: 'childrenFirstName',
   childrenLastName: 'childrenLastName',
@@ -138,7 +148,7 @@ export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data
       result[value] = data[field];
     }
   }
-  console.log('case.ts 111' + JSON.stringify(result));
+  console.log('case.ts 151-a-' + JSON.stringify(result));
   return result as OutputFormat;
 }
 
@@ -213,9 +223,12 @@ export interface Case {
   applicant1DateOfBirth?: CaseDate;
   applicant1Occupation: string;
   applicant1Nationality: Nationality[];
-
   applicant1Address1?: string;
   applicant1Address2?: string;
+  applicant1Town: string;
+  applicant1Country: string;
+  applicant1PostCode: string;
+
   applicant1Address3?: string;
   applicant1AddressTown?: string;
   applicant1AddressCounty?: string;
@@ -240,7 +253,11 @@ export interface Case {
   applicant2EmailAddress: string;
   applicant2PhoneNumber: string;
   applicant2Nationality: Nationality[];
-
+  applicant2Address1?: string;
+  applicant2Address2?: string;
+  applicant2Town: string;
+  applicant2Country: string;
+  applicant2PostCode: string;
 
   childrenFirstName: string;
   childrenLastName: string;
@@ -256,8 +273,6 @@ export interface Case {
 
   applicant2MiddleNames?: string;
   applicant2AddressPrivate: YesOrNo;
-  applicant2Address1?: string;
-  applicant2Address2?: string;
   applicant2Address3?: string;
   applicant2AddressTown?: string;
   applicant2AddressCounty?: string;

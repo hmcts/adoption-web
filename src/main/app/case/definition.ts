@@ -139,6 +139,11 @@ export interface Applicant {
   EmailAddress: string;
   PhoneNumber: string;
   Nationality: Nationality[];
+  Address1: string;
+  Address2: string;
+  Town: string;
+  Country: string;
+  PostCode: string;
 
   Email: string;
   AgreedToReceiveEmails: YesOrNo;
@@ -296,11 +301,16 @@ export interface CaseData {
   applicant1LastName: string;
   applicant1FullName: string;
   applicant1HasOtherNames: YesOrNo;
-  applicant1AdditionalNames?: string[];//(string | OtherName)[];
+  applicant1AdditionalNames?: (string | OtherName)[];
   applicant1DateOfBirth: DateAsString;
   applicant1Occupation: string;
   applicant1EmailAddress: string;
   applicant1PhoneNumber: string;
+  applicant1Address1: string;
+  applicant1Address2: string;
+  applicant1Town: string;
+  applicant1Country: string;
+  applicant1PostCode: string;
 
   applicant1Email: string;
   applicant1AgreedToReceiveEmails: YesOrNo;
@@ -337,6 +347,11 @@ export interface CaseData {
   applicant2EmailAddress: string;
   applicant2PhoneNumber: string;
   applicant2Nationality: Nationality[];
+  applicant2Address1: string;
+  applicant2Address2: string;
+  applicant2Town: string;
+  applicant2Country: string;
+  applicant2PostCode: string;
 
   childrenFirstName: string;
   childrenLastName: string;
