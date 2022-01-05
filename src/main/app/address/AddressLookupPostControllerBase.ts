@@ -1,20 +1,21 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
-import { AppRequest } from '../../../app/controller/AppRequest';
-import { AnyObject, PostController } from '../../../app/controller/PostController';
-import { Form, FormFields, FormFieldsFn } from '../../../app/form/Form';
-import { Address, getAddressesFromPostcode } from '../../../app/postcode/postcode-lookup-api';
-import { getNextStepUrl } from '../../../steps';
+import { FieldPrefix } from '../../app/case/case';
+import { getNextStepUrl } from '../../steps';
+import { AppRequest } from '../controller/AppRequest';
+import { AnyObject, PostController } from '../controller/PostController';
+import { Form, FormFields, FormFieldsFn } from '../form/Form';
+import { Address, getAddressesFromPostcode } from '../postcode/postcode-lookup-api';
 
 @autobind
-export default class FindAddressPostController extends PostController<AnyObject> {
-  constructor(protected readonly fields: FormFields | FormFieldsFn) {
+export default class AddressLookupPostControllerBase extends PostController<AnyObject> {
+  constructor(protected readonly fields: FormFields | FormFieldsFn, protected readonly fieldPrefix: FieldPrefix) {
     super(fields);
   }
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
-    const postcode = req.body.applicant1AddressPostcode as string;
+    const postcode = req.body[`${this.fieldPrefix}AddressPostcode`] as string;
 
     let addresses;
 

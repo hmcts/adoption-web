@@ -1,14 +1,14 @@
-import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
-import { isFieldFilledIn, isInvalidPostcode } from '../../../app/form/validation';
+import { FormContent, FormFields, FormOptions } from '../../../../app/form/Form';
+import { isFieldFilledIn, isInvalidPostcode } from '../../../../app/form/validation';
 // import { isFieldFilledIn } from '../../../app/form/validation';
-import { CommonContent, generatePageContent } from '../../common/common.content';
+import { CommonContent, generatePageContent } from '../../../common/common.content';
 
 import { generateContent } from './content';
 
-jest.mock('../../../app/form/validation');
+jest.mock('../../../../app/form/validation');
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('manual-address content', () => {
+describe('applicant1 > manual-address > content', () => {
   const commonContent = { language: 'en', userCase: { applicant1Address1: 'address line 1' } } as CommonContent;
   let generatedContent;
   let form;

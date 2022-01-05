@@ -1,13 +1,13 @@
-import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
-import { isAddressSelected } from '../../../app/form/validation';
-import { CommonContent, generatePageContent } from '../../common/common.content';
+import { FormContent, FormFields, FormOptions } from '../../../../app/form/Form';
+import { isAddressSelected } from '../../../../app/form/validation';
+import { CommonContent, generatePageContent } from '../../../common/common.content';
 
 import { generateContent } from './content';
 
-jest.mock('../../../app/form/validation');
+jest.mock('../../../../app/form/validation');
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('select-address content', () => {
+describe('applicant1 > select-address > content', () => {
   const commonContent = { language: 'en', userCase: {}, addresses: [] as any[] } as CommonContent;
   let generatedContent;
 
@@ -29,8 +29,8 @@ describe('select-address content', () => {
       { attributes: { id: 'totalAddressesFound' }, selected: true, text: '0 addresses found', value: -1 },
     ]);
 
-    expect(generatedContent.changePostCodeUrl).toEqual('/applicant1/find-address');
-    expect(generatedContent.cantFindAddressUrl).toEqual('/applicant1/manual-address');
+    expect(generatedContent.changePostCodeUrl).toEqual('/applicant1/address/lookup');
+    expect(generatedContent.cantFindAddressUrl).toEqual('/applicant1/address/manual');
   });
 
   test('should return correct welsh content', () => {
@@ -50,8 +50,8 @@ describe('select-address content', () => {
       { attributes: { id: 'totalAddressesFound' }, selected: true, text: '0 addresses found (in welsh)', value: -1 },
     ]);
 
-    expect(generatedContent.changePostCodeUrl).toEqual('/applicant1/find-address');
-    expect(generatedContent.cantFindAddressUrl).toEqual('/applicant1/manual-address');
+    expect(generatedContent.changePostCodeUrl).toEqual('/applicant1/address/lookup');
+    expect(generatedContent.cantFindAddressUrl).toEqual('/applicant1/address/manual');
   });
 
   describe('when there is one address in session', () => {

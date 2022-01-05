@@ -274,3 +274,9 @@ export interface UploadedFile {
   id: string;
   name: string;
 }
+
+export enum FieldPrefix {
+  APPLICANT1 = 'applicant1',
+  APPLICANT2 = 'applicant2',
+  CHILDREN = 'children',
+}

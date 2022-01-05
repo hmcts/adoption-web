@@ -1,6 +1,6 @@
-import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent } from '../../../app/form/Form';
-import { isFieldFilledIn, isInvalidPostcode } from '../../../app/form/validation';
+import { TranslationFn } from '../../../../app/controller/GetController';
+import { FormContent } from '../../../../app/form/Form';
+import { isFieldFilledIn, isInvalidPostcode } from '../../../../app/form/validation';
 
 const en = () => ({
   section: 'Primary applicant',

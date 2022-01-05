@@ -1,7 +1,7 @@
-import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent } from '../../../app/form/Form';
-import { isAddressSelected } from '../../../app/form/validation';
-import { APPLICANT_1_FIND_ADDRESS, APPLICANT_1_MANUAL_ADDRESS } from '../../../steps/urls';
+import { TranslationFn } from '../../../../app/controller/GetController';
+import { FormContent } from '../../../../app/form/Form';
+import { isAddressSelected } from '../../../../app/form/validation';
+import { APPLICANT_1_FIND_ADDRESS, APPLICANT_1_MANUAL_ADDRESS } from '../../../urls';
 
 const getAddressItems = addresses => addresses.map((item, index) => ({ text: item.fullAddress, value: index }));
 
