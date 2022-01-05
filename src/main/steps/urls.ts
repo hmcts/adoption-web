@@ -65,6 +65,12 @@ export const JURISDICTION_CONNECTION_SUMMARY: PageLink = '/connection-summary';
 
 export const YOUR_NAME: PageLink = '/enter-your-name';
 
+export const OTHER_PARENT: PageLink = '/other-parent';
+export const OTHER_PARENT_NAME: PageLink = `${OTHER_PARENT}/full-name`;
+export const OTHER_PARENT_ADDRESS: PageLink = `${OTHER_PARENT}/address`;
+export const OTHER_PARENT_FIND_ADDRESS_POSTCODE: PageLink = `${OTHER_PARENT}/find-address-postcode`;
+export const OTHER_PARENT_VERIFY_ADDRESS: PageLink = `${OTHER_PARENT}/verify-address`;
+
 export const APPLY_FINANCIAL_ORDER: PageLink = '/do-you-want-to-apply-financial-order';
 
 export const SENT_TO_APPLICANT2_FOR_REVIEW: PageLink = '/application-sent-for-review';

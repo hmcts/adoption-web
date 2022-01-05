@@ -24,6 +24,7 @@ export enum Sections {
   AboutChildren = 'aboutChildren',
   AboutApplication = 'aboutApplication',
   AboutPartnership = 'aboutPartnership',
+  AboutOtherParent = 'aboutOtherParent',
   HelpWithFees = 'helpWithFees',
   ConnectionsToEnglandWales = 'connectionsToEnglandWales',
   AboutPartners = 'aboutPartners',
