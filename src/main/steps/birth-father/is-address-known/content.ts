@@ -4,7 +4,7 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 export const en = (): Record<string, unknown> => ({
   section: SECTION,
-  title: 'title',
+  title: 'is-address-known',
   errors: {},
 });
 

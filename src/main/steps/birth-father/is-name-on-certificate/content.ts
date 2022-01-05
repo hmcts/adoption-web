@@ -1,6 +1,7 @@
 import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
+import { isFieldFilledIn } from '../../../app/form/validation';
 import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 export const en = (): Record<string, unknown> => ({
@@ -9,7 +10,11 @@ export const en = (): Record<string, unknown> => ({
   hint: "Ask the adoption agency or social worker if you're not sure.",
   yes: 'Yes',
   no: 'No',
-  errors: {},
+  errors: {
+    isFathersNameOnCertificate: {
+      required: 'Please answer the question',
+    },
+  },
 });
 
 export const cy = (): Record<string, unknown> => ({
@@ -18,7 +23,11 @@ export const cy = (): Record<string, unknown> => ({
   hint: "Ask the adoption agency or social worker if you're not sure. (in Welsh)",
   yes: 'Yes (in Welsh)',
   no: 'No (in Welsh)',
-  errors: {},
+  errors: {
+    isFathersNameOnCertificate: {
+      required: 'Please answer the question (in Welsh)',
+    },
+  },
 });
 
 export const form: FormContent = {
@@ -30,6 +39,7 @@ export const form: FormContent = {
         { label: l => l.yes, value: YesOrNo.YES },
         { label: l => l.no, value: YesOrNo.NO },
       ],
+      validator: isFieldFilledIn,
     },
   },
   submit: {
