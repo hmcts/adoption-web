@@ -67,9 +67,11 @@ export const YOUR_NAME: PageLink = '/enter-your-name';
 
 export const OTHER_PARENT: PageLink = '/other-parent';
 export const OTHER_PARENT_NAME: PageLink = `${OTHER_PARENT}/full-name`;
-export const OTHER_PARENT_ADDRESS: PageLink = `${OTHER_PARENT}/address`;
-export const OTHER_PARENT_FIND_ADDRESS_POSTCODE: PageLink = `${OTHER_PARENT}/find-address-postcode`;
-export const OTHER_PARENT_VERIFY_ADDRESS: PageLink = `${OTHER_PARENT}/verify-address`;
+export const OTHER_PARENT_ADDRESS_KNOWN: PageLink = `${OTHER_PARENT}/address-known`;
+export const OTHER_PARENT_POSTCODE_LOOKUP: PageLink = `${OTHER_PARENT}/address-lookup`;
+export const OTHER_PARENT_VERIFY_ADDRESS: PageLink = `${OTHER_PARENT}/address/select`;
+export const OTHER_PARENT_MANUAL_ADDRESS: PageLink = `${OTHER_PARENT}/address/manual`;
+export const OTHER_PARENT_INTERNATIONAL_ADDRESS: PageLink = `${OTHER_PARENT}/address/international`;
 
 export const APPLY_FINANCIAL_ORDER: PageLink = '/do-you-want-to-apply-financial-order';
 
