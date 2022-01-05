@@ -54,6 +54,10 @@ export const CHILDREN_SEX_AT_BIRTH: PageLink = `${CHILDREN}/sex-at-birth`;
 export const CHILDREN_NATIONALITY: PageLink = `${CHILDREN}/nationality`;
 export const CHILDREN_FULL_NAME_AFTER_ADOPTION: PageLink = `${CHILDREN}/full-name-after-adoption`;
 
+export const BIRTH_MOTHER: PageLink = '/birth-mother';
+export const BIRTH_MOTHER_FULL_NAME: PageLink = `${BIRTH_MOTHER}/full-name`;
+export const BIRTH_MOTHER_OCCUPATION: PageLink = `${BIRTH_MOTHER}/occupation`;
+
 export const RELATIONSHIP_DATE_URL: PageLink = '/date-from-certificate';
 
 export const CHECK_JURISDICTION: PageLink = '/check-jurisdiction';
