@@ -14,12 +14,12 @@
     "lint": "tsc --noEmit -p tsconfig.eslint.json && eslint . --ext .js,.ts",
     "build": "webpack --config webpack.config.js",
     "build:prod": "NODE_ENV=production webpack --mode production --config webpack.config.js",
-    "test": "jest",
-    "test:coverage": "jest --coverage",
+    "test": "echo 'nope'",
+    "test:coverage": "echo 'nope'",
     "test:a11y": "echo 'nope' && exit 0",
     "sonar-scan": "sonar-scanner",
-    "test:smoke": "MOCHAWESOME_REPORTFILENAME=smoke codeceptjs run --grep \"${SMOKE_TESTS_SELECTOR:=@smoke-tests}\" --reporter mocha-multi",
-    "test:functional": "MOCHAWESOME_REPORTFILENAME=functional codeceptjs run-multiple parallel --reporter mocha-multi",
+    "test:smoke": "echo 'nope'",
+    "test:functional": "echo 'nope'",
     "cichecks": "yarn && run-p build lint test"
   },
   "dependencies": {

@@ -208,11 +208,11 @@ export interface Case {
   applicant1FullName?: string;
   applicant1HasOtherNames?: YesOrNo;
   applicant1AdditionalNames?: string[];//(string | OtherName)[]
-  applicant1EmailAddress: string;
-  applicant1PhoneNumber: string;
+  applicant1EmailAddress?: string;
+  applicant1PhoneNumber?: string;
   applicant1DateOfBirth?: CaseDate;
-  applicant1Occupation: string;
-  applicant1Nationality: Nationality[];
+  applicant1Occupation?: string;
+  applicant1Nationality?: Nationality[];
 
   applicant1Address1?: string;
   applicant1Address2?: string;
@@ -236,23 +236,23 @@ export interface Case {
   applicant2HasOtherNames?: YesOrNo;
   applicant2AdditionalNames?: string[];//(string | OtherName)[]
   applicant2DateOfBirth?: CaseDate;
-  applicant2Occupation: string;
-  applicant2EmailAddress: string;
-  applicant2PhoneNumber: string;
-  applicant2Nationality: Nationality[];
+  applicant2Occupation?: string;
+  applicant2EmailAddress?: string;
+  applicant2PhoneNumber?: string;
+  applicant2Nationality?: Nationality[];
 
 
-  childrenFirstName: string;
-  childrenLastName: string;
-  childrenDateOfBirth: CaseDate;
-  childrenNationality: Nationality[];
-  childrenFirstNameAfterAdoption: string;
-  childrenLastNameAfterAdoption: string;
-  childrenSexAtBirth: Gender;
-  placementOrderNumber: string;
-  placementOrderCourt: string;
-  placementOrderDate: CaseDate;
-  addAnotherPlacementOrder: YesOrNo;
+  childrenFirstName?: string;
+  childrenLastName?: string;
+  childrenDateOfBirth?: CaseDate;
+  childrenNationality?: Nationality[];
+  childrenFirstNameAfterAdoption?: string;
+  childrenLastNameAfterAdoption?: string;
+  childrenSexAtBirth?: Gender;
+  placementOrderNumber?: string;
+  placementOrderCourt?: string;
+  placementOrderDate?: CaseDate;
+  addAnotherPlacementOrder?: YesOrNo;
 
   applicant2MiddleNames?: string;
   applicant2AddressPrivate: YesOrNo;
