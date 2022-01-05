@@ -31,16 +31,11 @@ export default class SelectAddressPostController extends PostController<AnyObjec
         req.session.userCase.applicant1AddressCounty = selectedAddress.county;
         req.session.userCase.applicant1AddressPostcode = selectedAddress.postcode;
 
-        console.log('post.ts 34-z-' + JSON.stringify(formData));
-
         formData.applicant1Address1=selectedAddress.street1;
         formData.applicant1Address2 = selectedAddress.street2;
         formData.applicant1AddressTown = selectedAddress.town;
         formData.applicant1AddressCounty = selectedAddress.county;
         formData.applicant1AddressPostcode = selectedAddress.postcode;
-
-        console.log('post.ts 42-b-' + JSON.stringify(formData));
-
         try {
           req.session.userCase = await this.save(req, formData, this.getEventName(req));
         } catch (err) {
