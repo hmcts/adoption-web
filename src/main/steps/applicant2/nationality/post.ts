@@ -18,7 +18,7 @@ export default class NationalityPostController extends PostController<AnyObject>
     Object.assign(req.session.userCase, formData);
 
     if (req.session.errors.length === 0) {
-      console.log('post.ts applicant2 16');
+      console.log("post.ts applicant2 16");
       try {
         req.session.userCase = await this.save(req, formData, this.getEventName(req));
       } catch (err) {

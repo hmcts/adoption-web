@@ -16,9 +16,9 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
 
     req.session.errors = form.getErrors(formData);
     Object.assign(req.session.userCase, formData);
-    console.log('post.ts 19');
+    console.log("post.ts 19");
     if (req.session.errors.length === 0) {
-      console.log('post.ts 21');
+      console.log("post.ts 21");
       try {
         req.session.userCase = await this.save(req, formData, this.getEventName(req));
       } catch (err) {

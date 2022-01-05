@@ -18,7 +18,7 @@ export class PropertiesVolume {
       this.setSecret('secrets.adoption.s2s-secret', 'services.authProvider.secret');
       this.setSecret('secrets.adoption.postcode-lookup-token', 'services.postcodeLookup.token');
     } else {
-      //this.setLocalSecret('idam-secret', 'services.idam.clientSecret');
+      this.setLocalSecret('idam-secret', 'services.idam.clientSecret');
       this.setLocalSecret('s2s-secret', 'services.authProvider.secret');
       this.setLocalSecret('postcode-lookup-token', 'services.postcodeLookup.token');
       // this.setLocalSecret('idam-systemupdate-username', 'services.idam.systemUsername');
