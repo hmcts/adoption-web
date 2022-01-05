@@ -18,22 +18,23 @@ export const birthMotherSequence: Step[] = [
   {
     url: Urls.BIRTH_MOTHER_FULL_NAME,
     showInSection: Sections.AboutBirthMother,
-    getNextStep: () => Urls.TASK_LIST_URL,
+    getNextStep: () => Urls.BIRTH_MOTHER_OCCUPATION,
   },
   {
     url: Urls.BIRTH_MOTHER_STILL_ALIVE,
     showInSection: Sections.AboutBirthMother,
-    getNextStep: () => Urls.TASK_LIST_URL,
+    getNextStep: data =>
+      data.birthMotherStillAlive === YesOrNo.YES ? Urls.BIRTH_MOTHER_NATIONALITY : Urls.TASK_LIST_URL,
   },
   {
     url: Urls.BIRTH_MOTHER_NATIONALITY,
     showInSection: Sections.AboutBirthMother,
-    getNextStep: () => Urls.TASK_LIST_URL,
+    getNextStep: () => Urls.BIRTH_MOTHER_OCCUPATION,
   },
   {
     url: Urls.BIRTH_MOTHER_OCCUPATION,
     showInSection: Sections.AboutBirthMother,
-    getNextStep: () => Urls.TASK_LIST_URL,
+    getNextStep: () => Urls.BIRTH_MOTHER_ADDRESS_KNOWN,
   },
   {
     url: Urls.BIRTH_MOTHER_ADDRESS_KNOWN,

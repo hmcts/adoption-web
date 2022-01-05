@@ -1,3 +1,5 @@
+import { YesOrNo } from '../../app/case/definition';
+
 import { birthMotherSequence } from './birthMotherSequence';
 
 describe('birthMotherSequence', () => {
@@ -6,22 +8,28 @@ describe('birthMotherSequence', () => {
 
     expect(birthMotherSequence[0].url).toBe('/birth-mother/full-name');
     expect(birthMotherSequence[0].showInSection).toBe('aboutBirthMother');
-    expect(birthMotherSequence[0].getNextStep({})).toBe('/task-list');
+    expect(birthMotherSequence[0].getNextStep({})).toBe('/birth-mother/occupation');
 
     expect(birthMotherSequence[1].url).toBe('/birth-mother/still-alive');
     expect(birthMotherSequence[1].showInSection).toBe('aboutBirthMother');
+    expect(birthMotherSequence[1].getNextStep({ birthMotherStillAlive: YesOrNo.YES })).toBe(
+      '/birth-mother/nationality'
+    );
     expect(birthMotherSequence[1].getNextStep({})).toBe('/task-list');
 
     expect(birthMotherSequence[2].url).toBe('/birth-mother/nationality');
     expect(birthMotherSequence[2].showInSection).toBe('aboutBirthMother');
-    expect(birthMotherSequence[2].getNextStep({})).toBe('/task-list');
+    expect(birthMotherSequence[2].getNextStep({})).toBe('/birth-mother/occupation');
 
     expect(birthMotherSequence[3].url).toBe('/birth-mother/occupation');
     expect(birthMotherSequence[3].showInSection).toBe('aboutBirthMother');
-    expect(birthMotherSequence[3].getNextStep({})).toBe('/task-list');
+    expect(birthMotherSequence[3].getNextStep({})).toBe('/birth-mother/address-known');
 
     expect(birthMotherSequence[4].url).toBe('/birth-mother/address-known');
     expect(birthMotherSequence[4].showInSection).toBe('aboutBirthMother');
+    expect(birthMotherSequence[4].getNextStep({ birthMotherAddressKnown: YesOrNo.YES })).toBe(
+      '/birth-mother/address/lookup'
+    );
     expect(birthMotherSequence[4].getNextStep({})).toBe('/task-list');
 
     expect(birthMotherSequence[5].url).toBe('/birth-mother/address/lookup');
