@@ -20,7 +20,42 @@ export const birthMotherSequence: Step[] = [
     getNextStep: () => Urls.TASK_LIST_URL,
   },
   {
+    url: Urls.BIRTH_MOTHER_STILL_ALIVE,
+    showInSection: Sections.AboutBirthMother,
+    getNextStep: () => Urls.TASK_LIST_URL,
+  },
+  {
+    url: Urls.BIRTH_MOTHER_NATIONALITY,
+    showInSection: Sections.AboutBirthMother,
+    getNextStep: () => Urls.TASK_LIST_URL,
+  },
+  {
     url: Urls.BIRTH_MOTHER_OCCUPATION,
+    showInSection: Sections.AboutBirthMother,
+    getNextStep: () => Urls.TASK_LIST_URL,
+  },
+  {
+    url: Urls.BIRTH_MOTHER_ADDRESS_KNOWN,
+    showInSection: Sections.AboutBirthMother,
+    getNextStep: () => Urls.TASK_LIST_URL,
+  },
+  {
+    url: Urls.BIRTH_MOTHER_FIND_ADDRESS,
+    showInSection: Sections.AboutBirthMother,
+    getNextStep: () => Urls.BIRTH_MOTHER_SELECT_ADDRESS,
+  },
+  {
+    url: Urls.BIRTH_MOTHER_SELECT_ADDRESS,
+    showInSection: Sections.AboutBirthMother,
+    getNextStep: () => Urls.TASK_LIST_URL,
+  },
+  {
+    url: Urls.BIRTH_MOTHER_MANUAL_ADDRESS,
+    showInSection: Sections.AboutBirthMother,
+    getNextStep: () => Urls.TASK_LIST_URL,
+  },
+  {
+    url: Urls.BIRTH_MOTHER_INTERNATIONAL_ADDRESS,
     showInSection: Sections.AboutBirthMother,
     getNextStep: () => Urls.TASK_LIST_URL,
   },

@@ -56,7 +56,14 @@ export const CHILDREN_FULL_NAME_AFTER_ADOPTION: PageLink = `${CHILDREN}/full-nam
 
 export const BIRTH_MOTHER: PageLink = '/birth-mother';
 export const BIRTH_MOTHER_FULL_NAME: PageLink = `${BIRTH_MOTHER}/full-name`;
+export const BIRTH_MOTHER_STILL_ALIVE: PageLink = `${BIRTH_MOTHER}/still-alive`;
+export const BIRTH_MOTHER_NATIONALITY: PageLink = `${BIRTH_MOTHER}/nationality`;
 export const BIRTH_MOTHER_OCCUPATION: PageLink = `${BIRTH_MOTHER}/occupation`;
+export const BIRTH_MOTHER_ADDRESS_KNOWN: PageLink = `${BIRTH_MOTHER}/address-known`;
+export const BIRTH_MOTHER_FIND_ADDRESS: PageLink = `${BIRTH_MOTHER}/address/lookup`;
+export const BIRTH_MOTHER_SELECT_ADDRESS: PageLink = `${BIRTH_MOTHER}/address/select`;
+export const BIRTH_MOTHER_MANUAL_ADDRESS: PageLink = `${BIRTH_MOTHER}/address/manual`;
+export const BIRTH_MOTHER_INTERNATIONAL_ADDRESS: PageLink = `${BIRTH_MOTHER}/address/international`;
 
 export const RELATIONSHIP_DATE_URL: PageLink = '/date-from-certificate';
 
