@@ -6,8 +6,38 @@ import { generateContent } from './content';
 
 jest.mock('../../../../app/form/validation');
 
-/* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('applicant1 > find-address > content', () => {
+const enContent = {
+  section: 'Primary applicant',
+  title: "What's your home address?",
+  line1: "We'll send all court papers to this address.",
+  postcode: 'Postcode',
+  findAddress: 'Find address',
+  enterAddressManually: 'Or enter address manually',
+  errors: {
+    applicant1AddressPostcode: {
+      required: 'Enter a valid postcode',
+      invalid: 'Enter a valid postcode',
+    },
+  },
+};
+
+const cyContent = {
+  section: 'Primary applicant (in welsh)',
+  title: "What's your home address? (in welsh)",
+  line1: "We'll send all court papers to this address. (in welsh)",
+  postcode: 'Postcode (in welsh)',
+  findAddress: 'Find address (in welsh)',
+  enterAddressManually: 'Or enter address manually (in welsh)',
+  errors: {
+    applicant1AddressPostcode: {
+      required: 'Enter a valid postcode (in welsh)',
+      invalid: 'Enter a valid postcode (in welsh)',
+    },
+  },
+};
+
+/* eslint-disable @typescript-eslint/ban-types */
+describe('applicant1 > address > lookup > content', () => {
   const commonContent = { language: 'en', userCase: {} } as CommonContent;
   let generatedContent;
 
@@ -16,35 +46,25 @@ describe('applicant1 > find-address > content', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual('Primary applicant');
-    expect(generatedContent.title).toEqual("What's your home address?");
-    expect(generatedContent.line1).toEqual("We'll send all court papers to this address.");
-    expect(generatedContent.postcode).toEqual('Postcode');
-    expect(generatedContent.findAddress).toEqual('Find address');
-    expect(generatedContent.enterAddressManually).toEqual('Or enter address manually');
-
-    expect((generatedContent.errors as any).applicant1AddressPostcode.required).toEqual('Enter a valid postcode');
-    expect((generatedContent.errors as any).applicant1AddressPostcode.invalid).toEqual('Enter a valid postcode');
-
+    expect(generatedContent.section).toEqual(enContent.section);
+    expect(generatedContent.title).toEqual(enContent.title);
+    expect(generatedContent.line1).toEqual(enContent.line1);
+    expect(generatedContent.postcode).toEqual(enContent.postcode);
+    expect(generatedContent.findAddress).toEqual(enContent.findAddress);
+    expect(generatedContent.enterAddressManually).toEqual(enContent.enterAddressManually);
+    expect(generatedContent.errors).toEqual(enContent.errors);
     expect(generatedContent.manualAddressUrl).toEqual('/applicant1/address/manual');
   });
 
   test('should return correct welsh content', () => {
     generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual('Primary applicant (in welsh)');
-    expect(generatedContent.title).toEqual("What's your home address? (in welsh)");
-    expect(generatedContent.line1).toEqual("We'll send all court papers to this address. (in welsh)");
-    expect(generatedContent.postcode).toEqual('Postcode (in welsh)');
-    expect(generatedContent.findAddress).toEqual('Find address (in welsh)');
-    expect(generatedContent.enterAddressManually).toEqual('Or enter address manually (in welsh)');
-
-    expect((generatedContent.errors as any).applicant1AddressPostcode.required).toEqual(
-      'Enter a valid postcode (in welsh)'
-    );
-    expect((generatedContent.errors as any).applicant1AddressPostcode.invalid).toEqual(
-      'Enter a valid postcode (in welsh)'
-    );
-
+    expect(generatedContent.section).toEqual(cyContent.section);
+    expect(generatedContent.title).toEqual(cyContent.title);
+    expect(generatedContent.line1).toEqual(cyContent.line1);
+    expect(generatedContent.postcode).toEqual(cyContent.postcode);
+    expect(generatedContent.findAddress).toEqual(cyContent.findAddress);
+    expect(generatedContent.enterAddressManually).toEqual(cyContent.enterAddressManually);
+    expect(generatedContent.errors).toEqual(cyContent.errors);
     expect(generatedContent.manualAddressUrl).toEqual('/applicant1/address/manual');
   });
 
@@ -66,4 +86,4 @@ describe('applicant1 > find-address > content', () => {
     expect((form.submit.text as Function)(generatedContent)).toBe('Find address');
   });
 });
-/* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
+/* eslint-enable @typescript-eslint/ban-types */
