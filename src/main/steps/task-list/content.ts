@@ -108,7 +108,19 @@ const en = content => {
         'adoption-certificate-details-status'
       ),
     },
-    urls,
+    urls: {
+      applyingWith: urls.APPLYING_WITH_URL,
+      applicant1PersonalDetails: urls.APPLICANT_1_FULL_NAME,
+      applicant1ContactDetails: urls.APPLICANT_1_FIND_ADDRESS,
+      applicant2PersonalDetails: urls.APPLICANT_2_FULL_NAME,
+      applicant2ContactDetails: urls.APPLICANT_2_SAME_ADDRESS,
+      childrenBirthCertificate: urls.CHILDREN_FULL_NAME,
+      adoptionCertificateDetails: urls.CHILDREN_FULL_NAME_AFTER_ADOPTION,
+      childrenPlacementOrder:
+        getChildrenPlacementOrderStatus(content.userCase) === SectionStatus.NOT_STARTED
+          ? urls.CHILDREN_PLACEMENT_ORDER_NUMBER
+          : urls.CHILDREN_PLACEMENT_ORDER_SUMMARY,
+    },
   };
 };
 
@@ -199,7 +211,19 @@ const cy = content => {
         'adoption-certificate-details-status'
       ),
     },
-    urls,
+    urls: {
+      applyingWith: urls.APPLYING_WITH_URL,
+      applicant1PersonalDetails: urls.APPLICANT_1_FULL_NAME,
+      applicant1ContactDetails: urls.APPLICANT_1_FIND_ADDRESS,
+      applicant2PersonalDetails: urls.APPLICANT_2_FULL_NAME,
+      applicant2ContactDetails: urls.APPLICANT_2_SAME_ADDRESS,
+      childrenBirthCertificate: urls.CHILDREN_FULL_NAME,
+      adoptionCertificateDetails: urls.CHILDREN_FULL_NAME_AFTER_ADOPTION,
+      childrenPlacementOrder:
+        getChildrenPlacementOrderStatus(content.userCase) === SectionStatus.NOT_STARTED
+          ? urls.CHILDREN_PLACEMENT_ORDER_NUMBER
+          : urls.CHILDREN_PLACEMENT_ORDER_SUMMARY,
+    },
   };
 };
 

@@ -1,5 +1,6 @@
 import { CaseDate, CaseWithId } from '../../app/case/case';
 import { ContactDetails, SectionStatus, YesOrNo } from '../../app/case/definition';
+import { isDateInputInvalid } from '../../app/form/validation';
 
 export const isApplyingWithComplete = (userCase: CaseWithId): boolean => {
   return !!userCase.applyingWith;
@@ -64,21 +65,33 @@ export const getPersonalDetailsStatus = (userCase: CaseWithId, userType: `applic
 };
 
 export const getChildrenPlacementOrderStatus = (userCase: CaseWithId): SectionStatus => {
-  const childrenFirstName = userCase.childrenFirstName;
-  const childrenLastName = userCase.childrenLastName;
-  const childrenDateOfBirth = userCase.childrenDateOfBirth as CaseDate;
-  const dateOfBirthComplete = childrenDateOfBirth?.day && childrenDateOfBirth?.month && childrenDateOfBirth?.year;
-  const childrenSexAtBirth = userCase.childrenSexAtBirth;
+  const addAnotherPlacementOrder = userCase.addAnotherPlacementOrder;
+  const placementOrdersComplete =
+    userCase.placementOrders?.length &&
+    userCase.placementOrders.every((item, index) => {
+      return (
+        (index === 0 || item.placementOrderType) &&
+        item.placementOrderNumber &&
+        item.placementOrderCourt &&
+        !isDateInputInvalid(item.placementOrderDate)
+      );
+    });
 
-  const nationality: string[] = userCase['childrenNationality'] || [];
-  const nationalities: string[] = userCase['childrenAdditionalNationalities'] || [];
-  const nationalityComplete =
-    !!nationality.length &&
-    (!nationality.includes('Other') || (!!nationalities.length && nationality.includes('Other')));
+  const placementOrdersInProgress =
+    userCase.placementOrders?.length &&
+    userCase.placementOrders.some((item, index) => {
+      return (
+        item.placementOrderType ||
+        item.placementOrderNumber ||
+        item.placementOrderCourt ||
+        !isDateInputInvalid(item.placementOrderDate) ||
+        index === 0
+      );
+    });
 
-  return childrenFirstName && childrenLastName && dateOfBirthComplete && childrenSexAtBirth && nationalityComplete
+  return addAnotherPlacementOrder && placementOrdersComplete
     ? SectionStatus.COMPLETED
-    : !childrenFirstName && !childrenLastName && !dateOfBirthComplete && !childrenSexAtBirth && !nationalityComplete
+    : !addAnotherPlacementOrder && !placementOrdersComplete && !placementOrdersInProgress
     ? SectionStatus.NOT_STARTED
     : SectionStatus.IN_PROGRESS;
 };
@@ -90,8 +103,8 @@ export const getChildrenBirthCertificateStatus = (userCase: CaseWithId): Section
   const dateOfBirthComplete = childrenDateOfBirth?.day && childrenDateOfBirth?.month && childrenDateOfBirth?.year;
   const childrenSexAtBirth = userCase.childrenSexAtBirth;
 
-  const nationality: string[] = userCase['childrenNationality'] || [];
-  const nationalities: string[] = userCase['childrenAdditionalNationalities'] || [];
+  const nationality: string[] = userCase.childrenNationality || [];
+  const nationalities: string[] = userCase.childrenAdditionalNationalities || [];
   const nationalityComplete =
     !!nationality.length &&
     (!nationality.includes('Other') || (!!nationalities.length && nationality.includes('Other')));
@@ -104,8 +117,8 @@ export const getChildrenBirthCertificateStatus = (userCase: CaseWithId): Section
 };
 
 export const getAdoptionCertificateDetailsStatus = (userCase: CaseWithId): SectionStatus => {
-  const firstName = userCase['childrenFirstNameAfterAdoption'];
-  const lastName = userCase['childrenLastNameAfterAdoption'];
+  const firstName = userCase.childrenFirstNameAfterAdoption;
+  const lastName = userCase.childrenLastNameAfterAdoption;
 
   return firstName && lastName
     ? SectionStatus.COMPLETED

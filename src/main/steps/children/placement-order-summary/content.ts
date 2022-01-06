@@ -3,25 +3,7 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 
-const placementOrderListItems = (userCase, content) => {
-  return userCase.placementOrders?.map(item => {
-    return {
-      key: {
-        text: item.placementOrderType || content.placementOrder,
-        classes: 'font-normal',
-      },
-      actions: {
-        items: [
-          {
-            href: '#',
-            text: content.change,
-            visuallyHiddenText: 'name',
-          },
-        ],
-      },
-    };
-  });
-};
+import { placementOrderListItems } from './placement-order-summary';
 
 const en = content => {
   const enContent = {
@@ -33,7 +15,7 @@ const en = content => {
     label: 'Do you want to add another order?',
     hint: 'We need details of all orders already in place. Your social worker or adoption agency can help provide these details.',
     errors: {
-      addAnotherOrder: {
+      addAnotherPlacementOrder: {
         required: 'Please select an answer',
       },
     },
@@ -54,7 +36,7 @@ const cy = content => {
     label: 'Do you want to add another order? (in welsh)',
     hint: 'We need details of all orders already in place. Your social worker or adoption agency can help provide these details. (in welsh)',
     errors: {
-      addAnotherOrder: {
+      addAnotherPlacementOrder: {
         required: 'Please select an answer (in welsh)',
       },
     },
