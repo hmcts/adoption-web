@@ -31,7 +31,7 @@ describe('applicant1 > address > lookup > content', () => {
     expect(generatedContent.section).toEqual(enContent.section);
     expect(generatedContent.title).toEqual(enContent.title);
     expect(generatedContent.errors).toEqual({
-      applicant1AddressPostcode: (addressLookupContent.errors as any).adressPostcode,
+      applicant1AddressPostcode: (addressLookupContent.errors as any).addressPostcode,
     });
     expect(generatedContent.manualAddressUrl).toEqual('/applicant1/address/manual');
   });
@@ -42,7 +42,7 @@ describe('applicant1 > address > lookup > content', () => {
     expect(generatedContent.section).toEqual(cyContent.section);
     expect(generatedContent.title).toEqual(cyContent.title);
     expect(generatedContent.errors).toEqual({
-      applicant1AddressPostcode: (addressLookupContent.errors as any).adressPostcode,
+      applicant1AddressPostcode: (addressLookupContent.errors as any).addressPostcode,
     });
     expect(generatedContent.manualAddressUrl).toEqual('/applicant1/address/manual');
   });
