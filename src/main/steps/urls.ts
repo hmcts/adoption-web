@@ -109,5 +109,6 @@ export const BIRTH_FATHER_MANUAL_INTERNATIONAL_ADDRESS: PageLink = `${BIRTH_FATH
 export const BIRTH_FATHER_NATIONALITY: PageLink = `${BIRTH_FATHER}nationality`;
 export const BIRTH_FATHER_OCCUPATION: PageLink = `${BIRTH_FATHER}occupation`;
 
+// TODO update below URLs when other parents changes in master
 export const OTHER_PARENT = '/other-parent';
 export const OTHER_PARENT_IS_ANOTHER_RESPONSIBLE: PageLink = `${OTHER_PARENT}delete-me`;

@@ -3,11 +3,13 @@ import { FormContent, FormInput } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent } from '../common.content';
 
+import { defaultButtons } from './default-buttons';
+
 export class Radios {
-  fieldName: string;
-  values: Record<string, string>;
   enContent: Record<string, unknown>;
   cyContent: Record<string, unknown>;
+  fieldName: string;
+  values: Record<string, string>;
   form: FormContent;
 
   constructor(
@@ -61,12 +63,7 @@ export class Radios {
         validator: isFieldFilledIn,
       },
     },
-    submit: {
-      text: l => l.continue,
-    },
-    saveAsDraft: {
-      text: l => l.saveAsDraft,
-    },
+    ...defaultButtons,
   });
 
   generateContent: TranslationFn = (content: CommonContent) => ({
