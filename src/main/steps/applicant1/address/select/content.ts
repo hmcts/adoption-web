@@ -1,36 +1,36 @@
 import { TranslationFn } from '../../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../../app/form/Form';
-import { APPLICANT_2_FIND_ADDRESS, APPLICANT_2_MANUAL_ADDRESS } from '../../../../steps/urls';
 import {
   form as selectAddressForm,
   generateContent as selectAddressGenerateContent,
 } from '../../../common/components/address-select';
+import { APPLICANT_1_FIND_ADDRESS, APPLICANT_1_MANUAL_ADDRESS } from '../../../urls';
 
 const en = selectAddressContent => ({
-  section: 'Second applicant',
+  section: 'Primary applicant',
   title: "What's your home address?",
   errors: {
-    applicant2SelectAddress: selectAddressContent.errors.selectAddress,
+    applicant1SelectAddress: selectAddressContent.errors.selectAddress,
   },
-  changePostCodeUrl: APPLICANT_2_FIND_ADDRESS,
-  cantFindAddressUrl: APPLICANT_2_MANUAL_ADDRESS,
+  changePostCodeUrl: APPLICANT_1_FIND_ADDRESS,
+  cantFindAddressUrl: APPLICANT_1_MANUAL_ADDRESS,
 });
 
 const cy = selectAddressContent => ({
-  section: 'Second applicant (in welsh)',
+  section: 'Primary applicant (in welsh)',
   title: "What's your home address? (in welsh)",
   errors: {
-    applicant2SelectAddress: selectAddressContent.errors.selectAddress,
+    applicant1SelectAddress: selectAddressContent.errors.selectAddress,
   },
-  changePostCodeUrl: APPLICANT_2_FIND_ADDRESS,
-  cantFindAddressUrl: APPLICANT_2_MANUAL_ADDRESS,
+  changePostCodeUrl: APPLICANT_1_FIND_ADDRESS,
+  cantFindAddressUrl: APPLICANT_1_MANUAL_ADDRESS,
 });
 
 const selectAddressFormFields = selectAddressForm.fields as FormFields;
 export const form: FormContent = {
   ...selectAddressForm,
   fields: {
-    applicant2SelectAddress: selectAddressFormFields.selectAddress,
+    applicant1SelectAddress: selectAddressFormFields.selectAddress,
   },
 };
 

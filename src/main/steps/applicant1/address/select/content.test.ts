@@ -8,17 +8,17 @@ import {
 import { generateContent } from './content';
 
 const enContent = {
-  section: 'Second applicant',
+  section: 'Primary applicant',
   title: "What's your home address?",
 };
 
 const cyContent = {
-  section: 'Second applicant (in welsh)',
+  section: 'Primary applicant (in welsh)',
   title: "What's your home address? (in welsh)",
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('applicant2 > address > select > content', () => {
+describe('applicant1 > address > select > content', () => {
   const commonContent = { language: 'en', userCase: {}, addresses: [] as any[] } as CommonContent;
   let generatedContent;
 
@@ -31,10 +31,10 @@ describe('applicant2 > address > select > content', () => {
     expect(generatedContent.section).toEqual(enContent.section);
     expect(generatedContent.title).toEqual(enContent.title);
     expect(generatedContent.errors).toEqual({
-      applicant2SelectAddress: (selectAddressContent.errors as any).selectAddress,
+      applicant1SelectAddress: (selectAddressContent.errors as any).selectAddress,
     });
-    expect(generatedContent.changePostCodeUrl).toEqual('/applicant2/address/lookup');
-    expect(generatedContent.cantFindAddressUrl).toEqual('/applicant2/address/manual');
+    expect(generatedContent.changePostCodeUrl).toEqual('/applicant1/address/lookup');
+    expect(generatedContent.cantFindAddressUrl).toEqual('/applicant1/address/manual');
   });
 
   test('should return correct welsh content', () => {
@@ -43,16 +43,16 @@ describe('applicant2 > address > select > content', () => {
     expect(generatedContent.section).toEqual(cyContent.section);
     expect(generatedContent.title).toEqual(cyContent.title);
     expect(generatedContent.errors).toEqual({
-      applicant2SelectAddress: (selectAddressContent.errors as any).selectAddress,
+      applicant1SelectAddress: (selectAddressContent.errors as any).selectAddress,
     });
-    expect(generatedContent.changePostCodeUrl).toEqual('/applicant2/address/lookup');
-    expect(generatedContent.cantFindAddressUrl).toEqual('/applicant2/address/manual');
+    expect(generatedContent.changePostCodeUrl).toEqual('/applicant1/address/lookup');
+    expect(generatedContent.cantFindAddressUrl).toEqual('/applicant1/address/manual');
   });
 
-  test('should contain applicant2SelectAddress field', () => {
+  test('should contain applicant1SelectAddress field', () => {
     const selectAddressFormFields = selectAddressForm.fields as FormFields;
     const fields = generatedContent.form.fields as FormFields;
-    expect(fields.applicant2SelectAddress).toEqual(selectAddressFormFields.selectAddress);
+    expect(fields.applicant1SelectAddress).toEqual(selectAddressFormFields.selectAddress);
   });
 
   test('should contain submit button', () => {

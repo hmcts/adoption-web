@@ -61,10 +61,10 @@ withPipeline(type, product, component) {
   }
 
   before('smoketest:aat') {
-    env.ADOP_WEB_URL = "https://adoption-web.aat.platform.hmcts.net/"
+    env.ADOP_WEB_URL = "https://adoption-web-staging.service.core-compute-aat.internal/"
   }
   before('functionalTest:aat') {
-    env.SKIP_BROWSER_TESTS = 'true'
+    yarnBuilder.yarn('test:functional:skip')
   }
 
 }
