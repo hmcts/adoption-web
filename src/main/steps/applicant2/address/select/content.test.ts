@@ -1,10 +1,21 @@
-import { FormContent, FormFields, FormOptions } from '../../../../app/form/Form';
-import { isAddressSelected } from '../../../../app/form/validation';
+import { FormContent, FormFields } from '../../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../../common/common.content';
+import {
+  generateContent as generateSelectAddressContent,
+  form as selectAddressForm,
+} from '../../../common/components/address-select';
 
 import { generateContent } from './content';
 
-jest.mock('../../../../app/form/validation');
+const enContent = {
+  section: 'Second applicant',
+  title: "What's your home address?",
+};
+
+const cyContent = {
+  section: 'Second applicant (in welsh)',
+  title: "What's your home address? (in welsh)",
+};
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('applicant2 > address > select > content', () => {
@@ -16,91 +27,32 @@ describe('applicant2 > address > select > content', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual('Second applicant');
-    expect(generatedContent.title).toEqual("What's your home address?");
-    expect(generatedContent.line1).toEqual("We'll send all court papers to this address.");
-    expect(generatedContent.postcode).toEqual('Postcode');
-    expect(generatedContent.selectAddress).toEqual('Select an address');
-    expect(generatedContent.cannotFindAddress).toEqual('I cannot find the address in the list');
-
-    expect((generatedContent.errors as any).applicant2SelectAddress.notSelected).toEqual('Select an address');
-
-    expect(generatedContent.items).toEqual([
-      { attributes: { id: 'totalAddressesFound' }, selected: true, text: '0 addresses found', value: -1 },
-    ]);
-
+    const selectAddressContent = generateSelectAddressContent(commonContent);
+    expect(generatedContent.section).toEqual(enContent.section);
+    expect(generatedContent.title).toEqual(enContent.title);
+    expect(generatedContent.errors).toEqual({
+      applicant2SelectAddress: (selectAddressContent.errors as any).selectAddress,
+    });
     expect(generatedContent.changePostCodeUrl).toEqual('/applicant2/address/lookup');
     expect(generatedContent.cantFindAddressUrl).toEqual('/applicant2/address/manual');
   });
 
   test('should return correct welsh content', () => {
+    const selectAddressContent = generateSelectAddressContent({ ...commonContent, language: 'cy' });
     generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual('Second applicant (in welsh)');
-    expect(generatedContent.title).toEqual("What's your home address? (in welsh)");
-    expect(generatedContent.line1).toEqual("We'll send all court papers to this address. (in welsh)");
-    expect(generatedContent.postcode).toEqual('Postcode (in welsh)');
-    expect(generatedContent.selectAddress).toEqual('Select an address (in welsh)');
-    expect(generatedContent.cannotFindAddress).toEqual('I cannot find the address in the list (in welsh)');
-
-    expect((generatedContent.errors as any).applicant2SelectAddress.notSelected).toEqual(
-      'Select an address (in welsh)'
-    );
-
-    expect(generatedContent.items).toEqual([
-      { attributes: { id: 'totalAddressesFound' }, selected: true, text: '0 addresses found (in welsh)', value: -1 },
-    ]);
-
+    expect(generatedContent.section).toEqual(cyContent.section);
+    expect(generatedContent.title).toEqual(cyContent.title);
+    expect(generatedContent.errors).toEqual({
+      applicant2SelectAddress: (selectAddressContent.errors as any).selectAddress,
+    });
     expect(generatedContent.changePostCodeUrl).toEqual('/applicant2/address/lookup');
     expect(generatedContent.cantFindAddressUrl).toEqual('/applicant2/address/manual');
   });
 
-  describe('when there is one address in session', () => {
-    test('should create correct options for selectAddress field', () => {
-      generatedContent = generateContent({ ...commonContent, addresses: [{ fullAddress: 'MOCK_FULL_ADDRESS_1' }] });
-      expect(generatedContent.items).toEqual([
-        { attributes: { id: 'totalAddressesFound' }, selected: true, text: '1 address found', value: -1 },
-        { text: 'MOCK_FULL_ADDRESS_1', value: 0 },
-      ]);
-    });
-
-    test('should create correct options for selectAddress field (welsh)', () => {
-      generatedContent = generateContent({
-        ...commonContent,
-        language: 'cy',
-        addresses: [{ fullAddress: 'MOCK_FULL_ADDRESS_1' }],
-      });
-      expect(generatedContent.items).toEqual([
-        { attributes: { id: 'totalAddressesFound' }, selected: true, text: '1 address found (in welsh)', value: -1 },
-        { text: 'MOCK_FULL_ADDRESS_1', value: 0 },
-      ]);
-    });
-  });
-
-  describe('when there addresses is undefined in session', () => {
-    test('should create correct options for selectAddress field', () => {
-      generatedContent = generateContent({ ...commonContent, addresses: undefined });
-      expect(generatedContent.items).toEqual([
-        { attributes: { id: 'totalAddressesFound' }, selected: true, text: '0 addresses found', value: -1 },
-      ]);
-    });
-
-    test('should create correct options for selectAddress field (welsh)', () => {
-      generatedContent = generateContent({ ...commonContent, language: 'cy', addresses: undefined });
-      expect(generatedContent.items).toEqual([
-        { attributes: { id: 'totalAddressesFound' }, selected: true, text: '0 addresses found (in welsh)', value: -1 },
-      ]);
-    });
-  });
-
   test('should contain applicant2SelectAddress field', () => {
-    const form = generatedContent.form as FormContent;
-    const fields = form.fields as FormFields;
-    const applicant2SelectAddressField = fields.applicant2SelectAddress as FormOptions;
-
-    expect(applicant2SelectAddressField.type).toBe('select');
-    expect((applicant2SelectAddressField.label as Function)(generatedContent)).toBe('Select an address');
-    expect(applicant2SelectAddressField.labelSize).toBe('m');
-    expect(applicant2SelectAddressField.validator).toBe(isAddressSelected);
+    const selectAddressFormFields = selectAddressForm.fields as FormFields;
+    const fields = generatedContent.form.fields as FormFields;
+    expect(fields.applicant2SelectAddress).toEqual(selectAddressFormFields.selectAddress);
   });
 
   test('should contain submit button', () => {
