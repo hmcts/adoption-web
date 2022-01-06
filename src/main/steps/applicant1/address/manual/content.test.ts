@@ -3,7 +3,7 @@ import { CommonContent, generatePageContent } from '../../../common/common.conte
 import {
   generateContent as generateManualAddressContent,
   form as manualAddressForm,
-} from '../../../common/components/manual-address';
+} from '../../../common/components/address-manual';
 
 import { generateContent } from './content';
 

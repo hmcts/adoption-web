@@ -1,8 +1,8 @@
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn, isInvalidPostcode } from '../../../app/form/validation';
-import { CommonContent, generatePageContent } from '../../common/common.content';
+import { CommonContent, generatePageContent } from '../common.content';
 
-import { generateContent } from './manual-address';
+import { generateContent } from './address-manual';
 
 jest.mock('../../../app/form/validation');
 
