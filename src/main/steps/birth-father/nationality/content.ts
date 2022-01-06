@@ -70,7 +70,7 @@ const values = [
 
 const includeNotSureOption = true;
 
-export const { generateForm, generateContent } = new Checkboxes(
+export const { form, generateContent } = new Checkboxes(
   en,
   cy,
   flow,

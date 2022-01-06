@@ -46,18 +46,10 @@ export class Checkboxes {
     cy: (): Record<string, unknown> => ({ ...this.cyContent, notSure: 'Not sure (in Welsh)', add: 'Add (in Welsh)' }),
   };
 
-  generateForm = (): FormContent => {
-    const form: FormContent = {
-      fields: this.renderCheckbox(),
-      ...defaultButtons,
-    };
-
-    if (this.includeNotSureOption) {
-      this.appendNotSureOption(form);
-    }
-
-    return form;
-  };
+  generateForm = (): FormContent => ({
+    fields: this.renderCheckbox(),
+    ...defaultButtons,
+  });
 
   renderCheckbox = (): FormFields => ({
     [`${this.flow}${this.dataTypeSingular}`]: {
@@ -72,8 +64,8 @@ export class Checkboxes {
     },
   });
 
-  renderCheckboxValues = (): FormInput[] =>
-    this.values.map(({ field, value, subtext, includeArraySubFields }) => ({
+  renderCheckboxValues = (): FormInput[] => {
+    const checkboxValues = this.values.map(({ field, value, subtext, includeArraySubFields }) => ({
       name: `${this.flow}${this.dataTypeSingular}`,
       label: l => l[field as string],
       value: value as string,
@@ -81,31 +73,38 @@ export class Checkboxes {
       subFields: includeArraySubFields ? this.renderArraySubFields() : undefined,
     }));
 
-  renderArraySubFields = (): Record<string, FormField> => ({
-    ...this.renderSummaryList(['value1', 'value2'], 'Remove', this.url ? this.url : '/#'),
-    ...this.renderDetails(),
+    if (this.includeNotSureOption) {
+      this.appendNotSureOption(checkboxValues);
+    }
+
+    return checkboxValues;
+  };
+
+  renderArraySubFields = (): FormFields => ({
+    [`${this.flow}Additional${this.dataTypePlural}`]: this.renderSummaryList(
+      ['value1', 'value2'],
+      'Remove',
+      this.url ? this.url : '/#'
+    ),
+    [`addAnother${this.dataTypeSingular}Details`]: this.renderDetails(),
     ...this.renderAddAnotherSubFields(true),
   });
 
-  renderSummaryList = (data: string[], label: string, url: PageLink): Record<string, FormField> => ({
-    [`${this.flow}Additional${this.dataTypePlural}`]: {
-      type: 'summarylist',
-      values: [],
-      rows: mapSummaryListContent(data, [label], url),
+  renderSummaryList = (data: string[], label: string, url: PageLink): FormField => ({
+    type: 'summarylist',
+    values: [],
+    rows: mapSummaryListContent(data, [label], url),
+  });
+
+  renderDetails = (): FormField => ({
+    type: 'details',
+    label: l => l.another,
+    subFields: {
+      ...this.renderAddAnotherSubFields(false),
     },
   });
 
-  renderDetails = (): Record<string, FormField> => ({
-    [`addAnother${this.dataTypeSingular}Details`]: {
-      type: 'details',
-      label: l => l.another,
-      subFields: {
-        ...this.renderAddAnotherSubFields(false),
-      },
-    },
-  });
-
-  renderAddAnotherSubFields = (validate: boolean): Record<string, FormField> => ({
+  renderAddAnotherSubFields = (validate: boolean): FormFields => ({
     [`addAnother${this.dataTypeSingular}`]: {
       type: 'input',
       classes: 'govuk-!-width-two-thirds',
@@ -121,14 +120,15 @@ export class Checkboxes {
     },
   });
 
-  appendNotSureOption = (form: FormContent): void => {
-    const values = form.fields[`${this.flow}${this.dataTypeSingular}`].values;
-    values.push({ divider: l => l.or });
-    values.push({
-      name: `${this.flow}${this.dataTypeSingular}`,
-      label: l => l.notSure,
-      value: 'Not sure',
-    });
+  appendNotSureOption = (values: FormInput[]): void => {
+    values.push(
+      { divider: l => l.or, label: '' },
+      {
+        name: `${this.flow}${this.dataTypeSingular}`,
+        label: l => l.notSure,
+        value: 'Not sure',
+      }
+    );
   };
 
   generateContent: TranslationFn = (content: CommonContent) => ({
