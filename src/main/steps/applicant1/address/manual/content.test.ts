@@ -7,8 +7,6 @@ import {
 
 import { generateContent } from './content';
 
-jest.mock('../../../../app/form/validation');
-
 const enContent = {
   section: 'Primary applicant',
   title: "What's your home address?",
