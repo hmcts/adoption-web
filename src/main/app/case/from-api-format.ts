@@ -4,7 +4,7 @@ import { invert } from 'lodash';
 
 import { Case, Checkbox, LanguagePreference, formFieldsToCaseMapping, formatCase } from './case';
 import { CaseData, ThePrayer, YesOrNo } from './definition';
-import { fromApi as formatAddress } from './formatter/address';
+//import { fromApi as formatAddress } from './formatter/address';
 import {
   fromApiApplicant1 as uploadedFilesFromApiApplicant1,
   fromApiApplicant2 as uploadedFilesFromApiApplicant2,
@@ -65,16 +65,16 @@ const fields: FromApiConverters = {
     applicant1DoesNotKnowApplicant2EmailAddress:
       data.applicant1KnowsApplicant2EmailAddress === YesOrNo.YES ? Checkbox.Unchecked : Checkbox.Checked,
   }),
-  applicant1KeepContactDetailsConfidential: data => ({
-    applicant1AddressPrivate: data.applicant1KeepContactDetailsConfidential,
-  }),
+  // applicant1KeepContactDetailsConfidential: data => ({
+  //   applicant1AddressPrivate: data.applicant1KeepContactDetailsConfidential,
+  // }),
   applicant1WantsToHavePapersServedAnotherWay: data => ({
     iWantToHavePapersServedAnotherWay: checkboxConverter(data.applicant1WantsToHavePapersServedAnotherWay),
   }),
-  applicant2KeepContactDetailsConfidential: data => ({
-    applicant2AddressPrivate: data.applicant2KeepContactDetailsConfidential,
-  }),
-  applicant2HomeAddress: data => formatAddress(data, 'applicant2'),
+  // applicant2KeepContactDetailsConfidential: data => ({
+  //   applicant2AddressPrivate: data.applicant2KeepContactDetailsConfidential,
+  // }),
+  // applicant2HomeAddress: data => formatAddress(data, 'applicant2'),
   applicant1DocumentsUploaded: uploadedFilesFromApiApplicant1,
   applicant2DocumentsUploaded: uploadedFilesFromApiApplicant2,
   applicant1CannotUploadSupportingDocument: uploadedFilesFromApiApplicant1,

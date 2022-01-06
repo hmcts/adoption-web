@@ -18,21 +18,35 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
     Object.assign(req.session.userCase, formData);
     console.log('post.ts 19');
     if (req.session.errors.length === 0) {
-      console.log('post.ts 21');
-      try {
-        req.session.userCase = await this.save(req, formData, this.getEventName(req));
-      } catch (err) {
-        req.locals.logger.error('Error saving', err);
-        //req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
-      }
-
+      console.log('post.ts 21' + JSON.stringify(formData));
       if (formData.addButton) {
         if (!req.session.userCase.applicant1AdditionalNames) {
           req.session.userCase.applicant1AdditionalNames = [];
         }
-        if (formData.applicant1AdditionalNames) {
-          req.session.userCase.applicant1AdditionalNames.push(formData.applicant1AdditionalNames[0]);
-          //req.session.userCase.applicant1AdditionalNames = '';
+        if (formData.applicant1AdditionalName) {
+          req.session.userCase.applicant1AdditionalNames.push(formData.applicant1AdditionalName);
+          req.session.userCase.applicant1AdditionalName = '';
+        }
+        console.log('post.ts 21');
+        try {
+          console.log('post.ts 31 data before save' + JSON.stringify(formData));
+          console.log('post.ts 32 data before save' + JSON.stringify(req.session.userCase.applicant1AdditionalNames));
+          req.session.userCase = await this.save(
+            req,
+            { ...formData, applicant1AdditionalNames: req.session.userCase.applicant1AdditionalNames },
+            this.getEventName(req)
+          );
+        } catch (err) {
+          req.locals.logger.error('Error saving', err);
+          // req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+        }
+      } else {
+        console.log('post.ts 41' + JSON.stringify(formData));
+        try {
+          req.session.userCase = await this.save(req, formData, this.getEventName(req));
+        } catch (err) {
+          req.locals.logger.error('Error saving', err);
+          // req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
         }
       }
     }

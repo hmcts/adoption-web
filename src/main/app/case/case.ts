@@ -6,6 +6,7 @@ import {
   ApplyingWith,
   CaseData,
   ChangedNameHow,
+  ContactDetails,
   DateAsString,
   DivorceDocument,
   DivorceOrDissolution,
@@ -15,11 +16,11 @@ import {
   ListValue,
   Nationality,
   OrderSummary,
+  //OtherName,
   Payment,
   PlacementOrder,
   State,
   YesOrNo,
-  //Children,
   //OtherName,
 } from './definition';
 
@@ -52,7 +53,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   connections: 'jurisdictionConnections',
 
   applicant1FirstNames: 'applicant1FirstName',
-  applicant1MiddleNames: 'applicant1MiddleName',
+  //applicant1MiddleNames: 'applicant1MiddleName',
   applicant1LastNames: 'applicant1LastName',
   applicant1FullName: 'applicant1FullName',
   applicant1HasOtherNames: 'applicant1HasOtherNames',
@@ -64,9 +65,10 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant1Nationality: 'applicant1Nationality',
   applicant1Address1: 'applicant1Address1',
   applicant1Address2: 'applicant1Address2',
-  applicant1Town: 'applicant1Town',
-  applicant1Country: 'applicant1Country',
-  applicant1PostCode: 'applicant1PostCode',
+  applicant1AddressTown: 'applicant1AddressTown',
+  applicant1AddressCounty: 'applicant1AddressCountry',
+  applicant1AddressPostcode: 'applicant1AddressPostCode',
+  applicant1ContactDetails: 'applicant1ContactDetails',
 
   applicant2FirstNames: 'applicant2FirstName',
   applicant2LastNames: 'applicant2LastName',
@@ -79,9 +81,11 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant2Nationality: 'applicant2Nationality',
   applicant2Address1: 'applicant2Address1',
   applicant2Address2: 'applicant2Address2',
-  applicant2Town: 'applicant2Town',
-  applicant2Country: 'applicant2Country',
-  applicant2PostCode: 'applicant2PostCode',
+  applicant2AddressTown: 'applicant2AddressTown',
+  applicant2AddressCounty: 'applicant2AddressCountry',
+  applicant2AddressPostcode: 'applicant2AddressPostCode',
+  applicant2AddressSameAsApplicant1: 'applicant2AddressSameAsApplicant1',
+  applicant2ContactDetails: 'applicant2ContactDetails',
 
   childrenFirstName: 'childrenFirstName',
   childrenLastName: 'childrenLastName',
@@ -138,6 +142,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
 
 export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data: InputFormat): OutputFormat {
   const result = {};
+  console.log('case.ts 1r1-a-' + JSON.stringify(data));
 
   for (const field of Object.keys(data)) {
     const value = fields[field];
@@ -155,6 +160,54 @@ export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data
 export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;
 
 export interface Case {
+  applicant1FirstNames?: string;
+  applicant1MiddleNames?: string;
+  applicant1LastNames?: string;
+  applicant1FullName?: string;
+  applicant1HasOtherNames?: YesOrNo;
+  applicant1AdditionalName?: string;
+  applicant1AdditionalNames?: string[];
+  applicant1EmailAddress?: string;
+  applicant1PhoneNumber?: string;
+  applicant1DateOfBirth?: CaseDate;
+  applicant1Occupation?: string;
+  applicant1Nationality?: Nationality[];
+  applicant1Address1?: string;
+  applicant1Address2?: string;
+  applicant1AddressTown?: string;
+  applicant1AddressCounty?: string;
+  applicant1AddressPostcode?: string;
+  applicant1ContactDetails?: ContactDetails[];
+
+  applicant2FirstNames?: string;
+  applicant2LastNames?: string;
+  applicant2AdditionalName?: string;
+  applicant2HasOtherNames?: YesOrNo;
+  applicant2AdditionalNames?: string[]; //(string | OtherName)[]
+  applicant2DateOfBirth?: CaseDate;
+  applicant2Occupation?: string;
+  applicant2EmailAddress?: string;
+  applicant2PhoneNumber?: string;
+  applicant2Nationality?: Nationality[];
+  applicant2Address1?: string;
+  applicant2Address2?: string;
+  applicant2AddressTown?: string;
+  applicant2AddressCounty?: string;
+  applicant2AddressPostcode?: string;
+  applicant2ContactDetails?: ContactDetails[];
+
+  childrenFirstName?: string;
+  childrenLastName?: string;
+  childrenDateOfBirth?: CaseDate;
+  childrenNationality?: Nationality[];
+  childrenFirstNameAfterAdoption?: string;
+  childrenLastNameAfterAdoption?: string;
+  childrenSexAtBirth?: Gender;
+  placementOrderNumber?: string;
+  placementOrderCourt?: string;
+  placementOrderDate?: CaseDate;
+  addAnotherPlacementOrder?: YesOrNo;
+
   addButton?: string;
   addAnotherNationality: string;
   // applicant1Nationality?: string[];
@@ -162,7 +215,7 @@ export interface Case {
   applicant2AdditionalNationalities?: string[];
   applicant1SelectAddress?: string;
   applicant2SelectAddress?: string;
-  applicant1ContactDetails?: string[];
+  //applicant1ContactDetails?: string[];
   applicant2AddressSameAsApplicant1?: YesOrNo;
   placementOrders?: PlacementOrder[];
   selectedPlacementOrderId?: string;
@@ -212,28 +265,7 @@ export interface Case {
   applicant1EnglishOrWelsh?: LanguagePreference;
   applicant2EnglishOrWelsh?: LanguagePreference;
 
-  applicant1FirstNames?: string;
-  applicant1MiddleNames?: string;
-  applicant1LastNames?: string;
-  applicant1FullName?: string;
-  applicant1HasOtherNames?: YesOrNo;
-  applicant1AdditionalNames?: string[]; //(string | OtherName)[]
-  applicant1EmailAddress?: string;
-  applicant1PhoneNumber?: string;
-  applicant1DateOfBirth?: CaseDate;
-  applicant1Occupation?: string;
-  applicant1Nationality?: Nationality[];
-  applicant1Address1?: string;
-  applicant1Address2?: string;
-  applicant1Town?: string;
-  applicant1Country?: string;
-  applicant1PostCode?: string;
-
   applicant1Address3?: string;
-  applicant1AddressTown?: string;
-  applicant1AddressCounty?: string;
-  applicant1AddressPostcode?: string;
-  applicant1AddressCountry?: string;
   applicant1AgreeToReceiveEmails?: Checkbox;
   applicant1ConfirmReceipt: YesOrNo;
   applicant2AgreeToReceiveEmails?: Checkbox;
@@ -243,41 +275,9 @@ export interface Case {
   applicant2FullNameOnCertificate?: string;
   applicant1AddressPrivate: YesOrNo;
 
-  applicant2FirstNames?: string;
-  applicant2LastNames?: string;
-  applicant2AdditionalName?: string;
-  applicant2HasOtherNames?: YesOrNo;
-  applicant2AdditionalNames?: string[]; //(string | OtherName)[]
-  applicant2DateOfBirth?: CaseDate;
-  applicant2Occupation?: string;
-  applicant2EmailAddress?: string;
-  applicant2PhoneNumber?: string;
-  applicant2Nationality?: Nationality[];
-  applicant2Address1?: string;
-  applicant2Address2?: string;
-  applicant2Town?: string;
-  applicant2Country?: string;
-  applicant2PostCode?: string;
-
-  childrenFirstName?: string;
-  childrenLastName?: string;
-  childrenDateOfBirth?: CaseDate;
-  childrenNationality?: Nationality[];
-  childrenFirstNameAfterAdoption?: string;
-  childrenLastNameAfterAdoption?: string;
-  childrenSexAtBirth?: Gender;
-  placementOrderNumber?: string;
-  placementOrderCourt?: string;
-  placementOrderDate?: CaseDate;
-  addAnotherPlacementOrder?: YesOrNo;
-
   applicant2MiddleNames?: string;
   applicant2AddressPrivate: YesOrNo;
   applicant2Address3?: string;
-  applicant2AddressTown?: string;
-  applicant2AddressCounty?: string;
-  applicant2AddressPostcode?: string;
-  applicant2AddressCountry?: string;
   applicant1LastNameChangedWhenRelationshipFormed?: YesOrNo;
   applicant2LastNameChangedWhenRelationshipFormed?: YesOrNo;
   applicant1NameChangedSinceRelationshipFormed?: YesOrNo;

@@ -2,7 +2,7 @@
 /* eslint-disable */
 // Generated using typescript-generator version 2.33.956 on 2021-11-12 15:28:24.
 
-import { CaseDate } from './case';
+import { CaseDate } from "./case";
 
 export interface Address {
   AddressLine1: string;
@@ -129,11 +129,11 @@ export interface AlternativeService {
 
 export interface Applicant {
   FirstName: string;
-  MiddleName: string;
   LastName: string;
+  Email: string;
   FullName: string;
   HasOtherNames: YesOrNo;
-  AdditionalNames: string[];//OtherName[];
+  AdditionalNames: ListValue<OtherName>[];
   DateOfBirth: DateAsString;
   Occupation: string;
   EmailAddress: string;
@@ -141,11 +141,12 @@ export interface Applicant {
   Nationality: Nationality[];
   Address1: string;
   Address2: string;
-  Town: string;
-  Country: string;
-  PostCode: string;
+  AddressTown: string;
+  AddressCountry: string;
+  AddressPostCode: string;
+  AddressSameAsApplicant1: string;
+  contactDetails: ContactDetails[];
 
-  Email: string;
   AgreedToReceiveEmails: YesOrNo;
   ConfirmReceipt: YesOrNo;
   LanguagePreferenceWelsh: YesOrNo;
@@ -268,6 +269,46 @@ export interface Bailiff {
   reasonFailureToServeByBailiff: string;
 }
 
+export const enum Nationality {
+  BRITHISH = "British",
+  IRISH = "Irish",
+  OTHER = "Other",
+  NOT_SURE = "Not sure",
+}
+
+export const enum ContactDetails {
+  EMAIL = 'email',
+  PHONE = 'phone',
+}
+
+export interface Children {
+  FirstName: string;
+  LastName: string;
+  DateOfBirth: DateAsString;
+  Nationality: Nationality[];
+  FirstNameAfterAdoption: string;
+  LastNameAfterAdoption: string;
+  SexAtBirth: Gender;
+}
+
+export interface OtherName {
+  name: string;
+}
+
+export const enum Gender {
+  MALE = "male",
+  FEMALE = "female",
+  NOT_GIVEN = "notGiven",
+  INTERSEX = 'intersex',
+}
+
+// export interface PlacementOrder {
+//   id: string;
+//   Number: string;
+//   Court: string;
+//   Date: DateAsString;
+// }
+
 export interface PlacementOrder {
   placementOrderId: string;
   placementOrderType?: string;
@@ -276,16 +317,61 @@ export interface PlacementOrder {
   placementOrderDate?: CaseDate;
 }
 
-export const enum Nationality {
-  BRITHISH = "British",
-  IRISH = "Irish",
-  OTHER = "Other",
-  NOT_SURE = "Not sure",
-}
-
 export interface CaseData {
-  applicationType: ApplicationType;
   applyingWith: ApplyingWith;
+  applicant1FirstName: string;
+  applicant1LastName: string;
+  applicant1Email: string;
+  applicant1FullName: string;
+  applicant1HasOtherNames: YesOrNo;
+  applicant1AdditionalNames: OtherName[];//OtherName[];//(string | OtherName)[];ListValue<DivorceDocument>[];
+  applicant1DateOfBirth: DateAsString;
+  applicant1Occupation: string;
+  applicant1EmailAddress: string;
+  applicant1PhoneNumber: string;
+  applicant1Nationality: Nationality[];
+  applicant1Address1: string;
+  applicant1Address2: string;
+  applicant1AddressTown: string;
+  applicant1AddressCountry: string;
+  applicant1AddressPostCode: string;
+  applicant1ContactDetails: ContactDetails[];
+
+  applicant2FirstName: string;
+  applicant2LastName: string;
+  applicant2Email: string;
+  applicant2FullName: string;
+  applicant2HasOtherNames: YesOrNo;
+  applicant2AdditionalNames: ListValue<OtherName>[];
+  applicant2DateOfBirth: DateAsString;
+  applicant2Occupation: string;
+  applicant2EmailAddress: string;
+  applicant2PhoneNumber: string;
+  applicant2Nationality: Nationality[];
+  applicant2Address1: string;
+  applicant2Address2: string;
+  applicant2AddressTown: string;
+  applicant2AddressCountry: string;
+  applicant2AddressPostCode: string;
+  applicant2AddressSameAsApplicant1: string;
+  applicant2ContactDetails: ContactDetails[];
+
+  childrenFirstName: string;
+  childrenLastName: string;
+  childrenDateOfBirth: DateAsString;
+  childrenNationality: Nationality[];
+  childrenFirstNameAfterAdoption: string;
+  childrenLastNameAfterAdoption: string;
+  childrenSexAtBirth: Gender;
+  placementOrderNumber: string;
+  placementOrderCourt: string;
+  placementOrderDate: DateAsString;
+  addAnotherPlacementOrder: YesOrNo;
+  hyphenatedCaseRef: string;
+
+  placementOrderId: string;
+
+  applicationType: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
   labelContentApplicant2: string;
   labelContentTheApplicant2: string;
@@ -294,25 +380,7 @@ export interface CaseData {
   labelContentUnionType: string;
   labelContentUnionTypeUC: string;
   labelContentApplicationType: ApplicationType;
-  applicant1Nationality: Nationality[];
 
-  applicant1FirstName: string;
-  applicant1MiddleName: string;
-  applicant1LastName: string;
-  applicant1FullName: string;
-  applicant1HasOtherNames: YesOrNo;
-  applicant1AdditionalNames?: (string | OtherName)[];
-  applicant1DateOfBirth: DateAsString;
-  applicant1Occupation: string;
-  applicant1EmailAddress: string;
-  applicant1PhoneNumber: string;
-  applicant1Address1: string;
-  applicant1Address2: string;
-  applicant1Town: string;
-  applicant1Country: string;
-  applicant1PostCode: string;
-
-  applicant1Email: string;
   applicant1AgreedToReceiveEmails: YesOrNo;
   applicant1ConfirmReceipt: YesOrNo;
   applicant1LanguagePreferenceWelsh: YesOrNo;
@@ -338,35 +406,7 @@ export interface CaseData {
   applicant1LegalProceedingsDetails: string;
   applicant1PcqId: string;
 
-  applicant2FirstName: string;
-  applicant2LastName: string;
-  applicant2HasOtherNames: YesOrNo;
-  applicant2AdditionalNames?: string[];//(string | OtherName)[];
-  applicant2DateOfBirth: DateAsString;
-  applicant2Occupation: string;
-  applicant2EmailAddress: string;
-  applicant2PhoneNumber: string;
-  applicant2Nationality: Nationality[];
-  applicant2Address1: string;
-  applicant2Address2: string;
-  applicant2Town: string;
-  applicant2Country: string;
-  applicant2PostCode: string;
-
-  childrenFirstName: string;
-  childrenLastName: string;
-  childrenDateOfBirth: DateAsString;
-  childrenNationality: Nationality[];
-  childrenFirstNameAfterAdoption: string;
-  childrenLastNameAfterAdoption: string;
-  childrenSexAtBirth: Gender;
-  placementOrderNumber: string;
-  placementOrderCourt: string;
-  placementOrderDate: DateAsString;
-  addAnotherPlacementOrder: YesOrNo;
-
   applicant2MiddleName: string;
-  applicant2Email: string;
   applicant2AgreedToReceiveEmails: YesOrNo;
   applicant2ConfirmReceipt: YesOrNo;
   applicant2LanguagePreferenceWelsh: YesOrNo;
@@ -609,13 +649,6 @@ export interface Children {
   LastNameAfterAdoption: string;
   SexAtBirth: Gender;
 }
-
-
-// export interface PlacementOrder {
-//   Number: string;
-//   Court: string;
-//   Date: DateAsString;
-// }
 
 export interface CaseInvite {
   applicant2InviteEmailAddress: string;
@@ -965,11 +998,6 @@ export const enum YesOrNo {
   NO = 'No',
 }
 
-export const enum ContactDetails {
-  EMAIL = 'email',
-  PHONE = 'phone',
-}
-
 export const enum SectionStatus {
   NOT_STARTED = 'NOT_STARTED',
   IN_PROGRESS = 'IN_PROGRESS',
@@ -997,10 +1025,6 @@ export const enum ApplicationType {
 export const enum ApplyingWith {
   ALONE = "alone",
   WITH_SPOUSE_OR_CIVIL_PARTNER = "withSpouseOrCivilPartner",
-}
-
-export interface OtherName {
-  name: string;
 }
 
 export const enum ChangedNameHow {
@@ -1084,13 +1108,6 @@ export const enum DocumentsServedWhere {
 export const enum FinancialOrderFor {
   APPLICANT = 'applicant',
   CHILDREN = 'children',
-}
-
-export const enum Gender {
-  MALE = 'male',
-  FEMALE = 'female',
-  NOT_GIVEN = 'notGiven',
-  INTERSEX = 'intersex',
 }
 
 export const enum GeneralOrderDivorceParties {

@@ -2,7 +2,7 @@ import { isInvalidHelpWithFeesRef } from '../form/validation';
 
 import { Case, CaseDate, Checkbox, LanguagePreference, formFieldsToCaseMapping, formatCase } from './case';
 import { CaseData, ChangedNameHow, DivorceOrDissolution, Gender, ThePrayer, YesOrNo } from './definition';
-import { applicant2AddressToApi } from './formatter/address'; //applicant1AddressToApi
+//import { applicant2AddressToApi } from './formatter/address'; //applicant1AddressToApi
 
 export type OrNull<T> = { [K in keyof T]: T[K] | null };
 
@@ -52,10 +52,24 @@ const fields: ToApiConverters = {
   placementOrderDate: data => ({
     placementOrderDate: toApiDate(data.placementOrderDate),
   }),
-  // applicant1AdditionalNames: data => ({
-  //   applicant1AdditionalNames: (data.applicant1HasOtherNames === YesOrNo.YES ?
-  //     (data.applicant1AdditionalNames || []).map(item => ({ name: `${item}` })) : [])
-  // }),
+  //
+  // export const fromApiApplicant1 = (data: Partial<CaseData>): Partial<Case> => ({
+  //   applicant1UploadedFiles:
+  //     data.applicant1DocumentsUploaded?.map(file => ({
+  //       id: `${file.id}`,
+  //       name: `${file.value.documentFileName}`,
+  //     })) || [],
+  //   applicant1DocumentsUploaded: data.applicant1DocumentsUploaded,
+  //   applicant1CannotUpload: data.applicant1CannotUploadSupportingDocument?.length ? Checkbox.Checked : Checkbox.Unchecked,
+  //   applicant1CannotUploadDocuments: data.applicant1CannotUploadSupportingDocument,
+  // });
+  //
+  applicant1AdditionalNames: data => ({
+    applicant1AdditionalNames:
+      data.applicant1HasOtherNames === YesOrNo.YES
+        ? (data.applicant1AdditionalNames || []).map(item => ({ name: `${item}` }))
+        : [],
+  }),
   jurisdictionResidualEligible: data => ({
     jurisdictionResidualEligible: checkboxConverter(data.jurisdictionResidualEligible),
   }),
@@ -82,12 +96,12 @@ const fields: ToApiConverters = {
   applicant2AgreeToReceiveEmails: data => ({
     applicant2AgreedToReceiveEmails: checkboxConverter(data.applicant2AgreeToReceiveEmails),
   }),
-  applicant1AddressPrivate: data => ({
-    applicant1KeepContactDetailsConfidential: data.applicant1AddressPrivate,
-  }),
-  applicant2AddressPrivate: data => ({
-    applicant2KeepContactDetailsConfidential: data.applicant2AddressPrivate,
-  }),
+  // applicant1AddressPrivate: data => ({
+  //   applicant1KeepContactDetailsConfidential: data.applicant1AddressPrivate,
+  // }),
+  // applicant2AddressPrivate: data => ({
+  //   applicant2KeepContactDetailsConfidential: data.applicant2AddressPrivate,
+  // }),
   //applicant2AddressPostcode: applicant2AddressToApi,
   applicant1DoesNotKnowApplicant2EmailAddress: data => ({
     applicant1KnowsApplicant2EmailAddress:
@@ -163,22 +177,22 @@ const fields: ToApiConverters = {
       ? setUnreachableAnswersToNull(['applicant2HWFAppliedForFees', 'applicant2HWFReferenceNumber'])
       : {}),
   }),
-  applicant1KnowsApplicant2Address: data => ({
-    applicant1KnowsApplicant2Address: data.applicant1KnowsApplicant2Address,
-    ...(data.applicant1KnowsApplicant2Address === YesOrNo.NO
-      ? applicant2AddressToApi(
-          setUnreachableAnswersToNull([
-            'applicant2Address1',
-            'applicant2Address2',
-            'applicant2Address3',
-            'applicant2AddressCountry',
-            'applicant2AddressCounty',
-            'applicant2AddressPostcode',
-            'applicant2AddressTown',
-          ])
-        )
-      : setUnreachableAnswersToNull(['applicant1WantsToHavePapersServedAnotherWay'])),
-  }),
+  // applicant1KnowsApplicant2Address: data => ({
+  //   applicant1KnowsApplicant2Address: data.applicant1KnowsApplicant2Address,
+  //   ...(data.applicant1KnowsApplicant2Address === YesOrNo.NO
+  //     ? applicant2AddressToApi(
+  //         setUnreachableAnswersToNull([
+  //           'applicant2Address1',
+  //           'applicant2Address2',
+  //           'applicant2Address3',
+  //           'applicant2AddressCountry',
+  //           'applicant2AddressCounty',
+  //           'applicant2AddressPostcode',
+  //           'applicant2AddressTown',
+  //         ])
+  //       )
+  //     : setUnreachableAnswersToNull(['applicant1WantsToHavePapersServedAnotherWay'])),
+  // }),
   inTheUk: data => ({
     marriageMarriedInUk: data.inTheUk,
     ...(data.inTheUk === YesOrNo.YES

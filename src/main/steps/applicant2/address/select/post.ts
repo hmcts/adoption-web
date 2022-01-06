@@ -30,6 +30,20 @@ export default class SelectAddressPostController extends PostController<AnyObjec
         req.session.userCase.applicant2AddressTown = selectedAddress.town;
         req.session.userCase.applicant2AddressCounty = selectedAddress.county;
         req.session.userCase.applicant2AddressPostcode = selectedAddress.postcode;
+
+        formData.applicant2Address1 = selectedAddress.street1;
+        formData.applicant2Address2 = selectedAddress.street2;
+        formData.applicant2AddressTown = selectedAddress.town;
+        formData.applicant2AddressCounty = selectedAddress.county;
+        formData.applicant2AddressPostcode = selectedAddress.postcode;
+
+        console.log('select-address: ' + JSON.stringify(selectedAddress));
+        try {
+          req.session.userCase = await this.save(req, formData, this.getEventName(req));
+        } catch (err) {
+          req.locals.logger.error('Error saving', err);
+          //req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+        }
       }
     }
 
