@@ -23,7 +23,7 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
         req.session.userCase = await this.save(req, formData, this.getEventName(req));
       } catch (err) {
         req.locals.logger.error('Error saving', err);
-        req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+        //req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
       }
 
       if (formData.addButton) {

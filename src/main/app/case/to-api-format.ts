@@ -2,7 +2,7 @@ import { isInvalidHelpWithFeesRef } from '../form/validation';
 
 import { Case, CaseDate, Checkbox, LanguagePreference, formFieldsToCaseMapping, formatCase } from './case';
 import { CaseData, ChangedNameHow, DivorceOrDissolution, Gender, ThePrayer, YesOrNo } from './definition';
-import { applicant1AddressToApi, applicant2AddressToApi } from './formatter/address';
+import { applicant2AddressToApi } from './formatter/address'; //applicant1AddressToApi
 
 export type OrNull<T> = { [K in keyof T]: T[K] | null };
 
@@ -75,7 +75,7 @@ const fields: ToApiConverters = {
   applicant2EnglishOrWelsh: data => ({
     applicant2LanguagePreferenceWelsh: languagePreferenceYesNoOrNull(data.applicant2EnglishOrWelsh),
   }),
-  applicant1AddressPostcode: applicant1AddressToApi,
+  //applicant1AddressPostcode: applicant1AddressToApi,
   applicant1AgreeToReceiveEmails: data => ({
     applicant1AgreedToReceiveEmails: checkboxConverter(data.applicant1AgreeToReceiveEmails),
   }),
@@ -88,7 +88,7 @@ const fields: ToApiConverters = {
   applicant2AddressPrivate: data => ({
     applicant2KeepContactDetailsConfidential: data.applicant2AddressPrivate,
   }),
-  applicant2AddressPostcode: applicant2AddressToApi,
+  //applicant2AddressPostcode: applicant2AddressToApi,
   applicant1DoesNotKnowApplicant2EmailAddress: data => ({
     applicant1KnowsApplicant2EmailAddress:
       data.applicant1DoesNotKnowApplicant2EmailAddress === Checkbox.Checked ? YesOrNo.NO : YesOrNo.YES,

@@ -54,7 +54,7 @@ const fields: FromApiConverters = {
         ? data.applicant2LanguagePreferenceWelsh
         : LanguagePreference.English,
   }),
-  applicant1HomeAddress: data => formatAddress(data, 'applicant1'),
+  //applicant1HomeAddress: data => formatAddress(data, 'applicant1'),
   applicant1AgreedToReceiveEmails: data => ({
     applicant1AgreeToReceiveEmails: checkboxConverter(data.applicant1AgreedToReceiveEmails),
   }),
