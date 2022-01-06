@@ -10,13 +10,11 @@ import { generateContent } from './content';
 const enContent = {
   section: 'Primary applicant',
   title: "What's your home address?",
-  line1: "We'll send all court papers to this address.",
 };
 
 const cyContent = {
   section: 'Primary applicant (in welsh)',
   title: "What's your home address? (in welsh)",
-  line1: "We'll send all court papers to this address. (in welsh)",
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
@@ -32,7 +30,6 @@ describe('applicant1 > address > lookup > content', () => {
     const addressLookupContent = generateAddressLookupContent(commonContent);
     expect(generatedContent.section).toEqual(enContent.section);
     expect(generatedContent.title).toEqual(enContent.title);
-    expect(generatedContent.line1).toEqual(enContent.line1);
     expect(generatedContent.errors).toEqual({
       applicant1AddressPostcode: (addressLookupContent.errors as any).adressPostcode,
     });
@@ -44,7 +41,6 @@ describe('applicant1 > address > lookup > content', () => {
     generatedContent = generateContent({ ...commonContent, language: 'cy' });
     expect(generatedContent.section).toEqual(cyContent.section);
     expect(generatedContent.title).toEqual(cyContent.title);
-    expect(generatedContent.line1).toEqual(cyContent.line1);
     expect(generatedContent.errors).toEqual({
       applicant1AddressPostcode: (addressLookupContent.errors as any).adressPostcode,
     });

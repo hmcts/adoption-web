@@ -1,13 +1,24 @@
-import { FormContent, FormFields, FormOptions } from '../../../../app/form/Form';
-import { isInvalidPostcode } from '../../../../app/form/validation';
+import { FormContent, FormFields } from '../../../../app/form/Form';
 import { CommonContent } from '../../../common/common.content';
+import {
+  form as addressLookupForm,
+  generateContent as generateAddressLookupContent,
+} from '../../../common/components/address-lookup';
 
 import { generateContent } from './content';
 
-jest.mock('../../../../app/form/validation');
+const enContent = {
+  section: 'Second applicant',
+  title: "What's your home address?",
+};
+
+const cyContent = {
+  section: 'Second applicant (in welsh)',
+  title: "What's your home address? (in welsh)",
+};
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('find-address content', () => {
+describe('applicant2 > address > lookup > content', () => {
   const commonContent = { language: 'en', userCase: {} } as CommonContent;
   let generatedContent;
 
@@ -16,49 +27,30 @@ describe('find-address content', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual('Second applicant');
-    expect(generatedContent.title).toEqual("What's your home address?");
-    expect(generatedContent.line1).toEqual("We'll send all court papers to this address.");
-    expect(generatedContent.postcode).toEqual('Postcode');
-    expect(generatedContent.findAddress).toEqual('Find address');
-    expect(generatedContent.enterAddressManually).toEqual('Or enter address manually');
-
-    expect((generatedContent.errors as any).applicant2AddressPostcode.required).toEqual('Enter a valid postcode');
-    expect((generatedContent.errors as any).applicant2AddressPostcode.invalid).toEqual('Enter a valid postcode');
-
+    const addressLookupContent = generateAddressLookupContent(commonContent);
+    expect(generatedContent.section).toEqual(enContent.section);
+    expect(generatedContent.title).toEqual(enContent.title);
+    expect(generatedContent.errors).toEqual({
+      applicant1AddressPostcode: (addressLookupContent.errors as any).adressPostcode,
+    });
     expect(generatedContent.manualAddressUrl).toEqual('/applicant2/address/manual');
   });
 
   test('should return correct welsh content', () => {
+    const addressLookupContent = generateAddressLookupContent({ ...commonContent, language: 'cy' });
     generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual('Second applicant (in welsh)');
-    expect(generatedContent.title).toEqual("What's your home address? (in welsh)");
-    expect(generatedContent.line1).toEqual("We'll send all court papers to this address. (in welsh)");
-    expect(generatedContent.postcode).toEqual('Postcode (in welsh)');
-    expect(generatedContent.findAddress).toEqual('Find address (in welsh)');
-    expect(generatedContent.enterAddressManually).toEqual('Or enter address manually (in welsh)');
-
-    expect((generatedContent.errors as any).applicant2AddressPostcode.required).toEqual(
-      'Enter a valid postcode (in welsh)'
-    );
-    expect((generatedContent.errors as any).applicant2AddressPostcode.invalid).toEqual(
-      'Enter a valid postcode (in welsh)'
-    );
-
+    expect(generatedContent.section).toEqual(cyContent.section);
+    expect(generatedContent.title).toEqual(cyContent.title);
+    expect(generatedContent.errors).toEqual({
+      applicant1AddressPostcode: (addressLookupContent.errors as any).adressPostcode,
+    });
     expect(generatedContent.manualAddressUrl).toEqual('/applicant2/address/manual');
   });
 
   test('should contain applicant2AddressPostcode field', () => {
-    const form = generatedContent.form as FormContent;
-    const fields = form.fields as FormFields;
-    const applicant2AddressPostcodeField = fields.applicant2AddressPostcode as FormOptions;
-
-    expect(applicant2AddressPostcodeField.type).toBe('text');
-    expect(applicant2AddressPostcodeField.classes).toBe('govuk-label govuk-input--width-10');
-    expect((applicant2AddressPostcodeField.label as Function)(generatedContent)).toBe('Postcode');
-    expect(applicant2AddressPostcodeField.labelSize).toBe('m');
-    expect(applicant2AddressPostcodeField.attributes!.maxLength).toBe(14);
-    expect(applicant2AddressPostcodeField.validator).toBe(isInvalidPostcode);
+    const addressLookupFormFields = addressLookupForm.fields as FormFields;
+    const fields = generatedContent.form.fields as FormFields;
+    expect(fields.applicant2AddressPostcode).toEqual(addressLookupFormFields.addressPostcode);
   });
 
   test('should contain find address button', () => {

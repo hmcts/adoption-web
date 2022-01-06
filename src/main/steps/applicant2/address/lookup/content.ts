@@ -1,55 +1,34 @@
 import { TranslationFn } from '../../../../app/controller/GetController';
-import { FormContent } from '../../../../app/form/Form';
-import { isInvalidPostcode } from '../../../../app/form/validation';
+import { FormContent, FormFields } from '../../../../app/form/Form';
+import {
+  form as addressLookupForm,
+  generateContent as addressLookupGenerateContent,
+} from '../../../common/components/address-lookup';
 import { APPLICANT_2_MANUAL_ADDRESS } from '../../../urls';
 
-const en = () => ({
+const en = addressLookupContent => ({
   section: 'Second applicant',
   title: "What's your home address?",
-  line1: "We'll send all court papers to this address.",
-  postcode: 'Postcode',
-  findAddress: 'Find address',
-  enterAddressManually: 'Or enter address manually',
   errors: {
-    applicant2AddressPostcode: {
-      required: 'Enter a valid postcode',
-      invalid: 'Enter a valid postcode',
-    },
+    applicant2AddressPostcode: addressLookupContent.errors.adressPostcode,
   },
   manualAddressUrl: APPLICANT_2_MANUAL_ADDRESS,
 });
 
-const cy = () => ({
+const cy = addressLookupContent => ({
   section: 'Second applicant (in welsh)',
   title: "What's your home address? (in welsh)",
-  line1: "We'll send all court papers to this address. (in welsh)",
-  postcode: 'Postcode (in welsh)',
-  findAddress: 'Find address (in welsh)',
-  enterAddressManually: 'Or enter address manually (in welsh)',
   errors: {
-    applicant2AddressPostcode: {
-      required: 'Enter a valid postcode (in welsh)',
-      invalid: 'Enter a valid postcode (in welsh)',
-    },
+    applicant2AddressPostcode: addressLookupContent.errors.adressPostcode,
   },
   manualAddressUrl: APPLICANT_2_MANUAL_ADDRESS,
 });
 
+const addressLookupFormFields = addressLookupForm.fields as FormFields;
 export const form: FormContent = {
+  ...addressLookupForm,
   fields: {
-    applicant2AddressPostcode: {
-      type: 'text',
-      classes: 'govuk-label govuk-input--width-10',
-      label: l => l.postcode,
-      labelSize: 'm',
-      attributes: {
-        maxLength: 14,
-      },
-      validator: isInvalidPostcode,
-    },
-  },
-  submit: {
-    text: l => l.findAddress,
+    applicant2AddressPostcode: addressLookupFormFields.addressPostcode,
   },
 };
 
@@ -59,8 +38,10 @@ const languages = {
 };
 
 export const generateContent: TranslationFn = content => {
-  const translations = languages[content.language]();
+  const addressLookupContent = addressLookupGenerateContent(content);
+  const translations = languages[content.language](addressLookupContent);
   return {
+    ...addressLookupContent,
     ...translations,
     form,
   };
