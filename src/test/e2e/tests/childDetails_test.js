@@ -13,11 +13,23 @@ Scenario(
 );
 
 Scenario(
-  'Child Details Birth certificate details details event',
+  'Child Details Birth certificate details event',
   async ({ loginPage, childrenBirthCertificatePage, taskListPage }) => {
     await loginPage.signInWithCitizenUser(config.citizenUserOne);
     await taskListPage.goToTaskListPage();
     await taskListPage.selectChildrenBirthCertificate();
     await childrenBirthCertificatePage.childDetailsBirthCertificaterSection();
+    await taskListPage.verifyChildBirthCertificateDetailsStatus();
+  }
+);
+
+Scenario(
+  'Child Adoption certificate details event',
+  async ({ loginPage, childAdoptionCertificateDetailsPage, taskListPage }) => {
+    await loginPage.signInWithCitizenUser(config.citizenUserOne);
+    await taskListPage.goToTaskListPage();
+    await taskListPage.selectChildAdoptionCertificateDetails();
+    await childAdoptionCertificateDetailsPage.childAdoptionCertificateDetailsSection();
+    await taskListPage.verifyAdoptionCertificateDetailStatus();
   }
 );

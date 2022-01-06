@@ -6,7 +6,7 @@ module.exports = {
     password: defaultPassword,
   },
 
-  baseUrl: process.env.ADOP_WEB_URL || 'https://adoption-web-staging.service.core-compute-aat.internal/',
+  baseUrl: process.env.ADOP_WEB_URL || 'https://adoption-web.aat.platform.hmcts.net/',
 
   definition: {
     jurisdiction: 'PUBLICLAW',
