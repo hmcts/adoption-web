@@ -3,7 +3,7 @@ import { FieldPrefix } from '../../../../app/case/case';
 
 import SelectAddressPostController from './post';
 
-describe('applicant2 > address > select > post', () => {
+describe('applicant1 > address > select > post', () => {
   let controller;
 
   beforeEach(() => {
@@ -15,6 +15,6 @@ describe('applicant2 > address > select > post', () => {
   });
 
   test('should call super constructor with correct params', async () => {
-    expect(controller.fieldPrefix).toBe(FieldPrefix.APPLICANT2);
+    expect(controller.fieldPrefix).toBe(FieldPrefix.APPLICANT1);
   });
 });

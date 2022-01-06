@@ -3,20 +3,18 @@ import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn, isInvalidPostcode } from '../../../app/form/validation';
 
 const en = () => ({
-  section: 'Primary applicant',
-  title: "What's your home address?",
   buildingStreet: 'Building and street',
   town: 'Town or city',
   county: 'County',
   postcode: 'Postcode',
   errors: {
-    applicant1Address1: {
+    address1: {
       required: 'Enter the first line of the address',
     },
-    applicant1AddressTown: {
+    addressTown: {
       required: 'Enter the town or city',
     },
-    applicant1AddressPostcode: {
+    addressPostcode: {
       required: 'Enter a valid postcode',
       invalid: 'Enter a valid postcode',
     },
@@ -24,20 +22,18 @@ const en = () => ({
 });
 
 const cy = () => ({
-  section: 'Primary applicant (in welsh)',
-  title: "What's your home address? (in welsh)",
   buildingStreet: 'Building and street (in welsh)',
   town: 'Town or city (in welsh)',
   county: 'County (in welsh)',
   postcode: 'Postcode (in welsh)',
   errors: {
-    applicant1Address1: {
+    address1: {
       required: 'Enter the first line of the address (in welsh)',
     },
-    applicant1AddressTown: {
+    addressTown: {
       required: 'Enter the town or city (in welsh)',
     },
-    applicant1AddressPostcode: {
+    addressPostcode: {
       required: 'Enter a valid postcode (in welsh)',
       invalid: 'Enter a valid postcode (in welsh)',
     },
@@ -46,33 +42,33 @@ const cy = () => ({
 
 export const form: FormContent = {
   fields: {
-    applicant1Address1: {
+    address1: {
       type: 'text',
       classes: 'govuk-label',
       label: l => l.buildingStreet,
       labelSize: null,
       validator: isFieldFilledIn,
     },
-    applicant1Address2: {
+    address2: {
       type: 'text',
       classes: 'govuk-label',
       label: '',
       labelSize: null,
     },
-    applicant1AddressTown: {
+    addressTown: {
       type: 'text',
       classes: 'govuk-label govuk-!-width-two-thirds',
       label: l => l.town,
       labelSize: null,
       validator: isFieldFilledIn,
     },
-    applicant1AddressCounty: {
+    addressCounty: {
       type: 'text',
       classes: 'govuk-label govuk-!-width-two-thirds',
       label: l => l.county,
       labelSize: null,
     },
-    applicant1AddressPostcode: {
+    addressPostcode: {
       type: 'text',
       classes: 'govuk-label govuk-input--width-10',
       label: l => l.postcode,

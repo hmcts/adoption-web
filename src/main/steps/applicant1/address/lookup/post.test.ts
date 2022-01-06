@@ -2,7 +2,7 @@ import AddressLookupPostControllerBase from '../../../../app/address/AddressLook
 
 import AddressLookupPostController from './post';
 
-describe('applicant2 > address > lookup > post', () => {
+describe('applicant1 > address > lookup > post', () => {
   let controller;
 
   beforeEach(() => {
@@ -14,6 +14,6 @@ describe('applicant2 > address > lookup > post', () => {
   });
 
   test('should call super constructor with correct params', async () => {
-    expect(controller.fieldPrefix).toBe('applicant2');
+    expect(controller.fieldPrefix).toBe('applicant1');
   });
 });

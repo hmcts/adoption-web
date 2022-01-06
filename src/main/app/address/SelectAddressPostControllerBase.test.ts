@@ -1,6 +1,6 @@
 const mockGetParsedBody = jest.fn();
 const mockGetErrors = jest.fn();
-jest.mock('../../../app/form/Form', () => {
+jest.mock('../form/Form', () => {
   return {
     Form: jest.fn().mockImplementation(() => {
       return { getParsedBody: mockGetParsedBody, getErrors: mockGetErrors };
@@ -9,14 +9,15 @@ jest.mock('../../../app/form/Form', () => {
 });
 
 const mockGetNextStepUrl = jest.fn();
-jest.mock('../../../steps', () => {
+jest.mock('../../steps', () => {
   return { getNextStepUrl: mockGetNextStepUrl };
 });
 
-import { mockRequest } from '../../../../test/unit/utils/mockRequest';
-import { mockResponse } from '../../../../test/unit/utils/mockResponse';
+import { mockRequest } from '../../../test/unit/utils/mockRequest';
+import { mockResponse } from '../../../test/unit/utils/mockResponse';
+import { FieldPrefix } from '../case/case';
 
-import SelectAddressPostController from './post';
+import SelectAddressPostController from './SelectAddressPostControllerBase';
 
 describe('SelectAddressPostController', () => {
   let req;
@@ -40,7 +41,7 @@ describe('SelectAddressPostController', () => {
       },
     });
     res = mockResponse();
-    controller = new SelectAddressPostController({});
+    controller = new SelectAddressPostController({}, FieldPrefix.APPLICANT1);
   });
 
   describe('when there are no form errors', () => {
@@ -59,7 +60,7 @@ describe('SelectAddressPostController', () => {
         req.body.applicant1SelectAddress = 0;
         mockGetParsedBody.mockReturnValue({ applicant1SelectAddress: 0 });
         mockGetErrors.mockReturnValue([]);
-        controller = new SelectAddressPostController({});
+        controller = new SelectAddressPostController({}, FieldPrefix.APPLICANT1);
       });
 
       test('should set the address fields in userCase session data', async () => {
@@ -76,7 +77,7 @@ describe('SelectAddressPostController', () => {
       beforeEach(() => {
         mockGetParsedBody.mockReturnValue({ applicant1SelectAddress: -1 });
         mockGetErrors.mockReturnValue([]);
-        controller = new SelectAddressPostController({});
+        controller = new SelectAddressPostController({}, FieldPrefix.APPLICANT1);
       });
 
       test('should not set the address fields in userCase session data', async () => {

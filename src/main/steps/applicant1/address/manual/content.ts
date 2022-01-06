@@ -6,22 +6,22 @@ import {
 } from '../../../common/components/address-manual';
 
 const en = manualAddressContent => ({
-  section: 'Second applicant',
+  section: 'Primary applicant',
   title: "What's your home address?",
   errors: {
-    applicant2Address1: manualAddressContent.errors.address1,
-    applicant2AddressTown: manualAddressContent.errors.addressTown,
-    applicant2AddressPostcode: manualAddressContent.errors.addressPostcode,
+    applicant1Address1: manualAddressContent.errors.address1,
+    applicant1AddressTown: manualAddressContent.errors.addressTown,
+    applicant1AddressPostcode: manualAddressContent.errors.addressPostcode,
   },
 });
 
 const cy = manualAddressContent => ({
-  section: 'Second applicant (in welsh)',
+  section: 'Primary applicant (in welsh)',
   title: "What's your home address? (in welsh)",
   errors: {
-    applicant2Address1: manualAddressContent.errors.address1,
-    applicant2AddressTown: manualAddressContent.errors.addressTown,
-    applicant2AddressPostcode: manualAddressContent.errors.addressPostcode,
+    applicant1Address1: manualAddressContent.errors.address1,
+    applicant1AddressTown: manualAddressContent.errors.addressTown,
+    applicant1AddressPostcode: manualAddressContent.errors.addressPostcode,
   },
 });
 
@@ -29,11 +29,11 @@ const manualAddressFormFields = manualAddressForm.fields as FormFields;
 export const form: FormContent = {
   ...manualAddressForm,
   fields: {
-    applicant2Address1: manualAddressFormFields.address1,
-    applicant2Address2: manualAddressFormFields.address2,
-    applicant2AddressTown: manualAddressFormFields.addressTown,
-    applicant2AddressCounty: manualAddressFormFields.addressCounty,
-    applicant2AddressPostcode: manualAddressFormFields.addressPostcode,
+    applicant1Address1: manualAddressFormFields.address1,
+    applicant1Address2: manualAddressFormFields.address2,
+    applicant1AddressTown: manualAddressFormFields.addressTown,
+    applicant1AddressCounty: manualAddressFormFields.addressCounty,
+    applicant1AddressPostcode: manualAddressFormFields.addressPostcode,
   },
 };
 
