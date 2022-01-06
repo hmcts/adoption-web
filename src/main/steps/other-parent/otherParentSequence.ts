@@ -15,6 +15,11 @@ export interface Step {
 
 export const otherParentSequence: Step[] = [
   {
+    url: Urls.OTHER_PARENT_EXISTS,
+    showInSection: Sections.AboutOtherParent,
+    getNextStep: () => Urls.OTHER_PARENT_NAME,
+  },
+  {
     url: Urls.OTHER_PARENT_NAME,
     showInSection: Sections.AboutOtherParent,
     getNextStep: () => Urls.OTHER_PARENT_ADDRESS_KNOWN,
