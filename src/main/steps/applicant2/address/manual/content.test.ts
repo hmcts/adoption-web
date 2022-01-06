@@ -1,11 +1,21 @@
 import { FormContent, FormFields, FormOptions } from '../../../../app/form/Form';
-import { isFieldFilledIn, isInvalidPostcode } from '../../../../app/form/validation';
-// import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../../common/common.content';
+import {
+  generateContent as generateManualAddressContent,
+  form as manualAddressForm,
+} from '../../../common/components/address-manual';
 
 import { generateContent } from './content';
 
-jest.mock('../../../../app/form/validation');
+const enContent = {
+  section: 'Second applicant',
+  title: "What's your home address?",
+};
+
+const cyContent = {
+  section: 'Second applicant (in welsh)',
+  title: "What's your home address? (in welsh)",
+};
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('applicant2 > address > manual > content', () => {
@@ -13,6 +23,8 @@ describe('applicant2 > address > manual > content', () => {
   let generatedContent;
   let form;
   let fields;
+  const manualAddressFormFields = manualAddressForm.fields as FormFields;
+
   beforeEach(() => {
     generatedContent = generateContent(commonContent);
     form = generatedContent.form as FormContent;
@@ -20,79 +32,51 @@ describe('applicant2 > address > manual > content', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual('Second applicant');
-    expect(generatedContent.title).toEqual("What's your home address?");
-    expect(generatedContent.buildingStreet).toEqual('Building and street');
-    expect(generatedContent.town).toEqual('Town or city');
-    expect(generatedContent.county).toEqual('County');
-    expect((generatedContent.errors as any).applicant2Address1.required).toEqual('Enter the first line of the address');
-    expect((generatedContent.errors as any).applicant2AddressTown.required).toEqual('Enter the town or city');
-    expect((generatedContent.errors as any).applicant2AddressPostcode.required).toEqual('Enter a valid postcode');
-    expect((generatedContent.errors as any).applicant2AddressPostcode.invalid).toEqual('Enter a valid postcode');
+    const manualAddressContent = generateManualAddressContent(commonContent);
+    expect(generatedContent.section).toEqual(enContent.section);
+    expect(generatedContent.title).toEqual(enContent.title);
+    expect(generatedContent.errors).toEqual({
+      applicant2Address1: (manualAddressContent.errors as any).address1,
+      applicant2AddressTown: (manualAddressContent.errors as any).addressTown,
+      applicant2AddressPostcode: (manualAddressContent.errors as any).addressPostcode,
+    });
   });
 
   test('should return correct welsh content', () => {
+    const manualAddressContent = generateManualAddressContent({ ...commonContent, language: 'cy' });
     generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual('Second applicant (in welsh)');
-    expect(generatedContent.title).toEqual("What's your home address? (in welsh)");
-    expect(generatedContent.buildingStreet).toEqual('Building and street (in welsh)');
-    expect(generatedContent.town).toEqual('Town or city (in welsh)');
-    expect(generatedContent.county).toEqual('County (in welsh)');
-    expect((generatedContent.errors as any).applicant2Address1.required).toEqual(
-      'Enter the first line of the address (in welsh)'
-    );
-    expect((generatedContent.errors as any).applicant2AddressTown.required).toEqual(
-      'Enter the town or city (in welsh)'
-    );
-    expect((generatedContent.errors as any).applicant2AddressPostcode.required).toEqual(
-      'Enter a valid postcode (in welsh)'
-    );
-    expect((generatedContent.errors as any).applicant2AddressPostcode.invalid).toEqual(
-      'Enter a valid postcode (in welsh)'
-    );
+    expect(generatedContent.section).toEqual(cyContent.section);
+    expect(generatedContent.title).toEqual(cyContent.title);
+    expect(generatedContent.errors).toEqual({
+      applicant2Address1: (manualAddressContent.errors as any).address1,
+      applicant2AddressTown: (manualAddressContent.errors as any).addressTown,
+      applicant2AddressPostcode: (manualAddressContent.errors as any).addressPostcode,
+    });
   });
 
   test('should contain applicant2Address1 field', () => {
     const applicant2Address1Field = fields.applicant2Address1 as FormOptions;
-    expect(applicant2Address1Field.type).toBe('text');
-    expect(applicant2Address1Field.classes).toBe('govuk-label');
-    expect((applicant2Address1Field.label as Function)(generatedContent)).toBe('Building and street');
-    expect(applicant2Address1Field.labelSize).toBe(null);
-    expect(applicant2Address1Field.validator).toBe(isFieldFilledIn);
+    expect(applicant2Address1Field).toEqual(manualAddressFormFields.address1);
   });
 
   test('should contain applicant2Address2 field', () => {
     const applicant2Address2Field = fields.applicant2Address2 as FormOptions;
-    expect(applicant2Address2Field.type).toBe('text');
-    expect(applicant2Address2Field.classes).toBe('govuk-label');
-    expect(applicant2Address2Field.label).toBe('');
-    expect(applicant2Address2Field.labelSize).toBe(null);
+    expect(applicant2Address2Field).toEqual(manualAddressFormFields.address2);
   });
 
   test('should contain applicant2AddressTown field', () => {
     const applicant2AddressTownField = fields.applicant2AddressTown as FormOptions;
-    expect(applicant2AddressTownField.type).toBe('text');
-    expect(applicant2AddressTownField.classes).toBe('govuk-label govuk-!-width-two-thirds');
-    expect((applicant2AddressTownField.label as Function)(generatedContent)).toBe('Town or city');
-    expect(applicant2AddressTownField.labelSize).toBe(null);
-    expect(applicant2AddressTownField.validator).toBe(isFieldFilledIn);
+    expect(applicant2AddressTownField).toEqual(manualAddressFormFields.addressTown);
   });
 
   test('should contain applicant2AddressCounty field', () => {
     const applicant2AddressCountyField = fields.applicant2AddressCounty as FormOptions;
-    expect(applicant2AddressCountyField.type).toBe('text');
-    expect(applicant2AddressCountyField.classes).toBe('govuk-label govuk-!-width-two-thirds');
-    expect((applicant2AddressCountyField.label as Function)(generatedContent)).toBe('County');
-    expect(applicant2AddressCountyField.labelSize).toBe(null);
+    expect(applicant2AddressCountyField).toEqual(manualAddressFormFields.addressCounty);
   });
 
   test('should contain applicant2AddressPostcode field', () => {
     const applicant2AddressPostcodeField = fields.applicant2AddressPostcode as FormOptions;
-    expect(applicant2AddressPostcodeField.type).toBe('text');
-    expect(applicant2AddressPostcodeField.classes).toBe('govuk-label govuk-input--width-10');
-    expect((applicant2AddressPostcodeField.label as Function)(generatedContent)).toBe('Postcode');
-    expect(applicant2AddressPostcodeField.labelSize).toBe(null);
-    expect(applicant2AddressPostcodeField.validator).toBe(isInvalidPostcode);
+    expect(applicant2AddressPostcodeField).toEqual(manualAddressFormFields.addressPostcode);
   });
 
   test('should contain submit button', () => {
