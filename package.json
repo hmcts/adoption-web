@@ -20,7 +20,9 @@
     "sonar-scan": "sonar-scanner",
     "test:smoke": "echo 'nope'",
     "test:functional": "echo 'nope'",
-    "cichecks": "yarn && run-p build lint test"
+    "test:fullfunctional": "echo 'nope'",
+    "cichecks": "yarn && run-p build lint test",
+    "test:functional:skip": "echo 'Not running functional cases in Master' && exit 0"
   },
   "dependencies": {
     "@hmcts/cookie-manager": "^0.0.4",

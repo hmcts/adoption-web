@@ -1,4 +1,5 @@
 import { CaseWithId } from '../../app/case/case';
+import { YesOrNo } from '../../app/case/definition';
 import * as Urls from '../urls';
 
 export enum Sections {
@@ -14,6 +15,11 @@ export interface Step {
 }
 
 export const childrenSequence: Step[] = [
+  {
+    url: Urls.CHILDREN_PLACEMENT_ORDER_TYPE,
+    showInSection: Sections.AboutChildren,
+    getNextStep: () => Urls.CHILDREN_PLACEMENT_ORDER_NUMBER,
+  },
   {
     url: Urls.CHILDREN_PLACEMENT_ORDER_NUMBER,
     showInSection: Sections.AboutChildren,
@@ -32,7 +38,15 @@ export const childrenSequence: Step[] = [
   {
     url: Urls.CHILDREN_PLACEMENT_ORDER_SUMMARY,
     showInSection: Sections.AboutChildren,
-    getNextStep: () => Urls.TASK_LIST_URL,
+    getNextStep: userCase =>
+      userCase.addAnotherPlacementOrder === YesOrNo.YES
+        ? `${Urls.CHILDREN_PLACEMENT_ORDER_TYPE}?add=${Date.now()}`
+        : Urls.TASK_LIST_URL,
+  },
+  {
+    url: Urls.CHILDREN_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS,
+    showInSection: Sections.AboutChildren,
+    getNextStep: () => Urls.CHILDREN_PLACEMENT_ORDER_SUMMARY,
   },
   {
     url: Urls.CHILDREN_FULL_NAME,

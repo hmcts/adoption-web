@@ -209,7 +209,7 @@ export interface Case {
   addAnotherPlacementOrder?: YesOrNo;
 
   addButton?: string;
-  addAnotherNationality: string;
+  addAnotherNationality?: string;
   // applicant1Nationality?: string[];
   applicant1AdditionalNationalities?: string[];
   applicant2AdditionalNationalities?: string[];
@@ -232,7 +232,7 @@ export interface Case {
   applyingWith?: ApplyingWith;
 
   divorceOrDissolution: DivorceOrDissolution;
-  adoption: Adoption;
+  adoption?: Adoption;
 
   issueDate?: DateAsString;
   applicant1SolicitorAddress?: string;
