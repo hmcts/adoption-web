@@ -22,6 +22,7 @@ module.exports = {
   },
 
   async signInWithCitizenUser(user) {
+    console.log('User using the URL= ' + config.baseUrl);
     await I.amOnPage(config.baseUrl);
     await I.wait('5');
     await I.waitForSelector(this.fields.username);
