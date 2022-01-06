@@ -1,4 +1,4 @@
-import { FormContent, FormFields, FormOptions } from '../../../../app/form/Form';
+import { FormContent, FormFields } from '../../../../app/form/Form';
 import { CommonContent } from '../../../common/common.content';
 import {
   form as addressLookupForm,
@@ -53,10 +53,8 @@ describe('applicant1 > address > lookup > content', () => {
 
   test('should contain applicant1AddressPostcode field', () => {
     const addressLookupFormFields = addressLookupForm.fields as FormFields;
-    const form = generatedContent.form as FormContent;
-    const fields = form.fields as FormFields;
-    const applicant1AddressPostcodeField = fields.applicant1AddressPostcode as FormOptions;
-    expect(applicant1AddressPostcodeField).toEqual(addressLookupFormFields.addressPostcode);
+    const fields = generatedContent.form.fields as FormFields;
+    expect(fields.applicant1AddressPostcode).toEqual(addressLookupFormFields.addressPostcode);
   });
 
   test('should contain find address button', () => {
