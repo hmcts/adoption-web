@@ -888,6 +888,12 @@ export const enum YesOrNo {
   NO = 'No',
 }
 
+export const enum YesNoUnsure {
+  YES = 'Yes',
+  NO = 'No',
+  UNSURE = 'Not sure',
+}
+
 export const enum ContactDetails {
   EMAIL = 'email',
   PHONE = 'phone',

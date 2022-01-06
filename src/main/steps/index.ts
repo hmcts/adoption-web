@@ -7,11 +7,20 @@ import { Form, FormContent } from '../app/form/Form';
 
 import { Step, applicant1Sequence } from './applicant1Sequence';
 import { applicant2Sequence } from './applicant2/applicant2Sequence';
+import { birthFatherSequence } from './birth-father/fatherSequence';
 import { birthMotherSequence } from './birth-mother/birthMotherSequence';
 import { childrenSequence } from './children/childrenSequence';
 import { Step as EligibilityStep, eligibilitySequence } from './eligibilitySequence';
 import { otherParentSequence } from './other-parent/otherParentSequence';
-import { APPLICANT_1, APPLICANT_2, BIRTH_MOTHER, CHECK_ANSWERS_URL, CHILDREN, OTHER_PARENT } from './urls';
+import {
+  APPLICANT_1,
+  APPLICANT_2,
+  BIRTH_FATHER,
+  BIRTH_MOTHER,
+  CHECK_ANSWERS_URL,
+  CHILDREN,
+  OTHER_PARENT,
+} from './urls';
 
 const stepForms: Record<string, Form> = {};
 
@@ -76,6 +85,7 @@ export const getNextStepUrl = (req: AppRequest, data: Partial<Case>): string => 
     ...childrenSequence,
     ...birthMotherSequence,
     ...otherParentSequence,
+    ...birthFatherSequence,
   ].find(s => s.url === path);
   const url = nextStep ? nextStep.getNextStep(data) : CHECK_ANSWERS_URL;
 
@@ -133,6 +143,7 @@ export const stepsWithContentApplicant1 = getStepsWithContent(applicant1Sequence
 export const stepsWithContentApplicant2 = getStepsWithContent(applicant2Sequence, APPLICANT_2);
 export const stepsWithContentChildren = getStepsWithContent(childrenSequence, CHILDREN);
 export const stepsWithContentOtherParent = getStepsWithContent(otherParentSequence, OTHER_PARENT);
+export const stepsWithContentBirthFather = getStepsWithContent(birthFatherSequence, BIRTH_FATHER);
 export const stepsWithContentBirthMother = getStepsWithContent(birthMotherSequence, BIRTH_MOTHER);
 export const stepsWithContent = [
   ...stepsWithContentEligibility,
@@ -140,5 +151,6 @@ export const stepsWithContent = [
   ...stepsWithContentApplicant2,
   ...stepsWithContentChildren,
   ...stepsWithContentOtherParent,
+  ...stepsWithContentBirthFather,
   ...stepsWithContentBirthMother,
 ];
