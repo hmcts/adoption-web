@@ -137,6 +137,9 @@ export interface Case {
   childrenNationality?: string[];
   childrenAdditionalNationalities?: string[];
 
+  birthFatherNationality?: string;
+  birthFatherNationalities?: string[];
+
   applicationType?: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
   issueDate?: DateAsString;
