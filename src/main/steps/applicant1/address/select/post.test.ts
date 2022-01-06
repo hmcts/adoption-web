@@ -3,7 +3,7 @@ import { FieldPrefix } from '../../../../app/case/case';
 
 import SelectAddressPostController from './post';
 
-describe('applicant1 > select-address > post', () => {
+describe('applicant1 > address > select > post', () => {
   let controller;
 
   beforeEach(() => {

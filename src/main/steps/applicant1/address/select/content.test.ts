@@ -7,7 +7,7 @@ import { generateContent } from './content';
 jest.mock('../../../../app/form/validation');
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('applicant1 > select-address > content', () => {
+describe('applicant1 > address > select > content', () => {
   const commonContent = { language: 'en', userCase: {}, addresses: [] as any[] } as CommonContent;
   let generatedContent;
 
