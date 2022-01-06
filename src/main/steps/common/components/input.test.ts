@@ -54,7 +54,7 @@ describe('input class', () => {
     languageAssertions(CY, cyContent, generateContent);
   });
 
-  it('should render the input field with correct data', () => {
+  it('should render the input field with the correct data', () => {
     const { fields } = generateForm();
     const field = fields[fieldName];
     const fieldInputValue = 'test';
