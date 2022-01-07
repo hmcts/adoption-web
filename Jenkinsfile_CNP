@@ -41,8 +41,8 @@ env.IDAM_URL = 'https://idam-api.aat.platform.hmcts.net'
 
 withPipeline(type, product, component) {
   enableAksStagingDeployment()
-  disableLegacyDeployment()
   enableCrossBrowserTest(['chrome', 'firefox'])
+  disableLegacyDeployment()
   enableSlackNotifications('#adoption-tech')
 
   loadVaultSecrets(secrets)
@@ -70,6 +70,13 @@ withPipeline(type, product, component) {
   }
   before('functionalTest:aat') {
     yarnBuilder.yarn('test:functional:skip')
+  }
+  before('crossBrowserTest') {
+    env.TEST_RETRIES = 5
+  }
+
+  after('crossBrowserTest') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
   }
 
 }
