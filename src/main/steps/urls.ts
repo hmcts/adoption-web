@@ -86,7 +86,7 @@ export const OTHER_PARENT_ADDRESS_KNOWN: PageLink = `${OTHER_PARENT}/address-kno
 export const OTHER_PARENT_POSTCODE_LOOKUP: PageLink = `${OTHER_PARENT}/address/lookup`;
 export const OTHER_PARENT_VERIFY_ADDRESS: PageLink = `${OTHER_PARENT}/address/select`;
 export const OTHER_PARENT_MANUAL_ADDRESS: PageLink = `${OTHER_PARENT}/address/manual`;
-export const OTHER_PARENT_INTERNATIONAL_ADDRESS: PageLink = `${OTHER_PARENT}/address-international`;
+export const OTHER_PARENT_INTERNATIONAL_ADDRESS: PageLink = `${OTHER_PARENT}/address/international`;
 
 export const APPLY_FINANCIAL_ORDER: PageLink = '/do-you-want-to-apply-financial-order';
 
