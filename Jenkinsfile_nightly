@@ -50,16 +50,16 @@ pipelineConf.vaultSecrets = secrets
 withNightlyPipeline(type, product, component) {
 
   env.ADOP_WEB_URL = params.FRONTEND_URL
-  enableCrossBrowserTest()
+  enableCrossBrowserTest(['chrome', 'firefox'])
   enableFullFunctionalTest(120)
   loadVaultSecrets(secrets)
 
   before('crossBrowserTest') {
-    yarnBuilder.smokeTest()
+    env.TEST_RETRIES = 5
   }
 
   after('crossBrowserTest') {
-    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/crossbrowser/reports/**/*'
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
   }
 
   before('fullFunctionalTest') {
