@@ -1,14 +1,15 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
-import { AppRequest } from '../../../app/controller/AppRequest';
-import { AnyObject, PostController } from '../../../app/controller/PostController';
-import { Form, FormFields, FormFieldsFn } from '../../../app/form/Form';
-import { getNextStepUrl } from '../../../steps';
+import { getNextStepUrl } from '../../steps';
+import { FieldPrefix } from '../case/case';
+import { AppRequest } from '../controller/AppRequest';
+import { AnyObject, PostController } from '../controller/PostController';
+import { Form, FormFields, FormFieldsFn } from '../form/Form';
 
 @autobind
-export default class SelectAddressPostController extends PostController<AnyObject> {
-  constructor(protected readonly fields: FormFields | FormFieldsFn) {
+export default class SelectAddressPostControllerBase extends PostController<AnyObject> {
+  constructor(protected readonly fields: FormFields | FormFieldsFn, protected readonly fieldPrefix: FieldPrefix) {
     super(fields);
   }
 
@@ -21,21 +22,22 @@ export default class SelectAddressPostController extends PostController<AnyObjec
     Object.assign(req.session.userCase, formData);
 
     if (req.session.errors.length === 0) {
-      const selectedAddressIndex = Number(formData.applicant1SelectAddress);
+      const selectedAddressIndex = Number(formData[`${this.fieldPrefix}SelectAddress`]);
       if (selectedAddressIndex >= 0) {
         //eslint-disable-next-line @typescript-eslint/no-explicit-any
         const selectedAddress = req.session.addresses[selectedAddressIndex] as any;
-        req.session.userCase.applicant1Address1 = selectedAddress.street1;
-        req.session.userCase.applicant1Address2 = selectedAddress.street2;
-        req.session.userCase.applicant1AddressTown = selectedAddress.town;
-        req.session.userCase.applicant1AddressCounty = selectedAddress.county;
-        req.session.userCase.applicant1AddressPostcode = selectedAddress.postcode;
 
-        formData.applicant1Address1 = selectedAddress.street1;
-        formData.applicant1Address2 = selectedAddress.street2;
-        formData.applicant1AddressTown = selectedAddress.town;
-        formData.applicant1AddressCounty = selectedAddress.county;
-        formData.applicant1AddressPostcode = selectedAddress.postcode;
+        req.session.userCase[`${this.fieldPrefix}Address1`] = selectedAddress.street1;
+        req.session.userCase[`${this.fieldPrefix}Address2`] = selectedAddress.street2;
+        req.session.userCase[`${this.fieldPrefix}AddressTown`] = selectedAddress.town;
+        req.session.userCase[`${this.fieldPrefix}AddressCounty`] = selectedAddress.county;
+        req.session.userCase[`${this.fieldPrefix}AddressPostcode`] = selectedAddress.postcode;
+
+        formData[`${this.fieldPrefix}Address1`] = selectedAddress.street1;
+        formData[`${this.fieldPrefix}Address2`] = selectedAddress.street2;
+        formData[`${this.fieldPrefix}AddressTown`] = selectedAddress.town;
+        formData[`${this.fieldPrefix}AddressCounty`] = selectedAddress.county;
+        formData[`${this.fieldPrefix}AddressPostcode`] = selectedAddress.postcode;
         //[0] select-address: {"fullAddress":"51, WORTON WAY, ISLEWORTH, TW7 4AY",
         //"street1":"51 WORTON WAY",
         //"street2":"",

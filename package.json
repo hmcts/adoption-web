@@ -22,7 +22,9 @@
     "test:functional": "echo 'nope'",
     "test:fullfunctional": "echo 'nope'",
     "cichecks": "yarn && run-p build lint test",
-    "test:functional:skip": "echo 'Not running functional cases in Master' && exit 0"
+    "test:functional:skip": "echo 'Not running functional cases in Master' && exit 0",
+    "test:crossbrowser-e2e": "MOCHAWESOME_REPORTFILENAME=crossbrowser codeceptjs run-multiple --grep \"@cross-browser\" ${BROWSER_GROUP:-'--all'} -c saucelabs.conf.js --reporter mocha-multi",
+    "test:crossbrowser": "./bin/run-crossbrowser-tests.sh"
   },
   "dependencies": {
     "@hmcts/cookie-manager": "^0.0.4",

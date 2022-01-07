@@ -8,18 +8,18 @@ import {
 import { generateContent } from './content';
 
 const enContent = {
-  section: 'Second applicant',
+  section: 'Primary applicant',
   title: "What's your home address?",
 };
 
 const cyContent = {
-  section: 'Second applicant (in welsh)',
+  section: 'Primary applicant (in welsh)',
   title: "What's your home address? (in welsh)",
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('applicant2 > address > manual > content', () => {
-  const commonContent = { language: 'en', userCase: { applicant2Address1: 'address line 1' } } as CommonContent;
+describe('applicant1 > address > manual > content', () => {
+  const commonContent = { language: 'en', userCase: {} } as CommonContent;
   let generatedContent;
   let form;
   let fields;
@@ -36,9 +36,9 @@ describe('applicant2 > address > manual > content', () => {
     expect(generatedContent.section).toEqual(enContent.section);
     expect(generatedContent.title).toEqual(enContent.title);
     expect(generatedContent.errors).toEqual({
-      applicant2Address1: (manualAddressContent.errors as any).address1,
-      applicant2AddressTown: (manualAddressContent.errors as any).addressTown,
-      applicant2AddressPostcode: (manualAddressContent.errors as any).addressPostcode,
+      applicant1Address1: (manualAddressContent.errors as any).address1,
+      applicant1AddressTown: (manualAddressContent.errors as any).addressTown,
+      applicant1AddressPostcode: (manualAddressContent.errors as any).addressPostcode,
     });
   });
 
@@ -48,35 +48,35 @@ describe('applicant2 > address > manual > content', () => {
     expect(generatedContent.section).toEqual(cyContent.section);
     expect(generatedContent.title).toEqual(cyContent.title);
     expect(generatedContent.errors).toEqual({
-      applicant2Address1: (manualAddressContent.errors as any).address1,
-      applicant2AddressTown: (manualAddressContent.errors as any).addressTown,
-      applicant2AddressPostcode: (manualAddressContent.errors as any).addressPostcode,
+      applicant1Address1: (manualAddressContent.errors as any).address1,
+      applicant1AddressTown: (manualAddressContent.errors as any).addressTown,
+      applicant1AddressPostcode: (manualAddressContent.errors as any).addressPostcode,
     });
   });
 
-  test('should contain applicant2Address1 field', () => {
-    const applicant2Address1Field = fields.applicant2Address1 as FormOptions;
-    expect(applicant2Address1Field).toEqual(manualAddressFormFields.address1);
+  test('should contain applicant1Address1 field', () => {
+    const applicant1Address1Field = fields.applicant1Address1 as FormOptions;
+    expect(applicant1Address1Field).toEqual(manualAddressFormFields.address1);
   });
 
-  test('should contain applicant2Address2 field', () => {
-    const applicant2Address2Field = fields.applicant2Address2 as FormOptions;
-    expect(applicant2Address2Field).toEqual(manualAddressFormFields.address2);
+  test('should contain applicant1Address2 field', () => {
+    const applicant1Address2Field = fields.applicant1Address2 as FormOptions;
+    expect(applicant1Address2Field).toEqual(manualAddressFormFields.address2);
   });
 
-  test('should contain applicant2AddressTown field', () => {
-    const applicant2AddressTownField = fields.applicant2AddressTown as FormOptions;
-    expect(applicant2AddressTownField).toEqual(manualAddressFormFields.addressTown);
+  test('should contain applicant1AddressTown field', () => {
+    const applicant1AddressTownField = fields.applicant1AddressTown as FormOptions;
+    expect(applicant1AddressTownField).toEqual(manualAddressFormFields.addressTown);
   });
 
-  test('should contain applicant2AddressCounty field', () => {
-    const applicant2AddressCountyField = fields.applicant2AddressCounty as FormOptions;
-    expect(applicant2AddressCountyField).toEqual(manualAddressFormFields.addressCounty);
+  test('should contain applicant1AddressCounty field', () => {
+    const applicant1AddressCountyField = fields.applicant1AddressCounty as FormOptions;
+    expect(applicant1AddressCountyField).toEqual(manualAddressFormFields.addressCounty);
   });
 
-  test('should contain applicant2AddressPostcode field', () => {
-    const applicant2AddressPostcodeField = fields.applicant2AddressPostcode as FormOptions;
-    expect(applicant2AddressPostcodeField).toEqual(manualAddressFormFields.addressPostcode);
+  test('should contain applicant1AddressPostcode field', () => {
+    const applicant1AddressPostcodeField = fields.applicant1AddressPostcode as FormOptions;
+    expect(applicant1AddressPostcodeField).toEqual(manualAddressFormFields.addressPostcode);
   });
 
   test('should contain submit button', () => {
