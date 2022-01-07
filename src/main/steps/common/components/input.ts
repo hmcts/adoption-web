@@ -3,6 +3,8 @@ import { FormContent } from '../../../app/form/Form';
 import { Validator } from '../../../app/form/validation';
 import { CommonContent } from '../common.content';
 
+import { defaultButtons } from './default-buttons';
+
 export class Input {
   fieldName: string;
   enContent: Record<string, unknown>;
@@ -44,12 +46,7 @@ export class Input {
         validator: this.validator,
       },
     },
-    submit: {
-      text: l => l.continue,
-    },
-    saveAsDraft: {
-      text: l => l.saveAsDraft,
-    },
+    ...defaultButtons,
   });
 
   generateContent: TranslationFn = (content: CommonContent) => ({

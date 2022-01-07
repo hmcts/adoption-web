@@ -10,6 +10,7 @@ import {
   BIRTH_FATHER_MANUAL_INTERNATIONAL_ADDRESS,
   BIRTH_FATHER_NATIONALITY,
   BIRTH_FATHER_OCCUPATION,
+  // TODO update below URL when other parents changes in master
   OTHER_PARENT_IS_ANOTHER_RESPONSIBLE,
   PageLink,
   TASK_LIST_URL,
@@ -32,7 +33,10 @@ export const birthFatherSequence: Step[] = [
     url: BIRTH_FATHER_IS_NAME_ON_CERTIFICATE,
     showInSection: Sections.AboutChildren,
     getNextStep: data =>
-      data.isFathersNameOnCertificate === YesOrNo.YES ? BIRTH_FATHER_FULL_NAME : OTHER_PARENT_IS_ANOTHER_RESPONSIBLE,
+      data.isFathersNameOnCertificate === YesOrNo.YES
+        ? BIRTH_FATHER_FULL_NAME
+        : // TODO update below URL when other parents changes in master
+          OTHER_PARENT_IS_ANOTHER_RESPONSIBLE,
   },
   {
     url: BIRTH_FATHER_FULL_NAME,

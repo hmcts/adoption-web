@@ -19,7 +19,7 @@ export const en = (): Record<string, unknown> => ({
   notSure: 'Not Sure',
   errors: {
     childrenNationality: {
-      required: "Select a nationality or 'Not sure'",
+      notSureViolation: "Select a nationality or 'Not sure'",
     },
     addAnotherNationality: {
       required: 'This is not a valid entry',
@@ -42,7 +42,7 @@ export const cy = (): Record<string, unknown> => ({
   notSure: 'Not Sure (in Welsh)',
   errors: {
     childrenNationality: {
-      required: "Select a nationality or 'Not sure' (in Welsh)",
+      notSureViolation: "Select a nationality or 'Not sure' (in Welsh)",
     },
     addAnotherNationality: {
       required: 'This is not a valid entry (in Welsh)',

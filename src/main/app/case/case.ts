@@ -164,6 +164,8 @@ export interface Case {
   otherParentAddressPostcode?: string;
   childrenFirstNameAfterAdoption?: string;
   childrenLastNameAfterAdoption?: string;
+  birthFatherNationality?: string;
+  birthFatherNationalities?: string[];
 
   applicationType?: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
