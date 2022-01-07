@@ -10,7 +10,7 @@ const en = addressLookupContent => ({
   section: 'Second applicant',
   title: "What's your home address?",
   errors: {
-    applicant2AddressPostcode: addressLookupContent.errors.adressPostcode,
+    applicant2AddressPostcode: addressLookupContent.errors.addressPostcode,
   },
   manualAddressUrl: APPLICANT_2_MANUAL_ADDRESS,
 });
@@ -19,7 +19,7 @@ const cy = addressLookupContent => ({
   section: 'Second applicant (in welsh)',
   title: "What's your home address? (in welsh)",
   errors: {
-    applicant2AddressPostcode: addressLookupContent.errors.adressPostcode,
+    applicant2AddressPostcode: addressLookupContent.errors.addressPostcode,
   },
   manualAddressUrl: APPLICANT_2_MANUAL_ADDRESS,
 });
