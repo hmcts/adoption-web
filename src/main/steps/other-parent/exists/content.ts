@@ -2,9 +2,10 @@ import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
+import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
-  section: "Other parent's details",
+  section: SECTION,
   label: 'Is there another person who has parental responsibility for the child?',
   hint: 'Apart from the birth mother and father. For example, a step parent.',
   one: 'Yes',
@@ -17,7 +18,7 @@ const en = () => ({
 });
 
 const cy = () => ({
-  section: "Other parent's details (in welsh)",
+  section: SECTION_IN_WELSH,
   label: 'Is there another person who has parental responsibility for the child? (in welsh)',
   hint: 'Apart from the birth mother and father. For example, a step parent. (in welsh)',
   one: 'Yes (in welsh)',

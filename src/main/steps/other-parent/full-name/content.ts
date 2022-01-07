@@ -1,9 +1,10 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../app/form/Form';
 import { form as fullNameForm, generateContent as fullNameGenerateContent } from '../../common/components/full-name';
+import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 export const en = (): Record<string, unknown> => ({
-  section: "Other parent's details",
+  section: SECTION,
   title: 'What is the full name of the other person with parental responsibility?',
   line1: 'If you are not sure, ask your social worker or adoption agency for help.',
   errors: {
@@ -17,15 +18,15 @@ export const en = (): Record<string, unknown> => ({
 });
 
 export const cy = (): Record<string, unknown> => ({
-  section: "Other parent's details (in welsh)",
-  title: 'What is the full name of the other person with parental responsibility? (in welsh)',
-  line1: 'If you are not sure, ask your social worker or adoption agency for help. (in welsh)',
+  section: SECTION_IN_WELSH,
+  title: 'What is the full name of the other person with parental responsibility? (in Welsh)',
+  line1: 'If you are not sure, ask your social worker or adoption agency for help. (in Welsh)',
   errors: {
     otherPersonFirstNames: {
-      required: 'Enter their first names (in welsh)',
+      required: 'Enter their first names (in Welsh)',
     },
     otherPersonLastNames: {
-      required: 'Enter their last names (in welsh)',
+      required: 'Enter their last names (in Welsh)',
     },
   },
 });

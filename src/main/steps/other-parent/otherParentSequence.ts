@@ -1,4 +1,5 @@
 import { CaseWithId } from '../../app/case/case';
+import { YesOrNo } from '../../app/case/definition';
 import {
   OTHER_PARENT_ADDRESS_KNOWN,
   OTHER_PARENT_EXISTS,
@@ -27,7 +28,7 @@ export const otherParentSequence: Step[] = [
   {
     url: OTHER_PARENT_EXISTS,
     showInSection: Sections.AboutOtherParent,
-    getNextStep: () => OTHER_PARENT_NAME,
+    getNextStep: data => (data.otherParentExists === YesOrNo.YES ? OTHER_PARENT_NAME : TASK_LIST_URL),
   },
   {
     url: OTHER_PARENT_NAME,
@@ -37,7 +38,7 @@ export const otherParentSequence: Step[] = [
   {
     url: OTHER_PARENT_ADDRESS_KNOWN,
     showInSection: Sections.AboutOtherParent,
-    getNextStep: () => OTHER_PARENT_POSTCODE_LOOKUP,
+    getNextStep: data => (data.otherParentAddressKnown === YesOrNo.YES ? OTHER_PARENT_POSTCODE_LOOKUP : TASK_LIST_URL),
   },
   {
     url: OTHER_PARENT_POSTCODE_LOOKUP,

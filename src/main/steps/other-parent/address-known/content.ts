@@ -2,9 +2,10 @@ import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
+import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
-  section: "Other parent's details",
+  section: SECTION,
   label: 'Do you have the address of the other person with parental responsibility for the child?',
   hint: "Ask the adoption agency or social worker if you're not sure.",
   errors: {
@@ -15,7 +16,7 @@ const en = () => ({
 });
 
 const cy = () => ({
-  section: "Other parent's details (in welsh)",
+  section: SECTION_IN_WELSH,
   label: 'Do you have the address of the other person with parental responsibility for the child? (in welsh)',
   hint: "Ask the adoption agency or social worker if you're not sure. (in welsh)",
   errors: {
