@@ -8,10 +8,6 @@ def type = 'nodejs'
 def product = 'adoption'
 def component = 'web'
 
-// SAUCELABS config - configured on Jenkins
-env.SAUCE_USERNAME = 'username'
-env.SAUCE_ACCESS_KEY = 'privatekey'
-env.SAUCE_TUNNEL_IDENTIFIER = 'reformtunnel'
 
 static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
   [ $class: 'AzureKeyVaultSecret',
@@ -41,7 +37,6 @@ env.IDAM_URL = 'https://idam-api.aat.platform.hmcts.net'
 
 withPipeline(type, product, component) {
   enableAksStagingDeployment()
-  enableCrossBrowserTest(['chrome', 'firefox'])
   disableLegacyDeployment()
   enableSlackNotifications('#adoption-tech')
 
