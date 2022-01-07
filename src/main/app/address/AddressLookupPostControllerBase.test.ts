@@ -1,6 +1,6 @@
 const mockGetParsedBody = jest.fn();
 const mockGetErrors = jest.fn();
-jest.mock('../../../app/form/Form', () => {
+jest.mock('../form/Form', () => {
   return {
     Form: jest.fn().mockImplementation(() => {
       return { getParsedBody: mockGetParsedBody, getErrors: mockGetErrors };
@@ -9,21 +9,22 @@ jest.mock('../../../app/form/Form', () => {
 });
 
 const mockGetAddressesFromPostcode = jest.fn();
-jest.mock('../../../app/postcode/postcode-lookup-api', () => {
+jest.mock('../postcode/postcode-lookup-api', () => {
   return { getAddressesFromPostcode: mockGetAddressesFromPostcode };
 });
 
 const mockGetNextStepUrl = jest.fn();
-jest.mock('../../../steps', () => {
+jest.mock('../../steps', () => {
   return { getNextStepUrl: mockGetNextStepUrl };
 });
 
-import { mockRequest } from '../../../../test/unit/utils/mockRequest';
-import { mockResponse } from '../../../../test/unit/utils/mockResponse';
+import { mockRequest } from '../../../test/unit/utils/mockRequest';
+import { mockResponse } from '../../../test/unit/utils/mockResponse';
+import { FieldPrefix } from '../case/case';
 
-import FindAddressPostController from './post';
+import AddressLookupPostControllerBase from './AddressLookupPostControllerBase';
 
-describe('FindAddressPostController', () => {
+describe('AddressLookupPostControllerBase', () => {
   let req;
   let res;
   let controller;
@@ -31,7 +32,7 @@ describe('FindAddressPostController', () => {
   beforeEach(() => {
     req = mockRequest({ session: { userCase: { email: 'test@example.com' } } });
     res = mockResponse();
-    controller = new FindAddressPostController({});
+    controller = new AddressLookupPostControllerBase({}, FieldPrefix.APPLICANT1);
   });
 
   describe('when there are no form errors', () => {

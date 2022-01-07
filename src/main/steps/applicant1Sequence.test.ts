@@ -40,15 +40,15 @@ describe('applicant1Sequence', () => {
     expect(applicant1Sequence[8].showInSection).toBe('aboutApplicant1');
     expect(applicant1Sequence[8].getNextStep({})).toBe('/task-list');
 
-    expect(applicant1Sequence[9].url).toBe('/applicant1/find-address');
+    expect(applicant1Sequence[9].url).toBe('/applicant1/address/lookup');
     expect(applicant1Sequence[9].showInSection).toBe('aboutApplicant1');
-    expect(applicant1Sequence[9].getNextStep({})).toBe('/applicant1/select-address');
+    expect(applicant1Sequence[9].getNextStep({})).toBe('/applicant1/address/select');
 
-    expect(applicant1Sequence[10].url).toBe('/applicant1/select-address');
+    expect(applicant1Sequence[10].url).toBe('/applicant1/address/select');
     expect(applicant1Sequence[10].showInSection).toBe('aboutApplicant1');
     expect(applicant1Sequence[10].getNextStep({})).toBe('/applicant1/contact-details');
 
-    expect(applicant1Sequence[11].url).toBe('/applicant1/manual-address');
+    expect(applicant1Sequence[11].url).toBe('/applicant1/address/manual');
     expect(applicant1Sequence[11].showInSection).toBe('aboutApplicant1');
     expect(applicant1Sequence[11].getNextStep({})).toBe('/applicant1/contact-details');
 

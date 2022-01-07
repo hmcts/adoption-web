@@ -12,10 +12,10 @@ describe('Format case date', () => {
   });
 
   it('returns false when the date is not set', () => {
-    expect(getFormattedDate(undefined)).toBe(false);
+    expect(getFormattedDate(undefined)).toBe('');
   });
 
   it('returns false when the date is incomplete', () => {
-    expect(getFormattedDate({ year: '', month: '', day: '' } as unknown as CaseDate)).toBe(false);
+    expect(getFormattedDate({ year: '', month: '', day: '' } as unknown as CaseDate)).toBe('');
   });
 });

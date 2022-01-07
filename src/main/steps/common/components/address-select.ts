@@ -1,7 +1,6 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isAddressSelected } from '../../../app/form/validation';
-import { APPLICANT_1_FIND_ADDRESS, APPLICANT_1_MANUAL_ADDRESS } from '../../../steps/urls';
 
 const getAddressItems = addresses => addresses.map((item, index) => ({ text: item.fullAddress, value: index }));
 
@@ -19,20 +18,18 @@ const en = content => {
   items.push(...getAddressItems(addresses));
 
   return {
-    section: 'Primary applicant',
-    title: "What's your home address?",
     line1: "We'll send all court papers to this address.",
     postcode: 'Postcode',
     selectAddress: 'Select an address',
     cannotFindAddress: 'I cannot find the address in the list',
     errors: {
-      applicant1SelectAddress: {
+      selectAddress: {
         notSelected: 'Select an address',
       },
     },
     items,
-    changePostCodeUrl: APPLICANT_1_FIND_ADDRESS,
-    cantFindAddressUrl: APPLICANT_1_MANUAL_ADDRESS,
+    changePostCodeUrl: '#',
+    cantFindAddressUrl: '#',
   };
 };
 
@@ -50,26 +47,24 @@ const cy = content => {
   items.push(...getAddressItems(addresses));
 
   return {
-    section: 'Primary applicant (in welsh)',
-    title: "What's your home address? (in welsh)",
     line1: "We'll send all court papers to this address. (in welsh)",
     postcode: 'Postcode (in welsh)',
     selectAddress: 'Select an address (in welsh)',
     cannotFindAddress: 'I cannot find the address in the list (in welsh)',
     errors: {
-      applicant1SelectAddress: {
+      selectAddress: {
         notSelected: 'Select an address (in welsh)',
       },
     },
     items,
-    changePostCodeUrl: APPLICANT_1_FIND_ADDRESS,
-    cantFindAddressUrl: APPLICANT_1_MANUAL_ADDRESS,
+    changePostCodeUrl: '#',
+    cantFindAddressUrl: '#',
   };
 };
 
 export const form: FormContent = {
   fields: {
-    applicant1SelectAddress: {
+    selectAddress: {
       type: 'select',
       label: l => l.selectAddress,
       labelSize: 'm',
