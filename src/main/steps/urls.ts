@@ -83,9 +83,9 @@ export const OTHER_PARENT: PageLink = '/other-parent';
 export const OTHER_PARENT_EXISTS: PageLink = `${OTHER_PARENT}/exists`;
 export const OTHER_PARENT_NAME: PageLink = `${OTHER_PARENT}/full-name`;
 export const OTHER_PARENT_ADDRESS_KNOWN: PageLink = `${OTHER_PARENT}/address-known`;
-export const OTHER_PARENT_POSTCODE_LOOKUP: PageLink = `${OTHER_PARENT}/address-lookup`;
-export const OTHER_PARENT_VERIFY_ADDRESS: PageLink = `${OTHER_PARENT}/address-select`;
-export const OTHER_PARENT_MANUAL_ADDRESS: PageLink = `${OTHER_PARENT}/address-manual`;
+export const OTHER_PARENT_POSTCODE_LOOKUP: PageLink = `${OTHER_PARENT}/address/lookup`;
+export const OTHER_PARENT_VERIFY_ADDRESS: PageLink = `${OTHER_PARENT}/address/select`;
+export const OTHER_PARENT_MANUAL_ADDRESS: PageLink = `${OTHER_PARENT}/address/manual`;
 export const OTHER_PARENT_INTERNATIONAL_ADDRESS: PageLink = `${OTHER_PARENT}/address-international`;
 
 export const APPLY_FINANCIAL_ORDER: PageLink = '/do-you-want-to-apply-financial-order';

@@ -37,7 +37,7 @@ export const form: FormContent = {
       classes: 'govuk-radios',
       label: l => l.label,
       section: l => l.section,
-      labelHidden: false,
+      hint: l => l.hint,
       values: [
         { label: l => l.one, value: YesOrNo.YES },
         { label: l => l.two, value: YesOrNo.NO },
