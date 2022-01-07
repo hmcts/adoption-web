@@ -1,4 +1,4 @@
-import { CaseDate, CaseWithId } from '../../app/case/case';
+import { CaseDate, CaseWithId, FieldPrefix } from '../../app/case/case';
 import { ContactDetails, SectionStatus, YesOrNo } from '../../app/case/definition';
 import { isDateInputInvalid } from '../../app/form/validation';
 
@@ -6,19 +6,22 @@ export const isApplyingWithComplete = (userCase: CaseWithId): boolean => {
   return !!userCase.applyingWith;
 };
 
-export const getContactDetailsStatus = (userCase: CaseWithId, userType: 'applicant1' | 'applicant2'): SectionStatus => {
-  const address1 = userCase[`${userType}Address1`];
-  const addressTown = userCase[`${userType}AddressTown`];
-  const addressPostcode = userCase[`${userType}AddressPostcode`];
-  const contactDetails = userCase[`${userType}ContactDetails`] || [];
-  const emailAddress = userCase[`${userType}EmailAddress`];
-  const phoneNumber = userCase[`${userType}PhoneNumber`];
-  const applicant2AddressSameAsApplicant1 = userCase[`${userType}AddressSameAsApplicant1`];
+const addressComplete = (userCase: CaseWithId, fieldPrefix: FieldPrefix) => {
+  const address1 = userCase[`${fieldPrefix}Address1`];
+  const addressTown = userCase[`${fieldPrefix}AddressTown`];
+  const addressPostcode = userCase[`${fieldPrefix}AddressPostcode`];
 
-  let addressAvailable = false;
-  if (address1 && addressTown && addressPostcode) {
-    addressAvailable = true;
-  } else if (userType === 'applicant2' && applicant2AddressSameAsApplicant1 === YesOrNo.YES) {
+  return address1 && addressTown && addressPostcode;
+};
+
+export const getContactDetailsStatus = (userCase: CaseWithId, fieldPrefix: FieldPrefix): SectionStatus => {
+  const contactDetails = userCase[`${fieldPrefix}ContactDetails`] || [];
+  const emailAddress = userCase[`${fieldPrefix}EmailAddress`];
+  const phoneNumber = userCase[`${fieldPrefix}PhoneNumber`];
+  const applicant2AddressSameAsApplicant1 = userCase[`${fieldPrefix}AddressSameAsApplicant1`];
+
+  let addressAvailable = addressComplete(userCase, fieldPrefix);
+  if (fieldPrefix === FieldPrefix.APPLICANT2 && applicant2AddressSameAsApplicant1 === YesOrNo.YES) {
     addressAvailable = true;
   }
 
@@ -30,12 +33,12 @@ export const getContactDetailsStatus = (userCase: CaseWithId, userType: 'applica
       item => (item === ContactDetails.EMAIL && emailAddress) || (item === ContactDetails.PHONE && phoneNumber)
     );
   }
-  if (addressAvailable && contactDetailsAvailable) {
-    return SectionStatus.COMPLETED;
-  } else if (addressAvailable || contactDetailsAvailable) {
-    return SectionStatus.IN_PROGRESS;
-  }
-  return SectionStatus.NOT_STARTED;
+
+  return addressAvailable && contactDetailsAvailable
+    ? SectionStatus.COMPLETED
+    : !addressAvailable && !contactDetailsAvailable
+    ? SectionStatus.NOT_STARTED
+    : SectionStatus.IN_PROGRESS;
 };
 
 export const getPersonalDetailsStatus = (userCase: CaseWithId, userType: `applicant${1 | 2}`): SectionStatus => {
@@ -123,6 +126,37 @@ export const getAdoptionCertificateDetailsStatus = (userCase: CaseWithId): Secti
   return firstName && lastName
     ? SectionStatus.COMPLETED
     : !firstName && !lastName
+    ? SectionStatus.NOT_STARTED
+    : SectionStatus.IN_PROGRESS;
+};
+
+export const getBirthMotherDetailsStatus = (userCase: CaseWithId): SectionStatus => {
+  const names = userCase.birthMotherFirstNames && userCase.birthMotherLastNames;
+
+  const addressKnown = userCase.birthMotherAddressKnown;
+  const addressAvailable =
+    addressKnown === YesOrNo.NO ||
+    (addressKnown === YesOrNo.YES && addressComplete(userCase, FieldPrefix.BIRTH_MOTHER));
+
+  /**
+
+  birthMotherStillAlive?: YesOrNo;
+  birthMotherNotAliveReason?: string;
+  birthMotherNationality?: string[];
+  birthMotherAdditionalNationalities?: string[];
+  birthMotherOccupation?: string;
+  birthMotherAddressKnown?: YesOrNo;
+  birthMotherAddress1?: string;
+  birthMotherAddress2?: string;
+  birthMotherAddress3?: string;
+  birthMotherAddressTown?: string;
+  birthMotherAddressCounty?: string;
+  birthMotherAddressPostcode?: string;
+  birthMotherAddressCountry?: string;
+   */
+  return names && addressAvailable
+    ? SectionStatus.COMPLETED
+    : !names
     ? SectionStatus.NOT_STARTED
     : SectionStatus.IN_PROGRESS;
 };

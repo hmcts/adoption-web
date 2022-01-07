@@ -1,4 +1,4 @@
-import { CaseWithId } from '../../app/case/case';
+import { CaseWithId, FieldPrefix } from '../../app/case/case';
 import { DivorceOrDissolution, Gender, State, YesOrNo } from '../../app/case/definition';
 
 import {
@@ -158,7 +158,7 @@ describe('utils', () => {
         expected: 'IN_PROGRESS',
       },
     ])('should return correct status %o', async ({ data, userType, expected }) => {
-      expect(getContactDetailsStatus({ ...userCase, ...data }, <'applicant1' | 'applicant2'>userType)).toBe(expected);
+      expect(getContactDetailsStatus({ ...userCase, ...data }, <FieldPrefix>userType)).toBe(expected);
     });
   });
 
