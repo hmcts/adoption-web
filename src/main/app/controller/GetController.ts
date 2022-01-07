@@ -1,3 +1,4 @@
+import { Case, CaseWithId } from 'app/case/case';
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 import Negotiator from 'negotiator';
@@ -6,7 +7,7 @@ import { Fee } from '../../app/fee/fee-lookup-api';
 import { LanguageToggle } from '../../modules/i18n';
 import { getNextIncompleteStepUrl } from '../../steps';
 import { CommonContent, Language, generatePageContent } from '../../steps/common/common.content';
-import { DivorceOrDissolution, State } from '../case/definition';
+import { CITIZEN_UPDATE, DivorceOrDissolution, State } from '../case/definition';
 
 import { AppRequest } from './AppRequest';
 
@@ -74,5 +75,14 @@ export class GetController {
     // Browsers default language
     const negotiator = new Negotiator(req);
     return negotiator.language(LanguageToggle.supportedLanguages) || 'en';
+  }
+
+  protected async save(req: AppRequest, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
+    return req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
+  }
+
+  //eslint-disable-next-line @typescript-eslint/no-unused-vars
+  protected getEventName(req: AppRequest): string {
+    return CITIZEN_UPDATE;
   }
 }

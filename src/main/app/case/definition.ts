@@ -324,7 +324,7 @@ export interface CaseData {
   applicant1Email: string;
   applicant1FullName: string;
   applicant1HasOtherNames: YesOrNo;
-  applicant1AdditionalNames: OtherName[];//OtherName[];//(string | OtherName)[];ListValue<DivorceDocument>[];
+  applicant1AdditionalNames: ListValue<OtherName>[];//OtherName[];//OtherName[];//(string | OtherName)[];ListValue<DivorceDocument>[];
   applicant1DateOfBirth: DateAsString;
   applicant1Occupation: string;
   applicant1EmailAddress: string;

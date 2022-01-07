@@ -2,6 +2,7 @@ import { isInvalidHelpWithFeesRef } from '../form/validation';
 
 import { Case, CaseDate, Checkbox, LanguagePreference, formFieldsToCaseMapping, formatCase } from './case';
 import { CaseData, ChangedNameHow, DivorceOrDissolution, Gender, ThePrayer, YesOrNo } from './definition';
+import { v4 as generateUuid } from 'uuid';
 //import { applicant2AddressToApi } from './formatter/address'; //applicant1AddressToApi
 
 export type OrNull<T> = { [K in keyof T]: T[K] | null };
@@ -64,10 +65,12 @@ const fields: ToApiConverters = {
   //   applicant1CannotUploadDocuments: data.applicant1CannotUploadSupportingDocument,
   // });
   //
+//{"applicant1AdditionalNames":[{"id":"abc","value":{"name":"trump bush"}}]}
   applicant1AdditionalNames: data => ({
     applicant1AdditionalNames:
       data.applicant1HasOtherNames === YesOrNo.YES
-        ? (data.applicant1AdditionalNames || []).map(item => ({ name: `${item}` }))
+      //? (data.applicant1AdditionalNames || []).map(item => ({ id: `${item}`, value:`{"Name":"Test"}`}))
+         ? (data.applicant1AdditionalNames || []).map(item => ({ id: generateUuid(), value: {name: `${item}`}}))
         : [],
   }),
   jurisdictionResidualEligible: data => ({
@@ -154,14 +157,14 @@ const fields: ToApiConverters = {
   applicant1LastNameChangedWhenRelationshipFormed: data => ({
     applicant1LastNameChangedWhenMarried: data.applicant1LastNameChangedWhenRelationshipFormed,
     ...(data.applicant1LastNameChangedWhenRelationshipFormed === YesOrNo.NO &&
-    data.applicant1NameChangedSinceRelationshipFormed === YesOrNo.NO
+      data.applicant1NameChangedSinceRelationshipFormed === YesOrNo.NO
       ? setUnreachableAnswersToNull(['applicant1NameChangedHow', 'applicant1NameChangedHowOtherDetails'])
       : {}),
   }),
   applicant2LastNameChangedWhenRelationshipFormed: data => ({
     applicant2LastNameChangedWhenMarried: data.applicant2LastNameChangedWhenRelationshipFormed,
     ...(data.applicant2LastNameChangedWhenRelationshipFormed === YesOrNo.NO &&
-    data.applicant2NameChangedSinceRelationshipFormed === YesOrNo.NO
+      data.applicant2NameChangedSinceRelationshipFormed === YesOrNo.NO
       ? setUnreachableAnswersToNull(['applicant2NameChangedHow', 'applicant2NameChangedHowOtherDetails'])
       : {}),
   }),
@@ -197,11 +200,11 @@ const fields: ToApiConverters = {
     marriageMarriedInUk: data.inTheUk,
     ...(data.inTheUk === YesOrNo.YES
       ? setUnreachableAnswersToNull([
-          'marriageCertificateInEnglish',
-          'marriageCertifiedTranslation',
-          'marriageCountryOfMarriage',
-          'marriagePlaceOfMarriage',
-        ])
+        'marriageCertificateInEnglish',
+        'marriageCertifiedTranslation',
+        'marriageCountryOfMarriage',
+        'marriagePlaceOfMarriage',
+      ])
       : {}),
   }),
   certificateInEnglish: data => ({
