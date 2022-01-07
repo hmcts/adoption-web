@@ -1,10 +1,6 @@
 import { Checkboxes } from '../../../steps/common/components/checkboxes/checkboxes';
 import { BIRTH_FATHER_NATIONALITY } from '../../../steps/urls';
-import { SECTION, SECTION_IN_WELSH } from '../constants';
-
-const flow = 'birthFather';
-const dataTypeSingular = 'Nationality';
-const dataTypePlural = 'Nationalities';
+import { FLOW, NATIONALITIES, NATIONALITY, SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = {
   section: SECTION,
@@ -18,12 +14,12 @@ const en = {
   inputLabel: 'Country name',
   another: 'Add another country',
   errors: {
-    [`${flow}${dataTypeSingular}`]: {
+    [`${FLOW}${NATIONALITY}`]: {
       required: 'Select if they are British, Irish, citizen of a different country or not sure',
       notSureViolation: "Select a nationality or 'Not sure'",
     },
-    [`addAnother${dataTypeSingular}`]: {
-      required: 'This is not a valid entry (in Welsh)',
+    [`addAnother${NATIONALITY}`]: {
+      required: 'This is not a valid entry',
     },
   },
 };
@@ -40,11 +36,11 @@ const cy = {
   inputLabel: 'Country name (in Welsh)',
   another: 'Add another country (in Welsh)',
   errors: {
-    [`${flow}${dataTypeSingular}`]: {
+    [`${FLOW}${NATIONALITY}`]: {
       required: 'Select if they are British, Irish, citizen of a different country or not sure (in Welsh)',
       notSureViolation: "Select a nationality or 'Not sure' (in Welsh)",
     },
-    [`addAnother${dataTypeSingular}`]: {
+    [`addAnother${NATIONALITY}`]: {
       required: 'This is not a valid entry (in Welsh)',
     },
   },
@@ -73,9 +69,9 @@ const includeNotSureOption = true;
 export const { form, generateContent } = new Checkboxes(
   en,
   cy,
-  flow,
-  dataTypeSingular,
-  dataTypePlural,
+  FLOW,
+  NATIONALITY,
+  NATIONALITIES,
   checkboxLabelSize,
   values,
   includeNotSureOption,

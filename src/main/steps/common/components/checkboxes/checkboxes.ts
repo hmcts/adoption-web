@@ -1,5 +1,5 @@
 import { TranslationFn } from '../../../../app/controller/GetController';
-import { FormContent, FormField, FormFields, FormFieldsFn } from '../../../../app/form/Form';
+import { FormContent, FormFields, FormFieldsFn } from '../../../../app/form/Form';
 import { atLeastOneFieldIsChecked, isFieldFilledIn, notSure } from '../../../../app/form/validation';
 import { mapSummaryListContent } from '../../../../steps/common/functions/mapSummaryListContent';
 import { PageLink } from '../../../../steps/urls';
@@ -42,8 +42,18 @@ export class Checkboxes {
   }
 
   languages = {
-    en: (): Record<string, unknown> => ({ ...this.enContent, notSure: 'Not sure', add: 'Add' }),
-    cy: (): Record<string, unknown> => ({ ...this.cyContent, notSure: 'Not sure (in Welsh)', add: 'Add (in Welsh)' }),
+    en: (): Record<string, unknown> => ({
+      ...this.enContent,
+      notSure: 'Not sure',
+      add: 'Add',
+      remove: 'Remove',
+    }),
+    cy: (): Record<string, unknown> => ({
+      ...this.cyContent,
+      notSure: 'Not sure (in Welsh)',
+      add: 'Add (in Welsh)',
+      remove: 'Remove (in Welsh)',
+    }),
   };
 
   generateForm = (): FormContent => ({
@@ -64,19 +74,20 @@ export class Checkboxes {
               value: value as string,
               hint: subtext ? l => l[`${field}Subtext`] : undefined,
               subFields: includeArraySubFields
-                ? {
-                    [`${this.flow}Additional${this.dataTypePlural}`]: {
-                      type: 'summarylist',
-                      values: [],
-                      rows: mapSummaryListContent(
-                        userCase[`${this.flow}Additional${this.dataTypePlural}`] || [],
-                        ['Remove'],
-                        this.url ? this.url : '/#'
-                      ),
-                    },
-                    [`addAnother${this.dataTypeSingular}Details`]: this.renderDetails(),
-                    ...this.renderAddAnotherSubFields(true),
-                  }
+                ? userCase[`${this.flow}Additional${this.dataTypePlural}`]?.length
+                  ? {
+                      [`${this.flow}Additional${this.dataTypePlural}`]: {
+                        type: 'summarylist',
+                        values: [],
+                        rows: mapSummaryListContent(
+                          userCase[`${this.flow}Additional${this.dataTypePlural}`],
+                          ['Remove'],
+                          this.url ? this.url : '/#'
+                        ),
+                      },
+                      ...this.renderDetails(),
+                    }
+                  : { ...this.renderAddAnotherSubFields(true) }
                 : undefined,
             })),
             ...(this.includeNotSureOption
@@ -96,11 +107,13 @@ export class Checkboxes {
     ...defaultButtons,
   });
 
-  renderDetails = (): FormField => ({
-    type: 'details',
-    label: l => l.another,
-    subFields: {
-      ...this.renderAddAnotherSubFields(false),
+  renderDetails = (): FormFields => ({
+    [`addAnother${this.dataTypeSingular}Details`]: {
+      type: 'details',
+      label: l => l.another,
+      subFields: {
+        ...this.renderAddAnotherSubFields(false),
+      },
     },
   });
 
