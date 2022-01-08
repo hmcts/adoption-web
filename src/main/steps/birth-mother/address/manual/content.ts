@@ -1,5 +1,6 @@
 import { TranslationFn } from '../../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../../app/form/Form';
+import { BIRTH_MOTHER_INTERNATIONAL_ADDRESS } from '../../../../steps/urls';
 import {
   form as manualAddressForm,
   generateContent as manualAddressGenerateContent,
@@ -13,6 +14,7 @@ const en = manualAddressContent => ({
     birthMotherAddressTown: manualAddressContent.errors.addressTown,
     birthMotherAddressPostcode: manualAddressContent.errors.addressPostcode,
   },
+  internationalAddressUrl: BIRTH_MOTHER_INTERNATIONAL_ADDRESS,
 });
 
 const cy = manualAddressContent => ({
@@ -23,6 +25,7 @@ const cy = manualAddressContent => ({
     birthMotherAddressTown: manualAddressContent.errors.addressTown,
     birthMotherAddressPostcode: manualAddressContent.errors.addressPostcode,
   },
+  internationalAddressUrl: BIRTH_MOTHER_INTERNATIONAL_ADDRESS,
 });
 
 const manualAddressFormFields = manualAddressForm.fields as FormFields;
