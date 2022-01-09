@@ -27,7 +27,7 @@ describe('SelectAddressPostController', () => {
   beforeEach(() => {
     req = mockRequest({
       session: {
-        userCase: { email: 'test@example.com' },
+        userCase: { id: 'MOCK_ID' },
         addresses: [
           {
             county: 'CITY OF WESTMINSTER',
@@ -38,6 +38,7 @@ describe('SelectAddressPostController', () => {
             town: 'LONDON',
           },
         ],
+        errors: [],
       },
     });
     res = mockResponse();
@@ -56,11 +57,20 @@ describe('SelectAddressPostController', () => {
     });
 
     describe('and when there is a selected address', () => {
+      const formData = {
+        applicant1AddressCounty: 'CITY OF WESTMINSTER',
+        applicant1AddressPostcode: 'SW1H 9AJ',
+        applicant1Address1: '102 MINISTRY OF JUSTICE, SEVENTH FLOOR, PETTY FRANCE',
+        applicant1Address2: '',
+        applicant1AddressTown: 'LONDON',
+        applicant1SelectAddress: 0,
+      };
       beforeEach(() => {
         req.body.applicant1SelectAddress = 0;
         mockGetParsedBody.mockReturnValue({ applicant1SelectAddress: 0 });
         mockGetErrors.mockReturnValue([]);
         controller = new SelectAddressPostController({}, FieldPrefix.APPLICANT1);
+        req.locals.api.triggerEvent.mockResolvedValue(formData);
       });
 
       test('should set the address fields in userCase session data', async () => {
@@ -70,6 +80,21 @@ describe('SelectAddressPostController', () => {
         expect(req.session.userCase.applicant1AddressTown).toBe('LONDON');
         expect(req.session.userCase.applicant1AddressCounty).toBe('CITY OF WESTMINSTER');
         expect(req.session.userCase.applicant1AddressPostcode).toBe('SW1H 9AJ');
+      });
+
+      test('should call save with correct params', async () => {
+        await controller.post(req, res);
+        expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(1);
+        expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('MOCK_ID', formData, 'citizen-update-application');
+      });
+
+      test('should log error when triggerEvent call fails', async () => {
+        req.locals.api.triggerEvent.mockRejectedValue('MOCK_ERROR');
+        await controller.post(req, res);
+        expect(req.locals.logger.error).toHaveBeenCalledTimes(1);
+        expect(req.locals.logger.error).toHaveBeenCalledWith('Error saving', 'MOCK_ERROR');
+        //TODO uncomment this line when CCD work is complete
+        // expect(req.session.errors).toEqual([{ errorType: 'errorSaving', propertyName: '*' }]);
       });
     });
 

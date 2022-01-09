@@ -38,17 +38,12 @@ export default class SelectAddressPostControllerBase extends PostController<AnyO
         formData[`${this.fieldPrefix}AddressTown`] = selectedAddress.town;
         formData[`${this.fieldPrefix}AddressCounty`] = selectedAddress.county;
         formData[`${this.fieldPrefix}AddressPostcode`] = selectedAddress.postcode;
-        //[0] select-address: {"fullAddress":"51, WORTON WAY, ISLEWORTH, TW7 4AY",
-        //"street1":"51 WORTON WAY",
-        //"street2":"",
-        //"town":"ISLEWORTH",
-        //"county":"LONDON BOROUGH OF HOUNSLOW",
-        //"postcode":"TW7 4AY"}
-        console.log('select-address: ' + JSON.stringify(selectedAddress));
+
         try {
           req.session.userCase = await this.save(req, formData, this.getEventName(req));
         } catch (err) {
           req.locals.logger.error('Error saving', err);
+          //TODO uncomment this line when CCD work is complete
           //req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
         }
       }
