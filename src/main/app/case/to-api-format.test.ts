@@ -40,7 +40,6 @@ describe('to-api-format', () => {
       marriageIsSameSexCouple: YesOrNo.YES,
       applicant2Gender: Gender.MALE,
       applicant1Gender: Gender.MALE,
-      marriageDate: '1900-01-04',
       applicant1HWFNeedHelp: YesOrNo.YES,
       applicant1HWFAppliedForFees: YesOrNo.YES,
       applicant1HWFReferenceNumber: 'HWF-123-ABC',
@@ -48,13 +47,11 @@ describe('to-api-format', () => {
       applicant2HWFAppliedForFees: YesOrNo.YES,
       applicant2HWFReferenceNumber: 'HWF-123-CBA',
       applicant1AgreedToReceiveEmails: YesOrNo.YES,
-      applicant1KeepContactDetailsConfidential: YesOrNo.YES,
       applicant1KnowsApplicant2Address: YesOrNo.NO,
       applicant1KnowsApplicant2EmailAddress: YesOrNo.NO,
       applicant1WantsToHavePapersServedAnotherWay: null,
       applicant1LanguagePreferenceWelsh: 'No',
       applicant2LanguagePreferenceWelsh: 'No',
-      applicant2KeepContactDetailsConfidential: YesOrNo.YES,
       applicant1CannotUploadSupportingDocument: [],
       applicant2CannotUploadSupportingDocument: [],
       applicant1PrayerHasBeenGivenCheckbox: [ThePrayer.I_CONFIRM],
@@ -65,15 +62,6 @@ describe('to-api-format', () => {
       applicant2NameChangedHow: [ChangedNameHow.OTHER],
       applicant1NameChangedHowOtherDetails: 'Test',
       applicant2NameChangedHowOtherDetails: 'Test',
-      applicant2HomeAddress: {
-        AddressLine1: null,
-        AddressLine2: null,
-        AddressLine3: null,
-        PostTown: null,
-        County: null,
-        PostCode: null,
-        Country: null,
-      },
     });
   });
 
@@ -87,7 +75,6 @@ describe('to-api-format', () => {
     expect(apiFormat).toMatchObject({
       applicant1HWFReferenceNumber: '',
       applicant2HWFReferenceNumber: '',
-      marriageDate: '',
     });
   });
 
@@ -134,31 +121,6 @@ describe('to-api-format', () => {
       });
     }
   );
-
-  test('converts your address to match API format', () => {
-    const apiFormat = toApiFormat({
-      ...results,
-      applicant1Address1: 'Line 1',
-      applicant1Address2: 'Line 2',
-      applicant1Address3: '',
-      applicant1AddressTown: 'Town',
-      applicant1AddressCounty: 'County',
-      applicant1AddressPostcode: 'Postcode',
-      applicant1AddressCountry: 'UK',
-    } as unknown as Partial<Case>);
-
-    expect(apiFormat).toMatchObject({
-      applicant1HomeAddress: {
-        AddressLine1: 'Line 1',
-        AddressLine2: 'Line 2',
-        AddressLine3: '',
-        PostTown: 'Town',
-        County: 'County',
-        PostCode: 'Postcode',
-        Country: 'UK',
-      },
-    });
-  });
 
   test.each([
     {
@@ -211,22 +173,12 @@ describe('to-api-format', () => {
       applicant1KnowsApplicant2Address: YesOrNo.YES,
       expected: {
         applicant1KnowsApplicant2Address: YesOrNo.YES,
-        applicant1WantsToHavePapersServedAnotherWay: null,
       },
     },
     {
       applicant1KnowsApplicant2Address: YesOrNo.NO,
       expected: {
         applicant1KnowsApplicant2Address: YesOrNo.NO,
-        applicant2HomeAddress: {
-          AddressLine1: null,
-          AddressLine2: null,
-          AddressLine3: null,
-          PostTown: null,
-          County: null,
-          PostCode: null,
-          Country: null,
-        },
       },
     },
     {
