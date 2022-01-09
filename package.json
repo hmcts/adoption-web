@@ -15,7 +15,7 @@
     "build": "webpack --config webpack.config.js",
     "build:prod": "NODE_ENV=production webpack --mode production --config webpack.config.js",
     "test": "echo 'nope'",
-    "test:coverage": "echo 'nope'",
+    "test:coverage": "jest --coverage",
     "test:a11y": "echo 'nope' && exit 0",
     "sonar-scan": "sonar-scanner",
     "test:smoke": "echo 'nope'",
