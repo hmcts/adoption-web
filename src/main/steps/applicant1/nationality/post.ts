@@ -35,7 +35,11 @@ export default class NationalityPostController extends PostController<AnyObject>
           req.session.userCase.addAnotherNationality = '';
         }
         try {
-          req.session.userCase = await this.save(req, { ...formData, applicant1AdditionalNationalities: req.session.userCase.applicant1AdditionalNationalities }, this.getEventName(req));
+          req.session.userCase = await this.save(
+            req,
+            { ...formData, applicant1AdditionalNationalities: req.session.userCase.applicant1AdditionalNationalities },
+            this.getEventName(req)
+          );
         } catch (err) {
           req.locals.logger.error('Error saving', err);
           // req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });

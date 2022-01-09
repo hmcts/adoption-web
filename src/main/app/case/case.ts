@@ -78,7 +78,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant2EmailAddress: 'applicant2EmailAddress',
   applicant2PhoneNumber: 'applicant2PhoneNumber',
   applicant2Nationality: 'applicant2Nationality',
-  applicant2AdditionalNationalities: 'applicant2AdditionalNationalities', 
+  applicant2AdditionalNationalities: 'applicant2AdditionalNationalities',
   applicant2Address1: 'applicant2Address1',
   applicant2Address2: 'applicant2Address2',
   applicant2AddressTown: 'applicant2AddressTown',

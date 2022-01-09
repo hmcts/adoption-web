@@ -34,7 +34,11 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
           req.session.userCase.applicant2AdditionalName = '';
         }
         try {
-          req.session.userCase = await this.save(req, { ...formData, applicant2AdditionalNames: req.session.userCase.applicant2AdditionalNames }, this.getEventName(req));
+          req.session.userCase = await this.save(
+            req,
+            { ...formData, applicant2AdditionalNames: req.session.userCase.applicant2AdditionalNames },
+            this.getEventName(req)
+          );
         } catch (err) {
           req.locals.logger.error('Error saving', err);
           // req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });

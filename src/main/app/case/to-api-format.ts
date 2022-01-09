@@ -57,24 +57,32 @@ const fields: ToApiConverters = {
   applicant1AdditionalNames: data => ({
     applicant1AdditionalNames:
       data.applicant1HasOtherNames === YesOrNo.YES
-        ?(data.applicant1AdditionalNames || []).map(item => ({ id: generateUuid(), value: { name: `${item}` } })) : [],
+        ? (data.applicant1AdditionalNames || []).map(item => ({ id: generateUuid(), value: { name: `${item}` } }))
+        : [],
   }),
   applicant2AdditionalNames: data => ({
     applicant2AdditionalNames:
       data.applicant2HasOtherNames === YesOrNo.YES
-        ?(data.applicant2AdditionalNames || []).map(item => ({ id: generateUuid(), value: { name: `${item}` } })) : [],
+        ? (data.applicant2AdditionalNames || []).map(item => ({ id: generateUuid(), value: { name: `${item}` } }))
+        : [],
   }),
   applicant1AdditionalNationalities: data => ({
-    applicant1AdditionalNationalities:
-        (data.applicant1AdditionalNationalities || []).map(item => ({ id: generateUuid(), value: { name: `${item}` } })),
+    applicant1AdditionalNationalities: (data.applicant1AdditionalNationalities || []).map(item => ({
+      id: generateUuid(),
+      value: { name: `${item}` },
+    })),
   }),
   applicant2AdditionalNationalities: data => ({
-    applicant2AdditionalNationalities:
-        (data.applicant2AdditionalNationalities || []).map(item => ({ id: generateUuid(), value: { name: `${item}` } })),
+    applicant2AdditionalNationalities: (data.applicant2AdditionalNationalities || []).map(item => ({
+      id: generateUuid(),
+      value: { name: `${item}` },
+    })),
   }),
   childrenAdditionalNationalities: data => ({
-    childrenAdditionalNationalities:
-        (data.childrenAdditionalNationalities || []).map(item => ({ id: generateUuid(), value: { name: `${item}` } })),
+    childrenAdditionalNationalities: (data.childrenAdditionalNationalities || []).map(item => ({
+      id: generateUuid(),
+      value: { name: `${item}` },
+    })),
   }),
   jurisdictionResidualEligible: data => ({
     jurisdictionResidualEligible: checkboxConverter(data.jurisdictionResidualEligible),

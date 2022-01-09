@@ -20,7 +20,11 @@ export default class NationalityGetController extends GetController {
       ////
       req.session.userCase.childrenAdditionalNationalities = countries;
       try {
-        req.session.userCase = await this.save(req, { childrenAdditionalNationalities: countries }, this.getEventName(req));
+        req.session.userCase = await this.save(
+          req,
+          { childrenAdditionalNationalities: countries },
+          this.getEventName(req)
+        );
       } catch (err) {
         req.locals.logger.error('Error saving', err);
         // req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });

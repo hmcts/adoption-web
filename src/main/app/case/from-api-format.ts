@@ -38,7 +38,7 @@ const fields: FromApiConverters = {
   }),
   childrenAdditionalNationalities: data => ({
     childrenAdditionalNationalities: data.childrenAdditionalNationalities?.map(item => item.value.name),
-  }), 
+  }),
   marriageIsSameSexCouple: data => ({
     sameSex: checkboxConverter(data.marriageIsSameSexCouple),
   }),

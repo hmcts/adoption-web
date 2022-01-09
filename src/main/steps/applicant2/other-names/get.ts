@@ -20,7 +20,11 @@ export default class OtherNamesGetController extends GetController {
       }
       req.session.userCase.applicant2AdditionalNames = names;
       try {
-        req.session.userCase = await this.save(req, { applicant2AdditionalNames: names, applicant2HasOtherNames: YesOrNo.YES }, this.getEventName(req));
+        req.session.userCase = await this.save(
+          req,
+          { applicant2AdditionalNames: names, applicant2HasOtherNames: YesOrNo.YES },
+          this.getEventName(req)
+        );
       } catch (err) {
         req.locals.logger.error('Error saving', err);
         // req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
