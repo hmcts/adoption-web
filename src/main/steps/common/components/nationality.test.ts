@@ -3,7 +3,7 @@
 import { FieldPrefix } from '../../../app/case/case';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
 import { atLeastOneFieldIsChecked, isFieldFilledIn } from '../../../app/form/validation';
-import { CommonContent, generatePageContent } from '../../common/common.content';
+import { CommonContent, generatePageContent } from '../common.content';
 
 import { generateContent } from './nationality';
 
