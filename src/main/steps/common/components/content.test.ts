@@ -1,26 +1,27 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable jest/expect-expect */
+import { FieldPrefix } from '../../../app/case/case';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
 import { atLeastOneFieldIsChecked, isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
-import { generateContent } from './content';
+import { generateContent } from './nationality';
 
 const CY = 'cy';
 const EN = 'en';
+const fieldPrefix = FieldPrefix.APPLICANT1;
 const enContent = {
-  section: 'Primary applicant',
   label: 'What is your nationality?',
   hint: 'Select all options that are relevant to you.',
   british: 'British',
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish',
   irish: 'Irish',
   differentCountry: 'Citizen of a different country',
-  applicant1Nationality: 'Country name',
+  countryName: 'Country name',
   add: 'Add',
   another: 'Add another country',
   errors: {
-    applicant1Nationality: {
+    [`${fieldPrefix}Nationality`]: {
       required: 'Select if you are British, Irish or a citizen of a different country',
     },
     addAnotherNationality: {
@@ -28,19 +29,19 @@ const enContent = {
     },
   },
 };
+
 const cyContent = {
-  section: 'Primary applicant (in Welsh)',
   label: 'What is your nationality? (in Welsh)',
   hint: 'Select all options that are relevant to you. (in Welsh)',
   british: 'British (in Welsh)',
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish (in Welsh)',
   irish: 'Irish (in Welsh)',
   differentCountry: 'Citizen of a different country (in Welsh)',
-  applicant1Nationality: 'Country name (in Welsh)',
+  [`${fieldPrefix}Nationality`]: 'Country name (in Welsh)',
   add: 'Add (in Welsh)',
   another: 'Add another country (in Welsh)',
   errors: {
-    applicant1Nationality: {
+    [`${fieldPrefix}Nationality`]: {
       required: 'Select if you are British, Irish or a citizen of a different country (in Welsh)',
     },
     addAnotherNationality: {
@@ -50,13 +51,11 @@ const cyContent = {
 };
 
 const langAssertions = (language, content) => {
-  const generatedContent = generateContent({ language, userCase: {} } as CommonContent);
-  const { section, title, label, british, britishSubtext, irish, differentCountry, countryName, add, another, errors } =
-    content;
+  const generatedContent = generateContent({ language, userCase: {} } as CommonContent, fieldPrefix);
+  const { label, hint, british, britishSubtext, irish, differentCountry, countryName, add, another, errors } = content;
 
-  expect(generatedContent.section).toEqual(section);
-  expect(generatedContent.title).toEqual(title);
   expect(generatedContent.label).toEqual(label);
+  expect(generatedContent.hint).toEqual(hint);
   expect(generatedContent.british).toEqual(british);
   expect(generatedContent.britishSubtext).toEqual(britishSubtext);
   expect(generatedContent.irish).toEqual(irish);
@@ -81,30 +80,30 @@ describe('nationality content', () => {
   });
 
   it('should display a checkbox with nationality options', () => {
-    const generatedContent = generateContent(commonContent([]));
+    const generatedContent = generateContent(commonContent([]), fieldPrefix);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
 
     const { type, label, labelSize, hint, values, validator } = fields.applicant1Nationality as FormOptions;
 
     expect(type).toBe('checkboxes');
-    expect((label as Function)(generateContent(commonContent([])))).toBe(enContent.label);
+    expect((label as Function)(generatedContent)).toBe(enContent.label);
     expect(labelSize).toBe('l');
     expect((hint as Function)(generatedContent)).toBe(enContent.hint);
     expect(values).toHaveLength(3);
-    expect((values[0].label as Function)(generateContent(commonContent([])))).toBe(enContent.british);
+    expect((values[0].label as Function)(generatedContent)).toBe(enContent.british);
     expect(values[0].value).toBe('British');
-    expect((values[0].hint as Function)(generateContent(commonContent([])))).toBe(enContent.britishSubtext);
-    expect((values[1].label as Function)(generateContent(commonContent([])))).toBe(enContent.irish);
+    expect((values[0].hint as Function)(generatedContent)).toBe(enContent.britishSubtext);
+    expect((values[1].label as Function)(generatedContent)).toBe(enContent.irish);
     expect(values[1].value).toBe('Irish');
-    expect((values[2].label as Function)(generateContent(commonContent([])))).toBe(enContent.differentCountry);
+    expect((values[2].label as Function)(generatedContent)).toBe(enContent.differentCountry);
     expect(values[2].value).toBe('Other');
     expect(validator).toBe(atLeastOneFieldIsChecked);
   });
 
   it("should display correct content under 'Citizen of a different country' when country array is empty", () => {
     const emptyArray = [];
-    const generatedContent = generateContent(commonContent(emptyArray));
+    const generatedContent = generateContent(commonContent(emptyArray), fieldPrefix);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const nationality = fields.applicant1Nationality as FormOptions;
@@ -116,21 +115,19 @@ describe('nationality content', () => {
     expect(applicant1AdditionalNationalities).toBeUndefined();
 
     expect(addAnotherNationality?.type).toBe('input');
-    expect((addAnotherNationality?.label as Function)(generateContent(commonContent([])))).toBe(
-      enContent.applicant1Nationality
-    );
+    expect((addAnotherNationality?.label as Function)(generatedContent)).toBe(enContent.countryName);
     expect(addAnotherNationality?.labelSize).toBe(null);
     expect(addAnotherNationality?.validator).toBe(isFieldFilledIn);
 
     expect(addButton?.type).toBe('button');
-    expect((addButton?.label as Function)(generateContent(commonContent([])))).toBe(enContent.add);
+    expect((addButton?.label as Function)(generatedContent)).toBe(enContent.add);
     expect(addButton?.classes).toBe('govuk-button--secondary');
     expect(addButton?.value).toBe('addButton');
   });
 
   it("should display correct content under 'Citizen of a different country' when country array is populated", () => {
     const populatedArray = ['country1', 'country2'];
-    const generatedContent = generateContent(commonContent(populatedArray));
+    const generatedContent = generateContent(commonContent(populatedArray), fieldPrefix);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const nationality = fields.applicant1Nationality as FormOptions;
@@ -150,30 +147,26 @@ describe('nationality content', () => {
     expect(rows?.[0].actions.items[0].visuallyHiddenText).toStrictEqual(populatedArray[0]);
 
     expect(addAnotherNationalityDetails.type).toBe('details');
-    expect((addAnotherNationalityDetails.label as Function)(generateContent(commonContent([])))).toBe(
-      enContent.another
-    );
+    expect((addAnotherNationalityDetails.label as Function)(generatedContent)).toBe(enContent.another);
 
     expect(addAnotherNationality?.type).toBe('input');
-    expect((addAnotherNationality?.label as Function)(generateContent(commonContent([])))).toBe(
-      enContent.applicant1Nationality
-    );
+    expect((addAnotherNationality?.label as Function)(generatedContent)).toBe(enContent.countryName);
     expect(addAnotherNationality?.labelSize).toBe(null);
 
     expect(addButton?.type).toBe('button');
-    expect((addButton?.label as Function)(generateContent(commonContent([])))).toBe(enContent.add);
+    expect((addButton?.label as Function)(generatedContent)).toBe(enContent.add);
     expect(addButton?.classes).toBe('govuk-button--secondary');
     expect(addButton?.value).toBe('addButton');
   });
 
   it('should contain submit button', () => {
-    const generatedContent = generateContent(commonContent([]));
+    const generatedContent = generateContent(commonContent([]), fieldPrefix);
     const form = generatedContent.form as FormContent;
     expect((form.submit.text as Function)(generatePageContent({ language: EN }))).toBe('Save and continue');
   });
 
   it('should contain saveAsDraft button', () => {
-    const generatedContent = generateContent({ ...commonContent([]), userCase: {} });
+    const generatedContent = generateContent({ ...commonContent([]), userCase: {} }, fieldPrefix);
     const form = generatedContent.form as FormContent;
     expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: EN }))).toBe('Save as draft');
   });

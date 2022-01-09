@@ -83,7 +83,7 @@ export const nationalityFields = (userCase: Partial<Case>, fieldPrefix: FieldPre
                   rows: mapSummaryListContent(
                     userCase[`${fieldPrefix}AdditionalNationalities`]!,
                     ['Remove'],
-                    urls[fieldPrefix] || '#'
+                    urls[fieldPrefix]
                   ),
                 },
               }
