@@ -139,6 +139,7 @@ export interface Applicant {
   EmailAddress: string;
   PhoneNumber: string;
   Nationality: Nationality[];
+  AdditionalNationality: ListValue<OtherName>[];
   Address1: string;
   Address2: string;
   AddressTown: string;
@@ -286,6 +287,7 @@ export interface Children {
   LastName: string;
   DateOfBirth: DateAsString;
   Nationality: Nationality[];
+  AdditionalNationality: ListValue<OtherName>[];
   FirstNameAfterAdoption: string;
   LastNameAfterAdoption: string;
   SexAtBirth: Gender;
@@ -324,12 +326,13 @@ export interface CaseData {
   applicant1Email: string;
   applicant1FullName: string;
   applicant1HasOtherNames: YesOrNo;
-  applicant1AdditionalNames: ListValue<OtherName>[];//OtherName[];//OtherName[];//(string | OtherName)[];ListValue<DivorceDocument>[];
+  applicant1AdditionalNames: ListValue<OtherName>[];
   applicant1DateOfBirth: DateAsString;
   applicant1Occupation: string;
   applicant1EmailAddress: string;
   applicant1PhoneNumber: string;
   applicant1Nationality: Nationality[];
+  applicant1AdditionalNationalities: ListValue<OtherName>[];
   applicant1Address1: string;
   applicant1Address2: string;
   applicant1AddressTown: string;
@@ -348,6 +351,7 @@ export interface CaseData {
   applicant2EmailAddress: string;
   applicant2PhoneNumber: string;
   applicant2Nationality: Nationality[];
+  applicant2AdditionalNationalities: ListValue<OtherName>[];
   applicant2Address1: string;
   applicant2Address2: string;
   applicant2AddressTown: string;
@@ -360,6 +364,7 @@ export interface CaseData {
   childrenLastName: string;
   childrenDateOfBirth: DateAsString;
   childrenNationality: Nationality[];
+  childrenAdditionalNationalities: ListValue<OtherName>[];
   childrenFirstNameAfterAdoption: string;
   childrenLastNameAfterAdoption: string;
   childrenSexAtBirth: Gender;

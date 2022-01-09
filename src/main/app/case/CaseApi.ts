@@ -130,12 +130,12 @@ export class CaseApi {
       //delete data.applicant1HasOtherNames;
 
       //const data1 = JSON.stringify({"applicant1AdditionalNames" :[{"value":"asdf1"}]});
-      console.log("xxxxxxxxxxxxxxxxx" );
-      console.log("a1 132 url: " +`/cases/${caseId}/events`);
-      console.log("a1 132 event: " +JSON.stringify(event));
-      console.log("a1 132 token: " +JSON.stringify(token));
-      console.log("a1 132 data: " +JSON.stringify(data));
-      console.log("xxxxxxxxxxxxxxxxx" );
+      console.log('xxxxxxxxxxxxxxxxx');
+      console.log('a1 132 url: ' + `/cases/${caseId}/events`);
+      console.log('a1 132 event: ' + JSON.stringify(event));
+      console.log('a1 132 token: ' + JSON.stringify(token));
+      console.log('a1 132 data: ' + JSON.stringify(data));
+      console.log('xxxxxxxxxxxxxxxxx');
       const response: AxiosResponse<CcdV2Response> = await this.axios.post(`/cases/${caseId}/events`, {
         event,
         data,

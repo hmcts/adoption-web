@@ -24,9 +24,21 @@ const checkboxConverter = (value: string | undefined) => {
 
 const fields: FromApiConverters = {
   ...invert(formFieldsToCaseMapping),
-  applicant1AdditionalNames: data =>({
-    applicant1AdditionalNames: data.applicant1AdditionalNames?.map(item=>item.value.name)
+  applicant1AdditionalNames: data => ({
+    applicant1AdditionalNames: data.applicant1AdditionalNames?.map(item => item.value.name),
   }),
+  applicant2AdditionalNames: data => ({
+    applicant2AdditionalNames: data.applicant2AdditionalNames?.map(item => item.value.name),
+  }),
+  applicant1AdditionalNationalities: data => ({
+    applicant1AdditionalNationalities: data.applicant1AdditionalNationalities?.map(item => item.value.name),
+  }),
+  applicant2AdditionalNationalities: data => ({
+    applicant2AdditionalNationalities: data.applicant2AdditionalNationalities?.map(item => item.value.name),
+  }),
+  childrenAdditionalNationalities: data => ({
+    childrenAdditionalNationalities: data.childrenAdditionalNationalities?.map(item => item.value.name),
+  }), 
   marriageIsSameSexCouple: data => ({
     sameSex: checkboxConverter(data.marriageIsSameSexCouple),
   }),

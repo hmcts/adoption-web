@@ -17,8 +17,15 @@ export default class NationalityGetController extends GetController {
       if (index !== -1) {
         countries.splice(index, 1);
       }
-
+      ////
       req.session.userCase.childrenAdditionalNationalities = countries;
+      try {
+        req.session.userCase = await this.save(req, { childrenAdditionalNationalities: countries }, this.getEventName(req));
+      } catch (err) {
+        req.locals.logger.error('Error saving', err);
+        // req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+      }
+      ////
       delete req.query.remove;
       req.url = req.url.substring(0, req.url.indexOf('?'));
       removed = true;

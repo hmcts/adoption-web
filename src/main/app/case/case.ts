@@ -16,12 +16,10 @@ import {
   ListValue,
   Nationality,
   OrderSummary,
-  //OtherName,
   Payment,
   PlacementOrder,
   State,
   YesOrNo,
-  //OtherName,
 } from './definition';
 
 export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {
@@ -63,6 +61,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant1EmailAddress: 'applicant1EmailAddress',
   applicant1PhoneNumber: 'applicant1PhoneNumber',
   applicant1Nationality: 'applicant1Nationality',
+  applicant1AdditionalNationalities: 'applicant1AdditionalNationalities',
   applicant1Address1: 'applicant1Address1',
   applicant1Address2: 'applicant1Address2',
   applicant1AddressTown: 'applicant1AddressTown',
@@ -79,6 +78,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant2EmailAddress: 'applicant2EmailAddress',
   applicant2PhoneNumber: 'applicant2PhoneNumber',
   applicant2Nationality: 'applicant2Nationality',
+  applicant2AdditionalNationalities: 'applicant2AdditionalNationalities', 
   applicant2Address1: 'applicant2Address1',
   applicant2Address2: 'applicant2Address2',
   applicant2AddressTown: 'applicant2AddressTown',
@@ -91,6 +91,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   childrenLastName: 'childrenLastName',
   childrenDateOfBirth: 'childrenDateOfBirth',
   childrenNationality: 'childrenNationality',
+  childrenAdditionalNationalities: 'childrenAdditionalNationalities',
   childrenFirstNameAfterAdoption: 'childrenFirstNameAfterAdoption',
   childrenLastNameAfterAdoption: 'childrenLastNameAfterAdoption',
   childrenSexAtBirth: 'childrenSexAtBirth',
@@ -172,6 +173,7 @@ export interface Case {
   applicant1DateOfBirth?: CaseDate;
   applicant1Occupation?: string;
   applicant1Nationality?: Nationality[];
+  applicant1AdditionalNationalities?: string[];
   applicant1Address1?: string;
   applicant1Address2?: string;
   applicant1AddressTown?: string;
@@ -183,12 +185,13 @@ export interface Case {
   applicant2LastNames?: string;
   applicant2AdditionalName?: string;
   applicant2HasOtherNames?: YesOrNo;
-  applicant2AdditionalNames?: string[]; //(string | OtherName)[]
+  applicant2AdditionalNames?: string[];
   applicant2DateOfBirth?: CaseDate;
   applicant2Occupation?: string;
   applicant2EmailAddress?: string;
   applicant2PhoneNumber?: string;
   applicant2Nationality?: Nationality[];
+  applicant2AdditionalNationalities?: string[];
   applicant2Address1?: string;
   applicant2Address2?: string;
   applicant2AddressTown?: string;
@@ -200,6 +203,7 @@ export interface Case {
   childrenLastName?: string;
   childrenDateOfBirth?: CaseDate;
   childrenNationality?: Nationality[];
+  childrenAdditionalNationalities?: string[];
   childrenFirstNameAfterAdoption?: string;
   childrenLastNameAfterAdoption?: string;
   childrenSexAtBirth?: Gender;
@@ -211,8 +215,8 @@ export interface Case {
   addButton?: string;
   addAnotherNationality?: string;
   // applicant1Nationality?: string[];
-  applicant1AdditionalNationalities?: string[];
-  applicant2AdditionalNationalities?: string[];
+  // applicant1AdditionalNationalities?: string[];
+  // applicant2AdditionalNationalities?: string[];
   applicant1SelectAddress?: string;
   applicant2SelectAddress?: string;
   //applicant1ContactDetails?: string[];
@@ -226,7 +230,7 @@ export interface Case {
   // childrenDateOfBirth?: CaseDate;
   // childrenSexAtBirth?: Gender;
   // childrenNationality?: string[];
-  childrenAdditionalNationalities?: string[];
+  // childrenAdditionalNationalities?: string[];
 
   applicationType?: ApplicationType;
   applyingWith?: ApplyingWith;
