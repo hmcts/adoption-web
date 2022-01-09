@@ -7,10 +7,11 @@ import { generateContent } from './address-manual';
 jest.mock('../../../app/form/validation');
 
 const enContent = {
-  buildingStreet: 'Building and street',
+  addressLine1: 'Building and street',
   town: 'Town or city',
   county: 'County',
   postcode: 'Postcode',
+  enterInternationalAddress: 'Enter an international address',
   errors: {
     address1: {
       required: 'Enter the first line of the address',
@@ -26,10 +27,11 @@ const enContent = {
 };
 
 const cyContent = {
-  buildingStreet: 'Building and street (in welsh)',
+  addressLine1: 'Building and street (in welsh)',
   town: 'Town or city (in welsh)',
   county: 'County (in welsh)',
   postcode: 'Postcode (in welsh)',
+  enterInternationalAddress: 'Enter an international address (in welsh)',
   errors: {
     address1: {
       required: 'Enter the first line of the address (in welsh)',
@@ -58,19 +60,21 @@ describe('common > components > manual-address > content', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.buildingStreet).toEqual(enContent.buildingStreet);
+    expect(generatedContent.addressLine1).toEqual(enContent.addressLine1);
     expect(generatedContent.town).toEqual(enContent.town);
     expect(generatedContent.county).toEqual(enContent.county);
     expect(generatedContent.postcode).toEqual(enContent.postcode);
+    expect(generatedContent.enterInternationalAddress).toEqual(enContent.enterInternationalAddress);
     expect(generatedContent.errors).toEqual(enContent.errors);
   });
 
   test('should return correct welsh content', () => {
     generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.buildingStreet).toEqual(cyContent.buildingStreet);
+    expect(generatedContent.addressLine1).toEqual(cyContent.addressLine1);
     expect(generatedContent.town).toEqual(cyContent.town);
     expect(generatedContent.county).toEqual(cyContent.county);
     expect(generatedContent.postcode).toEqual(cyContent.postcode);
+    expect(generatedContent.enterInternationalAddress).toEqual(cyContent.enterInternationalAddress);
     expect(generatedContent.errors).toEqual(cyContent.errors);
   });
 
@@ -78,7 +82,7 @@ describe('common > components > manual-address > content', () => {
     const address1Field = fields.address1 as FormOptions;
     expect(address1Field.type).toBe('text');
     expect(address1Field.classes).toBe('govuk-label');
-    expect((address1Field.label as Function)(generatedContent)).toBe(enContent.buildingStreet);
+    expect((address1Field.label as Function)(generatedContent)).toBe(enContent.addressLine1);
     expect(address1Field.labelSize).toBe(null);
     expect(address1Field.validator).toBe(isFieldFilledIn);
   });
@@ -87,7 +91,6 @@ describe('common > components > manual-address > content', () => {
     const address2Field = fields.address2 as FormOptions;
     expect(address2Field.type).toBe('text');
     expect(address2Field.classes).toBe('govuk-label');
-    expect(address2Field.label).toBe('');
     expect(address2Field.labelSize).toBe(null);
   });
 
