@@ -65,7 +65,7 @@ export const nationalityFields = (userCase: Partial<Case>, fieldPrefix: FieldPre
     labelSize: 'l',
     hint: l => l.hint,
     validator: value =>
-      [FieldPrefix.APPLICANT1, FieldPrefix.APPLICANT1].includes(fieldPrefix)
+      [FieldPrefix.APPLICANT1, FieldPrefix.APPLICANT2].includes(fieldPrefix)
         ? atLeastOneFieldIsChecked(value)
         : atLeastOneFieldIsChecked(value) || notSureViolation(value),
     values: [
@@ -136,7 +136,7 @@ export const nationalityFields = (userCase: Partial<Case>, fieldPrefix: FieldPre
               }),
         },
       },
-      ...(![FieldPrefix.APPLICANT1, FieldPrefix.APPLICANT1].includes(fieldPrefix)
+      ...(![FieldPrefix.APPLICANT1, FieldPrefix.APPLICANT2].includes(fieldPrefix)
         ? [
             {
               divider: l => l.or,
