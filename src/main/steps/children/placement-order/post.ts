@@ -15,6 +15,7 @@ export default class PlacementOrderPostController extends PostController<AnyObje
 
     req.session.errors = form.getErrors(formData);
 
+    console.log(req.session.userCase.selectedPlacementOrderId, req.session.userCase.placementOrders);
     const placementOrder = req.session.userCase.placementOrders?.find(
       item => item.placementOrderId === req.session.userCase.selectedPlacementOrderId
     );

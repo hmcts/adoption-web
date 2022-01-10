@@ -39,11 +39,12 @@ const fields: FromApiConverters = {
   childrenAdditionalNationalities: data => ({
     childrenAdditionalNationalities: data.childrenAdditionalNationalities?.map(item => item.value.name),
   }),
-  // placementOrders: data => ({
-  //   placementOrders: data.placementOrders?.map(item => ({
-  //     ...item.value, placementOrderDate: fromApiDate(item.value.placementOrderDate)
-  //   })),
-  // }),
+  placementOrders: data => ({
+    placementOrders: data.placementOrders?.map(item => ({
+      ...item.value,
+      placementOrderDate: fromApiDate(item.value.placementOrderDate),
+    })),
+  }),
   marriageIsSameSexCouple: data => ({
     sameSex: checkboxConverter(data.marriageIsSameSexCouple),
   }),

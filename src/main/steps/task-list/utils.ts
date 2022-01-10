@@ -76,7 +76,7 @@ export const getChildrenPlacementOrderStatus = (userCase: CaseWithId): SectionSt
         (index === 0 || item.placementOrderType) &&
         item.placementOrderNumber &&
         item.placementOrderCourt &&
-        !isDateInputInvalid(item.placementOrderDate)
+        !isDateInputInvalid(item.placementOrderDate as CaseDate)
       );
     });
 
@@ -87,7 +87,7 @@ export const getChildrenPlacementOrderStatus = (userCase: CaseWithId): SectionSt
         item.placementOrderType ||
         item.placementOrderNumber ||
         item.placementOrderCourt ||
-        !isDateInputInvalid(item.placementOrderDate) ||
+        !isDateInputInvalid(item.placementOrderDate as CaseDate) ||
         index === 0
       );
     });

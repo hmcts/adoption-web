@@ -2,7 +2,7 @@
 /* eslint-disable */
 // Generated using typescript-generator version 2.33.956 on 2021-11-12 15:28:24.
 
-import { CaseDate } from "./case";
+import { CaseDate } from './case';
 
 export interface Address {
   AddressLine1: string;
@@ -271,10 +271,10 @@ export interface Bailiff {
 }
 
 export const enum Nationality {
-  BRITHISH = "British",
-  IRISH = "Irish",
-  OTHER = "Other",
-  NOT_SURE = "Not sure",
+  BRITHISH = 'British',
+  IRISH = 'Irish',
+  OTHER = 'Other',
+  NOT_SURE = 'Not sure',
 }
 
 export const enum ContactDetails {
@@ -298,9 +298,9 @@ export interface OtherName {
 }
 
 export const enum Gender {
-  MALE = "male",
-  FEMALE = "female",
-  NOT_GIVEN = "notGiven",
+  MALE = 'male',
+  FEMALE = 'female',
+  NOT_GIVEN = 'notGiven',
   INTERSEX = 'intersex',
 }
 
@@ -309,7 +309,7 @@ export interface PlacementOrder {
   placementOrderType?: string;
   placementOrderNumber?: string;
   placementOrderCourt?: string;
-  placementOrderDate?: CaseDate;// | string;
+  placementOrderDate?: CaseDate | string;
 }
 
 export interface CaseData {
@@ -1019,8 +1019,8 @@ export const enum ApplicationType {
 }
 
 export const enum ApplyingWith {
-  ALONE = "alone",
-  WITH_SPOUSE_OR_CIVIL_PARTNER = "withSpouseOrCivilPartner",
+  ALONE = 'alone',
+  WITH_SPOUSE_OR_CIVIL_PARTNER = 'withSpouseOrCivilPartner',
 }
 
 export const enum ChangedNameHow {

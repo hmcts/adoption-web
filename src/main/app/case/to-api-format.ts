@@ -88,11 +88,8 @@ const fields: ToApiConverters = {
     placementOrders: (data.placementOrders || []).map(item => ({
       id: generateUuid(),
       value: {
-        placementOrderType: `${item.placementOrderType}`,
-        placementOrderId: `${item.placementOrderId}`,
-        placementOrderNumber: `${item.placementOrderNumber}`,
-        placementOrderCourt: `${item.placementOrderCourt}`,
-        //placementOrderDate: toApiDate(item.placementOrderDate as CaseDate),
+        ...item,
+        placementOrderDate: toApiDate(item.placementOrderDate as CaseDate),
       },
     })),
   }),

@@ -8,7 +8,12 @@ import { GetController } from '../../../app/controller/GetController';
 export default class PlacementOrderGetController extends GetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
     let placementOrders = req.session.userCase.placementOrders || [];
-
+    console.log(
+      'req.session.userCase.selectedPlacementOrderId',
+      req.session.userCase.selectedPlacementOrderId,
+      !req.session.userCase.selectedPlacementOrderId
+    );
+    console.log('req.query', req.query);
     let redirect = false;
     if (req.query.add) {
       req.session.userCase.selectedPlacementOrderId = `${req.query.add}`;
@@ -28,9 +33,14 @@ export default class PlacementOrderGetController extends GetController {
       delete req.query.remove;
       req.url = req.url.substring(0, req.url.indexOf('?'));
       redirect = true;
-    } else if (!req.session.userCase.selectedPlacementOrderId) {
+    } else if (
+      !req.session.userCase.selectedPlacementOrderId ||
+      req.session.userCase.selectedPlacementOrderId === 'undefined'
+    ) {
       //generate random id for placement order if there are no placement orders
       req.session.userCase.selectedPlacementOrderId = placementOrders[0]?.placementOrderId || `${Date.now()}`;
+
+      console.log('req.session.userCase.selectedPlacementOrderId 2', req.session.userCase.selectedPlacementOrderId);
     }
 
     let placementOrder = placementOrders.find(

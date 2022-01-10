@@ -40,7 +40,7 @@ export const form: FormContent = {
   fields: userCase => {
     const placementOrderDate = userCase.placementOrders?.find(
       item => item.placementOrderId === userCase.selectedPlacementOrderId
-    )?.placementOrderDate;
+    )?.placementOrderDate as CaseDate;
     return {
       placementOrderDate: {
         type: 'date',
