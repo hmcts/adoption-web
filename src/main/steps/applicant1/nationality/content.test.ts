@@ -13,11 +13,11 @@ jest.mock('../../common/components/nationality', () => {
 });
 
 import { FieldPrefix } from '../../../app/case/case';
-import { FormContent, FormFields } from '../../../app/form/Form';
+import { FormContent, FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { CommonContent } from '../../common/common.content';
 import { nationalityFields } from '../../common/components/nationality';
 
-import { generateContent } from './content';
+import { form, generateContent } from './content';
 
 const enContent = {
   section: 'Primary applicant',
@@ -52,14 +52,16 @@ describe('nationality content', () => {
     expect(fields.applicant1Nationality).toEqual(nationalityFormFields.applicant1Nationality);
   });
 
+  test('should call nationalityFields when form.fields is called', () => {
+    (form.fields as FormFieldsFn)(commonContent.userCase!);
+    expect(nationalityFields).toHaveBeenCalledWith(commonContent.userCase, FieldPrefix.APPLICANT1);
+  });
+
   it('should contain submit button', () => {
-    const form = generatedContent.form as FormContent;
-    console.log(generatedContent);
-    expect(form.submit).toEqual(mockForm.form.submit);
+    expect((generatedContent.form as FormContent).submit).toEqual(mockForm.form.submit);
   });
 
   it('should contain saveAsDraft button', () => {
-    const form = generatedContent.form as FormContent;
-    expect(form.saveAsDraft).toEqual(mockForm.form.saveAsDraft);
+    expect((generatedContent.form as FormContent).saveAsDraft).toEqual(mockForm.form.saveAsDraft);
   });
 });
