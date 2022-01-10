@@ -8,7 +8,7 @@ describe('birthMotherSequence', () => {
 
     expect(birthMotherSequence[0].url).toBe('/birth-mother/full-name');
     expect(birthMotherSequence[0].showInSection).toBe('aboutBirthMother');
-    expect(birthMotherSequence[0].getNextStep({})).toBe('/birth-mother/occupation');
+    expect(birthMotherSequence[0].getNextStep({})).toBe('/birth-mother/still-alive');
 
     expect(birthMotherSequence[1].url).toBe('/birth-mother/still-alive');
     expect(birthMotherSequence[1].showInSection).toBe('aboutBirthMother');

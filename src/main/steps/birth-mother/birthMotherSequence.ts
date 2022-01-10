@@ -18,7 +18,7 @@ export const birthMotherSequence: Step[] = [
   {
     url: Urls.BIRTH_MOTHER_FULL_NAME,
     showInSection: Sections.AboutBirthMother,
-    getNextStep: () => Urls.BIRTH_MOTHER_OCCUPATION,
+    getNextStep: () => Urls.BIRTH_MOTHER_STILL_ALIVE,
   },
   {
     url: Urls.BIRTH_MOTHER_STILL_ALIVE,
