@@ -8,6 +8,7 @@ def type = 'nodejs'
 def product = 'adoption'
 def component = 'web'
 
+
 static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
   [ $class: 'AzureKeyVaultSecret',
     secretType: 'Secret',
@@ -19,7 +20,9 @@ static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
 
 def secrets = [
   'adoption-${env}': [
-    secret('idam-secret', 'IDAM_SECRET')
+    secret('idam-secret', 'IDAM_SECRET'),
+    secret('citizen-user', 'CITIZEN_USERNAME'),
+    secret('citizen-password', 'CITIZEN_PASSWORD')
   ],
   's2s-${env}': [
     secret('microservicekey-adoption-web', 'SERVICE_AUTH_SECRET')
@@ -37,7 +40,6 @@ env.IDAM_URL = 'https://idam-api.aat.platform.hmcts.net'
 withPipeline(type, product, component) {
   enableAksStagingDeployment()
   disableLegacyDeployment()
-
   enableSlackNotifications('#adoption-tech')
 
   loadVaultSecrets(secrets)
@@ -62,6 +64,9 @@ withPipeline(type, product, component) {
 
   before('smoketest:aat') {
     env.ADOP_WEB_URL = "https://adoption-web-staging.service.core-compute-aat.internal/"
+  }
+  before('functionalTest:aat') {
+    yarnBuilder.yarn('test:functional:skip')
   }
 
 }

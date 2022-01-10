@@ -15,7 +15,7 @@ const enContent = {
   label: 'Do you want to add another order?',
   hint: 'We need details of all orders already in place. Your social worker or adoption agency can help provide these details.',
   errors: {
-    addAnotherOrder: {
+    addAnotherPlacementOrder: {
       required: 'Please select an answer',
     },
   },
@@ -30,7 +30,7 @@ const cyContent = {
   label: 'Do you want to add another order? (in welsh)',
   hint: 'We need details of all orders already in place. Your social worker or adoption agency can help provide these details. (in welsh)',
   errors: {
-    addAnotherOrder: {
+    addAnotherPlacementOrder: {
       required: 'Please select an answer (in welsh)',
     },
   },
@@ -47,11 +47,12 @@ describe('children > placement-order-summary content', () => {
           placementOrderId: 'MOCK_ID',
           placementOrderNumber: 'MOCK_NUMBER',
           placementOrderCourt: 'MOCK_COURT',
-          placementOrderDate: {},
+          placementOrderDate: { day: '12', month: '10', year: '2021' },
         },
       ],
     },
   } as CommonContent;
+
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
     expect(generatedContent.section).toEqual(enContent.section);
@@ -65,8 +66,15 @@ describe('children > placement-order-summary content', () => {
     expect(generatedContent.placementOrderListItems).toEqual([
       {
         key: { text: 'Placement Order', classes: 'font-normal' },
+        value: { html: '' },
         actions: {
-          items: [{ href: '#', text: 'Change', visuallyHiddenText: 'name' }],
+          items: [
+            {
+              href: '/children/placement-order-check-your-answers?change=MOCK_ID',
+              text: 'Change',
+              visuallyHiddenText: 'change',
+            },
+          ],
         },
       },
     ]);

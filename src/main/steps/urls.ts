@@ -9,7 +9,6 @@ export const TIMED_OUT_URL: PageLink = '/timed-out';
 export const KEEP_ALIVE_URL: PageLink = '/keep-alive';
 export const CSRF_TOKEN_ERROR_URL: PageLink = '/csrf-token-error';
 
-export const APPLICANT_1: PageLink = '/applicant1';
 export const RESPONDENT: PageLink = '/respondent';
 
 export const CHECK_ANSWERS_URL: PageLink = '/check-your-answers';
@@ -19,16 +18,18 @@ export const TASK_LIST_URL: PageLink = '/task-list';
 
 export const APPLYING_WITH_URL: PageLink = '/applying-with';
 export const DATE_CHILD_MOVED_IN_URL: PageLink = '/date-child-moved-in';
-export const APPLICANT_1_FULL_NAME: PageLink = '/applicant1/full-name';
-export const APPLICANT_1_OTHER_NAMES: PageLink = '/applicant1/other-names';
-export const APPLICANT_1_DOB: PageLink = '/applicant1/dob';
-export const APPLICANT_1_NATIONALITY: PageLink = '/applicant1/nationality';
-export const APPLICANT_1_OCCUPATION: PageLink = '/applicant1/occupation';
-export const APPLICANT_1_CONTACT_DETAILS: PageLink = '/applicant1/contact-details';
-export const APPLICANT_1_FIND_ADDRESS: PageLink = '/applicant1/find-address';
-export const APPLICANT_1_SELECT_ADDRESS: PageLink = '/applicant1/select-address';
-export const APPLICANT_1_MANUAL_ADDRESS: PageLink = '/applicant1/manual-address';
-export const APPLICANT_1_IDENTITY_DOCUMENTS: PageLink = '/applicant1/identity-documents';
+
+export const APPLICANT_1: PageLink = '/applicant1';
+export const APPLICANT_1_FULL_NAME: PageLink = `${APPLICANT_1}/full-name`;
+export const APPLICANT_1_OTHER_NAMES: PageLink = `${APPLICANT_1}/other-names`;
+export const APPLICANT_1_DOB: PageLink = `${APPLICANT_1}/dob`;
+export const APPLICANT_1_NATIONALITY: PageLink = `${APPLICANT_1}/nationality`;
+export const APPLICANT_1_OCCUPATION: PageLink = `${APPLICANT_1}/occupation`;
+export const APPLICANT_1_CONTACT_DETAILS: PageLink = `${APPLICANT_1}/contact-details`;
+export const APPLICANT_1_FIND_ADDRESS: PageLink = `${APPLICANT_1}/address/lookup`;
+export const APPLICANT_1_SELECT_ADDRESS: PageLink = `${APPLICANT_1}/address/select`;
+export const APPLICANT_1_MANUAL_ADDRESS: PageLink = `${APPLICANT_1}/address/manual`;
+export const APPLICANT_1_IDENTITY_DOCUMENTS: PageLink = `${APPLICANT_1}/identity-documents`;
 
 export const APPLICANT_2: PageLink = '/applicant2';
 export const APPLICANT_2_FULL_NAME: PageLink = `${APPLICANT_2}/full-name`;
@@ -43,10 +44,12 @@ export const APPLICANT_2_MANUAL_ADDRESS: PageLink = `${APPLICANT_2}/address/manu
 export const APPLICANT_2_CONTACT_DETAILS: PageLink = `${APPLICANT_2}/contact-details`;
 
 export const CHILDREN: PageLink = '/children';
+export const CHILDREN_PLACEMENT_ORDER_TYPE: PageLink = `${CHILDREN}/placement-order-type`;
 export const CHILDREN_PLACEMENT_ORDER_NUMBER: PageLink = `${CHILDREN}/placement-order-number`;
 export const CHILDREN_PLACEMENT_ORDER_COURT: PageLink = `${CHILDREN}/placement-order-court`;
 export const CHILDREN_PLACEMENT_ORDER_DATE: PageLink = `${CHILDREN}/placement-order-date`;
 export const CHILDREN_PLACEMENT_ORDER_SUMMARY: PageLink = `${CHILDREN}/placement-order-summary`;
+export const CHILDREN_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS: PageLink = `${CHILDREN}/placement-order-check-your-answers`;
 
 export const CHILDREN_FULL_NAME: PageLink = `${CHILDREN}/full-name`;
 export const CHILDREN_DATE_OF_BIRTH: PageLink = `${CHILDREN}/date-of-birth`;

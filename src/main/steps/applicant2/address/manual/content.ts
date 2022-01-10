@@ -1,93 +1,39 @@
 import { TranslationFn } from '../../../../app/controller/GetController';
-import { FormContent } from '../../../../app/form/Form';
-import { isFieldFilledIn, isInvalidPostcode } from '../../../../app/form/validation';
+import { FormContent, FormFields } from '../../../../app/form/Form';
+import {
+  form as manualAddressForm,
+  generateContent as manualAddressGenerateContent,
+} from '../../../common/components/address-manual';
 
-const en = () => ({
+const en = manualAddressContent => ({
   section: 'Second applicant',
   title: "What's your home address?",
-  buildingStreet: 'Building and street',
-  town: 'Town or city',
-  county: 'County',
-  postcode: 'Postcode',
   errors: {
-    applicant2Address1: {
-      required: 'Enter the first line of the address',
-    },
-    applicant2AddressTown: {
-      required: 'Enter the town or city',
-    },
-    applicant2AddressPostcode: {
-      required: 'Enter a valid postcode',
-      invalid: 'Enter a valid postcode',
-    },
+    applicant2Address1: manualAddressContent.errors.address1,
+    applicant2AddressTown: manualAddressContent.errors.addressTown,
+    applicant2AddressPostcode: manualAddressContent.errors.addressPostcode,
   },
 });
 
-const cy = () => ({
+const cy = manualAddressContent => ({
   section: 'Second applicant (in welsh)',
   title: "What's your home address? (in welsh)",
-  buildingStreet: 'Building and street (in welsh)',
-  town: 'Town or city (in welsh)',
-  county: 'County (in welsh)',
-  postcode: 'Postcode (in welsh)',
   errors: {
-    applicant2Address1: {
-      required: 'Enter the first line of the address (in welsh)',
-    },
-    applicant2AddressTown: {
-      required: 'Enter the town or city (in welsh)',
-    },
-    applicant2AddressPostcode: {
-      required: 'Enter a valid postcode (in welsh)',
-      invalid: 'Enter a valid postcode (in welsh)',
-    },
+    applicant2Address1: manualAddressContent.errors.address1,
+    applicant2AddressTown: manualAddressContent.errors.addressTown,
+    applicant2AddressPostcode: manualAddressContent.errors.addressPostcode,
   },
 });
 
+const manualAddressFormFields = manualAddressForm.fields as FormFields;
 export const form: FormContent = {
+  ...manualAddressForm,
   fields: {
-    applicant2Address1: {
-      type: 'text',
-      classes: 'govuk-label',
-      label: l => l.buildingStreet,
-      labelSize: null,
-      validator: isFieldFilledIn,
-    },
-    applicant2Address2: {
-      type: 'text',
-      classes: 'govuk-label',
-      label: '',
-      labelSize: null,
-    },
-    applicant2AddressTown: {
-      type: 'text',
-      classes: 'govuk-label govuk-!-width-two-thirds',
-      label: l => l.town,
-      labelSize: null,
-      validator: isFieldFilledIn,
-    },
-    applicant2AddressCounty: {
-      type: 'text',
-      classes: 'govuk-label govuk-!-width-two-thirds',
-      label: l => l.county,
-      labelSize: null,
-    },
-    applicant2AddressPostcode: {
-      type: 'text',
-      classes: 'govuk-label govuk-input--width-10',
-      label: l => l.postcode,
-      labelSize: null,
-      attributes: {
-        maxLength: 14,
-      },
-      validator: isInvalidPostcode,
-    },
-  },
-  submit: {
-    text: l => l.continue,
-  },
-  saveAsDraft: {
-    text: l => l.saveAsDraft,
+    applicant2Address1: manualAddressFormFields.address1,
+    applicant2Address2: manualAddressFormFields.address2,
+    applicant2AddressTown: manualAddressFormFields.addressTown,
+    applicant2AddressCounty: manualAddressFormFields.addressCounty,
+    applicant2AddressPostcode: manualAddressFormFields.addressPostcode,
   },
 };
 
@@ -97,8 +43,10 @@ const languages = {
 };
 
 export const generateContent: TranslationFn = content => {
-  const translations = languages[content.language]();
+  const manualAddressContent = manualAddressGenerateContent(content);
+  const translations = languages[content.language](manualAddressContent);
   return {
+    ...manualAddressContent,
     ...translations,
     form,
   };

@@ -1,86 +1,36 @@
 import { TranslationFn } from '../../../../app/controller/GetController';
-import { FormContent } from '../../../../app/form/Form';
-import { isAddressSelected } from '../../../../app/form/validation';
+import { FormContent, FormFields } from '../../../../app/form/Form';
 import { APPLICANT_2_FIND_ADDRESS, APPLICANT_2_MANUAL_ADDRESS } from '../../../../steps/urls';
+import {
+  form as selectAddressForm,
+  generateContent as selectAddressGenerateContent,
+} from '../../../common/components/address-select';
 
-const getAddressItems = addresses => addresses.map((item, index) => ({ text: item.fullAddress, value: index }));
+const en = selectAddressContent => ({
+  section: 'Second applicant',
+  title: "What's your home address?",
+  errors: {
+    applicant2SelectAddress: selectAddressContent.errors.selectAddress,
+  },
+  changePostCodeUrl: APPLICANT_2_FIND_ADDRESS,
+  cantFindAddressUrl: APPLICANT_2_MANUAL_ADDRESS,
+});
 
-const en = content => {
-  const addresses = content.addresses || [];
-  const items = [
-    {
-      attributes: { id: 'totalAddressesFound' },
-      value: -1,
-      text: `${addresses?.length} address${addresses?.length !== 1 ? 'es' : ''} found`,
-      selected: true,
-    },
-  ];
+const cy = selectAddressContent => ({
+  section: 'Second applicant (in welsh)',
+  title: "What's your home address? (in welsh)",
+  errors: {
+    applicant2SelectAddress: selectAddressContent.errors.selectAddress,
+  },
+  changePostCodeUrl: APPLICANT_2_FIND_ADDRESS,
+  cantFindAddressUrl: APPLICANT_2_MANUAL_ADDRESS,
+});
 
-  items.push(...getAddressItems(addresses));
-
-  return {
-    section: 'Primary applicant',
-    title: "What's your home address?",
-    line1: "We'll send all court papers to this address.",
-    postcode: 'Postcode',
-    selectAddress: 'Select an address',
-    cannotFindAddress: 'I cannot find the address in the list',
-    errors: {
-      applicant2SelectAddress: {
-        notSelected: 'Select an address',
-      },
-    },
-    items,
-    changePostCodeUrl: APPLICANT_2_FIND_ADDRESS,
-    cantFindAddressUrl: APPLICANT_2_MANUAL_ADDRESS,
-  };
-};
-
-const cy = content => {
-  const addresses = content.addresses || [];
-  const items = [
-    {
-      attributes: { id: 'totalAddressesFound' },
-      value: -1,
-      text: `${addresses.length} address${addresses?.length !== 1 ? 'es' : ''} found (in welsh)`,
-      selected: true,
-    },
-  ];
-
-  items.push(...getAddressItems(addresses));
-
-  return {
-    section: 'Primary applicant (in welsh)',
-    title: "What's your home address? (in welsh)",
-    line1: "We'll send all court papers to this address. (in welsh)",
-    postcode: 'Postcode (in welsh)',
-    selectAddress: 'Select an address (in welsh)',
-    cannotFindAddress: 'I cannot find the address in the list (in welsh)',
-    errors: {
-      applicant2SelectAddress: {
-        notSelected: 'Select an address (in welsh)',
-      },
-    },
-    items,
-    changePostCodeUrl: APPLICANT_2_FIND_ADDRESS,
-    cantFindAddressUrl: APPLICANT_2_MANUAL_ADDRESS,
-  };
-};
-
+const selectAddressFormFields = selectAddressForm.fields as FormFields;
 export const form: FormContent = {
+  ...selectAddressForm,
   fields: {
-    applicant2SelectAddress: {
-      type: 'select',
-      label: l => l.selectAddress,
-      labelSize: 'm',
-      validator: isAddressSelected,
-    },
-  },
-  submit: {
-    text: l => l.continue,
-  },
-  saveAsDraft: {
-    text: l => l.saveAsDraft,
+    applicant2SelectAddress: selectAddressFormFields.selectAddress,
   },
 };
 
@@ -90,8 +40,10 @@ const languages = {
 };
 
 export const generateContent: TranslationFn = content => {
-  const translations = languages[content.language](content);
+  const selectAddressContent = selectAddressGenerateContent(content);
+  const translations = languages[content.language](selectAddressContent);
   return {
+    ...selectAddressContent,
     ...translations,
     form,
   };

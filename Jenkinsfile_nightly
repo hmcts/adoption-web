@@ -4,7 +4,7 @@ properties([
   // H allow predefined but random minute see https://en.wikipedia.org/wiki/Cron#Non-standard_characters
   pipelineTriggers([cron('H 04 * * *')]),
   parameters([
-    string(name: 'TEST_URL', defaultValue: 'https://adoption-web.aat.platform.hmcts.net', description: 'The URL you want to run tests against'),
+    string(name: 'FRONTEND_URL', defaultValue: 'https://adoption-web.aat.platform.hmcts.net/', description: 'The URL you want to run tests against'),
     string(name: 'FUNCTIONAL_TESTS_WORKERS',
       defaultValue: '2',
       description: 'Number of workers running functional tests'),
@@ -48,16 +48,18 @@ def pipelineConf = new AppPipelineConfig()
 pipelineConf.vaultSecrets = secrets
 
 withNightlyPipeline(type, product, component) {
-  enableCrossBrowserTest()
-  enableFullFunctionalTest()
+
+  env.ADOP_WEB_URL = params.FRONTEND_URL
+  enableCrossBrowserTest(['chrome', 'firefox'])
+  enableFullFunctionalTest(120)
   loadVaultSecrets(secrets)
 
   before('crossBrowserTest') {
-    yarnBuilder.smokeTest()
+    env.TEST_RETRIES = 5
   }
 
   after('crossBrowserTest') {
-    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/crossbrowser/reports/**/*'
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
   }
 
   before('fullFunctionalTest') {
