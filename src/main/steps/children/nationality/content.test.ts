@@ -13,7 +13,7 @@ jest.mock('../../common/components/nationality', () => {
   return { nationalityFields: mockNationalityFields, generateContent: jest.fn().mockReturnValue(mockForm) };
 });
 
-import { FieldPrefix } from '../../../app/case/case';
+import { CaseWithId, FieldPrefix } from '../../../app/case/case';
 import { FormContent, FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { CommonContent } from '../../common/common.content';
 import { nationalityFields } from '../../common/components/nationality';
@@ -72,8 +72,8 @@ describe('children > nationality content', () => {
   });
 
   test('should call nationalityFields when form.fields is called', () => {
-    (form.fields as FormFieldsFn)(commonContent.userCase!);
-    expect(nationalityFields).toHaveBeenCalledWith(commonContent.userCase, FieldPrefix.CHILDREN);
+    (form.fields as FormFieldsFn)({ userCase: {} } as Partial<CaseWithId>);
+    expect(nationalityFields).toHaveBeenCalledWith({ userCase: {} }, FieldPrefix.CHILDREN);
   });
 
   it('should contain submit button', () => {
