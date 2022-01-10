@@ -3,10 +3,11 @@ import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn, isInvalidPostcode } from '../../../app/form/validation';
 
 const en = () => ({
-  buildingStreet: 'Building and street',
+  addressLine1: 'Building and street',
   town: 'Town or city',
   county: 'County',
   postcode: 'Postcode',
+  enterInternationalAddress: 'Enter an international address',
   errors: {
     address1: {
       required: 'Enter the first line of the address',
@@ -22,10 +23,11 @@ const en = () => ({
 });
 
 const cy = () => ({
-  buildingStreet: 'Building and street (in welsh)',
+  addressLine1: 'Building and street (in welsh)',
   town: 'Town or city (in welsh)',
   county: 'County (in welsh)',
   postcode: 'Postcode (in welsh)',
+  enterInternationalAddress: 'Enter an international address (in welsh)',
   errors: {
     address1: {
       required: 'Enter the first line of the address (in welsh)',
@@ -45,14 +47,14 @@ export const form: FormContent = {
     address1: {
       type: 'text',
       classes: 'govuk-label',
-      label: l => l.buildingStreet,
+      label: l => l.addressLine1,
       labelSize: null,
       validator: isFieldFilledIn,
     },
     address2: {
       type: 'text',
       classes: 'govuk-label',
-      label: '',
+      label: l => l.addressLine2,
       labelSize: null,
     },
     addressTown: {
