@@ -140,6 +140,16 @@ export interface Case {
   childrenFirstNameAfterAdoption?: string;
   childrenLastNameAfterAdoption?: string;
 
+  otherParentAddressKnown?: YesOrNo;
+  otherParentFirstNames?: string;
+  otherParentLastNames?: string;
+  otherParentExists?: YesOrNo;
+  otherParentAddress1?: string;
+  otherParentAddress2?: string;
+  otherParentAddressTown?: string;
+  otherParentAddressCounty?: string;
+  otherParentAddressPostcode?: string;
+
   applicationType?: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
   issueDate?: DateAsString;
@@ -282,4 +292,5 @@ export enum FieldPrefix {
   APPLICANT1 = 'applicant1',
   APPLICANT2 = 'applicant2',
   CHILDREN = 'children',
+  OTHERPARENT = 'otherParent',
 }

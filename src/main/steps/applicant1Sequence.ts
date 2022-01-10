@@ -32,6 +32,7 @@ export enum Sections {
   OtherCourtCases = 'otherCourtCases',
   DividingAssets = 'dividingAssets',
   Documents = 'documents',
+  AboutOtherParent = 'aboutOtherParent',
 }
 
 export interface Step {
