@@ -18,12 +18,21 @@ export default class PlacementOrderPostController extends PostController<AnyObje
     const placementOrder = req.session.userCase.placementOrders?.find(
       item => item.placementOrderId === req.session.userCase.selectedPlacementOrderId
     );
+    console.log('po 22:' + JSON.stringify(placementOrder));
+    console.log('po 23:' + JSON.stringify(formData));
     Object.assign(placementOrder, formData);
 
     const nextUrl = req.session.errors.length > 0 ? req.url : getNextStepUrl(req, req.session.userCase);
 
     try {
-      req.session.userCase = await this.save(req, formData, this.getEventName(req));
+      req.session.userCase = await this.save(
+        req,
+        {
+          placementOrders: req.session.userCase.placementOrders,
+          selectedPlacementOrderId: req.session.userCase.selectedPlacementOrderId,
+        },
+        this.getEventName(req)
+      );
     } catch (err) {
       req.locals.logger.error('Error saving', err);
       //req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });

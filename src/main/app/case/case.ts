@@ -95,10 +95,12 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   childrenFirstNameAfterAdoption: 'childrenFirstNameAfterAdoption',
   childrenLastNameAfterAdoption: 'childrenLastNameAfterAdoption',
   childrenSexAtBirth: 'childrenSexAtBirth',
-  placementOrderNumber: 'placementOrderNumber',
-  placementOrderCourt: 'placementOrderCourt',
-  placementOrderDate: 'placementOrderDate',
   addAnotherPlacementOrder: 'addAnotherPlacementOrder',
+  placementOrders: 'placementOrders',
+  selectedPlacementOrderId: 'selectedPlacementOrderId',
+  //placementOrderNumber: 'placementOrderNumber',
+  //placementOrderCourt: 'placementOrderCourt',
+  //placementOrderDate: 'placementOrderDate',
 
   applicant2MiddleNames: 'applicant2MiddleName',
   applicant1FullNameOnCertificate: 'marriageApplicant1Name',
@@ -143,7 +145,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
 
 export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data: InputFormat): OutputFormat {
   const result = {};
-  console.log('case.ts 1r1-a-' + JSON.stringify(data));
+  //console.log('case.ts 1r1-a-' + JSON.stringify(data));
 
   for (const field of Object.keys(data)) {
     const value = fields[field];
@@ -154,7 +156,7 @@ export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data
       result[value] = data[field];
     }
   }
-  console.log('case.ts 151-a-' + JSON.stringify(result));
+  //console.log('case.ts 151-a-' + JSON.stringify(result));
   return result as OutputFormat;
 }
 
@@ -207,30 +209,15 @@ export interface Case {
   childrenFirstNameAfterAdoption?: string;
   childrenLastNameAfterAdoption?: string;
   childrenSexAtBirth?: Gender;
-  placementOrderNumber?: string;
-  placementOrderCourt?: string;
-  placementOrderDate?: CaseDate;
   addAnotherPlacementOrder?: YesOrNo;
+  placementOrders?: PlacementOrder[];
+  selectedPlacementOrderId?: string;
 
   addButton?: string;
   addAnotherNationality?: string;
-  // applicant1Nationality?: string[];
-  // applicant1AdditionalNationalities?: string[];
-  // applicant2AdditionalNationalities?: string[];
   applicant1SelectAddress?: string;
   applicant2SelectAddress?: string;
-  //applicant1ContactDetails?: string[];
   applicant2AddressSameAsApplicant1?: YesOrNo;
-  placementOrders?: PlacementOrder[];
-  selectedPlacementOrderId?: string;
-  //addAnotherPlacementOrder?: YesOrNo;
-
-  // childrenFirstName?: string;
-  // childrenLastName?: string;
-  // childrenDateOfBirth?: CaseDate;
-  // childrenSexAtBirth?: Gender;
-  // childrenNationality?: string[];
-  // childrenAdditionalNationalities?: string[];
 
   applicationType?: ApplicationType;
   applyingWith?: ApplyingWith;

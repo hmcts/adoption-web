@@ -39,6 +39,11 @@ const fields: FromApiConverters = {
   childrenAdditionalNationalities: data => ({
     childrenAdditionalNationalities: data.childrenAdditionalNationalities?.map(item => item.value.name),
   }),
+  // placementOrders: data => ({
+  //   placementOrders: data.placementOrders?.map(item => ({
+  //     ...item.value, placementOrderDate: fromApiDate(item.value.placementOrderDate)
+  //   })),
+  // }),
   marriageIsSameSexCouple: data => ({
     sameSex: checkboxConverter(data.marriageIsSameSexCouple),
   }),
@@ -51,9 +56,9 @@ const fields: FromApiConverters = {
   childrenDateOfBirth: data => ({
     childrenDateOfBirth: fromApiDate(data.childrenDateOfBirth),
   }),
-  placementOrderDate: data => ({
-    placementOrderDate: fromApiDate(data.placementOrderDate),
-  }),
+  // placementOrderDate: data => ({
+  //   placementOrderDate: fromApiDate(data.placementOrderDate),
+  // }),
   jurisdictionResidualEligible: data => ({
     jurisdictionResidualEligible: checkboxConverter(data.jurisdictionResidualEligible),
   }),

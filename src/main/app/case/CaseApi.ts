@@ -17,7 +17,6 @@ import {
   ListValue,
   Payment,
   State,
-  // UserRole,
 } from './definition';
 import { fromApiFormat } from './from-api-format';
 import { toApiFormat } from './to-api-format';
@@ -129,13 +128,7 @@ export class CaseApi {
       const event = { id: eventName };
       //delete data.applicant1HasOtherNames;
 
-      //const data1 = JSON.stringify({"applicant1AdditionalNames" :[{"value":"asdf1"}]});
-      console.log('xxxxxxxxxxxxxxxxx');
-      console.log('a1 132 url: ' + `/cases/${caseId}/events`);
-      console.log('a1 132 event: ' + JSON.stringify(event));
-      console.log('a1 132 token: ' + JSON.stringify(token));
-      console.log('a1 132 data: ' + JSON.stringify(data));
-      console.log('xxxxxxxxxxxxxxxxx');
+      console.log('caseapi.ts 132 data: ' + JSON.stringify(data));
       const response: AxiosResponse<CcdV2Response> = await this.axios.post(`/cases/${caseId}/events`, {
         event,
         data,
@@ -150,7 +143,7 @@ export class CaseApi {
 
   public async triggerEvent(caseId: string, userData: Partial<Case>, eventName: string): Promise<CaseWithId> {
     const data = toApiFormat(userData);
-    console.log('CaseAPI 144', JSON.stringify(data));
+    //console.log('CaseAPI 144', JSON.stringify(data));
     return this.sendEvent(caseId, data, eventName);
   }
 

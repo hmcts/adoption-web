@@ -304,19 +304,12 @@ export const enum Gender {
   INTERSEX = 'intersex',
 }
 
-// export interface PlacementOrder {
-//   id: string;
-//   Number: string;
-//   Court: string;
-//   Date: DateAsString;
-// }
-
 export interface PlacementOrder {
   placementOrderId: string;
   placementOrderType?: string;
   placementOrderNumber?: string;
   placementOrderCourt?: string;
-  placementOrderDate?: CaseDate;
+  placementOrderDate?: CaseDate;// | string;
 }
 
 export interface CaseData {
@@ -368,13 +361,11 @@ export interface CaseData {
   childrenFirstNameAfterAdoption: string;
   childrenLastNameAfterAdoption: string;
   childrenSexAtBirth: Gender;
-  placementOrderNumber: string;
-  placementOrderCourt: string;
-  placementOrderDate: DateAsString;
+  placementOrders: ListValue<PlacementOrder>[];
   addAnotherPlacementOrder: YesOrNo;
+  selectedPlacementOrderId: string;
   hyphenatedCaseRef: string;
-
-  placementOrderId: string;
+  //placementOrderId: string;
 
   applicationType: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;

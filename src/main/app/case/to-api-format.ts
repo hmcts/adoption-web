@@ -50,9 +50,9 @@ const fields: ToApiConverters = {
   childrenDateOfBirth: data => ({
     childrenDateOfBirth: toApiDate(data.childrenDateOfBirth),
   }),
-  placementOrderDate: data => ({
-    placementOrderDate: toApiDate(data.placementOrderDate),
-  }),
+  // placementOrderDate: data => ({
+  //   placementOrderDate: toApiDate(data.placementOrderDate),
+  // }),
   //{"applicant1AdditionalNames":[{"id":"abc","value":{"name":"trump bush"}}]}
   applicant1AdditionalNames: data => ({
     applicant1AdditionalNames:
@@ -82,6 +82,18 @@ const fields: ToApiConverters = {
     childrenAdditionalNationalities: (data.childrenAdditionalNationalities || []).map(item => ({
       id: generateUuid(),
       value: { name: `${item}` },
+    })),
+  }),
+  placementOrders: data => ({
+    placementOrders: (data.placementOrders || []).map(item => ({
+      id: generateUuid(),
+      value: {
+        placementOrderType: `${item.placementOrderType}`,
+        placementOrderId: `${item.placementOrderId}`,
+        placementOrderNumber: `${item.placementOrderNumber}`,
+        placementOrderCourt: `${item.placementOrderCourt}`,
+        //placementOrderDate: toApiDate(item.placementOrderDate as CaseDate),
+      },
     })),
   }),
   jurisdictionResidualEligible: data => ({
@@ -236,7 +248,7 @@ const fields: ToApiConverters = {
   }),
 };
 
-const toApiDate = (date: CaseDate | undefined) => {
+const toApiDate = (date: CaseDate | undefined): string => {
   if (!date?.year || !date?.month || !date?.day) {
     return '';
   }

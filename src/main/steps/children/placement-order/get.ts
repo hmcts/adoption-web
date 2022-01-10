@@ -36,14 +36,32 @@ export default class PlacementOrderGetController extends GetController {
     let placementOrder = placementOrders.find(
       item => item.placementOrderId === req.session.userCase.selectedPlacementOrderId
     );
+
     if (!placementOrder) {
       placementOrder = {
         placementOrderId: req.session.userCase.selectedPlacementOrderId,
       };
+
       placementOrders.push(placementOrder);
     }
 
     req.session.userCase.placementOrders = placementOrders;
+
+    try {
+      console.log(' po get 45 : ' + JSON.stringify(placementOrder));
+
+      req.session.userCase = await this.save(
+        req,
+        {
+          placementOrders: req.session.userCase.placementOrders,
+          selectedPlacementOrderId: req.session.userCase.selectedPlacementOrderId,
+        },
+        this.getEventName(req)
+      );
+    } catch (err) {
+      req.locals.logger.error('Error saving', err);
+      //req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+    }
 
     req.session.save(err => {
       if (err) {

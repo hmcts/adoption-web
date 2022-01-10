@@ -7,15 +7,15 @@ services:
     url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'
     microservice: 'adoption_web'
     secret: 'NEED TO INSERT SECRET'
-  idam:
-    authorizationURL: 'http://localhost:3501/login'
-    tokenURL: 'http://localhost:5000/o/token'
-    clientID: 'adoption-web'
-    clientSecret: 'thUphEveC2Ekuqedaneh4jEcRuba4t2t'
-    systemUsername: 'dummy_user'
-    systemPassword: 'dummy_password'
-  case:
-    url: 'http://localhost:4452'
+  # idam:
+  #   authorizationURL: 'http://localhost:3501/login'
+  #   tokenURL: 'http://localhost:5000/o/token'
+  #   clientID: 'adoption-web'
+  #   clientSecret: 'thUphEveC2Ekuqedaneh4jEcRuba4t2t'
+  #   systemUsername: 'dummy_user'
+  #   systemPassword: 'dummy_password'
+  # case:
+  #   url: 'http://localhost:4452'    
   postcodeLookup:
     url: 'https://api.os.uk/search/places/v1'
     token: 'NEED TO INSERT SECRET'
