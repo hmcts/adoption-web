@@ -64,7 +64,6 @@ export const nationalityFields = (userCase: Partial<Case>, fieldPrefix: FieldPre
     label: l => l.label,
     labelSize: 'l',
     hint: l => l.hint,
-    // validator: atLeastOneFieldIsChecked,
     validator: value =>
       [FieldPrefix.APPLICANT1, FieldPrefix.APPLICANT1].includes(fieldPrefix)
         ? atLeastOneFieldIsChecked(value)
