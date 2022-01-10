@@ -152,7 +152,7 @@ export interface FormInput {
   id?: string;
   name?: string;
   type?: string;
-  label: Label;
+  label?: Label;
   labelSize?: string | null;
   section?: Label;
   hint?: Label;
