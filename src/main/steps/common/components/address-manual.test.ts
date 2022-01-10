@@ -91,6 +91,7 @@ describe('common > components > manual-address > content', () => {
     const address2Field = fields.address2 as FormOptions;
     expect(address2Field.type).toBe('text');
     expect(address2Field.classes).toBe('govuk-label');
+    expect((address2Field.label as Function)(generatedContent)).toBeUndefined();
     expect(address2Field.labelSize).toBe(null);
   });
 

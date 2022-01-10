@@ -7,6 +7,8 @@ import { CommonContent, generatePageContent } from '../common.content';
 
 import { generateContent } from './nationality';
 
+jest.mock('../../../app/form/validation');
+
 const CY = 'cy';
 const EN = 'en';
 const fieldPrefix = FieldPrefix.APPLICANT1;
@@ -20,9 +22,12 @@ const enContent = {
   countryName: 'Country name',
   add: 'Add',
   another: 'Add another country',
+  or: 'or',
+  notSure: 'Not sure',
   errors: {
     [`${fieldPrefix}Nationality`]: {
       required: 'Select if you are British, Irish or a citizen of a different country',
+      notSureViolation: "Select a nationality or 'Not sure'",
     },
     addAnotherNationality: {
       required: 'This is not a valid entry',
@@ -37,12 +42,15 @@ const cyContent = {
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish (in Welsh)',
   irish: 'Irish (in Welsh)',
   differentCountry: 'Citizen of a different country (in Welsh)',
-  [`${fieldPrefix}Nationality`]: 'Country name (in Welsh)',
+  countryName: 'Country name (in Welsh)',
   add: 'Add (in Welsh)',
   another: 'Add another country (in Welsh)',
+  or: 'or',
+  notSure: 'Not sure',
   errors: {
     [`${fieldPrefix}Nationality`]: {
       required: 'Select if you are British, Irish or a citizen of a different country (in Welsh)',
+      notSureViolation: "Select a nationality or 'Not sure' (in Welsh)",
     },
     addAnotherNationality: {
       required: 'This is not a valid entry (in Welsh)',
@@ -52,7 +60,20 @@ const cyContent = {
 
 const langAssertions = (language, content) => {
   const generatedContent = generateContent({ language, userCase: {} } as CommonContent, fieldPrefix);
-  const { label, hint, british, britishSubtext, irish, differentCountry, countryName, add, another, errors } = content;
+  const {
+    label,
+    hint,
+    british,
+    britishSubtext,
+    irish,
+    differentCountry,
+    countryName,
+    add,
+    another,
+    or,
+    notSure,
+    errors,
+  } = content;
 
   expect(generatedContent.label).toEqual(label);
   expect(generatedContent.hint).toEqual(hint);
@@ -64,6 +85,8 @@ const langAssertions = (language, content) => {
   expect(generatedContent.differentCountry).toEqual(differentCountry);
   expect(generatedContent.add).toEqual(add);
   expect(generatedContent.another).toEqual(another);
+  expect(generatedContent.or).toEqual(or);
+  expect(generatedContent.notSure).toEqual(notSure);
   expect(generatedContent.errors).toEqual(errors);
 };
 
@@ -98,7 +121,38 @@ describe('nationality content', () => {
     expect(values[1].value).toBe('Irish');
     expect((values[2].label as Function)(generatedContent)).toBe(enContent.differentCountry);
     expect(values[2].value).toBe('Other');
-    expect(validator).toBe(atLeastOneFieldIsChecked);
+
+    validator!(['British'], {});
+    expect(atLeastOneFieldIsChecked).toHaveBeenCalledWith(['British']);
+  });
+
+  describe('when fieldPrefix is other than APPLICANT1 or APPLICANT2', () => {
+    it('should display a checkbox with nationality options', () => {
+      const generatedContent = generateContent(commonContent([]), FieldPrefix.CHILDREN);
+      const form = generatedContent.form as FormContent;
+      const fields = form.fields as FormFields;
+
+      const { type, label, labelSize, hint, values, validator } = fields.childrenNationality as FormOptions;
+
+      expect(type).toBe('checkboxes');
+      expect((label as Function)(generatedContent)).toBe(enContent.label);
+      expect(labelSize).toBe('l');
+      expect((hint as Function)(generatedContent)).toBe(enContent.hint);
+      expect(values).toHaveLength(5);
+      expect((values[0].label as Function)(generatedContent)).toBe(enContent.british);
+      expect(values[0].value).toBe('British');
+      expect((values[0].hint as Function)(generatedContent)).toBe(enContent.britishSubtext);
+      expect((values[1].label as Function)(generatedContent)).toBe(enContent.irish);
+      expect(values[1].value).toBe('Irish');
+      expect((values[2].label as Function)(generatedContent)).toBe(enContent.differentCountry);
+      expect(values[2].value).toBe('Other');
+      expect((values[3].divider as Function)(generatedContent)).toBe(enContent.or);
+      expect((values[4].label as Function)(generatedContent)).toBe(enContent.notSure);
+      expect(values[4].value).toBe('Not sure');
+
+      validator!(['British'], {});
+      expect(atLeastOneFieldIsChecked).toHaveBeenCalledWith(['British']);
+    });
   });
 
   it("should display correct content under 'Citizen of a different country' when country array is empty", () => {

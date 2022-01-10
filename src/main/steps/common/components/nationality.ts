@@ -1,8 +1,8 @@
 import { Case, FieldPrefix } from '../../../app/case/case';
 import { PageContent } from '../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../app/form/Form';
-import { atLeastOneFieldIsChecked, isFieldFilledIn } from '../../../app/form/validation';
-import { APPLICANT_1_NATIONALITY, APPLICANT_2_NATIONALITY } from '../../urls';
+import { atLeastOneFieldIsChecked, isFieldFilledIn, notSureViolation } from '../../../app/form/validation';
+import { APPLICANT_1_NATIONALITY, APPLICANT_2_NATIONALITY, CHILDREN_NATIONALITY } from '../../urls';
 import { CommonContent } from '../common.content';
 import { mapSummaryListContent } from '../functions/mapSummaryListContent';
 
@@ -16,9 +16,12 @@ export const en = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
   countryName: 'Country name',
   add: 'Add',
   another: 'Add another country',
+  or: 'or',
+  notSure: 'Not sure',
   errors: {
     [`${fieldPrefix}Nationality`]: {
       required: 'Select if you are British, Irish or a citizen of a different country',
+      notSureViolation: "Select a nationality or 'Not sure'",
     },
     addAnotherNationality: {
       required: 'This is not a valid entry',
@@ -33,12 +36,15 @@ export const cy = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish (in Welsh)',
   irish: 'Irish (in Welsh)',
   differentCountry: 'Citizen of a different country (in Welsh)',
-  [`${fieldPrefix}Nationality`]: 'Country name (in Welsh)',
+  countryName: 'Country name (in Welsh)',
   add: 'Add (in Welsh)',
   another: 'Add another country (in Welsh)',
+  or: 'or',
+  notSure: 'Not sure',
   errors: {
     [`${fieldPrefix}Nationality`]: {
       required: 'Select if you are British, Irish or a citizen of a different country (in Welsh)',
+      notSureViolation: "Select a nationality or 'Not sure' (in Welsh)",
     },
     addAnotherNationality: {
       required: 'This is not a valid entry (in Welsh)',
@@ -49,6 +55,7 @@ export const cy = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
 const urls = {
   [FieldPrefix.APPLICANT1]: APPLICANT_1_NATIONALITY,
   [FieldPrefix.APPLICANT2]: APPLICANT_2_NATIONALITY,
+  [FieldPrefix.CHILDREN]: CHILDREN_NATIONALITY,
 };
 
 export const nationalityFields = (userCase: Partial<Case>, fieldPrefix: FieldPrefix): FormFields => ({
@@ -57,7 +64,11 @@ export const nationalityFields = (userCase: Partial<Case>, fieldPrefix: FieldPre
     label: l => l.label,
     labelSize: 'l',
     hint: l => l.hint,
-    validator: atLeastOneFieldIsChecked,
+    // validator: atLeastOneFieldIsChecked,
+    validator: value =>
+      [FieldPrefix.APPLICANT1, FieldPrefix.APPLICANT1].includes(fieldPrefix)
+        ? atLeastOneFieldIsChecked(value)
+        : atLeastOneFieldIsChecked(value) || notSureViolation(value),
     values: [
       {
         name: `${fieldPrefix}Nationality`,
@@ -126,6 +137,18 @@ export const nationalityFields = (userCase: Partial<Case>, fieldPrefix: FieldPre
               }),
         },
       },
+      ...(![FieldPrefix.APPLICANT1, FieldPrefix.APPLICANT1].includes(fieldPrefix)
+        ? [
+            {
+              divider: l => l.or,
+            },
+            {
+              name: `${fieldPrefix}Nationality`,
+              label: l => l.notSure,
+              value: 'Not sure',
+            },
+          ]
+        : []),
     ],
   },
 });

@@ -21,10 +21,10 @@ export const atLeastOneFieldIsChecked: Validator = fields => {
   }
 };
 
-export const notSure: Validator = fields => {
+export const notSureViolation: Validator = fields => {
   const arr = fields as string[];
   if (arr.length > 1 && arr.find(s => s === 'Not sure')) {
-    return 'required';
+    return 'notSureViolation';
   }
 };
 
