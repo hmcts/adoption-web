@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Case, FieldPrefix } from '../../../app/case/case';
 import { PageContent } from '../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../app/form/Form';
@@ -5,6 +6,8 @@ import { atLeastOneFieldIsChecked, isFieldFilledIn, notSureViolation } from '../
 import { APPLICANT_1_NATIONALITY, APPLICANT_2_NATIONALITY, CHILDREN_NATIONALITY } from '../../urls';
 import { CommonContent } from '../common.content';
 import { mapSummaryListContent } from '../functions/mapSummaryListContent';
+
+import { defaultButtons } from './default-buttons';
 
 export const en = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
   label: 'What is your nationality?',
@@ -91,7 +94,7 @@ export const nationalityFields = (userCase: Partial<Case>, fieldPrefix: FieldPre
                   type: 'summarylist',
                   values: [],
                   rows: mapSummaryListContent(
-                    userCase[`${fieldPrefix}AdditionalNationalities`]!,
+                    userCase[`${fieldPrefix}AdditionalNationalities`] || [],
                     ['Remove'],
                     urls[fieldPrefix]
                   ),
@@ -154,12 +157,7 @@ export const nationalityFields = (userCase: Partial<Case>, fieldPrefix: FieldPre
 
 export const form: FormContent = {
   fields: {},
-  submit: {
-    text: l => l.continue,
-  },
-  saveAsDraft: {
-    text: l => l.saveAsDraft,
-  },
+  ...defaultButtons,
 };
 
 const languages = {
