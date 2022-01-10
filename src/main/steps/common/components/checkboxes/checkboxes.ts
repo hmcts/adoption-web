@@ -92,7 +92,7 @@ export class Checkboxes {
             })),
             ...(this.includeNotSureOption
               ? [
-                  { divider: l => l.or, label: '' },
+                  { divider: l => l.divider, label: '' },
                   {
                     name: `${this.flow}${this.dataTypeSingular}`,
                     label: l => l.notSure,

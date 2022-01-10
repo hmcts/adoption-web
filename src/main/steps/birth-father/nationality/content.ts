@@ -10,7 +10,7 @@ const en = {
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish',
   irish: 'Irish',
   other: 'Citizen of a different country',
-  or: 'or',
+  divider: 'or',
   inputLabel: 'Country name',
   another: 'Add another country',
   errors: {
@@ -32,7 +32,7 @@ const cy = {
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish (in Welsh)',
   irish: 'Irish (in Welsh)',
   other: 'Citizen of a different country (in Welsh)',
-  or: 'or (in Welsh)',
+  divider: 'or (in Welsh)',
   inputLabel: 'Country name (in Welsh)',
   another: 'Add another country (in Welsh)',
   errors: {
