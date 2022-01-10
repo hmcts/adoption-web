@@ -38,7 +38,10 @@ export const getContactDetailsStatus = (userCase: CaseWithId, userType: 'applica
   return SectionStatus.NOT_STARTED;
 };
 
-export const getPersonalDetailsStatus = (userCase: CaseWithId, userType: `applicant${1 | 2}`): SectionStatus => {
+export const getPersonalDetailsStatus = (
+  userCase: Partial<CaseWithId>,
+  userType: `applicant${1 | 2}`
+): SectionStatus => {
   //TODO full name logic should be changed after applicant1 name field is split into 2
   const fullName =
     userCase[`${userType}FullName`] || (userCase[`${userType}FirstNames`] && userCase[`${userType}LastNames`]);
