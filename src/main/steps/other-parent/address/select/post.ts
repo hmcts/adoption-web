@@ -7,6 +7,6 @@ import { FormFields, FormFieldsFn } from '../../../../app/form/Form';
 @autobind
 export default class SelectAddressPostController extends SelectAddressPostControllerBase {
   constructor(protected readonly fields: FormFields | FormFieldsFn) {
-    super(fields, FieldPrefix.OTHERPARENT);
+    super(fields, FieldPrefix.OTHER_PARENT);
   }
 }

@@ -8,10 +8,10 @@ export const en = (): Record<string, unknown> => ({
   title: 'What is the full name of the other person with parental responsibility?',
   line1: 'If you are not sure, ask your social worker or adoption agency for help.',
   errors: {
-    otherPersonFirstNames: {
+    otherParentFirstNames: {
       required: 'Enter their first names',
     },
-    otherPersonLastNames: {
+    otherParentLastNames: {
       required: 'Enter their last names',
     },
   },
@@ -22,10 +22,10 @@ export const cy = (): Record<string, unknown> => ({
   title: 'What is the full name of the other person with parental responsibility? (in Welsh)',
   line1: 'If you are not sure, ask your social worker or adoption agency for help. (in Welsh)',
   errors: {
-    otherPersonFirstNames: {
+    otherParentFirstNames: {
       required: 'Enter their first names (in Welsh)',
     },
-    otherPersonLastNames: {
+    otherParentLastNames: {
       required: 'Enter their last names (in Welsh)',
     },
   },
@@ -35,8 +35,8 @@ const fullNameFormFields = fullNameForm.fields as FormFields;
 export const form: FormContent = {
   ...fullNameForm,
   fields: {
-    otherPersonFirstNames: fullNameFormFields.firstNames,
-    otherPersonLastNames: fullNameFormFields.lastNames,
+    otherParentFirstNames: fullNameFormFields.firstNames,
+    otherParentLastNames: fullNameFormFields.lastNames,
   },
 };
 

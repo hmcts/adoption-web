@@ -294,5 +294,5 @@ export enum FieldPrefix {
   APPLICANT1 = 'applicant1',
   APPLICANT2 = 'applicant2',
   CHILDREN = 'children',
-  OTHERPARENT = 'otherParent',
+  OTHER_PARENT = 'otherParent',
 }

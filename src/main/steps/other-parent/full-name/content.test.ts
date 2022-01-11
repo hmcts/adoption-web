@@ -11,10 +11,10 @@ const enContent = {
   title: 'What is the full name of the other person with parental responsibility?',
   line1: 'If you are not sure, ask your social worker or adoption agency for help.',
   errors: {
-    otherPersonFirstNames: {
+    otherParentFirstNames: {
       required: 'Enter their first names',
     },
-    otherPersonLastNames: {
+    otherParentLastNames: {
       required: 'Enter their last names',
     },
   },
@@ -25,10 +25,10 @@ const cyContent = {
   title: 'What is the full name of the other person with parental responsibility? (in Welsh)',
   line1: 'If you are not sure, ask your social worker or adoption agency for help. (in Welsh)',
   errors: {
-    otherPersonFirstNames: {
+    otherParentFirstNames: {
       required: 'Enter their first names (in Welsh)',
     },
-    otherPersonLastNames: {
+    otherParentLastNames: {
       required: 'Enter their last names (in Welsh)',
     },
   },
@@ -63,12 +63,12 @@ describe('other-parent > full-name > content', () => {
   });
 
   test('should contain firstNames field', () => {
-    const firstNamesField = fields.otherPersonFirstNames as FormOptions;
+    const firstNamesField = fields.otherParentFirstNames as FormOptions;
     expect(firstNamesField).toEqual(fullNameFormFields.firstNames);
   });
 
   test('should contain lastNames field', () => {
-    const lastNamesField = fields.otherPersonLastNames as FormOptions;
+    const lastNamesField = fields.otherParentLastNames as FormOptions;
     expect(lastNamesField).toEqual(fullNameFormFields.lastNames);
   });
 

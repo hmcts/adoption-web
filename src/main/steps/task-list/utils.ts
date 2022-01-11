@@ -147,7 +147,7 @@ export const getOtherParentStatus = (userCase: CaseWithId): SectionStatus => {
     if (addressKnown === YesOrNo.NO) {
       return names ? SectionStatus.IN_PROGRESS : SectionStatus.COMPLETED;
     } else {
-      return names && addressKnown === YesOrNo.YES && addressComplete(userCase, FieldPrefix.OTHERPARENT)
+      return names && addressKnown === YesOrNo.YES && addressComplete(userCase, FieldPrefix.OTHER_PARENT)
         ? SectionStatus.IN_PROGRESS
         : SectionStatus.COMPLETED;
     }
