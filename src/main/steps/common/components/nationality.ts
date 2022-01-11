@@ -39,8 +39,8 @@ export const cy = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
   countryName: 'Country name (in Welsh)',
   add: 'Add (in Welsh)',
   another: 'Add another country (in Welsh)',
-  or: 'or',
-  notSure: 'Not sure',
+  or: 'or (in Welsh)',
+  notSure: 'Not sure (in Welsh)',
   errors: {
     [`${fieldPrefix}Nationality`]: {
       required: 'Select if you are British, Irish or a citizen of a different country (in Welsh)',

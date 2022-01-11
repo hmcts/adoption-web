@@ -27,7 +27,7 @@ const cy = manualAddressContent => ({
   town: 'Town or city (Optional) (in welsh)',
   county: 'County, district, state or province (Optional) (in welsh)',
   postcode: 'Postcode, zip code or area code (Optional) (in welsh)',
-  country: 'Country',
+  country: 'Country (in Welsh)',
   errors: {
     address1: manualAddressContent.errors.address1,
     addressCountry: {

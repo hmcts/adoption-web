@@ -24,7 +24,7 @@ const cyContent = {
   town: 'Town or city (Optional) (in welsh)',
   county: 'County, district, state or province (Optional) (in welsh)',
   postcode: 'Postcode, zip code or area code (Optional) (in welsh)',
-  country: 'Country',
+  country: 'Country (in Welsh)',
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
