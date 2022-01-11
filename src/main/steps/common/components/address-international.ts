@@ -53,7 +53,7 @@ export const form: FormContent = {
     addressPostcode: { ...manualAddressFormFields.addressPostcode, validator: undefined },
     addressCountry: {
       type: 'text',
-      classes: 'govuk-label govuk-!-width-two-thirds',
+      classes: 'govuk-label',
       label: l => l.country,
       labelSize: null,
       validator: isFieldFilledIn,

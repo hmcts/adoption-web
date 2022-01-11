@@ -21,7 +21,7 @@ import { nationalityFields } from '../../common/components/nationality';
 import { form, generateContent } from './content';
 
 const enContent = {
-  section: "The child's details",
+  section: "Birth mother's details",
   label: "What is the nationality of the child's birth mother?",
   errors: {
     birthMotherNationality: {
@@ -32,7 +32,7 @@ const enContent = {
 };
 
 const cyContent = {
-  section: "The child's details (in welsh)",
+  section: "Birth mother's details (in welsh)",
   label: "What is the nationality of the child's birth mother? (in welsh)",
   errors: {
     birthMotherNationality: {

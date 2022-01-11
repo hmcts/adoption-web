@@ -108,7 +108,7 @@ describe('common > components > address-international > content', () => {
   test('should contain addressCountry field', () => {
     const addressCountryField = fields.addressCountry as FormOptions;
     expect(addressCountryField.type).toBe('text');
-    expect(addressCountryField.classes).toBe('govuk-label govuk-!-width-two-thirds');
+    expect(addressCountryField.classes).toBe('govuk-label');
     expect(addressCountryField.labelSize).toBe(null);
     expect(addressCountryField.validator).toBe(isFieldFilledIn);
     expect((addressCountryField.label as Function)(generatedContent)).toBe(enContent.country);
