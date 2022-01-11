@@ -14,8 +14,8 @@ const enContent = {
 };
 
 const cyContent = {
-  section: "Birth father's details (in welsh)",
-  title: "What is the birth father's last known address? (in welsh)",
+  section: "Birth father's details (in Welsh)",
+  title: "What is the birth father's last known address? (in Welsh)",
 };
 
 describe('birth-father > address > international > content', () => {
@@ -35,7 +35,7 @@ describe('birth-father > address > international > content', () => {
     languageAssertions('en', enContent, generateContent);
   });
 
-  test('should return correct welsh content', () => {
+  test('should return correct Welsh content', () => {
     languageAssertions('cy', cyContent, generateContent);
   });
 

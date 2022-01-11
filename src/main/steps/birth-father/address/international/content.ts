@@ -1,12 +1,13 @@
 import { TranslationFn } from '../../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../../app/form/Form';
+import { SECTION, SECTION_IN_WELSH } from '../../../../steps/birth-father/constants';
 import {
   form as internationalAddressForm,
   generateContent as manualAddressGenerateContent,
 } from '../../../common/components/address-international';
 
 const en = internationalAddressContent => ({
-  section: "Birth father's details",
+  section: SECTION,
   title: "What is the birth father's last known address?",
   errors: {
     birthFatherAddress1: internationalAddressContent.errors.address1,
@@ -15,8 +16,8 @@ const en = internationalAddressContent => ({
 });
 
 const cy = internationalAddressContent => ({
-  section: "Birth father's details (in welsh)",
-  title: "What is the birth father's last known address? (in welsh)",
+  section: SECTION_IN_WELSH,
+  title: "What is the birth father's last known address? (in Welsh)",
   errors: {
     birthFatherAddress1: internationalAddressContent.errors.address1,
     birthFatherAddressCountry: internationalAddressContent.errors.addressCountry,

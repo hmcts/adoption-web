@@ -15,6 +15,6 @@ describe('applicant1 > address > select > post', () => {
   });
 
   test('should call super constructor with correct params', async () => {
-    expect(controller.fieldPrefix).toBe(FieldPrefix.APPLICANT1);
+    expect(controller.fieldPrefix).toBe(FieldPrefix.BIRTH_FATHER);
   });
 });

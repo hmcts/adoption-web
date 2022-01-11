@@ -1,36 +1,37 @@
 import { TranslationFn } from '../../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../../app/form/Form';
+import { SECTION, SECTION_IN_WELSH } from '../../../../steps/birth-father/constants';
 import {
   form as selectAddressForm,
   generateContent as selectAddressGenerateContent,
 } from '../../../common/components/address-select';
-import { APPLICANT_1_FIND_ADDRESS, APPLICANT_1_MANUAL_ADDRESS } from '../../../urls';
+import { BIRTH_FATHER_ADDRESS_LOOKUP, BIRTH_FATHER_ADDRESS_MANUAL } from '../../../urls';
 
 const en = selectAddressContent => ({
-  section: 'Primary applicant',
-  title: "What's your home address?",
+  section: SECTION,
+  title: "What is the birth father's last known address?",
   errors: {
-    applicant1SelectAddress: selectAddressContent.errors.selectAddress,
+    birthFatherSelectAddress: selectAddressContent.errors.selectAddress,
   },
-  changePostCodeUrl: APPLICANT_1_FIND_ADDRESS,
-  cantFindAddressUrl: APPLICANT_1_MANUAL_ADDRESS,
+  changePostCodeUrl: BIRTH_FATHER_ADDRESS_LOOKUP,
+  cantFindAddressUrl: BIRTH_FATHER_ADDRESS_MANUAL,
 });
 
 const cy = selectAddressContent => ({
-  section: 'Primary applicant (in welsh)',
-  title: "What's your home address? (in welsh)",
+  section: SECTION_IN_WELSH,
+  title: "What is the birth father's last known address? (in Welsh)",
   errors: {
-    applicant1SelectAddress: selectAddressContent.errors.selectAddress,
+    birthFatherSelectAddress: selectAddressContent.errors.selectAddress,
   },
-  changePostCodeUrl: APPLICANT_1_FIND_ADDRESS,
-  cantFindAddressUrl: APPLICANT_1_MANUAL_ADDRESS,
+  changePostCodeUrl: BIRTH_FATHER_ADDRESS_LOOKUP,
+  cantFindAddressUrl: BIRTH_FATHER_ADDRESS_MANUAL,
 });
 
 const selectAddressFormFields = selectAddressForm.fields as FormFields;
 export const form: FormContent = {
   ...selectAddressForm,
   fields: {
-    applicant1SelectAddress: selectAddressFormFields.selectAddress,
+    birthFatherSelectAddress: selectAddressFormFields.selectAddress,
   },
 };
 

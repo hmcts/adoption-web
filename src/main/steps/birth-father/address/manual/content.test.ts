@@ -1,9 +1,7 @@
 import { FormContent, FormFields, FormOptions } from '../../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../../common/common.content';
-import {
-  generateContent as generateManualAddressContent,
-  form as manualAddressForm,
-} from '../../../common/components/address-manual';
+import { form as manualAddressForm } from '../../../common/components/address-manual';
+import { languageAssertions } from '../../../common/test/languageAssertions';
 
 import { generateContent } from './content';
 
@@ -13,8 +11,8 @@ const enContent = {
 };
 
 const cyContent = {
-  section: "Birth father's details (in welsh)",
-  title: "What is the birth father's last known address? (in welsh)",
+  section: "Birth father's details (in Welsh)",
+  title: "What is the birth father's last known address? (in Welsh)",
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
@@ -32,26 +30,11 @@ describe('birth-father > address > manual > content', () => {
   });
 
   test('should return correct english content', () => {
-    const manualAddressContent = generateManualAddressContent(commonContent);
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.title).toEqual(enContent.title);
-    expect(generatedContent.errors).toEqual({
-      birthFatherAddress1: (manualAddressContent.errors as any).address1,
-      birthFatherAddressTown: (manualAddressContent.errors as any).addressTown,
-      birthFatherAddressPostcode: (manualAddressContent.errors as any).addressPostcode,
-    });
+    languageAssertions('en', enContent, generateContent);
   });
 
-  test('should return correct welsh content', () => {
-    const manualAddressContent = generateManualAddressContent({ ...commonContent, language: 'cy' });
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.title).toEqual(cyContent.title);
-    expect(generatedContent.errors).toEqual({
-      birthFatherAddress1: (manualAddressContent.errors as any).address1,
-      birthFatherAddressTown: (manualAddressContent.errors as any).addressTown,
-      birthFatherAddressPostcode: (manualAddressContent.errors as any).addressPostcode,
-    });
+  test('should return correct Welsh content', () => {
+    languageAssertions('cy', cyContent, generateContent);
   });
 
   test('should contain birthFatherAddress1 field', () => {

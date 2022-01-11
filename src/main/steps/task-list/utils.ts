@@ -144,7 +144,7 @@ export const getBirthFatherDetailsStatus = (userCase: CaseWithId): SectionStatus
     birthFatherStillAlive,
     birthFatherUnsureAliveReason,
     birthFatherNationality,
-    birthFatherAdditionalNationalities,
+    birthFatherOtherNationalities,
     birthFatherOccupation,
     birthFatherAddressKnown,
     // birthFatherAddress1,
@@ -173,7 +173,7 @@ export const getBirthFatherDetailsStatus = (userCase: CaseWithId): SectionStatus
         birthFatherNationality?.length === 1
       : birthFatherNationality.includes('Other')
       ? // Returns true if additional nationality array has elements, else false
-        !!birthFatherAdditionalNationalities?.length
+        !!birthFatherOtherNationalities?.length
       : // Doesn't contain 'Other' and has over 1 array element, true
         true
     : // Empty array, false

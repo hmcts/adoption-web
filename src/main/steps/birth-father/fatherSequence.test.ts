@@ -3,6 +3,7 @@ import {
   BIRTH_FATHER_ADDRESS_INTERNATIONAL,
   BIRTH_FATHER_ADDRESS_LOOKUP,
   BIRTH_FATHER_ADDRESS_MANUAL,
+  BIRTH_FATHER_ADDRESS_SELECT,
   BIRTH_FATHER_FULL_NAME,
   BIRTH_FATHER_IS_ADDRESS_KNOWN,
   BIRTH_FATHER_IS_ALIVE,
@@ -22,7 +23,8 @@ const [
   nationality,
   occupation,
   isAddressKnown,
-  address,
+  addressLookup,
+  addressSelect,
   manualAddress,
   internationalAddress,
 ] = birthFatherSequence;
@@ -83,10 +85,18 @@ describe('birth father sequence', () => {
       expect(getNextStep({ birthFatherAddressKnown: YesOrNo.NO })).toBe(TASK_LIST_URL);
     });
 
-    it('should be correct for address', () => {
-      const { url, showInSection, getNextStep } = address;
+    it('should be correct for addressLookup', () => {
+      const { url, showInSection, getNextStep } = addressLookup;
 
       expect(url).toBe(BIRTH_FATHER_ADDRESS_LOOKUP);
+      expect(showInSection).toBe(aboutChildren);
+      expect(getNextStep({})).toBe(BIRTH_FATHER_ADDRESS_SELECT);
+    });
+
+    it('should be correct for addressSelect', () => {
+      const { url, showInSection, getNextStep } = addressSelect;
+
+      expect(url).toBe(BIRTH_FATHER_ADDRESS_SELECT);
       expect(showInSection).toBe(aboutChildren);
       expect(getNextStep({})).toBe(TASK_LIST_URL);
     });
