@@ -101,16 +101,16 @@ export const INELIGIBLE_TO_ADOPT: PageLink = `${ELIGIBILITY_URL}/cannot-apply`;
 
 export const FEE_LOOKUP_URL: PageLink = '/fee-lookup';
 
-export const BIRTH_FATHER = '/birth-father/';
-export const BIRTH_FATHER_IS_NAME_ON_CERTIFICATE: PageLink = `${BIRTH_FATHER}is-name-on-certificate`;
-export const BIRTH_FATHER_ADDRESS: PageLink = `${BIRTH_FATHER}address`;
-export const BIRTH_FATHER_FULL_NAME: PageLink = `${BIRTH_FATHER}full-name`;
-export const BIRTH_FATHER_IS_ADDRESS_KNOWN: PageLink = `${BIRTH_FATHER}is-address-known`;
-export const BIRTH_FATHER_IS_ALIVE: PageLink = `${BIRTH_FATHER}is-alive`;
-export const BIRTH_FATHER_MANUAL_ADDRESS: PageLink = `${BIRTH_FATHER}manual-address`;
-export const BIRTH_FATHER_MANUAL_INTERNATIONAL_ADDRESS: PageLink = `${BIRTH_FATHER}manual-international-address`;
-export const BIRTH_FATHER_NATIONALITY: PageLink = `${BIRTH_FATHER}nationality`;
-export const BIRTH_FATHER_OCCUPATION: PageLink = `${BIRTH_FATHER}occupation`;
+export const BIRTH_FATHER = '/birth-father';
+export const BIRTH_FATHER_IS_NAME_ON_CERTIFICATE: PageLink = `${BIRTH_FATHER}/is-name-on-certificate`;
+export const BIRTH_FATHER_ADDRESS: PageLink = `${BIRTH_FATHER}/address`;
+export const BIRTH_FATHER_FULL_NAME: PageLink = `${BIRTH_FATHER}/full-name`;
+export const BIRTH_FATHER_IS_ADDRESS_KNOWN: PageLink = `${BIRTH_FATHER}/is-address-known`;
+export const BIRTH_FATHER_IS_ALIVE: PageLink = `${BIRTH_FATHER}/is-alive`;
+export const BIRTH_FATHER_MANUAL_ADDRESS: PageLink = `${BIRTH_FATHER}/manual-address`;
+export const BIRTH_FATHER_MANUAL_INTERNATIONAL_ADDRESS: PageLink = `${BIRTH_FATHER}/manual-international-address`;
+export const BIRTH_FATHER_NATIONALITY: PageLink = `${BIRTH_FATHER}/nationality`;
+export const BIRTH_FATHER_OCCUPATION: PageLink = `${BIRTH_FATHER}/occupation`;
 
 // TODO update below URLs when other parents changes in master
 export const OTHER_PARENT = '/other-parent';

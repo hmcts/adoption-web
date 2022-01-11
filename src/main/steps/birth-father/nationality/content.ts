@@ -13,12 +13,30 @@ export const en = (): Record<string, unknown> => ({
   section: SECTION,
   label: "What is the nationality of the child's birth father?",
   url: BIRTH_FATHER_NATIONALITY,
+  errors: {
+    [`${FieldPrefix.BIRTH_FATHER}Nationality`]: {
+      required: "Select a nationality or 'Not sure'",
+      notSureViolation: "Select a nationality or 'Not sure'",
+    },
+    addAnotherNationality: {
+      required: 'This is not a valid entry',
+    },
+  },
 });
 
 export const cy = (): Record<string, unknown> => ({
   section: SECTION_IN_WELSH,
   label: "What is the nationality of the child's birth father? (in Welsh)",
   url: BIRTH_FATHER_NATIONALITY,
+  errors: {
+    [`${FieldPrefix.BIRTH_FATHER}Nationality`]: {
+      required: "Select a nationality or 'Not sure' (in Welsh)",
+      notSureViolation: "Select a nationality or 'Not sure' (in Welsh)",
+    },
+    addAnotherNationality: {
+      required: 'This is not a valid entry (in Welsh)',
+    },
+  },
 });
 
 export const form: FormContent = {
