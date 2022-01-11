@@ -1,4 +1,4 @@
-import { YesOrNo } from '../../app/case/definition';
+import { YesNoNotsure, YesOrNo } from '../../app/case/definition';
 
 import { birthMotherSequence } from './birthMotherSequence';
 
@@ -12,7 +12,7 @@ describe('birthMotherSequence', () => {
 
     expect(birthMotherSequence[1].url).toBe('/birth-mother/still-alive');
     expect(birthMotherSequence[1].showInSection).toBe('aboutBirthMother');
-    expect(birthMotherSequence[1].getNextStep({ birthMotherStillAlive: YesOrNo.YES })).toBe(
+    expect(birthMotherSequence[1].getNextStep({ birthMotherStillAlive: YesNoNotsure.YES })).toBe(
       '/birth-mother/nationality'
     );
     expect(birthMotherSequence[1].getNextStep({})).toBe('/task-list');

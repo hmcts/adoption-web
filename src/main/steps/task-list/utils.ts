@@ -1,5 +1,5 @@
 import { CaseDate, CaseWithId, FieldPrefix } from '../../app/case/case';
-import { ContactDetails, SectionStatus, YesOrNo } from '../../app/case/definition';
+import { ContactDetails, SectionStatus, YesNoNotsure, YesOrNo } from '../../app/case/definition';
 import { isDateInputInvalid } from '../../app/form/validation';
 
 export const isApplyingWithComplete = (userCase: CaseWithId): boolean => {
@@ -10,8 +10,9 @@ const addressComplete = (userCase: CaseWithId, fieldPrefix: FieldPrefix) => {
   const address1 = userCase[`${fieldPrefix}Address1`];
   const addressTown = userCase[`${fieldPrefix}AddressTown`];
   const addressPostcode = userCase[`${fieldPrefix}AddressPostcode`];
+  const addressCountry = userCase[`${fieldPrefix}AddressCountry`];
 
-  return address1 && addressTown && addressPostcode;
+  return (address1 && addressTown && addressPostcode) || (address1 && addressCountry);
 };
 
 export const getContactDetailsStatus = (userCase: CaseWithId, fieldPrefix: FieldPrefix): SectionStatus => {
@@ -131,31 +132,35 @@ export const getAdoptionCertificateDetailsStatus = (userCase: CaseWithId): Secti
 
 export const getBirthMotherDetailsStatus = (userCase: CaseWithId): SectionStatus => {
   const names = userCase.birthMotherFirstNames && userCase.birthMotherLastNames;
+  const stillAlive = userCase.birthMotherStillAlive;
 
-  const addressKnown = userCase.birthMotherAddressKnown;
-  const addressAvailable =
-    addressKnown === YesOrNo.NO ||
-    (addressKnown === YesOrNo.YES && addressComplete(userCase, FieldPrefix.BIRTH_MOTHER));
+  if (stillAlive === YesNoNotsure.NO) {
+    return names ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
+  } else if (stillAlive === YesNoNotsure.NOT_SURE) {
+    const notAliveReason = userCase.birthMotherNotAliveReason;
+    return names && notAliveReason ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
+  } else if (stillAlive === YesNoNotsure.YES) {
+    const nationality = userCase.birthMotherNationality;
+    const nationalities = userCase.birthMotherAdditionalNationalities;
+    //TODO consider not sure selection
+    const nationalityComplete =
+      nationality?.length &&
+      (!nationality.includes('Other') || (nationality.includes('Other') && nationalities?.length));
+    const occupation = userCase.birthMotherOccupation;
+    const addressKnown = userCase.birthMotherAddressKnown;
 
-  /**
+    if (addressKnown === YesOrNo.NO) {
+      return names && nationalityComplete && occupation ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
+    } else {
+      return names &&
+        nationalityComplete &&
+        occupation &&
+        addressKnown === YesOrNo.YES &&
+        addressComplete(userCase, FieldPrefix.BIRTH_MOTHER)
+        ? SectionStatus.COMPLETED
+        : SectionStatus.IN_PROGRESS;
+    }
+  }
 
-  birthMotherStillAlive?: YesOrNo;
-  birthMotherNotAliveReason?: string;
-  birthMotherNationality?: string[];
-  birthMotherAdditionalNationalities?: string[];
-  birthMotherOccupation?: string;
-  birthMotherAddressKnown?: YesOrNo;
-  birthMotherAddress1?: string;
-  birthMotherAddress2?: string;
-  birthMotherAddress3?: string;
-  birthMotherAddressTown?: string;
-  birthMotherAddressCounty?: string;
-  birthMotherAddressPostcode?: string;
-  birthMotherAddressCountry?: string;
-   */
-  return names && addressAvailable
-    ? SectionStatus.COMPLETED
-    : !names
-    ? SectionStatus.NOT_STARTED
-    : SectionStatus.IN_PROGRESS;
+  return names ? SectionStatus.IN_PROGRESS : SectionStatus.NOT_STARTED;
 };

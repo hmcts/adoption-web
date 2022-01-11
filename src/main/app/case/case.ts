@@ -15,6 +15,7 @@ import {
   Payment,
   PlacementOrder,
   State,
+  YesNoNotsure,
   YesOrNo,
 } from './definition';
 
@@ -139,7 +140,7 @@ export interface Case {
 
   birthMotherFirstNames?: string;
   birthMotherLastNames?: string;
-  birthMotherStillAlive?: YesOrNo;
+  birthMotherStillAlive?: YesNoNotsure;
   birthMotherNotAliveReason?: string;
   birthMotherNationality?: string[];
   birthMotherAdditionalNationalities?: string[];
