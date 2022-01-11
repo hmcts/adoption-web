@@ -7,6 +7,7 @@ import {
   getChildrenBirthCertificateStatus,
   getChildrenPlacementOrderStatus,
   getContactDetailsStatus,
+  getOtherParentStatus,
   getPersonalDetailsStatus,
   isApplyingWithComplete,
 } from './utils';
@@ -58,9 +59,10 @@ const en = content => {
     section3link2: 'Adoption certificate details',
     section3link3: 'Their placement order details',
     section3link4: "Their birth mother's details",
-    section3link5: "Their birth father's or other parent's details",
-    section3link6: 'Previous court orders for the child',
-    section3link7: 'Court order details for any siblings or half-siblings',
+    section3link5: "Their birth father's details",
+    section3link6: "Other parent's details",
+    section3link7: 'Previous court orders for the child',
+    section3link8: 'Court order details for any siblings or half-siblings',
     section4: 'Add your adoption contacts',
     section4link1: 'Your adoption agency or local authority',
     section4link2: "The child's adoption agency or local authority",
@@ -107,6 +109,7 @@ const en = content => {
         statuses,
         'adoption-certificate-details-status'
       ),
+      otherParent: getSectionStatusLabel(getOtherParentStatus(content.userCase), statuses, 'other-parent-status'),
     },
     urls: {
       applyingWith: urls.APPLYING_WITH_URL,
@@ -115,6 +118,7 @@ const en = content => {
       applicant2PersonalDetails: urls.APPLICANT_2_FULL_NAME,
       applicant2ContactDetails: urls.APPLICANT_2_SAME_ADDRESS,
       childrenBirthCertificate: urls.CHILDREN_FULL_NAME,
+      otherParentExists: urls.OTHER_PARENT_EXISTS,
       adoptionCertificateDetails: urls.CHILDREN_FULL_NAME_AFTER_ADOPTION,
       childrenPlacementOrder:
         getChildrenPlacementOrderStatus(content.userCase) === SectionStatus.NOT_STARTED
@@ -161,9 +165,10 @@ const cy = content => {
     section3link2: 'Adoption certificate details (in welsh) ',
     section3link3: 'Their placement order details (in welsh) ',
     section3link4: "Their birth mother's details (in welsh) ",
-    section3link5: "Their birth father's or other parent's details (in welsh) ",
-    section3link6: 'Previous court orders for the child (in welsh) ',
-    section3link7: 'Court order details for any siblings or half-siblings (in welsh) ',
+    section3link5: "Their birth father's (in welsh) ",
+    section3link6: "Other parent's details (in welsh)",
+    section3link7: 'Previous court orders for the child (in welsh) ',
+    section3link8: 'Court order details for any siblings or half-siblings (in welsh) ',
     section4: 'Add your adoption contacts (in welsh) ',
     section4link1: 'Your adoption agency or local authority (in welsh) ',
     section4link2: "The child's adoption agency or local authority (in welsh) ",
@@ -210,6 +215,7 @@ const cy = content => {
         statuses,
         'adoption-certificate-details-status'
       ),
+      otherParent: getSectionStatusLabel(getOtherParentStatus(content.userCase), statuses, 'other-parent-status'),
     },
     urls: {
       applyingWith: urls.APPLYING_WITH_URL,
@@ -218,6 +224,7 @@ const cy = content => {
       applicant2PersonalDetails: urls.APPLICANT_2_FULL_NAME,
       applicant2ContactDetails: urls.APPLICANT_2_SAME_ADDRESS,
       childrenBirthCertificate: urls.CHILDREN_FULL_NAME,
+      otherParentExists: urls.OTHER_PARENT_EXISTS,
       adoptionCertificateDetails: urls.CHILDREN_FULL_NAME_AFTER_ADOPTION,
       childrenPlacementOrder:
         getChildrenPlacementOrderStatus(content.userCase) === SectionStatus.NOT_STARTED

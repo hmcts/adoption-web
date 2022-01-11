@@ -146,9 +146,11 @@ export interface Case {
   otherParentExists?: YesOrNo;
   otherParentAddress1?: string;
   otherParentAddress2?: string;
+  otherParentAddress3?: string;
   otherParentAddressTown?: string;
   otherParentAddressCounty?: string;
   otherParentAddressPostcode?: string;
+  otherParentAddressCountry?: string;
 
   applicationType?: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;

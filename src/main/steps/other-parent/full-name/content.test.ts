@@ -35,7 +35,7 @@ const cyContent = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('common > components > full-name', () => {
+describe('other-parent > full-name > content', () => {
   const fullNameFormFields = fullNameForm.fields as FormFields;
   const commonContent = { language: 'en', userCase: {} } as CommonContent;
   let generatedContent;

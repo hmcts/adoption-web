@@ -1,4 +1,4 @@
-import { CaseDate, CaseWithId } from '../../app/case/case';
+import { CaseDate, CaseWithId, FieldPrefix } from '../../app/case/case';
 import { ContactDetails, SectionStatus, YesOrNo } from '../../app/case/definition';
 import { isDateInputInvalid } from '../../app/form/validation';
 
@@ -125,4 +125,33 @@ export const getAdoptionCertificateDetailsStatus = (userCase: CaseWithId): Secti
     : !firstName && !lastName
     ? SectionStatus.NOT_STARTED
     : SectionStatus.IN_PROGRESS;
+};
+
+const addressComplete = (userCase: CaseWithId, fieldPrefix: FieldPrefix) => {
+  const address1 = userCase[`${fieldPrefix}Address1`];
+  const addressTown = userCase[`${fieldPrefix}AddressTown`];
+  const addressPostcode = userCase[`${fieldPrefix}AddressPostcode`];
+  const addressCountry = userCase[`${fieldPrefix}AddressCountry`];
+
+  return (address1 && addressTown && addressPostcode) || (address1 && addressCountry);
+};
+
+export const getOtherParentStatus = (userCase: CaseWithId): SectionStatus => {
+  const exists = userCase.otherParentExists;
+  const names = userCase.otherParentFirstNames && userCase.otherParentLastNames;
+
+  if (exists === YesOrNo.NO) {
+    return names ? SectionStatus.IN_PROGRESS : SectionStatus.COMPLETED;
+  } else if (exists === YesOrNo.YES) {
+    const addressKnown = userCase.otherParentAddressKnown;
+    if (addressKnown === YesOrNo.NO) {
+      return names ? SectionStatus.IN_PROGRESS : SectionStatus.COMPLETED;
+    } else {
+      return names && addressKnown === YesOrNo.YES && addressComplete(userCase, FieldPrefix.OTHERPARENT)
+        ? SectionStatus.IN_PROGRESS
+        : SectionStatus.COMPLETED;
+    }
+  }
+
+  return names ? SectionStatus.IN_PROGRESS : SectionStatus.NOT_STARTED;
 };
