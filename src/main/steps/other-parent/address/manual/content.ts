@@ -4,6 +4,7 @@ import {
   form as manualAddressForm,
   generateContent as manualAddressGenerateContent,
 } from '../../../common/components/address-manual';
+import { OTHER_PARENT_INTERNATIONAL_ADDRESS } from '../../../urls';
 import { SECTION, SECTION_IN_WELSH } from '../../constants';
 
 const en = manualAddressContent => ({
@@ -14,6 +15,7 @@ const en = manualAddressContent => ({
     otherParentAddressTown: manualAddressContent.errors.addressTown,
     otherParentAddressPostcode: manualAddressContent.errors.addressPostcode,
   },
+  internationalAddressUrl: OTHER_PARENT_INTERNATIONAL_ADDRESS,
 });
 
 const cy = manualAddressContent => ({
@@ -24,6 +26,7 @@ const cy = manualAddressContent => ({
     otherParentAddressTown: manualAddressContent.errors.addressTown,
     otherParentAddressPostcode: manualAddressContent.errors.addressPostcode,
   },
+  internationalAddressUrl: OTHER_PARENT_INTERNATIONAL_ADDRESS,
 });
 
 const manualAddressFormFields = manualAddressForm.fields as FormFields;
