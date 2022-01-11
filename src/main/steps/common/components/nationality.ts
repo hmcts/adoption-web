@@ -2,7 +2,12 @@ import { Case, FieldPrefix } from '../../../app/case/case';
 import { PageContent } from '../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../app/form/Form';
 import { atLeastOneFieldIsChecked, isFieldFilledIn, notSureViolation } from '../../../app/form/validation';
-import { APPLICANT_1_NATIONALITY, APPLICANT_2_NATIONALITY, CHILDREN_NATIONALITY } from '../../urls';
+import {
+  APPLICANT_1_NATIONALITY,
+  APPLICANT_2_NATIONALITY,
+  BIRTH_MOTHER_NATIONALITY,
+  CHILDREN_NATIONALITY,
+} from '../../urls';
 import { CommonContent } from '../common.content';
 import { mapSummaryListContent } from '../functions/mapSummaryListContent';
 
@@ -39,8 +44,8 @@ export const cy = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
   countryName: 'Country name (in Welsh)',
   add: 'Add (in Welsh)',
   another: 'Add another country (in Welsh)',
-  or: 'or',
-  notSure: 'Not sure',
+  or: 'or (in Welsh)',
+  notSure: 'Not sure (in Welsh)',
   errors: {
     [`${fieldPrefix}Nationality`]: {
       required: 'Select if you are British, Irish or a citizen of a different country (in Welsh)',
@@ -56,6 +61,7 @@ const urls = {
   [FieldPrefix.APPLICANT1]: APPLICANT_1_NATIONALITY,
   [FieldPrefix.APPLICANT2]: APPLICANT_2_NATIONALITY,
   [FieldPrefix.CHILDREN]: CHILDREN_NATIONALITY,
+  [FieldPrefix.BIRTH_MOTHER]: BIRTH_MOTHER_NATIONALITY,
 };
 
 export const nationalityFields = (userCase: Partial<Case>, fieldPrefix: FieldPrefix): FormFields => ({

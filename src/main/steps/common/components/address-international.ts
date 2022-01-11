@@ -27,7 +27,7 @@ const cy = manualAddressContent => ({
   town: 'Town or city (Optional) (in welsh)',
   county: 'County, district, state or province (Optional) (in welsh)',
   postcode: 'Postcode, zip code or area code (Optional) (in welsh)',
-  country: 'Country',
+  country: 'Country (in Welsh)',
   errors: {
     address1: manualAddressContent.errors.address1,
     addressCountry: {
@@ -53,7 +53,7 @@ export const form: FormContent = {
     addressPostcode: { ...manualAddressFormFields.addressPostcode, validator: undefined },
     addressCountry: {
       type: 'text',
-      classes: 'govuk-label govuk-!-width-two-thirds',
+      classes: 'govuk-label',
       label: l => l.country,
       labelSize: null,
       validator: isFieldFilledIn,
