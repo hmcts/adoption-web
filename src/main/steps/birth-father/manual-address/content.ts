@@ -1,26 +1,42 @@
 import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent } from '../../../app/form/Form';
-import { SECTION, SECTION_IN_WELSH } from '../constants';
+import { FormContent, FormFields } from '../../../app/form/Form';
+import { BIRTH_FATHER_MANUAL_ADDRESS } from '../../../steps/urls';
+import {
+  form as manualAddressForm,
+  generateContent as manualAddressGenerateContent,
+} from '../../common/components/address-manual';
 
-export const en = (): Record<string, unknown> => ({
-  section: SECTION,
-  title: 'manual-address',
-  errors: {},
-});
-
-export const cy = (): Record<string, unknown> => ({
-  section: SECTION_IN_WELSH,
-  title: 'title (in Welsh)',
-  errors: {},
-});
-
-export const form: FormContent = {
-  fields: {},
-  submit: {
-    text: l => l.continue,
+const en = manualAddressContent => ({
+  section: "Birth father's details",
+  title: "What is the birth father's last known address?",
+  errors: {
+    birthFatherAddress1: manualAddressContent.errors.address1,
+    birthFatherAddressTown: manualAddressContent.errors.addressTown,
+    birthFatherAddressPostcode: manualAddressContent.errors.addressPostcode,
   },
-  saveAsDraft: {
-    text: l => l.saveAsDraft,
+  internationalAddressUrl: BIRTH_FATHER_MANUAL_ADDRESS,
+});
+
+const cy = manualAddressContent => ({
+  section: "Birth father's details (in welsh)",
+  title: "What is the birth father's last known address? (in welsh)",
+  errors: {
+    birthFatherAddress1: manualAddressContent.errors.address1,
+    birthFatherAddressTown: manualAddressContent.errors.addressTown,
+    birthFatherAddressPostcode: manualAddressContent.errors.addressPostcode,
+  },
+  internationalAddressUrl: BIRTH_FATHER_MANUAL_ADDRESS,
+});
+
+const manualAddressFormFields = manualAddressForm.fields as FormFields;
+export const form: FormContent = {
+  ...manualAddressForm,
+  fields: {
+    birthFatherAddress1: manualAddressFormFields.address1,
+    birthFatherAddress2: manualAddressFormFields.address2,
+    birthFatherAddressTown: manualAddressFormFields.addressTown,
+    birthFatherAddressCounty: manualAddressFormFields.addressCounty,
+    birthFatherAddressPostcode: manualAddressFormFields.addressPostcode,
   },
 };
 
@@ -29,7 +45,12 @@ const languages = {
   cy,
 };
 
-export const generateContent: TranslationFn = content => ({
-  ...languages[content.language](),
-  form,
-});
+export const generateContent: TranslationFn = content => {
+  const manualAddressContent = manualAddressGenerateContent(content);
+  const translations = languages[content.language](manualAddressContent);
+  return {
+    ...manualAddressContent,
+    ...translations,
+    form,
+  };
+};

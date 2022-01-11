@@ -17,27 +17,34 @@ import { CaseWithId, FieldPrefix } from '../../../app/case/case';
 import { FormContent, FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { CommonContent } from '../../common/common.content';
 import { nationalityFields } from '../../common/components/nationality';
+import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 import { form, generateContent } from './content';
 
 const enContent = {
-  section: "The child's details",
-  label: 'What is their nationality?',
+  section: SECTION,
+  label: "What is the nationality of the child's birth father?",
   errors: {
-    birthFatherNationality: {
+    [`${FieldPrefix.BIRTH_FATHER}Nationality`]: {
       required: "Select a nationality or 'Not sure'",
       notSureViolation: "Select a nationality or 'Not sure'",
+    },
+    addAnotherNationality: {
+      required: 'This is not a valid entry',
     },
   },
 };
 
 const cyContent = {
-  section: "The child's details (in welsh)",
-  label: 'What is their nationality? (in welsh)',
+  section: SECTION_IN_WELSH,
+  label: "What is the nationality of the child's birth father? (in Welsh)",
   errors: {
-    birthFatherNationality: {
-      required: "Select a nationality or 'Not sure' (in welsh)",
-      notSureViolation: "Select a nationality or 'Not sure' (in welsh)",
+    [`${FieldPrefix.BIRTH_FATHER}Nationality`]: {
+      required: "Select a nationality or 'Not sure' (in Welsh)",
+      notSureViolation: "Select a nationality or 'Not sure' (in Welsh)",
+    },
+    addAnotherNationality: {
+      required: 'This is not a valid entry (in Welsh)',
     },
   },
 };
@@ -53,16 +60,16 @@ describe('birthFather > nationality content', () => {
   test('should return correct english content', () => {
     expect(generatedContent.section).toEqual(enContent.section);
     expect(generatedContent.label).toEqual(enContent.label);
-    expect(generatedContent.errors).toEqual({ ...enContent.errors, ...mockForm.errors });
-    expect(generatedContent.url).toEqual('/birthFather/nationality');
+    expect(generatedContent.errors).toEqual(enContent.errors);
+    expect(generatedContent.url).toEqual('/birth-father/nationality');
   });
 
   test('should return correct welsh content', () => {
     generatedContent = generateContent({ ...commonContent, language: 'cy' });
     expect(generatedContent.section).toEqual(cyContent.section);
     expect(generatedContent.label).toEqual(cyContent.label);
-    expect(generatedContent.errors).toEqual({ ...cyContent.errors, ...mockForm.errors });
-    expect(generatedContent.url).toEqual('/birthFather/nationality');
+    expect(generatedContent.errors).toEqual(cyContent.errors);
+    expect(generatedContent.url).toEqual('/birth-father/nationality');
   });
 
   test('should contain birthFatherNationality field', () => {
