@@ -193,15 +193,11 @@
             </li>
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a href="{{urls.BIRTH_FATHER_IS_NAME_ON_CERTIFICATE}}" class="govuk-link" aria-describedby="eligibility-completed">
+                    <a id="birth-father-status" href="{{urls.birthFather}}" class="govuk-link" aria-describedby="eligibility-completed">
                         {{section3link5}}
                     </a>
                 </span>
-                {% if data['birth-father'] %}
-                    <strong class="govuk-tag  app-task-list__tag" id="eligibility-completed">Completed</strong>
-                {% else %}
-                    <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
-                {% endif %}
+                <p class="govuk-body">{{ status.birthFather | safe }}</p>
             </li>
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">

@@ -1,9 +1,18 @@
-import { CaseDate, CaseWithId } from '../../app/case/case';
+import { CaseDate, CaseWithId, FieldPrefix } from '../../app/case/case';
 import { ContactDetails, SectionStatus, YesOrNo } from '../../app/case/definition';
 import { isDateInputInvalid } from '../../app/form/validation';
 
 export const isApplyingWithComplete = (userCase: CaseWithId): boolean => {
   return !!userCase.applyingWith;
+};
+
+const addressComplete = (userCase: CaseWithId, fieldPrefix: FieldPrefix) => {
+  const address1 = userCase[`${fieldPrefix}Address1`];
+  const addressTown = userCase[`${fieldPrefix}AddressTown`];
+  const addressPostcode = userCase[`${fieldPrefix}AddressPostcode`];
+  const addressCountry = userCase[`${fieldPrefix}AddressCountry`];
+
+  return (address1 && addressTown && addressPostcode) || (address1 && addressCountry);
 };
 
 export const getContactDetailsStatus = (userCase: CaseWithId, userType: 'applicant1' | 'applicant2'): SectionStatus => {
@@ -125,4 +134,68 @@ export const getAdoptionCertificateDetailsStatus = (userCase: CaseWithId): Secti
     : !firstName && !lastName
     ? SectionStatus.NOT_STARTED
     : SectionStatus.IN_PROGRESS;
+};
+
+export const getBirthFatherDetailsStatus = (userCase: CaseWithId): SectionStatus => {
+  const {
+    birthFathersNameOnCertificate,
+    birthFatherFirstNames,
+    birthFatherLastNames,
+    birthFatherStillAlive,
+    birthFatherUnsureAliveReason,
+    birthFatherNationality,
+    birthFatherAdditionalNationalities,
+    birthFatherOccupation,
+    birthFatherAddressKnown,
+    // birthFatherAddress1,
+    // birthFatherAddress2,
+    // birthFatherAddress3,
+    // birthFatherAddressTown,
+    // birthFatherAddressCounty,
+    // birthFatherAddressPostcode,
+    // birthFatherAddressCountry,
+  } = userCase;
+
+  if (!birthFathersNameOnCertificate) {
+    return SectionStatus.NOT_STARTED;
+  }
+
+  const nameIsOnCertificate = birthFathersNameOnCertificate === 'Yes';
+
+  const areNamesComplete = !!(birthFatherFirstNames && birthFatherLastNames);
+
+  const isFatherAlive = birthFatherStillAlive === 'Yes';
+  const unsureAliveComplete = birthFatherStillAlive === 'Not sure' && birthFatherUnsureAliveReason;
+  const notAlive = birthFatherStillAlive === 'No';
+  const nationalityComplete = birthFatherNationality?.length
+    ? birthFatherNationality.includes('Not sure')
+      ? // Returns true if 'Not sure' is the only array element, else false
+        birthFatherNationality?.length === 1
+      : birthFatherNationality.includes('Other')
+      ? // Returns true if additional nationality array has elements, else false
+        !!birthFatherAdditionalNationalities?.length
+      : // Doesn't contain 'Other' and has over 1 array element, true
+        true
+    : // Empty array, false
+      false;
+  const lastAddressKnown = birthFatherAddressKnown === 'Yes';
+  const isAddressComplete = addressComplete(userCase, FieldPrefix.BIRTH_FATHER);
+
+  return nameIsOnCertificate
+    ? areNamesComplete
+      ? isFatherAlive
+        ? nationalityComplete
+          ? birthFatherOccupation
+            ? lastAddressKnown
+              ? isAddressComplete
+                ? SectionStatus.COMPLETED
+                : SectionStatus.IN_PROGRESS
+              : SectionStatus.COMPLETED
+            : SectionStatus.IN_PROGRESS
+          : SectionStatus.IN_PROGRESS
+        : unsureAliveComplete || notAlive
+        ? SectionStatus.COMPLETED
+        : SectionStatus.IN_PROGRESS
+      : SectionStatus.IN_PROGRESS
+    : SectionStatus.COMPLETED;
 };

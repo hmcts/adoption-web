@@ -1,9 +1,9 @@
-import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent, FormFields } from '../../../app/form/Form';
+import { TranslationFn } from '../../../../app/controller/GetController';
+import { FormContent, FormFields } from '../../../../app/form/Form';
 import {
   form as internationalAddressForm,
   generateContent as manualAddressGenerateContent,
-} from '../../common/components/address-international';
+} from '../../../common/components/address-international';
 
 const en = internationalAddressContent => ({
   section: "Birth father's details",

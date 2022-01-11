@@ -11,7 +11,7 @@ const cyContent = {
   title: "Is the child's birth father still alive? (in Welsh)",
 };
 
-const fieldName = 'isFatherStillAlive';
+const fieldName = 'birthFatherStillAlive';
 
 const values = {
   yes: 'Yes',

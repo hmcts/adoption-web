@@ -1,10 +1,10 @@
 /* eslint-disable jest/expect-expect */
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
-import { CommonContent, generatePageContent } from '../../common/common.content';
-import { form as internationalAddressForm } from '../../common/components/address-international';
-import { languageAssertions } from '../../common/test/languageAssertions';
+import { FormContent, FormFields, FormOptions } from '../../../../app/form/Form';
+import { CommonContent, generatePageContent } from '../../../common/common.content';
+import { form as internationalAddressForm } from '../../../common/components/address-international';
+import { languageAssertions } from '../../../common/test/languageAssertions';
 
 import { generateContent } from './content';
 

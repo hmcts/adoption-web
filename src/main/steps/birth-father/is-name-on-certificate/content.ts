@@ -13,7 +13,7 @@ const cyContent = {
   hint: "Ask the adoption agency or social worker if you're not sure. (in Welsh)",
 };
 
-const fieldName = 'isFathersNameOnCertificate';
+const fieldName = 'birthFathersNameOnCertificate';
 
 const values = {
   yes: 'Yes',

@@ -139,14 +139,16 @@ export interface Case {
   childrenFirstNameAfterAdoption?: string;
   childrenLastNameAfterAdoption?: string;
 
+  birthFathersNameOnCertificate?: string;
   birthFatherFirstNames?: string;
   birthFatherLastNames?: string;
-  birthFatherStillAlive?: YesOrNo;
-  birthFatherNotAliveReason?: string;
+  birthFatherStillAlive?: string;
+  birthFatherUnsureAliveReason?: string;
   birthFatherNationality?: string[];
   birthFatherAdditionalNationalities?: string[];
   birthFatherOccupation?: string;
   birthFatherAddressKnown?: YesOrNo;
+
   birthFatherAddress1?: string;
   birthFatherAddress2?: string;
   birthFatherAddress3?: string;
@@ -265,9 +267,6 @@ export interface Case {
   jurisdictionAgree?: YesOrNo;
   reasonCourtsOfEnglandAndWalesHaveNoJurisdiction?: string;
   inWhichCountryIsYourLifeMainlyBased?: string;
-  isFathersNameOnCertificate?: string;
-  isFatherStillAlive?: string;
-  isFathersAddressKnown?: string;
 }
 
 export interface CaseWithId extends Case {

@@ -4,6 +4,7 @@ import * as urls from '../urls';
 
 import {
   getAdoptionCertificateDetailsStatus,
+  getBirthFatherDetailsStatus,
   getChildrenBirthCertificateStatus,
   getChildrenPlacementOrderStatus,
   getContactDetailsStatus,
@@ -107,6 +108,11 @@ const en = content => {
         statuses,
         'adoption-certificate-details-status'
       ),
+      birthFather: getSectionStatusLabel(
+        getBirthFatherDetailsStatus(content.userCase),
+        statuses,
+        'birth-father-status'
+      ),
     },
     urls: {
       applyingWith: urls.APPLYING_WITH_URL,
@@ -120,6 +126,7 @@ const en = content => {
         getChildrenPlacementOrderStatus(content.userCase) === SectionStatus.NOT_STARTED
           ? urls.CHILDREN_PLACEMENT_ORDER_NUMBER
           : urls.CHILDREN_PLACEMENT_ORDER_SUMMARY,
+      birthFather: urls.BIRTH_FATHER_IS_NAME_ON_CERTIFICATE,
     },
   };
 };
@@ -210,6 +217,11 @@ const cy = content => {
         statuses,
         'adoption-certificate-details-status'
       ),
+      birthFather: getSectionStatusLabel(
+        getBirthFatherDetailsStatus(content.userCase),
+        statuses,
+        'birth-father-status'
+      ),
     },
     urls: {
       applyingWith: urls.APPLYING_WITH_URL,
@@ -223,6 +235,7 @@ const cy = content => {
         getChildrenPlacementOrderStatus(content.userCase) === SectionStatus.NOT_STARTED
           ? urls.CHILDREN_PLACEMENT_ORDER_NUMBER
           : urls.CHILDREN_PLACEMENT_ORDER_SUMMARY,
+      birthFather: urls.BIRTH_FATHER_IS_NAME_ON_CERTIFICATE,
     },
   };
 };

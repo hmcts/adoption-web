@@ -8,7 +8,7 @@ import { Radios } from './radios';
 
 jest.mock('../../../app/form/validation');
 
-const fieldName = 'isFatherStillAlive';
+const fieldName = 'birthFatherStillAlive';
 const EN = 'en';
 const CY = 'cy';
 

@@ -1,10 +1,10 @@
-import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent, FormFields } from '../../../app/form/Form';
-import { BIRTH_FATHER_MANUAL_ADDRESS } from '../../../steps/urls';
+import { TranslationFn } from '../../../../app/controller/GetController';
+import { FormContent, FormFields } from '../../../../app/form/Form';
+import { BIRTH_FATHER_ADDRESS_INTERNATIONAL } from '../../../../steps/urls';
 import {
   form as manualAddressForm,
   generateContent as manualAddressGenerateContent,
-} from '../../common/components/address-manual';
+} from '../../../common/components/address-manual';
 
 const en = manualAddressContent => ({
   section: "Birth father's details",
@@ -14,7 +14,7 @@ const en = manualAddressContent => ({
     birthFatherAddressTown: manualAddressContent.errors.addressTown,
     birthFatherAddressPostcode: manualAddressContent.errors.addressPostcode,
   },
-  internationalAddressUrl: BIRTH_FATHER_MANUAL_ADDRESS,
+  internationalAddressUrl: BIRTH_FATHER_ADDRESS_INTERNATIONAL,
 });
 
 const cy = manualAddressContent => ({
@@ -25,7 +25,7 @@ const cy = manualAddressContent => ({
     birthFatherAddressTown: manualAddressContent.errors.addressTown,
     birthFatherAddressPostcode: manualAddressContent.errors.addressPostcode,
   },
-  internationalAddressUrl: BIRTH_FATHER_MANUAL_ADDRESS,
+  internationalAddressUrl: BIRTH_FATHER_ADDRESS_INTERNATIONAL,
 });
 
 const manualAddressFormFields = manualAddressForm.fields as FormFields;

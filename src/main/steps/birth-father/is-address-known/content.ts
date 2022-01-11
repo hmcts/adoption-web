@@ -11,7 +11,7 @@ const cyContent = {
   title: 'Do you have the birth father’s last known address? (in Welsh)',
 };
 
-const fieldName = 'isFathersAddressKnown';
+const fieldName = 'birthFatherAddressKnown';
 
 const values = {
   yes: 'Yes',
