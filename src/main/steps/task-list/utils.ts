@@ -1,6 +1,6 @@
 import { CaseDate, CaseWithId, FieldPrefix } from '../../app/case/case';
 import { ContactDetails, SectionStatus, YesNoNotsure, YesOrNo } from '../../app/case/definition';
-import { isDateInputInvalid } from '../../app/form/validation';
+import { isDateInputInvalid, notSureViolation } from '../../app/form/validation';
 
 export const isApplyingWithComplete = (userCase: CaseWithId): boolean => {
   return !!userCase.applyingWith;
@@ -142,9 +142,9 @@ export const getBirthMotherDetailsStatus = (userCase: CaseWithId): SectionStatus
   } else if (stillAlive === YesNoNotsure.YES) {
     const nationality = userCase.birthMotherNationality;
     const nationalities = userCase.birthMotherAdditionalNationalities;
-    //TODO consider not sure selection
     const nationalityComplete =
       nationality?.length &&
+      !notSureViolation(nationality) &&
       (!nationality.includes('Other') || (nationality.includes('Other') && nationalities?.length));
     const occupation = userCase.birthMotherOccupation;
     const addressKnown = userCase.birthMotherAddressKnown;
