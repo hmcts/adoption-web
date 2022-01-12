@@ -1,3 +1,4 @@
+import { FieldPrefix } from '../../app/case/case';
 import { SectionStatus } from '../../app/case/definition';
 import { TranslationFn } from '../../app/controller/GetController';
 import * as urls from '../urls';
@@ -5,6 +6,7 @@ import * as urls from '../urls';
 import {
   getAdoptionCertificateDetailsStatus,
   getBirthFatherDetailsStatus,
+  getBirthMotherDetailsStatus,
   getChildrenBirthCertificateStatus,
   getChildrenPlacementOrderStatus,
   getContactDetailsStatus,
@@ -79,7 +81,7 @@ const en = content => {
         'applicant1-personal-details-status'
       ),
       applicant1ContactDetails: getSectionStatusLabel(
-        getContactDetailsStatus(content.userCase, 'applicant1'),
+        getContactDetailsStatus(content.userCase, FieldPrefix.APPLICANT1),
         statuses,
         'applicant1-contact-details-status'
       ),
@@ -89,7 +91,7 @@ const en = content => {
         'applicant2-personal-details-status'
       ),
       applicant2ContactDetails: getSectionStatusLabel(
-        getContactDetailsStatus(content.userCase, 'applicant2'),
+        getContactDetailsStatus(content.userCase, FieldPrefix.APPLICANT2),
         statuses,
         'applicant2-contact-details-status'
       ),
@@ -113,6 +115,11 @@ const en = content => {
         statuses,
         'birth-father-status'
       ),
+      birthMotherDetails: getSectionStatusLabel(
+        getBirthMotherDetailsStatus(content.userCase),
+        statuses,
+        'birth-mother-details-status'
+      ),
     },
     urls: {
       applyingWith: urls.APPLYING_WITH_URL,
@@ -127,6 +134,7 @@ const en = content => {
           ? urls.CHILDREN_PLACEMENT_ORDER_NUMBER
           : urls.CHILDREN_PLACEMENT_ORDER_SUMMARY,
       birthFather: urls.BIRTH_FATHER_IS_NAME_ON_CERTIFICATE,
+      birthMotherDetails: urls.BIRTH_MOTHER_FULL_NAME,
     },
   };
 };
@@ -188,7 +196,7 @@ const cy = content => {
         'applicant1-personal-details-status'
       ),
       applicant1ContactDetails: getSectionStatusLabel(
-        getContactDetailsStatus(content.userCase, 'applicant1'),
+        getContactDetailsStatus(content.userCase, FieldPrefix.APPLICANT1),
         statuses,
         'applicant1-contact-details-status'
       ),
@@ -198,7 +206,7 @@ const cy = content => {
         'applicant1-personal-details-status'
       ),
       applicant2ContactDetails: getSectionStatusLabel(
-        getContactDetailsStatus(content.userCase, 'applicant2'),
+        getContactDetailsStatus(content.userCase, FieldPrefix.APPLICANT2),
         statuses,
         'applicant2-contact-details-status'
       ),
@@ -222,6 +230,11 @@ const cy = content => {
         statuses,
         'birth-father-status'
       ),
+      birthMotherDetails: getSectionStatusLabel(
+        getBirthMotherDetailsStatus(content.userCase),
+        statuses,
+        'birth-mother-details-status'
+      ),
     },
     urls: {
       applyingWith: urls.APPLYING_WITH_URL,
@@ -236,6 +249,7 @@ const cy = content => {
           ? urls.CHILDREN_PLACEMENT_ORDER_NUMBER
           : urls.CHILDREN_PLACEMENT_ORDER_SUMMARY,
       birthFather: urls.BIRTH_FATHER_IS_NAME_ON_CERTIFICATE,
+      birthMotherDetails: urls.BIRTH_MOTHER_FULL_NAME,
     },
   };
 };

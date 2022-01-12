@@ -24,7 +24,7 @@ const cyContent = {
   town: 'Town or city (Optional) (in welsh)',
   county: 'County, district, state or province (Optional) (in welsh)',
   postcode: 'Postcode, zip code or area code (Optional) (in welsh)',
-  country: 'Country',
+  country: 'Country (in Welsh)',
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
@@ -108,7 +108,7 @@ describe('common > components > address-international > content', () => {
   test('should contain addressCountry field', () => {
     const addressCountryField = fields.addressCountry as FormOptions;
     expect(addressCountryField.type).toBe('text');
-    expect(addressCountryField.classes).toBe('govuk-label govuk-!-width-two-thirds');
+    expect(addressCountryField.classes).toBe('govuk-label');
     expect(addressCountryField.labelSize).toBe(null);
     expect(addressCountryField.validator).toBe(isFieldFilledIn);
     expect((addressCountryField.label as Function)(generatedContent)).toBe(enContent.country);
