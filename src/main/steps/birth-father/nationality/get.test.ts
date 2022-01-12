@@ -4,7 +4,7 @@ import NationalityGetControllerBase from '../../../app/nationality/NationalityGe
 import { generateContent } from './content';
 import NationalityGetController from './get';
 
-describe('children > nationality > get', () => {
+describe('birth-father > nationality > get', () => {
   let controller;
 
   beforeEach(() => {
