@@ -18,6 +18,10 @@ describe('PlacementOrderGetController', () => {
 
   describe('when there is no selectedPlacementOrderId in userCase', () => {
     test('should generate random placementOrderId', async () => {
+      req.locals.api.triggerEvent.mockResolvedValue({
+        selectedPlacementOrderId: '1609459200000',
+        placementOrders: [{ placementOrderId: '1609459200000' }],
+      });
       await controller.get(req, res);
       expect(req.session.userCase.selectedPlacementOrderId).toBe('1609459200000');
     });
@@ -26,6 +30,10 @@ describe('PlacementOrderGetController', () => {
   describe('when there is a selectedPlacementOrderId in userCase', () => {
     test('should not generate random placementOrderId', async () => {
       req = mockRequest({ session: { userCase: { selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID' } } });
+      req.locals.api.triggerEvent.mockResolvedValue({
+        selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+        placementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }],
+      });
       await controller.get(req, res);
       expect(req.session.userCase.selectedPlacementOrderId).toBe('MOCK_PLACEMENT_ORDER_ID');
     });
@@ -33,6 +41,10 @@ describe('PlacementOrderGetController', () => {
 
   describe('when there is no placementOrder with selectedPlacementOrderId in userCase', () => {
     test('should create a blank placementOrder with generated placementOrderId', async () => {
+      req.locals.api.triggerEvent.mockResolvedValue({
+        selectedPlacementOrderId: '1609459200000',
+        placementOrders: [{ placementOrderId: '1609459200000' }],
+      });
       await controller.get(req, res);
       expect(req.session.userCase.placementOrders).toEqual([{ placementOrderId: '1609459200000' }]);
     });
@@ -48,6 +60,11 @@ describe('PlacementOrderGetController', () => {
           },
         },
       });
+      req.locals.api.triggerEvent.mockResolvedValue({
+        selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+        placementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }],
+      });
+
       await controller.get(req, res);
       expect(req.session.userCase.placementOrders).toEqual([{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }]);
     });
@@ -60,11 +77,16 @@ describe('PlacementOrderGetController', () => {
     });
 
     test('should create a blank placementOrder with "add" query param\'s value as placementOrderId', async () => {
+      req.locals.api.triggerEvent.mockResolvedValue({
+        selectedPlacementOrderId: 'MOCK_ID',
+        placementOrders: [{ placementOrderId: 'MOCK_ID' }],
+      });
       await controller.get(req, res);
       expect(req.session.userCase.placementOrders).toEqual([{ placementOrderId: 'MOCK_ID' }]);
     });
 
     test('should reset the addAnotherPlacementOrder in userCase', async () => {
+      req.locals.api.triggerEvent.mockResolvedValue({ selectedPlacementOrderId: 'MOCK_ID' });
       await controller.get(req, res);
       expect(req.session.userCase.addAnotherPlacementOrder).toBeUndefined();
     });
@@ -82,6 +104,7 @@ describe('PlacementOrderGetController', () => {
     });
 
     test('should set the selectedPlacementOrderId in userCase', async () => {
+      req.locals.api.triggerEvent.mockResolvedValue({ selectedPlacementOrderId: 'MOCK_ID' });
       await controller.get(req, res);
       expect(req.session.userCase.selectedPlacementOrderId).toBe('MOCK_ID');
     });
@@ -112,6 +135,9 @@ describe('PlacementOrderGetController', () => {
     });
 
     test('should remove the placementOrder from userCase placementOrders list', async () => {
+      req.locals.api.triggerEvent.mockResolvedValue({
+        placementOrders: [{ placementOrderId: 'MOCK_ID' }, { placementOrderId: 'MOCK_ID3' }],
+      });
       await controller.get(req, res);
       expect(req.session.userCase.placementOrders).toEqual([
         { placementOrderId: 'MOCK_ID' },
@@ -120,11 +146,13 @@ describe('PlacementOrderGetController', () => {
     });
 
     test('should set the selectedPlacementOrderId in userCase', async () => {
+      req.locals.api.triggerEvent.mockResolvedValue({ selectedPlacementOrderId: 'MOCK_ID' });
       await controller.get(req, res);
       expect(req.session.userCase.selectedPlacementOrderId).toBe('MOCK_ID');
     });
 
     test('should reset the addAnotherPlacementOrder in userCase', async () => {
+      req.locals.api.triggerEvent.mockResolvedValue({});
       await controller.get(req, res);
       expect(req.session.userCase.addAnotherPlacementOrder).toBeUndefined();
     });
