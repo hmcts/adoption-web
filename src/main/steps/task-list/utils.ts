@@ -167,7 +167,7 @@ export const getBirthMotherDetailsStatus = (userCase: CaseWithId): SectionStatus
 
 export const getOtherParentStatus = (userCase: CaseWithId): SectionStatus => {
   const exists = userCase.otherParentExists;
-  
+
   if (exists === YesOrNo.NO) {
     return SectionStatus.COMPLETED;
   } else if (exists === YesOrNo.YES) {
@@ -181,6 +181,6 @@ export const getOtherParentStatus = (userCase: CaseWithId): SectionStatus => {
         : SectionStatus.IN_PROGRESS;
     }
   }
-  
+
   return SectionStatus.NOT_STARTED;
 };

@@ -6,6 +6,7 @@ import {
   getChildrenBirthCertificateStatus,
   getChildrenPlacementOrderStatus,
   getContactDetailsStatus,
+  getOtherParentStatus,
   getPersonalDetailsStatus,
   isApplyingWithComplete,
 } from './utils';
@@ -319,6 +320,72 @@ describe('utils', () => {
       },
     ])('should return correct status %o', async ({ data, expected }) => {
       expect(getAdoptionCertificateDetailsStatus({ ...userCase, ...data })).toBe(expected);
+    });
+  });
+
+  describe('getOherParentStatus', () => {
+    test.each([
+      { data: {}, userType: 'otherParent', expected: 'NOT_STARTED' },
+      { data: { otherParentExists: YesOrNo.NO }, userType: 'otherParent', expected: 'COMPLETED' },
+      {
+        data: {
+          otherParentExists: YesOrNo.YES,
+          otherParentFirstNames: 'MOCKNAME',
+          otherParentLastNames: 'MOCKNAME',
+          otherParentAddressKnown: YesOrNo.YES,
+          otherParentAddress1: 'MOCK_ADDRESS_1',
+          otherParentAddress2: 'MOCK_ADDRESS_2',
+          otherParentAddressTown: ' MOCK_TOWN',
+          otherParentAddressPostcode: 'MOCK_POSTCODE',
+        },
+        userType: 'otherParent',
+        expected: 'COMPLETED',
+      },
+      {
+        data: {
+          otherParentExists: YesOrNo.YES,
+          otherParentFirstNames: 'MOCKNAME',
+          otherParentLastNames: 'MOCKNAME',
+        },
+        userType: 'otherParent',
+        expected: 'IN_PROGRESS',
+      },
+      {
+        data: {
+          otherParentExists: YesOrNo.YES,
+          otherParentFirstNames: 'MOCKNAME',
+          otherParentLastNames: 'MOCKNAME',
+          otherParentAddressKnown: YesOrNo.NO,
+        },
+        userType: 'otherParent',
+        expected: 'COMPLETED',
+      },
+      {
+        data: {
+          otherParentExists: YesOrNo.YES,
+          otherParentFirstNames: 'MOCKNAME',
+          otherParentLastNames: 'MOCKNAME',
+          otherParentAddressKnown: YesOrNo.YES,
+          otherParentAddress1: 'MOCK_ADDRESS_1',
+        },
+        userType: 'otherParent',
+        expected: 'IN_PROGRESS',
+      },
+      {
+        data: {
+          otherParentExists: YesOrNo.YES,
+          otherParentFirstNames: 'MOCKNAME',
+          otherParentLastNames: 'MOCKNAME',
+          otherParentAddressKnown: YesOrNo.YES,
+          otherParentAddress1: 'MOCK_ADDRESS_1',
+          otherParentAddressTown: ' MOCK_TOWN',
+          otherParentAddressPostcode: 'MOCK_POSTCODE',
+        },
+        userType: 'otherParent',
+        expected: 'COMPLETED',
+      },
+    ])('should return correct status %o', async ({ data, expected }) => {
+      expect(getOtherParentStatus({ ...userCase, ...data })).toBe(expected);
     });
   });
 });
