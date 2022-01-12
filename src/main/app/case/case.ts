@@ -19,6 +19,7 @@ import {
   Payment,
   PlacementOrder,
   State,
+  YesNoNotsure,
   YesOrNo,
 } from './definition';
 
@@ -98,9 +99,22 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   addAnotherPlacementOrder: 'addAnotherPlacementOrder',
   placementOrders: 'placementOrders',
   selectedPlacementOrderId: 'selectedPlacementOrderId',
-  //placementOrderNumber: 'placementOrderNumber',
-  //placementOrderCourt: 'placementOrderCourt',
-  //placementOrderDate: 'placementOrderDate',
+
+  birthMotherFirstNames: 'birthMotherFirstName',
+  birthMotherLastNames: 'birthMotherLastName',
+  birthMotherStillAlive: 'birthMotherStillAlive',
+  birthMotherNotAliveReason: 'birthMotherNotAliveReason',
+  birthMotherNationality: 'birthMotherNationality',
+  birthMotherAdditionalNationalities: 'birthMotherOtherNationalities',
+  birthMotherOccupation: 'birthMotherOccupation',
+  birthMotherAddressKnown: 'birthMotherAddressKnown',
+  birthMotherAddress1: 'birthMotherAddress1',
+  birthMotherAddress2: 'birthMotherAddress2',
+  birthMotherAddress3: 'birthMotherAddress3',
+  birthMotherAddressTown: 'birthMotherAddressTown',
+  birthMotherAddressCounty: 'birthMotherAddressCounty',
+  birthMotherAddressPostcode: 'birthMotherAddressPostCode',
+  birthMotherAddressCountry: 'birthMotherAddressCountry',
 
   applicant2MiddleNames: 'applicant2MiddleName',
   applicant1FullNameOnCertificate: 'marriageApplicant1Name',
@@ -212,6 +226,22 @@ export interface Case {
   addAnotherPlacementOrder?: YesOrNo;
   placementOrders?: PlacementOrder[];
   selectedPlacementOrderId?: string;
+
+  birthMotherFirstNames?: string;
+  birthMotherLastNames?: string;
+  birthMotherStillAlive?: YesNoNotsure;
+  birthMotherNotAliveReason?: string;
+  birthMotherNationality?: string[];
+  birthMotherAdditionalNationalities?: string[];
+  birthMotherOccupation?: string;
+  birthMotherAddressKnown?: YesOrNo;
+  birthMotherAddress1?: string;
+  birthMotherAddress2?: string;
+  birthMotherAddress3?: string;
+  birthMotherAddressTown?: string;
+  birthMotherAddressCounty?: string;
+  birthMotherAddressPostcode?: string;
+  birthMotherAddressCountry?: string;
 
   addButton?: string;
   addAnotherNationality?: string;
@@ -347,4 +377,5 @@ export enum FieldPrefix {
   APPLICANT1 = 'applicant1',
   APPLICANT2 = 'applicant2',
   CHILDREN = 'children',
+  BIRTH_MOTHER = 'birthMother',
 }

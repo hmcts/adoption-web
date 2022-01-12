@@ -1,82 +1,78 @@
-/* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable jest/expect-expect */
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
-import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
+import { form as fullNameForm } from '../../common/components/full-name';
 
 import { generateContent } from './content';
 
 jest.mock('../../../app/form/validation');
 
-const CY = 'cy';
-const EN = 'en';
 const enContent = {
   section: 'Primary applicant',
-  label: "What's your full name?",
-  hint: 'Your full name',
+  title: "What's your full name?",
   errors: {
-    applicant1FullName: {
-      required: 'Enter your full name',
+    applicant1FirstNames: {
+      required: 'Enter your first names',
+    },
+    applicant1LastNames: {
+      required: 'Enter your last names',
     },
   },
 };
 const cyContent = {
   section: 'Primary applicant (in Welsh)',
-  label: "What's your full name? (in Welsh)",
-  hint: 'Your full name (in Welsh)',
+  title: "What's your full name? (in Welsh)",
   errors: {
-    applicant1FullName: {
-      required: 'Enter your full name (in Welsh)',
+    applicant1FirstNames: {
+      required: 'Enter your first names (in Welsh)',
+    },
+    applicant1LastNames: {
+      required: 'Enter your last names (in Welsh)',
     },
   },
 };
 
-const langAssertions = (language, content) => {
-  const generatedContent = generateContent({ language, userCase: {} } as CommonContent);
-  const { section, title, applicant1FullName, errors } = content;
-
-  expect(generatedContent.section).toEqual(section);
-  expect(generatedContent.title).toEqual(title);
-  expect(generatedContent.applicant1FullName).toEqual(applicant1FullName);
-  expect(generatedContent.errors).toEqual(errors);
-};
-
-const commonContent = { language: EN } as CommonContent;
-
-describe('applicant1 > full-name content', () => {
-  it('should return the correct content for language = en', () => {
-    langAssertions(EN, enContent);
+/* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
+describe('primary applicant > full-name', () => {
+  const fullNameFormFields = fullNameForm.fields as FormFields;
+  const commonContent = { language: 'en', userCase: {} } as CommonContent;
+  let generatedContent;
+  let form;
+  let fields;
+  beforeEach(() => {
+    generatedContent = generateContent(commonContent);
+    form = generatedContent.form as FormContent;
+    fields = form.fields as FormFields;
   });
 
-  it('should return the correct content for language = cy', () => {
-    langAssertions(CY, cyContent);
+  test('should return correct english content', () => {
+    expect(generatedContent.section).toEqual(enContent.section);
+    expect(generatedContent.title).toEqual(enContent.title);
+    expect(generatedContent.errors).toEqual(enContent.errors);
   });
 
-  it('should have an full name text input field', () => {
-    const generatedContent = generateContent(commonContent);
-    const form = generatedContent.form as FormContent;
-    const fields = form.fields as FormFields;
-    const fullName = fields.applicant1FullName;
-
-    expect(fullName.type).toBe('input');
-    expect((fullName.label as Function)(generateContent(commonContent))).toBe(enContent.label);
-    expect((fullName.hint as Function)(generateContent(commonContent))).toBe(enContent.hint);
-    expect((fullName as FormOptions).labelSize).toBe('l');
-    expect(fullName.classes).toBe('govuk-input--width-20');
-
-    (fullName.validator as Function)('MockName');
-    expect(isFieldFilledIn).toHaveBeenCalledWith('MockName');
+  test('should return correct welsh content', () => {
+    generatedContent = generateContent({ ...commonContent, language: 'cy' });
+    expect(generatedContent.section).toEqual(cyContent.section);
+    expect(generatedContent.title).toEqual(cyContent.title);
+    expect(generatedContent.errors).toEqual(cyContent.errors);
   });
 
-  it('should contain submit button', () => {
-    const generatedContent = generateContent(commonContent);
-    const form = generatedContent.form as FormContent;
-    expect((form.submit.text as Function)(generatePageContent({ language: EN }))).toBe('Save and continue');
+  test('should contain firstNames field', () => {
+    const firstNamesField = fields.applicant1FirstNames as FormOptions;
+    expect(firstNamesField).toEqual(fullNameFormFields.firstNames);
   });
 
-  it('should contain saveAsDraft button', () => {
-    const generatedContent = generateContent(commonContent);
-    const form = generatedContent.form as FormContent;
-    expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: EN }))).toBe('Save as draft');
+  test('should contain lastNames field', () => {
+    const lastNamesField = fields.applicant1LastNames as FormOptions;
+    expect(lastNamesField).toEqual(fullNameFormFields.lastNames);
+  });
+
+  test('should contain submit button', () => {
+    expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
+  });
+
+  test('should contain saveAsDraft button', () => {
+    expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save as draft');
   });
 });
+/* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

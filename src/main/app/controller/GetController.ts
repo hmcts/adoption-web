@@ -1,4 +1,3 @@
-import { Case, CaseWithId } from 'app/case/case';
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 import Negotiator from 'negotiator';
@@ -7,6 +6,7 @@ import { Fee } from '../../app/fee/fee-lookup-api';
 import { LanguageToggle } from '../../modules/i18n';
 import { getNextIncompleteStepUrl } from '../../steps';
 import { CommonContent, Language, generatePageContent } from '../../steps/common/common.content';
+import { Case, CaseWithId } from '../case/case';
 import { CITIZEN_UPDATE, DivorceOrDissolution, State } from '../case/definition';
 
 import { AppRequest } from './AppRequest';

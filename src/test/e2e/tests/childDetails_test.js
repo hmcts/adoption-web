@@ -33,3 +33,11 @@ Scenario(
     await taskListPage.verifyAdoptionCertificateDetailStatus();
   }
 );
+
+Scenario('Child birth mother details event', async ({ loginPage, childBirthMothersDetailsPage, taskListPage }) => {
+  await loginPage.signInWithCitizenUser(config.citizenUserOne);
+  await taskListPage.goToTaskListPage();
+  await taskListPage.selectChildBirthMotherCertificateDetails();
+  await childBirthMothersDetailsPage.childBirthMothersDetailsSection();
+  await taskListPage.verifyChildBirthMotherCertificateDetailsStatus();
+});

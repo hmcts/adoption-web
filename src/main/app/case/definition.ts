@@ -277,6 +277,7 @@ export const enum Nationality {
   NOT_SURE = 'Not sure',
 }
 
+
 export const enum ContactDetails {
   EMAIL = 'email',
   PHONE = 'phone',
@@ -365,7 +366,58 @@ export interface CaseData {
   addAnotherPlacementOrder: YesOrNo;
   selectedPlacementOrderId: string;
   hyphenatedCaseRef: string;
-  //placementOrderId: string;
+  
+  birthMotherFirstName: string;
+  birthMotherLastName: string;
+  birthMotherStillAlive: string;
+  birthMotherNotAliveReason: string;
+  birthMotherNationality: Nationality[];
+  birthMotherOccupation: string;
+  birthMotherAddressKnown: YesOrNo;
+  birthMotherAddress1: string;
+  birthMotherAddress2: string;
+  birthMotherAddress3: string;
+  birthMotherAddressTown: string;
+  birthMotherAddressCounty: string;
+  birthMotherAddressPostCode: string;
+  birthMotherAddressCountry: string;
+  birthMotherOtherNationalities: ListValue<OtherName>[];
+  birthMotherNameOnCertificate: string;
+
+  birthFatherFirstName: string;
+  birthFatherLastName: string;
+  birthFatherStillAlive: string;
+  birthFatherNotAliveReason: string;
+  birthFatherNationality: Nationality[];
+  birthFatherOccupation: string;
+  birthFatherAddressKnown: YesOrNo;
+  birthFatherAddress1: string;
+  birthFatherAddress2: string;
+  birthFatherAddress3: string;
+  birthFatherAddressTown: string;
+  birthFatherAddressCounty: string;
+  birthFatherAddressPostCode: string;
+  birthFatherAddressCountry: string;
+  birthFatherOtherNationalities: ListValue<OtherName>[];
+  birthFatherNameOnCertificate: string;
+
+  otherParentFirstName: string;
+  otherParentLastName: string;
+  otherParentStillAlive: string;
+  otherParentNotAliveReason: string;
+  otherParentNationality: Nationality[];
+  otherParentOccupation: string;
+  otherParentAddressKnown: YesOrNo;
+  otherParentAddress1: string;
+  otherParentAddress2: string;
+  otherParentAddress3: string;
+  otherParentAddressTown: string;
+  otherParentAddressCounty: string;
+  otherParentAddressPostCode: string;
+  otherParentAddressCountry: string;
+  otherParentOtherNationalities: ListValue<OtherName>[];
+  otherParentNameOnCertificate: string;
+
 
   applicationType: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
@@ -644,6 +696,25 @@ export interface Children {
   FirstNameAfterAdoption: string;
   LastNameAfterAdoption: string;
   SexAtBirth: Gender;
+}
+
+export interface Parent {
+  FirstName: string;
+  LastName: string;
+  StillAlive: string;
+  NotAliveReason: string;
+  Nationality: Nationality[];
+  Occupation: string;
+  AddressKnown: YesOrNo;
+  Address1: string;
+  Address2: string;
+  Address3: string;
+  AddressTown: string;
+  AddressCounty: string;
+  AddressPostCode: string;
+  AddressCountry: string;
+  OtherNationalities: ListValue<OtherName>[];
+  NameOnCertificate: string;
 }
 
 export interface CaseInvite {
@@ -992,6 +1063,12 @@ export const enum FieldType {
 export const enum YesOrNo {
   YES = 'Yes',
   NO = 'No',
+}
+
+export const enum YesNoNotsure {
+  YES = 'Yes',
+  NO = 'No',
+  NOT_SURE = 'NotSure',
 }
 
 export const enum SectionStatus {

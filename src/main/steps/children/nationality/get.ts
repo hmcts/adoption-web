@@ -1,49 +1,12 @@
 import autobind from 'autobind-decorator';
-import { Response } from 'express';
 
-import { AppRequest } from '../../../app/controller/AppRequest';
-import { GetController } from '../../../app/controller/GetController';
+import { FieldPrefix } from '../../../app/case/case';
+import { TranslationFn } from '../../../app/controller/GetController';
+import NationalityGetControllerBase from '../../../app/nationality/NationalityGetController';
 
 @autobind
-export default class NationalityGetController extends GetController {
-  public async get(req: AppRequest, res: Response): Promise<void> {
-    const countries = req.session.userCase.childrenAdditionalNationalities;
-    const remove = req.query.remove;
-
-    let removed = false;
-    if (remove && countries?.length) {
-      const index = countries.indexOf(remove as string);
-
-      if (index !== -1) {
-        countries.splice(index, 1);
-      }
-      ////
-      req.session.userCase.childrenAdditionalNationalities = countries;
-      try {
-        req.session.userCase = await this.save(
-          req,
-          { childrenAdditionalNationalities: countries },
-          this.getEventName(req)
-        );
-      } catch (err) {
-        req.locals.logger.error('Error saving', err);
-        // req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
-      }
-      ////
-      delete req.query.remove;
-      req.url = req.url.substring(0, req.url.indexOf('?'));
-      removed = true;
-    }
-
-    req.session.save(err => {
-      if (err) {
-        throw err;
-      }
-      if (removed) {
-        res.redirect(req.url);
-      } else {
-        super.get(req, res);
-      }
-    });
+export default class NationalityGetController extends NationalityGetControllerBase {
+  constructor(protected readonly view: string, protected readonly content: TranslationFn) {
+    super(view, content, FieldPrefix.CHILDREN);
   }
 }

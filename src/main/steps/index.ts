@@ -7,9 +7,10 @@ import { Form, FormContent } from '../app/form/Form';
 
 import { Step, applicant1Sequence } from './applicant1Sequence';
 import { applicant2Sequence } from './applicant2/applicant2Sequence';
+import { birthMotherSequence } from './birth-mother/birthMotherSequence';
 import { childrenSequence } from './children/childrenSequence';
 import { Step as EligibilityStep, eligibilitySequence } from './eligibilitySequence';
-import { APPLICANT_1, APPLICANT_2, CHECK_ANSWERS_URL, CHILDREN } from './urls';
+import { APPLICANT_1, APPLICANT_2, BIRTH_MOTHER, CHECK_ANSWERS_URL, CHILDREN, TASK_LIST_URL } from './urls';
 
 const stepForms: Record<string, Form> = {};
 
@@ -67,8 +68,14 @@ export const getNextIncompleteStepUrl = (req: AppRequest): string => {
 };
 
 export const getNextStepUrl = (req: AppRequest, data: Partial<Case>): string => {
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
+  if ((req.body as any).saveAsDraft) {
+    return TASK_LIST_URL;
+  }
   const { path, queryString } = getPathAndQueryString(req);
-  const nextStep = [...applicant1Sequence, ...applicant2Sequence, ...childrenSequence].find(s => s.url === path);
+  const nextStep = [...applicant1Sequence, ...applicant2Sequence, ...childrenSequence, ...birthMotherSequence].find(
+    s => s.url === path
+  );
   const url = nextStep ? nextStep.getNextStep(data) : CHECK_ANSWERS_URL;
 
   return `${url}${queryString}`;
@@ -124,9 +131,11 @@ export const stepsWithContentEligibility = getStepsWithContent(eligibilitySequen
 export const stepsWithContentApplicant1 = getStepsWithContent(applicant1Sequence, APPLICANT_1);
 export const stepsWithContentApplicant2 = getStepsWithContent(applicant2Sequence, APPLICANT_2);
 export const stepsWithContentChildren = getStepsWithContent(childrenSequence, CHILDREN);
+export const stepsWithContentBirthMother = getStepsWithContent(birthMotherSequence, BIRTH_MOTHER);
 export const stepsWithContent = [
   ...stepsWithContentEligibility,
   ...stepsWithContentApplicant1,
   ...stepsWithContentApplicant2,
   ...stepsWithContentChildren,
+  ...stepsWithContentBirthMother,
 ];

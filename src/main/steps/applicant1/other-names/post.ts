@@ -1,4 +1,3 @@
-//import { YesOrNo } from 'app/case/definition';
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
