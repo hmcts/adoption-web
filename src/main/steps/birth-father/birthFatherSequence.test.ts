@@ -1,4 +1,4 @@
-import { YesNoUnsure, YesOrNo } from '../../app/case/definition';
+import { YesNoNotsure, YesOrNo } from '../../app/case/definition';
 import {
   BIRTH_FATHER_ADDRESS_INTERNATIONAL,
   BIRTH_FATHER_ADDRESS_KNOWN,
@@ -55,9 +55,9 @@ describe('birth father sequence', () => {
 
       expect(url).toBe(BIRTH_FATHER_ALIVE);
       expect(showInSection).toBe(aboutChildren);
-      expect(getNextStep({ birthFatherStillAlive: YesNoUnsure.YES })).toBe(BIRTH_FATHER_NATIONALITY);
-      expect(getNextStep({ birthFatherStillAlive: YesNoUnsure.NO })).toBe(TASK_LIST_URL);
-      expect(getNextStep({ birthFatherStillAlive: YesNoUnsure.UNSURE })).toBe(TASK_LIST_URL);
+      expect(getNextStep({ birthFatherStillAlive: YesNoNotsure.YES })).toBe(BIRTH_FATHER_NATIONALITY);
+      expect(getNextStep({ birthFatherStillAlive: YesNoNotsure.NO })).toBe(TASK_LIST_URL);
+      expect(getNextStep({ birthFatherStillAlive: YesNoNotsure.NOT_SURE })).toBe(TASK_LIST_URL);
     });
 
     it('should be correct for nationality', () => {

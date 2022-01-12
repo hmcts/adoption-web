@@ -15,6 +15,9 @@ const CY = 'cy';
 const enContent = {
   section: 'Section',
   title: 'Title',
+  yes: 'Yes',
+  no: 'No',
+  notSure: 'Not sure',
   continue: 'Save and continue',
   saveAsDraft: 'Save as draft',
 };
@@ -22,15 +25,18 @@ const enContent = {
 const cyContent = {
   section: 'Section (in Welsh)',
   title: 'Title (in Welsh)',
+  yes: 'Yes (in Welsh)',
+  no: 'No (in Welsh)',
+  notSure: 'Not sure (in Welsh)',
   continue: 'Save and continue (in Welsh)',
   saveAsDraft: 'Save as draft (in Welsh)',
 };
 
-const values = {
-  yes: 'Yes',
-  no: 'No',
-  unsure: 'Not sure',
-};
+const values = [
+  { key: 'yes', value: 'Yes' },
+  { key: 'no', value: 'No' },
+  { key: 'notSure', value: 'NotSure', input: { fieldName: 'birthFatherUnsureAliveReason' } },
+];
 
 const { generateForm, generateContent } = new Radios(enContent, cyContent, fieldName, values);
 const generatedContent = generateContent({ language: EN } as CommonContent);
@@ -56,7 +62,7 @@ describe('radios class', () => {
     expect((no.label as Function)(generatedContent)).toBe('No');
     expect(no.value).toBe('No');
     expect((unsure.label as Function)(generatedContent)).toBe('Not sure');
-    expect(unsure.value).toBe('Not sure');
+    expect(unsure.value).toBe('NotSure');
 
     (field.validator as Function)(fieldInputValue);
     expect(isFieldFilledIn).toHaveBeenCalledWith(fieldInputValue);
