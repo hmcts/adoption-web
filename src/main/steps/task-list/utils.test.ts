@@ -380,8 +380,6 @@ describe('utils', () => {
           birthFatherFirstNames: 'Harry',
           birthFatherLastNames: 'Cornell',
           birthFatherStillAlive: 'Yes',
-          birthFatherNationality: ['British', 'Irish', 'Other'],
-          birthFatherAdditionalNationalities: ['Japan'],
         },
         expected: IN_PROGRESS,
       },

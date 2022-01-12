@@ -171,14 +171,12 @@ export const getBirthFatherDetailsStatus = (userCase: CaseWithId): SectionStatus
   return nameIsOnCertificate
     ? areNamesComplete
       ? isFatherAlive
-        ? nationalityComplete
-          ? birthFatherOccupation
-            ? lastAddressKnown
-              ? isAddressComplete
-                ? SectionStatus.COMPLETED
-                : SectionStatus.IN_PROGRESS
-              : SectionStatus.COMPLETED
-            : SectionStatus.IN_PROGRESS
+        ? nationalityComplete && birthFatherOccupation
+          ? lastAddressKnown
+            ? isAddressComplete
+              ? SectionStatus.COMPLETED
+              : SectionStatus.IN_PROGRESS
+            : SectionStatus.COMPLETED
           : SectionStatus.IN_PROGRESS
         : unsureAliveComplete || notAlive
         ? SectionStatus.COMPLETED
