@@ -165,7 +165,7 @@ export const getBirthFatherDetailsStatus = (userCase: CaseWithId): SectionStatus
         true
     : // Empty array, false
       false;
-  const lastAddressKnown = birthFatherAddressKnown === 'Yes';
+  const lastAddressKnown = birthFatherAddressKnown !== 'No';
   const isAddressComplete = addressComplete(userCase, FieldPrefix.BIRTH_FATHER);
 
   return nameIsOnCertificate
