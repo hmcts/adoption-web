@@ -1,4 +1,4 @@
-import { Radios } from '../../../steps/common/components/radios';
+import { Radios } from '../../common/components/radios';
 import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const enContent = {

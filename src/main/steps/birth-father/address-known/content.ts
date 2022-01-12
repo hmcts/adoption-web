@@ -1,22 +1,21 @@
-import { Radios } from '../../../steps/common/components/radios';
+import { Radios } from '../../common/components/radios';
 import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const enContent = {
   section: SECTION,
-  title: "Is the child's birth father still alive?",
+  title: 'Do you have the birth father’s last known address?',
 };
 
 const cyContent = {
   section: SECTION_IN_WELSH,
-  title: "Is the child's birth father still alive? (in Welsh)",
+  title: 'Do you have the birth father’s last known address? (in Welsh)',
 };
 
-const fieldName = 'birthFatherStillAlive';
+const fieldName = 'birthFatherAddressKnown';
 
 const values = {
   yes: 'Yes',
   no: 'No',
-  unsure: 'Not sure',
 };
 
 export const { form, generateContent } = new Radios(enContent, cyContent, fieldName, values);

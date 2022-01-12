@@ -14,7 +14,7 @@ import {
   TASK_LIST_URL,
 } from '../urls';
 
-import { birthFatherSequence } from './fatherSequence';
+import { birthFatherSequence } from './birthFatherSequence';
 
 const [
   isOnCertificate,

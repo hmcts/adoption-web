@@ -7,7 +7,7 @@ import { Form, FormContent } from '../app/form/Form';
 
 import { Step, applicant1Sequence } from './applicant1Sequence';
 import { applicant2Sequence } from './applicant2/applicant2Sequence';
-import { birthFatherSequence } from './birth-father/fatherSequence';
+import { birthFatherSequence } from './birth-father/birthFatherSequence';
 import { birthMotherSequence } from './birth-mother/birthMotherSequence';
 import { childrenSequence } from './children/childrenSequence';
 import { Step as EligibilityStep, eligibilitySequence } from './eligibilitySequence';

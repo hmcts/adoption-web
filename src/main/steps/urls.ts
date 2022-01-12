@@ -102,10 +102,10 @@ export const INELIGIBLE_TO_ADOPT: PageLink = `${ELIGIBILITY_URL}/cannot-apply`;
 export const FEE_LOOKUP_URL: PageLink = '/fee-lookup';
 
 export const BIRTH_FATHER = '/birth-father';
-export const BIRTH_FATHER_IS_NAME_ON_CERTIFICATE: PageLink = `${BIRTH_FATHER}/is-name-on-certificate`;
+export const BIRTH_FATHER_IS_NAME_ON_CERTIFICATE: PageLink = `${BIRTH_FATHER}/name-on-certificate`;
 export const BIRTH_FATHER_FULL_NAME: PageLink = `${BIRTH_FATHER}/full-name`;
-export const BIRTH_FATHER_IS_ADDRESS_KNOWN: PageLink = `${BIRTH_FATHER}/is-address-known`;
-export const BIRTH_FATHER_IS_ALIVE: PageLink = `${BIRTH_FATHER}/is-alive`;
+export const BIRTH_FATHER_IS_ADDRESS_KNOWN: PageLink = `${BIRTH_FATHER}/address-known`;
+export const BIRTH_FATHER_IS_ALIVE: PageLink = `${BIRTH_FATHER}/alive`;
 export const BIRTH_FATHER_ADDRESS_LOOKUP: PageLink = `${BIRTH_FATHER}/address/lookup`;
 export const BIRTH_FATHER_ADDRESS_SELECT: PageLink = `${BIRTH_FATHER}/address/select`;
 export const BIRTH_FATHER_ADDRESS_MANUAL: PageLink = `${BIRTH_FATHER}/address/manual`;
