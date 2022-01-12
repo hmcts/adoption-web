@@ -163,7 +163,7 @@ export interface Case {
   birthFatherStillAlive?: string;
   birthFatherUnsureAliveReason?: string;
   birthFatherNationality?: string[];
-  birthFatherOtherNationalities?: string[];
+  birthFatherAdditionalNationalities?: string[];
   birthFatherOccupation?: string;
   birthFatherAddressKnown?: YesOrNo;
   birthFatherAddress1?: string;

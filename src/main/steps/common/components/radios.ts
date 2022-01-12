@@ -1,5 +1,5 @@
 import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent, FormInput } from '../../../app/form/Form';
+import { FormContent, FormField, FormInput } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent } from '../common.content';
 
@@ -9,14 +9,14 @@ export class Radios {
   enContent: Record<string, unknown>;
   cyContent: Record<string, unknown>;
   fieldName: string;
-  values: Record<string, string>;
+  values: Record<string, unknown>[];
   form: FormContent;
 
   constructor(
     enContent: Record<string, unknown>,
     cyContent: Record<string, unknown>,
     fieldName: string,
-    values: Record<string, string>
+    values: Record<string, unknown>[]
   ) {
     this.enContent = enContent;
     this.cyContent = cyContent;
@@ -31,22 +31,12 @@ export class Radios {
       yes: 'Yes',
       no: 'No',
       unsure: 'Not sure',
-      errors: {
-        [this.fieldName]: {
-          required: 'Please answer the question',
-        },
-      },
     }),
     cy: (): Record<string, unknown> => ({
       ...this.cyContent,
       yes: 'Yes (in Welsh)',
       no: 'No (in Welsh)',
       unsure: 'Not sure (in Welsh)',
-      errors: {
-        [this.fieldName]: {
-          required: 'Please answer the question (in Welsh)',
-        },
-      },
     }),
   };
 
@@ -54,16 +44,27 @@ export class Radios {
     fields: {
       [this.fieldName]: {
         type: 'radios',
-        values: Object.entries(this.values).map(
-          ([key, value]): FormInput => ({
-            label: l => l[key],
-            value,
+        label: l => l.label,
+        values: this.values.map(
+          ({ key, value, input }): FormInput => ({
+            label: l => l[key as string],
+            value: value as string,
+            subFields: input ? this.renderInput(key as string, input as Record<string, string>) : undefined,
           })
         ),
         validator: isFieldFilledIn,
       },
     },
     ...defaultButtons,
+  });
+
+  renderInput = (key: string, input: Record<string, string>): Record<string, FormField> => ({
+    [(input as Record<string, string>).fieldName]: {
+      type: 'input',
+      label: l => l[`${key}Input`],
+      labelSize: null,
+      validator: isFieldFilledIn,
+    },
   });
 
   generateContent: TranslationFn = (content: CommonContent) => ({

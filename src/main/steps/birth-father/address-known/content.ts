@@ -13,9 +13,9 @@ const cyContent = {
 
 const fieldName = 'birthFatherAddressKnown';
 
-const values = {
-  yes: 'Yes',
-  no: 'No',
-};
+const values = [
+  { key: 'yes', value: 'Yes' },
+  { key: 'no', value: 'No' },
+];
 
 export const { form, generateContent } = new Radios(enContent, cyContent, fieldName, values);
