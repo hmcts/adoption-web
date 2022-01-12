@@ -10,7 +10,7 @@ import {
   BIRTH_FATHER_NAME_ON_CERTIFICATE,
   BIRTH_FATHER_NATIONALITY,
   BIRTH_FATHER_OCCUPATION,
-  OTHER_PARENT_ANOTHER_RESPONSIBLE,
+  OTHER_PARENT_EXISTS,
   TASK_LIST_URL,
 } from '../urls';
 
@@ -39,7 +39,7 @@ describe('birth father sequence', () => {
       expect(url).toBe(BIRTH_FATHER_NAME_ON_CERTIFICATE);
       expect(showInSection).toBe(aboutChildren);
       expect(getNextStep({ birthFatherNameOnCertificate: YesOrNo.YES })).toBe(BIRTH_FATHER_FULL_NAME);
-      expect(getNextStep({ birthFatherNameOnCertificate: YesOrNo.NO })).toBe(OTHER_PARENT_ANOTHER_RESPONSIBLE);
+      expect(getNextStep({ birthFatherNameOnCertificate: YesOrNo.NO })).toBe(OTHER_PARENT_EXISTS);
     });
 
     it('should be correct for fullName', () => {

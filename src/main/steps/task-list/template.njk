@@ -197,8 +197,16 @@
             </li>
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a href="#" class="govuk-link" aria-describedby="eligibility-completed">
+                    <a id = "other-parent-status" href="{{urls.otherParentExists}}" class="govuk-link" aria-describedby="eligibility-completed">
                         {{section3link6}}
+                    </a>
+                </span>
+                <p class="govuk-body">{{ status.otherParent | safe }}</p>
+            </li>
+            <li class="app-task-list__item">
+                <span class="app-task-list__task-name">
+                    <a href="#" class="govuk-link" aria-describedby="eligibility-completed">
+                        {{section3link7}}
                     </a>
                 </span>
                 {% if data['court-orders'] %}
@@ -210,11 +218,13 @@
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
                     <a href="#" class="govuk-link" aria-describedby="eligibility-completed">
-                        {{section3link7}}
+                        {{section3link8}}
                     </a>
                 </span>
                 {% if data['siblings'] %}
                     <strong class="govuk-tag  app-task-list__tag" id="eligibility-completed">Completed</strong>
+                {% else %}
+                    <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
                 {% endif %}
             </li>
         </ul>

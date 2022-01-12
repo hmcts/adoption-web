@@ -11,7 +11,16 @@ import { birthFatherSequence } from './birth-father/birthFatherSequence';
 import { birthMotherSequence } from './birth-mother/birthMotherSequence';
 import { childrenSequence } from './children/childrenSequence';
 import { Step as EligibilityStep, eligibilitySequence } from './eligibilitySequence';
-import { APPLICANT_1, APPLICANT_2, BIRTH_FATHER, BIRTH_MOTHER, CHECK_ANSWERS_URL, CHILDREN } from './urls';
+import { otherParentSequence } from './other-parent/otherParentSequence';
+import {
+  APPLICANT_1,
+  APPLICANT_2,
+  BIRTH_FATHER,
+  BIRTH_MOTHER,
+  CHECK_ANSWERS_URL,
+  CHILDREN,
+  OTHER_PARENT,
+} from './urls';
 
 const stepForms: Record<string, Form> = {};
 
@@ -76,6 +85,7 @@ export const getNextStepUrl = (req: AppRequest, data: Partial<Case>): string => 
     ...childrenSequence,
     ...birthMotherSequence,
     ...birthFatherSequence,
+    ...otherParentSequence,
   ].find(s => s.url === path);
   const url = nextStep ? nextStep.getNextStep(data) : CHECK_ANSWERS_URL;
 
@@ -134,6 +144,7 @@ export const stepsWithContentApplicant2 = getStepsWithContent(applicant2Sequence
 export const stepsWithContentChildren = getStepsWithContent(childrenSequence, CHILDREN);
 export const stepsWithContentBirthFather = getStepsWithContent(birthFatherSequence, BIRTH_FATHER);
 export const stepsWithContentBirthMother = getStepsWithContent(birthMotherSequence, BIRTH_MOTHER);
+export const stepsWithContentOtherParent = getStepsWithContent(otherParentSequence, OTHER_PARENT);
 export const stepsWithContent = [
   ...stepsWithContentEligibility,
   ...stepsWithContentApplicant1,
@@ -141,4 +152,5 @@ export const stepsWithContent = [
   ...stepsWithContentChildren,
   ...stepsWithContentBirthFather,
   ...stepsWithContentBirthMother,
+  ...stepsWithContentOtherParent,
 ];

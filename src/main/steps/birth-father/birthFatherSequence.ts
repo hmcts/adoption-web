@@ -11,7 +11,7 @@ import {
   BIRTH_FATHER_NAME_ON_CERTIFICATE,
   BIRTH_FATHER_NATIONALITY,
   BIRTH_FATHER_OCCUPATION,
-  OTHER_PARENT_ANOTHER_RESPONSIBLE,
+  OTHER_PARENT_EXISTS,
   PageLink,
   TASK_LIST_URL,
 } from '../urls';
@@ -36,7 +36,7 @@ export const birthFatherSequence: Step[] = [
       data.birthFatherNameOnCertificate === YesOrNo.YES
         ? BIRTH_FATHER_FULL_NAME
         : // TODO update below URL when other parents changes in master
-          OTHER_PARENT_ANOTHER_RESPONSIBLE,
+          OTHER_PARENT_EXISTS,
   },
   {
     url: BIRTH_FATHER_FULL_NAME,
