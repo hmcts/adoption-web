@@ -133,7 +133,7 @@ const en = content => {
         getChildrenPlacementOrderStatus(content.userCase) === SectionStatus.NOT_STARTED
           ? urls.CHILDREN_PLACEMENT_ORDER_NUMBER
           : urls.CHILDREN_PLACEMENT_ORDER_SUMMARY,
-      birthFather: urls.BIRTH_FATHER_IS_NAME_ON_CERTIFICATE,
+      birthFather: urls.BIRTH_FATHER_NAME_ON_CERTIFICATE,
       birthMotherDetails: urls.BIRTH_MOTHER_FULL_NAME,
     },
   };
@@ -248,7 +248,7 @@ const cy = content => {
         getChildrenPlacementOrderStatus(content.userCase) === SectionStatus.NOT_STARTED
           ? urls.CHILDREN_PLACEMENT_ORDER_NUMBER
           : urls.CHILDREN_PLACEMENT_ORDER_SUMMARY,
-      birthFather: urls.BIRTH_FATHER_IS_NAME_ON_CERTIFICATE,
+      birthFather: urls.BIRTH_FATHER_NAME_ON_CERTIFICATE,
       birthMotherDetails: urls.BIRTH_MOTHER_FULL_NAME,
     },
   };

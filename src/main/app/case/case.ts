@@ -166,7 +166,6 @@ export interface Case {
   birthFatherOtherNationalities?: string[];
   birthFatherOccupation?: string;
   birthFatherAddressKnown?: YesOrNo;
-
   birthFatherAddress1?: string;
   birthFatherAddress2?: string;
   birthFatherAddress3?: string;

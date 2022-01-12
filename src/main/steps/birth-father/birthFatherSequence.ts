@@ -2,16 +2,16 @@ import { CaseWithId } from '../../app/case/case';
 import { YesOrNo } from '../../app/case/definition';
 import {
   BIRTH_FATHER_ADDRESS_INTERNATIONAL,
+  BIRTH_FATHER_ADDRESS_KNOWN,
   BIRTH_FATHER_ADDRESS_LOOKUP,
   BIRTH_FATHER_ADDRESS_MANUAL,
   BIRTH_FATHER_ADDRESS_SELECT,
+  BIRTH_FATHER_ALIVE,
   BIRTH_FATHER_FULL_NAME,
-  BIRTH_FATHER_IS_ADDRESS_KNOWN,
-  BIRTH_FATHER_IS_ALIVE,
-  BIRTH_FATHER_IS_NAME_ON_CERTIFICATE,
+  BIRTH_FATHER_NAME_ON_CERTIFICATE,
   BIRTH_FATHER_NATIONALITY,
   BIRTH_FATHER_OCCUPATION,
-  OTHER_PARENT_IS_ANOTHER_RESPONSIBLE,
+  OTHER_PARENT_ANOTHER_RESPONSIBLE,
   PageLink,
   TASK_LIST_URL,
 } from '../urls';
@@ -30,21 +30,21 @@ export interface Step {
 
 export const birthFatherSequence: Step[] = [
   {
-    url: BIRTH_FATHER_IS_NAME_ON_CERTIFICATE,
+    url: BIRTH_FATHER_NAME_ON_CERTIFICATE,
     showInSection: Sections.AboutChildren,
     getNextStep: data =>
       data.birthFathersNameOnCertificate === YesOrNo.YES
         ? BIRTH_FATHER_FULL_NAME
         : // TODO update below URL when other parents changes in master
-          OTHER_PARENT_IS_ANOTHER_RESPONSIBLE,
+          OTHER_PARENT_ANOTHER_RESPONSIBLE,
   },
   {
     url: BIRTH_FATHER_FULL_NAME,
     showInSection: Sections.AboutChildren,
-    getNextStep: () => BIRTH_FATHER_IS_ALIVE,
+    getNextStep: () => BIRTH_FATHER_ALIVE,
   },
   {
-    url: BIRTH_FATHER_IS_ALIVE,
+    url: BIRTH_FATHER_ALIVE,
     showInSection: Sections.AboutChildren,
     getNextStep: data => (data.birthFatherStillAlive === 'Yes' ? BIRTH_FATHER_NATIONALITY : TASK_LIST_URL),
   },
@@ -56,10 +56,10 @@ export const birthFatherSequence: Step[] = [
   {
     url: BIRTH_FATHER_OCCUPATION,
     showInSection: Sections.AboutChildren,
-    getNextStep: () => BIRTH_FATHER_IS_ADDRESS_KNOWN,
+    getNextStep: () => BIRTH_FATHER_ADDRESS_KNOWN,
   },
   {
-    url: BIRTH_FATHER_IS_ADDRESS_KNOWN,
+    url: BIRTH_FATHER_ADDRESS_KNOWN,
     showInSection: Sections.AboutChildren,
     getNextStep: data => (data.birthFatherAddressKnown === YesOrNo.YES ? BIRTH_FATHER_ADDRESS_LOOKUP : TASK_LIST_URL),
   },
