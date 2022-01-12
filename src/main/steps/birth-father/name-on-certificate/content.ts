@@ -16,7 +16,7 @@ const cyContent = {
 const fieldName = 'birthFathersNameOnCertificate';
 
 const values = [
-  { key: 'yes', value: 'Yes' },
+  { key: 'yes', value: YesOrNo.YES },
   { key: 'no', value: 'No' },
 ];
 
