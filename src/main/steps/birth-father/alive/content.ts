@@ -34,7 +34,7 @@ const cyContent = {
 const fieldName = 'birthFatherStillAlive';
 
 const values = [
-  { key: 'yes', value: 'Yes' },
+  { key: 'yes', value: YesNoNotsure.YES },
   { key: 'no', value: 'No' },
   { key: 'notSure', value: 'NotSure', input: { fieldName: 'birthFatherUnsureAliveReason' } },
 ];
