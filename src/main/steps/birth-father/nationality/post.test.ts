@@ -3,7 +3,7 @@ import NationalityPostControllerBase from '../../../app/nationality/NationalityP
 
 import NationalityPostController from './post';
 
-describe('children > nationality > post', () => {
+describe('birth-father > nationality > post', () => {
   let controller;
 
   beforeEach(() => {
