@@ -1,3 +1,4 @@
+import { YesNoNotsure } from '../../../app/case/definition';
 import { Radios } from '../../common/components/radios';
 import { SECTION, SECTION_IN_WELSH } from '../constants';
 
@@ -35,8 +36,8 @@ const fieldName = 'birthFatherStillAlive';
 
 const values = [
   { key: 'yes', value: YesNoNotsure.YES },
-  { key: 'no', value: 'No' },
-  { key: 'notSure', value: 'NotSure', input: { fieldName: 'birthFatherUnsureAliveReason' } },
+  { key: 'no', value: YesNoNotsure.NO },
+  { key: 'notSure', value: YesNoNotsure.NOT_SURE, input: { fieldName: 'birthFatherUnsureAliveReason' } },
 ];
 
 export const { form, generateContent } = new Radios(enContent, cyContent, fieldName, values);

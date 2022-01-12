@@ -1,3 +1,4 @@
+import { YesOrNo } from '../../../app/case/definition';
 import { Radios } from '../../common/components/radios';
 import { SECTION, SECTION_IN_WELSH } from '../constants';
 
@@ -14,8 +15,8 @@ const cyContent = {
 const fieldName = 'birthFatherAddressKnown';
 
 const values = [
-  { key: 'yes', value: 'Yes' },
-  { key: 'no', value: 'No' },
+  { key: 'yes', value: YesOrNo.YES },
+  { key: 'no', value: YesOrNo.NO },
 ];
 
 export const { form, generateContent } = new Radios(enContent, cyContent, fieldName, values);
