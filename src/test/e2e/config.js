@@ -1,10 +1,10 @@
 module.exports = {
   citizenUserOne: {
-    email: 'citizen.automation@mailinator.com',
-    password: 'Adoption12',
+    email: process.env.CITIZEN_USERNAME,
+    password: process.env.CITIZEN_PASSWORD,
   },
 
-  baseUrl: process.env.ADOP_WEB_URL || 'https://adoption-web-pr-86.service.core-compute-preview.internal/',
+  baseUrl: process.env.ADOP_WEB_URL || 'https://adoption-web-staging.service.core-compute-aat.internal/',
 
   definition: {
     jurisdiction: 'PUBLICLAW',
