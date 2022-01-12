@@ -15,12 +15,10 @@ export default class PlacementOrderPostController extends PostController<AnyObje
 
     req.session.errors = form.getErrors(formData);
 
-    console.log(req.session.userCase.selectedPlacementOrderId, req.session.userCase.placementOrders);
     const placementOrder = req.session.userCase.placementOrders?.find(
       item => item.placementOrderId === req.session.userCase.selectedPlacementOrderId
     );
-    console.log('po 22:' + JSON.stringify(placementOrder));
-    console.log('po 23:' + JSON.stringify(formData));
+
     Object.assign(placementOrder, formData);
 
     const nextUrl = req.session.errors.length > 0 ? req.url : getNextStepUrl(req, req.session.userCase);

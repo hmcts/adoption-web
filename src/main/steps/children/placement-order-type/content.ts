@@ -27,10 +27,6 @@ export const form: FormContent = {
     const placementOrder = userCase.placementOrders?.find(
       item => item.placementOrderId === userCase.selectedPlacementOrderId
     );
-    console.log(
-      'content.ts order-type po 30 : ' + userCase.selectedPlacementOrderId + ' ' + JSON.stringify(placementOrder)
-    );
-
     return {
       placementOrderType: {
         type: 'text',
