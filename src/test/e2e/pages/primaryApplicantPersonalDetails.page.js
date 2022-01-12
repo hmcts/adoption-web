@@ -2,7 +2,8 @@ const { I } = inject();
 
 module.exports = {
   fields: {
-    applicant1FullName: 'input[id$="applicant1FullName"]',
+    applicant1FirstNames: 'input[id$="applicant1FirstNames"]',
+    applicant1LastNames: 'input[id$="applicant1LastNames"]',
     applicant1HasOtherNames: 'input[id$="applicant1HasOtherNames"]',
     applicant1AdditionalName: 'input[id$="applicant1AdditionalName"]',
     dateOfBirthDay: 'input[id$="applicant1DateOfBirth-day"]',
@@ -15,7 +16,8 @@ module.exports = {
   },
 
   primaryApplicantPersonalDetailsSection() {
-    I.fillField(this.fields.applicant1FullName, 'Joe Bloggs');
+    I.fillField(this.fields.applicant1FirstNames, 'Joe');
+    I.fillField(this.fields.applicant1LastNames, 'Bloggs');
     I.click('Save and continue');
     I.wait('2');
     I.waitForText('Have you ever legally been known by any other names?');
