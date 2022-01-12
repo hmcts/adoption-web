@@ -46,7 +46,7 @@ export const birthFatherSequence: Step[] = [
   {
     url: BIRTH_FATHER_ALIVE,
     showInSection: Sections.AboutChildren,
-    getNextStep: data => (data.birthFatherStillAlive === 'Yes' ? BIRTH_FATHER_NATIONALITY : TASK_LIST_URL),
+    getNextStep: data => (data.birthFatherStillAlive === YesNoNotsure.YES ? BIRTH_FATHER_NATIONALITY : TASK_LIST_URL),
   },
   {
     url: BIRTH_FATHER_NATIONALITY,
