@@ -120,6 +120,7 @@ const en = content => {
         getChildrenPlacementOrderStatus(content.userCase) === SectionStatus.NOT_STARTED
           ? urls.CHILDREN_PLACEMENT_ORDER_NUMBER
           : urls.CHILDREN_PLACEMENT_ORDER_SUMMARY,
+      reviewApplicationPayAndSubmit: urls.CHECK_ANSWERS_URL,
     },
   };
 };
@@ -223,6 +224,7 @@ const cy = content => {
         getChildrenPlacementOrderStatus(content.userCase) === SectionStatus.NOT_STARTED
           ? urls.CHILDREN_PLACEMENT_ORDER_NUMBER
           : urls.CHILDREN_PLACEMENT_ORDER_SUMMARY,
+      reviewApplicationPayAndSubmit: urls.CHECK_ANSWERS_URL,
     },
   };
 };

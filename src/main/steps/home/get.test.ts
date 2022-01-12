@@ -8,6 +8,7 @@ import {
   CHECK_ANSWERS_URL,
   CONFIRM_JOINT_APPLICATION,
   HUB_PAGE,
+  PAY_YOUR_FEE,
   SENT_TO_APPLICANT2_FOR_REVIEW,
 } from '../urls';
 
@@ -136,6 +137,22 @@ describe('HomeGetController', () => {
     controller.get(req, res);
 
     expect(res.redirect).toBeCalledWith(CHECK_ANSWERS_URL);
+  });
+
+  test('redirects to the pay your fee page for applicant 1 users for sole application in awaitingPayment state', () => {
+    const req = mockRequest({
+      session: {
+        userCase: {
+          id: '123',
+          divorceOrDissolution: DivorceOrDissolution.DIVORCE,
+          state: State.AwaitingPayment,
+        },
+      },
+    });
+    const res = mockResponse();
+    controller.get(req, res);
+
+    expect(res.redirect).toBeCalledWith(PAY_YOUR_FEE);
   });
 
   test('redirects to the hub page for applicant 1 users in holding state', () => {

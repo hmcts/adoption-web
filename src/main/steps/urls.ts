@@ -11,8 +11,6 @@ export const CSRF_TOKEN_ERROR_URL: PageLink = '/csrf-token-error';
 
 export const RESPONDENT: PageLink = '/respondent';
 
-export const CHECK_ANSWERS_URL: PageLink = '/check-your-answers';
-
 export const APPLICATION_ENDED: PageLink = '/application-ended';
 export const TASK_LIST_URL: PageLink = '/task-list';
 
@@ -71,7 +69,7 @@ export const YOUR_NAME: PageLink = '/enter-your-name';
 export const APPLY_FINANCIAL_ORDER: PageLink = '/do-you-want-to-apply-financial-order';
 
 export const SENT_TO_APPLICANT2_FOR_REVIEW: PageLink = '/application-sent-for-review';
-export const PAY_YOUR_FEE: PageLink = '/pay-your-fee';
+
 export const PAY_AND_SUBMIT: PageLink = '/pay-and-submit';
 
 export const NO_RESPONSE_YET: PageLink = '/no-response-yet';
@@ -79,8 +77,6 @@ export const NO_RESPONSE_YET: PageLink = '/no-response-yet';
 export const APPLICATION_SUBMITTED: PageLink = '/application-submitted';
 
 export const SWITCH_TO_SOLE_APPLICATION: PageLink = '/switch-to-sole-application';
-
-export const PAYMENT_CALLBACK_URL: PageLink = '/payment-callback';
 
 export const CONFIRM_JOINT_APPLICATION: PageLink = '/confirm-your-joint-application';
 
@@ -96,3 +92,8 @@ export const CHECK_ELIGIBILITY_URL_LIVED_UK: PageLink = `${ELIGIBILITY_URL}/live
 export const INELIGIBLE_TO_ADOPT: PageLink = `${ELIGIBILITY_URL}/cannot-apply`;
 
 export const FEE_LOOKUP_URL: PageLink = '/fee-lookup';
+
+export const REVIEW_PAY_SUBMIT: PageLink = '/review-pay-submit';
+export const CHECK_ANSWERS_URL: PageLink = `${REVIEW_PAY_SUBMIT}/check-your-answers`;
+export const PAY_YOUR_FEE: PageLink = `${REVIEW_PAY_SUBMIT}/payment/pay-your-fee`;
+export const PAYMENT_CALLBACK_URL: PageLink = `${REVIEW_PAY_SUBMIT}/payment/payment-callback`;
