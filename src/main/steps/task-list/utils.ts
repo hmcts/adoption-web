@@ -164,3 +164,23 @@ export const getBirthMotherDetailsStatus = (userCase: CaseWithId): SectionStatus
 
   return names ? SectionStatus.IN_PROGRESS : SectionStatus.NOT_STARTED;
 };
+
+export const getOtherParentStatus = (userCase: CaseWithId): SectionStatus => {
+  const exists = userCase.otherParentExists;
+
+  if (exists === YesOrNo.NO) {
+    return SectionStatus.COMPLETED;
+  } else if (exists === YesOrNo.YES) {
+    const names = userCase.otherParentFirstNames && userCase.otherParentLastNames;
+    const addressKnown = userCase.otherParentAddressKnown;
+    if (addressKnown === YesOrNo.NO) {
+      return names ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
+    } else {
+      return names && addressKnown === YesOrNo.YES && addressComplete(userCase, FieldPrefix.OTHER_PARENT)
+        ? SectionStatus.COMPLETED
+        : SectionStatus.IN_PROGRESS;
+    }
+  }
+
+  return SectionStatus.NOT_STARTED;
+};

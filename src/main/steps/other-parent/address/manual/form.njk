@@ -1,0 +1,11 @@
+{% extends "common/form/form.njk"%}
+
+{% if internationalAddressUrl %}
+  {% block after_fields %}
+    <div class="govuk-form-group">
+      <p class="govuk-body">
+        <a href="{{internationalAddressUrl}}" id="enter-international-address" class="govuk-link">{{ enterInternationalAddress }}</a>
+      </p>
+    </div>
+  {% endblock %}
+{% endif %}
