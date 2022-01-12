@@ -23,13 +23,6 @@ export default class NationalityPostController extends PostController<AnyObject>
     Object.assign(req.session.userCase, formData);
 
     if (req.session.errors.length === 0) {
-      try {
-        req.session.userCase = await this.save(req, formData, this.getEventName(req));
-      } catch (err) {
-        req.locals.logger.error('Error saving', err);
-        //req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
-      }
-
       if (formData.addButton) {
         if (!req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`]) {
           req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`] = [];
@@ -38,20 +31,21 @@ export default class NationalityPostController extends PostController<AnyObject>
           req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`]?.push(formData.addAnotherNationality);
           req.session.userCase.addAnotherNationality = '';
         }
-        try {
-          req.session.userCase = await this.save(
-            req,
-            {
-              ...formData,
-              [`${this.fieldPrefix}AdditionalNationalities`]:
-                req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`],
-            },
-            this.getEventName(req)
-          );
-        } catch (err) {
-          req.locals.logger.error('Error saving', err);
-          // req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
-        }
+      }
+
+      try {
+        req.session.userCase = await this.save(
+          req,
+          {
+            // ...formData,
+            [`${this.fieldPrefix}AdditionalNationalities`]:
+              req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`],
+          },
+          this.getEventName(req)
+        );
+      } catch (err) {
+        req.locals.logger.error('Error saving', err);
+        // req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
       }
     }
 
