@@ -26,18 +26,8 @@ export class Radios {
   }
 
   languages = {
-    en: (): Record<string, unknown> => ({
-      ...this.enContent,
-      yes: 'Yes',
-      no: 'No',
-      unsure: 'Not sure',
-    }),
-    cy: (): Record<string, unknown> => ({
-      ...this.cyContent,
-      yes: 'Yes (in Welsh)',
-      no: 'No (in Welsh)',
-      unsure: 'Not sure (in Welsh)',
-    }),
+    en: (): Record<string, unknown> => this.enContent,
+    cy: (): Record<string, unknown> => this.cyContent,
   };
 
   generateForm = (): FormContent => ({

@@ -3,8 +3,8 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const enContent = {
   section: SECTION,
-  title: "Is the child's birth father still alive?",
-  unsureInput:
+  label: "Is the child's birth father still alive?",
+  notSureInput:
     "Provide more details. For example, 'the birth father is uncontactable'. Your adoption agency or social worker can help you to complete this section.",
   errors: {
     birthFatherStillAlive: {
@@ -18,8 +18,8 @@ const enContent = {
 
 const cyContent = {
   section: SECTION_IN_WELSH,
-  title: "Is the child's birth father still alive? (in Welsh)",
-  unsureInput:
+  label: "Is the child's birth father still alive? (in Welsh)",
+  notSureInput:
     "Provide more details. For example, 'the birth father is uncontactable'. Your adoption agency or social worker can help you to complete this section. (in Welsh)",
   errors: {
     birthFatherStillAlive: {
@@ -36,7 +36,7 @@ const fieldName = 'birthFatherStillAlive';
 const values = [
   { key: 'yes', value: 'Yes' },
   { key: 'no', value: 'No' },
-  { key: 'unsure', value: 'NotSure', input: { fieldName: 'birthFatherUnsureAliveReason' } },
+  { key: 'notSure', value: 'NotSure', input: { fieldName: 'birthFatherUnsureAliveReason' } },
 ];
 
 export const { form, generateContent } = new Radios(enContent, cyContent, fieldName, values);
