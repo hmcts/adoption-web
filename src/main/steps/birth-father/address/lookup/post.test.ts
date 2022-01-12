@@ -2,7 +2,7 @@ import AddressLookupPostControllerBase from '../../../../app/address/AddressLook
 
 import AddressLookupPostController from './post';
 
-describe('applicant1 > address > lookup > post', () => {
+describe('birth-father > address > lookup > post', () => {
   let controller;
 
   beforeEach(() => {
