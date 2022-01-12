@@ -7,10 +7,13 @@ import { Form, FormContent } from '../app/form/Form';
 
 import { Step, applicant1Sequence } from './applicant1Sequence';
 import { applicant2Sequence } from './applicant2/applicant2Sequence';
+import { birthMotherSequence } from './birth-mother/birthMotherSequence';
 import { childrenSequence } from './children/childrenSequence';
 import { Step as EligibilityStep, eligibilitySequence } from './eligibilitySequence';
+import { otherParentSequence } from './other-parent/otherParentSequence';
 import { Step as ReviewPaySubmitStep, reviewPaySubmitSequence } from './review-pay-submit/reviewPaySubmitSequence';
-import { APPLICANT_1, APPLICANT_2, CHECK_ANSWERS_URL, CHILDREN, REVIEW_PAY_SUBMIT } from './urls';
+import { APPLICANT_1, APPLICANT_2, BIRTH_MOTHER, CHECK_ANSWERS_URL, CHILDREN, OTHER_PARENT, REVIEW_PAY_SUBMIT } from './urls';
+
 
 const stepForms: Record<string, Form> = {};
 
@@ -69,9 +72,15 @@ export const getNextIncompleteStepUrl = (req: AppRequest): string => {
 
 export const getNextStepUrl = (req: AppRequest, data: Partial<Case>): string => {
   const { path, queryString } = getPathAndQueryString(req);
-  const nextStep = [...applicant1Sequence, ...applicant2Sequence, ...childrenSequence, ...reviewPaySubmitSequence].find(
-    s => s.url === path
-  );
+  const nextStep = [
+    ...applicant1Sequence,
+    ...applicant2Sequence,
+    ...childrenSequence,
+    ...birthMotherSequence,
+    ...otherParentSequence,
+    ...reviewPaySubmitSequence,
+  ].find(s => s.url === path);
+
   const url = nextStep ? nextStep.getNextStep(data) : CHECK_ANSWERS_URL;
 
   return `${url}${queryString}`;
@@ -130,11 +139,15 @@ export const stepsWithContentEligibility = getStepsWithContent(eligibilitySequen
 export const stepsWithContentApplicant1 = getStepsWithContent(applicant1Sequence, APPLICANT_1);
 export const stepsWithContentApplicant2 = getStepsWithContent(applicant2Sequence, APPLICANT_2);
 export const stepsWithContentChildren = getStepsWithContent(childrenSequence, CHILDREN);
+export const stepsWithContentBirthMother = getStepsWithContent(birthMotherSequence, BIRTH_MOTHER);
+export const stepsWithContentOtherParent = getStepsWithContent(otherParentSequence, OTHER_PARENT);
 export const stepsWithContentReviewPaySubmit = getStepsWithContent(reviewPaySubmitSequence, REVIEW_PAY_SUBMIT);
 export const stepsWithContent = [
   ...stepsWithContentEligibility,
   ...stepsWithContentApplicant1,
   ...stepsWithContentApplicant2,
   ...stepsWithContentChildren,
+  ...stepsWithContentBirthMother,
+  ...stepsWithContentOtherParent,
   ...stepsWithContentReviewPaySubmit,
 ];

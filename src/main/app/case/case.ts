@@ -15,6 +15,7 @@ import {
   Payment,
   PlacementOrder,
   State,
+  YesNoNotsure,
   YesOrNo,
 } from './definition';
 
@@ -137,8 +138,36 @@ export interface Case {
   childrenNationality?: string[];
   childrenAdditionalNationalities?: string[];
 
+  birthMotherFirstNames?: string;
+  birthMotherLastNames?: string;
+  birthMotherStillAlive?: YesNoNotsure;
+  birthMotherNotAliveReason?: string;
+  birthMotherNationality?: string[];
+  birthMotherAdditionalNationalities?: string[];
+  birthMotherOccupation?: string;
+  birthMotherAddressKnown?: YesOrNo;
+  birthMotherAddress1?: string;
+  birthMotherAddress2?: string;
+  birthMotherAddress3?: string;
+  birthMotherAddressTown?: string;
+  birthMotherAddressCounty?: string;
+  birthMotherAddressPostcode?: string;
+  birthMotherAddressCountry?: string;
+
   childrenFirstNameAfterAdoption?: string;
   childrenLastNameAfterAdoption?: string;
+
+  otherParentAddressKnown?: YesOrNo;
+  otherParentFirstNames?: string;
+  otherParentLastNames?: string;
+  otherParentExists?: YesOrNo;
+  otherParentAddress1?: string;
+  otherParentAddress2?: string;
+  otherParentAddress3?: string;
+  otherParentAddressTown?: string;
+  otherParentAddressCounty?: string;
+  otherParentAddressPostcode?: string;
+  otherParentAddressCountry?: string;
 
   applicationType?: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
@@ -282,4 +311,6 @@ export enum FieldPrefix {
   APPLICANT1 = 'applicant1',
   APPLICANT2 = 'applicant2',
   CHILDREN = 'children',
+  BIRTH_MOTHER = 'birthMother',
+  OTHER_PARENT = 'otherParent',
 }

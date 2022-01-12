@@ -7,9 +7,8 @@ Scenario(
   async ({ loginPage, childDetailsPlacementOrderPage, taskListPage }) => {
     await loginPage.signInWithCitizenUser(config.citizenUserOne);
     await taskListPage.goToTaskListPage();
-    //TODO temporarily commenting this to pass the PR
-    // await taskListPage.selectChildPlacementOrderDetails();
-    // await childDetailsPlacementOrderPage.childDetailsPlacementOrderSection();
+    await taskListPage.selectChildPlacementOrderDetails();
+    await childDetailsPlacementOrderPage.childDetailsPlacementOrderSection();
   }
 );
 
@@ -18,10 +17,9 @@ Scenario(
   async ({ loginPage, childrenBirthCertificatePage, taskListPage }) => {
     await loginPage.signInWithCitizenUser(config.citizenUserOne);
     await taskListPage.goToTaskListPage();
-    //TODO temporarily commenting this to pass the PR
-    // await taskListPage.selectChildrenBirthCertificate();
-    // await childrenBirthCertificatePage.childDetailsBirthCertificaterSection();
-    // await taskListPage.verifyChildBirthCertificateDetailsStatus();
+    await taskListPage.selectChildrenBirthCertificate();
+    await childrenBirthCertificatePage.childDetailsBirthCertificaterSection();
+    await taskListPage.verifyChildBirthCertificateDetailsStatus();
   }
 );
 
@@ -30,9 +28,24 @@ Scenario(
   async ({ loginPage, childAdoptionCertificateDetailsPage, taskListPage }) => {
     await loginPage.signInWithCitizenUser(config.citizenUserOne);
     await taskListPage.goToTaskListPage();
-    //TODO temporarily commenting this to pass the PR
-    // await taskListPage.selectChildAdoptionCertificateDetails();
-    // await childAdoptionCertificateDetailsPage.childAdoptionCertificateDetailsSection();
-    // await taskListPage.verifyAdoptionCertificateDetailStatus();
+    await taskListPage.selectChildAdoptionCertificateDetails();
+    await childAdoptionCertificateDetailsPage.childAdoptionCertificateDetailsSection();
+    await taskListPage.verifyAdoptionCertificateDetailStatus();
   }
 );
+
+Scenario('Child birth mother details event', async ({ loginPage, childBirthMothersDetailsPage, taskListPage }) => {
+  await loginPage.signInWithCitizenUser(config.citizenUserOne);
+  await taskListPage.goToTaskListPage();
+  await taskListPage.selectChildBirthMotherCertificateDetails();
+  await childBirthMothersDetailsPage.childBirthMothersDetailsSection();
+  await taskListPage.verifyChildBirthMotherCertificateDetailsStatus();
+});
+
+Scenario('Child other parent details event', async ({ loginPage, childOtherParentDetailsPage, taskListPage }) => {
+  await loginPage.signInWithCitizenUser(config.citizenUserOne);
+  await taskListPage.goToTaskListPage();
+  await taskListPage.selectChildOtherParentDetails();
+  await childOtherParentDetailsPage.childOtherParentDetailsSection();
+  await taskListPage.verifyChildOtherParentDetailsStatus();
+});

@@ -1,45 +1,39 @@
 import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent } from '../../../app/form/Form';
-import { isFieldFilledIn } from '../../../app/form/validation';
+import { FormContent, FormFields } from '../../../app/form/Form';
+import { form as fullNameForm, generateContent as fullNameGenerateContent } from '../../common/components/full-name';
 
 export const en = (): Record<string, unknown> => ({
   section: 'Primary applicant',
-  label: "What's your full name?",
-  hint: 'Your full name',
+  title: "What's your full name?",
   errors: {
-    applicant1FullName: {
-      required: 'Enter your full name',
+    applicant1FirstNames: {
+      required: 'Enter your first names',
+    },
+    applicant1LastNames: {
+      required: 'Enter your last names',
     },
   },
 });
 
 export const cy = (): Record<string, unknown> => ({
   section: 'Primary applicant (in Welsh)',
-  label: "What's your full name? (in Welsh)",
-  hint: 'Your full name (in Welsh)',
+  title: "What's your full name? (in Welsh)",
   errors: {
-    applicant1FullName: {
-      required: 'Enter your full name (in Welsh)',
+    applicant1FirstNames: {
+      required: 'Enter your first names (in Welsh)',
+    },
+    applicant1LastNames: {
+      required: 'Enter your last names (in Welsh)',
     },
   },
 });
 
+const fullNameFormFields = fullNameForm.fields as FormFields;
 export const form: FormContent = {
+  ...fullNameForm,
   fields: {
-    applicant1FullName: {
-      type: 'input',
-      label: l => l.label,
-      hint: l => l.hint,
-      labelSize: 'l',
-      classes: 'govuk-input--width-20',
-      validator: isFieldFilledIn,
-    },
-  },
-  submit: {
-    text: l => l.continue,
-  },
-  saveAsDraft: {
-    text: l => l.saveAsDraft,
+    applicant1FirstNames: fullNameFormFields.firstNames,
+    applicant1LastNames: fullNameFormFields.lastNames,
   },
 };
 
@@ -48,7 +42,11 @@ const languages = {
   cy,
 };
 
-export const generateContent: TranslationFn = content => ({
-  ...languages[content.language](),
-  form,
-});
+export const generateContent: TranslationFn = content => {
+  const fullNameContent = fullNameGenerateContent(content);
+  return {
+    ...fullNameContent,
+    ...languages[content.language](),
+    form,
+  };
+};

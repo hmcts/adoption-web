@@ -22,6 +22,7 @@ export enum Sections {
   AboutApplicant1 = 'aboutApplicant1',
   AboutApplicant2 = 'aboutApplicant2',
   AboutChildren = 'aboutChildren',
+  AboutBirthMother = 'aboutBirthMother',
   AboutApplication = 'aboutApplication',
   AboutPartnership = 'aboutPartnership',
   HelpWithFees = 'helpWithFees',
@@ -32,6 +33,7 @@ export enum Sections {
   OtherCourtCases = 'otherCourtCases',
   DividingAssets = 'dividingAssets',
   Documents = 'documents',
+  AboutOtherParent = 'aboutOtherParent',
 }
 
 export interface Step {
