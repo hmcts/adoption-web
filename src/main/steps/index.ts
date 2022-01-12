@@ -12,8 +12,15 @@ import { childrenSequence } from './children/childrenSequence';
 import { Step as EligibilityStep, eligibilitySequence } from './eligibilitySequence';
 import { otherParentSequence } from './other-parent/otherParentSequence';
 import { Step as ReviewPaySubmitStep, reviewPaySubmitSequence } from './review-pay-submit/reviewPaySubmitSequence';
-import { APPLICANT_1, APPLICANT_2, BIRTH_MOTHER, CHECK_ANSWERS_URL, CHILDREN, OTHER_PARENT, REVIEW_PAY_SUBMIT } from './urls';
-
+import {
+  APPLICANT_1,
+  APPLICANT_2,
+  BIRTH_MOTHER,
+  CHECK_ANSWERS_URL,
+  CHILDREN,
+  OTHER_PARENT,
+  REVIEW_PAY_SUBMIT,
+} from './urls';
 
 const stepForms: Record<string, Form> = {};
 

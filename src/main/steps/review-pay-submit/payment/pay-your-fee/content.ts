@@ -3,6 +3,7 @@ import config from 'config';
 import { TranslationFn } from '../../../../app/controller/GetController';
 import { FormContent } from '../../../../app/form/Form';
 
+// TODO: Update this page
 const en = () => ({
   title: 'Pay your adoption application fee',
   line1: `The adoption application fee is ${config.get(
