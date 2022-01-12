@@ -21,6 +21,8 @@ module.exports = {
     childrenBirthMotherDetailsStatus: 'strong[id$="birth-mother-details-status"]',
     childOtherParentLink: 'a[id$="other-parent-status"]',
     childOtherParentDetailsStatus: 'strong[id$="other-parent-status"]',
+    childrenBirthFatherLink: 'a[id$="children-birth-father"]',
+    childrenBirthFatherDetailsStatus: 'strong[id$="birth-father-status"]',
   },
 
   async goToTaskListPage() {
@@ -71,11 +73,11 @@ module.exports = {
     await I.see('COMPLETED', this.childDetails.adoptionCertificateDetails);
   },
 
-  async selectChildBirthMotherCertificateDetails() {
+  async selectChildBirthMotherDetails() {
     await I.click(this.childDetails.childrenBirthMotherLink);
   },
 
-  async verifyChildBirthMotherCertificateDetailsStatus() {
+  async verifyChildBirthMotherDetailsStatus() {
     await I.see('COMPLETED', this.childDetails.childrenBirthMotherDetailsStatus);
   },
 
@@ -85,5 +87,13 @@ module.exports = {
 
   async verifyChildOtherParentDetailsStatus() {
     await I.see('COMPLETED', this.childDetails.childOtherParentDetailsStatus);
+  },
+
+  async selectChildBirthFatherDetails() {
+    await I.click(this.childDetails.childrenBirthFatherLink);
+  },
+
+  async verifyChildBirthFatherDetailsStatus() {
+    await I.see('COMPLETED', this.childDetails.childrenBirthFatherDetailsStatus);
   },
 };

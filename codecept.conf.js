@@ -83,6 +83,7 @@ exports.config = {
     childAdoptionCertificateDetailsPage: './src/test/e2e/pages/childAdoptionCertificateDetails.page.js',
     childBirthMothersDetailsPage: './src/test/e2e/pages/childBirthMothersDetails.page.js',
     childOtherParentDetailsPage: './src/test/e2e/pages/childOtherParentDetails.page.js',
+    childBirthFatherDetailsPage: './src/test/e2e/pages/childBirthFatherDetails.page.js',
   },
   plugins: {
     retryFailedStep: {
