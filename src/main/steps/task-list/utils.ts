@@ -132,7 +132,7 @@ export const getAdoptionCertificateDetailsStatus = (userCase: CaseWithId): Secti
 
 export const getBirthFatherDetailsStatus = (userCase: CaseWithId): SectionStatus => {
   const {
-    birthFathersNameOnCertificate,
+    birthFatherNameOnCertificate,
     birthFatherFirstNames,
     birthFatherLastNames,
     birthFatherStillAlive,
@@ -143,9 +143,9 @@ export const getBirthFatherDetailsStatus = (userCase: CaseWithId): SectionStatus
     birthFatherAddressKnown,
   } = userCase;
 
-  if (birthFathersNameOnCertificate === YesOrNo.NO) {
+  if (birthFatherNameOnCertificate === YesOrNo.NO) {
     return SectionStatus.COMPLETED;
-  } else if (!birthFathersNameOnCertificate) {
+  } else if (!birthFatherNameOnCertificate) {
     return SectionStatus.NOT_STARTED;
   }
 

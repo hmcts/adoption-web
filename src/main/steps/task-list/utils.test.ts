@@ -335,20 +335,20 @@ describe('utils', () => {
         expected: NOT_STARTED,
       },
       {
-        data: { birthFathersNameOnCertificate: 'No' },
+        data: { birthFatherNameOnCertificate: 'No' },
         expected: COMPLETED,
       },
       {
-        data: { birthFathersNameOnCertificate: 'Yes', birthFatherFirstNames: 'Harry' },
+        data: { birthFatherNameOnCertificate: 'Yes', birthFatherFirstNames: 'Harry' },
         expected: IN_PROGRESS,
       },
       {
-        data: { birthFathersNameOnCertificate: 'Yes', birthFatherFirstNames: 'Harry', birthFatherLastNames: 'Cornell' },
+        data: { birthFatherNameOnCertificate: 'Yes', birthFatherFirstNames: 'Harry', birthFatherLastNames: 'Cornell' },
         expected: IN_PROGRESS,
       },
       {
         data: {
-          birthFathersNameOnCertificate: 'Yes',
+          birthFatherNameOnCertificate: 'Yes',
           birthFatherFirstNames: 'Harry',
           birthFatherLastNames: 'Cornell',
           birthFatherStillAlive: 'Yes',
@@ -357,7 +357,7 @@ describe('utils', () => {
       },
       {
         data: {
-          birthFathersNameOnCertificate: 'Yes',
+          birthFatherNameOnCertificate: 'Yes',
           birthFatherFirstNames: 'Harry',
           birthFatherLastNames: 'Cornell',
           birthFatherStillAlive: 'No',
@@ -366,7 +366,7 @@ describe('utils', () => {
       },
       {
         data: {
-          birthFathersNameOnCertificate: 'Yes',
+          birthFatherNameOnCertificate: 'Yes',
           birthFatherFirstNames: 'Harry',
           birthFatherLastNames: 'Cornell',
           birthFatherStillAlive: 'NotSure',
@@ -376,7 +376,7 @@ describe('utils', () => {
       },
       {
         data: {
-          birthFathersNameOnCertificate: 'Yes',
+          birthFatherNameOnCertificate: 'Yes',
           birthFatherFirstNames: 'Harry',
           birthFatherLastNames: 'Cornell',
           birthFatherStillAlive: 'Yes',
@@ -385,7 +385,7 @@ describe('utils', () => {
       },
       {
         data: {
-          birthFathersNameOnCertificate: 'Yes',
+          birthFatherNameOnCertificate: 'Yes',
           birthFatherFirstNames: 'Harry',
           birthFatherLastNames: 'Cornell',
           birthFatherStillAlive: 'Yes',
@@ -397,7 +397,7 @@ describe('utils', () => {
       },
       {
         data: {
-          birthFathersNameOnCertificate: 'Yes',
+          birthFatherNameOnCertificate: 'Yes',
           birthFatherFirstNames: 'Harry',
           birthFatherLastNames: 'Cornell',
           birthFatherStillAlive: 'Yes',
@@ -410,7 +410,7 @@ describe('utils', () => {
       },
       {
         data: {
-          birthFathersNameOnCertificate: 'Yes',
+          birthFatherNameOnCertificate: 'Yes',
           birthFatherFirstNames: 'Harry',
           birthFatherLastNames: 'Cornell',
           birthFatherStillAlive: 'Yes',
@@ -424,7 +424,7 @@ describe('utils', () => {
       },
       {
         data: {
-          birthFathersNameOnCertificate: 'Yes',
+          birthFatherNameOnCertificate: 'Yes',
           birthFatherFirstNames: 'Harry',
           birthFatherLastNames: 'Cornell',
           birthFatherStillAlive: 'Yes',

@@ -157,7 +157,7 @@ export interface Case {
   childrenFirstNameAfterAdoption?: string;
   childrenLastNameAfterAdoption?: string;
 
-  birthFathersNameOnCertificate?: string;
+  birthFatherNameOnCertificate?: string;
   birthFatherFirstNames?: string;
   birthFatherLastNames?: string;
   birthFatherStillAlive?: string;

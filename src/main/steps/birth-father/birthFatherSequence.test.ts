@@ -38,8 +38,8 @@ describe('birth father sequence', () => {
 
       expect(url).toBe(BIRTH_FATHER_NAME_ON_CERTIFICATE);
       expect(showInSection).toBe(aboutChildren);
-      expect(getNextStep({ birthFathersNameOnCertificate: YesOrNo.YES })).toBe(BIRTH_FATHER_FULL_NAME);
-      expect(getNextStep({ birthFathersNameOnCertificate: YesOrNo.NO })).toBe(OTHER_PARENT_ANOTHER_RESPONSIBLE);
+      expect(getNextStep({ birthFatherNameOnCertificate: YesOrNo.YES })).toBe(BIRTH_FATHER_FULL_NAME);
+      expect(getNextStep({ birthFatherNameOnCertificate: YesOrNo.NO })).toBe(OTHER_PARENT_ANOTHER_RESPONSIBLE);
     });
 
     it('should be correct for fullName', () => {
