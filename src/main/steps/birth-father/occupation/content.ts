@@ -2,7 +2,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 import { Input } from '../../../steps/common/components/input';
 import { SECTION, SECTION_IN_WELSH } from '../constants';
 
-const fieldName = 'fathersOccupation';
+const fieldName = 'birthFatherOccupation';
 
 const enContent = {
   section: SECTION,

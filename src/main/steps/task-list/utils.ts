@@ -152,7 +152,7 @@ export const getBirthFatherDetailsStatus = (userCase: CaseWithId): SectionStatus
   const areNamesComplete = !!(birthFatherFirstNames && birthFatherLastNames);
 
   const isFatherAlive = birthFatherStillAlive === 'Yes';
-  const unsureAliveComplete = birthFatherStillAlive === 'Not sure' && birthFatherUnsureAliveReason;
+  const unsureAliveComplete = birthFatherStillAlive === 'NotSure' && birthFatherUnsureAliveReason;
   const notAlive = birthFatherStillAlive === 'No';
   const nationalityComplete = birthFatherNationality?.length
     ? birthFatherNationality.includes('Not sure')
