@@ -1,5 +1,5 @@
 import { CaseWithId } from '../../app/case/case';
-import { YesOrNo } from '../../app/case/definition';
+import { YesNoNotsure, YesOrNo } from '../../app/case/definition';
 import {
   BIRTH_FATHER_ADDRESS_INTERNATIONAL,
   BIRTH_FATHER_ADDRESS_KNOWN,

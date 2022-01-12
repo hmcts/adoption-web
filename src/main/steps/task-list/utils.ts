@@ -143,46 +143,40 @@ export const getBirthFatherDetailsStatus = (userCase: CaseWithId): SectionStatus
     birthFatherAddressKnown,
   } = userCase;
 
-  if (!birthFathersNameOnCertificate) {
+  if (birthFathersNameOnCertificate === YesOrNo.NO) {
+    return SectionStatus.COMPLETED;
+  } else if (!birthFathersNameOnCertificate) {
     return SectionStatus.NOT_STARTED;
   }
 
-  const nameIsOnCertificate = birthFathersNameOnCertificate === 'Yes';
+  // Progressed beyond certificate screen
 
-  const areNamesComplete = !!(birthFatherFirstNames && birthFatherLastNames);
+  if (!birthFatherFirstNames || !birthFatherLastNames || !birthFatherStillAlive) {
+    return SectionStatus.IN_PROGRESS;
+  } else {
+    if (
+      birthFatherStillAlive === YesNoNotsure.NO ||
+      (birthFatherStillAlive === YesNoNotsure.NOT_SURE && birthFatherUnsureAliveReason)
+    ) {
+      return SectionStatus.COMPLETED;
+    }
+  }
 
-  const isFatherAlive = birthFatherStillAlive === 'Yes';
-  const unsureAliveComplete = birthFatherStillAlive === 'NotSure' && birthFatherUnsureAliveReason;
-  const notAlive = birthFatherStillAlive === 'No';
-  const nationalityComplete = birthFatherNationality?.length
-    ? birthFatherNationality.includes('Not sure')
-      ? // Returns true if 'Not sure' is the only array element, else false
-        birthFatherNationality?.length === 1
-      : birthFatherNationality.includes('Other')
-      ? // Returns true if additional nationality array has elements, else false
-        !!birthFatherAdditionalNationalities?.length
-      : // Doesn't contain 'Other' and has over 1 array element, true
-        true
-    : // Empty array, false
-      false;
-  const lastAddressKnown = birthFatherAddressKnown !== 'No';
-  const isAddressComplete = addressComplete(userCase, FieldPrefix.BIRTH_FATHER);
+  // Progressed beyond alive screen
 
-  return nameIsOnCertificate
-    ? areNamesComplete
-      ? isFatherAlive
-        ? nationalityComplete && birthFatherOccupation
-          ? lastAddressKnown
-            ? isAddressComplete
-              ? SectionStatus.COMPLETED
-              : SectionStatus.IN_PROGRESS
-            : SectionStatus.COMPLETED
-          : SectionStatus.IN_PROGRESS
-        : unsureAliveComplete || notAlive
-        ? SectionStatus.COMPLETED
-        : SectionStatus.IN_PROGRESS
-      : SectionStatus.IN_PROGRESS
-    : SectionStatus.COMPLETED;
+  if (
+    !birthFatherNationality?.length ||
+    notSureViolation(birthFatherNationality) ||
+    (birthFatherNationality.includes('Other') && !birthFatherAdditionalNationalities?.length) ||
+    !birthFatherOccupation ||
+    !birthFatherAddressKnown
+  ) {
+    return SectionStatus.IN_PROGRESS;
+  } else {
+    return birthFatherAddressKnown === YesOrNo.NO || addressComplete(userCase, FieldPrefix.BIRTH_FATHER)
+      ? SectionStatus.COMPLETED
+      : SectionStatus.IN_PROGRESS;
+  }
 };
 
 export const getBirthMotherDetailsStatus = (userCase: CaseWithId): SectionStatus => {
