@@ -61,7 +61,7 @@ describe('PaymentClient', () => {
         },
       ],
       language: undefined,
-      case_type: 'NFD',
+      case_type: 'A58',
     });
 
     expect(actual).toEqual({
