@@ -37,7 +37,7 @@ export default class NationalityPostController extends PostController<AnyObject>
         req.session.userCase = await this.save(
           req,
           {
-            // ...formData,
+            [`${this.fieldPrefix}Nationality`]: req.session.userCase[`${this.fieldPrefix}Nationality`],
             [`${this.fieldPrefix}AdditionalNationalities`]:
               req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`],
           },
