@@ -115,6 +115,23 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   birthMotherAddressPostcode: 'birthMotherAddressPostCode',
   birthMotherAddressCountry: 'birthMotherAddressCountry',
 
+  birthFatherNameOnCertificate: 'birthFatherNameOnCertificate',
+  birthFatherFirstNames: 'birthFatherFirstName',
+  birthFatherLastNames: 'birthFatherLastName',
+  birthFatherStillAlive: 'birthFatherStillAlive',
+  birthFatherUnsureAliveReason: 'birthFatherNotAliveReason',
+  birthFatherNationality: 'birthFatherNationality',
+  birthFatherAdditionalNationalities: 'birthFatherOtherNationalities',
+  birthFatherOccupation: 'birthFatherOccupation',
+  birthFatherAddressKnown: 'birthFatherAddressKnown',
+  birthFatherAddress1: 'birthFatherAddress1',
+  birthFatherAddress2: 'birthFatherAddress2',
+  birthFatherAddress3: 'birthFatherAddress3',
+  birthFatherAddressTown: 'birthFatherAddressTown',
+  birthFatherAddressCounty: 'birthFatherAddressCounty',
+  birthFatherAddressPostcode: 'birthFatherAddressPostCode',
+  birthFatherAddressCountry: 'birthFatherAddressCountry',
+
   otherParentFirstNames: 'otherParentFirstName',
   otherParentLastNames: 'otherParentLastName',
   otherParentExists: 'otherParentStillAlive',
@@ -253,6 +270,23 @@ export interface Case {
   birthMotherAddressPostcode?: string;
   birthMotherAddressCountry?: string;
 
+  birthFatherNameOnCertificate?: string;
+  birthFatherFirstNames?: string;
+  birthFatherLastNames?: string;
+  birthFatherStillAlive?: string;
+  birthFatherUnsureAliveReason?: string;
+  birthFatherNationality?: string[];
+  birthFatherAdditionalNationalities?: string[];
+  birthFatherOccupation?: string;
+  birthFatherAddressKnown?: YesOrNo;
+  birthFatherAddress1?: string;
+  birthFatherAddress2?: string;
+  birthFatherAddress3?: string;
+  birthFatherAddressTown?: string;
+  birthFatherAddressCounty?: string;
+  birthFatherAddressPostcode?: string;
+  birthFatherAddressCountry?: string;
+
   otherParentFirstNames?: string;
   otherParentLastNames?: string;
   otherParentExists?: YesOrNo;
@@ -264,23 +298,6 @@ export interface Case {
   otherParentAddressPostcode?: string;
   otherParentAddressCountry?: string;
   otherParentAddressKnown?: YesOrNo;
-
-  // otherParentFirstName: string;
-  // otherParentLastName: string;
-  // otherParentStillAlive: string;
-  // otherParentNotAliveReason: string;
-  // otherParentNationality: Nationality[];
-  // otherParentOccupation: string;
-  // otherParentAddressKnown: YesOrNo;
-  // otherParentAddress1: string;
-  // otherParentAddress2: string;
-  // otherParentAddress3: string;
-  // otherParentAddressTown: string;
-  // otherParentAddressCounty: string;
-  // otherParentAddressPostCode: string;
-  // otherParentAddressCountry: string;
-  // otherParentOtherNationalities: ListValue<OtherName>[];
-  // otherParentNameOnCertificate: string;
 
   addButton?: string;
   addAnotherNationality?: string;
@@ -416,6 +433,7 @@ export enum FieldPrefix {
   APPLICANT1 = 'applicant1',
   APPLICANT2 = 'applicant2',
   CHILDREN = 'children',
+  BIRTH_FATHER = 'birthFather',
   BIRTH_MOTHER = 'birthMother',
   OTHER_PARENT = 'otherParent',
 }

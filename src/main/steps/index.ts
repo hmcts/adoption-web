@@ -7,6 +7,7 @@ import { Form, FormContent } from '../app/form/Form';
 
 import { Step, applicant1Sequence } from './applicant1Sequence';
 import { applicant2Sequence } from './applicant2/applicant2Sequence';
+import { birthFatherSequence } from './birth-father/birthFatherSequence';
 import { birthMotherSequence } from './birth-mother/birthMotherSequence';
 import { childrenSequence } from './children/childrenSequence';
 import { Step as EligibilityStep, eligibilitySequence } from './eligibilitySequence';
@@ -15,6 +16,7 @@ import { Step as ReviewPaySubmitStep, reviewPaySubmitSequence } from './review-p
 import {
   APPLICANT_1,
   APPLICANT_2,
+  BIRTH_FATHER,
   BIRTH_MOTHER,
   CHECK_ANSWERS_URL,
   CHILDREN,
@@ -89,6 +91,7 @@ export const getNextStepUrl = (req: AppRequest, data: Partial<Case>): string => 
     ...applicant2Sequence,
     ...childrenSequence,
     ...birthMotherSequence,
+    ...birthFatherSequence,
     ...otherParentSequence,
     ...reviewPaySubmitSequence,
   ].find(s => s.url === path);
@@ -151,6 +154,7 @@ export const stepsWithContentEligibility = getStepsWithContent(eligibilitySequen
 export const stepsWithContentApplicant1 = getStepsWithContent(applicant1Sequence, APPLICANT_1);
 export const stepsWithContentApplicant2 = getStepsWithContent(applicant2Sequence, APPLICANT_2);
 export const stepsWithContentChildren = getStepsWithContent(childrenSequence, CHILDREN);
+export const stepsWithContentBirthFather = getStepsWithContent(birthFatherSequence, BIRTH_FATHER);
 export const stepsWithContentBirthMother = getStepsWithContent(birthMotherSequence, BIRTH_MOTHER);
 export const stepsWithContentOtherParent = getStepsWithContent(otherParentSequence, OTHER_PARENT);
 export const stepsWithContentReviewPaySubmit = getStepsWithContent(reviewPaySubmitSequence, REVIEW_PAY_SUBMIT);
@@ -159,6 +163,7 @@ export const stepsWithContent = [
   ...stepsWithContentApplicant1,
   ...stepsWithContentApplicant2,
   ...stepsWithContentChildren,
+  ...stepsWithContentBirthFather,
   ...stepsWithContentBirthMother,
   ...stepsWithContentOtherParent,
   ...stepsWithContentReviewPaySubmit,
