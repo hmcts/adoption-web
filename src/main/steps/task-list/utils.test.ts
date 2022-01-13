@@ -6,14 +6,17 @@ import {
   Gender,
   Nationality,
   State,
+  YesNoNotsure,
   YesOrNo,
 } from '../../app/case/definition';
 
 import {
   getAdoptionCertificateDetailsStatus,
+  getBirthMotherDetailsStatus,
   getChildrenBirthCertificateStatus,
   getChildrenPlacementOrderStatus,
   getContactDetailsStatus,
+  getOtherParentStatus,
   getPersonalDetailsStatus,
   isApplyingWithComplete,
   // isApplyingWithComplete,
@@ -331,6 +334,211 @@ describe('utils', () => {
       },
     ])('should return correct status %o', async ({ data, expected }) => {
       expect(getAdoptionCertificateDetailsStatus({ ...userCase, ...data })).toBe(expected);
+    });
+  });
+
+  describe('getOtherParentStatus', () => {
+    test.each([
+      { data: {}, userType: 'otherParent', expected: 'NOT_STARTED' },
+      { data: { otherParentExists: YesOrNo.NO }, userType: 'otherParent', expected: 'COMPLETED' },
+      {
+        data: {
+          otherParentExists: YesOrNo.YES,
+          otherParentFirstNames: 'MOCKNAME',
+          otherParentLastNames: 'MOCKNAME',
+          otherParentAddressKnown: YesOrNo.YES,
+          otherParentAddress1: 'MOCK_ADDRESS_1',
+          otherParentAddress2: 'MOCK_ADDRESS_2',
+          otherParentAddressTown: ' MOCK_TOWN',
+          otherParentAddressPostcode: 'MOCK_POSTCODE',
+        },
+        userType: 'otherParent',
+        expected: 'COMPLETED',
+      },
+      {
+        data: {
+          otherParentExists: YesOrNo.YES,
+          otherParentFirstNames: 'MOCKNAME',
+          otherParentLastNames: 'MOCKNAME',
+        },
+        userType: 'otherParent',
+        expected: 'IN_PROGRESS',
+      },
+      {
+        data: {
+          otherParentExists: YesOrNo.YES,
+          otherParentFirstNames: 'MOCKNAME',
+          otherParentLastNames: 'MOCKNAME',
+          otherParentAddressKnown: YesOrNo.NO,
+        },
+        userType: 'otherParent',
+        expected: 'COMPLETED',
+      },
+      {
+        data: {
+          otherParentExists: YesOrNo.YES,
+          otherParentFirstNames: 'MOCKNAME',
+          otherParentLastNames: 'MOCKNAME',
+          otherParentAddressKnown: YesOrNo.YES,
+          otherParentAddress1: 'MOCK_ADDRESS_1',
+        },
+        userType: 'otherParent',
+        expected: 'IN_PROGRESS',
+      },
+      {
+        data: {
+          otherParentExists: YesOrNo.YES,
+          otherParentFirstNames: 'MOCKNAME',
+          otherParentAddressKnown: YesOrNo.NO,
+        },
+        userType: 'otherParent',
+        expected: 'IN_PROGRESS',
+      },
+      {
+        data: {
+          otherParentExists: YesOrNo.YES,
+          otherParentFirstNames: 'MOCKNAME',
+          otherParentLastNames: 'MOCKNAME',
+          otherParentAddressKnown: YesOrNo.YES,
+          otherParentAddress1: 'MOCK_ADDRESS_1',
+          otherParentAddressTown: ' MOCK_TOWN',
+          otherParentAddressPostcode: 'MOCK_POSTCODE',
+        },
+        userType: 'otherParent',
+        expected: 'COMPLETED',
+      },
+    ])('should return correct status %o', async ({ data, expected }) => {
+      expect(getOtherParentStatus({ ...userCase, ...data })).toBe(expected);
+    });
+  });
+
+  describe('getBirthMotherDetailsStatus', () => {
+    test.each([
+      { data: {}, userType: 'birthMother', expected: 'NOT_STARTED' },
+      {
+        data: {
+          birthMotherFirstNames: 'MOCKNAME',
+          birthMotherLastNames: 'MOCKNAME',
+        },
+        userType: 'birthMother',
+        expected: 'IN_PROGRESS',
+      },
+      {
+        data: {
+          birthMotherFirstNames: 'MOCKNAME',
+          birthMotherLastNames: 'MOCKNAME',
+          birthMotherStillAlive: YesNoNotsure.NO,
+        },
+        userType: 'birthMother',
+        expected: 'COMPLETED',
+      },
+      {
+        data: {
+          birthMotherFirstNames: 'MOCKNAME',
+          birthMotherStillAlive: YesNoNotsure.NO,
+        },
+        userType: 'birthMother',
+        expected: 'IN_PROGRESS',
+      },
+      {
+        data: {
+          birthMotherFirstNames: 'MOCKNAME',
+          birthMotherLastNames: 'MOCKNAME',
+          birthMotherStillAlive: YesNoNotsure.NOT_SURE,
+          birthMotherNotAliveReason: 'MOCK_REASON',
+        },
+        userType: 'birthMother',
+        expected: 'COMPLETED',
+      },
+      {
+        data: {
+          birthMotherFirstNames: 'MOCKNAME',
+          birthMotherLastNames: 'MOCKNAME',
+          birthMotherStillAlive: YesNoNotsure.NOT_SURE,
+        },
+        userType: 'birthMother',
+        expected: 'IN_PROGRESS',
+      },
+      {
+        data: {
+          birthMotherFirstNames: 'MOCKNAME',
+          birthMotherLastNames: 'MOCKNAME',
+          birthMotherStillAlive: YesNoNotsure.YES,
+          birthMotherNationality: ['British'],
+          birthMotherOccupation: 'MOCK_OCCUPATION',
+          birthMotherAddressKnown: YesOrNo.YES,
+          birthMotherAddress1: 'MOCK_ADDRESS_1',
+          birthMotherAddress2: 'MOCK_ADDRESS_2',
+          birthMotherAddressTown: ' MOCK_TOWN',
+          birthMotherAddressPostcode: 'MOCK_POSTCODE',
+        },
+        userType: 'birthMother',
+        expected: 'COMPLETED',
+      },
+      {
+        data: {
+          birthMotherFirstNames: 'MOCKNAME',
+          birthMotherLastNames: 'MOCKNAME',
+          birthMotherStillAlive: YesNoNotsure.YES,
+        },
+        userType: 'birthMother',
+        expected: 'IN_PROGRESS',
+      },
+      {
+        data: {
+          birthMotherFirstNames: 'MOCKNAME',
+          birthMotherLastNames: 'MOCKNAME',
+          birthMotherStillAlive: YesNoNotsure.YES,
+          birthMotherNationality: ['British'],
+          birthMotherOccupation: 'MOCK_OCCUPATION',
+          birthMotherAdditionalNationalities: ['MOCK_COUNTRY'],
+          birthMotherAddressKnown: YesOrNo.NO,
+        },
+        userType: 'birthMother',
+        expected: 'COMPLETED',
+      },
+      {
+        data: {
+          birthMotherFirstNames: 'MOCKNAME',
+          birthMotherLastNames: 'MOCKNAME',
+          birthMotherStillAlive: YesNoNotsure.YES,
+          birthMotherNationality: ['British'],
+          birthMotherOccupation: 'MOCK_OCCUPATION',
+          birthMotherAddressKnown: YesOrNo.YES,
+          birthMotherAddress1: 'MOCK_ADDRESS_1',
+        },
+        userType: 'birthMother',
+        expected: 'IN_PROGRESS',
+      },
+      {
+        data: {
+          birthMotherFirstNames: 'MOCKNAME',
+          birthMotherLastNames: 'MOCKNAME',
+          birthMotherStillAlive: YesNoNotsure.YES,
+          birthMotherNationality: ['British'],
+          birthMotherAddressKnown: YesOrNo.NO,
+        },
+        userType: 'birthMother',
+        expected: 'IN_PROGRESS',
+      },
+      {
+        data: {
+          birthMotherStillAlive: YesNoNotsure.YES,
+          birthMotherFirstNames: 'MOCKNAME',
+          birthMotherLastNames: 'MOCKNAME',
+          birthMotherNationality: ['British'],
+          birthMotherOccupation: 'MOCK_OCCUPATION',
+          birthMotherAddressKnown: YesOrNo.YES,
+          birthMotherAddress1: 'MOCK_ADDRESS_1',
+          birthMotherAddressTown: 'MOCK_TOWN',
+          birthMotherAddressPostcode: 'MOCK_POSTCODE',
+          birthMotherCountry: 'MOCK_COUNTRY',
+        },
+        userType: 'birthMother',
+        expected: 'COMPLETED',
+      },
+    ])('should return correct status %o', async ({ data, expected }) => {
+      expect(getBirthMotherDetailsStatus({ ...userCase, ...data })).toBe(expected);
     });
   });
 });

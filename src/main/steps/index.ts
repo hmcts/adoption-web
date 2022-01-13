@@ -10,7 +10,16 @@ import { applicant2Sequence } from './applicant2/applicant2Sequence';
 import { birthMotherSequence } from './birth-mother/birthMotherSequence';
 import { childrenSequence } from './children/childrenSequence';
 import { Step as EligibilityStep, eligibilitySequence } from './eligibilitySequence';
-import { APPLICANT_1, APPLICANT_2, BIRTH_MOTHER, CHECK_ANSWERS_URL, CHILDREN, TASK_LIST_URL } from './urls';
+import { otherParentSequence } from './other-parent/otherParentSequence';
+import {
+  APPLICANT_1,
+  APPLICANT_2,
+  BIRTH_MOTHER,
+  CHECK_ANSWERS_URL,
+  CHILDREN,
+  OTHER_PARENT,
+  TASK_LIST_URL,
+} from './urls';
 
 const stepForms: Record<string, Form> = {};
 
@@ -73,9 +82,13 @@ export const getNextStepUrl = (req: AppRequest, data: Partial<Case>): string => 
     return TASK_LIST_URL;
   }
   const { path, queryString } = getPathAndQueryString(req);
-  const nextStep = [...applicant1Sequence, ...applicant2Sequence, ...childrenSequence, ...birthMotherSequence].find(
-    s => s.url === path
-  );
+  const nextStep = [
+    ...applicant1Sequence,
+    ...applicant2Sequence,
+    ...childrenSequence,
+    ...birthMotherSequence,
+    ...otherParentSequence,
+  ].find(s => s.url === path);
   const url = nextStep ? nextStep.getNextStep(data) : CHECK_ANSWERS_URL;
 
   return `${url}${queryString}`;
@@ -132,10 +145,12 @@ export const stepsWithContentApplicant1 = getStepsWithContent(applicant1Sequence
 export const stepsWithContentApplicant2 = getStepsWithContent(applicant2Sequence, APPLICANT_2);
 export const stepsWithContentChildren = getStepsWithContent(childrenSequence, CHILDREN);
 export const stepsWithContentBirthMother = getStepsWithContent(birthMotherSequence, BIRTH_MOTHER);
+export const stepsWithContentOtherParent = getStepsWithContent(otherParentSequence, OTHER_PARENT);
 export const stepsWithContent = [
   ...stepsWithContentEligibility,
   ...stepsWithContentApplicant1,
   ...stepsWithContentApplicant2,
   ...stepsWithContentChildren,
   ...stepsWithContentBirthMother,
+  ...stepsWithContentOtherParent,
 ];

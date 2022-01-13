@@ -418,7 +418,6 @@ export interface CaseData {
   otherParentOtherNationalities: ListValue<OtherName>[];
   otherParentNameOnCertificate: string;
 
-
   applicationType: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
   labelContentApplicant2: string;
