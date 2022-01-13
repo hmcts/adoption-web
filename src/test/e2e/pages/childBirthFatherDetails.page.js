@@ -30,7 +30,7 @@ module.exports = {
     I.wait('2');
     I.click('Save and continue');
     I.wait('2');
-    I.waitForText("Is the child's birth Father still alive?");
+    I.waitForText("Is the child's birth father still alive?");
     I.click(this.fields.birthFatherStillAlive);
     I.wait('2');
     I.click('Save and continue');

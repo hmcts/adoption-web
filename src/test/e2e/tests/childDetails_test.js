@@ -42,7 +42,7 @@ Scenario('Child birth mother details event', async ({ loginPage, childBirthMothe
   await taskListPage.verifyChildBirthMotherDetailsStatus();
 });
 
-Scenario('Child birth Father details event', async ({ loginPage, childBirthFatherDetailsPage, taskListPage }) => {
+Scenario('Child birth father details event', async ({ loginPage, childBirthFatherDetailsPage, taskListPage }) => {
   await loginPage.signInWithCitizenUser(config.citizenUserOne);
   await taskListPage.goToTaskListPage();
   await taskListPage.selectChildBirthFatherDetails();
