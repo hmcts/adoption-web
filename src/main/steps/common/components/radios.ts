@@ -26,8 +26,14 @@ export class Radios {
   }
 
   languages = {
-    en: (): Record<string, unknown> => this.enContent,
-    cy: (): Record<string, unknown> => this.cyContent,
+    en: (): Record<string, unknown> => ({
+      ...this.enContent,
+      errors: { [this.fieldName]: { required: 'Please answer the question' } },
+    }),
+    cy: (): Record<string, unknown> => ({
+      ...this.cyContent,
+      errors: { [this.fieldName]: { required: 'Please answer the question (in Welsh)' } },
+    }),
   };
 
   generateForm = (): FormContent => ({
