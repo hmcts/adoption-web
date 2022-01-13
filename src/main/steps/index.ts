@@ -22,6 +22,7 @@ import {
   CHILDREN,
   OTHER_PARENT,
   REVIEW_PAY_SUBMIT,
+  TASK_LIST_URL,
 } from './urls';
 
 const stepForms: Record<string, Form> = {};
@@ -80,6 +81,10 @@ export const getNextIncompleteStepUrl = (req: AppRequest): string => {
 };
 
 export const getNextStepUrl = (req: AppRequest, data: Partial<Case>): string => {
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
+  if ((req.body as any).saveAsDraft) {
+    return TASK_LIST_URL;
+  }
   const { path, queryString } = getPathAndQueryString(req);
   const nextStep = [
     ...applicant1Sequence,

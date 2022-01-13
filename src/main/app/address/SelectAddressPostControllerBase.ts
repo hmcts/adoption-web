@@ -26,11 +26,26 @@ export default class SelectAddressPostControllerBase extends PostController<AnyO
       if (selectedAddressIndex >= 0) {
         //eslint-disable-next-line @typescript-eslint/no-explicit-any
         const selectedAddress = req.session.addresses[selectedAddressIndex] as any;
+
         req.session.userCase[`${this.fieldPrefix}Address1`] = selectedAddress.street1;
         req.session.userCase[`${this.fieldPrefix}Address2`] = selectedAddress.street2;
         req.session.userCase[`${this.fieldPrefix}AddressTown`] = selectedAddress.town;
         req.session.userCase[`${this.fieldPrefix}AddressCounty`] = selectedAddress.county;
         req.session.userCase[`${this.fieldPrefix}AddressPostcode`] = selectedAddress.postcode;
+
+        formData[`${this.fieldPrefix}Address1`] = selectedAddress.street1;
+        formData[`${this.fieldPrefix}Address2`] = selectedAddress.street2;
+        formData[`${this.fieldPrefix}AddressTown`] = selectedAddress.town;
+        formData[`${this.fieldPrefix}AddressCounty`] = selectedAddress.county;
+        formData[`${this.fieldPrefix}AddressPostcode`] = selectedAddress.postcode;
+
+        try {
+          req.session.userCase = await this.save(req, formData, this.getEventName(req));
+        } catch (err) {
+          req.locals.logger.error('Error saving', err);
+          //TODO uncomment this line when CCD work is complete
+          //req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+        }
       }
     }
 

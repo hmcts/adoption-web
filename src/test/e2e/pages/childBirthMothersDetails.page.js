@@ -31,10 +31,11 @@ module.exports = {
     I.click('Save and continue');
     I.waitForText("What is the nationality of the child's birth mother?");
     I.click(this.fields.britishCitizen);
-    I.click(this.fields.citizenOfDifferentCountry);
-    I.fillField(this.fields.addAnotherNationality, 'Canada');
-    I.click('Add');
-    I.wait('2');
+    //TODO uncomment these tests
+    // I.click(this.fields.citizenOfDifferentCountry);
+    // I.fillField(this.fields.addAnotherNationality, 'Canada');
+    // I.click('Add');
+    // I.wait('2');
     I.click('Save and continue');
     I.waitForText("What is the occupation of the child's birth mother?");
     I.fillField(this.fields.birthMotherOccupation, 'Software Engineer');

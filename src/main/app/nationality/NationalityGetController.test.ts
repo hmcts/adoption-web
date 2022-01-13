@@ -36,15 +36,36 @@ describe('NationalityGetController', () => {
   });
 
   describe('when there is remove param in req.query and applicant1AdditionalNationalities in userCase', () => {
-    test('should redirect to same url', async () => {
+    const formData = { applicant1AdditionalNationalities: ['MOCK_COUNTRY2'] };
+
+    beforeEach(() => {
       req = mockRequest({
         query: { remove: 'MOCK_COUNTRY' },
-        session: { userCase: { applicant1AdditionalNationalities: ['MOCK_COUNTRY', 'MOCK_COUNTRY2'] } },
+        session: { userCase: { id: 'MOCK_ID', applicant1AdditionalNationalities: ['MOCK_COUNTRY', 'MOCK_COUNTRY2'] } },
       });
       req.url = '/request?remove=MOCK_COUNTRY';
+      req.locals.api.triggerEvent.mockResolvedValue(formData);
+    });
+
+    test('should redirect to same url', async () => {
       await controller.get(req, res);
       expect(req.session.userCase.applicant1AdditionalNationalities).toEqual(['MOCK_COUNTRY2']);
       expect(res.redirect).toHaveBeenCalledWith('/request');
+    });
+
+    test('should call save with correct params', async () => {
+      await controller.get(req, res);
+      expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(1);
+      expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('MOCK_ID', formData, 'citizen-update-application');
+    });
+
+    test('should log error when triggerEvent call fails', async () => {
+      req.locals.api.triggerEvent.mockRejectedValue('MOCK_ERROR');
+      await controller.get(req, res);
+      expect(req.locals.logger.error).toHaveBeenCalledTimes(1);
+      expect(req.locals.logger.error).toHaveBeenCalledWith('Error saving', 'MOCK_ERROR');
+      //TODO uncomment this line when CCD work is complete
+      // expect(req.session.errors).toEqual([{ errorType: 'errorSaving', propertyName: '*' }]);
     });
   });
 

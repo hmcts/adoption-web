@@ -129,9 +129,25 @@ export interface AlternativeService {
 
 export interface Applicant {
   FirstName: string;
-  MiddleName: string;
   LastName: string;
   Email: string;
+  FullName: string;
+  HasOtherNames: YesOrNo;
+  AdditionalNames: ListValue<OtherName>[];
+  DateOfBirth: DateAsString;
+  Occupation: string;
+  EmailAddress: string;
+  PhoneNumber: string;
+  Nationality: Nationality[];
+  AdditionalNationality: ListValue<OtherName>[];
+  Address1: string;
+  Address2: string;
+  AddressTown: string;
+  AddressCountry: string;
+  AddressPostCode: string;
+  AddressSameAsApplicant1: string;
+  contactDetails: ContactDetails[];
+
   AgreedToReceiveEmails: YesOrNo;
   ConfirmReceipt: YesOrNo;
   LanguagePreferenceWelsh: YesOrNo;
@@ -140,7 +156,6 @@ export interface Applicant {
   NameChangedHow: ChangedNameHow[];
   NameChangedHowOtherDetails: string;
   HomeAddress: AddressGlobalUK;
-  PhoneNumber: string;
   KeepContactDetailsConfidential: YesOrNo;
   Gender: Gender;
   CorrespondenceAddress: AddressGlobalUK;
@@ -255,15 +270,151 @@ export interface Bailiff {
   reasonFailureToServeByBailiff: string;
 }
 
+export const enum Nationality {
+  BRITHISH = 'British',
+  IRISH = 'Irish',
+  OTHER = 'Other',
+  NOT_SURE = 'Not sure',
+}
+
+export const enum ContactDetails {
+  EMAIL = 'email',
+  PHONE = 'phone',
+}
+
+export interface Children {
+  FirstName: string;
+  LastName: string;
+  DateOfBirth: DateAsString;
+  Nationality: Nationality[];
+  AdditionalNationality: ListValue<OtherName>[];
+  FirstNameAfterAdoption: string;
+  LastNameAfterAdoption: string;
+  SexAtBirth: Gender;
+}
+
+export interface OtherName {
+  name: string;
+}
+
+export const enum Gender {
+  MALE = 'male',
+  FEMALE = 'female',
+  NOT_GIVEN = 'notGiven',
+  INTERSEX = 'intersex',
+}
+
 export interface PlacementOrder {
   placementOrderId: string;
   placementOrderType?: string;
   placementOrderNumber?: string;
   placementOrderCourt?: string;
-  placementOrderDate?: CaseDate;
+  placementOrderDate?: CaseDate | string;
 }
 
 export interface CaseData {
+  applyingWith: ApplyingWith;
+  applicant1FirstName: string;
+  applicant1LastName: string;
+  applicant1Email: string;
+  applicant1HasOtherNames: YesOrNo;
+  applicant1AdditionalNames: ListValue<OtherName>[];
+  applicant1DateOfBirth: DateAsString;
+  applicant1Occupation: string;
+  applicant1EmailAddress: string;
+  applicant1PhoneNumber: string;
+  applicant1Nationality: Nationality[];
+  applicant1AdditionalNationalities: ListValue<OtherName>[];
+  applicant1Address1: string;
+  applicant1Address2: string;
+  applicant1AddressTown: string;
+  applicant1AddressCountry: string;
+  applicant1AddressPostCode: string;
+  applicant1ContactDetails: ContactDetails[];
+
+  applicant2FirstName: string;
+  applicant2LastName: string;
+  applicant2Email: string;
+  applicant2HasOtherNames: YesOrNo;
+  applicant2AdditionalNames: ListValue<OtherName>[];
+  applicant2DateOfBirth: DateAsString;
+  applicant2Occupation: string;
+  applicant2EmailAddress: string;
+  applicant2PhoneNumber: string;
+  applicant2Nationality: Nationality[];
+  applicant2AdditionalNationalities: ListValue<OtherName>[];
+  applicant2Address1: string;
+  applicant2Address2: string;
+  applicant2AddressTown: string;
+  applicant2AddressCountry: string;
+  applicant2AddressPostCode: string;
+  applicant2AddressSameAsApplicant1: string;
+  applicant2ContactDetails: ContactDetails[];
+
+  childrenFirstName: string;
+  childrenLastName: string;
+  childrenDateOfBirth: DateAsString;
+  childrenNationality: Nationality[];
+  childrenAdditionalNationalities: ListValue<OtherName>[];
+  childrenFirstNameAfterAdoption: string;
+  childrenLastNameAfterAdoption: string;
+  childrenSexAtBirth: Gender;
+  placementOrders: ListValue<PlacementOrder>[];
+  addAnotherPlacementOrder: YesOrNo;
+  selectedPlacementOrderId: string;
+  hyphenatedCaseRef: string;
+
+  birthMotherFirstName: string;
+  birthMotherLastName: string;
+  birthMotherStillAlive: string;
+  birthMotherNotAliveReason: string;
+  birthMotherNationality: Nationality[];
+  birthMotherOccupation: string;
+  birthMotherAddressKnown: YesOrNo;
+  birthMotherAddress1: string;
+  birthMotherAddress2: string;
+  birthMotherAddress3: string;
+  birthMotherAddressTown: string;
+  birthMotherAddressCounty: string;
+  birthMotherAddressPostCode: string;
+  birthMotherAddressCountry: string;
+  birthMotherOtherNationalities: ListValue<OtherName>[];
+  birthMotherNameOnCertificate: string;
+
+  birthFatherFirstName: string;
+  birthFatherLastName: string;
+  birthFatherStillAlive: string;
+  birthFatherNotAliveReason: string;
+  birthFatherNationality: Nationality[];
+  birthFatherOccupation: string;
+  birthFatherAddressKnown: YesOrNo;
+  birthFatherAddress1: string;
+  birthFatherAddress2: string;
+  birthFatherAddress3: string;
+  birthFatherAddressTown: string;
+  birthFatherAddressCounty: string;
+  birthFatherAddressPostCode: string;
+  birthFatherAddressCountry: string;
+  birthFatherOtherNationalities: ListValue<OtherName>[];
+  birthFatherNameOnCertificate: string;
+
+  otherParentFirstName: string;
+  otherParentLastName: string;
+  otherParentStillAlive: string;
+  otherParentNotAliveReason: string;
+  otherParentNationality: Nationality[];
+  otherParentOccupation: string;
+  otherParentAddressKnown: YesOrNo;
+  otherParentAddress1: string;
+  otherParentAddress2: string;
+  otherParentAddress3: string;
+  otherParentAddressTown: string;
+  otherParentAddressCounty: string;
+  otherParentAddressPostCode: string;
+  otherParentAddressCountry: string;
+  otherParentOtherNationalities: ListValue<OtherName>[];
+  otherParentNameOnCertificate: string;
+
   applicationType: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
   labelContentApplicant2: string;
@@ -273,10 +424,7 @@ export interface CaseData {
   labelContentUnionType: string;
   labelContentUnionTypeUC: string;
   labelContentApplicationType: ApplicationType;
-  applicant1FirstName: string;
-  applicant1MiddleName: string;
-  applicant1LastName: string;
-  applicant1Email: string;
+
   applicant1AgreedToReceiveEmails: YesOrNo;
   applicant1ConfirmReceipt: YesOrNo;
   applicant1LanguagePreferenceWelsh: YesOrNo;
@@ -285,7 +433,6 @@ export interface CaseData {
   applicant1NameChangedHow: ChangedNameHow[];
   applicant1NameChangedHowOtherDetails: string;
   applicant1HomeAddress: AddressGlobalUK;
-  applicant1PhoneNumber: string;
   applicant1KeepContactDetailsConfidential: YesOrNo;
   applicant1Gender: Gender;
   applicant1CorrespondenceAddress: AddressGlobalUK;
@@ -302,10 +449,8 @@ export interface CaseData {
   applicant1LegalProceedings: YesOrNo;
   applicant1LegalProceedingsDetails: string;
   applicant1PcqId: string;
-  applicant2FirstName: string;
+
   applicant2MiddleName: string;
-  applicant2LastName: string;
-  applicant2Email: string;
   applicant2AgreedToReceiveEmails: YesOrNo;
   applicant2ConfirmReceipt: YesOrNo;
   applicant2LanguagePreferenceWelsh: YesOrNo;
@@ -314,7 +459,6 @@ export interface CaseData {
   applicant2NameChangedHow: ChangedNameHow[];
   applicant2NameChangedHowOtherDetails: string;
   applicant2HomeAddress: AddressGlobalUK;
-  applicant2PhoneNumber: string;
   applicant2KeepContactDetailsConfidential: YesOrNo;
   applicant2Gender: Gender;
   applicant2CorrespondenceAddress: AddressGlobalUK;
@@ -538,6 +682,35 @@ export interface CaseData {
   coAddNewDocuments: YesOrNo;
   coDocumentsUploaded: ListValue<DivorceDocument>[];
   coIsEverythingInPetitionTrue: YesOrNo;
+}
+
+export interface Children {
+  FirstName: string;
+  LastName: string;
+  DateOfBirth: DateAsString;
+  Nationality: Nationality[];
+  FirstNameAfterAdoption: string;
+  LastNameAfterAdoption: string;
+  SexAtBirth: Gender;
+}
+
+export interface Parent {
+  FirstName: string;
+  LastName: string;
+  StillAlive: string;
+  NotAliveReason: string;
+  Nationality: Nationality[];
+  Occupation: string;
+  AddressKnown: YesOrNo;
+  Address1: string;
+  Address2: string;
+  Address3: string;
+  AddressTown: string;
+  AddressCounty: string;
+  AddressPostCode: string;
+  AddressCountry: string;
+  OtherNationalities: ListValue<OtherName>[];
+  NameOnCertificate: string;
 }
 
 export interface CaseInvite {
@@ -894,11 +1067,6 @@ export const enum YesNoNotsure {
   NOT_SURE = 'NotSure',
 }
 
-export const enum ContactDetails {
-  EMAIL = 'email',
-  PHONE = 'phone',
-}
-
 export const enum SectionStatus {
   NOT_STARTED = 'NOT_STARTED',
   IN_PROGRESS = 'IN_PROGRESS',
@@ -921,6 +1089,11 @@ export const enum AlternativeServiceType {
 export const enum ApplicationType {
   SOLE_APPLICATION = 'soleApplication',
   JOINT_APPLICATION = 'jointApplication',
+}
+
+export const enum ApplyingWith {
+  ALONE = 'alone',
+  WITH_SPOUSE_OR_CIVIL_PARTNER = 'withSpouseOrCivilPartner',
 }
 
 export const enum ChangedNameHow {
@@ -964,6 +1137,10 @@ export const enum Court {
   BURY_ST_EDMUNDS = 'buryStEdmunds',
 }
 
+export const enum Adoption {
+  ADOPTION = 'adoption',
+}
+
 export const enum DivorceOrDissolution {
   DIVORCE = 'divorce',
   DISSOLUTION = 'dissolution',
@@ -1000,13 +1177,6 @@ export const enum DocumentsServedWhere {
 export const enum FinancialOrderFor {
   APPLICANT = 'applicant',
   CHILDREN = 'children',
-}
-
-export const enum Gender {
-  MALE = 'male',
-  FEMALE = 'female',
-  NOT_GIVEN = 'notGiven',
-  INTERSEX = 'intersex',
 }
 
 export const enum GeneralOrderDivorceParties {
@@ -1475,8 +1645,8 @@ export const enum HttpStatus {
   NOT_EXTENDED = 'NOT_EXTENDED',
   NETWORK_AUTHENTICATION_REQUIRED = 'NETWORK_AUTHENTICATION_REQUIRED',
 }
-export const CASE_TYPE = 'NFD';
-export const JURISDICTION = 'DIVORCE';
+export const CASE_TYPE = 'A58';
+export const JURISDICTION = 'ADOPTION';
 export const CITIZEN_SUBMIT = 'citizen-submit-application';
 export const CITIZEN_INVITE_APPLICANT_2 = 'citizen-invite-applicant2';
 export const CITIZEN_CREATE = 'citizen-create-application';

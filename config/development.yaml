@@ -1,31 +1,26 @@
 security:
   referrerPolicy: 'origin'
-port: 3000
+port: 3001
 timeout: 30000
-fees:
-  applicationFee: £183
 services:
   authProvider:
     url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'
     microservice: 'adoption_web'
     secret: 'NEED TO INSERT SECRET'
-  idam:
-    authorizationURL: 'https://idam-web-public.aat.platform.hmcts.net/login'
-    tokenURL: 'https://idam-api.aat.platform.hmcts.net/o/token'
-    clientID: 'adoption-web'
-    clientSecret: 'NEED TO INSERT SECRET'
-    systemUsername: 'dummy_user'
-    systemPassword: 'dummy_password'
-  case:
-    #ßurl: 'http://ccd-data-store-api-adoption-cos-api-pr-51.service.core-compute-preview.internal'
-    url: 'http://ccd-data-store-api-aat.service.core-compute-aat.internal'
+  # idam:
+  #   authorizationURL: 'http://localhost:3501/login'
+  #   tokenURL: 'http://localhost:5000/o/token'
+  #   clientID: 'adoption-web'
+  #   clientSecret: 'thUphEveC2Ekuqedaneh4jEcRuba4t2t'
+  #   systemUsername: 'dummy_user'
+  #   systemPassword: 'dummy_password'
+  # case:
+  #   url: 'http://localhost:4452'    
   postcodeLookup:
     url: 'https://api.os.uk/search/places/v1'
     token: 'NEED TO INSERT SECRET'
   feeLookup:
     url: 'http://fees-register-api-aat.service.core-compute-aat.internal/fees-register/fees/lookup'
-  payments:
-    url: http://payment-api-aat.service.core-compute-aat.internal
 health:
   timeout: 5000
   deadline: 15000

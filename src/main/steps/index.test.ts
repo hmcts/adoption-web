@@ -1,6 +1,6 @@
 import { mockRequest } from '../../test/unit/utils/mockRequest';
 import { Checkbox } from '../app/case/case';
-import { Gender, YesOrNo } from '../app/case/definition';
+import { ApplyingWith, Gender, YesOrNo } from '../app/case/definition';
 import { AppRequest } from '../app/controller/AppRequest';
 
 import { applicant1Sequence } from './applicant1Sequence';
@@ -59,7 +59,7 @@ describe('Steps', () => {
     });
 
     it('returns the next incomplete step if previous is valid', () => {
-      mockReq.session.userCase.applyingWith = 'alone';
+      mockReq.session.userCase.applyingWith = ApplyingWith.ALONE;
       expect(getNextIncompleteStepUrl(mockReq)).toBe('/review-pay-submit/check-your-answers');
     });
 

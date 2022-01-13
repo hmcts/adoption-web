@@ -24,11 +24,13 @@ describe('NationalityPostController', () => {
   let req;
   let res;
   let controller;
+  const formData = { applicant1AdditionalNationalities: [] };
 
   beforeEach(() => {
     req = mockRequest({
       session: {
         userCase: {
+          id: 'MOCK_ID',
           applicant1AdditionalNationalities: [],
         },
         save: jest.fn(done => done()),
@@ -42,6 +44,7 @@ describe('NationalityPostController', () => {
     beforeEach(() => {
       mockGetParsedBody.mockReturnValue({});
       mockGetErrors.mockReturnValue([]);
+      req.locals.api.triggerEvent.mockResolvedValue(formData);
     });
 
     afterEach(() => {
@@ -60,6 +63,10 @@ describe('NationalityPostController', () => {
           mockGetParsedBody.mockReturnValue({ addButton: 'addButton', addAnotherNationality: 'MOCK_COUNTRY' });
           mockGetErrors.mockReturnValue([]);
           controller = new NationalityPostController({}, FieldPrefix.APPLICANT1);
+          req.locals.api.triggerEvent.mockResolvedValue({
+            ...formData,
+            applicant1AdditionalNationalities: ['MOCK_COUNTRY'],
+          });
         });
 
         test('should add the country in userCase applicant1AdditionalNationalities session data', async () => {
@@ -67,6 +74,25 @@ describe('NationalityPostController', () => {
           expect(req.session.errors).toEqual([]);
           expect(req.session.userCase.applicant1AdditionalNationalities).toEqual(['MOCK_COUNTRY']);
           expect(req.session.save).toHaveBeenCalled();
+        });
+
+        test('should call save with correct params', async () => {
+          await controller.post(req, res);
+          expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(1);
+          expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(
+            'MOCK_ID',
+            { applicant1AdditionalNationalities: ['MOCK_COUNTRY'] },
+            'citizen-update-application'
+          );
+        });
+
+        test('should log error when triggerEvent call fails', async () => {
+          req.locals.api.triggerEvent.mockRejectedValue('MOCK_ERROR');
+          await controller.post(req, res);
+          expect(req.locals.logger.error).toHaveBeenCalledTimes(1);
+          expect(req.locals.logger.error).toHaveBeenCalledWith('Error saving', 'MOCK_ERROR');
+          //TODO uncomment this line when CCD work is complete
+          // expect(req.session.errors).toEqual([{ errorType: 'errorSaving', propertyName: '*' }]);
         });
       });
     });
@@ -76,6 +102,7 @@ describe('NationalityPostController', () => {
         mockGetParsedBody.mockReturnValue({});
         mockGetErrors.mockReturnValue([]);
         controller = new NationalityPostController({}, FieldPrefix.APPLICANT1);
+        req.locals.api.triggerEvent.mockResolvedValue(formData);
       });
 
       test('should add the country in userCase applicant1AdditionalNationalities session data', async () => {
@@ -83,7 +110,9 @@ describe('NationalityPostController', () => {
         expect(req.session.errors).toEqual([]);
         expect(req.session.userCase.applicant1AdditionalNationalities).toEqual([]);
         expect(req.session.save).toHaveBeenCalled();
-        expect(mockGetNextStepUrl).toHaveBeenCalledWith(req, { applicant1AdditionalNationalities: [] });
+        expect(mockGetNextStepUrl).toHaveBeenCalledWith(req, {
+          applicant1AdditionalNationalities: [],
+        });
       });
     });
   });
@@ -141,9 +170,13 @@ describe('NationalityPostController', () => {
         },
       });
       res = mockResponse();
-      mockGetParsedBody.mockReturnValue({ addButton: 'addButton', addAnotherNationality: 'MOCK_COUNTRY' });
+      mockGetParsedBody.mockReturnValue({ addButton: 'addButton', addAnotherNationality: 'MOCK_COUNTRY3' });
       mockGetErrors.mockReturnValue([]);
       controller = new NationalityPostController((): FormFields => ({}), FieldPrefix.APPLICANT1);
+      req.locals.api.triggerEvent.mockResolvedValue({
+        ...formData,
+        applicant1AdditionalNationalities: ['MOCK_COUNTRY'],
+      });
     });
 
     test('should set the formData fields in userCase applicant1AdditionalNationalities session data', async () => {
