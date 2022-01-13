@@ -27,6 +27,7 @@ module.exports = {
 
   async goToTaskListPage() {
     await I.goToPage(config.baseUrl + 'task-list');
+    I.wait('3');
   },
   async selectTaskNameFromTaskList(taskName) {
     await I.click(taskName);
