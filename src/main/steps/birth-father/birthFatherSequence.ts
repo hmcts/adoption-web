@@ -33,10 +33,7 @@ export const birthFatherSequence: Step[] = [
     url: BIRTH_FATHER_NAME_ON_CERTIFICATE,
     showInSection: Sections.AboutChildren,
     getNextStep: data =>
-      data.birthFatherNameOnCertificate === YesOrNo.YES
-        ? BIRTH_FATHER_FULL_NAME
-        : // TODO update below URL when other parents changes in master
-          OTHER_PARENT_EXISTS,
+      data.birthFatherNameOnCertificate === YesOrNo.YES ? BIRTH_FATHER_FULL_NAME : OTHER_PARENT_EXISTS,
   },
   {
     url: BIRTH_FATHER_FULL_NAME,
