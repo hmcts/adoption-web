@@ -33,8 +33,8 @@ export class Input extends Component {
 export const generateInputField = (values: InputValues): Record<string, FormField> => ({
   [values.fieldName]: {
     type: 'input',
-    label: l => l[`${values.path}label`],
-    hint: l => l[`${values.path}hint`],
+    label: l => l[`${values.path || ''}label`],
+    hint: l => l[`${values.path || ''}hint`],
     labelSize: values.labelSize,
     validator: values.validator,
   },
