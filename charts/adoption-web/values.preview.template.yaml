@@ -7,7 +7,7 @@ nodejs:
   autoscaling:
     enabled: false
   environment:
-    CCD_URL: 'http://ccd-data-store-api-adoption-cos-api-pr-50.service.core-compute-preview.internal'
+    CCD_URL: 'http://ccd-data-store-api-adoption-cos-api-pr-51.service.core-compute-preview.internal'
 idam-pr:
   enabled: true
   redirect_uris:
