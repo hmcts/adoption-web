@@ -12,6 +12,7 @@ import {
   CHECK_ANSWERS_URL,
   CONFIRM_JOINT_APPLICATION,
   HUB_PAGE,
+  PAY_YOUR_FEE,
   SENT_TO_APPLICANT2_FOR_REVIEW,
 } from '../urls';
 
@@ -43,6 +44,9 @@ const applicant1RedirectPageSwitch = (caseState: State, userCase: Partial<Case>,
     }
     case State.Submitted: {
       return APPLICATION_SUBMITTED;
+    }
+    case State.AwaitingPayment: {
+      return PAY_YOUR_FEE;
     }
     case State.AwaitingAos:
     case State.AwaitingConditionalOrder:

@@ -27,6 +27,7 @@ nodejs:
     IDAM_WEB_URL: 'https://idam-web-public.{{ .Values.global.environment }}.platform.hmcts.net/login'
     IDAM_API_URL: 'https://idam-api.{{ .Values.global.environment }}.platform.hmcts.net/o/token'
     REDIS_HOST: 'adoption-web-session-storage-{{ .Values.global.environment }}.redis.cache.windows.net'
+    PAYMENTS_API_URL: 'http://payment-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal'
 
   keyVaults:
     adoption:

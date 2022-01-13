@@ -132,6 +132,7 @@ const en = content => {
           ? urls.CHILDREN_PLACEMENT_ORDER_NUMBER
           : urls.CHILDREN_PLACEMENT_ORDER_SUMMARY,
       birthMotherDetails: urls.BIRTH_MOTHER_FULL_NAME,
+      reviewApplicationPayAndSubmit: urls.CHECK_ANSWERS_URL,
     },
   };
 };
@@ -244,6 +245,7 @@ const cy = content => {
           ? urls.CHILDREN_PLACEMENT_ORDER_NUMBER
           : urls.CHILDREN_PLACEMENT_ORDER_SUMMARY,
       birthMotherDetails: urls.BIRTH_MOTHER_FULL_NAME,
+      reviewApplicationPayAndSubmit: urls.CHECK_ANSWERS_URL,
     },
   };
 };

@@ -2,6 +2,8 @@ security:
   referrerPolicy: 'origin'
 port: 3000
 timeout: 30000
+fees:
+  applicationFee: £183
 services:
   authProvider:
     url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'
@@ -22,6 +24,8 @@ services:
     token: 'NEED TO INSERT SECRET'
   feeLookup:
     url: 'http://fees-register-api-aat.service.core-compute-aat.internal/fees-register/fees/lookup'
+  payments:
+    url: http://payment-api-aat.service.core-compute-aat.internal
 health:
   timeout: 5000
   deadline: 15000

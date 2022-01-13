@@ -9,6 +9,8 @@ services:
     clientSecret: IDAM_SECRET
   case:
     url: CCD_URL
+  payments:
+    url: PAYMENTS_API_URL
 port: PORT
 session:
   redis:
