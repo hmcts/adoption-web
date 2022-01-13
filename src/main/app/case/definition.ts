@@ -277,7 +277,6 @@ export const enum Nationality {
   NOT_SURE = 'Not sure',
 }
 
-
 export const enum ContactDetails {
   EMAIL = 'email',
   PHONE = 'phone',
@@ -318,7 +317,6 @@ export interface CaseData {
   applicant1FirstName: string;
   applicant1LastName: string;
   applicant1Email: string;
-  applicant1FullName: string;
   applicant1HasOtherNames: YesOrNo;
   applicant1AdditionalNames: ListValue<OtherName>[];
   applicant1DateOfBirth: DateAsString;
@@ -337,7 +335,6 @@ export interface CaseData {
   applicant2FirstName: string;
   applicant2LastName: string;
   applicant2Email: string;
-  applicant2FullName: string;
   applicant2HasOtherNames: YesOrNo;
   applicant2AdditionalNames: ListValue<OtherName>[];
   applicant2DateOfBirth: DateAsString;
@@ -366,7 +363,7 @@ export interface CaseData {
   addAnotherPlacementOrder: YesOrNo;
   selectedPlacementOrderId: string;
   hyphenatedCaseRef: string;
-  
+
   birthMotherFirstName: string;
   birthMotherLastName: string;
   birthMotherStillAlive: string;

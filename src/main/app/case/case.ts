@@ -54,7 +54,6 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant1FirstNames: 'applicant1FirstName',
   //applicant1MiddleNames: 'applicant1MiddleName',
   applicant1LastNames: 'applicant1LastName',
-  applicant1FullName: 'applicant1FullName',
   applicant1HasOtherNames: 'applicant1HasOtherNames',
   applicant1AdditionalNames: 'applicant1AdditionalNames',
   applicant1DateOfBirth: 'applicant1DateOfBirth',
@@ -192,7 +191,6 @@ export interface Case {
   applicant1FirstNames?: string;
   applicant1MiddleNames?: string;
   applicant1LastNames?: string;
-  applicant1FullName?: string;
   applicant1HasOtherNames?: YesOrNo;
   applicant1AdditionalName?: string;
   applicant1AdditionalNames?: string[];
