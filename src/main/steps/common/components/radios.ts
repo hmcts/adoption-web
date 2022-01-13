@@ -4,6 +4,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent } from '../common.content';
 
 import { defaultButtons } from './default-buttons';
+import { RadioValues } from './types';
 
 export class Radios {
   enContent: Record<string, unknown>;
@@ -62,3 +63,16 @@ export class Radios {
     form: this.form,
   });
 }
+
+export const generateRadiosField = (values: RadioValues): Record<string, FormField> => ({
+  [values.fieldName]: {
+    type: 'radios',
+    label: l => l[`${values.path}label`],
+    values: values.values.map(({ key, value, subFields }) => ({
+      label: l => l[key as string],
+      value: value as string,
+      subFields,
+    })),
+    validator: isFieldFilledIn,
+  },
+});

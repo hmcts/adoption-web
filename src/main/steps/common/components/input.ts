@@ -1,51 +1,26 @@
 import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent } from '../../../app/form/Form';
-import { Validator } from '../../../app/form/validation';
+import { FormContent, FormField } from '../../../app/form/Form';
 import { CommonContent } from '../common.content';
 
+import { Component } from './component';
 import { defaultButtons } from './default-buttons';
+import { InputValues } from './types';
 
-export class Input {
-  fieldName: string;
-  enContent: Record<string, unknown>;
-  cyContent: Record<string, unknown>;
-  labelSize?: string;
-  errors?: Record<string, string>;
-  validator: Validator;
-  form: FormContent;
+export class Input extends Component {
+  public form: FormContent;
 
-  constructor(
-    enContent: Record<string, unknown>,
-    cyContent: Record<string, unknown>,
-    fieldName: string,
-    validator: Validator,
-    labelSize?: string,
-    errors?: Record<string, string>
-  ) {
-    this.enContent = enContent;
-    this.cyContent = cyContent;
-    this.fieldName = fieldName;
-    this.validator = validator;
-    this.labelSize = labelSize;
-    this.errors = errors;
+  constructor(values: InputValues) {
+    super(values);
     this.form = this.generateForm();
   }
 
   languages = {
-    en: (): Record<string, unknown> => this.enContent,
-    cy: (): Record<string, unknown> => this.cyContent,
+    en: (): Record<string, unknown> => this.values.enContent,
+    cy: (): Record<string, unknown> => this.values.cyContent,
   };
 
   generateForm = (): FormContent => ({
-    fields: {
-      [this.fieldName]: {
-        type: 'input',
-        label: l => l.label,
-        hint: l => l.hint,
-        labelSize: this.labelSize,
-        validator: this.validator,
-      },
-    },
+    fields: { ...generateInputField(this.values as InputValues) },
     ...defaultButtons,
   });
 
@@ -54,3 +29,13 @@ export class Input {
     form: this.form,
   });
 }
+
+export const generateInputField = (values: InputValues): Record<string, FormField> => ({
+  [values.fieldName]: {
+    type: 'input',
+    label: l => l[`${values.path}label`],
+    hint: l => l[`${values.path}hint`],
+    labelSize: values.labelSize,
+    validator: values.validator,
+  },
+});

@@ -26,8 +26,11 @@ const cyContent = {
   },
 };
 
-const validator = isFieldFilledIn;
-
-const labelSize = 'l';
-
-export const { form, generateContent } = new Input(enContent, cyContent, fieldName, validator, labelSize);
+export const { form, generateContent } = new Input({
+  fieldName,
+  enContent,
+  cyContent,
+  validator: isFieldFilledIn,
+  labelSize: 'l',
+  path: '',
+});

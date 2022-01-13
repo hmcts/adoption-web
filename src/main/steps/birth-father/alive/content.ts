@@ -37,7 +37,7 @@ const fieldName = 'birthFatherStillAlive';
 const values = [
   { key: 'yes', value: YesNoNotsure.YES },
   { key: 'no', value: YesNoNotsure.NO },
-  { key: 'notSure', value: YesNoNotsure.NOT_SURE, input: { fieldName: 'birthFatherUnsureAliveReason' } },
+  { key: 'notSure', value: YesNoNotsure.NOT_SURE, subFields: { fieldName: 'birthFatherUnsureAliveReason' } },
 ];
 
 export const { form, generateContent } = new Radios(enContent, cyContent, fieldName, values);
