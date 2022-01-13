@@ -1094,6 +1094,7 @@ export const enum ApplicationType {
 export const enum ApplyingWith {
   ALONE = 'alone',
   WITH_SPOUSE_OR_CIVIL_PARTNER = 'withSpouseOrCivilPartner',
+  WITH_SOME_ONE_ELSE = 'withSomeoneElse',
 }
 
 export const enum ChangedNameHow {
