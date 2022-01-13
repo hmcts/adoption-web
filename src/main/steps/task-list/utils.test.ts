@@ -3,6 +3,7 @@ import { DivorceOrDissolution, Gender, State, YesNoNotsure, YesOrNo } from '../.
 
 import {
   getAdoptionCertificateDetailsStatus,
+  getBirthFatherDetailsStatus,
   getBirthMotherDetailsStatus,
   getChildrenBirthCertificateStatus,
   getChildrenPlacementOrderStatus,
@@ -27,6 +28,11 @@ const userCase: CaseWithId = {
   applicant2Explanation: YesOrNo.NO,
   addAnotherNationality: YesOrNo.NO,
 };
+
+const NOT_STARTED = 'NOT_STARTED';
+const IN_PROGRESS = 'IN_PROGRESS';
+const COMPLETED = 'COMPLETED';
+
 describe('utils', () => {
   describe('isApplyingWithComplete()', () => {
     test('Should return false if applyingWith is not present', async () => {
@@ -57,7 +63,7 @@ describe('utils', () => {
           applicant1Occupation: undefined,
         },
         userType: 'applicant1',
-        expected: 'NOT_STARTED',
+        expected: NOT_STARTED,
       },
       {
         data: {
@@ -71,7 +77,7 @@ describe('utils', () => {
           applicant1Occupation: undefined,
         },
         userType: 'applicant1',
-        expected: 'IN_PROGRESS',
+        expected: IN_PROGRESS,
       },
       {
         data: {
@@ -85,7 +91,7 @@ describe('utils', () => {
           applicant1Occupation: 'MOCK_OCCUPATION',
         },
         userType: 'applicant1',
-        expected: 'COMPLETED',
+        expected: COMPLETED,
       },
     ])('should return correct status %o', async ({ data, userType, expected }) => {
       expect(getPersonalDetailsStatus({ ...userCase, ...data }, <'applicant1' | 'applicant2'>userType)).toBe(expected);
@@ -94,11 +100,11 @@ describe('utils', () => {
 
   describe('getContactDetailsStatus', () => {
     test.each([
-      { data: { applicant1Address1: 'MOCK_ADDRESS_1' }, userType: 'applicant1', expected: 'NOT_STARTED' },
+      { data: { applicant1Address1: 'MOCK_ADDRESS_1' }, userType: 'applicant1', expected: NOT_STARTED },
       {
         data: { applicant1Address1: 'MOCK_ADDRESS_1', applicant1AddressTown: ' MOCK_TOWN' },
         userType: 'applicant1',
-        expected: 'NOT_STARTED',
+        expected: NOT_STARTED,
       },
       {
         data: {
@@ -107,7 +113,7 @@ describe('utils', () => {
           applicant1AddressPostcode: 'MOCK_POSTCODE',
         },
         userType: 'applicant1',
-        expected: 'IN_PROGRESS',
+        expected: IN_PROGRESS,
       },
       {
         data: {
@@ -117,7 +123,7 @@ describe('utils', () => {
           applicant1ContactDetails: undefined,
         },
         userType: 'applicant1',
-        expected: 'IN_PROGRESS',
+        expected: IN_PROGRESS,
       },
       {
         data: {
@@ -128,7 +134,7 @@ describe('utils', () => {
           applicant1EmailAddress: 'MOCK_EMAIL',
         },
         userType: 'applicant1',
-        expected: 'COMPLETED',
+        expected: COMPLETED,
       },
       {
         data: {
@@ -139,7 +145,7 @@ describe('utils', () => {
           applicant1PhoneNumber: 'MOCK_PHONE',
         },
         userType: 'applicant1',
-        expected: 'COMPLETED',
+        expected: COMPLETED,
       },
       {
         data: {
@@ -148,7 +154,7 @@ describe('utils', () => {
           applicant2PhoneNumber: 'MOCK_PHONE',
         },
         userType: 'applicant2',
-        expected: 'COMPLETED',
+        expected: COMPLETED,
       },
       {
         data: {
@@ -157,7 +163,7 @@ describe('utils', () => {
           applicant2PhoneNumber: 'MOCK_PHONE',
         },
         userType: 'applicant2',
-        expected: 'IN_PROGRESS',
+        expected: IN_PROGRESS,
       },
     ])('should return correct status %o', async ({ data, userType, expected }) => {
       expect(getContactDetailsStatus({ ...userCase, ...data }, <FieldPrefix>userType)).toBe(expected);
@@ -166,8 +172,8 @@ describe('utils', () => {
 
   describe('getChildrenPlacementOrderStatus', () => {
     test.each([
-      { data: { addAnotherPlacementOrder: undefined, placementOrders: undefined }, expected: 'NOT_STARTED' },
-      { data: { addAnotherPlacementOrder: YesOrNo.YES, placementOrders: undefined }, expected: 'IN_PROGRESS' },
+      { data: { addAnotherPlacementOrder: undefined, placementOrders: undefined }, expected: NOT_STARTED },
+      { data: { addAnotherPlacementOrder: YesOrNo.YES, placementOrders: undefined }, expected: IN_PROGRESS },
       {
         data: {
           addAnotherPlacementOrder: YesOrNo.YES,
@@ -180,7 +186,7 @@ describe('utils', () => {
             },
           ],
         },
-        expected: 'IN_PROGRESS',
+        expected: IN_PROGRESS,
       },
       {
         data: {
@@ -194,7 +200,7 @@ describe('utils', () => {
             },
           ],
         },
-        expected: 'COMPLETED',
+        expected: COMPLETED,
       },
       {
         data: {
@@ -215,7 +221,7 @@ describe('utils', () => {
             },
           ],
         },
-        expected: 'IN_PROGRESS',
+        expected: IN_PROGRESS,
       },
       {
         data: {
@@ -236,7 +242,7 @@ describe('utils', () => {
             },
           ],
         },
-        expected: 'IN_PROGRESS',
+        expected: IN_PROGRESS,
       },
     ])('should return correct status %o', async ({ data, expected }) => {
       expect(getChildrenPlacementOrderStatus({ ...userCase, ...data })).toBe(expected);
@@ -254,7 +260,7 @@ describe('utils', () => {
           childrenNationality: undefined,
           childrenAdditionalNationalities: undefined,
         },
-        expected: 'NOT_STARTED',
+        expected: NOT_STARTED,
       },
       {
         data: {
@@ -265,7 +271,7 @@ describe('utils', () => {
           childrenNationality: undefined,
           childrenAdditionalNationalities: undefined,
         },
-        expected: 'IN_PROGRESS',
+        expected: IN_PROGRESS,
       },
       {
         data: {
@@ -276,7 +282,7 @@ describe('utils', () => {
           childrenNationality: ['British'],
           childrenAdditionalNationalities: undefined,
         },
-        expected: 'COMPLETED',
+        expected: COMPLETED,
       },
       {
         data: {
@@ -287,7 +293,7 @@ describe('utils', () => {
           childrenNationality: ['Other'],
           childrenAdditionalNationalities: undefined,
         },
-        expected: 'IN_PROGRESS',
+        expected: IN_PROGRESS,
       },
       {
         data: {
@@ -298,7 +304,7 @@ describe('utils', () => {
           childrenNationality: ['Other'],
           childrenAdditionalNationalities: ['MOCK_COUNTRY'],
         },
-        expected: 'COMPLETED',
+        expected: COMPLETED,
       },
     ])('should return correct status %o', async ({ data, expected }) => {
       expect(getChildrenBirthCertificateStatus({ ...userCase, ...data })).toBe(expected);
@@ -309,18 +315,132 @@ describe('utils', () => {
     test.each([
       {
         data: { childrenFirstNameAfterAdoption: undefined, childrenLastNameAfterAdoption: undefined },
-        expected: 'NOT_STARTED',
+        expected: NOT_STARTED,
       },
       {
         data: { childrenFirstNameAfterAdoption: 'MOCK_FIRST_NAME', childrenLastNameAfterAdoption: undefined },
-        expected: 'IN_PROGRESS',
+        expected: IN_PROGRESS,
       },
       {
         data: { childrenFirstNameAfterAdoption: 'MOCK_FIRST_NAME', childrenLastNameAfterAdoption: 'MOCK_LAST_NAME' },
-        expected: 'COMPLETED',
+        expected: COMPLETED,
       },
     ])('should return correct status %o', async ({ data, expected }) => {
       expect(getAdoptionCertificateDetailsStatus({ ...userCase, ...data })).toBe(expected);
+    });
+  });
+
+  describe('getBirthFatherDetailsStatus', () => {
+    it.each([
+      {
+        data: {},
+        expected: NOT_STARTED,
+      },
+      {
+        data: { birthFatherNameOnCertificate: 'No' },
+        expected: COMPLETED,
+      },
+      {
+        data: { birthFatherNameOnCertificate: 'Yes', birthFatherFirstNames: 'Harry' },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: { birthFatherNameOnCertificate: 'Yes', birthFatherFirstNames: 'Harry', birthFatherLastNames: 'Cornell' },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          birthFatherNameOnCertificate: 'Yes',
+          birthFatherFirstNames: 'Harry',
+          birthFatherLastNames: 'Cornell',
+          birthFatherStillAlive: 'Yes',
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          birthFatherNameOnCertificate: 'Yes',
+          birthFatherFirstNames: 'Harry',
+          birthFatherLastNames: 'Cornell',
+          birthFatherStillAlive: 'No',
+        },
+        expected: COMPLETED,
+      },
+      {
+        data: {
+          birthFatherNameOnCertificate: 'Yes',
+          birthFatherFirstNames: 'Harry',
+          birthFatherLastNames: 'Cornell',
+          birthFatherStillAlive: 'NotSure',
+          birthFatherUnsureAliveReason: 'Disappeared',
+        },
+        expected: COMPLETED,
+      },
+      {
+        data: {
+          birthFatherNameOnCertificate: 'Yes',
+          birthFatherFirstNames: 'Harry',
+          birthFatherLastNames: 'Cornell',
+          birthFatherStillAlive: 'Yes',
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          birthFatherNameOnCertificate: 'Yes',
+          birthFatherFirstNames: 'Harry',
+          birthFatherLastNames: 'Cornell',
+          birthFatherStillAlive: 'Yes',
+          birthFatherNationality: ['British', 'Irish', 'Other'],
+          birthFatherAdditionalNationalities: ['Japan'],
+          birthFatherOccupation: 'Primary school teacher',
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          birthFatherNameOnCertificate: 'Yes',
+          birthFatherFirstNames: 'Harry',
+          birthFatherLastNames: 'Cornell',
+          birthFatherStillAlive: 'Yes',
+          birthFatherNationality: ['British', 'Irish', 'Other'],
+          birthFatherAdditionalNationalities: ['Japan'],
+          birthFatherOccupation: 'Primary school teacher',
+          birthFatherAddressKnown: YesOrNo.NO,
+        },
+        expected: COMPLETED,
+      },
+      {
+        data: {
+          birthFatherNameOnCertificate: 'Yes',
+          birthFatherFirstNames: 'Harry',
+          birthFatherLastNames: 'Cornell',
+          birthFatherStillAlive: 'Yes',
+          birthFatherNationality: ['British', 'Irish', 'Other'],
+          birthFatherAdditionalNationalities: ['Japan'],
+          birthFatherOccupation: 'Primary school teacher',
+          birthFatherAddressKnown: YesOrNo.YES,
+          birthFatherAddress1: '33 Example Road',
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          birthFatherNameOnCertificate: 'Yes',
+          birthFatherFirstNames: 'Harry',
+          birthFatherLastNames: 'Cornell',
+          birthFatherStillAlive: 'Yes',
+          birthFatherNationality: ['British', 'Irish', 'Other'],
+          birthFatherAdditionalNationalities: ['Japan'],
+          birthFatherOccupation: 'Primary school teacher',
+          birthFatherAddressKnown: YesOrNo.YES,
+          birthFatherAddress1: '33 Example Road',
+          birthFatherAddressCountry: 'United Kingdom',
+        },
+        expected: COMPLETED,
+      },
+    ])('should return correct status %o', async ({ data, expected }) => {
+      expect(getBirthFatherDetailsStatus({ ...userCase, ...data })).toBe(expected);
     });
   });
 

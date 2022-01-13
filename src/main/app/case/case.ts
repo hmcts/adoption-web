@@ -157,6 +157,23 @@ export interface Case {
   childrenFirstNameAfterAdoption?: string;
   childrenLastNameAfterAdoption?: string;
 
+  birthFatherNameOnCertificate?: string;
+  birthFatherFirstNames?: string;
+  birthFatherLastNames?: string;
+  birthFatherStillAlive?: string;
+  birthFatherUnsureAliveReason?: string;
+  birthFatherNationality?: string[];
+  birthFatherAdditionalNationalities?: string[];
+  birthFatherOccupation?: string;
+  birthFatherAddressKnown?: YesOrNo;
+  birthFatherAddress1?: string;
+  birthFatherAddress2?: string;
+  birthFatherAddress3?: string;
+  birthFatherAddressTown?: string;
+  birthFatherAddressCounty?: string;
+  birthFatherAddressPostcode?: string;
+  birthFatherAddressCountry?: string;
+
   otherParentAddressKnown?: YesOrNo;
   otherParentFirstNames?: string;
   otherParentLastNames?: string;
@@ -311,6 +328,7 @@ export enum FieldPrefix {
   APPLICANT1 = 'applicant1',
   APPLICANT2 = 'applicant2',
   CHILDREN = 'children',
+  BIRTH_FATHER = 'birthFather',
   BIRTH_MOTHER = 'birthMother',
   OTHER_PARENT = 'otherParent',
 }

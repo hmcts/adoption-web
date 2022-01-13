@@ -130,6 +130,55 @@ export const getAdoptionCertificateDetailsStatus = (userCase: CaseWithId): Secti
     : SectionStatus.IN_PROGRESS;
 };
 
+export const getBirthFatherDetailsStatus = (userCase: CaseWithId): SectionStatus => {
+  const {
+    birthFatherNameOnCertificate,
+    birthFatherFirstNames,
+    birthFatherLastNames,
+    birthFatherStillAlive,
+    birthFatherUnsureAliveReason,
+    birthFatherNationality,
+    birthFatherAdditionalNationalities,
+    birthFatherOccupation,
+    birthFatherAddressKnown,
+  } = userCase;
+
+  if (birthFatherNameOnCertificate === YesOrNo.NO) {
+    return SectionStatus.COMPLETED;
+  } else if (!birthFatherNameOnCertificate) {
+    return SectionStatus.NOT_STARTED;
+  }
+
+  // Progressed beyond certificate screen
+
+  if (!birthFatherFirstNames || !birthFatherLastNames || !birthFatherStillAlive) {
+    return SectionStatus.IN_PROGRESS;
+  } else {
+    if (
+      birthFatherStillAlive === YesNoNotsure.NO ||
+      (birthFatherStillAlive === YesNoNotsure.NOT_SURE && birthFatherUnsureAliveReason)
+    ) {
+      return SectionStatus.COMPLETED;
+    }
+  }
+
+  // Progressed beyond alive screen
+
+  if (
+    !birthFatherNationality?.length ||
+    notSureViolation(birthFatherNationality) ||
+    (birthFatherNationality.includes('Other') && !birthFatherAdditionalNationalities?.length) ||
+    !birthFatherOccupation ||
+    !birthFatherAddressKnown
+  ) {
+    return SectionStatus.IN_PROGRESS;
+  } else {
+    return birthFatherAddressKnown === YesOrNo.NO || addressComplete(userCase, FieldPrefix.BIRTH_FATHER)
+      ? SectionStatus.COMPLETED
+      : SectionStatus.IN_PROGRESS;
+  }
+};
+
 export const getBirthMotherDetailsStatus = (userCase: CaseWithId): SectionStatus => {
   const names = userCase.birthMotherFirstNames && userCase.birthMotherLastNames;
   const stillAlive = userCase.birthMotherStillAlive;

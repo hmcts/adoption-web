@@ -5,6 +5,7 @@ import * as urls from '../urls';
 
 import {
   getAdoptionCertificateDetailsStatus,
+  getBirthFatherDetailsStatus,
   getBirthMotherDetailsStatus,
   getChildrenBirthCertificateStatus,
   getChildrenPlacementOrderStatus,
@@ -111,6 +112,11 @@ const en = content => {
         statuses,
         'adoption-certificate-details-status'
       ),
+      birthFather: getSectionStatusLabel(
+        getBirthFatherDetailsStatus(content.userCase),
+        statuses,
+        'birth-father-status'
+      ),
       birthMotherDetails: getSectionStatusLabel(
         getBirthMotherDetailsStatus(content.userCase),
         statuses,
@@ -131,6 +137,7 @@ const en = content => {
         getChildrenPlacementOrderStatus(content.userCase) === SectionStatus.NOT_STARTED
           ? urls.CHILDREN_PLACEMENT_ORDER_NUMBER
           : urls.CHILDREN_PLACEMENT_ORDER_SUMMARY,
+      birthFather: urls.BIRTH_FATHER_NAME_ON_CERTIFICATE,
       birthMotherDetails: urls.BIRTH_MOTHER_FULL_NAME,
       reviewApplicationPayAndSubmit: urls.CHECK_ANSWERS_URL,
     },
@@ -224,6 +231,11 @@ const cy = content => {
         statuses,
         'adoption-certificate-details-status'
       ),
+      birthFather: getSectionStatusLabel(
+        getBirthFatherDetailsStatus(content.userCase),
+        statuses,
+        'birth-father-status'
+      ),
       birthMotherDetails: getSectionStatusLabel(
         getBirthMotherDetailsStatus(content.userCase),
         statuses,
@@ -244,6 +256,7 @@ const cy = content => {
         getChildrenPlacementOrderStatus(content.userCase) === SectionStatus.NOT_STARTED
           ? urls.CHILDREN_PLACEMENT_ORDER_NUMBER
           : urls.CHILDREN_PLACEMENT_ORDER_SUMMARY,
+      birthFather: urls.BIRTH_FATHER_NAME_ON_CERTIFICATE,
       birthMotherDetails: urls.BIRTH_MOTHER_FULL_NAME,
       reviewApplicationPayAndSubmit: urls.CHECK_ANSWERS_URL,
     },
