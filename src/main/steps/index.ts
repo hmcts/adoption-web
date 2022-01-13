@@ -11,7 +11,16 @@ import { birthMotherSequence } from './birth-mother/birthMotherSequence';
 import { childrenSequence } from './children/childrenSequence';
 import { Step as EligibilityStep, eligibilitySequence } from './eligibilitySequence';
 import { otherParentSequence } from './other-parent/otherParentSequence';
-import { APPLICANT_1, APPLICANT_2, BIRTH_MOTHER, CHECK_ANSWERS_URL, CHILDREN, OTHER_PARENT } from './urls';
+import { Step as ReviewPaySubmitStep, reviewPaySubmitSequence } from './review-pay-submit/reviewPaySubmitSequence';
+import {
+  APPLICANT_1,
+  APPLICANT_2,
+  BIRTH_MOTHER,
+  CHECK_ANSWERS_URL,
+  CHILDREN,
+  OTHER_PARENT,
+  REVIEW_PAY_SUBMIT,
+} from './urls';
 
 const stepForms: Record<string, Form> = {};
 
@@ -76,7 +85,9 @@ export const getNextStepUrl = (req: AppRequest, data: Partial<Case>): string => 
     ...childrenSequence,
     ...birthMotherSequence,
     ...otherParentSequence,
+    ...reviewPaySubmitSequence,
   ].find(s => s.url === path);
+
   const url = nextStep ? nextStep.getNextStep(data) : CHECK_ANSWERS_URL;
 
   return `${url}${queryString}`;
@@ -116,7 +127,10 @@ export type StepWithContent = Step & {
   view: string;
 };
 
-const getStepsWithContent = (sequence: Step[] | EligibilityStep[], subDir = ''): StepWithContent[] => {
+const getStepsWithContent = (
+  sequence: Step[] | EligibilityStep[] | ReviewPaySubmitStep[],
+  subDir = ''
+): StepWithContent[] => {
   const dir = __dirname;
 
   const results: StepWithContent[] = [];
@@ -134,6 +148,7 @@ export const stepsWithContentApplicant2 = getStepsWithContent(applicant2Sequence
 export const stepsWithContentChildren = getStepsWithContent(childrenSequence, CHILDREN);
 export const stepsWithContentBirthMother = getStepsWithContent(birthMotherSequence, BIRTH_MOTHER);
 export const stepsWithContentOtherParent = getStepsWithContent(otherParentSequence, OTHER_PARENT);
+export const stepsWithContentReviewPaySubmit = getStepsWithContent(reviewPaySubmitSequence, REVIEW_PAY_SUBMIT);
 export const stepsWithContent = [
   ...stepsWithContentEligibility,
   ...stepsWithContentApplicant1,
@@ -141,4 +156,5 @@ export const stepsWithContent = [
   ...stepsWithContentChildren,
   ...stepsWithContentBirthMother,
   ...stepsWithContentOtherParent,
+  ...stepsWithContentReviewPaySubmit,
 ];

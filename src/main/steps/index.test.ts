@@ -60,7 +60,7 @@ describe('Steps', () => {
 
     it('returns the next incomplete step if previous is valid', () => {
       mockReq.session.userCase.applyingWith = 'alone';
-      expect(getNextIncompleteStepUrl(mockReq)).toBe('/check-your-answers');
+      expect(getNextIncompleteStepUrl(mockReq)).toBe('/review-pay-submit/check-your-answers');
     });
 
     it('returns the previous step if its a dead end', () => {
