@@ -1,13 +1,13 @@
-import { FormField } from '../../../app/form/Form';
 import { Validator } from '../../../app/form/validation';
 
 export interface ComponentValues {
-  enContent: Record<string, unknown>;
-  cyContent: Record<string, unknown>;
+  enContent?: Record<string, unknown>;
+  cyContent?: Record<string, unknown>;
   fieldName: string;
-  labelSize?: string;
   subFields?: ComponentValues[];
-  path?: string;
+  label?: string;
+  labelSize?: string | null;
+  hint?: string;
 }
 
 export interface RadiosValues extends ComponentValues {
@@ -17,7 +17,7 @@ export interface RadiosValues extends ComponentValues {
 export interface RadiosItem {
   key: string;
   value: string;
-  subFields?: Record<string, FormField>;
+  input?: InputValues;
 }
 
 export interface InputValues extends ComponentValues {

@@ -1,9 +1,20 @@
+import { TranslationFn } from '../../../app/controller/GetController';
+import { FormContent } from '../../../app/form/Form';
+import { CommonContent } from '../common.content';
+
 import { ComponentValues } from './types';
 
 export abstract class Component {
-  values: ComponentValues;
+  form: FormContent | undefined;
+  generateContent: TranslationFn;
 
   constructor(values: ComponentValues) {
-    this.values = values;
+    this.generateContent = (content: CommonContent) => ({
+      ...{
+        en: (): Record<string, unknown> => values.enContent || {},
+        cy: (): Record<string, unknown> => values.cyContent || {},
+      }[content.language](),
+      form: this.form,
+    });
   }
 }

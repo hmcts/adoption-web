@@ -31,6 +31,7 @@ export const { form, generateContent } = new Input({
   enContent,
   cyContent,
   validator: isFieldFilledIn,
+  label: 'label',
   labelSize: 'l',
-  path: '',
+  hint: 'hint',
 });

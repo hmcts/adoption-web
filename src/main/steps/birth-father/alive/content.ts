@@ -2,42 +2,38 @@ import { YesNoNotsure } from '../../../app/case/definition';
 import { Radios } from '../../common/components/radios';
 import { SECTION, SECTION_IN_WELSH } from '../constants';
 
+import { cyNotSure, enNotSure, notSureInput } from './notSureInput/content';
+
+const fieldName = 'birthFatherStillAlive';
+
 const enContent = {
   section: SECTION,
   label: "Is the child's birth father still alive?",
-  notSureInput:
-    "Provide more details. For example, 'the birth father is uncontactable'. Your adoption agency or social worker can help you to complete this section.",
+  ...enNotSure.content,
   errors: {
-    birthFatherStillAlive: {
+    [fieldName]: {
       required: 'Please answer the question',
     },
-    birthFatherUnsureAliveReason: {
-      required: 'Enter more details',
-    },
+    ...enNotSure.errors,
   },
 };
 
 const cyContent = {
   section: SECTION_IN_WELSH,
   label: "Is the child's birth father still alive? (in Welsh)",
-  notSureInput:
-    "Provide more details. For example, 'the birth father is uncontactable'. Your adoption agency or social worker can help you to complete this section. (in Welsh)",
+  ...cyNotSure,
   errors: {
-    birthFatherStillAlive: {
+    [fieldName]: {
       required: 'Please answer the question (in Welsh)',
     },
-    birthFatherUnsureAliveReason: {
-      required: 'Enter more details (in Welsh)',
-    },
+    ...cyNotSure.errors,
   },
 };
-
-const fieldName = 'birthFatherStillAlive';
 
 const values = [
   { key: 'yes', value: YesNoNotsure.YES },
   { key: 'no', value: YesNoNotsure.NO },
-  { key: 'notSure', value: YesNoNotsure.NOT_SURE, subFields: { fieldName: 'birthFatherUnsureAliveReason' } },
+  { key: 'notSure', value: YesNoNotsure.NOT_SURE, input: notSureInput },
 ];
 
-export const { form, generateContent } = new Radios(enContent, cyContent, fieldName, values);
+export const { form, generateContent } = new Radios({ enContent, cyContent, fieldName, values, label: 'label' });
