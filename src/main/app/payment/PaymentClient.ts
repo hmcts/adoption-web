@@ -3,7 +3,7 @@ import Axios, { AxiosInstance } from 'axios';
 import config from 'config';
 
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
-import { CASE_TYPE, DivorceOrDissolution } from '../case/definition';
+import { CASE_TYPE } from '../case/definition';
 import type { AppSession } from '../controller/AppRequest';
 
 const logger = Logger.getLogger('payment');
@@ -24,14 +24,13 @@ export class PaymentClient {
 
   public async create(): Promise<Payment> {
     const userCase = this.session.userCase;
-    const isDivorce = userCase.divorceOrDissolution === DivorceOrDissolution.DIVORCE;
     const caseId = userCase.id.toString();
     const total = userCase.applicationFeeOrderSummary.Fees.reduce((sum, item) => sum + +item.value.FeeAmount, 0) / 100;
     const body = {
       case_type: CASE_TYPE,
       amount: total,
       ccd_case_number: caseId,
-      description: `${isDivorce ? 'Divorce' : 'Ending your civil partnership'} application fee`,
+      description: 'Adoption application fee', //TODO consider welsh text
       currency: 'GBP',
       fees: userCase.applicationFeeOrderSummary.Fees.map(fee => ({
         calculated_amount: `${parseInt(fee.value.FeeAmount, 10) / 100}`,

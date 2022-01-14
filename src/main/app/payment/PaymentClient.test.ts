@@ -4,7 +4,6 @@ import config from 'config';
 import { mockLogger } from '../../../test/unit/mocks/hmcts/nodejs-logging';
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
-import { DivorceOrDissolution } from '../case/definition';
 
 import { PaymentClient } from './PaymentClient';
 
@@ -28,7 +27,6 @@ describe('PaymentClient', () => {
     const req = mockRequest({
       userCase: {
         id: '1234',
-        divorceOrDissolution: DivorceOrDissolution.DIVORCE,
         applicationFeeOrderSummary: {
           Fees: [{ value: { FeeAmount: 12345, FeeCode: 'mock fee code', FeeVersion: 'mock fee version' } }],
         },
@@ -52,7 +50,7 @@ describe('PaymentClient', () => {
       amount: 123.45,
       ccd_case_number: '1234',
       currency: 'GBP',
-      description: 'Divorce application fee',
+      description: 'Adoption application fee',
       fees: [
         {
           calculated_amount: '123.45',
@@ -83,7 +81,6 @@ describe('PaymentClient', () => {
     const req = mockRequest({
       userCase: {
         id: '1234',
-        divorceOrDissolution: DivorceOrDissolution.DIVORCE,
         applicationFeeOrderSummary: {
           Fees: [{ value: { FeeAmount: 12345, FeeCode: 'mock fee code', FeeVersion: 'mock fee version' } }],
         },
