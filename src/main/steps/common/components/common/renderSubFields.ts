@@ -18,7 +18,7 @@ const renderComponent = (component: ComponentValues): Record<string, FormField> 
   switch (component.type) {
     case 'radios':
       return generateRadiosField(component as RadiosValues);
-    case 'input' || 'text':
+    case 'input':
       return generateInputField(component as InputValues);
     default:
       return {};

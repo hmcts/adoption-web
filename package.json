@@ -14,7 +14,7 @@
     "lint": "tsc --noEmit -p tsconfig.eslint.json && eslint . --ext .js,.ts",
     "build": "webpack --config webpack.config.js",
     "build:prod": "NODE_ENV=production webpack --mode production --config webpack.config.js",
-    "test": "echo 'nope'",
+    "test": "jest",
     "test:coverage": "jest --coverage",
     "test:a11y": "echo 'nope' && exit 0",
     "sonar-scan": "sonar-scanner",
