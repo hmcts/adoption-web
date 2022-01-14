@@ -1,6 +1,6 @@
 import { stepsWithContentApplicant1 } from '../../../steps';
-import { Sections } from '../../../steps/applicant1Sequence';
 import { generatePageContent } from '../../../steps/common/common.content';
+import { Sections } from '../../../steps/constants';
 import { PageLink, YOUR_NAME } from '../../../steps/urls';
 import type { FormOptions } from '../../form/Form';
 import { Case, Checkbox } from '../case';

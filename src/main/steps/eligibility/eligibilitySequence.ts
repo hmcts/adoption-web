@@ -1,6 +1,5 @@
-import { YesOrNo } from '../app/case/definition';
-import { Eligibility as appRequestEligibility } from '../app/controller/AppRequest';
-
+import { YesOrNo } from '../../app/case/definition';
+import { Eligibility as appRequestEligibility } from '../../app/controller/AppRequest';
 import {
   CHECK_ELIGIBILITY_URL_LIVED_UK,
   CHECK_ELIGIBILITY_URL_MARRIED,
@@ -10,7 +9,7 @@ import {
   PageLink,
   SIGN_IN_URL,
   START_ELIGIBILITY_URL,
-} from './urls';
+} from '../urls';
 
 export enum Sections {
   Eligibility = 'eligibility',
