@@ -1,70 +1,32 @@
-import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent, FormField, FormInput } from '../../../app/form/Form';
+import { FormField } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
-import { CommonContent } from '../common.content';
 
-import { defaultButtons } from './default-buttons';
+import { Component } from './common/component';
+import { defaultButtons } from './common/default-buttons';
+import { renderSubFields } from './common/renderSubFields';
+import { RadiosValues } from './common/types';
 
-export class Radios {
-  enContent: Record<string, unknown>;
-  cyContent: Record<string, unknown>;
-  fieldName: string;
-  values: Record<string, unknown>[];
-  form: FormContent;
+export class Radios extends Component {
+  constructor(values: RadiosValues) {
+    super(values);
 
-  constructor(
-    enContent: Record<string, unknown>,
-    cyContent: Record<string, unknown>,
-    fieldName: string,
-    values: Record<string, unknown>[]
-  ) {
-    this.enContent = enContent;
-    this.cyContent = cyContent;
-    this.fieldName = fieldName;
-    this.values = values;
-    this.form = this.generateForm();
+    this.form = {
+      fields: { ...generateRadiosField(values as RadiosValues) },
+      ...defaultButtons,
+    };
   }
-
-  languages = {
-    en: (): Record<string, unknown> => ({
-      ...this.enContent,
-      errors: { [this.fieldName]: { required: 'Please answer the question' } },
-    }),
-    cy: (): Record<string, unknown> => ({
-      ...this.cyContent,
-      errors: { [this.fieldName]: { required: 'Please answer the question (in Welsh)' } },
-    }),
-  };
-
-  generateForm = (): FormContent => ({
-    fields: {
-      [this.fieldName]: {
-        type: 'radios',
-        label: l => l.label,
-        values: this.values.map(
-          ({ key, value, input }): FormInput => ({
-            label: l => l[key as string],
-            value: value as string,
-            subFields: input ? this.renderInput(key as string, input as Record<string, string>) : undefined,
-          })
-        ),
-        validator: isFieldFilledIn,
-      },
-    },
-    ...defaultButtons,
-  });
-
-  renderInput = (key: string, input: Record<string, string>): Record<string, FormField> => ({
-    [(input as Record<string, string>).fieldName]: {
-      type: 'input',
-      label: l => l[`${key}Input`],
-      labelSize: null,
-      validator: isFieldFilledIn,
-    },
-  });
-
-  generateContent: TranslationFn = (content: CommonContent) => ({
-    ...this.languages[content.language](),
-    form: this.form,
-  });
 }
+
+export const generateRadiosField = (values: RadiosValues): Record<string, FormField> => ({
+  [values.fieldName]: {
+    type: 'radios',
+    label: l => l[`${values.label}`],
+    hint: l => l[`${values.hint}`],
+    values: values.values.map(({ key, value, subFields }) => ({
+      label: l => l[key],
+      value,
+      subFields: subFields ? renderSubFields(subFields) : undefined,
+    })),
+    validator: isFieldFilledIn,
+  },
+});
