@@ -3,7 +3,7 @@ import { Checkbox } from '../app/case/case';
 import { ApplyingWith, Gender, YesOrNo } from '../app/case/definition';
 import { AppRequest } from '../app/controller/AppRequest';
 
-import { applicant1Sequence } from './applicant1Sequence';
+import { applicant1Sequence } from './applicant1/applicant1Sequence';
 import { APPLYING_WITH_URL, CHECK_ELIGIBILITY_URL_UNDER_18, START_ELIGIBILITY_URL, TASK_LIST_URL } from './urls';
 
 import { getNextEligibilityStepUrl, getNextIncompleteStepUrl, getNextStepUrl } from './index';

@@ -5,14 +5,15 @@ import { AppRequest, Eligibility } from '../app/controller/AppRequest';
 import { TranslationFn } from '../app/controller/GetController';
 import { Form, FormContent } from '../app/form/Form';
 
-import { Step, applicant1Sequence } from './applicant1Sequence';
+import { applicant1Sequence } from './applicant1/applicant1Sequence';
 import { applicant2Sequence } from './applicant2/applicant2Sequence';
 import { birthFatherSequence } from './birth-father/birthFatherSequence';
 import { birthMotherSequence } from './birth-mother/birthMotherSequence';
 import { childrenSequence } from './children/childrenSequence';
-import { Step as EligibilityStep, eligibilitySequence } from './eligibilitySequence';
+import { Step } from './constants';
+import { Step as EligibilityStep, eligibilitySequence } from './eligibility/eligibilitySequence';
 import { otherParentSequence } from './other-parent/otherParentSequence';
-import { Step as ReviewPaySubmitStep, reviewPaySubmitSequence } from './review-pay-submit/reviewPaySubmitSequence';
+import { reviewPaySubmitSequence } from './review-pay-submit/reviewPaySubmitSequence';
 import {
   APPLICANT_1,
   APPLICANT_2,
@@ -135,10 +136,7 @@ export type StepWithContent = Step & {
   view: string;
 };
 
-const getStepsWithContent = (
-  sequence: Step[] | EligibilityStep[] | ReviewPaySubmitStep[],
-  subDir = ''
-): StepWithContent[] => {
+const getStepsWithContent = (sequence: Step[] | EligibilityStep[], subDir = ''): StepWithContent[] => {
   const dir = __dirname;
 
   const results: StepWithContent[] = [];
