@@ -21,4 +21,11 @@ const values = [
   { key: 'no', value: YesOrNo.NO },
 ];
 
-export const { form, generateContent } = new Radios(enContent, cyContent, fieldName, values);
+export const { form, generateContent } = new Radios({
+  enContent,
+  cyContent,
+  fieldName,
+  values,
+  label: 'label',
+  hint: 'hint',
+});

@@ -1,56 +1,26 @@
-import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent } from '../../../app/form/Form';
-import { Validator } from '../../../app/form/validation';
-import { CommonContent } from '../common.content';
+import { FormField } from '../../../app/form/Form';
 
-import { defaultButtons } from './default-buttons';
+import { Component } from './common/component';
+import { defaultButtons } from './common/default-buttons';
+import { InputValues } from './common/types';
 
-export class Input {
-  fieldName: string;
-  enContent: Record<string, unknown>;
-  cyContent: Record<string, unknown>;
-  labelSize?: string;
-  errors?: Record<string, string>;
-  validator: Validator;
-  form: FormContent;
+export class Input extends Component {
+  constructor(values: InputValues) {
+    super(values);
 
-  constructor(
-    enContent: Record<string, unknown>,
-    cyContent: Record<string, unknown>,
-    fieldName: string,
-    validator: Validator,
-    labelSize?: string,
-    errors?: Record<string, string>
-  ) {
-    this.enContent = enContent;
-    this.cyContent = cyContent;
-    this.fieldName = fieldName;
-    this.validator = validator;
-    this.labelSize = labelSize;
-    this.errors = errors;
-    this.form = this.generateForm();
+    this.form = {
+      fields: { ...generateInputField(values as InputValues) },
+      ...defaultButtons,
+    };
   }
-
-  languages = {
-    en: (): Record<string, unknown> => this.enContent,
-    cy: (): Record<string, unknown> => this.cyContent,
-  };
-
-  generateForm = (): FormContent => ({
-    fields: {
-      [this.fieldName]: {
-        type: 'input',
-        label: l => l.label,
-        hint: l => l.hint,
-        labelSize: this.labelSize,
-        validator: this.validator,
-      },
-    },
-    ...defaultButtons,
-  });
-
-  generateContent: TranslationFn = (content: CommonContent) => ({
-    ...this.languages[content.language](),
-    form: this.form,
-  });
 }
+
+export const generateInputField = (values: InputValues): Record<string, FormField> => ({
+  [values.fieldName]: {
+    type: 'input',
+    label: l => l[`${values.label}`],
+    hint: l => l[`${values.hint}`],
+    labelSize: values.labelSize,
+    validator: values.validator,
+  },
+});
