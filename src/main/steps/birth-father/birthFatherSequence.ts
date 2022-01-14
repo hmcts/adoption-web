@@ -1,5 +1,5 @@
-import { CaseWithId } from '../../app/case/case';
 import { YesNoNotsure, YesOrNo } from '../../app/case/definition';
+import { Sections, Step } from '../constants';
 import {
   BIRTH_FATHER_ADDRESS_INTERNATIONAL,
   BIRTH_FATHER_ADDRESS_KNOWN,
@@ -12,21 +12,8 @@ import {
   BIRTH_FATHER_NATIONALITY,
   BIRTH_FATHER_OCCUPATION,
   OTHER_PARENT_EXISTS,
-  PageLink,
   TASK_LIST_URL,
 } from '../urls';
-
-export enum Sections {
-  AboutChildren = 'aboutChildren',
-}
-
-export interface Step {
-  url: string;
-  showInSection?: Sections;
-  showInCompleteSection?: Sections;
-  excludeFromContinueApplication?: boolean;
-  getNextStep: (data: Partial<CaseWithId>) => PageLink;
-}
 
 export const birthFatherSequence: Step[] = [
   {

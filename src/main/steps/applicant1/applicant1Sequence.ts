@@ -1,5 +1,4 @@
-import { CaseWithId } from '../app/case/case';
-
+import { Sections, Step } from '../constants';
 import {
   APPLICANT_1_CONTACT_DETAILS,
   APPLICANT_1_DOB,
@@ -14,35 +13,8 @@ import {
   APPLYING_WITH_URL,
   DATE_CHILD_MOVED_IN_URL,
   FEE_LOOKUP_URL,
-  PageLink,
   TASK_LIST_URL,
-} from './urls';
-
-export enum Sections {
-  AboutApplicant1 = 'aboutApplicant1',
-  AboutApplicant2 = 'aboutApplicant2',
-  AboutChildren = 'aboutChildren',
-  AboutBirthMother = 'aboutBirthMother',
-  AboutApplication = 'aboutApplication',
-  AboutPartnership = 'aboutPartnership',
-  HelpWithFees = 'helpWithFees',
-  ConnectionsToEnglandWales = 'connectionsToEnglandWales',
-  AboutPartners = 'aboutPartners',
-  ContactYou = 'contactYou',
-  ContactThem = 'contactThem',
-  OtherCourtCases = 'otherCourtCases',
-  DividingAssets = 'dividingAssets',
-  Documents = 'documents',
-  AboutOtherParent = 'aboutOtherParent',
-}
-
-export interface Step {
-  url: string;
-  showInSection?: Sections;
-  showInCompleteSection?: Sections;
-  excludeFromContinueApplication?: boolean;
-  getNextStep: (data: Partial<CaseWithId>) => PageLink;
-}
+} from '../urls';
 
 export const applicant1Sequence: Step[] = [
   {

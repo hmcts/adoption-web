@@ -1,18 +1,6 @@
-import { CaseWithId } from '../../app/case/case';
 import { YesOrNo } from '../../app/case/definition';
+import { Sections, Step } from '../constants';
 import * as Urls from '../urls';
-
-export enum Sections {
-  AboutChildren = 'aboutChildren',
-}
-
-export interface Step {
-  url: string;
-  showInSection?: Sections;
-  showInCompleteSection?: Sections;
-  excludeFromContinueApplication?: boolean;
-  getNextStep: (data: Partial<CaseWithId>) => Urls.PageLink;
-}
 
 export const childrenSequence: Step[] = [
   {
