@@ -33,7 +33,7 @@ const cyContent = {
 const values = [
   { key: 'yes', value: YesNoNotsure.YES },
   { key: 'no', value: YesNoNotsure.NO },
-  { key: 'notSure', value: YesNoNotsure.NOT_SURE, input: notSureInput },
+  { key: 'notSure', value: YesNoNotsure.NOT_SURE, subFields: [notSureInput] },
 ];
 
 export const { form, generateContent } = new Radios({ enContent, cyContent, fieldName, values, label: 'label' });

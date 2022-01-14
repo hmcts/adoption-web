@@ -1,8 +1,8 @@
 import { FormField } from '../../../app/form/Form';
 
-import { Component } from './component';
-import { defaultButtons } from './default-buttons';
-import { InputValues } from './types';
+import { Component } from './common/component';
+import { defaultButtons } from './common/default-buttons';
+import { InputValues } from './common/types';
 
 export class Input extends Component {
   constructor(values: InputValues) {

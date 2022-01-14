@@ -1,8 +1,7 @@
 /* eslint-disable jest/expect-expect */
-import { YesNoNotsure } from '../../../app/case/definition';
-import { languageAssertions } from '../test/languageAssertions';
-
-import { Radios } from './radios';
+import { YesNoNotsure } from '../../../../app/case/definition';
+import { languageAssertions } from '../../test/languageAssertions';
+import { Radios } from '../radios';
 
 const fieldName = 'birthFatherNameOnCertificate';
 

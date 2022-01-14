@@ -1,4 +1,4 @@
-import { Validator } from '../../../app/form/validation';
+import { Validator } from '../../../../app/form/validation';
 
 export interface ComponentValues {
   enContent?: Record<string, unknown>;
@@ -8,6 +8,7 @@ export interface ComponentValues {
   label?: string;
   labelSize?: string | null;
   hint?: string;
+  type?: string;
 }
 
 export interface RadiosValues extends ComponentValues {
@@ -17,7 +18,7 @@ export interface RadiosValues extends ComponentValues {
 export interface RadiosItem {
   key: string;
   value: string;
-  input?: InputValues;
+  subFields?: ComponentValues[];
 }
 
 export interface InputValues extends ComponentValues {

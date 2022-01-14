@@ -1,5 +1,5 @@
 import { isFieldFilledIn } from '../../../../app/form/validation';
-import { InputValues } from '../../../../steps/common/components/types';
+import { InputValues } from '../../../common/components/common/types';
 
 export const fieldName = 'birthFatherUnsureAliveReason';
 
@@ -28,6 +28,7 @@ export const cyNotSure = {
 };
 
 export const notSureInput: InputValues = {
+  type: 'input',
   validator: isFieldFilledIn,
   fieldName,
   label: `${fieldName}label`,

@@ -13,7 +13,7 @@ import {
 import { CommonContent } from '../common.content';
 import { mapSummaryListContent } from '../functions/mapSummaryListContent';
 
-import { defaultButtons } from './default-buttons';
+import { defaultButtons } from './common/default-buttons';
 
 export const en = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
   label: 'What is your nationality?',

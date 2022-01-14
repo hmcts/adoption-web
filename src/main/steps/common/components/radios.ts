@@ -1,10 +1,10 @@
 import { FormField } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 
-import { Component } from './component';
-import { defaultButtons } from './default-buttons';
-import { generateInputField } from './input';
-import { RadiosValues } from './types';
+import { Component } from './common/component';
+import { defaultButtons } from './common/default-buttons';
+import { renderSubFields } from './common/renderSubFields';
+import { RadiosValues } from './common/types';
 
 export class Radios extends Component {
   constructor(values: RadiosValues) {
@@ -22,10 +22,10 @@ export const generateRadiosField = (values: RadiosValues): Record<string, FormFi
     type: 'radios',
     label: l => l[`${values.label}`],
     hint: l => l[`${values.hint}`],
-    values: values.values.map(({ key, value, input }) => ({
+    values: values.values.map(({ key, value, subFields }) => ({
       label: l => l[key],
       value,
-      subFields: input ? generateInputField(input) : undefined,
+      subFields: subFields ? renderSubFields(subFields) : undefined,
     })),
     validator: isFieldFilledIn,
   },
