@@ -20,8 +20,8 @@ export class Radios extends Component {
 export const generateRadiosField = (values: RadiosValues): Record<string, FormField> => ({
   [values.fieldName]: {
     type: 'radios',
-    label: l => l[`${values.label || ''}`],
-    hint: l => l[`${values.hint || ''}`],
+    label: l => l[`${values.label}`],
+    hint: l => l[`${values.hint}`],
     values: values.values.map(({ key, value, input }) => ({
       label: l => l[key],
       value,
