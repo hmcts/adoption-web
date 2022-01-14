@@ -32,7 +32,7 @@ const { form } = new Input({
 
 describe('input class', () => {
   it('should render the input field with the correct data', () => {
-    const field = form?.fields[fieldName];
+    const field = form.fields[fieldName];
     const fieldInputValue = 'test';
     const { label, hint } = enContent;
 
@@ -46,10 +46,10 @@ describe('input class', () => {
   });
 
   it('should contain submit button', () => {
-    expect((form?.submit.text as Function)(enContent)).toBe('Save and continue');
+    expect((form.submit.text as Function)(enContent)).toBe('Save and continue');
   });
 
   it('should contain saveAsDraft button', () => {
-    expect((form?.saveAsDraft?.text as Function)(enContent)).toBe('Save as draft');
+    expect((form.saveAsDraft?.text as Function)(enContent)).toBe('Save as draft');
   });
 });

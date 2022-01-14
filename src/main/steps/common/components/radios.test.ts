@@ -36,7 +36,7 @@ const { form } = new Radios({
 
 describe('radios class', () => {
   it('should render the radios field with the correct data', () => {
-    const field = form?.fields[fieldName];
+    const field = form.fields[fieldName];
     const { type, label, hint } = field;
     const fieldInputValue = 'test';
     const [yes, no, unsure] = field.values;
@@ -56,10 +56,10 @@ describe('radios class', () => {
   });
 
   it('should contain submit button', () => {
-    expect((form?.submit.text as Function)(enContent)).toBe('Save and continue');
+    expect((form.submit.text as Function)(enContent)).toBe('Save and continue');
   });
 
   it('should contain saveAsDraft button', () => {
-    expect((form?.saveAsDraft?.text as Function)(enContent)).toBe('Save as draft');
+    expect((form.saveAsDraft?.text as Function)(enContent)).toBe('Save as draft');
   });
 });
