@@ -415,6 +415,28 @@ export interface CaseData {
   otherParentOtherNationalities: ListValue<OtherName>[];
   otherParentNameOnCertificate: string;
 
+  socialWorkerName: string;
+  socialWorkerPhoneNumber: string;
+  socialWorkerEmail: string;
+  socialWorkerTeamEmail: string;
+  solicitorFirm: string;
+  solicitorName: string;
+  solicitorPhoneNumber: string;
+  solicitorEmail: string;
+  solicitorHelpingWithApplication: YesOrNo;
+  adopAgencyOrLAs: ListValue<AdoptionAgencyOrLocalAuthority>[];
+  siblings: ListValue<Sibling>[];
+  payments: ListValue<Payment>[];
+  hasAnotherAdopAgencyOrLA: YesOrNo;
+  selectedAdoptionAgencyId: string;
+  hasSiblings: string;
+  hasSiblingNotSureReason: string;
+  hasPoForSiblings: string;
+  hasPoForSiblingsNotSureReason: string;
+  addAnotherSiblingPlacementOrder: YesOrNo;
+  selectedSiblingId: string;
+  selectedSiblingPoId: string;
+
   applicationType: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
   labelContentApplicant2: string;
@@ -711,6 +733,55 @@ export interface Parent {
   AddressCountry: string;
   OtherNationalities: ListValue<OtherName>[];
   NameOnCertificate: string;
+}
+
+export interface AdoptionAgencyOrLocalAuthority {
+  AdopAgencyOrLaId: string;
+  AdopAgencyOrLaName: string;
+  AdopAgencyOrLaPhoneNumber: string;
+  AdopAgencyOrLaContactName: string;
+  AdopAgencyOrLaContactEmail: string;
+}
+
+export interface Payment {
+  Created: DateAsString;
+  Updated: DateAsString;
+  FeeCode: string;
+  Amount: number;
+  Status: PaymentStatus;
+  Channel: string;
+  Reference: string;
+  TransactionId: string;
+}
+
+export interface PlacementOrder {
+  PlacementOrderId: string;
+  PlacementOrderType: string;
+  PlacementOrderNumber: string;
+  PlacementOrderCourt: string;
+  PlacementOrderDate: DateAsString;
+}
+
+export interface Sibling {
+  SiblingId: string;
+  SiblingFirstName: string;
+  SiblingLastNames: string;
+  SiblingPlacementOrders: ListValue<PlacementOrder>[];
+}
+
+export interface SocialWorker {
+  socialWorkerName: string;
+  socialWorkerPhoneNumber: string;
+  socialWorkerEmail: string;
+  socialWorkerTeamEmail: string;
+}
+
+export interface Solicitor {
+  solicitorFirm: string;
+  solicitorName: string;
+  solicitorPhoneNumber: string;
+  solicitorEmail: string;
+  solicitorHelpingWithApplication: YesOrNo;
 }
 
 export interface CaseInvite {
@@ -1094,6 +1165,7 @@ export const enum ApplicationType {
 export const enum ApplyingWith {
   ALONE = 'alone',
   WITH_SPOUSE_OR_CIVIL_PARTNER = 'withSpouseOrCivilPartner',
+  WITH_SOME_ONE_ELSE = 'withSomeoneElse',
 }
 
 export const enum ChangedNameHow {
