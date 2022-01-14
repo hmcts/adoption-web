@@ -12,7 +12,7 @@ export const jointApplicant1CompleteCase: Partial<BrowserCase> = {
   applicant1Address1: 'BUCKINGHAM PALACE',
   applicant1Address2: '',
   applicant1Address3: '',
-  applicant1AddressCountry: 'UK',
+  //applicant1AddressCountry: 'UK',
   applicant1AddressCounty: 'CITY OF WESTMINSTER',
   applicant1AddressPostcode: 'SW1A 1AA',
   applicant1AddressPrivate: YesOrNo.NO,

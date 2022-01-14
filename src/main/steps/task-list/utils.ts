@@ -42,7 +42,10 @@ export const getContactDetailsStatus = (userCase: CaseWithId, fieldPrefix: Field
     : SectionStatus.IN_PROGRESS;
 };
 
-export const getPersonalDetailsStatus = (userCase: CaseWithId, userType: `applicant${1 | 2}`): SectionStatus => {
+export const getPersonalDetailsStatus = (
+  userCase: Partial<CaseWithId>,
+  userType: `applicant${1 | 2}`
+): SectionStatus => {
   //TODO full name logic should be changed after applicant1 name field is split into 2
   const fullName = userCase[`${userType}FirstNames`] && userCase[`${userType}LastNames`];
   const hasOtherNames = userCase[`${userType}HasOtherNames`];
@@ -76,7 +79,7 @@ export const getChildrenPlacementOrderStatus = (userCase: CaseWithId): SectionSt
         (index === 0 || item.placementOrderType) &&
         item.placementOrderNumber &&
         item.placementOrderCourt &&
-        !isDateInputInvalid(item.placementOrderDate)
+        !isDateInputInvalid(item.placementOrderDate as CaseDate)
       );
     });
 
@@ -87,7 +90,7 @@ export const getChildrenPlacementOrderStatus = (userCase: CaseWithId): SectionSt
         item.placementOrderType ||
         item.placementOrderNumber ||
         item.placementOrderCourt ||
-        !isDateInputInvalid(item.placementOrderDate) ||
+        !isDateInputInvalid(item.placementOrderDate as CaseDate) ||
         index === 0
       );
     });

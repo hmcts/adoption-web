@@ -1,8 +1,9 @@
+import { v4 as generateUuid } from 'uuid';
+
 import { isInvalidHelpWithFeesRef } from '../form/validation';
 
 import { Case, CaseDate, Checkbox, LanguagePreference, formFieldsToCaseMapping, formatCase } from './case';
 import { CaseData, ChangedNameHow, DivorceOrDissolution, Gender, ThePrayer, YesOrNo } from './definition';
-import { applicant1AddressToApi, applicant2AddressToApi } from './formatter/address';
 
 export type OrNull<T> = { [K in keyof T]: T[K] | null };
 
@@ -40,8 +41,57 @@ const fields: ToApiConverters = {
 
     return { applicant1Gender, applicant2Gender };
   },
-  relationshipDate: data => ({
-    marriageDate: toApiDate(data.relationshipDate),
+  applicant1DateOfBirth: data => ({
+    applicant1DateOfBirth: toApiDate(data.applicant1DateOfBirth),
+  }),
+  applicant2DateOfBirth: data => ({
+    applicant2DateOfBirth: toApiDate(data.applicant2DateOfBirth),
+  }),
+  childrenDateOfBirth: data => ({
+    childrenDateOfBirth: toApiDate(data.childrenDateOfBirth),
+  }),
+  // placementOrderDate: data => ({
+  //   placementOrderDate: toApiDate(data.placementOrderDate),
+  // }),
+  //{"applicant1AdditionalNames":[{"id":"abc","value":{"name":"trump bush"}}]}
+  applicant1AdditionalNames: data => ({
+    applicant1AdditionalNames:
+      data.applicant1HasOtherNames === YesOrNo.YES
+        ? (data.applicant1AdditionalNames || []).map(item => ({ id: generateUuid(), value: { name: `${item}` } }))
+        : [],
+  }),
+  applicant2AdditionalNames: data => ({
+    applicant2AdditionalNames:
+      data.applicant2HasOtherNames === YesOrNo.YES
+        ? (data.applicant2AdditionalNames || []).map(item => ({ id: generateUuid(), value: { name: `${item}` } }))
+        : [],
+  }),
+  applicant1AdditionalNationalities: data => ({
+    applicant1AdditionalNationalities: (data.applicant1AdditionalNationalities || []).map(item => ({
+      id: generateUuid(),
+      value: { name: `${item}` },
+    })),
+  }),
+  applicant2AdditionalNationalities: data => ({
+    applicant2AdditionalNationalities: (data.applicant2AdditionalNationalities || []).map(item => ({
+      id: generateUuid(),
+      value: { name: `${item}` },
+    })),
+  }),
+  childrenAdditionalNationalities: data => ({
+    childrenAdditionalNationalities: (data.childrenAdditionalNationalities || []).map(item => ({
+      id: generateUuid(),
+      value: { name: `${item}` },
+    })),
+  }),
+  placementOrders: data => ({
+    placementOrders: (data.placementOrders || []).map(item => ({
+      id: generateUuid(),
+      value: {
+        ...item,
+        placementOrderDate: toApiDate(item.placementOrderDate as CaseDate),
+      },
+    })),
   }),
   jurisdictionResidualEligible: data => ({
     jurisdictionResidualEligible: checkboxConverter(data.jurisdictionResidualEligible),
@@ -62,20 +112,20 @@ const fields: ToApiConverters = {
   applicant2EnglishOrWelsh: data => ({
     applicant2LanguagePreferenceWelsh: languagePreferenceYesNoOrNull(data.applicant2EnglishOrWelsh),
   }),
-  applicant1AddressPostcode: applicant1AddressToApi,
+  //applicant1AddressPostcode: applicant1AddressToApi,
   applicant1AgreeToReceiveEmails: data => ({
     applicant1AgreedToReceiveEmails: checkboxConverter(data.applicant1AgreeToReceiveEmails),
   }),
   applicant2AgreeToReceiveEmails: data => ({
     applicant2AgreedToReceiveEmails: checkboxConverter(data.applicant2AgreeToReceiveEmails),
   }),
-  applicant1AddressPrivate: data => ({
-    applicant1KeepContactDetailsConfidential: data.applicant1AddressPrivate,
-  }),
-  applicant2AddressPrivate: data => ({
-    applicant2KeepContactDetailsConfidential: data.applicant2AddressPrivate,
-  }),
-  applicant2AddressPostcode: applicant2AddressToApi,
+  // applicant1AddressPrivate: data => ({
+  //   applicant1KeepContactDetailsConfidential: data.applicant1AddressPrivate,
+  // }),
+  // applicant2AddressPrivate: data => ({
+  //   applicant2KeepContactDetailsConfidential: data.applicant2AddressPrivate,
+  // }),
+  //applicant2AddressPostcode: applicant2AddressToApi,
   applicant1DoesNotKnowApplicant2EmailAddress: data => ({
     applicant1KnowsApplicant2EmailAddress:
       data.applicant1DoesNotKnowApplicant2EmailAddress === Checkbox.Checked ? YesOrNo.NO : YesOrNo.YES,
@@ -150,22 +200,22 @@ const fields: ToApiConverters = {
       ? setUnreachableAnswersToNull(['applicant2HWFAppliedForFees', 'applicant2HWFReferenceNumber'])
       : {}),
   }),
-  applicant1KnowsApplicant2Address: data => ({
-    applicant1KnowsApplicant2Address: data.applicant1KnowsApplicant2Address,
-    ...(data.applicant1KnowsApplicant2Address === YesOrNo.NO
-      ? applicant2AddressToApi(
-          setUnreachableAnswersToNull([
-            'applicant2Address1',
-            'applicant2Address2',
-            'applicant2Address3',
-            'applicant2AddressCountry',
-            'applicant2AddressCounty',
-            'applicant2AddressPostcode',
-            'applicant2AddressTown',
-          ])
-        )
-      : setUnreachableAnswersToNull(['applicant1WantsToHavePapersServedAnotherWay'])),
-  }),
+  // applicant1KnowsApplicant2Address: data => ({
+  //   applicant1KnowsApplicant2Address: data.applicant1KnowsApplicant2Address,
+  //   ...(data.applicant1KnowsApplicant2Address === YesOrNo.NO
+  //     ? applicant2AddressToApi(
+  //         setUnreachableAnswersToNull([
+  //           'applicant2Address1',
+  //           'applicant2Address2',
+  //           'applicant2Address3',
+  //           'applicant2AddressCountry',
+  //           'applicant2AddressCounty',
+  //           'applicant2AddressPostcode',
+  //           'applicant2AddressTown',
+  //         ])
+  //       )
+  //     : setUnreachableAnswersToNull(['applicant1WantsToHavePapersServedAnotherWay'])),
+  // }),
   inTheUk: data => ({
     marriageMarriedInUk: data.inTheUk,
     ...(data.inTheUk === YesOrNo.YES
@@ -195,7 +245,7 @@ const fields: ToApiConverters = {
   }),
 };
 
-const toApiDate = (date: CaseDate | undefined) => {
+const toApiDate = (date: CaseDate | undefined): string => {
   if (!date?.year || !date?.month || !date?.day) {
     return '';
   }

@@ -1,5 +1,14 @@
 import { CaseWithId, FieldPrefix } from '../../app/case/case';
-import { DivorceOrDissolution, Gender, State, YesNoNotsure, YesOrNo } from '../../app/case/definition';
+import {
+  ApplyingWith,
+  ContactDetails,
+  DivorceOrDissolution,
+  Gender,
+  Nationality,
+  State,
+  YesNoNotsure,
+  YesOrNo,
+} from '../../app/case/definition';
 
 import {
   getAdoptionCertificateDetailsStatus,
@@ -11,6 +20,7 @@ import {
   getOtherParentStatus,
   getPersonalDetailsStatus,
   isApplyingWithComplete,
+  // isApplyingWithComplete,
 } from './utils';
 const userCase: CaseWithId = {
   id: '123',
@@ -42,7 +52,7 @@ describe('utils', () => {
     });
 
     test('Should return true if applyingWith is present', async () => {
-      userCase.applyingWith = 'alone';
+      userCase.applyingWith = ApplyingWith.ALONE;
       const isValid = isApplyingWithComplete(userCase);
 
       expect(isValid).toStrictEqual(true);
@@ -72,7 +82,7 @@ describe('utils', () => {
           applicant1HasOtherNames: YesOrNo.NO,
           applicant1AdditionalNames: undefined,
           applicant1DateOfBirth: { day: '1', month: '1', year: '2021' },
-          applicant1Nationality: ['British'],
+          applicant1Nationality: [Nationality.BRITHISH],
           applicant1AdditionalNationalities: undefined,
           applicant1Occupation: undefined,
         },
@@ -86,7 +96,7 @@ describe('utils', () => {
           applicant1HasOtherNames: YesOrNo.YES,
           applicant1AdditionalNames: ['MOCK_ADDITIONAL_NAME'],
           applicant1DateOfBirth: { day: '1', month: '1', year: '2021' },
-          applicant1Nationality: ['Other'],
+          applicant1Nationality: [Nationality.OTHER],
           applicant1AdditionalNationalities: ['MOCK_COUNTRY'],
           applicant1Occupation: 'MOCK_OCCUPATION',
         },
@@ -130,7 +140,7 @@ describe('utils', () => {
           applicant1Address1: 'MOCK_ADDRESS_1',
           applicant1AddressTown: ' MOCK_TOWN',
           applicant1AddressPostcode: 'MOCK_POSTCODE',
-          applicant1ContactDetails: ['email'],
+          applicant1ContactDetails: [ContactDetails.EMAIL],
           applicant1EmailAddress: 'MOCK_EMAIL',
         },
         userType: 'applicant1',
@@ -141,7 +151,7 @@ describe('utils', () => {
           applicant1Address1: 'MOCK_ADDRESS_1',
           applicant1AddressTown: ' MOCK_TOWN',
           applicant1AddressPostcode: 'MOCK_POSTCODE',
-          applicant1ContactDetails: ['phone'],
+          applicant1ContactDetails: [ContactDetails.PHONE],
           applicant1PhoneNumber: 'MOCK_PHONE',
         },
         userType: 'applicant1',
@@ -150,7 +160,7 @@ describe('utils', () => {
       {
         data: {
           applicant2AddressSameAsApplicant1: YesOrNo.YES,
-          applicant2ContactDetails: ['phone'],
+          applicant2ContactDetails: [ContactDetails.PHONE],
           applicant2PhoneNumber: 'MOCK_PHONE',
         },
         userType: 'applicant2',
@@ -159,7 +169,7 @@ describe('utils', () => {
       {
         data: {
           applicant2AddressSameAsApplicant1: YesOrNo.NO,
-          applicant2ContactDetails: ['phone'],
+          applicant2ContactDetails: [ContactDetails.PHONE],
           applicant2PhoneNumber: 'MOCK_PHONE',
         },
         userType: 'applicant2',
@@ -279,7 +289,7 @@ describe('utils', () => {
           childrenLastName: 'MOCK_LAST_NAME',
           childrenDateOfBirth: { day: '1', month: '1', year: '2021' },
           childrenSexAtBirth: Gender.MALE,
-          childrenNationality: ['British'],
+          childrenNationality: [Nationality.BRITHISH],
           childrenAdditionalNationalities: undefined,
         },
         expected: COMPLETED,
@@ -290,7 +300,7 @@ describe('utils', () => {
           childrenLastName: 'MOCK_LAST_NAME',
           childrenDateOfBirth: { day: '1', month: '1', year: '2021' },
           childrenSexAtBirth: Gender.MALE,
-          childrenNationality: ['Other'],
+          childrenNationality: [Nationality.OTHER],
           childrenAdditionalNationalities: undefined,
         },
         expected: IN_PROGRESS,
@@ -301,7 +311,7 @@ describe('utils', () => {
           childrenLastName: 'MOCK_LAST_NAME',
           childrenDateOfBirth: { day: '1', month: '1', year: '2021' },
           childrenSexAtBirth: Gender.MALE,
-          childrenNationality: ['Other'],
+          childrenNationality: [Nationality.OTHER],
           childrenAdditionalNationalities: ['MOCK_COUNTRY'],
         },
         expected: COMPLETED,

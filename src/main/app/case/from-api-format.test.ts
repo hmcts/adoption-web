@@ -34,9 +34,7 @@ describe('from-api-format', () => {
       applicant1ScreenHasUnionBroken: YesOrNo.YES,
       applicant1HelpWithFeesRefNo: 'HWF-ABC-123',
       applicant1AgreeToReceiveEmails: Checkbox.Checked,
-      applicant1AddressPrivate: YesOrNo.YES,
       applicant1DoesNotKnowApplicant2EmailAddress: Checkbox.Checked,
-      applicant2AddressPrivate: YesOrNo.YES,
       iWantToHavePapersServedAnotherWay: undefined,
       applicant1EnglishOrWelsh: 'welsh',
       applicant2EnglishOrWelsh: 'welsh',
@@ -60,11 +58,6 @@ describe('from-api-format', () => {
       gender: Gender.MALE,
       sameSex: Checkbox.Checked,
       applicant1ScreenHasUnionBroken: YesOrNo.YES,
-      relationshipDate: {
-        day: '2',
-        month: '9',
-        year: '2000',
-      },
       applicant1IBelieveApplicationIsTrue: 'checked',
       applicant2IBelieveApplicationIsTrue: 'checked',
       applicant1IConfirmPrayer: 'checked',
@@ -73,9 +66,7 @@ describe('from-api-format', () => {
       applicant2EnglishOrWelsh: 'welsh',
       applicant1HelpWithFeesRefNo: 'HWF-ABC-123',
       applicant1AgreeToReceiveEmails: Checkbox.Checked,
-      applicant1AddressPrivate: YesOrNo.YES,
       applicant1DoesNotKnowApplicant2EmailAddress: Checkbox.Checked,
-      applicant2AddressPrivate: YesOrNo.YES,
       iWantToHavePapersServedAnotherWay: undefined,
       dateSubmitted: new Date('2021-01-01'),
       dueDate: '26 July 2021',
@@ -101,9 +92,7 @@ describe('from-api-format', () => {
       applicant2EnglishOrWelsh: null,
       applicant1HelpWithFeesRefNo: 'HWF-ABC-123',
       applicant1AgreeToReceiveEmails: Checkbox.Checked,
-      applicant1AddressPrivate: YesOrNo.YES,
       applicant1DoesNotKnowApplicant2EmailAddress: Checkbox.Checked,
-      applicant2AddressPrivate: YesOrNo.YES,
       iWantToHavePapersServedAnotherWay: undefined,
       dueDate: '26 July 2021',
     });
@@ -128,9 +117,7 @@ describe('from-api-format', () => {
       applicant2EnglishOrWelsh: 'english',
       applicant1HelpWithFeesRefNo: 'HWF-ABC-123',
       applicant1AgreeToReceiveEmails: Checkbox.Checked,
-      applicant1AddressPrivate: YesOrNo.YES,
       applicant1DoesNotKnowApplicant2EmailAddress: Checkbox.Checked,
-      applicant2AddressPrivate: YesOrNo.YES,
       iWantToHavePapersServedAnotherWay: undefined,
       dueDate: '26 July 2021',
     });
@@ -143,54 +130,11 @@ describe('from-api-format', () => {
     } as unknown as CaseData);
 
     expect(nfdivFormat).toStrictEqual({
-      relationshipDate: undefined,
       dateSubmitted: new Date('2021-01-01'),
     });
   });
 
   describe('converting your address between UK and international', () => {
-    test('converts to UK format', () => {
-      const nfdivFormat = fromApiFormat({
-        ...results,
-        applicant1HomeAddress: {
-          AddressLine1: 'Line 1',
-          AddressLine2: 'Line 2',
-          PostTown: 'Town',
-          County: 'County',
-          PostCode: 'Postcode',
-        },
-      } as unknown as CaseData);
-
-      expect(nfdivFormat).toMatchObject({
-        applicant1Address1: 'Line 1',
-        applicant1Address2: 'Line 2',
-        applicant1AddressTown: 'Town',
-        applicant1AddressCounty: 'County',
-        applicant1AddressPostcode: 'Postcode',
-      });
-    });
-
-    test('converts to UK format for applicant2', () => {
-      const nfdivFormat = fromApiFormat({
-        ...results,
-        applicant2HomeAddress: {
-          AddressLine1: 'Line 1',
-          AddressLine2: 'Line 2',
-          PostTown: 'Town',
-          County: 'County',
-          PostCode: 'Postcode',
-        },
-      } as unknown as CaseData);
-
-      expect(nfdivFormat).toMatchObject({
-        applicant2Address1: 'Line 1',
-        applicant2Address2: 'Line 2',
-        applicant2AddressTown: 'Town',
-        applicant2AddressCounty: 'County',
-        applicant2AddressPostcode: 'Postcode',
-      });
-    });
-
     test('converts to an international format', () => {
       const nfdivFormat = fromApiFormat({
         ...results,

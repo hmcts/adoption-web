@@ -32,6 +32,21 @@ export default class NationalityPostController extends PostController<AnyObject>
           req.session.userCase.addAnotherNationality = '';
         }
       }
+
+      try {
+        req.session.userCase = await this.save(
+          req,
+          {
+            [`${this.fieldPrefix}Nationality`]: req.session.userCase[`${this.fieldPrefix}Nationality`],
+            [`${this.fieldPrefix}AdditionalNationalities`]:
+              req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`],
+          },
+          this.getEventName(req)
+        );
+      } catch (err) {
+        req.locals.logger.error('Error saving', err);
+        // req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+      }
     }
 
     const nextUrl =

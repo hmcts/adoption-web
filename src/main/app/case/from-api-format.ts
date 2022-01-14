@@ -4,7 +4,7 @@ import { invert } from 'lodash';
 
 import { Case, Checkbox, LanguagePreference, formFieldsToCaseMapping, formatCase } from './case';
 import { CaseData, ThePrayer, YesOrNo } from './definition';
-import { fromApi as formatAddress } from './formatter/address';
+//import { fromApi as formatAddress } from './formatter/address';
 import {
   fromApiApplicant1 as uploadedFilesFromApiApplicant1,
   fromApiApplicant2 as uploadedFilesFromApiApplicant2,
@@ -24,12 +24,42 @@ const checkboxConverter = (value: string | undefined) => {
 
 const fields: FromApiConverters = {
   ...invert(formFieldsToCaseMapping),
+  applicant1AdditionalNames: data => ({
+    applicant1AdditionalNames: data.applicant1AdditionalNames?.map(item => item.value.name),
+  }),
+  applicant2AdditionalNames: data => ({
+    applicant2AdditionalNames: data.applicant2AdditionalNames?.map(item => item.value.name),
+  }),
+  applicant1AdditionalNationalities: data => ({
+    applicant1AdditionalNationalities: data.applicant1AdditionalNationalities?.map(item => item.value.name),
+  }),
+  applicant2AdditionalNationalities: data => ({
+    applicant2AdditionalNationalities: data.applicant2AdditionalNationalities?.map(item => item.value.name),
+  }),
+  childrenAdditionalNationalities: data => ({
+    childrenAdditionalNationalities: data.childrenAdditionalNationalities?.map(item => item.value.name),
+  }),
+  placementOrders: data => ({
+    placementOrders: data.placementOrders?.map(item => ({
+      ...item.value,
+      placementOrderDate: fromApiDate(item.value.placementOrderDate),
+    })),
+  }),
   marriageIsSameSexCouple: data => ({
     sameSex: checkboxConverter(data.marriageIsSameSexCouple),
   }),
-  marriageDate: data => ({
-    relationshipDate: fromApiDate(data.marriageDate),
+  applicant1DateOfBirth: data => ({
+    applicant1DateOfBirth: fromApiDate(data.applicant1DateOfBirth),
   }),
+  applicant2DateOfBirth: data => ({
+    applicant2DateOfBirth: fromApiDate(data.applicant2DateOfBirth),
+  }),
+  childrenDateOfBirth: data => ({
+    childrenDateOfBirth: fromApiDate(data.childrenDateOfBirth),
+  }),
+  // placementOrderDate: data => ({
+  //   placementOrderDate: fromApiDate(data.placementOrderDate),
+  // }),
   jurisdictionResidualEligible: data => ({
     jurisdictionResidualEligible: checkboxConverter(data.jurisdictionResidualEligible),
   }),
@@ -45,7 +75,7 @@ const fields: FromApiConverters = {
         ? data.applicant2LanguagePreferenceWelsh
         : LanguagePreference.English,
   }),
-  applicant1HomeAddress: data => formatAddress(data, 'applicant1'),
+  //applicant1HomeAddress: data => formatAddress(data, 'applicant1'),
   applicant1AgreedToReceiveEmails: data => ({
     applicant1AgreeToReceiveEmails: checkboxConverter(data.applicant1AgreedToReceiveEmails),
   }),
@@ -56,16 +86,16 @@ const fields: FromApiConverters = {
     applicant1DoesNotKnowApplicant2EmailAddress:
       data.applicant1KnowsApplicant2EmailAddress === YesOrNo.YES ? Checkbox.Unchecked : Checkbox.Checked,
   }),
-  applicant1KeepContactDetailsConfidential: data => ({
-    applicant1AddressPrivate: data.applicant1KeepContactDetailsConfidential,
-  }),
+  // applicant1KeepContactDetailsConfidential: data => ({
+  //   applicant1AddressPrivate: data.applicant1KeepContactDetailsConfidential,
+  // }),
   applicant1WantsToHavePapersServedAnotherWay: data => ({
     iWantToHavePapersServedAnotherWay: checkboxConverter(data.applicant1WantsToHavePapersServedAnotherWay),
   }),
-  applicant2KeepContactDetailsConfidential: data => ({
-    applicant2AddressPrivate: data.applicant2KeepContactDetailsConfidential,
-  }),
-  applicant2HomeAddress: data => formatAddress(data, 'applicant2'),
+  // applicant2KeepContactDetailsConfidential: data => ({
+  //   applicant2AddressPrivate: data.applicant2KeepContactDetailsConfidential,
+  // }),
+  // applicant2HomeAddress: data => formatAddress(data, 'applicant2'),
   applicant1DocumentsUploaded: uploadedFilesFromApiApplicant1,
   applicant2DocumentsUploaded: uploadedFilesFromApiApplicant2,
   applicant1CannotUploadSupportingDocument: uploadedFilesFromApiApplicant1,

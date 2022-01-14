@@ -28,7 +28,10 @@ export default class PlacementOrderGetController extends GetController {
       delete req.query.remove;
       req.url = req.url.substring(0, req.url.indexOf('?'));
       redirect = true;
-    } else if (!req.session.userCase.selectedPlacementOrderId) {
+    } else if (
+      !req.session.userCase.selectedPlacementOrderId ||
+      req.session.userCase.selectedPlacementOrderId === 'undefined'
+    ) {
       //generate random id for placement order if there are no placement orders
       req.session.userCase.selectedPlacementOrderId = placementOrders[0]?.placementOrderId || `${Date.now()}`;
     }
@@ -36,14 +39,30 @@ export default class PlacementOrderGetController extends GetController {
     let placementOrder = placementOrders.find(
       item => item.placementOrderId === req.session.userCase.selectedPlacementOrderId
     );
+
     if (!placementOrder) {
       placementOrder = {
         placementOrderId: req.session.userCase.selectedPlacementOrderId,
       };
+
       placementOrders.push(placementOrder);
     }
 
     req.session.userCase.placementOrders = placementOrders;
+
+    try {
+      req.session.userCase = await this.save(
+        req,
+        {
+          placementOrders: req.session.userCase.placementOrders,
+          selectedPlacementOrderId: req.session.userCase.selectedPlacementOrderId,
+        },
+        this.getEventName(req)
+      );
+    } catch (err) {
+      req.locals.logger.error('Error saving', err);
+      //req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+    }
 
     req.session.save(err => {
       if (err) {

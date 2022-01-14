@@ -1,6 +1,7 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
+import { YesOrNo } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { GetController } from '../../../app/controller/GetController';
 
@@ -17,8 +18,18 @@ export default class OtherNamesGetController extends GetController {
       if (index !== -1) {
         names.splice(index, 1);
       }
-
       req.session.userCase.applicant2AdditionalNames = names;
+      try {
+        req.session.userCase = await this.save(
+          req,
+          { applicant2AdditionalNames: names, applicant2HasOtherNames: YesOrNo.YES },
+          this.getEventName(req)
+        );
+      } catch (err) {
+        req.locals.logger.error('Error saving', err);
+        // req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+      }
+
       delete req.query.remove;
       req.url = req.url.substring(0, req.url.indexOf('?'));
       removed = true;

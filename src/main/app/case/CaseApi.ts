@@ -8,16 +8,15 @@ import { UserDetails } from '../controller/AppRequest';
 import { Case, CaseWithId } from './case';
 import { CaseAssignedUserRoles } from './case-roles';
 import {
+  Adoption,
   CASE_TYPE,
   CITIZEN_ADD_PAYMENT,
   CITIZEN_CREATE,
   CaseData,
-  DivorceOrDissolution,
   JURISDICTION,
   ListValue,
   Payment,
   State,
-  // UserRole,
 } from './definition';
 import { fromApiFormat } from './from-api-format';
 import { toApiFormat } from './to-api-format';
@@ -29,29 +28,37 @@ export class CaseApi {
     private readonly logger: LoggerInstance
   ) {}
 
-  public async getOrCreateCase(serviceType: DivorceOrDissolution, userDetails: UserDetails): Promise<CaseWithId> {
+  public async getOrCreateCase(serviceType: Adoption, userDetails: UserDetails): Promise<CaseWithId> {
     const userCase = await this.getCase(serviceType);
-
     return userCase || this.createCase(serviceType, userDetails);
   }
 
-  private async getCase(serviceType: DivorceOrDissolution): Promise<CaseWithId | false> {
+  private async getCase(serviceType: Adoption): Promise<CaseWithId | false> {
     const cases = await this.getCases();
 
-    const serviceCases = cases.filter(c => c.case_data.divorceOrDissolution === serviceType);
-    switch (serviceCases.length) {
-      case 0: {
-        return false;
-      }
-      case 1:
-      case 2: {
-        const { id, state, case_data: caseData } = serviceCases[0];
-        return { ...fromApiFormat(caseData), id: id.toString(), state };
-      }
-      default: {
-        throw new Error('Too many cases assigned to user.');
-      }
+    const serviceCases = cases; //cases.filter(c => c.case_data.divorceOrDissolution === serviceType);
+    console.log('caseapi.ts 41' + serviceType);
+    if (serviceCases.length === 0) {
+      return false;
+    } else if (serviceCases.length > 0) {
+      const { id, state, case_data: caseData } = serviceCases[0];
+      return { ...fromApiFormat(caseData), id: id.toString(), state };
+    } else {
+      throw new Error('Too many cases assigned to user.');
     }
+    // switch (serviceCases.length) {
+    //   case 0: {
+    //     return false;
+    //   }
+    //   case 1:
+    //   case 2: {
+    //     const { id, state, case_data: caseData } = serviceCases[0];
+    //     return { ...fromApiFormat(caseData), id: id.toString(), state };
+    //   }
+    //   default: {
+    //     throw new Error('Too many cases assigned to user.');
+    //   }
+    // }
   }
 
   private async getCases(): Promise<CcdV1Response[]> {
@@ -59,7 +66,6 @@ export class CaseApi {
       const response = await this.axios.get<CcdV1Response[]>(
         `/citizens/${this.userDetails.id}/jurisdictions/${JURISDICTION}/case-types/${CASE_TYPE}/cases`
       );
-
       return response.data;
     } catch (err) {
       this.logError(err);
@@ -78,14 +84,15 @@ export class CaseApi {
     }
   }
 
-  private async createCase(serviceType: DivorceOrDissolution, userDetails: UserDetails): Promise<CaseWithId> {
+  private async createCase(serviceType: Adoption, userDetails: UserDetails): Promise<CaseWithId> {
     const tokenResponse: AxiosResponse<CcdTokenResponse> = await this.axios.get(
       `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
     );
+    console.log('caseapi.ts ' + serviceType);
     const token = tokenResponse.data.token;
     const event = { id: CITIZEN_CREATE };
     const data = {
-      divorceOrDissolution: serviceType,
+      //adoption: serviceType,
       applicant1FirstName: userDetails.givenName,
       applicant1LastName: userDetails.familyName,
       applicant1Email: userDetails.email,
@@ -97,7 +104,6 @@ export class CaseApi {
         event,
         event_token: token,
       });
-
       return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
     } catch (err) {
       this.logError(err);
@@ -117,18 +123,18 @@ export class CaseApi {
 
   private async sendEvent(caseId: string, data: Partial<CaseData>, eventName: string): Promise<CaseWithId> {
     try {
-      //TODO uncomment this
-      // const tokenResponse = await this.axios.get<CcdTokenResponse>(`/cases/${caseId}/event-triggers/${eventName}`);
-      // const token = tokenResponse.data.token;
-      // const event = { id: eventName };
-      // const response: AxiosResponse<CcdV2Response> = await this.axios.post(`/cases/${caseId}/events`, {
-      //   event,
-      //   data,
-      //   event_token: token,
-      // });
-      console.log(eventName);
-      //TODO uncomment this
-      return data as CaseWithId; //{ id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
+      const tokenResponse = await this.axios.get<CcdTokenResponse>(`/cases/${caseId}/event-triggers/${eventName}`);
+      const token = tokenResponse.data.token;
+      const event = { id: eventName };
+      //delete data.applicant1HasOtherNames;
+
+      console.log('caseapi.ts 132 data: ' + JSON.stringify(data));
+      const response: AxiosResponse<CcdV2Response> = await this.axios.post(`/cases/${caseId}/events`, {
+        event,
+        data,
+        event_token: token,
+      });
+      return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
     } catch (err) {
       this.logError(err);
       throw new Error('Case could not be updated.');
@@ -136,7 +142,9 @@ export class CaseApi {
   }
 
   public async triggerEvent(caseId: string, userData: Partial<Case>, eventName: string): Promise<CaseWithId> {
-    return this.sendEvent(caseId, toApiFormat(userData), eventName);
+    const data = toApiFormat(userData);
+    //console.log('CaseAPI 144', JSON.stringify(data));
+    return this.sendEvent(caseId, data, eventName);
   }
 
   public async addPayment(caseId: string, payments: ListValue<Payment>[]): Promise<CaseWithId> {

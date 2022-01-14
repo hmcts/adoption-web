@@ -9,7 +9,7 @@ import { Fee } from '../../app/fee/fee-lookup-api';
 const en = {
   phase: 'Beta',
   applyForAdoption: 'apply for adoption',
-  applyForDissolution: 'apply to end a civil partnership',
+  applyForDissolution: 'Apply for adoption',
   feedback:
     'This is a new service – your <a class="govuk-link" aria-label="Feedback link, This will open a new tab. You’ll need to return to this tab and continue with your application within 60 mins so you don’t lose your progress." href="#" target="_blank">feedback</a> will help us to improve it.',
   languageToggle: '<a href="?lng=cy" class="govuk-link language">Cymraeg</a>',
@@ -111,7 +111,7 @@ const cy: typeof en = {
   ...en, // @TODO delete me to get a list of missing translations
   phase: 'Beta',
   applyForAdoption: 'Apply for adoption (in welsh)',
-  applyForDissolution: 'gwneud cais i ddod â phartneriaeth sifil i ben',
+  applyForDissolution: 'Apply for adoption (in welsh)',
   feedback:
     'This is a new service – your <a class="govuk-link" aria-label="Feedback link, This will open a new tab. You’ll need to return to this tab and continue with your application within 60 mins so you don’t lose your progress." href="#" target="_blank">feedback</a> will help us to improve it.(in welsh)',
   languageToggle: '<a href="?lng=en" class="govuk-link language">English</a>',

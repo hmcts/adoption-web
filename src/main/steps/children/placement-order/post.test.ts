@@ -53,6 +53,12 @@ describe('PlacementOrderPostController', () => {
         mockGetParsedBody.mockReturnValue({ placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER' });
         mockGetErrors.mockReturnValue([]);
         controller = new PlacementOrderPostController({});
+        req.locals.api.triggerEvent.mockResolvedValue({
+          selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+          placementOrders: [
+            { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER' },
+          ],
+        });
       });
 
       test('should set the formData fields in userCase placementOrders session data', async () => {
@@ -132,6 +138,12 @@ describe('PlacementOrderPostController', () => {
       mockGetParsedBody.mockReturnValue({ placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER' });
       mockGetErrors.mockReturnValue([]);
       controller = new PlacementOrderPostController((): FormFields => ({}));
+      req.locals.api.triggerEvent.mockResolvedValue({
+        selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_NUMBER',
+        placementOrders: [
+          { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER' },
+        ],
+      });
     });
 
     test('should set the formData fields in userCase placementOrders session data', async () => {

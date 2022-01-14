@@ -28,6 +28,17 @@ export default class NationalityGetController extends GetController {
       }
 
       req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`] = countries;
+      try {
+        req.session.userCase = await this.save(
+          req,
+          { [`${this.fieldPrefix}AdditionalNationalities`]: countries },
+          this.getEventName(req)
+        );
+      } catch (err) {
+        req.locals.logger.error('Error saving', err);
+        // req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+      }
+
       delete req.query.remove;
       req.url = req.url.substring(0, req.url.indexOf('?'));
       removed = true;
