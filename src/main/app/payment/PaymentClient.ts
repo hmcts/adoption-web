@@ -12,6 +12,7 @@ export class PaymentClient {
   client: AxiosInstance;
 
   constructor(private readonly session: AppSession, readonly returnUrl: string) {
+    console.log("config.get('services.payments.url')", config.get('services.payments.url'));
     this.client = Axios.create({
       baseURL: config.get('services.payments.url'),
       headers: {
@@ -25,18 +26,28 @@ export class PaymentClient {
   public async create(): Promise<Payment> {
     const userCase = this.session.userCase;
     const caseId = userCase.id.toString();
-    const total = userCase.applicationFeeOrderSummary.Fees.reduce((sum, item) => sum + +item.value.FeeAmount, 0) / 100;
+    //TODO uncomment
+    // const total = userCase.applicationFeeOrderSummary.Fees.reduce((sum, item) => sum + +item.value.FeeAmount, 0) / 100;
+    const total = 183;
     const body = {
       case_type: CASE_TYPE,
       amount: total,
       ccd_case_number: caseId,
       description: 'Adoption application fee', //TODO consider welsh text
       currency: 'GBP',
-      fees: userCase.applicationFeeOrderSummary.Fees.map(fee => ({
-        calculated_amount: `${parseInt(fee.value.FeeAmount, 10) / 100}`,
-        code: fee.value.FeeCode,
-        version: fee.value.FeeVersion,
-      })),
+      //TODO uncomment this
+      // fees: userCase.applicationFeeOrderSummary.Fees.map(fee => ({
+      //   calculated_amount: `${parseInt(fee.value.FeeAmount, 10) / 100}`,
+      //   code: fee.value.FeeCode,
+      //   version: fee.value.FeeVersion,
+      // })),
+      fees: [
+        {
+          calculated_amount: 183,
+          code: 'FEE0310',
+          version: 2,
+        },
+      ],
       language: this.session.lang === 'en' ? '' : this.session.lang?.toUpperCase(),
     };
 
@@ -53,6 +64,7 @@ export class PaymentClient {
 
       return response.data;
     } catch (e) {
+      console.log(e);
       const errMsg = 'Error creating payment';
       logger.error(errMsg, e.data);
       throw new Error(errMsg);

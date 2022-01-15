@@ -2,7 +2,7 @@ import autobind from 'autobind-decorator';
 import config from 'config';
 import { Response } from 'express';
 
-import { CITIZEN_SUBMIT, PaymentStatus, State } from '../../../../app/case/definition';
+import { PaymentStatus } from '../../../../app/case/definition';
 import { AppRequest } from '../../../../app/controller/AppRequest';
 import { AnyObject } from '../../../../app/controller/PostController';
 import { PaymentClient } from '../../../../app/payment/PaymentClient';
@@ -15,16 +15,18 @@ export default class PaymentPostController {
     if (req.body.saveAndSignOut) {
       return res.redirect(SAVE_AND_SIGN_OUT);
     }
-    if (req.session.userCase.state !== State.AwaitingPayment) {
-      req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, {}, CITIZEN_SUBMIT);
-    }
+
+    //TODO need to uncomment this
+    // if (req.session.userCase.state !== State.AwaitingPayment) {
+    //   req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, {}, CITIZEN_SUBMIT);
+    // }
 
     const payments = new PaymentModel(req.session.userCase.payments || []);
     if (payments.isPaymentInProgress()) {
       return this.saveAndRedirect(req, res, PAYMENT_CALLBACK_URL);
     }
 
-    const fee = req.session.userCase.applicationFeeOrderSummary.Fees[0].value;
+    const fee = req.session.fee;
     const client = this.getPaymentClient(req, res);
     const payment = await client.create();
     const now = new Date().toISOString();
@@ -32,8 +34,8 @@ export default class PaymentPostController {
     payments.add({
       created: now,
       updated: now,
-      feeCode: fee.FeeCode,
-      amount: parseInt(fee.FeeAmount, 10),
+      feeCode: fee.code,
+      amount: parseInt(fee.fee_amount, 10),
       status: PaymentStatus.IN_PROGRESS,
       channel: payment._links.next_url.href,
       reference: payment.reference,
