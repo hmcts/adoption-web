@@ -2,6 +2,7 @@ import { AnyObject } from '../controller/PostController';
 
 import {
   Adoption,
+  AdoptionAgencyOrLocalAuthority,
   ApplicationType,
   ApplyingWith,
   CaseData,
@@ -18,6 +19,7 @@ import {
   OrderSummary,
   Payment,
   PlacementOrder,
+  Sibling,
   State,
   YesNoNotsure,
   YesOrNo,
@@ -143,6 +145,28 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   otherParentAddressPostcode: 'otherParentAddressPostCode',
   otherParentAddressCountry: 'otherParentAddressCountry',
   otherParentAddressKnown: 'otherParentAddressKnown',
+
+  socialWorkerName: 'socialWorkerName',
+  socialWorkerPhoneNumber: 'socialWorkerPhoneNumber',
+  socialWorkerEmail: 'socialWorkerEmail',
+  socialWorkerTeamEmail: 'socialWorkerTeamEmail',
+  solicitorFirm: 'solicitorFirm',
+  solicitorName: 'solicitorName',
+  solicitorPhoneNumber: 'solicitorPhoneNumber',
+  solicitorEmail: 'solicitorEmail',
+  solicitorHelpingWithApplication: 'solicitorHelpingWithApplication',
+  adopAgencyOrLAs: 'adopAgencyOrLAs',
+  siblings: 'siblings',
+  //payments: 'payments',
+  hasAnotherAdopAgencyOrLA: 'hasAnotherAdopAgencyOrLA',
+  selectedAdoptionAgencyId: 'selectedAdoptionAgencyId',
+  hasSiblings: 'hasSiblings',
+  hasSiblingNotSureReason: 'hasSiblingNotSureReason',
+  hasPoForSiblings: 'hasPoForSiblings',
+  hasPoForSiblingsNotSureReason: 'hasPoForSiblingsNotSureReason',
+  addAnotherSiblingPlacementOrder: 'addAnotherSiblingPlacementOrder',
+  selectedSiblingId: 'selectedSiblingId',
+  selectedSiblingPoId: 'selectedSiblingPoId',
 
   applicant2MiddleNames: 'applicant2MiddleName',
   applicant1FullNameOnCertificate: 'marriageApplicant1Name',
@@ -299,6 +323,28 @@ export interface Case {
   otherParentAddressCountry?: string;
   otherParentAddressKnown?: YesOrNo;
 
+  socialWorkerName?: string;
+  socialWorkerPhoneNumber?: string;
+  socialWorkerEmail?: string;
+  socialWorkerTeamEmail?: string;
+  solicitorFirm?: string;
+  solicitorName?: string;
+  solicitorPhoneNumber?: string;
+  solicitorEmail?: string;
+  solicitorHelpingWithApplication?: YesOrNo;
+  adopAgencyOrLAs?: ListValue<AdoptionAgencyOrLocalAuthority>[];
+  siblings?: ListValue<Sibling>[];
+  payments?: ListValue<Payment>[];
+  hasAnotherAdopAgencyOrLA?: YesOrNo;
+  selectedAdoptionAgencyId?: string;
+  hasSiblings?: string;
+  hasSiblingNotSureReason?: string;
+  hasPoForSiblings?: string;
+  hasPoForSiblingsNotSureReason?: string;
+  addAnotherSiblingPlacementOrder?: YesOrNo;
+  selectedSiblingId?: string;
+  selectedSiblingPoId?: string;
+
   addButton?: string;
   addAnotherNationality?: string;
   applicant1SelectAddress?: string;
@@ -390,7 +436,6 @@ export interface Case {
   caseReference?: string;
   respondentUserId?: string;
   dateSubmitted?: Date;
-  payments: ListValue<Payment>[];
   applicationFeeOrderSummary: OrderSummary;
   applicant2Confirmation: YesOrNo;
   applicant2Explanation: string;

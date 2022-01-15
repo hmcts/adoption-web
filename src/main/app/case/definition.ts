@@ -743,25 +743,6 @@ export interface AdoptionAgencyOrLocalAuthority {
   AdopAgencyOrLaContactEmail: string;
 }
 
-export interface Payment {
-  Created: DateAsString;
-  Updated: DateAsString;
-  FeeCode: string;
-  Amount: number;
-  Status: PaymentStatus;
-  Channel: string;
-  Reference: string;
-  TransactionId: string;
-}
-
-export interface PlacementOrder {
-  PlacementOrderId: string;
-  PlacementOrderType: string;
-  PlacementOrderNumber: string;
-  PlacementOrderCourt: string;
-  PlacementOrderDate: DateAsString;
-}
-
 export interface Sibling {
   SiblingId: string;
   SiblingFirstName: string;
