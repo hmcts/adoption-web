@@ -182,12 +182,10 @@ When('I enter my valid case reference and valid access code', async () => {
   const testUser = await iGetTheTestUser(user);
   const caseApi = iGetTheCaseApi(testUser);
   const userCase = await caseApi.getOrCreateCase(Adoption.ADOPTION, testUser);
-  const fetchedCase = await caseApi.getCaseById(userCase.id);
 
   const caseReference = userCase.id;
-  const accessCode = fetchedCase.accessCode;
 
-  if (!caseReference || !accessCode) {
+  if (!caseReference) {
     throw new Error(`No case reference or access code was returned for ${testUser}`);
   }
 
@@ -198,9 +196,6 @@ When('I enter my valid case reference and valid access code', async () => {
 
   iClick('Your reference number');
   I.type(caseReference);
-  iClick('Your access code');
-  I.type(accessCode as string);
-  iClick('Continue');
 });
 
 When('a case worker issues the application', async () => {
@@ -220,7 +215,7 @@ When('a case worker issues the application', async () => {
   const cwUser = await testConfig.GetOrCreateCaseWorker();
   const caseWorker = await iGetTheTestUser(cwUser);
   const cwCaseApi = iGetTheCaseApi(caseWorker);
-  await cwCaseApi.triggerEvent(caseReference, { ceremonyPlace: 'Somewhere' }, 'caseworker-issue-application');
+  await cwCaseApi.triggerEvent(caseReference, {}, 'caseworker-issue-application');
 });
 
 export const iGetTheTestUser = async (user: { username: string; password: string }): Promise<UserDetails> => {
@@ -284,7 +279,4 @@ const executeUserCaseScript = (userCaseObj, requestPageLink: string, redirectPag
 
 export interface BrowserCase extends Case {
   state: State;
-  'relationshipDate-day': number;
-  'relationshipDate-month': number;
-  'relationshipDate-year': number;
 }

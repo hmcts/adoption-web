@@ -3,7 +3,7 @@ import { generatePageContent } from '../../../steps/common/common.content';
 import { Sections } from '../../../steps/constants';
 import { PageLink, YOUR_NAME } from '../../../steps/urls';
 import type { FormOptions } from '../../form/Form';
-import { Case, Checkbox } from '../case';
+import { Case } from '../case';
 
 import type { GovUkNunjucksSummary } from './govUkNunjucksSummary';
 import { omitUnreachableAnswers } from './possibleAnswers';
@@ -16,7 +16,6 @@ export const getAnswerRows = function (
 ): GovUkNunjucksSummary[] {
   const {
     language,
-    isDivorce,
     userCase,
     userEmail,
     isJointApplication,
@@ -49,7 +48,6 @@ export const getAnswerRows = function (
           ...generatePageContent({
             language,
             pageContent: step.generateContent,
-            isDivorce,
             userCase: processedUserCase,
             userEmail,
           }),
@@ -84,12 +82,7 @@ export const getAnswerRows = function (
               }),
         });
 
-      if (
-        isCompleteCase &&
-        section === Sections.AboutPartnership &&
-        processedUserCase.sameSex === Checkbox.Checked &&
-        sameSexHasBeenAnswered === false
-      ) {
+      if (isCompleteCase && section === Sections.AboutPartnership && sameSexHasBeenAnswered === false) {
         sameSexHasBeenAnswered = true;
         addQuestionAnswer('Same-sex couples', 'We were a same-sex couple when we got married');
       }
@@ -191,11 +184,11 @@ const getApplicant2Steps = (isJointApplication: boolean) => {
 const getCompleteQuestionAnswers = (stepUrl: string, processedUserCase: Partial<Case>): [string, string] => {
   let question;
   let answer;
+  console.log(processedUserCase);
 
   switch (stepUrl) {
     case YOUR_NAME: {
       question = 'Full name on the marriage certificate';
-      answer = processedUserCase.applicant1FullNameOnCertificate;
       break;
     }
   }

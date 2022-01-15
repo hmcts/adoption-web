@@ -1,8 +1,8 @@
 import { defaultViewArgs } from '../../../test/unit/utils/defaultViewArgs';
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
-import { Language, generatePageContent } from '../../steps/common/common.content';
-import { DivorceOrDissolution, Gender, State } from '../case/definition';
+import { generatePageContent } from '../../steps/common/common.content';
+import { State } from '../case/definition';
 
 import { GetController } from './GetController';
 
@@ -138,19 +138,15 @@ describe('GetController', () => {
 
     const req = mockRequest();
     const res = mockResponse();
-    req.session.userCase.gender = Gender.FEMALE;
     await controller.get(req, res);
 
     expect(res.render).toBeCalledWith('page', {
       ...defaultViewArgs,
       userCase: {
         id: '1234',
-        divorceOrDissolution: 'divorce',
-        gender: Gender.FEMALE,
       },
       text: 'english',
       userEmail,
-      selectedGender: Gender.FEMALE,
     });
   });
 
@@ -178,51 +174,6 @@ describe('GetController', () => {
         ...defaultViewArgs,
         isDraft: true,
         userCase: req.session.userCase,
-      });
-    });
-
-    describe.each([
-      { serviceType: DivorceOrDissolution.DIVORCE, isDivorce: true },
-      { serviceType: DivorceOrDissolution.DISSOLUTION, isDivorce: false, civilKey: 'civilPartner' },
-    ])('Service type %s', ({ serviceType, isDivorce }) => {
-      describe.each(['en', 'cy'] as Language[])('Language %s', language => {
-        test.each([
-          { gender: Gender.MALE, partnerKey: 'husband' },
-          { gender: Gender.FEMALE, partnerKey: 'wife' },
-          { partnerKey: 'partner' },
-        ])('calls getContent with correct arguments %s selected', async ({ gender }) => {
-          const getContentMock = jest.fn().mockReturnValue({ pageText: `something in ${language}` });
-          const controller = new GetController('page', getContentMock);
-
-          const req = mockRequest({ session: { lang: language, userCase: { gender } } });
-          const res = mockResponse({ locals: { serviceType } });
-          await controller.get(req, res);
-
-          const commonContent = generatePageContent({
-            language,
-            pageContent: getContentMock,
-            isDivorce,
-            userCase: { gender },
-            userEmail,
-          });
-
-          expect(getContentMock).toHaveBeenCalledTimes(2);
-          expect(getContentMock).toHaveBeenCalledWith({
-            ...commonContent,
-            isDivorce,
-            language,
-            userCase: req.session.userCase,
-          });
-          expect(res.render).toBeCalledWith('page', {
-            ...defaultViewArgs,
-            ...commonContent,
-            isDivorce,
-            userCase: req.session.userCase,
-            language,
-            pageText: `something in ${language}`,
-            userEmail,
-          });
-        });
       });
     });
   });

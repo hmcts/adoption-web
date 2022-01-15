@@ -183,10 +183,6 @@ describe('getAnswerRows()', () => {
       mockUserCase = {
         mockField: 'example response',
         applyForFinancialOrder: YesOrNo.YES,
-        applicant1FullNameOnCertificate: 'Sarah Smith',
-        applicant2FullNameOnCertificate: 'Billy Bob',
-        applicant1LegalProceedings: YesOrNo.YES,
-        applicant2LegalProceedings: YesOrNo.YES,
       };
       mockCtx = {
         language: 'en',

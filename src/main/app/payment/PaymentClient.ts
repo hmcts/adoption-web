@@ -24,7 +24,7 @@ export class PaymentClient {
 
   public async create(): Promise<Payment> {
     const userCase = this.session.userCase;
-    const isDivorce = userCase.divorceOrDissolution === DivorceOrDissolution.DIVORCE;
+    const isDivorce = DivorceOrDissolution.DIVORCE;
     const caseId = userCase.id.toString();
     const total = userCase.applicationFeeOrderSummary.Fees.reduce((sum, item) => sum + +item.value.FeeAmount, 0) / 100;
     const body = {
