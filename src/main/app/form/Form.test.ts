@@ -208,7 +208,12 @@ describe('Form', () => {
 
   test('Should build a form with a custom field function', async () => {
     const mockFieldFnForm: FormContent = {
-      fields: () => ({}),
+      fields: () => ({
+        customQuestion: {
+          label: 'custom',
+          type: 'text',
+        },
+      }),
       submit: {
         text: l => l.continue,
       },

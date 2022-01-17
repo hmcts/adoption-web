@@ -75,7 +75,6 @@ describe('getAnswerRows()', () => {
 
     expect(generatePageContentSpy).toHaveBeenCalledWith({
       userCase: {},
-      isDivorce: true,
       language: 'en',
       pageContent: mockGenerateContent,
       userEmail: 'test@example.com',

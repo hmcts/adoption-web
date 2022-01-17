@@ -29,7 +29,6 @@ describe('GetController', () => {
       language: 'en',
       serviceName: 'Apply for adoption',
       isDraft: true,
-      isDivorce: true,
       text: 'english',
       userCase: req.session.userCase,
       userEmail,
@@ -165,15 +164,19 @@ describe('GetController', () => {
       expect(getContentMock).toHaveBeenCalledWith({
         ...commonContent,
         language: 'en',
-        isDivorce: true,
         userCase: req.session.userCase,
-        partner: 'partner',
         userEmail,
       });
       expect(res.render).toBeCalledWith('page', {
         ...defaultViewArgs,
         isDraft: true,
         userCase: req.session.userCase,
+        userEmail,
+        htmlLang: 'en',
+        language: 'en',
+        serviceName: 'Apply for adoption',
+        contactEmail: 'todo@test.com',
+        sessionErrors: [],
       });
     });
   });
