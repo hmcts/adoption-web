@@ -5,7 +5,7 @@ import OtherNamesPostControllerBase from '../../../app/controller/other-names/Ot
 import { FormFields, FormFieldsFn } from '../../../app/form/Form';
 
 @autobind
-export default class NationalityPostController extends OtherNamesPostControllerBase {
+export default class OtherNamesPostController extends OtherNamesPostControllerBase {
   constructor(protected readonly fields: FormFields | FormFieldsFn) {
     super(fields, FieldPrefix.APPLICANT1);
   }

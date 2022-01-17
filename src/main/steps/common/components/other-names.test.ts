@@ -18,6 +18,7 @@ const enContent = {
   yes: 'Yes',
   no: 'No',
   applicant1OtherFirstNames: 'Add your previous first names',
+  applicant1OtherLastNames: 'Add your previous last names',
   add: 'Add',
   another: 'Add another name',
   remove: 'Remove',
@@ -42,6 +43,7 @@ const cyContent = {
   yes: 'Yes (in Welsh)',
   no: 'No (in Welsh)',
   applicant1OtherFirstNames: 'Add your previous first names (in Welsh)',
+  applicant1OtherLastNames: 'Add your previous last names (in Welsh)',
   add: 'Add (in Welsh)',
   another: 'Add another name (in Welsh)',
   remove: 'Remove (in Welsh)',
@@ -63,13 +65,15 @@ const cyContent = {
 
 const langAssertions = (language, content) => {
   const generatedContent = generateContent({ language, userCase: {} } as CommonContent, FieldPrefix.APPLICANT1);
-  const { label, example, yes, no, applicant1OtherFirstNames, add, another, remove, errors } = content;
+  const { label, example, yes, no, applicant1OtherFirstNames, applicant1OtherLastNames, add, another, remove, errors } =
+    content;
 
   expect(generatedContent.label).toEqual(label);
   expect(generatedContent.example).toEqual(example);
   expect(generatedContent.yes).toEqual(yes);
   expect(generatedContent.no).toEqual(no);
   expect(generatedContent.applicant1OtherFirstNames).toEqual(applicant1OtherFirstNames);
+  expect(generatedContent.applicant1OtherLastNames).toEqual(applicant1OtherLastNames);
   expect(generatedContent.add).toEqual(add);
   expect(generatedContent.another).toEqual(another);
   expect(generatedContent.remove).toEqual(remove);
@@ -93,12 +97,13 @@ describe('other names content', () => {
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
 
-    const { type, classes, label, hint, values, validator } = fields.applicant1HasOtherNames as FormOptions;
+    const { type, classes, label, hint, section, values, validator } = fields.applicant1HasOtherNames as FormOptions;
 
     expect(type).toBe('radios');
     expect(classes).toBe('govuk-radios');
     expect((label as Function)(generatedContent)).toBe(enContent.label);
     expect((hint as Function)(generatedContent)).toBe(enContent.example);
+    expect((section as Function)(generatedContent)).toBe(undefined);
     expect(values).toHaveLength(2);
     expect((values[0].label as Function)(generatedContent)).toBe(enContent.yes);
     expect(values[0].value).toBe(YesOrNo.YES);
@@ -116,14 +121,22 @@ describe('other names content', () => {
     const yesRadioSubFields = applicant1HasOtherNames.values[0].subFields;
     const applicant1AdditionalNames = yesRadioSubFields?.applicant1AdditionalNames as FormOptions;
     const applicant1OtherFirstNames = yesRadioSubFields?.applicant1OtherFirstNames;
+    const applicant1OtherLastNames = yesRadioSubFields?.applicant1OtherLastNames;
     const addButton = yesRadioSubFields?.addButton as FormInput;
 
     expect(applicant1AdditionalNames).toBeUndefined();
 
     expect(applicant1OtherFirstNames?.type).toBe('input');
+    expect(applicant1OtherFirstNames?.classes).toBe('govuk-!-width-two-thirds');
     expect((applicant1OtherFirstNames?.label as Function)(generatedContent)).toBe(enContent.applicant1OtherFirstNames);
     expect(applicant1OtherFirstNames?.labelSize).toBe(null);
     expect(applicant1OtherFirstNames?.validator).toBe(isFieldFilledIn);
+
+    expect(applicant1OtherLastNames?.type).toBe('input');
+    expect(applicant1OtherLastNames?.classes).toBe('govuk-!-width-two-thirds');
+    expect((applicant1OtherLastNames?.label as Function)(generatedContent)).toBe(enContent.applicant1OtherLastNames);
+    expect(applicant1OtherLastNames?.labelSize).toBe(null);
+    expect(applicant1OtherLastNames?.validator).toBe(isFieldFilledIn);
 
     expect(addButton?.type).toBe('button');
     expect((addButton?.label as Function)(generatedContent)).toBe(enContent.add);
@@ -145,6 +158,7 @@ describe('other names content', () => {
     const rows = applicant1AdditionalNames?.rows?.rows;
     const addAnotherName = yesRadioSubFields?.addAnotherName as FormInput;
     const applicant1OtherFirstNames = addAnotherName?.subFields?.applicant1OtherFirstNames;
+    const applicant1OtherLastNames = addAnotherName?.subFields?.applicant1OtherLastNames;
     const addButton = addAnotherName?.subFields?.addButton as FormInput;
 
     expect(applicant1AdditionalNames?.type).toBe('summarylist');
@@ -161,8 +175,14 @@ describe('other names content', () => {
     expect(doesArrayHaveValues).toHaveBeenCalled();
 
     expect(applicant1OtherFirstNames?.type).toBe('input');
+    expect(applicant1OtherFirstNames?.classes).toBe('govuk-!-width-two-thirds');
     expect((applicant1OtherFirstNames?.label as Function)(generatedContent)).toBe(enContent.applicant1OtherFirstNames);
     expect(applicant1OtherFirstNames?.labelSize).toBe(null);
+
+    expect(applicant1OtherLastNames?.type).toBe('input');
+    expect(applicant1OtherLastNames?.classes).toBe('govuk-!-width-two-thirds');
+    expect((applicant1OtherLastNames?.label as Function)(generatedContent)).toBe(enContent.applicant1OtherLastNames);
+    expect(applicant1OtherLastNames?.labelSize).toBe(null);
 
     expect(addButton?.type).toBe('button');
     expect((addButton?.label as Function)(generatedContent)).toBe(enContent.add);
