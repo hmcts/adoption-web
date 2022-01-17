@@ -99,21 +99,21 @@ describe('from-api-format', () => {
     });
   });
 
-  test('adds read only fields', () => {
-    expect(
-      fromApiFormat({
-        applicationPayments: [
-          {
-            id: 'mock-payment',
-          },
-        ],
-      } as unknown as CaseData)
-    ).toStrictEqual({
-      payments: [
-        {
-          id: 'mock-payment',
-        },
-      ],
-    });
-  });
+  // test('adds read only fields', () => {
+  //   expect(
+  //     fromApiFormat({
+  //       applicationPayments: [
+  //         {
+  //           id: 'mock-payment',
+  //         },
+  //       ],
+  //     } as unknown as CaseData)
+  //   ).toStrictEqual({
+  //     payments: [
+  //       {
+  //         id: 'mock-payment',
+  //       },
+  //     ],
+  //   });
+  // });
 });
