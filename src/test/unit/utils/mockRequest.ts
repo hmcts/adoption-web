@@ -1,4 +1,3 @@
-import { DivorceOrDissolution } from '../../../main/app/case/definition';
 import { AppRequest } from '../../../main/app/controller/AppRequest';
 
 export const mockRequest = ({
@@ -36,7 +35,6 @@ export const mockRequest = ({
       },
       userCase: {
         id: '1234',
-        divorceOrDissolution: DivorceOrDissolution.DIVORCE,
         ...userCase,
       },
       save: jest.fn(done => done()),
@@ -48,7 +46,7 @@ export const mockRequest = ({
         steps: [
           {
             getNextStep: () => '',
-            form: { fields: { gender: { type: 'radios' } } },
+            form: { fields: {} },
           },
         ],
         ...appLocals,

@@ -7,7 +7,7 @@ import { LanguageToggle } from '../../modules/i18n';
 import { getNextIncompleteStepUrl } from '../../steps';
 import { CommonContent, Language, generatePageContent } from '../../steps/common/common.content';
 import { Case, CaseWithId } from '../case/case';
-import { CITIZEN_UPDATE, DivorceOrDissolution, State } from '../case/definition';
+import { CITIZEN_UPDATE, State } from '../case/definition';
 
 import { AppRequest } from './AppRequest';
 
@@ -26,7 +26,6 @@ export class GetController {
     }
 
     const language = this.getPreferredLanguage(req) as Language;
-    const isDivorce = res.locals.serviceType === DivorceOrDissolution.DIVORCE;
     const userCase = req.session?.userCase;
     const addresses = req.session?.addresses;
     const eligibility = req.session?.eligibility;
@@ -34,7 +33,6 @@ export class GetController {
     const content = generatePageContent({
       language,
       pageContent: this.content,
-      isDivorce,
       userCase,
       userEmail: req.session?.user?.email,
       addresses,
@@ -53,9 +51,6 @@ export class GetController {
       sessionErrors,
       htmlLang: language,
       isDraft: req.session?.userCase?.state ? req.session.userCase.state === State.Draft : true,
-      isAwaitingApplicant2Response: req.session?.userCase?.state
-        ? req.session.userCase.state === State.AwaitingApplicant2Response
-        : false,
       getNextIncompleteStepUrl: () => getNextIncompleteStepUrl(req),
     });
   }

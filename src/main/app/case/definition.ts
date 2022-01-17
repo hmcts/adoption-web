@@ -90,17 +90,11 @@ export interface CaseNote {
 }
 
 export interface AcknowledgementOfService {
-  confirmReadPetition: YesOrNo;
-  disputeApplication: YesOrNo;
-  confirmDisputeApplication: YesOrNo;
-  jurisdictionAgree: YesOrNo;
   jurisdictionDisagreeReason: string;
   dateAosSubmitted: DateAsString;
   digitalNoticeOfProceedings: YesOrNo;
   noticeOfProceedingsEmail: string;
   noticeOfProceedingsSolicitorFirm: string;
-  reasonCourtsOfEnglandAndWalesHaveNoJurisdiction: string;
-  inWhichCountryIsYourLifeMainlyBased: string;
   statementOfTruth: YesOrNo;
   prayerHasBeenGiven: YesOrNo;
 }
@@ -153,7 +147,6 @@ export interface Applicant {
   LanguagePreferenceWelsh: YesOrNo;
   LastNameChangedWhenMarried: YesOrNo;
   NameDifferentToMarriageCertificate: YesOrNo;
-  NameChangedHow: ChangedNameHow[];
   NameChangedHowOtherDetails: string;
   HomeAddress: AddressGlobalUK;
   KeepContactDetailsConfidential: YesOrNo;
@@ -237,9 +230,7 @@ export interface Application {
   pbaNumbers: DynamicList;
   feeAccountReference: string;
   applicationFeeOrderSummary: OrderSummary;
-  applicant2AgreeToReceiveEmails: YesOrNo;
   applicant1KnowsApplicant2EmailAddress: YesOrNo;
-  applicant1KnowsApplicant2Address: YesOrNo;
   app2ContactMethodIsDigital: YesOrNo;
   applicant1CannotUploadSupportingDocument: DocumentType[];
   applicant2CannotUploadSupportingDocument: DocumentType[];
@@ -248,7 +239,6 @@ export interface Application {
   dateSubmitted: DateAsString;
   applicant2ConfirmApplicant1Information: YesOrNo;
   applicant2ExplainsApplicant1IncorrectInformation: string;
-  issueDate: DateAsString;
   reissueDate: DateAsString;
   createdDate: DateAsString;
   rejectReason: RejectReason;
@@ -448,11 +438,9 @@ export interface CaseData {
   labelContentApplicationType: ApplicationType;
 
   applicant1AgreedToReceiveEmails: YesOrNo;
-  applicant1ConfirmReceipt: YesOrNo;
   applicant1LanguagePreferenceWelsh: YesOrNo;
   applicant1LastNameChangedWhenMarried: YesOrNo;
   applicant1NameDifferentToMarriageCertificate: YesOrNo;
-  applicant1NameChangedHow: ChangedNameHow[];
   applicant1NameChangedHowOtherDetails: string;
   applicant1HomeAddress: AddressGlobalUK;
   applicant1KeepContactDetailsConfidential: YesOrNo;
@@ -463,22 +451,17 @@ export interface CaseData {
   applicant1SolicitorReference: string;
   applicant1SolicitorPhone: string;
   applicant1SolicitorEmail: string;
-  applicant1SolicitorAddress: string;
   applicant1SolicitorAgreeToReceiveEmails: YesOrNo;
   applicant1SolicitorOrganisationPolicy: OrganisationPolicy<UserRole>;
   applicant1FinancialOrder: YesOrNo;
   applicant1FinancialOrderFor: FinancialOrderFor[];
-  applicant1LegalProceedings: YesOrNo;
-  applicant1LegalProceedingsDetails: string;
   applicant1PcqId: string;
 
   applicant2MiddleName: string;
   applicant2AgreedToReceiveEmails: YesOrNo;
-  applicant2ConfirmReceipt: YesOrNo;
   applicant2LanguagePreferenceWelsh: YesOrNo;
   applicant2LastNameChangedWhenMarried: YesOrNo;
   applicant2NameDifferentToMarriageCertificate: YesOrNo;
-  applicant2NameChangedHow: ChangedNameHow[];
   applicant2NameChangedHowOtherDetails: string;
   applicant2HomeAddress: AddressGlobalUK;
   applicant2KeepContactDetailsConfidential: YesOrNo;
@@ -489,13 +472,10 @@ export interface CaseData {
   applicant2SolicitorReference: string;
   applicant2SolicitorPhone: string;
   applicant2SolicitorEmail: string;
-  applicant2SolicitorAddress: string;
   applicant2SolicitorAgreeToReceiveEmails: YesOrNo;
   applicant2SolicitorOrganisationPolicy: OrganisationPolicy<UserRole>;
   applicant2FinancialOrder: YesOrNo;
   applicant2FinancialOrderFor: FinancialOrderFor[];
-  applicant2LegalProceedings: YesOrNo;
-  applicant2LegalProceedingsDetails: string;
   applicant2PcqId: string;
   applicant1ScreenHasMarriageBroken: YesOrNo;
   applicant2ScreenHasMarriageBroken: YesOrNo;
@@ -559,9 +539,7 @@ export interface CaseData {
   pbaNumbers: DynamicList;
   feeAccountReference: string;
   applicationFeeOrderSummary: OrderSummary;
-  applicant2AgreeToReceiveEmails: YesOrNo;
   applicant1KnowsApplicant2EmailAddress: YesOrNo;
-  applicant1KnowsApplicant2Address: YesOrNo;
   app2ContactMethodIsDigital: YesOrNo;
   applicant1CannotUploadSupportingDocument: DocumentType[];
   applicant2CannotUploadSupportingDocument: DocumentType[];
@@ -570,7 +548,6 @@ export interface CaseData {
   dateSubmitted: DateAsString;
   applicant2ConfirmApplicant1Information: YesOrNo;
   applicant2ExplainsApplicant1IncorrectInformation: string;
-  issueDate: DateAsString;
   reissueDate: DateAsString;
   createdDate: DateAsString;
   rejectReason: RejectReason;
@@ -582,19 +559,12 @@ export interface CaseData {
   applicant1NotifiedCanApplyForConditionalOrder: YesOrNo;
   reissueOption: ReissueOption;
   applicant2InviteEmailAddress: string;
-  accessCode: string;
   applicant2UserId: string;
-  confirmReadPetition: YesOrNo;
-  disputeApplication: YesOrNo;
-  confirmDisputeApplication: YesOrNo;
-  jurisdictionAgree: YesOrNo;
   jurisdictionDisagreeReason: string;
   dateAosSubmitted: DateAsString;
   digitalNoticeOfProceedings: YesOrNo;
   noticeOfProceedingsEmail: string;
   noticeOfProceedingsSolicitorFirm: string;
-  reasonCourtsOfEnglandAndWalesHaveNoJurisdiction: string;
-  inWhichCountryIsYourLifeMainlyBased: string;
   statementOfTruth: YesOrNo;
   prayerHasBeenGiven: YesOrNo;
   coDateSubmitted: DateAsString;
@@ -1147,12 +1117,6 @@ export const enum ApplyingWith {
   ALONE = 'alone',
   WITH_SPOUSE_OR_CIVIL_PARTNER = 'withSpouseOrCivilPartner',
   WITH_SOME_ONE_ELSE = 'withSomeoneElse',
-}
-
-export const enum ChangedNameHow {
-  MARRIAGE_CERTIFICATE = 'marriageCertificate',
-  DEED_POLL = 'deedPoll',
-  OTHER = 'other',
 }
 
 export const enum ClarificationReason {
