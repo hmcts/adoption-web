@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable jest/expect-expect */
-import { YesOrNo } from '../../../app/case/definition';
+import { OtherName, YesOrNo } from '../../../app/case/definition';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
 import { doesArrayHaveValues, isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
@@ -13,7 +13,7 @@ const EN = 'en';
 const cyContent = cyFunction();
 const enContent = enFunction();
 
-const commonContent = (names: string[]) =>
+const commonContent = (names: OtherName[]) =>
   ({ language: EN, userCase: { applicant2AdditionalNames: names } } as CommonContent);
 
 const langAssertions = (language, content, generateFn) => {
@@ -80,7 +80,10 @@ describe('applicant2 > other-names content', () => {
   });
 
   it("should display correct content under the 'yes' radio when names array is populated", () => {
-    const populatedArray = ['name1', 'name2'];
+    const populatedArray = [
+      { id: 'MOCK_ID_1', firstNames: 'firstName1', lastNames: 'lastName1' },
+      { id: 'MOCK_ID_2', firstNames: 'firstName2', lastNames: 'lastName2' },
+    ];
     const generatedContent = generateContent(commonContent(populatedArray));
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
@@ -94,11 +97,11 @@ describe('applicant2 > other-names content', () => {
 
     expect(applicant2AdditionalNames?.type).toBe('summarylist');
     expect(rows).toHaveLength(2);
-    expect(rows?.[0].key.text).toStrictEqual(populatedArray[0]);
-    expect(rows?.[1].key.text).toStrictEqual(populatedArray[1]);
-    expect(rows?.[0].actions.items[0].href).toStrictEqual(`/applicant2/other-names?remove=${populatedArray[0]}`);
+    expect(rows?.[0].key.text).toStrictEqual('firstName1 lastName1');
+    expect(rows?.[0].actions.items[0].href).toStrictEqual('/applicant2/other-names?remove=MOCK_ID_1');
     expect(rows?.[0].actions.items[0].text).toStrictEqual('Remove');
-    expect(rows?.[0].actions.items[0].visuallyHiddenText).toStrictEqual(populatedArray[0]);
+    expect(rows?.[0].actions.items[0].visuallyHiddenText).toStrictEqual('firstName1 lastName1');
+    expect(rows?.[1].key.text).toStrictEqual('firstName2 lastName2');
 
     expect(addAnotherName.type).toBe('details');
     expect((addAnotherName.label as Function)(generateContent(commonContent([])))).toBe(enContent.another);

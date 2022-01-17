@@ -12,19 +12,23 @@ export const en = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
   example: 'For example, your name before marriage.',
   yes: 'Yes',
   no: 'No',
-  [`${fieldPrefix}AdditionalName`]: 'Add your previous full name',
+  [`${fieldPrefix}OtherFirstNames`]: 'Add your previous first names',
+  [`${fieldPrefix}OtherLastNames`]: 'Add your previous last names',
   add: 'Add',
   another: 'Add another name',
   remove: 'Remove',
   errors: {
     [`${fieldPrefix}HasOtherNames`]: {
-      required: 'Enter a name or choose no',
+      required: 'Please answer the question',
     },
-    [`${fieldPrefix}AdditionalName`]: {
-      required: 'Enter a name or choose no',
+    [`${fieldPrefix}OtherFirstNames`]: {
+      required: 'Enter your first names',
+    },
+    [`${fieldPrefix}OtherLastNames`]: {
+      required: 'Enter your last names',
     },
     addAnotherName: {
-      required: 'Enter a name or choose no',
+      required: 'Please answer the question',
     },
   },
 });
@@ -34,19 +38,23 @@ export const cy = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
   example: 'For example, your name before marriage. (in Welsh)',
   yes: 'Yes (in Welsh)',
   no: 'No (in Welsh)',
-  [`${fieldPrefix}AdditionalName`]: 'Add your previous full name (in Welsh)',
+  [`${fieldPrefix}OtherFirstNames`]: 'Add your previous first names (in Welsh)',
+  [`${fieldPrefix}OtherLastNames`]: 'Add your previous last names (in Welsh)',
   add: 'Add (in Welsh)',
   another: 'Add another name (in Welsh)',
   remove: 'Remove (in Welsh)',
   errors: {
     [`${fieldPrefix}HasOtherNames`]: {
-      required: 'Enter a name or choose no (in Welsh)',
+      required: 'Please answer the question (in Welsh)',
     },
-    [`${fieldPrefix}AdditionalName`]: {
-      required: 'Enter a name or choose no (in Welsh)',
+    [`${fieldPrefix}OtherFirstNames`]: {
+      required: 'Enter your first names (in Welsh)',
+    },
+    [`${fieldPrefix}OtherLastNames`]: {
+      required: 'Enter your last names (in Welsh)',
     },
     addAnotherName: {
-      required: 'Enter a name or choose no (in Welsh)',
+      required: 'Please answer the question (in Welsh)',
     },
   },
 });
@@ -82,10 +90,16 @@ export const otherNamesFields = (userCase: Partial<Case>, fieldPrefix: FieldPref
                   type: 'details',
                   label: l => l.another,
                   subFields: {
-                    [`${fieldPrefix}AdditionalName`]: {
+                    [`${fieldPrefix}OtherFirstNames`]: {
                       type: 'input',
                       classes: 'govuk-!-width-two-thirds',
-                      label: l => l[`${fieldPrefix}AdditionalName`],
+                      label: l => l[`${fieldPrefix}OtherFirstNames`],
+                      labelSize: null,
+                    },
+                    [`${fieldPrefix}OtherLastNames`]: {
+                      type: 'input',
+                      classes: 'govuk-!-width-two-thirds',
+                      label: l => l[`${fieldPrefix}OtherLastNames`],
                       labelSize: null,
                     },
                     addButton: {
@@ -99,10 +113,17 @@ export const otherNamesFields = (userCase: Partial<Case>, fieldPrefix: FieldPref
                 },
               }
             : {
-                [`${fieldPrefix}AdditionalName`]: {
+                [`${fieldPrefix}OtherFirstNames`]: {
                   type: 'input',
                   classes: 'govuk-!-width-two-thirds',
-                  label: l => l[`${fieldPrefix}AdditionalName`],
+                  label: l => l[`${fieldPrefix}OtherFirstNames`],
+                  labelSize: null,
+                  validator: isFieldFilledIn,
+                },
+                [`${fieldPrefix}OtherLastNames`]: {
+                  type: 'input',
+                  classes: 'govuk-!-width-two-thirds',
+                  label: l => l[`${fieldPrefix}OtherLastNames`],
                   labelSize: null,
                   validator: isFieldFilledIn,
                 },

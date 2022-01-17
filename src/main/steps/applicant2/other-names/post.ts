@@ -30,7 +30,8 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
           req.session.userCase.applicant2AdditionalNames = [];
         }
         if (formData.applicant2AdditionalName) {
-          req.session.userCase.applicant2AdditionalNames.push(formData.applicant2AdditionalName);
+          //TODO correct below logic
+          // req.session.userCase.applicant2AdditionalNames.push(formData.applicant2AdditionalName);
           req.session.userCase.applicant2AdditionalName = '';
         }
         try {

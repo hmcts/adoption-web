@@ -96,7 +96,7 @@ export const form: FormContent = {
                           value: 'addButton',
                         },
                       },
-                      validator: () => doesArrayHaveValues(userCase.applicant2AdditionalNames),
+                      validator: () => doesArrayHaveValues(userCase.applicant1AdditionalNames),
                     },
                   }
                 : {
