@@ -9,6 +9,7 @@ import { GetController } from '../../../app/controller/GetController';
 export default class OtherNamesGetController extends GetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
     const names = req.session.userCase.applicant1AdditionalNames;
+
     const remove = req.query.remove;
 
     let removed = false;
