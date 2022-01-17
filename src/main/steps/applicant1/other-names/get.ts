@@ -13,6 +13,7 @@ export default class OtherNamesGetController extends GetController {
     const remove = req.query.remove;
 
     let removed = false;
+
     if (remove && names?.length) {
       const index = names.indexOf(remove as string);
 
