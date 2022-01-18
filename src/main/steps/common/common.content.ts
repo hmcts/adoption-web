@@ -1,7 +1,6 @@
 import { capitalize } from 'lodash';
 
 import { CaseWithId } from '../../app/case/case';
-import { ApplicationType, Gender } from '../../app/case/definition';
 import { Eligibility } from '../../app/controller/AppRequest';
 import { PageContent, TranslationFn } from '../../app/controller/GetController';
 import { Fee } from '../../app/fee/fee-lookup-api';
@@ -185,7 +184,6 @@ const cy: typeof en = {
 export const generatePageContent = ({
   language,
   pageContent,
-  isDivorce = true,
   userCase,
   userEmail,
   addresses = [],
@@ -194,7 +192,6 @@ export const generatePageContent = ({
 }: {
   language: Language;
   pageContent?: TranslationFn;
-  isDivorce?: boolean;
   userCase?: Partial<CaseWithId>;
   userEmail?: string;
   addresses?: [];
@@ -202,23 +199,16 @@ export const generatePageContent = ({
   fee?: Fee;
 }): PageContent => {
   const commonTranslations: typeof en = language === 'en' ? en : cy;
-  const serviceName = getServiceName(commonTranslations, isDivorce);
-  const selectedGender = getSelectedGender(userCase as Partial<CaseWithId>);
-  const partner = getPartnerContent(commonTranslations, selectedGender, isDivorce);
-  const contactEmail = isDivorce ? 'contactdivorce@justice.gov.uk' : 'civilpartnership.case@justice.gov.uk';
-  const isJointApplication = userCase?.applicationType === ApplicationType.JOINT_APPLICATION;
+  const serviceName = getServiceName(commonTranslations);
+  const contactEmail = 'todo@test.com';
 
   const content: CommonContent = {
     ...commonTranslations,
     serviceName,
-    selectedGender,
-    partner,
     language,
-    isDivorce,
     userCase,
     userEmail,
     contactEmail,
-    isJointApplication,
     addresses,
     eligibility,
     fee,
@@ -231,39 +221,17 @@ export const generatePageContent = ({
   return content;
 };
 
-const getServiceName = (translations: typeof en, isDivorce: boolean): string => {
-  const serviceName = isDivorce ? translations.applyForAdoption : translations.applyForDissolution;
-  return capitalize(serviceName);
-};
-
-const getSelectedGender = (userCase: Partial<CaseWithId>): Gender => {
-  return userCase?.gender as Gender;
-};
-
-const getPartnerContent = (translations: typeof en, selectedGender: Gender, isDivorce: boolean): string => {
-  if (!isDivorce) {
-    return translations.civilPartner;
-  }
-  if (selectedGender === Gender.MALE) {
-    return translations.husband;
-  }
-  if (selectedGender === Gender.FEMALE) {
-    return translations.wife;
-  }
-  return translations.partner;
+const getServiceName = (translations: typeof en): string => {
+  return capitalize(translations.applyForAdoption);
 };
 
 export type CommonContent = typeof en & {
   language: Language;
   serviceName: string;
   pageContent?: TranslationFn;
-  isDivorce: boolean;
   userCase?: Partial<CaseWithId>;
-  partner: string;
   userEmail?: string;
   contactEmail?: string;
-  selectedGender: Gender;
-  isJointApplication: boolean;
   referenceNumber?: string;
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   addresses?: any[];
