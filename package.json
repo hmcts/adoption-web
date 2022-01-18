@@ -33,7 +33,7 @@
     "@hmcts/nodejs-logging": "^3.0.4",
     "@hmcts/properties-volume": "^0.0.13",
     "@types/autobind-decorator": "^2.1.0",
-    "@types/config": "^0.0.40",
+    "@types/config": "^0.0.41",
     "@types/connect-redis": "^0.0.18",
     "@types/cookie-parser": "^1.4.2",
     "@types/csurf": "^1.11.2",
