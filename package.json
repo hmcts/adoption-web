@@ -60,7 +60,7 @@
     "applicationinsights": "^2.1.9",
     "autobind-decorator": "^2.4.0",
     "axios": "^0.25.0",
-    "config": "^3.3.6",
+    "config": "^3.3.7",
     "connect-redis": "^6.0.0",
     "cookie-parser": "^1.4.5",
     "csurf": "^1.11.0",
