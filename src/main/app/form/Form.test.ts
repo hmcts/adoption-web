@@ -1,4 +1,4 @@
-import { Case, CaseDate, Checkbox } from '../case/case';
+import { Case, CaseDate } from '../case/case';
 import { YesOrNo } from '../case/definition';
 
 import { Form, FormContent, FormFields, FormFieldsFn } from './Form';
@@ -53,14 +53,12 @@ describe('Form', () => {
         month: '1',
         year: '2000',
       },
-      applicant1DoesNotKnowApplicant2EmailAddress: Checkbox.Checked,
       checkboxes: 'checkbox1',
     } as unknown as Case);
 
     expect(mockForm.fields['field'].validator).toHaveBeenCalledWith(YesOrNo.YES, {
       field: YesOrNo.YES,
       dateField: { day: '1', month: '1', year: '2000' },
-      applicant1DoesNotKnowApplicant2EmailAddress: Checkbox.Checked,
       checkboxes: 'checkbox1',
     });
     expect(errors).toStrictEqual([]);
@@ -210,8 +208,11 @@ describe('Form', () => {
 
   test('Should build a form with a custom field function', async () => {
     const mockFieldFnForm: FormContent = {
-      fields: userCase => ({
-        ...(userCase.applicant1AddressPrivate ? { customQuestion: { type: 'text', label: 'custom' } } : {}),
+      fields: () => ({
+        customQuestion: {
+          label: 'custom',
+          type: 'text',
+        },
       }),
       submit: {
         text: l => l.continue,
@@ -222,7 +223,7 @@ describe('Form', () => {
     };
     mockFieldFnForm.fields = mockFieldFnForm.fields as FormFieldsFn;
 
-    const mockUserCase = { applicant1AddressPrivate: YesOrNo.YES };
+    const mockUserCase = {};
     const fieldFnForm = new Form(mockFieldFnForm.fields(mockUserCase));
 
     expect(fieldFnForm).toEqual({

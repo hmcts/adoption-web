@@ -2,7 +2,6 @@ import { CaseWithId, FieldPrefix } from '../../app/case/case';
 import {
   ApplyingWith,
   ContactDetails,
-  DivorceOrDissolution,
   Gender,
   Nationality,
   State,
@@ -25,17 +24,10 @@ import {
 const userCase: CaseWithId = {
   id: '123',
   state: State.Draft,
-  divorceOrDissolution: DivorceOrDissolution.DIVORCE,
-  applicant1ConfirmReceipt: YesOrNo.NO,
-  applicant2ConfirmReceipt: YesOrNo.NO,
   connections: [],
-  applicant1AddressPrivate: YesOrNo.NO,
-  applicant2AddressPrivate: YesOrNo.NO,
   documentsGenerated: [],
   payments: [],
   applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },
-  applicant2Confirmation: YesOrNo.NO,
-  applicant2Explanation: YesOrNo.NO,
   addAnotherNationality: YesOrNo.NO,
 };
 
