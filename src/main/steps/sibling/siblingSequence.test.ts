@@ -2,7 +2,7 @@ import { YesNoNotsure } from '../../app/case/definition';
 
 import { siblingSequence } from './siblingSequence';
 
-describe('birthMotherSequence', () => {
+describe('siblingSequence', () => {
   test('should contain 2 entries in sibling screen sequence', () => {
     expect(siblingSequence).toHaveLength(2);
 

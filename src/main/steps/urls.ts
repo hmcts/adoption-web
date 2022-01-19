@@ -62,7 +62,7 @@ export const SIBLING_NAME: PageLink = `${SIBLING}/name`;
 export const SIBLING_ORDER_TYPE: PageLink = `${SIBLING}/order-type`;
 export const SIBLING_ORDER_CASE_NUMBER: PageLink = `${SIBLING}/case-number`;
 export const SIBLING_ORDER_COURT: PageLink = `${SIBLING}/order-court`;
-export const SIBLING_ORDER_DATE: PageLink = `${SIBLING}/order-date`;
+export const SIBLING_ORDER_DATE: PageLink = `${SIBLING}/placement-order-date`;
 export const SIBLING_ORDER_SUMMARY: PageLink = `${SIBLING}/summary`;
 export const SIBLING_CHOOSE_SIBLING: PageLink = `${SIBLING}/choose-sibling`;
 

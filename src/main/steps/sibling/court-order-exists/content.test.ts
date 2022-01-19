@@ -30,7 +30,7 @@ const cyContent = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('sibling > exists > content', () => {
+describe('sibling > court-order-exists > content', () => {
   const commonContent = generatePageContent({
     language: 'en',
     userCase: {},
@@ -56,7 +56,7 @@ describe('sibling > exists > content', () => {
     expect(generatedContent.errors).toEqual(cyContent.errors);
   });
 
-  test('should contain hasSiblings field', () => {
+  test('should contain hasPoForSiblings field', () => {
     const fields = (generatedContent.form as FormContent).fields as FormFields;
     const field = fields.hasPoForSiblings as FormOptions;
     expect(field.type).toBe('radios');
