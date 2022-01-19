@@ -28,10 +28,6 @@ const fields: ToApiConverters = {
   childrenDateOfBirth: data => ({
     childrenDateOfBirth: toApiDate(data.childrenDateOfBirth),
   }),
-  // placementOrderDate: data => ({
-  //   placementOrderDate: toApiDate(data.placementOrderDate),
-  // }),
-  //{"applicant1AdditionalNames":[{"id":"abc","value":{"name":"trump bush"}}]}
   applicant1AdditionalNames: data => ({
     applicant1AdditionalNames:
       data.applicant1HasOtherNames === YesOrNo.YES
@@ -68,6 +64,14 @@ const fields: ToApiConverters = {
       value: {
         ...item,
         placementOrderDate: toApiDate(item.placementOrderDate as CaseDate),
+      },
+    })),
+  }),
+  adopAgencyOrLAs: data => ({
+    adopAgencyOrLAs: (data.adopAgencyOrLAs || []).map(item => ({
+      id: generateUuid(),
+      value: {
+        ...item,
       },
     })),
   }),

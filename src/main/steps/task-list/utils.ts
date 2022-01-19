@@ -236,3 +236,26 @@ export const getOtherParentStatus = (userCase: CaseWithId): SectionStatus => {
 
   return SectionStatus.NOT_STARTED;
 };
+
+export const getAdoptionAgencyDetailStatus = (userCase: CaseWithId): SectionStatus => {
+  console.log(userCase);
+  // const childrenFirstName = userCase.childrenFirstName;
+  // const childrenLastName = userCase.childrenLastName;
+  // const childrenDateOfBirth = userCase.childrenDateOfBirth as CaseDate;
+  // const dateOfBirthComplete = childrenDateOfBirth?.day && childrenDateOfBirth?.month && childrenDateOfBirth?.year;
+  // const childrenSexAtBirth = userCase.childrenSexAtBirth;
+
+  // const nationality: string[] = userCase.childrenNationality || [];
+  // const nationalities: string[] = userCase.childrenAdditionalNationalities || [];
+  // const nationalityComplete =
+  //   !!nationality.length &&
+  //   (!nationality.includes('Other') || (!!nationalities.length && nationality.includes('Other')));
+
+  // return childrenFirstName && childrenLastName && dateOfBirthComplete && childrenSexAtBirth && nationalityComplete
+  //   ? SectionStatus.COMPLETED
+  //   : !childrenFirstName && !childrenLastName && !dateOfBirthComplete && !childrenSexAtBirth && !nationalityComplete
+  //   ? SectionStatus.NOT_STARTED
+  //   : SectionStatus.IN_PROGRESS;
+
+  return SectionStatus.NOT_STARTED;
+};

@@ -281,7 +281,7 @@ export interface Case {
   otherParentAddressKnown?: YesOrNo;
 
   /***** Adoption Agency, Social Worker and Solicitor *****/
-  adopAgencyOrLAs?: ListValue<AdoptionAgencyOrLocalAuthority>[];
+  adopAgencyOrLAs?: AdoptionAgencyOrLocalAuthority[];
   hasAnotherAdopAgencyOrLA?: YesOrNo;
   selectedAdoptionAgencyId?: string;
   socialWorkerName?: string;
@@ -293,8 +293,6 @@ export interface Case {
   solicitorPhoneNumber?: string;
   solicitorEmail?: string;
   solicitorHelpingWithApplication?: YesOrNo;
-
-  /***** Adoption Agency, Social Worker and Solicitor *****/
   siblings?: ListValue<Sibling>[];
   hasSiblings?: string;
   hasSiblingNotSureReason?: string;

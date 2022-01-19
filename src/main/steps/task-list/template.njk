@@ -227,6 +227,19 @@
                     <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
                 {% endif %}
             </li>
+            <li class="app-task-list__item">
+                <span class="app-task-list__task-name">
+                    <a id="adoption-agency" href="{{urls.adoptionAgency}}" class="govuk-link" aria-describedby="eligibility-completed">
+                        {{section3link9}}
+                    </a>
+                </span>
+                <!-- TODO --!>
+                {% if data['court-orders'] %}
+                    <strong class="govuk-tag  app-task-list__tag" id="eligibility-completed">Completed</strong>
+                {% else %}
+                    <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
+                {% endif %}
+            </li>
         </ul>
     </li>
 

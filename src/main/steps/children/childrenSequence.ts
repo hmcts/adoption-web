@@ -61,4 +61,9 @@ export const childrenSequence: Step[] = [
     showInSection: Sections.AboutChildren,
     getNextStep: () => Urls.TASK_LIST_URL,
   },
+  {
+    url: Urls.ADOPTION_AGENCY,
+    showInSection: Sections.AboutChildren,
+    getNextStep: () => Urls.TASK_LIST_URL,
+  },
 ];
