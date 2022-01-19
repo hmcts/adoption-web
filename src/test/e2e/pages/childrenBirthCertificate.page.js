@@ -28,11 +28,10 @@ module.exports = {
     I.click(this.fields.childrenSexAtBirth);
     I.click('Save and continue');
     I.click(this.fields.britishCitizen);
-    //TODO uncomment these tests
-    // I.click(this.fields.citizenOfDifferentCountry);
-    // I.fillField(this.fields.addAnotherNationality, 'India');
-    // I.click('Add');
-    // I.wait('2');
+    I.click(this.fields.citizenOfDifferentCountry);
+    I.fillField(this.fields.addAnotherNationality, 'India');
+    I.click('Add');
+    I.wait('2');
     I.click('Save and continue');
     I.wait('2');
   },

@@ -36,12 +36,12 @@ module.exports = {
     I.click('Save and continue');
     I.waitForText("What is the nationality of the child's birth father?");
     I.click(this.fields.britishCitizen);
-    //TODO uncomment this test
-    // I.click(this.fields.citizenOfDifferentCountry);
-    // I.fillField(this.fields.addAnotherNationality, 'Germany');
-    // I.click('Add');
-    // I.wait('2');
+    I.click(this.fields.citizenOfDifferentCountry);
+    I.fillField(this.fields.addAnotherNationality, 'Germany');
+    I.click('Add');
+    I.wait('2');
     I.click('Save and continue');
+    I.wait('2');
     I.waitForText("What is the occupation of the child's birth father?");
     I.fillField(this.fields.birthFatherOccupation, 'unknown');
     I.wait('2');

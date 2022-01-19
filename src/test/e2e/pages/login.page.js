@@ -1,5 +1,5 @@
 const config = require('../config');
-const { I } = inject();
+const { I, login } = inject();
 
 module.exports = {
   fields: {
@@ -12,28 +12,18 @@ module.exports = {
   },
   submitButton: 'input[value="Sign in"]',
 
-  async signIn(user) {
-    await I.waitForSelector(this.fields.username);
-    I.fillField(this.fields.username, user.email);
-    I.fillField(this.fields.password, user.password);
-    await I.waitForSelector(this.submitButton);
-    I.click(this.submitButton);
+  async createUserAndSignIn() {
+    await login('citizenSingleton');
     await I.wait('3');
   },
 
-  async signInWithCitizenUser(user) {
+  async createCitizenUserAndSignIn() {
     console.log('User using the URL= ' + config.baseUrl);
-    await I.amOnPage(config.baseUrl);
-    await I.wait('5');
-    await I.waitForSelector(this.fields.username);
-    await I.fillField(this.fields.username, user.email);
-    await I.fillField(this.fields.password, user.password);
-    await I.waitForSelector(this.submitButton);
-    I.click(this.submitButton);
+    await login('citizenSingleton');
     await I.wait('3');
   },
 
-  async signInFromEligibility(user) {
+  async signInFromEligibility() {
     await I.goToPage(config.baseUrl + 'eligibility/start');
     await I.wait('2');
     await I.click('Start now');
@@ -46,6 +36,6 @@ module.exports = {
     await I.click(this.fields.livedUKEligible);
     await I.click('Save and continue');
     await I.wait('4');
-    await this.signIn(user);
+    await this.createUserAndSignIn();
   },
 };
