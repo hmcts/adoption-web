@@ -5,6 +5,7 @@ import { getNextStepUrl } from '../..';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
+import { ValidationError } from '../../../app/form/validation';
 
 @autobind
 export default class PlacementOrderPostController extends PostController<AnyObject> {
@@ -20,6 +21,11 @@ export default class PlacementOrderPostController extends PostController<AnyObje
     );
 
     Object.assign(placementOrder, formData);
+
+    if (req.body.saveAsDraft) {
+      // skip empty field errors in case of save as draft
+      req.session.errors = req.session.errors.filter(item => item.errorType !== ValidationError.REQUIRED);
+    }
 
     const nextUrl = req.session.errors.length > 0 ? req.url : getNextStepUrl(req, req.session.userCase);
 
