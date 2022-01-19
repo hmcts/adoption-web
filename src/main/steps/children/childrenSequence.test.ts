@@ -3,8 +3,8 @@ import { YesOrNo } from '../../app/case/definition';
 import { childrenSequence } from './childrenSequence';
 
 describe('childrenSequence', () => {
-  test('should contain 12 entries in children screen sequence', () => {
-    expect(childrenSequence).toHaveLength(12);
+  test('should contain 13 entries in children screen sequence', () => {
+    expect(childrenSequence).toHaveLength(13);
 
     expect(childrenSequence[0].url).toBe('/children/placement-order-type');
     expect(childrenSequence[0].showInSection).toBe('aboutChildren');
