@@ -53,5 +53,13 @@ describe('childrenSequence', () => {
     expect(childrenSequence[10].url).toBe('/children/full-name-after-adoption');
     expect(childrenSequence[10].showInSection).toBe('aboutChildren');
     expect(childrenSequence[10].getNextStep({})).toBe('/task-list');
+
+    expect(childrenSequence[11].url).toBe('/children/adoption-agency');
+    expect(childrenSequence[11].showInSection).toBe('aboutChildren');
+    expect(childrenSequence[11].getNextStep({})).toBe('/children/other-adoption-agency');
+
+    expect(childrenSequence[12].url).toBe('/children/other-adoption-agency');
+    expect(childrenSequence[12].showInSection).toBe('aboutChildren');
+    expect(childrenSequence[12].getNextStep({})).toBe('/task-list');
   });
 });

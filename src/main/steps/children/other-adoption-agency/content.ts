@@ -5,9 +5,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
   section: 'Your adoption agency or local authority details',
-  title: 'Was there another adoption agency or local authority involved in placing the child?',
-  yes: 'Yes',
-  no: 'No',
+  label: 'Was there another adoption agency or local authority involved in placing the child?',
   errors: {
     hasAnotherAdopAgencyOrLA: {
       required: 'Please answer the question',
@@ -17,9 +15,7 @@ const en = () => ({
 
 const cy = () => ({
   section: 'Your adoption agency or local authority details (in Welsh)',
-  title: 'Was there another adoption agency or local authority involved in placing the child? (in Welsh)',
-  yes: 'Yes (in Welsh)',
-  no: 'No (in Welsh)',
+  label: 'Was there another adoption agency or local authority involved in placing the child? (in Welsh)',
   errors: {
     hasAnotherAdopAgencyOrLA: {
       required: 'Please answer the question (in welsh)',

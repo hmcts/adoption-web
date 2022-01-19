@@ -8,7 +8,7 @@ export const en = (): Record<string, unknown> => ({
   adopAgencyName: 'Name of adoption agency or local authority',
   adopAgencyPhone: 'Phone number',
   adopAgencyContactName: 'Name of your contact',
-  adopAgencyEmail: 'Email address of your contact',
+  adopAgencyContactEmail: 'Email address of your contact',
   errors: {
     adopAgencyOrLaName: {
       required: 'Enter a name',
@@ -33,7 +33,7 @@ export const cy = (): Record<string, unknown> => ({
   adopAgencyName: 'Name of adoption agency or local authority (in Welsh)',
   adopAgencyPhone: 'Phone number (in Welsh)',
   adopAgencyContactName: 'Name of your contact (in Welsh)',
-  adopAgencyEmail: 'Email address of your contact (in Welsh)',
+  adopAgencyContactEmail: 'Email address of your contact (in Welsh)',
   errors: {
     adopAgencyOrLaName: {
       required: 'Enter a name (in Welsh)',
@@ -88,7 +88,7 @@ export const form: FormContent = {
       adopAgencyOrLaContactEmail: {
         type: 'text',
         classes: 'govuk-label govuk-!-width-two-thirds',
-        label: l => l.adopAgencyEmail,
+        label: l => l.adopAgencyContactEmail,
         value: adopAgency?.adopAgencyOrLaContactEmail,
         labelSize: null,
         validator: value => isFieldFilledIn(value) || isEmailValid(value),

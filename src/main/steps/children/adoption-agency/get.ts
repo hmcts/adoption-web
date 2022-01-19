@@ -17,41 +17,22 @@ export default class AdoptionAgencyGetController extends GetController {
       delete req.query.add;
       req.url = req.url.substring(0, req.url.indexOf('?'));
       redirect = true;
-    }
-    //else if (req.query.change) {
-    //   req.session.userCase.selectedPlacementOrderId = `${req.query.change}`;
-    //   delete req.query.change;
-    //   req.url = req.url.substring(0, req.url.indexOf('?'));
-    //   redirect = true;
-    // } else if (req.query.remove) {
-    //   adopAgencyOrLAs = adopAgencyOrLAs.filter(item => item.placementOrderId !== `${req.query.remove}`);
-    //   req.session.userCase.selectedPlacementOrderId = adopAgencyOrLAs[0].placementOrderId;
-    //   req.session.userCase.addAnotherPlacementOrder = undefined;
-    //   delete req.query.remove;
-    //   req.url = req.url.substring(0, req.url.indexOf('?'));
-    //   redirect = true;
-    // }
-    else if (
+    } else if (
       !req.session.userCase.selectedAdoptionAgencyId ||
       req.session.userCase.selectedAdoptionAgencyId === 'undefined'
     ) {
       //generate random id for adoption agency if there are no adoption agency
       req.session.userCase.selectedAdoptionAgencyId = adopAgencyOrLAs[0]?.adopAgencyOrLaId || `${Date.now()}`;
-      console.log('req.query.add: 40 ' + req.session.userCase.selectedAdoptionAgencyId);
     }
 
     let adopAgency = adopAgencyOrLAs.find(
       item => item.adopAgencyOrLaId === req.session.userCase.selectedAdoptionAgencyId
     );
 
-    console.log('req.query.add: 48 ' + JSON.stringify(adopAgency));
-
     if (!adopAgency) {
       adopAgency = {
         adopAgencyOrLaId: req.session.userCase.selectedAdoptionAgencyId,
       };
-
-      console.log('req.query.add: 55 ' + JSON.stringify(adopAgency));
 
       adopAgencyOrLAs.push(adopAgency);
     }
