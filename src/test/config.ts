@@ -1,9 +1,9 @@
-import { PropertiesVolume } from '../main/modules/properties-volume';
-import { Application } from 'express';
+// import { PropertiesVolume } from '../main/modules/properties-volume';
+// import { Application } from 'express';
 
-if (!process.env.TEST_PASSWORD) {
-  new PropertiesVolume().enableFor({ locals: { developmentMode: true } } as unknown as Application);
-}
+// if (!process.env.TEST_PASSWORD) {
+//   new PropertiesVolume().enableFor({ locals: { developmentMode: true } } as unknown as Application);
+// }
 
 import sysConfig from 'config';
 import { getTokenFromApi } from '../main/app/auth/service/get-service-auth-token';
