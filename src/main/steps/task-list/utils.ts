@@ -238,34 +238,46 @@ export const getOtherParentStatus = (userCase: CaseWithId): SectionStatus => {
 };
 
 export const getAdoptionAgencyDetailStatus = (userCase: CaseWithId): SectionStatus => {
-  const hasAnotherAdopAgencyOrLA = userCase.hasAnotherAdopAgencyOrLA;
   const adopAgencyOrLAsComplete =
-    userCase.adopAgencyOrLAs?.length &&
-    userCase.adopAgencyOrLAs.every((item, index) => {
-      console.log(index);
-      return (
-        item.adopAgencyOrLaName &&
-        item.adopAgencyOrLaContactName &&
-        isPhoneNoValid(item.adopAgencyOrLaPhoneNumber) &&
-        isEmailValid(item.adopAgencyOrLaContactEmail)
-      );
-    });
+    (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO && userCase.adopAgencyOrLAs?.length === 1) ||
+    (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.YES &&
+      userCase.adopAgencyOrLAs?.length === 2 &&
+      userCase.adopAgencyOrLAs.every((item, index) => {
+        console.log('util.ts 245: ' + JSON.stringify(item) + '---' + index);
+        console.log(
+          item.adopAgencyOrLaName +
+            ' ' +
+            item.adopAgencyOrLaContactName +
+            ' ' +
+            isPhoneNoValid(item.adopAgencyOrLaPhoneNumber) +
+            ' ' +
+            isEmailValid(item.adopAgencyOrLaContactEmail)
+        );
+        return (
+          item.adopAgencyOrLaName &&
+          item.adopAgencyOrLaContactName &&
+          item.adopAgencyOrLaPhoneNumber &&
+          item.adopAgencyOrLaContactEmail
+        );
+      }));
+  console.log('util.ts 253: ' + adopAgencyOrLAsComplete);
 
   const adopAgencyOrLAsInProgress =
-    userCase.adopAgencyOrLAs?.length &&
-    userCase.adopAgencyOrLAs.some((item, index) => {
-      return (
-        item.adopAgencyOrLaName ||
-        item.adopAgencyOrLaContactName ||
-        isPhoneNoValid(item.adopAgencyOrLaPhoneNumber) ||
-        isEmailValid(item.adopAgencyOrLaContactEmail) ||
-        index === 0
-      );
-    });
+    userCase.hasAnotherAdopAgencyOrLA ||
+    (userCase.adopAgencyOrLAs?.length &&
+      userCase.adopAgencyOrLAs.some((item, index) => {
+        console.log('util.ts 269: ' + JSON.stringify(item) + '---' + index);
+        return (
+          item.adopAgencyOrLaName ||
+          item.adopAgencyOrLaContactName ||
+          item.adopAgencyOrLaPhoneNumber ||
+          item.adopAgencyOrLaContactEmail
+        );
+      }));
 
-  return hasAnotherAdopAgencyOrLA && adopAgencyOrLAsComplete
+  return adopAgencyOrLAsComplete
     ? SectionStatus.COMPLETED
-    : !hasAnotherAdopAgencyOrLA && !adopAgencyOrLAsComplete && !adopAgencyOrLAsInProgress
+    : !adopAgencyOrLAsComplete && !adopAgencyOrLAsInProgress
     ? SectionStatus.NOT_STARTED
     : SectionStatus.IN_PROGRESS;
 };
