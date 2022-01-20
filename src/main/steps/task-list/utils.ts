@@ -1,6 +1,6 @@
 import { CaseDate, CaseWithId, FieldPrefix } from '../../app/case/case';
 import { ContactDetails, SectionStatus, YesNoNotsure, YesOrNo } from '../../app/case/definition';
-import { isDateInputInvalid, isEmailValid, isPhoneNoValid, notSureViolation } from '../../app/form/validation';
+import { isDateInputInvalid, notSureViolation } from '../../app/form/validation';
 
 export const isApplyingWithComplete = (userCase: CaseWithId): boolean => {
   return !!userCase.applyingWith;
@@ -242,17 +242,7 @@ export const getAdoptionAgencyDetailStatus = (userCase: CaseWithId): SectionStat
     (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO && userCase.adopAgencyOrLAs?.length === 1) ||
     (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.YES &&
       userCase.adopAgencyOrLAs?.length === 2 &&
-      userCase.adopAgencyOrLAs.every((item, index) => {
-        console.log('util.ts 245: ' + JSON.stringify(item) + '---' + index);
-        console.log(
-          item.adopAgencyOrLaName +
-            ' ' +
-            item.adopAgencyOrLaContactName +
-            ' ' +
-            isPhoneNoValid(item.adopAgencyOrLaPhoneNumber) +
-            ' ' +
-            isEmailValid(item.adopAgencyOrLaContactEmail)
-        );
+      userCase.adopAgencyOrLAs.every(item => {
         return (
           item.adopAgencyOrLaName &&
           item.adopAgencyOrLaContactName &&
@@ -260,13 +250,11 @@ export const getAdoptionAgencyDetailStatus = (userCase: CaseWithId): SectionStat
           item.adopAgencyOrLaContactEmail
         );
       }));
-  console.log('util.ts 253: ' + adopAgencyOrLAsComplete);
 
   const adopAgencyOrLAsInProgress =
     userCase.hasAnotherAdopAgencyOrLA ||
     (userCase.adopAgencyOrLAs?.length &&
-      userCase.adopAgencyOrLAs.some((item, index) => {
-        console.log('util.ts 269: ' + JSON.stringify(item) + '---' + index);
+      userCase.adopAgencyOrLAs.some(item => {
         return (
           item.adopAgencyOrLaName ||
           item.adopAgencyOrLaContactName ||
