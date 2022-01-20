@@ -2,6 +2,7 @@ import autobind from 'autobind-decorator';
 import { Response } from 'express';
 import { v4 as generateUuid } from 'uuid';
 
+import { ValidationError } from '../../../app/form/validation';
 import { getNextStepUrl } from '../../../steps';
 import { FieldPrefix } from '../../case/case';
 import { Form, FormFields, FormFieldsFn } from '../../form/Form';
@@ -70,6 +71,11 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
     if (req.session.errors.length && addButtonClicked) {
       // This is required so that details component will be displayed in open state along with errors
       req.session.userCase.addAnotherNameHidden = `${!!addButtonClicked}`;
+    }
+
+    if (req.body.saveAsDraft) {
+      // skip empty field errors in case of save as draft
+      req.session.errors = req.session.errors.filter(item => item.errorType !== ValidationError.REQUIRED);
     }
 
     const nextUrl = req.session.errors.length > 0 || addButton ? req.url : getNextStepUrl(req, req.session.userCase);
