@@ -45,7 +45,7 @@
     "@types/multer": "^1.4.7",
     "@types/negotiator": "^0.6.1",
     "@types/node": "^16.11.7",
-    "@types/nunjucks": "^3.2.0",
+    "@types/nunjucks": "^3.2.1",
     "@types/redis": "^2.8.32",
     "@types/require-directory": "^2.1.2",
     "@types/serve-favicon": "^2.5.3",
