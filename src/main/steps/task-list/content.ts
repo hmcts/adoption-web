@@ -26,6 +26,14 @@ const getSectionStatusLabel = (status, statuses, id) => {
   }
 };
 
+const getAdoptionAgencyUrl = userCase => {
+  if (userCase.adopAgencyOrLAs?.length) {
+    const adopAgency = userCase.adopAgencyOrLAs[0];
+    return `${urls.ADOPTION_AGENCY}?change=${adopAgency.adopAgencyOrLaId}`;
+  }
+  return `${urls.ADOPTION_AGENCY}?add=${Date.now()}`;
+};
+
 const en = content => {
   const statuses = {
     completed: 'Completed',
@@ -147,7 +155,7 @@ const en = content => {
       birthFather: urls.BIRTH_FATHER_NAME_ON_CERTIFICATE,
       birthMotherDetails: urls.BIRTH_MOTHER_FULL_NAME,
       reviewApplicationPayAndSubmit: urls.CHECK_ANSWERS_URL,
-      adoptionAgency: urls.ADOPTION_AGENCY,
+      adoptionAgency: getAdoptionAgencyUrl(content.userCase),
     },
   };
 };

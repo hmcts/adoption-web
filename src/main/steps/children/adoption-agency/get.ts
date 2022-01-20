@@ -17,6 +17,11 @@ export default class AdoptionAgencyGetController extends GetController {
       delete req.query.add;
       req.url = req.url.substring(0, req.url.indexOf('?'));
       redirect = true;
+    } else if (req.query.change) {
+      req.session.userCase.selectedAdoptionAgencyId = `${req.query.change}`;
+      delete req.query.change;
+      req.url = req.url.substring(0, req.url.indexOf('?'));
+      redirect = true;
     } else if (
       !req.session.userCase.selectedAdoptionAgencyId ||
       req.session.userCase.selectedAdoptionAgencyId === 'undefined'
@@ -24,7 +29,7 @@ export default class AdoptionAgencyGetController extends GetController {
       //generate random id for adoption agency if there are no adoption agency
       req.session.userCase.selectedAdoptionAgencyId = adopAgencyOrLAs[0]?.adopAgencyOrLaId || `${Date.now()}`;
     }
-
+    console.log('get 38 ' + req.session.userCase.selectedAdoptionAgencyId);
     let adopAgency = adopAgencyOrLAs.find(
       item => item.adopAgencyOrLaId === req.session.userCase.selectedAdoptionAgencyId
     );
