@@ -6,6 +6,7 @@ import { getNextStepUrl } from '../../steps';
 import { AppRequest } from '../controller/AppRequest';
 import { AnyObject, PostController } from '../controller/PostController';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
+import { ValidationError } from '../form/validation';
 
 @autobind
 export default class NationalityPostController extends PostController<AnyObject> {
@@ -47,6 +48,11 @@ export default class NationalityPostController extends PostController<AnyObject>
         req.locals.logger.error('Error saving', err);
         // req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
       }
+    }
+
+    if (req.body.saveAsDraft) {
+      // skip empty field errors in case of save as draft
+      req.session.errors = req.session.errors.filter(item => item.errorType !== ValidationError.REQUIRED);
     }
 
     const nextUrl =
