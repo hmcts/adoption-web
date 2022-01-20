@@ -62,6 +62,6 @@ describe('childrenSequence', () => {
 
     expect(childrenSequence[12].url).toBe('/children/other-adoption-agency');
     expect(childrenSequence[12].showInSection).toBe('aboutChildren');
-    //expect(childrenSequence[12].getNextStep({})).toBe('/task-list');
+    expect(childrenSequence[12].getNextStep({ hasAnotherAdopAgencyOrLA: YesOrNo.NO })).toBe('/task-list');
   });
 });
