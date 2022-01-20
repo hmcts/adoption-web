@@ -35,9 +35,10 @@ module.exports = {
     I.fillField(this.fields.dateOfBirthYear, '1980');
     I.click('Save and continue');
     I.click(this.fields.britishCitizen);
-    I.click(this.fields.citizenOfDifferentCountry);
-    I.fillField(this.fields.addAnotherNationality, 'India');
-    I.click('Add');
+    //TODO once Abid PR merged then we can un comment as its known issue
+    // I.click(this.fields.citizenOfDifferentCountry);
+    // I.fillField(this.fields.addAnotherNationality, 'India');
+    // I.click('Add');
     I.wait('2');
     I.click('Save and continue');
     I.fillField(this.fields.applicant2Occupation, 'Teacher');

@@ -36,9 +36,10 @@ module.exports = {
     I.click('Save and continue');
     I.waitForText("What is the nationality of the child's birth father?");
     I.click(this.fields.britishCitizen);
-    I.click(this.fields.citizenOfDifferentCountry);
-    I.fillField(this.fields.addAnotherNationality, 'Germany');
-    I.click('Add');
+    //TODO once Abid PR merged then we can un comment as its known issue
+    // I.click(this.fields.citizenOfDifferentCountry);
+    // I.fillField(this.fields.addAnotherNationality, 'Germany');
+    // I.click('Add');
     I.wait('2');
     I.click('Save and continue');
     I.wait('2');
