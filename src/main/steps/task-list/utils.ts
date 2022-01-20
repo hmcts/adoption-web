@@ -1,6 +1,6 @@
 import { CaseDate, CaseWithId, FieldPrefix } from '../../app/case/case';
 import { ContactDetails, SectionStatus, YesNoNotsure, YesOrNo } from '../../app/case/definition';
-import { isDateInputInvalid, notSureViolation } from '../../app/form/validation';
+import { isDateInputInvalid, isEmailValid, isPhoneNoValid, notSureViolation } from '../../app/form/validation';
 
 export const isApplyingWithComplete = (userCase: CaseWithId): boolean => {
   return !!userCase.applyingWith;
@@ -238,24 +238,34 @@ export const getOtherParentStatus = (userCase: CaseWithId): SectionStatus => {
 };
 
 export const getAdoptionAgencyDetailStatus = (userCase: CaseWithId): SectionStatus => {
-  console.log(userCase);
-  // const childrenFirstName = userCase.childrenFirstName;
-  // const childrenLastName = userCase.childrenLastName;
-  // const childrenDateOfBirth = userCase.childrenDateOfBirth as CaseDate;
-  // const dateOfBirthComplete = childrenDateOfBirth?.day && childrenDateOfBirth?.month && childrenDateOfBirth?.year;
-  // const childrenSexAtBirth = userCase.childrenSexAtBirth;
+  const hasAnotherAdopAgencyOrLA = userCase.hasAnotherAdopAgencyOrLA;
+  const adopAgencyOrLAsComplete =
+    userCase.adopAgencyOrLAs?.length &&
+    userCase.adopAgencyOrLAs.every((item, index) => {
+      console.log(index);
+      return (
+        item.adopAgencyOrLaName &&
+        item.adopAgencyOrLaContactName &&
+        isPhoneNoValid(item.adopAgencyOrLaPhoneNumber) &&
+        isEmailValid(item.adopAgencyOrLaContactEmail)
+      );
+    });
 
-  // const nationality: string[] = userCase.childrenNationality || [];
-  // const nationalities: string[] = userCase.childrenAdditionalNationalities || [];
-  // const nationalityComplete =
-  //   !!nationality.length &&
-  //   (!nationality.includes('Other') || (!!nationalities.length && nationality.includes('Other')));
+  const adopAgencyOrLAsInProgress =
+    userCase.adopAgencyOrLAs?.length &&
+    userCase.adopAgencyOrLAs.some((item, index) => {
+      return (
+        item.adopAgencyOrLaName ||
+        item.adopAgencyOrLaContactName ||
+        isPhoneNoValid(item.adopAgencyOrLaPhoneNumber) ||
+        isEmailValid(item.adopAgencyOrLaContactEmail) ||
+        index === 0
+      );
+    });
 
-  // return childrenFirstName && childrenLastName && dateOfBirthComplete && childrenSexAtBirth && nationalityComplete
-  //   ? SectionStatus.COMPLETED
-  //   : !childrenFirstName && !childrenLastName && !dateOfBirthComplete && !childrenSexAtBirth && !nationalityComplete
-  //   ? SectionStatus.NOT_STARTED
-  //   : SectionStatus.IN_PROGRESS;
-
-  return SectionStatus.NOT_STARTED;
+  return hasAnotherAdopAgencyOrLA && adopAgencyOrLAsComplete
+    ? SectionStatus.COMPLETED
+    : !hasAnotherAdopAgencyOrLA && !adopAgencyOrLAsComplete && !adopAgencyOrLAsInProgress
+    ? SectionStatus.NOT_STARTED
+    : SectionStatus.IN_PROGRESS;
 };
