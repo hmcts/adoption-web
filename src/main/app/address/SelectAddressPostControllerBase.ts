@@ -6,6 +6,7 @@ import { FieldPrefix } from '../case/case';
 import { AppRequest } from '../controller/AppRequest';
 import { AnyObject, PostController } from '../controller/PostController';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
+import { ValidationError } from '../form/validation';
 
 @autobind
 export default class SelectAddressPostControllerBase extends PostController<AnyObject> {
@@ -47,6 +48,11 @@ export default class SelectAddressPostControllerBase extends PostController<AnyO
           //req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
         }
       }
+    }
+
+    if (req.body.saveAsDraft) {
+      // skip empty field errors in case of save as draft
+      req.session.errors = req.session.errors.filter(item => item.errorType !== ValidationError.NOT_SELECTED);
     }
 
     const nextUrl = req.session.errors.length > 0 ? req.url : getNextStepUrl(req, req.session.userCase);
