@@ -24,19 +24,19 @@ const checkboxConverter = (value: string | undefined) => {
 const fields: FromApiConverters = {
   ...invert(formFieldsToCaseMapping),
   applicant1AdditionalNames: data => ({
-    applicant1AdditionalNames: data.applicant1AdditionalNames?.map(item => item.value.name),
+    applicant1AdditionalNames: data.applicant1AdditionalNames?.map(item => ({ id: item.id, ...item.value })),
   }),
   applicant2AdditionalNames: data => ({
-    applicant2AdditionalNames: data.applicant2AdditionalNames?.map(item => item.value.name),
+    applicant2AdditionalNames: data.applicant2AdditionalNames?.map(item => ({ id: item.id, ...item.value })),
   }),
   applicant1AdditionalNationalities: data => ({
-    applicant1AdditionalNationalities: data.applicant1AdditionalNationalities?.map(item => item.value.name),
+    applicant1AdditionalNationalities: data.applicant1AdditionalNationalities?.map(item => item.value.country),
   }),
   applicant2AdditionalNationalities: data => ({
-    applicant2AdditionalNationalities: data.applicant2AdditionalNationalities?.map(item => item.value.name),
+    applicant2AdditionalNationalities: data.applicant2AdditionalNationalities?.map(item => item.value.country),
   }),
   childrenAdditionalNationalities: data => ({
-    childrenAdditionalNationalities: data.childrenAdditionalNationalities?.map(item => item.value.name),
+    childrenAdditionalNationalities: data.childrenAdditionalNationalities?.map(item => item.value.country),
   }),
   placementOrders: data => ({
     placementOrders: data.placementOrders?.map(item => ({

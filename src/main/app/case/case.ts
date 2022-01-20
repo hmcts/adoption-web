@@ -15,6 +15,7 @@ import {
   ListValue,
   Nationality,
   OrderSummary,
+  OtherName,
   Payment,
   PlacementOrder,
   Sibling,
@@ -180,7 +181,7 @@ export interface Case {
   applicant1LastNames?: string;
   applicant1HasOtherNames?: YesOrNo;
   applicant1AdditionalName?: string;
-  applicant1AdditionalNames?: string[];
+  applicant1AdditionalNames?: OtherName[];
   applicant1EmailAddress?: string;
   applicant1PhoneNumber?: string;
   applicant1DateOfBirth?: CaseDate;
@@ -200,7 +201,7 @@ export interface Case {
   applicant2LastNames?: string;
   applicant2HasOtherNames?: YesOrNo;
   applicant2AdditionalName?: string;
-  applicant2AdditionalNames?: string[];
+  applicant2AdditionalNames?: OtherName[];
   applicant2DateOfBirth?: CaseDate;
   applicant2Occupation?: string;
   applicant2EmailAddress?: string;

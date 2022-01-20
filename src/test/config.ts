@@ -1,13 +1,12 @@
-import { PropertiesVolume } from '../main/modules/properties-volume';
-import { Application } from 'express';
+// import { PropertiesVolume } from '../main/modules/properties-volume';
+// import { Application } from 'express';
 
-if (!process.env.TEST_PASSWORD) {
-  new PropertiesVolume().enableFor({ locals: { developmentMode: true } } as unknown as Application);
-}
+// if (!process.env.TEST_PASSWORD) {
+//   new PropertiesVolume().enableFor({ locals: { developmentMode: true } } as unknown as Application);
+// }
 
 import sysConfig from 'config';
 import { getTokenFromApi } from '../main/app/auth/service/get-service-auth-token';
-import { APPLYING_WITH_URL } from '../main/steps/urls';
 
 import { IdamUserManager } from './steps/IdamUserManager';
 
@@ -18,23 +17,25 @@ process.on('unhandledRejection', reason => {
 
 getTokenFromApi();
 
-const generateTestUsername = () => `nfdiv.frontend.test.${new Date().getTime()}.${Math.random()}@hmcts.net`;
+const generateTestUsername = () => `adoption.web.automationTest.${new Date().getTime()}@hmcts.net`;
 const TestUser = generateTestUsername();
-const TestPass = process.env.TEST_PASSWORD || sysConfig.get('e2e.userTestPassword') || '';
+const TestPass = process.env.CITIZEN_PASSWORD || sysConfig.get('e2e.userTestPassword') || '';
 const idamUserManager = new IdamUserManager(sysConfig.get('services.idam.tokenURL'));
 
 export const autoLogin = {
   login: (I: CodeceptJS.I, username = TestUser, password = TestPass): void => {
-    I.amOnPage(`${APPLYING_WITH_URL}?lng=en`);
+    console.log(process.env.ADOP_WEB_URL);
+    I.amOnPage(`${process.env.ADOP_WEB_URL}`);
     I.waitForText('Sign in or create an account');
     I.fillField('username', username);
+    I.wait(3);
     I.fillField('password', password);
     I.click('Sign in');
-    I.waitForText('Apply for adoption', 30);
+    I.wait(5);
   },
   check: (I: CodeceptJS.I): void => {
-    I.amOnPage(`${APPLYING_WITH_URL}?lng=en`);
-    I.waitForText('Apply for adoption');
+    I.amOnPage(`${process.env.ADOP_WEB_URL}`);
+    I.waitForText('Are you applying on your own, or with someone else?');
   },
   restore: (I: CodeceptJS.I, cookies: CodeceptJS.Cookie[]): void => {
     I.amOnPage('/info');
@@ -43,7 +44,7 @@ export const autoLogin = {
 };
 
 export const config = {
-  TEST_URL: process.env.TEST_URL || 'http://localhost:3001',
+  TEST_URL: process.env.ADOP_WEB_URL || 'http://localhost:3001',
   TestHeadlessBrowser: process.env.TEST_HEADLESS ? process.env.TEST_HEADLESS === 'true' : true,
   TestSlowMo: 250,
   WaitForTimeout: 10000,

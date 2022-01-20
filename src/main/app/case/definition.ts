@@ -284,7 +284,13 @@ export interface Children {
 }
 
 export interface OtherName {
-  name: string;
+  id?: string;
+  firstNames: string;
+  lastNames: string;
+}
+
+export interface AdditionalNationality {
+  country: string;
 }
 
 export const enum Gender {
@@ -314,7 +320,7 @@ export interface CaseData {
   applicant1EmailAddress: string;
   applicant1PhoneNumber: string;
   applicant1Nationality: Nationality[];
-  applicant1AdditionalNationalities: ListValue<OtherName>[];
+  applicant1AdditionalNationalities: ListValue<AdditionalNationality>[];
   applicant1Address1: string;
   applicant1Address2: string;
   applicant1AddressTown: string;
@@ -332,7 +338,7 @@ export interface CaseData {
   applicant2EmailAddress: string;
   applicant2PhoneNumber: string;
   applicant2Nationality: Nationality[];
-  applicant2AdditionalNationalities: ListValue<OtherName>[];
+  applicant2AdditionalNationalities: ListValue<AdditionalNationality>[];
   applicant2Address1: string;
   applicant2Address2: string;
   applicant2AddressTown: string;
@@ -345,7 +351,7 @@ export interface CaseData {
   childrenLastName: string;
   childrenDateOfBirth: DateAsString;
   childrenNationality: Nationality[];
-  childrenAdditionalNationalities: ListValue<OtherName>[];
+  childrenAdditionalNationalities: ListValue<AdditionalNationality>[];
   childrenFirstNameAfterAdoption: string;
   childrenLastNameAfterAdoption: string;
   childrenSexAtBirth: Gender;
@@ -368,7 +374,7 @@ export interface CaseData {
   birthMotherAddressCounty: string;
   birthMotherAddressPostCode: string;
   birthMotherAddressCountry: string;
-  birthMotherOtherNationalities: ListValue<OtherName>[];
+  birthMotherOtherNationalities: ListValue<AdditionalNationality>[];
   birthMotherNameOnCertificate: string;
 
   birthFatherFirstName: string;
@@ -385,7 +391,7 @@ export interface CaseData {
   birthFatherAddressCounty: string;
   birthFatherAddressPostCode: string;
   birthFatherAddressCountry: string;
-  birthFatherOtherNationalities: ListValue<OtherName>[];
+  birthFatherOtherNationalities: ListValue<AdditionalNationality>[];
   birthFatherNameOnCertificate: string;
 
   otherParentFirstName: string;
@@ -402,7 +408,7 @@ export interface CaseData {
   otherParentAddressCounty: string;
   otherParentAddressPostCode: string;
   otherParentAddressCountry: string;
-  otherParentOtherNationalities: ListValue<OtherName>[];
+  otherParentOtherNationalities: ListValue<AdditionalNationality>[];
   otherParentNameOnCertificate: string;
 
   socialWorkerName: string;
@@ -701,7 +707,7 @@ export interface Parent {
   AddressCounty: string;
   AddressPostCode: string;
   AddressCountry: string;
-  OtherNationalities: ListValue<OtherName>[];
+  OtherNationalities: ListValue<AdditionalNationality>[];
   NameOnCertificate: string;
 }
 
