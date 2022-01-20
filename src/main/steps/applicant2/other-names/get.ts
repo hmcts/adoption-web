@@ -1,49 +1,12 @@
 import autobind from 'autobind-decorator';
-import { Response } from 'express';
 
-import { YesOrNo } from '../../../app/case/definition';
-import { AppRequest } from '../../../app/controller/AppRequest';
-import { GetController } from '../../../app/controller/GetController';
+import { FieldPrefix } from '../../../app/case/case';
+import { TranslationFn } from '../../../app/controller/GetController';
+import OtherNamesGetControllerBase from '../../../app/controller/other-names/OtherNamesGetController';
 
 @autobind
-export default class OtherNamesGetController extends GetController {
-  public async get(req: AppRequest, res: Response): Promise<void> {
-    const names = req.session.userCase.applicant2AdditionalNames;
-    const remove = req.query.remove;
-
-    let removed = false;
-    if (remove && names?.length) {
-      const index = names.indexOf(remove as string);
-
-      if (index !== -1) {
-        names.splice(index, 1);
-      }
-      req.session.userCase.applicant2AdditionalNames = names;
-      try {
-        req.session.userCase = await this.save(
-          req,
-          { applicant2AdditionalNames: names, applicant2HasOtherNames: YesOrNo.YES },
-          this.getEventName(req)
-        );
-      } catch (err) {
-        req.locals.logger.error('Error saving', err);
-        // req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
-      }
-
-      delete req.query.remove;
-      req.url = req.url.substring(0, req.url.indexOf('?'));
-      removed = true;
-    }
-
-    req.session.save(err => {
-      if (err) {
-        throw err;
-      }
-      if (removed) {
-        res.redirect(req.url);
-      } else {
-        super.get(req, res);
-      }
-    });
+export default class OtherNamesGetController extends OtherNamesGetControllerBase {
+  constructor(protected readonly view: string, protected readonly content: TranslationFn) {
+    super(view, content, FieldPrefix.APPLICANT2);
   }
 }
