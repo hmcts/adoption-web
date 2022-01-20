@@ -6,6 +6,7 @@ import { SAVE_AND_SIGN_OUT } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
 import { CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
+import { ValidationError } from '../form/validation';
 
 import { AppRequest } from './AppRequest';
 
@@ -55,14 +56,17 @@ export class PostController<T extends AnyObject> {
 
     if (req.session.errors.length === 0) {
       try {
-        //TODO remove this line
-        //await this.save(req, formData, this.getEventName(req));
-        //TODO un comment this
         req.session.userCase = await this.save(req, formData, this.getEventName(req));
       } catch (err) {
         req.locals.logger.error('Error saving', err);
+        //TODO uncomment this
         //req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
       }
+    }
+
+    if (req.body.saveAsDraft) {
+      // skip empty field errors in case of save as draft
+      req.session.errors = req.session.errors.filter(item => item.errorType !== ValidationError.REQUIRED);
     }
 
     const nextUrl = req.session.errors.length > 0 ? req.url : getNextStepUrl(req, req.session.userCase);

@@ -3,7 +3,7 @@ import Axios, { AxiosInstance } from 'axios';
 import config from 'config';
 
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
-import { CASE_TYPE } from '../case/definition';
+// import { CASE_TYPE } from '../case/definition';
 import type { AppSession } from '../controller/AppRequest';
 
 const logger = Logger.getLogger('payment');
@@ -30,7 +30,7 @@ export class PaymentClient {
     // const total = userCase.applicationFeeOrderSummary.Fees.reduce((sum, item) => sum + +item.value.FeeAmount, 0) / 100;
     const total = 183;
     const body = {
-      case_type: CASE_TYPE,
+      case_type: 'NFD',
       amount: total,
       ccd_case_number: caseId,
       description: 'Adoption application fee', //TODO consider welsh text

@@ -1,6 +1,6 @@
 import { StepWithContent } from '../../../steps';
-import { Sections } from '../../../steps/applicant1Sequence';
 import * as commonContent from '../../../steps/common/common.content';
+import { Sections } from '../../../steps/constants';
 import { Checkbox } from '../case';
 import { YesOrNo } from '../definition';
 
@@ -75,7 +75,6 @@ describe('getAnswerRows()', () => {
 
     expect(generatePageContentSpy).toHaveBeenCalledWith({
       userCase: {},
-      isDivorce: true,
       language: 'en',
       pageContent: mockGenerateContent,
       userEmail: 'test@example.com',
@@ -183,10 +182,6 @@ describe('getAnswerRows()', () => {
       mockUserCase = {
         mockField: 'example response',
         applyForFinancialOrder: YesOrNo.YES,
-        applicant1FullNameOnCertificate: 'Sarah Smith',
-        applicant2FullNameOnCertificate: 'Billy Bob',
-        applicant1LegalProceedings: YesOrNo.YES,
-        applicant2LegalProceedings: YesOrNo.YES,
       };
       mockCtx = {
         language: 'en',

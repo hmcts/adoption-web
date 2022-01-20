@@ -90,17 +90,11 @@ export interface CaseNote {
 }
 
 export interface AcknowledgementOfService {
-  confirmReadPetition: YesOrNo;
-  disputeApplication: YesOrNo;
-  confirmDisputeApplication: YesOrNo;
-  jurisdictionAgree: YesOrNo;
   jurisdictionDisagreeReason: string;
   dateAosSubmitted: DateAsString;
   digitalNoticeOfProceedings: YesOrNo;
   noticeOfProceedingsEmail: string;
   noticeOfProceedingsSolicitorFirm: string;
-  reasonCourtsOfEnglandAndWalesHaveNoJurisdiction: string;
-  inWhichCountryIsYourLifeMainlyBased: string;
   statementOfTruth: YesOrNo;
   prayerHasBeenGiven: YesOrNo;
 }
@@ -153,7 +147,6 @@ export interface Applicant {
   LanguagePreferenceWelsh: YesOrNo;
   LastNameChangedWhenMarried: YesOrNo;
   NameDifferentToMarriageCertificate: YesOrNo;
-  NameChangedHow: ChangedNameHow[];
   NameChangedHowOtherDetails: string;
   HomeAddress: AddressGlobalUK;
   KeepContactDetailsConfidential: YesOrNo;
@@ -237,9 +230,7 @@ export interface Application {
   pbaNumbers: DynamicList;
   feeAccountReference: string;
   applicationFeeOrderSummary: OrderSummary;
-  applicant2AgreeToReceiveEmails: YesOrNo;
   applicant1KnowsApplicant2EmailAddress: YesOrNo;
-  applicant1KnowsApplicant2Address: YesOrNo;
   app2ContactMethodIsDigital: YesOrNo;
   applicant1CannotUploadSupportingDocument: DocumentType[];
   applicant2CannotUploadSupportingDocument: DocumentType[];
@@ -248,7 +239,6 @@ export interface Application {
   dateSubmitted: DateAsString;
   applicant2ConfirmApplicant1Information: YesOrNo;
   applicant2ExplainsApplicant1IncorrectInformation: string;
-  issueDate: DateAsString;
   reissueDate: DateAsString;
   createdDate: DateAsString;
   rejectReason: RejectReason;
@@ -294,7 +284,13 @@ export interface Children {
 }
 
 export interface OtherName {
-  name: string;
+  id?: string;
+  firstNames: string;
+  lastNames: string;
+}
+
+export interface AdditionalNationality {
+  country: string;
 }
 
 export const enum Gender {
@@ -324,7 +320,7 @@ export interface CaseData {
   applicant1EmailAddress: string;
   applicant1PhoneNumber: string;
   applicant1Nationality: Nationality[];
-  applicant1AdditionalNationalities: ListValue<OtherName>[];
+  applicant1AdditionalNationalities: ListValue<AdditionalNationality>[];
   applicant1Address1: string;
   applicant1Address2: string;
   applicant1AddressTown: string;
@@ -342,7 +338,7 @@ export interface CaseData {
   applicant2EmailAddress: string;
   applicant2PhoneNumber: string;
   applicant2Nationality: Nationality[];
-  applicant2AdditionalNationalities: ListValue<OtherName>[];
+  applicant2AdditionalNationalities: ListValue<AdditionalNationality>[];
   applicant2Address1: string;
   applicant2Address2: string;
   applicant2AddressTown: string;
@@ -355,7 +351,7 @@ export interface CaseData {
   childrenLastName: string;
   childrenDateOfBirth: DateAsString;
   childrenNationality: Nationality[];
-  childrenAdditionalNationalities: ListValue<OtherName>[];
+  childrenAdditionalNationalities: ListValue<AdditionalNationality>[];
   childrenFirstNameAfterAdoption: string;
   childrenLastNameAfterAdoption: string;
   childrenSexAtBirth: Gender;
@@ -378,7 +374,7 @@ export interface CaseData {
   birthMotherAddressCounty: string;
   birthMotherAddressPostCode: string;
   birthMotherAddressCountry: string;
-  birthMotherOtherNationalities: ListValue<OtherName>[];
+  birthMotherOtherNationalities: ListValue<AdditionalNationality>[];
   birthMotherNameOnCertificate: string;
 
   birthFatherFirstName: string;
@@ -395,7 +391,7 @@ export interface CaseData {
   birthFatherAddressCounty: string;
   birthFatherAddressPostCode: string;
   birthFatherAddressCountry: string;
-  birthFatherOtherNationalities: ListValue<OtherName>[];
+  birthFatherOtherNationalities: ListValue<AdditionalNationality>[];
   birthFatherNameOnCertificate: string;
 
   otherParentFirstName: string;
@@ -412,8 +408,30 @@ export interface CaseData {
   otherParentAddressCounty: string;
   otherParentAddressPostCode: string;
   otherParentAddressCountry: string;
-  otherParentOtherNationalities: ListValue<OtherName>[];
+  otherParentOtherNationalities: ListValue<AdditionalNationality>[];
   otherParentNameOnCertificate: string;
+
+  socialWorkerName: string;
+  socialWorkerPhoneNumber: string;
+  socialWorkerEmail: string;
+  socialWorkerTeamEmail: string;
+  solicitorFirm: string;
+  solicitorName: string;
+  solicitorPhoneNumber: string;
+  solicitorEmail: string;
+  solicitorHelpingWithApplication: YesOrNo;
+  adopAgencyOrLAs: ListValue<AdoptionAgencyOrLocalAuthority>[];
+  siblings: ListValue<Sibling>[];
+  payments: ListValue<Payment>[];
+  hasAnotherAdopAgencyOrLA: YesOrNo;
+  selectedAdoptionAgencyId: string;
+  hasSiblings: string;
+  hasSiblingNotSureReason: string;
+  hasPoForSiblings: string;
+  hasPoForSiblingsNotSureReason: string;
+  addAnotherSiblingPlacementOrder: YesOrNo;
+  selectedSiblingId: string;
+  selectedSiblingPoId: string;
 
   applicationType: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
@@ -426,11 +444,9 @@ export interface CaseData {
   labelContentApplicationType: ApplicationType;
 
   applicant1AgreedToReceiveEmails: YesOrNo;
-  applicant1ConfirmReceipt: YesOrNo;
   applicant1LanguagePreferenceWelsh: YesOrNo;
   applicant1LastNameChangedWhenMarried: YesOrNo;
   applicant1NameDifferentToMarriageCertificate: YesOrNo;
-  applicant1NameChangedHow: ChangedNameHow[];
   applicant1NameChangedHowOtherDetails: string;
   applicant1HomeAddress: AddressGlobalUK;
   applicant1KeepContactDetailsConfidential: YesOrNo;
@@ -441,22 +457,17 @@ export interface CaseData {
   applicant1SolicitorReference: string;
   applicant1SolicitorPhone: string;
   applicant1SolicitorEmail: string;
-  applicant1SolicitorAddress: string;
   applicant1SolicitorAgreeToReceiveEmails: YesOrNo;
   applicant1SolicitorOrganisationPolicy: OrganisationPolicy<UserRole>;
   applicant1FinancialOrder: YesOrNo;
   applicant1FinancialOrderFor: FinancialOrderFor[];
-  applicant1LegalProceedings: YesOrNo;
-  applicant1LegalProceedingsDetails: string;
   applicant1PcqId: string;
 
   applicant2MiddleName: string;
   applicant2AgreedToReceiveEmails: YesOrNo;
-  applicant2ConfirmReceipt: YesOrNo;
   applicant2LanguagePreferenceWelsh: YesOrNo;
   applicant2LastNameChangedWhenMarried: YesOrNo;
   applicant2NameDifferentToMarriageCertificate: YesOrNo;
-  applicant2NameChangedHow: ChangedNameHow[];
   applicant2NameChangedHowOtherDetails: string;
   applicant2HomeAddress: AddressGlobalUK;
   applicant2KeepContactDetailsConfidential: YesOrNo;
@@ -467,13 +478,10 @@ export interface CaseData {
   applicant2SolicitorReference: string;
   applicant2SolicitorPhone: string;
   applicant2SolicitorEmail: string;
-  applicant2SolicitorAddress: string;
   applicant2SolicitorAgreeToReceiveEmails: YesOrNo;
   applicant2SolicitorOrganisationPolicy: OrganisationPolicy<UserRole>;
   applicant2FinancialOrder: YesOrNo;
   applicant2FinancialOrderFor: FinancialOrderFor[];
-  applicant2LegalProceedings: YesOrNo;
-  applicant2LegalProceedingsDetails: string;
   applicant2PcqId: string;
   applicant1ScreenHasMarriageBroken: YesOrNo;
   applicant2ScreenHasMarriageBroken: YesOrNo;
@@ -537,9 +545,7 @@ export interface CaseData {
   pbaNumbers: DynamicList;
   feeAccountReference: string;
   applicationFeeOrderSummary: OrderSummary;
-  applicant2AgreeToReceiveEmails: YesOrNo;
   applicant1KnowsApplicant2EmailAddress: YesOrNo;
-  applicant1KnowsApplicant2Address: YesOrNo;
   app2ContactMethodIsDigital: YesOrNo;
   applicant1CannotUploadSupportingDocument: DocumentType[];
   applicant2CannotUploadSupportingDocument: DocumentType[];
@@ -548,7 +554,6 @@ export interface CaseData {
   dateSubmitted: DateAsString;
   applicant2ConfirmApplicant1Information: YesOrNo;
   applicant2ExplainsApplicant1IncorrectInformation: string;
-  issueDate: DateAsString;
   reissueDate: DateAsString;
   createdDate: DateAsString;
   rejectReason: RejectReason;
@@ -560,19 +565,12 @@ export interface CaseData {
   applicant1NotifiedCanApplyForConditionalOrder: YesOrNo;
   reissueOption: ReissueOption;
   applicant2InviteEmailAddress: string;
-  accessCode: string;
   applicant2UserId: string;
-  confirmReadPetition: YesOrNo;
-  disputeApplication: YesOrNo;
-  confirmDisputeApplication: YesOrNo;
-  jurisdictionAgree: YesOrNo;
   jurisdictionDisagreeReason: string;
   dateAosSubmitted: DateAsString;
   digitalNoticeOfProceedings: YesOrNo;
   noticeOfProceedingsEmail: string;
   noticeOfProceedingsSolicitorFirm: string;
-  reasonCourtsOfEnglandAndWalesHaveNoJurisdiction: string;
-  inWhichCountryIsYourLifeMainlyBased: string;
   statementOfTruth: YesOrNo;
   prayerHasBeenGiven: YesOrNo;
   coDateSubmitted: DateAsString;
@@ -709,8 +707,38 @@ export interface Parent {
   AddressCounty: string;
   AddressPostCode: string;
   AddressCountry: string;
-  OtherNationalities: ListValue<OtherName>[];
+  OtherNationalities: ListValue<AdditionalNationality>[];
   NameOnCertificate: string;
+}
+
+export interface AdoptionAgencyOrLocalAuthority {
+  AdopAgencyOrLaId: string;
+  AdopAgencyOrLaName: string;
+  AdopAgencyOrLaPhoneNumber: string;
+  AdopAgencyOrLaContactName: string;
+  AdopAgencyOrLaContactEmail: string;
+}
+
+export interface Sibling {
+  SiblingId: string;
+  SiblingFirstName: string;
+  SiblingLastNames: string;
+  SiblingPlacementOrders: ListValue<PlacementOrder>[];
+}
+
+export interface SocialWorker {
+  socialWorkerName: string;
+  socialWorkerPhoneNumber: string;
+  socialWorkerEmail: string;
+  socialWorkerTeamEmail: string;
+}
+
+export interface Solicitor {
+  solicitorFirm: string;
+  solicitorName: string;
+  solicitorPhoneNumber: string;
+  solicitorEmail: string;
+  solicitorHelpingWithApplication: YesOrNo;
 }
 
 export interface CaseInvite {
@@ -1094,12 +1122,7 @@ export const enum ApplicationType {
 export const enum ApplyingWith {
   ALONE = 'alone',
   WITH_SPOUSE_OR_CIVIL_PARTNER = 'withSpouseOrCivilPartner',
-}
-
-export const enum ChangedNameHow {
-  MARRIAGE_CERTIFICATE = 'marriageCertificate',
-  DEED_POLL = 'deedPoll',
-  OTHER = 'other',
+  WITH_SOME_ONE_ELSE = 'withSomeoneElse',
 }
 
 export const enum ClarificationReason {

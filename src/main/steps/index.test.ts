@@ -1,9 +1,8 @@
 import { mockRequest } from '../../test/unit/utils/mockRequest';
-import { Checkbox } from '../app/case/case';
-import { ApplyingWith, Gender, YesOrNo } from '../app/case/definition';
+import { ApplyingWith } from '../app/case/definition';
 import { AppRequest } from '../app/controller/AppRequest';
 
-import { applicant1Sequence } from './applicant1Sequence';
+import { applicant1Sequence } from './applicant1/applicant1Sequence';
 import { APPLYING_WITH_URL, CHECK_ELIGIBILITY_URL_UNDER_18, START_ELIGIBILITY_URL, TASK_LIST_URL } from './urls';
 
 import { getNextEligibilityStepUrl, getNextIncompleteStepUrl, getNextStepUrl } from './index';
@@ -17,7 +16,7 @@ describe('Steps', () => {
 
     it('returns the next step when correct details a passed', () => {
       mockReq.originalUrl = APPLYING_WITH_URL;
-      const data = { gender: Gender.MALE };
+      const data = {};
       expect(getNextStepUrl(mockReq, data)).toBe(TASK_LIST_URL);
     });
 
@@ -31,14 +30,14 @@ describe('Steps', () => {
 
     it('moves into a dead end when the response matches', () => {
       mockReq.originalUrl = APPLYING_WITH_URL;
-      const data = { applicant1ScreenHasUnionBroken: YesOrNo.NO };
+      const data = {};
       const actual = getNextStepUrl(mockReq, data);
       expect(actual).toBe('/task-list');
     });
 
     it('keeps the query string', () => {
       mockReq.originalUrl = `${APPLYING_WITH_URL}?customQueryString`;
-      const data = { gender: Gender.MALE };
+      const data = {};
       expect(getNextStepUrl(mockReq, data)).toBe(`${TASK_LIST_URL}?customQueryString`);
     });
   });
@@ -64,17 +63,12 @@ describe('Steps', () => {
     });
 
     it('returns the previous step if its a dead end', () => {
-      mockReq.session.userCase.gender = Gender.MALE;
-      mockReq.session.userCase.sameSex = Checkbox.Unchecked;
-      mockReq.session.userCase.applicant1ScreenHasUnionBroken = YesOrNo.NO;
       const actual = getNextIncompleteStepUrl(mockReq);
       expect(actual).toBe(APPLYING_WITH_URL);
     });
 
     it('keeps the query string', () => {
       mockReq.originalUrl = `${APPLYING_WITH_URL}?customQueryString`;
-      mockReq.session.userCase.gender = Gender.MALE;
-      mockReq.session.userCase.sameSex = Checkbox.Unchecked;
       expect(getNextIncompleteStepUrl(mockReq)).toBe(`${APPLYING_WITH_URL}?customQueryString`);
     });
 
@@ -82,8 +76,6 @@ describe('Steps', () => {
       applicant1Sequence[1].excludeFromContinueApplication = true;
 
       mockReq.originalUrl = APPLYING_WITH_URL;
-      mockReq.session.userCase.gender = Gender.MALE;
-      mockReq.session.userCase.sameSex = Checkbox.Unchecked;
       const actual = getNextIncompleteStepUrl(mockReq);
       expect(actual).toBe(APPLYING_WITH_URL);
     });

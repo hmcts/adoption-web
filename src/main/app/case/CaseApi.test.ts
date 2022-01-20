@@ -4,7 +4,7 @@ import { LoggerInstance } from 'winston';
 import { UserDetails } from '../controller/AppRequest';
 
 import { CaseApi, getCaseApi } from './CaseApi';
-import { Adoption, DivorceOrDissolution, State } from './definition';
+import { Adoption, State } from './definition';
 
 jest.mock('axios');
 
@@ -45,7 +45,6 @@ describe('CaseApi', () => {
   //         id: '1234',
   //         state: State.Draft,
   //         case_data: {
-  //           divorceOrDissolution: 'divorce',
   //           applicationFeeOrderSummary: [{ test: 'fees' }],
   //           applicationPayments: [{ test: 'payment' }],
   //         },
@@ -54,7 +53,6 @@ describe('CaseApi', () => {
   //         id: '1234',
   //         state: State.Draft,
   //         case_data: {
-  //           divorceOrDissolution: 'dissolution',
   //           applicationFeeOrderSummary: [{ test: 'fees' }],
   //           applicationPayments: [{ test: 'payment' }],
   //         },
@@ -67,7 +65,6 @@ describe('CaseApi', () => {
   // expect(userCase).toStrictEqual({
   //   id: '1234',
   //   state: State.Draft,
-  //   divorceOrDissolution: caseType,
   //   applicationFeeOrderSummary: [{ test: 'fees' }],
   //   payments: [{ test: 'payment' }],
   // });
@@ -95,9 +92,7 @@ describe('CaseApi', () => {
       data: {
         id: '1234',
         state: State.Draft,
-        data: {
-          divorceOrDissolution: 'divorce',
-        },
+        data: {},
       },
     };
     mockedAxios.post.mockResolvedValueOnce(results);
@@ -108,7 +103,6 @@ describe('CaseApi', () => {
     expect(userCase).toStrictEqual({
       id: '1234',
       state: State.Draft,
-      divorceOrDissolution: DivorceOrDissolution.DIVORCE,
     });
   });
 
@@ -128,7 +122,7 @@ describe('CaseApi', () => {
   });
 
   // test('Should throw an error if too many cases are found', async () => {
-  //   const mockCase = { case_data: { divorceOrDissolution: serviceType } };
+  //   const mockCase = { case_data: { } };
 
   //   mockedAxios.get.mockResolvedValue({
   //     data: [mockCase, mockCase, mockCase],
@@ -141,16 +135,12 @@ describe('CaseApi', () => {
     const firstMockCase = {
       id: '1',
       state: State.Draft,
-      case_data: {
-        divorceOrDissolution: serviceType,
-      },
+      case_data: {},
     };
     const secondMockCase = {
       id: '2',
       state: State.Draft,
-      case_data: {
-        divorceOrDissolution: serviceType,
-      },
+      case_data: {},
     };
 
     mockedAxios.get.mockResolvedValue({
@@ -162,16 +152,15 @@ describe('CaseApi', () => {
     expect(userCase).toStrictEqual({
       id: '1',
       state: State.Draft,
-      divorceOrDissolution: Adoption.ADOPTION,
     });
   });
   //TODO uncomment this
   // test('Should update case', async () => {
   //   mockedAxios.get.mockResolvedValue({ data: { token: '123' } });
   //   mockedAxios.post.mockResolvedValue({
-  //     data: { data: { id: '1234', divorceOrDissolution: DivorceOrDissolution.DIVORCE } },
+  //     data: { data: { id: '1234' } },
   //   });
-  //   const caseData = { divorceOrDissolution: DivorceOrDissolution.DIVORCE };
+  //   const caseData = { };
   //   await api.triggerEvent('1234', caseData, CITIZEN_UPDATE);
 
   //   const expectedRequest = {
@@ -190,7 +179,7 @@ describe('CaseApi', () => {
   //   });
 
   //   await expect(
-  //     api.triggerEvent('not found', { divorceOrDissolution: DivorceOrDissolution.DIVORCE }, CITIZEN_UPDATE)
+  //     api.triggerEvent('not found', { }, CITIZEN_UPDATE)
   //   ).rejects.toThrow('Case could not be updated.');
 
   //   expect(mockLogger.error).toHaveBeenCalledWith('API Error POST https://example.com 500');
@@ -202,14 +191,12 @@ describe('CaseApi', () => {
       data: {
         id: '1234',
         state: State.Draft,
-        data: {
-          accessCode: 'NFSDCLV3',
-        },
+        data: {},
       },
     });
 
     const userCase = await api.getCaseById('1234');
-    expect(userCase).toStrictEqual({ id: '1234', state: 'Draft', accessCode: 'NFSDCLV3' });
+    expect(userCase).toStrictEqual({ id: '1234', state: 'Draft' });
   });
 
   test('Should throw error when case could not be fetched', async () => {

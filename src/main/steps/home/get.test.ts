@@ -1,8 +1,7 @@
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
-import { DivorceOrDissolution, State, YesOrNo } from '../../app/case/definition';
+import { State } from '../../app/case/definition';
 import {
-  APPLICATION_ENDED,
   APPLICATION_SUBMITTED,
   APPLYING_WITH_URL,
   CHECK_ANSWERS_URL,
@@ -22,7 +21,6 @@ describe('HomeGetController', () => {
       session: {
         userCase: {
           id: '123',
-          divorceOrDissolution: DivorceOrDissolution.DIVORCE,
           mockQuestion: 'mockExistingAnswer',
         },
       },
@@ -38,8 +36,6 @@ describe('HomeGetController', () => {
       session: {
         userCase: {
           id: '123',
-          divorceOrDissolution: DivorceOrDissolution.DIVORCE,
-          gender: 'male',
         },
       },
     });
@@ -58,29 +54,11 @@ describe('HomeGetController', () => {
   //   expect(() => controller.get(req, res)).toThrowError(new Error('Invalid case type'));
   // });
 
-  test('redirects to application ended page for applicant 1 users if applicant2ScreenHasUnionBroken is No', () => {
-    const req = mockRequest({
-      session: {
-        userCase: {
-          id: '123',
-          applicant2ScreenHasUnionBroken: YesOrNo.NO,
-          divorceOrDissolution: DivorceOrDissolution.DIVORCE,
-          state: State.AwaitingApplicant1Response,
-        },
-      },
-    });
-    const res = mockResponse();
-    controller.get(req, res);
-
-    expect(res.redirect).toBeCalledWith(APPLICATION_ENDED);
-  });
-
   test('redirects to application sent for review page for applicant 1 users in awaitingApplicant2 state', () => {
     const req = mockRequest({
       session: {
         userCase: {
           id: '123',
-          divorceOrDissolution: DivorceOrDissolution.DIVORCE,
           state: State.AwaitingApplicant2Response,
         },
       },
@@ -96,7 +74,6 @@ describe('HomeGetController', () => {
       session: {
         userCase: {
           id: '123',
-          divorceOrDissolution: DivorceOrDissolution.DIVORCE,
           state: State.Applicant2Approved,
         },
       },
@@ -112,7 +89,6 @@ describe('HomeGetController', () => {
       session: {
         userCase: {
           id: '123',
-          divorceOrDissolution: DivorceOrDissolution.DIVORCE,
           state: State.Submitted,
         },
       },
@@ -128,7 +104,6 @@ describe('HomeGetController', () => {
       session: {
         userCase: {
           id: '123',
-          divorceOrDissolution: DivorceOrDissolution.DIVORCE,
           state: State.AwaitingApplicant1Response,
         },
       },
@@ -144,7 +119,6 @@ describe('HomeGetController', () => {
       session: {
         userCase: {
           id: '123',
-          divorceOrDissolution: DivorceOrDissolution.DIVORCE,
           state: State.AwaitingPayment,
         },
       },
@@ -160,7 +134,6 @@ describe('HomeGetController', () => {
       session: {
         userCase: {
           id: '123',
-          divorceOrDissolution: DivorceOrDissolution.DIVORCE,
           state: State.Holding,
         },
       },
@@ -177,9 +150,7 @@ describe('HomeGetController', () => {
   //     session: {
   //       userCase: {
   //         id: '123',
-  //         divorceOrDissolution: DivorceOrDissolution.DIVORCE,
   //         applicationType: ApplicationType.SOLE_APPLICATION,
-  //         disputeApplication: YesOrNo.NO,
   //         state: State.AosDrafted,
   //       },
   //     },
@@ -195,7 +166,6 @@ describe('HomeGetController', () => {
   //     session: {
   //       userCase: {
   //         id: '123',
-  //         divorceOrDissolution: DivorceOrDissolution.DIVORCE,
   //         applicationType: ApplicationType.SOLE_APPLICATION,
   //         state: State.Holding,
   //       },
@@ -212,7 +182,6 @@ describe('HomeGetController', () => {
   //     session: {
   //       userCase: {
   //         id: '123',
-  //         divorceOrDissolution: DivorceOrDissolution.DIVORCE,
   //         applicationType: ApplicationType.SOLE_APPLICATION,
   //         state: State.AosDrafted,
   //       },

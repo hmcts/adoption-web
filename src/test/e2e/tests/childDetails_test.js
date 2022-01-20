@@ -5,7 +5,7 @@ Feature('Child Details');
 Scenario(
   'Child Details placement order details event',
   async ({ loginPage, childDetailsPlacementOrderPage, taskListPage }) => {
-    await loginPage.signInWithCitizenUser(config.citizenUserOne);
+    await loginPage.createCitizenUserAndSignIn();
     await taskListPage.goToTaskListPage();
     await taskListPage.selectChildPlacementOrderDetails();
     await childDetailsPlacementOrderPage.childDetailsPlacementOrderSection();
@@ -15,7 +15,7 @@ Scenario(
 Scenario(
   'Child Details Birth certificate details event',
   async ({ loginPage, childrenBirthCertificatePage, taskListPage }) => {
-    await loginPage.signInWithCitizenUser(config.citizenUserOne);
+    await loginPage.createCitizenUserAndSignIn();
     await taskListPage.goToTaskListPage();
     await taskListPage.selectChildrenBirthCertificate();
     await childrenBirthCertificatePage.childDetailsBirthCertificaterSection();
@@ -26,7 +26,7 @@ Scenario(
 Scenario(
   'Child Adoption certificate details event',
   async ({ loginPage, childAdoptionCertificateDetailsPage, taskListPage }) => {
-    await loginPage.signInWithCitizenUser(config.citizenUserOne);
+    await loginPage.createCitizenUserAndSignIn();
     await taskListPage.goToTaskListPage();
     await taskListPage.selectChildAdoptionCertificateDetails();
     await childAdoptionCertificateDetailsPage.childAdoptionCertificateDetailsSection();
@@ -35,7 +35,7 @@ Scenario(
 );
 
 Scenario('Child birth mother details event', async ({ loginPage, childBirthMothersDetailsPage, taskListPage }) => {
-  await loginPage.signInWithCitizenUser(config.citizenUserOne);
+  await loginPage.createCitizenUserAndSignIn();
   await taskListPage.goToTaskListPage();
   await taskListPage.selectChildBirthMotherDetails();
   await childBirthMothersDetailsPage.childBirthMothersDetailsSection();
@@ -43,7 +43,7 @@ Scenario('Child birth mother details event', async ({ loginPage, childBirthMothe
 });
 
 Scenario('Child birth father details event', async ({ loginPage, childBirthFatherDetailsPage, taskListPage }) => {
-  await loginPage.signInWithCitizenUser(config.citizenUserOne);
+  await loginPage.createCitizenUserAndSignIn();
   await taskListPage.goToTaskListPage();
   await taskListPage.selectChildBirthFatherDetails();
   await childBirthFatherDetailsPage.childBirthFatherDetailsSection();
@@ -51,7 +51,7 @@ Scenario('Child birth father details event', async ({ loginPage, childBirthFathe
 });
 
 Scenario('Child other parent details event', async ({ loginPage, childOtherParentDetailsPage, taskListPage }) => {
-  await loginPage.signInWithCitizenUser(config.citizenUserOne);
+  await loginPage.createCitizenUserAndSignIn();
   await taskListPage.goToTaskListPage();
   await taskListPage.selectChildOtherParentDetails();
   await childOtherParentDetailsPage.childOtherParentDetailsSection();
