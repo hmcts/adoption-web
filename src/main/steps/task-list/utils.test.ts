@@ -86,7 +86,9 @@ describe('utils', () => {
           applicant1FirstNames: 'MOCK_FIRST_NAME',
           applicant1LastNames: 'MOCK_LAST_NAME',
           applicant1HasOtherNames: YesOrNo.YES,
-          applicant1AdditionalNames: ['MOCK_ADDITIONAL_NAME'],
+          applicant1AdditionalNames: [
+            { firstNames: 'MOCK_ADDITIONAL_FIRST_NAME', lastNames: 'MOCK_ADDITIONAL_FIRST_NAME' },
+          ],
           applicant1DateOfBirth: { day: '1', month: '1', year: '2021' },
           applicant1Nationality: [Nationality.OTHER],
           applicant1AdditionalNationalities: ['MOCK_COUNTRY'],

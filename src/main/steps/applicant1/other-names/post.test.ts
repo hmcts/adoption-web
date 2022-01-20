@@ -1,63 +1,20 @@
-import { mockRequest } from '../../../../test/unit/utils/mockRequest';
-import { mockResponse } from '../../../../test/unit/utils/mockResponse';
+import { FieldPrefix } from '../../../app/case/case';
+import OtherNamesPostControllerBase from '../../../app/controller/other-names/OtherNamesPostController';
 
 import OtherNamesPostController from './post';
 
-const mockParsedBody = jest.fn();
-const mockErrors = jest.fn();
-
-jest.mock('../../../app/form/Form', () => ({
-  Form: jest.fn().mockImplementation(() => ({
-    getParsedBody: mockParsedBody,
-    getErrors: mockErrors,
-  })),
-}));
-
-jest.mock('../../../steps', () => ({
-  getNextStepUrl: () => jest.fn(),
-}));
-
-describe('other names post controller', () => {
-  let req;
-  let res;
+describe('applicant1 > other-names > post', () => {
   let controller;
 
   beforeEach(() => {
-    req = mockRequest({ session: { userCase: {} } });
-    res = mockResponse();
     controller = new OtherNamesPostController({});
   });
 
-  describe('when there are no form errors', () => {
-    beforeEach(() => {
-      req.session.errors = [];
-      controller.fields = { example: { type: 'input', values: [] } };
-      mockParsedBody.mockReturnValue({
-        saveAndSignOut: true,
-        saveBeforeSessionTimeout: true,
-        _csrf: true,
-        formData: {},
-      });
-      mockErrors.mockReturnValue([]);
-    });
+  test('should extend OtherNamesPostControllerBase', async () => {
+    expect(controller).toBeInstanceOf(OtherNamesPostControllerBase);
+  });
 
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
-
-    // it('should save form input to session data and redirect to next url', async () => {
-    //   await controller.post(req, res);
-
-    //   console.log(req.session.userCase);
-
-    //   expect(req.session.userCase).toStrictEqual(controller.fields);
-    // });
-
-    it('should redirect to the next screen', async () => {
-      await controller.post(req, res);
-
-      expect(req.session.save).toHaveBeenCalled();
-      expect(res.redirect).toHaveBeenCalled();
-    });
+  test('should call super constructor with correct params', async () => {
+    expect(controller.fieldPrefix).toBe(FieldPrefix.APPLICANT1);
   });
 });

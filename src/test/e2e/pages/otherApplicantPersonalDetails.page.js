@@ -4,8 +4,9 @@ module.exports = {
   fields: {
     applicant2FirstNames: 'input[id$="applicant2FirstNames"]',
     applicant2LastNames: 'input[id$="applicant2LastNames"]',
-    applicant2HasOtherNames: 'input[id$="applicant2HasOtherNames-2"]',
-    // applicant2AdditionalName: 'input[id$="applicant2AdditionalName"]',
+    applicant2HasOtherNames: 'input[id$="applicant2HasOtherNames"]',
+    applicant2OtherFirstNames: 'input[id$="applicant2OtherFirstNames"]',
+    applicant2OtherLastNames: 'input[id$="applicant2OtherLastNames"]',
     dateOfBirthDay: 'input[id$="applicant2DateOfBirth-day"]',
     dateOfBirthMonth: 'input[id$="applicant2DateOfBirth-month"]',
     dateOfBirthYear: 'input[id$="applicant2DateOfBirth-year"]',
@@ -22,10 +23,10 @@ module.exports = {
     I.wait('2');
     I.waitForText('Have you ever legally been known by any other names?');
     I.click(this.fields.applicant2HasOtherNames);
-    //TODO uncomment these tests
-    // I.fillField(this.fields.applicant2AdditionalName, 'David William');
-    // I.click('Add');
-    // I.wait('2');
+    I.fillField(this.fields.applicant2OtherFirstNames, 'David');
+    I.fillField(this.fields.applicant2OtherLastNames, 'William');
+    I.click('Add');
+    I.wait('2');
     I.click('Save and continue');
     I.waitForText("What's your date of birth?");
     I.fillField(this.fields.dateOfBirthDay, '26');
@@ -34,11 +35,11 @@ module.exports = {
     I.fillField(this.fields.dateOfBirthYear, '1980');
     I.click('Save and continue');
     I.click(this.fields.britishCitizen);
-    //TODO uncomment these tests
+    //TODO once Abid PR merged then we can un comment as its known issue
     // I.click(this.fields.citizenOfDifferentCountry);
     // I.fillField(this.fields.addAnotherNationality, 'India');
     // I.click('Add');
-    // I.wait('2');
+    I.wait('2');
     I.click('Save and continue');
     I.fillField(this.fields.applicant2Occupation, 'Teacher');
     I.click('Save and continue');

@@ -19,12 +19,12 @@
     "test:a11y": "echo 'nope' && exit 0",
     "sonar-scan": "sonar-scanner",
     "test:smoke": "MOCHAWESOME_REPORTFILENAME=smoke codeceptjs run --grep \"${SMOKE_TESTS_SELECTOR:=@smoke-tests}\" --reporter mocha-multi",
-    "test:functional": "echo 'temporarily disabled'",
-    "test:fullfunctional": "echo 'temporarily disabled'",
+    "test:functional": "MOCHAWESOME_REPORTFILENAME=functional codeceptjs run-multiple parallel --reporter mocha-multi",
+    "test:fullfunctional": "MOCHAWESOME_REPORTFILENAME=functional codeceptjs run-multiple parallel --reporter mocha-multi",
     "cichecks": "yarn && run-p build lint test",
     "test:functional:skip": "echo 'Not running functional cases in Master' && exit 0",
-    "test:crossbrowser-e2e": "echo 'temporarily disabled'",
-    "test:crossbrowser": "echo 'temporarily disabled'"
+    "test:crossbrowser-e2e": "MOCHAWESOME_REPORTFILENAME=crossbrowser codeceptjs run-multiple --grep \"@cross-browser\" ${BROWSER_GROUP:-'--all'} -c saucelabs.conf.js --reporter mocha-multi",
+    "test:crossbrowser": "./bin/run-crossbrowser-tests.sh"
   },
   "dependencies": {
     "@hmcts/cookie-manager": "^0.0.4",
@@ -88,7 +88,7 @@
     "toobusy-js": "^0.5.1",
     "ts-node": "^10.4.0",
     "tsconfig-paths": "^3.11.0",
-    "typescript": "^4.5.2",
+    "typescript": "^4.5.4",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
