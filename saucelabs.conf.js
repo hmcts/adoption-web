@@ -2,6 +2,7 @@
 
 const testConfig = require('./src/test/e2e/config');
 const supportedBrowsers = require('./src/test/e2e/crossbrowser/supportedBrowsers.js');
+const testUserConfig = require('./src/test/config.js').config;
 
 const waitForTimeout = parseInt(process.env.WAIT_FOR_TIMEOUT) || 30000;
 const smartWait = parseInt(process.env.SMART_WAIT) || 30000;
@@ -38,6 +39,7 @@ function getBrowserConfig(browserGroup) {
 
 const setupConfig = {
   tests: './src/test/e2e/tests/*_test.js',
+  teardown: testUserConfig.teardown,
   output: `${process.cwd()}/${testConfig.TestOutputDir}`,
   helpers: {
     WebDriver: {
@@ -73,6 +75,7 @@ const setupConfig = {
     },
   },
   plugins: {
+    autoLogin: testUserConfig.AutoLogin,
     retryFailedStep: {
       enabled: true,
       retries: 2,
@@ -105,6 +108,7 @@ const setupConfig = {
     childBirthMothersDetailsPage: './src/test/e2e/pages/childBirthMothersDetails.page.js',
     childOtherParentDetailsPage: './src/test/e2e/pages/childOtherParentDetails.page.js',
     childBirthFatherDetailsPage: './src/test/e2e/pages/childBirthFatherDetails.page.js',
+    childSiblingDetailsPage: './src/test/e2e/pages/childSiblingDetails.page.js',
   },
   mocha: {
     reporterOptions: {
