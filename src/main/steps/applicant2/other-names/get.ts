@@ -27,7 +27,7 @@ export default class OtherNamesGetController extends GetController {
         );
       } catch (err) {
         req.locals.logger.error('Error saving', err);
-        req.session.errors?.push({ errorType: 'errorSaving', propertyName: '*' });
+        // req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
       }
 
       delete req.query.remove;
