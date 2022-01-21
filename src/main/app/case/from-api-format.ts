@@ -3,7 +3,7 @@ import advancedFormat from 'dayjs/plugin/advancedFormat';
 import { invert } from 'lodash';
 
 import { Case, Checkbox, formFieldsToCaseMapping, formatCase } from './case';
-import { CaseData, YesOrNo } from './definition';
+import { CaseData, ListValue, PlacementOrder, YesOrNo } from './definition';
 import {
   fromApiApplicant1 as uploadedFilesFromApiApplicant1,
   fromApiApplicant2 as uploadedFilesFromApiApplicant2,
@@ -42,6 +42,17 @@ const fields: FromApiConverters = {
     placementOrders: data.placementOrders?.map(item => ({
       ...item.value,
       placementOrderDate: fromApiDate(item.value.placementOrderDate),
+    })),
+  }),
+  siblings: data => ({
+    siblings: (data.siblings || []).map(sibling => ({
+      ...sibling.value,
+      siblingPlacementOrders: ((sibling.value.siblingPlacementOrders || []) as ListValue<PlacementOrder>[]).map(
+        placementOrder => ({
+          ...placementOrder.value,
+          placementOrderDate: fromApiDate(placementOrder.value.placementOrderDate),
+        })
+      ),
     })),
   }),
   applicant1DateOfBirth: data => ({
