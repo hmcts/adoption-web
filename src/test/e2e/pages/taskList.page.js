@@ -25,6 +25,8 @@ module.exports = {
     childrenBirthFatherDetailsStatus: 'strong[id$="birth-father-status"]',
     adoptionAgencyLink: 'a[id$="adoption-agency"]',
     adoptionAgencyDetailsStatus: 'strong[id$="birth-father-status"]',
+    childrenSiblingLink: 'a[href$="/sibling/exists"]',
+    childrenSiblingDetailsStatus: 'strong[id$="birth-father-status"]',
   },
 
   async goToTaskListPage() {
@@ -106,5 +108,13 @@ module.exports = {
 
   async verifyChildAdoptionAgencyDetailsStatus() {
     await I.see('COMPLETED', this.childDetails.adoptionAgencyDetailsStatus);
+  },
+
+  async selectSiblingDetails() {
+    await I.click(this.childDetails.childrenSiblingLink);
+  },
+
+  async verifySiblingDetailsStatus() {
+    await I.see('COMPLETED', this.childDetails.childrenSiblingDetailsStatus);
   },
 };

@@ -67,3 +67,9 @@ Scenario(
     await childAdoptionAgencyDetailsPage.childAdoptionAgencyDetailsSection();
   }
 );
+Scenario('Child sibling details event', async ({ loginPage, childSiblingDetailsPage, taskListPage }) => {
+  await loginPage.createCitizenUserAndSignIn();
+  await taskListPage.goToTaskListPage();
+  await taskListPage.selectSiblingDetails();
+  await childSiblingDetailsPage.childDetailsSiblingSection();
+});

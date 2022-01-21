@@ -76,6 +76,7 @@ const en = content => {
     section3link7: 'Previous court orders for the child',
     section3link8: 'Court order details for any siblings or half-siblings',
     section3link9: 'Adoption agency, social worker and solicitor details',
+    section3link10: 'Sibling details',
     section4: 'Add your adoption contacts',
     section4link1: 'Your adoption agency or local authority',
     section4link2: "The child's adoption agency or local authority",
@@ -156,6 +157,7 @@ const en = content => {
       birthMotherDetails: urls.BIRTH_MOTHER_FULL_NAME,
       reviewApplicationPayAndSubmit: urls.CHECK_ANSWERS_URL,
       adoptionAgency: getAdoptionAgencyUrl(content.userCase),
+      siblingDetails: urls.SIBLING_EXISTS,
     },
   };
 };
@@ -202,6 +204,7 @@ const cy = content => {
     section3link7: 'Previous court orders for the child (in welsh) ',
     section3link8: 'Court order details for any siblings or half-siblings (in welsh) ',
     section3link9: 'Adoption agency, social worker and solicitor details (in welsh) ',
+    section3link10: 'Sibling details',
     section4: 'Add your adoption contacts (in welsh) ',
     section4link1: 'Your adoption agency or local authority (in welsh) ',
     section4link2: "The child's adoption agency or local authority (in welsh) ",
@@ -282,6 +285,7 @@ const cy = content => {
       birthMotherDetails: urls.BIRTH_MOTHER_FULL_NAME,
       reviewApplicationPayAndSubmit: urls.CHECK_ANSWERS_URL,
       adoptionAgency: getAdoptionAgencyUrl(content.userCase),
+      siblingDetails: urls.SIBLING_EXISTS,
     },
   };
 };

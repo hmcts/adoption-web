@@ -55,6 +55,17 @@ export const CHILDREN_SEX_AT_BIRTH: PageLink = `${CHILDREN}/sex-at-birth`;
 export const CHILDREN_NATIONALITY: PageLink = `${CHILDREN}/nationality`;
 export const CHILDREN_FULL_NAME_AFTER_ADOPTION: PageLink = `${CHILDREN}/full-name-after-adoption`;
 
+export const SIBLING: PageLink = '/sibling';
+export const SIBLING_EXISTS: PageLink = `${SIBLING}/exists`;
+export const SIBLING_COURT_ORDER_EXISTS: PageLink = `${SIBLING}/court-order-exists`;
+export const SIBLING_NAME: PageLink = `${SIBLING}/name`;
+export const SIBLING_ORDER_TYPE: PageLink = `${SIBLING}/placement-order-type`;
+export const SIBLING_ORDER_CASE_NUMBER: PageLink = `${SIBLING}/placement-order-number`;
+export const SIBLING_ORDER_COURT: PageLink = `${SIBLING}/placement-order-court`;
+export const SIBLING_ORDER_DATE: PageLink = `${SIBLING}/placement-order-date`;
+export const SIBLING_ORDER_SUMMARY: PageLink = `${SIBLING}/summary`;
+export const SIBLING_CHOOSE_SIBLING: PageLink = `${SIBLING}/choose-sibling`;
+
 export const BIRTH_MOTHER: PageLink = '/birth-mother';
 export const BIRTH_MOTHER_FULL_NAME: PageLink = `${BIRTH_MOTHER}/full-name`;
 export const BIRTH_MOTHER_STILL_ALIVE: PageLink = `${BIRTH_MOTHER}/still-alive`;
