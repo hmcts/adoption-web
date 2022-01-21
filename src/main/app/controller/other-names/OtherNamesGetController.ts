@@ -29,7 +29,6 @@ export default class OtherNamesGetController extends GetController {
       if (index !== -1) {
         names.splice(index, 1);
       }
-      console.log(' po get 21a : ' + JSON.stringify(names));
 
       req.session.userCase[`${this.fieldPrefix}AdditionalNames`] = names;
       try {

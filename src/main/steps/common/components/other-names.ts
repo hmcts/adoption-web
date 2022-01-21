@@ -89,18 +89,25 @@ export const otherNamesFields = (userCase: Partial<Case>, fieldPrefix: FieldPref
                 addAnotherName: {
                   type: 'details',
                   label: l => l.another,
+                  open: !!userCase['addAnotherNameHidden'],
                   subFields: {
+                    addAnotherNameHidden: {
+                      type: 'hidden',
+                      hidden: true,
+                    },
                     [`${fieldPrefix}OtherFirstNames`]: {
                       type: 'input',
                       classes: 'govuk-!-width-two-thirds',
                       label: l => l[`${fieldPrefix}OtherFirstNames`],
                       labelSize: null,
+                      validator: isFieldFilledIn,
                     },
                     [`${fieldPrefix}OtherLastNames`]: {
                       type: 'input',
                       classes: 'govuk-!-width-two-thirds',
                       label: l => l[`${fieldPrefix}OtherLastNames`],
                       labelSize: null,
+                      validator: isFieldFilledIn,
                     },
                     addButton: {
                       type: 'button',
