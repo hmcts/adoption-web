@@ -2,22 +2,30 @@ import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { validate as isValidEmail } from 'email-validator';
 
+import { OtherName } from '../../app/case/definition';
 import { Case, CaseDate } from '../case/case';
 
 dayjs.extend(customParseFormat);
 
-export type Validator = (value: string | string[] | CaseDate | Partial<Case> | undefined) => void | string;
+export type Validator = (
+  value: string | string[] | CaseDate | Partial<Case> | OtherName[] | undefined
+) => void | string;
 export type DateValidator = (value: CaseDate | undefined) => void | string;
+
+export const enum ValidationError {
+  REQUIRED = 'required',
+  NOT_SELECTED = 'notSelected',
+}
 
 export const isFieldFilledIn: Validator = value => {
   if (!value || (value as string).trim?.().length === 0) {
-    return 'required';
+    return ValidationError.REQUIRED;
   }
 };
 
 export const atLeastOneFieldIsChecked: Validator = fields => {
   if (!fields || (fields as []).length === 0) {
-    return 'required';
+    return ValidationError.REQUIRED;
   }
 };
 
@@ -30,12 +38,12 @@ export const notSureViolation: Validator = fields => {
 
 export const areDateFieldsFilledIn: DateValidator = fields => {
   if (typeof fields !== 'object' || Object.keys(fields).length !== 3) {
-    return 'required';
+    return ValidationError.REQUIRED;
   }
   const values = Object.values(fields);
   const allFieldsMissing = values.every(value => !value);
   if (allFieldsMissing) {
-    return 'required';
+    return ValidationError.REQUIRED;
   }
 
   const someFieldsMissing = values.some(value => !value);
@@ -50,8 +58,8 @@ export const areDateFieldsFilledIn: DateValidator = fields => {
 };
 
 export const doesArrayHaveValues: Validator = value => {
-  if (!value || !(value as string[])?.length) {
-    return 'required';
+  if (!value || !(value as (string | OtherName)[])?.length) {
+    return ValidationError.REQUIRED;
   }
 };
 
@@ -172,6 +180,6 @@ export const isValidAccessCode: Validator = value => {
 
 export const isAddressSelected: Validator = value => {
   if ((value as string)?.trim() === '-1') {
-    return 'notSelected';
+    return ValidationError.NOT_SELECTED;
   }
 };

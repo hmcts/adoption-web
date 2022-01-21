@@ -20,7 +20,7 @@ module.exports = {
     if (!(this.isPuppeteer() && currentUser === user)) {
       output.debug(`Logging in as ${user.email}`);
       currentUser = {}; // reset in case the login fails
-      await this.retryUntilExists(() => loginPage.signIn(user), signedInSelector, false, 10);
+      await this.retryUntilExists(() => loginPage.createUserAndSignIn(user), signedInSelector, false, 10);
       await this.rejectCookies();
       output.debug(`Logged in as ${user.email}`);
       currentUser = user;

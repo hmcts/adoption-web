@@ -11,7 +11,6 @@ describe('TimedOutGetController', () => {
   let req = mockRequest();
   const res = mockResponse();
   const language = 'en';
-  const isDivorce = true;
   const userCase = req.session.userCase;
 
   test('Should destroy session and render timeout page', async () => {
@@ -21,7 +20,6 @@ describe('TimedOutGetController', () => {
       ...generatePageContent({
         language,
         pageContent: generateContent,
-        isDivorce,
         userCase,
         userEmail: 'test@example.com',
       }),

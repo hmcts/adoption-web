@@ -1,6 +1,7 @@
 require('./src/test/e2e/helpers/event_listener');
 const lodash = require('lodash');
 
+const testConfig = require('./src/test/config.js').config;
 exports.config = {
   output: './output',
   multiple: {
@@ -86,6 +87,7 @@ exports.config = {
     childBirthFatherDetailsPage: './src/test/e2e/pages/childBirthFatherDetails.page.js',
   },
   plugins: {
+    autoLogin: testConfig.AutoLogin,
     retryFailedStep: {
       enabled: true,
     },

@@ -1,12 +1,11 @@
 import { Response } from 'express';
 
 import { Case } from '../../app/case/case';
-import { State, YesOrNo } from '../../app/case/definition';
+import { State } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
 import { Form, FormFields } from '../../app/form/Form';
 import { form as applicant1FirstQuestionForm } from '../applicant1/applying-with/content';
 import {
-  APPLICATION_ENDED,
   APPLICATION_SUBMITTED,
   APPLYING_WITH_URL,
   CHECK_ANSWERS_URL,
@@ -34,7 +33,7 @@ export class HomeGetController {
 const applicant1RedirectPageSwitch = (caseState: State, userCase: Partial<Case>, isFirstQuestionComplete: boolean) => {
   switch (caseState) {
     case State.AwaitingApplicant1Response: {
-      return userCase.applicant2ScreenHasUnionBroken === YesOrNo.NO ? APPLICATION_ENDED : CHECK_ANSWERS_URL;
+      return CHECK_ANSWERS_URL;
     }
     case State.AwaitingApplicant2Response: {
       return SENT_TO_APPLICANT2_FOR_REVIEW;
