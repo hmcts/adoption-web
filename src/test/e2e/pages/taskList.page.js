@@ -23,6 +23,8 @@ module.exports = {
     childOtherParentDetailsStatus: 'strong[id$="other-parent-status"]',
     childrenBirthFatherLink: 'a[id$="children-birth-father"]',
     childrenBirthFatherDetailsStatus: 'strong[id$="birth-father-status"]',
+    childrenSiblingLink: 'a[href$="/sibling/exists"]',
+    childrenSiblingDetailsStatus: 'strong[id$="birth-father-status"]',
   },
 
   async goToTaskListPage() {
@@ -96,5 +98,12 @@ module.exports = {
 
   async verifyChildBirthFatherDetailsStatus() {
     await I.see('COMPLETED', this.childDetails.childrenBirthFatherDetailsStatus);
+  },
+  async selectSiblingDetails() {
+    await I.click(this.childDetails.childrenSiblingLink);
+  },
+
+  async verifySiblingDetailsStatus() {
+    await I.see('COMPLETED', this.childDetails.childrenSiblingDetailsStatus);
   },
 };

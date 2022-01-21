@@ -57,3 +57,10 @@ Scenario('Child other parent details event', async ({ loginPage, childOtherParen
   await childOtherParentDetailsPage.childOtherParentDetailsSection();
   await taskListPage.verifyChildOtherParentDetailsStatus();
 });
+
+Scenario('Child sibling details event', async ({ loginPage, childSiblingDetailsPage, taskListPage }) => {
+  await loginPage.createCitizenUserAndSignIn();
+  await taskListPage.goToTaskListPage();
+  await taskListPage.selectSiblingDetails();
+  await childSiblingDetailsPage.childDetailsSiblingSection();
+});
