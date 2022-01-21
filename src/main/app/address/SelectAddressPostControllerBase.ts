@@ -43,8 +43,7 @@ export default class SelectAddressPostControllerBase extends PostController<AnyO
           req.session.userCase = await this.save(req, formData, this.getEventName(req));
         } catch (err) {
           req.locals.logger.error('Error saving', err);
-          //TODO uncomment this line when CCD work is complete
-          //req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+          req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
         }
       }
     }
