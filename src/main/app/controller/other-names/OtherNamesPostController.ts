@@ -51,14 +51,14 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
           );
         } catch (err) {
           req.locals.logger.error('Error saving', err);
-          // req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+          req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
         }
       } else {
         try {
           req.session.userCase = await this.save(req, formData, this.getEventName(req));
         } catch (err) {
           req.locals.logger.error('Error saving', err);
-          // req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+          req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
         }
       }
     } else if (req.session.userCase[`${this.fieldPrefix}AdditionalNames`]?.length && !addButtonClicked) {
