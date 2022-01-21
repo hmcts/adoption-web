@@ -100,6 +100,7 @@ exports.config = {
   },
   tests: './src/test/e2e/tests/*_test.js',
   teardownAll: require('./src/test/e2e/hooks/aggregate-metrics'),
+  teardown: testConfig.teardown,
   mocha: {
     reporterOptions: {
       'codeceptjs-cli-reporter': {
