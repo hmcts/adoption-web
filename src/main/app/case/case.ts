@@ -306,6 +306,7 @@ export interface Case {
   /***** Common across different type of users *****/
   addButton?: string;
   addAnotherNationality?: string;
+  addAnotherNameHidden?: string;
   applicationType?: ApplicationType;
   payments?: ListValue<Payment>[];
 
