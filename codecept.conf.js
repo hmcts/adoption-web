@@ -85,6 +85,7 @@ exports.config = {
     childBirthMothersDetailsPage: './src/test/e2e/pages/childBirthMothersDetails.page.js',
     childOtherParentDetailsPage: './src/test/e2e/pages/childOtherParentDetails.page.js',
     childBirthFatherDetailsPage: './src/test/e2e/pages/childBirthFatherDetails.page.js',
+    childSiblingDetailsPage: './src/test/e2e/pages/childSiblingDetails.page.js',
   },
   plugins: {
     autoLogin: testConfig.AutoLogin,
@@ -98,6 +99,7 @@ exports.config = {
   },
   tests: './src/test/e2e/tests/*_test.js',
   teardownAll: require('./src/test/e2e/hooks/aggregate-metrics'),
+  teardown: testConfig.teardown,
   mocha: {
     reporterOptions: {
       'codeceptjs-cli-reporter': {

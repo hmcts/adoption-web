@@ -40,7 +40,7 @@ export default class PlacementOrderPostController extends PostController<AnyObje
       );
     } catch (err) {
       req.locals.logger.error('Error saving', err);
-      //req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
     }
 
     req.session.save(err => {

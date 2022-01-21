@@ -19,6 +19,7 @@ export enum Sections {
   Documents = 'documents',
   AboutOtherParent = 'aboutOtherParent',
   ReviewPaySubmit = 'reviewPaySubmit',
+  AboutSibling = 'aboutSibling',
 }
 
 export interface Step {

@@ -297,9 +297,9 @@ export interface Case {
 
   /***** Adoption Agency, Social Worker and Solicitor *****/
   siblings?: ListValue<Sibling>[];
-  hasSiblings?: string;
+  hasSiblings?: YesNoNotsure;
   hasSiblingNotSureReason?: string;
-  hasPoForSiblings?: string;
+  hasPoForSiblings?: YesNoNotsure;
   hasPoForSiblingsNotSureReason?: string;
   addAnotherSiblingPlacementOrder?: YesOrNo;
   selectedSiblingId?: string;
@@ -308,6 +308,7 @@ export interface Case {
   /***** Common across different type of users *****/
   addButton?: string;
   addAnotherNationality?: string;
+  addAnotherNameHidden?: string;
   applicationType?: ApplicationType;
   payments?: ListValue<Payment>[];
 

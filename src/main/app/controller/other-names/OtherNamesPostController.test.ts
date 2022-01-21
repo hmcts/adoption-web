@@ -88,6 +88,7 @@ describe('OtherNamesPostController', () => {
         });
 
         test('should add the otherName object in userCase applicant1AdditionalNames session data', async () => {
+          req.session.userCase.applicant1AdditionalNames = undefined;
           await controller.post(req, res);
           expect(req.session.errors).toEqual([]);
           expect(req.session.userCase.applicant1AdditionalNames).toEqual([
