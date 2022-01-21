@@ -73,39 +73,6 @@ const fields: ToApiConverters = {
       },
     })),
   }),
-  ///
-  // siblings: data => ({
-  //   siblings: (data.siblings || []).map(item => ({
-  //     id: generateUuid(),
-  //     value: {
-  //       ...item,
-  //       siblingPlacementOrders: (item.siblingPlacementOrders|| []).map(item2 => ({
-  //         id: generateUuid(),
-  //         value: {
-  //           ...item2,
-  //           placementOrderDate: toApiDate(item2.placementOrderDate as CaseDate),
-  //         },
-  //       })),
-  //     },
-  //   })),
-  // }),
-  ////
-  // siblings: data => ({
-  //   siblings: (data.siblings || []).map(item => ({
-  //     id: generateUuid(),
-  //     value: {
-  //       ...item,
-  //       siblingPlacementOrders: (item.siblingPlacementOrders|| []).map(item2 => ({
-  //         id: generateUuid(),
-  //         value: {
-  //           ...item2,
-  //           placementOrderDate: toApiDate(item2.value.placementOrderDate as CaseDate),
-  //         },
-  //       })),
-  //     },
-  //   })),
-  // }),
-  ///
   adopAgencyOrLAs: data => ({
     adopAgencyOrLAs: (data.adopAgencyOrLAs || []).map(item => ({
       id: generateUuid(),
