@@ -13,3 +13,5 @@ jest.*config.js
 src/test/*/codecept.conf.js
 src/test/config.ts
 src/test/config.js
+saucelabs.conf.js
+codecept.conf.js
