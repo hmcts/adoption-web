@@ -108,6 +108,7 @@ const setupConfig = {
     childBirthMothersDetailsPage: './src/test/e2e/pages/childBirthMothersDetails.page.js',
     childOtherParentDetailsPage: './src/test/e2e/pages/childOtherParentDetails.page.js',
     childBirthFatherDetailsPage: './src/test/e2e/pages/childBirthFatherDetails.page.js',
+    childSiblingDetailsPage: './src/test/e2e/pages/childSiblingDetails.page.js',
   },
   mocha: {
     reporterOptions: {
