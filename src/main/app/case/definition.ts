@@ -720,10 +720,10 @@ export interface AdoptionAgencyOrLocalAuthority {
 }
 
 export interface Sibling {
-  SiblingId: string;
-  SiblingFirstName: string;
-  SiblingLastNames: string;
-  SiblingPlacementOrders: ListValue<PlacementOrder>[];
+  siblingId: string;
+  siblingFirstName: string;
+  siblingLastNames: string;
+  siblingPlacementOrders: ListValue<PlacementOrder>[];
 }
 
 export interface SocialWorker {

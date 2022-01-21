@@ -294,7 +294,7 @@ export interface Case {
   solicitorPhoneNumber?: string;
   solicitorEmail?: string;
   solicitorHelpingWithApplication?: YesOrNo;
-  siblings?: ListValue<Sibling>[];
+  siblings?: Sibling[];
   hasSiblings?: string;
   hasSiblingNotSureReason?: string;
   hasPoForSiblings?: string;
