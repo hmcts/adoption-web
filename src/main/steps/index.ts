@@ -14,6 +14,7 @@ import { Step } from './constants';
 import { Step as EligibilityStep, eligibilitySequence } from './eligibility/eligibilitySequence';
 import { otherParentSequence } from './other-parent/otherParentSequence';
 import { reviewPaySubmitSequence } from './review-pay-submit/reviewPaySubmitSequence';
+import { siblingSequence } from './sibling/siblingSequence';
 import {
   APPLICANT_1,
   APPLICANT_2,
@@ -23,6 +24,7 @@ import {
   CHILDREN,
   OTHER_PARENT,
   REVIEW_PAY_SUBMIT,
+  SIBLING,
   TASK_LIST_URL,
 } from './urls';
 
@@ -95,6 +97,7 @@ export const getNextStepUrl = (req: AppRequest, data: Partial<Case>): string => 
     ...birthFatherSequence,
     ...otherParentSequence,
     ...reviewPaySubmitSequence,
+    ...siblingSequence,
   ].find(s => s.url === path);
 
   const url = nextStep ? nextStep.getNextStep(data) : CHECK_ANSWERS_URL;
@@ -155,6 +158,7 @@ export const stepsWithContentChildren = getStepsWithContent(childrenSequence, CH
 export const stepsWithContentBirthFather = getStepsWithContent(birthFatherSequence, BIRTH_FATHER);
 export const stepsWithContentBirthMother = getStepsWithContent(birthMotherSequence, BIRTH_MOTHER);
 export const stepsWithContentOtherParent = getStepsWithContent(otherParentSequence, OTHER_PARENT);
+export const stepsWithContentSibling = getStepsWithContent(siblingSequence, SIBLING);
 export const stepsWithContentReviewPaySubmit = getStepsWithContent(reviewPaySubmitSequence, REVIEW_PAY_SUBMIT);
 export const stepsWithContent = [
   ...stepsWithContentEligibility,
@@ -165,4 +169,5 @@ export const stepsWithContent = [
   ...stepsWithContentBirthMother,
   ...stepsWithContentOtherParent,
   ...stepsWithContentReviewPaySubmit,
+  ...stepsWithContentSibling,
 ];
