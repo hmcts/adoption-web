@@ -168,6 +168,7 @@ export interface FormInput {
   conditionalText?: Label;
   subFields?: Record<string, FormField>;
   divider?: Label; //Required for divider between checkbox options
+  open?: boolean;
 }
 
 function isFormOptions(field: FormField): field is FormOptions {
@@ -188,4 +189,6 @@ interface CaseWithFormData extends CaseWithId {
   saveAndSignOut?: string;
   saveBeforeSessionTimeout?: string;
   sendToApplicant2ForReview?: string;
+  addAnotherName?: string;
+  addAnotherNameHidden?: string;
 }
