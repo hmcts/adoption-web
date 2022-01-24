@@ -239,10 +239,20 @@ export const getOtherParentStatus = (userCase: CaseWithId): SectionStatus => {
 };
 
 export const getAdoptionAgencyDetailStatus = (userCase: CaseWithId): SectionStatus => {
-  const adopAgencyOrLAsComplete =
-    (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO && userCase.adopAgencyOrLAs?.length === 1) ||
-    (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.YES &&
-      userCase.adopAgencyOrLAs?.length === 2 &&
+  let adopAgencyOrLAsComplete = false;
+
+  if (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO && userCase.adopAgencyOrLAs?.length === 2) {
+    const item = userCase.adopAgencyOrLAs[0];
+    adopAgencyOrLAsComplete = !!(
+      item.adopAgencyOrLaName &&
+      item.adopAgencyOrLaContactName &&
+      item.adopAgencyOrLaPhoneNumber &&
+      item.adopAgencyOrLaContactEmail
+    );
+  } else {
+    adopAgencyOrLAsComplete =
+      ((userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO && userCase.adopAgencyOrLAs?.length === 1) ||
+        (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.YES && userCase.adopAgencyOrLAs?.length === 2)) &&
       userCase.adopAgencyOrLAs.every(item => {
         return (
           item.adopAgencyOrLaName &&
@@ -250,7 +260,8 @@ export const getAdoptionAgencyDetailStatus = (userCase: CaseWithId): SectionStat
           item.adopAgencyOrLaPhoneNumber &&
           item.adopAgencyOrLaContactEmail
         );
-      }));
+      });
+  }
 
   const adopAgencyOrLAsInProgress =
     userCase.hasAnotherAdopAgencyOrLA ||
