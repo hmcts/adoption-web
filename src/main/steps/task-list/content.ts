@@ -1,7 +1,7 @@
 import { FieldPrefix } from '../../app/case/case';
 import { SectionStatus } from '../../app/case/definition';
 import { TranslationFn } from '../../app/controller/GetController';
-import * as urls from '../urls';
+import * as URL from '../urls';
 
 import {
   getAdoptionCertificateDetailsStatus,
@@ -17,13 +17,32 @@ import {
 
 const getSectionStatusLabel = (status, statuses, id) => {
   if (status === SectionStatus.COMPLETED) {
-    return `<strong id="${id}" class="govuk-tag  app-task-list__tag" id="eligibility-completed">${statuses.completed}</strong>`;
+    return `<strong id="${id}-status" class="govuk-tag  app-task-list__tag" id="eligibility-completed">${statuses.completed}</strong>`;
   } else if (status === SectionStatus.IN_PROGRESS) {
-    return `<strong id="${id}" class="govuk-tag govuk-tag--blue app-task-list__tag">${statuses.inProgress}</strong>`;
+    return `<strong id="${id}-status" class="govuk-tag govuk-tag--blue app-task-list__tag">${statuses.inProgress}</strong>`;
   } else {
-    return `<strong id="${id}" class="govuk-tag govuk-tag--grey app-task-list__tag">${statuses.notStarted}</strong>`;
+    return `<strong id="${id}-status" class="govuk-tag govuk-tag--grey app-task-list__tag">${statuses.notStarted}</strong>`;
   }
 };
+
+const urls = content => ({
+  applyingWith: URL.APPLYING_WITH_URL,
+  applicant1PersonalDetails: URL.APPLICANT_1_FULL_NAME,
+  applicant1ContactDetails: URL.APPLICANT_1_FIND_ADDRESS,
+  applicant2PersonalDetails: URL.APPLICANT_2_FULL_NAME,
+  applicant2ContactDetails: URL.APPLICANT_2_SAME_ADDRESS,
+  childrenBirthCertificate: URL.CHILDREN_FULL_NAME,
+  otherParentExists: URL.OTHER_PARENT_EXISTS,
+  adoptionCertificateDetails: URL.CHILDREN_FULL_NAME_AFTER_ADOPTION,
+  childrenPlacementOrder:
+    getChildrenPlacementOrderStatus(content.userCase) === SectionStatus.NOT_STARTED
+      ? URL.CHILDREN_PLACEMENT_ORDER_NUMBER
+      : URL.CHILDREN_PLACEMENT_ORDER_SUMMARY,
+  birthFather: URL.BIRTH_FATHER_NAME_ON_CERTIFICATE,
+  birthMotherDetails: URL.BIRTH_MOTHER_FULL_NAME,
+  reviewApplicationPayAndSubmit: URL.CHECK_ANSWERS_URL,
+  siblingDetails: URL.SIBLING_EXISTS,
+});
 
 const en = content => {
   const statuses = {
@@ -66,68 +85,47 @@ const en = content => {
       applicant1PersonalDetails: getSectionStatusLabel(
         getPersonalDetailsStatus(content.userCase, 'applicant1'),
         statuses,
-        'applicant1-personal-details-status'
+        'applicant1-personal-details'
       ),
       applicant1ContactDetails: getSectionStatusLabel(
         getContactDetailsStatus(content.userCase, FieldPrefix.APPLICANT1),
         statuses,
-        'applicant1-contact-details-status'
+        'applicant1-contact-details'
       ),
       applicant2PersonalDetails: getSectionStatusLabel(
         getPersonalDetailsStatus(content.userCase, 'applicant2'),
         statuses,
-        'applicant2-personal-details-status'
+        'applicant2-personal-details'
       ),
       applicant2ContactDetails: getSectionStatusLabel(
         getContactDetailsStatus(content.userCase, FieldPrefix.APPLICANT2),
         statuses,
-        'applicant2-contact-details-status'
+        'applicant2-contact-details'
       ),
       childrenBirthCertificate: getSectionStatusLabel(
         getChildrenBirthCertificateStatus(content.userCase),
         statuses,
-        'children-birth-certificate-details-status'
+        'children-birth-certificate-details'
       ),
       childrenPlacementOrder: getSectionStatusLabel(
         getChildrenPlacementOrderStatus(content.userCase),
         statuses,
-        'children-placement-order-details-status'
+        'children-placement-order-details'
       ),
       adoptionCertificateDetails: getSectionStatusLabel(
         getAdoptionCertificateDetailsStatus(content.userCase),
         statuses,
-        'adoption-certificate-details-status'
+        'adoption-certificate-details'
       ),
-      birthFather: getSectionStatusLabel(
-        getBirthFatherDetailsStatus(content.userCase),
-        statuses,
-        'birth-father-status'
-      ),
+      birthFather: getSectionStatusLabel(getBirthFatherDetailsStatus(content.userCase), statuses, 'birth-father'),
       birthMotherDetails: getSectionStatusLabel(
         getBirthMotherDetailsStatus(content.userCase),
         statuses,
-        'birth-mother-details-status'
+        'birth-mother-details'
       ),
-      otherParent: getSectionStatusLabel(getOtherParentStatus(content.userCase), statuses, 'other-parent-status'),
+      otherParent: getSectionStatusLabel(getOtherParentStatus(content.userCase), statuses, 'other-parent'),
     },
-    urls: {
-      applyingWith: urls.APPLYING_WITH_URL,
-      applicant1PersonalDetails: urls.APPLICANT_1_FULL_NAME,
-      applicant1ContactDetails: urls.APPLICANT_1_FIND_ADDRESS,
-      applicant2PersonalDetails: urls.APPLICANT_2_FULL_NAME,
-      applicant2ContactDetails: urls.APPLICANT_2_SAME_ADDRESS,
-      childrenBirthCertificate: urls.CHILDREN_FULL_NAME,
-      otherParentExists: urls.OTHER_PARENT_EXISTS,
-      adoptionCertificateDetails: urls.CHILDREN_FULL_NAME_AFTER_ADOPTION,
-      childrenPlacementOrder:
-        getChildrenPlacementOrderStatus(content.userCase) === SectionStatus.NOT_STARTED
-          ? urls.CHILDREN_PLACEMENT_ORDER_NUMBER
-          : urls.CHILDREN_PLACEMENT_ORDER_SUMMARY,
-      birthFather: urls.BIRTH_FATHER_NAME_ON_CERTIFICATE,
-      birthMotherDetails: urls.BIRTH_MOTHER_FULL_NAME,
-      reviewApplicationPayAndSubmit: urls.CHECK_ANSWERS_URL,
-      siblingDetails: urls.SIBLING_EXISTS,
-    },
+    urls: urls(content),
   };
 };
 
@@ -172,68 +170,47 @@ const cy = content => {
       applicant1PersonalDetails: getSectionStatusLabel(
         getPersonalDetailsStatus(content.userCase, 'applicant1'),
         statuses,
-        'applicant1-personal-details-status'
+        'applicant1-personal-details'
       ),
       applicant1ContactDetails: getSectionStatusLabel(
         getContactDetailsStatus(content.userCase, FieldPrefix.APPLICANT1),
         statuses,
-        'applicant1-contact-details-status'
+        'applicant1-contact-details'
       ),
       applicant2PersonalDetails: getSectionStatusLabel(
         getPersonalDetailsStatus(content.userCase, 'applicant2'),
         statuses,
-        'applicant1-personal-details-status'
+        'applicant1-personal-details'
       ),
       applicant2ContactDetails: getSectionStatusLabel(
         getContactDetailsStatus(content.userCase, FieldPrefix.APPLICANT2),
         statuses,
-        'applicant2-contact-details-status'
+        'applicant2-contact-details'
       ),
       childrenBirthCertificate: getSectionStatusLabel(
         getChildrenBirthCertificateStatus(content.userCase),
         statuses,
-        'children-birth-certificate-details-status'
+        'children-birth-certificate-details'
       ),
       childrenPlacementOrder: getSectionStatusLabel(
         getChildrenPlacementOrderStatus(content.userCase),
         statuses,
-        'children-placement-order-details-status'
+        'children-placement-order-details'
       ),
       adoptionCertificateDetails: getSectionStatusLabel(
         getAdoptionCertificateDetailsStatus(content.userCase),
         statuses,
-        'adoption-certificate-details-status'
+        'adoption-certificate-details'
       ),
-      birthFather: getSectionStatusLabel(
-        getBirthFatherDetailsStatus(content.userCase),
-        statuses,
-        'birth-father-status'
-      ),
+      birthFather: getSectionStatusLabel(getBirthFatherDetailsStatus(content.userCase), statuses, 'birth-father'),
       birthMotherDetails: getSectionStatusLabel(
         getBirthMotherDetailsStatus(content.userCase),
         statuses,
-        'birth-mother-details-status'
+        'birth-mother-details'
       ),
-      otherParent: getSectionStatusLabel(getOtherParentStatus(content.userCase), statuses, 'other-parent-status'),
+      otherParent: getSectionStatusLabel(getOtherParentStatus(content.userCase), statuses, 'other-parent'),
     },
-    urls: {
-      applyingWith: urls.APPLYING_WITH_URL,
-      applicant1PersonalDetails: urls.APPLICANT_1_FULL_NAME,
-      applicant1ContactDetails: urls.APPLICANT_1_FIND_ADDRESS,
-      applicant2PersonalDetails: urls.APPLICANT_2_FULL_NAME,
-      applicant2ContactDetails: urls.APPLICANT_2_SAME_ADDRESS,
-      childrenBirthCertificate: urls.CHILDREN_FULL_NAME,
-      otherParentExists: urls.OTHER_PARENT_EXISTS,
-      adoptionCertificateDetails: urls.CHILDREN_FULL_NAME_AFTER_ADOPTION,
-      childrenPlacementOrder:
-        getChildrenPlacementOrderStatus(content.userCase) === SectionStatus.NOT_STARTED
-          ? urls.CHILDREN_PLACEMENT_ORDER_NUMBER
-          : urls.CHILDREN_PLACEMENT_ORDER_SUMMARY,
-      birthFather: urls.BIRTH_FATHER_NAME_ON_CERTIFICATE,
-      birthMotherDetails: urls.BIRTH_MOTHER_FULL_NAME,
-      reviewApplicationPayAndSubmit: urls.CHECK_ANSWERS_URL,
-      siblingDetails: urls.SIBLING_EXISTS,
-    },
+    urls: urls(content),
   };
 };
 
