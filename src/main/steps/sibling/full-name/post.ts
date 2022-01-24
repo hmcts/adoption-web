@@ -5,9 +5,10 @@ import { getNextStepUrl } from '../..';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
+import { ValidationError } from '../../../app/form/validation';
 
 @autobind
-export default class PlacementOrderPostController extends PostController<AnyObject> {
+export default class SiblingPostController extends PostController<AnyObject> {
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
     const form = new Form(fields);
@@ -15,15 +16,16 @@ export default class PlacementOrderPostController extends PostController<AnyObje
 
     req.session.errors = form.getErrors(formData);
 
-    // const siblingObject = req.session.userCase.siblings?.find(
-    //   item => item.siblingId === req.session.userCase.selectedSiblingId
-    // );
+    const siblingNames = req.session.userCase.siblings?.find(
+      item => item.siblingId === req.session.userCase.selectedSiblingId
+    );
 
-    // const placementOrder = siblingObject?.siblingPlacementOrders.find(
-    //   item => item.placementOrderId === req.session.userCase.selectedSiblingPoId
-    // );
+    Object.assign(siblingNames, formData);
 
-    // Object.assign(placementOrder, formData);
+    if (req.body.saveAsDraft) {
+      // skip empty field errors in case of save as draft
+      req.session.errors = req.session.errors.filter(item => item.errorType !== ValidationError.REQUIRED);
+    }
 
     const nextUrl = req.session.errors.length > 0 ? req.url : getNextStepUrl(req, req.session.userCase);
 
@@ -32,7 +34,6 @@ export default class PlacementOrderPostController extends PostController<AnyObje
         req,
         {
           siblings: req.session.userCase.siblings,
-          selectedSiblingPoId: req.session.userCase.selectedSiblingPoId,
           selectedSiblingId: req.session.userCase.selectedSiblingId,
         },
         this.getEventName(req)

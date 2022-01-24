@@ -4,7 +4,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
   section: "The child's details",
-  label: 'Which court made the placement order?',
+  label: 'Which court made the order?',
   errors: {
     placementOrderCourt: {
       required: 'Enter the name of the court',
@@ -14,7 +14,7 @@ const en = () => ({
 
 const cy = () => ({
   section: "The child's details (in welsh)",
-  label: 'Which court made the placement order? (in welsh)',
+  label: 'Which court made the order? (in welsh)',
   errors: {
     placementOrderCourt: {
       required: 'Enter the name of the court (in welsh)',

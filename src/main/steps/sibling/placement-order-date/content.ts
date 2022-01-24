@@ -3,10 +3,11 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { covertToDateObject } from '../../../app/form/parser';
 import { areDateFieldsFilledIn, isDateInputInvalid, isFutureDate } from '../../../app/form/validation';
+import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
-  section: "The child's details",
-  label: 'What date is on the placement order?',
+  section: SECTION,
+  label: 'What date is on the order?',
   hint: 'For example, 31 3 2020',
   errors: {
     placementOrderDate: {
@@ -21,8 +22,8 @@ const en = () => ({
 });
 
 const cy = () => ({
-  section: "The child's details (in welsh)",
-  label: 'What date is on the placement order? (in welsh)',
+  section: SECTION_IN_WELSH,
+  label: 'What date is on the order? (in welsh)',
   hint: 'For example, 31 3 2020 (in welsh)',
   errors: {
     placementOrderDate: {

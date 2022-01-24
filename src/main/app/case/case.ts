@@ -296,7 +296,7 @@ export interface Case {
   solicitorHelpingWithApplication?: YesOrNo;
 
   /***** Adoption Agency, Social Worker and Solicitor *****/
-  siblings?: ListValue<Sibling>[];
+  siblings?: Sibling[];
   hasSiblings?: YesNoNotsure;
   hasSiblingNotSureReason?: string;
   hasPoForSiblings?: YesNoNotsure;
@@ -304,6 +304,7 @@ export interface Case {
   addAnotherSiblingPlacementOrder?: YesOrNo;
   selectedSiblingId?: string;
   selectedSiblingPoId?: string;
+  addAnotherSibling?: YesOrNo;
 
   /***** Common across different type of users *****/
   addButton?: string;
