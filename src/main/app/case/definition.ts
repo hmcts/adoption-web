@@ -723,7 +723,7 @@ export interface Sibling {
   siblingId: string;
   siblingFirstName?: string;
   siblingLastNames?: string;
-  siblingPlacementOrders?: PlacementOrder[];
+  siblingPlacementOrders?: (PlacementOrder | ListValue<PlacementOrder>)[];
 }
 
 export interface SocialWorker {
