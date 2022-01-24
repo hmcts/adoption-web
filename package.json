@@ -92,7 +92,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.0",
+    "@babel/core": "^7.16.12",
     "@babel/preset-env": "^7.16.8",
     "@types/copy-webpack-plugin": "^8.0.1",
     "@types/jest": "^27.0.2",
@@ -140,7 +140,7 @@
     "ts-loader": "^9.2.6",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webdriverio": "^7.16.7",
-    "webpack": "^5.66.0",
+    "webpack": "^5.67.0",
     "webpack-cli": "^4.9.1",
     "webpack-dev-middleware": "^5.3.0",
     "webpack-node-externals": "^3.0.0"
