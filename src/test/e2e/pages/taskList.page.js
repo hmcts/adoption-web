@@ -23,6 +23,8 @@ module.exports = {
     childOtherParentDetailsStatus: 'strong[id$="other-parent-status"]',
     childrenBirthFatherLink: 'a[id$="children-birth-father"]',
     childrenBirthFatherDetailsStatus: 'strong[id$="birth-father-status"]',
+    adoptionAgencyLink: 'a[id$="adoption-agency"]',
+    adoptionAgencyDetailsStatus: 'strong[id$="adoption-agency"]',
     childrenSiblingLink: 'a[href$="/sibling/exists"]',
     childrenSiblingDetailsStatus: 'strong[id$="birth-father-status"]',
   },
@@ -99,6 +101,15 @@ module.exports = {
   async verifyChildBirthFatherDetailsStatus() {
     await I.see('COMPLETED', this.childDetails.childrenBirthFatherDetailsStatus);
   },
+
+  async selectChildAdoptionAgencyDetails() {
+    await I.click(this.childDetails.adoptionAgencyLink);
+  },
+
+  async verifyChildAdoptionAgencyDetailsStatus() {
+    await I.see('COMPLETED', this.childDetails.adoptionAgencyDetailsStatus);
+  },
+
   async selectSiblingDetails() {
     await I.click(this.childDetails.childrenSiblingLink);
   },

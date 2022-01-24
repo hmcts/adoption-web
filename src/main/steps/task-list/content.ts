@@ -4,6 +4,8 @@ import { TranslationFn } from '../../app/controller/GetController';
 import * as urls from '../urls';
 
 import {
+  getAdoptionAgencyDetailStatus,
+  getAdoptionAgencyUrl,
   getAdoptionCertificateDetailsStatus,
   getBirthFatherDetailsStatus,
   getBirthMotherDetailsStatus,
@@ -66,7 +68,8 @@ const en = content => {
     section3link6: "Other parent's details",
     section3link7: 'Previous court orders for the child',
     section3link8: 'Court order details for any siblings or half-siblings',
-    section3link9: 'Sibling details',
+    section3link9: 'Adoption agency, social worker and solicitor details',
+    section3link10: 'Sibling details',
     section4: 'Add your adoption contacts',
     section4link1: 'Your adoption agency or local authority',
     section4link2: "The child's adoption agency or local authority",
@@ -124,6 +127,11 @@ const en = content => {
         'birth-mother-details-status'
       ),
       otherParent: getSectionStatusLabel(getOtherParentStatus(content.userCase), statuses, 'other-parent-status'),
+      adoptionAgency: getSectionStatusLabel(
+        getAdoptionAgencyDetailStatus(content.userCase),
+        statuses,
+        'adoption-agency'
+      ),
     },
     urls: {
       applyingWith: urls.APPLYING_WITH_URL,
@@ -141,6 +149,7 @@ const en = content => {
       birthFather: urls.BIRTH_FATHER_NAME_ON_CERTIFICATE,
       birthMotherDetails: urls.BIRTH_MOTHER_FULL_NAME,
       reviewApplicationPayAndSubmit: urls.CHECK_ANSWERS_URL,
+      adoptionAgency: getAdoptionAgencyUrl(content.userCase),
       siblingDetails: urls.SIBLING_EXISTS,
     },
   };
@@ -187,7 +196,8 @@ const cy = content => {
     section3link6: "Other parent's details (in welsh)",
     section3link7: 'Previous court orders for the child (in welsh) ',
     section3link8: 'Court order details for any siblings or half-siblings (in welsh) ',
-    section3link9: 'Sibling details',
+    section3link9: 'Adoption agency, social worker and solicitor details (in welsh) ',
+    section3link10: 'Sibling details',
     section4: 'Add your adoption contacts (in welsh) ',
     section4link1: 'Your adoption agency or local authority (in welsh) ',
     section4link2: "The child's adoption agency or local authority (in welsh) ",
@@ -245,6 +255,11 @@ const cy = content => {
         'birth-mother-details-status'
       ),
       otherParent: getSectionStatusLabel(getOtherParentStatus(content.userCase), statuses, 'other-parent-status'),
+      adoptionAgency: getSectionStatusLabel(
+        getAdoptionAgencyDetailStatus(content.userCase),
+        statuses,
+        'adoption-agency'
+      ),
     },
     urls: {
       applyingWith: urls.APPLYING_WITH_URL,
@@ -262,6 +277,7 @@ const cy = content => {
       birthFather: urls.BIRTH_FATHER_NAME_ON_CERTIFICATE,
       birthMotherDetails: urls.BIRTH_MOTHER_FULL_NAME,
       reviewApplicationPayAndSubmit: urls.CHECK_ANSWERS_URL,
+      adoptionAgency: getAdoptionAgencyUrl(content.userCase),
       siblingDetails: urls.SIBLING_EXISTS,
     },
   };

@@ -229,8 +229,16 @@
             </li>
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a href="{{urls.siblingDetails}}" class="govuk-link" aria-describedby="eligibility-completed">
+                    <a id="adoption-agency" href="{{urls.adoptionAgency}}" class="govuk-link" aria-describedby="eligibility-completed">
                         {{section3link9}}
+                    </a>
+                </span>
+                <p class="govuk-body">{{ status.adoptionAgency | safe }}</p>
+            </li>
+            <li class="app-task-list__item">
+                <span class="app-task-list__task-name">
+                    <a href="{{urls.siblingDetails}}" class="govuk-link" aria-describedby="eligibility-completed">
+                        {{section3link10}}
                     </a>
                 </span>
                 {% if data['siblings'] %}

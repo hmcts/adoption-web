@@ -712,18 +712,18 @@ export interface Parent {
 }
 
 export interface AdoptionAgencyOrLocalAuthority {
-  AdopAgencyOrLaId: string;
-  AdopAgencyOrLaName: string;
-  AdopAgencyOrLaPhoneNumber: string;
-  AdopAgencyOrLaContactName: string;
-  AdopAgencyOrLaContactEmail: string;
+  adopAgencyOrLaId: string;
+  adopAgencyOrLaName?: string;
+  adopAgencyOrLaPhoneNumber?: string;
+  adopAgencyOrLaContactName?: string;
+  adopAgencyOrLaContactEmail?: string;
 }
 
 export interface Sibling {
-  SiblingId: string;
-  SiblingFirstName: string;
-  SiblingLastNames: string;
-  SiblingPlacementOrders: ListValue<PlacementOrder>[];
+  siblingId: string;
+  siblingFirstName: string;
+  siblingLastNames: string;
+  siblingPlacementOrders: ListValue<PlacementOrder>[];
 }
 
 export interface SocialWorker {
