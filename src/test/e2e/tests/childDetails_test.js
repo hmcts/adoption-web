@@ -1,6 +1,6 @@
 const config = require('../config');
 
-Feature('Child Details');
+Feature('Child Details').retry(3);
 
 Scenario(
   'Child Details placement order details event',

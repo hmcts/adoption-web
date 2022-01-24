@@ -24,15 +24,14 @@ const idamUserManager = new IdamUserManager(sysConfig.get('services.idam.tokenUR
 
 export const autoLogin = {
   login: (I: CodeceptJS.I, username = TestUser, password = TestPass): void => {
-    console.log(process.env.ADOP_WEB_URL);
     I.amOnPage(`${process.env.ADOP_WEB_URL}`);
     I.wait(5);
-    I.waitForText('Sign in or create an account');
+    I.waitForText('Sign in or create an account', 30);
     I.fillField('username', username);
-    I.wait(3);
+    I.wait(2);
     I.fillField('password', password);
     I.click('Sign in');
-    I.wait(5);
+    I.waitForText('Are you applying on your own, or with someone else?', 30);
   },
   check: (I: CodeceptJS.I): void => {
     I.amOnPage(`${process.env.ADOP_WEB_URL}`);

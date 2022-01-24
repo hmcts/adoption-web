@@ -1,6 +1,6 @@
 const config = require('../config');
 
-Feature('Other applicant details section');
+Feature('Other applicant details section').retry(3);
 
 Scenario('Enter other applicant contact details', async ({ loginPage, otherApplicantDetailsPage, taskListPage }) => {
   await loginPage.createCitizenUserAndSignIn();
