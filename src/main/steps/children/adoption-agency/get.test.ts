@@ -29,13 +29,13 @@ describe('AdoptionAgencyGetController', () => {
 
   describe('when there is a selectedAdoptionAgencyId in userCase', () => {
     test('should not generate random adopAgencyOrLaId', async () => {
-      req = mockRequest({ session: { userCase: { selectedAdoptionAgencyId: 'MOCK_PLACEMENT_ORDER_ID' } } });
+      req = mockRequest({ session: { userCase: { selectedAdoptionAgencyId: 'MOCK_ADOPTION_AGENCY_ID' } } });
       req.locals.api.triggerEvent.mockResolvedValue({
-        selectedAdoptionAgencyId: 'MOCK_PLACEMENT_ORDER_ID',
-        adopAgencyOrLAs: [{ adopAgencyOrLaId: 'MOCK_PLACEMENT_ORDER_ID' }],
+        selectedAdoptionAgencyId: 'MOCK_ADOPTION_AGENCY_ID',
+        adopAgencyOrLAs: [{ adopAgencyOrLaId: 'MOCK_ADOPTION_AGENCY_ID' }],
       });
       await controller.get(req, res);
-      expect(req.session.userCase.selectedAdoptionAgencyId).toBe('MOCK_PLACEMENT_ORDER_ID');
+      expect(req.session.userCase.selectedAdoptionAgencyId).toBe('MOCK_ADOPTION_AGENCY_ID');
     });
   });
 
@@ -55,18 +55,18 @@ describe('AdoptionAgencyGetController', () => {
       req = mockRequest({
         session: {
           userCase: {
-            selectedAdoptionAgencyId: 'MOCK_PLACEMENT_ORDER_ID',
-            adopAgencyOrLAs: [{ adopAgencyOrLaId: 'MOCK_PLACEMENT_ORDER_ID' }],
+            selectedAdoptionAgencyId: 'MOCK_ADOPTION_AGENCY_ID',
+            adopAgencyOrLAs: [{ adopAgencyOrLaId: 'MOCK_ADOPTION_AGENCY_ID' }],
           },
         },
       });
       req.locals.api.triggerEvent.mockResolvedValue({
-        selectedAdoptionAgencyId: 'MOCK_PLACEMENT_ORDER_ID',
-        adopAgencyOrLAs: [{ adopAgencyOrLaId: 'MOCK_PLACEMENT_ORDER_ID' }],
+        selectedAdoptionAgencyId: 'MOCK_ADOPTION_AGENCY_ID',
+        adopAgencyOrLAs: [{ adopAgencyOrLaId: 'MOCK_ADOPTION_AGENCY_ID' }],
       });
 
       await controller.get(req, res);
-      expect(req.session.userCase.adopAgencyOrLAs).toEqual([{ adopAgencyOrLaId: 'MOCK_PLACEMENT_ORDER_ID' }]);
+      expect(req.session.userCase.adopAgencyOrLAs).toEqual([{ adopAgencyOrLaId: 'MOCK_ADOPTION_AGENCY_ID' }]);
     });
   });
 

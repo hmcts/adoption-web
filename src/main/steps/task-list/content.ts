@@ -5,6 +5,7 @@ import * as urls from '../urls';
 
 import {
   getAdoptionAgencyDetailStatus,
+  getAdoptionAgencyUrl,
   getAdoptionCertificateDetailsStatus,
   getBirthFatherDetailsStatus,
   getBirthMotherDetailsStatus,
@@ -24,14 +25,6 @@ const getSectionStatusLabel = (status, statuses, id) => {
   } else {
     return `<strong id="${id}" class="govuk-tag govuk-tag--grey app-task-list__tag">${statuses.notStarted}</strong>`;
   }
-};
-
-const getAdoptionAgencyUrl = userCase => {
-  if (userCase.adopAgencyOrLAs?.length) {
-    const adopAgency = userCase.adopAgencyOrLAs[0];
-    return `${urls.ADOPTION_AGENCY}?change=${adopAgency.adopAgencyOrLaId}`;
-  }
-  return `${urls.ADOPTION_AGENCY}?add=${Date.now()}`;
 };
 
 const en = content => {

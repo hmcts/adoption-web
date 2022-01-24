@@ -1,6 +1,7 @@
 import { CaseDate, CaseWithId, FieldPrefix } from '../../app/case/case';
 import { ContactDetails, SectionStatus, YesNoNotsure, YesOrNo } from '../../app/case/definition';
 import { isDateInputInvalid, notSureViolation } from '../../app/form/validation';
+import * as urls from '../urls';
 
 export const isApplyingWithComplete = (userCase: CaseWithId): boolean => {
   return !!userCase.applyingWith;
@@ -268,4 +269,12 @@ export const getAdoptionAgencyDetailStatus = (userCase: CaseWithId): SectionStat
     : !adopAgencyOrLAsComplete && !adopAgencyOrLAsInProgress
     ? SectionStatus.NOT_STARTED
     : SectionStatus.IN_PROGRESS;
+};
+
+export const getAdoptionAgencyUrl = (userCase: CaseWithId): string => {
+  if (userCase.adopAgencyOrLAs?.length) {
+    const adopAgency = userCase.adopAgencyOrLAs[0];
+    return `${urls?.ADOPTION_AGENCY}?change=${adopAgency.adopAgencyOrLaId}`;
+  }
+  return `${urls?.ADOPTION_AGENCY}?add=${Date.now()}`;
 };

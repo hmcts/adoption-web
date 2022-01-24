@@ -24,7 +24,7 @@ module.exports = {
     childrenBirthFatherLink: 'a[id$="children-birth-father"]',
     childrenBirthFatherDetailsStatus: 'strong[id$="birth-father-status"]',
     adoptionAgencyLink: 'a[id$="adoption-agency"]',
-    adoptionAgencyDetailsStatus: 'strong[id$="birth-father-status"]',
+    adoptionAgencyDetailsStatus: 'strong[id$="adoption-agency"]',
     childrenSiblingLink: 'a[href$="/sibling/exists"]',
     childrenSiblingDetailsStatus: 'strong[id$="birth-father-status"]',
   },

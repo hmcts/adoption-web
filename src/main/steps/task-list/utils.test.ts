@@ -10,6 +10,7 @@ import {
 } from '../../app/case/definition';
 
 import {
+  getAdoptionAgencyUrl,
   getAdoptionCertificateDetailsStatus,
   getBirthFatherDetailsStatus,
   getBirthMotherDetailsStatus,
@@ -29,6 +30,7 @@ const userCase: CaseWithId = {
   payments: [],
   applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },
   addAnotherNationality: YesOrNo.NO,
+  adopAgencyOrLAs: [{ adopAgencyOrLaId: '1609459200099' }, { adopAgencyOrLaId: '1609459200000' }],
 };
 
 const NOT_STARTED = 'NOT_STARTED';
@@ -650,6 +652,13 @@ describe('utils', () => {
       },
     ])('should return correct status %o', async ({ data, expected }) => {
       expect(getBirthMotherDetailsStatus({ ...userCase, ...data })).toBe(expected);
+    });
+  });
+
+  Date.now = jest.fn(() => +new Date('2021-01-01'));
+  describe('getAdoptionAgencyUrl()', () => {
+    test('Should return adoption agency add url when adoption-agency count 2', async () => {
+      expect(getAdoptionAgencyUrl(userCase)).toBe('/children/adoption-agency?change=1609459200099');
     });
   });
 });

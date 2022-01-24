@@ -11,7 +11,6 @@ export default class AdoptionAgencyGetController extends GetController {
 
     let redirect = false;
     if (req.query.add) {
-      console.log('req.query.add 14: ' + req.query.add);
       req.session.userCase.selectedAdoptionAgencyId = `${req.query.add}`;
       req.session.userCase.hasAnotherAdopAgencyOrLA = undefined;
       delete req.query.add;
@@ -29,7 +28,6 @@ export default class AdoptionAgencyGetController extends GetController {
       //generate random id for adoption agency if there are no adoption agency
       req.session.userCase.selectedAdoptionAgencyId = adopAgencyOrLAs[0]?.adopAgencyOrLaId || `${Date.now()}`;
     }
-    console.log('get 38 ' + req.session.userCase.selectedAdoptionAgencyId);
     let adopAgency = adopAgencyOrLAs.find(
       item => item.adopAgencyOrLaId === req.session.userCase.selectedAdoptionAgencyId
     );
@@ -55,7 +53,7 @@ export default class AdoptionAgencyGetController extends GetController {
       );
     } catch (err) {
       req.locals.logger.error('Error saving', err);
-      //req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+      req.session.errors?.push({ errorType: 'errorSaving', propertyName: '*' });
     }
 
     req.session.save(err => {

@@ -59,9 +59,32 @@ describe('childrenSequence', () => {
     expect(
       childrenSequence[11].getNextStep({ adopAgencyOrLAs: [{ adopAgencyOrLaId: '1' }, { adopAgencyOrLaId: '2' }] })
     ).toBe('/children/other-adoption-agency');
+    expect(childrenSequence[11].getNextStep({ adopAgencyOrLAs: [{ adopAgencyOrLaId: '1' }] })).toBe(
+      '/children/other-adoption-agency'
+    );
+    expect(childrenSequence[11].getNextStep({ adopAgencyOrLAs: [] })).toBe('/children/other-adoption-agency');
+    expect(
+      childrenSequence[11].getNextStep({
+        selectedAdoptionAgencyId: '1609459200000',
+        adopAgencyOrLAs: [{ adopAgencyOrLaId: '1609459200099' }, { adopAgencyOrLaId: '1609459200000' }],
+      })
+    ).toBe('/task-list');
 
+    Date.now = jest.fn(() => +new Date('2021-01-01'));
     expect(childrenSequence[12].url).toBe('/children/other-adoption-agency');
     expect(childrenSequence[12].showInSection).toBe('aboutChildren');
     expect(childrenSequence[12].getNextStep({ hasAnotherAdopAgencyOrLA: YesOrNo.NO })).toBe('/task-list');
+    expect(
+      childrenSequence[12].getNextStep({
+        hasAnotherAdopAgencyOrLA: YesOrNo.YES,
+        adopAgencyOrLAs: [{ adopAgencyOrLaId: '1609459200099' }],
+      })
+    ).toBe('/children/adoption-agency?add=1609459200000');
+    expect(
+      childrenSequence[12].getNextStep({
+        hasAnotherAdopAgencyOrLA: YesOrNo.YES,
+        adopAgencyOrLAs: [{ adopAgencyOrLaId: '1' }, { adopAgencyOrLaId: '2' }],
+      })
+    ).toBe('/children/adoption-agency?change=2');
   });
 });
