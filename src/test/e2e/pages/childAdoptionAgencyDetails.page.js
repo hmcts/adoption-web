@@ -29,5 +29,6 @@ module.exports = {
     I.fillField(this.fields.adopAgencyOrLaContactEmail, 'test.another@example.com');
     I.wait('2');
     I.click('Save and continue');
+    I.wait('2');
   },
 };

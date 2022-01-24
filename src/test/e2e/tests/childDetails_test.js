@@ -65,6 +65,7 @@ Scenario(
     await taskListPage.goToTaskListPage();
     await taskListPage.selectChildAdoptionAgencyDetails();
     await childAdoptionAgencyDetailsPage.childAdoptionAgencyDetailsSection();
+    await taskListPage.verifyChildAdoptionAgencyDetailsStatus;
   }
 );
 Scenario('Child sibling details event', async ({ loginPage, childSiblingDetailsPage, taskListPage }) => {
