@@ -61,4 +61,25 @@ export const childrenSequence: Step[] = [
     showInSection: Sections.AboutChildren,
     getNextStep: () => Urls.TASK_LIST_URL,
   },
+  {
+    url: Urls.ADOPTION_AGENCY,
+    showInSection: Sections.AboutChildren,
+    getNextStep: userCase =>
+      userCase.adopAgencyOrLAs!.length < 2
+        ? Urls.OTHER_ADOPTION_AGENCY
+        : userCase.adopAgencyOrLAs?.length === 2 &&
+          userCase.selectedAdoptionAgencyId === userCase.adopAgencyOrLAs[1].adopAgencyOrLaId
+        ? Urls.TASK_LIST_URL
+        : Urls.OTHER_ADOPTION_AGENCY,
+  },
+  {
+    url: Urls.OTHER_ADOPTION_AGENCY,
+    showInSection: Sections.AboutChildren,
+    getNextStep: userCase =>
+      userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO
+        ? Urls.TASK_LIST_URL
+        : userCase.adopAgencyOrLAs !== undefined && userCase.adopAgencyOrLAs?.length < 2
+        ? `${Urls.ADOPTION_AGENCY}?add=${Date.now()}`
+        : `${Urls.ADOPTION_AGENCY}?change=${userCase.adopAgencyOrLAs![1].adopAgencyOrLaId}`,
+  },
 ];
