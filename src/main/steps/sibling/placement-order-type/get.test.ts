@@ -1,11 +1,11 @@
-// jest.mock('../placement-order/get');
+jest.mock('../placement-order/get');
 
-// import PlacementOrderGetController from '../placement-order/get';
+import PlacementOrderGetController from '../placement-order/get';
 
-// import GetController from './get';
+import GetController from './get';
 
-// describe('children > placement-order-type get', () => {
-//   test('should re-export placement-order get controller', () => {
-//     expect(GetController).toBe(PlacementOrderGetController);
-//   });
-// });
+describe('children > placement-order-type get', () => {
+  test.skip('should re-export placement-order get controller', () => {
+    expect(GetController).toBe(PlacementOrderGetController);
+  });
+});
