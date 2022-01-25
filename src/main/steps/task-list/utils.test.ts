@@ -10,6 +10,7 @@ import {
 } from '../../app/case/definition';
 
 import {
+  getAdoptionAgencyUrl,
   getAdoptionCertificateDetailsStatus,
   getBirthFatherDetailsStatus,
   getBirthMotherDetailsStatus,
@@ -28,7 +29,6 @@ const userCase: CaseWithId = {
   documentsGenerated: [],
   payments: [],
   applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },
-  addAnotherNationality: YesOrNo.NO,
 };
 
 const NOT_STARTED = 'NOT_STARTED';
@@ -634,6 +634,17 @@ describe('utils', () => {
       },
       {
         data: {
+          birthMotherFirstNames: 'MOCKNAME',
+          birthMotherLastNames: 'MOCKNAME',
+          birthMotherStillAlive: YesNoNotsure.YES,
+          birthMotherNationality: ['Other'],
+          birthMotherAddressKnown: YesOrNo.NO,
+        },
+        userType: 'birthMother',
+        expected: 'IN_PROGRESS',
+      },
+      {
+        data: {
           birthMotherStillAlive: YesNoNotsure.YES,
           birthMotherFirstNames: 'MOCKNAME',
           birthMotherLastNames: 'MOCKNAME',
@@ -650,6 +661,92 @@ describe('utils', () => {
       },
     ])('should return correct status %o', async ({ data, expected }) => {
       expect(getBirthMotherDetailsStatus({ ...userCase, ...data })).toBe(expected);
+    });
+  });
+
+  Date.now = jest.fn(() => +new Date('2021-01-01'));
+  describe('getAdoptionAgencyUrl()', () => {
+    test('Should return adoption agency add url when adoption-agency count 0', async () => {
+      expect(getAdoptionAgencyUrl(userCase)).toBe('/children/adoption-agency?add=1609459200000');
+    });
+
+    test('Should return adoption agency add url when adoption-agency count: 2 and hasAnotherAdopAgencyOrLA: NO', async () => {
+      expect(
+        getAdoptionAgencyUrl({
+          id: '123',
+          state: State.Draft,
+          connections: [],
+          documentsGenerated: [],
+          applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },
+          adopAgencyOrLAs: [
+            {
+              adopAgencyOrLaId: '1',
+              adopAgencyOrLaName: 'a',
+              adopAgencyOrLaContactName: 'a',
+              adopAgencyOrLaPhoneNumber: '09876543210',
+              adopAgencyOrLaContactEmail: 'a@a.a',
+            },
+            {
+              adopAgencyOrLaId: '2',
+              adopAgencyOrLaName: 'a',
+              adopAgencyOrLaContactName: 'a',
+              adopAgencyOrLaPhoneNumber: '09876543210',
+              adopAgencyOrLaContactEmail: 'a@a.a',
+            },
+          ],
+          hasAnotherAdopAgencyOrLA: YesOrNo.NO,
+        })
+      ).toBe('/children/adoption-agency?change=1');
+    });
+
+    test('Should return adoption agency add url when adoption-agency count: 2 and hasAnotherAdopAgencyOrLA: Yes', async () => {
+      expect(
+        getAdoptionAgencyUrl({
+          id: '123',
+          state: State.Draft,
+          connections: [],
+          documentsGenerated: [],
+          applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },
+          adopAgencyOrLAs: [
+            {
+              adopAgencyOrLaId: '1',
+              adopAgencyOrLaName: 'a',
+              adopAgencyOrLaContactName: 'a',
+              adopAgencyOrLaPhoneNumber: '09876543210',
+              adopAgencyOrLaContactEmail: 'a@a.a',
+            },
+            {
+              adopAgencyOrLaId: '2',
+              adopAgencyOrLaName: 'a',
+              adopAgencyOrLaContactName: 'a',
+              adopAgencyOrLaPhoneNumber: '09876543210',
+              adopAgencyOrLaContactEmail: 'a@a.a',
+            },
+          ],
+          hasAnotherAdopAgencyOrLA: YesOrNo.YES,
+        })
+      ).toBe('/children/adoption-agency?change=1');
+    });
+
+    test('Should return adoption agency add url when adoption-agency count: 1, hasAnotherAdopAgencyOrLA: NO and phone number not available', async () => {
+      expect(
+        getAdoptionAgencyUrl({
+          id: '123',
+          state: State.Draft,
+          connections: [],
+          documentsGenerated: [],
+          applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },
+          adopAgencyOrLAs: [
+            {
+              adopAgencyOrLaId: '1',
+              adopAgencyOrLaName: 'a',
+              adopAgencyOrLaContactName: 'a',
+              adopAgencyOrLaContactEmail: 'a@a.a',
+            },
+          ],
+          hasAnotherAdopAgencyOrLA: YesOrNo.NO,
+        })
+      ).toBe('/children/adoption-agency?change=1');
     });
   });
 });

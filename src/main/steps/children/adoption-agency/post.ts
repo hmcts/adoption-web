@@ -5,10 +5,9 @@ import { getNextStepUrl } from '../..';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
-import { ValidationError } from '../../../app/form/validation';
 
 @autobind
-export default class PlacementOrderPostController extends PostController<AnyObject> {
+export default class AdoptionAgencyPostController extends PostController<AnyObject> {
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
     const form = new Form(fields);
@@ -16,16 +15,11 @@ export default class PlacementOrderPostController extends PostController<AnyObje
 
     req.session.errors = form.getErrors(formData);
 
-    const placementOrder = req.session.userCase.placementOrders?.find(
-      item => item.placementOrderId === req.session.userCase.selectedPlacementOrderId
+    const adoptionAgency = req.session.userCase.adopAgencyOrLAs?.find(
+      item => item.adopAgencyOrLaId === req.session.userCase.selectedAdoptionAgencyId
     );
 
-    Object.assign(placementOrder, formData);
-
-    if (req.body.saveAsDraft) {
-      // skip empty field errors in case of save as draft
-      req.session.errors = req.session.errors.filter(item => item.errorType !== ValidationError.REQUIRED);
-    }
+    Object.assign(adoptionAgency, formData);
 
     const nextUrl = req.session.errors.length > 0 ? req.url : getNextStepUrl(req, req.session.userCase);
 
@@ -33,8 +27,8 @@ export default class PlacementOrderPostController extends PostController<AnyObje
       req.session.userCase = await this.save(
         req,
         {
-          placementOrders: req.session.userCase.placementOrders,
-          selectedPlacementOrderId: req.session.userCase.selectedPlacementOrderId,
+          adopAgencyOrLAs: req.session.userCase.adopAgencyOrLAs,
+          selectedAdoptionAgencyId: req.session.userCase.selectedAdoptionAgencyId,
         },
         this.getEventName(req)
       );

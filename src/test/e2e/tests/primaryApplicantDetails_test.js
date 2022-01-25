@@ -1,6 +1,6 @@
 const config = require('../config');
 
-Feature('Primary applicant details section');
+Feature('Primary applicant details section').retry(3);
 
 Scenario(
   'Enter primary applicant contact details',

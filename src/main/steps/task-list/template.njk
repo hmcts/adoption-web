@@ -14,22 +14,7 @@
                             <h2 class="app-task-list__section">
                                 <span class="app-task-list__section-number">1. </span>{{section1}}
                             </h2>
-                                        <ul class="app-task-list__items">
-                <div class="govuk-inset-text home-office-inset-text">
-                    <p>{{insetTextLine1}}</p>
-                    <ul class="govuk-list govuk-list--bullet">
-                        <li>{{insetTextLine2}}</li>
-                        <li>{{insetTextLine3}}</li>
-                    </ul>
-                    <p>{{insetTextLine4}}</p>
-                    <ul class="govuk-list govuk-list--bullet">
-                        <li>{{insetTextLine5}}</li>
-                        <li>{{insetTextLine6}}</li>
-                        <li>{{insetTextLine7}}</li>
-                        <li>{{insetTextLine8}}</li>
-                    </ul>
-                </div>
-
+                            <ul class="app-task-list__items">
                                 <!-- Number of applicants -->
                                 <li class="app-task-list__item">
                                     <span class="app-task-list__task-name">
@@ -56,104 +41,63 @@
                                         <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
                                     {% endif %}
                                 </li>
-                            </ul>
 
-                            <!-- **************************************** 2. Add applicants' details **************************************** -->
-                                <ul class="app-task-list__items">
-
-                                <p class="govuk-!-font-weight-bold govuk-!-margin-top-7">{{section2subheading2}}</p>
-
+                                <!-- **************************************** 2. Add applicants' details **************************************** -->
+                                {% if userCase.applyingWith != 'alone' %}
+                                    <p class="govuk-!-font-weight-bold govuk-!-margin-top-7 govuk-!-margin-bottom-2">{{section2subheading2}}</p>
+                                {% endif %}
                                 <!-- First applicant - personal details -->
                                 <li class="app-task-list__item">
                                     <span class="app-task-list__task-name">
                                         <a id="applicant1-personal-details" href="{{urls.applicant1PersonalDetails}}" class="govuk-link" aria-describedby="eligibility-completed">
                                             {{section2subheading2line1}}
                                         </a>
-                                    </a>
-                                </span>
-                            <p class="govuk-body">{{ status.applicant1PersonalDetails | safe }}</p>
+                                    </span>
+                                    <p class="govuk-body">{{ status.applicant1PersonalDetails | safe }}</p>
+                                </li>
 
-                            </li>
+                                <!-- First applicant - contact details -->
+                                <li class="app-task-list__item">
+                                    <span class="app-task-list__task-name">
+                                        <a id="applicant1-contact-details" href="{{urls.applicant1ContactDetails}}" class="govuk-link" aria-describedby="eligibility-completed">
+                                            {{section2subheading2line2}}
+                                        </a>
+                                    </span>
+                                    <p class="govuk-body">{{ status.applicant1ContactDetails | safe }}</p>
+                                </li>
 
-                            <!-- First applicant - contact details -->
-                            <li class="app-task-list__item">
-                                <span class="app-task-list__task-name">
-                                    <a id="applicant1-contact-details" href="{{urls.applicant1ContactDetails}}" class="govuk-link" aria-describedby="eligibility-completed">
-                                        {{section2subheading2line2}}
-                                    </a>
-                                </a>
-                            </span>
-                            <p class="govuk-body">{{ status.applicant1ContactDetails | safe }}</p>
+                                {% if userCase.applyingWith != 'alone' %}
+                                    <p class="govuk-!-font-weight-bold govuk-!-margin-top-7 govuk-!-margin-bottom-2">{{section2subheading3}}</p>
+                                
+                                    <!-- Second applicant - personal details -->
+                                    <li class="app-task-list__item">
+                                        <span class="app-task-list__task-name">
+                                            <a id="applicant2-personal-details" href="{{urls.applicant2PersonalDetails}}" class="govuk-link" aria-describedby="eligibility-completed">
+                                                {{section2subheading3line1}}
+                                            </a>
+                                        </span>
+                                        <p class="govuk-body">{{ status.applicant2PersonalDetails | safe }}</p>
+                                    </li>
+
+                                    <!-- Second applicant - contact details -->
+                                    <li class="app-task-list__item">
+                                        <span class="app-task-list__task-name">
+                                            <a id="applicant2-contact-details" href="{{urls.applicant2ContactDetails}}" class="govuk-link" aria-describedby="eligibility-completed">
+                                                {{section2subheading3line2}}
+                                            </a>
+                                        </span>
+                                        <p class="govuk-body">{{ status.applicant2ContactDetails | safe }}</p>
+                                    </li>
+                                {% endif %}
+                            </ul>
                         </li>
-
-                        <!-- First applicant - upload identity documents -->
-                        <li class="app-task-list__item">
-                            <span class="app-task-list__task-name">
-                                <a href="#" class="govuk-link" aria-describedby="eligibility-completed">{{section2subheading2line3}}</a>
-                            </span>
-                            {% if data['personal-photo'] %}
-                                <strong class="govuk-tag  app-task-list__tag" id="eligibility-completed">Completed</strong>
-                            {% else %}
-                                <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
-                            {% endif %}
-                        </li>
-
-                        <p class="govuk-!-font-weight-bold govuk-!-margin-top-7">{{section2subheading3}}</p>
-
-                        <!-- Second applicant - personal details -->
-                        <li class="app-task-list__item">
-                            <span class="app-task-list__task-name">
-                                <a id="applicant2-personal-details" href="{{urls.applicant2PersonalDetails}}" class="govuk-link" aria-describedby="eligibility-completed">
-                                    {{section2subheading3line1}}
-                                </a>
-                            </a>
-                        </span>
-                        <p class="govuk-body">{{ status.applicant2PersonalDetails | safe }}</p>
-                    </li>
-
-                    <!-- Second applicant - contact details -->
-                    <li class="app-task-list__item">
-                        <span class="app-task-list__task-name">
-                            <a id="applicant2-contact-details" href="{{urls.applicant2ContactDetails}}" class="govuk-link" aria-describedby="eligibility-completed">
-                                {{section2subheading3line2}}
-                            </a>
-                        </a>
-                    </span>
-                    <p class="govuk-body">{{ status.applicant2ContactDetails | safe }}</p>
-                </li>
-
-                <!-- Second applicant - upload identity documents -->
-                <li class="app-task-list__item">
-                    <span class="app-task-list__task-name">
-                        <a href="#" class="govuk-link" aria-describedby="eligibility-completed">
-                            {{section2subheading3line3}}
-                        </a>
-                    </a>
-                </span>
-                {% if data['personal-photo'] %}
-                    <strong class="govuk-tag  app-task-list__tag" id="eligibility-completed">Completed</strong>
-                {% else %}
-                    <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
-                {% endif %}
-            </li>
-
-        </ul>
-    </li>
 
     <!-- **************************************** 3. Add the child's details **************************************** -->
     <li>
         <h2 class="app-task-list__section">
-            <span class="app-task-list__section-number">3. </span>{{section3}}
+            <span class="app-task-list__section-number">2. </span>{{section3}}
         </h2>
         <ul class="app-task-list__items">
-            <div class="govuk-inset-text home-office-inset-text">
-                <p class="govuk-body">{{insetTextLine9}}</p>
-                <p class="govuk-body">{{insetTextLine10}}</p>
-            </div>
-
-            <p class="govuk-body-l"></p>
-
-            <!-- <p><strong>First child</strong></p><-->
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
                     <a id="children-birth-certificate" href="{{urls.childrenBirthCertificate}}" class="govuk-link" aria-describedby="eligibility-completed">
@@ -229,6 +173,14 @@
             </li>
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
+                    <a id="adoption-agency" href="{{urls.adoptionAgency}}" class="govuk-link" aria-describedby="eligibility-completed">
+                        {{section3link9}}
+                    </a>
+                </span>
+                <p class="govuk-body">{{ status.adoptionAgency | safe }}</p>
+            </li>
+            <li class="app-task-list__item">
+                <span class="app-task-list__task-name">
                     <a id = "sibling-status" href="{{urls.siblingDetails}}" class="govuk-link" aria-describedby="eligibility-completed">
                         {{section3link9}}
                     </a>
@@ -241,7 +193,7 @@
     <!-- **************************************** 4. Add your adoption contacts **************************************** -->
     <li>
         <h2 class="app-task-list__section">
-            <span class="app-task-list__section-number">4. </span>{{section4}}
+            <span class="app-task-list__section-number">3. </span>{{section4}}
         </h2>
         <ul class="app-task-list__items">
             <li class="app-task-list__item">
@@ -287,7 +239,7 @@
     <!-- **************************************** 5. Declare payments **************************************** -->
     <li>
         <h2 class="app-task-list__section">
-            <span class="app-task-list__section-number">5. </span>{{section5}}
+            <span class="app-task-list__section-number">4. </span>{{section5}}
         </h2>
         <ul class="app-task-list__items">
             <li class="app-task-list__item">
@@ -308,14 +260,9 @@
     <!-- **************************************** 6. Review application, pay and send **************************************** -->
     <li>
         <h2 class="app-task-list__section">
-            <span class="app-task-list__section-number">6. </span>{{section6}}
+            <span class="app-task-list__section-number">5. </span>{{section6}}
         </h2>
         <ul class="app-task-list__items">
-            <div class="govuk-inset-text home-office-inset-text">
-                {{insetTextLine11}}
-            </div>
-            <p class="govuk-body-l"></p>
-
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
                     <a href="#" class="govuk-link">

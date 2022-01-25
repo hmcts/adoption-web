@@ -1,6 +1,7 @@
 import { CaseDate, CaseWithId, FieldPrefix } from '../../app/case/case';
 import { ContactDetails, PlacementOrder, SectionStatus, YesNoNotsure, YesOrNo } from '../../app/case/definition';
 import { isDateInputInvalid, notSureViolation } from '../../app/form/validation';
+import * as urls from '../urls';
 
 export const isApplyingWithComplete = (userCase: CaseWithId): boolean => {
   return !!userCase.applyingWith;
@@ -272,4 +273,56 @@ export const getSiblingStatus = (userCase: CaseWithId): SectionStatus => {
     }
   }
   return SectionStatus.NOT_STARTED;
+};
+
+export const getAdoptionAgencyDetailStatus = (userCase: CaseWithId): SectionStatus => {
+  let adopAgencyOrLAsComplete = false;
+
+  if (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO && userCase.adopAgencyOrLAs?.length === 2) {
+    const item = userCase.adopAgencyOrLAs[0];
+    adopAgencyOrLAsComplete = !!(
+      item.adopAgencyOrLaName &&
+      item.adopAgencyOrLaContactName &&
+      item.adopAgencyOrLaPhoneNumber &&
+      item.adopAgencyOrLaContactEmail
+    );
+  } else {
+    adopAgencyOrLAsComplete =
+      ((userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO && userCase.adopAgencyOrLAs?.length === 1) ||
+        (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.YES && userCase.adopAgencyOrLAs?.length === 2)) &&
+      userCase.adopAgencyOrLAs.every(item => {
+        return (
+          item.adopAgencyOrLaName &&
+          item.adopAgencyOrLaContactName &&
+          item.adopAgencyOrLaPhoneNumber &&
+          item.adopAgencyOrLaContactEmail
+        );
+      });
+  }
+
+  const adopAgencyOrLAsInProgress =
+    userCase.hasAnotherAdopAgencyOrLA ||
+    (userCase.adopAgencyOrLAs?.length &&
+      userCase.adopAgencyOrLAs.some(item => {
+        return (
+          item.adopAgencyOrLaName ||
+          item.adopAgencyOrLaContactName ||
+          item.adopAgencyOrLaPhoneNumber ||
+          item.adopAgencyOrLaContactEmail
+        );
+      }));
+
+  return adopAgencyOrLAsComplete
+    ? SectionStatus.COMPLETED
+    : !adopAgencyOrLAsComplete && !adopAgencyOrLAsInProgress
+    ? SectionStatus.NOT_STARTED
+    : SectionStatus.IN_PROGRESS;
+};
+
+export const getAdoptionAgencyUrl = (userCase: CaseWithId): string => {
+  if (userCase.adopAgencyOrLAs?.length) {
+    const adopAgency = userCase.adopAgencyOrLAs[0];
+    return `${urls?.ADOPTION_AGENCY}?change=${adopAgency.adopAgencyOrLaId}`;
+  }
+  return `${urls?.ADOPTION_AGENCY}?add=${Date.now()}`;
 };

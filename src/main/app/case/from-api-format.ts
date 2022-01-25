@@ -55,6 +55,11 @@ const fields: FromApiConverters = {
       ),
     })),
   }),
+  adopAgencyOrLAs: data => ({
+    adopAgencyOrLAs: data.adopAgencyOrLAs?.map(item => ({
+      ...item.value,
+    })),
+  }),
   applicant1DateOfBirth: data => ({
     applicant1DateOfBirth: fromApiDate(data.applicant1DateOfBirth),
   }),

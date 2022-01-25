@@ -1,10 +1,17 @@
-const {I} = inject();
+const { I } = inject();
 
 module.exports = {
   fields: {
-    headerName: 'h1'
+    applyingWith: 'input[id$="applyingWith"]',
   },
   async seeTheLandingPage() {
-    await I.seeElement(this.fields.headerName);
-  }
+    I.wait('2');
+    await I.seeElement(this.fields.applyingWith);
+  },
+
+  selectApplyOnMyownSection() {
+    I.click(this.fields.applyingWith);
+    I.click('Save and continue');
+    I.wait('2');
+  },
 };

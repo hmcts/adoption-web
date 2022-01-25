@@ -1,6 +1,6 @@
 const config = require('../config');
 
-Feature('Child Details');
+Feature('Child Details').retry(3);
 
 Scenario(
   'Child Details placement order details event',
@@ -56,4 +56,21 @@ Scenario('Child other parent details event', async ({ loginPage, childOtherParen
   await taskListPage.selectChildOtherParentDetails();
   await childOtherParentDetailsPage.childOtherParentDetailsSection();
   await taskListPage.verifyChildOtherParentDetailsStatus();
+});
+
+Scenario(
+  'Child adoption agency or local authority details event',
+  async ({ loginPage, childAdoptionAgencyDetailsPage, taskListPage }) => {
+    await loginPage.createCitizenUserAndSignIn();
+    await taskListPage.goToTaskListPage();
+    await taskListPage.selectChildAdoptionAgencyDetails();
+    await childAdoptionAgencyDetailsPage.childAdoptionAgencyDetailsSection();
+    await taskListPage.verifyChildAdoptionAgencyDetailsStatus;
+  }
+);
+Scenario('Child sibling details event', async ({ loginPage, childSiblingDetailsPage, taskListPage }) => {
+  await loginPage.createCitizenUserAndSignIn();
+  await taskListPage.goToTaskListPage();
+  await taskListPage.selectSiblingDetails();
+  await childSiblingDetailsPage.childDetailsSiblingSection();
 });
