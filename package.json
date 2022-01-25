@@ -97,7 +97,7 @@
     "@babel/preset-env": "^7.16.8",
     "@types/copy-webpack-plugin": "^8.0.1",
     "@types/jest": "^27.0.2",
-    "@types/mini-css-extract-plugin": "^2.4.0",
+    "@types/mini-css-extract-plugin": "^2.5.1",
     "@types/webpack-dev-middleware": "^5.0.2",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
