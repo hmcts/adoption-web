@@ -50,7 +50,6 @@ const fields: FromApiConverters = {
       siblingPlacementOrders: ((sibling.value.siblingPlacementOrders || []) as ListValue<PlacementOrder>[]).map(
         placementOrder => ({
           ...placementOrder.value,
-          placementOrderDate: fromApiDate(placementOrder.value.placementOrderDate),
         })
       ),
     })),

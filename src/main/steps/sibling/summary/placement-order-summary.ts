@@ -1,5 +1,4 @@
 import { PlacementOrder } from '../../../app/case/definition';
-import { SIBLING_ORDER_SUMMARY } from '../../urls';
 
 const isPlacementOrderComplete = placementOrder => {
   return placementOrder.placementOrderType && placementOrder.placementOrderNumber;
@@ -24,7 +23,7 @@ export const placementOrderListItems = (placementOrders: PlacementOrder[], conte
             visuallyHiddenText: 'change',
           },
           {
-            href: `${SIBLING_ORDER_SUMMARY}?remove=${item.placementOrderId}`,
+            href: '#',
             text: content.remove,
             visuallyHiddenText: 'remove',
           },

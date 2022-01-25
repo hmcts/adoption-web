@@ -8,7 +8,7 @@ import { GetController } from '../../../app/controller/GetController';
 @autobind
 export default class SiblingPlacementOrderGetController extends GetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
-    const siblings = req.session.userCase.siblings;
+    const sibling = req.session.userCase.siblings;
     const siblingObject = req.session.userCase.siblings?.find(
       item => item.siblingId === req.session.userCase.selectedSiblingId
     );
@@ -40,7 +40,7 @@ export default class SiblingPlacementOrderGetController extends GetController {
       placementOrders.push(placementOrder);
     }
 
-    req.session.userCase.siblings = siblings;
+    req.session.userCase.siblings = sibling;
 
     try {
       req.session.userCase = await this.save(
@@ -54,7 +54,7 @@ export default class SiblingPlacementOrderGetController extends GetController {
       );
     } catch (err) {
       req.locals.logger.error('Error saving', err);
-      //req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+      req.session.errors?.push({ errorType: 'errorSaving', propertyName: '*' });
     }
 
     req.session.save(err => {

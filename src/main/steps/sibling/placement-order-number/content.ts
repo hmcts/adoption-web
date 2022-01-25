@@ -28,8 +28,8 @@ const cy = () => ({
 
 export const form: FormContent = {
   fields: userCase => {
-    const siblings = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
-    const siblingPlacementOrders = siblings?.siblingPlacementOrders?.find(
+    const sibling = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
+    const siblingPlacementOrder = sibling?.siblingPlacementOrders?.find(
       item => (item as PlacementOrder).placementOrderId === userCase.selectedSiblingPoId
     );
     return {
@@ -38,7 +38,7 @@ export const form: FormContent = {
         classes: 'govuk-label govuk-input--width-10',
         label: l => l.label,
         hint: l => l.hint,
-        value: (siblingPlacementOrders as PlacementOrder)?.placementOrderNumber,
+        value: (siblingPlacementOrder as PlacementOrder)?.placementOrderNumber,
         labelSize: 'l',
         attributes: {
           spellcheck: false,

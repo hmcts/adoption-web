@@ -26,8 +26,8 @@ const cy = () => ({
 
 export const form: FormContent = {
   fields: userCase => {
-    const siblings = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
-    const siblingPlacementOrders = siblings?.siblingPlacementOrders?.find(
+    const sibling = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
+    const siblingPlacementOrder = sibling?.siblingPlacementOrders?.find(
       item => (item as PlacementOrder).placementOrderId === userCase.selectedSiblingPoId
     );
     return {
@@ -35,7 +35,7 @@ export const form: FormContent = {
         type: 'text',
         classes: 'govuk-label',
         label: l => l.label,
-        value: (siblingPlacementOrders as PlacementOrder)?.placementOrderType,
+        value: (siblingPlacementOrder as PlacementOrder)?.placementOrderType,
         labelSize: 'l',
         attributes: {
           spellcheck: false,

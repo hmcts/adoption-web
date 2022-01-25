@@ -16,11 +16,11 @@ export default class SiblingPostController extends PostController<AnyObject> {
 
     req.session.errors = form.getErrors(formData);
 
-    const siblingNames = req.session.userCase.siblings?.find(
+    const sibling = req.session.userCase.siblings?.find(
       item => item.siblingId === req.session.userCase.selectedSiblingId
     );
 
-    Object.assign(siblingNames, formData);
+    Object.assign(sibling, formData);
 
     if (req.body.saveAsDraft) {
       // skip empty field errors in case of save as draft
@@ -40,7 +40,7 @@ export default class SiblingPostController extends PostController<AnyObject> {
       );
     } catch (err) {
       req.locals.logger.error('Error saving', err);
-      //req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
     }
 
     req.session.save(err => {

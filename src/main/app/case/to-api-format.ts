@@ -83,7 +83,6 @@ const fields: ToApiConverters = {
             id: generateUuid(),
             value: {
               ...item2,
-              placementOrderDate: toApiDate(item2.placementOrderDate as CaseDate),
             },
           })
         ),
