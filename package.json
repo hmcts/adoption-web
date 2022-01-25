@@ -24,7 +24,8 @@
     "cichecks": "yarn && run-p build lint test",
     "test:functional:skip": "echo 'Not running functional cases in Master' && exit 0",
     "test:crossbrowser-e2e": "MOCHAWESOME_REPORTFILENAME=crossbrowser codeceptjs run-multiple --grep \"@cross-browser\" ${BROWSER_GROUP:-'--all'} -c saucelabs.conf.js --reporter mocha-multi",
-    "test:crossbrowser": "./bin/run-crossbrowser-tests.sh"
+    "test:crossbrowser": "./bin/run-crossbrowser-tests.sh",
+    "test:local": "codeceptjs run-multiple parallel"
   },
   "dependencies": {
     "@hmcts/cookie-manager": "^0.0.4",

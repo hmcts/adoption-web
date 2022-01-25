@@ -8,4 +8,10 @@ module.exports = {
     I.wait('2');
     await I.seeElement(this.fields.applyingWith);
   },
+
+  selectApplyOnMyownSection() {
+    I.click(this.fields.applyingWith);
+    I.click('Save and continue');
+    I.wait('2');
+  },
 };

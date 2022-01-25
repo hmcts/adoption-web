@@ -24,7 +24,7 @@ module.exports = {
     childrenBirthFatherLink: 'a[id$="children-birth-father"]',
     childrenBirthFatherDetailsStatus: 'strong[id$="birth-father-status"]',
     adoptionAgencyLink: 'a[id$="adoption-agency"]',
-    adoptionAgencyDetailsStatus: 'strong[id$="adoption-agency"]',
+    adoptionAgencyDetailsStatus: 'strong[id$="adoption-agency-status"]',
     childrenSiblingLink: 'a[href$="/sibling/exists"]',
     childrenSiblingDetailsStatus: 'strong[id$="birth-father-status"]',
   },
@@ -116,5 +116,10 @@ module.exports = {
 
   async verifySiblingDetailsStatus() {
     await I.see('COMPLETED', this.childDetails.childrenSiblingDetailsStatus);
+  },
+
+  async verifySecondApplicantSectionNotDisplayed() {
+    await I.dontSeeElement(this.secondApplicant.personalDetailsLink);
+    await I.dontSeeElement(this.secondApplicant.contactDetailsLink);
   },
 };
