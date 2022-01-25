@@ -27,12 +27,12 @@ export const en = (): Record<string, unknown> => ({
 
 export const cy = (): Record<string, unknown> => ({
   section: 'Your adoption agency or local authority details (in Welsh)',
-  label: "Details about the child's social worker (in Welsh)",
-  hint: 'You can get these details from your adoption agency or local authority. (in Welsh)',
-  socialWorkerName: "Social worker's name (in Welsh)",
-  socialWorkerPhoneNumber: "Social worker's phone number (in Welsh)",
-  socialWorkerEmail: "Social worker's email address (in Welsh)",
-  socialWorkerTeamEmail: "Social worker's team email address (if known) (in Welsh)",
+  title: "Details about the child's social worker (in Welsh)",
+  line1: 'You can get these details from your adoption agency or local authority. (in Welsh)',
+  socialWorkerNameLabel: "Social worker's name (in Welsh)",
+  socialWorkerPhoneNumberLabel: "Social worker's phone number (in Welsh)",
+  socialWorkerEmailLabel: "Social worker's email address (in Welsh)",
+  socialWorkerTeamEmailLabel: "Social worker's team email address (if known) (in Welsh)",
   errors: {
     socialWorkerName: {
       required: 'Enter a name (in Welsh)',
@@ -72,14 +72,13 @@ export const form: FormContent = {
       classes: 'govuk-label govuk-!-width-two-thirds',
       label: l => l.socialWorkerEmailLabel,
       labelSize: null,
-      validator: isFieldFilledIn,
+      validator: value => isFieldFilledIn(value) || isEmailValid(value),
     },
     socialWorkerTeamEmail: {
       type: 'text',
       classes: 'govuk-label govuk-!-width-two-thirds',
       label: l => l.socialWorkerTeamEmailLabel,
       labelSize: null,
-      validator: value => isFieldFilledIn(value) || isEmailValid(value),
     },
   },
   submit: {
