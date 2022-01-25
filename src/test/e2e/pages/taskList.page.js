@@ -117,4 +117,9 @@ module.exports = {
   async verifySiblingDetailsStatus() {
     await I.see('COMPLETED', this.childDetails.childrenSiblingDetailsStatus);
   },
+
+  async verifySecondApplicantSectionNotDisplayed() {
+    await I.dontSeeElement(this.secondApplicant.personalDetailsLink);
+    await I.dontSeeElement(this.secondApplicant.contactDetailsLink);
+  },
 };
