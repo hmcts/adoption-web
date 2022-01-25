@@ -13,7 +13,7 @@ module.exports = {
 
   childDetailsPlacementOrderSection() {
     I.waitForText('What is the serial or case number on the placement order?');
-    I.fillField(this.fields.placementOrderNumber, '123467890');
+    I.fillField(this.fields.placementOrderNumber, '09876543210');
     I.click('Save and continue');
     I.wait('2');
     I.waitForText('Which court made the placement order?');
@@ -32,7 +32,7 @@ module.exports = {
     I.fillField(this.fields.placementOrderType, 'Emergency protection order');
     I.click('Save and continue');
     I.wait('2');
-    I.fillField(this.fields.placementOrderNumber, '123467890');
+    I.fillField(this.fields.placementOrderNumber, '09876543210');
     I.click('Save and continue');
     I.wait('2');
     I.waitForText('Which court made the placement order?');
