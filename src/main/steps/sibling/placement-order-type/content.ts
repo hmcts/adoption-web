@@ -1,3 +1,4 @@
+import { PlacementOrder } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -25,15 +26,16 @@ const cy = () => ({
 
 export const form: FormContent = {
   fields: userCase => {
-    const placementOrder = userCase.placementOrders?.find(
-      item => item.placementOrderId === userCase.selectedPlacementOrderId
+    const siblings = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
+    const siblingPlacementOrders = siblings?.siblingPlacementOrders?.find(
+      item => (item as PlacementOrder).placementOrderId === userCase.selectedSiblingPoId
     );
     return {
       placementOrderType: {
         type: 'text',
         classes: 'govuk-label',
         label: l => l.label,
-        value: placementOrder?.placementOrderType,
+        value: (siblingPlacementOrders as PlacementOrder)?.placementOrderType,
         labelSize: 'l',
         attributes: {
           spellcheck: false,

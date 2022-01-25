@@ -1,6 +1,6 @@
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
-import { generateContent } from '../case-number/content';
+import { generateContent } from '../placement-order-number/content';
 
 import PlacementOrderGetController from './get';
 

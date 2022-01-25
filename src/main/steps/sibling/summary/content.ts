@@ -1,55 +1,68 @@
-import { YesOrNo } from '../../../app/case/definition';
+import { PlacementOrder, YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
+import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 import { placementOrderListItems } from './placement-order-summary';
 
 const en = content => {
   const enContent = {
-    section: "The child's details",
-    title: 'Orders already in place',
+    section: SECTION,
+    title: 'Orders already in place for siblings and half-siblings',
     placementOrder: 'Placement Order',
     change: 'Change',
     remove: 'Remove',
-    label: 'Do you want to add another order?',
-    hint: 'We need details of all orders already in place. Your social worker or adoption agency can help provide these details.',
+    changeName: 'Change name',
+    label: 'Do you want to add another order for a sibling or half-sibling?',
+    hint: 'For example, a care order or supervision order. Your adoption agency or social worker can provide this information for you.',
     errors: {
-      addAnotherPlacementOrder: {
+      addAnotherSiblingPlacementOrder: {
         required: 'Please select an answer',
       },
     },
   };
   return {
     ...enContent,
-    placementOrderListItems: placementOrderListItems(content.userCase, enContent),
+    siblings: content.userCase.siblings?.map(item => ({
+      siblingFirstName: item.siblingFirstName,
+      siblingLastNames: item.siblingLastNames,
+      changeSiblingNameUrl: '#',
+      placementOrderListItems: placementOrderListItems(item.siblingPlacementOrders as PlacementOrder[], enContent),
+    })),
   };
 };
 
 const cy = content => {
   const cyContent = {
-    section: "The child's details (in welsh)",
-    title: 'Orders already in place (in welsh)',
+    section: SECTION_IN_WELSH,
+    title: 'Orders already in place for siblings and half-siblings (in welsh)',
     placementOrder: 'Placement Order (in welsh)',
     change: 'Change (in welsh)',
     remove: 'Remove (in welsh)',
-    label: 'Do you want to add another order? (in welsh)',
-    hint: 'We need details of all orders already in place. Your social worker or adoption agency can help provide these details. (in welsh)',
+    changeName: 'Change name (in welsh)',
+    label: 'Do you want to add another order for a sibling or half-sibling? (in welsh)',
+    hint: 'For example, a care order or supervision order. Your adoption agency or social worker can provide this information for you. (in welsh)',
     errors: {
-      addAnotherPlacementOrder: {
+      addAnotherSiblingPlacementOrder: {
         required: 'Please select an answer (in welsh)',
       },
     },
   };
   return {
     ...cyContent,
-    placementOrderListItems: placementOrderListItems(content.userCase, cyContent),
+    siblings: content.userCase.siblings?.map(item => ({
+      siblingFirstName: item.siblingFirstName,
+      siblingLastNames: item.siblingLastNames,
+      changeSiblingNameUrl: '#',
+      placementOrderListItems: placementOrderListItems(item.siblingPlacementOrders as PlacementOrder[], cyContent),
+    })),
   };
 };
 
 export const form: FormContent = {
   fields: {
-    addAnotherPlacementOrder: {
+    addAnotherSiblingPlacementOrder: {
       type: 'radios',
       classes: 'govuk-radios govuk-radios--inline',
       label: l => l.label,

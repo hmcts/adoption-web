@@ -1,46 +1,33 @@
-import { CaseWithId } from '../../../app/case/case';
-import { areDateFieldsFilledIn, isDateInputInvalid, isFutureDate } from '../../../app/form/validation';
-import { CHILDREN_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS, CHILDREN_PLACEMENT_ORDER_SUMMARY } from '../../urls';
+import { PlacementOrder } from '../../../app/case/definition';
+import { SIBLING_ORDER_SUMMARY } from '../../urls';
 
-const isPlacementOrderComplete = (placementOrder, ignorePlacementOrderType) => {
-  return (
-    (ignorePlacementOrderType || placementOrder.placementOrderType) &&
-    placementOrder.placementOrderNumber &&
-    placementOrder.placementOrderCourt &&
-    areDateFieldsFilledIn(placementOrder.placementOrderDate) === undefined &&
-    isDateInputInvalid(placementOrder.placementOrderDate) === undefined &&
-    isFutureDate(placementOrder.placementOrderDate) === undefined
-  );
+const isPlacementOrderComplete = placementOrder => {
+  return placementOrder.placementOrderType && placementOrder.placementOrderNumber;
 };
+
 //eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-export const placementOrderListItems = (userCase: CaseWithId, content: any): any => {
-  return userCase.placementOrders?.map((item, index) => {
+export const placementOrderListItems = (placementOrders: PlacementOrder[], content: any): any => {
+  return placementOrders?.map(item => {
     return {
       key: {
-        text: item.placementOrderType || content.placementOrder,
+        text: item.placementOrderType,
         classes: 'font-normal',
       },
       value: {
-        html: isPlacementOrderComplete(item, index === 0)
-          ? ''
-          : '<strong class="govuk-tag govuk-tag--yellow">Incomplete</strong>',
+        html: isPlacementOrderComplete(item) ? '' : '<strong class="govuk-tag govuk-tag--yellow">Incomplete</strong>',
       },
       actions: {
         items: [
           {
-            href: `${CHILDREN_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS}?change=${item.placementOrderId}`,
+            href: '#',
             text: content.change,
             visuallyHiddenText: 'change',
           },
-          ...(index === 0
-            ? []
-            : [
-                {
-                  href: `${CHILDREN_PLACEMENT_ORDER_SUMMARY}?remove=${item.placementOrderId}`,
-                  text: content.remove,
-                  visuallyHiddenText: 'remove',
-                },
-              ]),
+          {
+            href: `${SIBLING_ORDER_SUMMARY}?remove=${item.placementOrderId}`,
+            text: content.remove,
+            visuallyHiddenText: 'remove',
+          },
         ],
       },
     };

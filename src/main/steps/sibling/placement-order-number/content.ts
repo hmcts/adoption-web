@@ -1,4 +1,4 @@
-import { Sibling } from '../../../app/case/definition';
+import { PlacementOrder } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -28,8 +28,9 @@ const cy = () => ({
 
 export const form: FormContent = {
   fields: userCase => {
-    const placementOrder = (userCase.siblings as Sibling[])?.find(
-      item => item.siblingId === userCase.selectedSiblingPoId
+    const siblings = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
+    const siblingPlacementOrders = siblings?.siblingPlacementOrders?.find(
+      item => (item as PlacementOrder).placementOrderId === userCase.selectedSiblingPoId
     );
     return {
       placementOrderNumber: {
@@ -37,7 +38,7 @@ export const form: FormContent = {
         classes: 'govuk-label govuk-input--width-10',
         label: l => l.label,
         hint: l => l.hint,
-        value: placementOrder?.siblingId,
+        value: (siblingPlacementOrders as PlacementOrder)?.placementOrderNumber,
         labelSize: 'l',
         attributes: {
           spellcheck: false,

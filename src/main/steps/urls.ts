@@ -61,8 +61,6 @@ export const SIBLING_COURT_ORDER_EXISTS: PageLink = `${SIBLING}/court-order-exis
 export const SIBLING_NAME: PageLink = `${SIBLING}/name`;
 export const SIBLING_ORDER_TYPE: PageLink = `${SIBLING}/placement-order-type`;
 export const SIBLING_ORDER_CASE_NUMBER: PageLink = `${SIBLING}/placement-order-number`;
-export const SIBLING_ORDER_COURT: PageLink = `${SIBLING}/placement-order-court`;
-export const SIBLING_ORDER_DATE: PageLink = `${SIBLING}/placement-order-date`;
 export const SIBLING_ORDER_SUMMARY: PageLink = `${SIBLING}/summary`;
 export const SIBLING_CHOOSE_SIBLING: PageLink = `${SIBLING}/choose-sibling`;
 

@@ -12,6 +12,7 @@ import {
   getContactDetailsStatus,
   getOtherParentStatus,
   getPersonalDetailsStatus,
+  getSiblingStatus,
   isApplyingWithComplete,
 } from './utils';
 
@@ -124,6 +125,7 @@ const en = content => {
         'birth-mother-details-status'
       ),
       otherParent: getSectionStatusLabel(getOtherParentStatus(content.userCase), statuses, 'other-parent-status'),
+      sibling: getSectionStatusLabel(getSiblingStatus(content.userCase), statuses, 'sibling-status'),
     },
     urls: {
       applyingWith: urls.APPLYING_WITH_URL,
@@ -245,6 +247,7 @@ const cy = content => {
         'birth-mother-details-status'
       ),
       otherParent: getSectionStatusLabel(getOtherParentStatus(content.userCase), statuses, 'other-parent-status'),
+      sibling: getSectionStatusLabel(getSiblingStatus(content.userCase), statuses, 'sibling-status'),
     },
     urls: {
       applyingWith: urls.APPLYING_WITH_URL,
