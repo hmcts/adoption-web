@@ -6,10 +6,10 @@ export const en = (): Record<string, unknown> => ({
   section: 'Your adoption agency or local authority details',
   title: "Details about the child's social worker",
   line1: 'You can get these details from your adoption agency or local authority.',
-  socialWorkerNameLabel: "Social worker's name",
-  socialWorkerPhoneNumberLabel: "Social worker's phone number",
-  socialWorkerEmailLabel: "Social worker's email address",
-  socialWorkerTeamEmailLabel: "Social worker's team email address (if known)",
+  socialWorkerName: "Social worker's name",
+  socialWorkerPhoneNumber: "Social worker's phone number",
+  socialWorkerEmail: "Social worker's email address",
+  socialWorkerTeamEmail: "Social worker's team email address (if known)",
   errors: {
     socialWorkerName: {
       required: 'Enter a name',
@@ -22,6 +22,9 @@ export const en = (): Record<string, unknown> => ({
       required: 'Enter an email address',
       invalid: 'Enter an email address in the correct format, like name@example.com',
     },
+    socialWorkerTeamEmail: {
+      invalid: 'Enter an email address in the correct format, like name@example.com',
+    },
   },
 });
 
@@ -29,10 +32,10 @@ export const cy = (): Record<string, unknown> => ({
   section: 'Your adoption agency or local authority details (in Welsh)',
   title: "Details about the child's social worker (in Welsh)",
   line1: 'You can get these details from your adoption agency or local authority. (in Welsh)',
-  socialWorkerNameLabel: "Social worker's name (in Welsh)",
-  socialWorkerPhoneNumberLabel: "Social worker's phone number (in Welsh)",
-  socialWorkerEmailLabel: "Social worker's email address (in Welsh)",
-  socialWorkerTeamEmailLabel: "Social worker's team email address (if known) (in Welsh)",
+  socialWorkerName: "Social worker's name (in Welsh)",
+  socialWorkerPhoneNumber: "Social worker's phone number (in Welsh)",
+  socialWorkerEmail: "Social worker's email address (in Welsh)",
+  socialWorkerTeamEmail: "Social worker's team email address (if known) (in Welsh)",
   errors: {
     socialWorkerName: {
       required: 'Enter a name (in Welsh)',
@@ -45,6 +48,9 @@ export const cy = (): Record<string, unknown> => ({
       required: 'Enter an email address (in Welsh)',
       invalid: 'Enter an email address in the correct format, like name@example.com (in Welsh)',
     },
+    socialWorkerTeamEmail: {
+      invalid: 'Enter an email address in the correct format, like name@example.com (in Welsh)',
+    },
   },
 });
 
@@ -53,14 +59,14 @@ export const form: FormContent = {
     socialWorkerName: {
       type: 'text',
       classes: 'govuk-label govuk-!-width-two-thirds',
-      label: l => l.socialWorkerNameLabel,
+      label: l => l.socialWorkerName,
       labelSize: null,
       validator: isFieldFilledIn,
     },
     socialWorkerPhoneNumber: {
       type: 'text',
       classes: 'govuk-label govuk-input--width-10',
-      label: l => l.socialWorkerPhoneNumberLabel,
+      label: l => l.socialWorkerPhoneNumber,
       labelSize: null,
       attributes: {
         maxLength: 14,
@@ -70,15 +76,16 @@ export const form: FormContent = {
     socialWorkerEmail: {
       type: 'text',
       classes: 'govuk-label govuk-!-width-two-thirds',
-      label: l => l.socialWorkerEmailLabel,
+      label: l => l.socialWorkerEmail,
       labelSize: null,
       validator: value => isFieldFilledIn(value) || isEmailValid(value),
     },
     socialWorkerTeamEmail: {
       type: 'text',
       classes: 'govuk-label govuk-!-width-two-thirds',
-      label: l => l.socialWorkerTeamEmailLabel,
+      label: l => l.socialWorkerTeamEmail,
       labelSize: null,
+      validator: value => isEmailValid(value),
     },
   },
   submit: {

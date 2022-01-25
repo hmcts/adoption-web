@@ -15,10 +15,10 @@ const enContent = {
   section: 'Your adoption agency or local authority details',
   title: "Details about the child's social worker",
   line1: 'You can get these details from your adoption agency or local authority.',
-  socialWorkerNameLabel: "Social worker's name",
-  socialWorkerPhoneNumberLabel: "Social worker's phone number",
-  socialWorkerEmailLabel: "Social worker's email address",
-  socialWorkerTeamEmailLabel: "Social worker's team email address (if known)",
+  socialWorkerName: "Social worker's name",
+  socialWorkerPhoneNumber: "Social worker's phone number",
+  socialWorkerEmail: "Social worker's email address",
+  socialWorkerTeamEmail: "Social worker's team email address (if known)",
   errors: {
     socialWorkerName: {
       required: 'Enter a name',
@@ -31,6 +31,9 @@ const enContent = {
       required: 'Enter an email address',
       invalid: 'Enter an email address in the correct format, like name@example.com',
     },
+    socialWorkerTeamEmail: {
+      invalid: 'Enter an email address in the correct format, like name@example.com',
+    },
   },
 };
 
@@ -38,10 +41,10 @@ const cyContent = {
   section: 'Your adoption agency or local authority details (in Welsh)',
   title: "Details about the child's social worker (in Welsh)",
   line1: 'You can get these details from your adoption agency or local authority. (in Welsh)',
-  socialWorkerNameLabel: "Social worker's name (in Welsh)",
-  socialWorkerPhoneNumberLabel: "Social worker's phone number (in Welsh)",
-  socialWorkerEmailLabel: "Social worker's email address (in Welsh)",
-  socialWorkerTeamEmailLabel: "Social worker's team email address (if known) (in Welsh)",
+  socialWorkerName: "Social worker's name (in Welsh)",
+  socialWorkerPhoneNumber: "Social worker's phone number (in Welsh)",
+  socialWorkerEmail: "Social worker's email address (in Welsh)",
+  socialWorkerTeamEmail: "Social worker's team email address (if known) (in Welsh)",
   errors: {
     socialWorkerName: {
       required: 'Enter a name (in Welsh)',
@@ -54,6 +57,9 @@ const cyContent = {
       required: 'Enter an email address (in Welsh)',
       invalid: 'Enter an email address in the correct format, like name@example.com (in Welsh)',
     },
+    socialWorkerTeamEmail: {
+      invalid: 'Enter an email address in the correct format, like name@example.com (in Welsh)',
+    },
   },
 };
 
@@ -63,20 +69,20 @@ const langAssertions = (language, content) => {
     section,
     title,
     line1,
-    socialWorkerNameLabel,
-    socialWorkerPhoneNumberLabel,
-    socialWorkerEmailLabel,
-    socialWorkerTeamEmailLabel,
+    socialWorkerName,
+    socialWorkerPhoneNumber,
+    socialWorkerEmail,
+    socialWorkerTeamEmail,
     errors,
   } = content;
 
   expect(generatedContent.section).toEqual(section);
   expect(generatedContent.title).toEqual(title);
   expect(generatedContent.line1).toEqual(line1);
-  expect(generatedContent.socialWorkerNameLabel).toEqual(socialWorkerNameLabel);
-  expect(generatedContent.socialWorkerPhoneNumberLabel).toEqual(socialWorkerPhoneNumberLabel);
-  expect(generatedContent.socialWorkerEmailLabel).toEqual(socialWorkerEmailLabel);
-  expect(generatedContent.socialWorkerTeamEmailLabel).toEqual(socialWorkerTeamEmailLabel);
+  expect(generatedContent.socialWorkerName).toEqual(socialWorkerName);
+  expect(generatedContent.socialWorkerPhoneNumber).toEqual(socialWorkerPhoneNumber);
+  expect(generatedContent.socialWorkerEmail).toEqual(socialWorkerEmail);
+  expect(generatedContent.socialWorkerTeamEmail).toEqual(socialWorkerTeamEmail);
   expect(generatedContent.errors).toEqual(errors);
 };
 
@@ -91,14 +97,14 @@ describe('occupation content', () => {
     langAssertions(CY, cyContent);
   });
 
-  it('should have an adopAgencyOrLaName text input field', () => {
+  it('should have an socialWorkerName text input field', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const socialWorkerName = fields.socialWorkerName;
 
     expect(socialWorkerName.type).toBe('text');
-    expect((socialWorkerName.label as Function)(generateContent(commonContent))).toBe(enContent.socialWorkerNameLabel);
+    expect((socialWorkerName.label as Function)(generateContent(commonContent))).toBe(enContent.socialWorkerName);
 
     (socialWorkerName.validator as Function)('MockName');
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockName');
@@ -112,7 +118,7 @@ describe('occupation content', () => {
 
     expect(socialWorkerPhoneNumber.type).toBe('text');
     expect((socialWorkerPhoneNumber.label as Function)(generateContent(commonContent))).toBe(
-      enContent.socialWorkerPhoneNumberLabel
+      enContent.socialWorkerPhoneNumber
     );
 
     (socialWorkerPhoneNumber.validator as Function)('MockPhoneNumber');
@@ -126,9 +132,7 @@ describe('occupation content', () => {
     const socialWorkerEmail = fields.socialWorkerEmail;
 
     expect(socialWorkerEmail.type).toBe('text');
-    expect((socialWorkerEmail.label as Function)(generateContent(commonContent))).toBe(
-      enContent.socialWorkerEmailLabel
-    );
+    expect((socialWorkerEmail.label as Function)(generateContent(commonContent))).toBe(enContent.socialWorkerEmail);
 
     (socialWorkerEmail.validator as Function)('MockEmail');
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockEmail');
@@ -142,7 +146,7 @@ describe('occupation content', () => {
 
     expect(socialWorkerTeamEmail.type).toBe('text');
     expect((socialWorkerTeamEmail.label as Function)(generateContent(commonContent))).toBe(
-      enContent.socialWorkerTeamEmailLabel
+      enContent.socialWorkerTeamEmail
     );
   });
 
