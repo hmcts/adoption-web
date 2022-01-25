@@ -85,7 +85,7 @@ export const form: FormContent = {
       classes: 'govuk-label govuk-!-width-two-thirds',
       label: l => l.socialWorkerTeamEmail,
       labelSize: null,
-      validator: value => isEmailValid(value),
+      validator: value => (value ? isEmailValid(value) : undefined),
     },
   },
   submit: {

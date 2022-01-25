@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable jest/expect-expect */
-import { FormContent, FormFields } from '../../../app/form/Form'; //FormOptions
-import { isFieldFilledIn } from '../../../app/form/validation'; //{ isEmailValid, isFieldFilledIn, isPhoneNoValid }
-import { CommonContent, generatePageContent } from '../../common/common.content'; //generatePageContent
+import { FormContent, FormFields } from '../../../app/form/Form';
+import { isFieldFilledIn } from '../../../app/form/validation';
+import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
 
