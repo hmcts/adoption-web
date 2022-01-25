@@ -33,7 +33,7 @@ export class PaymentClient {
       case_type: CASE_TYPE,
       amount: total,
       ccd_case_number: caseId,
-      description: 'Application/permission to apply for adoption', //TODO consider welsh text
+      description: 'Apply for adoption', //TODO consider welsh text
       currency: 'GBP',
       //TODO uncomment this
       // fees: userCase.applicationFeeOrderSummary.Fees.map(fee => ({
