@@ -1,21 +1,12 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable jest/expect-expect */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-const mockIsFieldFilledIn = jest.fn();
-const mockIsEmailValid = jest.fn();
-const mockIsPhoneNoValid = jest.fn();
-
-jest.mock('../../../app/form/validation', () => ({
-  isFieldFilledIn: mockIsFieldFilledIn,
-  isEmailValid: mockIsEmailValid,
-  isPhoneNoValid: mockIsPhoneNoValid,
-}));
-
 import { FormContent, FormFields } from '../../../app/form/Form';
-import { isFieldFilledIn } from '../../../app/form/validation';
+import { isEmailValid, isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
+
+jest.mock('../../../app/form/validation');
 
 const CY = 'cy';
 const EN = 'en';
@@ -158,10 +149,8 @@ describe('social worker content', () => {
       enContent.socialWorkerTeamEmail
     );
 
-    const errors = generatedContent.errors as any;
-    expect(errors.socialWorkerTeamEmail.invalid).toEqual(
-      'Enter an email address in the correct format, like name@example.com'
-    );
+    (socialWorkerTeamEmail.validator as Function)('MockEmail');
+    expect(isEmailValid).toHaveBeenCalledWith('MockEmail');
   });
 
   it('should contain submit button', () => {
