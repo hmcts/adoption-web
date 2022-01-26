@@ -695,6 +695,9 @@ describe('utils', () => {
             },
           ],
           hasAnotherAdopAgencyOrLA: YesOrNo.NO,
+          socialWorkerName: 'John',
+          socialWorkerPhoneNumber: '09876543210',
+          socialWorkerEmail: 'abc@john.com',
         })
       ).toBe('/children/adoption-agency?change=1');
     });
@@ -724,6 +727,9 @@ describe('utils', () => {
             },
           ],
           hasAnotherAdopAgencyOrLA: YesOrNo.YES,
+          socialWorkerName: 'John',
+          socialWorkerPhoneNumber: '09876543210',
+          socialWorkerEmail: 'abc@john.com',
         })
       ).toBe('/children/adoption-agency?change=1');
     });
@@ -745,6 +751,9 @@ describe('utils', () => {
             },
           ],
           hasAnotherAdopAgencyOrLA: YesOrNo.NO,
+          socialWorkerName: 'John',
+          socialWorkerPhoneNumber: '09876543210',
+          socialWorkerEmail: 'abc@john.com',
         })
       ).toBe('/children/adoption-agency?change=1');
     });
