@@ -150,3 +150,41 @@ e.g. the ones verifying the state of each service it depends on.
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+
+## Testing:
+
+E2E tests are configured to run in parallel in 5 headless browsers by default.
+
+To run e2e tests enter `yarn test:local` in the command line.
+
+### Optional configuration
+
+To run all tests only in one browser please set `PARALLEL_CHUNKS` environment variable to `1`. By default 5 chunks are enabled.
+
+```$bash
+PARALLEL_CHUNKS=1 yarn test:local
+```
+
+To show tests in browser window as they run please set `SHOW_BROWSER_WINDOW` environment variable to `true`. By default browser window is hidden.
+
+```$bash
+SHOW_BROWSER_WINDOW=true yarn test:local
+```
+
+To disable chrome web security
+
+```$bash
+DISABLE_SECURITY=true yarn test:local
+```
+
+## Running E2E against AAT environment
+
+```$bash
+ADOP_WEB_URL=https://adoption-web.aat.platform.hmcts.net/ SHOW_BROWSER_WINDOW=false CITIZEN_PASSWORD=Adoption12 yarn test:local --grep 'Verify apply my own option'
+```
+
+## Running E2E against PR enviroment
+
+```$bash
+ADOP_WEB_URL=https://adoption-web-pr-146.service.core-compute-preview.internal/ SHOW_BROWSER_WINDOW=false CITIZEN_PASSWORD=Adoption12 yarn test:local --grep 'Verify apply my own option'
+```

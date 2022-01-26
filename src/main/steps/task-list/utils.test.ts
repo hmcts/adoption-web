@@ -634,6 +634,17 @@ describe('utils', () => {
       },
       {
         data: {
+          birthMotherFirstNames: 'MOCKNAME',
+          birthMotherLastNames: 'MOCKNAME',
+          birthMotherStillAlive: YesNoNotsure.YES,
+          birthMotherNationality: ['Other'],
+          birthMotherAddressKnown: YesOrNo.NO,
+        },
+        userType: 'birthMother',
+        expected: 'IN_PROGRESS',
+      },
+      {
+        data: {
           birthMotherStillAlive: YesNoNotsure.YES,
           birthMotherFirstNames: 'MOCKNAME',
           birthMotherLastNames: 'MOCKNAME',
