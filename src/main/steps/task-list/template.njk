@@ -269,10 +269,11 @@
         <ul class="app-task-list__items">
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a href="#" class="govuk-link">
+                    <a id="statement-of-truth" href="{{urls.statementsOfTruth}}" class="govuk-link" aria-describedby="eligibility-completed">
                         {{section6link1}}
                     </a>
                 </span>
+                <p class="govuk-body">{{ status.adoptionAgency | safe }}</p>
             </li>
         </ul>
     </li>

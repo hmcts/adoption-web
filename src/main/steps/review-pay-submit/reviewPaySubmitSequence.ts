@@ -5,7 +5,7 @@ export const reviewPaySubmitSequence: Step[] = [
   {
     url: Urls.STATEMENT_OF_TRUTH,
     showInSection: Sections.ReviewPaySubmit,
-    getNextStep: () => Urls.CHECK_ANSWERS_URL,
+    getNextStep: () => Urls.TASK_LIST_URL,
   },
   {
     url: Urls.CHECK_ANSWERS_URL,

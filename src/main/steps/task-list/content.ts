@@ -45,6 +45,7 @@ const urls = content => ({
   reviewApplicationPayAndSubmit: URL.CHECK_ANSWERS_URL,
   siblingDetails: URL.SIBLING_EXISTS,
   adoptionAgency: getAdoptionAgencyUrl(content.userCase),
+  statementsOfTruth: URL.STATEMENT_OF_TRUTH,
 });
 
 const en = content => {
@@ -132,6 +133,11 @@ const en = content => {
         getAdoptionAgencyDetailStatus(content.userCase),
         statuses,
         'adoption-agency'
+      ),
+      statementsOfTruth: getSectionStatusLabel(
+        getAdoptionAgencyDetailStatus(content.userCase),
+        statuses,
+        'statement-of-truth'
       ),
     },
     urls: urls(content),
@@ -223,6 +229,11 @@ const cy = content => {
         getAdoptionAgencyDetailStatus(content.userCase),
         statuses,
         'adoption-agency'
+      ),
+      statementsOfTruth: getSectionStatusLabel(
+        getAdoptionAgencyDetailStatus(content.userCase),
+        statuses,
+        'statement-of-truth'
       ),
     },
     urls: urls(content),
