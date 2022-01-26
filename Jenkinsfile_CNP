@@ -8,6 +8,10 @@ def type = 'nodejs'
 def product = 'adoption'
 def component = 'web'
 
+// SAUCELABS config - configured on Jenkins
+env.SAUCE_USERNAME = 'username'
+env.SAUCE_ACCESS_KEY = 'privatekey'
+env.SAUCE_TUNNEL_IDENTIFIER = 'reformtunnel'
 
 static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
   [ $class: 'AzureKeyVaultSecret',
@@ -43,9 +47,17 @@ withPipeline(type, product, component) {
   enableSlackNotifications('#adoption-tech')
 
   loadVaultSecrets(secrets)
-
+  enableCrossBrowserTest(['chrome', 'firefox'])
   after('build') {
     yarnBuilder.yarn('build')
+  }
+
+  before('crossBrowserTest') {
+    env.TEST_RETRIES = 5
+  }
+
+  after('crossBrowserTest') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
   }
 
   after('test') {

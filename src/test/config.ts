@@ -31,7 +31,6 @@ export const autoLogin = {
     I.wait(2);
     I.fillField('password', password);
     I.click('Sign in');
-    I.waitForText('Are you applying on your own, or with someone else?', 30);
   },
   check: (I: CodeceptJS.I): void => {
     I.amOnPage(`${process.env.ADOP_WEB_URL}`);

@@ -15,27 +15,27 @@ module.exports = {
     socialWorkerTeamEmail: 'input[id$="socialWorkerTeamEmail"]',
   },
 
-  childAdoptionAgencyDetailsSection() {
-    I.waitForText('Adoption agency or local authority details', 30);
-    I.fillField(this.adopAgency.adopAgencyOrLaName, 'Hillingdon');
-    I.fillField(this.adopAgency.adopAgencyOrLaPhoneNumber, '09876543210');
-    I.fillField(this.adopAgency.adopAgencyOrLaContactName, 'Jake');
-    I.fillField(this.adopAgency.adopAgencyOrLaContactEmail, 'test@example.com');
-    I.wait('2');
-    I.click('Save and continue');
-    I.waitForText('Was there another adoption agency or local authority involved in placing the child?', 30);
-    I.click(this.adopAgency.hasAnotherAdopAgencyOrLA);
-    I.wait('2');
-    I.click('Save and continue');
-    I.wait('2');
-    I.waitForText('Adoption agency or local authority details', 30);
-    I.fillField(this.adopAgency.adopAgencyOrLaName, 'Swansea');
-    I.fillField(this.adopAgency.adopAgencyOrLaPhoneNumber, '09876543210');
-    I.fillField(this.adopAgency.adopAgencyOrLaContactName, 'Freddie');
-    I.fillField(this.adopAgency.adopAgencyOrLaContactEmail, 'test.another@example.com');
-    I.wait('2');
-    I.click('Save and continue');
-    I.wait('2');
+  async childAdoptionAgencyDetailsSection() {
+    await I.waitForText('Adoption agency or local authority details', 30);
+    await I.fillField(this.adopAgency.adopAgencyOrLaName, 'Hillingdon');
+    await I.fillField(this.adopAgency.adopAgencyOrLaPhoneNumber, '09876543210');
+    await I.fillField(this.adopAgency.adopAgencyOrLaContactName, 'Jake');
+    await I.fillField(this.adopAgency.adopAgencyOrLaContactEmail, 'test@example.com');
+    await I.wait('2');
+    await I.click('Save and continue');
+    await I.waitForText('Was there another adoption agency or local authority involved in placing the child?', 30);
+    await I.click(this.adopAgency.hasAnotherAdopAgencyOrLA);
+    await I.wait('2');
+    await I.click('Save and continue');
+    await I.wait('2');
+    await I.waitForText('Adoption agency or local authority details', 30);
+    await I.fillField(this.adopAgency.adopAgencyOrLaName, 'Swansea');
+    await I.fillField(this.adopAgency.adopAgencyOrLaPhoneNumber, '09876543210');
+    await I.fillField(this.adopAgency.adopAgencyOrLaContactName, 'Freddie');
+    await I.fillField(this.adopAgency.adopAgencyOrLaContactEmail, 'test.another@example.com');
+    await I.wait('2');
+    await I.click('Save and continue');
+    await I.wait('2');
   },
   childSocialWorkerDetails() {
     I.waitForText("Details about the child's social worker", 30);
