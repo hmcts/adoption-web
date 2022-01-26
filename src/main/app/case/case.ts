@@ -135,7 +135,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   solicitorHelpingWithApplication: 'solicitorHelpingWithApplication',
   adopAgencyOrLAs: 'adopAgencyOrLAs',
   siblings: 'siblings',
-  
+
   applicant1IBelieveApplicationIsTrue: 'applicant1StatementOfTruth',
   applicant2IBelieveApplicationIsTrue: 'applicant2StatementOfTruth',
   applicant1SotFullName: 'applicant1SotFullName',
@@ -311,8 +311,8 @@ export interface Case {
   /***** Statement of truth *****/
   applicant1IBelieveApplicationIsTrue?: Checkbox;
   applicant2IBelieveApplicationIsTrue?: Checkbox;
-  applicant1SotFullName: string;
-  applicant2SotFullName: string;
+  applicant1SotFullName?: string;
+  applicant2SotFullName?: string;
 
   /***** Common across different type of users *****/
   addButton?: string;
