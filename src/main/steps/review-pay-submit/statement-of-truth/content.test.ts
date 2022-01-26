@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable jest/expect-expect */
-import { FormContent } from '../../../app/form/Form'; //FormFields
-//import { isFieldFilledIn } from '../../../app/form/validation';
+import { FormContent, FormFields } from '../../../app/form/Form';
+import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
@@ -107,69 +107,67 @@ describe('occupation content', () => {
     langAssertions(CY, cyContent);
   });
 
-  // it('should have an adopAgencyOrLaName text input field', () => {
-  //   const generatedContent = generateContent(commonContent);
-  //   const form = generatedContent.form as FormContent;
-  //   const fields = form.fields as FormFields;
-  //   const adopAgencyOrLaName = fields.adopAgencyOrLaName;
+  it('should have an applicant1IBelieveApplicationIsTrue checkboxes field', () => {
+    const generatedContent = generateContent(commonContent);
+    const form = generatedContent.form as FormContent;
+    const fields = form.fields as FormFields;
+    const applicant1IBelieveApplicationIsTrue = fields.applicant1IBelieveApplicationIsTrue;
 
-  //   expect(adopAgencyOrLaName.type).toBe('text');
-  //   expect((adopAgencyOrLaName.label as Function)(generateContent(commonContent))).toBe(enContent.adopAgencyName);
+    expect(applicant1IBelieveApplicationIsTrue.type).toBe('checkboxes'); //TODO
+    //expect((applicant1IBelieveApplicationIsTrue.label as Function)(generateContent(commonContent))).toBe(enContent.applicant1IBelieveApplicationIsTrue);
 
-  //   (adopAgencyOrLaName.validator as Function)('MockAgencyName');
-  //   expect(isFieldFilledIn).toHaveBeenCalledWith('MockAgencyName');
-  // });
+    (applicant1IBelieveApplicationIsTrue.validator as Function)('MockName');
+    expect(isFieldFilledIn).toHaveBeenCalledWith('MockName');
+  });
 
-  // it('should have an adopAgencyOrLaPhoneNumber text input field', () => {
-  //   const generatedContent = generateContent(commonContent);
-  //   const form = generatedContent.form as FormContent;
-  //   const fields = form.fields as FormFields;
-  //   const adopAgencyOrLaPhoneNumber = fields.adopAgencyOrLaPhoneNumber;
+  it('should have an applicant2IBelieveApplicationIsTrue checkobxes field', () => {
+    const generatedContent = generateContent(commonContent);
+    const form = generatedContent.form as FormContent;
+    const fields = form.fields as FormFields;
+    const applicant2IBelieveApplicationIsTrue = fields.applicant2IBelieveApplicationIsTrue;
 
-  //   expect(adopAgencyOrLaPhoneNumber.type).toBe('text');
-  //   expect((adopAgencyOrLaPhoneNumber.label as Function)(generateContent(commonContent))).toBe(
-  //     enContent.adopAgencyPhone
-  //   );
+    expect(applicant2IBelieveApplicationIsTrue.type).toBe('checkboxes'); //TODO
+    //expect((applicant2IBelieveApplicationIsTrue.label as Function)(generateContent(commonContent))).toBe(enContent.applicant2IBelieveApplicationIsTrue);
 
-  //   (adopAgencyOrLaPhoneNumber.validator as Function)('MockAgencyPhoneNumber');
-  //   expect(isFieldFilledIn).toHaveBeenCalledWith('MockAgencyPhoneNumber');
-  // });
+    // (applicant2IBelieveApplicationIsTrue.validator as Function)('MockName');
+    // expect(isFieldFilledIn).toHaveBeenCalledWith('MockName');
+  });
 
-  // it('should have an adopAgencyOrLaContactName text input field', () => {
-  //   const generatedContent = generateContent(commonContent);
-  //   const form = generatedContent.form as FormContent;
-  //   const fields = form.fields as FormFields;
-  //   const adopAgencyOrLaContactName = fields.adopAgencyOrLaContactName;
+  it('should have an applicant1SotFullName text input field', () => {
+    const generatedContent = generateContent(commonContent);
+    const form = generatedContent.form as FormContent;
+    const fields = form.fields as FormFields;
+    const applicant1SotFullName = fields.applicant1SotFullName;
 
-  //   expect(adopAgencyOrLaContactName.type).toBe('text');
-  //   expect((adopAgencyOrLaContactName.label as Function)(generateContent(commonContent))).toBe(
-  //     enContent.adopAgencyContactName
-  //   );
+    expect(applicant1SotFullName.type).toBe('text');
+    expect((applicant1SotFullName.label as Function)(generateContent(commonContent))).toBe(
+      enContent.applicant1SotFullName
+    );
 
-  //   (adopAgencyOrLaContactName.validator as Function)('MockAgencyContactName');
-  //   expect(isFieldFilledIn).toHaveBeenCalledWith('MockAgencyContactName');
-  // });
+    (applicant1SotFullName.validator as Function)('MockName');
+    expect(isFieldFilledIn).toHaveBeenCalledWith('MockName');
+  });
 
-  // it('should have an adopAgencyOrLaContactEmail text input field', () => {
-  //   const generatedContent = generateContent(commonContent);
-  //   const form = generatedContent.form as FormContent;
-  //   const fields = form.fields as FormFields;
-  //   const adopAgencyOrLaContactEmail = fields.adopAgencyOrLaContactEmail;
+  it('should have an applicant2SotFullName text input field', () => {
+    const generatedContent = generateContent(commonContent);
+    const form = generatedContent.form as FormContent;
+    const fields = form.fields as FormFields;
+    const applicant2SotFullName = fields.applicant2SotFullName;
 
-  //   expect(adopAgencyOrLaContactEmail.type).toBe('text');
-  //   expect((adopAgencyOrLaContactEmail.label as Function)(generateContent(commonContent))).toBe(
-  //     enContent.adopAgencyContactEmail
-  //   );
+    expect(applicant2SotFullName.type).toBe('text');
+    expect((applicant2SotFullName.label as Function)(generateContent(commonContent))).toBe(
+      enContent.applicant2SotFullName
+    );
 
-  //   (adopAgencyOrLaContactEmail.validator as Function)('MockAgencyContactEmail');
-  //   expect(isFieldFilledIn).toHaveBeenCalledWith('MockAgencyContactEmail');
-  // });
+    (applicant2SotFullName.validator as Function)('MockName');
+    expect(isFieldFilledIn).toHaveBeenCalledWith('MockName');
+  });
 
-  // it('should contain submit button', () => {
-  //   const generatedContent = generateContent(commonContent);
-  //   const form = generatedContent.form as FormContent;
-  //   expect((form.submit.text as Function)(generatePageContent({ language: EN }))).toBe('Save and continue');
-  // });
+  it('should contain submit button', () => {
+    const generatedContent = generateContent(commonContent);
+    const form = generatedContent.form as FormContent;
+    expect((form.submit.text as Function)(generatePageContent({ language: EN }))).toBe(undefined); //TODO
+  });
 
   it('should contain saveAsDraft button', () => {
     const generatedContent = generateContent(commonContent);
