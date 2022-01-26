@@ -48,6 +48,10 @@ withPipeline(type, product, component) {
     yarnBuilder.yarn('build')
   }
 
+  after('test') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
+  }
+
   before('functionalTest:preview') {
     env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
     env.TEST_RETRIES = 5
