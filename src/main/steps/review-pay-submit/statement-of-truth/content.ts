@@ -1,5 +1,5 @@
-import { Checkbox } from 'app/case/case';
-import { ApplyingWith } from 'app/case/definition';
+import { Checkbox } from '../../../app/case/case';
+import { ApplyingWith } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
