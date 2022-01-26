@@ -69,7 +69,7 @@ export const childrenSequence: Step[] = [
         ? Urls.OTHER_ADOPTION_AGENCY
         : userCase.adopAgencyOrLAs?.length === 2 &&
           userCase.selectedAdoptionAgencyId === userCase.adopAgencyOrLAs[1].adopAgencyOrLaId
-        ? Urls.TASK_LIST_URL
+        ? Urls.SOCIAL_WORKER
         : Urls.OTHER_ADOPTION_AGENCY,
   },
   {
@@ -77,9 +77,14 @@ export const childrenSequence: Step[] = [
     showInSection: Sections.AboutChildren,
     getNextStep: userCase =>
       userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO
-        ? Urls.TASK_LIST_URL
+        ? Urls.SOCIAL_WORKER
         : userCase.adopAgencyOrLAs !== undefined && userCase.adopAgencyOrLAs?.length < 2
         ? `${Urls.ADOPTION_AGENCY}?add=${Date.now()}`
         : `${Urls.ADOPTION_AGENCY}?change=${userCase.adopAgencyOrLAs![1].adopAgencyOrLaId}`,
+  },
+  {
+    url: Urls.SOCIAL_WORKER,
+    showInSection: Sections.AboutChildren,
+    getNextStep: () => Urls.TASK_LIST_URL,
   },
 ];
