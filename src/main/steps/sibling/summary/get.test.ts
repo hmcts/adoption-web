@@ -4,8 +4,8 @@ import PlacementOrderGetController from '../placement-order/get';
 
 import GetController from './get';
 
-describe('children > placement-order-summary get', () => {
-  test.skip('should re-export placement-order get controller', () => {
+describe('sibling > placement-order-summary get', () => {
+  test('should re-export placement-order get controller', () => {
     expect(GetController).toBe(PlacementOrderGetController);
   });
 });
