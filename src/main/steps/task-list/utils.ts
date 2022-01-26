@@ -246,24 +246,7 @@ export const getOtherParentStatus = (userCase: CaseWithId): SectionStatus => {
 };
 
 export const getSiblingStatus = (userCase: CaseWithId): SectionStatus => {
-  const siblingPlacementOrders = userCase.siblings?.find(item => item.siblingPlacementOrders);
   const exists = userCase.hasSiblings;
-
-  const siblingPlacementOrdersComplete =
-    siblingPlacementOrders?.siblingPlacementOrders?.length &&
-    siblingPlacementOrders?.siblingPlacementOrders?.every((item, index) => {
-      return (
-        (index === 0 || (item as PlacementOrder).placementOrderType) && (item as PlacementOrder).placementOrderNumber
-      );
-    });
-
-  const siblingPlacementOrdersInProgress =
-    siblingPlacementOrders?.siblingPlacementOrders?.length &&
-    siblingPlacementOrders?.siblingPlacementOrders?.some((item, index) => {
-      return (
-        (item as PlacementOrder).placementOrderType || (item as PlacementOrder).placementOrderNumber || index === 0
-      );
-    });
 
   if (exists === YesNoNotsure.NO || YesNoNotsure.NOT_SURE) {
     return SectionStatus.COMPLETED;
@@ -272,12 +255,18 @@ export const getSiblingStatus = (userCase: CaseWithId): SectionStatus => {
     if (courtOrderExists === YesNoNotsure.NO || YesNoNotsure.NOT_SURE) {
       return SectionStatus.COMPLETED;
     } else if (courtOrderExists === YesNoNotsure.YES) {
-      return siblingPlacementOrdersComplete
-        ? SectionStatus.COMPLETED
-        : !siblingPlacementOrdersComplete && !siblingPlacementOrdersInProgress
-        ? SectionStatus.NOT_STARTED
-        : SectionStatus.IN_PROGRESS;
+      const siblingsComplete = userCase.siblings?.every(item => {
+        item.siblingFirstName &&
+          item.siblingLastNames &&
+          item.siblingPlacementOrders?.length &&
+          (item.siblingPlacementOrders as PlacementOrder[]).every(
+            po => po.placementOrderType && po.placementOrderNumber
+          );
+      });
+
+      return siblingsComplete ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
     }
+    return SectionStatus.IN_PROGRESS;
   }
   return SectionStatus.NOT_STARTED;
 };
