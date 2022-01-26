@@ -1,4 +1,4 @@
-import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
+import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -27,7 +27,7 @@ const cyContent = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('children > placement-order-court content', () => {
+describe('sibling > placement-order-type content', () => {
   const commonContent = {
     language: 'en',
     userCase: {
@@ -35,21 +35,21 @@ describe('children > placement-order-court content', () => {
       selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
     },
   } as CommonContent;
-  test.skip('should return correct english content', () => {
+  test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
     expect(generatedContent.section).toBe(enContent.section);
     expect(generatedContent.label).toBe(enContent.label);
     expect(generatedContent.errors).toEqual(enContent.errors);
   });
 
-  test.skip('should return correct welsh content', () => {
+  test('should return correct welsh content', () => {
     const generatedContent = generateContent({ ...commonContent, language: 'cy' });
     expect(generatedContent.section).toBe(cyContent.section);
     expect(generatedContent.label).toBe(cyContent.label);
     expect(generatedContent.errors).toEqual(cyContent.errors);
   });
 
-  test.skip('should contain placementOrderCourt field', () => {
+  test('should contain placementOrderType field', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
@@ -57,20 +57,19 @@ describe('children > placement-order-court content', () => {
     expect(field.type).toBe('text');
     expect(field.classes).toBe('govuk-label');
     expect((field.label as Function)(generatedContent)).toBe(enContent.label);
-    expect((field as FormInput).value).toBe('MOCK_TYPE');
     expect(field.labelSize).toBe('l');
     expect(field.attributes).toEqual({ spellcheck: false });
 
     expect(field.validator).toBe(isFieldFilledIn);
   });
 
-  test.skip('should contain submit button', () => {
+  test('should contain submit button', () => {
     const generatedContent = generateContent({ ...commonContent, userCase: undefined });
     const form = generatedContent.form as FormContent;
     expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
   });
 
-  test.skip('should contain saveAsDraft button', () => {
+  test('should contain saveAsDraft button', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save as draft');

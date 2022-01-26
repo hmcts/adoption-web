@@ -41,14 +41,14 @@ describe('sibling > exists > content', () => {
     generatedContent = generateContent(commonContent);
   });
 
-  test.skip('should return correct english content', () => {
+  test('should return correct english content', () => {
     expect(generatedContent.section).toEqual(enContent.section);
     expect(generatedContent.label).toEqual(enContent.label);
     expect(generatedContent.hint).toEqual(enContent.hint);
     expect(generatedContent.errors).toEqual(enContent.errors);
   });
 
-  test.skip('should return correct welsh content', () => {
+  test('should return correct welsh content', () => {
     generatedContent = generateContent({ ...commonContent, language: 'cy' });
     expect(generatedContent.section).toEqual(cyContent.section);
     expect(generatedContent.label).toEqual(cyContent.label);
@@ -56,7 +56,7 @@ describe('sibling > exists > content', () => {
     expect(generatedContent.errors).toEqual(cyContent.errors);
   });
 
-  test.skip('should contain hasSiblings field', () => {
+  test('should contain hasSiblings field', () => {
     const fields = (generatedContent.form as FormContent).fields as FormFields;
     const field = fields.hasSiblings as FormOptions;
     expect(field.type).toBe('radios');
@@ -73,13 +73,13 @@ describe('sibling > exists > content', () => {
     expect(field.validator).toBe(isFieldFilledIn);
   });
 
-  test.skip('should contain submit button', () => {
+  test('should contain submit button', () => {
     expect(((generatedContent.form as FormContent).submit.text as Function)(commonContent)).toBe(
       commonContent.continue
     );
   });
 
-  test.skip('should contain saveAsDraft button', () => {
+  test('should contain saveAsDraft button', () => {
     expect(((generatedContent.form as FormContent).saveAsDraft?.text as Function)(commonContent)).toBe(
       commonContent.saveAsDraft
     );

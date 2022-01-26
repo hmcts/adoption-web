@@ -19,6 +19,7 @@ import {
   getContactDetailsStatus,
   getOtherParentStatus,
   getPersonalDetailsStatus,
+  getSiblingStatus,
   isApplyingWithComplete,
   // isApplyingWithComplete,
 } from './utils';
@@ -756,6 +757,113 @@ describe('utils', () => {
           socialWorkerEmail: 'abc@john.com',
         })
       ).toBe('/children/adoption-agency?change=1');
+    });
+  });
+
+  describe('getSiblingPlacementOrderStatus', () => {
+    test.each([
+      {
+        data: {
+          siblings: [
+            {
+              id: '270f5665-54d5-4931-bae7-74dea9a80e95',
+              value: {
+                siblingId: '1643051152111',
+                siblingFirstName: 'Dilip',
+                siblingLastNames: 'Samra',
+                siblingPlacementOrders: [
+                  {
+                    id: '76782ea7-e0ed-49a2-9780-30b85adc0d15',
+                    value: {
+                      placementOrderId: '1643051387926',
+                      placementOrderDate: '',
+                      placementOrderType: 'Court order',
+                      placementOrderNumber: '123456789',
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          hasPoForSiblings: YesNoNotsure.YES,
+          placementOrders: [
+            {
+              placementOrderId: '',
+              placementOrderNumber: '',
+              placementOrderCourt: '',
+              placementOrderDate: { day: '', month: '', year: '' },
+            },
+          ],
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          hasPoForSiblings: YesNoNotsure.YES,
+          placementOrders: [
+            {
+              placementOrderId: 'MOCK_ID',
+              placementOrderNumber: 'MOCK_NUMBER',
+              placementOrderCourt: 'MOCK_COURT',
+              placementOrderDate: { day: '1', month: '1', year: '2001' },
+            },
+          ],
+        },
+        expected: COMPLETED,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          hasPoForSiblings: YesNoNotsure.YES,
+          placementOrders: [
+            {
+              placementOrderId: 'MOCK_ID',
+              placementOrderNumber: '',
+              placementOrderCourt: '',
+              placementOrderDate: { day: '1', month: '1', year: '2001' },
+            },
+            {
+              placementOrderId: 'MOCK_ID2',
+              placementOrderType: '',
+              placementOrderNumber: 'MOCK_NUMBER2',
+              placementOrderCourt: 'MOCK_COURT2',
+              placementOrderDate: { day: '2', month: '2', year: '2002' },
+            },
+          ],
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          hasPoForSiblings: YesNoNotsure.YES,
+          placementOrders: [
+            {
+              placementOrderId: 'MOCK_ID',
+              placementOrderNumber: 'MOCK_NUMBER',
+              placementOrderCourt: 'MOCK_COURT',
+              placementOrderDate: { day: '1', month: '1', year: '2001' },
+            },
+            {
+              placementOrderId: 'MOCK_ID2',
+              placementOrderType: '',
+              placementOrderNumber: 'MOCK_NUMBER2',
+              placementOrderCourt: 'MOCK_COURT2',
+              placementOrderDate: { day: '2', month: '2', year: '2002' },
+            },
+          ],
+        },
+        expected: IN_PROGRESS,
+      },
+    ])('should return correct status %o', async ({ data, expected }) => {
+      expect(getSiblingStatus({ ...userCase, ...data })).toBe(expected);
     });
   });
 });

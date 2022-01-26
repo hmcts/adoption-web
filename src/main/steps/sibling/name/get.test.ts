@@ -2,17 +2,17 @@ import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { generateContent } from '../placement-order-number/content';
 
-import SiblingPlacementOrderGetController from './get';
+import SiblingGetController from './get';
 
-describe('SiblingPlacementOrderGetController', () => {
+describe('SiblingGetController', () => {
   let controller;
   let req;
   let res;
 
   beforeEach(() => {
     Date.now = jest.fn(() => +new Date('2021-01-01'));
-    controller = new SiblingPlacementOrderGetController(__dirname + '../../common/template', generateContent);
-    req = mockRequest({ session: { userCase: { siblings: [] } } });
+    controller = new SiblingGetController(__dirname + '../../common/template', generateContent);
+    req = mockRequest({ session: { userCase: { placementOrders: [] } } });
     res = mockResponse();
   });
 
@@ -108,6 +108,11 @@ describe('SiblingPlacementOrderGetController', () => {
       await controller.get(req, res);
       expect(req.session.userCase.selectedPlacementOrderId).toBe('MOCK_ID');
     });
+
+    test('should remove the query param and redirect', async () => {
+      await controller.get(req, res);
+      expect(res.redirect).toHaveBeenCalledWith('/request');
+    });
   });
 
   describe('when there is "remove" query param', () => {
@@ -150,6 +155,11 @@ describe('SiblingPlacementOrderGetController', () => {
       req.locals.api.triggerEvent.mockResolvedValue({});
       await controller.get(req, res);
       expect(req.session.userCase.addAnotherPlacementOrder).toBeUndefined();
+    });
+
+    test('should remove the query param and redirect', async () => {
+      await controller.get(req, res);
+      expect(res.redirect).toHaveBeenCalledWith('/request');
     });
   });
 

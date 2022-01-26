@@ -17,9 +17,9 @@ import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { FormFields } from '../../../app/form/Form';
 
-import SiblingPlacementOrderPostController from './post';
+import PlacementOrderPostController from './post';
 
-describe('SiblingPlacementOrderPostController', () => {
+describe('PlacementOrderPostController', () => {
   let req;
   let res;
   let controller;
@@ -28,21 +28,14 @@ describe('SiblingPlacementOrderPostController', () => {
     req = mockRequest({
       session: {
         userCase: {
-          siblings: [
-            {
-              siblingId: 'MOCK_SIBLING_ID',
-              siblingFirstName: '',
-              siblingLastName: '',
-              siblingPlacementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }],
-              selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
-            },
-          ],
+          placementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }],
+          selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
         },
         save: jest.fn(done => done()),
       },
     });
     res = mockResponse();
-    controller = new SiblingPlacementOrderPostController({});
+    controller = new PlacementOrderPostController({});
   });
 
   describe('when there are no form errors', () => {
@@ -59,7 +52,7 @@ describe('SiblingPlacementOrderPostController', () => {
       beforeEach(() => {
         mockGetParsedBody.mockReturnValue({ placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER' });
         mockGetErrors.mockReturnValue([]);
-        controller = new SiblingPlacementOrderPostController({});
+        controller = new PlacementOrderPostController({});
         req.locals.api.triggerEvent.mockResolvedValue({
           selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
           placementOrders: [
@@ -144,7 +137,7 @@ describe('SiblingPlacementOrderPostController', () => {
       res = mockResponse();
       mockGetParsedBody.mockReturnValue({ placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER' });
       mockGetErrors.mockReturnValue([]);
-      controller = new SiblingPlacementOrderPostController((): FormFields => ({}));
+      controller = new PlacementOrderPostController((): FormFields => ({}));
       req.locals.api.triggerEvent.mockResolvedValue({
         selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_NUMBER',
         placementOrders: [

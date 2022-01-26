@@ -8,7 +8,7 @@ describe('placement-order-summary', () => {
     placementOrder: 'Placement Order',
   };
 
-  test.skip('should return correct summary list items', () => {
+  test('should return correct summary list items', () => {
     userCase = {
       placementOrders: [
         {

@@ -15,29 +15,29 @@ describe('children > placement-order-number content', () => {
       selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
     },
   } as CommonContent;
-  test.skip('should return correct english content', () => {
+  test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
-    expect(generatedContent.section).toEqual("The child's details");
-    expect(generatedContent.label).toEqual('What is the serial or case number on the placement order?');
+    expect(generatedContent.section).toEqual('Sibling details');
+    expect(generatedContent.label).toEqual('What is the serial or case number on the order?');
     expect(generatedContent.hint).toEqual(
-      "This is on the top right of the order. Ask the adoption agency or social worker if you're not sure."
+      'Ask your social worker or adoption agency if you are not sure where to find this.'
     );
     expect((generatedContent.errors as any).placementOrderNumber.required).toBe('Enter the serial or case number');
   });
 
-  test.skip('should return correct welsh content', () => {
+  test('should return correct welsh content', () => {
     const generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual("The child's details (in welsh)");
-    expect(generatedContent.label).toEqual('What is the serial or case number on the placement order? (in welsh)');
+    expect(generatedContent.section).toEqual('Sibling details (in Welsh)');
+    expect(generatedContent.label).toEqual('What is the serial or case number on the order? (in welsh)');
     expect(generatedContent.hint).toEqual(
-      "This is on the top right of the order. Ask the adoption agency or social worker if you're not sure. (in welsh)"
+      'Ask your social worker or adoption agency if you are not sure where to find this. (in welsh)'
     );
     expect((generatedContent.errors as any).placementOrderNumber.required).toBe(
       'Enter the serial or case number (in welsh)'
     );
   });
 
-  test.skip('should contain placementOrderNumber field', () => {
+  test('should contain placementOrderNumber field', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
@@ -45,25 +45,24 @@ describe('children > placement-order-number content', () => {
     expect(placementOrderNumberField.type).toBe('text');
     expect(placementOrderNumberField.classes).toBe('govuk-label govuk-input--width-10');
     expect((placementOrderNumberField.label as Function)(generatedContent)).toBe(
-      'What is the serial or case number on the placement order?'
+      'What is the serial or case number on the order?'
     );
     expect(((placementOrderNumberField as FormInput).hint as Function)(generatedContent)).toBe(
-      "This is on the top right of the order. Ask the adoption agency or social worker if you're not sure."
+      'Ask your social worker or adoption agency if you are not sure where to find this.'
     );
-    expect((placementOrderNumberField as FormInput).value).toBe('1234');
     expect(placementOrderNumberField.labelSize).toBe('l');
     expect(placementOrderNumberField.attributes).toEqual({ spellcheck: false });
 
     expect(placementOrderNumberField.validator).toBe(isFieldFilledIn);
   });
 
-  test.skip('should contain submit button', () => {
+  test('should contain submit button', () => {
     const generatedContent = generateContent({ ...commonContent, userCase: undefined });
     const form = generatedContent.form as FormContent;
     expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
   });
 
-  test.skip('should contain saveAsDraft button', () => {
+  test('should contain saveAsDraft button', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save as draft');
