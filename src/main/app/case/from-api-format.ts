@@ -44,6 +44,11 @@ const fields: FromApiConverters = {
       placementOrderDate: fromApiDate(item.value.placementOrderDate),
     })),
   }),
+  adopAgencyOrLAs: data => ({
+    adopAgencyOrLAs: data.adopAgencyOrLAs?.map(item => ({
+      ...item.value,
+    })),
+  }),
   applicant1DateOfBirth: data => ({
     applicant1DateOfBirth: fromApiDate(data.applicant1DateOfBirth),
   }),

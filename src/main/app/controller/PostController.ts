@@ -54,19 +54,18 @@ export class PostController<T extends AnyObject> {
     Object.assign(req.session.userCase, formData);
     req.session.errors = form.getErrors(formData);
 
+    if (req.body.saveAsDraft) {
+      // skip empty field errors in case of save as draft
+      req.session.errors = req.session.errors.filter(item => item.errorType !== ValidationError.REQUIRED);
+    }
+
     if (req.session.errors.length === 0) {
       try {
         req.session.userCase = await this.save(req, formData, this.getEventName(req));
       } catch (err) {
         req.locals.logger.error('Error saving', err);
-        //TODO uncomment this
-        //req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+        req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
       }
-    }
-
-    if (req.body.saveAsDraft) {
-      // skip empty field errors in case of save as draft
-      req.session.errors = req.session.errors.filter(item => item.errorType !== ValidationError.REQUIRED);
     }
 
     const nextUrl = req.session.errors.length > 0 ? req.url : getNextStepUrl(req, req.session.userCase);

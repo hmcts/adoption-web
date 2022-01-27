@@ -3,8 +3,8 @@ import { YesOrNo } from '../../app/case/definition';
 import { childrenSequence } from './childrenSequence';
 
 describe('childrenSequence', () => {
-  test('should contain 11 entries in children screen sequence', () => {
-    expect(childrenSequence).toHaveLength(11);
+  test('should contain 14 entries in children screen sequence', () => {
+    expect(childrenSequence).toHaveLength(14);
 
     expect(childrenSequence[0].url).toBe('/children/placement-order-type');
     expect(childrenSequence[0].showInSection).toBe('aboutChildren');
@@ -53,5 +53,42 @@ describe('childrenSequence', () => {
     expect(childrenSequence[10].url).toBe('/children/full-name-after-adoption');
     expect(childrenSequence[10].showInSection).toBe('aboutChildren');
     expect(childrenSequence[10].getNextStep({})).toBe('/task-list');
+
+    expect(childrenSequence[11].url).toBe('/children/adoption-agency');
+    expect(childrenSequence[11].showInSection).toBe('aboutChildren');
+    expect(
+      childrenSequence[11].getNextStep({ adopAgencyOrLAs: [{ adopAgencyOrLaId: '1' }, { adopAgencyOrLaId: '2' }] })
+    ).toBe('/children/other-adoption-agency');
+    expect(childrenSequence[11].getNextStep({ adopAgencyOrLAs: [{ adopAgencyOrLaId: '1' }] })).toBe(
+      '/children/other-adoption-agency'
+    );
+    expect(childrenSequence[11].getNextStep({ adopAgencyOrLAs: [] })).toBe('/children/other-adoption-agency');
+    expect(
+      childrenSequence[11].getNextStep({
+        selectedAdoptionAgencyId: '1609459200000',
+        adopAgencyOrLAs: [{ adopAgencyOrLaId: '1609459200099' }, { adopAgencyOrLaId: '1609459200000' }],
+      })
+    ).toBe('/children/social-worker');
+
+    Date.now = jest.fn(() => +new Date('2021-01-01'));
+    expect(childrenSequence[12].url).toBe('/children/other-adoption-agency');
+    expect(childrenSequence[12].showInSection).toBe('aboutChildren');
+    expect(childrenSequence[12].getNextStep({ hasAnotherAdopAgencyOrLA: YesOrNo.NO })).toBe('/children/social-worker');
+    expect(
+      childrenSequence[12].getNextStep({
+        hasAnotherAdopAgencyOrLA: YesOrNo.YES,
+        adopAgencyOrLAs: [{ adopAgencyOrLaId: '1609459200099' }],
+      })
+    ).toBe('/children/adoption-agency?add=1609459200000');
+    expect(
+      childrenSequence[12].getNextStep({
+        hasAnotherAdopAgencyOrLA: YesOrNo.YES,
+        adopAgencyOrLAs: [{ adopAgencyOrLaId: '1' }, { adopAgencyOrLaId: '2' }],
+      })
+    ).toBe('/children/adoption-agency?change=2');
+
+    expect(childrenSequence[13].url).toBe('/children/social-worker');
+    expect(childrenSequence[13].showInSection).toBe('aboutChildren');
+    expect(childrenSequence[13].getNextStep({})).toBe('/task-list');
   });
 });

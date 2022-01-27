@@ -48,8 +48,13 @@ withPipeline(type, product, component) {
     yarnBuilder.yarn('build')
   }
 
+  after('test') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
+  }
+
   before('functionalTest:preview') {
     env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
+    env.TEST_RETRIES = 5
   }
 
   after('functionalTest:preview') {
@@ -60,13 +65,28 @@ withPipeline(type, product, component) {
 
   before('smoketest:preview') {
     env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
+    env.TEST_RETRIES = 5
   }
 
   before('smoketest:aat') {
     env.ADOP_WEB_URL = "https://adoption-web-staging.service.core-compute-aat.internal/"
+    env.TEST_RETRIES = 5
   }
+
+  after('smoketest:aat') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+
+  }
+
   before('functionalTest:aat') {
     yarnBuilder.yarn('test:functional:skip')
+    env.TEST_RETRIES = 5
   }
+
+  after('functionalTest:aat') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+
+  }
+
 
 }
