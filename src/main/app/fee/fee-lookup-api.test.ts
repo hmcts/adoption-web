@@ -44,7 +44,12 @@ describe('fee-lookup-api', () => {
       }
     );
 
-    expect(actual).toEqual({ MOCK_KEY: 'MOCK_VALUE' });
+    expect(actual).toEqual({
+      feeAmount: 1234,
+      feeCode: 'MOCK_CODE',
+      feeDescription: 'MOCK_DESCRIPTION',
+      feeVersion: 'MOCK_VERSION',
+    });
   });
 
   it('returns an empty object when there are no results', async () => {
@@ -53,7 +58,7 @@ describe('fee-lookup-api', () => {
     const actual = await getFee(mockLogger);
 
     expect(mockLogger.error).not.toHaveBeenCalled();
-    expect(actual).toEqual({});
+    expect(actual).toEqual(undefined);
   });
 
   it('returns an empty object with an invalid response', async () => {
@@ -62,7 +67,7 @@ describe('fee-lookup-api', () => {
     const actual = await getFee(mockLogger);
 
     expect(mockLogger.error).toHaveBeenCalled();
-    expect(actual).toEqual({});
+    expect(actual).toEqual(undefined);
   });
 
   it('returns an empty object when the token is incorrect and logs the error', async () => {
@@ -72,7 +77,7 @@ describe('fee-lookup-api', () => {
     const actual = await getFee(mockLogger);
 
     expect(mockLogger.error).toHaveBeenCalledWith('Fee lookup error occurred', mockResponse);
-    expect(actual).toEqual({});
+    expect(actual).toEqual(undefined);
   });
 
   it('returns an empty object when the request fails', async () => {
@@ -81,6 +86,6 @@ describe('fee-lookup-api', () => {
     const actual = await getFee(mockLogger);
 
     expect(mockLogger.error).toHaveBeenCalledWith('Fee lookup error occurred', { code: 'ECONNABORTED' });
-    expect(actual).toEqual({});
+    expect(actual).toEqual(undefined);
   });
 });

@@ -1,5 +1,10 @@
 export const validFeeLookup200Response = {
-  data: { MOCK_KEY: 'MOCK_VALUE' },
+  data: {
+    fee_amount: 1234,
+    code: 'MOCK_CODE',
+    description: 'MOCK_DESCRIPTION',
+    version: 'MOCK_VERSION',
+  },
 };
 
 export const emptyFeeLookup200Response = {};
