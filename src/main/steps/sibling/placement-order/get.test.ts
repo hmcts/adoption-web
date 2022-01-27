@@ -20,7 +20,7 @@ describe('SiblingPlacementOrderGetController', () => {
     test('should generate random placementOrderId', async () => {
       req.locals.api.triggerEvent.mockResolvedValue({
         selectedSiblingPoId: '1609459200000',
-        placementOrders: [{ placementOrderId: '1609459200000' }],
+        siblings: [{ siblingPlacementOrders: [{ placementOrderId: '1609459200000' }] }],
       });
       await controller.get(req, res);
       expect(req.session.userCase.selectedSiblingPoId).toBe('1609459200000');
@@ -32,7 +32,7 @@ describe('SiblingPlacementOrderGetController', () => {
       req = mockRequest({ session: { userCase: { selectedSiblingPoId: 'MOCK_PLACEMENT_ORDER_ID' } } });
       req.locals.api.triggerEvent.mockResolvedValue({
         selectedSiblingPoId: 'MOCK_PLACEMENT_ORDER_ID',
-        placementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }],
+        siblings: [{ siblingPlacementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }] }],
       });
       await controller.get(req, res);
       expect(req.session.userCase.selectedSiblingPoId).toBe('MOCK_PLACEMENT_ORDER_ID');
@@ -43,10 +43,13 @@ describe('SiblingPlacementOrderGetController', () => {
     test('should create a blank placementOrder with generated placementOrderId', async () => {
       req.locals.api.triggerEvent.mockResolvedValue({
         selectedSiblingPoId: '1609459200000',
-        placementOrders: [{ placementOrderId: '1609459200000' }],
+        siblings: [{ siblingPlacementOrders: [{ placementOrderId: '1609459200000' }] }],
       });
       await controller.get(req, res);
-      expect(req.session.userCase.placementOrders).toEqual([{ placementOrderId: '1609459200000' }]);
+      expect(req.session.userCase.siblings).toEqual([
+        { siblingPlacementOrders: [{ placementOrderId: '1609459200000' }] },
+      ]);
+      expect(req.session.userCase.selectedSiblingPoId).toEqual('1609459200000');
     });
   });
 
@@ -67,28 +70,43 @@ describe('SiblingPlacementOrderGetController', () => {
         },
       });
       req.locals.api.triggerEvent.mockResolvedValue({
-        selectedSiblingPoId: 'MOCK_PLACEMENT_ORDER_ID',
-        placementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }],
+        selectedSiblingId: 'MOCK_SIBLING_ID',
+        selectedSiblingPoId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID',
+        siblings: [
+          {
+            siblingId: 'MOCK_SIBLING_ID',
+            siblingPlacementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }],
+          },
+        ],
       });
 
       await controller.get(req, res);
-      expect(req.session.userCase.placementOrders).toEqual([{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }]);
+      expect(req.session.userCase.siblings).toEqual([
+        { siblingId: 'MOCK_SIBLING_ID', siblingPlacementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }] },
+      ]);
+      expect(req.session.userCase.selectedSiblingPoId).toEqual('MOCK_SIBLING_PLACEMENT_ORDER_ID');
     });
   });
 
   describe('when there is "add" query param', () => {
     beforeEach(() => {
-      req = mockRequest({ query: { add: 'MOCK_ID' }, session: { userCase: { placementOrders: [] } } });
+      req = mockRequest({
+        query: { add: 'MOCK_ID' },
+        session: { userCase: { siblings: [{ siblingPlacementOrders: [] }] } },
+      });
       req.url = '/request?add=MOCK_ID';
     });
 
     test('should create a blank placementOrder with "add" query param\'s value as placementOrderId', async () => {
       req.locals.api.triggerEvent.mockResolvedValue({
         selectedSiblingPoId: 'MOCK_ID',
-        placementOrders: [{ placementOrderId: 'MOCK_ID' }],
+        siblings: [{ siblingPlacementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }] }],
       });
       await controller.get(req, res);
-      expect(req.session.userCase.placementOrders).toEqual([{ placementOrderId: 'MOCK_ID' }]);
+      expect(req.session.userCase.selectedSiblingPoId).toEqual('MOCK_ID');
+      expect(req.session.userCase.siblings).toEqual([
+        { siblingPlacementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }] },
+      ]);
     });
 
     test('should reset the addAnotherPlacementOrder in userCase', async () => {
@@ -122,12 +140,16 @@ describe('SiblingPlacementOrderGetController', () => {
         query: { remove: 'MOCK_ID2' },
         session: {
           userCase: {
-            addAnotherPlacementOrder: 'Yes',
+            addAnotherSiblingPlacementOrder: 'Yes',
             selectedSiblingPoId: 'MOCK_ID2',
-            placementOrders: [
-              { placementOrderId: 'MOCK_ID' },
-              { placementOrderId: 'MOCK_ID2' },
-              { placementOrderId: 'MOCK_ID3' },
+            siblings: [
+              {
+                siblingPlacementOrders: [
+                  { placementOrderId: 'MOCK_ID' },
+                  { placementOrderId: 'MOCK_ID2' },
+                  { placementOrderId: 'MOCK_ID3' },
+                ],
+              },
             ],
           },
         },
@@ -137,12 +159,13 @@ describe('SiblingPlacementOrderGetController', () => {
 
     test('should remove the placementOrder from userCase placementOrders list', async () => {
       req.locals.api.triggerEvent.mockResolvedValue({
-        placementOrders: [{ placementOrderId: 'MOCK_ID' }, { placementOrderId: 'MOCK_ID3' }],
+        siblings: [{ siblingPlacementOrders: [{ placementOrderId: 'MOCK_ID' }, { placementOrderId: 'MOCK_ID3' }] }],
       });
       await controller.get(req, res);
-      expect(req.session.userCase.placementOrders).toEqual([
-        { placementOrderId: 'MOCK_ID' },
-        { placementOrderId: 'MOCK_ID3' },
+      expect(req.session.userCase.siblings).toEqual([
+        {
+          siblingPlacementOrders: [{ placementOrderId: 'MOCK_ID' }, { placementOrderId: 'MOCK_ID3' }],
+        },
       ]);
     });
 
@@ -150,12 +173,6 @@ describe('SiblingPlacementOrderGetController', () => {
       req.locals.api.triggerEvent.mockResolvedValue({ selectedSiblingPoId: 'MOCK_ID' });
       await controller.get(req, res);
       expect(req.session.userCase.selectedSiblingPoId).toBe('MOCK_ID');
-    });
-
-    test('should reset the addAnotherPlacementOrder in userCase', async () => {
-      req.locals.api.triggerEvent.mockResolvedValue({});
-      await controller.get(req, res);
-      expect(req.session.userCase.addAnotherPlacementOrder).toBeUndefined();
     });
   });
 
