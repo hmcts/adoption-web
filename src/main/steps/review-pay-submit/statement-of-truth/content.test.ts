@@ -31,6 +31,9 @@ const enContent = {
     applicant1IBelieveApplicationIsTrue: {
       required: 'Confirm your statement of truth',
     },
+    applicant2IBelieveApplicationIsTrue: {
+      required: 'Confirm your statement of truth',
+    },
     applicant1SotFullName: {
       required: 'Enter a full name',
     },
@@ -57,6 +60,9 @@ const cyContent = {
   confirm: 'Confirm (in Welsh)',
   errors: {
     applicant1IBelieveApplicationIsTrue: {
+      required: 'Confirm your statement of truth (in Welsh)',
+    },
+    applicant2IBelieveApplicationIsTrue: {
       required: 'Confirm your statement of truth (in Welsh)',
     },
     applicant1SotFullName: {
@@ -146,6 +152,9 @@ describe('occupation content', () => {
     expect(values).toHaveLength(1);
     expect((values[0].label as Function)(generatedContent)).toBe(enContent.applicant2IBelieveApplicationIsTrue);
     expect(values[0].value).toBe('checked');
+
+    (applicant2IBelieveApplicationIsTrue.validator as Function)('MockName');
+    expect(isFieldFilledIn).toHaveBeenCalledWith('MockName');
   });
 
   it('should have an applicant1SotFullName text input field', () => {

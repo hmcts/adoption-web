@@ -23,6 +23,9 @@ export const en = (): Record<string, unknown> => ({
     applicant1IBelieveApplicationIsTrue: {
       required: 'Confirm your statement of truth',
     },
+    applicant2IBelieveApplicationIsTrue: {
+      required: 'Confirm your statement of truth',
+    },
     applicant1SotFullName: {
       required: 'Enter a full name',
     },
@@ -49,6 +52,9 @@ export const cy = (): Record<string, unknown> => ({
   confirm: 'Confirm (in Welsh)',
   errors: {
     applicant1IBelieveApplicationIsTrue: {
+      required: 'Confirm your statement of truth (in Welsh)',
+    },
+    applicant2IBelieveApplicationIsTrue: {
       required: 'Confirm your statement of truth (in Welsh)',
     },
     applicant1SotFullName: {
@@ -114,6 +120,7 @@ export const form: FormContent = {
                   value: Checkbox.Checked,
                 },
               ],
+              validator: isFieldFilledIn,
             },
             applicant1SotFullName: {
               type: 'text',
