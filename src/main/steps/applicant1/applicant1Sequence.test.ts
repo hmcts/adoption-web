@@ -2,7 +2,7 @@ import { applicant1Sequence } from './applicant1Sequence';
 
 describe('applicant1Sequence', () => {
   test('should contain 13 entries in applicant 1 screen sequence', () => {
-    expect(applicant1Sequence).toHaveLength(13);
+    expect(applicant1Sequence).toHaveLength(12);
 
     expect(applicant1Sequence[0].url).toBe('/applying-with');
     expect(applicant1Sequence[0].showInSection).toBe('aboutApplicant1');
@@ -51,8 +51,5 @@ describe('applicant1Sequence', () => {
     expect(applicant1Sequence[11].url).toBe('/applicant1/address/manual');
     expect(applicant1Sequence[11].showInSection).toBe('aboutApplicant1');
     expect(applicant1Sequence[11].getNextStep({})).toBe('/applicant1/contact-details');
-
-    expect(applicant1Sequence[12].url).toBe('/fee-lookup');
-    expect(applicant1Sequence[12].getNextStep({})).toBe('/task-list');
   });
 });
