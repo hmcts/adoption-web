@@ -18,7 +18,6 @@ const mockGetServiceAuthToken = getServiceAuthToken as jest.Mocked<jest.Mock>;
 describe('PaymentClient', () => {
   it('creates payments', async () => {
     mockedConfig.get.mockReturnValueOnce('http://mock-service-url');
-    mockedConfig.get.mockReturnValueOnce('mock-api-key');
     mockGetServiceAuthToken.mockReturnValueOnce('mock-server-auth-token');
     const mockPost = jest.fn().mockResolvedValueOnce({
       data: { mockPayment: 'data', _links: { next_url: { href: 'http://example.com/pay' } } },
@@ -47,15 +46,15 @@ describe('PaymentClient', () => {
     });
 
     expect(mockPost).toHaveBeenCalledWith('/card-payments', {
-      amount: 123.45,
+      amount: 183,
       ccd_case_number: '1234',
       currency: 'GBP',
-      description: 'Adoption application fee',
+      description: 'Apply for adoption',
       fees: [
         {
-          calculated_amount: '123.45',
-          code: 'mock fee code',
-          version: 'mock fee version',
+          calculated_amount: 183,
+          code: 'FEE0310',
+          version: 2,
         },
       ],
       language: undefined,
@@ -74,11 +73,11 @@ describe('PaymentClient', () => {
 
   it('throws an error and logs if the response does not contain a redirect URL', async () => {
     mockedConfig.get.mockReturnValueOnce('http://mock-service-url');
-    mockedConfig.get.mockReturnValueOnce('mock-api-key');
     mockGetServiceAuthToken.mockReturnValueOnce('mock-server-auth-token');
     const mockPost = jest.fn().mockResolvedValueOnce({ data: { mockPayment: 'data, but missing _links' } });
     mockedAxios.create.mockReturnValueOnce({ post: mockPost } as unknown as AxiosInstance);
     const req = mockRequest({
+      session: { lang: 'en' },
       userCase: {
         id: '1234',
         applicationFeeOrderSummary: {

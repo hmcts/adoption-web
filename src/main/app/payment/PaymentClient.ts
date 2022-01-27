@@ -12,7 +12,6 @@ export class PaymentClient {
   client: AxiosInstance;
 
   constructor(private readonly session: AppSession, readonly returnUrl: string) {
-    console.log("config.get('services.payments.url')", config.get('services.payments.url'));
     this.client = Axios.create({
       baseURL: config.get('services.payments.url'),
       headers: {
@@ -26,6 +25,8 @@ export class PaymentClient {
   public async create(): Promise<Payment> {
     const userCase = this.session.userCase;
     const caseId = userCase.id.toString();
+    // const fee = this.session.fee;
+
     //TODO uncomment
     // const total = userCase.applicationFeeOrderSummary.Fees.reduce((sum, item) => sum + +item.value.FeeAmount, 0) / 100;
     const total = 183;
@@ -74,6 +75,7 @@ export class PaymentClient {
   public async get(paymentReference: string): Promise<Payment | undefined> {
     try {
       const response = await this.client.get<Payment>(`/card-payments/${paymentReference}`);
+      console.log(JSON.stringify(response.data));
       return response.data;
     } catch (e) {
       const errMsg = 'Error fetching payment';
