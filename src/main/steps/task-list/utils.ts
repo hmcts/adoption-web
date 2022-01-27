@@ -247,12 +247,12 @@ export const getOtherParentStatus = (userCase: CaseWithId): SectionStatus => {
 
 export const getSiblingStatus = (userCase: CaseWithId): SectionStatus => {
   const exists = userCase.hasSiblings;
-
-  if (exists === YesNoNotsure.NO || YesNoNotsure.NOT_SURE) {
+  console.log('exists', exists);
+  if (exists === YesNoNotsure.NO || exists === YesNoNotsure.NOT_SURE) {
     return SectionStatus.COMPLETED;
   } else if (exists === YesNoNotsure.YES) {
     const courtOrderExists = userCase.hasPoForSiblings;
-    if (courtOrderExists === YesNoNotsure.NO || YesNoNotsure.NOT_SURE) {
+    if (courtOrderExists === YesNoNotsure.NO || courtOrderExists === YesNoNotsure.NOT_SURE) {
       return SectionStatus.COMPLETED;
     } else if (courtOrderExists === YesNoNotsure.YES) {
       const siblingsComplete = userCase.siblings?.every(item => {

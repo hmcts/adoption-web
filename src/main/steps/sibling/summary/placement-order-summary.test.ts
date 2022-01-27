@@ -1,7 +1,7 @@
 import { placementOrderListItems } from './placement-order-summary';
 
 describe('placement-order-summary', () => {
-  let userCase;
+  // let userCase;
   const content = {
     change: 'Change',
     remove: 'Remove',
@@ -9,42 +9,35 @@ describe('placement-order-summary', () => {
   };
 
   test('should return correct summary list items', () => {
-    userCase = {
-      placementOrders: [
-        {
-          placementOrderId: 'MOCK_ID',
-          placementOrderNumber: 'MOCK_NUMBER',
-          placementOrderCourt: 'MOCK_COURT',
-          placementOrderDate: { day: '12', month: '10', year: '2021' },
-        },
-        {
-          placementOrderId: 'MOCK_ID2',
-          placementOrderType: 'MOCK_TYPE2',
-          placementOrderNumber: 'MOCK_NUMBER2',
-          placementOrderCourt: 'MOCK_COURT2',
-          placementOrderDate: { day: '2', month: '2', year: '' },
-        },
-        {
-          placementOrderId: 'MOCK_ID3',
-          placementOrderType: 'MOCK_TYPE3',
-          placementOrderNumber: 'MOCK_NUMBER3',
-          placementOrderCourt: 'MOCK_COURT3',
-          placementOrderDate: { day: '3', month: '3', year: '2021' },
-        },
-      ],
-    };
-    const result = placementOrderListItems(userCase, content);
+    const placementOrders = [
+      {
+        placementOrderId: 'MOCK_ID',
+        placementOrderType: 'MOCK_TYPE',
+        placementOrderNumber: 'MOCK_NUMBER',
+      },
+      {
+        placementOrderId: 'MOCK_ID2',
+        placementOrderType: 'MOCK_TYPE2',
+      },
+      {
+        placementOrderId: 'MOCK_ID3',
+        placementOrderType: 'MOCK_TYPE3',
+        placementOrderNumber: 'MOCK_NUMBER3',
+      },
+    ];
+    const result = placementOrderListItems(placementOrders, content);
     expect(result).toEqual([
       {
-        key: { text: 'Placement Order', classes: 'font-normal' },
+        key: { text: 'MOCK_TYPE', classes: 'font-normal' },
         value: { html: '' },
         actions: {
           items: [
             {
-              href: '/children/placement-order-check-your-answers?change=MOCK_ID',
+              href: '#',
               text: 'Change',
               visuallyHiddenText: 'change',
             },
+            { href: '#', text: 'Remove', visuallyHiddenText: 'remove' },
           ],
         },
       },
@@ -54,11 +47,11 @@ describe('placement-order-summary', () => {
         actions: {
           items: [
             {
-              href: '/children/placement-order-check-your-answers?change=MOCK_ID2',
+              href: '#',
               text: 'Change',
               visuallyHiddenText: 'change',
             },
-            { href: '/children/placement-order-summary?remove=MOCK_ID2', text: 'Remove', visuallyHiddenText: 'remove' },
+            { href: '#', text: 'Remove', visuallyHiddenText: 'remove' },
           ],
         },
       },
@@ -68,11 +61,11 @@ describe('placement-order-summary', () => {
         actions: {
           items: [
             {
-              href: '/children/placement-order-check-your-answers?change=MOCK_ID3',
+              href: '#',
               text: 'Change',
               visuallyHiddenText: 'change',
             },
-            { href: '/children/placement-order-summary?remove=MOCK_ID3', text: 'Remove', visuallyHiddenText: 'remove' },
+            { href: '#', text: 'Remove', visuallyHiddenText: 'remove' },
           ],
         },
       },
