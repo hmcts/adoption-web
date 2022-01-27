@@ -5,6 +5,8 @@ import { getNextStepUrl } from '../..';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
+import { ValidationError } from '../../../app/form/validation';
+
 @autobind
 export default class SiblingPostController extends PostController<AnyObject> {
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
@@ -19,6 +21,11 @@ export default class SiblingPostController extends PostController<AnyObject> {
     );
 
     Object.assign(sibling, formData);
+
+    if (req.body.saveAsDraft) {
+      // skip empty field errors in case of save as draft
+      req.session.errors = req.session.errors.filter(item => item.errorType !== ValidationError.REQUIRED);
+    }
 
     const nextUrl = req.session.errors.length > 0 ? req.url : getNextStepUrl(req, req.session.userCase);
 
