@@ -81,6 +81,12 @@ const fields: ToApiConverters = {
       },
     })),
   }),
+  applicant1IBelieveApplicationIsTrue: data => ({
+    applicant1StatementOfTruth: checkboxConverter(data.applicant1IBelieveApplicationIsTrue),
+  }),
+  applicant2IBelieveApplicationIsTrue: data => ({
+    applicant2StatementOfTruth: checkboxConverter(data.applicant2IBelieveApplicationIsTrue),
+  }),
   jurisdictionResidualEligible: data => ({
     jurisdictionResidualEligible: checkboxConverter(data.jurisdictionResidualEligible),
   }),

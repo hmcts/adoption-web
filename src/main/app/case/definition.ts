@@ -433,6 +433,11 @@ export interface CaseData {
   selectedSiblingId: string;
   selectedSiblingPoId: string;
 
+  applicant1StatementOfTruth: YesOrNo;
+  applicant2StatementOfTruth: YesOrNo;
+  applicant1SotFullName: string;
+  applicant2SotFullName: string;
+
   applicationType: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
   labelContentApplicant2: string;
@@ -534,8 +539,6 @@ export interface CaseData {
   solStatementOfReconciliationDiscussed: YesOrNo;
   applicant1PrayerHasBeenGivenCheckbox: ThePrayer[];
   applicant2PrayerHasBeenGiven: YesOrNo;
-  applicant1StatementOfTruth: YesOrNo;
-  applicant2StatementOfTruth: YesOrNo;
   solSignStatementOfTruth: YesOrNo;
   solStatementOfReconciliationName: string;
   solStatementOfReconciliationFirm: string;
