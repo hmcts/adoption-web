@@ -5,11 +5,11 @@
 {% block before_fields %}
   {% if siblings%}
     {% for item in siblings %}
-      <p class="govuk-!-margin-top-7 govuk-!-margin-bottom-0">
-          <span class="govuk-!-font-weight-bold">Sibling:</span>{{ item.siblingFirstName}} {{item.siblingLastNames}}
+      <p class="govuk-!-margin-top-7 govuk-!-margin-bottom-0 govuk-body govuk-!-font-size-19">
+          <span class="govuk-!-font-weight-bold">Sibling: </span>{{ item.siblingFirstName}} {{item.siblingLastNames}}
       </p>
       <p class="govuk-!-margin-top-0">
-          <a class="govuk-link" href="{{ item.changeSiblingNameUrl }}">{{changeName}}</a>
+          <a class="govuk-link govuk-!-font-size-19" href="{{ item.changeSiblingNameUrl }}">{{changeName}}</a>
       </p>
       {{ govukSummaryList({
           classes: 'govuk-!-margin-bottom-9 govuk-!-margin-top-9',

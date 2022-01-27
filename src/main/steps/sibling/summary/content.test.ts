@@ -44,12 +44,16 @@ describe('sibling > placement-order-summary content', () => {
     language: 'en',
     userCase: {
       addAnotherSiblingPlacementOrder: 'Yes',
-      placementOrders: [
+      siblings: [
         {
-          placementOrderId: 'MOCK_ID',
-          placementOrderNumber: 'MOCK_NUMBER',
-          placementOrderCourt: 'MOCK_COURT',
-          placementOrderDate: { day: '12', month: '10', year: '2021' },
+          siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+          siblingLastNames: 'MOCK_SIBLING_LAST_NAME',
+          siblingPlacementOrders: [
+            {
+              placementOrderId: 'MOCK_ID',
+              placementOrderNumber: 'MOCK_NUMBER',
+            },
+          ],
         },
       ],
     },
@@ -66,26 +70,6 @@ describe('sibling > placement-order-summary content', () => {
     expect(generatedContent.label).toEqual(enContent.label);
     expect(generatedContent.hint).toEqual(enContent.hint);
     expect(generatedContent.errors).toEqual(enContent.errors);
-    expect(generatedContent.placementOrderListItems).toEqual([
-      {
-        key: { text: 'Placement Order', classes: 'font-normal' },
-        value: { html: '' },
-        actions: {
-          items: [
-            {
-              href: '#',
-              text: 'Change',
-              visuallyHiddenText: 'change',
-            },
-            {
-              href: '#',
-              text: 'Remove',
-              visuallyHiddenText: 'remove',
-            },
-          ],
-        },
-      },
-    ]);
   });
 
   test('should return correct welsh content', () => {

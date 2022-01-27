@@ -181,6 +181,7 @@ describe('SiblingPlacementOrderGetController', () => {
       expect(req.locals.logger.error).toHaveBeenCalledWith('Error saving', 'MOCK_ERROR');
     });
   });
+
   test('saves the placementOrders and selectedSiblingPoId in session', async () => {
     await controller.get(req, res);
     expect(req.session.save).toHaveBeenCalled();

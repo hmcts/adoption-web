@@ -17,9 +17,9 @@ import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { FormFields } from '../../../app/form/Form';
 
-import PlacementOrderPostController from './post';
+import SiblingPostController from './post';
 
-describe('PlacementOrderPostController', () => {
+describe('SiblingPostController', () => {
   let req;
   let res;
   let controller;
@@ -28,14 +28,14 @@ describe('PlacementOrderPostController', () => {
     req = mockRequest({
       session: {
         userCase: {
-          placementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }],
-          selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+          siblings: [{ siblingId: 'MOCK_SIBLING_ID' }],
+          selectedSiblingId: 'MOCK_SIBLING_ID',
         },
         save: jest.fn(done => done()),
       },
     });
     res = mockResponse();
-    controller = new PlacementOrderPostController({});
+    controller = new SiblingPostController({});
   });
 
   describe('when there are no form errors', () => {
@@ -48,24 +48,35 @@ describe('PlacementOrderPostController', () => {
       jest.clearAllMocks();
     });
 
-    describe('and when there is a selectedPlacementOrderId', () => {
+    describe('and when there is a selectedSiblingId', () => {
       beforeEach(() => {
-        mockGetParsedBody.mockReturnValue({ placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER' });
+        mockGetParsedBody.mockReturnValue({
+          siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+          siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
+        });
         mockGetErrors.mockReturnValue([]);
-        controller = new PlacementOrderPostController({});
+        controller = new SiblingPostController({});
         req.locals.api.triggerEvent.mockResolvedValue({
-          selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
-          placementOrders: [
-            { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER' },
+          selectedSiblingId: 'MOCK_SIBLING_ID',
+          siblings: [
+            {
+              siblingId: 'MOCK_SIBLING_ID',
+              siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+              siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
+            },
           ],
         });
       });
 
-      test('should set the formData fields in userCase placementOrders session data', async () => {
+      test('should set the formData fields in userCase siblings session data', async () => {
         await controller.post(req, res);
         expect(req.session.errors).toEqual([]);
-        expect(req.session.userCase.placementOrders).toEqual([
-          { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER' },
+        expect(req.session.userCase.siblings).toEqual([
+          {
+            siblingId: 'MOCK_SIBLING_ID',
+            siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+            siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
+          },
         ]);
         expect(req.session.save).toHaveBeenCalled();
       });
@@ -108,8 +119,8 @@ describe('PlacementOrderPostController', () => {
       req = mockRequest({
         session: {
           userCase: {
-            placementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }],
-            selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+            siblings: [{ siblingId: 'MOCK_SIBLING_ID' }],
+            selectedSiblingId: 'MOCK_SIBLING_ID',
           },
           save: jest.fn(done => done('MOCK_ERROR')),
         },
@@ -128,31 +139,63 @@ describe('PlacementOrderPostController', () => {
       req = mockRequest({
         session: {
           userCase: {
-            placementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }],
-            selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+            siblings: [{ siblingId: 'MOCK_SIBLING_ID' }],
+            selectedSiblingId: 'MOCK_SIBLING_ID',
           },
           save: jest.fn(done => done()),
         },
       });
       res = mockResponse();
-      mockGetParsedBody.mockReturnValue({ placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER' });
+      mockGetParsedBody.mockReturnValue({
+        siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+        siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
+      });
       mockGetErrors.mockReturnValue([]);
-      controller = new PlacementOrderPostController((): FormFields => ({}));
+      controller = new SiblingPostController((): FormFields => ({}));
       req.locals.api.triggerEvent.mockResolvedValue({
-        selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_NUMBER',
-        placementOrders: [
-          { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER' },
+        selectedSiblingId: 'MOCK_PLACEMENT_ORDER_NUMBER',
+        siblings: [
+          {
+            siblingId: 'MOCK_SIBLING_ID',
+            siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+            siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
+          },
         ],
       });
     });
 
-    test('should set the formData fields in userCase placementOrders session data', async () => {
+    test('should set the formData fields in userCase siblings session data', async () => {
       await controller.post(req, res);
       expect(req.session.errors).toEqual([]);
-      expect(req.session.userCase.placementOrders).toEqual([
-        { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER' },
+      expect(req.session.userCase.siblings).toEqual([
+        {
+          siblingId: 'MOCK_SIBLING_ID',
+          siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+          siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
+        },
       ]);
       expect(req.session.save).toHaveBeenCalled();
+    });
+  });
+
+  describe('when there is an error in saving CCD data', () => {
+    test('should log error and add error to session object', async () => {
+      req = mockRequest({
+        session: {
+          userCase: {
+            selectedSiblingId: 'MOCK_SIBLING_ID',
+            siblings: [
+              {
+                siblingId: 'MOCK_SIBLING_ID',
+              },
+            ],
+          },
+        },
+      });
+      req.locals.api.triggerEvent.mockRejectedValue('MOCK_ERROR');
+
+      await controller.post(req, res);
+      expect(req.locals.logger.error).toHaveBeenCalledWith('Error saving', 'MOCK_ERROR');
     });
   });
 });
