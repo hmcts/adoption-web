@@ -45,10 +45,10 @@ export interface DynamicListElement {
 }
 
 export interface Fee {
-  FeeAmount: string;
-  FeeCode: string;
-  FeeDescription: string;
-  FeeVersion: string;
+  feeAmount: string;
+  feeCode: string;
+  feeDescription: string;
+  feeVersion: string;
 }
 
 export interface ListValue<T> {
