@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable jest/expect-expect */
-import { FormContent, FormFields } from '../../../app/form/Form';
+import { ApplyingWith } from '../../../app/case/definition';
+import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -48,7 +49,7 @@ const cyContent = {
     "Once you submit your application, you cannot make any further changes. You can select 'Save as draft' to review your application before you submit. (in Welsh)",
   applicant1IBelieveApplicationIsTrue:
     'I believe that the facts stated in this form and any additional documents are true. (in Welsh)',
-  applicant1IBelieveApplicationIsTru2:
+  applicant1IBelieveApplicationIsTrue2:
     'The primary applicant believes that the facts stated in this form and any additional documents are true. (in Welsh)',
   applicant2IBelieveApplicationIsTrue: 'I am authorised by the second applicant to sign this statement. (in Welsh)',
   applicant1SotFullName: 'Enter your full name (in Welsh)',
@@ -68,7 +69,10 @@ const cyContent = {
 };
 
 const langAssertions = (language, content) => {
-  const generatedContent = generateContent({ language, userCase: {} } as CommonContent);
+  const generatedContent = generateContent({
+    language,
+    userCase: { applyingWith: ApplyingWith.ALONE },
+  } as CommonContent);
   const {
     section,
     title,
@@ -111,10 +115,17 @@ describe('occupation content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
+    const { type, label, labelSize, section, values } = fields.applicant1IBelieveApplicationIsTrue as FormOptions;
     const applicant1IBelieveApplicationIsTrue = fields.applicant1IBelieveApplicationIsTrue;
 
-    expect(applicant1IBelieveApplicationIsTrue.type).toBe('checkboxes'); //TODO
-    //expect((applicant1IBelieveApplicationIsTrue.label as Function)(generateContent(commonContent))).toBe(enContent.applicant1IBelieveApplicationIsTrue);
+    expect(applicant1IBelieveApplicationIsTrue.type).toBe('checkboxes');
+    expect(type).toBe('checkboxes');
+    expect((label as Function)(generatedContent)).toBe(undefined);
+    expect((section as Function)(generatedContent)).toBe(enContent.section);
+    expect(labelSize).toBe('l');
+    expect(values).toHaveLength(1);
+    expect((values[0].label as Function)(generatedContent)).toBe(enContent.applicant1IBelieveApplicationIsTrue2);
+    expect(values[0].value).toBe('checked');
 
     (applicant1IBelieveApplicationIsTrue.validator as Function)('MockName');
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockName');
@@ -124,13 +135,17 @@ describe('occupation content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
+    const { type, label, labelSize, section, values } = fields.applicant2IBelieveApplicationIsTrue as FormOptions;
     const applicant2IBelieveApplicationIsTrue = fields.applicant2IBelieveApplicationIsTrue;
 
-    expect(applicant2IBelieveApplicationIsTrue.type).toBe('checkboxes'); //TODO
-    //expect((applicant2IBelieveApplicationIsTrue.label as Function)(generateContent(commonContent))).toBe(enContent.applicant2IBelieveApplicationIsTrue);
-
-    // (applicant2IBelieveApplicationIsTrue.validator as Function)('MockName');
-    // expect(isFieldFilledIn).toHaveBeenCalledWith('MockName');
+    expect(applicant2IBelieveApplicationIsTrue.type).toBe('checkboxes');
+    expect(type).toBe('checkboxes');
+    expect((label as Function)(generatedContent)).toBe(undefined);
+    expect((section as Function)(generatedContent)).toBe(enContent.section);
+    expect(labelSize).toBe('l');
+    expect(values).toHaveLength(1);
+    expect((values[0].label as Function)(generatedContent)).toBe(enContent.applicant2IBelieveApplicationIsTrue);
+    expect(values[0].value).toBe('checked');
   });
 
   it('should have an applicant1SotFullName text input field', () => {

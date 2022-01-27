@@ -41,7 +41,7 @@ export const cy = (): Record<string, unknown> => ({
     "Once you submit your application, you cannot make any further changes. You can select 'Save as draft' to review your application before you submit. (in Welsh)",
   applicant1IBelieveApplicationIsTrue:
     'I believe that the facts stated in this form and any additional documents are true. (in Welsh)',
-  applicant1IBelieveApplicationIsTru2:
+  applicant1IBelieveApplicationIsTrue2:
     'The primary applicant believes that the facts stated in this form and any additional documents are true. (in Welsh)',
   applicant2IBelieveApplicationIsTrue: 'I am authorised by the second applicant to sign this statement. (in Welsh)',
   applicant1SotFullName: 'Enter your full name (in Welsh)',

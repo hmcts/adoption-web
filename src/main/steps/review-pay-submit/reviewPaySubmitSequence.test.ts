@@ -6,7 +6,7 @@ describe('reviewPaySubmitSequence', () => {
 
     expect(reviewPaySubmitSequence[0].url).toBe('/review-pay-submit/statement-of-truth');
     expect(reviewPaySubmitSequence[0].showInSection).toBe('reviewPaySubmit');
-    expect(reviewPaySubmitSequence[0].getNextStep({})).toBe('/task-list');
+    expect(reviewPaySubmitSequence[0].getNextStep({})).toBe('/review-pay-submit/payment/pay-your-fee');
 
     expect(reviewPaySubmitSequence[1].url).toBe('/review-pay-submit/check-your-answers');
     expect(reviewPaySubmitSequence[1].showInSection).toBe('reviewPaySubmit');
