@@ -254,15 +254,15 @@ export const getSiblingStatus = (userCase: CaseWithId): SectionStatus => {
     if (courtOrderExists === YesNoNotsure.NO || courtOrderExists === YesNoNotsure.NOT_SURE) {
       return SectionStatus.COMPLETED;
     } else if (courtOrderExists === YesNoNotsure.YES) {
-      const siblingsComplete = userCase.siblings?.every(item => {
-        item.siblingFirstName &&
+      const siblingsComplete = userCase.siblings?.every(
+        item =>
+          item.siblingFirstName &&
           item.siblingLastNames &&
           item.siblingPlacementOrders?.length &&
           (item.siblingPlacementOrders as PlacementOrder[]).every(
             po => po.placementOrderType && po.placementOrderNumber && po.placementOrderId
-          );
-      });
-
+          )
+      );
       return siblingsComplete ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
     }
     return SectionStatus.IN_PROGRESS;

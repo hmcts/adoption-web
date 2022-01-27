@@ -792,6 +792,12 @@ describe('utils', () => {
       {
         data: {
           hasSiblings: YesNoNotsure.YES,
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
           hasPoForSiblings: YesNoNotsure.YES,
           siblings: [
             {
