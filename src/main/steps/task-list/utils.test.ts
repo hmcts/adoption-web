@@ -763,100 +763,87 @@ describe('utils', () => {
   describe('getSiblingPlacementOrderStatus', () => {
     test.each([
       { data: {}, expected: 'NOT_STARTED' },
-      // {
-      //   data: {
-      //     siblings: [
-      //       {
-      //         siblingId: '1643051152111',
-      //         siblingFirstName: 'Dilip',
-      //         siblingLastNames: 'Samra',
-      //         siblingPlacementOrders: [
-      //           {
-      //             placementOrderId: '1643051387926',
-      //             placementOrderDate: '',
-      //             placementOrderType: 'Court order',
-      //             placementOrderNumber: '123456789',
-      //           },
-      //         ],
-      //       },
-      //     ],
-      //   },
-      //   expected: IN_PROGRESS,
-      // },
-      // {
-      //   data: {
-      //     hasSiblings: YesNoNotsure.YES,
-      //     hasPoForSiblings: YesNoNotsure.YES,
-      //     placementOrders: [
-      //       {
-      //         placementOrderId: '',
-      //         placementOrderNumber: '',
-      //         placementOrderCourt: '',
-      //         placementOrderDate: { day: '', month: '', year: '' },
-      //       },
-      //     ],
-      //   },
-      //   expected: IN_PROGRESS,
-      // },
-      // {
-      //   data: {
-      //     hasSiblings: YesNoNotsure.YES,
-      //     hasPoForSiblings: YesNoNotsure.YES,
-      //     placementOrders: [
-      //       {
-      //         placementOrderId: 'MOCK_ID',
-      //         placementOrderNumber: 'MOCK_NUMBER',
-      //         placementOrderCourt: 'MOCK_COURT',
-      //         placementOrderDate: { day: '1', month: '1', year: '2001' },
-      //       },
-      //     ],
-      //   },
-      //   expected: COMPLETED,
-      // },
-      // {
-      //   data: {
-      //     hasSiblings: YesNoNotsure.YES,
-      //     hasPoForSiblings: YesNoNotsure.YES,
-      //     placementOrders: [
-      //       {
-      //         placementOrderId: 'MOCK_ID',
-      //         placementOrderNumber: '',
-      //         placementOrderCourt: '',
-      //         placementOrderDate: { day: '1', month: '1', year: '2001' },
-      //       },
-      //       {
-      //         placementOrderId: 'MOCK_ID2',
-      //         placementOrderType: '',
-      //         placementOrderNumber: 'MOCK_NUMBER2',
-      //         placementOrderCourt: 'MOCK_COURT2',
-      //         placementOrderDate: { day: '2', month: '2', year: '2002' },
-      //       },
-      //     ],
-      //   },
-      //   expected: IN_PROGRESS,
-      // },
-      // {
-      //   data: {
-      //     hasSiblings: YesNoNotsure.YES,
-      //     hasPoForSiblings: YesNoNotsure.YES,
-      //     placementOrders: [
-      //       {
-      //         placementOrderId: 'MOCK_ID',
-      //         placementOrderNumber: 'MOCK_NUMBER',
-      //         placementOrderCourt: 'MOCK_COURT',
-      //         placementOrderDate: { day: '1', month: '1', year: '2001' },
-      //       },
-      //       {
-      //         placementOrderId: 'MOCK_ID2',
-      //         placementOrderType: '',
-      //         placementOrderNumber: 'MOCK_NUMBER2',
-      //         placementOrderCourt: 'MOCK_COURT2',
-      //         placementOrderDate: { day: '2', month: '2', year: '2002' },
-      //       },
-      //     ],
-      //   },
-      //   expected: IN_PROGRESS,
-      // },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.NO,
+        },
+        expected: COMPLETED,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.NOT_SURE,
+        },
+        expected: COMPLETED,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          hasPoForSiblings: YesNoNotsure.NO,
+        },
+        expected: COMPLETED,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          hasPoForSiblings: YesNoNotsure.YES,
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          hasPoForSiblings: YesNoNotsure.YES,
+          siblings: [
+            {
+              siblingId: 'MOCK_SIBLING_ID',
+              siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+              siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
+            },
+          ],
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          hasPoForSiblings: YesNoNotsure.YES,
+          siblings: [
+            {
+              siblingId: 'MOCK_SIBLING_ID',
+              siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+              siblingLastNames: 'MOCK_SIBLING_LAST_NAME',
+              siblingPlacementOrders: [
+                {
+                  placementOrderId: 'MOCK_SIBLING_PO_ID',
+                  placementOrderType: 'MOCK_SIBLING_PO_TYPE',
+                  placementOrderNumber: 'MOCK_SIBLING_PO_NUMBER',
+                },
+              ],
+            },
+          ],
+        },
+        expected: COMPLETED,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          hasPoForSiblings: YesNoNotsure.YES,
+          siblings: [
+            {
+              siblingId: 'MOCK_SIBLING_ID',
+              siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+              siblingLastNames: 'MOCK_SIBLING_LAST_NAME',
+              siblingPlacementOrders: [
+                {
+                  placementOrderId: 'MOCK_SIBLING_PO_ID',
+                  placementOrderType: 'MOCK_SIBLING_PO_TYPE',
+                },
+              ],
+            },
+          ],
+        },
+        expected: IN_PROGRESS,
+      },
     ])('should return correct status %o', async ({ data, expected }) => {
       expect(getSiblingStatus({ ...userCase, ...data })).toBe(expected);
     });

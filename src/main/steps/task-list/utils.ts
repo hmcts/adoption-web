@@ -247,7 +247,6 @@ export const getOtherParentStatus = (userCase: CaseWithId): SectionStatus => {
 
 export const getSiblingStatus = (userCase: CaseWithId): SectionStatus => {
   const exists = userCase.hasSiblings;
-  console.log('exists', exists);
   if (exists === YesNoNotsure.NO || exists === YesNoNotsure.NOT_SURE) {
     return SectionStatus.COMPLETED;
   } else if (exists === YesNoNotsure.YES) {
@@ -260,7 +259,7 @@ export const getSiblingStatus = (userCase: CaseWithId): SectionStatus => {
           item.siblingLastNames &&
           item.siblingPlacementOrders?.length &&
           (item.siblingPlacementOrders as PlacementOrder[]).every(
-            po => po.placementOrderType && po.placementOrderNumber
+            po => po.placementOrderType && po.placementOrderNumber && po.placementOrderId
           );
       });
 
