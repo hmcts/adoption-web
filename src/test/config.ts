@@ -27,9 +27,9 @@ export const autoLogin = {
     I.amOnPage(`${process.env.ADOP_WEB_URL}`);
     I.wait(5);
     // I.waitForText('Sign in or create an account', 30);
-    I.fillField('username', username);
+    I.fillField('#username', username);
     I.wait(2);
-    I.fillField('password', password);
+    I.fillField('#password', password);
     I.click('Sign in');
   },
   check: (I: CodeceptJS.I): void => {
