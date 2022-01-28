@@ -14,13 +14,13 @@ module.exports = {
 
   async createUserAndSignIn() {
     await login('citizenSingleton');
-    await I.waitForText('Are you applying on your own, or with someone else?', 30);
+    //  await I.waitForText('Are you applying on your own, or with someone else?', 30);
     await I.wait('3');
   },
 
   async createCitizenUserAndSignIn() {
     await login('citizenSingleton');
-    await I.waitForText('Are you applying on your own, or with someone else?', 30);
+    // await I.waitForText('Are you applying on your own, or with someone else?', 30);
     await I.wait('3');
   },
 
