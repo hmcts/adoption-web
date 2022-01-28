@@ -68,6 +68,12 @@ const fields: FromApiConverters = {
   childrenDateOfBirth: data => ({
     childrenDateOfBirth: fromApiDate(data.childrenDateOfBirth),
   }),
+  applicant1StatementOfTruth: data => ({
+    applicant1IBelieveApplicationIsTrue: checkboxConverter(data.applicant1StatementOfTruth),
+  }),
+  applicant2StatementOfTruth: data => ({
+    applicant2IBelieveApplicationIsTrue: checkboxConverter(data.applicant2StatementOfTruth),
+  }),
   jurisdictionResidualEligible: data => ({
     jurisdictionResidualEligible: checkboxConverter(data.jurisdictionResidualEligible),
   }),

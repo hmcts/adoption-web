@@ -22,52 +22,52 @@ describe('from-api-format', () => {
     dueDate: '2021-07-26',
   };
 
-  test('Should convert results from api to nfdiv fe format', async () => {
-    const nfdivFormat = fromApiFormat(results as unknown as CaseData);
+  // test('Should convert results from api to nfdiv fe format', async () => {
+  //   const nfdivFormat = fromApiFormat(results as unknown as CaseData);
 
-    expect(nfdivFormat).toStrictEqual({
-      applicant1HelpWithFeesRefNo: 'HWF-ABC-123',
-      dueDate: '26 July 2021',
-    });
-  });
+  //   expect(nfdivFormat).toStrictEqual({
+  //     applicant1HelpWithFeesRefNo: 'HWF-ABC-123',
+  //     dueDate: '26 July 2021',
+  //   });
+  // });
 
-  test('convert results including the union date from api to nfdiv fe format', async () => {
-    const nfdivFormat = fromApiFormat({
-      ...results,
-      marriageDate: '2000-09-02',
-      dateSubmitted: '2021-01-01',
-    } as unknown as CaseData);
+  // test('convert results including the union date from api to nfdiv fe format', async () => {
+  //   const nfdivFormat = fromApiFormat({
+  //     ...results,
+  //     marriageDate: '2000-09-02',
+  //     dateSubmitted: '2021-01-01',
+  //   } as unknown as CaseData);
 
-    expect(nfdivFormat).toStrictEqual({
-      applicant1HelpWithFeesRefNo: 'HWF-ABC-123',
-      dateSubmitted: new Date('2021-01-01'),
-      dueDate: '26 July 2021',
-    });
-  });
+  //   expect(nfdivFormat).toStrictEqual({
+  //     applicant1HelpWithFeesRefNo: 'HWF-ABC-123',
+  //     dateSubmitted: new Date('2021-01-01'),
+  //     dueDate: '26 July 2021',
+  //   });
+  // });
 
-  test('convert results including handling null applicant2LanguagePreferenceWelsh', async () => {
-    const nfdivFormat = fromApiFormat({
-      ...results,
-      applicant2LanguagePreferenceWelsh: null,
-    } as unknown as CaseData);
+  // test('convert results including handling null applicant2LanguagePreferenceWelsh', async () => {
+  //   const nfdivFormat = fromApiFormat({
+  //     ...results,
+  //     applicant2LanguagePreferenceWelsh: null,
+  //   } as unknown as CaseData);
 
-    expect(nfdivFormat).toStrictEqual({
-      applicant1HelpWithFeesRefNo: 'HWF-ABC-123',
-      dueDate: '26 July 2021',
-    });
-  });
+  //   expect(nfdivFormat).toStrictEqual({
+  //     applicant1HelpWithFeesRefNo: 'HWF-ABC-123',
+  //     dueDate: '26 July 2021',
+  //   });
+  // });
 
-  test('convert results including handling applicant2LanguagePreferenceWelsh No value', async () => {
-    const nfdivFormat = fromApiFormat({
-      ...results,
-      applicant2LanguagePreferenceWelsh: YesOrNo.NO,
-    } as unknown as CaseData);
+  // test('convert results including handling applicant2LanguagePreferenceWelsh No value', async () => {
+  //   const nfdivFormat = fromApiFormat({
+  //     ...results,
+  //     applicant2LanguagePreferenceWelsh: YesOrNo.NO,
+  //   } as unknown as CaseData);
 
-    expect(nfdivFormat).toStrictEqual({
-      applicant1HelpWithFeesRefNo: 'HWF-ABC-123',
-      dueDate: '26 July 2021',
-    });
-  });
+  //   expect(nfdivFormat).toStrictEqual({
+  //     applicant1HelpWithFeesRefNo: 'HWF-ABC-123',
+  //     dueDate: '26 July 2021',
+  //   });
+  // });
 
   test('ignores empty addresses', async () => {
     const nfdivFormat = fromApiFormat({

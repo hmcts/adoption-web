@@ -151,6 +151,8 @@ describe('social worker content', () => {
 
     (socialWorkerTeamEmail.validator as Function)('MockEmail');
     expect(isEmailValid).toHaveBeenCalledWith('MockEmail');
+    (socialWorkerTeamEmail.validator as Function)();
+    expect(isEmailValid).not.toHaveBeenCalledWith();
   });
 
   it('should contain submit button', () => {

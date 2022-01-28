@@ -46,6 +46,7 @@ const urls = content => ({
   reviewApplicationPayAndSubmit: URL.CHECK_ANSWERS_URL,
   siblingDetails: URL.SIBLING_EXISTS,
   adoptionAgency: getAdoptionAgencyUrl(content.userCase),
+  statementsOfTruth: URL.STATEMENT_OF_TRUTH,
 });
 
 const en = content => {
@@ -75,7 +76,7 @@ const en = content => {
     section3link6: "Other parent's details",
     section3link7: 'Previous court orders for the child',
     section3link8: 'Court order details for any siblings or half-siblings',
-    section3link9: 'Adoption agency, social worker and solicitor details',
+    section3link9: 'Adoption agency and social worker',
     section3link10: 'Sibling details',
     section4: 'Add your adoption contacts',
     section4link1: 'Your adoption agency or local authority',
@@ -135,6 +136,11 @@ const en = content => {
         'adoption-agency'
       ),
       sibling: getSectionStatusLabel(getSiblingStatus(content.userCase), statuses, 'sibling'),
+      statementsOfTruth: getSectionStatusLabel(
+        getAdoptionAgencyDetailStatus(content.userCase),
+        statuses,
+        'statement-of-truth'
+      ),
     },
     urls: urls(content),
   };
@@ -167,7 +173,7 @@ const cy = content => {
     section3link6: "Other parent's details (in welsh)",
     section3link7: 'Previous court orders for the child (in welsh) ',
     section3link8: 'Court order details for any siblings or half-siblings (in welsh) ',
-    section3link9: 'Adoption agency, social worker and solicitor details (in welsh) ',
+    section3link9: 'Adoption agency and social worker (in welsh) ',
     section3link10: 'Sibling details',
     section4: 'Add your adoption contacts (in welsh) ',
     section4link1: 'Your adoption agency or local authority (in welsh) ',
@@ -227,6 +233,11 @@ const cy = content => {
         'adoption-agency'
       ),
       sibling: getSectionStatusLabel(getSiblingStatus(content.userCase), statuses, 'sibling'),
+      statementsOfTruth: getSectionStatusLabel(
+        getAdoptionAgencyDetailStatus(content.userCase),
+        statuses,
+        'statement-of-truth'
+      ),
     },
     urls: urls(content),
   };
