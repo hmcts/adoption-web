@@ -32,7 +32,7 @@ describe('siblingSequence', () => {
 
     expect(siblingSequence[5].url).toBe('/sibling/summary');
     expect(siblingSequence[5].showInSection).toBe('aboutSibling');
-    expect(siblingSequence[5].getNextStep({ addAnotherSiblingPlacementOrder: YesOrNo.YES })).toBe('/task-list');
+    expect(siblingSequence[5].getNextStep({ addAnotherSiblingPlacementOrder: YesOrNo.YES })).toBe('/sibling/summary');
     expect(siblingSequence[5].getNextStep({ addAnotherSiblingPlacementOrder: YesOrNo.NO })).toBe('/task-list');
   });
 });
