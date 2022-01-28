@@ -52,7 +52,7 @@ pipelineConf.vaultSecrets = secrets
 withNightlyPipeline(type, product, component) {
 
   env.ADOP_WEB_URL = params.FRONTEND_URL
-  enableCrossBrowserTest(['chrome', 'firefox'])
+  enableCrossBrowserTest(['firefox'])
   enableFullFunctionalTest(120)
   loadVaultSecrets(secrets)
 
