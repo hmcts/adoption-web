@@ -41,7 +41,7 @@ pipelineConf.vaultSecrets = secrets
 
 env.IDAM_URL = 'https://idam-api.aat.platform.hmcts.net'
 
-withPipeline(type, product, component) {
+withNightlyPipeline(type, product, component) {
   enableAksStagingDeployment()
   disableLegacyDeployment()
   enableSlackNotifications('#adoption-tech')
