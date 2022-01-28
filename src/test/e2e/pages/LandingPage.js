@@ -2,7 +2,7 @@ const { I } = inject();
 
 module.exports = {
   fields: {
-    applyingWith: 'input[id$="applyingWith"]',
+    applyingWith: '#applyingWith',
   },
   async seeTheLandingPage() {
     I.wait('2');

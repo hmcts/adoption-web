@@ -59,7 +59,7 @@ withNightlyPipeline(type, product, component) {
   enableSlackNotifications('#adoption-tech')
 
   loadVaultSecrets(secrets)
-  enableCrossBrowserTest(['chrome', 'firefox'])
+  enableCrossBrowserTest(['chrome'])
   after('build') {
     yarnBuilder.yarn('build')
   }
