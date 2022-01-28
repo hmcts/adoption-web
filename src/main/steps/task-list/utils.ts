@@ -2,6 +2,7 @@ import { CaseDate, CaseWithId, FieldPrefix } from '../../app/case/case';
 import {
   AdoptionAgencyOrLocalAuthority,
   ContactDetails,
+  PlacementOrder,
   SectionStatus,
   YesNoNotsure,
   YesOrNo,
@@ -241,6 +242,31 @@ export const getOtherParentStatus = (userCase: CaseWithId): SectionStatus => {
     }
   }
 
+  return SectionStatus.NOT_STARTED;
+};
+
+export const getSiblingStatus = (userCase: CaseWithId): SectionStatus => {
+  const exists = userCase.hasSiblings;
+  if (exists === YesNoNotsure.NO || exists === YesNoNotsure.NOT_SURE) {
+    return SectionStatus.COMPLETED;
+  } else if (exists === YesNoNotsure.YES) {
+    const courtOrderExists = userCase.hasPoForSiblings;
+    if (courtOrderExists === YesNoNotsure.NO || courtOrderExists === YesNoNotsure.NOT_SURE) {
+      return SectionStatus.COMPLETED;
+    } else if (courtOrderExists === YesNoNotsure.YES) {
+      const siblingsComplete = userCase.siblings?.every(
+        item =>
+          item.siblingFirstName &&
+          item.siblingLastNames &&
+          item.siblingPlacementOrders?.length &&
+          (item.siblingPlacementOrders as PlacementOrder[]).every(
+            po => po.placementOrderType && po.placementOrderNumber && po.placementOrderId
+          )
+      );
+      return siblingsComplete ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
+    }
+    return SectionStatus.IN_PROGRESS;
+  }
   return SectionStatus.NOT_STARTED;
 };
 

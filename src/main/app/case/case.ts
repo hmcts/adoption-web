@@ -299,14 +299,17 @@ export interface Case {
   solicitorPhoneNumber?: string;
   solicitorEmail?: string;
   solicitorHelpingWithApplication?: YesOrNo;
+
+  /***** Sibling *****/
   siblings?: Sibling[];
-  hasSiblings?: string;
+  hasSiblings?: YesNoNotsure;
   hasSiblingNotSureReason?: string;
   hasPoForSiblings?: YesNoNotsure;
   hasPoForSiblingsNotSureReason?: string;
   addAnotherSiblingPlacementOrder?: YesOrNo;
   selectedSiblingId?: string;
   selectedSiblingPoId?: string;
+  addAnotherSibling?: YesOrNo;
 
   /***** Statement of truth *****/
   applicant1IBelieveApplicationIsTrue?: Checkbox;

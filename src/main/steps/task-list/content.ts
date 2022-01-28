@@ -14,6 +14,7 @@ import {
   getContactDetailsStatus,
   getOtherParentStatus,
   getPersonalDetailsStatus,
+  getSiblingStatus,
   isApplyingWithComplete,
 } from './utils';
 
@@ -134,6 +135,7 @@ const en = content => {
         statuses,
         'adoption-agency'
       ),
+      sibling: getSectionStatusLabel(getSiblingStatus(content.userCase), statuses, 'sibling'),
       statementsOfTruth: getSectionStatusLabel(
         getAdoptionAgencyDetailStatus(content.userCase),
         statuses,
@@ -230,6 +232,7 @@ const cy = content => {
         statuses,
         'adoption-agency'
       ),
+      sibling: getSectionStatusLabel(getSiblingStatus(content.userCase), statuses, 'sibling'),
       statementsOfTruth: getSectionStatusLabel(
         getAdoptionAgencyDetailStatus(content.userCase),
         statuses,

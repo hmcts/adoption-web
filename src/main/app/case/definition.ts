@@ -724,9 +724,9 @@ export interface AdoptionAgencyOrLocalAuthority {
 
 export interface Sibling {
   siblingId: string;
-  siblingFirstName: string;
-  siblingLastNames: string;
-  siblingPlacementOrders: ListValue<PlacementOrder>[];
+  siblingFirstName?: string;
+  siblingLastNames?: string;
+  siblingPlacementOrders?: (PlacementOrder | ListValue<PlacementOrder>)[];
 }
 
 export interface SocialWorker {

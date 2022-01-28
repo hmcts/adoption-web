@@ -181,15 +181,11 @@
             </li>
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a href="{{urls.siblingDetails}}" class="govuk-link" aria-describedby="eligibility-completed">
+                    <a id = "sibling-details" href="{{urls.siblingDetails}}" class="govuk-link" aria-describedby="eligibility-completed">
                         {{section3link10}}
                     </a>
                 </span>
-                {% if data['siblings'] %}
-                    <strong class="govuk-tag  app-task-list__tag" id="eligibility-completed">Completed</strong>
-                {% else %}
-                    <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
-                {% endif %}
+                <p class="govuk-body">{{ status.sibling | safe }}</p>
             </li>
         </ul>
     </li>
