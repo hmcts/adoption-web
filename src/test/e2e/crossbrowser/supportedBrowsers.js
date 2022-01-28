@@ -36,21 +36,23 @@ const supportedBrowsers = {
   },
   chrome: {
     chrome_win_latest: {
-      browserName: 'chrome',
+      browserName: 'Chrome',
       platformName: LATEST_WINDOWS,
       browserVersion: 'latest',
       'sauce:options': {
         name: 'FPLA: WIN_CHROME_LATEST',
         screenResolution: '1600x1200',
+        extendedDebugging: true,
       },
     },
     chrome_mac_latest: {
-      browserName: 'chrome',
+      browserName: 'Chrome',
       platformName: LATEST_MAC,
       browserVersion: 'latest',
       'sauce:options': {
         name: 'FPLA: MAC_CHROME_LATEST',
         screenResolution: '1600x1200',
+        extendedDebugging: true,
       },
     },
   },
