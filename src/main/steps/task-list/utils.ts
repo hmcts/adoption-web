@@ -1,5 +1,12 @@
 import { CaseDate, CaseWithId, FieldPrefix } from '../../app/case/case';
-import { ContactDetails, SectionStatus, YesNoNotsure, YesOrNo } from '../../app/case/definition';
+import {
+  AdoptionAgencyOrLocalAuthority,
+  ContactDetails,
+  PlacementOrder,
+  SectionStatus,
+  YesNoNotsure,
+  YesOrNo,
+} from '../../app/case/definition';
 import { isDateInputInvalid, notSureViolation } from '../../app/form/validation';
 import * as urls from '../urls';
 
@@ -238,17 +245,36 @@ export const getOtherParentStatus = (userCase: CaseWithId): SectionStatus => {
   return SectionStatus.NOT_STARTED;
 };
 
+export const getSiblingStatus = (userCase: CaseWithId): SectionStatus => {
+  const exists = userCase.hasSiblings;
+  if (exists === YesNoNotsure.NO || exists === YesNoNotsure.NOT_SURE) {
+    return SectionStatus.COMPLETED;
+  } else if (exists === YesNoNotsure.YES) {
+    const courtOrderExists = userCase.hasPoForSiblings;
+    if (courtOrderExists === YesNoNotsure.NO || courtOrderExists === YesNoNotsure.NOT_SURE) {
+      return SectionStatus.COMPLETED;
+    } else if (courtOrderExists === YesNoNotsure.YES) {
+      const siblingsComplete = userCase.siblings?.every(
+        item =>
+          item.siblingFirstName &&
+          item.siblingLastNames &&
+          item.siblingPlacementOrders?.length &&
+          (item.siblingPlacementOrders as PlacementOrder[]).every(
+            po => po.placementOrderType && po.placementOrderNumber && po.placementOrderId
+          )
+      );
+      return siblingsComplete ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
+    }
+    return SectionStatus.IN_PROGRESS;
+  }
+  return SectionStatus.NOT_STARTED;
+};
+
 export const getAdoptionAgencyDetailStatus = (userCase: CaseWithId): SectionStatus => {
   let adopAgencyOrLAsComplete = false;
-
   if (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO && userCase.adopAgencyOrLAs?.length === 2) {
-    const item = userCase.adopAgencyOrLAs[0];
-    adopAgencyOrLAsComplete = !!(
-      item.adopAgencyOrLaName &&
-      item.adopAgencyOrLaContactName &&
-      item.adopAgencyOrLaPhoneNumber &&
-      item.adopAgencyOrLaContactEmail
-    );
+    adopAgencyOrLAsComplete =
+      isAdoptionAgencyOrLocalAuthorityNotEmpty(userCase.adopAgencyOrLAs[0]) && isSocialWorkerNotEmpty(userCase);
   } else {
     adopAgencyOrLAsComplete =
       ((userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO && userCase.adopAgencyOrLAs?.length === 1) ||
@@ -260,7 +286,8 @@ export const getAdoptionAgencyDetailStatus = (userCase: CaseWithId): SectionStat
           item.adopAgencyOrLaPhoneNumber &&
           item.adopAgencyOrLaContactEmail
         );
-      });
+      }) &&
+      isSocialWorkerNotEmpty(userCase);
   }
 
   const adopAgencyOrLAsInProgress =
@@ -273,7 +300,10 @@ export const getAdoptionAgencyDetailStatus = (userCase: CaseWithId): SectionStat
           item.adopAgencyOrLaPhoneNumber ||
           item.adopAgencyOrLaContactEmail
         );
-      }));
+      })) ||
+    userCase.socialWorkerName ||
+    userCase.socialWorkerPhoneNumber ||
+    userCase.socialWorkerEmail;
 
   return adopAgencyOrLAsComplete
     ? SectionStatus.COMPLETED
@@ -288,4 +318,17 @@ export const getAdoptionAgencyUrl = (userCase: CaseWithId): string => {
     return `${urls?.ADOPTION_AGENCY}?change=${adopAgency.adopAgencyOrLaId}`;
   }
   return `${urls?.ADOPTION_AGENCY}?add=${Date.now()}`;
+};
+
+export const isAdoptionAgencyOrLocalAuthorityNotEmpty = (item: AdoptionAgencyOrLocalAuthority): boolean => {
+  return !!(
+    item.adopAgencyOrLaName &&
+    item.adopAgencyOrLaContactName &&
+    item.adopAgencyOrLaPhoneNumber &&
+    item.adopAgencyOrLaContactEmail
+  );
+};
+
+export const isSocialWorkerNotEmpty = (userCase: CaseWithId): boolean => {
+  return !!(userCase.socialWorkerName && userCase.socialWorkerPhoneNumber && userCase.socialWorkerEmail);
 };

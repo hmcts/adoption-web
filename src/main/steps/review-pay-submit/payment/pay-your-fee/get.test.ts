@@ -1,25 +1,25 @@
 const mockGetFee = jest.fn();
-jest.mock('../../../app/fee/fee-lookup-api', () => ({
+jest.mock('../../../../app/fee/fee-lookup-api', () => ({
   getFee: mockGetFee,
 }));
 
-import { mockRequest } from '../../../../test/unit/utils/mockRequest';
-import { mockResponse } from '../../../../test/unit/utils/mockResponse';
+import { mockRequest } from '../../../../../test/unit/utils/mockRequest';
+import { mockResponse } from '../../../../../test/unit/utils/mockResponse';
 
 import { generateContent } from './content';
 import FeeGetController from './get';
 
-describe('FeeGetController', () => {
-  const controller = new FeeGetController(__dirname + '../../common/template', generateContent);
+describe('PayYourFeeGetController', () => {
+  const controller = new FeeGetController(__dirname + './template', generateContent);
   let req = mockRequest();
   const res = mockResponse();
 
   describe('when there is no fee object in session', () => {
     it('shoul call the fee lookup api', async () => {
-      mockGetFee.mockResolvedValue({ fee_amount: 'MOCK_FEE_AMOUNT' });
+      mockGetFee.mockResolvedValue({ feeAmount: 'MOCK_FEE_AMOUNT' });
       await controller.get(req, res);
       expect(mockGetFee).toHaveBeenCalledWith(req.locals.logger);
-      expect(req.session.fee).toBe('MOCK_FEE_AMOUNT');
+      expect(req.session.fee).toEqual({ feeAmount: 'MOCK_FEE_AMOUNT' });
     });
   });
 
@@ -28,20 +28,20 @@ describe('FeeGetController', () => {
       req = mockRequest({
         session: {
           fee: {
-            fee_amount: 'MOCK_AMOUNT',
-            code: 'MOCK_CODE',
-            description: 'MOCK_DESCRIPTION',
-            version: 'MOCK_VERSION',
+            feeAmount: 'MOCK_AMOUNT',
+            feeCode: 'MOCK_CODE',
+            feeDescription: 'MOCK_DESCRIPTION',
+            feeVersion: 'MOCK_VERSION',
           },
         },
       });
       await controller.get(req, res);
       expect(mockGetFee).not.toHaveBeenCalledWith(req.locals.logger);
       expect(req.session.fee).toEqual({
-        code: 'MOCK_CODE',
-        description: 'MOCK_DESCRIPTION',
-        fee_amount: 'MOCK_AMOUNT',
-        version: 'MOCK_VERSION',
+        feeAmount: 'MOCK_AMOUNT',
+        feeCode: 'MOCK_CODE',
+        feeDescription: 'MOCK_DESCRIPTION',
+        feeVersion: 'MOCK_VERSION',
       });
     });
   });

@@ -3,7 +3,7 @@ import { v4 as generateUuid } from 'uuid';
 import { isInvalidHelpWithFeesRef } from '../form/validation';
 
 import { Case, CaseDate, Checkbox, formFieldsToCaseMapping, formatCase } from './case';
-import { CaseData, YesOrNo } from './definition';
+import { CaseData, PlacementOrder, YesOrNo } from './definition';
 
 export type OrNull<T> = { [K in keyof T]: T[K] | null };
 
@@ -73,6 +73,22 @@ const fields: ToApiConverters = {
       },
     })),
   }),
+  siblings: data => ({
+    siblings: (data.siblings || []).map(item => ({
+      id: generateUuid(),
+      value: {
+        ...item,
+        siblingPlacementOrders: ((item.siblingPlacementOrders || []) as PlacementOrder[]).map(
+          (item2: PlacementOrder) => ({
+            id: generateUuid(),
+            value: {
+              ...item2,
+            },
+          })
+        ),
+      },
+    })),
+  }),
   adopAgencyOrLAs: data => ({
     adopAgencyOrLAs: (data.adopAgencyOrLAs || []).map(item => ({
       id: generateUuid(),
@@ -80,6 +96,12 @@ const fields: ToApiConverters = {
         ...item,
       },
     })),
+  }),
+  applicant1IBelieveApplicationIsTrue: data => ({
+    applicant1StatementOfTruth: checkboxConverter(data.applicant1IBelieveApplicationIsTrue),
+  }),
+  applicant2IBelieveApplicationIsTrue: data => ({
+    applicant2StatementOfTruth: checkboxConverter(data.applicant2IBelieveApplicationIsTrue),
   }),
   jurisdictionResidualEligible: data => ({
     jurisdictionResidualEligible: checkboxConverter(data.jurisdictionResidualEligible),

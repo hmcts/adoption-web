@@ -19,6 +19,7 @@ import {
   getContactDetailsStatus,
   getOtherParentStatus,
   getPersonalDetailsStatus,
+  getSiblingStatus,
   isApplyingWithComplete,
   // isApplyingWithComplete,
 } from './utils';
@@ -695,6 +696,9 @@ describe('utils', () => {
             },
           ],
           hasAnotherAdopAgencyOrLA: YesOrNo.NO,
+          socialWorkerName: 'John',
+          socialWorkerPhoneNumber: '09876543210',
+          socialWorkerEmail: 'abc@john.com',
         })
       ).toBe('/children/adoption-agency?change=1');
     });
@@ -724,6 +728,9 @@ describe('utils', () => {
             },
           ],
           hasAnotherAdopAgencyOrLA: YesOrNo.YES,
+          socialWorkerName: 'John',
+          socialWorkerPhoneNumber: '09876543210',
+          socialWorkerEmail: 'abc@john.com',
         })
       ).toBe('/children/adoption-agency?change=1');
     });
@@ -745,8 +752,106 @@ describe('utils', () => {
             },
           ],
           hasAnotherAdopAgencyOrLA: YesOrNo.NO,
+          socialWorkerName: 'John',
+          socialWorkerPhoneNumber: '09876543210',
+          socialWorkerEmail: 'abc@john.com',
         })
       ).toBe('/children/adoption-agency?change=1');
+    });
+  });
+
+  describe('getSiblingPlacementOrderStatus', () => {
+    test.each([
+      { data: {}, expected: 'NOT_STARTED' },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.NO,
+        },
+        expected: COMPLETED,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.NOT_SURE,
+        },
+        expected: COMPLETED,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          hasPoForSiblings: YesNoNotsure.NO,
+        },
+        expected: COMPLETED,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          hasPoForSiblings: YesNoNotsure.YES,
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          hasPoForSiblings: YesNoNotsure.YES,
+          siblings: [
+            {
+              siblingId: 'MOCK_SIBLING_ID',
+              siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+              siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
+            },
+          ],
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          hasPoForSiblings: YesNoNotsure.YES,
+          siblings: [
+            {
+              siblingId: 'MOCK_SIBLING_ID',
+              siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+              siblingLastNames: 'MOCK_SIBLING_LAST_NAME',
+              siblingPlacementOrders: [
+                {
+                  placementOrderId: 'MOCK_SIBLING_PO_ID',
+                  placementOrderType: 'MOCK_SIBLING_PO_TYPE',
+                  placementOrderNumber: 'MOCK_SIBLING_PO_NUMBER',
+                },
+              ],
+            },
+          ],
+        },
+        expected: COMPLETED,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          hasPoForSiblings: YesNoNotsure.YES,
+          siblings: [
+            {
+              siblingId: 'MOCK_SIBLING_ID',
+              siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+              siblingLastNames: 'MOCK_SIBLING_LAST_NAME',
+              siblingPlacementOrders: [
+                {
+                  placementOrderId: 'MOCK_SIBLING_PO_ID',
+                  placementOrderType: 'MOCK_SIBLING_PO_TYPE',
+                },
+              ],
+            },
+          ],
+        },
+        expected: IN_PROGRESS,
+      },
+    ])('should return correct status %o', async ({ data, expected }) => {
+      expect(getSiblingStatus({ ...userCase, ...data })).toBe(expected);
     });
   });
 });

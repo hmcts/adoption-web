@@ -2,8 +2,6 @@ security:
   referrerPolicy: 'origin'
 port: 3000
 timeout: 30000
-fees:
-  applicationFee: £183
 services:
   authProvider:
     url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'

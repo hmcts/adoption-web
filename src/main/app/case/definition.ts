@@ -45,10 +45,10 @@ export interface DynamicListElement {
 }
 
 export interface Fee {
-  FeeAmount: string;
-  FeeCode: string;
-  FeeDescription: string;
-  FeeVersion: string;
+  feeAmount: string;
+  feeCode: string;
+  feeDescription: string;
+  feeVersion: string;
 }
 
 export interface ListValue<T> {
@@ -433,6 +433,11 @@ export interface CaseData {
   selectedSiblingId: string;
   selectedSiblingPoId: string;
 
+  applicant1StatementOfTruth: YesOrNo;
+  applicant2StatementOfTruth: YesOrNo;
+  applicant1SotFullName: string;
+  applicant2SotFullName: string;
+
   applicationType: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
   labelContentApplicant2: string;
@@ -534,8 +539,6 @@ export interface CaseData {
   solStatementOfReconciliationDiscussed: YesOrNo;
   applicant1PrayerHasBeenGivenCheckbox: ThePrayer[];
   applicant2PrayerHasBeenGiven: YesOrNo;
-  applicant1StatementOfTruth: YesOrNo;
-  applicant2StatementOfTruth: YesOrNo;
   solSignStatementOfTruth: YesOrNo;
   solStatementOfReconciliationName: string;
   solStatementOfReconciliationFirm: string;
@@ -721,9 +724,9 @@ export interface AdoptionAgencyOrLocalAuthority {
 
 export interface Sibling {
   siblingId: string;
-  siblingFirstName: string;
-  siblingLastNames: string;
-  siblingPlacementOrders: ListValue<PlacementOrder>[];
+  siblingFirstName?: string;
+  siblingLastNames?: string;
+  siblingPlacementOrders?: (PlacementOrder | ListValue<PlacementOrder>)[];
 }
 
 export interface SocialWorker {

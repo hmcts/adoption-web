@@ -26,7 +26,7 @@ module.exports = {
     adoptionAgencyLink: 'a[id$="adoption-agency"]',
     adoptionAgencyDetailsStatus: 'strong[id$="adoption-agency-status"]',
     childrenSiblingLink: 'a[href$="/sibling/exists"]',
-    childrenSiblingDetailsStatus: 'strong[id$="birth-father-status"]',
+    childrenSiblingDetailsStatus: 'strong[id$="sibling-status"]',
   },
 
   async goToTaskListPage() {

@@ -61,10 +61,7 @@ export const SIBLING_COURT_ORDER_EXISTS: PageLink = `${SIBLING}/court-order-exis
 export const SIBLING_NAME: PageLink = `${SIBLING}/name`;
 export const SIBLING_ORDER_TYPE: PageLink = `${SIBLING}/placement-order-type`;
 export const SIBLING_ORDER_CASE_NUMBER: PageLink = `${SIBLING}/placement-order-number`;
-export const SIBLING_ORDER_COURT: PageLink = `${SIBLING}/placement-order-court`;
-export const SIBLING_ORDER_DATE: PageLink = `${SIBLING}/placement-order-date`;
 export const SIBLING_ORDER_SUMMARY: PageLink = `${SIBLING}/summary`;
-export const SIBLING_CHOOSE_SIBLING: PageLink = `${SIBLING}/choose-sibling`;
 
 export const BIRTH_MOTHER: PageLink = '/birth-mother';
 export const BIRTH_MOTHER_FULL_NAME: PageLink = `${BIRTH_MOTHER}/full-name`;
@@ -122,8 +119,6 @@ export const OTHER_PARENT_VERIFY_ADDRESS: PageLink = `${OTHER_PARENT}/address/se
 export const OTHER_PARENT_MANUAL_ADDRESS: PageLink = `${OTHER_PARENT}/address/manual`;
 export const OTHER_PARENT_INTERNATIONAL_ADDRESS: PageLink = `${OTHER_PARENT}/address/international`;
 
-export const FEE_LOOKUP_URL: PageLink = '/fee-lookup';
-
 export const BIRTH_FATHER = '/birth-father';
 export const BIRTH_FATHER_NAME_ON_CERTIFICATE: PageLink = `${BIRTH_FATHER}/name-on-certificate`;
 export const BIRTH_FATHER_FULL_NAME: PageLink = `${BIRTH_FATHER}/full-name`;
@@ -143,3 +138,5 @@ export const PAYMENT_CALLBACK_URL: PageLink = `${REVIEW_PAY_SUBMIT}/payment/paym
 
 export const ADOPTION_AGENCY: PageLink = `${CHILDREN}/adoption-agency`;
 export const OTHER_ADOPTION_AGENCY: PageLink = `${CHILDREN}/other-adoption-agency`;
+export const SOCIAL_WORKER: PageLink = `${CHILDREN}/social-worker`;
+export const STATEMENT_OF_TRUTH: PageLink = `${REVIEW_PAY_SUBMIT}/statement-of-truth`;
