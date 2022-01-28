@@ -136,7 +136,7 @@ const setupConfig = {
       // chromium = Google Chrome, Microsoft Edge, Android, Opera, Brave, Vivaldi etc.
       // webkit = Safari, iOS, Smart TVs, Games consoles etc.
       // firefox = Firefox :P
-      browsers: [{ browser: 'chromium' }],
+      browsers: [{ browser: 'chromium' }, { browser: 'firefox' }],
     },
   },
   //   microsoft: {
