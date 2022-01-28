@@ -78,7 +78,6 @@ const setupConfig = {
     autoLogin: testUserConfig.AutoLogin,
     retryFailedStep: {
       enabled: true,
-      retries: 2,
     },
     autoDelay: {
       enabled: true,
@@ -133,19 +132,26 @@ const setupConfig = {
     },
   },
   multiple: {
-    microsoft: {
-      browsers: getBrowserConfig('microsoft'),
-    },
-    chrome: {
-      browsers: getBrowserConfig('chrome'),
-    },
-    firefox: {
-      browsers: getBrowserConfig('firefox'),
-    },
-    safari: {
-      browsers: getBrowserConfig('safari'),
+    crossBrowser: {
+      // chromium = Google Chrome, Microsoft Edge, Android, Opera, Brave, Vivaldi etc.
+      // webkit = Safari, iOS, Smart TVs, Games consoles etc.
+      // firefox = Firefox :P
+      browsers: [{ browser: 'chromium' }],
     },
   },
+  //   microsoft: {
+  //     browsers: getBrowserConfig('microsoft'),
+  //   },
+  //   chrome: {
+  //     browsers: getBrowserConfig('chrome'),
+  //   },
+  //   firefox: {
+  //     browsers: getBrowserConfig('firefox'),
+  //   },
+  //   safari: {
+  //     browsers: getBrowserConfig('safari'),
+  //   },
+  // },
   name: 'Adoption FrontEnd Cross-Browser Tests',
 };
 
