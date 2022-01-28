@@ -74,6 +74,13 @@ const supportedBrowsers = {
       },
     },
   },
+  chromium: {
+    browserName: 'chromium',
+    'sauce:options': {
+      name: 'FPLA: MAC_CHROME_LATEST',
+      screenResolution: '1600x1200',
+    },
+  },
 };
 
 module.exports = supportedBrowsers;

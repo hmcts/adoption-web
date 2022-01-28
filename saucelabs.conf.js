@@ -132,26 +132,22 @@ const setupConfig = {
     },
   },
   multiple: {
-    crossBrowser: {
-      // chromium = Google Chrome, Microsoft Edge, Android, Opera, Brave, Vivaldi etc.
-      // webkit = Safari, iOS, Smart TVs, Games consoles etc.
-      // firefox = Firefox :P
-      browsers: [{ browser: 'chromium' }, { browser: 'firefox' }],
+    microsoft: {
+      browsers: getBrowserConfig('microsoft'),
+    },
+    chrome: {
+      browsers: getBrowserConfig('chrome'),
+    },
+    firefox: {
+      browsers: getBrowserConfig('firefox'),
+    },
+    safari: {
+      browsers: getBrowserConfig('safari'),
+    },
+    chromium: {
+      browsers: getBrowserConfig('chromium'),
     },
   },
-  //   microsoft: {
-  //     browsers: getBrowserConfig('microsoft'),
-  //   },
-  //   chrome: {
-  //     browsers: getBrowserConfig('chrome'),
-  //   },
-  //   firefox: {
-  //     browsers: getBrowserConfig('firefox'),
-  //   },
-  //   safari: {
-  //     browsers: getBrowserConfig('safari'),
-  //   },
-  // },
   name: 'Adoption FrontEnd Cross-Browser Tests',
 };
 

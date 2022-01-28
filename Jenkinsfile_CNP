@@ -53,7 +53,7 @@ withNightlyPipeline(type, product, component) {
   disableLegacyDeployment()
   enableSlackNotifications('#adoption-tech')
 
-  enableCrossBrowserTest()
+  enableCrossBrowserTest(['chromium'])
   loadVaultSecrets(secrets)
 
   after('build') {
