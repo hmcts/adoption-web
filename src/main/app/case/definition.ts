@@ -741,6 +741,11 @@ export interface Solicitor {
   solicitorHelpingWithApplication: YesOrNo;
 }
 
+export const enum PaymentMethod {
+  PAY_BY_CARD = 'payByCard',
+  PAY_BY_HWF = 'payByHWF',
+  APPLY_FOR_HWF = 'applyForHWF',
+}
 export interface CaseInvite {
   applicant2InviteEmailAddress: string;
   accessCode: string;

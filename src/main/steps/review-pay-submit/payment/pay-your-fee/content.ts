@@ -1,3 +1,4 @@
+import { PaymentMethod } from '../../../../app/case/definition';
 import { TranslationFn } from '../../../../app/controller/GetController';
 import { FormContent } from '../../../../app/form/Form';
 import { isFieldFilledIn } from '../../../../app/form/validation';
@@ -14,7 +15,13 @@ const en = content => ({
   applyForHWF: 'I want to apply for help with fees',
   continue: 'Continue',
   errors: {
-    paymentType: { errorRetrievingFee: 'Error in retrieving fee', required: 'Please select an answer' },
+    paymentType: {
+      errorRetrievingFee: 'Error in retrieving fee',
+      required: 'Select an option',
+    },
+    hwfRefNumber: {
+      required: 'Enter your reference number',
+    },
   },
 });
 
@@ -31,7 +38,13 @@ const cy: typeof en = content => ({
   applyForHWF: 'I want to apply for help with fees (in welsh)',
   continue: 'Continue (in welsh)',
   errors: {
-    paymentType: { errorRetrievingFee: 'Error in retrieving fee', required: 'Please select an answer' },
+    paymentType: {
+      errorRetrievingFee: 'Error in retrieving fee (in welsh)',
+      required: 'Select an option (in welsh)',
+    },
+    hwfRefNumber: {
+      required: 'Enter your reference number (in welsh)',
+    },
   },
 });
 
@@ -44,20 +57,21 @@ export const form: FormContent = {
       section: l => l.section,
       hint: l => l.hint,
       values: [
-        { label: l => l.payingByCard, value: 'payingByCard' },
+        { label: l => l.payingByCard, value: PaymentMethod.PAY_BY_CARD },
         {
           label: l => l.haveHWFRef,
-          value: 'haveHWFRef',
+          value: PaymentMethod.PAY_BY_HWF,
           subFields: {
             hwfRefNumber: {
               type: 'text',
+              classes: 'govuk-!-width-one-third',
               label: l => l.hwfRefNumber,
               labelSize: null,
               validator: isFieldFilledIn,
             },
           },
         },
-        { label: l => l.applyForHWF, value: 'applyForHWF' },
+        { label: l => l.applyForHWF, value: PaymentMethod.APPLY_FOR_HWF },
       ],
       validator: isFieldFilledIn,
     },

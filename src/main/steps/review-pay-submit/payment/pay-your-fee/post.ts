@@ -2,13 +2,13 @@ import autobind from 'autobind-decorator';
 import config from 'config';
 import { Response } from 'express';
 
-import { PaymentStatus } from '../../../../app/case/definition';
+import { PaymentMethod, PaymentStatus } from '../../../../app/case/definition';
 import { AppRequest } from '../../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../../app/controller/PostController';
 import { Form, FormFields } from '../../../../app/form/Form';
 import { PaymentClient } from '../../../../app/payment/PaymentClient';
 import { PaymentModel } from '../../../../app/payment/PaymentModel';
-import { PAYMENT_CALLBACK_URL } from '../../../urls';
+import { PAYMENT_CALLBACK_URL, TASK_LIST_URL } from '../../../urls';
 
 @autobind
 export default class PayYourFeePostController extends PostController<AnyObject> {
@@ -39,7 +39,15 @@ export default class PayYourFeePostController extends PostController<AnyObject> 
       return;
     }
 
+    Object.assign(req.session.userCase, formData);
+
     if (req.session.errors.length === 0) {
+      if (formData['paymentType'] !== PaymentMethod.PAY_BY_CARD) {
+        //other than pay by card
+        this.saveAndRedirect(req, res, TASK_LIST_URL);
+        return;
+      }
+
       const client = this.getPaymentClient(req, res);
       const payment = await client.create();
       const now = new Date().toISOString();
