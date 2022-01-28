@@ -87,6 +87,15 @@ const setupConfig = {
       enabled: true,
       fullPageScreenshots: true,
     },
+    wdio: {
+      enabled: true,
+      services: ['sauce'],
+      host: process.env.SAUCE_HOST || 'ondemand.eu-central-1.saucelabs.com',
+      user: process.env.SAUCE_USERNAME,
+      key: process.env.SAUCE_ACCESS_KEY,
+      region: 'eu',
+      acceptSslCerts: true,
+    },
   },
   include: {
     config: './src/test/e2e/config.js',
