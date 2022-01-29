@@ -1,7 +1,6 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
-import { getNextStepUrl } from '../..';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
@@ -21,27 +20,17 @@ export default class AdoptionAgencyPostController extends PostController<AnyObje
 
     Object.assign(adoptionAgency, formData);
 
-    const nextUrl = req.session.errors.length > 0 ? req.url : getNextStepUrl(req, req.session.userCase);
+    this.filterErrorsForSaveAsDraft(req);
 
-    try {
-      req.session.userCase = await this.save(
-        req,
-        {
-          adopAgencyOrLAs: req.session.userCase.adopAgencyOrLAs,
-          selectedAdoptionAgencyId: req.session.userCase.selectedAdoptionAgencyId,
-        },
-        this.getEventName(req)
-      );
-    } catch (err) {
-      req.locals.logger.error('Error saving', err);
-      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
-    }
+    req.session.userCase = await this.save(
+      req,
+      {
+        adopAgencyOrLAs: req.session.userCase.adopAgencyOrLAs,
+        selectedAdoptionAgencyId: req.session.userCase.selectedAdoptionAgencyId,
+      },
+      this.getEventName(req)
+    );
 
-    req.session.save(err => {
-      if (err) {
-        throw err;
-      }
-      res.redirect(nextUrl);
-    });
+    this.redirect(req, res);
   }
 }

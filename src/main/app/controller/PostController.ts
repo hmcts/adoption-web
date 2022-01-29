@@ -54,32 +54,46 @@ export class PostController<T extends AnyObject> {
     Object.assign(req.session.userCase, formData);
     req.session.errors = form.getErrors(formData);
 
-    if (req.body.saveAsDraft) {
-      // skip empty field errors in case of save as draft
-      req.session.errors = req.session.errors.filter(item => item.errorType !== ValidationError.REQUIRED);
-    }
+    this.filterErrorsForSaveAsDraft(req);
 
     if (req.session.errors.length === 0) {
-      try {
-        req.session.userCase = await this.save(req, formData, this.getEventName(req));
-      } catch (err) {
-        req.locals.logger.error('Error saving', err);
-        req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
-      }
+      req.session.userCase = await this.save(req, formData, this.getEventName(req));
     }
 
-    const nextUrl = req.session.errors.length > 0 ? req.url : getNextStepUrl(req, req.session.userCase);
+    this.redirect(req, res);
+  }
+
+  protected filterErrorsForSaveAsDraft(req: AppRequest<T>): void {
+    if (req.body.saveAsDraft) {
+      // skip empty field errors in case of save as draft
+      req.session.errors = req.session.errors!.filter(
+        item => item.errorType !== ValidationError.REQUIRED && item.errorType !== ValidationError.NOT_SELECTED
+      );
+    }
+  }
+
+  protected async save(req: AppRequest<T>, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
+    try {
+      return req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
+    } catch (err) {
+      req.locals.logger.error('Error saving', err);
+      req.session.errors = req.session.errors || [];
+      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+      return req.session.userCase;
+    }
+  }
+
+  protected redirect(req: AppRequest<T>, res: Response, nextUrl?: string): void {
+    if (!nextUrl) {
+      nextUrl = req.session.errors?.length ? req.url : getNextStepUrl(req, req.session.userCase);
+    }
 
     req.session.save(err => {
       if (err) {
         throw err;
       }
-      res.redirect(nextUrl);
+      res.redirect(nextUrl!);
     });
-  }
-
-  protected async save(req: AppRequest<T>, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
-    return req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
   }
 
   //eslint-disable-next-line @typescript-eslint/no-unused-vars

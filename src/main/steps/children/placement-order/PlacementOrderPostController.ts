@@ -1,11 +1,9 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
-import { getNextStepUrl } from '../..';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
-import { ValidationError } from '../../../app/form/validation';
 
 @autobind
 export default class PlacementOrderPostController extends PostController<AnyObject> {
@@ -22,32 +20,17 @@ export default class PlacementOrderPostController extends PostController<AnyObje
 
     Object.assign(placementOrder, formData);
 
-    if (req.body.saveAsDraft) {
-      // skip empty field errors in case of save as draft
-      req.session.errors = req.session.errors.filter(item => item.errorType !== ValidationError.REQUIRED);
-    }
+    this.filterErrorsForSaveAsDraft(req);
 
-    const nextUrl = req.session.errors.length > 0 ? req.url : getNextStepUrl(req, req.session.userCase);
+    req.session.userCase = await this.save(
+      req,
+      {
+        placementOrders: req.session.userCase.placementOrders,
+        selectedPlacementOrderId: req.session.userCase.selectedPlacementOrderId,
+      },
+      this.getEventName(req)
+    );
 
-    try {
-      req.session.userCase = await this.save(
-        req,
-        {
-          placementOrders: req.session.userCase.placementOrders,
-          selectedPlacementOrderId: req.session.userCase.selectedPlacementOrderId,
-        },
-        this.getEventName(req)
-      );
-    } catch (err) {
-      req.locals.logger.error('Error saving', err);
-      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
-    }
-
-    req.session.save(err => {
-      if (err) {
-        throw err;
-      }
-      res.redirect(nextUrl);
-    });
+    this.redirect(req, res);
   }
 }
