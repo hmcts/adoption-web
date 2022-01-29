@@ -42,30 +42,15 @@ export default class AdoptionAgencyGetController extends GetController {
 
     req.session.userCase.adopAgencyOrLAs = adopAgencyOrLAs;
 
-    try {
-      req.session.userCase = await this.save(
-        req,
-        {
-          adopAgencyOrLAs: req.session.userCase.adopAgencyOrLAs,
-          selectedAdoptionAgencyId: req.session.userCase.selectedAdoptionAgencyId,
-        },
-        this.getEventName(req)
-      );
-    } catch (err) {
-      req.locals.logger.error('Error saving', err);
-      req.session.errors?.push({ errorType: 'errorSaving', propertyName: '*' });
-    }
+    req.session.userCase = await this.save(
+      req,
+      {
+        adopAgencyOrLAs: req.session.userCase.adopAgencyOrLAs,
+        selectedAdoptionAgencyId: req.session.userCase.selectedAdoptionAgencyId,
+      },
+      this.getEventName(req)
+    );
 
-    req.session.save(err => {
-      if (err) {
-        throw err;
-      }
-
-      if (redirect) {
-        res.redirect(req.url);
-      } else {
-        super.get(req, res);
-      }
-    });
+    this.saveSessionAndRedirect(req, res, redirect);
   }
 }

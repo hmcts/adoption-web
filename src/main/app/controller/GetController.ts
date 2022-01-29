@@ -72,7 +72,28 @@ export class GetController {
   }
 
   protected async save(req: AppRequest, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
-    return req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
+    try {
+      return req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
+    } catch (err) {
+      req.locals.logger.error('Error saving', err);
+      req.session.errors = req.session.errors || [];
+      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+      return req.session.userCase;
+    }
+  }
+
+  protected saveSessionAndRedirect(req: AppRequest, res: Response, reloadSamePage?: boolean): void {
+    req.session.save(err => {
+      if (err) {
+        throw err;
+      }
+
+      if (reloadSamePage) {
+        res.redirect(req.url);
+      } else {
+        this.get(req, res);
+      }
+    });
   }
 
   //eslint-disable-next-line @typescript-eslint/no-unused-vars

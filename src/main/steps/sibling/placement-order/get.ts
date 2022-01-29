@@ -42,31 +42,16 @@ export default class SiblingPlacementOrderGetController extends GetController {
 
     req.session.userCase.siblings = sibling;
 
-    try {
-      req.session.userCase = await this.save(
-        req,
-        {
-          siblings: req.session.userCase.siblings,
-          selectedSiblingPoId: req.session.userCase.selectedSiblingPoId,
-          selectedSiblingId: req.session.userCase.selectedSiblingId,
-        },
-        this.getEventName(req)
-      );
-    } catch (err) {
-      req.locals.logger.error('Error saving', err);
-      req.session.errors?.push({ errorType: 'errorSaving', propertyName: '*' });
-    }
+    req.session.userCase = await this.save(
+      req,
+      {
+        siblings: req.session.userCase.siblings,
+        selectedSiblingPoId: req.session.userCase.selectedSiblingPoId,
+        selectedSiblingId: req.session.userCase.selectedSiblingId,
+      },
+      this.getEventName(req)
+    );
 
-    req.session.save(err => {
-      if (err) {
-        throw err;
-      }
-
-      if (redirect) {
-        res.redirect(req.url);
-      } else {
-        super.get(req, res);
-      }
-    });
+    this.saveSessionAndRedirect(req, res, redirect);
   }
 }

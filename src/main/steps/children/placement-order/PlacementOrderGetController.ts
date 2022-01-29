@@ -50,30 +50,15 @@ export default class PlacementOrderGetController extends GetController {
 
     req.session.userCase.placementOrders = placementOrders;
 
-    try {
-      req.session.userCase = await this.save(
-        req,
-        {
-          placementOrders: req.session.userCase.placementOrders,
-          selectedPlacementOrderId: req.session.userCase.selectedPlacementOrderId,
-        },
-        this.getEventName(req)
-      );
-    } catch (err) {
-      req.locals.logger.error('Error saving', err);
-      req.session.errors?.push({ errorType: 'errorSaving', propertyName: '*' });
-    }
+    req.session.userCase = await this.save(
+      req,
+      {
+        placementOrders: req.session.userCase.placementOrders,
+        selectedPlacementOrderId: req.session.userCase.selectedPlacementOrderId,
+      },
+      this.getEventName(req)
+    );
 
-    req.session.save(err => {
-      if (err) {
-        throw err;
-      }
-
-      if (redirect) {
-        res.redirect(req.url);
-      } else {
-        super.get(req, res);
-      }
-    });
+    this.saveSessionAndRedirect(req, res, redirect);
   }
 }
