@@ -41,12 +41,13 @@ describe('AdoptionAgencyGetController', () => {
 
   describe('when there is no adoptionAgency with selectedAdoptionAgencyId in userCase', () => {
     test('should create a blank adoptionAgency with generated adopAgencyOrLaId', async () => {
+      req = mockRequest({ session: { userCase: { selectedAdoptionAgencyId: 'MOCK_ADOPTION_AGENCY_ID' } } });
       req.locals.api.triggerEvent.mockResolvedValue({
         selectedAdoptionAgencyId: 'adopAgencyOrLaId',
-        adopAgencyOrLAs: [{ adopAgencyOrLaId: '1609459200000' }],
+        adopAgencyOrLAs: [{ adopAgencyOrLaId: 'adopAgencyOrLaId' }],
       });
       await controller.get(req, res);
-      expect(req.session.userCase.adopAgencyOrLAs).toEqual([{ adopAgencyOrLaId: '1609459200000' }]);
+      expect(req.session.userCase.adopAgencyOrLAs).toEqual([{ adopAgencyOrLaId: 'adopAgencyOrLaId' }]);
     });
   });
 

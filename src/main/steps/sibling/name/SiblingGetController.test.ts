@@ -177,25 +177,4 @@ describe('SiblingGetController', () => {
       }
     });
   });
-
-  describe('when there is an error in saving CCD data', () => {
-    test('should log error and add error to session object', async () => {
-      req = mockRequest({
-        session: {
-          userCase: {
-            selectedSiblingId: 'MOCK_SIBLING_ID',
-            siblings: [
-              {
-                siblingId: 'MOCK_SIBLING_ID',
-              },
-            ],
-          },
-        },
-      });
-      req.locals.api.triggerEvent.mockRejectedValue('MOCK_ERROR');
-
-      await controller.get(req, res);
-      expect(req.locals.logger.error).toHaveBeenCalledWith('Error saving', 'MOCK_ERROR');
-    });
-  });
 });

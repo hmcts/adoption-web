@@ -74,13 +74,13 @@ export class PostController<T extends AnyObject> {
 
   protected async save(req: AppRequest<T>, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
     try {
-      return req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
+      req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
     } catch (err) {
       req.locals.logger.error('Error saving', err);
       req.session.errors = req.session.errors || [];
       req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
-      return req.session.userCase;
     }
+    return req.session.userCase;
   }
 
   protected redirect(req: AppRequest<T>, res: Response, nextUrl?: string): void {
