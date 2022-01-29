@@ -1,6 +1,6 @@
-jest.mock('../placement-order/get');
+jest.mock('../placement-order/PlacementOrderGetController');
 
-import PlacementOrderGetController from '../placement-order/get';
+import PlacementOrderGetController from '../placement-order/PlacementOrderGetController';
 
 import GetController from './get';
 
