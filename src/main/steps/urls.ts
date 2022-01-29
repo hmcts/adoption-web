@@ -15,7 +15,6 @@ export const APPLICATION_ENDED: PageLink = '/application-ended';
 export const TASK_LIST_URL: PageLink = '/task-list';
 
 export const APPLYING_WITH_URL: PageLink = '/applying-with';
-export const DATE_CHILD_MOVED_IN_URL: PageLink = '/date-child-moved-in';
 
 export const APPLICANT_1: PageLink = '/applicant1';
 export const APPLICANT_1_FULL_NAME: PageLink = `${APPLICANT_1}/full-name`;
@@ -27,7 +26,6 @@ export const APPLICANT_1_CONTACT_DETAILS: PageLink = `${APPLICANT_1}/contact-det
 export const APPLICANT_1_FIND_ADDRESS: PageLink = `${APPLICANT_1}/address/lookup`;
 export const APPLICANT_1_SELECT_ADDRESS: PageLink = `${APPLICANT_1}/address/select`;
 export const APPLICANT_1_MANUAL_ADDRESS: PageLink = `${APPLICANT_1}/address/manual`;
-export const APPLICANT_1_IDENTITY_DOCUMENTS: PageLink = `${APPLICANT_1}/identity-documents`;
 
 export const APPLICANT_2: PageLink = '/applicant2';
 export const APPLICANT_2_FULL_NAME: PageLink = `${APPLICANT_2}/full-name`;

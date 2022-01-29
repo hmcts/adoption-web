@@ -126,9 +126,7 @@ export class CaseApi {
       const tokenResponse = await this.axios.get<CcdTokenResponse>(`/cases/${caseId}/event-triggers/${eventName}`);
       const token = tokenResponse.data.token;
       const event = { id: eventName };
-      //delete data.applicant1HasOtherNames;
 
-      console.log('caseapi.ts 132 data: ' + JSON.stringify(data));
       const response: AxiosResponse<CcdV2Response> = await this.axios.post(`/cases/${caseId}/events`, {
         event,
         data,
@@ -143,7 +141,6 @@ export class CaseApi {
 
   public async triggerEvent(caseId: string, userData: Partial<Case>, eventName: string): Promise<CaseWithId> {
     const data = toApiFormat(userData);
-    //console.log('CaseAPI 144', JSON.stringify(data));
     return this.sendEvent(caseId, data, eventName);
   }
 
