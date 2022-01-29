@@ -19,7 +19,6 @@ export default class NationalityGetController extends GetController {
     const countries = req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`];
     const remove = req.query.remove;
 
-    let removed = false;
     if (remove && countries?.length) {
       const index = countries.indexOf(remove as string);
 
@@ -37,9 +36,10 @@ export default class NationalityGetController extends GetController {
 
       delete req.query.remove;
       req.url = req.url.substring(0, req.url.indexOf('?'));
-      removed = true;
-    }
 
-    this.saveSessionAndRedirect(req, res, removed);
+      super.saveSessionAndRedirect(req, res);
+    } else {
+      super.get(req, res);
+    }
   }
 }

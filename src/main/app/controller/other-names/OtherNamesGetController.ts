@@ -21,8 +21,6 @@ export default class OtherNamesGetController extends GetController {
 
     const remove = req.query.remove;
 
-    let removed = false;
-
     if (remove && names?.length) {
       const index = names.findIndex(item => item.id === remove);
 
@@ -40,9 +38,10 @@ export default class OtherNamesGetController extends GetController {
 
       delete req.query.remove;
       req.url = req.url.substring(0, req.url.indexOf('?'));
-      removed = true;
-    }
 
-    this.saveSessionAndRedirect(req, res, removed);
+      super.saveSessionAndRedirect(req, res);
+    } else {
+      super.get(req, res);
+    }
   }
 }

@@ -13,6 +13,6 @@ export default class PayYourFeeGetController extends GetController {
       req.session.fee = fee;
     }
 
-    this.saveSessionAndRedirect(req, res, false);
+    super.saveSessionAndRedirect(req, res);
   }
 }

@@ -52,6 +52,15 @@ export default class SiblingPlacementOrderGetController extends GetController {
       this.getEventName(req)
     );
 
-    this.saveSessionAndRedirect(req, res, redirect);
+    if (redirect) {
+      super.saveSessionAndRedirect(req, res);
+    } else {
+      req.session.save(err => {
+        if (err) {
+          throw err;
+        }
+        super.get(req, res);
+      });
+    }
   }
 }

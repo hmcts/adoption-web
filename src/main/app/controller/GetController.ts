@@ -82,17 +82,12 @@ export class GetController {
     }
   }
 
-  protected saveSessionAndRedirect(req: AppRequest, res: Response, reloadSamePage?: boolean): void {
+  protected saveSessionAndRedirect(req: AppRequest, res: Response): void {
     req.session.save(err => {
       if (err) {
         throw err;
       }
-
-      if (reloadSamePage) {
-        res.redirect(req.url);
-      } else {
-        this.get(req, res);
-      }
+      res.redirect(req.url);
     });
   }
 

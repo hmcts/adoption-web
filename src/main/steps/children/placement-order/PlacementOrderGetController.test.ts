@@ -167,21 +167,4 @@ describe('PlacementOrderGetController', () => {
     await controller.get(req, res);
     expect(req.session.save).toHaveBeenCalled();
   });
-
-  describe('when there is an error in saving session', () => {
-    test('should throw an error', async () => {
-      req = mockRequest({
-        session: {
-          user: { email: 'test@example.com' },
-          save: jest.fn(done => done('MOCK_ERROR')),
-        },
-      });
-      try {
-        await controller.get(req, res);
-      } catch (err) {
-        //eslint-disable-next-line jest/no-conditional-expect
-        expect(err).toBe('MOCK_ERROR');
-      }
-    });
-  });
 });
