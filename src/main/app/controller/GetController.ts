@@ -3,7 +3,7 @@ import { Response } from 'express';
 import Negotiator from 'negotiator';
 
 import { LanguageToggle } from '../../modules/i18n';
-import { getNextIncompleteStepUrl } from '../../steps';
+// import { getNextIncompleteStepUrl } from '../../steps';
 import { CommonContent, Language, generatePageContent } from '../../steps/common/common.content';
 import { Case, CaseWithId } from '../case/case';
 import { CITIZEN_UPDATE, Fee, State } from '../case/definition';
@@ -50,7 +50,7 @@ export class GetController {
       sessionErrors,
       htmlLang: language,
       isDraft: req.session?.userCase?.state ? req.session.userCase.state === State.Draft : true,
-      getNextIncompleteStepUrl: () => getNextIncompleteStepUrl(req),
+      // getNextIncompleteStepUrl: () => getNextIncompleteStepUrl(req),
     });
   }
 
@@ -71,7 +71,7 @@ export class GetController {
     return negotiator.language(LanguageToggle.supportedLanguages) || 'en';
   }
 
-  protected async save(req: AppRequest, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
+  public async save(req: AppRequest, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
     try {
       return await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
     } catch (err) {
@@ -82,7 +82,7 @@ export class GetController {
     }
   }
 
-  protected saveSessionAndRedirect(req: AppRequest, res: Response): void {
+  public saveSessionAndRedirect(req: AppRequest, res: Response): void {
     req.session.save(err => {
       if (err) {
         throw err;

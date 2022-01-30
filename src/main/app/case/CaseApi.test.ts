@@ -4,7 +4,7 @@ import { LoggerInstance } from 'winston';
 import { UserDetails } from '../controller/AppRequest';
 
 import { CaseApi, getCaseApi } from './CaseApi';
-import { Adoption, State } from './definition';
+import { Adoption, CITIZEN_UPDATE, State } from './definition';
 
 jest.mock('axios');
 
@@ -35,41 +35,6 @@ describe('CaseApi', () => {
   });
 
   const serviceType = Adoption.ADOPTION;
-
-  //test.each([DivorceOrDissolution.DIVORCE, DivorceOrDissolution.DISSOLUTION])(
-  //'Should return %s case data response',
-  // async caseType => {
-  //   mockedAxios.get.mockResolvedValue({
-  //     data: [
-  //       {
-  //         id: '1234',
-  //         state: State.Draft,
-  //         case_data: {
-  //           applicationFeeOrderSummary: [{ test: 'fees' }],
-  //           applicationPayments: [{ test: 'payment' }],
-  //         },
-  //       },
-  //       {
-  //         id: '1234',
-  //         state: State.Draft,
-  //         case_data: {
-  //           applicationFeeOrderSummary: [{ test: 'fees' }],
-  //           applicationPayments: [{ test: 'payment' }],
-  //         },
-  //       },
-  //     ],
-  //  });
-
-  // const userCase = await api.getOrCreateCase(caseType, userDetails);
-
-  // expect(userCase).toStrictEqual({
-  //   id: '1234',
-  //   state: State.Draft,
-  //   applicationFeeOrderSummary: [{ test: 'fees' }],
-  //   payments: [{ test: 'payment' }],
-  // });
-  //   }
-  // );
 
   test('Should throw error when case could not be retrieved', async () => {
     mockedAxios.get.mockRejectedValue({
@@ -121,15 +86,15 @@ describe('CaseApi', () => {
     expect(mockLogger.error).toHaveBeenCalledWith('API Error POST https://example.com');
   });
 
-  // test('Should throw an error if too many cases are found', async () => {
-  //   const mockCase = { case_data: { } };
+  test('Should throw an error if more than one cases are found', async () => {
+    const mockCase = { case_data: {} };
 
-  //   mockedAxios.get.mockResolvedValue({
-  //     data: [mockCase, mockCase, mockCase],
-  //   });
+    mockedAxios.get.mockResolvedValue({
+      data: [mockCase, mockCase, mockCase],
+    });
 
-  //   await expect(api.getOrCreateCase(serviceType, userDetails)).rejects.toThrow('Too many cases assigned to user.');
-  // });
+    await expect(api.getOrCreateCase(serviceType, userDetails)).rejects.toThrow('Too many cases assigned to user.');
+  });
 
   test('Should retrieve the first case if two cases found', async () => {
     const firstMockCase = {
@@ -137,14 +102,14 @@ describe('CaseApi', () => {
       state: State.Draft,
       case_data: {},
     };
-    const secondMockCase = {
-      id: '2',
-      state: State.Draft,
-      case_data: {},
-    };
+    // const secondMockCase = {
+    //   id: '2',
+    //   state: State.Draft,
+    //   case_data: {},
+    // };
 
     mockedAxios.get.mockResolvedValue({
-      data: [firstMockCase, secondMockCase],
+      data: [firstMockCase],
     });
 
     const userCase = await api.getOrCreateCase(serviceType, userDetails);
@@ -154,37 +119,35 @@ describe('CaseApi', () => {
       state: State.Draft,
     });
   });
-  //TODO uncomment this
-  // test('Should update case', async () => {
-  //   mockedAxios.get.mockResolvedValue({ data: { token: '123' } });
-  //   mockedAxios.post.mockResolvedValue({
-  //     data: { data: { id: '1234' } },
-  //   });
-  //   const caseData = { };
-  //   await api.triggerEvent('1234', caseData, CITIZEN_UPDATE);
 
-  //   const expectedRequest = {
-  //     data: caseData,
-  //     event: { id: CITIZEN_UPDATE },
-  //     event_token: '123',
-  //   };
+  test('Should update case', async () => {
+    mockedAxios.get.mockResolvedValue({ data: { token: '123' } });
+    mockedAxios.post.mockResolvedValue({
+      data: { data: { id: '1234' } },
+    });
+    const caseData = {};
+    await api.triggerEvent('1234', caseData, CITIZEN_UPDATE);
 
-  //   expect(mockedAxios.post).toBeCalledWith('/cases/1234/events', expectedRequest);
-  // });
+    const expectedRequest = {
+      data: caseData,
+      event: { id: CITIZEN_UPDATE },
+      event_token: '123',
+    };
 
-  // test('Should throw error when case could not be updated', async () => {
-  //   mockedAxios.post.mockRejectedValue({
-  //     config: { method: 'POST', url: 'https://example.com' },
-  //     response: { status: 500, data: 'mock error' },
-  //   });
+    expect(mockedAxios.post).toBeCalledWith('/cases/1234/events', expectedRequest);
+  });
 
-  //   await expect(
-  //     api.triggerEvent('not found', { }, CITIZEN_UPDATE)
-  //   ).rejects.toThrow('Case could not be updated.');
+  test('Should throw error when case could not be updated', async () => {
+    mockedAxios.post.mockRejectedValue({
+      config: { method: 'POST', url: 'https://example.com' },
+      response: { status: 500, data: 'mock error' },
+    });
 
-  //   expect(mockLogger.error).toHaveBeenCalledWith('API Error POST https://example.com 500');
-  //   expect(mockLogger.info).toHaveBeenCalledWith('Response: ', 'mock error');
-  // });
+    await expect(api.triggerEvent('not found', {}, CITIZEN_UPDATE)).rejects.toThrow('Case could not be updated.');
+
+    expect(mockLogger.error).toHaveBeenCalledWith('API Error POST https://example.com 500');
+    expect(mockLogger.info).toHaveBeenCalledWith('Response: ', 'mock error');
+  });
 
   test('Should return case for caseId passed', async () => {
     mockedAxios.get.mockResolvedValue({
