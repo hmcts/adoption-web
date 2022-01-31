@@ -45,7 +45,7 @@ const fields: FromApiConverters = {
     })),
   }),
   siblings: data => ({
-    siblings: (data.siblings || []).map(sibling => ({
+    siblings: data.siblings?.map(sibling => ({
       ...sibling.value,
       siblingPlacementOrders: ((sibling.value.siblingPlacementOrders || []) as ListValue<PlacementOrder>[]).map(
         placementOrder => ({
@@ -73,9 +73,6 @@ const fields: FromApiConverters = {
   }),
   applicant2StatementOfTruth: data => ({
     applicant2IBelieveApplicationIsTrue: checkboxConverter(data.applicant2StatementOfTruth),
-  }),
-  jurisdictionResidualEligible: data => ({
-    jurisdictionResidualEligible: checkboxConverter(data.jurisdictionResidualEligible),
   }),
   applicant1DocumentsUploaded: uploadedFilesFromApiApplicant1,
   applicant2DocumentsUploaded: uploadedFilesFromApiApplicant2,

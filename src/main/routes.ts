@@ -32,15 +32,19 @@ export class Routes {
     app.get(TASK_LIST_URL, errorHandler(new TaskListGetController().get));
 
     for (const step of stepsWithContent) {
-      const getController = fs.existsSync(`${step.stepDir}/get.ts`)
-        ? require(`${step.stepDir}/get.ts`).default
+      const files = fs.readdirSync(`${step.stepDir}`);
+
+      const getControllerFileName = files.find(item => /get/i.test(item) && !/test/i.test(item));
+      const getController = getControllerFileName
+        ? require(`${step.stepDir}/${getControllerFileName}`).default
         : GetController;
 
       app.get(step.url, errorHandler(new getController(step.view, step.generateContent).get));
 
       if (step.form) {
-        const postController = fs.existsSync(`${step.stepDir}/post.ts`)
-          ? require(`${step.stepDir}/post.ts`).default
+        const postControllerFileName = files.find(item => /post/i.test(item) && !/test/i.test(item));
+        const postController = postControllerFileName
+          ? require(`${step.stepDir}/${postControllerFileName}`).default
           : PostController;
         app.post(step.url, errorHandler(new postController(step.form.fields).post));
       }
