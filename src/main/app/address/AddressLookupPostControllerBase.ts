@@ -2,7 +2,6 @@ import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
 import { FieldPrefix } from '../../app/case/case';
-import { getNextStepUrl } from '../../steps';
 import { AppRequest } from '../controller/AppRequest';
 import { AnyObject, PostController } from '../controller/PostController';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
@@ -36,14 +35,7 @@ export default class AddressLookupPostControllerBase extends PostController<AnyO
       req.session.addresses = addresses;
     }
 
-    const nextUrl = req.session.errors.length > 0 ? req.url : getNextStepUrl(req, req.session.userCase);
-
-    req.session.save(err => {
-      if (err) {
-        throw err;
-      }
-      res.redirect(nextUrl);
-    });
+    this.redirect(req, res);
   }
 
   private checkStubbedPostcode(postcode: string): Address[] | null {

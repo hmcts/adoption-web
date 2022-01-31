@@ -59,11 +59,11 @@ describe('SiblingPlacementOrderGetController', () => {
         session: {
           userCase: {
             selectedSiblingId: 'MOCK_SIBLING_ID',
-            selectedSiblingPoId: 'MOCK_PLACEMENT_ORDER_ID',
+            selectedSiblingPoId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID',
             siblings: [
               {
                 siblingId: 'MOCK_SIBLING_ID',
-                siblingPlacementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }],
+                siblingPlacementOrders: [{ placementOrderId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID' }],
               },
             ],
           },
@@ -75,14 +75,17 @@ describe('SiblingPlacementOrderGetController', () => {
         siblings: [
           {
             siblingId: 'MOCK_SIBLING_ID',
-            siblingPlacementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }],
+            siblingPlacementOrders: [{ placementOrderId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID' }],
           },
         ],
       });
 
       await controller.get(req, res);
       expect(req.session.userCase.siblings).toEqual([
-        { siblingId: 'MOCK_SIBLING_ID', siblingPlacementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }] },
+        {
+          siblingId: 'MOCK_SIBLING_ID',
+          siblingPlacementOrders: [{ placementOrderId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID' }],
+        },
       ]);
       expect(req.session.userCase.selectedSiblingPoId).toEqual('MOCK_SIBLING_PLACEMENT_ORDER_ID');
     });
@@ -173,29 +176,6 @@ describe('SiblingPlacementOrderGetController', () => {
       req.locals.api.triggerEvent.mockResolvedValue({ selectedSiblingPoId: 'MOCK_ID' });
       await controller.get(req, res);
       expect(req.session.userCase.selectedSiblingPoId).toBe('MOCK_ID');
-    });
-  });
-
-  describe('when there is an error in saving CCD data', () => {
-    test('should log error and add error to session object', async () => {
-      req = mockRequest({
-        session: {
-          userCase: {
-            selectedSiblingId: 'MOCK_SIBLING_ID',
-            selectedSiblingPoId: 'MOCK_PLACEMENT_ORDER_ID',
-            siblings: [
-              {
-                siblingId: 'MOCK_SIBLING_ID',
-                siblingPlacementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }],
-              },
-            ],
-          },
-        },
-      });
-      req.locals.api.triggerEvent.mockRejectedValue('MOCK_ERROR');
-
-      await controller.get(req, res);
-      expect(req.locals.logger.error).toHaveBeenCalledWith('Error saving', 'MOCK_ERROR');
     });
   });
 

@@ -103,27 +103,10 @@ const fields: ToApiConverters = {
   applicant2IBelieveApplicationIsTrue: data => ({
     applicant2StatementOfTruth: checkboxConverter(data.applicant2IBelieveApplicationIsTrue),
   }),
-  jurisdictionResidualEligible: data => ({
-    jurisdictionResidualEligible: checkboxConverter(data.jurisdictionResidualEligible),
-  }),
   applicant1HelpWithFeesRefNo: data => ({
     applicant1HWFReferenceNumber: !isInvalidHelpWithFeesRef(data.applicant1HelpWithFeesRefNo)
       ? data.applicant1HelpWithFeesRefNo
       : '',
-  }),
-  applicant1CannotUploadDocuments: data => ({
-    applicant1CannotUploadSupportingDocument: data.applicant1CannotUploadDocuments
-      ? !Array.isArray(data.applicant1CannotUploadDocuments)
-        ? [data.applicant1CannotUploadDocuments]
-        : data.applicant1CannotUploadDocuments
-      : [],
-  }),
-  applicant2CannotUploadDocuments: data => ({
-    applicant2CannotUploadSupportingDocument: data.applicant2CannotUploadDocuments
-      ? !Array.isArray(data.applicant2CannotUploadDocuments)
-        ? [data.applicant2CannotUploadDocuments]
-        : data.applicant2CannotUploadDocuments
-      : [],
   }),
   applicant1UploadedFiles: () => ({}),
   applicant2UploadedFiles: () => ({}),

@@ -87,15 +87,6 @@ describe('SelectAddressPostController', () => {
         expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(1);
         expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('MOCK_ID', formData, 'citizen-update-application');
       });
-
-      test('should log error when triggerEvent call fails', async () => {
-        req.locals.api.triggerEvent.mockRejectedValue('MOCK_ERROR');
-        await controller.post(req, res);
-        expect(req.locals.logger.error).toHaveBeenCalledTimes(1);
-        expect(req.locals.logger.error).toHaveBeenCalledWith('Error saving', 'MOCK_ERROR');
-        //TODO uncomment this line when CCD work is complete
-        // expect(req.session.errors).toEqual([{ errorType: 'errorSaving', propertyName: '*' }]);
-      });
     });
 
     describe('and when there is no selected address', () => {
@@ -140,23 +131,6 @@ describe('SelectAddressPostController', () => {
       await controller.post(req, res);
       expect(mockGetNextStepUrl).not.toHaveBeenCalled();
       expect(res.redirect).toHaveBeenCalledWith('/request');
-    });
-  });
-
-  describe('when there is an error in saving session', () => {
-    test('should throw an error', async () => {
-      req = mockRequest({
-        session: {
-          user: { email: 'test@example.com' },
-          save: jest.fn(done => done('MOCK_ERROR')),
-        },
-      });
-      try {
-        await controller.post(req, res);
-      } catch (err) {
-        //eslint-disable-next-line jest/no-conditional-expect
-        expect(err).toBe('MOCK_ERROR');
-      }
     });
   });
 });

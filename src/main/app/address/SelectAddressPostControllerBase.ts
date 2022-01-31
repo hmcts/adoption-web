@@ -1,12 +1,10 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
-import { getNextStepUrl } from '../../steps';
 import { FieldPrefix } from '../case/case';
 import { AppRequest } from '../controller/AppRequest';
 import { AnyObject, PostController } from '../controller/PostController';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
-import { ValidationError } from '../form/validation';
 
 @autobind
 export default class SelectAddressPostControllerBase extends PostController<AnyObject> {
@@ -40,27 +38,12 @@ export default class SelectAddressPostControllerBase extends PostController<AnyO
         formData[`${this.fieldPrefix}AddressCounty`] = selectedAddress.county;
         formData[`${this.fieldPrefix}AddressPostcode`] = selectedAddress.postcode;
 
-        try {
-          req.session.userCase = await this.save(req, formData, this.getEventName(req));
-        } catch (err) {
-          req.locals.logger.error('Error saving', err);
-          req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
-        }
+        req.session.userCase = await this.save(req, formData, this.getEventName(req));
       }
     }
 
-    if (req.body.saveAsDraft) {
-      // skip empty field errors in case of save as draft
-      req.session.errors = req.session.errors.filter(item => item.errorType !== ValidationError.NOT_SELECTED);
-    }
+    this.filterErrorsForSaveAsDraft(req);
 
-    const nextUrl = req.session.errors.length > 0 ? req.url : getNextStepUrl(req, req.session.userCase);
-
-    req.session.save(err => {
-      if (err) {
-        throw err;
-      }
-      res.redirect(nextUrl);
-    });
+    this.redirect(req, res);
   }
 }

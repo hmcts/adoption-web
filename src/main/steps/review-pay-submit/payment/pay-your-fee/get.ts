@@ -11,15 +11,8 @@ export default class PayYourFeeGetController extends GetController {
     if (!req.session.fee) {
       const fee = await getFee(req.locals.logger);
       req.session.fee = fee;
-      req.session.save(err => {
-        if (err) {
-          throw err;
-        }
-        super.get(req, res);
-      });
-      return;
     }
 
-    super.get(req, res);
+    super.saveSessionAndRedirect(req, res);
   }
 }

@@ -4,7 +4,7 @@ export const defaultViewArgs = {
   ...generatePageContent({ language: 'en', userEmail: 'test@example.com' }),
   serviceName: expect.any(String),
   sessionErrors: expect.any(Array),
-  getNextIncompleteStepUrl: expect.any(Function),
+  // getNextIncompleteStepUrl: expect.any(Function),
   isDraft: expect.any(Boolean),
   userCase: expect.any(Object),
   language: expect.any(String),
