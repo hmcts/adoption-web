@@ -24,7 +24,7 @@ export default class PayYourFeePostController extends PostController<AnyObject> 
 
     const payments = new PaymentModel(req.session.userCase.payments || []);
     if (payments.isPaymentInProgress()) {
-      return this.saveAndRedirect(req, res, PAYMENT_CALLBACK_URL);
+      return this.redirect(req, res, PAYMENT_CALLBACK_URL);
     }
 
     const form = new Form(this.fields as FormFields);
@@ -35,7 +35,7 @@ export default class PayYourFeePostController extends PostController<AnyObject> 
     const fee = req.session.fee;
     if (!fee) {
       req.session.errors.push({ errorType: 'errorRetrievingFee', propertyName: 'paymentType' });
-      this.saveAndRedirect(req, res, req.url);
+      this.redirect(req, res, req.url);
       return;
     }
 
@@ -60,20 +60,10 @@ export default class PayYourFeePostController extends PostController<AnyObject> 
       //TODO uncomment this once CCD events are available
       // req.session.userCase = await req.locals.api.addPayment(req.session.userCase.id, payments.list);
 
-      this.saveAndRedirect(req, res, payment._links.next_url.href);
+      this.redirect(req, res, payment._links.next_url.href);
     } else {
-      this.saveAndRedirect(req, res, req.url);
+      this.redirect(req, res, req.url);
     }
-  }
-
-  private saveAndRedirect(req: AppRequest, res: Response, url: string) {
-    req.session.save(err => {
-      if (err) {
-        throw err;
-      }
-
-      res.redirect(url);
-    });
   }
 
   private getPaymentClient(req: AppRequest, res: Response) {

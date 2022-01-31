@@ -25,14 +25,12 @@ export const getFee = async (logger: LoggerInstance): Promise<Fee | undefined> =
       return;
     }
 
-    const fee = {
+    return {
       feeCode: response.data.code,
       feeDescription: response.data.description,
       feeVersion: response.data.version,
       feeAmount: response.data.fee_amount,
     };
-
-    return fee;
   } catch (err) {
     logger.error('Fee lookup error occurred', err);
     return;
