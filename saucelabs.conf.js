@@ -44,7 +44,6 @@ const setupConfig = {
   helpers: {
     WebDriver: {
       url: testConfig.baseUrl,
-      restart: false,
       keepCookies: true,
       browser,
       smartWait,
