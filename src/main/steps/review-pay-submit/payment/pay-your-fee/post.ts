@@ -2,7 +2,7 @@ import autobind from 'autobind-decorator';
 import config from 'config';
 import { Response } from 'express';
 
-import { PaymentMethod, PaymentStatus } from '../../../../app/case/definition';
+import { CITIZEN_SUBMIT, PaymentMethod, PaymentStatus, State } from '../../../../app/case/definition';
 import { AppRequest } from '../../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../../app/controller/PostController';
 import { Form, FormFields } from '../../../../app/form/Form';
@@ -17,22 +17,12 @@ export default class PayYourFeePostController extends PostController<AnyObject> 
   }
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
-    //TODO need to uncomment this
-    // if (req.session.userCase.state !== State.AwaitingPayment) {
-    //   req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, {}, CITIZEN_SUBMIT);
-    // }
-
-    const payments = new PaymentModel(req.session.userCase.payments || []);
-    if (payments.isPaymentInProgress()) {
-      return this.saveAndRedirect(req, res, PAYMENT_CALLBACK_URL);
-    }
-
     const form = new Form(this.fields as FormFields);
     const { _csrf, ...formData } = form.getParsedBody(req.body);
 
     req.session.errors = form.getErrors(formData);
 
-    const fee = req.session.fee;
+    const fee = req.session.userCase.applicationFeeOrderSummary?.Fees[0]?.value;
     if (!fee) {
       req.session.errors.push({ errorType: 'errorRetrievingFee', propertyName: 'paymentType' });
       this.saveAndRedirect(req, res, req.url);
@@ -48,6 +38,17 @@ export default class PayYourFeePostController extends PostController<AnyObject> 
         return;
       }
 
+      console.log('req.session.userCase.state', req.session.userCase.state);
+      if (req.session.userCase.state !== State.AwaitingPayment) {
+        req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, {}, CITIZEN_SUBMIT);
+        console.log('req.session.userCase.state after', req.session.userCase.state);
+      }
+
+      const payments = new PaymentModel(req.session.userCase.payments || []);
+      if (payments.isPaymentInProgress()) {
+        return this.saveAndRedirect(req, res, PAYMENT_CALLBACK_URL);
+      }
+
       const client = this.getPaymentClient(req, res);
       const payment = await client.create();
       const now = new Date().toISOString();
@@ -55,18 +56,17 @@ export default class PayYourFeePostController extends PostController<AnyObject> 
       payments.add({
         created: now,
         updated: now,
-        feeCode: fee.feeCode,
-        amount: parseInt(fee.feeAmount, 10),
+        feeCode: fee.FeeCode,
+        amount: parseInt(fee.FeeAmount, 10),
         status: PaymentStatus.IN_PROGRESS,
         channel: payment._links.next_url.href,
         reference: payment.reference,
         transactionId: payment.external_reference,
       });
 
-      console.log(JSON.stringify(payments));
+      req.session.userCase = await req.locals.api.addPayment(req.session.userCase.id, payments.list);
 
-      //TODO uncomment this once CCD events are available
-      // req.session.userCase = await req.locals.api.addPayment(req.session.userCase.id, payments.list);
+      console.log('req.session.userCase', JSON.stringify(req.session.userCase));
 
       this.saveAndRedirect(req, res, payment._links.next_url.href);
     } else {

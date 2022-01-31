@@ -25,30 +25,27 @@ export class PaymentClient {
   public async create(): Promise<Payment> {
     const userCase = this.session.userCase;
     const caseId = userCase.id.toString();
-    // const fee = this.session.fee;
 
-    //TODO uncomment
-    // const total = userCase.applicationFeeOrderSummary.Fees.reduce((sum, item) => sum + +item.value.FeeAmount, 0) / 100;
-    const total = 183;
+    const total = userCase.applicationFeeOrderSummary.Fees.reduce((sum, item) => sum + +item.value.FeeAmount, 0);
+    console.log(total);
     const body = {
       case_type: CASE_TYPE,
       amount: total,
       ccd_case_number: caseId,
       description: 'Apply for adoption', //TODO consider welsh text
       currency: 'GBP',
-      //TODO uncomment this
-      // fees: userCase.applicationFeeOrderSummary.Fees.map(fee => ({
-      //   calculated_amount: `${parseInt(fee.value.FeeAmount, 10) / 100}`,
-      //   code: fee.value.FeeCode,
-      //   version: fee.value.FeeVersion,
-      // })),
-      fees: [
-        {
-          calculated_amount: 183,
-          code: 'FEE0310',
-          version: 2,
-        },
-      ],
+      fees: userCase.applicationFeeOrderSummary.Fees.map(fee => ({
+        calculated_amount: `${fee.value.FeeAmount}`,
+        code: fee.value.FeeCode,
+        version: fee.value.FeeVersion,
+      })),
+      // fees: [
+      //   {
+      //     calculated_amount: 183,
+      //     code: 'FEE0310',
+      //     version: 2,
+      //   },
+      // ],
       language: this.session.lang === 'en' ? '' : this.session.lang?.toUpperCase(),
     };
 

@@ -1,3 +1,8 @@
+const v4Mock = jest.fn().mockReturnValue('MOCK_V4_UUID');
+jest.mock('uuid', () => ({
+  v4: v4Mock,
+}));
+
 const mockGetFee = jest.fn();
 jest.mock('../../../../app/fee/fee-lookup-api', () => ({
   getFee: mockGetFee,
@@ -11,38 +16,50 @@ import FeeGetController from './get';
 
 describe('PayYourFeeGetController', () => {
   const controller = new FeeGetController(__dirname + './template', generateContent);
-  let req = mockRequest();
+  let req = mockRequest({ userCase: {} });
   const res = mockResponse();
 
-  describe('when there is no fee object in session', () => {
+  afterEach(() => {
+    mockGetFee.mockClear();
+  });
+
+  describe('when there is no applicationFeeOrderSummary object in userCase', () => {
     it('shoul call the fee lookup api', async () => {
-      mockGetFee.mockResolvedValue({ feeAmount: 'MOCK_FEE_AMOUNT' });
+      mockGetFee.mockResolvedValue({ FeeAmount: '4321' });
       await controller.get(req, res);
       expect(mockGetFee).toHaveBeenCalledWith(req.locals.logger);
-      expect(req.session.fee).toEqual({ feeAmount: 'MOCK_FEE_AMOUNT' });
+      expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(
+        '1234',
+        {
+          applicationFeeOrderSummary: {
+            Fees: [{ id: 'MOCK_V4_UUID', value: { FeeAmount: '4321' } }],
+            PaymentReference: '',
+            PaymentTotal: '4321',
+          },
+        },
+        'citizen-update-application'
+      );
+    });
+
+    it('should throw error when feel lookup api fails', async () => {
+      mockGetFee.mockRejectedValue('MOCK_ERROR');
+      await controller.get(req, res);
+      expect(mockGetFee).toHaveBeenCalledWith(req.locals.logger);
+      expect(req.locals.api.triggerEvent).not.toHaveBeenCalledWith();
     });
   });
 
-  describe('when there is a fee object in session', () => {
+  describe('when there is a applicationFeeOrderSummary object in userCase', () => {
     it('shoul not call the fee lookup api', async () => {
       req = mockRequest({
-        session: {
-          fee: {
-            feeAmount: 'MOCK_AMOUNT',
-            feeCode: 'MOCK_CODE',
-            feeDescription: 'MOCK_DESCRIPTION',
-            feeVersion: 'MOCK_VERSION',
-          },
+        userCase: {
+          applicationFeeOrderSummary: { MOCK_KEY: 'MOCK_VALUE' },
         },
       });
       await controller.get(req, res);
-      expect(mockGetFee).not.toHaveBeenCalledWith(req.locals.logger);
-      expect(req.session.fee).toEqual({
-        feeAmount: 'MOCK_AMOUNT',
-        feeCode: 'MOCK_CODE',
-        feeDescription: 'MOCK_DESCRIPTION',
-        feeVersion: 'MOCK_VERSION',
-      });
+      expect(mockGetFee).not.toHaveBeenCalled();
+      expect(req.locals.api.triggerEvent).not.toHaveBeenCalled();
+      expect(req.session.userCase.applicationFeeOrderSummary).toEqual({ MOCK_KEY: 'MOCK_VALUE' });
     });
   });
 

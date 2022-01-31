@@ -47,14 +47,14 @@ describe('PaymentClient', () => {
 
     expect(mockPost).toHaveBeenCalledWith('/card-payments', {
       amount: 183,
-      ccd_case_number: '1234',
+      ccd_case_number: 1234,
       currency: 'GBP',
       description: 'Apply for adoption',
       fees: [
         {
-          calculated_amount: 183,
-          code: 'FEE0310',
-          version: 2,
+          calculated_amount: '12345',
+          code: 'mock fee code',
+          version: 'mock fee version',
         },
       ],
       language: undefined,

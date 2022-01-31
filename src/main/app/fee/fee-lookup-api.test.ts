@@ -45,10 +45,10 @@ describe('fee-lookup-api', () => {
     );
 
     expect(actual).toEqual({
-      feeAmount: 1234,
-      feeCode: 'MOCK_CODE',
-      feeDescription: 'MOCK_DESCRIPTION',
-      feeVersion: 'MOCK_VERSION',
+      FeeAmount: 1234,
+      FeeCode: 'MOCK_CODE',
+      FeeDescription: 'MOCK_DESCRIPTION',
+      FeeVersion: 'MOCK_VERSION',
     });
   });
 

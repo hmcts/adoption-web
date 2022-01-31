@@ -11,7 +11,7 @@ jest.mock('../../../../app/form/Form', () => {
 
 import { mockRequest } from '../../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../../test/unit/utils/mockResponse';
-import { PaymentStatus, State } from '../../../../app/case/definition';
+import { PaymentMethod, PaymentStatus, State } from '../../../../app/case/definition';
 import { PAYMENT_CALLBACK_URL } from '../../../urls';
 
 import PaymentPostController from './post';
@@ -24,7 +24,7 @@ describe('PayYourFeePostController', () => {
   const paymentController = new PaymentPostController({});
 
   beforeEach(() => {
-    mockGetParsedBody.mockReturnValue({});
+    mockGetParsedBody.mockReturnValue({ paymentType: PaymentMethod.PAY_BY_CARD });
     mockGetErrors.mockReturnValue([]);
   });
 
@@ -33,7 +33,7 @@ describe('PayYourFeePostController', () => {
     mockGet.mockClear();
   });
 
-  it('redirects to same page with errors if fee object is not present in session', async () => {
+  it('redirects to same page with errors if applicationFeeOrderSummary object is not present in session', async () => {
     const req = mockRequest();
     const res = mockResponse();
     await paymentController.post(req, res);
@@ -56,7 +56,9 @@ describe('PayYourFeePostController', () => {
         propertyName: 'MOCK_PROPERTY_NAME',
       },
     ]);
-    const req = mockRequest({ session: { fee: {} } });
+    const req = mockRequest({
+      userCase: { applicationFeeOrderSummary: { Fees: [{ value: { FeeCode: 'MOCK_FEE_CODE', FeeAmount: 1000 } }] } },
+    });
     const res = mockResponse();
     await paymentController.post(req, res);
     expect(req.session.errors).toEqual([
@@ -73,7 +75,6 @@ describe('PayYourFeePostController', () => {
 
   it('creates a new payment and redirects to payment URL', async () => {
     const req = mockRequest({
-      session: { fee: {} },
       userCase: {
         state: State.AwaitingPayment,
         applicationFeeOrderSummary: {
@@ -108,7 +109,9 @@ describe('PayYourFeePostController', () => {
   });
 
   it('transitions the case to awaiting payment if the state is draft', async () => {
-    const req = mockRequest({ session: { fee: {} } });
+    const req = mockRequest({
+      userCase: { applicationFeeOrderSummary: { Fees: [{ value: { FeeCode: 'mock fee code', FeeAmount: 123 } }] } },
+    });
     const res = mockResponse();
 
     (req.locals.api.triggerEvent as jest.Mock).mockReturnValueOnce({
@@ -184,7 +187,6 @@ describe('PayYourFeePostController', () => {
     it('creates correct return url', async () => {
       const req = mockRequest({
         appLocals: { developmentMode: true },
-        session: { fee: {} },
         userCase: {
           state: State.AwaitingPayment,
           applicationFeeOrderSummary: {

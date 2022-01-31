@@ -9,6 +9,7 @@ import { APPLICATION_SUBMITTED, CHECK_ANSWERS_URL, PAYMENT_CALLBACK_URL, PAY_YOU
 
 export default class PaymentCallbackGetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
+    console.log('req.session.userCase', JSON.stringify(req.session.userCase));
     if (req.session.userCase.state !== State.AwaitingPayment) {
       return res.redirect(CHECK_ANSWERS_URL);
     }
@@ -20,6 +21,7 @@ export default class PaymentCallbackGetController {
     const paymentClient = new PaymentClient(req.session, returnUrl);
     const payments = new PaymentModel(req.session.userCase.payments);
 
+    console.log('payments.hasPayment', payments.hasPayment);
     if (!payments.hasPayment) {
       return res.redirect(CHECK_ANSWERS_URL);
     }
@@ -27,15 +29,20 @@ export default class PaymentCallbackGetController {
     const lastPaymentAttempt = payments.lastPayment;
     const payment = await paymentClient.get(lastPaymentAttempt.reference);
 
+    console.log('payment?.status', payment?.status);
     if (payment?.status === 'Initiated') {
       return res.redirect(lastPaymentAttempt.channel);
     }
 
+    console.log('lastPaymentAttempt.transactionId', lastPaymentAttempt.transactionId);
     payments.setStatus(lastPaymentAttempt.transactionId, payment?.status);
 
     req.session.userCase = await req.locals.api.addPayment(req.session.userCase.id, payments.list);
 
+    console.log('req.session.userCase', JSON.stringify(req.session.userCase));
+
     req.session.save(() => {
+      console.log('payments.wasLastPaymentSuccessful', payments.wasLastPaymentSuccessful);
       if (payments.wasLastPaymentSuccessful) {
         return res.redirect(APPLICATION_SUBMITTED);
       }

@@ -1,13 +1,18 @@
+import { CaseWithId } from '../../../../app/case/case';
 import { PaymentMethod } from '../../../../app/case/definition';
 import { TranslationFn } from '../../../../app/controller/GetController';
 import { FormContent } from '../../../../app/form/Form';
 import { isFieldFilledIn } from '../../../../app/form/validation';
 
-// TODO: Update this page
+const getFeeAmount = (userCase: CaseWithId): string => {
+  const total = userCase.applicationFeeOrderSummary?.Fees?.reduce((acc, fee) => acc + +fee.value.FeeAmount, 0);
+  return total ? `${total}` : '';
+};
+
 const en = content => ({
   section: 'Review your application, pay and send',
   label: 'Paying your adoption court fees',
-  hint: `The adoption court fees total <span class="govuk-!-font-weight-bold">£${content.fee?.feeAmount || 0}</span>.
+  hint: `The adoption court fees total <span class="govuk-!-font-weight-bold">£${getFeeAmount(content.userCase)}</span>.
   <br>If you have little or no savings, receive certain benefits or have a low income you may be able to get help with your adoption application fees.`,
   payingByCard: 'I am paying by card',
   haveHWFRef: 'I have a help with fees reference number',
@@ -28,9 +33,9 @@ const en = content => ({
 const cy: typeof en = content => ({
   section: 'Review your application, pay and send (in welsh)',
   label: 'Paying your adoption court fees (in welsh)',
-  hint: `The adoption court fees total <span class="govuk-!-font-weight-bold">£${
-    content.fee?.feeAmount || 0
-  }</span> (in welsh).
+  hint: `The adoption court fees total <span class="govuk-!-font-weight-bold">£${getFeeAmount(
+    content.userCase
+  )}</span> (in welsh).
   <br>If you have little or no savings, receive certain benefits or have a low income you may be able to get help with your adoption application fees. (in welsh)`,
   payingByCard: 'I am paying by card (in welsh)',
   haveHWFRef: 'I have a help with fees reference number (in welsh)',

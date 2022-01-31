@@ -9,7 +9,7 @@ jest.mock('../../../../app/form/validation');
 
 const enContent = {
   section: 'Review your application, pay and send',
-  label: 'Pay your adoption application fee',
+  label: 'Paying your adoption court fees',
   hint: `The adoption court fees total <span class="govuk-!-font-weight-bold">£183</span>.
   <br>If you have little or no savings, receive certain benefits or have a low income you may be able to get help with your adoption application fees.`,
   hintNoFee: `The adoption court fees total <span class="govuk-!-font-weight-bold">£0</span>.
@@ -17,13 +17,16 @@ const enContent = {
   payingByCard: 'I am paying by card',
   continue: 'Continue',
   errors: {
-    paymentType: { errorRetrievingFee: 'Error in retrieving fee', required: 'Please select an answer' },
+    paymentType: { errorRetrievingFee: 'Error in retrieving fee', required: 'Select an option' },
+    hwfRefNumber: {
+      required: 'Enter your reference number',
+    },
   },
 };
 
 const cyContent = {
   section: 'Review your application, pay and send (in welsh)',
-  label: 'Pay your adoption application fee (in welsh)',
+  label: 'Paying your adoption court fees (in welsh)',
   hint: `The adoption court fees total <span class="govuk-!-font-weight-bold">£183</span> (in welsh).
   <br>If you have little or no savings, receive certain benefits or have a low income you may be able to get help with your adoption application fees. (in welsh)`,
   hintNoFee: `The adoption court fees total <span class="govuk-!-font-weight-bold">£0</span> (in welsh).
@@ -31,12 +34,15 @@ const cyContent = {
   payingByCard: 'I am paying by card (in welsh)',
   continue: 'Continue (in welsh)',
   errors: {
-    paymentType: { errorRetrievingFee: 'Error in retrieving fee', required: 'Please select an answer' },
+    paymentType: { errorRetrievingFee: 'Error in retrieving fee (in welsh)', required: 'Select an option (in welsh)' },
+    hwfRefNumber: {
+      required: 'Enter your reference number (in welsh)',
+    },
   },
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('birth-mother > still-alive > content', () => {
+describe('review-pay-submit > payment > pay-your-fee > content', () => {
   let commonContent = generatePageContent({
     language: 'en',
     fee: { feeAmount: '183' } as unknown as Fee,
@@ -75,7 +81,7 @@ describe('birth-mother > still-alive > content', () => {
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
     expect((field.hint as Function)(generatedContent)).toBe(enContent.hint);
     expect((field.values[0].label as Function)(generatedContent)).toBe(enContent.payingByCard);
-    expect(field.values[0].value).toBe('payingByCard');
+    expect(field.values[0].value).toBe('payByCard');
     expect(field.validator).toBe(isFieldFilledIn);
   });
 
