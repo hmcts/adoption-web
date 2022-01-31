@@ -1,1 +1,1 @@
-export { default } from '../placement-order/post';
+export { default } from '../placement-order/PlacementOrderPostController';

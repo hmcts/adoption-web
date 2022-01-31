@@ -85,15 +85,6 @@ describe('NationalityPostController', () => {
             'citizen-update-application'
           );
         });
-
-        test('should log error when triggerEvent call fails', async () => {
-          req.locals.api.triggerEvent.mockRejectedValue('MOCK_ERROR');
-          await controller.post(req, res);
-          expect(req.locals.logger.error).toHaveBeenCalledTimes(1);
-          expect(req.locals.logger.error).toHaveBeenCalledWith('Error saving', 'MOCK_ERROR');
-          //TODO uncomment this line when CCD work is complete
-          // expect(req.session.errors).toEqual([{ errorType: 'errorSaving', propertyName: '*' }]);
-        });
       });
     });
 

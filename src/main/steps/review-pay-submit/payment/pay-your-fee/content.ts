@@ -2,7 +2,6 @@ import { TranslationFn } from '../../../../app/controller/GetController';
 import { FormContent } from '../../../../app/form/Form';
 import { isFieldFilledIn } from '../../../../app/form/validation';
 
-// TODO: Update this page
 const en = content => ({
   section: 'Review your application, pay and send',
   label: 'Pay your adoption application fee',

@@ -11,7 +11,7 @@ export class Radios extends Component {
     super(values);
 
     this.form = {
-      fields: { ...generateRadiosField(values as RadiosValues) },
+      fields: { ...generateRadiosField(values) },
       ...defaultButtons,
     };
   }

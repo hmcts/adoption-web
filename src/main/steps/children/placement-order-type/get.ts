@@ -1,1 +1,1 @@
-export { default } from '../placement-order/get';
+export { default } from '../placement-order/PlacementOrderGetController';

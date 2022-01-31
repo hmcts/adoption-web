@@ -19,7 +19,6 @@ export default class NationalityGetController extends GetController {
     const countries = req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`];
     const remove = req.query.remove;
 
-    let removed = false;
     if (remove && countries?.length) {
       const index = countries.indexOf(remove as string);
 
@@ -28,31 +27,19 @@ export default class NationalityGetController extends GetController {
       }
 
       req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`] = countries;
-      try {
-        req.session.userCase = await this.save(
-          req,
-          { [`${this.fieldPrefix}AdditionalNationalities`]: countries },
-          this.getEventName(req)
-        );
-      } catch (err) {
-        req.locals.logger.error('Error saving', err);
-        req.session.errors?.push({ errorType: 'errorSaving', propertyName: '*' });
-      }
+
+      req.session.userCase = await this.save(
+        req,
+        { [`${this.fieldPrefix}AdditionalNationalities`]: countries },
+        this.getEventName(req)
+      );
 
       delete req.query.remove;
       req.url = req.url.substring(0, req.url.indexOf('?'));
-      removed = true;
-    }
 
-    req.session.save(err => {
-      if (err) {
-        throw err;
-      }
-      if (removed) {
-        res.redirect(req.url);
-      } else {
-        super.get(req, res);
-      }
-    });
+      super.saveSessionAndRedirect(req, res);
+    } else {
+      super.get(req, res);
+    }
   }
 }
