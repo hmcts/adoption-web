@@ -1,23 +1,24 @@
-const config = require('../config');
-
-Feature('Primary applicant details section').retry(3);
-
-Scenario(
-  'Enter primary applicant contact details',
-  async ({ loginPage, primaryApplicantDetailsPage, taskListPage }) => {
-    await loginPage.createCitizenUserAndSignIn();
-    await taskListPage.goToTaskListPage();
-    await taskListPage.selectPrimaryApplicantContactDetails();
-    await primaryApplicantDetailsPage.primaryApplicantContactDetailsSection();
-  }
-);
-
-Scenario(
-  'Enter primary applicant personal details',
-  async ({ loginPage, primaryApplicantPersonalDetailsPage, taskListPage }) => {
-    await loginPage.createCitizenUserAndSignIn();
-    await taskListPage.goToTaskListPage();
-    await taskListPage.selectFirstApplicantPersonalDetails();
-    await primaryApplicantPersonalDetailsPage.primaryApplicantPersonalDetailsSection();
-  }
-);
+//TODO once full functional run in master then will remove this tests
+// const config = require('../config');
+//
+// Feature('Primary applicant details section').retry(3);
+//
+// Scenario(
+//   'Enter primary applicant contact details',
+//   async ({ loginPage, primaryApplicantDetailsPage, taskListPage }) => {
+//     await loginPage.createCitizenUserAndSignIn();
+//     await taskListPage.goToTaskListPage();
+//     await taskListPage.selectPrimaryApplicantContactDetails();
+//     await primaryApplicantDetailsPage.primaryApplicantContactDetailsSection();
+//   }
+// );
+//
+// Scenario(
+//   'Enter primary applicant personal details',
+//   async ({ loginPage, primaryApplicantPersonalDetailsPage, taskListPage }) => {
+//     await loginPage.createCitizenUserAndSignIn();
+//     await taskListPage.goToTaskListPage();
+//     await taskListPage.selectFirstApplicantPersonalDetails();
+//     await primaryApplicantPersonalDetailsPage.primaryApplicantPersonalDetailsSection();
+//   }
+// );
