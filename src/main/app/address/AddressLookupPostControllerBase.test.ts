@@ -132,21 +132,4 @@ describe('AddressLookupPostControllerBase', () => {
       expect(req.session.addresses).toEqual(expected);
     });
   });
-
-  describe('when there is an error in saving session', () => {
-    test('should throw an error', async () => {
-      req = mockRequest({
-        session: {
-          user: { email: 'test@example.com' },
-          save: jest.fn(done => done('MOCK_ERROR')),
-        },
-      });
-      try {
-        await controller.post(req, res);
-      } catch (err) {
-        //eslint-disable-next-line jest/no-conditional-expect
-        expect(err).toBe('MOCK_ERROR');
-      }
-    });
-  });
 });

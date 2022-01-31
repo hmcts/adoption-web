@@ -236,30 +236,4 @@ describe('SiblingPlacementOrderPostController', () => {
       expect(req.session.save).toHaveBeenCalled();
     });
   });
-
-  describe('when there is an error in saving CCD data', () => {
-    test('should log error and add error to session object', async () => {
-      req = mockRequest({
-        session: {
-          userCase: {
-            siblings: [
-              {
-                siblingId: 'MOCK_SIBLING_ID',
-                siblingFirstName: '',
-                siblingLastName: '',
-                siblingPlacementOrders: [{ placementOrderId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID' }],
-                selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
-              },
-            ],
-            selectedSiblingId: 'MOCK_SIBLING_ID',
-            selectedSiblingPoId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID',
-          },
-        },
-      });
-      req.locals.api.triggerEvent.mockRejectedValue('MOCK_ERROR');
-
-      await controller.post(req, res);
-      expect(req.locals.logger.error).toHaveBeenCalledWith('Error saving', 'MOCK_ERROR');
-    });
-  });
 });

@@ -14,7 +14,7 @@ module.exports = {
 
   async createUserAndSignIn() {
     await login('citizenSingleton');
-    await I.wait('3');
+    await I.wait('5');
   },
 
   async createCitizenUserAndSignIn() {

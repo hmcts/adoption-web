@@ -9,7 +9,7 @@ export class Input extends Component {
     super(values);
 
     this.form = {
-      fields: { ...generateInputField(values as InputValues) },
+      fields: { ...generateInputField(values) },
       ...defaultButtons,
     };
   }
