@@ -9,7 +9,7 @@ import { getFee } from '../../../../app/fee/fee-lookup-api';
 @autobind
 export default class PayYourFeeGetController extends GetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
-    if (!req.session.userCase.applicationFeeOrderSummary) {
+    if (!req.session.userCase.applicationFeeOrderSummary?.PaymentTotal) {
       const fee = await getFee(req.locals.logger);
 
       if (fee) {

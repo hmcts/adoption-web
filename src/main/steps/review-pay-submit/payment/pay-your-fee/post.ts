@@ -22,7 +22,8 @@ export default class PayYourFeePostController extends PostController<AnyObject> 
 
     req.session.errors = form.getErrors(formData);
 
-    const fee = req.session.userCase.applicationFeeOrderSummary?.Fees[0]?.value;
+    const applicationFeeOrderSummary = req.session.userCase.applicationFeeOrderSummary;
+    const fee = applicationFeeOrderSummary?.Fees[0]?.value;
     if (!fee) {
       req.session.errors.push({ errorType: 'errorRetrievingFee', propertyName: 'paymentType' });
       this.redirect(req, res, req.url);
@@ -34,7 +35,7 @@ export default class PayYourFeePostController extends PostController<AnyObject> 
     if (req.session.errors.length === 0) {
       if (formData['paymentType'] !== PaymentMethod.PAY_BY_CARD) {
         //other than pay by card
-        this.saveAndRedirect(req, res, TASK_LIST_URL);
+        this.redirect(req, res, TASK_LIST_URL);
         return;
       }
 
@@ -44,9 +45,16 @@ export default class PayYourFeePostController extends PostController<AnyObject> 
         console.log('req.session.userCase.state after', req.session.userCase.state);
       }
 
-      const payments = new PaymentModel(req.session.userCase.payments || []);
+      const payments = new PaymentModel(req.session.userCase.payments);
       if (payments.isPaymentInProgress()) {
-        return this.saveAndRedirect(req, res, PAYMENT_CALLBACK_URL);
+        return this.redirect(req, res, PAYMENT_CALLBACK_URL);
+      }
+
+      console.log('payments.paymentTotal', payments.paymentTotal);
+      if (payments.paymentTotal === +applicationFeeOrderSummary.PaymentTotal) {
+        //user has already made a payment
+        //TODO reditect to application submitted screen in future
+        return this.redirect(req, res, TASK_LIST_URL);
       }
 
       const client = this.getPaymentClient(req, res);

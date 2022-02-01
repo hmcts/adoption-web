@@ -5,7 +5,7 @@ import { State } from '../../../../app/case/definition';
 import { AppRequest } from '../../../../app/controller/AppRequest';
 import { PaymentClient } from '../../../../app/payment/PaymentClient';
 import { PaymentModel } from '../../../../app/payment/PaymentModel';
-import { APPLICATION_SUBMITTED, CHECK_ANSWERS_URL, PAYMENT_CALLBACK_URL, PAY_YOUR_FEE } from '../../../urls';
+import { CHECK_ANSWERS_URL, PAYMENT_CALLBACK_URL, PAY_YOUR_FEE, TASK_LIST_URL } from '../../../urls';
 
 export default class PaymentCallbackGetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
@@ -44,7 +44,9 @@ export default class PaymentCallbackGetController {
     req.session.save(() => {
       console.log('payments.wasLastPaymentSuccessful', payments.wasLastPaymentSuccessful);
       if (payments.wasLastPaymentSuccessful) {
-        return res.redirect(APPLICATION_SUBMITTED);
+        //TODO redirect to application submitted screen later
+        // return res.redirect(APPLICATION_SUBMITTED);
+        return res.redirect(TASK_LIST_URL);
       }
 
       res.redirect(req.query.back ? CHECK_ANSWERS_URL : PAY_YOUR_FEE);
