@@ -154,6 +154,9 @@ describe('PayYourFeePostController', () => {
             },
           },
         ],
+        applicationFeeOrderSummary: {
+          Fees: [{ value: { FeeAmount: '1234' } }],
+        },
       },
     });
     const res = mockResponse();

@@ -42,10 +42,17 @@ describe('PayYourFeeGetController', () => {
     });
 
     it('should throw error when feel lookup api fails', async () => {
-      mockGetFee.mockRejectedValue('MOCK_ERROR');
-      await controller.get(req, res);
-      expect(mockGetFee).toHaveBeenCalledWith(req.locals.logger);
-      expect(req.locals.api.triggerEvent).not.toHaveBeenCalledWith();
+      req = mockRequest({ userCase: {} });
+      mockGetFee.mockReturnValue(undefined);
+      try {
+        await controller.get(req, res);
+      } catch (err) {
+        /* eslint-disable jest/no-conditional-expect */
+        expect(err).toEqual(new Error('Unable to get fee from fee-register API'));
+        expect(mockGetFee).toHaveBeenCalledWith(req.locals.logger);
+        expect(req.locals.api.triggerEvent).not.toHaveBeenCalledWith();
+        /* eslint-enable jest/no-conditional-expect */
+      }
     });
   });
 
@@ -65,10 +72,12 @@ describe('PayYourFeeGetController', () => {
 
   describe('when there is an error in destroying session', () => {
     test('Should throw an error', async () => {
+      mockGetFee.mockResolvedValue({ FeeAmount: '4321' });
       req = mockRequest({
         session: {
           user: { email: 'test@example.com' },
           save: jest.fn(done => done('MOCK_ERROR')),
+          userCase: {},
         },
       });
       try {

@@ -45,7 +45,7 @@ describe('fee-lookup-api', () => {
     );
 
     expect(actual).toEqual({
-      FeeAmount: 1234,
+      FeeAmount: '1234',
       FeeCode: 'MOCK_CODE',
       FeeDescription: 'MOCK_DESCRIPTION',
       FeeVersion: 'MOCK_VERSION',

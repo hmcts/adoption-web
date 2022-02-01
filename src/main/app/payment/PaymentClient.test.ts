@@ -27,7 +27,7 @@ describe('PaymentClient', () => {
       userCase: {
         id: '1234',
         applicationFeeOrderSummary: {
-          Fees: [{ value: { FeeAmount: 12345, FeeCode: 'mock fee code', FeeVersion: 'mock fee version' } }],
+          Fees: [{ value: { FeeAmount: 1234, FeeCode: 'mock fee code', FeeVersion: 'mock fee version' } }],
         },
       },
     });
@@ -46,13 +46,13 @@ describe('PaymentClient', () => {
     });
 
     expect(mockPost).toHaveBeenCalledWith('/card-payments', {
-      amount: 183,
-      ccd_case_number: 1234,
+      amount: 1234,
+      ccd_case_number: '1234',
       currency: 'GBP',
       description: 'Apply for adoption',
       fees: [
         {
-          calculated_amount: '12345',
+          calculated_amount: '1234',
           code: 'mock fee code',
           version: 'mock fee version',
         },

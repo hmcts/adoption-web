@@ -5,8 +5,8 @@ import { FormContent } from '../../../../app/form/Form';
 import { isFieldFilledIn } from '../../../../app/form/validation';
 
 const getFeeAmount = (userCase: CaseWithId): string => {
-  const total = userCase.applicationFeeOrderSummary?.Fees?.reduce((acc, fee) => acc + +fee.value.FeeAmount, 0);
-  return total ? `${total}` : '';
+  const total = userCase.applicationFeeOrderSummary?.PaymentTotal;
+  return total || '0';
 };
 
 const en = content => ({
