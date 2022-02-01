@@ -140,6 +140,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant2IBelieveApplicationIsTrue: 'applicant2StatementOfTruth',
   applicant1SotFullName: 'applicant1SotFullName',
   applicant2SotFullName: 'applicant2SotFullName',
+  pcqId: 'pcqId',
 
   hasAnotherAdopAgencyOrLA: 'hasAnotherAdopAgencyOrLA',
   selectedAdoptionAgencyId: 'selectedAdoptionAgencyId',
@@ -155,7 +156,6 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant1DocumentsUploaded: 'applicant1DocumentsUploaded',
   applicant2DocumentsUploaded: 'applicant2DocumentsUploaded',
   documentsGenerated: 'documentsGenerated',
-  applicant1PcqId: 'applicant1PcqId',
   applicationFeeOrderSummary: 'applicationFeeOrderSummary',
 };
 
@@ -313,6 +313,7 @@ export interface Case {
   applicant2IBelieveApplicationIsTrue?: Checkbox;
   applicant1SotFullName?: string;
   applicant2SotFullName?: string;
+  pcqId?: string;
 
   /***** Common across different type of users *****/
   addButton?: string;
@@ -343,7 +344,6 @@ export interface Case {
   caseReference?: string;
   dateSubmitted?: Date;
   applicationFeeOrderSummary: OrderSummary;
-  applicant1PcqId?: string;
 }
 
 export interface CaseWithId extends Case {

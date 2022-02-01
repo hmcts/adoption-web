@@ -138,3 +138,4 @@ export const ADOPTION_AGENCY: PageLink = `${CHILDREN}/adoption-agency`;
 export const OTHER_ADOPTION_AGENCY: PageLink = `${CHILDREN}/other-adoption-agency`;
 export const SOCIAL_WORKER: PageLink = `${CHILDREN}/social-worker`;
 export const STATEMENT_OF_TRUTH: PageLink = `${REVIEW_PAY_SUBMIT}/statement-of-truth`;
+export const EQUALITY: PageLink = '/equality';
