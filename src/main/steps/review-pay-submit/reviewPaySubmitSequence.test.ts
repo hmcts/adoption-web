@@ -4,7 +4,7 @@ describe('reviewPaySubmitSequence', () => {
   test('should contain 4 entries in review pay and submit screen sequence', () => {
     expect(reviewPaySubmitSequence).toHaveLength(5);
 
-    expect(reviewPaySubmitSequence[0].url).toBe('/equality');
+    expect(reviewPaySubmitSequence[0].url).toBe('/review-pay-submit/equality');
     expect(reviewPaySubmitSequence[0].showInSection).toBe('reviewPaySubmit');
     expect(reviewPaySubmitSequence[0].getNextStep({})).toBe('/review-pay-submit/check-your-answers');
 

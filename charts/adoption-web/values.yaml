@@ -39,7 +39,7 @@ nodejs:
         - redis-access-key
         - s2s-secret
         - postcode-lookup-token
-        - pcq-token-key
+        - adoption-pcq-token
         #  - AppInsightsInstrumentationKey
 
 idam-pr:
