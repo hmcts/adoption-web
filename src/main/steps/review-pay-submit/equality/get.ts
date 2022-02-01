@@ -22,18 +22,18 @@ export default class PCQGetController {
     if (!req.session.userCase.pcqId && tokenKey && url) {
       const path: string = config.get('services.equalityAndDiversity.path');
       const health = `${url}/health`;
-
       try {
         const response: AxiosResponse<StatusResponse> = await axios.get(health);
 
         if (response.data.status && response.data.status === 'UP') {
           req.session.userCase.pcqId = uuid();
-          logger.info('PCQ ID: ', req.session.userCase.pcqId);
+          logger.info(`PCQ service: ${health} is UP, PCQ ID: ${req.session.userCase.pcqId}`);
         } else {
+          logger.error(`PCQ service: ${health} is down`);
           return res.redirect(CHECK_ANSWERS_URL);
         }
       } catch (err) {
-        logger.error('Could not connect to PCQ: ', err.message);
+        logger.error(`Could not connect to PCQ service: ${health}`, err.message);
         return res.redirect(CHECK_ANSWERS_URL);
       }
       const protocol = req.app.locals.developmentMode ? 'http://' : '';
@@ -48,6 +48,8 @@ export default class PCQGetController {
         language: req.session.lang || 'en',
         ccdCaseId: req.session.userCase.id,
       };
+
+      logger.info(`PCQ service return URL: ${params.returnUrl}`);
 
       params['token'] = createToken(params, tokenKey);
       params.partyId = encodeURIComponent(params.partyId);
@@ -71,10 +73,12 @@ export default class PCQGetController {
           req.locals.logger.error('Error', err);
           throw err;
         }
+        logger.info(`PCQ service redirect URL: ${url}${path}?${qs}`);
         res.redirect(`${url}${path}?${qs}`);
       });
     } else {
       res.redirect(CHECK_ANSWERS_URL);
+      logger.info('User already attempted for PCQ: ', req.session.userCase.pcqId);
     }
   }
 }
