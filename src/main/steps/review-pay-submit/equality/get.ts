@@ -61,7 +61,6 @@ export default class PCQGetController {
       //console.log("index.ts 59 object: "+JSON.stringify(params) );
       params['token'] = createToken(params, tokenKey);
       params.partyId = encodeURIComponent(params.partyId);
-      //console.log("////////////////////////////");
       //console.log("index.ts 66 object: "+JSON.stringify(params) +CITIZEN_UPDATE);
 
       try {
