@@ -87,6 +87,7 @@ exports.config = {
     childBirthFatherDetailsPage: './src/test/e2e/pages/childBirthFatherDetails.page.js',
     childAdoptionAgencyDetailsPage: './src/test/e2e/pages/childAdoptionAgencyDetails.page.js',
     childSiblingDetailsPage: './src/test/e2e/pages/childSiblingDetails.page.js',
+    reviewPayAndSubmitPage: './src/test/e2e/pages/reviewPayAndSubmit.page.js',
   },
   plugins: {
     autoLogin: testConfig.AutoLogin,

@@ -22,50 +22,138 @@ describe('from-api-format', () => {
     dueDate: '2021-07-26',
   };
 
-  test('Should convert results from api to nfdiv fe format', async () => {
-    const nfdivFormat = fromApiFormat(results as unknown as CaseData);
+  test('should convert results from api to adoption-web format', async () => {
+    const adoptionFormat = fromApiFormat({
+      applicant1AdditionalNames: [
+        { id: 'MOCK_ID', value: { firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' } },
+      ],
+      applicant2AdditionalNames: [
+        { id: 'MOCK_ID', value: { firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' } },
+      ],
+      applicant1AdditionalNationalities: [{ id: 'MOCK_ID', value: { country: 'MOCK_COUNTRY' } }],
+      applicant2AdditionalNationalities: [{ id: 'MOCK_ID', value: { country: 'MOCK_COUNTRY' } }],
+      childrenAdditionalNationalities: [{ id: 'MOCK_ID', value: { country: 'MOCK_COUNTRY' } }],
+      placementOrders: [
+        {
+          id: 'MOCK_ID',
+          value: {
+            placementOrderId: 'MOCK_ID',
+            placementOrderType: 'MOCK_TYPE',
+            placementOrderNumber: 'MOCK_NUMBER',
+            placementOrderCourt: 'MOCK_COURT',
+            placementOrderDate: '2021-01-05',
+          },
+        },
+      ],
+      siblings: [
+        {
+          id: 'MOCK_SIBLING_ID',
+          value: {
+            siblingId: 'MOCK_SIBLING_ID',
+            siblingFirstName: 'MOCK_FIRST_NAMES',
+            siblingLastNames: 'MOCK_LAST_NAMES',
+            siblingPlacementOrders: [
+              {
+                id: 'MOCK_PLACEMENT_ORDER_ID',
+                value: {
+                  placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+                  placementOrderType: 'MOCK_TYPE',
+                  placementOrderNumber: 'MOCK_NUMBER',
+                },
+              },
+            ],
+          },
+        },
+      ],
+      adopAgencyOrLAs: [
+        {
+          id: 'MOCK_ID',
+          value: {
+            adopAgencyOrLaId: 'MOCK_ID',
+            adopAgencyOrLaName: 'MOCK_NAME',
+            adopAgencyOrLaPhoneNumber: 'MOCK_PHONE_NUMBER',
+            adopAgencyOrLaContactName: 'MOCK_CONTACT_NAME',
+            adopAgencyOrLaContactEmail: 'MOCK_CONTACT_EMAIL',
+          },
+        },
+      ],
+      applicant1DateOfBirth: '2000-01-20',
+      applicant2DateOfBirth: '',
+      childrenDateOfBirth: '2020-01-05',
+      applicant1StatementOfTruth: 'No',
+      applicant2StatementOfTruth: '',
+    } as unknown as CaseData);
 
-    expect(nfdivFormat).toStrictEqual({
-      applicant1HelpWithFeesRefNo: 'HWF-ABC-123',
-      dueDate: '26 July 2021',
+    expect(adoptionFormat).toStrictEqual({
+      applicant1AdditionalNames: [{ id: 'MOCK_ID', firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' }],
+      applicant2AdditionalNames: [{ id: 'MOCK_ID', firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' }],
+      applicant1AdditionalNationalities: ['MOCK_COUNTRY'],
+      applicant2AdditionalNationalities: ['MOCK_COUNTRY'],
+      childrenAdditionalNationalities: ['MOCK_COUNTRY'],
+      applicant1DateOfBirth: { day: '20', month: '1', year: '2000' },
+      applicant2DateOfBirth: undefined,
+      childrenDateOfBirth: { day: '5', month: '1', year: '2020' },
+      placementOrders: [
+        {
+          placementOrderId: 'MOCK_ID',
+          placementOrderType: 'MOCK_TYPE',
+          placementOrderNumber: 'MOCK_NUMBER',
+          placementOrderCourt: 'MOCK_COURT',
+          placementOrderDate: { day: '5', month: '1', year: '2021' },
+        },
+      ],
+      siblings: [
+        {
+          siblingId: 'MOCK_SIBLING_ID',
+          siblingFirstName: 'MOCK_FIRST_NAMES',
+          siblingLastNames: 'MOCK_LAST_NAMES',
+          siblingPlacementOrders: [
+            {
+              placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+              placementOrderType: 'MOCK_TYPE',
+              placementOrderNumber: 'MOCK_NUMBER',
+            },
+          ],
+        },
+      ],
+      adopAgencyOrLAs: [
+        {
+          adopAgencyOrLaId: 'MOCK_ID',
+          adopAgencyOrLaName: 'MOCK_NAME',
+          adopAgencyOrLaPhoneNumber: 'MOCK_PHONE_NUMBER',
+          adopAgencyOrLaContactName: 'MOCK_CONTACT_NAME',
+          adopAgencyOrLaContactEmail: 'MOCK_CONTACT_EMAIL',
+        },
+      ],
+      applicant1IBelieveApplicationIsTrue: '',
+      applicant2IBelieveApplicationIsTrue: undefined,
     });
   });
 
-  test('convert results including the union date from api to nfdiv fe format', async () => {
-    const nfdivFormat = fromApiFormat({
-      ...results,
-      marriageDate: '2000-09-02',
-      dateSubmitted: '2021-01-01',
+  test('should convert results from api to adoption-web format when sibling has no placementOrders', async () => {
+    const adoptionFormat = fromApiFormat({
+      siblings: [
+        {
+          id: 'MOCK_SIBLING_ID',
+          value: {
+            siblingId: 'MOCK_SIBLING_ID',
+            siblingFirstName: 'MOCK_FIRST_NAMES',
+            siblingLastNames: 'MOCK_LAST_NAMES',
+            siblingPlacementOrders: undefined,
+          },
+        },
+      ],
     } as unknown as CaseData);
 
-    expect(nfdivFormat).toStrictEqual({
-      applicant1HelpWithFeesRefNo: 'HWF-ABC-123',
-      dateSubmitted: new Date('2021-01-01'),
-      dueDate: '26 July 2021',
-    });
-  });
-
-  test('convert results including handling null applicant2LanguagePreferenceWelsh', async () => {
-    const nfdivFormat = fromApiFormat({
-      ...results,
-      applicant2LanguagePreferenceWelsh: null,
-    } as unknown as CaseData);
-
-    expect(nfdivFormat).toStrictEqual({
-      applicant1HelpWithFeesRefNo: 'HWF-ABC-123',
-      dueDate: '26 July 2021',
-    });
-  });
-
-  test('convert results including handling applicant2LanguagePreferenceWelsh No value', async () => {
-    const nfdivFormat = fromApiFormat({
-      ...results,
-      applicant2LanguagePreferenceWelsh: YesOrNo.NO,
-    } as unknown as CaseData);
-
-    expect(nfdivFormat).toStrictEqual({
-      applicant1HelpWithFeesRefNo: 'HWF-ABC-123',
-      dueDate: '26 July 2021',
+    expect(adoptionFormat).toStrictEqual({
+      siblings: [
+        {
+          siblingId: 'MOCK_SIBLING_ID',
+          siblingFirstName: 'MOCK_FIRST_NAMES',
+          siblingLastNames: 'MOCK_LAST_NAMES',
+          siblingPlacementOrders: [],
+        },
+      ],
     });
   });
 
@@ -98,22 +186,4 @@ describe('from-api-format', () => {
       expect(nfdivFormat).toMatchObject({});
     });
   });
-
-  // test('adds read only fields', () => {
-  //   expect(
-  //     fromApiFormat({
-  //       applicationPayments: [
-  //         {
-  //           id: 'mock-payment',
-  //         },
-  //       ],
-  //     } as unknown as CaseData)
-  //   ).toStrictEqual({
-  //     payments: [
-  //       {
-  //         id: 'mock-payment',
-  //       },
-  //     ],
-  //   });
-  // });
 });

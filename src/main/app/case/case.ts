@@ -136,6 +136,12 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   adopAgencyOrLAs: 'adopAgencyOrLAs',
   siblings: 'siblings',
   payments: 'applicationPayments',
+
+  applicant1IBelieveApplicationIsTrue: 'applicant1StatementOfTruth',
+  applicant2IBelieveApplicationIsTrue: 'applicant2StatementOfTruth',
+  applicant1SotFullName: 'applicant1SotFullName',
+  applicant2SotFullName: 'applicant2SotFullName',
+
   hasAnotherAdopAgencyOrLA: 'hasAnotherAdopAgencyOrLA',
   selectedAdoptionAgencyId: 'selectedAdoptionAgencyId',
   hasSiblings: 'hasSiblings',
@@ -156,8 +162,6 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
 
 export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data: InputFormat): OutputFormat {
   const result = {};
-  //console.log('case.ts 1r1-a-' + JSON.stringify(data));
-
   for (const field of Object.keys(data)) {
     const value = fields[field];
 
@@ -167,7 +171,6 @@ export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data
       result[value] = data[field];
     }
   }
-  //console.log('case.ts 151-a-' + JSON.stringify(result));
   return result as OutputFormat;
 }
 
@@ -294,14 +297,23 @@ export interface Case {
   solicitorPhoneNumber?: string;
   solicitorEmail?: string;
   solicitorHelpingWithApplication?: YesOrNo;
+
+  /***** Sibling *****/
   siblings?: Sibling[];
-  hasSiblings?: string;
+  hasSiblings?: YesNoNotsure;
   hasSiblingNotSureReason?: string;
   hasPoForSiblings?: YesNoNotsure;
   hasPoForSiblingsNotSureReason?: string;
   addAnotherSiblingPlacementOrder?: YesOrNo;
   selectedSiblingId?: string;
   selectedSiblingPoId?: string;
+  addAnotherSibling?: YesOrNo;
+
+  /***** Statement of truth *****/
+  applicant1IBelieveApplicationIsTrue?: Checkbox;
+  applicant2IBelieveApplicationIsTrue?: Checkbox;
+  applicant1SotFullName?: string;
+  applicant2SotFullName?: string;
 
   /***** Common across different type of users *****/
   addButton?: string;

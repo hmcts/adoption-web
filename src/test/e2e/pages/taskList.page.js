@@ -26,7 +26,8 @@ module.exports = {
     adoptionAgencyLink: 'a[id$="adoption-agency"]',
     adoptionAgencyDetailsStatus: 'strong[id$="adoption-agency-status"]',
     childrenSiblingLink: 'a[href$="/sibling/exists"]',
-    childrenSiblingDetailsStatus: 'strong[id$="birth-father-status"]',
+    childrenSiblingDetailsStatus: 'strong[id$="sibling-status"]',
+    reviewPayAndSubmitLink: 'a[id="review-pay-and-submit"]',
   },
 
   async goToTaskListPage() {
@@ -121,5 +122,9 @@ module.exports = {
   async verifySecondApplicantSectionNotDisplayed() {
     await I.dontSeeElement(this.secondApplicant.personalDetailsLink);
     await I.dontSeeElement(this.secondApplicant.contactDetailsLink);
+  },
+
+  async selectReviewPayAndSubmitDetails() {
+    await I.click(this.childDetails.reviewPayAndSubmitLink);
   },
 };

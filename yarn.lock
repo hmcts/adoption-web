@@ -2176,12 +2176,12 @@
   dependencies:
     "@uppy/utils" "^4.0.3"
 
-"@uppy/file-input@^2.0.4":
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/@uppy/file-input/-/file-input-2.0.4.tgz#df1a7962cd8272d51d37d9daef953def81d4e4b4"
-  integrity sha512-p/pzMdTuy71CTfci1wri90Ip0j8nTyyiqALTa2zucCzrcXNuf8BflpSKVrKyAHG7vEPybCBqQLZHzL1T6Tv/8w==
+"@uppy/file-input@^2.0.5":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@uppy/file-input/-/file-input-2.0.5.tgz#8be65749ad9c6bd10cc85b506bed08ba83daa404"
+  integrity sha512-egzStUF199NfE5dQ1CMem/qtptcHqw/xVWIpQyPxOiYzJa7LFeWi/6255j9ZfMJyT4VwSCe6S1A6/9NZQyvyyw==
   dependencies:
-    "@uppy/utils" "^4.0.3"
+    "@uppy/utils" "^4.0.4"
     preact "^10.5.13"
 
 "@uppy/progress-bar@^2.0.4":
@@ -8491,10 +8491,10 @@ min-indent@^1.0.0:
   resolved "https://registry.yarnpkg.com/min-indent/-/min-indent-1.0.1.tgz#a63f681673b30571fbe8bc25686ae746eefa9869"
   integrity sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==
 
-mini-css-extract-plugin@*, mini-css-extract-plugin@^2.5.2:
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-2.5.2.tgz#b3b9b98320c2c054d92c16f6a94ddfdbbba13755"
-  integrity sha512-Lwgq9qLNyBK6yNLgzssXnq4r2+mB9Mz3cJWlM8kseysHIvTicFhDNimFgY94jjqlwhNzLPsq8wv4X+vOHtMdYA==
+mini-css-extract-plugin@*, mini-css-extract-plugin@^2.5.3:
+  version "2.5.3"
+  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-2.5.3.tgz#c5c79f9b22ce9b4f164e9492267358dbe35376d9"
+  integrity sha512-YseMB8cs8U/KCaAGQoqYmfUuhhGW0a9p9XvWXrxVOkE3/IiISTLw4ALNt7JR5B2eYauFM+PQGSbXMDmVbR7Tfw==
   dependencies:
     schema-utils "^4.0.0"
 

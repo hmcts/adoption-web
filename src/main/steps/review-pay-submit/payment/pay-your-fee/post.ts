@@ -25,7 +25,7 @@ export default class PayYourFeePostController extends PostController<AnyObject> 
     const fee = req.session.userCase.applicationFeeOrderSummary?.Fees[0]?.value;
     if (!fee) {
       req.session.errors.push({ errorType: 'errorRetrievingFee', propertyName: 'paymentType' });
-      this.saveAndRedirect(req, res, req.url);
+      this.redirect(req, res, req.url);
       return;
     }
 
@@ -68,20 +68,10 @@ export default class PayYourFeePostController extends PostController<AnyObject> 
 
       console.log('req.session.userCase', JSON.stringify(req.session.userCase));
 
-      this.saveAndRedirect(req, res, payment._links.next_url.href);
+      this.redirect(req, res, payment._links.next_url.href);
     } else {
-      this.saveAndRedirect(req, res, req.url);
+      this.redirect(req, res, req.url);
     }
-  }
-
-  private saveAndRedirect(req: AppRequest, res: Response, url: string) {
-    req.session.save(err => {
-      if (err) {
-        throw err;
-      }
-
-      res.redirect(url);
-    });
   }
 
   private getPaymentClient(req: AppRequest, res: Response) {

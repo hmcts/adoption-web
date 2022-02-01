@@ -42,5 +42,6 @@ module.exports = {
     I.click('Save and continue');
     I.fillField(this.fields.applicant1Occupation, 'Teacher');
     I.click('Save and continue');
+    I.wait('3');
   },
 };

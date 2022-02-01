@@ -58,31 +58,5 @@ describe('NationalityGetController', () => {
       expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(1);
       expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('MOCK_ID', formData, 'citizen-update-application');
     });
-
-    test('should log error when triggerEvent call fails', async () => {
-      req.locals.api.triggerEvent.mockRejectedValue('MOCK_ERROR');
-      await controller.get(req, res);
-      expect(req.locals.logger.error).toHaveBeenCalledTimes(1);
-      expect(req.locals.logger.error).toHaveBeenCalledWith('Error saving', 'MOCK_ERROR');
-      //TODO uncomment this line when CCD work is complete
-      // expect(req.session.errors).toEqual([{ errorType: 'errorSaving', propertyName: '*' }]);
-    });
-  });
-
-  describe('when there is an error in saving session', () => {
-    test('should throw an error', async () => {
-      req = mockRequest({
-        session: {
-          user: { email: 'test@example.com' },
-          save: jest.fn(done => done('MOCK_ERROR')),
-        },
-      });
-      try {
-        await controller.get(req, res);
-      } catch (err) {
-        //eslint-disable-next-line jest/no-conditional-expect
-        expect(err).toBe('MOCK_ERROR');
-      }
-    });
   });
 });

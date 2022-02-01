@@ -3,7 +3,7 @@ import { v4 as generateUuid } from 'uuid';
 import { isInvalidHelpWithFeesRef } from '../form/validation';
 
 import { Case, CaseDate, Checkbox, formFieldsToCaseMapping, formatCase } from './case';
-import { CaseData, YesOrNo } from './definition';
+import { CaseData, PlacementOrder, YesOrNo } from './definition';
 
 export type OrNull<T> = { [K in keyof T]: T[K] | null };
 
@@ -73,6 +73,22 @@ const fields: ToApiConverters = {
       },
     })),
   }),
+  siblings: data => ({
+    siblings: (data.siblings || []).map(item => ({
+      id: generateUuid(),
+      value: {
+        ...item,
+        siblingPlacementOrders: ((item.siblingPlacementOrders || []) as PlacementOrder[]).map(
+          (item2: PlacementOrder) => ({
+            id: generateUuid(),
+            value: {
+              ...item2,
+            },
+          })
+        ),
+      },
+    })),
+  }),
   adopAgencyOrLAs: data => ({
     adopAgencyOrLAs: (data.adopAgencyOrLAs || []).map(item => ({
       id: generateUuid(),
@@ -81,27 +97,16 @@ const fields: ToApiConverters = {
       },
     })),
   }),
-  jurisdictionResidualEligible: data => ({
-    jurisdictionResidualEligible: checkboxConverter(data.jurisdictionResidualEligible),
+  applicant1IBelieveApplicationIsTrue: data => ({
+    applicant1StatementOfTruth: checkboxConverter(data.applicant1IBelieveApplicationIsTrue),
+  }),
+  applicant2IBelieveApplicationIsTrue: data => ({
+    applicant2StatementOfTruth: checkboxConverter(data.applicant2IBelieveApplicationIsTrue),
   }),
   applicant1HelpWithFeesRefNo: data => ({
     applicant1HWFReferenceNumber: !isInvalidHelpWithFeesRef(data.applicant1HelpWithFeesRefNo)
       ? data.applicant1HelpWithFeesRefNo
       : '',
-  }),
-  applicant1CannotUploadDocuments: data => ({
-    applicant1CannotUploadSupportingDocument: data.applicant1CannotUploadDocuments
-      ? !Array.isArray(data.applicant1CannotUploadDocuments)
-        ? [data.applicant1CannotUploadDocuments]
-        : data.applicant1CannotUploadDocuments
-      : [],
-  }),
-  applicant2CannotUploadDocuments: data => ({
-    applicant2CannotUploadSupportingDocument: data.applicant2CannotUploadDocuments
-      ? !Array.isArray(data.applicant2CannotUploadDocuments)
-        ? [data.applicant2CannotUploadDocuments]
-        : data.applicant2CannotUploadDocuments
-      : [],
   }),
   applicant1UploadedFiles: () => ({}),
   applicant2UploadedFiles: () => ({}),
