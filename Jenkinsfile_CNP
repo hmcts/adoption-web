@@ -22,7 +22,8 @@ def secrets = [
   'adoption-${env}': [
     secret('idam-secret', 'IDAM_SECRET'),
     secret('citizen-user', 'CITIZEN_USERNAME'),
-    secret('citizen-password', 'CITIZEN_PASSWORD')
+    secret('citizen-password', 'CITIZEN_PASSWORD'),
+    secret('adoption-pcq-token', 'PCQ_TOKEN')
   ],
   's2s-${env}': [
     secret('microservicekey-adoption-web', 'SERVICE_AUTH_SECRET')

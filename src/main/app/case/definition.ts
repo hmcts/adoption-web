@@ -164,7 +164,6 @@ export interface Applicant {
   FinancialOrderFor: FinancialOrderFor[];
   LegalProceedings: YesOrNo;
   LegalProceedingsDetails: string;
-  PcqId: string;
 }
 
 export interface Application {
@@ -437,6 +436,7 @@ export interface CaseData {
   applicant2StatementOfTruth: YesOrNo;
   applicant1SotFullName: string;
   applicant2SotFullName: string;
+  pcqId: string;
 
   applicationType: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
@@ -466,7 +466,6 @@ export interface CaseData {
   applicant1SolicitorOrganisationPolicy: OrganisationPolicy<UserRole>;
   applicant1FinancialOrder: YesOrNo;
   applicant1FinancialOrderFor: FinancialOrderFor[];
-  applicant1PcqId: string;
 
   applicant2MiddleName: string;
   applicant2AgreedToReceiveEmails: YesOrNo;
@@ -487,7 +486,6 @@ export interface CaseData {
   applicant2SolicitorOrganisationPolicy: OrganisationPolicy<UserRole>;
   applicant2FinancialOrder: YesOrNo;
   applicant2FinancialOrderFor: FinancialOrderFor[];
-  applicant2PcqId: string;
   applicant1ScreenHasMarriageBroken: YesOrNo;
   applicant2ScreenHasMarriageBroken: YesOrNo;
   screenHasMarriageCert: YesOrNo;
