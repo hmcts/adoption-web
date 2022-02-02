@@ -343,5 +343,5 @@ export const getReviewPaySubmitUrl = (userCase: CaseWithId): string => {
       return urls.PAYMENT_CALLBACK_URL;
     }
   }
-  return urls.CHECK_ANSWERS_URL;
+  return urls.EQUALITY;
 };
