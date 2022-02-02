@@ -8,6 +8,7 @@ import {
   YesOrNo,
 } from '../../app/case/definition';
 import { isDateInputInvalid, notSureViolation } from '../../app/form/validation';
+import { PaymentModel } from '../../app/payment/PaymentModel';
 import * as urls from '../urls';
 
 export const isApplyingWithComplete = (userCase: CaseWithId): boolean => {
@@ -331,4 +332,16 @@ export const isAdoptionAgencyOrLocalAuthorityNotEmpty = (item: AdoptionAgencyOrL
 
 export const isSocialWorkerNotEmpty = (userCase: CaseWithId): boolean => {
   return !!(userCase.socialWorkerName && userCase.socialWorkerPhoneNumber && userCase.socialWorkerEmail);
+};
+
+export const getReviewPaySubmitUrl = (userCase: CaseWithId): string => {
+  const payments = new PaymentModel(userCase.payments);
+  if (payments.hasPayment) {
+    if (payments.wasLastPaymentSuccessful) {
+      return '#';
+    } else {
+      return urls.PAYMENT_CALLBACK_URL;
+    }
+  }
+  return urls.EQUALITY;
 };

@@ -135,6 +135,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   solicitorHelpingWithApplication: 'solicitorHelpingWithApplication',
   adopAgencyOrLAs: 'adopAgencyOrLAs',
   siblings: 'siblings',
+  payments: 'applicationPayments',
 
   applicant1IBelieveApplicationIsTrue: 'applicant1StatementOfTruth',
   applicant2IBelieveApplicationIsTrue: 'applicant2StatementOfTruth',

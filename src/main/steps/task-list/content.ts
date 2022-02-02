@@ -14,6 +14,7 @@ import {
   getContactDetailsStatus,
   getOtherParentStatus,
   getPersonalDetailsStatus,
+  getReviewPaySubmitUrl,
   getSiblingStatus,
   isApplyingWithComplete,
 } from './utils';
@@ -43,10 +44,9 @@ const urls = content => ({
       : URL.CHILDREN_PLACEMENT_ORDER_SUMMARY,
   birthFather: URL.BIRTH_FATHER_NAME_ON_CERTIFICATE,
   birthMotherDetails: URL.BIRTH_MOTHER_FULL_NAME,
-  reviewApplicationPayAndSubmit: URL.EQUALITY,
+  reviewApplicationPayAndSubmit: getReviewPaySubmitUrl(content.userCase),
   siblingDetails: URL.SIBLING_EXISTS,
   adoptionAgency: getAdoptionAgencyUrl(content.userCase),
-  statementsOfTruth: URL.STATEMENT_OF_TRUTH,
 });
 
 const en = content => {

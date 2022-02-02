@@ -62,7 +62,7 @@ withNightlyPipeline(type, product, component) {
   }
 
   before('crossBrowserTest') {
-    env.TEST_RETRIES = 5
+
   }
 
   after('crossBrowserTest') {
@@ -71,7 +71,6 @@ withNightlyPipeline(type, product, component) {
 
   before('fullFunctionalTest') {
     env.PARALLEL_CHUNKS = params.FUNCTIONAL_TESTS_WORKERS
-    env.TEST_RETRIES = 2
   }
 
   after('fullFunctionalTest') {
