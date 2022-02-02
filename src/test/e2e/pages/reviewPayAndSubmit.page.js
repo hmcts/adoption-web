@@ -20,6 +20,11 @@ module.exports = {
   },
 
   reviewPayAndSubmitDetailsSection() {
+    I.wait('5');
+    if (I.see('Equality and diversity questions')) {
+      I.click("I don't want to answer these questions");
+    }
+    I.wait('5');
     I.waitForText('Review your application, pay and send', 30);
     I.click('Continue');
     I.waitForText('Statement of truth', 30);
