@@ -43,7 +43,7 @@ const urls = content => ({
       : URL.CHILDREN_PLACEMENT_ORDER_SUMMARY,
   birthFather: URL.BIRTH_FATHER_NAME_ON_CERTIFICATE,
   birthMotherDetails: URL.BIRTH_MOTHER_FULL_NAME,
-  reviewApplicationPayAndSubmit: URL.CHECK_ANSWERS_URL,
+  reviewApplicationPayAndSubmit: URL.EQUALITY,
   siblingDetails: URL.SIBLING_EXISTS,
   adoptionAgency: getAdoptionAgencyUrl(content.userCase),
   statementsOfTruth: URL.STATEMENT_OF_TRUTH,
