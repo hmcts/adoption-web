@@ -366,6 +366,7 @@ export interface CaseData {
   birthMotherNationality: Nationality[];
   birthMotherOccupation: string;
   birthMotherAddressKnown: YesOrNo;
+  birthMotherAddressUnknownReason: string;
   birthMotherAddress1: string;
   birthMotherAddress2: string;
   birthMotherAddress3: string;
@@ -383,6 +384,7 @@ export interface CaseData {
   birthFatherNationality: Nationality[];
   birthFatherOccupation: string;
   birthFatherAddressKnown: YesOrNo;
+  birthFatherAddressUnknownReason: string;
   birthFatherAddress1: string;
   birthFatherAddress2: string;
   birthFatherAddress3: string;
@@ -400,6 +402,7 @@ export interface CaseData {
   otherParentNationality: Nationality[];
   otherParentOccupation: string;
   otherParentAddressKnown: YesOrNo;
+  otherParentAddressUnknownReason: string;
   otherParentAddress1: string;
   otherParentAddress2: string;
   otherParentAddress3: string;

@@ -87,6 +87,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   birthMotherAdditionalNationalities: 'birthMotherOtherNationalities',
   birthMotherOccupation: 'birthMotherOccupation',
   birthMotherAddressKnown: 'birthMotherAddressKnown',
+  birthMotherAddressUnknownReason: 'birthMotherAddressUnknownReason',
   birthMotherAddress1: 'birthMotherAddress1',
   birthMotherAddress2: 'birthMotherAddress2',
   birthMotherAddress3: 'birthMotherAddress3',
@@ -104,6 +105,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   birthFatherAdditionalNationalities: 'birthFatherOtherNationalities',
   birthFatherOccupation: 'birthFatherOccupation',
   birthFatherAddressKnown: 'birthFatherAddressKnown',
+  birthFatherAddressUnknownReason: 'birthFatherAddressUnknownReason',
   birthFatherAddress1: 'birthFatherAddress1',
   birthFatherAddress2: 'birthFatherAddress2',
   birthFatherAddress3: 'birthFatherAddress3',
@@ -123,6 +125,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   otherParentAddressPostcode: 'otherParentAddressPostCode',
   otherParentAddressCountry: 'otherParentAddressCountry',
   otherParentAddressKnown: 'otherParentAddressKnown',
+  otherParentAddressUnknownReason: 'otherParentAddressUnknownReason',
 
   socialWorkerName: 'socialWorkerName',
   socialWorkerPhoneNumber: 'socialWorkerPhoneNumber',
@@ -242,6 +245,7 @@ export interface Case {
   birthMotherAdditionalNationalities?: string[];
   birthMotherOccupation?: string;
   birthMotherAddressKnown?: YesOrNo;
+  birthMotherAddressUnknownReason?: string;
   birthMotherSelectAddress?: string;
   birthMotherAddress1?: string;
   birthMotherAddress2?: string;
@@ -261,6 +265,7 @@ export interface Case {
   birthFatherAdditionalNationalities?: string[];
   birthFatherOccupation?: string;
   birthFatherAddressKnown?: YesOrNo;
+  birthFatherAddressUnknownReason?: string;
   birthFatherSelectAddress?: string;
   birthFatherAddress1?: string;
   birthFatherAddress2?: string;
@@ -283,6 +288,7 @@ export interface Case {
   otherParentAddressPostcode?: string;
   otherParentAddressCountry?: string;
   otherParentAddressKnown?: YesOrNo;
+  otherParentAddressUnknownReason?: string;
 
   /***** Adoption Agency, Social Worker and Solicitor *****/
   adopAgencyOrLAs?: AdoptionAgencyOrLocalAuthority[];

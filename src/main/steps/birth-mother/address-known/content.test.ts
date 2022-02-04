@@ -11,9 +11,13 @@ const enContent = {
   section: "Birth mother's details",
   label: "Do you have the birth mother's last known address?",
   hint: "Ask the adoption agency or social worker if you're not sure.",
+  birthMotherAddressUnknownReason: "Give a reason why address is not known, for example 'no fixed address'.",
   errors: {
     birthMotherAddressKnown: {
       required: 'Please select an answer',
+    },
+    birthMotherAddressUnknownReason: {
+      required: 'Provide a reason',
     },
   },
 };
@@ -22,9 +26,13 @@ const cyContent = {
   section: "Birth mother's details (in welsh)",
   label: "Do you have the birth mother's last known address? (in welsh)",
   hint: "Ask the adoption agency or social worker if you're not sure. (in welsh)",
+  birthMotherAddressUnknownReason: "Give a reason why address is not known, for example 'no fixed address'. (in welsh)",
   errors: {
     birthMotherAddressKnown: {
       required: 'Please select an answer (in welsh)',
+    },
+    birthMotherAddressUnknownReason: {
+      required: 'Provide a reason (in welsh)',
     },
   },
 };
@@ -69,6 +77,21 @@ describe('birth-mother > address-known content', () => {
     expect((field.values[1].label as Function)(commonContent)).toBe(commonContent.no);
     expect(field.values[1].value).toBe(YesOrNo.NO);
     expect(field.validator).toBe(isFieldFilledIn);
+  });
+
+  test('should display reason textarea in case of unknown', () => {
+    const content = generateContent(
+      generatePageContent({ language: 'en', userCase: { birthMotherAddressKnown: YesOrNo.NO } }) as CommonContent
+    );
+    const fields = (content.form as FormContent).fields as FormFields;
+    const field = fields.birthMotherAddressKnown as FormFields;
+    const subFieldNo = field.values[1].subFields.birthMotherAddressUnknownReason as FormOptions;
+    const subFieldAttributes = subFieldNo.attributes as HTMLTextAreaElement;
+    expect(subFieldNo.validator).toBe(isFieldFilledIn);
+    expect(subFieldNo.type).toBe('textarea');
+    expect((subFieldNo.label as Function)(content)).toBe(enContent.birthMotherAddressUnknownReason);
+    expect(subFieldNo.labelSize).toBe(null);
+    expect(subFieldAttributes.rows).toBe(1);
   });
 
   test('should contain submit button', () => {
