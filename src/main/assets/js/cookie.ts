@@ -62,7 +62,7 @@ cookieManager.init({
     {
       'category-name': 'essential',
       optional: false,
-      cookies: ['adoption-web-cookie-preferences'],
+      cookies: ['adoption-web-cookie-preferences', '_oauth2_proxy', 'ajs_user_id', 'ajs_group_id', 'ajs_anonymous_id'],
     },
     {
       'category-name': 'analytics',
