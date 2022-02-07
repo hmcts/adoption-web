@@ -37,6 +37,6 @@ export const siblingSequence: Step[] = [
   {
     url: Urls.SIBLING_SELECT,
     showInSection: Sections.AboutSibling,
-    getNextStep: () => Urls.SIBLING_ORDER_SUMMARY,
+    getNextStep: () => `${Urls.SIBLING_ORDER_TYPE}?add=${Date.now()}`,
   },
 ];
