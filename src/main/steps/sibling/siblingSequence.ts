@@ -32,6 +32,11 @@ export const siblingSequence: Step[] = [
     url: Urls.SIBLING_ORDER_SUMMARY,
     showInSection: Sections.AboutSibling,
     getNextStep: data =>
-      data.addAnotherSiblingPlacementOrder === YesOrNo.YES ? Urls.SIBLING_ORDER_SUMMARY : Urls.TASK_LIST_URL,
+      data.addAnotherSiblingPlacementOrder === YesOrNo.YES ? Urls.SIBLING_SELECT : Urls.TASK_LIST_URL,
+  },
+  {
+    url: Urls.SIBLING_SELECT,
+    showInSection: Sections.AboutSibling,
+    getNextStep: () => Urls.SIBLING_ORDER_SUMMARY,
   },
 ];
