@@ -1,4 +1,4 @@
-Feature('Creat application').retry(3);
+Feature('Creat application').retry(1);
 
 Scenario(
   'Creat full application and submit',
@@ -71,5 +71,6 @@ Scenario(
 
     await taskListPage.selectReviewPayAndSubmitDetails();
     await reviewPayAndSubmitPage.reviewPayAndSubmitDetailsSection();
+    await reviewPayAndSubmitPage.adoptionCourtFeesByCard();
   }
 );
