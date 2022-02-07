@@ -21,17 +21,14 @@ export const placementOrderListItems = (userCase: CaseWithId, content: any): any
         classes: 'font-normal',
       },
       value: {
+        classes: 'summary-list-value',
         html: isPlacementOrderComplete(item, index === 0)
           ? ''
           : '<strong class="govuk-tag govuk-tag--yellow">Incomplete</strong>',
       },
       actions: {
+        classes: 'summary-list-actions',
         items: [
-          {
-            href: `${CHILDREN_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS}?change=${item.placementOrderId}`,
-            text: content.change,
-            visuallyHiddenText: 'change',
-          },
           ...(index === 0
             ? []
             : [
@@ -41,6 +38,11 @@ export const placementOrderListItems = (userCase: CaseWithId, content: any): any
                   visuallyHiddenText: 'remove',
                 },
               ]),
+          {
+            href: `${CHILDREN_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS}?change=${item.placementOrderId}`,
+            text: content.change,
+            visuallyHiddenText: 'change',
+          },
         ],
       },
     };
