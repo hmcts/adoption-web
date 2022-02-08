@@ -79,6 +79,14 @@ describe('other-parent > address-known content', () => {
     expect((field.values[1].label as Function)(commonContent)).toBe(commonContent.no);
     expect(field.values[1].value).toBe(YesOrNo.NO);
     expect(field.validator).toBe(isFieldFilledIn);
+
+    const field2 = (fields.otherParentAddressKnown as FormOptions).values[1].subFields!
+      .otherParentAddressNotKnownReason;
+    expect((field2?.label as Function)(generatedContent)).toBe(enContent.moreDetails);
+    expect(field2.type).toBe('text');
+    expect(field2?.labelSize).toBe(null);
+    expect(field2?.labelSize).toBe(null);
+    expect(field2.validator).toBe(isFieldFilledIn);
   });
 
   test('should contain submit button', () => {
