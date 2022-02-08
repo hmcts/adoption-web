@@ -85,7 +85,6 @@ describe('birth-mother > address-known content', () => {
     expect((field2?.label as Function)(generatedContent)).toBe(enContent.moreDetails);
     expect(field2.type).toBe('text');
     expect(field2?.labelSize).toBe(null);
-    expect(field2?.labelSize).toBe(null);
     expect(field2.validator).toBe(isFieldFilledIn);
   });
 
