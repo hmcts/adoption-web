@@ -8,40 +8,40 @@ import { generateContent } from './content';
 jest.mock('../../../app/form/validation');
 
 const enContent = {
-  section: "Birth mother's details",
-  label: "Do you have the birth mother's last known address?",
+  section: "Birth father's details",
+  label: 'Do you have the birth father’s last known address?',
   moreDetails: "Give a reason why the address is not known, for example 'no fixed address'.",
   hint: "Ask the adoption agency or social worker if you're not sure.",
   errors: {
-    birthMotherAddressKnown: {
+    birthFatherAddressKnown: {
       required: 'Please select an answer',
     },
-    birthMotherAddressNotKnownReason: {
+    birthFatherAddressNotKnownReason: {
       required: 'Provide a reason',
     },
   },
 };
 
 const cyContent = {
-  section: "Birth mother's details (in welsh)",
-  label: "Do you have the birth mother's last known address? (in welsh)",
-  moreDetails: "Give a reason why the address is not known, for example 'no fixed address'. (in welsh)",
-  hint: "Ask the adoption agency or social worker if you're not sure. (in welsh)",
+  section: "Birth father's details (in Welsh)",
+  label: 'Do you have the birth father’s last known address? (in Welsh)',
+  moreDetails: "Give a reason why the address is not known, for example 'no fixed address'. (in Welsh)",
+  hint: "Ask the adoption agency or social worker if you're not sure. (in Welsh)",
   errors: {
-    birthMotherAddressKnown: {
-      required: 'Please select an answer (in welsh)',
+    birthFatherAddressKnown: {
+      required: 'Please select an answer (in Welsh)',
     },
-    birthMotherAddressNotKnownReason: {
-      required: 'Provide a reason (in welsh)',
+    birthFatherAddressNotKnownReason: {
+      required: 'Provide a reason (in Welsh)',
     },
   },
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('birth-mother > address-known content', () => {
+describe('birth-father > address-known content', () => {
   const commonContent = generatePageContent({
     language: 'en',
-    userCase: { birthMotherAddressKnown: YesOrNo.YES },
+    userCase: { birthFatherAddressKnown: YesOrNo.YES },
   }) as CommonContent;
 
   let generatedContent;
@@ -66,9 +66,9 @@ describe('birth-mother > address-known content', () => {
     expect(generatedContent.errors).toEqual(cyContent.errors);
   });
 
-  test('should contain birthMotherAddressKnown field', () => {
+  test('should contain birthFatherAddressKnown field', () => {
     const fields = (generatedContent.form as FormContent).fields as FormFields;
-    const field = fields.birthMotherAddressKnown as FormOptions;
+    const field = fields.birthFatherAddressKnown as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
     expect((field.label as Function)(generatedContent)).toBe(enContent.label);
@@ -80,8 +80,8 @@ describe('birth-mother > address-known content', () => {
     expect(field.values[1].value).toBe(YesOrNo.NO);
     expect(field.validator).toBe(isFieldFilledIn);
 
-    const field2 = (fields.birthMotherAddressKnown as FormOptions).values[1].subFields!
-      .birthMotherAddressNotKnownReason;
+    const field2 = (fields.birthFatherAddressKnown as FormOptions).values[1].subFields!
+      .birthFatherAddressNotKnownReason;
     expect((field2?.label as Function)(generatedContent)).toBe(enContent.moreDetails);
     expect(field2.type).toBe('text');
     expect(field2?.labelSize).toBe(null);
