@@ -42,16 +42,13 @@ export default class SiblingGetController extends GetController {
       this.getEventName(req)
     );
 
-    if (redirect) {
-      super.saveSessionAndRedirect(req, res);
-    } else {
-      req.session.save(err => {
-        if (err) {
-          throw err;
-        }
-        super.get(req, res);
-      });
-    }
+    const callback = redirect
+      ? undefined
+      : () => {
+          super.get(req, res);
+        };
+
+    super.saveSessionAndRedirect(req, res, callback);
   }
 
   private addSibling(req: AppRequest) {

@@ -88,12 +88,17 @@ export class GetController {
     }
   }
 
-  public saveSessionAndRedirect(req: AppRequest, res: Response): void {
+  //eslint-disable-next-line @typescript-eslint/ban-types
+  public saveSessionAndRedirect(req: AppRequest, res: Response, callback?: Function): void {
     req.session.save(err => {
       if (err) {
         throw err;
       }
-      res.redirect(req.url);
+      if (callback) {
+        callback();
+      } else {
+        res.redirect(req.url);
+      }
     });
   }
 
