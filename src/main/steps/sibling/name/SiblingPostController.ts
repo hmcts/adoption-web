@@ -5,9 +5,12 @@ import { Case } from '../../../app/case/case';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
+import { SIBLING_ORDER_SUMMARY } from '../../../steps/urls';
 
 @autobind
 export default class SiblingPostController extends PostController<AnyObject> {
+  protected ALLOWED_RETURN_URLS: string[] = [SIBLING_ORDER_SUMMARY];
+
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
     const form = new Form(fields);
@@ -16,7 +19,7 @@ export default class SiblingPostController extends PostController<AnyObject> {
     req.session.errors = form.getErrors(formData);
 
     let sibling;
-    if (req.body['selectedSiblingId']) {
+    if (req.body.selectedSiblingId) {
       this.handleSelectOrAddSiblingAction(req, formData, req.session.errors.length);
     } else {
       sibling = req.session.userCase.siblings?.find(item => item.siblingId === req.session.userCase.selectedSiblingId);
@@ -34,7 +37,13 @@ export default class SiblingPostController extends PostController<AnyObject> {
       this.getEventName(req)
     );
 
-    this.redirect(req, res);
+    const returnUrl = req.session.returnUrl;
+    if (returnUrl && this.ALLOWED_RETURN_URLS.includes(returnUrl)) {
+      req.session.returnUrl = undefined;
+      this.redirect(req, res, returnUrl);
+    } else {
+      this.redirect(req, res);
+    }
   }
 
   private handleSelectOrAddSiblingAction(

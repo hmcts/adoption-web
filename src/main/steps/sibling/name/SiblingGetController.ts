@@ -7,28 +7,16 @@ import { GetController } from '../../../app/controller/GetController';
 @autobind
 export default class SiblingGetController extends GetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
-    let siblings = req.session.userCase.siblings || [];
+    const siblings = req.session.userCase.siblings || [];
 
     let redirect = false;
     if (req.query.add) {
-      req.session.userCase.selectedSiblingId = `${req.query.add}`;
-      req.session.userCase.addAnotherSibling = undefined;
-      delete req.query.add;
-      req.url = req.url.substring(0, req.url.indexOf('?'));
+      this.addSibling(req);
       redirect = true;
     } else if (req.query.change) {
-      req.session.userCase.selectedSiblingId = `${req.query.change}`;
-      delete req.query.change;
-      req.url = req.url.substring(0, req.url.indexOf('?'));
+      this.changeSibling(req);
       redirect = true;
-    } else if (req.query.remove) {
-      siblings = siblings.filter(item => item.siblingId !== `${req.query.remove}`);
-      req.session.userCase.selectedSiblingId = siblings[0].siblingId;
-      req.session.userCase.addAnotherSibling = undefined;
-      delete req.query.remove;
-      req.url = req.url.substring(0, req.url.indexOf('?'));
-      redirect = true;
-    } else if (!req.session.userCase.selectedSiblingId || req.session.userCase.selectedSiblingId === 'undefined') {
+    } else if (!req.session.userCase.selectedSiblingId) {
       //generate random id for sibling if there are no siblings
       req.session.userCase.selectedSiblingId = siblings[0]?.siblingId || `${Date.now()}`;
     }
@@ -37,7 +25,7 @@ export default class SiblingGetController extends GetController {
 
     if (!sibling) {
       sibling = {
-        siblingId: req.session.userCase.selectedSiblingId,
+        siblingId: req.session.userCase.selectedSiblingId!,
       };
 
       siblings.push(sibling);
@@ -64,5 +52,19 @@ export default class SiblingGetController extends GetController {
         super.get(req, res);
       });
     }
+  }
+
+  private addSibling(req: AppRequest) {
+    req.session.userCase.selectedSiblingId = `${req.query.add}`;
+    req.session.userCase.addAnotherSibling = undefined;
+    delete req.query.add;
+    req.url = req.url.substring(0, req.url.indexOf('?'));
+  }
+
+  private changeSibling(req: AppRequest) {
+    req.session.userCase.selectedSiblingId = `${req.query.change}`;
+    this.parseAndSetReturnUrl(req);
+    delete req.query.change;
+    req.url = req.url.substring(0, req.url.indexOf('?'));
   }
 }

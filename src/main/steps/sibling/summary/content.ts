@@ -2,6 +2,7 @@ import { PlacementOrder, YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
+import { SIBLING_NAME, SIBLING_ORDER_SUMMARY } from '../../../steps/urls';
 import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 import { placementOrderListItems } from './placement-order-summary';
@@ -27,7 +28,7 @@ const en = content => {
     siblings: content.userCase.siblings?.map(item => ({
       siblingFirstName: item.siblingFirstName,
       siblingLastNames: item.siblingLastNames,
-      changeSiblingNameUrl: '#',
+      changeSiblingNameUrl: `${SIBLING_NAME}?change=${item.siblingId}&returnUrl=${SIBLING_ORDER_SUMMARY}`,
       placementOrderListItems: placementOrderListItems(item.siblingPlacementOrders as PlacementOrder[], enContent),
     })),
   };
@@ -54,7 +55,7 @@ const cy = content => {
     siblings: content.userCase.siblings?.map(item => ({
       siblingFirstName: item.siblingFirstName,
       siblingLastNames: item.siblingLastNames,
-      changeSiblingNameUrl: '#',
+      changeSiblingNameUrl: `${SIBLING_NAME}?change=${item.siblingId}&returnUrl=${SIBLING_ORDER_SUMMARY}`,
       placementOrderListItems: placementOrderListItems(item.siblingPlacementOrders as PlacementOrder[], cyContent),
     })),
   };

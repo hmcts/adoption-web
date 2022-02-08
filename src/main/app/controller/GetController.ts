@@ -3,10 +3,10 @@ import { Response } from 'express';
 import Negotiator from 'negotiator';
 
 import { LanguageToggle } from '../../modules/i18n';
-// import { getNextIncompleteStepUrl } from '../../steps';
 import { CommonContent, Language, generatePageContent } from '../../steps/common/common.content';
+import * as Urls from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
-import { CITIZEN_UPDATE, Fee, State } from '../case/definition';
+import { CITIZEN_UPDATE, State } from '../case/definition';
 
 import { AppRequest } from './AppRequest';
 
@@ -28,7 +28,6 @@ export class GetController {
     const userCase = req.session?.userCase;
     const addresses = req.session?.addresses;
     const eligibility = req.session?.eligibility;
-    const fee = req.session?.fee as Fee;
     const content = generatePageContent({
       language,
       pageContent: this.content,
@@ -36,7 +35,6 @@ export class GetController {
       userEmail: req.session?.user?.email,
       addresses,
       eligibility,
-      fee,
     });
 
     const sessionErrors = req.session?.errors || [];
@@ -69,6 +67,14 @@ export class GetController {
     // Browsers default language
     const negotiator = new Negotiator(req);
     return negotiator.language(LanguageToggle.supportedLanguages) || 'en';
+  }
+
+  protected parseAndSetReturnUrl(req: AppRequest): void {
+    if (req.query.returnUrl) {
+      if (Object.values(Urls).find(item => item === `${req.query.returnUrl}`)) {
+        req.session.returnUrl = `${req.query.returnUrl}`;
+      }
+    }
   }
 
   public async save(req: AppRequest, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
