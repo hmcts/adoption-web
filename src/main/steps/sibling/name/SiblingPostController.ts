@@ -52,7 +52,7 @@ export default class SiblingPostController extends PostController<AnyObject> {
     errorCount: number
   ): void {
     //handle select or add sibling screen save button action
-    if (req.body['selectedSiblingId'] === 'addAnotherSibling') {
+    if (req.body.selectedSiblingId === 'addAnotherSibling') {
       if (errorCount === 0) {
         // add empty sibling object in userCase
         req.session.userCase.selectedSiblingId = `${Date.now()}`;
