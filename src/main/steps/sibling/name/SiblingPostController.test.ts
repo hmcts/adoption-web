@@ -69,6 +69,7 @@ describe('SiblingPostController', () => {
       });
 
       test('should set the formData fields in userCase siblings session data', async () => {
+        req.session.returnUrl = '/sibling/summary';
         await controller.post(req, res);
         expect(req.session.errors).toEqual([]);
         expect(req.session.userCase.siblings).toEqual([
