@@ -28,6 +28,11 @@ export default class SiblingPostController extends PostController<AnyObject> {
 
     this.filterErrorsForSaveAsDraft(req);
 
+    if (req.session.errors.length > 0) {
+      this.redirect(req, res);
+      return;
+    }
+
     req.session.userCase = await this.save(
       req,
       {
