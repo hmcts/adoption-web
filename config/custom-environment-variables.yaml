@@ -11,6 +11,8 @@ services:
     url: CCD_URL
   payments:
     url: PAYMENTS_API_URL
+  feeLookup:
+    url: FEE_LOOKUP_URL
   equalityAndDiversity:
     url: EQUALITY_URL
     tokenKey: PCQ_TOKEN
