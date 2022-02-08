@@ -8,40 +8,40 @@ import { generateContent } from './content';
 jest.mock('../../../app/form/validation');
 
 const enContent = {
-  section: "Other parent's details",
-  label: 'Do you have the address of the other person with parental responsibility for the child?',
+  section: "Birth father's details",
+  label: 'Do you have the birth father’s last known address?',
   moreDetails: "Give a reason why the address is not known, for example 'no fixed address'.",
   hint: "Ask the adoption agency or social worker if you're not sure.",
   errors: {
-    otherParentAddressKnown: {
+    birthFatherAddressKnown: {
       required: 'Please select an answer',
     },
-    otherParentAddressNotKnownReason: {
+    birthFatherAddressNotKnownReason: {
       required: 'Provide a reason',
     },
   },
 };
 
 const cyContent = {
-  section: "Other parent's details (in Welsh)",
-  label: 'Do you have the address of the other person with parental responsibility for the child? (in welsh)',
-  moreDetails: "Give a reason why the address is not known, for example 'no fixed address'. (in welsh)",
-  hint: "Ask the adoption agency or social worker if you're not sure. (in welsh)",
+  section: "Birth father's details (in Welsh)",
+  label: 'Do you have the birth father’s last known address? (in Welsh)',
+  moreDetails: "Give a reason why the address is not known, for example 'no fixed address'. (in Welsh)",
+  hint: "Ask the adoption agency or social worker if you're not sure. (in Welsh)",
   errors: {
-    otherParentAddressKnown: {
-      required: 'Please select an answer (in welsh)',
+    birthFatherAddressKnown: {
+      required: 'Please select an answer (in Welsh)',
     },
-    otherParentAddressNotKnownReason: {
-      required: 'Provide a reason (in welsh)',
+    birthFatherAddressNotKnownReason: {
+      required: 'Provide a reason (in Welsh)',
     },
   },
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('other-parent > address-known content', () => {
+describe('birth-father > address-known content', () => {
   const commonContent = generatePageContent({
     language: 'en',
-    userCase: { otherParentAddressKnown: YesOrNo.YES },
+    userCase: { birthFatherAddressKnown: YesOrNo.YES },
   }) as CommonContent;
 
   let generatedContent;
@@ -66,9 +66,9 @@ describe('other-parent > address-known content', () => {
     expect(generatedContent.errors).toEqual(cyContent.errors);
   });
 
-  test('should contain otherParentAddressKnown field', () => {
+  test('should contain birthFatherAddressKnown field', () => {
     const fields = (generatedContent.form as FormContent).fields as FormFields;
-    const field = fields.otherParentAddressKnown as FormOptions;
+    const field = fields.birthFatherAddressKnown as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
     expect((field.label as Function)(generatedContent)).toBe(enContent.label);
