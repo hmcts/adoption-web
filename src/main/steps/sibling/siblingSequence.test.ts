@@ -15,6 +15,9 @@ describe('siblingSequence', () => {
     expect(siblingSequence[1].url).toBe('/sibling/court-order-exists');
     expect(siblingSequence[1].showInSection).toBe('aboutSibling');
     expect(siblingSequence[1].getNextStep({ hasPoForSiblings: YesNoNotsure.YES })).toBe('/sibling/name');
+    expect(
+      siblingSequence[1].getNextStep({ hasPoForSiblings: YesNoNotsure.YES, siblings: [{ siblingId: 'MOCK_ID' }] })
+    ).toBe('/sibling/summary');
     expect(siblingSequence[1].getNextStep({ hasPoForSiblings: YesNoNotsure.NO })).toBe('/task-list');
     expect(siblingSequence[1].getNextStep({ hasPoForSiblings: YesNoNotsure.NOT_SURE })).toBe('/task-list');
 

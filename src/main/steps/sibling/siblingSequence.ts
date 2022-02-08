@@ -11,7 +11,12 @@ export const siblingSequence: Step[] = [
   {
     url: Urls.SIBLING_COURT_ORDER_EXISTS,
     showInSection: Sections.AboutSibling,
-    getNextStep: data => (data.hasPoForSiblings === YesNoNotsure.YES ? Urls.SIBLING_NAME : Urls.TASK_LIST_URL),
+    getNextStep: data =>
+      data.hasPoForSiblings === YesNoNotsure.YES
+        ? data.siblings?.length
+          ? Urls.SIBLING_ORDER_SUMMARY
+          : Urls.SIBLING_NAME
+        : Urls.TASK_LIST_URL,
   },
   {
     url: Urls.SIBLING_NAME,

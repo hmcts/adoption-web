@@ -69,7 +69,7 @@ export class GetController {
     return negotiator.language(LanguageToggle.supportedLanguages) || 'en';
   }
 
-  protected parseAndSetReturnUrl(req: AppRequest): void {
+  public parseAndSetReturnUrl(req: AppRequest): void {
     if (req.query.returnUrl) {
       if (Object.values(Urls).find(item => item === `${req.query.returnUrl}`)) {
         req.session.returnUrl = `${req.query.returnUrl}`;
