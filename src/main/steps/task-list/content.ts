@@ -47,6 +47,7 @@ const urls = content => ({
   reviewApplicationPayAndSubmit: getReviewPaySubmitUrl(content.userCase),
   siblingDetails: URL.SIBLING_EXISTS,
   adoptionAgency: getAdoptionAgencyUrl(content.userCase),
+  uploadYourDocuments: URL.UPLOAD_YOUR_DOCUMENTS,
 });
 
 const en = content => {
@@ -82,8 +83,8 @@ const en = content => {
     section4link1: 'Your adoption agency or local authority',
     section4link2: "The child's adoption agency or local authority",
     section4link3: 'Your solicitor',
-    section5: 'Declare payments',
-    section5link1: 'Declare any payments made or received',
+    section5: 'Upload documents',
+    section5link1: 'Upload documents',
     section6: 'Review application, pay and send',
     section6link1: 'Review application, pay and send',
     status: {
@@ -179,8 +180,8 @@ const cy = content => {
     section4link1: 'Your adoption agency or local authority (in welsh) ',
     section4link2: "The child's adoption agency or local authority (in welsh) ",
     section4link3: 'Your solicitor (in welsh) ',
-    section5: 'Declare payments (in welsh) ',
-    section5link1: 'Declare any payments made or received (in welsh) ',
+    section5: 'Upload documents (in welsh) ',
+    section5link1: 'Upload documents (in welsh) ',
     section6: 'Review application, pay and send (in welsh) ',
     section6link1: 'Review application, pay and send (in welsh) ',
     status: {
