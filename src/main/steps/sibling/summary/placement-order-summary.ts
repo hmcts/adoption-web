@@ -1,11 +1,12 @@
 import { PlacementOrder } from '../../../app/case/definition';
+import { SIBLING_ORDER_CHECK_YOUR_ANSWERS } from '../../../steps/urls';
 
 const isPlacementOrderComplete = placementOrder => {
   return placementOrder.placementOrderType && placementOrder.placementOrderNumber;
 };
 
 //eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
-export const placementOrderListItems = (placementOrders: PlacementOrder[], content: any): any => {
+export const placementOrderListItems = (siblingId: string, placementOrders: PlacementOrder[], content: any): any => {
   return placementOrders?.map(item => {
     return {
       key: {
@@ -20,12 +21,12 @@ export const placementOrderListItems = (placementOrders: PlacementOrder[], conte
         classes: 'summary-list-actions',
         items: [
           {
-            href: '#',
+            href: `${SIBLING_ORDER_CHECK_YOUR_ANSWERS}?remove=${item.placementOrderId}`,
             text: content.remove,
             visuallyHiddenText: 'remove',
           },
           {
-            href: '#',
+            href: `${SIBLING_ORDER_CHECK_YOUR_ANSWERS}?change=${siblingId}/${item.placementOrderId}`,
             text: content.change,
             visuallyHiddenText: 'change',
           },

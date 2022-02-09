@@ -4,7 +4,7 @@ import { siblingSequence } from './siblingSequence';
 
 describe('siblingSequence', () => {
   test('should contain 6 entries in sibling screen sequence', () => {
-    expect(siblingSequence).toHaveLength(7);
+    expect(siblingSequence).toHaveLength(8);
 
     expect(siblingSequence[0].url).toBe('/sibling/exists');
     expect(siblingSequence[0].showInSection).toBe('aboutSibling');
@@ -44,5 +44,9 @@ describe('siblingSequence', () => {
     expect(siblingSequence[6].url).toBe('/sibling/select-sibling');
     expect(siblingSequence[6].showInSection).toBe('aboutSibling');
     expect(siblingSequence[6].getNextStep({})).toBe('/sibling/placement-order-type?add=1609459200000');
+
+    expect(siblingSequence[7].url).toBe('/sibling/placement-order-check-your-answers');
+    expect(siblingSequence[7].showInSection).toBe('aboutSibling');
+    expect(siblingSequence[7].getNextStep({})).toBe('/sibling/summary');
   });
 });

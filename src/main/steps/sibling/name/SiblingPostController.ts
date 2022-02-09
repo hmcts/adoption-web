@@ -20,6 +20,7 @@ export default class SiblingPostController extends PostController<AnyObject> {
 
     let sibling;
     if (req.body.selectedSiblingId) {
+      // this flow will be invoked from select-sibling page
       this.handleSelectOrAddSiblingAction(req, formData, req.session.errors.length);
     } else {
       sibling = req.session.userCase.siblings?.find(item => item.siblingId === req.session.userCase.selectedSiblingId);
@@ -42,13 +43,7 @@ export default class SiblingPostController extends PostController<AnyObject> {
       this.getEventName(req)
     );
 
-    const returnUrl = req.session.returnUrl;
-    if (returnUrl && this.ALLOWED_RETURN_URLS.includes(returnUrl)) {
-      req.session.returnUrl = undefined;
-      this.redirect(req, res, returnUrl);
-    } else {
-      this.redirect(req, res);
-    }
+    super.checkReturnUrlAndRedirect(req, res, this.ALLOWED_RETURN_URLS);
   }
 
   private handleSelectOrAddSiblingAction(

@@ -25,7 +25,7 @@ describe('placement-order-summary', () => {
         placementOrderNumber: 'MOCK_NUMBER3',
       },
     ];
-    const result = placementOrderListItems(placementOrders, content);
+    const result = placementOrderListItems('MOCK_SIBLING_ID', placementOrders, content);
     expect(result).toEqual([
       {
         key: { text: 'MOCK_TYPE', classes: 'font-normal' },
@@ -33,9 +33,13 @@ describe('placement-order-summary', () => {
         actions: {
           classes: 'summary-list-actions',
           items: [
-            { href: '#', text: 'Remove', visuallyHiddenText: 'remove' },
             {
-              href: '#',
+              href: '/sibling/placement-order-check-your-answers?remove=MOCK_ID',
+              text: 'Remove',
+              visuallyHiddenText: 'remove',
+            },
+            {
+              href: '/sibling/placement-order-check-your-answers?change=MOCK_SIBLING_ID/MOCK_ID',
               text: 'Change',
               visuallyHiddenText: 'change',
             },
@@ -51,9 +55,13 @@ describe('placement-order-summary', () => {
         actions: {
           classes: 'summary-list-actions',
           items: [
-            { href: '#', text: 'Remove', visuallyHiddenText: 'remove' },
             {
-              href: '#',
+              href: '/sibling/placement-order-check-your-answers?remove=MOCK_ID2',
+              text: 'Remove',
+              visuallyHiddenText: 'remove',
+            },
+            {
+              href: '/sibling/placement-order-check-your-answers?change=MOCK_SIBLING_ID/MOCK_ID2',
               text: 'Change',
               visuallyHiddenText: 'change',
             },
@@ -66,9 +74,13 @@ describe('placement-order-summary', () => {
         actions: {
           classes: 'summary-list-actions',
           items: [
-            { href: '#', text: 'Remove', visuallyHiddenText: 'remove' },
             {
-              href: '#',
+              href: '/sibling/placement-order-check-your-answers?remove=MOCK_ID3',
+              text: 'Remove',
+              visuallyHiddenText: 'remove',
+            },
+            {
+              href: '/sibling/placement-order-check-your-answers?change=MOCK_SIBLING_ID/MOCK_ID3',
               text: 'Change',
               visuallyHiddenText: 'change',
             },
