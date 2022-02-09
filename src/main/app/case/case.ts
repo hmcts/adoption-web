@@ -94,6 +94,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   birthMotherAddressCounty: 'birthMotherAddressCounty',
   birthMotherAddressPostcode: 'birthMotherAddressPostCode',
   birthMotherAddressCountry: 'birthMotherAddressCountry',
+  birthMotherAddressNotKnownReason: 'birthMotherAddressNotKnownReason',
 
   birthFatherNameOnCertificate: 'birthFatherNameOnCertificate',
   birthFatherFirstNames: 'birthFatherFirstName',
@@ -111,6 +112,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   birthFatherAddressCounty: 'birthFatherAddressCounty',
   birthFatherAddressPostcode: 'birthFatherAddressPostCode',
   birthFatherAddressCountry: 'birthFatherAddressCountry',
+  birthFatherAddressNotKnownReason: 'birthFatherAddressNotKnownReason',
 
   otherParentFirstNames: 'otherParentFirstName',
   otherParentLastNames: 'otherParentLastName',
@@ -123,6 +125,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   otherParentAddressPostcode: 'otherParentAddressPostCode',
   otherParentAddressCountry: 'otherParentAddressCountry',
   otherParentAddressKnown: 'otherParentAddressKnown',
+  otherParentAddressNotKnownReason: 'otherParentAddressNotKnownReason',
 
   socialWorkerName: 'socialWorkerName',
   socialWorkerPhoneNumber: 'socialWorkerPhoneNumber',
@@ -250,6 +253,7 @@ export interface Case {
   birthMotherAddressCounty?: string;
   birthMotherAddressPostcode?: string;
   birthMotherAddressCountry?: string;
+  birthMotherAddressNotKnownReason?: string;
 
   /***** Birth Father *****/
   birthFatherNameOnCertificate?: string;
@@ -269,6 +273,7 @@ export interface Case {
   birthFatherAddressCounty?: string;
   birthFatherAddressPostcode?: string;
   birthFatherAddressCountry?: string;
+  birthFatherAddressNotKnownReason?: string;
 
   /***** Other Parent *****/
   otherParentFirstNames?: string;
@@ -283,6 +288,7 @@ export interface Case {
   otherParentAddressPostcode?: string;
   otherParentAddressCountry?: string;
   otherParentAddressKnown?: YesOrNo;
+  otherParentAddressNotKnownReason?: string;
 
   /***** Adoption Agency, Social Worker and Solicitor *****/
   adopAgencyOrLAs?: AdoptionAgencyOrLocalAuthority[];

@@ -6,10 +6,14 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 const en = () => ({
   section: "Birth mother's details",
   label: "Do you have the birth mother's last known address?",
+  moreDetails: "Give a reason why the address is not known, for example 'no fixed address'.",
   hint: "Ask the adoption agency or social worker if you're not sure.",
   errors: {
     birthMotherAddressKnown: {
       required: 'Please select an answer',
+    },
+    birthMotherAddressNotKnownReason: {
+      required: 'Provide a reason',
     },
   },
 });
@@ -17,10 +21,14 @@ const en = () => ({
 const cy = () => ({
   section: "Birth mother's details (in welsh)",
   label: "Do you have the birth mother's last known address? (in welsh)",
+  moreDetails: "Give a reason why the address is not known, for example 'no fixed address'. (in welsh)",
   hint: "Ask the adoption agency or social worker if you're not sure. (in welsh)",
   errors: {
     birthMotherAddressKnown: {
       required: 'Please select an answer (in welsh)',
+    },
+    birthMotherAddressNotKnownReason: {
+      required: 'Provide a reason (in welsh)',
     },
   },
 });
@@ -35,7 +43,18 @@ export const form: FormContent = {
       hint: l => l.hint,
       values: [
         { label: l => l.yes, value: YesOrNo.YES },
-        { label: l => l.no, value: YesOrNo.NO },
+        {
+          label: l => l.no,
+          value: YesOrNo.NO,
+          subFields: {
+            birthMotherAddressNotKnownReason: {
+              type: 'text',
+              label: l => l.moreDetails,
+              labelSize: null,
+              validator: isFieldFilledIn,
+            },
+          },
+        },
       ],
       validator: isFieldFilledIn,
     },

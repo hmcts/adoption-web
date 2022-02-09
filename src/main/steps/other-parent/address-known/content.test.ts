@@ -10,10 +10,14 @@ jest.mock('../../../app/form/validation');
 const enContent = {
   section: "Other parent's details",
   label: 'Do you have the address of the other person with parental responsibility for the child?',
+  moreDetails: "Give a reason why the address is not known, for example 'no fixed address'.",
   hint: "Ask the adoption agency or social worker if you're not sure.",
   errors: {
     otherParentAddressKnown: {
       required: 'Please select an answer',
+    },
+    otherParentAddressNotKnownReason: {
+      required: 'Provide a reason',
     },
   },
 };
@@ -21,10 +25,14 @@ const enContent = {
 const cyContent = {
   section: "Other parent's details (in Welsh)",
   label: 'Do you have the address of the other person with parental responsibility for the child? (in welsh)',
+  moreDetails: "Give a reason why the address is not known, for example 'no fixed address'. (in welsh)",
   hint: "Ask the adoption agency or social worker if you're not sure. (in welsh)",
   errors: {
     otherParentAddressKnown: {
       required: 'Please select an answer (in welsh)',
+    },
+    otherParentAddressNotKnownReason: {
+      required: 'Provide a reason (in welsh)',
     },
   },
 };
@@ -45,6 +53,7 @@ describe('other-parent > address-known content', () => {
     expect(generatedContent.section).toEqual(enContent.section);
     expect(generatedContent.label).toEqual(enContent.label);
     expect(generatedContent.hint).toEqual(enContent.hint);
+    expect(generatedContent.moreDetails).toEqual(enContent.moreDetails);
     expect(generatedContent.errors).toEqual(enContent.errors);
   });
 
@@ -53,6 +62,7 @@ describe('other-parent > address-known content', () => {
     expect(generatedContent.section).toEqual(cyContent.section);
     expect(generatedContent.label).toEqual(cyContent.label);
     expect(generatedContent.hint).toEqual(cyContent.hint);
+    expect(generatedContent.moreDetails).toEqual(cyContent.moreDetails);
     expect(generatedContent.errors).toEqual(cyContent.errors);
   });
 
@@ -69,6 +79,13 @@ describe('other-parent > address-known content', () => {
     expect((field.values[1].label as Function)(commonContent)).toBe(commonContent.no);
     expect(field.values[1].value).toBe(YesOrNo.NO);
     expect(field.validator).toBe(isFieldFilledIn);
+
+    const field2 = (fields.otherParentAddressKnown as FormOptions).values[1].subFields!
+      .otherParentAddressNotKnownReason;
+    expect((field2?.label as Function)(generatedContent)).toBe(enContent.moreDetails);
+    expect(field2.type).toBe('text');
+    expect(field2?.labelSize).toBe(null);
+    expect(field2.validator).toBe(isFieldFilledIn);
   });
 
   test('should contain submit button', () => {
