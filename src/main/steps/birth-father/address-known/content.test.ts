@@ -83,9 +83,10 @@ describe('birth-father > address-known content', () => {
     const field2 = (fields.birthFatherAddressKnown as FormOptions).values[1].subFields!
       .birthFatherAddressNotKnownReason;
     expect((field2?.label as Function)(generatedContent)).toBe(enContent.moreDetails);
-    expect(field2.type).toBe('text');
+    expect(field2.type).toBe('textarea');
     expect(field2?.labelSize).toBe(null);
     expect(field2.validator).toBe(isFieldFilledIn);
+    expect((field2.attributes as HTMLTextAreaElement).rows).toBe(1);
   });
 
   test('should contain submit button', () => {

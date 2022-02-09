@@ -48,8 +48,11 @@ export const form: FormContent = {
           value: YesOrNo.NO,
           subFields: {
             birthFatherAddressNotKnownReason: {
-              type: 'text',
+              type: 'textarea',
               label: l => l.moreDetails,
+              attributes: {
+                rows: 1,
+              },
               labelSize: null,
               validator: isFieldFilledIn,
             },
