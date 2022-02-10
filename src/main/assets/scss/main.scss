@@ -43,3 +43,17 @@ section {
 .font-normal {
   font-weight: 400;
 }
+
+.summary-list-value {
+  text-align: left;
+  @include govuk-media-query($from: tablet) {
+    text-align: right;
+  }
+}
+
+.summary-list-actions {
+  width: 100%;
+  @include govuk-media-query($from: tablet) {
+    width: 30%;
+  }
+}

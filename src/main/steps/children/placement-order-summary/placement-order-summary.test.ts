@@ -37,8 +37,9 @@ describe('placement-order-summary', () => {
     expect(result).toEqual([
       {
         key: { text: 'Placement Order', classes: 'font-normal' },
-        value: { html: '' },
+        value: { classes: 'summary-list-value', html: '' },
         actions: {
+          classes: 'summary-list-actions',
           items: [
             {
               href: '/children/placement-order-check-your-answers?change=MOCK_ID',
@@ -50,29 +51,34 @@ describe('placement-order-summary', () => {
       },
       {
         key: { text: 'MOCK_TYPE2', classes: 'font-normal' },
-        value: { html: '<strong class="govuk-tag govuk-tag--yellow">Incomplete</strong>' },
+        value: {
+          classes: 'summary-list-value',
+          html: '<strong class="govuk-tag govuk-tag--yellow">Incomplete</strong>',
+        },
         actions: {
+          classes: 'summary-list-actions',
           items: [
+            { href: '/children/placement-order-summary?remove=MOCK_ID2', text: 'Remove', visuallyHiddenText: 'remove' },
             {
               href: '/children/placement-order-check-your-answers?change=MOCK_ID2',
               text: 'Change',
               visuallyHiddenText: 'change',
             },
-            { href: '/children/placement-order-summary?remove=MOCK_ID2', text: 'Remove', visuallyHiddenText: 'remove' },
           ],
         },
       },
       {
         key: { text: 'MOCK_TYPE3', classes: 'font-normal' },
-        value: { html: '' },
+        value: { classes: 'summary-list-value', html: '' },
         actions: {
+          classes: 'summary-list-actions',
           items: [
+            { href: '/children/placement-order-summary?remove=MOCK_ID3', text: 'Remove', visuallyHiddenText: 'remove' },
             {
               href: '/children/placement-order-check-your-answers?change=MOCK_ID3',
               text: 'Change',
               visuallyHiddenText: 'change',
             },
-            { href: '/children/placement-order-summary?remove=MOCK_ID3', text: 'Remove', visuallyHiddenText: 'remove' },
           ],
         },
       },
