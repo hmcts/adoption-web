@@ -3,7 +3,7 @@ import { YesNoNotsure, YesOrNo } from '../../app/case/definition';
 import { siblingSequence } from './siblingSequence';
 
 describe('siblingSequence', () => {
-  test('should contain 6 entries in sibling screen sequence', () => {
+  test('should contain 8 entries in sibling screen sequence', () => {
     expect(siblingSequence).toHaveLength(8);
 
     expect(siblingSequence[0].url).toBe('/sibling/exists');
