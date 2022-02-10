@@ -1,7 +1,7 @@
 import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { isFieldFilledIn } from '../../../app/form/validation';
+import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
 
 const en = () => ({
   section: "Other parent's details",
@@ -14,6 +14,7 @@ const en = () => ({
     },
     otherParentAddressNotKnownReason: {
       required: 'Provide a reason',
+      invalid: 'Reason must be 500 characters or fewer',
     },
   },
 });
@@ -29,6 +30,7 @@ const cy = () => ({
     },
     otherParentAddressNotKnownReason: {
       required: 'Provide a reason (in welsh)',
+      invalid: 'Reason must be 500 characters or fewer (in welsh)',
     },
   },
 });
@@ -54,7 +56,7 @@ export const form: FormContent = {
                 rows: 1,
               },
               labelSize: null,
-              validator: isFieldFilledIn,
+              validator: value => isFieldFilledIn(value) || isTextAreaValid(value),
             },
           },
         },

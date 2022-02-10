@@ -15,6 +15,7 @@ import {
   isLessThanAYear,
   isMoreThan18Years,
   isPhoneNoValid,
+  isTextAreaValid,
   isValidAccessCode,
   isValidCaseReference,
 } from './validation';
@@ -324,5 +325,20 @@ describe('Validation', () => {
       const isValid = isAddressSelected('-1');
       expect(isValid).toStrictEqual('notSelected');
     });
+  });
+});
+
+describe('isTextAreaValid()', () => {
+  test('Should check if value exist', async () => {
+    const isValid = isTextAreaValid('Yes');
+    expect(isValid).toStrictEqual(undefined);
+  });
+
+  test('Should check if value does not exist', async () => {
+    const value =
+      'abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz0987654321098765432123450abcdefghijklmnopqrstuvwxyz0987654321000000000000000000000000000000';
+    const isValid = isTextAreaValid(value);
+
+    expect(isValid).toStrictEqual(undefined);
   });
 });
