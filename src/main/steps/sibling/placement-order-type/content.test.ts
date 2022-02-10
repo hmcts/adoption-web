@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
@@ -27,26 +28,27 @@ const cyContent = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('sibling > placement-order-type content', () => {
+describe('sibling > placement-order-type > content', () => {
   const commonContent = {
     language: 'en',
     userCase: {
-      placementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderType: 'MOCK_TYPE' }],
+      siblings: [
+        {
+          siblingId: 'MOCK_SIBLING_ID',
+          siblingPlacementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderType: 'MOCK_TYPE' }],
+        },
+      ],
+      selectedSiblingId: 'MOCK_SIBLING_ID',
       selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
     },
   } as CommonContent;
+
   test('should return correct english content', () => {
-    const generatedContent = generateContent(commonContent);
-    expect(generatedContent.section).toBe(enContent.section);
-    expect(generatedContent.label).toBe(enContent.label);
-    expect(generatedContent.errors).toEqual(enContent.errors);
+    languageAssertions('en', enContent, generateContent);
   });
 
   test('should return correct welsh content', () => {
-    const generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toBe(cyContent.section);
-    expect(generatedContent.label).toBe(cyContent.label);
-    expect(generatedContent.errors).toEqual(cyContent.errors);
+    languageAssertions('cy', cyContent, generateContent);
   });
 
   test('should contain placementOrderType field', () => {

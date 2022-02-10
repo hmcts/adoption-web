@@ -69,6 +69,7 @@ describe('SiblingPostController', () => {
       });
 
       test('should set the formData fields in userCase siblings session data', async () => {
+        req.session.returnUrl = '/sibling/summary';
         await controller.post(req, res);
         expect(req.session.errors).toEqual([]);
         expect(req.session.userCase.siblings).toEqual([
@@ -114,26 +115,6 @@ describe('SiblingPostController', () => {
     });
   });
 
-  describe('when there is an error in saving session', () => {
-    test('should throw an error', async () => {
-      req = mockRequest({
-        session: {
-          userCase: {
-            siblings: [{ siblingId: 'MOCK_SIBLING_ID' }],
-            selectedSiblingId: 'MOCK_SIBLING_ID',
-          },
-          save: jest.fn(done => done('MOCK_ERROR')),
-        },
-      });
-      try {
-        await controller.post(req, res);
-      } catch (err) {
-        //eslint-disable-next-line jest/no-conditional-expect
-        expect(err).toBe('MOCK_ERROR');
-      }
-    });
-  });
-
   describe('when this.fields is a function', () => {
     beforeEach(() => {
       req = mockRequest({
@@ -175,6 +156,45 @@ describe('SiblingPostController', () => {
         },
       ]);
       expect(req.session.save).toHaveBeenCalled();
+    });
+  });
+
+  describe('handleSelectOrAddSiblingAction', () => {
+    test.each([
+      { selectedSiblingId: undefined, errors: undefined, expected: undefined },
+      { selectedSiblingId: 'MOCK_SIBLING_ID', expected: 'MOCK_SIBLING_ID' }, //
+      { selectedSiblingId: 'addAnotherSibling', expected: 'addAnotherSibling' },
+      { selectedSiblingId: 'addAnotherSibling', errors: ['MOCK_ERROR1'], expected: 'addAnotherSibling' },
+    ])('correctly parses and sets the return url in session', async ({ selectedSiblingId, errors, expected }) => {
+      req = mockRequest({
+        body: { selectedSiblingId },
+        session: {
+          userCase: {
+            siblings: [{ siblingId: 'MOCK_SIBLING_ID' }],
+            selectedSiblingId: 'MOCK_SIBLING_ID',
+          },
+          save: jest.fn(done => done()),
+        },
+      });
+      mockGetParsedBody.mockReturnValue({
+        selectedSiblingId,
+        siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+        siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
+      });
+      mockGetErrors.mockReturnValue(errors || []);
+      controller = new SiblingPostController({});
+      req.locals.api.triggerEvent.mockResolvedValue({
+        selectedSiblingId,
+        siblings: [
+          {
+            siblingId: 'MOCK_SIBLING_ID',
+            siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+            siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
+          },
+        ],
+      });
+      await controller.post(req, res);
+      expect(req.session.userCase.selectedSiblingId).toBe(expected);
     });
   });
 });
