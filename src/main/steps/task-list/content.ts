@@ -12,6 +12,7 @@ import {
   getChildrenBirthCertificateStatus,
   getChildrenPlacementOrderStatus,
   getContactDetailsStatus,
+  getDateChildMovedInStatus,
   getOtherParentStatus,
   getPersonalDetailsStatus,
   getReviewPaySubmitUrl,
@@ -46,6 +47,7 @@ const urls = content => ({
   birthMotherDetails: URL.BIRTH_MOTHER_FULL_NAME,
   reviewApplicationPayAndSubmit: getReviewPaySubmitUrl(content.userCase),
   siblingDetails: URL.SIBLING_EXISTS,
+  dateChildMovedIn: URL.DATE_CHILD_MOVED_IN,
   adoptionAgency: getAdoptionAgencyUrl(content.userCase),
 });
 
@@ -88,6 +90,7 @@ const en = content => {
     section6link1: 'Review application, pay and send',
     status: {
       applyingWith: isApplyingWithComplete(content.userCase),
+      dateChildMovedIn: getDateChildMovedInStatus(content.userCase),
       applicant1PersonalDetails: getSectionStatusLabel(
         getPersonalDetailsStatus(content.userCase, 'applicant1'),
         statuses,
@@ -185,6 +188,7 @@ const cy = content => {
     section6link1: 'Review application, pay and send (in welsh) ',
     status: {
       applyingWith: isApplyingWithComplete(content.userCase),
+      dateChildMovedIn: getDateChildMovedInStatus(content.userCase),
       applicant1PersonalDetails: getSectionStatusLabel(
         getPersonalDetailsStatus(content.userCase, 'applicant1'),
         statuses,

@@ -19,6 +19,9 @@ const checkboxConverter = (value: string | undefined) => {
 
 const fields: ToApiConverters = {
   ...formFieldsToCaseMapping,
+  dateChildMovedIn: data => ({
+    dateChildMovedIn: toApiDate(data.dateChildMovedIn),
+  }),
   applicant1DateOfBirth: data => ({
     applicant1DateOfBirth: toApiDate(data.applicant1DateOfBirth),
   }),
@@ -118,7 +121,7 @@ const fields: ToApiConverters = {
   }),
 };
 
-const toApiDate = (date: CaseDate | undefined): string => {
+export const toApiDate = (date: CaseDate | undefined): string => {
   if (!date?.year || !date?.month || !date?.day) {
     return '';
   }

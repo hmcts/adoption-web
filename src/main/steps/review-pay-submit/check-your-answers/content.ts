@@ -8,6 +8,11 @@ const en = (): Record<string, unknown> => ({
   checkInfoBeforeSubmit:
     'You should check that all the information given in your application is correct before you submit. Once submitted, your application will be sent to the court for processing.',
   continue: 'Continue',
+  errors: {
+    dateError: {
+      dateChildMovedIn: 'It has not been 10 weeks since the child started living with you',
+    },
+  },
 });
 
 const cy = (): Record<string, unknown> => ({
@@ -17,6 +22,11 @@ const cy = (): Record<string, unknown> => ({
   checkInfoBeforeSubmit:
     'You should check that all the information given in your application is correct before you submit. Once submitted, your application will be sent to the court for processing. (in welsh)',
   continue: 'Continue (in welsh)',
+  errors: {
+    dateError: {
+      dateChildMovedIn: 'It has not been 10 weeks since the child started living with you (in Welsh)',
+    },
+  },
 });
 
 export const form: FormContent = {
