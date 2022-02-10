@@ -63,6 +63,8 @@ export default class SiblingPostController extends PostController<AnyObject> {
         });
       } else {
         req.session.userCase.selectedSiblingId = 'addAnotherSibling';
+        req.session.userCase['siblingFirstName'] = formData['siblingFirstName'];
+        req.session.userCase['siblingLastNames'] = formData['siblingLastNames'];
       }
     } else {
       //store selected sibling's id in userCase
