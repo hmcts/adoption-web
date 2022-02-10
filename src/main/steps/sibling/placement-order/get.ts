@@ -22,7 +22,7 @@ export default class SiblingPlacementOrderGetController extends GetController {
       delete req.query.add;
       req.url = req.url.substring(0, req.url.indexOf('?'));
       redirect = true;
-    } else if (!req.session.userCase.selectedSiblingPoId || req.session.userCase.selectedSiblingPoId === 'undefined') {
+    } else if (!req.session.userCase.selectedSiblingPoId) {
       //generate random id for placement order if there are no placement orders
       req.session.userCase.selectedSiblingPoId =
         (placementOrders as PlacementOrder[])[0]?.placementOrderId || `${Date.now()}`;
