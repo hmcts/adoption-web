@@ -1,7 +1,8 @@
 import { isObject } from 'lodash';
 
 import { Checkbox } from '../../../app/case/case';
-import { DocumentType, YesOrNo } from '../../../app/case/definition';
+import { DocumentType } from '../../../app/case/definition';
+//import { DocumentType, YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { atLeastOneFieldIsChecked } from '../../../app/form/validation';
@@ -30,26 +31,24 @@ const en = () => {
     chooseFilePhoto: 'Choose a file or take a photo',
     orStr: 'or',
     dragDropHere: 'Drag and drop files here',
-    acceptedFileFormats: 'Accepted file formats:',
-    fileFormats: 'JPEG, TIFF, PNG, PDF',
-    maximumFileSize: 'Maximum file size:',
-    fileSize: '10 MB',
-
-    //s
-    certificateForeignTranslation: 'a certified translation of your foreign certificate',
-    proofOfNameChange: 'proof that you changed your name, for example a deed poll or ‘statutory declaration’',
-    //
+    fileFormats: 'The file must be in jpg, bmp, tiff, png or pdf format.',
+    fileSize: 'Maximum file size 10MB.',
     cannotUploadDocuments: 'I cannot upload some or all of my documents',
     cannotUploadWhich: 'Which document can you not upload?',
     checkAllThatApply: 'Select all that apply',
     cannotUploadYouCanPost: `<p class="govuk-body govuk-!-margin-top-5">You can post or email your documents to the court. If you post them you must send the original documents or certified copies. You’ll receive details of how to send them after you have submitted this application.</p>
       <p class="govuk-body">Continue with your application.</p>`,
+    cannotUploadForeignCertificateTranslation: 'Birth or adoption certificate',
+    cannotUploadNameChangeProof: 'Death certiticate',
+
+    //s
+    certificateForeignTranslation: 'a certified translation of your foreign certificate',
+    proofOfNameChange: 'proof that you changed your name, for example a deed poll or ‘statutory declaration’',
     cannotUploadCertificateSingular: `I cannot upload my original ${union} certificate`,
-    cannotUploadForeignCertificateSingular: `I cannot upload my original foreign ${union} certificate`,
     cannotUploadCertificate: `My original ${union} certificate`,
     cannotUploadForeignCertificate: `My original foreign ${union} certificate`,
-    cannotUploadForeignCertificateTranslation: `A certified translation of my foreign ${union} certificate`,
-    cannotUploadNameChangeProof: 'Proof that I changed my name',
+    //
+
     errors: {
       applicant1UploadedFiles: {
         notUploaded:
@@ -103,7 +102,6 @@ const cy = () => {
     cannotUploadYouCanPost: `<p class="govuk-body govuk-!-margin-top-5">Gallwch bostio neu e-bostio eich dogfennau i'r llys. Os byddwch yn eu postio, rhaid ichi anfon y dogfennau gwreiddiol neu gopïau wedi'u hardystio. Byddwch yn cael manylion am sut i'w hanfon ar ôl ichi gyflwyno'r cais hwn.</p>
       <p class="govuk-body">Ewch ymlaen gyda'ch cais.</p>`,
     cannotUploadCertificateSingular: `Ni allaf uwchlwytho fy nhystysgrif ${union} wreiddiol`,
-    cannotUploadForeignCertificateSingular: `Ni allaf uwchlwytho fy nhystysgrif ${union} dramor wreiddiol`,
     cannotUploadCertificate: `Fy nhystysgrif ${union} wreiddiol`,
     cannotUploadForeignCertificate: `Fy nhystysgrif ${union} dramor wreiddiol`,
     cannotUploadForeignCertificateTranslation: `Cyfieithiad wedi'i ardystio o fy nhystysgrif ${union} dramor`,
@@ -130,31 +128,47 @@ export const form: FormContent = {
   fields: userCase => {
     const checkboxes: { id: string; value: DocumentType }[] = [];
 
-    if (YesOrNo.NO === YesOrNo.NO) {
-      checkboxes.push({
-        id: 'cannotUploadForeignCertificate',
-        value: DocumentType.MARRIAGE_CERTIFICATE,
-      });
-    } else {
-      checkboxes.push({
-        id: 'cannotUploadCertificate',
-        value: DocumentType.MARRIAGE_CERTIFICATE,
-      });
-    }
+    // if (YesOrNo.NO === YesOrNo.NO) {
+    //   checkboxes.push({
+    //     id: 'cannotUploadForeignCertificate',
+    //     value: DocumentType.MARRIAGE_CERTIFICATE,
+    //   });
+    // } else {
+    //   checkboxes.push({
+    //     id: 'cannotUploadCertificate',
+    //     value: DocumentType.MARRIAGE_CERTIFICATE,
+    //   });
+    // }
 
-    if (YesOrNo.YES === YesOrNo.YES) {
-      checkboxes.push({
-        id: 'cannotUploadForeignCertificateTranslation',
-        value: DocumentType.MARRIAGE_CERTIFICATE_TRANSLATION,
-      });
-    }
+    // if (YesOrNo.YES === YesOrNo.YES) {
+    //   checkboxes.push({
+    //     id: 'cannotUploadForeignCertificateTranslation',
+    //     value: DocumentType.MARRIAGE_CERTIFICATE_TRANSLATION,
+    //   });
+    // }
 
-    if (YesOrNo.YES === YesOrNo.YES) {
-      checkboxes.push({
-        id: 'cannotUploadNameChangeProof',
-        value: DocumentType.NAME_CHANGE_EVIDENCE,
-      });
-    }
+    // if (
+    //   YesOrNo.YES === YesOrNo.YES
+    // ) {
+    //   checkboxes.push({
+    //     id: 'cannotUploadNameChangeProof',
+    //     value: DocumentType.NAME_CHANGE_EVIDENCE,
+    //   });
+    // }
+
+    //if (userCase.birthOrAdoptionCertificate=== YesOrNo.NO) {
+    checkboxes.push({
+      id: 'cannotUploadForeignCertificateTranslation',
+      value: DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE,
+    });
+    //}
+
+    //if (userCase.deathCertificate === YesOrNo.NO) {
+    checkboxes.push({
+      id: 'cannotUploadNameChangeProof',
+      value: DocumentType.DEATH_CERTIFICATE,
+    });
+    //}
 
     return {
       applicant1UploadedFiles: {
@@ -174,59 +188,92 @@ export const form: FormContent = {
           }
         },
       },
-      ...(checkboxes.length > 1
-        ? {
-            applicant1CannotUpload: {
-              type: 'checkboxes',
-              label: l => l.cannotUploadDocuments,
-              labelHidden: true,
-              validator: (value, formData) => {
-                if ((value as string[])?.includes(Checkbox.Checked)) {
-                  return atLeastOneFieldIsChecked(formData?.applicant1CannotUploadDocuments);
-                }
+      applicant1CannotUpload: {
+        type: 'checkboxes',
+        label: l => l.cannotUploadDocuments,
+        labelHidden: true,
+        validator: (value, formData) => {
+          if ((value as string[])?.includes(Checkbox.Checked)) {
+            return atLeastOneFieldIsChecked(formData?.applicant1CannotUploadDocuments);
+          }
+        },
+        values: [
+          {
+            name: 'applicant1CannotUpload',
+            label: l => l.cannotUploadDocuments,
+            value: Checkbox.Checked,
+            subFields: {
+              applicant1CannotUploadDocuments: {
+                type: 'checkboxes',
+                label: l => l.cannotUploadWhich,
+                hint: l => l.checkAllThatApply,
+                values: checkboxes.map(checkbox => ({
+                  name: 'applicant1CannotUploadDocuments',
+                  label: l => l[checkbox.id],
+                  value: checkbox.value,
+                })),
+                subtext: l => l.cannotUploadYouCanPost,
               },
-              values: [
-                {
-                  name: 'applicant1CannotUpload',
-                  label: l => l.cannotUploadDocuments,
-                  value: Checkbox.Checked,
-                  subFields: {
-                    applicant1CannotUploadDocuments: {
-                      type: 'checkboxes',
-                      label: l => l.cannotUploadWhich,
-                      hint: l => l.checkAllThatApply,
-                      values: checkboxes.map(checkbox => ({
-                        name: 'applicant1CannotUploadDocuments',
-                        label: l => l[checkbox.id],
-                        value: checkbox.value,
-                        conditionalText: l => l.cannotUploadYouCanPost,
-                      })),
-                    },
-                  },
-                },
-              ],
             },
-          }
-        : {}),
-      ...(checkboxes.length === 1
-        ? {
-            applicant1CannotUploadDocuments: {
-              type: 'checkboxes',
-              label: l => l.cannotUploadDocuments,
-              labelHidden: true,
-              values: checkboxes.map(checkbox => ({
-                name: 'applicant1CannotUploadDocuments',
-                label: l => l[`${checkbox.id}Singular`],
-                value: checkbox.value,
-                conditionalText: l => l.cannotUploadYouCanPost,
-              })),
-            },
-          }
-        : {}),
+          },
+        ],
+      },
+      // ...(checkboxes.length > 0
+      //   ? {
+      //       applicant1CannotUpload: {
+      //         type: 'checkboxes',
+      //         label: l => l.cannotUploadDocuments,
+      //         labelHidden: true,
+      //         validator: (value, formData) => {
+      //           if ((value as string[])?.includes(Checkbox.Checked)) {
+      //             return atLeastOneFieldIsChecked(formData?.applicant1CannotUploadDocuments);
+      //           }
+      //         },
+      //         values: [
+      //           {
+      //             name: 'applicant1CannotUpload',
+      //             label: l => l.cannotUploadDocuments,
+      //             value: Checkbox.Checked,
+      //             subFields: {
+      //               applicant1CannotUploadDocuments: {
+      //                 type: 'checkboxes',
+      //                 label: l => l.cannotUploadWhich,
+      //                 hint: l => l.checkAllThatApply,
+      //                 values: checkboxes.map(checkbox => ({
+      //                   name: 'applicant1CannotUploadDocuments',
+      //                   label: l => l[checkbox.id],
+      //                   value: checkbox.value,
+      //                 })),
+      //                 subtext: l => l.cannotUploadYouCanPost,
+      //               },
+      //             },
+      //           },
+      //         ],
+      //       },
+      //     }
+      //   : {}),
+      // ...(checkboxes.length === 1
+      //   ? {
+      //       applicant1CannotUploadDocuments: {
+      //         type: 'checkboxes',
+      //         label: l => l.cannotUploadDocuments,
+      //         labelHidden: true,
+      //         values: checkboxes.map(checkbox => ({
+      //           name: 'applicant1CannotUploadDocuments',
+      //           label: l => l[`${checkbox.id}Singular`],
+      //           value: checkbox.value,
+      //           conditionalText: l => l.cannotUploadYouCanPost,
+      //         })),
+      //       },
+      //     }
+      //   : {}),
     };
   },
   submit: {
     text: l => l.continue,
+  },
+  saveAsDraft: {
+    text: l => l.saveAsDraft,
   },
 };
 

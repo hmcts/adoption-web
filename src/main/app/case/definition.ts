@@ -1452,6 +1452,9 @@ export const enum ConfidentialDocumentsReceived {
 }
 
 export const enum DocumentType {
+  BIRTH_OR_ADOPTION_CERTIFICATE = '',
+  DEATH_CERTIFICATE = '',
+
   AOS_OVERDUE_COVER_LETTER = 'aosOverdueCoverLetter',
   ACKNOWLEDGEMENT_OF_SERVICE = 'acknowledgementOfService',
   ANNEX_A = 'annexA',

@@ -331,6 +331,11 @@ export interface Case {
 
   adoption?: Adoption;
 
+  /***** Document upload *****/
+  birthOrAdoptionCertificate?: YesOrNo;
+  deathCertificate?: YesOrNo;
+  applicant1UploadedFiles?: UploadedFile[];
+
   applicant1HelpPayingNeeded?: YesOrNo;
   applicant1AlreadyAppliedForHelpPaying?: YesOrNo;
   applicant1HelpWithFeesRefNo?: string;
@@ -338,7 +343,6 @@ export interface Case {
   connections: JurisdictionConnections[];
 
   applyForFinancialOrder?: YesOrNo;
-  applicant1UploadedFiles?: UploadedFile[];
   applicant2UploadedFiles?: UploadedFile[];
   documentsGenerated: ListValue<DivorceDocument>[];
   applicant1DocumentsUploaded?: ListValue<Partial<DivorceDocument> | null>[];
