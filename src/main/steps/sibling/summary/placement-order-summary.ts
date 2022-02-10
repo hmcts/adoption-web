@@ -13,19 +13,21 @@ export const placementOrderListItems = (placementOrders: PlacementOrder[], conte
         classes: 'font-normal',
       },
       value: {
+        classes: 'summary-list-value',
         html: isPlacementOrderComplete(item) ? '' : '<strong class="govuk-tag govuk-tag--yellow">Incomplete</strong>',
       },
       actions: {
+        classes: 'summary-list-actions',
         items: [
-          {
-            href: '#',
-            text: content.change,
-            visuallyHiddenText: 'change',
-          },
           {
             href: '#',
             text: content.remove,
             visuallyHiddenText: 'remove',
+          },
+          {
+            href: '#',
+            text: content.change,
+            visuallyHiddenText: 'change',
           },
         ],
       },

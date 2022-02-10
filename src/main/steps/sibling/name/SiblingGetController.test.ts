@@ -115,47 +115,6 @@ describe('SiblingGetController', () => {
     });
   });
 
-  describe('when there is "remove" query param', () => {
-    beforeEach(() => {
-      req = mockRequest({
-        query: { remove: 'MOCK_ID2' },
-        session: {
-          userCase: {
-            addAnotherSibling: 'Yes',
-            selectedSiblingId: 'MOCK_ID2',
-            siblings: [{ siblingId: 'MOCK_ID' }, { siblingId: 'MOCK_ID2' }, { siblingId: 'MOCK_ID3' }],
-          },
-        },
-      });
-      req.url = '/request?change=MOCK_ID2';
-    });
-
-    test('should remove the sibling from userCase siblings list', async () => {
-      req.locals.api.triggerEvent.mockResolvedValue({
-        siblings: [{ siblingId: 'MOCK_ID' }, { siblingId: 'MOCK_ID3' }],
-      });
-      await controller.get(req, res);
-      expect(req.session.userCase.siblings).toEqual([{ siblingId: 'MOCK_ID' }, { siblingId: 'MOCK_ID3' }]);
-    });
-
-    test('should set the selectedSiblingId in userCase', async () => {
-      req.locals.api.triggerEvent.mockResolvedValue({ selectedSiblingId: 'MOCK_ID' });
-      await controller.get(req, res);
-      expect(req.session.userCase.selectedSiblingId).toBe('MOCK_ID');
-    });
-
-    test('should reset the addAnotherSibling in userCase', async () => {
-      req.locals.api.triggerEvent.mockResolvedValue({});
-      await controller.get(req, res);
-      expect(req.session.userCase.addAnotherSibling).toBeUndefined();
-    });
-
-    test('should remove the query param and redirect', async () => {
-      await controller.get(req, res);
-      expect(res.redirect).toHaveBeenCalledWith('/request');
-    });
-  });
-
   test('saves the siblings and selectedSiblingId in session', async () => {
     await controller.get(req, res);
     expect(req.session.save).toHaveBeenCalled();

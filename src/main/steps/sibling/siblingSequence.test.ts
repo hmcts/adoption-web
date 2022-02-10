@@ -4,7 +4,7 @@ import { siblingSequence } from './siblingSequence';
 
 describe('siblingSequence', () => {
   test('should contain 6 entries in sibling screen sequence', () => {
-    expect(siblingSequence).toHaveLength(6);
+    expect(siblingSequence).toHaveLength(7);
 
     expect(siblingSequence[0].url).toBe('/sibling/exists');
     expect(siblingSequence[0].showInSection).toBe('aboutSibling');
@@ -15,6 +15,9 @@ describe('siblingSequence', () => {
     expect(siblingSequence[1].url).toBe('/sibling/court-order-exists');
     expect(siblingSequence[1].showInSection).toBe('aboutSibling');
     expect(siblingSequence[1].getNextStep({ hasPoForSiblings: YesNoNotsure.YES })).toBe('/sibling/name');
+    expect(
+      siblingSequence[1].getNextStep({ hasPoForSiblings: YesNoNotsure.YES, siblings: [{ siblingId: 'MOCK_ID' }] })
+    ).toBe('/sibling/summary');
     expect(siblingSequence[1].getNextStep({ hasPoForSiblings: YesNoNotsure.NO })).toBe('/task-list');
     expect(siblingSequence[1].getNextStep({ hasPoForSiblings: YesNoNotsure.NOT_SURE })).toBe('/task-list');
 
@@ -32,7 +35,14 @@ describe('siblingSequence', () => {
 
     expect(siblingSequence[5].url).toBe('/sibling/summary');
     expect(siblingSequence[5].showInSection).toBe('aboutSibling');
-    expect(siblingSequence[5].getNextStep({ addAnotherSiblingPlacementOrder: YesOrNo.YES })).toBe('/sibling/summary');
+    expect(siblingSequence[5].getNextStep({ addAnotherSiblingPlacementOrder: YesOrNo.YES })).toBe(
+      '/sibling/select-sibling'
+    );
     expect(siblingSequence[5].getNextStep({ addAnotherSiblingPlacementOrder: YesOrNo.NO })).toBe('/task-list');
+
+    Date.now = jest.fn(() => +new Date('2021-01-01'));
+    expect(siblingSequence[6].url).toBe('/sibling/select-sibling');
+    expect(siblingSequence[6].showInSection).toBe('aboutSibling');
+    expect(siblingSequence[6].getNextStep({})).toBe('/sibling/placement-order-type?add=1609459200000');
   });
 });
