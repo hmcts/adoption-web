@@ -337,8 +337,7 @@ describe('isTextAreaValid()', () => {
   test('Should check if value does not exist', async () => {
     const value =
       'abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz0987654321098765432123450abcdefghijklmnopqrstuvwxyz0987654321000000000000000000000000000000';
-    const isValid = isTextAreaValid(value);
 
-    expect(isValid).toStrictEqual(undefined);
+    expect(isTextAreaValid(value)).toStrictEqual('invalid');
   });
 });
