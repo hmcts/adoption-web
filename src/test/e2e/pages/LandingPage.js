@@ -3,7 +3,7 @@ const { I } = inject();
 module.exports = {
   fields: {
     applyingWith: 'input[id$="applyingWith"]',
-    applyWithMySpouse: 'input[id$="applyingWith-2"]',
+    applyWithMySpouse: 'input[id$="applyingWith-3"]',
   },
   async seeTheLandingPage() {
     I.wait('2');
