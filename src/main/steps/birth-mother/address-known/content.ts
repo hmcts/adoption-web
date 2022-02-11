@@ -1,7 +1,7 @@
 import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { isFieldFilledIn } from '../../../app/form/validation';
+import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
 
 const en = () => ({
   section: "Birth mother's details",
@@ -14,6 +14,7 @@ const en = () => ({
     },
     birthMotherAddressNotKnownReason: {
       required: 'Provide a reason',
+      invalid: 'Reason must be 500 characters or fewer',
     },
   },
 });
@@ -29,6 +30,7 @@ const cy = () => ({
     },
     birthMotherAddressNotKnownReason: {
       required: 'Provide a reason (in welsh)',
+      invalid: 'Reason must be 500 characters or fewer (in welsh)',
     },
   },
 });
@@ -48,10 +50,13 @@ export const form: FormContent = {
           value: YesOrNo.NO,
           subFields: {
             birthMotherAddressNotKnownReason: {
-              type: 'text',
+              type: 'textarea',
               label: l => l.moreDetails,
+              attributes: {
+                rows: 1,
+              },
               labelSize: null,
-              validator: isFieldFilledIn,
+              validator: value => isFieldFilledIn(value) || isTextAreaValid(value),
             },
           },
         },
