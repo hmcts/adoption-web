@@ -36,7 +36,8 @@ def secrets = [
   'adoption-${env}': [
     secret('idam-secret', 'IDAM_SECRET'),
     secret('citizen-user', 'CITIZEN_USERNAME'),
-    secret('citizen-password', 'CITIZEN_PASSWORD')
+    secret('citizen-password', 'CITIZEN_PASSWORD'),
+    secret('adoption-pcq-token', 'PCQ_TOKEN')
   ],
   's2s-${env}': [
     secret('microservicekey-adoption-web', 'SERVICE_AUTH_SECRET')
@@ -44,7 +45,7 @@ def secrets = [
 ]
 
 def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
-def branchesToSync = ['demo', 'perftest', 'ithc']
+def branchesToSync = ['demo', 'perftest']
 
 def pipelineConf = new AppPipelineConfig()
 pipelineConf.vaultSecrets = secrets
@@ -55,6 +56,7 @@ withNightlyPipeline(type, product, component) {
   env.ADOP_WEB_URL = params.FRONTEND_URL
   enableAksStagingDeployment()
   disableLegacyDeployment()
+  syncBranchesWithMaster(branchesToSync)
   enableSlackNotifications('#adoption-tech')
 
   enableCrossBrowserTest(['chrome'])
@@ -70,7 +72,6 @@ withNightlyPipeline(type, product, component) {
 
   before('functionalTest:preview') {
     env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
-    env.TEST_RETRIES = 5
   }
 
   after('functionalTest:preview') {
@@ -81,12 +82,12 @@ withNightlyPipeline(type, product, component) {
 
   before('smoketest:preview') {
     env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
-    env.TEST_RETRIES = 5
+
   }
 
   before('smoketest:aat') {
     env.ADOP_WEB_URL = "https://adoption-web-staging.service.core-compute-aat.internal/"
-    env.TEST_RETRIES = 5
+
   }
 
   after('smoketest:aat') {
@@ -96,7 +97,7 @@ withNightlyPipeline(type, product, component) {
 
   before('functionalTest:aat') {
     yarnBuilder.yarn('test:functional:skip')
-    env.TEST_RETRIES = 5
+
   }
 
   after('functionalTest:aat') {

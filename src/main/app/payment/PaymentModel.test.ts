@@ -1,4 +1,4 @@
-import { Payment } from '../../app/case/definition';
+import { Payment, PaymentStatus } from '../../app/case/definition';
 
 import { PaymentModel } from './PaymentModel';
 
@@ -15,6 +15,14 @@ describe('PaymentModel', () => {
       { id: '456', value: { data: 'last one' } as unknown as Payment },
     ]);
     expect(payment.lastPayment).toEqual({ transactionId: '456', data: 'last one' });
+  });
+
+  it('returns the total of successful payments', async () => {
+    const payment = new PaymentModel([
+      { id: '123', value: { status: PaymentStatus.SUCCESS, amount: 100 } as unknown as Payment },
+      { id: '456', value: { status: PaymentStatus.ERROR, amount: 100 } as unknown as Payment },
+    ]);
+    expect(payment.paymentTotal).toEqual(100);
   });
 
   it('adds a payment', async () => {

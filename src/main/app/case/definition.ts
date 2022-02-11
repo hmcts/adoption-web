@@ -45,10 +45,10 @@ export interface DynamicListElement {
 }
 
 export interface Fee {
-  feeAmount: string;
-  feeCode: string;
-  feeDescription: string;
-  feeVersion: string;
+  FeeAmount: string;
+  FeeCode: string;
+  FeeDescription: string;
+  FeeVersion: string;
 }
 
 export interface ListValue<T> {
@@ -57,7 +57,7 @@ export interface ListValue<T> {
 }
 
 export interface OrderSummary {
-  PaymentReference: string;
+  PaymentReference?: string;
   Fees: ListValue<Fee>[];
   PaymentTotal: string;
 }
@@ -164,7 +164,6 @@ export interface Applicant {
   FinancialOrderFor: FinancialOrderFor[];
   LegalProceedings: YesOrNo;
   LegalProceedingsDetails: string;
-  PcqId: string;
 }
 
 export interface Application {
@@ -376,6 +375,7 @@ export interface CaseData {
   birthMotherAddressCountry: string;
   birthMotherOtherNationalities: ListValue<AdditionalNationality>[];
   birthMotherNameOnCertificate: string;
+  birthMotherAddressNotKnownReason: string;
 
   birthFatherFirstName: string;
   birthFatherLastName: string;
@@ -393,6 +393,7 @@ export interface CaseData {
   birthFatherAddressCountry: string;
   birthFatherOtherNationalities: ListValue<AdditionalNationality>[];
   birthFatherNameOnCertificate: string;
+  birthFatherAddressNotKnownReason: string;
 
   otherParentFirstName: string;
   otherParentLastName: string;
@@ -410,6 +411,7 @@ export interface CaseData {
   otherParentAddressCountry: string;
   otherParentOtherNationalities: ListValue<AdditionalNationality>[];
   otherParentNameOnCertificate: string;
+  otherParentAddressNotKnownReason: string;
 
   socialWorkerName: string;
   socialWorkerPhoneNumber: string;
@@ -437,6 +439,7 @@ export interface CaseData {
   applicant2StatementOfTruth: YesOrNo;
   applicant1SotFullName: string;
   applicant2SotFullName: string;
+  pcqId: string;
 
   applicationType: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
@@ -466,7 +469,6 @@ export interface CaseData {
   applicant1SolicitorOrganisationPolicy: OrganisationPolicy<UserRole>;
   applicant1FinancialOrder: YesOrNo;
   applicant1FinancialOrderFor: FinancialOrderFor[];
-  applicant1PcqId: string;
 
   applicant2MiddleName: string;
   applicant2AgreedToReceiveEmails: YesOrNo;
@@ -487,7 +489,6 @@ export interface CaseData {
   applicant2SolicitorOrganisationPolicy: OrganisationPolicy<UserRole>;
   applicant2FinancialOrder: YesOrNo;
   applicant2FinancialOrderFor: FinancialOrderFor[];
-  applicant2PcqId: string;
   applicant1ScreenHasMarriageBroken: YesOrNo;
   applicant2ScreenHasMarriageBroken: YesOrNo;
   screenHasMarriageCert: YesOrNo;
@@ -744,6 +745,11 @@ export interface Solicitor {
   solicitorHelpingWithApplication: YesOrNo;
 }
 
+export const enum PaymentMethod {
+  PAY_BY_CARD = 'payByCard',
+  PAY_BY_HWF = 'payByHWF',
+  APPLY_FOR_HWF = 'applyForHWF',
+}
 export interface CaseInvite {
   applicant2InviteEmailAddress: string;
   accessCode: string;

@@ -94,6 +94,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   birthMotherAddressCounty: 'birthMotherAddressCounty',
   birthMotherAddressPostcode: 'birthMotherAddressPostCode',
   birthMotherAddressCountry: 'birthMotherAddressCountry',
+  birthMotherAddressNotKnownReason: 'birthMotherAddressNotKnownReason',
 
   birthFatherNameOnCertificate: 'birthFatherNameOnCertificate',
   birthFatherFirstNames: 'birthFatherFirstName',
@@ -111,6 +112,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   birthFatherAddressCounty: 'birthFatherAddressCounty',
   birthFatherAddressPostcode: 'birthFatherAddressPostCode',
   birthFatherAddressCountry: 'birthFatherAddressCountry',
+  birthFatherAddressNotKnownReason: 'birthFatherAddressNotKnownReason',
 
   otherParentFirstNames: 'otherParentFirstName',
   otherParentLastNames: 'otherParentLastName',
@@ -123,6 +125,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   otherParentAddressPostcode: 'otherParentAddressPostCode',
   otherParentAddressCountry: 'otherParentAddressCountry',
   otherParentAddressKnown: 'otherParentAddressKnown',
+  otherParentAddressNotKnownReason: 'otherParentAddressNotKnownReason',
 
   socialWorkerName: 'socialWorkerName',
   socialWorkerPhoneNumber: 'socialWorkerPhoneNumber',
@@ -135,11 +138,13 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   solicitorHelpingWithApplication: 'solicitorHelpingWithApplication',
   adopAgencyOrLAs: 'adopAgencyOrLAs',
   siblings: 'siblings',
+  payments: 'applicationPayments',
 
   applicant1IBelieveApplicationIsTrue: 'applicant1StatementOfTruth',
   applicant2IBelieveApplicationIsTrue: 'applicant2StatementOfTruth',
   applicant1SotFullName: 'applicant1SotFullName',
   applicant2SotFullName: 'applicant2SotFullName',
+  pcqId: 'pcqId',
 
   hasAnotherAdopAgencyOrLA: 'hasAnotherAdopAgencyOrLA',
   selectedAdoptionAgencyId: 'selectedAdoptionAgencyId',
@@ -155,7 +160,6 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant1DocumentsUploaded: 'applicant1DocumentsUploaded',
   applicant2DocumentsUploaded: 'applicant2DocumentsUploaded',
   documentsGenerated: 'documentsGenerated',
-  applicant1PcqId: 'applicant1PcqId',
   applicationFeeOrderSummary: 'applicationFeeOrderSummary',
 };
 
@@ -249,6 +253,7 @@ export interface Case {
   birthMotherAddressCounty?: string;
   birthMotherAddressPostcode?: string;
   birthMotherAddressCountry?: string;
+  birthMotherAddressNotKnownReason?: string;
 
   /***** Birth Father *****/
   birthFatherNameOnCertificate?: string;
@@ -268,6 +273,7 @@ export interface Case {
   birthFatherAddressCounty?: string;
   birthFatherAddressPostcode?: string;
   birthFatherAddressCountry?: string;
+  birthFatherAddressNotKnownReason?: string;
 
   /***** Other Parent *****/
   otherParentFirstNames?: string;
@@ -282,6 +288,7 @@ export interface Case {
   otherParentAddressPostcode?: string;
   otherParentAddressCountry?: string;
   otherParentAddressKnown?: YesOrNo;
+  otherParentAddressNotKnownReason?: string;
 
   /***** Adoption Agency, Social Worker and Solicitor *****/
   adopAgencyOrLAs?: AdoptionAgencyOrLocalAuthority[];
@@ -313,6 +320,7 @@ export interface Case {
   applicant2IBelieveApplicationIsTrue?: Checkbox;
   applicant1SotFullName?: string;
   applicant2SotFullName?: string;
+  pcqId?: string;
 
   /***** Common across different type of users *****/
   addButton?: string;
@@ -343,7 +351,6 @@ export interface Case {
   caseReference?: string;
   dateSubmitted?: Date;
   applicationFeeOrderSummary: OrderSummary;
-  applicant1PcqId?: string;
 }
 
 export interface CaseWithId extends Case {

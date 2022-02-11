@@ -60,6 +60,8 @@ export const SIBLING_NAME: PageLink = `${SIBLING}/name`;
 export const SIBLING_ORDER_TYPE: PageLink = `${SIBLING}/placement-order-type`;
 export const SIBLING_ORDER_CASE_NUMBER: PageLink = `${SIBLING}/placement-order-number`;
 export const SIBLING_ORDER_SUMMARY: PageLink = `${SIBLING}/summary`;
+export const SIBLING_SELECT: PageLink = `${SIBLING}/select-sibling`;
+export const SIBLING_ORDER_CHECK_YOUR_ANSWERS: PageLink = `${SIBLING}/placement-order-check-your-answers`;
 
 export const BIRTH_MOTHER: PageLink = '/birth-mother';
 export const BIRTH_MOTHER_FULL_NAME: PageLink = `${BIRTH_MOTHER}/full-name`;
@@ -138,3 +140,4 @@ export const ADOPTION_AGENCY: PageLink = `${CHILDREN}/adoption-agency`;
 export const OTHER_ADOPTION_AGENCY: PageLink = `${CHILDREN}/other-adoption-agency`;
 export const SOCIAL_WORKER: PageLink = `${CHILDREN}/social-worker`;
 export const STATEMENT_OF_TRUTH: PageLink = `${REVIEW_PAY_SUBMIT}/statement-of-truth`;
+export const EQUALITY: PageLink = `${REVIEW_PAY_SUBMIT}/equality`;

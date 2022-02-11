@@ -40,6 +40,7 @@ def secrets = [
     secret('idam-system-user-password', 'TEST_PASSWORD'),
     secret('citizen-user', 'CITIZEN_USERNAME'),
     secret('citizen-password', 'CITIZEN_PASSWORD'),
+    secret('adoption-pcq-token', 'PCQ_TOKEN')
   ],
   's2s-${env}': [
     secret('microservicekey-adoption-web', 'SERVICE_AUTH_SECRET')
@@ -61,7 +62,7 @@ withNightlyPipeline(type, product, component) {
   }
 
   before('crossBrowserTest') {
-    env.TEST_RETRIES = 5
+
   }
 
   after('crossBrowserTest') {
@@ -70,7 +71,6 @@ withNightlyPipeline(type, product, component) {
 
   before('fullFunctionalTest') {
     env.PARALLEL_CHUNKS = params.FUNCTIONAL_TESTS_WORKERS
-    env.TEST_RETRIES = 2
   }
 
   after('fullFunctionalTest') {

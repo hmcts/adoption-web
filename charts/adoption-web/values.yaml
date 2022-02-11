@@ -28,6 +28,9 @@ nodejs:
     IDAM_API_URL: 'https://idam-api.{{ .Values.global.environment }}.platform.hmcts.net/o/token'
     REDIS_HOST: 'adoption-web-session-storage-{{ .Values.global.environment }}.redis.cache.windows.net'
     PAYMENTS_API_URL: 'http://payment-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal'
+    CCD_URL: 'http://ccd-data-store-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal'
+    FEE_LOOKUP_URL: 'http://fees-register-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal/fees-register/fees/lookup'
+    EQUALITY_URL: 'https://pcq.{{ .Values.global.environment }}.platform.hmcts.net'
 
   keyVaults:
     adoption:
@@ -38,7 +41,8 @@ nodejs:
         - redis-access-key
         - s2s-secret
         - postcode-lookup-token
-        #  - AppInsightsInstrumentationKey
+        - adoption-pcq-token
+        - AppInsightsInstrumentationKey
 
 idam-pr:
   enabled: false

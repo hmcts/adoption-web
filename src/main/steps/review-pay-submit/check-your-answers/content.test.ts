@@ -5,13 +5,13 @@ import { generateContent } from './content';
 const enContent = () => ({
   section: 'Review your application, pay and send',
   title: 'Check your answers',
-  continue: 'Submit and pay',
+  continue: 'Continue',
 });
 
 const cyContent = () => ({
   section: 'Review your application, pay and send (in welsh)',
   title: 'Check your answers (in welsh)',
-  continue: 'Submit and pay (in welsh)',
+  continue: 'Continue (in welsh)',
 });
 
 describe('check-your-answer > content', () => {

@@ -8,6 +8,7 @@ module.exports = {
     placementOrderDateMonth: 'input[id$="placementOrderDate-month"]',
     placementOrderDateYear: 'input[id$="placementOrderDate-year"]',
     addAnotherPlacementOrder: 'input[id$="addAnotherPlacementOrder"]',
+    addAnotherPlacementOrderNo: 'input[id$="addAnotherPlacementOrder-2"]',
     placementOrderType: 'input[id$="placementOrderType"]',
   },
 
@@ -46,5 +47,9 @@ module.exports = {
     I.click('Save and continue');
     I.see('Orders already in place');
     I.see('Emergency protection order');
+    I.see('Do you want to add another order?');
+    I.click(this.fields.addAnotherPlacementOrderNo);
+    I.click('Save and continue');
+    I.wait('3');
   },
 };
