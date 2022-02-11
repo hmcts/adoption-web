@@ -24,6 +24,11 @@ const en = content => ({
   label: `Are you sure you want to remove this ${getPlacementOrderType(content.userCase)} for ${getSiblingName(
     content.userCase
   )}?`,
+  errors: {
+    confirm: {
+      required: 'Please select an answer',
+    },
+  },
 });
 
 const cy = content => ({
@@ -31,6 +36,11 @@ const cy = content => ({
   label: `Are you sure you want to remove this ${getPlacementOrderType(content.userCase)} for ${getSiblingName(
     content.userCase
   )}? (in welsh)`,
+  errors: {
+    confirm: {
+      required: 'Please select an answer (in welsh)',
+    },
+  },
 });
 
 export const form: FormContent = {
