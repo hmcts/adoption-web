@@ -38,7 +38,7 @@ const supportedBrowsers = {
     chrome_win_latest: {
       browserName: 'chrome',
       platformName: LATEST_WINDOWS,
-      browserVersion: 'latest-2',
+      browserVersion: 'latest',
       'sauce:options': {
         name: 'FPLA: WIN_CHROME_LATEST',
         screenResolution: '1600x1200',
@@ -47,7 +47,7 @@ const supportedBrowsers = {
     chrome_mac_latest: {
       browserName: 'chrome',
       platformName: LATEST_MAC,
-      browserVersion: 'latest-2',
+      browserVersion: 'latest',
       'sauce:options': {
         name: 'FPLA: MAC_CHROME_LATEST',
         screenResolution: '1600x1200',
