@@ -29,7 +29,11 @@ const en = content => {
       siblingFirstName: item.siblingFirstName,
       siblingLastNames: item.siblingLastNames,
       changeSiblingNameUrl: `${SIBLING_NAME}?change=${item.siblingId}&returnUrl=${SIBLING_ORDER_SUMMARY}`,
-      placementOrderListItems: placementOrderListItems(item.siblingPlacementOrders as PlacementOrder[], enContent),
+      placementOrderListItems: placementOrderListItems(
+        item.siblingId,
+        item.siblingPlacementOrders as PlacementOrder[],
+        enContent
+      ),
     })),
   };
 };
@@ -56,7 +60,11 @@ const cy = content => {
       siblingFirstName: item.siblingFirstName,
       siblingLastNames: item.siblingLastNames,
       changeSiblingNameUrl: `${SIBLING_NAME}?change=${item.siblingId}&returnUrl=${SIBLING_ORDER_SUMMARY}`,
-      placementOrderListItems: placementOrderListItems(item.siblingPlacementOrders as PlacementOrder[], cyContent),
+      placementOrderListItems: placementOrderListItems(
+        item.siblingId,
+        item.siblingPlacementOrders as PlacementOrder[],
+        cyContent
+      ),
     })),
   };
 };
