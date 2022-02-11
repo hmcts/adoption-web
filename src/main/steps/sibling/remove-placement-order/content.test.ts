@@ -1,9 +1,12 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
-import { PlacementOrder } from '../../../app/case/definition';
-import { FormContent } from '../../../app/form/Form';
+import { PlacementOrder, YesOrNo } from '../../../app/case/definition';
+import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
+import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent } from '../../common/common.content';
 
 import { generateContent } from './content';
+
+jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: 'Sibling details',
@@ -83,6 +86,22 @@ describe('sibling > remove-placement-order > content', () => {
       placementOrderType;
     generatedContent = generateContent(commonContent);
     expect(generatedContent.label).toBe(expected.label);
+  });
+
+  test('should contain confirm radio field', () => {
+    const fields = (generatedContent.form as FormContent).fields as FormFields;
+    const field = fields.confirm as FormOptions;
+    expect(field.type).toBe('radios');
+    expect(field.classes).toBe('govuk-radios');
+    expect((field.label as Function)(generatedContent)).toBe(
+      'Are you sure you want to remove this MOCK_TYPE for MOCK_FIRST_NAME MOCK_LAST_NAME?'
+    );
+    expect((field.section as Function)(generatedContent)).toBe(enContent.section);
+    expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
+    expect(field.values[0].value).toBe(YesOrNo.YES);
+    expect((field.values[1].label as Function)(commonContent)).toBe(commonContent.no);
+    expect(field.values[1].value).toBe(YesOrNo.NO);
+    expect(field.validator).toBe(isFieldFilledIn);
   });
 
   test('should contain submit button', () => {
