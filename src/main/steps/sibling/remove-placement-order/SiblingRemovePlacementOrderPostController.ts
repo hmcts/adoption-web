@@ -7,7 +7,7 @@ import { AnyObject, PostController } from '../../../app/controller/PostControlle
 import { Form, FormFields } from '../../../app/form/Form';
 
 @autobind
-export default class SiblingPlacementOrderPostController extends PostController<AnyObject> {
+export default class SiblingRemovePlacementOrderPostController extends PostController<AnyObject> {
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     const fields = this.fields as FormFields;
     const form = new Form(fields);
@@ -21,7 +21,7 @@ export default class SiblingPlacementOrderPostController extends PostController<
       this.redirect(req, res);
       return;
     }
-    console.log("formData['confirm']", formData['confirm']);
+
     if (formData['confirm'] === YesOrNo.YES) {
       const siblingObject = req.session.userCase.siblings?.find(
         item => item.siblingId === req.session.userCase.selectedSiblingId
@@ -40,10 +40,6 @@ export default class SiblingPlacementOrderPostController extends PostController<
       } else {
         siblingObject!.siblingPlacementOrders = siblingPlacementOrders;
       }
-
-      console.log('req.session.userCase.selectedSiblingId', req.session.userCase.selectedSiblingId);
-      console.log('req.session.userCase.selectedSiblingPoId', req.session.userCase.selectedSiblingPoId);
-      console.log('req.session.userCase.siblings', JSON.stringify(req.session.userCase.siblings));
 
       req.session.userCase = await this.save(
         req,
