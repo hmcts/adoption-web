@@ -35,7 +35,6 @@ describe('SiblingRemovePlacementOrderPostController', () => {
               siblingFirstName: '',
               siblingLastName: '',
               siblingPlacementOrders: [{ placementOrderId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID' }],
-              selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
             },
           ],
           selectedSiblingId: 'MOCK_SIBLING_ID',
@@ -60,7 +59,7 @@ describe('SiblingRemovePlacementOrderPostController', () => {
         jest.clearAllMocks();
       });
 
-      test('should update the siblings array', async () => {
+      test('should update the siblings array and save', async () => {
         await controller.post(req, res);
         expect(req.session.errors).toEqual([]);
         expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(
@@ -76,6 +75,45 @@ describe('SiblingRemovePlacementOrderPostController', () => {
         await controller.post(req, res);
         expect(mockGetNextStepUrl).toHaveBeenCalledWith(req, req.session.userCase);
         expect(res.redirect).toHaveBeenCalledWith('/MOCK_ENDPOINT');
+      });
+
+      test('should update the siblings array and save when there are more than one placement orders', async () => {
+        req = mockRequest({
+          session: {
+            userCase: {
+              id: 'MOCK_ID',
+              siblings: [
+                {
+                  siblingId: 'MOCK_SIBLING_ID',
+                  siblingPlacementOrders: [
+                    { placementOrderId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID' },
+                    { placementOrderId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID2' },
+                  ],
+                },
+              ],
+              selectedSiblingId: 'MOCK_SIBLING_ID',
+              selectedSiblingPoId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID',
+            },
+            save: jest.fn(done => done()),
+          },
+        });
+        await controller.post(req, res);
+        expect(req.session.errors).toEqual([]);
+        expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(
+          'MOCK_ID',
+          {
+            selectedSiblingId: undefined,
+            selectedSiblingPoId: undefined,
+            siblings: [
+              {
+                siblingId: 'MOCK_SIBLING_ID',
+                siblingPlacementOrders: [{ placementOrderId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID2' }],
+              },
+            ],
+          },
+          'citizen-update-application'
+        );
+        expect(req.session.save).toHaveBeenCalled();
       });
     });
   });
