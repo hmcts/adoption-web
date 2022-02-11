@@ -96,6 +96,18 @@ export class PostController<T extends AnyObject> {
     });
   }
 
+  // method to check if there is a returnUrl in session and
+  // it is one of the allowed redirects from current page
+  protected checkReturnUrlAndRedirect(req: AppRequest<T>, res: Response, allowedReturnUrls: string[]): void {
+    const returnUrl = req.session.returnUrl;
+    if (returnUrl && allowedReturnUrls.includes(returnUrl)) {
+      req.session.returnUrl = undefined;
+      this.redirect(req, res, returnUrl);
+    } else {
+      this.redirect(req, res);
+    }
+  }
+
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected getEventName(req: AppRequest): string {
     return CITIZEN_UPDATE;
