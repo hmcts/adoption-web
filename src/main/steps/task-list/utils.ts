@@ -347,7 +347,7 @@ export const getReviewPaySubmitUrl = (userCase: CaseWithId): string => {
 };
 export const getDateChildMovedInStatus = (userCase: CaseWithId): SectionStatus => {
   const dateChildMovedIn = userCase.dateChildMovedIn as CaseDate;
-  const dateChildMovedInComplete = dateChildMovedIn?.day && dateChildMovedIn?.month && dateChildMovedIn?.year;
+  const dateChildMovedInComplete = dateChildMovedIn.day && dateChildMovedIn.month && dateChildMovedIn.year;
 
   return dateChildMovedInComplete
     ? SectionStatus.COMPLETED

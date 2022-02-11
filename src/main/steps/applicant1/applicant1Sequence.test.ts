@@ -6,7 +6,7 @@ describe('applicant1Sequence', () => {
 
     expect(applicant1Sequence[0].url).toBe('/applying-with');
     expect(applicant1Sequence[0].showInSection).toBe('aboutApplicant1');
-    expect(applicant1Sequence[0].getNextStep({})).toBe('/date-child-moved-in');
+    expect(applicant1Sequence[0].getNextStep({})).toBe('/task-list');
 
     expect(applicant1Sequence[1].url).toBe('/date-child-moved-in');
     expect(applicant1Sequence[1].showInSection).toBe('aboutApplicant1');

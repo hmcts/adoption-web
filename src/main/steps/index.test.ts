@@ -3,7 +3,7 @@ import { ApplyingWith } from '../app/case/definition';
 import { AppRequest } from '../app/controller/AppRequest';
 
 import { applicant1Sequence } from './applicant1/applicant1Sequence';
-import { APPLYING_WITH_URL, CHECK_ELIGIBILITY_URL_UNDER_18, DATE_CHILD_MOVED_IN, START_ELIGIBILITY_URL } from './urls';
+import { APPLYING_WITH_URL, CHECK_ELIGIBILITY_URL_UNDER_18, START_ELIGIBILITY_URL, TASK_LIST_URL } from './urls';
 
 import { getNextEligibilityStepUrl, getNextIncompleteStepUrl, getNextStepUrl } from './index';
 
@@ -17,7 +17,7 @@ describe('Steps', () => {
     it('returns the next step when correct details a passed', () => {
       mockReq.originalUrl = APPLYING_WITH_URL;
       const data = {};
-      expect(getNextStepUrl(mockReq, data)).toBe(DATE_CHILD_MOVED_IN);
+      expect(getNextStepUrl(mockReq, data)).toBe(TASK_LIST_URL);
     });
 
     it('returns next eligibility step url when correctly called', () => {
@@ -32,13 +32,13 @@ describe('Steps', () => {
       mockReq.originalUrl = APPLYING_WITH_URL;
       const data = {};
       const actual = getNextStepUrl(mockReq, data);
-      expect(actual).toBe('/date-child-moved-in');
+      expect(actual).toBe('/task-list');
     });
 
     it('keeps the query string', () => {
       mockReq.originalUrl = `${APPLYING_WITH_URL}?customQueryString`;
       const data = {};
-      expect(getNextStepUrl(mockReq, data)).toBe(`${DATE_CHILD_MOVED_IN}?customQueryString`);
+      expect(getNextStepUrl(mockReq, data)).toBe(`${TASK_LIST_URL}?customQueryString`);
     });
   });
 
@@ -59,7 +59,7 @@ describe('Steps', () => {
 
     it('returns the next incomplete step if previous is valid', () => {
       mockReq.session.userCase.applyingWith = ApplyingWith.ALONE;
-      expect(getNextIncompleteStepUrl(mockReq)).toBe('/date-child-moved-in');
+      expect(getNextIncompleteStepUrl(mockReq)).toBe('/review-pay-submit/check-your-answers');
     });
 
     it('returns the previous step if its a dead end', () => {

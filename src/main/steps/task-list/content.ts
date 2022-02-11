@@ -90,7 +90,11 @@ const en = content => {
     section6link1: 'Review application, pay and send',
     status: {
       applyingWith: isApplyingWithComplete(content.userCase),
-      dateChildMovedIn: getDateChildMovedInStatus(content.userCase),
+      dateChildMovedIn: getSectionStatusLabel(
+        getDateChildMovedInStatus(content.userCase),
+        statuses,
+        'date-child-moved-in'
+      ),
       applicant1PersonalDetails: getSectionStatusLabel(
         getPersonalDetailsStatus(content.userCase, 'applicant1'),
         statuses,

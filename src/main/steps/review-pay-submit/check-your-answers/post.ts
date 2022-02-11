@@ -9,11 +9,14 @@ import { AnyObject, PostController } from '../../../app/controller/PostControlle
 @autobind
 export default class DateChildMovedInController extends PostController<AnyObject> {
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
+    req.session.errors = [];
+    if (req.session.userCase.dateChildMovedIn === undefined) {
+      req.session.errors.push({ errorType: 'lessThanTenWeeks', propertyName: 'dateChildMovedIn' });
+    }
     const dateChildMovedIn = new Date(toApiDate(req.session.userCase?.dateChildMovedIn));
     const currentDate = new Date();
     const days = moment(currentDate).diff(moment(dateChildMovedIn), 'days', true);
     if (days < 70) {
-      req.session.errors = [];
       req.session.errors.push({ errorType: 'lessThanTenWeeks', propertyName: 'dateChildMovedIn' });
       this.redirect(req, res, req.url);
       return;
