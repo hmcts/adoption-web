@@ -3,6 +3,7 @@ import { PlacementOrder, YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
+import { defaultButtons } from '../../../steps/common/components/common/default-buttons';
 import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const getSiblingName = (userCase: Partial<CaseWithId>) => {
@@ -57,12 +58,7 @@ export const form: FormContent = {
       validator: isFieldFilledIn,
     },
   },
-  submit: {
-    text: l => l.continue,
-  },
-  saveAsDraft: {
-    text: l => l.saveAsDraft,
-  },
+  ...defaultButtons,
 };
 
 const languages = {
