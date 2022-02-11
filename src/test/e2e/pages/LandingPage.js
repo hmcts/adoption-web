@@ -7,7 +7,7 @@ module.exports = {
   },
   async seeTheLandingPage() {
     I.wait('2');
-    await I.seeElement(this.fields.applyingWith);
+    await I.seeElement(this.fields.applyWithMySpouse);
   },
 
   selectApplyOnMyownSection() {
