@@ -44,4 +44,9 @@ export const siblingSequence: Step[] = [
     showInSection: Sections.AboutSibling,
     getNextStep: () => `${Urls.SIBLING_ORDER_TYPE}?add=${Date.now()}`,
   },
+  {
+    url: Urls.SIBLING_ORDER_CHECK_YOUR_ANSWERS,
+    showInSection: Sections.AboutSibling,
+    getNextStep: () => `${Urls.SIBLING_ORDER_SUMMARY}`,
+  },
 ];
