@@ -6,7 +6,7 @@ module.exports = {
     applyWithMySpouse: 'input[id$="applyingWith-3"]',
   },
   async seeTheLandingPage() {
-    I.wait('2');
+    await I.wait('2');
     await I.see('Are you applying on your own, or with someone else?', 30);
   },
 
