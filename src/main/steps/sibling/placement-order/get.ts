@@ -20,6 +20,9 @@ export default class SiblingPlacementOrderGetController extends GetController {
     } else if (req.query.change) {
       this.changeSiblingPlacementOrder(req);
       redirect = true;
+    } else if (req.query.remove) {
+      this.removeSiblingPlacementOrder(req);
+      redirect = true;
     } else if (!req.session.userCase.selectedSiblingPoId) {
       //generate random id for placement order if there are no placement orders
       req.session.userCase.selectedSiblingPoId =
@@ -68,6 +71,14 @@ export default class SiblingPlacementOrderGetController extends GetController {
     req.session.userCase.selectedSiblingPoId = placementOrderId;
     this.parseAndSetReturnUrl(req);
     delete req.query.change;
+    req.url = req.url.substring(0, req.url.indexOf('?'));
+  }
+
+  private removeSiblingPlacementOrder(req: AppRequest) {
+    const [siblingId, placementOrderId] = `${req.query.remove}`.split('/');
+    req.session.userCase.selectedSiblingId = siblingId;
+    req.session.userCase.selectedSiblingPoId = placementOrderId;
+    delete req.query.remove;
     req.url = req.url.substring(0, req.url.indexOf('?'));
   }
 }
