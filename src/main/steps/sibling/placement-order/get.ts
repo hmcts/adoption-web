@@ -8,11 +8,6 @@ import { GetController } from '../../../app/controller/GetController';
 @autobind
 export default class SiblingPlacementOrderGetController extends GetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
-    const siblings = req.session.userCase.siblings;
-    const siblingObject = siblings?.find(item => item.siblingId === req.session.userCase.selectedSiblingId);
-
-    const placementOrders = siblingObject?.siblingPlacementOrders || [];
-
     let redirect = false;
     if (req.query.add) {
       this.addSiblingPlacementOrder(req);
@@ -23,7 +18,13 @@ export default class SiblingPlacementOrderGetController extends GetController {
     } else if (req.query.remove) {
       this.removeSiblingPlacementOrder(req);
       redirect = true;
-    } else if (!req.session.userCase.selectedSiblingPoId) {
+    }
+
+    const siblings = req.session.userCase.siblings;
+    const siblingObject = siblings?.find(item => item.siblingId === req.session.userCase.selectedSiblingId);
+    const placementOrders = siblingObject?.siblingPlacementOrders || [];
+
+    if (!req.session.userCase.selectedSiblingPoId) {
       //generate random id for placement order if there are no placement orders
       req.session.userCase.selectedSiblingPoId =
         (placementOrders as PlacementOrder[])[0]?.placementOrderId || `${Date.now()}`;
@@ -35,12 +36,12 @@ export default class SiblingPlacementOrderGetController extends GetController {
 
     if (!placementOrder) {
       placementOrder = {
-        placementOrderId: req.session.userCase.selectedSiblingPoId!,
+        placementOrderId: req.session.userCase.selectedSiblingPoId,
       };
-
       placementOrders.push(placementOrder);
     }
 
+    siblingObject!.siblingPlacementOrders = placementOrders;
     req.session.userCase.siblings = siblings;
 
     req.session.userCase = await this.save(
