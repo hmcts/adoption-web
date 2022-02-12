@@ -7,8 +7,11 @@ import {
   YesNoNotsure,
   YesOrNo,
 } from '../../app/case/definition';
+import { Form } from '../../app/form/Form';
 import { isDateInputInvalid, notSureViolation } from '../../app/form/validation';
 import { PaymentModel } from '../../app/payment/PaymentModel';
+import { stepFields, steps } from '../../steps';
+import { Sections } from '../../steps/constants';
 import * as urls from '../urls';
 
 export const isApplyingWithComplete = (userCase: CaseWithId): boolean => {
@@ -111,35 +114,47 @@ export const getChildrenPlacementOrderStatus = (userCase: CaseWithId): SectionSt
     : SectionStatus.IN_PROGRESS;
 };
 
+const getSectionStatus = (userCase: Partial<CaseWithId>, section: Sections) => {
+  const sectionSteps = steps.filter(item => item.showInSection === section);
+  let completedCount = 0;
+  let nextStepUrl = sectionSteps.find(item => item.isFirstInSection)![0].url;
+  do {
+    const step = sectionSteps.find(item => item.url === nextStepUrl)!;
+    const formFields = stepFields[step.url];
+    const fields = typeof formFields === 'function' ? formFields(userCase) : formFields;
+    const form = new Form(fields);
+    if (form.getErrors(userCase).length === 0) {
+      completedCount++;
+    }
+    nextStepUrl = step.getNextStep(userCase);
+  } while (nextStepUrl !== urls.TASK_LIST_URL);
+
+  if (completedCount === 0) {
+    return SectionStatus.NOT_STARTED;
+  }
+  if (completedCount === sectionSteps.length) {
+    return SectionStatus.COMPLETED;
+  }
+  return SectionStatus.IN_PROGRESS;
+};
+
 export const getChildrenBirthCertificateStatus = (userCase: CaseWithId): SectionStatus => {
-  const childrenFirstName = userCase.childrenFirstName;
-  const childrenLastName = userCase.childrenLastName;
-  const childrenDateOfBirth = userCase.childrenDateOfBirth as CaseDate;
-  const dateOfBirthComplete = childrenDateOfBirth?.day && childrenDateOfBirth?.month && childrenDateOfBirth?.year;
-  const childrenSexAtBirth = userCase.childrenSexAtBirth;
-
-  const nationality: string[] = userCase.childrenNationality || [];
-  const nationalities: string[] = userCase.childrenAdditionalNationalities || [];
-  const nationalityComplete =
-    !!nationality.length &&
-    (!nationality.includes('Other') || (!!nationalities.length && nationality.includes('Other')));
-
-  return childrenFirstName && childrenLastName && dateOfBirthComplete && childrenSexAtBirth && nationalityComplete
-    ? SectionStatus.COMPLETED
-    : !childrenFirstName && !childrenLastName && !dateOfBirthComplete && !childrenSexAtBirth && !nationalityComplete
-    ? SectionStatus.NOT_STARTED
-    : SectionStatus.IN_PROGRESS;
+  return getSectionStatus(userCase, Sections.ChildrenBirthCertificate);
 };
 
 export const getAdoptionCertificateDetailsStatus = (userCase: CaseWithId): SectionStatus => {
   const firstName = userCase.childrenFirstNameAfterAdoption;
   const lastName = userCase.childrenLastNameAfterAdoption;
 
-  return firstName && lastName
-    ? SectionStatus.COMPLETED
-    : !firstName && !lastName
-    ? SectionStatus.NOT_STARTED
-    : SectionStatus.IN_PROGRESS;
+  if (firstName && lastName) {
+    return SectionStatus.COMPLETED;
+  }
+
+  if (!firstName && !lastName) {
+    return SectionStatus.NOT_STARTED;
+  }
+
+  return SectionStatus.IN_PROGRESS;
 };
 
 export const getBirthFatherDetailsStatus = (userCase: CaseWithId): SectionStatus => {

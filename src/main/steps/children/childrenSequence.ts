@@ -38,27 +38,29 @@ export const childrenSequence: Step[] = [
   },
   {
     url: Urls.CHILDREN_FULL_NAME,
-    showInSection: Sections.AboutChildren,
+    isFirstInSection: true,
+    showInSection: Sections.ChildrenBirthCertificate,
     getNextStep: () => Urls.CHILDREN_DATE_OF_BIRTH,
   },
   {
     url: Urls.CHILDREN_DATE_OF_BIRTH,
-    showInSection: Sections.AboutChildren,
+    showInSection: Sections.ChildrenBirthCertificate,
     getNextStep: () => Urls.CHILDREN_SEX_AT_BIRTH,
   },
   {
     url: Urls.CHILDREN_SEX_AT_BIRTH,
-    showInSection: Sections.AboutChildren,
+    showInSection: Sections.ChildrenBirthCertificate,
     getNextStep: () => Urls.CHILDREN_NATIONALITY,
   },
   {
     url: Urls.CHILDREN_NATIONALITY,
-    showInSection: Sections.AboutChildren,
+    showInSection: Sections.ChildrenBirthCertificate,
     getNextStep: () => Urls.TASK_LIST_URL,
   },
   {
     url: Urls.CHILDREN_FULL_NAME_AFTER_ADOPTION,
-    showInSection: Sections.AboutChildren,
+    isFirstInSection: true,
+    showInSection: Sections.ChildrenAdoptionCertificate,
     getNextStep: () => Urls.TASK_LIST_URL,
   },
   {

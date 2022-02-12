@@ -20,10 +20,13 @@ export enum Sections {
   AboutOtherParent = 'aboutOtherParent',
   ReviewPaySubmit = 'reviewPaySubmit',
   AboutSibling = 'aboutSibling',
+  ChildrenAdoptionCertificate = 'ChildrenAdoptionCertificate',
+  ChildrenBirthCertificate = 'ChildrenBirthCertificate',
 }
 
 export interface Step {
   url: string;
+  isFirstInSection?: boolean;
   showInSection?: Sections;
   showInCompleteSection?: Sections;
   excludeFromContinueApplication?: boolean;

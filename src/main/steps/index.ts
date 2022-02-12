@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import { Case, CaseWithId } from '../app/case/case';
 import { AppRequest, Eligibility } from '../app/controller/AppRequest';
 import { TranslationFn } from '../app/controller/GetController';
-import { Form, FormContent } from '../app/form/Form';
+import { Form, FormContent, FormFields, FormFieldsFn } from '../app/form/Form';
 
 import { applicant1Sequence } from './applicant1/applicant1Sequence';
 import { applicant2Sequence } from './applicant2/applicant2Sequence';
@@ -28,10 +28,21 @@ import {
   TASK_LIST_URL,
 } from './urls';
 
-const stepForms: Record<string, Form> = {};
+export const steps: Step[] = [];
+export const stepForms: Record<string, Form> = {};
+export const stepFields: Record<string, FormFields | FormFieldsFn> = {};
 
-[applicant1Sequence].forEach((sequence: Step[], i: number) => {
-  const dir = __dirname + (i === 0 ? '/applicant1' : '');
+[
+  applicant1Sequence,
+  applicant2Sequence,
+  childrenSequence,
+  birthMotherSequence,
+  birthFatherSequence,
+  otherParentSequence,
+  siblingSequence,
+].forEach((sequence: Step[]) => {
+  steps.push(...sequence);
+  const dir = __dirname;
   for (const step of sequence) {
     const stepContentFile = `${dir}${step.url}/content.ts`;
     if (fs.existsSync(stepContentFile)) {
@@ -39,6 +50,7 @@ const stepForms: Record<string, Form> = {};
 
       if (content.form) {
         stepForms[step.url] = new Form(content.form.fields);
+        stepFields[step.url] = content.form.fields;
       }
     }
   }
