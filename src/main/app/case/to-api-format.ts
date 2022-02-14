@@ -110,6 +110,20 @@ const fields: ToApiConverters = {
   }),
   applicant1UploadedFiles: () => ({}),
   applicant2UploadedFiles: () => ({}),
+  applicant1CannotUploadDocuments: data => ({
+    applicant1CannotUploadSupportingDocument: data.applicant1CannotUploadDocuments
+      ? !Array.isArray(data.applicant1CannotUploadDocuments)
+        ? [data.applicant1CannotUploadDocuments]
+        : data.applicant1CannotUploadDocuments
+      : [],
+  }),
+  applicant2CannotUploadDocuments: data => ({
+    applicant2CannotUploadSupportingDocument: data.applicant2CannotUploadDocuments
+      ? !Array.isArray(data.applicant2CannotUploadDocuments)
+        ? [data.applicant2CannotUploadDocuments]
+        : data.applicant2CannotUploadDocuments
+      : [],
+  }),
   applicant1HelpPayingNeeded: data => ({
     applicant1HWFNeedHelp: data.applicant1HelpPayingNeeded,
     ...(data.applicant1HelpPayingNeeded === YesOrNo.NO

@@ -47,11 +47,6 @@
   <ul class="govuk-list govuk-list--bullet">
     <li>{{ certificate }}</li>
     <li>{{ certificateForeign }}</li>
-    {% if userCase.certifiedTranslation === 'Yes' %}<li>{{ certificateForeignTranslation }}</li>{% endif %}
-    {% if userCase.applicant1LastNameChangedWhenRelationshipFormed === 'Yes' or
-          userCase.applicant1NameChangedSinceRelationshipFormed === 'Yes'%}
-      <li>{{ proofOfNameChange }}</li>
-    {% endif %}
   </ul>
   {{ govukInsetText({
     text: warningPhoto
