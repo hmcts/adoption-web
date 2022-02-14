@@ -332,9 +332,10 @@ export interface Case {
   adoption?: Adoption;
 
   /***** Document upload *****/
-  birthOrAdoptionCertificate?: YesOrNo;
-  deathCertificate?: YesOrNo;
+  applicant1DocumentsUploaded?: ListValue<Partial<DivorceDocument> | null>[];
   applicant1UploadedFiles?: UploadedFile[];
+  applicant1CannotUpload?: Checkbox;
+  applicant1CannotUploadDocuments?: DocumentType | DocumentType[];
 
   applicant1HelpPayingNeeded?: YesOrNo;
   applicant1AlreadyAppliedForHelpPaying?: YesOrNo;
@@ -345,11 +346,8 @@ export interface Case {
   applyForFinancialOrder?: YesOrNo;
   applicant2UploadedFiles?: UploadedFile[];
   documentsGenerated: ListValue<DivorceDocument>[];
-  applicant1DocumentsUploaded?: ListValue<Partial<DivorceDocument> | null>[];
   applicant2DocumentsUploaded?: ListValue<Partial<DivorceDocument> | null>[];
-  applicant1CannotUpload?: Checkbox;
   applicant2CannotUpload?: Checkbox;
-  applicant1CannotUploadDocuments?: DocumentType | DocumentType[];
   applicant2CannotUploadDocuments?: DocumentType | DocumentType[];
   dueDate?: DateAsString;
   caseReference?: string;

@@ -117,13 +117,6 @@ const fields: ToApiConverters = {
         : data.applicant1CannotUploadDocuments
       : [],
   }),
-  applicant2CannotUploadDocuments: data => ({
-    applicant2CannotUploadSupportingDocument: data.applicant2CannotUploadDocuments
-      ? !Array.isArray(data.applicant2CannotUploadDocuments)
-        ? [data.applicant2CannotUploadDocuments]
-        : data.applicant2CannotUploadDocuments
-      : [],
-  }),
   applicant1HelpPayingNeeded: data => ({
     applicant1HWFNeedHelp: data.applicant1HelpPayingNeeded,
     ...(data.applicant1HelpPayingNeeded === YesOrNo.NO
