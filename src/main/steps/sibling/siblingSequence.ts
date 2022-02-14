@@ -11,7 +11,12 @@ export const siblingSequence: Step[] = [
   {
     url: Urls.SIBLING_COURT_ORDER_EXISTS,
     showInSection: Sections.AboutSibling,
-    getNextStep: data => (data.hasPoForSiblings === YesNoNotsure.YES ? Urls.SIBLING_NAME : Urls.TASK_LIST_URL),
+    getNextStep: data =>
+      data.hasPoForSiblings === YesNoNotsure.YES
+        ? data.siblings?.length
+          ? Urls.SIBLING_ORDER_SUMMARY
+          : Urls.SIBLING_NAME
+        : Urls.TASK_LIST_URL,
   },
   {
     url: Urls.SIBLING_NAME,
@@ -32,6 +37,16 @@ export const siblingSequence: Step[] = [
     url: Urls.SIBLING_ORDER_SUMMARY,
     showInSection: Sections.AboutSibling,
     getNextStep: data =>
-      data.addAnotherSiblingPlacementOrder === YesOrNo.YES ? Urls.SIBLING_ORDER_SUMMARY : Urls.TASK_LIST_URL,
+      data.addAnotherSiblingPlacementOrder === YesOrNo.YES ? Urls.SIBLING_SELECT : Urls.TASK_LIST_URL,
+  },
+  {
+    url: Urls.SIBLING_SELECT,
+    showInSection: Sections.AboutSibling,
+    getNextStep: () => `${Urls.SIBLING_ORDER_TYPE}?add=${Date.now()}`,
+  },
+  {
+    url: Urls.SIBLING_ORDER_CHECK_YOUR_ANSWERS,
+    showInSection: Sections.AboutSibling,
+    getNextStep: () => `${Urls.SIBLING_ORDER_SUMMARY}`,
   },
 ];

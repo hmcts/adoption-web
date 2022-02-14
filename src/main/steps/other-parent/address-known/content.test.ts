@@ -1,6 +1,6 @@
 import { YesOrNo } from '../../../app/case/definition';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
-import { isFieldFilledIn } from '../../../app/form/validation';
+import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
@@ -18,6 +18,7 @@ const enContent = {
     },
     otherParentAddressNotKnownReason: {
       required: 'Provide a reason',
+      invalid: 'Reason must be 500 characters or fewer',
     },
   },
 };
@@ -33,6 +34,7 @@ const cyContent = {
     },
     otherParentAddressNotKnownReason: {
       required: 'Provide a reason (in welsh)',
+      invalid: 'Reason must be 500 characters or fewer (in welsh)',
     },
   },
 };
@@ -83,9 +85,14 @@ describe('other-parent > address-known content', () => {
     const field2 = (fields.otherParentAddressKnown as FormOptions).values[1].subFields!
       .otherParentAddressNotKnownReason;
     expect((field2?.label as Function)(generatedContent)).toBe(enContent.moreDetails);
-    expect(field2.type).toBe('text');
+    expect(field2.type).toBe('textarea');
     expect(field2?.labelSize).toBe(null);
-    expect(field2.validator).toBe(isFieldFilledIn);
+
+    (field2.validator as Function)('MockTextArea');
+    expect(isFieldFilledIn).toHaveBeenCalledWith('MockTextArea');
+    expect(isTextAreaValid).toHaveBeenCalledWith('MockTextArea');
+
+    expect((field2.attributes as HTMLTextAreaElement).rows).toBe(1);
   });
 
   test('should contain submit button', () => {

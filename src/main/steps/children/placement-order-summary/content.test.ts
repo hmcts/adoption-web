@@ -66,8 +66,9 @@ describe('children > placement-order-summary content', () => {
     expect(generatedContent.placementOrderListItems).toEqual([
       {
         key: { text: 'Placement Order', classes: 'font-normal' },
-        value: { html: '' },
+        value: { classes: 'summary-list-value', html: '' },
         actions: {
+          classes: 'summary-list-actions',
           items: [
             {
               href: '/children/placement-order-check-your-answers?change=MOCK_ID',
