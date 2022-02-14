@@ -18,9 +18,6 @@ import {
 
 export class HomeGetController {
   public get(req: AppRequest, res: Response): void {
-    // if (req.session.userCase.divorceOrDissolution !== res.locals.serviceType) {
-    //   throw new Error('Invalid case type');
-    // }
     const firstQuestionForm = getApplicantFirstQuestionForm();
     const isFirstQuestionComplete = firstQuestionForm.getErrors(req.session.userCase).length === 0;
 

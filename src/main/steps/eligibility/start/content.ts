@@ -24,7 +24,7 @@ const en = () => ({
   line9: "If relevant, you'll also need to upload:",
   bulletPoint8: 'your marriage or civil partnership certificate, in English or Welsh',
   bulletPoint9: "your spouse or civil partner's death certificate",
-  bulletPoint10: 'a decree absolute of divorce or decree of nullity of your marriage',
+  bulletPoint10: 'adoption',
   bulletPoint11: 'a dissolution order or nullity order of your civil partnership',
   bulletPoint12: 'a decree of judicial separation',
   bulletPoint13:
@@ -58,7 +58,7 @@ const cy = () => ({
   line9: "If relevant, you'll also need to upload: (in welsh) ",
   bulletPoint8: 'your marriage or civil partnership certificate, in English or Welsh (in welsh) ',
   bulletPoint9: "your spouse or civil partner's death certificate (in welsh) ",
-  bulletPoint10: 'a decree absolute of divorce or decree of nullity of your marriage (in welsh) ',
+  bulletPoint10: 'adoption (in welsh) ',
   bulletPoint11: 'a dissolution order or nullity order of your civil partnership (in welsh) ',
   bulletPoint12: 'a decree of judicial separation (in welsh) ',
   bulletPoint13:

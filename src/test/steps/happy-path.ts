@@ -101,7 +101,7 @@ Given("I've completed all happy path questions correctly", async () => {
 
   I.waitInUrl('/how-the-court-will-contact-you');
   iClearTheForm();
-  iClick('I agree that the divorce service can send me notifications');
+  iClick('I agree that the adoption service can send me notifications');
   iClick('Continue');
 
   I.waitInUrl('/english-or-welsh');

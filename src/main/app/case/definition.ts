@@ -209,7 +209,6 @@ export interface Application {
   applicant2HWFReferenceNumber: string;
   applicant2HWFNeedHelp: YesOrNo;
   applicant2HWFAppliedForFees: YesOrNo;
-  divorceWho: WhoDivorcing;
   solUrgentCase: YesOrNo;
   solUrgentCaseSupportingInformation: string;
   applicant1WantsToHavePapersServedAnotherWay: YesOrNo;
@@ -441,7 +440,6 @@ export interface CaseData {
   applicant1CannotUploadSupportingDocument: DocumentType[];
 
   applicationType: ApplicationType;
-  divorceOrDissolution: DivorceOrDissolution;
   labelContentApplicant2: string;
   labelContentTheApplicant2: string;
   labelContentTheApplicant2UC: string;
@@ -530,7 +528,6 @@ export interface CaseData {
   applicant2HWFReferenceNumber: string;
   applicant2HWFNeedHelp: YesOrNo;
   applicant2HWFAppliedForFees: YesOrNo;
-  divorceWho: WhoDivorcing;
   solUrgentCase: YesOrNo;
   solUrgentCaseSupportingInformation: string;
   applicant1WantsToHavePapersServedAnotherWay: YesOrNo;
@@ -649,7 +646,6 @@ export interface CaseData {
   successfulServedByBailiff: YesOrNo;
   reasonFailureToServeByBailiff: string;
   applicant2DocumentsUploaded: ListValue<AdoptionDocument>[];
-  divorceUnit: Court;
   documentsGenerated: ListValue<AdoptionDocument>[];
   documentsUploaded: ListValue<AdoptionDocument>[];
   confidentialDocumentsUploaded: ListValue<ConfidentialDivorceDocument>[];
@@ -971,7 +967,7 @@ export interface DocumentInfo {
 }
 
 export interface Letter {
-  divorceDocument: AdoptionDocument;
+  adoptionDocument: AdoptionDocument;
   count: number;
 }
 
@@ -1168,11 +1164,6 @@ export const enum Court {
 
 export const enum Adoption {
   ADOPTION = 'adoption',
-}
-
-export const enum DivorceOrDissolution {
-  DIVORCE = 'divorce',
-  DISSOLUTION = 'dissolution',
 }
 
 export const enum DocumentsServedBeingThe {
@@ -1393,17 +1384,15 @@ export const enum State {
 }
 
 export const enum UserRole {
-  CASE_WORKER = 'caseworker-divorce-courtadmin_beta',
-  LEGAL_ADVISOR = 'caseworker-divorce-courtadmin-la',
-  SUPER_USER = 'caseworker-divorce-superuser',
-  SYSTEMUPDATE = 'caseworker-divorce-systemupdate',
-  SOLICITOR = 'caseworker-divorce-solicitor',
-  APPLICANT_1_SOLICITOR = '[APPONESOLICITOR]',
-  APPLICANT_2_SOLICITOR = '[APPTWOSOLICITOR]',
-  ORGANISATION_CASE_ACCESS_ADMINISTRATOR = 'caseworker-caa',
+  ADOPTION_GENERIC = 'caseworker-adoption',
+  CASE_WORKER = 'caseworker-adoption-caseworker',
+  COURT_ADMIN = 'caseworker-adoption-courtadmin',
+  LEGAL_ADVISOR = 'caseworker-adoption-la',
+  DISTRICT_JUDGE = 'caseworker-adoption-judge',
+  SUPER_USER = 'caseworker-adoption-superuser',
+  SOLICITOR = 'caseworker-adoption-solicitor',
   CITIZEN = 'citizen',
   CREATOR = '[CREATOR]',
-  APPLICANT_2 = '[APPLICANTTWO]',
 }
 
 export const enum WhoDivorcing {
