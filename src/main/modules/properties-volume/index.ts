@@ -9,7 +9,7 @@ export class PropertiesVolume {
   enableFor(app: Application): void {
     if (!app.locals.developmentMode) {
       propertiesVolume.addTo(config);
-      // this.setSecret('secrets.adoption.AppInsightsInstrumentationKey', 'appInsights.instrumentationKey');
+      this.setSecret('secrets.adoption.AppInsightsInstrumentationKey', 'appInsights.instrumentationKey');
       this.setSecret('secrets.adoption.idam-secret', 'services.idam.clientSecret');
       this.setSecret('secrets.adoption.idam-system-user-name', 'services.idam.systemUsername');
       this.setSecret('secrets.adoption.idam-system-user-password', 'services.idam.systemPassword');
