@@ -3,12 +3,12 @@ import { AnyObject } from '../controller/PostController';
 import {
   Adoption,
   AdoptionAgencyOrLocalAuthority,
+  AdoptionDocument,
   ApplicationType,
   ApplyingWith,
   CaseData,
   ContactDetails,
   DateAsString,
-  DivorceDocument,
   DocumentType,
   Gender,
   JurisdictionConnections,
@@ -332,7 +332,7 @@ export interface Case {
   adoption?: Adoption;
 
   /***** Document upload *****/
-  applicant1DocumentsUploaded?: ListValue<Partial<DivorceDocument> | null>[];
+  applicant1DocumentsUploaded?: ListValue<Partial<AdoptionDocument> | null>[];
   applicant1UploadedFiles?: UploadedFile[];
   applicant1CannotUpload?: Checkbox;
   applicant1CannotUploadDocuments?: DocumentType | DocumentType[];
@@ -345,8 +345,8 @@ export interface Case {
 
   applyForFinancialOrder?: YesOrNo;
   applicant2UploadedFiles?: UploadedFile[];
-  documentsGenerated: ListValue<DivorceDocument>[];
-  applicant2DocumentsUploaded?: ListValue<Partial<DivorceDocument> | null>[];
+  documentsGenerated: ListValue<AdoptionDocument>[];
+  applicant2DocumentsUploaded?: ListValue<Partial<AdoptionDocument> | null>[];
   applicant2CannotUpload?: Checkbox;
   applicant2CannotUploadDocuments?: DocumentType | DocumentType[];
   dueDate?: DateAsString;

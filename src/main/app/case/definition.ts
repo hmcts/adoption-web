@@ -115,7 +115,7 @@ export interface AlternativeService {
   servicePaymentFeeOrderSummary: OrderSummary;
   localCourtName: string;
   localCourtEmail: string;
-  certificateOfServiceDocument: DivorceDocument;
+  certificateOfServiceDocument: AdoptionDocument;
   certificateOfServiceDate: DateAsString;
   successfulServedByBailiff: YesOrNo;
   reasonFailureToServeByBailiff: string;
@@ -231,9 +231,6 @@ export interface Application {
   applicationFeeOrderSummary: OrderSummary;
   applicant1KnowsApplicant2EmailAddress: YesOrNo;
   app2ContactMethodIsDigital: YesOrNo;
-  applicant1CannotUploadSupportingDocument: DocumentType[];
-  applicant2CannotUploadSupportingDocument: DocumentType[];
-  documentUploadComplete: YesOrNo;
   miniApplicationLink: Document;
   dateSubmitted: DateAsString;
   applicant2ConfirmApplicant1Information: YesOrNo;
@@ -253,7 +250,7 @@ export interface Application {
 export interface Bailiff {
   localCourtName: string;
   localCourtEmail: string;
-  certificateOfServiceDocument: DivorceDocument;
+  certificateOfServiceDocument: AdoptionDocument;
   certificateOfServiceDate: DateAsString;
   successfulServedByBailiff: YesOrNo;
   reasonFailureToServeByBailiff: string;
@@ -598,14 +595,14 @@ export interface CaseData {
   coRefusalClarificationReason: ClarificationReason;
   coRefusalClarificationAdditionalInfo: string;
   coClarificationResponse: string;
-  coClarificationUploadDocuments: ListValue<DivorceDocument>[];
+  coClarificationUploadDocuments: ListValue<AdoptionDocument>[];
   coOutcomeCase: YesOrNo;
   coCourt: ConditionalOrderCourt;
   coDateAndTimeOfHearing: DateAsString;
   coPronouncementJudge: string;
   coJudgeCostsClaimGranted: JudgeCostsClaimGranted;
   coJudgeCostsOrderAdditionalInfo: string;
-  coCertificateOfEntitlementDocument: DivorceDocument;
+  coCertificateOfEntitlementDocument: AdoptionDocument;
   coApplicantStatementOfTruth: YesOrNo;
   dateFinalOrderSubmitted: DateAsString;
   dateFinalOrderEligibleFrom: DateAsString;
@@ -646,15 +643,15 @@ export interface CaseData {
   servicePaymentFeeOrderSummary: OrderSummary;
   localCourtName: string;
   localCourtEmail: string;
-  certificateOfServiceDocument: DivorceDocument;
+  certificateOfServiceDocument: AdoptionDocument;
   certificateOfServiceDate: DateAsString;
   successfulServedByBailiff: YesOrNo;
   reasonFailureToServeByBailiff: string;
-  applicant1DocumentsUploaded: ListValue<DivorceDocument>[];
-  applicant2DocumentsUploaded: ListValue<DivorceDocument>[];
+  applicant1DocumentsUploaded: ListValue<AdoptionDocument>[];
+  applicant2DocumentsUploaded: ListValue<AdoptionDocument>[];
   divorceUnit: Court;
-  documentsGenerated: ListValue<DivorceDocument>[];
-  documentsUploaded: ListValue<DivorceDocument>[];
+  documentsGenerated: ListValue<AdoptionDocument>[];
+  documentsUploaded: ListValue<AdoptionDocument>[];
   confidentialDocumentsUploaded: ListValue<ConfidentialDivorceDocument>[];
   generalOrders: ListValue<DivorceGeneralOrder>[];
   previousCaseId: CaseLink;
@@ -682,7 +679,7 @@ export interface CaseData {
   courtName: Court;
   applicant1PrayerHasBeenGiven: YesOrNo;
   coAddNewDocuments: YesOrNo;
-  coDocumentsUploaded: ListValue<DivorceDocument>[];
+  coDocumentsUploaded: ListValue<AdoptionDocument>[];
   coIsEverythingInPetitionTrue: YesOrNo;
 }
 
@@ -778,14 +775,14 @@ export interface ConditionalOrder {
   RefusalClarificationReason: ClarificationReason;
   RefusalClarificationAdditionalInfo: string;
   ClarificationResponse: string;
-  ClarificationUploadDocuments: ListValue<DivorceDocument>[];
+  ClarificationUploadDocuments: ListValue<AdoptionDocument>[];
   OutcomeCase: YesOrNo;
   Court: ConditionalOrderCourt;
   DateAndTimeOfHearing: DateAsString;
   PronouncementJudge: string;
   JudgeCostsClaimGranted: JudgeCostsClaimGranted;
   JudgeCostsOrderAdditionalInfo: string;
-  CertificateOfEntitlementDocument: DivorceDocument;
+  CertificateOfEntitlementDocument: AdoptionDocument;
   ApplicantStatementOfTruth: YesOrNo;
 }
 
@@ -800,7 +797,7 @@ export interface CtscContactDetails {
 }
 
 export interface DivorceGeneralOrder {
-  generalOrderDocument: DivorceDocument;
+  generalOrderDocument: AdoptionDocument;
   generalOrderDivorceParties: GeneralOrderDivorceParties[];
 }
 
@@ -908,7 +905,7 @@ export interface RetiredFields {
   courtName: Court;
   applicant1PrayerHasBeenGiven: YesOrNo;
   coAddNewDocuments: YesOrNo;
-  coDocumentsUploaded: ListValue<DivorceDocument>[];
+  coDocumentsUploaded: ListValue<AdoptionDocument>[];
   coIsEverythingInPetitionTrue: YesOrNo;
 }
 
@@ -946,7 +943,7 @@ export interface ConfidentialDivorceDocument {
   documentFileName: string;
 }
 
-export interface DivorceDocument {
+export interface AdoptionDocument {
   documentDateAdded: DateAsString;
   documentComment: string;
   documentFileName: string;
@@ -974,7 +971,7 @@ export interface DocumentInfo {
 }
 
 export interface Letter {
-  divorceDocument: DivorceDocument;
+  divorceDocument: AdoptionDocument;
   count: number;
 }
 

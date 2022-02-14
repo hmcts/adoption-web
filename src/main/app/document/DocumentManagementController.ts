@@ -6,7 +6,7 @@ import { v4 as generateUuid } from 'uuid';
 import { UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
 import { CaseWithId } from '../case/case';
-import { CITIZEN_UPDATE, DivorceDocument, ListValue, State } from '../case/definition';
+import { AdoptionDocument, CITIZEN_UPDATE, ListValue, State } from '../case/definition';
 import type { AppRequest, UserDetails } from '../controller/AppRequest';
 
 import { Classification, DocumentManagementClient } from './DocumentManagementClient';
@@ -44,7 +44,7 @@ export class DocumentManagerController {
       classification: Classification.Public,
     });
 
-    const newUploads: ListValue<Partial<DivorceDocument> | null>[] = filesCreated.map(file => ({
+    const newUploads: ListValue<Partial<AdoptionDocument> | null>[] = filesCreated.map(file => ({
       id: generateUuid(),
       value: {
         documentComment: 'Uploaded by applicant',
@@ -78,7 +78,7 @@ export class DocumentManagerController {
   public async delete(req: AppRequest<Partial<CaseWithId>>, res: Response): Promise<void> {
     const documentsUploadedKey = 'applicant1DocumentsUploaded';
     const documentsUploaded =
-      (req.session.userCase[documentsUploadedKey] as ListValue<Partial<DivorceDocument> | null>[]) ?? [];
+      (req.session.userCase[documentsUploadedKey] as ListValue<Partial<AdoptionDocument> | null>[]) ?? [];
 
     if (
       ![State.Draft, State.AwaitingApplicant1Response, State.AwaitingClarification].includes(req.session.userCase.state)
