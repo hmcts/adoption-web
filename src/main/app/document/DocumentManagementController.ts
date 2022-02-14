@@ -21,13 +21,8 @@ export class DocumentManagerController {
     if (
       ![State.Draft, State.AwaitingApplicant1Response, State.AwaitingClarification].includes(req.session.userCase.state)
     ) {
-      throw new Error(
-        'Cannot upload new documents as case is not in Draft or AwaitingApplicant1Response or AwaitingClarification state'
-      );
+      throw new Error('Cannot upload new documents as case is not in Draft state');
     }
-    // if (req.session.userCase.state !== State.AwaitingApplicant2Response) {
-    //   throw new Error('Cannot upload new documents as case is not in AwaitingApplicant2Response state');
-    // }
 
     if (!req.files?.length) {
       if (req.headers.accept?.includes('application/json')) {
@@ -83,12 +78,7 @@ export class DocumentManagerController {
     if (
       ![State.Draft, State.AwaitingApplicant1Response, State.AwaitingClarification].includes(req.session.userCase.state)
     ) {
-      throw new Error(
-        'Cannot delete documents as case is not in Draft, AwaitingApplicant1Response or AwaitingClarification state'
-      );
-    }
-    if (req.session.userCase.state !== State.AwaitingApplicant2Response) {
-      throw new Error('Cannot delete documents as case is not in AwaitingApplicant2Response state');
+      throw new Error('Cannot delete documents as case is not in Draft state');
     }
 
     const documentIndexToDelete = parseInt(req.params.index, 10);
