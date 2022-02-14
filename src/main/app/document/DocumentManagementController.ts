@@ -18,9 +18,7 @@ export class DocumentManagerController {
   }
 
   public async post(req: AppRequest, res: Response): Promise<void> {
-    if (
-      ![State.Draft, State.AwaitingApplicant1Response, State.AwaitingClarification].includes(req.session.userCase.state)
-    ) {
+    if (![State.Draft].includes(req.session.userCase.state)) {
       throw new Error('Cannot upload new documents as case is not in Draft state');
     }
 
@@ -75,9 +73,7 @@ export class DocumentManagerController {
     const documentsUploaded =
       (req.session.userCase[documentsUploadedKey] as ListValue<Partial<AdoptionDocument> | null>[]) ?? [];
 
-    if (
-      ![State.Draft, State.AwaitingApplicant1Response, State.AwaitingClarification].includes(req.session.userCase.state)
-    ) {
+    if (![State.Draft].includes(req.session.userCase.state)) {
       throw new Error('Cannot delete documents as case is not in Draft state');
     }
 

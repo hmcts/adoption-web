@@ -1,9 +1,7 @@
-import 'jest-extended';
-
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
-import { APPLICANT_2, PROVIDE_INFORMATION_TO_THE_COURT, UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
-import { CITIZEN_APPLICANT2_UPDATE, CITIZEN_UPDATE, State } from '../case/definition';
+import { UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
+import { CITIZEN_UPDATE, State } from '../case/definition';
 
 import { DocumentManagerController } from './DocumentManagementController';
 
@@ -29,25 +27,8 @@ describe('DocumentManagerController', () => {
           field2: 'applicant1UploadedFiles',
         },
       },
-      {
-        isApplicant2: true,
-        state: State.AwaitingApplicant2Response,
-        uploadFields: {
-          field1: 'applicant2DocumentsUploaded',
-          field2: 'applicant2UploadedFiles',
-        },
-      },
-      {
-        isApplicant2: false,
-        state: State.AwaitingClarification,
-        uploadFields: {
-          field1: 'coClarificationUploadDocuments',
-          field2: 'coClarificationUploadedFiles',
-        },
-      },
-    ])('handles file uploads - %o', async ({ isApplicant2, state, uploadFields }) => {
+    ])('handles file uploads - %o', async ({ state, uploadFields }) => {
       const req = mockRequest({
-        isApplicant2,
         userCase: {
           state,
           [uploadFields.field1]: ['an-existing-doc'],
@@ -98,7 +79,7 @@ describe('DocumentManagerController', () => {
             'an-existing-doc',
           ],
         },
-        isApplicant2 ? CITIZEN_APPLICANT2_UPDATE : CITIZEN_UPDATE
+        CITIZEN_UPDATE
       );
 
       expect(res.json).toHaveBeenCalledWith([
@@ -119,29 +100,10 @@ describe('DocumentManagerController', () => {
         },
         redirectUrl: UPLOAD_YOUR_DOCUMENTS,
       },
-      {
-        isApplicant2: true,
-        state: State.AwaitingApplicant2Response,
-        uploadFields: {
-          field1: 'applicant2DocumentsUploaded',
-          field2: 'applicant2UploadedFiles',
-        },
-        redirectUrl: `${APPLICANT_2}${UPLOAD_YOUR_DOCUMENTS}`,
-      },
-      {
-        isApplicant2: false,
-        state: State.AwaitingClarification,
-        uploadFields: {
-          field1: 'coClarificationUploadDocuments',
-          field2: 'coClarificationUploadedFiles',
-        },
-        redirectUrl: PROVIDE_INFORMATION_TO_THE_COURT,
-      },
     ])(
       "redirects if browser doesn't accept JSON/has JavaScript disabled - %o",
-      async ({ isApplicant2, state, uploadFields, redirectUrl }) => {
+      async ({ state, uploadFields, redirectUrl }) => {
         const req = mockRequest({
-          isApplicant2,
           userCase: {
             state,
             [uploadFields.field1]: ['an-existing-doc'],
@@ -171,7 +133,7 @@ describe('DocumentManagerController', () => {
       }
     );
 
-    it("uploading throws an error if the case isn't in a Draft or AwaitingApplicant1Response or AwaitingClarification state as applicant 1", async () => {
+    it("uploading throws an error if the case isn't in a Draft state as applicant 1", async () => {
       const req = mockRequest({
         userCase: {
           state: State.Submitted,
@@ -182,23 +144,7 @@ describe('DocumentManagerController', () => {
       req.files = [{ originalname: 'uploaded-file.jpg' }] as unknown as Express.Multer.File[];
 
       await expect(() => documentManagerController.post(req, res)).rejects.toThrow(
-        'Cannot upload new documents as case is not in Draft or AwaitingApplicant1Response or AwaitingClarification state'
-      );
-    });
-
-    it("uploading throws an error if the case isn't in a awaiting applicant 2 response state as applicant 2", async () => {
-      const req = mockRequest({
-        isApplicant2: true,
-        userCase: {
-          state: State.Submitted,
-          applicant1DocumentsUploaded: ['an-existing-doc'],
-        },
-      });
-      const res = mockResponse();
-      req.files = [{ originalname: 'uploaded-file.jpg' }] as unknown as Express.Multer.File[];
-
-      await expect(() => documentManagerController.post(req, res)).rejects.toThrow(
-        'Cannot upload new documents as case is not in AwaitingApplicant2Response state'
+        'Cannot upload new documents as case is not in Draft state'
       );
     });
 
@@ -207,17 +153,8 @@ describe('DocumentManagerController', () => {
         isApplicant2: false,
         state: State.Draft,
       },
-      {
-        isApplicant2: true,
-        state: State.AwaitingApplicant2Response,
-      },
-      {
-        isApplicant2: false,
-        state: State.AwaitingClarification,
-      },
-    ])('throws an error if no files were uploaded - %o', async ({ state, isApplicant2 }) => {
+    ])('throws an error if no files were uploaded - %o', async ({ state }) => {
       const req = mockRequest({
-        isApplicant2,
         userCase: {
           state,
         },
@@ -239,36 +176,22 @@ describe('DocumentManagerController', () => {
         state: State.Draft,
         redirectUrl: UPLOAD_YOUR_DOCUMENTS,
       },
-      {
-        isApplicant2: true,
-        state: State.AwaitingApplicant2Response,
-        redirectUrl: `${APPLICANT_2}${UPLOAD_YOUR_DOCUMENTS}`,
-      },
-      {
-        isApplicant2: false,
-        state: State.AwaitingClarification,
-        redirectUrl: PROVIDE_INFORMATION_TO_THE_COURT,
-      },
-    ])(
-      'redirects if no files were uploaded & JavaScript is disabled - %o',
-      async ({ state, isApplicant2, redirectUrl }) => {
-        const req = mockRequest({
-          isApplicant2,
-          userCase: {
-            state,
-          },
-        });
-        const res = mockResponse();
+    ])('redirects if no files were uploaded & JavaScript is disabled - %o', async ({ state, redirectUrl }) => {
+      const req = mockRequest({
+        userCase: {
+          state,
+        },
+      });
+      const res = mockResponse();
 
-        await documentManagerController.post(req, res);
+      await documentManagerController.post(req, res);
 
-        expect(res.redirect).toHaveBeenCalledWith(redirectUrl);
+      expect(res.redirect).toHaveBeenCalledWith(redirectUrl);
 
-        expect(mockCreate).not.toHaveBeenCalled();
-        expect(req.locals.api.triggerEvent).not.toHaveBeenCalled();
-        expect(res.json).not.toHaveBeenCalled();
-      }
-    );
+      expect(mockCreate).not.toHaveBeenCalled();
+      expect(req.locals.api.triggerEvent).not.toHaveBeenCalled();
+      expect(res.json).not.toHaveBeenCalled();
+    });
 
     it.each([
       {
@@ -276,19 +199,8 @@ describe('DocumentManagerController', () => {
         state: State.Draft,
         redirectUrl: UPLOAD_YOUR_DOCUMENTS,
       },
-      {
-        isApplicant2: true,
-        state: State.AwaitingApplicant2Response,
-        redirectUrl: `${APPLICANT_2}${UPLOAD_YOUR_DOCUMENTS}`,
-      },
-      {
-        isApplicant2: false,
-        state: State.AwaitingClarification,
-        redirectUrl: PROVIDE_INFORMATION_TO_THE_COURT,
-      },
-    ])('redirects if deleting & JavaScript is disabled - %o', async ({ state, isApplicant2, redirectUrl }) => {
+    ])('redirects if deleting & JavaScript is disabled - %o', async ({ state, redirectUrl }) => {
       const req = mockRequest({
-        isApplicant2,
         userCase: {
           state,
         },
@@ -318,27 +230,8 @@ describe('DocumentManagerController', () => {
         },
         redirectUrl: UPLOAD_YOUR_DOCUMENTS,
       },
-      {
-        isApplicant2: true,
-        state: State.AwaitingApplicant2Response,
-        uploadFields: {
-          field1: 'applicant2DocumentsUploaded',
-          field2: 'applicant2UploadedFiles',
-        },
-        redirectUrl: `${APPLICANT_2}${UPLOAD_YOUR_DOCUMENTS}`,
-      },
-      {
-        isApplicant2: false,
-        state: State.AwaitingClarification,
-        uploadFields: {
-          field1: 'coClarificationUploadDocuments',
-          field2: 'coClarificationUploadedFiles',
-        },
-        redirectUrl: PROVIDE_INFORMATION_TO_THE_COURT,
-      },
-    ])('deletes an existing file - %o', async ({ isApplicant2, state, uploadFields, redirectUrl }) => {
+    ])('deletes an existing file - %o', async ({ state, uploadFields, redirectUrl }) => {
       const req = mockRequest({
-        isApplicant2,
         userCase: {
           state,
           [uploadFields.field1]: [
@@ -378,11 +271,11 @@ describe('DocumentManagerController', () => {
             },
           ],
         },
-        isApplicant2 ? CITIZEN_APPLICANT2_UPDATE : CITIZEN_UPDATE
+        CITIZEN_UPDATE
       );
 
       expect(mockDelete).toHaveBeenCalledWith({ url: 'object-of-doc-to-delete' });
-      expect(mockDelete).toHaveBeenCalledAfter(mockApiTriggerEvent);
+      //expect(mockDelete).toHaveBeenCalledAfter(mockApiTriggerEvent);
 
       expect(res.redirect).toHaveBeenCalledWith(redirectUrl);
     });
@@ -397,29 +290,11 @@ describe('DocumentManagerController', () => {
         },
         redirectUrl: UPLOAD_YOUR_DOCUMENTS,
       },
-      {
-        isApplicant2: true,
-        state: State.AwaitingApplicant2Response,
-        uploadFields: {
-          field1: 'applicant2DocumentsUploaded',
-          field2: 'applicant2UploadedFiles',
-        },
-        redirectUrl: `${APPLICANT_2}${UPLOAD_YOUR_DOCUMENTS}`,
-      },
-      {
-        isApplicant2: false,
-        state: State.AwaitingClarification,
-        uploadFields: {
-          field1: 'coClarificationUploadDocuments',
-          field2: 'coClarificationUploadedFiles',
-        },
-        redirectUrl: PROVIDE_INFORMATION_TO_THE_COURT,
-      },
     ])(
       "redirects if browser doesn't accept JSON/has JavaScript disabled - %o",
-      async ({ state, isApplicant2, uploadFields, redirectUrl }) => {
+      async ({ state, uploadFields, redirectUrl }) => {
         const req = mockRequest({
-          isApplicant2,
+          //isApplicant2,
           userCase: {
             state,
             [uploadFields.field1]: [
@@ -450,19 +325,8 @@ describe('DocumentManagerController', () => {
         state: State.Draft,
         redirectUrl: UPLOAD_YOUR_DOCUMENTS,
       },
-      {
-        isApplicant2: true,
-        state: State.AwaitingApplicant2Response,
-        redirectUrl: `${APPLICANT_2}${UPLOAD_YOUR_DOCUMENTS}`,
-      },
-      {
-        isApplicant2: false,
-        state: State.AwaitingClarification,
-        redirectUrl: PROVIDE_INFORMATION_TO_THE_COURT,
-      },
-    ])("redirects if file to deletes doesn't exist - %o", async ({ state, isApplicant2, redirectUrl }) => {
+    ])("redirects if file to deletes doesn't exist - %o", async ({ state, redirectUrl }) => {
       const req = mockRequest({
-        isApplicant2,
         userCase: {
           state,
           applicant1DocumentsUploaded: [
@@ -483,7 +347,7 @@ describe('DocumentManagerController', () => {
       expect(res.redirect).toHaveBeenCalledWith(redirectUrl);
     });
 
-    it("deleting throws an error if the case isn't in a Draft, AwaitingApplicant1Response or AwaitingClarification state", async () => {
+    it("deleting throws an error if the case isn't in a Draft state", async () => {
       const req = mockRequest({
         userCase: {
           state: State.Submitted,
@@ -497,26 +361,7 @@ describe('DocumentManagerController', () => {
       const res = mockResponse();
 
       await expect(() => documentManagerController.delete(req, res)).rejects.toThrow(
-        'Cannot delete documents as case is not in Draft, AwaitingApplicant1Response or AwaitingClarification state'
-      );
-    });
-
-    it("deleting throws an error if the case isn't in awaiting applicant 2 response state when logged in as applicant 2", async () => {
-      const req = mockRequest({
-        isApplicant2: true,
-        userCase: {
-          state: State.Submitted,
-          applicant1DocumentsUploaded: [
-            { id: '1', value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } } },
-            { id: '3', value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } } },
-          ],
-        },
-      });
-      req.params = { id: '1' };
-      const res = mockResponse();
-
-      await expect(() => documentManagerController.delete(req, res)).rejects.toThrow(
-        'Cannot delete documents as case is not in AwaitingApplicant2Response state'
+        'Cannot delete documents as case is not in Draft state'
       );
     });
   });

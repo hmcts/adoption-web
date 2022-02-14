@@ -129,6 +129,7 @@ describe('to-api-format', () => {
       childrenDateOfBirth: '2020-01-05',
       applicant1StatementOfTruth: 'No',
       applicant2StatementOfTruth: null,
+      applicant1CannotUploadSupportingDocument: [],
     });
   });
 

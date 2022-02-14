@@ -1,5 +1,5 @@
 import { Checkbox } from '../case';
-import { DivorceDocument, DocumentType } from '../definition';
+import { AdoptionDocument, DocumentType } from '../definition';
 
 import { fromApiApplicant1, fromApiApplicant2 } from './uploaded-files';
 
@@ -7,8 +7,8 @@ describe('uploadedFilesFromApiApplicant1', () => {
   it('converts documents', async () => {
     const result = fromApiApplicant1({
       applicant1DocumentsUploaded: [
-        { id: '1', value: { documentFileName: 'filename' } as DivorceDocument },
-        { id: '2', value: { documentFileName: 'filename' } as DivorceDocument },
+        { id: '1', value: { documentFileName: 'filename' } as AdoptionDocument },
+        { id: '2', value: { documentFileName: 'filename' } as AdoptionDocument },
       ],
     });
 
@@ -31,8 +31,8 @@ describe('uploadedFilesFromApiApplicant2', () => {
   it('converts documents', async () => {
     const result = fromApiApplicant2({
       applicant2DocumentsUploaded: [
-        { id: '1', value: { documentFileName: 'filename' } as DivorceDocument },
-        { id: '2', value: { documentFileName: 'filename' } as DivorceDocument },
+        { id: '1', value: { documentFileName: 'filename' } as AdoptionDocument },
+        { id: '2', value: { documentFileName: 'filename' } as AdoptionDocument },
       ],
     });
 
