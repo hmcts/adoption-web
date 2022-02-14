@@ -437,6 +437,8 @@ export interface CaseData {
   applicant1SotFullName: string;
   applicant2SotFullName: string;
   pcqId: string;
+  applicant1DocumentsUploaded: ListValue<AdoptionDocument>[];
+  applicant1CannotUploadSupportingDocument: DocumentType[];
 
   applicationType: ApplicationType;
   divorceOrDissolution: DivorceOrDissolution;
@@ -548,7 +550,6 @@ export interface CaseData {
   applicationFeeOrderSummary: OrderSummary;
   applicant1KnowsApplicant2EmailAddress: YesOrNo;
   app2ContactMethodIsDigital: YesOrNo;
-  applicant1CannotUploadSupportingDocument: DocumentType[];
   applicant2CannotUploadSupportingDocument: DocumentType[];
   documentUploadComplete: YesOrNo;
   miniApplicationLink: Document;
@@ -647,7 +648,6 @@ export interface CaseData {
   certificateOfServiceDate: DateAsString;
   successfulServedByBailiff: YesOrNo;
   reasonFailureToServeByBailiff: string;
-  applicant1DocumentsUploaded: ListValue<AdoptionDocument>[];
   applicant2DocumentsUploaded: ListValue<AdoptionDocument>[];
   divorceUnit: Court;
   documentsGenerated: ListValue<AdoptionDocument>[];
