@@ -53,4 +53,27 @@ describe('DateChildMovedInController', () => {
       expect(res.redirect).toHaveBeenCalledWith('/request');
     });
   });
+
+  describe('when there is no datehildMovedIn object', () => {
+    beforeEach(() => {
+      req = mockRequest({
+        session: {
+          userCase: {},
+          save: jest.fn(done => done()),
+        },
+      });
+      res = mockResponse();
+      controller = new DateChildMovedInController({});
+    });
+
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    test('should redirect to same page', async () => {
+      await controller.post(req, res);
+      expect(mockGetNextStepUrl).not.toHaveBeenCalled();
+      expect(res.redirect).toHaveBeenCalledWith('/request');
+    });
+  });
 });

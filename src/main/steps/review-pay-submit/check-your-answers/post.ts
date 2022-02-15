@@ -11,7 +11,6 @@ export default class DateChildMovedInController extends PostController<AnyObject
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     req.session.errors = [];
     if (req.session.userCase.dateChildMovedIn === undefined) {
-      console.log(req.session.userCase.dateChildMovedIn);
       req.session.errors.push({ errorType: 'lessThanTenWeeks', propertyName: 'dateChildMovedIn' });
       this.redirect(req, res, req.url);
       return;
