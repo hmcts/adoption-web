@@ -36,12 +36,7 @@
                                             {{section1details2}}
                                         </a>
                                     </span>
-
-                                    {% if status.dateChildMovedIn %}
-                                        <strong class="govuk-tag app-task-list__tag" id="eligibility-completed">completed</strong>
-                                    {% else %}
-                                        <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
-                                    {% endif %}
+                                    <p class="govuk-body">{{ status.dateChildMovedIn | safe }}</p>
                                 </li>
 
                                 <!-- **************************************** 2. Add applicants' details **************************************** -->

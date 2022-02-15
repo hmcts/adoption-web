@@ -345,17 +345,10 @@ export const getReviewPaySubmitUrl = (userCase: CaseWithId): string => {
   }
   return urls.EQUALITY;
 };
-export const getDateChildMovedInStatus = (userCase: CaseWithId): SectionStatus => {
-  // const dateChildMovedIn = new Date(toApiDate(userCase?.dateChildMovedIn));
-  const dateChildMovedIn = userCase?.dateChildMovedIn as CaseDate;
-  if (dateChildMovedIn === undefined) {
-    return SectionStatus.NOT_STARTED;
-  }
-  const dateChildMovedInComplete = dateChildMovedIn?.day && dateChildMovedIn?.month && dateChildMovedIn?.year;
 
-  return dateChildMovedInComplete
-    ? SectionStatus.COMPLETED
-    : !dateChildMovedInComplete
-    ? SectionStatus.NOT_STARTED
-    : SectionStatus.IN_PROGRESS;
+export const getDateChildMovedInStatus = (userCase: CaseWithId): SectionStatus => {
+  const dateChildMovedIn = userCase.dateChildMovedIn as CaseDate;
+  const dateChildMovedInComplete = !!(dateChildMovedIn?.day && dateChildMovedIn.month && dateChildMovedIn.year);
+
+  return dateChildMovedInComplete ? SectionStatus.COMPLETED : SectionStatus.NOT_STARTED;
 };
