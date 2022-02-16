@@ -250,20 +250,24 @@ export const getSiblingStatus = (userCase: CaseWithId): SectionStatus => {
   const exists = userCase.hasSiblings;
   if (exists === YesNoNotsure.NO || exists === YesNoNotsure.NOT_SURE) {
     return SectionStatus.COMPLETED;
-  } else if (exists === YesNoNotsure.YES) {
+  }
+  if (exists === YesNoNotsure.YES) {
     const courtOrderExists = userCase.hasPoForSiblings;
     if (courtOrderExists === YesNoNotsure.NO || courtOrderExists === YesNoNotsure.NOT_SURE) {
       return SectionStatus.COMPLETED;
-    } else if (courtOrderExists === YesNoNotsure.YES) {
-      const siblingsComplete = userCase.siblings?.every(
-        item =>
-          item.siblingFirstName &&
-          item.siblingLastNames &&
-          item.siblingPlacementOrders?.length &&
-          (item.siblingPlacementOrders as PlacementOrder[]).every(
-            po => po.placementOrderType && po.placementOrderNumber && po.placementOrderId
-          )
-      );
+    }
+    if (courtOrderExists === YesNoNotsure.YES) {
+      const siblingsComplete =
+        userCase.siblings?.length &&
+        userCase.siblings?.every(
+          item =>
+            item.siblingFirstName &&
+            item.siblingLastNames &&
+            item.siblingPlacementOrders?.length &&
+            (item.siblingPlacementOrders as PlacementOrder[]).every(
+              po => po.placementOrderType && po.placementOrderNumber && po.placementOrderId
+            )
+        );
       return siblingsComplete ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
     }
     return SectionStatus.IN_PROGRESS;
@@ -344,4 +348,11 @@ export const getReviewPaySubmitUrl = (userCase: CaseWithId): string => {
     }
   }
   return urls.EQUALITY;
+};
+
+export const getDateChildMovedInStatus = (userCase: CaseWithId): SectionStatus => {
+  const dateChildMovedIn = userCase.dateChildMovedIn as CaseDate;
+  const dateChildMovedInComplete = !!(dateChildMovedIn?.day && dateChildMovedIn.month && dateChildMovedIn.year);
+
+  return dateChildMovedInComplete ? SectionStatus.COMPLETED : SectionStatus.NOT_STARTED;
 };

@@ -78,6 +78,7 @@ describe('from-api-format', () => {
         },
       ],
       applicant1DateOfBirth: '2000-01-20',
+      dateChildMovedIn: '2021-01-01',
       applicant2DateOfBirth: '',
       childrenDateOfBirth: '2020-01-05',
       applicant1StatementOfTruth: 'No',
@@ -85,6 +86,7 @@ describe('from-api-format', () => {
     } as unknown as CaseData);
 
     expect(adoptionFormat).toStrictEqual({
+      dateChildMovedIn: { day: '1', month: '1', year: '2021' },
       applicant1AdditionalNames: [{ id: 'MOCK_ID', firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' }],
       applicant2AdditionalNames: [{ id: 'MOCK_ID', firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' }],
       applicant1AdditionalNationalities: ['MOCK_COUNTRY'],

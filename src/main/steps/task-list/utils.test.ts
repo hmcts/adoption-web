@@ -17,6 +17,7 @@ import {
   getChildrenBirthCertificateStatus,
   getChildrenPlacementOrderStatus,
   getContactDetailsStatus,
+  getDateChildMovedInStatus,
   getOtherParentStatus,
   getPersonalDetailsStatus,
   getSiblingStatus,
@@ -852,6 +853,20 @@ describe('utils', () => {
       },
     ])('should return correct status %o', async ({ data, expected }) => {
       expect(getSiblingStatus({ ...userCase, ...data })).toBe(expected);
+    });
+  });
+
+  describe('getDateChildMovedInStatus', () => {
+    test.each([
+      { data: {}, expected: 'NOT_STARTED' },
+      {
+        data: {
+          dateChildMovedIn: { day: '1', month: '1', year: '2020' },
+        },
+        expected: COMPLETED,
+      },
+    ])('should return correct status %o', async ({ data, expected }) => {
+      expect(getDateChildMovedInStatus({ ...userCase, ...data })).toBe(expected);
     });
   });
 });
