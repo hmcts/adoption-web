@@ -3,8 +3,8 @@ import { YesNoNotsure, YesOrNo } from '../../app/case/definition';
 import { siblingSequence } from './siblingSequence';
 
 describe('siblingSequence', () => {
-  test('should contain 8 entries in sibling screen sequence', () => {
-    expect(siblingSequence).toHaveLength(8);
+  test('should contain 9 entries in sibling screen sequence', () => {
+    expect(siblingSequence).toHaveLength(9);
 
     expect(siblingSequence[0].url).toBe('/sibling/exists');
     expect(siblingSequence[0].showInSection).toBe('aboutSibling');
@@ -48,5 +48,9 @@ describe('siblingSequence', () => {
     expect(siblingSequence[7].url).toBe('/sibling/placement-order-check-your-answers');
     expect(siblingSequence[7].showInSection).toBe('aboutSibling');
     expect(siblingSequence[7].getNextStep({})).toBe('/sibling/summary');
+
+    expect(siblingSequence[8].url).toBe('/sibling/remove-placement-order');
+    expect(siblingSequence[8].showInSection).toBe('aboutSibling');
+    expect(siblingSequence[8].getNextStep({})).toBe('/sibling/summary');
   });
 });

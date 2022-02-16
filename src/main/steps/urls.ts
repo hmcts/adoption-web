@@ -63,6 +63,7 @@ export const SIBLING_ORDER_CASE_NUMBER: PageLink = `${SIBLING}/placement-order-n
 export const SIBLING_ORDER_SUMMARY: PageLink = `${SIBLING}/summary`;
 export const SIBLING_SELECT: PageLink = `${SIBLING}/select-sibling`;
 export const SIBLING_ORDER_CHECK_YOUR_ANSWERS: PageLink = `${SIBLING}/placement-order-check-your-answers`;
+export const SIBLING_REMOVE_PLACEMENT_ORDER: PageLink = `${SIBLING}/remove-placement-order`;
 
 export const BIRTH_MOTHER: PageLink = '/birth-mother';
 export const BIRTH_MOTHER_FULL_NAME: PageLink = `${BIRTH_MOTHER}/full-name`;
