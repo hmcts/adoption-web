@@ -34,7 +34,7 @@ module.exports = {
   },
   uploadDocument: {
     uploadDocumentLink: 'a[href$="upload-your-documents"]',
-    uploadDocumentStatus: 'strong[id$="document-upload-completed"]',
+    uploadDocumentStatus: 'strong[id$="upload-your-documents-status"]',
   },
 
   async goToTaskListPage() {
