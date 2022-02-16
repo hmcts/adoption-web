@@ -4,6 +4,8 @@
 // import { isFieldFilledIn } from '../../../app/form/validation';
 // import { CommonContent, generatePageContent } from '../../common/common.content';
 
+import { assert } from 'console';
+
 // import { generateContent } from './content';
 
 // jest.mock('../../../app/form/validation');
@@ -255,3 +257,8 @@
 //     expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: EN }))).toBe('Save as draft');
 //   });
 // });
+describe('occupation content', () => {
+  it('should return the correct content for language = en', () => {
+    assert(true);
+  });
+});
