@@ -1,5 +1,5 @@
 import { PlacementOrder } from '../../../app/case/definition';
-import { SIBLING_ORDER_CHECK_YOUR_ANSWERS } from '../../../steps/urls';
+import { SIBLING_ORDER_CHECK_YOUR_ANSWERS, SIBLING_REMOVE_PLACEMENT_ORDER } from '../../../steps/urls';
 
 const isPlacementOrderComplete = placementOrder => {
   return placementOrder.placementOrderType && placementOrder.placementOrderNumber;
@@ -21,7 +21,7 @@ export const placementOrderListItems = (siblingId: string, placementOrders: Plac
         classes: 'summary-list-actions',
         items: [
           {
-            href: `${SIBLING_ORDER_CHECK_YOUR_ANSWERS}?remove=${item.placementOrderId}`,
+            href: `${SIBLING_REMOVE_PLACEMENT_ORDER}?remove=${siblingId}/${item.placementOrderId}`,
             text: content.remove,
             visuallyHiddenText: 'remove',
           },
