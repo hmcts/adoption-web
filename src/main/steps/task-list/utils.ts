@@ -366,3 +366,10 @@ export const getUploadDocumentStatus = (userCase: CaseWithId): SectionStatus => 
 
   return SectionStatus.COMPLETED;
 };
+
+export const getDateChildMovedInStatus = (userCase: CaseWithId): SectionStatus => {
+  const dateChildMovedIn = userCase.dateChildMovedIn as CaseDate;
+  const dateChildMovedInComplete = !!(dateChildMovedIn?.day && dateChildMovedIn.month && dateChildMovedIn.year);
+
+  return dateChildMovedInComplete ? SectionStatus.COMPLETED : SectionStatus.NOT_STARTED;
+};

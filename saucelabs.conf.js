@@ -111,6 +111,7 @@ const setupConfig = {
     childSiblingDetailsPage: './src/test/e2e/pages/childSiblingDetails.page.js',
     reviewPayAndSubmitPage: './src/test/e2e/pages/reviewPayAndSubmit.page.js',
     uploadDocumentsDetailsPage: './src/test/e2e/pages/uploadDocumentsDetails.page.js',
+    dateChildMovedinDetailsPage: './src/test/e2e/pages/dateChildMovedinDetails.page.js',
   },
   mocha: {
     reporterOptions: {

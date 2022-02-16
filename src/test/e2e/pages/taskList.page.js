@@ -29,6 +29,8 @@ module.exports = {
     childrenSiblingLink: 'a[href$="/sibling/exists"]',
     childrenSiblingDetailsStatus: 'strong[id$="sibling-status"]',
     reviewPayAndSubmitLink: 'a[id="review-pay-and-submit"]',
+    dateChildMovedInLink: 'a[id$="date-child-moved-in"]',
+    dateChildMovedInDetailsStatus: 'strong[id$="date-child-moved-in-status"]',
   },
   uploadDocument: {
     uploadDocumentLink: 'a[href$="upload-your-documents"]',
@@ -139,5 +141,13 @@ module.exports = {
 
   async verifyUploadDocumentsStatus() {
     await I.see('COMPLETED', this.uploadDocument.uploadDocumentStatus);
+  },
+
+  async selectDateChildMovedInDetails() {
+    await I.click(this.childDetails.dateChildMovedInLink);
+  },
+
+  async verifyDateChildMovedInStatus() {
+    await I.see('COMPLETED', this.childDetails.dateChildMovedInDetailsStatus);
   },
 };
