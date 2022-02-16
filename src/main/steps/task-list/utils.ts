@@ -345,3 +345,31 @@ export const getReviewPaySubmitUrl = (userCase: CaseWithId): string => {
   }
   return urls.EQUALITY;
 };
+
+export const getUploadDocumentStatus = (userCase: CaseWithId): SectionStatus => {
+  // const exists = userCase.applicant1UploadedFiles;
+
+  // if (exists === YesOrNo.NO) {
+  //   return SectionStatus.COMPLETED;
+  // } else if (exists === YesOrNo.YES) {
+  //   const names = userCase.otherParentFirstNames && userCase.otherParentLastNames;
+  //   const addressKnown = userCase.otherParentAddressKnown;
+  //   if (addressKnown === YesOrNo.NO) {
+  //     return names ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
+  //   } else {
+  //     return names && addressKnown === YesOrNo.YES && addressComplete(userCase, FieldPrefix.OTHER_PARENT)
+  //       ? SectionStatus.COMPLETED
+  //       : SectionStatus.IN_PROGRESS;
+  //   }
+  // }
+  console.log(userCase.addAnotherNameHidden);
+
+  return SectionStatus.COMPLETED;
+};
+
+export const getDateChildMovedInStatus = (userCase: CaseWithId): SectionStatus => {
+  const dateChildMovedIn = userCase.dateChildMovedIn as CaseDate;
+  const dateChildMovedInComplete = !!(dateChildMovedIn?.day && dateChildMovedIn.month && dateChildMovedIn.year);
+
+  return dateChildMovedInComplete ? SectionStatus.COMPLETED : SectionStatus.NOT_STARTED;
+};

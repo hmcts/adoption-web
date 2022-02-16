@@ -305,6 +305,7 @@ export interface PlacementOrder {
 
 export interface CaseData {
   applyingWith: ApplyingWith;
+  dateChildMovedIn?: DateAsString;
   applicant1FirstName: string;
   applicant1LastName: string;
   applicant1Email: string;

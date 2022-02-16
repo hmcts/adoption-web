@@ -30,16 +30,13 @@
                                     {% endif %}
                                 </li>
 
-                                <!-- Choose family court -->
                                 <li class="app-task-list__item">
                                     <span class="app-task-list__task-name">
-                                        <a id="date-child-moved-in" href="#" class="govuk-link">{{section1details2}}</a>
+                                        <a id="date-child-moved-in" href="{{urls.dateChildMovedIn}}" class="govuk-link">
+                                            {{section1details2}}
+                                        </a>
                                     </span>
-                                    {% if data['court-finder'] %}
-                                        <strong class="govuk-tag  app-task-list__tag" id="eligibility-completed">Completed</strong>
-                                    {% else %}
-                                        <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
-                                    {% endif %}
+                                    <p class="govuk-body">{{ status.dateChildMovedIn | safe }}</p>
                                 </li>
 
                                 <!-- **************************************** 2. Add applicants' details **************************************** -->
@@ -244,19 +241,14 @@
         <ul class="app-task-list__items">
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
-                    <a href="upload-your-documents" href="{{urls.uploadYourDocuments}}" class="govuk-link">
+                    <a href="upload-your-documents" href="{{urls.uploadYourDocuments}}" class="govuk-link" aria-describedby="eligibility-completed">
                         {{section5link1}}
                     </a>
                 </span>
-                {% if data['payment-declaration'] %}
-                    <strong class="govuk-tag  app-task-list__tag" id="eligibility-completed">Completed</strong>
-                {% else %}
-                    <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
-                {% endif %}
+                <p class="govuk-body">{{ status.uploadDocuments | safe }}</p>
             </li>
         </ul>
     </li>
-
     <!-- **************************************** 6. Review application, pay and send **************************************** -->
     <li>
         <h2 class="app-task-list__section">
