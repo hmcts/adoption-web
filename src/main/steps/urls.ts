@@ -15,6 +15,7 @@ export const APPLICATION_ENDED: PageLink = '/application-ended';
 export const TASK_LIST_URL: PageLink = '/task-list';
 
 export const APPLYING_WITH_URL: PageLink = '/applying-with';
+export const DATE_CHILD_MOVED_IN: PageLink = '/date-child-moved-in';
 
 export const APPLICANT_1: PageLink = '/applicant1';
 export const APPLICANT_1_FULL_NAME: PageLink = `${APPLICANT_1}/full-name`;
