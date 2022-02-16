@@ -16,6 +16,7 @@ import {
   getPersonalDetailsStatus,
   getReviewPaySubmitUrl,
   getSiblingStatus,
+  getUploadDocumentStatus,
   isApplyingWithComplete,
 } from './utils';
 
@@ -141,6 +142,11 @@ const en = content => {
         getAdoptionAgencyDetailStatus(content.userCase),
         statuses,
         'statement-of-truth'
+      ),
+      uploadDocuments: getSectionStatusLabel(
+        getUploadDocumentStatus(content.userCase),
+        statuses,
+        'upload-your-documents'
       ),
     },
     urls: urls(content),

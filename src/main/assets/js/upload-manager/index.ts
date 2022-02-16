@@ -25,9 +25,34 @@ const initUploadManager = (): void => {
   const uppy = new Uppy({
     restrictions: {
       maxFileSize: 10485760,
-      maxNumberOfFiles: 5,
-      allowedFileTypes: ['image/jpeg', 'image/tiff', 'image/png', 'application/pdf'],
+      maxNumberOfFiles: 10,
+      allowedFileTypes: ['image/jpeg', 'image/tiff', 'image/png', 'application/pdf', 'image/bmp'],
     },
+    // onBeforeFileAdded: (currentFile, files) => {
+    //   // console.log("****1: "+JSON.stringify(files));
+    //   // console.log("****2: "+JSON.stringify(currentFile));
+    //   console.log("****1: "+JSON.stringify(files));
+    //   console.log("****2: "+JSON.stringify(uploadedFiles));
+    //   console.log("****3: "+JSON.stringify(currentFile));
+    //   console.log("****4: "+JSON.stringify(fileUploadEvents));
+    //   if (currentFile.name != 'a.jpg') {
+    //     return false;
+    //   }
+    // },
+
+    // onBeforeUpload: (files) => {
+    //   if((uploadedFiles.length+1)>2){
+    //     console.log("****issue: can't upload : "+(uploadedFiles.length+1));
+    //     throw new Error('exceeds maximum allowed size');//fileUploadEvents.onError+'');
+    //     //return false;
+    //   }
+    //   console.log("****1: "+JSON.stringify(files));
+    //   console.log("****2: "+files.length);
+    //   console.log("****3: "+JSON.stringify(uploadedFiles));
+    //   console.log("****4: "+uploadedFiles.length);
+    //   return true;
+
+    // },
   });
 
   const uploadedFiles = new UploadedFiles();
