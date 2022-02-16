@@ -27,7 +27,7 @@ describe('DateChildMovedInController', () => {
     req = mockRequest({
       session: {
         userCase: {
-          dateChildMovedIn: { year: '2022', month: '2', day: '1' },
+          dateChildMovedIn: { year: '2021', month: '1', day: '1' },
         },
         save: jest.fn(done => done()),
       },
@@ -36,11 +36,34 @@ describe('DateChildMovedInController', () => {
     controller = new DateChildMovedInController({});
   });
 
-  describe('when there are form errors', () => {
+  describe('next page', () => {
     beforeEach(() => {
       mockGetParsedBody.mockReturnValue({});
       mockGetErrors.mockReturnValue(['MOCK_ERROR']);
       mockGetNextStepUrl.mockReturnValue('/MOCK_ENDPOINT');
+    });
+
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    test('should redirect to next page', async () => {
+      await controller.post(req, res);
+      expect(mockGetNextStepUrl).not.toHaveBeenCalled();
+      expect(res.redirect).toHaveBeenCalledWith('/review-pay-submit/statement-of-truth');
+    });
+  });
+
+  describe('when there are form errors', () => {
+    beforeEach(() => {
+      req = mockRequest({
+        session: {
+          userCase: { dateChildMovedIn: { year: '2022', month: '2', day: '1' } },
+          save: jest.fn(done => done()),
+        },
+      });
+      res = mockResponse();
+      controller = new DateChildMovedInController({});
     });
 
     afterEach(() => {
@@ -54,7 +77,7 @@ describe('DateChildMovedInController', () => {
     });
   });
 
-  describe('when there is no datehildMovedIn object', () => {
+  describe('when there is no dateChildMovedIn object', () => {
     beforeEach(() => {
       req = mockRequest({
         session: {

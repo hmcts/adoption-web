@@ -5,6 +5,7 @@ import moment from 'moment';
 import { toApiDate } from '../../../app/case/to-api-format';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
+import { STATEMENT_OF_TRUTH } from '../../../steps/urls';
 
 @autobind
 export default class DateChildMovedInController extends PostController<AnyObject> {
@@ -21,6 +22,9 @@ export default class DateChildMovedInController extends PostController<AnyObject
     if (days < 70) {
       req.session.errors.push({ errorType: 'lessThanTenWeeks', propertyName: 'dateChildMovedIn' });
       this.redirect(req, res, req.url);
+      return;
+    } else {
+      this.redirect(req, res, STATEMENT_OF_TRUTH);
       return;
     }
   }
