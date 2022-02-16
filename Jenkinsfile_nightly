@@ -56,7 +56,6 @@ withNightlyPipeline(type, product, component) {
   enableCrossBrowserTest(['firefox'])
   enableFullFunctionalTest(120)
   loadVaultSecrets(secrets)
-  enableFortifyScan()
 
 
   after('test') {
@@ -77,9 +76,5 @@ withNightlyPipeline(type, product, component) {
 
   after('fullFunctionalTest') {
     archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
-  }
-
-  after('fortify-scan') {
-    steps.archiveArtifacts allowEmptyArchive: true, artifacts: '**/Fortify Scan/**/*'
   }
 }
