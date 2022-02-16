@@ -49,4 +49,9 @@ export const siblingSequence: Step[] = [
     showInSection: Sections.AboutSibling,
     getNextStep: () => `${Urls.SIBLING_ORDER_SUMMARY}`,
   },
+  {
+    url: Urls.SIBLING_REMOVE_PLACEMENT_ORDER,
+    showInSection: Sections.AboutSibling,
+    getNextStep: () => `${Urls.SIBLING_ORDER_SUMMARY}`,
+  },
 ];
