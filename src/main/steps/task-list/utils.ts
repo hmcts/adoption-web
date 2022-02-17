@@ -351,24 +351,30 @@ export const getReviewPaySubmitUrl = (userCase: CaseWithId): string => {
 };
 
 export const getUploadDocumentStatus = (userCase: CaseWithId): SectionStatus => {
-  // const exists = userCase.applicant1UploadedFiles;
-
-  // if (exists === YesOrNo.NO) {
-  //   return SectionStatus.COMPLETED;
-  // } else if (exists === YesOrNo.YES) {
-  //   const names = userCase.otherParentFirstNames && userCase.otherParentLastNames;
-  //   const addressKnown = userCase.otherParentAddressKnown;
-  //   if (addressKnown === YesOrNo.NO) {
-  //     return names ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
-  //   } else {
-  //     return names && addressKnown === YesOrNo.YES && addressComplete(userCase, FieldPrefix.OTHER_PARENT)
-  //       ? SectionStatus.COMPLETED
-  //       : SectionStatus.IN_PROGRESS;
-  //   }
-  // }
-  console.log(userCase.addAnotherNameHidden);
-
-  return SectionStatus.COMPLETED;
+  if (
+    userCase?.applicant1UploadedFiles &&
+    userCase.applicant1UploadedFiles.length > 0 &&
+    !userCase.applicant1CannotUpload
+  ) {
+    return SectionStatus.COMPLETED;
+  } else if (
+    userCase?.applicant1UploadedFiles &&
+    userCase.applicant1UploadedFiles.length > 0 &&
+    userCase.applicant1CannotUpload
+  ) {
+    if (userCase.applicant1CannotUploadDocuments && userCase.applicant1CannotUploadDocuments.length > 0) {
+      return SectionStatus.COMPLETED;
+    } else {
+      return SectionStatus.IN_PROGRESS;
+    }
+  } else if (
+    userCase.applicant1CannotUpload &&
+    userCase?.applicant1CannotUploadDocuments &&
+    userCase.applicant1CannotUploadDocuments.length > 0
+  ) {
+    return SectionStatus.COMPLETED;
+  }
+  return SectionStatus.NOT_STARTED;
 };
 
 export const getDateChildMovedInStatus = (userCase: CaseWithId): SectionStatus => {
