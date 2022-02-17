@@ -17,6 +17,12 @@ describe('siblingSequence', () => {
     expect(siblingSequence[1].getNextStep({ hasPoForSiblings: YesNoNotsure.YES })).toBe('/sibling/name');
     expect(
       siblingSequence[1].getNextStep({ hasPoForSiblings: YesNoNotsure.YES, siblings: [{ siblingId: 'MOCK_ID' }] })
+    ).toBe('/sibling/name');
+    expect(
+      siblingSequence[1].getNextStep({
+        hasPoForSiblings: YesNoNotsure.YES,
+        siblings: [{ siblingId: 'MOCK_ID', siblingFirstName: 'MOCK_FIRST_NAME', siblingLastNames: 'MOCK_LAST_NAME' }],
+      })
     ).toBe('/sibling/summary');
     expect(siblingSequence[1].getNextStep({ hasPoForSiblings: YesNoNotsure.NO })).toBe('/task-list');
     expect(siblingSequence[1].getNextStep({ hasPoForSiblings: YesNoNotsure.NOT_SURE })).toBe('/task-list');
