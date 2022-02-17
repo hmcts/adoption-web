@@ -20,10 +20,10 @@ describe('uploadedFilesFromApiApplicant1', () => {
 
   it('sets cannot upload', async () => {
     const result = fromApiApplicant1({
-      applicant1CannotUploadSupportingDocument: [DocumentType.MARRIAGE_CERTIFICATE],
+      applicant1CannotUploadSupportingDocument: [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE],
     });
 
-    expect(result.applicant1CannotUpload).toBe(Checkbox.Checked);
+    expect(result.applicant1CannotUpload).toBe(Checkbox.Unchecked);
   });
 });
 
@@ -44,7 +44,7 @@ describe('uploadedFilesFromApiApplicant2', () => {
 
   it('sets cannot upload', async () => {
     const result = fromApiApplicant2({
-      applicant2CannotUploadSupportingDocument: [DocumentType.MARRIAGE_CERTIFICATE],
+      applicant2CannotUploadSupportingDocument: [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE],
     });
 
     expect(result.applicant2CannotUpload).toBe(Checkbox.Checked);
