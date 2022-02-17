@@ -123,6 +123,7 @@ export const form: FormContent = {
       value: DocumentType.DEATH_CERTIFICATE,
     });
 
+    console.log('applicant1CannotUpload', userCase.applicant1CannotUpload);
     return {
       applicant1UploadedFiles: {
         type: 'hidden',

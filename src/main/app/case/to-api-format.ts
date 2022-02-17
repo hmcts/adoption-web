@@ -126,6 +126,12 @@ const fields: ToApiConverters = {
       ? setUnreachableAnswersToNull(['applicant1HWFAppliedForFees', 'applicant1HWFReferenceNumber'])
       : {}),
   }),
+  applicant1CannotUpload: data => {
+    console.log('to data.applicant1CannotUpload', data.applicant1CannotUpload);
+    return {
+      applicant1CannotUpload: checkboxConverter(data.applicant1CannotUpload),
+    };
+  },
 };
 
 export const toApiDate = (date: CaseDate | undefined): string => {

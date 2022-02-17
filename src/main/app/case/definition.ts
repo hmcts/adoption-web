@@ -439,6 +439,7 @@ export interface CaseData {
   pcqId: string;
   applicant1DocumentsUploaded: ListValue<AdoptionDocument>[];
   applicant1CannotUploadSupportingDocument: DocumentType[];
+  applicant1CannotUpload: string;
 
   applicationType: ApplicationType;
   labelContentApplicant2: string;
