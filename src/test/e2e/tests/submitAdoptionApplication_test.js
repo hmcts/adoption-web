@@ -19,6 +19,7 @@ Scenario(
     primaryApplicantDetailsPage,
     primaryApplicantPersonalDetailsPage,
     reviewPayAndSubmitPage,
+    dateChildMovedinDetailsPage,
   }) => {
     await loginPage.createCitizenUserAndSignIn();
     await landingPage.seeTheLandingPage();
@@ -68,6 +69,10 @@ Scenario(
     await taskListPage.selectSiblingDetails();
     await childSiblingDetailsPage.childDetailsSiblingSection();
     await taskListPage.verifySiblingDetailsStatus();
+
+    await taskListPage.selectDateChildMovedInDetails();
+    await dateChildMovedinDetailsPage.dateChildMovedInSection();
+    await taskListPage.verifyDateChildMovedInStatus();
 
     await taskListPage.selectReviewPayAndSubmitDetails();
     await reviewPayAndSubmitPage.reviewPayAndSubmitDetailsSection();

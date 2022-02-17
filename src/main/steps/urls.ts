@@ -15,6 +15,7 @@ export const APPLICATION_ENDED: PageLink = '/application-ended';
 export const TASK_LIST_URL: PageLink = '/task-list';
 
 export const APPLYING_WITH_URL: PageLink = '/applying-with';
+export const DATE_CHILD_MOVED_IN: PageLink = '/date-child-moved-in';
 
 export const APPLICANT_1: PageLink = '/applicant1';
 export const APPLICANT_1_FULL_NAME: PageLink = `${APPLICANT_1}/full-name`;
@@ -62,6 +63,7 @@ export const SIBLING_ORDER_CASE_NUMBER: PageLink = `${SIBLING}/placement-order-n
 export const SIBLING_ORDER_SUMMARY: PageLink = `${SIBLING}/summary`;
 export const SIBLING_SELECT: PageLink = `${SIBLING}/select-sibling`;
 export const SIBLING_ORDER_CHECK_YOUR_ANSWERS: PageLink = `${SIBLING}/placement-order-check-your-answers`;
+export const SIBLING_REMOVE_PLACEMENT_ORDER: PageLink = `${SIBLING}/remove-placement-order`;
 
 export const BIRTH_MOTHER: PageLink = '/birth-mother';
 export const BIRTH_MOTHER_FULL_NAME: PageLink = `${BIRTH_MOTHER}/full-name`;

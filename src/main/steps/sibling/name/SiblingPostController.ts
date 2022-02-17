@@ -24,7 +24,9 @@ export default class SiblingPostController extends PostController<AnyObject> {
       this.handleSelectOrAddSiblingAction(req, formData, req.session.errors.length);
     } else {
       sibling = req.session.userCase.siblings?.find(item => item.siblingId === req.session.userCase.selectedSiblingId);
-      Object.assign(sibling, formData);
+      if (sibling) {
+        Object.assign(sibling, formData);
+      }
     }
 
     this.filterErrorsForSaveAsDraft(req);

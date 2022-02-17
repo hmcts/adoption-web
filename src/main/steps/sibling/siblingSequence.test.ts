@@ -3,8 +3,8 @@ import { YesNoNotsure, YesOrNo } from '../../app/case/definition';
 import { siblingSequence } from './siblingSequence';
 
 describe('siblingSequence', () => {
-  test('should contain 8 entries in sibling screen sequence', () => {
-    expect(siblingSequence).toHaveLength(8);
+  test('should contain 9 entries in sibling screen sequence', () => {
+    expect(siblingSequence).toHaveLength(9);
 
     expect(siblingSequence[0].url).toBe('/sibling/exists');
     expect(siblingSequence[0].showInSection).toBe('aboutSibling');
@@ -17,6 +17,12 @@ describe('siblingSequence', () => {
     expect(siblingSequence[1].getNextStep({ hasPoForSiblings: YesNoNotsure.YES })).toBe('/sibling/name');
     expect(
       siblingSequence[1].getNextStep({ hasPoForSiblings: YesNoNotsure.YES, siblings: [{ siblingId: 'MOCK_ID' }] })
+    ).toBe('/sibling/name');
+    expect(
+      siblingSequence[1].getNextStep({
+        hasPoForSiblings: YesNoNotsure.YES,
+        siblings: [{ siblingId: 'MOCK_ID', siblingFirstName: 'MOCK_FIRST_NAME', siblingLastNames: 'MOCK_LAST_NAME' }],
+      })
     ).toBe('/sibling/summary');
     expect(siblingSequence[1].getNextStep({ hasPoForSiblings: YesNoNotsure.NO })).toBe('/task-list');
     expect(siblingSequence[1].getNextStep({ hasPoForSiblings: YesNoNotsure.NOT_SURE })).toBe('/task-list');
@@ -48,5 +54,9 @@ describe('siblingSequence', () => {
     expect(siblingSequence[7].url).toBe('/sibling/placement-order-check-your-answers');
     expect(siblingSequence[7].showInSection).toBe('aboutSibling');
     expect(siblingSequence[7].getNextStep({})).toBe('/sibling/summary');
+
+    expect(siblingSequence[8].url).toBe('/sibling/remove-placement-order');
+    expect(siblingSequence[8].showInSection).toBe('aboutSibling');
+    expect(siblingSequence[8].getNextStep({})).toBe('/sibling/summary');
   });
 });
