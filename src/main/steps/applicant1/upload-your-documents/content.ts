@@ -4,7 +4,7 @@ import { Checkbox } from '../../../app/case/case';
 import { DocumentType } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
-import { atLeastOneFieldIsChecked } from '../../../app/form/validation';
+import { ValidationError, atLeastOneFieldIsChecked } from '../../../app/form/validation';
 
 const en = () => {
   return {
@@ -41,14 +41,14 @@ const en = () => {
 
     errors: {
       applicant1UploadedFiles: {
-        notUploaded:
+        [ValidationError.NOT_UPLOADED]:
           'You have not provided any information or uploaded any documents. You need to provide the information or documents the court has requested. Or if you are going to post any documents in, select that option.',
         errorUploading:
           'Your file was not uploaded because the service is experiencing technical issues. Try uploading your file again.',
         fileSizeTooBig: 'The file you have uploaded is too large. Reduce it to under 10MB and try uploading it again.',
         fileWrongFormat:
           'You cannot upload that format of file. Save the file as one of the accepted formats and try uploading it again.',
-        maxTenFileUpload: 'You can upload maximum 10 files.',
+        [ValidationError.FILE_COUNT_LIMIT_EXCEEDED]: 'You can upload maximum 10 files.',
       },
       applicant1CannotUpload: {
         required: 'Select which file you could not upload before continuing.',
@@ -92,7 +92,7 @@ const cy = () => {
 
     errors: {
       applicant1UploadedFiles: {
-        notUploaded:
+        [ValidationError.NOT_UPLOADED]:
           'You have not provided any information or uploaded any documents. You need to provide the information or documents the court has requested. Or if you are going to post any documents in, select that option. (in welsh)',
         errorUploading:
           'Your file was not uploaded because the service is experiencing technical issues. Try uploading your file again. (in welsh)',
@@ -100,7 +100,7 @@ const cy = () => {
           'The file you have uploaded is too large. Reduce it to under 10MB and try uploading it again. (in welsh)',
         fileWrongFormat:
           'You cannot upload that format of file. Save the file as one of the accepted formats and try uploading it again. (in welsh)',
-        maxTenFileUpload: 'You can upload maximum 10 files. (in welsh)',
+        [ValidationError.FILE_COUNT_LIMIT_EXCEEDED]: 'You can upload maximum 10 files. (in welsh)',
       },
       applicant1CannotUpload: {
         required: 'Select which file you could not upload before continuing. (in welsh)',
@@ -139,11 +139,11 @@ export const form: FormContent = {
           const selectedCannotUploadDocuments =
             formData.applicant1CannotUpload && !!formData.applicant1CannotUploadDocuments?.length;
           if (!hasUploadedFiles && !selectedCannotUploadDocuments) {
-            return 'notUploaded';
+            return ValidationError.NOT_UPLOADED;
           }
           const fileArray = JSON.parse((formData as Record<string, string>).applicant1UploadedFiles || '[]');
           if (Object.keys(fileArray).length > 10) {
-            return 'maxTenFileUpload';
+            return ValidationError.FILE_COUNT_LIMIT_EXCEEDED;
           }
         },
       },
