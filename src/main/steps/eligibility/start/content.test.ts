@@ -40,9 +40,7 @@ describe('start content', () => {
       'your marriage or civil partnership certificate, in English or Welsh'
     );
     expect(generatedContent.bulletPoint9).toEqual("your spouse or civil partner's death certificate");
-    expect(generatedContent.bulletPoint10).toEqual(
-      'a decree absolute of divorce or decree of nullity of your marriage'
-    );
+    expect(generatedContent.bulletPoint10).toEqual('adoption');
     expect(generatedContent.bulletPoint11).toEqual('a dissolution order or nullity order of your civil partnership');
     expect(generatedContent.bulletPoint12).toEqual('a decree of judicial separation');
     expect(generatedContent.bulletPoint13).toEqual(
@@ -88,9 +86,7 @@ describe('start content', () => {
       'your marriage or civil partnership certificate, in English or Welsh (in welsh) '
     );
     expect(generatedContent.bulletPoint9).toEqual("your spouse or civil partner's death certificate (in welsh) ");
-    expect(generatedContent.bulletPoint10).toEqual(
-      'a decree absolute of divorce or decree of nullity of your marriage (in welsh) '
-    );
+    expect(generatedContent.bulletPoint10).toEqual('adoption (in welsh) ');
     expect(generatedContent.bulletPoint11).toEqual(
       'a dissolution order or nullity order of your civil partnership (in welsh) '
     );
