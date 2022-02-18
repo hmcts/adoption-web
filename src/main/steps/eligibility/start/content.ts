@@ -2,7 +2,8 @@ import { TranslationFn } from '../../../app/controller/GetController';
 
 const en = () => ({
   title: 'Apply to adopt a child placed in your care',
-  line1: "You can apply to adopt a child who's in your care following a court placement order.",
+  line1:
+    'You can apply to adopt a child who\'s in your care following a <a class="govuk-link" href="/eligibility/start">court placement order.</a>',
   line2:
     'The child must have lived with you for at least 10 weeks before you apply. You will not be able to submit your application until the 10 week period has passed.',
   line3:
@@ -24,7 +25,8 @@ const en = () => ({
 
 const cy = () => ({
   title: 'Apply to adopt a child placed in your care (in welsh)',
-  line1: "You can apply to adopt a child who's in your care following a court placement order. (in welsh)",
+  line1:
+    'You can apply to adopt a child who\'s in your care following a <a class="govuk-link" href="/eligibility/start">court placement order.</a> (in welsh)',
   line2:
     'The child must have lived with you for at least 10 weeks before you apply. You will not be able to submit your application until the 10 week period has passed. (in welsh)',
   line3:
