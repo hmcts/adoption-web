@@ -3,12 +3,12 @@ import { AnyObject } from '../controller/PostController';
 import {
   Adoption,
   AdoptionAgencyOrLocalAuthority,
+  AdoptionDocument,
   ApplicationType,
   ApplyingWith,
   CaseData,
   ContactDetails,
   DateAsString,
-  DivorceDocument,
   DocumentType,
   Gender,
   JurisdictionConnections,
@@ -162,6 +162,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant2DocumentsUploaded: 'applicant2DocumentsUploaded',
   documentsGenerated: 'documentsGenerated',
   applicationFeeOrderSummary: 'applicationFeeOrderSummary',
+  applicant1CannotUpload: 'applicant1CannotUpload',
 };
 
 export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data: InputFormat): OutputFormat {
@@ -333,6 +334,12 @@ export interface Case {
 
   adoption?: Adoption;
 
+  /***** Document upload *****/
+  applicant1DocumentsUploaded?: ListValue<Partial<AdoptionDocument> | null>[];
+  applicant1UploadedFiles?: UploadedFile[];
+  applicant1CannotUpload?: Checkbox;
+  applicant1CannotUploadDocuments?: DocumentType | DocumentType[];
+
   applicant1HelpPayingNeeded?: YesOrNo;
   applicant1AlreadyAppliedForHelpPaying?: YesOrNo;
   applicant1HelpWithFeesRefNo?: string;
@@ -340,14 +347,10 @@ export interface Case {
   connections: JurisdictionConnections[];
 
   applyForFinancialOrder?: YesOrNo;
-  applicant1UploadedFiles?: UploadedFile[];
   applicant2UploadedFiles?: UploadedFile[];
-  documentsGenerated: ListValue<DivorceDocument>[];
-  applicant1DocumentsUploaded?: ListValue<Partial<DivorceDocument> | null>[];
-  applicant2DocumentsUploaded?: ListValue<Partial<DivorceDocument> | null>[];
-  applicant1CannotUpload?: Checkbox;
+  documentsGenerated: ListValue<AdoptionDocument>[];
+  applicant2DocumentsUploaded?: ListValue<Partial<AdoptionDocument> | null>[];
   applicant2CannotUpload?: Checkbox;
-  applicant1CannotUploadDocuments?: DocumentType | DocumentType[];
   applicant2CannotUploadDocuments?: DocumentType | DocumentType[];
   dueDate?: DateAsString;
   caseReference?: string;

@@ -22,6 +22,6 @@ export const completeCase: Partial<BrowserCase> = {
   applicant2LastNames: 'Test their last name',
   applyForFinancialOrder: YesOrNo.NO,
   applicant1CannotUpload: Checkbox.Checked,
-  applicant1CannotUploadDocuments: [DocumentType.MARRIAGE_CERTIFICATE],
+  applicant1CannotUploadDocuments: [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE],
   applicant1UploadedFiles: [],
 };

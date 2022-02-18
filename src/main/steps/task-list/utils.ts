@@ -350,6 +350,33 @@ export const getReviewPaySubmitUrl = (userCase: CaseWithId): string => {
   return urls.EQUALITY;
 };
 
+export const getUploadDocumentStatus = (userCase: CaseWithId): SectionStatus => {
+  if (
+    userCase?.applicant1UploadedFiles &&
+    userCase.applicant1UploadedFiles.length > 0 &&
+    !userCase.applicant1CannotUpload
+  ) {
+    return SectionStatus.COMPLETED;
+  } else if (
+    userCase?.applicant1UploadedFiles &&
+    userCase.applicant1UploadedFiles.length > 0 &&
+    userCase.applicant1CannotUpload
+  ) {
+    if (userCase.applicant1CannotUploadDocuments && userCase.applicant1CannotUploadDocuments.length > 0) {
+      return SectionStatus.COMPLETED;
+    } else {
+      return SectionStatus.IN_PROGRESS;
+    }
+  } else if (
+    userCase.applicant1CannotUpload &&
+    userCase?.applicant1CannotUploadDocuments &&
+    userCase.applicant1CannotUploadDocuments.length > 0
+  ) {
+    return SectionStatus.COMPLETED;
+  }
+  return SectionStatus.NOT_STARTED;
+};
+
 export const getDateChildMovedInStatus = (userCase: CaseWithId): SectionStatus => {
   const dateChildMovedIn = userCase.dateChildMovedIn as CaseDate;
   const dateChildMovedInComplete = !!(dateChildMovedIn?.day && dateChildMovedIn.month && dateChildMovedIn.year);

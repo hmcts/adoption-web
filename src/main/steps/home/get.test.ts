@@ -45,15 +45,6 @@ describe('HomeGetController', () => {
     expect(res.redirect).toBeCalledWith(APPLYING_WITH_URL);
   });
 
-  // test('throws an error if the user switches service type', () => {
-  //   const req = mockRequest();
-  //   const res = mockResponse({
-  //     locals: { serviceType: DivorceOrDissolution.DISSOLUTION },
-  //   });
-
-  //   expect(() => controller.get(req, res)).toThrowError(new Error('Invalid case type'));
-  // });
-
   test('redirects to application sent for review page for applicant 1 users in awaitingApplicant2 state', () => {
     const req = mockRequest({
       session: {

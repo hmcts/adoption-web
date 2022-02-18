@@ -22,6 +22,8 @@ services:
     token: 'NEED TO INSERT SECRET'
   feeLookup:
     url: 'http://fees-register-api-aat.service.core-compute-aat.internal/fees-register/fees/lookup'
+  documentManagement:
+    url: http://dm-store-aat.service.core-compute-aat.internal
   payments:
     url: http://payment-api-aat.service.core-compute-aat.internal
   equalityAndDiversity:
