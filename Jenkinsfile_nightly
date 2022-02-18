@@ -57,6 +57,7 @@ withNightlyPipeline(type, product, component) {
   enableFullFunctionalTest(120)
   loadVaultSecrets(secrets)
 
+
   after('test') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
   }
