@@ -8,11 +8,11 @@ import {
 } from '../../common/components/other-names';
 
 export const en = (): Record<string, unknown> => ({
-  section: 'Primary applicant',
+  section: 'First applicant',
 });
 
 export const cy = (): Record<string, unknown> => ({
-  section: 'Primary applicant (in Welsh)',
+  section: 'First applicant (in Welsh)',
 });
 
 export const form: FormContent = {
