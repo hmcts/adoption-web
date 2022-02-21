@@ -41,7 +41,7 @@ describe('contact-details content', () => {
     expect(errors.applicant2EmailAddress.invalid).toEqual(
       'Enter an email address in the correct format, like name@example.com'
     );
-    expect(errors.applicant2PhoneNumber.required).toEqual('Enter your telephone number');
+    expect(errors.applicant2PhoneNumber.required).toEqual('Enter a UK telephone number');
     expect(errors.applicant2PhoneNumber.invalid).toEqual('Enter a valid UK telephone number');
   });
 
@@ -66,7 +66,7 @@ describe('contact-details content', () => {
     expect(errors.applicant2EmailAddress.invalid).toEqual(
       'Enter an email address in the correct format, like name@example.com (in welsh)'
     );
-    expect(errors.applicant2PhoneNumber.required).toEqual('Enter your telephone number (in welsh)');
+    expect(errors.applicant2PhoneNumber.required).toEqual('Enter a UK telephone number (in welsh)');
     expect(errors.applicant2PhoneNumber.invalid).toEqual('Enter a valid UK telephone number (in welsh)');
   });
 

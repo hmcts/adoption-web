@@ -22,7 +22,7 @@ const en = () => ({
       invalid: 'Enter an email address in the correct format, like name@example.com',
     },
     applicant2PhoneNumber: {
-      required: 'Enter your telephone number',
+      required: 'Enter a UK telephone number',
       invalid: 'Enter a valid UK telephone number',
     },
   },
@@ -47,7 +47,7 @@ const cy = () => ({
       invalid: 'Enter an email address in the correct format, like name@example.com (in welsh)',
     },
     applicant2PhoneNumber: {
-      required: 'Enter your telephone number (in welsh)',
+      required: 'Enter a UK telephone number (in welsh)',
       invalid: 'Enter a valid UK telephone number (in welsh)',
     },
   },
