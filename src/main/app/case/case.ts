@@ -49,7 +49,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant1AddressCounty: 'applicant1AddressCountry',
   applicant1AddressPostcode: 'applicant1AddressPostCode',
   applicant1ContactDetails: 'applicant1ContactDetails',
-  applicant1Consent: 'applicant1Consent',
+  applicant1ContactDetailsConsent: 'applicant1ContactDetailsConsent',
 
   applicant2FirstNames: 'applicant2FirstName',
   applicant2LastNames: 'applicant2LastName',
@@ -68,7 +68,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant2AddressPostcode: 'applicant2AddressPostCode',
   applicant2AddressSameAsApplicant1: 'applicant2AddressSameAsApplicant1',
   applicant2ContactDetails: 'applicant2ContactDetails',
-  applicant2Consent: 'applicant2Consent',
+  applicant2ContactDetailsConsent: 'applicant2ContactDetailsConsent',
 
   childrenFirstName: 'childrenFirstName',
   childrenLastName: 'childrenLastName',
@@ -205,7 +205,7 @@ export interface Case {
   applicant1AddressCounty?: string;
   applicant1AddressPostcode?: string;
   applicant1ContactDetails?: ContactDetails[];
-  applicant1Consent?: YesOrNo;
+  applicant1ContactDetailsConsent?: YesOrNo;
 
   /***** Applicant2 *****/
   applicant2FirstNames?: string;
@@ -227,7 +227,7 @@ export interface Case {
   applicant2AddressCounty?: string;
   applicant2AddressPostcode?: string;
   applicant2ContactDetails?: ContactDetails[];
-  applicant2Consent?: YesOrNo;
+  applicant2ContactDetailsConsent?: YesOrNo;
 
   /***** Children *****/
   childrenFirstName?: string;

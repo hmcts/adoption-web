@@ -327,7 +327,7 @@ export interface CaseData {
   applicant1AddressCountry: string;
   applicant1AddressPostCode: string;
   applicant1ContactDetails: ContactDetails[];
-  applicant1Consent: YesOrNo;
+  applicant1ContactDetailsConsent: YesOrNo;
 
   applicant2FirstName: string;
   applicant2LastName: string;
@@ -347,7 +347,7 @@ export interface CaseData {
   applicant2AddressPostCode: string;
   applicant2AddressSameAsApplicant1: string;
   applicant2ContactDetails: ContactDetails[];
-  applicant2Consent: YesOrNo;
+  applicant2ContactDetailsConsent: YesOrNo;
 
   childrenFirstName: string;
   childrenLastName: string;

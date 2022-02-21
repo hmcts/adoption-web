@@ -11,10 +11,10 @@ const en = () => ({
     'We will email you updates and information about your application to adopt. You will only be contacted by telephone if the social worker or court staff need to contact you quickly.',
   emailAddress: 'Email Address',
   phoneNumber: 'UK Phone number',
-  applicant2Consent:
+  applicant2ContactDetailsConsent:
     'The court may want to use your email to serve you court orders. Are you happy to be served court orders by email?',
   errors: {
-    applicant2Consent: {
+    applicant2ContactDetailsConsent: {
       required: 'Please answer the question',
     },
     applicant2EmailAddress: {
@@ -36,10 +36,10 @@ const cy = () => ({
     'We will email you updates and information about your application to adopt. You will only be contacted by telephone if the social worker or court staff need to contact you quickly.',
   emailAddress: 'Email address (in welsh)',
   phoneNumber: 'UK phone number (for phone calls) (in welsh)',
-  applicant2Consent:
+  applicant2ContactDetailsConsent:
     'The court may want to use your email to serve you court orders. Are you happy to be served court orders by email?',
   errors: {
-    applicant2Consent: {
+    applicant2ContactDetailsConsent: {
       required: 'Please answer the question (in welsh)',
     },
     applicant2EmailAddress: {
@@ -69,7 +69,7 @@ export const form: FormContent = {
       labelSize: null,
       validator: value => isFieldFilledIn(value) || isPhoneNoValid(value),
     },
-    applicant2Consent: {
+    applicant2ContactDetailsConsent: {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.label,
