@@ -127,7 +127,6 @@ const fields: ToApiConverters = {
       : {}),
   }),
   applicant1CannotUpload: data => {
-    console.log('to data.applicant1CannotUpload', data.applicant1CannotUpload);
     return {
       applicant1CannotUpload: checkboxConverter(data.applicant1CannotUpload),
     };
