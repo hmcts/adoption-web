@@ -10,22 +10,44 @@ import * as Urls from '../../../steps/urls';
 const returnUrlQueryParam = `returnUrl=${Urls.CHECK_ANSWERS_URL}`;
 
 const getSectionSummaryList = (rows, content: PageContent) => {
-  return rows.map(item => ({
-    key: { text: item.key },
-    value: { text: item.value, html: item.valueHtml },
-    actions: {
-      items: [
-        {
-          href: item.changeUrl,
-          text: content.change,
-          visuallyHiddenText: `Change ${item.key}`,
-        },
-      ],
-    },
-  }));
+  return rows.map(item => {
+    const changeUrl = `${item.changeUrl}${item.changeUrl.indexOf('?') === -1 ? '?' : '&'}${returnUrlQueryParam}`;
+    return {
+      key: { text: item.key },
+      value: { text: item.value, html: item.valueHtml },
+      actions: {
+        items: [
+          {
+            href: changeUrl,
+            text: content.change,
+            visuallyHiddenText: `Change ${item.key}`,
+          },
+        ],
+      },
+    };
+  });
 };
 
-const adoptionAgencySummaryList = (sectionTitle, keys, content, userCase: Partial<CaseWithId>, agencyIndex) => {
+const applicationSummaryList = (sectionTitle, keys, content, userCase: Partial<CaseWithId>) => ({
+  title: sectionTitle,
+  rows: getSectionSummaryList(
+    [
+      {
+        key: keys.noOfApplicants,
+        value: content.applyingWith[userCase.applyingWith!],
+        changeUrl: Urls.APPLYING_WITH_URL,
+      },
+      {
+        key: keys.dateChildMovedIn,
+        value: getFormattedDate(userCase.dateChildMovedIn, content.language),
+        changeUrl: Urls.DATE_CHILD_MOVED_IN,
+      },
+    ],
+    content
+  ),
+});
+
+const adoptionAgencySummaryList = (sectionTitle, keys, content, userCase: Partial<CaseWithId>, agencyIndex = 0) => {
   let adoptionAgency;
   if (!userCase.adopAgencyOrLAs?.length) {
     return;
@@ -44,7 +66,7 @@ const adoptionAgencySummaryList = (sectionTitle, keys, content, userCase: Partia
               {
                 key: keys.additionalAdoptionAgency,
                 value: userCase.hasAnotherAdopAgencyOrLA,
-                changeUrl: `${Urls.OTHER_ADOPTION_AGENCY}?${returnUrlQueryParam}`,
+                changeUrl: Urls.OTHER_ADOPTION_AGENCY,
               },
             ]
           : []),
@@ -53,22 +75,22 @@ const adoptionAgencySummaryList = (sectionTitle, keys, content, userCase: Partia
               {
                 key: keys.name,
                 value: adoptionAgency?.adopAgencyOrLaName,
-                changeUrl: `${Urls.ADOPTION_AGENCY}?${returnUrlQueryParam}`,
+                changeUrl: Urls.ADOPTION_AGENCY,
               },
               {
                 key: keys.phoneNumber,
                 value: adoptionAgency?.adopAgencyOrLaPhoneNumber,
-                changeUrl: `${Urls.ADOPTION_AGENCY}?${returnUrlQueryParam}`,
+                changeUrl: Urls.ADOPTION_AGENCY,
               },
               {
                 key: keys.nameOfContact,
                 value: adoptionAgency?.adopAgencyOrLaContactName,
-                changeUrl: `${Urls.ADOPTION_AGENCY}?${returnUrlQueryParam}`,
+                changeUrl: Urls.ADOPTION_AGENCY,
               },
               {
                 key: keys.emailOfContact,
                 value: adoptionAgency?.adopAgencyOrLaContactEmail,
-                changeUrl: `${Urls.ADOPTION_AGENCY}?${returnUrlQueryParam}`,
+                changeUrl: Urls.ADOPTION_AGENCY,
               },
             ]
           : []),
@@ -86,22 +108,22 @@ const socialWorkerSummaryList = (sectionTitle, keys, content, userCase: Partial<
         {
           key: keys.name,
           value: userCase.socialWorkerName,
-          changeUrl: `${Urls.SOCIAL_WORKER}?${returnUrlQueryParam}`,
+          changeUrl: Urls.SOCIAL_WORKER,
         },
         {
           key: keys.phoneNumber,
           value: userCase.socialWorkerPhoneNumber,
-          changeUrl: `${Urls.SOCIAL_WORKER}?${returnUrlQueryParam}`,
+          changeUrl: Urls.SOCIAL_WORKER,
         },
         {
           key: keys.emailAddress,
           value: userCase.socialWorkerEmail,
-          changeUrl: `${Urls.SOCIAL_WORKER}?${returnUrlQueryParam}`,
+          changeUrl: Urls.SOCIAL_WORKER,
         },
         {
           key: keys.teamEmailAddress,
           value: userCase.socialWorkerTeamEmail,
-          changeUrl: `${Urls.SOCIAL_WORKER}?${returnUrlQueryParam}`,
+          changeUrl: Urls.SOCIAL_WORKER,
         },
       ],
       content
@@ -118,40 +140,40 @@ const applicantSummaryList = (sectionTitle, keys, content, userCase: Partial<Cas
       [
         {
           key: keys.fullName,
-          value: `${userCase[`${prefix}FirstNames`]} ${userCase[`${prefix}LastNames`]}`,
-          changeUrl: `${Urls[`${urlPrefix}FULL_NAME`]}?${returnUrlQueryParam}`,
+          value: userCase[`${prefix}FirstNames`] + ' ' + userCase[`${prefix}LastNames`],
+          changeUrl: Urls[`${urlPrefix}FULL_NAME`],
         },
         {
           key: keys.previousNames,
           valueHtml: userCase[`${prefix}HasOtherNames`]
             ? userCase[`${prefix}AdditionalNames`]?.map(item => `${item.firstNames} ${item.lastNames}`).join('<br>')
             : '',
-          changeUrl: `${Urls[`${urlPrefix}OTHER_NAMES`]}?${returnUrlQueryParam}`,
+          changeUrl: Urls[`${urlPrefix}OTHER_NAMES`],
         },
         {
           key: keys.dateOfBirth,
           value: getFormattedDate(userCase[`${prefix}DateOfBirth`], content.language),
-          changeUrl: `${Urls[`${urlPrefix}DOB`]}?${returnUrlQueryParam}`,
+          changeUrl: Urls[`${urlPrefix}DOB`],
         },
         {
           key: keys.occupation,
           value: userCase[`${prefix}Occupation`],
-          changeUrl: `${Urls[`${urlPrefix}OCCUPATION`]}?${returnUrlQueryParam}`,
+          changeUrl: Urls[`${urlPrefix}OCCUPATION`],
         },
         {
           key: keys.address,
           value: getFormattedAddress(userCase, prefix),
-          changeUrl: `${Urls[`${urlPrefix}MANUAL_ADDRESS`]}?${returnUrlQueryParam}`,
+          changeUrl: Urls[`${urlPrefix}MANUAL_ADDRESS`],
         },
         {
           key: keys.emailAddress,
           value: userCase[`${prefix}EmailAddress`],
-          changeUrl: `${Urls[`${urlPrefix}CONTACT_DETAILS`]}?${returnUrlQueryParam}`,
+          changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
         },
         {
           key: keys.phoneNumber,
           value: userCase[`${prefix}PhoneNumber`],
-          changeUrl: `${Urls[`${urlPrefix}CONTACT_DETAILS`]}?${returnUrlQueryParam}`,
+          changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
         },
       ],
       content
@@ -239,25 +261,8 @@ const en = (content: CommonContent): Record<string, unknown> => {
   return {
     ...enContent,
     sections: [
-      {
-        title: sectionTitles.applicationDetails,
-        rows: getSectionSummaryList(
-          [
-            {
-              key: keys.noOfApplicants,
-              value: enContent.applyingWith[userCase.applyingWith!],
-              changeUrl: `${Urls.APPLYING_WITH_URL}?${returnUrlQueryParam}`,
-            },
-            {
-              key: keys.dateChildMovedIn,
-              value: getFormattedDate(userCase.dateChildMovedIn, content.language),
-              changeUrl: `${Urls.DATE_CHILD_MOVED_IN}?${returnUrlQueryParam}`,
-            },
-          ],
-          enContent
-        ),
-      },
-      adoptionAgencySummaryList(sectionTitles.adoptionagencyOrLA, keys, enContent, userCase, 0),
+      applicationSummaryList(sectionTitles.applicationDetails, keys, enContent, userCase),
+      adoptionAgencySummaryList(sectionTitles.adoptionagencyOrLA, keys, enContent, userCase),
       adoptionAgencySummaryList(sectionTitles.additionalAoptionagencyOrLA, keys, enContent, userCase, 1),
       socialWorkerSummaryList(sectionTitles.socialWorkerDetails, keys, enContent, userCase),
       applicantSummaryList(
