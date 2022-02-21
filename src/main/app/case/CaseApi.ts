@@ -150,6 +150,8 @@ export class CaseApi {
 }
 
 export const getCaseApi = (userDetails: UserDetails, logger: LoggerInstance): CaseApi => {
+  // console.log('Authorization: Bearer ' + userDetails.accessToken);
+  // console.log('ServiceAuthorization:'+ getServiceAuthToken());
   return new CaseApi(
     Axios.create({
       baseURL: config.get('services.case.url'),

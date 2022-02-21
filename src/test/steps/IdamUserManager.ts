@@ -22,7 +22,7 @@ export class IdamUserManager {
   async createCaseWorker(
     email: string,
     password: string,
-    role = ['caseworker', 'caseworker-divorce', 'caseworker-divorce-courtadmin_beta']
+    role = ['caseworker', 'caseworker-adoption', 'caseworker-adoption-courtadmin_beta']
   ): Promise<void> {
     await this.create(email, password, role);
     this.caseWorker = email;

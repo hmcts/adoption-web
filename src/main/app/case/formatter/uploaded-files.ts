@@ -1,16 +1,19 @@
 import { Case, Checkbox } from '../case';
-import { CaseData } from '../definition';
+import { CaseData, YesOrNo } from '../definition';
 
-export const fromApiApplicant1 = (data: Partial<CaseData>): Partial<Case> => ({
-  applicant1UploadedFiles:
-    data.applicant1DocumentsUploaded?.map(file => ({
-      id: `${file.id}`,
-      name: `${file.value.documentFileName}`,
-    })) || [],
-  applicant1DocumentsUploaded: data.applicant1DocumentsUploaded,
-  applicant1CannotUpload: data.applicant1CannotUploadSupportingDocument?.length ? Checkbox.Checked : Checkbox.Unchecked,
-  applicant1CannotUploadDocuments: data.applicant1CannotUploadSupportingDocument,
-});
+export const fromApiApplicant1 = (data: Partial<CaseData>): Partial<Case> => {
+  console.log('data.applicant1CannotUpload', data.applicant1CannotUpload);
+  return {
+    applicant1UploadedFiles:
+      data.applicant1DocumentsUploaded?.map(file => ({
+        id: `${file.id}`,
+        name: `${file.value.documentFileName}`,
+      })) || [],
+    applicant1DocumentsUploaded: data.applicant1DocumentsUploaded,
+    applicant1CannotUpload: data.applicant1CannotUpload === YesOrNo.YES ? Checkbox.Checked : Checkbox.Unchecked,
+    applicant1CannotUploadDocuments: data.applicant1CannotUploadSupportingDocument,
+  };
+};
 
 export const fromApiApplicant2 = (data: Partial<CaseData>): Partial<Case> => ({
   applicant2UploadedFiles:
