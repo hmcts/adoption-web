@@ -16,6 +16,8 @@ export const enum ValidationError {
   REQUIRED = 'required',
   NOT_SELECTED = 'notSelected',
   INVALID = 'invalid',
+  NOT_UPLOADED = 'notUploaded',
+  FILE_COUNT_LIMIT_EXCEEDED = 'maxTenFileUpload',
 }
 
 export const isFieldFilledIn: Validator = value => {
