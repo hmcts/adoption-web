@@ -1,6 +1,6 @@
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { CaseWithId, FieldPrefix } from '../../../app/case/case';
-import { ApplyingWith, Gender, YesOrNo } from '../../../app/case/definition';
+import { ApplyingWith, Gender, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { PageContent, TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
@@ -176,7 +176,7 @@ const applicantSummaryList = (
         },
         {
           key: keys.address,
-          value: getFormattedAddress(userCase, prefix),
+          valueHtml: getFormattedAddress(userCase, prefix),
           changeUrl: Urls[`${urlPrefix}MANUAL_ADDRESS`],
         },
         {
@@ -232,11 +232,19 @@ const childrenSummaryList = ({ sectionTitles, keys, ...content }, userCase: Part
   };
 };
 
+const getNotSureReasonElement = (userCase, fieldName, reasonFieldName) => {
+  return `${userCase[fieldName]}<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">Reason: </span>${userCase[reasonFieldName]}</p>`;
+};
+
+/* eslint-disable import/namespace */
 const birthParentSummaryList = (
   { sectionTitles, keys, ...content },
   userCase: Partial<CaseWithId>,
   prefix: FieldPrefix
 ) => {
+  const urlPrefix = prefix === FieldPrefix.BIRTH_MOTHER ? 'BIRTH_MOTHER_' : 'BIRTH_FATHER_';
+  const reasonFieldName =
+    prefix === FieldPrefix.BIRTH_MOTHER ? `${prefix}NotAliveReason` : `${prefix}UnsureAliveReason`;
   return {
     title: sectionTitles[`${prefix}Details`],
     rows: getSectionSummaryList(
@@ -244,36 +252,39 @@ const birthParentSummaryList = (
         {
           key: keys.fullName,
           value: userCase[`${prefix}FirstNames`] + ' ' + userCase[`${prefix}LastNames`],
-          changeUrl: Urls.CHILDREN_FULL_NAME,
+          changeUrl: Urls[`${urlPrefix}FULL_NAME`],
         },
         {
           key: keys.alive,
-          value: userCase[`${prefix}StillAlive`],
-          changeUrl: Urls.CHILDREN_DATE_OF_BIRTH,
+          valueHtml:
+            userCase[`${prefix}StillAlive`] === YesNoNotsure.NOT_SURE
+              ? getNotSureReasonElement(userCase, `${prefix}StillAlive`, reasonFieldName)
+              : userCase[`${prefix}StillAlive`],
+          changeUrl: Urls[`${urlPrefix}STILL_ALIVE`],
         },
         ...(userCase[`${prefix}StillAlive`] === YesOrNo.YES
           ? [
               {
                 key: keys.nationality,
                 value: userCase[`${prefix}Nationality`],
-                changeUrl: Urls.CHILDREN_NATIONALITY,
+                changeUrl: Urls[`${urlPrefix}NATIONALITY`],
               },
               {
                 key: keys.occupation,
                 value: userCase[`${prefix}Occupation`],
-                changeUrl: Urls.CHILDREN_FULL_NAME_AFTER_ADOPTION,
+                changeUrl: Urls[`${urlPrefix}OCCUPATION`],
               },
               {
                 key: keys.addressKnown,
                 value: userCase[`${prefix}AddressKnown`],
-                changeUrl: Urls.CHILDREN_NATIONALITY,
+                changeUrl: Urls[`${urlPrefix}ADDRESS_KNOWN`],
               },
               ...(userCase[`${prefix}AddressKnown`] === YesOrNo.YES
                 ? [
                     {
                       key: keys.address,
-                      value: getFormattedAddress(userCase, FieldPrefix.BIRTH_MOTHER),
-                      changeUrl: Urls.CHILDREN_NATIONALITY,
+                      valueHtml: getFormattedAddress(userCase, FieldPrefix.BIRTH_MOTHER),
+                      changeUrl: Urls[`${urlPrefix}ADDRESS_MANUAL`],
                     },
                   ]
                 : []),
@@ -284,6 +295,7 @@ const birthParentSummaryList = (
     ),
   };
 };
+/* eslint-enable import/namespace */
 
 const en = (content: CommonContent): Record<string, unknown> => {
   const sectionTitles = {

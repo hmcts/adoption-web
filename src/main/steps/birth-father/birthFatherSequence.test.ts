@@ -5,11 +5,11 @@ import {
   BIRTH_FATHER_ADDRESS_LOOKUP,
   BIRTH_FATHER_ADDRESS_MANUAL,
   BIRTH_FATHER_ADDRESS_SELECT,
-  BIRTH_FATHER_ALIVE,
   BIRTH_FATHER_FULL_NAME,
   BIRTH_FATHER_NAME_ON_CERTIFICATE,
   BIRTH_FATHER_NATIONALITY,
   BIRTH_FATHER_OCCUPATION,
+  BIRTH_FATHER_STILL_ALIVE,
   OTHER_PARENT_EXISTS,
   TASK_LIST_URL,
 } from '../urls';
@@ -47,13 +47,13 @@ describe('birth father sequence', () => {
 
       expect(url).toBe(BIRTH_FATHER_FULL_NAME);
       expect(showInSection).toBe(aboutChildren);
-      expect(getNextStep({})).toBe(BIRTH_FATHER_ALIVE);
+      expect(getNextStep({})).toBe(BIRTH_FATHER_STILL_ALIVE);
     });
 
     it('should be correct for isAlive', () => {
       const { url, showInSection, getNextStep } = isAlive;
 
-      expect(url).toBe(BIRTH_FATHER_ALIVE);
+      expect(url).toBe(BIRTH_FATHER_STILL_ALIVE);
       expect(showInSection).toBe(aboutChildren);
       expect(getNextStep({ birthFatherStillAlive: YesNoNotsure.YES })).toBe(BIRTH_FATHER_NATIONALITY);
       expect(getNextStep({ birthFatherStillAlive: YesNoNotsure.NO })).toBe(TASK_LIST_URL);

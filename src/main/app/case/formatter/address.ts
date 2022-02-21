@@ -48,5 +48,5 @@ export const getFormattedAddress = (data: Partial<Case>, prefix: FieldPrefix): s
   //remove empty items
   address = address.filter(item => !!item);
 
-  return address.join(' ');
+  return address.join('<br>');
 };
