@@ -7,9 +7,8 @@ import { FormContent } from '../../../app/form/Form';
 import { CommonContent } from '../../../steps/common/common.content';
 import * as Urls from '../../../steps/urls';
 
-const returnUrlQueryParam = `returnUrl=${Urls.CHECK_ANSWERS_URL}`;
-
 const getSectionSummaryList = (rows, content: PageContent) => {
+  const returnUrlQueryParam = `returnUrl=${Urls.CHECK_ANSWERS_URL}`;
   return rows.map(item => {
     const changeUrl = `${item.changeUrl}${item.changeUrl.indexOf('?') === -1 ? '?' : '&'}${returnUrlQueryParam}`;
     return {
@@ -28,8 +27,8 @@ const getSectionSummaryList = (rows, content: PageContent) => {
   });
 };
 
-const applicationSummaryList = (sectionTitle, keys, content, userCase: Partial<CaseWithId>) => ({
-  title: sectionTitle,
+const applicationSummaryList = ({ sectionTitles, keys, language, ...content }, userCase: Partial<CaseWithId>) => ({
+  title: sectionTitles.applicationDetails,
   rows: getSectionSummaryList(
     [
       {
@@ -39,7 +38,7 @@ const applicationSummaryList = (sectionTitle, keys, content, userCase: Partial<C
       },
       {
         key: keys.dateChildMovedIn,
-        value: getFormattedDate(userCase.dateChildMovedIn, content.language),
+        value: getFormattedDate(userCase.dateChildMovedIn, language),
         changeUrl: Urls.DATE_CHILD_MOVED_IN,
       },
     ],
@@ -47,7 +46,11 @@ const applicationSummaryList = (sectionTitle, keys, content, userCase: Partial<C
   ),
 });
 
-const adoptionAgencySummaryList = (sectionTitle, keys, content, userCase: Partial<CaseWithId>, agencyIndex = 0) => {
+const adoptionAgencySummaryList = (
+  { sectionTitles, keys, ...content },
+  userCase: Partial<CaseWithId>,
+  agencyIndex = 0
+) => {
   let adoptionAgency;
   if (!userCase.adopAgencyOrLAs?.length) {
     return;
@@ -58,7 +61,7 @@ const adoptionAgencySummaryList = (sectionTitle, keys, content, userCase: Partia
   }
 
   return {
-    title: sectionTitle,
+    title: agencyIndex === 0 ? sectionTitles.adoptionagencyOrLA : sectionTitles.additionalAoptionagencyOrLA,
     rows: getSectionSummaryList(
       [
         ...(agencyIndex === 1
@@ -100,9 +103,9 @@ const adoptionAgencySummaryList = (sectionTitle, keys, content, userCase: Partia
   };
 };
 
-const socialWorkerSummaryList = (sectionTitle, keys, content, userCase: Partial<CaseWithId>) => {
+const socialWorkerSummaryList = ({ sectionTitles, keys, ...content }, userCase: Partial<CaseWithId>) => {
   return {
-    title: sectionTitle,
+    title: sectionTitles.socialWorkerDetails,
     rows: getSectionSummaryList(
       [
         {
@@ -132,8 +135,19 @@ const socialWorkerSummaryList = (sectionTitle, keys, content, userCase: Partial<
 };
 
 /* eslint-disable import/namespace */
-const applicantSummaryList = (sectionTitle, keys, content, userCase: Partial<CaseWithId>, prefix: FieldPrefix) => {
+const applicantSummaryList = (
+  { sectionTitles, keys, ...content },
+  userCase: Partial<CaseWithId>,
+  prefix: FieldPrefix
+) => {
   const urlPrefix = prefix === FieldPrefix.APPLICANT1 ? 'APPLICANT_1_' : 'APPLICANT_2_';
+  let sectionTitle = sectionTitles.applicantDetails;
+  if (prefix === FieldPrefix.APPLICANT1 && userCase.applyingWith !== ApplyingWith.ALONE) {
+    sectionTitle = sectionTitles.firstApplicantDetails;
+  } else if (prefix === FieldPrefix.APPLICANT2) {
+    sectionTitle = sectionTitles.secondApplicantDetails;
+  }
+
   return {
     title: sectionTitle,
     rows: getSectionSummaryList(
@@ -254,6 +268,8 @@ const en = (content: CommonContent): Record<string, unknown> => {
       [ApplyingWith.WITH_SOME_ONE_ELSE]: "I'm applying with someone who is not my spouse or civil partner",
     },
     language: content.language,
+    sectionTitles,
+    keys,
   };
 
   const userCase = content.userCase!;
@@ -261,29 +277,13 @@ const en = (content: CommonContent): Record<string, unknown> => {
   return {
     ...enContent,
     sections: [
-      applicationSummaryList(sectionTitles.applicationDetails, keys, enContent, userCase),
-      adoptionAgencySummaryList(sectionTitles.adoptionagencyOrLA, keys, enContent, userCase),
-      adoptionAgencySummaryList(sectionTitles.additionalAoptionagencyOrLA, keys, enContent, userCase, 1),
-      socialWorkerSummaryList(sectionTitles.socialWorkerDetails, keys, enContent, userCase),
-      applicantSummaryList(
-        userCase.applyingWith === ApplyingWith.ALONE
-          ? sectionTitles.applicantDetails
-          : sectionTitles.firstApplicantDetails,
-        keys,
-        enContent,
-        userCase,
-        FieldPrefix.APPLICANT1
-      ),
+      applicationSummaryList(enContent, userCase),
+      adoptionAgencySummaryList(enContent, userCase),
+      adoptionAgencySummaryList(enContent, userCase, 1),
+      socialWorkerSummaryList(enContent, userCase),
+      applicantSummaryList(enContent, userCase, FieldPrefix.APPLICANT1),
       ...(userCase.applyingWith !== ApplyingWith.ALONE
-        ? [
-            applicantSummaryList(
-              sectionTitles.secondApplicantDetails,
-              keys,
-              enContent,
-              userCase,
-              FieldPrefix.APPLICANT2
-            ),
-          ]
+        ? [applicantSummaryList(enContent, userCase, FieldPrefix.APPLICANT2)]
         : []),
     ],
   };
