@@ -1,3 +1,4 @@
+import { ApplyingWith } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -36,9 +37,9 @@ export const form: FormContent = {
       label: l => l.label,
       section: l => l.section,
       values: [
-        { label: l => l.one, value: 'alone' },
-        { label: l => l.two, value: 'withSpouseOrCivilPartner' },
-        { label: l => l.three, value: 'withSomeoneElse' },
+        { label: l => l.one, value: ApplyingWith.ALONE },
+        { label: l => l.two, value: ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER },
+        { label: l => l.three, value: ApplyingWith.WITH_SOME_ONE_ELSE },
       ],
       validator: isFieldFilledIn,
     },

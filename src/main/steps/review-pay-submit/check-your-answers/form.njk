@@ -5,18 +5,14 @@
 {% block before_fields %}
   {% if sections %}
     {% for item in sections %}
-      {# <p class="govuk-!-margin-top-7 govuk-!-margin-bottom-0 govuk-body govuk-!-font-size-19">
-          <span class="govuk-!-font-weight-bold">Sibling: </span>{{ item.siblingFirstName}} {{item.siblingLastNames}}
-      </p>
-      <p class="govuk-!-margin-top-0">
-          <a class="govuk-link govuk-!-font-size-19" href="{{ item.changeSiblingNameUrl }}">{{changeName}}</a>
-      </p> #}
-      <h2 class="govuk-heading-m govuk-!-margin-top-7">{{item.title}}</h2>
-      {{ govukSummaryList({
+      {% if item %}
+        <h2 class="govuk-heading-m govuk-!-margin-top-7">{{item.title}}</h2>
+        {{ govukSummaryList({
           classes: 'govuk-!-margin-bottom-9 govuk-!-margin-top-0',
           rows: item.rows
         })
       }}
+      {% endif %}
     {% endfor %}
   {% endif %}
 {% endblock %}

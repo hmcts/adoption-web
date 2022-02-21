@@ -1,10 +1,18 @@
+import { getFormattedDate } from '../../../app/case/answers/formatDate';
+import { CaseWithId, FieldPrefix } from '../../../app/case/case';
+import { ApplyingWith, YesOrNo } from '../../../app/case/definition';
+import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { PageContent, TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
+import { CommonContent } from '../../../steps/common/common.content';
+import * as Urls from '../../../steps/urls';
+
+const returnUrlQueryParam = `returnUrl=${Urls.CHECK_ANSWERS_URL}`;
 
 const getSectionSummaryList = (rows, content: PageContent) => {
   return rows.map(item => ({
     key: { text: item.key },
-    value: { text: item.value },
+    value: { text: item.value, html: item.valueHtml },
     actions: {
       items: [
         {
@@ -17,12 +25,148 @@ const getSectionSummaryList = (rows, content: PageContent) => {
   }));
 };
 
-const en = (): Record<string, unknown> => {
+const adoptionAgencySummaryList = (sectionTitle, keys, content, userCase: Partial<CaseWithId>, agencyIndex) => {
+  let adoptionAgency;
+  if (!userCase.adopAgencyOrLAs?.length) {
+    return;
+  }
+
+  if (agencyIndex === 0 || (agencyIndex === 1 && userCase.hasAnotherAdopAgencyOrLA === YesOrNo.YES)) {
+    adoptionAgency = userCase.adopAgencyOrLAs[agencyIndex];
+  }
+
+  return {
+    title: sectionTitle,
+    rows: getSectionSummaryList(
+      [
+        ...(agencyIndex === 1
+          ? [
+              {
+                key: keys.additionalAdoptionAgency,
+                value: userCase.hasAnotherAdopAgencyOrLA,
+                changeUrl: `${Urls.OTHER_ADOPTION_AGENCY}?${returnUrlQueryParam}`,
+              },
+            ]
+          : []),
+        ...(adoptionAgency
+          ? [
+              {
+                key: keys.name,
+                value: adoptionAgency?.adopAgencyOrLaName,
+                changeUrl: `${Urls.ADOPTION_AGENCY}?${returnUrlQueryParam}`,
+              },
+              {
+                key: keys.phoneNumber,
+                value: adoptionAgency?.adopAgencyOrLaPhoneNumber,
+                changeUrl: `${Urls.ADOPTION_AGENCY}?${returnUrlQueryParam}`,
+              },
+              {
+                key: keys.nameOfContact,
+                value: adoptionAgency?.adopAgencyOrLaContactName,
+                changeUrl: `${Urls.ADOPTION_AGENCY}?${returnUrlQueryParam}`,
+              },
+              {
+                key: keys.emailOfContact,
+                value: adoptionAgency?.adopAgencyOrLaContactEmail,
+                changeUrl: `${Urls.ADOPTION_AGENCY}?${returnUrlQueryParam}`,
+              },
+            ]
+          : []),
+      ],
+      content
+    ),
+  };
+};
+
+const socialWorkerSummaryList = (sectionTitle, keys, content, userCase: Partial<CaseWithId>) => {
+  return {
+    title: sectionTitle,
+    rows: getSectionSummaryList(
+      [
+        {
+          key: keys.name,
+          value: userCase.socialWorkerName,
+          changeUrl: `${Urls.SOCIAL_WORKER}?${returnUrlQueryParam}`,
+        },
+        {
+          key: keys.phoneNumber,
+          value: userCase.socialWorkerPhoneNumber,
+          changeUrl: `${Urls.SOCIAL_WORKER}?${returnUrlQueryParam}`,
+        },
+        {
+          key: keys.emailAddress,
+          value: userCase.socialWorkerEmail,
+          changeUrl: `${Urls.SOCIAL_WORKER}?${returnUrlQueryParam}`,
+        },
+        {
+          key: keys.teamEmailAddress,
+          value: userCase.socialWorkerTeamEmail,
+          changeUrl: `${Urls.SOCIAL_WORKER}?${returnUrlQueryParam}`,
+        },
+      ],
+      content
+    ),
+  };
+};
+
+/* eslint-disable import/namespace */
+const applicantSummaryList = (sectionTitle, keys, content, userCase: Partial<CaseWithId>, prefix: FieldPrefix) => {
+  const urlPrefix = prefix === FieldPrefix.APPLICANT1 ? 'APPLICANT_1_' : 'APPLICANT_2_';
+  return {
+    title: sectionTitle,
+    rows: getSectionSummaryList(
+      [
+        {
+          key: keys.fullName,
+          value: `${userCase[`${prefix}FirstNames`]} ${userCase[`${prefix}LastNames`]}`,
+          changeUrl: `${Urls[`${urlPrefix}FULL_NAME`]}?${returnUrlQueryParam}`,
+        },
+        {
+          key: keys.previousNames,
+          valueHtml: userCase[`${prefix}HasOtherNames`]
+            ? userCase[`${prefix}AdditionalNames`]?.map(item => `${item.firstNames} ${item.lastNames}`).join('<br>')
+            : '',
+          changeUrl: `${Urls[`${urlPrefix}OTHER_NAMES`]}?${returnUrlQueryParam}`,
+        },
+        {
+          key: keys.dateOfBirth,
+          value: getFormattedDate(userCase[`${prefix}DateOfBirth`], content.language),
+          changeUrl: `${Urls[`${urlPrefix}DOB`]}?${returnUrlQueryParam}`,
+        },
+        {
+          key: keys.occupation,
+          value: userCase[`${prefix}Occupation`],
+          changeUrl: `${Urls[`${urlPrefix}OCCUPATION`]}?${returnUrlQueryParam}`,
+        },
+        {
+          key: keys.address,
+          value: getFormattedAddress(userCase, prefix),
+          changeUrl: `${Urls[`${urlPrefix}MANUAL_ADDRESS`]}?${returnUrlQueryParam}`,
+        },
+        {
+          key: keys.emailAddress,
+          value: userCase[`${prefix}EmailAddress`],
+          changeUrl: `${Urls[`${urlPrefix}CONTACT_DETAILS`]}?${returnUrlQueryParam}`,
+        },
+        {
+          key: keys.phoneNumber,
+          value: userCase[`${prefix}PhoneNumber`],
+          changeUrl: `${Urls[`${urlPrefix}CONTACT_DETAILS`]}?${returnUrlQueryParam}`,
+        },
+      ],
+      content
+    ),
+  };
+};
+/* eslint-enable import/namespace */
+
+const en = (content: CommonContent): Record<string, unknown> => {
   const sectionTitles = {
     applicationDetails: 'Application details',
     adoptionagencyOrLA: 'Adoption agency or local authority details',
     additionalAoptionagencyOrLA: 'Additional adoption agency or local authority details',
     socialWorkerDetails: "Child's social worker details",
+    applicantDetails: "Applicant's details",
     firstApplicantDetails: "First applicant's details",
     secondApplicantDetails: "Second applicant's details",
     childDetails: "Child's details",
@@ -38,13 +182,41 @@ const en = (): Record<string, unknown> => {
   const keys = {
     noOfApplicants: 'Number of applicants',
     dateChildMovedIn: 'Date child moved in',
+    name: 'Name',
+    phoneNumber: 'Phone number',
+    emailAddress: 'Email address',
+    nameOfContact: 'Name of contact',
+    emailOfContact: 'Email address of contact',
+    teamEmailAddress: 'Team email address',
+    additionalAdoptionAgency: 'Additional adoption agency',
+    fullName: 'Full name',
+    previousNames: 'Previous names',
+    dateOfBirth: 'Date of birth',
+    occupation: 'Occupation',
+    address: 'Address',
+    sexAtBirth: 'Sex at birth',
+    nationality: 'Nationality',
+    fullNameAfterAdoption: 'Full name after adoption',
+    alive: 'Alive',
+    addressKnown: 'Address known',
+    nameOnBirthCertificate: 'Name on birth certificate',
+    otherParent: 'Is there another person with parental responsibility?',
+    placementOrder: 'Placement order',
+    typeOfOrder: 'Type of order',
+    orderNumber: 'Order case or serial number',
+    court: 'Court',
+    date: 'Date',
+    courtOrder: 'Court order',
+    siblingName: 'Sibling name',
+    familyCourtName: 'Family court name',
+    applicantDocuments: "Applicant's documents",
+    childDocuments: "Child's documents",
   };
 
-  const content = {
+  const enContent = {
     section: 'Review your application',
     title: 'Review your answers',
     change: 'Change',
-    orderType: 'Order type',
     submitApplication: 'Submit your application',
     checkInfoBeforeSubmit:
       'You should check that all the information given in your application is correct before you submit. Once submitted, your application will be sent to the court for processing.',
@@ -54,21 +226,60 @@ const en = (): Record<string, unknown> => {
         lessThanTenWeeks: 'You can only submit 10 weeks after the date the child started living continuously with you',
       },
     },
+    applyingWith: {
+      [ApplyingWith.ALONE]: "I'm applying on my own",
+      [ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER]: "I'm applying with my spouse or civil partner",
+      [ApplyingWith.WITH_SOME_ONE_ELSE]: "I'm applying with someone who is not my spouse or civil partner",
+    },
+    language: content.language,
   };
 
+  const userCase = content.userCase!;
+
   return {
-    ...content,
+    ...enContent,
     sections: [
       {
         title: sectionTitles.applicationDetails,
         rows: getSectionSummaryList(
           [
-            { key: keys.noOfApplicants, value: 'some value', changeUrl: '#' },
-            { key: keys.dateChildMovedIn, value: 'some value', changeUrl: '#' },
+            {
+              key: keys.noOfApplicants,
+              value: enContent.applyingWith[userCase.applyingWith!],
+              changeUrl: `${Urls.APPLYING_WITH_URL}?${returnUrlQueryParam}`,
+            },
+            {
+              key: keys.dateChildMovedIn,
+              value: getFormattedDate(userCase.dateChildMovedIn, content.language),
+              changeUrl: `${Urls.DATE_CHILD_MOVED_IN}?${returnUrlQueryParam}`,
+            },
           ],
-          content
+          enContent
         ),
       },
+      adoptionAgencySummaryList(sectionTitles.adoptionagencyOrLA, keys, enContent, userCase, 0),
+      adoptionAgencySummaryList(sectionTitles.additionalAoptionagencyOrLA, keys, enContent, userCase, 1),
+      socialWorkerSummaryList(sectionTitles.socialWorkerDetails, keys, enContent, userCase),
+      applicantSummaryList(
+        userCase.applyingWith === ApplyingWith.ALONE
+          ? sectionTitles.applicantDetails
+          : sectionTitles.firstApplicantDetails,
+        keys,
+        enContent,
+        userCase,
+        FieldPrefix.APPLICANT1
+      ),
+      ...(userCase.applyingWith !== ApplyingWith.ALONE
+        ? [
+            applicantSummaryList(
+              sectionTitles.secondApplicantDetails,
+              keys,
+              enContent,
+              userCase,
+              FieldPrefix.APPLICANT2
+            ),
+          ]
+        : []),
     ],
   };
 };
@@ -103,7 +314,7 @@ const languages = {
 };
 
 export const generateContent: TranslationFn = content => {
-  const translations = languages[content.language]();
+  const translations = languages[content.language](content);
   return {
     ...translations,
     form,
