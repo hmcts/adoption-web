@@ -174,7 +174,7 @@ const langAssertions = (language, content) => {
 };
 
 const commonContent = { language: EN } as CommonContent;
-
+/* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('Upload content', () => {
   it('should return the correct content for language = en', () => {
     langAssertions(EN, enContent);
