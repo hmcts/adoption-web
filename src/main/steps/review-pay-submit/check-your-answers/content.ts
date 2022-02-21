@@ -1,6 +1,6 @@
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { CaseWithId, FieldPrefix } from '../../../app/case/case';
-import { ApplyingWith, YesOrNo } from '../../../app/case/definition';
+import { ApplyingWith, Gender, YesOrNo } from '../../../app/case/definition';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { PageContent, TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
@@ -196,6 +196,95 @@ const applicantSummaryList = (
 };
 /* eslint-enable import/namespace */
 
+const childrenSummaryList = ({ sectionTitles, keys, ...content }, userCase: Partial<CaseWithId>) => {
+  return {
+    title: sectionTitles.childDetails,
+    rows: getSectionSummaryList(
+      [
+        {
+          key: keys.fullName,
+          value: userCase.childrenFirstName + ' ' + userCase.childrenLastName,
+          changeUrl: Urls.CHILDREN_FULL_NAME,
+        },
+        {
+          key: keys.dateOfBirth,
+          value: getFormattedDate(userCase.childrenDateOfBirth),
+          changeUrl: Urls.CHILDREN_DATE_OF_BIRTH,
+        },
+        {
+          key: keys.sexAtBirth,
+          value: content.gender[userCase.childrenSexAtBirth!],
+          changeUrl: Urls.CHILDREN_SEX_AT_BIRTH,
+        },
+        {
+          key: keys.nationality,
+          value: userCase.childrenNationality,
+          changeUrl: Urls.CHILDREN_NATIONALITY,
+        },
+        {
+          key: keys.fullNameAfterAdoption,
+          value: userCase.childrenFirstNameAfterAdoption + ' ' + userCase.childrenLastNameAfterAdoption,
+          changeUrl: Urls.CHILDREN_FULL_NAME_AFTER_ADOPTION,
+        },
+      ],
+      content
+    ),
+  };
+};
+
+const birthParentSummaryList = (
+  { sectionTitles, keys, ...content },
+  userCase: Partial<CaseWithId>,
+  prefix: FieldPrefix
+) => {
+  return {
+    title: sectionTitles[`${prefix}Details`],
+    rows: getSectionSummaryList(
+      [
+        {
+          key: keys.fullName,
+          value: userCase[`${prefix}FirstNames`] + ' ' + userCase[`${prefix}LastNames`],
+          changeUrl: Urls.CHILDREN_FULL_NAME,
+        },
+        {
+          key: keys.alive,
+          value: userCase[`${prefix}StillAlive`],
+          changeUrl: Urls.CHILDREN_DATE_OF_BIRTH,
+        },
+        ...(userCase[`${prefix}StillAlive`] === YesOrNo.YES
+          ? [
+              {
+                key: keys.nationality,
+                value: userCase[`${prefix}Nationality`],
+                changeUrl: Urls.CHILDREN_NATIONALITY,
+              },
+              {
+                key: keys.occupation,
+                value: userCase[`${prefix}Occupation`],
+                changeUrl: Urls.CHILDREN_FULL_NAME_AFTER_ADOPTION,
+              },
+              {
+                key: keys.addressKnown,
+                value: userCase[`${prefix}AddressKnown`],
+                changeUrl: Urls.CHILDREN_NATIONALITY,
+              },
+              ...(userCase[`${prefix}AddressKnown`] === YesOrNo.YES
+                ? [
+                    {
+                      key: keys.address,
+                      value: getFormattedAddress(userCase, FieldPrefix.BIRTH_MOTHER),
+                      changeUrl: Urls.CHILDREN_NATIONALITY,
+                    },
+                  ]
+                : []),
+            ]
+          : []),
+      ],
+      content
+    ),
+  };
+};
+
 const en = (content: CommonContent): Record<string, unknown> => {
   const sectionTitles = {
     applicationDetails: 'Application details',
@@ -267,6 +356,11 @@ const en = (content: CommonContent): Record<string, unknown> => {
       [ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER]: "I'm applying with my spouse or civil partner",
       [ApplyingWith.WITH_SOME_ONE_ELSE]: "I'm applying with someone who is not my spouse or civil partner",
     },
+    gender: {
+      [Gender.MALE]: 'Male',
+      [Gender.FEMALE]: 'Female',
+      [Gender.INTERSEX]: 'Other',
+    },
     language: content.language,
     sectionTitles,
     keys,
@@ -285,6 +379,9 @@ const en = (content: CommonContent): Record<string, unknown> => {
       ...(userCase.applyingWith !== ApplyingWith.ALONE
         ? [applicantSummaryList(enContent, userCase, FieldPrefix.APPLICANT2)]
         : []),
+      childrenSummaryList(enContent, userCase),
+      birthParentSummaryList(enContent, userCase, FieldPrefix.BIRTH_MOTHER),
+      birthParentSummaryList(enContent, userCase, FieldPrefix.BIRTH_FATHER),
     ],
   };
 };
