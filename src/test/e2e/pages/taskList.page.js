@@ -1,4 +1,5 @@
 const config = require('../config');
+
 const { I } = inject();
 
 module.exports = {
@@ -30,6 +31,10 @@ module.exports = {
     reviewPayAndSubmitLink: 'a[id="review-pay-and-submit"]',
     dateChildMovedInLink: 'a[id$="date-child-moved-in"]',
     dateChildMovedInDetailsStatus: 'strong[id$="date-child-moved-in-status"]',
+  },
+  uploadDocument: {
+    uploadDocumentLink: 'a[href$="upload-your-documents"]',
+    uploadDocumentStatus: 'strong[id$="upload-your-documents-status"]',
   },
 
   async goToTaskListPage() {
@@ -128,6 +133,14 @@ module.exports = {
 
   async selectReviewPayAndSubmitDetails() {
     await I.click(this.childDetails.reviewPayAndSubmitLink);
+  },
+
+  async selectUploadDocumentsDetails() {
+    await I.click(this.uploadDocument.uploadDocumentLink);
+  },
+
+  async verifyUploadDocumentsStatus() {
+    await I.see('COMPLETED', this.uploadDocument.uploadDocumentStatus);
   },
 
   async selectDateChildMovedInDetails() {
