@@ -15,6 +15,7 @@ import {
   otherParentSummaryList,
   siblingCourtOrderSummaryList,
   socialWorkerSummaryList,
+  uploadedDocumentSummaryList,
 } from './utils';
 
 const en = (content: CommonContent): Record<string, unknown> => {
@@ -124,6 +125,7 @@ const en = (content: CommonContent): Record<string, unknown> => {
       childrenPlacementOrderSummaryList(enContent, userCase),
       siblingCourtOrderSummaryList(enContent, userCase),
       familyCourtSummaryList(enContent),
+      uploadedDocumentSummaryList(enContent, userCase),
     ],
   };
 };

@@ -112,6 +112,7 @@ export const adoptionAgencySummaryList = (
     adoptionAgency = userCase.adopAgencyOrLAs[agencyIndex];
   }
 
+  const changeUrl = `${Urls.ADOPTION_AGENCY}?change=${adoptionAgency.adopAgencyOrLaId}`;
   return {
     title: agencyIndex === 0 ? sectionTitles.adoptionagencyOrLA : sectionTitles.additionalAoptionagencyOrLA,
     rows: getSectionSummaryList(
@@ -130,22 +131,22 @@ export const adoptionAgencySummaryList = (
               {
                 key: keys.name,
                 value: adoptionAgency?.adopAgencyOrLaName,
-                changeUrl: Urls.ADOPTION_AGENCY,
+                changeUrl,
               },
               {
                 key: keys.phoneNumber,
                 value: adoptionAgency?.adopAgencyOrLaPhoneNumber,
-                changeUrl: Urls.ADOPTION_AGENCY,
+                changeUrl,
               },
               {
                 key: keys.nameOfContact,
                 value: adoptionAgency?.adopAgencyOrLaContactName,
-                changeUrl: Urls.ADOPTION_AGENCY,
+                changeUrl,
               },
               {
                 key: keys.emailOfContact,
                 value: adoptionAgency?.adopAgencyOrLaContactEmail,
-                changeUrl: Urls.ADOPTION_AGENCY,
+                changeUrl,
               },
             ]
           : []),
@@ -324,7 +325,11 @@ export const birthParentSummaryList = (
           key: keys.alive,
           valueHtml:
             userCase[`${prefix}StillAlive`] === YesNoNotsure.NOT_SURE
-              ? getNotSureReasonElement(userCase, content.notSure, reasonFieldName)
+              ? getNotSureReasonElement(
+                  userCase,
+                  content.yesNoNotsure[userCase[`${prefix}StillAlive`]],
+                  reasonFieldName
+                )
               : content.yesNoNotsure[userCase[`${prefix}StillAlive`]],
           changeUrl: Urls[`${urlPrefix}STILL_ALIVE`],
         },
@@ -544,6 +549,28 @@ SummaryList => ({
         key: keys.familyCourtName,
         value: 'TBD',
         changeUrl: '#',
+      },
+    ],
+    content
+  ),
+});
+
+const formatDocuments = (userCase: Partial<CaseWithId>) => {
+  const documentFileNames = userCase.applicant1DocumentsUploaded?.map(item => item.value?.documentFileName);
+  return documentFileNames?.join('<br>');
+};
+
+export const uploadedDocumentSummaryList = (
+  { sectionTitles, keys, ...content }: SummaryListContent,
+  userCase: Partial<CaseWithId>
+): SummaryList => ({
+  title: sectionTitles.uploadedDocuments,
+  rows: getSectionSummaryList(
+    [
+      {
+        key: keys.familyCourtName,
+        valueHtml: formatDocuments(userCase),
+        changeUrl: Urls.UPLOAD_YOUR_DOCUMENTS,
       },
     ],
     content
