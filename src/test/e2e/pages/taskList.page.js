@@ -6,8 +6,8 @@ module.exports = {
   primaryApplicant: {
     contactDetailsLink: 'a[id$="applicant1-contact-details"]',
     personalDetailsLink: 'a[id$="applicant1-personal-details"]',
-    contactDetailsLinkStatus: 'a[id$="applicant1-contact-details-status"]',
-    personalDetailsLinkStatus: 'a[id$="applicant1-personal-details-status"]',
+    contactDetailsLinkStatus: 'strong[id$="applicant1-contact-details-status"]',
+    personalDetailsLinkStatus: 'strong[id$="applicant1-personal-details-status"]',
   },
   secondApplicant: {
     contactDetailsLink: 'a[id$="applicant2-contact-details"]',

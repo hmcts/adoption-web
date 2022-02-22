@@ -77,6 +77,7 @@ Scenario(
     await taskListPage.selectUploadDocumentsDetails();
     await uploadDocumentsDetailsPage.uploadDocumentsSection();
     await taskListPage.verifyUploadDocumentsStatus();
+
     await taskListPage.selectDateChildMovedInDetails();
     await dateChildMovedinDetailsPage.dateChildMovedInSection();
     await taskListPage.verifyDateChildMovedInStatus();
