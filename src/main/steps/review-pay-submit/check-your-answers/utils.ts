@@ -488,7 +488,7 @@ export const siblingCourtOrderSummaryList = (
       ...userCase.siblings!.map(sibling => ({
         key: keys.siblingName,
         value: sibling.siblingFirstName + ' ' + sibling.siblingLastNames,
-        changeUrl: Urls.CHILDREN_FULL_NAME,
+        changeUrl: `${Urls.SIBLING_NAME}?change=${sibling.siblingId}`,
       })),
     ],
     content
@@ -509,17 +509,20 @@ export const siblingCourtOrderSummaryList = (
               {
                 key: keys.siblingName,
                 value: sibling.siblingFirstName + ' ' + sibling.siblingLastNames,
-                changeUrl: Urls.CHILDREN_SEX_AT_BIRTH,
               },
               {
                 key: keys.typeOfOrder,
                 value: (item as PlacementOrder).placementOrderType,
-                changeUrl: Urls.CHILDREN_FULL_NAME,
+                changeUrl: `${Urls.SIBLING_ORDER_TYPE}?change=${sibling.siblingId}/${
+                  (item as PlacementOrder).placementOrderId
+                }`,
               },
               {
                 key: keys.orderNumber,
                 value: (item as PlacementOrder).placementOrderNumber,
-                changeUrl: Urls.CHILDREN_DATE_OF_BIRTH,
+                changeUrl: `${Urls.SIBLING_ORDER_CASE_NUMBER}?change=${sibling.siblingId}/${
+                  (item as PlacementOrder).placementOrderId
+                }`,
               },
             ],
             content
@@ -569,7 +572,7 @@ export const uploadedDocumentSummaryList = (
   rows: getSectionSummaryList(
     [
       {
-        key: keys.familyCourtName,
+        key: keys.childDocuments,
         valueHtml: formatDocuments(userCase),
         changeUrl: Urls.UPLOAD_YOUR_DOCUMENTS,
       },
