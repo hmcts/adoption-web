@@ -16,7 +16,7 @@ const en = () => ({
     applyingWith: {
       required: 'Select an option which best describes who is applying',
     },
-    applyingWithSomeoneElseReason: {
+    otherApplicantRelation: {
       required: 'Provide details of your relationship with the other applicant',
       invalid: 'Overview must be 100 words or less',
     },
@@ -37,7 +37,7 @@ const cy = () => ({
     applyingWith: {
       required: 'Select an option which best describes who is applying (in welsh)',
     },
-    applyingWithSomeoneElseReason: {
+    otherApplicantRelation: {
       required: 'Provide details of your relationship with the other applicant (in welsh)',
       invalid: 'Overview must be 100 words or less (in welsh)',
     },
@@ -67,7 +67,7 @@ export const form: FormContent = {
           value: 'withSomeoneElse',
           hint: l => l.threeHint,
           subFields: {
-            applyingWithSomeoneElseReason: {
+            otherApplicantRelation: {
               type: 'textarea',
               label: l => l.moreDetails,
               labelSize: null,

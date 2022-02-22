@@ -305,7 +305,7 @@ export interface PlacementOrder {
 
 export interface CaseData {
   applyingWith: ApplyingWith;
-  applyingWithSomeoneElseReason: string;
+  otherApplicantRelation: string;
   dateChildMovedIn?: DateAsString;
   applicant1FirstName: string;
   applicant1LastName: string;
