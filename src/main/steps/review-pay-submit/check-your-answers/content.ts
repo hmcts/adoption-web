@@ -1,6 +1,6 @@
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { CaseWithId, FieldPrefix } from '../../../app/case/case';
-import { ApplyingWith, Gender, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
+import { ApplyingWith, Gender, Nationality, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { PageContent, TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
@@ -196,6 +196,14 @@ const applicantSummaryList = (
 };
 /* eslint-enable import/namespace */
 
+const formatNationalities = (nationality: (string | Nationality)[], additionalNationalities: string[]): string => {
+  const nationalities = nationality.filter(item => item !== Nationality.OTHER);
+  if (nationality.includes(Nationality.OTHER)) {
+    nationalities.push(...additionalNationalities);
+  }
+  return nationalities.join('<br>');
+};
+
 const childrenSummaryList = ({ sectionTitles, keys, ...content }, userCase: Partial<CaseWithId>) => {
   return {
     title: sectionTitles.childDetails,
@@ -218,7 +226,7 @@ const childrenSummaryList = ({ sectionTitles, keys, ...content }, userCase: Part
         },
         {
           key: keys.nationality,
-          value: userCase.childrenNationality,
+          valueHtml: formatNationalities(userCase.childrenNationality!, userCase.childrenAdditionalNationalities!),
           changeUrl: Urls.CHILDREN_NATIONALITY,
         },
         {
@@ -232,8 +240,8 @@ const childrenSummaryList = ({ sectionTitles, keys, ...content }, userCase: Part
   };
 };
 
-const getNotSureReasonElement = (userCase, fieldName, reasonFieldName) => {
-  return `${userCase[fieldName]}<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">Reason: </span>${userCase[reasonFieldName]}</p>`;
+const getNotSureReasonElement = (userCase, notSure, reasonFieldName) => {
+  return `${notSure}<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">Reason: </span>${userCase[reasonFieldName]}</p>`;
 };
 
 /* eslint-disable import/namespace */
@@ -258,7 +266,7 @@ const birthParentSummaryList = (
           key: keys.alive,
           valueHtml:
             userCase[`${prefix}StillAlive`] === YesNoNotsure.NOT_SURE
-              ? getNotSureReasonElement(userCase, `${prefix}StillAlive`, reasonFieldName)
+              ? getNotSureReasonElement(userCase, content.notSure, reasonFieldName)
               : userCase[`${prefix}StillAlive`],
           changeUrl: Urls[`${urlPrefix}STILL_ALIVE`],
         },
@@ -266,7 +274,10 @@ const birthParentSummaryList = (
           ? [
               {
                 key: keys.nationality,
-                value: userCase[`${prefix}Nationality`],
+                valueHtml: formatNationalities(
+                  userCase[`${prefix}Nationality`],
+                  userCase[`${prefix}AdditionalNationalities`]
+                ),
                 changeUrl: Urls[`${urlPrefix}NATIONALITY`],
               },
               {
@@ -354,15 +365,11 @@ const en = (content: CommonContent): Record<string, unknown> => {
     section: 'Review your application',
     title: 'Review your answers',
     change: 'Change',
+    notSure: 'Not sure',
     submitApplication: 'Submit your application',
     checkInfoBeforeSubmit:
       'You should check that all the information given in your application is correct before you submit. Once submitted, your application will be sent to the court for processing.',
     continue: 'Continue',
-    errors: {
-      dateChildMovedIn: {
-        lessThanTenWeeks: 'You can only submit 10 weeks after the date the child started living continuously with you',
-      },
-    },
     applyingWith: {
       [ApplyingWith.ALONE]: "I'm applying on my own",
       [ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER]: "I'm applying with my spouse or civil partner",
@@ -376,6 +383,11 @@ const en = (content: CommonContent): Record<string, unknown> => {
     language: content.language,
     sectionTitles,
     keys,
+    errors: {
+      dateChildMovedIn: {
+        lessThanTenWeeks: 'You can only submit 10 weeks after the date the child started living continuously with you',
+      },
+    },
   };
 
   const userCase = content.userCase!;
