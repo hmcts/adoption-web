@@ -7,9 +7,8 @@ module.exports = {
     postcodeLookup: 'input[id$="applicant2AddressPostcode"]',
     addressList: 'select[id$="applicant2SelectAddress"]',
     findAddressButton: 'Find address',
-    applicant1ContactDetails: 'input[id$="applicant2ContactDetails"]',
     applicant1EmailAddress: 'input[id$="applicant2EmailAddress"]',
-    applicant1ContactDetails2: 'input[id$="applicant2ContactDetails-2"]',
+    applicant2ContactDetailsConsent: 'input[id$="applicant2ContactDetailsConsent"]',
     applicant1PhoneNumber: 'input[id$="applicant2PhoneNumber"]',
     lookupOption: '8B, CHURCH ROAD, UXBRIDGE, UB8 3NA',
     postcode: 'UB8 3NA',
@@ -27,10 +26,9 @@ module.exports = {
     I.selectOption(this.fields.addressList, this.fields.lookupOption);
     I.click('Save and continue');
     I.wait('2');
-    I.click(this.fields.applicant1ContactDetails);
     I.fillField(this.fields.applicant1EmailAddress, 'test@test.com');
-    I.click(this.fields.applicant1ContactDetails2);
     I.fillField(this.fields.applicant1PhoneNumber, '09876543210');
+    I.click(this.fields.applicant2ContactDetailsConsent);
     I.click('Save and continue');
     I.wait('3');
   },
