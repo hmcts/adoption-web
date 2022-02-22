@@ -53,9 +53,9 @@ type SummaryListContent = PageContent & {
 const getSectionSummaryList = (rows: SummaryListRow[], content: PageContent): GovUkNunjucksSummary[] => {
   const returnUrlQueryParam = `returnUrl=${Urls.CHECK_ANSWERS_URL}`;
   return rows.map(item => {
-    let changeUrl;
-    if (item.changeUrl) {
-      changeUrl = `${item.changeUrl}${item.changeUrl.indexOf('?') === -1 ? '?' : '&'}${returnUrlQueryParam}`;
+    let changeUrl = item.changeUrl;
+    if (changeUrl) {
+      changeUrl += `${changeUrl.indexOf('?') === -1 ? '?' : '&'}${returnUrlQueryParam}`;
     }
     return {
       key: { text: item.key, html: item.keyHtml },
@@ -64,7 +64,7 @@ const getSectionSummaryList = (rows: SummaryListRow[], content: PageContent): Go
         items: changeUrl
           ? [
               {
-                href: changeUrl as string,
+                href: changeUrl,
                 text: content.change as string,
                 visuallyHiddenText: `Change ${item.key}`,
               },
@@ -112,7 +112,7 @@ export const adoptionAgencySummaryList = (
     adoptionAgency = userCase.adopAgencyOrLAs[agencyIndex];
   }
 
-  const changeUrl = `${Urls.ADOPTION_AGENCY}?change=${adoptionAgency.adopAgencyOrLaId}`;
+  const changeUrl = `${Urls.ADOPTION_AGENCY}?change=${adoptionAgency?.adopAgencyOrLaId}`;
   return {
     title: agencyIndex === 0 ? sectionTitles.adoptionagencyOrLA : sectionTitles.additionalAoptionagencyOrLA,
     rows: getSectionSummaryList(
