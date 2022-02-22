@@ -448,22 +448,23 @@ export const childrenPlacementOrderSummaryList = (
             {
               key: keys.typeOfOrder,
               value: item.placementOrderType || keys.placementOrder,
-              changeUrl: Urls.CHILDREN_FULL_NAME,
+              changeUrl:
+                index !== 0 ? `${Urls.CHILDREN_PLACEMENT_ORDER_TYPE}?change=${item.placementOrderId}` : undefined,
             },
             {
               key: keys.orderNumber,
               value: item.placementOrderNumber,
-              changeUrl: Urls.CHILDREN_DATE_OF_BIRTH,
+              changeUrl: `${Urls.CHILDREN_PLACEMENT_ORDER_NUMBER}?change=${item.placementOrderId}`,
             },
             {
               key: keys.court,
               value: item.placementOrderCourt,
-              changeUrl: Urls.CHILDREN_SEX_AT_BIRTH,
+              changeUrl: `${Urls.CHILDREN_PLACEMENT_ORDER_COURT}?change=${item.placementOrderId}`,
             },
             {
               key: keys.date,
               valueHtml: getFormattedDate(item.placementOrderDate as CaseDate, content.language),
-              changeUrl: Urls.CHILDREN_NATIONALITY,
+              changeUrl: `${Urls.CHILDREN_PLACEMENT_ORDER_DATE}?change=${item.placementOrderId}`,
             },
           ],
           content
