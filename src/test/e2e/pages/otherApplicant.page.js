@@ -32,5 +32,6 @@ module.exports = {
     I.click(this.fields.applicant1ContactDetails2);
     I.fillField(this.fields.applicant1PhoneNumber, '09876543210');
     I.click('Save and continue');
+    I.wait('3');
   },
 };
