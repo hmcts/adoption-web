@@ -1,5 +1,5 @@
 import { Checkbox } from '../case';
-import { DivorceDocument, DocumentType } from '../definition';
+import { AdoptionDocument, DocumentType } from '../definition';
 
 import { fromApiApplicant1, fromApiApplicant2 } from './uploaded-files';
 
@@ -7,8 +7,8 @@ describe('uploadedFilesFromApiApplicant1', () => {
   it('converts documents', async () => {
     const result = fromApiApplicant1({
       applicant1DocumentsUploaded: [
-        { id: '1', value: { documentFileName: 'filename' } as DivorceDocument },
-        { id: '2', value: { documentFileName: 'filename' } as DivorceDocument },
+        { id: '1', value: { documentFileName: 'filename' } as AdoptionDocument },
+        { id: '2', value: { documentFileName: 'filename' } as AdoptionDocument },
       ],
     });
 
@@ -20,10 +20,10 @@ describe('uploadedFilesFromApiApplicant1', () => {
 
   it('sets cannot upload', async () => {
     const result = fromApiApplicant1({
-      applicant1CannotUploadSupportingDocument: [DocumentType.MARRIAGE_CERTIFICATE],
+      applicant1CannotUploadSupportingDocument: [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE],
     });
 
-    expect(result.applicant1CannotUpload).toBe(Checkbox.Checked);
+    expect(result.applicant1CannotUpload).toBe(Checkbox.Unchecked);
   });
 });
 
@@ -31,8 +31,8 @@ describe('uploadedFilesFromApiApplicant2', () => {
   it('converts documents', async () => {
     const result = fromApiApplicant2({
       applicant2DocumentsUploaded: [
-        { id: '1', value: { documentFileName: 'filename' } as DivorceDocument },
-        { id: '2', value: { documentFileName: 'filename' } as DivorceDocument },
+        { id: '1', value: { documentFileName: 'filename' } as AdoptionDocument },
+        { id: '2', value: { documentFileName: 'filename' } as AdoptionDocument },
       ],
     });
 
@@ -44,7 +44,7 @@ describe('uploadedFilesFromApiApplicant2', () => {
 
   it('sets cannot upload', async () => {
     const result = fromApiApplicant2({
-      applicant2CannotUploadSupportingDocument: [DocumentType.MARRIAGE_CERTIFICATE],
+      applicant2CannotUploadSupportingDocument: [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE],
     });
 
     expect(result.applicant2CannotUpload).toBe(Checkbox.Checked);
