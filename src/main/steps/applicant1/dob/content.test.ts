@@ -18,9 +18,9 @@ const commonContent = {
 } as CommonContent;
 
 const enContent = {
-  section: 'Primary applicant',
+  section: 'First applicant',
   title: "What's your date of birth?",
-  hint: 'For example, 28 6 1997',
+  hint: 'For example, 27 3 2007',
   errors: {
     applicant1DateOfBirth: {
       required: 'Enter your date of birth',
@@ -34,9 +34,9 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Primary applicant (in Welsh)',
+  section: 'First applicant (in Welsh)',
   title: "What's your date of birth? (in Welsh)",
-  hint: 'For example, 28 6 1997 (in Welsh)',
+  hint: 'For example, 27 3 2007 (in Welsh)',
   errors: {
     applicant1DateOfBirth: {
       required: 'Enter your date of birth (in Welsh)',
@@ -95,7 +95,7 @@ describe('appllicant1 > dob-content', () => {
     expect(dobField.classes).toBe('govuk-date-input');
     expect((dobField.label as Function)(generatedContent)).toBe("What's your date of birth?");
     expect(dobField.labelHidden).toBe(true);
-    expect((dobField.hint as Function)(generatedContent)).toBe('For example, 28 6 1997');
+    expect((dobField.hint as Function)(generatedContent)).toBe('For example, 27 3 2007');
 
     expect((dobField.values[0].label as Function)(commonContent)).toBe('Day');
     expect(dobField.values[0].name).toBe('day');

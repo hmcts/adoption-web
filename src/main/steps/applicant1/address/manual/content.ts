@@ -1,3 +1,4 @@
+import { ApplyingWith } from '../../../../app/case/definition';
 import { TranslationFn } from '../../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../../app/form/Form';
 import {
@@ -5,25 +6,31 @@ import {
   generateContent as manualAddressGenerateContent,
 } from '../../../common/components/address-manual';
 
-const en = manualAddressContent => ({
-  section: 'Primary applicant',
-  title: "What's your home address?",
-  errors: {
-    applicant1Address1: manualAddressContent.errors.address1,
-    applicant1AddressTown: manualAddressContent.errors.addressTown,
-    applicant1AddressPostcode: manualAddressContent.errors.addressPostcode,
-  },
-});
+const en = ({ manualAddressContent, userCase }): Record<string, unknown> => {
+  const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant' : 'First applicant';
+  return {
+    section,
+    title: "What's your address?",
+    errors: {
+      applicant1Address1: manualAddressContent.errors.address1,
+      applicant1AddressTown: manualAddressContent.errors.addressTown,
+      applicant1AddressPostcode: manualAddressContent.errors.addressPostcode,
+    },
+  };
+};
 
-const cy = manualAddressContent => ({
-  section: 'Primary applicant (in welsh)',
-  title: "What's your home address? (in welsh)",
-  errors: {
-    applicant1Address1: manualAddressContent.errors.address1,
-    applicant1AddressTown: manualAddressContent.errors.addressTown,
-    applicant1AddressPostcode: manualAddressContent.errors.addressPostcode,
-  },
-});
+const cy = ({ manualAddressContent, userCase }): Record<string, unknown> => {
+  const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant (in welsh)' : 'First applicant (in welsh)';
+  return {
+    section,
+    title: "What's your address? (in welsh)",
+    errors: {
+      applicant1Address1: manualAddressContent.errors.address1,
+      applicant1AddressTown: manualAddressContent.errors.addressTown,
+      applicant1AddressPostcode: manualAddressContent.errors.addressPostcode,
+    },
+  };
+};
 
 const manualAddressFormFields = manualAddressForm.fields as FormFields;
 export const form: FormContent = {
@@ -44,7 +51,8 @@ const languages = {
 
 export const generateContent: TranslationFn = content => {
   const manualAddressContent = manualAddressGenerateContent(content);
-  const translations = languages[content.language](manualAddressContent);
+  const translations = languages[content.language]({ manualAddressContent, userCase: content.userCase });
+
   return {
     ...manualAddressContent,
     ...translations,

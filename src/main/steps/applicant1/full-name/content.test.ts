@@ -7,7 +7,7 @@ import { generateContent } from './content';
 jest.mock('../../../app/form/validation');
 
 const enContent = {
-  section: 'Primary applicant',
+  section: 'First applicant',
   title: "What's your full name?",
   errors: {
     applicant1FirstNames: {
@@ -19,7 +19,7 @@ const enContent = {
   },
 };
 const cyContent = {
-  section: 'Primary applicant (in Welsh)',
+  section: 'First applicant (in Welsh)',
   title: "What's your full name? (in Welsh)",
   errors: {
     applicant1FirstNames: {

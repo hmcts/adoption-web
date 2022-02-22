@@ -11,7 +11,7 @@ describe('applying-with content', () => {
   const commonContent = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
-    expect(generatedContent.section).toEqual('Applicant details');
+    expect(generatedContent.section).toEqual('Application details');
     expect(generatedContent.label).toEqual('Are you applying on your own, or with someone else?');
     expect(generatedContent.one).toEqual("I'm applying on my own");
     expect(generatedContent.two).toEqual("I'm applying with my spouse or civil partner");
@@ -20,7 +20,7 @@ describe('applying-with content', () => {
 
   test('should return correct welsh content', () => {
     const generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual('Applicant details (in welsh)');
+    expect(generatedContent.section).toEqual('Application details (in welsh)');
     expect(generatedContent.label).toEqual('Are you applying on your own, or with someone else?(in welsh)');
     expect(generatedContent.one).toEqual("I'm applying on my own (in welsh)");
     expect(generatedContent.two).toEqual("I'm applying with my spouse or civil partner (in welsh)");
@@ -39,7 +39,7 @@ describe('applying-with content', () => {
     expect((applyingWithField.label as Function)(generatedContent)).toBe(
       'Are you applying on your own, or with someone else?'
     );
-    expect((applyingWithField.section as Function)(generatedContent)).toBe('Applicant details');
+    expect((applyingWithField.section as Function)(generatedContent)).toBe('Application details');
     expect((applyingWithField.values[0].label as Function)(generatedContent)).toBe("I'm applying on my own");
     expect((applyingWithField.values[1].label as Function)(generatedContent)).toBe(
       "I'm applying with my spouse or civil partner"

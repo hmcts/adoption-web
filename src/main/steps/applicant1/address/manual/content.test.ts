@@ -8,13 +8,13 @@ import {
 import { generateContent } from './content';
 
 const enContent = {
-  section: 'Primary applicant',
-  title: "What's your home address?",
+  section: 'First applicant',
+  title: "What's your address?",
 };
 
 const cyContent = {
-  section: 'Primary applicant (in welsh)',
-  title: "What's your home address? (in welsh)",
+  section: 'First applicant (in welsh)',
+  title: "What's your address? (in welsh)",
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

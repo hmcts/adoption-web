@@ -11,7 +11,7 @@ jest.mock('../../../app/form/validation');
 const CY = 'cy';
 const EN = 'en';
 const enContent = {
-  section: 'Primary applicant',
+  section: 'First applicant',
   label: "What's your occupation?",
   hint: 'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’.',
   warningText: {
@@ -35,7 +35,7 @@ const enContent = {
   },
 };
 const cyContent = {
-  section: 'Primary applicant (in Welsh)',
+  section: 'First applicant (in Welsh)',
   label: "What's your occupation? (in Welsh)",
   hint: 'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’. (in Welsh)',
   warningText: {
