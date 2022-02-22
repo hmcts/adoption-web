@@ -42,14 +42,14 @@ describe('utils', () => {
     test('Should return false if applyingWith is not present', async () => {
       const isValid = isApplyingWithComplete(userCase);
 
-      expect(isValid).toStrictEqual(false);
+      expect(isValid).toStrictEqual(NOT_STARTED);
     });
 
     test('Should return true if applyingWith is present', async () => {
       userCase.applyingWith = ApplyingWith.ALONE;
       const isValid = isApplyingWithComplete(userCase);
 
-      expect(isValid).toStrictEqual(true);
+      expect(isValid).toStrictEqual(COMPLETED);
     });
   });
 
