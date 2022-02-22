@@ -11,6 +11,7 @@ import {
   birthParentSummaryList,
   childrenPlacementOrderSummaryList,
   childrenSummaryList,
+  familyCourtSummaryList,
   otherParentSummaryList,
   siblingCourtOrderSummaryList,
   socialWorkerSummaryList,
@@ -122,6 +123,7 @@ const en = (content: CommonContent): Record<string, unknown> => {
       otherParentSummaryList(enContent, userCase),
       childrenPlacementOrderSummaryList(enContent, userCase),
       siblingCourtOrderSummaryList(enContent, userCase),
+      familyCourtSummaryList(enContent),
     ],
   };
 };
