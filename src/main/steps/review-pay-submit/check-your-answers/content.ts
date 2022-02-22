@@ -1,5 +1,5 @@
 import { FieldPrefix } from '../../../app/case/case';
-import { ApplyingWith, Gender } from '../../../app/case/definition';
+import { ApplyingWith, Gender, YesNoNotsure } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { CommonContent } from '../../../steps/common/common.content';
@@ -11,6 +11,7 @@ import {
   birthParentSummaryList,
   childrenPlacementOrderSummaryList,
   childrenSummaryList,
+  otherParentSummaryList,
   siblingCourtOrderSummaryList,
   socialWorkerSummaryList,
 } from './utils';
@@ -73,7 +74,6 @@ const en = (content: CommonContent): Record<string, unknown> => {
     section: 'Review your application',
     title: 'Review your answers',
     change: 'Change',
-    notSure: 'Not sure',
     submitApplication: 'Submit your application',
     checkInfoBeforeSubmit:
       'You should check that all the information given in your application is correct before you submit. Once submitted, your application will be sent to the court for processing.',
@@ -87,6 +87,11 @@ const en = (content: CommonContent): Record<string, unknown> => {
       [Gender.MALE]: 'Male',
       [Gender.FEMALE]: 'Female',
       [Gender.INTERSEX]: 'Other',
+    },
+    yesNoNotsure: {
+      [YesNoNotsure.YES]: 'Yes',
+      [YesNoNotsure.NO]: 'No',
+      [YesNoNotsure.NOT_SURE]: 'Not sure',
     },
     language: content.language,
     sectionTitles,
@@ -114,6 +119,7 @@ const en = (content: CommonContent): Record<string, unknown> => {
       childrenSummaryList(enContent, userCase),
       birthParentSummaryList(enContent, userCase, FieldPrefix.BIRTH_MOTHER),
       birthParentSummaryList(enContent, userCase, FieldPrefix.BIRTH_FATHER),
+      otherParentSummaryList(enContent, userCase),
       childrenPlacementOrderSummaryList(enContent, userCase),
       siblingCourtOrderSummaryList(enContent, userCase),
     ],

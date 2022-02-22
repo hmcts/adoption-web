@@ -47,6 +47,7 @@ type SummaryListContent = PageContent & {
   language?: string;
   gender: Record<string, string>;
   applyingWith: Record<string, string>;
+  yesNoNotsure: Record<string, string>;
 };
 
 const getSectionSummaryList = (rows: SummaryListRow[], content: PageContent): GovUkNunjucksSummary[] => {
@@ -324,7 +325,7 @@ export const birthParentSummaryList = (
           valueHtml:
             userCase[`${prefix}StillAlive`] === YesNoNotsure.NOT_SURE
               ? getNotSureReasonElement(userCase, content.notSure, reasonFieldName)
-              : userCase[`${prefix}StillAlive`],
+              : content.yesNoNotsure[userCase[`${prefix}StillAlive`]],
           changeUrl: Urls[`${urlPrefix}STILL_ALIVE`],
         },
         ...(userCase[`${prefix}StillAlive`] === YesOrNo.YES
@@ -344,7 +345,14 @@ export const birthParentSummaryList = (
               },
               {
                 key: keys.addressKnown,
-                value: userCase[`${prefix}AddressKnown`],
+                valueHtml:
+                  userCase[`${prefix}AddressKnown`] === YesOrNo.NO
+                    ? getNotSureReasonElement(
+                        userCase,
+                        content.yesNoNotsure[userCase[`${prefix}AddressKnown`]],
+                        `${prefix}AddressNotKnownReason`
+                      )
+                    : content.yesNoNotsure[userCase[`${prefix}AddressKnown`]],
                 changeUrl: Urls[`${urlPrefix}ADDRESS_KNOWN`],
               },
               ...(userCase[`${prefix}AddressKnown`] === YesOrNo.YES
@@ -364,6 +372,55 @@ export const birthParentSummaryList = (
   };
 };
 /* eslint-enable import/namespace */
+
+export const otherParentSummaryList = (
+  { sectionTitles, keys, ...content }: SummaryListContent,
+  userCase: Partial<CaseWithId>
+): SummaryList => {
+  return {
+    title: sectionTitles.otherParentDetails,
+    rows: getSectionSummaryList(
+      [
+        {
+          key: keys.otherParent,
+          value: content.yesNoNotsure[userCase.otherParentExists!],
+          changeUrl: Urls.OTHER_PARENT_EXISTS,
+        },
+        ...(userCase.otherParentExists === YesOrNo.YES
+          ? [
+              {
+                key: keys.fullName,
+                value: userCase.otherParentFirstNames + ' ' + userCase.otherParentLastNames,
+                changeUrl: Urls.OTHER_PARENT_NAME,
+              },
+              {
+                key: keys.addressKnown,
+                valueHtml:
+                  userCase.otherParentAddressKnown === YesOrNo.NO
+                    ? getNotSureReasonElement(
+                        userCase,
+                        content.yesNoNotsure[userCase.otherParentAddressKnown],
+                        'otherParentAddressNotKnownReason'
+                      )
+                    : content.yesNoNotsure[userCase.otherParentAddressKnown!],
+                changeUrl: Urls.OTHER_PARENT_ADDRESS_KNOWN,
+              },
+              ...(userCase.otherParentAddressKnown === YesOrNo.YES
+                ? [
+                    {
+                      key: keys.address,
+                      valueHtml: getFormattedAddress(userCase, FieldPrefix.OTHER_PARENT),
+                      changeUrl: Urls.OTHER_PARENT_MANUAL_ADDRESS, //TODO consider international address
+                    },
+                  ]
+                : []),
+            ]
+          : []),
+      ],
+      content
+    ),
+  };
+};
 
 export const childrenPlacementOrderSummaryList = (
   { sectionTitles, keys, ...content }: SummaryListContent,
