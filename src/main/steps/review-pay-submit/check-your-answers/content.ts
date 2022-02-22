@@ -1,312 +1,19 @@
-import { getFormattedDate } from '../../../app/case/answers/formatDate';
-import { CaseWithId, FieldPrefix } from '../../../app/case/case';
-import { ApplyingWith, Gender, Nationality, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
-import { getFormattedAddress } from '../../../app/case/formatter/address';
-import { PageContent, TranslationFn } from '../../../app/controller/GetController';
+import { FieldPrefix } from '../../../app/case/case';
+import { ApplyingWith, Gender } from '../../../app/case/definition';
+import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { CommonContent } from '../../../steps/common/common.content';
-import * as Urls from '../../../steps/urls';
 
-const getSectionSummaryList = (rows, content: PageContent) => {
-  const returnUrlQueryParam = `returnUrl=${Urls.CHECK_ANSWERS_URL}`;
-  return rows.map(item => {
-    const changeUrl = `${item.changeUrl}${item.changeUrl.indexOf('?') === -1 ? '?' : '&'}${returnUrlQueryParam}`;
-    return {
-      key: { text: item.key },
-      value: { text: item.value, html: item.valueHtml },
-      actions: {
-        items: [
-          {
-            href: changeUrl,
-            text: content.change,
-            visuallyHiddenText: `Change ${item.key}`,
-          },
-        ],
-      },
-    };
-  });
-};
-
-const applicationSummaryList = ({ sectionTitles, keys, language, ...content }, userCase: Partial<CaseWithId>) => ({
-  title: sectionTitles.applicationDetails,
-  rows: getSectionSummaryList(
-    [
-      {
-        key: keys.noOfApplicants,
-        value: content.applyingWith[userCase.applyingWith!],
-        changeUrl: Urls.APPLYING_WITH_URL,
-      },
-      {
-        key: keys.dateChildMovedIn,
-        value: getFormattedDate(userCase.dateChildMovedIn, language),
-        changeUrl: Urls.DATE_CHILD_MOVED_IN,
-      },
-    ],
-    content
-  ),
-});
-
-const adoptionAgencySummaryList = (
-  { sectionTitles, keys, ...content },
-  userCase: Partial<CaseWithId>,
-  agencyIndex = 0
-) => {
-  let adoptionAgency;
-  if (!userCase.adopAgencyOrLAs?.length) {
-    return;
-  }
-
-  if (agencyIndex === 0 || (agencyIndex === 1 && userCase.hasAnotherAdopAgencyOrLA === YesOrNo.YES)) {
-    adoptionAgency = userCase.adopAgencyOrLAs[agencyIndex];
-  }
-
-  return {
-    title: agencyIndex === 0 ? sectionTitles.adoptionagencyOrLA : sectionTitles.additionalAoptionagencyOrLA,
-    rows: getSectionSummaryList(
-      [
-        ...(agencyIndex === 1
-          ? [
-              {
-                key: keys.additionalAdoptionAgency,
-                value: userCase.hasAnotherAdopAgencyOrLA,
-                changeUrl: Urls.OTHER_ADOPTION_AGENCY,
-              },
-            ]
-          : []),
-        ...(adoptionAgency
-          ? [
-              {
-                key: keys.name,
-                value: adoptionAgency?.adopAgencyOrLaName,
-                changeUrl: Urls.ADOPTION_AGENCY,
-              },
-              {
-                key: keys.phoneNumber,
-                value: adoptionAgency?.adopAgencyOrLaPhoneNumber,
-                changeUrl: Urls.ADOPTION_AGENCY,
-              },
-              {
-                key: keys.nameOfContact,
-                value: adoptionAgency?.adopAgencyOrLaContactName,
-                changeUrl: Urls.ADOPTION_AGENCY,
-              },
-              {
-                key: keys.emailOfContact,
-                value: adoptionAgency?.adopAgencyOrLaContactEmail,
-                changeUrl: Urls.ADOPTION_AGENCY,
-              },
-            ]
-          : []),
-      ],
-      content
-    ),
-  };
-};
-
-const socialWorkerSummaryList = ({ sectionTitles, keys, ...content }, userCase: Partial<CaseWithId>) => {
-  return {
-    title: sectionTitles.socialWorkerDetails,
-    rows: getSectionSummaryList(
-      [
-        {
-          key: keys.name,
-          value: userCase.socialWorkerName,
-          changeUrl: Urls.SOCIAL_WORKER,
-        },
-        {
-          key: keys.phoneNumber,
-          value: userCase.socialWorkerPhoneNumber,
-          changeUrl: Urls.SOCIAL_WORKER,
-        },
-        {
-          key: keys.emailAddress,
-          value: userCase.socialWorkerEmail,
-          changeUrl: Urls.SOCIAL_WORKER,
-        },
-        {
-          key: keys.teamEmailAddress,
-          value: userCase.socialWorkerTeamEmail,
-          changeUrl: Urls.SOCIAL_WORKER,
-        },
-      ],
-      content
-    ),
-  };
-};
-
-/* eslint-disable import/namespace */
-const applicantSummaryList = (
-  { sectionTitles, keys, ...content },
-  userCase: Partial<CaseWithId>,
-  prefix: FieldPrefix
-) => {
-  const urlPrefix = prefix === FieldPrefix.APPLICANT1 ? 'APPLICANT_1_' : 'APPLICANT_2_';
-  let sectionTitle = sectionTitles.applicantDetails;
-  if (prefix === FieldPrefix.APPLICANT1 && userCase.applyingWith !== ApplyingWith.ALONE) {
-    sectionTitle = sectionTitles.firstApplicantDetails;
-  } else if (prefix === FieldPrefix.APPLICANT2) {
-    sectionTitle = sectionTitles.secondApplicantDetails;
-  }
-
-  return {
-    title: sectionTitle,
-    rows: getSectionSummaryList(
-      [
-        {
-          key: keys.fullName,
-          value: userCase[`${prefix}FirstNames`] + ' ' + userCase[`${prefix}LastNames`],
-          changeUrl: Urls[`${urlPrefix}FULL_NAME`],
-        },
-        {
-          key: keys.previousNames,
-          valueHtml: userCase[`${prefix}HasOtherNames`]
-            ? userCase[`${prefix}AdditionalNames`]?.map(item => `${item.firstNames} ${item.lastNames}`).join('<br>')
-            : '',
-          changeUrl: Urls[`${urlPrefix}OTHER_NAMES`],
-        },
-        {
-          key: keys.dateOfBirth,
-          value: getFormattedDate(userCase[`${prefix}DateOfBirth`], content.language),
-          changeUrl: Urls[`${urlPrefix}DOB`],
-        },
-        {
-          key: keys.occupation,
-          value: userCase[`${prefix}Occupation`],
-          changeUrl: Urls[`${urlPrefix}OCCUPATION`],
-        },
-        {
-          key: keys.address,
-          valueHtml: getFormattedAddress(userCase, prefix),
-          changeUrl: Urls[`${urlPrefix}MANUAL_ADDRESS`],
-        },
-        {
-          key: keys.emailAddress,
-          value: userCase[`${prefix}EmailAddress`],
-          changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
-        },
-        {
-          key: keys.phoneNumber,
-          value: userCase[`${prefix}PhoneNumber`],
-          changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
-        },
-      ],
-      content
-    ),
-  };
-};
-/* eslint-enable import/namespace */
-
-const formatNationalities = (nationality: (string | Nationality)[], additionalNationalities: string[]): string => {
-  const nationalities = nationality.filter(item => item !== Nationality.OTHER);
-  if (nationality.includes(Nationality.OTHER)) {
-    nationalities.push(...additionalNationalities);
-  }
-  return nationalities.join('<br>');
-};
-
-const childrenSummaryList = ({ sectionTitles, keys, ...content }, userCase: Partial<CaseWithId>) => {
-  return {
-    title: sectionTitles.childDetails,
-    rows: getSectionSummaryList(
-      [
-        {
-          key: keys.fullName,
-          value: userCase.childrenFirstName + ' ' + userCase.childrenLastName,
-          changeUrl: Urls.CHILDREN_FULL_NAME,
-        },
-        {
-          key: keys.dateOfBirth,
-          value: getFormattedDate(userCase.childrenDateOfBirth),
-          changeUrl: Urls.CHILDREN_DATE_OF_BIRTH,
-        },
-        {
-          key: keys.sexAtBirth,
-          value: content.gender[userCase.childrenSexAtBirth!],
-          changeUrl: Urls.CHILDREN_SEX_AT_BIRTH,
-        },
-        {
-          key: keys.nationality,
-          valueHtml: formatNationalities(userCase.childrenNationality!, userCase.childrenAdditionalNationalities!),
-          changeUrl: Urls.CHILDREN_NATIONALITY,
-        },
-        {
-          key: keys.fullNameAfterAdoption,
-          value: userCase.childrenFirstNameAfterAdoption + ' ' + userCase.childrenLastNameAfterAdoption,
-          changeUrl: Urls.CHILDREN_FULL_NAME_AFTER_ADOPTION,
-        },
-      ],
-      content
-    ),
-  };
-};
-
-const getNotSureReasonElement = (userCase, notSure, reasonFieldName) => {
-  return `${notSure}<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">Reason: </span>${userCase[reasonFieldName]}</p>`;
-};
-
-/* eslint-disable import/namespace */
-const birthParentSummaryList = (
-  { sectionTitles, keys, ...content },
-  userCase: Partial<CaseWithId>,
-  prefix: FieldPrefix
-) => {
-  const urlPrefix = prefix === FieldPrefix.BIRTH_MOTHER ? 'BIRTH_MOTHER_' : 'BIRTH_FATHER_';
-  const reasonFieldName =
-    prefix === FieldPrefix.BIRTH_MOTHER ? `${prefix}NotAliveReason` : `${prefix}UnsureAliveReason`;
-  return {
-    title: sectionTitles[`${prefix}Details`],
-    rows: getSectionSummaryList(
-      [
-        {
-          key: keys.fullName,
-          value: userCase[`${prefix}FirstNames`] + ' ' + userCase[`${prefix}LastNames`],
-          changeUrl: Urls[`${urlPrefix}FULL_NAME`],
-        },
-        {
-          key: keys.alive,
-          valueHtml:
-            userCase[`${prefix}StillAlive`] === YesNoNotsure.NOT_SURE
-              ? getNotSureReasonElement(userCase, content.notSure, reasonFieldName)
-              : userCase[`${prefix}StillAlive`],
-          changeUrl: Urls[`${urlPrefix}STILL_ALIVE`],
-        },
-        ...(userCase[`${prefix}StillAlive`] === YesOrNo.YES
-          ? [
-              {
-                key: keys.nationality,
-                valueHtml: formatNationalities(
-                  userCase[`${prefix}Nationality`],
-                  userCase[`${prefix}AdditionalNationalities`]
-                ),
-                changeUrl: Urls[`${urlPrefix}NATIONALITY`],
-              },
-              {
-                key: keys.occupation,
-                value: userCase[`${prefix}Occupation`],
-                changeUrl: Urls[`${urlPrefix}OCCUPATION`],
-              },
-              {
-                key: keys.addressKnown,
-                value: userCase[`${prefix}AddressKnown`],
-                changeUrl: Urls[`${urlPrefix}ADDRESS_KNOWN`],
-              },
-              ...(userCase[`${prefix}AddressKnown`] === YesOrNo.YES
-                ? [
-                    {
-                      key: keys.address,
-                      valueHtml: getFormattedAddress(userCase, FieldPrefix.BIRTH_MOTHER),
-                      changeUrl: Urls[`${urlPrefix}ADDRESS_MANUAL`],
-                    },
-                  ]
-                : []),
-            ]
-          : []),
-      ],
-      content
-    ),
-  };
-};
-/* eslint-enable import/namespace */
+import {
+  adoptionAgencySummaryList,
+  applicantSummaryList,
+  applicationSummaryList,
+  birthParentSummaryList,
+  childrenPlacementOrderSummaryList,
+  childrenSummaryList,
+  siblingCourtOrderSummaryList,
+  socialWorkerSummaryList,
+} from './utils';
 
 const en = (content: CommonContent): Record<string, unknown> => {
   const sectionTitles = {
@@ -355,6 +62,7 @@ const en = (content: CommonContent): Record<string, unknown> => {
     court: 'Court',
     date: 'Date',
     courtOrder: 'Court order',
+    siblingCourtOrders: 'Sibling with court orders',
     siblingName: 'Sibling name',
     familyCourtName: 'Family court name',
     applicantDocuments: "Applicant's documents",
@@ -406,6 +114,8 @@ const en = (content: CommonContent): Record<string, unknown> => {
       childrenSummaryList(enContent, userCase),
       birthParentSummaryList(enContent, userCase, FieldPrefix.BIRTH_MOTHER),
       birthParentSummaryList(enContent, userCase, FieldPrefix.BIRTH_FATHER),
+      childrenPlacementOrderSummaryList(enContent, userCase),
+      siblingCourtOrderSummaryList(enContent, userCase),
     ],
   };
 };
