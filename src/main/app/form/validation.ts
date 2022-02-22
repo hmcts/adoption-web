@@ -192,3 +192,9 @@ export const isTextAreaValid: Validator = value => {
     return ValidationError.INVALID;
   }
 };
+
+export const isWordCountValid: Validator = value => {
+  if (value && (value as string).trim?.().split(' ').length > 100) {
+    return ValidationError.INVALID;
+  }
+};
