@@ -5,7 +5,7 @@ import {
   form as addressLookupForm,
   generateContent as addressLookupGenerateContent,
 } from '../../../common/components/address-lookup';
-import { BIRTH_FATHER_ADDRESS_MANUAL } from '../../../urls';
+import { BIRTH_FATHER_MANUAL_ADDRESS } from '../../../urls';
 
 const en = addressLookupContent => ({
   section: SECTION,
@@ -13,7 +13,7 @@ const en = addressLookupContent => ({
   errors: {
     birthFatherAddressPostcode: addressLookupContent.errors.addressPostcode,
   },
-  manualAddressUrl: BIRTH_FATHER_ADDRESS_MANUAL,
+  manualAddressUrl: BIRTH_FATHER_MANUAL_ADDRESS,
 });
 
 const cy = addressLookupContent => ({
@@ -22,7 +22,7 @@ const cy = addressLookupContent => ({
   errors: {
     birthFatherAddressPostcode: addressLookupContent.errors.addressPostcode,
   },
-  manualAddressUrl: BIRTH_FATHER_ADDRESS_MANUAL,
+  manualAddressUrl: BIRTH_FATHER_MANUAL_ADDRESS,
 });
 
 const addressLookupFormFields = addressLookupForm.fields as FormFields;

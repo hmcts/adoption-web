@@ -371,7 +371,7 @@ export const birthParentSummaryList = (
                     {
                       key: keys.address,
                       valueHtml: getFormattedAddress(userCase, prefix),
-                      changeUrl: Urls[`${urlPrefix}ADDRESS_MANUAL`], //TODO consider international address
+                      changeUrl: Urls[`${urlPrefix}MANUAL_ADDRESS`], //TODO consider international address
                     },
                   ]
                 : []),
