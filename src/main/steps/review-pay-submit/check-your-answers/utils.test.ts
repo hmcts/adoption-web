@@ -7,8 +7,13 @@ import {
   applicantSummaryList,
   applicationSummaryList,
   birthParentSummaryList,
+  childrenPlacementOrderSummaryList,
   childrenSummaryList,
+  familyCourtSummaryList,
+  otherParentSummaryList,
+  siblingCourtOrderSummaryList,
   socialWorkerSummaryList,
+  uploadedDocumentSummaryList,
 } from './utils';
 
 describe('review-pay-submit > check-your-answers > utils', () => {
@@ -71,6 +76,21 @@ describe('review-pay-submit > check-your-answers > utils', () => {
     childrenAdditionalNationalities: ['MOCK_COUNTRY'],
     childrenFirstNameAfterAdoption: 'MOCK_FIRST_NAME_AFTER_ADOPTION',
     childrenLastNameAfterAdoption: 'MOCK_LAST_NAME_AFTER_ADOPTION',
+    placementOrders: [
+      {
+        placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+        placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
+        placementOrderCourt: 'MOCK_PLACEMENT_ORDER_COURT',
+        placementOrderDate: { day: 12, month: 11, year: 2020 },
+      },
+      {
+        placementOrderId: 'MOCK_PLACEMENT_ORDER_ID2',
+        placementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE2',
+        placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER2',
+        placementOrderCourt: 'MOCK_PLACEMENT_ORDER_COURT2',
+        placementOrderDate: { day: 10, month: 11, year: 2020 },
+      },
+    ],
 
     birthMotherFirstNames: 'BIRTH_MOTHER_FIRST_NAMES',
     birthMotherLastNames: 'BIRTH_MOTHER_LAST_NAMES',
@@ -98,6 +118,33 @@ describe('review-pay-submit > check-your-answers > utils', () => {
     birthFatherAddressCounty: 'MOCK_ADDRESS_COUNTY',
     birthFatherAddressPostcode: 'MOCK_ADDRESS_POSTCODE',
     birthFatherAddressCountry: 'MOCK_ADDRESS_COUNTRY',
+
+    otherParentFirstNames: 'MOCK_OTHER_PARENT_FIRST_NAME',
+    otherParentLastNames: 'MOCK_OTHER_PARENT_FIRST_NAME',
+    otherParentExists: YesOrNo.YES,
+    otherParentAddress1: 'MOCK_ADDRESS_1',
+    otherParentAddressTown: 'MOCK_ADDRESS_TOWN',
+    otherParentAddressCounty: 'MOCK_ADDRESS_COUNTY',
+    otherParentAddressPostcode: 'MOCK_ADDRESS_POSTCODE',
+    otherParentAddressCountry: 'MOCK_ADDRESS_COUNTRY',
+    otherParentAddressKnown: YesOrNo.YES,
+
+    siblings: [
+      {
+        siblingId: 'MOCK_SIBLING_ID',
+        siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+        siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
+        siblingPlacementOrders: [
+          {
+            placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+            placementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
+            placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
+          },
+        ],
+      },
+    ],
+
+    applicant1DocumentsUploaded: [{ id: 'MOCK_DOCUMENT_ID', value: { documentFileName: 'MOCK_DOCUMENT_FILE_NAME' } }],
   } as unknown as CaseWithId;
 
   describe('applicationSummaryList', () => {
@@ -136,7 +183,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
           title: 'Application details',
         },
       },
-    ])('return correct summary list items when %o', ({ userCase, expected }) => {
+    ])('return correct summary list items when %#', ({ userCase, expected }) => {
       expect(applicationSummaryList(enContent, userCase)).toStrictEqual(expected);
     });
   });
@@ -145,7 +192,6 @@ describe('review-pay-submit > check-your-answers > utils', () => {
     test.each([
       {
         userCase: mockUserCase,
-        agencyIndex: 0,
         expected: {
           title: 'Adoption agency or local authority details',
           rows: [
@@ -278,7 +324,29 @@ describe('review-pay-submit > check-your-answers > utils', () => {
           ],
         },
       },
-    ])('return correct summary list items when %o', ({ userCase, agencyIndex, expected }) => {
+      {
+        userCase: { ...mockUserCase, hasAnotherAdopAgencyOrLA: YesOrNo.NO },
+        agencyIndex: 1,
+        expected: {
+          title: 'Additional adoption agency or local authority details',
+          rows: [
+            {
+              key: { text: 'Additional adoption agency' },
+              value: { text: 'No' },
+              actions: {
+                items: [
+                  {
+                    href: '/children/other-adoption-agency?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Additional adoption agency',
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    ])('return correct summary list items when %#', ({ userCase, agencyIndex, expected }) => {
       expect(adoptionAgencySummaryList(enContent, userCase, agencyIndex)).toStrictEqual(expected);
     });
   });
@@ -346,7 +414,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
           ],
         },
       },
-    ])('return correct summary list items when %o', ({ userCase, expected }) => {
+    ])('return correct summary list items when %#', ({ userCase, expected }) => {
       expect(socialWorkerSummaryList(enContent, userCase)).toStrictEqual(expected);
     });
   });
@@ -659,7 +727,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
           ],
         },
       },
-    ])('return correct summary list items when %o', ({ userCase, fieldPrefix, expected }) => {
+    ])('return correct summary list items when %#', ({ userCase, fieldPrefix, expected }) => {
       expect(applicantSummaryList(enContent, userCase, fieldPrefix)).toStrictEqual(expected);
     });
   });
@@ -739,7 +807,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
           ],
         },
       },
-    ])('return correct summary list items when %o', ({ userCase, expected }) => {
+    ])('return correct summary list items when %#', ({ userCase, expected }) => {
       expect(childrenSummaryList(enContent, userCase)).toStrictEqual(expected);
     });
   });
@@ -1036,8 +1104,391 @@ describe('review-pay-submit > check-your-answers > utils', () => {
           ],
         },
       },
-    ])('return correct summary list items when %o', ({ userCase, fieldPrefix, expected }) => {
+    ])('return correct summary list items when %#', ({ userCase, fieldPrefix, expected }) => {
       expect(birthParentSummaryList(enContent, userCase, fieldPrefix)).toStrictEqual(expected);
+    });
+  });
+
+  describe('otherParentSummaryList', () => {
+    test.each([
+      {
+        userCase: mockUserCase,
+        expected: {
+          title: "Other parent's details",
+          rows: [
+            {
+              key: { text: 'Is there another person with parental responsibility?' },
+              value: { text: 'Yes' },
+              actions: {
+                items: [
+                  {
+                    href: '/other-parent/exists?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Is there another person with parental responsibility?',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Full name' },
+              value: { text: 'MOCK_OTHER_PARENT_FIRST_NAME MOCK_OTHER_PARENT_FIRST_NAME' },
+              actions: {
+                items: [
+                  {
+                    href: '/other-parent/full-name?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Full name',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Address known' },
+              value: { html: 'Yes' },
+              actions: {
+                items: [
+                  {
+                    href: '/other-parent/address-known?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Address known',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Address' },
+              value: {
+                html: 'MOCK_ADDRESS_1<br>MOCK_ADDRESS_TOWN<br>MOCK_ADDRESS_COUNTY<br>MOCK_ADDRESS_POSTCODE<br>MOCK_ADDRESS_COUNTRY',
+              },
+              actions: {
+                items: [
+                  {
+                    href: '/other-parent/address/manual?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Address',
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+      {
+        userCase: { ...mockUserCase, otherParentExists: YesOrNo.NO },
+        expected: {
+          title: "Other parent's details",
+          rows: [
+            {
+              key: { text: 'Is there another person with parental responsibility?' },
+              value: { text: 'No' },
+              actions: {
+                items: [
+                  {
+                    href: '/other-parent/exists?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Is there another person with parental responsibility?',
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+      {
+        userCase: {
+          ...mockUserCase,
+          otherParentAddressKnown: YesOrNo.NO,
+          otherParentAddressNotKnownReason: 'MOCK_REASON',
+        },
+        expected: {
+          title: "Other parent's details",
+          rows: [
+            {
+              key: { text: 'Is there another person with parental responsibility?' },
+              value: { text: 'Yes' },
+              actions: {
+                items: [
+                  {
+                    href: '/other-parent/exists?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Is there another person with parental responsibility?',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Full name' },
+              value: { text: 'MOCK_OTHER_PARENT_FIRST_NAME MOCK_OTHER_PARENT_FIRST_NAME' },
+              actions: {
+                items: [
+                  {
+                    href: '/other-parent/full-name?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Full name',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Address known' },
+              value: {
+                html: 'No<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">Reason: </span>MOCK_REASON</p>',
+              },
+              actions: {
+                items: [
+                  {
+                    href: '/other-parent/address-known?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Address known',
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    ])('return correct summary list items when %#', ({ userCase, expected }) => {
+      expect(otherParentSummaryList(enContent, userCase)).toStrictEqual(expected);
+    });
+  });
+
+  describe('childrenPlacementOrderSummaryList', () => {
+    test.each([
+      {
+        userCase: mockUserCase,
+        expected: {
+          title: "Child's placement and court orders",
+          rows: [
+            {
+              key: { html: '<h3 class="govuk-heading-s ">Placement order</h3>' },
+              value: {},
+              classes: 'govuk-summary-list__row--no-border',
+            },
+            { key: { text: 'Type of order' }, value: { text: 'Placement order' } },
+            {
+              key: { text: 'Order case or serial number' },
+              value: { text: 'MOCK_PLACEMENT_ORDER_NUMBER' },
+              actions: {
+                items: [
+                  {
+                    href: '/children/placement-order-number?change=MOCK_PLACEMENT_ORDER_ID&returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Order case or serial number',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Court' },
+              value: { text: 'MOCK_PLACEMENT_ORDER_COURT' },
+              actions: {
+                items: [
+                  {
+                    href: '/children/placement-order-court?change=MOCK_PLACEMENT_ORDER_ID&returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Court',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Date' },
+              value: { html: '12 November 2020' },
+              actions: {
+                items: [
+                  {
+                    href: '/children/placement-order-date?change=MOCK_PLACEMENT_ORDER_ID&returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Date',
+                  },
+                ],
+              },
+            },
+            {
+              key: { html: '<h3 class="govuk-heading-s govuk-!-margin-top-8">Court order</h3>' },
+              value: {},
+              classes: 'govuk-summary-list__row--no-border',
+            },
+            {
+              key: { text: 'Type of order' },
+              value: { text: 'MOCK_PLACEMENT_ORDER_TYPE2' },
+              actions: {
+                items: [
+                  {
+                    href: '/children/placement-order-type?change=MOCK_PLACEMENT_ORDER_ID2&returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Type of order',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Order case or serial number' },
+              value: { text: 'MOCK_PLACEMENT_ORDER_NUMBER2' },
+              actions: {
+                items: [
+                  {
+                    href: '/children/placement-order-number?change=MOCK_PLACEMENT_ORDER_ID2&returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Order case or serial number',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Court' },
+              value: { text: 'MOCK_PLACEMENT_ORDER_COURT2' },
+              actions: {
+                items: [
+                  {
+                    href: '/children/placement-order-court?change=MOCK_PLACEMENT_ORDER_ID2&returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Court',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Date' },
+              value: { html: '10 November 2020' },
+              actions: {
+                items: [
+                  {
+                    href: '/children/placement-order-date?change=MOCK_PLACEMENT_ORDER_ID2&returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Date',
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    ])('return correct summary list items when %#', ({ userCase, expected }) => {
+      console.log(JSON.stringify(childrenPlacementOrderSummaryList(enContent, userCase)));
+
+      expect(childrenPlacementOrderSummaryList(enContent, userCase)).toStrictEqual(expected);
+    });
+  });
+
+  describe('siblingCourtOrderSummaryList', () => {
+    test.each([
+      {
+        userCase: mockUserCase,
+        expected: {
+          title: 'Sibling court orders',
+          rows: [
+            {
+              key: { html: '<h3 class="govuk-heading-s">Sibling with court orders</h3>' },
+              value: {},
+              classes: 'govuk-summary-list__row--no-border',
+            },
+            {
+              key: { text: 'Sibling name' },
+              value: { text: 'MOCK_SIBLING_FIRST_NAME MOCK_SIBLING_LAST_NAMES' },
+              actions: {
+                items: [
+                  {
+                    href: '/sibling/name?change=MOCK_SIBLING_ID&returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Sibling name',
+                  },
+                ],
+              },
+            },
+            {
+              key: { html: '<h3 class="govuk-heading-s govuk-!-margin-top-8">Court order</h3>' },
+              value: {},
+              classes: 'govuk-summary-list__row--no-border',
+            },
+            { key: { text: 'Sibling name' }, value: { text: 'MOCK_SIBLING_FIRST_NAME MOCK_SIBLING_LAST_NAMES' } },
+            {
+              key: { text: 'Type of order' },
+              value: { text: 'MOCK_PLACEMENT_ORDER_TYPE' },
+              actions: {
+                items: [
+                  {
+                    href: '/sibling/placement-order-type?change=MOCK_SIBLING_ID/MOCK_PLACEMENT_ORDER_ID&returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Type of order',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Order case or serial number' },
+              value: { text: 'MOCK_PLACEMENT_ORDER_NUMBER' },
+              actions: {
+                items: [
+                  {
+                    href: '/sibling/placement-order-number?change=MOCK_SIBLING_ID/MOCK_PLACEMENT_ORDER_ID&returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Order case or serial number',
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    ])('return correct summary list items when %#', ({ userCase, expected }) => {
+      expect(siblingCourtOrderSummaryList(enContent, userCase)).toStrictEqual(expected);
+    });
+  });
+
+  describe('familyCourtSummaryList', () => {
+    test.each([
+      {
+        userCase: mockUserCase,
+        expected: {
+          title: 'Family court details',
+          rows: [
+            {
+              key: { text: 'Family court name' },
+              value: { text: 'TBD' },
+              actions: {
+                items: [
+                  {
+                    href: '#?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Family court name',
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    ])('return correct summary list items when %#', ({ expected }) => {
+      expect(familyCourtSummaryList(enContent)).toStrictEqual(expected);
+    });
+  });
+
+  describe('uploadedDocumentSummaryList', () => {
+    test.each([
+      {
+        userCase: mockUserCase,
+        expected: {
+          title: 'Uploaded documents',
+          rows: [
+            {
+              key: { text: "Child's documents" },
+              value: { html: 'MOCK_DOCUMENT_FILE_NAME' },
+              actions: {
+                items: [
+                  {
+                    href: '/upload-your-documents?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: "Change Child's documents",
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    ])('return correct summary list items when %#', ({ userCase, expected }) => {
+      expect(uploadedDocumentSummaryList(enContent, userCase)).toStrictEqual(expected);
     });
   });
 });

@@ -213,9 +213,10 @@ export const applicantSummaryList = (
         },
         {
           key: keys.previousNames,
-          valueHtml: userCase[`${prefix}HasOtherNames`]
-            ? userCase[`${prefix}AdditionalNames`]?.map(item => `${item.firstNames} ${item.lastNames}`).join('<br>')
-            : '',
+          valueHtml:
+            userCase[`${prefix}HasOtherNames`] === YesOrNo.YES
+              ? userCase[`${prefix}AdditionalNames`]?.map(item => `${item.firstNames} ${item.lastNames}`).join('<br>')
+              : '',
           changeUrl: Urls[`${urlPrefix}OTHER_NAMES`],
         },
         {
@@ -364,7 +365,7 @@ export const birthParentSummaryList = (
                     {
                       key: keys.address,
                       valueHtml: getFormattedAddress(userCase, prefix),
-                      changeUrl: Urls[`${urlPrefix}ADDRESS_MANUAL`],
+                      changeUrl: Urls[`${urlPrefix}ADDRESS_MANUAL`], //TODO consider international address
                     },
                   ]
                 : []),
