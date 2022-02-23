@@ -1,6 +1,6 @@
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isInvalidPostcode } from '../../../app/form/validation';
-import { CommonContent } from '../../common/common.content';
+import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './address-lookup';
 
@@ -78,6 +78,12 @@ describe('common > components > address-lookup > content', () => {
   test('should contain find address button', () => {
     const form = generatedContent.form as FormContent;
     expect((form.submit.text as Function)(generatedContent)).toBe('Find address');
+  });
+
+  it('should contain saveAsDraft button', () => {
+    const generatedContent1 = generateContent(commonContent);
+    const form = generatedContent1.form as FormContent;
+    expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save as draft');
   });
 });
 /* eslint-enable @typescript-eslint/ban-types */

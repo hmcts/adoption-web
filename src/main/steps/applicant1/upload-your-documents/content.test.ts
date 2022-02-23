@@ -1,9 +1,6 @@
 // /* eslint-disable @typescript-eslint/ban-types */
 // /* eslint-disable jest/expect-expect */
-// import { assert } from 'console';
-
 import { FormContent, FormFields } from '../../../app/form/Form';
-//import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
@@ -207,40 +204,7 @@ describe('Upload content', () => {
     expect((applicant1CannotUpload.label as Function)(generateContent(commonContent))).toBe(
       enContent.cannotUploadDocuments
     );
-
-    // (adopAgencyOrLaPhoneNumber.validator as Function)('MockAgencyPhoneNumber');
-    // expect(isFieldFilledIn).toHaveBeenCalledWith('MockAgencyPhoneNumber');
   });
-  /////
-  // it('should have an applicant1CannotUploadDocuments checkboxes input field', () => {
-  //   const generatedContent = generateContent(commonContent);
-  //   const form = generatedContent.form as FormContent;
-  //   const fields = form.fields as FormFields;
-  //   const applicant1CannotUploadDocuments = fields.applicant1CannotUploadDocuments;
-
-  //   expect(applicant1CannotUploadDocuments.type).toBe('checkboxes');
-  //   expect((applicant1CannotUploadDocuments.label as Function)(generateContent(commonContent))).toBe(
-  //     enContent.cannotUploadWhich
-  //   );
-
-  //   (applicant1CannotUploadDocuments.validator as Function)('MockAgencyContactName');
-  //   expect(isFieldFilledIn).toHaveBeenCalledWith('MockAgencyContactName');
-  // });
-
-  // it('should have an adopAgencyOrLaContactEmail text input field', () => {
-  //   const generatedContent = generateContent(commonContent);
-  //   const form = generatedContent.form as FormContent;
-  //   const fields = form.fields as FormFields;
-  //   const adopAgencyOrLaContactEmail = fields.adopAgencyOrLaContactEmail;
-
-  //   expect(adopAgencyOrLaContactEmail.type).toBe('text');
-  //   expect((adopAgencyOrLaContactEmail.label as Function)(generateContent(commonContent))).toBe(
-  //     enContent.cannotUploadDocuments
-  //   );
-
-  //   (adopAgencyOrLaContactEmail.validator as Function)('MockAgencyContactEmail');
-  //   expect(isFieldFilledIn).toHaveBeenCalledWith('MockAgencyContactEmail');
-  // });
 
   it('should contain submit button', () => {
     const generatedContent = generateContent(commonContent);
@@ -252,5 +216,42 @@ describe('Upload content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: EN }))).toBe('Save as draft');
+  });
+});
+
+describe('applicant1CannotUpload', () => {
+  test.each([
+    { value: [], formData: {}, expected: undefined },
+    {
+      value: ['checked'],
+      formData: { applicant1CannotUploadDocuments: 'birthOrAdoptionCertificate' },
+      expected: undefined,
+    },
+    // { value: ['MOCK_VALUE'], expected: undefined },
+    //{ value: undefined, formData: undefined, expected: 'required' },
+  ])('checks applicant1CannotUpload', ({ value, formData, expected }) => {
+    const generatedContent = generateContent(commonContent);
+    const form = generatedContent.form as FormContent;
+    const fields = form.fields as FormFields;
+    const applicant1CannotUpload = fields.applicant1CannotUpload;
+
+    expect((applicant1CannotUpload.validator as Function)(value, formData)).toBe(expected);
+  });
+});
+
+describe('applicant1UploadedFiles', () => {
+  test.each([
+    { value: [], formData: {}, expected: 'notUploaded' },
+    //{ value: ['checked'], formData: {applicant1UploadedFiles:[]}, expected: undefined },
+    // { value: ['checked'], formData: {applicant1UploadedFiles:[{id: '123', name: 'abc.pdf'}]}, expected: undefined },
+    // { value: ['MOCK_VALUE'], expected: undefined },
+    //{ value: undefined, formData: undefined, expected: 'required' },
+  ])('checks applicant1UploadedFiles', ({ value, formData, expected }) => {
+    const generatedContent = generateContent(commonContent);
+    const form = generatedContent.form as FormContent;
+    const fields = form.fields as FormFields;
+    const applicant1UploadedFiles = fields.applicant1UploadedFiles;
+
+    expect((applicant1UploadedFiles.validator as Function)(value, formData)).toBe(expected);
   });
 });
