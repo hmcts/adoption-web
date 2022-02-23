@@ -315,8 +315,6 @@ export interface CaseData {
   applicant1Occupation: string;
   applicant1EmailAddress: string;
   applicant1PhoneNumber: string;
-  applicant1Nationality: Nationality[];
-  applicant1AdditionalNationalities: ListValue<AdditionalNationality>[];
   applicant1Address1: string;
   applicant1Address2: string;
   applicant1AddressTown: string;
@@ -333,8 +331,6 @@ export interface CaseData {
   applicant2Occupation: string;
   applicant2EmailAddress: string;
   applicant2PhoneNumber: string;
-  applicant2Nationality: Nationality[];
-  applicant2AdditionalNationalities: ListValue<AdditionalNationality>[];
   applicant2Address1: string;
   applicant2Address2: string;
   applicant2AddressTown: string;
@@ -396,7 +392,6 @@ export interface CaseData {
   otherParentLastName: string;
   otherParentStillAlive: string;
   otherParentNotAliveReason: string;
-  otherParentNationality: Nationality[];
   otherParentOccupation: string;
   otherParentAddressKnown: YesOrNo;
   otherParentAddress1: string;
@@ -406,7 +401,6 @@ export interface CaseData {
   otherParentAddressCounty: string;
   otherParentAddressPostCode: string;
   otherParentAddressCountry: string;
-  otherParentOtherNationalities: ListValue<AdditionalNationality>[];
   otherParentNameOnCertificate: string;
   otherParentAddressNotKnownReason: string;
 

@@ -1,6 +1,6 @@
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
-import { generateContent } from '../../steps/applicant1/nationality/content';
+import { generateContent } from '../../steps/birth-mother/nationality/content';
 import { FieldPrefix } from '../case/case';
 
 import NationalityGetController from './NationalityGetController';
