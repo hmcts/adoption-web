@@ -2,7 +2,6 @@ import { CaseDate, CaseWithId, FieldPrefix } from '../../app/case/case';
 import {
   AdoptionAgencyOrLocalAuthority,
   ApplyingWith,
-  ContactDetails,
   PlacementOrder,
   SectionStatus,
   YesNoNotsure,
@@ -36,7 +35,7 @@ const addressComplete = (userCase: CaseWithId, fieldPrefix: FieldPrefix) => {
 };
 
 export const getContactDetailsStatus = (userCase: CaseWithId, fieldPrefix: FieldPrefix): SectionStatus => {
-  const contactDetails = userCase[`${fieldPrefix}ContactDetails`] || [];
+  const contactDetailsConsent = userCase[`${fieldPrefix}ContactDetailsConsent`];
   const emailAddress = userCase[`${fieldPrefix}EmailAddress`];
   const phoneNumber = userCase[`${fieldPrefix}PhoneNumber`];
   const applicant2AddressSameAsApplicant1 = userCase[`${fieldPrefix}AddressSameAsApplicant1`];
@@ -46,14 +45,7 @@ export const getContactDetailsStatus = (userCase: CaseWithId, fieldPrefix: Field
     addressAvailable = true;
   }
 
-  let contactDetailsAvailable = false;
-  if (contactDetails.length === 0) {
-    contactDetailsAvailable = false;
-  } else if (contactDetails) {
-    contactDetailsAvailable = contactDetails.every(
-      item => (item === ContactDetails.EMAIL && emailAddress) || (item === ContactDetails.PHONE && phoneNumber)
-    );
-  }
+  const contactDetailsAvailable = !!contactDetailsConsent && !!emailAddress && !!phoneNumber;
 
   return addressAvailable && contactDetailsAvailable
     ? SectionStatus.COMPLETED
