@@ -9,12 +9,14 @@ import { PostController } from './app/controller/PostController';
 import { DocumentManagerController } from './app/document/DocumentManagementController';
 import { KeepAliveController } from './app/keepalive/KeepAliveController';
 import { stepsWithContent } from './steps';
+import { ApplicationSubmittedGetController } from './steps/application-submitted/get';
 import { ErrorController } from './steps/error/error.controller';
 import { HomeGetController } from './steps/home/get';
 import { SaveSignOutGetController } from './steps/save-sign-out/get';
 import { TaskListGetController } from './steps/task-list/get';
 import { TimedOutGetController } from './steps/timed-out/get';
 import {
+  APPLICATION_SUBMITTED,
   CSRF_TOKEN_ERROR_URL,
   DOCUMENT_MANAGER,
   HOME_URL,
@@ -37,6 +39,7 @@ export class Routes {
     app.get(SAVE_AND_SIGN_OUT, errorHandler(new SaveSignOutGetController().get));
     app.get(TIMED_OUT_URL, errorHandler(new TimedOutGetController().get));
     app.get(TASK_LIST_URL, errorHandler(new TaskListGetController().get));
+    app.get(APPLICATION_SUBMITTED, errorHandler(new ApplicationSubmittedGetController().get));
 
     const documentManagerController = new DocumentManagerController();
     app.post(DOCUMENT_MANAGER, handleUploads.array('files[]', 5), errorHandler(documentManagerController.post));
