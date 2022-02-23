@@ -320,59 +320,72 @@ export const birthParentSummaryList = (
     title: sectionTitles[`${prefix}Details`],
     rows: getSectionSummaryList(
       [
-        {
-          key: keys.fullName,
-          value: userCase[`${prefix}FirstNames`] + ' ' + userCase[`${prefix}LastNames`],
-          changeUrl: Urls[`${urlPrefix}FULL_NAME`],
-        },
-        {
-          key: keys.alive,
-          valueHtml:
-            userCase[`${prefix}StillAlive`] === YesNoNotsure.NOT_SURE
-              ? getNotSureReasonElement(
-                  content,
-                  userCase,
-                  content.yesNoNotsure[userCase[`${prefix}StillAlive`]],
-                  reasonFieldName
-                )
-              : content.yesNoNotsure[userCase[`${prefix}StillAlive`]],
-          changeUrl: Urls[`${urlPrefix}STILL_ALIVE`],
-        },
-        ...(userCase[`${prefix}StillAlive`] === YesOrNo.YES
+        ...(prefix === FieldPrefix.BIRTH_FATHER
           ? [
               {
-                key: keys.nationality,
-                valueHtml: formatNationalities(
-                  userCase[`${prefix}Nationality`],
-                  userCase[`${prefix}AdditionalNationalities`]
-                ),
-                changeUrl: Urls[`${urlPrefix}NATIONALITY`],
+                key: keys.nameOnBirthCertificate,
+                value: content.yesNoNotsure[userCase.birthFatherNameOnCertificate!],
+                changeUrl: Urls[`${urlPrefix}NAME_ON_CERTIFICATE`],
+              },
+            ]
+          : []),
+        ...(prefix === FieldPrefix.BIRTH_MOTHER || userCase.birthFatherNameOnCertificate === YesOrNo.YES
+          ? [
+              {
+                key: keys.fullName,
+                value: userCase[`${prefix}FirstNames`] + ' ' + userCase[`${prefix}LastNames`],
+                changeUrl: Urls[`${urlPrefix}FULL_NAME`],
               },
               {
-                key: keys.occupation,
-                value: userCase[`${prefix}Occupation`],
-                changeUrl: Urls[`${urlPrefix}OCCUPATION`],
-              },
-              {
-                key: keys.addressKnown,
+                key: keys.alive,
                 valueHtml:
-                  userCase[`${prefix}AddressKnown`] === YesOrNo.NO
+                  userCase[`${prefix}StillAlive`] === YesNoNotsure.NOT_SURE
                     ? getNotSureReasonElement(
                         content,
                         userCase,
-                        content.yesNoNotsure[userCase[`${prefix}AddressKnown`]],
-                        `${prefix}AddressNotKnownReason`
+                        content.yesNoNotsure[userCase[`${prefix}StillAlive`]],
+                        reasonFieldName
                       )
-                    : content.yesNoNotsure[userCase[`${prefix}AddressKnown`]],
-                changeUrl: Urls[`${urlPrefix}ADDRESS_KNOWN`],
+                    : content.yesNoNotsure[userCase[`${prefix}StillAlive`]],
+                changeUrl: Urls[`${urlPrefix}STILL_ALIVE`],
               },
-              ...(userCase[`${prefix}AddressKnown`] === YesOrNo.YES
+              ...(userCase[`${prefix}StillAlive`] === YesOrNo.YES
                 ? [
                     {
-                      key: keys.address,
-                      valueHtml: getFormattedAddress(userCase, prefix),
-                      changeUrl: Urls[`${urlPrefix}MANUAL_ADDRESS`], //TODO consider international address
+                      key: keys.nationality,
+                      valueHtml: formatNationalities(
+                        userCase[`${prefix}Nationality`],
+                        userCase[`${prefix}AdditionalNationalities`]
+                      ),
+                      changeUrl: Urls[`${urlPrefix}NATIONALITY`],
                     },
+                    {
+                      key: keys.occupation,
+                      value: userCase[`${prefix}Occupation`],
+                      changeUrl: Urls[`${urlPrefix}OCCUPATION`],
+                    },
+                    {
+                      key: keys.addressKnown,
+                      valueHtml:
+                        userCase[`${prefix}AddressKnown`] === YesOrNo.NO
+                          ? getNotSureReasonElement(
+                              content,
+                              userCase,
+                              content.yesNoNotsure[userCase[`${prefix}AddressKnown`]],
+                              `${prefix}AddressNotKnownReason`
+                            )
+                          : content.yesNoNotsure[userCase[`${prefix}AddressKnown`]],
+                      changeUrl: Urls[`${urlPrefix}ADDRESS_KNOWN`],
+                    },
+                    ...(userCase[`${prefix}AddressKnown`] === YesOrNo.YES
+                      ? [
+                          {
+                            key: keys.address,
+                            valueHtml: getFormattedAddress(userCase, prefix),
+                            changeUrl: Urls[`${urlPrefix}MANUAL_ADDRESS`], //TODO consider international address
+                          },
+                        ]
+                      : []),
                   ]
                 : []),
             ]

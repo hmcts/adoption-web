@@ -761,6 +761,15 @@ describe('review-pay-submit > check-your-answers > utils', () => {
               value: {
                 html: 'MOCK_ADDRESS_LINE1<br>MOCK_ADDRESS_LINE2<br>MOCK_ADDRESS_LINE3<br>MOCK_ADDRESS_TOWN<br>MOCK_ADDRESS_COUNTY<br>MOCK_ADDRESS_POSTCODE<br>MOCK_ADDRESS_COUNTRY',
               },
+              actions: {
+                items: [
+                  {
+                    href: '/birth-mother/address/manual?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Address',
+                  },
+                ],
+              },
             },
           ],
         },
@@ -771,6 +780,19 @@ describe('review-pay-submit > check-your-answers > utils', () => {
         expected: {
           title: "Birth father's details",
           rows: [
+            {
+              key: { text: 'Name on birth certificate' },
+              value: { text: 'Yes' },
+              actions: {
+                items: [
+                  {
+                    href: '/birth-father/name-on-certificate?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Name on birth certificate',
+                  },
+                ],
+              },
+            },
             {
               key: { text: 'Full name' },
               value: { text: 'BIRTH_FATHER_FIRST_NAMES BIRTH_FATHER_LAST_NAMES' },
@@ -865,6 +887,19 @@ describe('review-pay-submit > check-your-answers > utils', () => {
           title: "Birth father's details",
           rows: [
             {
+              key: { text: 'Name on birth certificate' },
+              value: { text: 'Yes' },
+              actions: {
+                items: [
+                  {
+                    href: '/birth-father/name-on-certificate?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Name on birth certificate',
+                  },
+                ],
+              },
+            },
+            {
               key: { text: 'Full name' },
               value: { text: 'BIRTH_FATHER_FIRST_NAMES BIRTH_FATHER_LAST_NAMES' },
               actions: {
@@ -905,6 +940,19 @@ describe('review-pay-submit > check-your-answers > utils', () => {
         expected: {
           title: "Birth father's details",
           rows: [
+            {
+              key: { text: 'Name on birth certificate' },
+              value: { text: 'Yes' },
+              actions: {
+                items: [
+                  {
+                    href: '/birth-father/name-on-certificate?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Name on birth certificate',
+                  },
+                ],
+              },
+            },
             {
               key: { text: 'Full name' },
               value: { text: 'BIRTH_FATHER_FIRST_NAMES BIRTH_FATHER_LAST_NAMES' },
@@ -975,7 +1023,33 @@ describe('review-pay-submit > check-your-answers > utils', () => {
           ],
         },
       },
+      {
+        userCase: {
+          ...mockUserCase,
+          birthFatherNameOnCertificate: YesOrNo.NO,
+        },
+        fieldPrefix: FieldPrefix.BIRTH_FATHER,
+        expected: {
+          title: "Birth father's details",
+          rows: [
+            {
+              key: { text: 'Name on birth certificate' },
+              value: { text: 'No' },
+              actions: {
+                items: [
+                  {
+                    href: '/birth-father/name-on-certificate?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Name on birth certificate',
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
     ])('return correct summary list items when %#', ({ userCase, fieldPrefix, expected }) => {
+      console.log(JSON.stringify(birthParentSummaryList(enContent, userCase, fieldPrefix)));
       expect(birthParentSummaryList(enContent, userCase, fieldPrefix)).toStrictEqual(expected);
     });
   });

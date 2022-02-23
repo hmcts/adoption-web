@@ -91,6 +91,7 @@ export default {
   birthMotherAddressPostcode: 'MOCK_ADDRESS_POSTCODE',
   birthMotherAddressCountry: 'MOCK_ADDRESS_COUNTRY',
 
+  birthFatherNameOnCertificate: YesOrNo.YES,
   birthFatherFirstNames: 'BIRTH_FATHER_FIRST_NAMES',
   birthFatherLastNames: 'BIRTH_FATHER_LAST_NAMES',
   birthFatherStillAlive: YesNoNotsure.YES,
