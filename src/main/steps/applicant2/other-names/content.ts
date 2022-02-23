@@ -1,24 +1,19 @@
 import { FieldPrefix } from '../../../app/case/case';
-import { ApplyingWith } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { CommonContent } from '../../../steps/common/common.content';
 import {
   otherNamesFields,
   form as otherNamesForm,
   generateContent as otherNamesGenerateContent,
 } from '../../common/components/other-names';
 
-export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
-  const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant' : 'Second applicant';
-  return { section };
-};
+export const en = (): Record<string, unknown> => ({
+  section: 'Second applicant',
+});
 
-export const cy = ({ userCase }: CommonContent): Record<string, unknown> => {
-  const section =
-    userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant (in Welsh)' : 'Second applicant (in Welsh)';
-  return { section };
-};
+export const cy = (): Record<string, unknown> => ({
+  section: 'Second applicant (in Welsh)',
+});
 
 export const form: FormContent = {
   ...otherNamesForm,
@@ -32,7 +27,7 @@ const languages = {
 
 export const generateContent: TranslationFn = content => {
   const otherNamesContent = otherNamesGenerateContent(content, FieldPrefix.APPLICANT2);
-  const translations = languages[content.language](content);
+  const translations = languages[content.language]();
   return {
     ...otherNamesContent,
     ...translations,
