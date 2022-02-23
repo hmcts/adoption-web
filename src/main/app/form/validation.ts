@@ -194,11 +194,11 @@ export const isTextAreaValid: Validator = value => {
   }
 };
 
-export const isWordCountValid: Validator = value => {
-  if (value && (value as string).trim?.().split(' ').length > 100) {
-    return ValidationError.INVALID;
-  }
-};
+// export const isWordCountValid: Validator = value => {
+//   if (value && (value as string).trim?.().split(' ').length > 100) {
+//     return ValidationError.INVALID;
+//   }
+// };
 
 // export const isValidCannotUpload: (value: Validator, formData: FormData):ValidationError => {
 //   if ((value as string[])?.includes(Checkbox.Checked)) {
