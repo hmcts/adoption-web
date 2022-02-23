@@ -110,9 +110,7 @@ const en = (content: CommonContent): Record<string, unknown> => {
       adoptionAgencySummaryList(enContent, userCase, 1),
       socialWorkerSummaryList(enContent, userCase),
       applicantSummaryList(enContent, userCase, FieldPrefix.APPLICANT1),
-      ...(userCase.applyingWith !== ApplyingWith.ALONE
-        ? [applicantSummaryList(enContent, userCase, FieldPrefix.APPLICANT2)]
-        : []),
+      applicantSummaryList(enContent, userCase, FieldPrefix.APPLICANT2),
       childrenSummaryList(enContent, userCase),
       birthParentSummaryList(enContent, userCase, FieldPrefix.BIRTH_MOTHER),
       birthParentSummaryList(enContent, userCase, FieldPrefix.BIRTH_FATHER),

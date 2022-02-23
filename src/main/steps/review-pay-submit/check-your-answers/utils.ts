@@ -193,7 +193,11 @@ export const applicantSummaryList = (
   { sectionTitles, keys, ...content }: SummaryListContent,
   userCase: Partial<CaseWithId>,
   prefix: FieldPrefix
-): SummaryList => {
+): SummaryList | undefined => {
+  if (userCase.applyingWith === ApplyingWith.ALONE && prefix === FieldPrefix.APPLICANT2) {
+    return;
+  }
+
   const urlPrefix = prefix === FieldPrefix.APPLICANT1 ? 'APPLICANT_1_' : 'APPLICANT_2_';
   let sectionTitle = sectionTitles.applicantDetails;
   if (prefix === FieldPrefix.APPLICANT1 && userCase.applyingWith !== ApplyingWith.ALONE) {
