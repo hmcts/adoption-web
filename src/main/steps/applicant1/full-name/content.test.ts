@@ -67,6 +67,20 @@ describe('primary applicant > full-name', () => {
     expect(lastNamesField).toEqual(fullNameFormFields.lastNames);
   });
 
+  it('should have full name label when language: en and  applyingWith: alone', () => {
+    const commonContent1 = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
+
+    const generatedContent1 = generateContent(commonContent1);
+    expect(generatedContent1.section).toBe('Applicant');
+  });
+
+  it('should have an full name label when language: cy and  applyingWith: alone', () => {
+    const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
+
+    const generatedContent1 = generateContent(commonContent1);
+    expect(generatedContent1.section).toBe('Applicant (in Welsh)');
+  });
+
   test('should contain submit button', () => {
     expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
   });

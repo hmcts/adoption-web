@@ -21,10 +21,10 @@ const en = ({ selectAddressContent, userCase }): Record<string, unknown> => {
 };
 
 const cy = ({ selectAddressContent, userCase }): Record<string, unknown> => {
-  const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant (in welsh)' : 'First applicant (in welsh)';
+  const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant (in Welsh)' : 'First applicant (in Welsh)';
   return {
     section,
-    title: "What's your home address? (in welsh)",
+    title: "What's your home address? (in Welsh)",
     errors: {
       applicant1SelectAddress: selectAddressContent.errors.selectAddress,
     },

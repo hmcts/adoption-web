@@ -22,7 +22,6 @@ import {
   getPersonalDetailsStatus,
   getSiblingStatus,
   isApplyingWithComplete,
-  // isApplyingWithComplete,
 } from './utils';
 const userCase: CaseWithId = {
   id: '123',
@@ -47,6 +46,21 @@ describe('utils', () => {
 
     test('Should return true if applyingWith is present', async () => {
       userCase.applyingWith = ApplyingWith.ALONE;
+      const isValid = isApplyingWithComplete(userCase);
+
+      expect(isValid).toStrictEqual(COMPLETED);
+    });
+
+    test('Should return true if applyingWith:WITH_SPOUSE_OR_CIVIL_PARTNER is present', async () => {
+      userCase.applyingWith = ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER;
+      const isValid = isApplyingWithComplete(userCase);
+
+      expect(isValid).toStrictEqual(COMPLETED);
+    });
+
+    test('Should return true if applyingWith:WITH_SOME_ONE_ELSE is present', async () => {
+      userCase.applyingWith = ApplyingWith.WITH_SOME_ONE_ELSE;
+      userCase.otherApplicantRelation = 'a b c';
       const isValid = isApplyingWithComplete(userCase);
 
       expect(isValid).toStrictEqual(COMPLETED);

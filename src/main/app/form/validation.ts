@@ -4,6 +4,7 @@ import { validate as isValidEmail } from 'email-validator';
 
 import { OtherName } from '../../app/case/definition';
 import { Case, CaseDate } from '../case/case';
+// import { Checkbox } from '../../app/case/case';
 
 dayjs.extend(customParseFormat);
 
@@ -198,3 +199,9 @@ export const isWordCountValid: Validator = value => {
     return ValidationError.INVALID;
   }
 };
+
+// export const isValidCannotUpload: (value: Validator, formData: FormData):ValidationError => {
+//   if ((value as string[])?.includes(Checkbox.Checked)) {
+//     return atLeastOneFieldIsChecked(formData?.applicant1CannotUploadDocuments);
+//   }
+// };

@@ -1,6 +1,6 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { isFieldFilledIn, isWordCountValid } from '../../../app/form/validation';
+import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
 
 const en = () => ({
   section: 'Application details',
@@ -18,7 +18,7 @@ const en = () => ({
     },
     otherApplicantRelation: {
       required: 'Provide details of your relationship with the other applicant',
-      invalid: 'Overview must be 100 words or less',
+      invalid: 'Overview must be 500 characters or fewer',
     },
   },
 });
@@ -39,7 +39,7 @@ const cy = () => ({
     },
     otherApplicantRelation: {
       required: 'Provide details of your relationship with the other applicant (in welsh)',
-      invalid: 'Overview must be 100 words or less (in welsh)',
+      invalid: 'Overview must be 500 characters or fewer (in welsh)',
     },
   },
 });
@@ -71,7 +71,7 @@ export const form: FormContent = {
               type: 'textarea',
               label: l => l.moreDetails,
               labelSize: null,
-              validator: value => isFieldFilledIn(value) || isWordCountValid(value),
+              validator: value => isFieldFilledIn(value) || isTextAreaValid(value),
             },
           },
         },

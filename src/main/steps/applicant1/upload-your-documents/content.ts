@@ -150,6 +150,7 @@ export const form: FormContent = {
         type: 'checkboxes',
         label: l => l.cannotUploadDocuments,
         labelHidden: true,
+        //validator: (value, formData) => isValidCannotUpload(value, formData),
         validator: (value, formData) => {
           if ((value as string[])?.includes(Checkbox.Checked)) {
             return atLeastOneFieldIsChecked(formData?.applicant1CannotUploadDocuments);
