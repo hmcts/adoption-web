@@ -7,11 +7,11 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 const en = () => ({
   section: SECTION,
   label:
-    'Have you and any other applicant if relevant, lived in the UK, Channel Islands or Isle of Man for at least 12 months (habitually resident)?',
-  livedUKNo: 'You cannot apply to adopt a child unless you have a permanent home here.',
+    'Is the UK, Channel Islands or Isle of Man the main country of residence (domicile) for you and the other applicant if relevant?',
+  domicileNo: 'You cannot apply to adopt a child unless you have a permanent home here.',
   moreInfo: 'More about adoption',
   errors: {
-    livedUKEligible: {
+    domicileEligible: {
       required: 'Please answer the question',
     },
   },
@@ -20,11 +20,11 @@ const en = () => ({
 const cy = () => ({
   section: SECTION_IN_WELSH,
   label:
-    'Have you and any other applicant if relevant, lived in the UK, Channel Islands or Isle of Man for at least 12 months (habitually resident)? (in welsh)',
-  livedUKNo: 'You cannot apply to adopt a child unless you have a permanent home here. (in welsh)',
+    'Is the UK, Channel Islands or Isle of Man the main country of residence (domicile) for you and the other applicant if relevant? (in welsh)',
+  domicileNo: 'You cannot apply to adopt a child unless you have a permanent home here. (in welsh)',
   moreInfo: 'More about adoption (in welsh)',
   errors: {
-    livedUKEligible: {
+    domicileEligible: {
       required: 'Please answer the question (in welsh)',
     },
   },
@@ -32,7 +32,7 @@ const cy = () => ({
 
 export const form: FormContent = {
   fields: {
-    livedUKEligible: {
+    domicileEligible: {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.label,
@@ -44,7 +44,7 @@ export const form: FormContent = {
           label: l => l.no,
           value: YesOrNo.NO,
           conditionalText: l =>
-            `<p class="govuk-label">${l.livedUKNo}</p> <p class ="govuk-label"><a href="https://www.gov.uk/child-adoption">${l.moreInfo}</a></p>`,
+            `<p class="govuk-label">${l.domicileNo}</p> <p class ="govuk-label"><a href="https://www.gov.uk/child-adoption">${l.moreInfo}</a></p>`,
         },
       ],
       validator: isFieldFilledIn,

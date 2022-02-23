@@ -2,13 +2,13 @@ import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
+import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
-  section: "Check you're eligible to adopt",
+  section: SECTION,
   label: 'Are you, and the other applicant if relevant, both aged 21 or over?',
-  one: 'Yes',
-  two: 'No',
   under21Yes: 'You must be 21 or over to adopt a child. This includes any other applicant.',
+  moreInfo: 'More about adoption',
   errors: {
     under21Eligible: {
       required: 'Please answer the question',
@@ -17,11 +17,10 @@ const en = () => ({
 });
 
 const cy = () => ({
-  section: "Check you're eligible to adopt (in welsh)",
+  section: SECTION_IN_WELSH,
   label: 'Are you, and the other applicant if relevant, both aged 21 or over? (in welsh)',
-  one: 'Yes (in welsh)',
-  two: 'No (in welsh)',
   under21Yes: 'You must be 21 or over to adopt a child. This includes any other applicant. (in welsh)',
+  moreInfo: 'More about adoption (in welsh)',
   errors: {
     under21Eligible: {
       required: 'Please answer the question (in welsh)',
@@ -38,8 +37,13 @@ export const form: FormContent = {
       section: l => l.section,
       labelHidden: false,
       values: [
-        { label: l => l.one, value: YesOrNo.YES },
-        { label: l => l.two, value: YesOrNo.NO, conditionalText: l => `<p class="govuk-label">${l.under21Yes}</p>` },
+        { label: l => l.yes, value: YesOrNo.YES },
+        {
+          label: l => l.no,
+          value: YesOrNo.NO,
+          conditionalText: l =>
+            `<p class="govuk-label">${l.under21Yes}</p> <p class ="govuk-label"><a href="https://www.gov.uk/child-adoption">${l.moreInfo}</a></p>`,
+        },
       ],
       validator: isFieldFilledIn,
     },

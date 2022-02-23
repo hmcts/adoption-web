@@ -38,7 +38,7 @@ const cyContent = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('eligibility > start > content', () => {
+describe('eligibility > married > content', () => {
   const commonContent = generatePageContent({
     language: 'en',
     userCase: {},
@@ -68,7 +68,7 @@ describe('eligibility > start > content', () => {
     expect(generatedContent.errors).toEqual(cyContent.errors);
   });
 
-  test('should contain hasPoForSiblings field', () => {
+  test('should contain marriedEligible field', () => {
     const fields = (generatedContent.form as FormContent).fields as FormFields;
     const field = fields.marriedEligible as FormOptions;
     expect(field.type).toBe('radios');
