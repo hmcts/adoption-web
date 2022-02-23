@@ -6,12 +6,15 @@ module.exports = {
   primaryApplicant: {
     contactDetailsLink: 'a[id$="applicant1-contact-details"]',
     personalDetailsLink: 'a[id$="applicant1-personal-details"]',
+    contactDetailsLinkStatus: 'strong[id$="applicant1-contact-details-status"]',
+    personalDetailsLinkStatus: 'strong[id$="applicant1-personal-details-status"]',
   },
   secondApplicant: {
     contactDetailsLink: 'a[id$="applicant2-contact-details"]',
     childrenPlacementOrderLink: 'a[id$="children-placement-order"]',
     personalDetailsLink: 'a[id$="applicant2-personal-details"]',
     personalDetailsLinkStatus: 'strong[id$="applicant2-personal-details-status"]',
+    contactDetailsLinkStatus: 'strong[id$="applicant2-contact-details-status"]',
   },
   childDetails: {
     childrenBirthCertificateLink: 'a[id$="children-birth-certificate"]',
@@ -149,5 +152,17 @@ module.exports = {
 
   async verifyDateChildMovedInStatus() {
     await I.see('COMPLETED', this.childDetails.dateChildMovedInDetailsStatus);
+  },
+
+  async verifyPrimaryApplicantContactDetailsStatus() {
+    await I.see('COMPLETED', this.primaryApplicant.contactDetailsLinkStatus);
+  },
+
+  async verifyPrimaryApplicantPersonalDetailsStatus() {
+    await I.see('COMPLETED', this.primaryApplicant.personalDetailsLinkStatus);
+  },
+
+  async verifySecondApplicantPersonalDetailsStatus() {
+    await I.see('COMPLETED', this.secondApplicant.contactDetailsLinkStatus);
   },
 };

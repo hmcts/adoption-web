@@ -1,89 +1,85 @@
-import { ContactDetails } from '../../../app/case/definition';
+import { ApplyingWith, YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { atLeastOneFieldIsChecked, isEmailValid, isFieldFilledIn, isPhoneNoValid } from '../../../app/form/validation';
+import { isEmailValid, isFieldFilledIn, isPhoneNoValid } from '../../../app/form/validation';
 
-const en = () => ({
-  section: 'Primary applicant',
-  label: 'What are your contact details?',
-  hint: 'This is so we can contact you with updates or questions about your application.',
+const en = content => ({
+  section: content.userCase.applyingWith === ApplyingWith.ALONE ? 'Applicant' : 'First applicant',
+  title: 'What are your contact details?',
+  line1: 'We need both a contact email and telephone number for you.',
+  line2:
+    'We will email you updates and information about your application to adopt. You will only be contacted by telephone if the social worker or court staff need to contact you quickly.',
   emailAddress: 'Email address',
-  phoneNumber: 'UK phone number (for phone calls)',
+  phoneNumber: 'UK Phone number',
+  applicant1ContactDetailsConsent:
+    'The court may want to use your email to serve you court orders. Are you happy to be served court orders by email?',
   errors: {
-    applicant1ContactDetails: {
-      required: 'Enter your telephone number or email address',
+    applicant1ContactDetailsConsent: {
+      required: 'Please answer the question',
     },
     applicant1EmailAddress: {
-      required: 'Enter an email address in the correct format, like name@example.com',
+      required: 'Enter your email address',
       invalid: 'Enter an email address in the correct format, like name@example.com',
     },
     applicant1PhoneNumber: {
       required: 'Enter a UK telephone number',
-      invalid: 'Enter a UK telephone number',
+      invalid: 'Enter a valid UK telephone number',
     },
   },
 });
 
-const cy = () => ({
-  section: 'Primary applicant (in welsh)',
-  label: 'What are your contact details? (in welsh)',
-  hint: 'This is so we can contact you with updates or questions about your application. (in welsh)',
+const cy = content => ({
+  section: content?.userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant' : 'First applicant (in welsh)',
+  title: 'What are your contact details? (in welsh)',
+  line1: 'We need both a contact email and telephone number for you. (in welsh)',
+  line2:
+    'We will email you updates and information about your application to adopt. You will only be contacted by telephone if the social worker or court staff need to contact you quickly. (in welsh)',
   emailAddress: 'Email address (in welsh)',
-  phoneNumber: 'UK phone number (for phone calls) (in welsh)',
+  phoneNumber: 'UK Phone number (in welsh)',
+  applicant1ContactDetailsConsent:
+    'The court may want to use your email to serve you court orders. Are you happy to be served court orders by email? (in welsh)',
   errors: {
-    applicant1ContactDetails: {
-      required: 'Enter your telephone number or email address (in welsh)',
+    applicant1ContactDetailsConsent: {
+      required: 'Please answer the question (in welsh)',
     },
     applicant1EmailAddress: {
-      required: 'Enter an email address in the correct format, like name@example.com (in welsh)',
+      required: 'Enter your email address (in welsh)',
       invalid: 'Enter an email address in the correct format, like name@example.com (in welsh)',
     },
     applicant1PhoneNumber: {
       required: 'Enter a UK telephone number (in welsh)',
-      invalid: 'Enter a UK telephone number (in welsh)',
+      invalid: 'Enter a valid UK telephone number (in welsh)',
     },
   },
 });
 
 export const form: FormContent = {
   fields: {
-    applicant1ContactDetails: {
-      type: 'checkboxes',
+    applicant1EmailAddress: {
+      type: 'text',
+      classes: 'govuk-input--width-20',
+      label: l => l.emailAddress,
+      labelSize: null,
+      validator: value => isFieldFilledIn(value) || isEmailValid(value),
+    },
+    applicant1PhoneNumber: {
+      type: 'text',
+      classes: 'govuk-input--width-20',
+      label: l => l.phoneNumber,
+      labelSize: null,
+      validator: value => isFieldFilledIn(value) || isPhoneNoValid(value),
+    },
+    applicant1ContactDetailsConsent: {
+      type: 'radios',
+      classes: 'govuk-radios',
       label: l => l.label,
-      labelSize: 'l',
       section: l => l.section,
-      hint: l => l.hint,
+      hint: l => l.applicant1ContactDetailsConsent,
       values: [
-        {
-          name: 'applicant1ContactDetails',
-          label: l => l.emailAddress,
-          value: ContactDetails.EMAIL,
-          subFields: {
-            applicant1EmailAddress: {
-              type: 'text',
-              classes: 'govuk-input--width-20',
-              label: '',
-              labelSize: null,
-              validator: value => isFieldFilledIn(value) || isEmailValid(value),
-            },
-          },
-        },
-        {
-          name: 'applicant1ContactDetails',
-          label: l => l.phoneNumber,
-          value: ContactDetails.PHONE,
-          subFields: {
-            applicant1PhoneNumber: {
-              type: 'text',
-              classes: 'govuk-input--width-20',
-              label: '',
-              labelSize: null,
-              validator: value => isFieldFilledIn(value) || isPhoneNoValid(value),
-            },
-          },
-        },
+        { label: l => l.yes, value: YesOrNo.YES },
+        { label: l => l.no, value: YesOrNo.NO },
       ],
-      validator: atLeastOneFieldIsChecked,
+      validator: isFieldFilledIn,
     },
   },
   submit: {
@@ -100,7 +96,7 @@ const languages = {
 };
 
 export const generateContent: TranslationFn = content => {
-  const translations = languages[content.language]();
+  const translations = languages[content.language](content);
   return {
     ...translations,
     form,
