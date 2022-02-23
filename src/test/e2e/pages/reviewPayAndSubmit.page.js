@@ -17,11 +17,12 @@ module.exports = {
     addressCity: 'input[id$="address-city"]',
     addressPostcode: 'input[id$="address-postcode"]',
     email: 'input[id$="email"]',
+    pcqNO: '.govuk-button.govuk-button--secondary',
   },
 
   reviewPayAndSubmitDetailsSection() {
     I.wait('5');
-    if (I.see('Equality and diversity questions')) {
+    if (I.seeElement(this.fields.pcqNO)) {
       I.click("I don't want to answer these questions");
     }
     I.wait('5');
