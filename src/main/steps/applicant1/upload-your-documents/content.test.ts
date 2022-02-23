@@ -1,6 +1,6 @@
 // /* eslint-disable @typescript-eslint/ban-types */
 // /* eslint-disable jest/expect-expect */
-import { FormContent, FormFields } from '../../../app/form/Form';
+import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
@@ -180,7 +180,7 @@ describe('Upload content', () => {
   it('should return the correct content for language = cy', () => {
     langAssertions(CY, cyContent);
   });
-  /////
+
   it('should have an applicant1UploadedFiles hidden input field', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
@@ -189,9 +189,6 @@ describe('Upload content', () => {
 
     expect(applicant1UploadedFiles.type).toBe('hidden');
     expect((applicant1UploadedFiles.label as Function)(generateContent(commonContent))).toBe(enContent.uploadFiles);
-
-    // (applicant1UploadedFiles.validator as Function)('MockAgencyName');
-    // expect(isFieldFilledIn).toHaveBeenCalledWith('MockAgencyName');
   });
 
   it('should have an applicant1CannotUpload checkbox field', () => {
@@ -227,14 +224,42 @@ describe('applicant1CannotUpload', () => {
       formData: { applicant1CannotUploadDocuments: 'birthOrAdoptionCertificate' },
       expected: undefined,
     },
-    // { value: ['MOCK_VALUE'], expected: undefined },
-    //{ value: undefined, formData: undefined, expected: 'required' },
   ])('checks applicant1CannotUpload', ({ value, formData, expected }) => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const applicant1CannotUpload = fields.applicant1CannotUpload;
+    const applicant1CannotUpload = fields.applicant1CannotUpload as FormOptions;
 
+    // console.log("************************************************************");
+    // console.log(JSON.stringify(applicant1CannotUpload));
+    /*
+     {"type":"checkboxes","labelHidden":true,"values":[{"name":"applicant1CannotUpload","value":"checked",
+     "subFields":{"applicant1CannotUploadDocuments":{"type":"checkboxes","values":[{"name":"applicant1CannotUploadDocuments",
+     "value":"birthOrAdoptionCertificate"},
+     {"name":"applicant1CannotUploadDocuments","value":"deathCertificate"}]}}}]}
+    */
+    // console.log("************************************************************");
+
+    expect((applicant1CannotUpload.label as Function)(generateContent(commonContent))).toBe(
+      enContent.cannotUploadDocuments
+    );
+    expect(applicant1CannotUpload.type).toBe('checkboxes');
+    expect(applicant1CannotUpload.labelHidden).toBe(true);
+    expect(applicant1CannotUpload.values).toHaveLength(1);
+    expect(applicant1CannotUpload.values[0].name).toBe('applicant1CannotUpload');
+    expect(applicant1CannotUpload.values[0].value).toBe('checked');
+    expect((applicant1CannotUpload.values[0].label as Function)(generateContent(commonContent))).toBe(
+      enContent.cannotUploadDocuments
+    );
+
+    const applicant1CannotUploadDocuments = applicant1CannotUpload.values[0].subFields!
+      .applicant1CannotUploadDocuments as FormOptions;
+    expect(applicant1CannotUploadDocuments.type).toBe('checkboxes');
+    expect(applicant1CannotUploadDocuments.values).toHaveLength(2);
+    expect(applicant1CannotUploadDocuments.values[0].name).toBe('applicant1CannotUploadDocuments');
+    expect(applicant1CannotUploadDocuments.values[0].value).toBe('birthOrAdoptionCertificate');
+    expect(applicant1CannotUploadDocuments.values[1].name).toBe('applicant1CannotUploadDocuments');
+    expect(applicant1CannotUploadDocuments.values[1].value).toBe('deathCertificate');
     expect((applicant1CannotUpload.validator as Function)(value, formData)).toBe(expected);
   });
 });
@@ -242,16 +267,50 @@ describe('applicant1CannotUpload', () => {
 describe('applicant1UploadedFiles', () => {
   test.each([
     { value: [], formData: {}, expected: 'notUploaded' },
-    //{ value: ['checked'], formData: {applicant1UploadedFiles:[]}, expected: undefined },
-    // { value: ['checked'], formData: {applicant1UploadedFiles:[{id: '123', name: 'abc.pdf'}]}, expected: undefined },
-    // { value: ['MOCK_VALUE'], expected: undefined },
-    //{ value: undefined, formData: undefined, expected: 'required' },
+    {
+      value: ['checked'],
+      formData: {
+        applicant1CannotUpload: 'checked',
+        applicant1CannotUploadDocuments: [{ id: '123', name: 'abc.pdf' }],
+      },
+      expected: undefined,
+    },
+    {
+      value: ['checked'],
+      formData: [
+        { id: '1', name: '1' },
+        { id: '2', name: '1' },
+        { id: '3', name: '1' },
+        { id: '4', name: '1' },
+        { id: '5', name: '1' },
+        { id: '6', name: '1' },
+        { id: '7', name: '1' },
+        { id: '8', name: '1' },
+        { id: '9', name: '1' },
+        { id: '10', name: '1' },
+        { id: '11', name: '1' },
+      ],
+      expected: undefined,
+    },
   ])('checks applicant1UploadedFiles', ({ value, formData, expected }) => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const applicant1UploadedFiles = fields.applicant1UploadedFiles;
-
     expect((applicant1UploadedFiles.validator as Function)(value, formData)).toBe(expected);
+  });
+});
+
+describe('applicant1UploadedFiles parser', () => {
+  test.each([
+    { data: {}, expected: [] },
+    { data: [{ id: '123', name: 'abc.pdf' }], expected: [] },
+  ])('checks applicant1UploadedFiles', ({ data, expected }) => {
+    const generatedContent = generateContent(commonContent);
+    const form = generatedContent.form as FormContent;
+    const fields = form.fields as FormFields;
+    const applicant1UploadedFiles = fields.applicant1UploadedFiles;
+
+    expect((applicant1UploadedFiles.parser as Function)(data)).toEqual(expected);
   });
 });
