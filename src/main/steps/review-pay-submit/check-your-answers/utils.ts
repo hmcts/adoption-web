@@ -119,7 +119,7 @@ export const adoptionAgencySummaryList = (
           ? [
               {
                 key: keys.additionalAdoptionAgency,
-                value: userCase.hasAnotherAdopAgencyOrLA,
+                value: content.yesNoNotsure[userCase.hasAnotherAdopAgencyOrLA!],
                 changeUrl: Urls.OTHER_ADOPTION_AGENCY,
               },
             ]
@@ -302,8 +302,8 @@ export const childrenSummaryList = (
   };
 };
 
-const getNotSureReasonElement = (userCase, notSure, reasonFieldName): string => {
-  return `${notSure}<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">Reason: </span>${userCase[reasonFieldName]}</p>`;
+const getNotSureReasonElement = (content, userCase, notSure, reasonFieldName): string => {
+  return `${notSure}<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">${content.reason}: </span>${userCase[reasonFieldName]}</p>`;
 };
 
 /* eslint-disable import/namespace */
@@ -330,6 +330,7 @@ export const birthParentSummaryList = (
           valueHtml:
             userCase[`${prefix}StillAlive`] === YesNoNotsure.NOT_SURE
               ? getNotSureReasonElement(
+                  content,
                   userCase,
                   content.yesNoNotsure[userCase[`${prefix}StillAlive`]],
                   reasonFieldName
@@ -357,6 +358,7 @@ export const birthParentSummaryList = (
                 valueHtml:
                   userCase[`${prefix}AddressKnown`] === YesOrNo.NO
                     ? getNotSureReasonElement(
+                        content,
                         userCase,
                         content.yesNoNotsure[userCase[`${prefix}AddressKnown`]],
                         `${prefix}AddressNotKnownReason`
@@ -407,6 +409,7 @@ export const otherParentSummaryList = (
                 valueHtml:
                   userCase.otherParentAddressKnown === YesOrNo.NO
                     ? getNotSureReasonElement(
+                        content,
                         userCase,
                         content.yesNoNotsure[userCase.otherParentAddressKnown],
                         'otherParentAddressNotKnownReason'

@@ -22,6 +22,7 @@ export const enContent = {
   section: 'Review your application',
   title: 'Review your answers',
   change: 'Change',
+  reason: 'Reason',
   submitApplication: 'Submit your application',
   checkInfoBeforeSubmit:
     'You should check that all the information given in your application is correct before you submit. Once submitted, your application will be sent to the court for processing.',
@@ -123,20 +124,112 @@ const en = (content: CommonContent): Record<string, unknown> => {
   };
 };
 
-const cy = (): Record<string, unknown> => ({
-  section: 'Review your application, pay and send (in welsh)',
-  title: 'Check your answers (in welsh)',
+export const cyContent = {
+  section: 'Review your application (in welsh)',
+  title: 'Review your answers (in welsh)',
+  change: 'Change (in welsh)',
+  reason: 'Reason (in welsh)',
   submitApplication: 'Submit your application (in welsh)',
   checkInfoBeforeSubmit:
     'You should check that all the information given in your application is correct before you submit. Once submitted, your application will be sent to the court for processing. (in welsh)',
   continue: 'Continue (in welsh)',
+  applyingWith: {
+    [ApplyingWith.ALONE]: "I'm applying on my own (in welsh)",
+    [ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER]: "I'm applying with my spouse or civil partner (in welsh)",
+    [ApplyingWith.WITH_SOME_ONE_ELSE]: "I'm applying with someone who is not my spouse or civil partner (in welsh)",
+  },
+  gender: {
+    [Gender.MALE]: 'Male (in welsh)',
+    [Gender.FEMALE]: 'Female (in welsh)',
+    [Gender.INTERSEX]: 'Other (in welsh)',
+  },
+  yesNoNotsure: {
+    [YesNoNotsure.YES]: 'Yes (in welsh)',
+    [YesNoNotsure.NO]: 'No (in welsh)',
+    [YesNoNotsure.NOT_SURE]: 'Not sure (in welsh)',
+  },
+  sectionTitles: {
+    applicationDetails: 'Application details (in welsh)',
+    adoptionagencyOrLA: 'Adoption agency or local authority details (in welsh)',
+    additionalAoptionagencyOrLA: 'Additional adoption agency or local authority details (in welsh)',
+    socialWorkerDetails: "Child's social worker details (in welsh)",
+    applicantDetails: "Applicant's details (in welsh)",
+    firstApplicantDetails: "First applicant's details (in welsh)",
+    secondApplicantDetails: "Second applicant's details (in welsh)",
+    childDetails: "Child's details (in welsh)",
+    birthMotherDetails: "Birth mother's details (in welsh)",
+    birthFatherDetails: "Birth father's details (in welsh)",
+    otherParentDetails: "Other parent's details (in welsh)",
+    childPlacementAndCourtOrders: "Child's placement and court orders (in welsh)",
+    siblingCourtOrders: 'Sibling court orders (in welsh)',
+    familyCourtDetails: 'Family court details (in welsh)',
+    uploadedDocuments: 'Uploaded documents (in welsh)',
+  },
+  keys: {
+    noOfApplicants: 'Number of applicants (in welsh)',
+    dateChildMovedIn: 'Date child moved in (in welsh)',
+    name: 'Name (in welsh)',
+    phoneNumber: 'Phone number (in welsh)',
+    emailAddress: 'Email address (in welsh)',
+    nameOfContact: 'Name of contact (in welsh)',
+    emailOfContact: 'Email address of contact (in welsh)',
+    teamEmailAddress: 'Team email address (in welsh)',
+    additionalAdoptionAgency: 'Additional adoption agency (in welsh)',
+    fullName: 'Full name (in welsh)',
+    previousNames: 'Previous names (in welsh)',
+    dateOfBirth: 'Date of birth (in welsh)',
+    occupation: 'Occupation (in welsh)',
+    address: 'Address (in welsh)',
+    sexAtBirth: 'Sex at birth (in welsh)',
+    nationality: 'Nationality (in welsh)',
+    fullNameAfterAdoption: 'Full name after adoption (in welsh)',
+    alive: 'Alive (in welsh)',
+    addressKnown: 'Address known (in welsh)',
+    nameOnBirthCertificate: 'Name on birth certificate (in welsh)',
+    otherParent: 'Is there another person with parental responsibility? (in welsh)',
+    placementOrder: 'Placement order (in welsh)',
+    typeOfOrder: 'Type of order (in welsh)',
+    orderNumber: 'Order case or serial number (in welsh)',
+    court: 'Court (in welsh)',
+    date: 'Date (in welsh)',
+    courtOrder: 'Court order (in welsh)',
+    siblingCourtOrders: 'Sibling with court orders (in welsh)',
+    siblingName: 'Sibling name (in welsh)',
+    familyCourtName: 'Family court name (in welsh)',
+    applicantDocuments: "Applicant's documents (in welsh)",
+    childDocuments: "Child's documents (in welsh)",
+  },
   errors: {
     dateChildMovedIn: {
       lessThanTenWeeks:
-        'You can only submit 10 weeks after the date the child started living continuously with you (in Welsh)',
+        'You can only submit 10 weeks after the date the child started living continuously with you (in welsh)',
     },
   },
-});
+  language: 'cy',
+};
+
+const cy = (content: CommonContent): Record<string, unknown> => {
+  const userCase = content.userCase!;
+  return {
+    ...cyContent,
+    sections: [
+      applicationSummaryList(cyContent, userCase),
+      adoptionAgencySummaryList(cyContent, userCase),
+      adoptionAgencySummaryList(cyContent, userCase, 1),
+      socialWorkerSummaryList(cyContent, userCase),
+      applicantSummaryList(cyContent, userCase, FieldPrefix.APPLICANT1),
+      applicantSummaryList(cyContent, userCase, FieldPrefix.APPLICANT2),
+      childrenSummaryList(cyContent, userCase),
+      birthParentSummaryList(cyContent, userCase, FieldPrefix.BIRTH_MOTHER),
+      birthParentSummaryList(cyContent, userCase, FieldPrefix.BIRTH_FATHER),
+      otherParentSummaryList(cyContent, userCase),
+      childrenPlacementOrderSummaryList(cyContent, userCase),
+      siblingCourtOrderSummaryList(cyContent, userCase),
+      familyCourtSummaryList(cyContent),
+      uploadedDocumentSummaryList(cyContent, userCase),
+    ],
+  };
+};
 
 export const form: FormContent = {
   fields: {
