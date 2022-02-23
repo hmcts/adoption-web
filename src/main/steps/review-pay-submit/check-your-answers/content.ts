@@ -18,8 +18,30 @@ import {
   uploadedDocumentSummaryList,
 } from './utils';
 
-const en = (content: CommonContent): Record<string, unknown> => {
-  const sectionTitles = {
+export const enContent = {
+  section: 'Review your application',
+  title: 'Review your answers',
+  change: 'Change',
+  submitApplication: 'Submit your application',
+  checkInfoBeforeSubmit:
+    'You should check that all the information given in your application is correct before you submit. Once submitted, your application will be sent to the court for processing.',
+  continue: 'Continue',
+  applyingWith: {
+    [ApplyingWith.ALONE]: "I'm applying on my own",
+    [ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER]: "I'm applying with my spouse or civil partner",
+    [ApplyingWith.WITH_SOME_ONE_ELSE]: "I'm applying with someone who is not my spouse or civil partner",
+  },
+  gender: {
+    [Gender.MALE]: 'Male',
+    [Gender.FEMALE]: 'Female',
+    [Gender.INTERSEX]: 'Other',
+  },
+  yesNoNotsure: {
+    [YesNoNotsure.YES]: 'Yes',
+    [YesNoNotsure.NO]: 'No',
+    [YesNoNotsure.NOT_SURE]: 'Not sure',
+  },
+  sectionTitles: {
     applicationDetails: 'Application details',
     adoptionagencyOrLA: 'Adoption agency or local authority details',
     additionalAoptionagencyOrLA: 'Additional adoption agency or local authority details',
@@ -35,9 +57,8 @@ const en = (content: CommonContent): Record<string, unknown> => {
     siblingCourtOrders: 'Sibling court orders',
     familyCourtDetails: 'Family court details',
     uploadedDocuments: 'Uploaded documents',
-  };
-
-  const keys = {
+  },
+  keys: {
     noOfApplicants: 'Number of applicants',
     dateChildMovedIn: 'Date child moved in',
     name: 'Name',
@@ -70,45 +91,19 @@ const en = (content: CommonContent): Record<string, unknown> => {
     familyCourtName: 'Family court name',
     applicantDocuments: "Applicant's documents",
     childDocuments: "Child's documents",
-  };
+  },
+  errors: {
+    dateChildMovedIn: {
+      lessThanTenWeeks: 'You can only submit 10 weeks after the date the child started living continuously with you',
+    },
+  },
+};
 
-  const enContent = {
-    section: 'Review your application',
-    title: 'Review your answers',
-    change: 'Change',
-    submitApplication: 'Submit your application',
-    checkInfoBeforeSubmit:
-      'You should check that all the information given in your application is correct before you submit. Once submitted, your application will be sent to the court for processing.',
-    continue: 'Continue',
-    applyingWith: {
-      [ApplyingWith.ALONE]: "I'm applying on my own",
-      [ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER]: "I'm applying with my spouse or civil partner",
-      [ApplyingWith.WITH_SOME_ONE_ELSE]: "I'm applying with someone who is not my spouse or civil partner",
-    },
-    gender: {
-      [Gender.MALE]: 'Male',
-      [Gender.FEMALE]: 'Female',
-      [Gender.INTERSEX]: 'Other',
-    },
-    yesNoNotsure: {
-      [YesNoNotsure.YES]: 'Yes',
-      [YesNoNotsure.NO]: 'No',
-      [YesNoNotsure.NOT_SURE]: 'Not sure',
-    },
-    language: content.language,
-    sectionTitles,
-    keys,
-    errors: {
-      dateChildMovedIn: {
-        lessThanTenWeeks: 'You can only submit 10 weeks after the date the child started living continuously with you',
-      },
-    },
-  };
-
+const en = (content: CommonContent): Record<string, unknown> => {
   const userCase = content.userCase!;
-
   return {
     ...enContent,
+    language: content.language,
     sections: [
       applicationSummaryList(enContent, userCase),
       adoptionAgencySummaryList(enContent, userCase),

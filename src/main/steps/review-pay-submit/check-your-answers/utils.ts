@@ -58,20 +58,22 @@ const getSectionSummaryList = (rows: SummaryListRow[], content: PageContent): Go
       changeUrl += `${changeUrl.indexOf('?') === -1 ? '?' : '&'}${returnUrlQueryParam}`;
     }
     return {
-      key: { text: item.key, html: item.keyHtml },
-      value: { text: item.value, html: item.valueHtml },
-      actions: {
-        items: changeUrl
-          ? [
-              {
-                href: changeUrl,
-                text: content.change as string,
-                visuallyHiddenText: `Change ${item.key}`,
-              },
-            ]
-          : undefined,
-      },
-      classes: item.classes,
+      key: { ...(item.key ? { text: item.key } : {}), ...(item.keyHtml ? { html: item.keyHtml } : {}) },
+      value: { ...(item.value ? { text: item.value } : {}), ...(item.valueHtml ? { html: item.valueHtml } : {}) },
+      ...(changeUrl
+        ? {
+            actions: {
+              items: [
+                {
+                  href: changeUrl,
+                  text: content.change as string,
+                  visuallyHiddenText: `Change ${item.key}`,
+                },
+              ],
+            },
+          }
+        : {}),
+      ...(item.classes ? { classes: item.classes } : {}),
     };
   });
 };
@@ -104,12 +106,8 @@ export const adoptionAgencySummaryList = (
   agencyIndex = 0
 ): SummaryList => {
   let adoptionAgency;
-  if (!userCase.adopAgencyOrLAs?.length) {
-    return { title: 'TODO', rows: [] };
-  }
-
   if (agencyIndex === 0 || (agencyIndex === 1 && userCase.hasAnotherAdopAgencyOrLA === YesOrNo.YES)) {
-    adoptionAgency = userCase.adopAgencyOrLAs[agencyIndex];
+    adoptionAgency = userCase.adopAgencyOrLAs![agencyIndex];
   }
 
   const changeUrl = `${Urls.ADOPTION_AGENCY}?change=${adoptionAgency?.adopAgencyOrLaId}`;
@@ -312,6 +310,7 @@ export const birthParentSummaryList = (
   const urlPrefix = prefix === FieldPrefix.BIRTH_MOTHER ? 'BIRTH_MOTHER_' : 'BIRTH_FATHER_';
   const reasonFieldName =
     prefix === FieldPrefix.BIRTH_MOTHER ? `${prefix}NotAliveReason` : `${prefix}UnsureAliveReason`;
+  //TODO add a row for birth father name on certificate
   return {
     title: sectionTitles[`${prefix}Details`],
     rows: getSectionSummaryList(
@@ -364,7 +363,7 @@ export const birthParentSummaryList = (
                 ? [
                     {
                       key: keys.address,
-                      valueHtml: getFormattedAddress(userCase, FieldPrefix.BIRTH_MOTHER),
+                      valueHtml: getFormattedAddress(userCase, prefix),
                       changeUrl: Urls[`${urlPrefix}ADDRESS_MANUAL`],
                     },
                   ]
