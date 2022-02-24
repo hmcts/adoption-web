@@ -2,7 +2,6 @@ import { CaseDate, CaseWithId, FieldPrefix } from '../../app/case/case';
 import {
   AdoptionAgencyOrLocalAuthority,
   ApplyingWith,
-  ContactDetails,
   PlacementOrder,
   SectionStatus,
   YesNoNotsure,
