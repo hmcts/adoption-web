@@ -25,6 +25,7 @@ module.exports = {
     I.click('Add');
     I.wait('2');
     I.click('Save and continue');
+    I.wait('2');
     I.waitForText("What's your date of birth?");
     I.fillField(this.fields.dateOfBirthDay, '26');
     I.fillField(this.fields.dateOfBirthMonth, '06');
