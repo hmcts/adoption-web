@@ -80,7 +80,7 @@ export default class PCQGetController {
     } else {
       res.redirect(CHECK_ANSWERS_URL);
       logger.info(
-        'User already attempted for PCQ ID or pcqEnabled is not enabled:${req.session.userCase.pcqId} , pcqEnabled: ${pcqEnabled}'
+        `User already attempted for PCQ ID or pcqEnabled is not enabled:${req.session.userCase.pcqId} , pcqEnabled: ${pcqEnabled}`
       );
     }
   }
