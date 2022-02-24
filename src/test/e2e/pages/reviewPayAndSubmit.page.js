@@ -25,7 +25,7 @@ module.exports = {
       I.click("I don't want to answer these questions");
     }
     I.wait('5');
-    I.waitForText('Review your application, pay and send', 30);
+    I.waitForText('Review your application', 30);
     I.click('Continue');
     I.waitForText('Statement of truth', 30);
     I.click(this.fields.applicant1IBelieveApplicationIsTrue);
