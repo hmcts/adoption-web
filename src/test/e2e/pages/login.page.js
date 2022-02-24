@@ -9,6 +9,7 @@ module.exports = {
     marriedEligible: '#marriedEligible-2',
     under21Eligible: '#under21Eligible',
     livedUKEligible: '#livedUKEligible',
+    domicileEligible: '#domicileEligible',
   },
   submitButton: 'input[value="Sign in"]',
 
@@ -32,6 +33,8 @@ module.exports = {
     await I.click(this.fields.marriedEligible);
     await I.click('Save and continue');
     await I.click(this.fields.under21Eligible);
+    await I.click('Save and continue');
+    await I.click(this.fields.domicileEligible);
     await I.click('Save and continue');
     await I.click(this.fields.livedUKEligible);
     await I.click('Save and continue');
