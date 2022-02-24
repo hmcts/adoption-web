@@ -31,6 +31,7 @@ nodejs:
     CCD_URL: 'http://ccd-data-store-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal'
     FEE_LOOKUP_URL: 'http://fees-register-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal/fees-register/fees/lookup'
     EQUALITY_URL: 'https://pcq.{{ .Values.global.environment }}.platform.hmcts.net'
+    DOCUMENT_MANAGEMENT_URL: 'http://dm-store-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal'
 
   keyVaults:
     adoption:
@@ -42,7 +43,7 @@ nodejs:
         - s2s-secret
         - postcode-lookup-token
         - adoption-pcq-token
-        #  - AppInsightsInstrumentationKey
+        - AppInsightsInstrumentationKey
 
 idam-pr:
   enabled: false

@@ -59,6 +59,9 @@ const fields: FromApiConverters = {
       ...item.value,
     })),
   }),
+  dateChildMovedIn: data => ({
+    dateChildMovedIn: fromApiDate(data.dateChildMovedIn),
+  }),
   applicant1DateOfBirth: data => ({
     applicant1DateOfBirth: fromApiDate(data.applicant1DateOfBirth),
   }),

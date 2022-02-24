@@ -2,7 +2,7 @@
 
 properties([
   // H allow predefined but random minute see https://en.wikipedia.org/wiki/Cron#Non-standard_characters
-  pipelineTriggers([cron('H 04 * * *')]),
+  pipelineTriggers([cron('H 19 * * *')]),
   parameters([
     string(name: 'FRONTEND_URL', defaultValue: 'https://adoption-web.aat.platform.hmcts.net/', description: 'The URL you want to run tests against'),
     string(name: 'FUNCTIONAL_TESTS_WORKERS',
@@ -56,6 +56,7 @@ withNightlyPipeline(type, product, component) {
   enableCrossBrowserTest(['firefox'])
   enableFullFunctionalTest(120)
   loadVaultSecrets(secrets)
+
 
   after('test') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'

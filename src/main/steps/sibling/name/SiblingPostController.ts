@@ -20,10 +20,13 @@ export default class SiblingPostController extends PostController<AnyObject> {
 
     let sibling;
     if (req.body.selectedSiblingId) {
+      // this flow will be invoked from select-sibling page
       this.handleSelectOrAddSiblingAction(req, formData, req.session.errors.length);
     } else {
       sibling = req.session.userCase.siblings?.find(item => item.siblingId === req.session.userCase.selectedSiblingId);
-      Object.assign(sibling, formData);
+      if (sibling) {
+        Object.assign(sibling, formData);
+      }
     }
 
     this.filterErrorsForSaveAsDraft(req);
@@ -42,13 +45,7 @@ export default class SiblingPostController extends PostController<AnyObject> {
       this.getEventName(req)
     );
 
-    const returnUrl = req.session.returnUrl;
-    if (returnUrl && this.ALLOWED_RETURN_URLS.includes(returnUrl)) {
-      req.session.returnUrl = undefined;
-      this.redirect(req, res, returnUrl);
-    } else {
-      this.redirect(req, res);
-    }
+    super.checkReturnUrlAndRedirect(req, res, this.ALLOWED_RETURN_URLS);
   }
 
   private handleSelectOrAddSiblingAction(
@@ -68,6 +65,8 @@ export default class SiblingPostController extends PostController<AnyObject> {
         });
       } else {
         req.session.userCase.selectedSiblingId = 'addAnotherSibling';
+        req.session.userCase['siblingFirstName'] = formData['siblingFirstName'];
+        req.session.userCase['siblingLastNames'] = formData['siblingLastNames'];
       }
     } else {
       //store selected sibling's id in userCase

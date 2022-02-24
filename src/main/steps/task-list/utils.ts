@@ -1,7 +1,6 @@
 import { CaseDate, CaseWithId, FieldPrefix } from '../../app/case/case';
 import {
   AdoptionAgencyOrLocalAuthority,
-  ContactDetails,
   PlacementOrder,
   SectionStatus,
   YesNoNotsure,
@@ -25,7 +24,7 @@ const addressComplete = (userCase: CaseWithId, fieldPrefix: FieldPrefix) => {
 };
 
 export const getContactDetailsStatus = (userCase: CaseWithId, fieldPrefix: FieldPrefix): SectionStatus => {
-  const contactDetails = userCase[`${fieldPrefix}ContactDetails`] || [];
+  const contactDetailsConsent = userCase[`${fieldPrefix}ContactDetailsConsent`];
   const emailAddress = userCase[`${fieldPrefix}EmailAddress`];
   const phoneNumber = userCase[`${fieldPrefix}PhoneNumber`];
   const applicant2AddressSameAsApplicant1 = userCase[`${fieldPrefix}AddressSameAsApplicant1`];
@@ -35,14 +34,7 @@ export const getContactDetailsStatus = (userCase: CaseWithId, fieldPrefix: Field
     addressAvailable = true;
   }
 
-  let contactDetailsAvailable = false;
-  if (contactDetails.length === 0) {
-    contactDetailsAvailable = false;
-  } else if (contactDetails) {
-    contactDetailsAvailable = contactDetails.every(
-      item => (item === ContactDetails.EMAIL && emailAddress) || (item === ContactDetails.PHONE && phoneNumber)
-    );
-  }
+  const contactDetailsAvailable = !!contactDetailsConsent && !!emailAddress && !!phoneNumber;
 
   return addressAvailable && contactDetailsAvailable
     ? SectionStatus.COMPLETED
@@ -250,20 +242,24 @@ export const getSiblingStatus = (userCase: CaseWithId): SectionStatus => {
   const exists = userCase.hasSiblings;
   if (exists === YesNoNotsure.NO || exists === YesNoNotsure.NOT_SURE) {
     return SectionStatus.COMPLETED;
-  } else if (exists === YesNoNotsure.YES) {
+  }
+  if (exists === YesNoNotsure.YES) {
     const courtOrderExists = userCase.hasPoForSiblings;
     if (courtOrderExists === YesNoNotsure.NO || courtOrderExists === YesNoNotsure.NOT_SURE) {
       return SectionStatus.COMPLETED;
-    } else if (courtOrderExists === YesNoNotsure.YES) {
-      const siblingsComplete = userCase.siblings?.every(
-        item =>
-          item.siblingFirstName &&
-          item.siblingLastNames &&
-          item.siblingPlacementOrders?.length &&
-          (item.siblingPlacementOrders as PlacementOrder[]).every(
-            po => po.placementOrderType && po.placementOrderNumber && po.placementOrderId
-          )
-      );
+    }
+    if (courtOrderExists === YesNoNotsure.YES) {
+      const siblingsComplete =
+        userCase.siblings?.length &&
+        userCase.siblings?.every(
+          item =>
+            item.siblingFirstName &&
+            item.siblingLastNames &&
+            item.siblingPlacementOrders?.length &&
+            (item.siblingPlacementOrders as PlacementOrder[]).every(
+              po => po.placementOrderType && po.placementOrderNumber && po.placementOrderId
+            )
+        );
       return siblingsComplete ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
     }
     return SectionStatus.IN_PROGRESS;
@@ -344,4 +340,38 @@ export const getReviewPaySubmitUrl = (userCase: CaseWithId): string => {
     }
   }
   return urls.EQUALITY;
+};
+
+export const getUploadDocumentStatus = (userCase: CaseWithId): SectionStatus => {
+  if (
+    userCase?.applicant1UploadedFiles &&
+    userCase.applicant1UploadedFiles.length > 0 &&
+    !userCase.applicant1CannotUpload
+  ) {
+    return SectionStatus.COMPLETED;
+  } else if (
+    userCase?.applicant1UploadedFiles &&
+    userCase.applicant1UploadedFiles.length > 0 &&
+    userCase.applicant1CannotUpload
+  ) {
+    if (userCase.applicant1CannotUploadDocuments && userCase.applicant1CannotUploadDocuments.length > 0) {
+      return SectionStatus.COMPLETED;
+    } else {
+      return SectionStatus.IN_PROGRESS;
+    }
+  } else if (
+    userCase.applicant1CannotUpload &&
+    userCase?.applicant1CannotUploadDocuments &&
+    userCase.applicant1CannotUploadDocuments.length > 0
+  ) {
+    return SectionStatus.COMPLETED;
+  }
+  return SectionStatus.NOT_STARTED;
+};
+
+export const getDateChildMovedInStatus = (userCase: CaseWithId): SectionStatus => {
+  const dateChildMovedIn = userCase.dateChildMovedIn as CaseDate;
+  const dateChildMovedInComplete = !!(dateChildMovedIn?.day && dateChildMovedIn.month && dateChildMovedIn.year);
+
+  return dateChildMovedInComplete ? SectionStatus.COMPLETED : SectionStatus.NOT_STARTED;
 };

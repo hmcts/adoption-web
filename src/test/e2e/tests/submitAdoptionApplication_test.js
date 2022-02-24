@@ -19,6 +19,8 @@ Scenario(
     primaryApplicantDetailsPage,
     primaryApplicantPersonalDetailsPage,
     reviewPayAndSubmitPage,
+    uploadDocumentsDetailsPage,
+    dateChildMovedinDetailsPage,
   }) => {
     await loginPage.createCitizenUserAndSignIn();
     await landingPage.seeTheLandingPage();
@@ -26,12 +28,15 @@ Scenario(
 
     await taskListPage.selectPrimaryApplicantContactDetails();
     await primaryApplicantDetailsPage.primaryApplicantContactDetailsSection();
+    await taskListPage.verifyPrimaryApplicantContactDetailsStatus();
 
     await taskListPage.selectFirstApplicantPersonalDetails();
     await primaryApplicantPersonalDetailsPage.primaryApplicantPersonalDetailsSection();
+    await taskListPage.verifyPrimaryApplicantPersonalDetailsStatus();
 
     await taskListPage.selectOtherApplicantContactDetails();
     await otherApplicantDetailsPage.otherApplicantContactDetailsSection();
+    await taskListPage.verifySecondApplicantPersonalDetailsStatus();
 
     await taskListPage.selectOtherApplicantPersonalDetails();
     await otherApplicantPersonalDetailsPage.otherApplicantPersonalDetailsSection();
@@ -68,6 +73,14 @@ Scenario(
     await taskListPage.selectSiblingDetails();
     await childSiblingDetailsPage.childDetailsSiblingSection();
     await taskListPage.verifySiblingDetailsStatus();
+
+    await taskListPage.selectUploadDocumentsDetails();
+    await uploadDocumentsDetailsPage.uploadDocumentsSection();
+    await taskListPage.verifyUploadDocumentsStatus();
+
+    await taskListPage.selectDateChildMovedInDetails();
+    await dateChildMovedinDetailsPage.dateChildMovedInSection();
+    await taskListPage.verifyDateChildMovedInStatus();
 
     await taskListPage.selectReviewPayAndSubmitDetails();
     await reviewPayAndSubmitPage.reviewPayAndSubmitDetailsSection();

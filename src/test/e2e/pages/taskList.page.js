@@ -1,16 +1,20 @@
 const config = require('../config');
+
 const { I } = inject();
 
 module.exports = {
   primaryApplicant: {
     contactDetailsLink: 'a[id$="applicant1-contact-details"]',
     personalDetailsLink: 'a[id$="applicant1-personal-details"]',
+    contactDetailsLinkStatus: 'strong[id$="applicant1-contact-details-status"]',
+    personalDetailsLinkStatus: 'strong[id$="applicant1-personal-details-status"]',
   },
   secondApplicant: {
     contactDetailsLink: 'a[id$="applicant2-contact-details"]',
     childrenPlacementOrderLink: 'a[id$="children-placement-order"]',
     personalDetailsLink: 'a[id$="applicant2-personal-details"]',
     personalDetailsLinkStatus: 'strong[id$="applicant2-personal-details-status"]',
+    contactDetailsLinkStatus: 'strong[id$="applicant2-contact-details-status"]',
   },
   childDetails: {
     childrenBirthCertificateLink: 'a[id$="children-birth-certificate"]',
@@ -28,6 +32,12 @@ module.exports = {
     childrenSiblingLink: 'a[href$="/sibling/exists"]',
     childrenSiblingDetailsStatus: 'strong[id$="sibling-status"]',
     reviewPayAndSubmitLink: 'a[id="review-pay-and-submit"]',
+    dateChildMovedInLink: 'a[id$="date-child-moved-in"]',
+    dateChildMovedInDetailsStatus: 'strong[id$="date-child-moved-in-status"]',
+  },
+  uploadDocument: {
+    uploadDocumentLink: 'a[href$="upload-your-documents"]',
+    uploadDocumentStatus: 'strong[id$="upload-your-documents-status"]',
   },
 
   async goToTaskListPage() {
@@ -126,5 +136,33 @@ module.exports = {
 
   async selectReviewPayAndSubmitDetails() {
     await I.click(this.childDetails.reviewPayAndSubmitLink);
+  },
+
+  async selectUploadDocumentsDetails() {
+    await I.click(this.uploadDocument.uploadDocumentLink);
+  },
+
+  async verifyUploadDocumentsStatus() {
+    await I.see('COMPLETED', this.uploadDocument.uploadDocumentStatus);
+  },
+
+  async selectDateChildMovedInDetails() {
+    await I.click(this.childDetails.dateChildMovedInLink);
+  },
+
+  async verifyDateChildMovedInStatus() {
+    await I.see('COMPLETED', this.childDetails.dateChildMovedInDetailsStatus);
+  },
+
+  async verifyPrimaryApplicantContactDetailsStatus() {
+    await I.see('COMPLETED', this.primaryApplicant.contactDetailsLinkStatus);
+  },
+
+  async verifyPrimaryApplicantPersonalDetailsStatus() {
+    await I.see('COMPLETED', this.primaryApplicant.personalDetailsLinkStatus);
+  },
+
+  async verifySecondApplicantPersonalDetailsStatus() {
+    await I.see('COMPLETED', this.secondApplicant.contactDetailsLinkStatus);
   },
 };
