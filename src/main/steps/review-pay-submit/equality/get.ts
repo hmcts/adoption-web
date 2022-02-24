@@ -18,8 +18,9 @@ export default class PCQGetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
     const tokenKey: string = config.get('services.equalityAndDiversity.tokenKey');
     const url = config.get('services.equalityAndDiversity.url');
+    const pcqEnabled = config.get('services.equalityAndDiversity.pcqEnabled');
     console.log(config);
-    if (!req.session.userCase.pcqId && tokenKey && url) {
+    if (pcqEnabled && pcqEnabled === 'true' && !req.session.userCase.pcqId && tokenKey && url) {
       const path: string = config.get('services.equalityAndDiversity.path');
       const health = `${url}/health`;
       try {
@@ -27,9 +28,9 @@ export default class PCQGetController {
 
         if (response.data.status && response.data.status === 'UP') {
           req.session.userCase.pcqId = uuid();
-          logger.info(`PCQ service: ${health} is UP, PCQ ID: ${req.session.userCase.pcqId}`);
+          logger.info(`PCQ service: ${health} is UP, PCQ ID: ${req.session.userCase.pcqId}, pcqEnabled: ${pcqEnabled}`);
         } else {
-          logger.error(`PCQ service: ${health} is down`);
+          logger.error(`PCQ service: ${health} is down, pcqEnabled: ${pcqEnabled}`);
           return res.redirect(CHECK_ANSWERS_URL);
         }
       } catch (err) {
@@ -78,7 +79,9 @@ export default class PCQGetController {
       });
     } else {
       res.redirect(CHECK_ANSWERS_URL);
-      logger.info('User already attempted for PCQ: ', req.session.userCase.pcqId);
+      logger.info(
+        'User already attempted for PCQ ID or pcqEnabled is not enabled:${req.session.userCase.pcqId} , pcqEnabled: ${pcqEnabled}'
+      );
     }
   }
 }
