@@ -18,12 +18,13 @@ export default class PCQGetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
     const tokenKey: string = config.get('services.equalityAndDiversity.tokenKey');
     const url = config.get('services.equalityAndDiversity.url');
-    const pcqEnable = config.get('services.equalityAndDiversity.pcqEnabled');
+    //const pcqEnabled = config.get('services.equalityAndDiversity.pcqEnabled');
     console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
-    console.log(pcqEnable + '***');
-    console.log(JSON.stringify(config));
+    //console.log(pcqEnabled + '***');//pcqEnabled && pcqEnabled === 'true' &&
+    // console.log(JSON.stringify(config));
+    console.log(config);
     console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
-    if (pcqEnable && pcqEnable === 'true' && !req.session.userCase.pcqId && tokenKey && url) {
+    if (!req.session.userCase.pcqId && tokenKey && url) {
       const path: string = config.get('services.equalityAndDiversity.path');
       const health = `${url}/health`;
       try {
