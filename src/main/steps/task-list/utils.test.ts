@@ -12,6 +12,7 @@ import {
 import {
   getAdoptionAgencyUrl,
   getAdoptionCertificateDetailsStatus,
+  getApplyingWithStatus,
   getBirthFatherDetailsStatus,
   getBirthMotherDetailsStatus,
   getChildrenBirthCertificateStatus,
@@ -21,8 +22,6 @@ import {
   getOtherParentStatus,
   getPersonalDetailsStatus,
   getSiblingStatus,
-  isApplyingWithComplete,
-  // isApplyingWithComplete,
 } from './utils';
 const userCase: CaseWithId = {
   id: '123',
@@ -38,18 +37,13 @@ const IN_PROGRESS = 'IN_PROGRESS';
 const COMPLETED = 'COMPLETED';
 
 describe('utils', () => {
-  describe('isApplyingWithComplete()', () => {
-    test('Should return false if applyingWith is not present', async () => {
-      const isValid = isApplyingWithComplete(userCase);
-
-      expect(isValid).toStrictEqual(false);
-    });
-
-    test('Should return true if applyingWith is present', async () => {
-      userCase.applyingWith = ApplyingWith.ALONE;
-      const isValid = isApplyingWithComplete(userCase);
-
-      expect(isValid).toStrictEqual(true);
+  describe('getApplyingWithStatus()', () => {
+    test.each([
+      { data: { applyingWith: undefined }, expected: NOT_STARTED },
+      { data: { applyingWith: ApplyingWith.ALONE }, expected: COMPLETED },
+      { data: { applyingWith: ApplyingWith.WITH_SOME_ONE_ELSE }, expected: COMPLETED },
+    ])('should return correct status %#', async ({ data, expected }) => {
+      expect(getApplyingWithStatus({ ...userCase, ...data })).toBe(expected);
     });
   });
 
