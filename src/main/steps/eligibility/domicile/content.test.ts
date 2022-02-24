@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { YesNoNotsure } from '../../../app/case/definition';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -46,20 +47,11 @@ describe('eligibility > domicile > content', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.label).toEqual(enContent.label);
-    expect(generatedContent.domicileNo).toEqual(enContent.domicileNo);
-    expect(generatedContent.moreInfo).toEqual(enContent.moreInfo);
-    expect(generatedContent.errors).toEqual(enContent.errors);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.label).toEqual(cyContent.label);
-    expect(generatedContent.domicileNo).toEqual(cyContent.domicileNo);
-    expect(generatedContent.moreInfo).toEqual(cyContent.moreInfo);
-    expect(generatedContent.errors).toEqual(cyContent.errors);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain domicileEligible field', () => {

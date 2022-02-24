@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { YesNoNotsure } from '../../../app/case/definition';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -10,8 +11,6 @@ jest.mock('../../../app/form/validation');
 const enContent = {
   section: 'Eligibility to apply to adopt',
   label: 'Will the child be under 18 years old on the date you submit your application?',
-  one: 'Yes',
-  two: 'No',
   under18No:
     'You can only apply to adopt a child if they are under 18 years old on the date your application is submitted.',
   moreInfo: 'More about adoption',
@@ -25,8 +24,6 @@ const enContent = {
 const cyContent = {
   section: 'Eligibility to apply to adopt (in Welsh)',
   label: 'Will the child be under 18 years old on the date you submit your application? (in welsh)',
-  one: 'Yes (in welsh)',
-  two: 'No (in welsh)',
   under18No:
     'You can only apply to adopt a child if they are under 18 years old on the date your application is submitted. (in welsh)',
   moreInfo: 'More about adoption (in welsh)',
@@ -50,20 +47,11 @@ describe('eligibility > under-18 > content', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.label).toEqual(enContent.label);
-    expect(generatedContent.under18No).toEqual(enContent.under18No);
-    expect(generatedContent.moreInfo).toEqual(enContent.moreInfo);
-    expect(generatedContent.errors).toEqual(enContent.errors);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.label).toEqual(cyContent.label);
-    expect(generatedContent.under18No).toEqual(cyContent.under18No);
-    expect(generatedContent.moreInfo).toEqual(cyContent.moreInfo);
-    expect(generatedContent.errors).toEqual(cyContent.errors);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain under18Eligible field', () => {
