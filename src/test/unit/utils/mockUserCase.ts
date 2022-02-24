@@ -102,7 +102,6 @@ export default {
   birthFatherAddressTown: 'MOCK_ADDRESS_TOWN',
   birthFatherAddressCounty: 'MOCK_ADDRESS_COUNTY',
   birthFatherAddressPostcode: 'MOCK_ADDRESS_POSTCODE',
-  birthFatherAddressCountry: 'MOCK_ADDRESS_COUNTRY',
 
   otherParentFirstNames: 'MOCK_OTHER_PARENT_FIRST_NAME',
   otherParentLastNames: 'MOCK_OTHER_PARENT_FIRST_NAME',

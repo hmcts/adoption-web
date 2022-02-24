@@ -1,11 +1,11 @@
 import { YesNoNotsure, YesOrNo } from '../../app/case/definition';
 import { Sections, Step } from '../constants';
 import {
-  BIRTH_FATHER_ADDRESS_INTERNATIONAL,
   BIRTH_FATHER_ADDRESS_KNOWN,
   BIRTH_FATHER_ADDRESS_LOOKUP,
   BIRTH_FATHER_ADDRESS_SELECT,
   BIRTH_FATHER_FULL_NAME,
+  BIRTH_FATHER_INTERNATIONAL_ADDRESS,
   BIRTH_FATHER_MANUAL_ADDRESS,
   BIRTH_FATHER_NAME_ON_CERTIFICATE,
   BIRTH_FATHER_NATIONALITY,
@@ -63,7 +63,7 @@ export const birthFatherSequence: Step[] = [
     getNextStep: () => TASK_LIST_URL,
   },
   {
-    url: BIRTH_FATHER_ADDRESS_INTERNATIONAL,
+    url: BIRTH_FATHER_INTERNATIONAL_ADDRESS,
     showInSection: Sections.AboutChildren,
     getNextStep: () => TASK_LIST_URL,
   },

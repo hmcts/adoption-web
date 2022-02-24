@@ -764,7 +764,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
               actions: {
                 items: [
                   {
-                    href: '/birth-mother/address/manual?returnUrl=/review-pay-submit/check-your-answers',
+                    href: '/birth-mother/address/international?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
                     visuallyHiddenText: 'Change Address',
                   },
@@ -861,7 +861,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
             {
               key: { text: 'Address' },
               value: {
-                html: 'MOCK_ADDRESS_LINE1<br>MOCK_ADDRESS_TOWN<br>MOCK_ADDRESS_COUNTY<br>MOCK_ADDRESS_POSTCODE<br>MOCK_ADDRESS_COUNTRY',
+                html: 'MOCK_ADDRESS_LINE1<br>MOCK_ADDRESS_TOWN<br>MOCK_ADDRESS_COUNTY<br>MOCK_ADDRESS_POSTCODE',
               },
               actions: {
                 items: [
@@ -1049,7 +1049,6 @@ describe('review-pay-submit > check-your-answers > utils', () => {
         },
       },
     ])('return correct summary list items when %#', ({ userCase, fieldPrefix, expected }) => {
-      console.log(JSON.stringify(birthParentSummaryList(enContent, userCase, fieldPrefix)));
       expect(birthParentSummaryList(enContent, userCase, fieldPrefix)).toStrictEqual(expected);
     });
   });

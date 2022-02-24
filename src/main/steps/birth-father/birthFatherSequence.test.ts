@@ -1,10 +1,10 @@
 import { YesNoNotsure, YesOrNo } from '../../app/case/definition';
 import {
-  BIRTH_FATHER_ADDRESS_INTERNATIONAL,
   BIRTH_FATHER_ADDRESS_KNOWN,
   BIRTH_FATHER_ADDRESS_LOOKUP,
   BIRTH_FATHER_ADDRESS_SELECT,
   BIRTH_FATHER_FULL_NAME,
+  BIRTH_FATHER_INTERNATIONAL_ADDRESS,
   BIRTH_FATHER_MANUAL_ADDRESS,
   BIRTH_FATHER_NAME_ON_CERTIFICATE,
   BIRTH_FATHER_NATIONALITY,
@@ -112,7 +112,7 @@ describe('birth father sequence', () => {
     it('should be correct for internationalAddress', () => {
       const { url, showInSection, getNextStep } = internationalAddress;
 
-      expect(url).toBe(BIRTH_FATHER_ADDRESS_INTERNATIONAL);
+      expect(url).toBe(BIRTH_FATHER_INTERNATIONAL_ADDRESS);
       expect(showInSection).toBe(aboutChildren);
       expect(getNextStep({})).toBe(TASK_LIST_URL);
     });

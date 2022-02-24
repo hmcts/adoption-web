@@ -315,7 +315,6 @@ export const birthParentSummaryList = (
   const urlPrefix = prefix === FieldPrefix.BIRTH_MOTHER ? 'BIRTH_MOTHER_' : 'BIRTH_FATHER_';
   const reasonFieldName =
     prefix === FieldPrefix.BIRTH_MOTHER ? `${prefix}NotAliveReason` : `${prefix}UnsureAliveReason`;
-  //TODO add a row for birth father name on certificate
   return {
     title: sectionTitles[`${prefix}Details`],
     rows: getSectionSummaryList(
@@ -382,7 +381,9 @@ export const birthParentSummaryList = (
                           {
                             key: keys.address,
                             valueHtml: getFormattedAddress(userCase, prefix),
-                            changeUrl: Urls[`${urlPrefix}MANUAL_ADDRESS`], //TODO consider international address
+                            changeUrl: userCase[`${prefix}AddressCountry`]
+                              ? Urls[`${urlPrefix}INTERNATIONAL_ADDRESS`]
+                              : Urls[`${urlPrefix}MANUAL_ADDRESS`],
                           },
                         ]
                       : []),
