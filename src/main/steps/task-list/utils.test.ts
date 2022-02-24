@@ -88,7 +88,6 @@ describe('utils', () => {
             { firstNames: 'MOCK_ADDITIONAL_FIRST_NAME', lastNames: 'MOCK_ADDITIONAL_FIRST_NAME' },
           ],
           applicant1DateOfBirth: { day: '1', month: '1', year: '2021' },
-          applicant1AdditionalNationalities: ['MOCK_COUNTRY'],
           applicant1Occupation: 'MOCK_OCCUPATION',
         },
         userType: 'applicant1',
