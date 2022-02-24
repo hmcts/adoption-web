@@ -72,4 +72,20 @@ describe('OtherNamesGetController', () => {
       expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('MOCK_ID', formData, 'citizen-update-application');
     });
   });
+
+  describe('when there is returnUrl param in req.query', () => {
+    beforeEach(() => {
+      req = mockRequest({
+        query: { returnUrl: '/review-pay-submit/check-your-answers' },
+        session: { userCase: { id: 'MOCK_ID' } },
+      });
+      req.url = '/request?returnUrl=/review-pay-submit/check-your-answers';
+    });
+
+    test('should save returnUrl in session and redirect to same url', async () => {
+      await controller.get(req, res);
+      expect(req.session.returnUrl).toEqual('/review-pay-submit/check-your-answers');
+      expect(res.redirect).toHaveBeenCalledWith('/request');
+    });
+  });
 });
