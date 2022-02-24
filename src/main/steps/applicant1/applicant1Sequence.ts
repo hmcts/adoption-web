@@ -10,12 +10,19 @@ import {
   APPLICANT_1_OTHER_NAMES,
   APPLICANT_1_SELECT_ADDRESS,
   APPLYING_WITH_URL,
+  DATE_CHILD_MOVED_IN,
   TASK_LIST_URL,
+  UPLOAD_YOUR_DOCUMENTS,
 } from '../urls';
 
 export const applicant1Sequence: Step[] = [
   {
     url: APPLYING_WITH_URL,
+    showInSection: Sections.AboutApplicant1,
+    getNextStep: () => TASK_LIST_URL,
+  },
+  {
+    url: DATE_CHILD_MOVED_IN,
     showInSection: Sections.AboutApplicant1,
     getNextStep: () => TASK_LIST_URL,
   },
@@ -63,5 +70,10 @@ export const applicant1Sequence: Step[] = [
     url: APPLICANT_1_MANUAL_ADDRESS,
     showInSection: Sections.AboutApplicant1,
     getNextStep: () => APPLICANT_1_CONTACT_DETAILS,
+  },
+  {
+    url: UPLOAD_YOUR_DOCUMENTS,
+    showInSection: Sections.AboutApplicant1,
+    getNextStep: () => TASK_LIST_URL,
   },
 ];

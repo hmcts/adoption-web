@@ -1,9 +1,12 @@
 import fs from 'fs';
+//import { extname } from 'path';
 
 import { Application, RequestHandler } from 'express';
+import multer from 'multer';
 
 import { GetController } from './app/controller/GetController';
 import { PostController } from './app/controller/PostController';
+import { DocumentManagerController } from './app/document/DocumentManagementController';
 import { KeepAliveController } from './app/keepalive/KeepAliveController';
 import { stepsWithContent } from './steps';
 import { ErrorController } from './steps/error/error.controller';
@@ -13,12 +16,16 @@ import { TaskListGetController } from './steps/task-list/get';
 import { TimedOutGetController } from './steps/timed-out/get';
 import {
   CSRF_TOKEN_ERROR_URL,
+  DOCUMENT_MANAGER,
   HOME_URL,
   KEEP_ALIVE_URL,
   SAVE_AND_SIGN_OUT,
   TASK_LIST_URL,
   TIMED_OUT_URL,
 } from './steps/urls';
+
+const handleUploads = multer();
+//const ext = extname(__filename);
 
 export class Routes {
   public enableFor(app: Application): void {
@@ -30,6 +37,10 @@ export class Routes {
     app.get(SAVE_AND_SIGN_OUT, errorHandler(new SaveSignOutGetController().get));
     app.get(TIMED_OUT_URL, errorHandler(new TimedOutGetController().get));
     app.get(TASK_LIST_URL, errorHandler(new TaskListGetController().get));
+
+    const documentManagerController = new DocumentManagerController();
+    app.post(DOCUMENT_MANAGER, handleUploads.array('files[]', 5), errorHandler(documentManagerController.post));
+    app.get(`${DOCUMENT_MANAGER}/delete/:index`, errorHandler(documentManagerController.delete));
 
     for (const step of stepsWithContent) {
       const files = fs.readdirSync(`${step.stepDir}`);

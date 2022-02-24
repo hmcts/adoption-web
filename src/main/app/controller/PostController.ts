@@ -67,7 +67,10 @@ export class PostController<T extends AnyObject> {
     if (req.body.saveAsDraft) {
       // skip empty field errors in case of save as draft
       req.session.errors = req.session.errors!.filter(
-        item => item.errorType !== ValidationError.REQUIRED && item.errorType !== ValidationError.NOT_SELECTED
+        item =>
+          item.errorType !== ValidationError.REQUIRED &&
+          item.errorType !== ValidationError.NOT_SELECTED &&
+          item.errorType !== ValidationError.NOT_UPLOADED
       );
     }
   }
@@ -94,6 +97,18 @@ export class PostController<T extends AnyObject> {
       }
       res.redirect(nextUrl!);
     });
+  }
+
+  // method to check if there is a returnUrl in session and
+  // it is one of the allowed redirects from current page
+  protected checkReturnUrlAndRedirect(req: AppRequest<T>, res: Response, allowedReturnUrls: string[]): void {
+    const returnUrl = req.session.returnUrl;
+    if (returnUrl && allowedReturnUrls.includes(returnUrl)) {
+      req.session.returnUrl = undefined;
+      this.redirect(req, res, returnUrl);
+    } else {
+      this.redirect(req, res);
+    }
   }
 
   //eslint-disable-next-line @typescript-eslint/no-unused-vars

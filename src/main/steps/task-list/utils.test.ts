@@ -1,13 +1,5 @@
 import { CaseWithId, FieldPrefix } from '../../app/case/case';
-import {
-  ApplyingWith,
-  ContactDetails,
-  Gender,
-  Nationality,
-  State,
-  YesNoNotsure,
-  YesOrNo,
-} from '../../app/case/definition';
+import { ApplyingWith, Gender, Nationality, State, YesNoNotsure, YesOrNo } from '../../app/case/definition';
 
 import {
   getAdoptionAgencyUrl,
@@ -17,6 +9,7 @@ import {
   getChildrenBirthCertificateStatus,
   getChildrenPlacementOrderStatus,
   getContactDetailsStatus,
+  getDateChildMovedInStatus,
   getOtherParentStatus,
   getPersonalDetailsStatus,
   getSiblingStatus,
@@ -125,7 +118,7 @@ describe('utils', () => {
           applicant1Address1: 'MOCK_ADDRESS_1',
           applicant1AddressTown: ' MOCK_TOWN',
           applicant1AddressPostcode: 'MOCK_POSTCODE',
-          applicant1ContactDetails: undefined,
+          applicant1ContactDetailsConsent: undefined,
         },
         userType: 'applicant1',
         expected: IN_PROGRESS,
@@ -135,8 +128,9 @@ describe('utils', () => {
           applicant1Address1: 'MOCK_ADDRESS_1',
           applicant1AddressTown: ' MOCK_TOWN',
           applicant1AddressPostcode: 'MOCK_POSTCODE',
-          applicant1ContactDetails: [ContactDetails.EMAIL],
+          applicant1ContactDetailsConsent: YesOrNo.YES,
           applicant1EmailAddress: 'MOCK_EMAIL',
+          applicant1PhoneNumber: 'MOCK_PHONE',
         },
         userType: 'applicant1',
         expected: COMPLETED,
@@ -146,8 +140,9 @@ describe('utils', () => {
           applicant1Address1: 'MOCK_ADDRESS_1',
           applicant1AddressTown: ' MOCK_TOWN',
           applicant1AddressPostcode: 'MOCK_POSTCODE',
-          applicant1ContactDetails: [ContactDetails.PHONE],
+          applicant1ContactDetailsConsent: YesOrNo.YES,
           applicant1PhoneNumber: 'MOCK_PHONE',
+          applicant1EmailAddress: 'MOCK_EMAIL',
         },
         userType: 'applicant1',
         expected: COMPLETED,
@@ -155,8 +150,9 @@ describe('utils', () => {
       {
         data: {
           applicant2AddressSameAsApplicant1: YesOrNo.YES,
-          applicant2ContactDetails: [ContactDetails.PHONE],
+          applicant2ContactDetailsConsent: YesOrNo.YES,
           applicant2PhoneNumber: 'MOCK_PHONE',
+          applicant2EmailAddress: 'MOCK_EMAIL',
         },
         userType: 'applicant2',
         expected: COMPLETED,
@@ -164,8 +160,9 @@ describe('utils', () => {
       {
         data: {
           applicant2AddressSameAsApplicant1: YesOrNo.NO,
-          applicant2ContactDetails: [ContactDetails.PHONE],
+          applicant2ContactDetailsConsent: YesOrNo.YES,
           applicant2PhoneNumber: 'MOCK_PHONE',
+          applicant2EmailAddress: 'MOCK_EMAIL',
         },
         userType: 'applicant2',
         expected: IN_PROGRESS,
@@ -852,6 +849,20 @@ describe('utils', () => {
       },
     ])('should return correct status %o', async ({ data, expected }) => {
       expect(getSiblingStatus({ ...userCase, ...data })).toBe(expected);
+    });
+  });
+
+  describe('getDateChildMovedInStatus', () => {
+    test.each([
+      { data: {}, expected: 'NOT_STARTED' },
+      {
+        data: {
+          dateChildMovedIn: { day: '1', month: '1', year: '2020' },
+        },
+        expected: COMPLETED,
+      },
+    ])('should return correct status %o', async ({ data, expected }) => {
+      expect(getDateChildMovedInStatus({ ...userCase, ...data })).toBe(expected);
     });
   });
 });

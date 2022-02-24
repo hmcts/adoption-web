@@ -28,19 +28,23 @@ module.exports = {
     I.click('Add');
     I.wait('2');
     I.click('Save and continue');
+    I.wait('2');
     I.waitForText("What's your date of birth?");
     I.fillField(this.fields.dateOfBirthDay, '26');
     I.fillField(this.fields.dateOfBirthMonth, '06');
     I.wait('2');
     I.fillField(this.fields.dateOfBirthYear, '1988');
     I.click('Save and continue');
+    I.wait('3');
     I.click(this.fields.britishCitizen);
     I.click(this.fields.citizenOfDifferentCountry);
     I.fillField(this.fields.addAnotherNationality, 'India');
     I.click('Add');
     I.wait('2');
     I.click('Save and continue');
+    I.wait('3');
     I.fillField(this.fields.applicant1Occupation, 'Teacher');
     I.click('Save and continue');
+    I.wait('3');
   },
 };
