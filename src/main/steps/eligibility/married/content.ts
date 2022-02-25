@@ -44,7 +44,7 @@ export const form: FormContent = {
           label: l => l.yes,
           value: YesOrNo.YES,
           conditionalText: l =>
-            `<p class="govuk-label">${l.marriedYes}</p> <p class="govuk-label"><a rel="noreferrer noopener" target="_blank" href="https://www.gov.uk/child-adoption">${l.moreInfo}</a></p>`,
+            `<p class="govuk-label">${l.marriedYes}</p> <p class="govuk-label"><a rel="noreferrer noopener" href="https://www.gov.uk/child-adoption">${l.moreInfo}</a></p>`,
         },
         { label: l => l.no, value: YesOrNo.NO },
       ],

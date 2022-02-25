@@ -11,7 +11,7 @@ jest.mock('../../../app/form/validation');
 const enContent = {
   section: 'Eligibility to apply to adopt',
   label:
-    'Have you and any other applicant if relevant, lived in the UK, Channel Islands or Isle of Man for at least 12 months (habitually resident)?',
+    'Have you, and the other applicant if relevant, lived in the UK, Channel Islands or Isle of Man for the last 12 months (habitually resident)?',
   livedUKNo: 'You cannot apply to adopt a child unless you have a permanent home here.',
   moreInfo: 'More about adoption',
   errors: {
@@ -24,7 +24,7 @@ const enContent = {
 const cyContent = {
   section: 'Eligibility to apply to adopt (in Welsh)',
   label:
-    'Have you and any other applicant if relevant, lived in the UK, Channel Islands or Isle of Man for at least 12 months (habitually resident)? (in welsh)',
+    'Have you, and the other applicant if relevant, lived in the UK, Channel Islands or Isle of Man for the last 12 months (habitually resident)? (in welsh)',
   livedUKNo: 'You cannot apply to adopt a child unless you have a permanent home here. (in welsh)',
   moreInfo: 'More about adoption (in welsh)',
   errors: {
