@@ -109,6 +109,7 @@ export const START_ELIGIBILITY_URL: PageLink = `${ELIGIBILITY_URL}/start`;
 export const CHECK_ELIGIBILITY_URL_UNDER_18: PageLink = `${ELIGIBILITY_URL}/under-18`;
 export const CHECK_ELIGIBILITY_URL_MARRIED: PageLink = `${ELIGIBILITY_URL}/married`;
 export const CHECK_ELIGIBILITY_URL_UNDER_21: PageLink = `${ELIGIBILITY_URL}/under-21`;
+export const CHECK_ELIGIBILITY_URL_DOMICILE: PageLink = `${ELIGIBILITY_URL}/domicile`;
 export const CHECK_ELIGIBILITY_URL_LIVED_UK: PageLink = `${ELIGIBILITY_URL}/lived-uk`;
 export const INELIGIBLE_TO_ADOPT: PageLink = `${ELIGIBILITY_URL}/cannot-apply`;
 
@@ -143,3 +144,6 @@ export const OTHER_ADOPTION_AGENCY: PageLink = `${CHILDREN}/other-adoption-agenc
 export const SOCIAL_WORKER: PageLink = `${CHILDREN}/social-worker`;
 export const STATEMENT_OF_TRUTH: PageLink = `${REVIEW_PAY_SUBMIT}/statement-of-truth`;
 export const EQUALITY: PageLink = `${REVIEW_PAY_SUBMIT}/equality`;
+
+export const UPLOAD_YOUR_DOCUMENTS: PageLink = '/upload-your-documents';
+export const DOCUMENT_MANAGER: PageLink = '/document-manager';

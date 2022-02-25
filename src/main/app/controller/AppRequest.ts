@@ -40,4 +40,5 @@ export interface Eligibility {
   marriedEligible?: string;
   livedUKEligible?: string;
   under21Eligible?: string;
+  domicileEligible?: string;
 }

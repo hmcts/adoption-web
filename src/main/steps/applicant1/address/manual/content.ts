@@ -1,3 +1,4 @@
+import { ApplyingWith } from '../../../../app/case/definition';
 import { TranslationFn } from '../../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../../app/form/Form';
 import {
@@ -5,8 +6,8 @@ import {
   generateContent as manualAddressGenerateContent,
 } from '../../../common/components/address-manual';
 
-const en = manualAddressContent => ({
-  section: 'Primary applicant',
+const en = (manualAddressContent, content) => ({
+  section: content.userCase.applyingWith === ApplyingWith.ALONE ? 'Applicant' : 'First applicant',
   title: "What's your home address?",
   errors: {
     applicant1Address1: manualAddressContent.errors.address1,
@@ -15,8 +16,8 @@ const en = manualAddressContent => ({
   },
 });
 
-const cy = manualAddressContent => ({
-  section: 'Primary applicant (in welsh)',
+const cy = (manualAddressContent, content) => ({
+  section: content.userCase.applyingWith === ApplyingWith.ALONE ? 'Applicant (in welsh)' : 'First applicant (in welsh)',
   title: "What's your home address? (in welsh)",
   errors: {
     applicant1Address1: manualAddressContent.errors.address1,
@@ -44,7 +45,7 @@ const languages = {
 
 export const generateContent: TranslationFn = content => {
   const manualAddressContent = manualAddressGenerateContent(content);
-  const translations = languages[content.language](manualAddressContent);
+  const translations = languages[content.language](manualAddressContent, content);
   return {
     ...manualAddressContent,
     ...translations,

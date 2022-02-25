@@ -1,7 +1,6 @@
 import { CaseDate, CaseWithId, FieldPrefix } from '../../app/case/case';
 import {
   AdoptionAgencyOrLocalAuthority,
-  ContactDetails,
   PlacementOrder,
   SectionStatus,
   YesNoNotsure,
@@ -25,7 +24,7 @@ const addressComplete = (userCase: CaseWithId, fieldPrefix: FieldPrefix) => {
 };
 
 export const getContactDetailsStatus = (userCase: CaseWithId, fieldPrefix: FieldPrefix): SectionStatus => {
-  const contactDetails = userCase[`${fieldPrefix}ContactDetails`] || [];
+  const contactDetailsConsent = userCase[`${fieldPrefix}ContactDetailsConsent`];
   const emailAddress = userCase[`${fieldPrefix}EmailAddress`];
   const phoneNumber = userCase[`${fieldPrefix}PhoneNumber`];
   const applicant2AddressSameAsApplicant1 = userCase[`${fieldPrefix}AddressSameAsApplicant1`];
@@ -35,14 +34,7 @@ export const getContactDetailsStatus = (userCase: CaseWithId, fieldPrefix: Field
     addressAvailable = true;
   }
 
-  let contactDetailsAvailable = false;
-  if (contactDetails.length === 0) {
-    contactDetailsAvailable = false;
-  } else if (contactDetails) {
-    contactDetailsAvailable = contactDetails.every(
-      item => (item === ContactDetails.EMAIL && emailAddress) || (item === ContactDetails.PHONE && phoneNumber)
-    );
-  }
+  const contactDetailsAvailable = !!contactDetailsConsent && !!emailAddress && !!phoneNumber;
 
   return addressAvailable && contactDetailsAvailable
     ? SectionStatus.COMPLETED
@@ -60,21 +52,16 @@ export const getPersonalDetailsStatus = (
   const hasOtherNames = userCase[`${userType}HasOtherNames`];
   const additionalNames = userCase[`${userType}AdditionalNames`] || [];
   const dateOfBirth = userCase[`${userType}DateOfBirth`];
-  const nationality: string[] = userCase[`${userType}Nationality`] || [];
-  const nationalities: string[] = userCase[`${userType}AdditionalNationalities`] || [];
   const occupation = userCase[`${userType}Occupation`];
 
   const dateOfBirthComplete = dateOfBirth ? !!dateOfBirth.year && !!dateOfBirth.month && !!dateOfBirth.day : false;
 
   const otherNamesComplete: boolean =
     hasOtherNames === YesOrNo.NO || (hasOtherNames === YesOrNo.YES && !!additionalNames.length);
-  const nationalityComplete =
-    !!nationality.length &&
-    (!nationality.includes('Other') || (!!nationalities.length && nationality.includes('Other')));
 
-  return fullName && otherNamesComplete && dateOfBirthComplete && nationalityComplete && occupation
+  return fullName && otherNamesComplete && dateOfBirthComplete && occupation
     ? SectionStatus.COMPLETED
-    : !fullName && !otherNamesComplete && !dateOfBirthComplete && !nationalityComplete && !occupation
+    : !fullName && !otherNamesComplete && !dateOfBirthComplete && !occupation
     ? SectionStatus.NOT_STARTED
     : SectionStatus.IN_PROGRESS;
 };
@@ -348,6 +335,33 @@ export const getReviewPaySubmitUrl = (userCase: CaseWithId): string => {
     }
   }
   return urls.EQUALITY;
+};
+
+export const getUploadDocumentStatus = (userCase: CaseWithId): SectionStatus => {
+  if (
+    userCase?.applicant1UploadedFiles &&
+    userCase.applicant1UploadedFiles.length > 0 &&
+    !userCase.applicant1CannotUpload
+  ) {
+    return SectionStatus.COMPLETED;
+  } else if (
+    userCase?.applicant1UploadedFiles &&
+    userCase.applicant1UploadedFiles.length > 0 &&
+    userCase.applicant1CannotUpload
+  ) {
+    if (userCase.applicant1CannotUploadDocuments && userCase.applicant1CannotUploadDocuments.length > 0) {
+      return SectionStatus.COMPLETED;
+    } else {
+      return SectionStatus.IN_PROGRESS;
+    }
+  } else if (
+    userCase.applicant1CannotUpload &&
+    userCase?.applicant1CannotUploadDocuments &&
+    userCase.applicant1CannotUploadDocuments.length > 0
+  ) {
+    return SectionStatus.COMPLETED;
+  }
+  return SectionStatus.NOT_STARTED;
 };
 
 export const getDateChildMovedInStatus = (userCase: CaseWithId): SectionStatus => {

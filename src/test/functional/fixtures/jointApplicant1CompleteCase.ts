@@ -16,6 +16,6 @@ export const jointApplicant1CompleteCase: Partial<BrowserCase> = {
   applicationType: ApplicationType.JOINT_APPLICATION,
   applyForFinancialOrder: YesOrNo.NO,
   applicant1CannotUpload: Checkbox.Checked,
-  applicant1CannotUploadDocuments: [DocumentType.MARRIAGE_CERTIFICATE],
+  applicant1CannotUploadDocuments: [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE],
   applicant1UploadedFiles: [],
 };

@@ -66,6 +66,7 @@ describe('GetController', () => {
         language: 'cy',
         htmlLang: 'cy',
         userCase: req.session.userCase,
+        isAmendableStates: false,
         userEmail,
       });
     });
@@ -86,6 +87,7 @@ describe('GetController', () => {
         language: 'cy',
         htmlLang: 'cy',
         userCase: req.session.userCase,
+        isAmendableStates: false,
         userEmail,
       });
     });
@@ -106,6 +108,7 @@ describe('GetController', () => {
         language: 'cy',
         htmlLang: 'cy',
         userCase: req.session.userCase,
+        isAmendableStates: false,
         userEmail,
       });
     });
@@ -126,6 +129,7 @@ describe('GetController', () => {
         language: 'en',
         htmlLang: 'en',
         userCase: req.session.userCase,
+        isAmendableStates: false,
         userEmail,
       });
     });
@@ -199,6 +203,7 @@ describe('GetController', () => {
         ...commonContent,
         language: 'en',
         userCase: req.session.userCase,
+        isAmendableStates: true,
         userEmail,
       });
       expect(res.render).toBeCalledWith('page', {
@@ -210,6 +215,7 @@ describe('GetController', () => {
         language: 'en',
         serviceName: 'Apply for adoption',
         contactEmail: 'todo@test.com',
+        isAmendableStates: true,
         sessionErrors: [],
       });
     });

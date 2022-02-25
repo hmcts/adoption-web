@@ -1,3 +1,4 @@
+import { ApplyingWith } from '../../../../app/case/definition';
 import { TranslationFn } from '../../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../../app/form/Form';
 import {
@@ -6,8 +7,8 @@ import {
 } from '../../../common/components/address-lookup';
 import { APPLICANT_1_MANUAL_ADDRESS } from '../../../urls';
 
-const en = addressLookupContent => ({
-  section: 'Primary applicant',
+const en = (addressLookupContent, content) => ({
+  section: content.userCase.applyingWith === ApplyingWith.ALONE ? 'Applicant' : 'First applicant',
   title: "What's your home address?",
   errors: {
     applicant1AddressPostcode: addressLookupContent.errors.addressPostcode,
@@ -15,8 +16,8 @@ const en = addressLookupContent => ({
   manualAddressUrl: APPLICANT_1_MANUAL_ADDRESS,
 });
 
-const cy = addressLookupContent => ({
-  section: 'Primary applicant (in welsh)',
+const cy = (addressLookupContent, content) => ({
+  section: content.userCase.applyingWith === ApplyingWith.ALONE ? 'Applicant (in welsh)' : 'First applicant (in welsh)',
   title: "What's your home address? (in welsh)",
   errors: {
     applicant1AddressPostcode: addressLookupContent.errors.addressPostcode,
@@ -39,7 +40,7 @@ const languages = {
 
 export const generateContent: TranslationFn = content => {
   const addressLookupContent = addressLookupGenerateContent(content);
-  const translations = languages[content.language](addressLookupContent);
+  const translations = languages[content.language](addressLookupContent, content);
   return {
     ...addressLookupContent,
     ...translations,

@@ -49,14 +49,14 @@ const fields: ToApiConverters = {
           }))
         : [],
   }),
-  applicant1AdditionalNationalities: data => ({
-    applicant1AdditionalNationalities: (data.applicant1AdditionalNationalities || []).map(item => ({
+  birthMotherAdditionalNationalities: data => ({
+    birthMotherOtherNationalities: (data.birthMotherAdditionalNationalities || []).map(item => ({
       id: generateUuid(),
       value: { country: `${item}` },
     })),
   }),
-  applicant2AdditionalNationalities: data => ({
-    applicant2AdditionalNationalities: (data.applicant2AdditionalNationalities || []).map(item => ({
+  birthFatherAdditionalNationalities: data => ({
+    birthFatherOtherNationalities: (data.birthFatherAdditionalNationalities || []).map(item => ({
       id: generateUuid(),
       value: { country: `${item}` },
     })),
@@ -113,12 +113,25 @@ const fields: ToApiConverters = {
   }),
   applicant1UploadedFiles: () => ({}),
   applicant2UploadedFiles: () => ({}),
+  applicant1CannotUploadDocuments: data => ({
+    applicant1CannotUploadSupportingDocument: data.applicant1CannotUploadDocuments
+      ? !Array.isArray(data.applicant1CannotUploadDocuments)
+        ? [data.applicant1CannotUploadDocuments]
+        : data.applicant1CannotUploadDocuments
+      : [],
+  }),
   applicant1HelpPayingNeeded: data => ({
     applicant1HWFNeedHelp: data.applicant1HelpPayingNeeded,
     ...(data.applicant1HelpPayingNeeded === YesOrNo.NO
       ? setUnreachableAnswersToNull(['applicant1HWFAppliedForFees', 'applicant1HWFReferenceNumber'])
       : {}),
   }),
+  applicant1CannotUpload: data => {
+    console.log('to data.applicant1CannotUpload', data.applicant1CannotUpload);
+    return {
+      applicant1CannotUpload: checkboxConverter(data.applicant1CannotUpload),
+    };
+  },
 };
 
 export const toApiDate = (date: CaseDate | undefined): string => {

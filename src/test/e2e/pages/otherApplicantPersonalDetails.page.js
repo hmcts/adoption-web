@@ -10,8 +10,6 @@ module.exports = {
     dateOfBirthDay: 'input[id$="applicant2DateOfBirth-day"]',
     dateOfBirthMonth: 'input[id$="applicant2DateOfBirth-month"]',
     dateOfBirthYear: 'input[id$="applicant2DateOfBirth-year"]',
-    britishCitizen: 'input[id$="applicant2Nationality"]',
-    citizenOfDifferentCountry: 'input[id$="applicant2Nationality-3"]',
     addAnotherNationality: 'input[id$="addAnotherNationality"]',
     applicant2Occupation: 'input[id$="applicant2Occupation"]',
   },
@@ -33,13 +31,6 @@ module.exports = {
     I.fillField(this.fields.dateOfBirthMonth, '06');
     I.wait('2');
     I.fillField(this.fields.dateOfBirthYear, '1980');
-    I.click('Save and continue');
-    I.click(this.fields.britishCitizen);
-    //TODO once Abid PR merged then we can un comment as its known issue
-    // I.click(this.fields.citizenOfDifferentCountry);
-    // I.fillField(this.fields.addAnotherNationality, 'India');
-    // I.click('Add');
-    I.wait('2');
     I.click('Save and continue');
     I.fillField(this.fields.applicant2Occupation, 'Teacher');
     I.click('Save and continue');

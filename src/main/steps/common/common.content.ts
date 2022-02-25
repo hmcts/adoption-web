@@ -1,7 +1,7 @@
 import { capitalize } from 'lodash';
 
 import { CaseWithId } from '../../app/case/case';
-import { Fee } from '../../app/case/definition';
+import { Fee, State } from '../../app/case/definition';
 import { Eligibility } from '../../app/controller/AppRequest';
 import { PageContent, TranslationFn } from '../../app/controller/GetController';
 
@@ -36,7 +36,6 @@ const en = {
   privacyPolicy: 'Privacy policy',
   termsAndConditions: 'Terms and conditions',
   marriage: 'marriage',
-  divorce: 'divorce',
   civilPartnership: 'civil partnership',
   endingCivilPartnership: 'ending a civil partnership',
   husband: 'husband',
@@ -137,7 +136,6 @@ const cy: typeof en = {
   privacyPolicy: 'Privacy policy (in welsh)',
   termsAndConditions: 'Terms and conditions (in welsh)',
   marriage: 'priodas',
-  divorce: 'ysgariad',
   endingCivilPartnership: 'dod â phartneriaeth sifil i ben',
   civilPartnership: 'partneriaeth sifil',
   husband: 'gŵr',
@@ -201,6 +199,7 @@ export const generatePageContent = ({
   const commonTranslations: typeof en = language === 'en' ? en : cy;
   const serviceName = getServiceName(commonTranslations);
   const contactEmail = 'todo@test.com';
+  const isAmendableStates = userCase && [State.Draft].includes(userCase.state!);
 
   const content: CommonContent = {
     ...commonTranslations,
@@ -212,6 +211,7 @@ export const generatePageContent = ({
     addresses,
     eligibility,
     fee,
+    isAmendableStates,
   };
 
   if (pageContent) {
@@ -237,6 +237,7 @@ export type CommonContent = typeof en & {
   addresses?: any[];
   eligibility?: Eligibility;
   fee?: Fee;
+  isAmendableStates?: boolean;
 };
 
 export type Language = 'en' | 'cy';

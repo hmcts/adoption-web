@@ -1,13 +1,5 @@
 import { CaseWithId, FieldPrefix } from '../../app/case/case';
-import {
-  ApplyingWith,
-  ContactDetails,
-  Gender,
-  Nationality,
-  State,
-  YesNoNotsure,
-  YesOrNo,
-} from '../../app/case/definition';
+import { ApplyingWith, Gender, Nationality, State, YesNoNotsure, YesOrNo } from '../../app/case/definition';
 
 import {
   getAdoptionAgencyUrl,
@@ -62,8 +54,6 @@ describe('utils', () => {
           applicant1HasOtherNames: undefined,
           applicant1AdditionalNames: undefined,
           applicant1DateOfBirth: undefined,
-          applicant1Nationality: undefined,
-          applicant1AdditionalNationalities: undefined,
           applicant1Occupation: undefined,
         },
         userType: 'applicant1',
@@ -76,8 +66,6 @@ describe('utils', () => {
           applicant1HasOtherNames: YesOrNo.NO,
           applicant1AdditionalNames: undefined,
           applicant1DateOfBirth: { day: '1', month: '1', year: '2021' },
-          applicant1Nationality: [Nationality.BRITHISH],
-          applicant1AdditionalNationalities: undefined,
           applicant1Occupation: undefined,
         },
         userType: 'applicant1',
@@ -92,8 +80,6 @@ describe('utils', () => {
             { firstNames: 'MOCK_ADDITIONAL_FIRST_NAME', lastNames: 'MOCK_ADDITIONAL_FIRST_NAME' },
           ],
           applicant1DateOfBirth: { day: '1', month: '1', year: '2021' },
-          applicant1Nationality: [Nationality.OTHER],
-          applicant1AdditionalNationalities: ['MOCK_COUNTRY'],
           applicant1Occupation: 'MOCK_OCCUPATION',
         },
         userType: 'applicant1',
@@ -126,7 +112,7 @@ describe('utils', () => {
           applicant1Address1: 'MOCK_ADDRESS_1',
           applicant1AddressTown: ' MOCK_TOWN',
           applicant1AddressPostcode: 'MOCK_POSTCODE',
-          applicant1ContactDetails: undefined,
+          applicant1ContactDetailsConsent: undefined,
         },
         userType: 'applicant1',
         expected: IN_PROGRESS,
@@ -136,8 +122,9 @@ describe('utils', () => {
           applicant1Address1: 'MOCK_ADDRESS_1',
           applicant1AddressTown: ' MOCK_TOWN',
           applicant1AddressPostcode: 'MOCK_POSTCODE',
-          applicant1ContactDetails: [ContactDetails.EMAIL],
+          applicant1ContactDetailsConsent: YesOrNo.YES,
           applicant1EmailAddress: 'MOCK_EMAIL',
+          applicant1PhoneNumber: 'MOCK_PHONE',
         },
         userType: 'applicant1',
         expected: COMPLETED,
@@ -147,8 +134,9 @@ describe('utils', () => {
           applicant1Address1: 'MOCK_ADDRESS_1',
           applicant1AddressTown: ' MOCK_TOWN',
           applicant1AddressPostcode: 'MOCK_POSTCODE',
-          applicant1ContactDetails: [ContactDetails.PHONE],
+          applicant1ContactDetailsConsent: YesOrNo.YES,
           applicant1PhoneNumber: 'MOCK_PHONE',
+          applicant1EmailAddress: 'MOCK_EMAIL',
         },
         userType: 'applicant1',
         expected: COMPLETED,
@@ -156,8 +144,9 @@ describe('utils', () => {
       {
         data: {
           applicant2AddressSameAsApplicant1: YesOrNo.YES,
-          applicant2ContactDetails: [ContactDetails.PHONE],
+          applicant2ContactDetailsConsent: YesOrNo.YES,
           applicant2PhoneNumber: 'MOCK_PHONE',
+          applicant2EmailAddress: 'MOCK_EMAIL',
         },
         userType: 'applicant2',
         expected: COMPLETED,
@@ -165,8 +154,9 @@ describe('utils', () => {
       {
         data: {
           applicant2AddressSameAsApplicant1: YesOrNo.NO,
-          applicant2ContactDetails: [ContactDetails.PHONE],
+          applicant2ContactDetailsConsent: YesOrNo.YES,
           applicant2PhoneNumber: 'MOCK_PHONE',
+          applicant2EmailAddress: 'MOCK_EMAIL',
         },
         userType: 'applicant2',
         expected: IN_PROGRESS,
