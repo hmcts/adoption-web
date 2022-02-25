@@ -2,7 +2,7 @@ import { TranslationFn } from '../../app/controller/GetController';
 
 const en = content => ({
   title: 'Application Submitted',
-  referenceNumber: `Your reference number<br><strong>${content.userCase.hyphenatedCaseRef}</strong>`,
+  referenceNumber: `Your reference number<br><strong>${content.userCase.id}</strong>`,
   emailSentConfirmation:
     'We have sent you a confirmation email. If you have not received this, you should check your junk or spam folder.',
   nextStep: 'What happens next',
@@ -15,7 +15,7 @@ const en = content => ({
 
 const cy = content => ({
   title: 'Application Submitted',
-  referenceNumber: `Your reference number<br><strong>${content.userCase.hyphenatedCaseRef}</strong>`,
+  referenceNumber: `Your reference number<br><strong>${content.userCase.id}</strong>`,
   emailSentConfirmation:
     'We have sent you a confirmation email. If you have not received this, you should check your junk or spam folder.',
   nextStep: 'What happens next',
