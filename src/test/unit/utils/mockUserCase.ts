@@ -113,6 +113,8 @@ export default {
   otherParentAddressCountry: 'MOCK_ADDRESS_COUNTRY',
   otherParentAddressKnown: YesOrNo.YES,
 
+  hasSiblings: YesNoNotsure.YES,
+  hasPoForSiblings: YesNoNotsure.YES,
   siblings: [
     {
       siblingId: 'MOCK_SIBLING_ID',

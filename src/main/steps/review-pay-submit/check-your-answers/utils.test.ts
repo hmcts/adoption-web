@@ -1,6 +1,6 @@
 import mockUserCase from '../../../../test/unit/utils/mockUserCase';
-import { FieldPrefix } from '../../../app/case/case';
-import { ApplyingWith, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
+import { Checkbox, FieldPrefix } from '../../../app/case/case';
+import { ApplyingWith, DocumentType, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
 
 import { enContent } from './content';
 import {
@@ -1321,9 +1321,30 @@ describe('review-pay-submit > check-your-answers > utils', () => {
           title: 'Sibling court orders',
           rows: [
             {
-              key: { html: '<h3 class="govuk-heading-s">Sibling with court orders</h3>' },
-              value: {},
-              classes: 'govuk-summary-list__row--no-border',
+              key: { text: 'Child siblings or half siblings' },
+              value: { html: 'Yes' },
+              actions: {
+                items: [
+                  {
+                    href: '/sibling/exists?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Child siblings or half siblings',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Sibling court orders' },
+              value: { html: 'Yes' },
+              actions: {
+                items: [
+                  {
+                    href: '/sibling/court-order-exists?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Sibling court orders',
+                  },
+                ],
+              },
             },
             {
               key: { text: 'Sibling name' },
@@ -1373,6 +1394,61 @@ describe('review-pay-submit > check-your-answers > utils', () => {
           ],
         },
       },
+      {
+        userCase: { ...mockUserCase, hasSiblings: YesNoNotsure.NO },
+        expected: {
+          title: 'Sibling court orders',
+          rows: [
+            {
+              key: { text: 'Child siblings or half siblings' },
+              value: { html: 'No' },
+              actions: {
+                items: [
+                  {
+                    href: '/sibling/exists?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Child siblings or half siblings',
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+      {
+        userCase: { ...mockUserCase, hasSiblings: YesNoNotsure.YES, hasPoForSiblings: YesNoNotsure.NO },
+        expected: {
+          title: 'Sibling court orders',
+          rows: [
+            {
+              key: { text: 'Child siblings or half siblings' },
+              value: { html: 'Yes' },
+              actions: {
+                items: [
+                  {
+                    href: '/sibling/exists?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Child siblings or half siblings',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Sibling court orders' },
+              value: { html: 'No' },
+              actions: {
+                items: [
+                  {
+                    href: '/sibling/court-order-exists?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Sibling court orders',
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
     ])('return correct summary list items when %#', ({ userCase, expected }) => {
       expect(siblingCourtOrderSummaryList(enContent, userCase)).toStrictEqual(expected);
     });
@@ -1414,14 +1490,52 @@ describe('review-pay-submit > check-your-answers > utils', () => {
           title: 'Uploaded documents',
           rows: [
             {
-              key: { text: "Child's documents" },
+              key: { text: 'Uploaded documents' },
               value: { html: 'MOCK_DOCUMENT_FILE_NAME' },
               actions: {
                 items: [
                   {
                     href: '/upload-your-documents?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: "Change Child's documents",
+                    visuallyHiddenText: 'Change Uploaded documents',
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+      {
+        userCase: {
+          ...mockUserCase,
+          applicant1CannotUpload: Checkbox.Checked,
+          applicant1CannotUploadDocuments: [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE],
+        },
+        expected: {
+          title: 'Uploaded documents',
+          rows: [
+            {
+              key: { text: 'Uploaded documents' },
+              value: { html: 'MOCK_DOCUMENT_FILE_NAME' },
+              actions: {
+                items: [
+                  {
+                    href: '/upload-your-documents?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Uploaded documents',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Documents not uploaded' },
+              value: { html: 'Birth or adoption certificate' },
+              actions: {
+                items: [
+                  {
+                    href: '/upload-your-documents?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Change Documents not uploaded',
                   },
                 ],
               },

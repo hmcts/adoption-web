@@ -74,11 +74,12 @@ const enContent = {
     court: 'Court',
     date: 'Date',
     courtOrder: 'Court order',
-    siblingCourtOrders: 'Sibling with court orders',
+    siblingCourtOrders: 'Sibling court orders',
+    siblingOrHalfSibling: 'Child siblings or half siblings',
     siblingName: 'Sibling name',
     familyCourtName: 'Family court name',
-    applicantDocuments: "Applicant's documents",
-    childDocuments: "Child's documents",
+    uploadedDocuments: 'Uploaded documents',
+    documentsNotUploaded: 'Documents not uploaded',
   },
   errors: {
     dateChildMovedIn: {
@@ -156,11 +157,12 @@ const cyContent = {
     court: 'Court (in welsh)',
     date: 'Date (in welsh)',
     courtOrder: 'Court order (in welsh)',
-    siblingCourtOrders: 'Sibling with court orders (in welsh)',
+    siblingCourtOrders: 'Sibling court orders (in welsh)',
+    siblingOrHalfSibling: 'Child siblings or half siblings (in welsh)',
     siblingName: 'Sibling name (in welsh)',
     familyCourtName: 'Family court name (in welsh)',
-    applicantDocuments: "Applicant's documents (in welsh)",
-    childDocuments: "Child's documents (in welsh)",
+    uploadedDocuments: 'Uploaded documents (in welsh)',
+    documentsNotUploaded: 'Documents not uploaded (in welsh)',
   },
   errors: {
     dateChildMovedIn: {

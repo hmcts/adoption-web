@@ -1,5 +1,5 @@
 import { FieldPrefix } from '../../../app/case/case';
-import { ApplyingWith, Gender, YesNoNotsure } from '../../../app/case/definition';
+import { ApplyingWith, DocumentType, Gender, YesNoNotsure } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { CommonContent } from '../../../steps/common/common.content';
@@ -41,6 +41,10 @@ export const enContent = {
     [YesNoNotsure.YES]: 'Yes',
     [YesNoNotsure.NO]: 'No',
     [YesNoNotsure.NOT_SURE]: 'Not sure',
+  },
+  documentTypes: {
+    [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE]: 'Birth or adoption certificate',
+    [DocumentType.DEATH_CERTIFICATE]: 'Death certiticate',
   },
   sectionTitles: {
     applicationDetails: 'Application details',
@@ -87,11 +91,12 @@ export const enContent = {
     court: 'Court',
     date: 'Date',
     courtOrder: 'Court order',
-    siblingCourtOrders: 'Sibling with court orders',
+    siblingOrHalfSibling: 'Child siblings or half siblings',
+    siblingCourtOrders: 'Sibling court orders',
     siblingName: 'Sibling name',
     familyCourtName: 'Family court name',
-    applicantDocuments: "Applicant's documents",
-    childDocuments: "Child's documents",
+    uploadedDocuments: 'Uploaded documents',
+    documentsNotUploaded: 'Documents not uploaded',
   },
   errors: {
     dateChildMovedIn: {
@@ -148,6 +153,10 @@ export const cyContent = {
     [YesNoNotsure.NO]: 'No (in welsh)',
     [YesNoNotsure.NOT_SURE]: 'Not sure (in welsh)',
   },
+  documentTypes: {
+    [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE]: 'Birth or adoption certificate (in welsh)',
+    [DocumentType.DEATH_CERTIFICATE]: 'Death certiticate (in welsh)',
+  },
   sectionTitles: {
     applicationDetails: 'Application details (in welsh)',
     adoptionagencyOrLA: 'Adoption agency or local authority details (in welsh)',
@@ -193,11 +202,12 @@ export const cyContent = {
     court: 'Court (in welsh)',
     date: 'Date (in welsh)',
     courtOrder: 'Court order (in welsh)',
-    siblingCourtOrders: 'Sibling with court orders (in welsh)',
+    siblingOrHalfSibling: 'Child siblings or half siblings (in welsh)',
+    siblingCourtOrders: 'Sibling court orders (in welsh)',
     siblingName: 'Sibling name (in welsh)',
     familyCourtName: 'Family court name (in welsh)',
-    applicantDocuments: "Applicant's documents (in welsh)",
-    childDocuments: "Child's documents (in welsh)",
+    uploadedDocuments: 'Uploaded documents (in welsh)',
+    documentsNotUploaded: 'Documents not uploaded (in welsh)',
   },
   errors: {
     dateChildMovedIn: {

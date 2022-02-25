@@ -1,5 +1,5 @@
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
-import { CaseDate, CaseWithId, FieldPrefix } from '../../../app/case/case';
+import { CaseDate, CaseWithId, Checkbox, FieldPrefix } from '../../../app/case/case';
 import { ApplyingWith, Nationality, PlacementOrder, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { PageContent } from '../../../app/controller/GetController';
@@ -503,57 +503,72 @@ export const siblingCourtOrderSummaryList = (
   const siblingList = getSectionSummaryList(
     [
       {
-        keyHtml: `<h3 class="govuk-heading-s">${keys.siblingCourtOrders}</h3>`,
-        classes: 'govuk-summary-list__row--no-border',
+        key: keys.siblingOrHalfSibling,
+        valueHtml: content.yesNoNotsure[userCase.hasSiblings!],
+        changeUrl: `${Urls.SIBLING_EXISTS}`,
       },
-      ...userCase.siblings!.map(sibling => ({
-        key: keys.siblingName,
-        value: sibling.siblingFirstName + ' ' + sibling.siblingLastNames,
-        changeUrl: `${Urls.SIBLING_NAME}?change=${sibling.siblingId}`,
-      })),
+      ...(userCase.hasSiblings === YesNoNotsure.YES
+        ? [
+            {
+              key: keys.siblingCourtOrders,
+              valueHtml: content.yesNoNotsure[userCase.hasPoForSiblings!],
+              changeUrl: `${Urls.SIBLING_COURT_ORDER_EXISTS}`,
+            },
+            ...(userCase.hasPoForSiblings === YesNoNotsure.YES
+              ? userCase.siblings!.map(sibling => ({
+                  key: keys.siblingName,
+                  value: sibling.siblingFirstName + ' ' + sibling.siblingLastNames,
+                  changeUrl: `${Urls.SIBLING_NAME}?change=${sibling.siblingId}`,
+                }))
+              : []),
+          ]
+        : []),
     ],
     content
   );
 
-  const siblingCourtOrderList = userCase.siblings!.reduce(
-    (rows: GovUkNunjucksSummary[], sibling) => [
-      ...rows,
-      ...sibling.siblingPlacementOrders!.reduce(
-        (acc: GovUkNunjucksSummary[], item) => [
-          ...acc,
-          ...getSectionSummaryList(
-            [
-              {
-                keyHtml: `<h3 class="govuk-heading-s govuk-!-margin-top-8">${keys.courtOrder}</h3>`,
-                classes: 'govuk-summary-list__row--no-border',
-              },
-              {
-                key: keys.siblingName,
-                value: sibling.siblingFirstName + ' ' + sibling.siblingLastNames,
-              },
-              {
-                key: keys.typeOfOrder,
-                value: (item as PlacementOrder).placementOrderType,
-                changeUrl: `${Urls.SIBLING_ORDER_TYPE}?change=${sibling.siblingId}/${
-                  (item as PlacementOrder).placementOrderId
-                }`,
-              },
-              {
-                key: keys.orderNumber,
-                value: (item as PlacementOrder).placementOrderNumber,
-                changeUrl: `${Urls.SIBLING_ORDER_CASE_NUMBER}?change=${sibling.siblingId}/${
-                  (item as PlacementOrder).placementOrderId
-                }`,
-              },
-            ],
-            content
-          ),
-        ],
-        []
-      ),
-    ],
-    []
-  );
+  const siblingCourtOrderList =
+    userCase.hasSiblings === YesNoNotsure.YES && userCase.hasPoForSiblings === YesNoNotsure.YES
+      ? userCase.siblings!.reduce(
+          (rows: GovUkNunjucksSummary[], sibling) => [
+            ...rows,
+            ...sibling.siblingPlacementOrders!.reduce(
+              (acc: GovUkNunjucksSummary[], item) => [
+                ...acc,
+                ...getSectionSummaryList(
+                  [
+                    {
+                      keyHtml: `<h3 class="govuk-heading-s govuk-!-margin-top-8">${keys.courtOrder}</h3>`,
+                      classes: 'govuk-summary-list__row--no-border',
+                    },
+                    {
+                      key: keys.siblingName,
+                      value: sibling.siblingFirstName + ' ' + sibling.siblingLastNames,
+                    },
+                    {
+                      key: keys.typeOfOrder,
+                      value: (item as PlacementOrder).placementOrderType,
+                      changeUrl: `${Urls.SIBLING_ORDER_TYPE}?change=${sibling.siblingId}/${
+                        (item as PlacementOrder).placementOrderId
+                      }`,
+                    },
+                    {
+                      key: keys.orderNumber,
+                      value: (item as PlacementOrder).placementOrderNumber,
+                      changeUrl: `${Urls.SIBLING_ORDER_CASE_NUMBER}?change=${sibling.siblingId}/${
+                        (item as PlacementOrder).placementOrderId
+                      }`,
+                    },
+                  ],
+                  content
+                ),
+              ],
+              []
+            ),
+          ],
+          []
+        )
+      : [];
 
   return {
     title: sectionTitles.siblingCourtOrders,
@@ -585,6 +600,13 @@ const formatDocuments = (userCase: Partial<CaseWithId>) => {
   return documentFileNames?.join('<br>');
 };
 
+const formatNotUploadedDocuments = (userCase: Partial<CaseWithId>, content: PageContent) => {
+  const documentTypes = userCase.applicant1CannotUploadDocuments?.map(
+    item => (content.documentTypes as Record<string, string>)[item]
+  );
+  return documentTypes?.join('<br>');
+};
+
 export const uploadedDocumentSummaryList = (
   { sectionTitles, keys, ...content }: SummaryListContent,
   userCase: Partial<CaseWithId>
@@ -593,10 +615,19 @@ export const uploadedDocumentSummaryList = (
   rows: getSectionSummaryList(
     [
       {
-        key: keys.childDocuments,
+        key: keys.uploadedDocuments,
         valueHtml: formatDocuments(userCase),
         changeUrl: Urls.UPLOAD_YOUR_DOCUMENTS,
       },
+      ...(userCase.applicant1CannotUpload === Checkbox.Checked
+        ? [
+            {
+              key: keys.documentsNotUploaded,
+              valueHtml: formatNotUploadedDocuments(userCase, content),
+              changeUrl: Urls.UPLOAD_YOUR_DOCUMENTS,
+            },
+          ]
+        : []),
     ],
     content
   ),
