@@ -24,20 +24,20 @@ describe('NationalityPostController', () => {
   let req;
   let res;
   let controller;
-  const formData = { applicant1AdditionalNationalities: [] };
+  const formData = { birthMotherAdditionalNationalities: [] };
 
   beforeEach(() => {
     req = mockRequest({
       session: {
         userCase: {
           id: 'MOCK_ID',
-          applicant1AdditionalNationalities: [],
+          birthMotherAdditionalNationalities: [],
         },
         save: jest.fn(done => done()),
       },
     });
     res = mockResponse();
-    controller = new NationalityPostController({}, FieldPrefix.APPLICANT1);
+    controller = new NationalityPostController({}, FieldPrefix.BIRTH_MOTHER);
   });
 
   describe('when there are no form errors', () => {
@@ -55,24 +55,24 @@ describe('NationalityPostController', () => {
       beforeEach(() => {
         mockGetParsedBody.mockReturnValue({ addButton: 'addButton' });
         mockGetErrors.mockReturnValue([]);
-        controller = new NationalityPostController({}, FieldPrefix.APPLICANT1);
+        controller = new NationalityPostController({}, FieldPrefix.BIRTH_MOTHER);
       });
 
       describe('and when addAnotherNationality is present in formData', () => {
         beforeEach(() => {
           mockGetParsedBody.mockReturnValue({ addButton: 'addButton', addAnotherNationality: 'MOCK_COUNTRY' });
           mockGetErrors.mockReturnValue([]);
-          controller = new NationalityPostController({}, FieldPrefix.APPLICANT1);
+          controller = new NationalityPostController({}, FieldPrefix.BIRTH_MOTHER);
           req.locals.api.triggerEvent.mockResolvedValue({
             ...formData,
-            applicant1AdditionalNationalities: ['MOCK_COUNTRY'],
+            birthMotherAdditionalNationalities: ['MOCK_COUNTRY'],
           });
         });
 
-        test('should add the country in userCase applicant1AdditionalNationalities session data', async () => {
+        test('should add the country in userCase birthMotherAdditionalNationalities session data', async () => {
           await controller.post(req, res);
           expect(req.session.errors).toEqual([]);
-          expect(req.session.userCase.applicant1AdditionalNationalities).toEqual(['MOCK_COUNTRY']);
+          expect(req.session.userCase.birthMotherAdditionalNationalities).toEqual(['MOCK_COUNTRY']);
           expect(req.session.save).toHaveBeenCalled();
         });
 
@@ -81,7 +81,7 @@ describe('NationalityPostController', () => {
           expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(1);
           expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(
             'MOCK_ID',
-            { applicant1AdditionalNationalities: ['MOCK_COUNTRY'] },
+            { birthMotherAdditionalNationalities: ['MOCK_COUNTRY'] },
             'citizen-update-application'
           );
         });
@@ -92,17 +92,17 @@ describe('NationalityPostController', () => {
       beforeEach(() => {
         mockGetParsedBody.mockReturnValue({});
         mockGetErrors.mockReturnValue([]);
-        controller = new NationalityPostController({}, FieldPrefix.APPLICANT1);
+        controller = new NationalityPostController({}, FieldPrefix.BIRTH_MOTHER);
         req.locals.api.triggerEvent.mockResolvedValue(formData);
       });
 
-      test('should add the country in userCase applicant1AdditionalNationalities session data', async () => {
+      test('should add the country in userCase birthMotherAdditionalNationalities session data', async () => {
         await controller.post(req, res);
         expect(req.session.errors).toEqual([]);
-        expect(req.session.userCase.applicant1AdditionalNationalities).toEqual([]);
+        expect(req.session.userCase.birthMotherAdditionalNationalities).toEqual([]);
         expect(req.session.save).toHaveBeenCalled();
         expect(mockGetNextStepUrl).toHaveBeenCalledWith(req, {
-          applicant1AdditionalNationalities: [],
+          birthMotherAdditionalNationalities: [],
         });
       });
     });
@@ -163,17 +163,17 @@ describe('NationalityPostController', () => {
       res = mockResponse();
       mockGetParsedBody.mockReturnValue({ addButton: 'addButton', addAnotherNationality: 'MOCK_COUNTRY3' });
       mockGetErrors.mockReturnValue([]);
-      controller = new NationalityPostController((): FormFields => ({}), FieldPrefix.APPLICANT1);
+      controller = new NationalityPostController((): FormFields => ({}), FieldPrefix.BIRTH_MOTHER);
       req.locals.api.triggerEvent.mockResolvedValue({
         ...formData,
-        applicant1AdditionalNationalities: ['MOCK_COUNTRY'],
+        birthMotherAdditionalNationalities: ['MOCK_COUNTRY'],
       });
     });
 
-    test('should set the formData fields in userCase applicant1AdditionalNationalities session data', async () => {
+    test('should set the formData fields in userCase birthMotherAdditionalNationalities session data', async () => {
       await controller.post(req, res);
       expect(req.session.errors).toEqual([]);
-      expect(req.session.userCase.applicant1AdditionalNationalities).toEqual(['MOCK_COUNTRY']);
+      expect(req.session.userCase.birthMotherAdditionalNationalities).toEqual(['MOCK_COUNTRY']);
       expect(req.session.save).toHaveBeenCalled();
     });
   });

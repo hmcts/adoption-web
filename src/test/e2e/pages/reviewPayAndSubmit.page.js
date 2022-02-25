@@ -20,43 +20,45 @@ module.exports = {
     pcqNO: '.govuk-button.govuk-button--secondary',
   },
 
-  reviewPayAndSubmitDetailsSection() {
-    I.wait('5');
-    if (I.seeElement(this.fields.pcqNO)) {
-      I.click("I don't want to answer these questions");
+  async reviewPayAndSubmitDetailsSection() {
+    await I.wait('5');
+    const numOfPCQElements = await I.grabNumberOfVisibleElements(this.fields.pcqNO);
+    if (numOfPCQElements === 1) {
+      await I.click("I don't want to answer these questions");
     }
-    I.wait('5');
-    I.waitForText('Review your application', 30);
-    I.click('Continue');
-    I.waitForText('Statement of truth', 30);
-    I.click(this.fields.applicant1IBelieveApplicationIsTrue);
-    I.click(this.fields.applicant2IBelieveApplicationIsTrue);
-    I.fillField(this.fields.applicant1SotFullName, 'Joe Bloggs');
-    I.fillField(this.fields.applicant2SotFullName, 'George Thomas');
-    I.click('Confirm');
-    I.wait('3');
+
+    await I.wait('5');
+    await I.waitForText('Review your application', 30);
+    await I.click('Continue');
+    await I.waitForText('Statement of truth', 30);
+    await I.click(this.fields.applicant1IBelieveApplicationIsTrue);
+    await I.click(this.fields.applicant2IBelieveApplicationIsTrue);
+    await I.fillField(this.fields.applicant1SotFullName, 'Joe Bloggs');
+    await I.fillField(this.fields.applicant2SotFullName, 'George Thomas');
+    await I.click('Confirm');
+    await I.wait('3');
   },
 
-  adoptionCourtFeesByCard() {
-    I.waitForText('Paying your adoption court fees', 30);
-    I.click(this.fields.paymentTypeCard);
-    I.click('Continue');
-    I.wait(30);
-    I.waitForText('Enter card details', 30);
-    I.fillField(this.fields.cardNo, '4444333322221111');
-    I.fillField(this.fields.expiryMonth, '10');
-    I.fillField(this.fields.expiryYear, '28');
-    I.fillField(this.fields.cardholderName, 'Joe Bloggs');
-    I.fillField(this.fields.cvc, '123');
-    I.fillField(this.fields.addressLine1, '2');
-    I.fillField(this.fields.addressLine2, 'Chruch road');
-    I.fillField(this.fields.addressCity, 'Uxbridge');
-    I.fillField(this.fields.addressPostcode, 'UB8 3NA');
-    I.fillField(this.fields.email, 'simulate-delivered@notifications.service.gov.uk');
-    I.click('Continue');
-    I.wait(10);
-    I.waitForText('Confirm your payment', 30);
-    I.waitForText('£183.00', 30);
-    I.click('Confirm payment');
+  async adoptionCourtFeesByCard() {
+    await I.waitForText('Paying your adoption court fees', 30);
+    await I.click(this.fields.paymentTypeCard);
+    await I.click('Continue');
+    await I.wait(30);
+    await I.waitForText('Enter card details', 30);
+    await I.fillField(this.fields.cardNo, '4444333322221111');
+    await I.fillField(this.fields.expiryMonth, '10');
+    await I.fillField(this.fields.expiryYear, '28');
+    await I.fillField(this.fields.cardholderName, 'Joe Bloggs');
+    await I.fillField(this.fields.cvc, '123');
+    await I.fillField(this.fields.addressLine1, '2');
+    await I.fillField(this.fields.addressLine2, 'Chruch road');
+    await I.fillField(this.fields.addressCity, 'Uxbridge');
+    await I.fillField(this.fields.addressPostcode, 'UB8 3NA');
+    await I.fillField(this.fields.email, 'simulate-delivered@notifications.service.gov.uk');
+    await I.click('Continue');
+    await I.wait(10);
+    await I.waitForText('Confirm your payment', 30);
+    await I.waitForText('£183.00', 30);
+    await I.click('Confirm payment');
   },
 };

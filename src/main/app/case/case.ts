@@ -41,8 +41,6 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant1Occupation: 'applicant1Occupation',
   applicant1EmailAddress: 'applicant1EmailAddress',
   applicant1PhoneNumber: 'applicant1PhoneNumber',
-  applicant1Nationality: 'applicant1Nationality',
-  applicant1AdditionalNationalities: 'applicant1AdditionalNationalities',
   applicant1Address1: 'applicant1Address1',
   applicant1Address2: 'applicant1Address2',
   applicant1AddressTown: 'applicant1AddressTown',
@@ -59,8 +57,6 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant2Occupation: 'applicant2Occupation',
   applicant2EmailAddress: 'applicant2EmailAddress',
   applicant2PhoneNumber: 'applicant2PhoneNumber',
-  applicant2Nationality: 'applicant2Nationality',
-  applicant2AdditionalNationalities: 'applicant2AdditionalNationalities',
   applicant2Address1: 'applicant2Address1',
   applicant2Address2: 'applicant2Address2',
   applicant2AddressTown: 'applicant2AddressTown',
@@ -197,8 +193,6 @@ export interface Case {
   applicant1PhoneNumber?: string;
   applicant1DateOfBirth?: CaseDate;
   applicant1Occupation?: string;
-  applicant1Nationality?: Nationality[];
-  applicant1AdditionalNationalities?: string[];
   applicant1SelectAddress?: string;
   applicant1Address1?: string;
   applicant1Address2?: string;
@@ -218,8 +212,6 @@ export interface Case {
   applicant2Occupation?: string;
   applicant2EmailAddress?: string;
   applicant2PhoneNumber?: string;
-  applicant2Nationality?: Nationality[];
-  applicant2AdditionalNationalities?: string[];
   applicant2AddressSameAsApplicant1?: YesOrNo;
   applicant2SelectAddress?: string;
   applicant2Address1?: string;

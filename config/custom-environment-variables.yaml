@@ -18,6 +18,7 @@ services:
   equalityAndDiversity:
     url: EQUALITY_URL
     tokenKey: PCQ_TOKEN
+    pcqEnabled: PCQ_ENABLED
 port: PORT
 session:
   redis:

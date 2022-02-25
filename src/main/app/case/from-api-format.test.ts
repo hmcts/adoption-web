@@ -89,8 +89,6 @@ describe('from-api-format', () => {
       dateChildMovedIn: { day: '1', month: '1', year: '2021' },
       applicant1AdditionalNames: [{ id: 'MOCK_ID', firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' }],
       applicant2AdditionalNames: [{ id: 'MOCK_ID', firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' }],
-      applicant1AdditionalNationalities: ['MOCK_COUNTRY'],
-      applicant2AdditionalNationalities: ['MOCK_COUNTRY'],
       childrenAdditionalNationalities: ['MOCK_COUNTRY'],
       applicant1DateOfBirth: { day: '20', month: '1', year: '2000' },
       applicant2DateOfBirth: undefined,

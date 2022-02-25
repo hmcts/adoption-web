@@ -53,21 +53,16 @@ export const getPersonalDetailsStatus = (
   const hasOtherNames = userCase[`${userType}HasOtherNames`];
   const additionalNames = userCase[`${userType}AdditionalNames`] || [];
   const dateOfBirth = userCase[`${userType}DateOfBirth`];
-  const nationality: string[] = userCase[`${userType}Nationality`] || [];
-  const nationalities: string[] = userCase[`${userType}AdditionalNationalities`] || [];
   const occupation = userCase[`${userType}Occupation`];
 
   const dateOfBirthComplete = dateOfBirth ? !!dateOfBirth.year && !!dateOfBirth.month && !!dateOfBirth.day : false;
 
   const otherNamesComplete: boolean =
     hasOtherNames === YesOrNo.NO || (hasOtherNames === YesOrNo.YES && !!additionalNames.length);
-  const nationalityComplete =
-    !!nationality.length &&
-    (!nationality.includes('Other') || (!!nationalities.length && nationality.includes('Other')));
 
-  return fullName && otherNamesComplete && dateOfBirthComplete && nationalityComplete && occupation
+  return fullName && otherNamesComplete && dateOfBirthComplete && occupation
     ? SectionStatus.COMPLETED
-    : !fullName && !otherNamesComplete && !dateOfBirthComplete && !nationalityComplete && !occupation
+    : !fullName && !otherNamesComplete && !dateOfBirthComplete && !occupation
     ? SectionStatus.NOT_STARTED
     : SectionStatus.IN_PROGRESS;
 };
