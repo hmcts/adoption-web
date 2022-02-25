@@ -10,9 +10,6 @@ module.exports = {
     dateOfBirthDay: 'input[id$="applicant1DateOfBirth-day"]',
     dateOfBirthMonth: 'input[id$="applicant1DateOfBirth-month"]',
     dateOfBirthYear: 'input[id$="applicant1DateOfBirth-year"]',
-    britishCitizen: 'input[id$="applicant1Nationality"]',
-    citizenOfDifferentCountry: 'input[id$="applicant1Nationality-3"]',
-    addAnotherNationality: 'input[id$="addAnotherNationality"]',
     applicant1Occupation: 'input[id$="applicant1Occupation"]',
   },
 
@@ -35,14 +32,6 @@ module.exports = {
     I.wait('2');
     I.fillField(this.fields.dateOfBirthYear, '1988');
     I.click('Save and continue');
-    I.wait('3');
-    I.click(this.fields.britishCitizen);
-    I.click(this.fields.citizenOfDifferentCountry);
-    I.fillField(this.fields.addAnotherNationality, 'India');
-    I.click('Add');
-    I.wait('2');
-    I.click('Save and continue');
-    I.wait('3');
     I.fillField(this.fields.applicant1Occupation, 'Teacher');
     I.click('Save and continue');
     I.wait('3');
