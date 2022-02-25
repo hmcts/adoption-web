@@ -292,7 +292,7 @@ export const enum Gender {
   MALE = 'male',
   FEMALE = 'female',
   NOT_GIVEN = 'notGiven',
-  INTERSEX = 'intersex',
+  OTHER = 'other',
 }
 
 export interface PlacementOrder {

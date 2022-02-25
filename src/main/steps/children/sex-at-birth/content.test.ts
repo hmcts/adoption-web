@@ -18,7 +18,7 @@ describe('children > sex-at-birth content', () => {
     );
     expect(generatedContent.male).toEqual('Male');
     expect(generatedContent.female).toEqual('Female');
-    expect(generatedContent.intersex).toEqual('Intersex');
+    expect(generatedContent.other).toEqual('Other');
     expect((generatedContent.errors as any).childrenSexAtBirth.required).toEqual('Please select an answer');
   });
 
@@ -31,7 +31,7 @@ describe('children > sex-at-birth content', () => {
     );
     expect(generatedContent.male).toEqual('Male (in welsh)');
     expect(generatedContent.female).toEqual('Female (in welsh)');
-    expect(generatedContent.intersex).toEqual('Intersex (in welsh)');
+    expect(generatedContent.other).toEqual('Other (in welsh)');
     expect((generatedContent.errors as any).childrenSexAtBirth.required).toEqual('Please select an answer (in welsh)');
   });
 
@@ -49,7 +49,7 @@ describe('children > sex-at-birth content', () => {
     expect((childrenSexAtBirthField.section as Function)(generatedContent)).toBe("The child's details");
     expect((childrenSexAtBirthField.values[0].label as Function)(generatedContent)).toBe('Male');
     expect((childrenSexAtBirthField.values[1].label as Function)(generatedContent)).toBe('Female');
-    expect((childrenSexAtBirthField.values[2].label as Function)(generatedContent)).toBe('Intersex');
+    expect((childrenSexAtBirthField.values[2].label as Function)(generatedContent)).toBe('Other');
     expect(childrenSexAtBirthField.validator).toBe(isFieldFilledIn);
   });
 

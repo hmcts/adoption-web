@@ -9,7 +9,7 @@ const en = () => ({
   hint: "You should state exactly what is listed on the birth certificate. If the child's sex is listed as 'diverse', which means their biological sex could not be determined, you should choose the 'intersex' option.",
   male: 'Male',
   female: 'Female',
-  intersex: 'Intersex',
+  other: 'Other',
   errors: {
     childrenSexAtBirth: {
       required: 'Please select an answer',
@@ -23,7 +23,7 @@ const cy = () => ({
   hint: "You should state exactly what is listed on the birth certificate. If the child's sex is listed as 'diverse', which means their biological sex could not be determined, you should choose the 'intersex' option. (in welsh)",
   male: 'Male (in welsh)',
   female: 'Female (in welsh)',
-  intersex: 'Intersex (in welsh)',
+  other: 'Other (in welsh)',
   errors: {
     childrenSexAtBirth: {
       required: 'Please select an answer (in welsh)',
@@ -42,7 +42,7 @@ export const form: FormContent = {
       values: [
         { label: l => l.male, value: Gender.MALE },
         { label: l => l.female, value: Gender.FEMALE },
-        { label: l => l.intersex, value: Gender.INTERSEX },
+        { label: l => l.other, value: Gender.OTHER },
       ],
       validator: isFieldFilledIn,
     },
