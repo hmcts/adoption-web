@@ -1,5 +1,6 @@
-import { YesOrNo } from '../../../app/case/definition';
-import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
+import { YesNoNotsure } from '../../../app/case/definition';
+import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -7,58 +8,70 @@ import { generateContent } from './content';
 
 jest.mock('../../../app/form/validation');
 
-/* eslint-disable @typescript-eslint/ban-types */
-describe('under-18 content', () => {
-  const commonContent = { language: 'en' } as CommonContent;
+const enContent = {
+  section: 'Eligibility to apply to adopt',
+  label: 'Will the child be under 18 years old on the date you submit your application?',
+  under18No:
+    'You can only apply to adopt a child if they are under 18 years old on the date your application is submitted.',
+  moreInfo: 'More about adoption',
+  errors: {
+    under18Eligible: {
+      required: 'Please answer the question',
+    },
+  },
+};
+
+const cyContent = {
+  section: 'Eligibility to apply to adopt (in Welsh)',
+  label: 'Will the child be under 18 years old on the date you submit your application? (in welsh)',
+  under18No:
+    'You can only apply to adopt a child if they are under 18 years old on the date your application is submitted. (in welsh)',
+  moreInfo: 'More about adoption (in welsh)',
+  errors: {
+    under18Eligible: {
+      required: 'Please answer the question (in welsh)',
+    },
+  },
+};
+
+/* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
+describe('eligibility > under-18 > content', () => {
+  const commonContent = generatePageContent({
+    language: 'en',
+    userCase: {},
+  }) as CommonContent;
+
+  let generatedContent;
+  beforeEach(() => {
+    generatedContent = generateContent(commonContent);
+  });
+
   test('should return correct english content', () => {
-    const generatedContent = generateContent(commonContent);
-    expect(generatedContent.label).toEqual(
-      'Will the child be under 18 years old on the date you submit your application?'
-    );
-    expect(generatedContent.section).toEqual("Check you're eligible to adopt");
-    expect(generatedContent.under18No).toEqual(
-      'You can only apply to adopt a child if they are under 18 years old on the date your application is submitted.'
-    );
-    expect(generatedContent.one).toEqual('Yes');
-    expect(generatedContent.two).toEqual('No');
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    const generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.label).toEqual(
-      'Will the child be under 18 years old on the date you submit your application? (in welsh)'
-    );
-    expect(generatedContent.section).toEqual("Check you're eligible to adopt (in welsh)");
-    expect(generatedContent.under18No).toEqual(
-      'You can only apply to adopt a child if they are under 18 years old on the date your application is submitted. (in welsh)'
-    );
-    expect(generatedContent.one).toEqual('Yes (in welsh)');
-    expect(generatedContent.two).toEqual('No (in welsh)');
-  });
-
-  test('should contain submit button', () => {
-    const generatedContent = generateContent(commonContent);
-    const form = generatedContent.form as FormContent;
-    expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain under18Eligible field', () => {
-    const generatedContent = generateContent(commonContent);
-    const form = generatedContent.form as FormContent;
-    const fields = form.fields as FormFields;
-    const under18Eligible = fields.under18Eligible as FormOptions;
-    expect(under18Eligible.type).toBe('radios');
-    expect((under18Eligible as FormInput).classes).toBe('govuk-radios');
-    expect((under18Eligible.label as Function)(generatedContent)).toBe(
-      'Will the child be under 18 years old on the date you submit your application?'
+    const fields = (generatedContent.form as FormContent).fields as FormFields;
+    const field = fields.under18Eligible as FormOptions;
+    expect(field.type).toBe('radios');
+    expect(field.classes).toBe('govuk-radios');
+    expect((field.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((field.section as Function)(generatedContent)).toBe(enContent.section);
+    expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
+    expect(field.values[0].value).toBe(YesNoNotsure.YES);
+    expect((field.values[1].label as Function)(commonContent)).toBe(commonContent.no);
+    expect(field.values[1].value).toBe(YesNoNotsure.NO);
+    expect(field.validator).toBe(isFieldFilledIn);
+  });
+
+  test('should contain submit button', () => {
+    expect(((generatedContent.form as FormContent).submit.text as Function)(commonContent)).toBe(
+      commonContent.continue
     );
-    expect((under18Eligible.section as Function)(generatedContent)).toBe("Check you're eligible to adopt");
-    expect((under18Eligible.values[0].label as Function)(generatedContent)).toBe(YesOrNo.YES);
-    expect((under18Eligible.values[1].label as Function)(generatedContent)).toBe(YesOrNo.NO);
-    expect((under18Eligible.values[1].conditionalText as Function)(generatedContent)).toBe(
-      '<p class="govuk-label">You can only apply to adopt a child if they are under 18 years old on the date your application is submitted.</p>'
-    );
-    expect(under18Eligible.validator).toBe(isFieldFilledIn);
   });
 });
-/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-enable @typescript-eslint/ban-types */

@@ -1,6 +1,7 @@
 import { YesOrNo } from '../../app/case/definition';
 import { Eligibility as appRequestEligibility } from '../../app/controller/AppRequest';
 import {
+  CHECK_ELIGIBILITY_URL_DOMICILE,
   CHECK_ELIGIBILITY_URL_LIVED_UK,
   CHECK_ELIGIBILITY_URL_MARRIED,
   CHECK_ELIGIBILITY_URL_UNDER_18,
@@ -42,7 +43,12 @@ export const eligibilitySequence: Step[] = [
   {
     url: CHECK_ELIGIBILITY_URL_UNDER_21,
     showInSection: Sections.Eligibility,
-    getNextStep: data => (data.under21Eligible === YesOrNo.NO ? INELIGIBLE_TO_ADOPT : CHECK_ELIGIBILITY_URL_LIVED_UK),
+    getNextStep: data => (data.under21Eligible === YesOrNo.NO ? INELIGIBLE_TO_ADOPT : CHECK_ELIGIBILITY_URL_DOMICILE),
+  },
+  {
+    url: CHECK_ELIGIBILITY_URL_DOMICILE,
+    showInSection: Sections.Eligibility,
+    getNextStep: data => (data.domicileEligible === YesOrNo.NO ? INELIGIBLE_TO_ADOPT : CHECK_ELIGIBILITY_URL_LIVED_UK),
   },
   {
     url: CHECK_ELIGIBILITY_URL_LIVED_UK,
