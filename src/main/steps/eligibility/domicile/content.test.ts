@@ -10,11 +10,12 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: 'Eligibility to apply to adopt',
-  label: 'Are you, and the other applicant if relevant, both aged 21 or over?',
-  under21Yes: 'You must be 21 or over to adopt a child. This includes any other applicant.',
+  label:
+    'Is the UK, Channel Islands or Isle of Man the main country of residence (domicile) for you and the other applicant if relevant?',
+  domicileNo: 'You cannot apply to adopt a child unless you have a permanent home here.',
   moreInfo: 'More about adoption',
   errors: {
-    under21Eligible: {
+    domicileEligible: {
       required: 'Please answer the question',
     },
   },
@@ -22,18 +23,19 @@ const enContent = {
 
 const cyContent = {
   section: 'Eligibility to apply to adopt (in Welsh)',
-  label: 'Are you, and the other applicant if relevant, both aged 21 or over? (in welsh)',
-  under21Yes: 'You must be 21 or over to adopt a child. This includes any other applicant. (in welsh)',
+  label:
+    'Is the UK, Channel Islands or Isle of Man the main country of residence (domicile) for you and the other applicant if relevant? (in welsh)',
+  domicileNo: 'You cannot apply to adopt a child unless you have a permanent home here. (in welsh)',
   moreInfo: 'More about adoption (in welsh)',
   errors: {
-    under21Eligible: {
+    domicileEligible: {
       required: 'Please answer the question (in welsh)',
     },
   },
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('eligibility > under-21 > content', () => {
+describe('eligibility > domicile > content', () => {
   const commonContent = generatePageContent({
     language: 'en',
     userCase: {},
@@ -52,9 +54,9 @@ describe('eligibility > under-21 > content', () => {
     languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
-  test('should contain under21Eligible field', () => {
+  test('should contain domicileEligible field', () => {
     const fields = (generatedContent.form as FormContent).fields as FormFields;
-    const field = fields.under21Eligible as FormOptions;
+    const field = fields.domicileEligible as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
     expect((field.label as Function)(generatedContent)).toBe(enContent.label);
