@@ -32,6 +32,7 @@ services:
     path: '/service-endpoint'
     port: 4000
     tokenKey: 'SERVICE_TOKEN_KEY'
+    pcqEnabled: 'true'
 health:
   timeout: 5000
   deadline: 15000
