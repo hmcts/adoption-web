@@ -18,9 +18,9 @@ const commonContent = {
 } as CommonContent;
 
 const enContent = {
-  section: 'Primary applicant',
+  section: 'First applicant',
   title: "What's your date of birth?",
-  hint: 'For example, 28 6 1997',
+  hint: 'For example, 27 3 2007',
   errors: {
     applicant1DateOfBirth: {
       required: 'Enter your date of birth',
@@ -34,9 +34,9 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Primary applicant (in Welsh)',
+  section: 'First applicant (in Welsh)',
   title: "What's your date of birth? (in Welsh)",
-  hint: 'For example, 28 6 1997 (in Welsh)',
+  hint: 'For example, 27 3 2007 (in Welsh)',
   errors: {
     applicant1DateOfBirth: {
       required: 'Enter your date of birth (in Welsh)',
@@ -95,7 +95,7 @@ describe('appllicant1 > dob-content', () => {
     expect(dobField.classes).toBe('govuk-date-input');
     expect((dobField.label as Function)(generatedContent)).toBe("What's your date of birth?");
     expect(dobField.labelHidden).toBe(true);
-    expect((dobField.hint as Function)(generatedContent)).toBe('For example, 28 6 1997');
+    expect((dobField.hint as Function)(generatedContent)).toBe('For example, 27 3 2007');
 
     expect((dobField.values[0].label as Function)(commonContent)).toBe('Day');
     expect(dobField.values[0].name).toBe('day');
@@ -120,6 +120,20 @@ describe('appllicant1 > dob-content', () => {
       })
     ).toEqual({ day: '21', month: '12', year: '2018' });
     expect((dobField.validator as Function)({ day: '21', month: '12', year: '2018' })).toBe(undefined);
+  });
+
+  it('should have dateOfBirth label when language: en and  applyingWith: alone', () => {
+    const commonContent1 = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
+
+    const generatedContent1 = generateContent(commonContent1);
+    expect(generatedContent1.section).toBe('Applicant');
+  });
+
+  it('should have an dateOfBirth label when language: cy and  applyingWith: alone', () => {
+    const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
+
+    const generatedContent1 = generateContent(commonContent1);
+    expect(generatedContent1.section).toBe('Applicant (in Welsh)');
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

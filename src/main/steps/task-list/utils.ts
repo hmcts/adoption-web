@@ -1,6 +1,7 @@
 import { CaseDate, CaseWithId, FieldPrefix } from '../../app/case/case';
 import {
   AdoptionAgencyOrLocalAuthority,
+  ApplyingWith,
   PlacementOrder,
   SectionStatus,
   YesNoNotsure,
@@ -10,8 +11,18 @@ import { isDateInputInvalid, notSureViolation } from '../../app/form/validation'
 import { PaymentModel } from '../../app/payment/PaymentModel';
 import * as urls from '../urls';
 
-export const isApplyingWithComplete = (userCase: CaseWithId): boolean => {
-  return !!userCase.applyingWith;
+export const isApplyingWithComplete = (userCase: CaseWithId): SectionStatus => {
+  if (
+    userCase.applyingWith === ApplyingWith.ALONE ||
+    userCase.applyingWith === ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER
+  ) {
+    return SectionStatus.COMPLETED;
+  } else if (userCase.applyingWith === ApplyingWith.WITH_SOME_ONE_ELSE) {
+    return userCase.otherApplicantRelation && userCase.otherApplicantRelation?.length > 0
+      ? SectionStatus.COMPLETED
+      : SectionStatus.IN_PROGRESS;
+  }
+  return SectionStatus.NOT_STARTED;
 };
 
 const addressComplete = (userCase: CaseWithId, fieldPrefix: FieldPrefix) => {

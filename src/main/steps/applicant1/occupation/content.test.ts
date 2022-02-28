@@ -11,7 +11,7 @@ jest.mock('../../../app/form/validation');
 const CY = 'cy';
 const EN = 'en';
 const enContent = {
-  section: 'Primary applicant',
+  section: 'First applicant',
   label: "What's your occupation?",
   hint: 'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’.',
   warningText: {
@@ -35,7 +35,7 @@ const enContent = {
   },
 };
 const cyContent = {
-  section: 'Primary applicant (in Welsh)',
+  section: 'First applicant (in Welsh)',
   label: "What's your occupation? (in Welsh)",
   hint: 'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’. (in Welsh)',
   warningText: {
@@ -95,6 +95,26 @@ describe('occupation content', () => {
 
     (applicant1Occupation.validator as Function)('MockOccupation');
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockOccupation');
+  });
+
+  it('should have an occupation label when language: en and  applyingWith: alone', () => {
+    const commonContent1 = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
+
+    const generatedContent1 = generateContent(commonContent1);
+    const form1 = generatedContent1.form as FormContent;
+    const fields1 = form1.fields as FormFields;
+    const applicant1Occupation = fields1.applicant1Occupation;
+    expect((applicant1Occupation.label as Function)(generateContent(commonContent1))).toBe(enContent.label);
+  });
+
+  it('should have an occupation label when language: cy and  applyingWith: alone', () => {
+    const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
+
+    const generatedContent1 = generateContent(commonContent1);
+    const form1 = generatedContent1.form as FormContent;
+    const fields1 = form1.fields as FormFields;
+    const applicant1Occupation = fields1.applicant1Occupation;
+    expect((applicant1Occupation.label as Function)(generateContent(commonContent1))).toBe(cyContent.label);
   });
 
   it('should contain submit button', () => {
