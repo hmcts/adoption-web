@@ -10,9 +10,13 @@ const en = () => ({
   male: 'Male',
   female: 'Female',
   other: 'Other',
+  childrenOtherSexAtBirth: 'You should state exactly what is listed on the birth certificate.',
   errors: {
     childrenSexAtBirth: {
       required: 'Please select an answer',
+    },
+    childrenOtherSexAtBirth: {
+      required: 'Enter what is written on the birth certificate',
     },
   },
 });
@@ -24,9 +28,13 @@ const cy = () => ({
   male: 'Male (in welsh)',
   female: 'Female (in welsh)',
   other: 'Other (in welsh)',
+  childrenOtherSexAtBirth: 'You should state exactly what is listed on the birth certificate.',
   errors: {
     childrenSexAtBirth: {
       required: 'Please select an answer (in welsh)',
+    },
+    childrenOtherSexAtBirth: {
+      required: 'Enter what is written on the birth certificate (in welsh)',
     },
   },
 });
@@ -42,7 +50,18 @@ export const form: FormContent = {
       values: [
         { label: l => l.male, value: Gender.MALE },
         { label: l => l.female, value: Gender.FEMALE },
-        { label: l => l.other, value: Gender.OTHER },
+        {
+          label: l => l.other,
+          value: Gender.OTHER,
+          subFields: {
+            childrenOtherSexAtBirth: {
+              type: 'text',
+              label: l => l.childrenOtherSexAtBirth,
+              labelSize: null,
+              validator: isFieldFilledIn,
+            },
+          },
+        },
       ],
       validator: isFieldFilledIn,
     },

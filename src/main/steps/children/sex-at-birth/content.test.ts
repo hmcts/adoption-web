@@ -1,3 +1,5 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
+import { Gender } from '../../../app/case/definition';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
@@ -6,33 +8,51 @@ import { generateContent } from './content';
 
 jest.mock('../../../app/form/validation');
 
+const enContent = {
+  section: "The child's details",
+  label: "What was the child's sex at birth?",
+  hint: "You should state exactly what is listed on the birth certificate. If the child's sex is listed as 'diverse', which means their biological sex could not be determined, you should choose the 'intersex' option.",
+  male: 'Male',
+  female: 'Female',
+  other: 'Other',
+  childrenOtherSexAtBirth: 'You should state exactly what is listed on the birth certificate.',
+  errors: {
+    childrenSexAtBirth: {
+      required: 'Please select an answer',
+    },
+    childrenOtherSexAtBirth: {
+      required: 'Enter what is written on the birth certificate',
+    },
+  },
+};
+
+const cyContent = {
+  section: "The child's details (in welsh)",
+  label: "What was the child's sex at birth? (in welsh)",
+  hint: "You should state exactly what is listed on the birth certificate. If the child's sex is listed as 'diverse', which means their biological sex could not be determined, you should choose the 'intersex' option. (in welsh)",
+  male: 'Male (in welsh)',
+  female: 'Female (in welsh)',
+  other: 'Other (in welsh)',
+  childrenOtherSexAtBirth: 'You should state exactly what is listed on the birth certificate.',
+  errors: {
+    childrenSexAtBirth: {
+      required: 'Please select an answer (in welsh)',
+    },
+    childrenOtherSexAtBirth: {
+      required: 'Enter what is written on the birth certificate (in welsh)',
+    },
+  },
+};
+
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('children > sex-at-birth content', () => {
+describe('children > sex-at-birth > content', () => {
   const commonContent = { language: 'en', userCase: { childrenSexAtBirth: 'male' } } as CommonContent;
   test('should return correct english content', () => {
-    const generatedContent = generateContent(commonContent);
-    expect(generatedContent.section).toEqual("The child's details");
-    expect(generatedContent.label).toEqual("What was the child's sex at birth?");
-    expect(generatedContent.hint).toEqual(
-      "You should state exactly what is listed on the birth certificate. If the child's sex is listed as 'diverse', which means their biological sex could not be determined, you should choose the 'intersex' option."
-    );
-    expect(generatedContent.male).toEqual('Male');
-    expect(generatedContent.female).toEqual('Female');
-    expect(generatedContent.other).toEqual('Other');
-    expect((generatedContent.errors as any).childrenSexAtBirth.required).toEqual('Please select an answer');
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    const generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual("The child's details (in welsh)");
-    expect(generatedContent.label).toEqual("What was the child's sex at birth? (in welsh)");
-    expect(generatedContent.hint).toEqual(
-      "You should state exactly what is listed on the birth certificate. If the child's sex is listed as 'diverse', which means their biological sex could not be determined, you should choose the 'intersex' option. (in welsh)"
-    );
-    expect(generatedContent.male).toEqual('Male (in welsh)');
-    expect(generatedContent.female).toEqual('Female (in welsh)');
-    expect(generatedContent.other).toEqual('Other (in welsh)');
-    expect((generatedContent.errors as any).childrenSexAtBirth.required).toEqual('Please select an answer (in welsh)');
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain childrenSexAtBirth field', () => {
@@ -42,15 +62,22 @@ describe('children > sex-at-birth content', () => {
     const childrenSexAtBirthField = fields.childrenSexAtBirth as FormOptions;
     expect(childrenSexAtBirthField.type).toBe('radios');
     expect(childrenSexAtBirthField.classes).toBe('govuk-radios');
-    expect((childrenSexAtBirthField.label as Function)(generatedContent)).toBe("What was the child's sex at birth?");
-    expect(((childrenSexAtBirthField as FormInput).hint as Function)(generatedContent)).toBe(
-      "You should state exactly what is listed on the birth certificate. If the child's sex is listed as 'diverse', which means their biological sex could not be determined, you should choose the 'intersex' option."
-    );
-    expect((childrenSexAtBirthField.section as Function)(generatedContent)).toBe("The child's details");
-    expect((childrenSexAtBirthField.values[0].label as Function)(generatedContent)).toBe('Male');
-    expect((childrenSexAtBirthField.values[1].label as Function)(generatedContent)).toBe('Female');
-    expect((childrenSexAtBirthField.values[2].label as Function)(generatedContent)).toBe('Other');
+    expect((childrenSexAtBirthField.label as Function)(generatedContent)).toBe(enContent.label);
+    expect(((childrenSexAtBirthField as FormInput).hint as Function)(generatedContent)).toBe(enContent.hint);
+    expect((childrenSexAtBirthField.section as Function)(generatedContent)).toBe(enContent.section);
+    expect((childrenSexAtBirthField.values[0].label as Function)(generatedContent)).toBe(enContent.male);
+    expect(childrenSexAtBirthField.values[0].value).toBe(Gender.MALE);
+    expect((childrenSexAtBirthField.values[1].label as Function)(generatedContent)).toBe(enContent.female);
+    expect(childrenSexAtBirthField.values[1].value).toBe(Gender.FEMALE);
+    expect((childrenSexAtBirthField.values[2].label as Function)(generatedContent)).toBe(enContent.other);
+    expect(childrenSexAtBirthField.values[2].value).toBe(Gender.OTHER);
     expect(childrenSexAtBirthField.validator).toBe(isFieldFilledIn);
+
+    const childrenOtherSexAtBirthField = childrenSexAtBirthField.values[2].subFields!.childrenOtherSexAtBirth;
+    expect(childrenOtherSexAtBirthField.type).toBe('text');
+    expect((childrenOtherSexAtBirthField.label as Function)(generatedContent)).toBe(enContent.childrenOtherSexAtBirth);
+    expect(childrenOtherSexAtBirthField.labelSize).toBe(null);
+    expect(childrenOtherSexAtBirthField.validator).toBe(isFieldFilledIn);
   });
 
   test('should contain submit button', () => {

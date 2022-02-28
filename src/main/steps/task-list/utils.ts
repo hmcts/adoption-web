@@ -1,6 +1,7 @@
 import { CaseDate, CaseWithId, FieldPrefix } from '../../app/case/case';
 import {
   AdoptionAgencyOrLocalAuthority,
+  Gender,
   PlacementOrder,
   SectionStatus,
   YesNoNotsure,
@@ -104,16 +105,21 @@ export const getChildrenBirthCertificateStatus = (userCase: CaseWithId): Section
   const childrenDateOfBirth = userCase.childrenDateOfBirth as CaseDate;
   const dateOfBirthComplete = childrenDateOfBirth?.day && childrenDateOfBirth?.month && childrenDateOfBirth?.year;
   const childrenSexAtBirth = userCase.childrenSexAtBirth;
+  const childrenOtherSexAtBirth = userCase.childrenOtherSexAtBirth;
 
+  const sexAtBirthComplete =
+    childrenSexAtBirth === Gender.MALE ||
+    childrenSexAtBirth === Gender.FEMALE ||
+    (childrenSexAtBirth === Gender.OTHER && childrenOtherSexAtBirth);
   const nationality: string[] = userCase.childrenNationality || [];
   const nationalities: string[] = userCase.childrenAdditionalNationalities || [];
   const nationalityComplete =
     !!nationality.length &&
     (!nationality.includes('Other') || (!!nationalities.length && nationality.includes('Other')));
 
-  return childrenFirstName && childrenLastName && dateOfBirthComplete && childrenSexAtBirth && nationalityComplete
+  return childrenFirstName && childrenLastName && dateOfBirthComplete && sexAtBirthComplete && nationalityComplete
     ? SectionStatus.COMPLETED
-    : !childrenFirstName && !childrenLastName && !dateOfBirthComplete && !childrenSexAtBirth && !nationalityComplete
+    : !childrenFirstName && !childrenLastName && !dateOfBirthComplete && !sexAtBirthComplete && !nationalityComplete
     ? SectionStatus.NOT_STARTED
     : SectionStatus.IN_PROGRESS;
 };
