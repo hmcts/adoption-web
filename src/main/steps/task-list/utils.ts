@@ -381,3 +381,18 @@ export const getDateChildMovedInStatus = (userCase: CaseWithId): SectionStatus =
 
   return dateChildMovedInComplete ? SectionStatus.COMPLETED : SectionStatus.NOT_STARTED;
 };
+
+export const findFamilyCourtStatus = (userCase: CaseWithId): SectionStatus => {
+  const exists = userCase.findFamilyCourt;
+
+  if (exists === YesOrNo.YES) {
+    return SectionStatus.COMPLETED;
+  } else if (exists === YesOrNo.NO) {
+    if (userCase.familyCourtName && userCase.familyCourtName?.length > 0) {
+      return SectionStatus.COMPLETED;
+    } else {
+      return SectionStatus.IN_PROGRESS;
+    }
+  }
+  return SectionStatus.NOT_STARTED;
+};

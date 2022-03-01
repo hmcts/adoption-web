@@ -4,6 +4,7 @@ import { TranslationFn } from '../../app/controller/GetController';
 import * as URL from '../urls';
 
 import {
+  findFamilyCourtStatus,
   getAdoptionAgencyDetailStatus,
   getAdoptionAgencyUrl,
   getAdoptionCertificateDetailsStatus,
@@ -51,6 +52,7 @@ const urls = content => ({
   dateChildMovedIn: URL.DATE_CHILD_MOVED_IN,
   adoptionAgency: getAdoptionAgencyUrl(content.userCase),
   uploadYourDocuments: URL.UPLOAD_YOUR_DOCUMENTS,
+  findFamilyCourt: URL.CHILDREN_FIND_FAMILY_COURT,
 });
 
 const en = content => {
@@ -83,6 +85,7 @@ const en = content => {
     section3link8: 'Court order details for any siblings or half-siblings',
     section3link9: 'Adoption agency and social worker',
     section3link10: 'Sibling details',
+    section3link11: 'Choose your family court',
     section4: 'Add your adoption contacts',
     section4link1: 'Your adoption agency or local authority',
     section4link2: "The child's adoption agency or local authority",
@@ -156,6 +159,7 @@ const en = content => {
         statuses,
         'upload-your-documents'
       ),
+      findFamilyCourt: getSectionStatusLabel(findFamilyCourtStatus(content.userCase), statuses, 'find-family-court'),
     },
     urls: urls(content),
   };
@@ -191,6 +195,7 @@ const cy = content => {
     section3link8: 'Court order details for any siblings or half-siblings (in welsh) ',
     section3link9: 'Adoption agency and social worker (in welsh) ',
     section3link10: 'Sibling details',
+    section3link11: 'Choose your family court (in welsh)',
     section4: 'Add your adoption contacts (in welsh) ',
     section4link1: 'Your adoption agency or local authority (in welsh) ',
     section4link2: "The child's adoption agency or local authority (in welsh) ",
@@ -255,6 +260,7 @@ const cy = content => {
         statuses,
         'statement-of-truth'
       ),
+      findFamilyCourt: getSectionStatusLabel(findFamilyCourtStatus(content.userCase), statuses, 'find-family-court'),
     },
     urls: urls(content),
   };
