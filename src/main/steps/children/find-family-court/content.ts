@@ -1,9 +1,9 @@
 import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent } from '../../../app/form/Form';//FormFieldsFn
+import { FormContent } from '../../../app/form/Form'; //FormFieldsFn
 import { isFieldFilledIn } from '../../../app/form/validation';
 
-export const en = content => ({
+const en = content => ({
   section: "The child's details",
   title: 'Choose a family court',
   findFamilyCourtParagraph1:
@@ -31,7 +31,7 @@ export const en = content => ({
   },
 });
 
-export const cy = content => ({
+const cy = content => ({
   section: "The child's details (in welsh)",
   label: 'Choose a family court (in welsh)',
 
@@ -115,13 +115,6 @@ const languages = {
   cy,
 };
 
-// export const generateContent: TranslationFn = content => {
-//   const translations = languages[content.language](content);
-//   return {
-//     ...translations,
-//     form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}) },
-//   };
-// };
 export const generateContent: TranslationFn = content => {
   const translations = languages[content.language](content);
   return {
