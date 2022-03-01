@@ -1,7 +1,6 @@
-// import { values } from 'lodash';
 import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent, FormFieldsFn } from '../../../app/form/Form';
+import { FormContent } from '../../../app/form/Form';//FormFieldsFn
 import { isFieldFilledIn } from '../../../app/form/validation';
 
 export const en = content => ({
@@ -61,64 +60,47 @@ export const cy = content => ({
 });
 
 export const form: FormContent = {
-  fields: userCase => {
-    //const courtName = userCase.placementOrders && userCase.placementOrders.length>0?userCase.placementOrders[0]?.placementOrderCourt:'';
-    return {
-      findFamilyCourt: {
-        type: 'radios',
-        classes: 'govuk-radios',
-        section: l => l.section,
-        label: l => l.findFamilyCourt,
-        hint: l => l.findFamilyCourtHint,
-        labelSize: 'normal',
+  fields: {
+    findFamilyCourt: {
+      type: 'radios',
+      classes: 'govuk-radios',
+      section: l => l.section,
+      label: l => l.findFamilyCourt,
+      hint: l => l.findFamilyCourtHint,
+      labelSize: 'normal',
 
-        values: [
-          {
-            label: l => l.yes,
-            value: YesOrNo.YES,
-            // subFields: {
-            //   familyCourtName: {
-            //     type: 'hidden',
-            //     value: userCase.placementOrders![0]!.placementOrderCourt,
-            //   },
-            // },
-          },
-          {
-            label: l => l.no,
-            value: YesOrNo.NO,
-            subFields: {
-              p1: {
-                label: l => l.familyCourtNameParagraph1,
-                type: 'label',
-              },
-              p2: {
-                label: l => l.familyCourtNameParagraph2,
-                type: 'label',
-              },
-              p3: {
-                label: l => l.familyCourtNameParagraph3,
-                type: 'label',
-              },
-              familyCourtName: {
-                type: 'text',
-                label: l => l.familyCourtName,
-                labelSize: null,
-                //value: '',
-                //conditionalText: l => `${l.familyCourtNameParagraph1}`,
-                // parser: data=>{
-                //   console.log("103: "+data);
-                // },
-                // validator: data=>{
-                //   console.log("106: "+data);
-                // },
-                validator: isFieldFilledIn,
-              },
+      values: [
+        {
+          label: l => l.yes,
+          value: YesOrNo.YES,
+        },
+        {
+          label: l => l.no,
+          value: YesOrNo.NO,
+          subFields: {
+            p1: {
+              label: l => l.familyCourtNameParagraph1,
+              type: 'label',
+            },
+            p2: {
+              label: l => l.familyCourtNameParagraph2,
+              type: 'label',
+            },
+            p3: {
+              label: l => l.familyCourtNameParagraph3,
+              type: 'label',
+            },
+            familyCourtName: {
+              type: 'text',
+              label: l => l.familyCourtName,
+              labelSize: null,
+              validator: isFieldFilledIn,
             },
           },
-        ],
-        validator: isFieldFilledIn,
-      },
-    };
+        },
+      ],
+      validator: isFieldFilledIn,
+    },
   },
   submit: {
     text: l => l.continue,
@@ -133,10 +115,17 @@ const languages = {
   cy,
 };
 
+// export const generateContent: TranslationFn = content => {
+//   const translations = languages[content.language](content);
+//   return {
+//     ...translations,
+//     form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}) },
+//   };
+// };
 export const generateContent: TranslationFn = content => {
   const translations = languages[content.language](content);
   return {
     ...translations,
-    form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}) },
+    form,
   };
 };
