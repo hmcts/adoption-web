@@ -1,3 +1,4 @@
+// import { values } from 'lodash';
 import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
@@ -5,17 +6,20 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 export const en = content => ({
   section: "The child's details",
-  title: "Choose a family court",
-  findFamilyCourtParagraph1: 'There may be court hearings related to your application to adopt. The birth parents may be present at these. You do not have to attend these hearings.',
-  findFamilyCourtParagraph2:
-    `You have told us that the court which issued the placement order was <b>${content.userCase.placementOrders[0].placementOrderCourt}</b>.`,
+  title: 'Choose a family court',
+  findFamilyCourtParagraph1:
+    'There may be court hearings related to your application to adopt. The birth parents may be present at these. You do not have to attend these hearings.',
+  findFamilyCourtParagraph2: `You have told us that the court which issued the placement order was <b>${content.userCase.placementOrders[0].placementOrderCourt}</b>.`,
 
-  findFamilyCourt:'Do you want the hearings to be heard in the same court?',
+  findFamilyCourt: 'Do you want the hearings to be heard in the same court?',
   findFamilyCourtHint: 'You should discuss this with your social worker or adoption agency.',
 
-  familyCourtNameParagraph1:'<p class="govuk-label"><a  target="_blank" href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode">Choose your family court</a></p>',
-  familyCourtNameParagraph2:'Find the family court in the town or region you want your application heard. The link will open in a new tab. Return to this tab to enter the court name.',
-  familyCourtNameParagraph3:'Note that your request will be submitted to the judge. The judge has the final decision about where court hearings will take place.',
+  familyCourtNameParagraph1:
+    '<p class="govuk-label"><a  target="_blank" href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode">Choose your family court</a></p>',
+  familyCourtNameParagraph2:
+    'Find the family court in the town or region you want your application heard. The link will open in a new tab. Return to this tab to enter the court name.',
+  familyCourtNameParagraph3:
+    'Note that your request will be submitted to the judge. The judge has the final decision about where court hearings will take place.',
   familyCourtName: 'Enter the full name of the court',
 
   errors: {
@@ -30,17 +34,20 @@ export const en = content => ({
 
 export const cy = content => ({
   section: "The child's details (in welsh)",
-  label: "Choose a family court (in welsh)",
+  label: 'Choose a family court (in welsh)',
 
-  findFamilyCourtParagraph1: 'There may be court hearings related to your application to adopt. The birth parents may be present at these. You do not have to attend these hearings. (in welsh)',
-  findFamilyCourtParagraph2:
-  `You have told us that the court which issued the placement order was <b>${content.userCase.placementOrders[0].placementOrderCourt}</b>. (in welsh)`,
-  findFamilyCourt:'Do you want the hearings to be heard in the same court? (in welsh)',
+  findFamilyCourtParagraph1:
+    'There may be court hearings related to your application to adopt. The birth parents may be present at these. You do not have to attend these hearings. (in welsh)',
+  findFamilyCourtParagraph2: `You have told us that the court which issued the placement order was <b>${content.userCase.placementOrders[0].placementOrderCourt}</b>. (in welsh)`,
+  findFamilyCourt: 'Do you want the hearings to be heard in the same court? (in welsh)',
   findFamilyCourtHint: 'You should discuss this with your social worker or adoption agency. (in welsh)',
 
-  familyCourtNameParagraph1:'<p class="govuk-label"><a  target="_blank" href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode">Choose your family court</a></p> (in welsh)',
-  familyCourtNameParagraph2:'Find the family court in the town or region you want your application heard. The link will open in a new tab. Return to this tab to enter the court name. (in welsh)',
-  familyCourtNameParagraph3:'Note that your request will be submitted to the judge. The judge has the final decision about where court hearings will take place. (in welsh)',
+  familyCourtNameParagraph1:
+    '<p class="govuk-label"><a  target="_blank" href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode">Choose your family court</a></p> (in welsh)',
+  familyCourtNameParagraph2:
+    'Find the family court in the town or region you want your application heard. The link will open in a new tab. Return to this tab to enter the court name. (in welsh)',
+  familyCourtNameParagraph3:
+    'Note that your request will be submitted to the judge. The judge has the final decision about where court hearings will take place. (in welsh)',
   familyCourtName: 'Enter the full name of the court (in welsh)',
 
   errors: {
@@ -57,56 +64,62 @@ export const form: FormContent = {
   fields: userCase => {
     //const courtName = userCase.placementOrders && userCase.placementOrders.length>0?userCase.placementOrders[0]?.placementOrderCourt:'';
     return {
-    findFamilyCourt: {
-      type: 'radios',
-      classes: 'govuk-radios',
-      section: l => l.section,
-      label: l => l.findFamilyCourt,
-      hint: l=> l.findFamilyCourtHint,
-      labelSize: 'normal',
+      findFamilyCourt: {
+        type: 'radios',
+        classes: 'govuk-radios',
+        section: l => l.section,
+        label: l => l.findFamilyCourt,
+        hint: l => l.findFamilyCourtHint,
+        labelSize: 'normal',
 
-      values: [
-        { 
-          label: l => l.yes, 
-          value: YesOrNo.YES,
-          subFields: {
-            familyCourtName: {
-              type: 'hidden',
-              value: userCase.placementOrders![0]!.placementOrderCourt,
+        values: [
+          {
+            label: l => l.yes,
+            value: YesOrNo.YES,
+            // subFields: {
+            //   familyCourtName: {
+            //     type: 'hidden',
+            //     value: userCase.placementOrders![0]!.placementOrderCourt,
+            //   },
+            // },
+          },
+          {
+            label: l => l.no,
+            value: YesOrNo.NO,
+            subFields: {
+              p1: {
+                label: l => l.familyCourtNameParagraph1,
+                type: 'label',
+              },
+              p2: {
+                label: l => l.familyCourtNameParagraph2,
+                type: 'label',
+              },
+              p3: {
+                label: l => l.familyCourtNameParagraph3,
+                type: 'label',
+              },
+              familyCourtName: {
+                type: 'text',
+                label: l => l.familyCourtName,
+                labelSize: null,
+                //value: '',
+                //conditionalText: l => `${l.familyCourtNameParagraph1}`,
+                // parser: data=>{
+                //   console.log("103: "+data);
+                // },
+                // validator: data=>{
+                //   console.log("106: "+data);
+                // },
+                validator: isFieldFilledIn,
+              },
             },
           },
-        },
-        {
-          label: l => l.no,
-          value: YesOrNo.NO,
-          subFields: {
-            p1: {
-              label: l => l.familyCourtNameParagraph1,
-              type: 'label',
-            },
-            p2: {
-              label: l => l.familyCourtNameParagraph2,
-              type: 'label',
-            },
-            p3: {
-              label: l => l.familyCourtNameParagraph3,
-              type: 'label',
-            },
-            familyCourtName: {
-              type: 'text',
-              label: l => l.familyCourtName,
-              labelSize: null,
-              //value: '',
-              //conditionalText: l => `${l.familyCourtNameParagraph1}`,
-              validator: isFieldFilledIn,
-            },
-          },
-        },
-      ],
-      validator: isFieldFilledIn,
+        ],
+        validator: isFieldFilledIn,
+      },
+    };
   },
-};
-},
   submit: {
     text: l => l.continue,
   },
