@@ -1,7 +1,7 @@
 import { Gender } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { isFieldFilledIn } from '../../../app/form/validation';
+import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
 
 const en = () => ({
   section: "The child's details",
@@ -17,6 +17,7 @@ const en = () => ({
     },
     childrenOtherSexAtBirth: {
       required: 'Enter what is written on the birth certificate',
+      invalid: 'Must be 500 characters or fewer',
     },
   },
 });
@@ -35,6 +36,7 @@ const cy = () => ({
     },
     childrenOtherSexAtBirth: {
       required: 'Enter what is written on the birth certificate (in welsh)',
+      invalid: 'Must be 500 characters or fewer (in welsh)',
     },
   },
 });
@@ -58,7 +60,7 @@ export const form: FormContent = {
               type: 'text',
               label: l => l.childrenOtherSexAtBirth,
               labelSize: null,
-              validator: isFieldFilledIn,
+              validator: value => isFieldFilledIn(value) || isTextAreaValid(value),
             },
           },
         },

@@ -1,7 +1,7 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { Gender } from '../../../app/case/definition';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
-import { isFieldFilledIn } from '../../../app/form/validation';
+import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
@@ -22,6 +22,7 @@ const enContent = {
     },
     childrenOtherSexAtBirth: {
       required: 'Enter what is written on the birth certificate',
+      invalid: 'Must be 500 characters or fewer',
     },
   },
 };
@@ -40,6 +41,7 @@ const cyContent = {
     },
     childrenOtherSexAtBirth: {
       required: 'Enter what is written on the birth certificate (in welsh)',
+      invalid: 'Must be 500 characters or fewer (in welsh)',
     },
   },
 };
@@ -77,7 +79,10 @@ describe('children > sex-at-birth > content', () => {
     expect(childrenOtherSexAtBirthField.type).toBe('text');
     expect((childrenOtherSexAtBirthField.label as Function)(generatedContent)).toBe(enContent.childrenOtherSexAtBirth);
     expect(childrenOtherSexAtBirthField.labelSize).toBe(null);
-    expect(childrenOtherSexAtBirthField.validator).toBe(isFieldFilledIn);
+
+    (childrenOtherSexAtBirthField.validator as Function)('MockTextArea');
+    expect(isFieldFilledIn).toHaveBeenCalledWith('MockTextArea');
+    expect(isTextAreaValid).toHaveBeenCalledWith('MockTextArea');
   });
 
   test('should contain submit button', () => {
