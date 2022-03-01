@@ -183,4 +183,64 @@ describe('HomeGetController', () => {
 
   //   expect(res.redirect).toBeCalledWith(`${RESPONDENT}${HOW_DO_YOU_WANT_TO_RESPOND}`);
   // });
+
+  test('redirects to application AwaitingAos page for applicant 1 users in submitted state', () => {
+    const req = mockRequest({
+      session: {
+        userCase: {
+          id: '123',
+          state: State.AwaitingAos,
+        },
+      },
+    });
+    const res = mockResponse();
+    controller.get(req, res);
+
+    expect(res.redirect).toBeCalledWith(HUB_PAGE);
+  });
+
+  test('redirects to application AwaitingConditionalOrder page for applicant 1 users in submitted state', () => {
+    const req = mockRequest({
+      session: {
+        userCase: {
+          id: '123',
+          state: State.AwaitingConditionalOrder,
+        },
+      },
+    });
+    const res = mockResponse();
+    controller.get(req, res);
+
+    expect(res.redirect).toBeCalledWith(HUB_PAGE);
+  });
+
+  test('redirects to application AosDrafted page for applicant 1 users in submitted state', () => {
+    const req = mockRequest({
+      session: {
+        userCase: {
+          id: '123',
+          state: State.AosDrafted,
+        },
+      },
+    });
+    const res = mockResponse();
+    controller.get(req, res);
+
+    expect(res.redirect).toBeCalledWith(HUB_PAGE);
+  });
+
+  test('redirects to application AosOverdue page for applicant 1 users in submitted state', () => {
+    const req = mockRequest({
+      session: {
+        userCase: {
+          id: '123',
+          state: State.AosOverdue,
+        },
+      },
+    });
+    const res = mockResponse();
+    controller.get(req, res);
+
+    expect(res.redirect).toBeCalledWith(HUB_PAGE);
+  });
 });
