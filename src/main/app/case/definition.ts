@@ -438,6 +438,10 @@ export interface CaseData {
   applicant1CannotUploadSupportingDocument: DocumentType[];
   applicant1CannotUpload: string;
 
+  findFamilyCourt: YesOrNo;
+  familyCourtName: string;
+  familyCourtEmailId: string;
+
   applicationType: ApplicationType;
   labelContentApplicant2: string;
   labelContentTheApplicant2: string;

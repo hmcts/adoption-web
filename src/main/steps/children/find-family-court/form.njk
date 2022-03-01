@@ -1,0 +1,11 @@
+{% extends "common/form/form.njk"%}
+
+{% block before_fields %}
+
+  <p class="govuk-body govuk-!-margin-bottom-5">
+    {{findFamilyCourtParagraph1}}
+  </p>
+  <p class="govuk-body govuk-!-margin-bottom-5">
+    {{findFamilyCourtParagraph2 | safe }}
+  </p>
+{% endblock %}
