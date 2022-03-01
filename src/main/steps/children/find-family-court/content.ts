@@ -13,7 +13,7 @@ export const en = content => ({
   findFamilyCourt:'Do you want the hearings to be heard in the same court?',
   findFamilyCourtHint: 'You should discuss this with your social worker or adoption agency.',
 
-  familyCourtNameParagraph1:`<p class="govuk-label"><a  target="_blank" href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode">Choose your family court</a></p>`,
+  familyCourtNameParagraph1:'<p class="govuk-label"><a  target="_blank" href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode">Choose your family court</a></p>',
   familyCourtNameParagraph2:'Find the family court in the town or region you want your application heard. The link will open in a new tab. Return to this tab to enter the court name.',
   familyCourtNameParagraph3:'Note that your request will be submitted to the judge. The judge has the final decision about where court hearings will take place.',
   familyCourtName: 'Enter the full name of the court',
@@ -38,7 +38,7 @@ export const cy = content => ({
   findFamilyCourt:'Do you want the hearings to be heard in the same court? (in welsh)',
   findFamilyCourtHint: 'You should discuss this with your social worker or adoption agency. (in welsh)',
 
-  familyCourtNameParagraph1:`<p class="govuk-label"><a  target="_blank" href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode">Choose your family court</a></p> (in welsh)`,
+  familyCourtNameParagraph1:'<p class="govuk-label"><a  target="_blank" href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode">Choose your family court</a></p> (in welsh)',
   familyCourtNameParagraph2:'Find the family court in the town or region you want your application heard. The link will open in a new tab. Return to this tab to enter the court name. (in welsh)',
   familyCourtNameParagraph3:'Note that your request will be submitted to the judge. The judge has the final decision about where court hearings will take place. (in welsh)',
   familyCourtName: 'Enter the full name of the court (in welsh)',
@@ -80,12 +80,24 @@ export const form: FormContent = {
           label: l => l.no,
           value: YesOrNo.NO,
           subFields: {
+            p1: {
+              label: l => l.familyCourtNameParagraph1,
+              type: 'label',
+            },
+            p2: {
+              label: l => l.familyCourtNameParagraph2,
+              type: 'label',
+            },
+            p3: {
+              label: l => l.familyCourtNameParagraph3,
+              type: 'label',
+            },
             familyCourtName: {
               type: 'text',
               label: l => l.familyCourtName,
               labelSize: null,
               //value: '',
-              //conditionalText: l => l.familyCourtNameParagraph1,
+              //conditionalText: l => `${l.familyCourtNameParagraph1}`,
               validator: isFieldFilledIn,
             },
           },
@@ -107,14 +119,6 @@ const languages = {
   en,
   cy,
 };
-
-// export const generateContent: TranslationFn = content => {
-//   const translations = languages[content.language](content);
-//   return {
-//     ...translations,
-//     form,
-//   };
-// };
 
 export const generateContent: TranslationFn = content => {
   const translations = languages[content.language](content);
