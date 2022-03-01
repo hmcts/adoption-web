@@ -12,7 +12,17 @@ import { PaymentModel } from '../../app/payment/PaymentModel';
 import * as urls from '../urls';
 
 export const getApplyingWithStatus = (userCase: CaseWithId): SectionStatus => {
-  return userCase.applyingWith ? SectionStatus.COMPLETED : SectionStatus.NOT_STARTED;
+  if (
+    userCase.applyingWith === ApplyingWith.ALONE ||
+    userCase.applyingWith === ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER
+  ) {
+    return SectionStatus.COMPLETED;
+  } else if (userCase.applyingWith === ApplyingWith.WITH_SOME_ONE_ELSE) {
+    return userCase.otherApplicantRelation && userCase.otherApplicantRelation?.length > 0
+      ? SectionStatus.COMPLETED
+      : SectionStatus.IN_PROGRESS;
+  }
+  return SectionStatus.NOT_STARTED;
 };
 
 const addressComplete = (userCase: CaseWithId, fieldPrefix: FieldPrefix) => {

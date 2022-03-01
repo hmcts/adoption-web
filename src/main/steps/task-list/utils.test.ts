@@ -30,12 +30,32 @@ const COMPLETED = 'COMPLETED';
 
 describe('utils', () => {
   describe('getApplyingWithStatus()', () => {
-    test.each([
-      { data: { applyingWith: undefined }, expected: NOT_STARTED },
-      { data: { applyingWith: ApplyingWith.ALONE }, expected: COMPLETED },
-      { data: { applyingWith: ApplyingWith.WITH_SOME_ONE_ELSE }, expected: COMPLETED },
-    ])('should return correct status %#', async ({ data, expected }) => {
-      expect(getApplyingWithStatus({ ...userCase, ...data })).toBe(expected);
+    test('Should return false if applyingWith is not present', async () => {
+      const isValid = getApplyingWithStatus(userCase);
+
+      expect(isValid).toStrictEqual(NOT_STARTED);
+    });
+
+    test('Should return true if applyingWith is present', async () => {
+      userCase.applyingWith = ApplyingWith.ALONE;
+      const isValid = getApplyingWithStatus(userCase);
+
+      expect(isValid).toStrictEqual(COMPLETED);
+    });
+
+    test('Should return true if applyingWith:WITH_SPOUSE_OR_CIVIL_PARTNER is present', async () => {
+      userCase.applyingWith = ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER;
+      const isValid = getApplyingWithStatus(userCase);
+
+      expect(isValid).toStrictEqual(COMPLETED);
+    });
+
+    test('Should return true if applyingWith:WITH_SOME_ONE_ELSE is present', async () => {
+      userCase.applyingWith = ApplyingWith.WITH_SOME_ONE_ELSE;
+      userCase.otherApplicantRelation = 'a b c';
+      const isValid = getApplyingWithStatus(userCase);
+
+      expect(isValid).toStrictEqual(COMPLETED);
     });
   });
 
