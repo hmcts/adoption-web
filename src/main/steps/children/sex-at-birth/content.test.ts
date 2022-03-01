@@ -1,7 +1,7 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { Gender } from '../../../app/case/definition';
-import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
-import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
+import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
+import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
@@ -11,18 +11,17 @@ jest.mock('../../../app/form/validation');
 const enContent = {
   section: "The child's details",
   label: "What was the child's sex at birth?",
-  hint: "You should state exactly what is listed on the birth certificate. If the child's sex is listed as 'diverse', which means their biological sex could not be determined, you should choose the 'intersex' option.",
   male: 'Male',
   female: 'Female',
   other: 'Other',
-  childrenOtherSexAtBirth: 'You should state exactly what is listed on the birth certificate.',
+  childrenOtherSexAtBirth:
+    "For example, if the child's sex was intersex when they were born, you should enter exactly what is listed on the birth certificate.",
   errors: {
     childrenSexAtBirth: {
       required: 'Please select an answer',
     },
     childrenOtherSexAtBirth: {
       required: 'Enter what is written on the birth certificate',
-      invalid: 'Must be 500 characters or fewer',
     },
   },
 };
@@ -30,18 +29,17 @@ const enContent = {
 const cyContent = {
   section: "The child's details (in welsh)",
   label: "What was the child's sex at birth? (in welsh)",
-  hint: "You should state exactly what is listed on the birth certificate. If the child's sex is listed as 'diverse', which means their biological sex could not be determined, you should choose the 'intersex' option. (in welsh)",
   male: 'Male (in welsh)',
   female: 'Female (in welsh)',
   other: 'Other (in welsh)',
-  childrenOtherSexAtBirth: 'You should state exactly what is listed on the birth certificate.',
+  childrenOtherSexAtBirth:
+    "For example, if the child's sex was intersex when they were born, you should enter exactly what is listed on the birth certificate. (in welsh)",
   errors: {
     childrenSexAtBirth: {
       required: 'Please select an answer (in welsh)',
     },
     childrenOtherSexAtBirth: {
       required: 'Enter what is written on the birth certificate (in welsh)',
-      invalid: 'Must be 500 characters or fewer (in welsh)',
     },
   },
 };
@@ -65,7 +63,6 @@ describe('children > sex-at-birth > content', () => {
     expect(childrenSexAtBirthField.type).toBe('radios');
     expect(childrenSexAtBirthField.classes).toBe('govuk-radios');
     expect((childrenSexAtBirthField.label as Function)(generatedContent)).toBe(enContent.label);
-    expect(((childrenSexAtBirthField as FormInput).hint as Function)(generatedContent)).toBe(enContent.hint);
     expect((childrenSexAtBirthField.section as Function)(generatedContent)).toBe(enContent.section);
     expect((childrenSexAtBirthField.values[0].label as Function)(generatedContent)).toBe(enContent.male);
     expect(childrenSexAtBirthField.values[0].value).toBe(Gender.MALE);
@@ -79,10 +76,7 @@ describe('children > sex-at-birth > content', () => {
     expect(childrenOtherSexAtBirthField.type).toBe('text');
     expect((childrenOtherSexAtBirthField.label as Function)(generatedContent)).toBe(enContent.childrenOtherSexAtBirth);
     expect(childrenOtherSexAtBirthField.labelSize).toBe(null);
-
-    (childrenOtherSexAtBirthField.validator as Function)('MockTextArea');
-    expect(isFieldFilledIn).toHaveBeenCalledWith('MockTextArea');
-    expect(isTextAreaValid).toHaveBeenCalledWith('MockTextArea');
+    expect(childrenOtherSexAtBirthField.validator).toBe(isFieldFilledIn);
   });
 
   test('should contain submit button', () => {
