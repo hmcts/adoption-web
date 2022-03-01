@@ -62,10 +62,11 @@ const en = content => {
 
   return {
     title: 'Apply to adopt a child placed in your care',
-    section1: 'Add your details',
+    section1: 'Add application details',
     section1details1: 'Number of applicants',
     section1details2: 'Date child moved in with you',
-    section2subheading2: 'Primary applicant',
+    section2: "Add applicant's details",
+    section2subheading2: 'First applicant',
     section2subheading2line1: 'Your personal details',
     section2subheading2line2: 'Your contact details',
     section2subheading3: 'Second applicant',
@@ -169,10 +170,11 @@ const cy = content => {
 
   return {
     title: 'Apply to adopt a child placed in your care (in welsh) ',
-    section1: 'Add your details (in welsh) ',
+    section1: 'Add application details (in welsh) ',
     section1details1: 'Number of applicants (in welsh) ',
+    section2: "Add applicant's details (in welsh) ",
     section1details2: 'Date child moved in with you (in welsh) ',
-    section2subheading2: 'Primary applicant (in welsh) ',
+    section2subheading2: 'First applicant (in welsh) ',
     section2subheading2line1: 'Your personal details (in welsh) ',
     section2subheading2line2: 'Your contact details (in welsh) ',
     section2subheading3: 'Second applicant (in welsh) ',

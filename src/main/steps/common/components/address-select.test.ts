@@ -7,10 +7,11 @@ import { generateContent } from './address-select';
 jest.mock('../../../app/form/validation');
 
 const enContent = {
-  line1: "We'll send all court papers to this address.",
+  line1:
+    "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email.",
   postcode: 'Postcode',
   selectAddress: 'Select an address',
-  cannotFindAddress: 'I cannot find the address in the list',
+  cannotFindAddress: 'Or enter address manually',
   errors: {
     selectAddress: {
       notSelected: 'Select an address',
@@ -21,10 +22,11 @@ const enContent = {
 };
 
 const cyContent = {
-  line1: "We'll send all court papers to this address. (in welsh)",
+  line1:
+    "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email. (in welsh)",
   postcode: 'Postcode (in welsh)',
   selectAddress: 'Select an address (in welsh)',
-  cannotFindAddress: 'I cannot find the address in the list (in welsh)',
+  cannotFindAddress: 'Or enter address manually (in welsh)',
   errors: {
     selectAddress: {
       notSelected: 'Select an address (in welsh)',
