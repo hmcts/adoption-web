@@ -28,7 +28,7 @@ const cyContent = {
 };
 
 describe('application submmitted', () => {
-  const commonContent = { language: 'en', userCase: { hyphenatedCaseRef: '1234-5678-9012-3456' } } as CommonContent;
+  const commonContent = { language: 'en', userCase: { id: '1234567890123456' } } as CommonContent;
   let generatedContent;
 
   beforeEach(() => {
