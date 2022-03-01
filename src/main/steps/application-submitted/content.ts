@@ -1,6 +1,5 @@
 import { TranslationFn } from '../../app/controller/GetController';
-
-import { formatCaseId } from './utils';
+import { formatCaseId } from '../../steps/application-submitted/utils';
 
 const en = content => ({
   title: 'Application Submitted',
