@@ -3,7 +3,7 @@ import { CommonContent } from '../common/common.content';
 
 const enContent = {
   title: 'Application Submitted',
-  referenceNumber: 'Your reference number<br><strong>1234-5678-9012-3456</strong>',
+  referenceNumber: 'Your reference number<br><strong>1234567890123456</strong>',
   emailSentConfirmation:
     'We have sent you a confirmation email. If you have not received this, you should check your junk or spam folder.',
   nextStep: 'What happens next',
@@ -16,7 +16,7 @@ const enContent = {
 
 const cyContent = {
   title: 'Application Submitted (in welsh)',
-  referenceNumber: 'Your reference number<br><strong>1234-5678-9012-3456</strong> (in welsh)',
+  referenceNumber: 'Your reference number<br><strong>1234567890123456</strong> (in welsh)',
   emailSentConfirmation:
     'We have sent you a confirmation email. If you have not received this, you should check your junk or spam folder. (in welsh)',
   nextStep: 'What happens next (in welsh)',
