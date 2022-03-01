@@ -9,10 +9,8 @@ const en = content => ({
   findFamilyCourtParagraph1:
     'There may be court hearings related to your application to adopt. The birth parents may be present at these. You do not have to attend these hearings.',
   findFamilyCourtParagraph2: `You have told us that the court which issued the placement order was <b>${content.userCase.placementOrders[0].placementOrderCourt}</b>.`,
-
   findFamilyCourt: 'Do you want the hearings to be heard in the same court?',
   findFamilyCourtHint: 'You should discuss this with your social worker or adoption agency.',
-
   familyCourtNameParagraph1:
     '<p class="govuk-label"><a  target="_blank" href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode">Choose your family court</a></p>',
   familyCourtNameParagraph2:
@@ -20,7 +18,6 @@ const en = content => ({
   familyCourtNameParagraph3:
     'Note that your request will be submitted to the judge. The judge has the final decision about where court hearings will take place.',
   familyCourtName: 'Enter the full name of the court',
-
   errors: {
     findFamilyCourt: {
       required: 'Please answer the question',
@@ -33,14 +30,12 @@ const en = content => ({
 
 const cy = content => ({
   section: "The child's details (in welsh)",
-  label: 'Choose a family court (in welsh)',
-
+  title: 'Choose a family court (in welsh)',
   findFamilyCourtParagraph1:
     'There may be court hearings related to your application to adopt. The birth parents may be present at these. You do not have to attend these hearings. (in welsh)',
   findFamilyCourtParagraph2: `You have told us that the court which issued the placement order was <b>${content.userCase.placementOrders[0].placementOrderCourt}</b>. (in welsh)`,
   findFamilyCourt: 'Do you want the hearings to be heard in the same court? (in welsh)',
   findFamilyCourtHint: 'You should discuss this with your social worker or adoption agency. (in welsh)',
-
   familyCourtNameParagraph1:
     '<p class="govuk-label"><a  target="_blank" href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode">Choose your family court</a></p> (in welsh)',
   familyCourtNameParagraph2:
@@ -48,7 +43,6 @@ const cy = content => ({
   familyCourtNameParagraph3:
     'Note that your request will be submitted to the judge. The judge has the final decision about where court hearings will take place. (in welsh)',
   familyCourtName: 'Enter the full name of the court (in welsh)',
-
   errors: {
     findFamilyCourt: {
       required: 'Please answer the question (in welsh)',
