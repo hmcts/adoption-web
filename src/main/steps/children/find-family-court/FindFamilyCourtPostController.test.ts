@@ -29,7 +29,7 @@ describe('FindFamilyCourtPostController', () => {
       session: {
         userCase: {
           placementOrders: [
-            { adopAgencyOrLaId: 'MOCK_ADOPTION_AGENCY_ID', placementOrderCourt: 'Chelmsford Family Court' },
+            { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderCourt: 'Chelmsford Family Court' },
           ],
           findFamilyCourt: 'No',
           familyCourtName: 'Chelmsford Family Court',
@@ -58,7 +58,7 @@ describe('FindFamilyCourtPostController', () => {
         controller = new FindFamilyCourtPostController({});
         req.locals.api.triggerEvent.mockResolvedValue({
           placementOrders: [
-            { adopAgencyOrLaId: 'MOCK_ADOPTION_AGENCY_ID', placementOrderCourt: 'Chelmsford Family Court' },
+            { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderCourt: 'Chelmsford Family Court' },
           ],
           findFamilyCourt: 'No',
           familyCourtName: 'Chelmsford Family Court',
@@ -111,8 +111,8 @@ describe('FindFamilyCourtPostController', () => {
       req = mockRequest({
         session: {
           userCase: {
-            adopAgencyOrLAs: [{ adopAgencyOrLaId: 'MOCK_ADOPTION_AGENCY_ID' }],
-            selectedAdoptionAgencyId: 'MOCK_ADOPTION_AGENCY_ID',
+            adopAgencyOrLAs: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }],
+            selectedAdoptionAgencyId: 'MOCK_PLACEMENT_ORDER_ID',
           },
           save: jest.fn(done => done('MOCK_ERROR')),
         },
@@ -131,8 +131,8 @@ describe('FindFamilyCourtPostController', () => {
       req = mockRequest({
         session: {
           userCase: {
-            adopAgencyOrLAs: [{ adopAgencyOrLaId: 'MOCK_ADOPTION_AGENCY_ID' }],
-            selectedAdoptionAgencyId: 'MOCK_ADOPTION_AGENCY_ID',
+            adopAgencyOrLAs: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }],
+            selectedAdoptionAgencyId: 'MOCK_PLACEMENT_ORDER_ID',
           },
           save: jest.fn(done => done()),
         },
@@ -144,7 +144,7 @@ describe('FindFamilyCourtPostController', () => {
       req.locals.api.triggerEvent.mockResolvedValue({
         selectedAdoptionAgencyId: 'MOCK_ADOPTION_AGENCY_NAME',
         adopAgencyOrLAs: [
-          { adopAgencyOrLaId: 'MOCK_ADOPTION_AGENCY_ID', adopAgencyOrLaName: 'MOCK_ADOPTION_AGENCY_NAME' },
+          { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', adopAgencyOrLaName: 'MOCK_ADOPTION_AGENCY_NAME' },
         ],
       });
     });
@@ -153,7 +153,7 @@ describe('FindFamilyCourtPostController', () => {
       await controller.post(req, res);
       expect(req.session.errors).toEqual([]);
       expect(req.session.userCase.adopAgencyOrLAs).toEqual([
-        { adopAgencyOrLaId: 'MOCK_ADOPTION_AGENCY_ID', adopAgencyOrLaName: 'MOCK_ADOPTION_AGENCY_NAME' },
+        { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', adopAgencyOrLaName: 'MOCK_ADOPTION_AGENCY_NAME' },
       ]);
       expect(req.session.save).toHaveBeenCalled();
     });

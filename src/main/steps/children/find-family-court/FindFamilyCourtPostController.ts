@@ -5,7 +5,8 @@ import { YesOrNo } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
-import { getCourtEmailId } from '../../task-list/utils';
+
+import { getCourtEmailId } from './util';
 
 @autobind
 export default class FindFamilyCourtPostController extends PostController<AnyObject> {

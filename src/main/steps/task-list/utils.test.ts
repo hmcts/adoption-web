@@ -418,7 +418,7 @@ describe('utils', () => {
           birthFatherOccupation: 'Primary school teacher',
           birthFatherAddressKnown: YesOrNo.NO,
         },
-        expected: COMPLETED,
+        expected: IN_PROGRESS,
       },
       {
         data: {
