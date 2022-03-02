@@ -1,0 +1,46 @@
+{% extends "common/page.njk" %}
+
+{% block page_content %}
+  <h1 class="govuk-heading-l">{{ title }}</h1>
+
+  <p class="govuk-body">{{ thisPage | safe }}</p>
+
+  <h2 class="govuk-heading-m">{{ whoWeAre }}</h2>
+  <p class="govuk-body">{{ managedBy }}</p>
+  <p class="govuk-body">{{ update }}</p>
+
+  <h2 class="govuk-heading-m">{{ info }}</h2>
+  <p class="govuk-body">{{ service }}</p>
+  <p class="govuk-body">{{ answer }}</p>
+
+  <h2 class="govuk-heading-m">{{ stored }}</h2>
+  <p class="govuk-body">{{ data }}</p>
+  <p class="govuk-body">{{ notifyEmails }}</p>
+
+  <h2 class="govuk-heading-m">{{ applicationLaw }}</h2>
+  <p class="govuk-body">{{ dispute }}</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>{{ dispute1 }}</li>
+    <li>{{ dispute2 }}</li>
+    <li>{{ dispute3 }}</li>
+  </ul>
+
+  <h2 class="govuk-heading-m">{{ responsible }}</h2>
+  <p class="govuk-body">{{ designedForPeople }}</p>
+  <p class="govuk-body">{{ risks }}</p>
+  <p class="govuk-body">{{ precautions }}</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>{{ precautions1 }}</li>
+    <li>{{ precautions2 }}</li>
+    <li>{{ precautions3 }}</li>
+  </ul>
+  <p class="govuk-body">{{ knowinglyIntroducing }}</p>
+  <p class="govuk-body">{{ containsSeveral }}</p>
+
+  <h2 class="govuk-heading-m">{{ changes }}</h2>
+  <p class="govuk-body">{{ checkTermsAndConditions }}</p>
+  <p class="govuk-body">{{ agreeToChanges }}</p>
+
+  <h2 class="govuk-heading-m">{{ contactUs }}</h2>
+  <p class="govuk-body">{{ address | safe }}</p>
+{% endblock %}

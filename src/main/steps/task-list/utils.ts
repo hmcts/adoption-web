@@ -346,7 +346,7 @@ export const getReviewPaySubmitUrl = (userCase: CaseWithId): string => {
   const payments = new PaymentModel(userCase.payments);
   if (payments.hasPayment) {
     if (payments.wasLastPaymentSuccessful) {
-      return '#';
+      return urls.APPLICATION_SUBMITTED;
     } else {
       return urls.PAYMENT_CALLBACK_URL;
     }
