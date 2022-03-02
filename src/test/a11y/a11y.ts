@@ -105,6 +105,8 @@ describe('Accessibility', () => {
     urls.CALLBACK_URL,
     urls.SAVE_AND_SIGN_OUT,
     urls.KEEP_ALIVE_URL,
+    urls.TIMED_OUT_URL,
+    urls.CSRF_TOKEN_ERROR_URL,
     urls.RESPONDENT,
     urls.APPLICATION_ENDED,
     urls.APPLICANT_1,
