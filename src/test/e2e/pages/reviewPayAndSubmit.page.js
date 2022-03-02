@@ -18,6 +18,7 @@ module.exports = {
     addressPostcode: 'input[id$="address-postcode"]',
     email: 'input[id$="email"]',
     pcqNO: '.govuk-button.govuk-button--secondary',
+    caseID: '.govuk-panel__body strong',
     changeChildMoveInDate: 'a[href="/date-child-moved-in?returnUrl=/review-pay-submit/check-your-answers"]',
   },
   async selectNoPCQOption() {
@@ -72,5 +73,8 @@ module.exports = {
     await I.waitForText('Confirm your payment', 30);
     await I.waitForText('£183.00', 30);
     await I.click('Confirm payment');
+    await I.wait(5);
+    await I.waitForText('Application Submitted', 30);
+    console.log(await I.grabTextFrom(this.fields.caseID));
   },
 };
