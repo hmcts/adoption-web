@@ -19,29 +19,26 @@ export default class FindFamilyCourtPostController extends PostController<AnyObj
 
     Object.assign(req.session.userCase, formData);
 
-    const findFamilyCourt = req.session.userCase.findFamilyCourt;
-    const familyCourtName =
-      findFamilyCourt === YesOrNo.YES
-        ? req.session.userCase.placementOrders![0].placementOrderCourt
-        : req.session.userCase.familyCourtName;
-    const familyCourtEmailId = getCourtEmailId(familyCourtName as string);
+    if (req.session.errors.length === 0) {
+      const findFamilyCourt = req.session.userCase.findFamilyCourt;
+      const familyCourtName =
+        findFamilyCourt === YesOrNo.YES
+          ? req.session.userCase.placementOrders![0].placementOrderCourt
+          : req.session.userCase.familyCourtName;
+      const familyCourtEmailId = getCourtEmailId(familyCourtName as string);
 
-    console.log('FindFamilyCourtPostController 24: ' + findFamilyCourt);
-    console.log('FindFamilyCourtPostController 25: ' + familyCourtName);
-    console.log('FindFamilyCourtPostController 26: ' + familyCourtEmailId);
-
+      req.session.userCase = await this.save(
+        req,
+        {
+          findFamilyCourt,
+          familyCourtName,
+          familyCourtEmailId,
+        },
+        this.getEventName(req)
+      );
+    }
     this.filterErrorsForSaveAsDraft(req);
 
-    req.session.userCase = await this.save(
-      req,
-      {
-        findFamilyCourt,
-        familyCourtName,
-        familyCourtEmailId,
-      },
-      this.getEventName(req)
-    );
-
-    this.redirect(req, res);
+    super.checkReturnUrlAndRedirect(req, res, this.ALLOWED_RETURN_URLS);
   }
 }

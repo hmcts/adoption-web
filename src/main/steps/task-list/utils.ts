@@ -212,7 +212,11 @@ export const getBirthMotherDetailsStatus = (userCase: CaseWithId): SectionStatus
     const occupation = userCase.birthMotherOccupation;
     const addressKnown = userCase.birthMotherAddressKnown;
 
-    if (addressKnown === YesOrNo.NO) {
+    if (
+      addressKnown === YesOrNo.NO &&
+      userCase.birthMotherAddressNotKnownReason &&
+      userCase.birthMotherAddressNotKnownReason?.length > 0
+    ) {
       return names && nationalityComplete && occupation ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
     } else {
       return names &&
@@ -236,7 +240,11 @@ export const getOtherParentStatus = (userCase: CaseWithId): SectionStatus => {
   } else if (exists === YesOrNo.YES) {
     const names = userCase.otherParentFirstNames && userCase.otherParentLastNames;
     const addressKnown = userCase.otherParentAddressKnown;
-    if (addressKnown === YesOrNo.NO) {
+    if (
+      addressKnown === YesOrNo.NO &&
+      userCase.otherParentAddressNotKnownReason &&
+      userCase.otherParentAddressNotKnownReason?.length > 0
+    ) {
       return names ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
     } else {
       return names && addressKnown === YesOrNo.YES && addressComplete(userCase, FieldPrefix.OTHER_PARENT)

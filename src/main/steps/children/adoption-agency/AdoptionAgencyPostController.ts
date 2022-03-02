@@ -20,17 +20,17 @@ export default class AdoptionAgencyPostController extends PostController<AnyObje
 
     Object.assign(adoptionAgency, formData);
 
+    if (req.session.errors.length === 0) {
+      req.session.userCase = await this.save(
+        req,
+        {
+          adopAgencyOrLAs: req.session.userCase.adopAgencyOrLAs,
+          selectedAdoptionAgencyId: req.session.userCase.selectedAdoptionAgencyId,
+        },
+        this.getEventName(req)
+      );
+    }
     this.filterErrorsForSaveAsDraft(req);
-
-    req.session.userCase = await this.save(
-      req,
-      {
-        adopAgencyOrLAs: req.session.userCase.adopAgencyOrLAs,
-        selectedAdoptionAgencyId: req.session.userCase.selectedAdoptionAgencyId,
-      },
-      this.getEventName(req)
-    );
-
     super.checkReturnUrlAndRedirect(req, res, this.ALLOWED_RETURN_URLS);
   }
 }
