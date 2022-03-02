@@ -8,7 +8,7 @@
   label: {
     text: getContent(field.label) if not field.labelHidden else "",
     classes: labelClasses,
-    isPageHeading: true if not title
+    isPageHeading: true if not title else undefined
   },
   hint: {
     html: getContent(field.hint)

@@ -74,7 +74,7 @@ describe('Accessibility', () => {
 
     // Login once only for other pages to reuse session
     const page = await browser.newPage();
-    console.log(config.TEST_URL);
+    console.log('setup', config.TEST_URL);
     await page.goto(config.TEST_URL);
     await page.type('#username', process.env.CITIZEN_USERNAME);
     await page.type('#password', process.env.CITIZEN_PASSWORD);
