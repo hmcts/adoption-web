@@ -3,7 +3,8 @@ import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn, isInvalidPostcode } from '../../../app/form/validation';
 
 const en = () => ({
-  addressLine1: 'Building and street',
+  addressLine1: 'Building and street <span class="govuk-visually-hidden">line 1 of 2</span>',
+  addressLine2: '<span class="govuk-visually-hidden">Building and street line 2 of 2</span>',
   town: 'Town or city',
   county: 'County',
   postcode: 'Postcode',

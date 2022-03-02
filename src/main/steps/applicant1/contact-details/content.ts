@@ -72,9 +72,8 @@ export const form: FormContent = {
     applicant1ContactDetailsConsent: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.applicant1ContactDetailsConsent,
       section: l => l.section,
-      hint: l => l.applicant1ContactDetailsConsent,
       values: [
         { label: l => l.yes, value: YesOrNo.YES },
         { label: l => l.no, value: YesOrNo.NO },
