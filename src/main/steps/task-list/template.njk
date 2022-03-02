@@ -9,26 +9,21 @@
                     </h1>
 
                     <ol class="app-task-list">
-    <!-- **************************************** 1. Add application details **************************************** -->
-    <li>
-        <h2 class="app-task-list__section">
-            <span class="app-task-list__section-number">1. </span>{{section1}}
-        </h2>
-        <ul class="app-task-list__items">
-            <!-- Number of applicants -->
-            <li class="app-task-list__item">
-                <span class="app-task-list__task-name">
-                    <a id="number-of-appicants" href="{{urls.applyingWith}}" class="govuk-link">
-                        {{section1details1}}
-                    </a>
-                </span>
-
-                {% if status.applyingWith %}
-                    <strong class="govuk-tag app-task-list__tag" id="eligibility-completed">completed</strong>
-                {% else %}
-                    <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
-                {% endif %}
-            </li>
+                        <!-- **************************************** 1. Add application details **************************************** -->
+                        <li>
+                            <h2 class="app-task-list__section">
+                                <span class="app-task-list__section-number">1. </span>{{section1}}
+                            </h2>
+                            <ul class="app-task-list__items">
+                                <!-- Number of applicants -->
+                                <li class="app-task-list__item">
+                                    <span class="app-task-list__task-name">
+                                        <a id="number-of-appicants" href="{{urls.applyingWith}}" class="govuk-link">
+                                            {{section1details1}}
+                                        </a>
+                                    </span>
+                                    <p class="govuk-body">{{ status.applyingWith | safe }}</p>
+                                </li>
 
             <li class="app-task-list__item">
                 <span class="app-task-list__task-name">
@@ -263,11 +258,20 @@
         </h2>
         <ul class="app-task-list__items">
             <li class="app-task-list__item">
-                <span class="app-task-list__task-name">
-                    <a id="review-pay-and-submit" href="{{urls.reviewApplicationPayAndSubmit}}" class="govuk-link">
-                        {{section6link1}}
-                    </a>
-                </span>
+                {% if urls.reviewApplicationPayAndSubmit %}
+                    <span class="app-task-list__task-name">
+                        <a id="review-pay-and-submit" href="{{urls.reviewApplicationPayAndSubmit}}" class="govuk-link">
+                            {{section6link1}}
+                        </a>
+                    </span>
+                {% else %}
+                    <span class="app-task-list__task-name">
+                        <a id="review-pay-and-submit" href="#" class="not-underlined">
+                            {{section6link1}}
+                        </a>
+                    </span>
+                {% endif %}
+                <p class="govuk-body">{{ status.reviewPayAndSubmit | safe }}</p>
             </li>
         </ul>
     </li>

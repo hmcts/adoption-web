@@ -337,7 +337,7 @@ export interface Case {
   applicant1DocumentsUploaded?: ListValue<Partial<AdoptionDocument> | null>[];
   applicant1UploadedFiles?: UploadedFile[];
   applicant1CannotUpload?: Checkbox;
-  applicant1CannotUploadDocuments?: DocumentType | DocumentType[];
+  applicant1CannotUploadDocuments?: DocumentType[];
 
   applicant1HelpPayingNeeded?: YesOrNo;
   applicant1AlreadyAppliedForHelpPaying?: YesOrNo;

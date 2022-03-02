@@ -2,7 +2,6 @@ import autobind from 'autobind-decorator';
 import { Response } from 'express';
 import { v4 as generateUuid } from 'uuid';
 
-import { getNextStepUrl } from '../../../steps';
 import { FieldPrefix } from '../../case/case';
 import { Form, FormFields, FormFieldsFn } from '../../form/Form';
 import { AppRequest } from '../AppRequest';
@@ -65,8 +64,11 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
 
     this.filterErrorsForSaveAsDraft(req);
 
-    const nextUrl = req.session.errors.length > 0 || addButton ? req.url : getNextStepUrl(req, req.session.userCase);
+    if (req.session.errors.length > 0 || addButton) {
+      this.redirect(req, res, req.url);
+      return;
+    }
 
-    this.redirect(req, res, nextUrl);
+    this.checkReturnUrlAndRedirect(req, res, this.ALLOWED_RETURN_URLS);
   }
 }

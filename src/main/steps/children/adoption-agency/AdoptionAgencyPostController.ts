@@ -31,6 +31,6 @@ export default class AdoptionAgencyPostController extends PostController<AnyObje
       this.getEventName(req)
     );
 
-    this.redirect(req, res);
+    super.checkReturnUrlAndRedirect(req, res, this.ALLOWED_RETURN_URLS);
   }
 }
