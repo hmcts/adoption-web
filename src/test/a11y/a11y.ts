@@ -76,8 +76,8 @@ describe('Accessibility', () => {
     const page = await browser.newPage();
     console.log(config.TEST_URL);
     await page.goto(config.TEST_URL);
-    await page.type('#username', 'abid.sayyad@hmcts.net');
-    await page.type('#password', 'Pa55word12');
+    await page.type('#username', process.env.CITIZEN_USERNAME);
+    await page.type('#password', process.env.CITIZEN_PASSWORD);
     await page.click('input[type="submit"]');
     cookies = await page.cookies(config.TEST_URL);
     console.log(cookies);
