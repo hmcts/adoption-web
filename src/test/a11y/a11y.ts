@@ -100,7 +100,10 @@ describe('Accessibility', () => {
   });
 
   const IGNORED_URLS = [urls.SIGN_IN_URL, urls.SIGN_OUT_URL];
-  const urlsNoSignOut = Object.values(urls).filter(url => !IGNORED_URLS.includes(url));
+  const urlsNoSignOut = Object.values(urls)
+    .filter(url => !IGNORED_URLS.includes(url))
+    .map(item => item.slice(1));
+  console.log(urlsNoSignOut);
   // const urlsNoSignOut = [urls.RELATIONSHIP_NOT_BROKEN_URL]
   test.each(urlsNoSignOut)('Page %s should have no accessibility errors', async url => {
     await ensurePageCallWillSucceed(url);
