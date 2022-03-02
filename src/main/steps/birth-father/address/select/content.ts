@@ -5,7 +5,7 @@ import {
   form as selectAddressForm,
   generateContent as selectAddressGenerateContent,
 } from '../../../common/components/address-select';
-import { BIRTH_FATHER_ADDRESS_LOOKUP, BIRTH_FATHER_ADDRESS_MANUAL } from '../../../urls';
+import { BIRTH_FATHER_ADDRESS_LOOKUP, BIRTH_FATHER_MANUAL_ADDRESS } from '../../../urls';
 
 const en = selectAddressContent => ({
   section: SECTION,
@@ -14,7 +14,7 @@ const en = selectAddressContent => ({
     birthFatherSelectAddress: selectAddressContent.errors.selectAddress,
   },
   changePostCodeUrl: BIRTH_FATHER_ADDRESS_LOOKUP,
-  cantFindAddressUrl: BIRTH_FATHER_ADDRESS_MANUAL,
+  cantFindAddressUrl: BIRTH_FATHER_MANUAL_ADDRESS,
 });
 
 const cy = selectAddressContent => ({
@@ -24,7 +24,7 @@ const cy = selectAddressContent => ({
     birthFatherSelectAddress: selectAddressContent.errors.selectAddress,
   },
   changePostCodeUrl: BIRTH_FATHER_ADDRESS_LOOKUP,
-  cantFindAddressUrl: BIRTH_FATHER_ADDRESS_MANUAL,
+  cantFindAddressUrl: BIRTH_FATHER_MANUAL_ADDRESS,
 });
 
 const selectAddressFormFields = selectAddressForm.fields as FormFields;
