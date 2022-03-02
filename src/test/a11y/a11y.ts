@@ -24,11 +24,13 @@ interface PallyIssue {
   typeCode: number;
 }
 
+const ignoredA11yErrors = ['WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.InputInput.Name'];
+
 function ensurePageCallWillSucceed(url: string): Promise<void> {
   return axios.get(url);
 }
 
-function runPally(url: string, browser): Promise<Pa11yResult> {
+function runPally(url: string, browser, page): Promise<Pa11yResult> {
   let screenCapture: string | boolean = false;
   if (!config.TestHeadlessBrowser) {
     const screenshotDir = `${__dirname}/../../../functional-output/pa11y`;
@@ -38,7 +40,9 @@ function runPally(url: string, browser): Promise<Pa11yResult> {
 
   const fullUrl = `${config.TEST_URL}${url}`;
   return pa11y(fullUrl, {
+    ignore: ignoredA11yErrors,
     browser,
+    page,
     screenCapture,
     hideElements: '.govuk-footer__licence-logo, .govuk-header__logotype-crown',
   });
@@ -80,19 +84,9 @@ describe('Accessibility', () => {
     await page.type('#password', process.env.CITIZEN_PASSWORD);
     await page.click('input[type="submit"]');
     cookies = await page.cookies(config.TEST_URL);
-    console.log(cookies);
-    await page.close();
   };
 
   beforeAll(setup);
-
-  beforeEach(async () => {
-    const page = await browser.newPage();
-    await page.goto(config.TEST_URL);
-    await page.setCookie(...cookies);
-    await page.goto(`${config.TEST_URL}/info`);
-    await page.close();
-  });
 
   afterAll(async () => {
     hasAfterAllRun = true;
@@ -141,17 +135,28 @@ describe('Accessibility', () => {
     urls.EQUALITY,
     urls.DOCUMENT_MANAGER,
   ];
-  const urlsNoSignOut = Object.values(urls)
+  const urlsToTest = Object.values(urls)
     .filter(url => !IGNORED_URLS.includes(url))
     .map(item => item.slice(1));
-  console.log(urlsNoSignOut);
-  // const urlsNoSignOut = [urls.RELATIONSHIP_NOT_BROKEN_URL]
-  test.each(urlsNoSignOut)('Page %s should have no accessibility errors', async url => {
-    await ensurePageCallWillSucceed(url);
-    console.log('url ', url);
-    const result = await runPally(url, browser);
-    console.log('result ', result);
-    expect(result.issues).toEqual(expect.any(Array));
-    expectNoErrors(result.issues);
+
+  console.log('urlsToTest ', urlsToTest);
+  console.log('IGNORED_URLS ', IGNORED_URLS);
+
+  describe.each(urlsToTest)('Page %s', url => {
+    let page;
+
+    test(`Page ${url} should have no accessibility errors`, async () => {
+      page = await browser.newPage();
+      await page.goto(config.TEST_URL);
+      await page.setCookie(...cookies);
+
+      await ensurePageCallWillSucceed(url);
+
+      const result = await runPally(url, browser, page);
+      console.log(url, result);
+
+      expect(result.issues).toEqual(expect.any(Array));
+      expectNoErrors(result.issues);
+    });
   });
 });
