@@ -18,6 +18,7 @@
     "fortifyScan": "./test/java/gradlew -p test/java fortifyScan",
     "test:coverage": "jest --coverage",
     "test:a11y": "echo 'nope' && exit 0",
+    "test:pa11y": "NODE_TLS_REJECT_UNAUTHORIZED=0 jest -c jest.a11y.config.js --maxWorkers 1",
     "sonar-scan": "sonar-scanner",
     "test:smoke": "MOCHAWESOME_REPORTFILENAME=smoke codeceptjs run --grep \"${SMOKE_TESTS_SELECTOR:=@smoke-tests}\" --reporter mocha-multi",
     "test:functional": "MOCHAWESOME_REPORTFILENAME=functional codeceptjs run-multiple parallel --reporter mocha-multi",
