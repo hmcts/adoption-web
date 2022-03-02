@@ -1098,6 +1098,7 @@ export const enum YesNoNotsure {
 }
 
 export const enum SectionStatus {
+  CAN_NOT_START_YET = 'CAN_NOT_START_YET',
   NOT_STARTED = 'NOT_STARTED',
   IN_PROGRESS = 'IN_PROGRESS',
   COMPLETED = 'COMPLETED',

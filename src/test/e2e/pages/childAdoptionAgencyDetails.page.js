@@ -1,5 +1,5 @@
 const { I } = inject();
-
+const adoptionAgencyDetails = require('../fixtures/caseData/childAdoptionAgencyDetails');
 module.exports = {
   adopAgency: {
     adopAgencyOrLaName: 'input[id$="adopAgencyOrLaName"]',
@@ -17,10 +17,10 @@ module.exports = {
 
   childAdoptionAgencyDetailsSection() {
     I.waitForText('Adoption agency or local authority details', 30);
-    I.fillField(this.adopAgency.adopAgencyOrLaName, 'Hillingdon');
-    I.fillField(this.adopAgency.adopAgencyOrLaPhoneNumber, '09876543210');
-    I.fillField(this.adopAgency.adopAgencyOrLaContactName, 'Jake');
-    I.fillField(this.adopAgency.adopAgencyOrLaContactEmail, 'test@example.com');
+    I.fillField(this.adopAgency.adopAgencyOrLaName, adoptionAgencyDetails.adopAgencyOrLaName);
+    I.fillField(this.adopAgency.adopAgencyOrLaPhoneNumber, adoptionAgencyDetails.adopAgencyOrLaPhoneNumber);
+    I.fillField(this.adopAgency.adopAgencyOrLaContactName, adoptionAgencyDetails.adopAgencyOrLaContactName);
+    I.fillField(this.adopAgency.adopAgencyOrLaContactEmail, adoptionAgencyDetails.adopAgencyOrLaContactEmail);
     I.wait('2');
     I.click('Save and continue');
     I.waitForText('Was there another adoption agency or local authority involved in placing the child?', 30);

@@ -12,7 +12,7 @@ import { isDateInputInvalid, notSureViolation } from '../../app/form/validation'
 import { PaymentModel } from '../../app/payment/PaymentModel';
 import * as urls from '../urls';
 
-export const isApplyingWithComplete = (userCase: CaseWithId): SectionStatus => {
+export const getApplyingWithStatus = (userCase: CaseWithId): SectionStatus => {
   if (
     userCase.applyingWith === ApplyingWith.ALONE ||
     userCase.applyingWith === ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER
@@ -386,4 +386,34 @@ export const getDateChildMovedInStatus = (userCase: CaseWithId): SectionStatus =
   const dateChildMovedInComplete = !!(dateChildMovedIn?.day && dateChildMovedIn.month && dateChildMovedIn.year);
 
   return dateChildMovedInComplete ? SectionStatus.COMPLETED : SectionStatus.NOT_STARTED;
+};
+
+export const getApplicationStatus = (userCase: CaseWithId): SectionStatus => {
+  const statuses = [
+    getApplyingWithStatus(userCase),
+    getDateChildMovedInStatus(userCase),
+    getPersonalDetailsStatus(userCase, FieldPrefix.APPLICANT1),
+    getContactDetailsStatus(userCase, FieldPrefix.APPLICANT1),
+    ...(userCase.applyingWith !== ApplyingWith.ALONE
+      ? [
+          getPersonalDetailsStatus(userCase, FieldPrefix.APPLICANT2),
+          getContactDetailsStatus(userCase, FieldPrefix.APPLICANT2),
+        ]
+      : []),
+    getChildrenBirthCertificateStatus(userCase),
+    getAdoptionCertificateDetailsStatus(userCase),
+    getChildrenPlacementOrderStatus(userCase),
+    getBirthMotherDetailsStatus(userCase),
+    getBirthFatherDetailsStatus(userCase),
+    getOtherParentStatus(userCase),
+    getAdoptionAgencyDetailStatus(userCase),
+    getSiblingStatus(userCase),
+    getUploadDocumentStatus(userCase),
+  ];
+
+  if (statuses.every(status => status === SectionStatus.COMPLETED)) {
+    return SectionStatus.NOT_STARTED;
+  }
+
+  return SectionStatus.CAN_NOT_START_YET;
 };
