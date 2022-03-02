@@ -8,6 +8,8 @@ import {
   getAdoptionAgencyDetailStatus,
   getAdoptionAgencyUrl,
   getAdoptionCertificateDetailsStatus,
+  getApplicationStatus,
+  getApplyingWithStatus,
   getBirthFatherDetailsStatus,
   getBirthMotherDetailsStatus,
   getChildrenBirthCertificateStatus,
@@ -19,16 +21,18 @@ import {
   getReviewPaySubmitUrl,
   getSiblingStatus,
   getUploadDocumentStatus,
-  isApplyingWithComplete,
 } from './utils';
 
 const getSectionStatusLabel = (status, statuses, id) => {
-  if (status === SectionStatus.COMPLETED) {
-    return `<strong id="${id}-status" class="govuk-tag  app-task-list__tag" id="eligibility-completed">${statuses.completed}</strong>`;
-  } else if (status === SectionStatus.IN_PROGRESS) {
-    return `<strong id="${id}-status" class="govuk-tag govuk-tag--blue app-task-list__tag">${statuses.inProgress}</strong>`;
-  } else {
-    return `<strong id="${id}-status" class="govuk-tag govuk-tag--grey app-task-list__tag">${statuses.notStarted}</strong>`;
+  switch (status) {
+    case SectionStatus.CAN_NOT_START_YET:
+      return `<strong id="${id}-status" class="govuk-tag govuk-tag--grey app-task-list__tag">${statuses.canNotStartYet}</strong>`;
+    case SectionStatus.IN_PROGRESS:
+      return `<strong id="${id}-status" class="govuk-tag govuk-tag--blue app-task-list__tag">${statuses.inProgress}</strong>`;
+    case SectionStatus.COMPLETED:
+      return `<strong id="${id}-status" class="govuk-tag  app-task-list__tag">${statuses.completed}</strong>`;
+    default:
+      return `<strong id="${id}-status" class="govuk-tag govuk-tag--grey app-task-list__tag">${statuses.notStarted}</strong>`;
   }
 };
 
@@ -47,12 +51,15 @@ const urls = content => ({
       : URL.CHILDREN_PLACEMENT_ORDER_SUMMARY,
   birthFather: URL.BIRTH_FATHER_NAME_ON_CERTIFICATE,
   birthMotherDetails: URL.BIRTH_MOTHER_FULL_NAME,
-  reviewApplicationPayAndSubmit: getReviewPaySubmitUrl(content.userCase),
   siblingDetails: URL.SIBLING_EXISTS,
   dateChildMovedIn: URL.DATE_CHILD_MOVED_IN,
   adoptionAgency: getAdoptionAgencyUrl(content.userCase),
   uploadYourDocuments: URL.UPLOAD_YOUR_DOCUMENTS,
   findFamilyCourt: URL.CHILDREN_FIND_FAMILY_COURT,
+  reviewApplicationPayAndSubmit:
+    getApplicationStatus(content.userCase) === SectionStatus.CAN_NOT_START_YET
+      ? undefined
+      : getReviewPaySubmitUrl(content.userCase),
 });
 
 const en = content => {
@@ -60,6 +67,7 @@ const en = content => {
     completed: 'Completed',
     inProgress: 'In Progress',
     notStarted: 'Not Started',
+    canNotStartYet: 'Can not start yet',
   };
 
   return {
@@ -95,7 +103,7 @@ const en = content => {
     section6: 'Review application, pay and send',
     section6link1: 'Review application, pay and send',
     status: {
-      applyingWith: isApplyingWithComplete(content.userCase),
+      applyingWith: getSectionStatusLabel(getApplyingWithStatus(content.userCase), statuses, 'applying-with'),
       dateChildMovedIn: getSectionStatusLabel(
         getDateChildMovedInStatus(content.userCase),
         statuses,
@@ -160,6 +168,11 @@ const en = content => {
         'upload-your-documents'
       ),
       findFamilyCourt: getSectionStatusLabel(findFamilyCourtStatus(content.userCase), statuses, 'find-family-court'),
+      reviewPayAndSubmit: getSectionStatusLabel(
+        getApplicationStatus(content.userCase),
+        statuses,
+        'review-pay-and-submit'
+      ),
     },
     urls: urls(content),
   };
@@ -170,6 +183,7 @@ const cy = content => {
     completed: 'Completed (in welsh)',
     inProgress: 'In Progress (in welsh)',
     notStarted: 'Not Started (in welsh)',
+    canNotStartYet: 'Can not start yet (in welsh)',
   };
 
   return {
@@ -205,7 +219,7 @@ const cy = content => {
     section6: 'Review application, pay and send (in welsh) ',
     section6link1: 'Review application, pay and send (in welsh) ',
     status: {
-      applyingWith: isApplyingWithComplete(content.userCase),
+      applyingWith: getSectionStatusLabel(getApplyingWithStatus(content.userCase), statuses, 'applying-with'),
       dateChildMovedIn: getDateChildMovedInStatus(content.userCase),
       applicant1PersonalDetails: getSectionStatusLabel(
         getPersonalDetailsStatus(content.userCase, 'applicant1'),
@@ -261,6 +275,11 @@ const cy = content => {
         'statement-of-truth'
       ),
       findFamilyCourt: getSectionStatusLabel(findFamilyCourtStatus(content.userCase), statuses, 'find-family-court'),
+      reviewPayAndSubmit: getSectionStatusLabel(
+        getApplicationStatus(content.userCase),
+        statuses,
+        'review-pay-and-submit'
+      ),
     },
     urls: urls(content),
   };

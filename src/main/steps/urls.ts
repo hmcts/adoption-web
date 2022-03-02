@@ -127,11 +127,11 @@ export const BIRTH_FATHER = '/birth-father';
 export const BIRTH_FATHER_NAME_ON_CERTIFICATE: PageLink = `${BIRTH_FATHER}/name-on-certificate`;
 export const BIRTH_FATHER_FULL_NAME: PageLink = `${BIRTH_FATHER}/full-name`;
 export const BIRTH_FATHER_ADDRESS_KNOWN: PageLink = `${BIRTH_FATHER}/address-known`;
-export const BIRTH_FATHER_ALIVE: PageLink = `${BIRTH_FATHER}/alive`;
+export const BIRTH_FATHER_STILL_ALIVE: PageLink = `${BIRTH_FATHER}/alive`;
 export const BIRTH_FATHER_ADDRESS_LOOKUP: PageLink = `${BIRTH_FATHER}/address/lookup`;
 export const BIRTH_FATHER_ADDRESS_SELECT: PageLink = `${BIRTH_FATHER}/address/select`;
-export const BIRTH_FATHER_ADDRESS_MANUAL: PageLink = `${BIRTH_FATHER}/address/manual`;
-export const BIRTH_FATHER_ADDRESS_INTERNATIONAL: PageLink = `${BIRTH_FATHER}/address/international`;
+export const BIRTH_FATHER_MANUAL_ADDRESS: PageLink = `${BIRTH_FATHER}/address/manual`;
+export const BIRTH_FATHER_INTERNATIONAL_ADDRESS: PageLink = `${BIRTH_FATHER}/address/international`;
 export const BIRTH_FATHER_NATIONALITY: PageLink = `${BIRTH_FATHER}/nationality`;
 export const BIRTH_FATHER_OCCUPATION: PageLink = `${BIRTH_FATHER}/occupation`;
 
