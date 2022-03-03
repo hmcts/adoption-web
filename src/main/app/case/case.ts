@@ -75,6 +75,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   childrenFirstNameAfterAdoption: 'childrenFirstNameAfterAdoption',
   childrenLastNameAfterAdoption: 'childrenLastNameAfterAdoption',
   childrenSexAtBirth: 'childrenSexAtBirth',
+  childrenOtherSexAtBirth: 'childrenOtherSexAtBirth',
   addAnotherPlacementOrder: 'addAnotherPlacementOrder',
   placementOrders: 'placementOrders',
   selectedPlacementOrderId: 'selectedPlacementOrderId',
@@ -238,6 +239,7 @@ export interface Case {
   childrenFirstNameAfterAdoption?: string;
   childrenLastNameAfterAdoption?: string;
   childrenSexAtBirth?: Gender;
+  childrenOtherSexAtBirth?: string;
   addAnotherPlacementOrder?: YesOrNo;
   placementOrders?: PlacementOrder[];
   selectedPlacementOrderId?: string;

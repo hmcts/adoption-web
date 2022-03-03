@@ -35,7 +35,7 @@ export const enContent = {
   gender: {
     [Gender.MALE]: 'Male',
     [Gender.FEMALE]: 'Female',
-    [Gender.INTERSEX]: 'Other',
+    [Gender.OTHER]: 'Other',
   },
   yesNoNotsure: {
     [YesNoNotsure.YES]: 'Yes',
@@ -146,7 +146,7 @@ export const cyContent = {
   gender: {
     [Gender.MALE]: 'Male (in welsh)',
     [Gender.FEMALE]: 'Female (in welsh)',
-    [Gender.INTERSEX]: 'Other (in welsh)',
+    [Gender.OTHER]: 'Other (in welsh)',
   },
   yesNoNotsure: {
     [YesNoNotsure.YES]: 'Yes (in welsh)',
