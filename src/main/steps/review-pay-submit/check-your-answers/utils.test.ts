@@ -1463,11 +1463,11 @@ describe('review-pay-submit > check-your-answers > utils', () => {
           rows: [
             {
               key: { text: 'Family court name' },
-              value: { text: 'TBD' },
+              value: { text: 'MOCK_FAMILY_COURT' },
               actions: {
                 items: [
                   {
-                    href: '#?returnUrl=/review-pay-submit/check-your-answers',
+                    href: '/children/find-family-court?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
                     visuallyHiddenText: 'Change Family court name',
                   },
@@ -1477,8 +1477,8 @@ describe('review-pay-submit > check-your-answers > utils', () => {
           ],
         },
       },
-    ])('return correct summary list items when %#', ({ expected }) => {
-      expect(familyCourtSummaryList(enContent)).toStrictEqual(expected);
+    ])('return correct summary list items when %#', ({ userCase, expected }) => {
+      expect(familyCourtSummaryList(enContent, userCase)).toEqual(expected);
     });
   });
 

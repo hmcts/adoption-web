@@ -123,7 +123,7 @@ const en = (content: CommonContent): Record<string, unknown> => {
       otherParentSummaryList(enContent, userCase),
       childrenPlacementOrderSummaryList(enContent, userCase),
       siblingCourtOrderSummaryList(enContent, userCase),
-      familyCourtSummaryList(enContent),
+      familyCourtSummaryList(enContent, userCase),
       uploadedDocumentSummaryList(enContent, userCase),
     ],
   };
@@ -235,7 +235,7 @@ const cy = (content: CommonContent): Record<string, unknown> => {
       otherParentSummaryList(cyContent, userCase),
       childrenPlacementOrderSummaryList(cyContent, userCase),
       siblingCourtOrderSummaryList(cyContent, userCase),
-      familyCourtSummaryList(cyContent),
+      familyCourtSummaryList(cyContent, userCase),
       uploadedDocumentSummaryList(cyContent, userCase),
     ],
   };

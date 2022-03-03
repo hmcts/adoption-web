@@ -157,6 +157,7 @@ export const getBirthFatherDetailsStatus = (userCase: CaseWithId): SectionStatus
     birthFatherAdditionalNationalities,
     birthFatherOccupation,
     birthFatherAddressKnown,
+    birthFatherAddressNotKnownReason,
   } = userCase;
 
   if (birthFatherNameOnCertificate === YesOrNo.NO) {
@@ -189,7 +190,10 @@ export const getBirthFatherDetailsStatus = (userCase: CaseWithId): SectionStatus
   ) {
     return SectionStatus.IN_PROGRESS;
   } else {
-    return birthFatherAddressKnown === YesOrNo.NO || addressComplete(userCase, FieldPrefix.BIRTH_FATHER)
+    return (birthFatherAddressKnown === YesOrNo.NO &&
+      birthFatherAddressNotKnownReason &&
+      birthFatherAddressNotKnownReason?.length > 0) ||
+      addressComplete(userCase, FieldPrefix.BIRTH_FATHER)
       ? SectionStatus.COMPLETED
       : SectionStatus.IN_PROGRESS;
   }
@@ -214,7 +218,11 @@ export const getBirthMotherDetailsStatus = (userCase: CaseWithId): SectionStatus
     const occupation = userCase.birthMotherOccupation;
     const addressKnown = userCase.birthMotherAddressKnown;
 
-    if (addressKnown === YesOrNo.NO) {
+    if (
+      addressKnown === YesOrNo.NO &&
+      userCase.birthMotherAddressNotKnownReason &&
+      userCase.birthMotherAddressNotKnownReason?.length > 0
+    ) {
       return names && nationalityComplete && occupation ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
     } else {
       return names &&
@@ -238,7 +246,11 @@ export const getOtherParentStatus = (userCase: CaseWithId): SectionStatus => {
   } else if (exists === YesOrNo.YES) {
     const names = userCase.otherParentFirstNames && userCase.otherParentLastNames;
     const addressKnown = userCase.otherParentAddressKnown;
-    if (addressKnown === YesOrNo.NO) {
+    if (
+      addressKnown === YesOrNo.NO &&
+      userCase.otherParentAddressNotKnownReason &&
+      userCase.otherParentAddressNotKnownReason?.length > 0
+    ) {
       return names ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
     } else {
       return names && addressKnown === YesOrNo.YES && addressComplete(userCase, FieldPrefix.OTHER_PARENT)
@@ -388,6 +400,21 @@ export const getDateChildMovedInStatus = (userCase: CaseWithId): SectionStatus =
   return dateChildMovedInComplete ? SectionStatus.COMPLETED : SectionStatus.NOT_STARTED;
 };
 
+export const findFamilyCourtStatus = (userCase: CaseWithId): SectionStatus => {
+  const exists = userCase.findFamilyCourt;
+
+  if (exists === YesOrNo.YES) {
+    return SectionStatus.COMPLETED;
+  } else if (exists === YesOrNo.NO) {
+    if (userCase.familyCourtName && userCase.familyCourtName?.length > 0) {
+      return SectionStatus.COMPLETED;
+    } else {
+      return SectionStatus.IN_PROGRESS;
+    }
+  }
+  return SectionStatus.NOT_STARTED;
+};
+
 export const getApplicationStatus = (userCase: CaseWithId): SectionStatus => {
   const statuses = [
     getApplyingWithStatus(userCase),
@@ -408,6 +435,7 @@ export const getApplicationStatus = (userCase: CaseWithId): SectionStatus => {
     getOtherParentStatus(userCase),
     getAdoptionAgencyDetailStatus(userCase),
     getSiblingStatus(userCase),
+    findFamilyCourtStatus(userCase),
     getUploadDocumentStatus(userCase),
   ];
 

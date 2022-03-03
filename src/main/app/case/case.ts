@@ -163,6 +163,10 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   documentsGenerated: 'documentsGenerated',
   applicationFeeOrderSummary: 'applicationFeeOrderSummary',
   applicant1CannotUpload: 'applicant1CannotUpload',
+
+  findFamilyCourt: 'findFamilyCourt',
+  familyCourtName: 'familyCourtName',
+  familyCourtEmailId: 'familyCourtEmailId',
   hyphenatedCaseRef: 'hyphenatedCaseRef',
 };
 
@@ -340,6 +344,11 @@ export interface Case {
   applicant1UploadedFiles?: UploadedFile[];
   applicant1CannotUpload?: Checkbox;
   applicant1CannotUploadDocuments?: DocumentType[];
+
+  /***** Find court *****/
+  findFamilyCourt?: YesOrNo;
+  familyCourtName?: string;
+  familyCourtEmailId?: string;
 
   applicant1HelpPayingNeeded?: YesOrNo;
   applicant1AlreadyAppliedForHelpPaying?: YesOrNo;

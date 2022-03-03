@@ -419,7 +419,7 @@ describe('utils', () => {
           birthFatherOccupation: 'Primary school teacher',
           birthFatherAddressKnown: YesOrNo.NO,
         },
-        expected: COMPLETED,
+        expected: IN_PROGRESS,
       },
       {
         data: {
@@ -490,7 +490,7 @@ describe('utils', () => {
           otherParentAddressKnown: YesOrNo.NO,
         },
         userType: 'otherParent',
-        expected: 'COMPLETED',
+        expected: 'IN_PROGRESS',
       },
       {
         data: {
@@ -613,7 +613,7 @@ describe('utils', () => {
           birthMotherAddressKnown: YesOrNo.NO,
         },
         userType: 'birthMother',
-        expected: 'COMPLETED',
+        expected: 'IN_PROGRESS',
       },
       {
         data: {

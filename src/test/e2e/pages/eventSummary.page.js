@@ -7,8 +7,8 @@ module.exports = {
   },
 
   async provideSummary(summary, description) {
-    I.fillField(this.fields.summary, summary);
-    I.fillField(this.fields.description, description);
+    await I.fillField(this.fields.summary, summary);
+    await I.fillField(this.fields.description, description);
   },
 
   async submit(button, locator = '.hmcts-banner--success') {
