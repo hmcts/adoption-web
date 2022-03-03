@@ -435,6 +435,7 @@ export const getApplicationStatus = (userCase: CaseWithId): SectionStatus => {
     getOtherParentStatus(userCase),
     getAdoptionAgencyDetailStatus(userCase),
     getSiblingStatus(userCase),
+    findFamilyCourtStatus(userCase),
     getUploadDocumentStatus(userCase),
   ];
 
