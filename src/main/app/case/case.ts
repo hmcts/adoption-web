@@ -166,6 +166,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   findFamilyCourt: 'findFamilyCourt',
   familyCourtName: 'familyCourtName',
   familyCourtEmailId: 'familyCourtEmailId',
+  hyphenatedCaseRef: 'hyphenatedCaseRef',
 };
 
 export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data: InputFormat): OutputFormat {
@@ -363,6 +364,7 @@ export interface Case {
   caseReference?: string;
   dateSubmitted?: Date;
   applicationFeeOrderSummary: OrderSummary;
+  hyphenatedCaseRef?: string;
 }
 
 export interface CaseWithId extends Case {
