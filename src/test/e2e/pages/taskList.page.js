@@ -34,6 +34,8 @@ module.exports = {
     reviewPayAndSubmitLink: 'a[id="review-pay-and-submit"]',
     dateChildMovedInLink: 'a[id$="date-child-moved-in"]',
     dateChildMovedInDetailsStatus: 'strong[id$="date-child-moved-in-status"]',
+    findFamilyCourtLink: 'a[id$="find-family-court"]',
+    findFamilyCourtStatus: 'strong[id$="find-family-court-status"]',
   },
   uploadDocument: {
     uploadDocumentLink: 'a[href$="upload-your-documents"]',
@@ -164,5 +166,13 @@ module.exports = {
 
   async verifySecondApplicantPersonalDetailsStatus() {
     await I.see('COMPLETED', this.secondApplicant.contactDetailsLinkStatus);
+  },
+
+  async selectChooseYourFamilyCourtDetails() {
+    await I.click(this.childDetails.findFamilyCourtLink);
+  },
+
+  async verifyChooseYourFamilyCourtStatus() {
+    await I.see('COMPLETED', this.childDetails.findFamilyCourtStatus);
   },
 };
