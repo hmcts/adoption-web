@@ -14,22 +14,22 @@ module.exports = {
     postcode: 'UB8 3NA',
   },
 
-  otherApplicantContactDetailsSection() {
-    I.wait('3');
-    I.click(this.fields.applicant2AddressSameAsApplicant1_No);
-    I.click('Save and continue');
-    I.wait('3');
-    I.fillField(this.fields.postcodeLookup, this.fields.postcode);
-    I.click(this.fields.findAddressButton);
-    I.waitForText('addresses found');
-    I.waitForElement(locate(this.fields.addressList).find('option').withText(this.fields.lookupOption));
-    I.selectOption(this.fields.addressList, this.fields.lookupOption);
-    I.click('Save and continue');
-    I.wait('2');
-    I.fillField(this.fields.applicant1EmailAddress, 'test@test.com');
-    I.fillField(this.fields.applicant1PhoneNumber, '09876543210');
-    I.click(this.fields.applicant2ContactDetailsConsent);
-    I.click('Save and continue');
-    I.wait('3');
+  async otherApplicantContactDetailsSection() {
+    await I.wait('3');
+    await I.click(this.fields.applicant2AddressSameAsApplicant1_No);
+    await I.click('Save and continue');
+    await I.wait('4');
+    await I.fillField(this.fields.postcodeLookup, this.fields.postcode);
+    await I.click(this.fields.findAddressButton);
+    await I.waitForText('addresses found');
+    await I.waitForElement(locate(this.fields.addressList).find('option').withText(this.fields.lookupOption));
+    await I.selectOption(this.fields.addressList, this.fields.lookupOption);
+    await I.click('Save and continue');
+    await I.wait('2');
+    await I.fillField(this.fields.applicant1EmailAddress, 'test@test.com');
+    await I.fillField(this.fields.applicant1PhoneNumber, '09876543210');
+    await I.click(this.fields.applicant2ContactDetailsConsent);
+    await I.click('Save and continue');
+    await I.wait('3');
   },
 };
