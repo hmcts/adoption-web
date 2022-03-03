@@ -20,6 +20,8 @@ export default class AdoptionAgencyPostController extends PostController<AnyObje
 
     Object.assign(adoptionAgency, formData);
 
+    this.filterErrorsForSaveAsDraft(req);
+
     if (req.session.errors.length === 0) {
       req.session.userCase = await this.save(
         req,
@@ -30,7 +32,6 @@ export default class AdoptionAgencyPostController extends PostController<AnyObje
         this.getEventName(req)
       );
     }
-    this.filterErrorsForSaveAsDraft(req);
     super.checkReturnUrlAndRedirect(req, res, this.ALLOWED_RETURN_URLS);
   }
 }
