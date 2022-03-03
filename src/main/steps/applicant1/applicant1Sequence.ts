@@ -5,7 +5,6 @@ import {
   APPLICANT_1_FIND_ADDRESS,
   APPLICANT_1_FULL_NAME,
   APPLICANT_1_MANUAL_ADDRESS,
-  APPLICANT_1_NATIONALITY,
   APPLICANT_1_OCCUPATION,
   APPLICANT_1_OTHER_NAMES,
   APPLICANT_1_SELECT_ADDRESS,
@@ -38,11 +37,6 @@ export const applicant1Sequence: Step[] = [
   },
   {
     url: APPLICANT_1_DOB,
-    showInSection: Sections.AboutApplicant1,
-    getNextStep: () => APPLICANT_1_NATIONALITY,
-  },
-  {
-    url: APPLICANT_1_NATIONALITY,
     showInSection: Sections.AboutApplicant1,
     getNextStep: () => APPLICANT_1_OCCUPATION,
   },

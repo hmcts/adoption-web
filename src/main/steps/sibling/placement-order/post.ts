@@ -9,7 +9,7 @@ import { SIBLING_ORDER_CHECK_YOUR_ANSWERS } from '../../../steps/urls';
 
 @autobind
 export default class SiblingPlacementOrderPostController extends PostController<AnyObject> {
-  private ALLOWED_RETURN_URLS: string[] = [SIBLING_ORDER_CHECK_YOUR_ANSWERS];
+  protected ALLOWED_RETURN_URLS: string[] = [SIBLING_ORDER_CHECK_YOUR_ANSWERS];
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;

@@ -40,6 +40,11 @@ export default class OtherNamesGetController extends GetController {
       req.url = req.url.substring(0, req.url.indexOf('?'));
 
       super.saveSessionAndRedirect(req, res);
+    } else if (req.query.returnUrl) {
+      this.parseAndSetReturnUrl(req);
+      delete req.query.returnUrl;
+      req.url = req.url.substring(0, req.url.indexOf('?'));
+      this.saveSessionAndRedirect(req, res);
     } else {
       super.get(req, res);
     }

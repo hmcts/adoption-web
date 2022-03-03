@@ -2,7 +2,6 @@ import { Case, Checkbox } from '../case';
 import { CaseData, YesOrNo } from '../definition';
 
 export const fromApiApplicant1 = (data: Partial<CaseData>): Partial<Case> => {
-  console.log('data.applicant1CannotUpload', data.applicant1CannotUpload);
   return {
     applicant1UploadedFiles:
       data.applicant1DocumentsUploaded?.map(file => ({

@@ -6,12 +6,12 @@ module.exports = {
     dateChildMovedInMonth: 'input[id$="dateChildMovedIn-month"]',
     dateChildMovedInYear: 'input[id$="dateChildMovedIn-year"]',
   },
-  async dateChildMovedInSection() {
+  async dateChildMovedInSection(date, month, year) {
     await I.waitForText('When did the child move in with you?', 30);
-    await I.fillField(this.fields.dateChildMovedInDay, '26');
-    await I.fillField(this.fields.dateChildMovedInMonth, '06');
+    await I.fillField(this.fields.dateChildMovedInDay, date);
+    await I.fillField(this.fields.dateChildMovedInMonth, month);
     await I.wait('2');
-    await I.fillField(this.fields.dateChildMovedInYear, '2020');
+    await I.fillField(this.fields.dateChildMovedInYear, year);
     await I.click('Save and continue');
     await I.wait('2');
   },

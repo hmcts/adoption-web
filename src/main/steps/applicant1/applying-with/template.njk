@@ -1,3 +1,5 @@
 {% extends "common/template.njk" %}
 
-{% block backLink %}{% endblock %}
+{% if userCase.applyingWith == 'alone' or userCase.applyingWith === 'withSpouseOrCivilPartner' or userCase.applyingWith === 'withSomeoneElse' %}
+    {% block backLink %}{% endblock %}
+{% endif %}

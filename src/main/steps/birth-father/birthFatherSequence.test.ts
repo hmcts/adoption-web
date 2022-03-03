@@ -1,15 +1,15 @@
 import { YesNoNotsure, YesOrNo } from '../../app/case/definition';
 import {
-  BIRTH_FATHER_ADDRESS_INTERNATIONAL,
   BIRTH_FATHER_ADDRESS_KNOWN,
   BIRTH_FATHER_ADDRESS_LOOKUP,
-  BIRTH_FATHER_ADDRESS_MANUAL,
   BIRTH_FATHER_ADDRESS_SELECT,
-  BIRTH_FATHER_ALIVE,
   BIRTH_FATHER_FULL_NAME,
+  BIRTH_FATHER_INTERNATIONAL_ADDRESS,
+  BIRTH_FATHER_MANUAL_ADDRESS,
   BIRTH_FATHER_NAME_ON_CERTIFICATE,
   BIRTH_FATHER_NATIONALITY,
   BIRTH_FATHER_OCCUPATION,
+  BIRTH_FATHER_STILL_ALIVE,
   OTHER_PARENT_EXISTS,
   TASK_LIST_URL,
 } from '../urls';
@@ -47,13 +47,13 @@ describe('birth father sequence', () => {
 
       expect(url).toBe(BIRTH_FATHER_FULL_NAME);
       expect(showInSection).toBe(aboutChildren);
-      expect(getNextStep({})).toBe(BIRTH_FATHER_ALIVE);
+      expect(getNextStep({})).toBe(BIRTH_FATHER_STILL_ALIVE);
     });
 
     it('should be correct for isAlive', () => {
       const { url, showInSection, getNextStep } = isAlive;
 
-      expect(url).toBe(BIRTH_FATHER_ALIVE);
+      expect(url).toBe(BIRTH_FATHER_STILL_ALIVE);
       expect(showInSection).toBe(aboutChildren);
       expect(getNextStep({ birthFatherStillAlive: YesNoNotsure.YES })).toBe(BIRTH_FATHER_NATIONALITY);
       expect(getNextStep({ birthFatherStillAlive: YesNoNotsure.NO })).toBe(TASK_LIST_URL);
@@ -104,7 +104,7 @@ describe('birth father sequence', () => {
     it('should be correct for manualAddress', () => {
       const { url, showInSection, getNextStep } = manualAddress;
 
-      expect(url).toBe(BIRTH_FATHER_ADDRESS_MANUAL);
+      expect(url).toBe(BIRTH_FATHER_MANUAL_ADDRESS);
       expect(showInSection).toBe(aboutChildren);
       expect(getNextStep({})).toBe(TASK_LIST_URL);
     });
@@ -112,7 +112,7 @@ describe('birth father sequence', () => {
     it('should be correct for internationalAddress', () => {
       const { url, showInSection, getNextStep } = internationalAddress;
 
-      expect(url).toBe(BIRTH_FATHER_ADDRESS_INTERNATIONAL);
+      expect(url).toBe(BIRTH_FATHER_INTERNATIONAL_ADDRESS);
       expect(showInSection).toBe(aboutChildren);
       expect(getNextStep({})).toBe(TASK_LIST_URL);
     });
