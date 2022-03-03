@@ -7,10 +7,11 @@ import { generateContent } from './address-select';
 jest.mock('../../../app/form/validation');
 
 const enContent = {
-  line1: "We'll send all court papers to this address.",
+  line1:
+    "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email.",
   postcode: 'Postcode',
   selectAddress: 'Select an address',
-  cannotFindAddress: 'I cannot find the address in the list',
+  cannotFindAddress: 'Or enter address manually',
   errors: {
     selectAddress: {
       notSelected: 'Select an address',
@@ -21,10 +22,11 @@ const enContent = {
 };
 
 const cyContent = {
-  line1: "We'll send all court papers to this address. (in welsh)",
+  line1:
+    "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email. (in welsh)",
   postcode: 'Postcode (in welsh)',
   selectAddress: 'Select an address (in welsh)',
-  cannotFindAddress: 'I cannot find the address in the list (in welsh)',
+  cannotFindAddress: 'Or enter address manually (in welsh)',
   errors: {
     selectAddress: {
       notSelected: 'Select an address (in welsh)',
@@ -55,7 +57,7 @@ describe('common > components > address-select', () => {
       },
     });
 
-    expect(generatedContent.items).toEqual([
+    expect(generatedContent.options).toEqual([
       { attributes: { id: 'totalAddressesFound' }, selected: true, text: '0 addresses found', value: -1 },
     ]);
 
@@ -76,7 +78,7 @@ describe('common > components > address-select', () => {
       },
     });
 
-    expect(generatedContent.items).toEqual([
+    expect(generatedContent.options).toEqual([
       { attributes: { id: 'totalAddressesFound' }, selected: true, text: '0 addresses found (in welsh)', value: -1 },
     ]);
 
@@ -87,7 +89,7 @@ describe('common > components > address-select', () => {
   describe('when there is one address in session', () => {
     test('should create correct options for selectAddress field', () => {
       generatedContent = generateContent({ ...commonContent, addresses: [{ fullAddress: 'MOCK_FULL_ADDRESS_1' }] });
-      expect(generatedContent.items).toEqual([
+      expect(generatedContent.options).toEqual([
         { attributes: { id: 'totalAddressesFound' }, selected: true, text: '1 address found', value: -1 },
         { text: 'MOCK_FULL_ADDRESS_1', value: 0 },
       ]);
@@ -99,7 +101,7 @@ describe('common > components > address-select', () => {
         language: 'cy',
         addresses: [{ fullAddress: 'MOCK_FULL_ADDRESS_1' }],
       });
-      expect(generatedContent.items).toEqual([
+      expect(generatedContent.options).toEqual([
         { attributes: { id: 'totalAddressesFound' }, selected: true, text: '1 address found (in welsh)', value: -1 },
         { text: 'MOCK_FULL_ADDRESS_1', value: 0 },
       ]);
@@ -109,14 +111,14 @@ describe('common > components > address-select', () => {
   describe('when there addresses is undefined in session', () => {
     test('should create correct options for selectAddress field', () => {
       generatedContent = generateContent({ ...commonContent, addresses: undefined });
-      expect(generatedContent.items).toEqual([
+      expect(generatedContent.options).toEqual([
         { attributes: { id: 'totalAddressesFound' }, selected: true, text: '0 addresses found', value: -1 },
       ]);
     });
 
     test('should create correct options for selectAddress field (welsh)', () => {
       generatedContent = generateContent({ ...commonContent, language: 'cy', addresses: undefined });
-      expect(generatedContent.items).toEqual([
+      expect(generatedContent.options).toEqual([
         { attributes: { id: 'totalAddressesFound' }, selected: true, text: '0 addresses found (in welsh)', value: -1 },
       ]);
     });

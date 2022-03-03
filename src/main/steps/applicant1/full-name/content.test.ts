@@ -7,7 +7,7 @@ import { generateContent } from './content';
 jest.mock('../../../app/form/validation');
 
 const enContent = {
-  section: 'Primary applicant',
+  section: 'First applicant',
   title: "What's your full name?",
   errors: {
     applicant1FirstNames: {
@@ -19,7 +19,7 @@ const enContent = {
   },
 };
 const cyContent = {
-  section: 'Primary applicant (in Welsh)',
+  section: 'First applicant (in Welsh)',
   title: "What's your full name? (in Welsh)",
   errors: {
     applicant1FirstNames: {
@@ -65,6 +65,20 @@ describe('primary applicant > full-name', () => {
   test('should contain lastNames field', () => {
     const lastNamesField = fields.applicant1LastNames as FormOptions;
     expect(lastNamesField).toEqual(fullNameFormFields.lastNames);
+  });
+
+  it('should have full name label when language: en and  applyingWith: alone', () => {
+    const commonContent1 = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
+
+    const generatedContent1 = generateContent(commonContent1);
+    expect(generatedContent1.section).toBe('Applicant');
+  });
+
+  it('should have an full name label when language: cy and  applyingWith: alone', () => {
+    const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
+
+    const generatedContent1 = generateContent(commonContent1);
+    expect(generatedContent1.section).toBe('Applicant (in Welsh)');
   });
 
   test('should contain submit button', () => {

@@ -11,7 +11,7 @@ jest.mock('../../../app/form/validation');
 const enContent = {
   section: 'Eligibility to apply to adopt',
   label: 'Is the child married or in a civil partnership?',
-  hint: 'This includes any past marriages or civil partnerships. In the UK a child can get married at 16 with parental permission. In other countries this age may be lower. A child who is married or in a civil partnership cannot be adopted.',
+  hint: 'This includes any past marriages or civil partnerships. In the UK a child can get married at 16 with parental permission. In other countries this age may be lower. A child who is or ever was married or in a civil partnership cannot be adopted.',
   marriedYes: "You can only apply to adopt a child if they've not been married or in a civil partnership.",
   moreInfo: 'More about adoption',
   errors: {
@@ -24,7 +24,7 @@ const enContent = {
 const cyContent = {
   section: 'Eligibility to apply to adopt (in Welsh)',
   label: 'Is the child married or in a civil partnership? (in welsh)',
-  hint: 'This includes any past marriages or civil partnerships. In the UK a child can get married at 16 with parental permission. In other countries this age may be lower. A child who is married or in a civil partnership cannot be adopted. (in welsh)',
+  hint: 'This includes any past marriages or civil partnerships. In the UK a child can get married at 16 with parental permission. In other countries this age may be lower. A child who is or ever was married or in a civil partnership cannot be adopted. (in welsh)',
   marriedYes: "You can only apply to adopt a child if they've not been married or in a civil partnership. (in welsh)",
   moreInfo: 'More about adoption (in welsh)',
   errors: {
@@ -62,8 +62,13 @@ describe('eligibility > married > content', () => {
     expect((field.label as Function)(generatedContent)).toBe(enContent.label);
     expect((field.hint as Function)(generatedContent)).toBe(enContent.hint);
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
+
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesNoNotsure.YES);
+    expect((field.values[0].conditionalText as Function)(generatedContent)).toBe(
+      '<p class="govuk-label">You can only apply to adopt a child if they\'ve not been married or in a civil partnership.</p> <p class="govuk-label"><a rel="noreferrer noopener" href="https://www.gov.uk/child-adoption">More about adoption</a></p>'
+    );
+
     expect((field.values[1].label as Function)(commonContent)).toBe(commonContent.no);
     expect(field.values[1].value).toBe(YesNoNotsure.NO);
     expect(field.validator).toBe(isFieldFilledIn);

@@ -18,18 +18,31 @@ module.exports = {
     addressPostcode: 'input[id$="address-postcode"]',
     email: 'input[id$="email"]',
     pcqNO: '.govuk-button.govuk-button--secondary',
+    caseID: '.govuk-panel__body strong',
+    changeChildMoveInDate: 'a[href="/date-child-moved-in?returnUrl=/review-pay-submit/check-your-answers"]',
   },
-
-  async reviewPayAndSubmitDetailsSection() {
+  async selectNoPCQOption() {
     await I.wait('5');
     const numOfPCQElements = await I.grabNumberOfVisibleElements(this.fields.pcqNO);
     if (numOfPCQElements === 1) {
       await I.click("I don't want to answer these questions");
     }
-
     await I.wait('5');
-    await I.waitForText('Review your application, pay and send', 30);
+  },
+
+  async changeValueFromReviewYourAnswers() {
+    await I.waitForText('Review your answers', 30);
+    await I.click(this.fields.changeChildMoveInDate);
+    await I.wait('5');
+  },
+
+  async reviewYourAnswersAndContinue() {
+    await I.waitForText('Review your answers', 30);
     await I.click('Continue');
+    await I.wait('5');
+  },
+
+  async statementOfTruthDetailsSection() {
     await I.waitForText('Statement of truth', 30);
     await I.click(this.fields.applicant1IBelieveApplicationIsTrue);
     await I.click(this.fields.applicant2IBelieveApplicationIsTrue);
@@ -60,5 +73,8 @@ module.exports = {
     await I.waitForText('Confirm your payment', 30);
     await I.waitForText('£183.00', 30);
     await I.click('Confirm payment');
+    await I.wait(5);
+    await I.waitForText('Application Submitted', 30);
+    console.log(await I.grabTextFrom(this.fields.caseID));
   },
 };

@@ -155,6 +155,7 @@ describe('OtherNamesPostController', () => {
     });
 
     test('should save the errors in session', async () => {
+      req.body.addButton = 'true';
       await controller.post(req, res);
       expect(req.session.errors).toEqual(['MOCK_ERROR']);
       expect(req.session.save).toHaveBeenCalled();
@@ -164,26 +165,6 @@ describe('OtherNamesPostController', () => {
       await controller.post(req, res);
       expect(mockGetNextStepUrl).not.toHaveBeenCalled();
       expect(res.redirect).toHaveBeenCalledWith('/request');
-    });
-  });
-
-  describe('when there is an error in saving session', () => {
-    test('should throw an error', async () => {
-      req = mockRequest({
-        session: {
-          userCase: {
-            placementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }],
-            selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
-          },
-          save: jest.fn(done => done('MOCK_ERROR')),
-        },
-      });
-      try {
-        await controller.post(req, res);
-      } catch (err) {
-        //eslint-disable-next-line jest/no-conditional-expect
-        expect(err).toBe('MOCK_ERROR');
-      }
     });
   });
 
@@ -197,7 +178,6 @@ describe('OtherNamesPostController', () => {
       });
       res = mockResponse();
       mockGetParsedBody.mockReturnValue({
-        addButton: 'addButton',
         applicant1AdditionalNames: [
           {
             firstNames: 'MOCK_OTHER_FIRST_NAME',
@@ -208,7 +188,7 @@ describe('OtherNamesPostController', () => {
         applicant1OtherFirstNames: 'MOCK_OTHER_FIRST_NAME',
         applicant1OtherLastNames: 'MOCK_OTHER_LAST_NAME',
       });
-      mockGetErrors.mockReturnValue([]);
+      mockGetErrors.mockReturnValue(['MOCK_ERROR']);
       controller = new OtherNamesPostController((): FormFields => ({}), FieldPrefix.APPLICANT1);
       req.locals.api.triggerEvent.mockResolvedValue({
         ...formData,
@@ -226,7 +206,7 @@ describe('OtherNamesPostController', () => {
 
     test('should set the formData fields in userCase applicant1AdditionalNames session data', async () => {
       await controller.post(req, res);
-      expect(req.session.errors).toEqual([]);
+      expect(req.session.errors).toEqual(['MOCK_ERROR']);
       expect(req.session.userCase.applicant1AdditionalNames).toEqual([
         {
           firstNames: 'MOCK_OTHER_FIRST_NAME',

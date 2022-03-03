@@ -13,27 +13,27 @@ module.exports = {
     applicant1Occupation: 'input[id$="applicant1Occupation"]',
   },
 
-  primaryApplicantPersonalDetailsSection() {
-    I.fillField(this.fields.applicant1FirstNames, 'Joe');
-    I.fillField(this.fields.applicant1LastNames, 'Bloggs');
-    I.click('Save and continue');
-    I.wait('2');
-    I.waitForText('Have you ever legally been known by any other names?');
-    I.click(this.fields.applicant1HasOtherNames);
-    I.fillField(this.fields.applicant1OtherFirstNames, 'Wayne');
-    I.fillField(this.fields.applicant1OtherLastNames, 'Best');
-    I.click('Add');
-    I.wait('2');
-    I.click('Save and continue');
-    I.wait('2');
-    I.waitForText("What's your date of birth?");
-    I.fillField(this.fields.dateOfBirthDay, '26');
-    I.fillField(this.fields.dateOfBirthMonth, '06');
-    I.wait('2');
-    I.fillField(this.fields.dateOfBirthYear, '1988');
-    I.click('Save and continue');
-    I.fillField(this.fields.applicant1Occupation, 'Teacher');
-    I.click('Save and continue');
-    I.wait('3');
+  async primaryApplicantPersonalDetailsSection() {
+    await I.fillField(this.fields.applicant1FirstNames, 'Joe');
+    await I.fillField(this.fields.applicant1LastNames, 'Bloggs');
+    await I.click('Save and continue');
+    await I.wait('2');
+    await I.waitForText('Have you ever legally been known by any other names?');
+    await I.click(this.fields.applicant1HasOtherNames);
+    await I.fillField(this.fields.applicant1OtherFirstNames, 'Wayne');
+    await I.fillField(this.fields.applicant1OtherLastNames, 'Best');
+    await I.click('Add');
+    await I.wait('2');
+    await I.click('Save and continue');
+    await I.wait('2');
+    await I.waitForText("What's your date of birth?");
+    await I.fillField(this.fields.dateOfBirthDay, '26');
+    await I.fillField(this.fields.dateOfBirthMonth, '06');
+    await I.wait('2');
+    await I.fillField(this.fields.dateOfBirthYear, '1988');
+    await I.click('Save and continue');
+    await I.fillField(this.fields.applicant1Occupation, 'Teacher');
+    await I.click('Save and continue');
+    await I.wait('3');
   },
 };
