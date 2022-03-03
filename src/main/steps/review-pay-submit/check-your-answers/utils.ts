@@ -576,19 +576,17 @@ export const siblingCourtOrderSummaryList = (
   };
 };
 
-export const familyCourtSummaryList = ({
-  sectionTitles,
-  keys,
-  ...content
-}: SummaryListContent): // userCase: Partial<CaseWithId>
-SummaryList => ({
+export const familyCourtSummaryList = (
+  { sectionTitles, keys, language, ...content }: SummaryListContent,
+  userCase: Partial<CaseWithId>
+): SummaryList => ({
   title: sectionTitles.familyCourtDetails,
   rows: getSectionSummaryList(
     [
       {
         key: keys.familyCourtName,
-        value: 'TBD',
-        changeUrl: '#',
+        value: userCase.familyCourtName,
+        changeUrl: Urls.CHILDREN_FIND_FAMILY_COURT,
       },
     ],
     content
