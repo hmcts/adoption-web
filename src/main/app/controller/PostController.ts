@@ -91,7 +91,6 @@ export class PostController<T extends AnyObject> {
   }
 
   protected redirect(req: AppRequest<T>, res: Response, nextUrl?: string): void {
-    console.log('nextUrl', nextUrl);
     let target;
     if (req.body['saveAsDraft']) {
       //redirects to task-list page in case of save-as-draft button click
@@ -104,7 +103,6 @@ export class PostController<T extends AnyObject> {
       //redirects to input nextUrl if present otherwise calls getNextStepUrl to get the next step url
       target = nextUrl || getNextStepUrl(req, req.session.userCase);
     }
-    console.log('target', target);
 
     req.session.save(err => {
       if (err) {
