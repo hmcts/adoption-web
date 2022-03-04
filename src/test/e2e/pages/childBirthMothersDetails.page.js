@@ -18,45 +18,45 @@ module.exports = {
     birthMotherAddressCountry: 'input[id$="birthMotherAddressCountry"]',
   },
 
-  childBirthMothersDetailsSection() {
-    I.waitForText("What is the full name of the child's birth mother?");
-    I.fillField(this.fields.birthMotherFirstNames, 'Marie');
-    I.fillField(this.fields.birthMotherLastNames, 'Stopes');
-    I.wait('2');
-    I.click('Save and continue');
-    I.wait('2');
-    I.waitForText("Is the child's birth mother still alive?");
-    I.click(this.fields.birthMotherStillAlive);
-    I.wait('2');
-    I.click('Save and continue');
-    I.waitForText("What is the nationality of the child's birth mother?");
-    I.click(this.fields.britishCitizen);
+  async childBirthMothersDetailsSection() {
+    await I.waitForText("What is the full name of the child's birth mother?");
+    await I.fillField(this.fields.birthMotherFirstNames, 'Marie');
+    await I.fillField(this.fields.birthMotherLastNames, 'Stopes');
+    await I.wait('2');
+    await I.click('Save and continue');
+    await I.wait('2');
+    await I.waitForText("Is the child's birth mother still alive?");
+    await I.click(this.fields.birthMotherStillAlive);
+    await I.wait('2');
+    await I.click('Save and continue');
+    await I.waitForText("What is the nationality of the child's birth mother?");
+    await I.click(this.fields.britishCitizen);
     //TODO once Abid PR merged then we can un comment as its known issue
-    // I.click(this.fields.citizenOfDifferentCountry);
-    // I.wait('2');
-    // I.fillField(this.fields.addAnotherNationality, 'Canada');
-    // I.wait('2');
-    // I.click('Add');
-    I.wait('2');
-    I.click('Save and continue');
-    I.wait('2');
-    I.waitForText("What is the occupation of the child's birth mother?");
-    I.fillField(this.fields.birthMotherOccupation, 'Software Engineer');
-    I.wait('2');
-    I.click('Save and continue');
-    I.waitForText("Do you have the birth mother's last known address?");
-    I.click(this.fields.birthMotherAddressKnown);
-    I.wait('2');
-    I.click('Save and continue');
-    I.click(this.fields.enterAddressManually);
-    I.wait('2');
-    I.click(this.fields.enterInternationalAddress);
-    I.waitForText("What is the birth mother's last known address?");
-    I.fillField(this.fields.birthMotherAddress1, '90 Riverview Road');
-    I.fillField(this.fields.birthMotherAddressTown, 'Trail');
-    I.fillField(this.fields.birthMotherAddressPostcode, 'BC V1R 7N9');
-    I.fillField(this.fields.birthMotherAddressCountry, 'Canada');
-    I.wait('2');
-    I.click('Save and continue');
+    // await I.click(this.fields.citizenOfDifferentCountry);
+    // await I.wait('2');
+    // await I.fillField(this.fields.addAnotherNationality, 'Canada');
+    // await I.wait('2');
+    // await I.click('Add');
+    await I.wait('2');
+    await I.click('Save and continue');
+    await I.wait('2');
+    await I.waitForText("What is the occupation of the child's birth mother?");
+    await I.fillField(this.fields.birthMotherOccupation, 'Software Engineer');
+    await I.wait('2');
+    await I.click('Save and continue');
+    await I.waitForText("Do you have the birth mother's last known address?");
+    await I.click(this.fields.birthMotherAddressKnown);
+    await I.wait('2');
+    await I.click('Save and continue');
+    await I.click(this.fields.enterAddressManually);
+    await I.wait('2');
+    await I.click(this.fields.enterInternationalAddress);
+    await I.waitForText("What is the birth mother's last known address?");
+    await I.fillField(this.fields.birthMotherAddress1, '90 Riverview Road');
+    await I.fillField(this.fields.birthMotherAddressTown, 'Trail');
+    await I.fillField(this.fields.birthMotherAddressPostcode, 'BC V1R 7N9');
+    await I.fillField(this.fields.birthMotherAddressCountry, 'Canada');
+    await I.wait('2');
+    await I.click('Save and continue');
   },
 };

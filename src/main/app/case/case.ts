@@ -26,6 +26,7 @@ import {
 
 export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {
   applicationType: 'applicationType',
+  otherApplicantRelation: 'otherApplicantRelation',
   dateChildMovedIn: 'dateChildMovedIn',
   applyingWith: 'applyingWith',
   applicant1HelpPayingNeeded: 'applicant1HWFNeedHelp',
@@ -74,6 +75,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   childrenFirstNameAfterAdoption: 'childrenFirstNameAfterAdoption',
   childrenLastNameAfterAdoption: 'childrenLastNameAfterAdoption',
   childrenSexAtBirth: 'childrenSexAtBirth',
+  childrenOtherSexAtBirth: 'childrenOtherSexAtBirth',
   addAnotherPlacementOrder: 'addAnotherPlacementOrder',
   placementOrders: 'placementOrders',
   selectedPlacementOrderId: 'selectedPlacementOrderId',
@@ -161,6 +163,11 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   documentsGenerated: 'documentsGenerated',
   applicationFeeOrderSummary: 'applicationFeeOrderSummary',
   applicant1CannotUpload: 'applicant1CannotUpload',
+
+  findFamilyCourt: 'findFamilyCourt',
+  familyCourtName: 'familyCourtName',
+  familyCourtEmailId: 'familyCourtEmailId',
+  hyphenatedCaseRef: 'hyphenatedCaseRef',
 };
 
 export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data: InputFormat): OutputFormat {
@@ -181,6 +188,7 @@ export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;
 
 export interface Case {
   applyingWith?: ApplyingWith;
+  otherApplicantRelation?: string;
   dateChildMovedIn?: CaseDate;
 
   /***** Applicant1 *****/
@@ -231,6 +239,7 @@ export interface Case {
   childrenFirstNameAfterAdoption?: string;
   childrenLastNameAfterAdoption?: string;
   childrenSexAtBirth?: Gender;
+  childrenOtherSexAtBirth?: string;
   addAnotherPlacementOrder?: YesOrNo;
   placementOrders?: PlacementOrder[];
   selectedPlacementOrderId?: string;
@@ -334,7 +343,12 @@ export interface Case {
   applicant1DocumentsUploaded?: ListValue<Partial<AdoptionDocument> | null>[];
   applicant1UploadedFiles?: UploadedFile[];
   applicant1CannotUpload?: Checkbox;
-  applicant1CannotUploadDocuments?: DocumentType | DocumentType[];
+  applicant1CannotUploadDocuments?: DocumentType[];
+
+  /***** Find court *****/
+  findFamilyCourt?: YesOrNo;
+  familyCourtName?: string;
+  familyCourtEmailId?: string;
 
   applicant1HelpPayingNeeded?: YesOrNo;
   applicant1AlreadyAppliedForHelpPaying?: YesOrNo;
@@ -352,6 +366,7 @@ export interface Case {
   caseReference?: string;
   dateSubmitted?: Date;
   applicationFeeOrderSummary: OrderSummary;
+  hyphenatedCaseRef?: string;
 }
 
 export interface CaseWithId extends Case {

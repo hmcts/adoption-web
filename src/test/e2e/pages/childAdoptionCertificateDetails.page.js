@@ -6,12 +6,12 @@ module.exports = {
     childrenLastNameAfterAdoption: 'input[id$="childrenLastNameAfterAdoption"]',
   },
 
-  childAdoptionCertificateDetailsSection() {
-    I.waitForText("What will the child's full name be after adoption?");
-    I.fillField(this.fields.childrenFirstNameAfterAdoption, 'Joe');
-    I.fillField(this.fields.childrenLastNameAfterAdoption, 'Flient');
-    I.wait('2');
-    I.click('Save and continue');
-    I.wait('2');
+  async childAdoptionCertificateDetailsSection() {
+    await I.waitForText("What will the child's full name be after adoption?");
+    await I.fillField(this.fields.childrenFirstNameAfterAdoption, 'Joe');
+    await I.fillField(this.fields.childrenLastNameAfterAdoption, 'Flient');
+    await I.wait('2');
+    await I.click('Save and continue');
+    await I.wait('2');
   },
 };

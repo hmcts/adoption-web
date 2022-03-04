@@ -7,25 +7,31 @@ import {
 } from '../../../common/components/address-select';
 import { APPLICANT_1_FIND_ADDRESS, APPLICANT_1_MANUAL_ADDRESS } from '../../../urls';
 
-const en = (selectAddressContent, content) => ({
-  section: content.userCase.applyingWith === ApplyingWith.ALONE ? 'Applicant' : 'First applicant',
-  title: "What's your home address?",
-  errors: {
-    applicant1SelectAddress: selectAddressContent.errors.selectAddress,
-  },
-  changePostCodeUrl: APPLICANT_1_FIND_ADDRESS,
-  cantFindAddressUrl: APPLICANT_1_MANUAL_ADDRESS,
-});
+const en = ({ selectAddressContent, userCase }): Record<string, unknown> => {
+  const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant' : 'First applicant';
+  return {
+    section,
+    title: "What's your home address?",
+    errors: {
+      applicant1SelectAddress: selectAddressContent.errors.selectAddress,
+    },
+    changePostCodeUrl: APPLICANT_1_FIND_ADDRESS,
+    cantFindAddressUrl: APPLICANT_1_MANUAL_ADDRESS,
+  };
+};
 
-const cy = (selectAddressContent, content) => ({
-  section: content.userCase.applyingWith === ApplyingWith.ALONE ? 'Applicant (in welsh)' : 'First applicant (in welsh)',
-  title: "What's your home address? (in welsh)",
-  errors: {
-    applicant1SelectAddress: selectAddressContent.errors.selectAddress,
-  },
-  changePostCodeUrl: APPLICANT_1_FIND_ADDRESS,
-  cantFindAddressUrl: APPLICANT_1_MANUAL_ADDRESS,
-});
+const cy = ({ selectAddressContent, userCase }): Record<string, unknown> => {
+  const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant (in Welsh)' : 'First applicant (in Welsh)';
+  return {
+    section,
+    title: "What's your home address? (in Welsh)",
+    errors: {
+      applicant1SelectAddress: selectAddressContent.errors.selectAddress,
+    },
+    changePostCodeUrl: APPLICANT_1_FIND_ADDRESS,
+    cantFindAddressUrl: APPLICANT_1_MANUAL_ADDRESS,
+  };
+};
 
 const selectAddressFormFields = selectAddressForm.fields as FormFields;
 export const form: FormContent = {
@@ -42,7 +48,8 @@ const languages = {
 
 export const generateContent: TranslationFn = content => {
   const selectAddressContent = selectAddressGenerateContent(content);
-  const translations = languages[content.language](selectAddressContent, content);
+  const translations = languages[content.language]({ selectAddressContent, userCase: content.userCase });
+
   return {
     ...selectAddressContent,
     ...translations,
