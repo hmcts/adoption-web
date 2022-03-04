@@ -10,10 +10,9 @@ const enContent = {
   section: 'Review your application',
   title: 'Review your answers',
   change: 'Change',
-  submitApplication: 'Submit your application',
+  submitApplication: 'Check your application',
   checkInfoBeforeSubmit:
-    'You should check that all the information given in your application is correct before you submit. Once submitted, your application will be sent to the court for processing.',
-  continue: 'Continue',
+    'Check all the information you have provided carefully. The next step is to sign a statement of truth declaring that the information provided is correct. Once this is signed and payment has been taken, your application will be submitted to the court.',
   applyingWith: {
     [ApplyingWith.ALONE]: "I'm applying on my own",
     [ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER]: "I'm applying with my spouse or civil partner",
@@ -93,10 +92,9 @@ const cyContent = {
   title: 'Review your answers (in welsh)',
   change: 'Change (in welsh)',
   reason: 'Reason (in welsh)',
-  submitApplication: 'Submit your application (in welsh)',
+  submitApplication: 'Check your application (in welsh)',
   checkInfoBeforeSubmit:
-    'You should check that all the information given in your application is correct before you submit. Once submitted, your application will be sent to the court for processing. (in welsh)',
-  continue: 'Continue (in welsh)',
+    'Check all the information you have provided carefully. The next step is to sign a statement of truth declaring that the information provided is correct. Once this is signed and payment has been taken, your application will be submitted to the court. (in welsh)',
   applyingWith: {
     [ApplyingWith.ALONE]: "I'm applying on my own (in welsh)",
     [ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER]: "I'm applying with my spouse or civil partner (in welsh)",
@@ -199,6 +197,12 @@ describe('check-your-answer > content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
+  });
+
+  test('should contain save-as-draft button', () => {
+    const generatedContent = generateContent(commonContent);
+    const form = generatedContent.form as FormContent;
+    expect((form.saveAsDraft!.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save as draft');
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
