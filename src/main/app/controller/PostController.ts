@@ -58,9 +58,11 @@ export class PostController<T extends AnyObject> {
 
     this.filterErrorsForSaveAsDraft(req);
 
-    if (req.session.errors.length === 0) {
-      req.session.userCase = await this.save(req, formData, this.getEventName(req));
+    if (req.session.errors.length) {
+      return this.redirect(req, res);
     }
+
+    req.session.userCase = await this.save(req, formData, this.getEventName(req));
 
     this.checkReturnUrlAndRedirect(req, res, this.ALLOWED_RETURN_URLS);
   }
@@ -89,17 +91,26 @@ export class PostController<T extends AnyObject> {
   }
 
   protected redirect(req: AppRequest<T>, res: Response, nextUrl?: string): void {
+    console.log('nextUrl', nextUrl);
+    let target;
     if (req.body['saveAsDraft']) {
-      nextUrl = TASK_LIST_URL;
-    } else if (!nextUrl) {
-      nextUrl = req.session.errors?.length ? req.url : getNextStepUrl(req, req.session.userCase);
+      //redirects to task-list page in case of save-as-draft button click
+      req.session.returnUrl = undefined;
+      target = TASK_LIST_URL;
+    } else if (req.session.errors?.length) {
+      //redirects to same page in case of validation errors
+      target = req.url;
+    } else {
+      //redirects to input nextUrl if present otherwise calls getNextStepUrl to get the next step url
+      target = nextUrl || getNextStepUrl(req, req.session.userCase);
     }
+    console.log('target', target);
 
     req.session.save(err => {
       if (err) {
         throw err;
       }
-      res.redirect(nextUrl!);
+      res.redirect(target);
     });
   }
 
