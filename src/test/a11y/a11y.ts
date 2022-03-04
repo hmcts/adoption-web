@@ -38,7 +38,8 @@ function runPally(url: string, browser, page): Promise<Pa11yResult> {
     screenCapture = `${screenshotDir}/${url.replace(/^\/$/, 'home').replace('/', '')}.png`;
   }
 
-  const fullUrl = `${config.TEST_URL}${url}`;
+  const { TEST_URL } = config;
+  const fullUrl = `${TEST_URL.endsWith('/') ? TEST_URL.slice(0, TEST_URL.length - 1) : TEST_URL}${url}`;
   return pa11y(fullUrl, {
     ignore: ignoredA11yErrors,
     browser,
@@ -135,9 +136,7 @@ describe('Accessibility', () => {
     urls.EQUALITY,
     urls.DOCUMENT_MANAGER,
   ];
-  const urlsToTest = Object.values(urls)
-    .filter(url => !IGNORED_URLS.includes(url))
-    .map(item => item.slice(1));
+  const urlsToTest = Object.values(urls).filter(url => !IGNORED_URLS.includes(url));
 
   console.log('urlsToTest ', urlsToTest);
   console.log('IGNORED_URLS ', IGNORED_URLS);
