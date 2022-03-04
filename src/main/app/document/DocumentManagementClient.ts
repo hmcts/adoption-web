@@ -2,7 +2,6 @@ import Axios, { AxiosInstance, AxiosResponse } from 'axios';
 import FormData from 'form-data';
 
 import type { UserDetails } from '../controller/AppRequest';
-// import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
 
 export class DocumentManagementClient {
   client: AxiosInstance;
@@ -34,20 +33,10 @@ export class DocumentManagementClient {
     const response: AxiosResponse<DocumentManagementResponse> = await this.client.post('/documents', formData, {
       headers: { ...formData.getHeaders(), 'user-id': this.user.id },
     });
-    // console.log("///////////////////////////////////////////////////////");
-    // console.log("create headers "+this.user.id + " data: "+JSON.stringify(formData.getHeaders())+" user-id: "+this.user.id);
-    // console.log("///////////////////////////////////////////////////////");
-    // console.log("create formdata "+this.user.id + " data: "+JSON.stringify(formData));
-    // console.log("///////////////////////////////////////////////////////");
-    // console.log("create response "+this.user.id + JSON.stringify(response.data));
-    // console.log("///////////////////////////////////////////////////////");
-    // console.log('Authorization: Bearer ' + this.user.accessToken);
-    // console.log('ServiceAuthorization: '+getServiceAuthToken());
     return response.data?._embedded?.documents || [];
   }
 
   async delete({ url }: { url: string }): Promise<AxiosResponse> {
-    //console.log("delete "+this.user.id + " URL: "+url);
     return this.client.delete(url, { headers: { 'user-id': this.user.id } });
   }
 }

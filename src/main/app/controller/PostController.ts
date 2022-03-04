@@ -2,7 +2,7 @@ import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
 import { getNextStepUrl } from '../../steps';
-import { SAVE_AND_SIGN_OUT } from '../../steps/urls';
+import { CHECK_ANSWERS_URL, SAVE_AND_SIGN_OUT, TASK_LIST_URL } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
 import { CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
@@ -12,6 +12,8 @@ import { AppRequest } from './AppRequest';
 
 @autobind
 export class PostController<T extends AnyObject> {
+  protected ALLOWED_RETURN_URLS: string[] = [CHECK_ANSWERS_URL];
+
   constructor(protected readonly fields: FormFields | FormFieldsFn) {}
 
   /**
@@ -60,7 +62,7 @@ export class PostController<T extends AnyObject> {
       req.session.userCase = await this.save(req, formData, this.getEventName(req));
     }
 
-    this.redirect(req, res);
+    this.checkReturnUrlAndRedirect(req, res, this.ALLOWED_RETURN_URLS);
   }
 
   protected filterErrorsForSaveAsDraft(req: AppRequest<T>): void {
@@ -87,7 +89,9 @@ export class PostController<T extends AnyObject> {
   }
 
   protected redirect(req: AppRequest<T>, res: Response, nextUrl?: string): void {
-    if (!nextUrl) {
+    if (req.body['saveAsDraft']) {
+      nextUrl = TASK_LIST_URL;
+    } else if (!nextUrl) {
       nextUrl = req.session.errors?.length ? req.url : getNextStepUrl(req, req.session.userCase);
     }
 

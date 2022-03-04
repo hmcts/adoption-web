@@ -10,18 +10,18 @@ module.exports = {
     applicant1CannotUploadDocuments2: 'input[id$="applicant1CannotUploadDocuments-2"]',
   },
 
-  uploadDocumentsSection() {
-    I.waitForText("Upload the child's documents", 30);
-    I.attachFile(this.fields.uploadFileButton, config.testPdfFile);
-    I.wait('3');
-    I.waitForElement(this.fields.uploadProgressBar, 30);
-    I.wait('3');
-    I.waitForElement(this.fields.fileUploadedOption, 30);
-    I.click(this.fields.applicant1CannotUpload);
-    I.wait('3');
-    I.click(this.fields.applicant1CannotUploadDocuments);
-    I.click(this.fields.applicant1CannotUploadDocuments2);
-    I.click('Save and continue');
-    I.wait('2');
+  async uploadDocumentsSection() {
+    await I.waitForText("Upload the child's documents", 30);
+    await I.attachFile(this.fields.uploadFileButton, config.testPdfFile);
+    await I.wait('3');
+    await I.waitForElement(this.fields.uploadProgressBar, 30);
+    await I.wait('3');
+    await I.waitForElement(this.fields.fileUploadedOption, 30);
+    await I.click(this.fields.applicant1CannotUpload);
+    await I.wait('3');
+    await I.click(this.fields.applicant1CannotUploadDocuments);
+    await I.click(this.fields.applicant1CannotUploadDocuments2);
+    await I.click('Save and continue');
+    await I.wait('2');
   },
 };

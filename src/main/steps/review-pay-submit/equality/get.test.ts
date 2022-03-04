@@ -17,8 +17,9 @@ describe('PCQGetController', () => {
   const controller = new PCQGetController();
 
   test('Should redirect to PCQ', async () => {
-    mockedConfig.get.mockReturnValueOnce('https://pcq.aat.platform.hmcts.net');
     mockedConfig.get.mockReturnValueOnce('SERVICE_TOKEN_KEY');
+    mockedConfig.get.mockReturnValueOnce('https://pcq.aat.platform.hmcts.net');
+    mockedConfig.get.mockReturnValueOnce('true');
     mockedConfig.get.mockReturnValueOnce('/service-endpoint');
 
     const req = mockRequest();

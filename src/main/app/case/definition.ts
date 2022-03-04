@@ -292,7 +292,7 @@ export const enum Gender {
   MALE = 'male',
   FEMALE = 'female',
   NOT_GIVEN = 'notGiven',
-  INTERSEX = 'intersex',
+  OTHER = 'other',
 }
 
 export interface PlacementOrder {
@@ -305,6 +305,7 @@ export interface PlacementOrder {
 
 export interface CaseData {
   applyingWith: ApplyingWith;
+  otherApplicantRelation: string;
   dateChildMovedIn?: DateAsString;
   applicant1FirstName: string;
   applicant1LastName: string;
@@ -315,8 +316,6 @@ export interface CaseData {
   applicant1Occupation: string;
   applicant1EmailAddress: string;
   applicant1PhoneNumber: string;
-  applicant1Nationality: Nationality[];
-  applicant1AdditionalNationalities: ListValue<AdditionalNationality>[];
   applicant1Address1: string;
   applicant1Address2: string;
   applicant1AddressTown: string;
@@ -334,8 +333,6 @@ export interface CaseData {
   applicant2Occupation: string;
   applicant2EmailAddress: string;
   applicant2PhoneNumber: string;
-  applicant2Nationality: Nationality[];
-  applicant2AdditionalNationalities: ListValue<AdditionalNationality>[];
   applicant2Address1: string;
   applicant2Address2: string;
   applicant2AddressTown: string;
@@ -353,6 +350,7 @@ export interface CaseData {
   childrenFirstNameAfterAdoption: string;
   childrenLastNameAfterAdoption: string;
   childrenSexAtBirth: Gender;
+  childrenOtherSexAtBirth: string;
   placementOrders: ListValue<PlacementOrder>[];
   addAnotherPlacementOrder: YesOrNo;
   selectedPlacementOrderId: string;
@@ -398,7 +396,6 @@ export interface CaseData {
   otherParentLastName: string;
   otherParentStillAlive: string;
   otherParentNotAliveReason: string;
-  otherParentNationality: Nationality[];
   otherParentOccupation: string;
   otherParentAddressKnown: YesOrNo;
   otherParentAddress1: string;
@@ -408,7 +405,6 @@ export interface CaseData {
   otherParentAddressCounty: string;
   otherParentAddressPostCode: string;
   otherParentAddressCountry: string;
-  otherParentOtherNationalities: ListValue<AdditionalNationality>[];
   otherParentNameOnCertificate: string;
   otherParentAddressNotKnownReason: string;
 
@@ -442,6 +438,10 @@ export interface CaseData {
   applicant1DocumentsUploaded: ListValue<AdoptionDocument>[];
   applicant1CannotUploadSupportingDocument: DocumentType[];
   applicant1CannotUpload: string;
+
+  findFamilyCourt: YesOrNo;
+  familyCourtName: string;
+  familyCourtEmailId: string;
 
   applicationType: ApplicationType;
   labelContentApplicant2: string;
@@ -1102,6 +1102,7 @@ export const enum YesNoNotsure {
 }
 
 export const enum SectionStatus {
+  CAN_NOT_START_YET = 'CAN_NOT_START_YET',
   NOT_STARTED = 'NOT_STARTED',
   IN_PROGRESS = 'IN_PROGRESS',
   COMPLETED = 'COMPLETED',

@@ -7,7 +7,7 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 const en = () => ({
   section: SECTION,
   label: 'Is the child married or in a civil partnership?',
-  hint: 'This includes any past marriages or civil partnerships. In the UK a child can get married at 16 with parental permission. In other countries this age may be lower. A child who is married or in a civil partnership cannot be adopted.',
+  hint: 'This includes any past marriages or civil partnerships. In the UK a child can get married at 16 with parental permission. In other countries this age may be lower. A child who is or ever was married or in a civil partnership cannot be adopted.',
   marriedYes: "You can only apply to adopt a child if they've not been married or in a civil partnership.",
   moreInfo: 'More about adoption',
   errors: {
@@ -20,7 +20,7 @@ const en = () => ({
 const cy = () => ({
   section: SECTION_IN_WELSH,
   label: 'Is the child married or in a civil partnership? (in welsh)',
-  hint: 'This includes any past marriages or civil partnerships. In the UK a child can get married at 16 with parental permission. In other countries this age may be lower. A child who is married or in a civil partnership cannot be adopted. (in welsh)',
+  hint: 'This includes any past marriages or civil partnerships. In the UK a child can get married at 16 with parental permission. In other countries this age may be lower. A child who is or ever was married or in a civil partnership cannot be adopted. (in welsh)',
   marriedYes: "You can only apply to adopt a child if they've not been married or in a civil partnership. (in welsh)",
   moreInfo: 'More about adoption (in welsh)',
   errors: {
@@ -44,7 +44,7 @@ export const form: FormContent = {
           label: l => l.yes,
           value: YesOrNo.YES,
           conditionalText: l =>
-            `<p class="govuk-label">${l.marriedYes}</p> <p class ="govuk-label"><a rel="noreferrer noopener" target="_blank" href="https://www.gov.uk/child-adoption">${l.moreInfo}</a></p>`,
+            `<p class="govuk-label">${l.marriedYes}</p> <p class="govuk-label"><a rel="noreferrer noopener" href="https://www.gov.uk/child-adoption">${l.moreInfo}</a></p>`,
         },
         { label: l => l.no, value: YesOrNo.NO },
       ],

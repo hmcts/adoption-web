@@ -4,6 +4,7 @@ import { ApplyingWith, Gender, Nationality, State, YesNoNotsure, YesOrNo } from 
 import {
   getAdoptionAgencyUrl,
   getAdoptionCertificateDetailsStatus,
+  getApplyingWithStatus,
   getBirthFatherDetailsStatus,
   getBirthMotherDetailsStatus,
   getChildrenBirthCertificateStatus,
@@ -13,8 +14,6 @@ import {
   getOtherParentStatus,
   getPersonalDetailsStatus,
   getSiblingStatus,
-  isApplyingWithComplete,
-  // isApplyingWithComplete,
 } from './utils';
 const userCase: CaseWithId = {
   id: '123',
@@ -30,18 +29,33 @@ const IN_PROGRESS = 'IN_PROGRESS';
 const COMPLETED = 'COMPLETED';
 
 describe('utils', () => {
-  describe('isApplyingWithComplete()', () => {
+  describe('getApplyingWithStatus()', () => {
     test('Should return false if applyingWith is not present', async () => {
-      const isValid = isApplyingWithComplete(userCase);
+      const isValid = getApplyingWithStatus(userCase);
 
-      expect(isValid).toStrictEqual(false);
+      expect(isValid).toStrictEqual(NOT_STARTED);
     });
 
     test('Should return true if applyingWith is present', async () => {
       userCase.applyingWith = ApplyingWith.ALONE;
-      const isValid = isApplyingWithComplete(userCase);
+      const isValid = getApplyingWithStatus(userCase);
 
-      expect(isValid).toStrictEqual(true);
+      expect(isValid).toStrictEqual(COMPLETED);
+    });
+
+    test('Should return true if applyingWith:WITH_SPOUSE_OR_CIVIL_PARTNER is present', async () => {
+      userCase.applyingWith = ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER;
+      const isValid = getApplyingWithStatus(userCase);
+
+      expect(isValid).toStrictEqual(COMPLETED);
+    });
+
+    test('Should return true if applyingWith:WITH_SOME_ONE_ELSE is present', async () => {
+      userCase.applyingWith = ApplyingWith.WITH_SOME_ONE_ELSE;
+      userCase.otherApplicantRelation = 'a b c';
+      const isValid = getApplyingWithStatus(userCase);
+
+      expect(isValid).toStrictEqual(COMPLETED);
     });
   });
 
@@ -54,8 +68,6 @@ describe('utils', () => {
           applicant1HasOtherNames: undefined,
           applicant1AdditionalNames: undefined,
           applicant1DateOfBirth: undefined,
-          applicant1Nationality: undefined,
-          applicant1AdditionalNationalities: undefined,
           applicant1Occupation: undefined,
         },
         userType: 'applicant1',
@@ -68,8 +80,6 @@ describe('utils', () => {
           applicant1HasOtherNames: YesOrNo.NO,
           applicant1AdditionalNames: undefined,
           applicant1DateOfBirth: { day: '1', month: '1', year: '2021' },
-          applicant1Nationality: [Nationality.BRITHISH],
-          applicant1AdditionalNationalities: undefined,
           applicant1Occupation: undefined,
         },
         userType: 'applicant1',
@@ -84,8 +94,6 @@ describe('utils', () => {
             { firstNames: 'MOCK_ADDITIONAL_FIRST_NAME', lastNames: 'MOCK_ADDITIONAL_FIRST_NAME' },
           ],
           applicant1DateOfBirth: { day: '1', month: '1', year: '2021' },
-          applicant1Nationality: [Nationality.OTHER],
-          applicant1AdditionalNationalities: ['MOCK_COUNTRY'],
           applicant1Occupation: 'MOCK_OCCUPATION',
         },
         userType: 'applicant1',
@@ -269,7 +277,7 @@ describe('utils', () => {
           childrenFirstName: 'MOCK_FIRST_NAME',
           childrenLastName: 'MOCK_LAST_NAME',
           childrenDateOfBirth: { day: '1', month: '1', year: '2021' },
-          childrenSexAtBirth: undefined,
+          childrenSexAtBirth: Gender.OTHER,
           childrenNationality: undefined,
           childrenAdditionalNationalities: undefined,
         },
@@ -291,7 +299,7 @@ describe('utils', () => {
           childrenFirstName: 'MOCK_FIRST_NAME',
           childrenLastName: 'MOCK_LAST_NAME',
           childrenDateOfBirth: { day: '1', month: '1', year: '2021' },
-          childrenSexAtBirth: Gender.MALE,
+          childrenSexAtBirth: Gender.FEMALE,
           childrenNationality: [Nationality.OTHER],
           childrenAdditionalNationalities: undefined,
         },
@@ -302,7 +310,8 @@ describe('utils', () => {
           childrenFirstName: 'MOCK_FIRST_NAME',
           childrenLastName: 'MOCK_LAST_NAME',
           childrenDateOfBirth: { day: '1', month: '1', year: '2021' },
-          childrenSexAtBirth: Gender.MALE,
+          childrenSexAtBirth: Gender.OTHER,
+          childrenOtherSexAtBirth: 'MOCK_OTHER_GENDER',
           childrenNationality: [Nationality.OTHER],
           childrenAdditionalNationalities: ['MOCK_COUNTRY'],
         },
@@ -410,7 +419,7 @@ describe('utils', () => {
           birthFatherOccupation: 'Primary school teacher',
           birthFatherAddressKnown: YesOrNo.NO,
         },
-        expected: COMPLETED,
+        expected: IN_PROGRESS,
       },
       {
         data: {
@@ -481,7 +490,7 @@ describe('utils', () => {
           otherParentAddressKnown: YesOrNo.NO,
         },
         userType: 'otherParent',
-        expected: 'COMPLETED',
+        expected: 'IN_PROGRESS',
       },
       {
         data: {
@@ -604,7 +613,7 @@ describe('utils', () => {
           birthMotherAddressKnown: YesOrNo.NO,
         },
         userType: 'birthMother',
-        expected: 'COMPLETED',
+        expected: 'IN_PROGRESS',
       },
       {
         data: {

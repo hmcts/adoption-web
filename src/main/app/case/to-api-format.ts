@@ -49,14 +49,14 @@ const fields: ToApiConverters = {
           }))
         : [],
   }),
-  applicant1AdditionalNationalities: data => ({
-    applicant1AdditionalNationalities: (data.applicant1AdditionalNationalities || []).map(item => ({
+  birthMotherAdditionalNationalities: data => ({
+    birthMotherOtherNationalities: (data.birthMotherAdditionalNationalities || []).map(item => ({
       id: generateUuid(),
       value: { country: `${item}` },
     })),
   }),
-  applicant2AdditionalNationalities: data => ({
-    applicant2AdditionalNationalities: (data.applicant2AdditionalNationalities || []).map(item => ({
+  birthFatherAdditionalNationalities: data => ({
+    birthFatherOtherNationalities: (data.birthFatherAdditionalNationalities || []).map(item => ({
       id: generateUuid(),
       value: { country: `${item}` },
     })),
@@ -127,7 +127,6 @@ const fields: ToApiConverters = {
       : {}),
   }),
   applicant1CannotUpload: data => {
-    console.log('to data.applicant1CannotUpload', data.applicant1CannotUpload);
     return {
       applicant1CannotUpload: checkboxConverter(data.applicant1CannotUpload),
     };

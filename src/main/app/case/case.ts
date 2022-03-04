@@ -26,6 +26,7 @@ import {
 
 export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {
   applicationType: 'applicationType',
+  otherApplicantRelation: 'otherApplicantRelation',
   dateChildMovedIn: 'dateChildMovedIn',
   applyingWith: 'applyingWith',
   applicant1HelpPayingNeeded: 'applicant1HWFNeedHelp',
@@ -41,8 +42,6 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant1Occupation: 'applicant1Occupation',
   applicant1EmailAddress: 'applicant1EmailAddress',
   applicant1PhoneNumber: 'applicant1PhoneNumber',
-  applicant1Nationality: 'applicant1Nationality',
-  applicant1AdditionalNationalities: 'applicant1AdditionalNationalities',
   applicant1Address1: 'applicant1Address1',
   applicant1Address2: 'applicant1Address2',
   applicant1AddressTown: 'applicant1AddressTown',
@@ -59,8 +58,6 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant2Occupation: 'applicant2Occupation',
   applicant2EmailAddress: 'applicant2EmailAddress',
   applicant2PhoneNumber: 'applicant2PhoneNumber',
-  applicant2Nationality: 'applicant2Nationality',
-  applicant2AdditionalNationalities: 'applicant2AdditionalNationalities',
   applicant2Address1: 'applicant2Address1',
   applicant2Address2: 'applicant2Address2',
   applicant2AddressTown: 'applicant2AddressTown',
@@ -78,6 +75,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   childrenFirstNameAfterAdoption: 'childrenFirstNameAfterAdoption',
   childrenLastNameAfterAdoption: 'childrenLastNameAfterAdoption',
   childrenSexAtBirth: 'childrenSexAtBirth',
+  childrenOtherSexAtBirth: 'childrenOtherSexAtBirth',
   addAnotherPlacementOrder: 'addAnotherPlacementOrder',
   placementOrders: 'placementOrders',
   selectedPlacementOrderId: 'selectedPlacementOrderId',
@@ -165,6 +163,11 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   documentsGenerated: 'documentsGenerated',
   applicationFeeOrderSummary: 'applicationFeeOrderSummary',
   applicant1CannotUpload: 'applicant1CannotUpload',
+
+  findFamilyCourt: 'findFamilyCourt',
+  familyCourtName: 'familyCourtName',
+  familyCourtEmailId: 'familyCourtEmailId',
+  hyphenatedCaseRef: 'hyphenatedCaseRef',
 };
 
 export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data: InputFormat): OutputFormat {
@@ -185,6 +188,7 @@ export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;
 
 export interface Case {
   applyingWith?: ApplyingWith;
+  otherApplicantRelation?: string;
   dateChildMovedIn?: CaseDate;
 
   /***** Applicant1 *****/
@@ -197,8 +201,6 @@ export interface Case {
   applicant1PhoneNumber?: string;
   applicant1DateOfBirth?: CaseDate;
   applicant1Occupation?: string;
-  applicant1Nationality?: Nationality[];
-  applicant1AdditionalNationalities?: string[];
   applicant1SelectAddress?: string;
   applicant1Address1?: string;
   applicant1Address2?: string;
@@ -218,8 +220,6 @@ export interface Case {
   applicant2Occupation?: string;
   applicant2EmailAddress?: string;
   applicant2PhoneNumber?: string;
-  applicant2Nationality?: Nationality[];
-  applicant2AdditionalNationalities?: string[];
   applicant2AddressSameAsApplicant1?: YesOrNo;
   applicant2SelectAddress?: string;
   applicant2Address1?: string;
@@ -239,6 +239,7 @@ export interface Case {
   childrenFirstNameAfterAdoption?: string;
   childrenLastNameAfterAdoption?: string;
   childrenSexAtBirth?: Gender;
+  childrenOtherSexAtBirth?: string;
   addAnotherPlacementOrder?: YesOrNo;
   placementOrders?: PlacementOrder[];
   selectedPlacementOrderId?: string;
@@ -342,7 +343,12 @@ export interface Case {
   applicant1DocumentsUploaded?: ListValue<Partial<AdoptionDocument> | null>[];
   applicant1UploadedFiles?: UploadedFile[];
   applicant1CannotUpload?: Checkbox;
-  applicant1CannotUploadDocuments?: DocumentType | DocumentType[];
+  applicant1CannotUploadDocuments?: DocumentType[];
+
+  /***** Find court *****/
+  findFamilyCourt?: YesOrNo;
+  familyCourtName?: string;
+  familyCourtEmailId?: string;
 
   applicant1HelpPayingNeeded?: YesOrNo;
   applicant1AlreadyAppliedForHelpPaying?: YesOrNo;
@@ -360,6 +366,7 @@ export interface Case {
   caseReference?: string;
   dateSubmitted?: Date;
   applicationFeeOrderSummary: OrderSummary;
+  hyphenatedCaseRef?: string;
 }
 
 export interface CaseWithId extends Case {
