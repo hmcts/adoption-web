@@ -292,7 +292,7 @@ export const enum Gender {
   MALE = 'male',
   FEMALE = 'female',
   NOT_GIVEN = 'notGiven',
-  INTERSEX = 'intersex',
+  OTHER = 'other',
 }
 
 export interface PlacementOrder {
@@ -350,6 +350,7 @@ export interface CaseData {
   childrenFirstNameAfterAdoption: string;
   childrenLastNameAfterAdoption: string;
   childrenSexAtBirth: Gender;
+  childrenOtherSexAtBirth: string;
   placementOrders: ListValue<PlacementOrder>[];
   addAnotherPlacementOrder: YesOrNo;
   selectedPlacementOrderId: string;
@@ -437,6 +438,10 @@ export interface CaseData {
   applicant1DocumentsUploaded: ListValue<AdoptionDocument>[];
   applicant1CannotUploadSupportingDocument: DocumentType[];
   applicant1CannotUpload: string;
+
+  findFamilyCourt: YesOrNo;
+  familyCourtName: string;
+  familyCourtEmailId: string;
 
   applicationType: ApplicationType;
   labelContentApplicant2: string;

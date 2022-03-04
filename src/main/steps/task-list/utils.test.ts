@@ -277,7 +277,7 @@ describe('utils', () => {
           childrenFirstName: 'MOCK_FIRST_NAME',
           childrenLastName: 'MOCK_LAST_NAME',
           childrenDateOfBirth: { day: '1', month: '1', year: '2021' },
-          childrenSexAtBirth: undefined,
+          childrenSexAtBirth: Gender.OTHER,
           childrenNationality: undefined,
           childrenAdditionalNationalities: undefined,
         },
@@ -299,7 +299,7 @@ describe('utils', () => {
           childrenFirstName: 'MOCK_FIRST_NAME',
           childrenLastName: 'MOCK_LAST_NAME',
           childrenDateOfBirth: { day: '1', month: '1', year: '2021' },
-          childrenSexAtBirth: Gender.MALE,
+          childrenSexAtBirth: Gender.FEMALE,
           childrenNationality: [Nationality.OTHER],
           childrenAdditionalNationalities: undefined,
         },
@@ -310,7 +310,8 @@ describe('utils', () => {
           childrenFirstName: 'MOCK_FIRST_NAME',
           childrenLastName: 'MOCK_LAST_NAME',
           childrenDateOfBirth: { day: '1', month: '1', year: '2021' },
-          childrenSexAtBirth: Gender.MALE,
+          childrenSexAtBirth: Gender.OTHER,
+          childrenOtherSexAtBirth: 'MOCK_OTHER_GENDER',
           childrenNationality: [Nationality.OTHER],
           childrenAdditionalNationalities: ['MOCK_COUNTRY'],
         },
@@ -418,7 +419,7 @@ describe('utils', () => {
           birthFatherOccupation: 'Primary school teacher',
           birthFatherAddressKnown: YesOrNo.NO,
         },
-        expected: COMPLETED,
+        expected: IN_PROGRESS,
       },
       {
         data: {
@@ -489,7 +490,7 @@ describe('utils', () => {
           otherParentAddressKnown: YesOrNo.NO,
         },
         userType: 'otherParent',
-        expected: 'COMPLETED',
+        expected: 'IN_PROGRESS',
       },
       {
         data: {
@@ -612,7 +613,7 @@ describe('utils', () => {
           birthMotherAddressKnown: YesOrNo.NO,
         },
         userType: 'birthMother',
-        expected: 'COMPLETED',
+        expected: 'IN_PROGRESS',
       },
       {
         data: {

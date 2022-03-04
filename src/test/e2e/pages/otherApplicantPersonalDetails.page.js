@@ -14,26 +14,26 @@ module.exports = {
     applicant2Occupation: 'input[id$="applicant2Occupation"]',
   },
 
-  otherApplicantPersonalDetailsSection() {
-    I.fillField(this.fields.applicant2FirstNames, 'George');
-    I.fillField(this.fields.applicant2LastNames, 'Thomas');
-    I.click('Save and continue');
-    I.wait('2');
-    I.waitForText('Have you ever legally been known by any other names?');
-    I.click(this.fields.applicant2HasOtherNames);
-    I.fillField(this.fields.applicant2OtherFirstNames, 'David');
-    I.fillField(this.fields.applicant2OtherLastNames, 'William');
-    I.click('Add');
-    I.wait('2');
-    I.click('Save and continue');
-    I.waitForText("What's your date of birth?");
-    I.fillField(this.fields.dateOfBirthDay, '26');
-    I.fillField(this.fields.dateOfBirthMonth, '06');
-    I.wait('2');
-    I.fillField(this.fields.dateOfBirthYear, '1980');
-    I.click('Save and continue');
-    I.fillField(this.fields.applicant2Occupation, 'Teacher');
-    I.click('Save and continue');
-    I.wait('2');
+  async otherApplicantPersonalDetailsSection() {
+    await I.fillField(this.fields.applicant2FirstNames, 'George');
+    await I.fillField(this.fields.applicant2LastNames, 'Thomas');
+    await I.click('Save and continue');
+    await I.wait('2');
+    await I.waitForText('Have you ever legally been known by any other names?');
+    await I.click(this.fields.applicant2HasOtherNames);
+    await I.fillField(this.fields.applicant2OtherFirstNames, 'David');
+    await I.fillField(this.fields.applicant2OtherLastNames, 'William');
+    await I.click('Add');
+    await I.wait('2');
+    await I.click('Save and continue');
+    await I.waitForText("What's your date of birth?");
+    await I.fillField(this.fields.dateOfBirthDay, '26');
+    await I.fillField(this.fields.dateOfBirthMonth, '06');
+    await I.wait('2');
+    await I.fillField(this.fields.dateOfBirthYear, '1980');
+    await I.click('Save and continue');
+    await I.fillField(this.fields.applicant2Occupation, 'Teacher');
+    await I.click('Save and continue');
+    await I.wait('2');
   },
 };

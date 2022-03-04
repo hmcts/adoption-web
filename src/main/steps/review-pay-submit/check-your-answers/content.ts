@@ -35,7 +35,7 @@ export const enContent = {
   gender: {
     [Gender.MALE]: 'Male',
     [Gender.FEMALE]: 'Female',
-    [Gender.INTERSEX]: 'Other',
+    [Gender.OTHER]: 'Other',
   },
   yesNoNotsure: {
     [YesNoNotsure.YES]: 'Yes',
@@ -123,7 +123,7 @@ const en = (content: CommonContent): Record<string, unknown> => {
       otherParentSummaryList(enContent, userCase),
       childrenPlacementOrderSummaryList(enContent, userCase),
       siblingCourtOrderSummaryList(enContent, userCase),
-      familyCourtSummaryList(enContent),
+      familyCourtSummaryList(enContent, userCase),
       uploadedDocumentSummaryList(enContent, userCase),
     ],
   };
@@ -146,7 +146,7 @@ export const cyContent = {
   gender: {
     [Gender.MALE]: 'Male (in welsh)',
     [Gender.FEMALE]: 'Female (in welsh)',
-    [Gender.INTERSEX]: 'Other (in welsh)',
+    [Gender.OTHER]: 'Other (in welsh)',
   },
   yesNoNotsure: {
     [YesNoNotsure.YES]: 'Yes (in welsh)',
@@ -235,7 +235,7 @@ const cy = (content: CommonContent): Record<string, unknown> => {
       otherParentSummaryList(cyContent, userCase),
       childrenPlacementOrderSummaryList(cyContent, userCase),
       siblingCourtOrderSummaryList(cyContent, userCase),
-      familyCourtSummaryList(cyContent),
+      familyCourtSummaryList(cyContent, userCase),
       uploadedDocumentSummaryList(cyContent, userCase),
     ],
   };

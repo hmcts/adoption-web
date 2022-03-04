@@ -6,7 +6,7 @@ const getAddressItems = addresses => addresses.map((item, index) => ({ text: ite
 
 const en = content => {
   const addresses = content.addresses || [];
-  const items = [
+  const options = [
     {
       attributes: { id: 'totalAddressesFound' },
       value: -1,
@@ -15,7 +15,7 @@ const en = content => {
     },
   ];
 
-  items.push(...getAddressItems(addresses));
+  options.push(...getAddressItems(addresses));
 
   return {
     line1:
@@ -28,7 +28,7 @@ const en = content => {
         notSelected: 'Select an address',
       },
     },
-    items,
+    options,
     changePostCodeUrl: '#',
     cantFindAddressUrl: '#',
   };
@@ -36,7 +36,7 @@ const en = content => {
 
 const cy = content => {
   const addresses = content.addresses || [];
-  const items = [
+  const options = [
     {
       attributes: { id: 'totalAddressesFound' },
       value: -1,
@@ -45,7 +45,7 @@ const cy = content => {
     },
   ];
 
-  items.push(...getAddressItems(addresses));
+  options.push(...getAddressItems(addresses));
 
   return {
     line1:
@@ -58,7 +58,7 @@ const cy = content => {
         notSelected: 'Select an address (in welsh)',
       },
     },
-    items,
+    options,
     changePostCodeUrl: '#',
     cantFindAddressUrl: '#',
   };
@@ -71,6 +71,7 @@ export const form: FormContent = {
       label: l => l.selectAddress,
       labelSize: 'm',
       validator: isAddressSelected,
+      options: l => l.options,
     },
   },
   submit: {

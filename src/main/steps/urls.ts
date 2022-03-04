@@ -51,6 +51,7 @@ export const CHILDREN_DATE_OF_BIRTH: PageLink = `${CHILDREN}/date-of-birth`;
 export const CHILDREN_SEX_AT_BIRTH: PageLink = `${CHILDREN}/sex-at-birth`;
 export const CHILDREN_NATIONALITY: PageLink = `${CHILDREN}/nationality`;
 export const CHILDREN_FULL_NAME_AFTER_ADOPTION: PageLink = `${CHILDREN}/full-name-after-adoption`;
+export const CHILDREN_FIND_FAMILY_COURT: PageLink = `${CHILDREN}/find-family-court`;
 
 export const SIBLING: PageLink = '/sibling';
 export const SIBLING_EXISTS: PageLink = `${SIBLING}/exists`;

@@ -50,6 +50,7 @@ export class Nunjucks {
         },
         divider: this.env.globals.getContent.call(this, i.divider),
         open: i.open,
+        options: this.env.globals.getContent.call(this, i.options),
         conditional: (() => {
           if (i.warning) {
             return {

@@ -13,20 +13,20 @@ module.exports = {
     postcode: 'RG4 7AA',
   },
 
-  primaryApplicantContactDetailsSection() {
-    I.waitForText("What's your home address?");
-    I.fillField(this.fields.postcodeLookup, this.fields.postcode);
-    I.click(this.fields.findAddressButton);
-    I.waitForText('addresses found');
-    I.waitForElement(locate(this.fields.addressList).find('option').withText(this.fields.lookupOption));
-    I.selectOption(this.fields.addressList, this.fields.lookupOption);
-    I.click('Save and continue');
-    I.wait('2');
-    I.fillField(this.fields.applicant1EmailAddress, 'test@test.com');
-    I.fillField(this.fields.applicant1PhoneNumber, '09876543210');
-    I.wait('2');
-    I.click(this.fields.applicant1ContactDetailsConsent);
-    I.click('Save and continue');
-    I.wait('3');
+  async primaryApplicantContactDetailsSection() {
+    await I.waitForText("What's your home address?");
+    await I.fillField(this.fields.postcodeLookup, this.fields.postcode);
+    await I.click(this.fields.findAddressButton);
+    await I.waitForText('addresses found');
+    await I.waitForElement(locate(this.fields.addressList).find('option').withText(this.fields.lookupOption));
+    await I.selectOption(this.fields.addressList, this.fields.lookupOption);
+    await I.click('Save and continue');
+    await I.wait('2');
+    await I.fillField(this.fields.applicant1EmailAddress, 'test@test.com');
+    await I.fillField(this.fields.applicant1PhoneNumber, '09876543210');
+    await I.wait('2');
+    await I.click(this.fields.applicant1ContactDetailsConsent);
+    await I.click('Save and continue');
+    await I.wait('4');
   },
 };

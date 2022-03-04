@@ -75,6 +75,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   childrenFirstNameAfterAdoption: 'childrenFirstNameAfterAdoption',
   childrenLastNameAfterAdoption: 'childrenLastNameAfterAdoption',
   childrenSexAtBirth: 'childrenSexAtBirth',
+  childrenOtherSexAtBirth: 'childrenOtherSexAtBirth',
   addAnotherPlacementOrder: 'addAnotherPlacementOrder',
   placementOrders: 'placementOrders',
   selectedPlacementOrderId: 'selectedPlacementOrderId',
@@ -162,6 +163,11 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   documentsGenerated: 'documentsGenerated',
   applicationFeeOrderSummary: 'applicationFeeOrderSummary',
   applicant1CannotUpload: 'applicant1CannotUpload',
+
+  findFamilyCourt: 'findFamilyCourt',
+  familyCourtName: 'familyCourtName',
+  familyCourtEmailId: 'familyCourtEmailId',
+  hyphenatedCaseRef: 'hyphenatedCaseRef',
 };
 
 export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data: InputFormat): OutputFormat {
@@ -233,6 +239,7 @@ export interface Case {
   childrenFirstNameAfterAdoption?: string;
   childrenLastNameAfterAdoption?: string;
   childrenSexAtBirth?: Gender;
+  childrenOtherSexAtBirth?: string;
   addAnotherPlacementOrder?: YesOrNo;
   placementOrders?: PlacementOrder[];
   selectedPlacementOrderId?: string;
@@ -338,6 +345,11 @@ export interface Case {
   applicant1CannotUpload?: Checkbox;
   applicant1CannotUploadDocuments?: DocumentType[];
 
+  /***** Find court *****/
+  findFamilyCourt?: YesOrNo;
+  familyCourtName?: string;
+  familyCourtEmailId?: string;
+
   applicant1HelpPayingNeeded?: YesOrNo;
   applicant1AlreadyAppliedForHelpPaying?: YesOrNo;
   applicant1HelpWithFeesRefNo?: string;
@@ -354,6 +366,7 @@ export interface Case {
   caseReference?: string;
   dateSubmitted?: Date;
   applicationFeeOrderSummary: OrderSummary;
+  hyphenatedCaseRef?: string;
 }
 
 export interface CaseWithId extends Case {

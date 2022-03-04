@@ -21,10 +21,15 @@ Scenario(
     reviewPayAndSubmitPage,
     uploadDocumentsDetailsPage,
     dateChildMovedinDetailsPage,
+    chooseYourFamilyCourtDetailsPage,
   }) => {
     await loginPage.createCitizenUserAndSignIn();
     await landingPage.seeTheLandingPage();
     await landingPage.selectApplyWithMySpouseSection();
+
+    await taskListPage.selectDateChildMovedInDetails();
+    await dateChildMovedinDetailsPage.dateChildMovedInSection('10', '10', '2020');
+    await taskListPage.verifyDateChildMovedInStatus();
 
     await taskListPage.selectPrimaryApplicantContactDetails();
     await primaryApplicantDetailsPage.primaryApplicantContactDetailsSection();
@@ -74,13 +79,13 @@ Scenario(
     await childSiblingDetailsPage.childDetailsSiblingSection();
     await taskListPage.verifySiblingDetailsStatus();
 
+    await taskListPage.selectChooseYourFamilyCourtDetails();
+    await chooseYourFamilyCourtDetailsPage.childDetailsFindFamilyCourtSection();
+    await taskListPage.verifyChooseYourFamilyCourtStatus();
+
     await taskListPage.selectUploadDocumentsDetails();
     await uploadDocumentsDetailsPage.uploadDocumentsSection();
     await taskListPage.verifyUploadDocumentsStatus();
-
-    await taskListPage.selectDateChildMovedInDetails();
-    await dateChildMovedinDetailsPage.dateChildMovedInSection('10', '10', '2020');
-    await taskListPage.verifyDateChildMovedInStatus();
 
     await taskListPage.selectReviewPayAndSubmitDetails();
     await reviewPayAndSubmitPage.selectNoPCQOption();
