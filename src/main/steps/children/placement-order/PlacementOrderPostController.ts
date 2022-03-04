@@ -23,8 +23,7 @@ export default class PlacementOrderPostController extends PostController<AnyObje
     this.filterErrorsForSaveAsDraft(req);
 
     if (req.session.errors.length > 0) {
-      this.redirect(req, res);
-      return;
+      return this.redirect(req, res);
     }
 
     req.session.userCase = await this.save(
