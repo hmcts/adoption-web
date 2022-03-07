@@ -121,14 +121,13 @@ describe('occupation content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const { type, label, labelSize, section, values } = fields.applicant1IBelieveApplicationIsTrue as FormOptions;
+    const { type, labelHidden, section, values } = fields.applicant1IBelieveApplicationIsTrue as FormOptions;
     const applicant1IBelieveApplicationIsTrue = fields.applicant1IBelieveApplicationIsTrue;
 
     expect(applicant1IBelieveApplicationIsTrue.type).toBe('checkboxes');
     expect(type).toBe('checkboxes');
-    expect((label as Function)(generatedContent)).toBe(undefined);
+    expect(labelHidden).toBe(true);
     expect((section as Function)(generatedContent)).toBe(enContent.section);
-    expect(labelSize).toBe('l');
     expect(values).toHaveLength(1);
     expect((values[0].label as Function)(generatedContent)).toBe(enContent.applicant1IBelieveApplicationIsTrue2);
     expect(values[0].value).toBe('checked');
@@ -141,14 +140,13 @@ describe('occupation content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const { type, label, labelSize, section, values } = fields.applicant2IBelieveApplicationIsTrue as FormOptions;
+    const { type, labelHidden, section, values } = fields.applicant2IBelieveApplicationIsTrue as FormOptions;
     const applicant2IBelieveApplicationIsTrue = fields.applicant2IBelieveApplicationIsTrue;
 
     expect(applicant2IBelieveApplicationIsTrue.type).toBe('checkboxes');
     expect(type).toBe('checkboxes');
-    expect((label as Function)(generatedContent)).toBe(undefined);
+    expect(labelHidden).toBe(true);
     expect((section as Function)(generatedContent)).toBe(enContent.section);
-    expect(labelSize).toBe('l');
     expect(values).toHaveLength(1);
     expect((values[0].label as Function)(generatedContent)).toBe(enContent.applicant2IBelieveApplicationIsTrue);
     expect(values[0].value).toBe('checked');

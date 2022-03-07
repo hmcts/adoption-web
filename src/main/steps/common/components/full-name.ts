@@ -19,7 +19,7 @@ export const cy = (): Record<string, unknown> => ({
 export const form: FormContent = {
   fields: {
     firstNames: {
-      type: 'input',
+      type: 'text',
       classes: 'govuk-label',
       label: l => l.firstNames,
       hint: l => l.firstNamesHint,
@@ -27,7 +27,7 @@ export const form: FormContent = {
       validator: isFieldFilledIn,
     },
     lastNames: {
-      type: 'input',
+      type: 'text',
       classes: 'govuk-label',
       label: l => l.lastNames,
       hint: l => l.lastNamesHint,

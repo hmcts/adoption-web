@@ -63,7 +63,7 @@ export const cy = ({ userCase }: CommonContent): Record<string, unknown> => {
 export const form: FormContent = {
   fields: {
     applicant1Occupation: {
-      type: 'input',
+      type: 'text',
       label: l => l.label,
       labelSize: 'l',
       hint: l => l.hint,
