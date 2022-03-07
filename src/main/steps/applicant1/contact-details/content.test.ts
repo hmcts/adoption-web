@@ -87,7 +87,7 @@ describe('contact-details content', () => {
     expect(applicant1ContactDetailsConsentField.type).toBe('radios');
     expect(applicant1ContactDetailsConsentField.classes).toBe('govuk-radios');
     const applicant1ContactDetailsConsentOptions = fields.applicant1ContactDetailsConsent as FormOptions;
-    expect(((fields.applicant1ContactDetailsConsent as FormInput).hint as Function)(generatedContent)).toBe(
+    expect(((fields.applicant1ContactDetailsConsent as FormInput).label as Function)(generatedContent)).toBe(
       'The court may want to use your email to serve you court orders. Are you happy to be served court orders by email?'
     );
     expect((applicant1ContactDetailsConsentOptions.values[0].label as Function)({ yes: 'Yes' })).toBe(YesOrNo.YES);

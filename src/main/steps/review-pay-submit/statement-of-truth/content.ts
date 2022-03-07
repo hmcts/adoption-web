@@ -73,8 +73,7 @@ export const form: FormContent = {
         ? {
             applicant1IBelieveApplicationIsTrue: {
               type: 'checkboxes',
-              label: l => l.label,
-              labelSize: 'l',
+              labelHidden: true,
               section: l => l.section,
               values: [
                 {
@@ -96,9 +95,8 @@ export const form: FormContent = {
         : {
             applicant1IBelieveApplicationIsTrue: {
               type: 'checkboxes',
-              label: l => l.label,
-              labelSize: 'l',
               section: l => l.section,
+              labelHidden: true,
               values: [
                 {
                   name: 'applicant1IBelieveApplicationIsTrue',
@@ -110,9 +108,8 @@ export const form: FormContent = {
             },
             applicant2IBelieveApplicationIsTrue: {
               type: 'checkboxes',
-              label: l => l.label,
-              labelSize: 'l',
               section: l => l.section,
+              labelHidden: true,
               values: [
                 {
                   name: 'applicant2IBelieveApplicationIsTrue',

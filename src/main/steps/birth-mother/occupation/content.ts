@@ -27,7 +27,7 @@ export const cy = (): Record<string, unknown> => ({
 export const form: FormContent = {
   fields: {
     birthMotherOccupation: {
-      type: 'input',
+      type: 'text',
       label: l => l.label,
       labelSize: 'l',
       hint: l => l.hint,
