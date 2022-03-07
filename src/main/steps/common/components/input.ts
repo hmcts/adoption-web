@@ -17,7 +17,7 @@ export class Input extends Component {
 
 export const generateInputField = (values: InputValues): Record<string, FormField> => ({
   [values.fieldName]: {
-    type: 'input',
+    type: 'text',
     label: l => l[`${values.label}`],
     hint: l => l[`${values.hint}`],
     labelSize: values.labelSize,

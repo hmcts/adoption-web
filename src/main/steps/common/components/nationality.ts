@@ -108,7 +108,7 @@ export const nationalityFields = (userCase: Partial<Case>, fieldPrefix: FieldPre
                   label: l => l.another,
                   subFields: {
                     addAnotherNationality: {
-                      type: 'input',
+                      type: 'text',
                       classes: 'govuk-!-width-two-thirds',
                       label: l => l.countryName,
                       labelSize: null,
@@ -124,7 +124,7 @@ export const nationalityFields = (userCase: Partial<Case>, fieldPrefix: FieldPre
               }
             : {
                 addAnotherNationality: {
-                  type: 'input',
+                  type: 'text',
                   classes: 'govuk-!-width-two-thirds',
                   label: l => l.countryName,
                   labelSize: null,

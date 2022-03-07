@@ -102,14 +102,14 @@ export const otherNamesFields = (userCase: Partial<Case>, fieldPrefix: FieldPref
                       type: 'label',
                     },
                     [`${fieldPrefix}OtherFirstNames`]: {
-                      type: 'input',
+                      type: 'text',
                       classes: 'govuk-!-width-two-thirds',
                       label: l => l[`${fieldPrefix}OtherFirstNames`],
                       labelSize: null,
                       validator: isFieldFilledIn,
                     },
                     [`${fieldPrefix}OtherLastNames`]: {
-                      type: 'input',
+                      type: 'text',
                       classes: 'govuk-!-width-two-thirds',
                       label: l => l[`${fieldPrefix}OtherLastNames`],
                       labelSize: null,
@@ -131,14 +131,14 @@ export const otherNamesFields = (userCase: Partial<Case>, fieldPrefix: FieldPref
                   type: 'label',
                 },
                 [`${fieldPrefix}OtherFirstNames`]: {
-                  type: 'input',
+                  type: 'text',
                   classes: 'govuk-!-width-two-thirds',
                   label: l => l[`${fieldPrefix}OtherFirstNames`],
                   labelSize: null,
                   validator: isFieldFilledIn,
                 },
                 [`${fieldPrefix}OtherLastNames`]: {
-                  type: 'input',
+                  type: 'text',
                   classes: 'govuk-!-width-two-thirds',
                   label: l => l[`${fieldPrefix}OtherLastNames`],
                   labelSize: null,
