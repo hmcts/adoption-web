@@ -1,6 +1,7 @@
 import fs from 'fs';
 
 import Axios from 'axios';
+import htmlReporter from 'pa11y/lib/reporters/html';
 import puppeteer from 'puppeteer';
 
 import * as urls from '../../main/steps/urls';
@@ -152,7 +153,11 @@ describe('Accessibility', () => {
       await ensurePageCallWillSucceed(url);
 
       const result = await runPally(url, browser, page);
-      console.log(url, result);
+      const html = await htmlReporter.results(result);
+
+      const reportsDir = `${__dirname}/../../../functional-output/pa11y${url.slice(0, url.lastIndexOf('/'))}`;
+      fs.mkdirSync(reportsDir, { recursive: true });
+      fs.writeFileSync(`${reportsDir}${url.slice(url.lastIndexOf('/'))}.html`, html);
 
       expect(result.issues).toEqual(expect.any(Array));
       expectNoErrors(result.issues);
