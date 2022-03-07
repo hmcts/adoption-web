@@ -1,5 +1,6 @@
 import * as path from 'path';
 
+import { Express } from '@hmcts/nodejs-logging';
 import * as bodyParser from 'body-parser';
 import config from 'config';
 import express, { RequestHandler } from 'express';
@@ -38,6 +39,7 @@ app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
   next();
 });
+app.use(Express.accessLogger());
 
 new AxiosLogger().enableFor(app);
 new PropertiesVolume().enableFor(app);
