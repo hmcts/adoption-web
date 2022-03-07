@@ -17,13 +17,14 @@ module.exports = {
     addressCity: 'input[id$="address-city"]',
     addressPostcode: 'input[id$="address-postcode"]',
     email: 'input[id$="email"]',
-    pcqNO: '.govuk-button.govuk-button--secondary',
+    pcqNO: 'form[action="/start-page"] button[formaction="/opt-out"]',
     caseID: '.govuk-panel__body strong',
     changeChildMoveInDate: 'a[href="/date-child-moved-in?returnUrl=/review-pay-submit/check-your-answers"]',
   },
   async selectNoPCQOption() {
     await I.wait('5');
     const numOfPCQElements = await I.grabNumberOfVisibleElements(this.fields.pcqNO);
+    console.log('No of elements: ' + numOfPCQElements);
     if (numOfPCQElements === 1) {
       await I.click("I don't want to answer these questions");
     }
