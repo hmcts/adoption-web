@@ -24,7 +24,8 @@ const en = () => ({
 });
 
 const cy = () => ({
-  addressLine1: 'Building and street (in welsh)',
+  addressLine1: 'Building and street <span class="govuk-visually-hidden">line 1 of 2 (in welsh)</span>',
+  addressLine2: '<span class="govuk-visually-hidden">Building and street line 2 of 2 (in welsh)</span>',
   town: 'Town or city (in welsh)',
   county: 'County (in welsh)',
   postcode: 'Postcode (in welsh)',
