@@ -141,7 +141,7 @@ describe('other names content', () => {
 
     expect(applicant1AdditionalNames).toBeUndefined();
 
-    expect(applicant1OtherFirstNames?.type).toBe('input');
+    expect(applicant1OtherFirstNames?.type).toBe('text');
     expect(applicant1OtherFirstNames?.classes).toBe('govuk-!-width-two-thirds');
     expect((applicant1OtherFirstNames?.label as Function)(generatedContent)).toBe(enContent.applicant1OtherFirstNames);
     expect(applicant1OtherFirstNames?.labelSize).toBe(null);
@@ -151,7 +151,7 @@ describe('other names content', () => {
       "List each previous name separately and select 'Add'"
     );
 
-    expect(applicant1OtherLastNames?.type).toBe('input');
+    expect(applicant1OtherLastNames?.type).toBe('text');
     expect(applicant1OtherLastNames?.classes).toBe('govuk-!-width-two-thirds');
     expect((applicant1OtherLastNames?.label as Function)(generatedContent)).toBe(enContent.applicant1OtherLastNames);
     expect(applicant1OtherLastNames?.labelSize).toBe(null);
@@ -194,7 +194,7 @@ describe('other names content', () => {
     (addAnotherName.validator as Function)();
     expect(doesArrayHaveValues).toHaveBeenCalled();
 
-    expect(applicant1OtherFirstNames?.type).toBe('input');
+    expect(applicant1OtherFirstNames?.type).toBe('text');
     expect(applicant1OtherFirstNames?.classes).toBe('govuk-!-width-two-thirds');
     expect((applicant1OtherFirstNames?.label as Function)(generatedContent)).toBe(enContent.applicant1OtherFirstNames);
     expect(applicant1OtherFirstNames?.labelSize).toBe(null);
@@ -204,7 +204,7 @@ describe('other names content', () => {
       "List each previous name separately and select 'Add'"
     );
 
-    expect(applicant1OtherLastNames?.type).toBe('input');
+    expect(applicant1OtherLastNames?.type).toBe('text');
     expect(applicant1OtherLastNames?.classes).toBe('govuk-!-width-two-thirds');
     expect((applicant1OtherLastNames?.label as Function)(generatedContent)).toBe(enContent.applicant1OtherLastNames);
     expect(applicant1OtherLastNames?.labelSize).toBe(null);

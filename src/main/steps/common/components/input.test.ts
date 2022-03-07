@@ -36,7 +36,7 @@ describe('input class', () => {
     const fieldInputValue = 'test';
     const { label, hint } = enContent;
 
-    expect(field.type).toBe('input');
+    expect(field.type).toBe('text');
     expect((field.label as Function)(enContent)).toBe(label);
     expect((field.hint as Function)(enContent)).toBe(hint);
     expect(field.labelSize).toBe('l');
