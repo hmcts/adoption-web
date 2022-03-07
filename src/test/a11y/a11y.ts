@@ -80,7 +80,6 @@ describe('Accessibility', () => {
 
     // Login once only for other pages to reuse session
     const page = await browser.newPage();
-    console.log('setup', config.TEST_URL);
     await page.goto(config.TEST_URL);
     await page.type('#username', process.env.CITIZEN_USERNAME);
     await page.type('#password', process.env.CITIZEN_PASSWORD);
@@ -136,11 +135,9 @@ describe('Accessibility', () => {
     urls.PAYMENT_CALLBACK_URL,
     urls.EQUALITY,
     urls.DOCUMENT_MANAGER,
+    urls.UPLOAD_YOUR_DOCUMENTS,
   ];
   const urlsToTest = Object.values(urls).filter(url => !IGNORED_URLS.includes(url));
-
-  console.log('urlsToTest ', urlsToTest);
-  console.log('IGNORED_URLS ', IGNORED_URLS);
 
   describe.each(urlsToTest)('Page %s', url => {
     let page;
