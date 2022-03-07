@@ -25,7 +25,7 @@ interface PallyIssue {
   typeCode: number;
 }
 
-const ignoredA11yErrors = ['WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.InputInput.Name'];
+const ignoredA11yErrors = [];
 
 function ensurePageCallWillSucceed(url: string): Promise<void> {
   return axios.get(url);
