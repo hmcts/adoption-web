@@ -38,7 +38,7 @@ module.exports = {
 
   async reviewYourAnswersAndContinue() {
     await I.waitForText('Review your answers', 30);
-    await I.click('Continue');
+    await I.click('Save and continue');
     await I.wait('5');
   },
 
@@ -49,7 +49,7 @@ module.exports = {
     await I.fillField(this.fields.applicant1SotFullName, 'Joe Bloggs');
     await I.fillField(this.fields.applicant2SotFullName, 'George Thomas');
     await I.click('Confirm');
-    await I.wait('3');
+    await I.wait('4');
   },
 
   async adoptionCourtFeesByCard() {
