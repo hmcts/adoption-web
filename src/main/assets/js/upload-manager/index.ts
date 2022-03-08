@@ -17,10 +17,16 @@ import '@uppy/progress-bar/src/style.scss';
 const initUploadManager = (): void => {
   const url = DOCUMENT_MANAGER;
   const csrfToken = (getById('csrfToken') as HTMLInputElement)?.value;
+  const localeToken = (getById('localeToken') as HTMLInputElement)?.value;
   const csrfQuery = `?_csrf=${csrfToken}`;
   location.hash = '';
 
-  const chooseFilePhoto = 'Choose a file or take a photo';
+  let chooseFilePhoto;
+  if (localeToken === 'cy') {
+    chooseFilePhoto = 'Choose a file or take a photo (in welsh)';
+  } else {
+    chooseFilePhoto = 'Choose a file or take a photo';
+  }
 
   const uppy = new Uppy({
     restrictions: {
