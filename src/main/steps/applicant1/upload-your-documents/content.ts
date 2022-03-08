@@ -30,7 +30,7 @@ const en = () => {
     orStr: 'or',
     dragDropHere: 'Drag and drop files here',
     fileFormats: 'The file must be in jpg, bmp, tiff, png or pdf format.',
-    fileSize: 'Maximum file size 10MB.',
+    fileSize: 'Maximum file size 2MB.',
     cannotUploadDocuments: 'I cannot upload some or all of my documents',
     cannotUploadWhich: 'Which document can you not upload?',
     checkAllThatApply: 'Select all that apply',
@@ -45,7 +45,7 @@ const en = () => {
           'You have not provided any information or uploaded any documents. You need to provide the information or documents the court has requested. Or if you are going to post any documents in, select that option.',
         errorUploading:
           'Your file was not uploaded because the service is experiencing technical issues. Try uploading your file again.',
-        fileSizeTooBig: 'The file you have uploaded is too large. Reduce it to under 10MB and try uploading it again.',
+        fileSizeTooBig: 'The file you have uploaded is too large. Reduce it to under 2MB and try uploading it again.',
         fileWrongFormat:
           'You cannot upload that format of file. Save the file as one of the accepted formats and try uploading it again.',
         [ValidationError.FILE_COUNT_LIMIT_EXCEEDED]: 'You can upload maximum 10 files.',
@@ -81,7 +81,7 @@ const cy = () => {
     orStr: 'or (in welsh)',
     dragDropHere: 'Drag and drop files here (in welsh)',
     fileFormats: 'The file must be in jpg, bmp, tiff, png or pdf format. (in welsh)',
-    fileSize: 'Maximum file size 10MB. (in welsh)',
+    fileSize: 'Maximum file size 2MB. (in welsh)',
     cannotUploadDocuments: 'I cannot upload some or all of my documents (in welsh)',
     cannotUploadWhich: 'Which document can you not upload? (in welsh)',
     checkAllThatApply: 'Select all that apply (in welsh)',
@@ -97,7 +97,7 @@ const cy = () => {
         errorUploading:
           'Your file was not uploaded because the service is experiencing technical issues. Try uploading your file again. (in welsh)',
         fileSizeTooBig:
-          'The file you have uploaded is too large. Reduce it to under 10MB and try uploading it again. (in welsh)',
+          'The file you have uploaded is too large. Reduce it to under 2MB and try uploading it again. (in welsh)',
         fileWrongFormat:
           'You cannot upload that format of file. Save the file as one of the accepted formats and try uploading it again. (in welsh)',
         [ValidationError.FILE_COUNT_LIMIT_EXCEEDED]: 'You can upload maximum 10 files. (in welsh)',
