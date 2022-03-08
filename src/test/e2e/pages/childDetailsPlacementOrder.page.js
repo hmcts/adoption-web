@@ -8,43 +8,48 @@ module.exports = {
     placementOrderDateMonth: 'input[id$="placementOrderDate-month"]',
     placementOrderDateYear: 'input[id$="placementOrderDate-year"]',
     addAnotherPlacementOrder: 'input[id$="addAnotherPlacementOrder"]',
+    addAnotherPlacementOrderNo: 'input[id$="addAnotherPlacementOrder-2"]',
     placementOrderType: 'input[id$="placementOrderType"]',
   },
 
-  childDetailsPlacementOrderSection() {
-    I.waitForText('What is the serial or case number on the placement order?');
-    I.fillField(this.fields.placementOrderNumber, '09876543210');
-    I.click('Save and continue');
-    I.wait('2');
-    I.waitForText('Which court made the placement order?');
-    I.fillField(this.fields.placementOrderCourt, 'Swansea');
-    I.click('Save and continue');
-    I.waitForText('What date is on the placement order?');
-    I.fillField(this.fields.placementOrderDateDay, '21');
-    I.fillField(this.fields.placementOrderDateMonth, '12');
-    I.wait('2');
-    I.fillField(this.fields.placementOrderDateYear, '2021');
-    I.click('Save and continue');
-    I.see('Orders already in place');
-    I.see('Do you want to add another order?');
-    I.click(this.fields.addAnotherPlacementOrder);
-    I.click('Save and continue');
-    I.fillField(this.fields.placementOrderType, 'Emergency protection order');
-    I.click('Save and continue');
-    I.wait('2');
-    I.fillField(this.fields.placementOrderNumber, '09876543210');
-    I.click('Save and continue');
-    I.wait('2');
-    I.waitForText('Which court made the placement order?');
-    I.fillField(this.fields.placementOrderCourt, 'Swansea');
-    I.click('Save and continue');
-    I.waitForText('What date is on the placement order?');
-    I.fillField(this.fields.placementOrderDateDay, '21');
-    I.fillField(this.fields.placementOrderDateMonth, '12');
-    I.wait('2');
-    I.fillField(this.fields.placementOrderDateYear, '2021');
-    I.click('Save and continue');
-    I.see('Orders already in place');
-    I.see('Emergency protection order');
+  async childDetailsPlacementOrderSection() {
+    await I.waitForText('What is the serial or case number on the placement order?');
+    await I.fillField(this.fields.placementOrderNumber, '09876543210');
+    await I.click('Save and continue');
+    await I.wait('2');
+    await I.waitForText('Which court made the placement order?');
+    await I.fillField(this.fields.placementOrderCourt, 'Swansea');
+    await I.click('Save and continue');
+    await I.waitForText('What date is on the placement order?');
+    await I.fillField(this.fields.placementOrderDateDay, '21');
+    await I.fillField(this.fields.placementOrderDateMonth, '12');
+    await I.wait('2');
+    await I.fillField(this.fields.placementOrderDateYear, '2021');
+    await I.click('Save and continue');
+    await I.see('Orders already in place');
+    await I.see('Do you want to add another order?');
+    await I.click(this.fields.addAnotherPlacementOrder);
+    await I.click('Save and continue');
+    await I.fillField(this.fields.placementOrderType, 'Emergency protection order');
+    await I.click('Save and continue');
+    await I.wait('2');
+    await I.fillField(this.fields.placementOrderNumber, '09876543210');
+    await I.click('Save and continue');
+    await I.wait('2');
+    await I.waitForText('Which court made the placement order?');
+    await I.fillField(this.fields.placementOrderCourt, 'Swansea');
+    await I.click('Save and continue');
+    await I.waitForText('What date is on the placement order?');
+    await I.fillField(this.fields.placementOrderDateDay, '21');
+    await I.fillField(this.fields.placementOrderDateMonth, '12');
+    await I.wait('2');
+    await I.fillField(this.fields.placementOrderDateYear, '2021');
+    await I.click('Save and continue');
+    await I.see('Orders already in place');
+    await I.see('Emergency protection order');
+    await I.see('Do you want to add another order?');
+    await I.click(this.fields.addAnotherPlacementOrderNo);
+    await I.click('Save and continue');
+    await I.wait('3');
   },
 };

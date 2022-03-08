@@ -19,7 +19,7 @@ exports.config = {
           return sets;
         };
 
-        const buckets = parseInt(process.env.PARALLEL_CHUNKS || '5');
+        const buckets = parseInt(process.env.PARALLEL_CHUNKS || '1');
         const slowTests = lodash.filter(files, file => file.includes('@slow'));
         const otherTests = lodash.difference(files, slowTests);
 
@@ -87,6 +87,10 @@ exports.config = {
     childBirthFatherDetailsPage: './src/test/e2e/pages/childBirthFatherDetails.page.js',
     childAdoptionAgencyDetailsPage: './src/test/e2e/pages/childAdoptionAgencyDetails.page.js',
     childSiblingDetailsPage: './src/test/e2e/pages/childSiblingDetails.page.js',
+    reviewPayAndSubmitPage: './src/test/e2e/pages/reviewPayAndSubmit.page.js',
+    uploadDocumentsDetailsPage: './src/test/e2e/pages/uploadDocumentsDetails.page.js',
+    dateChildMovedinDetailsPage: './src/test/e2e/pages/dateChildMovedinDetails.page.js',
+    chooseYourFamilyCourtDetailsPage: './src/test/e2e/pages/chooseYourFamilyCourtDetails.page.js',
   },
   plugins: {
     autoLogin: testConfig.AutoLogin,

@@ -3,7 +3,8 @@ import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn, isInvalidPostcode } from '../../../app/form/validation';
 
 const en = () => ({
-  addressLine1: 'Building and street',
+  addressLine1: 'Building and street <span class="govuk-visually-hidden">line 1 of 2</span>',
+  addressLine2: '<span class="govuk-visually-hidden">Building and street line 2 of 2</span>',
   town: 'Town or city',
   county: 'County',
   postcode: 'Postcode',
@@ -16,14 +17,15 @@ const en = () => ({
       required: 'Enter the town or city',
     },
     addressPostcode: {
-      required: 'Enter a valid postcode',
-      invalid: 'Enter a valid postcode',
+      required: 'Enter the postcode',
+      invalid: 'Enter a real postcode',
     },
   },
 });
 
 const cy = () => ({
-  addressLine1: 'Building and street (in welsh)',
+  addressLine1: 'Building and street <span class="govuk-visually-hidden">line 1 of 2 (in welsh)</span>',
+  addressLine2: '<span class="govuk-visually-hidden">Building and street line 2 of 2 (in welsh)</span>',
   town: 'Town or city (in welsh)',
   county: 'County (in welsh)',
   postcode: 'Postcode (in welsh)',
@@ -36,8 +38,8 @@ const cy = () => ({
       required: 'Enter the town or city (in welsh)',
     },
     addressPostcode: {
-      required: 'Enter a valid postcode (in welsh)',
-      invalid: 'Enter a valid postcode (in welsh)',
+      required: 'Enter the postcode (in welsh)',
+      invalid: 'Enter a real postcode (in welsh)',
     },
   },
 });

@@ -11,6 +11,14 @@ services:
     url: CCD_URL
   payments:
     url: PAYMENTS_API_URL
+  feeLookup:
+    url: FEE_LOOKUP_URL
+  documentManagement:
+    url: DOCUMENT_MANAGEMENT_URL
+  equalityAndDiversity:
+    url: EQUALITY_URL
+    tokenKey: PCQ_TOKEN
+    pcqEnabled: PCQ_ENABLED
 port: PORT
 session:
   redis:

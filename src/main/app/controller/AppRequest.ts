@@ -4,7 +4,6 @@ import type { LoggerInstance } from 'winston';
 
 import { CaseApi } from '../case/CaseApi';
 import { Case, CaseWithId } from '../case/case';
-import { Fee } from '../case/definition';
 import { FormError } from '../form/Form';
 
 export interface AppRequest<T = Partial<Case>> extends Request {
@@ -25,7 +24,7 @@ export interface AppSession extends Session {
   lang: string | undefined;
   errors: FormError[] | undefined;
   addresses: [];
-  fee: Fee | undefined;
+  returnUrl?: string;
 }
 
 export interface UserDetails {
@@ -41,4 +40,5 @@ export interface Eligibility {
   marriedEligible?: string;
   livedUKEligible?: string;
   under21Eligible?: string;
+  domicileEligible?: string;
 }

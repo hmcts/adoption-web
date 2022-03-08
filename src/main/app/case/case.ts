@@ -3,12 +3,12 @@ import { AnyObject } from '../controller/PostController';
 import {
   Adoption,
   AdoptionAgencyOrLocalAuthority,
+  AdoptionDocument,
   ApplicationType,
   ApplyingWith,
   CaseData,
   ContactDetails,
   DateAsString,
-  DivorceDocument,
   DocumentType,
   Gender,
   JurisdictionConnections,
@@ -26,6 +26,8 @@ import {
 
 export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {
   applicationType: 'applicationType',
+  otherApplicantRelation: 'otherApplicantRelation',
+  dateChildMovedIn: 'dateChildMovedIn',
   applyingWith: 'applyingWith',
   applicant1HelpPayingNeeded: 'applicant1HWFNeedHelp',
   applicant1AlreadyAppliedForHelpPaying: 'applicant1HWFAppliedForFees',
@@ -40,14 +42,13 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant1Occupation: 'applicant1Occupation',
   applicant1EmailAddress: 'applicant1EmailAddress',
   applicant1PhoneNumber: 'applicant1PhoneNumber',
-  applicant1Nationality: 'applicant1Nationality',
-  applicant1AdditionalNationalities: 'applicant1AdditionalNationalities',
   applicant1Address1: 'applicant1Address1',
   applicant1Address2: 'applicant1Address2',
   applicant1AddressTown: 'applicant1AddressTown',
   applicant1AddressCounty: 'applicant1AddressCountry',
   applicant1AddressPostcode: 'applicant1AddressPostCode',
   applicant1ContactDetails: 'applicant1ContactDetails',
+  applicant1ContactDetailsConsent: 'applicant1ContactDetailsConsent',
 
   applicant2FirstNames: 'applicant2FirstName',
   applicant2LastNames: 'applicant2LastName',
@@ -57,8 +58,6 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant2Occupation: 'applicant2Occupation',
   applicant2EmailAddress: 'applicant2EmailAddress',
   applicant2PhoneNumber: 'applicant2PhoneNumber',
-  applicant2Nationality: 'applicant2Nationality',
-  applicant2AdditionalNationalities: 'applicant2AdditionalNationalities',
   applicant2Address1: 'applicant2Address1',
   applicant2Address2: 'applicant2Address2',
   applicant2AddressTown: 'applicant2AddressTown',
@@ -66,6 +65,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant2AddressPostcode: 'applicant2AddressPostCode',
   applicant2AddressSameAsApplicant1: 'applicant2AddressSameAsApplicant1',
   applicant2ContactDetails: 'applicant2ContactDetails',
+  applicant2ContactDetailsConsent: 'applicant2ContactDetailsConsent',
 
   childrenFirstName: 'childrenFirstName',
   childrenLastName: 'childrenLastName',
@@ -75,6 +75,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   childrenFirstNameAfterAdoption: 'childrenFirstNameAfterAdoption',
   childrenLastNameAfterAdoption: 'childrenLastNameAfterAdoption',
   childrenSexAtBirth: 'childrenSexAtBirth',
+  childrenOtherSexAtBirth: 'childrenOtherSexAtBirth',
   addAnotherPlacementOrder: 'addAnotherPlacementOrder',
   placementOrders: 'placementOrders',
   selectedPlacementOrderId: 'selectedPlacementOrderId',
@@ -94,6 +95,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   birthMotherAddressCounty: 'birthMotherAddressCounty',
   birthMotherAddressPostcode: 'birthMotherAddressPostCode',
   birthMotherAddressCountry: 'birthMotherAddressCountry',
+  birthMotherAddressNotKnownReason: 'birthMotherAddressNotKnownReason',
 
   birthFatherNameOnCertificate: 'birthFatherNameOnCertificate',
   birthFatherFirstNames: 'birthFatherFirstName',
@@ -111,6 +113,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   birthFatherAddressCounty: 'birthFatherAddressCounty',
   birthFatherAddressPostcode: 'birthFatherAddressPostCode',
   birthFatherAddressCountry: 'birthFatherAddressCountry',
+  birthFatherAddressNotKnownReason: 'birthFatherAddressNotKnownReason',
 
   otherParentFirstNames: 'otherParentFirstName',
   otherParentLastNames: 'otherParentLastName',
@@ -123,6 +126,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   otherParentAddressPostcode: 'otherParentAddressPostCode',
   otherParentAddressCountry: 'otherParentAddressCountry',
   otherParentAddressKnown: 'otherParentAddressKnown',
+  otherParentAddressNotKnownReason: 'otherParentAddressNotKnownReason',
 
   socialWorkerName: 'socialWorkerName',
   socialWorkerPhoneNumber: 'socialWorkerPhoneNumber',
@@ -135,11 +139,13 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   solicitorHelpingWithApplication: 'solicitorHelpingWithApplication',
   adopAgencyOrLAs: 'adopAgencyOrLAs',
   siblings: 'siblings',
+  payments: 'applicationPayments',
 
   applicant1IBelieveApplicationIsTrue: 'applicant1StatementOfTruth',
   applicant2IBelieveApplicationIsTrue: 'applicant2StatementOfTruth',
   applicant1SotFullName: 'applicant1SotFullName',
   applicant2SotFullName: 'applicant2SotFullName',
+  pcqId: 'pcqId',
 
   hasAnotherAdopAgencyOrLA: 'hasAnotherAdopAgencyOrLA',
   selectedAdoptionAgencyId: 'selectedAdoptionAgencyId',
@@ -155,8 +161,13 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant1DocumentsUploaded: 'applicant1DocumentsUploaded',
   applicant2DocumentsUploaded: 'applicant2DocumentsUploaded',
   documentsGenerated: 'documentsGenerated',
-  applicant1PcqId: 'applicant1PcqId',
   applicationFeeOrderSummary: 'applicationFeeOrderSummary',
+  applicant1CannotUpload: 'applicant1CannotUpload',
+
+  findFamilyCourt: 'findFamilyCourt',
+  familyCourtName: 'familyCourtName',
+  familyCourtEmailId: 'familyCourtEmailId',
+  hyphenatedCaseRef: 'hyphenatedCaseRef',
 };
 
 export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data: InputFormat): OutputFormat {
@@ -177,6 +188,8 @@ export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;
 
 export interface Case {
   applyingWith?: ApplyingWith;
+  otherApplicantRelation?: string;
+  dateChildMovedIn?: CaseDate;
 
   /***** Applicant1 *****/
   applicant1FirstNames?: string;
@@ -188,8 +201,6 @@ export interface Case {
   applicant1PhoneNumber?: string;
   applicant1DateOfBirth?: CaseDate;
   applicant1Occupation?: string;
-  applicant1Nationality?: Nationality[];
-  applicant1AdditionalNationalities?: string[];
   applicant1SelectAddress?: string;
   applicant1Address1?: string;
   applicant1Address2?: string;
@@ -197,6 +208,7 @@ export interface Case {
   applicant1AddressCounty?: string;
   applicant1AddressPostcode?: string;
   applicant1ContactDetails?: ContactDetails[];
+  applicant1ContactDetailsConsent?: YesOrNo;
 
   /***** Applicant2 *****/
   applicant2FirstNames?: string;
@@ -208,8 +220,6 @@ export interface Case {
   applicant2Occupation?: string;
   applicant2EmailAddress?: string;
   applicant2PhoneNumber?: string;
-  applicant2Nationality?: Nationality[];
-  applicant2AdditionalNationalities?: string[];
   applicant2AddressSameAsApplicant1?: YesOrNo;
   applicant2SelectAddress?: string;
   applicant2Address1?: string;
@@ -218,6 +228,7 @@ export interface Case {
   applicant2AddressCounty?: string;
   applicant2AddressPostcode?: string;
   applicant2ContactDetails?: ContactDetails[];
+  applicant2ContactDetailsConsent?: YesOrNo;
 
   /***** Children *****/
   childrenFirstName?: string;
@@ -228,6 +239,7 @@ export interface Case {
   childrenFirstNameAfterAdoption?: string;
   childrenLastNameAfterAdoption?: string;
   childrenSexAtBirth?: Gender;
+  childrenOtherSexAtBirth?: string;
   addAnotherPlacementOrder?: YesOrNo;
   placementOrders?: PlacementOrder[];
   selectedPlacementOrderId?: string;
@@ -249,6 +261,7 @@ export interface Case {
   birthMotherAddressCounty?: string;
   birthMotherAddressPostcode?: string;
   birthMotherAddressCountry?: string;
+  birthMotherAddressNotKnownReason?: string;
 
   /***** Birth Father *****/
   birthFatherNameOnCertificate?: string;
@@ -268,6 +281,7 @@ export interface Case {
   birthFatherAddressCounty?: string;
   birthFatherAddressPostcode?: string;
   birthFatherAddressCountry?: string;
+  birthFatherAddressNotKnownReason?: string;
 
   /***** Other Parent *****/
   otherParentFirstNames?: string;
@@ -282,6 +296,7 @@ export interface Case {
   otherParentAddressPostcode?: string;
   otherParentAddressCountry?: string;
   otherParentAddressKnown?: YesOrNo;
+  otherParentAddressNotKnownReason?: string;
 
   /***** Adoption Agency, Social Worker and Solicitor *****/
   adopAgencyOrLAs?: AdoptionAgencyOrLocalAuthority[];
@@ -313,6 +328,7 @@ export interface Case {
   applicant2IBelieveApplicationIsTrue?: Checkbox;
   applicant1SotFullName?: string;
   applicant2SotFullName?: string;
+  pcqId?: string;
 
   /***** Common across different type of users *****/
   addButton?: string;
@@ -323,6 +339,17 @@ export interface Case {
 
   adoption?: Adoption;
 
+  /***** Document upload *****/
+  applicant1DocumentsUploaded?: ListValue<Partial<AdoptionDocument> | null>[];
+  applicant1UploadedFiles?: UploadedFile[];
+  applicant1CannotUpload?: Checkbox;
+  applicant1CannotUploadDocuments?: DocumentType[];
+
+  /***** Find court *****/
+  findFamilyCourt?: YesOrNo;
+  familyCourtName?: string;
+  familyCourtEmailId?: string;
+
   applicant1HelpPayingNeeded?: YesOrNo;
   applicant1AlreadyAppliedForHelpPaying?: YesOrNo;
   applicant1HelpWithFeesRefNo?: string;
@@ -330,20 +357,16 @@ export interface Case {
   connections: JurisdictionConnections[];
 
   applyForFinancialOrder?: YesOrNo;
-  applicant1UploadedFiles?: UploadedFile[];
   applicant2UploadedFiles?: UploadedFile[];
-  documentsGenerated: ListValue<DivorceDocument>[];
-  applicant1DocumentsUploaded?: ListValue<Partial<DivorceDocument> | null>[];
-  applicant2DocumentsUploaded?: ListValue<Partial<DivorceDocument> | null>[];
-  applicant1CannotUpload?: Checkbox;
+  documentsGenerated: ListValue<AdoptionDocument>[];
+  applicant2DocumentsUploaded?: ListValue<Partial<AdoptionDocument> | null>[];
   applicant2CannotUpload?: Checkbox;
-  applicant1CannotUploadDocuments?: DocumentType | DocumentType[];
   applicant2CannotUploadDocuments?: DocumentType | DocumentType[];
   dueDate?: DateAsString;
   caseReference?: string;
   dateSubmitted?: Date;
   applicationFeeOrderSummary: OrderSummary;
-  applicant1PcqId?: string;
+  hyphenatedCaseRef?: string;
 }
 
 export interface CaseWithId extends Case {

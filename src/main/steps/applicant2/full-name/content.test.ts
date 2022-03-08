@@ -67,7 +67,7 @@ describe('applicant2 > full-name content', () => {
     const fields = form.fields as FormFields;
     const firstNames = fields.applicant2FirstNames;
 
-    expect(firstNames.type).toBe('input');
+    expect(firstNames.type).toBe('text');
     expect((firstNames.label as Function)(generateContent(commonContent))).toBe(enContent.firstNames);
     expect((firstNames.hint as Function)(generateContent(commonContent))).toBe(enContent.firstHint);
     expect(firstNames.labelSize).toBe('normal');
@@ -82,7 +82,7 @@ describe('applicant2 > full-name content', () => {
     const fields = form.fields as FormFields;
     const lastNames = fields.applicant2LastNames;
 
-    expect(lastNames.type).toBe('input');
+    expect(lastNames.type).toBe('text');
     expect((lastNames.label as Function)(generateContent(commonContent))).toBe(enContent.lastNames);
     expect((lastNames.hint as Function)(generateContent(commonContent))).toBe(enContent.lastHint);
     expect(lastNames.labelSize).toBe('normal');

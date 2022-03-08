@@ -28,7 +28,7 @@ export const cyNotSure = {
 };
 
 export const notSureInput: InputValues = {
-  type: 'input',
+  type: 'text',
   validator: isFieldFilledIn,
   fieldName,
   label: `${fieldName}label`,

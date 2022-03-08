@@ -8,13 +8,13 @@ import {
 import { generateContent } from './content';
 
 const enContent = {
-  section: 'Primary applicant',
+  section: 'First applicant',
   title: "What's your home address?",
 };
 
 const cyContent = {
-  section: 'Primary applicant (in welsh)',
-  title: "What's your home address? (in welsh)",
+  section: 'First applicant (in Welsh)',
+  title: "What's your home address? (in Welsh)",
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
@@ -53,6 +53,20 @@ describe('applicant1 > address > select > content', () => {
     const selectAddressFormFields = selectAddressForm.fields as FormFields;
     const fields = generatedContent.form.fields as FormFields;
     expect(fields.applicant1SelectAddress).toEqual(selectAddressFormFields.selectAddress);
+  });
+
+  it('should have applicant1SelectAddress label when language: en and  applyingWith: alone', () => {
+    const commonContent1 = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
+
+    const generatedContent1 = generateContent(commonContent1);
+    expect(generatedContent1.section).toBe('Applicant');
+  });
+
+  it('should have applicant1SelectAddress label when language: cy and  applyingWith: alone', () => {
+    const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
+
+    const generatedContent1 = generateContent(commonContent1);
+    expect(generatedContent1.section).toBe('Applicant (in Welsh)');
   });
 
   test('should contain submit button', () => {

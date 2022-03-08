@@ -29,11 +29,11 @@ const fields: FromApiConverters = {
   applicant2AdditionalNames: data => ({
     applicant2AdditionalNames: data.applicant2AdditionalNames?.map(item => ({ id: item.id, ...item.value })),
   }),
-  applicant1AdditionalNationalities: data => ({
-    applicant1AdditionalNationalities: data.applicant1AdditionalNationalities?.map(item => item.value.country),
+  birthMotherOtherNationalities: data => ({
+    birthMotherAdditionalNationalities: data.birthMotherOtherNationalities?.map(item => item.value.country),
   }),
-  applicant2AdditionalNationalities: data => ({
-    applicant2AdditionalNationalities: data.applicant2AdditionalNationalities?.map(item => item.value.country),
+  birthFatherOtherNationalities: data => ({
+    birthFatherAdditionalNationalities: data.birthFatherOtherNationalities?.map(item => item.value.country),
   }),
   childrenAdditionalNationalities: data => ({
     childrenAdditionalNationalities: data.childrenAdditionalNationalities?.map(item => item.value.country),
@@ -58,6 +58,9 @@ const fields: FromApiConverters = {
     adopAgencyOrLAs: data.adopAgencyOrLAs?.map(item => ({
       ...item.value,
     })),
+  }),
+  dateChildMovedIn: data => ({
+    dateChildMovedIn: fromApiDate(data.dateChildMovedIn),
   }),
   applicant1DateOfBirth: data => ({
     applicant1DateOfBirth: fromApiDate(data.applicant1DateOfBirth),

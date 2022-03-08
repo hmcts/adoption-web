@@ -10,6 +10,7 @@ import { CommonContent } from '../common.content';
 export const en = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
   label: 'Have you ever legally been known by any other names?',
   example: 'For example, your name before marriage.',
+  previousNameYes: "List each previous name separately and select 'Add'",
   yes: 'Yes',
   no: 'No',
   [`${fieldPrefix}OtherFirstNames`]: 'Add your previous first names',
@@ -36,6 +37,7 @@ export const en = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
 export const cy = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
   label: 'Have you ever legally been known by any other names? (in Welsh)',
   example: 'For example, your name before marriage. (in Welsh)',
+  previousNameYes: "List each previous name separately and select 'Add' (in Welsh)",
   yes: 'Yes (in Welsh)',
   no: 'No (in Welsh)',
   [`${fieldPrefix}OtherFirstNames`]: 'Add your previous first names (in Welsh)',
@@ -95,15 +97,19 @@ export const otherNamesFields = (userCase: Partial<Case>, fieldPrefix: FieldPref
                       type: 'hidden',
                       hidden: true,
                     },
+                    previousNameYes: {
+                      label: l => l.previousNameYes,
+                      type: 'label',
+                    },
                     [`${fieldPrefix}OtherFirstNames`]: {
-                      type: 'input',
+                      type: 'text',
                       classes: 'govuk-!-width-two-thirds',
                       label: l => l[`${fieldPrefix}OtherFirstNames`],
                       labelSize: null,
                       validator: isFieldFilledIn,
                     },
                     [`${fieldPrefix}OtherLastNames`]: {
-                      type: 'input',
+                      type: 'text',
                       classes: 'govuk-!-width-two-thirds',
                       label: l => l[`${fieldPrefix}OtherLastNames`],
                       labelSize: null,
@@ -120,15 +126,19 @@ export const otherNamesFields = (userCase: Partial<Case>, fieldPrefix: FieldPref
                 },
               }
             : {
+                previousNameYes: {
+                  label: l => l.previousNameYes,
+                  type: 'label',
+                },
                 [`${fieldPrefix}OtherFirstNames`]: {
-                  type: 'input',
+                  type: 'text',
                   classes: 'govuk-!-width-two-thirds',
                   label: l => l[`${fieldPrefix}OtherFirstNames`],
                   labelSize: null,
                   validator: isFieldFilledIn,
                 },
                 [`${fieldPrefix}OtherLastNames`]: {
-                  type: 'input',
+                  type: 'text',
                   classes: 'govuk-!-width-two-thirds',
                   label: l => l[`${fieldPrefix}OtherLastNames`],
                   labelSize: null,

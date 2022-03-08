@@ -2,7 +2,6 @@ import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
 import { FieldPrefix } from '../../app/case/case';
-import { getNextStepUrl } from '../../steps';
 import { AppRequest } from '../controller/AppRequest';
 import { AnyObject, PostController } from '../controller/PostController';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
@@ -22,33 +21,37 @@ export default class NationalityPostController extends PostController<AnyObject>
 
     Object.assign(req.session.userCase, formData);
 
-    if (req.session.errors.length === 0) {
-      if (formData.addButton) {
-        if (!req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`]) {
-          req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`] = [];
-        }
-        if (formData.addAnotherNationality) {
-          req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`]?.push(formData.addAnotherNationality);
-          req.session.userCase.addAnotherNationality = '';
-        }
-      }
-
-      req.session.userCase = await this.save(
-        req,
-        {
-          [`${this.fieldPrefix}Nationality`]: req.session.userCase[`${this.fieldPrefix}Nationality`],
-          [`${this.fieldPrefix}AdditionalNationalities`]:
-            req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`],
-        },
-        this.getEventName(req)
-      );
-    }
-
     this.filterErrorsForSaveAsDraft(req);
 
-    const nextUrl =
-      req.session.errors.length > 0 || formData.addButton ? req.url : getNextStepUrl(req, req.session.userCase);
+    if (req.session.errors.length > 0) {
+      return this.redirect(req, res);
+    }
 
-    this.redirect(req, res, nextUrl);
+    if (formData.addButton) {
+      if (!req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`]) {
+        req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`] = [];
+      }
+      if (formData.addAnotherNationality) {
+        req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`]?.push(formData.addAnotherNationality);
+        req.session.userCase.addAnotherNationality = '';
+      }
+    }
+
+    req.session.userCase = await this.save(
+      req,
+      {
+        [`${this.fieldPrefix}Nationality`]: req.session.userCase[`${this.fieldPrefix}Nationality`],
+        [`${this.fieldPrefix}AdditionalNationalities`]:
+          req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`],
+      },
+      this.getEventName(req)
+    );
+
+    if (formData.addButton) {
+      //redirect to same page when add button is clicked
+      return this.redirect(req, res, req.url);
+    }
+
+    this.checkReturnUrlAndRedirect(req, res, this.ALLOWED_RETURN_URLS);
   }
 }

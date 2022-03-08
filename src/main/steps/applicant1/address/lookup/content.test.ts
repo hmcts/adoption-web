@@ -8,12 +8,12 @@ import {
 import { generateContent } from './content';
 
 const enContent = {
-  section: 'Primary applicant',
+  section: 'First applicant',
   title: "What's your home address?",
 };
 
 const cyContent = {
-  section: 'Primary applicant (in welsh)',
+  section: 'First applicant (in welsh)',
   title: "What's your home address? (in welsh)",
 };
 
@@ -45,6 +45,20 @@ describe('applicant1 > address > lookup > content', () => {
       applicant1AddressPostcode: (addressLookupContent.errors as any).addressPostcode,
     });
     expect(generatedContent.manualAddressUrl).toEqual('/applicant1/address/manual');
+  });
+
+  it('should have applicant1AddressPostcode label when language: en and  applyingWith: alone', () => {
+    const commonContent1 = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
+
+    const generatedContent1 = generateContent(commonContent1);
+    expect(generatedContent1.section).toBe('Applicant');
+  });
+
+  it('should have an applicant1AddressPostcode label when language: cy and  applyingWith: alone', () => {
+    const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
+
+    const generatedContent1 = generateContent(commonContent1);
+    expect(generatedContent1.section).toBe('Applicant (in welsh)');
   });
 
   test('should contain applicant1AddressPostcode field', () => {
