@@ -9,7 +9,6 @@ import { APPLICATION_SUBMITTED, CHECK_ANSWERS_URL, PAYMENT_CALLBACK_URL, TASK_LI
 
 export default class PaymentCallbackGetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
-    console.log('req.session.userCase', JSON.stringify(req.session.userCase));
     if (req.session.userCase.state !== State.AwaitingPayment) {
       return res.redirect(CHECK_ANSWERS_URL);
     }
@@ -38,8 +37,6 @@ export default class PaymentCallbackGetController {
     payments.setStatus(lastPaymentAttempt.transactionId, payment?.status);
 
     req.session.userCase = await req.locals.api.addPayment(req.session.userCase.id, payments.list);
-
-    console.log('req.session.userCase', JSON.stringify(req.session.userCase));
 
     req.session.save(() => {
       console.log('payments.wasLastPaymentSuccessful', payments.wasLastPaymentSuccessful);

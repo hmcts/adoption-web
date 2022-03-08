@@ -39,14 +39,14 @@ export const cy = (): Record<string, unknown> => ({
 export const form: FormContent = {
   fields: {
     applicant2FirstNames: {
-      type: 'input',
+      type: 'text',
       label: l => l.firstNames,
       hint: l => l.firstHint,
       labelSize: 'normal',
       validator: input => isFieldFilledIn(input),
     },
     applicant2LastNames: {
-      type: 'input',
+      type: 'text',
       label: l => l.lastNames,
       hint: l => l.lastHint,
       labelSize: 'normal',

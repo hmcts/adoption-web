@@ -81,7 +81,7 @@ describe('applicant2 > occupation content', () => {
     const fields = form.fields as FormFields;
     const applicant2Occupation = fields.applicant2Occupation;
 
-    expect(applicant2Occupation.type).toBe('input');
+    expect(applicant2Occupation.type).toBe('text');
     expect((applicant2Occupation.label as Function)(generateContent(commonContent))).toBe(enContent.label);
     expect((applicant2Occupation.hint as Function)(generateContent(commonContent))).toBe(enContent.hint);
     expect(applicant2Occupation.labelSize).toBe('l');

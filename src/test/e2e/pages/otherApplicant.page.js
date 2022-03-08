@@ -30,6 +30,6 @@ module.exports = {
     await I.fillField(this.fields.applicant1PhoneNumber, '09876543210');
     await I.click(this.fields.applicant2ContactDetailsConsent);
     await I.click('Save and continue');
-    await I.wait('3');
+    await I.wait('4');
   },
 };
