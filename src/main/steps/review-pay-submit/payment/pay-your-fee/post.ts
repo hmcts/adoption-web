@@ -74,8 +74,6 @@ export default class PayYourFeePostController extends PostController<AnyObject> 
 
       req.session.userCase = await req.locals.api.addPayment(req.session.userCase.id, payments.list);
 
-      console.log('req.session.userCase', JSON.stringify(req.session.userCase));
-
       this.redirect(req, res, payment._links.next_url.href);
     } else {
       this.redirect(req, res, req.url);
