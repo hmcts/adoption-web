@@ -5,7 +5,7 @@ describe('utils', () => {
     test('When sending not listed court name', async () => {
       const emailId = getCourtEmailId('London Court');
 
-      expect(emailId).toStrictEqual('chelmsfordadoptionapplication@justice.gov.uk');
+      expect(emailId).toStrictEqual('adoptionproject@justice.gov.uk');
     });
     test('When sending listed court name', async () => {
       const emailId = getCourtEmailId('oxford family court');
