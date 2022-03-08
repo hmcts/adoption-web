@@ -55,6 +55,6 @@ module.exports = {
     await I.see('Rosie Florance');
     await I.click(this.fields.addAnotherSiblingPlacementOrderNo);
     await I.click('Save and continue');
-    await I.wait('2');
+    await I.wait('4');
   },
 };

@@ -18,9 +18,13 @@ export default class PlacementOrderPostController extends PostController<AnyObje
       item => item.placementOrderId === req.session.userCase.selectedPlacementOrderId
     );
 
-    Object.assign(placementOrder, formData);
+    Object.assign(placementOrder!, formData);
 
     this.filterErrorsForSaveAsDraft(req);
+
+    if (req.session.errors.length > 0) {
+      return this.redirect(req, res);
+    }
 
     req.session.userCase = await this.save(
       req,
@@ -31,6 +35,6 @@ export default class PlacementOrderPostController extends PostController<AnyObje
       this.getEventName(req)
     );
 
-    this.redirect(req, res);
+    super.checkReturnUrlAndRedirect(req, res, this.ALLOWED_RETURN_URLS);
   }
 }

@@ -168,7 +168,7 @@ describe('nationality content', () => {
 
     expect(birthMotherAdditionalNationalities).toBeUndefined();
 
-    expect(addAnotherNationality?.type).toBe('input');
+    expect(addAnotherNationality?.type).toBe('text');
     expect((addAnotherNationality?.label as Function)(generatedContent)).toBe(enContent.countryName);
     expect(addAnotherNationality?.labelSize).toBe(null);
     expect(addAnotherNationality?.validator).toBe(isFieldFilledIn);
@@ -203,7 +203,7 @@ describe('nationality content', () => {
     expect(addAnotherNationalityDetails.type).toBe('details');
     expect((addAnotherNationalityDetails.label as Function)(generatedContent)).toBe(enContent.another);
 
-    expect(addAnotherNationality?.type).toBe('input');
+    expect(addAnotherNationality?.type).toBe('text');
     expect((addAnotherNationality?.label as Function)(generatedContent)).toBe(enContent.countryName);
     expect(addAnotherNationality?.labelSize).toBe(null);
 

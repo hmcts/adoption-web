@@ -34,6 +34,6 @@ module.exports = {
     await I.click('Save and continue');
     await I.fillField(this.fields.applicant2Occupation, 'Teacher');
     await I.click('Save and continue');
-    await I.wait('2');
+    await I.wait('4');
   },
 };

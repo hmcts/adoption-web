@@ -6,7 +6,7 @@ import { InputValues, RadiosValues } from './types';
 describe('steps > common > components > common > renderSubFields', () => {
   it('should render multiple fields if multiple values provided', () => {
     const inputFieldName = 'inputField';
-    const inputType = 'input';
+    const inputType = 'text';
     const validator = isFieldFilledIn;
 
     const radiosFieldName = 'radiosField';
@@ -34,7 +34,7 @@ describe('steps > common > components > common > renderSubFields', () => {
 
   it('should correctly render all input subfields', () => {
     const fieldName = 'field';
-    const type = 'input';
+    const type = 'text';
     const validator = isFieldFilledIn;
 
     const subFields = renderSubFields([{ fieldName, type, validator } as InputValues]);
