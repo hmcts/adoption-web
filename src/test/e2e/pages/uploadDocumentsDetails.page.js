@@ -22,6 +22,6 @@ module.exports = {
     await I.click(this.fields.applicant1CannotUploadDocuments);
     await I.click(this.fields.applicant1CannotUploadDocuments2);
     await I.click('Save and continue');
-    await I.wait('2');
+    await I.wait('4');
   },
 };

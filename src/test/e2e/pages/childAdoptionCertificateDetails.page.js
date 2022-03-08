@@ -12,6 +12,6 @@ module.exports = {
     await I.fillField(this.fields.childrenLastNameAfterAdoption, 'Flient');
     await I.wait('2');
     await I.click('Save and continue');
-    await I.wait('2');
+    await I.wait('4');
   },
 };

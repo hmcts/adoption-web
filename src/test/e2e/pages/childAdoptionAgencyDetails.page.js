@@ -45,6 +45,6 @@ module.exports = {
     await I.fillField(this.socialWorker.socialWorkerTeamEmail, 'social.workerTeam@example.com');
     await I.wait('2');
     await I.click('Save and continue');
-    await I.wait('2');
+    await I.wait('4');
   },
 };
