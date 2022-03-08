@@ -18,6 +18,7 @@ export default class PlacementOrderGetController extends GetController {
       redirect = true;
     } else if (req.query.change) {
       req.session.userCase.selectedPlacementOrderId = `${req.query.change}`;
+      this.parseAndSetReturnUrl(req);
       delete req.query.change;
       req.url = req.url.substring(0, req.url.indexOf('?'));
       redirect = true;

@@ -61,5 +61,6 @@ module.exports = {
     await I.fillField(this.fields.birthFatherAddressCountry, 'Germany');
     await I.wait('2');
     await I.click('Save and continue');
+    await I.wait('4');
   },
 };

@@ -18,20 +18,23 @@ export default class AdoptionAgencyPostController extends PostController<AnyObje
       item => item.adopAgencyOrLaId === req.session.userCase.selectedAdoptionAgencyId
     );
 
-    Object.assign(adoptionAgency, formData);
+    Object.assign(adoptionAgency!, formData);
 
     this.filterErrorsForSaveAsDraft(req);
 
-    if (req.session.errors.length === 0) {
-      req.session.userCase = await this.save(
-        req,
-        {
-          adopAgencyOrLAs: req.session.userCase.adopAgencyOrLAs,
-          selectedAdoptionAgencyId: req.session.userCase.selectedAdoptionAgencyId,
-        },
-        this.getEventName(req)
-      );
+    if (req.session.errors.length) {
+      return this.redirect(req, res, req.url);
     }
+
+    req.session.userCase = await this.save(
+      req,
+      {
+        adopAgencyOrLAs: req.session.userCase.adopAgencyOrLAs,
+        selectedAdoptionAgencyId: req.session.userCase.selectedAdoptionAgencyId,
+      },
+      this.getEventName(req)
+    );
+
     super.checkReturnUrlAndRedirect(req, res, this.ALLOWED_RETURN_URLS);
   }
 }
