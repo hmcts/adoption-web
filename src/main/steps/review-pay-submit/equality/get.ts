@@ -19,7 +19,6 @@ export default class PCQGetController {
     const tokenKey: string = config.get('services.equalityAndDiversity.tokenKey');
     const url = config.get('services.equalityAndDiversity.url');
     const pcqEnabled = config.get('services.equalityAndDiversity.pcqEnabled');
-
     if (pcqEnabled && pcqEnabled === 'true' && !req.session.userCase.pcqId && tokenKey && url) {
       const path: string = config.get('services.equalityAndDiversity.path');
       const health = `${url}/health`;
