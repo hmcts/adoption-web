@@ -240,9 +240,9 @@ const languages = {
 };
 
 export const generateContent: TranslationFn = content => {
-  const { sectionTitles, taskListItems, ...translations } = languages[content.language]();
+  const translations = languages[content.language]();
   return {
     ...translations,
-    sections: generateTaskList(sectionTitles, taskListItems, content.userCase),
+    sections: generateTaskList(translations.sectionTitles, translations.taskListItems, content.userCase),
   };
 };
