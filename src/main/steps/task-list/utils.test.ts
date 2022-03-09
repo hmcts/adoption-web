@@ -1,7 +1,17 @@
-import { CaseWithId, FieldPrefix } from '../../app/case/case';
-import { ApplyingWith, Gender, Nationality, State, YesNoNotsure, YesOrNo } from '../../app/case/definition';
+import mockUserCase from '../../../test/unit/utils/mockUserCase';
+import { CaseWithId, Checkbox, FieldPrefix } from '../../app/case/case';
+import {
+  ApplyingWith,
+  DocumentType,
+  Gender,
+  Nationality,
+  State,
+  YesNoNotsure,
+  YesOrNo,
+} from '../../app/case/definition';
 
 import {
+  findFamilyCourtStatus,
   getAdoptionAgencyUrl,
   getAdoptionCertificateDetailsStatus,
   getApplyingWithStatus,
@@ -14,6 +24,7 @@ import {
   getOtherParentStatus,
   getPersonalDetailsStatus,
   getSiblingStatus,
+  getUploadDocumentStatus,
 } from './utils';
 const userCase: CaseWithId = {
   id: '123',
@@ -29,33 +40,21 @@ const IN_PROGRESS = 'IN_PROGRESS';
 const COMPLETED = 'COMPLETED';
 
 describe('utils', () => {
-  describe('getApplyingWithStatus()', () => {
-    test('Should return false if applyingWith is not present', async () => {
-      const isValid = getApplyingWithStatus(userCase);
-
-      expect(isValid).toStrictEqual(NOT_STARTED);
-    });
-
-    test('Should return true if applyingWith is present', async () => {
-      userCase.applyingWith = ApplyingWith.ALONE;
-      const isValid = getApplyingWithStatus(userCase);
-
-      expect(isValid).toStrictEqual(COMPLETED);
-    });
-
-    test('Should return true if applyingWith:WITH_SPOUSE_OR_CIVIL_PARTNER is present', async () => {
-      userCase.applyingWith = ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER;
-      const isValid = getApplyingWithStatus(userCase);
-
-      expect(isValid).toStrictEqual(COMPLETED);
-    });
-
-    test('Should return true if applyingWith:WITH_SOME_ONE_ELSE is present', async () => {
-      userCase.applyingWith = ApplyingWith.WITH_SOME_ONE_ELSE;
-      userCase.otherApplicantRelation = 'a b c';
-      const isValid = getApplyingWithStatus(userCase);
-
-      expect(isValid).toStrictEqual(COMPLETED);
+  describe('getApplyingWithStatus', () => {
+    test.each([
+      { data: { ...mockUserCase, applyingWith: undefined }, expected: 'NOT_STARTED' },
+      { data: { ...mockUserCase, applyingWith: ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER }, expected: 'COMPLETED' },
+      { data: { ...mockUserCase, applyingWith: ApplyingWith.WITH_SOME_ONE_ELSE }, expected: 'IN_PROGRESS' },
+      {
+        data: {
+          ...mockUserCase,
+          applyingWith: ApplyingWith.WITH_SOME_ONE_ELSE,
+          otherApplicantRelation: 'MOCK_RELATION',
+        },
+        expected: 'COMPLETED',
+      },
+    ])('should return correct status %#', async ({ data, expected }) => {
+      expect(getApplyingWithStatus(data)).toBe(expected);
     });
   });
 
@@ -99,7 +98,7 @@ describe('utils', () => {
         userType: 'applicant1',
         expected: COMPLETED,
       },
-    ])('should return correct status %o', async ({ data, userType, expected }) => {
+    ])('should return correct status %#', async ({ data, userType, expected }) => {
       expect(getPersonalDetailsStatus({ ...userCase, ...data }, <'applicant1' | 'applicant2'>userType)).toBe(expected);
     });
   });
@@ -175,7 +174,7 @@ describe('utils', () => {
         userType: 'applicant2',
         expected: IN_PROGRESS,
       },
-    ])('should return correct status %o', async ({ data, userType, expected }) => {
+    ])('should return correct status %#', async ({ data, userType, expected }) => {
       expect(getContactDetailsStatus({ ...userCase, ...data }, <FieldPrefix>userType)).toBe(expected);
     });
   });
@@ -254,7 +253,7 @@ describe('utils', () => {
         },
         expected: IN_PROGRESS,
       },
-    ])('should return correct status %o', async ({ data, expected }) => {
+    ])('should return correct status %#', async ({ data, expected }) => {
       expect(getChildrenPlacementOrderStatus({ ...userCase, ...data })).toBe(expected);
     });
   });
@@ -317,7 +316,7 @@ describe('utils', () => {
         },
         expected: COMPLETED,
       },
-    ])('should return correct status %o', async ({ data, expected }) => {
+    ])('should return correct status %#', async ({ data, expected }) => {
       expect(getChildrenBirthCertificateStatus({ ...userCase, ...data })).toBe(expected);
     });
   });
@@ -336,7 +335,7 @@ describe('utils', () => {
         data: { childrenFirstNameAfterAdoption: 'MOCK_FIRST_NAME', childrenLastNameAfterAdoption: 'MOCK_LAST_NAME' },
         expected: COMPLETED,
       },
-    ])('should return correct status %o', async ({ data, expected }) => {
+    ])('should return correct status %#', async ({ data, expected }) => {
       expect(getAdoptionCertificateDetailsStatus({ ...userCase, ...data })).toBe(expected);
     });
   });
@@ -450,7 +449,7 @@ describe('utils', () => {
         },
         expected: COMPLETED,
       },
-    ])('should return correct status %o', async ({ data, expected }) => {
+    ])('should return correct status %#', async ({ data, expected }) => {
       expect(getBirthFatherDetailsStatus({ ...userCase, ...data })).toBe(expected);
     });
   });
@@ -488,9 +487,10 @@ describe('utils', () => {
           otherParentFirstNames: 'MOCKNAME',
           otherParentLastNames: 'MOCKNAME',
           otherParentAddressKnown: YesOrNo.NO,
+          otherParentAddressNotKnownReason: 'MOCK_REASON',
         },
         userType: 'otherParent',
-        expected: 'IN_PROGRESS',
+        expected: 'COMPLETED',
       },
       {
         data: {
@@ -508,6 +508,7 @@ describe('utils', () => {
           otherParentExists: YesOrNo.YES,
           otherParentFirstNames: 'MOCKNAME',
           otherParentAddressKnown: YesOrNo.NO,
+          otherParentAddressNotKnownReason: 'MOCK_REASON',
         },
         userType: 'otherParent',
         expected: 'IN_PROGRESS',
@@ -525,7 +526,7 @@ describe('utils', () => {
         userType: 'otherParent',
         expected: 'COMPLETED',
       },
-    ])('should return correct status %o', async ({ data, expected }) => {
+    ])('should return correct status %#', async ({ data, expected }) => {
       expect(getOtherParentStatus({ ...userCase, ...data })).toBe(expected);
     });
   });
@@ -635,9 +636,11 @@ describe('utils', () => {
           birthMotherStillAlive: YesNoNotsure.YES,
           birthMotherNationality: ['British'],
           birthMotherAddressKnown: YesOrNo.NO,
+          birthMotherAddressNotKnownReason: 'MOCK_REASON',
+          birthMotherOccupation: 'MOCK_OCCUPATION',
         },
         userType: 'birthMother',
-        expected: 'IN_PROGRESS',
+        expected: 'COMPLETED',
       },
       {
         data: {
@@ -646,6 +649,8 @@ describe('utils', () => {
           birthMotherStillAlive: YesNoNotsure.YES,
           birthMotherNationality: ['Other'],
           birthMotherAddressKnown: YesOrNo.NO,
+          birthMotherAddressNotKnownReason: 'MOCK_REASON',
+          birthMotherOccupation: 'MOCK_OCCUPATION',
         },
         userType: 'birthMother',
         expected: 'IN_PROGRESS',
@@ -666,7 +671,7 @@ describe('utils', () => {
         userType: 'birthMother',
         expected: 'COMPLETED',
       },
-    ])('should return correct status %o', async ({ data, expected }) => {
+    ])('should return correct status %#', async ({ data, expected }) => {
       expect(getBirthMotherDetailsStatus({ ...userCase, ...data })).toBe(expected);
     });
   });
@@ -856,7 +861,7 @@ describe('utils', () => {
         },
         expected: IN_PROGRESS,
       },
-    ])('should return correct status %o', async ({ data, expected }) => {
+    ])('should return correct status %#', async ({ data, expected }) => {
       expect(getSiblingStatus({ ...userCase, ...data })).toBe(expected);
     });
   });
@@ -870,8 +875,66 @@ describe('utils', () => {
         },
         expected: COMPLETED,
       },
-    ])('should return correct status %o', async ({ data, expected }) => {
+    ])('should return correct status %#', async ({ data, expected }) => {
       expect(getDateChildMovedInStatus({ ...userCase, ...data })).toBe(expected);
+    });
+  });
+
+  describe('findFamilyCourtStatus', () => {
+    test.each([
+      { data: mockUserCase, expected: 'COMPLETED' },
+      { data: { ...mockUserCase, findFamilyCourt: YesOrNo.YES }, expected: 'COMPLETED' },
+      { data: { ...mockUserCase, findFamilyCourt: YesOrNo.NO }, expected: 'COMPLETED' },
+      { data: { ...mockUserCase, findFamilyCourt: YesOrNo.NO, familyCourtName: undefined }, expected: 'IN_PROGRESS' },
+      { data: { ...mockUserCase, findFamilyCourt: undefined, familyCourtName: undefined }, expected: 'NOT_STARTED' },
+    ])('should return correct status %#', async ({ data, expected }) => {
+      expect(findFamilyCourtStatus(data)).toBe(expected);
+    });
+  });
+
+  describe('getUploadDocumentStatus', () => {
+    test.each([
+      { data: { ...mockUserCase }, expected: 'COMPLETED' },
+      {
+        data: { ...mockUserCase, applicant1CannotUpload: Checkbox.Checked },
+        expected: 'IN_PROGRESS',
+      },
+      {
+        data: {
+          ...mockUserCase,
+          applicant1CannotUpload: Checkbox.Checked,
+          applicant1CannotUploadDocuments: [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE],
+        },
+        expected: 'COMPLETED',
+      },
+      {
+        data: {
+          ...mockUserCase,
+          applicant1UploadedFiles: undefined,
+          applicant1CannotUpload: Checkbox.Checked,
+          applicant1CannotUploadDocuments: [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE],
+        },
+        expected: 'COMPLETED',
+      },
+      {
+        data: {
+          ...mockUserCase,
+          applicant1UploadedFiles: undefined,
+          applicant1CannotUpload: undefined,
+        },
+        expected: 'NOT_STARTED',
+      },
+      {
+        data: {
+          ...mockUserCase,
+          applyingWith: undefined,
+          applicant1UploadedFiles: undefined,
+          applicant1CannotUpload: undefined,
+        },
+        expected: 'CAN_NOT_START_YET',
+      },
+    ])('should return correct status %#', async ({ data, expected }) => {
+      expect(getUploadDocumentStatus(data)).toBe(expected);
     });
   });
 });
