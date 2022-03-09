@@ -2,7 +2,7 @@
 
 <form class="form" id="main-form" method="post" action="" novalidate="novalidate">
   <input type="hidden" name="_csrf" id="csrfToken" value="{{ csrfToken }}">
-  <input type="hidden" name="_locale" id="localeToken" value="{{ language }}">
+  <input type="hidden" name="locale" id="locale" value="{{ language }}">
   
   {% block before_fields %}{% endblock %}
 
