@@ -140,7 +140,7 @@
     "sonar-scanner": "^3.1.0",
     "style-loader": "^3.3.1",
     "ts-jest": "^26.5.6",
-    "ts-loader": "^9.2.6",
+    "ts-loader": "^9.2.7",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webdriverio": "^7.16.16",
     "webpack": "^5.70.0",
