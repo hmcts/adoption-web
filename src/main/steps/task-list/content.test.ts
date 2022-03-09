@@ -204,6 +204,10 @@ describe('task-list > content', () => {
         applyingWith: ApplyingWith.WITH_SOME_ONE_ELSE,
         placementOrders: undefined,
         addAnotherPlacementOrder: undefined,
+        applicant1UploadedFiles: undefined,
+        applicant1CannotUpload: undefined,
+        findFamilyCourt: undefined,
+        familyCourtName: undefined,
       },
       expected: [
         {
@@ -295,9 +299,9 @@ describe('task-list > content', () => {
             },
             { href: '/sibling/exists', id: 'sibling', status: 'COMPLETED', text: 'Sibling court order details' },
             {
-              href: '/children/find-family-court',
+              href: '',
               id: 'find-family-court',
-              status: 'COMPLETED',
+              status: 'CAN_NOT_START_YET',
               text: 'Choose your family court',
             },
           ],
@@ -306,9 +310,9 @@ describe('task-list > content', () => {
         {
           items: [
             {
-              href: '/upload-your-documents',
+              href: '',
               id: 'upload-your-documents',
-              status: 'COMPLETED',
+              status: 'CAN_NOT_START_YET',
               text: 'Upload documents',
             },
           ],
