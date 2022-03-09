@@ -1,25 +1,19 @@
 import { CaseWithId, FieldPrefix } from '../../app/case/case';
-import {
-  ApplyingWith,
-  ContactDetails,
-  Gender,
-  Nationality,
-  State,
-  YesNoNotsure,
-  YesOrNo,
-} from '../../app/case/definition';
+import { ApplyingWith, Gender, Nationality, State, YesNoNotsure, YesOrNo } from '../../app/case/definition';
 
 import {
+  getAdoptionAgencyUrl,
   getAdoptionCertificateDetailsStatus,
+  getApplyingWithStatus,
   getBirthFatherDetailsStatus,
   getBirthMotherDetailsStatus,
   getChildrenBirthCertificateStatus,
   getChildrenPlacementOrderStatus,
   getContactDetailsStatus,
+  getDateChildMovedInStatus,
   getOtherParentStatus,
   getPersonalDetailsStatus,
-  isApplyingWithComplete,
-  // isApplyingWithComplete,
+  getSiblingStatus,
 } from './utils';
 const userCase: CaseWithId = {
   id: '123',
@@ -28,7 +22,6 @@ const userCase: CaseWithId = {
   documentsGenerated: [],
   payments: [],
   applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },
-  addAnotherNationality: YesOrNo.NO,
 };
 
 const NOT_STARTED = 'NOT_STARTED';
@@ -36,18 +29,33 @@ const IN_PROGRESS = 'IN_PROGRESS';
 const COMPLETED = 'COMPLETED';
 
 describe('utils', () => {
-  describe('isApplyingWithComplete()', () => {
+  describe('getApplyingWithStatus()', () => {
     test('Should return false if applyingWith is not present', async () => {
-      const isValid = isApplyingWithComplete(userCase);
+      const isValid = getApplyingWithStatus(userCase);
 
-      expect(isValid).toStrictEqual(false);
+      expect(isValid).toStrictEqual(NOT_STARTED);
     });
 
     test('Should return true if applyingWith is present', async () => {
       userCase.applyingWith = ApplyingWith.ALONE;
-      const isValid = isApplyingWithComplete(userCase);
+      const isValid = getApplyingWithStatus(userCase);
 
-      expect(isValid).toStrictEqual(true);
+      expect(isValid).toStrictEqual(COMPLETED);
+    });
+
+    test('Should return true if applyingWith:WITH_SPOUSE_OR_CIVIL_PARTNER is present', async () => {
+      userCase.applyingWith = ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER;
+      const isValid = getApplyingWithStatus(userCase);
+
+      expect(isValid).toStrictEqual(COMPLETED);
+    });
+
+    test('Should return true if applyingWith:WITH_SOME_ONE_ELSE is present', async () => {
+      userCase.applyingWith = ApplyingWith.WITH_SOME_ONE_ELSE;
+      userCase.otherApplicantRelation = 'a b c';
+      const isValid = getApplyingWithStatus(userCase);
+
+      expect(isValid).toStrictEqual(COMPLETED);
     });
   });
 
@@ -60,8 +68,6 @@ describe('utils', () => {
           applicant1HasOtherNames: undefined,
           applicant1AdditionalNames: undefined,
           applicant1DateOfBirth: undefined,
-          applicant1Nationality: undefined,
-          applicant1AdditionalNationalities: undefined,
           applicant1Occupation: undefined,
         },
         userType: 'applicant1',
@@ -74,8 +80,6 @@ describe('utils', () => {
           applicant1HasOtherNames: YesOrNo.NO,
           applicant1AdditionalNames: undefined,
           applicant1DateOfBirth: { day: '1', month: '1', year: '2021' },
-          applicant1Nationality: [Nationality.BRITHISH],
-          applicant1AdditionalNationalities: undefined,
           applicant1Occupation: undefined,
         },
         userType: 'applicant1',
@@ -90,8 +94,6 @@ describe('utils', () => {
             { firstNames: 'MOCK_ADDITIONAL_FIRST_NAME', lastNames: 'MOCK_ADDITIONAL_FIRST_NAME' },
           ],
           applicant1DateOfBirth: { day: '1', month: '1', year: '2021' },
-          applicant1Nationality: [Nationality.OTHER],
-          applicant1AdditionalNationalities: ['MOCK_COUNTRY'],
           applicant1Occupation: 'MOCK_OCCUPATION',
         },
         userType: 'applicant1',
@@ -124,7 +126,7 @@ describe('utils', () => {
           applicant1Address1: 'MOCK_ADDRESS_1',
           applicant1AddressTown: ' MOCK_TOWN',
           applicant1AddressPostcode: 'MOCK_POSTCODE',
-          applicant1ContactDetails: undefined,
+          applicant1ContactDetailsConsent: undefined,
         },
         userType: 'applicant1',
         expected: IN_PROGRESS,
@@ -134,8 +136,9 @@ describe('utils', () => {
           applicant1Address1: 'MOCK_ADDRESS_1',
           applicant1AddressTown: ' MOCK_TOWN',
           applicant1AddressPostcode: 'MOCK_POSTCODE',
-          applicant1ContactDetails: [ContactDetails.EMAIL],
+          applicant1ContactDetailsConsent: YesOrNo.YES,
           applicant1EmailAddress: 'MOCK_EMAIL',
+          applicant1PhoneNumber: 'MOCK_PHONE',
         },
         userType: 'applicant1',
         expected: COMPLETED,
@@ -145,8 +148,9 @@ describe('utils', () => {
           applicant1Address1: 'MOCK_ADDRESS_1',
           applicant1AddressTown: ' MOCK_TOWN',
           applicant1AddressPostcode: 'MOCK_POSTCODE',
-          applicant1ContactDetails: [ContactDetails.PHONE],
+          applicant1ContactDetailsConsent: YesOrNo.YES,
           applicant1PhoneNumber: 'MOCK_PHONE',
+          applicant1EmailAddress: 'MOCK_EMAIL',
         },
         userType: 'applicant1',
         expected: COMPLETED,
@@ -154,8 +158,9 @@ describe('utils', () => {
       {
         data: {
           applicant2AddressSameAsApplicant1: YesOrNo.YES,
-          applicant2ContactDetails: [ContactDetails.PHONE],
+          applicant2ContactDetailsConsent: YesOrNo.YES,
           applicant2PhoneNumber: 'MOCK_PHONE',
+          applicant2EmailAddress: 'MOCK_EMAIL',
         },
         userType: 'applicant2',
         expected: COMPLETED,
@@ -163,8 +168,9 @@ describe('utils', () => {
       {
         data: {
           applicant2AddressSameAsApplicant1: YesOrNo.NO,
-          applicant2ContactDetails: [ContactDetails.PHONE],
+          applicant2ContactDetailsConsent: YesOrNo.YES,
           applicant2PhoneNumber: 'MOCK_PHONE',
+          applicant2EmailAddress: 'MOCK_EMAIL',
         },
         userType: 'applicant2',
         expected: IN_PROGRESS,
@@ -271,7 +277,7 @@ describe('utils', () => {
           childrenFirstName: 'MOCK_FIRST_NAME',
           childrenLastName: 'MOCK_LAST_NAME',
           childrenDateOfBirth: { day: '1', month: '1', year: '2021' },
-          childrenSexAtBirth: undefined,
+          childrenSexAtBirth: Gender.OTHER,
           childrenNationality: undefined,
           childrenAdditionalNationalities: undefined,
         },
@@ -293,7 +299,7 @@ describe('utils', () => {
           childrenFirstName: 'MOCK_FIRST_NAME',
           childrenLastName: 'MOCK_LAST_NAME',
           childrenDateOfBirth: { day: '1', month: '1', year: '2021' },
-          childrenSexAtBirth: Gender.MALE,
+          childrenSexAtBirth: Gender.FEMALE,
           childrenNationality: [Nationality.OTHER],
           childrenAdditionalNationalities: undefined,
         },
@@ -304,7 +310,8 @@ describe('utils', () => {
           childrenFirstName: 'MOCK_FIRST_NAME',
           childrenLastName: 'MOCK_LAST_NAME',
           childrenDateOfBirth: { day: '1', month: '1', year: '2021' },
-          childrenSexAtBirth: Gender.MALE,
+          childrenSexAtBirth: Gender.OTHER,
+          childrenOtherSexAtBirth: 'MOCK_OTHER_GENDER',
           childrenNationality: [Nationality.OTHER],
           childrenAdditionalNationalities: ['MOCK_COUNTRY'],
         },
@@ -412,7 +419,7 @@ describe('utils', () => {
           birthFatherOccupation: 'Primary school teacher',
           birthFatherAddressKnown: YesOrNo.NO,
         },
-        expected: COMPLETED,
+        expected: IN_PROGRESS,
       },
       {
         data: {
@@ -483,7 +490,7 @@ describe('utils', () => {
           otherParentAddressKnown: YesOrNo.NO,
         },
         userType: 'otherParent',
-        expected: 'COMPLETED',
+        expected: 'IN_PROGRESS',
       },
       {
         data: {
@@ -606,7 +613,7 @@ describe('utils', () => {
           birthMotherAddressKnown: YesOrNo.NO,
         },
         userType: 'birthMother',
-        expected: 'COMPLETED',
+        expected: 'IN_PROGRESS',
       },
       {
         data: {
@@ -634,6 +641,17 @@ describe('utils', () => {
       },
       {
         data: {
+          birthMotherFirstNames: 'MOCKNAME',
+          birthMotherLastNames: 'MOCKNAME',
+          birthMotherStillAlive: YesNoNotsure.YES,
+          birthMotherNationality: ['Other'],
+          birthMotherAddressKnown: YesOrNo.NO,
+        },
+        userType: 'birthMother',
+        expected: 'IN_PROGRESS',
+      },
+      {
+        data: {
           birthMotherStillAlive: YesNoNotsure.YES,
           birthMotherFirstNames: 'MOCKNAME',
           birthMotherLastNames: 'MOCKNAME',
@@ -650,6 +668,210 @@ describe('utils', () => {
       },
     ])('should return correct status %o', async ({ data, expected }) => {
       expect(getBirthMotherDetailsStatus({ ...userCase, ...data })).toBe(expected);
+    });
+  });
+
+  Date.now = jest.fn(() => +new Date('2021-01-01'));
+  describe('getAdoptionAgencyUrl()', () => {
+    test('Should return adoption agency add url when adoption-agency count 0', async () => {
+      expect(getAdoptionAgencyUrl(userCase)).toBe('/children/adoption-agency?add=1609459200000');
+    });
+
+    test('Should return adoption agency add url when adoption-agency count: 2 and hasAnotherAdopAgencyOrLA: NO', async () => {
+      expect(
+        getAdoptionAgencyUrl({
+          id: '123',
+          state: State.Draft,
+          connections: [],
+          documentsGenerated: [],
+          applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },
+          adopAgencyOrLAs: [
+            {
+              adopAgencyOrLaId: '1',
+              adopAgencyOrLaName: 'a',
+              adopAgencyOrLaContactName: 'a',
+              adopAgencyOrLaPhoneNumber: '09876543210',
+              adopAgencyOrLaContactEmail: 'a@a.a',
+            },
+            {
+              adopAgencyOrLaId: '2',
+              adopAgencyOrLaName: 'a',
+              adopAgencyOrLaContactName: 'a',
+              adopAgencyOrLaPhoneNumber: '09876543210',
+              adopAgencyOrLaContactEmail: 'a@a.a',
+            },
+          ],
+          hasAnotherAdopAgencyOrLA: YesOrNo.NO,
+          socialWorkerName: 'John',
+          socialWorkerPhoneNumber: '09876543210',
+          socialWorkerEmail: 'abc@john.com',
+        })
+      ).toBe('/children/adoption-agency?change=1');
+    });
+
+    test('Should return adoption agency add url when adoption-agency count: 2 and hasAnotherAdopAgencyOrLA: Yes', async () => {
+      expect(
+        getAdoptionAgencyUrl({
+          id: '123',
+          state: State.Draft,
+          connections: [],
+          documentsGenerated: [],
+          applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },
+          adopAgencyOrLAs: [
+            {
+              adopAgencyOrLaId: '1',
+              adopAgencyOrLaName: 'a',
+              adopAgencyOrLaContactName: 'a',
+              adopAgencyOrLaPhoneNumber: '09876543210',
+              adopAgencyOrLaContactEmail: 'a@a.a',
+            },
+            {
+              adopAgencyOrLaId: '2',
+              adopAgencyOrLaName: 'a',
+              adopAgencyOrLaContactName: 'a',
+              adopAgencyOrLaPhoneNumber: '09876543210',
+              adopAgencyOrLaContactEmail: 'a@a.a',
+            },
+          ],
+          hasAnotherAdopAgencyOrLA: YesOrNo.YES,
+          socialWorkerName: 'John',
+          socialWorkerPhoneNumber: '09876543210',
+          socialWorkerEmail: 'abc@john.com',
+        })
+      ).toBe('/children/adoption-agency?change=1');
+    });
+
+    test('Should return adoption agency add url when adoption-agency count: 1, hasAnotherAdopAgencyOrLA: NO and phone number not available', async () => {
+      expect(
+        getAdoptionAgencyUrl({
+          id: '123',
+          state: State.Draft,
+          connections: [],
+          documentsGenerated: [],
+          applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },
+          adopAgencyOrLAs: [
+            {
+              adopAgencyOrLaId: '1',
+              adopAgencyOrLaName: 'a',
+              adopAgencyOrLaContactName: 'a',
+              adopAgencyOrLaContactEmail: 'a@a.a',
+            },
+          ],
+          hasAnotherAdopAgencyOrLA: YesOrNo.NO,
+          socialWorkerName: 'John',
+          socialWorkerPhoneNumber: '09876543210',
+          socialWorkerEmail: 'abc@john.com',
+        })
+      ).toBe('/children/adoption-agency?change=1');
+    });
+  });
+
+  describe('getSiblingPlacementOrderStatus', () => {
+    test.each([
+      { data: {}, expected: 'NOT_STARTED' },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.NO,
+        },
+        expected: COMPLETED,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.NOT_SURE,
+        },
+        expected: COMPLETED,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          hasPoForSiblings: YesNoNotsure.NO,
+        },
+        expected: COMPLETED,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          hasPoForSiblings: YesNoNotsure.YES,
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          hasPoForSiblings: YesNoNotsure.YES,
+          siblings: [
+            {
+              siblingId: 'MOCK_SIBLING_ID',
+              siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+              siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
+            },
+          ],
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          hasPoForSiblings: YesNoNotsure.YES,
+          siblings: [
+            {
+              siblingId: 'MOCK_SIBLING_ID',
+              siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+              siblingLastNames: 'MOCK_SIBLING_LAST_NAME',
+              siblingPlacementOrders: [
+                {
+                  placementOrderId: 'MOCK_SIBLING_PO_ID',
+                  placementOrderType: 'MOCK_SIBLING_PO_TYPE',
+                  placementOrderNumber: 'MOCK_SIBLING_PO_NUMBER',
+                },
+              ],
+            },
+          ],
+        },
+        expected: COMPLETED,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          hasPoForSiblings: YesNoNotsure.YES,
+          siblings: [
+            {
+              siblingId: 'MOCK_SIBLING_ID',
+              siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+              siblingLastNames: 'MOCK_SIBLING_LAST_NAME',
+              siblingPlacementOrders: [
+                {
+                  placementOrderId: 'MOCK_SIBLING_PO_ID',
+                  placementOrderType: 'MOCK_SIBLING_PO_TYPE',
+                },
+              ],
+            },
+          ],
+        },
+        expected: IN_PROGRESS,
+      },
+    ])('should return correct status %o', async ({ data, expected }) => {
+      expect(getSiblingStatus({ ...userCase, ...data })).toBe(expected);
+    });
+  });
+
+  describe('getDateChildMovedInStatus', () => {
+    test.each([
+      { data: {}, expected: 'NOT_STARTED' },
+      {
+        data: {
+          dateChildMovedIn: { day: '1', month: '1', year: '2020' },
+        },
+        expected: COMPLETED,
+      },
+    ])('should return correct status %o', async ({ data, expected }) => {
+      expect(getDateChildMovedInStatus({ ...userCase, ...data })).toBe(expected);
     });
   });
 });

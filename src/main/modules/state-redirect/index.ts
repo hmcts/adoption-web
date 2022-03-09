@@ -2,17 +2,18 @@ import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { Application, NextFunction, Response } from 'express';
 
-import { CaseWithId } from '../../app/case/case';
-import { State } from '../../app/case/definition';
+import { ApplyingWith, SectionStatus, State } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
+import { getApplicationStatus } from '../../steps/task-list/utils';
 import {
+  APPLICANT_2,
   APPLICATION_SUBMITTED,
-  NO_RESPONSE_YET,
+  CHECK_ANSWERS_URL,
   PAYMENT_CALLBACK_URL,
   PAY_AND_SUBMIT,
   PAY_YOUR_FEE,
   PageLink,
-  SWITCH_TO_SOLE_APPLICATION,
+  TASK_LIST_URL,
 } from '../../steps/urls';
 
 /**
@@ -25,11 +26,16 @@ export class StateRedirectMiddleware {
 
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
+        if (req.session.userCase?.applyingWith === ApplyingWith.ALONE && req.path.startsWith(APPLICANT_2)) {
+          return res.redirect(TASK_LIST_URL);
+        }
+
         if (
-          this.hasPartnerNotResponded(req.session.userCase) &&
-          ![NO_RESPONSE_YET, SWITCH_TO_SOLE_APPLICATION].includes(req.path as PageLink)
+          req.path.startsWith(CHECK_ANSWERS_URL) &&
+          getApplicationStatus(req.session.userCase) === SectionStatus.CAN_NOT_START_YET
         ) {
-          return res.redirect(NO_RESPONSE_YET);
+          // can not go to check-your-answers page before completing all the sections
+          return res.redirect(TASK_LIST_URL);
         }
 
         if (
@@ -48,12 +54,6 @@ export class StateRedirectMiddleware {
 
         return next();
       })
-    );
-  }
-
-  private hasPartnerNotResponded(userCase: CaseWithId) {
-    return (
-      userCase?.state === State.AwaitingApplicant2Response && dayjs(userCase.dueDate, 'D MMMM YYYY').diff(dayjs()) < 0
     );
   }
 }

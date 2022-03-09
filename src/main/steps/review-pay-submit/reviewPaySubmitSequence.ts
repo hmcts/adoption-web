@@ -3,7 +3,17 @@ import * as Urls from '../urls';
 
 export const reviewPaySubmitSequence: Step[] = [
   {
+    url: Urls.EQUALITY,
+    showInSection: Sections.ReviewPaySubmit,
+    getNextStep: () => Urls.CHECK_ANSWERS_URL,
+  },
+  {
     url: Urls.CHECK_ANSWERS_URL,
+    showInSection: Sections.ReviewPaySubmit,
+    getNextStep: () => Urls.STATEMENT_OF_TRUTH,
+  },
+  {
+    url: Urls.STATEMENT_OF_TRUTH,
     showInSection: Sections.ReviewPaySubmit,
     getNextStep: () => Urls.PAY_YOUR_FEE,
   },

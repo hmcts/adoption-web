@@ -2,11 +2,9 @@ import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
 import { FieldPrefix } from '../../app/case/case';
-import { getNextStepUrl } from '../../steps';
 import { AppRequest } from '../controller/AppRequest';
 import { AnyObject, PostController } from '../controller/PostController';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
-import { ValidationError } from '../form/validation';
 
 @autobind
 export default class NationalityPostController extends PostController<AnyObject> {
@@ -23,46 +21,37 @@ export default class NationalityPostController extends PostController<AnyObject>
 
     Object.assign(req.session.userCase, formData);
 
-    if (req.session.errors.length === 0) {
-      if (formData.addButton) {
-        if (!req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`]) {
-          req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`] = [];
-        }
-        if (formData.addAnotherNationality) {
-          req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`]?.push(formData.addAnotherNationality);
-          req.session.userCase.addAnotherNationality = '';
-        }
-      }
+    this.filterErrorsForSaveAsDraft(req);
 
-      try {
-        req.session.userCase = await this.save(
-          req,
-          {
-            [`${this.fieldPrefix}Nationality`]: req.session.userCase[`${this.fieldPrefix}Nationality`],
-            [`${this.fieldPrefix}AdditionalNationalities`]:
-              req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`],
-          },
-          this.getEventName(req)
-        );
-      } catch (err) {
-        req.locals.logger.error('Error saving', err);
-        req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+    if (req.session.errors.length > 0) {
+      return this.redirect(req, res);
+    }
+
+    if (formData.addButton) {
+      if (!req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`]) {
+        req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`] = [];
+      }
+      if (formData.addAnotherNationality) {
+        req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`]?.push(formData.addAnotherNationality);
+        req.session.userCase.addAnotherNationality = '';
       }
     }
 
-    if (req.body.saveAsDraft) {
-      // skip empty field errors in case of save as draft
-      req.session.errors = req.session.errors.filter(item => item.errorType !== ValidationError.REQUIRED);
+    req.session.userCase = await this.save(
+      req,
+      {
+        [`${this.fieldPrefix}Nationality`]: req.session.userCase[`${this.fieldPrefix}Nationality`],
+        [`${this.fieldPrefix}AdditionalNationalities`]:
+          req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`],
+      },
+      this.getEventName(req)
+    );
+
+    if (formData.addButton) {
+      //redirect to same page when add button is clicked
+      return this.redirect(req, res, req.url);
     }
 
-    const nextUrl =
-      req.session.errors.length > 0 || formData.addButton ? req.url : getNextStepUrl(req, req.session.userCase);
-
-    req.session.save(err => {
-      if (err) {
-        throw err;
-      }
-      res.redirect(nextUrl);
-    });
+    this.checkReturnUrlAndRedirect(req, res, this.ALLOWED_RETURN_URLS);
   }
 }

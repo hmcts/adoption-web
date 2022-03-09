@@ -25,11 +25,11 @@ const CY = 'cy';
 const EN = 'en';
 
 const enContent = {
-  section: 'Primary applicant',
+  section: 'First applicant',
 };
 
 const cyContent = {
-  section: 'Primary applicant (in Welsh)',
+  section: 'First applicant (in Welsh)',
 };
 
 const langAssertions = (language, content) => {

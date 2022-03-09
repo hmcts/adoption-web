@@ -22,6 +22,12 @@ export class PaymentModel {
     return this.lastPayment?.status === PaymentStatus.SUCCESS;
   }
 
+  public get paymentTotal(): number {
+    return this.payments
+      .filter(item => item.value.status === PaymentStatus.SUCCESS)
+      .reduce((acc, item) => acc + item.value.amount, 0);
+  }
+
   public add(payment: Payment): void {
     this.payments.push({ id: payment.transactionId, value: payment });
   }

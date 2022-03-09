@@ -2,7 +2,7 @@ import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
 import { getNextStepUrl } from '../../steps';
-import { SAVE_AND_SIGN_OUT } from '../../steps/urls';
+import { CHECK_ANSWERS_URL, SAVE_AND_SIGN_OUT, TASK_LIST_URL } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
 import { CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
@@ -12,6 +12,8 @@ import { AppRequest } from './AppRequest';
 
 @autobind
 export class PostController<T extends AnyObject> {
+  protected ALLOWED_RETURN_URLS: string[] = [CHECK_ANSWERS_URL];
+
   constructor(protected readonly fields: FormFields | FormFieldsFn) {}
 
   /**
@@ -54,32 +56,72 @@ export class PostController<T extends AnyObject> {
     Object.assign(req.session.userCase, formData);
     req.session.errors = form.getErrors(formData);
 
-    if (req.session.errors.length === 0) {
-      try {
-        req.session.userCase = await this.save(req, formData, this.getEventName(req));
-      } catch (err) {
-        req.locals.logger.error('Error saving', err);
-        req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
-      }
+    this.filterErrorsForSaveAsDraft(req);
+
+    if (req.session.errors.length) {
+      return this.redirect(req, res);
     }
 
+    req.session.userCase = await this.save(req, formData, this.getEventName(req));
+
+    this.checkReturnUrlAndRedirect(req, res, this.ALLOWED_RETURN_URLS);
+  }
+
+  protected filterErrorsForSaveAsDraft(req: AppRequest<T>): void {
     if (req.body.saveAsDraft) {
       // skip empty field errors in case of save as draft
-      req.session.errors = req.session.errors.filter(item => item.errorType !== ValidationError.REQUIRED);
+      req.session.errors = req.session.errors!.filter(
+        item =>
+          item.errorType !== ValidationError.REQUIRED &&
+          item.errorType !== ValidationError.NOT_SELECTED &&
+          item.errorType !== ValidationError.NOT_UPLOADED
+      );
     }
+  }
 
-    const nextUrl = req.session.errors.length > 0 ? req.url : getNextStepUrl(req, req.session.userCase);
+  protected async save(req: AppRequest<T>, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
+    try {
+      req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
+    } catch (err) {
+      req.locals.logger.error('Error saving', err);
+      req.session.errors = req.session.errors || [];
+      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+    }
+    return req.session.userCase;
+  }
+
+  protected redirect(req: AppRequest<T>, res: Response, nextUrl?: string): void {
+    let target;
+    if (req.body['saveAsDraft']) {
+      //redirects to task-list page in case of save-as-draft button click
+      req.session.returnUrl = undefined;
+      target = TASK_LIST_URL;
+    } else if (req.session.errors?.length) {
+      //redirects to same page in case of validation errors
+      target = req.url;
+    } else {
+      //redirects to input nextUrl if present otherwise calls getNextStepUrl to get the next step url
+      target = nextUrl || getNextStepUrl(req, req.session.userCase);
+    }
 
     req.session.save(err => {
       if (err) {
         throw err;
       }
-      res.redirect(nextUrl);
+      res.redirect(target);
     });
   }
 
-  protected async save(req: AppRequest<T>, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
-    return req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
+  // method to check if there is a returnUrl in session and
+  // it is one of the allowed redirects from current page
+  protected checkReturnUrlAndRedirect(req: AppRequest<T>, res: Response, allowedReturnUrls: string[]): void {
+    const returnUrl = req.session.returnUrl;
+    if (returnUrl && allowedReturnUrls.includes(returnUrl)) {
+      req.session.returnUrl = undefined;
+      this.redirect(req, res, returnUrl);
+    } else {
+      this.redirect(req, res);
+    }
   }
 
   //eslint-disable-next-line @typescript-eslint/no-unused-vars

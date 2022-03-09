@@ -2,7 +2,7 @@
 
 properties([
   // H allow predefined but random minute see https://en.wikipedia.org/wiki/Cron#Non-standard_characters
-  pipelineTriggers([cron('H 04 * * *')]),
+  pipelineTriggers([cron('0 19 * * 1-5')]),
   parameters([
     string(name: 'FRONTEND_URL', defaultValue: 'https://adoption-web.aat.platform.hmcts.net/', description: 'The URL you want to run tests against'),
     string(name: 'FUNCTIONAL_TESTS_WORKERS',
@@ -40,6 +40,7 @@ def secrets = [
     secret('idam-system-user-password', 'TEST_PASSWORD'),
     secret('citizen-user', 'CITIZEN_USERNAME'),
     secret('citizen-password', 'CITIZEN_PASSWORD'),
+    secret('adoption-pcq-token', 'PCQ_TOKEN')
   ],
   's2s-${env}': [
     secret('microservicekey-adoption-web', 'SERVICE_AUTH_SECRET')
@@ -52,12 +53,17 @@ pipelineConf.vaultSecrets = secrets
 withNightlyPipeline(type, product, component) {
 
   env.ADOP_WEB_URL = params.FRONTEND_URL
-  enableCrossBrowserTest(['chrome', 'firefox'])
+  enableCrossBrowserTest(['firefox'])
   enableFullFunctionalTest(120)
   loadVaultSecrets(secrets)
 
+
+  after('test') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
+  }
+
   before('crossBrowserTest') {
-    env.TEST_RETRIES = 5
+
   }
 
   after('crossBrowserTest') {
@@ -66,7 +72,6 @@ withNightlyPipeline(type, product, component) {
 
   before('fullFunctionalTest') {
     env.PARALLEL_CHUNKS = params.FUNCTIONAL_TESTS_WORKERS
-    env.TEST_RETRIES = 2
   }
 
   after('fullFunctionalTest') {

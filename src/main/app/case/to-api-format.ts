@@ -3,7 +3,7 @@ import { v4 as generateUuid } from 'uuid';
 import { isInvalidHelpWithFeesRef } from '../form/validation';
 
 import { Case, CaseDate, Checkbox, formFieldsToCaseMapping, formatCase } from './case';
-import { CaseData, YesOrNo } from './definition';
+import { CaseData, PlacementOrder, YesOrNo } from './definition';
 
 export type OrNull<T> = { [K in keyof T]: T[K] | null };
 
@@ -19,6 +19,9 @@ const checkboxConverter = (value: string | undefined) => {
 
 const fields: ToApiConverters = {
   ...formFieldsToCaseMapping,
+  dateChildMovedIn: data => ({
+    dateChildMovedIn: toApiDate(data.dateChildMovedIn),
+  }),
   applicant1DateOfBirth: data => ({
     applicant1DateOfBirth: toApiDate(data.applicant1DateOfBirth),
   }),
@@ -28,10 +31,6 @@ const fields: ToApiConverters = {
   childrenDateOfBirth: data => ({
     childrenDateOfBirth: toApiDate(data.childrenDateOfBirth),
   }),
-  // placementOrderDate: data => ({
-  //   placementOrderDate: toApiDate(data.placementOrderDate),
-  // }),
-  //{"applicant1AdditionalNames":[{"id":"abc","value":{"name":"trump bush"}}]}
   applicant1AdditionalNames: data => ({
     applicant1AdditionalNames:
       data.applicant1HasOtherNames === YesOrNo.YES
@@ -50,14 +49,14 @@ const fields: ToApiConverters = {
           }))
         : [],
   }),
-  applicant1AdditionalNationalities: data => ({
-    applicant1AdditionalNationalities: (data.applicant1AdditionalNationalities || []).map(item => ({
+  birthMotherAdditionalNationalities: data => ({
+    birthMotherOtherNationalities: (data.birthMotherAdditionalNationalities || []).map(item => ({
       id: generateUuid(),
       value: { country: `${item}` },
     })),
   }),
-  applicant2AdditionalNationalities: data => ({
-    applicant2AdditionalNationalities: (data.applicant2AdditionalNationalities || []).map(item => ({
+  birthFatherAdditionalNationalities: data => ({
+    birthFatherOtherNationalities: (data.birthFatherAdditionalNationalities || []).map(item => ({
       id: generateUuid(),
       value: { country: `${item}` },
     })),
@@ -77,14 +76,43 @@ const fields: ToApiConverters = {
       },
     })),
   }),
-  jurisdictionResidualEligible: data => ({
-    jurisdictionResidualEligible: checkboxConverter(data.jurisdictionResidualEligible),
+  siblings: data => ({
+    siblings: (data.siblings || []).map(item => ({
+      id: generateUuid(),
+      value: {
+        ...item,
+        siblingPlacementOrders: ((item.siblingPlacementOrders || []) as PlacementOrder[]).map(
+          (item2: PlacementOrder) => ({
+            id: generateUuid(),
+            value: {
+              ...item2,
+            },
+          })
+        ),
+      },
+    })),
+  }),
+  adopAgencyOrLAs: data => ({
+    adopAgencyOrLAs: (data.adopAgencyOrLAs || []).map(item => ({
+      id: generateUuid(),
+      value: {
+        ...item,
+      },
+    })),
+  }),
+  applicant1IBelieveApplicationIsTrue: data => ({
+    applicant1StatementOfTruth: checkboxConverter(data.applicant1IBelieveApplicationIsTrue),
+  }),
+  applicant2IBelieveApplicationIsTrue: data => ({
+    applicant2StatementOfTruth: checkboxConverter(data.applicant2IBelieveApplicationIsTrue),
   }),
   applicant1HelpWithFeesRefNo: data => ({
     applicant1HWFReferenceNumber: !isInvalidHelpWithFeesRef(data.applicant1HelpWithFeesRefNo)
       ? data.applicant1HelpWithFeesRefNo
       : '',
   }),
+  applicant1UploadedFiles: () => ({}),
+  applicant2UploadedFiles: () => ({}),
   applicant1CannotUploadDocuments: data => ({
     applicant1CannotUploadSupportingDocument: data.applicant1CannotUploadDocuments
       ? !Array.isArray(data.applicant1CannotUploadDocuments)
@@ -92,24 +120,20 @@ const fields: ToApiConverters = {
         : data.applicant1CannotUploadDocuments
       : [],
   }),
-  applicant2CannotUploadDocuments: data => ({
-    applicant2CannotUploadSupportingDocument: data.applicant2CannotUploadDocuments
-      ? !Array.isArray(data.applicant2CannotUploadDocuments)
-        ? [data.applicant2CannotUploadDocuments]
-        : data.applicant2CannotUploadDocuments
-      : [],
-  }),
-  applicant1UploadedFiles: () => ({}),
-  applicant2UploadedFiles: () => ({}),
   applicant1HelpPayingNeeded: data => ({
     applicant1HWFNeedHelp: data.applicant1HelpPayingNeeded,
     ...(data.applicant1HelpPayingNeeded === YesOrNo.NO
       ? setUnreachableAnswersToNull(['applicant1HWFAppliedForFees', 'applicant1HWFReferenceNumber'])
       : {}),
   }),
+  applicant1CannotUpload: data => {
+    return {
+      applicant1CannotUpload: checkboxConverter(data.applicant1CannotUpload),
+    };
+  },
 };
 
-const toApiDate = (date: CaseDate | undefined): string => {
+export const toApiDate = (date: CaseDate | undefined): string => {
   if (!date?.year || !date?.month || !date?.day) {
     return '';
   }

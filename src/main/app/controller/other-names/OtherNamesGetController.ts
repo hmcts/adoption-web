@@ -21,8 +21,6 @@ export default class OtherNamesGetController extends GetController {
 
     const remove = req.query.remove;
 
-    let removed = false;
-
     if (remove && names?.length) {
       const index = names.findIndex(item => item.id === remove);
 
@@ -31,30 +29,24 @@ export default class OtherNamesGetController extends GetController {
       }
 
       req.session.userCase[`${this.fieldPrefix}AdditionalNames`] = names;
-      try {
-        req.session.userCase = await this.save(
-          req,
-          { [`${this.fieldPrefix}AdditionalNames`]: names, [`${this.fieldPrefix}HasOtherNames`]: YesOrNo.YES },
-          this.getEventName(req)
-        );
-      } catch (err) {
-        req.locals.logger.error('Error saving', err);
-        req.session.errors?.push({ errorType: 'errorSaving', propertyName: '*' });
-      }
+
+      req.session.userCase = await this.save(
+        req,
+        { [`${this.fieldPrefix}AdditionalNames`]: names, [`${this.fieldPrefix}HasOtherNames`]: YesOrNo.YES },
+        this.getEventName(req)
+      );
+
       delete req.query.remove;
       req.url = req.url.substring(0, req.url.indexOf('?'));
-      removed = true;
-    }
 
-    req.session.save(err => {
-      if (err) {
-        throw err;
-      }
-      if (removed) {
-        res.redirect(req.url);
-      } else {
-        super.get(req, res);
-      }
-    });
+      super.saveSessionAndRedirect(req, res);
+    } else if (req.query.returnUrl) {
+      this.parseAndSetReturnUrl(req);
+      delete req.query.returnUrl;
+      req.url = req.url.substring(0, req.url.indexOf('?'));
+      this.saveSessionAndRedirect(req, res);
+    } else {
+      super.get(req, res);
+    }
   }
 }

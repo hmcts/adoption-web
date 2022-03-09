@@ -2,16 +2,11 @@ import axios, { AxiosResponse } from 'axios';
 import config from 'config';
 import { LoggerInstance } from 'winston';
 
-export type Fee = {
-  code: string;
-  description: string;
-  version: string;
-  fee_amount: string;
-};
+import { Fee } from '../../app/case/definition';
 
-export const getFee = async (logger: LoggerInstance): Promise<Fee> => {
+export const getFee = async (logger: LoggerInstance): Promise<Fee | undefined> => {
   try {
-    const response: AxiosResponse<Fee> = await axios.get(config.get('services.feeLookup.url'), {
+    const response: AxiosResponse = await axios.get(config.get('services.feeLookup.url'), {
       headers: {
         accept: 'application/json',
       },
@@ -27,12 +22,17 @@ export const getFee = async (logger: LoggerInstance): Promise<Fee> => {
     });
 
     if (!response.data) {
-      return <Fee>{};
+      return;
     }
 
-    return response.data;
+    return {
+      FeeCode: `${response.data.code}`,
+      FeeDescription: `${response.data.description}`,
+      FeeVersion: `${response.data.version}`,
+      FeeAmount: `${response.data.fee_amount}`,
+    };
   } catch (err) {
     logger.error('Fee lookup error occurred', err);
-    return <Fee>{};
+    return;
   }
 };

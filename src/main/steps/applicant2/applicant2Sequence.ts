@@ -16,11 +16,6 @@ export const applicant2Sequence: Step[] = [
   {
     url: Urls.APPLICANT_2_DOB,
     showInSection: Sections.AboutApplicant2,
-    getNextStep: () => Urls.APPLICANT_2_NATIONALITY,
-  },
-  {
-    url: Urls.APPLICANT_2_NATIONALITY,
-    showInSection: Sections.AboutApplicant2,
     getNextStep: () => Urls.APPLICANT_2_OCCUPATION,
   },
   {

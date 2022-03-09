@@ -49,7 +49,7 @@ describe('common > components > full-name', () => {
 
   test('should contain firstNames field', () => {
     const firstNamesField = fields.firstNames as FormOptions;
-    expect(firstNamesField.type).toBe('input');
+    expect(firstNamesField.type).toBe('text');
     expect(firstNamesField.classes).toBe('govuk-label');
     expect((firstNamesField.label as Function)(generatedContent)).toBe(enContent.firstNames);
     expect(((firstNamesField as FormInput).hint as Function)(generatedContent)).toBe(enContent.firstNamesHint);
@@ -59,7 +59,7 @@ describe('common > components > full-name', () => {
 
   test('should contain lastNames field', () => {
     const lastNamesField = fields.lastNames as FormOptions;
-    expect(lastNamesField.type).toBe('input');
+    expect(lastNamesField.type).toBe('text');
     expect(lastNamesField.classes).toBe('govuk-label');
     expect((lastNamesField.label as Function)(generatedContent)).toBe(enContent.lastNames);
     expect(((lastNamesField as FormInput).hint as Function)(generatedContent)).toBe(enContent.lastNamesHint);

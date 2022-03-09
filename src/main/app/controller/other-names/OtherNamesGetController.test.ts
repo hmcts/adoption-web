@@ -71,31 +71,21 @@ describe('OtherNamesGetController', () => {
       expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(1);
       expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('MOCK_ID', formData, 'citizen-update-application');
     });
-
-    test('should log error when triggerEvent call fails', async () => {
-      req.locals.api.triggerEvent.mockRejectedValue('MOCK_ERROR');
-      await controller.get(req, res);
-      expect(req.locals.logger.error).toHaveBeenCalledTimes(1);
-      expect(req.locals.logger.error).toHaveBeenCalledWith('Error saving', 'MOCK_ERROR');
-      //TODO uncomment this line when CCD work is complete
-      // expect(req.session.errors).toEqual([{ errorType: 'errorSaving', propertyName: '*' }]);
-    });
   });
 
-  describe('when there is an error in saving session', () => {
-    test('should throw an error', async () => {
+  describe('when there is returnUrl param in req.query', () => {
+    beforeEach(() => {
       req = mockRequest({
-        session: {
-          user: { email: 'test@example.com' },
-          save: jest.fn(done => done('MOCK_ERROR')),
-        },
+        query: { returnUrl: '/review-pay-submit/check-your-answers' },
+        session: { userCase: { id: 'MOCK_ID' } },
       });
-      try {
-        await controller.get(req, res);
-      } catch (err) {
-        //eslint-disable-next-line jest/no-conditional-expect
-        expect(err).toBe('MOCK_ERROR');
-      }
+      req.url = '/request?returnUrl=/review-pay-submit/check-your-answers';
+    });
+
+    test('should save returnUrl in session and redirect to same url', async () => {
+      await controller.get(req, res);
+      expect(req.session.returnUrl).toEqual('/review-pay-submit/check-your-answers');
+      expect(res.redirect).toHaveBeenCalledWith('/request');
     });
   });
 });

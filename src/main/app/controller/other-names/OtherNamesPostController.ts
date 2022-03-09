@@ -2,8 +2,6 @@ import autobind from 'autobind-decorator';
 import { Response } from 'express';
 import { v4 as generateUuid } from 'uuid';
 
-import { ValidationError } from '../../../app/form/validation';
-import { getNextStepUrl } from '../../../steps';
 import { FieldPrefix } from '../../case/case';
 import { Form, FormFields, FormFieldsFn } from '../../form/Form';
 import { AppRequest } from '../AppRequest';
@@ -40,26 +38,17 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
           req.session.userCase[`${this.fieldPrefix}OtherFirstNames`] = '';
           req.session.userCase[`${this.fieldPrefix}OtherLastNames`] = '';
         }
-        try {
-          req.session.userCase = await this.save(
-            req,
-            {
-              ...formData,
-              [`${this.fieldPrefix}AdditionalNames`]: req.session.userCase[`${this.fieldPrefix}AdditionalNames`],
-            },
-            this.getEventName(req)
-          );
-        } catch (err) {
-          req.locals.logger.error('Error saving', err);
-          req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
-        }
+
+        req.session.userCase = await this.save(
+          req,
+          {
+            ...formData,
+            [`${this.fieldPrefix}AdditionalNames`]: req.session.userCase[`${this.fieldPrefix}AdditionalNames`],
+          },
+          this.getEventName(req)
+        );
       } else {
-        try {
-          req.session.userCase = await this.save(req, formData, this.getEventName(req));
-        } catch (err) {
-          req.locals.logger.error('Error saving', err);
-          req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
-        }
+        req.session.userCase = await this.save(req, formData, this.getEventName(req));
       }
     } else if (req.session.userCase[`${this.fieldPrefix}AdditionalNames`]?.length && !addButtonClicked) {
       // Remove validation errors when there is more than one additional name
@@ -73,18 +62,13 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
       req.session.userCase.addAnotherNameHidden = `${!!addButtonClicked}`;
     }
 
-    if (req.body.saveAsDraft) {
-      // skip empty field errors in case of save as draft
-      req.session.errors = req.session.errors.filter(item => item.errorType !== ValidationError.REQUIRED);
+    this.filterErrorsForSaveAsDraft(req);
+
+    if (req.session.errors.length > 0 || addButton) {
+      this.redirect(req, res, req.url);
+      return;
     }
 
-    const nextUrl = req.session.errors.length > 0 || addButton ? req.url : getNextStepUrl(req, req.session.userCase);
-
-    req.session.save(err => {
-      if (err) {
-        throw err;
-      }
-      res.redirect(nextUrl);
-    });
+    this.checkReturnUrlAndRedirect(req, res, this.ALLOWED_RETURN_URLS);
   }
 }

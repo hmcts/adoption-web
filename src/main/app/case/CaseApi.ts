@@ -29,36 +29,25 @@ export class CaseApi {
   ) {}
 
   public async getOrCreateCase(serviceType: Adoption, userDetails: UserDetails): Promise<CaseWithId> {
-    const userCase = await this.getCase(serviceType);
+    const userCase = await this.getCase();
     return userCase || this.createCase(serviceType, userDetails);
   }
 
-  private async getCase(serviceType: Adoption): Promise<CaseWithId | false> {
+  private async getCase(): Promise<CaseWithId | false> {
     const cases = await this.getCases();
 
-    const serviceCases = cases; //cases.filter(c => c.case_data.divorceOrDissolution === serviceType);
-    console.log('caseapi.ts 41' + serviceType);
-    if (serviceCases.length === 0) {
-      return false;
-    } else if (serviceCases.length > 0) {
-      const { id, state, case_data: caseData } = serviceCases[0];
-      return { ...fromApiFormat(caseData), id: id.toString(), state };
-    } else {
-      throw new Error('Too many cases assigned to user.');
+    switch (cases.length) {
+      case 0: {
+        return false;
+      }
+      case 1: {
+        const { id, state, case_data: caseData } = cases[0];
+        return { ...fromApiFormat(caseData), id: id.toString(), state };
+      }
+      default: {
+        throw new Error('Too many cases assigned to user.');
+      }
     }
-    // switch (serviceCases.length) {
-    //   case 0: {
-    //     return false;
-    //   }
-    //   case 1:
-    //   case 2: {
-    //     const { id, state, case_data: caseData } = serviceCases[0];
-    //     return { ...fromApiFormat(caseData), id: id.toString(), state };
-    //   }
-    //   default: {
-    //     throw new Error('Too many cases assigned to user.');
-    //   }
-    // }
   }
 
   private async getCases(): Promise<CcdV1Response[]> {
@@ -88,7 +77,6 @@ export class CaseApi {
     const tokenResponse: AxiosResponse<CcdTokenResponse> = await this.axios.get(
       `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
     );
-    console.log('caseapi.ts ' + serviceType);
     const token = tokenResponse.data.token;
     const event = { id: CITIZEN_CREATE };
     const data = {
@@ -126,9 +114,7 @@ export class CaseApi {
       const tokenResponse = await this.axios.get<CcdTokenResponse>(`/cases/${caseId}/event-triggers/${eventName}`);
       const token = tokenResponse.data.token;
       const event = { id: eventName };
-      //delete data.applicant1HasOtherNames;
 
-      console.log('caseapi.ts 132 data: ' + JSON.stringify(data));
       const response: AxiosResponse<CcdV2Response> = await this.axios.post(`/cases/${caseId}/events`, {
         event,
         data,
@@ -143,7 +129,6 @@ export class CaseApi {
 
   public async triggerEvent(caseId: string, userData: Partial<Case>, eventName: string): Promise<CaseWithId> {
     const data = toApiFormat(userData);
-    //console.log('CaseAPI 144', JSON.stringify(data));
     return this.sendEvent(caseId, data, eventName);
   }
 

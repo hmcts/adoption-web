@@ -13,14 +13,11 @@ import {
   HUB_PAGE,
   PAY_YOUR_FEE,
   SENT_TO_APPLICANT2_FOR_REVIEW,
+  TASK_LIST_URL,
 } from '../urls';
 
 export class HomeGetController {
   public get(req: AppRequest, res: Response): void {
-    // if (req.session.userCase.divorceOrDissolution !== res.locals.serviceType) {
-    //   throw new Error('Invalid case type');
-    // }
-
     const firstQuestionForm = getApplicantFirstQuestionForm();
     const isFirstQuestionComplete = firstQuestionForm.getErrors(req.session.userCase).length === 0;
 
@@ -57,7 +54,7 @@ const applicant1RedirectPageSwitch = (caseState: State, userCase: Partial<Case>,
       return HUB_PAGE;
     }
     default: {
-      return isFirstQuestionComplete ? APPLYING_WITH_URL : APPLYING_WITH_URL;
+      return isFirstQuestionComplete ? TASK_LIST_URL : APPLYING_WITH_URL;
     }
   }
 };

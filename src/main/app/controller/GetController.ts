@@ -2,10 +2,9 @@ import autobind from 'autobind-decorator';
 import { Response } from 'express';
 import Negotiator from 'negotiator';
 
-import { Fee } from '../../app/fee/fee-lookup-api';
 import { LanguageToggle } from '../../modules/i18n';
-import { getNextIncompleteStepUrl } from '../../steps';
 import { CommonContent, Language, generatePageContent } from '../../steps/common/common.content';
+import * as Urls from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
 import { CITIZEN_UPDATE, State } from '../case/definition';
 
@@ -25,11 +24,18 @@ export class GetController {
       return;
     }
 
+    if (req.query.returnUrl) {
+      this.parseAndSetReturnUrl(req);
+      delete req.query.returnUrl;
+      req.url = req.url.substring(0, req.url.indexOf('?'));
+      this.saveSessionAndRedirect(req, res);
+      return;
+    }
+
     const language = this.getPreferredLanguage(req) as Language;
     const userCase = req.session?.userCase;
     const addresses = req.session?.addresses;
     const eligibility = req.session?.eligibility;
-    const fee = req.session?.fee as Fee;
     const content = generatePageContent({
       language,
       pageContent: this.content,
@@ -37,7 +43,6 @@ export class GetController {
       userEmail: req.session?.user?.email,
       addresses,
       eligibility,
-      fee,
     });
 
     const sessionErrors = req.session?.errors || [];
@@ -51,7 +56,7 @@ export class GetController {
       sessionErrors,
       htmlLang: language,
       isDraft: req.session?.userCase?.state ? req.session.userCase.state === State.Draft : true,
-      getNextIncompleteStepUrl: () => getNextIncompleteStepUrl(req),
+      // getNextIncompleteStepUrl: () => getNextIncompleteStepUrl(req),
     });
   }
 
@@ -72,8 +77,37 @@ export class GetController {
     return negotiator.language(LanguageToggle.supportedLanguages) || 'en';
   }
 
-  protected async save(req: AppRequest, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
-    return req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
+  public parseAndSetReturnUrl(req: AppRequest): void {
+    if (req.query.returnUrl) {
+      if (Object.values(Urls).find(item => item === `${req.query.returnUrl}`)) {
+        req.session.returnUrl = `${req.query.returnUrl}`;
+      }
+    }
+  }
+
+  public async save(req: AppRequest, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
+    try {
+      return await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
+    } catch (err) {
+      req.locals.logger.error('Error saving', err);
+      req.session.errors = req.session.errors || [];
+      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+      return req.session.userCase;
+    }
+  }
+
+  //eslint-disable-next-line @typescript-eslint/ban-types
+  public saveSessionAndRedirect(req: AppRequest, res: Response, callback?: Function): void {
+    req.session.save(err => {
+      if (err) {
+        throw err;
+      }
+      if (callback) {
+        callback();
+      } else {
+        res.redirect(req.url);
+      }
+    });
   }
 
   //eslint-disable-next-line @typescript-eslint/no-unused-vars

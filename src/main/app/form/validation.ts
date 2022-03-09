@@ -15,6 +15,9 @@ export type DateValidator = (value: CaseDate | undefined) => void | string;
 export const enum ValidationError {
   REQUIRED = 'required',
   NOT_SELECTED = 'notSelected',
+  INVALID = 'invalid',
+  NOT_UPLOADED = 'notUploaded',
+  FILE_COUNT_LIMIT_EXCEEDED = 'maxTenFileUpload',
 }
 
 export const isFieldFilledIn: Validator = value => {
@@ -181,5 +184,11 @@ export const isValidAccessCode: Validator = value => {
 export const isAddressSelected: Validator = value => {
   if ((value as string)?.trim() === '-1') {
     return ValidationError.NOT_SELECTED;
+  }
+};
+
+export const isTextAreaValid: Validator = value => {
+  if (value && (value as string).trim?.().length > 500) {
+    return ValidationError.INVALID;
   }
 };
