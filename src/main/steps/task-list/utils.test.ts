@@ -5,6 +5,7 @@ import {
   DocumentType,
   Gender,
   Nationality,
+  PaymentStatus,
   State,
   YesNoNotsure,
   YesOrNo,
@@ -12,8 +13,10 @@ import {
 
 import {
   findFamilyCourtStatus,
+  getAdoptionAgencyDetailStatus,
   getAdoptionAgencyUrl,
   getAdoptionCertificateDetailsStatus,
+  getApplicationStatus,
   getApplyingWithStatus,
   getBirthFatherDetailsStatus,
   getBirthMotherDetailsStatus,
@@ -23,6 +26,7 @@ import {
   getDateChildMovedInStatus,
   getOtherParentStatus,
   getPersonalDetailsStatus,
+  getReviewPaySubmitUrl,
   getSiblingStatus,
   getUploadDocumentStatus,
 } from './utils';
@@ -55,6 +59,44 @@ describe('utils', () => {
       },
     ])('should return correct status %#', async ({ data, expected }) => {
       expect(getApplyingWithStatus(data)).toBe(expected);
+    });
+  });
+
+  describe('getAdoptionAgencyDetailStatus', () => {
+    test.each([
+      {
+        data: {
+          ...mockUserCase,
+          adopAgencyOrLAs: undefined,
+          hasAnotherAdopAgencyOrLA: undefined,
+          socialWorkerName: undefined,
+          socialWorkerPhoneNumber: undefined,
+          socialWorkerEmail: undefined,
+        },
+        expected: 'NOT_STARTED',
+      },
+      {
+        data: mockUserCase,
+        expected: 'COMPLETED',
+      },
+      {
+        data: { ...mockUserCase, hasAnotherAdopAgencyOrLA: YesOrNo.NO },
+        expected: 'COMPLETED',
+      },
+      {
+        data: { ...mockUserCase, hasAnotherAdopAgencyOrLA: undefined, adopAgencyOrLAs: [] },
+        expected: 'IN_PROGRESS',
+      },
+      {
+        data: {
+          ...mockUserCase,
+          hasAnotherAdopAgencyOrLA: undefined,
+          adopAgencyOrLAs: [{ adopAgencyOrLaId: 'MOCK_ID_1' }],
+        },
+        expected: 'IN_PROGRESS',
+      },
+    ])('should return correct status %#', async ({ data, expected }) => {
+      expect(getAdoptionAgencyDetailStatus(data)).toBe(expected);
     });
   });
 
@@ -887,6 +929,10 @@ describe('utils', () => {
       { data: { ...mockUserCase, findFamilyCourt: YesOrNo.NO }, expected: 'COMPLETED' },
       { data: { ...mockUserCase, findFamilyCourt: YesOrNo.NO, familyCourtName: undefined }, expected: 'IN_PROGRESS' },
       { data: { ...mockUserCase, findFamilyCourt: undefined, familyCourtName: undefined }, expected: 'NOT_STARTED' },
+      {
+        data: { ...mockUserCase, applyingWith: undefined, findFamilyCourt: undefined, familyCourtName: undefined },
+        expected: 'CAN_NOT_START_YET',
+      },
     ])('should return correct status %#', async ({ data, expected }) => {
       expect(findFamilyCourtStatus(data)).toBe(expected);
     });
@@ -935,6 +981,65 @@ describe('utils', () => {
       },
     ])('should return correct status %#', async ({ data, expected }) => {
       expect(getUploadDocumentStatus(data)).toBe(expected);
+    });
+  });
+
+  describe('getReviewPaySubmitUrl', () => {
+    test.each([
+      { data: mockUserCase, expected: '/review-pay-submit/equality' },
+      {
+        data: {
+          ...mockUserCase,
+          payments: [
+            {
+              id: 'MOCK_ID',
+              value: {
+                created: 'MOCK_DATE',
+                updated: 'MOCK_DATE',
+                feeCode: 'MOCK_FEE_CODE',
+                amount: 100,
+                status: PaymentStatus.IN_PROGRESS,
+                channel: 'MOCK_CHANNEL',
+                reference: 'MOCK_REF',
+                transactionId: 'MOCK_TRANSACTION_ID',
+              },
+            },
+          ],
+        },
+        expected: '/review-pay-submit/payment/payment-callback',
+      },
+      {
+        data: {
+          ...mockUserCase,
+          payments: [
+            {
+              id: 'MOCK_ID',
+              value: {
+                created: 'MOCK_DATE',
+                updated: 'MOCK_DATE',
+                feeCode: 'MOCK_FEE_CODE',
+                amount: 100,
+                status: PaymentStatus.SUCCESS,
+                channel: 'MOCK_CHANNEL',
+                reference: 'MOCK_REF',
+                transactionId: 'MOCK_TRANSACTION_ID',
+              },
+            },
+          ],
+        },
+        expected: '/application-submitted',
+      },
+    ])('should return correct url %#', async ({ data, expected }) => {
+      expect(getReviewPaySubmitUrl(data)).toBe(expected);
+    });
+  });
+
+  describe('getApplicationStatus', () => {
+    test.each([
+      { data: mockUserCase, expected: 'NOT_STARTED' },
+      { data: { ...mockUserCase, applyingWith: undefined }, expected: 'CAN_NOT_START_YET' },
+    ])('should return correct status %#', async ({ data, expected }) => {
+      expect(getApplicationStatus(data)).toBe(expected);
     });
   });
 });

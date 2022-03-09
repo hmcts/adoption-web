@@ -364,9 +364,8 @@ export const getReviewPaySubmitUrl = (userCase: CaseWithId): string => {
   if (payments.hasPayment) {
     if (payments.wasLastPaymentSuccessful) {
       return urls.APPLICATION_SUBMITTED;
-    } else {
-      return urls.PAYMENT_CALLBACK_URL;
     }
+    return urls.PAYMENT_CALLBACK_URL;
   }
   return urls.EQUALITY;
 };
@@ -387,7 +386,7 @@ export const getUploadDocumentStatus = (userCase: CaseWithId): SectionStatus => 
   if (applicant1CannotUpload && applicant1CannotUploadDocuments && applicant1CannotUploadDocuments.length > 0) {
     return SectionStatus.COMPLETED;
   }
-  console.log(userCase.applyingWith);
+
   const statuses = [
     getApplyingWithStatus(userCase),
     getDateChildMovedInStatus(userCase),
@@ -410,7 +409,6 @@ export const getUploadDocumentStatus = (userCase: CaseWithId): SectionStatus => 
     findFamilyCourtStatus(userCase),
   ];
 
-  console.log(statuses, userCase.applyingWith);
   if (statuses.some(status => status !== SectionStatus.COMPLETED)) {
     return SectionStatus.CAN_NOT_START_YET;
   }
