@@ -58,5 +58,6 @@ module.exports = {
     await I.fillField(this.fields.birthMotherAddressCountry, 'Canada');
     await I.wait('2');
     await I.click('Save and continue');
+    await I.wait('4');
   },
 };

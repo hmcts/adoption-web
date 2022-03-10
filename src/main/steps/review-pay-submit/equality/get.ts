@@ -19,7 +19,6 @@ export default class PCQGetController {
     const tokenKey: string = config.get('services.equalityAndDiversity.tokenKey');
     const url = config.get('services.equalityAndDiversity.url');
     const pcqEnabled = config.get('services.equalityAndDiversity.pcqEnabled');
-    console.log(config);
     if (pcqEnabled && pcqEnabled === 'true' && !req.session.userCase.pcqId && tokenKey && url) {
       const path: string = config.get('services.equalityAndDiversity.path');
       const health = `${url}/health`;
@@ -34,7 +33,7 @@ export default class PCQGetController {
           return res.redirect(CHECK_ANSWERS_URL);
         }
       } catch (err) {
-        logger.error(`Could not connect to PCQ service: ${health}`, err.message);
+        logger.error(`Could not connect to PCQ service: ${health}, pcqEnabled: ${pcqEnabled}`, err.message);
         return res.redirect(CHECK_ANSWERS_URL);
       }
       const protocol = req.app.locals.developmentMode ? 'http://' : '';
@@ -62,7 +61,7 @@ export default class PCQGetController {
           CITIZEN_UPDATE
         );
       } catch (err) {
-        req.locals.logger.error('Error updating PCQ ID for Applicant', err);
+        req.locals.logger.error(`Error updating PCQ ID for Applicant, pcqEnabled: ${pcqEnabled}`, err);
         return res.redirect(CHECK_ANSWERS_URL);
       }
       const qs = Object.keys(params)
@@ -74,7 +73,7 @@ export default class PCQGetController {
           req.locals.logger.error('Error', err);
           throw err;
         }
-        logger.info(`PCQ service redirect URL: ${url}${path}?${qs}`);
+        logger.info(`PCQ service redirect URL: ${url}${path}?${qs}, pcqEnabled: ${pcqEnabled}`);
         res.redirect(`${url}${path}?${qs}`);
       });
     } else {

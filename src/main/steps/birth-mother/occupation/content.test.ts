@@ -54,7 +54,7 @@ describe('birth mother > occupation content', () => {
     const fields = form.fields as FormFields;
     const occupationField = fields.birthMotherOccupation;
 
-    expect(occupationField.type).toBe('input');
+    expect(occupationField.type).toBe('text');
     expect((occupationField.label as Function)(generateContent(commonContent))).toBe(enContent.label);
     expect((occupationField.hint as Function)(generateContent(commonContent))).toBe(enContent.hint);
     expect(occupationField.labelSize).toBe('l');

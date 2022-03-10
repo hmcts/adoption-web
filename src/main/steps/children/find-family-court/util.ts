@@ -10,7 +10,7 @@ export const getCourtEmailId = (key: string): string => {
     ['worcester family court', 'NewportGwentadoptionapplication@justice.gov.uk'],
     ['newport (gwent) family court', 'NewportGwentadoptionapplication@justice.gov.uk'],
   ]);
-  return map.has(courtKey) ? (map.get(courtKey) as string) : 'chelmsfordadoptionapplication@justice.gov.uk';
+  return map.has(courtKey) ? (map.get(courtKey) as string) : 'adoptionproject@justice.gov.uk';
   /*
   South East
   Chelmsford Family Court -  chelmsfordadoptionapplication@justice.gov.uk

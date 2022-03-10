@@ -17,13 +17,14 @@ module.exports = {
     addressCity: 'input[id$="address-city"]',
     addressPostcode: 'input[id$="address-postcode"]',
     email: 'input[id$="email"]',
-    pcqNO: '.govuk-button.govuk-button--secondary',
+    pcqNO: 'form[action="/start-page"] button[formaction="/opt-out"]',
     caseID: '.govuk-panel__body strong',
     changeChildMoveInDate: 'a[href="/date-child-moved-in?returnUrl=/review-pay-submit/check-your-answers"]',
   },
   async selectNoPCQOption() {
     await I.wait('5');
     const numOfPCQElements = await I.grabNumberOfVisibleElements(this.fields.pcqNO);
+    console.log('No of elements: ' + numOfPCQElements);
     if (numOfPCQElements === 1) {
       await I.click("I don't want to answer these questions");
     }
@@ -38,7 +39,7 @@ module.exports = {
 
   async reviewYourAnswersAndContinue() {
     await I.waitForText('Review your answers', 30);
-    await I.click('Continue');
+    await I.click('Save and continue');
     await I.wait('5');
   },
 
@@ -49,7 +50,7 @@ module.exports = {
     await I.fillField(this.fields.applicant1SotFullName, 'Joe Bloggs');
     await I.fillField(this.fields.applicant2SotFullName, 'George Thomas');
     await I.click('Confirm');
-    await I.wait('3');
+    await I.wait('4');
   },
 
   async adoptionCourtFeesByCard() {
