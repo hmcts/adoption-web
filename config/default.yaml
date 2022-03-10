@@ -45,3 +45,14 @@ e2e:
   userTestPassword: ''
 appInsights:
   instrumentationKey:
+localCourt:
+  emailId:
+    CHELMSFORD_FAMILY_COURT: 'gaurav.tomar@hmcts.net'
+    OXFORD_FAMILY_COURT: 'gaurav.tomar@hmcts.net'
+    MEDWAY_FAMILY_COURT: 'gaurav.tomar@hmcts.net'
+    PORTSMOUTH_FAMILY_COURT: 'gaurav.tomar@hmcts.net'
+    LEEDS_FAMILY_COURT: 'gaurav.tomar@hmcts.net'
+    NORTHAMPTON_FAMILY_COURT: 'gaurav.tomar@hmcts.net'
+    WORCESTER_FAMILY_COURT: 'gaurav.tomar@hmcts.net'
+    NEWPORT_GWENT_FAMILY_COURT: 'gaurav.tomar@hmcts.net'
+    FALLBACK_EMAIL_ID: 'gaurav.tomar@hmcts.net'
