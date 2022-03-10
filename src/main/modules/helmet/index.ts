@@ -1,6 +1,7 @@
 import * as express from 'express';
 import { Express, RequestHandler } from 'express';
-import helmet = require('helmet');
+
+const helmet = require('helmet');
 
 export interface HelmetConfig {
   referrerPolicy: string;
