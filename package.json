@@ -62,12 +62,12 @@
     "@uppy/xhr-upload": "^2.0.7",
     "applicationinsights": "^2.2.2",
     "autobind-decorator": "^2.4.0",
-    "axios": "^0.26.0",
+    "axios": "^0.26.1",
     "config": "^3.3.7",
     "connect-redis": "^6.1.1",
     "cookie-parser": "^1.4.5",
     "csurf": "^1.11.0",
-    "dayjs": "^1.10.7",
+    "dayjs": "^1.10.8",
     "email-validator": "^2.0.4",
     "express": "^4.17.3",
     "express-http-proxy": "^1.6.3",
@@ -89,13 +89,13 @@
     "serve-favicon": "^2.5.0",
     "session-file-store": "^1.5.0",
     "toobusy-js": "^0.5.1",
-    "ts-node": "^10.4.0",
+    "ts-node": "^10.7.0",
     "tsconfig-paths": "^3.11.0",
     "typescript": "^4.6.2",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.12",
+    "@babel/core": "^7.17.5",
     "@babel/preset-env": "^7.16.11",
     "@types/copy-webpack-plugin": "^10.1.0",
     "@types/jest": "^27.4.1",
@@ -136,7 +136,7 @@
     "pa11y": "^6.1.1",
     "playwright": "^1.18.1",
     "prettier": "^2.5.1",
-    "sass-loader": "^12.4.0",
+    "sass-loader": "^12.6.0",
     "sonar-scanner": "^3.1.0",
     "style-loader": "^3.3.1",
     "ts-jest": "^26.5.6",
@@ -145,7 +145,7 @@
     "webdriverio": "^7.16.16",
     "webpack": "^5.70.0",
     "webpack-cli": "^4.9.2",
-    "webpack-dev-middleware": "^5.3.0",
+    "webpack-dev-middleware": "^5.3.1",
     "webpack-node-externals": "^3.0.0"
   }
 }
