@@ -145,7 +145,7 @@
     "webdriverio": "^7.16.16",
     "webpack": "^5.70.0",
     "webpack-cli": "^4.9.2",
-    "webpack-dev-middleware": "^5.3.0",
+    "webpack-dev-middleware": "^5.3.1",
     "webpack-node-externals": "^3.0.0"
   }
 }
