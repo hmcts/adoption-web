@@ -17,14 +17,21 @@ import '@uppy/progress-bar/src/style.scss';
 const initUploadManager = (): void => {
   const url = DOCUMENT_MANAGER;
   const csrfToken = (getById('csrfToken') as HTMLInputElement)?.value;
+  const locale = (getById('locale') as HTMLInputElement)?.value;
   const csrfQuery = `?_csrf=${csrfToken}`;
   location.hash = '';
 
-  const chooseFilePhoto = 'Choose a file or take a photo';
+  let chooseFilePhoto;
+  if (locale === 'cy') {
+    chooseFilePhoto = 'Choose a file or take a photo (in welsh)';
+  } else {
+    chooseFilePhoto = 'Choose a file or take a photo';
+  }
 
   const uppy = new Uppy({
     restrictions: {
-      maxFileSize: 10485760,
+      maxFileSize: 2097152,
+      maxTotalFileSize: 10485760,
       maxNumberOfFiles: 10,
       allowedFileTypes: ['image/jpeg', 'image/tiff', 'image/png', 'application/pdf', 'image/bmp'],
     },
