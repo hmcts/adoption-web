@@ -3,9 +3,9 @@ import {
   JURISDICTION_CONNECTION_SUMMARY,
   JURISDICTION_INTERSTITIAL_URL,
   JURISDICTION_MAY_NOT_BE_ABLE_TO,
-  PAYMENT_CALLBACK_URL,
-  PAY_AND_SUBMIT,
-  PAY_YOUR_FEE,
+  // PAYMENT_CALLBACK_URL,
+  // PAY_AND_SUBMIT,
+  // PAY_YOUR_FEE,
   WHERE_YOUR_LIVES_ARE_BASED_URL,
 } from '../../steps/urls';
 
@@ -20,9 +20,11 @@ if (backLink) {
       document.location.pathname === JURISDICTION_CONNECTION_SUMMARY
     ) {
       document.location.pathname = WHERE_YOUR_LIVES_ARE_BASED_URL;
-    } else if (document.location.pathname === PAY_YOUR_FEE || document.location.pathname === PAY_AND_SUBMIT) {
-      document.location.href = `${PAYMENT_CALLBACK_URL}?back=true`;
-    } else {
+    }
+    //else if (document.location.pathname === PAY_YOUR_FEE || document.location.pathname === PAY_AND_SUBMIT) {
+    //   document.location.href = `${PAYMENT_CALLBACK_URL}?back=true`;
+    // }
+    else {
       history.go(-1);
     }
   };

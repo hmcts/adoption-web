@@ -32,6 +32,9 @@ export const en = (): Record<string, unknown> => ({
     applicant2SotFullName: {
       required: 'Enter a full name',
     },
+    adoptionFee: {
+      errorRetrievingFee: 'Error in retrieving fee',
+    },
   },
 });
 
@@ -63,6 +66,9 @@ export const cy = (): Record<string, unknown> => ({
     applicant2SotFullName: {
       required: 'Enter a full name (in Welsh)',
     },
+    adoptionFee: {
+      errorRetrievingFee: 'Error in retrieving fee (in Welsh)',
+    },
   },
 });
 
@@ -90,6 +96,25 @@ export const form: FormContent = {
               label: l => l.applicant1SotFullName,
               labelSize: null,
               validator: isFieldFilledIn,
+            },
+            adoptionFee: {
+              type: 'hidden',
+              hidden: true,
+              validator: () => {
+                // console.log("userCase.applicationFeeOrderSummary?.Fees?.length: "+JSON.stringify(userCase.applicationFeeOrderSummary));
+                // userCase.applicationFeeOrderSummary= undefined;
+                // console.log("userCase.applicationFeeOrderSummary?.Fees?.length: "+JSON.stringify(userCase.applicationFeeOrderSummary));
+                // if (!userCase.applicationFeeOrderSummary) {
+
+                // if (
+                //   !userCase.applicationFeeOrderSummary ||
+                //   !userCase.applicationFeeOrderSummary.Fees ||
+                //   (userCase?.applicationFeeOrderSummary && userCase.applicationFeeOrderSummary?.Fees?.length < 1)
+                // ) {
+                if (userCase?.applicationFeeOrderSummary && userCase.applicationFeeOrderSummary?.Fees?.length < 1) {
+                  return 'errorRetrievingFee';
+                }
+              },
             },
           }
         : {
@@ -132,6 +157,15 @@ export const form: FormContent = {
               label: l => l.applicant2SotFullName,
               labelSize: null,
               validator: isFieldFilledIn,
+            },
+            adoptionFee: {
+              type: 'hidden',
+              hidden: true,
+              validator: () => {
+                if (userCase?.applicationFeeOrderSummary && userCase.applicationFeeOrderSummary?.Fees?.length < 1) {
+                  return 'errorRetrievingFee';
+                }
+              },
             },
           }),
     };

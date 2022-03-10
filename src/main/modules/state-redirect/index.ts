@@ -9,10 +9,10 @@ import {
   APPLICANT_2,
   APPLICATION_SUBMITTED,
   CHECK_ANSWERS_URL,
-  PAYMENT_CALLBACK_URL,
-  PAY_AND_SUBMIT,
-  PAY_YOUR_FEE,
-  PageLink,
+  // PAYMENT_CALLBACK_URL,
+  // PAY_AND_SUBMIT,
+  // PAY_YOUR_FEE,
+  // PageLink,
   TASK_LIST_URL,
 } from '../../steps/urls';
 
@@ -46,8 +46,8 @@ export class StateRedirectMiddleware {
         }
 
         if (
-          req.session.userCase?.state !== State.AwaitingPayment ||
-          [PAY_YOUR_FEE, PAY_AND_SUBMIT, PAYMENT_CALLBACK_URL].includes(req.path as PageLink)
+          req.session.userCase?.state !== State.AwaitingPayment // ||
+          //[PAY_YOUR_FEE, PAY_AND_SUBMIT, PAYMENT_CALLBACK_URL].includes(req.path as PageLink)
         ) {
           return next();
         }

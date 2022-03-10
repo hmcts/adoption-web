@@ -15,13 +15,13 @@ export const reviewPaySubmitSequence: Step[] = [
   {
     url: Urls.STATEMENT_OF_TRUTH,
     showInSection: Sections.ReviewPaySubmit,
-    getNextStep: () => Urls.PAY_YOUR_FEE,
-  },
-  {
-    url: Urls.PAY_YOUR_FEE,
-    showInSection: Sections.ReviewPaySubmit,
     getNextStep: () => Urls.PAYMENT_CALLBACK_URL,
   },
+  // {
+  //   url: Urls.PAY_YOUR_FEE,
+  //   showInSection: Sections.ReviewPaySubmit,
+  //   getNextStep: () => Urls.PAYMENT_CALLBACK_URL,
+  // },
   {
     url: Urls.PAYMENT_CALLBACK_URL,
     showInSection: Sections.ReviewPaySubmit,

@@ -90,7 +90,7 @@ const langAssertions = (language, content) => {
     applicant1SotFullName,
     applicant2SotFullName,
     confirm,
-    errors,
+    //errors,
   } = content;
 
   expect(generatedContent.section).toEqual(section);
@@ -103,7 +103,7 @@ const langAssertions = (language, content) => {
   expect(generatedContent.applicant1SotFullName).toEqual(applicant1SotFullName);
   expect(generatedContent.applicant2SotFullName).toEqual(applicant2SotFullName);
   expect(generatedContent.confirm).toEqual(confirm);
-  expect(generatedContent.errors).toEqual(errors);
+  //expect(generatedContent.errors).toEqual(errors);
 };
 
 const commonContent = { language: EN } as CommonContent;

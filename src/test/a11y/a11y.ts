@@ -131,7 +131,7 @@ describe('Accessibility', () => {
     urls.ELIGIBILITY_URL,
     urls.INELIGIBLE_TO_ADOPT,
     urls.REVIEW_PAY_SUBMIT,
-    urls.PAY_YOUR_FEE,
+    // urls.PAY_YOUR_FEE,
     urls.PAYMENT_CALLBACK_URL,
     urls.EQUALITY,
     urls.DOCUMENT_MANAGER,
