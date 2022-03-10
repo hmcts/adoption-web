@@ -3,6 +3,7 @@ import { Response } from 'express';
 import Negotiator from 'negotiator';
 
 import { LanguageToggle } from '../../modules/i18n';
+import { getNextStepUrl } from '../../steps';
 import { CommonContent, Language, generatePageContent } from '../../steps/common/common.content';
 import * as Urls from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
@@ -113,5 +114,28 @@ export class GetController {
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected getEventName(req: AppRequest): string {
     return CITIZEN_UPDATE;
+  }
+
+  /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
+  protected redirect(req: AppRequest<any>, res: Response, nextUrl?: string): void {
+    let target;
+    if (req.body['saveAsDraft']) {
+      //redirects to task-list page in case of save-as-draft button click
+      req.session.returnUrl = undefined;
+      target = Urls.TASK_LIST_URL;
+    } else if (req.session.errors?.length) {
+      //redirects to same page in case of validation errors
+      target = req.url;
+    } else {
+      //redirects to input nextUrl if present otherwise calls getNextStepUrl to get the next step url
+      target = nextUrl || getNextStepUrl(req, req.session.userCase);
+    }
+
+    req.session.save(err => {
+      if (err) {
+        throw err;
+      }
+      res.redirect(target);
+    });
   }
 }
