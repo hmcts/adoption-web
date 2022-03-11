@@ -1,7 +1,7 @@
 import config from 'config';
 
 export const getCourtEmailId = (key: string): string => {
-  const courtKey: string = key && key.trim().length > 0 ? key.trim().toLowerCase() : 'chelmsford family court';
+  const courtKey: string = key && key.trim().length > 0 ? key.trim().toLowerCase() : 'court name not provided';
   const map = new Map<string, string>([
     ['chelmsford family court', config.get('localCourt.emailId.CHELMSFORD_FAMILY_COURT')],
     ['oxford family court', config.get('localCourt.emailId.OXFORD_FAMILY_COURT')],
