@@ -123,8 +123,7 @@ const cy: typeof en = {
   warning: 'Rhybudd',
   required: 'Nid ydych wedi ateb y cwestiwn. Rhaid ichi ddewis ateb cyn symud ymlaen.',
   notAnswered: 'Nid ydych wedi ateb y cwestiwn.',
-  errorSaving:
-    "Mae'n ddrwg gennym, rydym yn cael problemau technegol wrth geisio cadw eich cais. Rhowch gynnig arall arni mewn ychydig funudau.",
+  errorSaving: 'Sorry, we are unable to save your application right now. Please try again later. (in welsh)',
   ogl: 'Mae’r holl gynnwys ar gael o dan <a class="govuk-link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license" >Drwydded Agored y Llywodraeth f3.0</a>, oni nodir fel arall',
   errorSummaryHeading: 'There is a problem (in welsh)',
   saveAndSignOut: 'Cadw ac allgofnodi',
