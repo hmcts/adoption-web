@@ -1,7 +1,4 @@
 nodejs:
-  # Don't modify below here
-  image: ${IMAGE_NAME}
-  ingressHost: ${SERVICE_FQDN}
   environment:
     #Pilot local-court email-Ids
     CHELMSFORD_FAMILY_COURT_EMAIL: 'chelmsfordadoptionapplication@mailinator.com'
@@ -13,6 +10,3 @@ nodejs:
     WORCESTER_FAMILY_COURT_EMAIL: 'Worcesteradoptionapplication@mailinator.com'
     NEWPORT_GWENT_FAMILY_COURT_EMAIL: 'NewportGwentadoptionapplication@mailinator.com'
     FALLBACK_EMAIL_ID_VALUE: 'adoptionproject@mailinator.com'
-
-idam-pr:
-  enabled: false
