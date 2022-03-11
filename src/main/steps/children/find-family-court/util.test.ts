@@ -1,3 +1,5 @@
+import config from 'config';
+
 import { getCourtEmailId } from './util';
 
 describe('utils', () => {
@@ -5,12 +7,12 @@ describe('utils', () => {
     test('When sending not listed court name', async () => {
       const emailId = getCourtEmailId('London Court');
 
-      expect(emailId).toStrictEqual('adoptionproject@justice.gov.uk');
+      expect(emailId).toStrictEqual(config.get('localCourt.emailId.FALLBACK_EMAIL_ID'));
     });
     test('When sending listed court name', async () => {
       const emailId = getCourtEmailId('oxford family court');
 
-      expect(emailId).toStrictEqual('Oxfordadoptionapplication@justice.gov.uk');
+      expect(emailId).toStrictEqual(config.get('localCourt.emailId.OXFORD_FAMILY_COURT'));
     });
   });
 });

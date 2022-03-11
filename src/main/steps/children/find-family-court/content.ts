@@ -8,7 +8,7 @@ const en = content => ({
   title: 'Choose a family court',
   findFamilyCourtParagraph1:
     'There may be court hearings related to your application to adopt. The birth parents may be present at these. You do not have to attend these hearings.',
-  findFamilyCourtParagraph2: `You have told us that the court which issued the placement order was <b>${content.userCase.placementOrders[0].placementOrderCourt}</b>.`,
+  findFamilyCourtParagraph2: `You have told us that the court which issued the placement order was <b>${content.userCase?.placementOrders[0]?.placementOrderCourt}</b>.`,
   findFamilyCourt: 'Do you want the hearings to be heard in the same court?',
   findFamilyCourtHint: 'You should discuss this with your social worker or adoption agency.',
   familyCourtNameParagraph1:
