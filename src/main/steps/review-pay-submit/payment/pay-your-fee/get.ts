@@ -3,7 +3,6 @@ import config from 'config';
 import { Response } from 'express';
 import { v4 as generateUuid } from 'uuid';
 
-// import { Form, FormFields } from '../../../../app/form/Form';
 import { CITIZEN_SUBMIT, PaymentStatus, State } from '../../../../app/case/definition';
 import { AppRequest } from '../../../../app/controller/AppRequest';
 import { GetController } from '../../../../app/controller/GetController';
@@ -42,22 +41,13 @@ export default class PayYourFeeGetController extends GetController {
         throw new Error('Unable to get fee from fee-register API');
       }
     }
-    ////////////////////////////////////////////////////////////////////
-    // const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
-    // const form = new Form(fields);
-    // const { _csrf, ...formData } = form.getParsedBody(req.body);
-    // req.session.errors = form.getErrors(formData);
-    //Object.assign(req.session.userCase, formData);
 
     const applicationFeeOrderSummary = req.session.userCase.applicationFeeOrderSummary;
-    //const fee = applicationFeeOrderSummary?.Fees[0]?.value;
-    const fee =
-      applicationFeeOrderSummary && applicationFeeOrderSummary.Fees
-        ? applicationFeeOrderSummary?.Fees[0]?.value
-        : undefined;
+    const fee = applicationFeeOrderSummary?.Fees[0]?.value;
     if (!fee) {
       req.session.errors?.push({ errorType: 'errorRetrievingFee', propertyName: 'paymentType' });
-      this.redirect(req, res, req.url);
+      const callback = () => res.redirect(req.url);
+      super.saveSessionAndRedirect(req, res, callback);
       return;
     }
 
@@ -67,13 +57,13 @@ export default class PayYourFeeGetController extends GetController {
 
     const payments = new PaymentModel(req.session.userCase?.payments);
     if (payments.isPaymentInProgress()) {
-      return this.redirect(req, res, PAYMENT_CALLBACK_URL);
+      const callback = () => res.redirect(PAYMENT_CALLBACK_URL);
+      return super.saveSessionAndRedirect(req, res, callback);
     }
 
     if (payments.paymentTotal === +applicationFeeOrderSummary.PaymentTotal) {
-      //user has already made a payment
-      //TODO reditect to application submitted screen in future
-      return this.redirect(req, res, APPLICATION_SUBMITTED);
+      const callback = () => res.redirect(APPLICATION_SUBMITTED);
+      return super.saveSessionAndRedirect(req, res, callback);
     }
 
     const client = this.getPaymentClient(req, res);
@@ -93,7 +83,8 @@ export default class PayYourFeeGetController extends GetController {
 
     req.session.userCase = await req.locals.api.addPayment(req.session.userCase?.id, payments.list);
 
-    this.redirect(req, res, payment._links.next_url.href);
+    const callback = () => res.redirect(payment._links.next_url.href);
+    super.saveSessionAndRedirect(req, res, callback);
   }
 
   private getPaymentClient(req: AppRequest, res: Response) {

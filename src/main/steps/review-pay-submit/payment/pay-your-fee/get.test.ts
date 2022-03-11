@@ -64,13 +64,21 @@ describe('PayYourFeeGetController', () => {
     it('shoud not call the fee lookup api', async () => {
       req = mockRequest({
         userCase: {
-          applicationFeeOrderSummary: { PaymentTotal: '100' },
+          applicationFeeOrderSummary: {
+            PaymentTotal: '100',
+            Fees: [{ id: 'MOCK_V4_UUID', value: { FeeAmount: '4321' } }],
+          },
         },
+      });
+      (mockCreate as jest.Mock).mockReturnValueOnce({
+        date_created: '1999-12-31T23:59:59.999Z',
+        reference: 'mock ref',
+        external_reference: 'mock external reference payment id',
+        _links: { next_url: { href: 'http://example.com/pay' } },
       });
       await controller.get(req, res);
       expect(mockGetFee).not.toHaveBeenCalled();
-      expect(req.locals.api.triggerEvent).not.toHaveBeenCalled();
-      expect(req.session.userCase.applicationFeeOrderSummary).toEqual({ PaymentTotal: '100' });
+      expect(req.locals.api.triggerEvent).toHaveBeenCalled();
     });
   });
 
