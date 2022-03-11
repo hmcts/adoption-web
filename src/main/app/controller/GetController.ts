@@ -119,11 +119,7 @@ export class GetController {
   /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
   protected redirect(req: AppRequest<any>, res: Response, nextUrl?: string): void {
     let target;
-    if (req.body['saveAsDraft']) {
-      //redirects to task-list page in case of save-as-draft button click
-      req.session.returnUrl = undefined;
-      target = Urls.TASK_LIST_URL;
-    } else if (req.session.errors?.length) {
+    if (req.session.errors?.length) {
       //redirects to same page in case of validation errors
       target = req.url;
     } else {
