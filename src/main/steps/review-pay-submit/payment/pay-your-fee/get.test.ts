@@ -10,9 +10,13 @@ jest.mock('../../../../app/fee/fee-lookup-api', () => ({
 
 import { mockRequest } from '../../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../../test/unit/utils/mockResponse';
+import { PaymentStatus, State } from '../../../../app/case/definition';
 import { generateContent } from '../../statement-of-truth/content';
 
 import FeeGetController from './get';
+
+jest.mock('../../../../app/payment/PaymentClient');
+const { mockCreate } = require('../../../../app/payment/PaymentClient');
 
 describe('PayYourFeeGetController', () => {
   const controller = new FeeGetController(__dirname + './template', generateContent);
@@ -24,7 +28,7 @@ describe('PayYourFeeGetController', () => {
   });
 
   describe('when there is no applicationFeeOrderSummary object in userCase', () => {
-    it('shoul call the fee lookup api', async () => {
+    it('shoud call the fee lookup api', async () => {
       mockGetFee.mockResolvedValue({ FeeAmount: '4321' });
       await controller.get(req, res);
       expect(mockGetFee).toHaveBeenCalledWith(req.locals.logger);
@@ -56,19 +60,94 @@ describe('PayYourFeeGetController', () => {
     });
   });
 
-  // describe('when there is a applicationFeeOrderSummary object in userCase', () => {
-  //   it('shoul not call the fee lookup api', async () => {
-  //     req = mockRequest({
-  //       userCase: {
-  //         applicationFeeOrderSummary: { PaymentTotal: '100' },
-  //       },
-  //     });
-  //     await controller.get(req, res);
-  //     expect(mockGetFee).not.toHaveBeenCalled();
-  //     expect(req.locals.api.triggerEvent).not.toHaveBeenCalled();
-  //     expect(req.session.userCase.applicationFeeOrderSummary).toEqual({ PaymentTotal: '100' });
-  //   });
-  // });
+  describe('when there is a applicationFeeOrderSummary object in userCase', () => {
+    it('shoud not call the fee lookup api', async () => {
+      req = mockRequest({
+        userCase: {
+          applicationFeeOrderSummary: { PaymentTotal: '100' },
+        },
+      });
+      await controller.get(req, res);
+      expect(mockGetFee).not.toHaveBeenCalled();
+      expect(req.locals.api.triggerEvent).not.toHaveBeenCalled();
+      expect(req.session.userCase.applicationFeeOrderSummary).toEqual({ PaymentTotal: '100' });
+    });
+  });
+
+  describe('when there is a applicationFeeOrderSummary object and state is AwaitingPayment', () => {
+    it('shoud not call the fee lookup api', async () => {
+      req = mockRequest({
+        userCase: {
+          state: State.AwaitingPayment,
+          payments: [
+            {
+              id: 'mock external reference payment id',
+              value: {
+                amount: 123,
+                channel: 'HMCTS Pay',
+                create: '1999-12-31T20:00:01.123',
+                feeCode: 'mock fee code',
+                reference: 'mock ref',
+                siteId: 'AA00',
+                status: PaymentStatus.IN_PROGRESS,
+                transactionId: 'mock external reference payment id',
+              },
+            },
+          ],
+          applicationFeeOrderSummary: {
+            PaymentTotal: '100',
+            Fees: [{ id: 'MOCK_V4_UUID', value: { FeeAmount: '4321' } }],
+          },
+        },
+      });
+      await controller.get(req, res);
+      expect(mockGetFee).not.toHaveBeenCalled();
+      expect(req.locals.api.triggerEvent).not.toHaveBeenCalled();
+      expect(req.session.userCase.applicationFeeOrderSummary.Fees).toEqual([
+        { id: 'MOCK_V4_UUID', value: { FeeAmount: '4321' } },
+      ]);
+    });
+  });
+
+  describe('when there is a applicationFeeOrderSummary object and state is not AwaitingPayment', () => {
+    it('shoud not call the fee lookup api', async () => {
+      req = mockRequest({
+        userCase: {
+          id: 'abcd-efgh-ijkl-mnop-qrst-uvwx-yz12',
+          state: State.FinalOrderComplete,
+          payments: [
+            {
+              id: 'mock external reference payment id',
+              value: {
+                amount: 123,
+                channel: 'HMCTS Pay',
+                create: '1999-12-31T20:00:01.123',
+                feeCode: 'mock fee code',
+                reference: 'mock ref',
+                siteId: 'AA00',
+                status: PaymentStatus.IN_PROGRESS,
+                transactionId: 'mock external reference payment id',
+              },
+            },
+          ],
+          applicationFeeOrderSummary: {
+            PaymentTotal: '100',
+            Fees: [{ id: 'MOCK_V4_UUID', value: { FeeAmount: '4321' } }],
+          },
+        },
+      });
+
+      (mockCreate as jest.Mock).mockReturnValueOnce({
+        date_created: '1999-12-31T23:59:59.999Z',
+        reference: 'mock ref',
+        external_reference: 'mock external reference payment id',
+        _links: { next_url: { href: 'http://example.com/pay' } },
+      });
+      await controller.get(req, res);
+      expect(mockGetFee).not.toHaveBeenCalled();
+      expect(req.locals.api.triggerEvent).toHaveBeenCalled();
+    });
+  });
 
   describe('when there is an error in destroying session', () => {
     test('Should throw an error', async () => {

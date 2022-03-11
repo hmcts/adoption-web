@@ -46,31 +46,30 @@ export default class PayYourFeeGetController extends GetController {
     // const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
     // const form = new Form(fields);
     // const { _csrf, ...formData } = form.getParsedBody(req.body);
-
     // req.session.errors = form.getErrors(formData);
+    //Object.assign(req.session.userCase, formData);
 
     const applicationFeeOrderSummary = req.session.userCase.applicationFeeOrderSummary;
-    const fee = applicationFeeOrderSummary?.Fees[0]?.value;
+    //const fee = applicationFeeOrderSummary?.Fees[0]?.value;
+    const fee =
+      applicationFeeOrderSummary && applicationFeeOrderSummary.Fees
+        ? applicationFeeOrderSummary?.Fees[0]?.value
+        : undefined;
     if (!fee) {
       req.session.errors?.push({ errorType: 'errorRetrievingFee', propertyName: 'paymentType' });
       this.redirect(req, res, req.url);
       return;
     }
 
-    //Object.assign(req.session.userCase, formData);
-
-    console.log('req.session.userCase.state', req.session.userCase.state);
     if (req.session.userCase.state !== State.AwaitingPayment) {
       req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, {}, CITIZEN_SUBMIT);
-      console.log('req.session.userCase.state after', req.session.userCase.state);
     }
 
-    const payments = new PaymentModel(req.session.userCase.payments);
+    const payments = new PaymentModel(req.session.userCase?.payments);
     if (payments.isPaymentInProgress()) {
       return this.redirect(req, res, PAYMENT_CALLBACK_URL);
     }
 
-    console.log('payments.paymentTotal', payments.paymentTotal);
     if (payments.paymentTotal === +applicationFeeOrderSummary.PaymentTotal) {
       //user has already made a payment
       //TODO reditect to application submitted screen in future
@@ -92,7 +91,7 @@ export default class PayYourFeeGetController extends GetController {
       transactionId: payment.external_reference,
     });
 
-    req.session.userCase = await req.locals.api.addPayment(req.session.userCase.id, payments.list);
+    req.session.userCase = await req.locals.api.addPayment(req.session.userCase?.id, payments.list);
 
     this.redirect(req, res, payment._links.next_url.href);
   }
