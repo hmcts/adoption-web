@@ -77,7 +77,6 @@ export class CaseApi {
     const tokenResponse: AxiosResponse<CcdTokenResponse> = await this.axios.get(
       `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
     );
-    console.log('caseapi.ts ' + serviceType);
     const token = tokenResponse.data.token;
     const event = { id: CITIZEN_CREATE };
     const data = {

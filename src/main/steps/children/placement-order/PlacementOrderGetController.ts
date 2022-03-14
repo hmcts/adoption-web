@@ -18,6 +18,7 @@ export default class PlacementOrderGetController extends GetController {
       redirect = true;
     } else if (req.query.change) {
       req.session.userCase.selectedPlacementOrderId = `${req.query.change}`;
+      this.parseAndSetReturnUrl(req);
       delete req.query.change;
       req.url = req.url.substring(0, req.url.indexOf('?'));
       redirect = true;
@@ -59,15 +60,8 @@ export default class PlacementOrderGetController extends GetController {
       this.getEventName(req)
     );
 
-    if (redirect) {
-      super.saveSessionAndRedirect(req, res);
-    } else {
-      req.session.save(err => {
-        if (err) {
-          throw err;
-        }
-        super.get(req, res);
-      });
-    }
+    const callback = redirect ? undefined : () => super.get(req, res);
+
+    super.saveSessionAndRedirect(req, res, callback);
   }
 }

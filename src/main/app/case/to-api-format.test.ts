@@ -18,9 +18,8 @@ describe('to-api-format', () => {
     applicant1AdditionalNames: [{ id: 'MOCK_ID', firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' }],
     applicant2HasOtherNames: YesOrNo.YES,
     applicant2AdditionalNames: [{ id: 'MOCK_ID', firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' }],
-    applicant1AdditionalNationalities: ['MOCK_COUNTRY'],
-    applicant2AdditionalNationalities: ['MOCK_COUNTRY'],
     childrenAdditionalNationalities: ['MOCK_COUNTRY'],
+    dateChildMovedIn: { day: '1', month: '1', year: '2021' },
     applicant1DateOfBirth: { day: '20', month: '1', year: '2000' },
     applicant2DateOfBirth: undefined,
     childrenDateOfBirth: { day: '5', month: '1', year: '2020' },
@@ -77,8 +76,6 @@ describe('to-api-format', () => {
       applicant2AdditionalNames: [
         { id: 'MOCK_V4_UUID', value: { firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' } },
       ],
-      applicant1AdditionalNationalities: [{ id: 'MOCK_V4_UUID', value: { country: 'MOCK_COUNTRY' } }],
-      applicant2AdditionalNationalities: [{ id: 'MOCK_V4_UUID', value: { country: 'MOCK_COUNTRY' } }],
       childrenAdditionalNationalities: [{ id: 'MOCK_V4_UUID', value: { country: 'MOCK_COUNTRY' } }],
       placementOrders: [
         {
@@ -124,11 +121,13 @@ describe('to-api-format', () => {
           },
         },
       ],
+      dateChildMovedIn: '2021-01-01',
       applicant1DateOfBirth: '2000-01-20',
       applicant2DateOfBirth: '',
       childrenDateOfBirth: '2020-01-05',
       applicant1StatementOfTruth: 'No',
       applicant2StatementOfTruth: null,
+      applicant1CannotUploadSupportingDocument: [],
     });
   });
 
@@ -189,18 +188,6 @@ describe('to-api-format', () => {
       applicant2AdditionalNames: undefined,
       expected: {
         applicant2AdditionalNames: [],
-      },
-    },
-    {
-      applicant1AdditionalNationalities: undefined,
-      expected: {
-        applicant1AdditionalNationalities: [],
-      },
-    },
-    {
-      applicant2AdditionalNationalities: undefined,
-      expected: {
-        applicant2AdditionalNationalities: [],
       },
     },
     {

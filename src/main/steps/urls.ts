@@ -15,12 +15,12 @@ export const APPLICATION_ENDED: PageLink = '/application-ended';
 export const TASK_LIST_URL: PageLink = '/task-list';
 
 export const APPLYING_WITH_URL: PageLink = '/applying-with';
+export const DATE_CHILD_MOVED_IN: PageLink = '/date-child-moved-in';
 
 export const APPLICANT_1: PageLink = '/applicant1';
 export const APPLICANT_1_FULL_NAME: PageLink = `${APPLICANT_1}/full-name`;
 export const APPLICANT_1_OTHER_NAMES: PageLink = `${APPLICANT_1}/other-names`;
 export const APPLICANT_1_DOB: PageLink = `${APPLICANT_1}/dob`;
-export const APPLICANT_1_NATIONALITY: PageLink = `${APPLICANT_1}/nationality`;
 export const APPLICANT_1_OCCUPATION: PageLink = `${APPLICANT_1}/occupation`;
 export const APPLICANT_1_CONTACT_DETAILS: PageLink = `${APPLICANT_1}/contact-details`;
 export const APPLICANT_1_FIND_ADDRESS: PageLink = `${APPLICANT_1}/address/lookup`;
@@ -31,7 +31,6 @@ export const APPLICANT_2: PageLink = '/applicant2';
 export const APPLICANT_2_FULL_NAME: PageLink = `${APPLICANT_2}/full-name`;
 export const APPLICANT_2_OTHER_NAMES: PageLink = `${APPLICANT_2}/other-names`;
 export const APPLICANT_2_DOB: PageLink = `${APPLICANT_2}/dob`;
-export const APPLICANT_2_NATIONALITY: PageLink = `${APPLICANT_2}/nationality`;
 export const APPLICANT_2_OCCUPATION: PageLink = `${APPLICANT_2}/occupation`;
 export const APPLICANT_2_SAME_ADDRESS: PageLink = `${APPLICANT_2}/same-address`;
 export const APPLICANT_2_FIND_ADDRESS: PageLink = `${APPLICANT_2}/address/lookup`;
@@ -52,6 +51,7 @@ export const CHILDREN_DATE_OF_BIRTH: PageLink = `${CHILDREN}/date-of-birth`;
 export const CHILDREN_SEX_AT_BIRTH: PageLink = `${CHILDREN}/sex-at-birth`;
 export const CHILDREN_NATIONALITY: PageLink = `${CHILDREN}/nationality`;
 export const CHILDREN_FULL_NAME_AFTER_ADOPTION: PageLink = `${CHILDREN}/full-name-after-adoption`;
+export const CHILDREN_FIND_FAMILY_COURT: PageLink = `${CHILDREN}/find-family-court`;
 
 export const SIBLING: PageLink = '/sibling';
 export const SIBLING_EXISTS: PageLink = `${SIBLING}/exists`;
@@ -62,6 +62,7 @@ export const SIBLING_ORDER_CASE_NUMBER: PageLink = `${SIBLING}/placement-order-n
 export const SIBLING_ORDER_SUMMARY: PageLink = `${SIBLING}/summary`;
 export const SIBLING_SELECT: PageLink = `${SIBLING}/select-sibling`;
 export const SIBLING_ORDER_CHECK_YOUR_ANSWERS: PageLink = `${SIBLING}/placement-order-check-your-answers`;
+export const SIBLING_REMOVE_PLACEMENT_ORDER: PageLink = `${SIBLING}/remove-placement-order`;
 
 export const BIRTH_MOTHER: PageLink = '/birth-mother';
 export const BIRTH_MOTHER_FULL_NAME: PageLink = `${BIRTH_MOTHER}/full-name`;
@@ -107,6 +108,7 @@ export const START_ELIGIBILITY_URL: PageLink = `${ELIGIBILITY_URL}/start`;
 export const CHECK_ELIGIBILITY_URL_UNDER_18: PageLink = `${ELIGIBILITY_URL}/under-18`;
 export const CHECK_ELIGIBILITY_URL_MARRIED: PageLink = `${ELIGIBILITY_URL}/married`;
 export const CHECK_ELIGIBILITY_URL_UNDER_21: PageLink = `${ELIGIBILITY_URL}/under-21`;
+export const CHECK_ELIGIBILITY_URL_DOMICILE: PageLink = `${ELIGIBILITY_URL}/domicile`;
 export const CHECK_ELIGIBILITY_URL_LIVED_UK: PageLink = `${ELIGIBILITY_URL}/lived-uk`;
 export const INELIGIBLE_TO_ADOPT: PageLink = `${ELIGIBILITY_URL}/cannot-apply`;
 
@@ -123,11 +125,11 @@ export const BIRTH_FATHER = '/birth-father';
 export const BIRTH_FATHER_NAME_ON_CERTIFICATE: PageLink = `${BIRTH_FATHER}/name-on-certificate`;
 export const BIRTH_FATHER_FULL_NAME: PageLink = `${BIRTH_FATHER}/full-name`;
 export const BIRTH_FATHER_ADDRESS_KNOWN: PageLink = `${BIRTH_FATHER}/address-known`;
-export const BIRTH_FATHER_ALIVE: PageLink = `${BIRTH_FATHER}/alive`;
+export const BIRTH_FATHER_STILL_ALIVE: PageLink = `${BIRTH_FATHER}/alive`;
 export const BIRTH_FATHER_ADDRESS_LOOKUP: PageLink = `${BIRTH_FATHER}/address/lookup`;
 export const BIRTH_FATHER_ADDRESS_SELECT: PageLink = `${BIRTH_FATHER}/address/select`;
-export const BIRTH_FATHER_ADDRESS_MANUAL: PageLink = `${BIRTH_FATHER}/address/manual`;
-export const BIRTH_FATHER_ADDRESS_INTERNATIONAL: PageLink = `${BIRTH_FATHER}/address/international`;
+export const BIRTH_FATHER_MANUAL_ADDRESS: PageLink = `${BIRTH_FATHER}/address/manual`;
+export const BIRTH_FATHER_INTERNATIONAL_ADDRESS: PageLink = `${BIRTH_FATHER}/address/international`;
 export const BIRTH_FATHER_NATIONALITY: PageLink = `${BIRTH_FATHER}/nationality`;
 export const BIRTH_FATHER_OCCUPATION: PageLink = `${BIRTH_FATHER}/occupation`;
 
@@ -141,3 +143,6 @@ export const OTHER_ADOPTION_AGENCY: PageLink = `${CHILDREN}/other-adoption-agenc
 export const SOCIAL_WORKER: PageLink = `${CHILDREN}/social-worker`;
 export const STATEMENT_OF_TRUTH: PageLink = `${REVIEW_PAY_SUBMIT}/statement-of-truth`;
 export const EQUALITY: PageLink = `${REVIEW_PAY_SUBMIT}/equality`;
+
+export const UPLOAD_YOUR_DOCUMENTS: PageLink = '/upload-your-documents';
+export const DOCUMENT_MANAGER: PageLink = '/document-manager';

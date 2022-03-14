@@ -1,4 +1,4 @@
-Feature('Creat application').retry(1);
+Feature('Creat application');
 
 Scenario(
   'Creat full application and submit',
@@ -19,19 +19,29 @@ Scenario(
     primaryApplicantDetailsPage,
     primaryApplicantPersonalDetailsPage,
     reviewPayAndSubmitPage,
+    uploadDocumentsDetailsPage,
+    dateChildMovedinDetailsPage,
+    chooseYourFamilyCourtDetailsPage,
   }) => {
     await loginPage.createCitizenUserAndSignIn();
     await landingPage.seeTheLandingPage();
     await landingPage.selectApplyWithMySpouseSection();
 
+    await taskListPage.selectDateChildMovedInDetails();
+    await dateChildMovedinDetailsPage.dateChildMovedInSection('10', '10', '2020');
+    await taskListPage.verifyDateChildMovedInStatus();
+
     await taskListPage.selectPrimaryApplicantContactDetails();
     await primaryApplicantDetailsPage.primaryApplicantContactDetailsSection();
+    await taskListPage.verifyPrimaryApplicantContactDetailsStatus();
 
     await taskListPage.selectFirstApplicantPersonalDetails();
     await primaryApplicantPersonalDetailsPage.primaryApplicantPersonalDetailsSection();
+    await taskListPage.verifyPrimaryApplicantPersonalDetailsStatus();
 
     await taskListPage.selectOtherApplicantContactDetails();
     await otherApplicantDetailsPage.otherApplicantContactDetailsSection();
+    await taskListPage.verifySecondApplicantPersonalDetailsStatus();
 
     await taskListPage.selectOtherApplicantPersonalDetails();
     await otherApplicantPersonalDetailsPage.otherApplicantPersonalDetailsSection();
@@ -69,8 +79,20 @@ Scenario(
     await childSiblingDetailsPage.childDetailsSiblingSection();
     await taskListPage.verifySiblingDetailsStatus();
 
+    await taskListPage.selectChooseYourFamilyCourtDetails();
+    await chooseYourFamilyCourtDetailsPage.childDetailsFindFamilyCourtSection();
+    await taskListPage.verifyChooseYourFamilyCourtStatus();
+
+    await taskListPage.selectUploadDocumentsDetails();
+    await uploadDocumentsDetailsPage.uploadDocumentsSection();
+    await taskListPage.verifyUploadDocumentsStatus();
+
     await taskListPage.selectReviewPayAndSubmitDetails();
-    await reviewPayAndSubmitPage.reviewPayAndSubmitDetailsSection();
+    await reviewPayAndSubmitPage.selectNoPCQOption();
+    await reviewPayAndSubmitPage.changeValueFromReviewYourAnswers();
+    await dateChildMovedinDetailsPage.dateChildMovedInSection('10', '12', '2020');
+    await reviewPayAndSubmitPage.reviewYourAnswersAndContinue();
+    await reviewPayAndSubmitPage.statementOfTruthDetailsSection();
     await reviewPayAndSubmitPage.adoptionCourtFeesByCard();
   }
 );

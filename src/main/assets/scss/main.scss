@@ -6,6 +6,7 @@
 @import './contact-us';
 @import './cookie-banner';
 @import './task-list';
+@import './upload-documents';
 
 .hmcts-button-link,
 .uppy-FileInput-btn {
@@ -56,4 +57,9 @@ section {
   @include govuk-media-query($from: tablet) {
     width: 30%;
   }
+}
+
+.not-underlined {
+  text-decoration: none;
+  color: #0b0c0c !important;
 }

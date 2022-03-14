@@ -4,28 +4,35 @@ import { TranslationFn } from '../../app/controller/GetController';
 import * as URL from '../urls';
 
 import {
+  findFamilyCourtStatus,
   getAdoptionAgencyDetailStatus,
   getAdoptionAgencyUrl,
   getAdoptionCertificateDetailsStatus,
+  getApplicationStatus,
+  getApplyingWithStatus,
   getBirthFatherDetailsStatus,
   getBirthMotherDetailsStatus,
   getChildrenBirthCertificateStatus,
   getChildrenPlacementOrderStatus,
   getContactDetailsStatus,
+  getDateChildMovedInStatus,
   getOtherParentStatus,
   getPersonalDetailsStatus,
   getReviewPaySubmitUrl,
   getSiblingStatus,
-  isApplyingWithComplete,
+  getUploadDocumentStatus,
 } from './utils';
 
 const getSectionStatusLabel = (status, statuses, id) => {
-  if (status === SectionStatus.COMPLETED) {
-    return `<strong id="${id}-status" class="govuk-tag  app-task-list__tag" id="eligibility-completed">${statuses.completed}</strong>`;
-  } else if (status === SectionStatus.IN_PROGRESS) {
-    return `<strong id="${id}-status" class="govuk-tag govuk-tag--blue app-task-list__tag">${statuses.inProgress}</strong>`;
-  } else {
-    return `<strong id="${id}-status" class="govuk-tag govuk-tag--grey app-task-list__tag">${statuses.notStarted}</strong>`;
+  switch (status) {
+    case SectionStatus.CAN_NOT_START_YET:
+      return `<strong id="${id}-status" class="govuk-tag govuk-tag--grey app-task-list__tag">${statuses.canNotStartYet}</strong>`;
+    case SectionStatus.IN_PROGRESS:
+      return `<strong id="${id}-status" class="govuk-tag govuk-tag--blue app-task-list__tag">${statuses.inProgress}</strong>`;
+    case SectionStatus.COMPLETED:
+      return `<strong id="${id}-status" class="govuk-tag  app-task-list__tag">${statuses.completed}</strong>`;
+    default:
+      return `<strong id="${id}-status" class="govuk-tag govuk-tag--grey app-task-list__tag">${statuses.notStarted}</strong>`;
   }
 };
 
@@ -44,9 +51,15 @@ const urls = content => ({
       : URL.CHILDREN_PLACEMENT_ORDER_SUMMARY,
   birthFather: URL.BIRTH_FATHER_NAME_ON_CERTIFICATE,
   birthMotherDetails: URL.BIRTH_MOTHER_FULL_NAME,
-  reviewApplicationPayAndSubmit: getReviewPaySubmitUrl(content.userCase),
   siblingDetails: URL.SIBLING_EXISTS,
+  dateChildMovedIn: URL.DATE_CHILD_MOVED_IN,
   adoptionAgency: getAdoptionAgencyUrl(content.userCase),
+  uploadYourDocuments: URL.UPLOAD_YOUR_DOCUMENTS,
+  findFamilyCourt: URL.CHILDREN_FIND_FAMILY_COURT,
+  reviewApplicationPayAndSubmit:
+    getApplicationStatus(content.userCase) === SectionStatus.CAN_NOT_START_YET
+      ? undefined
+      : getReviewPaySubmitUrl(content.userCase),
 });
 
 const en = content => {
@@ -54,14 +67,16 @@ const en = content => {
     completed: 'Completed',
     inProgress: 'In Progress',
     notStarted: 'Not Started',
+    canNotStartYet: 'Can not start yet',
   };
 
   return {
     title: 'Apply to adopt a child placed in your care',
-    section1: 'Add your details',
+    section1: 'Add application details',
     section1details1: 'Number of applicants',
     section1details2: 'Date child moved in with you',
-    section2subheading2: 'Primary applicant',
+    section2: "Add applicant's details",
+    section2subheading2: 'First applicant',
     section2subheading2line1: 'Your personal details',
     section2subheading2line2: 'Your contact details',
     section2subheading3: 'Second applicant',
@@ -78,16 +93,22 @@ const en = content => {
     section3link8: 'Court order details for any siblings or half-siblings',
     section3link9: 'Adoption agency and social worker',
     section3link10: 'Sibling details',
+    section3link11: 'Choose your family court',
     section4: 'Add your adoption contacts',
     section4link1: 'Your adoption agency or local authority',
     section4link2: "The child's adoption agency or local authority",
     section4link3: 'Your solicitor',
-    section5: 'Declare payments',
-    section5link1: 'Declare any payments made or received',
+    section5: 'Upload documents',
+    section5link1: 'Upload documents',
     section6: 'Review application, pay and send',
     section6link1: 'Review application, pay and send',
     status: {
-      applyingWith: isApplyingWithComplete(content.userCase),
+      applyingWith: getSectionStatusLabel(getApplyingWithStatus(content.userCase), statuses, 'applying-with'),
+      dateChildMovedIn: getSectionStatusLabel(
+        getDateChildMovedInStatus(content.userCase),
+        statuses,
+        'date-child-moved-in'
+      ),
       applicant1PersonalDetails: getSectionStatusLabel(
         getPersonalDetailsStatus(content.userCase, 'applicant1'),
         statuses,
@@ -141,6 +162,17 @@ const en = content => {
         statuses,
         'statement-of-truth'
       ),
+      uploadDocuments: getSectionStatusLabel(
+        getUploadDocumentStatus(content.userCase),
+        statuses,
+        'upload-your-documents'
+      ),
+      findFamilyCourt: getSectionStatusLabel(findFamilyCourtStatus(content.userCase), statuses, 'find-family-court'),
+      reviewPayAndSubmit: getSectionStatusLabel(
+        getApplicationStatus(content.userCase),
+        statuses,
+        'review-pay-and-submit'
+      ),
     },
     urls: urls(content),
   };
@@ -151,14 +183,16 @@ const cy = content => {
     completed: 'Completed (in welsh)',
     inProgress: 'In Progress (in welsh)',
     notStarted: 'Not Started (in welsh)',
+    canNotStartYet: 'Can not start yet (in welsh)',
   };
 
   return {
     title: 'Apply to adopt a child placed in your care (in welsh) ',
-    section1: 'Add your details (in welsh) ',
+    section1: 'Add application details (in welsh) ',
     section1details1: 'Number of applicants (in welsh) ',
+    section2: "Add applicant's details (in welsh) ",
     section1details2: 'Date child moved in with you (in welsh) ',
-    section2subheading2: 'Primary applicant (in welsh) ',
+    section2subheading2: 'First applicant (in welsh) ',
     section2subheading2line1: 'Your personal details (in welsh) ',
     section2subheading2line2: 'Your contact details (in welsh) ',
     section2subheading3: 'Second applicant (in welsh) ',
@@ -175,16 +209,18 @@ const cy = content => {
     section3link8: 'Court order details for any siblings or half-siblings (in welsh) ',
     section3link9: 'Adoption agency and social worker (in welsh) ',
     section3link10: 'Sibling details',
+    section3link11: 'Choose your family court (in welsh)',
     section4: 'Add your adoption contacts (in welsh) ',
     section4link1: 'Your adoption agency or local authority (in welsh) ',
     section4link2: "The child's adoption agency or local authority (in welsh) ",
     section4link3: 'Your solicitor (in welsh) ',
-    section5: 'Declare payments (in welsh) ',
-    section5link1: 'Declare any payments made or received (in welsh) ',
+    section5: 'Upload documents (in welsh) ',
+    section5link1: 'Upload documents (in welsh) ',
     section6: 'Review application, pay and send (in welsh) ',
     section6link1: 'Review application, pay and send (in welsh) ',
     status: {
-      applyingWith: isApplyingWithComplete(content.userCase),
+      applyingWith: getSectionStatusLabel(getApplyingWithStatus(content.userCase), statuses, 'applying-with'),
+      dateChildMovedIn: getDateChildMovedInStatus(content.userCase),
       applicant1PersonalDetails: getSectionStatusLabel(
         getPersonalDetailsStatus(content.userCase, 'applicant1'),
         statuses,
@@ -237,6 +273,12 @@ const cy = content => {
         getAdoptionAgencyDetailStatus(content.userCase),
         statuses,
         'statement-of-truth'
+      ),
+      findFamilyCourt: getSectionStatusLabel(findFamilyCourtStatus(content.userCase), statuses, 'find-family-court'),
+      reviewPayAndSubmit: getSectionStatusLabel(
+        getApplicationStatus(content.userCase),
+        statuses,
+        'review-pay-and-submit'
       ),
     },
     urls: urls(content),

@@ -8,7 +8,7 @@ import { AnyObject, PostController } from '../../../../app/controller/PostContro
 import { Form, FormFields } from '../../../../app/form/Form';
 import { PaymentClient } from '../../../../app/payment/PaymentClient';
 import { PaymentModel } from '../../../../app/payment/PaymentModel';
-import { PAYMENT_CALLBACK_URL, TASK_LIST_URL } from '../../../urls';
+import { APPLICATION_SUBMITTED, PAYMENT_CALLBACK_URL, TASK_LIST_URL } from '../../../urls';
 
 @autobind
 export default class PayYourFeePostController extends PostController<AnyObject> {
@@ -54,7 +54,7 @@ export default class PayYourFeePostController extends PostController<AnyObject> 
       if (payments.paymentTotal === +applicationFeeOrderSummary.PaymentTotal) {
         //user has already made a payment
         //TODO reditect to application submitted screen in future
-        return this.redirect(req, res, TASK_LIST_URL);
+        return this.redirect(req, res, APPLICATION_SUBMITTED);
       }
 
       const client = this.getPaymentClient(req, res);
@@ -73,8 +73,6 @@ export default class PayYourFeePostController extends PostController<AnyObject> 
       });
 
       req.session.userCase = await req.locals.api.addPayment(req.session.userCase.id, payments.list);
-
-      console.log('req.session.userCase', JSON.stringify(req.session.userCase));
 
       this.redirect(req, res, payment._links.next_url.href);
     } else {

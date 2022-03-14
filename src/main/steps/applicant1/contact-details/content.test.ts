@@ -10,115 +10,100 @@ jest.mock('../../../app/form/validation', () => ({
   isPhoneNoValid: mockIsPhoneNoValid,
 }));
 
+import { ApplyingWith, YesOrNo } from '../../../app/case/definition';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
+import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('contact-details content', () => {
-  const commonContent = { language: 'en', userCase: {} } as CommonContent;
+  const commonContent = {
+    language: 'en',
+    userCase: { applyingWith: ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER },
+  } as CommonContent;
 
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
-    expect(generatedContent.section).toEqual('Primary applicant');
-    expect(generatedContent.label).toEqual('What are your contact details?');
-    expect(generatedContent.hint).toEqual(
-      'This is so we can contact you with updates or questions about your application.'
+    expect(generatedContent.section).toEqual('First applicant');
+    expect(generatedContent.title).toEqual('What are your contact details?');
+    expect(generatedContent.line1).toEqual('We need both a contact email and telephone number for you.');
+    expect(generatedContent.line2).toEqual(
+      'We will email you updates and information about your application to adopt. You will only be contacted by telephone if the social worker or court staff need to contact you quickly.'
     );
     expect(generatedContent.emailAddress).toEqual('Email address');
-    expect(generatedContent.phoneNumber).toEqual('UK phone number (for phone calls)');
+    expect(generatedContent.phoneNumber).toEqual('UK Phone number');
 
     const errors = generatedContent.errors as any;
-    expect(errors.applicant1ContactDetails.required).toEqual('Enter your telephone number or email address');
-    expect(errors.applicant1EmailAddress.required).toEqual(
-      'Enter an email address in the correct format, like name@example.com'
-    );
+    expect(errors.applicant1ContactDetailsConsent.required).toEqual('Please answer the question');
+    expect(errors.applicant1EmailAddress.required).toEqual('Enter your email address');
     expect(errors.applicant1EmailAddress.invalid).toEqual(
       'Enter an email address in the correct format, like name@example.com'
     );
     expect(errors.applicant1PhoneNumber.required).toEqual('Enter a UK telephone number');
-    expect(errors.applicant1PhoneNumber.invalid).toEqual('Enter a UK telephone number');
+    expect(errors.applicant1PhoneNumber.invalid).toEqual('Enter a valid UK telephone number');
+  });
+
+  test('should set title to applicant in case of applying alone', () => {
+    const aloneCommonContent = { language: 'cy', userCase: { applyingWith: ApplyingWith.ALONE } } as CommonContent;
+    const generatedContent = generateContent(aloneCommonContent);
+    expect(generatedContent.section).toEqual('Applicant');
   });
 
   test('should return correct welsh content', () => {
-    const generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual('Primary applicant (in welsh)');
-    expect(generatedContent.label).toEqual('What are your contact details? (in welsh)');
-    expect(generatedContent.hint).toEqual(
-      'This is so we can contact you with updates or questions about your application. (in welsh)'
+    const welshCommonContent = {
+      language: 'cy',
+      userCase: { applyingWith: ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER },
+    } as CommonContent;
+    const generatedContent = generateContent(welshCommonContent);
+    expect(generatedContent.section).toEqual('First applicant (in welsh)');
+    expect(generatedContent.title).toEqual('What are your contact details? (in welsh)');
+    expect(generatedContent.line1).toEqual('We need both a contact email and telephone number for you. (in welsh)');
+    expect(generatedContent.line2).toEqual(
+      'We will email you updates and information about your application to adopt. You will only be contacted by telephone if the social worker or court staff need to contact you quickly. (in welsh)'
     );
     expect(generatedContent.emailAddress).toEqual('Email address (in welsh)');
-    expect(generatedContent.phoneNumber).toEqual('UK phone number (for phone calls) (in welsh)');
+    expect(generatedContent.phoneNumber).toEqual('UK Phone number (in welsh)');
 
     const errors = generatedContent.errors as any;
-    expect(errors.applicant1ContactDetails.required).toEqual('Enter your telephone number or email address (in welsh)');
-    expect(errors.applicant1EmailAddress.required).toEqual(
-      'Enter an email address in the correct format, like name@example.com (in welsh)'
-    );
+    expect(errors.applicant1ContactDetailsConsent.required).toEqual('Please answer the question (in welsh)');
+    expect(errors.applicant1EmailAddress.required).toEqual('Enter your email address (in welsh)');
     expect(errors.applicant1EmailAddress.invalid).toEqual(
       'Enter an email address in the correct format, like name@example.com (in welsh)'
     );
     expect(errors.applicant1PhoneNumber.required).toEqual('Enter a UK telephone number (in welsh)');
-    expect(errors.applicant1PhoneNumber.invalid).toEqual('Enter a UK telephone number (in welsh)');
+    expect(errors.applicant1PhoneNumber.invalid).toEqual('Enter a valid UK telephone number (in welsh)');
   });
 
   test('should contain applicant1ContactDetails field', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
+    const applicant1ContactDetailsConsentField = fields.applicant1ContactDetailsConsent as FormFields;
+    const applicant1EmailAddressField = fields.applicant1EmailAddress as FormFields;
+    const applicant1PhoneNumberField = fields.applicant1PhoneNumber as FormFields;
 
-    const applicant1ContactDetailsField = fields.applicant1ContactDetails as FormOptions;
-    expect(applicant1ContactDetailsField.type).toBe('checkboxes');
-    expect((applicant1ContactDetailsField.label as Function)(generatedContent)).toBe('What are your contact details?');
-    expect(applicant1ContactDetailsField.labelSize).toBe('l');
-    expect((applicant1ContactDetailsField.section as Function)(generatedContent)).toBe('Primary applicant');
-    expect(((applicant1ContactDetailsField as FormInput).hint as Function)(generatedContent)).toBe(
-      'This is so we can contact you with updates or questions about your application.'
+    expect(applicant1ContactDetailsConsentField.type).toBe('radios');
+    expect(applicant1ContactDetailsConsentField.classes).toBe('govuk-radios');
+    const applicant1ContactDetailsConsentOptions = fields.applicant1ContactDetailsConsent as FormOptions;
+    expect(((fields.applicant1ContactDetailsConsent as FormInput).label as Function)(generatedContent)).toBe(
+      'The court may want to use your email to serve you court orders. Are you happy to be served court orders by email?'
     );
-
-    expect(applicant1ContactDetailsField.values[0].name).toBe('applicant1ContactDetails');
-    expect((applicant1ContactDetailsField.values[0].label as Function)(generatedContent)).toBe('Email address');
-    expect(applicant1ContactDetailsField.values[0].value).toBe('email');
-
-    expect(applicant1ContactDetailsField.values[1].name).toBe('applicant1ContactDetails');
-    expect((applicant1ContactDetailsField.values[1].label as Function)(generatedContent)).toBe(
-      'UK phone number (for phone calls)'
-    );
-    expect(applicant1ContactDetailsField.values[1].value).toBe('phone');
-
-    expect(applicant1ContactDetailsField.validator).toBe(mockAtLeastOneFieldIsChecked);
-  });
-
-  test('should contain applicant1EmailAddress as subField of applicant1ContactDetails', () => {
-    const generatedContent = generateContent(commonContent);
-    const form = generatedContent.form as FormContent;
-    const fields = form.fields as FormFields;
-
-    const applicant1ContactDetailsField = fields.applicant1ContactDetails as FormOptions;
-    const applicant1EmailAddressField = applicant1ContactDetailsField.values[0].subFields!.applicant1EmailAddress;
+    expect((applicant1ContactDetailsConsentOptions.values[0].label as Function)({ yes: 'Yes' })).toBe(YesOrNo.YES);
+    expect((applicant1ContactDetailsConsentOptions.values[1].label as Function)({ no: 'No' })).toBe(YesOrNo.NO);
+    expect(applicant1ContactDetailsConsentField.validator as Function).toBe(isFieldFilledIn);
 
     expect(applicant1EmailAddressField.type).toBe('text');
     expect(applicant1EmailAddressField.classes).toBe('govuk-input--width-20');
-    expect(applicant1EmailAddressField.label).toBe('');
-    expect((applicant1EmailAddressField as FormOptions).labelSize).toBe(null);
-
+    expect((applicant1EmailAddressField.label as Function)(generatedContent)).toBe('Email address');
+    expect(applicant1EmailAddressField.labelSize).toBe(null);
     expect((applicant1EmailAddressField.validator as Function)('someone@example.com')).toBe(undefined);
-  });
-
-  test('should contain applicant1PhoneNumber as subField of applicant1ContactDetails', () => {
-    const generatedContent = generateContent(commonContent);
-    const form = generatedContent.form as FormContent;
-    const fields = form.fields as FormFields;
-
-    const applicant1ContactDetailsField = fields.applicant1ContactDetails as FormOptions;
-    const applicant1PhoneNumberField = applicant1ContactDetailsField.values[1].subFields!.applicant1PhoneNumber;
 
     expect(applicant1PhoneNumberField.type).toBe('text');
     expect(applicant1PhoneNumberField.classes).toBe('govuk-input--width-20');
-    expect(applicant1PhoneNumberField.label).toBe('');
-    expect((applicant1PhoneNumberField as FormOptions).labelSize).toBe(null);
-
+    expect((applicant1PhoneNumberField.label as Function)(generatedContent)).toBe('UK Phone number');
+    expect(applicant1PhoneNumberField.labelSize).toBe(null);
     expect((applicant1PhoneNumberField.validator as Function)('someone@example.com')).toBe(undefined);
   });
 

@@ -19,6 +19,9 @@ const checkboxConverter = (value: string | undefined) => {
 
 const fields: ToApiConverters = {
   ...formFieldsToCaseMapping,
+  dateChildMovedIn: data => ({
+    dateChildMovedIn: toApiDate(data.dateChildMovedIn),
+  }),
   applicant1DateOfBirth: data => ({
     applicant1DateOfBirth: toApiDate(data.applicant1DateOfBirth),
   }),
@@ -46,14 +49,14 @@ const fields: ToApiConverters = {
           }))
         : [],
   }),
-  applicant1AdditionalNationalities: data => ({
-    applicant1AdditionalNationalities: (data.applicant1AdditionalNationalities || []).map(item => ({
+  birthMotherAdditionalNationalities: data => ({
+    birthMotherOtherNationalities: (data.birthMotherAdditionalNationalities || []).map(item => ({
       id: generateUuid(),
       value: { country: `${item}` },
     })),
   }),
-  applicant2AdditionalNationalities: data => ({
-    applicant2AdditionalNationalities: (data.applicant2AdditionalNationalities || []).map(item => ({
+  birthFatherAdditionalNationalities: data => ({
+    birthFatherOtherNationalities: (data.birthFatherAdditionalNationalities || []).map(item => ({
       id: generateUuid(),
       value: { country: `${item}` },
     })),
@@ -110,15 +113,27 @@ const fields: ToApiConverters = {
   }),
   applicant1UploadedFiles: () => ({}),
   applicant2UploadedFiles: () => ({}),
+  applicant1CannotUploadDocuments: data => ({
+    applicant1CannotUploadSupportingDocument: data.applicant1CannotUploadDocuments
+      ? !Array.isArray(data.applicant1CannotUploadDocuments)
+        ? [data.applicant1CannotUploadDocuments]
+        : data.applicant1CannotUploadDocuments
+      : [],
+  }),
   applicant1HelpPayingNeeded: data => ({
     applicant1HWFNeedHelp: data.applicant1HelpPayingNeeded,
     ...(data.applicant1HelpPayingNeeded === YesOrNo.NO
       ? setUnreachableAnswersToNull(['applicant1HWFAppliedForFees', 'applicant1HWFReferenceNumber'])
       : {}),
   }),
+  applicant1CannotUpload: data => {
+    return {
+      applicant1CannotUpload: checkboxConverter(data.applicant1CannotUpload),
+    };
+  },
 };
 
-const toApiDate = (date: CaseDate | undefined): string => {
+export const toApiDate = (date: CaseDate | undefined): string => {
   if (!date?.year || !date?.month || !date?.day) {
     return '';
   }

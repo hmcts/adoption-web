@@ -24,6 +24,14 @@ export class GetController {
       return;
     }
 
+    if (req.query.returnUrl) {
+      this.parseAndSetReturnUrl(req);
+      delete req.query.returnUrl;
+      req.url = req.url.substring(0, req.url.indexOf('?'));
+      this.saveSessionAndRedirect(req, res);
+      return;
+    }
+
     const language = this.getPreferredLanguage(req) as Language;
     const userCase = req.session?.userCase;
     const addresses = req.session?.addresses;

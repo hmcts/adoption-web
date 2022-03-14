@@ -101,6 +101,7 @@ export class Form {
     return true;
   }
 }
+export type DropdownOptionsLookup = (lang: Record<string, never>) => [];
 
 export type LanguageLookup = (lang: Record<string, never>) => string;
 
@@ -169,6 +170,7 @@ export interface FormInput {
   subFields?: Record<string, FormField>;
   divider?: Label; //Required for divider between checkbox options
   open?: boolean;
+  options?: DropdownOptionsLookup;
 }
 
 function isFormOptions(field: FormField): field is FormOptions {

@@ -22,6 +22,8 @@ services:
     token: 'NEED TO INSERT SECRET'
   feeLookup:
     url: 'http://fees-register-api-aat.service.core-compute-aat.internal/fees-register/fees/lookup'
+  documentManagement:
+    url: http://dm-store-aat.service.core-compute-aat.internal
   payments:
     url: http://payment-api-aat.service.core-compute-aat.internal
   equalityAndDiversity:
@@ -30,6 +32,7 @@ services:
     path: '/service-endpoint'
     port: 4000
     tokenKey: 'SERVICE_TOKEN_KEY'
+    pcqEnabled: 'false'
 health:
   timeout: 5000
   deadline: 15000
@@ -42,3 +45,14 @@ e2e:
   userTestPassword: ''
 appInsights:
   instrumentationKey:
+localCourt:
+  emailId:
+    CHELMSFORD_FAMILY_COURT: 'chelmsfordadoptionapplication@mailinator.com'
+    OXFORD_FAMILY_COURT: 'Oxfordadoptionapplication@mailinator.com'
+    MEDWAY_FAMILY_COURT: 'Medwayadoptionapplication@mailinator.com'
+    PORTSMOUTH_FAMILY_COURT: 'PortsmouthAdoptionApplication@mailinator.com'
+    LEEDS_FAMILY_COURT: 'adoptionsleeds@mailinator.com'
+    NORTHAMPTON_FAMILY_COURT: 'Northamptonadoptionapplications@mailinator.com'
+    WORCESTER_FAMILY_COURT: 'Worcesteradoptionapplication@mailinator.com'
+    NEWPORT_GWENT_FAMILY_COURT: 'NewportGwentadoptionapplication@mailinator.com'
+    FALLBACK_EMAIL_ID: 'adoptionproject@mailinator.com'

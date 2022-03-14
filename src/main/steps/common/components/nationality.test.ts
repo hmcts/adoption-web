@@ -11,7 +11,7 @@ jest.mock('../../../app/form/validation');
 
 const CY = 'cy';
 const EN = 'en';
-const fieldPrefix = FieldPrefix.APPLICANT1;
+const fieldPrefix = FieldPrefix.BIRTH_MOTHER;
 const enContent = {
   label: 'What is your nationality?',
   hint: 'Select all options that are relevant to you.',
@@ -91,7 +91,7 @@ const langAssertions = (language, content) => {
 };
 
 const commonContent = (countries: string[]) =>
-  ({ language: EN, userCase: { applicant1AdditionalNationalities: countries } } as CommonContent);
+  ({ language: EN, userCase: { birthMotherAdditionalNationalities: countries } } as CommonContent);
 
 describe('nationality content', () => {
   it('should return the correct content for language = en', () => {
@@ -107,13 +107,13 @@ describe('nationality content', () => {
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
 
-    const { type, label, labelSize, hint, values, validator } = fields.applicant1Nationality as FormOptions;
+    const { type, label, labelSize, hint, values, validator } = fields.birthMotherNationality as FormOptions;
 
     expect(type).toBe('checkboxes');
     expect((label as Function)(generatedContent)).toBe(enContent.label);
     expect(labelSize).toBe('l');
     expect((hint as Function)(generatedContent)).toBe(enContent.hint);
-    expect(values).toHaveLength(3);
+    expect(values).toHaveLength(5);
     expect((values[0].label as Function)(generatedContent)).toBe(enContent.british);
     expect(values[0].value).toBe('British');
     expect((values[0].hint as Function)(generatedContent)).toBe(enContent.britishSubtext);
@@ -126,7 +126,7 @@ describe('nationality content', () => {
     expect(atLeastOneFieldIsChecked).toHaveBeenCalledWith(['British']);
   });
 
-  describe('when fieldPrefix is other than APPLICANT1 or APPLICANT2', () => {
+  describe('when fieldPrefix is other than BIRTH_MOTHER or BIRTH_FATHER', () => {
     it('should display a checkbox with nationality options', () => {
       const generatedContent = generateContent(commonContent([]), FieldPrefix.CHILDREN);
       const form = generatedContent.form as FormContent;
@@ -160,15 +160,15 @@ describe('nationality content', () => {
     const generatedContent = generateContent(commonContent(emptyArray), fieldPrefix);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const nationality = fields.applicant1Nationality as FormOptions;
+    const nationality = fields.birthMotherNationality as FormOptions;
     const otherCountrySubFields = nationality.values[2].subFields;
-    const applicant1AdditionalNationalities = otherCountrySubFields?.applicant1AdditionalNationalities as FormOptions;
+    const birthMotherAdditionalNationalities = otherCountrySubFields?.birthMotherAdditionalNationalities as FormOptions;
     const addAnotherNationality = otherCountrySubFields?.addAnotherNationality;
     const addButton = otherCountrySubFields?.addButton as FormInput;
 
-    expect(applicant1AdditionalNationalities).toBeUndefined();
+    expect(birthMotherAdditionalNationalities).toBeUndefined();
 
-    expect(addAnotherNationality?.type).toBe('input');
+    expect(addAnotherNationality?.type).toBe('text');
     expect((addAnotherNationality?.label as Function)(generatedContent)).toBe(enContent.countryName);
     expect(addAnotherNationality?.labelSize).toBe(null);
     expect(addAnotherNationality?.validator).toBe(isFieldFilledIn);
@@ -184,26 +184,26 @@ describe('nationality content', () => {
     const generatedContent = generateContent(commonContent(populatedArray), fieldPrefix);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const nationality = fields.applicant1Nationality as FormOptions;
+    const nationality = fields.birthMotherNationality as FormOptions;
     const otherCountrySubFields = nationality.values[2].subFields;
-    const applicant1AdditionalNationalities = otherCountrySubFields?.applicant1AdditionalNationalities as FormOptions;
-    const rows = applicant1AdditionalNationalities?.rows?.rows;
+    const birthMotherAdditionalNationalities = otherCountrySubFields?.birthMotherAdditionalNationalities as FormOptions;
+    const rows = birthMotherAdditionalNationalities?.rows?.rows;
     const addAnotherNationalityDetails = otherCountrySubFields?.addAnotherNationalityDetails as FormInput;
     const addAnotherNationality = addAnotherNationalityDetails?.subFields?.addAnotherNationality;
     const addButton = addAnotherNationalityDetails?.subFields?.addButton as FormInput;
 
-    expect(applicant1AdditionalNationalities?.type).toBe('summarylist');
+    expect(birthMotherAdditionalNationalities?.type).toBe('summarylist');
     expect(rows).toHaveLength(2);
     expect(rows?.[0].key.text).toStrictEqual(populatedArray[0]);
     expect(rows?.[1].key.text).toStrictEqual(populatedArray[1]);
-    expect(rows?.[0].actions.items[0].href).toStrictEqual(`/applicant1/nationality?remove=${populatedArray[0]}`);
+    expect(rows?.[0].actions.items[0].href).toStrictEqual(`/birth-mother/nationality?remove=${populatedArray[0]}`);
     expect(rows?.[0].actions.items[0].text).toStrictEqual('Remove');
     expect(rows?.[0].actions.items[0].visuallyHiddenText).toStrictEqual(populatedArray[0]);
 
     expect(addAnotherNationalityDetails.type).toBe('details');
     expect((addAnotherNationalityDetails.label as Function)(generatedContent)).toBe(enContent.another);
 
-    expect(addAnotherNationality?.type).toBe('input');
+    expect(addAnotherNationality?.type).toBe('text');
     expect((addAnotherNationality?.label as Function)(generatedContent)).toBe(enContent.countryName);
     expect(addAnotherNationality?.labelSize).toBe(null);
 

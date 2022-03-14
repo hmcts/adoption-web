@@ -34,7 +34,7 @@ describe('placement-order-summary', () => {
           classes: 'summary-list-actions',
           items: [
             {
-              href: '/sibling/placement-order-check-your-answers?remove=MOCK_ID',
+              href: '/sibling/remove-placement-order?remove=MOCK_SIBLING_ID/MOCK_ID',
               text: 'Remove',
               visuallyHiddenText: 'remove',
             },
@@ -56,7 +56,7 @@ describe('placement-order-summary', () => {
           classes: 'summary-list-actions',
           items: [
             {
-              href: '/sibling/placement-order-check-your-answers?remove=MOCK_ID2',
+              href: '/sibling/remove-placement-order?remove=MOCK_SIBLING_ID/MOCK_ID2',
               text: 'Remove',
               visuallyHiddenText: 'remove',
             },
@@ -75,7 +75,7 @@ describe('placement-order-summary', () => {
           classes: 'summary-list-actions',
           items: [
             {
-              href: '/sibling/placement-order-check-your-answers?remove=MOCK_ID3',
+              href: '/sibling/remove-placement-order?remove=MOCK_SIBLING_ID/MOCK_ID3',
               text: 'Remove',
               visuallyHiddenText: 'remove',
             },

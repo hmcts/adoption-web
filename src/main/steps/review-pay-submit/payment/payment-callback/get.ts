@@ -5,11 +5,10 @@ import { State } from '../../../../app/case/definition';
 import { AppRequest } from '../../../../app/controller/AppRequest';
 import { PaymentClient } from '../../../../app/payment/PaymentClient';
 import { PaymentModel } from '../../../../app/payment/PaymentModel';
-import { CHECK_ANSWERS_URL, PAYMENT_CALLBACK_URL, TASK_LIST_URL } from '../../../urls';
+import { APPLICATION_SUBMITTED, CHECK_ANSWERS_URL, PAYMENT_CALLBACK_URL, TASK_LIST_URL } from '../../../urls';
 
 export default class PaymentCallbackGetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
-    console.log('req.session.userCase', JSON.stringify(req.session.userCase));
     if (req.session.userCase.state !== State.AwaitingPayment) {
       return res.redirect(CHECK_ANSWERS_URL);
     }
@@ -39,14 +38,11 @@ export default class PaymentCallbackGetController {
 
     req.session.userCase = await req.locals.api.addPayment(req.session.userCase.id, payments.list);
 
-    console.log('req.session.userCase', JSON.stringify(req.session.userCase));
-
     req.session.save(() => {
       console.log('payments.wasLastPaymentSuccessful', payments.wasLastPaymentSuccessful);
       if (payments.wasLastPaymentSuccessful) {
         //TODO redirect to application submitted screen later
-        // return res.redirect(APPLICATION_SUBMITTED);
-        return res.redirect(TASK_LIST_URL);
+        return res.redirect(APPLICATION_SUBMITTED);
       }
 
       res.redirect(req.query.back ? CHECK_ANSWERS_URL : TASK_LIST_URL);
