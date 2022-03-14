@@ -1,6 +1,7 @@
 import fs from 'fs';
 
 import Axios from 'axios';
+import lighthouse from 'lighthouse';
 import htmlReporter from 'pa11y/lib/reporters/html';
 import puppeteer from 'puppeteer';
 
@@ -60,12 +61,13 @@ function expectNoErrors(messages: PallyIssue[]): void {
 }
 
 jest.retryTimes(3);
-jest.setTimeout(15000);
+jest.setTimeout(60000);
 
 describe('Accessibility', () => {
   let browser;
   let cookies;
   let hasAfterAllRun = false;
+  const debugPort = 3001;
 
   const setup = async () => {
     if (hasAfterAllRun) {
@@ -75,7 +77,9 @@ describe('Accessibility', () => {
       await browser.close();
     }
 
-    browser = await puppeteer.launch({ ignoreHTTPSErrors: true });
+    // debugPort = Math.floor(Math.random() * (4000 - 3000 + 1) ) + 3000;
+
+    browser = await puppeteer.launch({ args: [`--remote-debugging-port=${debugPort}`], ignoreHTTPSErrors: true });
     browser.on('disconnected', setup);
 
     // Login once only for other pages to reuse session
@@ -138,7 +142,7 @@ describe('Accessibility', () => {
     urls.UPLOAD_YOUR_DOCUMENTS,
   ];
   const urlsToTest = Object.values(urls).filter(url => !IGNORED_URLS.includes(url));
-
+  console.log(urlsToTest);
   describe.each(urlsToTest)('Page %s', url => {
     let page;
 
@@ -148,6 +152,18 @@ describe('Accessibility', () => {
       await page.setCookie(...cookies);
 
       await ensurePageCallWillSucceed(url);
+
+      const { TEST_URL } = config;
+      const fullUrl = `${TEST_URL.endsWith('/') ? TEST_URL.slice(0, TEST_URL.length - 1) : TEST_URL}${url}`;
+      const lighthouseResult = await lighthouse(fullUrl, {
+        logLevel: 'info',
+        output: 'html',
+        port: debugPort,
+        disableStorageReset: true,
+      });
+      const lhReportsDir = `${__dirname}/../../../functional-output/lighthouse${url.slice(0, url.lastIndexOf('/'))}`;
+      fs.mkdirSync(lhReportsDir, { recursive: true });
+      fs.writeFileSync(`${lhReportsDir}${url.slice(url.lastIndexOf('/'))}.html`, lighthouseResult.report);
 
       const result = await runPally(url, browser, page);
       const html = await htmlReporter.results(result);
