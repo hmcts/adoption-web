@@ -16,7 +16,7 @@ const enContent = {
   sectionTitles: {
     applicationDetails: 'Add application details',
     applicantDetails: "Add applicant's details",
-    childDetails: "Add the child's details",
+    childDetails: "Add child's details",
     uploadDocuments: 'Upload documents',
     reviewPayAndSubmit: 'Review, pay and submit',
   },
@@ -52,7 +52,7 @@ const cyContent = {
   sectionTitles: {
     applicationDetails: 'Add application details (in welsh)',
     applicantDetails: "Add applicant's details (in welsh)",
-    childDetails: "Add the child's details (in welsh)",
+    childDetails: "Add child's details (in welsh)",
     uploadDocuments: 'Upload documents (in welsh)',
     reviewPayAndSubmit: 'Review, pay and submit (in welsh)',
   },
@@ -172,7 +172,7 @@ describe('task-list > content', () => {
               text: 'Choose your family court',
             },
           ],
-          title: "Add the child's details",
+          title: "Add child's details",
         },
         {
           items: [
@@ -305,7 +305,7 @@ describe('task-list > content', () => {
               text: 'Choose your family court',
             },
           ],
-          title: "Add the child's details",
+          title: "Add child's details",
         },
         {
           items: [
