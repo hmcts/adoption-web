@@ -10,6 +10,7 @@ import { DocumentManagerController } from './app/document/DocumentManagementCont
 import { KeepAliveController } from './app/keepalive/KeepAliveController';
 import { stepsWithContent } from './steps';
 import { ApplicationSubmittedGetController } from './steps/application-submitted/get';
+import { CookiesGetController } from './steps/cookies/get';
 import { ErrorController } from './steps/error/error.controller';
 import { HomeGetController } from './steps/home/get';
 import { SaveSignOutGetController } from './steps/save-sign-out/get';
@@ -17,6 +18,7 @@ import { TaskListGetController } from './steps/task-list/get';
 import { TimedOutGetController } from './steps/timed-out/get';
 import {
   APPLICATION_SUBMITTED,
+  COOKIES_PAGE,
   CSRF_TOKEN_ERROR_URL,
   DOCUMENT_MANAGER,
   HOME_URL,
@@ -40,6 +42,7 @@ export class Routes {
     app.get(TIMED_OUT_URL, errorHandler(new TimedOutGetController().get));
     app.get(TASK_LIST_URL, errorHandler(new TaskListGetController().get));
     app.get(APPLICATION_SUBMITTED, errorHandler(new ApplicationSubmittedGetController().get));
+    app.get(COOKIES_PAGE, errorHandler(new CookiesGetController().get));
 
     const documentManagerController = new DocumentManagerController();
     app.post(DOCUMENT_MANAGER, handleUploads.array('files[]', 5), errorHandler(documentManagerController.post));

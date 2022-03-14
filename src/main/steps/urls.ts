@@ -146,3 +146,5 @@ export const EQUALITY: PageLink = `${REVIEW_PAY_SUBMIT}/equality`;
 
 export const UPLOAD_YOUR_DOCUMENTS: PageLink = '/upload-your-documents';
 export const DOCUMENT_MANAGER: PageLink = '/document-manager';
+
+export const COOKIES_PAGE: PageLink = '/cookies';
