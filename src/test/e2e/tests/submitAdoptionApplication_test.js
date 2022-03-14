@@ -1,4 +1,4 @@
-Feature('Creat application');
+Feature('Creat application @cross-browser');
 
 Scenario(
   'Creat full application and submit',
