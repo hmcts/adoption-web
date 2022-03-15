@@ -32,7 +32,7 @@ export class PaymentClient {
       case_type: CASE_TYPE,
       amount: total,
       ccd_case_number: caseId,
-      description: 'Apply for adoption', //TODO consider welsh text
+      description: 'Apply for adoption', //TO DO consider welsh text
       currency: 'GBP',
       fees: userCase.applicationFeeOrderSummary.Fees.map(fee => ({
         calculated_amount: `${fee.value.FeeAmount}`,
@@ -117,7 +117,7 @@ interface LinksDto {
 }
 
 interface LinkDto {
-  href: string; // @TODO check how URI serializes
+  href: string;
   method: RequestMethod;
 }
 
