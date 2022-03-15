@@ -115,7 +115,7 @@ const fields: ToApiConverters = {
   applicant2UploadedFiles: () => ({}),
   applicant1CannotUploadDocuments: data => ({
     applicant1CannotUploadSupportingDocument: data.applicant1CannotUploadDocuments
-      ? formatApplicant1CannotUploadDocuments(data.applicant1CannotUploadDocuments)
+      ? formatApplicant1CannotUploadDocuments(data)
       : [],
   }),
   applicant1HelpPayingNeeded: data => ({
@@ -131,10 +131,11 @@ const fields: ToApiConverters = {
   },
 };
 
-const formatApplicant1CannotUploadDocuments = data => {
-  return !Array.isArray(data.applicant1CannotUploadDocuments)
-    ? [data.applicant1CannotUploadDocuments]
-    : data.applicant1CannotUploadDocuments;
+//eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const formatApplicant1CannotUploadDocuments = (data: Partial<Case>): any[] => {
+  return !Array.isArray(data.applicant1CannotUploadDocuments!)
+    ? [data.applicant1CannotUploadDocuments!]
+    : data.applicant1CannotUploadDocuments!;
 };
 
 export const toApiDate = (date: CaseDate | undefined): string => {

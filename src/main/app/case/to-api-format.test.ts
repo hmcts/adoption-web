@@ -5,7 +5,7 @@ jest.mock('uuid', () => ({
 
 import { Case, Checkbox } from './case';
 import { DocumentType, YesOrNo } from './definition';
-import { OrNull, toApiFormat } from './to-api-format';
+import { OrNull, formatApplicant1CannotUploadDocuments, toApiFormat } from './to-api-format';
 
 describe('to-api-format', () => {
   const results: OrNull<Partial<Case>> = {
@@ -71,7 +71,7 @@ describe('to-api-format', () => {
       applicant1HWFNeedHelp: 'Yes',
       applicant1HWFAppliedForFees: 'Yes',
       applicant1HWFReferenceNumber: 'HWF-123-ABC',
-      applicant1CannotUploadSupportingDocument: [undefined],
+      applicant1CannotUploadSupportingDocument: ['application'],
       applicant1HasOtherNames: 'Yes',
       applicant1AdditionalNames: [
         { id: 'MOCK_V4_UUID', value: { firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' } },
@@ -245,5 +245,12 @@ describe('to-api-format', () => {
     },
   ])('set unreachable answers to null if condition met', ({ expected, ...formData }) => {
     expect(toApiFormat(formData as Partial<Case>)).toMatchObject(expected);
+  });
+
+  test('formatApplicant1CannotUploadDocuments should return array', () => {
+    expect(formatApplicant1CannotUploadDocuments({ applicant1CannotUploadDocuments: undefined })).toEqual([undefined]);
+    expect(
+      formatApplicant1CannotUploadDocuments({ applicant1CannotUploadDocuments: [DocumentType.APPLICATION] })
+    ).toEqual([DocumentType.APPLICATION]);
   });
 });
