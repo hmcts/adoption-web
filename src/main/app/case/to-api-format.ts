@@ -133,9 +133,9 @@ const fields: ToApiConverters = {
 
 //eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const formatApplicant1CannotUploadDocuments = (data: Partial<Case>): any[] => {
-  return !Array.isArray(data.applicant1CannotUploadDocuments!)
-    ? [data.applicant1CannotUploadDocuments!]
-    : data.applicant1CannotUploadDocuments!;
+  return !Array.isArray(data.applicant1CannotUploadDocuments)
+    ? [data.applicant1CannotUploadDocuments]
+    : data.applicant1CannotUploadDocuments;
 };
 
 export const toApiDate = (date: CaseDate | undefined): string => {
