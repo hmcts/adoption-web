@@ -5,6 +5,7 @@ import {
   Gender,
   PlacementOrder,
   SectionStatus,
+  State,
   YesNoNotsure,
   YesOrNo,
 } from '../../app/case/definition';
@@ -451,15 +452,29 @@ export const getApplicationStatus = (userCase: CaseWithId): SectionStatus => {
 
 export const statementOfTruthAndPaymentStatus = (userCase: CaseWithId): SectionStatus => {
   if (userCase.applyingWith === ApplyingWith.ALONE) {
-    if (userCase.applicant1IBelieveApplicationIsTrue || userCase.applicant1SotFullName) {
+    if (!userCase.applicant1IBelieveApplicationIsTrue && !userCase.applicant1SotFullName) {
+      SectionStatus.NOT_STARTED;
+    } else if (
+      userCase.applicant1IBelieveApplicationIsTrue ||
+      userCase.applicant1SotFullName ||
+      userCase.state !== State.Submitted
+    ) {
       return SectionStatus.IN_PROGRESS;
     }
   } else {
     if (
+      !userCase.applicant1IBelieveApplicationIsTrue &&
+      !userCase.applicant1SotFullName &&
+      !userCase.applicant2IBelieveApplicationIsTrue &&
+      !userCase.applicant2SotFullName
+    ) {
+      SectionStatus.NOT_STARTED;
+    } else if (
       userCase.applicant1IBelieveApplicationIsTrue ||
       userCase.applicant1SotFullName ||
       userCase.applicant1IBelieveApplicationIsTrue ||
-      userCase.applicant1SotFullName
+      userCase.applicant1SotFullName ||
+      userCase.state !== State.Submitted
     ) {
       return SectionStatus.IN_PROGRESS;
     }

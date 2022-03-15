@@ -878,30 +878,31 @@ describe('utils', () => {
 
   describe('statementOfTruthAndPaymentStatus', () => {
     test.each([
-      { userCase: { applyingWith: ApplyingWith.ALONE }, expected: 'NOT_STARTED' },
+      { userCase: { applyingWith: ApplyingWith.ALONE, state: State.Draft }, expected: 'NOT_STARTED' },
       {
         userCase: {
           applyingWith: ApplyingWith.ALONE,
           applicant1IBelieveApplicationIsTrue: 'checked',
           applicant1SotFullName: 'abc def',
+          state: State.Draft,
         },
         expected: NOT_STARTED,
       },
       {
         userCase: {
-          applyingWith: ApplyingWith.ALONE,
+          applyingWith: ApplyingWith.WITH_SOME_ONE_ELSE,
           applicant1IBelieveApplicationIsTrue: 'checked',
           applicant1SotFullName: 'abc def',
           applicant2IBelieveApplicationIsTrue: 'checked',
           applicant2SotFullName: 'abc def',
+          state: State.Draft,
         },
         expected: NOT_STARTED,
       },
       {
         userCase: {
-          applyingWith: ApplyingWith.ALONE,
-          applicant1IBelieveApplicationIsTrue: 'checked',
-          applicant1SotFullName: 'abc def',
+          applyingWith: ApplyingWith.WITH_SOME_ONE_ELSE,
+          state: State.Draft,
         },
         expected: NOT_STARTED,
       },
