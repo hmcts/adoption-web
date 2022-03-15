@@ -27,7 +27,7 @@ export class PaymentClient {
     const caseId = userCase.id.toString();
 
     const total = userCase.applicationFeeOrderSummary.Fees.reduce((sum, item) => sum + +item.value.FeeAmount, 0);
-    console.log(total);
+    logger.info('total: ', total);
     const body = {
       case_type: CASE_TYPE,
       amount: total,
@@ -62,7 +62,7 @@ export class PaymentClient {
 
       return response.data;
     } catch (e) {
-      console.log(e);
+      logger.error(e);
       const errMsg = 'Error creating payment';
       logger.error(errMsg, e.data);
       throw new Error(errMsg);
@@ -72,7 +72,7 @@ export class PaymentClient {
   public async get(paymentReference: string): Promise<Payment | undefined> {
     try {
       const response = await this.client.get<Payment>(`/card-payments/${paymentReference}`);
-      console.log(JSON.stringify(response.data));
+      logger.info(JSON.stringify(response.data));
       return response.data;
     } catch (e) {
       const errMsg = 'Error fetching payment';
