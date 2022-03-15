@@ -33,16 +33,15 @@ nodejs:
     EQUALITY_URL: 'https://pcq.{{ .Values.global.environment }}.platform.hmcts.net'
     DOCUMENT_MANAGEMENT_URL: 'http://dm-store-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal'
     #Pilot local-court email-Ids
-    CHELMSFORD_FAMILY_COURT_EMAIL: 'chelmsfordadoptionapplication@justice.gov.uk'
-    OXFORD_FAMILY_COURT_EMAIL: 'Oxfordadoptionapplication@justice.gov.uk'
-    MEDWAY_FAMILY_COURT_EMAIL: 'Medwayadoptionapplication@justice.gov.uk'
-    PORTSMOUTH_FAMILY_COURT_EMAIL: 'PortsmouthAdoptionApplication@justice.gov.uk'
-    #Leedsadoptionapplication@justice.gov.uk(Business has asked to update Leeds court email id)
-    LEEDS_FAMILY_COURT_EMAIL: 'adoptionsleeds@justice.gov.uk'
-    NORTHAMPTON_FAMILY_COURT_EMAIL: 'Northamptonadoptionapplications@justice.gov.uk'
-    WORCESTER_FAMILY_COURT_EMAIL: 'Worcesteradoptionapplication@justice.gov.uk'
-    NEWPORT_GWENT_FAMILY_COURT_EMAIL: 'NewportGwentadoptionapplication@justice.gov.uk'
-    FALLBACK_EMAIL_ID_VALUE: 'adoptionproject@justice.gov.uk'
+    CHELMSFORD_FAMILY_COURT_EMAIL: 'chelmsfordadoptionapplication@mailinator.com'
+    OXFORD_FAMILY_COURT_EMAIL: 'Oxfordadoptionapplication@mailinator.com'
+    MEDWAY_FAMILY_COURT_EMAIL: 'Medwayadoptionapplication@mailinator.com'
+    PORTSMOUTH_FAMILY_COURT_EMAIL: 'PortsmouthAdoptionApplication@mailinator.com'
+    LEEDS_FAMILY_COURT_EMAIL: 'adoptionsleeds@mailinator.com'
+    NORTHAMPTON_FAMILY_COURT_EMAIL: 'Northamptonadoptionapplications@mailinator.com'
+    WORCESTER_FAMILY_COURT_EMAIL: 'Worcesteradoptionapplication@mailinator.com'
+    NEWPORT_GWENT_FAMILY_COURT_EMAIL: 'NewportGwentadoptionapplication@mailinator.com'
+    FALLBACK_EMAIL_ID_VALUE: 'adoptionproject@mailinator.com'
 
   keyVaults:
     adoption:
