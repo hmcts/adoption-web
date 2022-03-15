@@ -21,6 +21,8 @@ const en = () => ({
   line6:
     "You will need to provide details about yourself and any second applicant. Some of the information you provide is needed for the Adoption Register and adoption certificate which will replace the child's birth certificate. Your personal information will not affect your application to adopt.",
   line7: 'The information you provide will only be seen by the court and relevant adoption agencies or authorities.',
+  line8:
+    'The court processing fee for an application to adopt is <b>£183</b>. Payment is due once the application is complete and ready to submit to the court.',
 });
 
 const cy = () => ({
@@ -45,6 +47,8 @@ const cy = () => ({
     "You will need to provide details about yourself and any second applicant. Some of the information you provide is needed for the Adoption Register and adoption certificate which will replace the child's birth certificate. Your personal information will not affect your application to adopt. (in welsh)",
   line7:
     'The information you provide will only be seen by the court and relevant adoption agencies or authorities. (in welsh)',
+  line8:
+    'The court processing fee for an application to adopt is <b>£183</b>. Payment is due once the application is complete and ready to submit to the court. (in welsh)',
 });
 
 const languages = {
