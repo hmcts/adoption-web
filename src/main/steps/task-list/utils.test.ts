@@ -14,6 +14,7 @@ import {
   getOtherParentStatus,
   getPersonalDetailsStatus,
   getSiblingStatus,
+  statementOfTruthAndPaymentStatus,
 } from './utils';
 const userCase: CaseWithId = {
   id: '123',
@@ -872,6 +873,40 @@ describe('utils', () => {
       },
     ])('should return correct status %o', async ({ data, expected }) => {
       expect(getDateChildMovedInStatus({ ...userCase, ...data })).toBe(expected);
+    });
+  });
+
+  describe('statementOfTruthAndPaymentStatus', () => {
+    test.each([
+      { userCase: { applyingWith: ApplyingWith.ALONE }, expected: 'NOT_STARTED' },
+      {
+        userCase: {
+          applyingWith: ApplyingWith.ALONE,
+          applicant1IBelieveApplicationIsTrue: 'checked',
+          applicant1SotFullName: 'abc def',
+        },
+        expected: NOT_STARTED,
+      },
+      {
+        userCase: {
+          applyingWith: ApplyingWith.ALONE,
+          applicant1IBelieveApplicationIsTrue: 'checked',
+          applicant1SotFullName: 'abc def',
+          applicant2IBelieveApplicationIsTrue: 'checked',
+          applicant2SotFullName: 'abc def',
+        },
+        expected: NOT_STARTED,
+      },
+      {
+        userCase: {
+          applyingWith: ApplyingWith.ALONE,
+          applicant1IBelieveApplicationIsTrue: 'checked',
+          applicant1SotFullName: 'abc def',
+        },
+        expected: NOT_STARTED,
+      },
+    ])('should return correct status %o', async ({ expected }) => {
+      expect(statementOfTruthAndPaymentStatus({ ...userCase })).toBe(expected);
     });
   });
 });
