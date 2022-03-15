@@ -59,7 +59,7 @@ withNightlyPipeline(type, product, component) {
   syncBranchesWithMaster(branchesToSync)
   enableSlackNotifications('#adoption-tech')
 
-  enableCrossBrowserTest(['chrome', 'firefox'])
+  enableCrossBrowserTest(['chrome', 'firefox','microsoft','safari'])
   loadVaultSecrets(secrets)
 
   after('build') {
