@@ -54,9 +54,6 @@ module.exports = {
   },
 
   async adoptionCourtFeesByCard() {
-    await I.waitForText('Paying your adoption court fees', 30);
-    await I.click(this.fields.paymentTypeCard);
-    await I.click('Continue');
     await I.wait(30);
     await I.waitForText('Enter card details', 30);
     await I.fillField(this.fields.cardNo, '4444333322221111');
