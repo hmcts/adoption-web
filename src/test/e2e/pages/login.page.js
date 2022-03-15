@@ -21,7 +21,8 @@ module.exports = {
   async createCitizenUserAndSignIn() {
     console.log('User using the URL= ' + config.baseUrl);
     await login('citizenSingleton');
-    await I.wait('3');
+    await I.wait('4');
+    I.see('Are you applying on your own, or with someone else?');
   },
 
   async signInFromEligibility() {
@@ -39,6 +40,6 @@ module.exports = {
     await I.click(this.fields.livedUKEligible);
     await I.click('Save and continue');
     await I.wait('4');
-    await this.createUserAndSignIn();
+    await this.createCitizenUserAndSignIn();
   },
 };

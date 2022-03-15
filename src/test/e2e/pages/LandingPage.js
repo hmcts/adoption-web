@@ -7,7 +7,7 @@ module.exports = {
   },
   async seeTheLandingPage() {
     await I.wait('2');
-    await I.seeElement(this.fields.applyingWith);
+    await I.see('Are you applying on your own, or with someone else?');
   },
 
   async selectApplyOnMyownSection() {
