@@ -85,7 +85,8 @@ const getStepsWithContent = (sequence: Step[] | EligibilityStep[], subDir: strin
 
   const results: StepWithContent[] = [];
   for (const step of sequence) {
-    const stepDir = `${dir}${step.url.startsWith(subDir) ? step.url : `${subDir}${step.url}`}`;
+    const path = step.url.startsWith(subDir) ? step.url : `${subDir}${step.url}`;
+    const stepDir = `${dir}${path}`;
     const { content, view } = getStepFiles(stepDir);
     results.push({ stepDir, ...step, ...content, view });
   }
