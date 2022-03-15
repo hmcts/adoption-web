@@ -44,12 +44,6 @@ export default class PayYourFeeGetController extends GetController {
 
     const applicationFeeOrderSummary = req.session.userCase.applicationFeeOrderSummary;
     const fee = applicationFeeOrderSummary?.Fees[0]?.value;
-    if (!fee) {
-      req.session.errors?.push({ errorType: 'errorRetrievingFee', propertyName: 'paymentType' });
-      const callback = () => res.redirect(req.url);
-      super.saveSessionAndRedirect(req, res, callback);
-      return;
-    }
 
     if (req.session.userCase.state !== State.AwaitingPayment) {
       req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, {}, CITIZEN_SUBMIT);
