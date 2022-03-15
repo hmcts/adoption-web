@@ -26,6 +26,7 @@ module.exports = {
     await I.click('Add');
     await I.wait('2');
     await I.click('Save and continue');
+    await I.wait('2');
     await I.waitForText("What's your date of birth?");
     await I.fillField(this.fields.dateOfBirthDay, '26');
     await I.fillField(this.fields.dateOfBirthMonth, '06');
