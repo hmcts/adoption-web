@@ -19,6 +19,7 @@ import {
   APPLICATION_SUBMITTED,
   CSRF_TOKEN_ERROR_URL,
   DOCUMENT_MANAGER,
+  DOWNLOAD_APPLICATION_SUMMARY,
   HOME_URL,
   KEEP_ALIVE_URL,
   SAVE_AND_SIGN_OUT,
@@ -42,6 +43,7 @@ export class Routes {
     app.get(APPLICATION_SUBMITTED, errorHandler(new ApplicationSubmittedGetController().get));
 
     const documentManagerController = new DocumentManagerController();
+    app.get(DOWNLOAD_APPLICATION_SUMMARY, errorHandler(documentManagerController.get));
     app.post(DOCUMENT_MANAGER, handleUploads.array('files[]', 5), errorHandler(documentManagerController.post));
     app.get(`${DOCUMENT_MANAGER}/delete/:index`, errorHandler(documentManagerController.delete));
 

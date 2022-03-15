@@ -9,6 +9,7 @@ import {
   APPLICANT_2,
   APPLICATION_SUBMITTED,
   CHECK_ANSWERS_URL,
+  DOWNLOAD_APPLICATION_SUMMARY,
   PAYMENT_CALLBACK_URL,
   PAY_AND_SUBMIT,
   PAY_YOUR_FEE,
@@ -40,7 +41,8 @@ export class StateRedirectMiddleware {
 
         if (
           [State.Submitted, State.AwaitingDocuments, State.AwaitingHWFDecision].includes(req.session.userCase?.state) &&
-          req.path !== APPLICATION_SUBMITTED
+          req.path !== APPLICATION_SUBMITTED &&
+          req.path !== DOWNLOAD_APPLICATION_SUMMARY
         ) {
           return res.redirect(APPLICATION_SUBMITTED);
         }
