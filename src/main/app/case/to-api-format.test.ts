@@ -4,7 +4,7 @@ jest.mock('uuid', () => ({
 }));
 
 import { Case, Checkbox } from './case';
-import { YesOrNo } from './definition';
+import { DocumentType, YesOrNo } from './definition';
 import { OrNull, toApiFormat } from './to-api-format';
 
 describe('to-api-format', () => {
@@ -12,13 +12,15 @@ describe('to-api-format', () => {
     applicant1HelpPayingNeeded: YesOrNo.YES,
     applicant1AlreadyAppliedForHelpPaying: YesOrNo.YES,
     applicant1HelpWithFeesRefNo: 'HWF-123-ABC',
-    applicant1CannotUploadDocuments: [],
+    applicant1CannotUploadDocuments: [DocumentType.APPLICATION],
     applicant2CannotUploadDocuments: [],
     applicant1HasOtherNames: YesOrNo.YES,
     applicant1AdditionalNames: [{ id: 'MOCK_ID', firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' }],
     applicant2HasOtherNames: YesOrNo.YES,
     applicant2AdditionalNames: [{ id: 'MOCK_ID', firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' }],
     childrenAdditionalNationalities: ['MOCK_COUNTRY'],
+    birthMotherAdditionalNationalities: ['MOCK_COUNTRY'],
+    birthFatherAdditionalNationalities: ['MOCK_COUNTRY'],
     dateChildMovedIn: { day: '1', month: '1', year: '2021' },
     applicant1DateOfBirth: { day: '20', month: '1', year: '2000' },
     applicant2DateOfBirth: undefined,
@@ -59,24 +61,32 @@ describe('to-api-format', () => {
     applicant2IBelieveApplicationIsTrue: null,
     applicant1UploadedFiles: [],
     applicant2UploadedFiles: [],
+    applicant1CannotUpload: Checkbox.Checked,
   };
 
   test('should convert results from adoption-web to CCD api format', async () => {
     const apiFormat = toApiFormat(results as Partial<Case>);
-
     expect(apiFormat).toStrictEqual({
-      applicant1HWFNeedHelp: YesOrNo.YES,
-      applicant1HWFAppliedForFees: YesOrNo.YES,
+      applicant1CannotUpload: 'Yes',
+      applicant1HWFNeedHelp: 'Yes',
+      applicant1HWFAppliedForFees: 'Yes',
       applicant1HWFReferenceNumber: 'HWF-123-ABC',
-      applicant1HasOtherNames: YesOrNo.YES,
+      applicant1CannotUploadSupportingDocument: [undefined],
+      applicant1HasOtherNames: 'Yes',
       applicant1AdditionalNames: [
         { id: 'MOCK_V4_UUID', value: { firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' } },
       ],
-      applicant2HasOtherNames: YesOrNo.YES,
+      applicant2HasOtherNames: 'Yes',
       applicant2AdditionalNames: [
         { id: 'MOCK_V4_UUID', value: { firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' } },
       ],
       childrenAdditionalNationalities: [{ id: 'MOCK_V4_UUID', value: { country: 'MOCK_COUNTRY' } }],
+      birthMotherOtherNationalities: [{ id: 'MOCK_V4_UUID', value: { country: 'MOCK_COUNTRY' } }],
+      birthFatherOtherNationalities: [{ id: 'MOCK_V4_UUID', value: { country: 'MOCK_COUNTRY' } }],
+      dateChildMovedIn: '2021-01-01',
+      applicant1DateOfBirth: '2000-01-20',
+      applicant2DateOfBirth: '',
+      childrenDateOfBirth: '2020-01-05',
       placementOrders: [
         {
           id: 'MOCK_V4_UUID',
@@ -121,13 +131,8 @@ describe('to-api-format', () => {
           },
         },
       ],
-      dateChildMovedIn: '2021-01-01',
-      applicant1DateOfBirth: '2000-01-20',
-      applicant2DateOfBirth: '',
-      childrenDateOfBirth: '2020-01-05',
       applicant1StatementOfTruth: 'No',
       applicant2StatementOfTruth: null,
-      applicant1CannotUploadSupportingDocument: [],
     });
   });
 
@@ -194,6 +199,24 @@ describe('to-api-format', () => {
       childrenAdditionalNationalities: undefined,
       expected: {
         childrenAdditionalNationalities: [],
+      },
+    },
+    {
+      birthMotherAdditionalNationalities: undefined,
+      expected: {
+        birthMotherOtherNationalities: [],
+      },
+    },
+    {
+      birthFatherAdditionalNationalities: undefined,
+      expected: {
+        birthFatherOtherNationalities: [],
+      },
+    },
+    {
+      applicant1CannotUploadDocuments: undefined,
+      expected: {
+        applicant1CannotUploadSupportingDocument: [],
       },
     },
     {

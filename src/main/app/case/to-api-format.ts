@@ -115,9 +115,7 @@ const fields: ToApiConverters = {
   applicant2UploadedFiles: () => ({}),
   applicant1CannotUploadDocuments: data => ({
     applicant1CannotUploadSupportingDocument: data.applicant1CannotUploadDocuments
-      ? !Array.isArray(data.applicant1CannotUploadDocuments)
-        ? [data.applicant1CannotUploadDocuments]
-        : data.applicant1CannotUploadDocuments
+      ? formatApplicant1CannotUploadDocuments(data.applicant1CannotUploadDocuments)
       : [],
   }),
   applicant1HelpPayingNeeded: data => ({
@@ -131,6 +129,12 @@ const fields: ToApiConverters = {
       applicant1CannotUpload: checkboxConverter(data.applicant1CannotUpload),
     };
   },
+};
+
+const formatApplicant1CannotUploadDocuments = data => {
+  return !Array.isArray(data.applicant1CannotUploadDocuments)
+    ? [data.applicant1CannotUploadDocuments]
+    : data.applicant1CannotUploadDocuments;
 };
 
 export const toApiDate = (date: CaseDate | undefined): string => {
