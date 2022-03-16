@@ -10,7 +10,6 @@ export const defaultViewArgs = {
 
   // serviceName: expect.any(String),
   // sessionErrors: expect.any(Array),
-  // // getNextIncompleteStepUrl: expect.any(Function),
   // isDraft: expect.any(Boolean),
   // userCase: expect.any(Object),
   // language: expect.any(String),
