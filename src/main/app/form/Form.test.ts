@@ -34,6 +34,22 @@ describe('Form', () => {
           { name: 'checkboxes', label: () => 'checkbox2', value: 'checkbox2' },
         ],
       },
+      fieldWithSubfields: {
+        type: 'radios',
+        values: [
+          { label: l => l.no, value: YesOrNo.YES },
+          {
+            label: l => l.yes,
+            value: YesOrNo.NO,
+            subFields: {
+              inputField: {
+                type: 'text',
+                label: () => 'input field',
+              },
+            },
+          },
+        ],
+      },
     },
     submit: {
       text: l => l.continue,
@@ -198,10 +214,12 @@ describe('Form', () => {
             year: '2000',
           },
           checkboxes: ['checkbox1'],
+          fieldWithSubfields: 'No',
+          inputField: 'some value',
         },
         expected: true,
       },
-    ])('checks if complete when %o', ({ body, expected }: { body: Record<string, unknown>; expected: boolean }) => {
+    ])('checks if complete when %#', ({ body, expected }: { body: Record<string, unknown>; expected: boolean }) => {
       expect(form.isComplete(body)).toBe(expected);
     });
   });
