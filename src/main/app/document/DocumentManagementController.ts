@@ -131,7 +131,7 @@ export class DocumentManagerController {
       } else if (generatedDocument) {
         res.setHeader('Content-Type', 'application/pdf');
         res.setHeader('Content-Disposition', 'attachment; filename=A58.pdf');
-        return res.end(generatedDocument);
+        return res.end(generatedDocument.data);
       }
       return res.redirect(PAY_YOUR_FEE);
     });
