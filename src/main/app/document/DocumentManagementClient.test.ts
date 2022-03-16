@@ -50,20 +50,4 @@ describe('DocumentManagementClient', () => {
     expect(mockDelete.mock.calls[0][1].headers['user-id']).toEqual('userId');
     expect(actual).toEqual({ data: 'MOCKED-OK' });
   });
-
-  it('fetches documents', async () => {
-    const mockFetch = jest.fn().mockResolvedValue({ data: 'MOCKED-OK' });
-    mockedAxios.create.mockReturnValueOnce({ get: mockFetch } as unknown as AxiosInstance);
-
-    const client = new DocumentManagementClient('http://localhost', 'abcd', {
-      id: 'userId',
-      accessToken: 'userAccessToken',
-    } as unknown as UserDetails);
-
-    const actual = await client.get({ url: 'http://localhost/doc' });
-
-    expect(mockFetch.mock.calls[0][0]).toEqual('http://localhost/doc');
-    expect(mockFetch.mock.calls[0][1].headers['user-id']).toEqual('userId');
-    expect(actual).toEqual({ data: 'MOCKED-OK' });
-  });
 });
