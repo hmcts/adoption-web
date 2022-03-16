@@ -29,6 +29,7 @@ import {
   getReviewPaySubmitUrl,
   getSiblingStatus,
   getUploadDocumentStatus,
+  statementOfTruthAndPaymentStatus,
 } from './utils';
 const userCase: CaseWithId = {
   id: '123',
@@ -1040,6 +1041,40 @@ describe('utils', () => {
       { data: { ...mockUserCase, applyingWith: undefined }, expected: 'CAN_NOT_START_YET' },
     ])('should return correct status %#', async ({ data, expected }) => {
       expect(getApplicationStatus(data)).toBe(expected);
+    });
+  });
+  describe('statementOfTruthAndPaymentStatus', () => {
+    test.each([
+      { userCase: { applyingWith: ApplyingWith.ALONE, state: State.Draft }, expected: 'NOT_STARTED' },
+      {
+        userCase: {
+          applyingWith: ApplyingWith.ALONE,
+          applicant1IBelieveApplicationIsTrue: 'checked',
+          applicant1SotFullName: 'abc def',
+          state: State.Draft,
+        },
+        expected: NOT_STARTED,
+      },
+      {
+        userCase: {
+          applyingWith: ApplyingWith.WITH_SOME_ONE_ELSE,
+          applicant1IBelieveApplicationIsTrue: 'checked',
+          applicant1SotFullName: 'abc def',
+          applicant2IBelieveApplicationIsTrue: 'checked',
+          applicant2SotFullName: 'abc def',
+          state: State.Draft,
+        },
+        expected: NOT_STARTED,
+      },
+      {
+        userCase: {
+          applyingWith: ApplyingWith.WITH_SOME_ONE_ELSE,
+          state: State.Draft,
+        },
+        expected: NOT_STARTED,
+      },
+    ])('should return correct status %o', async ({ expected }) => {
+      expect(statementOfTruthAndPaymentStatus({ ...userCase })).toBe(expected);
     });
   });
 });

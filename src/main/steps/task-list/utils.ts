@@ -5,6 +5,7 @@ import {
   Gender,
   PlacementOrder,
   SectionStatus,
+  State,
   YesNoNotsure,
   YesOrNo,
 } from '../../app/case/definition';
@@ -493,8 +494,43 @@ export const getApplicationStatus = (userCase: CaseWithId): SectionStatus => {
   ];
 
   if (statuses.every(status => status === SectionStatus.COMPLETED)) {
+    if (statementOfTruthAndPaymentStatus(userCase) === SectionStatus.IN_PROGRESS) {
+      return SectionStatus.IN_PROGRESS;
+    }
     return SectionStatus.NOT_STARTED;
   }
 
   return SectionStatus.CAN_NOT_START_YET;
+};
+
+export const statementOfTruthAndPaymentStatus = (userCase: CaseWithId): SectionStatus => {
+  if (userCase.applyingWith === ApplyingWith.ALONE) {
+    if (!userCase.applicant1IBelieveApplicationIsTrue && !userCase.applicant1SotFullName) {
+      SectionStatus.NOT_STARTED;
+    } else if (
+      userCase.applicant1IBelieveApplicationIsTrue ||
+      userCase.applicant1SotFullName ||
+      userCase.state !== State.Submitted
+    ) {
+      return SectionStatus.IN_PROGRESS;
+    }
+  } else {
+    if (
+      !userCase.applicant1IBelieveApplicationIsTrue &&
+      !userCase.applicant1SotFullName &&
+      !userCase.applicant2IBelieveApplicationIsTrue &&
+      !userCase.applicant2SotFullName
+    ) {
+      SectionStatus.NOT_STARTED;
+    } else if (
+      userCase.applicant1IBelieveApplicationIsTrue ||
+      userCase.applicant1SotFullName ||
+      userCase.applicant1IBelieveApplicationIsTrue ||
+      userCase.applicant1SotFullName ||
+      userCase.state !== State.Submitted
+    ) {
+      return SectionStatus.IN_PROGRESS;
+    }
+  }
+  return SectionStatus.NOT_STARTED;
 };
