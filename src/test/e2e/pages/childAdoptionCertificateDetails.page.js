@@ -6,7 +6,7 @@ module.exports = {
     childrenLastNameAfterAdoption: 'input[id$="childrenLastNameAfterAdoption"]',
   },
 
-  async childAdoptionCertificateDetailsSection() {
+  async childNameAfterAdoptionDetailsSection() {
     await I.waitForText("What will the child's full name be after adoption?");
     await I.fillField(this.fields.childrenFirstNameAfterAdoption, 'Joe');
     await I.fillField(this.fields.childrenLastNameAfterAdoption, 'Flient');
