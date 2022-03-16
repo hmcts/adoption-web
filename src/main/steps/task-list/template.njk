@@ -1,292 +1,67 @@
-    {% extends "common/page.njk" %}
-        {% block content %}
-            <div class="govuk-grid-column-full"></div>
-            <div class="govuk-grid-row">
+{% extends "common/page.njk" %}
 
-                <div class="govuk-grid-column-two-thirds">
-                    <h1 class="govuk-heading-xl">
-                        {{title}}
-                    </h1>
+{% macro taskName(item) %}
+  <span class="app-task-list__task-name">
+    {% if item.href %}
+      <a id="{{item.id}}" href="{{item.href}}" aria-describedby="{{item.id}}-status">
+        {{item.text}}
+      </a>
+    {% else %}
+      <p id="{{item.id}}" class="govuk-body govuk-!-margin-bottom-0" aria-describedby="{{item.id}}-status">
+        {{item.text}}
+      </p>
+    {% endif %}
+  </span>
+{% endmacro %}
 
-                    <ol class="app-task-list">
-                        <!-- **************************************** 1. Add application details **************************************** -->
-                        <li>
-                            <h2 class="app-task-list__section">
-                                <span class="app-task-list__section-number">1. </span>{{section1}}
-                            </h2>
-                            <ul class="app-task-list__items">
-                                <!-- Number of applicants -->
-                                <li class="app-task-list__item">
-                                    <span class="app-task-list__task-name">
-                                        <a id="number-of-appicants" href="{{urls.applyingWith}}" class="govuk-link">
-                                            {{section1details1}}
-                                        </a>
-                                    </span>
-                                    <p class="govuk-body">{{ status.applyingWith | safe }}</p>
-                                </li>
+{% macro taskStatus(item) %}
+  {% set statusClass = "" %}
+  {%if item.status == 'IN_PROGRESS' %}
+    {% set statusClass = "govuk-tag--blue" %}
+  {% elif item.status == 'NOT_STARTED' or item.status == 'CAN_NOT_START_YET' %}
+    {% set statusClass = "govuk-tag--grey"%}
+  {% endif %}
+  <strong id="{{item.id}}-status" class="govuk-tag app-task-list__tag {{statusClass}}">{{statuses[item.status]}}</strong>
+{% endmacro %}
 
-            <li class="app-task-list__item">
-                <span class="app-task-list__task-name">
-                    <a id="date-child-moved-in" href="{{urls.dateChildMovedIn}}" class="govuk-link">
-                        {{section1details2}}
-                    </a>
-                </span>
-                <p class="govuk-body">{{ status.dateChildMovedIn | safe }}</p>
-            </li>
-        </ul>
+{% macro taskListItem(item) %}
+  {% if item.id %}
+    <li class="app-task-list__item">
+      {{ taskName(item) }}
+      {{ taskStatus(item) }}
     </li>
+  {% else %}
+    <p class="govuk-!-font-weight-bold govuk-!-margin-top-7 govuk-!-margin-bottom-2">{{item.text}}</p>
+  {% endif %}
+{% endmacro %}
 
-    <!-- **************************************** 2. Add applicants' details **************************************** -->
-    <li>
-        <h2 class="app-task-list__section">
-            <span class="app-task-list__section-number">2. </span>{{section2}}
-        </h2>
-        <ul class="app-task-list__items">
-            {% if userCase.applyingWith != 'alone' %}
-                <p class="govuk-!-font-weight-bold govuk-!-margin-top-7 govuk-!-margin-bottom-2">{{section2subheading2}}</p>
-            {% endif %}
-            <!-- First applicant - personal details -->
-            <li class="app-task-list__item">
-                <span class="app-task-list__task-name">
-                    <a id="applicant1-personal-details" href="{{urls.applicant1PersonalDetails}}" class="govuk-link" aria-describedby="eligibility-completed">
-                        {{section2subheading2line1}}
-                    </a>
-                </span>
-                <p class="govuk-body">{{ status.applicant1PersonalDetails | safe }}</p>
-            </li>
+{% macro taskListSection(section, index) %}
+  <li>
+    <h2 class="app-task-list__section">
+      <span class="app-task-list__section-number">{{index}}. </span>{{section.title}}
+    </h2>
+    <ul class="app-task-list__items">
+      {% for item in section.items %}
+        {{ taskListItem(item) }}
+      {% endfor %}
+    </ul>
+  </li>
+{% endmacro %}
 
-            <!-- First applicant - contact details -->
-            <li class="app-task-list__item">
-                <span class="app-task-list__task-name">
-                    <a id="applicant1-contact-details" href="{{urls.applicant1ContactDetails}}" class="govuk-link" aria-describedby="eligibility-completed">
-                        {{section2subheading2line2}}
-                    </a>
-                </span>
-                <p class="govuk-body">{{ status.applicant1ContactDetails | safe }}</p>
-            </li>
+{% block content %}
+  <div class="govuk-grid-column-full"></div>
+  <div class="govuk-grid-row">
 
-            {% if userCase.applyingWith != 'alone' %}
-                <p class="govuk-!-font-weight-bold govuk-!-margin-top-7 govuk-!-margin-bottom-2">{{section2subheading3}}</p>
-            
-                <!-- Second applicant - personal details -->
-                <li class="app-task-list__item">
-                    <span class="app-task-list__task-name">
-                        <a id="applicant2-personal-details" href="{{urls.applicant2PersonalDetails}}" class="govuk-link" aria-describedby="eligibility-completed">
-                            {{section2subheading3line1}}
-                        </a>
-                    </span>
-                    <p class="govuk-body">{{ status.applicant2PersonalDetails | safe }}</p>
-                </li>
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">
+        {{title}}
+      </h1>
 
-                <!-- Second applicant - contact details -->
-                <li class="app-task-list__item">
-                    <span class="app-task-list__task-name">
-                        <a id="applicant2-contact-details" href="{{urls.applicant2ContactDetails}}" class="govuk-link" aria-describedby="eligibility-completed">
-                            {{section2subheading3line2}}
-                        </a>
-                    </span>
-                    <p class="govuk-body">{{ status.applicant2ContactDetails | safe }}</p>
-                </li>
-            {% endif %}
-        </ul>
-    </li>
-
-    <!-- **************************************** 3. Add the child's details **************************************** -->
-    <li>
-        <h2 class="app-task-list__section">
-            <span class="app-task-list__section-number">3. </span>{{section3}}
-        </h2>
-        <ul class="app-task-list__items">
-            <li class="app-task-list__item">
-                <span class="app-task-list__task-name">
-                    <a id="children-birth-certificate" href="{{urls.childrenBirthCertificate}}" class="govuk-link" aria-describedby="eligibility-completed">
-                        {{section3link1}}
-                    </a>
-                </span>
-                <p class="govuk-body">{{ status.childrenBirthCertificate | safe }}</p>
-            </li>
-            <li class="app-task-list__item">
-                <span class="app-task-list__task-name">
-                    <a id="adoption-certificate-details" href="{{urls.adoptionCertificateDetails}}" class="govuk-link" aria-describedby="eligibility-completed">
-                        {{section3link2}}
-                    </a>
-                </span>
-                <p class="govuk-body">{{ status.adoptionCertificateDetails | safe }}</p>
-            </li>
-
-            <li class="app-task-list__item">
-                <span class="app-task-list__task-name">
-                    <a id="children-placement-order" href="{{urls.childrenPlacementOrder}}" class="govuk-link" aria-describedby="eligibility-completed">
-                        {{section3link3}}
-                    </a>
-                </span>
-                <p class="govuk-body">{{ status.childrenPlacementOrder | safe }}</p>
-            </li>
-            <li class="app-task-list__item">
-                <span class="app-task-list__task-name">
-                    <a id="children-birth-mother" href="{{urls.birthMotherDetails}}"  class="govuk-link" aria-describedby="eligibility-completed">
-                        {{section3link4}}
-                    </a>
-                </span>
-                <p class="govuk-body">{{ status.birthMotherDetails | safe }}</p>
-            </li>
-            <li class="app-task-list__item">
-                <span class="app-task-list__task-name">
-                    <a id="children-birth-father" href="{{urls.birthFather}}" class="govuk-link" aria-describedby="eligibility-completed">
-                        {{section3link5}}
-                    </a>
-                </span>
-                <p class="govuk-body">{{ status.birthFather | safe }}</p>
-            </li>
-            <li class="app-task-list__item">
-                <span class="app-task-list__task-name">
-                    <a id = "other-parent" href="{{urls.otherParentExists}}" class="govuk-link" aria-describedby="eligibility-completed">
-                        {{section3link6}}
-                    </a>
-                </span>
-                <p class="govuk-body">{{ status.otherParent | safe }}</p>
-            </li>
-            <li class="app-task-list__item">
-                <span class="app-task-list__task-name">
-                    <a href="#" class="govuk-link" aria-describedby="eligibility-completed">
-                        {{section3link7}}
-                    </a>
-                </span>
-                {% if data['court-orders'] %}
-                    <strong class="govuk-tag  app-task-list__tag" id="eligibility-completed">Completed</strong>
-                {% else %}
-                    <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
-                {% endif %}
-            </li>
-            <li class="app-task-list__item">
-                <span class="app-task-list__task-name">
-                    <a href="#" class="govuk-link" aria-describedby="eligibility-completed">
-                        {{section3link8}}
-                    </a>
-                </span>
-                {% if data['siblings'] %}
-                    <strong class="govuk-tag  app-task-list__tag" id="eligibility-completed">Completed</strong>
-                {% else %}
-                    <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
-                {% endif %}
-            </li>
-            <li class="app-task-list__item">
-                <span class="app-task-list__task-name">
-                    <a id="adoption-agency" href="{{urls.adoptionAgency}}" class="govuk-link" aria-describedby="eligibility-completed">
-                        {{section3link9}}
-                    </a>
-                </span>
-                <p class="govuk-body">{{ status.adoptionAgency | safe }}</p>
-            </li>
-            <li class="app-task-list__item">
-                <span class="app-task-list__task-name">
-                    <a id = "sibling-details" href="{{urls.siblingDetails}}" class="govuk-link" aria-describedby="eligibility-completed">
-                        {{section3link10}}
-                    </a>
-                </span>
-                <p class="govuk-body">{{ status.sibling | safe }}</p>
-            </li>
-            <li class="app-task-list__item">
-                <span class="app-task-list__task-name">
-                    <a id = "find-family-court" href="{{urls.findFamilyCourt}}" class="govuk-link" aria-describedby="eligibility-completed">
-                        {{section3link11}}
-                    </a>
-                </span>
-                <p class="govuk-body">{{ status.findFamilyCourt | safe }}</p>
-            </li>            
-        </ul>
-    </li>
-
-    <!-- **************************************** 4. Add your adoption contacts **************************************** -->
-    <li>
-        <h2 class="app-task-list__section">
-            <span class="app-task-list__section-number">4. </span>{{section4}}
-        </h2>
-        <ul class="app-task-list__items">
-            <li class="app-task-list__item">
-                <span class="app-task-list__task-name">
-                    <a href="#" class="govuk-link"> 
-                        {{section4link1}}
-                    </a>
-                </span>
-                {% if data['your-adoption-agency'] %}
-                    <strong class="govuk-tag  app-task-list__tag" id="eligibility-completed">Completed</strong>
-                {% else %}
-                    <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
-                {% endif %}
-            </li>
-            <li class="app-task-list__item">
-                <span class="app-task-list__task-name">
-                    <a href="#" class="govuk-link">
-                        {{section4link2}}
-                    </a>
-                </span>
-                {% if data['childs-adoption-agency'] %}
-                    <strong class="govuk-tag  app-task-list__tag" id="eligibility-completed">Completed</strong>
-                {% else %}
-                    <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
-                {% endif %}
-            </li>
-
-            <li class="app-task-list__item">
-                <span class="app-task-list__task-name">
-                    <a href="#" class="govuk-link">
-                        {{section4link3}}
-                    </a>
-                </span>
-                {% if data['solicitor'] %}
-                    <strong class="govuk-tag  app-task-list__tag" id="eligibility-completed">Completed</strong>
-                {% else %}
-                    <strong class="govuk-tag govuk-tag--grey app-task-list__tag">not started</strong>
-                {% endif %}
-            </li>
-        </ul>
-    </li>
-
-    <!-- **************************************** 5. Declare payments **************************************** -->
-    <li>
-        <h2 class="app-task-list__section">
-            <span class="app-task-list__section-number">5. </span>{{section5}}
-        </h2>
-        <ul class="app-task-list__items">
-            <li class="app-task-list__item">
-                <span class="app-task-list__task-name">
-                    <a href="upload-your-documents" href="{{urls.uploadYourDocuments}}" class="govuk-link" aria-describedby="eligibility-completed">
-                        {{section5link1}}
-                    </a>
-                </span>
-                <p class="govuk-body">{{ status.uploadDocuments | safe }}</p>
-            </li>
-        </ul>
-    </li>
-    <!-- **************************************** 6. Review application, pay and send **************************************** -->
-    <li>
-        <h2 class="app-task-list__section">
-            <span class="app-task-list__section-number">6. </span>{{section6}}
-        </h2>
-        <ul class="app-task-list__items">
-            <li class="app-task-list__item">
-                {% if urls.reviewApplicationPayAndSubmit %}
-                    <span class="app-task-list__task-name">
-                        <a id="review-pay-and-submit" href="{{urls.reviewApplicationPayAndSubmit}}" class="govuk-link">
-                            {{section6link1}}
-                        </a>
-                    </span>
-                {% else %}
-                    <span class="app-task-list__task-name">
-                        <a id="review-pay-and-submit" href="#" class="not-underlined">
-                            {{section6link1}}
-                        </a>
-                    </span>
-                {% endif %}
-                <p class="govuk-body">{{ status.reviewPayAndSubmit | safe }}</p>
-            </li>
-        </ul>
-    </li>
-
-</ol>
-
-</div>
-</div>
-
+      <ol class="app-task-list">
+        {% for section in sections %}
+          {{ taskListSection(section, loop.index) }}
+        {% endfor %}
+      </ol>
+    </div>
+  </div>
 {% endblock %}
