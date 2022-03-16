@@ -4,7 +4,7 @@ import { LoggerInstance } from 'winston';
 import { UserDetails } from '../controller/AppRequest';
 
 import { CaseApi, getCaseApi } from './CaseApi';
-import { Adoption, CITIZEN_UPDATE, State } from './definition';
+import { Adoption, CITIZEN_ADD_PAYMENT, CITIZEN_UPDATE, PaymentStatus, State } from './definition';
 
 jest.mock('axios');
 
@@ -24,7 +24,7 @@ describe('CaseApi', () => {
     info: jest.fn().mockImplementation((message: string) => message),
   } as unknown as LoggerInstance;
 
-  let api = new CaseApi(mockedAxios, userDetails, mockLogger);
+  let api; // = new CaseApi(mockedAxios, userDetails, mockLogger);
   beforeEach(() => {
     mockLogger = {
       error: jest.fn().mockImplementation((message: string) => message),
@@ -32,6 +32,10 @@ describe('CaseApi', () => {
     } as unknown as LoggerInstance;
 
     api = new CaseApi(mockedAxios, userDetails, mockLogger);
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   const serviceType = Adoption.ADOPTION;
@@ -147,6 +151,40 @@ describe('CaseApi', () => {
 
     expect(mockLogger.error).toHaveBeenCalledWith('API Error POST https://example.com 500');
     expect(mockLogger.info).toHaveBeenCalledWith('Response: ', 'mock error');
+  });
+
+  test('Should update case when adding payment', async () => {
+    mockedAxios.get.mockResolvedValue({ data: { token: '123' } });
+    mockedAxios.post.mockResolvedValue({
+      data: { data: { id: '1234' } },
+    });
+
+    const payments = [
+      {
+        id: 'MOCK_ID',
+        value: {
+          created: 'MOCK_CREATED_DATE',
+          updated: 'MOCK_UPDATED_DATE',
+          feeCode: 'MOCK_FEE_CODE',
+          amount: 100,
+          status: PaymentStatus.SUCCESS,
+          channel: 'MOCK_CHANNEL',
+          reference: 'MOCK_REFERENCE',
+          transactionId: 'MOCK_TRANSACTION_ID',
+        },
+      },
+    ];
+
+    await api.addPayment('1234', payments);
+
+    const caseData = { applicationPayments: payments };
+    const expectedRequest = {
+      data: caseData,
+      event: { id: CITIZEN_ADD_PAYMENT },
+      event_token: '123',
+    };
+
+    expect(mockedAxios.post).toBeCalledWith('/cases/1234/events', expectedRequest);
   });
 
   test('Should return case for caseId passed', async () => {

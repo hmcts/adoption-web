@@ -16,9 +16,9 @@ jest.mock('../../../steps', () => {
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 
-import DateChildMovedInController from './post';
+import CheckYouAnswersPostController from './CheckYouAnswersPostController';
 
-describe('DateChildMovedInController', () => {
+describe('CheckYouAnswersPostController', () => {
   let req;
   let res;
   let controller;
@@ -33,7 +33,7 @@ describe('DateChildMovedInController', () => {
       },
     });
     res = mockResponse();
-    controller = new DateChildMovedInController({});
+    controller = new CheckYouAnswersPostController({});
   });
 
   describe('next page', () => {
@@ -63,7 +63,7 @@ describe('DateChildMovedInController', () => {
         },
       });
       res = mockResponse();
-      controller = new DateChildMovedInController({});
+      controller = new CheckYouAnswersPostController({});
     });
 
     afterEach(() => {
@@ -86,7 +86,7 @@ describe('DateChildMovedInController', () => {
         },
       });
       res = mockResponse();
-      controller = new DateChildMovedInController({});
+      controller = new CheckYouAnswersPostController({});
     });
 
     afterEach(() => {
