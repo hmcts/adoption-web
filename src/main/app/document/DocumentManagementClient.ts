@@ -1,6 +1,7 @@
 import Axios, { AxiosInstance, AxiosResponse } from 'axios';
 import FormData from 'form-data';
 
+import { UserRole } from '../../app/case/definition';
 import type { UserDetails } from '../controller/AppRequest';
 
 export class DocumentManagementClient {
@@ -38,6 +39,13 @@ export class DocumentManagementClient {
 
   async delete({ url }: { url: string }): Promise<AxiosResponse> {
     return this.client.delete(url, { headers: { 'user-id': this.user.id } });
+  }
+
+  async get({ url }: { url: string }): Promise<AxiosResponse> {
+    return this.client.get(url, {
+      responseType: 'arraybuffer',
+      headers: { 'user-id': this.user.id, 'user-roles': UserRole.ADOPTION_GENERIC },
+    });
   }
 }
 

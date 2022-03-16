@@ -1,11 +1,11 @@
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
-import { UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
-import { CITIZEN_UPDATE, State } from '../case/definition';
+import { PAY_YOUR_FEE, UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
+import { CITIZEN_UPDATE, DocumentType, State } from '../case/definition';
 
 import { DocumentManagerController } from './DocumentManagementController';
 
-const { mockCreate, mockDelete } = require('./DocumentManagementClient');
+const { mockCreate, mockDelete, mockGet } = require('./DocumentManagementClient');
 
 jest.mock('../document/DocumentManagementClient');
 
@@ -15,6 +15,7 @@ describe('DocumentManagerController', () => {
   beforeEach(() => {
     mockCreate.mockClear();
     mockDelete.mockClear();
+    mockGet.mockClear();
   });
 
   describe('Uploading files', () => {
@@ -362,6 +363,84 @@ describe('DocumentManagerController', () => {
 
       await expect(() => documentManagerController.delete(req, res)).rejects.toThrow(
         'Cannot delete documents as case is not in Draft state'
+      );
+    });
+  });
+
+  describe('fetch file', () => {
+    it.each([
+      {
+        state: State.Submitted,
+        documentsGenerated: {
+          field1: 'documentsGenerated',
+        },
+        redirectUrl: PAY_YOUR_FEE,
+      },
+    ])('fetch an existing file - %o', async ({ state, documentsGenerated }) => {
+      const req = mockRequest({
+        userCase: {
+          state,
+          [documentsGenerated.field1]: [
+            { id: '1', value: { documentLink: { document_binary_url: 'object-of-doc-not-to-fetch' } } },
+            {
+              id: '2',
+              value: {
+                documentLink: { document_binary_url: 'object-of-doc-to-fetch' },
+                documentType: DocumentType.APPLICATION_SUMMARY,
+              },
+            },
+            { id: '3', value: { documentLink: { document_binary_url: 'object-of-doc-not-to-fetch' } } },
+          ],
+        },
+      });
+
+      req.headers.accept = 'application/pdf';
+      const res = mockResponse();
+
+      await documentManagerController.get(req, res);
+
+      expect(mockGet).toHaveBeenCalledWith({ url: 'object-of-doc-to-fetch' });
+    });
+
+    it.each([
+      {
+        state: State.Submitted,
+        generatedFields: {
+          field1: 'documentsGenerated',
+        },
+        redirectUrl: PAY_YOUR_FEE,
+      },
+    ])("redirects if browser doesn't accept JSON/has JavaScript disabled - %o", async ({ redirectUrl }) => {
+      const req = mockRequest({
+        userCase: {
+          state: State.Submitted,
+          applicant1DocumentsUploaded: [
+            { id: '1', value: { documentLink: { document_url: 'object-of-doc-not-to-fetch' } } },
+            { id: '3', value: { documentLink: { document_url: 'object-of-doc-not-to-fetch' } } },
+          ],
+        },
+      });
+      const res = mockResponse();
+
+      await documentManagerController.get(req, res);
+
+      expect(res.redirect).toHaveBeenCalledWith(redirectUrl);
+    });
+
+    it("fetch throws an error if the case isn't in a Submitted state", async () => {
+      const req = mockRequest({
+        userCase: {
+          state: State.Draft,
+          documentsGenerated: [
+            { id: '1', value: { documentLink: { document_url: 'object-of-doc-not-to-fetch' } } },
+            { id: '3', value: { documentLink: { document_url: 'object-of-doc-not-to-fetch' } } },
+          ],
+        },
+      });
+      const res = mockResponse();
+
+      await expect(() => documentManagerController.get(req, res)).rejects.toThrow(
+        'Cannot display document as the application is not in submitted state'
       );
     });
   });
