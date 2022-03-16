@@ -29,7 +29,20 @@ describe('PayYourFeeGetController', () => {
 
   describe('when there is no applicationFeeOrderSummary object in userCase', () => {
     it('shoud call the fee lookup api', async () => {
+      req = mockRequest({ userCase: {} });
       mockGetFee.mockResolvedValue({ FeeAmount: '4321' });
+      (req.locals.api.triggerEvent as jest.Mock).mockResolvedValueOnce({
+        applicationFeeOrderSummary: {
+          PaymentTotal: '100',
+          Fees: [{ id: 'MOCK_V4_UUID', value: { FeeAmount: '4321' } }],
+        },
+      });
+      (mockCreate as jest.Mock).mockReturnValueOnce({
+        date_created: '1999-12-31T23:59:59.999Z',
+        reference: 'mock ref',
+        external_reference: 'mock external reference payment id',
+        _links: { next_url: { href: 'http://example.com/pay' } },
+      });
       await controller.get(req, res);
       expect(mockGetFee).toHaveBeenCalledWith(req.locals.logger);
       expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(

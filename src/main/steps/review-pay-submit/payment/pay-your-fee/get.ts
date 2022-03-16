@@ -40,7 +40,6 @@ export default class PayYourFeeGetController extends GetController {
             throw err;
           }
         });
-        return;
       } else {
         logger.error('Unable to get fee from fee-register API');
         throw new Error('Unable to get fee from fee-register API');
