@@ -90,7 +90,7 @@ const en = {
   viewCookies: 'View cookies',
   hideMessage: 'Hide this message',
   cookiesConfirmationMessage:
-    '<p>You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.</p>',
+    '<p class="govuk-body">You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.</p>',
   changeCookiesHeading: 'Change your cookie settings',
   allowAnalyticsCookies: 'Allow cookies that measure website use?',
   useAnalyticsCookies: 'Use cookies that measure my website use',
