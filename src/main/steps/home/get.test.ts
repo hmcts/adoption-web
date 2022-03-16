@@ -1,6 +1,6 @@
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
-import { State } from '../../app/case/definition';
+import { ApplyingWith, State } from '../../app/case/definition';
 import {
   APPLICATION_SUBMITTED,
   APPLYING_WITH_URL,
@@ -9,6 +9,7 @@ import {
   HUB_PAGE,
   PAY_YOUR_FEE,
   SENT_TO_APPLICANT2_FOR_REVIEW,
+  TASK_LIST_URL,
 } from '../urls';
 
 import { HomeGetController } from './get';
@@ -31,18 +32,19 @@ describe('HomeGetController', () => {
     expect(res.redirect).toBeCalledWith(APPLYING_WITH_URL);
   });
 
-  test('redirects to the check your answers page for existing users', () => {
+  test('redirects to task list when applyingWith question has been answered', () => {
     const req = mockRequest({
       session: {
         userCase: {
           id: '123',
+          applyingWith: ApplyingWith.ALONE,
         },
       },
     });
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(APPLYING_WITH_URL);
+    expect(res.redirect).toBeCalledWith(TASK_LIST_URL);
   });
 
   test('redirects to application sent for review page for applicant 1 users in awaitingApplicant2 state', () => {

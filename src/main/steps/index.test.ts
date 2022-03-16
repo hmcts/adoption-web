@@ -1,11 +1,9 @@
 import { mockRequest } from '../../test/unit/utils/mockRequest';
-import { ApplyingWith } from '../app/case/definition';
 import { AppRequest } from '../app/controller/AppRequest';
 
-import { applicant1Sequence } from './applicant1/applicant1Sequence';
 import { APPLYING_WITH_URL, CHECK_ELIGIBILITY_URL_UNDER_18, START_ELIGIBILITY_URL, TASK_LIST_URL } from './urls';
 
-import { getNextEligibilityStepUrl, getNextIncompleteStepUrl, getNextStepUrl } from './index';
+import { getNextEligibilityStepUrl, getNextStepUrl } from './index';
 
 describe('Steps', () => {
   describe('getNextStep()', () => {
@@ -40,44 +38,18 @@ describe('Steps', () => {
       const data = {};
       expect(getNextStepUrl(mockReq, data)).toBe(`${TASK_LIST_URL}?customQueryString`);
     });
-  });
 
-  describe('getNextIncompleteStepUrl()', () => {
-    let mockReq: AppRequest;
-    beforeEach(() => {
-      mockReq = mockRequest();
+    it('returns task list url in case of unrecognised urls', () => {
+      mockReq.originalUrl = '/non-existing-url';
+      const data = {};
+      expect(getNextStepUrl(mockReq, data)).toBe(TASK_LIST_URL);
     });
 
-    it('returns the next step url when step does not have a form', () => {
-      mockReq.originalUrl = '/non-existent-url';
-      expect(getNextIncompleteStepUrl(mockReq)).toBe(APPLYING_WITH_URL);
-    });
-
-    it('returns the first url that fails validation', () => {
-      expect(getNextIncompleteStepUrl(mockReq)).toBe(APPLYING_WITH_URL);
-    });
-
-    it('returns the next incomplete step if previous is valid', () => {
-      mockReq.session.userCase.applyingWith = ApplyingWith.ALONE;
-      expect(getNextIncompleteStepUrl(mockReq)).toBe('/applying-with');
-    });
-
-    it('returns the previous step if its a dead end', () => {
-      const actual = getNextIncompleteStepUrl(mockReq);
-      expect(actual).toBe(APPLYING_WITH_URL);
-    });
-
-    it('keeps the query string', () => {
-      mockReq.originalUrl = `${APPLYING_WITH_URL}?customQueryString`;
-      expect(getNextIncompleteStepUrl(mockReq)).toBe(`${APPLYING_WITH_URL}?customQueryString`);
-    });
-
-    it('goes back one page if the step is incomplete & excluded from continue application', () => {
-      applicant1Sequence[1].excludeFromContinueApplication = true;
-
-      mockReq.originalUrl = APPLYING_WITH_URL;
-      const actual = getNextIncompleteStepUrl(mockReq);
-      expect(actual).toBe(APPLYING_WITH_URL);
+    it('returns task list url in case of saveAsDraft', () => {
+      mockReq.originalUrl = `${APPLYING_WITH_URL}`;
+      const data = {};
+      mockReq.body['saveAsDraft'] = true;
+      expect(getNextStepUrl(mockReq, data)).toBe(TASK_LIST_URL);
     });
   });
 });
