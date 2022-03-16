@@ -10,4 +10,14 @@ module.exports = {
   moduleNameMapper: {
     '@hmcts/nodejs-logging': '<rootDir>/src/test/unit/mocks/hmcts/nodejs-logging',
   },
+  reporters: [
+    'default',
+    [
+      './node_modules/jest-html-reporter',
+      {
+        pageTitle: 'Integration test report',
+        outputPath: 'output/integration-tests.html',
+      },
+    ],
+  ],
 };
