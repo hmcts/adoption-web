@@ -29,12 +29,12 @@ describe('initAuthToken', () => {
   });
 
   test('Should log errors', () => {
-    mockedAxios.post.mockRejectedValue({ response: { status: 500, data: 'Error' } });
+    mockedAxios.post.mockRejectedValue({ message: 'MOCK_ERROR', response: { status: 500, data: 'Error' } });
 
     initAuthToken();
     return new Promise<void>(resolve => {
       setImmediate(() => {
-        expect(logger.error).toHaveBeenCalledWith(500, 'Error');
+        expect(logger.error).toHaveBeenCalledWith('MOCK_ERROR', 500, 'Error');
         resolve();
       });
     });

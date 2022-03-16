@@ -1,4 +1,4 @@
-Feature('Creat application');
+Feature('Creat application').retry(1);
 
 Scenario(
   'Creat full application and submit',
@@ -31,6 +31,11 @@ Scenario(
     await dateChildMovedinDetailsPage.dateChildMovedInSection('10', '10', '2020');
     await taskListPage.verifyDateChildMovedInStatus();
 
+    await taskListPage.selectChildAdoptionAgencyDetails();
+    await childAdoptionAgencyDetailsPage.childAdoptionAgencyDetailsSection();
+    await childAdoptionAgencyDetailsPage.childSocialWorkerDetails();
+    await taskListPage.verifyChildAdoptionAgencyDetailsStatus;
+
     await taskListPage.selectPrimaryApplicantContactDetails();
     await primaryApplicantDetailsPage.primaryApplicantContactDetailsSection();
     await taskListPage.verifyPrimaryApplicantContactDetailsStatus();
@@ -47,15 +52,12 @@ Scenario(
     await otherApplicantPersonalDetailsPage.otherApplicantPersonalDetailsSection();
     await taskListPage.verifyOtherApplicantPersonalDetailsStatus();
 
-    await taskListPage.selectChildPlacementOrderDetails();
-    await childDetailsPlacementOrderPage.childDetailsPlacementOrderSection();
-
     await taskListPage.selectChildrenBirthCertificate();
     await childrenBirthCertificatePage.childDetailsBirthCertificaterSection();
     await taskListPage.verifyChildBirthCertificateDetailsStatus();
 
     await taskListPage.selectChildAdoptionCertificateDetails();
-    await childAdoptionCertificateDetailsPage.childAdoptionCertificateDetailsSection();
+    await childAdoptionCertificateDetailsPage.childNameAfterAdoptionDetailsSection();
     await taskListPage.verifyAdoptionCertificateDetailStatus();
 
     await taskListPage.selectChildBirthMotherDetails();
@@ -70,10 +72,8 @@ Scenario(
     await childOtherParentDetailsPage.childOtherParentDetailsSection();
     await taskListPage.verifyChildOtherParentDetailsStatus();
 
-    await taskListPage.selectChildAdoptionAgencyDetails();
-    await childAdoptionAgencyDetailsPage.childAdoptionAgencyDetailsSection();
-    await childAdoptionAgencyDetailsPage.childSocialWorkerDetails();
-    await taskListPage.verifyChildAdoptionAgencyDetailsStatus;
+    await taskListPage.selectChildPlacementOrderDetails();
+    await childDetailsPlacementOrderPage.childDetailsPlacementOrderSection();
 
     await taskListPage.selectSiblingDetails();
     await childSiblingDetailsPage.childDetailsSiblingSection();

@@ -17,7 +17,7 @@ export const getTokenFromApi = (): void => {
 
   Axios.post(url, body)
     .then(response => (token = response.data))
-    .catch(err => logger.error(err.response?.status, err.response?.data));
+    .catch(err => logger.error(err.message, err.response?.status, err.response?.data));
 };
 
 export const initAuthToken = (): void => {
