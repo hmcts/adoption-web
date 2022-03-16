@@ -122,10 +122,6 @@ export class DocumentManagerController {
       }
     }
 
-    if (!documentToGet) {
-      throw new Error('Document is not available');
-    }
-
     const documentManagementClient = this.getDocumentManagementClient(req.session.user);
     const generatedDocument = await documentManagementClient.get({ url: documentToGet });
 
