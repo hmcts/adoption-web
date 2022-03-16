@@ -479,6 +479,5 @@ export const statementOfTruthAndPaymentStatus = (userCase: CaseWithId): SectionS
       return SectionStatus.IN_PROGRESS;
     }
   }
-
   return SectionStatus.NOT_STARTED;
 };
