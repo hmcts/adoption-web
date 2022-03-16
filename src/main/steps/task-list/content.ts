@@ -168,7 +168,7 @@ const en = () => ({
     [SectionStatus.COMPLETED]: 'Completed',
     [SectionStatus.IN_PROGRESS]: 'In Progress',
     [SectionStatus.NOT_STARTED]: 'Not Started',
-    [SectionStatus.CAN_NOT_START_YET]: 'Can not start yet',
+    [SectionStatus.CAN_NOT_START_YET]: 'Cannot start yet',
   },
   sectionTitles: {
     applicationDetails: 'Add application details',
@@ -204,7 +204,7 @@ const cy = () => ({
     [SectionStatus.COMPLETED]: 'Completed (in welsh)',
     [SectionStatus.IN_PROGRESS]: 'In Progress (in welsh)',
     [SectionStatus.NOT_STARTED]: 'Not Started (in welsh)',
-    [SectionStatus.CAN_NOT_START_YET]: 'Can not start yet (in welsh)',
+    [SectionStatus.CAN_NOT_START_YET]: 'Cannot start yet (in welsh)',
   },
   sectionTitles: {
     applicationDetails: 'Add application details (in welsh)',
