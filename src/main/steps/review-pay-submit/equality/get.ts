@@ -74,7 +74,7 @@ export default class PCQGetController {
           req.locals.logger.error('Error', err);
           throw err;
         }
-        logger.info(`PCQ service redirect URL: ${url}${path}?${qs}, pcqEnabled: ${pcqEnabled}`);
+        logger.info(`PCQ service redirect URL: ${url}${path}?${qs}, pcqEnabled: ${pcqEnabled} completed successfully.`);
         res.redirect(`${url}${path}?${qs}`);
       });
     } else {
