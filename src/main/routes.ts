@@ -9,20 +9,29 @@ import { PostController } from './app/controller/PostController';
 import { DocumentManagerController } from './app/document/DocumentManagementController';
 import { KeepAliveController } from './app/keepalive/KeepAliveController';
 import { stepsWithContent } from './steps';
+import { AccessibilityStatementGetController } from './steps/accessibility-statement/get';
 import { ApplicationSubmittedGetController } from './steps/application-submitted/get';
+import { CookiesGetController } from './steps/cookies/get';
 import { ErrorController } from './steps/error/error.controller';
 import { HomeGetController } from './steps/home/get';
+import { PrivacyPolicyGetController } from './steps/privacy-policy/get';
 import { SaveSignOutGetController } from './steps/save-sign-out/get';
 import { TaskListGetController } from './steps/task-list/get';
+import { TermsAndConditionsGetController } from './steps/terms-and-conditions/get';
 import { TimedOutGetController } from './steps/timed-out/get';
 import {
+  ACCESSIBILITY_STATEMENT,
   APPLICATION_SUBMITTED,
+  COOKIES_PAGE,
   CSRF_TOKEN_ERROR_URL,
   DOCUMENT_MANAGER,
+  DOWNLOAD_APPLICATION_SUMMARY,
   HOME_URL,
   KEEP_ALIVE_URL,
+  PRIVACY_POLICY,
   SAVE_AND_SIGN_OUT,
   TASK_LIST_URL,
+  TERMS_AND_CONDITIONS,
   TIMED_OUT_URL,
 } from './steps/urls';
 
@@ -40,8 +49,13 @@ export class Routes {
     app.get(TIMED_OUT_URL, errorHandler(new TimedOutGetController().get));
     app.get(TASK_LIST_URL, errorHandler(new TaskListGetController().get));
     app.get(APPLICATION_SUBMITTED, errorHandler(new ApplicationSubmittedGetController().get));
+    app.get(COOKIES_PAGE, errorHandler(new CookiesGetController().get));
+    app.get(PRIVACY_POLICY, errorHandler(new PrivacyPolicyGetController().get));
+    app.get(TERMS_AND_CONDITIONS, errorHandler(new TermsAndConditionsGetController().get));
+    app.get(ACCESSIBILITY_STATEMENT, errorHandler(new AccessibilityStatementGetController().get));
 
     const documentManagerController = new DocumentManagerController();
+    app.get(DOWNLOAD_APPLICATION_SUMMARY, errorHandler(documentManagerController.get));
     app.post(DOCUMENT_MANAGER, handleUploads.array('files[]', 5), errorHandler(documentManagerController.post));
     app.get(`${DOCUMENT_MANAGER}/delete/:index`, errorHandler(documentManagerController.delete));
 

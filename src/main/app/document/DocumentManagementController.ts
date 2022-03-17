@@ -3,10 +3,10 @@ import config from 'config';
 import type { Response } from 'express';
 import { v4 as generateUuid } from 'uuid';
 
-import { UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
+import { PAY_YOUR_FEE, UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
 import { CaseWithId } from '../case/case';
-import { AdoptionDocument, CITIZEN_UPDATE, ListValue, State } from '../case/definition';
+import { AdoptionDocument, CITIZEN_UPDATE, DocumentType, ListValue, State } from '../case/definition';
 import type { AppRequest, UserDetails } from '../controller/AppRequest';
 
 import { Classification, DocumentManagementClient } from './DocumentManagementClient';
@@ -100,6 +100,40 @@ export class DocumentManagerController {
         throw err;
       }
       return res.redirect(UPLOAD_YOUR_DOCUMENTS);
+    });
+  }
+
+  public async get(req: AppRequest<Partial<CaseWithId>>, res: Response): Promise<void> {
+    const documentsGeneratedKey = 'documentsGenerated';
+    const documentsGenerated =
+      (req.session.userCase[documentsGeneratedKey] as ListValue<Partial<AdoptionDocument> | null>[]) ?? [];
+    if (![State.Submitted].includes(req.session.userCase.state)) {
+      throw new Error('Cannot display document as the application is not in submitted state');
+    }
+
+    let documentToGet;
+
+    if (!!documentsGenerated && documentsGenerated.length > 0) {
+      const applicationSummaryDocuments = documentsGenerated
+        .map(item => item.value)
+        .filter(element => element?.documentType === DocumentType.APPLICATION_SUMMARY);
+      if (applicationSummaryDocuments !== null && applicationSummaryDocuments.length > 0) {
+        documentToGet = applicationSummaryDocuments[0]?.documentLink?.document_binary_url;
+      }
+    }
+
+    const documentManagementClient = this.getDocumentManagementClient(req.session.user);
+    const generatedDocument = await documentManagementClient.get({ url: documentToGet });
+
+    req.session.save(err => {
+      if (err) {
+        throw err;
+      } else if (generatedDocument) {
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename=A58.pdf');
+        return res.end(generatedDocument.data);
+      }
+      return res.redirect(PAY_YOUR_FEE);
     });
   }
 }

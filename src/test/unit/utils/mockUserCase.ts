@@ -33,6 +33,7 @@ export default {
   applicant1AdditionalNames: [{ firstNames: 'MOCK_ADDITIONAL_FIRST_NAMES', lastNames: 'MOCK_ADDITIONAL_LAST_NAMES' }],
   applicant1EmailAddress: 'applicant1@email.com',
   applicant1PhoneNumber: '01234567893',
+  applicant1ContactDetailsConsent: YesOrNo.YES,
   applicant1DateOfBirth: { day: '1', month: '4', year: '1990' },
   applicant1Occupation: 'MOCK_OCCUPATION',
   applicant1Address1: 'MOCK_ADDRESS_LINE_1',
@@ -45,6 +46,7 @@ export default {
   applicant2HasOtherNames: YesOrNo.NO,
   applicant2EmailAddress: 'applicant2@email.com',
   applicant2PhoneNumber: '01234567894',
+  applicant2ContactDetailsConsent: YesOrNo.YES,
   applicant2DateOfBirth: { day: '3', month: '6', year: '1992' },
   applicant2Occupation: 'MOCK_OCCUPATION',
   applicant2Address1: 'MOCK_ADDRESS_LINE_1',
@@ -75,6 +77,7 @@ export default {
       placementOrderDate: { day: 10, month: 11, year: 2020 },
     },
   ],
+  addAnotherPlacementOrder: YesOrNo.NO,
 
   birthMotherFirstNames: 'BIRTH_MOTHER_FIRST_NAMES',
   birthMotherLastNames: 'BIRTH_MOTHER_LAST_NAMES',
@@ -129,6 +132,8 @@ export default {
       ],
     },
   ],
+  findFamilyCourt: YesOrNo.NO,
   familyCourtName: 'MOCK_FAMILY_COURT',
+  applicant1UploadedFiles: [{ id: 'MOCK_DOCUMENT_ID', name: 'MOCK_DOCUMENT_FILE_NAME' }],
   applicant1DocumentsUploaded: [{ id: 'MOCK_DOCUMENT_ID', value: { documentFileName: 'MOCK_DOCUMENT_FILE_NAME' } }],
 } as unknown as CaseWithId;

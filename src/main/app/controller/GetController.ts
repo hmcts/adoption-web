@@ -56,7 +56,6 @@ export class GetController {
       sessionErrors,
       htmlLang: language,
       isDraft: req.session?.userCase?.state ? req.session.userCase.state === State.Draft : true,
-      // getNextIncompleteStepUrl: () => getNextIncompleteStepUrl(req),
     });
   }
 

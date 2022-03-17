@@ -11,24 +11,24 @@ module.exports = {
   },
   secondApplicant: {
     contactDetailsLink: 'a[id$="applicant2-contact-details"]',
-    childrenPlacementOrderLink: 'a[id$="children-placement-order"]',
     personalDetailsLink: 'a[id$="applicant2-personal-details"]',
     personalDetailsLinkStatus: 'strong[id$="applicant2-personal-details-status"]',
     contactDetailsLinkStatus: 'strong[id$="applicant2-contact-details-status"]',
   },
   childDetails: {
-    childrenBirthCertificateLink: 'a[id$="children-birth-certificate"]',
+    childrenBirthCertificateLink: 'a[id$="children-birth-certificate-details"]',
     adoptionCertificateDetailsLink: 'a[id$="adoption-certificate-details"]',
     childrenBirthCertificateDetailsStatus: 'strong[id$="children-birth-certificate-details-status"]',
     adoptionCertificateDetails: 'strong[id$="adoption-certificate-details-status"]',
-    childrenBirthMotherLink: 'a[id$="children-birth-mother"]',
+    childrenBirthMotherLink: 'a[id$="birth-mother-details"]',
     childrenBirthMotherDetailsStatus: 'strong[id$="birth-mother-details-status"]',
     childOtherParentLink: 'a[id$="other-parent"]',
     childOtherParentDetailsStatus: 'strong[id$="other-parent-status"]',
-    childrenBirthFatherLink: 'a[id$="children-birth-father"]',
+    childrenBirthFatherLink: 'a[id$="birth-father"]',
     childrenBirthFatherDetailsStatus: 'strong[id$="birth-father-status"]',
     adoptionAgencyLink: 'a[id$="adoption-agency"]',
     adoptionAgencyDetailsStatus: 'strong[id$="adoption-agency-status"]',
+    childrenPlacementOrderLink: 'a[id$="children-placement-order-details"]',
     childrenSiblingLink: 'a[href$="/sibling/exists"]',
     childrenSiblingDetailsStatus: 'strong[id$="sibling-status"]',
     reviewPayAndSubmitLink: 'a[id="review-pay-and-submit"]',
@@ -63,8 +63,8 @@ module.exports = {
   },
 
   async selectChildPlacementOrderDetails() {
-    await I.waitForSelector(this.secondApplicant.childrenPlacementOrderLink, 30);
-    await I.click(this.secondApplicant.childrenPlacementOrderLink);
+    await I.waitForSelector(this.childDetails.childrenPlacementOrderLink, 30);
+    await I.click(this.childDetails.childrenPlacementOrderLink);
     await I.wait('4');
   },
 
