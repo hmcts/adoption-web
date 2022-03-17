@@ -1447,6 +1447,7 @@ export const enum DocumentType {
   DEATH_CERTIFICATE = 'deathCertificate',
   APPLICATION = 'application',
   EMAIL = 'email',
+  APPLICATION_SUMMARY = 'applicationSummary',
 }
 
 export const enum PaymentStatus {

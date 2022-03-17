@@ -1,3 +1,4 @@
+import { Logger } from '@hmcts/nodejs-logging';
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
@@ -7,6 +8,7 @@ import { AnyObject, PostController } from '../../../app/controller/PostControlle
 import { Form } from '../../../app/form/Form';
 
 import { getCourtEmailId } from './util';
+const logger = Logger.getLogger('FindFamilyCourtPostController');
 
 @autobind
 export default class FindFamilyCourtPostController extends PostController<AnyObject> {
@@ -29,9 +31,10 @@ export default class FindFamilyCourtPostController extends PostController<AnyObj
     const findFamilyCourt = req.session.userCase.findFamilyCourt;
     const familyCourtName =
       findFamilyCourt === YesOrNo.YES
-        ? req.session.userCase.placementOrders![0].placementOrderCourt
+        ? req.session.userCase?.placementOrders![0]?.placementOrderCourt
         : req.session.userCase.familyCourtName;
     const familyCourtEmailId = getCourtEmailId(familyCourtName as string);
+    logger.info(`CaseId: ${req.session.userCase.hyphenatedCaseRef} has familyCourtEmailId: ${familyCourtEmailId}`);
 
     req.session.userCase = await this.save(
       req,

@@ -436,7 +436,7 @@ export const otherParentSummaryList = (
                     {
                       key: keys.address,
                       valueHtml: getFormattedAddress(userCase, FieldPrefix.OTHER_PARENT),
-                      changeUrl: Urls.OTHER_PARENT_MANUAL_ADDRESS, //TODO consider international address
+                      changeUrl: Urls.OTHER_PARENT_MANUAL_ADDRESS,
                     },
                   ]
                 : []),
@@ -452,7 +452,6 @@ export const childrenPlacementOrderSummaryList = (
   { sectionTitles, keys, ...content }: SummaryListContent,
   userCase: Partial<CaseWithId>
 ): SummaryList => {
-  //TODO handle no placement order case
   return {
     title: sectionTitles.childPlacementAndCourtOrders,
     rows: userCase.placementOrders!.reduce(

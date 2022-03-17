@@ -32,6 +32,16 @@ nodejs:
     FEE_LOOKUP_URL: 'http://fees-register-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal/fees-register/fees/lookup'
     EQUALITY_URL: 'https://pcq.{{ .Values.global.environment }}.platform.hmcts.net'
     DOCUMENT_MANAGEMENT_URL: 'http://dm-store-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal'
+    #Pilot local-court email-Ids
+    CHELMSFORD_FAMILY_COURT_EMAIL: 'chelmsfordadoptionapplication@mailinator.com'
+    OXFORD_FAMILY_COURT_EMAIL: 'Oxfordadoptionapplication@mailinator.com'
+    MEDWAY_FAMILY_COURT_EMAIL: 'Medwayadoptionapplication@mailinator.com'
+    PORTSMOUTH_FAMILY_COURT_EMAIL: 'PortsmouthAdoptionApplication@mailinator.com'
+    LEEDS_FAMILY_COURT_EMAIL: 'adoptionsleeds@mailinator.com'
+    NORTHAMPTON_FAMILY_COURT_EMAIL: 'Northamptonadoptionapplications@mailinator.com'
+    WORCESTER_FAMILY_COURT_EMAIL: 'Worcesteradoptionapplication@mailinator.com'
+    NEWPORT_GWENT_FAMILY_COURT_EMAIL: 'NewportGwentadoptionapplication@mailinator.com'
+    FALLBACK_EMAIL_ID_VALUE: 'adoptionproject@mailinator.com'
 
   keyVaults:
     adoption:

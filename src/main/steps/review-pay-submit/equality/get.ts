@@ -19,6 +19,7 @@ export default class PCQGetController {
     const tokenKey: string = config.get('services.equalityAndDiversity.tokenKey');
     const url = config.get('services.equalityAndDiversity.url');
     const pcqEnabled = config.get('services.equalityAndDiversity.pcqEnabled');
+    logger.info(`PCQEnabled : ${pcqEnabled}`);
     if (pcqEnabled && pcqEnabled === 'true' && !req.session.userCase.pcqId && tokenKey && url) {
       const path: string = config.get('services.equalityAndDiversity.path');
       const health = `${url}/health`;
@@ -73,14 +74,14 @@ export default class PCQGetController {
           req.locals.logger.error('Error', err);
           throw err;
         }
-        logger.info(`PCQ service redirect URL: ${url}${path}?${qs}, pcqEnabled: ${pcqEnabled}`);
+        logger.info(`PCQ service redirect URL: ${url}${path}?${qs}, pcqEnabled: ${pcqEnabled} completed successfully.`);
         res.redirect(`${url}${path}?${qs}`);
       });
     } else {
-      res.redirect(CHECK_ANSWERS_URL);
       logger.info(
         `User already attempted for PCQ ID or pcqEnabled is not enabled:${req.session.userCase.pcqId} , pcqEnabled: ${pcqEnabled}`
       );
+      res.redirect(CHECK_ANSWERS_URL);
     }
   }
 }

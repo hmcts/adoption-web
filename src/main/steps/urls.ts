@@ -96,6 +96,8 @@ export const NO_RESPONSE_YET: PageLink = '/no-response-yet';
 
 export const APPLICATION_SUBMITTED: PageLink = '/application-submitted';
 
+export const DOWNLOAD_APPLICATION_SUMMARY: PageLink = '/download-summary';
+
 export const SWITCH_TO_SOLE_APPLICATION: PageLink = '/switch-to-sole-application';
 
 export const CONFIRM_JOINT_APPLICATION: PageLink = '/confirm-your-joint-application';
@@ -146,3 +148,8 @@ export const EQUALITY: PageLink = `${REVIEW_PAY_SUBMIT}/equality`;
 
 export const UPLOAD_YOUR_DOCUMENTS: PageLink = '/upload-your-documents';
 export const DOCUMENT_MANAGER: PageLink = '/document-manager';
+
+export const COOKIES_PAGE: PageLink = '/cookies';
+export const PRIVACY_POLICY: PageLink = '/privacy-policy';
+export const ACCESSIBILITY_STATEMENT: PageLink = '/accessibility-statement';
+export const TERMS_AND_CONDITIONS: PageLink = '/terms-and-conditions';
