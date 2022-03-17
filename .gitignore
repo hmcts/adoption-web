@@ -26,3 +26,4 @@ functional-output/
 tsconfig.lint.json
 
 output/
+**/pacts/*
