@@ -6,10 +6,11 @@ import { authenticator } from 'otplib';
 const logger = Logger.getLogger('service-auth-token');
 let token;
 
-export const getTokenFromApi = async (): Promise<string> => {
+export const getTokenFromApi = async (baseUrl = ''): Promise<string> => {
   logger.info('Refreshing service auth token');
+  console.log('config.get(services.authProvider.url', config.get('services.authProvider.url'));
 
-  const url: string = config.get('services.authProvider.url') + '/lease';
+  const url: string = (baseUrl || config.get('services.authProvider.url')) + '/lease';
   const microservice: string = config.get('services.authProvider.microservice');
   const secret: string = config.get('services.authProvider.secret');
   const oneTimePassword = authenticator.generate(secret);
