@@ -1,4 +1,6 @@
-import { getMeDogs } from '..';
+import type { LoggerInstance } from 'winston';
+
+import { getFee } from '../../main/app/fee/fee-lookup-api';
 
 const { pactWith } = require('jest-pact');
 
@@ -9,47 +11,56 @@ pactWith(
   },
   provider => {
     describe('fees-register API', () => {
-      const DOGS_DATA = [
-        {
-          dog: 1,
-        },
-      ];
-
-      const dogsSuccessResponse = {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: DOGS_DATA,
+      const EXPECTED_RESPONSE = {
+        FeeCode: 'FEE0310',
+        FeeDescription: 'Adoption application fee',
+        FeeVersion: '2',
+        FeeAmount: '183',
       };
 
-      const dogsListRequest = {
-        uponReceiving: 'a request for dogs',
+      const successResponse = {
+        status: 200,
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: { code: 'FEE0310', description: 'Adoption application fee', version: '2', fee_amount: '183' },
+      };
+
+      const feeLookupRequest = {
+        uponReceiving: 'a request for adoption application fee',
         withRequest: {
           method: 'GET',
-          path: '/dogs',
+          path: '/fees-register/fees/lookup',
           headers: {
-            Accept: 'application/json',
+            accept: 'application/json',
+          },
+          params: {
+            application_type: 'all',
+            channel: 'default',
+            event: 'issue',
+            jurisdiction1: 'family',
+            jurisdiction2: 'family court',
+            keyword: 'ApplyAdoption',
+            service: 'adoption',
           },
         },
       };
 
       beforeEach(() => {
         const interaction = {
-          state: 'i have a list of dogs',
-          ...dogsListRequest,
-          willRespondWith: dogsSuccessResponse,
+          state: 'adoption-web request a fee-register',
+          ...feeLookupRequest,
+          willRespondWith: successResponse,
         };
         return provider.addInteraction(interaction);
       });
 
-      // add expectations
-      it('returns a successful body', () => {
-        return getMeDogs({
-          url: provider.mockService.baseUrl,
-        }).then(dogs => {
-          expect(dogs).toEqual(DOGS_DATA);
-        });
+      it('returns an adoption application fee', async () => {
+        const { Logger } = require('@hmcts/nodejs-logging');
+        const logger: LoggerInstance = Logger.getLogger('server');
+
+        const feeResponse = await getFee(logger, `${provider.mockService.baseUrl}/fees-register/fees/lookup`);
+        expect(feeResponse).toEqual(EXPECTED_RESPONSE);
       });
     });
   }

@@ -4,9 +4,10 @@ import { LoggerInstance } from 'winston';
 
 import { Fee } from '../../app/case/definition';
 
-export const getFee = async (logger: LoggerInstance): Promise<Fee | undefined> => {
+export const getFee = async (logger: LoggerInstance, feeLookupUrl?: string): Promise<Fee | undefined> => {
   try {
-    const response: AxiosResponse = await axios.get(config.get('services.feeLookup.url'), {
+    const url = feeLookupUrl || config.get('services.feeLookup.url');
+    const response: AxiosResponse = await axios.get(url!, {
       headers: {
         accept: 'application/json',
       },

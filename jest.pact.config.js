@@ -1,6 +1,6 @@
 module.exports = {
   roots: ['<rootDir>/src/test/pact'],
-  testRegex: '(/src/test/pact/rpe*|\\.test)\\.(ts|js)$',
+  testRegex: '(/src/test/pact/.*|\\.test)\\.(ts|js)$',
   testEnvironment: 'node',
   // testRunner: 'jest-circus/runner',
   transform: {

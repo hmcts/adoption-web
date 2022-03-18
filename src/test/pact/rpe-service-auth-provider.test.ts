@@ -19,6 +19,9 @@ pactWith(
 
       const successResponse = {
         status: 200,
+        headers: {
+          'content-type': 'application/json',
+        },
         body: EXPECTED_RESPONSE,
       };
 
@@ -29,6 +32,7 @@ pactWith(
           path: '/lease',
           headers: {
             Accept: 'application/json, text/plain, */*',
+            'content-type': 'application/json',
           },
           body: {
             microservice: 'adoption_web',

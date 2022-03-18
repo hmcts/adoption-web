@@ -8,7 +8,6 @@ let token;
 
 export const getTokenFromApi = async (baseUrl = ''): Promise<string> => {
   logger.info('Refreshing service auth token');
-  console.log('config.get(services.authProvider.url', config.get('services.authProvider.url'));
 
   const url: string = (baseUrl || config.get('services.authProvider.url')) + '/lease';
   const microservice: string = config.get('services.authProvider.microservice');
