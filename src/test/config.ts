@@ -26,7 +26,7 @@ export const autoLogin = {
   login: (I, username = TestUser, password = TestPass): void => {
     I.amOnPage(`${process.env.ADOP_WEB_URL}`);
     I.wait(5);
-    I.waitForText('Sign in or create an account', 30);
+    I.waitForText('Sign in', 30);
     I.fillField('username', username);
     I.wait(2);
     I.fillField('password', password);
