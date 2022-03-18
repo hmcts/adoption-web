@@ -1,7 +1,7 @@
 import config from 'config';
 import { when } from 'jest-when';
 
-import { getUserDetails } from '../../main/app/auth/user/oidc';
+import { getSystemUser, getUserDetails } from '../../main/app/auth/user/oidc';
 
 const { pactWith } = require('jest-pact');
 
@@ -99,7 +99,7 @@ pactWith(
       };
 
       const getUserDetailsRequest = {
-        uponReceiving: 'a request to get user details',
+        uponReceiving: 'a request to get system-user details',
         withRequest: {
           method: 'POST',
           path: '/o/token',
@@ -107,7 +107,7 @@ pactWith(
             Accept: 'application/json',
             'Content-Type': 'application/x-www-form-urlencoded',
           },
-          data: 'client_id=adoption-web&client_secret=ssshhhh&grant_type=authorization_code&redirect_uri=http://localhost:3001/receiver&code=raw_code',
+          data: 'grant_type=password&username=citizen.automation@mailinator.com&password=mock_password&client_id=adoption-web&client_secret=ssshhhh&scope=openid%20profile%20roles%20openid%20roles%20profile',
         },
       };
 
@@ -119,10 +119,14 @@ pactWith(
           .calledWith('services.idam.clientID')
           .mockReturnValue('adoption-web')
           .calledWith('services.idam.clientSecret')
-          .mockReturnValue('ssshhhh');
+          .mockReturnValue('ssshhhh')
+          .calledWith('services.idam.systemUsername')
+          .mockReturnValue('someone@hmcts.net')
+          .calledWith('services.idam.systemPassword')
+          .mockReturnValue('mock_password');
 
         const interaction = {
-          state: 'adoption-web request user details from idam',
+          state: 'adoption-web request system-user details from idam',
           ...getUserDetailsRequest,
           willRespondWith: getUserDetailsSuccessResponse,
         };
@@ -130,7 +134,7 @@ pactWith(
       });
 
       it('returns user details', async () => {
-        const userDetails = await getUserDetails('http://localhost:3001', 'raw-code', '/receiver');
+        const userDetails = await getSystemUser();
         expect(userDetails).toEqual(EXPECTED_USER_DETAILS);
       });
     });
