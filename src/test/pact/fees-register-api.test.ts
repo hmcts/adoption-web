@@ -1,3 +1,5 @@
+import config from 'config';
+import { when } from 'jest-when';
 import type { LoggerInstance } from 'winston';
 
 import { getFee } from '../../main/app/fee/fee-lookup-api';
@@ -47,6 +49,11 @@ pactWith(
       };
 
       beforeEach(() => {
+        config.get = jest.fn();
+        when(config.get)
+          .calledWith('services.feeLookup.url')
+          .mockReturnValue(`${provider.mockService.baseUrl}/fees-register/fees/lookup`);
+
         const interaction = {
           state: 'adoption-web request a fee-register',
           ...feeLookupRequest,
@@ -59,7 +66,7 @@ pactWith(
         const { Logger } = require('@hmcts/nodejs-logging');
         const logger: LoggerInstance = Logger.getLogger('server');
 
-        const feeResponse = await getFee(logger, `${provider.mockService.baseUrl}/fees-register/fees/lookup`);
+        const feeResponse = await getFee(logger);
         expect(feeResponse).toEqual(EXPECTED_RESPONSE);
       });
     });
