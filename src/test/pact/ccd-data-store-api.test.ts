@@ -1,55 +1,223 @@
-import { getMeDogs } from '..';
+jest.mock('../../main/app/auth/service/get-service-auth-token', () => ({
+  getServiceAuthToken: jest.fn(() => 'mock-service-auth-token'),
+}));
+
+import config from 'config';
+import { when } from 'jest-when';
+import type { LoggerInstance } from 'winston';
+
+import { getCaseApi } from '../../main/app/case/CaseApi';
 
 const { pactWith } = require('jest-pact');
+
+// config.get('services.case.url')
+config.get = jest.fn();
 
 pactWith(
   {
     consumer: 'adoption-web',
     provider: 'ccd-data-store',
+    logLevel: 'DEBUG',
   },
   provider => {
-    describe('ccd-data-store API', () => {
-      const DOGS_DATA = [
+    let caseApi;
+    const userDetails = {
+      accessToken: 'mock-user-access-token',
+      id: '123456',
+      email: 'user@hmcts.net',
+      givenName: 'Firstname',
+      familyName: 'Surname',
+    };
+
+    beforeEach(() => {
+      const { Logger } = require('@hmcts/nodejs-logging');
+      const logger: LoggerInstance = Logger.getLogger('server');
+      when(config.get).calledWith('services.case.url').mockReturnValue(provider.mockService.baseUrl);
+      caseApi = getCaseApi(userDetails, logger);
+    });
+
+    describe('ccd-data-store getCases API', () => {
+      const CASES = [
         {
-          dog: 1,
+          id: '45678',
+          state: 'Draft',
+          case_data: { applyingWith: 'alone' },
         },
       ];
 
-      const dogsSuccessResponse = {
+      const getCasesSuccessResponse = {
         status: 200,
         headers: {
           'Content-Type': 'application/json',
         },
-        body: DOGS_DATA,
+        body: CASES,
       };
 
-      const dogsListRequest = {
-        uponReceiving: 'a request for dogs',
+      const getCasesRequest = {
+        uponReceiving: 'a request to get cases',
         withRequest: {
           method: 'GET',
-          path: '/dogs',
+          path: '/citizens/123456/jurisdictions/ADOPTION/case-types/A58/cases',
           headers: {
-            Accept: 'application/json',
+            Authorization: 'Bearer mock-user-access-token',
+            ServiceAuthorization: 'mock-service-auth-token',
+            experimental: 'true',
+            Accept: '*/*',
+            'Content-Type': 'application/json',
           },
         },
       };
 
       beforeEach(() => {
         const interaction = {
-          state: 'i have a list of dogs',
-          ...dogsListRequest,
-          willRespondWith: dogsSuccessResponse,
+          state: 'adoption-web makes request to get cases',
+          ...getCasesRequest,
+          willRespondWith: getCasesSuccessResponse,
         };
         return provider.addInteraction(interaction);
       });
 
-      // add expectations
-      it('returns a successful body', () => {
-        return getMeDogs({
-          url: provider.mockService.baseUrl,
-        }).then(dogs => {
-          expect(dogs).toEqual(DOGS_DATA);
-        });
+      it('returns all cases for a user', async () => {
+        const cases = await caseApi.getCases();
+        expect(cases).toEqual(CASES);
+      });
+    });
+
+    describe('ccd-data-store getCaseById API', () => {
+      const EXPECTED_CASE_DATA = {
+        id: '45678',
+        state: 'Draft',
+        applyingWith: 'alone',
+      };
+
+      const getCaseByIdSuccessResponse = {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: {
+          id: '45678',
+          state: 'Draft',
+          data: { applyingWith: 'alone' },
+        },
+      };
+
+      const getCaseByIdRequest = {
+        uponReceiving: 'a request to get case by id',
+        withRequest: {
+          method: 'GET',
+          path: '/cases/45678',
+          headers: {
+            Authorization: 'Bearer mock-user-access-token',
+            ServiceAuthorization: 'mock-service-auth-token',
+            experimental: 'true',
+            Accept: '*/*',
+            'Content-Type': 'application/json',
+          },
+        },
+      };
+
+      beforeEach(() => {
+        const interaction = {
+          state: 'adoption-web makes request to get case by id',
+          ...getCaseByIdRequest,
+          willRespondWith: getCaseByIdSuccessResponse,
+        };
+        return provider.addInteraction(interaction);
+      });
+
+      it('returns case data by id', async () => {
+        const caseResponse = await caseApi.getCaseById('45678');
+        expect(caseResponse).toEqual(EXPECTED_CASE_DATA);
+      });
+    });
+
+    describe('ccd-data-store createCase API', () => {
+      const EXPECTED_CASE_DATA = {
+        id: '45678',
+        state: 'Draft',
+      };
+
+      const createCaseEventTokenResponse = {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: {
+          token: 'create-case-event-token',
+        },
+      };
+
+      const createCaseEventTokenRequest = {
+        uponReceiving: 'a request to get citizen-create-application event token',
+        withRequest: {
+          method: 'GET',
+          path: '/case-types/A58/event-triggers/citizen-create-application',
+          headers: {
+            Authorization: 'Bearer mock-user-access-token',
+            ServiceAuthorization: 'mock-service-auth-token',
+            experimental: 'true',
+            Accept: '*/*',
+            'Content-Type': 'application/json',
+          },
+        },
+      };
+
+      const createCaseResponse = {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: {
+          id: '45678',
+          state: 'Draft',
+          data: {},
+        },
+      };
+
+      const createCaseRequest = {
+        uponReceiving: 'a request to get citizen-create-application event token',
+        withRequest: {
+          method: 'POST',
+          path: '/case-types/A58/cases',
+          headers: {
+            Authorization: 'Bearer mock-user-access-token',
+            ServiceAuthorization: 'mock-service-auth-token',
+            experimental: 'true',
+            Accept: '*/*',
+            'Content-Type': 'application/json',
+          },
+          body: {
+            data: {
+              applicant1FirstName: userDetails.givenName,
+              applicant1LastName: userDetails.familyName,
+              applicant1Email: userDetails.email,
+            },
+            event: { id: 'citizen-create-application' },
+            event_token: 'create-case-event-token',
+          },
+        },
+      };
+
+      beforeEach(() => {
+        const interaction = {
+          state: 'adoption-web makes request to get citizen-create-application event token',
+          ...createCaseEventTokenRequest,
+          willRespondWith: createCaseEventTokenResponse,
+        };
+        provider.addInteraction(interaction);
+
+        const interaction2 = {
+          state: 'adoption-web makes request to create case',
+          ...createCaseRequest,
+          willRespondWith: createCaseResponse,
+        };
+        provider.addInteraction(interaction2);
+      });
+
+      it('creates a new case and return case data in response', async () => {
+        const caseResponse = await caseApi.createCase('adoption', userDetails);
+        expect(caseResponse).toEqual(EXPECTED_CASE_DATA);
       });
     });
   }

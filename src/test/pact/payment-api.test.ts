@@ -18,6 +18,10 @@ pactWith(
     provider: 'payment-api',
   },
   provider => {
+    beforeEach(() => {
+      when(config.get).calledWith('services.payments.url').mockReturnValue(provider.mockService.baseUrl);
+    });
+
     describe('create payment API', () => {
       const EXPECTED_RESPONSE = {
         _links: {
@@ -107,8 +111,6 @@ pactWith(
       };
 
       beforeEach(() => {
-        when(config.get).calledWith('services.payments.url').mockReturnValue(provider.mockService.baseUrl);
-
         const interaction = {
           state: 'adoption-web makes initiate payment request',
           ...createPaymentRequest,
@@ -214,8 +216,6 @@ pactWith(
       };
 
       beforeEach(() => {
-        when(config.get).calledWith('services.payments.url').mockReturnValue(provider.mockService.baseUrl);
-
         const interaction = {
           state: 'adoption-web request a payment details by payment-reference',
           ...getPaymentRequest,
