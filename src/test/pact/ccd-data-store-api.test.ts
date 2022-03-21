@@ -220,5 +220,151 @@ pactWith(
         expect(caseResponse).toEqual(EXPECTED_CASE_DATA);
       });
     });
+
+    describe('ccd-data-store case-users API', () => {
+      const EXPECTED_CASE_USER_ROLES = {
+        case_users: [{ case_id: '45678', user_id: '123456', case_role: 'citizen' }],
+      };
+
+      const getCaseUserRolesResponse = {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: {
+          case_users: [{ case_id: '45678', user_id: '123456', case_role: 'citizen' }],
+        },
+      };
+
+      const getCaseUserRolesRequest = {
+        uponReceiving: 'a request to get case-user roles',
+        withRequest: {
+          method: 'GET',
+          path: '/case-users',
+          headers: {
+            Authorization: 'Bearer mock-user-access-token',
+            ServiceAuthorization: 'mock-service-auth-token',
+            experimental: 'true',
+            Accept: '*/*',
+            'Content-Type': 'application/json',
+          },
+          params: {
+            case_ids: '45678',
+            user_ids: userDetails.id,
+          },
+        },
+      };
+
+      beforeEach(() => {
+        const interaction = {
+          state: 'adoption-web makes request to get case-users roles',
+          ...getCaseUserRolesRequest,
+          willRespondWith: getCaseUserRolesResponse,
+        };
+        provider.addInteraction(interaction);
+      });
+
+      it('return case assigned user roles in response for given caseId and userId', async () => {
+        const caseUserRoles = await caseApi.getCaseUserRoles('45678', userDetails.id);
+        expect(caseUserRoles).toEqual(EXPECTED_CASE_USER_ROLES);
+      });
+    });
+
+    describe('ccd-data-store sendEvent API', () => {
+      const EXPECTED_CASE_DATA = {
+        id: '45678',
+        state: 'Draft',
+        applicant1FirstNames: 'Updated first name',
+        applicant1LastNames: 'Updated last name',
+      };
+
+      const getEventTokenResponse = {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: {
+          token: 'update-case-event-token',
+        },
+      };
+
+      const getEventTokenRequest = {
+        uponReceiving: 'a request to get citizen-update-application event token',
+        withRequest: {
+          method: 'GET',
+          path: '/cases/45678/event-triggers/citizen-update-application',
+          headers: {
+            Authorization: 'Bearer mock-user-access-token',
+            ServiceAuthorization: 'mock-service-auth-token',
+            experimental: 'true',
+            Accept: '*/*',
+            'Content-Type': 'application/json',
+          },
+        },
+      };
+
+      const sendCaseEventResponse = {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: {
+          id: '45678',
+          state: 'Draft',
+          data: {
+            applicant1FirstName: 'Updated first name',
+            applicant1LastName: 'Updated last name',
+          },
+        },
+      };
+
+      const sendCaseEventRequest = {
+        uponReceiving: 'a request to send citizen-update-application event',
+        withRequest: {
+          method: 'POST',
+          path: '/cases/45678/events',
+          headers: {
+            Authorization: 'Bearer mock-user-access-token',
+            ServiceAuthorization: 'mock-service-auth-token',
+            experimental: 'true',
+            Accept: '*/*',
+            'Content-Type': 'application/json',
+          },
+          body: {
+            data: {
+              applicant1FirstNames: 'Updated first name',
+              applicant1LastNames: 'Updated last name',
+            },
+            event: { id: 'citizen-update-application' },
+            event_token: 'update-case-event-token',
+          },
+        },
+      };
+
+      beforeEach(() => {
+        const interaction = {
+          state: 'adoption-web makes request to get citizen-update-application event token',
+          ...getEventTokenRequest,
+          willRespondWith: getEventTokenResponse,
+        };
+        provider.addInteraction(interaction);
+
+        const interaction2 = {
+          state: 'adoption-web makes request to send case event',
+          ...sendCaseEventRequest,
+          willRespondWith: sendCaseEventResponse,
+        };
+        provider.addInteraction(interaction2);
+      });
+
+      it('updates case and return case data in response', async () => {
+        const caseResponse = await caseApi.sendEvent(
+          '45678',
+          { applicant1FirstNames: 'Updated first name', applicant1LastNames: 'Updated last name' },
+          'citizen-update-application'
+        );
+        expect(caseResponse).toEqual(EXPECTED_CASE_DATA);
+      });
+    });
   }
 );
