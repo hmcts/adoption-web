@@ -84,7 +84,7 @@ Scenario(
     await taskListPage.verifyChooseYourFamilyCourtStatus();
 
     await taskListPage.selectUploadDocumentsDetails();
-    await uploadDocumentsDetailsPage.uploadDocumentsSection();
+    await uploadDocumentsDetailsPage.uploadDocumentsSectionWithCantNotUploadOption();
     await taskListPage.verifyUploadDocumentsStatus();
 
     await taskListPage.selectReviewPayAndSubmitDetails();
