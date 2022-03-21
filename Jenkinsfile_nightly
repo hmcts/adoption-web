@@ -57,7 +57,7 @@ withNightlyPipeline(type, product, component) {
   enableFullFunctionalTest(120)
   loadVaultSecrets(secrets)
   enableFortifyScan()
-
+  enableSecurityScan()
 
   after('test') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
