@@ -13,6 +13,17 @@ const supportedBrowsers = {
       },
     },
   },
+  webkit: {
+    webkit_latest: {
+      browserName: 'webkit',
+      platformName: LATEST_MAC,
+      browserVersion: 'latest',
+      'sauce:options': {
+        name: 'ADOP: Webkit_MAC',
+        screenResolution: '1400x1050',
+      },
+    },
+  },
   safari: {
     safari_mac_latest: {
       browserName: 'safari',

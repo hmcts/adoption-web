@@ -199,6 +199,7 @@ module.exports = {
   async verifyDateChildMovedInStatus() {
     await I.retry(3).waitForSelector(this.childDetails.dateChildMovedInDetailsStatus, 30);
     await I.retry(3).see('COMPLETED', this.childDetails.dateChildMovedInDetailsStatus);
+    await I.wait(4);
   },
 
   async verifyPrimaryApplicantContactDetailsStatus() {
