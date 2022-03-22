@@ -98,7 +98,7 @@ pactWith(
           .mockReturnValue('ssshhh');
 
         const interaction = {
-          state: 'i have a list of dogs',
+          state: 'adoption-web makes request to get addresses from postcode-lookup',
           ...postcodeLookupRequest,
           willRespondWith: postcodeLookupSuccessResponse,
         };
