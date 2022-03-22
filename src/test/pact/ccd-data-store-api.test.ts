@@ -15,7 +15,7 @@ config.get = jest.fn();
 pactWith(
   {
     consumer: 'adoption-web',
-    provider: 'ccd-data-store',
+    provider: 'ccd_data_store',
     logLevel: 'DEBUG',
   },
   provider => {
@@ -35,7 +35,7 @@ pactWith(
       caseApi = getCaseApi(userDetails, logger);
     });
 
-    describe('ccd-data-store getCases API', () => {
+    describe('ccd_data_store getCases API', () => {
       const CASES = [
         {
           id: '45678',
@@ -82,7 +82,7 @@ pactWith(
       });
     });
 
-    describe('ccd-data-store getCaseById API', () => {
+    describe('ccd_data_store getCaseById API', () => {
       const EXPECTED_CASE_DATA = {
         id: '45678',
         state: 'Draft',
@@ -131,7 +131,7 @@ pactWith(
       });
     });
 
-    describe('ccd-data-store createCase API', () => {
+    describe('ccd_data_store createCase API', () => {
       const EXPECTED_CASE_DATA = {
         id: '45678',
         state: 'Draft',
@@ -220,7 +220,7 @@ pactWith(
       });
     });
 
-    describe('ccd-data-store case-users API', () => {
+    describe('ccd_data_store case-users API', () => {
       const EXPECTED_CASE_USER_ROLES = {
         case_users: [{ case_id: '45678', user_id: '123456', case_role: 'citizen' }],
       };
@@ -269,7 +269,7 @@ pactWith(
       });
     });
 
-    describe('ccd-data-store sendEvent API', () => {
+    describe('ccd_data_store sendEvent API', () => {
       const EXPECTED_CASE_DATA = {
         id: '45678',
         state: 'Draft',

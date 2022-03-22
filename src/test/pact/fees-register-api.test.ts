@@ -9,7 +9,7 @@ const { pactWith } = require('jest-pact');
 pactWith(
   {
     consumer: 'adoption-web',
-    provider: 'fees-register',
+    provider: 'FeeRegister',
     logLevel: 'DEBUG',
   },
   provider => {
@@ -56,7 +56,7 @@ pactWith(
           .mockReturnValue(`${provider.mockService.baseUrl}/fees-register/fees/lookup`);
 
         const interaction = {
-          state: 'adoption-web request a fee-register',
+          state: 'adoption-web request a FeeRegister',
           ...feeLookupRequest,
           willRespondWith: successResponse,
         };
