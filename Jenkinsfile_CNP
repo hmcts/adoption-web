@@ -1,14 +1,4 @@
 #!groovy
-properties([
-  // H allow predefined but random minute see https://en.wikipedia.org/wiki/Cron#Non-standard_characters
-  pipelineTriggers([cron('H 04 * * *')]),
-  parameters([
-    string(name: 'FRONTEND_URL', defaultValue: 'https://adoption-web.aat.platform.hmcts.net/', description: 'The URL you want to run tests against'),
-    string(name: 'FUNCTIONAL_TESTS_WORKERS',
-      defaultValue: '2',
-      description: 'Number of workers running functional tests'),
-  ])
-])
 
 @Library('Infrastructure')
 
@@ -18,10 +8,6 @@ def type = 'nodejs'
 def product = 'adoption'
 def component = 'web'
 
-// SAUCELABS config - configured on Jenkins
-env.SAUCE_USERNAME = 'username'
-env.SAUCE_ACCESS_KEY = 'privatekey'
-env.SAUCE_TUNNEL_IDENTIFIER = 'reformtunnel'
 
 static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
   [ $class: 'AzureKeyVaultSecret',
@@ -45,21 +31,19 @@ def secrets = [
 ]
 
 def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
-def branchesToSync = ['demo']
+def branchesToSync = ['demo', 'perftest']
 
 def pipelineConf = new AppPipelineConfig()
 pipelineConf.vaultSecrets = secrets
 
 env.IDAM_URL = 'https://idam-api.aat.platform.hmcts.net'
 
-withNightlyPipeline(type, product, component) {
-  env.ADOP_WEB_URL = params.FRONTEND_URL
+withPipeline(type, product, component) {
   enableAksStagingDeployment()
   disableLegacyDeployment()
   syncBranchesWithMaster(branchesToSync)
   enableSlackNotifications('#adoption-tech')
 
-  enableCrossBrowserTest(['chrome', 'firefox','microsoft'])
   loadVaultSecrets(secrets)
 
   after('build') {
@@ -67,7 +51,6 @@ withNightlyPipeline(type, product, component) {
   }
 
   after('test') {
-    yarnBuilder.yarn('test:integration')
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
   }
 
