@@ -58,7 +58,7 @@ withNightlyPipeline(type, product, component) {
   loadVaultSecrets(secrets)
   enableFortifyScan()
   enableSecurityScan()
-
+  env.TEST_URL = "https://adoption-web.aat.platform.hmcts.net/"
   after('test') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
   }
