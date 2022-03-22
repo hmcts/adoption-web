@@ -1,3 +1,6 @@
+import config from 'config';
+import { when } from 'jest-when';
+
 import { getTokenFromApi } from '../../main/app/auth/service/get-service-auth-token';
 
 const { pactWith } = require('jest-pact');
@@ -7,6 +10,8 @@ jest.mock('otplib', () => ({
     generate: jest.fn(() => '123456'),
   },
 }));
+
+config.get = jest.fn();
 
 pactWith(
   {
@@ -43,6 +48,14 @@ pactWith(
       };
 
       beforeEach(() => {
+        when(config.get)
+          .calledWith('services.authProvider.url')
+          .mockReturnValue(provider.mockService.baseUrl)
+          .calledWith('services.authProvider.microservice')
+          .mockReturnValue('adoption_web')
+          .calledWith('services.authProvider.secret')
+          .mockReturnValue('mock-secret');
+
         const interaction = {
           state: 'i request a service auth token',
           ...serviceAuthTokenRequest,
@@ -52,7 +65,7 @@ pactWith(
       });
 
       it('returns a service auth token', async () => {
-        const token = await getTokenFromApi(provider.mockService.baseUrl);
+        const token = await getTokenFromApi();
         expect(token).toEqual(EXPECTED_RESPONSE);
       });
     });
