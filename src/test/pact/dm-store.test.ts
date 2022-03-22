@@ -9,7 +9,6 @@ pactWith(
   {
     consumer: 'adoption-web',
     provider: 'dm-store',
-    logLevel: 'DEBUG',
   },
   provider => {
     let documentManagementClient;
@@ -141,7 +140,6 @@ pactWith(
 
       it('returns a document data in arraybuffer format', async () => {
         const res = await documentManagementClient.get({ url: '/some/document.pdf' });
-        console.log(res.data);
         expect(res.data).toEqual(DOCUMENTS_DATA);
       });
     });

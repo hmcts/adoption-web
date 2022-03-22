@@ -16,6 +16,7 @@ pactWith(
   {
     consumer: 'adoption-web',
     provider: 'payment-api',
+    logLevel: 'DEBUG',
   },
   provider => {
     beforeEach(() => {

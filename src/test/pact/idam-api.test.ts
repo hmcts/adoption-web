@@ -9,6 +9,7 @@ pactWith(
   {
     consumer: 'adoption-web',
     provider: 'idam',
+    logLevel: 'DEBUG',
   },
   provider => {
     describe('idam-get-user-details API', () => {

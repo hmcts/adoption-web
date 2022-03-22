@@ -12,6 +12,7 @@ pactWith(
   {
     consumer: 'adoption-web',
     provider: 'rpe-service-auth-provider',
+    logLevel: 'DEBUG',
   },
   provider => {
     describe('rpe-service-auth-provider API', () => {

@@ -10,6 +10,7 @@ pactWith(
   {
     consumer: 'adoption-web',
     provider: 'fees-register',
+    logLevel: 'DEBUG',
   },
   provider => {
     describe('fees-register API', () => {

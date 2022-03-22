@@ -11,6 +11,7 @@ pactWith(
   {
     consumer: 'adoption-web',
     provider: 'postcode-lookup',
+    logLevel: 'DEBUG',
   },
   provider => {
     describe('postcode-lookup API', () => {
