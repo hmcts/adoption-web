@@ -39,6 +39,8 @@ pipelineConf.vaultSecrets = secrets
 env.IDAM_URL = 'https://idam-api.aat.platform.hmcts.net'
 
 withPipeline(type, product, component) {
+  //env.TEST_URL = "https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
+  env.TEST_URL = "https://adoption-web.aat.platform.hmcts.net/"
   enableAksStagingDeployment()
   disableLegacyDeployment()
   enableSecurityScan()
@@ -57,7 +59,6 @@ withPipeline(type, product, component) {
   }
 
   before('functionalTest:preview') {
-    env.TEST_URL = "https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
     env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
   }
 
