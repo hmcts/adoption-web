@@ -10,7 +10,6 @@ import { getCaseApi } from '../../main/app/case/CaseApi';
 
 const { pactWith } = require('jest-pact');
 
-// config.get('services.case.url')
 config.get = jest.fn();
 
 pactWith(
