@@ -323,6 +323,7 @@ export interface CaseData {
   applicant1AddressPostCode: string;
   applicant1ContactDetails: ContactDetails[];
   applicant1ContactDetailsConsent: YesOrNo;
+  applicant1LanguagePreference?: LanguagePreference;
 
   applicant2FirstName: string;
   applicant2LastName: string;
