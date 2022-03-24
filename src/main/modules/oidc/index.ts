@@ -46,7 +46,7 @@ export class OidcMiddleware {
           if (!req.session.userCase) {
             //This language preference will be used while creating a case
             const languagePreference =
-              req.session['lng'] === 'cy' ? LanguagePreference.WELSH : LanguagePreference.ENGLISH;
+              req.session['lang'] === 'cy' ? LanguagePreference.WELSH : LanguagePreference.ENGLISH;
             req.session.userCase = await req.locals.api.getOrCreateCase(
               res.locals.serviceType,
               req.session.user,
