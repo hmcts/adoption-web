@@ -7,11 +7,11 @@ module.exports = {
   },
 
   async childNameAfterAdoptionDetailsSection() {
-    await I.waitForText("What will the child's full name be after adoption?");
-    await I.fillField(this.fields.childrenFirstNameAfterAdoption, 'Joe');
-    await I.fillField(this.fields.childrenLastNameAfterAdoption, 'Flient');
-    await I.wait('2');
-    await I.click('Save and continue');
-    await I.wait('4');
+    await I.retry(3).waitForText("What will the child's full name be after adoption?");
+    await I.retry(3).fillField(this.fields.childrenFirstNameAfterAdoption, 'Joe');
+    await I.retry(3).fillField(this.fields.childrenLastNameAfterAdoption, 'Flient');
+    await I.wait(2);
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
   },
 };

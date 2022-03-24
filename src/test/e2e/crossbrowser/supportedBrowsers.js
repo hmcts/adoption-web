@@ -3,21 +3,23 @@ const LATEST_WINDOWS = 'Windows 10';
 
 const supportedBrowsers = {
   microsoft: {
-    ie11_win: {
-      browserName: 'internet explorer',
-      platformName: LATEST_WINDOWS,
-      browserVersion: 'latest',
-      'sauce:options': {
-        name: 'FPLA: IE11',
-        screenResolution: '1400x1050',
-      },
-    },
     edge_win_latest: {
       browserName: 'MicrosoftEdge',
       platformName: LATEST_WINDOWS,
       browserVersion: 'latest',
       'sauce:options': {
-        name: 'FPLA: Edge_Win10',
+        name: 'ADOP: Edge_Win10',
+        screenResolution: '1400x1050',
+      },
+    },
+  },
+  webkit: {
+    webkit_latest: {
+      browserName: 'webkit',
+      platformName: LATEST_MAC,
+      browserVersion: 'latest',
+      'sauce:options': {
+        name: 'ADOP: Webkit_MAC',
         screenResolution: '1400x1050',
       },
     },
@@ -28,7 +30,7 @@ const supportedBrowsers = {
       platformName: LATEST_MAC,
       browserVersion: 'latest',
       'sauce:options': {
-        name: 'FPLA: MAC_SAFARI',
+        name: 'ADOP: MAC_SAFARI',
         seleniumVersion: '3.141.59',
         screenResolution: '1376x1032',
       },
@@ -40,7 +42,7 @@ const supportedBrowsers = {
       platformName: LATEST_WINDOWS,
       browserVersion: 'latest',
       'sauce:options': {
-        name: 'FPLA: WIN_CHROME_LATEST',
+        name: 'ADOP: WIN_CHROME_LATEST',
         screenResolution: '1600x1200',
       },
     },
@@ -49,7 +51,7 @@ const supportedBrowsers = {
       platformName: LATEST_MAC,
       browserVersion: 'latest',
       'sauce:options': {
-        name: 'FPLA: MAC_CHROME_LATEST',
+        name: 'ADOP: MAC_CHROME_LATEST',
         screenResolution: '1600x1200',
       },
     },
@@ -60,7 +62,7 @@ const supportedBrowsers = {
       platformName: LATEST_WINDOWS,
       browserVersion: 'latest',
       'sauce:options': {
-        name: 'FPLA: WIN_FIREFOX_LATEST',
+        name: 'ADOP: WIN_FIREFOX_LATEST',
         screenResolution: '1600x1200',
       },
     },
@@ -69,7 +71,7 @@ const supportedBrowsers = {
       platformName: LATEST_MAC,
       browserVersion: 'latest',
       'sauce:options': {
-        name: 'FPLA: MAC_FIREFOX_LATEST',
+        name: 'ADOP: MAC_FIREFOX_LATEST',
         screenResolution: '1600x1200',
       },
     },
