@@ -30,6 +30,7 @@ export default class PCQGetController {
           req.session.userCase.pcqId = uuid();
           logger.info(`PCQ service: ${health} is UP, PCQ ID: ${req.session.userCase.pcqId}, pcqEnabled: ${pcqEnabled}`);
         } else {
+          logger.error('PCQ service response.data: ' + response.data);
           logger.error(`PCQ service: ${health} is down, pcqEnabled: ${pcqEnabled}`);
           return res.redirect(CHECK_ANSWERS_URL);
         }
