@@ -11,6 +11,7 @@ import { KeepAliveController } from './app/keepalive/KeepAliveController';
 import { stepsWithContent } from './steps';
 import { AccessibilityStatementGetController } from './steps/accessibility-statement/get';
 import { ApplicationSubmittedGetController } from './steps/application-submitted/get';
+import { ContactUsGetController } from './steps/contact-us/get';
 import { CookiesGetController } from './steps/cookies/get';
 import { ErrorController } from './steps/error/error.controller';
 import { HomeGetController } from './steps/home/get';
@@ -22,6 +23,7 @@ import { TimedOutGetController } from './steps/timed-out/get';
 import {
   ACCESSIBILITY_STATEMENT,
   APPLICATION_SUBMITTED,
+  CONTACT_US,
   COOKIES_PAGE,
   CSRF_TOKEN_ERROR_URL,
   DOCUMENT_MANAGER,
@@ -53,6 +55,7 @@ export class Routes {
     app.get(PRIVACY_POLICY, errorHandler(new PrivacyPolicyGetController().get));
     app.get(TERMS_AND_CONDITIONS, errorHandler(new TermsAndConditionsGetController().get));
     app.get(ACCESSIBILITY_STATEMENT, errorHandler(new AccessibilityStatementGetController().get));
+    app.get(CONTACT_US, errorHandler(new ContactUsGetController().get));
 
     const documentManagerController = new DocumentManagerController();
     app.get(DOWNLOAD_APPLICATION_SUMMARY, errorHandler(documentManagerController.get));
