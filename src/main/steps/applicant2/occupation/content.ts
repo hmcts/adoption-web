@@ -2,7 +2,7 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 
-export const en = (): Record<string, unknown> => ({
+const en = () => ({
   section: 'Second applicant',
   label: "What's your occupation?",
   hint: 'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’.',
@@ -27,7 +27,7 @@ export const en = (): Record<string, unknown> => ({
   },
 });
 
-export const cy = (): Record<string, unknown> => ({
+const cy: typeof en = () => ({
   section: 'Ail geisydd',
   label: 'Beth yw eich galwedigaeth?',
   hint: 'Nac ydwdwch eich galwedigaeth yn llawn. Er enghraifft, ‘Athro Ysgol Uwchradd’ yn hytrach nac ‘Athro’ yn unig. Os ydych yn hunangyflogedig, dywedwch hynny. Er enghraifft, ‘Saer hunangyflogedig.’',

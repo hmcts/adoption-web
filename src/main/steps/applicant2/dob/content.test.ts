@@ -1,5 +1,6 @@
 /* eslint-disable jest/expect-expect */
 /* eslint-disable @typescript-eslint/ban-types */
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -24,18 +25,19 @@ const enContent = {
     },
   },
 };
+
 const cyContent = {
-  section: 'Second applicant (in Welsh)',
-  title: "What's your date of birth? (in Welsh)",
-  hint: 'For example, 28 6 1997 (in Welsh)',
+  section: 'Ail geisydd',
+  title: 'Beth yw eich dyddiad geni?',
+  hint: 'Er enghraifft, 28 6 1997',
   errors: {
     applicant2DateOfBirth: {
-      required: 'Enter your date of birth (in Welsh)',
-      invalidDate: 'Date of birth must be a real date (in Welsh)',
-      incompleteDay: 'Your date of birth must include a day (in Welsh)',
-      incompleteMonth: 'Your date of birth must include a month (in Welsh)',
-      incompleteYear: 'Your date of birth must include a year (in Welsh)',
-      invalidDateInFuture: 'Your date of birth must be in the past (in Welsh)',
+      required: 'Nac ydwdwch eich dyddiad geni',
+      invalidDate: 'Rhaid i’r dyddiad geni fod yn ddyddiad dilys',
+      incompleteDay: 'Rhaid i’ch dyddiad geni gynnwys diwrnod',
+      incompleteMonth: 'Rhaid i’ch dyddiad geni gynnwys mis',
+      incompleteYear: 'Rhaid i’ch dyddiad geni gynnwys blwyddyn',
+      invalidDateInFuture: 'Rhaid i’ch dyddiad geni fod yn y gorffennol',
     },
   },
 };
@@ -48,21 +50,13 @@ const commonContent = {
   },
 } as CommonContent;
 
-const langAssertions = (language, content, generateFn) => {
-  const generatedContent = generateFn({ language } as CommonContent);
-
-  Object.entries(content).forEach(([key, value]) => {
-    expect(generatedContent[key]).toEqual(value);
-  });
-};
-
 describe('applicant2 > dob content', () => {
   it('should return the correct content for language = en', () => {
-    langAssertions(EN, enContent, generateContent);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   it('should return the correct content for language = cy', () => {
-    langAssertions(CY, cyContent, generateContent);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: CY }));
   });
 
   test('should contain submit button', () => {

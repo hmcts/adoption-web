@@ -16,7 +16,7 @@ const en = content => ({
   },
 });
 
-const cy = content => ({
+const cy: typeof en = content => ({
   section: 'Ail geisydd',
   label: 'A ydych chi’n byw yn y cyfeiriad hwn hefyd?',
   yes: 'Ydw',

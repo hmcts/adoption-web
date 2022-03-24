@@ -52,7 +52,6 @@ describe('applicant1 > address > manual > content', () => {
   test('should return correct welsh content', () => {
     const manualAddressContent = generateManualAddressContent({ ...commonContent, language: 'cy' });
     const manualAddressErrors = manualAddressContent.errors as Record<string, unknown>;
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
     languageAssertions(
       'cy',
       {

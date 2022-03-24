@@ -2,7 +2,7 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 
-export const en = (): Record<string, unknown> => ({
+const en = (): Record<string, unknown> => ({
   section: 'Second applicant',
   title: "What's your full name?",
   firstNames: 'First names',
@@ -19,7 +19,7 @@ export const en = (): Record<string, unknown> => ({
   },
 });
 
-export const cy = (): Record<string, unknown> => ({
+const cy: typeof en = () => ({
   section: 'Ail geisydd',
   title: 'Beth yw eich enw llawn?',
   firstNames: 'Enwau cyntaf',

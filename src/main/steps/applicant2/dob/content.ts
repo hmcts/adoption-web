@@ -4,7 +4,7 @@ import { FormContent } from '../../../app/form/Form';
 import { covertToDateObject } from '../../../app/form/parser';
 import { areDateFieldsFilledIn, isDateInputInvalid, isFutureDate } from '../../../app/form/validation';
 
-export const en = (): Record<string, unknown> => ({
+const en = () => ({
   section: 'Second applicant',
   title: "What's your date of birth?",
   hint: 'For example, 28 6 1997',
@@ -20,7 +20,7 @@ export const en = (): Record<string, unknown> => ({
   },
 });
 
-export const cy = (): Record<string, unknown> => ({
+const cy: typeof en = () => ({
   section: 'Ail geisydd',
   title: 'Beth yw eich dyddiad geni?',
   hint: 'Er enghraifft, 28 6 1997',

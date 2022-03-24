@@ -28,7 +28,7 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
+const cy: typeof en = () => ({
   section: 'Ail geisydd',
   title: 'Beth yw eich manylion cyswllt?',
   line1: 'Mae arnom angen cyfeiriad e-bost cyswllt a rhif ffôn cyswllt ar eich cyfer.',

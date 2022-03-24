@@ -33,7 +33,7 @@ describe('applicant1 > address > lookup > content', () => {
   test('should return correct english content', () => {
     const addressLookupContent = generateAddressLookupContent(commonContent);
     const addressLookupErrors = addressLookupContent.errors as Record<string, unknown>;
-    return languageAssertions(
+    languageAssertions(
       'en',
       {
         ...enContent,
