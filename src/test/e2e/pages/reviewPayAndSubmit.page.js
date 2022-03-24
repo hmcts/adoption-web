@@ -22,57 +22,57 @@ module.exports = {
     changeChildMoveInDate: 'a[href="/date-child-moved-in?returnUrl=/review-pay-submit/check-your-answers"]',
   },
   async selectNoPCQOption() {
-    await I.wait('5');
-    const numOfPCQElements = await I.grabNumberOfVisibleElements(this.fields.pcqNO);
+    await I.wait(5);
+    const numOfPCQElements = await I.retry(3).grabNumberOfVisibleElements(this.fields.pcqNO);
     console.log('No of elements: ' + numOfPCQElements);
     if (numOfPCQElements === 1) {
-      await I.click("I don't want to answer these questions");
+      await I.retry(3).click("I don't want to answer these questions");
     }
-    await I.wait('5');
+    await I.wait(5);
   },
 
   async changeValueFromReviewYourAnswers() {
-    await I.waitForText('Review your answers', 30);
-    await I.click(this.fields.changeChildMoveInDate);
-    await I.wait('5');
+    await I.retry(3).waitForText('Review your answers', 30);
+    await I.retry(3).click(this.fields.changeChildMoveInDate);
+    await I.wait(5);
   },
 
   async reviewYourAnswersAndContinue() {
-    await I.waitForText('Review your answers', 30);
-    await I.click('Save and continue');
-    await I.wait('5');
+    await I.retry(3).waitForText('Review your answers', 30);
+    await I.retry(3).click('Save and continue');
+    await I.wait(5);
   },
 
   async statementOfTruthDetailsSection() {
-    await I.waitForText('Statement of truth', 30);
-    await I.click(this.fields.applicant1IBelieveApplicationIsTrue);
-    await I.click(this.fields.applicant2IBelieveApplicationIsTrue);
-    await I.fillField(this.fields.applicant1SotFullName, 'Joe Bloggs');
-    await I.fillField(this.fields.applicant2SotFullName, 'George Thomas');
-    await I.click('Confirm');
-    await I.wait('4');
+    await I.retry(3).waitForText('Statement of truth', 30);
+    await I.retry(3).click(this.fields.applicant1IBelieveApplicationIsTrue);
+    await I.retry(3).click(this.fields.applicant2IBelieveApplicationIsTrue);
+    await I.retry(3).fillField(this.fields.applicant1SotFullName, 'Joe Bloggs');
+    await I.retry(3).fillField(this.fields.applicant2SotFullName, 'George Thomas');
+    await I.retry(3).click('Confirm');
+    await I.wait(4);
   },
 
   async adoptionCourtFeesByCard() {
     await I.wait(30);
-    await I.waitForText('Enter card details', 30);
-    await I.fillField(this.fields.cardNo, '4444333322221111');
-    await I.fillField(this.fields.expiryMonth, '10');
-    await I.fillField(this.fields.expiryYear, '28');
-    await I.fillField(this.fields.cardholderName, 'Joe Bloggs');
-    await I.fillField(this.fields.cvc, '123');
-    await I.fillField(this.fields.addressLine1, '2');
-    await I.fillField(this.fields.addressLine2, 'Chruch road');
-    await I.fillField(this.fields.addressCity, 'Uxbridge');
-    await I.fillField(this.fields.addressPostcode, 'UB8 3NA');
-    await I.fillField(this.fields.email, 'simulate-delivered@notifications.service.gov.uk');
-    await I.click('Continue');
+    await I.retry(3).waitForText('Enter card details', 30);
+    await I.retry(3).fillField(this.fields.cardNo, '4444333322221111');
+    await I.retry(3).fillField(this.fields.expiryMonth, '10');
+    await I.retry(3).fillField(this.fields.expiryYear, '28');
+    await I.retry(3).fillField(this.fields.cardholderName, 'Joe Bloggs');
+    await I.retry(3).fillField(this.fields.cvc, '123');
+    await I.retry(3).fillField(this.fields.addressLine1, '2');
+    await I.retry(3).fillField(this.fields.addressLine2, 'Chruch road');
+    await I.retry(3).fillField(this.fields.addressCity, 'Uxbridge');
+    await I.retry(3).fillField(this.fields.addressPostcode, 'UB8 3NA');
+    await I.retry(3).fillField(this.fields.email, 'simulate-delivered@notifications.service.gov.uk');
+    await I.retry(3).click('Continue');
     await I.wait(10);
-    await I.waitForText('Confirm your payment', 30);
-    await I.waitForText('£183.00', 30);
-    await I.click('Confirm payment');
+    await I.retry(3).waitForText('Confirm your payment', 30);
+    await I.retry(3).waitForText('£183.00', 30);
+    await I.retry(3).click('Confirm payment');
     await I.wait(5);
-    await I.waitForText('Application Submitted', 30);
-    console.log(await I.grabTextFrom(this.fields.caseID));
+    await I.retry(3).waitForText('Application Submitted', 30);
+    console.log(await I.retry(3).grabTextFrom(this.fields.caseID));
   },
 };

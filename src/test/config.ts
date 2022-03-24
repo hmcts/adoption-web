@@ -23,7 +23,7 @@ const TestPass = process.env.CITIZEN_PASSWORD || sysConfig.get('e2e.userTestPass
 const idamUserManager = new IdamUserManager(sysConfig.get('services.idam.tokenURL'));
 
 export const autoLogin = {
-  login: (I: CodeceptJS.I, username = TestUser, password = TestPass): void => {
+  login: (I, username = TestUser, password = TestPass): void => {
     I.amOnPage(`${process.env.ADOP_WEB_URL}`);
     I.wait(5);
     I.waitForText('Sign in or create an account', 30);
@@ -31,15 +31,10 @@ export const autoLogin = {
     I.wait(2);
     I.fillField('password', password);
     I.click('Sign in');
-    I.waitForText('Are you applying on your own, or with someone else?', 30);
   },
   check: (I: CodeceptJS.I): void => {
     I.amOnPage(`${process.env.ADOP_WEB_URL}`);
     I.waitForText('Are you applying on your own, or with someone else?');
-  },
-  restore: (I: CodeceptJS.I, cookies: CodeceptJS.Cookie[]): void => {
-    I.amOnPage('/info');
-    I.setCookie(cookies);
   },
 };
 
@@ -88,7 +83,6 @@ export const config = {
           idamUserManager.createUser(username, TestPass);
           autoLogin.login(I, username, TestPass);
         },
-        check: autoLogin.check,
         fetch: (): void => {
           // don't fetch existing login
         },
@@ -97,17 +91,5 @@ export const config = {
         },
       },
     },
-  },
-};
-
-config.helpers = {
-  Playwright: {
-    url: config.TEST_URL,
-    show: !config.TestHeadlessBrowser,
-    browser: 'chromium',
-    waitForTimeout: config.WaitForTimeout,
-    waitForAction: 1000,
-    waitForNavigation: 'networkidle0',
-    ignoreHTTPSErrors: true,
   },
 };
