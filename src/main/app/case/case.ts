@@ -370,6 +370,7 @@ export interface Case {
   dateSubmitted?: Date;
   applicationFeeOrderSummary: OrderSummary;
   hyphenatedCaseRef?: string;
+  languagePreference?: LanguagePreference;
 }
 
 export interface CaseWithId extends Case {
