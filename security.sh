@@ -19,12 +19,12 @@ echo 'Changing owner from $(id -u):$(id -g) to $(id -u):$(id -u)'
 chown -R $(id -u):$(id -u) activescan.html
 chown -R $(id -u):$(id -u) activescanReport.xml
 
-cp activescan.html output/
-cp activescanReport.xml output/
+cp *.html functional-output/
+cp activescanReport.xml functional-output/
 
 zap-cli --zap-url http://0.0.0.0 -p 1001 alerts -l Low --exit-code False
 curl --fail http://0.0.0.0:1001/OTHER/core/other/jsonreport/?formMethod=GET --output report.json
-cp *.* output/
+cp *.* functional-output/
 
 echo
 echo ZAP Security vulnerabilities were found that were not ignored
