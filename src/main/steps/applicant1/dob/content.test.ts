@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -34,41 +35,28 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'First applicant (in Welsh)',
-  title: "What's your date of birth? (in Welsh)",
-  hint: 'For example, 27 3 2007 (in Welsh)',
+  section: 'Ceisydd cyntaf',
+  title: 'Beth yw eich dyddiad geni?',
+  hint: 'Er enghraifft, 27 3 2007',
   errors: {
     applicant1DateOfBirth: {
-      required: 'Enter your date of birth (in Welsh)',
-      invalidDate: 'Date of birth must be a real date (in Welsh)',
-      incompleteDay: 'Your date of birth must include a day (in Welsh)',
-      incompleteMonth: 'Your date of birth must include a month (in Welsh)',
-      incompleteYear: 'Your date of birth must include a year (in Welsh)',
-      invalidDateInFuture: 'Your date of birth must be in the past (in Welsh)',
+      required: 'Nodwch eich dyddiad geni',
+      invalidDate: 'Rhaid i’r dyddiad geni fod yn ddyddiad dilys',
+      incompleteDay: 'Rhaid i’ch dyddiad geni gynnwys diwrnod',
+      incompleteMonth: 'Rhaid i’ch dyddiad geni gynnwys mis',
+      incompleteYear: 'Rhaid i’ch dyddiad geni gynnwys blwyddyn',
+      invalidDateInFuture: 'Rhaid i’ch dyddiad geni fod yn y gorffennol',
     },
   },
 };
 
 describe('appllicant1 > dob-content', () => {
   test('should return correct english content', () => {
-    const generatedContent = generateContent({ ...commonContent });
-
-    expect(generatedContent.title).toEqual(enContent.title);
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.hint).toEqual(enContent.hint);
-    expect(generatedContent.errors).toEqual(enContent.errors);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test("should return correct welsh content for cannot adopt page because they're 18 or over", () => {
-    const generatedContent = generateContent({
-      ...commonContent,
-      language: CY,
-    });
-
-    expect(generatedContent.title).toEqual(cyContent.title);
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.hint).toEqual(cyContent.hint);
-    expect(generatedContent.errors).toEqual(cyContent.errors);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: CY }));
   });
 
   test('should contain submit button', () => {
@@ -93,9 +81,9 @@ describe('appllicant1 > dob-content', () => {
 
     expect(dobField.type).toBe('date');
     expect(dobField.classes).toBe('govuk-date-input');
-    expect((dobField.label as Function)(generatedContent)).toBe("What's your date of birth?");
+    expect((dobField.label as Function)(generatedContent)).toBe(enContent.title);
     expect(dobField.labelHidden).toBe(true);
-    expect((dobField.hint as Function)(generatedContent)).toBe('For example, 27 3 2007');
+    expect((dobField.hint as Function)(generatedContent)).toBe(enContent.hint);
 
     expect((dobField.values[0].label as Function)(commonContent)).toBe('Day');
     expect(dobField.values[0].name).toBe('day');
@@ -133,7 +121,7 @@ describe('appllicant1 > dob-content', () => {
     const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);
-    expect(generatedContent1.section).toBe('Applicant (in Welsh)');
+    expect(generatedContent1.section).toBe('Ceisydd');
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

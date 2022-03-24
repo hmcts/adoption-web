@@ -1,20 +1,26 @@
+import languageAssertions from '../../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields } from '../../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../../common/common.content';
 import {
   generateContent as generateSelectAddressContent,
   form as selectAddressForm,
 } from '../../../common/components/address-select';
+import { APPLICANT_1_FIND_ADDRESS, APPLICANT_1_MANUAL_ADDRESS } from '../../../urls';
 
 import { generateContent } from './content';
 
 const enContent = {
   section: 'First applicant',
   title: "What's your home address?",
+  changePostCodeUrl: APPLICANT_1_FIND_ADDRESS,
+  cantFindAddressUrl: APPLICANT_1_MANUAL_ADDRESS,
 };
 
 const cyContent = {
-  section: 'First applicant (in Welsh)',
-  title: "What's your home address? (in Welsh)",
+  section: 'Ceisydd cyntaf',
+  title: 'Beth yw eich cyfeiriad cartref?',
+  changePostCodeUrl: APPLICANT_1_FIND_ADDRESS,
+  cantFindAddressUrl: APPLICANT_1_MANUAL_ADDRESS,
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
@@ -28,25 +34,32 @@ describe('applicant1 > address > select > content', () => {
 
   test('should return correct english content', () => {
     const selectAddressContent = generateSelectAddressContent(commonContent);
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.title).toEqual(enContent.title);
-    expect(generatedContent.errors).toEqual({
-      applicant1SelectAddress: (selectAddressContent.errors as any).selectAddress,
-    });
-    expect(generatedContent.changePostCodeUrl).toEqual('/applicant1/address/lookup');
-    expect(generatedContent.cantFindAddressUrl).toEqual('/applicant1/address/manual');
+    const selectAddressErrors = selectAddressContent.errors as Record<string, unknown>;
+    languageAssertions(
+      'en',
+      {
+        ...enContent,
+        errors: {
+          applicant1SelectAddress: selectAddressErrors.selectAddress,
+        },
+      },
+      () => generateContent(commonContent)
+    );
   });
 
   test('should return correct welsh content', () => {
     const selectAddressContent = generateSelectAddressContent({ ...commonContent, language: 'cy' });
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.title).toEqual(cyContent.title);
-    expect(generatedContent.errors).toEqual({
-      applicant1SelectAddress: (selectAddressContent.errors as any).selectAddress,
-    });
-    expect(generatedContent.changePostCodeUrl).toEqual('/applicant1/address/lookup');
-    expect(generatedContent.cantFindAddressUrl).toEqual('/applicant1/address/manual');
+    const selectAddressErrors = selectAddressContent.errors as Record<string, unknown>;
+    languageAssertions(
+      'cy',
+      {
+        ...cyContent,
+        errors: {
+          applicant1SelectAddress: selectAddressErrors.selectAddress,
+        },
+      },
+      () => generateContent({ ...commonContent, language: 'cy' })
+    );
   });
 
   test('should contain applicant1SelectAddress field', () => {
@@ -66,7 +79,7 @@ describe('applicant1 > address > select > content', () => {
     const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);
-    expect(generatedContent1.section).toBe('Applicant (in Welsh)');
+    expect(generatedContent1.section).toBe('Ceisydd');
   });
 
   test('should contain submit button', () => {

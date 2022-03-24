@@ -28,7 +28,7 @@ const en = content => ({
   },
 });
 
-const cy = content => ({
+const cy: typeof en = content => ({
   section: content.userCase.applyingWith === ApplyingWith.ALONE ? 'Ceisydd' : 'Ceisydd cyntaf',
   title: 'Beth yw eich manylion cyswllt?',
   line1: 'Mae arnom angen cyfeiriad e-bost cyswllt a rhif ffôn cyswllt ar eich cyfer.',

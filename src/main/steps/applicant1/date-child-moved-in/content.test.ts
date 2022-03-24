@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -36,45 +37,30 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Application details (in Welsh)',
-  title: 'When did the child move in with you? (in Welsh)',
-  hint: 'Enter the date when they started living with you continuously. For example, 31 3 2020. (in Welsh)',
+  section: 'Manylion y cais',
+  title: 'Pryd wnaeth y plentyn symud i fyw gyda chi?',
+  hint: 'Nac ydwdwch y dyddiad wnaethon nhw ddechrau byw gyda chi yn barhaus. Er enghraifft, 31 3 2020.',
   warning:
-    'You can begin your application at any time, but you can only submit 10 weeks after the date the child started living continuously with you. (in Welsh)',
+    'Gallwch gychwyn eich cais unrhyw dro, ond gallwch ond cyflwyno’ch cais 10 wythnos ar ôl y dyddiad wnaeth y plentyn ddechrau byw gyda chi’n barhaus. ',
   errors: {
     dateChildMovedIn: {
-      required: 'Enter your date of birth (in Welsh)',
-      invalidDate: 'Date of birth must be a real date (in Welsh)',
-      incompleteDay: 'Your date of birth must include a day (in Welsh)',
-      incompleteMonth: 'Your date of birth must include a month (in Welsh)',
-      incompleteYear: 'Your date of birth must include a year (in Welsh)',
-      invalidDateInFuture: 'Your date of birth must be in the past (in Welsh)',
+      required: 'Nac ydwdwch eich dyddiad geni',
+      invalidDate: 'Rhaid i’r dyddiad geni fod yn ddyddiad dilys',
+      incompleteDay: 'Rhaid i’ch dyddiad geni gynnwys diwrnod',
+      incompleteMonth: 'Rhaid i’ch dyddiad geni gynnwys mis',
+      incompleteYear: 'Rhaid i’ch dyddiad geni gynnwys blwyddyn',
+      invalidDateInFuture: 'Rhaid i’ch dyddiad geni fod yn y gorffennol',
     },
   },
 };
 
 describe('applicant1 > date-child-moved-in-content', () => {
   test('should return correct english content', () => {
-    const generatedContent = generateContent({ ...commonContent });
-
-    expect(generatedContent.title).toEqual(enContent.title);
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.hint).toEqual(enContent.hint);
-    expect(generatedContent.warning).toEqual(enContent.warning);
-    expect(generatedContent.errors).toEqual(enContent.errors);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content for page', () => {
-    const generatedContent = generateContent({
-      ...commonContent,
-      language: CY,
-    });
-
-    expect(generatedContent.title).toEqual(cyContent.title);
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.hint).toEqual(cyContent.hint);
-    expect(generatedContent.warning).toEqual(cyContent.warning);
-    expect(generatedContent.errors).toEqual(cyContent.errors);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: CY }));
   });
 
   test('should contain submit button', () => {
@@ -99,14 +85,10 @@ describe('applicant1 > date-child-moved-in-content', () => {
 
     expect(dateChildMovedIn.type).toBe('date');
     expect(dateChildMovedIn.classes).toBe('govuk-date-input');
-    expect((dateChildMovedIn.label as Function)(generatedContent)).toBe('When did the child move in with you?');
+    expect((dateChildMovedIn.label as Function)(generatedContent)).toBe(enContent.title);
     expect(dateChildMovedIn.labelHidden).toBe(true);
-    expect((dateChildMovedIn.hint as Function)(generatedContent)).toBe(
-      'Enter the date when they started living with you continuously. For example, 31 3 2020.'
-    );
-    expect(((dateChildMovedIn as FormInput).warning as Function)(generatedContent)).toBe(
-      'You can begin your application at any time, but you can only submit 10 weeks after the date the child started living continuously with you.'
-    );
+    expect((dateChildMovedIn.hint as Function)(generatedContent)).toBe(enContent.hint);
+    expect(((dateChildMovedIn as FormInput).warning as Function)(generatedContent)).toBe(enContent.warning);
 
     expect((dateChildMovedIn.values[0].label as Function)(commonContent)).toBe('Day');
     expect(dateChildMovedIn.values[0].name).toBe('day');

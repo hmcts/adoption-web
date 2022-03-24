@@ -32,29 +32,23 @@ export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
   };
 };
 
-export const cy = ({ userCase }: CommonContent): Record<string, unknown> => {
+export const cy: typeof en = ({ userCase }: CommonContent) => {
   const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Ceisydd' : 'Ceisydd cyntaf';
   return {
     section,
-    label: "What's your occupation? (in Welsh)",
-    hint: 'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’. (in Welsh)',
+    label: 'Beth yw eich galwedigaeth?',
+    hint: 'Nodwch eich galwedigaeth yn llawn. Er enghraifft, ‘Athro Ysgol Uwchradd’ yn hytrach na ‘Athro’ yn unig. Os ydych yn hunangyflogedig, dywedwch hynny. Er enghraifft, ‘Saer hunangyflogedig.’',
     warningText: {
-      text: 'This information will appear on the adoption certificate. (in Welsh)',
-      iconFallbackText: 'Warning (in Welsh)',
+      text: 'Bydd yr wybodaeth hon yn ymddangos ar y dystysgrif mabwysiadu.',
+      iconFallbackText: 'Rhybudd',
     },
     details: {
-      summaryText: "I'm not working at the moment (in Welsh)",
-      html: `If you’re unemployed, say what your occupation was when you were working. For example, 'Unemployed administrative assistant'.
-    <br>
-    <br>
-    If you’re retired, say that you’re retired and what your occupation was when you were working. For example, ‘Retired hairdresser’.
-    <br>
-    <br>
-    If you’re a full time parent, enter ‘Full time parent’. (in Welsh)`,
+      summaryText: 'Nid wyf yn gweithio ar hyn o bryd',
+      html: 'Os ydych yn ddi-waith, nodwch beth oedd eich galwedigaeth pan oeddech yn gweithio. Er enghraifft, ‘Cynorthwyydd Gweinyddol Di-waith’.<br><br>Os ydych wedi ymddeol, nodwch beth oedd eich galwedigaeth pan oeddech yn gweithio. Er enghraifft, ‘Triniwr Gwallt Wedi Ymddeol’.<br><br>Os ydych yn riant amser llawn, nodwch ‘Rhiant amser llawn’.',
     },
     errors: {
       applicant1Occupation: {
-        required: 'Enter your occupation (in Welsh)',
+        required: 'Nodwch eich galwedigaeth',
       },
     },
   };

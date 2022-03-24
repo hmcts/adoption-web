@@ -14,7 +14,7 @@ export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
   return { section };
 };
 
-export const cy = ({ userCase }: CommonContent): Record<string, unknown> => {
+export const cy: typeof en = ({ userCase }: CommonContent) => {
   const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Ceisydd' : 'Ceisydd cyntaf';
   return { section };
 };

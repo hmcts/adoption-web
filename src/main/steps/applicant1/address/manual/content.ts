@@ -23,7 +23,7 @@ const cy = ({ manualAddressContent, userCase }): Record<string, unknown> => {
   const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Ceisydd' : 'Ceisydd cyntaf';
   return {
     section,
-    title: "What's your address? (in welsh)",
+    title: 'Beth yw eich cyfeiriad?',
     errors: {
       applicant1Address1: manualAddressContent.errors.address1,
       applicant1AddressTown: manualAddressContent.errors.addressTown,

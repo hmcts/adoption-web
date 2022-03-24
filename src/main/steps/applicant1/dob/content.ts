@@ -24,20 +24,20 @@ export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
     },
   };
 };
-export const cy = ({ userCase }: CommonContent): Record<string, unknown> => {
+export const cy: typeof en = ({ userCase }: CommonContent) => {
   const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Ceisydd' : 'Ceisydd cyntaf';
   return {
     section,
-    title: "What's your date of birth? (in Welsh)",
-    hint: 'For example, 27 3 2007 (in Welsh)',
+    title: 'Beth yw eich dyddiad geni?',
+    hint: 'Er enghraifft, 27 3 2007',
     errors: {
       applicant1DateOfBirth: {
-        required: 'Enter your date of birth (in Welsh)',
-        invalidDate: 'Date of birth must be a real date (in Welsh)',
-        incompleteDay: 'Your date of birth must include a day (in Welsh)',
-        incompleteMonth: 'Your date of birth must include a month (in Welsh)',
-        incompleteYear: 'Your date of birth must include a year (in Welsh)',
-        invalidDateInFuture: 'Your date of birth must be in the past (in Welsh)',
+        required: 'Nodwch eich dyddiad geni',
+        invalidDate: 'Rhaid i’r dyddiad geni fod yn ddyddiad dilys',
+        incompleteDay: 'Rhaid i’ch dyddiad geni gynnwys diwrnod',
+        incompleteMonth: 'Rhaid i’ch dyddiad geni gynnwys mis',
+        incompleteYear: 'Rhaid i’ch dyddiad geni gynnwys blwyddyn',
+        invalidDateInFuture: 'Rhaid i’ch dyddiad geni fod yn y gorffennol',
       },
     },
   };

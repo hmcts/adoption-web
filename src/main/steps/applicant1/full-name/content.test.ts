@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 import { form as fullNameForm } from '../../common/components/full-name';
@@ -19,25 +20,26 @@ const enContent = {
   },
 };
 const cyContent = {
-  section: 'First applicant (in Welsh)',
-  title: "What's your full name? (in Welsh)",
+  section: 'Ceisydd cyntaf',
+  title: 'Beth yw eich enw llawn?',
   errors: {
     applicant1FirstNames: {
-      required: 'Enter your first names (in Welsh)',
+      required: 'Nodwch eich enw(au) cyntaf',
     },
     applicant1LastNames: {
-      required: 'Enter your last names (in Welsh)',
+      required: 'Nodwch eich cyfenw(au)',
     },
   },
 };
 
-/* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-types */
 describe('primary applicant > full-name', () => {
   const fullNameFormFields = fullNameForm.fields as FormFields;
   const commonContent = { language: 'en', userCase: {} } as CommonContent;
   let generatedContent;
   let form;
   let fields;
+
   beforeEach(() => {
     generatedContent = generateContent(commonContent);
     form = generatedContent.form as FormContent;
@@ -45,16 +47,11 @@ describe('primary applicant > full-name', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.title).toEqual(enContent.title);
-    expect(generatedContent.errors).toEqual(enContent.errors);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.title).toEqual(cyContent.title);
-    expect(generatedContent.errors).toEqual(cyContent.errors);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain firstNames field', () => {
@@ -78,7 +75,7 @@ describe('primary applicant > full-name', () => {
     const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);
-    expect(generatedContent1.section).toBe('Applicant (in Welsh)');
+    expect(generatedContent1.section).toBe('Ceisydd');
   });
 
   test('should contain submit button', () => {
@@ -89,4 +86,4 @@ describe('primary applicant > full-name', () => {
     expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save as draft');
   });
 });
-/* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
+/* eslint-enable @typescript-eslint/ban-types */

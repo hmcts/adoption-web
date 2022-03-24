@@ -77,5 +77,6 @@ module.exports = {
         ignoreMemberSort: false,
       },
     ],
+    'jest/expect-expect': 'off',
   },
 };

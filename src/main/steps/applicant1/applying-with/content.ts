@@ -23,7 +23,7 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
+const cy: typeof en = () => ({
   section: 'Manylion y cais',
   label: 'A ydych yn gwneud cais ar ben eich hun, neu gyda rhywun arall?',
   one: 'Rwy’n gwneud cais ar ben fy hun',

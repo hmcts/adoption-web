@@ -22,7 +22,7 @@ export const en = (): Record<string, unknown> => ({
   },
 });
 
-export const cy = (): Record<string, unknown> => ({
+export const cy: typeof en = () => ({
   section: 'Manylion y cais',
   title: 'Pryd wnaeth y plentyn symud i fyw gyda chi?',
   hint: 'Nac ydwdwch y dyddiad wnaethon nhw ddechrau byw gyda chi yn barhaus. Er enghraifft, 31 3 2020.',
