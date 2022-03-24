@@ -28,16 +28,16 @@ const en = content => {
 
 const cy = content => {
   const cyContent = {
-    section: "The child's details (in welsh)",
-    title: 'Orders already in place (in welsh)',
-    placementOrder: 'Placement Order (in welsh)',
-    change: 'Change (in welsh)',
-    remove: 'Remove (in welsh)',
-    label: 'Do you want to add another order? (in welsh)',
-    hint: 'We need details of all orders already in place. Your social worker or adoption agency can help provide these details. (in welsh)',
+    section: 'Manylion y plentyn',
+    title: 'Gorchmynion sydd eisoes mewn lle',
+    placementOrder: 'Gorchymyn Lleoli',
+    change: 'Newid',
+    remove: 'Dileu',
+    label: 'A ydych eisiau ychwanegu gorchymyn arall?',
+    hint: 'Mae arnom angen manylion y gorchmynion sydd eisoes mewn lle. Gall eich gweithiwr cymdeithasol neu’ch asiantaeth fabwysiadu eich helpu i ddarparu’r manylion hyn.',
     errors: {
       addAnotherPlacementOrder: {
-        required: 'Please select an answer (in welsh)',
+        required: 'Dewiswch ateb os gwelwch yn dda',
       },
     },
   };

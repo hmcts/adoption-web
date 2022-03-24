@@ -20,18 +20,18 @@ export const en = (): Record<string, unknown> => ({
 });
 
 export const cy = (): Record<string, unknown> => ({
-  section: 'Second applicant (in Welsh)',
-  title: "What's your full name? (in Welsh)",
-  firstNames: 'First names (in Welsh)',
-  firstHint: '(Include any given or middle names) (in Welsh)',
-  lastNames: 'Last names (in Welsh)',
-  lastHint: '(Include surname or family names) (in Welsh)',
+  section: 'Ail geisydd',
+  title: 'Beth yw eich enw llawn?',
+  firstNames: 'Enwau cyntaf',
+  firstHint: '(Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol)',
+  lastNames: 'Cyfenwau',
+  lastHint: '(Cofiwch gynnwys cyfenw neu enwau teuluol)',
   errors: {
     applicant2FirstNames: {
-      required: 'Enter your first names (in Welsh)',
+      required: 'Nac ydwdwch eich enw(au) cyntaf',
     },
     applicant2LastNames: {
-      required: 'Enter your last names (in Welsh)',
+      required: 'Nac ydwdwch eich cyfenw(au)',
     },
   },
 });

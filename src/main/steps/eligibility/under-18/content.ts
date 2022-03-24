@@ -19,13 +19,12 @@ const en = () => ({
 
 const cy = () => ({
   section: SECTION_IN_WELSH,
-  label: 'Will the child be under 18 years old on the date you submit your application? (in welsh)',
-  under18No:
-    'You can only apply to adopt a child if they are under 18 years old on the date your application is submitted. (in welsh)',
-  moreInfo: 'More about adoption (in welsh)',
+  label: 'A fydd y plentyn dan 18 oed ar y dyddiad byddwch yn cyflwyno’ch cais?',
+  under18No: 'Gallwch ond mabwysiadu plentyn os ydynt dan 18 oed ar y dyddiad mae eich cais yn cael ei gyflwyno.',
+  moreInfo: 'Mwy o wybodaeth am fabwysiadu',
   errors: {
     under18Eligible: {
-      required: 'Please answer the question (in welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
 });

@@ -12,7 +12,7 @@ export const en = (): Record<string, unknown> => ({
 });
 
 export const cy = (): Record<string, unknown> => ({
-  section: 'Second applicant (in Welsh)',
+  section: 'Ail geisydd',
 });
 
 export const form: FormContent = {

@@ -23,19 +23,19 @@ export const en = (): Record<string, unknown> => ({
 });
 
 export const cy = (): Record<string, unknown> => ({
-  section: 'Application details (in Welsh)',
-  title: 'When did the child move in with you? (in Welsh)',
-  hint: 'Enter the date when they started living with you continuously. For example, 31 3 2020. (in Welsh)',
+  section: 'Manylion y cais',
+  title: 'Pryd wnaeth y plentyn symud i fyw gyda chi?',
+  hint: 'Nac ydwdwch y dyddiad wnaethon nhw ddechrau byw gyda chi yn barhaus. Er enghraifft, 31 3 2020.',
   warning:
-    'You can begin your application at any time, but you can only submit 10 weeks after the date the child started living continuously with you. (in Welsh)',
+    'Gallwch gychwyn eich cais unrhyw dro, ond gallwch ond cyflwyno’ch cais 10 wythnos ar ôl y dyddiad wnaeth y plentyn ddechrau byw gyda chi’n barhaus. ',
   errors: {
     dateChildMovedIn: {
-      required: 'Enter your date of birth (in Welsh)',
-      invalidDate: 'Date of birth must be a real date (in Welsh)',
-      incompleteDay: 'Your date of birth must include a day (in Welsh)',
-      incompleteMonth: 'Your date of birth must include a month (in Welsh)',
-      incompleteYear: 'Your date of birth must include a year (in Welsh)',
-      invalidDateInFuture: 'Your date of birth must be in the past (in Welsh)',
+      required: 'Nac ydwdwch eich dyddiad geni',
+      invalidDate: 'Rhaid i’r dyddiad geni fod yn ddyddiad dilys',
+      incompleteDay: 'Rhaid i’ch dyddiad geni gynnwys diwrnod',
+      incompleteMonth: 'Rhaid i’ch dyddiad geni gynnwys mis',
+      incompleteYear: 'Rhaid i’ch dyddiad geni gynnwys blwyddyn',
+      invalidDateInFuture: 'Rhaid i’ch dyddiad geni fod yn y gorffennol',
     },
   },
 });

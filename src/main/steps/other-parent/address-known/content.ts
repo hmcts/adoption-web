@@ -20,17 +20,17 @@ const en = () => ({
 });
 
 const cy = () => ({
-  section: "Other parent's details (in Welsh)",
-  label: 'Do you have the address of the other person with parental responsibility for the child? (in welsh)',
-  moreDetails: "Give a reason why the address is not known, for example 'no fixed address'. (in welsh)",
-  hint: "Ask the adoption agency or social worker if you're not sure. (in welsh)",
+  section: 'Manylion y rhiant arall',
+  label: 'A oes gennych gyfeiriad yr unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn?',
+  moreDetails: 'Rhowch reswm pam bod y cyfeiriad yn anhysbys, er enghraifft ‘dim cyfeiriad parhaol’.',
+  hint: 'Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
   errors: {
     otherParentAddressKnown: {
-      required: 'Please select an answer (in welsh)',
+      required: 'Dewiswch ateb os gwelwch yn dda',
     },
     otherParentAddressNotKnownReason: {
-      required: 'Provide a reason (in welsh)',
-      invalid: 'Reason must be 500 characters or fewer (in welsh)',
+      required: 'Darparwch reswm',
+      invalid: 'Rhaid i’r rheswm fod yn 500 nod neu llai',
     },
   },
 });

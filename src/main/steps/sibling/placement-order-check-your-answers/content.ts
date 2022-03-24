@@ -76,12 +76,12 @@ const en = content => {
 
 const cy = content => {
   const cyContent = {
-    section: 'Sibling details (in welsh)',
-    for: 'for (in welsh)',
-    orderType: 'Type of order (in welsh)',
-    orderNumber: 'Order case or serial number (in welsh)',
-    change: 'Change (in welsh)',
-    continue: 'Continue (in welsh)',
+    section: 'Manylion y brawd/chwaer',
+    for: 'ar gyfer',
+    orderType: 'Math o neuchymyn',
+    orderNumber: 'Rhif cyfresol neu rif yr achos ar y gorchymyn',
+    change: 'Newid',
+    continue: 'Parhau',
     language: content.language,
   };
   return {

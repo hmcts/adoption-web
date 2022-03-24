@@ -29,26 +29,26 @@ const en = content => ({
 });
 
 const cy = content => ({
-  section: content?.userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant' : 'First applicant (in welsh)',
-  title: 'What are your contact details? (in welsh)',
-  line1: 'We need both a contact email and telephone number for you. (in welsh)',
+  section: content.userCase.applyingWith === ApplyingWith.ALONE ? 'Ceisydd' : 'Ceisydd cyntaf',
+  title: 'Beth yw eich manylion cyswllt?',
+  line1: 'Mae arnom angen cyfeiriad e-bost cyswllt a rhif ffôn cyswllt ar eich cyfer.',
   line2:
-    'We will email you updates and information about your application to adopt. You will only be contacted by telephone if the social worker or court staff need to contact you quickly. (in welsh)',
-  emailAddress: 'Email address (in welsh)',
-  phoneNumber: 'UK Phone number (in welsh)',
+    'Byddwn yn anfon diweddariadau a gwybodaeth am eich cais i fabwysiadu trwy e-bost. Cysylltir â chi dros y ffôn dim ond os yw’r gweithiwr cymdeithasol neu staff y llys eisiau cysylltu â chi ar frys.',
+  emailAddress: 'Cyfeiriad e-bost',
+  phoneNumber: 'Rhif ffôn yn y DU',
   applicant1ContactDetailsConsent:
-    'The court may want to use your email to serve you court orders. Are you happy to be served court orders by email? (in welsh)',
+    'Efallai bydd y llys eisiau defnyddio eich cyfeiriad e-bost i gyflwyno gorchmynion llys arnoch, A ydych yn hapus i neuchmynion llys gael eu cyflwyno arnoch drwy e-bost?',
   errors: {
     applicant1ContactDetailsConsent: {
-      required: 'Please answer the question (in welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
     applicant1EmailAddress: {
-      required: 'Enter your email address (in welsh)',
-      invalid: 'Enter an email address in the correct format, like name@example.com (in welsh)',
+      required: 'Nac ydwdwch eich cyfeiriad e-bost',
+      invalid: 'Rhowch gyfeiriad e-bost yn y fformat cywir, er enghraifft enw@enghraifft.com',
     },
     applicant1PhoneNumber: {
-      required: 'Enter a UK telephone number (in welsh)',
-      invalid: 'Enter a valid UK telephone number (in welsh)',
+      required: 'Rhowch rif ffôn yn y DU',
+      invalid: 'Rhowch rif ffôn dilys yn y DU',
     },
   },
 });

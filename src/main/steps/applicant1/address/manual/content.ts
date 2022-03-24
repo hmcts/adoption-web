@@ -20,7 +20,7 @@ const en = ({ manualAddressContent, userCase }): Record<string, unknown> => {
 };
 
 const cy = ({ manualAddressContent, userCase }): Record<string, unknown> => {
-  const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant (in welsh)' : 'First applicant (in welsh)';
+  const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Ceisydd' : 'Ceisydd cyntaf';
   return {
     section,
     title: "What's your address? (in welsh)",

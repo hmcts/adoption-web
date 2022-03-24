@@ -22,19 +22,19 @@ const en = () => ({
 });
 
 const cy = () => ({
-  section: "The child's details (in welsh)",
-  label: "What was the child's sex at birth? (in welsh)",
-  male: 'Male (in welsh)',
-  female: 'Female (in welsh)',
-  other: 'Other (in welsh)',
+  section: 'Manylion y plentyn',
+  label: 'Beth oedd rhyw’r plentyn pan gafodd ei (g)eni?',
+  male: 'Gwryw',
+  female: 'Benyw',
+  other: 'Arall',
   childrenOtherSexAtBirth:
-    "For example, if the child's sex was intersex when they were born, you should enter exactly what is listed on the birth certificate. (in welsh)",
+    'Er enghraifft, os mai rhyngrywiol oedd rhyw y plentyn pan gafodd ei eni, dylech nodi’n union yr hyn sydd wedi’i restru ar y dystysgrif geni.',
   errors: {
     childrenSexAtBirth: {
-      required: 'Please select an answer (in welsh)',
+      required: 'Dewiswch ateb os gwelwch yn dda',
     },
     childrenOtherSexAtBirth: {
-      required: 'Enter what is written on the birth certificate (in welsh)',
+      required: 'Nac ydwdwch yr hyn sydd wedi’i ysgrifennu ar y dystysgrif geni.',
     },
   },
 });

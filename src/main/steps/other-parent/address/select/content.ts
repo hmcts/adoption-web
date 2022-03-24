@@ -19,7 +19,7 @@ const en = selectAddressContent => ({
 
 const cy = selectAddressContent => ({
   section: SECTION_IN_WELSH,
-  title: "What's their address? (in Welsh)",
+  title: 'Beth yw eu cyfeiriad?',
   errors: {
     otherParentSelectAddress: selectAddressContent.errors.selectAddress,
   },

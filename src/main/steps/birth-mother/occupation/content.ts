@@ -14,12 +14,12 @@ export const en = (): Record<string, unknown> => ({
 });
 
 export const cy = (): Record<string, unknown> => ({
-  section: "Birth mother's details (in welsh)",
-  label: "What is the occupation of the child's birth mother? (in welsh)",
-  hint: "Ask the adoption agency or social worker if you're not sure. If the occupation is not known, you can type 'unknown'. (in welsh)",
+  section: 'Manylion y fam fiolegol',
+  label: 'Beth yw galwedigaeth mam fiolegol y plentyn?',
+  hint: 'Gofynnwch i’ch asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr. Os yw’r galwedigaeth yn anhysbys, gallwch deipio ‘anhysbys’.',
   errors: {
     birthMotherOccupation: {
-      required: 'Enter an occupation (in welsh)',
+      required: 'Nac ydwdwch alwedigaeth',
     },
   },
 });

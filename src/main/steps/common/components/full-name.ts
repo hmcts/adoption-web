@@ -10,10 +10,10 @@ export const en = (): Record<string, unknown> => ({
 });
 
 export const cy = (): Record<string, unknown> => ({
-  firstNames: 'First names (in Welsh)',
-  firstNamesHint: '(Include any given or middle names) (in Welsh)',
-  lastNames: 'Last names (in Welsh)',
-  lastNamesHint: '(Include surname or family names) (in Welsh)',
+  firstNames: 'Enwau cyntaf',
+  firstNamesHint: '(Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol)',
+  lastNames: 'Cyfenwau',
+  lastNamesHint: '(Cofiwch gynnwys cyfenw neu enwau teuluol)',
 });
 
 export const form: FormContent = {

@@ -41,16 +41,16 @@ const en = content => {
 const cy = content => {
   const cyContent = {
     section: SECTION_IN_WELSH,
-    title: 'Orders already in place for siblings and half-siblings (in welsh)',
-    placementOrder: 'Placement Order (in welsh)',
-    change: 'Change (in welsh)',
-    remove: 'Remove (in welsh)',
-    changeName: 'Change name (in welsh)',
-    label: 'Do you want to add another order for a sibling or half-sibling? (in welsh)',
-    hint: 'For example, a care order or supervision order. Your adoption agency or social worker can provide this information for you. (in welsh)',
+    title: 'Gorchmynion eisoes mewn lle ar gyfer brodyr/chwiorydd a hanner brodyr/hanner chwiorydd',
+    placementOrder: 'Gorchymyn Lleoli',
+    change: 'Newid',
+    remove: 'Dileu',
+    changeName: 'Newid enw',
+    label: 'A ydych eisiau ychwanegu gorchymyn arall ar gyfer brawd/chwaer neu hanner frawd/hanner chwaer?',
+    hint: 'Er enghraifft, gorchymyn gofal neu neuchymyn goruchwylio. Gall eich gweithiwr cymdeithasol neu’ch asiantaeth fabwysiadau ddarparu’r wybodaeth hon ichi.',
     errors: {
       addAnotherSiblingPlacementOrder: {
-        required: 'Please select an answer (in welsh)',
+        required: 'Dewiswch ateb os gwelwch yn dda',
       },
     },
   };

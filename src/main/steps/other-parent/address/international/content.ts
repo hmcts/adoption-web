@@ -17,7 +17,7 @@ const en = internationalAddressContent => ({
 
 const cy = internationalAddressContent => ({
   section: SECTION_IN_WELSH,
-  title: "What is the other parent's last known address? (in Welsh)",
+  title: 'Beth yw cyfeiriad olaf hysbys y rhiant arall?',
   errors: {
     otherParentAddress1: internationalAddressContent.errors.address1,
     otherParentAddressCountry: internationalAddressContent.errors.addressCountry,

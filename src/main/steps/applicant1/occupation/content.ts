@@ -33,7 +33,7 @@ export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
 };
 
 export const cy = ({ userCase }: CommonContent): Record<string, unknown> => {
-  const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant (in Welsh)' : 'First applicant (in Welsh)';
+  const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Ceisydd' : 'Ceisydd cyntaf';
   return {
     section,
     label: "What's your occupation? (in Welsh)",

@@ -19,14 +19,14 @@ export const en = (): Record<string, unknown> => ({
 
 export const cy = (): Record<string, unknown> => ({
   section: SECTION_IN_WELSH,
-  title: 'What is the full name of the other person with parental responsibility? (in Welsh)',
-  line1: 'If you are not sure, ask your social worker or adoption agency for help. (in Welsh)',
+  title: 'Beth yw enw llawn yr unigolyn arall sydd â chyfrifoldeb rhiant?',
+  line1: 'Os nad ydych yn siŵr, holwch gyda’ch gweithiwr cymdeithasol, neu’ch asiantaeth fabwysiadu i gael cymorth.',
   errors: {
     otherParentFirstNames: {
-      required: 'Enter their first names (in Welsh)',
+      required: 'Nac ydwdwch eu henw(au) cyntaf',
     },
     otherParentLastNames: {
-      required: 'Enter their last names (in Welsh)',
+      required: 'Nac ydwdwch eu cyfenw(au)',
     },
   },
 });

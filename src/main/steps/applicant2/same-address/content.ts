@@ -17,19 +17,14 @@ const en = content => ({
 });
 
 const cy = content => ({
-  section: 'Second applicant (in welsh)',
-  label: 'Do you also live at this address? (in welsh)',
-  yes: 'Yes (in welsh)',
-  no: 'No (in welsh)',
-  applicant1Address: `<div class="govuk-inset-text">
-  ${content.userCase.applicant1Address1}
-  <br>
-  ${content.userCase.applicant1AddressTown}
-  <br>
-  ${content.userCase.applicant1AddressPostcode}</div>`,
+  section: 'Ail geisydd',
+  label: 'A ydych chi’n byw yn y cyfeiriad hwn hefyd?',
+  yes: 'Ydw',
+  no: 'Nac ydw',
+  applicant1Address: `<div class="govuk-inset-text">${content.userCase.applicant1Address1}<br>${content.userCase.applicant1Address1}<br>${content.userCase.applicant1Address1}</div>`,
   errors: {
     applicant2AddressSameAsApplicant1: {
-      required: 'Please answer the question (in welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
 });

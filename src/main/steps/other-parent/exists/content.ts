@@ -19,13 +19,13 @@ const en = () => ({
 
 const cy = () => ({
   section: SECTION_IN_WELSH,
-  label: 'Is there another person who has parental responsibility for the child? (in welsh)',
-  hint: 'Apart from the birth mother and father. For example, a step parent. (in welsh)',
-  one: 'Yes (in welsh)',
-  two: 'No (in welsh)',
+  label: 'A oes unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn?',
+  hint: 'Oni bai am y fam a’r tad biolegol. Er enghraifft, llys-riant.',
+  one: 'Ydw',
+  two: 'Nac ydw',
   errors: {
     otherParentExists: {
-      required: 'Please answer the question (in welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
 });

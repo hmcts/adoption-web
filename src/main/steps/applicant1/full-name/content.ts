@@ -21,7 +21,7 @@ export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
 };
 
 export const cy = ({ userCase }: CommonContent): Record<string, unknown> => {
-  const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant (in Welsh)' : 'First applicant (in Welsh)';
+  const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Ceisydd' : 'Ceisydd cyntaf';
   return {
     section,
     title: "What's your full name? (in Welsh)",

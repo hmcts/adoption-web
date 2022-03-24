@@ -20,7 +20,7 @@ const en = manualAddressContent => ({
 
 const cy = manualAddressContent => ({
   section: SECTION_IN_WELSH,
-  title: "What is the birth father's last known address? (in Welsh)",
+  title: 'Beth yw cyfeiriad olaf hysbys y tad biolegol?',
   errors: {
     birthFatherAddress1: manualAddressContent.errors.address1,
     birthFatherAddressTown: manualAddressContent.errors.addressTown,

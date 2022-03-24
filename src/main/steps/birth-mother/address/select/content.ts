@@ -18,8 +18,8 @@ const en = selectAddressContent => ({
 });
 
 const cy = selectAddressContent => ({
-  section: "Birth mother's details (in welsh)",
-  title: "What is the birth mother's last known address? (in welsh)",
+  section: 'Manylion y fam fiolegol',
+  title: 'Beth yw cyfeiriad olaf hysbys y fam fiolegol?',
   line1: null,
   errors: {
     birthMotherSelectAddress: selectAddressContent.errors.selectAddress,

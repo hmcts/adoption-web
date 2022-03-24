@@ -29,27 +29,27 @@ export const en = (): Record<string, unknown> => ({
 });
 
 export const cy = (): Record<string, unknown> => ({
-  section: 'Your adoption agency or local authority details (in Welsh)',
-  title: "Details about the child's social worker (in Welsh)",
-  line1: 'You can get these details from your adoption agency or local authority. (in Welsh)',
-  socialWorkerName: "Social worker's name (in Welsh)",
-  socialWorkerPhoneNumber: "Social worker's phone number (in Welsh)",
-  socialWorkerEmail: "Social worker's email address (in Welsh)",
-  socialWorkerTeamEmail: "Social worker's team email address (if known) (in Welsh)",
+  section: 'Manylion eich asiantaeth fabwysiadu neu’ch awdurdod lleol',
+  title: 'Manylion am weithiwr cymdeithasol y plentyn',
+  line1: 'Gallwch gael y manylion hyn gan eich asiantaeth fabwysiadau neu’ch awdurdod lleol.',
+  socialWorkerName: "Enw'r gweithiwr cymdeithasol",
+  socialWorkerPhoneNumber: 'Rhif ffôn y gweithiwr cymdeithasol',
+  socialWorkerEmail: 'Cyfeiriad e-bost y gweithiwr cymdeithasol',
+  socialWorkerTeamEmail: 'Cyfeiriad e-bost tîm y gweithiwr cymdeithasol (os yw’n hysbys)',
   errors: {
     socialWorkerName: {
-      required: 'Enter a name (in Welsh)',
+      required: 'Nac ydwdwch enw',
     },
     socialWorkerPhoneNumber: {
-      required: 'Enter a UK telephone number (in Welsh)',
-      invalid: 'Enter a UK telephone number (in Welsh)',
+      required: 'Rhowch rif ffôn yn y DU',
+      invalid: 'Rhowch rif ffôn yn y DU',
     },
     socialWorkerEmail: {
-      required: 'Enter an email address (in Welsh)',
-      invalid: 'Enter an email address in the correct format, like name@example.com (in Welsh)',
+      required: 'Nac ydwdwch gyfeiriad e-bost',
+      invalid: 'Rhowch gyfeiriad e-bost yn y fformat cywir, er enghraifft enw@enghraifft.com',
     },
     socialWorkerTeamEmail: {
-      invalid: 'Enter an email address in the correct format, like name@example.com (in Welsh)',
+      invalid: 'Rhowch gyfeiriad e-bost yn y fformat cywir, er enghraifft enw@enghraifft.com',
     },
   },
 });

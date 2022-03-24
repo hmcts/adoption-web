@@ -17,11 +17,12 @@ const en = () => ({
 
 const cy = () => ({
   section: SECTION_IN_WELSH,
-  label: "Is there a court order in place for any of the child's siblings or half siblings? (in Welsh)",
-  hint: 'For example, a care order or supervision order. Your adoption agency or social worker can help provide these details. (in Welsh)',
+  label:
+    'A oes gorchymyn llys mewn lle ar gyfer unrhyw un o frodyr/chwiorydd neu hanner frodyr/hanner chwiorydd y plentyn?',
+  hint: 'Er enghraifft, gorchymyn gofal neu neuchymyn goruchwylio. Gall eich asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol eich helpu i lenwi’r rhan hon.',
   errors: {
     hasPoForSiblings: {
-      required: 'Please answer the question (in welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
 });

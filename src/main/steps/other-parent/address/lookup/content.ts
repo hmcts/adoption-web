@@ -18,7 +18,7 @@ const en = addressLookupContent => ({
 
 const cy = addressLookupContent => ({
   section: SECTION_IN_WELSH,
-  title: "What's their address? (in Welsh)",
+  title: 'Beth yw eu cyfeiriad?',
   errors: {
     otherParentAddressPostcode: addressLookupContent.errors.addressPostcode,
   },

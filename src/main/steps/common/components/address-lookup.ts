@@ -19,14 +19,14 @@ const en = () => ({
 
 const cy = () => ({
   line1:
-    "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email. (in welsh)",
-  postcode: 'Postcode (in welsh)',
-  findAddress: 'Find address (in welsh)',
-  enterAddressManually: 'Or enter address manually (in welsh)',
+    'Byddwn yn anfon yr holl bapurau llys i’r cyfeiriad hwn oni bai eich bod yn ein cynghori eich bod yn hapus i’r gorchmynion llys gael eu cyflwyno arnoch trwy e-bost.',
+  postcode: 'Cod post',
+  findAddress: 'Dod o hyd i gyfeiriad',
+  enterAddressManually: 'Neu nodwch y cyfeiriad â llaw',
   errors: {
     addressPostcode: {
-      required: 'Enter a real postcode (in welsh)',
-      invalid: 'Enter a real postcode (in welsh)',
+      required: 'Nac ydwdwch god post dilys',
+      invalid: 'Nac ydwdwch god post dilys',
     },
   },
   manualAddressUrl: '#',

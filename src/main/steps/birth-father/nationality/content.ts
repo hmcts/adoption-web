@@ -24,17 +24,17 @@ export const en = (): Record<string, unknown> => ({
   },
 });
 
-export const cy = (): Record<string, unknown> => ({
+export const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  label: "What is the nationality of the child's birth father? (in Welsh)",
+  label: 'Beth yw cenedligrwydd tad biolegol y plentyn?',
   url: BIRTH_FATHER_NATIONALITY,
   errors: {
     [`${FieldPrefix.BIRTH_FATHER}Nationality`]: {
-      required: "Select a nationality or 'Not sure' (in Welsh)",
-      notSureViolation: "Select a nationality or 'Not sure' (in Welsh)",
+      required: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
+      notSureViolation: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
     },
     addAnotherNationality: {
-      required: 'This is not a valid entry (in Welsh)',
+      required: 'Nid yw hyn yn gofnod dilys',
     },
   },
 });

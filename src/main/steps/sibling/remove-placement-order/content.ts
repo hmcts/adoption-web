@@ -34,12 +34,12 @@ const en = content => ({
 
 const cy = content => ({
   section: SECTION_IN_WELSH,
-  label: `Are you sure you want to remove this ${getPlacementOrderType(content.userCase)} for ${getSiblingName(
+  label: `Are you sure you want to remove this ${getPlacementOrderType(
     content.userCase
-  )}? (in welsh)`,
+  )} ar gyfer ${getPlacementOrderType(content.userCase)}?`,
   errors: {
     confirm: {
-      required: 'Please select an answer (in welsh)',
+      required: 'Dewiswch ateb os gwelwch yn dda',
     },
   },
 });

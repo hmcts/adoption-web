@@ -17,8 +17,8 @@ const en = selectAddressContent => ({
 });
 
 const cy = selectAddressContent => ({
-  section: 'Second applicant (in welsh)',
-  title: "What's your home address? (in welsh)",
+  section: 'Ail geisydd',
+  title: 'Beth yw eich cyfeiriad cartref?',
   errors: {
     applicant2SelectAddress: selectAddressContent.errors.selectAddress,
   },

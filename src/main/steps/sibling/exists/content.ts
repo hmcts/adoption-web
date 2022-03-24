@@ -17,11 +17,11 @@ const en = () => ({
 
 const cy = () => ({
   section: SECTION_IN_WELSH,
-  label: 'Does the child have any siblings or half siblings? (in welsh)',
-  hint: "Ask the adoption agency or social worker if you're not sure. (in welsh)",
+  label: 'A oes gan y plentyn frodyr/chwiorydd neu hanner frodyr/chwiorydd?',
+  hint: 'Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
   errors: {
     hasSiblings: {
-      required: 'Please answer the question (in welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
 });

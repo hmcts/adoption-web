@@ -22,12 +22,12 @@ export const en = (nationalityContent: PageContent): Record<string, unknown> => 
 });
 
 export const cy = (nationalityContent: PageContent): Record<string, unknown> => ({
-  section: "The child's details (in welsh)",
-  label: 'What is their nationality? (in welsh)',
+  section: 'Manylion y plentyn',
+  label: 'Beth yw eu cenedligrwydd?',
   errors: {
     childrenNationality: {
-      required: "Select a nationality or 'Not sure' (in welsh)",
-      notSureViolation: "Select a nationality or 'Not sure' (in welsh)",
+      required: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
+      notSureViolation: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
     },
     addAnotherNationality: (nationalityContent.errors as Record<string, unknown>).addAnotherNationality,
   },

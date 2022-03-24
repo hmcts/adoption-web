@@ -13,11 +13,11 @@ const en = () => ({
 });
 
 const cy = () => ({
-  section: "The child's details (in welsh)",
-  label: 'Which court made the placement order? (in welsh)',
+  section: 'Manylion y plentyn',
+  label: 'Pa lys wnaeth wneud y gorchymyn lleoli?',
   errors: {
     placementOrderCourt: {
-      required: 'Enter the name of the court (in welsh)',
+      required: 'Nac ydwdwch enw’r llys',
     },
   },
 });

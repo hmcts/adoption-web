@@ -24,19 +24,19 @@ const en = () => ({
 
 const cy = () => ({
   section: SECTION_IN_WELSH,
-  title: 'Which siblings or half siblings have a court order in place? (in welsh)',
+  title: 'Pa frodyr/chwiorydd neu hanner brodyr/hanner chwiorydd sydd â gorchymyn llys mewn lle?',
   line1:
-    "Enter the child's full name, as it's written on their birth certificate. Ask the adoption agency or social worker if you're not sure. (in welsh)",
-  firstName: 'First names (in welsh)',
-  firstNameHint: '(Include any given or middle names) (in welsh)',
-  lastName: 'Last names (in welsh)',
-  lastNameHint: '(Include surname or family names) (in welsh)',
+    'Mae arnom angen manylion yr holl frodyr/chwiorydd neu’r hanner brodyr/hanner chwiorydd sydd â gorchymyn llys mewn lle. Gofynnir ichi lenwi’r manylion i bob un ohonynt fesul un.',
+  firstName: 'Enwau cyntaf',
+  firstNameHint: '((Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol))',
+  lastName: 'Cyfenwau',
+  lastNameHint: '((Cofiwch gynnwys cyfenw neu enwau teuluol))',
   errors: {
     siblingFirstName: {
-      required: "Enter the child's first names (in welsh)",
+      required: 'Nac ydwdwch enw(au) cyntaf y plentyn',
     },
     siblingLastNames: {
-      required: "Enter the child's last names (in welsh)",
+      required: 'Nac ydwdwch gyfenw(au)’r plentyn',
     },
   },
 });

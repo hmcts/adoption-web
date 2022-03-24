@@ -14,12 +14,12 @@ const en = () => ({
 });
 
 const cy = () => ({
-  section: "The child's details (in welsh)",
-  label: 'What is the serial or case number on the placement order? (in welsh)',
-  hint: "This is on the top right of the order. Ask the adoption agency or social worker if you're not sure. (in welsh)",
+  section: 'Manylion y plentyn',
+  label: 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn lleoli?',
+  hint: 'Mae hwn wedi’i nodi yng nghornel dde uchaf y gorchymyn. Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
   errors: {
     placementOrderNumber: {
-      required: 'Enter the serial or case number (in welsh)',
+      required: 'Nac ydwdwch y rhif cyfresol neu rif yr achos',
     },
   },
 });

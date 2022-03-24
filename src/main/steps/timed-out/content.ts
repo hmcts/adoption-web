@@ -7,11 +7,11 @@ const en = {
   signBackInAndContinue: 'Sign back in and continue',
 };
 
-const cy: typeof en = {
-  title: 'Cawsoch eich allgofnodi i amddiffyn eich preifatrwydd',
-  line1: "Ni chafodd unrhyw beth ei wneud i'ch cais am dros 20 munud, felly cawsoch eich allgofnodi.",
-  line2: "Mae'r hyn a wnaethoch wedi cael ei gadw.",
-  signBackInAndContinue: 'Mewngofnodi eto a pharhau',
+const cy = {
+  title: 'Rydych wedi cael eich allgofnodi i amddiffyn eich preifatrwydd.',
+  line1: 'Roedd eich cais yn segur am fwy nac 20 munud felly rydych wedi cael eich allgofnodi.',
+  line2: 'Cafodd eich cynnydd ei gadw.',
+  signBackInAndContinue: 'Mewngofnodwch eto a pharhau',
 };
 
 const languages = {
