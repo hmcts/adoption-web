@@ -5,7 +5,7 @@ import { v4 as generateUuid } from 'uuid';
 
 import { PAY_YOUR_FEE, UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
-import { CaseWithId } from '../case/case';
+import { CaseWithId, LanguagePreference } from '../case/case';
 import { AdoptionDocument, CITIZEN_UPDATE, DocumentType, ListValue, State } from '../case/definition';
 import type { AppRequest, UserDetails } from '../controller/AppRequest';
 
@@ -105,6 +105,7 @@ export class DocumentManagerController {
 
   public async get(req: AppRequest<Partial<CaseWithId>>, res: Response): Promise<void> {
     const documentsGeneratedKey = 'documentsGenerated';
+    const languagePreference = req.session.userCase['languagePreference'] === LanguagePreference.Welsh ? 'Cy' : 'En';
     const documentsGenerated =
       (req.session.userCase[documentsGeneratedKey] as ListValue<Partial<AdoptionDocument> | null>[]) ?? [];
     if (![State.Submitted].includes(req.session.userCase.state)) {
@@ -116,7 +117,7 @@ export class DocumentManagerController {
     if (!!documentsGenerated && documentsGenerated.length > 0) {
       const applicationSummaryDocuments = documentsGenerated
         .map(item => item.value)
-        .filter(element => element?.documentType === DocumentType.APPLICATION_SUMMARY);
+        .filter(element => element?.documentType === DocumentType.APPLICATION_SUMMARY + languagePreference);
       if (applicationSummaryDocuments !== null && applicationSummaryDocuments.length > 0) {
         documentToGet = applicationSummaryDocuments[0]?.documentLink?.document_binary_url;
       }
