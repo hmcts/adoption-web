@@ -34,7 +34,7 @@ function ensurePageCallWillSucceed(url: string): Promise<void> {
 function runPally(url: string, browser, page): Promise<Pa11yResult> {
   let screenCapture: string | boolean = false;
   if (!config.TestHeadlessBrowser) {
-    const screenshotDir = `${__dirname}/../../../functional-output/pa11y`;
+    const screenshotDir = `${__dirname}/../../../output/pa11y`;
     fs.mkdirSync(screenshotDir, { recursive: true });
     screenCapture = `${screenshotDir}/${url.replace(/^\/$/, 'home').replace('/', '')}.png`;
   }
@@ -152,7 +152,7 @@ describe('Accessibility', () => {
       const result = await runPally(url, browser, page);
       const html = await htmlReporter.results(result);
 
-      const reportsDir = `${__dirname}/../../../functional-output/pa11y${url.slice(0, url.lastIndexOf('/'))}`;
+      const reportsDir = `${__dirname}/../../../output/pa11y${url.slice(0, url.lastIndexOf('/'))}`;
       fs.mkdirSync(reportsDir, { recursive: true });
       fs.writeFileSync(`${reportsDir}${url.slice(url.lastIndexOf('/'))}.html`, html);
 
