@@ -1,7 +1,9 @@
-/* istanbul ignore file */
-import { TranslationFn } from '../../app/controller/GetController';
+import languageAssertions from '../../../test/unit/utils/languageAssertions';
+import { CommonContent } from '../common/common.content';
 
-const en = () => ({
+import { generateContent } from './content';
+
+const enContent = {
   title: 'Accessibility Statement',
   statement: 'Accessibility statement for the adoption service',
   websiteRanBy: 'This website is run by HM Courts & Tribunals Service',
@@ -71,9 +73,9 @@ const en = () => ({
   improvingAccessibility: 'What we’re doing to improve accessibility',
   planning: 'We are planning an external accessibility audit and will update our statement before our website is live.',
   statementPrepared: 'This statement was prepared on 19 September 2019.',
-});
+};
 
-const cy: typeof en = () => ({
+const cyContent = {
   title: 'Datganiad Hygyrchedd',
   statement: 'Datganiad hygyrchedd ar gyfer y gwasanaeth mabwysiadu',
   websiteRanBy: 'Gwasanaeth Llysoedd a Thribiwnlysoedd EM sy’n gyfrifol am y wefan hon',
@@ -144,13 +146,16 @@ const cy: typeof en = () => ({
   planning:
     'Rydym yn cynllunio i gynnal awdit hygyrchedd allanol a byddwn yn diweddaru ein datganiad cyn y daw ein gwefan yn fyw.',
   statementPrepared: 'Cafodd y datganiad hwn ei baratoi ar 19 Medi 2019.',
+};
+
+/* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
+describe('children > sex-at-birth > content', () => {
+  const commonContent = { language: 'en', userCase: { childrenSexAtBirth: 'male' } } as CommonContent;
+  test('should return correct english content', () => {
+    languageAssertions('en', enContent, () => generateContent(commonContent));
+  });
+
+  test('should return correct welsh content', () => {
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
+  });
 });
-
-const languages = {
-  en,
-  cy,
-};
-
-export const generateContent: TranslationFn = content => {
-  return languages[content.language]();
-};
