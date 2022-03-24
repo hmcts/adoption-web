@@ -54,7 +54,6 @@ withPipeline(type, product, component) {
   }
 
   after('test') {
-    yarnBuilder.yarn('test:integration')
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
   }
 

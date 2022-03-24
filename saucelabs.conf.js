@@ -148,6 +148,9 @@ const setupConfig = {
     safari: {
       browsers: getBrowserConfig('safari'),
     },
+    safari: {
+      browsers: getBrowserConfig('webkit'),
+    },
   },
   name: 'Adoption FrontEnd Cross-Browser Tests',
 };
