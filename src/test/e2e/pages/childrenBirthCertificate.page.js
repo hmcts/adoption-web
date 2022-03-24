@@ -14,25 +14,25 @@ module.exports = {
   },
 
   async childDetailsBirthCertificaterSection() {
-    await I.waitForText("What is the child's full name?");
-    await I.fillField(this.fields.childrenFirstName, 'William');
-    await I.fillField(this.fields.childrenLastName, 'Jacob');
-    await I.click('Save and continue');
-    await I.wait('2');
-    await I.fillField(this.fields.childrenDateOfBirthDay, '10');
-    await I.fillField(this.fields.childrenDateOfBirthMonth, '10');
-    await I.wait('2');
-    await I.fillField(this.fields.childrenDateOfBirthYear, '2020');
-    await I.click('Save and continue');
-    await I.wait('2');
-    await I.click(this.fields.childrenSexAtBirth);
-    await I.click('Save and continue');
-    await I.click(this.fields.britishCitizen);
-    await I.click(this.fields.citizenOfDifferentCountry);
-    await I.fillField(this.fields.addAnotherNationality, 'India');
-    await I.click('Add');
-    await I.wait('2');
-    await I.click('Save and continue');
-    await I.wait('4');
+    await I.retry(3).waitForText("What is the child's full name?");
+    await I.retry(3).fillField(this.fields.childrenFirstName, 'William');
+    await I.retry(3).fillField(this.fields.childrenLastName, 'Jacob');
+    await I.retry(3).click('Save and continue');
+    await I.wait(2);
+    await I.retry(3).fillField(this.fields.childrenDateOfBirthDay, '10');
+    await I.retry(3).fillField(this.fields.childrenDateOfBirthMonth, '10');
+    await I.wait(2);
+    await I.retry(3).fillField(this.fields.childrenDateOfBirthYear, '2020');
+    await I.retry(3).click('Save and continue');
+    await I.wait(2);
+    await I.retry(3).click(this.fields.childrenSexAtBirth);
+    await I.retry(3).click('Save and continue');
+    await I.retry(3).click(this.fields.britishCitizen);
+    await I.retry(3).click(this.fields.citizenOfDifferentCountry);
+    await I.retry(3).fillField(this.fields.addAnotherNationality, 'India');
+    await I.retry(3).click('Add');
+    await I.wait(2);
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
   },
 };

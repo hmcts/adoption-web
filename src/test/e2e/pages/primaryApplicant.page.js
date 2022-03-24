@@ -14,19 +14,19 @@ module.exports = {
   },
 
   async primaryApplicantContactDetailsSection() {
-    await I.waitForText("What's your home address?");
-    await I.fillField(this.fields.postcodeLookup, this.fields.postcode);
-    await I.click(this.fields.findAddressButton);
-    await I.waitForText('addresses found');
-    await I.waitForElement(locate(this.fields.addressList).find('option').withText(this.fields.lookupOption));
-    await I.selectOption(this.fields.addressList, this.fields.lookupOption);
-    await I.click('Save and continue');
-    await I.wait('2');
-    await I.fillField(this.fields.applicant1EmailAddress, 'test@test.com');
-    await I.fillField(this.fields.applicant1PhoneNumber, '09876543210');
-    await I.wait('2');
-    await I.click(this.fields.applicant1ContactDetailsConsent);
-    await I.click('Save and continue');
-    await I.wait('4');
+    await I.retry(3).waitForText("What's your home address?");
+    await I.retry(3).fillField(this.fields.postcodeLookup, this.fields.postcode);
+    await I.retry(3).click(this.fields.findAddressButton);
+    await I.retry(3).waitForText('addresses found');
+    await I.retry(3).waitForElement(locate(this.fields.addressList).find('option').withText(this.fields.lookupOption));
+    await I.retry(3).selectOption(this.fields.addressList, this.fields.lookupOption);
+    await I.retry(3).click('Save and continue');
+    await I.wait(2);
+    await I.retry(3).fillField(this.fields.applicant1EmailAddress, 'test@test.com');
+    await I.retry(3).fillField(this.fields.applicant1PhoneNumber, '09876543210');
+    await I.wait(2);
+    await I.retry(3).click(this.fields.applicant1ContactDetailsConsent);
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
   },
 };
