@@ -112,7 +112,8 @@ export class DocumentManagerController {
 
   public async get(req: AppRequest<Partial<CaseWithId>>, res: Response): Promise<void> {
     const documentsGeneratedKey = 'documentsGenerated';
-    const languagePreference = req.session.userCase['languagePreference'] === LanguagePreference.WELSH ? 'Cy' : 'En';
+    const languagePreference =
+      req.session.userCase['applicant1LanguagePreference'] === LanguagePreference.WELSH ? 'Cy' : 'En';
     const documentsGenerated =
       (req.session.userCase[documentsGeneratedKey] as ListValue<Partial<AdoptionDocument> | null>[]) ?? [];
     if (![State.Submitted].includes(req.session.userCase.state)) {
