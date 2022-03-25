@@ -1,7 +1,7 @@
 Feature('Creat application').retry(1);
 
 Scenario(
-  'Creat full application and submit',
+  'Creat full application and submit @cross-browser',
   async ({
     loginPage,
     landingPage,
@@ -84,7 +84,7 @@ Scenario(
     await taskListPage.verifyChooseYourFamilyCourtStatus();
 
     await taskListPage.selectUploadDocumentsDetails();
-    await uploadDocumentsDetailsPage.uploadDocumentsSection();
+    await uploadDocumentsDetailsPage.uploadDocumentsSectionWithCantNotUploadOption();
     await taskListPage.verifyUploadDocumentsStatus();
 
     await taskListPage.selectReviewPayAndSubmitDetails();
