@@ -34,7 +34,12 @@ describe('initAuthToken', () => {
     initAuthToken();
     return new Promise<void>(resolve => {
       setImmediate(() => {
-        expect(logger.error).toHaveBeenCalledWith('MOCK_ERROR', 500, 'Error');
+        expect(logger.error).toHaveBeenCalledWith(
+          'Error in refreshing service auth token ',
+          'MOCK_ERROR',
+          500,
+          'Error'
+        );
         resolve();
       });
     });
