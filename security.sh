@@ -18,6 +18,7 @@ zap-cli --zap-url http://0.0.0.0 -p 1001 report -o activescanReport.xml -f xml
 echo 'Changing owner from $(id -u):$(id -g) to $(id -u):$(id -u)'
 chown -R $(id -u):$(id -u) activescan.html
 chown -R $(id -u):$(id -u) activescanReport.xml
+chown -R $(id -u):$(id -u) zap
 
 cp activescan.html zap/
 cp activescanReport.xml zap/
