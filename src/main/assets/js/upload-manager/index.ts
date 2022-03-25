@@ -23,9 +23,9 @@ const initUploadManager = (): void => {
 
   let chooseFilePhoto;
   if (locale === 'cy') {
-    chooseFilePhoto = 'Choose a file or take a photo (in welsh)';
+    chooseFilePhoto = 'Dewiswch ffeil';
   } else {
-    chooseFilePhoto = 'Choose a file or take a photo';
+    chooseFilePhoto = 'Choose a file';
   }
 
   const uppy = new Uppy({
@@ -33,7 +33,8 @@ const initUploadManager = (): void => {
       maxFileSize: 2097152,
       maxTotalFileSize: 10485760,
       maxNumberOfFiles: 10,
-      allowedFileTypes: ['image/jpeg', 'image/tiff', 'image/png', 'application/pdf', 'image/bmp'],
+//       allowedFileTypes: ['image/jpeg', 'image/tiff', 'image/png', 'application/pdf', 'image/bmp'],
+      allowedFileTypes: ['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf'],
     },
   });
 
