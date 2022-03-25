@@ -25,7 +25,7 @@ const en = () => ({
     'If you need information on this website in a different format like accessible PDF, large print, easy read, audio recording or braille:',
   email:
     'Email <a href="adoptionproject@justice.gov.uk" class="govuk-link" aria-label="This link will open in a new email to adoptionproject@justice.gov.uk">adoptionproject@justice.gov.uk</a>',
-  phone: 'Call 01634 887900',
+  phone: 'Call: 01634 887900',
   considerYourRequest: 'We’ll consider your request and get back to you in 10 working days.',
   reportingAccessibility: 'Reporting accessibility problems with this website',
   improveAccessibility:
@@ -113,7 +113,7 @@ const cy = () => ({
     'If you need information on this website in a different format like accessible PDF, large print, easy read, audio recording or braille: (in Welsh)',
   email:
     'Email <a href="adoptionproject@justice.gov.uk" class="govuk-link" aria-label="This link will open in a new email to adoptionproject@justice.gov.uk">adoptionproject@justice.gov.uk</a> (in Welsh)',
-  phone: 'Call 01634 887900 (in Welsh)',
+  phone: 'Call: 01634 887900 (in Welsh)',
   considerYourRequest: 'We’ll consider your request and get back to you in 10 working days. (in Welsh)',
   reportingAccessibility: 'Reporting accessibility problems with this website (in Welsh)',
   improveAccessibility:
