@@ -12,10 +12,11 @@ const en = () => ({
   asManyAsPossibleSpeech: 'navigate most of the website using speech recognition software',
   asManyAsPossibleListen:
     'listen to most of the website using a screen reader (including the most recent versions of NVDA, CCA(colour contrast Analyser) and Voiceover)',
+  simpleAsPossible: "We've also made the text as simple as possible to understand.",
   abilityNet:
     '<a href="https://mcmw.abilitynet.org.uk" class="govuk-link" target="_blank" aria-label="This link will open in a new tab for AbilityNet">AbilityNet</a> has advice on making your device easier to use if you have a disability.',
   howAccessible: 'How accessible this website is',
-  somePartsNot: 'We know some parts of this website aren’t fully accessible:',
+  somePartsNot: 'We know some parts of this service may not be accessible:',
   somePartsNotReflow: 'the text will not reflow in a single column when you change the size of the browser window',
   somePartsNotSpacing: 'you cannot modify the line height or spacing of text',
   somePartsNotFooter: 'All footer links not yet implemented and so has not tested.',
@@ -28,14 +29,15 @@ const en = () => ({
   considerYourRequest: 'We’ll consider your request and get back to you in 10 working days.',
   reportingAccessibility: 'Reporting accessibility problems with this website',
   improveAccessibility:
-    'We’re always looking to improve the accessibility of this website. If you find any problems that aren’t listed on this page or think we’re not meeting the requirements of the accessibility regulations contact: <a href="mailto:adoptionproject@justice.gov.uk" class="govuk-link" aria-label="This link will open in a new email to adoptionproject@justice.gov.uk">adoptionproject@justice.gov.uk</a>.',
+    'We’re always looking to improve the accessibility of this website. If you find any problems that aren’t addressed on this page, or think we’re not meeting accessibility requirements, please contact us:',
   enforcementProcedure: 'Enforcement procedure',
   humanRightsCommission:
     'The Equality and Human Rights Commission (EHRC) is responsible for enforcing the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018 (the ‘accessibility regulations’).',
   notHappy:
     'If you’ve contacted us about accessibility and you’re not happy with our response, you can contact the <a href="https://www.equalityadvisoryservice.com/" class="govuk-link" target="_blank" aria-label="This link will open in a new tab for Equality Advisory and Support Service">Equality Advisory and Support Service (EASS)</a>.',
   contactingUs: 'Contacting us by phone or visiting us in person',
-  contactCourtDirectly: 'Contacting us by phone or visiting us in person',
+  contactCourtDirectly:
+    'If you have a question about accessibility in our family courts, you can <a href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode" class="govuk-link" target="blank">contact the court directly.</a>.',
   contactTextRelay:
     'We provide a text relay service for people who are D/deaf, hearing impaired or have a speech impediment.',
   contactInductionLoops:
@@ -97,10 +99,11 @@ const cy = () => ({
   asManyAsPossibleSpeech: 'navigate most of the website using speech recognition software (in Welsh)',
   asManyAsPossibleListen:
     'listen to most of the website using a screen reader (including the most recent versions of NVDA, CCA(colour contrast Analyser) and Voiceover) (in Welsh)',
+  simpleAsPossible: "We've also made the text as simple as possible to understand. (in Welsh)",
   abilityNet:
     '<a href="https://mcmw.abilitynet.org.uk" class="govuk-link" target="_blank" aria-label="This link will open in a new tab for AbilityNet">AbilityNet</a> has advice on making your device easier to use if you have a disability. (in Welsh)',
   howAccessible: 'How accessible this website is (in Welsh)',
-  somePartsNot: 'We know some parts of this website aren’t fully accessible: (in Welsh)',
+  somePartsNot: 'We know some parts of this service may not be accessible: (in Welsh)',
   somePartsNotReflow:
     'the text will not reflow in a single column when you change the size of the browser window (in Welsh)',
   somePartsNotSpacing: 'you cannot modify the line height or spacing of text (in Welsh)',
@@ -114,14 +117,15 @@ const cy = () => ({
   considerYourRequest: 'We’ll consider your request and get back to you in 10 working days. (in Welsh)',
   reportingAccessibility: 'Reporting accessibility problems with this website (in Welsh)',
   improveAccessibility:
-    'We’re always looking to improve the accessibility of this website. If you find any problems that aren’t listed on this page or think we’re not meeting the requirements of the accessibility regulations contact: <a href="mailto:adoptionproject@justice.gov.uk" class="govuk-link" aria-label="This link will open in a new email to adoptionproject@justice.gov.uk">adoptionproject@justice.gov.uk</a>. (in Welsh)',
+    'We’re always looking to improve the accessibility of this website. If you find any problems that aren’t addressed on this page, or think we’re not meeting accessibility requirements, please contact us: (in Welsh)',
   enforcementProcedure: 'Enforcement procedure (in Welsh)',
   humanRightsCommission:
     'The Equality and Human Rights Commission (EHRC) is responsible for enforcing the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018 (the ‘accessibility regulations’). (in Welsh)',
   notHappy:
     'If you’ve contacted us about accessibility and you’re not happy with our response, you can contact the <a href="https://www.equalityadvisoryservice.com/" class="govuk-link" target="_blank" aria-label="This link will open in a new tab for Equality Advisory and Support Service">Equality Advisory and Support Service (EASS)</a>. (in Welsh)',
   contactingUs: 'Contacting us by phone or visiting us in person (in Welsh)',
-  contactCourtDirectly: 'Contacting us by phone or visiting us in person (in Welsh)',
+  contactCourtDirectly:
+    'If you have a question about accessibility in our family courts, you can <a href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode" class="govuk-link" target="blank">contact the court directly.</a>. (in Welsh)',
   contactTextRelay:
     'We provide a text relay service for people who are D/deaf, hearing impaired or have a speech impediment. (in Welsh)',
   contactInductionLoops:

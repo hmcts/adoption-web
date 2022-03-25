@@ -12,6 +12,7 @@
     <li>{{ asManyAsPossibleSpeech }}</li>
     <li>{{ asManyAsPossibleListen }}</li>
   </ul>
+  <p class="govuk-body">{{ simpleAsPossible }}</p>
   <p class="govuk-body">{{ abilityNet | safe }}</p>
 
   <h3 class="govuk-heading-s">{{ howAccessible }}</h3>
@@ -49,7 +50,9 @@
 
   <h2 class="govuk-heading-m">{{ complianceStatus }}</h2>
   <p class="govuk-body">{{ partiallyCompliant }}</p>
-  <p class="govuk-body">{{ partiallyCompliantMobile }}</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>{{ partiallyCompliantMobile }}</li>
+  </ul>
 
   <h2 class="govuk-heading-m">{{ nonAccessibleContent }}</h2>
 
