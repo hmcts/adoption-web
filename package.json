@@ -137,7 +137,7 @@
     "jest-html-reporter": "^3.4.2",
     "jest-pact": "^0.9.1",
     "jest-when": "^3.5.1",
-    "lint-staged": "^12.3.5",
+    "lint-staged": "^12.3.7",
     "mini-css-extract-plugin": "^2.6.0",
     "mocha-junit-reporter": "^2.0.0",
     "mocha-multi": "^1.1.6",
