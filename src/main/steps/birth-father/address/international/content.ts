@@ -15,7 +15,7 @@ const en = internationalAddressContent => ({
   },
 });
 
-const cy = internationalAddressContent => ({
+const cy: typeof en = internationalAddressContent => ({
   section: SECTION_IN_WELSH,
   title: 'Beth yw cyfeiriad olaf hysbys y tad biolegol?',
   errors: {

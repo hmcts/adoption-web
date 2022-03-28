@@ -18,7 +18,7 @@ const enContent = {
   },
 };
 
-const cyContent = {
+const cyContent: typeof enContent = {
   section: SECTION_IN_WELSH,
   label: "Is the child's birth father still alive? (in Welsh)",
   ...cyNotSure,

@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 import { form as fullNameForm } from '../../common/components/full-name';
@@ -22,16 +23,16 @@ const enContent = {
 };
 
 const cyContent = {
-  section: "Birth father's details (in Welsh)",
-  title: "What is the full name of the child's birth father? (in Welsh)",
+  section: 'Manylion y tad biolegol',
+  title: 'Beth yw enw llawn tad biolegol y plentyn?',
   line1:
-    "This will be on the child's full birth certificate. Ask the adoption agency or social worker if you're not sure. (in Welsh)",
+    'Bydd y rhain ar dystysgrif geni llawn y plentyn. Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
   errors: {
     birthFatherFirstNames: {
-      required: 'Enter their first names (in Welsh)',
+      required: 'Nac ydwdwch eu henw(au) cyntaf',
     },
     birthFatherLastNames: {
-      required: 'Enter their last names (in Welsh)',
+      required: 'Nac ydwdwch eu cyfenw(au)',
     },
   },
 };
@@ -50,18 +51,11 @@ describe('common > components > full-name', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.title).toEqual(enContent.title);
-    expect(generatedContent.line1).toEqual(enContent.line1);
-    expect(generatedContent.errors).toEqual(enContent.errors);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct Welsh content', () => {
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.title).toEqual(cyContent.title);
-    expect(generatedContent.line1).toEqual(cyContent.line1);
-    expect(generatedContent.errors).toEqual(cyContent.errors);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain firstNames field', () => {

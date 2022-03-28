@@ -1,10 +1,13 @@
 /* eslint-disable jest/expect-expect */
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import languageAssertions from '../../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormOptions } from '../../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../../common/common.content';
-import { form as internationalAddressForm } from '../../../common/components/address-international';
-import { languageAssertions } from '../../../common/test/languageAssertions';
+import {
+  generateContent as generateInternationalAddressContent,
+  form as internationalAddressForm,
+} from '../../../common/components/address-international';
 
 import { generateContent } from './content';
 
@@ -14,8 +17,8 @@ const enContent = {
 };
 
 const cyContent = {
-  section: "Birth father's details (in Welsh)",
-  title: "What is the birth father's last known address? (in Welsh)",
+  section: 'Manylion y tad biolegol',
+  title: 'Beth yw cyfeiriad olaf hysbys y tad biolegol?',
 };
 
 describe('birth-father > address > international > content', () => {
@@ -32,11 +35,35 @@ describe('birth-father > address > international > content', () => {
   });
 
   test('should return correct english content', () => {
-    languageAssertions('en', enContent, generateContent);
+    const internationalAddressContent = generateInternationalAddressContent(commonContent);
+    const internationalAddressErrors = internationalAddressContent.errors as Record<string, unknown>;
+    languageAssertions(
+      'en',
+      {
+        ...enContent,
+        errors: {
+          birthFatherAddress1: internationalAddressErrors.address1,
+          birthFatherAddressCountry: internationalAddressErrors.addressCountry,
+        },
+      },
+      () => generateContent(commonContent)
+    );
   });
 
   test('should return correct Welsh content', () => {
-    languageAssertions('cy', cyContent, generateContent);
+    const internationalAddressContent = generateInternationalAddressContent({ ...commonContent, language: 'cy' });
+    const internationalAddressErrors = internationalAddressContent.errors as Record<string, unknown>;
+    languageAssertions(
+      'cy',
+      {
+        ...cyContent,
+        errors: {
+          birthFatherAddress1: internationalAddressErrors.address1,
+          birthFatherAddressCountry: internationalAddressErrors.addressCountry,
+        },
+      },
+      () => generateContent({ ...commonContent, language: 'cy' })
+    );
   });
 
   test('should contain birthFatherAddress1 field', () => {

@@ -16,7 +16,7 @@ const en = addressLookupContent => ({
   manualAddressUrl: BIRTH_FATHER_MANUAL_ADDRESS,
 });
 
-const cy = addressLookupContent => ({
+const cy: typeof en = addressLookupContent => ({
   section: SECTION_IN_WELSH,
   title: 'Beth yw cyfeiriad olaf hysbys y tad biolegol?',
   errors: {

@@ -3,7 +3,7 @@ import { FormContent, FormFields } from '../../../app/form/Form';
 import { form as fullNameForm, generateContent as fullNameGenerateContent } from '../../common/components/full-name';
 import { SECTION, SECTION_IN_WELSH } from '../constants';
 
-export const en = (): Record<string, unknown> => ({
+const en = () => ({
   section: SECTION,
   title: "What is the full name of the child's birth father?",
   line1:
@@ -18,7 +18,7 @@ export const en = (): Record<string, unknown> => ({
   },
 });
 
-export const cy = (): Record<string, unknown> => ({
+const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
   title: 'Beth yw enw llawn tad biolegol y plentyn?',
   line1:

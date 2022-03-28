@@ -9,7 +9,7 @@ import {
 import { BIRTH_FATHER_NATIONALITY } from '../../urls';
 import { SECTION, SECTION_IN_WELSH } from '../constants';
 
-export const en = (): Record<string, unknown> => ({
+const en = () => ({
   section: SECTION,
   label: "What is the nationality of the child's birth father?",
   url: BIRTH_FATHER_NATIONALITY,
@@ -24,7 +24,7 @@ export const en = (): Record<string, unknown> => ({
   },
 });
 
-export const cy: typeof en = () => ({
+const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
   label: 'Beth yw cenedligrwydd tad biolegol y plentyn?',
   url: BIRTH_FATHER_NATIONALITY,
