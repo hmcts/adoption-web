@@ -13,9 +13,9 @@ const en = content => ({
   printApplication: 'Print your application',
 });
 
-const cy = content => ({
+const cy: typeof en = content => ({
   title: 'Cais wedi’i gyflwyno',
-  referenceNumber: `Your reference number<br><strong>${content.userCase.hyphenatedCaseRef}</strong>`,
+  referenceNumber: `Eich cyfeirnod<br><strong>${content.userCase.hyphenatedCaseRef}</strong>`,
   emailSentConfirmation:
     'Rydym wedi anfon neges gadarnhau drwy e-bost. Os nad ydych wedi cael y neges hon, dylech wirio eich ffolder sothach neu spam.',
   nextStep: 'Beth fydd yn digwydd nesaf',
