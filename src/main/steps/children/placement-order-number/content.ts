@@ -13,7 +13,7 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
+const cy: typeof en = () => ({
   section: 'Manylion y plentyn',
   label: 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn lleoli?',
   hint: 'Mae hwn wedi’i nodi yng nghornel dde uchaf y gorchymyn. Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',

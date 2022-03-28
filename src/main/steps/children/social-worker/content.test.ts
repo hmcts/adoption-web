@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable jest/expect-expect */
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields } from '../../../app/form/Form';
 import { isEmailValid, isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
@@ -8,7 +9,6 @@ import { generateContent } from './content';
 
 jest.mock('../../../app/form/validation');
 
-const CY = 'cy';
 const EN = 'en';
 
 const enContent = {
@@ -38,63 +38,40 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Your adoption agency or local authority details (in Welsh)',
-  title: "Details about the child's social worker (in Welsh)",
-  line1: 'You can get these details from your adoption agency or local authority. (in Welsh)',
-  socialWorkerName: "Social worker's name (in Welsh)",
-  socialWorkerPhoneNumber: "Social worker's phone number (in Welsh)",
-  socialWorkerEmail: "Social worker's email address (in Welsh)",
-  socialWorkerTeamEmail: "Social worker's team email address (if known) (in Welsh)",
+  section: 'Manylion eich asiantaeth fabwysiadu neu’ch awdurdod lleol',
+  title: 'Manylion am weithiwr cymdeithasol y plentyn',
+  line1: 'Gallwch gael y manylion hyn gan eich asiantaeth fabwysiadau neu’ch awdurdod lleol.',
+  socialWorkerName: "Enw'r gweithiwr cymdeithasol",
+  socialWorkerPhoneNumber: 'Rhif ffôn y gweithiwr cymdeithasol',
+  socialWorkerEmail: 'Cyfeiriad e-bost y gweithiwr cymdeithasol',
+  socialWorkerTeamEmail: 'Cyfeiriad e-bost tîm y gweithiwr cymdeithasol (os yw’n hysbys)',
   errors: {
     socialWorkerName: {
-      required: 'Enter a name (in Welsh)',
+      required: 'Nac ydwdwch enw',
     },
     socialWorkerPhoneNumber: {
-      required: 'Enter a UK telephone number (in Welsh)',
-      invalid: 'Enter a UK telephone number (in Welsh)',
+      required: 'Rhowch rif ffôn yn y DU',
+      invalid: 'Rhowch rif ffôn yn y DU',
     },
     socialWorkerEmail: {
-      required: 'Enter an email address (in Welsh)',
-      invalid: 'Enter an email address in the correct format, like name@example.com (in Welsh)',
+      required: 'Nac ydwdwch gyfeiriad e-bost',
+      invalid: 'Rhowch gyfeiriad e-bost yn y fformat cywir, er enghraifft enw@enghraifft.com',
     },
     socialWorkerTeamEmail: {
-      invalid: 'Enter an email address in the correct format, like name@example.com (in Welsh)',
+      invalid: 'Rhowch gyfeiriad e-bost yn y fformat cywir, er enghraifft enw@enghraifft.com',
     },
   },
-};
-
-const langAssertions = (language, content) => {
-  const generatedContent = generateContent({ language, userCase: {} } as CommonContent);
-  const {
-    section,
-    title,
-    line1,
-    socialWorkerName,
-    socialWorkerPhoneNumber,
-    socialWorkerEmail,
-    socialWorkerTeamEmail,
-    errors,
-  } = content;
-
-  expect(generatedContent.section).toEqual(section);
-  expect(generatedContent.title).toEqual(title);
-  expect(generatedContent.line1).toEqual(line1);
-  expect(generatedContent.socialWorkerName).toEqual(socialWorkerName);
-  expect(generatedContent.socialWorkerPhoneNumber).toEqual(socialWorkerPhoneNumber);
-  expect(generatedContent.socialWorkerEmail).toEqual(socialWorkerEmail);
-  expect(generatedContent.socialWorkerTeamEmail).toEqual(socialWorkerTeamEmail);
-  expect(generatedContent.errors).toEqual(errors);
 };
 
 const commonContent = { language: EN } as CommonContent;
 
 describe('social worker content', () => {
-  it('should return the correct content for language = en', () => {
-    langAssertions(EN, enContent);
+  it('should return correct english content', () => {
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
-  it('should return the correct content for language = cy', () => {
-    langAssertions(CY, cyContent);
+  it('should return correct welsh content', () => {
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   it('should have an socialWorkerName text input field', () => {

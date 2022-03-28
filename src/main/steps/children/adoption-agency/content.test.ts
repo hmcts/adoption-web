@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable jest/expect-expect */
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
@@ -8,7 +9,6 @@ import { generateContent } from './content';
 
 jest.mock('../../../app/form/validation');
 
-const CY = 'cy';
 const EN = 'en';
 
 const enContent = {
@@ -37,53 +37,39 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Your adoption agency or local authority details (in Welsh)',
-  title: 'Adoption agency or local authority details (in Welsh)',
-  adopAgencyName: 'Name of adoption agency or local authority (in Welsh)',
-  adopAgencyPhone: 'Phone number (in Welsh)',
-  adopAgencyContactName: 'Name of your contact (in Welsh)',
-  adopAgencyContactEmail: 'Email address of your contact (in Welsh)',
+  section: 'Manylion eich asiantaeth fabwysiadu neu’ch awdurdod lleol',
+  title: 'Manylion yr asiantaeth fabwysiadu neu’r awdurdod lleol',
+  adopAgencyName: 'Enw’r asiantaeth fabwysiadu neu’r awdurdod lleol',
+  adopAgencyPhone: 'Rhif ffôn',
+  adopAgencyContactName: 'Enw eich cyswllt',
+  adopAgencyContactEmail: 'Cyfeiriad e-bost eich cyswllt',
   errors: {
     adopAgencyOrLaName: {
-      required: 'Enter a name (in Welsh)',
+      required: 'Nac ydwdwch enw',
     },
     adopAgencyOrLaPhoneNumber: {
-      required: 'Enter a UK telephone number (in Welsh)',
-      invalid: 'Enter a UK telephone number (in Welsh)',
+      required: 'Rhowch rif ffôn yn y DU',
+      invalid: 'Rhowch rif ffôn yn y DU',
     },
     adopAgencyOrLaContactName: {
-      required: 'Enter a name (in Welsh)',
+      required: 'Nac ydwdwch enw',
     },
     adopAgencyOrLaContactEmail: {
-      required: 'Enter an email address (in Welsh)',
-      invalid: 'Enter an email address in the correct format, like name@example.com (in Welsh)',
+      required: 'Nac ydwdwch gyfeiriad e-bost',
+      invalid: 'Rhowch gyfeiriad e-bost yn y fformat cywir, er enghraifft enw@enghraifft.com',
     },
   },
-};
-
-const langAssertions = (language, content) => {
-  const generatedContent = generateContent({ language, userCase: {} } as CommonContent);
-  const { section, title, adopAgencyName, adopAgencyPhone, adopAgencyContactName, adopAgencyContactEmail, errors } =
-    content;
-
-  expect(generatedContent.section).toEqual(section);
-  expect(generatedContent.title).toEqual(title);
-  expect(generatedContent.adopAgencyName).toEqual(adopAgencyName);
-  expect(generatedContent.adopAgencyPhone).toEqual(adopAgencyPhone);
-  expect(generatedContent.adopAgencyContactName).toEqual(adopAgencyContactName);
-  expect(generatedContent.adopAgencyContactEmail).toEqual(adopAgencyContactEmail);
-  expect(generatedContent.errors).toEqual(errors);
 };
 
 const commonContent = { language: EN } as CommonContent;
 
 describe('occupation content', () => {
   it('should return the correct content for language = en', () => {
-    langAssertions(EN, enContent);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   it('should return the correct content for language = cy', () => {
-    langAssertions(CY, cyContent);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   it('should have an adopAgencyOrLaName text input field', () => {

@@ -28,12 +28,12 @@ const en = content => ({
   },
 });
 
-const cy = content => ({
+const cy: typeof en = content => ({
   section: 'Manylion y plentyn',
   title: 'Dewiswch lys teulu',
   findFamilyCourtParagraph1:
     'Efallai cynhelir gwrandawiadau llys sy’n ymwneud â’ch cais i fabwysiadu. Efallai bydd y rheini biolegol yn bresennol yn y gwrandawiadau hyn. Nid oes rhaid ichi fynychu’r gwrandawiadau hyn.',
-  findFamilyCourtParagraph2: `You have told us that the court which issued the placement neuder was <b>${content.userCase?.placementOrders[0]?.placementOrderCourt}</b>.`,
+  findFamilyCourtParagraph2: `Rydych wedi dweud wrthym mai’r llys a gyhoeddodd y gorchymyn lleoli oedd <b>${content.userCase?.placementOrders[0]?.placementOrderCourt}</b>.`,
   findFamilyCourt: 'A ydych eisiau i’r gwrandawiadau cael eu gwrando yn yr un llys?',
   findFamilyCourtHint: 'Dylech drafod hyn gyda’ch gweithiwr cymdeithasol neu’ch asiantaeth fabwysiadu.',
   familyCourtNameParagraph1:

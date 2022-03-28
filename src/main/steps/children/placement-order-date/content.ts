@@ -20,7 +20,7 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
+const cy: typeof en = () => ({
   section: 'Manylion y plentyn',
   label: 'Pa ddyddiad sydd ar y gorchymyn lleoli?',
   hint: 'Er enghraifft, 31 3 2020',

@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
@@ -5,6 +6,44 @@ import { CommonContent, generatePageContent } from '../../common/common.content'
 import { generateContent } from './content';
 
 jest.mock('../../../app/form/validation');
+
+const enContent = {
+  section: "The child's details",
+  title: "What is the child's full name?",
+  line1:
+    "Enter the child's full name, as it's written on their birth certificate. Ask the adoption agency or social worker if you're not sure.",
+  firstName: 'First names',
+  firstNameHint: '(Include any given or middle names)',
+  lastName: 'Last names',
+  lastNameHint: '(Include surname or family names)',
+  errors: {
+    childrenFirstName: {
+      required: "Enter the child's first names",
+    },
+    childrenLastName: {
+      required: "Enter the child's last names",
+    },
+  },
+};
+
+const cyContent = {
+  section: 'Manylion y plentyn',
+  title: 'Beth yw enw llawn y plentyn?',
+  line1:
+    'Nac ydwdwch enw llawn y plentyn, fel y mae wedi’i ysgrifennu ar eu tystysgrif geni. Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
+  firstName: 'Enwau cyntaf',
+  firstNameHint: '(Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol)',
+  lastName: 'Cyfenwau',
+  lastNameHint: '(Cofiwch gynnwys cyfenw neu enwau teuluol)',
+  errors: {
+    childrenFirstName: {
+      required: 'Nac ydwdwch enw(au) cyntaf y plentyn',
+    },
+    childrenLastName: {
+      required: 'Nac ydwdwch gyfenw(au)’r plentyn',
+    },
+  },
+};
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('children full-name content', () => {
@@ -19,46 +58,19 @@ describe('children full-name content', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual("The child's details");
-    expect(generatedContent.title).toEqual("What is the child's full name?");
-    expect(generatedContent.line1).toEqual(
-      "Enter the child's full name, as it's written on their birth certificate. Ask the adoption agency or social worker if you're not sure."
-    );
-    expect(generatedContent.firstName).toEqual('First names');
-    expect(generatedContent.firstNameHint).toEqual('(Include any given or middle names)');
-    expect(generatedContent.lastName).toEqual('Last names');
-    expect(generatedContent.lastNameHint).toEqual('(Include surname or family names)');
-    expect((generatedContent.errors as any).childrenFirstName.required).toEqual("Enter the child's first names");
-    expect((generatedContent.errors as any).childrenLastName.required).toEqual("Enter the child's last names");
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual("The child's details (in welsh)");
-    expect(generatedContent.title).toEqual("What is the child's full name? (in welsh)");
-    expect(generatedContent.line1).toEqual(
-      "Enter the child's full name, as it's written on their birth certificate. Ask the adoption agency or social worker if you're not sure. (in welsh)"
-    );
-    expect(generatedContent.firstName).toEqual('First names (in welsh)');
-    expect(generatedContent.firstNameHint).toEqual('(Include any given or middle names) (in welsh)');
-    expect(generatedContent.lastName).toEqual('Last names (in welsh)');
-    expect(generatedContent.lastNameHint).toEqual('(Include surname or family names) (in welsh)');
-    expect((generatedContent.errors as any).childrenFirstName.required).toEqual(
-      "Enter the child's first names (in welsh)"
-    );
-    expect((generatedContent.errors as any).childrenLastName.required).toEqual(
-      "Enter the child's last names (in welsh)"
-    );
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain childrenFirstName field', () => {
     const childrenFirstNameField = fields.childrenFirstName as FormOptions;
     expect(childrenFirstNameField.type).toBe('text');
     expect(childrenFirstNameField.classes).toBe('govuk-label');
-    expect((childrenFirstNameField.label as Function)(generatedContent)).toBe('First names');
-    expect(((childrenFirstNameField as FormInput).hint as Function)(generatedContent)).toBe(
-      '(Include any given or middle names)'
-    );
+    expect((childrenFirstNameField.label as Function)(generatedContent)).toBe(enContent.firstName);
+    expect(((childrenFirstNameField as FormInput).hint as Function)(generatedContent)).toBe(enContent.firstNameHint);
     expect(childrenFirstNameField.labelSize).toBe(null);
     expect(childrenFirstNameField.validator).toBe(isFieldFilledIn);
   });
@@ -67,10 +79,8 @@ describe('children full-name content', () => {
     const childrenLastNameField = fields.childrenLastName as FormOptions;
     expect(childrenLastNameField.type).toBe('text');
     expect(childrenLastNameField.classes).toBe('govuk-label');
-    expect((childrenLastNameField.label as Function)(generatedContent)).toBe('Last names');
-    expect(((childrenLastNameField as FormInput).hint as Function)(generatedContent)).toBe(
-      '(Include surname or family names)'
-    );
+    expect((childrenLastNameField.label as Function)(generatedContent)).toBe(enContent.lastName);
+    expect(((childrenLastNameField as FormInput).hint as Function)(generatedContent)).toBe(enContent.lastNameHint);
     expect(childrenLastNameField.labelSize).toBe(null);
     expect(childrenLastNameField.validator).toBe(isFieldFilledIn);
   });

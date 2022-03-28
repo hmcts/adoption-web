@@ -12,7 +12,7 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
+const cy: typeof en = () => ({
   section: 'Manylion y plentyn',
   label: 'Pa fath o neuchymyn ydyw?',
   errors: {

@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
@@ -5,6 +6,26 @@ import { CommonContent, generatePageContent } from '../../common/common.content'
 import { generateContent } from './content';
 
 jest.mock('../../../app/form/validation');
+
+const enContent = {
+  section: "The child's details",
+  label: 'Which court made the placement order?',
+  errors: {
+    placementOrderCourt: {
+      required: 'Enter the name of the court',
+    },
+  },
+};
+
+const cyContent = {
+  section: 'Manylion y plentyn',
+  label: 'Pa lys wnaeth wneud y gorchymyn lleoli?',
+  errors: {
+    placementOrderCourt: {
+      required: 'Nac ydwdwch enw’r llys',
+    },
+  },
+};
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('children > placement-order-court content', () => {
@@ -16,19 +37,11 @@ describe('children > placement-order-court content', () => {
     },
   } as CommonContent;
   test('should return correct english content', () => {
-    const generatedContent = generateContent(commonContent);
-    expect(generatedContent.section).toBe("The child's details");
-    expect(generatedContent.label).toBe('Which court made the placement order?');
-    expect((generatedContent.errors as any).placementOrderCourt.required).toBe('Enter the name of the court');
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    const generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toBe("The child's details (in welsh)");
-    expect(generatedContent.label).toBe('Which court made the placement order? (in welsh)');
-    expect((generatedContent.errors as any).placementOrderCourt.required).toBe(
-      'Enter the name of the court (in welsh)'
-    );
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain placementOrderCourt field', () => {
@@ -38,9 +51,7 @@ describe('children > placement-order-court content', () => {
     const placementOrderCourtField = fields.placementOrderCourt as FormOptions;
     expect(placementOrderCourtField.type).toBe('text');
     expect(placementOrderCourtField.classes).toBe('govuk-label');
-    expect((placementOrderCourtField.label as Function)(generatedContent)).toBe(
-      'Which court made the placement order?'
-    );
+    expect((placementOrderCourtField.label as Function)(generatedContent)).toBe(enContent.label);
     expect((placementOrderCourtField as FormInput).value).toBe('MOCK_COURT');
     expect(placementOrderCourtField.labelSize).toBe('l');
     expect(placementOrderCourtField.attributes).toEqual({ spellcheck: false });

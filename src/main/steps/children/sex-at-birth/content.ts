@@ -21,7 +21,7 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
+const cy: typeof en = () => ({
   section: 'Manylion y plentyn',
   label: 'Beth oedd rhyw’r plentyn pan gafodd ei (g)eni?',
   male: 'Gwryw',

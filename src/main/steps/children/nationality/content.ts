@@ -8,7 +8,7 @@ import {
 } from '../../common/components/nationality';
 import { CHILDREN_NATIONALITY } from '../../urls';
 
-export const en = (nationalityContent: PageContent): Record<string, unknown> => ({
+const en = (nationalityContent: PageContent) => ({
   section: "The child's details",
   label: 'What is their nationality?',
   errors: {
@@ -21,7 +21,7 @@ export const en = (nationalityContent: PageContent): Record<string, unknown> => 
   url: CHILDREN_NATIONALITY,
 });
 
-export const cy = (nationalityContent: PageContent): Record<string, unknown> => ({
+const cy: typeof en = (nationalityContent: PageContent) => ({
   section: 'Manylion y plentyn',
   label: 'Beth yw eu cenedligrwydd?',
   errors: {

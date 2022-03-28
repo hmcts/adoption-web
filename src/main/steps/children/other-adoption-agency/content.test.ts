@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { YesOrNo } from '../../../app/case/definition';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -18,11 +19,11 @@ const en = {
 };
 
 const cy = {
-  section: 'Your adoption agency or local authority details (in Welsh)',
-  label: 'Was there another adoption agency or local authority involved in placing the child? (in Welsh)',
+  section: 'Manylion eich asiantaeth fabwysiadu neu’ch awdurdod lleol',
+  label: 'A oedd asiantaeth fabwysiadu neu awdurdod lleol arall wedi chwarae rhan mewn lleoli’r plentyn?',
   errors: {
     hasAnotherAdopAgencyOrLA: {
-      required: 'Please answer the question (in welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
 };
@@ -40,16 +41,11 @@ describe('children> other adoption agency', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual(en.section);
-    expect(generatedContent.label).toEqual(en.label);
-    expect(generatedContent.errors).toEqual(en.errors);
+    languageAssertions('en', en, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cy.section);
-    expect(generatedContent.label).toEqual(cy.label);
-    expect(generatedContent.errors).toEqual(cy.errors);
+    languageAssertions('cy', cy, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain hasAnotherAdopAgencyOrLA field', () => {
@@ -58,6 +54,7 @@ describe('children> other adoption agency', () => {
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
     expect((field.label as Function)(generatedContent)).toBe(en.label);
+    expect((field.section as Function)(generatedContent)).toBe(en.section);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesOrNo.YES);
     expect((field.values[1].label as Function)(commonContent)).toBe(commonContent.no);

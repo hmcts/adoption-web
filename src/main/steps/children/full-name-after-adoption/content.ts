@@ -20,7 +20,7 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
+const cy: typeof en = () => ({
   section: 'Manylion y plentyn',
   title: 'Beth fydd enw llawn y plentyn ar ôl mabwysiadu?',
   line1:

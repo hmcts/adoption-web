@@ -2,7 +2,7 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { isEmailValid, isFieldFilledIn, isPhoneNoValid } from '../../../app/form/validation';
 
-export const en = (): Record<string, unknown> => ({
+const en = () => ({
   section: 'Your adoption agency or local authority details',
   title: 'Adoption agency or local authority details',
   adopAgencyName: 'Name of adoption agency or local authority',
@@ -27,7 +27,7 @@ export const en = (): Record<string, unknown> => ({
   },
 });
 
-export const cy = (): Record<string, unknown> => ({
+const cy: typeof en = () => ({
   section: 'Manylion eich asiantaeth fabwysiadu neu’ch awdurdod lleol',
   title: 'Manylion yr asiantaeth fabwysiadu neu’r awdurdod lleol',
   adopAgencyName: 'Enw’r asiantaeth fabwysiadu neu’r awdurdod lleol',
