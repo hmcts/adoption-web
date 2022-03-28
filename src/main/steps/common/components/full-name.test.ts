@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../common.content';
@@ -14,10 +15,10 @@ const enContent = {
 };
 
 const cyContent = {
-  firstNames: 'First names (in Welsh)',
-  firstNamesHint: '(Include any given or middle names) (in Welsh)',
-  lastNames: 'Last names (in Welsh)',
-  lastNamesHint: '(Include surname or family names) (in Welsh)',
+  firstNames: 'Enwau cyntaf',
+  firstNamesHint: '(Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol)',
+  lastNames: 'Cyfenwau',
+  lastNamesHint: '(Cofiwch gynnwys cyfenw neu enwau teuluol)',
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
@@ -33,18 +34,11 @@ describe('common > components > full-name', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.firstNames).toEqual(enContent.firstNames);
-    expect(generatedContent.firstNamesHint).toEqual(enContent.firstNamesHint);
-    expect(generatedContent.lastNames).toEqual(enContent.lastNames);
-    expect(generatedContent.lastNamesHint).toEqual(enContent.lastNamesHint);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.firstNames).toEqual(cyContent.firstNames);
-    expect(generatedContent.firstNamesHint).toEqual(cyContent.firstNamesHint);
-    expect(generatedContent.lastNames).toEqual(cyContent.lastNames);
-    expect(generatedContent.lastNamesHint).toEqual(cyContent.lastNamesHint);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain firstNames field', () => {

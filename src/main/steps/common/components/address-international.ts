@@ -20,7 +20,7 @@ const en = manualAddressContent => ({
   },
 });
 
-const cy = manualAddressContent => ({
+const cy: typeof en = manualAddressContent => ({
   addressLine1: 'Llinell cyfeiriad 1',
   addressLine2: 'Llinell cyfeiriad 2 (Dewisol)',
   addressLine3: 'Llinell cyfeiriad 3 (Dewisol)',

@@ -2,14 +2,14 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 
-export const en = (): Record<string, unknown> => ({
+const en = () => ({
   firstNames: 'First names',
   firstNamesHint: '(Include any given or middle names)',
   lastNames: 'Last names',
   lastNamesHint: '(Include surname or family names)',
 });
 
-export const cy = (): Record<string, unknown> => ({
+const cy: typeof en = () => ({
   firstNames: 'Enwau cyntaf',
   firstNamesHint: '(Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol)',
   lastNames: 'Cyfenwau',

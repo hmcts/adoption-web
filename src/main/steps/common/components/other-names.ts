@@ -7,7 +7,7 @@ import { mapSummaryListContent } from '../../common/functions/mapSummaryListCont
 import { APPLICANT_1_OTHER_NAMES, APPLICANT_2_OTHER_NAMES } from '../../urls';
 import { CommonContent } from '../common.content';
 
-export const en = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
+const en = (fieldPrefix: FieldPrefix) => ({
   label: 'Have you ever legally been known by any other names?',
   example: 'For example, your name before marriage.',
   previousNameYes: "List each previous name separately and select 'Add'",
@@ -34,7 +34,7 @@ export const en = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
   },
 });
 
-export const cy = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
+const cy: typeof en = (fieldPrefix: FieldPrefix) => ({
   label: 'A ydych erioed wedi’ch adnabod yn gyfreithiol dan unrhyw enwau eraill?',
   example: 'Er enghraifft, eich enw cyn ichi briodi.',
   previousNameYes: 'Rhestrwch bob enw blaenorol ar wahân a dewiswch ‘Ychwanegu’',

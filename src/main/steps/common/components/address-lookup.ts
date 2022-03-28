@@ -17,7 +17,7 @@ const en = () => ({
   manualAddressUrl: '#',
 });
 
-const cy = () => ({
+const cy: typeof en = () => ({
   line1:
     'Byddwn yn anfon yr holl bapurau llys i’r cyfeiriad hwn oni bai eich bod yn ein cynghori eich bod yn hapus i’r gorchmynion llys gael eu cyflwyno arnoch trwy e-bost.',
   postcode: 'Cod post',

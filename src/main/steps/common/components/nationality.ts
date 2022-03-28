@@ -9,7 +9,7 @@ import { mapSummaryListContent } from '../functions/mapSummaryListContent';
 
 import { defaultButtons } from './common/default-buttons';
 
-export const en = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
+const en = (fieldPrefix: FieldPrefix) => ({
   label: 'What is your nationality?',
   hint: 'Select all options that are relevant to you.',
   british: 'British',
@@ -32,7 +32,7 @@ export const en = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
   },
 });
 
-export const cy = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
+const cy: typeof en = (fieldPrefix: FieldPrefix) => ({
   label: 'Beth yw eich cenedligrwydd?',
   hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
   british: 'Prydeinig',

@@ -1,6 +1,7 @@
 /* eslint-disable jest/expect-expect */
+import languageAssertions from '../../../../../test/unit/utils/languageAssertions';
 import { YesNoNotsure } from '../../../../app/case/definition';
-import { languageAssertions } from '../../test/languageAssertions';
+import { CommonContent } from '../../common.content';
 import { Radios } from '../radios';
 
 const fieldName = 'birthFatherNameOnCertificate';
@@ -44,10 +45,10 @@ const { generateContent } = new Radios({
 
 describe('steps > common > component', () => {
   it('should return correct English content', () => {
-    languageAssertions('en', enContent, generateContent);
+    languageAssertions('en', enContent, () => generateContent({ language: 'en' } as CommonContent));
   });
 
   it('should return correct Welsh content', () => {
-    languageAssertions('cy', cyContent, generateContent);
+    languageAssertions('cy', cyContent, () => generateContent({ language: 'cy' } as CommonContent));
   });
 });
