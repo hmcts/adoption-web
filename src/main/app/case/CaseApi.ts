@@ -50,7 +50,7 @@ export class CaseApi {
     }
   }
 
-  private async getCases(): Promise<CcdV1Response[]> {
+  public async getCases(): Promise<CcdV1Response[]> {
     try {
       const response = await this.axios.get<CcdV1Response[]>(
         `/citizens/${this.userDetails.id}/jurisdictions/${JURISDICTION}/case-types/${CASE_TYPE}/cases`
@@ -73,7 +73,7 @@ export class CaseApi {
     }
   }
 
-  private async createCase(serviceType: Adoption, userDetails: UserDetails): Promise<CaseWithId> {
+  public async createCase(serviceType: Adoption, userDetails: UserDetails): Promise<CaseWithId> {
     const tokenResponse: AxiosResponse<CcdTokenResponse> = await this.axios.get(
       `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
     );
