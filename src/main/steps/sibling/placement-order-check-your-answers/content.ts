@@ -74,7 +74,7 @@ const en = content => {
   };
 };
 
-const cy = content => {
+const cy: typeof en = content => {
   const cyContent = {
     section: 'Manylion y brawd/chwaer',
     for: 'ar gyfer',

@@ -10,6 +10,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: 'Sibling details',
+  label: 'Are you sure you want to remove this MOCK_TYPE for MOCK_FIRST_NAME MOCK_LAST_NAMES?',
   errors: {
     confirm: {
       required: 'Please select an answer',
@@ -18,10 +19,11 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Sibling details (in Welsh)',
+  section: 'Manylion y brawd/chwaer',
+  label: 'Ydych chi’n siŵr eich bod eisiau dileu’r MOCK_TYPE hwn ar gyfer MOCK_TYPE?',
   errors: {
     confirm: {
-      required: 'Please select an answer (in welsh)',
+      required: 'Dewiswch ateb os gwelwch yn dda',
     },
   },
 };

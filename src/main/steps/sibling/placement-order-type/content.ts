@@ -14,7 +14,7 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
+const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
   label: 'Pa fath o neuchymyn ydyw?',
   errors: {

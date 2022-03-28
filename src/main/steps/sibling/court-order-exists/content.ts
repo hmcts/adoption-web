@@ -15,7 +15,7 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
+const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
   label:
     'A oes gorchymyn llys mewn lle ar gyfer unrhyw un o frodyr/chwiorydd neu hanner frodyr/hanner chwiorydd y plentyn?',

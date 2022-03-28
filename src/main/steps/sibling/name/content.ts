@@ -22,15 +22,15 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
+const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
   title: 'Pa frodyr/chwiorydd neu hanner brodyr/hanner chwiorydd sydd â gorchymyn llys mewn lle?',
   line1:
     'Mae arnom angen manylion yr holl frodyr/chwiorydd neu’r hanner brodyr/hanner chwiorydd sydd â gorchymyn llys mewn lle. Gofynnir ichi lenwi’r manylion i bob un ohonynt fesul un.',
   firstName: 'Enwau cyntaf',
-  firstNameHint: '((Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol))',
+  firstNameHint: '(Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol)',
   lastName: 'Cyfenwau',
-  lastNameHint: '((Cofiwch gynnwys cyfenw neu enwau teuluol))',
+  lastNameHint: '(Cofiwch gynnwys cyfenw neu enwau teuluol)',
   errors: {
     siblingFirstName: {
       required: 'Nac ydwdwch enw(au) cyntaf y plentyn',

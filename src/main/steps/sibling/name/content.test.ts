@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
@@ -25,20 +26,20 @@ const enContent = {
   },
 };
 const cyContent = {
-  section: 'Sibling details (in Welsh)',
-  title: 'Which siblings or half siblings have a court order in place? (in welsh)',
+  section: 'Manylion y brawd/chwaer',
+  title: 'Pa frodyr/chwiorydd neu hanner brodyr/hanner chwiorydd sydd â gorchymyn llys mewn lle?',
   line1:
-    "Enter the child's full name, as it's written on their birth certificate. Ask the adoption agency or social worker if you're not sure. (in welsh)",
-  firstName: 'First names (in welsh)',
-  firstNameHint: '(Include any given or middle names) (in welsh)',
-  lastName: 'Last names (in welsh)',
-  lastNameHint: '(Include surname or family names) (in welsh)',
+    'Mae arnom angen manylion yr holl frodyr/chwiorydd neu’r hanner brodyr/hanner chwiorydd sydd â gorchymyn llys mewn lle. Gofynnir ichi lenwi’r manylion i bob un ohonynt fesul un.',
+  firstName: 'Enwau cyntaf',
+  firstNameHint: '(Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol)',
+  lastName: 'Cyfenwau',
+  lastNameHint: '(Cofiwch gynnwys cyfenw neu enwau teuluol)',
   errors: {
     siblingFirstName: {
-      required: "Enter the child's first names (in welsh)",
+      required: 'Nac ydwdwch enw(au) cyntaf y plentyn',
     },
     siblingLastNames: {
-      required: "Enter the child's last names (in welsh)",
+      required: 'Nac ydwdwch gyfenw(au)’r plentyn',
     },
   },
 };
@@ -56,24 +57,11 @@ describe('sibling > full-name', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.title).toEqual(enContent.title);
-    expect(generatedContent.firstName).toEqual(enContent.firstName);
-    expect(generatedContent.firstNameHint).toEqual(enContent.firstNameHint);
-    expect(generatedContent.lastName).toEqual(enContent.lastName);
-    expect(generatedContent.lastNameHint).toEqual(enContent.lastNameHint);
-    expect(generatedContent.errors).toEqual(enContent.errors);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.title).toEqual(cyContent.title);
-    expect(generatedContent.firstName).toEqual(cyContent.firstName);
-    expect(generatedContent.firstNameHint).toEqual(cyContent.firstNameHint);
-    expect(generatedContent.lastName).toEqual(cyContent.lastName);
-    expect(generatedContent.lastNameHint).toEqual(cyContent.lastNameHint);
-    expect(generatedContent.errors).toEqual(cyContent.errors);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain firstNames field', () => {

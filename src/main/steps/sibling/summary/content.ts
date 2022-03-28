@@ -38,7 +38,7 @@ const en = content => {
   };
 };
 
-const cy = content => {
+const cy: typeof en = content => {
   const cyContent = {
     section: SECTION_IN_WELSH,
     title: 'Gorchmynion eisoes mewn lle ar gyfer brodyr/chwiorydd a hanner brodyr/hanner chwiorydd',

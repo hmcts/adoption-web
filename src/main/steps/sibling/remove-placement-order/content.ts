@@ -32,11 +32,11 @@ const en = content => ({
   },
 });
 
-const cy = content => ({
+const cy: typeof en = content => ({
   section: SECTION_IN_WELSH,
-  label: `Are you sure you want to remove this ${getPlacementOrderType(
+  label: `Ydych chi’n siŵr eich bod eisiau dileu’r ${getPlacementOrderType(
     content.userCase
-  )} ar gyfer ${getPlacementOrderType(content.userCase)}?`,
+  )} hwn ar gyfer ${getPlacementOrderType(content.userCase)}?`,
   errors: {
     confirm: {
       required: 'Dewiswch ateb os gwelwch yn dda',

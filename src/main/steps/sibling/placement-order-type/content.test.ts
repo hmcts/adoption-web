@@ -18,11 +18,11 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Sibling details (in Welsh)',
-  label: 'What type of order is it? (in Welsh)',
+  section: 'Manylion y brawd/chwaer',
+  label: 'Pa fath o neuchymyn ydyw?',
   errors: {
     placementOrderType: {
-      required: 'Please answer the question (in Welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
 };

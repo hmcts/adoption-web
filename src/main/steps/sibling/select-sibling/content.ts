@@ -22,7 +22,7 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
+const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
   label: 'Pa frawd/chwaer neu hanner frawd/hanner chwaer ydych chi eisiau gorchymyn llys ar eu cyfer?',
   addAnotherSibling: 'Ychwanegu brawd/chwaer neu hanner frawd/hanner chwaer gwahanol',

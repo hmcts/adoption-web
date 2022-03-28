@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
@@ -23,17 +24,17 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Sibling details (in Welsh)',
-  title: 'Orders already in place for siblings and half-siblings (in welsh)',
-  placementOrder: 'Placement Order (in welsh)',
-  change: 'Change (in welsh)',
-  remove: 'Remove (in welsh)',
-  changeName: 'Change name (in welsh)',
-  label: 'Do you want to add another order for a sibling or half-sibling? (in welsh)',
-  hint: 'For example, a care order or supervision order. Your adoption agency or social worker can provide this information for you. (in welsh)',
+  section: 'Manylion y brawd/chwaer',
+  title: 'Gorchmynion eisoes mewn lle ar gyfer brodyr/chwiorydd a hanner brodyr/hanner chwiorydd',
+  placementOrder: 'Gorchymyn Lleoli',
+  change: 'Newid',
+  remove: 'Dileu',
+  changeName: 'Newid enw',
+  label: 'A ydych eisiau ychwanegu gorchymyn arall ar gyfer brawd/chwaer neu hanner frawd/hanner chwaer?',
+  hint: 'Er enghraifft, gorchymyn gofal neu neuchymyn goruchwylio. Gall eich gweithiwr cymdeithasol neu’ch asiantaeth fabwysiadau ddarparu’r wybodaeth hon ichi.',
   errors: {
     addAnotherSiblingPlacementOrder: {
-      required: 'Please select an answer (in welsh)',
+      required: 'Dewiswch ateb os gwelwch yn dda',
     },
   },
 };
@@ -60,29 +61,11 @@ describe('sibling > placement-order-summary content', () => {
   } as CommonContent;
 
   test('should return correct english content', () => {
-    const generatedContent = generateContent(commonContent);
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.title).toEqual(enContent.title);
-    expect(generatedContent.placementOrder).toEqual(enContent.placementOrder);
-    expect(generatedContent.change).toEqual(enContent.change);
-    expect(generatedContent.remove).toEqual(enContent.remove);
-    expect(generatedContent.changeName).toEqual(enContent.changeName);
-    expect(generatedContent.label).toEqual(enContent.label);
-    expect(generatedContent.hint).toEqual(enContent.hint);
-    expect(generatedContent.errors).toEqual(enContent.errors);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    const generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.title).toEqual(cyContent.title);
-    expect(generatedContent.placementOrder).toEqual(cyContent.placementOrder);
-    expect(generatedContent.change).toEqual(cyContent.change);
-    expect(generatedContent.remove).toEqual(cyContent.remove);
-    expect(generatedContent.changeName).toEqual(cyContent.changeName);
-    expect(generatedContent.label).toEqual(cyContent.label);
-    expect(generatedContent.hint).toEqual(cyContent.hint);
-    expect(generatedContent.errors).toEqual(cyContent.errors);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain addAnotherSiblingPlacementOrder field', () => {
