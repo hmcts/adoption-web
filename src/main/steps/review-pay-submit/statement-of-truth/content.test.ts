@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable jest/expect-expect */
-import { ApplyingWith } from '../../../app/case/definition';
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
@@ -9,7 +8,6 @@ import { generateContent } from './content';
 
 jest.mock('../../../app/form/validation');
 
-const CY = 'cy';
 const EN = 'en';
 
 const enContent = {
@@ -44,77 +42,45 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Review your application, pay and send (in Welsh)',
-  title: 'Statement of truth (in Welsh)',
+  section: 'Adolygu eich cais, talu a’i anfon',
+  title: 'Datganiad Gwirionedd',
   statement:
-    'I understand that proceedings for contempt of court may be brought against anyone who makes, or causes to be made, a false statement in a document verified by a statement of truth without an honest belief in the truth. (in Welsh)',
+    'Deallaf y gellir dwyn achos dirmyg llys yn erbyn unrhyw un sy’n gwneud datganiad anwir, neu sy’n achosi i ddatganiad anwir gael ei wneud mewn dogfen a ddilysir gan ddatganiad gwirionedd heb gredu’n onest ei fod yn wir.',
   reviewBeforeSubmit:
-    "Once you submit your application, you cannot make any further changes. You can select 'Save as draft' to review your application before you submit. (in Welsh)",
+    'Unwaith y byddwch yn cyflwyno’ch cais, ni allwch wneud unrhyw newidiadau pellach. Gallwch ddewis ‘Cadw fel drafft’ i adolygu eich cais cyn ichi ei gyflwyno.',
   applicant1IBelieveApplicationIsTrue:
-    'I believe that the facts stated in this form and any additional documents are true. (in Welsh)',
+    'Rwy’n credu bod y ffeithiau a nodir yn y ffurflen hon, ac ar unrhyw ddogfennau ychwanegol, yn wir.',
   applicant1IBelieveApplicationIsTrue2:
-    'The primary applicant believes that the facts stated in this form and any additional documents are true. (in Welsh)',
-  applicant2IBelieveApplicationIsTrue: 'I am authorised by the second applicant to sign this statement. (in Welsh)',
-  applicant1SotFullName: 'Enter your full name (in Welsh)',
-  applicant2SotFullName: "Enter the second applicant's full name (if applicable) (in Welsh)",
-  confirm: 'Confirm (in Welsh)',
+    'Mae’r prif geisydd yn credu bod y ffeithiau a nodir yn y ffurflen hon ac unrhyw ddogfennau ychwanegol yn wir.',
+  applicant2IBelieveApplicationIsTrue: 'Fe’m hawdurdodir gan yr ail geisydd i lofnodi’r datganiad hwn.',
+  applicant1SotFullName: 'Nac ydwdwch eich enw llawn',
+  applicant2SotFullName: 'Nac ydwdwch enw llawn yr ail geisydd (os yw’n berthnasol)',
+  confirm: 'Cadarnhau',
   errors: {
     applicant1IBelieveApplicationIsTrue: {
-      required: 'Confirm your statement of truth (in Welsh)',
+      required: 'Cadarnhewch eich datganiad gwirionedd',
     },
     applicant2IBelieveApplicationIsTrue: {
-      required: 'Confirm your statement of truth (in Welsh)',
+      required: 'Cadarnhewch eich datganiad gwirionedd',
     },
     applicant1SotFullName: {
-      required: 'Enter a full name (in Welsh)',
+      required: 'Nac ydwdwch enw llawn',
     },
     applicant2SotFullName: {
-      required: 'Enter a full name (in Welsh)',
+      required: 'Nac ydwdwch enw llawn',
     },
   },
-};
-
-const langAssertions = (language, content) => {
-  const generatedContent = generateContent({
-    language,
-    userCase: { applyingWith: ApplyingWith.ALONE },
-  } as CommonContent);
-  const {
-    section,
-    title,
-    statement,
-    reviewBeforeSubmit,
-    applicant1IBelieveApplicationIsTrue,
-    applicant1IBelieveApplicationIsTrue2,
-    applicant2IBelieveApplicationIsTrue,
-    applicant1SotFullName,
-    applicant2SotFullName,
-    confirm,
-    errors,
-  } = content;
-
-  expect(generatedContent.section).toEqual(section);
-  expect(generatedContent.title).toEqual(title);
-  expect(generatedContent.statement).toEqual(statement);
-  expect(generatedContent.reviewBeforeSubmit).toEqual(reviewBeforeSubmit);
-  expect(generatedContent.applicant1IBelieveApplicationIsTrue).toEqual(applicant1IBelieveApplicationIsTrue);
-  expect(generatedContent.applicant1IBelieveApplicationIsTrue2).toEqual(applicant1IBelieveApplicationIsTrue2);
-  expect(generatedContent.applicant2IBelieveApplicationIsTrue).toEqual(applicant2IBelieveApplicationIsTrue);
-  expect(generatedContent.applicant1SotFullName).toEqual(applicant1SotFullName);
-  expect(generatedContent.applicant2SotFullName).toEqual(applicant2SotFullName);
-  expect(generatedContent.confirm).toEqual(confirm);
-  expect(generatedContent.errors).toEqual(errors);
 };
 
 const commonContent = { language: EN } as CommonContent;
 
 describe('occupation content', () => {
   it('should return the correct content for language = en', () => {
-    langAssertions(EN, enContent);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   it('should return the correct content for language = cy', () => {
-    langAssertions(CY, cyContent);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   it('should have an applicant1IBelieveApplicationIsTrue checkboxes field', () => {
@@ -197,3 +163,4 @@ describe('occupation content', () => {
     expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: EN }))).toBe('Save as draft');
   });
 });
+/* eslint-enable @typescript-eslint/ban-types */

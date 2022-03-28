@@ -4,7 +4,7 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 
-export const en = (): Record<string, unknown> => ({
+const en = () => ({
   section: 'Review your application, pay and send',
   title: 'Statement of truth',
   statement:
@@ -35,7 +35,7 @@ export const en = (): Record<string, unknown> => ({
   },
 });
 
-export const cy = (): Record<string, unknown> => ({
+const cy: typeof en = () => ({
   section: 'Adolygu eich cais, talu a’i anfon',
   title: 'Datganiad Gwirionedd',
   statement:
