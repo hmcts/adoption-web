@@ -30,7 +30,7 @@ cp /zap/activescanReport.xml zap_report/
 
 zap-cli --zap-url http://0.0.0.0 -p 1001 alerts -l Low --exit-code False
 curl --fail http://0.0.0.0:1001/OTHER/core/other/jsonreport/?formMethod=GET --output report.json
-cp *.* activescanReport/
+cp *.* zap_report/
 
 echo
 echo ZAP Security vulnerabilities were found that were not ignored
