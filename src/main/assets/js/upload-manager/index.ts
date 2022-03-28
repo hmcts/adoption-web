@@ -34,7 +34,10 @@ const initUploadManager = (): void => {
       maxTotalFileSize: 10485760,
       maxNumberOfFiles: 10,
 //       allowedFileTypes: ['image/jpeg', 'image/tiff', 'image/png', 'application/pdf', 'image/bmp'],
-      allowedFileTypes: ['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf'],
+      allowedFileTypes: [
+        'application/msword',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'application/pdf'],
     },
   });
 
