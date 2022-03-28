@@ -25,10 +25,10 @@ const en = () => ({
     'The court processing fee for an application to adopt is <b>£183</b>. Payment is due once the application is complete and ready to submit to the court.',
 });
 
-const cy = () => ({
+const cy: typeof en = () => ({
   title: 'Gwneud cais i fabwysiadu plentyn a leolwyd dan eich gofal',
   line1:
-    'You can apply to adopt a child who\'s in your care following a <a class="govuk-link" href="/eligibility/start">court placement neuder.</a>',
+    'Gallwch wneud cais i fabwysiadu plentyn sydd dan eich gofal yn dilyn <a class=”govuk-link” href=”/eligibility/start”>gorchymyn lleoli gan lys.</a>',
   line2:
     'Rhaid bod y plentyn wedi byw gyda chi am o leiaf 10 wythnos cyn ichi wneud cais. Ni fyddwch yn gallu cyflwyno’ch cais nes bod y cyfnod o 10 wythnos wedi pasio.',
   line3:

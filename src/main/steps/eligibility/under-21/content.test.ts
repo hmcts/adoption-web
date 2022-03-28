@@ -22,12 +22,12 @@ const enContent = {
 
 const cyContent = {
   section: 'Eligibility to apply to adopt (in Welsh)',
-  label: 'Are you, and the other applicant if relevant, both aged 21 or over? (in welsh)',
-  under21Yes: 'You must be 21 or over to adopt a child. This includes any other applicant. (in welsh)',
-  moreInfo: 'More about adoption (in welsh)',
+  label: 'Ydych chi, a’r ceisydd arall os yw’n berthnasol, yn 21 oed neu’n hŷn?',
+  under21Yes: 'Rhaid i chi fod yn 21 oed o leiaf i fabwysiadu plentyn. Mae hyn yn cynnwys unrhyw geisydd arall.',
+  moreInfo: 'Mwy o wybodaeth am fabwysiadu',
   errors: {
     under21Eligible: {
-      required: 'Please answer the question (in welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
 };
@@ -63,6 +63,9 @@ describe('eligibility > under-21 > content', () => {
     expect(field.values[0].value).toBe(YesNoNotsure.YES);
     expect((field.values[1].label as Function)(commonContent)).toBe(commonContent.no);
     expect(field.values[1].value).toBe(YesNoNotsure.NO);
+    expect((field.values[1].conditionalText as Function)(generatedContent)).toBe(
+      '<p class="govuk-label">You must be 21 or over to adopt a child. This includes any other applicant.</p> <p class="govuk-label"><a href="https://www.gov.uk/child-adoption">More about adoption</a></p>'
+    );
     expect(field.validator).toBe(isFieldFilledIn);
   });
 
