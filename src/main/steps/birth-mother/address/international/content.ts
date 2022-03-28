@@ -14,7 +14,7 @@ const en = internationalAddressContent => ({
   },
 });
 
-const cy = internationalAddressContent => ({
+const cy: typeof en = internationalAddressContent => ({
   section: 'Manylion y fam fiolegol',
   title: 'Beth yw cyfeiriad olaf hysbys y fam fiolegol?',
   errors: {

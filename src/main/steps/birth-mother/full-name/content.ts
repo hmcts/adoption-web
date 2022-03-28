@@ -2,7 +2,7 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../app/form/Form';
 import { form as fullNameForm, generateContent as fullNameGenerateContent } from '../../common/components/full-name';
 
-export const en = (): Record<string, unknown> => ({
+const en = () => ({
   section: "Birth mother's details",
   title: "What is the full name of the child's birth mother?",
   line1:
@@ -17,7 +17,7 @@ export const en = (): Record<string, unknown> => ({
   },
 });
 
-export const cy = (): Record<string, unknown> => ({
+const cy: typeof en = () => ({
   section: 'Manylion y fam fiolegol',
   title: 'Beth yw enw llawn mam fiolegol y plentyn?',
   line1:

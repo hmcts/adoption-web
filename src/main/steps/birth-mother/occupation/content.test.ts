@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/ban-types, jest/expect-expect */
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
 jest.mock('../../../app/form/validation');
-const CY = 'cy';
+
 const EN = 'en';
 const enContent = {
   section: "Birth mother's details",
@@ -19,33 +20,25 @@ const enContent = {
 };
 
 const cyContent = {
-  section: "Birth mother's details (in welsh)",
-  label: "What is the occupation of the child's birth mother? (in welsh)",
-  hint: "Ask the adoption agency or social worker if you're not sure. If the occupation is not known, you can type 'unknown'. (in welsh)",
+  section: 'Manylion y fam fiolegol',
+  label: 'Beth yw galwedigaeth mam fiolegol y plentyn?',
+  hint: 'Gofynnwch i’ch asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr. Os yw’r galwedigaeth yn anhysbys, gallwch deipio ‘anhysbys’.',
   errors: {
     birthMotherOccupation: {
-      required: 'Enter an occupation (in welsh)',
+      required: 'Nac ydwdwch alwedigaeth',
     },
   },
-};
-
-const langAssertions = (language, content, generateFn) => {
-  const generatedContent = generateFn({ language } as CommonContent);
-
-  Object.entries(content).forEach(([key, value]) => {
-    expect(generatedContent[key]).toEqual(value);
-  });
 };
 
 const commonContent = { language: EN } as CommonContent;
 
 describe('birth mother > occupation content', () => {
   it('should return the correct content for language = en', () => {
-    langAssertions(EN, enContent, generateContent);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   it('should return the correct content for language = cy', () => {
-    langAssertions(CY, cyContent, generateContent);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   it('should have an occupation text input field', () => {

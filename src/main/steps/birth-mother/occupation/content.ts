@@ -2,7 +2,7 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 
-export const en = (): Record<string, unknown> => ({
+const en = () => ({
   section: "Birth mother's details",
   label: "What is the occupation of the child's birth mother?",
   hint: "Ask the adoption agency or social worker if you're not sure. If the occupation is not known, you can type 'unknown'.",
@@ -13,7 +13,7 @@ export const en = (): Record<string, unknown> => ({
   },
 });
 
-export const cy = (): Record<string, unknown> => ({
+const cy: typeof en = () => ({
   section: 'Manylion y fam fiolegol',
   label: 'Beth yw galwedigaeth mam fiolegol y plentyn?',
   hint: 'Gofynnwch i’ch asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr. Os yw’r galwedigaeth yn anhysbys, gallwch deipio ‘anhysbys’.',
