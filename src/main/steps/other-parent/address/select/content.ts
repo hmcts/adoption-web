@@ -17,7 +17,7 @@ const en = selectAddressContent => ({
   cantFindAddressUrl: OTHER_PARENT_MANUAL_ADDRESS,
 });
 
-const cy = selectAddressContent => ({
+const cy: typeof en = selectAddressContent => ({
   section: SECTION_IN_WELSH,
   title: 'Beth yw eu cyfeiriad?',
   errors: {

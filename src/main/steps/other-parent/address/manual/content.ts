@@ -18,7 +18,7 @@ const en = manualAddressContent => ({
   internationalAddressUrl: OTHER_PARENT_INTERNATIONAL_ADDRESS,
 });
 
-const cy = manualAddressContent => ({
+const cy: typeof en = manualAddressContent => ({
   section: SECTION_IN_WELSH,
   title: 'Beth yw cyfeiriad olaf hysbys y rhiant arall?',
   errors: {

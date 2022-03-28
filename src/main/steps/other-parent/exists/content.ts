@@ -17,7 +17,7 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
+const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
   label: 'A oes unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn?',
   hint: 'Oni bai am y fam a’r tad biolegol. Er enghraifft, llys-riant.',

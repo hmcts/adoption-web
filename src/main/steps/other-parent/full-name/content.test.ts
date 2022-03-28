@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 import { form as fullNameForm } from '../../common/components/full-name';
@@ -21,15 +22,15 @@ const enContent = {
 };
 
 const cyContent = {
-  section: "Other parent's details (in Welsh)",
-  title: 'What is the full name of the other person with parental responsibility? (in Welsh)',
-  line1: 'If you are not sure, ask your social worker or adoption agency for help. (in Welsh)',
+  section: 'Manylion y rhiant arall',
+  title: 'Beth yw enw llawn yr unigolyn arall sydd â chyfrifoldeb rhiant?',
+  line1: 'Os nad ydych yn siŵr, holwch gyda’ch gweithiwr cymdeithasol, neu’ch asiantaeth fabwysiadu i gael cymorth.',
   errors: {
     otherParentFirstNames: {
-      required: 'Enter their first names (in Welsh)',
+      required: 'Nac ydwdwch eu henw(au) cyntaf',
     },
     otherParentLastNames: {
-      required: 'Enter their last names (in Welsh)',
+      required: 'Nac ydwdwch eu cyfenw(au)',
     },
   },
 };
@@ -48,18 +49,11 @@ describe('other-parent > full-name > content', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.title).toEqual(enContent.title);
-    expect(generatedContent.line1).toEqual(enContent.line1);
-    expect(generatedContent.errors).toEqual(enContent.errors);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
-  test('should return correct Welsh content', () => {
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.title).toEqual(cyContent.title);
-    expect(generatedContent.line1).toEqual(cyContent.line1);
-    expect(generatedContent.errors).toEqual(cyContent.errors);
+  test('should return correct welsh content', () => {
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain firstNames field', () => {

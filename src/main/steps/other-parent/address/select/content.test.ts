@@ -1,20 +1,26 @@
+import languageAssertions from '../../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields } from '../../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../../common/common.content';
 import {
   generateContent as generateSelectAddressContent,
   form as selectAddressForm,
 } from '../../../common/components/address-select';
+import { OTHER_PARENT_MANUAL_ADDRESS, OTHER_PARENT_POSTCODE_LOOKUP } from '../../../urls';
 
 import { generateContent } from './content';
 
 const enContent = {
   section: "Other parent's details",
   title: "What's their address?",
+  changePostCodeUrl: OTHER_PARENT_POSTCODE_LOOKUP,
+  cantFindAddressUrl: OTHER_PARENT_MANUAL_ADDRESS,
 };
 
 const cyContent = {
-  section: "Other parent's details (in Welsh)",
-  title: "What's their address? (in Welsh)",
+  section: 'Manylion y rhiant arall',
+  title: 'Beth yw eu cyfeiriad?',
+  changePostCodeUrl: OTHER_PARENT_POSTCODE_LOOKUP,
+  cantFindAddressUrl: OTHER_PARENT_MANUAL_ADDRESS,
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
@@ -28,25 +34,32 @@ describe('otherParent > address > select > content', () => {
 
   test('should return correct english content', () => {
     const selectAddressContent = generateSelectAddressContent(commonContent);
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.title).toEqual(enContent.title);
-    expect(generatedContent.errors).toEqual({
-      otherParentSelectAddress: (selectAddressContent.errors as any).selectAddress,
-    });
-    expect(generatedContent.changePostCodeUrl).toEqual('/other-parent/address/lookup');
-    expect(generatedContent.cantFindAddressUrl).toEqual('/other-parent/address/manual');
+    const selectAddressErrors = selectAddressContent.errors as Record<string, unknown>;
+    languageAssertions(
+      'en',
+      {
+        ...enContent,
+        errors: {
+          otherParentSelectAddress: selectAddressErrors.selectAddress,
+        },
+      },
+      () => generateContent(commonContent)
+    );
   });
 
   test('should return correct welsh content', () => {
     const selectAddressContent = generateSelectAddressContent({ ...commonContent, language: 'cy' });
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.title).toEqual(cyContent.title);
-    expect(generatedContent.errors).toEqual({
-      otherParentSelectAddress: (selectAddressContent.errors as any).selectAddress,
-    });
-    expect(generatedContent.changePostCodeUrl).toEqual('/other-parent/address/lookup');
-    expect(generatedContent.cantFindAddressUrl).toEqual('/other-parent/address/manual');
+    const selectAddressErrors = selectAddressContent.errors as Record<string, unknown>;
+    languageAssertions(
+      'cy',
+      {
+        ...cyContent,
+        errors: {
+          otherParentSelectAddress: selectAddressErrors.selectAddress,
+        },
+      },
+      () => generateContent({ ...commonContent, language: 'cy' })
+    );
   });
 
   test('should contain otherParentSelectAddress field', () => {
