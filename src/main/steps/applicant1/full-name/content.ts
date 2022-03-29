@@ -4,7 +4,7 @@ import { FormContent, FormFields } from '../../../app/form/Form';
 import { CommonContent } from '../../../steps/common/common.content';
 import { form as fullNameForm, generateContent as fullNameGenerateContent } from '../../common/components/full-name';
 
-export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
+const en = ({ userCase }: CommonContent) => {
   const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant' : 'First applicant';
   return {
     section,
@@ -20,7 +20,7 @@ export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
   };
 };
 
-export const cy: typeof en = ({ userCase }: CommonContent) => {
+const cy: typeof en = ({ userCase }: CommonContent) => {
   const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Ceisydd' : 'Ceisydd cyntaf';
   return {
     section,

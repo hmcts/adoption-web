@@ -18,7 +18,7 @@ import {
   uploadedDocumentSummaryList,
 } from './utils';
 
-export const enContent = {
+const enContent = {
   section: 'Review your application',
   title: 'Review your answers',
   change: 'Change',
@@ -104,7 +104,7 @@ export const enContent = {
   },
 };
 
-const en = (content: CommonContent): Record<string, unknown> => {
+const en = (content: CommonContent) => {
   const userCase = content.userCase!;
   return {
     ...enContent,
@@ -128,7 +128,7 @@ const en = (content: CommonContent): Record<string, unknown> => {
   };
 };
 
-export const cyContent = {
+const cyContent: typeof enContent = {
   section: 'Review your application (in welsh)',
   title: 'Review your answers (in welsh)',
   change: 'Change (in welsh)',
@@ -213,13 +213,13 @@ export const cyContent = {
         'You can only submit 10 weeks after the date the child started living continuously with you (in welsh)',
     },
   },
-  language: 'cy',
 };
 
-const cy = (content: CommonContent): Record<string, unknown> => {
+const cy: typeof en = (content: CommonContent) => {
   const userCase = content.userCase!;
   return {
     ...cyContent,
+    language: content.language,
     sections: [
       applicationSummaryList(cyContent, userCase),
       adoptionAgencySummaryList(cyContent, userCase),

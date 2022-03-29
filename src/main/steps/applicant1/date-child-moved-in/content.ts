@@ -4,7 +4,7 @@ import { FormContent } from '../../../app/form/Form';
 import { covertToDateObject } from '../../../app/form/parser';
 import { areDateFieldsFilledIn, isDateInputInvalid, isFutureDate } from '../../../app/form/validation';
 
-export const en = (): Record<string, unknown> => ({
+const en = () => ({
   section: 'Application details',
   title: 'When did the child move in with you?',
   hint: 'Enter the date when they started living with you continuously. For example, 31 3 2020.',
@@ -22,7 +22,7 @@ export const en = (): Record<string, unknown> => ({
   },
 });
 
-export const cy: typeof en = () => ({
+const cy: typeof en = () => ({
   section: 'Manylion y cais',
   title: 'Pryd wnaeth y plentyn symud i fyw gyda chi?',
   hint: 'Nac ydwdwch y dyddiad wnaethon nhw ddechrau byw gyda chi yn barhaus. Er enghraifft, 31 3 2020.',

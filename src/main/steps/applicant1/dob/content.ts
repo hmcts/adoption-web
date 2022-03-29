@@ -6,7 +6,7 @@ import { covertToDateObject } from '../../../app/form/parser';
 import { areDateFieldsFilledIn, isDateInputInvalid, isFutureDate } from '../../../app/form/validation';
 import { CommonContent } from '../../../steps/common/common.content';
 
-export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
+const en = ({ userCase }: CommonContent) => {
   const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant' : 'First applicant';
   return {
     section,
@@ -24,7 +24,8 @@ export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
     },
   };
 };
-export const cy: typeof en = ({ userCase }: CommonContent) => {
+
+const cy: typeof en = ({ userCase }: CommonContent) => {
   const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Ceisydd' : 'Ceisydd cyntaf';
   return {
     section,
