@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types, jest/expect-expect */
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -32,6 +31,7 @@ const cyContent = {
 
 const commonContent = { language: EN } as CommonContent;
 
+/* eslint-disable @typescript-eslint/ban-types */
 describe('birth mother > occupation > content', () => {
   it('should return the correct content for language = en', () => {
     languageAssertions('en', enContent, () => generateContent(commonContent));
@@ -68,4 +68,3 @@ describe('birth mother > occupation > content', () => {
     expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: EN }))).toBe('Save as draft');
   });
 });
-/* eslint-enable @typescript-eslint/ban-types, jest/expect-expect */

@@ -1,6 +1,3 @@
-/* eslint-disable jest/expect-expect */
-/* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import languageAssertions from '../../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormOptions } from '../../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../../common/common.content';
@@ -21,6 +18,7 @@ const cyContent = {
   title: 'Beth yw cyfeiriad olaf hysbys y tad biolegol?',
 };
 
+/* eslint-disable @typescript-eslint/ban-types */
 describe('birth-father > address > international > content', () => {
   const commonContent = { language: 'en', userCase: {} } as CommonContent;
   let generatedContent;

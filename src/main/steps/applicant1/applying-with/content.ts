@@ -25,6 +25,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: 'Manylion y cais',
+  section1: 'Manylion y cais',
   label: 'A ydych yn gwneud cais ar ben eich hun, neu gyda rhywun arall?',
   one: 'Rwy’n gwneud cais ar ben fy hun',
   oneHint: 'Er enghraifft, fel rhiant sengl.',

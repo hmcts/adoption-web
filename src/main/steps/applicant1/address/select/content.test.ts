@@ -1,5 +1,5 @@
 import languageAssertions from '../../../../../test/unit/utils/languageAssertions';
-import { FormContent, FormFields } from '../../../../app/form/Form';
+import { FormContent, FormFields, LanguageLookup } from '../../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../../common/common.content';
 import {
   generateContent as generateSelectAddressContent,
@@ -23,7 +23,7 @@ const cyContent = {
   cantFindAddressUrl: APPLICANT_1_MANUAL_ADDRESS,
 };
 
-/* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 describe('applicant1 > address > select > content', () => {
   const commonContent = { language: 'en', userCase: {}, addresses: [] as any[] } as CommonContent;
   let generatedContent;
@@ -84,12 +84,15 @@ describe('applicant1 > address > select > content', () => {
 
   test('should contain submit button', () => {
     const form = generatedContent.form as FormContent;
-    expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
+    expect((form.submit.text as LanguageLookup)(generatePageContent({ language: 'en' }) as Record<string, never>)).toBe(
+      'Save and continue'
+    );
   });
 
   test('should contain saveAsDraft button', () => {
     const form = generatedContent.form as FormContent;
-    expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save as draft');
+    expect(
+      (form.saveAsDraft?.text as LanguageLookup)(generatePageContent({ language: 'en' }) as Record<string, never>)
+    ).toBe('Save as draft');
   });
 });
-/* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

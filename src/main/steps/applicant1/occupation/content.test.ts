@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable jest/expect-expect */
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -54,6 +52,7 @@ const cyContent = {
 
 const commonContent = { language: 'en' } as CommonContent;
 
+/* eslint-disable @typescript-eslint/ban-types */
 describe('applicant1 > occupation > content', () => {
   it('should return the correct content for language = en', () => {
     languageAssertions('en', enContent, () => generateContent(commonContent));

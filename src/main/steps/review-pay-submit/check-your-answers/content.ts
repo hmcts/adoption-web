@@ -18,7 +18,7 @@ import {
   uploadedDocumentSummaryList,
 } from './utils';
 
-const enContent = {
+export const enContent = {
   section: 'Review your application',
   title: 'Review your answers',
   change: 'Change',

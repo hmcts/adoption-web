@@ -1,4 +1,3 @@
-/* eslint-disable jest/expect-expect */
 import languageAssertions from '../../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields } from '../../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../../common/common.content';
@@ -79,4 +78,3 @@ describe('birthFather > address > select > content', () => {
     expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save as draft');
   });
 });
-/* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

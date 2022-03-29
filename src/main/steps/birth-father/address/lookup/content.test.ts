@@ -1,4 +1,3 @@
-/* eslint-disable jest/expect-expect */
 import languageAssertions from '../../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields } from '../../../../app/form/Form';
 import { CommonContent } from '../../../common/common.content';
@@ -22,7 +21,7 @@ const cyContent = {
   manualAddressUrl: BIRTH_FATHER_MANUAL_ADDRESS,
 };
 
-/* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-types */
 describe('birthFather > address > lookup > content', () => {
   const commonContent = { language: 'en', userCase: {} } as CommonContent;
   let generatedContent;
@@ -68,4 +67,3 @@ describe('birthFather > address > lookup > content', () => {
     expect((form.submit.text as Function)(generatedContent)).toBe('Find address');
   });
 });
-/* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable jest/expect-expect */
 const mockForm = {
   form: {
     fields: { childrenNationality: { MOCK_KEY: 'MOCK_VALUE' } },

@@ -1,5 +1,5 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
-import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
+import { FormContent, FormFields, FormOptions, LanguageLookup, ValidationCheck } from '../../../app/form/Form';
 import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -49,7 +49,6 @@ const cyContent = {
   },
 };
 
-/* eslint-disable @typescript-eslint/ban-types */
 describe('applicant1 > applying-with > content', () => {
   const commonContent = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
   test('should return correct english content', () => {
@@ -61,39 +60,42 @@ describe('applicant1 > applying-with > content', () => {
   });
 
   test('should contain applyingWith field', () => {
-    const generatedContent = generateContent(commonContent);
+    const generatedContent = generateContent(commonContent) as Record<string, never>;
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const applyingWithField = fields.applyingWith as FormOptions;
     expect(applyingWithField.type).toBe('radios');
     expect(applyingWithField.classes).toBe('govuk-radios');
-    expect((applyingWithField.label as Function)(generatedContent)).toBe(enContent.label);
-    expect((applyingWithField.section as Function)(generatedContent)).toBe(enContent.section);
-    expect((applyingWithField.values[0].label as Function)(generatedContent)).toBe(enContent.one);
-    expect((applyingWithField.values[1].label as Function)(generatedContent)).toBe(enContent.two);
-    expect((applyingWithField.values[2].label as Function)(generatedContent)).toBe(enContent.three);
+    expect((applyingWithField.label as LanguageLookup)(generatedContent)).toBe(enContent.label);
+    expect((applyingWithField.section as LanguageLookup)(generatedContent)).toBe(enContent.section);
+    expect((applyingWithField.values[0].label as LanguageLookup)(generatedContent)).toBe(enContent.one);
+    expect((applyingWithField.values[1].label as LanguageLookup)(generatedContent)).toBe(enContent.two);
+    expect((applyingWithField.values[2].label as LanguageLookup)(generatedContent)).toBe(enContent.three);
     expect(applyingWithField.validator).toBe(isFieldFilledIn);
 
-    expect((applyingWithField.values[0].hint as Function)(generatedContent)).toBe(enContent.oneHint);
-    expect((applyingWithField.values[1].hint as Function)(generatedContent)).toBe(enContent.twoHint);
-    expect((applyingWithField.values[2].hint as Function)(generatedContent)).toBe(enContent.threeHint);
+    expect((applyingWithField.values[0].hint as LanguageLookup)(generatedContent)).toBe(enContent.oneHint);
+    expect((applyingWithField.values[1].hint as LanguageLookup)(generatedContent)).toBe(enContent.twoHint);
+    expect((applyingWithField.values[2].hint as LanguageLookup)(generatedContent)).toBe(enContent.threeHint);
 
     const field2 = applyingWithField.values[2].subFields!.otherApplicantRelation;
-    (field2.validator as Function)('MockTextArea');
+    (field2.validator as ValidationCheck)('MockTextArea', {});
     expect(isTextAreaValid).toHaveBeenCalledWith('MockTextArea');
-    expect((field2.label as Function)(generatedContent)).toBe(enContent.moreDetails);
+    expect((field2.label as LanguageLookup)(generatedContent)).toBe(enContent.moreDetails);
   });
 
   test('should contain submit button', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
-    expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
+    expect((form.submit.text as LanguageLookup)(generatePageContent({ language: 'en' }) as Record<string, never>)).toBe(
+      'Save and continue'
+    );
   });
 
   test('should contain saveAsDraft button', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
-    expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save as draft');
+    expect(
+      (form.saveAsDraft?.text as LanguageLookup)(generatePageContent({ language: 'en' }) as Record<string, never>)
+    ).toBe('Save as draft');
   });
 });
-/* eslint-enable @typescript-eslint/ban-types */

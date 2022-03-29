@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable jest/expect-expect */
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
-import { FormContent, FormFields } from '../../../app/form/Form';
+import { FormContent, FormFields, LanguageLookup, ValidationCheck } from '../../../app/form/Form';
 import { isEmailValid, isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -75,72 +73,72 @@ describe('children > social-worker > content', () => {
   });
 
   it('should have an socialWorkerName text input field', () => {
-    const generatedContent = generateContent(commonContent);
+    const generatedContent = generateContent(commonContent) as Record<string, never>;
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const socialWorkerName = fields.socialWorkerName;
 
     expect(socialWorkerName.type).toBe('text');
-    expect((socialWorkerName.label as Function)(generateContent(commonContent))).toBe(enContent.socialWorkerName);
+    expect((socialWorkerName.label as LanguageLookup)(generatedContent)).toBe(enContent.socialWorkerName);
 
-    (socialWorkerName.validator as Function)('MockName');
-    expect(isFieldFilledIn).toHaveBeenCalledWith('MockName');
+    (socialWorkerName.validator as ValidationCheck)('MockName', {});
+    expect(isFieldFilledIn).toHaveBeenCalledWith('MockName', {});
   });
 
   it('should have an socialWorkerPhoneNumber text input field', () => {
-    const generatedContent = generateContent(commonContent);
+    const generatedContent = generateContent(commonContent) as Record<string, never>;
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const socialWorkerPhoneNumber = fields.socialWorkerPhoneNumber;
 
     expect(socialWorkerPhoneNumber.type).toBe('text');
-    expect((socialWorkerPhoneNumber.label as Function)(generateContent(commonContent))).toBe(
-      enContent.socialWorkerPhoneNumber
-    );
+    expect((socialWorkerPhoneNumber.label as LanguageLookup)(generatedContent)).toBe(enContent.socialWorkerPhoneNumber);
 
-    (socialWorkerPhoneNumber.validator as Function)('MockPhoneNumber');
+    (socialWorkerPhoneNumber.validator as ValidationCheck)('MockPhoneNumber', {});
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockPhoneNumber');
   });
 
   it('should have an socialWorkerEmail text input field', () => {
-    const generatedContent = generateContent(commonContent);
+    const generatedContent = generateContent(commonContent) as Record<string, never>;
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const socialWorkerEmail = fields.socialWorkerEmail;
 
     expect(socialWorkerEmail.type).toBe('text');
-    expect((socialWorkerEmail.label as Function)(generateContent(commonContent))).toBe(enContent.socialWorkerEmail);
+    expect((socialWorkerEmail.label as LanguageLookup)(generatedContent)).toBe(enContent.socialWorkerEmail);
 
-    (socialWorkerEmail.validator as Function)('MockEmail');
+    (socialWorkerEmail.validator as ValidationCheck)('MockEmail', {});
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockEmail');
   });
 
   it('should have an socialWorkerTeamEmail text input field', () => {
-    const generatedContent = generateContent(commonContent);
+    const generatedContent = generateContent(commonContent) as Record<string, never>;
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const socialWorkerTeamEmail = fields.socialWorkerTeamEmail;
 
     expect(socialWorkerTeamEmail.type).toBe('text');
-    expect((socialWorkerTeamEmail.label as Function)(generateContent(commonContent))).toBe(
-      enContent.socialWorkerTeamEmail
-    );
+    expect((socialWorkerTeamEmail.label as LanguageLookup)(generatedContent)).toBe(enContent.socialWorkerTeamEmail);
 
-    (socialWorkerTeamEmail.validator as Function)('MockEmail');
+    (socialWorkerTeamEmail.validator as ValidationCheck)('MockEmail', {});
     expect(isEmailValid).toHaveBeenCalledWith('MockEmail');
-    (socialWorkerTeamEmail.validator as Function)();
+    (socialWorkerTeamEmail.validator as ValidationCheck)(undefined, {});
     expect(isEmailValid).not.toHaveBeenCalledWith();
   });
 
   it('should contain submit button', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
-    expect((form.submit.text as Function)(generatePageContent({ language: EN }))).toBe('Save and continue');
+    expect((form.submit.text as LanguageLookup)(generatePageContent({ language: EN }) as Record<string, never>)).toBe(
+      'Save and continue'
+    );
   });
 
   it('should contain saveAsDraft button', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
-    expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: EN }))).toBe('Save as draft');
+    expect(
+      (form.saveAsDraft?.text as LanguageLookup)(generatePageContent({ language: EN }) as Record<string, never>)
+    ).toBe('Save as draft');
   });
 });

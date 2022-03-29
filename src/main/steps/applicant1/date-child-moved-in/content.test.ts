@@ -1,6 +1,13 @@
-/* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
-import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
+import { CaseDate } from '../../../app/case/case';
+import {
+  FormContent,
+  FormFields,
+  FormInput,
+  FormOptions,
+  LanguageLookup,
+  ValidationCheck,
+} from '../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
@@ -67,52 +74,66 @@ describe('applicant1 > date-child-moved-in > content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
 
-    expect((form.submit.text as Function)(generatePageContent({ language: EN }))).toBe('Save and continue');
+    expect((form.submit.text as LanguageLookup)(generatePageContent({ language: EN }) as Record<string, never>)).toBe(
+      'Save and continue'
+    );
   });
 
   test('should contain saveAsDraft button', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
 
-    expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: EN }))).toBe('Save as draft');
+    expect(
+      (form.saveAsDraft?.text as LanguageLookup)(generatePageContent({ language: EN }) as Record<string, never>)
+    ).toBe('Save as draft');
   });
 
   test('should contain dateChildMovedIn field', () => {
-    const generatedContent = generateContent(commonContent);
+    const generatedContent = generateContent(commonContent) as Record<string, never>;
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const dateChildMovedIn = fields.dateChildMovedIn as FormOptions;
 
     expect(dateChildMovedIn.type).toBe('date');
     expect(dateChildMovedIn.classes).toBe('govuk-date-input');
-    expect((dateChildMovedIn.label as Function)(generatedContent)).toBe(enContent.title);
+    expect((dateChildMovedIn.label as LanguageLookup)(generatedContent)).toBe(enContent.title);
     expect(dateChildMovedIn.labelHidden).toBe(true);
-    expect((dateChildMovedIn.hint as Function)(generatedContent)).toBe(enContent.hint);
-    expect(((dateChildMovedIn as FormInput).warning as Function)(generatedContent)).toBe(enContent.warning);
+    expect((dateChildMovedIn.hint as LanguageLookup)(generatedContent)).toBe(enContent.hint);
+    expect(((dateChildMovedIn as FormInput).warning as LanguageLookup)(generatedContent)).toBe(enContent.warning);
 
-    expect((dateChildMovedIn.values[0].label as Function)(commonContent)).toBe('Day');
+    expect(
+      (dateChildMovedIn.values[0].label as LanguageLookup)(commonContent as unknown as Record<string, never>)
+    ).toBe('Day');
     expect(dateChildMovedIn.values[0].name).toBe('day');
     expect(dateChildMovedIn.values[0].classes).toBe('govuk-input--width-2');
     expect(dateChildMovedIn.values[0].attributes?.maxLength).toBe(2);
 
-    expect((dateChildMovedIn.values[1].label as Function)(commonContent)).toBe('Month');
+    expect(
+      (dateChildMovedIn.values[1].label as LanguageLookup)(commonContent as unknown as Record<string, never>)
+    ).toBe('Month');
     expect(dateChildMovedIn.values[1].name).toBe('month');
     expect(dateChildMovedIn.values[1].classes).toBe('govuk-input--width-2');
     expect(dateChildMovedIn.values[1].attributes?.maxLength).toBe(2);
 
-    expect((dateChildMovedIn.values[2].label as Function)(commonContent)).toBe('Year');
+    expect(
+      (dateChildMovedIn.values[2].label as LanguageLookup)(commonContent as unknown as Record<string, never>)
+    ).toBe('Year');
     expect(dateChildMovedIn.values[2].name).toBe('year');
     expect(dateChildMovedIn.values[2].classes).toBe('govuk-input--width-4');
     expect(dateChildMovedIn.values[2].attributes?.maxLength).toBe(4);
 
     expect(
-      (dateChildMovedIn.parser as Function)({
-        'dateChildMovedIn-day': '21',
-        'dateChildMovedIn-month': '12',
-        'dateChildMovedIn-year': '2018',
-      })
+      (dateChildMovedIn.parser as ValidationCheck)(
+        {
+          'dateChildMovedIn-day': '21',
+          'dateChildMovedIn-month': '12',
+          'dateChildMovedIn-year': '2018',
+        } as unknown as CaseDate,
+        {}
+      )
     ).toEqual({ day: '21', month: '12', year: '2018' });
-    expect((dateChildMovedIn.validator as Function)({ day: '21', month: '12', year: '2018' })).toBe(undefined);
+    expect((dateChildMovedIn.validator as ValidationCheck)({ day: '21', month: '12', year: '2018' }, {})).toBe(
+      undefined
+    );
   });
 });
-/* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

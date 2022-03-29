@@ -12,7 +12,14 @@ jest.mock('../../../app/form/validation', () => ({
 
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { ApplyingWith, YesOrNo } from '../../../app/case/definition';
-import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
+import {
+  FormContent,
+  FormFields,
+  FormInput,
+  FormOptions,
+  LanguageLookup,
+  ValidationCheck,
+} from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -68,7 +75,6 @@ const cyContent = {
   },
 };
 
-/* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('applicant1 > contact-details > content', () => {
   const commonContent = {
     language: 'en',
@@ -100,7 +106,7 @@ describe('applicant1 > contact-details > content', () => {
   });
 
   test('should contain applicant1ContactDetails field', () => {
-    const generatedContent = generateContent(commonContent);
+    const generatedContent = generateContent(commonContent) as Record<string, never>;
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const applicant1ContactDetailsConsentField = fields.applicant1ContactDetailsConsent as FormFields;
@@ -110,39 +116,52 @@ describe('applicant1 > contact-details > content', () => {
     expect(applicant1ContactDetailsConsentField.type).toBe('radios');
     expect(applicant1ContactDetailsConsentField.classes).toBe('govuk-radios');
     const applicant1ContactDetailsConsentOptions = fields.applicant1ContactDetailsConsent as FormOptions;
-    expect(((fields.applicant1ContactDetailsConsent as FormInput).label as Function)(generatedContent)).toBe(
+    expect(((fields.applicant1ContactDetailsConsent as FormInput).label as LanguageLookup)(generatedContent)).toBe(
       enContent.applicant1ContactDetailsConsent
     );
-    expect(((fields.applicant1ContactDetailsConsent as FormInput).section as Function)(generatedContent)).toBe(
+    expect(((fields.applicant1ContactDetailsConsent as FormInput).section as LanguageLookup)(generatedContent)).toBe(
       enContent.section
     );
-    expect((applicant1ContactDetailsConsentOptions.values[0].label as Function)({ yes: 'Yes' })).toBe(YesOrNo.YES);
-    expect((applicant1ContactDetailsConsentOptions.values[1].label as Function)({ no: 'No' })).toBe(YesOrNo.NO);
-    expect(applicant1ContactDetailsConsentField.validator as Function).toBe(isFieldFilledIn);
+    expect(
+      (applicant1ContactDetailsConsentOptions.values[0].label as LanguageLookup)({ yes: 'Yes' } as unknown as Record<
+        string,
+        never
+      >)
+    ).toBe(YesOrNo.YES);
+    expect(
+      (applicant1ContactDetailsConsentOptions.values[1].label as LanguageLookup)({ no: 'No' } as unknown as Record<
+        string,
+        never
+      >)
+    ).toBe(YesOrNo.NO);
+    expect(applicant1ContactDetailsConsentField.validator).toBe(isFieldFilledIn);
 
     expect(applicant1EmailAddressField.type).toBe('text');
     expect(applicant1EmailAddressField.classes).toBe('govuk-input--width-20');
-    expect((applicant1EmailAddressField.label as Function)(generatedContent)).toBe(enContent.emailAddress);
+    expect((applicant1EmailAddressField.label as LanguageLookup)(generatedContent)).toBe(enContent.emailAddress);
     expect(applicant1EmailAddressField.labelSize).toBe(null);
-    expect((applicant1EmailAddressField.validator as Function)('someone@example.com')).toBe(undefined);
+    expect((applicant1EmailAddressField.validator as ValidationCheck)('someone@example.com', {})).toBe(undefined);
 
     expect(applicant1PhoneNumberField.type).toBe('text');
     expect(applicant1PhoneNumberField.classes).toBe('govuk-input--width-20');
-    expect((applicant1PhoneNumberField.label as Function)(generatedContent)).toBe(enContent.phoneNumber);
+    expect((applicant1PhoneNumberField.label as LanguageLookup)(generatedContent)).toBe(enContent.phoneNumber);
     expect(applicant1PhoneNumberField.labelSize).toBe(null);
-    expect((applicant1PhoneNumberField.validator as Function)('someone@example.com')).toBe(undefined);
+    expect((applicant1PhoneNumberField.validator as ValidationCheck)('someone@example.com', {})).toBe(undefined);
   });
 
   test('should contain submit button', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
-    expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
+    expect((form.submit.text as LanguageLookup)(generatePageContent({ language: 'en' }) as Record<string, never>)).toBe(
+      'Save and continue'
+    );
   });
 
   test('should contain saveAsDraft button', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
-    expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save as draft');
+    expect(
+      (form.saveAsDraft?.text as LanguageLookup)(generatePageContent({ language: 'en' }) as Record<string, never>)
+    ).toBe('Save as draft');
   });
 });
-/* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
