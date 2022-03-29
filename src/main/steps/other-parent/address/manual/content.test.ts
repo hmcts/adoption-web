@@ -22,7 +22,7 @@ const cyContent = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('otherParent > address > manual > content', () => {
+describe('other-parent > address > manual > content', () => {
   const commonContent = { language: 'en', userCase: {} } as CommonContent;
   let generatedContent;
   let form;

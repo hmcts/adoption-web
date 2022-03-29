@@ -61,7 +61,7 @@ const cyContent = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('find-family-court content', () => {
+describe('children > find-family-court > content', () => {
   const commonContent = generatePageContent({
     language: 'en',
     userCase: { placementOrders: [{ placementOrderId: '123', placementOrderCourt: 'London Court' }] },

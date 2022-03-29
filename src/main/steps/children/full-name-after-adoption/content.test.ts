@@ -45,7 +45,7 @@ const cyContent = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('children full-name-after-adoption content', () => {
+describe('children > full-name-after-adoption > content', () => {
   const commonContent = { language: 'en', userCase: {} } as CommonContent;
   let generatedContent;
   let form;

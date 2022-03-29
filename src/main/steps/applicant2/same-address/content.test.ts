@@ -32,7 +32,7 @@ const cyContent = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('same-address content', () => {
+describe('applicant2 > same-address > content', () => {
   const commonContent = {
     language: 'en',
     userCase: {

@@ -53,7 +53,7 @@ const cyContent = {
   },
 };
 
-describe('birthFather > nationality content', () => {
+describe('birth-father > nationality > content', () => {
   const commonContent = { language: 'en', userCase: {} } as CommonContent;
   let generatedContent;
 

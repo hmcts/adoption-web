@@ -41,7 +41,7 @@ const cyContent = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('birth-mother > address-known content', () => {
+describe('birth-mother > address-known > content', () => {
   const commonContent = generatePageContent({
     language: 'en',
     userCase: { birthMotherAddressKnown: YesOrNo.YES },

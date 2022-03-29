@@ -28,7 +28,7 @@ const cyContent = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('children > placement-order-court content', () => {
+describe('children > placement-order-type > content', () => {
   const commonContent = {
     language: 'en',
     userCase: {

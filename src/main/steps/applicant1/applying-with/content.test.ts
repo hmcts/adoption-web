@@ -50,7 +50,7 @@ const cyContent = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types */
-describe('applying-with content', () => {
+describe('applicant1 > applying-with > content', () => {
   const commonContent = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
   test('should return correct english content', () => {
     languageAssertions('en', enContent, () => generateContent(commonContent));

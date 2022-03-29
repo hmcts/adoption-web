@@ -2,7 +2,7 @@ import { CommonContent } from '../../common/common.content';
 
 import { generateContent } from './content';
 
-describe('cannot-apply content', () => {
+describe('eligibility > cannot-apply > content', () => {
   const commonContent = { language: 'en' } as CommonContent;
   test('should return correct english content', () => {
     const generatedContent = generateContent({ ...commonContent, eligibility: { under18Eligible: 'No' } });

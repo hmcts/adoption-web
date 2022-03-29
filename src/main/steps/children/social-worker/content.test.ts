@@ -65,7 +65,7 @@ const cyContent = {
 
 const commonContent = { language: EN } as CommonContent;
 
-describe('social worker content', () => {
+describe('children > social-worker > content', () => {
   it('should return correct english content', () => {
     languageAssertions('en', enContent, () => generateContent(commonContent));
   });

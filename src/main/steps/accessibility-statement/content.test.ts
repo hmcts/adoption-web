@@ -149,7 +149,7 @@ const cyContent = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('children > sex-at-birth > content', () => {
+describe('accessibility-statement > content', () => {
   const commonContent = { language: 'en', userCase: { childrenSexAtBirth: 'male' } } as CommonContent;
   test('should return correct english content', () => {
     languageAssertions('en', enContent, () => generateContent(commonContent));

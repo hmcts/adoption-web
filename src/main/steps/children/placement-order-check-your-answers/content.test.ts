@@ -29,7 +29,7 @@ const cyContent = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('children > placement-order-check-your-answers content', () => {
+describe('children > placement-order-check-your-answers > content', () => {
   const commonContent = {
     language: 'en',
     userCase: {

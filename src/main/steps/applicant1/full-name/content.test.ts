@@ -33,7 +33,7 @@ const cyContent = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types */
-describe('primary applicant > full-name', () => {
+describe('applicant1 > full-name > content', () => {
   const fullNameFormFields = fullNameForm.fields as FormFields;
   const commonContent = { language: 'en', userCase: {} } as CommonContent;
   let generatedContent;

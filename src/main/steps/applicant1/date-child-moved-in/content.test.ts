@@ -54,7 +54,7 @@ const cyContent = {
   },
 };
 
-describe('applicant1 > date-child-moved-in-content', () => {
+describe('applicant1 > date-child-moved-in > content', () => {
   test('should return correct english content', () => {
     languageAssertions('en', enContent, () => generateContent(commonContent));
   });

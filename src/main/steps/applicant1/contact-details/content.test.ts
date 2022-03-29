@@ -69,7 +69,7 @@ const cyContent = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('contact-details content', () => {
+describe('applicant1 > contact-details > content', () => {
   const commonContent = {
     language: 'en',
     userCase: { applyingWith: ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER },

@@ -70,7 +70,7 @@ const cyContent = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('children > placement-order-summary content', () => {
+describe('children > placement-order-summary > content', () => {
   const commonContent = {
     language: 'en',
     userCase: {

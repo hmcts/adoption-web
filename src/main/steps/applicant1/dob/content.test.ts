@@ -50,7 +50,7 @@ const cyContent = {
   },
 };
 
-describe('appllicant1 > dob-content', () => {
+describe('appllicant1 > dob > content', () => {
   test('should return correct english content', () => {
     languageAssertions('en', enContent, () => generateContent(commonContent));
   });

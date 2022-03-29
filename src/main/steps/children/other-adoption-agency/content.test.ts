@@ -29,7 +29,7 @@ const cy = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('children> other adoption agency', () => {
+describe('children > other-adoption-agency > content', () => {
   const commonContent = generatePageContent({
     language: 'en',
     userCase: { hasAnotherAdopAgencyOrLA: YesOrNo.YES },

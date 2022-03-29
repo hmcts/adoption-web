@@ -54,7 +54,7 @@ const cyContent = {
 
 const commonContent = { language: 'en' } as CommonContent;
 
-describe('occupation content', () => {
+describe('applicant1 > occupation > content', () => {
   it('should return the correct content for language = en', () => {
     languageAssertions('en', enContent, () => generateContent(commonContent));
   });

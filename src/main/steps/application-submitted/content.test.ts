@@ -28,7 +28,7 @@ const cyContent = {
   printApplication: 'Argraffu eich cais',
 };
 
-describe('application submmitted', () => {
+describe('application-submmitted > content', () => {
   const commonContent = { language: 'en', userCase: { hyphenatedCaseRef: '1234567890123456' } } as CommonContent;
 
   test('should return correct english content', () => {

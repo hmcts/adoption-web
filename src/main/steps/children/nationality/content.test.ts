@@ -48,7 +48,7 @@ const cyContent = {
   url: CHILDREN_NATIONALITY,
 };
 
-describe('children > nationality content', () => {
+describe('children > nationality > content', () => {
   const commonContent = { language: 'en', userCase: {} } as CommonContent;
   let generatedContent;
 
