@@ -3,6 +3,7 @@
 @Library('Infrastructure')
 
 import uk.gov.hmcts.contino.AppPipelineConfig
+import uk.gov.hmcts.contino.AppPipelineDsl
 
 def type = 'nodejs'
 def product = 'adoption'
@@ -46,17 +47,19 @@ withPipeline(type, product, component) {
 
   loadVaultSecrets(secrets)
 
+  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
+
   after('build') {
     yarnBuilder.yarn('build')
   }
 
   after('test') {
-    yarnBuilder.yarn('test:integration')
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
   }
 
   before('functionalTest:preview') {
     env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
+    yarnBuilder.yarn('test:pa11y')
   }
 
   after('functionalTest:preview') {
@@ -65,7 +68,6 @@ withPipeline(type, product, component) {
 
   before('smoketest:preview') {
     env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
-
   }
 
   after('smoketest:preview') {
@@ -74,23 +76,19 @@ withPipeline(type, product, component) {
 
   before('smoketest:aat') {
     env.ADOP_WEB_URL = "https://adoption-web-staging.service.core-compute-aat.internal/"
-
   }
 
   after('smoketest:aat') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
-
   }
 
   before('functionalTest:aat') {
+    env.ADOP_WEB_URL = "https://adoption-web-staging.service.core-compute-aat.internal/"
     yarnBuilder.yarn('test:functional:skip')
-
   }
 
   after('functionalTest:aat') {
+    yarnBuilder.yarn('test:pa11y')
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
-
   }
-
-
 }

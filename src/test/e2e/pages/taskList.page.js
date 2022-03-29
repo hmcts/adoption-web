@@ -43,187 +43,189 @@ module.exports = {
   },
 
   async goToTaskListPage() {
-    await I.goToPage(config.baseUrl + 'task-list');
-    I.wait('3');
+    await I.retry(3).goToPage(config.baseUrl + 'task-list');
+    I.wait(3);
   },
   async selectTaskNameFromTaskList(taskName) {
-    await I.click(taskName);
+    await I.retry(3).click(taskName);
   },
 
   async selectPrimaryApplicantContactDetails() {
-    await I.waitForSelector(this.primaryApplicant.contactDetailsLink, 30);
-    await I.click(this.primaryApplicant.contactDetailsLink);
-    await I.wait('4');
+    await I.retry(3).waitForSelector(this.primaryApplicant.contactDetailsLink, 30);
+    await I.retry(3).click(this.primaryApplicant.contactDetailsLink);
+    await I.wait(4);
   },
 
   async selectOtherApplicantContactDetails() {
-    await I.waitForSelector(this.secondApplicant.contactDetailsLink, 30);
-    await I.click(this.secondApplicant.contactDetailsLink);
-    await I.wait('4');
+    await I.retry(3).waitForSelector(this.secondApplicant.contactDetailsLink, 30);
+    await I.retry(3).click(this.secondApplicant.contactDetailsLink);
+    await I.wait(4);
   },
 
   async selectChildPlacementOrderDetails() {
-    await I.waitForSelector(this.childDetails.childrenPlacementOrderLink, 30);
-    await I.click(this.childDetails.childrenPlacementOrderLink);
-    await I.wait('4');
+    await I.retry(3).waitForSelector(this.childDetails.childrenPlacementOrderLink, 30);
+    await I.retry(3).click(this.childDetails.childrenPlacementOrderLink);
+    await I.wait(4);
   },
 
   async selectFirstApplicantPersonalDetails() {
-    await I.waitForSelector(this.primaryApplicant.contactDetailsLink, 30);
-    await I.click(this.primaryApplicant.contactDetailsLink);
-    await I.wait('4');
+    await I.retry(3).waitForSelector(this.primaryApplicant.contactDetailsLink, 30);
+    await I.retry(3).click(this.primaryApplicant.contactDetailsLink);
+    await I.wait(4);
   },
 
   async selectChildrenBirthCertificate() {
-    await I.waitForSelector(this.childDetails.childrenBirthCertificateLink, 30);
-    await I.click(this.childDetails.childrenBirthCertificateLink);
-    await I.wait('4');
+    await I.retry(3).waitForSelector(this.childDetails.childrenBirthCertificateLink, 30);
+    await I.retry(3).click(this.childDetails.childrenBirthCertificateLink);
+    await I.wait(4);
   },
 
   async selectFirstApplicantPersonalDetails() {
-    await I.waitForSelector(this.primaryApplicant.personalDetailsLink, 30);
-    await I.click(this.primaryApplicant.personalDetailsLink);
-    await I.wait('4');
+    await I.retry(3).waitForSelector(this.primaryApplicant.personalDetailsLink, 30);
+    await I.retry(3).click(this.primaryApplicant.personalDetailsLink);
+    await I.wait(4);
   },
   async selectOtherApplicantPersonalDetails() {
-    await I.waitForSelector(this.secondApplicant.personalDetailsLink, 30);
-    await I.click(this.secondApplicant.personalDetailsLink);
-    await I.wait('4');
+    await I.retry(3).waitForSelector(this.secondApplicant.personalDetailsLink, 30);
+    await I.retry(3).click(this.secondApplicant.personalDetailsLink);
+    await I.wait(4);
   },
   async verifyOtherApplicantPersonalDetailsStatus() {
-    await I.waitForSelector(this.secondApplicant.personalDetailsLinkStatus, 30);
-    await I.see('COMPLETED', this.secondApplicant.personalDetailsLinkStatus);
-    await I.wait('4');
+    await I.retry(3).waitForSelector(this.secondApplicant.personalDetailsLinkStatus, 30);
+    await I.retry(3).see('COMPLETED', this.secondApplicant.personalDetailsLinkStatus);
+    await I.wait(4);
   },
   async verifyChildBirthCertificateDetailsStatus() {
-    await I.waitForSelector(this.childDetails.childrenBirthCertificateDetailsStatus, 30);
-    await I.see('COMPLETED', this.childDetails.childrenBirthCertificateDetailsStatus);
-    await I.wait('4');
+    await I.retry(3).waitForSelector(this.childDetails.childrenBirthCertificateDetailsStatus, 30);
+    await I.retry(3).see('COMPLETED', this.childDetails.childrenBirthCertificateDetailsStatus);
+    await I.wait(4);
   },
 
   async selectChildAdoptionCertificateDetails() {
-    await I.waitForSelector(this.childDetails.adoptionCertificateDetailsLink, 30);
-    await I.click(this.childDetails.adoptionCertificateDetailsLink);
-    await I.wait('4');
+    await I.retry(3).waitForSelector(this.childDetails.adoptionCertificateDetailsLink, 30);
+    await I.retry(3).click(this.childDetails.adoptionCertificateDetailsLink);
+    await I.wait(4);
   },
 
   async verifyAdoptionCertificateDetailStatus() {
-    await I.waitForSelector(this.childDetails.adoptionCertificateDetails, 30);
-    await I.see('COMPLETED', this.childDetails.adoptionCertificateDetails);
+    await I.retry(3).waitForSelector(this.childDetails.adoptionCertificateDetails, 30);
+    await I.retry(3).see('COMPLETED', this.childDetails.adoptionCertificateDetails);
   },
 
   async selectChildBirthMotherDetails() {
-    await I.waitForSelector(this.childDetails.childrenBirthMotherLink, 30);
-    await I.click(this.childDetails.childrenBirthMotherLink);
-    await I.wait('4');
+    await I.retry(3).waitForSelector(this.childDetails.childrenBirthMotherLink, 30);
+    await I.retry(3).click(this.childDetails.childrenBirthMotherLink);
+    await I.wait(4);
   },
 
   async verifyChildBirthMotherDetailsStatus() {
-    await I.waitForSelector(this.childDetails.childrenBirthMotherDetailsStatus, 30);
-    await I.see('COMPLETED', this.childDetails.childrenBirthMotherDetailsStatus);
+    await I.retry(3).waitForSelector(this.childDetails.childrenBirthMotherDetailsStatus, 30);
+    await I.retry(3).see('COMPLETED', this.childDetails.childrenBirthMotherDetailsStatus);
   },
 
   async selectChildOtherParentDetails() {
-    await I.waitForSelector(this.childDetails.childOtherParentLink, 30);
-    await I.click(this.childDetails.childOtherParentLink);
-    await I.wait('4');
+    await I.retry(3).waitForSelector(this.childDetails.childOtherParentLink, 30);
+    await I.retry(3).click(this.childDetails.childOtherParentLink);
+    await I.wait(4);
   },
 
   async verifyChildOtherParentDetailsStatus() {
-    await I.waitForSelector(this.childDetails.childOtherParentDetailsStatus, 30);
-    await I.see('COMPLETED', this.childDetails.childOtherParentDetailsStatus);
-    await I.wait('4');
+    await I.retry(3).waitForSelector(this.childDetails.childOtherParentDetailsStatus, 30);
+    await I.retry(3).see('COMPLETED', this.childDetails.childOtherParentDetailsStatus);
+    await I.wait(4);
   },
 
   async selectChildBirthFatherDetails() {
-    await I.waitForSelector(this.childDetails.childrenBirthFatherLink, 30);
-    await I.click(this.childDetails.childrenBirthFatherLink);
-    await I.wait('4');
+    await I.retry(3).waitForSelector(this.childDetails.childrenBirthFatherLink, 30);
+    await I.retry(3).click(this.childDetails.childrenBirthFatherLink);
+    await I.wait(4);
   },
 
   async verifyChildBirthFatherDetailsStatus() {
-    await I.waitForSelector(this.childDetails.childrenBirthFatherDetailsStatus, 30);
-    await I.see('COMPLETED', this.childDetails.childrenBirthFatherDetailsStatus);
+    await I.retry(3).waitForSelector(this.childDetails.childrenBirthFatherDetailsStatus, 30);
+    await I.retry(3).see('COMPLETED', this.childDetails.childrenBirthFatherDetailsStatus);
   },
 
   async selectChildAdoptionAgencyDetails() {
-    await I.waitForSelector(this.childDetails.adoptionAgencyLink, 30);
-    await I.click(this.childDetails.adoptionAgencyLink);
-    await I.wait('4');
+    await I.retry(3).waitForSelector(this.childDetails.adoptionAgencyLink, 30);
+    await I.retry(3).click(this.childDetails.adoptionAgencyLink);
+    await I.wait(4);
   },
 
   async verifyChildAdoptionAgencyDetailsStatus() {
-    await I.waitForSelector(this.childDetails.adoptionAgencyDetailsStatus, 30);
-    await I.see('COMPLETED', this.childDetails.adoptionAgencyDetailsStatus);
+    await I.retry(3).waitForSelector(this.childDetails.adoptionAgencyDetailsStatus, 30);
+    await I.retry(3).see('COMPLETED', this.childDetails.adoptionAgencyDetailsStatus);
   },
 
   async selectSiblingDetails() {
-    await I.waitForSelector(this.childDetails.childrenSiblingLink, 30);
-    await I.click(this.childDetails.childrenSiblingLink);
-    await I.wait('4');
+    await I.retry(3).waitForSelector(this.childDetails.childrenSiblingLink, 30);
+    await I.retry(3).click(this.childDetails.childrenSiblingLink);
+    await I.wait(4);
   },
 
   async verifySiblingDetailsStatus() {
-    await I.waitForSelector(this.childDetails.childrenSiblingDetailsStatus, 30);
-    await I.see('COMPLETED', this.childDetails.childrenSiblingDetailsStatus);
+    await I.retry(3).waitForSelector(this.childDetails.childrenSiblingDetailsStatus, 30);
+    await I.retry(3).see('COMPLETED', this.childDetails.childrenSiblingDetailsStatus);
   },
 
   async verifySecondApplicantSectionNotDisplayed() {
-    await I.dontSeeElement(this.secondApplicant.personalDetailsLink);
-    await I.dontSeeElement(this.secondApplicant.contactDetailsLink);
+    await I.retry(3).dontSeeElement(this.secondApplicant.personalDetailsLink);
+    await I.retry(3).dontSeeElement(this.secondApplicant.contactDetailsLink);
   },
 
   async selectReviewPayAndSubmitDetails() {
-    await I.waitForSelector(this.childDetails.reviewPayAndSubmitLink, 30);
-    await I.click(this.childDetails.reviewPayAndSubmitLink);
-    await I.wait('4');
+    await I.retry(3).waitForSelector(this.childDetails.reviewPayAndSubmitLink, 30);
+    await I.retry(3).click(this.childDetails.reviewPayAndSubmitLink);
+    await I.wait(4);
   },
 
   async selectUploadDocumentsDetails() {
-    await I.waitForSelector(this.uploadDocument.uploadDocumentLink, 30);
-    await I.click(this.uploadDocument.uploadDocumentLink);
-    await I.wait('4');
+    await I.retry(3).waitForSelector(this.uploadDocument.uploadDocumentLink, 30);
+    await I.retry(3).click(this.uploadDocument.uploadDocumentLink);
+    await I.wait(4);
   },
 
   async verifyUploadDocumentsStatus() {
-    await I.waitForSelector(this.uploadDocument.uploadDocumentStatus, 30);
-    await I.see('COMPLETED', this.uploadDocument.uploadDocumentStatus);
+    await I.retry(3).waitForSelector(this.uploadDocument.uploadDocumentStatus, 30);
+    await I.retry(3).see('COMPLETED', this.uploadDocument.uploadDocumentStatus);
   },
 
   async selectDateChildMovedInDetails() {
-    await I.waitForSelector(this.childDetails.dateChildMovedInLink, 30);
-    await I.click(this.childDetails.dateChildMovedInLink);
-    await I.wait('4');
+    await I.retry(3).waitForSelector(this.childDetails.dateChildMovedInLink, 30);
+    await I.retry(3).click(this.childDetails.dateChildMovedInLink);
+    await I.wait(4);
   },
 
   async verifyDateChildMovedInStatus() {
-    await I.waitForSelector(this.childDetails.dateChildMovedInDetailsStatus, 30);
-    await I.see('COMPLETED', this.childDetails.dateChildMovedInDetailsStatus);
+    await I.retry(3).waitForSelector(this.childDetails.dateChildMovedInDetailsStatus, 30);
+    await I.retry(3).see('COMPLETED', this.childDetails.dateChildMovedInDetailsStatus);
+    await I.wait(4);
   },
 
   async verifyPrimaryApplicantContactDetailsStatus() {
-    await I.waitForSelector(this.primaryApplicant.contactDetailsLinkStatus, 30);
-    await I.see('COMPLETED', this.primaryApplicant.contactDetailsLinkStatus);
+    await I.retry(3).waitForSelector(this.primaryApplicant.contactDetailsLinkStatus, 30);
+    await I.retry(3).see('COMPLETED', this.primaryApplicant.contactDetailsLinkStatus);
   },
 
   async verifyPrimaryApplicantPersonalDetailsStatus() {
-    await I.waitForSelector(this.primaryApplicant.personalDetailsLinkStatus, 30);
-    await I.see('COMPLETED', this.primaryApplicant.personalDetailsLinkStatus);
+    await I.retry(3).waitForSelector(this.primaryApplicant.personalDetailsLinkStatus, 30);
+    await I.retry(3).see('COMPLETED', this.primaryApplicant.personalDetailsLinkStatus);
   },
 
   async verifySecondApplicantPersonalDetailsStatus() {
-    await I.waitForSelector(this.secondApplicant.contactDetailsLinkStatus, 30);
-    await I.see('COMPLETED', this.secondApplicant.contactDetailsLinkStatus);
+    await I.retry(3).waitForSelector(this.secondApplicant.contactDetailsLinkStatus, 30);
+    await I.retry(3).see('COMPLETED', this.secondApplicant.contactDetailsLinkStatus);
   },
 
   async selectChooseYourFamilyCourtDetails() {
-    await I.waitForSelector(this.childDetails.findFamilyCourtLink, 30);
-    await I.click(this.childDetails.findFamilyCourtLink);
-    await I.wait('4');
+    await I.retry(3).waitForSelector(this.childDetails.findFamilyCourtLink, 30);
+    await I.retry(3).click(this.childDetails.findFamilyCourtLink);
+    await I.wait(4);
   },
 
   async verifyChooseYourFamilyCourtStatus() {
-    await I.waitForSelector(this.childDetails.findFamilyCourtStatus, 30);
-    await I.see('COMPLETED', this.childDetails.findFamilyCourtStatus);
+    await I.retry(3).waitForSelector(this.childDetails.findFamilyCourtStatus, 30);
+    await I.retry(3).see('COMPLETED', this.childDetails.findFamilyCourtStatus);
+    await I.wait(4);
   },
 };

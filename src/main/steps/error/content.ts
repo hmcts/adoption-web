@@ -1,47 +1,37 @@
 import { StatusCodes } from 'http-status-codes';
 
-const common = {
-  en: {
-    info: 'This could be because you’ve followed a broken or outdated link, or because there’s an error on our site.',
-    youCan: 'You can either:',
-    goBack: 'go back to the previous page',
-    signInAgain: 'sign in again',
-  },
-  cy: {
-    info: 'Efallai eich bod wedi defnyddio dolen nad yw’n gweithio neu hen ddolen, neu bod yna nam ar ein safle.',
-    youCan: 'Gallwch:',
-    goBack: 'fynd yn ôl i’r dudalen flaenorol',
-    signInAgain: 'mewngofnodi eto',
-  },
-};
-
 const en = {
   [StatusCodes.BAD_REQUEST]: {
-    ...common.en,
     title: 'Bad request',
   },
   [StatusCodes.NOT_FOUND]: {
-    ...common.en,
     title: 'Page not found',
+    line1: 'If you typed the web address into the URL bar, check that it is correct.',
+    line2: 'If you pasted the web address, check you copied the entire address.',
+    line3:
+      'If you followed a link, there may be a problem with the service or the link has timed out. You should ask for a new link.',
+    line4: 'If you need support for the online adoption service, contact your social worker or adoption agency.',
   },
   [StatusCodes.INTERNAL_SERVER_ERROR]: {
-    ...common.en,
-    title: 'Sorry, we’re having technical problems',
-    info: 'Please try again in a few minutes',
+    title: 'Sorry, there is a problem with the online adoption service',
+    info: 'Please try again later. We have saved your answers.',
   },
 };
 
 const cy: typeof en = {
   [StatusCodes.BAD_REQUEST]: {
-    ...common.cy,
     title: 'Cais gwael',
   },
   [StatusCodes.NOT_FOUND]: {
-    ...common.cy,
     title: 'Ni ellir dod o hyd i’r dudalen',
+    line1: 'If you typed the web address into the URL bar, check that it is correct. (in welsh)',
+    line2: 'If you pasted the web address, check you copied the entire address. (in welsh)',
+    line3:
+      'If you followed a link, there may be a problem with the service or the link has timed out. You should ask for a new link. (in welsh)',
+    line4:
+      'If you need support for the online adoption service, contact your social worker or adoption agency. (in welsh)',
   },
   [StatusCodes.INTERNAL_SERVER_ERROR]: {
-    ...common.cy,
     title: 'Yn anffodus, rydym yn cael problemau technegol',
     info: 'Rhowch gynnig arall arni ymhen ychydig funudau',
   },
