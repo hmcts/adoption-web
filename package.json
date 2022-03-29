@@ -30,7 +30,12 @@
     "test:functional:skip": "echo 'Not running functional cases in Master' && exit 0",
     "test:crossbrowser-e2e": "MOCHAWESOME_REPORTFILENAME=crossbrowser codeceptjs run-multiple --grep \"@cross-browser\" ${BROWSER_GROUP:-'--all'} -c saucelabs.conf.js --reporter mocha-multi",
     "test:crossbrowser": "./bin/run-crossbrowser-tests.sh",
-    "test:local": "codeceptjs run-multiple parallel"
+    "test:local": "codeceptjs run-multiple parallel",
+    "test:pact": "jest -c jest.pact.config.js --runInBand",
+    "pact:publish": "pact-broker publish pact/pacts --consumer-app-version=\"$(npx @pact-foundation/absolute-version)\" --auto-detect-version-properties --broker-base-url=https://pact-broker.platform.hmcts.net/",
+    "test:pact:run-and-publish": "yarn test:pact && yarn pact:publish",
+    "broker": "docker-compose -f broker-compose.yaml up -d",
+    "broker:stop": "docker-compose -f broker-compose.yaml down"
   },
   "dependencies": {
     "@hmcts/cookie-manager": "^0.0.4",
@@ -100,6 +105,8 @@
   "devDependencies": {
     "@babel/core": "^7.17.5",
     "@babel/preset-env": "^7.16.11",
+    "@pact-foundation/absolute-version": "^0.0.4",
+    "@pact-foundation/pact": "^9.17.3",
     "@types/copy-webpack-plugin": "^10.1.0",
     "@types/jest": "^27.4.1",
     "@types/mini-css-extract-plugin": "^2.5.1",
@@ -128,6 +135,8 @@
     "jest-circus": "^27.5.1",
     "jest-extended": "^1.2.1",
     "jest-html-reporter": "^3.4.2",
+    "jest-pact": "^0.9.1",
+    "jest-when": "^3.5.1",
     "lint-staged": "^12.3.5",
     "mini-css-extract-plugin": "^2.6.0",
     "mocha-junit-reporter": "^2.0.0",
@@ -151,5 +160,8 @@
     "webpack-cli": "^4.9.2",
     "webpack-dev-middleware": "^5.3.1",
     "webpack-node-externals": "^3.0.0"
+  },
+  "resolutions": {
+    "minimist": "^1.2.6"
   }
 }

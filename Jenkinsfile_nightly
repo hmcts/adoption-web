@@ -14,6 +14,7 @@ properties([
 @Library("Infrastructure")
 
 import uk.gov.hmcts.contino.AppPipelineConfig
+import uk.gov.hmcts.contino.AppPipelineDsl
 
 def type = "nodejs"
 def product = "adoption"
@@ -53,11 +54,13 @@ pipelineConf.vaultSecrets = secrets
 withNightlyPipeline(type, product, component) {
   env.TEST_URL = "https://adoption-web.aat.platform.hmcts.net/"
   env.ADOP_WEB_URL = params.FRONTEND_URL
-  enableCrossBrowserTest(['firefox'])
+  enableCrossBrowserTest(['chrome', 'firefox','microsoft'])
   enableFullFunctionalTest(120)
   loadVaultSecrets(secrets)
+  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
   enableFortifyScan()
   enableSecurityScan()
+
   after('test') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
   }
