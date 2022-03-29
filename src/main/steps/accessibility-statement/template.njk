@@ -32,14 +32,14 @@
   <h3 class="govuk-heading-s">{{ reportingAccessibility }}</h3>
   <p class="govuk-body">{{ improveAccessibility | safe }}</p>
   <p class="govuk-body">{{ email | safe }}</p>
-  <p class="govuk-body">{{ phone }}</p>
+  <p class="govuk-body">{{ accessibilityPhoneNumber }}</p>
 
   <h3 class="govuk-heading-s">{{ enforcementProcedure }}</h3>
   <p class="govuk-body">{{ humanRightsCommission | safe }}</p>
   <p class="govuk-body">{{ notHappy | safe }}</p>
 
   <h2 class="govuk-heading-m">{{ contactingUs }}</h2>
-  <p class="govuk-body">{{ contactCourtDirectly }}</p>
+  <p class="govuk-body">{{ contactCourtDirectly | safe }}</p>
   <p class="govuk-body">{{ contactTextRelay }}</p>
   <p class="govuk-body">{{ contactInductionLoops }}</p>
 
@@ -47,7 +47,7 @@
   <p class="govuk-body">{{ hmctsIsCommitted }}</p>
 
   <h2 class="govuk-heading-m">{{ complianceStatus }}</h2>
-  <p class="govuk-body">{{ partiallyCompliant }}</p>
+  <p class="govuk-body">{{ partiallyCompliant | safe }}</p>
   <ul class="govuk-list govuk-list--bullet">
     <li>{{ partiallyCompliantMobile }}</li>
   </ul>
@@ -93,7 +93,7 @@
   <h2 class="govuk-heading-m">{{ preparationAccessibilityStatement }}</h2>
   <p class="govuk-body">{{ statementPreparationDate }}</p>
 
-  <p class="govuk-heading-m">{{ contactHelp }}</p>
+  <p class="govuk-body govuk-!-font-weight-bold">{{ contactHelp }}</p>
   <p class="govuk-body">{{ email | safe }}</p>
-  <p class="govuk-body">{{ phone }}</p>
+  <p class="govuk-body">{{ accessibilityPhoneNumber }}</p>
 {% endblock %}

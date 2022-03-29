@@ -24,10 +24,11 @@ const en = () => ({
   needMoreInformation:
     'If you need information on this website in a different format like accessible PDF, large print, easy read, audio recording or braille:',
   email:
-    'Email <a href="adoptionproject@justice.gov.uk" class="govuk-link" aria-label="This link will open in a new email to adoptionproject@justice.gov.uk">adoptionproject@justice.gov.uk</a>',
+    'Email: <a href="adoptionproject@justice.gov.uk" class="govuk-link" aria-label="This link will open in a new email to adoptionproject@justice.gov.uk">adoptionproject@justice.gov.uk</a>',
   phone: 'Call: 01634 887900',
   considerYourRequest: 'We’ll consider your request and get back to you in 10 working days.',
   reportingAccessibility: 'Reporting accessibility problems with this website',
+  accessibilityPhoneNumber: 'Telephone: 01634 887900',
   improveAccessibility:
     'We’re always looking to improve the accessibility of this website. If you find any problems that aren’t addressed on this page, or think we’re not meeting accessibility requirements, please contact us:',
   enforcementProcedure: 'Enforcement procedure',
@@ -37,7 +38,7 @@ const en = () => ({
     'If you’ve contacted us about accessibility and you’re not happy with our response, you can contact the <a href="https://www.equalityadvisoryservice.com/" class="govuk-link" target="_blank" aria-label="This link will open in a new tab for Equality Advisory and Support Service">Equality Advisory and Support Service (EASS)</a>.',
   contactingUs: 'Contacting us by phone or visiting us in person',
   contactCourtDirectly:
-    'If you have a question about accessibility in our family courts, you can <a href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode" class="govuk-link" target="blank">contact the court directly.</a>.',
+    'If you have a question about accessibility in our family courts, you can <a href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode" class="govuk-link" target="blank">contact the court directly</a>.',
   contactTextRelay:
     'We provide a text relay service for people who are D/deaf, hearing impaired or have a speech impediment.',
   contactInductionLoops:
@@ -47,7 +48,7 @@ const en = () => ({
     'HMCTS is committed to making its website accessible, in accordance with the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018.',
   complianceStatus: 'Compliance status',
   partiallyCompliant:
-    'This website is partially compliant with the Web Content Accessibility Guidelines version 2.1 AA standard, due to the non-compliances and exemptions listed below.',
+    'This website is partially compliant with the <a href="https://www.w3.org/TR/WCAG21/" class="govuk-link" target="blank">Web Content Accessibility Guidelines version 2.1</a> AA standard, due to the non-compliances and exemptions listed below.',
   partiallyCompliantMobile:
     'Content not presented without loss of information and requiring scrolling in two dimensions while using Adoption application via Mobile.',
   nonAccessibleContent: 'Content that’s not within the scope of the accessibility regulations',
@@ -82,7 +83,7 @@ const en = () => ({
   statementCommitted:
     'We’re committed to ensuring our services are accessible to all our customers and that they comply with level AA of the Web Content Accessibility Guidelines – WCAG 2.1.',
   statementDAC:
-    'To help us achieve this, we will commission the <a href="https://digitalaccessibilitycentre.org/" class="govuk-link" target="_blank" aria-label="This link will open in a new tab for Digital Accessibility Centre">Digital Accessibility Centre (DAC)</a>. to carry out a WCAG 2.1 AA level technical compliance audit that includes over 50 hours of testing by users with a wide range of disabilities. We will update this statement with the testing date when it is confirmed. Any issues identified during testing will be reviewed and addressed appropriately',
+    'To help us achieve this, we will commission the <a href="https://digitalaccessibilitycentre.org/" class="govuk-link" target="_blank" aria-label="This link will open in a new tab for Digital Accessibility Centre">Digital Accessibility Centre (DAC)</a> to carry out a WCAG 2.1 AA level technical compliance audit that includes over 50 hours of testing by users with a wide range of disabilities. We will update this statement with the testing date when it is confirmed. Any issues identified during testing will be reviewed and addressed appropriately.',
   preparationAccessibilityStatement: 'Preparation of this accessibility statement',
   statementPreparationDate: 'This statement was prepared on 11 March 2022. It was last reviewed on 11 March 2022.',
   contactHelp: 'Contact us for help:',
@@ -112,10 +113,11 @@ const cy = () => ({
   needMoreInformation:
     'If you need information on this website in a different format like accessible PDF, large print, easy read, audio recording or braille: (in Welsh)',
   email:
-    'Email <a href="adoptionproject@justice.gov.uk" class="govuk-link" aria-label="This link will open in a new email to adoptionproject@justice.gov.uk">adoptionproject@justice.gov.uk</a> (in Welsh)',
+    'Email: <a href="adoptionproject@justice.gov.uk" class="govuk-link" aria-label="This link will open in a new email to adoptionproject@justice.gov.uk">adoptionproject@justice.gov.uk</a> (in Welsh)',
   phone: 'Call: 01634 887900 (in Welsh)',
   considerYourRequest: 'We’ll consider your request and get back to you in 10 working days. (in Welsh)',
   reportingAccessibility: 'Reporting accessibility problems with this website (in Welsh)',
+  accessibilityPhoneNumber: 'Telephone: 01634 887900 (in Welsh)',
   improveAccessibility:
     'We’re always looking to improve the accessibility of this website. If you find any problems that aren’t addressed on this page, or think we’re not meeting accessibility requirements, please contact us: (in Welsh)',
   enforcementProcedure: 'Enforcement procedure (in Welsh)',
@@ -125,7 +127,7 @@ const cy = () => ({
     'If you’ve contacted us about accessibility and you’re not happy with our response, you can contact the <a href="https://www.equalityadvisoryservice.com/" class="govuk-link" target="_blank" aria-label="This link will open in a new tab for Equality Advisory and Support Service">Equality Advisory and Support Service (EASS)</a>. (in Welsh)',
   contactingUs: 'Contacting us by phone or visiting us in person (in Welsh)',
   contactCourtDirectly:
-    'If you have a question about accessibility in our family courts, you can <a href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode" class="govuk-link" target="blank">contact the court directly.</a>. (in Welsh)',
+    'If you have a question about accessibility in our family courts, you can <a href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode" class="govuk-link" target="blank">contact the court directly</a>. (in Welsh)',
   contactTextRelay:
     'We provide a text relay service for people who are D/deaf, hearing impaired or have a speech impediment. (in Welsh)',
   contactInductionLoops:
@@ -135,7 +137,7 @@ const cy = () => ({
     'HMCTS is committed to making its website accessible, in accordance with the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018. (in Welsh)',
   complianceStatus: 'Compliance status (in Welsh)',
   partiallyCompliant:
-    'This website is partially compliant with the Web Content Accessibility Guidelines version 2.1 AA standard, due to the non-compliances and exemptions listed below. (in Welsh)',
+    'This website is partially compliant with the <a href="https://www.w3.org/TR/WCAG21/" class="govuk-link" target="blank">Web Content Accessibility Guidelines version 2.1</a> AA standard, due to the non-compliances and exemptions listed below. (in Welsh)',
   partiallyCompliantMobile:
     'Content not presented without loss of information and requiring scrolling in two dimensions while using Adoption application via Mobile. (in Welsh)',
   nonAccessibleContent: 'Content that’s not within the scope of the accessibility regulations (in Welsh)',
@@ -170,7 +172,7 @@ const cy = () => ({
   statementCommitted:
     'We’re committed to ensuring our services are accessible to all our customers and that they comply with level AA of the Web Content Accessibility Guidelines – WCAG 2.1. (in Welsh)',
   statementDAC:
-    'To help us achieve this, we will commission the <a href="https://digitalaccessibilitycentre.org/" class="govuk-link" target="_blank" aria-label="This link will open in a new tab for Digital Accessibility Centre">Digital Accessibility Centre (DAC)</a>. to carry out a WCAG 2.1 AA level technical compliance audit that includes over 50 hours of testing by users with a wide range of disabilities. We will update this statement with the testing date when it is confirmed. Any issues identified during testing will be reviewed and addressed appropriately (in Welsh)',
+    'To help us achieve this, we will commission the <a href="https://digitalaccessibilitycentre.org/" class="govuk-link" target="_blank" aria-label="This link will open in a new tab for Digital Accessibility Centre">Digital Accessibility Centre (DAC)</a> to carry out a WCAG 2.1 AA level technical compliance audit that includes over 50 hours of testing by users with a wide range of disabilities. We will update this statement with the testing date when it is confirmed. Any issues identified during testing will be reviewed and addressed appropriately. (in Welsh)',
   preparationAccessibilityStatement: 'Preparation of this accessibility statement (in Welsh)',
   statementPreparationDate:
     'This statement was prepared on 11 March 2022. It was last reviewed on 11 March 2022. (in Welsh)',
