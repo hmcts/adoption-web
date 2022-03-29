@@ -2,7 +2,7 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 
-const en = (): Record<string, unknown> => ({
+const en = () => ({
   section: 'Second applicant',
   title: "What's your full name?",
   firstNames: 'First names',

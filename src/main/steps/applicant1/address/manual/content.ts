@@ -6,7 +6,7 @@ import {
   generateContent as manualAddressGenerateContent,
 } from '../../../common/components/address-manual';
 
-const en = ({ manualAddressContent, userCase }): Record<string, unknown> => {
+const en = ({ manualAddressContent, userCase }) => {
   const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant' : 'First applicant';
   return {
     section,
@@ -19,7 +19,7 @@ const en = ({ manualAddressContent, userCase }): Record<string, unknown> => {
   };
 };
 
-const cy = ({ manualAddressContent, userCase }): Record<string, unknown> => {
+const cy: typeof en = ({ manualAddressContent, userCase }) => {
   const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Ceisydd' : 'Ceisydd cyntaf';
   return {
     section,

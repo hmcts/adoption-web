@@ -7,7 +7,7 @@ import {
 } from '../../../common/components/address-select';
 import { APPLICANT_1_FIND_ADDRESS, APPLICANT_1_MANUAL_ADDRESS } from '../../../urls';
 
-const en = ({ selectAddressContent, userCase }): Record<string, unknown> => {
+const en = ({ selectAddressContent, userCase }) => {
   const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant' : 'First applicant';
   return {
     section,
@@ -20,7 +20,7 @@ const en = ({ selectAddressContent, userCase }): Record<string, unknown> => {
   };
 };
 
-const cy = ({ selectAddressContent, userCase }): Record<string, unknown> => {
+const cy: typeof en = ({ selectAddressContent, userCase }) => {
   const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Ceisydd' : 'Ceisydd cyntaf';
   return {
     section,
