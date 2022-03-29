@@ -48,7 +48,7 @@ const cy: typeof en = () => ({
   line7:
     'Dim ond y llys a’r asiantaethau neu awdurdodau mabwysiadu perthnasol fydd yn gweld yr wybodaeth a ddarperir gennych.',
   line8:
-    'The court processing fee ar gyfer an application to adopt is <b>£183</b>. Payment is due once the application is complete and ready to submit to the court.',
+    'Y ffi prosesu llys ar gyfer cais i fabwysiadu yw <b>£183</b>. Mae taliad yn ddyledus unwaith y bydd y cais wedi’i gwblhau ac yn barod i’w gyflwyno i’r llys.',
 });
 
 const languages = {

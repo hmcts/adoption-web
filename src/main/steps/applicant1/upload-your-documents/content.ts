@@ -34,8 +34,8 @@ const en = () => {
     cannotUploadDocuments: 'I cannot upload some or all of my documents',
     cannotUploadWhich: 'Which document can you not upload?',
     checkAllThatApply: 'Select all that apply',
-    cannotUploadYouCanPost: `<p class="govuk-body govuk-!-margin-top-5">You can post or email your documents to the court. If you post them you must send the original documents or certified copies. You’ll receive details of how to send them after you have submitted this application.</p>
-      <p class="govuk-body">Continue with your application.</p>`,
+    cannotUploadYouCanPost:
+      '<p class="govuk-body govuk-!-margin-top-5">You can post or email your documents to the court. If you post them you must send the original documents or certified copies. You’ll receive details of how to send them after you have submitted this application.</p><p class="govuk-body">Continue with your application.</p>',
     birthOrAdoptionCertificate: 'Birth or adoption certificate',
     deathCertificate: 'Death certiticate',
 
@@ -82,25 +82,26 @@ const cy = () => {
     orStr: 'neu',
     dragDropHere: 'Llusgwch a gollyngwch ffeiliau yma',
     fileFormats: "Rhaid i'r ffeil fod ar ffurf jpg, bmp, tiff, png neu pdf.",
-    fileSize: 'Maximum file size 2MB.',
+    fileSize: 'Caniateir ichi lwytho ffeil sydd hyd at 2MB o ran maint.',
     cannotUploadDocuments: 'Ni allaf lwytho rhai o fy nogfennau / fy holl ddogfennau.',
     cannotUploadWhich: 'Pa ddogfen na allwch ei llwytho?',
     checkAllThatApply: "Dewiswch bob un sy'n berthnasol",
-    cannotUploadYouCanPost: `<p class="govuk-body govuk-!-margin-top-5">You can post neu email your documents to the court. If you post them you must send the neuiginal documents neu certified copies. You’ll receive details of how to send them after you have submitted this application.</p>
-      <p class="govuk-body">Parhau with your application.</p>`,
+    cannotUploadYouCanPost:
+      '<p class=”govuk-body govuk-!-margin-top-5”>Gallwch bostio neu e-bostio eich dogfennau i’r llys. Os ydych yn eu postio, rhaid ichi anfon y dogfennau gwreiddiol neu gopïau wedi’u hardystio. Byddwch yn cael manylion am sut i’w hanfon ar ôl ichi gyflwyno’r cais hwn. </p><p class=”govuk-body”>Parhau gyda’ch cais.</p>',
     birthOrAdoptionCertificate: 'Tystysgrif geni neu fabwysiadu',
     deathCertificate: 'Tystysgrif marwolaeth',
 
     errors: {
       applicant1UploadedFiles: {
         [ValidationError.NOT_UPLOADED]:
-          'You have not provided any information neu uploaded any documents. You need to provide the information neu documents the court has requested. Or if you are going to post any documents in, select that option.',
+          'Nid ydych wedi darparu unrhyw wybodaeth nac wedi uwchlwytho unrhyw ddogfennau. Mae angen i chi ddarparu’r wybodaeth neu’r dogfennau y mae’r llys wedi gofyn amdanynt. Neu os ydych am bostio unrhyw ddogfennau i mewn, dewiswch yr opsiwn hwnnw.',
         errorUploading:
           'Ni chafodd eich ffeil ei llwytho oherwydd bod y gwasanaeth yn profi problemau technegol. Ceisiwch lwytho eich ffeil eto.',
-        fileSizeTooBig: 'The file you have uploaded is too large. Reduce it to under 2MB and try uploading it again.',
+        fileSizeTooBig:
+          'Mae’r ffeil yr ydych wedi ei llwytho yn rhy fawr. Ceisiwch leihau maint y ffeil i lai na 2MB a llwytho’r ffeil eto.',
         fileWrongFormat:
           'Ni allwch lwytho ffeil yn y fformat hwnnw. Cadwch y ffeil ar ffurf fformat a dderbynnir a cheisiwch ei llwytho eto.',
-        [ValidationError.FILE_COUNT_LIMIT_EXCEEDED]: 'You can upload maximum 10 files.',
+        [ValidationError.FILE_COUNT_LIMIT_EXCEEDED]: 'Gallwch uwchlwytho uchafswm o 10 ffeil.',
       },
       applicant1CannotUpload: {
         required: 'Dewiswch pa ffeil nad oeddech yn gallu llwytho cyn parhau.',

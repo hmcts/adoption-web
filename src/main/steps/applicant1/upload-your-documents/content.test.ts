@@ -1,5 +1,4 @@
-// /* eslint-disable @typescript-eslint/ban-types */
-// /* eslint-disable jest/expect-expect */
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -7,7 +6,6 @@ import { generateContent } from './content';
 
 jest.mock('../../../app/form/validation');
 
-const CY = 'cy';
 const EN = 'en';
 
 const enContent = {
@@ -37,8 +35,8 @@ const enContent = {
   cannotUploadDocuments: 'I cannot upload some or all of my documents',
   cannotUploadWhich: 'Which document can you not upload?',
   checkAllThatApply: 'Select all that apply',
-  cannotUploadYouCanPost: `<p class="govuk-body govuk-!-margin-top-5">You can post or email your documents to the court. If you post them you must send the original documents or certified copies. You’ll receive details of how to send them after you have submitted this application.</p>
-  <p class="govuk-body">Continue with your application.</p>`,
+  cannotUploadYouCanPost:
+    '<p class="govuk-body govuk-!-margin-top-5">You can post or email your documents to the court. If you post them you must send the original documents or certified copies. You’ll receive details of how to send them after you have submitted this application.</p><p class="govuk-body">Continue with your application.</p>',
   birthOrAdoptionCertificate: 'Birth or adoption certificate',
   deathCertificate: 'Death certiticate',
 
@@ -60,125 +58,65 @@ const enContent = {
 };
 
 const cyContent = {
-  title: "Upload the child's documents (in welsh)",
+  title: 'Llwytho dogfennau’r plentyn',
   youNeed:
-    "You need to upload a digital photo or scan the child's full birth certificate (this is the one which includes details of their birth parents) (in welsh)",
-  youNeed2: 'If relevant you may also need to upload: (in welsh)',
-  certificate: 'death certificates of birth parents (in welsh)',
-  certificateForeign: 'any previous adoption certificates (in welsh)',
+    'Mae arnoch angen llwytho llun digidol neu sganio tystysgrif geni llawn y plentyn (dyma’r un sy’n cynnwys manylion eu rhieni biolegol)',
+  youNeed2: 'Os yw’n berthnasol, efallai byddwch angen llwytho’r pethau canlynol hefyd:',
+  certificate: 'Tystysgrifau marwolaeth y rhieni biolegol',
+  certificateForeign: 'Unrhyw dystysgrifau mabwysiadu blaenorol',
   warningPhoto:
-    'Make sure the photo or scan shows the whole document. Check you can read all the text before uploading it. If court staff cannot read the details then it may be rejected. (in welsh)',
-  infoTakePhoto: 'You can take a picture with your phone and upload it (in welsh)',
-  infoBullet1: 'Place your document on a flat service in a well-lit room. Use a flash if you need to. (in welsh)',
-  infoBullet2: 'Take a picture of the whole document. You should be able to see its edges. (in welsh)',
-  infoBullet3: 'Check you can read all the writing, including the handwriting. (in welsh)',
-  infoBullet4: 'Email or send the photo or scan to the device you are using now. (in welsh)',
-  infoBullet5: 'Upload it using the link below. (in welsh)',
+    'Gwnewch yn siŵr bod y llun neu’r sgan yn dangos y ddogfen gyfan. Gwiriwch eich bod yn gallu darllen y testun i gyd cyn llwytho’r ffeil. Os na fydd staff y llys yn gallu darllen y manylion, gall y llun gael ei wrthod.',
+  infoTakePhoto: 'Gallwch dynnu llun gyda’ch ffôn a’i lwytho.',
+  infoBullet1:
+    'Rhowch eich dogfen ar rywbeth gwastad mewn ystafell sydd â digon o olau. Defnyddiwch fflach y camera os bydd angen.',
+  infoBullet2: "Tynnwch lun o’r ddogfen gyfan. Dylech allu gweld corneli'r ddogfen.",
+  infoBullet3: 'Gwiriwch eich bod yn gallu gweld yr ysgrifen i gyd, gan gynnwys y llawysgrifen.',
+  infoBullet4: 'Anfonwch y llun trwy e-bost neu sganiwch y ddogfen i’r ddyfais rydych yn ei defnyddio nawr.',
+  infoBullet5: 'Defnyddiwch y ddolen isod i’w lwytho.',
   minRequirements:
-    'You should upload at least one clear image which shows the whole document. If you think it will help court staff read the details you can upload more images. If your document has more than one page then you should upload at least one image of each page. (in welsh)',
-  uploadFiles: 'Uploaded files (in welsh)',
-  noFilesUploaded: 'No files uploaded (in welsh)',
-  chooseFilePhoto: 'Choose a file or take a photo (in welsh)',
-  orStr: 'or (in welsh)',
-  dragDropHere: 'Drag and drop files here (in welsh)',
-  fileFormats: 'The file must be in jpg, bmp, tiff, png or pdf format. (in welsh)',
-  fileSize: 'Maximum file size 2MB. (in welsh)',
-  cannotUploadDocuments: 'I cannot upload some or all of my documents (in welsh)',
-  cannotUploadWhich: 'Which document can you not upload? (in welsh)',
-  checkAllThatApply: 'Select all that apply (in welsh)',
-  cannotUploadYouCanPost: `<p class="govuk-body govuk-!-margin-top-5">You can post or email your documents to the court. If you post them you must send the original documents or certified copies. You’ll receive details of how to send them after you have submitted this application.</p>
-<p class="govuk-body">Continue with your application.</p> (in welsh)`,
-  birthOrAdoptionCertificate: 'Birth or adoption certificate (in welsh)',
-  deathCertificate: 'Death certiticate (in welsh)',
+    'Dylech lwytho o leiaf un delwedd glir sy’n dangos y ddogfen gyfan. Os ydych yn meddwl y bydd yn helpu staff y llys ddarllen y manylion, gallwch lwytho sawl delwedd. Os oes gan eich dogfen mwy nac un tudalen, yna dylech lwytho o leiaf un delwedd o bob tudalen.',
+  uploadFiles: 'Ffeiliau sydd wedi cael eu llwytho',
+  noFilesUploaded: 'Nid oes ffeiliau wedi cael eu llwytho',
+  chooseFilePhoto: 'Dewiswch ffeil neu tynnwch lun',
+  orStr: 'neu',
+  dragDropHere: 'Llusgwch a gollyngwch ffeiliau yma',
+  fileFormats: "Rhaid i'r ffeil fod ar ffurf jpg, bmp, tiff, png neu pdf.",
+  fileSize: 'Caniateir ichi lwytho ffeil sydd hyd at 2MB o ran maint.',
+  cannotUploadDocuments: 'Ni allaf lwytho rhai o fy nogfennau / fy holl ddogfennau.',
+  cannotUploadWhich: 'Pa ddogfen na allwch ei llwytho?',
+  checkAllThatApply: "Dewiswch bob un sy'n berthnasol",
+  cannotUploadYouCanPost:
+    '<p class=”govuk-body govuk-!-margin-top-5”>Gallwch bostio neu e-bostio eich dogfennau i’r llys. Os ydych yn eu postio, rhaid ichi anfon y dogfennau gwreiddiol neu gopïau wedi’u hardystio. Byddwch yn cael manylion am sut i’w hanfon ar ôl ichi gyflwyno’r cais hwn. </p><p class=”govuk-body”>Parhau gyda’ch cais.</p>',
+  birthOrAdoptionCertificate: 'Tystysgrif geni neu fabwysiadu',
+  deathCertificate: 'Tystysgrif marwolaeth',
 
   errors: {
     applicant1UploadedFiles: {
       notUploaded:
-        'You have not provided any information or uploaded any documents. You need to provide the information or documents the court has requested. Or if you are going to post any documents in, select that option. (in welsh)',
+        'Nid ydych wedi darparu unrhyw wybodaeth nac wedi uwchlwytho unrhyw ddogfennau. Mae angen i chi ddarparu’r wybodaeth neu’r dogfennau y mae’r llys wedi gofyn amdanynt. Neu os ydych am bostio unrhyw ddogfennau i mewn, dewiswch yr opsiwn hwnnw.',
       errorUploading:
-        'Your file was not uploaded because the service is experiencing technical issues. Try uploading your file again. (in welsh)',
+        'Ni chafodd eich ffeil ei llwytho oherwydd bod y gwasanaeth yn profi problemau technegol. Ceisiwch lwytho eich ffeil eto.',
       fileSizeTooBig:
-        'The file you have uploaded is too large. Reduce it to under 2MB and try uploading it again. (in welsh)',
+        'Mae’r ffeil yr ydych wedi ei llwytho yn rhy fawr. Ceisiwch leihau maint y ffeil i lai na 2MB a llwytho’r ffeil eto.',
       fileWrongFormat:
-        'You cannot upload that format of file. Save the file as one of the accepted formats and try uploading it again. (in welsh)',
-      maxTenFileUpload: 'You can upload maximum 10 files. (in welsh)',
+        'Ni allwch lwytho ffeil yn y fformat hwnnw. Cadwch y ffeil ar ffurf fformat a dderbynnir a cheisiwch ei llwytho eto.',
+      maxTenFileUpload: 'Gallwch uwchlwytho uchafswm o 10 ffeil.',
     },
     applicant1CannotUpload: {
-      required: 'Select which file you could not upload before continuing. (in welsh)',
+      required: 'Dewiswch pa ffeil nad oeddech yn gallu llwytho cyn parhau.',
     },
   },
-};
-
-const langAssertions = (language, content) => {
-  const generatedContent = generateContent({ language, userCase: {} } as CommonContent);
-  const {
-    title,
-    youNeed,
-    youNeed2,
-    certificate,
-    certificateForeign,
-    warningPhoto,
-    infoTakePhoto,
-    infoBullet1,
-    infoBullet2,
-    infoBullet3,
-    infoBullet4,
-    infoBullet5,
-    minRequirements,
-    uploadFiles,
-    noFilesUploaded,
-    chooseFilePhoto,
-    orStr,
-    dragDropHere,
-    fileFormats,
-    fileSize,
-    cannotUploadDocuments,
-    cannotUploadWhich,
-    checkAllThatApply,
-    //cannotUploadYouCanPost,
-    birthOrAdoptionCertificate,
-    deathCertificate,
-    errors,
-  } = content;
-
-  expect(generatedContent.title).toEqual(title);
-  expect(generatedContent.youNeed).toEqual(youNeed);
-  expect(generatedContent.youNeed2).toEqual(youNeed2);
-  expect(generatedContent.certificate).toEqual(certificate);
-  expect(generatedContent.certificateForeign).toEqual(certificateForeign);
-  expect(generatedContent.warningPhoto).toEqual(warningPhoto);
-  expect(generatedContent.infoTakePhoto).toEqual(infoTakePhoto);
-  expect(generatedContent.infoBullet1).toEqual(infoBullet1);
-  expect(generatedContent.infoBullet2).toEqual(infoBullet2);
-  expect(generatedContent.infoBullet3).toEqual(infoBullet3);
-  expect(generatedContent.infoBullet4).toEqual(infoBullet4);
-  expect(generatedContent.infoBullet5).toEqual(infoBullet5);
-  expect(generatedContent.minRequirements).toEqual(minRequirements);
-  expect(generatedContent.uploadFiles).toEqual(uploadFiles);
-  expect(generatedContent.noFilesUploaded).toEqual(noFilesUploaded);
-  expect(generatedContent.chooseFilePhoto).toEqual(chooseFilePhoto);
-  expect(generatedContent.orStr).toEqual(orStr);
-  expect(generatedContent.dragDropHere).toEqual(dragDropHere);
-  expect(generatedContent.fileFormats).toEqual(fileFormats);
-  expect(generatedContent.fileSize).toEqual(fileSize);
-  expect(generatedContent.cannotUploadDocuments).toEqual(cannotUploadDocuments);
-  expect(generatedContent.cannotUploadWhich).toEqual(cannotUploadWhich);
-  expect(generatedContent.checkAllThatApply).toEqual(checkAllThatApply);
-  //expect(generatedContent.cannotUploadYouCanPost).toEqual(cannotUploadYouCanPost);
-  expect(generatedContent.birthOrAdoptionCertificate).toEqual(birthOrAdoptionCertificate);
-  expect(generatedContent.deathCertificate).toEqual(deathCertificate);
-  expect(generatedContent.errors).toEqual(errors);
 };
 
 const commonContent = { language: EN } as CommonContent;
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('Upload content', () => {
   it('should return the correct content for language = en', () => {
-    langAssertions(EN, enContent);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   it('should return the correct content for language = cy', () => {
-    langAssertions(CY, cyContent);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   it('should have an applicant1UploadedFiles hidden input field', () => {
@@ -229,16 +167,6 @@ describe('applicant1CannotUpload', () => {
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const applicant1CannotUpload = fields.applicant1CannotUpload as FormOptions;
-
-    // console.log("************************************************************");
-    // console.log(JSON.stringify(applicant1CannotUpload));
-    /*
-     {"type":"checkboxes","labelHidden":true,"values":[{"name":"applicant1CannotUpload","value":"checked",
-     "subFields":{"applicant1CannotUploadDocuments":{"type":"checkboxes","values":[{"name":"applicant1CannotUploadDocuments",
-     "value":"birthOrAdoptionCertificate"},
-     {"name":"applicant1CannotUploadDocuments","value":"deathCertificate"}]}}}]}
-    */
-    // console.log("************************************************************");
 
     expect((applicant1CannotUpload.label as Function)(generateContent(commonContent))).toBe(
       enContent.cannotUploadDocuments

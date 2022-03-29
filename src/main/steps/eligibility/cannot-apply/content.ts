@@ -23,13 +23,13 @@ const cy = content => ({
   title: 'Ni allwch wneud cais i fabwysiadu',
   line1: `${
     content.eligibility.under18Eligible === YesOrNo.NO
-      ? 'Ni allwch wneud cais i fabwysiadu the child because they’re 18 neu over.'
+      ? 'Ni allwch wneud cais i fabwysiadu’r plentyn oherwydd ei fod yn 18 oed neu’n hŷn.'
       : content.eligibility.marriedEligible === YesOrNo.YES
-      ? "Ni allwch wneud cais i fabwysiadu the child because they've been married neu in a partneriaeth sifil."
+      ? "Ni allwch wneud cais i fabwysiadu'r plentyn oherwydd ei fod wedi bod yn briod neu mewn partneriaeth sifil."
       : content.eligibility.livedUKEligible === YesOrNo.NO
-      ? 'Ni allwch wneud cais i fabwysiadu the child until you, and the other applicant if relevant, have been living in the UK, Channel Islands neu Isle of Man ar gyfer at least 12 months.'
+      ? 'Ni allwch wneud cais i fabwysiadu’r plentyn nes eich bod chi, a’r ymgeisydd arall os yw’n berthnasol, wedi bod yn byw yn y DU, Ynysoedd y Sianel neu Ynys Manaw am o leiaf 12 mis.'
       : content.eligibility.under21Eligible === YesOrNo.NO
-      ? 'Ni allwch wneud cais i fabwysiadu the child until you, and your partner if applicable, are 21.'
+      ? 'Ni allwch wneud cais i fabwysiadu’r plentyn nes eich bod chi, a’ch partner os yw’n berthnasol, yn 21 oed.'
       : ''
   }`,
   line2: 'Mwy o wybodaeth am fabwysiadu',
