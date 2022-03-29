@@ -103,8 +103,7 @@ const en = () => ({
   mojAddress:
     'Data Protection Officer, Ministry of Justice, 3rd Floor, Post Point 3.20, 10 South Colonnades, Canary Wharf, London E14 4PU',
   mojEmailAddress: '<a href="mailto:dpo@justice.gov.uk" class="govuk-link">dpo@justice.gov.uk</a>',
-  youCanAlsoComplain:
-    "You can also complain to the <a class='govuk-link' href='https://ico.org.uk/global/contact-us'>Information Commissioner’s Office</a> if you’re not satisfied with our response or believe we are not processing your personal data lawfully.",
+  youCanAlsoComplain: 'You can also complain to the ICO if you are unhappy with how we have used your data.',
   icoAddress: 'Information Commissioner’s Office, Wycliffe House, Water Lane, Wilmslow, Cheshire, SK9 5AF',
   icoHelplineNumber: 'Helpline number: 0303 123 1113',
   icoWebsite: "ICO website: <a class='govuk-link' href='https://ico.org.uk'>https://www.ico.org.uk</a>",

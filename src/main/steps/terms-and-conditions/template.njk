@@ -2,20 +2,19 @@
 
 {% block page_content %}
   <h1 class="govuk-heading-l">{{ title }}</h1>
-
   <p class="govuk-body">{{ thisPage | safe }}</p>
+
+  <h2 class="govuk-heading-m">{{ termsAndConditionsUsers }}</h2>
+  <p class="govuk-body">{{ termsAndConditionsProfessional }}</p>
 
   <h2 class="govuk-heading-m">{{ whoWeAre }}</h2>
   <p class="govuk-body">{{ managedBy }}</p>
-  <p class="govuk-body">{{ update }}</p>
 
   <h2 class="govuk-heading-m">{{ info }}</h2>
   <p class="govuk-body">{{ service }}</p>
-  <p class="govuk-body">{{ answer }}</p>
 
   <h2 class="govuk-heading-m">{{ stored }}</h2>
-  <p class="govuk-body">{{ data }}</p>
-  <p class="govuk-body">{{ notifyEmails }}</p>
+  <p class="govuk-body">{{ dataStored | safe }}</p>
 
   <h2 class="govuk-heading-m">{{ applicationLaw }}</h2>
   <p class="govuk-body">{{ dispute }}</p>
@@ -23,24 +22,70 @@
     <li>{{ dispute1 }}</li>
     <li>{{ dispute2 }}</li>
     <li>{{ dispute3 }}</li>
+    <li>{{ dispute4 }}</li>
+    <li>{{ dispute5 }}</li>
   </ul>
 
   <h2 class="govuk-heading-m">{{ responsible }}</h2>
-  <p class="govuk-body">{{ designedForPeople }}</p>
   <p class="govuk-body">{{ risks }}</p>
-  <p class="govuk-body">{{ precautions }}</p>
   <ul class="govuk-list govuk-list--bullet">
     <li>{{ precautions1 }}</li>
     <li>{{ precautions2 }}</li>
     <li>{{ precautions3 }}</li>
   </ul>
   <p class="govuk-body">{{ knowinglyIntroducing }}</p>
-  <p class="govuk-body">{{ containsSeveral }}</p>
 
-  <h2 class="govuk-heading-m">{{ changes }}</h2>
-  <p class="govuk-body">{{ checkTermsAndConditions }}</p>
-  <p class="govuk-body">{{ agreeToChanges }}</p>
+  <h3 class="govuk-heading-s">{{ personallySensitiveInformation }}</h3>
+  <p class="govuk-body">{{ riskcontainsSeverals }}</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>{{ religiousBeliefs }}</li>
+    <li>{{ sexualOrientation }}</li>
+    <li>{{ racialOrigins }}</li>
+    <li>{{ politicalOpinions }}</li>
+    <li>{{ philosophicalBeliefs }}</li>
+    <li>{{ tradeMembership }}</li>
+    <li>{{ geneticData }}</li>
+    <li>{{ healthData }}</li>
+  </ul>
+  <p class="govuk-body">{{ consentGiven | safe }}</p>
 
-  <h2 class="govuk-heading-m">{{ contactUs }}</h2>
-  <p class="govuk-body">{{ address | safe }}</p>
+  <h2 class="govuk-heading-m">{{ disclaimer }}</h2>
+  <p class="govuk-body">{{ disclaimerGuarantee }}</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>{{ current }}</li>
+    <li>{{ secure }}</li>
+    <li>{{ accurate }}</li>
+    <li>{{ complete }}</li>
+    <li>{{ bugFree }}</li>
+  </ul>
+  <p class="govuk-body">{{ advice }}</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>{{ losses }}</li>
+    <li>{{ civilWrongs }}</li>
+    <li>{{ serviceUse }}</li>
+    <li>{{ inabilityToUse }}</li>
+  </ul>
+  <p class="govuk-body">{{ damageForeseeable }}</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>{{ income }}</li>
+    <li>{{ salary }}</li>
+    <li>{{ business }}</li>
+    <li>{{ profits }}</li>
+    <li>{{ opportunity }}</li>
+    <li>{{ anticipatedSavings }}</li>
+    <li>{{ data }}</li>
+    <li>{{ goodwill }}</li>
+    <li>{{ tangibleProperty }}</li>
+    <li>{{ intangibleProperty }}</li>
+    <li>{{ wastedTime }}</li>
+  </ul>
+
+  <p class="govuk-body">{{ liable }}</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>{{ death }}</li>
+    <li>{{ fraudulentMisrepresentation }}</li>
+    <li>{{ anyOtherLiability }}</li>
+  </ul>
+
+  <p class="govuk-body">{{ contactUsFurtherInfo | safe }}</p>
 {% endblock %}

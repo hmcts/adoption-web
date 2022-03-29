@@ -3,8 +3,8 @@ import { TranslationFn } from '../../app/controller/GetController';
 const en = {
   title: 'Terms and conditions',
   thisPage:
-    'By using this service you’re agreeing to these terms of use. This includes the <a class="govuk-link" href="https://www.gov.uk/help/privacy-policy" target="_blank">privacy policy</a>.',
-  termsAndConditions: 'Terms and conditions for professional users',
+    'By using this service you’re agreeing to these terms of use. This includes the <a class="govuk-link" href="/privacy-policy" target="_blank">privacy policy</a>.',
+  termsAndConditionsUsers: 'Terms and conditions for professional users',
   termsAndConditionsProfessional:
     "If you are a professional user, you'll be asked to agree to the additional terms and conditions of the service after you create a MyHMCTS account.",
   whoWeAre: 'Who we are',
@@ -77,15 +77,15 @@ const en = {
   death: 'death or personal injury arising from our negligence',
   fraudulentMisrepresentation: 'fraudulent misrepresentation',
   anyOtherLiability: 'any other liability which cannot be excluded or limited under applicable law',
-  contactUs:
-    '<a class="govuk-link" href="https://hmcts-access.service.gov.uk/contact-us" target="_blank">Contact us</a> for further information.',
+  contactUsFurtherInfo:
+    '<a class="govuk-link" href="/contact-us" target="_blank">Contact us</a> for further information.',
 };
 
 const cy: typeof en = {
   title: 'Terms and conditions (in Welsh)',
   thisPage:
-    'By using this service you’re agreeing to these terms of use. This includes the <a class="govuk-link" href="https://www.gov.uk/help/privacy-policy" target="_blank">privacy policy</a>. (in Welsh)',
-  termsAndConditions: 'Terms and conditions for professional users (in Welsh)',
+    'By using this service you’re agreeing to these terms of use. This includes the <a class="govuk-link" href="/privacy-policy" target="_blank">privacy policy</a>. (in Welsh)',
+  termsAndConditionsUsers: 'Terms and conditions for professional users (in Welsh)',
   termsAndConditionsProfessional:
     "If you are a professional user, you'll be asked to agree to the additional terms and conditions of the service after you create a MyHMCTS account. (in Welsh)",
   whoWeAre: 'Who we are (in Welsh)',
@@ -159,8 +159,8 @@ const cy: typeof en = {
   death: 'death or personal injury arising from our negligence (in Welsh)',
   fraudulentMisrepresentation: 'fraudulent misrepresentation (in Welsh)',
   anyOtherLiability: 'any other liability which cannot be excluded or limited under applicable law (in Welsh)',
-  contactUs:
-    '<a class="govuk-link" href="https://hmcts-access.service.gov.uk/contact-us" target="_blank">Contact us</a> for further information. (in Welsh)',
+  contactUsFurtherInfo:
+    '<a class="govuk-link" href="/contact-us" target="_blank">Contact us</a> for further information. (in Welsh)',
 };
 
 const languages = {
