@@ -12,6 +12,7 @@ import {
   DocumentType,
   Gender,
   JurisdictionConnections,
+  LanguagePreference,
   ListValue,
   Nationality,
   OrderSummary,
@@ -49,6 +50,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant1AddressPostcode: 'applicant1AddressPostCode',
   applicant1ContactDetails: 'applicant1ContactDetails',
   applicant1ContactDetailsConsent: 'applicant1ContactDetailsConsent',
+  applicant1LanguagePreference: 'applicant1LanguagePreference',
 
   applicant2FirstNames: 'applicant2FirstName',
   applicant2LastNames: 'applicant2LastName',
@@ -209,6 +211,7 @@ export interface Case {
   applicant1AddressPostcode?: string;
   applicant1ContactDetails?: ContactDetails[];
   applicant1ContactDetailsConsent?: YesOrNo;
+  applicant1LanguagePreference?: LanguagePreference;
 
   /***** Applicant2 *****/
   applicant2FirstNames?: string;
@@ -383,11 +386,6 @@ export interface CaseDate {
   year: string;
   month: string;
   day: string;
-}
-
-export enum LanguagePreference {
-  English = 'english',
-  Welsh = 'welsh',
 }
 
 export interface UploadedFile {
