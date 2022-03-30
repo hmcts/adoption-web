@@ -18,7 +18,7 @@ export class FileUploadEvents {
   public onError = (state: Error): void => {
     if (state.message.includes('exceeds maximum allowed size')) {
       errorUploadingTooBigEl?.classList.remove(hidden);
-    } else if (state.message.includes('You can only upload: image/jpeg')) {
+    } else if (state.message.includes('You can only upload:')) {
       errorUploadingWrongFormatEl?.classList.remove(hidden);
     } else {
       errorUploadingGenericEl?.classList.remove(hidden);

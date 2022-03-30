@@ -30,7 +30,7 @@ const enContent = {
   chooseFilePhoto: 'Choose a file or take a photo',
   orStr: 'or',
   dragDropHere: 'Drag and drop files here',
-  fileFormats: 'The file must be in jpg, bmp, tiff, png or pdf format.',
+  fileFormats: 'The file must be in PDF or MS Word Document format.',
   fileSize: 'Maximum file size 2MB.',
   cannotUploadDocuments: 'I cannot upload some or all of my documents',
   cannotUploadWhich: 'Which document can you not upload?',
