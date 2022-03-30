@@ -26,6 +26,7 @@ import {
  * Adds the state redirect middleware to redirect when application is in certain states
  */
 export class StateRedirectMiddleware {
+  FOOTER_LINKS = [COOKIES_PAGE, PRIVACY_POLICY, ACCESSIBILITY_STATEMENT, TERMS_AND_CONDITIONS, CONTACT_US];
   public enableFor(app: Application): void {
     const { errorHandler } = app.locals;
     dayjs.extend(customParseFormat);
@@ -43,8 +44,7 @@ export class StateRedirectMiddleware {
           // can not go to check-your-answers page before completing all the sections
           return res.redirect(TASK_LIST_URL);
         }
-        const FOOTER_LINKS = [COOKIES_PAGE, PRIVACY_POLICY, ACCESSIBILITY_STATEMENT, TERMS_AND_CONDITIONS, CONTACT_US];
-        if (FOOTER_LINKS.find(item => req.path.startsWith(item))) {
+        if (this.FOOTER_LINKS.find(item => req.path.startsWith(item))) {
           //Footer links are accessible from anywhere in the application
           return next();
         }
