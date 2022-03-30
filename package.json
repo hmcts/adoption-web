@@ -32,7 +32,7 @@
     "test:crossbrowser": "./bin/run-crossbrowser-tests.sh",
     "test:local": "codeceptjs run-multiple parallel",
     "test:pact": "jest -c jest.pact.config.js --runInBand",
-    "pact:publish": "pact-broker publish pact/pacts --consumer-app-version=\"$(npx @pact-foundation/absolute-version)\" --auto-detect-version-properties --broker-base-url=https://pact-broker.platform.hmcts.net/",
+    "pact:publish": "pact-broker publish pact/pacts --consumer-app-version=0.0.1 --broker-base-url=https://pact-broker.platform.hmcts.net/",
     "test:pact:run-and-publish": "yarn test:pact && yarn pact:publish",
     "broker": "docker-compose -f broker-compose.yaml up -d",
     "broker:stop": "docker-compose -f broker-compose.yaml down"
@@ -52,7 +52,7 @@
     "@types/express": "^4.17.13",
     "@types/express-session": "^1.17.4",
     "@types/glob": "^7.2.0",
-    "@types/lodash": "^4.14.179",
+    "@types/lodash": "^4.14.181",
     "@types/multer": "^1.4.7",
     "@types/negotiator": "^0.6.1",
     "@types/node": "^16.11.7",

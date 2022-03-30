@@ -3,6 +3,7 @@ import { Application, NextFunction, Response } from 'express';
 
 import { getRedirectUrl, getUserDetails } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
+import { LanguagePreference } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
 import { CALLBACK_URL, ELIGIBILITY_URL, SIGN_IN_URL, SIGN_OUT_URL } from '../../steps/urls';
 
@@ -42,8 +43,20 @@ export class OidcMiddleware {
         if (req.session?.user) {
           res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
-          req.session.userCase =
-            req.session.userCase || (await req.locals.api.getOrCreateCase(res.locals.serviceType, req.session.user));
+          if (!req.session.userCase) {
+            //This language preference will be used while creating a case
+            const languagePreference =
+              req.session['lang'] === 'cy' ? LanguagePreference.WELSH : LanguagePreference.ENGLISH;
+            req.session.userCase = await req.locals.api.getOrCreateCase(
+              res.locals.serviceType,
+              req.session.user,
+              languagePreference
+            );
+
+            //setting the applicant's preferred language in session
+            req.session['lang'] =
+              req.session.userCase.applicant1LanguagePreference === LanguagePreference.WELSH ? 'cy' : 'en';
+          }
           return next();
         }
         res.redirect(SIGN_IN_URL);
