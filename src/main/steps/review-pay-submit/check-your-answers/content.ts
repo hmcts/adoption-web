@@ -131,7 +131,7 @@ const en = (content: CommonContent) => {
 const cyContent: typeof enContent = {
   section: 'Review your application (in welsh)',
   title: 'Review your answers (in welsh)',
-  change: 'Change (in welsh)',
+  change: 'Newid',
   reason: 'Reason (in welsh)',
   submitApplication: 'Check your application (in welsh)',
   checkInfoBeforeSubmit:
@@ -142,9 +142,9 @@ const cyContent: typeof enContent = {
     [ApplyingWith.WITH_SOME_ONE_ELSE]: "I'm applying with someone who is not my spouse or civil partner (in welsh)",
   },
   gender: {
-    [Gender.MALE]: 'Male (in welsh)',
-    [Gender.FEMALE]: 'Female (in welsh)',
-    [Gender.OTHER]: 'Other (in welsh)',
+    [Gender.MALE]: 'Gwryw',
+    [Gender.FEMALE]: 'Benyw',
+    [Gender.OTHER]: 'Arall',
   },
   yesNoNotsure: {
     [YesNoNotsure.YES]: 'Yes (in welsh)',

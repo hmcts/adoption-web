@@ -33,7 +33,7 @@ const enContent = {
 const cyContent = {
   title: 'Gwneud cais i fabwysiadu plentyn a leolwyd dan eich gofal',
   line1:
-    'Gallwch wneud cais i fabwysiadu plentyn sydd dan eich gofal yn dilyn <a class=”govuk-link” href=”/eligibility/start”>gorchymyn lleoli gan lys.</a>',
+    'Gallwch wneud cais i fabwysiadu plentyn sydd dan eich gofal yn dilyn <a class="govuk-link" href="/eligibility/start">gorchymyn lleoli gan lys.</a>',
   line2:
     'Rhaid bod y plentyn wedi byw gyda chi am o leiaf 10 wythnos cyn ichi wneud cais. Ni fyddwch yn gallu cyflwyno’ch cais nes bod y cyfnod o 10 wythnos wedi pasio.',
   line3:

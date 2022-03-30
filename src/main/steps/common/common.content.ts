@@ -111,7 +111,7 @@ const cy: typeof en = {
   applyForAdoption: 'Gwneud cais i fabwysiadu',
   applyForDissolution: 'Gwneud cais i fabwysiadu',
   feedback:
-    "Mae hwn yn wasanaeth newydd <a class=”govuk-link” aria-label=”Dolen adborth, Bydd hyn yn agor tab newydd. Bydd arnoch angen dychwelyd i’r tab hwn a pharhau gyda’ch cais o fewn 60 munud fel na fyddwch yn colli eich cynnydd. “ href=”#” target=”_blank”>Bydd adborth</a> yn ein helpu ni i'w wella.",
+    'Mae hwn yn wasanaeth newydd <a class="govuk-link" aria-label="Dolen adborth, Bydd hyn yn agor tab newydd. Bydd arnoch angen dychwelyd i’r tab hwn a pharhau gyda’ch cais o fewn 60 munud fel na fyddwch yn colli eich cynnydd." href="#" target="_blank">Bydd adborth</a> yn ein helpu ni i’w wella.',
   languageToggle: '<a href="?lng=en" class="govuk-link language">English</a>',
   govUk: 'GOV.UK',
   back: 'Yn ôl',

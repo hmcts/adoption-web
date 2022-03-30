@@ -29,7 +29,7 @@ const enContent = {
 };
 
 const cyContent = {
-  addressLine1: 'Adeilad a stryd <span class=”govuk-visually-hidden”>llinell 1 o 2</span>',
+  addressLine1: 'Adeilad a stryd <span class="govuk-visually-hidden">llinell 1 o 2</span>',
   addressLine2: '<span class="govuk-visually-hidden">Adeilad a stryd llinell 2 o 2</span>',
   town: 'Tref neu ddinas',
   county: 'Sir',

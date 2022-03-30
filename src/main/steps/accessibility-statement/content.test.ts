@@ -101,15 +101,15 @@ const cyContent = {
   needMoreInformation:
     'Os ydych angen gwybodaeth sydd ar y wefan hon mewn fformat arall megis ar ffurf PDF hygyrch, print bras, fformat hawdd ei ddarllen, recordiad sain neu braille:',
   email:
-    'e-bost <a href=”mailto:HMCTSforms@justice.gov.uk” class=”govuk-link” aria-label=”Bydd y ddolen hon yn agor mewn neges e-bost newydd i HMCTSforms@justice.gov.uk">HMCTSforms@justice.gov.uk</a>',
+    'e-bost <a href="mailto:HMCTSforms@justice.gov.uk" class="govuk-link" aria-label="Bydd y ddolen hon yn agor mewn neges e-bost newydd i HMCTSforms@justice.gov.uk">HMCTSforms@justice.gov.uk</a>',
   phone: 'ffoniwch 0300 303 5171 (dydd Llun i ddydd Gwener, 8.30am - 5pm)',
   considerYourRequest: 'Byddwn yn ystyried eich cais ac yn ymateb cyn gynted â phosib.',
   reportingAccessibility: "Riportio problemau hygyrchedd gyda'r wefan hon",
   improveAccessibility:
-    'Rydym bob amser yn ceisio gwella hygyrchedd y wefan hon. Os byddwch yn cael unrhyw broblemau nad ydynt yn cael eu crybwyll ar y dudalen hon, neu os ydych yn credu nad ydym yn bodloni gofynion y rheoliadau hygyrchedd, cysylltwch â: <a href=”mailto:HMCTSforms@justice.gov.uk” class=”govuk-link” aria-label=”Bydd y ddolen hon yn agor mewn neges e-bost newydd i HMCTSforms@justice.gov.uk”>HMCTSforms@justice.gov.uk</a>.',
+    'Rydym bob amser yn ceisio gwella hygyrchedd y wefan hon. Os byddwch yn cael unrhyw broblemau nad ydynt yn cael eu crybwyll ar y dudalen hon, neu os ydych yn credu nad ydym yn bodloni gofynion y rheoliadau hygyrchedd, cysylltwch â: <a href="mailto:HMCTSforms@justice.gov.uk" class="govuk-link" aria-label="Bydd y ddolen hon yn agor mewn neges e-bost newydd i HMCTSforms@justice.gov.uk">HMCTSforms@justice.gov.uk</a>.',
   enforcementProcedure: 'Y Weithdrefn Orfodi',
   humanRightsCommission:
-    'Y Comisiwn Cydraddoldeb a Hawliau Dynol (EHRC) sy’n gyfrifol am neufodi’r <a href=”http://www.legislation.gov.uk/uksi/2018/852/contents/made” class=”govuk-link” target=”_blank” aria-label=”Bydd y ddolen hon yn agor mewn tab newydd ar gyfer Cyrff y Sector Cyhoeddus”>Rheoliadau Hygyrchedd Cyrff y Sector Cyhoeddus (Gwefannau a Rhaglenni Symudol) (Rhif 2) 2018</a> (y’ rheoliadau hygyrchedd‘).”,',
+    'Y Comisiwn Cydraddoldeb a Hawliau Dynol (EHRC) sy’n gyfrifol am neufodi’r <a href="http://www.legislation.gov.uk/uksi/2018/852/contents/made" class="govuk-link" target="_blank" aria-label="Bydd y ddolen hon yn agor mewn tab newydd ar gyfer Cyrff y Sector Cyhoeddus">Rheoliadau Hygyrchedd Cyrff y Sector Cyhoeddus (Gwefannau a Rhaglenni Symudol) (Rhif 2) 2018</a> (y’ rheoliadau hygyrchedd‘).",',
   notHappy:
     'Os nad ydych chi’ n fodlon gyda’r ffordd rydym yn ymateb i’ch cwyn, <a href=https://www.equalityadvisoryservice.com/" class="govuk-link" target="_blank" aria-label=Bydd y ddolen hon yn agor mewn tab newydd ar gyfer y Gwasanaeth Cynghori a Chymorth Cydraddoldeb">cysylltwch â’r Gwasanaeth Cynghori a Chymorth Cydraddoldeb (EASS)</a>.",',
   technicalInfo: 'Gwybodaeth dechnegol am hygyrchedd y wefan hon',

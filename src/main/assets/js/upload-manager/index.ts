@@ -23,7 +23,7 @@ const initUploadManager = (): void => {
 
   let chooseFilePhoto;
   if (locale === 'cy') {
-    chooseFilePhoto = 'Choose a file or take a photo (in welsh)';
+    chooseFilePhoto = 'Dewiswch ffeil neu tynnwch lun';
   } else {
     chooseFilePhoto = 'Choose a file or take a photo';
   }

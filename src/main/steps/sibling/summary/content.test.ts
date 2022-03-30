@@ -10,6 +10,7 @@ jest.mock('../../../app/form/validation');
 const enContent = {
   section: 'Sibling details',
   title: 'Orders already in place for siblings and half-siblings',
+  sibling: 'Sibling',
   placementOrder: 'Placement Order',
   change: 'Change',
   remove: 'Remove',
@@ -26,6 +27,7 @@ const enContent = {
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
   title: 'Gorchmynion eisoes mewn lle ar gyfer brodyr/chwiorydd a hanner brodyr/hanner chwiorydd',
+  sibling: 'Brawd/chwaer',
   placementOrder: 'Gorchymyn Lleoli',
   change: 'Newid',
   remove: 'Dileu',
