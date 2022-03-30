@@ -10,7 +10,7 @@ const en = {
   applyForAdoption: 'apply for adoption',
   applyForDissolution: 'Apply for adoption',
   feedback:
-    'This is a new service – your <a class="govuk-link" aria-label="Feedback link, This will open a new tab. You’ll need to return to this tab and continue with your application within 60 mins so you don’t lose your progress." href="https://www.smartsurvey.co.uk/s/Adoption_Feedback/?pageurl=X" target="_blank">feedback</a> will help us to improve it.',
+    'This is a new service – your <a class="govuk-link" aria-label="Feedback link, This will open a new tab. You’ll need to return to this tab and continue with your application within 60 mins so you don’t lose your progress." href="https://www.smartsurvey.co.uk/s/Adoption_Feedback/?pageurl=PAGE_TITLE" target="_blank">feedback</a> will help us to improve it.',
   languageToggle: '<a href="?lng=cy" class="govuk-link language">Cymraeg</a>',
   govUk: 'GOV.UK',
   back: 'Back',
@@ -111,7 +111,7 @@ const cy: typeof en = {
   applyForAdoption: 'Apply for adoption (in welsh)',
   applyForDissolution: 'Apply for adoption (in welsh)',
   feedback:
-    'This is a new service – your <a class="govuk-link" aria-label="Feedback link, This will open a new tab. You’ll need to return to this tab and continue with your application within 60 mins so you don’t lose your progress." href="https://www.smartsurvey.co.uk/s/Adoption_Feedback/?pageurl=X" target="_blank">feedback</a> will help us to improve it.(in welsh)',
+    'This is a new service – your <a class="govuk-link" aria-label="Feedback link, This will open a new tab. You’ll need to return to this tab and continue with your application within 60 mins so you don’t lose your progress." href="https://www.smartsurvey.co.uk/s/Adoption_Feedback/?pageurl=PAGE_TITLE" target="_blank">feedback</a> will help us to improve it.(in welsh)',
   languageToggle: '<a href="?lng=en" class="govuk-link language">English</a>',
   govUk: 'GOV.UK',
   back: 'Back (in welsh)',
