@@ -15,7 +15,9 @@ export const placementOrderListItems = (siblingId: string, placementOrders: Plac
       },
       value: {
         classes: 'summary-list-value',
-        html: isPlacementOrderComplete(item) ? '' : '<strong class="govuk-tag govuk-tag--yellow">Incomplete</strong>',
+        html: isPlacementOrderComplete(item)
+          ? ''
+          : `<strong class="govuk-tag govuk-tag--yellow">${content.incomplete}</strong>`,
       },
       actions: {
         classes: 'summary-list-actions',

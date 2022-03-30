@@ -24,7 +24,7 @@ export const placementOrderListItems = (userCase: CaseWithId, content: any): any
         classes: 'summary-list-value',
         html: isPlacementOrderComplete(item, index === 0)
           ? ''
-          : '<strong class="govuk-tag govuk-tag--yellow">Incomplete</strong>',
+          : `<strong class="govuk-tag govuk-tag--yellow">${content.incomplete}</strong>`,
       },
       actions: {
         classes: 'summary-list-actions',

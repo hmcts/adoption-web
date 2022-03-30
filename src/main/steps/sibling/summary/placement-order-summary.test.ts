@@ -6,6 +6,7 @@ describe('placement-order-summary', () => {
     change: 'Change',
     remove: 'Remove',
     placementOrder: 'Placement Order',
+    incomplete: 'incomplete',
   };
 
   test('should return correct summary list items', () => {
@@ -50,7 +51,7 @@ describe('placement-order-summary', () => {
         key: { text: 'MOCK_TYPE2', classes: 'font-normal' },
         value: {
           classes: 'summary-list-value',
-          html: '<strong class="govuk-tag govuk-tag--yellow">Incomplete</strong>',
+          html: '<strong class="govuk-tag govuk-tag--yellow">incomplete</strong>',
         },
         actions: {
           classes: 'summary-list-actions',
