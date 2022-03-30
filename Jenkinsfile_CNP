@@ -3,6 +3,7 @@
 @Library('Infrastructure')
 
 import uk.gov.hmcts.contino.AppPipelineConfig
+import uk.gov.hmcts.contino.AppPipelineDsl
 
 def type = 'nodejs'
 def product = 'adoption'
@@ -45,6 +46,8 @@ withPipeline(type, product, component) {
   enableSlackNotifications('#adoption-tech')
 
   loadVaultSecrets(secrets)
+
+  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
 
   after('build') {
     yarnBuilder.yarn('build')

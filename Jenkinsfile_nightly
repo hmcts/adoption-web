@@ -14,6 +14,7 @@ properties([
 @Library("Infrastructure")
 
 import uk.gov.hmcts.contino.AppPipelineConfig
+import uk.gov.hmcts.contino.AppPipelineDsl
 
 def type = "nodejs"
 def product = "adoption"
@@ -56,8 +57,10 @@ withNightlyPipeline(type, product, component) {
   enableCrossBrowserTest(['chrome', 'firefox','microsoft'])
   enableFullFunctionalTest(120)
   loadVaultSecrets(secrets)
+  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
   enableFortifyScan()
   enableSecurityScan()
+
   after('test') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
   }
@@ -79,7 +82,6 @@ withNightlyPipeline(type, product, component) {
   }
 
   after('fortify-scan') {
-    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'zap/**/*'
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: '**/Fortify Scan/**/*'
   }
 }

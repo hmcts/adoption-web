@@ -55,7 +55,7 @@ export class CaseApi {
     }
   }
 
-  private async getCases(): Promise<CcdV1Response[]> {
+  public async getCases(): Promise<CcdV1Response[]> {
     try {
       const response = await this.axios.get<CcdV1Response[]>(
         `/citizens/${this.userDetails.id}/jurisdictions/${JURISDICTION}/case-types/${CASE_TYPE}/cases`
