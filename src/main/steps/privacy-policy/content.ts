@@ -10,7 +10,7 @@ const en = () => ({
   whoManages: 'Who manages this service',
   managedBy:
     'This service is managed by HM Courts and Tribunals Service (HMCTS), which is an executive agency of the Ministry of Justice (MoJ).',
-  moj: "The MoJ is known as the data controller for data protection purposes. <a class='govuk-link' href='https://www.gov.uk/government/organisations/ministry-of-justice/about/personal-information-charter' target='_blank'>The MoJ personal information charter</a> explains how the MoJ processes personal data.",
+  moj: "The MoJ is known as the data controller for data protection purposes. <a class='govuk-link' href='https://www.gov.uk/government/organisations/ministry-of-justice/about/personal-information-charter' target='_blank'>The MoJ personal information charter (opens in a new window)</a> explains how the MoJ processes personal data.",
   responsibleForDeciding:
     'As part of the MoJ, HMCTS is responsible for deciding how your personal data is used and for protecting the personal data you provide.',
   moreInformation:
@@ -42,7 +42,7 @@ const en = () => ({
   asPart:
     'As part of your application you’ll be asked to use your email address to set up an account. You will be able to use this email address and password to sign into other HMCTS services.',
   weMayAskForPermission:
-    'We will ask for your permission to use your email address to send you emails using GOV.UK Notify. This system processes emails only within the European Economic Area until the point where emails are handed over to the email provider you use.',
+    'We may ask for your permission to use your email address to send you emails using GOV.UK Notify. This system processes emails only within the European Economic Area until the point where emails are handed over to the email provider you use.',
   weUseCookies:
     "We use <a class='govuk-link' href='/cookies'>cookies</a> to collect data that tells us about how you’re using this service, including:",
   ifYouOpenEmail: 'if you open an email from us or click on a link in an email',
@@ -58,9 +58,9 @@ const en = () => ({
   ifAnother:
     'While processing your application, another government department, agency or organisation might be involved and we may share your data with them.',
   ifYouContactUs:
-    'If you contact us and ask for help with the service you’re using, your personal data may be shared with the <a class="govuk-link" href="https://www.goodthingsfoundation.org/" target="_blank">Good Things Foundation</a>. This is a company who we have partnered with to offer face to face support.',
+    'If you contact us and ask for help with the service you’re using, your personal data may be shared with the <a class="govuk-link" href="https://www.goodthingsfoundation.org/" target="_blank">Good Things Foundation (opens in a new window)</a>. This is a company who we have partnered with to offer face to face support.',
   crime:
-    'In some circumstances we may share your data for example, to prevent or detect crime, or to produce anonymised statistics.',
+    'In some circumstances we may share your data. For example, to prevent or detect crime, or to produce anonymised statistics.',
   weUse:
     "We use Google Analytics to collect data about how a website is used. This anonymous data is shared with Google. Find out about this in our <a class='govuk-link' href='/terms-and-conditions'>terms and conditions</a>.",
   lawfulBases:
@@ -87,8 +87,8 @@ const en = () => ({
     'that we transfer the personal information you gave us to another organisation, or to you, in certain circumstances',
   ifYouWantToSeePersonal: 'If you want to see the personal data that we hold on you, you can:',
   completeForm:
-    "complete a form to make a <a class='govuk-link' href='https://www.gov.uk/government/publications/request-your-personal-data-from-moj'>subject access request</a> - your request goes to the MoJ as data controller",
-  writeToUs: 'write to us: Disclosure Team, Post point 10.38, 102 Petty France, London, SW1H 9AJ',
+    "complete a form to make a <a class='govuk-link' href='https://www.gov.uk/government/publications/request-your-personal-data-from-moj' target='_blank'>subject access request (opens in a new window)</a>. Your request goes to the MoJ as data controller",
+  writeToUs: 'write to us: Disclosure Team, Post point 10.24, 102 Petty France, London, SW1H 9AJ',
   emailUs: 'email: <a href="mailto:data.access@justice.gov.uk" class="govuk-link">data.access@justice.gov.uk</a>',
   askMoreInformation: 'You can ask for more information about:',
   agreementsWeHave: 'agreements we have on sharing information with other organisations',
@@ -97,14 +97,15 @@ const en = () => ({
   howWeCheck: 'how we check that the information we hold is accurate and up-to-date',
   howToComplain: 'How to complain',
   seeOurComplaints:
-    "See our <a class='govuk-link' href='https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service/about/complaints-procedure'>complaints procedure</a> if you want to complain about how we've handled your personal data.",
+    "See our <a class='govuk-link' href='https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service/about/complaints-procedure' target='_blank'>complaints procedure (opens in a new window)</a> if you want to complain about how we've handled your personal data.",
   concernsDataProtection:
     'If you have any concerns about our use of your personal data, you can contact the MoJ data protection officer:',
   mojAddress:
-    'Data Protection Officer, Ministry of Justice, 3rd Floor, Post Point 3.20, 10 South Colonnades, Canary Wharf, London E14 4PU',
+    'Data Protection Officer <br/> Ministry of Justice <br/> 3rd Floor, Post Point 3.20 <br/> 10 South Colonnades <br/> Canary Wharf <br/> London <br/> E14 4PU',
   mojEmailAddress: '<a href="mailto:dpo@justice.gov.uk" class="govuk-link">dpo@justice.gov.uk</a>',
   youCanAlsoComplain: 'You can also complain to the ICO if you are unhappy with how we have used your data.',
-  icoAddress: 'Information Commissioner’s Office, Wycliffe House, Water Lane, Wilmslow, Cheshire, SK9 5AF',
+  icoAddress:
+    'Information Commissioner’s Office <br/> Wycliffe House <br/> Water Lane <br/> Wilmslow <br/> Cheshire <br/> SK9 5AF',
   icoHelplineNumber: 'Helpline number: 0303 123 1113',
   icoWebsite: "ICO website: <a class='govuk-link' href='https://ico.org.uk'>https://www.ico.org.uk</a>",
 });
@@ -120,7 +121,7 @@ const cy: typeof en = () => ({
   whoManages: 'Who manages this service (in Welsh)',
   managedBy:
     'This service is managed by HM Courts and Tribunals Service (HMCTS), which is an executive agency of the Ministry of Justice (MoJ). (in Welsh)',
-  moj: "The MoJ is known as the data controller for data protection purposes. <a class='govuk-link' href='https://www.gov.uk/government/organisations/ministry-of-justice/about/personal-information-charter' target='_blank'>The MoJ personal information charter</a> explains how the MoJ processes personal data. (in Welsh)",
+  moj: "The MoJ is known as the data controller for data protection purposes. <a class='govuk-link' href='https://www.gov.uk/government/organisations/ministry-of-justice/about/personal-information-charter' target='_blank'>The MoJ personal information charter (opens in a new window)</a> explains how the MoJ processes personal data. (in Welsh)",
   responsibleForDeciding:
     'As part of the MoJ, HMCTS is responsible for deciding how your personal data is used and for protecting the personal data you provide. (in Welsh)',
   moreInformation:
@@ -152,7 +153,7 @@ const cy: typeof en = () => ({
   asPart:
     'As part of your application you’ll be asked to use your email address to set up an account. You will be able to use this email address and password to sign into other HMCTS services. (in Welsh)',
   weMayAskForPermission:
-    'We will ask for your permission to use your email address to send you emails using GOV.UK Notify. This system processes emails only within the European Economic Area until the point where emails are handed over to the email provider you use. (in Welsh)',
+    'We may ask for your permission to use your email address to send you emails using GOV.UK Notify. This system processes emails only within the European Economic Area until the point where emails are handed over to the email provider you use. (in Welsh)',
   weUseCookies:
     "We use <a class='govuk-link' href='/cookies'>cookies</a> to collect data that tells us about how you’re using this service, including: (in Welsh)",
   ifYouOpenEmail: 'if you open an email from us or click on a link in an email (in Welsh)',
@@ -168,9 +169,9 @@ const cy: typeof en = () => ({
   ifAnother:
     'While processing your application, another government department, agency or organisation might be involved and we may share your data with them. (in Welsh)',
   ifYouContactUs:
-    'If you contact us and ask for help with the service you’re using, your personal data may be shared with the <a class="govuk-link" href="https://www.goodthingsfoundation.org/" target="_blank">Good Things Foundation</a>. This is a company who we have partnered with to offer face to face support. (in Welsh)',
+    'If you contact us and ask for help with the service you’re using, your personal data may be shared with the <a class="govuk-link" href="https://www.goodthingsfoundation.org/" target="_blank">Good Things Foundation (opens in a new window)</a>. This is a company who we have partnered with to offer face to face support. (in Welsh)',
   crime:
-    'In some circumstances we may share your data for example, to prevent or detect crime, or to produce anonymised statistics. (in Welsh)',
+    'In some circumstances we may share your data. For example, to prevent or detect crime, or to produce anonymised statistics. (in Welsh)',
   weUse:
     "We use Google Analytics to collect data about how a website is used. This anonymous data is shared with Google. Find out about this in our <a class='govuk-link' href='/terms-and-conditions'>terms and conditions</a>. (in Welsh)",
   lawfulBases:
@@ -197,7 +198,7 @@ const cy: typeof en = () => ({
     'that we transfer the personal information you gave us to another organisation, or to you, in certain circumstances (in Welsh)',
   ifYouWantToSeePersonal: 'If you want to see the personal data that we hold on you, you can: (in Welsh)',
   completeForm:
-    "complete a form to make a <a class='govuk-link' href='https://www.gov.uk/government/publications/request-your-personal-data-from-moj'>subject access request</a> - your request goes to the MoJ as data controller (in Welsh)",
+    "complete a form to make a <a class='govuk-link' href='https://www.gov.uk/government/publications/request-your-personal-data-from-moj' target='_blank'>subject access request (opens in a new window)</a>. Your request goes to the MoJ as data controller (in Welsh)",
   writeToUs: 'write to us: Disclosure Team, Post point 10.38, 102 Petty France, London, SW1H 9AJ (in Welsh)',
   emailUs:
     'email: <a href="mailto:data.access@justice.gov.uk" class="govuk-link">data.access@justice.gov.uk</a> (in Welsh)',
@@ -208,15 +209,16 @@ const cy: typeof en = () => ({
   howWeCheck: 'how we check that the information we hold is accurate and up-to-date (in Welsh)',
   howToComplain: 'How to complain (in Welsh)',
   seeOurComplaints:
-    "See our <a class='govuk-link' href='https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service/about/complaints-procedure'>complaints procedure</a> if you want to complain about how we've handled your personal data. (in Welsh)",
+    "See our <a class='govuk-link' href='https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service/about/complaints-procedure' target='_blank'>complaints procedure (opens in a new window)</a> if you want to complain about how we've handled your personal data. (in Welsh)",
   concernsDataProtection:
     'If you have any concerns about our use of your personal data, you can contact the MoJ data protection officer: (in Welsh)',
   mojAddress:
-    'Data Protection Officer, Ministry of Justice, 3rd Floor, Post Point 3.20, 10 South Colonnades, Canary Wharf, London E14 4PU (in Welsh)',
+    'Data Protection Officer <br/> Ministry of Justice <br/> 3rd Floor, Post Point 3.20 <br/> 10 South Colonnades <br/> Canary Wharf <br/> London <br/> E14 4PU (in Welsh)',
   mojEmailAddress: '<a href="mailto:dpo@justice.gov.uk" class="govuk-link">dpo@justice.gov.uk</a> (in Welsh)',
   youCanAlsoComplain:
     "You can also complain to the <a class='govuk-link' href='https://ico.org.uk/global/contact-us'>Information Commissioner’s Office</a> if you’re not satisfied with our response or believe we are not processing your personal data lawfully. (in Welsh)",
-  icoAddress: 'Information Commissioner’s Office, Wycliffe House, Water Lane, Wilmslow, Cheshire, SK9 5AF (in Welsh)',
+  icoAddress:
+    'Information Commissioner’s Office <br/> Wycliffe House <br/> Water Lane <br/> Wilmslow <br/> Cheshire <br/> SK9 5AF (in Welsh)',
   icoHelplineNumber: 'Helpline number: 0303 123 1113 (in Welsh)',
   icoWebsite: "ICO website: <a class='govuk-link' href='https://ico.org.uk'>https://www.ico.org.uk</a> (in Welsh)",
 });

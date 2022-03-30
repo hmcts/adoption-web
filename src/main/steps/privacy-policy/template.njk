@@ -66,16 +66,16 @@
     <p class="govuk-body">{{ crime }}</p>
     <p class="govuk-body">{{ weUse | safe }}</p>
     <p class="govuk-body">{{ lawfulBases }}</p>
-    <ul class="govuk-list govuk-list--bullet">
-        <li>{{ consent }}</li>
-        <li>{{ legalObligation }}</li>
-        <li>{{ vitalInterest }}</li>
-        <li>{{ publicTask }}</li>
-        <li>{{ legitimateInterest }}</li>
+    <ul class="govuk-list">
+        <li>(a) {{ consent }}</li>
+        <li>(b) {{ legalObligation }}</li>
+        <li>(c) {{ vitalInterest }}</li>
+        <li>(d) {{ publicTask }}</li>
+        <li>(e) {{ legitimateInterest }}</li>
     </ul>
 
     <h2 class="govuk-heading-s">{{ storeAndShare }}</h2>
-    <p class="govuk-body">{{ personalInformation }}</p>
+    <p class="govuk-body">{{ personalInformationOutsideUK }}</p>
 
     <h3 class="govuk-heading-s">{{ yourRights }}</h3>
     <p class="govuk-body">{{ youCanAsk }}</p>
@@ -105,10 +105,10 @@
     <h2 class="govuk-heading-s">{{ howToComplain }}</h2>
     <p class="govuk-body">{{ seeOurComplaints | safe }}</p>
     <p class="govuk-body">{{ concernsDataProtection }}</p>
-    <p class="govuk-body">{{ mojAddress }}</p>
+    <p class="govuk-body">{{ mojAddress | safe }}</p>
     <p class="govuk-body">{{ mojEmailAddress | safe }}</p>
     <p class="govuk-body">{{ youCanAlsoComplain }}</p>
-    <p class="govuk-body">{{ icoAddress }}</p>
+    <p class="govuk-body">{{ icoAddress | safe}}</p>
     <p class="govuk-body">{{ icoHelplineNumber }}</p>
     <p class="govuk-body">{{ icoWebsite | safe}}</p>
   </div>

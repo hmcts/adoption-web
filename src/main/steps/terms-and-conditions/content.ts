@@ -3,7 +3,7 @@ import { TranslationFn } from '../../app/controller/GetController';
 const en = {
   title: 'Terms and conditions',
   thisPage:
-    'By using this service you’re agreeing to these terms of use. This includes the <a class="govuk-link" href="/privacy-policy" target="_blank">privacy policy</a>.',
+    'By using this service you’re agreeing to these terms of use. This includes the <a class="govuk-link" href="/privacy-policy">privacy policy</a>.',
   termsAndConditionsUsers: 'Terms and conditions for professional users',
   termsAndConditionsProfessional:
     "If you are a professional user, you'll be asked to agree to the additional terms and conditions of the service after you create a MyHMCTS account.",
@@ -15,7 +15,7 @@ const en = {
     'This service provides information to support your claim or application. We cannot give legal advice on individual cases. You should answer the questions in the service based on your circumstances and seek legal advice if you need it.',
   stored: 'Sharing and storing data',
   dataStored:
-    'Our <a class="govuk-link" href="https://www.gov.uk/help/privacy-policy" target="_blank">privacy policy</a> explains where your data is stored, and who it is shared with. Our cookie policy explains how this service uses and stores cookies.',
+    'Our <a class="govuk-link" href="/privacy-policy">privacy policy</a> explains where your data is stored, and who it is shared with. Our cookie policy explains how this service uses and stores cookies.',
   applicationLaw: 'Laws applying to this service',
   dispute:
     'Your use of this service and any dispute arising from its use will be  governed by and construed in accordance with the laws of England and Wales, including but not limited to the:',
@@ -44,7 +44,7 @@ const en = {
   geneticData: 'genetic data or biometric data',
   healthData: 'health data',
   consentGiven:
-    'you give us your consent to processing this information for the purpose of dealing with your application. For more information about how we collect and store your personal data, see the <a class="govuk-link" href="https://www.gov.uk/help/privacy-policy" target="_blank">privacy policy</a>.',
+    'you give us your consent to processing this information for the purpose of dealing with your application. For more information about how we collect and store your personal data, see the <a class="govuk-link" href="/privacy-policy">privacy policy</a>.',
   disclaimer: 'Disclaimer',
   disclaimerGuarantee:
     "While we make every effort to keep information up to date, we don't provide any guarantees, conditions or warranties that it will be:",
@@ -77,14 +77,13 @@ const en = {
   death: 'death or personal injury arising from our negligence',
   fraudulentMisrepresentation: 'fraudulent misrepresentation',
   anyOtherLiability: 'any other liability which cannot be excluded or limited under applicable law',
-  contactUsFurtherInfo:
-    '<a class="govuk-link" href="/contact-us" target="_blank">Contact us</a> for further information.',
+  contactUsFurtherInfo: '<a class="govuk-link" href="/contact-us">Contact us</a> for further information.',
 };
 
 const cy: typeof en = {
   title: 'Terms and conditions (in Welsh)',
   thisPage:
-    'By using this service you’re agreeing to these terms of use. This includes the <a class="govuk-link" href="/privacy-policy" target="_blank">privacy policy</a>. (in Welsh)',
+    'By using this service you’re agreeing to these terms of use. This includes the <a class="govuk-link" href="/privacy-policy">privacy policy</a>. (in Welsh)',
   termsAndConditionsUsers: 'Terms and conditions for professional users (in Welsh)',
   termsAndConditionsProfessional:
     "If you are a professional user, you'll be asked to agree to the additional terms and conditions of the service after you create a MyHMCTS account. (in Welsh)",
@@ -96,7 +95,7 @@ const cy: typeof en = {
     'This service provides information to support your claim or application. We cannot give legal advice on individual cases. You should answer the questions in the service based on your circumstances and seek legal advice if you need it. (in Welsh)',
   stored: 'Sharing and storing data (in Welsh)',
   dataStored:
-    'Our <a class="govuk-link" href="https://www.gov.uk/help/privacy-policy" target="_blank">privacy policy</a> explains where your data is stored, and who it is shared with. Our cookie policy explains how this service uses and stores cookies. (in Welsh)',
+    'Our <a class="govuk-link" href="/privacy-policy">privacy policy</a> explains where your data is stored, and who it is shared with. Our cookie policy explains how this service uses and stores cookies. (in Welsh)',
   applicationLaw: 'Laws applying to this service (in Welsh)',
   dispute:
     'Your use of this service and any dispute arising from its use will be  governed by and construed in accordance with the laws of England and Wales, including but not limited to the: (in Welsh)',
@@ -125,7 +124,7 @@ const cy: typeof en = {
   geneticData: 'genetic data or biometric data (in Welsh)',
   healthData: 'health data (in Welsh)',
   consentGiven:
-    'you give us your consent to processing this information for the purpose of dealing with your application. For more information about how we collect and store your personal data, see the <a class="govuk-link" href="https://www.gov.uk/help/privacy-policy" target="_blank">privacy policy</a>. (in Welsh)',
+    'you give us your consent to processing this information for the purpose of dealing with your application. For more information about how we collect and store your personal data, see the <a class="govuk-link" href="/privacy-policy">privacy policy</a>. (in Welsh)',
   disclaimer: 'Disclaimer (in Welsh)',
   disclaimerGuarantee:
     "While we make every effort to keep information up to date, we don't provide any guarantees, conditions or warranties that it will be: (in Welsh)",
@@ -159,8 +158,7 @@ const cy: typeof en = {
   death: 'death or personal injury arising from our negligence (in Welsh)',
   fraudulentMisrepresentation: 'fraudulent misrepresentation (in Welsh)',
   anyOtherLiability: 'any other liability which cannot be excluded or limited under applicable law (in Welsh)',
-  contactUsFurtherInfo:
-    '<a class="govuk-link" href="/contact-us" target="_blank">Contact us</a> for further information. (in Welsh)',
+  contactUsFurtherInfo: '<a class="govuk-link" href="/contact-us">Contact us</a> for further information. (in Welsh)',
 };
 
 const languages = {
