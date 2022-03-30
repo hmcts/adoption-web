@@ -18,10 +18,10 @@ const enContent = {
 const cyContent = {
   section: SECTION_IN_WELSH,
   label: "What is the occupation of the child's birth father? (in Welsh)",
-  hint: "Ask the adoption agency or social worker if you’re not sure. If the occupation is not known, you can type 'unknown'. (in Welsh)",
+  hint: 'Gofynnwch i’ch asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr. Os yw’r galwedigaeth yn anhysbys, gallwch deipio ‘anhysbys’.',
   errors: {
     [fieldName]: {
-      required: 'Enter an occupation (in Welsh)',
+      required: 'Nodwch alwedigaeth',
     },
   },
 };
