@@ -6,21 +6,27 @@ import { ApplyingWith, SectionStatus, State } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
 import { getApplicationStatus } from '../../steps/task-list/utils';
 import {
+  ACCESSIBILITY_STATEMENT,
   APPLICANT_2,
   APPLICATION_SUBMITTED,
   CHECK_ANSWERS_URL,
+  CONTACT_US,
+  COOKIES_PAGE,
   DOWNLOAD_APPLICATION_SUMMARY,
   PAYMENT_CALLBACK_URL,
   PAY_AND_SUBMIT,
   PAY_YOUR_FEE,
+  PRIVACY_POLICY,
   PageLink,
   TASK_LIST_URL,
+  TERMS_AND_CONDITIONS,
 } from '../../steps/urls';
 
 /**
  * Adds the state redirect middleware to redirect when application is in certain states
  */
 export class StateRedirectMiddleware {
+  FOOTER_LINKS = [COOKIES_PAGE, PRIVACY_POLICY, ACCESSIBILITY_STATEMENT, TERMS_AND_CONDITIONS, CONTACT_US];
   public enableFor(app: Application): void {
     const { errorHandler } = app.locals;
     dayjs.extend(customParseFormat);
@@ -38,7 +44,10 @@ export class StateRedirectMiddleware {
           // can not go to check-your-answers page before completing all the sections
           return res.redirect(TASK_LIST_URL);
         }
-
+        if (this.FOOTER_LINKS.find(item => req.path.startsWith(item))) {
+          //Footer links are accessible from anywhere in the application
+          return next();
+        }
         if (
           [State.Submitted, State.AwaitingDocuments, State.AwaitingHWFDecision].includes(req.session.userCase?.state) &&
           req.path !== APPLICATION_SUBMITTED &&

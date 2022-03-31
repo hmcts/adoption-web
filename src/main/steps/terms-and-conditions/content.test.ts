@@ -1,4 +1,9 @@
-import { TranslationFn } from '../../app/controller/GetController';
+import languageAssertions from '../../../test/unit/utils/languageAssertions';
+import { CommonContent, generatePageContent } from '../common/common.content';
+
+import { generateContent } from './content';
+
+jest.mock('../../app/form/validation');
 
 const en = {
   title: 'Terms and conditions',
@@ -161,11 +166,18 @@ const cy: typeof en = {
   contactUsFurtherInfo: '<a class="govuk-link" href="/contact-us">Contact us</a> for further information. (in Welsh)',
 };
 
-const languages = {
-  en,
-  cy,
-};
+/* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
+describe('terms-and-conditions > content', () => {
+  const commonContent = generatePageContent({
+    language: 'en',
+    userCase: {},
+  }) as CommonContent;
 
-export const generateContent: TranslationFn = content => {
-  return languages[content.language];
-};
+  test('should return correct english content', () => {
+    languageAssertions('en', en, () => generateContent(commonContent));
+  });
+
+  test('should return correct welsh content', () => {
+    languageAssertions('cy', cy, () => generateContent({ ...commonContent, language: 'cy' }));
+  });
+});

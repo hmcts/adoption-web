@@ -10,7 +10,7 @@ const en = () => ({
   howAreCookiesUsedItem3: 'temporarily store the answers you give',
   howAreCookiesUsedParagraph2:
     'Find out more about <a class="govuk-link" href="http://www.aboutcookies.org/">how to manage cookies</a>.',
-  howAreCookiesUsedHeading2: 'How cookies are used in the apply adoption service',
+  howAreCookiesUsedHeading2: 'How cookies are used in the adoption service',
   websiteUsageCookiesHeading3: 'To measure website usage',
   websiteUsageCookiesParagraph1:
     'We use Google Analytics software to collect information about how you use this service. We do this to help make sure the service is meeting the needs of its users and to help us make improvements, for example improving site search.',
@@ -65,6 +65,7 @@ const en = () => ({
   securityCookiePurpose1: 'Protects your session from tampering',
   securityCookieName2: '__state',
   securityCookiePurpose2: 'Identifies you to the service and secures your authentication',
+  whenYouCloseYourBrowser: 'When you close your browser',
   dynatraceCookiesHeading1: 'To measure application performance',
   dynatraceCookiesParagraph1:
     'We use Dynatrace Software Intelligence Platform to provide an Application Performance Monitoring Service to collect information about how you use HMCTS services.' +
@@ -90,12 +91,11 @@ const en = () => ({
   dynatraceCookieName5: 'rxVisitor',
   dynatraceCookieName6: 'rxvt',
   sessionEnd: 'Session end',
-  whenYouCloseYourBrowser: 'When you close your browser',
   dynatraceCookiesAriaDescribedby: 'List of dynatrace cookies used.',
   oneYear: '1 year',
 });
 
-const cy = () => ({
+const cy: typeof en = () => ({
   title: 'Cwcis',
   paragraph1:
     'A cookie is a small piece of data that&rsquo;n cael ei storio ar eich cyfrifiadur, eich tabled neu eich ffôn symudol pan fyddwch yn ymweld â gwefan yw cwci. Mae angen cwcis ar y rhan fwyaf o wefannau i weithio&rsquo;n iawn.',
@@ -162,6 +162,30 @@ const cy = () => ({
   securityCookieName2: '__state',
   securityCookiePurpose2: 'Gadael i&rsquo;r gwasanaeth wybod pwy ydych chi a diogelu eich manylion',
   whenYouCloseYourBrowser: 'Pan fyddwch chi’n cau’ch porwr',
+  dynatraceCookiesHeading1: 'Mesur perfformiad y rhaglen',
+  dynatraceCookiesParagraph1:
+    'Rydym yn defnyddio Platfform Deallusrwydd Meddalwedd Dynatrace i ddarparu Gwasanaeth Monitro Perfformiad Gwasanaeth i gasglu gwybodaeth am sut yr ydych yn defnyddio gwasanaethau GLlTEM. Rydym yn gwneud hyn i fonitro gwasanaethau GLlTEM er mwyn datrys problemau yn ein gwasanaethau a chasglu data ar sut y gallwn eu gwella. Mae GLlTEM yn storio gwybodaeth am:',
+  dynatraceCookiesItem1: 'Perfformiad y wefan',
+  dynatraceCookiesItem2: "Y defnydd a wneir o'r wefan",
+  dynatraceCookiesItem3: 'Ymddygiad defnyddwyr',
+  dynatraceCookiesParagraph2:
+    "Cyflwynir yr wybodaeth angenrheidiol yn y Gwasanaeth Monitro Perfformiad Gwasanaeth at y dibenion a nodwyd uchod. Nid ydym yn defnyddio neu’n rhannu'r wybodaeth ar gyfer unrhyw bwrpas arall. Nid ydym yn caniatáu i Dynatrace ddefnyddio neu rannu'r wybodaeth ar gyfer unrhyw bwrpas arall.",
+  dynatraceCookiesPurpose1: 'Olrhain ymweliad ar draws ceisiadau amryfal',
+  dynatraceCookiesPurpose2: 'Mesur natur gudd y gweinydd er mwyn monitro perfformiad y gwasanaeth',
+  dynatraceCookiesPurpose3:
+    'Er mwyn canfod pwyntiau terfyn priodol ar gyfer trosglwyddo tywysydd: mae’n cynnwys rhif adnabod y sesiwn at ddibenion cydberthyniad',
+  dynatraceCookiesPurpose4: 'Storfa gyfryngol ar gyfer gweithrediadau rhychwantu tudalennau',
+  dynatraceCookiesPurpose5: 'Rhif adnabod ymwelydd er mwyn cyd-berthnasu sesiynau',
+  dynatraceCookiesPurpose6: 'Terfyn amser y sesiwn',
+  dynatraceCookieName1: 'dtCookie',
+  dynatraceCookieName2: 'dtLatC',
+  dynatraceCookieName3: 'dtPC',
+  dynatraceCookieName4: 'dtSa',
+  dynatraceCookieName5: 'rxVisitor',
+  dynatraceCookieName6: 'rxvt',
+  sessionEnd: 'Diwedd y sesiwn',
+  dynatraceCookiesAriaDescribedby: 'Rhestr o’r cwcis Dynatrace a ddefnyddir.',
+  oneYear: '1 blwyddyn',
 });
 
 const languages = {
