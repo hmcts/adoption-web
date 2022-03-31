@@ -386,7 +386,7 @@ describe('DocumentManagerController', () => {
               id: '2',
               value: {
                 documentLink: { document_binary_url: 'object-of-doc-to-fetch' },
-                documentType: DocumentType.APPLICATION_SUMMARY,
+                documentType: DocumentType.APPLICATION_SUMMARY + 'En',
               },
             },
             { id: '3', value: { documentLink: { document_binary_url: 'object-of-doc-not-to-fetch' } } },
