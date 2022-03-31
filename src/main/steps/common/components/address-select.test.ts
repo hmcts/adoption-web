@@ -23,13 +23,13 @@ const enContent = {
 
 const cyContent = {
   line1:
-    "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email. (in welsh)",
-  postcode: 'Postcode (in welsh)',
-  selectAddress: 'Select an address (in welsh)',
-  cannotFindAddress: 'Or enter address manually (in welsh)',
+    'Byddwn yn anfon yr holl bapurau llys i’r cyfeiriad hwn oni bai eich bod yn ein cynghori eich bod yn hapus i’r gorchmynion llys gael eu cyflwyno arnoch trwy e-bost.',
+  postcode: 'Cod post',
+  selectAddress: 'Dewiswch gyfeiriad',
+  cannotFindAddress: 'Neu nodwch y cyfeiriad â llaw',
   errors: {
     selectAddress: {
-      notSelected: 'Select an address (in welsh)',
+      notSelected: 'Dewiswch gyfeiriad',
     },
   },
   changePostCodeUrl: '#',
@@ -74,7 +74,7 @@ describe('common > components > address-select', () => {
 
     expect(generatedContent.errors).toEqual({
       selectAddress: {
-        notSelected: 'Select an address (in welsh)',
+        notSelected: 'Dewiswch gyfeiriad',
       },
     });
 

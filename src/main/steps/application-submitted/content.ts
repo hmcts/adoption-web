@@ -13,17 +13,17 @@ const en = content => ({
   printApplication: 'Print your application',
 });
 
-const cy = content => ({
-  title: 'Application Submitted (in welsh)',
-  referenceNumber: `Your reference number<br><strong>${content.userCase.hyphenatedCaseRef}</strong> (in welsh)`,
+const cy: typeof en = content => ({
+  title: 'Cais wedi’i gyflwyno',
+  referenceNumber: `Eich cyfeirnod<br><strong>${content.userCase.hyphenatedCaseRef}</strong>`,
   emailSentConfirmation:
-    'We have sent you a confirmation email. If you have not received this, you should check your junk or spam folder. (in welsh)',
-  nextStep: 'What happens next (in welsh)',
+    'Rydym wedi anfon neges gadarnhau drwy e-bost. Os nad ydych wedi cael y neges hon, dylech wirio eich ffolder sothach neu spam.',
+  nextStep: 'Beth fydd yn digwydd nesaf',
   line1:
-    'The court reviews your application and informs the birth parents, if applicable, of your application to adopt. Your personal details are kept strictly confidential. (in welsh)',
+    'Mae’r llys yn adolygu eich cais ac yn hysbysu’r rhieni biolegol, os yw’n berthnasol, am eich cais i fabwysiadu. Mae eich manylion personol yn cael eu cadw’n gwbl gyfrinachol.',
   line2:
-    "Once the adoption order is granted, an adoption certificate is created. This replaces the child's birth certificate. It can be ordered from the General Register Office for a small fee. (in welsh)",
-  printApplication: 'Print your application (in welsh)',
+    'Unwaith bydd y gorchymyn mabwysiadu yn cael ei gymeradwyo, bydd tystysgrif mabwysiadu yn cael ei chreu. Bydd hon yn disodli tystysgrif geni’r plentyn. Gellir ei archebu o’r Swyddfa Gofrestru Gyffredinol am ffi fechan.',
+  printApplication: 'Argraffu eich cais',
 });
 
 const languages = {

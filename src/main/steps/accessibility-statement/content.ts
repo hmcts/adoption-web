@@ -1,4 +1,3 @@
-/* istanbul ignore file */
 import { TranslationFn } from '../../app/controller/GetController';
 
 const en = {

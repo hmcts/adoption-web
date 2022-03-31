@@ -10,43 +10,83 @@ jest.mock('../../../app/form/validation', () => ({
   isPhoneNoValid: mockIsPhoneNoValid,
 }));
 
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { ApplyingWith, YesOrNo } from '../../../app/case/definition';
-import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
+import {
+  FormContent,
+  FormFields,
+  FormInput,
+  FormOptions,
+  LanguageLookup,
+  ValidationCheck,
+} from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
 
-/* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('contact-details content', () => {
+const enContent = {
+  section: 'First applicant',
+  title: 'What are your contact details?',
+  line1: 'We need both a contact email and telephone number for you.',
+  line2:
+    'We will email you updates and information about your application to adopt. You will only be contacted by telephone if the social worker or court staff need to contact you quickly.',
+  emailAddress: 'Email address',
+  phoneNumber: 'UK Phone number',
+  applicant1ContactDetailsConsent:
+    'The court may want to use your email to serve you court orders. Are you happy to be served court orders by email?',
+  errors: {
+    applicant1ContactDetailsConsent: {
+      required: 'Please answer the question',
+    },
+    applicant1EmailAddress: {
+      required: 'Enter your email address',
+      invalid: 'Enter an email address in the correct format, like name@example.com',
+    },
+    applicant1PhoneNumber: {
+      required: 'Enter a UK telephone number',
+      invalid: 'Enter a valid UK telephone number',
+    },
+  },
+};
+
+const cyContent = {
+  section: 'Ceisydd cyntaf',
+  title: 'Beth yw eich manylion cyswllt?',
+  line1: 'Mae arnom angen cyfeiriad e-bost cyswllt a rhif ffôn cyswllt ar eich cyfer.',
+  line2:
+    'Byddwn yn anfon diweddariadau a gwybodaeth am eich cais i fabwysiadu trwy e-bost. Cysylltir â chi dros y ffôn dim ond os yw’r gweithiwr cymdeithasol neu staff y llys eisiau cysylltu â chi ar frys.',
+  emailAddress: 'Cyfeiriad e-bost',
+  phoneNumber: 'Rhif ffôn yn y DU',
+  applicant1ContactDetailsConsent:
+    'Efallai bydd y llys eisiau defnyddio eich cyfeiriad e-bost i gyflwyno gorchmynion llys arnoch, A ydych yn hapus i neuchmynion llys gael eu cyflwyno arnoch drwy e-bost?',
+  errors: {
+    applicant1ContactDetailsConsent: {
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+    },
+    applicant1EmailAddress: {
+      required: 'Nac ydwdwch eich cyfeiriad e-bost',
+      invalid: 'Rhowch gyfeiriad e-bost yn y fformat cywir, er enghraifft enw@enghraifft.com',
+    },
+    applicant1PhoneNumber: {
+      required: 'Rhowch rif ffôn yn y DU',
+      invalid: 'Rhowch rif ffôn dilys yn y DU',
+    },
+  },
+};
+
+describe('applicant1 > contact-details > content', () => {
   const commonContent = {
     language: 'en',
     userCase: { applyingWith: ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER },
   } as CommonContent;
 
   test('should return correct english content', () => {
-    const generatedContent = generateContent(commonContent);
-    expect(generatedContent.section).toEqual('First applicant');
-    expect(generatedContent.title).toEqual('What are your contact details?');
-    expect(generatedContent.line1).toEqual('We need both a contact email and telephone number for you.');
-    expect(generatedContent.line2).toEqual(
-      'We will email you updates and information about your application to adopt. You will only be contacted by telephone if the social worker or court staff need to contact you quickly.'
-    );
-    expect(generatedContent.emailAddress).toEqual('Email address');
-    expect(generatedContent.phoneNumber).toEqual('UK Phone number');
-
-    const errors = generatedContent.errors as any;
-    expect(errors.applicant1ContactDetailsConsent.required).toEqual('Please answer the question');
-    expect(errors.applicant1EmailAddress.required).toEqual('Enter your email address');
-    expect(errors.applicant1EmailAddress.invalid).toEqual(
-      'Enter an email address in the correct format, like name@example.com'
-    );
-    expect(errors.applicant1PhoneNumber.required).toEqual('Enter a UK telephone number');
-    expect(errors.applicant1PhoneNumber.invalid).toEqual('Enter a valid UK telephone number');
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
-  test('should set title to applicant in case of applying alone', () => {
-    const aloneCommonContent = { language: 'cy', userCase: { applyingWith: ApplyingWith.ALONE } } as CommonContent;
+  test('should set correct english title in case of applying alone', () => {
+    const aloneCommonContent = { language: 'en', userCase: { applyingWith: ApplyingWith.ALONE } } as CommonContent;
     const generatedContent = generateContent(aloneCommonContent);
     expect(generatedContent.section).toEqual('Applicant');
   });
@@ -56,28 +96,17 @@ describe('contact-details content', () => {
       language: 'cy',
       userCase: { applyingWith: ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER },
     } as CommonContent;
-    const generatedContent = generateContent(welshCommonContent);
-    expect(generatedContent.section).toEqual('First applicant (in welsh)');
-    expect(generatedContent.title).toEqual('What are your contact details? (in welsh)');
-    expect(generatedContent.line1).toEqual('We need both a contact email and telephone number for you. (in welsh)');
-    expect(generatedContent.line2).toEqual(
-      'We will email you updates and information about your application to adopt. You will only be contacted by telephone if the social worker or court staff need to contact you quickly. (in welsh)'
-    );
-    expect(generatedContent.emailAddress).toEqual('Email address (in welsh)');
-    expect(generatedContent.phoneNumber).toEqual('UK Phone number (in welsh)');
+    languageAssertions('cy', cyContent, () => generateContent(welshCommonContent));
+  });
 
-    const errors = generatedContent.errors as any;
-    expect(errors.applicant1ContactDetailsConsent.required).toEqual('Please answer the question (in welsh)');
-    expect(errors.applicant1EmailAddress.required).toEqual('Enter your email address (in welsh)');
-    expect(errors.applicant1EmailAddress.invalid).toEqual(
-      'Enter an email address in the correct format, like name@example.com (in welsh)'
-    );
-    expect(errors.applicant1PhoneNumber.required).toEqual('Enter a UK telephone number (in welsh)');
-    expect(errors.applicant1PhoneNumber.invalid).toEqual('Enter a valid UK telephone number (in welsh)');
+  test('should set correct welsh title in case of applying alone', () => {
+    const aloneCommonContent = { language: 'cy', userCase: { applyingWith: ApplyingWith.ALONE } } as CommonContent;
+    const generatedContent = generateContent(aloneCommonContent);
+    expect(generatedContent.section).toEqual('Ceisydd');
   });
 
   test('should contain applicant1ContactDetails field', () => {
-    const generatedContent = generateContent(commonContent);
+    const generatedContent = generateContent(commonContent) as Record<string, never>;
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const applicant1ContactDetailsConsentField = fields.applicant1ContactDetailsConsent as FormFields;
@@ -87,36 +116,52 @@ describe('contact-details content', () => {
     expect(applicant1ContactDetailsConsentField.type).toBe('radios');
     expect(applicant1ContactDetailsConsentField.classes).toBe('govuk-radios');
     const applicant1ContactDetailsConsentOptions = fields.applicant1ContactDetailsConsent as FormOptions;
-    expect(((fields.applicant1ContactDetailsConsent as FormInput).label as Function)(generatedContent)).toBe(
-      'The court may want to use your email to serve you court orders. Are you happy to be served court orders by email?'
+    expect(((fields.applicant1ContactDetailsConsent as FormInput).label as LanguageLookup)(generatedContent)).toBe(
+      enContent.applicant1ContactDetailsConsent
     );
-    expect((applicant1ContactDetailsConsentOptions.values[0].label as Function)({ yes: 'Yes' })).toBe(YesOrNo.YES);
-    expect((applicant1ContactDetailsConsentOptions.values[1].label as Function)({ no: 'No' })).toBe(YesOrNo.NO);
-    expect(applicant1ContactDetailsConsentField.validator as Function).toBe(isFieldFilledIn);
+    expect(((fields.applicant1ContactDetailsConsent as FormInput).section as LanguageLookup)(generatedContent)).toBe(
+      enContent.section
+    );
+    expect(
+      (applicant1ContactDetailsConsentOptions.values[0].label as LanguageLookup)({ yes: 'Yes' } as unknown as Record<
+        string,
+        never
+      >)
+    ).toBe(YesOrNo.YES);
+    expect(
+      (applicant1ContactDetailsConsentOptions.values[1].label as LanguageLookup)({ no: 'No' } as unknown as Record<
+        string,
+        never
+      >)
+    ).toBe(YesOrNo.NO);
+    expect(applicant1ContactDetailsConsentField.validator).toBe(isFieldFilledIn);
 
     expect(applicant1EmailAddressField.type).toBe('text');
     expect(applicant1EmailAddressField.classes).toBe('govuk-input--width-20');
-    expect((applicant1EmailAddressField.label as Function)(generatedContent)).toBe('Email address');
+    expect((applicant1EmailAddressField.label as LanguageLookup)(generatedContent)).toBe(enContent.emailAddress);
     expect(applicant1EmailAddressField.labelSize).toBe(null);
-    expect((applicant1EmailAddressField.validator as Function)('someone@example.com')).toBe(undefined);
+    expect((applicant1EmailAddressField.validator as ValidationCheck)('someone@example.com', {})).toBe(undefined);
 
     expect(applicant1PhoneNumberField.type).toBe('text');
     expect(applicant1PhoneNumberField.classes).toBe('govuk-input--width-20');
-    expect((applicant1PhoneNumberField.label as Function)(generatedContent)).toBe('UK Phone number');
+    expect((applicant1PhoneNumberField.label as LanguageLookup)(generatedContent)).toBe(enContent.phoneNumber);
     expect(applicant1PhoneNumberField.labelSize).toBe(null);
-    expect((applicant1PhoneNumberField.validator as Function)('someone@example.com')).toBe(undefined);
+    expect((applicant1PhoneNumberField.validator as ValidationCheck)('someone@example.com', {})).toBe(undefined);
   });
 
   test('should contain submit button', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
-    expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
+    expect((form.submit.text as LanguageLookup)(generatePageContent({ language: 'en' }) as Record<string, never>)).toBe(
+      'Save and continue'
+    );
   });
 
   test('should contain saveAsDraft button', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
-    expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save as draft');
+    expect(
+      (form.saveAsDraft?.text as LanguageLookup)(generatePageContent({ language: 'en' }) as Record<string, never>)
+    ).toBe('Save as draft');
   });
 });
-/* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

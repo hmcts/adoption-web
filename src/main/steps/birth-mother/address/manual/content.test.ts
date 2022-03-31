@@ -1,20 +1,24 @@
+import languageAssertions from '../../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormOptions } from '../../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../../common/common.content';
 import {
   generateContent as generateManualAddressContent,
   form as manualAddressForm,
 } from '../../../common/components/address-manual';
+import { BIRTH_MOTHER_INTERNATIONAL_ADDRESS } from '../../../urls';
 
 import { generateContent } from './content';
 
 const enContent = {
   section: "Birth mother's details",
   title: "What is the birth mother's last known address?",
+  internationalAddressUrl: BIRTH_MOTHER_INTERNATIONAL_ADDRESS,
 };
 
 const cyContent = {
-  section: "Birth mother's details (in welsh)",
-  title: "What is the birth mother's last known address? (in welsh)",
+  section: 'Manylion y fam fiolegol',
+  title: 'Beth yw cyfeiriad olaf hysbys y fam fiolegol?',
+  internationalAddressUrl: BIRTH_MOTHER_INTERNATIONAL_ADDRESS,
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
@@ -33,25 +37,36 @@ describe('birth-mother > address > manual > content', () => {
 
   test('should return correct english content', () => {
     const manualAddressContent = generateManualAddressContent(commonContent);
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.title).toEqual(enContent.title);
-    expect(generatedContent.errors).toEqual({
-      birthMotherAddress1: (manualAddressContent.errors as any).address1,
-      birthMotherAddressTown: (manualAddressContent.errors as any).addressTown,
-      birthMotherAddressPostcode: (manualAddressContent.errors as any).addressPostcode,
-    });
+    const manualAddressErrors = manualAddressContent.errors as Record<string, unknown>;
+    languageAssertions(
+      'en',
+      {
+        ...enContent,
+        errors: {
+          birthMotherAddress1: manualAddressErrors.address1,
+          birthMotherAddressTown: manualAddressErrors.addressTown,
+          birthMotherAddressPostcode: manualAddressErrors.addressPostcode,
+        },
+      },
+      () => generateContent(commonContent)
+    );
   });
 
   test('should return correct welsh content', () => {
     const manualAddressContent = generateManualAddressContent({ ...commonContent, language: 'cy' });
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.title).toEqual(cyContent.title);
-    expect(generatedContent.errors).toEqual({
-      birthMotherAddress1: (manualAddressContent.errors as any).address1,
-      birthMotherAddressTown: (manualAddressContent.errors as any).addressTown,
-      birthMotherAddressPostcode: (manualAddressContent.errors as any).addressPostcode,
-    });
+    const manualAddressErrors = manualAddressContent.errors as Record<string, unknown>;
+    languageAssertions(
+      'cy',
+      {
+        ...cyContent,
+        errors: {
+          birthMotherAddress1: manualAddressErrors.address1,
+          birthMotherAddressTown: manualAddressErrors.addressTown,
+          birthMotherAddressPostcode: manualAddressErrors.addressPostcode,
+        },
+      },
+      () => generateContent({ ...commonContent, language: 'cy' })
+    );
   });
 
   test('should contain birthMotherAddress1 field', () => {

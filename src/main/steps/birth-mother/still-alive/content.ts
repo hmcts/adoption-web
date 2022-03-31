@@ -18,17 +18,17 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
-  section: "Birth mother's details (in welsh)",
-  label: "Is the child's birth mother still alive? (in welsh)",
+const cy: typeof en = () => ({
+  section: 'Manylion y fam fiolegol',
+  label: 'A yw mam fiolegol y plentyn dal yn fyw?',
   moreDetails:
-    "Provide more details. For example, 'the birth mother is uncontactable'. Your adoption agency or social worker can help you to complete this section. (in welsh)",
+    'Darparwch fwy o fanylion. Er enghraifft, ‘nid oes modd cysylltu â’r fam fiolegol’. Gall eich asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol eich helpu i lenwi’r rhan hon. ',
   errors: {
     birthMotherStillAlive: {
-      required: 'Please answer the question (in welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
     birthMotherNotAliveReason: {
-      required: 'Enter more detail (in welsh)',
+      required: 'Rhowch fwy o fanylion',
     },
   },
 });

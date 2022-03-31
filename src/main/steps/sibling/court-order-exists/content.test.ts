@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { YesNoNotsure } from '../../../app/case/definition';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -19,12 +20,13 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Sibling details (in Welsh)',
-  label: "Is there a court order in place for any of the child's siblings or half siblings? (in Welsh)",
-  hint: 'For example, a care order or supervision order. Your adoption agency or social worker can help provide these details. (in Welsh)',
+  section: 'Manylion y brawd/chwaer',
+  label:
+    'A oes gorchymyn llys mewn lle ar gyfer unrhyw un o frodyr/chwiorydd neu hanner frodyr/hanner chwiorydd y plentyn?',
+  hint: 'Er enghraifft, gorchymyn gofal neu neuchymyn goruchwylio. Gall eich asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol eich helpu i lenwi’r rhan hon.',
   errors: {
     hasPoForSiblings: {
-      required: 'Please answer the question (in welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
 };
@@ -42,18 +44,11 @@ describe('sibling > court-order-exists > content', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.label).toEqual(enContent.label);
-    expect(generatedContent.hint).toEqual(enContent.hint);
-    expect(generatedContent.errors).toEqual(enContent.errors);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.label).toEqual(cyContent.label);
-    expect(generatedContent.hint).toEqual(cyContent.hint);
-    expect(generatedContent.errors).toEqual(cyContent.errors);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain hasPoForSiblings field', () => {
@@ -85,4 +80,4 @@ describe('sibling > court-order-exists > content', () => {
     );
   });
 });
-/* eslint-enable @typescript-eslint/ban-types */
+/* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

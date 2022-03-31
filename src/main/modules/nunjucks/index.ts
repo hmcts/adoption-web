@@ -40,6 +40,7 @@ export class Nunjucks {
       return items.map(i => ({
         id: i.id,
         text: this.env.globals.getContent.call(this, i.label),
+        label: this.env.globals.getContent.call(this, i.label),
         name: i.name,
         classes: i.classes,
         value: i.value ?? userAnswer?.[i.name as string] ?? (userAnswer as string),

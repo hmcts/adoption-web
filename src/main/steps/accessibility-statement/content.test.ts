@@ -183,7 +183,6 @@ const cy = {
   contactHelp: 'Contact us for help: (in Welsh)',
 };
 
-/* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('accessibility statement > content', () => {
   const commonContent = generatePageContent({
     language: 'en',

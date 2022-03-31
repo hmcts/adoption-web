@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable jest/expect-expect */
 const mockForm = {
   form: {
     fields: { birthMotherNationality: { MOCK_KEY: 'MOCK_VALUE' } },
@@ -13,10 +11,12 @@ jest.mock('../../common/components/nationality', () => {
   return { nationalityFields: mockNationalityFields, generateContent: jest.fn().mockReturnValue(mockForm) };
 });
 
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FieldPrefix } from '../../../app/case/case';
 import { FormContent, FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { CommonContent } from '../../common/common.content';
 import { nationalityFields } from '../../common/components/nationality';
+import { BIRTH_MOTHER_NATIONALITY } from '../../urls';
 
 import { form, generateContent } from './content';
 
@@ -28,18 +28,22 @@ const enContent = {
       required: "Select a nationality or 'Not sure'",
       notSureViolation: "Select a nationality or 'Not sure'",
     },
+    addAnotherNationality: 'MOCK_ERROR_MESSAGE',
   },
+  url: BIRTH_MOTHER_NATIONALITY,
 };
 
 const cyContent = {
-  section: "Birth mother's details (in welsh)",
-  label: "What is the nationality of the child's birth mother? (in welsh)",
+  section: 'Manylion y fam fiolegol',
+  label: 'Beth yw cenedligrwydd mam fiolegol y plentyn?',
   errors: {
     birthMotherNationality: {
-      required: "Select a nationality or 'Not sure' (in welsh)",
-      notSureViolation: "Select a nationality or 'Not sure' (in welsh)",
+      required: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
+      notSureViolation: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
     },
+    addAnotherNationality: 'MOCK_ERROR_MESSAGE',
   },
+  url: BIRTH_MOTHER_NATIONALITY,
 };
 
 describe('birth-mother > nationality > content', () => {
@@ -51,18 +55,11 @@ describe('birth-mother > nationality > content', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.label).toEqual(enContent.label);
-    expect(generatedContent.errors).toEqual({ ...enContent.errors, ...mockForm.errors });
-    expect(generatedContent.url).toEqual('/birth-mother/nationality');
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.label).toEqual(cyContent.label);
-    expect(generatedContent.errors).toEqual({ ...cyContent.errors, ...mockForm.errors });
-    expect(generatedContent.url).toEqual('/birth-mother/nationality');
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain birthMotherNationality field', () => {

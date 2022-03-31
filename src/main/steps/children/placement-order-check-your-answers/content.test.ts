@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent } from '../../../app/form/Form';
 import { CommonContent } from '../../common/common.content';
 
@@ -16,19 +17,19 @@ const enContent = {
 };
 
 const cyContent = {
-  section: "The child's details (in welsh)",
-  title: 'Orders already in place (in welsh)',
-  orderType: 'Type of order (in welsh)',
-  orderNumber: 'Order case or serial number (in welsh)',
-  orderCourt: 'Court (in welsh)',
-  orderDate: 'Order date (in welsh)',
-  placementOrder: 'Placement Order (in welsh)',
-  change: 'Change (in welsh)',
-  continue: 'Continue (in welsh)',
+  section: 'Manylion y plentyn',
+  title: 'Gorchmynion sydd eisoes mewn lle',
+  orderType: 'Math o neuchymyn',
+  orderNumber: 'Rhif cyfresol neu rif yr achos ar y gorchymyn',
+  orderCourt: 'Llys',
+  orderDate: 'Dyddiad y gorchymyn',
+  placementOrder: 'Gorchymyn Lleoli',
+  change: 'Newid',
+  continue: 'Parhau',
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('children > placement-order-check-your-answers content', () => {
+describe('children > placement-order-check-your-answers > content', () => {
   const commonContent = {
     language: 'en',
     userCase: {
@@ -45,19 +46,11 @@ describe('children > placement-order-check-your-answers content', () => {
   } as CommonContent;
 
   test('should return correct english content', () => {
-    const generatedContent = generateContent(commonContent);
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.title).toEqual(enContent.title);
-    expect(generatedContent.placementOrder).toEqual(enContent.placementOrder);
-    expect(generatedContent.change).toEqual(enContent.change);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    const generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.title).toEqual(cyContent.title);
-    expect(generatedContent.placementOrder).toEqual(cyContent.placementOrder);
-    expect(generatedContent.change).toEqual(cyContent.change);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should create correct items for summaryList', () => {

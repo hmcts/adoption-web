@@ -2,7 +2,7 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../app/form/Form';
 import { form as fullNameForm, generateContent as fullNameGenerateContent } from '../../common/components/full-name';
 
-export const en = (): Record<string, unknown> => ({
+const en = () => ({
   section: "Birth mother's details",
   title: "What is the full name of the child's birth mother?",
   line1:
@@ -17,17 +17,17 @@ export const en = (): Record<string, unknown> => ({
   },
 });
 
-export const cy = (): Record<string, unknown> => ({
-  section: "Birth mother's details (in welsh)",
-  title: "What is the full name of the child's birth mother? (in welsh)",
+const cy: typeof en = () => ({
+  section: 'Manylion y fam fiolegol',
+  title: 'Beth yw enw llawn mam fiolegol y plentyn?',
   line1:
-    "This will be on the child's full birth certificate. Ask the adoption agency or social worker if you're not sure. (in welsh)",
+    'Bydd y rhain ar dystysgrif geni llawn y plentyn. Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
   errors: {
     birthMotherFirstNames: {
-      required: 'Enter their first names (in welsh)',
+      required: 'Nac ydwdwch eu henw(au) cyntaf',
     },
     birthMotherLastNames: {
-      required: 'Enter their last names (in welsh)',
+      required: 'Nac ydwdwch eu cyfenw(au)',
     },
   },
 });

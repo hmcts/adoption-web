@@ -9,7 +9,7 @@ import { mapSummaryListContent } from '../functions/mapSummaryListContent';
 
 import { defaultButtons } from './common/default-buttons';
 
-export const en = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
+const en = (fieldPrefix: FieldPrefix) => ({
   label: 'What is your nationality?',
   hint: 'Select all options that are relevant to you.',
   british: 'British',
@@ -32,25 +32,25 @@ export const en = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
   },
 });
 
-export const cy = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
-  label: 'What is your nationality? (in Welsh)',
-  hint: 'Select all options that are relevant to you. (in Welsh)',
-  british: 'British (in Welsh)',
-  britishSubtext: 'including English, Scottish, Welsh and Northern Irish (in Welsh)',
-  irish: 'Irish (in Welsh)',
-  differentCountry: 'Citizen of a different country (in Welsh)',
-  countryName: 'Country name (in Welsh)',
-  add: 'Add (in Welsh)',
-  another: 'Add another country (in Welsh)',
-  or: 'or (in Welsh)',
-  notSure: 'Not sure (in Welsh)',
+const cy: typeof en = (fieldPrefix: FieldPrefix) => ({
+  label: 'Beth yw eich cenedligrwydd?',
+  hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
+  british: 'Prydeinig',
+  britishSubtext: 'gan gynnwys Saesneg, Albanaidd, Cymraeg a Gwyddelig Gogledd Iwerddon',
+  irish: 'Gwyddelig',
+  differentCountry: 'Dinesydd gwlad wahanol',
+  countryName: 'Enw’r wlad',
+  add: 'Ychwanegu',
+  another: 'Ychwanegu gwlad arall',
+  or: 'neu',
+  notSure: 'Ddim yn siŵr',
   errors: {
     [`${fieldPrefix}Nationality`]: {
-      required: 'Select if you are British, Irish or a citizen of a different country (in Welsh)',
-      notSureViolation: "Select a nationality or 'Not sure' (in Welsh)",
+      required: 'Dewiswch a ydych yn Brydeinig, Gwyddelig neu’n ddinesydd gwlad wahanol',
+      notSureViolation: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
     },
     addAnotherNationality: {
-      required: 'This is not a valid entry (in Welsh)',
+      required: 'Nid yw hyn yn gofnod dilys',
     },
   },
 });

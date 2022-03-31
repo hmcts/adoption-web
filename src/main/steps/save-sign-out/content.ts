@@ -11,9 +11,9 @@ const en = {
 const cy: typeof en = {
   title: 'Mae eich cais wedi cael ei gadw',
   applicationSentTo: 'Anfonwyd dolen sy’n arwain at eich cais i:',
-  applicationSavedFor6Months: 'Bydd eich cais yn cael ei gadw am 6 mis.',
+  applicationSavedFor6Months: 'Cedwir eich cais am 6 mis.',
   beenSignedOut: 'Rydych wedi cael eich allgofnodi.',
-  signBackIn: 'Mewngofnodi eto a pharhau',
+  signBackIn: 'Mewngofnodwch eto a pharhau',
 };
 
 const languages = {

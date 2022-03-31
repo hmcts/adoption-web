@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable jest/expect-expect */
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
@@ -7,7 +6,6 @@ import { CommonContent, generatePageContent } from '../../common/common.content'
 import { generateContent } from './content';
 jest.mock('../../../app/form/validation');
 
-const CY = 'cy';
 const EN = 'en';
 const enContent = {
   section: 'Second applicant',
@@ -26,39 +24,32 @@ const enContent = {
   },
 };
 const cyContent = {
-  section: 'Second applicant (in Welsh)',
-  title: "What's your full name? (in Welsh)",
-  firstNames: 'First names (in Welsh)',
-  firstHint: '(Include any given or middle names) (in Welsh)',
-  lastNames: 'Last names (in Welsh)',
-  lastHint: '(Include surname or family names) (in Welsh)',
+  section: 'Ail geisydd',
+  title: 'Beth yw eich enw llawn?',
+  firstNames: 'Enwau cyntaf',
+  firstHint: '(Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol)',
+  lastNames: 'Cyfenwau',
+  lastHint: '(Cofiwch gynnwys cyfenw neu enwau teuluol)',
   errors: {
     applicant2FirstNames: {
-      required: 'Enter your first names (in Welsh)',
+      required: 'Nac ydwdwch eich enw(au) cyntaf',
     },
     applicant2LastNames: {
-      required: 'Enter your last names (in Welsh)',
+      required: 'Nac ydwdwch eich cyfenw(au)',
     },
   },
 };
 
-const langAssertions = (language, content, generateFn) => {
-  const generatedContent = generateFn({ language } as CommonContent);
-
-  Object.entries(content).forEach(([key, value]) => {
-    expect(generatedContent[key]).toEqual(value);
-  });
-};
-
 const commonContent = { language: EN } as CommonContent;
 
-describe('applicant2 > full-name content', () => {
+/* eslint-disable @typescript-eslint/ban-types */
+describe('applicant2 > full-name > content', () => {
   it('should return the correct content for language = en', () => {
-    langAssertions(EN, enContent, generateContent);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   it('should return the correct content for language = cy', () => {
-    langAssertions(CY, cyContent, generateContent);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   it('should contain applicant2FirstNames text input field', () => {

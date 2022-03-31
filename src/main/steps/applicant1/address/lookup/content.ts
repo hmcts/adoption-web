@@ -7,8 +7,8 @@ import {
 } from '../../../common/components/address-lookup';
 import { APPLICANT_1_MANUAL_ADDRESS } from '../../../urls';
 
-const en = ({ addressLookupContent, userCase }): Record<string, unknown> => {
-  const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant' : 'First applicant';
+const en = ({ addressLookupContent, userCase }) => {
+  const section = userCase.applyingWith === ApplyingWith.ALONE ? 'Applicant' : 'First applicant';
   return {
     section,
     title: "What's your home address?",
@@ -19,11 +19,11 @@ const en = ({ addressLookupContent, userCase }): Record<string, unknown> => {
   };
 };
 
-const cy = ({ addressLookupContent, userCase }): Record<string, unknown> => {
-  const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant (in welsh)' : 'First applicant (in welsh)';
+const cy: typeof en = ({ addressLookupContent, userCase }) => {
+  const section = userCase.applyingWith === ApplyingWith.ALONE ? 'Ceisydd' : 'Ceisydd cyntaf';
   return {
     section,
-    title: "What's your home address? (in welsh)",
+    title: 'Beth yw eich cyfeiriad cartref?',
     errors: {
       applicant1AddressPostcode: addressLookupContent.errors.addressPostcode,
     },

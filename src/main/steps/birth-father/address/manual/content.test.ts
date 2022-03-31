@@ -1,18 +1,24 @@
+import languageAssertions from '../../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormOptions } from '../../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../../common/common.content';
-import { form as manualAddressForm } from '../../../common/components/address-manual';
-import { languageAssertions } from '../../../common/test/languageAssertions';
+import {
+  generateContent as generateManualAddressContent,
+  form as manualAddressForm,
+} from '../../../common/components/address-manual';
+import { BIRTH_FATHER_INTERNATIONAL_ADDRESS } from '../../../urls';
 
 import { generateContent } from './content';
 
 const enContent = {
   section: "Birth father's details",
   title: "What is the birth father's last known address?",
+  internationalAddressUrl: BIRTH_FATHER_INTERNATIONAL_ADDRESS,
 };
 
 const cyContent = {
-  section: "Birth father's details (in Welsh)",
-  title: "What is the birth father's last known address? (in Welsh)",
+  section: 'Manylion y tad biolegol',
+  title: 'Beth yw cyfeiriad olaf hysbys y tad biolegol?',
+  internationalAddressUrl: BIRTH_FATHER_INTERNATIONAL_ADDRESS,
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
@@ -30,11 +36,37 @@ describe('birth-father > address > manual > content', () => {
   });
 
   test('should return correct english content', () => {
-    languageAssertions('en', enContent, generateContent);
+    const manualAddressContent = generateManualAddressContent(commonContent);
+    const manualAddressErrors = manualAddressContent.errors as Record<string, unknown>;
+    languageAssertions(
+      'en',
+      {
+        ...enContent,
+        errors: {
+          birthFatherAddress1: manualAddressErrors.address1,
+          birthFatherAddressTown: manualAddressErrors.addressTown,
+          birthFatherAddressPostcode: manualAddressErrors.addressPostcode,
+        },
+      },
+      () => generateContent(commonContent)
+    );
   });
 
   test('should return correct Welsh content', () => {
-    languageAssertions('cy', cyContent, generateContent);
+    const manualAddressContent = generateManualAddressContent({ ...commonContent, language: 'cy' });
+    const manualAddressErrors = manualAddressContent.errors as Record<string, unknown>;
+    languageAssertions(
+      'cy',
+      {
+        ...cyContent,
+        errors: {
+          birthFatherAddress1: manualAddressErrors.address1,
+          birthFatherAddressTown: manualAddressErrors.addressTown,
+          birthFatherAddressPostcode: manualAddressErrors.addressPostcode,
+        },
+      },
+      () => generateContent({ ...commonContent, language: 'cy' })
+    );
   });
 
   test('should contain birthFatherAddress1 field', () => {

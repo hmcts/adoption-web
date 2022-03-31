@@ -19,18 +19,18 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
-  section: "Birth father's details (in Welsh)",
-  label: 'Do you have the birth father’s last known address? (in Welsh)',
-  moreDetails: "Give a reason why the address is not known, for example 'no fixed address'. (in Welsh)",
-  hint: "Ask the adoption agency or social worker if you're not sure. (in Welsh)",
+const cy: typeof en = () => ({
+  section: 'Manylion y tad biolegol',
+  label: 'A oes gennych gyfeiriad olaf hysbys y tad biolegol?',
+  moreDetails: 'Rhowch reswm pam bod y cyfeiriad yn anhysbys, er enghraifft ‘dim cyfeiriad parhaol’.',
+  hint: 'Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
   errors: {
     birthFatherAddressKnown: {
-      required: 'Please select an answer (in Welsh)',
+      required: 'Dewiswch ateb os gwelwch yn dda',
     },
     birthFatherAddressNotKnownReason: {
-      required: 'Provide a reason (in Welsh)',
-      invalid: 'Reason must be 500 characters or fewer (in welsh)',
+      required: 'Darparwch reswm',
+      invalid: 'Rhaid i’r rheswm fod yn 500 nod neu llai',
     },
   },
 });

@@ -94,17 +94,17 @@ const en = content => {
   };
 };
 
-const cy = content => {
+const cy: typeof en = content => {
   const cyContent = {
-    section: "The child's details (in welsh)",
-    title: 'Orders already in place (in welsh)',
-    orderType: 'Type of order (in welsh)',
-    orderNumber: 'Order case or serial number (in welsh)',
-    orderCourt: 'Court (in welsh)',
-    orderDate: 'Order date (in welsh)',
-    placementOrder: 'Placement Order (in welsh)',
-    change: 'Change (in welsh)',
-    continue: 'Continue (in welsh)',
+    section: 'Manylion y plentyn',
+    title: 'Gorchmynion sydd eisoes mewn lle',
+    orderType: 'Math o neuchymyn',
+    orderNumber: 'Rhif cyfresol neu rif yr achos ar y gorchymyn',
+    orderCourt: 'Llys',
+    orderDate: 'Dyddiad y gorchymyn',
+    placementOrder: 'Gorchymyn Lleoli',
+    change: 'Newid',
+    continue: 'Parhau',
     language: content.language,
   };
   return {

@@ -7,7 +7,7 @@ import {
 } from '../../../common/components/address-select';
 import { APPLICANT_1_FIND_ADDRESS, APPLICANT_1_MANUAL_ADDRESS } from '../../../urls';
 
-const en = ({ selectAddressContent, userCase }): Record<string, unknown> => {
+const en = ({ selectAddressContent, userCase }) => {
   const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant' : 'First applicant';
   return {
     section,
@@ -20,11 +20,11 @@ const en = ({ selectAddressContent, userCase }): Record<string, unknown> => {
   };
 };
 
-const cy = ({ selectAddressContent, userCase }): Record<string, unknown> => {
-  const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant (in Welsh)' : 'First applicant (in Welsh)';
+const cy: typeof en = ({ selectAddressContent, userCase }) => {
+  const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Ceisydd' : 'Ceisydd cyntaf';
   return {
     section,
-    title: "What's your home address? (in Welsh)",
+    title: 'Beth yw eich cyfeiriad cartref?',
     errors: {
       applicant1SelectAddress: selectAddressContent.errors.selectAddress,
     },

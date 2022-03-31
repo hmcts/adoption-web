@@ -14,9 +14,9 @@ const en = internationalAddressContent => ({
   },
 });
 
-const cy = internationalAddressContent => ({
-  section: "Birth mother's details (in welsh)",
-  title: "What is the birth mother's last known address? (in welsh)",
+const cy: typeof en = internationalAddressContent => ({
+  section: 'Manylion y fam fiolegol',
+  title: 'Beth yw cyfeiriad olaf hysbys y fam fiolegol?',
   errors: {
     birthMotherAddress1: internationalAddressContent.errors.address1,
     birthMotherAddressCountry: internationalAddressContent.errors.addressCountry,

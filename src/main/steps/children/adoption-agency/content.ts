@@ -2,7 +2,7 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { isEmailValid, isFieldFilledIn, isPhoneNoValid } from '../../../app/form/validation';
 
-export const en = (): Record<string, unknown> => ({
+const en = () => ({
   section: 'Your adoption agency or local authority details',
   title: 'Adoption agency or local authority details',
   adopAgencyName: 'Name of adoption agency or local authority',
@@ -27,27 +27,27 @@ export const en = (): Record<string, unknown> => ({
   },
 });
 
-export const cy = (): Record<string, unknown> => ({
-  section: 'Your adoption agency or local authority details (in Welsh)',
-  title: 'Adoption agency or local authority details (in Welsh)',
-  adopAgencyName: 'Name of adoption agency or local authority (in Welsh)',
-  adopAgencyPhone: 'Phone number (in Welsh)',
-  adopAgencyContactName: 'Name of your contact (in Welsh)',
-  adopAgencyContactEmail: 'Email address of your contact (in Welsh)',
+const cy: typeof en = () => ({
+  section: 'Manylion eich asiantaeth fabwysiadu neu’ch awdurdod lleol',
+  title: 'Manylion yr asiantaeth fabwysiadu neu’r awdurdod lleol',
+  adopAgencyName: 'Enw’r asiantaeth fabwysiadu neu’r awdurdod lleol',
+  adopAgencyPhone: 'Rhif ffôn',
+  adopAgencyContactName: 'Enw eich cyswllt',
+  adopAgencyContactEmail: 'Cyfeiriad e-bost eich cyswllt',
   errors: {
     adopAgencyOrLaName: {
-      required: 'Enter a name (in Welsh)',
+      required: 'Nac ydwdwch enw',
     },
     adopAgencyOrLaPhoneNumber: {
-      required: 'Enter a UK telephone number (in Welsh)',
-      invalid: 'Enter a UK telephone number (in Welsh)',
+      required: 'Rhowch rif ffôn yn y DU',
+      invalid: 'Rhowch rif ffôn yn y DU',
     },
     adopAgencyOrLaContactName: {
-      required: 'Enter a name (in Welsh)',
+      required: 'Nac ydwdwch enw',
     },
     adopAgencyOrLaContactEmail: {
-      required: 'Enter an email address (in Welsh)',
-      invalid: 'Enter an email address in the correct format, like name@example.com (in Welsh)',
+      required: 'Nac ydwdwch gyfeiriad e-bost',
+      invalid: 'Rhowch gyfeiriad e-bost yn y fformat cywir, er enghraifft enw@enghraifft.com',
     },
   },
 });

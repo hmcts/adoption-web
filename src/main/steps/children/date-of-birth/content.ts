@@ -26,19 +26,19 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
-  section: "The child's details (in welsh)",
-  label: "What is the child's date of birth? (in welsh)",
-  hint: "For example, 31 3 2012. This should be on their birth certificate. Ask the adoption agency or social worker if you're not sure. (in welsh)",
+const cy: typeof en = () => ({
+  section: 'Manylion y plentyn',
+  label: 'Beth yw dyddiad geni’r plentyn?',
+  hint: 'Er enghraifft, 31 3 2012. Dylai hyn fod ar eu tystysgrif geni Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
   errors: {
     childrenDateOfBirth: {
-      required: 'Enter their date of birth (in welsh)',
-      incompleteDay: 'Date of birth must include a day (in welsh)',
-      incompleteMonth: 'Date of birth must include a month (in welsh)',
-      incompleteYear: 'Date of birth must include a year (in welsh)',
-      invalidDate: 'Date of birth must be a real date (in welsh)',
-      invalidDateInFuture: 'Date of birth must be in the past (in welsh)',
-      invalidDateOver18: 'Child is 18 or over and cannot be adopted (in welsh)',
+      required: 'Nac ydwdwch eu dyddiad geni',
+      incompleteDay: 'Rhaid i’r dyddiad geni gynnwys diwrnod',
+      incompleteMonth: 'Rhaid i’r dyddiad geni gynnwys mis',
+      incompleteYear: 'Rhaid i’r dyddiad geni gynnwys blwyddyn',
+      invalidDate: 'Rhaid i’r dyddiad geni fod yn ddyddiad dilys',
+      invalidDateInFuture: 'Rhaid i’r dyddiad geni fod yn y gorffennol',
+      invalidDateOver18: 'Mae’r plentyn dros 18 oed ac ni ellir ei fabwysiadu',
     },
   },
 });

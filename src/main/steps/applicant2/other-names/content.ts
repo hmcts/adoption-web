@@ -7,12 +7,12 @@ import {
   generateContent as otherNamesGenerateContent,
 } from '../../common/components/other-names';
 
-export const en = (): Record<string, unknown> => ({
+const en = () => ({
   section: 'Second applicant',
 });
 
-export const cy = (): Record<string, unknown> => ({
-  section: 'Second applicant (in Welsh)',
+const cy: typeof en = () => ({
+  section: 'Ail geisydd',
 });
 
 export const form: FormContent = {

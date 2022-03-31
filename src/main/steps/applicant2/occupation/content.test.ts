@@ -1,11 +1,11 @@
-/* eslint-disable @typescript-eslint/ban-types, jest/expect-expect */
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
 jest.mock('../../../app/form/validation');
-const CY = 'cy';
+
 const EN = 'en';
 const enContent = {
   section: 'Second applicant',
@@ -31,48 +31,36 @@ const enContent = {
     },
   },
 };
+
 const cyContent = {
-  section: 'Second applicant (in Welsh)',
-  label: "What's your occupation? (in Welsh)",
-  hint: 'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’. (in Welsh)',
+  section: 'Ail geisydd',
+  label: 'Beth yw eich galwedigaeth?',
+  hint: 'Nac ydwdwch eich galwedigaeth yn llawn. Er enghraifft, ‘Athro Ysgol Uwchradd’ yn hytrach nac ‘Athro’ yn unig. Os ydych yn hunangyflogedig, dywedwch hynny. Er enghraifft, ‘Saer hunangyflogedig.’',
   warningText: {
-    text: 'This information will appear on the adoption certificate. (in Welsh)',
-    iconFallbackText: 'Warning (in Welsh)',
+    text: 'Bydd yr wybodaeth hon yn ymddangos ar y dystysgrif mabwysiadu.',
+    iconFallbackText: 'Rhybudd',
   },
   details: {
-    summaryText: "I'm not working at the moment (in Welsh)",
-    html: `If you’re unemployed, say what your occupation was when you were working. For example, 'Unemployed administrative assistant'.
-    <br>
-    <br>
-    If you’re retired, say that you’re retired and what your occupation was when you were working. For example, ‘Retired hairdresser’.
-    <br>
-    <br>
-    If you’re a full time parent, enter ‘Full time parent’. (in Welsh)`,
+    summaryText: 'Nid wyf yn gweithio ar hyn o bryd',
+    html: 'Os ydych yn ddi-waith, nodwch beth oedd eich galwedigaeth pan oeddech yn gweithio. Er enghraifft, ‘Cynorthwyydd Gweinyddol Di-waith’.<br><br>Os ydych wedi ymddeol, nodwch beth oedd eich galwedigaeth pan oeddech yn gweithio. Er enghraifft, ‘Triniwr Gwallt Wedi Ymddeol’.<br><br>Os ydych yn riant amser llawn, nodwch ‘Rhiant amser llawn’.',
   },
   errors: {
     applicant2Occupation: {
-      required: 'Enter your occupation (in Welsh)',
+      required: 'Nac ydwdwch eich galwedigaeth',
     },
   },
 };
 
-const langAssertions = (language, content, generateFn) => {
-  const generatedContent = generateFn({ language } as CommonContent);
-
-  Object.entries(content).forEach(([key, value]) => {
-    expect(generatedContent[key]).toEqual(value);
-  });
-};
-
 const commonContent = { language: EN } as CommonContent;
 
-describe('applicant2 > occupation content', () => {
+/* eslint-disable @typescript-eslint/ban-types */
+describe('applicant2 > occupation > content', () => {
   it('should return the correct content for language = en', () => {
-    langAssertions(EN, enContent, generateContent);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   it('should return the correct content for language = cy', () => {
-    langAssertions(CY, cyContent, generateContent);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   it('should have an occupation text input field', () => {
@@ -102,4 +90,3 @@ describe('applicant2 > occupation content', () => {
     expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: EN }))).toBe('Save as draft');
   });
 });
-/* eslint-enable @typescript-eslint/ban-types, jest/expect-expect */

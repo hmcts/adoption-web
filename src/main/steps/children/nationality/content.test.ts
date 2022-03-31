@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable jest/expect-expect */
 const mockForm = {
   form: {
     fields: { childrenNationality: { MOCK_KEY: 'MOCK_VALUE' } },
@@ -13,10 +11,12 @@ jest.mock('../../common/components/nationality', () => {
   return { nationalityFields: mockNationalityFields, generateContent: jest.fn().mockReturnValue(mockForm) };
 });
 
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { CaseWithId, FieldPrefix } from '../../../app/case/case';
 import { FormContent, FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { CommonContent } from '../../common/common.content';
 import { nationalityFields } from '../../common/components/nationality';
+import { CHILDREN_NATIONALITY } from '../../urls';
 
 import { form, generateContent } from './content';
 
@@ -28,21 +28,25 @@ const enContent = {
       required: "Select a nationality or 'Not sure'",
       notSureViolation: "Select a nationality or 'Not sure'",
     },
+    addAnotherNationality: 'MOCK_ERROR_MESSAGE',
   },
+  url: CHILDREN_NATIONALITY,
 };
 
 const cyContent = {
-  section: "The child's details (in welsh)",
-  label: 'What is their nationality? (in welsh)',
+  section: 'Manylion y plentyn',
+  label: 'Beth yw eu cenedligrwydd?',
   errors: {
     childrenNationality: {
-      required: "Select a nationality or 'Not sure' (in welsh)",
-      notSureViolation: "Select a nationality or 'Not sure' (in welsh)",
+      required: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
+      notSureViolation: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
     },
+    addAnotherNationality: 'MOCK_ERROR_MESSAGE',
   },
+  url: CHILDREN_NATIONALITY,
 };
 
-describe('children > nationality content', () => {
+describe('children > nationality > content', () => {
   const commonContent = { language: 'en', userCase: {} } as CommonContent;
   let generatedContent;
 
@@ -51,18 +55,11 @@ describe('children > nationality content', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.label).toEqual(enContent.label);
-    expect(generatedContent.errors).toEqual({ ...enContent.errors, ...mockForm.errors });
-    expect(generatedContent.url).toEqual('/children/nationality');
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.label).toEqual(cyContent.label);
-    expect(generatedContent.errors).toEqual({ ...cyContent.errors, ...mockForm.errors });
-    expect(generatedContent.url).toEqual('/children/nationality');
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain childrenNationality field', () => {

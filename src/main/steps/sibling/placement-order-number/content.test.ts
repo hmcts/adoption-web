@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
@@ -6,8 +7,29 @@ import { generateContent } from './content';
 
 jest.mock('../../../app/form/validation');
 
+const enContent = {
+  section: 'Sibling details',
+  label: 'What is the serial or case number on the order?',
+  hint: 'Ask your social worker or adoption agency if you are not sure where to find this.',
+  errors: {
+    placementOrderNumber: {
+      required: 'Enter the serial or case number',
+    },
+  },
+};
+
+const cyContent = {
+  section: 'Manylion y brawd/chwaer',
+  label: 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn?',
+  hint: 'Gofynnwch i’ch gweithiwr cymdeithasol, neu’ch asiantaeth fabwysiadu os nad ydych yn siŵr lle i ddod o hyd i hwn.',
+  errors: {
+    placementOrderNumber: {
+      required: 'Nac ydwdwch y rhif cyfresol neu rif yr achos',
+    },
+  },
+};
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('sibling > placement-order-number content', () => {
+describe('sibling > placement-order-number > content', () => {
   const commonContent = {
     language: 'en',
     userCase: {
@@ -15,26 +37,13 @@ describe('sibling > placement-order-number content', () => {
       selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
     },
   } as CommonContent;
+
   test('should return correct english content', () => {
-    const generatedContent = generateContent(commonContent);
-    expect(generatedContent.section).toEqual('Sibling details');
-    expect(generatedContent.label).toEqual('What is the serial or case number on the order?');
-    expect(generatedContent.hint).toEqual(
-      'Ask your social worker or adoption agency if you are not sure where to find this.'
-    );
-    expect((generatedContent.errors as any).placementOrderNumber.required).toBe('Enter the serial or case number');
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    const generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual('Sibling details (in Welsh)');
-    expect(generatedContent.label).toEqual('What is the serial or case number on the order? (in welsh)');
-    expect(generatedContent.hint).toEqual(
-      'Ask your social worker or adoption agency if you are not sure where to find this. (in welsh)'
-    );
-    expect((generatedContent.errors as any).placementOrderNumber.required).toBe(
-      'Enter the serial or case number (in welsh)'
-    );
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain placementOrderNumber field', () => {
@@ -44,12 +53,8 @@ describe('sibling > placement-order-number content', () => {
     const placementOrderNumberField = fields.placementOrderNumber as FormOptions;
     expect(placementOrderNumberField.type).toBe('text');
     expect(placementOrderNumberField.classes).toBe('govuk-label govuk-input--width-10');
-    expect((placementOrderNumberField.label as Function)(generatedContent)).toBe(
-      'What is the serial or case number on the order?'
-    );
-    expect(((placementOrderNumberField as FormInput).hint as Function)(generatedContent)).toBe(
-      'Ask your social worker or adoption agency if you are not sure where to find this.'
-    );
+    expect((placementOrderNumberField.label as Function)(generatedContent)).toBe(enContent.label);
+    expect(((placementOrderNumberField as FormInput).hint as Function)(generatedContent)).toBe(enContent.hint);
     expect(placementOrderNumberField.labelSize).toBe('l');
     expect(placementOrderNumberField.attributes).toEqual({ spellcheck: false });
 

@@ -98,7 +98,7 @@ const en = () => ({
 const cy: typeof en = () => ({
   title: 'Cwcis',
   paragraph1:
-    'Darn bach o ddata sy&rsquo;n cael ei storio ar eich cyfrifiadur, eich tabled neu eich ffôn symudol pan fyddwch yn ymweld â gwefan yw cwci. Mae angen cwcis ar y rhan fwyaf o wefannau i weithio&rsquo;n iawn.',
+    'A cookie is a small piece of data that&rsquo;n cael ei storio ar eich cyfrifiadur, eich tabled neu eich ffôn symudol pan fyddwch yn ymweld â gwefan yw cwci. Mae angen cwcis ar y rhan fwyaf o wefannau i weithio&rsquo;n iawn.',
   howAreCookiesUsedParagraph1: 'Sut ydym yn defnyddio cwcis yn y gwasanaeth hwn:',
   howAreCookiesUsedItem1: 'mesur sut ydych yn defnyddio’r gwasanaeth fel y gallwn ei wella',
   howAreCookiesUsedItem2: 'cofio&rsquo;r hysbysiadau rydych wedi&rsquo;u gweld fel na fyddwch yn eu gweld eto',

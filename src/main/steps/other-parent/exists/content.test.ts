@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { YesOrNo } from '../../../app/case/definition';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -11,6 +12,8 @@ const enContent = {
   section: "Other parent's details",
   label: 'Is there another person who has parental responsibility for the child?',
   hint: 'Apart from the birth mother and father. For example, a step parent.',
+  one: 'Yes',
+  two: 'No',
   errors: {
     otherParentExists: {
       required: 'Please answer the question',
@@ -19,18 +22,20 @@ const enContent = {
 };
 
 const cyContent = {
-  section: "Other parent's details (in Welsh)",
-  label: 'Is there another person who has parental responsibility for the child? (in welsh)',
-  hint: 'Apart from the birth mother and father. For example, a step parent. (in welsh)',
+  section: 'Manylion y rhiant arall',
+  label: 'A oes unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn?',
+  hint: 'Oni bai am y fam a’r tad biolegol. Er enghraifft, llys-riant.',
+  one: 'Ydw',
+  two: 'Nac ydw',
   errors: {
     otherParentExists: {
-      required: 'Please answer the question (in welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('common > components > full-name', () => {
+describe('other-parent > exists > content', () => {
   const commonContent = { language: 'en', userCase: {} } as CommonContent;
   let generatedContent;
   let form;
@@ -40,18 +45,11 @@ describe('common > components > full-name', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.label).toEqual(enContent.label);
-    expect(generatedContent.hint).toEqual(enContent.hint);
-    expect(generatedContent.errors).toEqual(enContent.errors);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
-  test('should return correct Welsh content', () => {
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.label).toEqual(cyContent.label);
-    expect(generatedContent.hint).toEqual(cyContent.hint);
-    expect(generatedContent.errors).toEqual(cyContent.errors);
+  test('should return correct welsh content', () => {
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain otherParentExists field', () => {

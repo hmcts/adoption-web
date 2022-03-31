@@ -24,22 +24,22 @@ const en = () => ({
 });
 
 const cy = () => ({
-  addressLine1: 'Building and street <span class="govuk-visually-hidden">line 1 of 2 (in welsh)</span>',
-  addressLine2: '<span class="govuk-visually-hidden">Building and street line 2 of 2 (in welsh)</span>',
-  town: 'Town or city (in welsh)',
-  county: 'County (in welsh)',
-  postcode: 'Postcode (in welsh)',
-  enterInternationalAddress: 'Enter an international address (in welsh)',
+  addressLine1: 'Adeilad a stryd <span class="govuk-visually-hidden">llinell 1 o 2</span>',
+  addressLine2: '<span class="govuk-visually-hidden">Adeilad a stryd llinell 2 o 2</span>',
+  town: 'Tref neu ddinas',
+  county: 'Sir',
+  postcode: 'Cod post',
+  enterInternationalAddress: 'Nac ydwdwch gyfeiriad rhyngwladol',
   errors: {
     address1: {
-      required: 'Enter the first line of the address (in welsh)',
+      required: 'Nac ydwdwch linell gyntaf y cyfeiriad',
     },
     addressTown: {
-      required: 'Enter the town or city (in welsh)',
+      required: 'Nac ydwdwch y dref neu ddinas',
     },
     addressPostcode: {
-      required: 'Enter the postcode (in welsh)',
-      invalid: 'Enter a real postcode (in welsh)',
+      required: 'Nac ydwdwch y cod post',
+      invalid: 'Nac ydwdwch god post dilys',
     },
   },
 });

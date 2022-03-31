@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable jest/expect-expect */
 const mockForm = {
   form: {
     fields: { applicant1HasOtherNames: { MOCK_KEY: 'MOCK_VALUE' } },
@@ -12,7 +10,9 @@ jest.mock('../../common/components/other-names', () => {
   return { otherNamesFields: mockOtherNamesFields, generateContent: jest.fn().mockReturnValue(mockForm) };
 });
 
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FieldPrefix } from '../../../app/case/case';
+import { ApplyingWith } from '../../../app/case/definition';
 import { FormContent, FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { CommonContent } from '../../common/common.content';
 import { otherNamesFields } from '../../common/components/other-names';
@@ -21,21 +21,12 @@ import { form, generateContent } from './content';
 
 jest.mock('../../../app/form/validation');
 
-const CY = 'cy';
-const EN = 'en';
-
 const enContent = {
   section: 'First applicant',
 };
 
 const cyContent = {
-  section: 'First applicant (in Welsh)',
-};
-
-const langAssertions = (language, content) => {
-  const generatedContent = generateContent({ language, userCase: {} } as CommonContent);
-  const { section } = content;
-  expect(generatedContent.section).toEqual(section);
+  section: 'Ceisydd cyntaf',
 };
 
 describe('applicant1 > other-names > content', () => {
@@ -47,11 +38,23 @@ describe('applicant1 > other-names > content', () => {
   });
 
   it('should return the correct content for language = en', () => {
-    langAssertions(EN, enContent);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
+  });
+
+  test('should set correct english title in case of applying alone', () => {
+    const aloneCommonContent = { language: 'en', userCase: { applyingWith: ApplyingWith.ALONE } } as CommonContent;
+    generatedContent = generateContent(aloneCommonContent);
+    expect(generatedContent.section).toEqual('Applicant');
   });
 
   it('should return the correct content for language = cy', () => {
-    langAssertions(CY, cyContent);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
+  });
+
+  test('should set correct welsh title in case of applying alone', () => {
+    const aloneCommonContent = { language: 'cy', userCase: { applyingWith: ApplyingWith.ALONE } } as CommonContent;
+    generatedContent = generateContent(aloneCommonContent);
+    expect(generatedContent.section).toEqual('Ceisydd');
   });
 
   test('should contain applicant1HasOtherNames field', () => {

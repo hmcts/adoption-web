@@ -1,9 +1,10 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './address-international';
-import { generateContent as generateManualAddressContent, form as manualAddressForm } from './address-manual';
+import { form as manualAddressForm } from './address-manual';
 
 jest.mock('../../../app/form/validation');
 
@@ -18,13 +19,21 @@ const enContent = {
 };
 
 const cyContent = {
-  addressLine1: 'Address line 1 (in welsh)',
-  addressLine2: 'Address line 2 (Optional) (in welsh)',
-  addressLine3: 'Address line 3 (Optional) (in welsh)',
-  town: 'Town or city (Optional) (in welsh)',
-  county: 'County, district, state or province (Optional) (in welsh)',
-  postcode: 'Postcode, zip code or area code (Optional) (in welsh)',
-  country: 'Country (in Welsh)',
+  addressLine1: 'Llinell cyfeiriad 1',
+  addressLine2: 'Llinell cyfeiriad 2 (Dewisol)',
+  addressLine3: 'Llinell cyfeiriad 3 (Dewisol)',
+  town: 'Tref neu ddinas (Dewisol)',
+  county: 'Sir, rhanbarth, gwladwriaeth neu dalaith (dewisol)',
+  postcode: 'Cod post, cod zip neu god rhanbarth (dewisol)',
+  country: 'Gwlad',
+  errors: {
+    address1: {
+      required: 'Nac ydwdwch linell gyntaf y cyfeiriad',
+    },
+    addressCountry: {
+      required: 'Nac ydwdwch y wlad',
+    },
+  },
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
@@ -42,34 +51,11 @@ describe('common > components > address-international > content', () => {
   });
 
   test('should return correct english content', () => {
-    const manualAddressContent = generateManualAddressContent(commonContent);
-    expect(generatedContent.addressLine1).toEqual(enContent.addressLine1);
-    expect(generatedContent.addressLine2).toEqual(enContent.addressLine2);
-    expect(generatedContent.addressLine3).toEqual(enContent.addressLine3);
-    expect(generatedContent.town).toEqual(enContent.town);
-    expect(generatedContent.county).toEqual(enContent.county);
-    expect(generatedContent.postcode).toEqual(enContent.postcode);
-    expect(generatedContent.country).toEqual(enContent.country);
-    expect(generatedContent.errors).toEqual({
-      address1: (manualAddressContent.errors as any).address1,
-      addressCountry: { required: 'Enter the country' },
-    });
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    const manualAddressContent = generateManualAddressContent({ ...commonContent, language: 'cy' });
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.addressLine1).toEqual(cyContent.addressLine1);
-    expect(generatedContent.addressLine2).toEqual(cyContent.addressLine2);
-    expect(generatedContent.addressLine3).toEqual(cyContent.addressLine3);
-    expect(generatedContent.town).toEqual(cyContent.town);
-    expect(generatedContent.county).toEqual(cyContent.county);
-    expect(generatedContent.postcode).toEqual(cyContent.postcode);
-    expect(generatedContent.country).toEqual(cyContent.country);
-    expect(generatedContent.errors).toEqual({
-      address1: (manualAddressContent.errors as any).address1,
-      addressCountry: { required: 'Enter the country (in welsh)' },
-    });
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain address1 field', () => {
