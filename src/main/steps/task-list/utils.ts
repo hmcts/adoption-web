@@ -506,7 +506,7 @@ export const getApplicationStatus = (userCase: CaseWithId): SectionStatus => {
 export const statementOfTruthAndPaymentStatus = (userCase: CaseWithId): SectionStatus => {
   if (userCase.applyingWith === ApplyingWith.ALONE) {
     if (!userCase.applicant1IBelieveApplicationIsTrue && !userCase.applicant1SotFullName) {
-      SectionStatus.NOT_STARTED;
+      return SectionStatus.NOT_STARTED;
     } else if (
       userCase.applicant1IBelieveApplicationIsTrue ||
       userCase.applicant1SotFullName ||
@@ -521,7 +521,7 @@ export const statementOfTruthAndPaymentStatus = (userCase: CaseWithId): SectionS
       !userCase.applicant2IBelieveApplicationIsTrue &&
       !userCase.applicant2SotFullName
     ) {
-      SectionStatus.NOT_STARTED;
+      return SectionStatus.NOT_STARTED;
     } else if (
       userCase.applicant1IBelieveApplicationIsTrue ||
       userCase.applicant1SotFullName ||
