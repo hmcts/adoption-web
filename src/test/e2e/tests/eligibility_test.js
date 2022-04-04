@@ -1,8 +1,8 @@
 const config = require('../config');
 
-Feature('Applicant Eligibility Criteria').retry(1);
+Feature('Applicant Eligibility Criteria ').retry(1);
 
-Scenario('Verify applicant eligible to adopt', async ({ landingPage, loginPage }) => {
+Scenario('Verify applicant eligible to adopt @master', async ({ landingPage, loginPage }) => {
   await loginPage.signInFromEligibility();
   await landingPage.seeTheLandingPage();
 });

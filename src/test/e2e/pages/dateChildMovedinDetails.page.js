@@ -15,4 +15,9 @@ module.exports = {
     await I.retry(3).click('Save and continue');
     await I.wait(4);
   },
+  async errorWithOutSelectingDateOption() {
+    await I.retry(3).click('Save and continue');
+    await I.wait(2);
+    await I.retry(3).see('Enter your date of birth', '#dateChildMovedIn-error');
+  },
 };

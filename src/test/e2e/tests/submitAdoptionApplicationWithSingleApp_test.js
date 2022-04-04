@@ -1,7 +1,7 @@
-Feature('Creat application').retry(1);
+Feature('Single applicant creat application').retry(1);
 
 Scenario(
-  'Creat full application and submit @cross-browser @master',
+  'Submit application with single applicant',
   async ({
     loginPage,
     landingPage,
@@ -14,8 +14,6 @@ Scenario(
     childOtherParentDetailsPage,
     childAdoptionAgencyDetailsPage,
     childSiblingDetailsPage,
-    otherApplicantDetailsPage,
-    otherApplicantPersonalDetailsPage,
     primaryApplicantDetailsPage,
     primaryApplicantPersonalDetailsPage,
     reviewPayAndSubmitPage,
@@ -25,7 +23,7 @@ Scenario(
   }) => {
     await loginPage.createCitizenUserAndSignIn();
     await landingPage.seeTheLandingPage();
-    await landingPage.selectApplyWithMySpouseSection();
+    await landingPage.selectApplyWithOnMyOwnSection();
 
     await taskListPage.selectDateChildMovedInDetails();
     await dateChildMovedinDetailsPage.dateChildMovedInSection('10', '10', '2020');
@@ -44,14 +42,6 @@ Scenario(
     await taskListPage.selectFirstApplicantPersonalDetails();
     await primaryApplicantPersonalDetailsPage.primaryApplicantPersonalDetailsSection();
     await taskListPage.verifyPrimaryApplicantPersonalDetailsStatus();
-
-    await taskListPage.selectOtherApplicantContactDetails();
-    await otherApplicantDetailsPage.otherApplicantContactDetailsSection();
-    await taskListPage.verifySecondApplicantPersonalDetailsStatus();
-
-    await taskListPage.selectOtherApplicantPersonalDetails();
-    await otherApplicantPersonalDetailsPage.otherApplicantPersonalDetailsSection();
-    await taskListPage.verifyOtherApplicantPersonalDetailsStatus();
 
     await taskListPage.selectChildrenBirthCertificate();
     await childrenBirthCertificatePage.childDetailsBirthCertificaterSection();
