@@ -1,7 +1,7 @@
-Feature('Creat application').retry(1);
+Feature('Create application').retry(1);
 
 Scenario(
-  'Creat full application and submit @cross-browser @master',
+  'Create full application and submit @cross-browser @master',
   async ({
     loginPage,
     landingPage,
