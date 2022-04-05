@@ -1,8 +1,12 @@
 import axios from 'axios';
 import config from 'config';
 
+import { setLocalEndpoints } from '../../main/modules/properties-volume';
+
 jest.retryTimes(20);
 jest.setTimeout(5000);
+
+setLocalEndpoints();
 
 const servicesToCheck = [
   { name: 'Adoption Web', url: process.env.TEST_URL },

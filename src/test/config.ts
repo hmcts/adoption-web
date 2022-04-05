@@ -4,11 +4,11 @@
 // if (!process.env.TEST_PASSWORD) {
 //   new PropertiesVolume().enableFor({ locals: { developmentMode: true } } as unknown as Application);
 // }
-
 import sysConfig from 'config';
 import { getTokenFromApi } from '../main/app/auth/service/get-service-auth-token';
 
 import { IdamUserManager } from './steps/IdamUserManager';
+import { setLocalEndpoints } from '../main/modules/properties-volume';
 
 // better handling of unhandled exceptions
 process.on('unhandledRejection', reason => {
@@ -16,6 +16,8 @@ process.on('unhandledRejection', reason => {
 });
 
 getTokenFromApi();
+
+setLocalEndpoints();
 
 const generateTestUsername = () => `adoption.web.automationTest.${new Date().getTime()}@hmcts.net`;
 const TestUser = generateTestUsername();
