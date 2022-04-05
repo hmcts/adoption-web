@@ -49,6 +49,9 @@ describe('session', () => {
   beforeEach(() => {
     config.get = jest.fn().mockImplementationOnce(() => 'MOCK_SECRET');
     mockApp = {
+      locals: {
+        developmentMode: false,
+      },
       use: jest.fn(callback => callback),
     } as unknown as Application;
 
@@ -85,7 +88,7 @@ describe('session', () => {
         .mockImplementationOnce(() => 'MOCK_REDIS_KEY');
       mockApp = {
         use: jest.fn(callback => callback),
-        locals: {},
+        locals: { developmentMode: true },
       } as unknown as Application;
 
       new SessionStorage().enableFor(mockApp);
