@@ -18,11 +18,11 @@ export const enNotSure = {
 export const cyNotSure = {
   content: {
     [`${fieldName}label`]:
-      "Provide more details. For example, 'the birth father is uncontactable'. Your adoption agency or social worker can help you to complete this section. (in Welsh)",
+      'Darparwch fwy o fanylion. Er enghraifft, ‘nid oes modd cysylltu â’r tad biolegol’. Gall eich asiantaeth fabwysiadu neu eich gweithiwr cymdeithasol eich helpu i lenwi’r rhan hon.',
   },
   errors: {
     [fieldName]: {
-      required: 'Enter more details (in Welsh)',
+      required: 'Rhowch fwy o fanylion',
     },
   },
 };

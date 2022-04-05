@@ -135,7 +135,7 @@ const cy: typeof en = {
   cookies: 'Cwcis',
   privacyPolicy: 'Polisi preifatrwydd',
   termsAndConditions: 'Telerau ac amodau',
-  contactUs: 'Contact us (in welsh)',
+  contactUs: 'Cysylltwch â ni',
   marriage: 'priodas',
   endingCivilPartnership: 'dod â phartneriaeth sifil i ben',
   civilPartnership: 'partneriaeth sifil',

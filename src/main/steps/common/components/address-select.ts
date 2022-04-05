@@ -40,7 +40,7 @@ const cy = content => {
     {
       attributes: { id: 'totalAddressesFound' },
       value: -1,
-      text: `${addresses.length} address${addresses?.length !== 1 ? 'es' : ''} found (in welsh)`,
+      text: `${addresses.length} cyfeiriad${addresses?.length !== 1 ? 'au' : ''} wedi’i ddarganfod`,
       selected: true,
     },
   ];
