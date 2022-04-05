@@ -4,8 +4,9 @@ nodejs:
   ingressHost: ${SERVICE_FQDN}
   ingressIP: ${INGRESS_IP}
   consulIP: ${CONSUL_LB_IP}
-  devmemoryLimits: '256Mi'
-  devmemoryRequests: '256Mi'
+  devmemoryLimits: '512Mi'
+  devmemoryRequests: '512Mi'
+  devcpuRequests: '500m'
   autoscaling:
     enabled: false
   environment:
