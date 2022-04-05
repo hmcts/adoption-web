@@ -247,10 +247,7 @@ pactWith(
             Accept: '*/*',
             'Content-Type': 'application/json',
           },
-          params: {
-            case_ids: '45678',
-            user_ids: userDetails.id,
-          },
+          query: 'case_ids=45678&user_ids=123456',
         },
       };
 
