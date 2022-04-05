@@ -14,7 +14,7 @@ export const cookieMaxAge = 21 * (60 * 1000); // 21 minutes
 export class SessionStorage {
   public enableFor(app: Application): void {
     app.use(cookieParser());
-
+    console.log('app.locals.developmentMode', app.locals.developmentMode);
     app.use(
       session({
         name: 'adoption-web-session',
@@ -23,7 +23,7 @@ export class SessionStorage {
         secret: config.get('session.secret'),
         cookie: {
           httpOnly: true,
-          secure: true,
+          ...(app.locals.developmentMode ? {} : { secure: true }),
           maxAge: cookieMaxAge,
         },
         rolling: true, // Renew the cookie for another 20 minutes on each request
