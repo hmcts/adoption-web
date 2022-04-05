@@ -1,10 +1,13 @@
 import Axios, { AxiosStatic } from 'axios';
+import config from 'config';
+import { when } from 'jest-when';
 
 import { CALLBACK_URL } from '../../../steps/urls';
 
 import { getRedirectUrl, getSystemUser, getUserDetails } from './oidc';
 
 jest.mock('axios');
+config.get = jest.fn();
 
 const mockedAxios = Axios as jest.Mocked<AxiosStatic>;
 
@@ -13,8 +16,14 @@ const token =
 
 describe('getRedirectUrl', () => {
   test('should create a valid URL to redirect to the login screen', () => {
+    when(config.get)
+      .calledWith('services.idam.clientID')
+      .mockReturnValue('adoption-web')
+      .calledWith('services.idam.authorizationURL')
+      .mockReturnValue('https://idam-web-public/login');
+
     expect(getRedirectUrl('http://localhost', CALLBACK_URL)).toBe(
-      'https://idam-web-public.aat.platform.hmcts.net/login?client_id=adoption-web&response_type=code&redirect_uri=http://localhost/receiver'
+      'https://idam-web-public/login?client_id=adoption-web&response_type=code&redirect_uri=http://localhost/receiver'
     );
   });
 });
