@@ -2,17 +2,16 @@ jest.mock('axios');
 jest.mock('@hmcts/nodejs-logging');
 jest.useFakeTimers();
 import { Logger } from '@hmcts/nodejs-logging';
-import Axios, { AxiosStatic } from 'axios';
-import config from 'config';
-import { when } from 'jest-when';
-
-import { getServiceAuthToken, initAuthToken } from './get-service-auth-token';
-
 const logger = {
   info: jest.fn(),
   error: jest.fn(),
 };
 Logger.getLogger.mockReturnValue(logger);
+import Axios, { AxiosStatic } from 'axios';
+import config from 'config';
+import { when } from 'jest-when';
+
+import { getServiceAuthToken, initAuthToken } from './get-service-auth-token';
 
 const mockedAxios = Axios as jest.Mocked<AxiosStatic>;
 
