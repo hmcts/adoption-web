@@ -3,7 +3,6 @@ nodejs:
   applicationPort: 3000
   readinessDelay: 130
   livenessDelay: 130
-  memoryLimits: 1Gi
   autoscaling: # Default is false
     enabled: true
     maxReplicas: 5 # Required setting
