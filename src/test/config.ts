@@ -19,6 +19,7 @@ getTokenFromApi();
 
 setLocalEndpoints(process.env.ENDPOINTS);
 
+console.log('sysConfig', sysConfig);
 const generateTestUsername = () => `adoption.web.automationTest.${new Date().getTime()}@hmcts.net`;
 const TestUser = generateTestUsername();
 const TestPass = process.env.CITIZEN_PASSWORD || sysConfig.get('e2e.userTestPassword') || '';

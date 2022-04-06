@@ -66,4 +66,6 @@ export const setLocalEndpoints = (encoded?: string): void => {
   set(config, 'services.documentManagement.url', endpoints.dmStore);
   set(config, 'services.payments.url', endpoints.payments);
   set(config, 'services.equalityAndDiversity.url', endpoints.pcq);
+
+  console.log('config', config);
 };
