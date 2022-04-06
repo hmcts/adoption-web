@@ -8,7 +8,7 @@ import sysConfig from 'config';
 import { getTokenFromApi } from '../main/app/auth/service/get-service-auth-token';
 
 import { IdamUserManager } from './steps/IdamUserManager';
-import { setLocalEndpoints } from '../main/modules/properties-volume';
+// import { setLocalEndpoints } from '../main/modules/properties-volume';
 
 // better handling of unhandled exceptions
 process.on('unhandledRejection', reason => {
@@ -17,13 +17,14 @@ process.on('unhandledRejection', reason => {
 
 getTokenFromApi();
 
-setLocalEndpoints(process.env.ENDPOINTS);
+// setLocalEndpoints(process.env.ENDPOINTS);
+const decoded = Buffer.from(process.env.ENDPOINTS as string, 'base64');
+const endpoints = JSON.parse(decoded.toString());
 
-console.log('sysConfig', sysConfig);
 const generateTestUsername = () => `adoption.web.automationTest.${new Date().getTime()}@hmcts.net`;
 const TestUser = generateTestUsername();
 const TestPass = process.env.CITIZEN_PASSWORD || sysConfig.get('e2e.userTestPassword') || '';
-const idamUserManager = new IdamUserManager(sysConfig.get('services.idam.tokenURL'));
+const idamUserManager = new IdamUserManager(endpoints.idamToken);
 
 export const autoLogin = {
   login: (I, username = TestUser, password = TestPass): void => {
