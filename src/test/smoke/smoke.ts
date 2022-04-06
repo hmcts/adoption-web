@@ -5,8 +5,6 @@ import config from 'config';
 jest.retryTimes(20);
 jest.setTimeout(5000);
 
-console.log('smoke.ts config', config);
-
 const decoded = Buffer.from(process.env.ENDPOINTS as string, 'base64');
 const endpoints = JSON.parse(decoded.toString());
 
