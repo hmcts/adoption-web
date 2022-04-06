@@ -1,12 +1,14 @@
+/* eslint-disable import/order */
+import { setLocalEndpoints } from '../../main/modules/properties-volume';
+setLocalEndpoints(process.env.ENDPOINTS);
+
 import axios from 'axios';
 import config from 'config';
-
-import { setLocalEndpoints } from '../../main/modules/properties-volume';
 
 jest.retryTimes(20);
 jest.setTimeout(5000);
 
-setLocalEndpoints(process.env.ENDPOINTS);
+console.log('smoke.ts config', config);
 
 const servicesToCheck = [
   { name: 'Adoption Web', url: process.env.TEST_URL },
