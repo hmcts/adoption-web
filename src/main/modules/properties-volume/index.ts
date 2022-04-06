@@ -44,20 +44,11 @@ export class PropertiesVolume {
     set(config, toPath, result.toString().replace('\n', ''));
   }
 }
-export const setLocalEndpoints = (encoded?: string): void => {
-  console.log('encoded', encoded);
-  let decoded;
-  if (encoded) {
-    decoded = Buffer.from(encoded, 'base64');
-  } else {
-    const result = execSync('az keyvault secret show --vault-name adoption-aat -o tsv --query value --name endpoints');
-    decoded = Buffer.from(result.toString().replace('\n', ''), 'base64');
-  }
-
-  console.log('decoded', decoded);
+export const setLocalEndpoints = (): void => {
+  const result = execSync('az keyvault secret show --vault-name adoption-aat -o tsv --query value --name endpoints');
+  const decoded = Buffer.from(result.toString().replace('\n', ''), 'base64');
 
   const endpoints = JSON.parse(decoded.toString());
-  console.log('endpoints', endpoints);
 
   set(config, 'services.authProvider.url', endpoints.s2s);
   set(config, 'services.idam.authorizationURL', endpoints.idamWeb);
@@ -67,6 +58,4 @@ export const setLocalEndpoints = (encoded?: string): void => {
   set(config, 'services.feeLookup.url', endpoints.feeRegister);
   set(config, 'services.payments.url', endpoints.payments);
   set(config, 'services.equalityAndDiversity.url', endpoints.pcq);
-
-  console.log('config', config);
 };
