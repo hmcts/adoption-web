@@ -45,6 +45,7 @@ export class PropertiesVolume {
   }
 }
 export const setLocalEndpoints = (encoded?: string): void => {
+  console.log('encoded', encoded);
   let decoded;
   if (encoded) {
     decoded = Buffer.from(encoded, 'base64');
@@ -52,7 +53,11 @@ export const setLocalEndpoints = (encoded?: string): void => {
     const result = execSync('az keyvault secret show --vault-name adoption-aat -o tsv --query value --name endpoints');
     decoded = Buffer.from(result.toString().replace('\n', ''), 'base64');
   }
+
+  console.log('decoded', decoded);
+
   const endpoints = JSON.parse(decoded.toString());
+  console.log('endpoints', endpoints);
 
   set(config, 'services.authProvider.url', endpoints.s2s);
   set(config, 'services.idam.authorizationURL', endpoints.idamWeb);
