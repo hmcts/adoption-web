@@ -64,6 +64,7 @@ export const setLocalEndpoints = (encoded?: string): void => {
   set(config, 'services.idam.tokenURL', endpoints.idamToken);
   set(config, 'services.case.url', endpoints.ccd);
   set(config, 'services.documentManagement.url', endpoints.dmStore);
+  set(config, 'services.feeLookup.url', endpoints.feeRegister);
   set(config, 'services.payments.url', endpoints.payments);
   set(config, 'services.equalityAndDiversity.url', endpoints.pcq);
 
