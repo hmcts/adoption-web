@@ -1,19 +1,23 @@
+/* eslint-disable import/order */
 import axios from 'axios';
 import config from 'config';
 
 jest.retryTimes(20);
 jest.setTimeout(5000);
 
+const decoded = Buffer.from(process.env.ENDPOINTS as string, 'base64');
+const endpoints = JSON.parse(decoded.toString());
+
 const servicesToCheck = [
   { name: 'Adoption Web', url: process.env.TEST_URL },
-  { name: 'IDAM Web', url: config.get('services.idam.authorizationURL') },
-  { name: 'IDAM API', url: config.get('services.idam.tokenURL') },
-  { name: 'Auth Provider', url: config.get('services.authProvider.url') },
-  { name: 'CCD Data Store', url: config.get('services.case.url') },
-  { name: 'Fee Lookup', url: config.get('services.feeLookup.url') },
-  { name: 'Document Management', url: config.get('services.documentManagement.url') },
-  { name: 'Payment API', url: config.get('services.payments.url') },
-  { name: 'PCQ', url: config.get('services.equalityAndDiversity.url') },
+  { name: 'IDAM Web', url: endpoints.idamWeb },
+  { name: 'IDAM API', url: endpoints.idamToken },
+  { name: 'Auth Provider', url: endpoints.s2s },
+  { name: 'CCD Data Store', url: endpoints.ccd },
+  { name: 'Fee Lookup', url: endpoints.feeRegister },
+  { name: 'Document Management', url: endpoints.dmStore },
+  { name: 'Payment API', url: endpoints.payments },
+  { name: 'PCQ', url: endpoints.pcq },
   {
     name: 'Postcode Lookup',
     url: config.get('services.postcodeLookup.url'),
