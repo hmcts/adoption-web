@@ -5,7 +5,7 @@
 //   new PropertiesVolume().enableFor({ locals: { developmentMode: true } } as unknown as Application);
 // }
 import sysConfig from 'config';
-import { getTokenFromApi } from '../main/app/auth/service/get-service-auth-token';
+// import { getTokenFromApi } from '../main/app/auth/service/get-service-auth-token';
 
 import { IdamUserManager } from './steps/IdamUserManager';
 // import { setLocalEndpoints } from '../main/modules/properties-volume';
@@ -15,7 +15,7 @@ process.on('unhandledRejection', reason => {
   throw reason;
 });
 
-getTokenFromApi();
+// getTokenFromApi();
 
 // setLocalEndpoints(process.env.ENDPOINTS);
 const decoded = Buffer.from(process.env.ENDPOINTS as string, 'base64');
