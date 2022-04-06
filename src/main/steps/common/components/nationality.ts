@@ -95,7 +95,7 @@ export const nationalityFields = (userCase: Partial<Case>, fieldPrefix: FieldPre
                   type: 'summarylist',
                   values: [],
                   rows: mapSummaryListContent(
-                    userCase[`${fieldPrefix}AdditionalNames`],
+                    userCase[`${fieldPrefix}AdditionalNationalities`]!,
                     [userCase.applicant1LanguagePreference === LanguagePreference.WELSH ? 'Dileu' : 'Remove'],
                     urls[fieldPrefix]
                   ),
