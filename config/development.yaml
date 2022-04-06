@@ -2,7 +2,6 @@ security:
   referrerPolicy: 'origin'
 port: 3001
 timeout: 30000
-services:
 health:
   timeout: 5000
   deadline: 15000

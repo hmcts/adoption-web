@@ -44,9 +44,14 @@ export class PropertiesVolume {
     set(config, toPath, result.toString().replace('\n', ''));
   }
 }
-export const setLocalEndpoints = (): void => {
-  const result = execSync('az keyvault secret show --vault-name adoption-aat -o tsv --query value --name endpoints');
-  const decoded = Buffer.from(result.toString().replace('\n', ''), 'base64');
+export const setLocalEndpoints = (encoded?: string): void => {
+  let decoded;
+  if (encoded) {
+    decoded = Buffer.from(encoded, 'base64');
+  } else {
+    const result = execSync('az keyvault secret show --vault-name adoption-aat -o tsv --query value --name endpoints');
+    decoded = Buffer.from(result.toString().replace('\n', ''), 'base64');
+  }
   const endpoints = JSON.parse(decoded.toString());
 
   set(config, 'services.authProvider.url', endpoints.s2s);

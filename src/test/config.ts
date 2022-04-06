@@ -17,7 +17,7 @@ process.on('unhandledRejection', reason => {
 
 getTokenFromApi();
 
-setLocalEndpoints();
+setLocalEndpoints(process.env.ENDPOINTS);
 
 const generateTestUsername = () => `adoption.web.automationTest.${new Date().getTime()}@hmcts.net`;
 const TestUser = generateTestUsername();
