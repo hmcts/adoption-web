@@ -101,7 +101,7 @@ const cy = {
     'gwrando ar y rhan fwyaf o’r wefan gan ddefnyddio darllenydd sgrin (gan gynnwys fersiynau diweddaraf NVDA, CCA (Dadansoddwr cyferbyniad lliwiau) a VoiceOver)',
   simpleAsPossible: "We've also made the text as simple as possible to understand. (in Welsh)",
   abilityNet:
-    '<a href=”https://mcmw.abilitynet.org.uk” class=”govuk-link” target=”_blank” aria-label=”Bydd y ddolen hon yn agor mewn tab newydd ar gyfer AbilityNet”>Mae AbilityNet</a> yn rhoi cyngor ar sut i wneud eich dyfais yn haws i’w defnyddio os oes gennych anabledd.',
+    '<a href="https://mcmw.abilitynet.org.uk" class="govuk-link" target="_blank">Mae AbilityNet</a> yn rhoi cyngor ar sut i wneud eich dyfais yn haws i’w defnyddio os oes gennych anabledd.',
   howAccessible: "Pa mor hygyrch yw'r wefan hon",
   somePartsNot: "Rydym yn gwybod nad yw rhai rhannau o'r wefan hon yn gwbl hygyrch:",
   somePartsNotReflow: 'nid yw’r testun yn newid i fod mewn un golofn pan fyddwch yn newid maint ffenestr y porwr',
@@ -110,19 +110,18 @@ const cy = {
   feedbackAndContactInformation: 'Adborth a gwybodaeth gyswllt',
   needMoreInformation:
     'Os ydych angen gwybodaeth sydd ar y wefan hon mewn fformat arall megis ar ffurf PDF hygyrch, print bras, fformat hawdd ei ddarllen, recordiad sain neu braille:',
-  email:
-    'E-bost: <a href=”adoptionproject@justice.gov.uk” class=”govuk-link” aria-label=””Bydd y ddolen hon yn agor mewn neges e-bost newydd i adoptionproject@justice.gov.uk”>adoptionproject@justice.gov.uk</a>',
+  email: 'E-bost: <a href=”adoptionproject@justice.gov.uk” class=”govuk-link”>adoptionproject@justice.gov.uk</a>',
   phone: 'Ffoniwch: 01634 887900',
   considerYourRequest: 'Byddwn yn ystyried eich cais ac yn ymateb o fewn 10 diwrnod gwaith.',
   reportingAccessibility: "Riportio problemau hygyrchedd gyda'r wefan hon",
   accessibilityPhoneNumber: 'Telephone: 01634 887900 (in Welsh)',
   improveAccessibility:
-    'Rydym wastad yn ceisio gwella hygyrchedd y wefan hon. Os byddwch yn cael unrhyw broblemau nad ydynt yn cael eu crybwyll ar y dudalen hon, neu os ydych yn credu nad ydym yn bodloni gofynion y rheoliadau hygyrchedd, cysylltwch â: <a href=”mailto:adoptionproject@justice.gov.uk” class=”govuk-link” aria-label=”Bydd y ddolen hon yn agor mewn neges e-bost newydd i adoptionproject@justice.gov.uk”>adoptionproject@justice.gov.uk</a>.',
+    'Rydym wastad yn ceisio gwella hygyrchedd y wefan hon. Os byddwch yn cael unrhyw broblemau nad ydynt yn cael eu crybwyll ar y dudalen hon, neu os ydych yn credu nad ydym yn bodloni gofynion y rheoliadau hygyrchedd, cysylltwch â: <a href=”mailto:adoptionproject@justice.gov.uk” class=”govuk-link”>adoptionproject@justice.gov.uk</a>.',
   enforcementProcedure: 'Y Weithdrefn Orfodi',
   humanRightsCommission:
     'Y Comisiwn Cydraddoldeb a Hawliau Dynol (EHRC) sy’n gyfrifol am orfodi Rheoliadau Hygyrchedd Cyrff y Sector Cyhoeddus (Gwefannau a Rhaglenni Symudol) (Rhif 2) 2018 (y ‘rheoliadau hygyrchedd’).',
   notHappy:
-    'Os ydych wedi cysylltu â ni ynghylch mater hygyrchedd ac nad ydych yn fodlon â’n hymateb, gallwch gysylltu â’r <a href=”https://www.equalityadvisoryservice.com/” class=”govuk-link” target=”_blank” aria-label=”Bydd y ddolen hon yn agor mewn tab newydd ar gyfer y Gwasanaeth Cynghori a Chymorth Cydraddoldeb”>Gwasanaeth Chynghori a Chymorth Cydraddoldeb (EASS)</a>.',
+    'Os ydych wedi cysylltu â ni ynghylch mater hygyrchedd ac nad ydych yn fodlon â’n hymateb, gallwch gysylltu â’r <a href=”https://www.equalityadvisoryservice.com/” class=”govuk-link” target=”_blank”>Gwasanaeth Chynghori a Chymorth Cydraddoldeb (EASS)</a>.',
   contactingUs: 'Cysylltu â ni dros y ffôn neu ymweld â ni’n bersonol',
   contactCourtDirectly:
     'If you have a question about accessibility in our family courts, you can <a href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode" class="govuk-link" target="blank">contact the court directly</a>. (in Welsh)',
@@ -171,7 +170,7 @@ const cy = {
   statementCommitted:
     'Rydym wedi ymrwymo i sicrhau bod ein gwasanaethau’n hygyrch i’n holl gwsmeriaid a’u bod yn cydymffurfio â lefel AA Canllawiau Hygyrchedd Cynnwys Gwe - WCAG 2.1.',
   statementDAC:
-    'I’n helpu i gyflawni hyn, byddwn yn comisiynu <a href=”https://digitalaccessibilitycentre.org/” class=”govuk-link” target=”_blank” aria-label=”Bydd y ddolen hon yn agor mewn tab newydd ar gyfer y Ganolfan Hygyrchedd Digidol”>y Ganolfan Hygyrchedd Digidol (DAC)</a>. i gynnal archwiliad cydymffurfiad technegol WCAG 2.1 lefel AA lle bydd profion yn cael eu cynnal am dros 50 awr gan ddefnyddwyr sydd ag amrywiaeth eang o anableddau. Byddwn yn diweddaru’r datganiad hwn gyda dyddiad y profi ar ôl iddo gael ei gadarnhau. Bydd unrhyw faterion a adnabyddir yn ystod y profi yn cael eu hadolygu ac yn cael y sylw priodol',
+    'I’n helpu i gyflawni hyn, byddwn yn comisiynu <a href=”https://digitalaccessibilitycentre.org/” class=”govuk-link” target=”_blank”>y Ganolfan Hygyrchedd Digidol (DAC)</a>. i gynnal archwiliad cydymffurfiad technegol WCAG 2.1 lefel AA lle bydd profion yn cael eu cynnal am dros 50 awr gan ddefnyddwyr sydd ag amrywiaeth eang o anableddau. Byddwn yn diweddaru’r datganiad hwn gyda dyddiad y profi ar ôl iddo gael ei gadarnhau. Bydd unrhyw faterion a adnabyddir yn ystod y profi yn cael eu hadolygu ac yn cael y sylw priodol',
   preparationAccessibilityStatement: 'Paratoi’r datganiad hygyrchedd hwn',
   statementPreparationDate:
     'Cafodd y datganiad hwn ei baratoi ar 11 Mawrth 2022. Cafodd ei adolygu diwethaf ar 11 Mawrth 2022.',
