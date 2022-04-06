@@ -14,7 +14,7 @@ export const cookieMaxAge = 21 * (60 * 1000); // 21 minutes
 export class SessionStorage {
   public enableFor(app: Application): void {
     app.use(cookieParser());
-    console.log('app.locals.developmentMode', app.locals.developmentMode);
+
     app.use(
       session({
         name: 'adoption-web-session',
