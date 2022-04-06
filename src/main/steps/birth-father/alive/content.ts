@@ -21,7 +21,7 @@ const enContent = {
 const cyContent: typeof enContent = {
   section: SECTION_IN_WELSH,
   label: 'A yw tad biolegol y plentyn dal yn fyw?',
-  ...cyNotSure,
+  ...cyNotSure.content,
   errors: {
     [fieldName]: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
