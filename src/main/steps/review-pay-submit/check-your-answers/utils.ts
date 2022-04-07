@@ -67,7 +67,7 @@ const getSectionSummaryList = (rows: SummaryListRow[], content: PageContent): Go
                 {
                   href: changeUrl,
                   text: content.change as string,
-                  visuallyHiddenText: `Change ${item.key}`,
+                  visuallyHiddenText: `${item.key}`,
                 },
               ],
             },
