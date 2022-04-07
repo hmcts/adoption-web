@@ -84,7 +84,7 @@ describe('sibling > placement-order-check-your-answers > content', () => {
             {
               href: '/sibling/placement-order-type?change=MOCK_SIBLING_ID/MOCK_PO_ID&returnUrl=/sibling/placement-order-check-your-answers',
               text: 'Change',
-              visuallyHiddenText: 'change-order-type',
+              visuallyHiddenText: 'Type of order',
             },
           ],
         },
@@ -97,7 +97,7 @@ describe('sibling > placement-order-check-your-answers > content', () => {
             {
               href: '/sibling/placement-order-number?change=MOCK_SIBLING_ID/MOCK_PO_ID&returnUrl=/sibling/placement-order-check-your-answers',
               text: 'Change',
-              visuallyHiddenText: 'change-order-number',
+              visuallyHiddenText: 'Order case or serial number',
             },
           ],
         },

@@ -25,7 +25,7 @@ const placementOrderListItems = (userCase: Partial<CaseWithId>, content) => {
           {
             href: `${SIBLING_ORDER_TYPE}${queryParams}`,
             text: content.change,
-            visuallyHiddenText: 'change-order-type',
+            visuallyHiddenText: content.orderType,
           },
         ],
       },
@@ -38,7 +38,7 @@ const placementOrderListItems = (userCase: Partial<CaseWithId>, content) => {
           {
             href: `${SIBLING_ORDER_CASE_NUMBER}${queryParams}`,
             text: content.change,
-            visuallyHiddenText: 'change-order-number',
+            visuallyHiddenText: content.orderNumber,
           },
         ],
       },
