@@ -126,11 +126,11 @@ const cy: typeof en = {
   whoManages: "Pwy sy’n rheoli'r gwasanaeth hwn",
   managedBy:
     'Gwasanaeth Llysoedd a Thribiwnlysoedd EM (GLlTEM) sy’n rheoli’r gwasanaeth hwn, sef un o asiantaethau gweithredol y Weinyddiaeth Gyfiawnder (MoJ).',
-  moj: 'MoJ yw’r rheolydd data at ddibenion diogelu data. <a class=’govuk-link’ href=’https://www.gov.uk/government/organisations/ministry-of-justice/about/personal-information-charter.cy’>Mae siarter gwybodaeth bersonol y Weinyddiaeth Gyfiawnder</a> yn esbonio sut mae’r MoJ yn prosesu data personol.',
+  moj: "MoJ yw’r rheolydd data at ddibenion diogelu data. <a class='govuk-link' target = 'blank' href='https://www.gov.uk/government/organisations/ministry-of-justice/about/personal-information-charter.cy'>Mae siarter gwybodaeth bersonol y Weinyddiaeth Gyfiawnder (yn agor mewn ffenestr newydd)</a> yn esbonio sut mae’r MoJ yn prosesu data personol.",
   responsibleForDeciding:
     "Fel rhan o’r MoJ, mae GLlTEM yn gyfrifol am benderfynu sut mae eich data personol yn cael ei ddefnyddio ac am ddiogelu'r data personol rydych yn ei ddarparu.",
   moreInformation:
-    'Gallwch gael rhagor o wybodaeth am ddefnyddio’r gwasanaeth hwn yn y <a class=’govuk-link’ href=’/terms-and-conditions’>telerau ac amodau</a>.',
+    "Gallwch gael rhagor o wybodaeth am ddefnyddio’r gwasanaeth hwn yn y <a class='govuk-link' href='/terms-and-conditions'>telerau ac amodau</a>.",
   thePersonal: 'Pam rydym ni’n casglu eich data personol',
   personalInformation:
     'Most of the personal information we process is provided to us directly by you for one the purposes of applying to adopt a child. (in Welsh)',
@@ -174,11 +174,11 @@ const cy: typeof en = {
   ifAnother:
     'Pan fydd eich hawliad neu eich cais ei brosesu, mae’n bosib y byddwn angen cysylltu ag adran, asiantaeth neu sefydliad arall yn y llywodraeth ac efallai y byddwn yn rhannu eich data gyda nhw.',
   ifYouContactUs:
-    "Os byddwch yn cysylltu â ni ac yn gofyn am help gyda’r gwasanaeth rydych yn ei ddefnyddio, efallai y byddwn yn rhannu eich data personol gyda’r Good Things Foundation. Rydym yn gweithio mewn partneriaeth â'r cwmni hwn i gynnig cefnogaeth wyneb yn wyneb.",
+    "Os byddwch yn cysylltu â ni ac yn gofyn am help gyda’r gwasanaeth rydych yn ei ddefnyddio, efallai y byddwn yn rhannu eich data personol gyda’r <a class='govuk-link' href='https://www.goodthingsfoundation.org/' target='_blank'>Good Things Foundation (yn agor mewn ffenestr newydd)</a>. Rydym yn gweithio mewn partneriaeth â'r cwmni hwn i gynnig cefnogaeth wyneb yn wyneb.",
   crime:
     'Mewn rhai amgylchiadau efallai y byddwn yn rhannu eich data. Er enghraifft er mwyn atal neu i ddatrys trosedd, neu i gynhyrchu ystadegau cyffredinol.',
   weUse:
-    "Rydym yn defnyddio Google Analytics i gasglu data am sut y defnyddir gwefan. Mae'r data cyffredinol hwn yn cael ei rannu â Google. Gallwch gael gwybodaeth am hyn yn ein  <a class=’govuk-link’ href=’/terms-and-conditions’>telerau ac amodau</a>.",
+    "Rydym yn defnyddio Google Analytics i gasglu data am sut y defnyddir gwefan. Mae'r data cyffredinol hwn yn cael ei rannu â Google. Gallwch gael gwybodaeth am hyn yn ein  <a class='govuk-link' href='/terms-and-conditions'>telerau ac amodau</a>.",
   lawfulBases:
     'Under the UK General Data Protection Regulation (UK GDPR), the lawful bases we rely on for processing this information are: (in Welsh)',
   consent:
@@ -203,7 +203,7 @@ const cy: typeof en = {
     'that we transfer the personal information you gave us to another organisation, or to you, in certain circumstances (in Welsh)',
   ifYouWantToSeePersonal: 'If you want to see the personal data that we hold on you, you can: (in Welsh)',
   completeForm:
-    'llenwi ffurflen i wneud <a class=’govuk-link’ href=’https://www.gov.uk/government/publications/request-your-personal-data-from-moj’>cais gwrthrych am wybodaeth</a>. Bydd eich cais yn mynd i’r rheolydd data, sef MoJ.',
+    "llenwi ffurflen i wneud <a class='govuk-link' target = 'blank' href='https://www.gov.uk/government/organisations/ministry-of-justice/about/personal-information-charter.cy'>cais gwrthrych am wybodaeth (yn agor mewn ffenestr newydd)</a>. Bydd eich cais yn mynd i’r rheolydd data, sef MoJ.",
   writeToUs: 'ysgrifennu atom yn: Disclosure Team, Post point 10.24, 102 Petty France, Llundain, SW1H 9AJ',
   emailUs: 'e-bost: <a href="mailto:data.access@justice.gov.uk" class="govuk-link">data.access@justice.gov.uk</a>',
   askMoreInformation: 'Gallwch ofyn am fwy o wybodaeth ynghylch:',
@@ -213,14 +213,14 @@ const cy: typeof en = {
   howWeCheck: 'sut rydym yn gwirio bod yr wybodaeth sydd gennym yn gywir ac yn gyfredol',
   howToComplain: 'Sut i wneud cwyn',
   seeOurComplaints:
-    'Gweler ein <a class=’govuk-link’ href=’https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service/about/complaints-procedure.cy’>trefn gwyno</a> os ydych eisiau cwyno am sut rydym wedi trin eich data personol.',
+    "Gweler ein <a class='govuk-link' target='blank' href='https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service/about/complaints-procedure.cy'>trefn gwyno (yn agor mewn ffenestr newydd)</a> os ydych eisiau cwyno am sut rydym wedi trin eich data personol.",
   concernsDataProtection:
     'If you have any concerns about our use of your personal data, you can contact the MoJ data protection officer: (in Welsh)',
   mojAddress:
     'Data Protection Officer <br/> Ministry of Justice <br/> 3rd Floor, Post Point 3.20 <br/> 10 South Colonnades <br/> Canary Wharf <br/> London <br/> E14 4PU (in Welsh)',
   mojEmailAddress: '<a href="mailto:dpo@justice.gov.uk" class="govuk-link">dpo@justice.gov.uk</a> (in Welsh)',
   youCanAlsoComplain:
-    "Gallwch hefyd gyflwyno cwyn i <a class=’govuk-link’ href=’https://ico.org.uk/global/contact-us’>Swyddfa'r Comisiynydd Gwybodaeth</a> os ydych yn anfodlon â’n hymateb neu'n credu nad ydym yn prosesu eich data personol yn gyfreithlon.",
+    "Gallwch hefyd gyflwyno cwyn i <a class='govuk-link' href='https://ico.org.uk/global/contact-us'>Swyddfa'r Comisiynydd Gwybodaeth</a> os ydych yn anfodlon â’n hymateb neu'n credu nad ydym yn prosesu eich data personol yn gyfreithlon.",
   icoAddress:
     'Information Commissioner’s Office <br/> Wycliffe House <br/> Water Lane <br/> Wilmslow <br/> Cheshire <br/> SK9 5AF (in Welsh)',
   icoHelplineNumber: 'Helpline number: 0303 123 1113 (in Welsh)',
