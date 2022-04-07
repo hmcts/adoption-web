@@ -1,6 +1,7 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
+import { YesOrNo } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form, FormFields, FormFieldsFn } from '../../../app/form/Form';
@@ -21,7 +22,7 @@ export default class SameAddressPostController extends PostController<AnyObject>
 
     this.filterErrorsForSaveAsDraft(req);
 
-    if (req.session.errors.length === 0) {
+    if (req.session.errors.length === 0 && req.session.userCase.applicant2AddressSameAsApplicant1 === YesOrNo.YES) {
       const { userCase } = req.session;
 
       userCase.applicant2Address1 = userCase.applicant1Address1;
