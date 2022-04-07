@@ -8,14 +8,11 @@ jest.mock('../../../app/form/Form', () => {
   };
 });
 
-// import { FieldPrefix } from '../../../app/case/case';
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { YesOrNo } from '../../../app/case/definition';
 import { PostController } from '../../../app/controller/PostController';
-
-import SameAddressPostController from './SameAddressController';
-// import { FormFields } from '../../../app/form/Form';
+import SameAddressPostController from './SameAddressPostController';
 
 describe('applicant2 > other-names > OtherNamesPostController', () => {
   let req;
@@ -86,13 +83,6 @@ describe('applicant2 > other-names > OtherNamesPostController', () => {
 
         expect(req.session.save).toHaveBeenCalled();
       });
-
-      //   test('should redirect to correct screen', async () => {
-      //     mockGetNextStepUrl.mockReturnValue('/MOCK_ENDPOINT');
-      //     await controller.post(req, res);
-      //     expect(mockGetNextStepUrl).toHaveBeenCalledWith(req, req.session.userCase);
-      //     expect(res.redirect).toHaveBeenCalledWith('/MOCK_ENDPOINT');
-      //   });
     });
   });
 });
