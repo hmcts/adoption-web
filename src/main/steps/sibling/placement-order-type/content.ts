@@ -14,12 +14,12 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
+const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  label: 'What type of order is it? (in Welsh)',
+  label: 'Pa fath o neuchymyn ydyw?',
   errors: {
     placementOrderType: {
-      required: 'Please answer the question (in Welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
 });

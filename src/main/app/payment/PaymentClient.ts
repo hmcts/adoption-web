@@ -32,7 +32,7 @@ export class PaymentClient {
       case_type: CASE_TYPE,
       amount: total,
       ccd_case_number: caseId,
-      description: 'Apply for adoption', //TO DO consider welsh text
+      description: this.session.lang === 'cy' ? 'Gwneud cais i fabwysiadu' : 'Apply for adoption',
       currency: 'GBP',
       fees: userCase.applicationFeeOrderSummary.Fees.map(fee => ({
         calculated_amount: `${fee.value.FeeAmount}`,

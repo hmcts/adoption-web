@@ -16,9 +16,9 @@ const en = addressLookupContent => ({
   manualAddressUrl: OTHER_PARENT_MANUAL_ADDRESS,
 });
 
-const cy = addressLookupContent => ({
+const cy: typeof en = addressLookupContent => ({
   section: SECTION_IN_WELSH,
-  title: "What's their address? (in Welsh)",
+  title: 'Beth yw eu cyfeiriad?',
   errors: {
     otherParentAddressPostcode: addressLookupContent.errors.addressPostcode,
   },

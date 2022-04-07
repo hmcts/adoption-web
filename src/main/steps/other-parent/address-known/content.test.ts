@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { YesOrNo } from '../../../app/case/definition';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
@@ -24,23 +25,23 @@ const enContent = {
 };
 
 const cyContent = {
-  section: "Other parent's details (in Welsh)",
-  label: 'Do you have the address of the other person with parental responsibility for the child? (in welsh)',
-  moreDetails: "Give a reason why the address is not known, for example 'no fixed address'. (in welsh)",
-  hint: "Ask the adoption agency or social worker if you're not sure. (in welsh)",
+  section: 'Manylion y rhiant arall',
+  label: 'A oes gennych gyfeiriad yr unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn?',
+  moreDetails: 'Rhowch reswm pam bod y cyfeiriad yn anhysbys, er enghraifft ‘dim cyfeiriad parhaol’.',
+  hint: 'Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
   errors: {
     otherParentAddressKnown: {
-      required: 'Please select an answer (in welsh)',
+      required: 'Dewiswch ateb os gwelwch yn dda',
     },
     otherParentAddressNotKnownReason: {
-      required: 'Provide a reason (in welsh)',
-      invalid: 'Reason must be 500 characters or fewer (in welsh)',
+      required: 'Darparwch reswm',
+      invalid: 'Rhaid i’r rheswm fod yn 500 nod neu llai',
     },
   },
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('other-parent > address-known content', () => {
+describe('other-parent > address-known > content', () => {
   const commonContent = generatePageContent({
     language: 'en',
     userCase: { otherParentAddressKnown: YesOrNo.YES },
@@ -52,20 +53,11 @@ describe('other-parent > address-known content', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.label).toEqual(enContent.label);
-    expect(generatedContent.hint).toEqual(enContent.hint);
-    expect(generatedContent.moreDetails).toEqual(enContent.moreDetails);
-    expect(generatedContent.errors).toEqual(enContent.errors);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.label).toEqual(cyContent.label);
-    expect(generatedContent.hint).toEqual(cyContent.hint);
-    expect(generatedContent.moreDetails).toEqual(cyContent.moreDetails);
-    expect(generatedContent.errors).toEqual(cyContent.errors);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain otherParentAddressKnown field', () => {

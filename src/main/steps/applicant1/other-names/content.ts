@@ -9,13 +9,13 @@ import {
   generateContent as otherNamesGenerateContent,
 } from '../../common/components/other-names';
 
-export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
+const en = ({ userCase }: CommonContent) => {
   const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant' : 'First applicant';
   return { section };
 };
 
-export const cy = ({ userCase }: CommonContent): Record<string, unknown> => {
-  const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant (in Welsh)' : 'First applicant (in Welsh)';
+const cy: typeof en = ({ userCase }: CommonContent) => {
+  const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Ceisydd' : 'Ceisydd cyntaf';
   return { section };
 };
 

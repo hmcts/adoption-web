@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable jest/expect-expect */
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FieldPrefix } from '../../../app/case/case';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
 import { atLeastOneFieldIsChecked, isFieldFilledIn } from '../../../app/form/validation';
@@ -9,7 +10,6 @@ import { generateContent } from './nationality';
 
 jest.mock('../../../app/form/validation');
 
-const CY = 'cy';
 const EN = 'en';
 const fieldPrefix = FieldPrefix.BIRTH_MOTHER;
 const enContent = {
@@ -36,70 +36,40 @@ const enContent = {
 };
 
 const cyContent = {
-  label: 'What is your nationality? (in Welsh)',
-  hint: 'Select all options that are relevant to you. (in Welsh)',
-  british: 'British (in Welsh)',
-  britishSubtext: 'including English, Scottish, Welsh and Northern Irish (in Welsh)',
-  irish: 'Irish (in Welsh)',
-  differentCountry: 'Citizen of a different country (in Welsh)',
-  countryName: 'Country name (in Welsh)',
-  add: 'Add (in Welsh)',
-  another: 'Add another country (in Welsh)',
-  or: 'or (in Welsh)',
-  notSure: 'Not sure (in Welsh)',
+  label: 'Beth yw eich cenedligrwydd?',
+  hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
+  british: 'Prydeinig',
+  britishSubtext: 'gan gynnwys Saesneg, Albanaidd, Cymraeg a Gwyddelig Gogledd Iwerddon',
+  irish: 'Gwyddelig',
+  differentCountry: 'Dinesydd gwlad wahanol',
+  countryName: 'Enw’r wlad',
+  add: 'Ychwanegu',
+  another: 'Ychwanegu gwlad arall',
+  or: 'neu',
+  notSure: 'Ddim yn siŵr',
   errors: {
     [`${fieldPrefix}Nationality`]: {
-      required: 'Select if you are British, Irish or a citizen of a different country (in Welsh)',
-      notSureViolation: "Select a nationality or 'Not sure' (in Welsh)",
+      required: 'Dewiswch a ydych yn Brydeinig, Gwyddelig neu’n ddinesydd gwlad wahanol',
+      notSureViolation: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
     },
     addAnotherNationality: {
-      required: 'This is not a valid entry (in Welsh)',
+      required: 'Nid yw hyn yn gofnod dilys',
     },
   },
-};
-
-const langAssertions = (language, content) => {
-  const generatedContent = generateContent({ language, userCase: {} } as CommonContent, fieldPrefix);
-  const {
-    label,
-    hint,
-    british,
-    britishSubtext,
-    irish,
-    differentCountry,
-    countryName,
-    add,
-    another,
-    or,
-    notSure,
-    errors,
-  } = content;
-
-  expect(generatedContent.label).toEqual(label);
-  expect(generatedContent.hint).toEqual(hint);
-  expect(generatedContent.british).toEqual(british);
-  expect(generatedContent.britishSubtext).toEqual(britishSubtext);
-  expect(generatedContent.irish).toEqual(irish);
-  expect(generatedContent.differentCountry).toEqual(differentCountry);
-  expect(generatedContent.countryName).toEqual(countryName);
-  expect(generatedContent.differentCountry).toEqual(differentCountry);
-  expect(generatedContent.add).toEqual(add);
-  expect(generatedContent.another).toEqual(another);
-  expect(generatedContent.or).toEqual(or);
-  expect(generatedContent.notSure).toEqual(notSure);
-  expect(generatedContent.errors).toEqual(errors);
 };
 
 const commonContent = (countries: string[]) =>
   ({ language: EN, userCase: { birthMotherAdditionalNationalities: countries } } as CommonContent);
 
 describe('nationality content', () => {
-  it('should return the correct content for language = en', () => {
-    langAssertions(EN, enContent);
+  it('should return correct english content', () => {
+    languageAssertions('en', enContent, () => generateContent(commonContent([]), FieldPrefix.BIRTH_MOTHER));
   });
 
-  it('should return the correct content for language = cy', () => {
-    langAssertions(CY, cyContent);
+  it('should return correct welsh content', () => {
+    languageAssertions('cy', cyContent, () =>
+      generateContent({ ...commonContent([]), language: 'cy' }, FieldPrefix.BIRTH_MOTHER)
+    );
   });
 
   it('should display a checkbox with nationality options', () => {

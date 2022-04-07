@@ -16,8 +16,8 @@ const en = addressLookupContent => ({
 });
 
 const cy = addressLookupContent => ({
-  section: 'Second applicant (in welsh)',
-  title: "What's your home address? (in welsh)",
+  section: 'Ail geisydd',
+  title: 'Beth yw eich cyfeiriad cartref?',
   errors: {
     applicant2AddressPostcode: addressLookupContent.errors.addressPostcode,
   },

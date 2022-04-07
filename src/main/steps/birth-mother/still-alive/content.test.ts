@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { YesNoNotsure, YesOrNo } from '../../../app/case/definition';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -23,16 +24,16 @@ const enContent = {
 };
 
 const cyContent = {
-  section: "Birth mother's details (in welsh)",
-  label: "Is the child's birth mother still alive? (in welsh)",
+  section: 'Manylion y fam fiolegol',
+  label: 'A yw mam fiolegol y plentyn dal yn fyw?',
   moreDetails:
-    "Provide more details. For example, 'the birth mother is uncontactable'. Your adoption agency or social worker can help you to complete this section. (in welsh)",
+    'Darparwch fwy o fanylion. Er enghraifft, ‘nid oes modd cysylltu â’r fam fiolegol’. Gall eich asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol eich helpu i lenwi’r rhan hon. ',
   errors: {
     birthMotherStillAlive: {
-      required: 'Please answer the question (in welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
     birthMotherNotAliveReason: {
-      required: 'Enter more detail (in welsh)',
+      required: 'Rhowch fwy o fanylion',
     },
   },
 };
@@ -50,18 +51,11 @@ describe('birth-mother > still-alive > content', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.label).toEqual(enContent.label);
-    expect(generatedContent.moreDetails).toEqual(enContent.moreDetails);
-    expect(generatedContent.errors).toEqual(enContent.errors);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.label).toEqual(cyContent.label);
-    expect(generatedContent.moreDetails).toEqual(cyContent.moreDetails);
-    expect(generatedContent.errors).toEqual(cyContent.errors);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain birthMotherStillAlive field', () => {
@@ -77,6 +71,13 @@ describe('birth-mother > still-alive > content', () => {
     expect(field.values[1].value).toBe(YesNoNotsure.NO);
     expect((field.values[2].label as Function)(commonContent)).toBe(commonContent.notSure);
     expect(field.values[2].value).toBe(YesNoNotsure.NOT_SURE);
+
+    const birthMotherNotAliveReason = field.values[2].subFields!.birthMotherNotAliveReason;
+    expect(birthMotherNotAliveReason.type).toBe('text');
+    expect((birthMotherNotAliveReason.label as Function)(generatedContent)).toBe(enContent.moreDetails);
+    expect(birthMotherNotAliveReason.labelSize).toBe(null);
+    expect(birthMotherNotAliveReason.validator).toBe(isFieldFilledIn);
+
     expect(field.validator).toBe(isFieldFilledIn);
   });
 

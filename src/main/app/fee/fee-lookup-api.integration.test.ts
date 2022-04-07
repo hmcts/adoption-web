@@ -1,4 +1,6 @@
 import axios from 'axios';
+import config from 'config';
+import { when } from 'jest-when';
 import { LoggerInstance } from 'winston';
 
 import {
@@ -13,7 +15,7 @@ import { getFee } from './fee-lookup-api';
 jest.mock('axios');
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;
-
+config.get = jest.fn();
 describe('fee-lookup-api', () => {
   let mockLogger: LoggerInstance;
 
@@ -21,6 +23,10 @@ describe('fee-lookup-api', () => {
     mockLogger = {
       error: jest.fn().mockImplementation((message: string) => message),
     } as unknown as LoggerInstance;
+
+    when(config.get)
+      .calledWith('services.feeLookup.url')
+      .mockReturnValue('http://fees-register-api/fees-register/fees/lookup');
   });
 
   it('correctly returns fee lookup api success response', async () => {
@@ -28,21 +34,18 @@ describe('fee-lookup-api', () => {
 
     const actual = await getFee(mockLogger);
 
-    expect(mockedAxios.get).toHaveBeenCalledWith(
-      'http://fees-register-api-aat.service.core-compute-aat.internal/fees-register/fees/lookup',
-      {
-        headers: { accept: 'application/json' },
-        params: {
-          application_type: 'all',
-          channel: 'default',
-          event: 'issue',
-          jurisdiction1: 'family',
-          jurisdiction2: 'family court',
-          keyword: 'ApplyAdoption',
-          service: 'adoption',
-        },
-      }
-    );
+    expect(mockedAxios.get).toHaveBeenCalledWith('http://fees-register-api/fees-register/fees/lookup', {
+      headers: { accept: 'application/json' },
+      params: {
+        application_type: 'all',
+        channel: 'default',
+        event: 'issue',
+        jurisdiction1: 'family',
+        jurisdiction2: 'family court',
+        keyword: 'ApplyAdoption',
+        service: 'adoption',
+      },
+    });
 
     expect(actual).toEqual({
       FeeAmount: '1234',

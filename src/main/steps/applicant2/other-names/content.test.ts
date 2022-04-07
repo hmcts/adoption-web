@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable jest/expect-expect */
 const mockForm = {
   form: {
     fields: { applicant2HasOtherNames: { MOCK_KEY: 'MOCK_VALUE' } },
@@ -12,6 +10,7 @@ jest.mock('../../common/components/other-names', () => {
   return { otherNamesFields: mockOtherNamesFields, generateContent: jest.fn().mockReturnValue(mockForm) };
 });
 
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FieldPrefix } from '../../../app/case/case';
 import { FormContent, FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { CommonContent } from '../../common/common.content';
@@ -21,21 +20,12 @@ import { form, generateContent } from './content';
 
 jest.mock('../../../app/form/validation');
 
-const CY = 'cy';
-const EN = 'en';
-
 const enContent = {
   section: 'Second applicant',
 };
 
 const cyContent = {
-  section: 'Second applicant (in Welsh)',
-};
-
-const langAssertions = (language, content) => {
-  const generatedContent = generateContent({ language, userCase: {} } as CommonContent);
-  const { section } = content;
-  expect(generatedContent.section).toEqual(section);
+  section: 'Ail geisydd',
 };
 
 describe('applicant2 > other-names > content', () => {
@@ -47,11 +37,11 @@ describe('applicant2 > other-names > content', () => {
   });
 
   it('should return the correct content for language = en', () => {
-    langAssertions(EN, enContent);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   it('should return the correct content for language = cy', () => {
-    langAssertions(CY, cyContent);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain applicant2HasOtherNames field', () => {

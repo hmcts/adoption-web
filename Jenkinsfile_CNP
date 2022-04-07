@@ -24,7 +24,8 @@ def secrets = [
     secret('idam-secret', 'IDAM_SECRET'),
     secret('citizen-user', 'CITIZEN_USERNAME'),
     secret('citizen-password', 'CITIZEN_PASSWORD'),
-    secret('adoption-pcq-token', 'PCQ_TOKEN')
+    secret('adoption-pcq-token', 'PCQ_TOKEN'),
+    secret('endpoints', 'ENDPOINTS')
   ],
   's2s-${env}': [
     secret('microservicekey-adoption-web', 'SERVICE_AUTH_SECRET')
@@ -54,6 +55,7 @@ withPipeline(type, product, component) {
   }
 
   after('test') {
+    yarnBuilder.yarn('test:integration')
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
   }
 

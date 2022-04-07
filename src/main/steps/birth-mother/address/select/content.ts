@@ -17,9 +17,9 @@ const en = selectAddressContent => ({
   cantFindAddressUrl: BIRTH_MOTHER_MANUAL_ADDRESS,
 });
 
-const cy = selectAddressContent => ({
-  section: "Birth mother's details (in welsh)",
-  title: "What is the birth mother's last known address? (in welsh)",
+const cy: typeof en = selectAddressContent => ({
+  section: 'Manylion y fam fiolegol',
+  title: 'Beth yw cyfeiriad olaf hysbys y fam fiolegol?',
   line1: null,
   errors: {
     birthMotherSelectAddress: selectAddressContent.errors.selectAddress,

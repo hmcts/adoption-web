@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
 import {
   areDateFieldsFilledIn,
@@ -29,24 +30,24 @@ const enContent = {
 };
 
 const cyContent = {
-  section: "The child's details (in welsh)",
-  label: "What is the child's date of birth? (in welsh)",
-  hint: "For example, 31 3 2012. This should be on their birth certificate. Ask the adoption agency or social worker if you're not sure. (in welsh)",
+  section: 'Manylion y plentyn',
+  label: 'Beth yw dyddiad geni’r plentyn?',
+  hint: 'Er enghraifft, 31 3 2012. Dylai hyn fod ar eu tystysgrif geni Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
   errors: {
     childrenDateOfBirth: {
-      required: 'Enter their date of birth (in welsh)',
-      incompleteDay: 'Date of birth must include a day (in welsh)',
-      incompleteMonth: 'Date of birth must include a month (in welsh)',
-      incompleteYear: 'Date of birth must include a year (in welsh)',
-      invalidDate: 'Date of birth must be a real date (in welsh)',
-      invalidDateInFuture: 'Date of birth must be in the past (in welsh)',
-      invalidDateOver18: 'Child is 18 or over and cannot be adopted (in welsh)',
+      required: 'Nac ydwdwch eu dyddiad geni',
+      incompleteDay: 'Rhaid i’r dyddiad geni gynnwys diwrnod',
+      incompleteMonth: 'Rhaid i’r dyddiad geni gynnwys mis',
+      incompleteYear: 'Rhaid i’r dyddiad geni gynnwys blwyddyn',
+      invalidDate: 'Rhaid i’r dyddiad geni fod yn ddyddiad dilys',
+      invalidDateInFuture: 'Rhaid i’r dyddiad geni fod yn y gorffennol',
+      invalidDateOver18: 'Mae’r plentyn dros 18 oed ac ni ellir ei fabwysiadu',
     },
   },
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('children date-of-birth content', () => {
+describe('children > date-of-birth > content', () => {
   const commonContent = { language: 'en', userCase: {} } as CommonContent;
   let generatedContent;
   let form;
@@ -58,28 +59,19 @@ describe('children date-of-birth content', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.label).toEqual(enContent.label);
-    expect(generatedContent.hint).toEqual(enContent.hint);
-    expect(generatedContent.errors).toEqual(enContent.errors);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.label).toEqual(cyContent.label);
-    expect(generatedContent.hint).toEqual(cyContent.hint);
-    expect(generatedContent.errors).toEqual(cyContent.errors);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain childrenDateOfBirth field', () => {
     const childrenDateOfBirthField = fields.childrenDateOfBirth as FormOptions;
     expect(childrenDateOfBirthField.type).toBe('date');
     expect(childrenDateOfBirthField.classes).toBe('govuk-date-input');
-    expect((childrenDateOfBirthField.label as Function)(generatedContent)).toBe("What is the child's date of birth?");
-    expect(((childrenDateOfBirthField as FormInput).hint as Function)(generatedContent)).toBe(
-      "For example, 31 3 2012. This should be on their birth certificate. Ask the adoption agency or social worker if you're not sure."
-    );
+    expect((childrenDateOfBirthField.label as Function)(generatedContent)).toBe(enContent.label);
+    expect(((childrenDateOfBirthField as FormInput).hint as Function)(generatedContent)).toBe(enContent.hint);
     expect(childrenDateOfBirthField.labelSize).toBe('l');
     expect(childrenDateOfBirthField.attributes?.spellcheck).toBe(false);
 

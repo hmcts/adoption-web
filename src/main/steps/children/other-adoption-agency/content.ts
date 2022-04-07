@@ -13,12 +13,12 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
-  section: 'Your adoption agency or local authority details (in Welsh)',
-  label: 'Was there another adoption agency or local authority involved in placing the child? (in Welsh)',
+const cy: typeof en = () => ({
+  section: 'Manylion eich asiantaeth fabwysiadu neu’ch awdurdod lleol',
+  label: 'A oedd asiantaeth fabwysiadu neu awdurdod lleol arall wedi chwarae rhan mewn lleoli’r plentyn?',
   errors: {
     hasAnotherAdopAgencyOrLA: {
-      required: 'Please answer the question (in welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
 });

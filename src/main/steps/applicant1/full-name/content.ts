@@ -4,7 +4,7 @@ import { FormContent, FormFields } from '../../../app/form/Form';
 import { CommonContent } from '../../../steps/common/common.content';
 import { form as fullNameForm, generateContent as fullNameGenerateContent } from '../../common/components/full-name';
 
-export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
+const en = ({ userCase }: CommonContent) => {
   const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant' : 'First applicant';
   return {
     section,
@@ -20,17 +20,17 @@ export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
   };
 };
 
-export const cy = ({ userCase }: CommonContent): Record<string, unknown> => {
-  const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant (in Welsh)' : 'First applicant (in Welsh)';
+const cy: typeof en = ({ userCase }: CommonContent) => {
+  const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Ceisydd' : 'Ceisydd cyntaf';
   return {
     section,
-    title: "What's your full name? (in Welsh)",
+    title: 'Beth yw eich enw llawn?',
     errors: {
       applicant1FirstNames: {
-        required: 'Enter your first names (in Welsh)',
+        required: 'Nodwch eich enw(au) cyntaf',
       },
       applicant1LastNames: {
-        required: 'Enter your last names (in Welsh)',
+        required: 'Nodwch eich cyfenw(au)',
       },
     },
   };

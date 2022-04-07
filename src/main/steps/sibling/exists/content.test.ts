@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { YesNoNotsure } from '../../../app/case/definition';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -19,12 +20,12 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Sibling details (in Welsh)',
-  label: 'Does the child have any siblings or half siblings? (in welsh)',
-  hint: "Ask the adoption agency or social worker if you're not sure. (in welsh)",
+  section: 'Manylion y brawd/chwaer',
+  label: 'A oes gan y plentyn frodyr/chwiorydd neu hanner frodyr/chwiorydd?',
+  hint: 'Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
   errors: {
     hasSiblings: {
-      required: 'Please answer the question (in welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
 };
@@ -42,18 +43,11 @@ describe('sibling > exists > content', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.label).toEqual(enContent.label);
-    expect(generatedContent.hint).toEqual(enContent.hint);
-    expect(generatedContent.errors).toEqual(enContent.errors);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.label).toEqual(cyContent.label);
-    expect(generatedContent.hint).toEqual(cyContent.hint);
-    expect(generatedContent.errors).toEqual(cyContent.errors);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain hasSiblings field', () => {

@@ -6,6 +6,7 @@ describe('placement-order-summary', () => {
     change: 'Change',
     remove: 'Remove',
     placementOrder: 'Placement Order',
+    incomplete: 'incomplete',
   };
 
   test('should return correct summary list items', () => {
@@ -44,7 +45,7 @@ describe('placement-order-summary', () => {
             {
               href: '/children/placement-order-check-your-answers?change=MOCK_ID',
               text: 'Change',
-              visuallyHiddenText: 'change',
+              visuallyHiddenText: 'Placement Order',
             },
           ],
         },
@@ -53,16 +54,20 @@ describe('placement-order-summary', () => {
         key: { text: 'MOCK_TYPE2', classes: 'font-normal' },
         value: {
           classes: 'summary-list-value',
-          html: '<strong class="govuk-tag govuk-tag--yellow">Incomplete</strong>',
+          html: '<strong class="govuk-tag govuk-tag--yellow">incomplete</strong>',
         },
         actions: {
           classes: 'summary-list-actions',
           items: [
-            { href: '/children/placement-order-summary?remove=MOCK_ID2', text: 'Remove', visuallyHiddenText: 'remove' },
+            {
+              href: '/children/placement-order-summary?remove=MOCK_ID2',
+              text: 'Remove',
+              visuallyHiddenText: 'MOCK_TYPE2',
+            },
             {
               href: '/children/placement-order-check-your-answers?change=MOCK_ID2',
               text: 'Change',
-              visuallyHiddenText: 'change',
+              visuallyHiddenText: 'MOCK_TYPE2',
             },
           ],
         },
@@ -73,11 +78,15 @@ describe('placement-order-summary', () => {
         actions: {
           classes: 'summary-list-actions',
           items: [
-            { href: '/children/placement-order-summary?remove=MOCK_ID3', text: 'Remove', visuallyHiddenText: 'remove' },
+            {
+              href: '/children/placement-order-summary?remove=MOCK_ID3',
+              text: 'Remove',
+              visuallyHiddenText: 'MOCK_TYPE3',
+            },
             {
               href: '/children/placement-order-check-your-answers?change=MOCK_ID3',
               text: 'Change',
-              visuallyHiddenText: 'change',
+              visuallyHiddenText: 'MOCK_TYPE3',
             },
           ],
         },

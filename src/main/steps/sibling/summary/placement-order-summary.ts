@@ -15,7 +15,9 @@ export const placementOrderListItems = (siblingId: string, placementOrders: Plac
       },
       value: {
         classes: 'summary-list-value',
-        html: isPlacementOrderComplete(item) ? '' : '<strong class="govuk-tag govuk-tag--yellow">Incomplete</strong>',
+        html: isPlacementOrderComplete(item)
+          ? ''
+          : `<strong class="govuk-tag govuk-tag--yellow">${content.incomplete}</strong>`,
       },
       actions: {
         classes: 'summary-list-actions',
@@ -23,12 +25,12 @@ export const placementOrderListItems = (siblingId: string, placementOrders: Plac
           {
             href: `${SIBLING_REMOVE_PLACEMENT_ORDER}?remove=${siblingId}/${item.placementOrderId}`,
             text: content.remove,
-            visuallyHiddenText: 'remove',
+            visuallyHiddenText: item.placementOrderType,
           },
           {
             href: `${SIBLING_ORDER_CHECK_YOUR_ANSWERS}?change=${siblingId}/${item.placementOrderId}`,
             text: content.change,
-            visuallyHiddenText: 'change',
+            visuallyHiddenText: item.placementOrderType,
           },
         ],
       },

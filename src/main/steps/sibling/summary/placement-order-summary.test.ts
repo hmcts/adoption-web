@@ -6,6 +6,7 @@ describe('placement-order-summary', () => {
     change: 'Change',
     remove: 'Remove',
     placementOrder: 'Placement Order',
+    incomplete: 'incomplete',
   };
 
   test('should return correct summary list items', () => {
@@ -36,12 +37,12 @@ describe('placement-order-summary', () => {
             {
               href: '/sibling/remove-placement-order?remove=MOCK_SIBLING_ID/MOCK_ID',
               text: 'Remove',
-              visuallyHiddenText: 'remove',
+              visuallyHiddenText: 'MOCK_TYPE',
             },
             {
               href: '/sibling/placement-order-check-your-answers?change=MOCK_SIBLING_ID/MOCK_ID',
               text: 'Change',
-              visuallyHiddenText: 'change',
+              visuallyHiddenText: 'MOCK_TYPE',
             },
           ],
         },
@@ -50,7 +51,7 @@ describe('placement-order-summary', () => {
         key: { text: 'MOCK_TYPE2', classes: 'font-normal' },
         value: {
           classes: 'summary-list-value',
-          html: '<strong class="govuk-tag govuk-tag--yellow">Incomplete</strong>',
+          html: '<strong class="govuk-tag govuk-tag--yellow">incomplete</strong>',
         },
         actions: {
           classes: 'summary-list-actions',
@@ -58,12 +59,12 @@ describe('placement-order-summary', () => {
             {
               href: '/sibling/remove-placement-order?remove=MOCK_SIBLING_ID/MOCK_ID2',
               text: 'Remove',
-              visuallyHiddenText: 'remove',
+              visuallyHiddenText: 'MOCK_TYPE2',
             },
             {
               href: '/sibling/placement-order-check-your-answers?change=MOCK_SIBLING_ID/MOCK_ID2',
               text: 'Change',
-              visuallyHiddenText: 'change',
+              visuallyHiddenText: 'MOCK_TYPE2',
             },
           ],
         },
@@ -77,12 +78,12 @@ describe('placement-order-summary', () => {
             {
               href: '/sibling/remove-placement-order?remove=MOCK_SIBLING_ID/MOCK_ID3',
               text: 'Remove',
-              visuallyHiddenText: 'remove',
+              visuallyHiddenText: 'MOCK_TYPE3',
             },
             {
               href: '/sibling/placement-order-check-your-answers?change=MOCK_SIBLING_ID/MOCK_ID3',
               text: 'Change',
-              visuallyHiddenText: 'change',
+              visuallyHiddenText: 'MOCK_TYPE3',
             },
           ],
         },

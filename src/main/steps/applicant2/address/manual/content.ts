@@ -16,8 +16,8 @@ const en = manualAddressContent => ({
 });
 
 const cy = manualAddressContent => ({
-  section: 'Second applicant (in welsh)',
-  title: "What's your home address? (in welsh)",
+  section: 'Ail geisydd',
+  title: 'Beth yw eich cyfeiriad cartref?',
   errors: {
     applicant2Address1: manualAddressContent.errors.address1,
     applicant2AddressTown: manualAddressContent.errors.addressTown,

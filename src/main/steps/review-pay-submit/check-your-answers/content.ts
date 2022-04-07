@@ -104,7 +104,7 @@ export const enContent = {
   },
 };
 
-const en = (content: CommonContent): Record<string, unknown> => {
+const en = (content: CommonContent) => {
   const userCase = content.userCase!;
   return {
     ...enContent,
@@ -128,10 +128,10 @@ const en = (content: CommonContent): Record<string, unknown> => {
   };
 };
 
-export const cyContent = {
+const cyContent: typeof enContent = {
   section: 'Review your application (in welsh)',
   title: 'Review your answers (in welsh)',
-  change: 'Change (in welsh)',
+  change: 'Newid',
   reason: 'Reason (in welsh)',
   submitApplication: 'Check your application (in welsh)',
   checkInfoBeforeSubmit:
@@ -142,9 +142,9 @@ export const cyContent = {
     [ApplyingWith.WITH_SOME_ONE_ELSE]: "I'm applying with someone who is not my spouse or civil partner (in welsh)",
   },
   gender: {
-    [Gender.MALE]: 'Male (in welsh)',
-    [Gender.FEMALE]: 'Female (in welsh)',
-    [Gender.OTHER]: 'Other (in welsh)',
+    [Gender.MALE]: 'Gwryw',
+    [Gender.FEMALE]: 'Benyw',
+    [Gender.OTHER]: 'Arall',
   },
   yesNoNotsure: {
     [YesNoNotsure.YES]: 'Yes (in welsh)',
@@ -213,13 +213,13 @@ export const cyContent = {
         'You can only submit 10 weeks after the date the child started living continuously with you (in welsh)',
     },
   },
-  language: 'cy',
 };
 
-const cy = (content: CommonContent): Record<string, unknown> => {
+const cy: typeof en = (content: CommonContent) => {
   const userCase = content.userCase!;
   return {
     ...cyContent,
+    language: content.language,
     sections: [
       applicationSummaryList(cyContent, userCase),
       adoptionAgencySummaryList(cyContent, userCase),

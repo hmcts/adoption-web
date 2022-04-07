@@ -11,7 +11,7 @@ const enContent = {
 const cyContent = {
   section: SECTION_IN_WELSH,
   label: "Is the birth father's name on the birth certificate? (in Welsh)",
-  hint: "Ask the adoption agency or social worker if you're not sure. (in Welsh)",
+  hint: 'Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
 };
 
 const fieldName = 'birthFatherNameOnCertificate';

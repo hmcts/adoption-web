@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
@@ -17,17 +18,17 @@ const enContent = {
 };
 
 const cyContent = {
-  section: "The child's details (in welsh)",
-  label: 'What type of order is it? (in welsh)',
+  section: 'Manylion y plentyn',
+  label: 'Pa fath o neuchymyn ydyw?',
   errors: {
     placementOrderType: {
-      required: 'Please answer the question (in welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('children > placement-order-court content', () => {
+describe('children > placement-order-type > content', () => {
   const commonContent = {
     language: 'en',
     userCase: {
@@ -35,18 +36,13 @@ describe('children > placement-order-court content', () => {
       selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
     },
   } as CommonContent;
+
   test('should return correct english content', () => {
-    const generatedContent = generateContent(commonContent);
-    expect(generatedContent.section).toBe(enContent.section);
-    expect(generatedContent.label).toBe(enContent.label);
-    expect(generatedContent.errors).toEqual(enContent.errors);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    const generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toBe(cyContent.section);
-    expect(generatedContent.label).toBe(cyContent.label);
-    expect(generatedContent.errors).toEqual(cyContent.errors);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain placementOrderCourt field', () => {

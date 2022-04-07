@@ -1,20 +1,24 @@
+import languageAssertions from '../../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields } from '../../../../app/form/Form';
 import { CommonContent } from '../../../common/common.content';
 import {
   form as addressLookupForm,
   generateContent as generateAddressLookupContent,
 } from '../../../common/components/address-lookup';
+import { APPLICANT_2_MANUAL_ADDRESS } from '../../../urls';
 
 import { generateContent } from './content';
 
 const enContent = {
   section: 'Second applicant',
   title: "What's your home address?",
+  manualAddressUrl: APPLICANT_2_MANUAL_ADDRESS,
 };
 
 const cyContent = {
-  section: 'Second applicant (in welsh)',
-  title: "What's your home address? (in welsh)",
+  section: 'Ail geisydd',
+  title: 'Beth yw eich cyfeiriad cartref?',
+  manualAddressUrl: APPLICANT_2_MANUAL_ADDRESS,
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
@@ -28,23 +32,28 @@ describe('applicant2 > address > lookup > content', () => {
 
   test('should return correct english content', () => {
     const addressLookupContent = generateAddressLookupContent(commonContent);
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.title).toEqual(enContent.title);
-    expect(generatedContent.errors).toEqual({
-      applicant2AddressPostcode: (addressLookupContent.errors as any).addressPostcode,
-    });
-    expect(generatedContent.manualAddressUrl).toEqual('/applicant2/address/manual');
+    const addressLookupErrors = addressLookupContent.errors as Record<string, unknown>;
+    languageAssertions(
+      'en',
+      {
+        ...enContent,
+        errors: { applicant2AddressPostcode: addressLookupErrors.addressPostcode },
+      },
+      () => generateContent(commonContent)
+    );
   });
 
   test('should return correct welsh content', () => {
     const addressLookupContent = generateAddressLookupContent({ ...commonContent, language: 'cy' });
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.title).toEqual(cyContent.title);
-    expect(generatedContent.errors).toEqual({
-      applicant2AddressPostcode: (addressLookupContent.errors as any).addressPostcode,
-    });
-    expect(generatedContent.manualAddressUrl).toEqual('/applicant2/address/manual');
+    const addressLookupErrors = addressLookupContent.errors as Record<string, unknown>;
+    languageAssertions(
+      'cy',
+      {
+        ...cyContent,
+        errors: { applicant2AddressPostcode: addressLookupErrors.addressPostcode },
+      },
+      () => generateContent({ ...commonContent, language: 'cy' })
+    );
   });
 
   test('should contain applicant2AddressPostcode field', () => {

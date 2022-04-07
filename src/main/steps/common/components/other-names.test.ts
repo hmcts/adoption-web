@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable jest/expect-expect */
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FieldPrefix } from '../../../app/case/case';
 import { OtherName, YesOrNo } from '../../../app/case/definition';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
@@ -10,7 +11,6 @@ import { generateContent } from './other-names';
 
 jest.mock('../../../app/form/validation');
 
-const CY = 'cy';
 const EN = 'en';
 const enContent = {
   label: 'Have you ever legally been known by any other names?',
@@ -39,71 +39,44 @@ const enContent = {
   },
 };
 const cyContent = {
-  label: 'Have you ever legally been known by any other names? (in Welsh)',
-  example: 'For example, your name before marriage. (in Welsh)',
-  previousNameYes: "List each previous name separately and select 'Add' (in Welsh)",
-  yes: 'Yes (in Welsh)',
-  no: 'No (in Welsh)',
-  applicant1OtherFirstNames: 'Add your previous first names (in Welsh)',
-  applicant1OtherLastNames: 'Add your previous last names (in Welsh)',
-  add: 'Add (in Welsh)',
-  another: 'Add another name (in Welsh)',
-  remove: 'Remove (in Welsh)',
+  label: 'A ydych erioed wedi’ch adnabod yn gyfreithiol dan unrhyw enwau eraill?',
+  example: 'Er enghraifft, eich enw cyn ichi briodi.',
+  previousNameYes: 'Rhestrwch bob enw blaenorol ar wahân a dewiswch ‘Ychwanegu’',
+  yes: 'Ydw',
+  no: 'Nac ydw',
+  applicant1OtherFirstNames: 'Ychwanegwch eich enw(au) cyntaf blaenorol',
+  applicant1OtherLastNames: 'Ychwanegwch eich cyfenw(au) blaenorol',
+  add: 'Ychwanegu',
+  another: 'Ychwanegu enw arall',
+  remove: 'Dileu',
   errors: {
     applicant1HasOtherNames: {
-      required: 'Please answer the question (in Welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
     applicant1OtherFirstNames: {
-      required: 'Enter your first names (in Welsh)',
+      required: 'Nac ydwdwch eich enw(au) cyntaf',
     },
     applicant1OtherLastNames: {
-      required: 'Enter your last names (in Welsh)',
+      required: 'Nac ydwdwch eich cyfenw(au)',
     },
     addAnotherName: {
-      required: 'Please answer the question (in Welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
-};
-
-const langAssertions = (language, content) => {
-  const generatedContent = generateContent({ language, userCase: {} } as CommonContent, FieldPrefix.APPLICANT1);
-  const {
-    label,
-    example,
-    previousNameYes,
-    yes,
-    no,
-    applicant1OtherFirstNames,
-    applicant1OtherLastNames,
-    add,
-    another,
-    remove,
-    errors,
-  } = content;
-
-  expect(generatedContent.label).toEqual(label);
-  expect(generatedContent.example).toEqual(example);
-  expect(generatedContent.previousNameYes).toEqual(previousNameYes);
-  expect(generatedContent.yes).toEqual(yes);
-  expect(generatedContent.no).toEqual(no);
-  expect(generatedContent.applicant1OtherFirstNames).toEqual(applicant1OtherFirstNames);
-  expect(generatedContent.applicant1OtherLastNames).toEqual(applicant1OtherLastNames);
-  expect(generatedContent.add).toEqual(add);
-  expect(generatedContent.another).toEqual(another);
-  expect(generatedContent.remove).toEqual(remove);
-  expect(generatedContent.errors).toEqual(errors);
 };
 
 const commonContent = (names: OtherName[]) =>
   ({ language: EN, userCase: { applicant1AdditionalNames: names } } as CommonContent);
 
 describe('other names content', () => {
-  it('should return the correct content for language = en', () => {
-    langAssertions(EN, enContent);
+  it('should return correct english content', () => {
+    languageAssertions('en', enContent, () => generateContent(commonContent([]), FieldPrefix.APPLICANT1));
   });
 
-  it('should return the correct content for language = cy', () => {
-    langAssertions(CY, cyContent);
+  it('should return correct welsh content', () => {
+    languageAssertions('cy', cyContent, () =>
+      generateContent({ ...commonContent([]), language: 'cy' }, FieldPrefix.APPLICANT1)
+    );
   });
 
   it('should have a yes-no radio button', () => {

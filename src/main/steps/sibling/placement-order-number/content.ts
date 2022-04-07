@@ -15,13 +15,13 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
+const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  label: 'What is the serial or case number on the order? (in welsh)',
-  hint: 'Ask your social worker or adoption agency if you are not sure where to find this. (in welsh)',
+  label: 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn?',
+  hint: 'Gofynnwch i’ch gweithiwr cymdeithasol, neu’ch asiantaeth fabwysiadu os nad ydych yn siŵr lle i ddod o hyd i hwn.',
   errors: {
     placementOrderNumber: {
-      required: 'Enter the serial or case number (in welsh)',
+      required: 'Nac ydwdwch y rhif cyfresol neu rif yr achos',
     },
   },
 });

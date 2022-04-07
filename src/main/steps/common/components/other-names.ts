@@ -7,7 +7,7 @@ import { mapSummaryListContent } from '../../common/functions/mapSummaryListCont
 import { APPLICANT_1_OTHER_NAMES, APPLICANT_2_OTHER_NAMES } from '../../urls';
 import { CommonContent } from '../common.content';
 
-export const en = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
+const en = (fieldPrefix: FieldPrefix) => ({
   label: 'Have you ever legally been known by any other names?',
   example: 'For example, your name before marriage.',
   previousNameYes: "List each previous name separately and select 'Add'",
@@ -34,29 +34,29 @@ export const en = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
   },
 });
 
-export const cy = (fieldPrefix: FieldPrefix): Record<string, unknown> => ({
-  label: 'Have you ever legally been known by any other names? (in Welsh)',
-  example: 'For example, your name before marriage. (in Welsh)',
-  previousNameYes: "List each previous name separately and select 'Add' (in Welsh)",
-  yes: 'Yes (in Welsh)',
-  no: 'No (in Welsh)',
-  [`${fieldPrefix}OtherFirstNames`]: 'Add your previous first names (in Welsh)',
-  [`${fieldPrefix}OtherLastNames`]: 'Add your previous last names (in Welsh)',
-  add: 'Add (in Welsh)',
-  another: 'Add another name (in Welsh)',
-  remove: 'Remove (in Welsh)',
+const cy: typeof en = (fieldPrefix: FieldPrefix) => ({
+  label: 'A ydych erioed wedi’ch adnabod yn gyfreithiol dan unrhyw enwau eraill?',
+  example: 'Er enghraifft, eich enw cyn ichi briodi.',
+  previousNameYes: 'Rhestrwch bob enw blaenorol ar wahân a dewiswch ‘Ychwanegu’',
+  yes: 'Ydw',
+  no: 'Nac ydw',
+  [`${fieldPrefix}OtherFirstNames`]: 'Ychwanegwch eich enw(au) cyntaf blaenorol',
+  [`${fieldPrefix}OtherLastNames`]: 'Ychwanegwch eich cyfenw(au) blaenorol',
+  add: 'Ychwanegu',
+  another: 'Ychwanegu enw arall',
+  remove: 'Dileu',
   errors: {
     [`${fieldPrefix}HasOtherNames`]: {
-      required: 'Please answer the question (in Welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
     [`${fieldPrefix}OtherFirstNames`]: {
-      required: 'Enter your first names (in Welsh)',
+      required: 'Nac ydwdwch eich enw(au) cyntaf',
     },
     [`${fieldPrefix}OtherLastNames`]: {
-      required: 'Enter your last names (in Welsh)',
+      required: 'Nac ydwdwch eich cyfenw(au)',
     },
     addAnotherName: {
-      required: 'Please answer the question (in Welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
 });

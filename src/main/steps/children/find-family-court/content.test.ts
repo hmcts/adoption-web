@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { YesOrNo } from '../../../app/case/definition';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -34,33 +35,33 @@ const enContent = {
 };
 
 const cyContent = {
-  section: "The child's details (in welsh)",
-  title: 'Choose a family court (in welsh)',
+  section: 'Manylion y plentyn',
+  title: 'Dewiswch lys teulu',
   findFamilyCourtParagraph1:
-    'There may be court hearings related to your application to adopt. The birth parents may be present at these. You do not have to attend these hearings. (in welsh)',
+    'Efallai cynhelir gwrandawiadau llys sy’n ymwneud â’ch cais i fabwysiadu. Efallai bydd y rheini biolegol yn bresennol yn y gwrandawiadau hyn. Nid oes rhaid ichi fynychu’r gwrandawiadau hyn.',
   findFamilyCourtParagraph2:
-    'You have told us that the court which issued the placement order was <b>London Court</b>. (in welsh)',
-  findFamilyCourt: 'Do you want the hearings to be heard in the same court? (in welsh)',
-  findFamilyCourtHint: 'You should discuss this with your social worker or adoption agency. (in welsh)',
+    'Rydych wedi dweud wrthym mai’r llys a gyhoeddodd y gorchymyn lleoli oedd <b>London Court</b>.',
+  findFamilyCourt: 'A ydych eisiau i’r gwrandawiadau cael eu gwrando yn yr un llys?',
+  findFamilyCourtHint: 'Dylech drafod hyn gyda’ch gweithiwr cymdeithasol neu’ch asiantaeth fabwysiadu.',
   familyCourtNameParagraph1:
-    '<p class="govuk-label"><a  target="_blank" href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode">Choose your family court</a></p> (in welsh)',
+    '<p class="govuk-label"><a  target="_blank" href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode">Dewiswch eich llys teulu</a></p>',
   familyCourtNameParagraph2:
-    'Find the family court in the town or region you want your application heard. The link will open in a new tab. Return to this tab to enter the court name. (in welsh)',
+    'Dewch o hyd i’r llys teulu yn y dref neu’r rhanbarth rydych yn dymuno i’ch cais gael ei wrando. Bydd y ddolen yn agor mewn ffenestr newydd. Dychwelwch i’r tab yma i nodi enw’r llys.',
   familyCourtNameParagraph3:
-    'Note that your request will be submitted to the judge. The judge has the final decision about where court hearings will take place. (in welsh)',
-  familyCourtName: 'Enter the full name of the court (in welsh)',
+    'Nac ydwdwch bydd eich cais yn cael gyflwyno i’r barnwr. Y barnwr sy’n gwneud y penderfyniad terfynol am lle bydd y gwrandawiadau llys yn cymryd rhan.',
+  familyCourtName: 'Nac ydwdwch enw llawn y llys',
   errors: {
     findFamilyCourt: {
-      required: 'Please answer the question (in welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
     familyCourtName: {
-      required: 'Enter the name of the court (in welsh)',
+      required: 'Nac ydwdwch enw’r llys',
     },
   },
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('find-family-court content', () => {
+describe('children > find-family-court > content', () => {
   const commonContent = generatePageContent({
     language: 'en',
     userCase: { placementOrders: [{ placementOrderId: '123', placementOrderCourt: 'London Court' }] },
@@ -72,38 +73,17 @@ describe('find-family-court content', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.title).toEqual(enContent.title);
-    expect(generatedContent.findFamilyCourtParagraph1).toEqual(enContent.findFamilyCourtParagraph1);
-    expect(generatedContent.findFamilyCourtParagraph2).toEqual(enContent.findFamilyCourtParagraph2);
-    expect(generatedContent.findFamilyCourt).toEqual(enContent.findFamilyCourt);
-    expect(generatedContent.findFamilyCourtHint).toEqual(enContent.findFamilyCourtHint);
-    expect(generatedContent.familyCourtNameParagraph1).toEqual(enContent.familyCourtNameParagraph1);
-    expect(generatedContent.familyCourtNameParagraph2).toEqual(enContent.familyCourtNameParagraph2);
-    expect(generatedContent.familyCourtNameParagraph3).toEqual(enContent.familyCourtNameParagraph3);
-    expect(generatedContent.familyCourtName).toEqual(enContent.familyCourtName);
-    expect(generatedContent.errors).toEqual(enContent.errors);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    generatedContent = generateContent({
-      ...commonContent,
-      language: 'cy',
-      userCase: { placementOrders: [{ placementOrderId: '123', placementOrderCourt: 'oxford family court' }] },
-    });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.title).toEqual(cyContent.title);
-    expect(generatedContent.findFamilyCourtParagraph1).toEqual(cyContent.findFamilyCourtParagraph1);
-    expect(generatedContent.findFamilyCourtParagraph2).toEqual(
-      'You have told us that the court which issued the placement order was <b>oxford family court</b>. (in welsh)'
+    languageAssertions('cy', cyContent, () =>
+      generateContent({
+        ...commonContent,
+        language: 'cy',
+        userCase: { placementOrders: [{ placementOrderId: '123', placementOrderCourt: 'London Court' }] },
+      })
     );
-    expect(generatedContent.findFamilyCourt).toEqual(cyContent.findFamilyCourt);
-    expect(generatedContent.findFamilyCourtHint).toEqual(cyContent.findFamilyCourtHint);
-    expect(generatedContent.familyCourtNameParagraph1).toEqual(cyContent.familyCourtNameParagraph1);
-    expect(generatedContent.familyCourtNameParagraph2).toEqual(cyContent.familyCourtNameParagraph2);
-    expect(generatedContent.familyCourtNameParagraph3).toEqual(cyContent.familyCourtNameParagraph3);
-    expect(generatedContent.familyCourtName).toEqual(cyContent.familyCourtName);
-    expect(generatedContent.errors).toEqual(cyContent.errors);
   });
 
   test('should contain findFamilyCourt field', () => {

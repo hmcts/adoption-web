@@ -23,23 +23,24 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
-  section: 'Application details (in welsh)',
-  label: 'Are you applying on your own, or with someone else?(in welsh)',
-  one: "I'm applying on my own (in welsh)",
-  oneHint: 'For example, as a single parent. (in welsh)',
-  two: "I'm applying with my spouse or civil partner (in welsh)",
-  twoHint: 'For example, as a married couple with joint parenting responsibilities. (in welsh)',
-  three: "I'm applying with someone who is not my spouse or civil partner (in welsh)",
-  threeHint: 'For example, with a long-term partner but not in a legally binding relationship. (in welsh)',
-  moreDetails: 'Give a brief overview of what your relationship is with the other applicant. (in welsh)',
+const cy: typeof en = () => ({
+  section: 'Manylion y cais',
+  section1: 'Manylion y cais',
+  label: 'A ydych yn gwneud cais ar ben eich hun, neu gyda rhywun arall?',
+  one: 'Rwy’n gwneud cais ar ben fy hun',
+  oneHint: 'Er enghraifft, fel rhiant sengl.',
+  two: 'Rwy’n gwneud cais gyda fy mhriod / fy mhartner sifil',
+  twoHint: 'Er enghraifft, fel cwpl priod gyda chyfrifoldebau rhiant ar y cyd.',
+  three: 'Rwy’n gwneud cais gyda rhywun nad ydynt yn briod neu’n bartner sifil i mi',
+  threeHint: 'Er enghraifft, gyda phartner hir dymor ond nid ydym mewn perthynas sy’n rhwymol yn gyfreithiol.',
+  moreDetails: 'Rhowch drosolwg bras o beth yw eich perthynas â’r ceisydd arall.',
   errors: {
     applyingWith: {
-      required: 'Select an option which best describes who is applying (in welsh)',
+      required: 'Dewiswch opsiwn sy’n disgrifio neuau pwy sy’n gwneud cais',
     },
     otherApplicantRelation: {
-      required: 'Provide details of your relationship with the other applicant (in welsh)',
-      invalid: 'Overview must be 500 characters or fewer (in welsh)',
+      required: 'Darparwch fanylion am eich perthynas â’r ceisydd arall',
+      invalid: 'Rhaid i’r trosolwg fod yn 500 nod neu lai',
     },
   },
 });

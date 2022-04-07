@@ -32,14 +32,14 @@ const en = content => ({
   },
 });
 
-const cy = content => ({
+const cy: typeof en = content => ({
   section: SECTION_IN_WELSH,
-  label: `Are you sure you want to remove this ${getPlacementOrderType(content.userCase)} for ${getSiblingName(
+  label: `Ydych chi’n siŵr eich bod eisiau dileu’r ${getPlacementOrderType(
     content.userCase
-  )}? (in welsh)`,
+  )} hwn ar gyfer ${getPlacementOrderType(content.userCase)}?`,
   errors: {
     confirm: {
-      required: 'Please select an answer (in welsh)',
+      required: 'Dewiswch ateb os gwelwch yn dda',
     },
   },
 });

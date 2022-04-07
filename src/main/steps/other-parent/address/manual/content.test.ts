@@ -1,24 +1,28 @@
+import languageAssertions from '../../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormOptions } from '../../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../../common/common.content';
 import {
   generateContent as generateManualAddressContent,
   form as manualAddressForm,
 } from '../../../common/components/address-manual';
+import { OTHER_PARENT_INTERNATIONAL_ADDRESS } from '../../../urls';
 
 import { generateContent } from './content';
 
 const enContent = {
   section: "Other parent's details",
   title: "What is the other parent's last known address?",
+  internationalAddressUrl: OTHER_PARENT_INTERNATIONAL_ADDRESS,
 };
 
 const cyContent = {
-  section: "Other parent's details (in Welsh)",
-  title: "What is the other parent's last known address? (in Welsh)",
+  section: 'Manylion y rhiant arall',
+  title: 'Beth yw cyfeiriad olaf hysbys y rhiant arall?',
+  internationalAddressUrl: OTHER_PARENT_INTERNATIONAL_ADDRESS,
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('otherParent > address > manual > content', () => {
+describe('other-parent > address > manual > content', () => {
   const commonContent = { language: 'en', userCase: {} } as CommonContent;
   let generatedContent;
   let form;
@@ -33,25 +37,36 @@ describe('otherParent > address > manual > content', () => {
 
   test('should return correct english content', () => {
     const manualAddressContent = generateManualAddressContent(commonContent);
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.title).toEqual(enContent.title);
-    expect(generatedContent.errors).toEqual({
-      otherParentAddress1: (manualAddressContent.errors as any).address1,
-      otherParentAddressTown: (manualAddressContent.errors as any).addressTown,
-      otherParentAddressPostcode: (manualAddressContent.errors as any).addressPostcode,
-    });
+    const manualAddressErrors = manualAddressContent.errors as Record<string, unknown>;
+    languageAssertions(
+      'en',
+      {
+        ...enContent,
+        errors: {
+          otherParentAddress1: manualAddressErrors.address1,
+          otherParentAddressTown: manualAddressErrors.addressTown,
+          otherParentAddressPostcode: manualAddressErrors.addressPostcode,
+        },
+      },
+      () => generateContent(commonContent)
+    );
   });
 
   test('should return correct welsh content', () => {
     const manualAddressContent = generateManualAddressContent({ ...commonContent, language: 'cy' });
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.title).toEqual(cyContent.title);
-    expect(generatedContent.errors).toEqual({
-      otherParentAddress1: (manualAddressContent.errors as any).address1,
-      otherParentAddressTown: (manualAddressContent.errors as any).addressTown,
-      otherParentAddressPostcode: (manualAddressContent.errors as any).addressPostcode,
-    });
+    const manualAddressErrors = manualAddressContent.errors as Record<string, unknown>;
+    languageAssertions(
+      'cy',
+      {
+        ...cyContent,
+        errors: {
+          otherParentAddress1: manualAddressErrors.address1,
+          otherParentAddressTown: manualAddressErrors.addressTown,
+          otherParentAddressPostcode: manualAddressErrors.addressPostcode,
+        },
+      },
+      () => generateContent({ ...commonContent, language: 'cy' })
+    );
   });
 
   test('should contain otherParentAddress1 field', () => {

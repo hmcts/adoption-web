@@ -1,66 +1,78 @@
 import { TranslationFn } from '../../app/controller/GetController';
 
-const en = () => ({
-  title: 'Privacy policy',
-  info: 'This privacy policy explains why we collect your personal data and what we do with it. It also explains your rights and how to enforce them.',
+const en = {
+  title: 'The Adoption Service Privacy policy',
+  info1: 'The Ministry of Justice (MoJ) is committed to the protection and security of your personal information.',
+  info2:
+    'This privacy policy explains why we collect your personal data and what we do with it. It also explains your rights and how to enforce them.',
+  info3:
+    'It is important that you read this notice so that you are aware of how and why we are using such information. This privacy notice describes how we collect and use personal information during and after your relationship with us, in accordance with data protection law. They will be updated regularly.',
   whoManages: 'Who manages this service',
   managedBy:
     'This service is managed by HM Courts and Tribunals Service (HMCTS), which is an executive agency of the Ministry of Justice (MoJ).',
-  moj: "The MoJ is known as the data controller for data protection purposes. <a class='govuk-link' href='https://www.gov.uk/government/organisations/ministry-of-justice/about/personal-information-charter'>The MoJ personal information charter</a> explains how the MoJ processes personal data.",
+  moj: "The MoJ is known as the data controller for data protection purposes. <a class='govuk-link' href='https://www.gov.uk/government/organisations/ministry-of-justice/about/personal-information-charter' target='_blank'>The MoJ personal information charter (opens in a new window)</a> explains how the MoJ processes personal data.",
   responsibleForDeciding:
     'As part of the MoJ, HMCTS is responsible for deciding how your personal data is used and for protecting the personal data you provide.',
   moreInformation:
     "More information about using this service is in the <a class='govuk-link' href='/terms-and-conditions'>terms and conditions</a>.",
-  thePersonal: 'The personal data we need',
-  whenYouUseAdoptionService: 'We need the following personal data for this service:',
-  applicantName: 'the applicant’s name',
-  applicantEmailAndPhone: 'the applicant’s addresses, email addresses and phone numbers',
-  applicantAddressAndNames:
-    'the address, email address and phone number of the applicant’s solicitors (if they have one)',
-  receivingNotifications: 'Receiving notifications',
-  youNeedSignUp:
-    'You need to sign up to receive notifications to use the adoption service. This is a legal requirement so that the application can proceed.',
-  storingYourData: 'Storing your data',
-  askedForEmailAddress:
-    'When you use this service you’ll be asked to use your email address to set up an account. You will be able to use this email and password to sign into other HMCTS services.',
-  holdYourData:
-    'While you’re filling out or responding to a adoption application we will hold your data for up to 6 months. If you do not complete the application during this time you’ll have to start again.',
-  whenAAdoptionIsFinalised:
-    'When adoption is finalised the case is stored for 18 years. After this time, some data (from the conditional order and the final order) is deleted.',
-  theRemainder:
-    'The remainder of the case information is stored for an additional 82 years. After a total of 100 years this data will be deleted.',
-
-  whyWeCollect: 'Why we collect your personal data',
-  personalData: 'We collect your personal data to:',
-  processApplication: 'process your application',
+  thePersonal: 'Why we collect your personal data',
+  personalInformation:
+    'Most of the personal information we process is provided to us directly by you for one the purposes of applying to adopt a child.',
+  whenYouUseAdoptionService: 'We collect your personal data to:',
+  applicationProcess: 'process your application',
   legalRequirements: 'meet legal requirements',
-  improveService: 'make improvements to this service',
-  staffUse:
+  improvementService: 'make improvements to this service',
+  personalDataProcessApplication:
     'Our staff use your personal data to process your application. They work in the UK and your data is stored in the UK.',
+  collectPersonalData: 'The personal data we collect',
+  onlineAdoptionServiceUse: 'When you use the online adoption service we ask for your:',
+  nameAndOthers: 'name, and any other names you are known as',
+  emailAddress: 'email address',
+  phoneNumber: 'phone number',
+  homeAddress: 'home address',
+  dateOfBirth: 'date of birth',
+  occupation: 'occupation',
+  specialCategoriesInformation:
+    'We also collect special categories of information via protected characteristic questions which are optional, such as:',
+  race: 'race or ethnicity',
+  health: 'health, sex life or sexual orientation',
+  genetics: 'genetics or biometrics',
+  religiousBeliefs: 'religious or philosophical beliefs',
   usingYourData: 'Using your data',
   asPart:
-    'As part of your application you’ll be asked to use your email address to set up an account. You will be able to use this email and password to sign into other HMCTS services.',
+    'As part of your application you’ll be asked to use your email address to set up an account. You will be able to use this email address and password to sign into other HMCTS services.',
   weMayAskForPermission:
-    'We will ask for your permission to use your email address to send you emails using GOV.UK Notify. This system processes emails only within the European Economic Area until the point where emails are handed over to the email provider you use.',
+    'We may ask for your permission to use your email address to send you emails using GOV.UK Notify. This system processes emails only within the European Economic Area until the point where emails are handed over to the email provider you use.',
   weUseCookies:
     "We use <a class='govuk-link' href='/cookies'>cookies</a> to collect data that tells us about how you’re using this service, including:",
   ifYouOpenEmail: 'if you open an email from us or click on a link in an email',
   yourComputer: 'your computer, phone or tablet’s IP address',
   theRegion: 'the region or town where you’re using your computer, phone or tablet',
   theWeb: 'the web browser you use',
+  storingYourData: 'Storing your data',
+  savedInformation:
+    'Information you enter in the online adoption service is saved until you decide to submit it. This allows you to save what you are doing and continue later. Saved information that you do not submit will be deleted after 180 days.',
+  postSubmissionData:
+    'After you submit your application, the information you entered will be stored for 100 years and then deleted.',
   sharingYourData: 'Sharing your data',
   ifAnother:
-    'While processing your claim or application, another government department, agency or organisation might be involved and we may share your data with them.',
-  dataSharedWithPrintingServiceProvider:
-    'Any data you provide which needs to be printed will be shared with Xerox (UK) Ltd. For example, the adoption application will be printed so that it can be sent to the respondent by post.',
+    'While processing your application, another government department, agency or organisation might be involved and we may share your data with them.',
   ifYouContactUs:
-    'If you contact us and ask for help with the service you’re using, your personal data may be shared with the Good Things Foundation. This is a company who we have partnered with to offer face to face support.',
+    'If you contact us and ask for help with the service you’re using, your personal data may be shared with the <a class="govuk-link" href="https://www.goodthingsfoundation.org/" target="_blank">Good Things Foundation (opens in a new window)</a>. This is a company who we have partnered with to offer face to face support.',
   crime:
-    'In some circumstances we may share your data for example, to prevent or detect crime, or to produce anonymised statistics.',
+    'In some circumstances we may share your data. For example, to prevent or detect crime, or to produce anonymised statistics.',
   weUse:
     "We use Google Analytics to collect data about how a website is used. This anonymous data is shared with Google. Find out about this in our <a class='govuk-link' href='/terms-and-conditions'>terms and conditions</a>.",
+  lawfulBases:
+    'Under the UK General Data Protection Regulation (UK GDPR), the lawful bases we rely on for processing this information are:',
+  consent:
+    'Your consent. You are able to withdraw your consent at any time. You can do this by contacting Disclosure Team, Post point 10.24, 102 Petty France, London, SW1H 9AJ',
+  legalObligation: 'We have a legal obligation.',
+  vitalInterest: 'We have a vital interest.',
+  publicTask: 'We need it to perform a public task.',
+  legitimateInterest: 'We have a legitimate interest',
   storeAndShare: 'Storing and sharing your data internationally',
-  personalInformation:
+  personalInformationOutsideUK:
     'Sometimes we need to send your personal information outside of the UK. When we do this we comply with data protection law.',
   yourRights: 'Your rights',
   youCanAsk: 'You can ask:',
@@ -70,120 +82,146 @@ const en = () => ({
     'to have the personal data removed or deleted (this will depend on the circumstances, for example if you decide not to continue your application)',
   thatAccessIsRestricted:
     'that access to the personal data is restricted (for example, you can ask to have your data stored for longer and not automatically deleted)',
+  personalDataNotProcessed: 'that your personal data is not processed',
+  transferPersonalInformation:
+    'that we transfer the personal information you gave us to another organisation, or to you, in certain circumstances',
   ifYouWantToSeePersonal: 'If you want to see the personal data that we hold on you, you can:',
   completeForm:
-    "complete a form to make a <a class='govuk-link' href='https://www.gov.uk/government/publications/request-your-personal-data-from-moj'>subject access request</a> - your request goes to the MoJ as data controller",
-  writeToUs: 'write to us: Disclosure Team, Post point 10.38, 102 Petty France, London, SW1H 9AJ',
+    "complete a form to make a <a class='govuk-link' href='https://www.gov.uk/government/publications/request-your-personal-data-from-moj' target='_blank'>subject access request (opens in a new window)</a>. Your request goes to the MoJ as data controller",
+  writeToUs: 'write to us: Disclosure Team, Post point 10.24, 102 Petty France, London, SW1H 9AJ',
+  emailUs: 'email: <a href="mailto:data.access@justice.gov.uk" class="govuk-link">data.access@justice.gov.uk</a>',
   askMoreInformation: 'You can ask for more information about:',
   agreementsWeHave: 'agreements we have on sharing information with other organisations',
   withoutTellingYou: 'when we are allowed to pass on personal information without telling you',
   ourInstructions: 'our instructions to staff on how to collect, use or delete your personal information',
   howWeCheck: 'how we check that the information we hold is accurate and up-to-date',
-  mojProtection: 'You can contact the MoJ data protection officer, by:',
-  pettyFrance: 'writing to us: Post point 10.38, 102 Petty France, London, SW1H 9AJ',
-  emailing:
-    'emailing: <a href="mailto:data.compliance@justice.gov.uk" class="govuk-link">data.compliance@justice.gov.uk</a>',
   howToComplain: 'How to complain',
   seeOurComplaints:
-    "See our <a class='govuk-link' href='https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service/about/complaints-procedure'>complaints procedure</a> if you want to complain about how we've handled your personal data.",
-  writeTo: 'Write to: Post point 10.38, 102 Petty France, London, SW1H 9AJ',
-  email: 'Email: <a href="mailto:data.compliance@justice.gov.uk" class="govuk-link">data.compliance@justice.gov.uk</a>',
-  youCanAlsoComplain:
-    "You can also complain to the <a class='govuk-link' href='https://ico.org.uk/global/contact-us'>Information Commissioner’s Office</a> if you’re not satisfied with our response or believe we are not processing your personal data lawfully.",
-});
+    "See our <a class='govuk-link' href='https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service/about/complaints-procedure' target='_blank'>complaints procedure (opens in a new window)</a> if you want to complain about how we've handled your personal data.",
+  concernsDataProtection:
+    'If you have any concerns about our use of your personal data, you can contact the MoJ data protection officer:',
+  mojAddress:
+    'Data Protection Officer <br/> Ministry of Justice <br/> 3rd Floor, Post Point 3.20 <br/> 10 South Colonnades <br/> Canary Wharf <br/> London <br/> E14 4PU',
+  mojEmailAddress: '<a href="mailto:dpo@justice.gov.uk" class="govuk-link">dpo@justice.gov.uk</a>',
+  youCanAlsoComplain: 'You can also complain to the ICO if you are unhappy with how we have used your data.',
+  icoAddress:
+    'Information Commissioner’s Office <br/> Wycliffe House <br/> Water Lane <br/> Wilmslow <br/> Cheshire <br/> SK9 5AF',
+  icoHelplineNumber: 'Helpline number: 0303 123 1113',
+  icoWebsite: "ICO website: <a class='govuk-link' href='https://ico.org.uk'>https://www.ico.org.uk</a>",
+};
 
-const cy: typeof en = () => ({
-  title: 'Polisi preifatrwydd',
-  info: 'Mae’r polisi preifatrwydd hwn yn egluro pam rydym yn casglu eich data personol a beth rydym yn ei wneud ag ef. Mae hefyd yn egluro eich hawliau a sut i’w gorfodi.',
-  whoManages: "Pwy sy’n rheoli'r gwasanaeth hwn",
+const cy: typeof en = {
+  title: 'The Adoption Service Privacy policy (in Welsh)',
+  info1:
+    'The Ministry of Justice (MoJ) is committed to the protection and security of your personal information. (in Welsh)',
+  info2:
+    'This privacy policy explains why we collect your personal data and what we do with it. It also explains your rights and how to enforce them. (in Welsh)',
+  info3:
+    'It is important that you read this notice so that you are aware of how and why we are using such information. This privacy notice describes how we collect and use personal information during and after your relationship with us, in accordance with data protection law. They will be updated regularly. (in Welsh)',
+  whoManages: 'Who manages this service (in Welsh)',
   managedBy:
-    'Gwasanaeth Llysoedd a Thribiwnlysoedd EM (GLlTEM) sy’n rheoli’r gwasanaeth hwn, sef un o asiantaethau gweithredol y Weinyddiaeth Gyfiawnder (MoJ).',
-  moj: "MoJ yw’r rheolydd data at ddibenion diogelu data. <a class='govuk-link' href='https://www.gov.uk/government/organisations/ministry-of-justice/about/personal-information-charter'>Mae siarter gwybodaeth bersonol yr MoJ</a> yn egluro sut mae'r MoJ yn prosesu data personol.",
+    'This service is managed by HM Courts and Tribunals Service (HMCTS), which is an executive agency of the Ministry of Justice (MoJ). (in Welsh)',
+  moj: "The MoJ is known as the data controller for data protection purposes. <a class='govuk-link' href='https://www.gov.uk/government/organisations/ministry-of-justice/about/personal-information-charter' target='_blank'>The MoJ personal information charter (opens in a new window)</a> explains how the MoJ processes personal data. (in Welsh)",
   responsibleForDeciding:
-    "Fel rhan o’r MoJ, mae GLlTEM yn gyfrifol am benderfynu sut mae eich data personol yn cael ei ddefnyddio ac am ddiogelu'r data personol rydych yn ei ddarparu.",
+    'As part of the MoJ, HMCTS is responsible for deciding how your personal data is used and for protecting the personal data you provide. (in Welsh)',
   moreInformation:
-    "Mae rhagor o wybodaeth am ddefnyddio’r gwasanaeth hwn yn y <a class='govuk-link' href='/terms-and-conditions'>telerau ac amodau</a>.",
-  thePersonal: 'Y data personol sydd ei angen arnom',
-  whenYouUseAdoptionService: 'Rydym angen y data personol canlynol ar gyfer y gwasanaeth hwn:',
-  applicantName: "enw'r ceisydd",
-  applicantEmailAndPhone: 'cyfeiriadau, cyfeiriadau e-bost a rhifau ffôn y ceisydd',
-  applicantAddressAndNames: 'cyfeiriad, cyfeiriad e-bost a rhif ffôn cyfreithiwr y ceisydd (os oes ganddynt un)',
-  applicantOtherCourtCases: "manylion achosion llys eraill y mae'r ceisydd wedi bod yn ymwneud â nhw",
-  receivingNotifications: 'Hysbysiadau',
-  youNeedSignUp:
-    'Mae angen ichi gofrestru i gael hysbysiadau i ddefnyddio’r gwasanaeth mabwysiad. Mae hwn yn ofyniad cyfreithiol er mwyn i’r cais fynd yn ei flaen.',
-  storingYourData: 'Storio eich data',
-  askedForEmailAddress:
-    "Pan fyddwch yn defnyddio'r gwasanaeth hwn fe ofynnir ichi ddefnyddio’ch cyfeiriad e-bost i greu cyfrif. Byddwch yn gallu defnyddio’r cyfeiriad e-bost hwn a chyfrinair i fewngofnodi i wasanaethau eraill GLlTEM.",
-  holdYourData:
-    "Tra byddwch yn llenwi neu'n ymateb i gais mabwysiad byddwn yn cadw eich data am hyd at 6 mis. Os na fyddwch yn cwblhau’r cais yn ystod yr amser hwn, bydd rhaid ichi ddechrau eto.",
-  whenAAdoptionIsFinalised:
-    "Pan gwblheir mabwysiad cedwir manylion yr achos am 18 mlynedd. Ar ôl y cyfnod hwnnw, dilëir peth data (o’r dyfarniad amodol a'r dyfarniad terfynol).",
-  theRemainder:
-    'Cedwir gweddill gwybodaeth yr achos am 82 blynedd arall. Ar ôl cyfanswm o 100 mlynedd dilëir y data hwn.',
-
-  whyWeCollect: 'Pam rydym ni’n casglu eich data personol',
-  personalData: 'Rydym ni’n casglu eich data personol i:',
-  processApplication: 'brosesu eich cais',
-  legalRequirements: 'bodloni gofynion cyfreithiol',
-  improveService: 'gwella’r gwasanaeth hwn',
-  staffUse:
-    'Mae ein staff yn defnyddio eich data personol i brosesu eich cais. Maent yn gweithio yn y DU ac mae eich data yn cael ei storio yn y DU.',
-  usingYourData: 'Defnyddio eich data',
-  asPart:
-    "Fel rhan o'ch cais fe ofynnir ichi ddefnyddio’ch cyfeiriad e-bost i greu cyfrif. Byddwch yn gallu defnyddio’r cyfeiriad e-bost hwn a chyfrinair i fewngofnodi i wasanaethau eraill GLlTEM.",
-  weMayAskForPermission:
-    'Byddwn yn gofyn am eich caniatâd i ddefnyddio’ch cyfeiriad e-bost i anfon negeseuon e-bost atoch trwy’r system GOV.UK Notify. O fewn Ardal Economaidd Ewrop yn unig y mae’r system yn prosesu negeseuon e-bost hyd nes y pwynt y mae negeseuon e-bost yn cael eu trosglwyddo i’r darparwr e-bost rydych chi’n ei ddefnyddio.',
-  weUseCookies:
-    "Rydym yn defnyddio <a class='govuk-link' href='/cookies'>cwcis</a> i gasglu data am sut rydych yn defnyddio'r gwasanaeth hwn, yn cynnwys:",
-  ifYouOpenEmail: 'os byddwch yn agor neges e-bost gennym neu’n clicio ar ddolen mewn e-bost',
-  yourComputer: 'cyfeiriad IP eich cyfrifiadur, ffôn symudol neu dabled',
-  theRegion: 'yr ardal neu’r dref lle rydych yn defnyddio’ch cyfrifiadur, ffôn symudol neu dabled',
-  theWeb: 'y porwr gwe rydych yn ei ddefnyddio',
-  sharingYourData: 'Rhannu eich data',
-  ifAnother:
-    'Pan fydd eich hawliad neu eich cais yn cael ei brosesu, mae’n bosib y byddwn angen cysylltu ag adran, asiantaeth neu sefydliad arall yn y llywodraeth ac efallai y byddwn yn rhannu eich data gyda nhw.',
-  dataSharedWithPrintingServiceProvider:
-    'Bydd unrhyw ddata a ddarperir gennych sydd angen ei argraffu yn cael ei rannu gyda Xerox (UK) Ltd. Er enghraifft, bydd y cais mabwysiad yn cael ei argraffu fel y gellir ei anfon at yr atebydd drwy’r post.',
-  ifYouContactUs:
-    "Os byddwch yn cysylltu â ni ac yn gofyn am help gyda'r gwasanaeth rydych yn ei ddefnyddio, efallai y byddwn yn rhannu eich data personol gyda’r Good Things Foundation. Rydym yn gweithio mewn partneriaeth â'r cwmni hwn i gynnig cefnogaeth wyneb yn wyneb.",
-  crime:
-    'Mewn rhai amgylchiadau efallai y byddwn yn rhannu eich data, er enghraifft er mwyn atal neu i ddatrys trosedd, neu i gynhyrchu ystadegau cyffredinol.',
-  weUse:
-    "Rydym yn defnyddio Google Analytics i gasglu data am sut y defnyddir gwefan. Mae'r data cyffredinol hwn yn cael ei rannu gyda Google. Mae rhagor o wybodaeth am hyn yn ein <a class='govuk-link' href='/terms-and-conditions'>telerau ac amodau</a>.",
-  storeAndShare: 'Storio a rhannu eich data’n rhyngwladol',
+    "More information about using this service is in the <a class='govuk-link' href='/terms-and-conditions'>terms and conditions</a>. (in Welsh)",
+  thePersonal: 'Why we collect your personal data (in Welsh)',
   personalInformation:
-    "Weithiau efallai y bydd angen inni anfon eich gwybodaeth bersonol tu allan i'r DU. Pan fyddwn yn gwneud hyn, byddwn yn cydymffurfio â chyfraith diogelu data.",
-  yourRights: 'Eich hawliau',
-  youCanAsk: 'Gallwch ofyn:',
-  toSeePersonal: 'i gael gweld y data personol rydym yn ei gadw amdanoch',
-  toHavePersonal: "i'r data personol gael ei gywiro",
+    'Most of the personal information we process is provided to us directly by you for one the purposes of applying to adopt a child. (in Welsh)',
+  whenYouUseAdoptionService: 'We collect your personal data to: (in Welsh)',
+  applicationProcess: 'process your application (in Welsh)',
+  legalRequirements: 'meet legal requirements (in Welsh)',
+  improvementService: 'make improvements to this service (in Welsh)',
+  personalDataProcessApplication:
+    'Our staff use your personal data to process your application. They work in the UK and your data is stored in the UK. (in Welsh)',
+  collectPersonalData: 'The personal data we collect (in Welsh)',
+  onlineAdoptionServiceUse: 'When you use the online adoption service we ask for your: (in Welsh)',
+  nameAndOthers: 'name, and any other names you are known as (in Welsh)',
+  emailAddress: 'email address (in Welsh)',
+  phoneNumber: 'phone number (in Welsh)',
+  homeAddress: 'home address (in Welsh)',
+  dateOfBirth: 'date of birth (in Welsh)',
+  occupation: 'occupation (in Welsh)',
+  specialCategoriesInformation:
+    'We also collect special categories of information via protected characteristic questions which are optional, such as: (in Welsh)',
+  race: 'race or ethnicity (in Welsh)',
+  health: 'health, sex life or sexual orientation (in Welsh)',
+  genetics: 'genetics or biometrics (in Welsh)',
+  religiousBeliefs: 'religious or philosophical beliefs (in Welsh)',
+  usingYourData: 'Using your data (in Welsh)',
+  asPart:
+    'As part of your application you’ll be asked to use your email address to set up an account. You will be able to use this email address and password to sign into other HMCTS services. (in Welsh)',
+  weMayAskForPermission:
+    'We may ask for your permission to use your email address to send you emails using GOV.UK Notify. This system processes emails only within the European Economic Area until the point where emails are handed over to the email provider you use. (in Welsh)',
+  weUseCookies:
+    "We use <a class='govuk-link' href='/cookies'>cookies</a> to collect data that tells us about how you’re using this service, including: (in Welsh)",
+  ifYouOpenEmail: 'if you open an email from us or click on a link in an email (in Welsh)',
+  yourComputer: 'your computer, phone or tablet’s IP address (in Welsh)',
+  theRegion: 'the region or town where you’re using your computer, phone or tablet (in Welsh)',
+  theWeb: 'the web browser you use (in Welsh)',
+  storingYourData: 'Storing your data (in Welsh)',
+  savedInformation:
+    'Information you enter in the online adoption service is saved until you decide to submit it. This allows you to save what you are doing and continue later. Saved information that you do not submit will be deleted after 180 days. (in Welsh)',
+  postSubmissionData:
+    'After you submit your application, the information you entered will be stored for 100 years and then deleted. (in Welsh)',
+  sharingYourData: 'Sharing your data (in Welsh)',
+  ifAnother:
+    'While processing your application, another government department, agency or organisation might be involved and we may share your data with them. (in Welsh)',
+  ifYouContactUs:
+    'If you contact us and ask for help with the service you’re using, your personal data may be shared with the <a class="govuk-link" href="https://www.goodthingsfoundation.org/" target="_blank">Good Things Foundation (opens in a new window)</a>. This is a company who we have partnered with to offer face to face support. (in Welsh)',
+  crime:
+    'In some circumstances we may share your data. For example, to prevent or detect crime, or to produce anonymised statistics. (in Welsh)',
+  weUse:
+    "We use Google Analytics to collect data about how a website is used. This anonymous data is shared with Google. Find out about this in our <a class='govuk-link' href='/terms-and-conditions'>terms and conditions</a>. (in Welsh)",
+  lawfulBases:
+    'Under the UK General Data Protection Regulation (UK GDPR), the lawful bases we rely on for processing this information are: (in Welsh)',
+  consent:
+    'Your consent. You are able to withdraw your consent at any time. You can do this by contacting Disclosure Team, Post point 10.24, 102 Petty France, London, SW1H 9AJ (in Welsh)',
+  legalObligation: 'We have a legal obligation. (in Welsh)',
+  vitalInterest: 'We have a vital interest. (in Welsh)',
+  publicTask: 'We need it to perform a public task. (in Welsh)',
+  legitimateInterest: 'We have a legitimate interest (in Welsh)',
+  storeAndShare: 'Storing and sharing your data internationally (in Welsh)',
+  personalInformationOutsideUK:
+    'Sometimes we need to send your personal information outside of the UK. When we do this we comply with data protection law. (in Welsh)',
+  yourRights: 'Your rights (in Welsh)',
+  youCanAsk: 'You can ask: (in Welsh)',
+  toSeePersonal: 'to see the personal data that we hold on you (in Welsh)',
+  toHavePersonal: 'to have the personal data corrected (in Welsh)',
   toHaveDataRemoved:
-    "i'r data personol gael ei ddileu (bydd hyn yn ddibynnol ar yr amgylchiadau, er enghraifft os ydych chi’n penderfynu peidio â pharhau gyda’ch cais)",
+    'to have the personal data removed or deleted (this will depend on the circumstances, for example if you decide not to continue your application) (in Welsh)',
   thatAccessIsRestricted:
-    "i gyfyngu ar y mynediad at y data personol (er enghraifft, gallwch ofyn i'ch data gael ei storio am gyfnod hirach a pheidio â chael ei ddileu'n awtomatig)",
-  ifYouWantToSeePersonal: 'Os ydych eisiau gweld y data personol rydym yn ei gadw amdanoch, gallwch:',
+    'that access to the personal data is restricted (for example, you can ask to have your data stored for longer and not automatically deleted) (in Welsh)',
+  personalDataNotProcessed: 'that your personal data is not processed (in Welsh)',
+  transferPersonalInformation:
+    'that we transfer the personal information you gave us to another organisation, or to you, in certain circumstances (in Welsh)',
+  ifYouWantToSeePersonal: 'If you want to see the personal data that we hold on you, you can: (in Welsh)',
   completeForm:
-    "lenwi ffurflen i wneud <a class='govuk-link' href='https://www.gov.uk/government/publications/request-your-personal-data-from-moj'>cais gwrthrych am wybodaeth</a> - bydd eich cais yn mynd i'r rheolydd data, sef MoJ",
-  writeToUs: 'ysgrifennu atom yn: Disclosure Team, Post point 10.38, 102 Petty France, Llundain, SW1H 9AJ',
-  askMoreInformation: 'Gallwch ofyn am fwy o wybodaeth am:',
-  agreementsWeHave: 'gytundebau sydd gennym ar rannu gwybodaeth gyda sefydliadau eraill',
-  withoutTellingYou: 'pryd y caniateir inni drosglwyddo gwybodaeth bersonol amdanoch heb roi gwybod ichi',
-  ourInstructions: 'ein cyfarwyddiadau i staff ynghylch sut i gasglu, defnyddio neu ddileu eich gwybodaeth bersonol',
-  howWeCheck: 'sut rydym yn gwirio bod yr wybodaeth sydd gennym yn gywir ac yn gyfredol',
-  mojProtection: 'Gallwch gysylltu â swyddog diogelu data’r MoJ drwy:',
-  pettyFrance: 'ysgrifennu atom yn: Post point 10.38, 102 Petty France, Llundain, SW1H 9AJ',
-  emailing:
-    'anfon neges e-bost i: <a href="mailto:data.compliance@justice.gov.uk" class="govuk-link">data.compliance@justice.gov.uk</a>',
-  howToComplain: 'Sut i gwyno',
+    "complete a form to make a <a class='govuk-link' href='https://www.gov.uk/government/publications/request-your-personal-data-from-moj' target='_blank'>subject access request (opens in a new window)</a>. Your request goes to the MoJ as data controller (in Welsh)",
+  writeToUs: 'write to us: Disclosure Team, Post point 10.38, 102 Petty France, London, SW1H 9AJ (in Welsh)',
+  emailUs:
+    'email: <a href="mailto:data.access@justice.gov.uk" class="govuk-link">data.access@justice.gov.uk</a> (in Welsh)',
+  askMoreInformation: 'You can ask for more information about: (in Welsh)',
+  agreementsWeHave: 'agreements we have on sharing information with other organisations (in Welsh)',
+  withoutTellingYou: 'when we are allowed to pass on personal information without telling you (in Welsh)',
+  ourInstructions: 'our instructions to staff on how to collect, use or delete your personal information (in Welsh)',
+  howWeCheck: 'how we check that the information we hold is accurate and up-to-date (in Welsh)',
+  howToComplain: 'How to complain (in Welsh)',
   seeOurComplaints:
-    "Gweler ein <a class='govuk-link' href='https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service/about/complaints-procedure'>proses gwyno</a> os ydych eisiau cwyno am sut rydym wedi trin eich data personol.",
-  writeTo: 'Ysgrifennwch at: Post point 10.38, 102 Petty France, Llundain, SW1H 9AJ',
-  email:
-    'Anfonwch neges e-bost i: <a href="mailto:data.compliance@justice.gov.uk" class="govuk-link">data.compliance@justice.gov.uk</a>',
+    "See our <a class='govuk-link' href='https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service/about/complaints-procedure' target='_blank'>complaints procedure (opens in a new window)</a> if you want to complain about how we've handled your personal data. (in Welsh)",
+  concernsDataProtection:
+    'If you have any concerns about our use of your personal data, you can contact the MoJ data protection officer: (in Welsh)',
+  mojAddress:
+    'Data Protection Officer <br/> Ministry of Justice <br/> 3rd Floor, Post Point 3.20 <br/> 10 South Colonnades <br/> Canary Wharf <br/> London <br/> E14 4PU (in Welsh)',
+  mojEmailAddress: '<a href="mailto:dpo@justice.gov.uk" class="govuk-link">dpo@justice.gov.uk</a> (in Welsh)',
   youCanAlsoComplain:
-    "Gallwch hefyd gyflwyno cwyn i <a class='govuk-link' href='https://ico.org.uk/global/contact-us'>Swyddfa’r Comisiynydd Gwybodaeth</a> os ydych yn anfodlon â’n hymateb neu'n credu nad ydym yn prosesu eich data personol yn gyfreithlon.",
-});
+    "You can also complain to the <a class='govuk-link' href='https://ico.org.uk/global/contact-us'>Information Commissioner’s Office</a> if you’re not satisfied with our response or believe we are not processing your personal data lawfully. (in Welsh)",
+  icoAddress:
+    'Information Commissioner’s Office <br/> Wycliffe House <br/> Water Lane <br/> Wilmslow <br/> Cheshire <br/> SK9 5AF (in Welsh)',
+  icoHelplineNumber: 'Helpline number: 0303 123 1113 (in Welsh)',
+  icoWebsite: "ICO website: <a class='govuk-link' href='https://ico.org.uk'>https://www.ico.org.uk</a> (in Welsh)",
+};
 
 const languages = {
   en,
@@ -191,5 +229,5 @@ const languages = {
 };
 
 export const generateContent: TranslationFn = content => {
-  return languages[content.language]();
+  return languages[content.language];
 };

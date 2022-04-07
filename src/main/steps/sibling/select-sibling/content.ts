@@ -22,19 +22,19 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
+const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  label: 'What sibling or half-sibling do you want to add a court order for? (in Welsh)',
-  addAnotherSibling: 'Add a different sibling or half-sibling (in Welsh)',
+  label: 'Pa frawd/chwaer neu hanner frawd/hanner chwaer ydych chi eisiau gorchymyn llys ar eu cyfer?',
+  addAnotherSibling: 'Ychwanegu brawd/chwaer neu hanner frawd/hanner chwaer gwahanol',
   errors: {
     selectedSiblingId: {
-      required: 'Please answer the question (in Welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
     siblingFirstName: {
-      required: 'Enter their first names (in Welsh)',
+      required: 'Nac ydwdwch eu henw(au) cyntaf',
     },
     siblingLastNames: {
-      required: 'Enter their last names (in Welsh)',
+      required: 'Nac ydwdwch eu cyfenw(au)',
     },
   },
 });

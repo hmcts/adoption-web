@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
@@ -10,6 +11,7 @@ const enContent = {
   section: "The child's details",
   title: 'Orders already in place',
   placementOrder: 'Placement Order',
+  incomplete: 'incomplete',
   change: 'Change',
   remove: 'Remove',
   label: 'Do you want to add another order?',
@@ -19,25 +21,58 @@ const enContent = {
       required: 'Please select an answer',
     },
   },
+  placementOrderListItems: [
+    {
+      key: { text: 'Placement Order', classes: 'font-normal' },
+      value: { classes: 'summary-list-value', html: '' },
+      actions: {
+        classes: 'summary-list-actions',
+        items: [
+          {
+            href: '/children/placement-order-check-your-answers?change=MOCK_ID',
+            text: 'Change',
+            visuallyHiddenText: 'Placement Order',
+          },
+        ],
+      },
+    },
+  ],
 };
 
 const cyContent = {
-  section: "The child's details (in welsh)",
-  title: 'Orders already in place (in welsh)',
-  placementOrder: 'Placement Order (in welsh)',
-  change: 'Change (in welsh)',
-  remove: 'Remove (in welsh)',
-  label: 'Do you want to add another order? (in welsh)',
-  hint: 'We need details of all orders already in place. Your social worker or adoption agency can help provide these details. (in welsh)',
+  section: 'Manylion y plentyn',
+  title: 'Gorchmynion sydd eisoes mewn lle',
+  placementOrder: 'Gorchymyn Lleoli',
+  incomplete: 'anghyflawn',
+  change: 'Newid',
+  remove: 'Dileu',
+  label: 'A ydych eisiau ychwanegu gorchymyn arall?',
+  hint: 'Mae arnom angen manylion y gorchmynion sydd eisoes mewn lle. Gall eich gweithiwr cymdeithasol neu’ch asiantaeth fabwysiadu eich helpu i ddarparu’r manylion hyn.',
   errors: {
     addAnotherPlacementOrder: {
-      required: 'Please select an answer (in welsh)',
+      required: 'Dewiswch ateb os gwelwch yn dda',
     },
   },
+  placementOrderListItems: [
+    {
+      key: { text: 'Gorchymyn Lleoli', classes: 'font-normal' },
+      value: { classes: 'summary-list-value', html: '' },
+      actions: {
+        classes: 'summary-list-actions',
+        items: [
+          {
+            href: '/children/placement-order-check-your-answers?change=MOCK_ID',
+            text: 'Newid',
+            visuallyHiddenText: 'Gorchymyn Lleoli',
+          },
+        ],
+      },
+    },
+  ],
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('children > placement-order-summary content', () => {
+describe('children > placement-order-summary > content', () => {
   const commonContent = {
     language: 'en',
     userCase: {
@@ -54,43 +89,11 @@ describe('children > placement-order-summary content', () => {
   } as CommonContent;
 
   test('should return correct english content', () => {
-    const generatedContent = generateContent(commonContent);
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.title).toEqual(enContent.title);
-    expect(generatedContent.placementOrder).toEqual(enContent.placementOrder);
-    expect(generatedContent.change).toEqual(enContent.change);
-    expect(generatedContent.remove).toEqual(enContent.remove);
-    expect(generatedContent.label).toEqual(enContent.label);
-    expect(generatedContent.hint).toEqual(enContent.hint);
-    expect(generatedContent.errors).toEqual(enContent.errors);
-    expect(generatedContent.placementOrderListItems).toEqual([
-      {
-        key: { text: 'Placement Order', classes: 'font-normal' },
-        value: { classes: 'summary-list-value', html: '' },
-        actions: {
-          classes: 'summary-list-actions',
-          items: [
-            {
-              href: '/children/placement-order-check-your-answers?change=MOCK_ID',
-              text: 'Change',
-              visuallyHiddenText: 'change',
-            },
-          ],
-        },
-      },
-    ]);
+    languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
-    const generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.title).toEqual(cyContent.title);
-    expect(generatedContent.placementOrder).toEqual(cyContent.placementOrder);
-    expect(generatedContent.change).toEqual(cyContent.change);
-    expect(generatedContent.remove).toEqual(cyContent.remove);
-    expect(generatedContent.label).toEqual(cyContent.label);
-    expect(generatedContent.hint).toEqual(cyContent.hint);
-    expect(generatedContent.errors).toEqual(cyContent.errors);
+    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
   test('should contain addAnotherPlacementOrder field', () => {

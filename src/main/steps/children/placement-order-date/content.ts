@@ -20,18 +20,18 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
-  section: "The child's details (in welsh)",
-  label: 'What date is on the placement order? (in welsh)',
-  hint: 'For example, 31 3 2020 (in welsh)',
+const cy: typeof en = () => ({
+  section: 'Manylion y plentyn',
+  label: 'Pa ddyddiad sydd ar y gorchymyn lleoli?',
+  hint: 'Er enghraifft, 31 3 2020',
   errors: {
     placementOrderDate: {
-      required: 'Enter the placement order date (in welsh)',
-      incompleteDay: 'Date must include a day (in welsh)',
-      incompleteMonth: 'Date must include a month (in welsh)',
-      incompleteYear: 'Date must include a year (in welsh)',
-      invalidDate: 'Enter a real date (in welsh) (in welsh)',
-      invalidDateInFuture: 'Date must be in the past (in welsh)',
+      required: 'Nac ydwdwch ddyddiad y gorchymyn lleoli',
+      incompleteDay: 'Rhaid i’r dyddiad gynnwys diwrnod',
+      incompleteMonth: 'Rhaid i’r dyddiad gynnwys mis',
+      incompleteYear: 'Rhaid i’r dyddiad gynnwys blwyddyn',
+      invalidDate: 'Nac ydwdwch ddyddiad dilys',
+      invalidDateInFuture: 'Rhaid i’r dyddiad fod yn y gorffennol',
     },
   },
 });

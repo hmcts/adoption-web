@@ -21,21 +21,21 @@ const en = () => ({
   },
 });
 
-const cy = () => ({
-  section: "The child's details (in welsh)",
-  title: "What is the child's full name? (in welsh)",
+const cy: typeof en = () => ({
+  section: 'Manylion y plentyn',
+  title: 'Beth yw enw llawn y plentyn?',
   line1:
-    "Enter the child's full name, as it's written on their birth certificate. Ask the adoption agency or social worker if you're not sure. (in welsh)",
-  firstName: 'First names (in welsh)',
-  firstNameHint: '(Include any given or middle names) (in welsh)',
-  lastName: 'Last names (in welsh)',
-  lastNameHint: '(Include surname or family names) (in welsh)',
+    'Nac ydwdwch enw llawn y plentyn, fel y mae wedi’i ysgrifennu ar eu tystysgrif geni. Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
+  firstName: 'Enwau cyntaf',
+  firstNameHint: '(Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol)',
+  lastName: 'Cyfenwau',
+  lastNameHint: '(Cofiwch gynnwys cyfenw neu enwau teuluol)',
   errors: {
     childrenFirstName: {
-      required: "Enter the child's first names (in welsh)",
+      required: 'Nac ydwdwch enw(au) cyntaf y plentyn',
     },
     childrenLastName: {
-      required: "Enter the child's last names (in welsh)",
+      required: 'Nac ydwdwch gyfenw(au)’r plentyn',
     },
   },
 });

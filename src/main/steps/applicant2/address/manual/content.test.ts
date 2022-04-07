@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormOptions } from '../../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../../common/common.content';
 import {
@@ -13,8 +14,8 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Second applicant (in welsh)',
-  title: "What's your home address? (in welsh)",
+  section: 'Ail geisydd',
+  title: 'Beth yw eich cyfeiriad cartref?',
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
@@ -33,25 +34,36 @@ describe('applicant2 > address > manual > content', () => {
 
   test('should return correct english content', () => {
     const manualAddressContent = generateManualAddressContent(commonContent);
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.title).toEqual(enContent.title);
-    expect(generatedContent.errors).toEqual({
-      applicant2Address1: (manualAddressContent.errors as any).address1,
-      applicant2AddressTown: (manualAddressContent.errors as any).addressTown,
-      applicant2AddressPostcode: (manualAddressContent.errors as any).addressPostcode,
-    });
+    const manualAddressErrors = manualAddressContent.errors as Record<string, unknown>;
+    languageAssertions(
+      'en',
+      {
+        ...enContent,
+        errors: {
+          applicant2Address1: manualAddressErrors.address1,
+          applicant2AddressTown: manualAddressErrors.addressTown,
+          applicant2AddressPostcode: manualAddressErrors.addressPostcode,
+        },
+      },
+      () => generateContent(commonContent)
+    );
   });
 
   test('should return correct welsh content', () => {
     const manualAddressContent = generateManualAddressContent({ ...commonContent, language: 'cy' });
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.title).toEqual(cyContent.title);
-    expect(generatedContent.errors).toEqual({
-      applicant2Address1: (manualAddressContent.errors as any).address1,
-      applicant2AddressTown: (manualAddressContent.errors as any).addressTown,
-      applicant2AddressPostcode: (manualAddressContent.errors as any).addressPostcode,
-    });
+    const manualAddressErrors = manualAddressContent.errors as Record<string, unknown>;
+    languageAssertions(
+      'cy',
+      {
+        ...cyContent,
+        errors: {
+          applicant2Address1: manualAddressErrors.address1,
+          applicant2AddressTown: manualAddressErrors.addressTown,
+          applicant2AddressPostcode: manualAddressErrors.addressPostcode,
+        },
+      },
+      () => generateContent({ ...commonContent, language: 'cy' })
+    );
   });
 
   test('should contain applicant2Address1 field', () => {

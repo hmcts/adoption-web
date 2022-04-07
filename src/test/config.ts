@@ -1,13 +1,4 @@
-// import { PropertiesVolume } from '../main/modules/properties-volume';
-// import { Application } from 'express';
-
-// if (!process.env.TEST_PASSWORD) {
-//   new PropertiesVolume().enableFor({ locals: { developmentMode: true } } as unknown as Application);
-// }
-
 import sysConfig from 'config';
-import { getTokenFromApi } from '../main/app/auth/service/get-service-auth-token';
-
 import { IdamUserManager } from './steps/IdamUserManager';
 
 // better handling of unhandled exceptions
@@ -15,12 +6,13 @@ process.on('unhandledRejection', reason => {
   throw reason;
 });
 
-getTokenFromApi();
+const decoded = Buffer.from(process.env.ENDPOINTS as string, 'base64');
+const endpoints = JSON.parse(decoded.toString());
 
 const generateTestUsername = () => `adoption.web.automationTest.${new Date().getTime()}@hmcts.net`;
 const TestUser = generateTestUsername();
 const TestPass = process.env.CITIZEN_PASSWORD || sysConfig.get('e2e.userTestPassword') || '';
-const idamUserManager = new IdamUserManager(sysConfig.get('services.idam.tokenURL'));
+const idamUserManager = new IdamUserManager(endpoints.idamToken);
 
 export const autoLogin = {
   login: (I, username = TestUser, password = TestPass): void => {

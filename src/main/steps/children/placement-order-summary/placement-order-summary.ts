@@ -15,16 +15,17 @@ const isPlacementOrderComplete = (placementOrder, ignorePlacementOrderType) => {
 //eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
 export const placementOrderListItems = (userCase: CaseWithId, content: any): any => {
   return userCase.placementOrders?.map((item, index) => {
+    const text = item.placementOrderType || content.placementOrder;
     return {
       key: {
-        text: item.placementOrderType || content.placementOrder,
+        text,
         classes: 'font-normal',
       },
       value: {
         classes: 'summary-list-value',
         html: isPlacementOrderComplete(item, index === 0)
           ? ''
-          : '<strong class="govuk-tag govuk-tag--yellow">Incomplete</strong>',
+          : `<strong class="govuk-tag govuk-tag--yellow">${content.incomplete}</strong>`,
       },
       actions: {
         classes: 'summary-list-actions',
@@ -35,13 +36,13 @@ export const placementOrderListItems = (userCase: CaseWithId, content: any): any
                 {
                   href: `${CHILDREN_PLACEMENT_ORDER_SUMMARY}?remove=${item.placementOrderId}`,
                   text: content.remove,
-                  visuallyHiddenText: 'remove',
+                  visuallyHiddenText: text,
                 },
               ]),
           {
             href: `${CHILDREN_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS}?change=${item.placementOrderId}`,
             text: content.change,
-            visuallyHiddenText: 'change',
+            visuallyHiddenText: text,
           },
         ],
       },

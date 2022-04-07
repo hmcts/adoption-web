@@ -15,12 +15,12 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Sibling details (in welsh)',
-  for: 'for (in welsh)',
-  orderType: 'Type of order (in welsh)',
-  orderNumber: 'Order case or serial number (in welsh)',
-  change: 'Change (in welsh)',
-  continue: 'Continue (in welsh)',
+  section: 'Manylion y brawd/chwaer',
+  for: 'ar gyfer',
+  orderType: 'Math o neuchymyn',
+  orderNumber: 'Rhif cyfresol neu rif yr achos ar y gorchymyn',
+  change: 'Newid',
+  continue: 'Parhau',
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
@@ -84,7 +84,7 @@ describe('sibling > placement-order-check-your-answers > content', () => {
             {
               href: '/sibling/placement-order-type?change=MOCK_SIBLING_ID/MOCK_PO_ID&returnUrl=/sibling/placement-order-check-your-answers',
               text: 'Change',
-              visuallyHiddenText: 'change-order-type',
+              visuallyHiddenText: 'Type of order',
             },
           ],
         },
@@ -97,7 +97,7 @@ describe('sibling > placement-order-check-your-answers > content', () => {
             {
               href: '/sibling/placement-order-number?change=MOCK_SIBLING_ID/MOCK_PO_ID&returnUrl=/sibling/placement-order-check-your-answers',
               text: 'Change',
-              visuallyHiddenText: 'change-order-number',
+              visuallyHiddenText: 'Order case or serial number',
             },
           ],
         },

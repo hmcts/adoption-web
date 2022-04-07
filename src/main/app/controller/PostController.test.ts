@@ -8,7 +8,7 @@ import { isPhoneNoValid } from '../form/validation';
 
 import { PostController } from './PostController';
 
-// import Mock = jest.Mock;
+import Mock = jest.Mock;
 
 const getNextStepUrlMock = jest.spyOn(steps, 'getNextStepUrl');
 
@@ -91,7 +91,7 @@ describe('PostController', () => {
 
     const req = mockRequest({ body });
     (req.locals.api.triggerEvent as jest.Mock).mockRejectedValueOnce('Error saving');
-    // const logger = req.locals.logger as unknown as MockedLogger;
+    const logger = req.locals.logger as unknown as MockedLogger;
     const res = mockResponse();
     await controller.post(req, res);
 
@@ -101,18 +101,16 @@ describe('PostController', () => {
     });
     expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { MOCK_KEY: 'MOCK_VALUE' }, CITIZEN_UPDATE);
 
-    //TODO uncomment following lines when CCD work is complete
-    // expect(getNextStepUrlMock).not.toHaveBeenCalled();
-    // expect(res.redirect).toBeCalledWith('/request');
-    // expect(logger.error).toBeCalledWith('Error saving', 'Error saving');
+    expect(getNextStepUrlMock).not.toHaveBeenCalled();
+    expect(res.redirect).toBeCalledWith('/request');
+    expect(logger.error).toBeCalledWith('Error saving', 'Error saving');
 
-    //TODO uncomment following line when CCD work is complete
-    // expect(req.session.errors).toEqual([
-    //   {
-    //     errorType: 'errorSaving',
-    //     propertyName: '*',
-    //   },
-    // ]);
+    expect(req.session.errors).toEqual([
+      {
+        errorType: 'errorSaving',
+        propertyName: '*',
+      },
+    ]);
   });
 
   test('rejects with an error when unable to save session data', async () => {
@@ -135,21 +133,6 @@ describe('PostController', () => {
     expect(res.redirect).not.toHaveBeenCalled();
     expect(req.session.errors).toStrictEqual([]);
   });
-
-  //TODO use some other checkbox instead of sameSex
-  // test('uses the last (not hidden) input for checkboxes', async () => {
-  //   getNextStepUrlMock.mockReturnValue('/next-step-url');
-  //   const body = { sameSex: [0, Checkbox.Checked] };
-  //   const controller = new PostController(mockFormContent.fields);
-
-  //   const req = mockRequest({ body });
-  //   const res = mockResponse();
-  //   (req.locals.api.triggerEvent as jest.Mock).mockResolvedValueOnce({ sameSex: Checkbox.Checked });
-
-  //   await controller.post(req, res);
-
-  //   expect(req.session.userCase.sameSex).toEqual(Checkbox.Checked);
-  // });
 
   test('Should save the users data and redirect to the next page if the form is valid with parsed body', async () => {
     getNextStepUrlMock.mockReturnValue('/next-step-url');
@@ -258,7 +241,7 @@ describe('PostController', () => {
   });
 });
 
-// interface MockedLogger {
-//   info: Mock;
-//   error: Mock;
-// }
+interface MockedLogger {
+  info: Mock;
+  error: Mock;
+}

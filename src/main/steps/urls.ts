@@ -153,3 +153,4 @@ export const COOKIES_PAGE: PageLink = '/cookies';
 export const PRIVACY_POLICY: PageLink = '/privacy-policy';
 export const ACCESSIBILITY_STATEMENT: PageLink = '/accessibility-statement';
 export const TERMS_AND_CONDITIONS: PageLink = '/terms-and-conditions';
+export const CONTACT_US: PageLink = '/contact-us';

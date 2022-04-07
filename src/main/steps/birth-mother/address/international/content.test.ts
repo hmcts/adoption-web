@@ -1,3 +1,4 @@
+import languageAssertions from '../../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormOptions } from '../../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../../common/common.content';
 import {
@@ -13,8 +14,8 @@ const enContent = {
 };
 
 const cyContent = {
-  section: "Birth mother's details (in welsh)",
-  title: "What is the birth mother's last known address? (in welsh)",
+  section: 'Manylion y fam fiolegol',
+  title: 'Beth yw cyfeiriad olaf hysbys y fam fiolegol?',
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
@@ -33,23 +34,34 @@ describe('birth-mother > address > international > content', () => {
 
   test('should return correct english content', () => {
     const internationalAddressContent = generateInternationalAddressContent(commonContent);
-    expect(generatedContent.section).toEqual(enContent.section);
-    expect(generatedContent.title).toEqual(enContent.title);
-    expect(generatedContent.errors).toEqual({
-      birthMotherAddress1: (internationalAddressContent.errors as any).address1,
-      birthMotherAddressCountry: (internationalAddressContent.errors as any).addressCountry,
-    });
+    const internationalAddressErrors = internationalAddressContent.errors as Record<string, unknown>;
+    languageAssertions(
+      'en',
+      {
+        ...enContent,
+        errors: {
+          birthMotherAddress1: internationalAddressErrors.address1,
+          birthMotherAddressCountry: internationalAddressErrors.addressCountry,
+        },
+      },
+      () => generateContent(commonContent)
+    );
   });
 
   test('should return correct welsh content', () => {
     const internationalAddressContent = generateInternationalAddressContent({ ...commonContent, language: 'cy' });
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
-    expect(generatedContent.title).toEqual(cyContent.title);
-    expect(generatedContent.errors).toEqual({
-      birthMotherAddress1: (internationalAddressContent.errors as any).address1,
-      birthMotherAddressCountry: (internationalAddressContent.errors as any).addressCountry,
-    });
+    const internationalAddressErrors = internationalAddressContent.errors as Record<string, unknown>;
+    languageAssertions(
+      'cy',
+      {
+        ...cyContent,
+        errors: {
+          birthMotherAddress1: internationalAddressErrors.address1,
+          birthMotherAddressCountry: internationalAddressErrors.addressCountry,
+        },
+      },
+      () => generateContent({ ...commonContent, language: 'cy' })
+    );
   });
 
   test('should contain birthMotherAddress1 field', () => {

@@ -24,15 +24,17 @@
 {% endblock %}
 
 {% block pageTitle %}
-  {{ serviceName }} - {{ title }} - {{ govUk }}
+  {{ serviceName }} - {{ title if title else label}} - {{ govUk }}
 {% endblock %}
+
+{% set feedbackLink = feedback | replace("PAGE_TITLE", title if title else label) %}
 
 {% block beforeContent %}
   {{ govukPhaseBanner({
     tag: {
       text: phase
     },
-    html: feedback + languageToggle
+    html: feedbackLink + languageToggle
   }) }}
   {% block backLink %}
     <a href="#" class="govuk-back-link">{{ back }}</a>
@@ -85,6 +87,10 @@
         {
           href: "/terms-and-conditions",
           text: termsAndConditions
+        },
+        {
+          href: "/contact-us",
+          text: contactUs
         }
       ]
     }
