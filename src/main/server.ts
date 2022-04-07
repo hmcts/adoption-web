@@ -38,9 +38,24 @@ app.use(bodyParser.json() as RequestHandler);
 app.use(bodyParser.urlencoded({ extended: false }) as RequestHandler);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
+  res.setHeader('X-Robots-Tag', 'noindex');
   res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
   next();
 });
+
+app.get('/robots.txt', (req, res) => {
+  res.type('text/plain');
+  res.send('User-agent: *\nDisallow: /');
+});
+
+app.get('/sitemap.xml', (req, res) => {
+  res.type('text/xml');
+  res.send('User-agent: *\nDisallow: /');
+});
+
+app.disable('x-powered-by');
+app.disable('X-Powered-By');
+
 app.use(Express.accessLogger());
 
 new AxiosLogger().enableFor(app);
