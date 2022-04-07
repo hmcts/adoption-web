@@ -25,12 +25,12 @@ export const placementOrderListItems = (siblingId: string, placementOrders: Plac
           {
             href: `${SIBLING_REMOVE_PLACEMENT_ORDER}?remove=${siblingId}/${item.placementOrderId}`,
             text: content.remove,
-            visuallyHiddenText: 'remove',
+            visuallyHiddenText: item.placementOrderType,
           },
           {
             href: `${SIBLING_ORDER_CHECK_YOUR_ANSWERS}?change=${siblingId}/${item.placementOrderId}`,
             text: content.change,
-            visuallyHiddenText: 'change',
+            visuallyHiddenText: item.placementOrderType,
           },
         ],
       },
