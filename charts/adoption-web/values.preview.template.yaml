@@ -4,12 +4,14 @@ nodejs:
   ingressHost: ${SERVICE_FQDN}
   ingressIP: ${INGRESS_IP}
   consulIP: ${CONSUL_LB_IP}
+  devmemoryLimits: 2Gi
+  devmemoryRequests: 512Mi
+  devcpuLimits: 1000m
+  devcpuRequests: 500m
   autoscaling:
     enabled: false
   environment:
     APPINSIGHTS_KEY: '00000000-0000-0000-0000-000000000000'
-    CCD_URL: 'http://ccd-data-store-api-aat.service.core-compute-aat.internal'
-    #CCD_URL: 'http://ccd-data-store-api-adoption-cos-api-pr-51.service.core-compute-preview.internal'
     PCQ_ENABLED: 'true'
 idam-pr:
   enabled: true
