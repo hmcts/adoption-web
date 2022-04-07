@@ -12,6 +12,7 @@ import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { YesOrNo } from '../../../app/case/definition';
 import { PostController } from '../../../app/controller/PostController';
+
 import SameAddressPostController from './SameAddressPostController';
 
 describe('applicant2 > other-names > OtherNamesPostController', () => {
