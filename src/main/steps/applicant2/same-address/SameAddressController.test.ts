@@ -11,6 +11,7 @@ jest.mock('../../../app/form/Form', () => {
 // import { FieldPrefix } from '../../../app/case/case';
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
+import { YesOrNo } from '../../../app/case/definition';
 import { PostController } from '../../../app/controller/PostController';
 
 import SameAddressPostController from './SameAddressController';
@@ -30,6 +31,7 @@ describe('applicant2 > other-names > OtherNamesPostController', () => {
           applicant1AddressTown: 'London',
           applicant1AddressCounty: 'London',
           applicant1AddressPostcode: 'TW7 AAA',
+          applicant2AddressSameAsApplicant1: YesOrNo.YES,
         },
         save: jest.fn(done => done()),
       },
@@ -60,24 +62,28 @@ describe('applicant2 > other-names > OtherNamesPostController', () => {
           applicant1AddressTown: 'London',
           applicant1AddressCounty: 'London',
           applicant1AddressPostcode: 'TW7 AAA',
+          applicant2AddressSameAsApplicant1: YesOrNo.YES,
         });
         mockGetErrors.mockReturnValue([]);
         controller = new SameAddressPostController({});
         req.locals.api.triggerEvent.mockResolvedValue({
-          applicant1Address1: '101',
-          applicant1Address2: 'xyz palace',
-          applicant1AddressTown: 'London',
-          applicant1AddressCounty: 'London',
-          applicant1AddressPostcode: 'TW7 AAA',
+          applicant2Address1: '101',
+          applicant2Address2: 'xyz palace',
+          applicant2AddressTown: 'London',
+          applicant2AddressCounty: 'London',
+          applicant2AddressPostcode: 'TW7 AAA',
         });
       });
 
       test('should set the formData fields in userCase applicant1Address session data', async () => {
         await controller.post(req, res);
         expect(req.session.errors).toEqual([]);
-        // expect(req.session.userCase.applicant1Address1).toEqual([
-        //   { applicant1Address1: '101'},
-        // ]);
+        expect(req.session.userCase.applicant2Address1).toEqual('101');
+        expect(req.session.userCase.applicant2Address2).toEqual('xyz palace');
+        expect(req.session.userCase.applicant2AddressTown).toEqual('London');
+        expect(req.session.userCase.applicant2AddressCounty).toEqual('London');
+        expect(req.session.userCase.applicant2AddressPostcode).toEqual('TW7 AAA');
+
         expect(req.session.save).toHaveBeenCalled();
       });
 
