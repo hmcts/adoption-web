@@ -83,7 +83,7 @@ const en = {
 const cy: typeof en = {
   title: 'Telerau ac amodau',
   thisPage:
-    'Trwy ddefnyddio’r gwasanaeth hwn rydych yn cytuno telerau defnyddio’r gwasanaeth hwn. Ar y wefan hon maent yn cynnwys <a class=”govuk-link” href=”/privacy-policy”>polisi preifatrwydd</a>',
+    'Trwy ddefnyddio’r gwasanaeth hwn rydych yn cytuno telerau defnyddio’r gwasanaeth hwn. Ar y wefan hon maent yn cynnwys <a class="govuk-link" href="/privacy-policy">polisi preifatrwydd</a>',
   termsAndConditionsUsers: 'Terms and conditions for professional users (in Welsh)',
   termsAndConditionsProfessional:
     "If you are a professional user, you'll be asked to agree to the additional terms and conditions of the service after you create a MyHMCTS account. (in Welsh)",
