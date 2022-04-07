@@ -49,10 +49,6 @@ const fields: ToApiConverters = {
           }))
         : [],
   }),
-  applicant2AddressSameAsApplicant1: data => ({
-    applicant2AddressSameAsApplicant1: data.applicant2AddressSameAsApplicant1,
-    ...(data.applicant2AddressSameAsApplicant1 === YesOrNo.YES ? {} : {}),
-  }),
   birthMotherAdditionalNationalities: data => ({
     birthMotherOtherNationalities: (data.birthMotherAdditionalNationalities || []).map(item => ({
       id: generateUuid(),
