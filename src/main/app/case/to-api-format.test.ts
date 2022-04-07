@@ -62,6 +62,7 @@ describe('to-api-format', () => {
     applicant1UploadedFiles: [],
     applicant2UploadedFiles: [],
     applicant1CannotUpload: Checkbox.Checked,
+    applicant2AddressSameAsApplicant1: YesOrNo.YES,
   };
 
   test('should convert results from adoption-web to CCD api format', async () => {
@@ -133,6 +134,7 @@ describe('to-api-format', () => {
       ],
       applicant1StatementOfTruth: 'No',
       applicant2StatementOfTruth: null,
+      applicant2AddressSameAsApplicant1: YesOrNo.YES,
     });
   });
 
