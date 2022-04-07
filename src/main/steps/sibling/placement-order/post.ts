@@ -5,11 +5,11 @@ import { PlacementOrder } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
-import { SIBLING_ORDER_CHECK_YOUR_ANSWERS } from '../../../steps/urls';
+import { CHECK_ANSWERS_URL, SIBLING_ORDER_CHECK_YOUR_ANSWERS } from '../../../steps/urls';
 
 @autobind
 export default class SiblingPlacementOrderPostController extends PostController<AnyObject> {
-  protected ALLOWED_RETURN_URLS: string[] = [SIBLING_ORDER_CHECK_YOUR_ANSWERS];
+  protected ALLOWED_RETURN_URLS: string[] = [SIBLING_ORDER_CHECK_YOUR_ANSWERS, CHECK_ANSWERS_URL];
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
