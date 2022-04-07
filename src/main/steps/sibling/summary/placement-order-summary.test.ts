@@ -37,12 +37,12 @@ describe('placement-order-summary', () => {
             {
               href: '/sibling/remove-placement-order?remove=MOCK_SIBLING_ID/MOCK_ID',
               text: 'Remove',
-              visuallyHiddenText: 'remove',
+              visuallyHiddenText: 'MOCK_TYPE',
             },
             {
               href: '/sibling/placement-order-check-your-answers?change=MOCK_SIBLING_ID/MOCK_ID',
               text: 'Change',
-              visuallyHiddenText: 'change',
+              visuallyHiddenText: 'MOCK_TYPE',
             },
           ],
         },
@@ -59,12 +59,12 @@ describe('placement-order-summary', () => {
             {
               href: '/sibling/remove-placement-order?remove=MOCK_SIBLING_ID/MOCK_ID2',
               text: 'Remove',
-              visuallyHiddenText: 'remove',
+              visuallyHiddenText: 'MOCK_TYPE2',
             },
             {
               href: '/sibling/placement-order-check-your-answers?change=MOCK_SIBLING_ID/MOCK_ID2',
               text: 'Change',
-              visuallyHiddenText: 'change',
+              visuallyHiddenText: 'MOCK_TYPE2',
             },
           ],
         },
@@ -78,12 +78,12 @@ describe('placement-order-summary', () => {
             {
               href: '/sibling/remove-placement-order?remove=MOCK_SIBLING_ID/MOCK_ID3',
               text: 'Remove',
-              visuallyHiddenText: 'remove',
+              visuallyHiddenText: 'MOCK_TYPE3',
             },
             {
               href: '/sibling/placement-order-check-your-answers?change=MOCK_SIBLING_ID/MOCK_ID3',
               text: 'Change',
-              visuallyHiddenText: 'change',
+              visuallyHiddenText: 'MOCK_TYPE3',
             },
           ],
         },

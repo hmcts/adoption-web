@@ -65,7 +65,7 @@ describe('children > placement-order-check-your-answers > content', () => {
             {
               href: '/children/placement-order-number?change=MOCK_ID',
               text: 'Change',
-              visuallyHiddenText: 'change-order-number',
+              visuallyHiddenText: 'Order case or serial number',
             },
           ],
         },
@@ -78,7 +78,7 @@ describe('children > placement-order-check-your-answers > content', () => {
             {
               href: '/children/placement-order-court?change=MOCK_ID',
               text: 'Change',
-              visuallyHiddenText: 'change-order-court',
+              visuallyHiddenText: 'Court',
             },
           ],
         },
@@ -91,7 +91,7 @@ describe('children > placement-order-check-your-answers > content', () => {
             {
               href: '/children/placement-order-date?change=MOCK_ID',
               text: 'Change',
-              visuallyHiddenText: 'change-order-date',
+              visuallyHiddenText: 'Order date',
             },
           ],
         },
@@ -118,7 +118,7 @@ describe('children > placement-order-check-your-answers > content', () => {
             {
               href: '/children/placement-order-type?change=MOCK_ID2',
               text: 'Change',
-              visuallyHiddenText: 'change-order-type',
+              visuallyHiddenText: 'Type of order',
             },
           ],
         },
@@ -131,7 +131,7 @@ describe('children > placement-order-check-your-answers > content', () => {
             {
               href: '/children/placement-order-number?change=MOCK_ID2',
               text: 'Change',
-              visuallyHiddenText: 'change-order-number',
+              visuallyHiddenText: 'Order case or serial number',
             },
           ],
         },
@@ -144,7 +144,7 @@ describe('children > placement-order-check-your-answers > content', () => {
             {
               href: '/children/placement-order-court?change=MOCK_ID2',
               text: 'Change',
-              visuallyHiddenText: 'change-order-court',
+              visuallyHiddenText: 'Court',
             },
           ],
         },
@@ -157,7 +157,7 @@ describe('children > placement-order-check-your-answers > content', () => {
             {
               href: '/children/placement-order-date?change=MOCK_ID2',
               text: 'Change',
-              visuallyHiddenText: 'change-order-date',
+              visuallyHiddenText: 'Order date',
             },
           ],
         },
