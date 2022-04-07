@@ -21,7 +21,7 @@ const cy: typeof en = content => ({
   label: 'A ydych chi’n byw yn y cyfeiriad hwn hefyd?',
   yes: 'Ydw',
   no: 'Nac ydw',
-  applicant1Address: `<div class="govuk-inset-text">${content.userCase.applicant1Address1}<br>${content.userCase.applicant1Address1}<br>${content.userCase.applicant1Address1}</div>`,
+  applicant1Address: `<div class="govuk-inset-text">${content.userCase.applicant1Address1}<br>${content.userCase.applicant1AddressTown}<br>${content.userCase.applicant1AddressPostcode}</div>`,
   errors: {
     applicant2AddressSameAsApplicant1: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
