@@ -1,14 +1,6 @@
 nodejs:
   image: 'hmctspublic.azurecr.io/adoption/web:latest'
   applicationPort: 3000
-  memoryRequests: 1Gi
-  cpuRequests: 1000m
-  memoryLimits: 2Gi
-  cpuLimits: 2500m
-  devmemoryRequests: 1Gi
-  devcpuRequests: 1000m
-  devmemoryLimits: 2Gi
-  devcpuLimits: 2500m
   readinessDelay: 130
   livenessDelay: 130
   autoscaling: # Default is false
