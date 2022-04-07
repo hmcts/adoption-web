@@ -32,6 +32,13 @@ const app = express();
 
 app.enable('trust proxy');
 
+app.use((req, res, next) => {
+  if ((req.method === 'OPTIONS' || req.method === 'TRACE') && req.headers['max-forwards']) {
+    return res.sendStatus(405);
+  }
+  next();
+});
+
 app.locals.developmentMode = process.env.NODE_ENV !== 'production';
 app.use(favicon(path.join(__dirname, '/public/assets/images/favicon.ico')));
 app.use(bodyParser.json() as RequestHandler);
