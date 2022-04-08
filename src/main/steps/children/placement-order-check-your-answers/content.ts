@@ -27,7 +27,7 @@ const placementOrderListItems = (userCase, content) => {
                 {
                   href: `${CHILDREN_PLACEMENT_ORDER_TYPE}?change=${order.placementOrderId}`,
                   text: content.change,
-                  visuallyHiddenText: 'change-order-type',
+                  visuallyHiddenText: content.orderType,
                 },
               ]
             : [],
@@ -41,7 +41,7 @@ const placementOrderListItems = (userCase, content) => {
           {
             href: `${CHILDREN_PLACEMENT_ORDER_NUMBER}?change=${order.placementOrderId}`,
             text: content.change,
-            visuallyHiddenText: 'change-order-number',
+            visuallyHiddenText: content.orderNumber,
           },
         ],
       },
@@ -54,7 +54,7 @@ const placementOrderListItems = (userCase, content) => {
           {
             href: `${CHILDREN_PLACEMENT_ORDER_COURT}?change=${order.placementOrderId}`,
             text: content.change,
-            visuallyHiddenText: 'change-order-court',
+            visuallyHiddenText: content.orderCourt,
           },
         ],
       },
@@ -67,7 +67,7 @@ const placementOrderListItems = (userCase, content) => {
           {
             href: `${CHILDREN_PLACEMENT_ORDER_DATE}?change=${order.placementOrderId}`,
             text: content.change,
-            visuallyHiddenText: 'change-order-date',
+            visuallyHiddenText: content.orderDate,
           },
         ],
       },

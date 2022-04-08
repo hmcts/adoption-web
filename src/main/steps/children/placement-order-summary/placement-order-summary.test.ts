@@ -45,7 +45,7 @@ describe('placement-order-summary', () => {
             {
               href: '/children/placement-order-check-your-answers?change=MOCK_ID',
               text: 'Change',
-              visuallyHiddenText: 'change',
+              visuallyHiddenText: 'Placement Order',
             },
           ],
         },
@@ -59,11 +59,15 @@ describe('placement-order-summary', () => {
         actions: {
           classes: 'summary-list-actions',
           items: [
-            { href: '/children/placement-order-summary?remove=MOCK_ID2', text: 'Remove', visuallyHiddenText: 'remove' },
+            {
+              href: '/children/placement-order-summary?remove=MOCK_ID2',
+              text: 'Remove',
+              visuallyHiddenText: 'MOCK_TYPE2',
+            },
             {
               href: '/children/placement-order-check-your-answers?change=MOCK_ID2',
               text: 'Change',
-              visuallyHiddenText: 'change',
+              visuallyHiddenText: 'MOCK_TYPE2',
             },
           ],
         },
@@ -74,11 +78,15 @@ describe('placement-order-summary', () => {
         actions: {
           classes: 'summary-list-actions',
           items: [
-            { href: '/children/placement-order-summary?remove=MOCK_ID3', text: 'Remove', visuallyHiddenText: 'remove' },
+            {
+              href: '/children/placement-order-summary?remove=MOCK_ID3',
+              text: 'Remove',
+              visuallyHiddenText: 'MOCK_TYPE3',
+            },
             {
               href: '/children/placement-order-check-your-answers?change=MOCK_ID3',
               text: 'Change',
-              visuallyHiddenText: 'change',
+              visuallyHiddenText: 'MOCK_TYPE3',
             },
           ],
         },
