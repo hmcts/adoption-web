@@ -17,6 +17,7 @@ pactWith(
     consumer: 'adoption-web',
     provider: 'ccdDataStoreAPI_Cases',
     logLevel: 'DEBUG',
+    publishVerificationResult: true,
   },
   provider => {
     let caseApi;
