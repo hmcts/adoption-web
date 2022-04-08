@@ -9,7 +9,7 @@ const { pactWith } = require('jest-pact');
 pactWith(
   {
     consumer: 'adoption-web',
-    provider: 'FeeRegister',
+    provider: 'feeRegister_lookUp',
     logLevel: 'DEBUG',
   },
   provider => {
