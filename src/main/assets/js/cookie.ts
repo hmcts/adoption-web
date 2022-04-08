@@ -5,7 +5,7 @@ import { getById, qs } from './selectors';
 const cookieBanner = qs('#cm-cookie-banner');
 const cookieBannerDecision = cookieBanner?.querySelector('.govuk-cookie-banner__decision') as HTMLInputElement;
 const cookieBannerConfirmation = cookieBanner?.querySelector('.govuk-cookie-banner__confirmation') as HTMLInputElement;
-const locale = (getById('locale') as HTMLInputElement)?.value;
+const locale = (getById('cookie_locale') as HTMLInputElement)?.value;
 
 function cookieBannerAccept() {
   const confirmationMessage = cookieBannerConfirmation?.querySelector('p') as HTMLInputElement;

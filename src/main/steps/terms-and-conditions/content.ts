@@ -100,8 +100,8 @@ const cy: typeof en = {
   dispute:
     'Bydd y defnydd a wnewch o’r gwasanaeth hwn ac unrhyw anghydfod sy’n codi o’i ddefnyddio yn cael eu rheoli a’u dehongli yn unol â chyfreithiau Cymru a Lloegr, gan gynnwys, ond heb fod yn gyfyngedig i’r canlynol:',
   dispute1: 'Deddf Camddefnyddio Cyfrifiaduron 1990',
-  dispute2: 'Deddf Diogelu Data 1998 (nes 25 May 2018)',
-  dispute3: 'Deddf Diogelu Data 2018 (gan 25 May 2018)',
+  dispute2: 'Deddf Diogelu Data 1998 (nes 25 Mai 2018)',
+  dispute3: 'Deddf Diogelu Data 2018 (gan 25 Mai 2018)',
   dispute4: 'Rheoliadau Cyffredinol Diogelu Data',
   dispute5: 'Deddf Galluedd Meddyliol 2005',
   responsible: "Sut i ddefnyddio'r gwasanaeth hwn yn gyfrifol",
