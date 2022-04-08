@@ -16,7 +16,7 @@ config.get = jest.fn();
 pactWith(
   {
     consumer: 'adoption-web',
-    provider: 'rpe-service-auth-provider',
+    provider: 's2s_auth',
     logLevel: 'DEBUG',
   },
   provider => {
