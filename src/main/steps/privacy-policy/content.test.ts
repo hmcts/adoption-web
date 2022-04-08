@@ -116,13 +116,12 @@ const en = {
 };
 
 const cy: typeof en = {
-  title: 'The Adoption Service Privacy policy (in Welsh)',
-  info1:
-    'The Ministry of Justice (MoJ) is committed to the protection and security of your personal information. (in Welsh)',
+  title: 'Polisi Preifatrwydd y Gwasanaeth Mabwysiadu',
+  info1: 'Mae’r Weinyddiaeth Gyfiawnder (MoJ) wedi ymrwymo i ddiogelu ac amddiffyn eich gwybodaeth bersonol.',
   info2:
     'Mae’r polisi preifatrwydd hwn yn egluro pam rydym yn casglu eich data personol a beth rydym yn ei wneud ag ef. Mae hefyd yn egluro eich hawliau a sut i’w gorfodi.',
   info3:
-    'It is important that you read this notice so that you are aware of how and why we are using such information. This privacy notice describes how we collect and use personal information during and after your relationship with us, in accordance with data protection law. They will be updated regularly. (in Welsh)',
+    "Mae'n bwysig eich bod yn darllen yr hysbysiad hwn fel eich bod yn ymwybodol o sut a pham yr ydym yn defnyddio gwybodaeth o'r fath. Mae'r hysbysiad preifatrwydd hwn yn disgrifio sut rydym yn casglu ac yn defnyddio gwybodaeth bersonol yn ystod ac ar ôl eich cysylltiad â ni, yn unol â chyfraith diogelu data. Byddant yn cael eu diweddaru'n rheolaidd.",
   whoManages: "Pwy sy’n rheoli'r gwasanaeth hwn",
   managedBy:
     'Gwasanaeth Llysoedd a Thribiwnlysoedd EM (GLlTEM) sy’n rheoli’r gwasanaeth hwn, sef un o asiantaethau gweithredol y Weinyddiaeth Gyfiawnder (MoJ).',
@@ -133,43 +132,43 @@ const cy: typeof en = {
     "Gallwch gael rhagor o wybodaeth am ddefnyddio’r gwasanaeth hwn yn y <a class='govuk-link' href='/terms-and-conditions'>telerau ac amodau</a>.",
   thePersonal: 'Pam rydym ni’n casglu eich data personol',
   personalInformation:
-    'Most of the personal information we process is provided to us directly by you for one the purposes of applying to adopt a child. (in Welsh)',
+    'Mae’r rhan fwyaf o’r wybodaeth bersonol a broseswn yn cael ei darparu i ni yn uniongyrchol gennych chi at ddibenion gwneud cais i fabwysiadu plentyn.',
   whenYouUseAdoptionService: 'Rydym ni’n casglu eich data personol i:',
   applicationProcess: 'prosesu eich cais',
   legalRequirements: 'bodloni gofynion cyfreithiol',
   improvementService: 'gwella’r gwasanaeth hwn',
   personalDataProcessApplication:
     'Mae ein staff yn defnyddio eich data personol i brosesu eich cais. Maent yn gweithio yn y DU ac mae eich data yn cael ei storio yn y DU.',
-  collectPersonalData: 'The personal data we collect (in Welsh)',
-  onlineAdoptionServiceUse: 'When you use the online adoption service we ask for your: (in Welsh)',
-  nameAndOthers: 'name, and any other names you are known as (in Welsh)',
+  collectPersonalData: 'Y data personol rydym ni’n casglu',
+  onlineAdoptionServiceUse: 'Pan fyddwch yn defnyddio’r gwasanaeth mabwysiadu ar-lein hwn, byddwn yn gofyn am eich:',
+  nameAndOthers: 'enw, ac unrhyw enwau eraill yr ydych yn cael eich adnabod wrthynt',
   emailAddress: 'cyfeiriad e-bost',
   phoneNumber: 'rhif ffôn',
-  homeAddress: 'home address (in Welsh)',
+  homeAddress: 'cyfeiriad cartref',
   dateOfBirth: 'dyddiad geni',
   occupation: 'galwedigaeth',
   specialCategoriesInformation:
-    'We also collect special categories of information via protected characteristic questions which are optional, such as: (in Welsh)',
-  race: 'race or ethnicity (in Welsh)',
-  health: 'health, sex life or sexual orientation (in Welsh)',
-  genetics: 'genetics or biometrics (in Welsh)',
-  religiousBeliefs: 'religious or philosophical beliefs (in Welsh)',
+    "Rydym hefyd yn casglu gwybodaeth drwy ofyn cwestiynau am nodweddion gwarchodedig sy'n ddewisol, megis:",
+  race: 'hil neu ethnigrwydd',
+  health: 'iechyd, bywyd rhywiol neu gyfeiriadedd rhywiol',
+  genetics: 'geneteg neu fiometreg',
+  religiousBeliefs: 'credoau crefyddol neu athronyddol',
   usingYourData: 'Defnyddio eich data',
   asPart:
     'Fel rhan o’ch cais fe ofynnir ichi ddefnyddio eich cyfeiriad e-bost i greu cyfrif. Byddwch yn gallu defnyddio’r cyfeiriad e-bost hwn a chyfrinair i fewngofnodi i wasanaethau eraill GLlTEM.',
   weMayAskForPermission:
-    'We may ask for your permission to use your email address to send you emails using GOV.UK Notify. This system processes emails only within the European Economic Area until the point where emails are handed over to the email provider you use. (in Welsh)',
+    'Efallai y byddwn yn gofyn am eich caniatâd i ddefnyddio eich cyfeiriad e-bost i anfon negeseuon e-bost atoch trwy’r system GOV.UK Notify. Mae’r system hon yn prosesu negeseuon e-bost o fewn Ardal Economaidd Ewrop yn unig tan y pwynt lle caiff negeseuon e-bost eu trosglwyddo i’r darparwr e-bost a ddefnyddiwch.',
   weUseCookies:
-    'Pan fydd mabwysiadu yn cael ei wneud yn derfynol, cedwir manylion yr achos am 18 mlynedd. Ar ôl y cyfnod hwnnw, dilëir peth data (o’r gorchymyn amodol a’r gorchymyn terfynol).',
+    "Rydym yn defnyddio <a class='govuk-link' href='/cookies'>cwcis</a> i gasglu data sy’n dweud wrthym sut rydych yn defnyddio’r gwasanaeth hwn, gan gynnwys:",
   ifYouOpenEmail: 'os byddwch yn agor neges e-bost gennym neu’n clicio ar ddolen mewn e-bost',
   yourComputer: "cyfeiriad IP eich cyfrifiadur, eich ffôn symudol neu'ch tabled",
   theRegion: 'yr ardal neu’r dref lle rydych yn defnyddio’ch cyfrifiadur, eich ffôn symudol neu’ch tabled',
   theWeb: 'y porwr gwe rydych yn ei ddefnyddio',
   storingYourData: 'Storio eich data',
   savedInformation:
-    'Information you enter in the online adoption service is saved until you decide to submit it. This allows you to save what you are doing and continue later. Saved information that you do not submit will be deleted after 180 days. (in Welsh)',
+    "Caiff yr wybodaeth rydych yn ei rhoi yn eich cais i fabwysiadu ar-lein ei storio hyd nes y byddwch yn penderfynu cyflwyno’ch cais. Bydd hyn yn eich galluogi i arbed beth ydych yn ei wneud a pharhau â'ch cais yn hwyrach ymlaen. Bydd gwybodaeth sydd wedi cael ei storio nad ydych yn ei chyflwyno yn cael ei dileu ar ôl 180 diwrnod.",
   postSubmissionData:
-    'After you submit your application, the information you entered will be stored for 100 years and then deleted. (in Welsh)',
+    "Ar ôl i chi gyflwyno’ch cais, bydd yr wybodaeth a roesoch yn cael ei storio am 100 mlynedd ac yna'n cael ei dileu.",
   sharingYourData: 'Rhannu eich data',
   ifAnother:
     'Pan fydd eich hawliad neu eich cais ei brosesu, mae’n bosib y byddwn angen cysylltu ag adran, asiantaeth neu sefydliad arall yn y llywodraeth ac efallai y byddwn yn rhannu eich data gyda nhw.',
@@ -180,13 +179,13 @@ const cy: typeof en = {
   weUse:
     "Rydym yn defnyddio Google Analytics i gasglu data am sut y defnyddir gwefan. Mae'r data cyffredinol hwn yn cael ei rannu â Google. Gallwch gael gwybodaeth am hyn yn ein  <a class='govuk-link' href='/terms-and-conditions'>telerau ac amodau</a>.",
   lawfulBases:
-    'Under the UK General Data Protection Regulation (UK GDPR), the lawful bases we rely on for processing this information are: (in Welsh)',
+    'O dan Reoliad Diogelu Data Cyffredinol y DU (GDPR y DU), y seiliau cyfreithlon yr ydym yn dibynnu arnynt ar gyfer prosesu’r wybodaeth hon yw:',
   consent:
-    'Your consent. You are able to withdraw your consent at any time. You can do this by contacting Disclosure Team, Post point 10.24, 102 Petty France, London, SW1H 9AJ (in Welsh)',
-  legalObligation: 'We have a legal obligation. (in Welsh)',
-  vitalInterest: 'We have a vital interest. (in Welsh)',
-  publicTask: 'We need it to perform a public task. (in Welsh)',
-  legitimateInterest: 'We have a legitimate interest (in Welsh)',
+    'Eich caniatâd. Gallwch dynnu eich caniatâd yn ôl ar unrhyw adeg. Gallwch wneud hyn drwy gysylltu â’r Tîm Datgelu, Post point 10.24, 102 Petty France, Llundain SW1H 9AJ',
+  legalObligation: 'Mae gennym rwymedigaeth gyfreithiol.',
+  vitalInterest: 'Mae gennym ddiddordeb hanfodol.',
+  publicTask: 'Mae ei angen arnom i gyflawni tasg gyhoeddus.',
+  legitimateInterest: 'Mae gennym ddiddordeb dilys',
   storeAndShare: 'Storio a rhannu eich data’n rhyngwladol',
   personalInformationOutsideUK:
     "Weithiau efallai y bydd angen inni anfon eich gwybodaeth bersonol y tu allan i'r DU. Pan fyddwn yn gwneud hyn, byddwn yn cydymffurfio â chyfraith diogelu data.",
@@ -198,10 +197,10 @@ const cy: typeof en = {
     "i'r data personol gael ei symud neu ei ddileu (bydd hyn yn ddibynnol ar yr amgylchiadau, er enghraifft os ydych chi’n penderfynu peidio â pharhau gyda’ch cais)",
   thatAccessIsRestricted:
     "i gyfyngu ar y mynediad at y data personol (er enghraifft, gallwch ofyn i'ch data gael ei storio am gyfnod hirach a pheidio â chael ei ddileu'n awtomatig)",
-  personalDataNotProcessed: 'that your personal data is not processed (in Welsh)',
+  personalDataNotProcessed: 'nad yw eich data personol yn cael ei brosesu',
   transferPersonalInformation:
-    'that we transfer the personal information you gave us to another organisation, or to you, in certain circumstances (in Welsh)',
-  ifYouWantToSeePersonal: 'If you want to see the personal data that we hold on you, you can: (in Welsh)',
+    "ein bod yn trosglwyddo'r wybodaeth bersonol a roesoch i ni i sefydliad arall, neu i chi, mewn rhai amgylchiadau",
+  ifYouWantToSeePersonal: 'Os ydych eisiau gweld y data personol rydym yn ei gadw amdanoch, gallwch:',
   completeForm:
     "llenwi ffurflen i wneud <a class='govuk-link' target = 'blank' href='https://www.gov.uk/government/organisations/ministry-of-justice/about/personal-information-charter.cy'>cais gwrthrych am wybodaeth (yn agor mewn ffenestr newydd)</a>. Bydd eich cais yn mynd i’r rheolydd data, sef MoJ.",
   writeToUs: 'ysgrifennu atom yn: Disclosure Team, Post point 10.24, 102 Petty France, Llundain, SW1H 9AJ',
@@ -215,16 +214,15 @@ const cy: typeof en = {
   seeOurComplaints:
     "Gweler ein <a class='govuk-link' target='blank' href='https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service/about/complaints-procedure.cy'>trefn gwyno (yn agor mewn ffenestr newydd)</a> os ydych eisiau cwyno am sut rydym wedi trin eich data personol.",
   concernsDataProtection:
-    'If you have any concerns about our use of your personal data, you can contact the MoJ data protection officer: (in Welsh)',
+    "Os oes gennych unrhyw bryderon am ein defnydd o'ch data personol, gallwch gysylltu â swyddog diogelu data'r MoJ:",
   mojAddress:
-    'Data Protection Officer <br/> Ministry of Justice <br/> 3rd Floor, Post Point 3.20 <br/> 10 South Colonnades <br/> Canary Wharf <br/> London <br/> E14 4PU (in Welsh)',
-  mojEmailAddress: '<a href="mailto:dpo@justice.gov.uk" class="govuk-link">dpo@justice.gov.uk</a> (in Welsh)',
-  youCanAlsoComplain:
-    "Gallwch hefyd gyflwyno cwyn i <a class='govuk-link' href='https://ico.org.uk/global/contact-us'>Swyddfa'r Comisiynydd Gwybodaeth</a> os ydych yn anfodlon â’n hymateb neu'n credu nad ydym yn prosesu eich data personol yn gyfreithlon.",
+    'Swyddog Diogelu Data Y <br/> Weinyddiaeth Gyfiawnder <br/> 3ydd Llawr, Post Point 3.20 <br/> 10 South Colonnades <br/> Canary Wharf <br/> Llundain <br/> E14 4PU',
+  mojEmailAddress: '<a href="mailto:dpo@justice.gov.uk" class="govuk-link">dpo@justice.gov.uk</a>',
+  youCanAlsoComplain: "Gallwch hefyd gwyno i'r ICO os ydych yn anhapus â'r ffordd rydym wedi defnyddio'ch data.",
   icoAddress:
-    'Information Commissioner’s Office <br/> Wycliffe House <br/> Water Lane <br/> Wilmslow <br/> Cheshire <br/> SK9 5AF (in Welsh)',
-  icoHelplineNumber: 'Helpline number: 0303 123 1113 (in Welsh)',
-  icoWebsite: "ICO website: <a class='govuk-link' href='https://ico.org.uk'>https://www.ico.org.uk</a> (in Welsh)",
+    "Swyddfa'r <br/> Comisiynydd Gwybodaeth Wycliffe House <br/> Water Lane <br/> Wilmslow <br/> Swydd <br/> Gaer SK9 5AF",
+  icoHelplineNumber: 'Rhif y llinell gymorth 0303 123 1113',
+  icoWebsite: "Gwefan ICO: <a class='govuk-link' href='https://ico.org.uk'>https://www.ico.org.uk</a>",
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
