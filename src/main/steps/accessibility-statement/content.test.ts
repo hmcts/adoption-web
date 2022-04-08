@@ -104,7 +104,7 @@ const cy = {
   asManyAsPossibleSpeech: "llywio'r rhan fwyaf o'r wefan gan ddefnyddio meddalwedd adnabod llais",
   asManyAsPossibleListen:
     'gwrando ar y rhan fwyaf o’r wefan gan ddefnyddio darllenydd sgrin (gan gynnwys fersiynau diweddaraf NVDA, CCA (Dadansoddwr cyferbyniad lliwiau) a VoiceOver)',
-  simpleAsPossible: "Rydym hefyd wedi gwneud y testun mor syml â phosibl i'w ddeall.",
+  simpleAsPossible: 'Rydym hefyd wedi sicrhau ein bod wedi defnyddio iaith syml.',
   abilityNet:
     '<a href="https://mcmw.abilitynet.org.uk" class="govuk-link" target="_blank">Mae AbilityNet</a> yn rhoi cyngor ar sut i wneud eich dyfais yn haws i’w defnyddio os oes gennych anabledd.',
   howAccessible: "Pa mor hygyrch yw'r wefan hon",
@@ -119,7 +119,7 @@ const cy = {
   phone: 'Ffoniwch: 01634 887900',
   considerYourRequest: 'Byddwn yn ystyried eich cais ac yn ymateb o fewn 10 diwrnod gwaith.',
   reportingAccessibility: "Riportio problemau hygyrchedd gyda'r wefan hon",
-  accessibilityPhoneNumber: 'Ffôn: 01634 887900',
+  accessibilityPhoneNumber: 'Rhif ffôn: 01634 887900',
   improveAccessibility:
     'Rydym wastad yn ceisio gwella hygyrchedd y wefan hon. Os byddwch yn cael unrhyw broblemau nad ydynt yn cael eu crybwyll ar y dudalen hon, neu os ydych yn credu nad ydym yn bodloni gofynion y rheoliadau hygyrchedd, cysylltwch â: <a href=”mailto:adoptionproject@justice.gov.uk” class=”govuk-link”>adoptionproject@justice.gov.uk</a>.',
   enforcementProcedure: 'Y Weithdrefn Orfodi',
@@ -129,7 +129,7 @@ const cy = {
     'Os ydych wedi cysylltu â ni ynghylch mater hygyrchedd ac nad ydych yn fodlon â’n hymateb, gallwch gysylltu â’r <a href="https://www.equalityadvisoryservice.com/" class="govuk-link" target="_blank">Gwasanaeth Chynghori a Chymorth Cydraddoldeb (EASS)</a>.',
   contactingUs: 'Cysylltu â ni dros y ffôn neu ymweld â ni’n bersonol',
   contactCourtDirectly:
-    'Os oes gennych gwestiwn am hygyrchedd yn ein llysoedd teulu, gallwch <a href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode?lng=cy" class="govuk-link" target="blank">cysylltu â’r llys yn uniongyrchol</a>.',
+    "Os oes gennych gwestiwn am hygyrchedd yn ein llysoedd teulu, gallwch <a href='https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode?lng=cy' class='govuk-link' target='_blank'>gysylltu â'r llys yn uniongyrchol</a>.",
   contactTextRelay:
     'Rydym yn darparu gwasanaeth cyfnewid negeseuon testun ar gyfer pobl fyddar, pobl sydd â nam ar eu clyw a phobl sydd â nam ar eu lleferydd.',
   contactInductionLoops:
