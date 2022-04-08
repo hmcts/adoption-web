@@ -119,7 +119,7 @@ const cy = {
   phone: 'Ffoniwch: 01634 887900',
   considerYourRequest: 'Byddwn yn ystyried eich cais ac yn ymateb o fewn 10 diwrnod gwaith.',
   reportingAccessibility: "Riportio problemau hygyrchedd gyda'r wefan hon",
-  accessibilityPhoneNumber: 'Ffôn: 01634 887900',
+  accessibilityPhoneNumber: 'Rhif ffôn: 01634 887900',
   improveAccessibility:
     'Rydym wastad yn ceisio gwella hygyrchedd y wefan hon. Os byddwch yn cael unrhyw broblemau nad ydynt yn cael eu crybwyll ar y dudalen hon, neu os ydych yn credu nad ydym yn bodloni gofynion y rheoliadau hygyrchedd, cysylltwch â: <a href=”mailto:adoptionproject@justice.gov.uk” class=”govuk-link”>adoptionproject@justice.gov.uk</a>.',
   enforcementProcedure: 'Y Weithdrefn Orfodi',
