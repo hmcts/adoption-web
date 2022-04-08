@@ -81,37 +81,37 @@ const en = {
 };
 
 const cy: typeof en = {
-  title: 'Terms and conditions (in Welsh)',
+  title: 'Telerau ac amodau',
   thisPage:
-    'By using this service you’re agreeing to these terms of use. This includes the <a class="govuk-link" href="/privacy-policy">privacy policy</a>. (in Welsh)',
+    'Trwy ddefnyddio’r gwasanaeth hwn rydych yn cytuno telerau defnyddio’r gwasanaeth hwn. Ar y wefan hon maent yn cynnwys <a class="govuk-link" href="/privacy-policy">polisi preifatrwydd</a>',
   termsAndConditionsUsers: 'Terms and conditions for professional users (in Welsh)',
   termsAndConditionsProfessional:
     "If you are a professional user, you'll be asked to agree to the additional terms and conditions of the service after you create a MyHMCTS account. (in Welsh)",
-  whoWeAre: 'Who we are (in Welsh)',
+  whoWeAre: 'Pwy ydym ni',
   managedBy:
-    "This service is managed by Her Majesty's Courts and Tribunals Service (referred to as 'us' or 'we' from now on). You should check these terms and conditions regularly. We may update them at any time without notice. If you continue to use this service after the terms and conditions have changed, you are deemed to have agreed to the changes. (in Welsh)",
-  info: 'Information provided by this service (in Welsh)',
+    'Rheolir y gwasanaeth hwn gan Wasanaeth Llysoedd a Thribiwnlysoedd Ei Mawrhydi a (chyfeirir at y gwasanaeth o hyn ymlaen fel ‘ni’). Dylech wirio’r telerau a’r amodau hyn yn rheolaidd. Gallwn eu diweddaru ar unrhyw adeg heb rybudd. Byddwch yn cytuno i unrhyw newidiadau os byddwch yn parhau i ddefnyddio’r gwasanaeth hwn ar ôl i’r telerau ac amodau gael eu diweddaru.',
+  info: 'Gwybodaeth a ddarperir gan y gwasanaeth hwn',
   service:
-    'This service provides information to support your claim or application. We cannot give legal advice on individual cases. You should answer the questions in the service based on your circumstances and seek legal advice if you need it. (in Welsh)',
-  stored: 'Sharing and storing data (in Welsh)',
+    'Mae’r gwasanaeth hwn yn darparu gwybodaeth i’ch cefnogi. Ni allwn roi cyngor cyfreithiol ar achosion unigol. Dylech ateb y cwestiynau yn y gwasanaeth gan ystyried eich amgylchiadau a chael cyngor cyfreithiol os oes arnoch angen hynny.',
+  stored: 'Rhannu a storio eich data',
   dataStored:
     'Our <a class="govuk-link" href="/privacy-policy">privacy policy</a> explains where your data is stored, and who it is shared with. Our cookie policy explains how this service uses and stores cookies. (in Welsh)',
   applicationLaw: 'Laws applying to this service (in Welsh)',
   dispute:
-    'Your use of this service and any dispute arising from its use will be  governed by and construed in accordance with the laws of England and Wales, including but not limited to the: (in Welsh)',
-  dispute1: 'Computer Misuse Act 1990 (in Welsh)',
-  dispute2: 'Data Protection Act 1998 (until 25 May 2018) (in Welsh)',
-  dispute3: 'Data Protection Act 2018 (from 25 May 2018) (in Welsh)',
+    'Bydd y defnydd a wnewch o’r gwasanaeth hwn ac unrhyw anghydfod sy’n codi o’i ddefnyddio yn cael eu rheoli a’u dehongli yn unol â chyfreithiau Cymru a Lloegr, gan gynnwys, ond heb fod yn gyfyngedig i’r canlynol:',
+  dispute1: 'Deddf Camddefnyddio Cyfrifiaduron 1990',
+  dispute2: 'Deddf Diogelu Data 1998 (nes 25 May 2018)',
+  dispute3: 'Deddf Diogelu Data 2018 (gan 25 May 2018)',
   dispute4: 'General Data Protection Regulation (in Welsh)',
-  dispute5: 'Mental Capacity Act 2005 (in Welsh)',
+  dispute5: 'Deddf Galluedd Meddyliol 2005',
   responsible: 'How to use this service responsibly (in Welsh)',
   risks:
-    "There are risks in using a shared computer (for example, in a library) to access this service. It's your responsibility to be aware of these risks and to avoid using any computer which may leave your personal information accessible to others. You're responsible if you choose to leave a computer unprotected while using this service. You should take your own precautions to ensure that the way you access this service does not expose you to the risk of: (in Welsh)",
-  precautions1: 'viruses (in Welsh)',
-  precautions2: 'malicious computer code (in Welsh)',
-  precautions3: 'other forms of interference which may damage your computer system (in Welsh)',
+    'Mae risgiau yn gysylltiedig â defnyddio cyfrifiadur sydd at ddefnydd y cyhoedd (er enghraifft, mewn caffi rhyngrwyd) i gael mynediad at y gwasanaeth hwn. Eich cyfrifoldeb chi yw bod yn ymwybodol o’r risgiau hyn ac osgoi defnyddio unrhyw gyfrifiadur lle mae posibilrwydd y gall eraill weld eich gwybodaeth bersonol. Chi sy’ n gyfrifol os ydych chi’n dewis gadael cyfrifiadur heb ei ddiogelu tra rydych wedi mewngofnodi i’r gwasanaeth hwn. Dylech ichi gymryd camau priodol eich hun i sicrhau nad yw’r ffordd rydych yn cael mynediad at y gwasanaeth hwn yn eich gadael yn agored i’r perygl o:',
+  precautions1: 'firysau',
+  precautions2: 'cod cyfrifiadur maleisus',
+  precautions3: 'neu niwed o fath arall a allai achosi difrod i’ch system gyfrifiadurol',
   knowinglyIntroducing:
-    'You must not misuse this service by knowingly introducing viruses, trojans, worms, logic bombs or other material which is malicious or technologically harmful. You must not attempt to gain unauthorised access to this service, the system on which it is stored, or any server, computer or database connected to it. You must not attack this site using a denial-of-service attack or a distributed denial-of-service attack. (in Welsh)',
+    "Ni ddylech gamddefnyddio'r gwasanaeth hwn drwy gyflwyno’n fwriadol firysau, ymwelwyr diwahoddiad, mwydod, bomiau rhesymeg neu unrhyw ddeunydd maleisus arall neu sy’n niweidiol i dechnoleg. Ni ddylech geisio cael mynediad heb awdurdod at y gwasanaeth hwn, y system lle caiff ei storio nac unrhyw weinydd, cyfrifiadur neu gronfa ddata sy’n gysylltiedig â’r gwasanaeth. Ni ddylech ymosod ar y wefan hon drwy ymosodiad atal gwasanaeth neu ymosodiad atal gwasanaeth a ddosbarthwyd.",
   personallySensitiveInformation: 'Entering personally sensitive information (in Welsh)',
   containsSeveral:
     'This online service contains several free-text fields in which you may choose to enter information which is personally sensitive. If you enter information about your: (in Welsh)',
@@ -137,7 +137,7 @@ const cy: typeof en = {
     "We don't publish advice. You should get professional or specialist advice before doing anything on the basis of the information in the service. We're not liable for any loss or damage that may come from using this service. This includes: (in Welsh)",
   losses: 'any direct, indirect or consequential losses (in Welsh)',
   civilWrongs:
-    "any loss or damage caused by civil wrongs ('tort (in Welsh)', including negligence), breach of contract or otherwise (in Welsh)",
+    "any loss or damage caused by civil wrongs ('tort', including negligence), breach of contract or otherwise (in Welsh)",
   serviceUse: 'the use of this service, GOV.UK and any websites that are linked to or from it (in Welsh)',
   inabilityToUse: 'the inability to use this service, GOV.UK and any websites that are linked to or from it (in Welsh)',
   damageForeseeable:

@@ -81,7 +81,7 @@ const cy = () => {
     chooseFilePhoto: 'Dewiswch ffeil neu tynnwch lun',
     orStr: 'neu',
     dragDropHere: 'Llusgwch a gollyngwch ffeiliau yma',
-    fileFormats: "Rhaid i'r ffeil fod ar ffurf jpg, bmp, tiff, png neu pdf.",
+    fileFormats: "Rhaid i'r ffeil fod ar ffurf PDF neu MS Word Document.",
     fileSize: 'Caniateir ichi lwytho ffeil sydd hyd at 2MB o ran maint.',
     cannotUploadDocuments: 'Ni allaf lwytho rhai o fy nogfennau / fy holl ddogfennau.',
     cannotUploadWhich: 'Pa ddogfen na allwch ei llwytho?',

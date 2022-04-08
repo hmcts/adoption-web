@@ -22,7 +22,7 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Eligibility to apply to adopt (in Welsh)',
+  section: 'Gofynion cymhwysedd i wneud cais i fabwysiadu',
   label:
     'Ai’r DU, Ynysoedd y Sianel, neu Ynys Manaw yw’r brif wlad preswylio (domisil) i chi a’r ceisydd arall os yw’n berthnasol?',
   domicileNo: 'Ni allwch wneud cais i fabwysiadu plentyn oni bai bod gennych gartref parhaol yma.',
