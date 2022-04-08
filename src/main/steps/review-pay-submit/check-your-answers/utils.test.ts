@@ -30,7 +30,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/applying-with?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Number of applicants',
+                    visuallyHiddenText: 'Number of applicants',
                   },
                 ],
               },
@@ -43,7 +43,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/date-child-moved-in?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Date child moved in',
+                    visuallyHiddenText: 'Date child moved in',
                   },
                 ],
               },
@@ -74,7 +74,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/adoption-agency?change=MOCK_ID_1&returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Name',
+                    visuallyHiddenText: 'Name',
                   },
                 ],
               },
@@ -87,7 +87,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/adoption-agency?change=MOCK_ID_1&returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Phone number',
+                    visuallyHiddenText: 'Phone number',
                   },
                 ],
               },
@@ -100,7 +100,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/adoption-agency?change=MOCK_ID_1&returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Name of contact',
+                    visuallyHiddenText: 'Name of contact',
                   },
                 ],
               },
@@ -113,7 +113,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/adoption-agency?change=MOCK_ID_1&returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Email address of contact',
+                    visuallyHiddenText: 'Email address of contact',
                   },
                 ],
               },
@@ -135,7 +135,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/other-adoption-agency?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Additional adoption agency',
+                    visuallyHiddenText: 'Additional adoption agency',
                   },
                 ],
               },
@@ -148,7 +148,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/adoption-agency?change=MOCK_ID_2&returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Name',
+                    visuallyHiddenText: 'Name',
                   },
                 ],
               },
@@ -161,7 +161,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/adoption-agency?change=MOCK_ID_2&returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Phone number',
+                    visuallyHiddenText: 'Phone number',
                   },
                 ],
               },
@@ -174,7 +174,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/adoption-agency?change=MOCK_ID_2&returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Name of contact',
+                    visuallyHiddenText: 'Name of contact',
                   },
                 ],
               },
@@ -187,7 +187,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/adoption-agency?change=MOCK_ID_2&returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Email address of contact',
+                    visuallyHiddenText: 'Email address of contact',
                   },
                 ],
               },
@@ -209,7 +209,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/other-adoption-agency?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Additional adoption agency',
+                    visuallyHiddenText: 'Additional adoption agency',
                   },
                 ],
               },
@@ -238,7 +238,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/social-worker?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Name',
+                    visuallyHiddenText: 'Name',
                   },
                 ],
               },
@@ -251,7 +251,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/social-worker?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Phone number',
+                    visuallyHiddenText: 'Phone number',
                   },
                 ],
               },
@@ -264,7 +264,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/social-worker?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Email address',
+                    visuallyHiddenText: 'Email address',
                   },
                 ],
               },
@@ -277,7 +277,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/social-worker?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Team email address',
+                    visuallyHiddenText: 'Team email address',
                   },
                 ],
               },
@@ -306,7 +306,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/applicant1/full-name?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Full name',
+                    visuallyHiddenText: 'Full name',
                   },
                 ],
               },
@@ -319,7 +319,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/applicant1/other-names?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Previous names',
+                    visuallyHiddenText: 'Previous names',
                   },
                 ],
               },
@@ -332,7 +332,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/applicant1/dob?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Date of birth',
+                    visuallyHiddenText: 'Date of birth',
                   },
                 ],
               },
@@ -345,7 +345,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/applicant1/occupation?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Occupation',
+                    visuallyHiddenText: 'Occupation',
                   },
                 ],
               },
@@ -360,7 +360,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/applicant1/address/manual?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Address',
+                    visuallyHiddenText: 'Address',
                   },
                 ],
               },
@@ -373,7 +373,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/applicant1/contact-details?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Email address',
+                    visuallyHiddenText: 'Email address',
                   },
                 ],
               },
@@ -386,7 +386,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/applicant1/contact-details?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Phone number',
+                    visuallyHiddenText: 'Phone number',
                   },
                 ],
               },
@@ -408,7 +408,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/applicant1/full-name?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Full name',
+                    visuallyHiddenText: 'Full name',
                   },
                 ],
               },
@@ -421,7 +421,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/applicant1/other-names?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Previous names',
+                    visuallyHiddenText: 'Previous names',
                   },
                 ],
               },
@@ -434,7 +434,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/applicant1/dob?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Date of birth',
+                    visuallyHiddenText: 'Date of birth',
                   },
                 ],
               },
@@ -447,7 +447,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/applicant1/occupation?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Occupation',
+                    visuallyHiddenText: 'Occupation',
                   },
                 ],
               },
@@ -462,7 +462,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/applicant1/address/manual?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Address',
+                    visuallyHiddenText: 'Address',
                   },
                 ],
               },
@@ -475,7 +475,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/applicant1/contact-details?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Email address',
+                    visuallyHiddenText: 'Email address',
                   },
                 ],
               },
@@ -488,7 +488,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/applicant1/contact-details?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Phone number',
+                    visuallyHiddenText: 'Phone number',
                   },
                 ],
               },
@@ -510,7 +510,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/applicant2/full-name?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Full name',
+                    visuallyHiddenText: 'Full name',
                   },
                 ],
               },
@@ -523,7 +523,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/applicant2/other-names?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Previous names',
+                    visuallyHiddenText: 'Previous names',
                   },
                 ],
               },
@@ -536,7 +536,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/applicant2/dob?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Date of birth',
+                    visuallyHiddenText: 'Date of birth',
                   },
                 ],
               },
@@ -549,7 +549,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/applicant2/occupation?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Occupation',
+                    visuallyHiddenText: 'Occupation',
                   },
                 ],
               },
@@ -564,7 +564,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/applicant2/address/manual?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Address',
+                    visuallyHiddenText: 'Address',
                   },
                 ],
               },
@@ -577,7 +577,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/applicant2/contact-details?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Email address',
+                    visuallyHiddenText: 'Email address',
                   },
                 ],
               },
@@ -590,7 +590,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/applicant2/contact-details?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Phone number',
+                    visuallyHiddenText: 'Phone number',
                   },
                 ],
               },
@@ -618,7 +618,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/full-name?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Full name',
+                    visuallyHiddenText: 'Full name',
                   },
                 ],
               },
@@ -631,7 +631,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/date-of-birth?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Date of birth',
+                    visuallyHiddenText: 'Date of birth',
                   },
                 ],
               },
@@ -644,7 +644,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/sex-at-birth?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Sex at birth',
+                    visuallyHiddenText: 'Sex at birth',
                   },
                 ],
               },
@@ -657,7 +657,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/nationality?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Nationality',
+                    visuallyHiddenText: 'Nationality',
                   },
                 ],
               },
@@ -670,7 +670,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/full-name-after-adoption?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Full name after adoption',
+                    visuallyHiddenText: 'Full name after adoption',
                   },
                 ],
               },
@@ -699,7 +699,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-mother/full-name?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Full name',
+                    visuallyHiddenText: 'Full name',
                   },
                 ],
               },
@@ -712,7 +712,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-mother/still-alive?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Alive',
+                    visuallyHiddenText: 'Alive',
                   },
                 ],
               },
@@ -725,7 +725,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-mother/nationality?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Nationality',
+                    visuallyHiddenText: 'Nationality',
                   },
                 ],
               },
@@ -738,7 +738,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-mother/occupation?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Occupation',
+                    visuallyHiddenText: 'Occupation',
                   },
                 ],
               },
@@ -751,7 +751,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-mother/address-known?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Address known',
+                    visuallyHiddenText: 'Address known',
                   },
                 ],
               },
@@ -766,7 +766,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-mother/address/international?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Address',
+                    visuallyHiddenText: 'Address',
                   },
                 ],
               },
@@ -788,7 +788,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-father/name-on-certificate?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Name on birth certificate',
+                    visuallyHiddenText: 'Name on birth certificate',
                   },
                 ],
               },
@@ -801,7 +801,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-father/full-name?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Full name',
+                    visuallyHiddenText: 'Full name',
                   },
                 ],
               },
@@ -814,7 +814,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-father/alive?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Alive',
+                    visuallyHiddenText: 'Alive',
                   },
                 ],
               },
@@ -827,7 +827,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-father/nationality?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Nationality',
+                    visuallyHiddenText: 'Nationality',
                   },
                 ],
               },
@@ -840,7 +840,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-father/occupation?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Occupation',
+                    visuallyHiddenText: 'Occupation',
                   },
                 ],
               },
@@ -853,7 +853,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-father/address-known?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Address known',
+                    visuallyHiddenText: 'Address known',
                   },
                 ],
               },
@@ -868,7 +868,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-father/address/manual?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Address',
+                    visuallyHiddenText: 'Address',
                   },
                 ],
               },
@@ -894,7 +894,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-father/name-on-certificate?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Name on birth certificate',
+                    visuallyHiddenText: 'Name on birth certificate',
                   },
                 ],
               },
@@ -907,7 +907,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-father/full-name?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Full name',
+                    visuallyHiddenText: 'Full name',
                   },
                 ],
               },
@@ -922,7 +922,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-father/alive?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Alive',
+                    visuallyHiddenText: 'Alive',
                   },
                 ],
               },
@@ -948,7 +948,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-father/name-on-certificate?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Name on birth certificate',
+                    visuallyHiddenText: 'Name on birth certificate',
                   },
                 ],
               },
@@ -961,7 +961,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-father/full-name?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Full name',
+                    visuallyHiddenText: 'Full name',
                   },
                 ],
               },
@@ -974,7 +974,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-father/alive?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Alive',
+                    visuallyHiddenText: 'Alive',
                   },
                 ],
               },
@@ -987,7 +987,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-father/nationality?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Nationality',
+                    visuallyHiddenText: 'Nationality',
                   },
                 ],
               },
@@ -1000,7 +1000,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-father/occupation?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Occupation',
+                    visuallyHiddenText: 'Occupation',
                   },
                 ],
               },
@@ -1015,7 +1015,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-father/address-known?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Address known',
+                    visuallyHiddenText: 'Address known',
                   },
                 ],
               },
@@ -1040,7 +1040,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/birth-father/name-on-certificate?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Name on birth certificate',
+                    visuallyHiddenText: 'Name on birth certificate',
                   },
                 ],
               },
@@ -1068,7 +1068,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/other-parent/exists?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Is there another person with parental responsibility?',
+                    visuallyHiddenText: 'Is there another person with parental responsibility?',
                   },
                 ],
               },
@@ -1081,7 +1081,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/other-parent/full-name?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Full name',
+                    visuallyHiddenText: 'Full name',
                   },
                 ],
               },
@@ -1094,7 +1094,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/other-parent/address-known?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Address known',
+                    visuallyHiddenText: 'Address known',
                   },
                 ],
               },
@@ -1109,7 +1109,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/other-parent/address/manual?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Address',
+                    visuallyHiddenText: 'Address',
                   },
                 ],
               },
@@ -1130,7 +1130,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/other-parent/exists?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Is there another person with parental responsibility?',
+                    visuallyHiddenText: 'Is there another person with parental responsibility?',
                   },
                 ],
               },
@@ -1155,7 +1155,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/other-parent/exists?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Is there another person with parental responsibility?',
+                    visuallyHiddenText: 'Is there another person with parental responsibility?',
                   },
                 ],
               },
@@ -1168,7 +1168,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/other-parent/full-name?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Full name',
+                    visuallyHiddenText: 'Full name',
                   },
                 ],
               },
@@ -1183,7 +1183,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/other-parent/address-known?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Address known',
+                    visuallyHiddenText: 'Address known',
                   },
                 ],
               },
@@ -1217,7 +1217,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/placement-order-number?change=MOCK_PLACEMENT_ORDER_ID&returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Order case or serial number',
+                    visuallyHiddenText: 'Order case or serial number',
                   },
                 ],
               },
@@ -1230,7 +1230,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/placement-order-court?change=MOCK_PLACEMENT_ORDER_ID&returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Court',
+                    visuallyHiddenText: 'Court',
                   },
                 ],
               },
@@ -1243,7 +1243,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/placement-order-date?change=MOCK_PLACEMENT_ORDER_ID&returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Date',
+                    visuallyHiddenText: 'Date',
                   },
                 ],
               },
@@ -1261,7 +1261,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/placement-order-type?change=MOCK_PLACEMENT_ORDER_ID2&returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Type of order',
+                    visuallyHiddenText: 'Type of order',
                   },
                 ],
               },
@@ -1274,7 +1274,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/placement-order-number?change=MOCK_PLACEMENT_ORDER_ID2&returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Order case or serial number',
+                    visuallyHiddenText: 'Order case or serial number',
                   },
                 ],
               },
@@ -1287,7 +1287,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/placement-order-court?change=MOCK_PLACEMENT_ORDER_ID2&returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Court',
+                    visuallyHiddenText: 'Court',
                   },
                 ],
               },
@@ -1300,7 +1300,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/placement-order-date?change=MOCK_PLACEMENT_ORDER_ID2&returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Date',
+                    visuallyHiddenText: 'Date',
                   },
                 ],
               },
@@ -1328,7 +1328,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/sibling/exists?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Child siblings or half siblings',
+                    visuallyHiddenText: 'Child siblings or half siblings',
                   },
                 ],
               },
@@ -1341,7 +1341,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/sibling/court-order-exists?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Sibling court orders',
+                    visuallyHiddenText: 'Sibling court orders',
                   },
                 ],
               },
@@ -1354,7 +1354,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/sibling/name?change=MOCK_SIBLING_ID&returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Sibling name',
+                    visuallyHiddenText: 'Sibling name',
                   },
                 ],
               },
@@ -1373,7 +1373,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/sibling/placement-order-type?change=MOCK_SIBLING_ID/MOCK_PLACEMENT_ORDER_ID&returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Type of order',
+                    visuallyHiddenText: 'Type of order',
                   },
                 ],
               },
@@ -1386,7 +1386,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/sibling/placement-order-number?change=MOCK_SIBLING_ID/MOCK_PLACEMENT_ORDER_ID&returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Order case or serial number',
+                    visuallyHiddenText: 'Order case or serial number',
                   },
                 ],
               },
@@ -1407,7 +1407,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/sibling/exists?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Child siblings or half siblings',
+                    visuallyHiddenText: 'Child siblings or half siblings',
                   },
                 ],
               },
@@ -1428,7 +1428,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/sibling/exists?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Child siblings or half siblings',
+                    visuallyHiddenText: 'Child siblings or half siblings',
                   },
                 ],
               },
@@ -1441,7 +1441,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/sibling/court-order-exists?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Sibling court orders',
+                    visuallyHiddenText: 'Sibling court orders',
                   },
                 ],
               },
@@ -1469,7 +1469,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/children/find-family-court?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Family court name',
+                    visuallyHiddenText: 'Family court name',
                   },
                 ],
               },
@@ -1497,7 +1497,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/upload-your-documents?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Uploaded documents',
+                    visuallyHiddenText: 'Uploaded documents',
                   },
                 ],
               },
@@ -1522,7 +1522,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/upload-your-documents?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Uploaded documents',
+                    visuallyHiddenText: 'Uploaded documents',
                   },
                 ],
               },
@@ -1535,7 +1535,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                   {
                     href: '/upload-your-documents?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Change Documents not uploaded',
+                    visuallyHiddenText: 'Documents not uploaded',
                   },
                 ],
               },
