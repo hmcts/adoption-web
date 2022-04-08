@@ -1,19 +1,28 @@
 import * as cookieManager from '@hmcts/cookie-manager';
 
-import { qs } from './selectors';
+import { getById, qs } from './selectors';
 
 const cookieBanner = qs('#cm-cookie-banner');
 const cookieBannerDecision = cookieBanner?.querySelector('.govuk-cookie-banner__decision') as HTMLInputElement;
 const cookieBannerConfirmation = cookieBanner?.querySelector('.govuk-cookie-banner__confirmation') as HTMLInputElement;
+const locale = (getById('locale') as HTMLInputElement)?.value;
 
 function cookieBannerAccept() {
   const confirmationMessage = cookieBannerConfirmation?.querySelector('p') as HTMLInputElement;
-  confirmationMessage.innerHTML = 'You’ve accepted additional cookies. ' + confirmationMessage.innerHTML;
+  if (locale === 'cy') {
+    confirmationMessage.innerHTML = 'Rydych chi wedi derbyn cwcis ychwanegol. ' + confirmationMessage.innerHTML;
+  } else {
+    confirmationMessage.innerHTML = 'You’ve accepted additional cookies. ' + confirmationMessage.innerHTML;
+  }
 }
 
 function cookieBannerReject() {
   const confirmationMessage = cookieBannerConfirmation?.querySelector('p') as HTMLInputElement;
-  confirmationMessage.innerHTML = 'You’ve rejected additional cookies. ' + confirmationMessage.innerHTML;
+  if (locale === 'cy') {
+    confirmationMessage.innerHTML = 'Rydych chi wedi gwrthod cwcis ychwanegol. ' + confirmationMessage.innerHTML;
+  } else {
+    confirmationMessage.innerHTML = 'You’ve rejected additional cookies. ' + confirmationMessage.innerHTML;
+  }
 }
 
 function cookieBannerSaved() {
