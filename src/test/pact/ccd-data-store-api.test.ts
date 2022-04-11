@@ -18,6 +18,7 @@ pactWith(
     provider: 'ccdDataStoreAPI_Cases',
     logLevel: 'DEBUG',
     publishVerificationResult: true,
+    providerVersion: '4b82d7fbb',
   },
   provider => {
     let caseApi;
