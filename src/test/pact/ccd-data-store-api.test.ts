@@ -15,7 +15,7 @@ config.get = jest.fn();
 pactWith(
   {
     consumer: 'adoption-web',
-    provider: 'ccd_data_store',
+    provider: 'ccdDataStoreAPI_Cases',
     logLevel: 'DEBUG',
   },
   provider => {

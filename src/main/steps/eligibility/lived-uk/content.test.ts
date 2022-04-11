@@ -22,7 +22,7 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Eligibility to apply to adopt (in Welsh)',
+  section: 'Gofynion cymhwysedd i wneud cais i fabwysiadu',
   label:
     'A ydych chi, a’r ceisydd arall os yw’n berthnasol, wedi byw yn y DU, Ynysoedd y Sianel neu Ynys Manaw am y 12 mis diwethaf (preswylio’n arferol)?',
   livedUKNo: 'Ni allwch wneud cais i fabwysiadu plentyn oni bai bod gennych gartref parhaol yma.',

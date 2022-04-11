@@ -24,12 +24,12 @@ const cy: typeof en = {
   },
   [StatusCodes.NOT_FOUND]: {
     title: 'Ni ellir dod o hyd i’r dudalen',
-    line1: 'If you typed the web address into the URL bar, check that it is correct. (in welsh)',
-    line2: 'If you pasted the web address, check you copied the entire address. (in welsh)',
+    line1: 'Os bu ichi deipio cyfeiriad y wefan i’r bar URL, gwiriwch ei fod yn gywir.',
+    line2: 'Os bu ichi ludo cyfeiriad y wefan, gwiriwch eich bod wedi copïo’r cyfeiriad cyfan.',
     line3:
-      'If you followed a link, there may be a problem with the service or the link has timed out. You should ask for a new link. (in welsh)',
+      'Os bu ichi ddilyn dolen, efallai bod problem gyda’r gwasanaeth neu fod y ddolen wedi dyddio.  Dylech ofyn am gael dolen newydd.',
     line4:
-      'If you need support for the online adoption service, contact your social worker or adoption agency. (in welsh)',
+      'Os ydych angen cymorth gyda’r gwasanaeth mabwysiadu ar-lein, cysylltwch â’ch gweithiwr cymdeithasol neu asiantaeth fabwysiadu.',
   },
   [StatusCodes.INTERNAL_SERVER_ERROR]: {
     title: 'Yn anffodus, rydym yn cael problemau technegol',

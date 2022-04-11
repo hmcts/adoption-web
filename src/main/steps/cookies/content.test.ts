@@ -1,6 +1,11 @@
-import { TranslationFn } from '../../app/controller/GetController';
+import languageAssertions from '../../../test/unit/utils/languageAssertions';
+import { CommonContent, generatePageContent } from '../common/common.content';
 
-const en = () => ({
+import { generateContent } from './content';
+
+jest.mock('../../app/form/validation');
+
+const en = {
   title: 'Cookies',
   paragraph1:
     'A cookie is a small piece of data that&rsquo;s stored on your computer, tablet, or phone when you visit a website. Most websites need cookies to work properly.',
@@ -93,9 +98,9 @@ const en = () => ({
   sessionEnd: 'Session end',
   dynatraceCookiesAriaDescribedby: 'List of dynatrace cookies used.',
   oneYear: '1 year',
-});
+};
 
-const cy: typeof en = () => ({
+const cy = {
   title: 'Cwcis',
   paragraph1:
     'Darn bach o ddata yw cwci cael ei storio ar eich cyfrifiadur, eich tabled neu eich ffôn symudol pan fyddwch yn ymweld â gwefan yw cwci. Mae angen cwcis ar y rhan fwyaf o wefannau i weithio&rsquo;n iawn.',
@@ -186,13 +191,19 @@ const cy: typeof en = () => ({
   sessionEnd: 'Diwedd y sesiwn',
   dynatraceCookiesAriaDescribedby: 'Rhestr o’r cwcis Dynatrace a ddefnyddir.',
   oneYear: '1 blwyddyn',
+};
+
+describe('cookies > content', () => {
+  const commonContent = generatePageContent({
+    language: 'en',
+    userCase: {},
+  }) as CommonContent;
+
+  test('should return correct english content', () => {
+    languageAssertions('en', en, () => generateContent(commonContent));
+  });
+
+  test('should return correct welsh content', () => {
+    languageAssertions('cy', cy, () => generateContent({ ...commonContent, language: 'cy' }));
+  });
 });
-
-const languages = {
-  en,
-  cy,
-};
-
-export const generateContent: TranslationFn = content => {
-  return languages[content.language]();
-};

@@ -13,10 +13,10 @@ const en = {
 };
 
 const cy: typeof en = {
-  title: 'Adoption (in Welsh)',
-  email: 'Email (in Welsh)',
+  title: 'Mabwysiadu',
+  email: 'E-bost',
   emailAddress:
-    'Email us at <a href="mailto:adoptionproject@justice.gov.uk" class="govuk-link">adoptionproject@justice.gov.uk.</a> (in Welsh)',
+    'Anfonwch neges e-bost i <a href="mailto:adoptionproject@justice.gov.uk" class="govuk-link">adoptionproject@justice.gov.uk.</a>',
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

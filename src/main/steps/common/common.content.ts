@@ -124,7 +124,7 @@ const cy: typeof en = {
   warning: 'Rhybudd',
   required: 'Nid ydych wedi ateb y cwestiwn. Rhaid ichi ddewis ateb cyn symud ymlaen.',
   notAnswered: 'Nid ydych wedi ateb y cwestiwn.',
-  errorSaving: 'Sorry, we are unable to save your application right now. Please try again later. (in welsh)',
+  errorSaving: 'Yn anffodus ni allwn gadw eich cais ar hyn o bryd. Rhowch gynnig arall arni yn hwyrach ymlaen.',
   ogl: 'Mae’r holl gynnwys ar gael o dan <a class="govuk-link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license" >Drwydded Agored y Llywodraeth f3.0</a>, oni nodir fel arall',
   errorSummaryHeading: 'Mae yna broblem',
   saveAndSignOut: 'Cadw ac allgofnodi',
@@ -135,7 +135,7 @@ const cy: typeof en = {
   cookies: 'Cwcis',
   privacyPolicy: 'Polisi preifatrwydd',
   termsAndConditions: 'Telerau ac amodau',
-  contactUs: 'Contact us (in welsh)',
+  contactUs: 'Cysylltwch â ni',
   marriage: 'priodas',
   endingCivilPartnership: 'dod â phartneriaeth sifil i ben',
   civilPartnership: 'partneriaeth sifil',
@@ -178,6 +178,28 @@ const cy: typeof en = {
   telephone: 'Ffoniwch',
   telephoneNumber: '0300 303 5171',
   telephoneDetails: 'Dydd Llun i Ddydd Gwener, 8.30am - 5pm.',
+  cookiesHeading: 'Cwcis ymlaen',
+  cookiesLine1: "Rydym yn defnyddio rhai cwcis hanfodol i wneud i'r gwasanaeth hwn weithio.",
+  cookiesLine2:
+    "Hoffem hefyd ddefnyddio cwcis dadansoddol fel y gallwn ddeall sut rydych yn defnyddio'r gwasanaeth a gwneud gwelliannau.",
+  acceptAnalyticsCookies: 'Derbyn cwcis dadansoddeg',
+  rejectAnalyticsCookies: 'Gwrthod cwcis dadansoddeg',
+  viewCookies: 'Gweld cwcis',
+  hideMessage: "Cuddio'r neges hon",
+  cookiesConfirmationMessage:
+    '<p class="govuk-body">Gallwch chi <a class="govuk-link" href="/cookies">newid eich gosodiadau cwci</a> ar unrhyw bryd.</p>',
+  changeCookiesHeading: 'Newidiwch eich gosodiadau cwci',
+  allowAnalyticsCookies: "Caniatáu cwcis sy'n mesur defnydd gwefan?",
+  useAnalyticsCookies: "Defnyddio cwcis sy'n mesur fy nefnydd gwefan",
+  doNotUseAnalyticsCookies: "Peidiwch â defnyddio cwcis sy'n mesur defnydd fy ngwefan",
+  save: 'Arbed',
+  cookiesSaved: 'Cadwyd eich gosodiadau cwci',
+  additionalCookies:
+    'Gall gwasanaethau’r llywodraeth osod cwcis ychwanegol ac, os felly, bydd ganddynt eu polisi cwcis a’u baner eu hunain.',
+  goToHomepage: 'Ewch i hafan',
+  apmCookiesHeadings: "Caniatáu cwcis sy'n mesur monitro perfformiad cymwysiadau gwefan?",
+  useApmCookies: "Defnyddio cwcis sy'n mesur monitro perfformiad cymwysiadau gwefan",
+  doNotUseApmCookies: "Peidiwch â defnyddio cwcis sy'n mesur monitro perfformiad cymwysiadau gwefan",
 };
 
 export const generatePageContent = ({

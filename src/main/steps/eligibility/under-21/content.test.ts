@@ -21,7 +21,7 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Eligibility to apply to adopt (in Welsh)',
+  section: 'Gofynion cymhwysedd i wneud cais i fabwysiadu',
   label: 'Ydych chi, a’r ceisydd arall os yw’n berthnasol, yn 21 oed neu’n hŷn?',
   under21Yes: 'Rhaid i chi fod yn 21 oed o leiaf i fabwysiadu plentyn. Mae hyn yn cynnwys unrhyw geisydd arall.',
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',

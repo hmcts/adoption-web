@@ -1,6 +1,7 @@
 {% from "govuk/components/cookie-banner/macro.njk" import govukCookieBanner %}
 
 {% set cookieMessageHTML %}
+  <input type="hidden" name="cookie_locale" id="cookie_locale" value="{{ language }}">
   <p class="govuk-body">{{ cookiesLine1 }}</p>
   <p class="govuk-body">{{ cookiesLine2 }}</p>
 {% endset %}
