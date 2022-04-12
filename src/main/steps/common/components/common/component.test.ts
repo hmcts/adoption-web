@@ -18,14 +18,14 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Section (in Welsh)',
-  label: "Is the birth father's name on the birth certificate? (in Welsh)",
-  hint: "Ask the adoption agency or social worker if you're not sure. (in Welsh)",
-  yes: 'Yes (in Welsh)',
-  no: 'No (in Welsh)',
-  unsure: 'Not sure (in Welsh)',
-  continue: 'Save and continue (in Welsh)',
-  saveAsDraft: 'Save as draft (in Welsh)',
+  section: 'Rhan hon',
+  label: 'A yw enw’r tad biolegol ar y dystysgrif geni?',
+  hint: 'Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
+  yes: 'Ydy',
+  no: 'Nac ydy',
+  unsure: 'Ddim yn siŵr',
+  continue: 'Arbed a pharhau',
+  saveAsDraft: 'Cadw a drafftio',
 };
 
 const values = [
