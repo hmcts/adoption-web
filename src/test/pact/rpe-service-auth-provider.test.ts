@@ -40,7 +40,6 @@ pactWith(
           method: 'POST',
           path: '/lease',
           headers: {
-            // Accept: 'application/json, text/plain, */*',
             'content-type': 'application/json',
           },
           body: {
