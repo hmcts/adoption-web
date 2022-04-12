@@ -3,6 +3,8 @@ import { when } from 'jest-when';
 
 import { getTokenFromApi } from '../../main/app/auth/service/get-service-auth-token';
 
+const { Matchers } = require('@pact-foundation/pact');
+const { string } = Matchers;
 const { pactWith } = require('jest-pact');
 
 jest.mock('otplib', () => ({
@@ -21,23 +23,24 @@ pactWith(
   },
   provider => {
     describe('rpe-service-auth-provider API', () => {
-      const EXPECTED_RESPONSE = 'MOCK_TOKEN';
+      const EXPECTED_RESPONSE = 'someMicroServiceToken';
 
       const successResponse = {
         status: 200,
         headers: {
-          'content-type': 'application/json',
+          'Content-Type': 'text/plain;charset=ISO-8859-1',
         },
-        body: EXPECTED_RESPONSE,
+        body: string(EXPECTED_RESPONSE),
       };
 
       const serviceAuthTokenRequest = {
-        uponReceiving: 'a request for service auth token',
+        state: 'microservice with valid credentials',
+        uponReceiving: 'a request for a token for a microservice',
         withRequest: {
           method: 'POST',
           path: '/lease',
           headers: {
-            Accept: 'application/json, text/plain, */*',
+            // Accept: 'application/json, text/plain, */*',
             'content-type': 'application/json',
           },
           body: {
@@ -57,7 +60,6 @@ pactWith(
           .mockReturnValue('mock-secret');
 
         const interaction = {
-          state: 'i request a service auth token',
           ...serviceAuthTokenRequest,
           willRespondWith: successResponse,
         };
