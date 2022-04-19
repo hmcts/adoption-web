@@ -220,51 +220,51 @@ pactWith(
       });
     });
 
-    describe('ccd_data_store case-users API', () => {
-      const EXPECTED_CASE_USER_ROLES = {
-        case_users: [{ case_id: '45678', user_id: '123456', case_role: 'citizen' }],
-      };
+    // describe('ccd_data_store case-users API', () => {
+    //   const EXPECTED_CASE_USER_ROLES = {
+    //     case_users: [{ case_id: '45678', user_id: '123456', case_role: 'citizen' }],
+    //   };
 
-      const getCaseUserRolesResponse = {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: {
-          case_users: [{ case_id: '45678', user_id: '123456', case_role: 'citizen' }],
-        },
-      };
+    //   const getCaseUserRolesResponse = {
+    //     status: 200,
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: {
+    //       case_users: [{ case_id: '45678', user_id: '123456', case_role: 'citizen' }],
+    //     },
+    //   };
 
-      const getCaseUserRolesRequest = {
-        uponReceiving: 'a request to get case-user roles',
-        withRequest: {
-          method: 'GET',
-          path: '/case-users',
-          headers: {
-            Authorization: 'Bearer mock-user-access-token',
-            ServiceAuthorization: 'mock-service-auth-token',
-            experimental: 'true',
-            Accept: '*/*',
-            'Content-Type': 'application/json',
-          },
-          query: 'case_ids=45678&user_ids=123456',
-        },
-      };
+    //   const getCaseUserRolesRequest = {
+    //     uponReceiving: 'a request to get case-user roles',
+    //     withRequest: {
+    //       method: 'GET',
+    //       path: '/case-users',
+    //       headers: {
+    //         Authorization: 'Bearer mock-user-access-token',
+    //         ServiceAuthorization: 'mock-service-auth-token',
+    //         experimental: 'true',
+    //         Accept: '*/*',
+    //         'Content-Type': 'application/json',
+    //       },
+    //       query: 'case_ids=45678&user_ids=123456',
+    //     },
+    //   };
 
-      beforeEach(() => {
-        const interaction = {
-          state: 'adoption-web makes request to get case-users roles',
-          ...getCaseUserRolesRequest,
-          willRespondWith: getCaseUserRolesResponse,
-        };
-        provider.addInteraction(interaction);
-      });
+    //   beforeEach(() => {
+    //     const interaction = {
+    //       state: 'adoption-web makes request to get case-users roles',
+    //       ...getCaseUserRolesRequest,
+    //       willRespondWith: getCaseUserRolesResponse,
+    //     };
+    //     provider.addInteraction(interaction);
+    //   });
 
-      it('return case assigned user roles in response for given caseId and userId', async () => {
-        const caseUserRoles = await caseApi.getCaseUserRoles('45678', userDetails.id);
-        expect(caseUserRoles).toEqual(EXPECTED_CASE_USER_ROLES);
-      });
-    });
+    //   it('return case assigned user roles in response for given caseId and userId', async () => {
+    //     const caseUserRoles = await caseApi.getCaseUserRoles('45678', userDetails.id);
+    //     expect(caseUserRoles).toEqual(EXPECTED_CASE_USER_ROLES);
+    //   });
+    // });
 
     describe('ccd_data_store sendEvent API', () => {
       const EXPECTED_CASE_DATA = {
