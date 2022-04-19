@@ -17,7 +17,7 @@ const enContent = {
 
 const cyContent = {
   section: SECTION_IN_WELSH,
-  label: "What is the occupation of the child's birth father? (in Welsh)",
+  label: 'Beth yw galwedigaeth tad biolegol y plentyn?',
   hint: 'Gofynnwch i’ch asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr. Os yw’r galwedigaeth yn anhysbys, gallwch deipio ‘anhysbys’.',
   errors: {
     [fieldName]: {

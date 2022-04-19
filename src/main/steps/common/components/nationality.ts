@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Case, FieldPrefix } from '../../../app/case/case';
+import { LanguagePreference } from '../../../app/case/definition';
 import { PageContent } from '../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../app/form/Form';
 import { atLeastOneFieldIsChecked, isFieldFilledIn, notSureViolation } from '../../../app/form/validation';
@@ -95,7 +96,7 @@ export const nationalityFields = (userCase: Partial<Case>, fieldPrefix: FieldPre
                   values: [],
                   rows: mapSummaryListContent(
                     userCase[`${fieldPrefix}AdditionalNationalities`]!,
-                    ['Remove'],
+                    [userCase.applicant1LanguagePreference === LanguagePreference.WELSH ? 'Dileu' : 'Remove'],
                     urls[fieldPrefix]
                   ),
                 },

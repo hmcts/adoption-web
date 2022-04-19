@@ -10,7 +10,7 @@ const enContent = {
 
 const cyContent = {
   section: SECTION_IN_WELSH,
-  label: "Is the birth father's name on the birth certificate? (in Welsh)",
+  label: 'A yw enw’r tad biolegol ar y dystysgrif geni?',
   hint: 'Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
 };
 

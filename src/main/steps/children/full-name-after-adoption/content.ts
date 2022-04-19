@@ -26,9 +26,9 @@ const cy: typeof en = () => ({
   line1:
     'Bydd hwn wedi’i nodi ar y dystysgrif geni, felly sicrhewch bod eu henwau wedi’u nodi mor gywir ac sy’n bosib.',
   firstName: 'Enwau cyntaf',
-  firstNameHint: '((Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol))',
+  firstNameHint: '(Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol)',
   lastName: 'Cyfenwau',
-  lastNameHint: '((Cofiwch gynnwys cyfenw neu enwau teuluol))',
+  lastNameHint: '(Cofiwch gynnwys cyfenw neu enwau teuluol)',
   errors: {
     childrenFirstNameAfterAdoption: {
       required: 'Nac ydwdwch eu henw(au) cyntaf',

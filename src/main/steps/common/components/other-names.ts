@@ -1,5 +1,5 @@
 import { Case, FieldPrefix } from '../../../app/case/case';
-import { YesOrNo } from '../../../app/case/definition';
+import { LanguagePreference, YesOrNo } from '../../../app/case/definition';
 import { PageContent } from '../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../app/form/Form';
 import { doesArrayHaveValues, isFieldFilledIn } from '../../../app/form/validation';
@@ -82,7 +82,11 @@ export const otherNamesFields = (userCase: Partial<Case>, fieldPrefix: FieldPref
             ? {
                 [`${fieldPrefix}AdditionalNames`]: {
                   type: 'summarylist',
-                  rows: mapSummaryListContent(userCase[`${fieldPrefix}AdditionalNames`], ['Remove'], urls[fieldPrefix]),
+                  rows: mapSummaryListContent(
+                    userCase[`${fieldPrefix}AdditionalNames`],
+                    [userCase.applicant1LanguagePreference === LanguagePreference.WELSH ? 'Dileu' : 'Remove'],
+                    urls[fieldPrefix]
+                  ),
                 },
               }
             : {}),
