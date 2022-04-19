@@ -35,8 +35,6 @@ pactWith(
       caseApi = getCaseApi(userDetails, logger);
     });
 
-    afterAll(() => provider.finalize());
-
     describe('ccd_data_store getCases API', () => {
       const CASES = [
         {
@@ -77,8 +75,6 @@ pactWith(
         };
         return provider.addInteraction(interaction);
       });
-
-      afterEach(() => provider.verify());
 
       it('returns all cases for a user', async () => {
         const cases = await caseApi.getCases();
@@ -128,8 +124,6 @@ pactWith(
         };
         return provider.addInteraction(interaction);
       });
-
-      afterEach(() => provider.verify());
 
       it('returns case data by id', async () => {
         const caseResponse = await caseApi.getCaseById('45678');
@@ -220,8 +214,6 @@ pactWith(
         provider.addInteraction(interaction2);
       });
 
-      afterEach(() => provider.verify());
-
       it('creates a new case and return case data in response', async () => {
         const caseResponse = await caseApi.createCase('adoption', userDetails);
         expect(caseResponse).toEqual(EXPECTED_CASE_DATA);
@@ -267,8 +259,6 @@ pactWith(
         };
         provider.addInteraction(interaction);
       });
-
-      afterEach(() => provider.verify());
 
       it('return case assigned user roles in response for given caseId and userId', async () => {
         const caseUserRoles = await caseApi.getCaseUserRoles('45678', userDetails.id);
@@ -362,8 +352,6 @@ pactWith(
         };
         provider.addInteraction(interaction2);
       });
-
-      afterEach(() => provider.verify());
 
       it('updates case and return case data in response', async () => {
         const caseResponse = await caseApi.sendEvent(
