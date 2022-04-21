@@ -41,7 +41,8 @@ def secrets = [
     secret('idam-system-user-password', 'TEST_PASSWORD'),
     secret('citizen-user', 'CITIZEN_USERNAME'),
     secret('citizen-password', 'CITIZEN_PASSWORD'),
-    secret('adoption-pcq-token', 'PCQ_TOKEN')
+    secret('adoption-pcq-token', 'PCQ_TOKEN'),
+    secret('endpoints', 'ENDPOINTS')
   ],
   's2s-${env}': [
     secret('microservicekey-adoption-web', 'SERVICE_AUTH_SECRET')

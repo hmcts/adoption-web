@@ -15,7 +15,7 @@ config.get = jest.fn();
 pactWith(
   {
     consumer: 'adoption-web',
-    provider: 'payment_api',
+    provider: 'payment_cardPayment',
     logLevel: 'DEBUG',
   },
   provider => {

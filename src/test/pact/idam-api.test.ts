@@ -8,7 +8,7 @@ const { pactWith } = require('jest-pact');
 pactWith(
   {
     consumer: 'adoption-web',
-    provider: 'Idam_api',
+    provider: 'idamApi_oidc',
     logLevel: 'DEBUG',
   },
   provider => {

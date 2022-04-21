@@ -20,11 +20,11 @@ const enContent = {
 
 const cyContent: typeof enContent = {
   section: SECTION_IN_WELSH,
-  label: "Is the child's birth father still alive? (in Welsh)",
-  ...cyNotSure,
+  label: 'A yw tad biolegol y plentyn dal yn fyw?',
+  ...cyNotSure.content,
   errors: {
     [fieldName]: {
-      required: 'Please answer the question (in Welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
     ...cyNotSure.errors,
   },

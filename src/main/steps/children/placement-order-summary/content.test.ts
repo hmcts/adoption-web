@@ -31,7 +31,7 @@ const enContent = {
           {
             href: '/children/placement-order-check-your-answers?change=MOCK_ID',
             text: 'Change',
-            visuallyHiddenText: 'change',
+            visuallyHiddenText: 'Placement Order',
           },
         ],
       },
@@ -63,7 +63,7 @@ const cyContent = {
           {
             href: '/children/placement-order-check-your-answers?change=MOCK_ID',
             text: 'Newid',
-            visuallyHiddenText: 'change',
+            visuallyHiddenText: 'Gorchymyn Lleoli',
           },
         ],
       },

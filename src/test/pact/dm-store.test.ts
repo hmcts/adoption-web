@@ -8,7 +8,7 @@ jest.spyOn(FormData.prototype, 'getBoundary').mockImplementation(() => '--------
 pactWith(
   {
     consumer: 'adoption-web',
-    provider: 'dm-store',
+    provider: 'em_dm_store',
   },
   provider => {
     let documentManagementClient;
