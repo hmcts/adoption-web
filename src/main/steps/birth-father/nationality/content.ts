@@ -14,6 +14,9 @@ const en = () => ({
   label: "What is the nationality of the child's birth father?",
   url: BIRTH_FATHER_NATIONALITY,
   errors: {
+    addButton: {
+      addButtonNotClicked: "Select 'Add' to save the country name",
+    },
     [`${FieldPrefix.BIRTH_FATHER}Nationality`]: {
       required: "Select a nationality or 'Not sure'",
       notSureViolation: "Select a nationality or 'Not sure'",
@@ -29,6 +32,9 @@ const cy: typeof en = () => ({
   label: 'Beth yw cenedligrwydd tad biolegol y plentyn?',
   url: BIRTH_FATHER_NATIONALITY,
   errors: {
+    addButton: {
+      addButtonNotClicked: "Select 'Add' to save the country name",
+    },
     [`${FieldPrefix.BIRTH_FATHER}Nationality`]: {
       required: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
       notSureViolation: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',

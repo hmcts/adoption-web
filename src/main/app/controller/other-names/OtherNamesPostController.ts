@@ -2,6 +2,7 @@ import autobind from 'autobind-decorator';
 import { Response } from 'express';
 import { v4 as generateUuid } from 'uuid';
 
+import { ValidationError } from '../../../app/form/validation';
 import { FieldPrefix } from '../../case/case';
 import { Form, FormFields, FormFieldsFn } from '../../form/Form';
 import { AppRequest } from '../AppRequest';
@@ -47,6 +48,9 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
           },
           this.getEventName(req)
         );
+      } else if (formData[`${this.fieldPrefix}OtherFirstNames`] && formData[`${this.fieldPrefix}OtherLastNames`]) {
+        req.session.errors.push({ propertyName: 'addButton', errorType: ValidationError.ADD_BUTTON_NOT_CLICKED });
+        req.session.userCase.addAnotherNameHidden = `${!addButtonClicked}`;
       } else {
         req.session.userCase = await this.save(req, formData, this.getEventName(req));
       }
