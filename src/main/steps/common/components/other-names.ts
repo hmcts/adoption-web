@@ -19,6 +19,9 @@ const en = (fieldPrefix: FieldPrefix) => ({
   another: 'Add another name',
   remove: 'Remove',
   errors: {
+    addButton: {
+      addButtonNotClicked: "Select 'Add' to save your previous names",
+    },
     [`${fieldPrefix}HasOtherNames`]: {
       required: 'Please answer the question',
     },
@@ -46,6 +49,9 @@ const cy: typeof en = (fieldPrefix: FieldPrefix) => ({
   another: 'Ychwanegu enw arall',
   remove: 'Dileu',
   errors: {
+    addButton: {
+      addButtonNotClicked: "Select 'Add' to save your previous names (in Welsh)",
+    },
     [`${fieldPrefix}HasOtherNames`]: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
