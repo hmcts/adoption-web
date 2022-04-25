@@ -37,7 +37,10 @@ export default class NationalityPostController extends PostController<AnyObject>
         req.session.userCase.addAnotherNationality = '';
       }
     } else if (formData.addAnotherNationality) {
-      req.session.errors.push({ propertyName: 'addButton', errorType: ValidationError.ADD_BUTTON_NOT_CLICKED });
+      req.session.errors.push({
+        propertyName: `${this.fieldPrefix}Nationality`,
+        errorType: ValidationError.ADD_BUTTON_NOT_CLICKED,
+      });
       return this.redirect(req, res, req.url);
     }
 
