@@ -58,7 +58,7 @@ withNightlyPipeline(type, product, component) {
   enableCrossBrowserTest(['chrome', 'firefox','microsoft'])
   enableFullFunctionalTest(120)
   loadVaultSecrets(secrets)
-  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
+//  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
   enableFortifyScan()
   // enableSecurityScan()
 
