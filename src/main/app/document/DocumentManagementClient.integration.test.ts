@@ -10,7 +10,7 @@ const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe('DocumentManagementClient', () => {
   it('creates documents', async () => {
-    const mockPost = jest.fn().mockResolvedValue({ data: { _embedded: { documents: ['a-document'] } } });
+    const mockPost = jest.fn().mockResolvedValue({ data: { documents: ['a-document'] } });
     mockedAxios.create.mockReturnValueOnce({ post: mockPost } as unknown as AxiosInstance);
 
     const client = new DocumentManagementClient('http://localhost', 'abcd', {
@@ -28,10 +28,9 @@ describe('DocumentManagementClient', () => {
       headers: { Authorization: 'Bearer userAccessToken', ServiceAuthorization: 'abcd' },
     });
 
-    expect(mockPost.mock.calls[0][0]).toEqual('/documents');
-    expect(mockPost.mock.calls[0][1]._streams[3]).toContain('filename="a-new-file"');
+    expect(mockPost.mock.calls[0][0]).toEqual('/cases/documents');
+    expect(mockPost.mock.calls[0][1]._streams[9]).toContain('filename="a-new-file"');
     expect(mockPost.mock.calls[0][1]._streams[1]).toEqual('PRIVATE');
-    expect(mockPost.mock.calls[0][2].headers['user-id']).toEqual('userId');
     expect(actual).toEqual(['a-document']);
   });
 

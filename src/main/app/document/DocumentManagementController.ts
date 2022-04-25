@@ -21,7 +21,7 @@ import { Classification, DocumentManagementClient } from './DocumentManagementCl
 @autobind
 export class DocumentManagerController {
   private getDocumentManagementClient(user: UserDetails) {
-    return new DocumentManagementClient(config.get('services.documentManagement.url'), getServiceAuthToken(), user);
+    return new DocumentManagementClient(config.get('services.cdam.url'), getServiceAuthToken(), user);
   }
 
   public async post(req: AppRequest, res: Response): Promise<void> {

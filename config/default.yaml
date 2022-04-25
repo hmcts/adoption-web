@@ -23,6 +23,8 @@ services:
     url: ''
   documentManagement:
     url: ''
+  cdam:
+    url: ''
   payments:
     url: ''
   equalityAndDiversity:
