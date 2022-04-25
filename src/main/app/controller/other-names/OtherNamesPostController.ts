@@ -49,7 +49,10 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
           this.getEventName(req)
         );
       } else if (formData[`${this.fieldPrefix}OtherFirstNames`] && formData[`${this.fieldPrefix}OtherLastNames`]) {
-        req.session.errors.push({ propertyName: 'addButton', errorType: ValidationError.ADD_BUTTON_NOT_CLICKED });
+        req.session.errors.push({
+          propertyName: `${this.fieldPrefix}HasOtherNames`,
+          errorType: ValidationError.ADD_BUTTON_NOT_CLICKED,
+        });
         req.session.userCase.addAnotherNameHidden = `${!addButtonClicked}`;
       } else {
         req.session.userCase = await this.save(req, formData, this.getEventName(req));
