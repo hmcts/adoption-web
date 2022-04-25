@@ -24,6 +24,9 @@ const enContent = {
   section: "The child's details",
   label: 'What is their nationality?',
   errors: {
+    addButton: {
+      addButtonNotClicked: "Select 'Add' to save the country name",
+    },
     childrenNationality: {
       required: "Select a nationality or 'Not sure'",
       notSureViolation: "Select a nationality or 'Not sure'",
@@ -37,6 +40,9 @@ const cyContent = {
   section: 'Manylion y plentyn',
   label: 'Beth yw eu cenedligrwydd?',
   errors: {
+    addButton: {
+      addButtonNotClicked: "Select 'Add' to save the country name",
+    },
     childrenNationality: {
       required: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
       notSureViolation: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',

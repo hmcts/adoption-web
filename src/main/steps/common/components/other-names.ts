@@ -50,7 +50,7 @@ const cy: typeof en = (fieldPrefix: FieldPrefix) => ({
   remove: 'Dileu',
   errors: {
     addButton: {
-      addButtonNotClicked: "Select 'Add' to save your previous names (in Welsh)",
+      addButtonNotClicked: "Select 'Add' to save your previous names",
     },
     [`${fieldPrefix}HasOtherNames`]: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
