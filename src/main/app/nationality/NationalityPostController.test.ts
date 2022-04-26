@@ -88,7 +88,7 @@ describe('NationalityPostController', () => {
       });
     });
 
-    describe('and when addButton is not pressed', () => {
+    describe('and when addButton is not clicked', () => {
       beforeEach(() => {
         mockGetParsedBody.mockReturnValue({});
         mockGetErrors.mockReturnValue([]);
