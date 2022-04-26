@@ -12,7 +12,7 @@ const en = (nationalityContent: PageContent) => ({
   section: "The child's details",
   label: 'What is their nationality?',
   errors: {
-    addButton: {
+    [`${FieldPrefix.CHILDREN}AdditionalNationalities`]: {
       addButtonNotClicked: "Select 'Add' to save the country name",
     },
     childrenNationality: {
