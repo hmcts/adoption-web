@@ -12,12 +12,10 @@ const en = (nationalityContent: PageContent) => ({
   section: "Birth mother's details",
   label: "What is the nationality of the child's birth mother?",
   errors: {
-    [`${FieldPrefix.BIRTH_MOTHER}AdditionalNationalities`]: {
-      addButtonNotClicked: "Select 'Add' to save the country name",
-    },
     birthMotherNationality: {
       required: "Select a nationality or 'Not sure'",
       notSureViolation: "Select a nationality or 'Not sure'",
+      addButtonNotClicked: "Select 'Add' to save the country name",
     },
     addAnotherNationality: (nationalityContent.errors as Record<string, unknown>).addAnotherNationality,
   },
@@ -28,12 +26,10 @@ const cy: typeof en = (nationalityContent: PageContent) => ({
   section: 'Manylion y fam fiolegol',
   label: 'Beth yw cenedligrwydd mam fiolegol y plentyn?',
   errors: {
-    [`${FieldPrefix.BIRTH_MOTHER}AdditionalNationalities`]: {
-      addButtonNotClicked: "Select 'Add' to save the country name",
-    },
     birthMotherNationality: {
       required: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
       notSureViolation: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
+      addButtonNotClicked: "Select 'Add' to save the country name",
     },
     addAnotherNationality: (nationalityContent.errors as Record<string, unknown>).addAnotherNationality,
   },

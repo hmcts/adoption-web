@@ -12,12 +12,10 @@ const en = (nationalityContent: PageContent) => ({
   section: "The child's details",
   label: 'What is their nationality?',
   errors: {
-    [`${FieldPrefix.CHILDREN}AdditionalNationalities`]: {
-      addButtonNotClicked: "Select 'Add' to save the country name",
-    },
     childrenNationality: {
       required: "Select a nationality or 'Not sure'",
       notSureViolation: "Select a nationality or 'Not sure'",
+      addButtonNotClicked: "Select 'Add' to save the country name",
     },
     addAnotherNationality: (nationalityContent.errors as Record<string, unknown>).addAnotherNationality,
   },
@@ -28,12 +26,10 @@ const cy: typeof en = (nationalityContent: PageContent) => ({
   section: 'Manylion y plentyn',
   label: 'Beth yw eu cenedligrwydd?',
   errors: {
-    [`${FieldPrefix.CHILDREN}AdditionalNationalities`]: {
-      addButtonNotClicked: "Select 'Add' to save the country name",
-    },
     childrenNationality: {
       required: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
       notSureViolation: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
+      addButtonNotClicked: "Select 'Add' to save the country name",
     },
     addAnotherNationality: (nationalityContent.errors as Record<string, unknown>).addAnotherNationality,
   },
