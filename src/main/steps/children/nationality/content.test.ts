@@ -24,7 +24,7 @@ const enContent = {
   section: "The child's details",
   label: 'What is their nationality?',
   errors: {
-    addButton: {
+    childrenAdditionalNationalities: {
       addButtonNotClicked: "Select 'Add' to save the country name",
     },
     childrenNationality: {
@@ -40,7 +40,7 @@ const cyContent = {
   section: 'Manylion y plentyn',
   label: 'Beth yw eu cenedligrwydd?',
   errors: {
-    addButton: {
+    childrenAdditionalNationalities: {
       addButtonNotClicked: "Select 'Add' to save the country name",
     },
     childrenNationality: {

@@ -24,11 +24,9 @@ const enContent = {
   another: 'Add another name',
   remove: 'Remove',
   errors: {
-    addButton: {
-      addButtonNotClicked: "Select 'Add' to save your previous names",
-    },
     applicant1HasOtherNames: {
       required: 'Please answer the question',
+      addButtonNotClicked: "Select 'Add' to save your previous names",
     },
     applicant1OtherFirstNames: {
       required: 'Enter your first names',
@@ -53,11 +51,9 @@ const cyContent = {
   another: 'Ychwanegu enw arall',
   remove: 'Dileu',
   errors: {
-    addButton: {
-      addButtonNotClicked: "Select 'Add' to save your previous names",
-    },
     applicant1HasOtherNames: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      addButtonNotClicked: "Select 'Add' to save your previous names",
     },
     applicant1OtherFirstNames: {
       required: 'Nac ydwdwch eich enw(au) cyntaf',
