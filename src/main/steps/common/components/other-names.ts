@@ -19,7 +19,7 @@ const en = (fieldPrefix: FieldPrefix) => ({
   another: 'Add another name',
   remove: 'Remove',
   errors: {
-    addButton: {
+    [`${fieldPrefix}HasOtherNames`]: {
       addButtonNotClicked: "Select 'Add' to save your previous names",
     },
     [`${fieldPrefix}HasOtherNames`]: {

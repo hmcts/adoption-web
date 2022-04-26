@@ -12,7 +12,7 @@ const en = (nationalityContent: PageContent) => ({
   section: "Birth mother's details",
   label: "What is the nationality of the child's birth mother?",
   errors: {
-    addButton: {
+    [`${FieldPrefix.BIRTH_MOTHER}AdditionalNationalities`]: {
       addButtonNotClicked: "Select 'Add' to save the country name",
     },
     birthMotherNationality: {
@@ -28,7 +28,7 @@ const cy: typeof en = (nationalityContent: PageContent) => ({
   section: 'Manylion y fam fiolegol',
   label: 'Beth yw cenedligrwydd mam fiolegol y plentyn?',
   errors: {
-    addButton: {
+    [`${FieldPrefix.BIRTH_MOTHER}AdditionalNationalities`]: {
       addButtonNotClicked: "Select 'Add' to save the country name",
     },
     birthMotherNationality: {
