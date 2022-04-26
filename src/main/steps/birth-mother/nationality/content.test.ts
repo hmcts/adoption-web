@@ -24,7 +24,7 @@ const enContent = {
   section: "Birth mother's details",
   label: "What is the nationality of the child's birth mother?",
   errors: {
-    addButton: {
+    birthMotherAdditionalNationalities: {
       addButtonNotClicked: "Select 'Add' to save the country name",
     },
     birthMotherNationality: {
@@ -40,7 +40,7 @@ const cyContent = {
   section: 'Manylion y fam fiolegol',
   label: 'Beth yw cenedligrwydd mam fiolegol y plentyn?',
   errors: {
-    addButton: {
+    birthMotherAdditionalNationalities: {
       addButtonNotClicked: "Select 'Add' to save the country name",
     },
     birthMotherNationality: {
