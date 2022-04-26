@@ -28,7 +28,7 @@ const cy: typeof en = (nationalityContent: PageContent) => ({
   section: 'Manylion y plentyn',
   label: 'Beth yw eu cenedligrwydd?',
   errors: {
-    addButton: {
+    [`${FieldPrefix.CHILDREN}AdditionalNationalities`]: {
       addButtonNotClicked: "Select 'Add' to save the country name",
     },
     childrenNationality: {
