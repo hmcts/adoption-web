@@ -3244,10 +3244,10 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.11.0.tgz#d61f46d83b2519250e2784daf5b09479a8b41c59"
   integrity sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
 
-axe-core@^4.0.2:
-  version "4.3.5"
-  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.3.5.tgz#78d6911ba317a8262bfee292aeafcc1e04b49cc5"
-  integrity sha512-WKTW1+xAzhMS5dJsxWkliixlO/PqC4VhmO9T4juNYcaTg9jzWiJsou6m5pxWYGfigWbwzJWeFY6z47a+4neRXA==
+axe-core@~4.2.1:
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.2.4.tgz#626cfbd1827985c5b20a9b9ae5bc3dbe8a3df490"
+  integrity sha512-9AiDKFKUCWEQm1Kj4lcq7KFavLqSXdf2m/zJo+NVh4VXlW5iwXRJ6alkKmipCyYorsRnqsICH9XLubP1jBF+Og==
 
 axios-debug-log@^0.8.4:
   version "0.8.4"
@@ -6798,14 +6798,6 @@ helmet@^4.6.0:
   resolved "https://registry.yarnpkg.com/helmet/-/helmet-4.6.0.tgz#579971196ba93c5978eb019e4e8ec0e50076b4df"
   integrity sha512-HVqALKZlR95ROkrnesdhbbZJFi/rIVSoNq6f3jA/9u6MIbTsPh3xZwihjeI5+DO/2sOV6HMHooXcEOuwskHpTg==
 
-hogan.js@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/hogan.js/-/hogan.js-3.0.2.tgz#4cd9e1abd4294146e7679e41d7898732b02c7bfd"
-  integrity sha1-TNnhq9QpQUbnZ55B14mHMrAse/0=
-  dependencies:
-    mkdirp "0.3.0"
-    nopt "1.0.10"
-
 hoopy@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/hoopy/-/hoopy-0.1.4.tgz#609207d661100033a9a9402ad3dea677381c1b1d"
@@ -6859,7 +6851,7 @@ html-webpack-plugin@^5.5.0:
     pretty-error "^4.0.0"
     tapable "^2.0.0"
 
-html_codesniffer@^2.5.1:
+html_codesniffer@~2.5.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/html_codesniffer/-/html_codesniffer-2.5.1.tgz#d76d124b8f5cd0e58b3c1b142fd095a40573ea28"
   integrity sha512-vcz0yAaX/OaV6sdNHuT9alBOKkSxYb8h5Yq26dUqgi7XmCgGUSa7U9PiY1PBXQFMjKv1wVPs5/QzHlGuxPDUGg==
@@ -9260,11 +9252,6 @@ mkdirp-classic@^0.5.2:
   resolved "https://registry.yarnpkg.com/mkdirp-classic/-/mkdirp-classic-0.5.3.tgz#fa10c9115cc6d8865be221ba47ee9bed78601113"
   integrity sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==
 
-mkdirp@0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.3.0.tgz#1bbf5ab1ba827af23575143490426455f481fe1e"
-  integrity sha1-G79asbqCevI1dRQ0kEJkVfSB/h4=
-
 mkdirp@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.0.tgz#8487b07699b70c9b06fce47b3ce28d8176c13c75"
@@ -9435,6 +9422,11 @@ multer@^1.4.4:
     on-finished "^2.3.0"
     type-is "^1.6.4"
     xtend "^4.0.0"
+
+mustache@~4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/mustache/-/mustache-4.2.0.tgz#e5892324d60a12ec9c2a73359edca52972bf6f64"
+  integrity sha512-71ippSywq5Yb7/tVYyGbkBggbU8H3u5Rz56fH60jGFgr8uHwxs+aSKeqmluIVzM0m0kB7xQjKS6qPfd0b2ZoqQ==
 
 mute-stream@0.0.7:
   version "0.0.7"
@@ -9626,17 +9618,17 @@ nodemon@^2.0.15:
     undefsafe "^2.0.5"
     update-notifier "^5.1.0"
 
-nopt@1.0.10, nopt@~1.0.10:
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/nopt/-/nopt-1.0.10.tgz#6ddd21bd2a31417b92727dd585f8a6f37608ebee"
-  integrity sha1-bd0hvSoxQXuScn3Vhfim83YI6+4=
-  dependencies:
-    abbrev "1"
-
 nopt@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/nopt/-/nopt-5.0.0.tgz#530942bb58a512fccafe53fe210f13a25355dc88"
   integrity sha512-Tbj67rffqceeLpcRXrT7vKAN8CwfPeIBgM7E6iBkmKLV7bEMwpGgYLGv0jACUsECaa/vuxP0IjEont6umdMgtQ==
+  dependencies:
+    abbrev "1"
+
+nopt@~1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/nopt/-/nopt-1.0.10.tgz#6ddd21bd2a31417b92727dd585f8a6f37608ebee"
+  integrity sha1-bd0hvSoxQXuScn3Vhfim83YI6+4=
   dependencies:
     abbrev "1"
 
@@ -10043,18 +10035,18 @@ p-try@^2.0.0:
   resolved "https://registry.yarnpkg.com/p-try/-/p-try-2.2.0.tgz#cb2868540e313d61de58fafbe35ce9004d5540e6"
   integrity sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
 
-pa11y@^6.1.1:
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/pa11y/-/pa11y-6.1.1.tgz#b204ecd172a664de4ade56f31a58fe5b3342800e"
-  integrity sha512-2NzqA3D9CUlDWj8WuOI4fM2P0qM1d/IUxsRRpzCOfDT5eMR1oEgmUwW2TAk+f90ff/GVck0BewdYT4et4BANew==
+pa11y@^6.2.3:
+  version "6.2.3"
+  resolved "https://registry.yarnpkg.com/pa11y/-/pa11y-6.2.3.tgz#920de467a9fa0d52c80e07ae910ea98b167b7336"
+  integrity sha512-69JoUlfW2QVmrgQAm+17XBxIvmd1u0ImFBYIHPyjC61CzAkmxO3kkbqDVxIcl0OKLvAMYSMbvfCH8kMFE9xsbg==
   dependencies:
-    axe-core "^4.0.2"
+    axe-core "~4.2.1"
     bfj "~7.0.2"
     commander "~8.0.0"
     envinfo "~7.8.1"
-    hogan.js "^3.0.2"
-    html_codesniffer "^2.5.1"
+    html_codesniffer "~2.5.1"
     kleur "~4.1.4"
+    mustache "~4.2.0"
     node.extend "~2.0.2"
     p-timeout "~4.1.0"
     puppeteer "~9.1.1"
