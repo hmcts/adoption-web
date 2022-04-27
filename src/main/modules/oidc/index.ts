@@ -28,7 +28,7 @@ export class OidcMiddleware {
       errorHandler(async (req, res) => {
         if (typeof req.query.code === 'string') {
           req.session.user = await getUserDetails(`${protocol}${res.locals.host}${port}`, req.query.code, CALLBACK_URL);
-          req.locals.logger.info('after getUserDetails');
+          req.locals.logger.info('after getUserDetails', req.session.user);
           req.session.save(err => {
             if (err) {
               req.locals.logger.error('error in saving session', err);
