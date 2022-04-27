@@ -28,7 +28,15 @@ export class OidcMiddleware {
       errorHandler(async (req, res) => {
         if (typeof req.query.code === 'string') {
           req.session.user = await getUserDetails(`${protocol}${res.locals.host}${port}`, req.query.code, CALLBACK_URL);
-          req.session.save(() => res.redirect('/'));
+          req.locals.logger.info('after getUserDetails');
+          req.session.save(err => {
+            if (err) {
+              req.locals.logger.error('error in saving session', err);
+              throw err;
+            }
+            req.locals.logger.info('saved user details in session');
+            res.redirect('/');
+          });
         } else {
           res.redirect(SIGN_IN_URL);
         }
@@ -40,6 +48,10 @@ export class OidcMiddleware {
         if (req.path.startsWith(ELIGIBILITY_URL)) {
           return next();
         }
+
+        req.locals.logger.info('req.session', req.session);
+        req.locals.logger.info('req.session?.user', req.session?.user);
+
         if (req.session?.user) {
           res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
