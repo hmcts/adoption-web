@@ -70,7 +70,6 @@ describe('session', () => {
       secret: 'MOCK_SECRET',
       cookie: {
         httpOnly: true,
-        secure: true,
         maxAge: 1260000,
       },
       rolling: true,
@@ -84,6 +83,7 @@ describe('session', () => {
       config.get = jest
         .fn()
         .mockImplementationOnce(() => 'MOCK_SECRET')
+        .mockImplementationOnce(() => 'true')
         .mockImplementationOnce(() => 'MOCK_REDIS_HOST')
         .mockImplementationOnce(() => 'MOCK_REDIS_KEY');
       mockApp = {
