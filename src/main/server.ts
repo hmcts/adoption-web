@@ -36,10 +36,6 @@ app.use((req, res, next) => {
   if ((req.method === 'OPTIONS' || req.method === 'TRACE') && req.headers['max-forwards']) {
     return res.sendStatus(405);
   }
-
-  logger.info('x-forwarded-proto', req.headers['x-forwarded-proto']);
-
-  req.headers['x-forwarded-proto'] = 'https';
   next();
 });
 
