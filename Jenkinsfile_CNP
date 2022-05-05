@@ -25,7 +25,6 @@ def secrets = [
     secret('citizen-user', 'CITIZEN_USERNAME'),
     secret('citizen-password', 'CITIZEN_PASSWORD'),
     secret('adoption-pcq-token', 'PCQ_TOKEN'),
-    secret('postcode-lookup-token', 'POSTCODE_LOOKUP_TOKEN'),
     secret('endpoints', 'ENDPOINTS')
     
   ],
@@ -62,7 +61,6 @@ withPipeline(type, product, component) {
 
   after('test') {
     yarnBuilder.yarn('test:integration')
-    yarnBuilder.yarn('test:api')
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
   }
 
@@ -72,6 +70,8 @@ withPipeline(type, product, component) {
   }
 
   after('functionalTest:preview') {
+    yarnBuilder.yarn('test:api')
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
   }
 
@@ -98,6 +98,8 @@ withPipeline(type, product, component) {
 
   after('functionalTest:aat') {
     yarnBuilder.yarn('test:pa11y')
+    yarnBuilder.yarn('test:api')
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
   }
 }
