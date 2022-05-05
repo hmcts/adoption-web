@@ -39,13 +39,6 @@ export class PaymentClient {
         code: fee.value.FeeCode,
         version: fee.value.FeeVersion,
       })),
-      // fees: [
-      //   {
-      //     calculated_amount: 183,
-      //     code: 'FEE0310',
-      //     version: 2,
-      //   },
-      // ],
       language: this.session.lang === 'en' ? '' : this.session.lang?.toUpperCase(),
     };
 
