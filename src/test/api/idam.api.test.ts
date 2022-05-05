@@ -4,9 +4,6 @@ import config from 'config';
 describe('IDAM API', () => {
   it('returns a valid token', async () => {
     const data = new URLSearchParams();
-    console.log(config.get('e2e.userTestPassword'));
-    console.log(process.env.IDAM_SECRET as string);
-    console.log(process.env.CITIZEN_PASSWORD as string);
 
     data.append('client_id', config.get('services.idam.clientID'));
     data.append('client_secret', process.env.IDAM_SECRET as string);
