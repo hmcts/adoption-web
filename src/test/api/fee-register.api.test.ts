@@ -8,21 +8,25 @@ describe('fees-register API', () => {
     version: 2,
     fee_amount: 183,
   };
+
   it('returns an adoption application fee', async () => {
-    const response = await axios.get(process.env.FEE_LOOKUP_URL as string, {
-      headers: {
-        accept: 'application/json',
-      },
-      params: {
-        application_type: 'all',
-        channel: 'default',
-        event: 'issue',
-        jurisdiction1: 'family',
-        jurisdiction2: 'family court',
-        keyword: 'ApplyAdoption',
-        service: 'adoption',
-      },
-    });
+    const response = await axios.get(
+      'http://fees-register-api-aat.service.core-compute-aat.internal/fees-register/fees/lookup',
+      {
+        headers: {
+          accept: 'application/json',
+        },
+        params: {
+          application_type: 'all',
+          channel: 'default',
+          event: 'issue',
+          jurisdiction1: 'family',
+          jurisdiction2: 'family court',
+          keyword: 'ApplyAdoption',
+          service: 'adoption',
+        },
+      }
+    );
     expect(response.data).toEqual(EXPECTED_RESPONSE);
   });
 });
