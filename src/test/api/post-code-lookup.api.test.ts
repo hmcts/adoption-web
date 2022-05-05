@@ -4,7 +4,7 @@ import config from 'config';
 
 describe('Post code lookup API', () => {
   it('address details', async () => {
-    const response = await axios.get(config.get('services.postcodeLookup.url'), {
+    const response = await axios.get(process.env.FEE_LOOKUP_URL, {
       headers: {
         accept: 'application/json',
       },

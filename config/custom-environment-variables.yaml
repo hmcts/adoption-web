@@ -7,6 +7,8 @@ services:
     tokenURL: IDAM_API_URL
     clientID: IDAM_CLIENT_ID
     clientSecret: IDAM_SECRET
+    systemUsername: IDAM_SYSTEM_USER_NAME
+    systemPassword: IDAM_SYSTEM_USER_PASSWORD
   case:
     url: CCD_URL
   payments:
@@ -19,6 +21,8 @@ services:
     url: EQUALITY_URL
     tokenKey: PCQ_TOKEN
     pcqEnabled: PCQ_ENABLED
+  postcodeLookup:
+    token: POSTCODE_LOOKUP_TOKEN
 port: PORT
 session:
   redis:
