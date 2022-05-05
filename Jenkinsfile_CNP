@@ -50,7 +50,11 @@ withPipeline(type, product, component) {
 
   loadVaultSecrets(secrets)
 
-//  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
+  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
+
+  onMaster {
+    env.PACT_TAG = 'master'
+  }
 
   after('build') {
     yarnBuilder.yarn('build')
