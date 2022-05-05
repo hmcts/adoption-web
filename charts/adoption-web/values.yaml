@@ -25,7 +25,7 @@ nodejs:
     FEE_LOOKUP_URL: 'http://fees-register-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal/fees-register/fees/lookup'
     EQUALITY_URL: 'https://pcq.{{ .Values.global.environment }}.platform.hmcts.net'
     DOCUMENT_MANAGEMENT_URL: 'http://dm-store-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal'
-    CDAM_API_URL: 'http://ccd-case-document-am-api-{{ .Values.global.environment }}.service.core-compute-aat.internal'
+    CDAM_API_URL: 'http://ccd-case-document-am-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal'
 
     #Pilot local-court email-Ids
     CHELMSFORD_FAMILY_COURT_EMAIL: 'chelmsfordadoptionapplication@mailinator.com'
