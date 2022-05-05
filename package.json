@@ -32,7 +32,7 @@
     "test:crossbrowser": "./bin/run-crossbrowser-tests.sh",
     "test:local": "codeceptjs run-multiple parallel",
     "test:pact": "jest -c jest.pact.config.js --runInBand",
-    "pact:publish": "pact-broker publish pact/pacts --consumer-app-version=\"$(npx @pact-foundation/absolute-version)\" --auto-detect-version-properties --tag master --broker-base-url=https://pact-broker.platform.hmcts.net/",
+    "pact:publish": "NODE_ENV=test NODE_PATH=. LOG_LEVEL=error ts-node src/test/pact/publish/publish.ts",
     "test:pact:run-and-publish": "yarn test:pact && yarn pact:publish",
     "broker": "docker-compose -f broker-compose.yaml up -d",
     "broker:stop": "docker-compose -f broker-compose.yaml down"
@@ -40,8 +40,8 @@
   "dependencies": {
     "@hmcts/cookie-manager": "^0.0.4",
     "@hmcts/frontend": "^0.0.50-alpha",
-    "@hmcts/nodejs-healthcheck": "^1.7.0",
-    "@hmcts/nodejs-logging": "^3.0.4",
+    "@hmcts/nodejs-healthcheck": "^1.7.1",
+    "@hmcts/nodejs-logging": "^4.0.1",
     "@hmcts/properties-volume": "^0.0.13",
     "@types/autobind-decorator": "^2.1.0",
     "@types/config": "^0.0.41",
