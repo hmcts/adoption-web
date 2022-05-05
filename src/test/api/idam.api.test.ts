@@ -11,7 +11,7 @@ describe('IDAM API', () => {
     data.append('grant_type', 'password');
     data.append('username', process.env.CITIZEN_USERNAME as string);
     data.append('password', process.env.CITIZEN_PASSWORD as string);
-    const response = await axios.post(`${config.get('services.idam.tokenURL')}/o/token`, data);
+    const response = await axios.post(`${process.env.IDAM_API_URL as string}/o/token`, data);
     const res = response.data;
     expect(!!res.access_token).toBeTruthy();
     expect(!!res.refresh_token).toBeTruthy();

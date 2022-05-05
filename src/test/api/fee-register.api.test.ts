@@ -1,6 +1,5 @@
 /* eslint-disable import/order */
 import axios from 'axios';
-import config from 'config';
 
 describe('fees-register API', () => {
   const EXPECTED_RESPONSE = {
@@ -10,7 +9,7 @@ describe('fees-register API', () => {
     fee_amount: 183,
   };
   it('returns an adoption application fee', async () => {
-    const response = await axios.get(`${config.get('services.feeLookup.url')}`, {
+    const response = await axios.get(process.env.FEE_LOOKUP_URL as string, {
       headers: {
         accept: 'application/json',
       },
