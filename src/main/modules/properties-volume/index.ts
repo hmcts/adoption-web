@@ -58,5 +58,6 @@ export class PropertiesVolume {
     set(config, 'services.feeLookup.url', endpoints.feeRegister);
     set(config, 'services.payments.url', endpoints.payments);
     set(config, 'services.equalityAndDiversity.url', endpoints.pcq);
+    set(config, 'services.cdam.url', endpoints.cdam);
   }
 }
