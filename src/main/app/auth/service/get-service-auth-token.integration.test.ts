@@ -41,11 +41,11 @@ describe('initAuthToken', () => {
   test('Should log errors', async () => {
     mockedAxios.post.mockRejectedValue({ message: 'MOCK_ERROR', response: { status: 500, data: 'Error' } });
     try {
-      getTokenFromApi();
+      await getTokenFromApi();
     } catch (err) {
       //eslint-disable-next-line jest/no-conditional-expect
+      expect(logger.error).toHaveBeenCalledWith('Error in refreshing service auth token ', 'MOCK_ERROR', 500, 'Error');
     }
-    expect(logger.error).toHaveBeenCalledWith('Error in refreshing service auth token ', 'MOCK_ERROR', 500, 'Error');
   });
 });
 
