@@ -21,6 +21,7 @@ const en = (fieldPrefix: FieldPrefix) => ({
   errors: {
     [`${fieldPrefix}HasOtherNames`]: {
       required: 'Please answer the question',
+      addButtonNotClicked: "Select 'Add' to save your previous names",
     },
     [`${fieldPrefix}OtherFirstNames`]: {
       required: 'Enter your first names',
@@ -48,6 +49,7 @@ const cy: typeof en = (fieldPrefix: FieldPrefix) => ({
   errors: {
     [`${fieldPrefix}HasOtherNames`]: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      addButtonNotClicked: "Select 'Add' to save your previous names",
     },
     [`${fieldPrefix}OtherFirstNames`]: {
       required: 'Nac ydwdwch eich enw(au) cyntaf',

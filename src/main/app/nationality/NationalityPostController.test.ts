@@ -88,7 +88,7 @@ describe('NationalityPostController', () => {
       });
     });
 
-    describe('and when addButton is not pressed', () => {
+    describe('and when addButton is not clicked', () => {
       beforeEach(() => {
         mockGetParsedBody.mockReturnValue({});
         mockGetErrors.mockReturnValue([]);
@@ -104,6 +104,17 @@ describe('NationalityPostController', () => {
         expect(mockGetNextStepUrl).toHaveBeenCalledWith(req, {
           birthMotherAdditionalNationalities: [],
         });
+      });
+
+      test('should show error for not pressing add button', async () => {
+        mockGetParsedBody.mockReturnValue({ addButton: undefined, addAnotherNationality: 'MOCK_COUNTRY3' });
+        await controller.post(req, res);
+        expect(req.session.errors).toEqual([
+          {
+            errorType: 'addButtonNotClicked',
+            propertyName: 'birthMotherNationality',
+          },
+        ]);
       });
     });
   });

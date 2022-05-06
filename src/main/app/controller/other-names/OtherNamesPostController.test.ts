@@ -141,6 +141,29 @@ describe('OtherNamesPostController', () => {
         });
       });
     });
+
+    describe('and when addButton is not pressed but data present in applicant1AdditionalNames', () => {
+      beforeEach(() => {
+        mockGetParsedBody.mockReturnValue({
+          addButton: undefined,
+          applicant1OtherFirstNames: 'MOCK_OTHER_FIRST_NAME',
+          applicant1OtherLastNames: 'MOCK_OTHER_LAST_NAME',
+        });
+        mockGetErrors.mockReturnValue([]);
+        controller = new OtherNamesPostController({}, FieldPrefix.APPLICANT1);
+        req.locals.api.triggerEvent.mockResolvedValue();
+      });
+
+      test('should show error for add button not clicked', async () => {
+        await controller.post(req, res);
+        expect(req.session.errors).toEqual([
+          {
+            errorType: 'addButtonNotClicked',
+            propertyName: 'applicant1HasOtherNames',
+          },
+        ]);
+      });
+    });
   });
 
   describe('when there are form errors', () => {
