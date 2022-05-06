@@ -1,5 +1,6 @@
 const { I } = inject();
 
+const childBirthMothersDetails = require('../fixtures/caseData/childBirthMothersDetails');
 module.exports = {
   fields: {
     birthMotherFirstNames: 'input[id$="birthMotherFirstNames"]',
@@ -20,8 +21,8 @@ module.exports = {
 
   async childBirthMothersDetailsSection() {
     await I.retry(3).waitForText("What is the full name of the child's birth mother?");
-    await I.retry(3).fillField(this.fields.birthMotherFirstNames, 'Marie');
-    await I.retry(3).fillField(this.fields.birthMotherLastNames, 'Stopes');
+    await I.retry(3).fillField(this.fields.birthMotherFirstNames, childBirthMothersDetails.birthMotherFirstNames);
+    await I.retry(3).fillField(this.fields.birthMotherLastNames, childBirthMothersDetails.birthMotherLastNames);
     await I.wait(2);
     await I.retry(3).click('Save and continue');
     await I.wait(2);
@@ -35,7 +36,7 @@ module.exports = {
     await I.retry(3).click('Save and continue');
     await I.wait(2);
     await I.retry(3).waitForText("What is the occupation of the child's birth mother?");
-    await I.retry(3).fillField(this.fields.birthMotherOccupation, 'Software Engineer');
+    await I.retry(3).fillField(this.fields.birthMotherOccupation, childBirthMothersDetails.birthMotherOccupation);
     await I.wait(2);
     await I.retry(3).click('Save and continue');
     await I.retry(3).waitForText("Do you have the birth mother's last known address?");
@@ -46,10 +47,16 @@ module.exports = {
     await I.wait(2);
     await I.retry(3).click(this.fields.enterInternationalAddress);
     await I.retry(3).waitForText("What is the birth mother's last known address?");
-    await I.retry(3).fillField(this.fields.birthMotherAddress1, '90 Riverview Road');
-    await I.retry(3).fillField(this.fields.birthMotherAddressTown, 'Trail');
-    await I.retry(3).fillField(this.fields.birthMotherAddressPostcode, 'BC V1R 7N9');
-    await I.retry(3).fillField(this.fields.birthMotherAddressCountry, 'Canada');
+    await I.retry(3).fillField(this.fields.birthMotherAddress1, childBirthMothersDetails.birthMotherAddress1);
+    await I.retry(3).fillField(this.fields.birthMotherAddressTown, childBirthMothersDetails.birthMotherAddressTown);
+    await I.retry(3).fillField(
+      this.fields.birthMotherAddressPostcode,
+      childBirthMothersDetails.birthMotherAddressPostcode
+    );
+    await I.retry(3).fillField(
+      this.fields.birthMotherAddressCountry,
+      childBirthMothersDetails.birthMotherAddressCountry
+    );
     await I.wait(2);
     await I.retry(3).click('Save and continue');
     await I.wait(4);

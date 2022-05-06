@@ -20,6 +20,7 @@ module.exports = {
     pcqNO: 'form[action="/start-page"] button[formaction="/opt-out"]',
     caseID: '.govuk-panel__body strong',
     changeChildMoveInDate: 'a[href="/date-child-moved-in?returnUrl=/review-pay-submit/check-your-answers"]',
+    cancelpayment: 'input[id$="cancel-payment"]',
   },
   async selectNoPCQOption() {
     await I.wait(5);
@@ -74,5 +75,18 @@ module.exports = {
     await I.wait(5);
     await I.retry(3).waitForText('Application Submitted', 30);
     console.log(await I.retry(3).grabTextFrom(this.fields.caseID));
+  },
+
+  async paymentCancellation() {
+    await I.wait(30);
+    await I.retry(3).waitForText('Enter card details', 30);
+    await I.retry(3).see('Enter your date of birth');
+    await I.retry(3).click('Cancel payment');
+    await I.wait(30);
+    await I.retry(3).waitForText('Your payment has been cancelled');
+    await I.retry(3).waitForText('No money has been taken from your account.');
+    await I.retry(3).click('Continue');
+    await I.wait(30);
+    await I.retry(3).waitForText('Statement of truth', 30);
   },
 };
