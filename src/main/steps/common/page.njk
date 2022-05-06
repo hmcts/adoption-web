@@ -60,10 +60,12 @@
         {% endblock %}
       {% endif %}
 
-      {# TODO uncomment this once we have contact us content #}
-      {# {% block contact_us %}
-        {% include "./contact-us.njk" %}
-      {% endblock %} #}
+      {% if not getContent(form.hideContactHelpSection) %}
+        {% block contactUs %}
+          {% include "common/form/contactForHelp.njk"%}
+        {% endblock %}
+      {% endif %}
+
     </div>
   </div>
 {% endblock %}

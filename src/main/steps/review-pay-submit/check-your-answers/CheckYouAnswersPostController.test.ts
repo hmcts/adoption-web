@@ -58,7 +58,7 @@ describe('CheckYouAnswersPostController', () => {
     beforeEach(() => {
       req = mockRequest({
         session: {
-          userCase: { dateChildMovedIn: { year: '2022', month: '2', day: '1' } },
+          userCase: { dateChildMovedIn: { year: '2032', month: '2', day: '1' } },
           save: jest.fn(done => done()),
         },
       });
