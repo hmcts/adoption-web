@@ -11,7 +11,7 @@ import Axios, { AxiosStatic } from 'axios';
 import config from 'config';
 import { when } from 'jest-when';
 
-import { getServiceAuthToken, initAuthToken } from './get-service-auth-token';
+import { getServiceAuthToken, getTokenFromApi, initAuthToken } from './get-service-auth-token';
 
 const mockedAxios = Axios as jest.Mocked<AxiosStatic>;
 
@@ -38,21 +38,14 @@ describe('initAuthToken', () => {
     });
   });
 
-  test('Should log errors', () => {
+  test('Should log errors', async () => {
     mockedAxios.post.mockRejectedValue({ message: 'MOCK_ERROR', response: { status: 500, data: 'Error' } });
-
-    initAuthToken();
-    return new Promise<void>(resolve => {
-      setImmediate(() => {
-        expect(logger.error).toHaveBeenCalledWith(
-          'Error in refreshing service auth token ',
-          'MOCK_ERROR',
-          500,
-          'Error'
-        );
-        resolve();
-      });
-    });
+    try {
+      getTokenFromApi();
+    } catch (err) {
+      //eslint-disable-next-line jest/no-conditional-expect
+    }
+    expect(logger.error).toHaveBeenCalledWith('Error in refreshing service auth token ', 'MOCK_ERROR', 500, 'Error');
   });
 });
 
@@ -60,13 +53,7 @@ describe('getServiceAuthToken', () => {
   test('Should return a token', async () => {
     mockedAxios.post.mockResolvedValue({ data: 'token' });
 
-    initAuthToken();
-
-    return new Promise<void>(resolve => {
-      setImmediate(() => {
-        expect(getServiceAuthToken()).not.toBeUndefined();
-        resolve();
-      });
-    });
+    await getTokenFromApi();
+    expect(getServiceAuthToken()).not.toBeUndefined();
   });
 });
