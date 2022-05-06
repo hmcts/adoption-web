@@ -62,7 +62,8 @@ app.get('/sitemap.xml', (req, res) => {
 });
 
 app.get('/launchDarkly', (req, res) => {
-  return res.send(LaunchDarklyValidationService.checkFeatureFlag('test-adoption-frontend'));
+  res.type('text/plain');
+  res.send(LaunchDarklyValidationService.checkFeatureFlag('test-adoption-frontend'));
 });
 
 app.disable('x-powered-by');
