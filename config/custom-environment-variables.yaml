@@ -25,7 +25,6 @@ port: PORT
 session:
   redis:
     host: REDIS_HOST
-  secureCookie: SECURE_COOKIE
 e2e:
   userTestPassword: TEST_PASSWORD
 appInsights:
