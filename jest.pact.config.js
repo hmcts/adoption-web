@@ -6,4 +6,7 @@ module.exports = {
     '^.+\\.ts$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'json'],
+  fakeTimers: {
+    enableGlobally: true,
+  },
 };
