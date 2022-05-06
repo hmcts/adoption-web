@@ -8,6 +8,7 @@ import favicon from 'serve-favicon';
 import toobusy from 'toobusy-js';
 import type { LoggerInstance } from 'winston';
 
+import { LaunchDarklyValidationService } from './app/utils/launchDarklyValidationService';
 import { AppInsights } from './modules/appinsights';
 import { AuthProvider } from './modules/auth-provider';
 import { AxiosLogger } from './modules/axios-logger';
@@ -58,6 +59,10 @@ app.get('/robots.txt', (req, res) => {
 app.get('/sitemap.xml', (req, res) => {
   res.type('text/xml');
   res.send('User-agent: *\nDisallow: /');
+});
+
+app.get('/launchDarkly', (req, res) => {
+  return res.send(LaunchDarklyValidationService.checkFeatureFlag('test-adoption-frontend'));
 });
 
 app.disable('x-powered-by');

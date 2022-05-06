@@ -46,6 +46,7 @@ nodejs:
         - postcode-lookup-token
         - adoption-pcq-token
         - AppInsightsInstrumentationKey
+        - launchDarkly-sdk-key
 
 idam-pr:
   enabled: false
