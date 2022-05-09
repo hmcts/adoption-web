@@ -63,7 +63,18 @@ app.get('/sitemap.xml', (req, res) => {
 app.disable('x-powered-by');
 app.disable('X-Powered-By');
 
-app.use(Express.accessLogger());
+app.use(
+  Express.accessLogger({
+    formatter: req => {
+      const caseId = req.session?.userCase?.id ? ` caseId=${req.session?.userCase?.id}` : '';
+      const errors = req.session?.errors?.length
+        ? ` errors=[${req.session.errors.map(item => ` ${item.propertyName}:${item.errorType}`)} ]`
+        : '';
+
+      return `"${req.method} ${req.originalUrl || req.url}${caseId}${errors}"`;
+    },
+  })
+);
 
 new AxiosLogger().enableFor(app);
 new PropertiesVolume().enableFor(app);
