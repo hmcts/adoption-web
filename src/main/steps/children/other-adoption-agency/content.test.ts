@@ -9,8 +9,10 @@ import { generateContent } from './content';
 jest.mock('../../../app/form/validation');
 
 const en = {
-  section: 'Your adoption agency or local authority details',
-  label: 'Was there another adoption agency or local authority involved in placing the child?',
+  section: 'Application details',
+  label: 'Is there another adoption agency or local authority involved?',
+  line1:
+    'This would be separate from your local authority, for example it could be a private agency or a different local authority.',
   errors: {
     hasAnotherAdopAgencyOrLA: {
       required: 'Please answer the question',
@@ -19,8 +21,10 @@ const en = {
 };
 
 const cy = {
-  section: 'Manylion eich asiantaeth fabwysiadu neu’ch awdurdod lleol',
-  label: 'A oedd asiantaeth fabwysiadu neu awdurdod lleol arall wedi chwarae rhan mewn lleoli’r plentyn?',
+  section: 'Application details. (in welsh)',
+  label: 'Is there another adoption agency or local authority involved?. (in welsh)',
+  line1:
+    'This would be separate from your local authority, for example it could be a private agency or a different local authority. (in welsh)',
   errors: {
     hasAnotherAdopAgencyOrLA: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
