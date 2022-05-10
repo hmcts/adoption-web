@@ -16,13 +16,9 @@ export default class SiblingPlacementOrderGetController extends GetController {
       redirect = true;
     }
 
-    const siblings = req.session.userCase.siblings;
-    req.session.userCase.siblings = siblings;
-
     req.session.userCase = await this.save(
       req,
       {
-        siblings: req.session.userCase.siblings,
         selectedSiblingId: req.session.userCase.selectedSiblingId,
       },
       this.getEventName(req)
