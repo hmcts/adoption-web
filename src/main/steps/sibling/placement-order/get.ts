@@ -8,10 +8,7 @@ import { GetController } from '../../../app/controller/GetController';
 export default class SiblingPlacementOrderGetController extends GetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
     let redirect = false;
-    if (req.query.add) {
-      this.addSiblingPlacementOrder(req);
-      redirect = true;
-    } else if (req.query.change) {
+    if (req.query.change) {
       this.changeSiblingPlacementOrder(req);
       redirect = true;
     } else if (req.query.remove) {
@@ -36,26 +33,17 @@ export default class SiblingPlacementOrderGetController extends GetController {
     super.saveSessionAndRedirect(req, res, callback);
   }
 
-  private addSiblingPlacementOrder(req: AppRequest) {
-    req.session.userCase.selectedSiblingPoId = `${req.query.add}`;
-    req.session.userCase.addAnotherSiblingPlacementOrder = undefined;
-    delete req.query.add;
-    req.url = req.url.substring(0, req.url.indexOf('?'));
-  }
-
   private changeSiblingPlacementOrder(req: AppRequest) {
-    const [siblingId, placementOrderId] = `${req.query.change}`.split('/');
+    const siblingId = `${req.query.change}`;
     req.session.userCase.selectedSiblingId = siblingId;
-    req.session.userCase.selectedSiblingPoId = placementOrderId;
     this.parseAndSetReturnUrl(req);
     delete req.query.change;
     req.url = req.url.substring(0, req.url.indexOf('?'));
   }
 
   private removeSiblingPlacementOrder(req: AppRequest) {
-    const [siblingId, placementOrderId] = `${req.query.remove}`.split('/');
+    const siblingId = `${req.query.remove}`;
     req.session.userCase.selectedSiblingId = siblingId;
-    req.session.userCase.selectedSiblingPoId = placementOrderId;
     delete req.query.remove;
     req.url = req.url.substring(0, req.url.indexOf('?'));
   }

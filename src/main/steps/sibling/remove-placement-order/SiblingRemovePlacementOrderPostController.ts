@@ -31,7 +31,6 @@ export default class SiblingRemovePlacementOrderPostController extends PostContr
         req,
         {
           siblings: req.session.userCase.siblings,
-          selectedSiblingPoId: undefined,
           selectedSiblingId: undefined,
         },
         this.getEventName(req)

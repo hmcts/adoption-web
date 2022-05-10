@@ -83,7 +83,6 @@ const languages = {
 
 export const generateContent: TranslationFn = content => {
   const translations = languages[content.language](content);
-  console.log(translations.siblings);
   return {
     ...translations,
     form,

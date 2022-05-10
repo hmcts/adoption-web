@@ -18,9 +18,9 @@ const getPlacementOrderType = (userCase: Partial<CaseWithId>): string => {
 
 const en = content => ({
   section: SECTION,
-  label: `Are you sure you want to remove this ${getPlacementOrderType(content.userCase)} for ${getSiblingRelation(
+  label: `Are you sure you want to remove this ${getPlacementOrderType(
     content.userCase
-  )}?`,
+  )} for child's ${getSiblingRelation(content.userCase)}?`,
   errors: {
     confirm: {
       required: 'Please select an answer',
@@ -30,9 +30,9 @@ const en = content => ({
 
 const cy: typeof en = content => ({
   section: SECTION_IN_WELSH,
-  label: `Ydych chi’n siŵr eich bod eisiau dileu’r ${getPlacementOrderType(
+  label: `Are you sure you want to remove this ${getPlacementOrderType(
     content.userCase
-  )} hwn ar gyfer ${getPlacementOrderType(content.userCase)}?`,
+  )} for child's ${getSiblingRelation(content.userCase)}? (in welsh)`,
   errors: {
     confirm: {
       required: 'Dewiswch ateb os gwelwch yn dda',

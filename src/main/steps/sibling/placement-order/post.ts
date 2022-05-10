@@ -35,7 +35,6 @@ export default class SiblingPlacementOrderPostController extends PostController<
       req,
       {
         siblings: req.session.userCase.siblings,
-        selectedSiblingPoId: req.session.userCase.selectedSiblingPoId,
         selectedSiblingId: req.session.userCase.selectedSiblingId,
       },
       this.getEventName(req)

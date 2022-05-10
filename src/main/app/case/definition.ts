@@ -429,7 +429,6 @@ export interface CaseData {
   hasPoForSiblingsNotSureReason: string;
   addAnotherSiblingPlacementOrder: YesOrNo;
   selectedSiblingId: string;
-  selectedSiblingPoId: string;
 
   applicant1StatementOfTruth: YesOrNo;
   applicant2StatementOfTruth: YesOrNo;

@@ -41,7 +41,9 @@ export const siblingSequence: Step[] = [
     url: Urls.SIBLING_ORDER_SUMMARY,
     showInSection: Sections.AboutSibling,
     getNextStep: data =>
-      data.addAnotherSiblingPlacementOrder === YesOrNo.YES ? Urls.SIBLING_RELATION : Urls.TASK_LIST_URL,
+      data.addAnotherSiblingPlacementOrder === YesOrNo.YES
+        ? `${Urls.SIBLING_RELATION}?add=${Date.now()}`
+        : Urls.TASK_LIST_URL,
   },
   {
     url: Urls.SIBLING_ORDER_CHECK_YOUR_ANSWERS,
