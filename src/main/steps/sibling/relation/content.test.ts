@@ -9,44 +9,28 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: 'Sibling details',
-  title: 'Which siblings or half siblings have a court order in place?',
-  line1:
-    'We need details of all siblings or half siblings with a court order in place. You will be asked to complete details for each of them in turn.',
-  firstName: 'First names',
-  firstNameHint: '(Include any given or middle names)',
-  lastName: 'Last names',
-  lastNameHint: '(Include surname or family names)',
+  label: 'What is their relationship to the child being adopted?',
+  hint: 'For instance, brother or half sister',
   errors: {
-    siblingFirstName: {
-      required: "Enter the child's first names",
-    },
-    siblingLastNames: {
-      required: "Enter the child's last names",
+    siblingRelation: {
+      required: 'Placeholder error message',
     },
   },
 };
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
-  title: 'Pa frodyr/chwiorydd neu hanner brodyr/hanner chwiorydd sydd â gorchymyn llys mewn lle?',
-  line1:
-    'Mae arnom angen manylion yr holl frodyr/chwiorydd neu’r hanner brodyr/hanner chwiorydd sydd â gorchymyn llys mewn lle. Gofynnir ichi lenwi’r manylion i bob un ohonynt fesul un.',
-  firstName: 'Enwau cyntaf',
-  firstNameHint: '(Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol)',
-  lastName: 'Cyfenwau',
-  lastNameHint: '(Cofiwch gynnwys cyfenw neu enwau teuluol)',
+  label: 'What is their relationship to the child being adopted? (in welsh)',
+  hint: 'For instance, brother or half sister (in welsh)',
   errors: {
-    siblingFirstName: {
-      required: 'Nac ydwdwch enw(au) cyntaf y plentyn',
-    },
-    siblingLastNames: {
-      required: 'Nac ydwdwch gyfenw(au)’r plentyn',
+    siblingRelation: {
+      required: 'Placeholder error message (in welsh)',
     },
   },
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('sibling > full-name > content', () => {
-  const commonContent = { language: 'en', userCase: {} } as CommonContent;
+describe('sibling > relation > content', () => {
+  const commonContent = { language: 'en' } as CommonContent;
   let generatedContent;
   let form;
   let fields;
@@ -64,26 +48,24 @@ describe('sibling > full-name > content', () => {
     languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
-  test('should contain firstNames field', () => {
-    const firstNamesField = fields.siblingFirstName as FormOptions;
-    expect(firstNamesField.type).toBe('text');
-    expect(firstNamesField.classes).toBe('govuk-label');
-    expect((firstNamesField.label as Function)(generatedContent)).toBe('First names');
-    expect(((firstNamesField as FormInput).hint as Function)(generatedContent)).toBe(
-      '(Include any given or middle names)'
-    );
-    expect(firstNamesField.validator).toBe(isFieldFilledIn);
-  });
-
-  test('should contain lastNames field', () => {
-    const lastNamesField = fields.siblingLastNames as FormOptions;
-    expect(lastNamesField.type).toBe('text');
-    expect(lastNamesField.classes).toBe('govuk-label');
-    expect((lastNamesField.label as Function)(generatedContent)).toBe('Last names');
-    expect(((lastNamesField as FormInput).hint as Function)(generatedContent)).toBe(
-      '(Include surname or family names)'
-    );
-    expect(lastNamesField.validator).toBe(isFieldFilledIn);
+  test('should contain siblingRelation field', () => {
+    generatedContent = generateContent({
+      ...commonContent,
+      userCase: {
+        siblings: [{ siblingId: 'MOCK_SIBLING_ID', siblingRelation: 'MOCK_RELATION' }],
+        selectedSiblingId: 'MOCK_SIBLING_ID',
+      },
+    });
+    form = generatedContent.form as FormContent;
+    fields = form.fields as FormFields;
+    const relationField = fields.siblingRelation as FormOptions;
+    expect(relationField.type).toBe('text');
+    expect(relationField.classes).toBe('govuk-input govuk-input--width-20');
+    expect((relationField.label as Function)(generatedContent)).toBe(enContent.label);
+    expect(relationField.labelSize).toBe('l');
+    expect(((relationField as FormInput).hint as Function)(generatedContent)).toBe(enContent.hint);
+    expect((relationField as FormInput).value).toBe('MOCK_RELATION');
+    expect(relationField.validator).toBe(isFieldFilledIn);
   });
 
   test('should contain submit button', () => {

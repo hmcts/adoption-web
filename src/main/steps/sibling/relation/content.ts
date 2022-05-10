@@ -34,8 +34,8 @@ export const form: FormContent = {
         classes: 'govuk-input govuk-input--width-20',
         label: l => l.label,
         labelSize: 'l',
-        value: sibling?.siblingRelation,
         hint: l => l.hint,
+        value: sibling?.siblingRelation,
         validator: isFieldFilledIn,
       },
     };
