@@ -5,7 +5,7 @@ import { AppRequest } from '../../../app/controller/AppRequest';
 import { GetController } from '../../../app/controller/GetController';
 
 @autobind
-export default class SiblingRelationGetController extends GetController {
+export default class SiblingGetController extends GetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
     const siblings = req.session.userCase.siblings || [];
 

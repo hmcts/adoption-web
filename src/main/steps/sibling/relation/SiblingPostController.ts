@@ -8,7 +8,7 @@ import { Form } from '../../../app/form/Form';
 import { SIBLING_ORDER_SUMMARY } from '../../urls';
 
 @autobind
-export default class SiblingRelationPostController extends PostController<AnyObject> {
+export default class SiblingPostController extends PostController<AnyObject> {
   protected ALLOWED_RETURN_URLS: string[] = [SIBLING_ORDER_SUMMARY];
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
