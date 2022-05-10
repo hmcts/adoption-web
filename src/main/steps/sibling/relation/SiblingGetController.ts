@@ -7,15 +7,19 @@ import { GetController } from '../../../app/controller/GetController';
 @autobind
 export default class SiblingGetController extends GetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
+    let dirty = false;
+
     const siblings = req.session.userCase.siblings || [];
 
     let redirect = false;
     if (req.query.add) {
       this.addSibling(req);
       redirect = true;
+      dirty = true;
     } else if (req.query.change) {
       this.changeSibling(req);
       redirect = true;
+      dirty = true;
     } else if (!req.session.userCase.selectedSiblingId) {
       //generate random id for sibling if there are no siblings
       req.session.userCase.selectedSiblingId = siblings[0]?.siblingId || `${Date.now()}`;
@@ -29,18 +33,21 @@ export default class SiblingGetController extends GetController {
       };
 
       siblings.push(sibling);
+      dirty = true;
     }
 
     req.session.userCase.siblings = siblings;
 
-    req.session.userCase = await this.save(
-      req,
-      {
-        siblings: req.session.userCase.siblings,
-        selectedSiblingId: req.session.userCase.selectedSiblingId,
-      },
-      this.getEventName(req)
-    );
+    if (dirty) {
+      req.session.userCase = await this.save(
+        req,
+        {
+          siblings: req.session.userCase.siblings,
+          selectedSiblingId: req.session.userCase.selectedSiblingId,
+        },
+        this.getEventName(req)
+      );
+    }
 
     const callback = redirect
       ? undefined

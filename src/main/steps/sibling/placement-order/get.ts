@@ -7,22 +7,27 @@ import { GetController } from '../../../app/controller/GetController';
 @autobind
 export default class SiblingPlacementOrderGetController extends GetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
+    let dirty = false;
     let redirect = false;
     if (req.query.change) {
       this.changeSiblingPlacementOrder(req);
       redirect = true;
+      dirty = true;
     } else if (req.query.remove) {
       this.removeSiblingPlacementOrder(req);
       redirect = true;
+      dirty = true;
     }
 
-    req.session.userCase = await this.save(
-      req,
-      {
-        selectedSiblingId: req.session.userCase.selectedSiblingId,
-      },
-      this.getEventName(req)
-    );
+    if (dirty) {
+      req.session.userCase = await this.save(
+        req,
+        {
+          selectedSiblingId: req.session.userCase.selectedSiblingId,
+        },
+        this.getEventName(req)
+      );
+    }
 
     const callback = redirect ? undefined : () => super.get(req, res);
 
