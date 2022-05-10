@@ -10,7 +10,7 @@ jest.mock('../../../app/form/validation');
 
 const en = {
   section: 'Application details',
-  label: 'Is there another adoption agency or local authority involved?',
+  title: 'Is there another adoption agency or local authority involved?',
   line1:
     'This would be separate from your local authority, for example it could be a private agency or a different local authority.',
   errors: {
@@ -22,7 +22,7 @@ const en = {
 
 const cy = {
   section: 'Application details. (in welsh)',
-  label: 'Is there another adoption agency or local authority involved?. (in welsh)',
+  title: 'Is there another adoption agency or local authority involved?. (in welsh)',
   line1:
     'This would be separate from your local authority, for example it could be a private agency or a different local authority. (in welsh)',
   errors: {
@@ -57,7 +57,6 @@ describe('children > other-adoption-agency > content', () => {
     const field = fields.hasAnotherAdopAgencyOrLA as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
-    expect((field.label as Function)(generatedContent)).toBe(en.label);
     expect((field.section as Function)(generatedContent)).toBe(en.section);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesOrNo.YES);
