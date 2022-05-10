@@ -1,5 +1,5 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
-import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
+import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -11,7 +11,7 @@ const enContent = {
   section: 'Sibling details',
   label: 'What type of order is it?',
   errors: {
-    placementOrderType: {
+    siblingPoType: {
       required: 'Please answer the question',
     },
   },
@@ -21,7 +21,7 @@ const cyContent = {
   section: 'Manylion y brawd/chwaer',
   label: 'Pa fath o neuchymyn ydyw?',
   errors: {
-    placementOrderType: {
+    siblingPoType: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
@@ -35,11 +35,10 @@ describe('sibling > placement-order-type > content', () => {
       siblings: [
         {
           siblingId: 'MOCK_SIBLING_ID',
-          siblingPlacementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderType: 'MOCK_TYPE' }],
+          siblingPoType: 'MOCK_TYPE',
         },
       ],
       selectedSiblingId: 'MOCK_SIBLING_ID',
-      selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
     },
   } as CommonContent;
 
@@ -51,15 +50,16 @@ describe('sibling > placement-order-type > content', () => {
     languageAssertions('cy', cyContent, generateContent);
   });
 
-  test('should contain placementOrderType field', () => {
+  test('should contain siblingPoType field', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const field = fields.placementOrderType as FormOptions;
+    const field = fields.siblingPoType as FormOptions;
     expect(field.type).toBe('text');
     expect(field.classes).toBe('govuk-label');
     expect((field.label as Function)(generatedContent)).toBe(enContent.label);
     expect(field.labelSize).toBe('l');
+    expect((field as FormInput).value).toBe('MOCK_TYPE');
     expect(field.attributes).toEqual({ spellcheck: false });
 
     expect(field.validator).toBe(isFieldFilledIn);
