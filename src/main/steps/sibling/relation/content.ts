@@ -5,22 +5,22 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
   section: SECTION,
-  label: 'What is the serial or case number on the order?',
-  hint: 'Ask your social worker or adoption agency if you are not sure where to find this.',
+  label: 'What is their relationship to the child being adopted?',
+  hint: 'For instance, brother or half sister',
   errors: {
-    placementOrderNumber: {
-      required: 'Enter the serial or case number',
+    siblingRelation: {
+      required: 'Placeholder error message',
     },
   },
 });
 
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  label: 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn?',
-  hint: 'Gofynnwch i’ch gweithiwr cymdeithasol, neu’ch asiantaeth fabwysiadu os nad ydych yn siŵr lle i ddod o hyd i hwn.',
+  label: 'What is their relationship to the child being adopted? (in welsh)',
+  hint: 'For instance, brother or half sister (in welsh)',
   errors: {
-    placementOrderNumber: {
-      required: 'Nac ydwdwch y rhif cyfresol neu rif yr achos',
+    siblingRelation: {
+      required: 'Placeholder error message (in welsh)',
     },
   },
 });
@@ -29,16 +29,13 @@ export const form: FormContent = {
   fields: userCase => {
     const sibling = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
     return {
-      siblingPoNumber: {
+      siblingRelation: {
         type: 'text',
-        classes: 'govuk-label govuk-input--width-10',
+        classes: 'govuk-input govuk-input--width-20',
         label: l => l.label,
-        hint: l => l.hint,
-        value: sibling?.siblingPoNumber,
         labelSize: 'l',
-        attributes: {
-          spellcheck: false,
-        },
+        value: sibling?.siblingRelation,
+        hint: l => l.hint,
         validator: isFieldFilledIn,
       },
     };

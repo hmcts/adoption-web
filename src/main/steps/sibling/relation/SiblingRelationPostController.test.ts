@@ -17,7 +17,7 @@ import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { FormFields } from '../../../app/form/Form';
 
-import SiblingPostController from './SiblingPostController';
+import SiblingRelationPostController from './SiblingRelationPostController';
 
 describe('SiblingPostController', () => {
   let req;
@@ -35,7 +35,7 @@ describe('SiblingPostController', () => {
       },
     });
     res = mockResponse();
-    controller = new SiblingPostController({});
+    controller = new SiblingRelationPostController({});
   });
 
   describe('when there are no form errors', () => {
@@ -55,7 +55,7 @@ describe('SiblingPostController', () => {
           siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
         });
         mockGetErrors.mockReturnValue([]);
-        controller = new SiblingPostController({});
+        controller = new SiblingRelationPostController({});
         req.locals.api.triggerEvent.mockResolvedValue({
           selectedSiblingId: 'MOCK_SIBLING_ID',
           siblings: [
@@ -132,7 +132,7 @@ describe('SiblingPostController', () => {
         siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
       });
       mockGetErrors.mockReturnValue([]);
-      controller = new SiblingPostController((): FormFields => ({}));
+      controller = new SiblingRelationPostController((): FormFields => ({}));
       req.locals.api.triggerEvent.mockResolvedValue({
         selectedSiblingId: 'MOCK_PLACEMENT_ORDER_NUMBER',
         siblings: [
@@ -182,7 +182,7 @@ describe('SiblingPostController', () => {
         siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
       });
       mockGetErrors.mockReturnValue(errors || []);
-      controller = new SiblingPostController({});
+      controller = new SiblingRelationPostController({});
       req.locals.api.triggerEvent.mockResolvedValue({
         selectedSiblingId,
         siblings: [

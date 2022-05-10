@@ -1,7 +1,7 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
-import { PlacementOrder } from '../../../app/case/definition';
+import { Sibling } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
@@ -20,13 +20,9 @@ export default class SiblingPlacementOrderPostController extends PostController<
 
     const siblingObject = req.session.userCase.siblings?.find(
       item => item.siblingId === req.session.userCase.selectedSiblingId
-    );
+    ) as Sibling;
 
-    const placementOrder = siblingObject?.siblingPlacementOrders?.find(
-      item => (item as PlacementOrder).placementOrderId === req.session.userCase.selectedSiblingPoId
-    );
-
-    Object.assign(placementOrder, formData);
+    Object.assign(siblingObject, formData);
 
     this.filterErrorsForSaveAsDraft(req);
 

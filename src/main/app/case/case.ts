@@ -153,8 +153,6 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   selectedAdoptionAgencyId: 'selectedAdoptionAgencyId',
   hasSiblings: 'hasSiblings',
   hasSiblingNotSureReason: 'hasSiblingNotSureReason',
-  hasPoForSiblings: 'hasPoForSiblings',
-  hasPoForSiblingsNotSureReason: 'hasPoForSiblingsNotSureReason',
   addAnotherSiblingPlacementOrder: 'addAnotherSiblingPlacementOrder',
   selectedSiblingId: 'selectedSiblingId',
   selectedSiblingPoId: 'selectedSiblingPoId',
@@ -319,8 +317,6 @@ export interface Case {
   siblings?: Sibling[];
   hasSiblings?: YesNoNotsure;
   hasSiblingNotSureReason?: string;
-  hasPoForSiblings?: YesNoNotsure;
-  hasPoForSiblingsNotSureReason?: string;
   addAnotherSiblingPlacementOrder?: YesOrNo;
   selectedSiblingId?: string;
   selectedSiblingPoId?: string;

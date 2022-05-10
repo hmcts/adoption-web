@@ -1,7 +1,7 @@
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 
-import SiblingGetController from './SiblingGetController';
+import SiblingRelationGetController from './SiblingRelationGetController';
 import { generateContent } from './content';
 
 describe('SiblingGetController', () => {
@@ -11,7 +11,7 @@ describe('SiblingGetController', () => {
 
   beforeEach(() => {
     Date.now = jest.fn(() => +new Date('2021-01-01'));
-    controller = new SiblingGetController(__dirname + '../../common/template', generateContent);
+    controller = new SiblingRelationGetController(__dirname + '../../common/template', generateContent);
     req = mockRequest({ session: { userCase: { siblings: [] } } });
     res = mockResponse();
   });

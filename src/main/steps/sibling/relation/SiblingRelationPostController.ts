@@ -5,10 +5,10 @@ import { Case } from '../../../app/case/case';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
-import { SIBLING_ORDER_SUMMARY } from '../../../steps/urls';
+import { SIBLING_ORDER_SUMMARY } from '../../urls';
 
 @autobind
-export default class SiblingPostController extends PostController<AnyObject> {
+export default class SiblingRelationPostController extends PostController<AnyObject> {
   protected ALLOWED_RETURN_URLS: string[] = [SIBLING_ORDER_SUMMARY];
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
@@ -60,13 +60,11 @@ export default class SiblingPostController extends PostController<AnyObject> {
         req.session.userCase.selectedSiblingId = `${Date.now()}`;
         req.session.userCase.siblings?.push({
           siblingId: req.session.userCase.selectedSiblingId,
-          siblingFirstName: formData['siblingFirstName'],
-          siblingLastNames: formData['siblingLastNames'],
+          siblingRelation: formData['siblingRelation'],
         });
       } else {
         req.session.userCase.selectedSiblingId = 'addAnotherSibling';
-        req.session.userCase['siblingFirstName'] = formData['siblingFirstName'];
-        req.session.userCase['siblingLastNames'] = formData['siblingLastNames'];
+        req.session.userCase['siblingRelation'] = formData['siblingRelation'];
       }
     } else {
       //store selected sibling's id in userCase

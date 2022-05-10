@@ -1,7 +1,6 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
-import { PlacementOrder } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { GetController } from '../../../app/controller/GetController';
 
@@ -21,34 +20,12 @@ export default class SiblingPlacementOrderGetController extends GetController {
     }
 
     const siblings = req.session.userCase.siblings;
-    const siblingObject = siblings?.find(item => item.siblingId === req.session.userCase.selectedSiblingId);
-    const placementOrders = siblingObject?.siblingPlacementOrders || [];
-
-    if (!req.session.userCase.selectedSiblingPoId) {
-      //generate random id for placement order if there are no placement orders
-      req.session.userCase.selectedSiblingPoId =
-        (placementOrders as PlacementOrder[])[0]?.placementOrderId || `${Date.now()}`;
-    }
-
-    let placementOrder = siblingObject?.siblingPlacementOrders?.find(
-      item => (item as PlacementOrder).placementOrderId === req.session.userCase.selectedSiblingPoId
-    );
-
-    if (!placementOrder) {
-      placementOrder = {
-        placementOrderId: req.session.userCase.selectedSiblingPoId,
-      };
-      placementOrders.push(placementOrder);
-    }
-
-    siblingObject!.siblingPlacementOrders = placementOrders;
     req.session.userCase.siblings = siblings;
 
     req.session.userCase = await this.save(
       req,
       {
         siblings: req.session.userCase.siblings,
-        selectedSiblingPoId: req.session.userCase.selectedSiblingPoId,
         selectedSiblingId: req.session.userCase.selectedSiblingId,
       },
       this.getEventName(req)
