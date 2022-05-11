@@ -2421,12 +2421,12 @@
   dependencies:
     "@uppy/utils" "^4.0.7"
 
-"@uppy/file-input@^2.0.5":
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/@uppy/file-input/-/file-input-2.0.5.tgz#8be65749ad9c6bd10cc85b506bed08ba83daa404"
-  integrity sha512-egzStUF199NfE5dQ1CMem/qtptcHqw/xVWIpQyPxOiYzJa7LFeWi/6255j9ZfMJyT4VwSCe6S1A6/9NZQyvyyw==
+"@uppy/file-input@^2.0.6":
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/@uppy/file-input/-/file-input-2.0.6.tgz#2ef1468ead3e2b6157b3233be847ce83292eb7f7"
+  integrity sha512-Au/J96B6yiGZkjNpLO+/hV43Beq71K3JP2p1f9Eh0EgcgLtqczmM8pggyj6vAduywamUTMWGaADKcdxYKLAFew==
   dependencies:
-    "@uppy/utils" "^4.0.4"
+    "@uppy/utils" "^4.0.7"
     preact "^10.5.13"
 
 "@uppy/progress-bar@^2.0.4":
