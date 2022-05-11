@@ -6,9 +6,8 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 const en = () => ({
   section: SECTION,
   label: 'What is the serial or case number on the order?',
-  hint: 'Ask your social worker or adoption agency if you are not sure where to find this.',
   errors: {
-    placementOrderNumber: {
+    siblingPoNumber: {
       required: 'Enter the serial or case number',
     },
   },
@@ -17,9 +16,8 @@ const en = () => ({
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
   label: 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn?',
-  hint: 'Gofynnwch i’ch gweithiwr cymdeithasol, neu’ch asiantaeth fabwysiadu os nad ydych yn siŵr lle i ddod o hyd i hwn.',
   errors: {
-    placementOrderNumber: {
+    siblingPoNumber: {
       required: 'Nac ydwdwch y rhif cyfresol neu rif yr achos',
     },
   },
@@ -33,7 +31,6 @@ export const form: FormContent = {
         type: 'text',
         classes: 'govuk-label govuk-input--width-10',
         label: l => l.label,
-        hint: l => l.hint,
         value: sibling?.siblingPoNumber,
         labelSize: 'l',
         attributes: {
