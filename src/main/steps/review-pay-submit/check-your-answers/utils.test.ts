@@ -1333,64 +1333,6 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                 ],
               },
             },
-            {
-              key: { text: 'Sibling court orders' },
-              value: { html: 'Yes' },
-              actions: {
-                items: [
-                  {
-                    href: '/sibling/court-order-exists?returnUrl=/review-pay-submit/check-your-answers',
-                    text: 'Change',
-                    visuallyHiddenText: 'Sibling court orders',
-                  },
-                ],
-              },
-            },
-            {
-              key: { text: 'Sibling name' },
-              value: { text: 'MOCK_SIBLING_FIRST_NAME MOCK_SIBLING_LAST_NAMES' },
-              actions: {
-                items: [
-                  {
-                    href: '/sibling/name?change=MOCK_SIBLING_ID&returnUrl=/review-pay-submit/check-your-answers',
-                    text: 'Change',
-                    visuallyHiddenText: 'Sibling name',
-                  },
-                ],
-              },
-            },
-            {
-              key: { html: '<h3 class="govuk-heading-s govuk-!-margin-top-8">Court order</h3>' },
-              value: {},
-              classes: 'govuk-summary-list__row--no-border',
-            },
-            { key: { text: 'Sibling name' }, value: { text: 'MOCK_SIBLING_FIRST_NAME MOCK_SIBLING_LAST_NAMES' } },
-            {
-              key: { text: 'Type of order' },
-              value: { text: 'MOCK_PLACEMENT_ORDER_TYPE' },
-              actions: {
-                items: [
-                  {
-                    href: '/sibling/placement-order-type?change=MOCK_SIBLING_ID/MOCK_PLACEMENT_ORDER_ID&returnUrl=/review-pay-submit/check-your-answers',
-                    text: 'Change',
-                    visuallyHiddenText: 'Type of order',
-                  },
-                ],
-              },
-            },
-            {
-              key: { text: 'Order case or serial number' },
-              value: { text: 'MOCK_PLACEMENT_ORDER_NUMBER' },
-              actions: {
-                items: [
-                  {
-                    href: '/sibling/placement-order-number?change=MOCK_SIBLING_ID/MOCK_PLACEMENT_ORDER_ID&returnUrl=/review-pay-submit/check-your-answers',
-                    text: 'Change',
-                    visuallyHiddenText: 'Order case or serial number',
-                  },
-                ],
-              },
-            },
           ],
         },
       },
@@ -1415,41 +1357,8 @@ describe('review-pay-submit > check-your-answers > utils', () => {
           ],
         },
       },
-      {
-        userCase: { ...mockUserCase, hasSiblings: YesNoNotsure.YES, hasPoForSiblings: YesNoNotsure.NO },
-        expected: {
-          title: 'Sibling court orders',
-          rows: [
-            {
-              key: { text: 'Child siblings or half siblings' },
-              value: { html: 'Yes' },
-              actions: {
-                items: [
-                  {
-                    href: '/sibling/exists?returnUrl=/review-pay-submit/check-your-answers',
-                    text: 'Change',
-                    visuallyHiddenText: 'Child siblings or half siblings',
-                  },
-                ],
-              },
-            },
-            {
-              key: { text: 'Sibling court orders' },
-              value: { html: 'No' },
-              actions: {
-                items: [
-                  {
-                    href: '/sibling/court-order-exists?returnUrl=/review-pay-submit/check-your-answers',
-                    text: 'Change',
-                    visuallyHiddenText: 'Sibling court orders',
-                  },
-                ],
-              },
-            },
-          ],
-        },
-      },
     ])('return correct summary list items when %#', ({ userCase, expected }) => {
+      console.log(JSON.stringify(siblingCourtOrderSummaryList(enContent, userCase)));
       expect(siblingCourtOrderSummaryList(enContent, userCase)).toStrictEqual(expected);
     });
   });

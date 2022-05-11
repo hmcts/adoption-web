@@ -117,19 +117,12 @@ export default {
   otherParentAddressKnown: YesOrNo.YES,
 
   hasSiblings: YesNoNotsure.YES,
-  hasPoForSiblings: YesNoNotsure.YES,
   siblings: [
     {
       siblingId: 'MOCK_SIBLING_ID',
-      siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
-      siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
-      siblingPlacementOrders: [
-        {
-          placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
-          placementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
-          placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
-        },
-      ],
+      siblingRelation: 'MOCK_SIBLING_RELATION',
+      siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
+      siblingPoNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
     },
   ],
   findFamilyCourt: YesOrNo.NO,

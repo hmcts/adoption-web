@@ -37,15 +37,9 @@ describe('to-api-format', () => {
     siblings: [
       {
         siblingId: 'MOCK_SIBLING_ID',
-        siblingFirstName: 'MOCK_FIRST_NAMES',
-        siblingLastNames: 'MOCK_LAST_NAMES',
-        siblingPlacementOrders: [
-          {
-            placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
-            placementOrderType: 'MOCK_TYPE',
-            placementOrderNumber: 'MOCK_NUMBER',
-          },
-        ],
+        siblingRelation: 'MOCK_RELATION',
+        siblingPoType: 'MOCK_TYPE',
+        siblingPoNumber: 'MOCK_NUMBER',
       },
     ],
     adopAgencyOrLAs: [
@@ -102,21 +96,12 @@ describe('to-api-format', () => {
       ],
       siblings: [
         {
-          id: 'MOCK_V4_UUID',
+          id: 'MOCK_SIBLING_ID',
           value: {
             siblingId: 'MOCK_SIBLING_ID',
-            siblingFirstName: 'MOCK_FIRST_NAMES',
-            siblingLastNames: 'MOCK_LAST_NAMES',
-            siblingPlacementOrders: [
-              {
-                id: 'MOCK_V4_UUID',
-                value: {
-                  placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
-                  placementOrderType: 'MOCK_TYPE',
-                  placementOrderNumber: 'MOCK_NUMBER',
-                },
-              },
-            ],
+            siblingRelation: 'MOCK_RELATION',
+            siblingPoType: 'MOCK_TYPE',
+            siblingPoNumber: 'MOCK_NUMBER',
           },
         },
       ],
@@ -231,12 +216,6 @@ describe('to-api-format', () => {
       siblings: undefined,
       expected: {
         siblings: [],
-      },
-    },
-    {
-      siblings: [{ siblingPlacementOrders: undefined }],
-      expected: {
-        siblings: [{ id: 'MOCK_V4_UUID', value: { siblingPlacementOrders: [] } }],
       },
     },
     {
