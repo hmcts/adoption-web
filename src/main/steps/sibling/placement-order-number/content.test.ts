@@ -12,7 +12,7 @@ const enContent = {
   label: 'What is the serial or case number on the order?',
   errors: {
     siblingPoNumber: {
-      required: 'Enter the serial or case number',
+      required: 'Please answer the question',
     },
   },
 };
@@ -22,7 +22,7 @@ const cyContent = {
   label: 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn?',
   errors: {
     siblingPoNumber: {
-      required: 'Nac ydwdwch y rhif cyfresol neu rif yr achos',
+      required: 'Please answer the question (in welsh)',
     },
   },
 };
