@@ -412,17 +412,30 @@ export interface CaseData {
   socialWorkerName: string;
   socialWorkerPhoneNumber: string;
   socialWorkerEmail: string;
-  socialWorkerTeamEmail: string;
+  childLocalAuthority: string;
+
   solicitorFirm: string;
   solicitorName: string;
   solicitorPhoneNumber: string;
   solicitorEmail: string;
   solicitorHelpingWithApplication: YesOrNo;
-  adopAgencyOrLAs: ListValue<AdoptionAgencyOrLocalAuthority>[];
+
+  localAuthorityName: string;
+  localAuthorityContactName: string;
+  localAuthorityPhoneNumber: string;
+  localAuthorityContactEmail: string;
+
+  adopAgencyOrLaName: string;
+  adopAgencyOrLaContactName: string;
+  adopAgencyOrLaPhoneNumber: string;
+  adopAgencyAddressLine1: string;
+  adopAgencyTown: string;
+  adopAgencyPostcode: string;
+  adopAgencyOrLaContactEmail: string;
+
   siblings: ListValue<Sibling>[];
   payments: ListValue<Payment>[];
   hasAnotherAdopAgencyOrLA: YesOrNo;
-  selectedAdoptionAgencyId: string;
   hasSiblings: string;
   hasSiblingNotSureReason: string;
   hasPoForSiblings: string;
@@ -713,11 +726,20 @@ export interface Parent {
   NameOnCertificate: string;
 }
 
+export interface LocalAuthority {
+  localAuthorityName: string;
+  localAuthorityContactName: string;
+  localAuthorityPhoneNumber: string;
+  localAuthorityContactEmail: string;
+}
+
 export interface AdoptionAgencyOrLocalAuthority {
-  adopAgencyOrLaId: string;
   adopAgencyOrLaName?: string;
-  adopAgencyOrLaPhoneNumber?: string;
   adopAgencyOrLaContactName?: string;
+  adopAgencyOrLaPhoneNumber?: string;
+  adopAgencyAddressLine1?: string;
+  adopAgencyTown?: string;
+  adopAgencyPostcode?: string;
   adopAgencyOrLaContactEmail?: string;
 }
 
@@ -732,7 +754,7 @@ export interface SocialWorker {
   socialWorkerName: string;
   socialWorkerPhoneNumber: string;
   socialWorkerEmail: string;
-  socialWorkerTeamEmail: string;
+  childLocalAuthority: string;
 }
 
 export interface Solicitor {

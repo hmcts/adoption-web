@@ -3,13 +3,15 @@ import { FormContent } from '../../../app/form/Form';
 import { isEmailValid, isFieldFilledIn, isPhoneNoValid } from '../../../app/form/validation';
 
 const en = () => ({
-  section: 'Your adoption agency or local authority details',
-  title: "Details about the child's social worker",
-  line1: 'You can get these details from your adoption agency or local authority.',
-  socialWorkerName: "Social worker's name",
-  socialWorkerPhoneNumber: "Social worker's phone number",
-  socialWorkerEmail: "Social worker's email address",
-  socialWorkerTeamEmail: "Social worker's team email address (if known)",
+  section: 'Application details',
+  title: "Child's social worker details",
+  line1: 'You can get these details from your local authority or adoption agency.',
+  socialWorkerName: "Name of child's social worker",
+  socialWorkerPhoneNumber: 'Phone number',
+  socialWorkerEmail: 'Email address',
+  childLocalAuthority: "Child's local authority",
+  childLocalAuthorityHint:
+    'This is the local authority with parental responsibility for the child. It may be different to your own local authority.',
   errors: {
     socialWorkerName: {
       required: 'Enter a name',
@@ -22,34 +24,36 @@ const en = () => ({
       required: 'Enter an email address',
       invalid: 'Enter an email address in the correct format, like name@example.com',
     },
-    socialWorkerTeamEmail: {
-      invalid: 'Enter an email address in the correct format, like name@example.com',
+    childLocalAuthority: {
+      invalid: 'Enter a name',
     },
   },
 });
 
 const cy: typeof en = () => ({
-  section: 'Manylion eich asiantaeth fabwysiadu neu’ch awdurdod lleol',
-  title: 'Manylion am weithiwr cymdeithasol y plentyn',
-  line1: 'Gallwch gael y manylion hyn gan eich asiantaeth fabwysiadau neu’ch awdurdod lleol.',
-  socialWorkerName: "Enw'r gweithiwr cymdeithasol",
-  socialWorkerPhoneNumber: 'Rhif ffôn y gweithiwr cymdeithasol',
-  socialWorkerEmail: 'Cyfeiriad e-bost y gweithiwr cymdeithasol',
-  socialWorkerTeamEmail: 'Cyfeiriad e-bost tîm y gweithiwr cymdeithasol (os yw’n hysbys)',
+  section: 'Application details (in welsh)',
+  title: "Child's social worker details (in welsh)",
+  line1: 'You can get these details from your local authority or adoption agency. (in welsh)',
+  socialWorkerName: "Name of child's social worker (in welsh)",
+  socialWorkerPhoneNumber: 'Phone number (in welsh)',
+  socialWorkerEmail: 'Email address (in welsh)',
+  childLocalAuthority: "Child's local authority (in welsh)",
+  childLocalAuthorityHint:
+    'This is the local authority with parental responsibility for the child. It may be different to your own local authority. (in welsh)',
   errors: {
     socialWorkerName: {
-      required: 'Nac ydwdwch enw',
+      required: 'Enter a name (in welsh)',
     },
     socialWorkerPhoneNumber: {
-      required: 'Rhowch rif ffôn yn y DU',
-      invalid: 'Rhowch rif ffôn yn y DU',
+      required: 'Enter a UK telephone number (in welsh)',
+      invalid: 'Enter a UK telephone number (in welsh)',
     },
     socialWorkerEmail: {
-      required: 'Nac ydwdwch gyfeiriad e-bost',
-      invalid: 'Rhowch gyfeiriad e-bost yn y fformat cywir, er enghraifft enw@enghraifft.com',
+      required: 'Enter an email address (in welsh)',
+      invalid: 'Enter an email address in the correct format, like name@example.com (in welsh)',
     },
-    socialWorkerTeamEmail: {
-      invalid: 'Rhowch gyfeiriad e-bost yn y fformat cywir, er enghraifft enw@enghraifft.com',
+    childLocalAuthority: {
+      invalid: 'Enter a name (in welsh)',
     },
   },
 });
@@ -80,12 +84,13 @@ export const form: FormContent = {
       labelSize: null,
       validator: value => isFieldFilledIn(value) || isEmailValid(value),
     },
-    socialWorkerTeamEmail: {
+    childLocalAuthority: {
       type: 'text',
       classes: 'govuk-label govuk-!-width-two-thirds',
-      label: l => l.socialWorkerTeamEmail,
+      label: l => l.childLocalAuthority,
+      hint: l => l.childLocalAuthorityHint,
       labelSize: null,
-      validator: value => (value ? isEmailValid(value) : undefined),
+      validator: isFieldFilledIn,
     },
   },
   submit: {
