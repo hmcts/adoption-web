@@ -425,8 +425,6 @@ export interface CaseData {
   selectedAdoptionAgencyId: string;
   hasSiblings: string;
   hasSiblingNotSureReason: string;
-  hasPoForSiblings: string;
-  hasPoForSiblingsNotSureReason: string;
   addAnotherSiblingPlacementOrder: YesOrNo;
   selectedSiblingId: string;
 
