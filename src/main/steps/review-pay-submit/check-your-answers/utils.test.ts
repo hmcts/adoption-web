@@ -1333,6 +1333,50 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                 ],
               },
             },
+            {
+              key: { html: '<h3 class="govuk-heading-s govuk-!-margin-top-8">Court order</h3>' },
+              value: {},
+              classes: 'govuk-summary-list__row--no-border',
+            },
+            {
+              key: { text: 'Sibling relation' },
+              value: { text: 'MOCK_SIBLING_RELATION' },
+              actions: {
+                items: [
+                  {
+                    href: '/sibling/relation?change=MOCK_SIBLING_ID&returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Sibling relation',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Type of order' },
+              value: { text: 'MOCK_PLACEMENT_ORDER_TYPE' },
+              actions: {
+                items: [
+                  {
+                    href: '/sibling/placement-order-type?change=MOCK_SIBLING_ID&returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Type of order',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Order case or serial number' },
+              value: { text: 'MOCK_PLACEMENT_ORDER_NUMBER' },
+              actions: {
+                items: [
+                  {
+                    href: '/sibling/placement-order-number?change=MOCK_SIBLING_ID&returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Order case or serial number',
+                  },
+                ],
+              },
+            },
           ],
         },
       },

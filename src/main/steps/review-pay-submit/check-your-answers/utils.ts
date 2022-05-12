@@ -513,41 +513,32 @@ export const siblingCourtOrderSummaryList = (
   const siblingCourtOrderList =
     userCase.hasSiblings === YesNoNotsure.YES
       ? userCase.siblings!.reduce(
-          (rows: GovUkNunjucksSummary[]) => [
+          (rows: GovUkNunjucksSummary[], sibling) => [
             ...rows,
-            // ...sibling.siblingPlacementOrders!.reduce(
-            //   (acc: GovUkNunjucksSummary[], item) => [
-            //     ...acc,
-            //     ...getSectionSummaryList(
-            //       [
-            //         {
-            //           keyHtml: `<h3 class="govuk-heading-s govuk-!-margin-top-8">${keys.courtOrder}</h3>`,
-            //           classes: 'govuk-summary-list__row--no-border',
-            //         },
-            //         {
-            //           key: keys.siblingName,
-            //           value: sibling.siblingRelation,
-            //         },
-            //         {
-            //           key: keys.typeOfOrder,
-            //           value: (item as PlacementOrder).placementOrderType,
-            //           changeUrl: `${Urls.SIBLING_ORDER_TYPE}?change=${sibling.siblingId}/${
-            //             (item as PlacementOrder).placementOrderId
-            //           }`,
-            //         },
-            //         {
-            //           key: keys.orderNumber,
-            //           value: (item as PlacementOrder).placementOrderNumber,
-            //           changeUrl: `${Urls.SIBLING_ORDER_CASE_NUMBER}?change=${sibling.siblingId}/${
-            //             (item as PlacementOrder).placementOrderId
-            //           }`,
-            //         },
-            //       ],
-            //       content
-            //     ),
-            //   ],
-            //   []
-            // ),
+            ...getSectionSummaryList(
+              [
+                {
+                  keyHtml: `<h3 class="govuk-heading-s govuk-!-margin-top-8">${keys.courtOrder}</h3>`,
+                  classes: 'govuk-summary-list__row--no-border',
+                },
+                {
+                  key: keys.siblingRelation,
+                  value: sibling.siblingRelation,
+                  changeUrl: `${Urls.SIBLING_RELATION}?change=${sibling.siblingId}`,
+                },
+                {
+                  key: keys.typeOfOrder,
+                  value: sibling.siblingPoType,
+                  changeUrl: `${Urls.SIBLING_ORDER_TYPE}?change=${sibling.siblingId}`,
+                },
+                {
+                  key: keys.orderNumber,
+                  value: sibling.siblingPoNumber,
+                  changeUrl: `${Urls.SIBLING_ORDER_CASE_NUMBER}?change=${sibling.siblingId}`,
+                },
+              ],
+              content
+            ),
           ],
           []
         )
