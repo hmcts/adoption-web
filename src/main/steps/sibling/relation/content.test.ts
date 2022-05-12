@@ -13,7 +13,7 @@ const enContent = {
   hint: 'For instance, brother or half sister',
   errors: {
     siblingRelation: {
-      required: 'Placeholder error message',
+      required: 'Please answer the question',
     },
   },
 };
@@ -23,7 +23,7 @@ const cyContent = {
   hint: 'For instance, brother or half sister (in welsh)',
   errors: {
     siblingRelation: {
-      required: 'Placeholder error message (in welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
 };

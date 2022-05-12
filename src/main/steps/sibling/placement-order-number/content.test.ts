@@ -22,7 +22,7 @@ const cyContent = {
   label: 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn?',
   errors: {
     siblingPoNumber: {
-      required: 'Please answer the question (in welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
 };
