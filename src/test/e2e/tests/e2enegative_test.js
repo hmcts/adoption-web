@@ -1,4 +1,4 @@
-Feature('Creat application').retry(1);
+Feature('E2E Negative').retry(1);
 
 Scenario(
   'Creat full application and submit @cross-browser',
@@ -25,23 +25,25 @@ Scenario(
   }) => {
     await loginPage.createCitizenUserAndSignIn();
     await landingPage.seeTheLandingPage();
+    await landingPage.continueWithoutSelection();
     await landingPage.selectApplyWithMySpouseSection();
 
     await taskListPage.selectDateChildMovedInDetails();
-    await dateChildMovedinDetailsPage.dateChildMovedInSection('10', '10', '2020');
+    await dateChildMovedinDetailsPage.dateChildMovedInSectionWithoutData();
     await taskListPage.verifyDateChildMovedInStatus();
 
     await taskListPage.selectChildAdoptionAgencyDetails();
+    await childAdoptionAgencyDetailsPage.childAdoptionAgencyDetailsSectionEmpty();
     await childAdoptionAgencyDetailsPage.childAdoptionAgencyDetailsSection();
     await childAdoptionAgencyDetailsPage.childSocialWorkerDetails();
     await taskListPage.verifyChildAdoptionAgencyDetailsStatus;
 
     await taskListPage.selectPrimaryApplicantContactDetails();
-    await primaryApplicantDetailsPage.primaryApplicantContactDetailsSection();
+    await primaryApplicantDetailsPage.primaryApplicantContactDetailsSectionEmpty();
     await taskListPage.verifyPrimaryApplicantContactDetailsStatus();
 
     await taskListPage.selectFirstApplicantPersonalDetails();
-    await primaryApplicantPersonalDetailsPage.primaryApplicantPersonalDetailsSection();
+    await primaryApplicantPersonalDetailsPage.primaryApplicantPersonalDetailsSectionEmptyfields();
     await taskListPage.verifyPrimaryApplicantPersonalDetailsStatus();
 
     await taskListPage.selectOtherApplicantContactDetails();
@@ -84,7 +86,7 @@ Scenario(
     await taskListPage.verifyChooseYourFamilyCourtStatus();
 
     await taskListPage.selectUploadDocumentsDetails();
-    await uploadDocumentsDetailsPage.uploadDocumentsSectionWithCantNotUploadOption();
+    await uploadDocumentsDetailsPage.uploadDocumentsSectionEmpty();
     await taskListPage.verifyUploadDocumentsStatus();
 
     await taskListPage.selectReviewPayAndSubmitDetails();
@@ -92,6 +94,8 @@ Scenario(
     await reviewPayAndSubmitPage.changeValueFromReviewYourAnswers();
     await dateChildMovedinDetailsPage.dateChildMovedInSection('10', '12', '2020');
     await reviewPayAndSubmitPage.reviewYourAnswersAndContinue();
+    await reviewPayAndSubmitPage.statementOfTruthDetailsSectionEmpty();
+    await reviewPayAndSubmitPage.paymentCancellation();
     await reviewPayAndSubmitPage.statementOfTruthDetailsSection();
     await reviewPayAndSubmitPage.adoptionCourtFeesByCard();
   }

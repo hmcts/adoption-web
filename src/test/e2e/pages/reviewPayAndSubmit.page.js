@@ -54,6 +54,20 @@ module.exports = {
     await I.wait(4);
   },
 
+  async statementOfTruthDetailsSectionEmpty() {
+    await I.retry(3).waitForText('Statement of truth', 30);
+    await I.retry(3).click('Confirm');
+    await I.wait(4);
+    await I.retry(3).see('Confirm your statement of truth');
+    await I.retry(3).see('Enter a full name');
+    await I.retry(3).click(this.fields.applicant1IBelieveApplicationIsTrue);
+    await I.retry(3).click(this.fields.applicant2IBelieveApplicationIsTrue);
+    await I.retry(3).fillField(this.fields.applicant1SotFullName, 'Joe Bloggs');
+    await I.retry(3).fillField(this.fields.applicant2SotFullName, 'George Thomas');
+    await I.retry(3).click('Confirm');
+    await I.wait(4);
+  },
+
   async adoptionCourtFeesByCard() {
     await I.wait(30);
     await I.retry(3).waitForText('Enter card details', 30);

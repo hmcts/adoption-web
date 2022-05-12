@@ -37,7 +37,9 @@ module.exports = {
     await I.wait(4);
   },
 
-  /* async primaryApplicantPersonalDetailsSectionEmptyfields() {
+  async primaryApplicantPersonalDetailsSectionEmptyfields() {
+    await I.retry(3).fillField(this.fields.applicant1FirstNames, '');
+    await I.retry(3).fillField(this.fields.applicant1LastNames, '');
     await I.retry(3).click('Save and continue');
     await I.wait(2);
     await I.retry(3).see('There is a problem');
@@ -78,5 +80,5 @@ module.exports = {
     await I.retry(3).fillField(this.fields.applicant1Occupation, 'Teacher');
     await I.retry(3).click('Save and continue');
     await I.wait(4);
-  }, */
+  },
 };
