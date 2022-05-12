@@ -134,6 +134,42 @@ describe('children > adoption-agency > content', () => {
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockAgencyContactName', {});
   });
 
+  it('should have an adopAgencyAddressLine1 text input field', () => {
+    const generatedContent = generateContent(commonContent) as Record<string, never>;
+    const form = generatedContent.form as FormContent;
+    const fields = form.fields as FormFields;
+    const adopAgencyAddressLine1 = fields.adopAgencyAddressLine1;
+
+    expect(adopAgencyAddressLine1.type).toBe('text');
+    expect((adopAgencyAddressLine1.label as LanguageLookup)(generatedContent)).toBe(enContent.adopAgencyAddressLine1);
+
+    (adopAgencyAddressLine1.validator as ValidationCheck)('MockAdopAgencyAddressLine1', {});
+    expect(isFieldFilledIn).toHaveBeenCalledWith('MockAdopAgencyAddressLine1', {});
+  });
+
+  it('should have an adopAgencyTown text input field', () => {
+    const generatedContent = generateContent(commonContent) as Record<string, never>;
+    const form = generatedContent.form as FormContent;
+    const fields = form.fields as FormFields;
+    const adopAgencyTown = fields.adopAgencyTown;
+
+    expect(adopAgencyTown.type).toBe('text');
+    expect((adopAgencyTown.label as LanguageLookup)(generatedContent)).toBe(enContent.adopAgencyTown);
+
+    (adopAgencyTown.validator as ValidationCheck)('MockAdopadopAgencyTown', {});
+    expect(isFieldFilledIn).toHaveBeenCalledWith('MockAdopadopAgencyTown', {});
+  });
+
+  it('should have an adopAgencyPostcode text input field', () => {
+    const generatedContent = generateContent(commonContent) as Record<string, never>;
+    const form = generatedContent.form as FormContent;
+    const fields = form.fields as FormFields;
+    const adopAgencyPostcode = fields.adopAgencyPostcode;
+
+    expect(adopAgencyPostcode.type).toBe('text');
+    expect((adopAgencyPostcode.label as LanguageLookup)(generatedContent)).toBe(enContent.adopAgencyPostcode);
+  });
+
   it('should have an adopAgencyOrLaContactEmail text input field', () => {
     const generatedContent = generateContent(commonContent) as Record<string, never>;
     const form = generatedContent.form as FormContent;
