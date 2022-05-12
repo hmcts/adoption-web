@@ -14,7 +14,6 @@ import {
 import {
   findFamilyCourtStatus,
   getAdoptionAgencyDetailStatus,
-  getAdoptionAgencyUrl,
   getAdoptionCertificateDetailsStatus,
   getApplicationStatus,
   getApplyingWithStatus,
@@ -68,7 +67,18 @@ describe('utils', () => {
       {
         data: {
           ...mockUserCase,
-          adopAgencyOrLAs: undefined,
+          localAuthorityName: undefined,
+          localAuthorityContactName: undefined,
+          localAuthorityPhoneNumber: undefined,
+          localAuthorityContactEmail: undefined,
+          adopAgencyOrLaName: undefined,
+          adopAgencyOrLaContactName: undefined,
+          adopAgencyOrLaPhoneNumber: undefined,
+          adopAgencyAddressLine1: undefined,
+          adopAgencyTown: undefined,
+          adopAgencyPostcode: undefined,
+          adopAgencyOrLaContactEmail: undefined,
+          childLocalAuthority: undefined,
           hasAnotherAdopAgencyOrLA: undefined,
           socialWorkerName: undefined,
           socialWorkerPhoneNumber: undefined,
@@ -85,14 +95,19 @@ describe('utils', () => {
         expected: 'COMPLETED',
       },
       {
-        data: { ...mockUserCase, hasAnotherAdopAgencyOrLA: undefined, adopAgencyOrLAs: [] },
+        data: {
+          ...mockUserCase,
+          hasAnotherAdopAgencyOrLA: undefined,
+          localAuthorityName: 'name',
+        },
         expected: 'IN_PROGRESS',
       },
       {
         data: {
           ...mockUserCase,
           hasAnotherAdopAgencyOrLA: undefined,
-          adopAgencyOrLAs: [{ adopAgencyOrLaId: 'MOCK_ID_1' }],
+          localAuthorityName: 'name',
+          localAuthorityPhoneNumber: '01234567890',
         },
         expected: 'IN_PROGRESS',
       },
@@ -719,100 +734,99 @@ describe('utils', () => {
     });
   });
 
-  Date.now = jest.fn(() => +new Date('2021-01-01'));
-  describe('getAdoptionAgencyUrl()', () => {
-    test('Should return adoption agency add url when adoption-agency count 0', async () => {
-      expect(getAdoptionAgencyUrl(userCase)).toBe('/children/adoption-agency?add=1609459200000');
-    });
+  // describe('getAdoptionAgencyUrl()', () => {
+  //   // test('Should return adoption agency add url when adoption-agency count 0', async () => {
+  //   //   expect(getAdoptionAgencyUrl(userCase)).toBe('/children/adoption-agency?add=1609459200000');
+  //   // });
 
-    test('Should return adoption agency add url when adoption-agency count: 2 and hasAnotherAdopAgencyOrLA: NO', async () => {
-      expect(
-        getAdoptionAgencyUrl({
-          id: '123',
-          state: State.Draft,
-          connections: [],
-          documentsGenerated: [],
-          applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },
-          adopAgencyOrLAs: [
-            {
-              adopAgencyOrLaId: '1',
-              adopAgencyOrLaName: 'a',
-              adopAgencyOrLaContactName: 'a',
-              adopAgencyOrLaPhoneNumber: '09876543210',
-              adopAgencyOrLaContactEmail: 'a@a.a',
-            },
-            {
-              adopAgencyOrLaId: '2',
-              adopAgencyOrLaName: 'a',
-              adopAgencyOrLaContactName: 'a',
-              adopAgencyOrLaPhoneNumber: '09876543210',
-              adopAgencyOrLaContactEmail: 'a@a.a',
-            },
-          ],
-          hasAnotherAdopAgencyOrLA: YesOrNo.NO,
-          socialWorkerName: 'John',
-          socialWorkerPhoneNumber: '09876543210',
-          socialWorkerEmail: 'abc@john.com',
-        })
-      ).toBe('/children/adoption-agency?change=1');
-    });
+  // test('Should return adoption agency add url when adoption-agency count: 2 and hasAnotherAdopAgencyOrLA: NO', async () => {
+  //   expect(
+  //     getAdoptionAgencyUrl({
+  //       id: '123',
+  //       state: State.Draft,
+  //       connections: [],
+  //       documentsGenerated: [],
+  //       applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },
+  //       adopAgencyOrLAs: [
+  //         {
+  //           adopAgencyOrLaId: '1',
+  //           adopAgencyOrLaName: 'a',
+  //           adopAgencyOrLaContactName: 'a',
+  //           adopAgencyOrLaPhoneNumber: '09876543210',
+  //           adopAgencyOrLaContactEmail: 'a@a.a',
+  //         },
+  //         {
+  //           adopAgencyOrLaId: '2',
+  //           adopAgencyOrLaName: 'a',
+  //           adopAgencyOrLaContactName: 'a',
+  //           adopAgencyOrLaPhoneNumber: '09876543210',
+  //           adopAgencyOrLaContactEmail: 'a@a.a',
+  //         },
+  //       ],
+  //       hasAnotherAdopAgencyOrLA: YesOrNo.NO,
+  //       socialWorkerName: 'John',
+  //       socialWorkerPhoneNumber: '09876543210',
+  //       socialWorkerEmail: 'abc@john.com',
+  //     })
+  //   ).toBe('/children/adoption-agency');
+  // });
 
-    test('Should return adoption agency add url when adoption-agency count: 2 and hasAnotherAdopAgencyOrLA: Yes', async () => {
-      expect(
-        getAdoptionAgencyUrl({
-          id: '123',
-          state: State.Draft,
-          connections: [],
-          documentsGenerated: [],
-          applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },
-          adopAgencyOrLAs: [
-            {
-              adopAgencyOrLaId: '1',
-              adopAgencyOrLaName: 'a',
-              adopAgencyOrLaContactName: 'a',
-              adopAgencyOrLaPhoneNumber: '09876543210',
-              adopAgencyOrLaContactEmail: 'a@a.a',
-            },
-            {
-              adopAgencyOrLaId: '2',
-              adopAgencyOrLaName: 'a',
-              adopAgencyOrLaContactName: 'a',
-              adopAgencyOrLaPhoneNumber: '09876543210',
-              adopAgencyOrLaContactEmail: 'a@a.a',
-            },
-          ],
-          hasAnotherAdopAgencyOrLA: YesOrNo.YES,
-          socialWorkerName: 'John',
-          socialWorkerPhoneNumber: '09876543210',
-          socialWorkerEmail: 'abc@john.com',
-        })
-      ).toBe('/children/adoption-agency?change=1');
-    });
+  // test('Should return adoption agency add url when adoption-agency count: 2 and hasAnotherAdopAgencyOrLA: Yes', async () => {
+  //   expect(
+  //     getAdoptionAgencyUrl({
+  //       id: '123',
+  //       state: State.Draft,
+  //       connections: [],
+  //       documentsGenerated: [],
+  //       applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },
+  //       adopAgencyOrLAs: [
+  //         {
+  //           adopAgencyOrLaId: '1',
+  //           adopAgencyOrLaName: 'a',
+  //           adopAgencyOrLaContactName: 'a',
+  //           adopAgencyOrLaPhoneNumber: '09876543210',
+  //           adopAgencyOrLaContactEmail: 'a@a.a',
+  //         },
+  //         {
+  //           adopAgencyOrLaId: '2',
+  //           adopAgencyOrLaName: 'a',
+  //           adopAgencyOrLaContactName: 'a',
+  //           adopAgencyOrLaPhoneNumber: '09876543210',
+  //           adopAgencyOrLaContactEmail: 'a@a.a',
+  //         },
+  //       ],
+  //       hasAnotherAdopAgencyOrLA: YesOrNo.YES,
+  //       socialWorkerName: 'John',
+  //       socialWorkerPhoneNumber: '09876543210',
+  //       socialWorkerEmail: 'abc@john.com',
+  //     })
+  //   ).toBe('/children/adoption-agency?change=1');
+  // });
 
-    test('Should return adoption agency add url when adoption-agency count: 1, hasAnotherAdopAgencyOrLA: NO and phone number not available', async () => {
-      expect(
-        getAdoptionAgencyUrl({
-          id: '123',
-          state: State.Draft,
-          connections: [],
-          documentsGenerated: [],
-          applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },
-          adopAgencyOrLAs: [
-            {
-              adopAgencyOrLaId: '1',
-              adopAgencyOrLaName: 'a',
-              adopAgencyOrLaContactName: 'a',
-              adopAgencyOrLaContactEmail: 'a@a.a',
-            },
-          ],
-          hasAnotherAdopAgencyOrLA: YesOrNo.NO,
-          socialWorkerName: 'John',
-          socialWorkerPhoneNumber: '09876543210',
-          socialWorkerEmail: 'abc@john.com',
-        })
-      ).toBe('/children/adoption-agency?change=1');
-    });
-  });
+  // test('Should return adoption agency add url when adoption-agency count: 1, hasAnotherAdopAgencyOrLA: NO and phone number not available', async () => {
+  //   expect(
+  //     getAdoptionAgencyUrl({
+  //       id: '123',
+  //       state: State.Draft,
+  //       connections: [],
+  //       documentsGenerated: [],
+  //       applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },
+  //       adopAgencyOrLAs: [
+  //         {
+  //           adopAgencyOrLaId: '1',
+  //           adopAgencyOrLaName: 'a',
+  //           adopAgencyOrLaContactName: 'a',
+  //           adopAgencyOrLaContactEmail: 'a@a.a',
+  //         },
+  //       ],
+  //       hasAnotherAdopAgencyOrLA: YesOrNo.NO,
+  //       socialWorkerName: 'John',
+  //       socialWorkerPhoneNumber: '09876543210',
+  //       socialWorkerEmail: 'abc@john.com',
+  //     })
+  //   ).toBe('/children/adoption-agency?change=1');
+  // });
+  // });
 
   describe('getSiblingPlacementOrderStatus', () => {
     test.each([

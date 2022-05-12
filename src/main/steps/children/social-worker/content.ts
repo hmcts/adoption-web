@@ -25,7 +25,7 @@ const en = () => ({
       invalid: 'Enter an email address in the correct format, like name@example.com',
     },
     childLocalAuthority: {
-      invalid: 'Enter a name',
+      required: 'Enter a name',
     },
   },
 });
@@ -53,7 +53,7 @@ const cy: typeof en = () => ({
       invalid: 'Enter an email address in the correct format, like name@example.com (in welsh)',
     },
     childLocalAuthority: {
-      invalid: 'Enter a name (in welsh)',
+      required: 'Enter a name (in welsh)',
     },
   },
 });

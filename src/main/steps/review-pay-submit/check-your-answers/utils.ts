@@ -107,7 +107,7 @@ export const adoptionAgencySummaryList = (
 ): SummaryList => {
   let adoptionAgency;
   if (agencyIndex === 0 || (agencyIndex === 1 && userCase.hasAnotherAdopAgencyOrLA === YesOrNo.YES)) {
-    adoptionAgency = userCase.adopAgencyOrLAs![agencyIndex];
+    //adoptionAgency = userCase.adopAgencyOrLAs![agencyIndex];
   }
 
   const changeUrl = `${Urls.ADOPTION_AGENCY}?change=${adoptionAgency?.adopAgencyOrLaId}`;
@@ -178,8 +178,8 @@ export const socialWorkerSummaryList = (
           changeUrl: Urls.SOCIAL_WORKER,
         },
         {
-          key: keys.teamEmailAddress,
-          value: userCase.socialWorkerTeamEmail,
+          key: keys.childLocalAuthority,
+          value: userCase.childLocalAuthority,
           changeUrl: Urls.SOCIAL_WORKER,
         },
       ],
