@@ -51,7 +51,7 @@ Scenario(
     await taskListPage.verifySecondApplicantPersonalDetailsStatus();
 
     await taskListPage.selectOtherApplicantPersonalDetails();
-    await otherApplicantPersonalDetailsPage.otherApplicantPersonalDetailsSection();
+    await otherApplicantPersonalDetailsPage.otherApplicantPersonalDetailsSectionEmpty();
     await taskListPage.verifyOtherApplicantPersonalDetailsStatus();
 
     await taskListPage.selectChildrenBirthCertificate();
