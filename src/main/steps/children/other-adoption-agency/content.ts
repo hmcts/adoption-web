@@ -5,7 +5,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
   section: 'Application details',
-  title: 'Is there another adoption agency or local authority involved?',
+  label: 'Is there another adoption agency or local authority involved?',
   line1:
     'This would be separate from your local authority, for example it could be a private agency or a different local authority.',
   errors: {
@@ -17,7 +17,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: 'Application details. (in welsh)',
-  title: 'Is there another adoption agency or local authority involved?. (in welsh)',
+  label: 'Is there another adoption agency or local authority involved?. (in welsh)',
   line1:
     'This would be separate from your local authority, for example it could be a private agency or a different local authority. (in welsh)',
   errors: {
