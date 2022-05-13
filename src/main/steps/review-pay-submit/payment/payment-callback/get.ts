@@ -5,7 +5,7 @@ import { State } from '../../../../app/case/definition';
 import { AppRequest } from '../../../../app/controller/AppRequest';
 import { PaymentClient } from '../../../../app/payment/PaymentClient';
 import { PaymentModel } from '../../../../app/payment/PaymentModel';
-import { APPLICATION_SUBMITTED, CHECK_ANSWERS_URL, PAYMENT_CALLBACK_URL, TASK_LIST_URL } from '../../../urls';
+import { APPLICATION_SUBMITTED, CHECK_ANSWERS_URL, PAYMENT_CALLBACK_URL, STATEMENT_OF_TRUTH } from '../../../urls';
 
 export default class PaymentCallbackGetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
@@ -45,7 +45,7 @@ export default class PaymentCallbackGetController {
         return res.redirect(APPLICATION_SUBMITTED);
       }
 
-      res.redirect(req.query.back ? CHECK_ANSWERS_URL : TASK_LIST_URL);
+      res.redirect(req.query.back ? CHECK_ANSWERS_URL : STATEMENT_OF_TRUTH);
     });
   }
 }

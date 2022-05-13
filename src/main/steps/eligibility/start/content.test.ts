@@ -27,7 +27,7 @@ const enContent = {
     "You will need to provide details about yourself and any second applicant. Some of the information you provide is needed for the Adoption Register and adoption certificate which will replace the child's birth certificate. Your personal information will not affect your application to adopt.",
   line7: 'The information you provide will only be seen by the court and relevant adoption agencies or authorities.',
   line8:
-    'The court processing fee for an application to adopt is <b>£183</b>. Payment is due once the application is complete and ready to submit to the court.',
+    'The court processing fee for an application to adopt is <b>£MOCK_AMOUNT</b>. Payment is due once the application is complete and ready to submit to the court.',
 };
 
 const cyContent = {
@@ -53,13 +53,19 @@ const cyContent = {
   line7:
     'Dim ond y llys a’r asiantaethau neu awdurdodau mabwysiadu perthnasol fydd yn gweld yr wybodaeth a ddarperir gennych.',
   line8:
-    'Y ffi prosesu llys ar gyfer cais i fabwysiadu yw <b>£183</b>. Mae taliad yn ddyledus unwaith y bydd y cais wedi’i gwblhau ac yn barod i’w gyflwyno i’r llys.',
+    'Y ffi prosesu llys ar gyfer cais i fabwysiadu yw <b>£MOCK_AMOUNT</b>. Mae taliad yn ddyledus unwaith y bydd y cais wedi’i gwblhau ac yn barod i’w gyflwyno i’r llys.',
 };
 
 describe('eligibility > start > content', () => {
   const commonContent = generatePageContent({
     language: 'en',
     userCase: {},
+    fee: {
+      FeeCode: 'MOCK_CODE',
+      FeeDescription: 'MOCK_DESCRIPTION',
+      FeeVersion: 'MOCK_VERSION',
+      FeeAmount: 'MOCK_AMOUNT',
+    },
   }) as CommonContent;
 
   test('should return correct english content', () => {

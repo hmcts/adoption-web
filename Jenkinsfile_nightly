@@ -55,10 +55,10 @@ pipelineConf.vaultSecrets = secrets
 withNightlyPipeline(type, product, component) {
   env.TEST_URL = "https://adoption-web.aat.platform.hmcts.net/"
   env.ADOP_WEB_URL = params.FRONTEND_URL
-  enableCrossBrowserTest(['chrome', 'firefox','microsoft'])
+  enableCrossBrowserTest(['chrome','microsoft'])
   enableFullFunctionalTest(120)
   loadVaultSecrets(secrets)
-  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
+//  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
   enableFortifyScan()
   // enableSecurityScan()
 

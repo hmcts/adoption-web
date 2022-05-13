@@ -4,6 +4,7 @@ import type { LoggerInstance } from 'winston';
 
 import { CaseApi } from '../case/CaseApi';
 import { Case, CaseWithId } from '../case/case';
+import { Fee } from '../case/definition';
 import { FormError } from '../form/Form';
 
 export interface AppRequest<T = Partial<Case>> extends Request {
@@ -25,6 +26,7 @@ export interface AppSession extends Session {
   errors: FormError[] | undefined;
   addresses: [];
   returnUrl?: string;
+  fee?: Fee;
 }
 
 export interface UserDetails {
