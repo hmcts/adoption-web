@@ -50,18 +50,9 @@ describe('from-api-format', () => {
           id: 'MOCK_SIBLING_ID',
           value: {
             siblingId: 'MOCK_SIBLING_ID',
-            siblingFirstName: 'MOCK_FIRST_NAMES',
-            siblingLastNames: 'MOCK_LAST_NAMES',
-            siblingPlacementOrders: [
-              {
-                id: 'MOCK_PLACEMENT_ORDER_ID',
-                value: {
-                  placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
-                  placementOrderType: 'MOCK_TYPE',
-                  placementOrderNumber: 'MOCK_NUMBER',
-                },
-              },
-            ],
+            siblingRelation: 'MOCK_RELATION',
+            siblingPoType: 'MOCK_TYPE',
+            siblingPoNumber: 'MOCK_NUMBER',
           },
         },
       ],
@@ -104,15 +95,9 @@ describe('from-api-format', () => {
       siblings: [
         {
           siblingId: 'MOCK_SIBLING_ID',
-          siblingFirstName: 'MOCK_FIRST_NAMES',
-          siblingLastNames: 'MOCK_LAST_NAMES',
-          siblingPlacementOrders: [
-            {
-              placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
-              placementOrderType: 'MOCK_TYPE',
-              placementOrderNumber: 'MOCK_NUMBER',
-            },
-          ],
+          siblingRelation: 'MOCK_RELATION',
+          siblingPoType: 'MOCK_TYPE',
+          siblingPoNumber: 'MOCK_NUMBER',
         },
       ],
       localAuthorityName: 'laname',
@@ -138,9 +123,9 @@ describe('from-api-format', () => {
           id: 'MOCK_SIBLING_ID',
           value: {
             siblingId: 'MOCK_SIBLING_ID',
-            siblingFirstName: 'MOCK_FIRST_NAMES',
-            siblingLastNames: 'MOCK_LAST_NAMES',
-            siblingPlacementOrders: undefined,
+            siblingRelation: 'MOCK_RELATION',
+            siblingPoType: 'MOCK_TYPE',
+            siblingPoNumber: 'MOCK_NUMBER',
           },
         },
       ],
@@ -150,9 +135,9 @@ describe('from-api-format', () => {
       siblings: [
         {
           siblingId: 'MOCK_SIBLING_ID',
-          siblingFirstName: 'MOCK_FIRST_NAMES',
-          siblingLastNames: 'MOCK_LAST_NAMES',
-          siblingPlacementOrders: [],
+          siblingRelation: 'MOCK_RELATION',
+          siblingPoType: 'MOCK_TYPE',
+          siblingPoNumber: 'MOCK_NUMBER',
         },
       ],
     });

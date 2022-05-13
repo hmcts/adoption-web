@@ -55,12 +55,10 @@ export const CHILDREN_FIND_FAMILY_COURT: PageLink = `${CHILDREN}/find-family-cou
 
 export const SIBLING: PageLink = '/sibling';
 export const SIBLING_EXISTS: PageLink = `${SIBLING}/exists`;
-export const SIBLING_COURT_ORDER_EXISTS: PageLink = `${SIBLING}/court-order-exists`;
-export const SIBLING_NAME: PageLink = `${SIBLING}/name`;
+export const SIBLING_RELATION: PageLink = `${SIBLING}/relation`;
 export const SIBLING_ORDER_TYPE: PageLink = `${SIBLING}/placement-order-type`;
 export const SIBLING_ORDER_CASE_NUMBER: PageLink = `${SIBLING}/placement-order-number`;
 export const SIBLING_ORDER_SUMMARY: PageLink = `${SIBLING}/summary`;
-export const SIBLING_SELECT: PageLink = `${SIBLING}/select-sibling`;
 export const SIBLING_ORDER_CHECK_YOUR_ANSWERS: PageLink = `${SIBLING}/placement-order-check-your-answers`;
 export const SIBLING_REMOVE_PLACEMENT_ORDER: PageLink = `${SIBLING}/remove-placement-order`;
 

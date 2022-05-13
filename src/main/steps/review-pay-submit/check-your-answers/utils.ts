@@ -1,6 +1,6 @@
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { CaseDate, CaseWithId, Checkbox, FieldPrefix } from '../../../app/case/case';
-import { ApplyingWith, Nationality, PlacementOrder, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
+import { ApplyingWith, Nationality, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { PageContent } from '../../../app/controller/GetController';
 import * as Urls from '../../../steps/urls';
@@ -506,63 +506,38 @@ export const siblingCourtOrderSummaryList = (
         valueHtml: content.yesNoNotsure[userCase.hasSiblings!],
         changeUrl: `${Urls.SIBLING_EXISTS}`,
       },
-      ...(userCase.hasSiblings === YesNoNotsure.YES
-        ? [
-            {
-              key: keys.siblingCourtOrders,
-              valueHtml: content.yesNoNotsure[userCase.hasPoForSiblings!],
-              changeUrl: `${Urls.SIBLING_COURT_ORDER_EXISTS}`,
-            },
-            ...(userCase.hasPoForSiblings === YesNoNotsure.YES
-              ? userCase.siblings!.map(sibling => ({
-                  key: keys.siblingName,
-                  value: sibling.siblingFirstName + ' ' + sibling.siblingLastNames,
-                  changeUrl: `${Urls.SIBLING_NAME}?change=${sibling.siblingId}`,
-                }))
-              : []),
-          ]
-        : []),
     ],
     content
   );
 
   const siblingCourtOrderList =
-    userCase.hasSiblings === YesNoNotsure.YES && userCase.hasPoForSiblings === YesNoNotsure.YES
+    userCase.hasSiblings === YesNoNotsure.YES
       ? userCase.siblings!.reduce(
           (rows: GovUkNunjucksSummary[], sibling) => [
             ...rows,
-            ...sibling.siblingPlacementOrders!.reduce(
-              (acc: GovUkNunjucksSummary[], item) => [
-                ...acc,
-                ...getSectionSummaryList(
-                  [
-                    {
-                      keyHtml: `<h3 class="govuk-heading-s govuk-!-margin-top-8">${keys.courtOrder}</h3>`,
-                      classes: 'govuk-summary-list__row--no-border',
-                    },
-                    {
-                      key: keys.siblingName,
-                      value: sibling.siblingFirstName + ' ' + sibling.siblingLastNames,
-                    },
-                    {
-                      key: keys.typeOfOrder,
-                      value: (item as PlacementOrder).placementOrderType,
-                      changeUrl: `${Urls.SIBLING_ORDER_TYPE}?change=${sibling.siblingId}/${
-                        (item as PlacementOrder).placementOrderId
-                      }`,
-                    },
-                    {
-                      key: keys.orderNumber,
-                      value: (item as PlacementOrder).placementOrderNumber,
-                      changeUrl: `${Urls.SIBLING_ORDER_CASE_NUMBER}?change=${sibling.siblingId}/${
-                        (item as PlacementOrder).placementOrderId
-                      }`,
-                    },
-                  ],
-                  content
-                ),
+            ...getSectionSummaryList(
+              [
+                {
+                  keyHtml: `<h3 class="govuk-heading-s govuk-!-margin-top-8">${keys.courtOrder}</h3>`,
+                  classes: 'govuk-summary-list__row--no-border',
+                },
+                {
+                  key: keys.siblingRelation,
+                  value: sibling.siblingRelation,
+                  changeUrl: `${Urls.SIBLING_RELATION}?change=${sibling.siblingId}`,
+                },
+                {
+                  key: keys.typeOfOrder,
+                  value: sibling.siblingPoType,
+                  changeUrl: `${Urls.SIBLING_ORDER_TYPE}?change=${sibling.siblingId}`,
+                },
+                {
+                  key: keys.orderNumber,
+                  value: sibling.siblingPoNumber,
+                  changeUrl: `${Urls.SIBLING_ORDER_CASE_NUMBER}?change=${sibling.siblingId}`,
+                },
               ],
-              []
+              content
             ),
           ],
           []
