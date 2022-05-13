@@ -8,7 +8,8 @@ process.on('unhandledRejection', reason => {
   throw reason;
 });
 
-getTokenFromApi();
+const decoded = Buffer.from(process.env.ENDPOINTS as string, 'base64');
+const endpoints = JSON.parse(decoded.toString());
 
 const generateTestUsername = () => `adoption.web.automationTest.${new Date().getTime()}@hmcts.net`;
 const TestUser = generateTestUsername();
@@ -63,7 +64,7 @@ export const config = {
     steps: ['../steps/common.ts', '../steps/date.ts', '../steps/check-your-answers.ts', '../steps/happy-path.ts'],
   },
   bootstrap: async (): Promise<void> => idamUserManager.createUser(TestUser, TestPass),
-  //teardown: async (): Promise<void> => idamUserManager.deleteAll(),
+  teardown: async (): Promise<void> => idamUserManager.deleteAll(),
   helpers: {},
   AutoLogin: {
     enabled: true,
