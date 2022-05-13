@@ -19,7 +19,7 @@ module.exports = {
   },
 
   async selectApplyWithMySpouseSection() {
-    // await I.retry(3).see('For example, as a legally married couple or legal civil partner.');
+    await I.retry(3).see('For example, as a legally married couple or legal civil partner.');
     await I.retry(3).click(this.fields.applyWithMySpouse);
     await I.retry(3).click('Save and continue');
     await I.wait(2);
