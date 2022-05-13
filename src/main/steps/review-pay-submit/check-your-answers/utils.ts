@@ -100,54 +100,76 @@ export const applicationSummaryList = (
   ),
 });
 
-export const adoptionAgencySummaryList = (
+export const localAuthoritySummaryList = (
   { sectionTitles, keys, ...content }: SummaryListContent,
-  userCase: Partial<CaseWithId>,
-  agencyIndex = 0
+  userCase: Partial<CaseWithId>
 ): SummaryList => {
-  let adoptionAgency;
-  if (agencyIndex === 0 || (agencyIndex === 1 && userCase.hasAnotherAdopAgencyOrLA === YesOrNo.YES)) {
-    //adoptionAgency = userCase.adopAgencyOrLAs![agencyIndex];
-  }
-
-  const changeUrl = `${Urls.ADOPTION_AGENCY}?change=${adoptionAgency?.adopAgencyOrLaId}`;
   return {
-    title: agencyIndex === 0 ? sectionTitles.adoptionagencyOrLA : sectionTitles.additionalAoptionagencyOrLA,
+    title: sectionTitles.adoptionagencyOrLA,
     rows: getSectionSummaryList(
       [
-        ...(agencyIndex === 1
-          ? [
-              {
-                key: keys.additionalAdoptionAgency,
-                value: content.yesNoNotsure[userCase.hasAnotherAdopAgencyOrLA!],
-                changeUrl: Urls.OTHER_ADOPTION_AGENCY,
-              },
-            ]
-          : []),
-        ...(adoptionAgency
-          ? [
-              {
-                key: keys.name,
-                value: adoptionAgency?.adopAgencyOrLaName,
-                changeUrl,
-              },
-              {
-                key: keys.phoneNumber,
-                value: adoptionAgency?.adopAgencyOrLaPhoneNumber,
-                changeUrl,
-              },
-              {
-                key: keys.nameOfContact,
-                value: adoptionAgency?.adopAgencyOrLaContactName,
-                changeUrl,
-              },
-              {
-                key: keys.emailOfContact,
-                value: adoptionAgency?.adopAgencyOrLaContactEmail,
-                changeUrl,
-              },
-            ]
-          : []),
+        {
+          key: keys.name,
+          value: userCase.localAuthorityName,
+          changeUrl: Urls.LOCAL_AUTHORITY,
+        },
+        {
+          key: keys.nameOfContact,
+          value: userCase.localAuthorityContactName,
+          changeUrl: Urls.LOCAL_AUTHORITY,
+        },
+        {
+          key: keys.phoneNumber,
+          value: userCase.localAuthorityPhoneNumber,
+          changeUrl: Urls.LOCAL_AUTHORITY,
+        },
+        {
+          key: keys.emailOfContact,
+          value: userCase.localAuthorityContactEmail,
+          changeUrl: Urls.LOCAL_AUTHORITY,
+        },
+      ],
+      content
+    ),
+  };
+};
+export const adoptionAgencySummaryList = (
+  { sectionTitles, keys, ...content }: SummaryListContent,
+  userCase: Partial<CaseWithId>
+): SummaryList | undefined => {
+  if (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO) {
+    return;
+  }
+  return {
+    title: sectionTitles.additionalAoptionagencyOrLA,
+    rows: getSectionSummaryList(
+      [
+        {
+          key: keys.name,
+          value: userCase.adopAgencyOrLaName,
+          changeUrl: Urls.ADOPTION_AGENCY,
+        },
+        {
+          key: keys.nameOfContact,
+          value: userCase.adopAgencyOrLaContactName,
+          changeUrl: Urls.ADOPTION_AGENCY,
+        },
+        {
+          key: keys.phoneNumber,
+          value: userCase.adopAgencyOrLaPhoneNumber,
+          changeUrl: Urls.ADOPTION_AGENCY,
+        },
+        {
+          key: keys.address,
+          valueHtml:
+            userCase.adopAgencyAddressLine1 + '<br>' + userCase.adopAgencyTown + '<br>' + userCase.adopAgencyPostcode,
+          changeUrl: Urls.ADOPTION_AGENCY,
+        },
+        {
+          key: keys.emailOfContact,
+          value: userCase.adopAgencyOrLaContactEmail,
+          changeUrl: Urls.ADOPTION_AGENCY,
+        },
       ],
       content
     ),

@@ -62,7 +62,7 @@ export const childrenSequence: Step[] = [
     getNextStep: () => Urls.TASK_LIST_URL,
   },
   {
-    url: Urls.ADOPTION_AGENCY,
+    url: Urls.LOCAL_AUTHORITY,
     showInSection: Sections.AboutChildren,
     getNextStep: () => Urls.OTHER_ADOPTION_AGENCY,
   },
@@ -70,10 +70,10 @@ export const childrenSequence: Step[] = [
     url: Urls.OTHER_ADOPTION_AGENCY,
     showInSection: Sections.AboutChildren,
     getNextStep: userCase =>
-      userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO ? Urls.SOCIAL_WORKER : Urls.ADOPTION_AGENCY2,
+      userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO ? Urls.SOCIAL_WORKER : Urls.ADOPTION_AGENCY,
   },
   {
-    url: Urls.ADOPTION_AGENCY2,
+    url: Urls.ADOPTION_AGENCY,
     showInSection: Sections.AboutChildren,
     getNextStep: () => Urls.SOCIAL_WORKER,
   },

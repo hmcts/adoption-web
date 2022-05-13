@@ -54,7 +54,7 @@ describe('childrenSequence', () => {
     expect(childrenSequence[10].showInSection).toBe('aboutChildren');
     expect(childrenSequence[10].getNextStep({})).toBe('/task-list');
 
-    expect(childrenSequence[11].url).toBe('/children/adoption-agency');
+    expect(childrenSequence[11].url).toBe('/children/local-authority');
     expect(childrenSequence[11].showInSection).toBe('aboutChildren');
     expect(childrenSequence[11].getNextStep({})).toBe('/children/other-adoption-agency');
 
@@ -62,10 +62,10 @@ describe('childrenSequence', () => {
     expect(childrenSequence[12].showInSection).toBe('aboutChildren');
     expect(childrenSequence[12].getNextStep({ hasAnotherAdopAgencyOrLA: YesOrNo.NO })).toBe('/children/social-worker');
     expect(childrenSequence[12].getNextStep({ hasAnotherAdopAgencyOrLA: YesOrNo.YES })).toBe(
-      '/children/adoption-agency2'
+      '/children/adoption-agency'
     );
 
-    expect(childrenSequence[13].url).toBe('/children/adoption-agency2');
+    expect(childrenSequence[13].url).toBe('/children/adoption-agency');
     expect(childrenSequence[13].showInSection).toBe('aboutChildren');
     expect(childrenSequence[13].getNextStep({})).toBe('/children/social-worker');
 

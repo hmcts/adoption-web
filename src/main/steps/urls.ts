@@ -138,8 +138,8 @@ export const CHECK_ANSWERS_URL: PageLink = `${REVIEW_PAY_SUBMIT}/check-your-answ
 export const PAY_YOUR_FEE: PageLink = `${REVIEW_PAY_SUBMIT}/payment/pay-your-fee`;
 export const PAYMENT_CALLBACK_URL: PageLink = `${REVIEW_PAY_SUBMIT}/payment/payment-callback`;
 
+export const LOCAL_AUTHORITY: PageLink = `${CHILDREN}/local-authority`;
 export const ADOPTION_AGENCY: PageLink = `${CHILDREN}/adoption-agency`;
-export const ADOPTION_AGENCY2: PageLink = `${CHILDREN}/adoption-agency2`;
 export const OTHER_ADOPTION_AGENCY: PageLink = `${CHILDREN}/other-adoption-agency`;
 export const SOCIAL_WORKER: PageLink = `${CHILDREN}/social-worker`;
 export const STATEMENT_OF_TRUTH: PageLink = `${REVIEW_PAY_SUBMIT}/statement-of-truth`;

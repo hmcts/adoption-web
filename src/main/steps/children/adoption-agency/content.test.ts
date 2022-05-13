@@ -11,28 +11,35 @@ const EN = 'en';
 
 const enContent = {
   section: 'Application details',
-  title: 'Local authority details',
-  line1:
-    'We need the details of the local authority that placed the child with you. These should be on the placement order.',
-  localAuthorityName: 'Name of local authority',
-  localAuthorityContactName: 'Name of your contact',
-  localAuthorityContactNameHint:
-    'This is usually your social worker. If you do not yet have a social worker, then this is the name of the person you have the most contact with in the local authority.',
-  localAuthorityPhoneNumber: 'Phone number',
-  localAuthorityPhoneNumberHint: 'This should be the number of your contact.',
-  localAuthorityContactEmail: 'Email address of your contact',
+  title: 'Adoption agency or local authority details',
+  adopAgencyName: 'Name of adoption agency or local authority',
+  adopAgencyContactName: 'Name of your contact',
+  adopAgencyPhone: 'Phone number',
+  adopAgencyAddressLine1: 'Address line 1',
+  adopAgencyTown: 'Town or city',
+  adopAgencyPostcode: 'Postcode',
+  adopAgencyContactEmail: 'Email address of your contact',
   errors: {
-    localAuthorityName: {
+    adopAgencyOrLaName: {
       required: 'Enter a name',
     },
-    localAuthorityContactName: {
+    adopAgencyOrLaContactName: {
       required: 'Enter a name',
     },
-    localAuthorityPhoneNumber: {
+    adopAgencyOrLaPhoneNumber: {
       required: 'Enter a UK telephone number',
       invalid: 'Enter a UK telephone number',
     },
-    localAuthorityContactEmail: {
+    adopAgencyAddressLine1: {
+      required: 'Enter the first line of the address',
+    },
+    adopAgencyTown: {
+      required: 'Enter the town or city',
+    },
+    adopAgencyPostcode: {
+      required: 'Enter the postcode',
+    },
+    adopAgencyOrLaContactEmail: {
       required: 'Enter an email address',
       invalid: 'Enter an email address in the correct format, like name@example.com',
     },
@@ -41,30 +48,37 @@ const enContent = {
 
 const cyContent = {
   section: 'Application details. (in welsh)',
-  title: 'Local authority details. (in welsh)',
-  line1:
-    'We need the details of the local authority that placed the child with you. These should be on the placement order. (in welsh)',
-  localAuthorityName: 'Enw’r asiantaeth fabwysiadu neu’r awdurdod lleol',
-  localAuthorityContactName: 'Enw eich cyswllt',
-  localAuthorityContactNameHint:
-    'This is usually your social worker. If you do not yet have a social worker, then this is the name of the person you have the most contact with in the local authority. (in welsh)',
-  localAuthorityPhoneNumber: 'Rhif ffôn',
-  localAuthorityPhoneNumberHint: 'This should be the number of your contact. (in welsh)',
-  localAuthorityContactEmail: 'Cyfeiriad e-bost eich cyswllt',
+  title: 'Adoption agency or local authority details. (in welsh)',
+  adopAgencyName: 'Name of adoption agency or local authority. (in welsh)',
+  adopAgencyContactName: 'Name of your contact. (in welsh)',
+  adopAgencyPhone: 'Phone number. (in welsh)',
+  adopAgencyAddressLine1: 'Address line 1. (in welsh)',
+  adopAgencyTown: 'Town or city. (in welsh)',
+  adopAgencyPostcode: 'Postcode. (in welsh)',
+  adopAgencyContactEmail: 'Email address of your contact. (in welsh)',
   errors: {
-    localAuthorityName: {
-      required: 'Nac ydwdwch enw',
+    adopAgencyOrLaName: {
+      required: 'Enter a name. (in welsh)',
     },
-    localAuthorityContactName: {
-      required: 'Nac ydwdwch enw',
+    adopAgencyOrLaContactName: {
+      required: 'Enter a name. (in welsh)',
     },
-    localAuthorityPhoneNumber: {
-      required: 'Rhowch rif ffôn yn y DU',
-      invalid: 'Rhowch rif ffôn yn y DU',
+    adopAgencyOrLaPhoneNumber: {
+      required: 'Enter a UK telephone number. (in welsh)',
+      invalid: 'Enter a UK telephone number. (in welsh)',
     },
-    localAuthorityContactEmail: {
-      required: 'Nac ydwdwch gyfeiriad e-bost',
-      invalid: 'Rhowch gyfeiriad e-bost yn y fformat cywir, er enghraifft enw@enghraifft.com',
+    adopAgencyAddressLine1: {
+      required: 'Enter the first line of the address. (in welsh)',
+    },
+    adopAgencyTown: {
+      required: 'Enter the town or city. (in welsh)',
+    },
+    adopAgencyPostcode: {
+      required: 'Enter the postcode. (in welsh)',
+    },
+    adopAgencyOrLaContactEmail: {
+      required: 'Enter an email address. (in welsh)',
+      invalid: 'Enter an email address in the correct format, like name@example.com. (in welsh)',
     },
   },
 };
@@ -72,7 +86,7 @@ const cyContent = {
 const commonContent = { language: EN } as CommonContent;
 
 /* eslint-disable @typescript-eslint/ban-types */
-describe('children > localAuthorityName > content', () => {
+describe('children > adoption-agency > content', () => {
   it('should return the correct content for language = en', () => {
     languageAssertions('en', enContent, () => generateContent(commonContent));
   });
@@ -81,61 +95,93 @@ describe('children > localAuthorityName > content', () => {
     languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
-  it('should have an localAuthorityName text input field', () => {
+  it('should have an adopAgencyOrLaName text input field', () => {
     const generatedContent = generateContent(commonContent) as Record<string, never>;
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const localAuthorityName = fields.localAuthorityName;
+    const adopAgencyOrLaName = fields.adopAgencyOrLaName;
 
-    expect(localAuthorityName.type).toBe('text');
-    expect((localAuthorityName.label as LanguageLookup)(generatedContent)).toBe(enContent.localAuthorityName);
+    expect(adopAgencyOrLaName.type).toBe('text');
+    expect((adopAgencyOrLaName.label as LanguageLookup)(generatedContent)).toBe(enContent.adopAgencyName);
 
-    (localAuthorityName.validator as ValidationCheck)('MockAgencyName', {});
+    (adopAgencyOrLaName.validator as ValidationCheck)('MockAgencyName', {});
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockAgencyName', {});
   });
 
-  it('should have an localAuthorityPhoneNumber text input field', () => {
+  it('should have an adopAgencyOrLaPhoneNumber text input field', () => {
     const generatedContent = generateContent(commonContent) as Record<string, never>;
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const localAuthorityPhoneNumber = fields.localAuthorityPhoneNumber;
+    const adopAgencyOrLaPhoneNumber = fields.adopAgencyOrLaPhoneNumber;
 
-    expect(localAuthorityPhoneNumber.type).toBe('text');
-    expect((localAuthorityPhoneNumber.label as LanguageLookup)(generatedContent)).toBe(
-      enContent.localAuthorityPhoneNumber
-    );
+    expect(adopAgencyOrLaPhoneNumber.type).toBe('text');
+    expect((adopAgencyOrLaPhoneNumber.label as LanguageLookup)(generatedContent)).toBe(enContent.adopAgencyPhone);
 
-    (localAuthorityPhoneNumber.validator as ValidationCheck)('MockAgencyPhoneNumber', {});
+    (adopAgencyOrLaPhoneNumber.validator as ValidationCheck)('MockAgencyPhoneNumber', {});
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockAgencyPhoneNumber');
   });
 
-  it('should have an localAuthorityContactName text input field', () => {
+  it('should have an adopAgencyOrLaContactName text input field', () => {
     const generatedContent = generateContent(commonContent) as Record<string, never>;
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const localAuthorityContactName = fields.localAuthorityContactName;
+    const adopAgencyOrLaContactName = fields.adopAgencyOrLaContactName;
 
-    expect(localAuthorityContactName.type).toBe('text');
-    expect((localAuthorityContactName.label as LanguageLookup)(generatedContent)).toBe(
-      enContent.localAuthorityContactName
-    );
+    expect(adopAgencyOrLaContactName.type).toBe('text');
+    expect((adopAgencyOrLaContactName.label as LanguageLookup)(generatedContent)).toBe(enContent.adopAgencyContactName);
 
-    (localAuthorityContactName.validator as ValidationCheck)('MockAgencyContactName', {});
+    (adopAgencyOrLaContactName.validator as ValidationCheck)('MockAgencyContactName', {});
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockAgencyContactName', {});
   });
 
-  it('should have an localAuthorityContactEmail text input field', () => {
+  it('should have an adopAgencyAddressLine1 text input field', () => {
     const generatedContent = generateContent(commonContent) as Record<string, never>;
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const localAuthorityContactEmail = fields.localAuthorityContactEmail;
+    const adopAgencyAddressLine1 = fields.adopAgencyAddressLine1;
 
-    expect(localAuthorityContactEmail.type).toBe('text');
-    expect((localAuthorityContactEmail.label as LanguageLookup)(generatedContent)).toBe(
-      enContent.localAuthorityContactEmail
+    expect(adopAgencyAddressLine1.type).toBe('text');
+    expect((adopAgencyAddressLine1.label as LanguageLookup)(generatedContent)).toBe(enContent.adopAgencyAddressLine1);
+
+    (adopAgencyAddressLine1.validator as ValidationCheck)('MockAdopAgencyAddressLine1', {});
+    expect(isFieldFilledIn).toHaveBeenCalledWith('MockAdopAgencyAddressLine1', {});
+  });
+
+  it('should have an adopAgencyTown text input field', () => {
+    const generatedContent = generateContent(commonContent) as Record<string, never>;
+    const form = generatedContent.form as FormContent;
+    const fields = form.fields as FormFields;
+    const adopAgencyTown = fields.adopAgencyTown;
+
+    expect(adopAgencyTown.type).toBe('text');
+    expect((adopAgencyTown.label as LanguageLookup)(generatedContent)).toBe(enContent.adopAgencyTown);
+
+    (adopAgencyTown.validator as ValidationCheck)('MockAdopadopAgencyTown', {});
+    expect(isFieldFilledIn).toHaveBeenCalledWith('MockAdopadopAgencyTown', {});
+  });
+
+  it('should have an adopAgencyPostcode text input field', () => {
+    const generatedContent = generateContent(commonContent) as Record<string, never>;
+    const form = generatedContent.form as FormContent;
+    const fields = form.fields as FormFields;
+    const adopAgencyPostcode = fields.adopAgencyPostcode;
+
+    expect(adopAgencyPostcode.type).toBe('text');
+    expect((adopAgencyPostcode.label as LanguageLookup)(generatedContent)).toBe(enContent.adopAgencyPostcode);
+  });
+
+  it('should have an adopAgencyOrLaContactEmail text input field', () => {
+    const generatedContent = generateContent(commonContent) as Record<string, never>;
+    const form = generatedContent.form as FormContent;
+    const fields = form.fields as FormFields;
+    const adopAgencyOrLaContactEmail = fields.adopAgencyOrLaContactEmail;
+
+    expect(adopAgencyOrLaContactEmail.type).toBe('text');
+    expect((adopAgencyOrLaContactEmail.label as LanguageLookup)(generatedContent)).toBe(
+      enContent.adopAgencyContactEmail
     );
 
-    (localAuthorityContactEmail.validator as ValidationCheck)('MockAgencyContactEmail', {});
+    (adopAgencyOrLaContactEmail.validator as ValidationCheck)('MockAgencyContactEmail', {});
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockAgencyContactEmail');
   });
 
