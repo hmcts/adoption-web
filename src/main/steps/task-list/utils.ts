@@ -1,12 +1,5 @@
 import { CaseDate, CaseWithId, FieldPrefix } from '../../app/case/case';
-import {
-  ApplyingWith,
-  Gender,
-  SectionStatus,
-  State,
-  YesNoNotsure,
-  YesOrNo,
-} from '../../app/case/definition';
+import { ApplyingWith, Gender, SectionStatus, State, YesNoNotsure, YesOrNo } from '../../app/case/definition';
 import {
   areDateFieldsFilledIn,
   isDateInputInvalid,
