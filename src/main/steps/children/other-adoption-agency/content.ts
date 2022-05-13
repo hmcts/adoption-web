@@ -6,8 +6,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 const en = () => ({
   section: 'Application details',
   label: 'Is there another adoption agency or local authority involved?',
-  line1:
-    'This would be separate from your local authority, for example it could be a private agency or a different local authority.',
+  hint: 'This would be separate from your local authority, for example it could be a private agency or a different local authority.',
   errors: {
     hasAnotherAdopAgencyOrLA: {
       required: 'Please answer the question',
@@ -18,8 +17,7 @@ const en = () => ({
 const cy: typeof en = () => ({
   section: 'Application details. (in welsh)',
   label: 'Is there another adoption agency or local authority involved?. (in welsh)',
-  line1:
-    'This would be separate from your local authority, for example it could be a private agency or a different local authority. (in welsh)',
+  hint: 'This would be separate from your local authority, for example it could be a private agency or a different local authority. (in welsh)',
   errors: {
     hasAnotherAdopAgencyOrLA: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
@@ -33,6 +31,7 @@ export const form: FormContent = {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.label,
+      hint: l => l.hint,
       section: l => l.section,
       values: [
         { label: l => l.yes, value: YesOrNo.YES },
