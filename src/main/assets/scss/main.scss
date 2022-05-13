@@ -52,6 +52,10 @@ section {
   }
 }
 
+.summary-list-value-left-align {
+  text-align: left;
+}
+
 .summary-list-actions {
   width: 100%;
   @include govuk-media-query($from: tablet) {

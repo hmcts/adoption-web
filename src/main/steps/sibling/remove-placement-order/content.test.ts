@@ -1,5 +1,5 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
-import { PlacementOrder, YesOrNo } from '../../../app/case/definition';
+import { YesOrNo } from '../../../app/case/definition';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent } from '../../common/common.content';
@@ -10,7 +10,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: 'Sibling details',
-  label: 'Are you sure you want to remove this MOCK_TYPE for MOCK_FIRST_NAME MOCK_LAST_NAMES?',
+  label: "Are you sure you want to remove this MOCK_TYPE for child's MOCK_RELATION?",
   errors: {
     confirm: {
       required: 'Please select an answer',
@@ -20,7 +20,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
-  label: 'Ydych chi’n siŵr eich bod eisiau dileu’r MOCK_TYPE hwn ar gyfer MOCK_TYPE?',
+  label: "Are you sure you want to remove this MOCK_TYPE for child's MOCK_RELATION? (in welsh)",
   errors: {
     confirm: {
       required: 'Dewiswch ateb os gwelwch yn dda',
@@ -36,19 +36,12 @@ describe('sibling > remove-placement-order > content', () => {
       siblings: [
         {
           siblingId: 'MOCK_SIBLING_ID',
-          siblingFirstName: 'MOCK_FIRST_NAME',
-          siblingLastNames: 'MOCK_LAST_NAMES',
-          siblingPlacementOrders: [
-            {
-              placementOrderId: 'MOCK_PO_ID',
-              placementOrderType: 'MOCK_TYPE',
-              placementOrderNumber: 'MOCK_NUMBER',
-            },
-          ],
+          siblingRelation: 'MOCK_RELATION',
+          siblingPoType: 'MOCK_TYPE',
+          siblingPoNumber: 'MOCK_NUMBER',
         },
       ],
       selectedSiblingId: 'MOCK_SIBLING_ID',
-      selectedSiblingPoId: 'MOCK_PO_ID',
     },
   } as CommonContent;
 
@@ -67,25 +60,24 @@ describe('sibling > remove-placement-order > content', () => {
 
   test.each([
     {
-      firstName: undefined,
-      lastName: undefined,
-      placementOrderType: undefined,
-      expected: { label: 'Are you sure you want to remove this  for  ?', placementOrderType: undefined },
+      siblingId: '',
+      siblingRelation: undefined,
+      siblingPoType: undefined,
+      expected: { label: "Are you sure you want to remove this  for child's ?", siblingPoType: undefined },
     },
     {
-      firstName: 'MOCK_FIRST_NAME',
-      lastName: 'MOCK_LAST_NAME',
-      placementOrderType: 'MOCK_TYPE',
+      siblingId: 'MOCK_SIBLING_ID',
+      siblingRelation: 'MOCK_RELATION',
+      siblingPoType: 'MOCK_TYPE',
       expected: {
-        label: 'Are you sure you want to remove this MOCK_TYPE for MOCK_FIRST_NAME MOCK_LAST_NAME?',
-        placementOrderType: 'MOCK_TYPE',
+        label: "Are you sure you want to remove this MOCK_TYPE for child's MOCK_RELATION?",
+        siblingPoType: 'MOCK_TYPE',
       },
     },
-  ])('should create correct label when %o', ({ firstName, lastName, placementOrderType, expected }) => {
-    commonContent.userCase!.siblings![0]!.siblingFirstName = firstName;
-    commonContent.userCase!.siblings![0]!.siblingLastNames = lastName;
-    (commonContent.userCase!.siblings![0]!.siblingPlacementOrders![0] as PlacementOrder).placementOrderType =
-      placementOrderType;
+  ])('should create correct label %#', ({ siblingId, siblingRelation, siblingPoType, expected }) => {
+    commonContent.userCase!.siblings![0]!.siblingId = siblingId;
+    commonContent.userCase!.siblings![0]!.siblingRelation = siblingRelation;
+    commonContent.userCase!.siblings![0]!.siblingPoType = siblingPoType;
     generatedContent = generateContent(commonContent);
     expect(generatedContent.label).toBe(expected.label);
   });
@@ -95,9 +87,7 @@ describe('sibling > remove-placement-order > content', () => {
     const field = fields.confirm as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
-    expect((field.label as Function)(generatedContent)).toBe(
-      'Are you sure you want to remove this MOCK_TYPE for MOCK_FIRST_NAME MOCK_LAST_NAME?'
-    );
+    expect((field.label as Function)(generatedContent)).toBe(enContent.label);
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesOrNo.YES);

@@ -43,6 +43,7 @@ export class GetController {
       userEmail: req.session?.user?.email,
       addresses,
       eligibility,
+      fee: req.session?.fee,
     });
 
     const sessionErrors = req.session?.errors || [];

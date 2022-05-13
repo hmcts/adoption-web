@@ -1,30 +1,26 @@
 import { CaseWithId } from '../../../app/case/case';
-import { PlacementOrder, YesOrNo } from '../../../app/case/definition';
+import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { defaultButtons } from '../../../steps/common/components/common/default-buttons';
 import { SECTION, SECTION_IN_WELSH } from '../constants';
 
-const getSiblingName = (userCase: Partial<CaseWithId>) => {
+const getSiblingRelation = (userCase: Partial<CaseWithId>) => {
   const sibling = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
-  return `${sibling?.siblingFirstName || ''} ${sibling?.siblingLastNames || ''}`;
+  return `${sibling?.siblingRelation || ''}`;
 };
 
 const getPlacementOrderType = (userCase: Partial<CaseWithId>): string => {
   const sibling = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
-  const placementOrder = (sibling?.siblingPlacementOrders as PlacementOrder[])?.find(
-    item => item.placementOrderId === userCase.selectedSiblingPoId
-  );
-
-  return `${placementOrder?.placementOrderType || ''}`;
+  return `${sibling?.siblingPoType || ''}`;
 };
 
 const en = content => ({
   section: SECTION,
-  label: `Are you sure you want to remove this ${getPlacementOrderType(content.userCase)} for ${getSiblingName(
+  label: `Are you sure you want to remove this ${getPlacementOrderType(
     content.userCase
-  )}?`,
+  )} for child's ${getSiblingRelation(content.userCase)}?`,
   errors: {
     confirm: {
       required: 'Please select an answer',
@@ -34,9 +30,9 @@ const en = content => ({
 
 const cy: typeof en = content => ({
   section: SECTION_IN_WELSH,
-  label: `Ydych chi’n siŵr eich bod eisiau dileu’r ${getPlacementOrderType(
+  label: `Are you sure you want to remove this ${getPlacementOrderType(
     content.userCase
-  )} hwn ar gyfer ${getPlacementOrderType(content.userCase)}?`,
+  )} for child's ${getSiblingRelation(content.userCase)}? (in welsh)`,
   errors: {
     confirm: {
       required: 'Dewiswch ateb os gwelwch yn dda',

@@ -74,6 +74,8 @@ const en = {
   webChatDetails:
     'All our web chat agents are busy helping other people. Please try again later or contact us using one of the ways below.',
   sendUsAMessage: 'Send us a message',
+  TBC: 'TBC',
+  sendUsAMessageTBC: 'Send us a message  (email TBC)',
   sendUsAMessageDetails: 'We aim to get back to you within 5 days.',
   telephone: 'Telephone',
   telephoneNumber: '0300 303 0642',
@@ -174,6 +176,8 @@ const cy: typeof en = {
   webChatDetails:
     "Mae ein holl asiantau sgwrsio dros y we yn brysur yn helpu pobl eraill. Dewch yn ôl nes ymlaen neu cysylltwch â ni trwy un o'r dulliau uchod.",
   sendUsAMessage: 'Anfonwch neges atom',
+  TBC: 'TBC (in Welsh)',
+  sendUsAMessageTBC: 'Send us a message  (email TBC) (in Welsh)',
   sendUsAMessageDetails: 'Byddwn yn ymdrechu i ymateb o fewn 5 diwrnod.',
   telephone: 'Ffoniwch',
   telephoneNumber: '0300 303 5171',

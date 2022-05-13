@@ -425,11 +425,8 @@ export interface CaseData {
   selectedAdoptionAgencyId: string;
   hasSiblings: string;
   hasSiblingNotSureReason: string;
-  hasPoForSiblings: string;
-  hasPoForSiblingsNotSureReason: string;
   addAnotherSiblingPlacementOrder: YesOrNo;
   selectedSiblingId: string;
-  selectedSiblingPoId: string;
 
   applicant1StatementOfTruth: YesOrNo;
   applicant2StatementOfTruth: YesOrNo;
@@ -723,9 +720,9 @@ export interface AdoptionAgencyOrLocalAuthority {
 
 export interface Sibling {
   siblingId: string;
-  siblingFirstName?: string;
-  siblingLastNames?: string;
-  siblingPlacementOrders?: (PlacementOrder | ListValue<PlacementOrder>)[];
+  siblingRelation?: string;
+  siblingPoType?: string;
+  siblingPoNumber?: string;
 }
 
 export interface SocialWorker {

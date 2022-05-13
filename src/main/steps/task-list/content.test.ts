@@ -1,6 +1,6 @@
 import languageAssertions from '../../../test/unit/utils/languageAssertions';
 import mockUserCase from '../../../test/unit/utils/mockUserCase';
-import { ApplyingWith, SectionStatus } from '../../app/case/definition';
+import { ApplyingWith, SectionStatus, YesNoNotsure } from '../../app/case/definition';
 import { CommonContent } from '../common/common.content';
 
 import { generateContent } from './content';
@@ -164,7 +164,7 @@ describe('task-list > content', () => {
               status: 'COMPLETED',
               text: 'Placement and court orders',
             },
-            { href: '/sibling/exists', id: 'sibling', status: 'COMPLETED', text: 'Sibling court order details' },
+            { href: '/sibling/summary', id: 'sibling', status: 'COMPLETED', text: 'Sibling court order details' },
             {
               href: '/children/find-family-court',
               id: 'find-family-court',
@@ -204,6 +204,7 @@ describe('task-list > content', () => {
         applyingWith: ApplyingWith.WITH_SOME_ONE_ELSE,
         placementOrders: undefined,
         addAnotherPlacementOrder: undefined,
+        hasSiblings: YesNoNotsure.NO,
         applicant1UploadedFiles: undefined,
         applicant1CannotUpload: undefined,
         findFamilyCourt: undefined,

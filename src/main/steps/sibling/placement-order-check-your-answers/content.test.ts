@@ -1,5 +1,4 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
-import { PlacementOrder } from '../../../app/case/definition';
 import { FormContent } from '../../../app/form/Form';
 import { CommonContent } from '../../common/common.content';
 
@@ -31,19 +30,12 @@ describe('sibling > placement-order-check-your-answers > content', () => {
       siblings: [
         {
           siblingId: 'MOCK_SIBLING_ID',
-          siblingFirstName: 'MOCK_FIRST_NAME',
-          siblingLastNames: 'MOCK_LAST_NAMES',
-          siblingPlacementOrders: [
-            {
-              placementOrderId: 'MOCK_PO_ID',
-              placementOrderType: 'MOCK_TYPE',
-              placementOrderNumber: 'MOCK_NUMBER',
-            },
-          ],
+          siblingRelation: 'MOCK_FIRST_NAME',
+          siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
+          siblingPoNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
         },
       ],
       selectedSiblingId: 'MOCK_SIBLING_ID',
-      selectedSiblingPoId: 'MOCK_PO_ID',
     },
   } as CommonContent;
 
@@ -57,53 +49,116 @@ describe('sibling > placement-order-check-your-answers > content', () => {
 
   test.each([
     {
-      firstName: undefined,
-      lastName: undefined,
-      placementOrderType: undefined,
-      expected: { title: ' for  ', placementOrderType: undefined },
+      siblingId: '',
+      siblingRelation: undefined,
+      siblingPoType: undefined,
+      siblingPoNumber: undefined,
+      expected: {
+        title: ' for ',
+        placementOrderListItems: [
+          {
+            key: { text: 'Relationship' },
+            value: {},
+            actions: {
+              items: [
+                {
+                  href: '/sibling/relation?change=undefined&returnUrl=/sibling/placement-order-check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Relationship',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Type of order' },
+            value: {},
+            actions: {
+              items: [
+                {
+                  href: '/sibling/placement-order-type?change=undefined&returnUrl=/sibling/placement-order-check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Type of order',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Order case or serial number' },
+            value: {},
+            actions: {
+              items: [
+                {
+                  href: '/sibling/placement-order-number?change=undefined&returnUrl=/sibling/placement-order-check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Order case or serial number',
+                },
+              ],
+            },
+          },
+        ],
+      },
     },
     {
-      firstName: 'MOCK_FIRST_NAME',
-      lastName: 'MOCK_LAST_NAME',
-      placementOrderType: 'MOCK_TYPE',
-      expected: { title: 'MOCK_TYPE for MOCK_FIRST_NAME MOCK_LAST_NAME', placementOrderType: 'MOCK_TYPE' },
+      siblingId: 'MOCK_SIBLING_ID',
+      siblingRelation: 'MOCK_RELATION',
+      siblingPoType: 'MOCK_TYPE',
+      siblingPoNumber: 'MOCK_NUMBER',
+      expected: {
+        title: 'MOCK_TYPE for MOCK_RELATION',
+        placementOrderListItems: [
+          {
+            key: { text: 'Relationship' },
+            value: { text: 'MOCK_RELATION' },
+            actions: {
+              items: [
+                {
+                  href: '/sibling/relation?change=MOCK_SIBLING_ID&returnUrl=/sibling/placement-order-check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Relationship',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Type of order' },
+            value: { text: 'MOCK_TYPE' },
+            actions: {
+              items: [
+                {
+                  href: '/sibling/placement-order-type?change=MOCK_SIBLING_ID&returnUrl=/sibling/placement-order-check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Type of order',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Order case or serial number' },
+            value: { text: 'MOCK_NUMBER' },
+            actions: {
+              items: [
+                {
+                  href: '/sibling/placement-order-number?change=MOCK_SIBLING_ID&returnUrl=/sibling/placement-order-check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Order case or serial number',
+                },
+              ],
+            },
+          },
+        ],
+      },
     },
-  ])('should create correct items for summaryList when %o', ({ firstName, lastName, placementOrderType, expected }) => {
-    commonContent.userCase!.siblings![0]!.siblingFirstName = firstName;
-    commonContent.userCase!.siblings![0]!.siblingLastNames = lastName;
-    (commonContent.userCase!.siblings![0]!.siblingPlacementOrders![0] as PlacementOrder).placementOrderType =
-      placementOrderType;
-    const generatedContent = generateContent(commonContent);
-    expect(generatedContent.title).toBe(expected.title);
-    expect(generatedContent.placementOrderListItems).toEqual([
-      {
-        key: { text: 'Type of order' },
-        value: { text: expected.placementOrderType },
-        actions: {
-          items: [
-            {
-              href: '/sibling/placement-order-type?change=MOCK_SIBLING_ID/MOCK_PO_ID&returnUrl=/sibling/placement-order-check-your-answers',
-              text: 'Change',
-              visuallyHiddenText: 'Type of order',
-            },
-          ],
-        },
-      },
-      {
-        key: { text: 'Order case or serial number' },
-        value: { text: 'MOCK_NUMBER' },
-        actions: {
-          items: [
-            {
-              href: '/sibling/placement-order-number?change=MOCK_SIBLING_ID/MOCK_PO_ID&returnUrl=/sibling/placement-order-check-your-answers',
-              text: 'Change',
-              visuallyHiddenText: 'Order case or serial number',
-            },
-          ],
-        },
-      },
-    ]);
-  });
+  ])(
+    'should create correct items for summaryList %#',
+    ({ siblingId, siblingRelation, siblingPoType, siblingPoNumber, expected }) => {
+      commonContent.userCase!.siblings![0]!.siblingId = siblingId;
+      commonContent.userCase!.siblings![0]!.siblingRelation = siblingRelation;
+      commonContent.userCase!.siblings![0]!.siblingPoType = siblingPoType;
+      commonContent.userCase!.siblings![0]!.siblingPoNumber = siblingPoNumber;
+      const generatedContent = generateContent(commonContent);
+      expect(generatedContent.placementOrderListItems).toEqual(expected.placementOrderListItems);
+    }
+  );
 
   test('should contain submit button', () => {
     const generatedContent = generateContent(commonContent);

@@ -19,10 +19,13 @@ services:
     url: EQUALITY_URL
     tokenKey: PCQ_TOKEN
     pcqEnabled: PCQ_ENABLED
+  pact:
+    tag: PACT_TAG
 port: PORT
 session:
   redis:
     host: REDIS_HOST
+  secureCookie: SECURE_COOKIE
 e2e:
   userTestPassword: TEST_PASSWORD
 appInsights:
