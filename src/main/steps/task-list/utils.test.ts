@@ -832,32 +832,17 @@ describe('utils', () => {
       {
         data: {
           hasSiblings: YesNoNotsure.YES,
-          hasPoForSiblings: YesNoNotsure.NO,
-        },
-        expected: COMPLETED,
-      },
-      {
-        data: {
-          hasSiblings: YesNoNotsure.YES,
-          hasPoForSiblings: YesNoNotsure.YES,
         },
         expected: IN_PROGRESS,
       },
       {
         data: {
           hasSiblings: YesNoNotsure.YES,
-        },
-        expected: IN_PROGRESS,
-      },
-      {
-        data: {
-          hasSiblings: YesNoNotsure.YES,
-          hasPoForSiblings: YesNoNotsure.YES,
           siblings: [
             {
               siblingId: 'MOCK_SIBLING_ID',
-              siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
-              siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
+              siblingRelation: 'MOCK_SIBLING_RELATION',
+              siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
             },
           ],
         },
@@ -866,43 +851,16 @@ describe('utils', () => {
       {
         data: {
           hasSiblings: YesNoNotsure.YES,
-          hasPoForSiblings: YesNoNotsure.YES,
           siblings: [
             {
               siblingId: 'MOCK_SIBLING_ID',
-              siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
-              siblingLastNames: 'MOCK_SIBLING_LAST_NAME',
-              siblingPlacementOrders: [
-                {
-                  placementOrderId: 'MOCK_SIBLING_PO_ID',
-                  placementOrderType: 'MOCK_SIBLING_PO_TYPE',
-                  placementOrderNumber: 'MOCK_SIBLING_PO_NUMBER',
-                },
-              ],
+              siblingRelation: 'MOCK_SIBLING_RELATION',
+              siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
+              siblingPoNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
             },
           ],
         },
         expected: COMPLETED,
-      },
-      {
-        data: {
-          hasSiblings: YesNoNotsure.YES,
-          hasPoForSiblings: YesNoNotsure.YES,
-          siblings: [
-            {
-              siblingId: 'MOCK_SIBLING_ID',
-              siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
-              siblingLastNames: 'MOCK_SIBLING_LAST_NAME',
-              siblingPlacementOrders: [
-                {
-                  placementOrderId: 'MOCK_SIBLING_PO_ID',
-                  placementOrderType: 'MOCK_SIBLING_PO_TYPE',
-                },
-              ],
-            },
-          ],
-        },
-        expected: IN_PROGRESS,
       },
     ])('should return correct status %#', async ({ data, expected }) => {
       expect(getSiblingStatus({ ...userCase, ...data })).toBe(expected);

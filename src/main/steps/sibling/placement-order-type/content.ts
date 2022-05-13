@@ -1,4 +1,3 @@
-import { PlacementOrder } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -8,7 +7,7 @@ const en = () => ({
   section: SECTION,
   label: 'What type of order is it?',
   errors: {
-    placementOrderType: {
+    siblingPoType: {
       required: 'Please answer the question',
     },
   },
@@ -18,7 +17,7 @@ const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
   label: 'Pa fath o neuchymyn ydyw?',
   errors: {
-    placementOrderType: {
+    siblingPoType: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
@@ -27,15 +26,12 @@ const cy: typeof en = () => ({
 export const form: FormContent = {
   fields: userCase => {
     const sibling = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
-    const siblingPlacementOrder = sibling?.siblingPlacementOrders?.find(
-      item => (item as PlacementOrder).placementOrderId === userCase.selectedSiblingPoId
-    );
     return {
-      placementOrderType: {
+      siblingPoType: {
         type: 'text',
         classes: 'govuk-label',
         label: l => l.label,
-        value: (siblingPlacementOrder as PlacementOrder)?.placementOrderType,
+        value: sibling?.siblingPoType,
         labelSize: 'l',
         attributes: {
           spellcheck: false,

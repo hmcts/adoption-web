@@ -3,7 +3,6 @@ import {
   AdoptionAgencyOrLocalAuthority,
   ApplyingWith,
   Gender,
-  PlacementOrder,
   SectionStatus,
   State,
   YesNoNotsure,
@@ -282,25 +281,10 @@ export const getSiblingStatus = (userCase: CaseWithId): SectionStatus => {
     return SectionStatus.COMPLETED;
   }
   if (exists === YesNoNotsure.YES) {
-    const courtOrderExists = userCase.hasPoForSiblings;
-    if (courtOrderExists === YesNoNotsure.NO || courtOrderExists === YesNoNotsure.NOT_SURE) {
-      return SectionStatus.COMPLETED;
-    }
-    if (courtOrderExists === YesNoNotsure.YES) {
-      const siblingsComplete =
-        userCase.siblings?.length &&
-        userCase.siblings?.every(
-          item =>
-            item.siblingFirstName &&
-            item.siblingLastNames &&
-            item.siblingPlacementOrders?.length &&
-            (item.siblingPlacementOrders as PlacementOrder[]).every(
-              po => po.placementOrderType && po.placementOrderNumber && po.placementOrderId
-            )
-        );
-      return siblingsComplete ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
-    }
-    return SectionStatus.IN_PROGRESS;
+    const siblingsComplete =
+      userCase.siblings?.length &&
+      userCase.siblings?.every(item => item.siblingRelation && item.siblingPoType && item.siblingPoNumber);
+    return siblingsComplete ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
   }
   return SectionStatus.NOT_STARTED;
 };

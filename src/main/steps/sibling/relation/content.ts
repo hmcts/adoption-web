@@ -5,9 +5,10 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
   section: SECTION,
-  label: 'What is the serial or case number on the order?',
+  label: 'What is their relationship to the child being adopted?',
+  hint: 'For instance, brother or half sister',
   errors: {
-    siblingPoNumber: {
+    siblingRelation: {
       required: 'Please answer the question',
     },
   },
@@ -15,9 +16,10 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  label: 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn?',
+  label: 'What is their relationship to the child being adopted? (in welsh)',
+  hint: 'For instance, brother or half sister (in welsh)',
   errors: {
-    siblingPoNumber: {
+    siblingRelation: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
@@ -27,15 +29,13 @@ export const form: FormContent = {
   fields: userCase => {
     const sibling = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
     return {
-      siblingPoNumber: {
+      siblingRelation: {
         type: 'text',
-        classes: 'govuk-label govuk-input--width-10',
+        classes: 'govuk-input govuk-input--width-20',
         label: l => l.label,
-        value: sibling?.siblingPoNumber,
         labelSize: 'l',
-        attributes: {
-          spellcheck: false,
-        },
+        hint: l => l.hint,
+        value: sibling?.siblingRelation,
         validator: isFieldFilledIn,
       },
     };

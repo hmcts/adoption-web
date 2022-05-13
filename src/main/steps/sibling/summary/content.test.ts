@@ -15,9 +15,8 @@ const enContent = {
   incomplete: 'incomplete',
   change: 'Change',
   remove: 'Remove',
-  changeName: 'Change name',
-  label: 'Do you want to add another order for a sibling or half-sibling?',
-  hint: 'For example, a care order or supervision order. Your adoption agency or social worker can provide this information for you.',
+  label: 'Do you want to add another order?',
+  hint: 'For example, a care order or supervision order.',
   errors: {
     addAnotherSiblingPlacementOrder: {
       required: 'Please select an answer',
@@ -33,9 +32,8 @@ const cyContent = {
   incomplete: 'anghyflawn',
   change: 'Newid',
   remove: 'Dileu',
-  changeName: 'Newid enw',
-  label: 'A ydych eisiau ychwanegu gorchymyn arall ar gyfer brawd/chwaer neu hanner frawd/hanner chwaer?',
-  hint: 'Er enghraifft, gorchymyn gofal neu neuchymyn goruchwylio. Gall eich gweithiwr cymdeithasol neu’ch asiantaeth fabwysiadau ddarparu’r wybodaeth hon ichi.',
+  label: 'Do you want to add another order? (in welsh)',
+  hint: 'For example, a care order or supervision order. (in welsh)',
   errors: {
     addAnotherSiblingPlacementOrder: {
       required: 'Dewiswch ateb os gwelwch yn dda',
@@ -51,14 +49,9 @@ describe('sibling > placement-order-summary > content', () => {
       addAnotherSiblingPlacementOrder: 'Yes',
       siblings: [
         {
-          siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
-          siblingLastNames: 'MOCK_SIBLING_LAST_NAME',
-          siblingPlacementOrders: [
-            {
-              placementOrderId: 'MOCK_ID',
-              placementOrderNumber: 'MOCK_NUMBER',
-            },
-          ],
+          siblingId: 'MOCK_SIBLING_ID',
+          siblingRelation: 'MOCK_SIBLING_RELATION',
+          siblingPoNumber: 'MOCK_NUMBER',
         },
       ],
     },
