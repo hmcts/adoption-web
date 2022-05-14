@@ -4,7 +4,7 @@ import { ApplyingWith, DocumentType, YesNoNotsure, YesOrNo } from '../../../app/
 
 import { enContent } from './content';
 import {
-  //adoptionAgencySummaryList,
+  adoptionAgencySummaryList,
   applicantSummaryList,
   applicationSummaryList,
   birthParentSummaryList,
@@ -60,7 +60,6 @@ describe('review-pay-submit > check-your-answers > utils', () => {
     });
   });
 
-  /////////////////////////
   describe('localAuthoritySummaryList', () => {
     test.each([
       {
@@ -70,7 +69,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
           rows: [
             {
               key: { text: 'Name' },
-              value: { text: 'MOCK_LOCAL_AUTHORITY_NAME' },
+              value: { text: 'laname' },
               actions: {
                 items: [
                   {
@@ -82,8 +81,21 @@ describe('review-pay-submit > check-your-answers > utils', () => {
               },
             },
             {
+              key: { text: 'Name of contact' },
+              value: { text: 'contact name1' },
+              actions: {
+                items: [
+                  {
+                    href: '/children/local-authority?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Name of contact',
+                  },
+                ],
+              },
+            },
+            {
               key: { text: 'Phone number' },
-              value: { text: '01234567892' },
+              value: { text: '01234567890' },
               actions: {
                 items: [
                   {
@@ -96,7 +108,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
             },
             {
               key: { text: 'Email address' },
-              value: { text: 'socialworker@email.com' },
+              value: { text: 'agency1@email.co.uk' },
               actions: {
                 items: [
                   {
@@ -107,15 +119,82 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                 ],
               },
             },
+          ],
+        },
+      },
+    ])('return correct summary list items when %#', ({ userCase, expected }) => {
+      expect(localAuthoritySummaryList(enContent, userCase)).toStrictEqual(expected);
+    });
+  });
+
+  describe('adoptionAgencySummaryList', () => {
+    test.each([
+      {
+        userCase: mockUserCase,
+        expected: {
+          title: 'Adoption agency or local authority details',
+          rows: [
             {
-              key: { text: "Child's local authority" },
-              value: { text: 'MOCK_CHILD_LOCAL_AUTHORITY' },
+              key: { text: 'Name' },
+              value: { text: 'agency1' },
               actions: {
                 items: [
                   {
-                    href: '/children/local-authority?returnUrl=/review-pay-submit/check-your-answers',
+                    href: '/children/adoption-agency?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: "Child's local authority",
+                    visuallyHiddenText: 'Name',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Name of contact' },
+              value: { text: 'contact name1' },
+              actions: {
+                items: [
+                  {
+                    href: '/children/adoption-agency?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Name of contact',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Phone number' },
+              value: { text: '01234567890' },
+              actions: {
+                items: [
+                  {
+                    href: '/children/adoption-agency?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Phone number',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Address' },
+              value: { html: 'address<br>town<br>aa14aa' },
+              actions: {
+                items: [
+                  {
+                    href: '/children/adoption-agency?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Address',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Email address' },
+              value: { text: 'agency1@email.co.uk' },
+              actions: {
+                items: [
+                  {
+                    href: '/children/adoption-agency?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Email address',
                   },
                 ],
               },
@@ -124,175 +203,9 @@ describe('review-pay-submit > check-your-answers > utils', () => {
         },
       },
     ])('return correct summary list items when %#', ({ userCase, expected }) => {
-      localAuthoritySummaryList(enContent, userCase);
-      expect(expected).toBe(expected);
-      //expect(localAuthoritySummaryList(enContent, userCase)).toStrictEqual(expected);
+      expect(adoptionAgencySummaryList(enContent, userCase)).toStrictEqual(expected);
     });
   });
-  /////////////////////////
-
-  // describe('adoptionAgencySummaryList', () => {
-  //   test.each([
-  //     {
-  //       userCase: mockUserCase,
-  //       expected: {
-  //         title: 'Adoption agency or local authority details',
-  //         rows: [
-  //           {
-  //             key: { text: 'Name' },
-  //             value: { text: 'MOCK_AGENCY_NAME_1' },
-  //             actions: {
-  //               items: [
-  //                 {
-  //                   href: '/children/adoption-agency?change=MOCK_ID_1&returnUrl=/review-pay-submit/check-your-answers',
-  //                   text: 'Change',
-  //                   visuallyHiddenText: 'Name',
-  //                 },
-  //               ],
-  //             },
-  //           },
-  //           {
-  //             key: { text: 'Phone number' },
-  //             value: { text: '01234567890' },
-  //             actions: {
-  //               items: [
-  //                 {
-  //                   href: '/children/adoption-agency?change=MOCK_ID_1&returnUrl=/review-pay-submit/check-your-answers',
-  //                   text: 'Change',
-  //                   visuallyHiddenText: 'Phone number',
-  //                 },
-  //               ],
-  //             },
-  //           },
-  //           {
-  //             key: { text: 'Name of contact' },
-  //             value: { text: 'MOCK_CONTACT_NAME_1' },
-  //             actions: {
-  //               items: [
-  //                 {
-  //                   href: '/children/adoption-agency?change=MOCK_ID_1&returnUrl=/review-pay-submit/check-your-answers',
-  //                   text: 'Change',
-  //                   visuallyHiddenText: 'Name of contact',
-  //                 },
-  //               ],
-  //             },
-  //           },
-  //           {
-  //             key: { text: 'Email address of contact' },
-  //             value: { text: 'contact1@email.com' },
-  //             actions: {
-  //               items: [
-  //                 {
-  //                   href: '/children/adoption-agency?change=MOCK_ID_1&returnUrl=/review-pay-submit/check-your-answers',
-  //                   text: 'Change',
-  //                   visuallyHiddenText: 'Email address of contact',
-  //                 },
-  //               ],
-  //             },
-  //           },
-  //         ],
-  //       },
-  //     },
-  //     {
-  //       userCase: mockUserCase,
-  //       expected: {
-  //         title: 'Adoption agency or local authority details',
-  //         rows: [
-  //           {
-  //             key: { text: 'Additional adoption agency' },
-  //             value: { text: 'Yes' },
-  //             actions: {
-  //               items: [
-  //                 {
-  //                   href: '/children/other-adoption-agency?returnUrl=/review-pay-submit/check-your-answers',
-  //                   text: 'Change',
-  //                   visuallyHiddenText: 'Additional adoption agency',
-  //                 },
-  //               ],
-  //             },
-  //           },
-  //           {
-  //             key: { text: 'Name' },
-  //             value: { text: 'MOCK_AGENCY_NAME_2' },
-  //             actions: {
-  //               items: [
-  //                 {
-  //                   href: '/children/adoption-agency?change=MOCK_ID_2&returnUrl=/review-pay-submit/check-your-answers',
-  //                   text: 'Change',
-  //                   visuallyHiddenText: 'Name',
-  //                 },
-  //               ],
-  //             },
-  //           },
-  //           {
-  //             key: { text: 'Phone number' },
-  //             value: { text: '01234567891' },
-  //             actions: {
-  //               items: [
-  //                 {
-  //                   href: '/children/adoption-agency?change=MOCK_ID_2&returnUrl=/review-pay-submit/check-your-answers',
-  //                   text: 'Change',
-  //                   visuallyHiddenText: 'Phone number',
-  //                 },
-  //               ],
-  //             },
-  //           },
-  //           {
-  //             key: { text: 'Name of contact' },
-  //             value: { text: 'MOCK_CONTACT_NAME_2' },
-  //             actions: {
-  //               items: [
-  //                 {
-  //                   href: '/children/adoption-agency?change=MOCK_ID_2&returnUrl=/review-pay-submit/check-your-answers',
-  //                   text: 'Change',
-  //                   visuallyHiddenText: 'Name of contact',
-  //                 },
-  //               ],
-  //             },
-  //           },
-  //           {
-  //             key: { text: 'Email address of contact' },
-  //             value: { text: 'contact2@email.com' },
-  //             actions: {
-  //               items: [
-  //                 {
-  //                   href: '/children/adoption-agency?change=MOCK_ID_2&returnUrl=/review-pay-submit/check-your-answers',
-  //                   text: 'Change',
-  //                   visuallyHiddenText: 'Email address of contact',
-  //                 },
-  //               ],
-  //             },
-  //           },
-  //         ],
-  //       },
-  //     },
-  //     {
-  //       userCase: { ...mockUserCase, hasAnotherAdopAgencyOrLA: YesOrNo.NO },
-  //       expected: {
-  //         title: 'Additional adoption agency or local authority details',
-  //         rows: [
-  //           {
-  //             key: { text: 'Additional adoption agency' },
-  //             value: { text: 'No' },
-  //             actions: {
-  //               items: [
-  //                 {
-  //                   href: '/children/other-adoption-agency?returnUrl=/review-pay-submit/check-your-answers',
-  //                   text: 'Change',
-  //                   visuallyHiddenText: 'Additional adoption agency',
-  //                 },
-  //               ],
-  //             },
-  //           },
-  //         ],
-  //       },
-  //     },
-  //   ])('return correct summary list items when %#', ({ userCase, expected }) => {
-  //     // adoptionAgencySummaryList(enContent, userCase);
-  //     // expect(expected).toBe(expected);
-  //     expect(adoptionAgencySummaryList(enContent, userCase)).toStrictEqual(expected);
-  //   });
-  // });
 
   describe('socialWorkerSummaryList', () => {
     test.each([

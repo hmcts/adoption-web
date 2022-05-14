@@ -124,7 +124,7 @@ export const localAuthoritySummaryList = (
           changeUrl: Urls.LOCAL_AUTHORITY,
         },
         {
-          key: keys.emailOfContact,
+          key: keys.emailAddress,
           value: userCase.localAuthorityContactEmail,
           changeUrl: Urls.LOCAL_AUTHORITY,
         },
@@ -166,7 +166,7 @@ export const adoptionAgencySummaryList = (
           changeUrl: Urls.ADOPTION_AGENCY,
         },
         {
-          key: keys.emailOfContact,
+          key: keys.emailAddress,
           value: userCase.adopAgencyOrLaContactEmail,
           changeUrl: Urls.ADOPTION_AGENCY,
         },
