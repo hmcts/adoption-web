@@ -101,7 +101,7 @@ describe('task-list > content', () => {
               text: 'Date child moved in with you',
             },
             {
-              href: '/children/adoption-agency?change=MOCK_ID_1',
+              href: '/children/local-authority',
               id: 'adoption-agency',
               status: 'COMPLETED',
               text: 'Adoption agency and social worker',
@@ -221,7 +221,7 @@ describe('task-list > content', () => {
               text: 'Date child moved in with you',
             },
             {
-              href: '/children/adoption-agency?change=MOCK_ID_1',
+              href: '/children/local-authority',
               id: 'adoption-agency',
               status: 'COMPLETED',
               text: 'Adoption agency and social worker',
