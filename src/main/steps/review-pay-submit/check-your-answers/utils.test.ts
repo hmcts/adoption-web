@@ -135,6 +135,19 @@ describe('review-pay-submit > check-your-answers > utils', () => {
           title: 'Adoption agency or local authority details',
           rows: [
             {
+              key: { text: 'Additional adoption agency' },
+              value: { text: 'Yes' },
+              actions: {
+                items: [
+                  {
+                    href: '/children/other-adoption-agency?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Additional adoption agency',
+                  },
+                ],
+              },
+            },
+            {
               key: { text: 'Name' },
               value: { text: 'agency1' },
               actions: {

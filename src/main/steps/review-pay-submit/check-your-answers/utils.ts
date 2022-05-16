@@ -145,6 +145,11 @@ export const adoptionAgencySummaryList = (
     rows: getSectionSummaryList(
       [
         {
+          key: keys.additionalAdoptionAgency,
+          value: content.yesNoNotsure[userCase.hasAnotherAdopAgencyOrLA!],
+          changeUrl: Urls.OTHER_ADOPTION_AGENCY,
+        },
+        {
           key: keys.name,
           value: userCase.adopAgencyOrLaName,
           changeUrl: Urls.ADOPTION_AGENCY,
