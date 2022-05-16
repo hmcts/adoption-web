@@ -2377,10 +2377,10 @@
     "@uppy/utils" "^4.0.4"
     namespace-emitter "^2.0.1"
 
-"@uppy/core@^2.1.10":
-  version "2.1.10"
-  resolved "https://registry.yarnpkg.com/@uppy/core/-/core-2.1.10.tgz#f356703a5247e44ab6f73e7e4eb204b13cc56374"
-  integrity sha512-Y6xBtlzG5235P6GTKFJeBF2tczfHNPfEk4ZfDL30aU+n4mVXIuOXTAN60kQ3WsX/SYaIfx7RmX9DSP/SBoQrbA==
+"@uppy/core@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@uppy/core/-/core-2.2.0.tgz#670697d50d3076d90a3ca0ac85c75f6699b60156"
+  integrity sha512-qdDoNCjrVjjOmFCFCxc+HEbtbQ9K0k6LKNbZZwWK7d4Cx3xEa6VsxmqVhfFL6ekH2gyboqYV8Z5IbRkJT/0Nqg==
   dependencies:
     "@transloadit/prettier-bytes" "0.0.7"
     "@uppy/store-default" "^2.0.3"
