@@ -22,5 +22,11 @@ module.exports = {
     await I.retry(3).see('There is a problem');
     await I.retry(3).see('Enter your date of birth');
     await I.wait(4);
+    await I.retry(3).fillField(this.fields.dateChildMovedInDay, date);
+    await I.retry(3).fillField(this.fields.dateChildMovedInMonth, month);
+    await I.wait(2);
+    await I.retry(3).fillField(this.fields.dateChildMovedInYear, year);
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
   },
 };

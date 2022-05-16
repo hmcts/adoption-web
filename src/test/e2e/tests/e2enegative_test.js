@@ -29,11 +29,11 @@ Scenario(
     await landingPage.selectApplyWithMySpouseSection();
 
     await taskListPage.selectDateChildMovedInDetails();
-    await dateChildMovedinDetailsPage.dateChildMovedInSectionWithoutData();
+    await dateChildMovedinDetailsPage.dateChildMovedInSectionWithoutData('10', '10', '2020');
     await taskListPage.verifyDateChildMovedInStatus();
 
     await taskListPage.selectChildAdoptionAgencyDetails();
-    await childAdoptionAgencyDetailsPage.childAdoptionAgencyDetailsSectionEmpty();
+    //await childAdoptionAgencyDetailsPage.childAdoptionAgencyDetailsSectionEmpty();
     await childAdoptionAgencyDetailsPage.childAdoptionAgencyDetailsSection();
     await childAdoptionAgencyDetailsPage.childSocialWorkerDetails();
     await taskListPage.verifyChildAdoptionAgencyDetailsStatus;
