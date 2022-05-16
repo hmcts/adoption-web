@@ -72,7 +72,7 @@ module.exports = {
     await I.wait(2);
     await I.retry(3).fillField(this.fields.dateOfBirthYear, '1988');
     await I.retry(3).click('Save and continue');
-    await I.retry(3).waitForText(" What's your occupation?");
+    await I.retry(3).waitForText("What's your occupation?");
     await I.retry(3).click('Save and continue');
     await I.wait(2);
     await I.retry(3).see('There is a problem');

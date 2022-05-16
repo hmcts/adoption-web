@@ -96,7 +96,6 @@ Scenario(
     await reviewPayAndSubmitPage.reviewYourAnswersAndContinue();
     await reviewPayAndSubmitPage.statementOfTruthDetailsSectionEmpty();
     await reviewPayAndSubmitPage.paymentCancellation();
-    await reviewPayAndSubmitPage.statementOfTruthDetailsSection();
     await reviewPayAndSubmitPage.adoptionCourtFeesByCard();
   }
 );

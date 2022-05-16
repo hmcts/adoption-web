@@ -92,15 +92,17 @@ module.exports = {
   },
 
   async paymentCancellation() {
-    await I.wait(30);
+    await I.wait(3);
     await I.retry(3).waitForText('Enter card details', 30);
-    await I.retry(3).see('Enter your date of birth');
+    await I.wait(5);
     await I.retry(3).click('Cancel payment');
-    await I.wait(30);
+    await I.wait(3);
     await I.retry(3).waitForText('Your payment has been cancelled');
     await I.retry(3).waitForText('No money has been taken from your account.');
     await I.retry(3).click('Continue');
-    await I.wait(30);
+    await I.wait(3);
     await I.retry(3).waitForText('Statement of truth', 30);
+    await I.retry(3).click('Confirm');
+    await I.wait(4);
   },
 };

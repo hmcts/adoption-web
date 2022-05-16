@@ -30,7 +30,7 @@ module.exports = {
   },
   async primaryApplicantContactDetailsSectionEmpty() {
     await I.retry(3).waitForText("What's your home address?");
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).click('Find address');
     await I.wait(2);
     await I.retry(3).see('There is a problem');
     await I.retry(3).see('Enter a real postcode');
@@ -44,6 +44,7 @@ module.exports = {
     await I.retry(3).selectOption(this.fields.addressList, this.fields.lookupOption);
     await I.retry(3).click('Save and continue');
     await I.wait(2);
+    await I.retry(3).waitForText('What are your contact details?');
     await I.retry(3).click('Save and continue');
     await I.wait(2);
     await I.retry(3).see('Enter your email address');
@@ -53,6 +54,7 @@ module.exports = {
     await I.retry(3).fillField(this.fields.applicant1PhoneNumber, '09876543210');
     await I.wait(2);
     await I.retry(3).click(this.fields.applicant1ContactDetailsConsent);
+    await I.wait(4);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
   },
