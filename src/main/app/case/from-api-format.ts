@@ -49,11 +49,6 @@ const fields: FromApiConverters = {
       ...sibling.value,
     })),
   }),
-  adopAgencyOrLAs: data => ({
-    adopAgencyOrLAs: data.adopAgencyOrLAs?.map(item => ({
-      ...item.value,
-    })),
-  }),
   dateChildMovedIn: data => ({
     dateChildMovedIn: fromApiDate(data.dateChildMovedIn),
   }),

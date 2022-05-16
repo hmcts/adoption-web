@@ -84,14 +84,6 @@ const fields: ToApiConverters = {
       },
     })),
   }),
-  adopAgencyOrLAs: data => ({
-    adopAgencyOrLAs: (data.adopAgencyOrLAs || []).map(item => ({
-      id: generateUuid(),
-      value: {
-        ...item,
-      },
-    })),
-  }),
   applicant1IBelieveApplicationIsTrue: data => ({
     applicant1StatementOfTruth: checkboxConverter(data.applicant1IBelieveApplicationIsTrue),
   }),

@@ -6,7 +6,6 @@ import * as URL from '../urls';
 import {
   findFamilyCourtStatus,
   getAdoptionAgencyDetailStatus,
-  getAdoptionAgencyUrl,
   getAdoptionCertificateDetailsStatus,
   getApplicationStatus,
   getApplyingWithStatus,
@@ -43,7 +42,7 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         id: 'adoption-agency',
         text: taskListItems.adoptionAgency,
         status: getAdoptionAgencyDetailStatus(userCase),
-        href: getAdoptionAgencyUrl(userCase),
+        href: URL.LOCAL_AUTHORITY,
       },
     ],
   },
