@@ -283,8 +283,6 @@ describe('review-pay-submit > check-your-answers > utils', () => {
         },
       },
     ])('return correct summary list items when %#', ({ userCase, expected }) => {
-      // socialWorkerSummaryList(enContent, userCase);
-      // expect(expected).toBe(expected);
       expect(socialWorkerSummaryList(enContent, userCase)).toStrictEqual(expected);
     });
   });
