@@ -1,5 +1,4 @@
 import sysConfig from 'config';
-import { getTokenFromApi } from '../main/app/auth/service/get-service-auth-token';
 
 import { IdamUserManager } from './steps/IdamUserManager';
 
