@@ -1,4 +1,6 @@
 import sysConfig from 'config';
+import { getTokenFromApi } from '../main/app/auth/service/get-service-auth-token';
+
 import { IdamUserManager } from './steps/IdamUserManager';
 
 // better handling of unhandled exceptions
@@ -6,13 +8,12 @@ process.on('unhandledRejection', reason => {
   throw reason;
 });
 
-const decoded = Buffer.from(process.env.ENDPOINTS as string, 'base64');
-const endpoints = JSON.parse(decoded.toString());
+getTokenFromApi();
 
 const generateTestUsername = () => `adoption.web.automationTest.${new Date().getTime()}@hmcts.net`;
 const TestUser = generateTestUsername();
 const TestPass = process.env.CITIZEN_PASSWORD || sysConfig.get('e2e.userTestPassword') || '';
-const idamUserManager = new IdamUserManager(endpoints.idamToken);
+const idamUserManager = new IdamUserManager(sysConfig.get('services.idam.tokenURL'));
 
 export const autoLogin = {
   login: (I, username = TestUser, password = TestPass): void => {
@@ -62,7 +63,7 @@ export const config = {
     steps: ['../steps/common.ts', '../steps/date.ts', '../steps/check-your-answers.ts', '../steps/happy-path.ts'],
   },
   bootstrap: async (): Promise<void> => idamUserManager.createUser(TestUser, TestPass),
-  teardown: async (): Promise<void> => idamUserManager.deleteAll(),
+  //teardown: async (): Promise<void> => idamUserManager.deleteAll(),
   helpers: {},
   AutoLogin: {
     enabled: true,

@@ -9,7 +9,7 @@ services:
     secret: 'NEED TO INSERT SECRET'
   idam:
     authorizationURL: ''
-    tokenURL: ''
+    tokenURL: 'https://idam-api.aat.platform.hmcts.net/o/token/'
     clientID: 'adoption-web'
     clientSecret: 'NEED TO INSERT SECRET'
     systemUsername: 'dummy_user'
