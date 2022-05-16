@@ -14,7 +14,7 @@ const endpoints = JSON.parse(decoded.toString());
 const generateTestUsername = () => `adoption.web.automationTest.${new Date().getTime()}@hmcts.net`;
 const TestUser = generateTestUsername();
 const TestPass = process.env.CITIZEN_PASSWORD || sysConfig.get('e2e.userTestPassword') || '';
-const idamUserManager = new IdamUserManager(sysConfig.get('services.idam.tokenURL'));
+const idamUserManager = new IdamUserManager(endpoints.idamToken);
 
 export const autoLogin = {
   login: (I, username = TestUser, password = TestPass): void => {
