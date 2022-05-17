@@ -2395,10 +2395,10 @@
   dependencies:
     "@uppy/utils" "^4.0.7"
 
-"@uppy/file-input@^2.0.6":
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/@uppy/file-input/-/file-input-2.0.6.tgz#2ef1468ead3e2b6157b3233be847ce83292eb7f7"
-  integrity sha512-Au/J96B6yiGZkjNpLO+/hV43Beq71K3JP2p1f9Eh0EgcgLtqczmM8pggyj6vAduywamUTMWGaADKcdxYKLAFew==
+"@uppy/file-input@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@uppy/file-input/-/file-input-2.1.0.tgz#531a59049286004da6df651a3891d752eba0155b"
+  integrity sha512-nHfwW+YZ3zalnbEBCx65FoWsKLkESVPJrJE2S2W3gKtuXATl0W+SqwnBHrbjDXqqmAAw8G+6VkkVY3PjyzkSSA==
   dependencies:
     "@uppy/utils" "^4.0.7"
     preact "^10.5.13"
