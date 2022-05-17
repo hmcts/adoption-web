@@ -6,7 +6,7 @@ home: https://github.com/hmcts/adoption-web
 version: 0.0.25
 dependencies:
   - name: nodejs
-    version: 2.4.3
+    version: 2.4.4
     repository: 'https://hmctspublic.azurecr.io/helm/v1/repo/'
   - name: idam-pr
     version: 2.2.7
