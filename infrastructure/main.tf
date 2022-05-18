@@ -13,12 +13,13 @@ data "azurerm_subnet" "core_infra_redis_subnet" {
 }
 
 module "adoption-web-session-storage" {
-  source   = "git@github.com:hmcts/cnp-module-redis?ref=master"
+  source   = "git@github.com:hmcts/cnp-module-redis?ref=redis-version-param"
   product  = "${var.product}-${var.component}-session-storage"
   location = var.location
   env      = var.env
   subnetid = data.azurerm_subnet.core_infra_redis_subnet.id
   common_tags  = var.common_tags
+  redis_version = 6
 }
 
 data "azurerm_key_vault" "adoption_key_vault" {
