@@ -1,3 +1,5 @@
+jest.useRealTimers();
+
 jest.mock('../../main/app/auth/service/get-service-auth-token', () => ({
   getServiceAuthToken: jest.fn(() => 'mock-service-auth-token'),
 }));

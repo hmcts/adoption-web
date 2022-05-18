@@ -1,12 +1,11 @@
 import { FieldPrefix } from '../../app/case/case';
-import { ApplyingWith, SectionStatus } from '../../app/case/definition';
+import { ApplyingWith, SectionStatus, YesNoNotsure } from '../../app/case/definition';
 import { TranslationFn } from '../../app/controller/GetController';
 import * as URL from '../urls';
 
 import {
   findFamilyCourtStatus,
   getAdoptionAgencyDetailStatus,
-  getAdoptionAgencyUrl,
   getAdoptionCertificateDetailsStatus,
   getApplicationStatus,
   getApplyingWithStatus,
@@ -43,7 +42,7 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         id: 'adoption-agency',
         text: taskListItems.adoptionAgency,
         status: getAdoptionAgencyDetailStatus(userCase),
-        href: getAdoptionAgencyUrl(userCase),
+        href: URL.LOCAL_AUTHORITY,
       },
     ],
   },
@@ -128,7 +127,10 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         id: 'sibling',
         text: taskListItems.siblingCourtOrders,
         status: getSiblingStatus(userCase),
-        href: URL.SIBLING_EXISTS,
+        href:
+          userCase.hasSiblings === YesNoNotsure.YES && userCase.siblings?.length
+            ? URL.SIBLING_ORDER_SUMMARY
+            : URL.SIBLING_EXISTS,
       },
       {
         id: 'find-family-court',

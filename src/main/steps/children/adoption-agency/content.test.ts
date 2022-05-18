@@ -10,22 +10,34 @@ jest.mock('../../../app/form/validation');
 const EN = 'en';
 
 const enContent = {
-  section: 'Your adoption agency or local authority details',
+  section: 'Application details',
   title: 'Adoption agency or local authority details',
   adopAgencyName: 'Name of adoption agency or local authority',
-  adopAgencyPhone: 'Phone number',
   adopAgencyContactName: 'Name of your contact',
+  adopAgencyPhone: 'Phone number',
+  adopAgencyAddressLine1: 'Address line 1',
+  adopAgencyTown: 'Town or city',
+  adopAgencyPostcode: 'Postcode',
   adopAgencyContactEmail: 'Email address of your contact',
   errors: {
     adopAgencyOrLaName: {
+      required: 'Enter a name',
+    },
+    adopAgencyOrLaContactName: {
       required: 'Enter a name',
     },
     adopAgencyOrLaPhoneNumber: {
       required: 'Enter a UK telephone number',
       invalid: 'Enter a UK telephone number',
     },
-    adopAgencyOrLaContactName: {
-      required: 'Enter a name',
+    adopAgencyAddressLine1: {
+      required: 'Enter the first line of the address',
+    },
+    adopAgencyTown: {
+      required: 'Enter the town or city',
+    },
+    adopAgencyPostcode: {
+      required: 'Enter the postcode',
     },
     adopAgencyOrLaContactEmail: {
       required: 'Enter an email address',
@@ -35,26 +47,38 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion eich asiantaeth fabwysiadu neu’ch awdurdod lleol',
-  title: 'Manylion yr asiantaeth fabwysiadu neu’r awdurdod lleol',
-  adopAgencyName: 'Enw’r asiantaeth fabwysiadu neu’r awdurdod lleol',
-  adopAgencyPhone: 'Rhif ffôn',
-  adopAgencyContactName: 'Enw eich cyswllt',
-  adopAgencyContactEmail: 'Cyfeiriad e-bost eich cyswllt',
+  section: 'Application details. (in welsh)',
+  title: 'Adoption agency or local authority details. (in welsh)',
+  adopAgencyName: 'Name of adoption agency or local authority. (in welsh)',
+  adopAgencyContactName: 'Name of your contact. (in welsh)',
+  adopAgencyPhone: 'Phone number. (in welsh)',
+  adopAgencyAddressLine1: 'Address line 1. (in welsh)',
+  adopAgencyTown: 'Town or city. (in welsh)',
+  adopAgencyPostcode: 'Postcode. (in welsh)',
+  adopAgencyContactEmail: 'Email address of your contact. (in welsh)',
   errors: {
     adopAgencyOrLaName: {
-      required: 'Nac ydwdwch enw',
-    },
-    adopAgencyOrLaPhoneNumber: {
-      required: 'Rhowch rif ffôn yn y DU',
-      invalid: 'Rhowch rif ffôn yn y DU',
+      required: 'Enter a name. (in welsh)',
     },
     adopAgencyOrLaContactName: {
-      required: 'Nac ydwdwch enw',
+      required: 'Enter a name. (in welsh)',
+    },
+    adopAgencyOrLaPhoneNumber: {
+      required: 'Enter a UK telephone number. (in welsh)',
+      invalid: 'Enter a UK telephone number. (in welsh)',
+    },
+    adopAgencyAddressLine1: {
+      required: 'Enter the first line of the address. (in welsh)',
+    },
+    adopAgencyTown: {
+      required: 'Enter the town or city. (in welsh)',
+    },
+    adopAgencyPostcode: {
+      required: 'Enter the postcode. (in welsh)',
     },
     adopAgencyOrLaContactEmail: {
-      required: 'Nac ydwdwch gyfeiriad e-bost',
-      invalid: 'Rhowch gyfeiriad e-bost yn y fformat cywir, er enghraifft enw@enghraifft.com',
+      required: 'Enter an email address. (in welsh)',
+      invalid: 'Enter an email address in the correct format, like name@example.com. (in welsh)',
     },
   },
 };
@@ -108,6 +132,42 @@ describe('children > adoption-agency > content', () => {
 
     (adopAgencyOrLaContactName.validator as ValidationCheck)('MockAgencyContactName', {});
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockAgencyContactName', {});
+  });
+
+  it('should have an adopAgencyAddressLine1 text input field', () => {
+    const generatedContent = generateContent(commonContent) as Record<string, never>;
+    const form = generatedContent.form as FormContent;
+    const fields = form.fields as FormFields;
+    const adopAgencyAddressLine1 = fields.adopAgencyAddressLine1;
+
+    expect(adopAgencyAddressLine1.type).toBe('text');
+    expect((adopAgencyAddressLine1.label as LanguageLookup)(generatedContent)).toBe(enContent.adopAgencyAddressLine1);
+
+    (adopAgencyAddressLine1.validator as ValidationCheck)('MockAdopAgencyAddressLine1', {});
+    expect(isFieldFilledIn).toHaveBeenCalledWith('MockAdopAgencyAddressLine1', {});
+  });
+
+  it('should have an adopAgencyTown text input field', () => {
+    const generatedContent = generateContent(commonContent) as Record<string, never>;
+    const form = generatedContent.form as FormContent;
+    const fields = form.fields as FormFields;
+    const adopAgencyTown = fields.adopAgencyTown;
+
+    expect(adopAgencyTown.type).toBe('text');
+    expect((adopAgencyTown.label as LanguageLookup)(generatedContent)).toBe(enContent.adopAgencyTown);
+
+    (adopAgencyTown.validator as ValidationCheck)('MockAdopadopAgencyTown', {});
+    expect(isFieldFilledIn).toHaveBeenCalledWith('MockAdopadopAgencyTown', {});
+  });
+
+  it('should have an adopAgencyPostcode text input field', () => {
+    const generatedContent = generateContent(commonContent) as Record<string, never>;
+    const form = generatedContent.form as FormContent;
+    const fields = form.fields as FormFields;
+    const adopAgencyPostcode = fields.adopAgencyPostcode;
+
+    expect(adopAgencyPostcode.type).toBe('text');
+    expect((adopAgencyPostcode.label as LanguageLookup)(generatedContent)).toBe(enContent.adopAgencyPostcode);
   });
 
   it('should have an adopAgencyOrLaContactEmail text input field', () => {

@@ -55,12 +55,10 @@ export const CHILDREN_FIND_FAMILY_COURT: PageLink = `${CHILDREN}/find-family-cou
 
 export const SIBLING: PageLink = '/sibling';
 export const SIBLING_EXISTS: PageLink = `${SIBLING}/exists`;
-export const SIBLING_COURT_ORDER_EXISTS: PageLink = `${SIBLING}/court-order-exists`;
-export const SIBLING_NAME: PageLink = `${SIBLING}/name`;
+export const SIBLING_RELATION: PageLink = `${SIBLING}/relation`;
 export const SIBLING_ORDER_TYPE: PageLink = `${SIBLING}/placement-order-type`;
 export const SIBLING_ORDER_CASE_NUMBER: PageLink = `${SIBLING}/placement-order-number`;
 export const SIBLING_ORDER_SUMMARY: PageLink = `${SIBLING}/summary`;
-export const SIBLING_SELECT: PageLink = `${SIBLING}/select-sibling`;
 export const SIBLING_ORDER_CHECK_YOUR_ANSWERS: PageLink = `${SIBLING}/placement-order-check-your-answers`;
 export const SIBLING_REMOVE_PLACEMENT_ORDER: PageLink = `${SIBLING}/remove-placement-order`;
 
@@ -140,6 +138,7 @@ export const CHECK_ANSWERS_URL: PageLink = `${REVIEW_PAY_SUBMIT}/check-your-answ
 export const PAY_YOUR_FEE: PageLink = `${REVIEW_PAY_SUBMIT}/payment/pay-your-fee`;
 export const PAYMENT_CALLBACK_URL: PageLink = `${REVIEW_PAY_SUBMIT}/payment/payment-callback`;
 
+export const LOCAL_AUTHORITY: PageLink = `${CHILDREN}/local-authority`;
 export const ADOPTION_AGENCY: PageLink = `${CHILDREN}/adoption-agency`;
 export const OTHER_ADOPTION_AGENCY: PageLink = `${CHILDREN}/other-adoption-agency`;
 export const SOCIAL_WORKER: PageLink = `${CHILDREN}/social-worker`;

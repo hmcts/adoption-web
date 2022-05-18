@@ -7,7 +7,7 @@ module.exports = {
     postcodeLookup: 'input[id$="applicant2AddressPostcode"]',
     addressList: 'select[id$="applicant2SelectAddress"]',
     findAddressButton: 'Find address',
-    applicant1EmailAddress: 'input[id$="applicant2EmailAddress"]',
+    applicant2EmailAddress: 'input[id$="applicant2EmailAddress"]',
     applicant2ContactDetailsConsent: 'input[id$="applicant2ContactDetailsConsent"]',
     applicant1PhoneNumber: 'input[id$="applicant2PhoneNumber"]',
     lookupOption: '8B, CHURCH ROAD, UXBRIDGE, UB8 3NA',
@@ -26,7 +26,7 @@ module.exports = {
     await I.retry(3).selectOption(this.fields.addressList, this.fields.lookupOption);
     await I.retry(3).click('Save and continue');
     await I.wait(2);
-    await I.retry(3).fillField(this.fields.applicant1EmailAddress, 'test@test.com');
+    await I.retry(3).fillField(this.fields.applicant2EmailAddress, 'test@test.com');
     await I.retry(3).fillField(this.fields.applicant1PhoneNumber, '09876543210');
     await I.retry(3).click(this.fields.applicant2ContactDetailsConsent);
     await I.retry(3).click('Save and continue');

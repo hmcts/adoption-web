@@ -4,29 +4,22 @@ import { ApplyingWith, Gender, Nationality, YesNoNotsure, YesOrNo } from '../../
 export default {
   applyingWith: ApplyingWith.ALONE,
   dateChildMovedIn: { day: 12, month: 10, year: '2020' },
-  adopAgencyOrLAs: [
-    {
-      adopAgencyOrLaId: 'MOCK_ID_1',
-      adopAgencyOrLaName: 'MOCK_AGENCY_NAME_1',
-      adopAgencyOrLaPhoneNumber: '01234567890',
-      adopAgencyOrLaContactName: 'MOCK_CONTACT_NAME_1',
-      adopAgencyOrLaContactEmail: 'contact1@email.com',
-    },
-    {
-      adopAgencyOrLaId: 'MOCK_ID_2',
-      adopAgencyOrLaName: 'MOCK_AGENCY_NAME_2',
-      adopAgencyOrLaPhoneNumber: '01234567891',
-      adopAgencyOrLaContactName: 'MOCK_CONTACT_NAME_2',
-      adopAgencyOrLaContactEmail: 'contact2@email.com',
-    },
-  ],
-
+  localAuthorityName: 'laname',
+  localAuthorityContactName: 'contact name1',
+  localAuthorityPhoneNumber: '01234567890',
+  localAuthorityContactEmail: 'agency1@email.co.uk',
+  adopAgencyOrLaName: 'agency1',
+  adopAgencyOrLaContactName: 'contact name1',
+  adopAgencyOrLaPhoneNumber: '01234567890',
+  adopAgencyAddressLine1: 'address',
+  adopAgencyTown: 'town',
+  adopAgencyPostcode: 'aa14aa',
+  adopAgencyOrLaContactEmail: 'agency1@email.co.uk',
   socialWorkerName: 'MOCK_SOCIAL_WORKER_NAME',
   socialWorkerPhoneNumber: '01234567892',
   socialWorkerEmail: 'socialworker@email.com',
-  socialWorkerTeamEmail: 'socialworkerteam@email.com',
+  childLocalAuthority: 'MOCK_CHILD_LOCAL_AUTHORITY',
   hasAnotherAdopAgencyOrLA: YesOrNo.YES,
-
   applicant1FirstNames: 'MOCK_APPLICANT1_FIRST_NAMES',
   applicant1LastNames: 'MOCK_APPLICANT1_LAST_NAMES',
   applicant1HasOtherNames: YesOrNo.YES,
@@ -117,19 +110,12 @@ export default {
   otherParentAddressKnown: YesOrNo.YES,
 
   hasSiblings: YesNoNotsure.YES,
-  hasPoForSiblings: YesNoNotsure.YES,
   siblings: [
     {
       siblingId: 'MOCK_SIBLING_ID',
-      siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
-      siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
-      siblingPlacementOrders: [
-        {
-          placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
-          placementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
-          placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
-        },
-      ],
+      siblingRelation: 'MOCK_SIBLING_RELATION',
+      siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
+      siblingPoNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
     },
   ],
   findFamilyCourt: YesOrNo.NO,

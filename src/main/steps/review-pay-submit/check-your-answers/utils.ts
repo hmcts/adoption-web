@@ -1,6 +1,6 @@
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { CaseDate, CaseWithId, Checkbox, FieldPrefix } from '../../../app/case/case';
-import { ApplyingWith, Nationality, PlacementOrder, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
+import { ApplyingWith, Nationality, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { PageContent } from '../../../app/controller/GetController';
 import * as Urls from '../../../steps/urls';
@@ -100,54 +100,81 @@ export const applicationSummaryList = (
   ),
 });
 
-export const adoptionAgencySummaryList = (
+export const localAuthoritySummaryList = (
   { sectionTitles, keys, ...content }: SummaryListContent,
-  userCase: Partial<CaseWithId>,
-  agencyIndex = 0
+  userCase: Partial<CaseWithId>
 ): SummaryList => {
-  let adoptionAgency;
-  if (agencyIndex === 0 || (agencyIndex === 1 && userCase.hasAnotherAdopAgencyOrLA === YesOrNo.YES)) {
-    adoptionAgency = userCase.adopAgencyOrLAs![agencyIndex];
-  }
-
-  const changeUrl = `${Urls.ADOPTION_AGENCY}?change=${adoptionAgency?.adopAgencyOrLaId}`;
   return {
-    title: agencyIndex === 0 ? sectionTitles.adoptionagencyOrLA : sectionTitles.additionalAoptionagencyOrLA,
+    title: sectionTitles.adoptionagencyOrLA,
     rows: getSectionSummaryList(
       [
-        ...(agencyIndex === 1
-          ? [
-              {
-                key: keys.additionalAdoptionAgency,
-                value: content.yesNoNotsure[userCase.hasAnotherAdopAgencyOrLA!],
-                changeUrl: Urls.OTHER_ADOPTION_AGENCY,
-              },
-            ]
-          : []),
-        ...(adoptionAgency
-          ? [
-              {
-                key: keys.name,
-                value: adoptionAgency?.adopAgencyOrLaName,
-                changeUrl,
-              },
-              {
-                key: keys.phoneNumber,
-                value: adoptionAgency?.adopAgencyOrLaPhoneNumber,
-                changeUrl,
-              },
-              {
-                key: keys.nameOfContact,
-                value: adoptionAgency?.adopAgencyOrLaContactName,
-                changeUrl,
-              },
-              {
-                key: keys.emailOfContact,
-                value: adoptionAgency?.adopAgencyOrLaContactEmail,
-                changeUrl,
-              },
-            ]
-          : []),
+        {
+          key: keys.name,
+          value: userCase.localAuthorityName,
+          changeUrl: Urls.LOCAL_AUTHORITY,
+        },
+        {
+          key: keys.nameOfContact,
+          value: userCase.localAuthorityContactName,
+          changeUrl: Urls.LOCAL_AUTHORITY,
+        },
+        {
+          key: keys.phoneNumber,
+          value: userCase.localAuthorityPhoneNumber,
+          changeUrl: Urls.LOCAL_AUTHORITY,
+        },
+        {
+          key: keys.emailAddress,
+          value: userCase.localAuthorityContactEmail,
+          changeUrl: Urls.LOCAL_AUTHORITY,
+        },
+      ],
+      content
+    ),
+  };
+};
+export const adoptionAgencySummaryList = (
+  { sectionTitles, keys, ...content }: SummaryListContent,
+  userCase: Partial<CaseWithId>
+): SummaryList | undefined => {
+  if (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO) {
+    return;
+  }
+  return {
+    title: sectionTitles.additionalAoptionagencyOrLA,
+    rows: getSectionSummaryList(
+      [
+        {
+          key: keys.additionalAdoptionAgency,
+          value: content.yesNoNotsure[userCase.hasAnotherAdopAgencyOrLA!],
+          changeUrl: Urls.OTHER_ADOPTION_AGENCY,
+        },
+        {
+          key: keys.name,
+          value: userCase.adopAgencyOrLaName,
+          changeUrl: Urls.ADOPTION_AGENCY,
+        },
+        {
+          key: keys.nameOfContact,
+          value: userCase.adopAgencyOrLaContactName,
+          changeUrl: Urls.ADOPTION_AGENCY,
+        },
+        {
+          key: keys.phoneNumber,
+          value: userCase.adopAgencyOrLaPhoneNumber,
+          changeUrl: Urls.ADOPTION_AGENCY,
+        },
+        {
+          key: keys.address,
+          valueHtml:
+            userCase.adopAgencyAddressLine1 + '<br>' + userCase.adopAgencyTown + '<br>' + userCase.adopAgencyPostcode,
+          changeUrl: Urls.ADOPTION_AGENCY,
+        },
+        {
+          key: keys.emailAddress,
+          value: userCase.adopAgencyOrLaContactEmail,
+          changeUrl: Urls.ADOPTION_AGENCY,
+        },
       ],
       content
     ),
@@ -178,8 +205,8 @@ export const socialWorkerSummaryList = (
           changeUrl: Urls.SOCIAL_WORKER,
         },
         {
-          key: keys.teamEmailAddress,
-          value: userCase.socialWorkerTeamEmail,
+          key: keys.childLocalAuthority,
+          value: userCase.childLocalAuthority,
           changeUrl: Urls.SOCIAL_WORKER,
         },
       ],
@@ -506,63 +533,38 @@ export const siblingCourtOrderSummaryList = (
         valueHtml: content.yesNoNotsure[userCase.hasSiblings!],
         changeUrl: `${Urls.SIBLING_EXISTS}`,
       },
-      ...(userCase.hasSiblings === YesNoNotsure.YES
-        ? [
-            {
-              key: keys.siblingCourtOrders,
-              valueHtml: content.yesNoNotsure[userCase.hasPoForSiblings!],
-              changeUrl: `${Urls.SIBLING_COURT_ORDER_EXISTS}`,
-            },
-            ...(userCase.hasPoForSiblings === YesNoNotsure.YES
-              ? userCase.siblings!.map(sibling => ({
-                  key: keys.siblingName,
-                  value: sibling.siblingFirstName + ' ' + sibling.siblingLastNames,
-                  changeUrl: `${Urls.SIBLING_NAME}?change=${sibling.siblingId}`,
-                }))
-              : []),
-          ]
-        : []),
     ],
     content
   );
 
   const siblingCourtOrderList =
-    userCase.hasSiblings === YesNoNotsure.YES && userCase.hasPoForSiblings === YesNoNotsure.YES
+    userCase.hasSiblings === YesNoNotsure.YES
       ? userCase.siblings!.reduce(
           (rows: GovUkNunjucksSummary[], sibling) => [
             ...rows,
-            ...sibling.siblingPlacementOrders!.reduce(
-              (acc: GovUkNunjucksSummary[], item) => [
-                ...acc,
-                ...getSectionSummaryList(
-                  [
-                    {
-                      keyHtml: `<h3 class="govuk-heading-s govuk-!-margin-top-8">${keys.courtOrder}</h3>`,
-                      classes: 'govuk-summary-list__row--no-border',
-                    },
-                    {
-                      key: keys.siblingName,
-                      value: sibling.siblingFirstName + ' ' + sibling.siblingLastNames,
-                    },
-                    {
-                      key: keys.typeOfOrder,
-                      value: (item as PlacementOrder).placementOrderType,
-                      changeUrl: `${Urls.SIBLING_ORDER_TYPE}?change=${sibling.siblingId}/${
-                        (item as PlacementOrder).placementOrderId
-                      }`,
-                    },
-                    {
-                      key: keys.orderNumber,
-                      value: (item as PlacementOrder).placementOrderNumber,
-                      changeUrl: `${Urls.SIBLING_ORDER_CASE_NUMBER}?change=${sibling.siblingId}/${
-                        (item as PlacementOrder).placementOrderId
-                      }`,
-                    },
-                  ],
-                  content
-                ),
+            ...getSectionSummaryList(
+              [
+                {
+                  keyHtml: `<h3 class="govuk-heading-s govuk-!-margin-top-8">${keys.courtOrder}</h3>`,
+                  classes: 'govuk-summary-list__row--no-border',
+                },
+                {
+                  key: keys.siblingRelation,
+                  value: sibling.siblingRelation,
+                  changeUrl: `${Urls.SIBLING_RELATION}?change=${sibling.siblingId}`,
+                },
+                {
+                  key: keys.typeOfOrder,
+                  value: sibling.siblingPoType,
+                  changeUrl: `${Urls.SIBLING_ORDER_TYPE}?change=${sibling.siblingId}`,
+                },
+                {
+                  key: keys.orderNumber,
+                  value: sibling.siblingPoNumber,
+                  changeUrl: `${Urls.SIBLING_ORDER_CASE_NUMBER}?change=${sibling.siblingId}`,
+                },
               ],
-              []
+              content
             ),
           ],
           []

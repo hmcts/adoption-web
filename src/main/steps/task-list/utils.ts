@@ -1,14 +1,5 @@
 import { CaseDate, CaseWithId, FieldPrefix } from '../../app/case/case';
-import {
-  AdoptionAgencyOrLocalAuthority,
-  ApplyingWith,
-  Gender,
-  PlacementOrder,
-  SectionStatus,
-  State,
-  YesNoNotsure,
-  YesOrNo,
-} from '../../app/case/definition';
+import { ApplyingWith, Gender, SectionStatus, State, YesNoNotsure, YesOrNo } from '../../app/case/definition';
 import {
   areDateFieldsFilledIn,
   isDateInputInvalid,
@@ -282,82 +273,84 @@ export const getSiblingStatus = (userCase: CaseWithId): SectionStatus => {
     return SectionStatus.COMPLETED;
   }
   if (exists === YesNoNotsure.YES) {
-    const courtOrderExists = userCase.hasPoForSiblings;
-    if (courtOrderExists === YesNoNotsure.NO || courtOrderExists === YesNoNotsure.NOT_SURE) {
-      return SectionStatus.COMPLETED;
-    }
-    if (courtOrderExists === YesNoNotsure.YES) {
-      const siblingsComplete =
-        userCase.siblings?.length &&
-        userCase.siblings?.every(
-          item =>
-            item.siblingFirstName &&
-            item.siblingLastNames &&
-            item.siblingPlacementOrders?.length &&
-            (item.siblingPlacementOrders as PlacementOrder[]).every(
-              po => po.placementOrderType && po.placementOrderNumber && po.placementOrderId
-            )
-        );
-      return siblingsComplete ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
-    }
-    return SectionStatus.IN_PROGRESS;
+    const siblingsComplete =
+      userCase.siblings?.length &&
+      userCase.siblings?.every(item => item.siblingRelation && item.siblingPoType && item.siblingPoNumber);
+    return siblingsComplete ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
   }
   return SectionStatus.NOT_STARTED;
 };
 
 export const getAdoptionAgencyDetailStatus = (userCase: CaseWithId): SectionStatus => {
-  const adopAgencyOrLAsComplete =
-    userCase.adopAgencyOrLAs?.length &&
-    ((userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO && isAdoptionAgencyOrLaComplete(userCase.adopAgencyOrLAs[0])) ||
-      (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.YES &&
-        userCase.adopAgencyOrLAs?.length === 2 &&
-        isAdoptionAgencyOrLaComplete(userCase.adopAgencyOrLAs[0]) &&
-        isAdoptionAgencyOrLaComplete(userCase.adopAgencyOrLAs[1])));
-
-  const socialWorkerComplete = !!(
-    userCase.socialWorkerName &&
-    userCase.socialWorkerPhoneNumber &&
-    userCase.socialWorkerEmail
-  );
-
-  if (adopAgencyOrLAsComplete && socialWorkerComplete) {
+  if (isAdoptionAgencyOrLaComplete(userCase)) {
     return SectionStatus.COMPLETED;
+  } else if (isAdoptionAgencyOrLaInProgress(userCase)) {
+    return SectionStatus.IN_PROGRESS;
+  } else {
+    return SectionStatus.NOT_STARTED;
   }
-
-  const adopAgencyOrLAsInProgress =
-    userCase.hasAnotherAdopAgencyOrLA ||
-    (userCase.adopAgencyOrLAs?.length && userCase.adopAgencyOrLAs.some(item => isAdoptionAgencyOrLaInProgress(item)));
-
-  const socialWorkerInProgress =
-    userCase.socialWorkerName || userCase.socialWorkerPhoneNumber || userCase.socialWorkerEmail;
-
-  return !adopAgencyOrLAsInProgress && !socialWorkerInProgress ? SectionStatus.NOT_STARTED : SectionStatus.IN_PROGRESS;
 };
 
-export const getAdoptionAgencyUrl = (userCase: CaseWithId): string => {
-  if (userCase.adopAgencyOrLAs?.length) {
-    const adopAgency = userCase.adopAgencyOrLAs[0];
-    return `${urls?.ADOPTION_AGENCY}?change=${adopAgency.adopAgencyOrLaId}`;
+const isAdoptionAgencyOrLaComplete = (userCase: CaseWithId): boolean => {
+  if (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.YES) {
+    return !!(
+      userCase.localAuthorityContactEmail &&
+      userCase.localAuthorityContactName &&
+      userCase.localAuthorityName &&
+      userCase.localAuthorityPhoneNumber &&
+      userCase.adopAgencyOrLaName &&
+      userCase.adopAgencyOrLaContactName &&
+      userCase.adopAgencyOrLaPhoneNumber &&
+      userCase.adopAgencyOrLaContactEmail &&
+      userCase.socialWorkerName &&
+      userCase.socialWorkerPhoneNumber &&
+      userCase.socialWorkerEmail &&
+      userCase.childLocalAuthority
+    );
+  } else {
+    return !!(
+      userCase.localAuthorityContactEmail &&
+      userCase.localAuthorityContactName &&
+      userCase.localAuthorityName &&
+      userCase.localAuthorityPhoneNumber &&
+      userCase.hasAnotherAdopAgencyOrLA &&
+      userCase.socialWorkerName &&
+      userCase.socialWorkerPhoneNumber &&
+      userCase.socialWorkerEmail &&
+      userCase.childLocalAuthority
+    );
   }
-  return `${urls?.ADOPTION_AGENCY}?add=${Date.now()}`;
 };
 
-const isAdoptionAgencyOrLaComplete = (item: AdoptionAgencyOrLocalAuthority): boolean => {
-  return !!(
-    item.adopAgencyOrLaName &&
-    item.adopAgencyOrLaContactName &&
-    item.adopAgencyOrLaPhoneNumber &&
-    item.adopAgencyOrLaContactEmail
-  );
-};
-
-const isAdoptionAgencyOrLaInProgress = (item: AdoptionAgencyOrLocalAuthority): boolean => {
-  return !!(
-    item.adopAgencyOrLaName ||
-    item.adopAgencyOrLaContactName ||
-    item.adopAgencyOrLaPhoneNumber ||
-    item.adopAgencyOrLaContactEmail
-  );
+const isAdoptionAgencyOrLaInProgress = (userCase: CaseWithId): boolean => {
+  if (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.YES) {
+    return !!(
+      userCase.localAuthorityContactEmail ||
+      userCase.localAuthorityContactName ||
+      userCase.localAuthorityName ||
+      userCase.localAuthorityPhoneNumber ||
+      userCase.adopAgencyOrLaName ||
+      userCase.adopAgencyOrLaContactName ||
+      userCase.adopAgencyOrLaPhoneNumber ||
+      userCase.adopAgencyOrLaContactEmail ||
+      userCase.socialWorkerName ||
+      userCase.socialWorkerPhoneNumber ||
+      userCase.socialWorkerEmail ||
+      userCase.childLocalAuthority
+    );
+  } else {
+    return !!(
+      userCase.localAuthorityContactEmail ||
+      userCase.localAuthorityContactName ||
+      userCase.localAuthorityName ||
+      userCase.localAuthorityPhoneNumber ||
+      userCase.hasAnotherAdopAgencyOrLA ||
+      userCase.socialWorkerName ||
+      userCase.socialWorkerPhoneNumber ||
+      userCase.socialWorkerEmail ||
+      userCase.childLocalAuthority
+    );
+  }
 };
 
 export const getReviewPaySubmitUrl = (userCase: CaseWithId): string => {

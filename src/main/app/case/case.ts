@@ -2,7 +2,6 @@ import { AnyObject } from '../controller/PostController';
 
 import {
   Adoption,
-  AdoptionAgencyOrLocalAuthority,
   AdoptionDocument,
   ApplicationType,
   ApplyingWith,
@@ -133,13 +132,27 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   socialWorkerName: 'socialWorkerName',
   socialWorkerPhoneNumber: 'socialWorkerPhoneNumber',
   socialWorkerEmail: 'socialWorkerEmail',
-  socialWorkerTeamEmail: 'socialWorkerTeamEmail',
+  childLocalAuthority: 'childLocalAuthority',
+
   solicitorFirm: 'solicitorFirm',
   solicitorName: 'solicitorName',
   solicitorPhoneNumber: 'solicitorPhoneNumber',
   solicitorEmail: 'solicitorEmail',
   solicitorHelpingWithApplication: 'solicitorHelpingWithApplication',
-  adopAgencyOrLAs: 'adopAgencyOrLAs',
+
+  localAuthorityName: 'localAuthorityName',
+  localAuthorityContactName: 'localAuthorityContactName',
+  localAuthorityPhoneNumber: 'localAuthorityPhoneNumber',
+  localAuthorityContactEmail: 'localAuthorityContactEmail',
+
+  adopAgencyOrLaName: 'adopAgencyOrLaName',
+  adopAgencyOrLaContactName: 'adopAgencyOrLaContactName',
+  adopAgencyOrLaPhoneNumber: 'adopAgencyOrLaPhoneNumber',
+  adopAgencyAddressLine1: 'adopAgencyAddressLine1',
+  adopAgencyTown: 'adopAgencyTown',
+  adopAgencyPostcode: 'adopAgencyPostcode',
+  adopAgencyOrLaContactEmail: 'adopAgencyOrLaContactEmail',
+
   siblings: 'siblings',
   payments: 'applicationPayments',
 
@@ -150,14 +163,10 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   pcqId: 'pcqId',
 
   hasAnotherAdopAgencyOrLA: 'hasAnotherAdopAgencyOrLA',
-  selectedAdoptionAgencyId: 'selectedAdoptionAgencyId',
   hasSiblings: 'hasSiblings',
   hasSiblingNotSureReason: 'hasSiblingNotSureReason',
-  hasPoForSiblings: 'hasPoForSiblings',
-  hasPoForSiblingsNotSureReason: 'hasPoForSiblingsNotSureReason',
   addAnotherSiblingPlacementOrder: 'addAnotherSiblingPlacementOrder',
   selectedSiblingId: 'selectedSiblingId',
-  selectedSiblingPoId: 'selectedSiblingPoId',
 
   applyForFinancialOrder: 'applicant1FinancialOrder',
   applicant1DocumentsUploaded: 'applicant1DocumentsUploaded',
@@ -302,13 +311,26 @@ export interface Case {
   otherParentAddressNotKnownReason?: string;
 
   /***** Adoption Agency, Social Worker and Solicitor *****/
-  adopAgencyOrLAs?: AdoptionAgencyOrLocalAuthority[];
+  localAuthorityName?: string;
+  localAuthorityContactName?: string;
+  localAuthorityPhoneNumber?: string;
+  localAuthorityContactEmail?: string;
+
+  adopAgencyOrLaName?: string;
+  adopAgencyOrLaContactName?: string;
+  adopAgencyOrLaPhoneNumber?: string;
+  adopAgencyAddressLine1?: string;
+  adopAgencyTown?: string;
+  adopAgencyPostcode?: string;
+  adopAgencyOrLaContactEmail?: string;
+
   hasAnotherAdopAgencyOrLA?: YesOrNo;
-  selectedAdoptionAgencyId?: string;
+
   socialWorkerName?: string;
   socialWorkerPhoneNumber?: string;
   socialWorkerEmail?: string;
-  socialWorkerTeamEmail?: string;
+  childLocalAuthority?: string;
+
   solicitorFirm?: string;
   solicitorName?: string;
   solicitorPhoneNumber?: string;
@@ -319,11 +341,8 @@ export interface Case {
   siblings?: Sibling[];
   hasSiblings?: YesNoNotsure;
   hasSiblingNotSureReason?: string;
-  hasPoForSiblings?: YesNoNotsure;
-  hasPoForSiblingsNotSureReason?: string;
   addAnotherSiblingPlacementOrder?: YesOrNo;
   selectedSiblingId?: string;
-  selectedSiblingPoId?: string;
   addAnotherSibling?: YesOrNo;
 
   /***** Statement of truth *****/
