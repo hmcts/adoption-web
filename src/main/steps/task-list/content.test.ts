@@ -29,13 +29,13 @@ const enContent = {
     personalDetails: 'Your personal details',
     contactDetails: 'Your contact details',
     birthCertificate: 'Birth certificate details',
-    childNameAfterAdoption: "Child's name after adoption",
+    childDetails: "Child's details",
     birthMother: 'Birth mother details',
     birthFather: 'Birth father details',
     otherParent: 'Other person with parental responsibility',
     placementAndCourtOrders: 'Placement and court orders',
     siblingCourtOrders: 'Sibling court order details',
-    chooseFamilyCourt: 'Choose your family court',
+    familyCourt: 'The family court details',
     uploadDocuments: 'Upload documents',
     reviewPayAndSubmit: 'Review, pay and submit your application',
   },
@@ -65,13 +65,13 @@ const cyContent = {
     personalDetails: 'Eich manylion personol',
     contactDetails: 'Eich manylion cyswllt',
     birthCertificate: 'Manylion y dystysgrif geni',
-    childNameAfterAdoption: 'Enw’r plentyn ar ôl ei fabwysiadu',
+    childDetails: "Child's details (in welsh)",
     birthMother: 'Manylion y fam fiolegol',
     birthFather: 'Manylion y tad biolegol',
     otherParent: 'Unigolyn arall sydd â chyfrifoldeb rhiant',
     placementAndCourtOrders: 'Gorchmynion llys a lleoli',
     siblingCourtOrders: 'Manylion gorchymyn llys brodyr/chwiorydd',
-    chooseFamilyCourt: 'Dewiswch eich llys teulu',
+    familyCourt: 'The family court details (in welsh)',
     uploadDocuments: 'Llwytho dogfennau',
     reviewPayAndSubmit: 'Adolygu, talu a chyflwyno eich cais',
   },
@@ -92,109 +92,109 @@ describe('task-list > content', () => {
       userCase: mockUserCase,
       expected: [
         {
-          items: [
-            { href: '/applying-with', id: 'applying-with', status: 'COMPLETED', text: 'Number of applicants' },
-            {
-              href: '/date-child-moved-in',
-              id: 'date-child-moved-in',
-              status: 'COMPLETED',
-              text: 'Date child moved in with you',
-            },
-            {
-              href: '/children/local-authority',
-              id: 'adoption-agency',
-              status: 'COMPLETED',
-              text: 'Adoption agency and social worker',
-            },
-          ],
           title: 'Add application details',
-        },
-        {
           items: [
+            { id: 'applying-with', text: 'Number of applicants', status: 'COMPLETED', href: '/applying-with' },
             {
-              href: '/applicant1/full-name',
-              id: 'applicant1-personal-details',
+              id: 'date-child-moved-in',
+              text: 'Date child moved in with you',
               status: 'COMPLETED',
-              text: 'Your personal details',
+              href: '/date-child-moved-in',
             },
             {
-              href: '/applicant1/address/lookup',
-              id: 'applicant1-contact-details',
-              status: 'COMPLETED',
-              text: 'Your contact details',
-            },
-          ],
-          title: "Add applicant's details",
-        },
-        {
-          items: [
-            {
-              href: '/children/full-name',
-              id: 'children-birth-certificate-details',
-              status: 'COMPLETED',
-              text: 'Birth certificate details',
-            },
-            {
-              href: '/children/full-name-after-adoption',
               id: 'adoption-certificate-details',
+              text: "Child's details",
               status: 'COMPLETED',
-              text: "Child's name after adoption",
+              href: '/children/full-name-after-adoption',
             },
             {
-              href: '/birth-mother/full-name',
-              id: 'birth-mother-details',
+              id: 'adoption-agency',
+              text: 'Adoption agency and social worker',
               status: 'COMPLETED',
-              text: 'Birth mother details',
+              href: '/children/local-authority',
             },
             {
-              href: '/birth-father/name-on-certificate',
-              id: 'birth-father',
-              status: 'COMPLETED',
-              text: 'Birth father details',
-            },
-            {
-              href: '/other-parent/exists',
-              id: 'other-parent',
-              status: 'COMPLETED',
-              text: 'Other person with parental responsibility',
-            },
-            {
-              href: '/children/placement-order-summary',
-              id: 'children-placement-order-details',
-              status: 'COMPLETED',
-              text: 'Placement and court orders',
-            },
-            { href: '/sibling/summary', id: 'sibling', status: 'COMPLETED', text: 'Sibling court order details' },
-            {
-              href: '/children/find-family-court',
               id: 'find-family-court',
+              text: 'The family court details',
               status: 'COMPLETED',
-              text: 'Choose your family court',
+              href: '/children/find-family-court',
             },
           ],
+        },
+        {
+          title: "Add applicant's details",
+          items: [
+            {
+              id: 'applicant1-personal-details',
+              text: 'Your personal details',
+              status: 'COMPLETED',
+              href: '/applicant1/full-name',
+            },
+            {
+              id: 'applicant1-contact-details',
+              text: 'Your contact details',
+              status: 'COMPLETED',
+              href: '/applicant1/address/lookup',
+            },
+          ],
+        },
+        {
           title: "Add child's details",
-        },
-        {
           items: [
             {
-              href: '/upload-your-documents',
-              id: 'upload-your-documents',
+              id: 'children-birth-certificate-details',
+              text: 'Birth certificate details',
               status: 'COMPLETED',
-              text: 'Upload documents',
+              href: '/children/full-name',
             },
+            {
+              id: 'birth-mother-details',
+              text: 'Birth mother details',
+              status: 'COMPLETED',
+              href: '/birth-mother/full-name',
+            },
+            {
+              id: 'birth-father',
+              text: 'Birth father details',
+              status: 'COMPLETED',
+              href: '/birth-father/name-on-certificate',
+            },
+            {
+              id: 'other-parent',
+              text: 'Other person with parental responsibility',
+              status: 'COMPLETED',
+              href: '/other-parent/exists',
+            },
+            {
+              id: 'children-placement-order-details',
+              text: 'Placement and court orders',
+              status: 'COMPLETED',
+              href: '/children/placement-order-summary',
+            },
+            { id: 'sibling', text: 'Sibling court order details', status: 'COMPLETED', href: '/sibling/summary' },
           ],
-          title: 'Upload documents',
         },
         {
+          title: 'Upload documents',
           items: [
             {
-              href: '/review-pay-submit/equality',
-              id: 'review-pay-and-submit',
-              status: 'NOT_STARTED',
-              text: 'Review, pay and submit your application',
+              id: 'upload-your-documents',
+              text: 'Upload documents',
+              status: 'COMPLETED',
+              href: '/upload-your-documents',
             },
           ],
+        },
+        {
           title: 'Review, pay and submit',
+          items: [
+            {
+              id: 'review-pay-and-submit',
+              text: 'Review, pay and submit your application',
+              status: 'NOT_STARTED',
+              href: '/review-pay-submit/equality',
+            },
+          ],
         },
       ],
     },
@@ -221,11 +221,18 @@ describe('task-list > content', () => {
               text: 'Date child moved in with you',
             },
             {
+              href: '/children/full-name-after-adoption',
+              id: 'adoption-certificate-details',
+              status: 'COMPLETED',
+              text: "Child's details",
+            },
+            {
               href: '/children/local-authority',
               id: 'adoption-agency',
               status: 'COMPLETED',
               text: 'Adoption agency and social worker',
             },
+            { href: '', id: 'find-family-court', status: 'CAN_NOT_START_YET', text: 'The family court details' },
           ],
           title: 'Add application details',
         },
@@ -269,12 +276,6 @@ describe('task-list > content', () => {
               text: 'Birth certificate details',
             },
             {
-              href: '/children/full-name-after-adoption',
-              id: 'adoption-certificate-details',
-              status: 'COMPLETED',
-              text: "Child's name after adoption",
-            },
-            {
               href: '/birth-mother/full-name',
               id: 'birth-mother-details',
               status: 'COMPLETED',
@@ -299,24 +300,11 @@ describe('task-list > content', () => {
               text: 'Placement and court orders',
             },
             { href: '/sibling/exists', id: 'sibling', status: 'COMPLETED', text: 'Sibling court order details' },
-            {
-              href: '',
-              id: 'find-family-court',
-              status: 'CAN_NOT_START_YET',
-              text: 'Choose your family court',
-            },
           ],
           title: "Add child's details",
         },
         {
-          items: [
-            {
-              href: '',
-              id: 'upload-your-documents',
-              status: 'CAN_NOT_START_YET',
-              text: 'Upload documents',
-            },
-          ],
+          items: [{ href: '', id: 'upload-your-documents', status: 'CAN_NOT_START_YET', text: 'Upload documents' }],
           title: 'Upload documents',
         },
         {
@@ -334,6 +322,7 @@ describe('task-list > content', () => {
     },
   ])('should generate correct task list %#', ({ userCase, expected }) => {
     const { sections: taskListItems } = generateContent({ ...commonContent, userCase });
+    console.log(JSON.stringify(taskListItems));
     expect(taskListItems).toEqual(expected);
   });
 });

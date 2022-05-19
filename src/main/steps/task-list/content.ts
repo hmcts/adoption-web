@@ -39,10 +39,22 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         href: URL.DATE_CHILD_MOVED_IN,
       },
       {
+        id: 'adoption-certificate-details',
+        text: taskListItems.childDetails,
+        status: getAdoptionCertificateDetailsStatus(userCase),
+        href: URL.CHILDREN_FULL_NAME_AFTER_ADOPTION,
+      },
+      {
         id: 'adoption-agency',
         text: taskListItems.adoptionAgency,
         status: getAdoptionAgencyDetailStatus(userCase),
         href: URL.LOCAL_AUTHORITY,
+      },
+      {
+        id: 'find-family-court',
+        text: taskListItems.familyCourt,
+        status: findFamilyCourtStatus(userCase),
+        href: findFamilyCourtStatus(userCase) === SectionStatus.CAN_NOT_START_YET ? '' : URL.CHILDREN_FIND_FAMILY_COURT,
       },
     ],
   },
@@ -91,12 +103,6 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         href: URL.CHILDREN_FULL_NAME,
       },
       {
-        id: 'adoption-certificate-details',
-        text: taskListItems.childNameAfterAdoption,
-        status: getAdoptionCertificateDetailsStatus(userCase),
-        href: URL.CHILDREN_FULL_NAME_AFTER_ADOPTION,
-      },
-      {
         id: 'birth-mother-details',
         text: taskListItems.birthMother,
         status: getBirthMotherDetailsStatus(userCase),
@@ -131,12 +137,6 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
           userCase.hasSiblings === YesNoNotsure.YES && userCase.siblings?.length
             ? URL.SIBLING_ORDER_SUMMARY
             : URL.SIBLING_EXISTS,
-      },
-      {
-        id: 'find-family-court',
-        text: taskListItems.chooseFamilyCourt,
-        status: findFamilyCourtStatus(userCase),
-        href: findFamilyCourtStatus(userCase) === SectionStatus.CAN_NOT_START_YET ? '' : URL.CHILDREN_FIND_FAMILY_COURT,
       },
     ],
   },
@@ -188,19 +188,19 @@ const en = () => ({
     personalDetails: 'Your personal details',
     contactDetails: 'Your contact details',
     birthCertificate: 'Birth certificate details',
-    childNameAfterAdoption: "Child's name after adoption",
+    childDetails: "Child's details",
     birthMother: 'Birth mother details',
     birthFather: 'Birth father details',
     otherParent: 'Other person with parental responsibility',
     placementAndCourtOrders: 'Placement and court orders',
     siblingCourtOrders: 'Sibling court order details',
-    chooseFamilyCourt: 'Choose your family court',
+    familyCourt: 'The family court details',
     uploadDocuments: 'Upload documents',
     reviewPayAndSubmit: 'Review, pay and submit your application',
   },
 });
 
-const cy = () => ({
+const cy: typeof en = () => ({
   title: 'Gwneud cais i fabwysiadu plentyn a leolwyd dan eich gofal',
   statuses: {
     [SectionStatus.COMPLETED]: 'Wedi cwblhau',
@@ -224,13 +224,13 @@ const cy = () => ({
     personalDetails: 'Eich manylion personol',
     contactDetails: 'Eich manylion cyswllt',
     birthCertificate: 'Manylion y dystysgrif geni',
-    childNameAfterAdoption: 'Enw’r plentyn ar ôl ei fabwysiadu',
+    childDetails: "Child's details (in welsh)",
     birthMother: 'Manylion y fam fiolegol',
     birthFather: 'Manylion y tad biolegol',
     otherParent: 'Unigolyn arall sydd â chyfrifoldeb rhiant',
     placementAndCourtOrders: 'Gorchmynion llys a lleoli',
     siblingCourtOrders: 'Manylion gorchymyn llys brodyr/chwiorydd',
-    chooseFamilyCourt: 'Dewiswch eich llys teulu',
+    familyCourt: 'The family court details (in welsh)',
     uploadDocuments: 'Llwytho dogfennau',
     reviewPayAndSubmit: 'Adolygu, talu a chyflwyno eich cais',
   },
