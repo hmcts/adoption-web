@@ -578,12 +578,17 @@ export const siblingCourtOrderSummaryList = (
 };
 
 export const familyCourtSummaryList = (
-  { sectionTitles, keys, language, ...content }: SummaryListContent,
+  { sectionTitles, keys, ...content }: SummaryListContent,
   userCase: Partial<CaseWithId>
 ): SummaryList => ({
   title: sectionTitles.familyCourtDetails,
   rows: getSectionSummaryList(
     [
+      {
+        key: keys.placementCourtName,
+        value: userCase.placementOrderCourt,
+        changeUrl: Urls.CHILDREN_FIND_PLACEMENT_ORDER_COURT,
+      },
       {
         key: keys.familyCourtName,
         value: userCase.familyCourtName,

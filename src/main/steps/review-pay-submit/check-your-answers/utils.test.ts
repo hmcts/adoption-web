@@ -1413,6 +1413,19 @@ describe('review-pay-submit > check-your-answers > utils', () => {
           rows: [
             {
               key: { text: 'Family court name' },
+              value: {},
+              actions: {
+                items: [
+                  {
+                    href: '/children/find-placement-order-court?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Family court name',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Family court name' },
               value: { text: 'MOCK_FAMILY_COURT' },
               actions: {
                 items: [
