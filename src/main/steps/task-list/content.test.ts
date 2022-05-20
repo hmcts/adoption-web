@@ -117,7 +117,7 @@ describe('task-list > content', () => {
               id: 'find-family-court',
               text: 'The family court details',
               status: 'COMPLETED',
-              href: '/children/find-family-court',
+              href: '/children/find-placement-order-court',
             },
           ],
         },
@@ -232,7 +232,12 @@ describe('task-list > content', () => {
               status: 'COMPLETED',
               text: 'Adoption agency and social worker',
             },
-            { href: '', id: 'find-family-court', status: 'CAN_NOT_START_YET', text: 'The family court details' },
+            {
+              href: '/children/find-placement-order-court',
+              id: 'find-family-court',
+              status: 'CAN_NOT_START_YET',
+              text: 'The family court details',
+            },
           ],
           title: 'Add application details',
         },
@@ -322,7 +327,6 @@ describe('task-list > content', () => {
     },
   ])('should generate correct task list %#', ({ userCase, expected }) => {
     const { sections: taskListItems } = generateContent({ ...commonContent, userCase });
-    console.log(JSON.stringify(taskListItems));
     expect(taskListItems).toEqual(expected);
   });
 });

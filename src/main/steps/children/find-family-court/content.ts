@@ -8,7 +8,7 @@ const en = content => ({
   title: 'Choose a family court',
   findFamilyCourtParagraph1:
     'There may be court hearings related to your application to adopt. The birth parents may be present at these. You do not have to attend these hearings.',
-  findFamilyCourtParagraph2: `You have told us that the court which issued the placement order was <b>${content.userCase?.placementOrders[0]?.placementOrderCourt}</b>.`,
+  findFamilyCourtParagraph2: `You have told us that the court which issued the placement order was <b>${content.userCase?.placementOrderCourt}</b>.`,
   findFamilyCourt: 'Do you want the hearings to be heard in the same court?',
   findFamilyCourtHint: 'You should discuss this with your social worker or adoption agency.',
   familyCourtNameParagraph1:
@@ -33,7 +33,7 @@ const cy: typeof en = content => ({
   title: 'Dewiswch lys teulu',
   findFamilyCourtParagraph1:
     'Efallai cynhelir gwrandawiadau llys sy’n ymwneud â’ch cais i fabwysiadu. Efallai bydd y rheini biolegol yn bresennol yn y gwrandawiadau hyn. Nid oes rhaid ichi fynychu’r gwrandawiadau hyn.',
-  findFamilyCourtParagraph2: `Rydych wedi dweud wrthym mai’r llys a gyhoeddodd y gorchymyn lleoli oedd <b>${content.userCase?.placementOrders[0]?.placementOrderCourt}</b>.`,
+  findFamilyCourtParagraph2: `Rydych wedi dweud wrthym mai’r llys a gyhoeddodd y gorchymyn lleoli oedd <b>${content.userCase?.placementOrderCourt}</b>.`,
   findFamilyCourt: 'A ydych eisiau i’r gwrandawiadau cael eu gwrando yn yr un llys?',
   findFamilyCourtHint: 'Dylech drafod hyn gyda’ch gweithiwr cymdeithasol neu’ch asiantaeth fabwysiadu.',
   familyCourtNameParagraph1:
@@ -62,7 +62,6 @@ export const form: FormContent = {
       label: l => l.findFamilyCourt,
       hint: l => l.findFamilyCourtHint,
       labelSize: 'normal',
-
       values: [
         {
           label: l => l.yes,

@@ -54,7 +54,7 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         id: 'find-family-court',
         text: taskListItems.familyCourt,
         status: findFamilyCourtStatus(userCase),
-        href: findFamilyCourtStatus(userCase) === SectionStatus.CAN_NOT_START_YET ? '' : URL.CHILDREN_FIND_FAMILY_COURT,
+        href: URL.CHILDREN_FIND_PLACEMENT_ORDER_COURT,
       },
     ],
   },

@@ -450,6 +450,7 @@ export interface CaseData {
   applicant1CannotUploadSupportingDocument: DocumentType[];
   applicant1CannotUpload: string;
 
+  placementOrderCourt: string;
   findFamilyCourt: YesOrNo;
   familyCourtName: string;
   familyCourtEmailId: string;
