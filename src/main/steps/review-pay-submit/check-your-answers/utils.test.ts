@@ -1413,7 +1413,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
           rows: [
             {
               key: { text: 'Family court name' },
-              value: {},
+              value: { text: 'MOCK_PLACEMENT_ORDER_COURT' },
               actions: {
                 items: [
                   {
