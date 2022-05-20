@@ -235,7 +235,7 @@ describe('task-list > content', () => {
             {
               href: '/children/find-placement-order-court',
               id: 'find-family-court',
-              status: 'CAN_NOT_START_YET',
+              status: 'IN_PROGRESS',
               text: 'The family court details',
             },
           ],
