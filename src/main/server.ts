@@ -75,6 +75,7 @@ app.use(
 
       return `"${req.method} ${req.originalUrl || req.url}${caseId}${errors}" ${timeTaken}s`;
     },
+    ignoreRequests: ['/health/readiness', '/health/liveness'],
   })
 );
 
