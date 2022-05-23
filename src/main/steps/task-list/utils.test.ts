@@ -848,13 +848,23 @@ describe('utils', () => {
   describe('findFamilyCourtStatus', () => {
     test.each([
       { data: mockUserCase, expected: 'COMPLETED' },
-      { data: { ...mockUserCase, findFamilyCourt: YesOrNo.YES }, expected: 'COMPLETED' },
-      { data: { ...mockUserCase, findFamilyCourt: YesOrNo.NO }, expected: 'COMPLETED' },
-      { data: { ...mockUserCase, findFamilyCourt: YesOrNo.NO, familyCourtName: undefined }, expected: 'IN_PROGRESS' },
-      { data: { ...mockUserCase, findFamilyCourt: undefined, familyCourtName: undefined }, expected: 'NOT_STARTED' },
       {
-        data: { ...mockUserCase, applyingWith: undefined, findFamilyCourt: undefined, familyCourtName: undefined },
-        expected: 'CAN_NOT_START_YET',
+        data: { ...mockUserCase, placementOrderCourt: 'MOCK_COURT', findFamilyCourt: YesOrNo.YES },
+        expected: 'COMPLETED',
+      },
+      {
+        data: {
+          ...mockUserCase,
+          placementOrderCourt: 'MOCK_COURT',
+          findFamilyCourt: YesOrNo.NO,
+          familyCourtName: undefined,
+        },
+        expected: 'IN_PROGRESS',
+      },
+      { data: { ...mockUserCase, findFamilyCourt: YesOrNo.NO, familyCourtName: undefined }, expected: 'IN_PROGRESS' },
+      {
+        data: { ...mockUserCase, placementOrderCourt: undefined, findFamilyCourt: undefined },
+        expected: 'NOT_STARTED',
       },
     ])('should return correct status %#', async ({ data, expected }) => {
       expect(findFamilyCourtStatus(data)).toBe(expected);

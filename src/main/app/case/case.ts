@@ -175,6 +175,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicationFeeOrderSummary: 'applicationFeeOrderSummary',
   applicant1CannotUpload: 'applicant1CannotUpload',
 
+  placementOrderCourt: 'placementOrderCourt',
   findFamilyCourt: 'findFamilyCourt',
   familyCourtName: 'familyCourtName',
   familyCourtEmailId: 'familyCourtEmailId',
@@ -368,6 +369,7 @@ export interface Case {
   applicant1CannotUploadDocuments?: DocumentType[];
 
   /***** Find court *****/
+  placementOrderCourt?: string;
   findFamilyCourt?: YesOrNo;
   familyCourtName?: string;
   familyCourtEmailId?: string;

@@ -20,13 +20,21 @@ import {
   PageLink,
   TASK_LIST_URL,
   TERMS_AND_CONDITIONS,
+  TIMED_OUT_URL,
 } from '../../steps/urls';
 
 /**
  * Adds the state redirect middleware to redirect when application is in certain states
  */
 export class StateRedirectMiddleware {
-  FOOTER_LINKS = [COOKIES_PAGE, PRIVACY_POLICY, ACCESSIBILITY_STATEMENT, TERMS_AND_CONDITIONS, CONTACT_US];
+  FOOTER_LINKS = [
+    COOKIES_PAGE,
+    PRIVACY_POLICY,
+    ACCESSIBILITY_STATEMENT,
+    TERMS_AND_CONDITIONS,
+    CONTACT_US,
+    TIMED_OUT_URL,
+  ];
   public enableFor(app: Application): void {
     const { errorHandler } = app.locals;
     dayjs.extend(customParseFormat);

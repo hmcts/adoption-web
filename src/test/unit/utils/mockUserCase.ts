@@ -118,6 +118,7 @@ export default {
       siblingPoNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
     },
   ],
+  placementOrderCourt: 'MOCK_PLACEMENT_ORDER_COURT',
   findFamilyCourt: YesOrNo.NO,
   familyCourtName: 'MOCK_FAMILY_COURT',
   applicant1UploadedFiles: [{ id: 'MOCK_DOCUMENT_ID', name: 'MOCK_DOCUMENT_FILE_NAME' }],
