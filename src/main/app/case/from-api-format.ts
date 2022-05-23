@@ -30,13 +30,22 @@ const fields: FromApiConverters = {
     applicant2AdditionalNames: data.applicant2AdditionalNames?.map(item => ({ id: item.id, ...item.value })),
   }),
   birthMotherOtherNationalities: data => ({
-    birthMotherAdditionalNationalities: data.birthMotherOtherNationalities?.map(item => item.value.country),
+    birthMotherAdditionalNationalities: data.birthMotherOtherNationalities?.map(item => ({
+      id: item.id,
+      country: item.value.country,
+    })),
   }),
   birthFatherOtherNationalities: data => ({
-    birthFatherAdditionalNationalities: data.birthFatherOtherNationalities?.map(item => item.value.country),
+    birthFatherAdditionalNationalities: data.birthFatherOtherNationalities?.map(item => ({
+      id: item.id,
+      country: item.value.country,
+    })),
   }),
   childrenAdditionalNationalities: data => ({
-    childrenAdditionalNationalities: data.childrenAdditionalNationalities?.map(item => item.value.country),
+    childrenAdditionalNationalities: data.childrenAdditionalNationalities?.map(item => ({
+      id: item.id,
+      country: item.value.country,
+    })),
   }),
   placementOrders: data => ({
     placementOrders: data.placementOrders?.map(item => ({
