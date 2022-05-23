@@ -121,6 +121,7 @@ export class CaseApi {
 
   private async sendEvent(caseId: string, data: Partial<CaseData>, eventName: string): Promise<CaseWithId> {
     try {
+      const before = Date.now();
       const tokenResponse = await this.axios.get<CcdTokenResponse>(`/cases/${caseId}/event-triggers/${eventName}`);
       const token = tokenResponse.data.token;
       const event = { id: eventName };
@@ -130,6 +131,9 @@ export class CaseApi {
         data,
         event_token: token,
       });
+
+      console.log('\x1b[36m', ((Date.now() - before) / 1000).toFixed(2));
+
       return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
     } catch (err) {
       this.logError(err);
