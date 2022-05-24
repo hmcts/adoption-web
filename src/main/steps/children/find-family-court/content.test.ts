@@ -64,7 +64,7 @@ const cyContent = {
 describe('children > find-family-court > content', () => {
   const commonContent = generatePageContent({
     language: 'en',
-    userCase: { placementOrders: [{ placementOrderId: '123', placementOrderCourt: 'London Court' }] },
+    userCase: { placementOrderCourt: 'London Court' },
   }) as CommonContent;
 
   let generatedContent;
@@ -81,7 +81,7 @@ describe('children > find-family-court > content', () => {
       generateContent({
         ...commonContent,
         language: 'cy',
-        userCase: { placementOrders: [{ placementOrderId: '123', placementOrderCourt: 'London Court' }] },
+        userCase: { placementOrderCourt: 'London Court' },
       })
     );
   });

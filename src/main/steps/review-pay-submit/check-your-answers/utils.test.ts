@@ -1399,7 +1399,6 @@ describe('review-pay-submit > check-your-answers > utils', () => {
         },
       },
     ])('return correct summary list items when %#', ({ userCase, expected }) => {
-      console.log(JSON.stringify(siblingCourtOrderSummaryList(enContent, userCase)));
       expect(siblingCourtOrderSummaryList(enContent, userCase)).toStrictEqual(expected);
     });
   });
@@ -1411,6 +1410,19 @@ describe('review-pay-submit > check-your-answers > utils', () => {
         expected: {
           title: 'Family court details',
           rows: [
+            {
+              key: { text: 'Family court name' },
+              value: { text: 'MOCK_PLACEMENT_ORDER_COURT' },
+              actions: {
+                items: [
+                  {
+                    href: '/children/find-placement-order-court?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Family court name',
+                  },
+                ],
+              },
+            },
             {
               key: { text: 'Family court name' },
               value: { text: 'MOCK_FAMILY_COURT' },

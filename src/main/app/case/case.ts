@@ -1,6 +1,7 @@
 import { AnyObject } from '../controller/PostController';
 
 import {
+  AdditionalNationality,
   Adoption,
   AdoptionDocument,
   ApplicationType,
@@ -175,6 +176,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicationFeeOrderSummary: 'applicationFeeOrderSummary',
   applicant1CannotUpload: 'applicant1CannotUpload',
 
+  placementOrderCourt: 'placementOrderCourt',
   findFamilyCourt: 'findFamilyCourt',
   familyCourtName: 'familyCourtName',
   familyCourtEmailId: 'familyCourtEmailId',
@@ -247,7 +249,7 @@ export interface Case {
   childrenLastName?: string;
   childrenDateOfBirth?: CaseDate;
   childrenNationality?: Nationality[];
-  childrenAdditionalNationalities?: string[];
+  childrenAdditionalNationalities?: AdditionalNationality[];
   childrenFirstNameAfterAdoption?: string;
   childrenLastNameAfterAdoption?: string;
   childrenSexAtBirth?: Gender;
@@ -262,7 +264,7 @@ export interface Case {
   birthMotherStillAlive?: YesNoNotsure;
   birthMotherNotAliveReason?: string;
   birthMotherNationality?: string[];
-  birthMotherAdditionalNationalities?: string[];
+  birthMotherAdditionalNationalities?: AdditionalNationality[];
   birthMotherOccupation?: string;
   birthMotherAddressKnown?: YesOrNo;
   birthMotherSelectAddress?: string;
@@ -282,7 +284,7 @@ export interface Case {
   birthFatherStillAlive?: string;
   birthFatherUnsureAliveReason?: string;
   birthFatherNationality?: string[];
-  birthFatherAdditionalNationalities?: string[];
+  birthFatherAdditionalNationalities?: AdditionalNationality[];
   birthFatherOccupation?: string;
   birthFatherAddressKnown?: YesOrNo;
   birthFatherSelectAddress?: string;
@@ -368,6 +370,7 @@ export interface Case {
   applicant1CannotUploadDocuments?: DocumentType[];
 
   /***** Find court *****/
+  placementOrderCourt?: string;
   findFamilyCourt?: YesOrNo;
   familyCourtName?: string;
   familyCourtEmailId?: string;

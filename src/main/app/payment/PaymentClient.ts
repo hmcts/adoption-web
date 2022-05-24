@@ -27,7 +27,8 @@ export class PaymentClient {
     const caseId = userCase.id.toString();
 
     const total = userCase.applicationFeeOrderSummary.Fees.reduce((sum, item) => sum + +item.value.FeeAmount, 0);
-    logger.info('total: ', total);
+    logger.info(`caseId=${caseId} total=${total}`);
+
     const body = {
       case_type: CASE_TYPE,
       amount: total,
@@ -42,12 +43,9 @@ export class PaymentClient {
       language: this.session.lang === 'en' ? '' : this.session.lang?.toUpperCase(),
     };
 
-    logger.info(body);
-
     try {
       const response = await this.client.post<Payment>('/card-payments', body);
-      logger.info('Payment response');
-      logger.info(response.data);
+      logger.info(`Generated govpay link for caseId=${caseId}`);
 
       if (!response.data || !response.data._links?.next_url.href) {
         throw response;

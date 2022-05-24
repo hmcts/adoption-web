@@ -1,6 +1,5 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
-import { v4 as generateUuid } from 'uuid';
 
 import { ValidationError } from '../../../app/form/validation';
 import { FieldPrefix } from '../../case/case';
@@ -32,7 +31,7 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
 
         if (formData[`${this.fieldPrefix}OtherFirstNames`] && formData[`${this.fieldPrefix}OtherLastNames`]) {
           req.session.userCase[`${this.fieldPrefix}AdditionalNames`].push({
-            id: generateUuid(),
+            id: `${Date.now()}`,
             firstNames: formData[`${this.fieldPrefix}OtherFirstNames`],
             lastNames: formData[`${this.fieldPrefix}OtherLastNames`],
           });
