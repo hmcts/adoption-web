@@ -1,6 +1,6 @@
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { CaseDate, CaseWithId, Checkbox, FieldPrefix } from '../../../app/case/case';
-import { ApplyingWith, Nationality, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
+import { AdditionalNationality, ApplyingWith, Nationality, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { PageContent } from '../../../app/controller/GetController';
 import * as Urls from '../../../steps/urls';
@@ -282,10 +282,13 @@ export const applicantSummaryList = (
 };
 /* eslint-enable import/namespace */
 
-const formatNationalities = (nationality: (string | Nationality)[], additionalNationalities: string[]): string => {
+const formatNationalities = (
+  nationality: (string | Nationality)[],
+  additionalNationalities: AdditionalNationality[]
+): string => {
   const nationalities = nationality.filter(item => item !== Nationality.OTHER);
   if (nationality.includes(Nationality.OTHER)) {
-    nationalities.push(...additionalNationalities);
+    nationalities.push(...additionalNationalities.map(item => item.country));
   }
   return nationalities.join('<br>');
 };

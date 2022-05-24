@@ -45,7 +45,7 @@ const cyContent = {
     [`${FieldPrefix.BIRTH_FATHER}Nationality`]: {
       required: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
       notSureViolation: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
-      addButtonNotClicked: "Select 'Add' to save the country name",
+      addButtonNotClicked: "Dewiswch ‘Ychwanegu’ i gadw enw'r wlad",
     },
     addAnotherNationality: {
       required: 'Nid yw hyn yn gofnod dilys',

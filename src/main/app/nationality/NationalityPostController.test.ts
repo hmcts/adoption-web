@@ -27,6 +27,7 @@ describe('NationalityPostController', () => {
   const formData = { birthMotherAdditionalNationalities: [] };
 
   beforeEach(() => {
+    Date.now = jest.fn(() => +new Date('2021-01-01'));
     req = mockRequest({
       session: {
         userCase: {
@@ -81,7 +82,7 @@ describe('NationalityPostController', () => {
           expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(1);
           expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(
             'MOCK_ID',
-            { birthMotherAdditionalNationalities: ['MOCK_COUNTRY'] },
+            { birthMotherAdditionalNationalities: [{ id: '1609459200000', country: 'MOCK_COUNTRY' }] },
             'citizen-update-application'
           );
         });

@@ -1,6 +1,7 @@
 import { AnyObject } from '../controller/PostController';
 
 import {
+  AdditionalNationality,
   Adoption,
   AdoptionDocument,
   ApplicationType,
@@ -248,7 +249,7 @@ export interface Case {
   childrenLastName?: string;
   childrenDateOfBirth?: CaseDate;
   childrenNationality?: Nationality[];
-  childrenAdditionalNationalities?: string[];
+  childrenAdditionalNationalities?: AdditionalNationality[];
   childrenFirstNameAfterAdoption?: string;
   childrenLastNameAfterAdoption?: string;
   childrenSexAtBirth?: Gender;
@@ -263,7 +264,7 @@ export interface Case {
   birthMotherStillAlive?: YesNoNotsure;
   birthMotherNotAliveReason?: string;
   birthMotherNationality?: string[];
-  birthMotherAdditionalNationalities?: string[];
+  birthMotherAdditionalNationalities?: AdditionalNationality[];
   birthMotherOccupation?: string;
   birthMotherAddressKnown?: YesOrNo;
   birthMotherSelectAddress?: string;
@@ -283,7 +284,7 @@ export interface Case {
   birthFatherStillAlive?: string;
   birthFatherUnsureAliveReason?: string;
   birthFatherNationality?: string[];
-  birthFatherAdditionalNationalities?: string[];
+  birthFatherAdditionalNationalities?: AdditionalNationality[];
   birthFatherOccupation?: string;
   birthFatherAddressKnown?: YesOrNo;
   birthFatherSelectAddress?: string;
