@@ -1,5 +1,13 @@
 import { CaseDate, CaseWithId, FieldPrefix } from '../../app/case/case';
-import { ApplyingWith, Gender, SectionStatus, State, YesNoNotsure, YesOrNo } from '../../app/case/definition';
+import {
+  AdditionalNationality,
+  ApplyingWith,
+  Gender,
+  SectionStatus,
+  State,
+  YesNoNotsure,
+  YesOrNo,
+} from '../../app/case/definition';
 import {
   areDateFieldsFilledIn,
   isDateInputInvalid,
@@ -131,7 +139,7 @@ export const getChildrenBirthCertificateStatus = (userCase: CaseWithId): Section
     childrenSexAtBirth === Gender.FEMALE ||
     (childrenSexAtBirth === Gender.OTHER && childrenOtherSexAtBirth);
   const nationality: string[] = userCase.childrenNationality || [];
-  const nationalities: string[] = userCase.childrenAdditionalNationalities || [];
+  const nationalities: AdditionalNationality[] = userCase.childrenAdditionalNationalities || [];
   const nationalityComplete =
     !!nationality.length &&
     (!nationality.includes('Other') || (!!nationalities.length && nationality.includes('Other')));

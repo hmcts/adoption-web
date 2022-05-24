@@ -1,5 +1,3 @@
-import { v4 as generateUuid } from 'uuid';
-
 import { isInvalidHelpWithFeesRef } from '../form/validation';
 
 import { Case, CaseDate, Checkbox, formFieldsToCaseMapping, formatCase } from './case';
@@ -35,7 +33,7 @@ const fields: ToApiConverters = {
     applicant1AdditionalNames:
       data.applicant1HasOtherNames === YesOrNo.YES
         ? (data.applicant1AdditionalNames || []).map(item => ({
-            id: generateUuid(),
+            id: item.id!,
             value: { firstNames: `${item.firstNames}`, lastNames: `${item.lastNames}` },
           }))
         : [],
@@ -44,32 +42,32 @@ const fields: ToApiConverters = {
     applicant2AdditionalNames:
       data.applicant2HasOtherNames === YesOrNo.YES
         ? (data.applicant2AdditionalNames || []).map(item => ({
-            id: generateUuid(),
+            id: item.id!,
             value: { firstNames: `${item.firstNames}`, lastNames: `${item.lastNames}` },
           }))
         : [],
   }),
   birthMotherAdditionalNationalities: data => ({
     birthMotherOtherNationalities: (data.birthMotherAdditionalNationalities || []).map(item => ({
-      id: generateUuid(),
-      value: { country: `${item}` },
+      id: item.id!,
+      value: { country: `${item.country}` },
     })),
   }),
   birthFatherAdditionalNationalities: data => ({
     birthFatherOtherNationalities: (data.birthFatherAdditionalNationalities || []).map(item => ({
-      id: generateUuid(),
-      value: { country: `${item}` },
+      id: item.id!,
+      value: { country: `${item.country}` },
     })),
   }),
   childrenAdditionalNationalities: data => ({
     childrenAdditionalNationalities: (data.childrenAdditionalNationalities || []).map(item => ({
-      id: generateUuid(),
-      value: { country: `${item}` },
+      id: item.id!,
+      value: { country: `${item.country}` },
     })),
   }),
   placementOrders: data => ({
     placementOrders: (data.placementOrders || []).map(item => ({
-      id: generateUuid(),
+      id: item.placementOrderId,
       value: {
         ...item,
         placementOrderDate: toApiDate(item.placementOrderDate as CaseDate),
