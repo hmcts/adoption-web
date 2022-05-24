@@ -1,8 +1,3 @@
-const v4Mock = jest.fn().mockReturnValue('MOCK_V4_UUID');
-jest.mock('uuid', () => ({
-  v4: v4Mock,
-}));
-
 import { Case, Checkbox } from './case';
 import { DocumentType, YesOrNo } from './definition';
 import { OrNull, formatApplicant1CannotUploadDocuments, toApiFormat } from './to-api-format';
