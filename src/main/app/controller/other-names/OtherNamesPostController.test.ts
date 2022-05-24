@@ -32,6 +32,7 @@ describe('OtherNamesPostController', () => {
   const formData = { applicant1AdditionalNames: [] };
 
   beforeEach(() => {
+    Date.now = jest.fn(() => +new Date('2021-01-01'));
     req = mockRequest({
       session: {
         userCase: {
@@ -110,7 +111,7 @@ describe('OtherNamesPostController', () => {
               applicant1AdditionalNames: [
                 {
                   firstNames: 'MOCK_OTHER_FIRST_NAME',
-                  id: 'MOCK_V4_UUID',
+                  id: '1609459200000',
                   lastNames: 'MOCK_OTHER_LAST_NAME',
                 },
               ],

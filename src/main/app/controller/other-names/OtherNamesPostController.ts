@@ -31,7 +31,7 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
 
         if (formData[`${this.fieldPrefix}OtherFirstNames`] && formData[`${this.fieldPrefix}OtherLastNames`]) {
           req.session.userCase[`${this.fieldPrefix}AdditionalNames`].push({
-            id: Date.now(),
+            id: `${Date.now()}`,
             firstNames: formData[`${this.fieldPrefix}OtherFirstNames`],
             lastNames: formData[`${this.fieldPrefix}OtherLastNames`],
           });
