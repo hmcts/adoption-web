@@ -421,42 +421,16 @@ export const getDateChildMovedInStatus = (userCase: CaseWithId): SectionStatus =
 };
 
 export const findFamilyCourtStatus = (userCase: CaseWithId): SectionStatus => {
-  const exists = userCase.findFamilyCourt;
+  const placementOrderCourtComplete = !!userCase.placementOrderCourt;
+  const familyCourtComplete =
+    userCase.findFamilyCourt === YesOrNo.YES || (userCase.findFamilyCourt === YesOrNo.NO && userCase.familyCourtName);
 
-  if (exists === YesOrNo.YES) {
+  if (placementOrderCourtComplete && familyCourtComplete) {
     return SectionStatus.COMPLETED;
   }
 
-  if (exists === YesOrNo.NO) {
-    if (userCase.familyCourtName) {
-      return SectionStatus.COMPLETED;
-    }
+  if (placementOrderCourtComplete || familyCourtComplete) {
     return SectionStatus.IN_PROGRESS;
-  }
-
-  const statuses = [
-    getApplyingWithStatus(userCase),
-    getDateChildMovedInStatus(userCase),
-    getPersonalDetailsStatus(userCase, FieldPrefix.APPLICANT1),
-    getContactDetailsStatus(userCase, FieldPrefix.APPLICANT1),
-    ...(userCase.applyingWith !== ApplyingWith.ALONE
-      ? [
-          getPersonalDetailsStatus(userCase, FieldPrefix.APPLICANT2),
-          getContactDetailsStatus(userCase, FieldPrefix.APPLICANT2),
-        ]
-      : []),
-    getChildrenBirthCertificateStatus(userCase),
-    getAdoptionCertificateDetailsStatus(userCase),
-    getChildrenPlacementOrderStatus(userCase),
-    getBirthMotherDetailsStatus(userCase),
-    getBirthFatherDetailsStatus(userCase),
-    getOtherParentStatus(userCase),
-    getAdoptionAgencyDetailStatus(userCase),
-    getSiblingStatus(userCase),
-  ];
-
-  if (statuses.some(status => status !== SectionStatus.COMPLETED)) {
-    return SectionStatus.CAN_NOT_START_YET;
   }
 
   return SectionStatus.NOT_STARTED;

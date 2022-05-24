@@ -83,6 +83,11 @@ export const childrenSequence: Step[] = [
     getNextStep: () => Urls.TASK_LIST_URL,
   },
   {
+    url: Urls.CHILDREN_FIND_PLACEMENT_ORDER_COURT,
+    showInSection: Sections.AboutChildren,
+    getNextStep: () => Urls.CHILDREN_FIND_FAMILY_COURT,
+  },
+  {
     url: Urls.CHILDREN_FIND_FAMILY_COURT,
     showInSection: Sections.AboutChildren,
     getNextStep: () => Urls.TASK_LIST_URL,

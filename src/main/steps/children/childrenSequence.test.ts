@@ -3,8 +3,8 @@ import { YesOrNo } from '../../app/case/definition';
 import { childrenSequence } from './childrenSequence';
 
 describe('childrenSequence', () => {
-  test('should contain 16 entries in children screen sequence', () => {
-    expect(childrenSequence).toHaveLength(16);
+  test('should contain 17 entries in children screen sequence', () => {
+    expect(childrenSequence).toHaveLength(17);
 
     expect(childrenSequence[0].url).toBe('/children/placement-order-type');
     expect(childrenSequence[0].showInSection).toBe('aboutChildren');
@@ -73,8 +73,12 @@ describe('childrenSequence', () => {
     expect(childrenSequence[14].showInSection).toBe('aboutChildren');
     expect(childrenSequence[14].getNextStep({})).toBe('/task-list');
 
-    expect(childrenSequence[15].url).toBe('/children/find-family-court');
+    expect(childrenSequence[15].url).toBe('/children/find-placement-order-court');
     expect(childrenSequence[15].showInSection).toBe('aboutChildren');
-    expect(childrenSequence[15].getNextStep({})).toBe('/task-list');
+    expect(childrenSequence[15].getNextStep({})).toBe('/children/find-family-court');
+
+    expect(childrenSequence[16].url).toBe('/children/find-family-court');
+    expect(childrenSequence[16].showInSection).toBe('aboutChildren');
+    expect(childrenSequence[16].getNextStep({})).toBe('/task-list');
   });
 });
