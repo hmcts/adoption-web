@@ -130,7 +130,6 @@ export class CaseApi {
         data,
         event_token: token,
       });
-
       return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
     } catch (err) {
       this.logError(err);
