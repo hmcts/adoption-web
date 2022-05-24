@@ -5,6 +5,8 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 const en = () => ({
   section: 'Second applicant',
   title: "What's your full name?",
+  line1:
+    'Your full name should match exactly what is on your passport or other form of authorised ID such as a driving licence. If the names do not match, this could delay your application',
   firstNames: 'First names',
   firstHint: '(Include any given or middle names)',
   lastNames: 'Last names',
@@ -22,6 +24,8 @@ const en = () => ({
 const cy: typeof en = () => ({
   section: 'Ail geisydd',
   title: 'Beth yw eich enw llawn?',
+  line1:
+    'Your full name should match exactly what is on your passport or other form of authorised ID such as a driving licence. If the names do not match, this could delay your application (in Welsh)',
   firstNames: 'Enwau cyntaf',
   firstHint: '(Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol)',
   lastNames: 'Cyfenwau',

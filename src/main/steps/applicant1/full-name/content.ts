@@ -9,6 +9,8 @@ const en = ({ userCase }: CommonContent) => {
   return {
     section,
     title: "What's your full name?",
+    line1:
+      'Your full name should match exactly what is on your passport or other form of authorised ID such as a driving licence. If the names do not match, this could delay your application',
     errors: {
       applicant1FirstNames: {
         required: 'Enter your first names',
@@ -25,6 +27,8 @@ const cy: typeof en = ({ userCase }: CommonContent) => {
   return {
     section,
     title: 'Beth yw eich enw llawn?',
+    line1:
+      'Your full name should match exactly what is on your passport or other form of authorised ID such as a driving licence. If the names do not match, this could delay your application (in Welsh)',
     errors: {
       applicant1FirstNames: {
         required: 'Nodwch eich enw(au) cyntaf',
