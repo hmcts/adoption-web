@@ -49,7 +49,7 @@ const cy: typeof en = (fieldPrefix: FieldPrefix) => ({
   errors: {
     [`${fieldPrefix}HasOtherNames`]: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
-      addButtonNotClicked: "Select 'Add' to save your previous names",
+      addButtonNotClicked: "Dewiswch 'Ychwanegu' i gadw eich enwau blaenorol",
     },
     [`${fieldPrefix}OtherFirstNames`]: {
       required: 'Nac ydwdwch eich enw(au) cyntaf',

@@ -30,7 +30,7 @@ const cy: typeof en = () => ({
   one: 'Rwy’n gwneud cais ar ben fy hun',
   oneHint: 'Er enghraifft, fel rhiant sengl.',
   two: 'Rwy’n gwneud cais gyda fy mhriod / fy mhartner sifil',
-  twoHint: 'For example, as a legally married couple or legal civil partner (in Welsh).',
+  twoHint: 'Er enghraifft, fel cwpl priod cyfreithiol neu bartner sifil cyfreithiol.',
   three: 'Rwy’n gwneud cais gyda rhywun nad ydynt yn briod neu’n bartner sifil i mi',
   threeHint: 'Er enghraifft, gyda phartner hir dymor ond nid ydym mewn perthynas sy’n rhwymol yn gyfreithiol.',
   moreDetails: 'Rhowch drosolwg bras o beth yw eich perthynas â’r ceisydd arall.',
