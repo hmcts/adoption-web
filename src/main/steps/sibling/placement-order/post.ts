@@ -24,7 +24,7 @@ export default class SiblingPlacementOrderPostController extends PostController<
 
     const placementOrder = siblingObject?.siblingPlacementOrders?.find(
       item => (item as PlacementOrder).placementOrderId === req.session.userCase.selectedSiblingPoId
-    );
+    ) as PlacementOrder;
 
     Object.assign(placementOrder, formData);
 
