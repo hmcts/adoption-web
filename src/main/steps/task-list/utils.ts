@@ -48,6 +48,7 @@ export const getContactDetailsStatus = (userCase: CaseWithId, fieldPrefix: Field
   const contactDetailsConsent = userCase[`${fieldPrefix}ContactDetailsConsent`];
   const emailAddress = userCase[`${fieldPrefix}EmailAddress`];
   const phoneNumber = userCase[`${fieldPrefix}PhoneNumber`];
+  const languagePreference = !!userCase[`${fieldPrefix}LanguagePreference`];
   const applicant2AddressSameAsApplicant1 = userCase[`${fieldPrefix}AddressSameAsApplicant1`];
 
   let addressAvailable = addressComplete(userCase, fieldPrefix);
@@ -57,9 +58,9 @@ export const getContactDetailsStatus = (userCase: CaseWithId, fieldPrefix: Field
 
   const contactDetailsAvailable = !!contactDetailsConsent && !!emailAddress && !!phoneNumber;
 
-  return addressAvailable && contactDetailsAvailable
+  return addressAvailable && contactDetailsAvailable && languagePreference
     ? SectionStatus.COMPLETED
-    : !addressAvailable && !contactDetailsAvailable
+    : !addressAvailable && !contactDetailsAvailable && !languagePreference
     ? SectionStatus.NOT_STARTED
     : SectionStatus.IN_PROGRESS;
 };
