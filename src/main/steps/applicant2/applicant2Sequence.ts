@@ -49,6 +49,11 @@ export const applicant2Sequence: Step[] = [
   {
     url: Urls.APPLICANT_2_CONTACT_DETAILS,
     showInSection: Sections.AboutApplicant2,
+    getNextStep: () => Urls.APPLICANT_2_LANGUAGE_PREFERENCE,
+  },
+  {
+    url: Urls.APPLICANT_2_LANGUAGE_PREFERENCE,
+    showInSection: Sections.AboutApplicant2,
     getNextStep: () => Urls.TASK_LIST_URL,
   },
 ];
