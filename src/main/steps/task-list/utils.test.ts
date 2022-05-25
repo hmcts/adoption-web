@@ -33,7 +33,6 @@ import {
 const userCase: CaseWithId = {
   id: '123',
   state: State.Draft,
-  connections: [],
   documentsGenerated: [],
   payments: [],
   applicationFeeOrderSummary: { PaymentReference: '', Fees: [], PaymentTotal: '0' },

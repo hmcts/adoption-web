@@ -19,7 +19,6 @@ describe('from-api-format', () => {
     applicant2PrayerHasBeenGiven: YesOrNo.YES,
     applicant1StatementOfTruth: YesOrNo.YES,
     applicant2StatementOfTruth: YesOrNo.YES,
-    dueDate: '2021-07-26',
   };
 
   test('should convert results from api to adoption-web format', async () => {
