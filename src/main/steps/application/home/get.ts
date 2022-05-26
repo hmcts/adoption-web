@@ -5,7 +5,6 @@ import { Case } from '../../../app/case/case';
 import { State } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { Form, FormFields } from '../../../app/form/Form';
-import { form as applicant1FirstQuestionForm } from '../../applicant1/applying-with/content';
 import {
   APPLICATION_SUBMITTED,
   APPLYING_WITH_URL,
@@ -16,6 +15,7 @@ import {
   SENT_TO_APPLICANT2_FOR_REVIEW,
   TASK_LIST_URL,
 } from '../../urls';
+import { form as applicant1FirstQuestionForm } from '../applying-with/content';
 
 @autobind
 export default class HomeGetController {
