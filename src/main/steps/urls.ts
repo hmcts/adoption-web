@@ -154,3 +154,21 @@ export const PRIVACY_POLICY: PageLink = '/privacy-policy';
 export const ACCESSIBILITY_STATEMENT: PageLink = '/accessibility-statement';
 export const TERMS_AND_CONDITIONS: PageLink = '/terms-and-conditions';
 export const CONTACT_US: PageLink = '/contact-us';
+
+/*********************************** LA PORTAL URLS ***********************************/
+export const LA_PORTAL = '/la-portal';
+export const LA_PORTAL_TASK_LIST: PageLink = `${LA_PORTAL}/task-list`;
+export const LA_PORTAL_CHILDREN_FULL_NAME: PageLink = `${LA_PORTAL}/child/full-name`;
+export const LA_PORTAL_CHILD_DATE_OF_BIRTH: PageLink = `${LA_PORTAL}/child/date-of-birth`;
+export const LA_PORTAL_CHILD_SEX_AT_BIRTH: PageLink = `${LA_PORTAL}/child/sex-at-birth`;
+export const LA_PORTAL_CHILD_NATIONALITY: PageLink = `${LA_PORTAL}/child/nationality`;
+
+export const LA_PORTAL_BIRTH_MOTHER_FULL_NAME: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/full-name`;
+export const LA_PORTAL_BIRTH_MOTHER_STILL_ALIVE: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/still-alive`;
+export const LA_PORTAL_BIRTH_MOTHER_NATIONALITY: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/nationality`;
+export const LA_PORTAL_BIRTH_MOTHER_OCCUPATION: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/occupation`;
+export const LA_PORTAL_BIRTH_MOTHER_ADDRESS_KNOWN: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/address-known`;
+export const LA_PORTAL_BIRTH_MOTHER_FIND_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/address/lookup`;
+export const LA_PORTAL_BIRTH_MOTHER_SELECT_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/address/select`;
+export const LA_PORTAL_BIRTH_MOTHER_MANUAL_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/address/manual`;
+export const LA_PORTAL_BIRTH_MOTHER_INTERNATIONAL_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/address/international`;

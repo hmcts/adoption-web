@@ -24,6 +24,7 @@ export enum Sections {
 
 export interface Step {
   url: string;
+  contentDir?: string;
   showInSection?: Sections;
   showInCompleteSection?: Sections;
   excludeFromContinueApplication?: boolean;

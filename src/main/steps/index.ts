@@ -13,6 +13,7 @@ import { birthMotherSequence } from './birth-mother/birthMotherSequence';
 import { childrenSequence } from './children/childrenSequence';
 import { Step } from './constants';
 import { Step as EligibilityStep, eligibilitySequence } from './eligibility/eligibilitySequence';
+import { laPortalSequence } from './la-portal/laPortalSequence';
 import { otherParentSequence } from './other-parent/otherParentSequence';
 import { reviewPaySubmitSequence } from './review-pay-submit/reviewPaySubmitSequence';
 import { siblingSequence } from './sibling/siblingSequence';
@@ -23,6 +24,7 @@ import {
   BIRTH_MOTHER,
   CHECK_ANSWERS_URL,
   CHILDREN,
+  LA_PORTAL,
   OTHER_PARENT,
   REVIEW_PAY_SUBMIT,
   SIBLING,
@@ -44,6 +46,7 @@ export const getNextStepUrl = (req: AppRequest, data: Partial<Case>): string => 
     ...otherParentSequence,
     ...reviewPaySubmitSequence,
     ...siblingSequence,
+    ...laPortalSequence,
   ].find(s => s.url === path);
 
   const url = nextStep ? nextStep.getNextStep(data) : TASK_LIST_URL;
@@ -87,9 +90,12 @@ const getStepsWithContent = (sequence: Step[] | EligibilityStep[], subDir: strin
 
   const results: StepWithContent[] = [];
   for (const step of sequence) {
-    const stepUrl = step.url === '/' ? '/home' : step.url;
-    const path = stepUrl.startsWith(subDir) ? stepUrl : `${subDir}${stepUrl}`;
-    const stepDir = `${dir}${path}`;
+    let stepDir = step.contentDir;
+    if (!stepDir) {
+      const stepUrl = step.url === '/' ? '/home' : step.url;
+      const path = stepUrl.startsWith(subDir) ? stepUrl : `${subDir}${stepUrl}`;
+      stepDir = `${dir}${path}`;
+    }
     const { content, view } = getStepFiles(stepDir);
     results.push({ stepDir, ...step, ...content, view });
   }
@@ -106,6 +112,7 @@ export const stepsWithContentBirthMother = getStepsWithContent(birthMotherSequen
 export const stepsWithContentOtherParent = getStepsWithContent(otherParentSequence, OTHER_PARENT);
 export const stepsWithContentSibling = getStepsWithContent(siblingSequence, SIBLING);
 export const stepsWithContentReviewPaySubmit = getStepsWithContent(reviewPaySubmitSequence, REVIEW_PAY_SUBMIT);
+export const stepsWithContentLaPortal = getStepsWithContent(laPortalSequence, LA_PORTAL);
 export const stepsWithContent = [
   ...stepsWithContentEligibility,
   ...stepsWithContentApplication,
@@ -117,4 +124,5 @@ export const stepsWithContent = [
   ...stepsWithContentOtherParent,
   ...stepsWithContentReviewPaySubmit,
   ...stepsWithContentSibling,
+  ...stepsWithContentLaPortal,
 ];
