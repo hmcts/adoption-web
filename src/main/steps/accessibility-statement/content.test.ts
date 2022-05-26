@@ -179,7 +179,7 @@ const cy = {
   preparationAccessibilityStatement: 'Paratoi’r datganiad hygyrchedd hwn',
   statementPreparationDate:
     'Cafodd y datganiad hwn ei baratoi ar 11 Mawrth 2022. Cafodd ei adolygu diwethaf ar 11 Mawrth 2022.',
-  contactHelp: 'Cysylltwch â ni i gael cymorth:',
+  contactHelp: 'Cysylltwch â ni am help:',
 };
 
 describe('accessibility statement > content', () => {

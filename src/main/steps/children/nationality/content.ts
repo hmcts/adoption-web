@@ -29,7 +29,7 @@ const cy: typeof en = (nationalityContent: PageContent) => ({
     childrenNationality: {
       required: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
       notSureViolation: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
-      addButtonNotClicked: "Select 'Add' to save the country name",
+      addButtonNotClicked: "Dewiswch ‘Ychwanegu’ i gadw enw'r wlad",
     },
     addAnotherNationality: (nationalityContent.errors as Record<string, unknown>).addAnotherNationality,
   },

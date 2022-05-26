@@ -11,6 +11,9 @@ const en = content => ({
   line2:
     "Once the adoption order is granted, an adoption certificate is created. This replaces the child's birth certificate. It can be ordered from the General Register Office for a small fee.",
   printApplication: 'Print your application',
+  helpUs: 'Help us improve this service',
+  line3:
+    'Please help us improve this service by <a  target="_blank" href="https://www.smartsurvey.co.uk/s/SurveyExit/?service=Adoption">leaving feedback</a>',
 });
 
 const cy: typeof en = content => ({
@@ -24,6 +27,9 @@ const cy: typeof en = content => ({
   line2:
     'Unwaith bydd y gorchymyn mabwysiadu yn cael ei gymeradwyo, bydd tystysgrif mabwysiadu yn cael ei chreu. Bydd hon yn disodli tystysgrif geni’r plentyn. Gellir ei archebu o’r Swyddfa Gofrestru Gyffredinol am ffi fechan.',
   printApplication: 'Argraffu eich cais',
+  helpUs: 'Help us improve this service (in welsh)',
+  line3:
+    'Please help us improve this service by <a  target="_blank" href="https://www.smartsurvey.co.uk/s/SurveyExit/?service=Adoption">leaving feedback</a> (in welsh)',
 });
 
 const languages = {
