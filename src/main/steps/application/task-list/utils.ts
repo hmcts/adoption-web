@@ -57,11 +57,15 @@ export const getContactDetailsStatus = (userCase: CaseWithId, fieldPrefix: Field
 
   const contactDetailsAvailable = !!contactDetailsConsent && !!emailAddress && !!phoneNumber;
 
-  return addressAvailable && contactDetailsAvailable
-    ? SectionStatus.COMPLETED
-    : !addressAvailable && !contactDetailsAvailable
-    ? SectionStatus.NOT_STARTED
-    : SectionStatus.IN_PROGRESS;
+  if (addressAvailable && contactDetailsAvailable) {
+    return SectionStatus.COMPLETED;
+  }
+
+  if (!addressAvailable && !contactDetailsAvailable) {
+    return SectionStatus.NOT_STARTED;
+  }
+
+  return SectionStatus.IN_PROGRESS;
 };
 
 export const getPersonalDetailsStatus = (
@@ -80,11 +84,15 @@ export const getPersonalDetailsStatus = (
   const otherNamesComplete =
     hasOtherNames === YesOrNo.NO || (hasOtherNames === YesOrNo.YES && !!additionalNames.length);
 
-  return fullName && otherNamesComplete && dateOfBirthComplete && occupation
-    ? SectionStatus.COMPLETED
-    : !fullName && !otherNamesComplete && !dateOfBirthComplete && !occupation
-    ? SectionStatus.NOT_STARTED
-    : SectionStatus.IN_PROGRESS;
+  if (fullName && otherNamesComplete && dateOfBirthComplete && occupation) {
+    return SectionStatus.COMPLETED;
+  }
+
+  if (!fullName && !otherNamesComplete && !dateOfBirthComplete && !occupation) {
+    return SectionStatus.NOT_STARTED;
+  }
+
+  return SectionStatus.IN_PROGRESS;
 };
 
 export const getChildrenPlacementOrderStatus = (userCase: CaseWithId): SectionStatus => {
@@ -114,11 +122,15 @@ export const getChildrenPlacementOrderStatus = (userCase: CaseWithId): SectionSt
       );
     });
 
-  return addAnotherPlacementOrder && placementOrdersComplete
-    ? SectionStatus.COMPLETED
-    : !addAnotherPlacementOrder && !placementOrdersComplete && !placementOrdersInProgress
-    ? SectionStatus.NOT_STARTED
-    : SectionStatus.IN_PROGRESS;
+  if (addAnotherPlacementOrder && placementOrdersComplete) {
+    return SectionStatus.COMPLETED;
+  }
+
+  if (!addAnotherPlacementOrder && !placementOrdersComplete && !placementOrdersInProgress) {
+    return SectionStatus.NOT_STARTED;
+  }
+
+  return SectionStatus.IN_PROGRESS;
 };
 
 export const getChildrenBirthCertificateStatus = (userCase: CaseWithId): SectionStatus => {
@@ -144,22 +156,30 @@ export const getChildrenBirthCertificateStatus = (userCase: CaseWithId): Section
     !!nationality.length &&
     (!nationality.includes('Other') || (!!nationalities.length && nationality.includes('Other')));
 
-  return childrenFirstName && childrenLastName && dateOfBirthComplete && sexAtBirthComplete && nationalityComplete
-    ? SectionStatus.COMPLETED
-    : !childrenFirstName && !childrenLastName && !dateOfBirthComplete && !sexAtBirthComplete && !nationalityComplete
-    ? SectionStatus.NOT_STARTED
-    : SectionStatus.IN_PROGRESS;
+  if (childrenFirstName && childrenLastName && dateOfBirthComplete && sexAtBirthComplete && nationalityComplete) {
+    return SectionStatus.COMPLETED;
+  }
+
+  if (!childrenFirstName && !childrenLastName && !dateOfBirthComplete && !sexAtBirthComplete && !nationalityComplete) {
+    return SectionStatus.NOT_STARTED;
+  }
+
+  return SectionStatus.IN_PROGRESS;
 };
 
 export const getAdoptionCertificateDetailsStatus = (userCase: CaseWithId): SectionStatus => {
   const firstName = userCase.childrenFirstNameAfterAdoption;
   const lastName = userCase.childrenLastNameAfterAdoption;
 
-  return firstName && lastName
-    ? SectionStatus.COMPLETED
-    : !firstName && !lastName
-    ? SectionStatus.NOT_STARTED
-    : SectionStatus.IN_PROGRESS;
+  if (firstName && lastName) {
+    return SectionStatus.COMPLETED;
+  }
+
+  if (!firstName && !lastName) {
+    return SectionStatus.NOT_STARTED;
+  }
+
+  return SectionStatus.IN_PROGRESS;
 };
 
 export const getBirthFatherDetailsStatus = (userCase: CaseWithId): SectionStatus => {
@@ -372,24 +392,8 @@ export const getReviewPaySubmitUrl = (userCase: CaseWithId): string => {
   return urls.EQUALITY;
 };
 
-export const getUploadDocumentStatus = (userCase: CaseWithId): SectionStatus => {
-  const { applicant1UploadedFiles, applicant1CannotUpload, applicant1CannotUploadDocuments } = userCase;
-  if (applicant1UploadedFiles && applicant1UploadedFiles.length > 0 && !applicant1CannotUpload) {
-    return SectionStatus.COMPLETED;
-  }
-
-  if (applicant1UploadedFiles && applicant1UploadedFiles.length > 0 && applicant1CannotUpload) {
-    if (applicant1CannotUploadDocuments && applicant1CannotUploadDocuments.length > 0) {
-      return SectionStatus.COMPLETED;
-    }
-    return SectionStatus.IN_PROGRESS;
-  }
-
-  if (applicant1CannotUpload && applicant1CannotUploadDocuments && applicant1CannotUploadDocuments.length > 0) {
-    return SectionStatus.COMPLETED;
-  }
-
-  const statuses = [
+const getAllSectionStatuses = (userCase: CaseWithId): SectionStatus[] => {
+  return [
     getApplyingWithStatus(userCase),
     getDateChildMovedInStatus(userCase),
     getPersonalDetailsStatus(userCase, FieldPrefix.APPLICANT1),
@@ -410,6 +414,26 @@ export const getUploadDocumentStatus = (userCase: CaseWithId): SectionStatus => 
     getSiblingStatus(userCase),
     findFamilyCourtStatus(userCase),
   ];
+};
+
+export const getUploadDocumentStatus = (userCase: CaseWithId): SectionStatus => {
+  const { applicant1UploadedFiles, applicant1CannotUpload, applicant1CannotUploadDocuments } = userCase;
+  if (applicant1UploadedFiles && applicant1UploadedFiles.length > 0 && !applicant1CannotUpload) {
+    return SectionStatus.COMPLETED;
+  }
+
+  if (applicant1UploadedFiles && applicant1UploadedFiles.length > 0 && applicant1CannotUpload) {
+    if (applicant1CannotUploadDocuments && applicant1CannotUploadDocuments.length > 0) {
+      return SectionStatus.COMPLETED;
+    }
+    return SectionStatus.IN_PROGRESS;
+  }
+
+  if (applicant1CannotUpload && applicant1CannotUploadDocuments && applicant1CannotUploadDocuments.length > 0) {
+    return SectionStatus.COMPLETED;
+  }
+
+  const statuses = getAllSectionStatuses(userCase);
 
   if (statuses.some(status => status !== SectionStatus.COMPLETED)) {
     return SectionStatus.CAN_NOT_START_YET;
@@ -445,28 +469,7 @@ export const findFamilyCourtStatus = (userCase: CaseWithId): SectionStatus => {
 };
 
 export const getApplicationStatus = (userCase: CaseWithId): SectionStatus => {
-  const statuses = [
-    getApplyingWithStatus(userCase),
-    getDateChildMovedInStatus(userCase),
-    getPersonalDetailsStatus(userCase, FieldPrefix.APPLICANT1),
-    getContactDetailsStatus(userCase, FieldPrefix.APPLICANT1),
-    ...(userCase.applyingWith !== ApplyingWith.ALONE
-      ? [
-          getPersonalDetailsStatus(userCase, FieldPrefix.APPLICANT2),
-          getContactDetailsStatus(userCase, FieldPrefix.APPLICANT2),
-        ]
-      : []),
-    getChildrenBirthCertificateStatus(userCase),
-    getAdoptionCertificateDetailsStatus(userCase),
-    getChildrenPlacementOrderStatus(userCase),
-    getBirthMotherDetailsStatus(userCase),
-    getBirthFatherDetailsStatus(userCase),
-    getOtherParentStatus(userCase),
-    getAdoptionAgencyDetailStatus(userCase),
-    getSiblingStatus(userCase),
-    findFamilyCourtStatus(userCase),
-    getUploadDocumentStatus(userCase),
-  ];
+  const statuses = [...getAllSectionStatuses(userCase), getUploadDocumentStatus(userCase)];
 
   if (statuses.every(status => status === SectionStatus.COMPLETED)) {
     if (statementOfTruthAndPaymentStatus(userCase) === SectionStatus.IN_PROGRESS) {
