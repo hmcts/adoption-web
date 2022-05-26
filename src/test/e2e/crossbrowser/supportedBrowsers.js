@@ -6,7 +6,7 @@ const supportedBrowsers = {
     edge_win_latest: {
       browserName: 'MicrosoftEdge',
       platformName: LATEST_WINDOWS,
-      browserVersion: 'latest',
+      browserVersion: 'latest-2',
       'sauce:options': {
         name: 'ADOP: Edge_Win10',
         screenResolution: '1400x1050',
@@ -17,7 +17,7 @@ const supportedBrowsers = {
     webkit_latest: {
       browserName: 'webkit',
       platformName: LATEST_MAC,
-      browserVersion: 'latest',
+      browserVersion: 'latest-2',
       'sauce:options': {
         name: 'ADOP: Webkit_MAC',
         screenResolution: '1400x1050',
@@ -28,7 +28,7 @@ const supportedBrowsers = {
     safari_mac_latest: {
       browserName: 'safari',
       platformName: LATEST_MAC,
-      browserVersion: 'latest',
+      browserVersion: 'latest-2',
       'sauce:options': {
         name: 'ADOP: MAC_SAFARI',
         seleniumVersion: '3.141.59',
@@ -40,7 +40,7 @@ const supportedBrowsers = {
     chrome_win_latest: {
       browserName: 'chrome',
       platformName: LATEST_WINDOWS,
-      browserVersion: 'latest',
+      browserVersion: 'latest-2',
       'sauce:options': {
         name: 'ADOP: WIN_CHROME_LATEST',
         screenResolution: '1600x1200',
@@ -49,7 +49,7 @@ const supportedBrowsers = {
     chrome_mac_latest: {
       browserName: 'chrome',
       platformName: LATEST_MAC,
-      browserVersion: 'latest',
+      browserVersion: 'latest-2',
       'sauce:options': {
         name: 'ADOP: MAC_CHROME_LATEST',
         screenResolution: '1600x1200',
@@ -60,7 +60,7 @@ const supportedBrowsers = {
     firefox_win_latest: {
       browserName: 'firefox',
       platformName: LATEST_WINDOWS,
-      browserVersion: 'latest',
+      browserVersion: 'latest-2',
       'sauce:options': {
         name: 'ADOP: WIN_FIREFOX_LATEST',
         screenResolution: '1600x1200',
@@ -69,7 +69,7 @@ const supportedBrowsers = {
     firefox_mac_latest: {
       browserName: 'firefox',
       platformName: LATEST_MAC,
-      browserVersion: 'latest',
+      browserVersion: 'latest-2',
       'sauce:options': {
         name: 'ADOP: MAC_FIREFOX_LATEST',
         screenResolution: '1600x1200',
