@@ -16,6 +16,9 @@ import { CookiesGetController } from './steps/cookies/get';
 import { ErrorController } from './steps/error/error.controller';
 import { HomeGetController } from './steps/home/get';
 import { PrivacyPolicyGetController } from './steps/privacy-policy/get';
+import * as saveAsDraft from './steps/save-as-draft/content';
+import { SaveAsDraftGetController } from './steps/save-as-draft/get';
+import { SaveAsDraftPostController } from './steps/save-as-draft/post';
 import { SaveSignOutGetController } from './steps/save-sign-out/get';
 import { TaskListGetController } from './steps/task-list/get';
 import { TermsAndConditionsGetController } from './steps/terms-and-conditions/get';
@@ -32,6 +35,7 @@ import {
   KEEP_ALIVE_URL,
   PRIVACY_POLICY,
   SAVE_AND_SIGN_OUT,
+  SAVE_AS_DRAFT,
   TASK_LIST_URL,
   TERMS_AND_CONDITIONS,
   TIMED_OUT_URL,
@@ -56,6 +60,8 @@ export class Routes {
     app.get(TERMS_AND_CONDITIONS, errorHandler(new TermsAndConditionsGetController().get));
     app.get(ACCESSIBILITY_STATEMENT, errorHandler(new AccessibilityStatementGetController().get));
     app.get(CONTACT_US, errorHandler(new ContactUsGetController().get));
+    app.get(SAVE_AS_DRAFT, errorHandler(new SaveAsDraftGetController().get));
+    app.post(SAVE_AS_DRAFT, errorHandler(new SaveAsDraftPostController(saveAsDraft.form.fields).post));
 
     const documentManagerController = new DocumentManagerController();
     app.get(DOWNLOAD_APPLICATION_SUMMARY, errorHandler(documentManagerController.get));

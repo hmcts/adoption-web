@@ -2,7 +2,7 @@ import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
 import { getNextStepUrl } from '../../steps';
-import { CHECK_ANSWERS_URL, SAVE_AND_SIGN_OUT, TASK_LIST_URL } from '../../steps/urls';
+import { CHECK_ANSWERS_URL, SAVE_AND_SIGN_OUT, SAVE_AS_DRAFT } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
 import { CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
@@ -95,7 +95,7 @@ export class PostController<T extends AnyObject> {
     if (req.body['saveAsDraft']) {
       //redirects to task-list page in case of save-as-draft button click
       req.session.returnUrl = undefined;
-      target = TASK_LIST_URL;
+      target = SAVE_AS_DRAFT;
     } else if (req.session.errors?.length) {
       //redirects to same page in case of validation errors
       target = req.url;
