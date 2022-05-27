@@ -4,7 +4,7 @@ import { Application, NextFunction, Response } from 'express';
 
 import { ApplyingWith, SectionStatus, State } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
-import { getApplicationStatus } from '../../steps/task-list/utils';
+import { getApplicationStatus } from '../../steps/application/task-list/utils';
 import {
   ACCESSIBILITY_STATEMENT,
   APPLICANT_2,

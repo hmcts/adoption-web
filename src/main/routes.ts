@@ -1,5 +1,4 @@
 import fs from 'fs';
-//import { extname } from 'path';
 
 import { Application, RequestHandler } from 'express';
 import multer from 'multer';
@@ -9,36 +8,10 @@ import { PostController } from './app/controller/PostController';
 import { DocumentManagerController } from './app/document/DocumentManagementController';
 import { KeepAliveController } from './app/keepalive/KeepAliveController';
 import { stepsWithContent } from './steps';
-import { AccessibilityStatementGetController } from './steps/accessibility-statement/get';
-import { ApplicationSubmittedGetController } from './steps/application-submitted/get';
-import { ContactUsGetController } from './steps/contact-us/get';
-import { CookiesGetController } from './steps/cookies/get';
 import { ErrorController } from './steps/error/error.controller';
-import { HomeGetController } from './steps/home/get';
-import { PrivacyPolicyGetController } from './steps/privacy-policy/get';
-import { SaveSignOutGetController } from './steps/save-sign-out/get';
-import { TaskListGetController } from './steps/task-list/get';
-import { TermsAndConditionsGetController } from './steps/terms-and-conditions/get';
-import { TimedOutGetController } from './steps/timed-out/get';
-import {
-  ACCESSIBILITY_STATEMENT,
-  APPLICATION_SUBMITTED,
-  CONTACT_US,
-  COOKIES_PAGE,
-  CSRF_TOKEN_ERROR_URL,
-  DOCUMENT_MANAGER,
-  DOWNLOAD_APPLICATION_SUMMARY,
-  HOME_URL,
-  KEEP_ALIVE_URL,
-  PRIVACY_POLICY,
-  SAVE_AND_SIGN_OUT,
-  TASK_LIST_URL,
-  TERMS_AND_CONDITIONS,
-  TIMED_OUT_URL,
-} from './steps/urls';
+import { CSRF_TOKEN_ERROR_URL, DOCUMENT_MANAGER, DOWNLOAD_APPLICATION_SUMMARY, KEEP_ALIVE_URL } from './steps/urls';
 
 const handleUploads = multer();
-//const ext = extname(__filename);
 
 export class Routes {
   public enableFor(app: Application): void {
@@ -46,16 +19,6 @@ export class Routes {
     const errorController = new ErrorController();
 
     app.get(CSRF_TOKEN_ERROR_URL, errorHandler(errorController.CSRFTokenError));
-    app.get(HOME_URL, errorHandler(new HomeGetController().get));
-    app.get(SAVE_AND_SIGN_OUT, errorHandler(new SaveSignOutGetController().get));
-    app.get(TIMED_OUT_URL, errorHandler(new TimedOutGetController().get));
-    app.get(TASK_LIST_URL, errorHandler(new TaskListGetController().get));
-    app.get(APPLICATION_SUBMITTED, errorHandler(new ApplicationSubmittedGetController().get));
-    app.get(COOKIES_PAGE, errorHandler(new CookiesGetController().get));
-    app.get(PRIVACY_POLICY, errorHandler(new PrivacyPolicyGetController().get));
-    app.get(TERMS_AND_CONDITIONS, errorHandler(new TermsAndConditionsGetController().get));
-    app.get(ACCESSIBILITY_STATEMENT, errorHandler(new AccessibilityStatementGetController().get));
-    app.get(CONTACT_US, errorHandler(new ContactUsGetController().get));
 
     const documentManagerController = new DocumentManagerController();
     app.get(DOWNLOAD_APPLICATION_SUMMARY, errorHandler(documentManagerController.get));

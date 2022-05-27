@@ -1,0 +1,27 @@
+{% from "govuk/components/panel/macro.njk" import govukPanel %}
+
+{% extends "common/page.njk" %}
+{% block content %}
+    <div class="govuk-width-container">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                <form action="/version-1/check-pay-and-submit/confirmation" method="post" class="form">
+                    {{  govukPanel({
+                            titleText: title,
+                            html: referenceNumber
+                        })
+                    }}
+                    <p class="govuk-body">{{ emailSentConfirmation }}</p>
+                    <h2 class="govuk-heading-m">{{ nextStep }}</h2>
+                    <p class="govuk-body">{{ line1 }}</p>
+                    <p class="govuk-body">{{ line2 }}</p>
+                    <p class="govuk-body">
+                        <a href="/download-summary?_csrf={{ csrfToken }}" class="govuk-link">{{ printApplication }}</a>
+                    </p>
+                    <h2 class="govuk-heading-m">{{ helpUs }}</h2>
+                    <p class="govuk-body">{{ line3 | safe }}</p>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
