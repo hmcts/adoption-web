@@ -52,7 +52,7 @@ export default {
   childrenDateOfBirth: { day: 9, month: 8, year: 2020 },
   childrenSexAtBirth: Gender.MALE,
   childrenNationality: [Nationality.BRITHISH, Nationality.OTHER],
-  childrenAdditionalNationalities: ['MOCK_COUNTRY'],
+  childrenAdditionalNationalities: [{ id: 'MOCK_ID', country: 'MOCK_COUNTRY' }],
   childrenFirstNameAfterAdoption: 'MOCK_FIRST_NAME_AFTER_ADOPTION',
   childrenLastNameAfterAdoption: 'MOCK_LAST_NAME_AFTER_ADOPTION',
   placementOrders: [
@@ -76,7 +76,7 @@ export default {
   birthMotherLastNames: 'BIRTH_MOTHER_LAST_NAMES',
   birthMotherStillAlive: YesNoNotsure.YES,
   birthMotherNationality: [Nationality.BRITHISH, Nationality.OTHER],
-  birthMotherAdditionalNationalities: ['MOCK_COUNTRY'],
+  birthMotherAdditionalNationalities: [{ id: 'MOCK_ID', country: 'MOCK_COUNTRY' }],
   birthMotherOccupation: 'MOCK_OCCUPATION',
   birthMotherAddressKnown: YesOrNo.YES,
   birthMotherAddress1: 'MOCK_ADDRESS_LINE1',

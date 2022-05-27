@@ -7,6 +7,7 @@ import { FormContent } from '../app/form/Form';
 
 import { applicant1Sequence } from './applicant1/applicant1Sequence';
 import { applicant2Sequence } from './applicant2/applicant2Sequence';
+import { applicationSequence } from './application/applicationSequence';
 import { birthFatherSequence } from './birth-father/birthFatherSequence';
 import { birthMotherSequence } from './birth-mother/birthMotherSequence';
 import { childrenSequence } from './children/childrenSequence';
@@ -65,10 +66,11 @@ const getPathAndQueryString = (req: AppRequest): { path: string; queryString: st
 };
 
 const getStepFiles = (stepDir: string) => {
+  const commonTemplatePath = `${__dirname}/common/template.njk`;
   const stepContentFile = `${stepDir}/content.ts`;
   const content = fs.existsSync(stepContentFile) ? require(stepContentFile) : {};
   const stepViewFile = `${stepDir}/template.njk`;
-  const view = fs.existsSync(stepViewFile) ? stepViewFile : `${stepDir}/../../common/template.njk`;
+  const view = fs.existsSync(stepViewFile) ? stepViewFile : commonTemplatePath;
 
   return { content, view };
 };
@@ -85,7 +87,8 @@ const getStepsWithContent = (sequence: Step[] | EligibilityStep[], subDir: strin
 
   const results: StepWithContent[] = [];
   for (const step of sequence) {
-    const path = step.url.startsWith(subDir) ? step.url : `${subDir}${step.url}`;
+    const stepUrl = step.url === '/' ? '/home' : step.url;
+    const path = stepUrl.startsWith(subDir) ? stepUrl : `${subDir}${stepUrl}`;
     const stepDir = `${dir}${path}`;
     const { content, view } = getStepFiles(stepDir);
     results.push({ stepDir, ...step, ...content, view });
@@ -94,6 +97,7 @@ const getStepsWithContent = (sequence: Step[] | EligibilityStep[], subDir: strin
 };
 
 export const stepsWithContentEligibility = getStepsWithContent(eligibilitySequence, '/eligibility');
+export const stepsWithContentApplication = getStepsWithContent(applicationSequence, '/application');
 export const stepsWithContentApplicant1 = getStepsWithContent(applicant1Sequence, APPLICANT_1);
 export const stepsWithContentApplicant2 = getStepsWithContent(applicant2Sequence, APPLICANT_2);
 export const stepsWithContentChildren = getStepsWithContent(childrenSequence, CHILDREN);
@@ -104,6 +108,7 @@ export const stepsWithContentSibling = getStepsWithContent(siblingSequence, SIBL
 export const stepsWithContentReviewPaySubmit = getStepsWithContent(reviewPaySubmitSequence, REVIEW_PAY_SUBMIT);
 export const stepsWithContent = [
   ...stepsWithContentEligibility,
+  ...stepsWithContentApplication,
   ...stepsWithContentApplicant1,
   ...stepsWithContentApplicant2,
   ...stepsWithContentChildren,

@@ -285,6 +285,7 @@ export interface OtherName {
 }
 
 export interface AdditionalNationality {
+  id?: string;
   country: string;
 }
 
@@ -362,6 +363,7 @@ export interface CaseData {
   birthMotherStillAlive: string;
   birthMotherNotAliveReason: string;
   birthMotherNationality: Nationality[];
+  birthMotherOtherNationalities: ListValue<AdditionalNationality>[];
   birthMotherOccupation: string;
   birthMotherAddressKnown: YesOrNo;
   birthMotherAddress1: string;
@@ -371,7 +373,6 @@ export interface CaseData {
   birthMotherAddressCounty: string;
   birthMotherAddressPostCode: string;
   birthMotherAddressCountry: string;
-  birthMotherOtherNationalities: ListValue<AdditionalNationality>[];
   birthMotherNameOnCertificate: string;
   birthMotherAddressNotKnownReason: string;
 
@@ -380,6 +381,7 @@ export interface CaseData {
   birthFatherStillAlive: string;
   birthFatherNotAliveReason: string;
   birthFatherNationality: Nationality[];
+  birthFatherOtherNationalities: ListValue<AdditionalNationality>[];
   birthFatherOccupation: string;
   birthFatherAddressKnown: YesOrNo;
   birthFatherAddress1: string;
@@ -389,7 +391,6 @@ export interface CaseData {
   birthFatherAddressCounty: string;
   birthFatherAddressPostCode: string;
   birthFatherAddressCountry: string;
-  birthFatherOtherNationalities: ListValue<AdditionalNationality>[];
   birthFatherNameOnCertificate: string;
   birthFatherAddressNotKnownReason: string;
 

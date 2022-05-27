@@ -36,20 +36,30 @@ describe('NationalityGetController', () => {
   });
 
   describe('when there is remove param in req.query and applicant1AdditionalNationalities in userCase', () => {
-    const formData = { applicant1AdditionalNationalities: ['MOCK_COUNTRY2'] };
+    const formData = { applicant1AdditionalNationalities: [{ id: 'MOCK_ID2', country: 'MOCK_COUNTRY2' }] };
 
     beforeEach(() => {
       req = mockRequest({
-        query: { remove: 'MOCK_COUNTRY' },
-        session: { userCase: { id: 'MOCK_ID', applicant1AdditionalNationalities: ['MOCK_COUNTRY', 'MOCK_COUNTRY2'] } },
+        query: { remove: 'MOCK_ID1' },
+        session: {
+          userCase: {
+            id: 'MOCK_ID',
+            applicant1AdditionalNationalities: [
+              { id: 'MOCK_ID1', country: 'MOCK_COUNTRY' },
+              { id: 'MOCK_ID2', country: 'MOCK_COUNTRY2' },
+            ],
+          },
+        },
       });
-      req.url = '/request?remove=MOCK_COUNTRY';
+      req.url = '/request?remove=MOCK_ID1';
       req.locals.api.triggerEvent.mockResolvedValue(formData);
     });
 
     test('should redirect to same url', async () => {
       await controller.get(req, res);
-      expect(req.session.userCase.applicant1AdditionalNationalities).toEqual(['MOCK_COUNTRY2']);
+      expect(req.session.userCase.applicant1AdditionalNationalities).toEqual([
+        { id: 'MOCK_ID2', country: 'MOCK_COUNTRY2' },
+      ]);
       expect(res.redirect).toHaveBeenCalledWith('/request');
     });
 
