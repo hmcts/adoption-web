@@ -172,3 +172,22 @@ export const LA_PORTAL_BIRTH_MOTHER_FIND_ADDRESS: PageLink = `${LA_PORTAL}${BIRT
 export const LA_PORTAL_BIRTH_MOTHER_SELECT_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/address/select`;
 export const LA_PORTAL_BIRTH_MOTHER_MANUAL_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/address/manual`;
 export const LA_PORTAL_BIRTH_MOTHER_INTERNATIONAL_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/address/international`;
+
+export const LA_PORTAL_BIRTH_FATHER_NAME_ON_CERTIFICATE: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/name-on-certificate`;
+export const LA_PORTAL_BIRTH_FATHER_FULL_NAME: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/full-name`;
+export const LA_PORTAL_BIRTH_FATHER_STILL_ALIVE: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/still-alive`;
+export const LA_PORTAL_BIRTH_FATHER_NATIONALITY: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/nationality`;
+export const LA_PORTAL_BIRTH_FATHER_OCCUPATION: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/occupation`;
+export const LA_PORTAL_BIRTH_FATHER_ADDRESS_KNOWN: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/address-known`;
+export const LA_PORTAL_BIRTH_FATHER_FIND_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/address/lookup`;
+export const LA_PORTAL_BIRTH_FATHER_SELECT_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/address/select`;
+export const LA_PORTAL_BIRTH_FATHER_MANUAL_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/address/manual`;
+export const LA_PORTAL_BIRTH_FATHER_INTERNATIONAL_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/address/international`;
+
+export const LA_PORTAL_OTHER_PARENT_EXISTS: PageLink = `${LA_PORTAL}${OTHER_PARENT}/exists`;
+export const LA_PORTAL_OTHER_PARENT_FULL_NAME: PageLink = `${LA_PORTAL}${OTHER_PARENT}/full-name`;
+export const LA_PORTAL_OTHER_PARENT_ADDRESS_KNOWN: PageLink = `${LA_PORTAL}${OTHER_PARENT}/address-known`;
+export const LA_PORTAL_OTHER_PARENT_FIND_ADDRESS: PageLink = `${LA_PORTAL}${OTHER_PARENT}/address/lookup`;
+export const LA_PORTAL_OTHER_PARENT_SELECT_ADDRESS: PageLink = `${LA_PORTAL}${OTHER_PARENT}/address/select`;
+export const LA_PORTAL_OTHER_PARENT_MANUAL_ADDRESS: PageLink = `${LA_PORTAL}${OTHER_PARENT}/address/manual`;
+export const LA_PORTAL_OTHER_PARENT_INTERNATIONAL_ADDRESS: PageLink = `${LA_PORTAL}${OTHER_PARENT}/address/international`;

@@ -32,13 +32,13 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         id: 'birth-father-details',
         text: taskListItems.birthFather,
         status: getBirthFatherDetailsStatus(userCase),
-        href: URL.BIRTH_FATHER_NAME_ON_CERTIFICATE,
+        href: URL.LA_PORTAL_BIRTH_FATHER_NAME_ON_CERTIFICATE,
       },
       {
         id: 'other-parent-details',
         text: taskListItems.otherParent,
         status: getOtherParentStatus(userCase),
-        href: URL.OTHER_PARENT_EXISTS,
+        href: URL.LA_PORTAL_OTHER_PARENT_EXISTS,
       },
       {
         id: 'placement-and-court-order-details',
