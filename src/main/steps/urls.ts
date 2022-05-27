@@ -93,7 +93,7 @@ export const PAY_AND_SUBMIT: PageLink = '/pay-and-submit';
 
 export const NO_RESPONSE_YET: PageLink = '/no-response-yet';
 
-export const APPLICATION_SUBMITTED: PageLink = '/application-submitted';
+export const APPLICATION_SUBMITTED: PageLink = '/application/submitted';
 
 export const DOWNLOAD_APPLICATION_SUMMARY: PageLink = '/download-summary';
 
