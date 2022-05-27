@@ -162,6 +162,12 @@ export const LA_PORTAL_CHILDREN_FULL_NAME: PageLink = `${LA_PORTAL}/child/full-n
 export const LA_PORTAL_CHILD_DATE_OF_BIRTH: PageLink = `${LA_PORTAL}/child/date-of-birth`;
 export const LA_PORTAL_CHILD_SEX_AT_BIRTH: PageLink = `${LA_PORTAL}/child/sex-at-birth`;
 export const LA_PORTAL_CHILD_NATIONALITY: PageLink = `${LA_PORTAL}/child/nationality`;
+export const LA_PORTAL_CHILD_PLACEMENT_ORDER_TYPE: PageLink = `${CHILDREN}/placement-order-type`;
+export const LA_PORTAL_CHILD_PLACEMENT_ORDER_NUMBER: PageLink = `${CHILDREN}/placement-order-number`;
+export const LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT: PageLink = `${CHILDREN}/placement-order-court`;
+export const LA_PORTAL_CHILD_PLACEMENT_ORDER_DATE: PageLink = `${CHILDREN}/placement-order-date`;
+export const LA_PORTAL_CHILD_PLACEMENT_ORDER_SUMMARY: PageLink = `${CHILDREN}/placement-order-summary`;
+export const LA_PORTAL_CHILD_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS: PageLink = `${CHILDREN}/placement-order-check-your-answers`;
 
 export const LA_PORTAL_BIRTH_MOTHER_FULL_NAME: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/full-name`;
 export const LA_PORTAL_BIRTH_MOTHER_STILL_ALIVE: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/still-alive`;
