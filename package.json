@@ -103,7 +103,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.0",
+    "@babel/core": "^7.18.2",
     "@babel/preset-env": "^7.18.2",
     "@pact-foundation/absolute-version": "^0.0.4",
     "@pact-foundation/pact": "^9.17.3",
