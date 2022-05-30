@@ -12,6 +12,8 @@ module.exports = {
     applicant1PhoneNumber: 'input[id$="applicant2PhoneNumber"]',
     lookupOption: '8B, CHURCH ROAD, UXBRIDGE, UB8 3NA',
     postcode: 'UB8 3NA',
+    applicant2LanguageEnglish: 'input[id$="applicant2LanguagePreference"]',
+    applicant2LanguageWelsh: 'input[id$="applicant2LanguagePreference-2ss"]',
   },
 
   async otherApplicantContactDetailsSection() {
@@ -29,6 +31,10 @@ module.exports = {
     await I.retry(3).fillField(this.fields.applicant2EmailAddress, 'test@test.com');
     await I.retry(3).fillField(this.fields.applicant1PhoneNumber, '09876543210');
     await I.retry(3).click(this.fields.applicant2ContactDetailsConsent);
+    await I.retry(3).click('Save and continue');
+    await I.retry(3).waitForText('What language do you want to receive emails and documents in?');
+    await I.retry(3).click(this.fields.applicant2LanguageEnglish);
+    await I.wait(4);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
   },

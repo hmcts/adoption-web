@@ -11,6 +11,8 @@ module.exports = {
     applicant1PhoneNumber: 'input[id$="applicant1PhoneNumber"]',
     lookupOption: 'FLAT 2, CAVERSHAM HOUSE 15-17, CHURCH ROAD, CAVERSHAM, READING, RG4 7AA',
     postcode: 'RG4 7AA',
+    applicant1LanguageEnglish: 'input[id$="applicant1LanguagePreference"]',
+    applicant1LanguageWelsh: 'input[id$="applicant1LanguagePreference-2ss"]',
   },
   async primaryApplicantContactDetailsSection() {
     await I.retry(3).waitForText("What's your home address?");
@@ -25,6 +27,10 @@ module.exports = {
     await I.retry(3).fillField(this.fields.applicant1PhoneNumber, '09876543210');
     await I.wait(2);
     await I.retry(3).click(this.fields.applicant1ContactDetailsConsent);
+    await I.retry(3).click('Save and continue');
+    await I.retry(3).waitForText('What language do you want to receive emails and documents in?');
+    await I.retry(3).click(this.fields.applicant1LanguageEnglish);
+    await I.wait(4);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
   },
@@ -54,6 +60,13 @@ module.exports = {
     await I.retry(3).fillField(this.fields.applicant1PhoneNumber, '09876543210');
     await I.wait(2);
     await I.retry(3).click(this.fields.applicant1ContactDetailsConsent);
+    await I.wait(4);
+    await I.retry(3).waitForText('What language do you want to receive emails and documents in?');
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
+    await I.retry(3).see('Please answer the question');
+    await I.wait(4);
+    await I.retry(3).click(this.fields.applicant1LanguageEnglish);
     await I.wait(4);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
