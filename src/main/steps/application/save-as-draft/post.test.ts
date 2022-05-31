@@ -1,11 +1,11 @@
 const mockGetParsedBody = jest.fn();
 const mockGetErrors = jest.fn();
 
-import { mockRequest } from '../../../test/unit/utils/mockRequest';
-import { mockResponse } from '../../../test/unit/utils/mockResponse';
-import { PostController } from '../../app/controller/PostController';
+import { mockRequest } from '../../../../test/unit/utils/mockRequest';
+import { mockResponse } from '../../../../test/unit/utils/mockResponse';
+import { PostController } from '../../../app/controller/PostController';
 
-import { SaveAsDraftPostController } from './post';
+import SaveAsDraftPostController from './post';
 
 describe('SaveAsDraftPostController', () => {
   let req;

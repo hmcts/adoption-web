@@ -9,16 +9,7 @@ import { DocumentManagerController } from './app/document/DocumentManagementCont
 import { KeepAliveController } from './app/keepalive/KeepAliveController';
 import { stepsWithContent } from './steps';
 import { ErrorController } from './steps/error/error.controller';
-import * as saveAsDraft from './steps/save-as-draft/content';
-import { SaveAsDraftGetController } from './steps/save-as-draft/get';
-import { SaveAsDraftPostController } from './steps/save-as-draft/post';
-import {
-  CSRF_TOKEN_ERROR_URL,
-  DOCUMENT_MANAGER,
-  DOWNLOAD_APPLICATION_SUMMARY,
-  KEEP_ALIVE_URL,
-  SAVE_AS_DRAFT,
-} from './steps/urls';
+import { CSRF_TOKEN_ERROR_URL, DOCUMENT_MANAGER, DOWNLOAD_APPLICATION_SUMMARY, KEEP_ALIVE_URL } from './steps/urls';
 
 const handleUploads = multer();
 
@@ -28,8 +19,6 @@ export class Routes {
     const errorController = new ErrorController();
 
     app.get(CSRF_TOKEN_ERROR_URL, errorHandler(errorController.CSRFTokenError));
-    app.get(SAVE_AS_DRAFT, errorHandler(new SaveAsDraftGetController().get));
-    app.post(SAVE_AS_DRAFT, errorHandler(new SaveAsDraftPostController(saveAsDraft.form.fields).post));
 
     const documentManagerController = new DocumentManagerController();
     app.get(DOWNLOAD_APPLICATION_SUMMARY, errorHandler(documentManagerController.get));

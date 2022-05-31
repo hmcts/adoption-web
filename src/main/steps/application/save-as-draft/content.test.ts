@@ -1,5 +1,5 @@
-import languageAssertions from '../../../test/unit/utils/languageAssertions';
-import { CommonContent } from '../common/common.content';
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
+import { CommonContent } from '../../common/common.content';
 import { generateContent } from '../save-as-draft/content';
 
 const enContent = {

@@ -74,7 +74,8 @@ export class PostController<T extends AnyObject> {
         item =>
           item.errorType !== ValidationError.REQUIRED &&
           item.errorType !== ValidationError.NOT_SELECTED &&
-          item.errorType !== ValidationError.NOT_UPLOADED
+          item.errorType !== ValidationError.NOT_UPLOADED &&
+          item.errorType !== ValidationError.ADD_BUTTON_NOT_CLICKED
       );
     }
   }
