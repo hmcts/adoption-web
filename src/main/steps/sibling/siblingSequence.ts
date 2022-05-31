@@ -20,7 +20,7 @@ export const siblingSequence: Step[] = [
   {
     url: Urls.SIBLING_EXISTS,
     showInSection: Sections.AboutSibling,
-    getNextStep: getStepAfterSiblingExists,
+    getNextStep: data => getStepAfterSiblingExists(data as Partial<CaseWithId>),
   },
   {
     url: Urls.SIBLING_RELATION,
@@ -41,7 +41,7 @@ export const siblingSequence: Step[] = [
     url: Urls.SIBLING_ORDER_SUMMARY,
     showInSection: Sections.AboutSibling,
     getNextStep: data =>
-      data.addAnotherSiblingPlacementOrder === YesOrNo.YES
+      (data as Partial<CaseWithId>).addAnotherSiblingPlacementOrder === YesOrNo.YES
         ? `${Urls.SIBLING_RELATION}?add=${Date.now()}`
         : Urls.TASK_LIST_URL,
   },

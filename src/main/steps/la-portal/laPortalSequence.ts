@@ -1,5 +1,6 @@
 import path from 'path';
 
+import { CaseWithId } from '../../app/case/case';
 import { YesNoNotsure, YesOrNo } from '../../app/case/definition';
 import { Step } from '../constants';
 import * as Urls from '../urls';
@@ -189,7 +190,103 @@ const otherParentSequence = [
   },
 ];
 
+/*********************** PLACEMENT ORDER *************************/
+const placementOrderSequence = [
+  {
+    url: Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_TYPE,
+    contentDir: path.join(__dirname, '..', 'children', 'placement-order-type'),
+    getNextStep: () => Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_NUMBER,
+  },
+  {
+    url: Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_NUMBER,
+    contentDir: path.join(__dirname, '..', 'children', 'placement-order-number'),
+    getNextStep: () => Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT,
+  },
+  {
+    url: Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT,
+    contentDir: path.join(__dirname, '..', 'children', 'placement-order-court'),
+    getNextStep: () => Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_DATE,
+  },
+  {
+    url: Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_DATE,
+    contentDir: path.join(__dirname, '..', 'children', 'placement-order-date'),
+    getNextStep: () => Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_SUMMARY,
+  },
+  {
+    url: Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_SUMMARY,
+    contentDir: path.join(__dirname, '..', 'children', 'placement-order-summary'),
+    getNextStep: data =>
+      data.addAnotherPlacementOrder === YesOrNo.YES
+        ? (`${Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_TYPE}?add=${Date.now()}` as Urls.PageLink)
+        : Urls.LA_PORTAL_TASK_LIST,
+  },
+  {
+    url: Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS,
+    contentDir: path.join(__dirname, '..', 'children', 'placement-order-check-your-answers'),
+    getNextStep: () => Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_SUMMARY,
+  },
+];
+
+const getStepAfterSiblingExists = (data): Urls.PageLink => {
+  if (data.hasSiblings === YesNoNotsure.NO || data.hasSiblings === YesNoNotsure.NOT_SURE) {
+    return Urls.LA_PORTAL_TASK_LIST;
+  }
+
+  const count = data.siblings?.length;
+  if (!count) {
+    return Urls.LA_PORTAL_SIBLING_RELATION;
+  }
+
+  return Urls.LA_PORTAL_SIBLING_ORDER_SUMMARY;
+};
+
+/******************** SIBLING PLACEMENT ORDER *********************/
+const siblingSequence: Step[] = [
+  {
+    url: Urls.LA_PORTAL_SIBLING_EXISTS,
+    contentDir: path.join(__dirname, '..', 'sibling', 'exists'),
+    getNextStep: getStepAfterSiblingExists,
+  },
+  {
+    url: Urls.LA_PORTAL_SIBLING_RELATION,
+    contentDir: path.join(__dirname, '..', 'sibling', 'relation'),
+    getNextStep: () => Urls.LA_PORTAL_SIBLING_ORDER_TYPE,
+  },
+  {
+    url: Urls.LA_PORTAL_SIBLING_ORDER_TYPE,
+    contentDir: path.join(__dirname, '..', 'sibling', 'placement-order-type'),
+    getNextStep: () => Urls.LA_PORTAL_SIBLING_ORDER_CASE_NUMBER,
+  },
+  {
+    url: Urls.LA_PORTAL_SIBLING_ORDER_CASE_NUMBER,
+    contentDir: path.join(__dirname, '..', 'sibling', 'placement-order-number'),
+    getNextStep: () => Urls.LA_PORTAL_SIBLING_ORDER_SUMMARY,
+  },
+  {
+    url: Urls.LA_PORTAL_SIBLING_ORDER_SUMMARY,
+    contentDir: path.join(__dirname, '..', 'sibling', 'summary'),
+    getNextStep: data =>
+      (data as Partial<CaseWithId>).addAnotherSiblingPlacementOrder === YesOrNo.YES
+        ? `${Urls.LA_PORTAL_SIBLING_RELATION}?add=${Date.now()}`
+        : Urls.LA_PORTAL_TASK_LIST,
+  },
+  {
+    url: Urls.LA_PORTAL_SIBLING_ORDER_CHECK_YOUR_ANSWERS,
+    contentDir: path.join(__dirname, '..', 'sibling', 'placement-order-check-your-answers'),
+    getNextStep: () => `${Urls.LA_PORTAL_SIBLING_ORDER_SUMMARY}`,
+  },
+  {
+    url: Urls.LA_PORTAL_SIBLING_REMOVE_PLACEMENT_ORDER,
+    contentDir: path.join(__dirname, '..', 'sibling', 'remove-placement-order'),
+    getNextStep: () => Urls.LA_PORTAL_SIBLING_ORDER_SUMMARY,
+  },
+];
+
 export const laPortalSequence: Step[] = [
+  {
+    url: Urls.LA_PORTAL_KBA_CASE_REF,
+    getNextStep: () => Urls.LA_PORTAL_KBA_CALLBACK,
+  },
   {
     url: Urls.LA_PORTAL_TASK_LIST,
     getNextStep: () => Urls.HOME_URL,
@@ -198,4 +295,6 @@ export const laPortalSequence: Step[] = [
   ...birthMotherSequence,
   ...birthFatherSequence,
   ...otherParentSequence,
+  ...placementOrderSequence,
+  ...siblingSequence,
 ];

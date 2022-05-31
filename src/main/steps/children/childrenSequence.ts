@@ -1,3 +1,4 @@
+import { CaseWithId } from '../../app/case/case';
 import { YesOrNo } from '../../app/case/definition';
 import { Sections, Step } from '../constants';
 import * as Urls from '../urls';
@@ -26,8 +27,8 @@ export const childrenSequence: Step[] = [
   {
     url: Urls.CHILDREN_PLACEMENT_ORDER_SUMMARY,
     showInSection: Sections.AboutChildren,
-    getNextStep: userCase =>
-      userCase.addAnotherPlacementOrder === YesOrNo.YES
+    getNextStep: data =>
+      (data as Partial<CaseWithId>).addAnotherPlacementOrder === YesOrNo.YES
         ? `${Urls.CHILDREN_PLACEMENT_ORDER_TYPE}?add=${Date.now()}`
         : Urls.TASK_LIST_URL,
   },
@@ -69,8 +70,8 @@ export const childrenSequence: Step[] = [
   {
     url: Urls.OTHER_ADOPTION_AGENCY,
     showInSection: Sections.AboutChildren,
-    getNextStep: userCase =>
-      userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO ? Urls.SOCIAL_WORKER : Urls.ADOPTION_AGENCY,
+    getNextStep: data =>
+      (data as Partial<CaseWithId>).hasAnotherAdopAgencyOrLA === YesOrNo.NO ? Urls.SOCIAL_WORKER : Urls.ADOPTION_AGENCY,
   },
   {
     url: Urls.ADOPTION_AGENCY,
