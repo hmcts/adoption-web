@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 
-import { Case } from '../app/case/case';
-import { AppRequest, Eligibility } from '../app/controller/AppRequest';
+import { CaseWithId } from '../app/case/case';
+import { AppRequest, Eligibility, LaPortalKBA } from '../app/controller/AppRequest';
 import { TranslationFn } from '../app/controller/GetController';
 import { FormContent } from '../app/form/Form';
 
@@ -31,7 +31,7 @@ import {
   TASK_LIST_URL,
 } from './urls';
 
-export const getNextStepUrl = (req: AppRequest, data: Partial<Case>): string => {
+export const getNextStepUrl = (req: AppRequest, data: Partial<CaseWithId> | LaPortalKBA): string => {
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   if ((req.body as any).saveAsDraft) {
     return TASK_LIST_URL;
