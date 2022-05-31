@@ -46,8 +46,8 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         status: getChildrenPlacementOrderStatus(userCase),
         href:
           getChildrenPlacementOrderStatus(userCase) === SectionStatus.NOT_STARTED
-            ? URL.CHILDREN_PLACEMENT_ORDER_NUMBER
-            : URL.CHILDREN_PLACEMENT_ORDER_SUMMARY,
+            ? URL.LA_PORTAL_CHILD_PLACEMENT_ORDER_NUMBER
+            : URL.LA_PORTAL_CHILD_PLACEMENT_ORDER_SUMMARY,
       },
       {
         id: 'sibling-court-order-details',
@@ -55,8 +55,8 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         status: getSiblingStatus(userCase),
         href:
           userCase.hasSiblings === YesNoNotsure.YES && userCase.siblings?.length
-            ? URL.SIBLING_ORDER_SUMMARY
-            : URL.SIBLING_EXISTS,
+            ? URL.LA_PORTAL_SIBLING_ORDER_SUMMARY
+            : URL.LA_PORTAL_SIBLING_EXISTS,
       },
       {
         id: 'upload-documents',
