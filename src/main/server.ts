@@ -66,13 +66,15 @@ app.disable('X-Powered-By');
 app.use(
   Express.accessLogger({
     formatter: req => {
+      const timeTaken = ((Date.now() - req['startTime']) / 1000).toFixed(2);
       const caseId = req.session?.userCase?.id ? ` caseId=${req.session?.userCase?.id}` : '';
       const errors = req.session?.errors?.length
         ? ` errors=[${req.session.errors.map(item => ` ${item.propertyName}:${item.errorType}`)} ]`
         : '';
 
-      return `"${req.method} ${req.originalUrl || req.url}${caseId}${errors}"`;
+      return `"${req.method} ${req.originalUrl || req.url}${caseId}${errors}" ${timeTaken}s`;
     },
+    ignoreRequests: ['/health/readiness', '/health/liveness'],
   })
 );
 
