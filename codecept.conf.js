@@ -91,6 +91,7 @@ exports.config = {
     uploadDocumentsDetailsPage: './src/test/e2e/pages/uploadDocumentsDetails.page.js',
     dateChildMovedinDetailsPage: './src/test/e2e/pages/dateChildMovedinDetails.page.js',
     chooseYourFamilyCourtDetailsPage: './src/test/e2e/pages/chooseYourFamilyCourtDetails.page.js',
+    saveAsDraftPage: './src/test/e2e/pages/saveAsDraft.page',
   },
   plugins: {
     autoLogin: testConfig.AutoLogin,
