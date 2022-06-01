@@ -28,9 +28,7 @@ describe('FindFamilyCourtPostController', () => {
     req = mockRequest({
       session: {
         userCase: {
-          placementOrders: [
-            { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderCourt: 'Chelmsford Family Court' },
-          ],
+          placementOrderCourt: 'Chelmsford Family Court',
           findFamilyCourt: 'No',
           familyCourtName: 'Chelmsford Family Court',
           familyCourtEmailId: 'chelmsfordadoptionapplication@justice.gov.uk',
@@ -57,9 +55,7 @@ describe('FindFamilyCourtPostController', () => {
         mockGetErrors.mockReturnValue([]);
         controller = new FindFamilyCourtPostController({});
         req.locals.api.triggerEvent.mockResolvedValue({
-          placementOrders: [
-            { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderCourt: 'Chelmsford Family Court' },
-          ],
+          placementOrderCourt: 'Chelmsford Family Court',
           findFamilyCourt: 'No',
           familyCourtName: 'Chelmsford Family Court',
           familyCourtEmailId: 'chelmsfordadoptionapplication@justice.gov.uk',
@@ -69,9 +65,7 @@ describe('FindFamilyCourtPostController', () => {
       test('should set the formData fields in userCase placementOrders session data', async () => {
         await controller.post(req, res);
         expect(req.session.errors).toEqual([]);
-        expect(req.session.userCase.placementOrders).toEqual([
-          { placementOrderCourt: 'Chelmsford Family Court', placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' },
-        ]);
+        expect(req.session.userCase.placementOrderCourt).toEqual('Chelmsford Family Court');
         expect(req.session.save).toHaveBeenCalled();
       });
 

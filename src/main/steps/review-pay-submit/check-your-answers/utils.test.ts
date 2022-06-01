@@ -1399,7 +1399,6 @@ describe('review-pay-submit > check-your-answers > utils', () => {
         },
       },
     ])('return correct summary list items when %#', ({ userCase, expected }) => {
-      console.log(JSON.stringify(siblingCourtOrderSummaryList(enContent, userCase)));
       expect(siblingCourtOrderSummaryList(enContent, userCase)).toStrictEqual(expected);
     });
   });

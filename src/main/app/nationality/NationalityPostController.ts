@@ -33,7 +33,10 @@ export default class NationalityPostController extends PostController<AnyObject>
         req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`] = [];
       }
       if (formData.addAnotherNationality) {
-        req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`]?.push(formData.addAnotherNationality);
+        req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`]?.push({
+          id: `${Date.now()}`,
+          country: formData.addAnotherNationality,
+        });
         req.session.userCase.addAnotherNationality = '';
       }
     } else if (formData.addAnotherNationality) {

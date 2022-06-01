@@ -53,7 +53,7 @@ const cyContent = {
   errors: {
     applicant1HasOtherNames: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
-      addButtonNotClicked: "Select 'Add' to save your previous names",
+      addButtonNotClicked: "Dewiswch 'Ychwanegu' i gadw eich enwau blaenorol",
     },
     applicant1OtherFirstNames: {
       required: 'Nac ydwdwch eich enw(au) cyntaf',
