@@ -364,8 +364,6 @@ describe('utils', () => {
     test.each([
       {
         data: {
-          childrenFirstName: undefined,
-          childrenLastName: undefined,
           childrenDateOfBirth: { day: '', month: '', year: '' },
           childrenSexAtBirth: undefined,
           childrenNationality: undefined,
@@ -375,8 +373,6 @@ describe('utils', () => {
       },
       {
         data: {
-          childrenFirstName: 'MOCK_FIRST_NAME',
-          childrenLastName: 'MOCK_LAST_NAME',
           childrenDateOfBirth: { day: '1', month: '1', year: '2021' },
           childrenSexAtBirth: Gender.OTHER,
           childrenNationality: undefined,
@@ -386,8 +382,6 @@ describe('utils', () => {
       },
       {
         data: {
-          childrenFirstName: 'MOCK_FIRST_NAME',
-          childrenLastName: 'MOCK_LAST_NAME',
           childrenDateOfBirth: { day: '1', month: '1', year: '2021' },
           childrenSexAtBirth: Gender.MALE,
           childrenNationality: [Nationality.BRITHISH],
@@ -397,8 +391,6 @@ describe('utils', () => {
       },
       {
         data: {
-          childrenFirstName: 'MOCK_FIRST_NAME',
-          childrenLastName: 'MOCK_LAST_NAME',
           childrenDateOfBirth: { day: '1', month: '1', year: '2021' },
           childrenSexAtBirth: Gender.FEMALE,
           childrenNationality: [Nationality.OTHER],
@@ -408,8 +400,6 @@ describe('utils', () => {
       },
       {
         data: {
-          childrenFirstName: 'MOCK_FIRST_NAME',
-          childrenLastName: 'MOCK_LAST_NAME',
           childrenDateOfBirth: { day: '1', month: '1', year: '2021' },
           childrenSexAtBirth: Gender.OTHER,
           childrenOtherSexAtBirth: 'MOCK_OTHER_GENDER',
@@ -426,15 +416,30 @@ describe('utils', () => {
   describe('getAdoptionCertificateDetailsStatus', () => {
     test.each([
       {
-        data: { childrenFirstNameAfterAdoption: undefined, childrenLastNameAfterAdoption: undefined },
+        data: {
+          childrenFirstName: undefined,
+          childrenLastName: undefined,
+          childrenFirstNameAfterAdoption: undefined,
+          childrenLastNameAfterAdoption: undefined,
+        },
         expected: NOT_STARTED,
       },
       {
-        data: { childrenFirstNameAfterAdoption: 'MOCK_FIRST_NAME', childrenLastNameAfterAdoption: undefined },
+        data: {
+          childrenFirstName: 'MOCK_FIRST_NAME',
+          childrenLastName: 'MOCK_LAST_NAME',
+          childrenFirstNameAfterAdoption: 'MOCK_FIRST_NAME',
+          childrenLastNameAfterAdoption: undefined,
+        },
         expected: IN_PROGRESS,
       },
       {
-        data: { childrenFirstNameAfterAdoption: 'MOCK_FIRST_NAME', childrenLastNameAfterAdoption: 'MOCK_LAST_NAME' },
+        data: {
+          childrenFirstName: 'MOCK_FIRST_NAME',
+          childrenLastName: 'MOCK_LAST_NAME',
+          childrenFirstNameAfterAdoption: 'MOCK_FIRST_NAME',
+          childrenLastNameAfterAdoption: 'MOCK_LAST_NAME',
+        },
         expected: COMPLETED,
       },
     ])('should return correct status %#', async ({ data, expected }) => {

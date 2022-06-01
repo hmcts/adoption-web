@@ -34,21 +34,21 @@ describe('childrenSequence', () => {
     expect(childrenSequence[5].showInSection).toBe('aboutChildren');
     expect(childrenSequence[5].getNextStep({})).toBe('/children/placement-order-summary');
 
-    expect(childrenSequence[6].url).toBe('/children/full-name');
+    expect(childrenSequence[6].url).toBe('/children/date-of-birth');
     expect(childrenSequence[6].showInSection).toBe('aboutChildren');
-    expect(childrenSequence[6].getNextStep({})).toBe('/children/date-of-birth');
+    expect(childrenSequence[6].getNextStep({})).toBe('/children/sex-at-birth');
 
-    expect(childrenSequence[7].url).toBe('/children/date-of-birth');
+    expect(childrenSequence[7].url).toBe('/children/sex-at-birth');
     expect(childrenSequence[7].showInSection).toBe('aboutChildren');
-    expect(childrenSequence[7].getNextStep({})).toBe('/children/sex-at-birth');
+    expect(childrenSequence[7].getNextStep({})).toBe('/children/nationality');
 
-    expect(childrenSequence[8].url).toBe('/children/sex-at-birth');
+    expect(childrenSequence[8].url).toBe('/children/nationality');
     expect(childrenSequence[8].showInSection).toBe('aboutChildren');
-    expect(childrenSequence[8].getNextStep({})).toBe('/children/nationality');
+    expect(childrenSequence[8].getNextStep({})).toBe('/task-list');
 
-    expect(childrenSequence[9].url).toBe('/children/nationality');
+    expect(childrenSequence[9].url).toBe('/children/full-name');
     expect(childrenSequence[9].showInSection).toBe('aboutChildren');
-    expect(childrenSequence[9].getNextStep({})).toBe('/task-list');
+    expect(childrenSequence[9].getNextStep({})).toBe('/children/full-name-after-adoption');
 
     expect(childrenSequence[10].url).toBe('/children/full-name-after-adoption');
     expect(childrenSequence[10].showInSection).toBe('aboutChildren');

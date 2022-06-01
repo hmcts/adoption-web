@@ -42,7 +42,7 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         id: 'adoption-certificate-details',
         text: taskListItems.childDetails,
         status: getAdoptionCertificateDetailsStatus(userCase),
-        href: URL.CHILDREN_FULL_NAME_AFTER_ADOPTION,
+        href: URL.CHILDREN_FULL_NAME,
       },
       {
         id: 'adoption-agency',
@@ -100,7 +100,7 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         id: 'children-birth-certificate-details',
         text: taskListItems.birthCertificate,
         status: getChildrenBirthCertificateStatus(userCase),
-        href: URL.CHILDREN_FULL_NAME,
+        href: URL.CHILDREN_DATE_OF_BIRTH,
       },
       {
         id: 'birth-mother-details',
