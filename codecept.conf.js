@@ -81,7 +81,7 @@ exports.config = {
     primaryApplicantPersonalDetailsPage: './src/test/e2e/pages/primaryApplicantPersonalDetails.page.js',
     childrenBirthCertificatePage: './src/test/e2e/pages/childrenBirthCertificate.page.js',
     otherApplicantPersonalDetailsPage: './src/test/e2e/pages/otherApplicantPersonalDetails.page.js',
-    childAdoptionCertificateDetailsPage: './src/test/e2e/pages/childAdoptionCertificateDetails.page.js',
+    childsDetailsPage: './src/test/e2e/pages/childsDetails.page.js',
     childBirthMothersDetailsPage: './src/test/e2e/pages/childBirthMothersDetails.page.js',
     childOtherParentDetailsPage: './src/test/e2e/pages/childOtherParentDetails.page.js',
     childBirthFatherDetailsPage: './src/test/e2e/pages/childBirthFatherDetails.page.js',
