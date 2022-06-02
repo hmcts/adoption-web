@@ -32,6 +32,7 @@ export class Helmet {
       "'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU='",
       "'sha256-gpnWB3ld/ux/M3KURJluvKNOUQ82MPOtzVeCtqK7gmE='",
       "'sha256-ZjdUCAt//TDpVjTXX+6bDfZNwte/RfSYJDgtfQtaoXs='",
+      "'sha256-FooZGzfstFw/L3iO1nVNFoGLxWpFKFVsOpewkb3rIaU='",
     ];
 
     const connectSrc = [self, googleAnalyticsDomain];
