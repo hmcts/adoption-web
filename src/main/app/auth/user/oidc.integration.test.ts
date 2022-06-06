@@ -44,6 +44,7 @@ describe('getUserDetails', () => {
       givenName: 'John',
       familyName: 'Dorian',
       id: '123',
+      roles: ['adoption-citizen-user'],
     });
   });
 });
@@ -64,6 +65,7 @@ describe('getCaseWorkerUser', () => {
       givenName: 'John',
       familyName: 'Dorian',
       id: '123',
+      roles: ['adoption-citizen-user'],
     });
   });
 });
