@@ -22,8 +22,8 @@ export class PropertiesVolume {
       this.setLocalSecret('idam-secret', 'services.idam.clientSecret');
       this.setLocalSecret('s2s-secret', 'services.authProvider.secret');
       this.setLocalSecret('postcode-lookup-token', 'services.postcodeLookup.token');
-      // this.setLocalSecret('idam-systemupdate-username', 'services.idam.systemUsername');
-      // this.setLocalSecret('idam-systemupdate-password', 'services.idam.systemPassword');
+      this.setLocalSecret('idam-system-user-name', 'services.idam.systemUsername');
+      this.setLocalSecret('idam-system-user-password', 'services.idam.systemPassword');
       // this.setLocalSecret('e2e-test-user-password', 'e2e.userTestPassword');
       this.setLocalSecret('adoption-pcq-token', 'services.equalityAndDiversity.tokenKey');
       this.setLocalEndpoints();
