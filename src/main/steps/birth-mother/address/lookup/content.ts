@@ -13,7 +13,7 @@ const en = addressLookupContent => ({
   errors: {
     birthMotherAddressPostcode: addressLookupContent.errors.addressPostcode,
   },
-  manualAddressUrl: './manual',
+  manualAddressUrl: BIRTH_MOTHER_MANUAL_ADDRESS,
 });
 
 const cy: typeof en = addressLookupContent => ({
