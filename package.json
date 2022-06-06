@@ -152,7 +152,7 @@
     "sass-loader": "^13.0.0",
     "sonar-scanner": "^3.1.0",
     "style-loader": "^3.3.1",
-    "ts-jest": "^28.0.3",
+    "ts-jest": "^28.0.4",
     "ts-loader": "^9.3.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webdriverio": "^7.19.7",
