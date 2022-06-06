@@ -1,7 +1,7 @@
 import config from 'config';
 import { Application, NextFunction, Response } from 'express';
 
-import { getRedirectUrl, getUserDetails, getUserRoles } from '../../app/auth/user/oidc';
+import { getRedirectUrl, getUserDetails } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
 import { LanguagePreference } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
@@ -27,22 +27,11 @@ export class OidcMiddleware {
     app.get(
       CALLBACK_URL,
       errorHandler(async (req, res) => {
+        console.log('entry---');
         if (typeof req.query.code === 'string') {
-          console.log('After login');
-          req.session.roleList = await getUserRoles(
-            `${protocol}${res.locals.host}${port}`,
-            req.query.code,
-            CALLBACK_URL
-          );
-          console.log('roles are--- ', req.session.roles);
-          if (req.session.roleList.roles.includes('adoption-citizen-user')) {
-            req.session.user = await getUserDetails(
-              `${protocol}${res.locals.host}${port}`,
-              req.query.code,
-              CALLBACK_URL
-            );
-            req.session.save(() => res.redirect('/'));
-          }
+          req.session.user = await getUserDetails(`${protocol}${res.locals.host}${port}`, req.query.code, CALLBACK_URL);
+          console.log('Roles are -- ', req.session.user.roles);
+          req.session.save(() => res.redirect('/'));
         } else {
           res.redirect(SIGN_IN_URL);
         }

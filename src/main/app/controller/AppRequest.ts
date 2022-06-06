@@ -25,7 +25,6 @@ export interface AppSession extends Session {
   errors: FormError[] | undefined;
   addresses: [];
   returnUrl?: string;
-  roleList: UserRoles;
 }
 
 export interface UserDetails {
@@ -34,9 +33,6 @@ export interface UserDetails {
   email: string;
   givenName: string;
   familyName: string;
-}
-
-export interface UserRoles {
   roles: string[];
 }
 

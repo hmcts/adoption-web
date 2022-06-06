@@ -3,7 +3,7 @@ import config from 'config';
 import jwt_decode from 'jwt-decode';
 
 import { PageLink } from '../../../steps/urls';
-import { UserDetails, UserRoles } from '../../controller/AppRequest';
+import { UserDetails } from '../../controller/AppRequest';
 
 export const getRedirectUrl = (serviceUrl: string, callbackUrlPageLink: PageLink): string => {
   const id: string = config.get('services.idam.clientID');
@@ -34,6 +34,7 @@ export const getUserDetails = async (
     email: jwt.sub,
     givenName: jwt.given_name,
     familyName: jwt.family_name,
+    roles: jwt.roles,
   };
 };
 
@@ -58,10 +59,11 @@ export const getSystemUser = async (): Promise<UserDetails> => {
     email: jwt.sub,
     givenName: jwt.given_name,
     familyName: jwt.family_name,
+    roles: jwt.roles,
   };
 };
 
-export const getUserRoles = async (
+/* export const getUserRoles = async (
   serviceUrl: string,
   rawCode: string,
   callbackUrlPageLink: PageLink
@@ -79,7 +81,7 @@ export const getUserRoles = async (
   return {
     roles: jwt.roles,
   };
-};
+}; */
 
 interface IdTokenJwtPayload {
   uid: string;

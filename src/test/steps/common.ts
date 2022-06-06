@@ -242,6 +242,7 @@ export const iGetTheTestUser = async (user: { username: string; password: string
     email: jwt.sub,
     givenName: jwt.given_name,
     familyName: jwt.family_name,
+    roles: jwt.roles,
   };
 };
 
