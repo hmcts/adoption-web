@@ -616,7 +616,7 @@ describe('utils', () => {
           applicant1UploadedFiles: undefined,
           applicant1CannotUpload: undefined,
         },
-        expected: 'CAN_NOT_START_YET',
+        expected: 'NOT_STARTED',
       },
     ])('should return correct status %#', async ({ data, expected }) => {
       expect(getUploadDocumentStatus(data)).toBe(expected);
