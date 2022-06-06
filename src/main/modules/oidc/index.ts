@@ -18,7 +18,6 @@ export class OidcMiddleware {
     const { errorHandler } = app.locals;
 
     app.get(SIGN_IN_URL, (req, res) => {
-      console.log('Entry---');
       res.redirect(getRedirectUrl(`${protocol}${res.locals.host}${port}`, CALLBACK_URL));
     });
 
@@ -27,17 +26,13 @@ export class OidcMiddleware {
     app.get(
       CALLBACK_URL,
       errorHandler(async (req, res) => {
-        console.log('entry---query code is --', req.query.code);
         if (typeof req.query.code === 'string') {
           req.session.user = await getUserDetails(`${protocol}${res.locals.host}${port}`, req.query.code, CALLBACK_URL);
-          console.log('Roles are -- ', req.session.user.roles);
           const role: string = config.get('services.idam.userRole');
-          console.log('Allowed role is -- ', role);
           if (req.session.user.roles.includes(role)) {
             req.session.save(() => res.redirect('/'));
           }
         }
-        console.log('Logging out------');
         res.redirect(SIGN_IN_URL);
       })
     );
