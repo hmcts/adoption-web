@@ -18,6 +18,7 @@ pactWith(
       email: 'user@hmcts.net',
       givenName: 'Firstname',
       familyName: 'Surname',
+      roles: ['adoption-citizen-user'],
     };
 
     beforeEach(() => {
