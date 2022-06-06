@@ -1,23 +1,12 @@
 import config from 'config';
 import { Application, NextFunction, Response } from 'express';
 
-import { getRedirectUrl, getSystemUser, getUserDetails } from '../../app/auth/user/oidc';
+import { getRedirectUrl, getUserDetails } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
 import { LanguagePreference } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
-import {
-  CALLBACK_URL,
-  ELIGIBILITY_URL,
-  HOME_URL,
-  LA_PORTAL,
-  LA_PORTAL_KBA_CALLBACK,
-  LA_PORTAL_KBA_CASE_REF,
-  LA_PORTAL_TASK_LIST,
-  SIGN_IN_URL,
-  SIGN_OUT_URL,
-} from '../../steps/urls';
+import { CALLBACK_URL, ELIGIBILITY_URL, HOME_URL, LA_PORTAL, SIGN_IN_URL, SIGN_OUT_URL } from '../../steps/urls';
 
-//TODO remove applicant2 related stuff
 /**
  * Adds the oidc middleware to add oauth authentication
  */
@@ -38,24 +27,9 @@ export class OidcMiddleware {
       errorHandler(async (req, res) => {
         if (typeof req.query.code === 'string') {
           req.session.user = await getUserDetails(`${protocol}${res.locals.host}${port}`, req.query.code, CALLBACK_URL);
-          console.log('..........citizen user', req.session.user);
           req.session.save(() => res.redirect(HOME_URL));
         } else {
           res.redirect(SIGN_IN_URL);
-        }
-      })
-    );
-
-    app.get(
-      LA_PORTAL_KBA_CALLBACK,
-      errorHandler(async (req: AppRequest, res) => {
-        console.log('.................outside', req.session.user, req.session.laPortalKba?.caseRef);
-        if (req.session.laPortalKba?.caseRef) {
-          req.session.user = await getSystemUser();
-          console.log('.................system user', req.session.user);
-          req.session.save(() => res.redirect(LA_PORTAL_TASK_LIST));
-        } else {
-          res.redirect(LA_PORTAL_KBA_CASE_REF);
         }
       })
     );
@@ -90,26 +64,6 @@ export class OidcMiddleware {
           return next();
         }
         res.redirect(SIGN_IN_URL);
-      })
-    );
-
-    app.use(
-      errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
-        if (!req.path.startsWith(LA_PORTAL)) {
-          return next();
-        }
-
-        if (req.session?.user) {
-          res.locals.isLoggedIn = true;
-          req.locals.api = getCaseApi(req.session.user, req.locals.logger);
-          if (!req.session.userCase) {
-            req.session.userCase = await req.locals.api.getCaseById(req.session.laPortalKba.caseRef!);
-            console.log('case retrieved.........');
-          }
-        }
-
-        return next();
-        // res.redirect(LA_PORTAL_KBA_CASE_REF);
       })
     );
   }
