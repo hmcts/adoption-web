@@ -27,14 +27,18 @@ export class OidcMiddleware {
     app.get(
       CALLBACK_URL,
       errorHandler(async (req, res) => {
-        console.log('entry---');
+        console.log('entry---query code is --', req.query.code);
         if (typeof req.query.code === 'string') {
           req.session.user = await getUserDetails(`${protocol}${res.locals.host}${port}`, req.query.code, CALLBACK_URL);
           console.log('Roles are -- ', req.session.user.roles);
-          req.session.save(() => res.redirect('/'));
-        } else {
-          res.redirect(SIGN_IN_URL);
+          const role: string = config.get('services.idam.userRole');
+          console.log('Allowed role is -- ', role);
+          if (req.session.user.roles.includes(role)) {
+            req.session.save(() => res.redirect('/'));
+          }
         }
+        console.log('Logging out------');
+        res.redirect(SIGN_IN_URL);
       })
     );
 

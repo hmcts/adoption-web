@@ -7,6 +7,7 @@ services:
     tokenURL: IDAM_API_URL
     clientID: IDAM_CLIENT_ID
     clientSecret: IDAM_SECRET
+    userRole: IDAM_ROLE
   case:
     url: CCD_URL
   payments:
