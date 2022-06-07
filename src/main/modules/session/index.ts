@@ -14,7 +14,7 @@ export const cookieMaxAge = 21 * (60 * 1000); // 21 minutes
 export class SessionStorage {
   public enableFor(app: Application): void {
     app.use(cookieParser());
-    app.set('trust proxy', 1);
+    //app.set('trust proxy', 1);
 
     app.use(
       session({
