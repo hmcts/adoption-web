@@ -100,6 +100,31 @@ describe('CaseApi', () => {
     await expect(api.getOrCreateCase(serviceType, userDetails)).rejects.toThrow('Too many cases assigned to user.');
   });
 
+  test('Should retrieve the first case if two cases found', async () => {
+    const firstMockCase = {
+      id: '1',
+      state: State.Draft,
+      case_data: {},
+    };
+    const secondMockCase = {
+      id: '2',
+      state: State.Draft,
+      case_data: {},
+    };
+
+    mockedAxios.get.mockResolvedValue({
+      data: [firstMockCase, secondMockCase],
+    });
+
+    const userCase = await api.getOrCreateCase(serviceType, userDetails);
+
+    expect(userCase).toStrictEqual({
+      id: '1',
+      state: State.Draft,
+      case_data: {},
+    });
+  });
+
   test('Should update case', async () => {
     mockedAxios.get.mockResolvedValue({ data: { token: '123' } });
     mockedAxios.post.mockResolvedValue({
