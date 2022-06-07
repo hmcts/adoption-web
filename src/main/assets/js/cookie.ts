@@ -40,11 +40,21 @@ cookieManager.init({
     {
       categoryName: 'essential',
       optional: false,
-      cookies: ['adoption-web-cookie-preferences'],
+      cookies: [
+        'adoption-web-cookie-preferences',
+        'adoption-web-session',
+        '_oauth2_proxy',
+        'ajs_user_id',
+        'ajs_group_id',
+        'ajs_anonymous_id',
+        'Idam.Session',
+        'seen_cookie_message',
+        '_oauth2_proxy',
+      ],
     },
     {
       categoryName: 'analytics',
-      cookies: ['_ga', '_gid', 'gat'],
+      cookies: ['_ga', '_gid', '_gat_UA-'],
     },
     {
       categoryName: 'apm',
@@ -72,6 +82,12 @@ cookieManager.init({
         buttonClass: 'cookie-banner-hide-button',
       },
     ],
+  },
+  additionalOptions: {
+    defaultConsent: false,
+    deleteUndefinedCookies: false,
+    disableCookieBanner: false,
+    disableCookiePreferencesForm: false,
   },
 });
 
