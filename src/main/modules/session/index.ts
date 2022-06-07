@@ -14,6 +14,7 @@ export const cookieMaxAge = 21 * (60 * 1000); // 21 minutes
 export class SessionStorage {
   public enableFor(app: Application): void {
     app.use(cookieParser());
+    app.set('trust proxy', 1);
 
     app.use(
       session({
@@ -25,6 +26,8 @@ export class SessionStorage {
           httpOnly: true,
           ...(config.get('session.secureCookie') === 'true' ? { secure: true } : {}),
           maxAge: cookieMaxAge,
+          sameSite: 'lax', // required for the oauth2 redirect
+          //secure: !app.locals.developmentMode,
         },
         rolling: true, // Renew the cookie for another 20 minutes on each request
         store: this.getStore(app),
