@@ -105,7 +105,7 @@ describe('task-list > content', () => {
               id: 'adoption-certificate-details',
               text: "Child's details",
               status: 'COMPLETED',
-              href: '/children/full-name-after-adoption',
+              href: '/children/full-name',
             },
             {
               id: 'adoption-agency',
@@ -145,7 +145,7 @@ describe('task-list > content', () => {
               id: 'children-birth-certificate-details',
               text: 'Birth certificate details',
               status: 'COMPLETED',
-              href: '/children/full-name',
+              href: '/children/date-of-birth',
             },
             {
               id: 'birth-mother-details',
@@ -221,7 +221,7 @@ describe('task-list > content', () => {
               text: 'Date child moved in with you',
             },
             {
-              href: '/children/full-name-after-adoption',
+              href: '/children/full-name',
               id: 'adoption-certificate-details',
               status: 'COMPLETED',
               text: "Child's details",
@@ -275,7 +275,7 @@ describe('task-list > content', () => {
         {
           items: [
             {
-              href: '/children/full-name',
+              href: '/children/date-of-birth',
               id: 'children-birth-certificate-details',
               status: 'COMPLETED',
               text: 'Birth certificate details',

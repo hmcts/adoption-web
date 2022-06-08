@@ -14,11 +14,7 @@ module.exports = {
   },
 
   async childDetailsBirthCertificaterSection() {
-    await I.retry(3).waitForText("What is the child's full name?");
-    await I.retry(3).fillField(this.fields.childrenFirstName, 'William');
-    await I.retry(3).fillField(this.fields.childrenLastName, 'Jacob');
-    await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.retry(3).waitForText("What is the child's date of birth?");
     await I.retry(3).fillField(this.fields.childrenDateOfBirthDay, '10');
     await I.retry(3).fillField(this.fields.childrenDateOfBirthMonth, '10');
     await I.wait(2);

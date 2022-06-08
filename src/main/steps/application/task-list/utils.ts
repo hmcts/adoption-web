@@ -135,8 +135,6 @@ export const getChildrenPlacementOrderStatus = (userCase: CaseWithId): SectionSt
 };
 
 export const getChildrenBirthCertificateStatus = (userCase: CaseWithId): SectionStatus => {
-  const childrenFirstName = userCase.childrenFirstName;
-  const childrenLastName = userCase.childrenLastName;
   const childrenDateOfBirth = userCase.childrenDateOfBirth as CaseDate;
   const dateOfBirthComplete =
     !areDateFieldsFilledIn(childrenDateOfBirth) &&
@@ -157,11 +155,11 @@ export const getChildrenBirthCertificateStatus = (userCase: CaseWithId): Section
     !!nationality.length &&
     (!nationality.includes('Other') || (!!nationalities.length && nationality.includes('Other')));
 
-  if (childrenFirstName && childrenLastName && dateOfBirthComplete && sexAtBirthComplete && nationalityComplete) {
+  if (dateOfBirthComplete && sexAtBirthComplete && nationalityComplete) {
     return SectionStatus.COMPLETED;
   }
 
-  if (!childrenFirstName && !childrenLastName && !dateOfBirthComplete && !sexAtBirthComplete && !nationalityComplete) {
+  if (!dateOfBirthComplete && !sexAtBirthComplete && !nationalityComplete) {
     return SectionStatus.NOT_STARTED;
   }
 
@@ -171,12 +169,14 @@ export const getChildrenBirthCertificateStatus = (userCase: CaseWithId): Section
 export const getAdoptionCertificateDetailsStatus = (userCase: CaseWithId): SectionStatus => {
   const firstName = userCase.childrenFirstNameAfterAdoption;
   const lastName = userCase.childrenLastNameAfterAdoption;
+  const childrenFirstName = userCase.childrenFirstName;
+  const childrenLastName = userCase.childrenLastName;
 
-  if (firstName && lastName) {
+  if (childrenFirstName && childrenLastName && firstName && lastName) {
     return SectionStatus.COMPLETED;
   }
 
-  if (!firstName && !lastName) {
+  if (!childrenFirstName && !childrenLastName && !firstName && !lastName) {
     return SectionStatus.NOT_STARTED;
   }
 
