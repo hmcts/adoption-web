@@ -8,7 +8,7 @@ Scenario(
     taskListPage,
     childDetailsPlacementOrderPage,
     childrenBirthCertificatePage,
-    childAdoptionCertificateDetailsPage,
+    childsDetailsPage,
     childBirthMothersDetailsPage,
     childBirthFatherDetailsPage,
     childOtherParentDetailsPage,
@@ -59,7 +59,8 @@ Scenario(
     await taskListPage.verifyChildBirthCertificateDetailsStatus();
 
     await taskListPage.selectChildAdoptionCertificateDetails();
-    await childAdoptionCertificateDetailsPage.childNameAfterAdoptionDetailsSection();
+    await childsDetailsPage.childFullNameSection();
+    await childsDetailsPage.childNameAfterAdoptionDetailsSection();
     await taskListPage.verifyAdoptionCertificateDetailStatus();
 
     await taskListPage.selectChildBirthMotherDetails();

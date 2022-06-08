@@ -83,9 +83,6 @@ const fields: FromApiConverters = {
   dateSubmitted: data => ({
     dateSubmitted: new Date(data.dateSubmitted as string),
   }),
-  dueDate: data => ({
-    dueDate: dayjs(data.dueDate).format('D MMMM YYYY'),
-  }),
 };
 
 const fromApiDate = date => {

@@ -1,88 +1,93 @@
-import * as cookieManager from '@hmcts/cookie-manager';
+import cookieManager from '@hmcts/cookie-manager';
 
-import { getById, qs } from './selectors';
+cookieManager.on('UserPreferencesLoaded', preferences => {
+  const dataLayer = window.dataLayer || [];
+  dataLayer.push({ event: 'Cookie Preferences', cookiePreferences: preferences });
+});
 
-const cookieBanner = qs('#cm-cookie-banner');
-const cookieBannerDecision = cookieBanner?.querySelector('.govuk-cookie-banner__decision') as HTMLInputElement;
-const cookieBannerConfirmation = cookieBanner?.querySelector('.govuk-cookie-banner__confirmation') as HTMLInputElement;
-const locale = (getById('cookie_locale') as HTMLInputElement)?.value;
-
-function cookieBannerAccept() {
-  const confirmationMessage = cookieBannerConfirmation?.querySelector('p') as HTMLInputElement;
-  if (locale === 'cy') {
-    confirmationMessage.innerHTML = 'Rydych chi wedi derbyn cwcis ychwanegol. ' + confirmationMessage.innerHTML;
-  } else {
-    confirmationMessage.innerHTML = 'You’ve accepted additional cookies. ' + confirmationMessage.innerHTML;
-  }
-}
-
-function cookieBannerReject() {
-  const confirmationMessage = cookieBannerConfirmation?.querySelector('p') as HTMLInputElement;
-  if (locale === 'cy') {
-    confirmationMessage.innerHTML = 'Rydych chi wedi gwrthod cwcis ychwanegol. ' + confirmationMessage.innerHTML;
-  } else {
-    confirmationMessage.innerHTML = 'You’ve rejected additional cookies. ' + confirmationMessage.innerHTML;
-  }
-}
-
-function cookieBannerSaved() {
-  cookieBannerDecision.hidden = true;
-  cookieBannerConfirmation.hidden = false;
-}
-
-function preferenceFormSaved() {
-  const message = qs('.cookie-preference-success') as HTMLInputElement;
-  message.style.display = 'block';
-  document.body.scrollTop = 0; // For Safari
-  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-}
-
-function cookiePreferencesUpdated(cookieStatus) {
+cookieManager.on('UserPreferencesSaved', preferences => {
   const dataLayer = window.dataLayer || [];
   const dtrum = window.dtrum;
 
-  dataLayer.push({ event: 'Cookie Preferences', cookiePreferences: cookieStatus });
+  dataLayer.push({ event: 'Cookie Preferences', cookiePreferences: preferences });
 
   if (dtrum !== undefined) {
-    if (cookieStatus.apm === 'on') {
+    if (preferences.apm === 'on') {
       dtrum.enable();
       dtrum.enableSessionReplay();
     } else {
-      dtrum.disable();
       dtrum.disableSessionReplay();
+      dtrum.disable();
     }
   }
-}
+});
+
+cookieManager.on('PreferenceFormSubmitted', () => {
+  const message = document.querySelector('.cookie-preference-success') as HTMLElement;
+  message.style.display = 'block';
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+});
 
 cookieManager.init({
-  'user-preference-cookie-name': 'adoption-web-cookie-preferences',
-  'user-preference-saved-callback': cookiePreferencesUpdated,
-  'preference-form-id': 'cm-preference-form',
-  'preference-form-saved-callback': preferenceFormSaved,
-  'set-checkboxes-in-preference-form': true,
-  'cookie-banner-id': 'cm-cookie-banner',
-  'cookie-banner-visible-on-page-with-preference-form': false,
-  'cookie-banner-reject-callback': cookieBannerReject,
-  'cookie-banner-accept-callback': cookieBannerAccept,
-  'cookie-banner-saved-callback': cookieBannerSaved,
-  'cookie-banner-auto-hide': false,
-  'cookie-manifest': [
+  userPreferences: {
+    cookieName: 'adoption-web-cookie-preferences',
+  },
+  cookieBanner: {
+    class: 'cookie-banner',
+    actions: [
+      {
+        name: 'accept',
+        buttonClass: 'cookie-banner-accept-button',
+        confirmationClass: 'cookie-banner-accept-message',
+        consent: true,
+      },
+      {
+        name: 'reject',
+        buttonClass: 'cookie-banner-reject-button',
+        confirmationClass: 'cookie-banner-reject-message',
+        consent: false,
+      },
+      {
+        name: 'hide',
+        buttonClass: 'cookie-banner-hide-button',
+      },
+    ],
+  },
+  preferencesForm: {
+    class: 'cookie-preferences-form',
+  },
+  cookieManifest: [
     {
-      'category-name': 'essential',
+      categoryName: 'essential',
       optional: false,
-      cookies: ['adoption-web-cookie-preferences', '_oauth2_proxy', 'ajs_user_id', 'ajs_group_id', 'ajs_anonymous_id'],
+      cookies: [
+        'adoption-web-cookie-preferences',
+        'adoption-web-session',
+        '_oauth2_proxy',
+        'ajs_user_id',
+        'ajs_group_id',
+        'ajs_anonymous_id',
+        'Idam.Session',
+        'seen_cookie_message',
+        '_oauth2_proxy',
+      ],
     },
     {
-      'category-name': 'analytics',
-      optional: true,
-      cookies: ['_ga', '_gid', 'gat'],
+      categoryName: 'analytics',
+      cookies: ['_ga', '_gid', '_gat_UA-'],
     },
     {
-      'category-name': 'apm',
-      optional: true,
+      categoryName: 'apm',
       cookies: ['dtCookie', 'dtLatC', 'dtPC', 'dtSa', 'rxVisitor', 'rxvt'],
     },
   ],
+  additionalOptions: {
+    defaultConsent: false,
+    deleteUndefinedCookies: false,
+    disableCookieBanner: false,
+    disableCookiePreferencesForm: false,
+  },
 });
 
 declare global {

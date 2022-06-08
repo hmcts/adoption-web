@@ -26,6 +26,7 @@ export const APPLICANT_1_CONTACT_DETAILS: PageLink = `${APPLICANT_1}/contact-det
 export const APPLICANT_1_FIND_ADDRESS: PageLink = `${APPLICANT_1}/address/lookup`;
 export const APPLICANT_1_SELECT_ADDRESS: PageLink = `${APPLICANT_1}/address/select`;
 export const APPLICANT_1_MANUAL_ADDRESS: PageLink = `${APPLICANT_1}/address/manual`;
+export const APPLICANT_1_LANGUAGE_PREFERENCE: PageLink = `${APPLICANT_1}/language-preference`;
 
 export const APPLICANT_2: PageLink = '/applicant2';
 export const APPLICANT_2_FULL_NAME: PageLink = `${APPLICANT_2}/full-name`;
@@ -37,6 +38,7 @@ export const APPLICANT_2_FIND_ADDRESS: PageLink = `${APPLICANT_2}/address/lookup
 export const APPLICANT_2_SELECT_ADDRESS: PageLink = `${APPLICANT_2}/address/select`;
 export const APPLICANT_2_MANUAL_ADDRESS: PageLink = `${APPLICANT_2}/address/manual`;
 export const APPLICANT_2_CONTACT_DETAILS: PageLink = `${APPLICANT_2}/contact-details`;
+export const APPLICANT_2_LANGUAGE_PREFERENCE: PageLink = `${APPLICANT_2}/language-preference`;
 
 export const CHILDREN: PageLink = '/children';
 export const CHILDREN_PLACEMENT_ORDER_TYPE: PageLink = `${CHILDREN}/placement-order-type`;
@@ -154,6 +156,8 @@ export const PRIVACY_POLICY: PageLink = '/privacy-policy';
 export const ACCESSIBILITY_STATEMENT: PageLink = '/accessibility-statement';
 export const TERMS_AND_CONDITIONS: PageLink = '/terms-and-conditions';
 export const CONTACT_US: PageLink = '/contact-us';
+
+export const SAVE_AS_DRAFT: PageLink = '/save-as-draft';
 
 /*********************************** LA PORTAL URLS ***********************************/
 export const LA_PORTAL = '/la-portal';

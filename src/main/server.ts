@@ -92,6 +92,7 @@ new SessionStorage().enableFor(app);
 new TooBusy().enableFor(app);
 new HealthCheck().enableFor(app);
 new CSRFToken().enableFor(app);
+new LanguageToggle().enableFor(app);
 new AuthProvider().enable();
 new OidcMiddleware().enableFor(app);
 new KbaMiddleware().enableFor(app);
