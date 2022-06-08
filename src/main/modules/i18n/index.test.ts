@@ -34,33 +34,5 @@ describe('i18n', () => {
       new LanguageToggle().enableFor(mockApp);
       expect(req.session.lang).toBe('en');
     });
-
-    test('should save language preference in ccd data store', () => {
-      new LanguageToggle().enableFor(mockApp);
-      expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(
-        '1234',
-        { applicant1LanguagePreference: 'ENGLISH' },
-        'citizen-update-application'
-      );
-    });
-
-    describe('when there is an error in saving language preference in ccd', () => {
-      beforeEach(() => {
-        req = mockRequest();
-        req.method = 'GET';
-        req.query.lng = 'cy';
-
-        (req.locals.api.triggerEvent as jest.Mock).mockRejectedValueOnce('MOCK_ERROR');
-      });
-
-      test('should handle error', () => {
-        new LanguageToggle().enableFor(mockApp);
-        expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(
-          '1234',
-          { applicant1LanguagePreference: 'WELSH' },
-          'citizen-update-application'
-        );
-      });
-    });
   });
 });

@@ -1,5 +1,12 @@
 import { CaseWithId } from '../../../main/app/case/case';
-import { ApplyingWith, Gender, Nationality, YesNoNotsure, YesOrNo } from '../../../main/app/case/definition';
+import {
+  ApplyingWith,
+  Gender,
+  LanguagePreference,
+  Nationality,
+  YesNoNotsure,
+  YesOrNo,
+} from '../../../main/app/case/definition';
 
 export default {
   applyingWith: ApplyingWith.ALONE,
@@ -33,6 +40,7 @@ export default {
   applicant1AddressTown: 'MOCK_ADDRESS_TOWN',
   applicant1AddressCounty: 'MOCK_ADDRESS_COUNTY',
   applicant1AddressPostcode: 'MOCK_ADDRESS_POSTCODE',
+  applicant1LanguagePreference: LanguagePreference.ENGLISH,
 
   applicant2FirstNames: 'MOCK_APPLICANT1_FIRST_NAMES',
   applicant2LastNames: 'MOCK_APPLICANT1_LAST_NAMES',
@@ -46,6 +54,7 @@ export default {
   applicant2AddressTown: 'MOCK_ADDRESS_TOWN',
   applicant2AddressCounty: 'MOCK_ADDRESS_COUNTY',
   applicant2AddressPostcode: 'MOCK_ADDRESS_POSTCODE',
+  applicant2LanguagePreference: LanguagePreference.ENGLISH,
 
   childrenFirstName: 'CHILDREN_FIRST_NAMES',
   childrenLastName: 'CHILDREN_LAST_NAMES',

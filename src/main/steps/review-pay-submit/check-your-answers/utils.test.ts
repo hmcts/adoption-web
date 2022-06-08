@@ -388,6 +388,32 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                 ],
               },
             },
+            {
+              key: { text: 'Court orders served by email' },
+              value: { text: 'Yes' },
+              actions: {
+                items: [
+                  {
+                    href: '/applicant1/contact-details?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Court orders served by email',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Emails and documents language' },
+              value: { text: 'English' },
+              actions: {
+                items: [
+                  {
+                    href: '/applicant1/language-preference?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Emails and documents language',
+                  },
+                ],
+              },
+            },
           ],
         },
       },
@@ -490,6 +516,32 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                 ],
               },
             },
+            {
+              key: { text: 'Court orders served by email' },
+              value: { text: 'Yes' },
+              actions: {
+                items: [
+                  {
+                    href: '/applicant1/contact-details?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Court orders served by email',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Emails and documents language' },
+              value: { text: 'English' },
+              actions: {
+                items: [
+                  {
+                    href: '/applicant1/language-preference?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Emails and documents language',
+                  },
+                ],
+              },
+            },
           ],
         },
       },
@@ -588,6 +640,32 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                     href: '/applicant2/contact-details?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
                     visuallyHiddenText: 'Phone number',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Court orders served by email' },
+              value: { text: 'Yes' },
+              actions: {
+                items: [
+                  {
+                    href: '/applicant2/contact-details?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Court orders served by email',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Emails and documents language' },
+              value: { text: 'English' },
+              actions: {
+                items: [
+                  {
+                    href: '/applicant2/language-preference?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Emails and documents language',
                   },
                 ],
               },

@@ -1,5 +1,5 @@
 import { Checkbox } from '../../../main/app/case/case';
-import { DocumentType, YesOrNo } from '../../../main/app/case/definition';
+import { DocumentType } from '../../../main/app/case/definition';
 import { BrowserCase } from '../../steps/common';
 
 export const completeCase: Partial<BrowserCase> = {
@@ -9,7 +9,6 @@ export const completeCase: Partial<BrowserCase> = {
   applicant1AddressPostcode: 'SW1A 1AA',
   applicant1AddressTown: 'LONDON',
   applicant1FirstNames: 'Test your name',
-  applicant1HelpPayingNeeded: YesOrNo.NO,
   applicant1LastNames: 'Test your last name',
   applicant1PhoneNumber: '',
   applicant2Address1: '102 MINISTRY OF JUSTICE, SEVENTH FLOOR, PETTY FRANCE',
@@ -20,7 +19,6 @@ export const completeCase: Partial<BrowserCase> = {
   applicant2EmailAddress: 'simulate-delivered@notifications.service.gov.uk',
   applicant2FirstNames: 'Test their name',
   applicant2LastNames: 'Test their last name',
-  applyForFinancialOrder: YesOrNo.NO,
   applicant1CannotUpload: Checkbox.Checked,
   applicant1CannotUploadDocuments: [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE],
   applicant1UploadedFiles: [],

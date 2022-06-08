@@ -188,9 +188,7 @@ export interface Application {
   jurisdictionApplicant2Domicile: YesOrNo;
   jurisdictionApp1HabituallyResLastTwelveMonths: YesOrNo;
   jurisdictionApp1HabituallyResLastSixMonths: YesOrNo;
-  jurisdictionResidualEligible: YesOrNo;
   jurisdictionBothLastHabituallyResident: YesOrNo;
-  jurisdictionConnections: JurisdictionConnections[];
   solServiceDateOfService: DateAsString;
   solServiceDocumentsServed: string;
   solServiceOnWhomServed: string;
@@ -343,6 +341,7 @@ export interface CaseData {
   applicant2AddressSameAsApplicant1: string;
   applicant2ContactDetails: ContactDetails[];
   applicant2ContactDetailsConsent: YesOrNo;
+  applicant2LanguagePreference?: LanguagePreference;
 
   childrenFirstName: string;
   childrenLastName: string;
@@ -524,9 +523,7 @@ export interface CaseData {
   jurisdictionApplicant2Domicile: YesOrNo;
   jurisdictionApp1HabituallyResLastTwelveMonths: YesOrNo;
   jurisdictionApp1HabituallyResLastSixMonths: YesOrNo;
-  jurisdictionResidualEligible: YesOrNo;
   jurisdictionBothLastHabituallyResident: YesOrNo;
-  jurisdictionConnections: JurisdictionConnections[];
   solServiceDateOfService: DateAsString;
   solServiceDocumentsServed: string;
   solServiceOnWhomServed: string;
@@ -668,7 +665,6 @@ export interface CaseData {
   confidentialDocumentsUploaded: ListValue<ConfidentialDivorceDocument>[];
   generalOrders: ListValue<DivorceGeneralOrder>[];
   previousCaseId: CaseLink;
-  dueDate: DateAsString;
   notes: ListValue<CaseNote>[];
   note: string;
   bulkListCaseReference: string;
@@ -873,7 +869,6 @@ export interface Jurisdiction {
   App1HabituallyResLastSixMonths: YesOrNo;
   ResidualEligible: YesOrNo;
   BothLastHabituallyResident: YesOrNo;
-  Connections: JurisdictionConnections[];
 }
 
 export interface LabelContent {
@@ -1263,62 +1258,6 @@ export const enum JudgeCostsClaimGranted {
   YES = 'Yes',
   NO = 'No',
   ADJOURN = 'Adjourn',
-}
-
-/**
- * Values:
- * - `J` - APP_1_RESIDENT_JOINT
- * - `A` - APP_1_APP_2_RESIDENT
- * - `B` - APP_1_APP_2_LAST_RESIDENT
- * - `C` - APP_2_RESIDENT
- * - `D` - APP_1_RESIDENT_TWELVE_MONTHS
- * - `E` - APP_1_RESIDENT_SIX_MONTHS
- * - `F` - APP_1_APP_2_DOMICILED
- * - `G` - APP_1_DOMICILED
- * - `H` - APP_2_DOMICILED
- * - `I` - RESIDUAL_JURISDICTION
- */
-export const enum JurisdictionConnections {
-  /**
-   * APP_1_RESIDENT_JOINT
-   */
-  APP_1_RESIDENT_JOINT = 'J',
-  /**
-   * APP_1_APP_2_RESIDENT
-   */
-  APP_1_APP_2_RESIDENT = 'A',
-  /**
-   * APP_1_APP_2_LAST_RESIDENT
-   */
-  APP_1_APP_2_LAST_RESIDENT = 'B',
-  /**
-   * APP_2_RESIDENT
-   */
-  APP_2_RESIDENT = 'C',
-  /**
-   * APP_1_RESIDENT_TWELVE_MONTHS
-   */
-  APP_1_RESIDENT_TWELVE_MONTHS = 'D',
-  /**
-   * APP_1_RESIDENT_SIX_MONTHS
-   */
-  APP_1_RESIDENT_SIX_MONTHS = 'E',
-  /**
-   * APP_1_APP_2_DOMICILED
-   */
-  APP_1_APP_2_DOMICILED = 'F',
-  /**
-   * APP_1_DOMICILED
-   */
-  APP_1_DOMICILED = 'G',
-  /**
-   * APP_2_DOMICILED
-   */
-  APP_2_DOMICILED = 'H',
-  /**
-   * RESIDUAL_JURISDICTION
-   */
-  RESIDUAL_JURISDICTION = 'I',
 }
 
 export const enum LanguagePreference {
