@@ -57,6 +57,7 @@ Scenario(
     await taskListPage.verifyChildBirthCertificateDetailsStatus();
 
     await taskListPage.selectChildAdoptionCertificateDetails();
+    await childsDetailsPage.childFullNameSection();
     await childsDetailsPage.childNameAfterAdoptionDetailsSection();
     await taskListPage.verifyAdoptionCertificateDetailStatus();
 
