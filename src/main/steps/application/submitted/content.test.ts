@@ -30,9 +30,9 @@ const cyContent = {
   line2:
     'Unwaith bydd y gorchymyn mabwysiadu yn cael ei gymeradwyo, bydd tystysgrif mabwysiadu yn cael ei chreu. Bydd hon yn disodli tystysgrif geni’r plentyn. Gellir ei archebu o’r Swyddfa Gofrestru Gyffredinol am ffi fechan.',
   printApplication: 'Argraffu eich cais',
-  helpUs: 'Help us improve this service (in welsh)',
+  helpUs: 'Helpwch ni i wella’r gwasanaeth hwn',
   line3:
-    'Please help us improve this service by <a  target="_blank" href="https://www.smartsurvey.co.uk/s/SurveyExit/?service=Adoption">leaving feedback</a> (in welsh)',
+    'Helpwch ni i wella’r gwasanaeth hwn drwy <a  target="_blank" href="https://www.smartsurvey.co.uk/s/SurveyExit/?service=Adoption">adael adborth</a>',
 };
 
 describe('application-submmitted > content', () => {
