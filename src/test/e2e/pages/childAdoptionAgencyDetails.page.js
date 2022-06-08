@@ -71,4 +71,23 @@ module.exports = {
     await I.retry(3).click('Save and continue');
     await I.wait(4);
   },
+  async childAdoptionAgencyDetailsSaveAsDraft() {
+    await I.retry(3).fillField(this.localAuthority.localAuthorityName, adoptionAgencyDetails.adopAgencyOrLaName);
+
+    await I.retry(3).fillField(
+      this.localAuthority.localAuthorityContactName,
+      adoptionAgencyDetails.adopAgencyOrLaContactName
+    );
+    await I.retry(3).fillField(
+      this.localAuthority.localAuthorityPhoneNumber,
+      adoptionAgencyDetails.adopAgencyOrLaPhoneNumber
+    );
+    await I.retry(3).fillField(
+      this.localAuthority.localAuthorityContactEmail,
+      adoptionAgencyDetails.adopAgencyOrLaContactEmail
+    );
+    await I.wait(2);
+    await I.retry(3).click('Save as draft');
+    await I.wait(2);
+  },
 };

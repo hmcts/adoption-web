@@ -44,6 +44,8 @@ export default class NationalityPostController extends PostController<AnyObject>
         propertyName: `${this.fieldPrefix}Nationality`,
         errorType: ValidationError.ADD_BUTTON_NOT_CLICKED,
       });
+      this.filterErrorsForSaveAsDraft(req);
+
       return this.redirect(req, res, req.url);
     }
 
