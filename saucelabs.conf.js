@@ -113,6 +113,7 @@ const setupConfig = {
     uploadDocumentsDetailsPage: './src/test/e2e/pages/uploadDocumentsDetails.page.js',
     dateChildMovedinDetailsPage: './src/test/e2e/pages/dateChildMovedinDetails.page.js',
     chooseYourFamilyCourtDetailsPage: './src/test/e2e/pages/chooseYourFamilyCourtDetails.page.js',
+    saveAsDraftPage: './src/test/e2e/pages/saveAsDraft.page',
   },
   mocha: {
     reporterOptions: {

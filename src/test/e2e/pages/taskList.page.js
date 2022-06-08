@@ -146,6 +146,11 @@ module.exports = {
     await I.retry(3).see('COMPLETED', this.childDetails.childrenBirthFatherDetailsStatus);
   },
 
+  async verifyChildBirthFatherInProgresStatus() {
+    await I.retry(3).waitForSelector(this.childDetails.childrenBirthFatherDetailsStatus, 30);
+    await I.retry(3).see('IN PROGRESS', this.childDetails.childrenBirthFatherDetailsStatus);
+  },
+
   async selectChildAdoptionAgencyDetails() {
     await I.retry(3).waitForSelector(this.childDetails.adoptionAgencyLink, 30);
     await I.retry(3).click(this.childDetails.adoptionAgencyLink);
@@ -155,6 +160,11 @@ module.exports = {
   async verifyChildAdoptionAgencyDetailsStatus() {
     await I.retry(3).waitForSelector(this.childDetails.adoptionAgencyDetailsStatus, 30);
     await I.retry(3).see('COMPLETED', this.childDetails.adoptionAgencyDetailsStatus);
+  },
+
+  async verifyChildAdoptionAgencyInProgresStatus() {
+    await I.retry(3).waitForSelector(this.childDetails.adoptionAgencyDetailsStatus, 30);
+    await I.retry(3).see('IN PROGRESS', this.childDetails.adoptionAgencyDetailsStatus);
   },
 
   async selectSiblingDetails() {

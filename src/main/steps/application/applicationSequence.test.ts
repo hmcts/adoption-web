@@ -1,8 +1,8 @@
 import { applicationSequence } from './applicationSequence';
 
 describe('applicationSequence', () => {
-  test('should contain 10 entries in applicant 1 screen sequence', () => {
-    expect(applicationSequence).toHaveLength(11);
+  test('should contain 12 entries in applicant 1 screen sequence', () => {
+    expect(applicationSequence).toHaveLength(12);
 
     expect(applicationSequence[0].url).toBe('/');
     expect(applicationSequence[0].getNextStep({})).toBe('/');
@@ -36,5 +36,8 @@ describe('applicationSequence', () => {
 
     expect(applicationSequence[10].url).toBe('/timed-out');
     expect(applicationSequence[10].getNextStep({})).toBe('/login');
+
+    expect(applicationSequence[11].url).toBe('/save-as-draft');
+    expect(applicationSequence[11].getNextStep({})).toBe('/task-list');
   });
 });
