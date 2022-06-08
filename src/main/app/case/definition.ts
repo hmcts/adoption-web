@@ -1594,6 +1594,7 @@ export const enum HttpStatus {
   NOT_EXTENDED = 'NOT_EXTENDED',
   NETWORK_AUTHENTICATION_REQUIRED = 'NETWORK_AUTHENTICATION_REQUIRED',
 }
+
 export const CASE_TYPE = 'A58';
 export const JURISDICTION = 'ADOPTION';
 export const CITIZEN_SUBMIT = 'citizen-submit-application';

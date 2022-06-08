@@ -36,6 +36,7 @@ export interface UserDetails {
   email: string;
   givenName: string;
   familyName: string;
+  isSystemUser?: boolean;
 }
 
 export interface Eligibility {
