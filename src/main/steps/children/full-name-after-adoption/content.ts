@@ -4,8 +4,9 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
   section: "The child's details",
-  title: "What will the child's full name be after adoption?",
-  line1: 'This will be on the adoption certificate so enter all their names as accurately as possible.',
+  title: "After adoption, what will be the child's full name?",
+  line1:
+    'If you are changing the child’s name, you should enter all their names here as accurately as possible. This is what will appear on both the adoption certificate and in the adoption register. Enter both first and last names even if there is no change.',
   firstName: 'First names',
   firstNameHint: '(Include any given or middle names)',
   lastName: 'Last names',
@@ -24,7 +25,7 @@ const cy: typeof en = () => ({
   section: 'Manylion y plentyn',
   title: 'Beth fydd enw llawn y plentyn ar ôl mabwysiadu?',
   line1:
-    'Bydd hwn wedi’i nodi ar y dystysgrif geni, felly sicrhewch bod eu henwau wedi’u nodi mor gywir ac sy’n bosib.',
+    'Os ydych yn newid enw’r plentyn, dylech nodi pob enw yma mor gywir â phosibl. Dyma beth fydd yn ymddangos ar y dystysgrif mabwysiadu ac yn y gofrestr plant mabwysiedig. Nodwch eu henwau cyntaf ac olaf, hyd yn oed os nad ydynt yn cael eu newid.',
   firstName: 'Enwau cyntaf',
   firstNameHint: '(Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol)',
   lastName: 'Cyfenwau',
