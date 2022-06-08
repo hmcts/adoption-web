@@ -110,7 +110,7 @@ export class GetController {
     });
   }
 
-  public getEventName(req: AppRequest): string {
+  protected getEventName(req: AppRequest): string {
     if (req.session.user?.isSystemUser) {
       return SYSTEM_USER_UPDATE;
     }
