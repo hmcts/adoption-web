@@ -1,52 +1,61 @@
+         
 {% from "govuk/components/cookie-banner/macro.njk" import govukCookieBanner %}
 
-{% set cookieMessageHTML %}
+{% set html %}
   <input type="hidden" name="cookie_locale" id="cookie_locale" value="{{ language }}">
-  <p class="govuk-body">{{ cookiesLine1 }}</p>
+  <p class="govuk-body">{{cookiesLine1}}</p>
   <p class="govuk-body">{{ cookiesLine2 }}</p>
 {% endset %}
 
-<div class="global-cookie-message" id="cm-cookie-banner" hidden>
-  {{ govukCookieBanner({
-    ariaLabel: cookiesHeading + " " + serviceName,
-    messages: [
-      {
-        headingText: cookiesHeading + " " + serviceName,
-        html: cookieMessageHTML,
-        classes: "govuk-cookie-banner__decision",
-        actions: [
-          {
-            text: acceptAnalyticsCookies,
-            attributes: {
-              'data-cm-action': 'accept'
-            }
-          },
-          {
-            text: rejectAnalyticsCookies,
-            attributes: {
-              'data-cm-action': 'reject'
-            }
-          },
-          {
-            text: viewCookies,
-            href: "/cookies"
-          }
-        ]
-      },
-      {
-        html: cookiesConfirmationMessage,
-        role: "alert",
-        classes: "govuk-cookie-banner__confirmation",
-        hidden: true,
-        actions: [
+{{ govukCookieBanner({
+  classes: 'cookie-banner',
+  ariaLabel: cookiesHeading + " " + serviceName,
+  hidden: true,
+  messages: [
+    {
+      classes: 'cookie-banner-message',
+      headingText: cookiesHeading + " " + serviceName,
+      html: html,
+      actions: [
         {
-          text: hideMessage,
-          attributes: {
-            'data-cm-action': 'hide'
-          }
+          classes: 'cookie-banner-accept-button',
+          text: acceptAnalyticsCookies,
+          type: "button"
+        },
+        {
+          classes: 'cookie-banner-reject-button',
+          text: rejectAnalyticsCookies,
+          type: "button"
+        },
+        {
+          text: viewCookies,
+          href: "/cookies"
         }
       ]
-      }
-    ]
-  }) }}
-</div>
+    },
+    {
+      classes: 'cookie-banner-accept-message',
+      html: cookiesAcceptedMessage,
+      role: "alert",
+      hidden: true,
+      actions: [
+        {
+          classes: 'cookie-banner-hide-button',
+          text: hideMessage
+        }
+      ]
+    },
+    {
+      classes: 'cookie-banner-reject-message',
+      html: cookiesRejectedMessage,
+      role: "alert",
+      hidden: true,
+      actions: [
+        {
+          classes: 'cookie-banner-hide-button',
+          text: hideMessage
+        }
+      ]
+    }
+  ]
+}) }}
