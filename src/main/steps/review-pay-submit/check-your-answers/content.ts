@@ -205,7 +205,7 @@ const cyContent: typeof enContent = {
     siblingOrHalfSibling: 'Brodyr/chwiorydd neu hanner brodyr/chwiorydd y plentyn',
     siblingCourtOrders: 'Gorchmynion llys brodyr/chwiorydd',
     siblingRelation: 'Sibling relation (in welsh)',
-    placementCourtName: ' Enw’r llys lle gwnaed y gorchymyn lleoli',
+    placementCourtName: 'Enw’r llys lle gwnaed y gorchymyn lleoli',
     familyCourtName: 'Enw’r llys teulu',
     uploadedDocuments: 'Dogfennau sydd wedi eu llwytho',
     documentsNotUploaded: 'Dogfennau heb eu llwytho',
