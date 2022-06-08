@@ -58,7 +58,7 @@ cookieManager.init({
     },
     {
       categoryName: 'apm',
-      cookies: ['dtCookie', 'dtLatC', 'dtPC', 'dtSa', 'dtValidationCookie', 'dtDisabled', 'rxVisitor', 'rxvt'],
+      cookies: ['dtCookie', 'dtLatC', 'dtPC', 'dtSa', 'rxVisitor', 'rxvt'],
     },
   ],
   cookieBanner: {
@@ -82,12 +82,6 @@ cookieManager.init({
         buttonClass: 'cookie-banner-hide-button',
       },
     ],
-  },
-  additionalOptions: {
-    defaultConsent: false,
-    deleteUndefinedCookies: false,
-    disableCookieBanner: false,
-    disableCookiePreferencesForm: false,
   },
 });
 
