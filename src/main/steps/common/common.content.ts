@@ -92,8 +92,10 @@ const en = {
   rejectAnalyticsCookies: 'Reject analytics cookies',
   viewCookies: 'View cookies',
   hideMessage: 'Hide this message',
-  cookiesConfirmationMessage:
-    '<p class="govuk-body">You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.</p>',
+  cookiesAcceptedMessage:
+    '<p class="govuk-body">You’ve accepted additional cookies. You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.</p>',
+  cookiesRejectedMessage:
+    '<p class="govuk-body">You’ve rejected additional cookies. You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.</p>',
   changeCookiesHeading: 'Change your cookie settings',
   allowAnalyticsCookies: 'Allow cookies that measure website use?',
   useAnalyticsCookies: 'Use cookies that measure my website use',
@@ -190,8 +192,10 @@ const cy: typeof en = {
   rejectAnalyticsCookies: 'Gwrthod cwcis dadansoddeg',
   viewCookies: 'Gweld cwcis',
   hideMessage: "Cuddio'r neges hon",
-  cookiesConfirmationMessage:
-    '<p class="govuk-body">Gallwch chi <a class="govuk-link" href="/cookies">newid eich gosodiadau cwci</a> ar unrhyw bryd.</p>',
+  cookiesAcceptedMessage:
+    '<p class="govuk-body">Rydych chi wedi derbyn cwcis ychwanegol. Gallwch chi <a class="govuk-link" href="/cookies">newid eich gosodiadau cwci</a> ar unrhyw bryd.</p>',
+  cookiesRejectedMessage:
+    '<p class="govuk-body">Rydych chi wedi gwrthod cwcis ychwanegol. Gallwch chi <a class="govuk-link" href="/cookies">newid eich gosodiadau cwci</a> ar unrhyw bryd.</p>',
   changeCookiesHeading: 'Newidiwch eich gosodiadau cwci',
   allowAnalyticsCookies: "Caniatáu cwcis sy'n mesur defnydd gwefan?",
   useAnalyticsCookies: "Defnyddio cwcis sy'n mesur fy nefnydd gwefan",
