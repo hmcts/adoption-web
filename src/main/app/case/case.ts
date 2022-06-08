@@ -8,10 +8,8 @@ import {
   ApplyingWith,
   CaseData,
   ContactDetails,
-  DateAsString,
   DocumentType,
   Gender,
-  JurisdictionConnections,
   LanguagePreference,
   ListValue,
   Nationality,
@@ -30,10 +28,6 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   otherApplicantRelation: 'otherApplicantRelation',
   dateChildMovedIn: 'dateChildMovedIn',
   applyingWith: 'applyingWith',
-  applicant1HelpPayingNeeded: 'applicant1HWFNeedHelp',
-  applicant1AlreadyAppliedForHelpPaying: 'applicant1HWFAppliedForFees',
-  applicant1HelpWithFeesRefNo: 'applicant1HWFReferenceNumber',
-  connections: 'jurisdictionConnections',
 
   applicant1FirstNames: 'applicant1FirstName',
   applicant1LastNames: 'applicant1LastName',
@@ -68,6 +62,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant2AddressSameAsApplicant1: 'applicant2AddressSameAsApplicant1',
   applicant2ContactDetails: 'applicant2ContactDetails',
   applicant2ContactDetailsConsent: 'applicant2ContactDetailsConsent',
+  applicant2LanguagePreference: 'applicant2LanguagePreference',
 
   childrenFirstName: 'childrenFirstName',
   childrenLastName: 'childrenLastName',
@@ -169,7 +164,6 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   addAnotherSiblingPlacementOrder: 'addAnotherSiblingPlacementOrder',
   selectedSiblingId: 'selectedSiblingId',
 
-  applyForFinancialOrder: 'applicant1FinancialOrder',
   applicant1DocumentsUploaded: 'applicant1DocumentsUploaded',
   applicant2DocumentsUploaded: 'applicant2DocumentsUploaded',
   documentsGenerated: 'documentsGenerated',
@@ -243,6 +237,7 @@ export interface Case {
   applicant2AddressPostcode?: string;
   applicant2ContactDetails?: ContactDetails[];
   applicant2ContactDetailsConsent?: YesOrNo;
+  applicant2LanguagePreference?: LanguagePreference;
 
   /***** Children *****/
   childrenFirstName?: string;
@@ -375,19 +370,11 @@ export interface Case {
   familyCourtName?: string;
   familyCourtEmailId?: string;
 
-  applicant1HelpPayingNeeded?: YesOrNo;
-  applicant1AlreadyAppliedForHelpPaying?: YesOrNo;
-  applicant1HelpWithFeesRefNo?: string;
-  jurisdictionResidualEligible?: Checkbox;
-  connections: JurisdictionConnections[];
-
-  applyForFinancialOrder?: YesOrNo;
   applicant2UploadedFiles?: UploadedFile[];
   documentsGenerated: ListValue<AdoptionDocument>[];
   applicant2DocumentsUploaded?: ListValue<Partial<AdoptionDocument> | null>[];
   applicant2CannotUpload?: Checkbox;
   applicant2CannotUploadDocuments?: DocumentType | DocumentType[];
-  dueDate?: DateAsString;
   caseReference?: string;
   dateSubmitted?: Date;
   applicationFeeOrderSummary: OrderSummary;

@@ -48,6 +48,7 @@ type SummaryListContent = PageContent & {
   gender: Record<string, string>;
   applyingWith: Record<string, string>;
   yesNoNotsure: Record<string, string>;
+  languagePreference: Record<string, string>;
 };
 
 const getSectionSummaryList = (rows: SummaryListRow[], content: PageContent): GovUkNunjucksSummary[] => {
@@ -274,6 +275,16 @@ export const applicantSummaryList = (
           key: keys.phoneNumber,
           value: userCase[`${prefix}PhoneNumber`],
           changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
+        },
+        {
+          key: keys.contactDetailsConsent,
+          value: userCase[`${prefix}ContactDetailsConsent`],
+          changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
+        },
+        {
+          key: keys.languagePreference,
+          value: content.languagePreference[userCase[`${prefix}LanguagePreference`]],
+          changeUrl: Urls[`${urlPrefix}LANGUAGE_PREFERENCE`],
         },
       ],
       content
