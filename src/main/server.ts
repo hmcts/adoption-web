@@ -33,6 +33,7 @@ const app = express();
 app.enable('trust proxy');
 
 app.use((req, res, next) => {
+  req['startTime'] = Date.now();
   if ((req.method === 'OPTIONS' || req.method === 'TRACE') && req.headers['max-forwards']) {
     return res.sendStatus(405);
   }
