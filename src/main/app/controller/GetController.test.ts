@@ -283,4 +283,19 @@ describe('GetController', () => {
       expect(res.redirect).not.toBeCalledWith('/request');
     });
   });
+
+  describe('getEventName', () => {
+    test('should return correct event name for citizen user', () => {
+      const controller = new GetController('page', () => ({}));
+      const req = mockRequest();
+      expect(controller.getEventName(req)).toBe('citizen-update-application');
+    });
+
+    test('should return correct event name for system user', () => {
+      const controller = new GetController('page', () => ({}));
+      const req = mockRequest();
+      req.session.user.isSystemUser = true;
+      expect(controller.getEventName(req)).toBe('system-user-update-application');
+    });
+  });
 });
