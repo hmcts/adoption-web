@@ -7,6 +7,9 @@ export interface HelmetConfig {
 }
 
 const googleAnalyticsDomain = '*.google-analytics.com';
+const tagManager = ['*.googletagmanager.com', 'https://tagmanager.google.com'];
+const azureBlob = '*.blob.core.windows.net';
+const doubleclick = 'stats.g.doubleclick.net';
 const self = "'self'";
 
 /**
@@ -24,8 +27,28 @@ export class Helmet {
   }
 
   private setContentSecurityPolicy(app: express.Express): void {
-    const scriptSrc = [self, googleAnalyticsDomain, "'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU='"];
+    const scriptSrc = [
+      self,
+      ...tagManager,
+      googleAnalyticsDomain,
+      "'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU='",
+      "'sha256-gpnWB3ld/ux/M3KURJluvKNOUQ82MPOtzVeCtqK7gmE='",
+      "'sha256-ZjdUCAt//TDpVjTXX+6bDfZNwte/RfSYJDgtfQtaoXs='",
+      "'sha256-FooZGzfstFw/L3iO1nVNFoGLxWpFKFVsOpewkb3rIaU='",
+      "'sha256-oXrQuOn5ue0eDsXk5lnJU7Mx7EpLv+H1yozv54mRMvA='",
+    ];
 
+    const connectSrc = [self, googleAnalyticsDomain, doubleclick];
+
+    const imgSrc = [
+      self,
+      azureBlob,
+      ...tagManager,
+      googleAnalyticsDomain,
+      'data:',
+      'https://ssl.gstatic.com',
+      'https://www.gstatic.com',
+    ];
     if (app.locals.developmentMode) {
       scriptSrc.push("'unsafe-eval'");
     }
@@ -33,13 +56,13 @@ export class Helmet {
     app.use(
       helmet.contentSecurityPolicy({
         directives: {
-          connectSrc: [self],
+          connectSrc,
           defaultSrc: ["'none'"],
-          fontSrc: [self, 'data:'],
-          imgSrc: [self, googleAnalyticsDomain],
+          fontSrc: [self, 'data:', 'https://fonts.gstatic.com'],
+          imgSrc,
           objectSrc: [self],
           scriptSrc,
-          styleSrc: [self],
+          styleSrc: [self, ...tagManager, "'unsafe-inline'", 'https://fonts.googleapis.com'],
         },
       }) as RequestHandler
     );

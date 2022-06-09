@@ -16,8 +16,8 @@ cookieManager.on('UserPreferencesSaved', preferences => {
       dtrum.enable();
       dtrum.enableSessionReplay();
     } else {
-      dtrum.disableSessionReplay();
       dtrum.disable();
+      dtrum.disableSessionReplay();
     }
   }
 });
@@ -32,27 +32,6 @@ cookieManager.on('PreferenceFormSubmitted', () => {
 cookieManager.init({
   userPreferences: {
     cookieName: 'adoption-web-cookie-preferences',
-  },
-  cookieBanner: {
-    class: 'cookie-banner',
-    actions: [
-      {
-        name: 'accept',
-        buttonClass: 'cookie-banner-accept-button',
-        confirmationClass: 'cookie-banner-accept-message',
-        consent: true,
-      },
-      {
-        name: 'reject',
-        buttonClass: 'cookie-banner-reject-button',
-        confirmationClass: 'cookie-banner-reject-message',
-        consent: false,
-      },
-      {
-        name: 'hide',
-        buttonClass: 'cookie-banner-hide-button',
-      },
-    ],
   },
   preferencesForm: {
     class: 'cookie-preferences-form',
@@ -82,11 +61,27 @@ cookieManager.init({
       cookies: ['dtCookie', 'dtLatC', 'dtPC', 'dtSa', 'rxVisitor', 'rxvt'],
     },
   ],
-  additionalOptions: {
-    defaultConsent: false,
-    deleteUndefinedCookies: false,
-    disableCookieBanner: false,
-    disableCookiePreferencesForm: false,
+  cookieBanner: {
+    class: 'cookie-banner',
+    showWithPreferencesForm: false,
+    actions: [
+      {
+        name: 'accept',
+        buttonClass: 'cookie-banner-accept-button',
+        confirmationClass: 'cookie-banner-accept-message',
+        consent: true,
+      },
+      {
+        name: 'reject',
+        buttonClass: 'cookie-banner-reject-button',
+        confirmationClass: 'cookie-banner-reject-message',
+        consent: false,
+      },
+      {
+        name: 'hide',
+        buttonClass: 'cookie-banner-hide-button',
+      },
+    ],
   },
 });
 
