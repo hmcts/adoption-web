@@ -30,7 +30,9 @@ export class OidcMiddleware {
           req.session.user = await getUserDetails(`${protocol}${res.locals.host}${port}`, req.query.code, CALLBACK_URL);
           const role: string = config.get('services.idam.userRole');
           if (req.session.user.roles.includes(role)) {
-            req.session.save(() => res.redirect('/'));
+            return req.session.save(() => res.redirect('/'));
+          } else {
+            throw new Error('Unauthorized role of the user');
           }
         }
         res.redirect(SIGN_IN_URL);
