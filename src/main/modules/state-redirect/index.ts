@@ -13,6 +13,7 @@ import {
   CONTACT_US,
   COOKIES_PAGE,
   DOWNLOAD_APPLICATION_SUMMARY,
+  LA_PORTAL,
   PAYMENT_CALLBACK_URL,
   PAY_AND_SUBMIT,
   PAY_YOUR_FEE,
@@ -59,7 +60,8 @@ export class StateRedirectMiddleware {
         if (
           [State.Submitted, State.AwaitingDocuments, State.AwaitingHWFDecision].includes(req.session.userCase?.state) &&
           req.path !== APPLICATION_SUBMITTED &&
-          req.path !== DOWNLOAD_APPLICATION_SUMMARY
+          req.path !== DOWNLOAD_APPLICATION_SUMMARY &&
+          !req.path.startsWith(LA_PORTAL)
         ) {
           return res.redirect(APPLICATION_SUBMITTED);
         }

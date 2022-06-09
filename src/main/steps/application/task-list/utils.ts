@@ -405,14 +405,14 @@ const getAllSectionStatuses = (userCase: CaseWithId): SectionStatus[] => {
           getContactDetailsStatus(userCase, FieldPrefix.APPLICANT2),
         ]
       : []),
-    getChildrenBirthCertificateStatus(userCase),
-    getAdoptionCertificateDetailsStatus(userCase),
-    getChildrenPlacementOrderStatus(userCase),
-    getBirthMotherDetailsStatus(userCase),
-    getBirthFatherDetailsStatus(userCase),
-    getOtherParentStatus(userCase),
+    //getChildrenBirthCertificateStatus(userCase),
+    //getAdoptionCertificateDetailsStatus(userCase),
+    //getChildrenPlacementOrderStatus(userCase),
+    //getBirthMotherDetailsStatus(userCase),
+    //getBirthFatherDetailsStatus(userCase),
+    //getOtherParentStatus(userCase),
     getAdoptionAgencyDetailStatus(userCase),
-    getSiblingStatus(userCase),
+    //getSiblingStatus(userCase),
     findFamilyCourtStatus(userCase),
   ];
 };
