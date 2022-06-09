@@ -3,12 +3,14 @@ import { Response } from 'express';
 
 import { getNextStepUrl } from '../..';
 import { AppRequest } from '../../../app/controller/AppRequest';
-import { AnyObject } from '../../../app/controller/PostController';
+import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form, FormFields } from '../../../app/form/Form';
 
 @autobind
-export default class LaPortalKbaPostController<T extends AnyObject> {
-  constructor(protected readonly fields: FormFields) {}
+export default class LaPortalKbaPostController<T extends AnyObject> extends PostController<AnyObject> {
+  constructor(protected readonly fields: FormFields) {
+    super(fields);
+  }
 
   /**
    * Parse the form body and decide whether this is a save and sign out, save and continue or session time out
