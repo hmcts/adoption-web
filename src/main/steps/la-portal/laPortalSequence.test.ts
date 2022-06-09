@@ -6,7 +6,7 @@ import { YesNoNotsure, YesOrNo } from '../../app/case/definition';
 
 import { laPortalSequence } from './laPortalSequence';
 
-describe('siblingSequence', () => {
+describe('la-portal > laPortalSequence', () => {
   test('should contain 45 entries in sibling screen sequence', () => {
     Date.now = jest.fn(() => +new Date('2021-01-01'));
 
