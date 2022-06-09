@@ -361,11 +361,16 @@ export const childrenSummaryList = (
           value: userCase.childrenFirstName + ' ' + userCase.childrenLastName,
           changeUrl: Urls.CHILDREN_FULL_NAME,
         },
-        // {
-        //   key: keys.sexAtBirth,
-        //   value: content.gender[userCase.childrenSexAtBirth!],
-        //   changeUrl: Urls.CHILDREN_SEX_AT_BIRTH,
-        // },
+        {
+          key: keys.dateOfBirth,
+          value: getFormattedDate(userCase.childrenDateOfBirth),
+          changeUrl: Urls.CHILDREN_DATE_OF_BIRTH,
+        },
+        {
+          key: keys.sexAtBirth,
+          value: content.gender[userCase.childrenSexAtBirth!],
+          changeUrl: Urls.CHILDREN_SEX_AT_BIRTH,
+        },
         // {
         //   key: keys.nationality,
         //   valueHtml: formatNationalities(userCase.childrenNationality!, userCase.childrenAdditionalNationalities!),

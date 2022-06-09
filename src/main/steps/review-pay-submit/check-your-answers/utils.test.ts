@@ -793,6 +793,32 @@ describe('review-pay-submit > check-your-answers > utils', () => {
               },
             },
             {
+              key: { text: 'Date of birth' },
+              value: { text: '9 August 2020' },
+              actions: {
+                items: [
+                  {
+                    href: '/children/date-of-birth?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Date of birth',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Sex at birth' },
+              value: { text: 'Male' },
+              actions: {
+                items: [
+                  {
+                    href: '/children/sex-at-birth?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Sex at birth',
+                  },
+                ],
+              },
+            },
+            {
               key: { text: 'Full name after adoption' },
               value: { text: 'MOCK_FIRST_NAME_AFTER_ADOPTION MOCK_LAST_NAME_AFTER_ADOPTION' },
               actions: {
