@@ -17,17 +17,27 @@
 
 {% block header %}
   {% include "./cookie-banner.njk" %}
-  {{ govukHeader({
+  {% if laPortal == true %}
+    {{ govukHeader({
     containerClasses: "govuk-width-container",
     serviceName: serviceName,
-    serviceUrl: (globals.basePath if globals.basePath) + "/",
-    navigation: [
-      {
-        href: "/logout" if isLoggedIn else "/",
-        text: signOut if isLoggedIn else signIn
-      }
-    ]
-  }) }}
+    serviceUrl: (globals.basePath if globals.basePath) + "/la-portal/kba-case-ref",
+    homepageUrl: "/la-portal/kba-case-ref",
+    navigation: []
+    }) }}
+  {% else %}
+    {{ govukHeader({
+      containerClasses: "govuk-width-container",
+      serviceName: serviceName,
+      serviceUrl: (globals.basePath if globals.basePath) + "/",
+      navigation: [
+        {
+          href: "/logout" if isLoggedIn else "/",
+          text: signOut if isLoggedIn else signIn
+        }
+      ]
+    }) }}
+  {% endif %}
 {% endblock %}
 
 {% block pageTitle %}
