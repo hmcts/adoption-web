@@ -43,10 +43,6 @@ cookieManager.init({
       cookies: [
         'adoption-web-cookie-preferences',
         'adoption-web-session',
-        '_oauth2_proxy',
-        'ajs_user_id',
-        'ajs_group_id',
-        'ajs_anonymous_id',
         'Idam.Session',
         'seen_cookie_message',
         '_oauth2_proxy',
@@ -54,10 +50,12 @@ cookieManager.init({
     },
     {
       categoryName: 'analytics',
+      optional: true,
       cookies: ['_ga', '_gid', '_gat_UA-'],
     },
     {
       categoryName: 'apm',
+      optional: true,
       cookies: ['dtCookie', 'dtLatC', 'dtPC', 'dtSa', 'rxVisitor', 'rxvt'],
     },
   ],
