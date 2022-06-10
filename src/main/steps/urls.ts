@@ -185,14 +185,6 @@ export const LA_PORTAL_BIRTH_MOTHER_MANUAL_ADDRESS: PageLink = `${LA_PORTAL}${BI
 export const LA_PORTAL_BIRTH_MOTHER_INTERNATIONAL_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/address/international`;
 export const LA_PORTAL_BIRTH_MOTER_LAST_ADDRESS_CONFIRMED: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/last-address-confirmed`;
 
-export const LA_PORTAL_SIBLING_EXISTS: PageLink = `${LA_PORTAL}${SIBLING}/exists`;
-export const LA_PORTAL_SIBLING_RELATION: PageLink = `${LA_PORTAL}${SIBLING}/relation`;
-export const LA_PORTAL_SIBLING_ORDER_TYPE: PageLink = `${LA_PORTAL}${SIBLING}/placement-order-type`;
-export const LA_PORTAL_SIBLING_ORDER_CASE_NUMBER: PageLink = `${LA_PORTAL}${SIBLING}/placement-order-number`;
-export const LA_PORTAL_SIBLING_ORDER_SUMMARY: PageLink = `${LA_PORTAL}${SIBLING}/summary`;
-export const LA_PORTAL_SIBLING_ORDER_CHECK_YOUR_ANSWERS: PageLink = `${LA_PORTAL}${SIBLING}/placement-order-check-your-answers`;
-export const LA_PORTAL_SIBLING_REMOVE_PLACEMENT_ORDER: PageLink = `${LA_PORTAL}${SIBLING}/remove-placement-order`;
-
 export const LA_PORTAL_BIRTH_FATHER_NAME_ON_CERTIFICATE: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/name-on-certificate`;
 export const LA_PORTAL_BIRTH_FATHER_FULL_NAME: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/full-name`;
 export const LA_PORTAL_BIRTH_FATHER_STILL_ALIVE: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/still-alive`;

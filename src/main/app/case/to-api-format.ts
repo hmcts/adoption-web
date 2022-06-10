@@ -24,12 +24,6 @@ const fields: ToApiConverters = {
   birthMotherLastAddressDate: data => ({
     birthMotherLastAddressDate: toApiDate(data.birthMotherLastAddressDate),
   }),
-  birthFatherLastAddressDate: data => ({
-    birthFatherLastAddressDate: toApiDate(data.birthFatherLastAddressDate),
-  }),
-  otherParentLastAddressDate: data => ({
-    otherParentLastAddressDate: toApiDate(data.otherParentLastAddressDate),
-  }),
   applicant2DateOfBirth: data => ({
     applicant2DateOfBirth: toApiDate(data.applicant2DateOfBirth),
   }),

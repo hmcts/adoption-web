@@ -47,6 +47,7 @@ describe('birth mother > occupation > content', () => {
 
     expect(occupationField.type).toBe('text');
     expect((occupationField.label as Function)(generateContent(commonContent))).toBe(enContent.label);
+    //expect((occupationField.hint as Function)(generateContent(commonContent))).toBe(enContent.hint);
     expect(occupationField.labelSize).toBe('l');
 
     (occupationField.validator as Function)('MockOccupation');

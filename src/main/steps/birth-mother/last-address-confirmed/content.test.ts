@@ -20,30 +20,32 @@ const commonContent = {
 
 const enContent = {
   section: "Birth mother's details",
-  title: 'When was the last date this address was confirmed?',
+  title: "What's your date of birth?",
+  hint: 'For example, 27 3 2007',
   errors: {
     birthMotherLastAddressDate: {
-      required: 'Enter date',
-      invalidDate: 'Date must be a real date',
-      incompleteDay: 'Date must include a day',
-      incompleteMonth: 'Date must include a month',
-      incompleteYear: 'Date must include a year',
-      invalidDateInFuture: 'Date must be in the past',
+      required: 'Enter your date of birth',
+      invalidDate: 'Date of birth must be a real date',
+      incompleteDay: 'Your date of birth must include a day',
+      incompleteMonth: 'Your date of birth must include a month',
+      incompleteYear: 'Your date of birth must include a year',
+      invalidDateInFuture: 'Your date of birth must be in the past',
     },
   },
 };
 
 const cyContent = {
   section: 'Manylion y fam fiolegol',
-  title: 'When was the last date this address was confirmed? (in welsh)',
+  title: 'Beth yw eich dyddiad geni?',
+  hint: 'Er enghraifft, 27 3 2007',
   errors: {
     birthMotherLastAddressDate: {
-      required: 'Enter date',
-      invalidDate: 'Date must be a real date',
-      incompleteDay: 'Date must include a day',
-      incompleteMonth: 'Date must include a month',
-      incompleteYear: 'Date must include a year',
-      invalidDateInFuture: 'Date must be in the past',
+      required: 'Nodwch eich dyddiad geni',
+      invalidDate: 'Rhaid i’r dyddiad geni fod yn ddyddiad dilys',
+      incompleteDay: 'Rhaid i’ch dyddiad geni gynnwys diwrnod',
+      incompleteMonth: 'Rhaid i’ch dyddiad geni gynnwys mis',
+      incompleteYear: 'Rhaid i’ch dyddiad geni gynnwys blwyddyn',
+      invalidDateInFuture: 'Rhaid i’ch dyddiad geni fod yn y gorffennol',
     },
   },
 };
@@ -81,6 +83,7 @@ describe('birthMotherLastAddressDate > content', () => {
     expect(dobField.classes).toBe('govuk-date-input');
     expect((dobField.label as Function)(generatedContent)).toBe(enContent.title);
     expect(dobField.labelHidden).toBe(true);
+    expect((dobField.hint as Function)(generatedContent)).toBe(enContent.hint);
 
     expect((dobField.values[0].label as Function)(commonContent)).toBe('Day');
     expect(dobField.values[0].name).toBe('day');

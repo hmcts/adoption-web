@@ -1,4 +1,4 @@
-import { SectionStatus, YesNoNotsure } from '../../../app/case/definition';
+import { SectionStatus } from '../../../app/case/definition'; //YesNoNotsure
 import { TranslationFn } from '../../../app/controller/GetController';
 import * as URL from '../../urls';
 
@@ -20,7 +20,7 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         id: 'birth-certificate-details',
         text: taskListItems.birthCertificate,
         status: getChildrenBirthCertificateStatus(userCase),
-        href: URL.LA_PORTAL_CHILDREN_FULL_NAME,
+        href: '', //URL.LA_PORTAL_CHILDREN_FULL_NAME,
       },
       {
         id: 'birth-mother-details',
@@ -32,37 +32,37 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         id: 'birth-father-details',
         text: taskListItems.birthFather,
         status: getBirthFatherDetailsStatus(userCase),
-        href: URL.LA_PORTAL_BIRTH_FATHER_NAME_ON_CERTIFICATE,
+        href: '', //URL.LA_PORTAL_BIRTH_FATHER_NAME_ON_CERTIFICATE,
       },
       {
         id: 'other-parent-details',
         text: taskListItems.otherParent,
         status: getOtherParentStatus(userCase),
-        href: URL.LA_PORTAL_OTHER_PARENT_EXISTS,
+        href: '', //URL.LA_PORTAL_OTHER_PARENT_EXISTS,
       },
       {
         id: 'placement-and-court-order-details',
         text: taskListItems.placementAndCourtOrders,
         status: getChildrenPlacementOrderStatus(userCase),
-        href:
-          getChildrenPlacementOrderStatus(userCase) === SectionStatus.NOT_STARTED
-            ? URL.LA_PORTAL_CHILD_PLACEMENT_ORDER_NUMBER
-            : URL.LA_PORTAL_CHILD_PLACEMENT_ORDER_SUMMARY,
+        href: '', //
+        // getChildrenPlacementOrderStatus(userCase) === SectionStatus.NOT_STARTED
+        //   ? URL.LA_PORTAL_CHILD_PLACEMENT_ORDER_NUMBER
+        //   : URL.LA_PORTAL_CHILD_PLACEMENT_ORDER_SUMMARY,
       },
       {
         id: 'sibling-court-order-details',
         text: taskListItems.siblingCourtOrders,
         status: getSiblingStatus(userCase),
-        href:
-          userCase.hasSiblings === YesNoNotsure.YES && userCase.siblings?.length
-            ? URL.LA_PORTAL_SIBLING_ORDER_SUMMARY
-            : URL.LA_PORTAL_SIBLING_EXISTS,
+        href: '', //
+        // userCase.hasSiblings === YesNoNotsure.YES && userCase.siblings?.length
+        //   ? URL.LA_PORTAL_SIBLING_ORDER_SUMMARY
+        //   : URL.LA_PORTAL_SIBLING_EXISTS,
       },
       {
         id: 'upload-documents',
         text: taskListItems.uploadDocuments,
         status: getUploadDocumentStatus(userCase),
-        href: getUploadDocumentStatus(userCase) === SectionStatus.CAN_NOT_START_YET ? '' : URL.UPLOAD_YOUR_DOCUMENTS,
+        href: '', //getUploadDocumentStatus(userCase) === SectionStatus.CAN_NOT_START_YET ? '' : URL.UPLOAD_YOUR_DOCUMENTS,
       },
     ],
   },
