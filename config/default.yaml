@@ -14,6 +14,7 @@ services:
     clientSecret: 'NEED TO INSERT SECRET'
     systemUsername: 'dummy_user'
     systemPassword: 'dummy_password'
+    userRole: 'adoption-citizen-user'
   case:
     url: ''
   postcodeLookup:
