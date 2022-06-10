@@ -3,7 +3,7 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { covertToDateObject } from '../../../app/form/parser';
 import { areDateFieldsFilledIn, isDateInputInvalid, isFutureDate } from '../../../app/form/validation';
-//applicant1DateOfBirth
+
 const en = () => ({
   section: "Birth mother's details",
   title: "What's your date of birth?",
