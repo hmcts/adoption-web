@@ -30,6 +30,7 @@ export class KbaMiddleware {
         if (!req.path.startsWith(LA_PORTAL)) {
           return next();
         }
+        res.locals.laPortal = true;
         if (req.session?.user) {
           res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
