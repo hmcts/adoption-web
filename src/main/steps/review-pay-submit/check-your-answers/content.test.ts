@@ -121,7 +121,7 @@ const cyContent = {
     applicantDetails: 'Manylion y ceisydd',
     firstApplicantDetails: 'Manylion y ceisydd cyntaf',
     secondApplicantDetails: 'Manylion yr ail geisydd',
-    childDetails: 'Manylion y plenty',
+    childDetails: 'Manylion y plentyn',
     birthMotherDetails: 'Manylion y fam fiolegol',
     birthFatherDetails: 'Manylion y tad biolegol',
     otherParentDetails: 'Manylion y rhiant arall',
