@@ -29,17 +29,13 @@ export class OidcMiddleware {
       errorHandler(async (req, res) => {
         if (typeof req.query.code === 'string') {
           req.session.user = await getUserDetails(`${protocol}${res.locals.host}${port}`, req.query.code, CALLBACK_URL);
-          logger.info('User logged in');
           const role: string = config.get('services.idam.userRole');
           logger.info('Roles are ---', req.session.user.roles);
           if (req.session.user.roles.includes(role)) {
-            logger.info('user has adoption-citizen-user-role');
             return req.session.save(() => res.redirect('/'));
           } else {
-            logger.info('Before throw');
             req.session.user = undefined;
             throw new Error('Unauthorized role of the user');
-            logger.info('After throw');
           }
         }
         res.redirect(SIGN_IN_URL);
@@ -52,7 +48,6 @@ export class OidcMiddleware {
           return next();
         }
         if (req.session?.user) {
-          logger.info('if not eligiblitiy');
           res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
           if (!req.session.userCase) {
