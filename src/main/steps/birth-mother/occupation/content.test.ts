@@ -10,7 +10,6 @@ const EN = 'en';
 const enContent = {
   section: "Birth mother's details",
   label: "What is the occupation of the child's birth mother?",
-  hint: "Ask the adoption agency or social worker if you're not sure. If the occupation is not known, you can type 'unknown'.",
   errors: {
     birthMotherOccupation: {
       required: 'Enter an occupation',
@@ -21,7 +20,6 @@ const enContent = {
 const cyContent = {
   section: 'Manylion y fam fiolegol',
   label: 'Beth yw galwedigaeth mam fiolegol y plentyn?',
-  hint: 'Gofynnwch i’ch asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr. Os yw’r galwedigaeth yn anhysbys, gallwch deipio ‘anhysbys’.',
   errors: {
     birthMotherOccupation: {
       required: 'Nac ydwdwch alwedigaeth',
@@ -49,7 +47,7 @@ describe('birth mother > occupation > content', () => {
 
     expect(occupationField.type).toBe('text');
     expect((occupationField.label as Function)(generateContent(commonContent))).toBe(enContent.label);
-    expect((occupationField.hint as Function)(generateContent(commonContent))).toBe(enContent.hint);
+    //expect((occupationField.hint as Function)(generateContent(commonContent))).toBe(enContent.hint);
     expect(occupationField.labelSize).toBe('l');
 
     (occupationField.validator as Function)('MockOccupation');

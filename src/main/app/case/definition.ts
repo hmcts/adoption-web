@@ -374,6 +374,7 @@ export interface CaseData {
   birthMotherAddressCountry: string;
   birthMotherNameOnCertificate: string;
   birthMotherAddressNotKnownReason: string;
+  birthMotherLastAddressDate: string;
 
   birthFatherFirstName: string;
   birthFatherLastName: string;

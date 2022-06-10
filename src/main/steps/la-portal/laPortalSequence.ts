@@ -70,16 +70,21 @@ const birthMotherSequence = [
   {
     url: Urls.LA_PORTAL_BIRTH_MOTHER_SELECT_ADDRESS,
     contentDir: path.join(__dirname, '..', 'birth-mother', 'address', 'select'),
-    getNextStep: () => Urls.LA_PORTAL_TASK_LIST,
+    getNextStep: () => Urls.LA_PORTAL_BIRTH_MOTER_LAST_ADDRESS_CONFIRMED,
   },
   {
     url: Urls.LA_PORTAL_BIRTH_MOTHER_MANUAL_ADDRESS,
     contentDir: path.join(__dirname, '..', 'birth-mother', 'address', 'manual'),
-    getNextStep: () => Urls.LA_PORTAL_TASK_LIST,
+    getNextStep: () => Urls.LA_PORTAL_BIRTH_MOTER_LAST_ADDRESS_CONFIRMED,
   },
   {
     url: Urls.LA_PORTAL_BIRTH_MOTHER_INTERNATIONAL_ADDRESS,
     contentDir: path.join(__dirname, '..', 'birth-mother', 'address', 'international'),
+    getNextStep: () => Urls.LA_PORTAL_BIRTH_MOTER_LAST_ADDRESS_CONFIRMED,
+  },
+  {
+    url: Urls.LA_PORTAL_BIRTH_MOTER_LAST_ADDRESS_CONFIRMED,
+    contentDir: path.join(__dirname, '..', 'birth-mother', 'last-address-confirmed'),
     getNextStep: () => Urls.LA_PORTAL_TASK_LIST,
   },
 ];
