@@ -4,9 +4,9 @@ import { PageContent } from '../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../app/form/Form';
 import { atLeastOneFieldIsChecked, isFieldFilledIn, notSureViolation } from '../../../app/form/validation';
 import {
+  CHILDREN_NATIONALITY,
   LA_PORTAL_BIRTH_FATHER_NATIONALITY,
   LA_PORTAL_BIRTH_MOTHER_NATIONALITY,
-  LA_PORTAL_CHILD_NATIONALITY,
 } from '../../urls';
 import { CommonContent } from '../common.content';
 import { mapSummaryListContent } from '../functions/mapSummaryListContent';
@@ -60,7 +60,7 @@ const cy: typeof en = (fieldPrefix: FieldPrefix) => ({
 });
 
 const urls = {
-  [FieldPrefix.CHILDREN]: LA_PORTAL_CHILD_NATIONALITY,
+  [FieldPrefix.CHILDREN]: CHILDREN_NATIONALITY,
   [FieldPrefix.BIRTH_FATHER]: LA_PORTAL_BIRTH_FATHER_NATIONALITY,
   [FieldPrefix.BIRTH_MOTHER]: LA_PORTAL_BIRTH_MOTHER_NATIONALITY,
 };
