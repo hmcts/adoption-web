@@ -170,7 +170,9 @@ describe('nationality content', () => {
     expect(rows).toHaveLength(2);
     expect(rows?.[0].key.text).toStrictEqual(populatedArray[0].country);
     expect(rows?.[1].key.text).toStrictEqual(populatedArray[1].country);
-    expect(rows?.[0].actions.items[0].href).toStrictEqual(`/birth-mother/nationality?remove=${populatedArray[0].id}`);
+    expect(rows?.[0].actions.items[0].href).toStrictEqual(
+      `/la-portal/birth-mother/nationality?remove=${populatedArray[0].id}`
+    );
     expect(rows?.[0].actions.items[0].text).toStrictEqual('Remove');
     expect(rows?.[0].actions.items[0].visuallyHiddenText).toStrictEqual(populatedArray[0].country);
 

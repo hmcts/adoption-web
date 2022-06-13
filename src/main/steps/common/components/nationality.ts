@@ -4,7 +4,11 @@ import { LanguagePreference } from '../../../app/case/definition';
 import { PageContent } from '../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../app/form/Form';
 import { atLeastOneFieldIsChecked, isFieldFilledIn, notSureViolation } from '../../../app/form/validation';
-import { BIRTH_FATHER_NATIONALITY, BIRTH_MOTHER_NATIONALITY, CHILDREN_NATIONALITY } from '../../urls';
+import {
+  CHILDREN_NATIONALITY,
+  LA_PORTAL_BIRTH_FATHER_NATIONALITY,
+  LA_PORTAL_BIRTH_MOTHER_NATIONALITY,
+} from '../../urls';
 import { CommonContent } from '../common.content';
 import { mapSummaryListContent } from '../functions/mapSummaryListContent';
 
@@ -58,8 +62,8 @@ const cy: typeof en = (fieldPrefix: FieldPrefix) => ({
 
 const urls = {
   [FieldPrefix.CHILDREN]: CHILDREN_NATIONALITY,
-  [FieldPrefix.BIRTH_FATHER]: BIRTH_FATHER_NATIONALITY,
-  [FieldPrefix.BIRTH_MOTHER]: BIRTH_MOTHER_NATIONALITY,
+  [FieldPrefix.BIRTH_FATHER]: LA_PORTAL_BIRTH_FATHER_NATIONALITY,
+  [FieldPrefix.BIRTH_MOTHER]: LA_PORTAL_BIRTH_MOTHER_NATIONALITY,
 };
 
 export const nationalityFields = (userCase: Partial<Case>, fieldPrefix: FieldPrefix): FormFields => ({
