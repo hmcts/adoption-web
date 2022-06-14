@@ -47,12 +47,23 @@
 {% set feedbackLink = feedback | replace("PAGE_TITLE", title if title else label) %}
 
 {% block beforeContent %}
-  {{ govukPhaseBanner({
-    tag: {
-      text: phase
-    },
-    html: feedbackLink + languageToggle
-  }) }}
+
+  {% if laPortal == true %}
+      {{ govukPhaseBanner({
+      tag: {
+        text: phase
+      },
+      html: feedbackLink
+      }) }}
+  {% else %}
+      {{ govukPhaseBanner({
+      tag: {
+        text: phase
+      },
+      html: feedbackLink + languageToggle
+      }) }}
+  {% endif %}
+
   {% block backLink %}
     <a href="#" class="govuk-back-link">{{ back }}</a>
   {% endblock %}
