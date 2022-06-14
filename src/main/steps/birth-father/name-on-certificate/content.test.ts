@@ -28,7 +28,7 @@ const cyContent = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('birth-mother > still-alive > content', () => {
+describe('birth-father > still-alive > content', () => {
   const commonContent = generatePageContent({
     language: 'en',
     userCase: { birthFatherNameOnCertificate: YesOrNo.YES },
@@ -47,7 +47,7 @@ describe('birth-mother > still-alive > content', () => {
     languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
-  test('should contain birthMotherStillAlive field', () => {
+  test('should contain birthFatherStillAlive field', () => {
     const fields = (generatedContent.form as FormContent).fields as FormFields;
     const field = fields.birthFatherNameOnCertificate as FormOptions;
     expect(field.type).toBe('radios');
