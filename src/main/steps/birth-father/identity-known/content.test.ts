@@ -9,9 +9,9 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: "Birth father's details",
-  label: "Is the birth father's name on the birth certificate?",
+  label: "Is the birth father's identity known? ",
   errors: {
-    birthFatherNameOnCertificate: {
+    birthFatherIdentityKnown: {
       required: 'Please answer the question',
     },
   },
@@ -19,9 +19,9 @@ const enContent = {
 
 const cyContent = {
   section: "Birth father's details (in welsh)",
-  label: 'A yw enw’r tad biolegol ar y dystysgrif geni?',
+  label: "Is the birth father's identity known? (in welsh)",
   errors: {
-    birthFatherNameOnCertificate: {
+    birthFatherIdentityKnown: {
       required: 'Please answer the question (in welsh)',
     },
   },
@@ -31,7 +31,7 @@ const cyContent = {
 describe('birth-father > still-alive > content', () => {
   const commonContent = generatePageContent({
     language: 'en',
-    userCase: { birthFatherNameOnCertificate: YesOrNo.YES },
+    userCase: { birthFatherIdentityKnown: YesOrNo.YES },
   }) as CommonContent;
 
   let generatedContent;
@@ -47,9 +47,9 @@ describe('birth-father > still-alive > content', () => {
     languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
-  test('should contain birthFatherStillAlive field', () => {
+  test('should contain birthFatherIdentityKnown field', () => {
     const fields = (generatedContent.form as FormContent).fields as FormFields;
-    const field = fields.birthFatherNameOnCertificate as FormOptions;
+    const field = fields.birthFatherIdentityKnown as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
     expect((field.label as Function)(generatedContent)).toBe(enContent.label);

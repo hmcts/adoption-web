@@ -97,7 +97,13 @@ const birthFatherSequence = [
     getNextStep: data =>
       data.birthFatherNameOnCertificate === YesOrNo.YES
         ? Urls.LA_PORTAL_BIRTH_FATHER_FULL_NAME
-        : Urls.LA_PORTAL_OTHER_PARENT_EXISTS,
+        : Urls.LA_PORTAL_BIRTH_FATHER_IDENTITY_KNOWN,
+  },
+  {
+    url: Urls.LA_PORTAL_BIRTH_FATHER_IDENTITY_KNOWN,
+    contentDir: path.join(__dirname, '..', 'birth-father', 'identity-known'),
+    getNextStep: data =>
+      data.birthFatherIdentityKnown === YesOrNo.YES ? Urls.LA_PORTAL_BIRTH_FATHER_FULL_NAME : Urls.LA_PORTAL_TASK_LIST,
   },
   {
     url: Urls.LA_PORTAL_BIRTH_FATHER_FULL_NAME,
