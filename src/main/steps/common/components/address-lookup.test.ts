@@ -13,8 +13,8 @@ const enContent = {
   enterAddressManually: 'Or enter address manually',
   errors: {
     addressPostcode: {
-      required: 'Enter a valid postcode',
-      invalid: 'Enter a valid postcode',
+      required: 'Enter a real postcode',
+      invalid: 'Enter a real postcode',
     },
   },
   manualAddressUrl: '#',
@@ -26,8 +26,8 @@ const cyContent = {
   enterAddressManually: 'Neu nodwch y cyfeiriad â llaw',
   errors: {
     addressPostcode: {
-      required: 'Enter a valid postcode (in welsh)',
-      invalid: 'Enter a valid postcode (in welsh)',
+      required: 'Enter a real postcode (in welsh)',
+      invalid: 'Enter a real postcode (in welsh)',
     },
   },
   manualAddressUrl: '#',

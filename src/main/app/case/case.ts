@@ -113,7 +113,6 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   birthFatherAddressCountry: 'birthFatherAddressCountry',
   birthFatherAddressNotKnownReason: 'birthFatherAddressNotKnownReason',
   birthFatherLastAddressDate: 'birthFatherLastAddressDate',
-  birthFatherIdentityKnown: 'birthFatherIdentityKnown',
 
   otherParentFirstNames: 'otherParentFirstName',
   otherParentLastNames: 'otherParentLastName',
@@ -304,7 +303,6 @@ export interface Case {
   birthFatherAddressCountry?: string;
   birthFatherAddressNotKnownReason?: string;
   birthFatherLastAddressDate?: CaseDate;
-  birthFatherIdentityKnown?: string;
 
   /***** Other Parent *****/
   otherParentFirstNames?: string;

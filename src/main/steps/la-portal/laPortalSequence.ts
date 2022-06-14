@@ -138,16 +138,21 @@ const birthFatherSequence = [
   {
     url: Urls.LA_PORTAL_BIRTH_FATHER_SELECT_ADDRESS,
     contentDir: path.join(__dirname, '..', 'birth-father', 'address', 'select'),
-    getNextStep: () => Urls.LA_PORTAL_TASK_LIST,
+    getNextStep: () => Urls.LA_PORTAL_BIRTH_FATHER_LAST_ADDRESS_CONFIRMED,
   },
   {
     url: Urls.LA_PORTAL_BIRTH_FATHER_MANUAL_ADDRESS,
     contentDir: path.join(__dirname, '..', 'birth-father', 'address', 'manual'),
-    getNextStep: () => Urls.LA_PORTAL_TASK_LIST,
+    getNextStep: () => Urls.LA_PORTAL_BIRTH_FATHER_LAST_ADDRESS_CONFIRMED,
   },
   {
     url: Urls.LA_PORTAL_BIRTH_FATHER_INTERNATIONAL_ADDRESS,
     contentDir: path.join(__dirname, '..', 'birth-father', 'address', 'international'),
+    getNextStep: () => Urls.LA_PORTAL_BIRTH_FATHER_LAST_ADDRESS_CONFIRMED,
+  },
+  {
+    url: Urls.LA_PORTAL_BIRTH_FATHER_LAST_ADDRESS_CONFIRMED,
+    contentDir: path.join(__dirname, '..', 'birth-father', 'last-address-confirmed'),
     getNextStep: () => Urls.LA_PORTAL_TASK_LIST,
   },
 ];
