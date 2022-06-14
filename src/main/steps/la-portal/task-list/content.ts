@@ -32,7 +32,7 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         id: 'birth-father-details',
         text: taskListItems.birthFather,
         status: getBirthFatherDetailsStatus(userCase),
-        href: '', //URL.LA_PORTAL_BIRTH_FATHER_NAME_ON_CERTIFICATE,
+        href: URL.LA_PORTAL_BIRTH_FATHER_NAME_ON_CERTIFICATE,
       },
       {
         id: 'other-parent-details',

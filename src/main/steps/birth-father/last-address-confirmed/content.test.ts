@@ -19,10 +19,10 @@ const commonContent = {
 } as CommonContent;
 
 const enContent = {
-  section: "Birth mother's details",
+  section: "Birth father's details",
   title: 'When was the last date this address was confirmed?',
   errors: {
-    birthMotherLastAddressDate: {
+    birthFatherLastAddressDate: {
       required: 'Enter date',
       invalidDate: 'Date must be a real date',
       incompleteDay: 'Date must include a day',
@@ -34,10 +34,10 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y fam fiolegol',
-  title: 'When was the last date this address was confirmed? (in welsh)',
+  section: "Birth father's details (in welsh)",
+  title: 'When was the last date this address was confirmed?',
   errors: {
-    birthMotherLastAddressDate: {
+    birthFatherLastAddressDate: {
       required: 'Enter date',
       invalidDate: 'Date must be a real date',
       incompleteDay: 'Date must include a day',
@@ -48,7 +48,7 @@ const cyContent = {
   },
 };
 
-describe('birthMotherLastAddressDate > content', () => {
+describe('birthFatherLastAddressDate > content', () => {
   test('should return correct english content', () => {
     languageAssertions('en', enContent, () => generateContent(commonContent));
   });
@@ -75,7 +75,7 @@ describe('birthMotherLastAddressDate > content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const dobField = fields.birthMotherLastAddressDate as FormOptions;
+    const dobField = fields.birthFatherLastAddressDate as FormOptions;
 
     expect(dobField.type).toBe('date');
     expect(dobField.classes).toBe('govuk-date-input');
@@ -99,9 +99,9 @@ describe('birthMotherLastAddressDate > content', () => {
 
     expect(
       (dobField.parser as Function)({
-        'birthMotherLastAddressDate-day': '21',
-        'birthMotherLastAddressDate-month': '12',
-        'birthMotherLastAddressDate-year': '2018',
+        'birthFatherLastAddressDate-day': '21',
+        'birthFatherLastAddressDate-month': '12',
+        'birthFatherLastAddressDate-year': '2018',
       })
     ).toEqual({ day: '21', month: '12', year: '2018' });
     expect((dobField.validator as Function)({ day: '21', month: '12', year: '2018' })).toBe(undefined);
@@ -111,14 +111,14 @@ describe('birthMotherLastAddressDate > content', () => {
     const commonContent1 = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);
-    expect(generatedContent1.section).toBe("Birth mother's details");
+    expect(generatedContent1.section).toBe("Birth father's details");
   });
 
   it('should have an date label when language: cy and  applyingWith: alone', () => {
     const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);
-    expect(generatedContent1.section).toBe('Manylion y fam fiolegol');
+    expect(generatedContent1.section).toBe("Birth father's details (in welsh)");
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

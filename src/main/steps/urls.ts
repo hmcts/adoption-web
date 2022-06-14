@@ -196,6 +196,7 @@ export const LA_PORTAL_BIRTH_FATHER_FIND_ADDRESS: PageLink = `${LA_PORTAL}${BIRT
 export const LA_PORTAL_BIRTH_FATHER_SELECT_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/address/select`;
 export const LA_PORTAL_BIRTH_FATHER_MANUAL_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/address/manual`;
 export const LA_PORTAL_BIRTH_FATHER_INTERNATIONAL_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/address/international`;
+export const LA_PORTAL_BIRTH_FATHER_LAST_ADDRESS_CONFIRMED: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/last-address-confirmed`;
 
 export const LA_PORTAL_OTHER_PARENT_EXISTS: PageLink = `${LA_PORTAL}${OTHER_PARENT}/exists`;
 export const LA_PORTAL_OTHER_PARENT_FULL_NAME: PageLink = `${LA_PORTAL}${OTHER_PARENT}/full-name`;

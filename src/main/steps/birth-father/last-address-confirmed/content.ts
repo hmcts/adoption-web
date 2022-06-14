@@ -5,10 +5,10 @@ import { covertToDateObject } from '../../../app/form/parser';
 import { areDateFieldsFilledIn, isDateInputInvalid, isFutureDate } from '../../../app/form/validation';
 
 const en = () => ({
-  section: "Birth mother's details",
+  section: "Birth father's details",
   title: 'When was the last date this address was confirmed?',
   errors: {
-    birthMotherLastAddressDate: {
+    birthFatherLastAddressDate: {
       required: 'Enter date',
       invalidDate: 'Date must be a real date',
       incompleteDay: 'Date must include a day',
@@ -20,10 +20,10 @@ const en = () => ({
 });
 
 const cy = () => ({
-  section: 'Manylion y fam fiolegol',
-  title: 'When was the last date this address was confirmed? (in welsh)',
+  section: "Birth father's details (in welsh)",
+  title: 'When was the last date this address was confirmed?',
   errors: {
-    birthMotherLastAddressDate: {
+    birthFatherLastAddressDate: {
       required: 'Enter date',
       invalidDate: 'Date must be a real date',
       incompleteDay: 'Date must include a day',
@@ -36,7 +36,7 @@ const cy = () => ({
 
 export const form: FormContent = {
   fields: {
-    birthMotherLastAddressDate: {
+    birthFatherLastAddressDate: {
       type: 'date',
       classes: 'govuk-date-input',
       label: l => l.title,
@@ -62,7 +62,7 @@ export const form: FormContent = {
           attributes: { maxLength: 4, pattern: '[0-9]*', inputMode: 'numeric' },
         },
       ],
-      parser: body => covertToDateObject('birthMotherLastAddressDate', body as Record<string, unknown>),
+      parser: body => covertToDateObject('birthFatherLastAddressDate', body as Record<string, unknown>),
       validator: value =>
         areDateFieldsFilledIn(value as CaseDate) ||
         isDateInputInvalid(value as CaseDate) ||
