@@ -411,6 +411,7 @@ export interface CaseData {
   otherParentAddressCountry: string;
   otherParentNameOnCertificate: string;
   otherParentAddressNotKnownReason: string;
+  otherParentLastAddressDate: string;
 
   socialWorkerName: string;
   socialWorkerPhoneNumber: string;
