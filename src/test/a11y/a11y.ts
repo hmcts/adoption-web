@@ -136,6 +136,7 @@ describe('Accessibility', () => {
     urls.EQUALITY,
     urls.DOCUMENT_MANAGER,
     urls.UPLOAD_YOUR_DOCUMENTS,
+    urls.LA_PORTAL,
   ];
   const urlsToTest = Object.values(urls).filter(url => !IGNORED_URLS.includes(url));
 
