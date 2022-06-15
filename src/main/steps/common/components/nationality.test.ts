@@ -15,7 +15,7 @@ const EN = 'en';
 const fieldPrefix = FieldPrefix.BIRTH_MOTHER;
 const enContent = {
   label: 'What is your nationality?',
-  hint: 'Select all options that are relevant to you.',
+  hint: 'Select all options that are relevant.',
   british: 'British',
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish',
   irish: 'Irish',
@@ -38,7 +38,7 @@ const enContent = {
 
 const cyContent = {
   label: 'Beth yw eich cenedligrwydd?',
-  hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
+  hint: 'Select all options that are relevant. (in welsh)',
   british: 'Prydeinig',
   britishSubtext: 'gan gynnwys Saesneg, Albanaidd, Cymraeg a Gwyddelig Gogledd Iwerddon',
   irish: 'Gwyddelig',

@@ -1,4 +1,4 @@
-import { SectionStatus } from '../../../app/case/definition'; //YesNoNotsure
+import { SectionStatus } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import * as URL from '../../urls';
 
@@ -20,7 +20,7 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         id: 'birth-certificate-details',
         text: taskListItems.birthCertificate,
         status: getChildrenBirthCertificateStatus(userCase),
-        href: '', //URL.LA_PORTAL_CHILDREN_FULL_NAME,
+        href: URL.LA_PORTAL_CHILD_SEX_AT_BIRTH,
       },
       {
         id: 'birth-mother-details',

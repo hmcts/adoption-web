@@ -8,16 +8,6 @@ import * as Urls from '../urls';
 /***************************** CHILD *****************************/
 const childSequence = [
   {
-    url: Urls.LA_PORTAL_CHILDREN_FULL_NAME,
-    contentDir: path.join(__dirname, '..', 'children', 'full-name'),
-    getNextStep: () => Urls.LA_PORTAL_CHILD_DATE_OF_BIRTH,
-  },
-  {
-    url: Urls.LA_PORTAL_CHILD_DATE_OF_BIRTH,
-    contentDir: path.join(__dirname, '..', 'children', 'date-of-birth'),
-    getNextStep: () => Urls.LA_PORTAL_CHILD_SEX_AT_BIRTH,
-  },
-  {
     url: Urls.LA_PORTAL_CHILD_SEX_AT_BIRTH,
     contentDir: path.join(__dirname, '..', 'children', 'sex-at-birth'),
     getNextStep: () => Urls.LA_PORTAL_CHILD_NATIONALITY,

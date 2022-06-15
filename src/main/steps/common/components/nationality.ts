@@ -5,9 +5,9 @@ import { PageContent } from '../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../app/form/Form';
 import { atLeastOneFieldIsChecked, isFieldFilledIn, notSureViolation } from '../../../app/form/validation';
 import {
-  CHILDREN_NATIONALITY,
   LA_PORTAL_BIRTH_FATHER_NATIONALITY,
   LA_PORTAL_BIRTH_MOTHER_NATIONALITY,
+  LA_PORTAL_CHILD_NATIONALITY,
 } from '../../urls';
 import { CommonContent } from '../common.content';
 import { mapSummaryListContent } from '../functions/mapSummaryListContent';
@@ -16,7 +16,7 @@ import { defaultButtons } from './common/default-buttons';
 
 const en = (fieldPrefix: FieldPrefix) => ({
   label: 'What is your nationality?',
-  hint: 'Select all options that are relevant to you.',
+  hint: 'Select all options that are relevant.',
   british: 'British',
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish',
   irish: 'Irish',
@@ -39,7 +39,7 @@ const en = (fieldPrefix: FieldPrefix) => ({
 
 const cy: typeof en = (fieldPrefix: FieldPrefix) => ({
   label: 'Beth yw eich cenedligrwydd?',
-  hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
+  hint: 'Select all options that are relevant. (in welsh)',
   british: 'Prydeinig',
   britishSubtext: 'gan gynnwys Saesneg, Albanaidd, Cymraeg a Gwyddelig Gogledd Iwerddon',
   irish: 'Gwyddelig',
@@ -61,7 +61,7 @@ const cy: typeof en = (fieldPrefix: FieldPrefix) => ({
 });
 
 const urls = {
-  [FieldPrefix.CHILDREN]: CHILDREN_NATIONALITY,
+  [FieldPrefix.CHILDREN]: LA_PORTAL_CHILD_NATIONALITY,
   [FieldPrefix.BIRTH_FATHER]: LA_PORTAL_BIRTH_FATHER_NATIONALITY,
   [FieldPrefix.BIRTH_MOTHER]: LA_PORTAL_BIRTH_MOTHER_NATIONALITY,
 };
