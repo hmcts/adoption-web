@@ -8,7 +8,7 @@ const en = () => ({
 });
 
 const cy: typeof en = () => ({
-  title: ' Mae eich cais wedi cael ei gadw',
+  title: 'Mae eich cais wedi cael ei gadw',
   continueApplication: 'Parhau â’ch cais',
   signOut: 'Allgofnodi',
 });
