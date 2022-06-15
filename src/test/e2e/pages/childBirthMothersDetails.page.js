@@ -17,6 +17,9 @@ module.exports = {
     birthMotherAddressTown: 'input[id$="birthMotherAddressTown"]',
     birthMotherAddressPostcode: 'input[id$="birthMotherAddressPostcode"]',
     birthMotherAddressCountry: 'input[id$="birthMotherAddressCountry"]',
+    birthMotherLastAddressDateDay: 'input[id$="birthMotherLastAddressDate-day"]',
+    birthMotherLastAddressDateMonth: 'input[id$="birthMotherLastAddressDate-month"]',
+    birthMotherLastAddressDateYear: 'input[id$="birthMotherLastAddressDate-year"]',
   },
 
   async childBirthMothersDetailsSection() {
@@ -39,14 +42,16 @@ module.exports = {
     await I.retry(3).fillField(this.fields.birthMotherOccupation, childBirthMothersDetails.birthMotherOccupation);
     await I.wait(2);
     await I.retry(3).click('Save and continue');
+    await I.wait(2);
     await I.retry(3).waitForText("Do you have the birth mother's last known address?");
     await I.retry(3).click(this.fields.birthMotherAddressKnown);
     await I.wait(2);
     await I.retry(3).click('Save and continue');
+    await I.wait(2);
+    await I.retry(3).waitForText("What is the birth mother's last known address?");
     await I.retry(3).click(this.fields.enterAddressManually);
     await I.wait(2);
     await I.retry(3).click(this.fields.enterInternationalAddress);
-    await I.retry(3).waitForText("What is the birth mother's last known address?");
     await I.retry(3).fillField(this.fields.birthMotherAddress1, childBirthMothersDetails.birthMotherAddress1);
     await I.retry(3).fillField(this.fields.birthMotherAddressTown, childBirthMothersDetails.birthMotherAddressTown);
     await I.retry(3).fillField(
@@ -58,6 +63,13 @@ module.exports = {
       childBirthMothersDetails.birthMotherAddressCountry
     );
     await I.wait(2);
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
+    await I.retry(3).waitForText('When was the last date this address was confirmed?');
+    await I.retry(3).fillField(this.fields.birthMotherLastAddressDateDay, '26');
+    await I.retry(3).fillField(this.fields.birthMotherLastAddressDateMonth, '06');
+    await I.wait(2);
+    await I.retry(3).fillField(this.fields.birthMotherLastAddressDateYear, '1980');
     await I.retry(3).click('Save and continue');
     await I.wait(4);
   },
