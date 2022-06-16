@@ -65,14 +65,24 @@ describe('task-list > content', () => {
       expected: [
         {
           items: [
-            { id: 'birth-certificate-details', text: 'Birth certificate details', status: 'COMPLETED', href: '' },
+            {
+              id: 'birth-certificate-details',
+              text: 'Birth certificate details',
+              status: 'COMPLETED',
+              href: '/la-portal/child/sex-at-birth',
+            },
             {
               id: 'birth-mother-details',
               text: 'Birth mother details',
               status: 'COMPLETED',
               href: '/la-portal/birth-mother/full-name',
             },
-            { id: 'birth-father-details', text: 'Birth father details', status: 'COMPLETED', href: '' },
+            {
+              id: 'birth-father-details',
+              text: 'Birth father details',
+              status: 'COMPLETED',
+              href: '/la-portal/birth-father/name-on-certificate',
+            },
             {
               id: 'other-parent-details',
               text: 'Other person with parental responsibility',
@@ -82,11 +92,11 @@ describe('task-list > content', () => {
             {
               id: 'placement-and-court-order-details',
               text: 'Placement and court orders',
-              status: 'NOT_STARTED',
+              status: 'COMPLETED',
               href: '',
             },
             { id: 'sibling-court-order-details', text: 'Sibling court order details', status: 'COMPLETED', href: '' },
-            { id: 'upload-documents', text: 'Upload documents', status: 'NOT_STARTED', href: '' },
+            { id: 'upload-documents', text: 'Upload documents', status: 'COMPLETED', href: '' },
           ],
         },
       ],
@@ -106,14 +116,24 @@ describe('task-list > content', () => {
       expected: [
         {
           items: [
-            { id: 'birth-certificate-details', text: 'Birth certificate details', status: 'COMPLETED', href: '' },
+            {
+              id: 'birth-certificate-details',
+              text: 'Birth certificate details',
+              status: 'COMPLETED',
+              href: '/la-portal/child/sex-at-birth',
+            },
             {
               id: 'birth-mother-details',
               text: 'Birth mother details',
               status: 'COMPLETED',
               href: '/la-portal/birth-mother/full-name',
             },
-            { id: 'birth-father-details', text: 'Birth father details', status: 'COMPLETED', href: '' },
+            {
+              id: 'birth-father-details',
+              text: 'Birth father details',
+              status: 'COMPLETED',
+              href: '/la-portal/birth-father/name-on-certificate',
+            },
             {
               id: 'other-parent-details',
               text: 'Other person with parental responsibility',
@@ -134,9 +154,6 @@ describe('task-list > content', () => {
     },
   ])('should generate correct task list %#', ({ userCase, expected }) => {
     const { sections: taskListItems } = generateContent({ ...commonContent, userCase });
-    //console.log(JSON.stringify(taskListItems));
-    //expect(taskListItems).toEqual(expected);//TODO fix
-    expect(taskListItems).toEqual(taskListItems);
-    expect(expected).toEqual(expected);
+    expect(taskListItems).toEqual(expected);
   });
 });
