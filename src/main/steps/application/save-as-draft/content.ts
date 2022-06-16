@@ -8,9 +8,9 @@ const en = () => ({
 });
 
 const cy: typeof en = () => ({
-  title: 'Mae eich cais wedi cael ei gadw',
-  continueApplication: 'Parhau â’ch cais',
-  signOut: 'Allgofnodi',
+  title: 'Your application has been saved (in welsh)',
+  continueApplication: 'Continue with your application (in welsh)',
+  signOut: 'Sign out (in welsh)',
 });
 
 export const form: FormContent = {
