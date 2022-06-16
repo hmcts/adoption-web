@@ -1,4 +1,5 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
+import { SiblingRelationships } from '../../../app/case/definition';
 import { FormContent } from '../../../app/form/Form';
 import { CommonContent } from '../../common/common.content';
 
@@ -30,7 +31,7 @@ describe('sibling > placement-order-check-your-answers > content', () => {
       siblings: [
         {
           siblingId: 'MOCK_SIBLING_ID',
-          siblingRelation: 'MOCK_FIRST_NAME',
+          siblingRelation: SiblingRelationships.SISTER,
           siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
           siblingPoNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
         },
@@ -100,15 +101,15 @@ describe('sibling > placement-order-check-your-answers > content', () => {
     },
     {
       siblingId: 'MOCK_SIBLING_ID',
-      siblingRelation: 'MOCK_RELATION',
+      siblingRelation: SiblingRelationships.SISTER,
       siblingPoType: 'MOCK_TYPE',
       siblingPoNumber: 'MOCK_NUMBER',
       expected: {
-        title: 'MOCK_TYPE for MOCK_RELATION',
+        title: `MOCK_TYPE for ${SiblingRelationships.SISTER}`,
         placementOrderListItems: [
           {
             key: { text: 'Relationship' },
-            value: { text: 'MOCK_RELATION' },
+            value: { text: SiblingRelationships.SISTER },
             actions: {
               items: [
                 {

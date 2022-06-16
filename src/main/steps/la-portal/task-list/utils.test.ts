@@ -1,6 +1,14 @@
 import mockUserCase from '../../../../test/unit/utils/mockUserCase';
 import { CaseWithId, Checkbox } from '../../../app/case/case';
-import { DocumentType, Gender, Nationality, State, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
+import {
+  DocumentType,
+  Gender,
+  Nationality,
+  SiblingRelationships,
+  State,
+  YesNoNotsure,
+  YesOrNo,
+} from '../../../app/case/definition';
 
 import {
   getAdoptionCertificateDetailsStatus,
@@ -550,7 +558,7 @@ describe('utils', () => {
           siblings: [
             {
               siblingId: 'MOCK_SIBLING_ID',
-              siblingRelation: 'MOCK_SIBLING_RELATION',
+              siblingRelation: SiblingRelationships.SISTER,
               siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
             },
           ],
@@ -563,7 +571,72 @@ describe('utils', () => {
           siblings: [
             {
               siblingId: 'MOCK_SIBLING_ID',
-              siblingRelation: 'MOCK_SIBLING_RELATION',
+              siblingRelation: SiblingRelationships.STEP_SISTER,
+              siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
+            },
+          ],
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          siblings: [
+            {
+              siblingId: 'MOCK_SIBLING_ID',
+              siblingRelation: SiblingRelationships.HALF_SISTER,
+              siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
+            },
+          ],
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          siblings: [
+            {
+              siblingId: 'MOCK_SIBLING_ID',
+              siblingRelation: SiblingRelationships.BROTHER,
+              siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
+            },
+          ],
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          siblings: [
+            {
+              siblingId: 'MOCK_SIBLING_ID',
+              siblingRelation: SiblingRelationships.STEP_BROTHER,
+              siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
+            },
+          ],
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          siblings: [
+            {
+              siblingId: 'MOCK_SIBLING_ID',
+              siblingRelation: SiblingRelationships.HALF_BROTHER,
+              siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
+            },
+          ],
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          siblings: [
+            {
+              siblingId: 'MOCK_SIBLING_ID',
+              siblingRelation: SiblingRelationships.SISTER,
               siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
               siblingPoNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
             },

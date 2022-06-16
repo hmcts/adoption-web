@@ -1,4 +1,5 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
+import { SiblingRelationships } from '../../../app/case/definition';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
@@ -50,7 +51,7 @@ describe('sibling > placement-order-summary > content', () => {
       siblings: [
         {
           siblingId: 'MOCK_SIBLING_ID',
-          siblingRelation: 'MOCK_SIBLING_RELATION',
+          siblingRelation: SiblingRelationships.SISTER,
           siblingPoNumber: 'MOCK_NUMBER',
         },
       ],

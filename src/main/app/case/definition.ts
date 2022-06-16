@@ -751,7 +751,7 @@ export interface AdoptionAgencyOrLocalAuthority {
 
 export interface Sibling {
   siblingId: string;
-  siblingRelation?: string;
+  siblingRelation?: SiblingRelationships;
   siblingPoType?: string;
   siblingPoNumber?: string;
 }
@@ -1318,6 +1318,15 @@ export const enum ServicePaymentMethod {
   FEE_PAY_BY_HWF = 'feePayByHelp',
   FEE_PAY_BY_PHONE = 'feePayByTelephone',
   FEE_PAY_BY_CHEQUE = 'feePayByCheque',
+}
+
+export const enum SiblingRelationships {
+  SISTER = 'sisterRelation',
+  HALF_SISTER = 'halfSisterRelation',
+  STEP_SISTER = 'stepSisterRelation',
+  BROTHER = 'brotherRelation',
+  HALF_BROTHER = 'halfBrotherRelation',
+  STEP_BROTHER = 'stepBrotherRelation',
 }
 
 export const enum SolicitorPaymentMethod {

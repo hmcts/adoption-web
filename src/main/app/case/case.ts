@@ -18,6 +18,7 @@ import {
   Payment,
   PlacementOrder,
   Sibling,
+  SiblingRelationships,
   State,
   YesNoNotsure,
   YesOrNo,
@@ -363,6 +364,7 @@ export interface Case {
   addAnotherSiblingPlacementOrder?: YesOrNo;
   selectedSiblingId?: string;
   addAnotherSibling?: YesOrNo;
+  siblingRelation?: SiblingRelationships;
 
   /***** Statement of truth *****/
   applicant1IBelieveApplicationIsTrue?: Checkbox;

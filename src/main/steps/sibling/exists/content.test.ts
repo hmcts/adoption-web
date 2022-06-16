@@ -11,7 +11,6 @@ jest.mock('../../../app/form/validation');
 const enContent = {
   section: 'Sibling details',
   label: 'Does the child have any siblings or half siblings with court orders?',
-  hint: 'For example, a care order or supervision order.',
   conditionalText:
     '<label class="govuk-label">You will be asked to provide each sibling court order individually.</label>',
   errors: {
@@ -24,7 +23,6 @@ const enContent = {
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
   label: 'Does the child have any siblings or half siblings with court orders? (in welsh)',
-  hint: 'For example, a care order or supervision order. (in welsh)',
   conditionalText:
     '<label class="govuk-label">You will be asked to provide each sibling court order individually.</label> (in welsh)',
   errors: {
@@ -60,7 +58,7 @@ describe('sibling > exists > content', () => {
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
     expect((field.label as Function)(generatedContent)).toBe(enContent.label);
-    expect((field.hint as Function)(generatedContent)).toBe(enContent.hint);
+    // expect((field.hint as Function)(generatedContent)).toBe(enContent.hint);
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesNoNotsure.YES);

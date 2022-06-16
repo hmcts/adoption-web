@@ -1,5 +1,5 @@
 import { Case, Checkbox } from './case';
-import { DocumentType, YesOrNo } from './definition';
+import { DocumentType, SiblingRelationships, YesOrNo } from './definition';
 import { OrNull, formatApplicant1CannotUploadDocuments, toApiFormat } from './to-api-format';
 
 describe('to-api-format', () => {
@@ -30,7 +30,7 @@ describe('to-api-format', () => {
     siblings: [
       {
         siblingId: 'MOCK_SIBLING_ID',
-        siblingRelation: 'MOCK_RELATION',
+        siblingRelation: SiblingRelationships.SISTER,
         siblingPoType: 'MOCK_TYPE',
         siblingPoNumber: 'MOCK_NUMBER',
       },
@@ -92,7 +92,7 @@ describe('to-api-format', () => {
           id: 'MOCK_SIBLING_ID',
           value: {
             siblingId: 'MOCK_SIBLING_ID',
-            siblingRelation: 'MOCK_RELATION',
+            siblingRelation: SiblingRelationships.SISTER,
             siblingPoType: 'MOCK_TYPE',
             siblingPoNumber: 'MOCK_NUMBER',
           },

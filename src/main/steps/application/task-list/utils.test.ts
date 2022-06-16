@@ -7,6 +7,7 @@ import {
   LanguagePreference,
   Nationality,
   PaymentStatus,
+  SiblingRelationships,
   State,
   YesNoNotsure,
   YesOrNo,
@@ -831,7 +832,7 @@ describe('utils', () => {
           siblings: [
             {
               siblingId: 'MOCK_SIBLING_ID',
-              siblingRelation: 'MOCK_SIBLING_RELATION',
+              siblingRelation: SiblingRelationships.SISTER,
               siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
             },
           ],
@@ -844,7 +845,7 @@ describe('utils', () => {
           siblings: [
             {
               siblingId: 'MOCK_SIBLING_ID',
-              siblingRelation: 'MOCK_SIBLING_RELATION',
+              siblingRelation: SiblingRelationships.SISTER,
               siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
               siblingPoNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
             },
