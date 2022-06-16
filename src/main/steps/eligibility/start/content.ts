@@ -33,8 +33,8 @@ const cy: typeof en = content => ({
   line2:
     'Gallwch gychwyn eich cais unrhyw bryd, ond mae’n rhaid bod y plentyn wedi bod yn byw gyda chi am o leiaf 10 wythnos cyn y gallwch ei gyflwyno.',
   line3:
-    'Gallwch gadw eich cais unrhyw bryd drwy glicio ar ‘cadw fel drafft’. Bydd hyn yn sicrhau bod eich atebion yn cael eu cadw fel y gallwch barhau i weithio ar y cais nes ymlaen. Gallwch ond cyflwyno’r cais pan fydd yr holl adrannau wedi’u llenwiCyn i chi ddechrau.',
-  heading1: 'Before you start (in welsh)',
+    'Gallwch gadw eich cais unrhyw bryd drwy glicio ar ‘cadw fel drafft’. Bydd hyn yn sicrhau bod eich atebion yn cael eu cadw fel y gallwch barhau i weithio ar y cais nes ymlaen. Gallwch ond cyflwyno’r cais pan fydd yr holl adrannau wedi’u llenwi.',
+  heading1: 'Cyn i chi ddechrau',
   subheading1: 'Eich manylion chi',
   line4: 'Mae angen i chi ddarparu eich manylion chi a manylion unrhyw ail geisydd.',
   line5:
