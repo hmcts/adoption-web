@@ -64,6 +64,12 @@ const fields: FromApiConverters = {
   applicant1DateOfBirth: data => ({
     applicant1DateOfBirth: fromApiDate(data.applicant1DateOfBirth),
   }),
+  birthMotherLastAddressDate: data => ({
+    birthMotherLastAddressDate: fromApiDate(data.birthMotherLastAddressDate),
+  }),
+  birthFatherLastAddressDate: data => ({
+    birthFatherLastAddressDate: fromApiDate(data.birthFatherLastAddressDate),
+  }),
   applicant2DateOfBirth: data => ({
     applicant2DateOfBirth: fromApiDate(data.applicant2DateOfBirth),
   }),

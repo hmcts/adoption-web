@@ -327,11 +327,11 @@ export const childrenSummaryList = (
           value: content.gender[userCase.childrenSexAtBirth!],
           changeUrl: Urls.CHILDREN_SEX_AT_BIRTH,
         },
-        {
-          key: keys.nationality,
-          valueHtml: formatNationalities(userCase.childrenNationality!, userCase.childrenAdditionalNationalities!),
-          changeUrl: Urls.CHILDREN_NATIONALITY,
-        },
+        // {
+        //   key: keys.nationality,
+        //   valueHtml: formatNationalities(userCase.childrenNationality!, userCase.childrenAdditionalNationalities!),
+        //   changeUrl: Urls.CHILDREN_NATIONALITY,
+        // },
         {
           key: keys.fullNameAfterAdoption,
           value: userCase.childrenFirstNameAfterAdoption + ' ' + userCase.childrenLastNameAfterAdoption,

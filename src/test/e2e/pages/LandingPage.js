@@ -1,11 +1,12 @@
 const { I } = inject();
-
+const config = require('../config');
 module.exports = {
   fields: {
     applyingWith: 'input[id$="applyingWith"]',
     applyWithMySpouse: 'input[id$="applyingWith-2"]',
     applyWithSomeone: 'input[id$="applyingWith-3"]',
     otherApplicantRelation: 'input[id$="otherApplicantRelation"]',
+    caseRef: 'input[id$="caseRef"]',
   },
   async seeTheLandingPage() {
     await I.wait(2);
@@ -38,5 +39,18 @@ module.exports = {
     await I.wait(2);
     await I.retry(3).see('There is a problem');
     await I.retry(3).see('Select an option which best describes who is applying');
+  },
+
+  async searchForCaseInLALandingPage(caseId) {
+    await I.retry(3).click('Sign out');
+    await I.wait(5);
+    console.log('User using the URL= ' + config.baseUrl + 'la-portal/kba-case-ref');
+    await I.amOnPage(config.baseUrl + 'la-portal/kba-case-ref');
+    await I.wait(5);
+    await I.retry(3).see('What is the adoption case reference number?');
+    await I.retry(3).fillField(this.fields.caseRef, caseId);
+    await I.retry(3).click('Save and continue');
+    await I.wait(5);
+    await I.retry(3).see('Apply to adopt a child placed in your care');
   },
 };

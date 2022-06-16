@@ -156,4 +156,59 @@ export const PRIVACY_POLICY: PageLink = '/privacy-policy';
 export const ACCESSIBILITY_STATEMENT: PageLink = '/accessibility-statement';
 export const TERMS_AND_CONDITIONS: PageLink = '/terms-and-conditions';
 export const CONTACT_US: PageLink = '/contact-us';
+
 export const SAVE_AS_DRAFT: PageLink = '/save-as-draft';
+
+/*********************************** LA PORTAL URLS ***********************************/
+export const LA_PORTAL = '/la-portal';
+export const LA_PORTAL_KBA_CASE_REF = '/la-portal/kba-case-ref';
+export const LA_PORTAL_KBA_CALLBACK = '/la-portal/kba-completed';
+export const LA_PORTAL_TASK_LIST: PageLink = `${LA_PORTAL}/task-list`;
+export const LA_PORTAL_CHILD_SEX_AT_BIRTH: PageLink = `${LA_PORTAL}/child/sex-at-birth`;
+export const LA_PORTAL_CHILD_NATIONALITY: PageLink = `${LA_PORTAL}/child/nationality`;
+export const LA_PORTAL_CHILD_PLACEMENT_ORDER_TYPE: PageLink = `${LA_PORTAL}/child/placement-order-type`;
+export const LA_PORTAL_CHILD_PLACEMENT_ORDER_NUMBER: PageLink = `${LA_PORTAL}/child/placement-order-number`;
+export const LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT: PageLink = `${LA_PORTAL}/child/placement-order-court`;
+export const LA_PORTAL_CHILD_PLACEMENT_ORDER_DATE: PageLink = `${LA_PORTAL}/child/placement-order-date`;
+export const LA_PORTAL_CHILD_PLACEMENT_ORDER_SUMMARY: PageLink = `${LA_PORTAL}/child/placement-order-summary`;
+export const LA_PORTAL_CHILD_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS: PageLink = `${LA_PORTAL}/child/placement-order-check-your-answers`;
+
+export const LA_PORTAL_BIRTH_MOTHER_FULL_NAME: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/full-name`;
+export const LA_PORTAL_BIRTH_MOTHER_STILL_ALIVE: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/still-alive`;
+export const LA_PORTAL_BIRTH_MOTHER_NATIONALITY: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/nationality`;
+export const LA_PORTAL_BIRTH_MOTHER_OCCUPATION: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/occupation`;
+export const LA_PORTAL_BIRTH_MOTHER_ADDRESS_KNOWN: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/address-known`;
+export const LA_PORTAL_BIRTH_MOTHER_FIND_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/address/lookup`;
+export const LA_PORTAL_BIRTH_MOTHER_SELECT_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/address/select`;
+export const LA_PORTAL_BIRTH_MOTHER_MANUAL_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/address/manual`;
+export const LA_PORTAL_BIRTH_MOTHER_INTERNATIONAL_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/address/international`;
+export const LA_PORTAL_BIRTH_MOTER_LAST_ADDRESS_CONFIRMED: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/last-address-confirmed`;
+
+export const LA_PORTAL_BIRTH_FATHER_NAME_ON_CERTIFICATE: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/name-on-certificate`;
+export const LA_PORTAL_BIRTH_FATHER_IDENTITY_KNOWN: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/identity-known`;
+export const LA_PORTAL_BIRTH_FATHER_FULL_NAME: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/full-name`;
+export const LA_PORTAL_BIRTH_FATHER_STILL_ALIVE: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/still-alive`;
+export const LA_PORTAL_BIRTH_FATHER_NATIONALITY: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/nationality`;
+export const LA_PORTAL_BIRTH_FATHER_OCCUPATION: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/occupation`;
+export const LA_PORTAL_BIRTH_FATHER_ADDRESS_KNOWN: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/address-known`;
+export const LA_PORTAL_BIRTH_FATHER_FIND_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/address/lookup`;
+export const LA_PORTAL_BIRTH_FATHER_SELECT_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/address/select`;
+export const LA_PORTAL_BIRTH_FATHER_MANUAL_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/address/manual`;
+export const LA_PORTAL_BIRTH_FATHER_INTERNATIONAL_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/address/international`;
+export const LA_PORTAL_BIRTH_FATHER_LAST_ADDRESS_CONFIRMED: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/last-address-confirmed`;
+
+export const LA_PORTAL_OTHER_PARENT_EXISTS: PageLink = `${LA_PORTAL}${OTHER_PARENT}/exists`;
+export const LA_PORTAL_OTHER_PARENT_FULL_NAME: PageLink = `${LA_PORTAL}${OTHER_PARENT}/full-name`;
+export const LA_PORTAL_OTHER_PARENT_ADDRESS_KNOWN: PageLink = `${LA_PORTAL}${OTHER_PARENT}/address-known`;
+export const LA_PORTAL_OTHER_PARENT_FIND_ADDRESS: PageLink = `${LA_PORTAL}${OTHER_PARENT}/address/lookup`;
+export const LA_PORTAL_OTHER_PARENT_SELECT_ADDRESS: PageLink = `${LA_PORTAL}${OTHER_PARENT}/address/select`;
+export const LA_PORTAL_OTHER_PARENT_MANUAL_ADDRESS: PageLink = `${LA_PORTAL}${OTHER_PARENT}/address/manual`;
+export const LA_PORTAL_OTHER_PARENT_INTERNATIONAL_ADDRESS: PageLink = `${LA_PORTAL}${OTHER_PARENT}/address/international`;
+
+export const LA_PORTAL_SIBLING_EXISTS: PageLink = `${LA_PORTAL}${SIBLING}/exists`;
+export const LA_PORTAL_SIBLING_RELATION: PageLink = `${LA_PORTAL}${SIBLING}/relation`;
+export const LA_PORTAL_SIBLING_ORDER_TYPE: PageLink = `${LA_PORTAL}${SIBLING}/placement-order-type`;
+export const LA_PORTAL_SIBLING_ORDER_CASE_NUMBER: PageLink = `${LA_PORTAL}${SIBLING}/placement-order-number`;
+export const LA_PORTAL_SIBLING_ORDER_SUMMARY: PageLink = `${LA_PORTAL}${SIBLING}/summary`;
+export const LA_PORTAL_SIBLING_ORDER_CHECK_YOUR_ANSWERS: PageLink = `${LA_PORTAL}${SIBLING}/placement-order-check-your-answers`;
+export const LA_PORTAL_SIBLING_REMOVE_PLACEMENT_ORDER: PageLink = `${LA_PORTAL}${SIBLING}/remove-placement-order`;

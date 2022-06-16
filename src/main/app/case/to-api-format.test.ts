@@ -16,6 +16,7 @@ describe('to-api-format', () => {
     dateChildMovedIn: { day: '1', month: '1', year: '2021' },
     applicant1DateOfBirth: { day: '20', month: '1', year: '2000' },
     applicant2DateOfBirth: undefined,
+    birthMotherLastAddressDate: { day: '20', month: '1', year: '2020' },
     childrenDateOfBirth: { day: '5', month: '1', year: '2020' },
     placementOrders: [
       {
@@ -73,6 +74,7 @@ describe('to-api-format', () => {
       applicant1DateOfBirth: '2000-01-20',
       applicant2DateOfBirth: '',
       childrenDateOfBirth: '2020-01-05',
+      birthMotherLastAddressDate: '2020-01-20',
       placementOrders: [
         {
           id: 'MOCK_ID',
