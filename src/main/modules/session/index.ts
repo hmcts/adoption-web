@@ -25,6 +25,7 @@ export class SessionStorage {
           httpOnly: true,
           ...(config.get('session.secureCookie') === 'true' ? { secure: true } : {}),
           maxAge: cookieMaxAge,
+          sameSite: 'lax', // required for the oauth2 redirect
         },
         rolling: true, // Renew the cookie for another 20 minutes on each request
         store: this.getStore(app),

@@ -1477,14 +1477,14 @@ describe('review-pay-submit > check-your-answers > utils', () => {
           title: 'Family court details',
           rows: [
             {
-              key: { text: 'Family court name' },
+              key: { text: 'Placement court name' },
               value: { text: 'MOCK_PLACEMENT_ORDER_COURT' },
               actions: {
                 items: [
                   {
                     href: '/children/find-placement-order-court?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Family court name',
+                    visuallyHiddenText: 'Placement court name',
                   },
                 ],
               },
