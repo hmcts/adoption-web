@@ -16,8 +16,8 @@ cookieManager.on('UserPreferencesSaved', preferences => {
       dtrum.enable();
       dtrum.enableSessionReplay();
     } else {
-      dtrum.disableSessionReplay();
       dtrum.disable();
+      dtrum.disableSessionReplay();
     }
   }
 });
@@ -33,8 +33,35 @@ cookieManager.init({
   userPreferences: {
     cookieName: 'adoption-web-cookie-preferences',
   },
+  preferencesForm: {
+    class: 'cookie-preferences-form',
+  },
+  cookieManifest: [
+    {
+      categoryName: 'essential',
+      optional: false,
+      cookies: [
+        'adoption-web-cookie-preferences',
+        'adoption-web-session',
+        'Idam.Session',
+        'seen_cookie_message',
+        '_oauth2_proxy',
+      ],
+    },
+    {
+      categoryName: 'analytics',
+      optional: true,
+      cookies: ['_ga', '_gid', '_gat_UA-'],
+    },
+    {
+      categoryName: 'apm',
+      optional: true,
+      cookies: ['dtCookie', 'dtLatC', 'dtPC', 'dtSa', 'rxVisitor', 'rxvt'],
+    },
+  ],
   cookieBanner: {
     class: 'cookie-banner',
+    showWithPreferencesForm: false,
     actions: [
       {
         name: 'accept',
@@ -53,40 +80,6 @@ cookieManager.init({
         buttonClass: 'cookie-banner-hide-button',
       },
     ],
-  },
-  preferencesForm: {
-    class: 'cookie-preferences-form',
-  },
-  cookieManifest: [
-    {
-      categoryName: 'essential',
-      optional: false,
-      cookies: [
-        'adoption-web-cookie-preferences',
-        'adoption-web-session',
-        '_oauth2_proxy',
-        'ajs_user_id',
-        'ajs_group_id',
-        'ajs_anonymous_id',
-        'Idam.Session',
-        'seen_cookie_message',
-        '_oauth2_proxy',
-      ],
-    },
-    {
-      categoryName: 'analytics',
-      cookies: ['_ga', '_gid', '_gat_UA-'],
-    },
-    {
-      categoryName: 'apm',
-      cookies: ['dtCookie', 'dtLatC', 'dtPC', 'dtSa', 'rxVisitor', 'rxvt'],
-    },
-  ],
-  additionalOptions: {
-    defaultConsent: false,
-    deleteUndefinedCookies: false,
-    disableCookieBanner: false,
-    disableCookiePreferencesForm: false,
   },
 });
 

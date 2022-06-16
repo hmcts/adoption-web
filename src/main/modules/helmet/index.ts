@@ -8,6 +8,8 @@ export interface HelmetConfig {
 
 const googleAnalyticsDomain = '*.google-analytics.com';
 const tagManager = ['*.googletagmanager.com', 'https://tagmanager.google.com'];
+const azureBlob = '*.blob.core.windows.net';
+const doubleclick = 'stats.g.doubleclick.net';
 const self = "'self'";
 
 /**
@@ -33,18 +35,20 @@ export class Helmet {
       "'sha256-gpnWB3ld/ux/M3KURJluvKNOUQ82MPOtzVeCtqK7gmE='",
       "'sha256-ZjdUCAt//TDpVjTXX+6bDfZNwte/RfSYJDgtfQtaoXs='",
       "'sha256-FooZGzfstFw/L3iO1nVNFoGLxWpFKFVsOpewkb3rIaU='",
+      "'sha256-oXrQuOn5ue0eDsXk5lnJU7Mx7EpLv+H1yozv54mRMvA='",
     ];
 
-    const connectSrc = [self, googleAnalyticsDomain];
+    const connectSrc = [self, googleAnalyticsDomain, doubleclick];
+
     const imgSrc = [
       self,
+      azureBlob,
       ...tagManager,
       googleAnalyticsDomain,
       'data:',
       'https://ssl.gstatic.com',
       'https://www.gstatic.com',
     ];
-
     if (app.locals.developmentMode) {
       scriptSrc.push("'unsafe-eval'");
     }
@@ -54,7 +58,7 @@ export class Helmet {
         directives: {
           connectSrc,
           defaultSrc: ["'none'"],
-          fontSrc: [self, 'data:'],
+          fontSrc: [self, 'data:', 'https://fonts.gstatic.com'],
           imgSrc,
           objectSrc: [self],
           scriptSrc,

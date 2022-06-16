@@ -13,7 +13,6 @@ import {
   CITIZEN_ADD_PAYMENT,
   CITIZEN_CREATE,
   CaseData,
-  JURISDICTION,
   ListValue,
   Payment,
   State,
@@ -22,11 +21,7 @@ import { fromApiFormat } from './from-api-format';
 import { toApiFormat } from './to-api-format';
 
 export class CaseApi {
-  constructor(
-    private readonly axios: AxiosInstance,
-    private readonly userDetails: UserDetails,
-    private readonly logger: LoggerInstance
-  ) {}
+  constructor(private readonly axios: AxiosInstance, private readonly logger: LoggerInstance) {}
 
   public async getOrCreateCase(serviceType: Adoption, userDetails: UserDetails): Promise<CaseWithId> {
     const userCase = await this.getCase();
@@ -52,10 +47,16 @@ export class CaseApi {
 
   public async getCases(): Promise<CcdV1Response[]> {
     try {
-      const response = await this.axios.get<CcdV1Response[]>(
-        `/citizens/${this.userDetails.id}/jurisdictions/${JURISDICTION}/case-types/${CASE_TYPE}/cases`
+      const query = {
+        query: { match_all: {} },
+        sort: [{ id: { order: 'asc' } }],
+      };
+      const response = await this.axios.post<ES<CcdV1Response>>(
+        `/searchCases?ctid=${CASE_TYPE}`,
+        JSON.stringify(query)
       );
-      return response.data;
+      //this.logger.info('Case/s fetched using elastic search API :: ', response.data.cases);
+      return response.data.cases;
     } catch (err) {
       this.logError(err);
       throw new Error('Case could not be retrieved.');
@@ -160,10 +161,14 @@ export const getCaseApi = (userDetails: UserDetails, logger: LoggerInstance): Ca
         'Content-Type': 'application/json',
       },
     }),
-    userDetails,
     logger
   );
 };
+
+interface ES<T> {
+  cases: T[];
+  total: number;
+}
 
 interface CcdV1Response {
   id: string;
