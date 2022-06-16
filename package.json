@@ -32,6 +32,8 @@
     "test:crossbrowser-e2e": "MOCHAWESOME_REPORTFILENAME=crossbrowser codeceptjs run-multiple --grep \"@cross-browser\" ${BROWSER_GROUP:-'--all'} -c saucelabs.conf.js --reporter mocha-multi",
     "test:crossbrowser": "./bin/run-crossbrowser-tests.sh",
     "test:local": "codeceptjs run-multiple parallel",
+    "test:pact": "jest -c jest.pact.config.js --runInBand",
+    "pact:publish": "NODE_ENV=test NODE_PATH=. LOG_LEVEL=error ts-node src/test/pact/publish/publish.ts",
     "broker": "docker-compose -f broker-compose.yaml up -d",
     "broker:stop": "docker-compose -f broker-compose.yaml down"
   },
