@@ -16,16 +16,18 @@ Scenario(
   }
 );
 
-Scenario(
-  'Verify child birth father details save as draft',
-  async ({ loginPage, landingPage, taskListPage, childBirthFatherDetailsPage, saveAsDraftPage }) => {
-    await loginPage.createCitizenUserAndSignIn();
-    await landingPage.seeTheLandingPage();
-    await landingPage.selectApplyWithMySpouseSection();
+//TODO waiting for  LA Save as Draft functionality
 
-    await taskListPage.selectChildBirthFatherDetails();
-    await childBirthFatherDetailsPage.childBirthFatherDetailsSaveAsDraft();
-    await saveAsDraftPage.saveAsDraftConfirmation();
-    await taskListPage.verifyChildBirthFatherInProgresStatus();
-  }
-);
+// Scenario(
+//   'Verify child birth father details save as draft',
+//   async ({ loginPage, landingPage, taskListPage, childBirthFatherDetailsPage, saveAsDraftPage }) => {
+//     await loginPage.createCitizenUserAndSignIn();
+//     await landingPage.seeTheLandingPage();
+//     await landingPage.selectApplyWithMySpouseSection();
+//
+//     await taskListPage.selectChildBirthFatherDetails();
+//     await childBirthFatherDetailsPage.childBirthFatherDetailsSaveAsDraft();
+//     await saveAsDraftPage.saveAsDraftConfirmation();
+//     await taskListPage.verifyChildBirthFatherInProgresStatus();
+//   }
+// );

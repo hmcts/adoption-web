@@ -7,7 +7,7 @@
     <p class="govuk-body govuk-!-font-size-19">{{ userCase.birthFatherAddressPostcode }}</p>
     <p class="govuk-body">
       {% if laPortal == true %}
-        <a href="/la-portal/birth-father/address/select" data-link="resetPostCodeLookup" class="govuk-link govuk-!-font-size-19" aria-label="{{ change }} {{ postcode }}">{{ change }}</a>
+        <a href="/la-portal/birth-father/address/lookup" data-link="resetPostCodeLookup" class="govuk-link govuk-!-font-size-19" aria-label="{{ change }} {{ postcode }}">{{ change }}</a>
       {% else %}
         <a href="{{changePostCodeUrl}}" data-link="resetPostCodeLookup" class="govuk-link govuk-!-font-size-19" aria-label="{{ change }} {{ postcode }}">{{ change }}</a>
       {% endif %}

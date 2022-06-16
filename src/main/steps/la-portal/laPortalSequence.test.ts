@@ -9,7 +9,6 @@ import { laPortalSequence } from './laPortalSequence';
 describe('la-portal > laPortalSequence', () => {
   test('should contain 46 entries in sibling screen sequence', () => {
     Date.now = jest.fn(() => +new Date('2021-01-01'));
-
     expect(laPortalSequence).toHaveLength(47);
 
     expect(laPortalSequence[0].url).toBe('/la-portal/kba-case-ref');
