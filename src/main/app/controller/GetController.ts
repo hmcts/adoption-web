@@ -6,7 +6,7 @@ import { LanguageToggle } from '../../modules/i18n';
 import { CommonContent, Language, generatePageContent } from '../../steps/common/common.content';
 import * as Urls from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
-import { CITIZEN_UPDATE, State } from '../case/definition';
+import { CITIZEN_UPDATE, SYSTEM_USER_UPDATE, State } from '../case/definition';
 
 import { AppRequest } from './AppRequest';
 
@@ -110,8 +110,10 @@ export class GetController {
     });
   }
 
-  //eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected getEventName(req: AppRequest): string {
+  public getEventName(req: AppRequest): string {
+    if (req.session.user?.isSystemUser) {
+      return SYSTEM_USER_UPDATE;
+    }
     return CITIZEN_UPDATE;
   }
 }

@@ -48,6 +48,7 @@ export const getContactDetailsStatus = (userCase: CaseWithId, fieldPrefix: Field
   const contactDetailsConsent = userCase[`${fieldPrefix}ContactDetailsConsent`];
   const emailAddress = userCase[`${fieldPrefix}EmailAddress`];
   const phoneNumber = userCase[`${fieldPrefix}PhoneNumber`];
+  const languagePreference = !!userCase[`${fieldPrefix}LanguagePreference`];
   const applicant2AddressSameAsApplicant1 = userCase[`${fieldPrefix}AddressSameAsApplicant1`];
 
   let addressAvailable = addressComplete(userCase, fieldPrefix);
@@ -57,11 +58,11 @@ export const getContactDetailsStatus = (userCase: CaseWithId, fieldPrefix: Field
 
   const contactDetailsAvailable = !!contactDetailsConsent && !!emailAddress && !!phoneNumber;
 
-  if (addressAvailable && contactDetailsAvailable) {
+  if (addressAvailable && contactDetailsAvailable && languagePreference) {
     return SectionStatus.COMPLETED;
   }
 
-  if (!addressAvailable && !contactDetailsAvailable) {
+  if (!addressAvailable && !contactDetailsAvailable && !languagePreference) {
     return SectionStatus.NOT_STARTED;
   }
 
@@ -134,8 +135,6 @@ export const getChildrenPlacementOrderStatus = (userCase: CaseWithId): SectionSt
 };
 
 export const getChildrenBirthCertificateStatus = (userCase: CaseWithId): SectionStatus => {
-  const childrenFirstName = userCase.childrenFirstName;
-  const childrenLastName = userCase.childrenLastName;
   const childrenDateOfBirth = userCase.childrenDateOfBirth as CaseDate;
   const dateOfBirthComplete =
     !areDateFieldsFilledIn(childrenDateOfBirth) &&
@@ -156,11 +155,11 @@ export const getChildrenBirthCertificateStatus = (userCase: CaseWithId): Section
     !!nationality.length &&
     (!nationality.includes('Other') || (!!nationalities.length && nationality.includes('Other')));
 
-  if (childrenFirstName && childrenLastName && dateOfBirthComplete && sexAtBirthComplete && nationalityComplete) {
+  if (dateOfBirthComplete && sexAtBirthComplete && nationalityComplete) {
     return SectionStatus.COMPLETED;
   }
 
-  if (!childrenFirstName && !childrenLastName && !dateOfBirthComplete && !sexAtBirthComplete && !nationalityComplete) {
+  if (!dateOfBirthComplete && !sexAtBirthComplete && !nationalityComplete) {
     return SectionStatus.NOT_STARTED;
   }
 
@@ -170,12 +169,14 @@ export const getChildrenBirthCertificateStatus = (userCase: CaseWithId): Section
 export const getAdoptionCertificateDetailsStatus = (userCase: CaseWithId): SectionStatus => {
   const firstName = userCase.childrenFirstNameAfterAdoption;
   const lastName = userCase.childrenLastNameAfterAdoption;
+  const childrenFirstName = userCase.childrenFirstName;
+  const childrenLastName = userCase.childrenLastName;
 
-  if (firstName && lastName) {
+  if (childrenFirstName && childrenLastName && firstName && lastName) {
     return SectionStatus.COMPLETED;
   }
 
-  if (!firstName && !lastName) {
+  if (!childrenFirstName && !childrenLastName && !firstName && !lastName) {
     return SectionStatus.NOT_STARTED;
   }
 
@@ -404,14 +405,14 @@ const getAllSectionStatuses = (userCase: CaseWithId): SectionStatus[] => {
           getContactDetailsStatus(userCase, FieldPrefix.APPLICANT2),
         ]
       : []),
-    getChildrenBirthCertificateStatus(userCase),
-    getAdoptionCertificateDetailsStatus(userCase),
-    getChildrenPlacementOrderStatus(userCase),
-    getBirthMotherDetailsStatus(userCase),
-    getBirthFatherDetailsStatus(userCase),
-    getOtherParentStatus(userCase),
+    //getChildrenBirthCertificateStatus(userCase),
+    //getAdoptionCertificateDetailsStatus(userCase),
+    //getChildrenPlacementOrderStatus(userCase),
+    //getBirthMotherDetailsStatus(userCase),
+    //getBirthFatherDetailsStatus(userCase),
+    //getOtherParentStatus(userCase),
     getAdoptionAgencyDetailStatus(userCase),
-    getSiblingStatus(userCase),
+    //getSiblingStatus(userCase),
     findFamilyCourtStatus(userCase),
   ];
 };

@@ -188,9 +188,7 @@ export interface Application {
   jurisdictionApplicant2Domicile: YesOrNo;
   jurisdictionApp1HabituallyResLastTwelveMonths: YesOrNo;
   jurisdictionApp1HabituallyResLastSixMonths: YesOrNo;
-  jurisdictionResidualEligible: YesOrNo;
   jurisdictionBothLastHabituallyResident: YesOrNo;
-  jurisdictionConnections: JurisdictionConnections[];
   solServiceDateOfService: DateAsString;
   solServiceDocumentsServed: string;
   solServiceOnWhomServed: string;
@@ -343,6 +341,7 @@ export interface CaseData {
   applicant2AddressSameAsApplicant1: string;
   applicant2ContactDetails: ContactDetails[];
   applicant2ContactDetailsConsent: YesOrNo;
+  applicant2LanguagePreference?: LanguagePreference;
 
   childrenFirstName: string;
   childrenLastName: string;
@@ -375,6 +374,7 @@ export interface CaseData {
   birthMotherAddressCountry: string;
   birthMotherNameOnCertificate: string;
   birthMotherAddressNotKnownReason: string;
+  birthMotherLastAddressDate: string;
 
   birthFatherFirstName: string;
   birthFatherLastName: string;
@@ -393,6 +393,8 @@ export interface CaseData {
   birthFatherAddressCountry: string;
   birthFatherNameOnCertificate: string;
   birthFatherAddressNotKnownReason: string;
+  birthFatherLastAddressDate: string;
+  birthFatherIdentityKnown: string;
 
   otherParentFirstName: string;
   otherParentLastName: string;
@@ -524,9 +526,7 @@ export interface CaseData {
   jurisdictionApplicant2Domicile: YesOrNo;
   jurisdictionApp1HabituallyResLastTwelveMonths: YesOrNo;
   jurisdictionApp1HabituallyResLastSixMonths: YesOrNo;
-  jurisdictionResidualEligible: YesOrNo;
   jurisdictionBothLastHabituallyResident: YesOrNo;
-  jurisdictionConnections: JurisdictionConnections[];
   solServiceDateOfService: DateAsString;
   solServiceDocumentsServed: string;
   solServiceOnWhomServed: string;
@@ -668,7 +668,6 @@ export interface CaseData {
   confidentialDocumentsUploaded: ListValue<ConfidentialDivorceDocument>[];
   generalOrders: ListValue<DivorceGeneralOrder>[];
   previousCaseId: CaseLink;
-  dueDate: DateAsString;
   notes: ListValue<CaseNote>[];
   note: string;
   bulkListCaseReference: string;
@@ -873,7 +872,6 @@ export interface Jurisdiction {
   App1HabituallyResLastSixMonths: YesOrNo;
   ResidualEligible: YesOrNo;
   BothLastHabituallyResident: YesOrNo;
-  Connections: JurisdictionConnections[];
 }
 
 export interface LabelContent {
@@ -1265,62 +1263,6 @@ export const enum JudgeCostsClaimGranted {
   ADJOURN = 'Adjourn',
 }
 
-/**
- * Values:
- * - `J` - APP_1_RESIDENT_JOINT
- * - `A` - APP_1_APP_2_RESIDENT
- * - `B` - APP_1_APP_2_LAST_RESIDENT
- * - `C` - APP_2_RESIDENT
- * - `D` - APP_1_RESIDENT_TWELVE_MONTHS
- * - `E` - APP_1_RESIDENT_SIX_MONTHS
- * - `F` - APP_1_APP_2_DOMICILED
- * - `G` - APP_1_DOMICILED
- * - `H` - APP_2_DOMICILED
- * - `I` - RESIDUAL_JURISDICTION
- */
-export const enum JurisdictionConnections {
-  /**
-   * APP_1_RESIDENT_JOINT
-   */
-  APP_1_RESIDENT_JOINT = 'J',
-  /**
-   * APP_1_APP_2_RESIDENT
-   */
-  APP_1_APP_2_RESIDENT = 'A',
-  /**
-   * APP_1_APP_2_LAST_RESIDENT
-   */
-  APP_1_APP_2_LAST_RESIDENT = 'B',
-  /**
-   * APP_2_RESIDENT
-   */
-  APP_2_RESIDENT = 'C',
-  /**
-   * APP_1_RESIDENT_TWELVE_MONTHS
-   */
-  APP_1_RESIDENT_TWELVE_MONTHS = 'D',
-  /**
-   * APP_1_RESIDENT_SIX_MONTHS
-   */
-  APP_1_RESIDENT_SIX_MONTHS = 'E',
-  /**
-   * APP_1_APP_2_DOMICILED
-   */
-  APP_1_APP_2_DOMICILED = 'F',
-  /**
-   * APP_1_DOMICILED
-   */
-  APP_1_DOMICILED = 'G',
-  /**
-   * APP_2_DOMICILED
-   */
-  APP_2_DOMICILED = 'H',
-  /**
-   * RESIDUAL_JURISDICTION
-   */
-  RESIDUAL_JURISDICTION = 'I',
-}
-
 export const enum LanguagePreference {
   ENGLISH = 'ENGLISH',
   WELSH = 'WELSH',
@@ -1655,41 +1597,13 @@ export const enum HttpStatus {
   NOT_EXTENDED = 'NOT_EXTENDED',
   NETWORK_AUTHENTICATION_REQUIRED = 'NETWORK_AUTHENTICATION_REQUIRED',
 }
+
 export const CASE_TYPE = 'A58';
 export const JURISDICTION = 'ADOPTION';
 export const CITIZEN_SUBMIT = 'citizen-submit-application';
-export const CITIZEN_INVITE_APPLICANT_2 = 'citizen-invite-applicant2';
 export const CITIZEN_CREATE = 'citizen-create-application';
-export const APPLICANT_2_APPROVE = 'applicant2-approve';
-export const APPLICANT_2_CONFIRM_RECEIPT = 'applicant2-confirm-receipt';
-export const CITIZEN_UPDATE_CONTACT_DETAILS = 'citizen-update-contact-details';
 export const CITIZEN_SAVE_AND_CLOSE = 'citizen-save-and-close';
-export const APPLICANT_2_NOT_BROKEN = 'applicant2-not-broken';
 export const CITIZEN_UPDATE = 'citizen-update-application';
-export const CITIZEN_APPLICANT_2_REQUEST_CHANGES = 'applicant2-request-changes';
+export const SYSTEM_USER_UPDATE = 'system-user-update-application';
 export const SWITCH_TO_SOLE = 'switch-to-sole';
-export const APPLICANT_1_CONFIRM_RECEIPT = 'applicant1-confirm-receipt';
-export const APPLICANT_1_RESUBMIT = 'applicant1-resubmit';
 export const CITIZEN_ADD_PAYMENT = 'citizen-add-payment';
-export const CITIZEN_APPLICANT2_UPDATE = 'citizen-applicant2-update-application';
-export const UPDATE_AOS = 'update-aos';
-export const DRAFT_CONDITIONAL_ORDER = 'draft-conditional-order';
-export const UPDATE_CONDITIONAL_ORDER = 'update-conditional-order';
-export const SUBMIT_CONDITIONAL_ORDER = 'submit-conditional-order';
-export const SUBMIT_AOS = 'submit-aos';
-export const DRAFT_AOS = 'draft-aos';
-export const SYSTEM_REMIND_APPLICANT2 = 'system-remind-applicant2';
-export const SYSTEM_UPDATE_CASE_PRONOUNCEMENT_JUDGE = 'system-update-case-pronouncement-judge';
-export const SYSTEM_LINK_APPLICANT_2 = 'system-link-applicant2';
-export const SYSTEM_PRONOUNCE_CASE = 'system-pronounce-case';
-export const SYSTEM_UPDATE_CASE_COURT_HEARING = 'system-update-case-court-hearing';
-export const SYSTEM_REMIND_APPLICANT_1_APPLICATION_REVIEWED = 'system-remind-applicant1';
-export const SYSTEM_MIGRATE_CASE = 'system-migrate-case';
-export const SYSTEM_LINK_WITH_BULK_CASE = 'system-link-with-bulk-case';
-export const SYSTEM_ISSUE_SOLICITOR_SERVICE_PACK = 'system-issue-solicitor-service-pack';
-export const SYSTEM_PROGRESS_HELD_CASE = 'system-progress-held-case';
-export const SYSTEM_REMOVE_BULK_CASE = 'system-remove-bulk-case';
-export const SYSTEM_NOTIFY_APPLICANT1_CONDITIONAL_ORDER = 'system-notify-applicant1-conditional-order';
-export const SYSTEM_APPLICATION_NOT_REVIEWED = 'system-application-not-reviewed';
-export const SYSTEM_PROGRESS_TO_AOS_OVERDUE = 'system-progress-to-aos-overdue';
-export const CASEWORKER_SYSTEM_USER_UPDATE_ISSUE_DATE = 'system-update-issue-date';

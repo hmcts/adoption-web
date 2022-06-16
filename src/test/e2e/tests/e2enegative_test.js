@@ -8,7 +8,7 @@ Scenario(
     taskListPage,
     childDetailsPlacementOrderPage,
     childrenBirthCertificatePage,
-    childAdoptionCertificateDetailsPage,
+    childsDetailsPage,
     childBirthMothersDetailsPage,
     childBirthFatherDetailsPage,
     childOtherParentDetailsPage,
@@ -54,32 +54,35 @@ Scenario(
     await otherApplicantPersonalDetailsPage.otherApplicantPersonalDetailsSectionEmpty();
     await taskListPage.verifyOtherApplicantPersonalDetailsStatus();
 
-    await taskListPage.selectChildrenBirthCertificate();
-    await childrenBirthCertificatePage.childDetailsBirthCertificaterSection();
-    await taskListPage.verifyChildBirthCertificateDetailsStatus();
+    //TODO in future stories
 
-    await taskListPage.selectChildAdoptionCertificateDetails();
-    await childAdoptionCertificateDetailsPage.childNameAfterAdoptionDetailsSection();
-    await taskListPage.verifyAdoptionCertificateDetailStatus();
-
-    await taskListPage.selectChildBirthMotherDetails();
-    await childBirthMothersDetailsPage.childBirthMothersDetailsSection();
-    await taskListPage.verifyChildBirthMotherDetailsStatus();
-
-    await taskListPage.selectChildBirthFatherDetails();
-    await childBirthFatherDetailsPage.childBirthFatherDetailsSection();
-    await taskListPage.verifyChildBirthFatherDetailsStatus();
-
-    await taskListPage.selectChildOtherParentDetails();
-    await childOtherParentDetailsPage.childOtherParentDetailsSection();
-    await taskListPage.verifyChildOtherParentDetailsStatus();
-
-    await taskListPage.selectChildPlacementOrderDetails();
-    await childDetailsPlacementOrderPage.childDetailsPlacementOrderSection();
-
-    await taskListPage.selectSiblingDetails();
-    await childSiblingDetailsPage.childDetailsSiblingSection();
-    await taskListPage.verifySiblingDetailsStatus();
+    // await taskListPage.selectChildrenBirthCertificate();
+    // await childrenBirthCertificatePage.childDetailsBirthCertificaterSection();
+    // await taskListPage.verifyChildBirthCertificateDetailsStatus();
+    //
+    // await taskListPage.selectChildChildDetails();
+    // await childsDetailsPage.childFullNameSection();
+    // await childsDetailsPage.childNameAfterAdoptionDetailsSection();
+    // await taskListPage.verifyChildDetailsStatus();
+    //
+    // await taskListPage.selectChildBirthMotherDetails();
+    // await childBirthMothersDetailsPage.childBirthMothersDetailsSection();
+    // await taskListPage.verifyChildBirthMotherDetailsStatus();
+    //
+    // await taskListPage.selectChildBirthFatherDetails();
+    // await childBirthFatherDetailsPage.childBirthFatherDetailsSection();
+    // await taskListPage.verifyChildBirthFatherDetailsStatus();
+    //
+    // await taskListPage.selectChildOtherParentDetails();
+    // await childOtherParentDetailsPage.childOtherParentDetailsSection();
+    // await taskListPage.verifyChildOtherParentDetailsStatus();
+    //
+    // await taskListPage.selectChildPlacementOrderDetails();
+    // await childDetailsPlacementOrderPage.childDetailsPlacementOrderSection();
+    //
+    // await taskListPage.selectSiblingDetails();
+    // await childSiblingDetailsPage.childDetailsSiblingSection();
+    // await taskListPage.verifySiblingDetailsStatus();
 
     await taskListPage.selectChooseYourFamilyCourtDetails();
     await chooseYourFamilyCourtDetailsPage.childDetailsFindFamilyCourtSection();

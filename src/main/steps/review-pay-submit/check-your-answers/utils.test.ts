@@ -388,6 +388,32 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                 ],
               },
             },
+            {
+              key: { text: 'Court orders served by email' },
+              value: { text: 'Yes' },
+              actions: {
+                items: [
+                  {
+                    href: '/applicant1/contact-details?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Court orders served by email',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Emails and documents language' },
+              value: { text: 'English' },
+              actions: {
+                items: [
+                  {
+                    href: '/applicant1/language-preference?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Emails and documents language',
+                  },
+                ],
+              },
+            },
           ],
         },
       },
@@ -486,6 +512,32 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                     href: '/applicant1/contact-details?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
                     visuallyHiddenText: 'Phone number',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Court orders served by email' },
+              value: { text: 'Yes' },
+              actions: {
+                items: [
+                  {
+                    href: '/applicant1/contact-details?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Court orders served by email',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Emails and documents language' },
+              value: { text: 'English' },
+              actions: {
+                items: [
+                  {
+                    href: '/applicant1/language-preference?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Emails and documents language',
                   },
                 ],
               },
@@ -592,6 +644,32 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                 ],
               },
             },
+            {
+              key: { text: 'Court orders served by email' },
+              value: { text: 'Yes' },
+              actions: {
+                items: [
+                  {
+                    href: '/applicant2/contact-details?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Court orders served by email',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Emails and documents language' },
+              value: { text: 'English' },
+              actions: {
+                items: [
+                  {
+                    href: '/applicant2/language-preference?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Emails and documents language',
+                  },
+                ],
+              },
+            },
           ],
         },
       },
@@ -647,19 +725,6 @@ describe('review-pay-submit > check-your-answers > utils', () => {
               },
             },
             {
-              key: { text: 'Nationality' },
-              value: { html: 'British<br>MOCK_COUNTRY' },
-              actions: {
-                items: [
-                  {
-                    href: '/children/nationality?returnUrl=/review-pay-submit/check-your-answers',
-                    text: 'Change',
-                    visuallyHiddenText: 'Nationality',
-                  },
-                ],
-              },
-            },
-            {
               key: { text: 'Full name after adoption' },
               value: { text: 'MOCK_FIRST_NAME_AFTER_ADOPTION MOCK_LAST_NAME_AFTER_ADOPTION' },
               actions: {
@@ -676,6 +741,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
         },
       },
     ])('return correct summary list items when %#', ({ userCase, expected }) => {
+      //console.log(JSON.stringify(childrenSummaryList(enContent, userCase)));
       expect(childrenSummaryList(enContent, userCase)).toStrictEqual(expected);
     });
   });

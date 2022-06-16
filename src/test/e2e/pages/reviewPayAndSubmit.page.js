@@ -88,7 +88,16 @@ module.exports = {
     await I.retry(3).click('Confirm payment');
     await I.wait(5);
     await I.retry(3).waitForText('Application Submitted', 30);
+    await I.wait(5);
+  },
+
+  async getCaseIDAfterAplicationSubmit() {
     console.log(await I.retry(3).grabTextFrom(this.fields.caseID));
+    const caseId = await I.retry(3).grabTextFrom(this.fields.caseID);
+    console.log('caseId= ' + caseId);
+    const normalizeCaseId = caseId.toString().replace(/\D/g, '');
+    console.log('normalizeCaseId= ' + normalizeCaseId);
+    return normalizeCaseId;
   },
 
   async paymentCancellation() {

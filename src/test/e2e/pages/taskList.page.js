@@ -16,7 +16,7 @@ module.exports = {
     contactDetailsLinkStatus: 'strong[id$="applicant2-contact-details-status"]',
   },
   childDetails: {
-    childrenBirthCertificateLink: 'a[id$="children-birth-certificate-details"]',
+    childrenBirthCertificateLink: 'a[id$="birth-certificate-details"]',
     adoptionCertificateDetailsLink: 'a[id$="adoption-certificate-details"]',
     childrenBirthCertificateDetailsStatus: 'strong[id$="children-birth-certificate-details-status"]',
     adoptionCertificateDetails: 'strong[id$="adoption-certificate-details-status"]',
@@ -24,7 +24,7 @@ module.exports = {
     childrenBirthMotherDetailsStatus: 'strong[id$="birth-mother-details-status"]',
     childOtherParentLink: 'a[id$="other-parent"]',
     childOtherParentDetailsStatus: 'strong[id$="other-parent-status"]',
-    childrenBirthFatherLink: 'a[id$="birth-father"]',
+    childrenBirthFatherLink: 'a[id$="birth-father-details"]',
     childrenBirthFatherDetailsStatus: 'strong[id$="birth-father-status"]',
     adoptionAgencyLink: 'a[id$="adoption-agency"]',
     adoptionAgencyDetailsStatus: 'strong[id$="adoption-agency-status"]',
@@ -101,13 +101,13 @@ module.exports = {
     await I.wait(4);
   },
 
-  async selectChildAdoptionCertificateDetails() {
+  async selectChildChildDetails() {
     await I.retry(3).waitForSelector(this.childDetails.adoptionCertificateDetailsLink, 30);
     await I.retry(3).click(this.childDetails.adoptionCertificateDetailsLink);
     await I.wait(4);
   },
 
-  async verifyAdoptionCertificateDetailStatus() {
+  async verifyChildDetailsStatus() {
     await I.retry(3).waitForSelector(this.childDetails.adoptionCertificateDetails, 30);
     await I.retry(3).see('COMPLETED', this.childDetails.adoptionCertificateDetails);
   },
@@ -146,6 +146,11 @@ module.exports = {
     await I.retry(3).see('COMPLETED', this.childDetails.childrenBirthFatherDetailsStatus);
   },
 
+  async verifyChildBirthFatherInProgresStatus() {
+    await I.retry(3).waitForSelector(this.childDetails.childrenBirthFatherDetailsStatus, 30);
+    await I.retry(3).see('IN PROGRESS', this.childDetails.childrenBirthFatherDetailsStatus);
+  },
+
   async selectChildAdoptionAgencyDetails() {
     await I.retry(3).waitForSelector(this.childDetails.adoptionAgencyLink, 30);
     await I.retry(3).click(this.childDetails.adoptionAgencyLink);
@@ -155,6 +160,11 @@ module.exports = {
   async verifyChildAdoptionAgencyDetailsStatus() {
     await I.retry(3).waitForSelector(this.childDetails.adoptionAgencyDetailsStatus, 30);
     await I.retry(3).see('COMPLETED', this.childDetails.adoptionAgencyDetailsStatus);
+  },
+
+  async verifyChildAdoptionAgencyInProgresStatus() {
+    await I.retry(3).waitForSelector(this.childDetails.adoptionAgencyDetailsStatus, 30);
+    await I.retry(3).see('IN PROGRESS', this.childDetails.adoptionAgencyDetailsStatus);
   },
 
   async selectSiblingDetails() {

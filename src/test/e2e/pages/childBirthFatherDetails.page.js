@@ -17,6 +17,9 @@ module.exports = {
     birthFatherAddressTown: 'input[id$="birthFatherAddressTown"]',
     birthFatherAddressPostcode: 'input[id$="birthFatherAddressPostcode"]',
     birthFatherAddressCountry: 'input[id$="birthFatherAddressCountry"]',
+    birthFatherLastAddressDateDay: 'input[id$="birthFatherLastAddressDate-day"]',
+    birthFatherLastAddressDateMonth: 'input[id$="birthFatherLastAddressDate-month"]',
+    birthFatherLastAddressDateYear: 'input[id$="birthFatherLastAddressDate-year"]',
   },
 
   async childBirthFatherDetailsSection() {
@@ -63,6 +66,21 @@ module.exports = {
     );
     await I.wait(2);
     await I.retry(3).click('Save and continue');
+    await I.wait(4);
+
+    await I.retry(3).waitForText('When was the last date this address was confirmed?');
+    await I.retry(3).fillField(this.fields.birthFatherLastAddressDateDay, '26');
+    await I.retry(3).fillField(this.fields.birthFatherLastAddressDateMonth, '06');
+    await I.wait(2);
+    await I.retry(3).fillField(this.fields.birthFatherLastAddressDateYear, '1980');
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
+  },
+  async childBirthFatherDetailsSaveAsDraft() {
+    await I.retry(3).waitForText("Is the birth father's name on the birth certificate?");
+    await I.retry(3).click(this.fields.birthFatherNameOnCertificate);
+    await I.wait(2);
+    await I.retry(3).click('Save as draft');
     await I.wait(4);
   },
 };

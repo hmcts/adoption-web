@@ -4,9 +4,6 @@ import { OrNull, formatApplicant1CannotUploadDocuments, toApiFormat } from './to
 
 describe('to-api-format', () => {
   const results: OrNull<Partial<Case>> = {
-    applicant1HelpPayingNeeded: YesOrNo.YES,
-    applicant1AlreadyAppliedForHelpPaying: YesOrNo.YES,
-    applicant1HelpWithFeesRefNo: 'HWF-123-ABC',
     applicant1CannotUploadDocuments: [DocumentType.APPLICATION],
     applicant2CannotUploadDocuments: [],
     applicant1HasOtherNames: YesOrNo.YES,
@@ -19,6 +16,7 @@ describe('to-api-format', () => {
     dateChildMovedIn: { day: '1', month: '1', year: '2021' },
     applicant1DateOfBirth: { day: '20', month: '1', year: '2000' },
     applicant2DateOfBirth: undefined,
+    birthMotherLastAddressDate: { day: '20', month: '1', year: '2020' },
     childrenDateOfBirth: { day: '5', month: '1', year: '2020' },
     placementOrders: [
       {
@@ -60,9 +58,6 @@ describe('to-api-format', () => {
     const apiFormat = toApiFormat(results as Partial<Case>);
     expect(apiFormat).toStrictEqual({
       applicant1CannotUpload: 'Yes',
-      applicant1HWFNeedHelp: 'Yes',
-      applicant1HWFAppliedForFees: 'Yes',
-      applicant1HWFReferenceNumber: 'HWF-123-ABC',
       applicant1CannotUploadSupportingDocument: ['application'],
       applicant1HasOtherNames: 'Yes',
       applicant1AdditionalNames: [
@@ -79,6 +74,7 @@ describe('to-api-format', () => {
       applicant1DateOfBirth: '2000-01-20',
       applicant2DateOfBirth: '',
       childrenDateOfBirth: '2020-01-05',
+      birthMotherLastAddressDate: '2020-01-20',
       placementOrders: [
         {
           id: 'MOCK_ID',
@@ -119,31 +115,7 @@ describe('to-api-format', () => {
     });
   });
 
-  test('handles invalid data correctly', async () => {
-    const apiFormat = toApiFormat({
-      applicant1HelpWithFeesRefNo: '123-ABC',
-    } as Partial<Case>);
-
-    expect(apiFormat).toMatchObject({
-      applicant1HWFReferenceNumber: '',
-    });
-  });
-
   test.each([
-    {
-      applicant1HelpPayingNeeded: YesOrNo.YES,
-      expected: {
-        applicant1HWFNeedHelp: YesOrNo.YES,
-      },
-    },
-    {
-      applicant1HelpPayingNeeded: YesOrNo.NO,
-      expected: {
-        applicant1HWFNeedHelp: YesOrNo.NO,
-        applicant1HWFAppliedForFees: null,
-        applicant1HWFReferenceNumber: null,
-      },
-    },
     {
       applicant1IBelieveApplicationIsTrue: Checkbox.Checked,
       expected: {
