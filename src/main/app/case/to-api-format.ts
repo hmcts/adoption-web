@@ -1,5 +1,3 @@
-import { isInvalidHelpWithFeesRef } from '../form/validation';
-
 import { Case, CaseDate, Checkbox, formFieldsToCaseMapping, formatCase } from './case';
 import { CaseData, YesOrNo } from './definition';
 
@@ -22,6 +20,12 @@ const fields: ToApiConverters = {
   }),
   applicant1DateOfBirth: data => ({
     applicant1DateOfBirth: toApiDate(data.applicant1DateOfBirth),
+  }),
+  birthMotherLastAddressDate: data => ({
+    birthMotherLastAddressDate: toApiDate(data.birthMotherLastAddressDate),
+  }),
+  birthFatherLastAddressDate: data => ({
+    birthFatherLastAddressDate: toApiDate(data.birthFatherLastAddressDate),
   }),
   applicant2DateOfBirth: data => ({
     applicant2DateOfBirth: toApiDate(data.applicant2DateOfBirth),
@@ -88,23 +92,12 @@ const fields: ToApiConverters = {
   applicant2IBelieveApplicationIsTrue: data => ({
     applicant2StatementOfTruth: checkboxConverter(data.applicant2IBelieveApplicationIsTrue),
   }),
-  applicant1HelpWithFeesRefNo: data => ({
-    applicant1HWFReferenceNumber: !isInvalidHelpWithFeesRef(data.applicant1HelpWithFeesRefNo)
-      ? data.applicant1HelpWithFeesRefNo
-      : '',
-  }),
   applicant1UploadedFiles: () => ({}),
   applicant2UploadedFiles: () => ({}),
   applicant1CannotUploadDocuments: data => ({
     applicant1CannotUploadSupportingDocument: data.applicant1CannotUploadDocuments
       ? formatApplicant1CannotUploadDocuments(data)
       : [],
-  }),
-  applicant1HelpPayingNeeded: data => ({
-    applicant1HWFNeedHelp: data.applicant1HelpPayingNeeded,
-    ...(data.applicant1HelpPayingNeeded === YesOrNo.NO
-      ? setUnreachableAnswersToNull(['applicant1HWFAppliedForFees', 'applicant1HWFReferenceNumber'])
-      : {}),
   }),
   applicant1CannotUpload: data => {
     return {
@@ -126,8 +119,5 @@ export const toApiDate = (date: CaseDate | undefined): string => {
   }
   return date.year + '-' + date.month.padStart(2, '0') + '-' + date.day.padStart(2, '0');
 };
-
-const setUnreachableAnswersToNull = (properties: string[]): Record<string, null> =>
-  properties.reduce((arr: Record<string, null>, property: string) => ({ ...arr, [property]: null }), {});
 
 export const toApiFormat = (data: Partial<Case>): CaseData => formatCase(fields, data);

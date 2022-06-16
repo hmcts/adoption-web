@@ -3,7 +3,11 @@
 {% block after_fields %}
   <div class="govuk-form-group">
     <p class="govuk-body">
-      <a href="{{manualAddressUrl}}" id="enterAddressManually" class="govuk-link">{{ enterAddressManually }}</a>
+      {% if laPortal == true %}
+        <a href="/la-portal/birth-mother/address/manual" id="enterAddressManually" class="govuk-link">{{ enterAddressManually }}</a>
+      {% else %}
+        <a href="{{manualAddressUrl}}" id="enterAddressManually" class="govuk-link">{{ enterAddressManually }}</a>
+      {% endif %}      
     </p>
   </div>
 {% endblock %}

@@ -8,8 +8,6 @@ import { generateContent } from './address-lookup';
 jest.mock('../../../app/form/validation');
 
 const enContent = {
-  line1:
-    "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email.",
   postcode: 'Postcode',
   findAddress: 'Find address',
   enterAddressManually: 'Or enter address manually',
@@ -23,15 +21,13 @@ const enContent = {
 };
 
 const cyContent = {
-  line1:
-    'Byddwn yn anfon yr holl bapurau llys i’r cyfeiriad hwn oni bai eich bod yn ein cynghori eich bod yn hapus i’r gorchmynion llys gael eu cyflwyno arnoch trwy e-bost.',
   postcode: 'Cod post',
   findAddress: 'Dod o hyd i gyfeiriad',
   enterAddressManually: 'Neu nodwch y cyfeiriad â llaw',
   errors: {
     addressPostcode: {
-      required: 'Nac ydwdwch god post dilys',
-      invalid: 'Nac ydwdwch god post dilys',
+      required: 'Enter a real postcode (in welsh)',
+      invalid: 'Enter a real postcode (in welsh)',
     },
   },
   manualAddressUrl: '#',

@@ -2,9 +2,9 @@ import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
 import { getNextStepUrl } from '../../steps';
-import { CHECK_ANSWERS_URL, SAVE_AND_SIGN_OUT, TASK_LIST_URL } from '../../steps/urls';
+import { CHECK_ANSWERS_URL, LA_PORTAL, LA_PORTAL_TASK_LIST, SAVE_AND_SIGN_OUT, SAVE_AS_DRAFT } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
-import { CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE } from '../case/definition';
+import { CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE, SYSTEM_USER_UPDATE } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
 import { ValidationError } from '../form/validation';
 
@@ -74,7 +74,8 @@ export class PostController<T extends AnyObject> {
         item =>
           item.errorType !== ValidationError.REQUIRED &&
           item.errorType !== ValidationError.NOT_SELECTED &&
-          item.errorType !== ValidationError.NOT_UPLOADED
+          item.errorType !== ValidationError.NOT_UPLOADED &&
+          item.errorType !== ValidationError.ADD_BUTTON_NOT_CLICKED
       );
     }
   }
@@ -95,7 +96,7 @@ export class PostController<T extends AnyObject> {
     if (req.body['saveAsDraft']) {
       //redirects to task-list page in case of save-as-draft button click
       req.session.returnUrl = undefined;
-      target = TASK_LIST_URL;
+      target = req.path.startsWith(LA_PORTAL) ? LA_PORTAL_TASK_LIST : SAVE_AS_DRAFT;
     } else if (req.session.errors?.length) {
       //redirects to same page in case of validation errors
       target = req.url;
@@ -124,8 +125,10 @@ export class PostController<T extends AnyObject> {
     }
   }
 
-  //eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected getEventName(req: AppRequest): string {
+    if (req.session.user?.isSystemUser) {
+      return SYSTEM_USER_UPDATE;
+    }
     return CITIZEN_UPDATE;
   }
 }

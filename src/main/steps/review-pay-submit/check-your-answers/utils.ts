@@ -48,6 +48,7 @@ type SummaryListContent = PageContent & {
   gender: Record<string, string>;
   applyingWith: Record<string, string>;
   yesNoNotsure: Record<string, string>;
+  languagePreference: Record<string, string>;
 };
 
 const getSectionSummaryList = (rows: SummaryListRow[], content: PageContent): GovUkNunjucksSummary[] => {
@@ -275,6 +276,16 @@ export const applicantSummaryList = (
           value: userCase[`${prefix}PhoneNumber`],
           changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
         },
+        {
+          key: keys.contactDetailsConsent,
+          value: userCase[`${prefix}ContactDetailsConsent`],
+          changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
+        },
+        {
+          key: keys.languagePreference,
+          value: content.languagePreference[userCase[`${prefix}LanguagePreference`]],
+          changeUrl: Urls[`${urlPrefix}LANGUAGE_PREFERENCE`],
+        },
       ],
       content
     ),
@@ -316,11 +327,11 @@ export const childrenSummaryList = (
           value: content.gender[userCase.childrenSexAtBirth!],
           changeUrl: Urls.CHILDREN_SEX_AT_BIRTH,
         },
-        {
-          key: keys.nationality,
-          valueHtml: formatNationalities(userCase.childrenNationality!, userCase.childrenAdditionalNationalities!),
-          changeUrl: Urls.CHILDREN_NATIONALITY,
-        },
+        // {
+        //   key: keys.nationality,
+        //   valueHtml: formatNationalities(userCase.childrenNationality!, userCase.childrenAdditionalNationalities!),
+        //   changeUrl: Urls.CHILDREN_NATIONALITY,
+        // },
         {
           key: keys.fullNameAfterAdoption,
           value: userCase.childrenFirstNameAfterAdoption + ' ' + userCase.childrenLastNameAfterAdoption,

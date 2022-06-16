@@ -65,4 +65,11 @@ module.exports = {
     await I.retry(3).click('Save and continue');
     await I.wait(4);
   },
+  async childBirthFatherDetailsSaveAsDraft() {
+    await I.retry(3).waitForText("Is the birth father's name on the birth certificate?");
+    await I.retry(3).click(this.fields.birthFatherNameOnCertificate);
+    await I.wait(2);
+    await I.retry(3).click('Save as draft');
+    await I.wait(4);
+  },
 };

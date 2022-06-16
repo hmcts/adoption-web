@@ -1,5 +1,5 @@
 import { FieldPrefix } from '../../../app/case/case';
-import { ApplyingWith, DocumentType, Gender, YesNoNotsure } from '../../../app/case/definition';
+import { ApplyingWith, DocumentType, Gender, LanguagePreference, YesNoNotsure } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { CommonContent } from '../../../steps/common/common.content';
@@ -46,6 +46,10 @@ export const enContent = {
     [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE]: 'Birth or adoption certificate',
     [DocumentType.DEATH_CERTIFICATE]: 'Death certiticate',
   },
+  languagePreference: {
+    [LanguagePreference.ENGLISH]: 'English',
+    [LanguagePreference.WELSH]: 'Welsh',
+  },
   sectionTitles: {
     applicationDetails: 'Application details',
     adoptionagencyOrLA: 'Local authority details',
@@ -78,6 +82,8 @@ export const enContent = {
     dateOfBirth: 'Date of birth',
     occupation: 'Occupation',
     address: 'Address',
+    contactDetailsConsent: 'Court orders served by email',
+    languagePreference: 'Emails and documents language',
     sexAtBirth: 'Sex at birth',
     nationality: 'Nationality',
     fullNameAfterAdoption: 'Full name after adoption',
@@ -157,6 +163,10 @@ const cyContent: typeof enContent = {
     [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE]: 'Tystysgrif geni neu dystysgrif mabwysiadu',
     [DocumentType.DEATH_CERTIFICATE]: 'Tystysgrif marwolaeth',
   },
+  languagePreference: {
+    [LanguagePreference.ENGLISH]: 'Saesneg',
+    [LanguagePreference.WELSH]: 'Cymraeg',
+  },
   sectionTitles: {
     applicationDetails: 'Manylion y cais',
     adoptionagencyOrLA: 'Local authority details (in welsh)',
@@ -165,7 +175,7 @@ const cyContent: typeof enContent = {
     applicantDetails: 'Manylion y ceisydd',
     firstApplicantDetails: 'Manylion y ceisydd cyntaf',
     secondApplicantDetails: 'Manylion yr ail geisydd',
-    childDetails: 'Manylion y plenty',
+    childDetails: 'Manylion y plentyn',
     birthMotherDetails: 'Manylion y fam fiolegol',
     birthFatherDetails: 'Manylion y tad biolegol',
     otherParentDetails: 'Manylion y rhiant arall',
@@ -189,6 +199,8 @@ const cyContent: typeof enContent = {
     dateOfBirth: 'Dyddiad geni',
     occupation: 'Galwedigaeth',
     address: 'Cyfeiriad',
+    contactDetailsConsent: 'Court orders served by email (in welsh)',
+    languagePreference: 'Emails and documents language (in welsh)',
     sexAtBirth: 'Rhyw pan anwyd',
     nationality: 'Cenedligrwydd',
     fullNameAfterAdoption: 'Enw llawn ar ôl mabwysiadu',

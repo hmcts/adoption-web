@@ -4,6 +4,7 @@ import {
   APPLICANT_1_DOB,
   APPLICANT_1_FIND_ADDRESS,
   APPLICANT_1_FULL_NAME,
+  APPLICANT_1_LANGUAGE_PREFERENCE,
   APPLICANT_1_MANUAL_ADDRESS,
   APPLICANT_1_OCCUPATION,
   APPLICANT_1_OTHER_NAMES,
@@ -40,11 +41,6 @@ export const applicant1Sequence: Step[] = [
     getNextStep: () => TASK_LIST_URL,
   },
   {
-    url: APPLICANT_1_CONTACT_DETAILS,
-    showInSection: Sections.AboutApplicant1,
-    getNextStep: () => TASK_LIST_URL,
-  },
-  {
     url: APPLICANT_1_FIND_ADDRESS,
     showInSection: Sections.AboutApplicant1,
     getNextStep: () => APPLICANT_1_SELECT_ADDRESS,
@@ -58,6 +54,16 @@ export const applicant1Sequence: Step[] = [
     url: APPLICANT_1_MANUAL_ADDRESS,
     showInSection: Sections.AboutApplicant1,
     getNextStep: () => APPLICANT_1_CONTACT_DETAILS,
+  },
+  {
+    url: APPLICANT_1_CONTACT_DETAILS,
+    showInSection: Sections.AboutApplicant1,
+    getNextStep: () => APPLICANT_1_LANGUAGE_PREFERENCE,
+  },
+  {
+    url: APPLICANT_1_LANGUAGE_PREFERENCE,
+    showInSection: Sections.AboutApplicant1,
+    getNextStep: () => TASK_LIST_URL,
   },
   {
     url: UPLOAD_YOUR_DOCUMENTS,

@@ -64,6 +64,12 @@ const fields: FromApiConverters = {
   applicant1DateOfBirth: data => ({
     applicant1DateOfBirth: fromApiDate(data.applicant1DateOfBirth),
   }),
+  birthMotherLastAddressDate: data => ({
+    birthMotherLastAddressDate: fromApiDate(data.birthMotherLastAddressDate),
+  }),
+  birthFatherLastAddressDate: data => ({
+    birthFatherLastAddressDate: fromApiDate(data.birthFatherLastAddressDate),
+  }),
   applicant2DateOfBirth: data => ({
     applicant2DateOfBirth: fromApiDate(data.applicant2DateOfBirth),
   }),
@@ -82,9 +88,6 @@ const fields: FromApiConverters = {
   applicant2CannotUploadSupportingDocument: uploadedFilesFromApiApplicant2,
   dateSubmitted: data => ({
     dateSubmitted: new Date(data.dateSubmitted as string),
-  }),
-  dueDate: data => ({
-    dueDate: dayjs(data.dueDate).format('D MMMM YYYY'),
   }),
 };
 

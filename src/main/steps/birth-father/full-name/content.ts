@@ -6,8 +6,6 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 const en = () => ({
   section: SECTION,
   title: "What is the full name of the child's birth father?",
-  line1:
-    "This will be on the child's full birth certificate. Ask the adoption agency or social worker if you're not sure.",
   errors: {
     birthFatherFirstNames: {
       required: 'Enter their first names',
@@ -21,8 +19,6 @@ const en = () => ({
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
   title: 'Beth yw enw llawn tad biolegol y plentyn?',
-  line1:
-    'Bydd y rhain ar dystysgrif geni llawn y plentyn. Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
   errors: {
     birthFatherFirstNames: {
       required: 'Nac ydwdwch eu henw(au) cyntaf',

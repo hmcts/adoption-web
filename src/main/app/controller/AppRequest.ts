@@ -22,6 +22,7 @@ export interface AppSession extends Session {
   user: UserDetails;
   userCase: CaseWithId;
   eligibility: Eligibility;
+  laPortalKba: LaPortalKBA;
   lang: string | undefined;
   errors: FormError[] | undefined;
   addresses: [];
@@ -35,6 +36,7 @@ export interface UserDetails {
   email: string;
   givenName: string;
   familyName: string;
+  isSystemUser?: boolean;
 }
 
 export interface Eligibility {
@@ -43,4 +45,10 @@ export interface Eligibility {
   livedUKEligible?: string;
   under21Eligible?: string;
   domicileEligible?: string;
+}
+
+// LA Portal Knowledge Based Authentication
+export interface LaPortalKBA {
+  caseRef?: string;
+  authenticated?: boolean;
 }
