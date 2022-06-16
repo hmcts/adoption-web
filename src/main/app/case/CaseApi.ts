@@ -13,6 +13,7 @@ import {
   CITIZEN_ADD_PAYMENT,
   CITIZEN_CREATE,
   CaseData,
+  LanguagePreference,
   ListValue,
   Payment,
   State,
@@ -23,9 +24,13 @@ import { toApiFormat } from './to-api-format';
 export class CaseApi {
   constructor(private readonly axios: AxiosInstance, private readonly logger: LoggerInstance) {}
 
-  public async getOrCreateCase(serviceType: Adoption, userDetails: UserDetails): Promise<CaseWithId> {
+  public async getOrCreateCase(
+    serviceType: Adoption,
+    userDetails: UserDetails,
+    languagePreference = LanguagePreference.ENGLISH
+  ): Promise<CaseWithId> {
     const userCase = await this.getCase();
-    return userCase || this.createCase(serviceType, userDetails);
+    return userCase || this.createCase(serviceType, userDetails, languagePreference);
   }
 
   private async getCase(): Promise<CaseWithId | false> {
@@ -74,7 +79,11 @@ export class CaseApi {
     }
   }
 
-  private async createCase(serviceType: Adoption, userDetails: UserDetails): Promise<CaseWithId> {
+  private async createCase(
+    serviceType: Adoption,
+    userDetails: UserDetails,
+    languagePreference: LanguagePreference
+  ): Promise<CaseWithId> {
     const tokenResponse: AxiosResponse<CcdTokenResponse> = await this.axios.get(
       `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
     );
@@ -85,6 +94,7 @@ export class CaseApi {
       applicant1FirstName: userDetails.givenName,
       applicant1LastName: userDetails.familyName,
       applicant1Email: userDetails.email,
+      applicant1LanguagePreference: languagePreference,
     };
 
     try {
