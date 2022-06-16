@@ -29,7 +29,7 @@ const en = content => ({
 const cy: typeof en = content => ({
   title: 'Gwneud cais i fabwysiadu plentyn a leolwyd yn eich gofal',
   line1:
-    'Gallwch wneud cais i fabwysiadu plentyn sydd yn eich gofal ar ôl <a class="govuk-link" href="/eligibility/start">i’r llys wneud gorchymyn lleoli.</a> (in welsh)',
+    'Gallwch wneud cais i fabwysiadu plentyn sydd yn eich gofal ar ôl <a class="govuk-link" href="/eligibility/start">i’r llys wneud gorchymyn lleoli.</a>',
   line2:
     'Gallwch gychwyn eich cais unrhyw bryd, ond mae’n rhaid bod y plentyn wedi bod yn byw gyda chi am o leiaf 10 wythnos cyn y gallwch ei gyflwyno.',
   line3:
