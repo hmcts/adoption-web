@@ -22,7 +22,7 @@ const enContent = {
   section: "Other parent's details",
   title: 'When was the last date this address was confirmed?',
   errors: {
-    birthFatherLastAddressDate: {
+    otherParentLastAddressDate: {
       required: 'Enter date',
       invalidDate: 'Date must be a real date',
       incompleteDay: 'Date must include a day',
@@ -37,7 +37,7 @@ const cyContent = {
   section: "Other parent's details (in welsh)",
   title: 'When was the last date this address was confirmed?',
   errors: {
-    birthFatherLastAddressDate: {
+    otherParentLastAddressDate: {
       required: 'Enter date',
       invalidDate: 'Date must be a real date',
       incompleteDay: 'Date must include a day',
@@ -48,7 +48,7 @@ const cyContent = {
   },
 };
 
-describe('birthFatherLastAddressDate > content', () => {
+describe('otherParentLastAddressDate > content', () => {
   test('should return correct english content', () => {
     languageAssertions('en', enContent, () => generateContent(commonContent));
   });
@@ -75,7 +75,7 @@ describe('birthFatherLastAddressDate > content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const dobField = fields.birthFatherLastAddressDate as FormOptions;
+    const dobField = fields.otherParentLastAddressDate as FormOptions;
 
     expect(dobField.type).toBe('date');
     expect(dobField.classes).toBe('govuk-date-input');
@@ -99,9 +99,9 @@ describe('birthFatherLastAddressDate > content', () => {
 
     expect(
       (dobField.parser as Function)({
-        'birthFatherLastAddressDate-day': '21',
-        'birthFatherLastAddressDate-month': '12',
-        'birthFatherLastAddressDate-year': '2018',
+        'otherParentLastAddressDate-day': '21',
+        'otherParentLastAddressDate-month': '12',
+        'otherParentLastAddressDate-year': '2018',
       })
     ).toEqual({ day: '21', month: '12', year: '2018' });
     expect((dobField.validator as Function)({ day: '21', month: '12', year: '2018' })).toBe(undefined);
