@@ -86,7 +86,7 @@ const cyContent = {
   cannotUploadWhich: 'Pa ddogfen na allwch ei llwytho?',
   checkAllThatApply: "Dewiswch bob un sy'n berthnasol",
   cannotUploadYouCanPost:
-    '<p class="govuk-body govuk-!-margin-top-5">Gallwch bostio neu e-bostio eich dogfennau i’r llys. Os ydych yn eu postio, rhaid ichi anfon y dogfennau gwreiddiol neu gopïau wedi’u hardystio. Byddwch yn cael manylion am sut i’w hanfon ar ôl ichi gyflwyno’r cais hwn. </p><p class="govuk-body">Parhau â’ch cais.</p>',
+    '<p class="govuk-body govuk-!-margin-top-5">Gallwch bostio neu e-bostio eich dogfennau i’r llys. Os ydych yn eu postio, rhaid ichi anfon y dogfennau gwreiddiol neu gopïau wedi’u hardystio. Byddwch yn cael manylion am sut i’w hanfon ar ôl ichi gyflwyno’r cais hwn. </p><p class="govuk-body">Parhau gyda’ch cais.</p>',
   birthOrAdoptionCertificate: 'Tystysgrif geni neu fabwysiadu',
   deathCertificate: 'Tystysgrif marwolaeth',
 
