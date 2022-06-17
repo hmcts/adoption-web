@@ -4,7 +4,20 @@ import { Application, NextFunction, Response } from 'express';
 import { getRedirectUrl, getUserDetails } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
 import { AppRequest } from '../../app/controller/AppRequest';
-import { CALLBACK_URL, ELIGIBILITY_URL, HOME_URL, LA_PORTAL, SIGN_IN_URL, SIGN_OUT_URL } from '../../steps/urls';
+import {
+  ACCESSIBILITY_STATEMENT,
+  CALLBACK_URL,
+  CONTACT_US,
+  COOKIES_PAGE,
+  ELIGIBILITY_URL,
+  HOME_URL,
+  LA_PORTAL,
+  PRIVACY_POLICY,
+  PageLink,
+  SIGN_IN_URL,
+  SIGN_OUT_URL,
+  TERMS_AND_CONDITIONS,
+} from '../../steps/urls';
 
 /**
  * Adds the oidc middleware to add oauth authentication
@@ -36,6 +49,14 @@ export class OidcMiddleware {
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
         if (req.path.startsWith(ELIGIBILITY_URL)) {
+          return next();
+        }
+
+        if (
+          [ACCESSIBILITY_STATEMENT, PRIVACY_POLICY, TERMS_AND_CONDITIONS, COOKIES_PAGE, CONTACT_US].includes(
+            req.path as PageLink
+          )
+        ) {
           return next();
         }
 
