@@ -97,11 +97,12 @@ Scenario(
     // TODO in Future stories
     // await taskListPage.verifyChildBirthFatherDetailsStatus();
 
+    await taskListPage.selectChildOtherParentDetails();
+    await childOtherParentDetailsPage.childOtherParentDetailsSection();
+
     // TODO in Future stories
-    // await taskListPage.selectChildOtherParentDetails();
-    // await childOtherParentDetailsPage.childOtherParentDetailsSection();
-    // await taskListPage.verifyChildOtherParentDetailsStatus();
-    //
+    //await taskListPage.verifyChildOtherParentDetailsStatus();
+
     // await taskListPage.selectChildPlacementOrderDetails();
     // await childDetailsPlacementOrderPage.childDetailsPlacementOrderSection();
     //

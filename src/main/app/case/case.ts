@@ -127,6 +127,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   otherParentAddressCountry: 'otherParentAddressCountry',
   otherParentAddressKnown: 'otherParentAddressKnown',
   otherParentAddressNotKnownReason: 'otherParentAddressNotKnownReason',
+  otherParentLastAddressDate: 'otherParentLastAddressDate',
 
   socialWorkerName: 'socialWorkerName',
   socialWorkerPhoneNumber: 'socialWorkerPhoneNumber',
@@ -312,6 +313,7 @@ export interface Case {
   otherParentAddressCountry?: string;
   otherParentAddressKnown?: YesOrNo;
   otherParentAddressNotKnownReason?: string;
+  otherParentLastAddressDate?: CaseDate;
 
   /***** Adoption Agency, Social Worker and Solicitor *****/
   localAuthorityName?: string;

@@ -204,6 +204,7 @@ export const LA_PORTAL_OTHER_PARENT_FIND_ADDRESS: PageLink = `${LA_PORTAL}${OTHE
 export const LA_PORTAL_OTHER_PARENT_SELECT_ADDRESS: PageLink = `${LA_PORTAL}${OTHER_PARENT}/address/select`;
 export const LA_PORTAL_OTHER_PARENT_MANUAL_ADDRESS: PageLink = `${LA_PORTAL}${OTHER_PARENT}/address/manual`;
 export const LA_PORTAL_OTHER_PARENT_INTERNATIONAL_ADDRESS: PageLink = `${LA_PORTAL}${OTHER_PARENT}/address/international`;
+export const LA_PORTAL_OTHER_PARENT_LAST_ADDRESS_CONFIRMED: PageLink = `${LA_PORTAL}${OTHER_PARENT}/last-address-confirmed`;
 
 export const LA_PORTAL_SIBLING_EXISTS: PageLink = `${LA_PORTAL}${SIBLING}/exists`;
 export const LA_PORTAL_SIBLING_RELATION: PageLink = `${LA_PORTAL}${SIBLING}/relation`;

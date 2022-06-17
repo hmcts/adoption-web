@@ -182,16 +182,21 @@ const otherParentSequence = [
   {
     url: Urls.LA_PORTAL_OTHER_PARENT_SELECT_ADDRESS,
     contentDir: path.join(__dirname, '..', 'other-parent', 'address', 'select'),
-    getNextStep: () => Urls.LA_PORTAL_TASK_LIST,
+    getNextStep: () => Urls.LA_PORTAL_OTHER_PARENT_LAST_ADDRESS_CONFIRMED,
   },
   {
     url: Urls.LA_PORTAL_OTHER_PARENT_MANUAL_ADDRESS,
     contentDir: path.join(__dirname, '..', 'other-parent', 'address', 'manual'),
-    getNextStep: () => Urls.LA_PORTAL_TASK_LIST,
+    getNextStep: () => Urls.LA_PORTAL_OTHER_PARENT_LAST_ADDRESS_CONFIRMED,
   },
   {
     url: Urls.LA_PORTAL_OTHER_PARENT_INTERNATIONAL_ADDRESS,
     contentDir: path.join(__dirname, '..', 'other-parent', 'address', 'international'),
+    getNextStep: () => Urls.LA_PORTAL_OTHER_PARENT_LAST_ADDRESS_CONFIRMED,
+  },
+  {
+    url: Urls.LA_PORTAL_OTHER_PARENT_LAST_ADDRESS_CONFIRMED,
+    contentDir: path.join(__dirname, '..', 'other-parent', 'last-address-confirmed'),
     getNextStep: () => Urls.LA_PORTAL_TASK_LIST,
   },
 ];

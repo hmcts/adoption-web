@@ -87,7 +87,7 @@ describe('task-list > content', () => {
               id: 'other-parent-details',
               text: 'Other person with parental responsibility',
               status: 'COMPLETED',
-              href: '',
+              href: '/la-portal/other-parent/exists',
             },
             {
               id: 'placement-and-court-order-details',
@@ -138,7 +138,7 @@ describe('task-list > content', () => {
               id: 'other-parent-details',
               text: 'Other person with parental responsibility',
               status: 'COMPLETED',
-              href: '',
+              href: '/la-portal/other-parent/exists',
             },
             {
               id: 'placement-and-court-order-details',

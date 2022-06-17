@@ -9,8 +9,7 @@ import { laPortalSequence } from './laPortalSequence';
 describe('la-portal > laPortalSequence', () => {
   test('should contain 46 entries in sibling screen sequence', () => {
     Date.now = jest.fn(() => +new Date('2021-01-01'));
-
-    expect(laPortalSequence).toHaveLength(46);
+    expect(laPortalSequence).toHaveLength(47);
 
     expect(laPortalSequence[0].url).toBe('/la-portal/kba-case-ref');
     expect(laPortalSequence[0].getNextStep({})).toBe('/la-portal/kba-completed');
@@ -153,80 +152,84 @@ describe('la-portal > laPortalSequence', () => {
 
     expect(laPortalSequence[30].url).toBe('/la-portal/other-parent/address/select');
     expect(laPortalSequence[30].contentDir).toBe('MOCK_BASE_DIR/../other-parent/address/select');
-    expect(laPortalSequence[30].getNextStep({})).toBe('/la-portal/task-list');
+    expect(laPortalSequence[30].getNextStep({})).toBe('/la-portal/other-parent/last-address-confirmed');
 
     expect(laPortalSequence[31].url).toBe('/la-portal/other-parent/address/manual');
     expect(laPortalSequence[31].contentDir).toBe('MOCK_BASE_DIR/../other-parent/address/manual');
-    expect(laPortalSequence[31].getNextStep({})).toBe('/la-portal/task-list');
+    expect(laPortalSequence[31].getNextStep({})).toBe('/la-portal/other-parent/last-address-confirmed');
 
     expect(laPortalSequence[32].url).toBe('/la-portal/other-parent/address/international');
     expect(laPortalSequence[32].contentDir).toBe('MOCK_BASE_DIR/../other-parent/address/international');
-    expect(laPortalSequence[32].getNextStep({})).toBe('/la-portal/task-list');
+    expect(laPortalSequence[32].getNextStep({})).toBe('/la-portal/other-parent/last-address-confirmed');
 
-    expect(laPortalSequence[33].url).toBe('/la-portal/child/placement-order-type');
-    expect(laPortalSequence[33].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-type');
-    expect(laPortalSequence[33].getNextStep({})).toBe('/la-portal/child/placement-order-number');
+    expect(laPortalSequence[33].url).toBe('/la-portal/other-parent/last-address-confirmed');
+    expect(laPortalSequence[33].contentDir).toBe('MOCK_BASE_DIR/../other-parent/last-address-confirmed');
+    expect(laPortalSequence[33].getNextStep({})).toBe('/la-portal/task-list');
 
-    expect(laPortalSequence[34].url).toBe('/la-portal/child/placement-order-number');
-    expect(laPortalSequence[34].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-number');
-    expect(laPortalSequence[34].getNextStep({})).toBe('/la-portal/child/placement-order-court');
+    expect(laPortalSequence[34].url).toBe('/la-portal/child/placement-order-type');
+    expect(laPortalSequence[34].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-type');
+    expect(laPortalSequence[34].getNextStep({})).toBe('/la-portal/child/placement-order-number');
 
-    expect(laPortalSequence[35].url).toBe('/la-portal/child/placement-order-court');
-    expect(laPortalSequence[35].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-court');
-    expect(laPortalSequence[35].getNextStep({})).toBe('/la-portal/child/placement-order-date');
+    expect(laPortalSequence[35].url).toBe('/la-portal/child/placement-order-number');
+    expect(laPortalSequence[35].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-number');
+    expect(laPortalSequence[35].getNextStep({})).toBe('/la-portal/child/placement-order-court');
 
-    expect(laPortalSequence[36].url).toBe('/la-portal/child/placement-order-date');
-    expect(laPortalSequence[36].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-date');
-    expect(laPortalSequence[36].getNextStep({})).toBe('/la-portal/child/placement-order-summary');
+    expect(laPortalSequence[36].url).toBe('/la-portal/child/placement-order-court');
+    expect(laPortalSequence[36].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-court');
+    expect(laPortalSequence[36].getNextStep({})).toBe('/la-portal/child/placement-order-date');
 
-    expect(laPortalSequence[37].url).toBe('/la-portal/child/placement-order-summary');
-    expect(laPortalSequence[37].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-summary');
-    expect(laPortalSequence[37].getNextStep({})).toBe('/la-portal/task-list');
-    expect(laPortalSequence[37].getNextStep({ addAnotherPlacementOrder: YesOrNo.YES })).toBe(
+    expect(laPortalSequence[37].url).toBe('/la-portal/child/placement-order-date');
+    expect(laPortalSequence[37].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-date');
+    expect(laPortalSequence[37].getNextStep({})).toBe('/la-portal/child/placement-order-summary');
+
+    expect(laPortalSequence[38].url).toBe('/la-portal/child/placement-order-summary');
+    expect(laPortalSequence[38].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-summary');
+    expect(laPortalSequence[38].getNextStep({})).toBe('/la-portal/task-list');
+    expect(laPortalSequence[38].getNextStep({ addAnotherPlacementOrder: YesOrNo.YES })).toBe(
       '/la-portal/child/placement-order-type?add=1609459200000'
     );
 
-    expect(laPortalSequence[38].url).toBe('/la-portal/child/placement-order-check-your-answers');
-    expect(laPortalSequence[38].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-check-your-answers');
-    expect(laPortalSequence[38].getNextStep({})).toBe('/la-portal/child/placement-order-summary');
+    expect(laPortalSequence[39].url).toBe('/la-portal/child/placement-order-check-your-answers');
+    expect(laPortalSequence[39].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-check-your-answers');
+    expect(laPortalSequence[39].getNextStep({})).toBe('/la-portal/child/placement-order-summary');
 
-    expect(laPortalSequence[39].url).toBe('/la-portal/sibling/exists');
-    expect(laPortalSequence[39].contentDir).toBe('MOCK_BASE_DIR/../sibling/exists');
-    expect(laPortalSequence[39].getNextStep({})).toBe('/la-portal/sibling/relation');
-    expect(laPortalSequence[39].getNextStep({ hasSiblings: YesNoNotsure.NO })).toBe('/la-portal/task-list');
-    expect(laPortalSequence[39].getNextStep({ hasSiblings: YesNoNotsure.NOT_SURE })).toBe('/la-portal/task-list');
-    expect(laPortalSequence[39].getNextStep({ hasSiblings: YesNoNotsure.YES, siblings: [] })).toBe(
+    expect(laPortalSequence[40].url).toBe('/la-portal/sibling/exists');
+    expect(laPortalSequence[40].contentDir).toBe('MOCK_BASE_DIR/../sibling/exists');
+    expect(laPortalSequence[40].getNextStep({})).toBe('/la-portal/sibling/relation');
+    expect(laPortalSequence[40].getNextStep({ hasSiblings: YesNoNotsure.NO })).toBe('/la-portal/task-list');
+    expect(laPortalSequence[40].getNextStep({ hasSiblings: YesNoNotsure.NOT_SURE })).toBe('/la-portal/task-list');
+    expect(laPortalSequence[40].getNextStep({ hasSiblings: YesNoNotsure.YES, siblings: [] })).toBe(
       '/la-portal/sibling/relation'
     );
     expect(
-      laPortalSequence[40].getNextStep({ hasSiblings: YesNoNotsure.YES, siblings: [{ siblingId: 'MOCK_ID' }] })
+      laPortalSequence[41].getNextStep({ hasSiblings: YesNoNotsure.YES, siblings: [{ siblingId: 'MOCK_ID' }] })
     ).toBe('/la-portal/sibling/placement-order-type');
 
-    expect(laPortalSequence[40].url).toBe('/la-portal/sibling/relation');
-    expect(laPortalSequence[40].contentDir).toBe('MOCK_BASE_DIR/../sibling/relation');
-    expect(laPortalSequence[40].getNextStep({})).toBe('/la-portal/sibling/placement-order-type');
+    expect(laPortalSequence[41].url).toBe('/la-portal/sibling/relation');
+    expect(laPortalSequence[41].contentDir).toBe('MOCK_BASE_DIR/../sibling/relation');
+    expect(laPortalSequence[41].getNextStep({})).toBe('/la-portal/sibling/placement-order-type');
 
-    expect(laPortalSequence[41].url).toBe('/la-portal/sibling/placement-order-type');
-    expect(laPortalSequence[41].contentDir).toBe('MOCK_BASE_DIR/../sibling/placement-order-type');
-    expect(laPortalSequence[41].getNextStep({})).toBe('/la-portal/sibling/placement-order-number');
+    expect(laPortalSequence[42].url).toBe('/la-portal/sibling/placement-order-type');
+    expect(laPortalSequence[42].contentDir).toBe('MOCK_BASE_DIR/../sibling/placement-order-type');
+    expect(laPortalSequence[42].getNextStep({})).toBe('/la-portal/sibling/placement-order-number');
 
-    expect(laPortalSequence[42].url).toBe('/la-portal/sibling/placement-order-number');
-    expect(laPortalSequence[42].contentDir).toBe('MOCK_BASE_DIR/../sibling/placement-order-number');
-    expect(laPortalSequence[42].getNextStep({})).toBe('/la-portal/sibling/summary');
+    expect(laPortalSequence[43].url).toBe('/la-portal/sibling/placement-order-number');
+    expect(laPortalSequence[43].contentDir).toBe('MOCK_BASE_DIR/../sibling/placement-order-number');
+    expect(laPortalSequence[43].getNextStep({})).toBe('/la-portal/sibling/summary');
 
-    expect(laPortalSequence[43].url).toBe('/la-portal/sibling/summary');
-    expect(laPortalSequence[43].contentDir).toBe('MOCK_BASE_DIR/../sibling/summary');
-    expect(laPortalSequence[43].getNextStep({})).toBe('/la-portal/task-list');
-    expect(laPortalSequence[43].getNextStep({ addAnotherSiblingPlacementOrder: YesOrNo.YES })).toBe(
+    expect(laPortalSequence[44].url).toBe('/la-portal/sibling/summary');
+    expect(laPortalSequence[44].contentDir).toBe('MOCK_BASE_DIR/../sibling/summary');
+    expect(laPortalSequence[44].getNextStep({})).toBe('/la-portal/task-list');
+    expect(laPortalSequence[44].getNextStep({ addAnotherSiblingPlacementOrder: YesOrNo.YES })).toBe(
       '/la-portal/sibling/relation?add=1609459200000'
     );
 
-    expect(laPortalSequence[44].url).toBe('/la-portal/sibling/placement-order-check-your-answers');
-    expect(laPortalSequence[44].contentDir).toBe('MOCK_BASE_DIR/../sibling/placement-order-check-your-answers');
-    expect(laPortalSequence[44].getNextStep({})).toBe('/la-portal/sibling/summary');
-
-    expect(laPortalSequence[45].url).toBe('/la-portal/sibling/remove-placement-order');
-    expect(laPortalSequence[45].contentDir).toBe('MOCK_BASE_DIR/../sibling/remove-placement-order');
+    expect(laPortalSequence[45].url).toBe('/la-portal/sibling/placement-order-check-your-answers');
+    expect(laPortalSequence[45].contentDir).toBe('MOCK_BASE_DIR/../sibling/placement-order-check-your-answers');
     expect(laPortalSequence[45].getNextStep({})).toBe('/la-portal/sibling/summary');
+
+    expect(laPortalSequence[46].url).toBe('/la-portal/sibling/remove-placement-order');
+    expect(laPortalSequence[46].contentDir).toBe('MOCK_BASE_DIR/../sibling/remove-placement-order');
+    expect(laPortalSequence[46].getNextStep({})).toBe('/la-portal/sibling/summary');
   });
 });

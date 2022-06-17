@@ -13,6 +13,9 @@ module.exports = {
     otherParentAddressTown: 'input[id$="otherParentAddressTown"]',
     otherParentAddressPostcode: 'input[id$="otherParentAddressPostcode"]',
     otherParentAddressCountry: 'input[id$="otherParentAddressCountry"]',
+    otherParentLastAddressDateDay: 'input[id$="otherParentLastAddressDate-day"]',
+    otherParentLastAddressDateMonth: 'input[id$="otherParentLastAddressDate-month"]',
+    otherParentLastAddressDateYear: 'input[id$="otherParentLastAddressDate-year"]',
   },
 
   async childOtherParentDetailsSection() {
@@ -46,6 +49,14 @@ module.exports = {
       childOtherParentDetails.otherParentAddressCountry
     );
     await I.wait(2);
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
+
+    await I.retry(3).waitForText('When was the last date this address was confirmed?');
+    await I.retry(3).fillField(this.fields.otherParentLastAddressDateDay, '26');
+    await I.retry(3).fillField(this.fields.otherParentLastAddressDateMonth, '06');
+    await I.wait(2);
+    await I.retry(3).fillField(this.fields.otherParentLastAddressDateYear, '1980');
     await I.retry(3).click('Save and continue');
     await I.wait(4);
   },

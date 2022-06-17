@@ -38,7 +38,7 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         id: 'other-parent-details',
         text: taskListItems.otherParent,
         status: getOtherParentStatus(userCase),
-        href: '', //URL.LA_PORTAL_OTHER_PARENT_EXISTS,
+        href: URL.LA_PORTAL_OTHER_PARENT_EXISTS,
       },
       {
         id: 'placement-and-court-order-details',
