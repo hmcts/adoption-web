@@ -12,12 +12,12 @@ const en = () => ({
     'You can begin your application at any time, but you can only submit 10 weeks after the date the child started living continuously with you.',
   errors: {
     dateChildMovedIn: {
-      required: 'Enter your date of birth',
-      invalidDate: 'Date of birth must be a real date',
-      incompleteDay: 'Your date of birth must include a day',
-      incompleteMonth: 'Your date of birth must include a month',
-      incompleteYear: 'Your date of birth must include a year',
-      invalidDateInFuture: 'Your date of birth must be in the past',
+      required: 'Enter the date the child moved in with you',
+      invalidDate: 'Must be a real date',
+      incompleteDay: 'Date must include a [day/month/year]',
+      incompleteMonth: 'Date must include a [day/month/year]',
+      incompleteYear: 'Date must include a [day/month/year]',
+      invalidDateInFuture: 'Date must be in the past',
     },
   },
 });
@@ -30,12 +30,12 @@ const cy: typeof en = () => ({
     'Gallwch gychwyn eich cais unrhyw dro, ond gallwch ond cyflwyno’ch cais 10 wythnos ar ôl y dyddiad wnaeth y plentyn ddechrau byw gyda chi’n barhaus. ',
   errors: {
     dateChildMovedIn: {
-      required: 'Nac ydwdwch eich dyddiad geni',
-      invalidDate: 'Rhaid i’r dyddiad geni fod yn ddyddiad dilys',
-      incompleteDay: 'Rhaid i’ch dyddiad geni gynnwys diwrnod',
-      incompleteMonth: 'Rhaid i’ch dyddiad geni gynnwys mis',
-      incompleteYear: 'Rhaid i’ch dyddiad geni gynnwys blwyddyn',
-      invalidDateInFuture: 'Rhaid i’ch dyddiad geni fod yn y gorffennol',
+      required: 'Rhowch y dyddiad y daeth y plentyn i fyw atoch',
+      invalidDate: 'Rhaid iddo fod yn ddyddiad go iawn',
+      incompleteDay: 'Mae’n rhaid i’r dyddiad gynnwys [diwrnod/mis/blwyddyn]',
+      incompleteMonth: 'Mae’n rhaid i’r dyddiad gynnwys [diwrnod/mis/blwyddyn]',
+      incompleteYear: 'Mae’n rhaid i’r dyddiad gynnwys [diwrnod/mis/blwyddyn]',
+      invalidDateInFuture: 'Rhaid i’r dyddiad fod yn y gorffennol',
     },
   },
 });
