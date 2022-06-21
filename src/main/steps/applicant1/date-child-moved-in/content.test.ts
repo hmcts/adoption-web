@@ -34,10 +34,10 @@ const enContent = {
   errors: {
     dateChildMovedIn: {
       required: 'Enter the date the child moved in with you',
-      invalidDate: 'Date must be a real date',
-      incompleteDay: 'Date must include a day',
-      incompleteMonth: 'Date must include a month',
-      incompleteYear: 'Date must include a year',
+      invalidDate: 'Must be a real date',
+      incompleteDay: 'Date must include a [day/month/year]',
+      incompleteMonth: 'Date must include a [day/month/year]',
+      incompleteYear: 'Date must include a [day/month/year]',
       invalidDateInFuture: 'Date must be in the past',
     },
   },
@@ -51,12 +51,12 @@ const cyContent = {
     'Gallwch gychwyn eich cais unrhyw dro, ond gallwch ond cyflwyno’ch cais 10 wythnos ar ôl y dyddiad wnaeth y plentyn ddechrau byw gyda chi’n barhaus. ',
   errors: {
     dateChildMovedIn: {
-      required: 'Enter the date the child moved in with you (in welsh)',
-      invalidDate: 'Date must be a real date (in welsh)',
-      incompleteDay: 'Date must include a day (in welsh)',
-      incompleteMonth: 'Date must include a month (in welsh)',
-      incompleteYear: 'Date must include a year (in welsh)',
-      invalidDateInFuture: 'Date must be in the past (in welsh)',
+      required: 'Rhowch y dyddiad y daeth y plentyn i fyw atoch',
+      invalidDate: 'Rhaid iddo fod yn ddyddiad go iawn',
+      incompleteDay: 'Mae’n rhaid i’r dyddiad gynnwys [diwrnod/mis/blwyddyn]',
+      incompleteMonth: 'Mae’n rhaid i’r dyddiad gynnwys [diwrnod/mis/blwyddyn]',
+      incompleteYear: 'Mae’n rhaid i’r dyddiad gynnwys [diwrnod/mis/blwyddyn]',
+      invalidDateInFuture: 'Rhaid i’r dyddiad fod yn y gorffennol',
     },
   },
 };
