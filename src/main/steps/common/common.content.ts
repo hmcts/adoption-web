@@ -96,6 +96,10 @@ const en = {
     '<p class="govuk-body">You’ve accepted additional cookies. You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.</p>',
   cookiesRejectedMessage:
     '<p class="govuk-body">You’ve rejected additional cookies. You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.</p>',
+  laPortalCookiesAcceptedMessage:
+    '<p class="govuk-body">You’ve accepted additional cookies. You can <a class="govuk-link" href="/la-portal/cookies">change your cookie settings</a> at any time.</p>',
+  laPortalCookiesRejectedMessage:
+    '<p class="govuk-body">You’ve rejected additional cookies. You can <a class="govuk-link" href="la-portal/cookies">change your cookie settings</a> at any time.</p>',
   changeCookiesHeading: 'Change your cookie settings',
   allowAnalyticsCookies: 'Allow cookies that measure website use?',
   useAnalyticsCookies: 'Use cookies that measure my website use',
@@ -196,6 +200,10 @@ const cy: typeof en = {
     '<p class="govuk-body">Rydych chi wedi derbyn cwcis ychwanegol. Gallwch chi <a class="govuk-link" href="/cookies">newid eich gosodiadau cwci</a> ar unrhyw bryd.</p>',
   cookiesRejectedMessage:
     '<p class="govuk-body">Rydych chi wedi gwrthod cwcis ychwanegol. Gallwch chi <a class="govuk-link" href="/cookies">newid eich gosodiadau cwci</a> ar unrhyw bryd.</p>',
+  laPortalCookiesAcceptedMessage:
+    '<p class="govuk-body">Rydych chi wedi derbyn cwcis ychwanegol. Gallwch chi <a class="govuk-link" href="/la-portal/cookies">newid eich gosodiadau cwci</a> ar unrhyw bryd.</p>',
+  laPortalCookiesRejectedMessage:
+    '<p class="govuk-body">Rydych chi wedi gwrthod cwcis ychwanegol. Gallwch chi <a class="govuk-link" href="/la-portal/cookies">newid eich gosodiadau cwci</a> ar unrhyw bryd.</p>',
   changeCookiesHeading: 'Newidiwch eich gosodiadau cwci',
   allowAnalyticsCookies: "Caniatáu cwcis sy'n mesur defnydd gwefan?",
   useAnalyticsCookies: "Defnyddio cwcis sy'n mesur fy nefnydd gwefan",

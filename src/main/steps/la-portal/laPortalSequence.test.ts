@@ -7,9 +7,9 @@ import { YesNoNotsure, YesOrNo } from '../../app/case/definition';
 import { laPortalSequence } from './laPortalSequence';
 
 describe('la-portal > laPortalSequence', () => {
-  test('should contain 46 entries in sibling screen sequence', () => {
+  test('should contain 52 entries in sibling screen sequence', () => {
     Date.now = jest.fn(() => +new Date('2021-01-01'));
-    expect(laPortalSequence).toHaveLength(47);
+    expect(laPortalSequence).toHaveLength(52);
 
     expect(laPortalSequence[0].url).toBe('/la-portal/kba-case-ref');
     expect(laPortalSequence[0].getNextStep({})).toBe('/la-portal/kba-completed');
@@ -231,5 +231,25 @@ describe('la-portal > laPortalSequence', () => {
     expect(laPortalSequence[46].url).toBe('/la-portal/sibling/remove-placement-order');
     expect(laPortalSequence[46].contentDir).toBe('MOCK_BASE_DIR/../sibling/remove-placement-order');
     expect(laPortalSequence[46].getNextStep({})).toBe('/la-portal/sibling/summary');
+
+    expect(laPortalSequence[47].url).toBe('/la-portal/cookies');
+    expect(laPortalSequence[47].contentDir).toBe('MOCK_BASE_DIR/../application/cookies');
+    expect(laPortalSequence[47].getNextStep({})).toBe('/la-portal/kba-case-ref');
+
+    expect(laPortalSequence[48].url).toBe('/la-portal/privacy-policy');
+    expect(laPortalSequence[48].contentDir).toBe('MOCK_BASE_DIR/../application/privacy-policy');
+    expect(laPortalSequence[48].getNextStep({})).toBe('/la-portal/kba-case-ref');
+
+    expect(laPortalSequence[49].url).toBe('/la-portal/accessibility-statement');
+    expect(laPortalSequence[49].contentDir).toBe('MOCK_BASE_DIR/../application/accessibility-statement');
+    expect(laPortalSequence[49].getNextStep({})).toBe('/la-portal/kba-case-ref');
+
+    expect(laPortalSequence[50].url).toBe('/la-portal/terms-and-conditions');
+    expect(laPortalSequence[50].contentDir).toBe('MOCK_BASE_DIR/../application/terms-and-conditions');
+    expect(laPortalSequence[50].getNextStep({})).toBe('/la-portal/kba-case-ref');
+
+    expect(laPortalSequence[51].url).toBe('/la-portal/contact-us');
+    expect(laPortalSequence[51].contentDir).toBe('MOCK_BASE_DIR/../application/contact-us');
+    expect(laPortalSequence[51].getNextStep({})).toBe('/la-portal/kba-case-ref');
   });
 });

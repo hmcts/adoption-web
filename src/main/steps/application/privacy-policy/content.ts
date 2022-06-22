@@ -15,6 +15,8 @@ const en = {
     'As part of the MoJ, HMCTS is responsible for deciding how your personal data is used and for protecting the personal data you provide.',
   moreInformation:
     "More information about using this service is in the <a class='govuk-link' href='/terms-and-conditions'>terms and conditions</a>.",
+  laPortalMoreInformation:
+    "More information about using this service is in the <a class='govuk-link' href='/la-portal/terms-and-conditions'>terms and conditions</a>.",
   thePersonal: 'Why we collect your personal data',
   personalInformation:
     'Most of the personal information we process is provided to us directly by you for one the purposes of applying to adopt a child.',
@@ -45,6 +47,8 @@ const en = {
     'We may ask for your permission to use your email address to send you emails using GOV.UK Notify. This system processes emails only within the European Economic Area until the point where emails are handed over to the email provider you use.',
   weUseCookies:
     "We use <a class='govuk-link' href='/cookies'>cookies</a> to collect data that tells us about how you’re using this service, including:",
+  laPortalWeUseCookies:
+    "We use <a class='govuk-link' href='/la-portal/cookies'>cookies</a> to collect data that tells us about how you’re using this service, including:",
   ifYouOpenEmail: 'if you open an email from us or click on a link in an email',
   yourComputer: 'your computer, phone or tablet’s IP address',
   theRegion: 'the region or town where you’re using your computer, phone or tablet',
@@ -63,6 +67,8 @@ const en = {
     'In some circumstances we may share your data. For example, to prevent or detect crime, or to produce anonymised statistics.',
   weUse:
     "We use Google Analytics to collect data about how a website is used. This anonymous data is shared with Google. Find out about this in our <a class='govuk-link' href='/terms-and-conditions'>terms and conditions</a>.",
+  laPortalWeUse:
+    "We use Google Analytics to collect data about how a website is used. This anonymous data is shared with Google. Find out about this in our <a class='govuk-link' href='/la-portal/terms-and-conditions'>terms and conditions</a>.",
   lawfulBases:
     'Under the UK General Data Protection Regulation (UK GDPR), the lawful bases we rely on for processing this information are:',
   consent:
@@ -125,6 +131,8 @@ const cy: typeof en = {
     "Fel rhan o’r MoJ, mae GLlTEM yn gyfrifol am benderfynu sut mae eich data personol yn cael ei ddefnyddio ac am ddiogelu'r data personol rydych yn ei ddarparu.",
   moreInformation:
     "Gallwch gael rhagor o wybodaeth am ddefnyddio’r gwasanaeth hwn yn y <a class='govuk-link' href='/terms-and-conditions'>telerau ac amodau</a>.",
+  laPortalMoreInformation:
+    "Gallwch gael rhagor o wybodaeth am ddefnyddio’r gwasanaeth hwn yn y <a class='govuk-link' href='/la-portal/terms-and-conditions'>telerau ac amodau</a>.",
   thePersonal: 'Pam rydym ni’n casglu eich data personol',
   personalInformation:
     'Mae’r rhan fwyaf o’r wybodaeth bersonol a broseswn yn cael ei darparu i ni yn uniongyrchol gennych chi at ddibenion gwneud cais i fabwysiadu plentyn.',
@@ -155,6 +163,8 @@ const cy: typeof en = {
     'Efallai y byddwn yn gofyn am eich caniatâd i ddefnyddio eich cyfeiriad e-bost i anfon negeseuon e-bost atoch trwy’r system GOV.UK Notify. Mae’r system hon yn prosesu negeseuon e-bost o fewn Ardal Economaidd Ewrop yn unig tan y pwynt lle caiff negeseuon e-bost eu trosglwyddo i’r darparwr e-bost a ddefnyddiwch.',
   weUseCookies:
     "Rydym yn defnyddio <a class='govuk-link' href='/cookies'>cwcis</a> i gasglu data sy’n dweud wrthym sut rydych yn defnyddio’r gwasanaeth hwn, gan gynnwys:",
+  laPortalWeUseCookies:
+    "Rydym yn defnyddio <a class='govuk-link' href='/la-portal/cookies'>cwcis</a> i gasglu data sy’n dweud wrthym sut rydych yn defnyddio’r gwasanaeth hwn, gan gynnwys:",
   ifYouOpenEmail: 'os byddwch yn agor neges e-bost gennym neu’n clicio ar ddolen mewn e-bost',
   yourComputer: "cyfeiriad IP eich cyfrifiadur, eich ffôn symudol neu'ch tabled",
   theRegion: 'yr ardal neu’r dref lle rydych yn defnyddio’ch cyfrifiadur, eich ffôn symudol neu’ch tabled',
@@ -173,6 +183,8 @@ const cy: typeof en = {
     'Mewn rhai amgylchiadau efallai y byddwn yn rhannu eich data. Er enghraifft er mwyn atal neu i ddatrys trosedd, neu i gynhyrchu ystadegau cyffredinol.',
   weUse:
     "Rydym yn defnyddio Google Analytics i gasglu data am sut y defnyddir gwefan. Mae'r data cyffredinol hwn yn cael ei rannu â Google. Gallwch gael gwybodaeth am hyn yn ein  <a class='govuk-link' href='/terms-and-conditions'>telerau ac amodau</a>.",
+  laPortalWeUse:
+    "Rydym yn defnyddio Google Analytics i gasglu data am sut y defnyddir gwefan. Mae'r data cyffredinol hwn yn cael ei rannu â Google. Gallwch gael gwybodaeth am hyn yn ein  <a class='govuk-link' href='/la-portal/terms-and-conditions'>telerau ac amodau</a>.",
   lawfulBases:
     'O dan Reoliad Diogelu Data Cyffredinol y DU (GDPR y DU), y seiliau cyfreithlon yr ydym yn dibynnu arnynt ar gyfer prosesu’r wybodaeth hon yw:',
   consent:

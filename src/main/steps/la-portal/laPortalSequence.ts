@@ -293,6 +293,35 @@ const siblingSequence: Step[] = [
   },
 ];
 
+/******************** FOOTER LINKS *********************/
+const footerLinkSequence: Step[] = [
+  {
+    url: Urls.LA_PORTAL_COOKIES_PAGE,
+    contentDir: path.join(__dirname, '..', 'application', 'cookies'),
+    getNextStep: () => Urls.LA_PORTAL_KBA_CASE_REF,
+  },
+  {
+    url: Urls.LA_PORTAL_PRIVACY_POLICY,
+    contentDir: path.join(__dirname, '..', 'application', 'privacy-policy'),
+    getNextStep: () => Urls.LA_PORTAL_KBA_CASE_REF,
+  },
+  {
+    url: Urls.LA_PORTAL_ACCESSIBILITY_STATEMENT,
+    contentDir: path.join(__dirname, '..', 'application', 'accessibility-statement'),
+    getNextStep: () => Urls.LA_PORTAL_KBA_CASE_REF,
+  },
+  {
+    url: Urls.LA_PORTAL_TERMS_AND_CONDITIONS,
+    contentDir: path.join(__dirname, '..', 'application', 'terms-and-conditions'),
+    getNextStep: () => Urls.LA_PORTAL_KBA_CASE_REF,
+  },
+  {
+    url: Urls.LA_PORTAL_CONTACT_US,
+    contentDir: path.join(__dirname, '..', 'application', 'contact-us'),
+    getNextStep: () => Urls.LA_PORTAL_KBA_CASE_REF,
+  },
+];
+
 export const laPortalSequence: Step[] = [
   {
     url: Urls.LA_PORTAL_KBA_CASE_REF,
@@ -308,4 +337,5 @@ export const laPortalSequence: Step[] = [
   ...otherParentSequence,
   ...placementOrderSequence,
   ...siblingSequence,
+  ...footerLinkSequence,
 ];

@@ -4,6 +4,8 @@ const en = {
   title: 'Terms and conditions',
   thisPage:
     'By using this service you’re agreeing to these terms of use. This includes the <a class="govuk-link" href="/privacy-policy">privacy policy</a>.',
+  laPortalThisPage:
+    'By using this service you’re agreeing to these terms of use. This includes the <a class="govuk-link" href="/la-portal/privacy-policy">privacy policy</a>.',
   termsAndConditionsUsers: 'Terms and conditions for professional users',
   termsAndConditionsProfessional:
     "If you are a professional user, you'll be asked to agree to the additional terms and conditions of the service after you create a MyHMCTS account.",
@@ -16,6 +18,8 @@ const en = {
   stored: 'Sharing and storing data',
   dataStored:
     'Our <a class="govuk-link" href="/privacy-policy">privacy policy</a> explains where your data is stored, and who it is shared with. Our cookie policy explains how this service uses and stores cookies.',
+  laPortalDataStored:
+    'Our <a class="govuk-link" href="/la-portal/privacy-policy">privacy policy</a> explains where your data is stored, and who it is shared with. Our cookie policy explains how this service uses and stores cookies.',
   applicationLaw: 'Laws applying to this service',
   dispute:
     'Your use of this service and any dispute arising from its use will be  governed by and construed in accordance with the laws of England and Wales, including but not limited to the:',
@@ -45,6 +49,8 @@ const en = {
   healthData: 'health data',
   consentGiven:
     'you give us your consent to processing this information for the purpose of dealing with your application. For more information about how we collect and store your personal data, see the <a class="govuk-link" href="/privacy-policy">privacy policy</a>.',
+  laPortalConsentGiven:
+    'you give us your consent to processing this information for the purpose of dealing with your application. For more information about how we collect and store your personal data, see the <a class="govuk-link" href="/la-portal/privacy-policy">privacy policy</a>.',
   disclaimer: 'Disclaimer',
   disclaimerGuarantee:
     "While we make every effort to keep information up to date, we don't provide any guarantees, conditions or warranties that it will be:",
@@ -78,12 +84,16 @@ const en = {
   fraudulentMisrepresentation: 'fraudulent misrepresentation',
   anyOtherLiability: 'any other liability which cannot be excluded or limited under applicable law',
   contactUsFurtherInfo: '<a class="govuk-link" href="/contact-us">Contact us</a> for further information.',
+  laPortalContactUsFurtherInfo:
+    '<a class="govuk-link" href="/la-portal/contact-us">Contact us</a> for further information.',
 };
 
 const cy: typeof en = {
   title: 'Telerau ac amodau',
   thisPage:
     'Trwy ddefnyddio’r gwasanaeth hwn rydych yn cytuno telerau defnyddio’r gwasanaeth hwn. Ar y wefan hon maent yn cynnwys <a class="govuk-link" href="/privacy-policy">polisi preifatrwydd</a>',
+  laPortalThisPage:
+    'Trwy ddefnyddio’r gwasanaeth hwn rydych yn cytuno telerau defnyddio’r gwasanaeth hwn. Ar y wefan hon maent yn cynnwys <a class="govuk-link" href="/la-portal/privacy-policy">polisi preifatrwydd</a>',
   termsAndConditionsUsers: 'Telerau ac amodau ar gyfer defnyddwyr proffesiynol',
   termsAndConditionsProfessional:
     'Os ydych yn ddefnyddiwr proffesiynol, bydd gofyn i chi gytuno â thelerau ac amodau ychwanegol y gwasanaeth ar ôl i chi greu cyfrif MyHMCTS.',
@@ -96,6 +106,8 @@ const cy: typeof en = {
   stored: 'Rhannu a storio eich data',
   dataStored:
     "Mae ein <a class='govuk-link' href='/privacy-policy'>polisi preifatrwydd</a> yn esbonio ble mae eich data'n cael ei storio, a gyda phwy y caiff ei rannu. Mae ein polisi cwcis yn egluro sut mae’r gwasanaeth hwn yn defnyddio ac yn storio cwcis.",
+  laPortalDataStored:
+    "Mae ein <a class='govuk-link' href='/la-portal/privacy-policy'>polisi preifatrwydd</a> yn esbonio ble mae eich data'n cael ei storio, a gyda phwy y caiff ei rannu. Mae ein polisi cwcis yn egluro sut mae’r gwasanaeth hwn yn defnyddio ac yn storio cwcis.",
   applicationLaw: 'Cyfreithiau sy’n berthnasol i’r gwasanaeth hwn',
   dispute:
     'Bydd y defnydd a wnewch o’r gwasanaeth hwn ac unrhyw anghydfod sy’n codi o’i ddefnyddio yn cael eu rheoli a’u dehongli yn unol â chyfreithiau Cymru a Lloegr, gan gynnwys, ond heb fod yn gyfyngedig i’r canlynol:',
@@ -125,6 +137,8 @@ const cy: typeof en = {
   healthData: 'data am eich iechyd',
   consentGiven:
     "rydych yn rhoi caniatâd inni brosesu'r wybodaeth hon er mwyn inni allu ymdrin â’ch cais. I gael rhagor o wybodaeth am sut rydym yn casglu ac yn storio eich data personol, gweler y <a class='govuk-link' href='/privacy-policy'>polisi preifatrwydd</a>.",
+  laPortalConsentGiven:
+    "rydych yn rhoi caniatâd inni brosesu'r wybodaeth hon er mwyn inni allu ymdrin â’ch cais. I gael rhagor o wybodaeth am sut rydym yn casglu ac yn storio eich data personol, gweler y <a class='govuk-link' href='/la-portal/privacy-policy'>polisi preifatrwydd</a>.",
   disclaimer: 'Ymwrthodiad',
   disclaimerGuarantee:
     'Er ein bod yn ymdrechu i gadw gwybodaeth yn gyfredol, nid ydym yn darparu unrhyw warantau, amodau neu sicrwydd y bydd:',
@@ -159,6 +173,8 @@ const cy: typeof en = {
   fraudulentMisrepresentation: 'camliwio twyllodrus',
   anyOtherLiability: 'unrhyw atebolrwydd arall na ellir ei eithrio neu ei gyfyngu dan y gyfraith berthnasol',
   contactUsFurtherInfo: '<a class="govuk-link" href="/contact-us">Cysylltwch â ni</a> am ragor o wybodaeth.',
+  laPortalContactUsFurtherInfo:
+    '<a class="govuk-link" href="/la-portal/contact-us">Cysylltwch â ni</a> am ragor o wybodaeth.',
 };
 
 const languages = {

@@ -12,7 +12,11 @@
     <p class="govuk-body">{{ managedBy }}</p>
     <p class="govuk-body">{{ moj | safe }}</p>
     <p class="govuk-body">{{ responsibleForDeciding }}</p>
-    <p class="govuk-body">{{ moreInformation | safe }}</p>
+    {% if laPortal == true %}
+      <p class="govuk-body">{{ laPortalMoreInformation | safe }}</p>
+    {% else %}
+      <p class="govuk-body">{{ moreInformation | safe }}</p>
+    {% endif %}
 
     <h3 class="govuk-heading-s">{{ thePersonal }}</h3>
     <p class="govuk-body">{{ personalInformation }}</p>
@@ -45,7 +49,11 @@
     <h2 class="govuk-heading-s">{{ usingYourData }}</h2>
     <p class="govuk-body">{{ asPart }}</p>
     <p class="govuk-body">{{ weMayAskForPermission }}</p>
-    <p class="govuk-body">{{ weUseCookies | safe }}</p>
+    {% if laPortal == true %}
+      <p class="govuk-body">{{ laPortalWeUseCookies | safe }}</p>
+    {% else %}
+      <p class="govuk-body">{{ weUseCookies | safe }}</p>
+    {% endif %}
     <ul class="govuk-list govuk-list--bullet">
         <li>{{ ifYouOpenEmail }}</li>
         <li>{{ yourComputer }}</li>
@@ -61,7 +69,12 @@
     <p class="govuk-body">{{ ifAnother }}</p>
     <p class="govuk-body">{{ ifYouContactUs | safe}}</p>
     <p class="govuk-body">{{ crime }}</p>
-    <p class="govuk-body">{{ weUse | safe }}</p>
+    {% if laPortal == true %}
+      <p class="govuk-body">{{ laPortalWeUse | safe }}</p>
+    {% else %}
+      <p class="govuk-body">{{ weUse | safe }}</p>
+    {% endif %}
+
     <p class="govuk-body">{{ lawfulBases }}</p>
     <ul class="govuk-list">
         <li>(a) {{ consent }}</li>
