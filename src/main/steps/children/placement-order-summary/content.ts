@@ -14,7 +14,7 @@ const en = content => {
     change: 'Change',
     remove: 'Remove',
     label: 'Do you want to add another order?',
-    hint: 'We need details of all orders already in place. Your social worker or adoption agency can help provide these details.',
+    // hint: 'We need details of all orders already in place. Your social worker or adoption agency can help provide these details.',
     errors: {
       addAnotherPlacementOrder: {
         required: 'Please select an answer',
@@ -36,7 +36,7 @@ const cy: typeof en = content => {
     change: 'Newid',
     remove: 'Dileu',
     label: 'A ydych eisiau ychwanegu gorchymyn arall?',
-    hint: 'Mae arnom angen manylion y gorchmynion sydd eisoes mewn lle. Gall eich gweithiwr cymdeithasol neu’ch asiantaeth fabwysiadu eich helpu i ddarparu’r manylion hyn.',
+    // hint: 'Mae arnom angen manylion y gorchmynion sydd eisoes mewn lle. Gall eich gweithiwr cymdeithasol neu’ch asiantaeth fabwysiadu eich helpu i ddarparu’r manylion hyn.',
     errors: {
       addAnotherPlacementOrder: {
         required: 'Dewiswch ateb os gwelwch yn dda',
@@ -56,7 +56,7 @@ export const form: FormContent = {
       classes: 'govuk-radios govuk-radios--inline',
       label: l => l.label,
       section: l => l.section,
-      hint: l => l.hint,
+      // hint: l => l.hint,
       labelSize: 'm',
       values: [
         { label: l => l.yes, value: YesOrNo.YES },

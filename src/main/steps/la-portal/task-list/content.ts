@@ -20,7 +20,7 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         id: 'birth-certificate-details',
         text: taskListItems.birthCertificate,
         status: getChildrenBirthCertificateStatus(userCase),
-        href: '', //URL.LA_PORTAL_CHILDREN_FULL_NAME,
+        href: URL.LA_PORTAL_CHILDREN_FULL_NAME,
       },
       {
         id: 'birth-mother-details',
@@ -44,10 +44,11 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         id: 'placement-and-court-order-details',
         text: taskListItems.placementAndCourtOrders,
         status: getChildrenPlacementOrderStatus(userCase),
-        href: '', //
-        // getChildrenPlacementOrderStatus(userCase) === SectionStatus.NOT_STARTED
-        //   ? URL.LA_PORTAL_CHILD_PLACEMENT_ORDER_NUMBER
-        //   : URL.LA_PORTAL_CHILD_PLACEMENT_ORDER_SUMMARY,
+        // href: '', //
+        href:
+          getChildrenPlacementOrderStatus(userCase) === SectionStatus.NOT_STARTED
+            ? URL.LA_PORTAL_CHILD_PLACEMENT_ORDER_NUMBER
+            : URL.LA_PORTAL_CHILD_PLACEMENT_ORDER_SUMMARY,
       },
       {
         id: 'sibling-court-order-details',

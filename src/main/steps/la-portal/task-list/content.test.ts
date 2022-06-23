@@ -65,14 +65,24 @@ describe('task-list > content', () => {
       expected: [
         {
           items: [
-            { id: 'birth-certificate-details', text: 'Birth certificate details', status: 'COMPLETED', href: '' },
+            {
+              id: 'birth-certificate-details',
+              text: 'Birth certificate details',
+              status: 'COMPLETED',
+              href: '/la-portal/child/full-name',
+            },
             {
               id: 'birth-mother-details',
               text: 'Birth mother details',
               status: 'COMPLETED',
               href: '/la-portal/birth-mother/full-name',
             },
-            { id: 'birth-father-details', text: 'Birth father details', status: 'COMPLETED', href: '' },
+            {
+              id: 'birth-father-details',
+              text: 'Birth father details',
+              status: 'COMPLETED',
+              href: '/la-portal/birth-father/name-on-certificate',
+            },
             {
               id: 'other-parent-details',
               text: 'Other person with parental responsibility',
@@ -83,7 +93,7 @@ describe('task-list > content', () => {
               id: 'placement-and-court-order-details',
               text: 'Placement and court orders',
               status: 'NOT_STARTED',
-              href: '',
+              href: '/la-portal/child/placement-order-number',
             },
             { id: 'sibling-court-order-details', text: 'Sibling court order details', status: 'COMPLETED', href: '' },
             { id: 'upload-documents', text: 'Upload documents', status: 'NOT_STARTED', href: '' },

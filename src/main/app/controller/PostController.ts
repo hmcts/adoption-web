@@ -24,7 +24,6 @@ export class PostController<T extends AnyObject> {
     const form = new Form(fields);
 
     const { saveAndSignOut, saveBeforeSessionTimeout, _csrf, ...formData } = form.getParsedBody(req.body);
-
     if (req.body.saveAndSignOut) {
       await this.saveAndSignOut(req, res, formData);
     } else if (req.body.saveBeforeSessionTimeout) {
@@ -55,7 +54,7 @@ export class PostController<T extends AnyObject> {
   private async saveAndContinue(req: AppRequest<T>, res: Response, form: Form, formData: Partial<Case>): Promise<void> {
     Object.assign(req.session.userCase, formData);
     req.session.errors = form.getErrors(formData);
-
+    //console.log('<<<<<<UserCase in PostController saveAndContinue method: >>>>> : '+JSON.stringify(req.session.userCase));
     this.filterErrorsForSaveAsDraft(req);
 
     if (req.session.errors.length) {
@@ -83,6 +82,7 @@ export class PostController<T extends AnyObject> {
   protected async save(req: AppRequest<T>, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
     try {
       req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
+      //console.log('<<<<<<UserCase in PostController save method: >>>>> : '+JSON.stringify(req.session.userCase));
     } catch (err) {
       req.locals.logger.error('Error saving', err);
       req.session.errors = req.session.errors || [];
