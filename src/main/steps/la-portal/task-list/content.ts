@@ -1,4 +1,4 @@
-import { SectionStatus, YesNoNotsure } from '../../../app/case/definition'; //YesNoNotsure
+import { SectionStatus, YesNoNotsure } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import * as URL from '../../urls';
 
