@@ -14,7 +14,6 @@ import {
 
 const generateTaskList = (sectionTitles, taskListItems, userCase) => [
   {
-    title: sectionTitles.childDetails,
     items: [
       {
         id: 'birth-certificate-details',

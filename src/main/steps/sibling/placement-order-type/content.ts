@@ -14,9 +14,13 @@ const en = () => ({
   placementOrder: 'Placement order',
   superVisOrder: 'Supervision order',
   other: 'Other',
+  placementOtherType: 'Add a different type of order',
   errors: {
     siblingPoType: {
       required: 'Please select an answer',
+    },
+    placementOtherType: {
+      required: 'Enter an order type',
     },
   },
 });
@@ -31,9 +35,13 @@ const cy: typeof en = () => ({
   placementOrder: 'Placement order (in welsh)',
   superVisOrder: 'Supervision order (in welsh)',
   other: 'Other (in welsh)',
+  placementOtherType: 'Add a different type of order (in welsh)',
   errors: {
     siblingPoType: {
       required: 'Please select an answer (in welsh)',
+    },
+    placementOtherType: {
+      required: 'Enter an order type',
     },
   },
 });
@@ -53,7 +61,18 @@ export const form: FormContent = {
           { label: l => l.freeingOrder, value: SiblingPOType.FREEING_ORDER },
           { label: l => l.placementOrder, value: SiblingPOType.PLACEMENT_ORDER },
           { label: l => l.superVisOrder, value: SiblingPOType.SUPERVIS_ORDER },
-          { label: l => l.other, value: SiblingPOType.OTHER },
+          {
+            label: l => l.other,
+            value: SiblingPOType.OTHER,
+            subFields: {
+              placementOtherType: {
+                type: 'text',
+                label: l => l.placementOtherType,
+                labelSize: null,
+                validator: isFieldFilledIn,
+              },
+            },
+          },
         ],
         attributes: {
           spellcheck: false,

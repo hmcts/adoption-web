@@ -18,9 +18,13 @@ const enContent = {
   placementOrder: 'Placement order',
   superVisOrder: 'Supervision order',
   other: 'Other',
+  placementOtherType: 'Add a different type of order',
   errors: {
     siblingPoType: {
       required: 'Please select an answer',
+    },
+    placementOtherType: {
+      required: 'Enter an order type',
     },
   },
 };
@@ -35,9 +39,13 @@ const cyContent = {
   placementOrder: 'Placement order (in welsh)',
   superVisOrder: 'Supervision order (in welsh)',
   other: 'Other (in welsh)',
+  placementOtherType: 'Add a different type of order (in welsh)',
   errors: {
     siblingPoType: {
       required: 'Please select an answer (in welsh)',
+    },
+    placementOtherType: {
+      required: 'Enter an order type',
     },
   },
 };
@@ -88,8 +96,13 @@ describe('sibling > placement-order-type > content', () => {
     expect((field.values[6].label as Function)(generatedContent)).toBe(enContent.other);
     expect(field.values[6].value).toBe(SiblingPOType.OTHER);
     expect(field.attributes).toEqual({ spellcheck: false });
-
     expect(field.validator).toBe(isFieldFilledIn);
+
+    const placementOrderOtherType = field.values[6].subFields!.placementOtherType;
+    expect(placementOrderOtherType.type).toBe('text');
+    expect((placementOrderOtherType.label as Function)(generatedContent)).toBe(enContent.placementOtherType);
+    expect(placementOrderOtherType.labelSize).toBe(null);
+    expect(placementOrderOtherType.validator).toBe(isFieldFilledIn);
   });
 
   test('should contain submit button', () => {

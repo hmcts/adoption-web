@@ -93,7 +93,10 @@ const getStepsWithContent = (sequence: Step[] | EligibilityStep[], subDir: strin
     let stepDir = step.contentDir;
     if (!stepDir) {
       const stepUrl = step.url === '/' ? '/home' : step.url;
-      const removeLAUrl = stepUrl.startsWith('/la-portal') ? stepUrl.split('/la-portal')[1] : stepUrl;
+      const removeLAUrl =
+        stepUrl.startsWith('/la-portal') && stepUrl !== '/la-portal/kba-case-ref' && stepUrl !== '/la-portal/task-list'
+          ? `/${stepUrl.split('/')[3] || ''}/${stepUrl.split('/')[4] || ''}`
+          : stepUrl;
       const path = removeLAUrl.startsWith(subDir) ? removeLAUrl : `${subDir}${removeLAUrl}`;
       stepDir = `${dir}${path}`;
     }
