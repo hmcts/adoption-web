@@ -447,7 +447,7 @@ export interface CaseData {
   siblings: ListValue<Sibling>[];
   payments: ListValue<Payment>[];
   hasAnotherAdopAgencyOrLA: YesOrNo;
-  hasSiblings: string;
+  hasSiblings: YesNoNotsure;
   hasSiblingNotSureReason: string;
   addAnotherSiblingPlacementOrder: YesOrNo;
   selectedSiblingId: string;
