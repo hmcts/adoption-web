@@ -181,6 +181,10 @@ When('I enter my valid case reference and valid access code', async () => {
   const user = testConfig.GetCurrentUser();
   const testUser = await iGetTheTestUser(user);
   const caseApi = iGetTheCaseApi(testUser);
+
+  // add a delay after logging a user in because it creates an extra case that needs to be added to the ES index
+  await new Promise(resolve => setTimeout(resolve, 5000));
+
   const userCase = await caseApi.getOrCreateCase(Adoption.ADOPTION, testUser);
 
   const caseReference = userCase.id;
@@ -205,6 +209,10 @@ When('a case worker issues the application', async () => {
   const user = testConfig.GetCurrentUser();
   const testUser = await iGetTheTestUser(user);
   const caseApi = iGetTheCaseApi(testUser);
+
+  // add a delay after logging a user in because it creates an extra case that needs to be added to the ES index
+  await new Promise(resolve => setTimeout(resolve, 5000));
+
   const userCase = await caseApi.getOrCreateCase(Adoption.ADOPTION, testUser);
   const caseReference = userCase.id;
 
