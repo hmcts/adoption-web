@@ -12,7 +12,7 @@ nodejs:
     enabled: false
   environment:
     APPINSIGHTS_KEY: '00000000-0000-0000-0000-000000000000'
-    CCD_URL: 'http://ccd-data-store-api-adoption-cos-api-pr-288.service.core-compute-preview.internal'
+    CCD_URL: 'http://ccd-data-store-api-adoption-cos-api-pr-323.service.core-compute-preview.internal'
     PCQ_ENABLED: 'true'
     IDAM_ROLE: 'adoption-citizen-user'
 idam-pr:
