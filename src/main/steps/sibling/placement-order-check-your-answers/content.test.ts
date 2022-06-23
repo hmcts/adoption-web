@@ -1,5 +1,5 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
-import { SiblingRelationships } from '../../../app/case/definition';
+import { SiblingPOType, SiblingRelationships } from '../../../app/case/definition';
 import { FormContent } from '../../../app/form/Form';
 import { CommonContent } from '../../common/common.content';
 
@@ -10,6 +10,23 @@ const enContent = {
   for: 'for',
   orderType: 'Type of order',
   orderNumber: 'Order case or serial number',
+  siblingRelation: {
+    [SiblingRelationships.SISTER]: 'Sister',
+    [SiblingRelationships.STEP_SISTER]: 'Step-sister',
+    [SiblingRelationships.HALF_SISTER]: 'Half-sister',
+    [SiblingRelationships.BROTHER]: 'Brother',
+    [SiblingRelationships.STEP_BROTHER]: 'Step-brother',
+    [SiblingRelationships.HALF_BROTHER]: 'Half-brother',
+  },
+  siblingPOType: {
+    [SiblingPOType.ADOPTION_ORDER]: 'Adoption order',
+    [SiblingPOType.CARE_ORDER]: 'Care order',
+    [SiblingPOType.CONTACT_ORDER]: 'Contact order',
+    [SiblingPOType.FREEING_ORDER]: 'Freeing order',
+    [SiblingPOType.PLACEMENT_ORDER]: 'Placement order',
+    [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order',
+    [SiblingPOType.OTHER]: 'Other',
+  },
   change: 'Change',
   continue: 'Continue',
 };
@@ -19,6 +36,23 @@ const cyContent = {
   for: 'ar gyfer',
   orderType: 'Math o neuchymyn',
   orderNumber: 'Rhif cyfresol neu rif yr achos ar y gorchymyn',
+  siblingRelation: {
+    [SiblingRelationships.SISTER]: 'Sister (in welsh)',
+    [SiblingRelationships.STEP_SISTER]: 'Step-sister (in welsh)',
+    [SiblingRelationships.HALF_SISTER]: 'Half-sister (in welsh)',
+    [SiblingRelationships.BROTHER]: 'Brother (in welsh)',
+    [SiblingRelationships.STEP_BROTHER]: 'Step-brother (in welsh)',
+    [SiblingRelationships.HALF_BROTHER]: 'Half-brother (in welsh)',
+  },
+  siblingPOType: {
+    [SiblingPOType.ADOPTION_ORDER]: 'Adoption order (in welsh)',
+    [SiblingPOType.CARE_ORDER]: 'Care order (in welsh)',
+    [SiblingPOType.CONTACT_ORDER]: 'Contact order (in welsh)',
+    [SiblingPOType.FREEING_ORDER]: 'Freeing order (in welsh)',
+    [SiblingPOType.PLACEMENT_ORDER]: 'Placement order (in welsh)',
+    [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order (in welsh)',
+    [SiblingPOType.OTHER]: 'Other (in welsh)',
+  },
   change: 'Newid',
   continue: 'Parhau',
 };
@@ -32,7 +66,7 @@ describe('sibling > placement-order-check-your-answers > content', () => {
         {
           siblingId: 'MOCK_SIBLING_ID',
           siblingRelation: SiblingRelationships.SISTER,
-          siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
+          siblingPoType: SiblingPOType.ADOPTION_ORDER,
           siblingPoNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
         },
       ],
@@ -59,37 +93,37 @@ describe('sibling > placement-order-check-your-answers > content', () => {
         placementOrderListItems: [
           {
             key: { text: 'Relationship' },
-            value: {},
+            value: { text: '' },
             actions: {
               items: [
                 {
-                  href: '/sibling/relation?change=undefined&returnUrl=/sibling/placement-order-check-your-answers',
+                  href: '/la-portal/sibling/relation?change=undefined&returnUrl=/la-portal/sibling/placement-order-check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Relationship',
+                  visuallyHiddenText: 'Relationship ',
                 },
               ],
             },
           },
           {
             key: { text: 'Type of order' },
-            value: {},
+            value: { text: '' },
             actions: {
               items: [
                 {
-                  href: '/sibling/placement-order-type?change=undefined&returnUrl=/sibling/placement-order-check-your-answers',
+                  href: '/la-portal/sibling/placement-order-type?change=undefined&returnUrl=/la-portal/sibling/placement-order-check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Type of order',
+                  visuallyHiddenText: 'Type of order ',
                 },
               ],
             },
           },
           {
             key: { text: 'Order case or serial number' },
-            value: {},
+            value: { text: undefined },
             actions: {
               items: [
                 {
-                  href: '/sibling/placement-order-number?change=undefined&returnUrl=/sibling/placement-order-check-your-answers',
+                  href: '/la-portal/sibling/placement-order-number?change=undefined&returnUrl=/la-portal/sibling/placement-order-check-your-answers',
                   text: 'Change',
                   visuallyHiddenText: 'Order case or serial number',
                 },
@@ -102,33 +136,33 @@ describe('sibling > placement-order-check-your-answers > content', () => {
     {
       siblingId: 'MOCK_SIBLING_ID',
       siblingRelation: SiblingRelationships.SISTER,
-      siblingPoType: 'MOCK_TYPE',
+      siblingPoType: SiblingPOType.ADOPTION_ORDER,
       siblingPoNumber: 'MOCK_NUMBER',
       expected: {
-        title: `MOCK_TYPE for ${SiblingRelationships.SISTER}`,
+        title: 'Adoption order for sister',
         placementOrderListItems: [
           {
             key: { text: 'Relationship' },
-            value: { text: SiblingRelationships.SISTER },
+            value: { text: 'Sister' },
             actions: {
               items: [
                 {
-                  href: '/sibling/relation?change=MOCK_SIBLING_ID&returnUrl=/sibling/placement-order-check-your-answers',
+                  href: '/la-portal/sibling/relation?change=MOCK_SIBLING_ID&returnUrl=/la-portal/sibling/placement-order-check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Relationship',
+                  visuallyHiddenText: 'Relationship Sister',
                 },
               ],
             },
           },
           {
             key: { text: 'Type of order' },
-            value: { text: 'MOCK_TYPE' },
+            value: { text: 'Adoption order' },
             actions: {
               items: [
                 {
-                  href: '/sibling/placement-order-type?change=MOCK_SIBLING_ID&returnUrl=/sibling/placement-order-check-your-answers',
+                  href: '/la-portal/sibling/placement-order-type?change=MOCK_SIBLING_ID&returnUrl=/la-portal/sibling/placement-order-check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Type of order',
+                  visuallyHiddenText: 'Type of order Adoption order',
                 },
               ],
             },
@@ -139,7 +173,7 @@ describe('sibling > placement-order-check-your-answers > content', () => {
             actions: {
               items: [
                 {
-                  href: '/sibling/placement-order-number?change=MOCK_SIBLING_ID&returnUrl=/sibling/placement-order-check-your-answers',
+                  href: '/la-portal/sibling/placement-order-number?change=MOCK_SIBLING_ID&returnUrl=/la-portal/sibling/placement-order-check-your-answers',
                   text: 'Change',
                   visuallyHiddenText: 'Order case or serial number',
                 },

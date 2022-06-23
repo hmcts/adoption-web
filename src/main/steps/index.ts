@@ -93,7 +93,8 @@ const getStepsWithContent = (sequence: Step[] | EligibilityStep[], subDir: strin
     let stepDir = step.contentDir;
     if (!stepDir) {
       const stepUrl = step.url === '/' ? '/home' : step.url;
-      const path = stepUrl.startsWith(subDir) ? stepUrl : `${subDir}${stepUrl}`;
+      const removeLAUrl = stepUrl.startsWith('/la-portal') ? stepUrl.split('/la-portal')[1] : stepUrl;
+      const path = removeLAUrl.startsWith(subDir) ? removeLAUrl : `${subDir}${removeLAUrl}`;
       stepDir = `${dir}${path}`;
     }
     const { content, view } = getStepFiles(stepDir);

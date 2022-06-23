@@ -1,6 +1,6 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
-import { SiblingRelationships } from '../../../app/case/definition';
-import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
+import { SiblingPOType, SiblingRelationships } from '../../../app/case/definition';
+import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -12,12 +12,28 @@ const enContent = {
   section: 'Sibling details',
   title: 'Orders already in place for siblings and half-siblings',
   sibling: 'Sibling',
+  siblingRelation: {
+    [SiblingRelationships.SISTER]: 'Sister',
+    [SiblingRelationships.STEP_SISTER]: 'Step-sister',
+    [SiblingRelationships.HALF_SISTER]: 'Half-sister',
+    [SiblingRelationships.BROTHER]: 'Brother',
+    [SiblingRelationships.STEP_BROTHER]: 'Step-brother',
+    [SiblingRelationships.HALF_BROTHER]: 'Half-brother',
+  },
   placementOrder: 'Placement Order',
+  siblingPOType: {
+    [SiblingPOType.ADOPTION_ORDER]: 'Adoption order',
+    [SiblingPOType.CARE_ORDER]: 'Care order',
+    [SiblingPOType.CONTACT_ORDER]: 'Contact order',
+    [SiblingPOType.FREEING_ORDER]: 'Freeing order',
+    [SiblingPOType.PLACEMENT_ORDER]: 'Placement order',
+    [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order',
+    [SiblingPOType.OTHER]: 'Other',
+  },
   incomplete: 'incomplete',
   change: 'Change',
   remove: 'Remove',
   label: 'Do you want to add another order?',
-  hint: 'For example, a care order or supervision order.',
   errors: {
     addAnotherSiblingPlacementOrder: {
       required: 'Please select an answer',
@@ -29,12 +45,28 @@ const cyContent = {
   section: 'Manylion y brawd/chwaer',
   title: 'Gorchmynion eisoes mewn lle ar gyfer brodyr/chwiorydd a hanner brodyr/hanner chwiorydd',
   sibling: 'Brawd/chwaer',
+  siblingRelation: {
+    [SiblingRelationships.SISTER]: 'Sister (in welsh)',
+    [SiblingRelationships.STEP_SISTER]: 'Step-sister (in welsh)',
+    [SiblingRelationships.HALF_SISTER]: 'Half-sister (in welsh)',
+    [SiblingRelationships.BROTHER]: 'Brother (in welsh)',
+    [SiblingRelationships.STEP_BROTHER]: 'Step-brother (in welsh)',
+    [SiblingRelationships.HALF_BROTHER]: 'Half-brother (in welsh)',
+  },
   placementOrder: 'Gorchymyn Lleoli',
+  siblingPOType: {
+    [SiblingPOType.ADOPTION_ORDER]: 'Adoption order',
+    [SiblingPOType.CARE_ORDER]: 'Care order',
+    [SiblingPOType.CONTACT_ORDER]: 'Contact order',
+    [SiblingPOType.FREEING_ORDER]: 'Freeing order',
+    [SiblingPOType.PLACEMENT_ORDER]: 'Placement order',
+    [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order',
+    [SiblingPOType.OTHER]: 'Other',
+  },
   incomplete: 'anghyflawn',
   change: 'Newid',
   remove: 'Dileu',
   label: 'Do you want to add another order? (in welsh)',
-  hint: 'For example, a care order or supervision order. (in welsh)',
   errors: {
     addAnotherSiblingPlacementOrder: {
       required: 'Dewiswch ateb os gwelwch yn dda',
@@ -74,7 +106,6 @@ describe('sibling > placement-order-summary > content', () => {
     expect(addAnotherSiblingPlacementOrder.type).toBe('radios');
     expect(addAnotherSiblingPlacementOrder.classes).toBe('govuk-radios govuk-radios--inline');
     expect((addAnotherSiblingPlacementOrder.label as Function)(generatedContent)).toBe(enContent.label);
-    expect(((addAnotherSiblingPlacementOrder as FormInput).hint as Function)(generatedContent)).toBe(enContent.hint);
     expect((addAnotherSiblingPlacementOrder.section as Function)(generatedContent)).toBe(enContent.section);
     expect((addAnotherSiblingPlacementOrder.values[0].label as Function)({ yes: 'Yes' })).toBe('Yes');
     expect((addAnotherSiblingPlacementOrder.values[1].label as Function)({ no: 'No' })).toBe('No');

@@ -4,6 +4,7 @@ import {
   DocumentType,
   Gender,
   Nationality,
+  SiblingPOType,
   SiblingRelationships,
   State,
   YesNoNotsure,
@@ -559,7 +560,7 @@ describe('utils', () => {
             {
               siblingId: 'MOCK_SIBLING_ID',
               siblingRelation: SiblingRelationships.SISTER,
-              siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
+              siblingPoType: SiblingPOType.ADOPTION_ORDER,
             },
           ],
         },
@@ -572,7 +573,7 @@ describe('utils', () => {
             {
               siblingId: 'MOCK_SIBLING_ID',
               siblingRelation: SiblingRelationships.STEP_SISTER,
-              siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
+              siblingPoType: SiblingPOType.CARE_ORDER,
             },
           ],
         },
@@ -585,7 +586,7 @@ describe('utils', () => {
             {
               siblingId: 'MOCK_SIBLING_ID',
               siblingRelation: SiblingRelationships.HALF_SISTER,
-              siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
+              siblingPoType: SiblingPOType.CONTACT_ORDER,
             },
           ],
         },
@@ -598,7 +599,7 @@ describe('utils', () => {
             {
               siblingId: 'MOCK_SIBLING_ID',
               siblingRelation: SiblingRelationships.BROTHER,
-              siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
+              siblingPoType: SiblingPOType.FREEING_ORDER,
             },
           ],
         },
@@ -611,7 +612,7 @@ describe('utils', () => {
             {
               siblingId: 'MOCK_SIBLING_ID',
               siblingRelation: SiblingRelationships.STEP_BROTHER,
-              siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
+              siblingPoType: SiblingPOType.PLACEMENT_ORDER,
             },
           ],
         },
@@ -624,7 +625,7 @@ describe('utils', () => {
             {
               siblingId: 'MOCK_SIBLING_ID',
               siblingRelation: SiblingRelationships.HALF_BROTHER,
-              siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
+              siblingPoType: SiblingPOType.SUPERVIS_ORDER,
             },
           ],
         },
@@ -637,7 +638,7 @@ describe('utils', () => {
             {
               siblingId: 'MOCK_SIBLING_ID',
               siblingRelation: SiblingRelationships.SISTER,
-              siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
+              siblingPoType: SiblingPOType.OTHER,
               siblingPoNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
             },
           ],

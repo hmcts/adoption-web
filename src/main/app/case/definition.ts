@@ -752,7 +752,7 @@ export interface AdoptionAgencyOrLocalAuthority {
 export interface Sibling {
   siblingId: string;
   siblingRelation?: SiblingRelationships;
-  siblingPoType?: string;
+  siblingPoType?: SiblingPOType;
   siblingPoNumber?: string;
 }
 
@@ -1327,6 +1327,16 @@ export const enum SiblingRelationships {
   BROTHER = 'brotherRelation',
   HALF_BROTHER = 'halfBrotherRelation',
   STEP_BROTHER = 'stepBrotherRelation',
+}
+
+export const enum SiblingPOType {
+  ADOPTION_ORDER = 'adoptionOrder',
+  CARE_ORDER = 'careOrder',
+  CONTACT_ORDER = 'contactOrder',
+  FREEING_ORDER = 'freeingOrder',
+  PLACEMENT_ORDER = 'placementOrder',
+  SUPERVIS_ORDER = 'superVisOrder',
+  OTHER = 'other',
 }
 
 export const enum SolicitorPaymentMethod {

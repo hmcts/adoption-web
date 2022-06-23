@@ -11,7 +11,6 @@ jest.mock('../../../app/form/validation');
 const enContent = {
   section: 'Sibling details',
   label: 'What is their relationship to the child being adopted?',
-  hint: 'For instance, brother or half sister',
   sister: 'Sister',
   halfSister: 'Half-sister',
   stepSister: 'Step-sister',
@@ -20,14 +19,13 @@ const enContent = {
   stepBrother: 'Step-brother',
   errors: {
     siblingRelation: {
-      required: 'Enter the relationship',
+      required: 'Please select an answer',
     },
   },
 };
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
   label: 'What is their relationship to the child being adopted? (in welsh)',
-  hint: 'For instance, brother or half sister (in welsh)',
   sister: 'Sister (in welsh)',
   halfSister: 'Half-sister (in welsh)',
   stepSister: 'Step-sister (in welsh)',
@@ -36,7 +34,7 @@ const cyContent = {
   stepBrother: 'Step-brother (in welsh)',
   errors: {
     siblingRelation: {
-      required: 'Enter the relationship (in welsh)',
+      required: 'Please select an answer (in welsh)',
     },
   },
 };

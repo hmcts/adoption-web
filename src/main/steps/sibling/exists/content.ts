@@ -11,7 +11,7 @@ const en = () => ({
     '<label class="govuk-label">You will be asked to provide each sibling court order individually.</label>',
   errors: {
     hasSiblings: {
-      required: 'Please answer the question',
+      required: 'Please select an answer',
     },
   },
 });
@@ -23,7 +23,7 @@ const cy: typeof en = () => ({
     '<label class="govuk-label">You will be asked to provide each sibling court order individually.</label> (in welsh)',
   errors: {
     hasSiblings: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: 'Please select an answer (in welsh)',
     },
   },
 });

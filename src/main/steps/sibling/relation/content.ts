@@ -7,7 +7,6 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 const en = () => ({
   section: SECTION,
   label: 'What is their relationship to the child being adopted?',
-  hint: 'For instance, brother or half sister',
   sister: 'Sister',
   halfSister: 'Half-sister',
   stepSister: 'Step-sister',
@@ -16,7 +15,7 @@ const en = () => ({
   stepBrother: 'Step-brother',
   errors: {
     siblingRelation: {
-      required: 'Enter the relationship',
+      required: 'Please select an answer',
     },
   },
 });
@@ -24,7 +23,6 @@ const en = () => ({
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
   label: 'What is their relationship to the child being adopted? (in welsh)',
-  hint: 'For instance, brother or half sister (in welsh)',
   sister: 'Sister (in welsh)',
   halfSister: 'Half-sister (in welsh)',
   stepSister: 'Step-sister (in welsh)',
@@ -33,7 +31,7 @@ const cy: typeof en = () => ({
   stepBrother: 'Step-brother (in welsh)',
   errors: {
     siblingRelation: {
-      required: 'Enter the relationship (in welsh)',
+      required: 'Please select an answer (in welsh)',
     },
   },
 });
@@ -47,8 +45,6 @@ export const form: FormContent = {
         classes: 'govuk-radios',
         label: l => l.label,
         section: l => l.section,
-        // labelSize: 'l',
-        // hint: l => l.hint,
         values: [
           { label: l => l.sister, value: SiblingRelationships.SISTER },
           { label: l => l.halfSister, value: SiblingRelationships.HALF_SISTER },
@@ -57,7 +53,6 @@ export const form: FormContent = {
           { label: l => l.halfBrother, value: SiblingRelationships.HALF_BROTHER },
           { label: l => l.stepBrother, value: SiblingRelationships.STEP_BROTHER },
         ],
-        // value: sibling?.siblingRelation,
         validator: isFieldFilledIn,
         ...sibling,
       },

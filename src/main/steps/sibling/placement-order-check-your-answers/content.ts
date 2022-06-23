@@ -1,41 +1,46 @@
 import { CaseWithId } from '../../../app/case/case';
+import { SiblingPOType, SiblingRelationships } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import {
-  SIBLING_ORDER_CASE_NUMBER,
-  SIBLING_ORDER_CHECK_YOUR_ANSWERS,
-  SIBLING_ORDER_TYPE,
-  SIBLING_RELATION,
+  LA_PORTAL_SIBLING_ORDER_CASE_NUMBER,
+  LA_PORTAL_SIBLING_ORDER_CHECK_YOUR_ANSWERS,
+  LA_PORTAL_SIBLING_ORDER_TYPE,
+  LA_PORTAL_SIBLING_RELATION,
 } from '../../../steps/urls';
 
 const placementOrderListItems = (userCase: Partial<CaseWithId>, content) => {
   const sibling = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
 
-  const queryParams = `?change=${sibling?.siblingId}&returnUrl=${SIBLING_ORDER_CHECK_YOUR_ANSWERS}`;
+  const queryParams = `?change=${sibling?.siblingId}&returnUrl=${LA_PORTAL_SIBLING_ORDER_CHECK_YOUR_ANSWERS}`;
 
   return [
     {
       key: { text: content.relationship },
-      value: { text: sibling?.siblingRelation },
+      value: { text: (sibling?.siblingRelation && content.siblingRelation[sibling.siblingRelation]) || '' },
       actions: {
         items: [
           {
-            href: `${SIBLING_RELATION}${queryParams}`,
+            href: `${LA_PORTAL_SIBLING_RELATION}${queryParams}`,
             text: content.change,
-            visuallyHiddenText: content.relationship,
+            visuallyHiddenText: `${content.relationship} ${
+              (sibling?.siblingRelation && content.siblingRelation[sibling.siblingRelation]) || ''
+            }`,
           },
         ],
       },
     },
     {
       key: { text: content.orderType },
-      value: { text: sibling?.siblingPoType },
+      value: { text: (sibling?.siblingPoType && content.siblingPOType[sibling.siblingPoType]) || '' },
       actions: {
         items: [
           {
-            href: `${SIBLING_ORDER_TYPE}${queryParams}`,
+            href: `${LA_PORTAL_SIBLING_ORDER_TYPE}${queryParams}`,
             text: content.change,
-            visuallyHiddenText: content.orderType,
+            visuallyHiddenText: `${content.orderType} ${
+              (sibling?.siblingPoType && content.siblingPOType[sibling.siblingPoType]) || ''
+            }`,
           },
         ],
       },
@@ -46,7 +51,7 @@ const placementOrderListItems = (userCase: Partial<CaseWithId>, content) => {
       actions: {
         items: [
           {
-            href: `${SIBLING_ORDER_CASE_NUMBER}${queryParams}`,
+            href: `${LA_PORTAL_SIBLING_ORDER_CASE_NUMBER}${queryParams}`,
             text: content.change,
             visuallyHiddenText: content.orderNumber,
           },
@@ -59,7 +64,9 @@ const placementOrderListItems = (userCase: Partial<CaseWithId>, content) => {
 const getTitle = (userCase: Partial<CaseWithId>, content): string => {
   const sibling = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
 
-  return `${sibling?.siblingPoType || ''} ${content.for} ${sibling?.siblingRelation || ''}`;
+  return `${!sibling?.siblingPoType ? 'Order' : content.siblingPOType[sibling?.siblingPoType]} ${content.for} ${
+    !sibling?.siblingRelation ? 'sibling' : content.siblingRelation[sibling?.siblingRelation].toLowerCase()
+  }`;
 };
 
 const en = content => {
@@ -69,6 +76,23 @@ const en = content => {
     relationship: 'Relationship',
     orderType: 'Type of order',
     orderNumber: 'Order case or serial number',
+    siblingRelation: {
+      [SiblingRelationships.SISTER]: 'Sister',
+      [SiblingRelationships.STEP_SISTER]: 'Step-sister',
+      [SiblingRelationships.HALF_SISTER]: 'Half-sister',
+      [SiblingRelationships.BROTHER]: 'Brother',
+      [SiblingRelationships.STEP_BROTHER]: 'Step-brother',
+      [SiblingRelationships.HALF_BROTHER]: 'Half-brother',
+    },
+    siblingPOType: {
+      [SiblingPOType.ADOPTION_ORDER]: 'Adoption order',
+      [SiblingPOType.CARE_ORDER]: 'Care order',
+      [SiblingPOType.CONTACT_ORDER]: 'Contact order',
+      [SiblingPOType.FREEING_ORDER]: 'Freeing order',
+      [SiblingPOType.PLACEMENT_ORDER]: 'Placement order',
+      [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order',
+      [SiblingPOType.OTHER]: 'Other',
+    },
     change: 'Change',
     continue: 'Continue',
     language: content.language,
@@ -87,6 +111,23 @@ const cy: typeof en = content => {
     relationship: 'Relationship (in welsh)',
     orderType: 'Math o neuchymyn',
     orderNumber: 'Rhif cyfresol neu rif yr achos ar y gorchymyn',
+    siblingRelation: {
+      [SiblingRelationships.SISTER]: 'Sister (in welsh)',
+      [SiblingRelationships.STEP_SISTER]: 'Step-sister (in welsh)',
+      [SiblingRelationships.HALF_SISTER]: 'Half-sister (in welsh)',
+      [SiblingRelationships.BROTHER]: 'Brother (in welsh)',
+      [SiblingRelationships.STEP_BROTHER]: 'Step-brother (in welsh)',
+      [SiblingRelationships.HALF_BROTHER]: 'Half-brother (in welsh)',
+    },
+    siblingPOType: {
+      [SiblingPOType.ADOPTION_ORDER]: 'Adoption order (in welsh)',
+      [SiblingPOType.CARE_ORDER]: 'Care order (in welsh)',
+      [SiblingPOType.CONTACT_ORDER]: 'Contact order (in welsh)',
+      [SiblingPOType.FREEING_ORDER]: 'Freeing order (in welsh)',
+      [SiblingPOType.PLACEMENT_ORDER]: 'Placement order (in welsh)',
+      [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order (in welsh)',
+      [SiblingPOType.OTHER]: 'Other (in welsh)',
+    },
     change: 'Newid',
     continue: 'Parhau',
     language: content.language,
