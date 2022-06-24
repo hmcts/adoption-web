@@ -2,7 +2,11 @@
 
 {% block page_content %}
   <h1 class="govuk-heading-l">{{ title }}</h1>
-  <p class="govuk-body">{{ thisPage | safe }}</p>
+  {% if laPortal == true %}
+    <p class="govuk-body">{{ laPortalThisPage | safe }}</p>
+  {% else %}
+    <p class="govuk-body">{{ thisPage | safe }}</p>
+  {% endif %}
 
   <h2 class="govuk-heading-m">{{ termsAndConditionsUsers }}</h2>
   <p class="govuk-body">{{ termsAndConditionsProfessional }}</p>
@@ -14,7 +18,11 @@
   <p class="govuk-body">{{ service }}</p>
 
   <h2 class="govuk-heading-m">{{ stored }}</h2>
-  <p class="govuk-body">{{ dataStored | safe }}</p>
+  {% if laPortal == true %}
+    <p class="govuk-body">{{ laPortalDataStored | safe }}</p>
+  {% else %}
+    <p class="govuk-body">{{ dataStored | safe }}</p>
+  {% endif %}
 
   <h2 class="govuk-heading-m">{{ applicationLaw }}</h2>
   <p class="govuk-body">{{ dispute }}</p>
@@ -47,7 +55,11 @@
     <li>{{ geneticData }}</li>
     <li>{{ healthData }}</li>
   </ul>
-  <p class="govuk-body">{{ consentGiven | safe }}</p>
+  {% if laPortal == true %}
+    <p class="govuk-body">{{ laPortalConsentGiven | safe }}</p>
+  {% else %}
+    <p class="govuk-body">{{ consentGiven | safe }}</p>
+  {% endif %}
 
   <h2 class="govuk-heading-m">{{ disclaimer }}</h2>
   <p class="govuk-body">{{ disclaimerGuarantee }}</p>
@@ -87,5 +99,9 @@
     <li>{{ anyOtherLiability }}</li>
   </ul>
 
-  <p class="govuk-body">{{ contactUsFurtherInfo | safe }}</p>
+  {% if laPortal == true %}
+    <p class="govuk-body">{{ laPortalContactUsFurtherInfo | safe }}</p>
+  {% else %}
+    <p class="govuk-body">{{ contactUsFurtherInfo | safe }}</p>
+  {% endif %}
 {% endblock %}
