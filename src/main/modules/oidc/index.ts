@@ -1,3 +1,4 @@
+import { Logger } from '@hmcts/nodejs-logging';
 import config from 'config';
 import { Application, NextFunction, Response } from 'express';
 
@@ -16,6 +17,7 @@ export class OidcMiddleware {
     const protocol = app.locals.developmentMode ? 'http://' : 'https://';
     const port = app.locals.developmentMode ? `:${config.get('port')}` : '';
     const { errorHandler } = app.locals;
+    const logger = Logger.getLogger('index-oidc');
 
     app.get(SIGN_IN_URL, (req, res) =>
       res.redirect(getRedirectUrl(`${protocol}${res.locals.host}${port}`, CALLBACK_URL))
@@ -43,6 +45,7 @@ export class OidcMiddleware {
         if (req.session?.user) {
           res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
+          logger.info('Bearer token is : ', req.session.user.accessToken);
           if (!req.session.userCase) {
             //This language preference will be used while creating a case
             const languagePreference =
