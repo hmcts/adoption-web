@@ -160,6 +160,7 @@ export class CaseApi {
 }
 
 export const getCaseApi = (userDetails: UserDetails, logger: LoggerInstance): CaseApi => {
+  logger.info('Bearer token is : ', userDetails.accessToken);
   return new CaseApi(
     Axios.create({
       baseURL: config.get('services.case.url'),
