@@ -331,10 +331,14 @@ const isAdoptionAgencyOrLaComplete = (userCase: CaseWithId): boolean => {
       userCase.adopAgencyOrLaContactName &&
       userCase.adopAgencyOrLaPhoneNumber &&
       userCase.adopAgencyOrLaContactEmail &&
-      userCase.socialWorkerName &&
-      userCase.socialWorkerPhoneNumber &&
-      userCase.socialWorkerEmail &&
-      userCase.childLocalAuthority
+      userCase.childSocialWorkerName &&
+      userCase.childSocialWorkerPhoneNumber &&
+      userCase.childLocalAuthority &&
+      userCase.childLocalAuthorityEmail &&
+      userCase.applicantSocialWorkerName &&
+      userCase.applicantSocialWorkerPhoneNumber &&
+      userCase.applicantLocalAuthority &&
+      userCase.applicantLocalAuthorityEmail
     );
   } else {
     return !!(
@@ -343,10 +347,14 @@ const isAdoptionAgencyOrLaComplete = (userCase: CaseWithId): boolean => {
       userCase.localAuthorityName &&
       userCase.localAuthorityPhoneNumber &&
       userCase.hasAnotherAdopAgencyOrLA &&
-      userCase.socialWorkerName &&
-      userCase.socialWorkerPhoneNumber &&
-      userCase.socialWorkerEmail &&
-      userCase.childLocalAuthority
+      userCase.childSocialWorkerName &&
+      userCase.childSocialWorkerPhoneNumber &&
+      userCase.childLocalAuthority &&
+      userCase.childLocalAuthorityEmail &&
+      userCase.applicantSocialWorkerName &&
+      userCase.applicantSocialWorkerPhoneNumber &&
+      userCase.applicantLocalAuthority &&
+      userCase.applicantLocalAuthorityEmail
     );
   }
 };
@@ -362,10 +370,16 @@ const isAdoptionAgencyOrLaInProgress = (userCase: CaseWithId): boolean => {
       userCase.adopAgencyOrLaContactName ||
       userCase.adopAgencyOrLaPhoneNumber ||
       userCase.adopAgencyOrLaContactEmail ||
-      userCase.socialWorkerName ||
-      userCase.socialWorkerPhoneNumber ||
-      userCase.socialWorkerEmail ||
-      userCase.childLocalAuthority
+      userCase.childSocialWorkerName ||
+      userCase.childSocialWorkerEmail ||
+      userCase.childSocialWorkerPhoneNumber ||
+      userCase.childLocalAuthority ||
+      userCase.childLocalAuthorityEmail ||
+      userCase.applicantSocialWorkerName ||
+      userCase.applicantSocialWorkerEmail ||
+      userCase.applicantSocialWorkerPhoneNumber ||
+      userCase.applicantLocalAuthority ||
+      userCase.applicantLocalAuthorityEmail
     );
   } else {
     return !!(
@@ -374,10 +388,16 @@ const isAdoptionAgencyOrLaInProgress = (userCase: CaseWithId): boolean => {
       userCase.localAuthorityName ||
       userCase.localAuthorityPhoneNumber ||
       userCase.hasAnotherAdopAgencyOrLA ||
-      userCase.socialWorkerName ||
-      userCase.socialWorkerPhoneNumber ||
-      userCase.socialWorkerEmail ||
-      userCase.childLocalAuthority
+      userCase.childSocialWorkerName ||
+      userCase.childSocialWorkerEmail ||
+      userCase.childSocialWorkerPhoneNumber ||
+      userCase.childLocalAuthority ||
+      userCase.childLocalAuthorityEmail ||
+      userCase.applicantSocialWorkerName ||
+      userCase.applicantSocialWorkerEmail ||
+      userCase.applicantSocialWorkerPhoneNumber ||
+      userCase.applicantLocalAuthority ||
+      userCase.applicantLocalAuthorityEmail
     );
   }
 };
