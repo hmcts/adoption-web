@@ -63,6 +63,16 @@ export const childrenSequence: Step[] = [
     getNextStep: () => Urls.TASK_LIST_URL,
   },
   {
+    url: Urls.SOCIAL_WORKER,
+    showInSection: Sections.AboutChildren,
+    getNextStep: () => Urls.APPLICANT_SOCIAL_WORKER,
+  },
+  {
+    url: Urls.APPLICANT_SOCIAL_WORKER,
+    showInSection: Sections.AboutChildren,
+    getNextStep: () => Urls.LOCAL_AUTHORITY,
+  },
+  {
     url: Urls.LOCAL_AUTHORITY,
     showInSection: Sections.AboutChildren,
     getNextStep: () => Urls.OTHER_ADOPTION_AGENCY,
@@ -71,15 +81,10 @@ export const childrenSequence: Step[] = [
     url: Urls.OTHER_ADOPTION_AGENCY,
     showInSection: Sections.AboutChildren,
     getNextStep: data =>
-      (data as Partial<CaseWithId>).hasAnotherAdopAgencyOrLA === YesOrNo.NO ? Urls.SOCIAL_WORKER : Urls.ADOPTION_AGENCY,
+      (data as Partial<CaseWithId>).hasAnotherAdopAgencyOrLA === YesOrNo.NO ? Urls.TASK_LIST_URL : Urls.ADOPTION_AGENCY,
   },
   {
     url: Urls.ADOPTION_AGENCY,
-    showInSection: Sections.AboutChildren,
-    getNextStep: () => Urls.SOCIAL_WORKER,
-  },
-  {
-    url: Urls.SOCIAL_WORKER,
     showInSection: Sections.AboutChildren,
     getNextStep: () => Urls.TASK_LIST_URL,
   },

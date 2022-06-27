@@ -15,9 +15,9 @@ const en = () => ({
 });
 
 const cy: typeof en = () => ({
-  section: 'Application details. (in welsh)',
-  label: 'Is there another adoption agency or local authority involved?. (in welsh)',
-  hint: 'This would be separate from your local authority, for example it could be a private agency or a different local authority. (in welsh)',
+  section: 'Manylion y cais',
+  label: 'A oes asiantaeth fabwysiadu neu awdurdod lleol arall yn gysylltiedig â’r achos?',
+  hint: "Byddai hyn ar wahân i'ch awdurdod lleol, er enghraifft gallai fod yn asiantaeth breifat neu'n awdurdod lleol gwahanol.",
   errors: {
     hasAnotherAdopAgencyOrLA: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',

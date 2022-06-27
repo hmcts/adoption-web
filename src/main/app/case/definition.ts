@@ -413,10 +413,17 @@ export interface CaseData {
   otherParentAddressNotKnownReason: string;
   otherParentLastAddressDate: string;
 
-  socialWorkerName: string;
-  socialWorkerPhoneNumber: string;
-  socialWorkerEmail: string;
+  childSocialWorkerName: string;
+  childSocialWorkerPhoneNumber: string;
+  childSocialWorkerEmail: string;
   childLocalAuthority: string;
+  childLocalAuthorityEmail: string;
+
+  applicantSocialWorkerName: string;
+  applicantSocialWorkerPhoneNumber: string;
+  applicantSocialWorkerEmail: string;
+  applicantLocalAuthority: string;
+  applicantLocalAuthorityEmail: string;
 
   solicitorFirm: string;
   solicitorName: string;
@@ -753,7 +760,8 @@ export interface SocialWorker {
   socialWorkerName: string;
   socialWorkerPhoneNumber: string;
   socialWorkerEmail: string;
-  childLocalAuthority: string;
+  localAuthority: string;
+  localAuthorityEmail: string;
 }
 
 export interface Solicitor {
