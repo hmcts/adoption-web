@@ -17,7 +17,7 @@ const en = () => ({
   hint: 'This is the 16 digit reference number that was on the email sent to you. Please insert the numbers only, without the hyphens.',
   childNameLabel: 'Child named on the application',
   childNameHint: 'Enter their name as it appears on the email sent to you.',
-  childDateOfBirth: "Child's date of birth",
+  childrenDateOfBirth: "Child's date of birth",
   childDateOfBirthHint: 'For example, 31 3 2012.',
   continueButton: 'Continue',
   errors: {
@@ -45,7 +45,7 @@ const cy: typeof en = () => ({
   hint: 'This is the 16 digit reference number that was on the email sent to you. Please insert the numbers only, without the hyphens. (in welsh)',
   childNameLabel: 'Child named on the application.(in welsh)',
   childNameHint: 'Enter their name exactly as it is on their original birth certificate.(in welsh)',
-  childDateOfBirth: 'Date of birth (in welsh)',
+  childrenDateOfBirth: 'Date of birth (in welsh)',
   childDateOfBirthHint: 'For example, 31 3 2012.',
   continueButton: 'Continue (in welsh)',
   errors: {
@@ -74,7 +74,7 @@ export const form: FormContent = {
       //section: l => l.section,
       label: l => l.label,
       hint: l => l.hint,
-      labelSize: 'l',
+      labelSize: 'm',
       attributes: {
         spellcheck: false,
       },
@@ -86,7 +86,7 @@ export const form: FormContent = {
       classes: 'govuk-heading-m govuk-!-margin-bottom-1',
       label: l => l.childNameLabel,
       hint: l => l.childNameHint,
-      labelSize: 'l',
+      labelSize: 'm',
       validator: isFieldFilledIn,
     },
     /* name123:{
@@ -98,8 +98,10 @@ export const form: FormContent = {
 
     childrenDateOfBirth: {
       type: 'date',
+      //classes: 'govuk-heading-s',
       classes: 'govuk-date-input',
-      label: l => l.childDateOfBirth,
+      //classes: 'govuk-fieldset__legend govuk-fieldset__legend--m',
+      label: l => l.childrenDateOfBirth,
       hint: l => l.childDateOfBirthHint,
       labelSize: 's',
       labelHidden: false,
@@ -133,7 +135,7 @@ export const form: FormContent = {
     },
   },
   submit: {
-    text: l => l.continue,
+    text: l => l.continueButton,
   },
   saveAsDraft: {
     text: '',
