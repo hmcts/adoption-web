@@ -26,11 +26,14 @@ module.exports = {
     await I.wait(2);
     await I.retry(3).fillField(this.fields.placementOrderDateYear, childDetailsPlacementOrder.placementOrderDateYear);
     await I.retry(3).click('Save and continue');
+    await I.wait(4);
     await I.retry(3).see('Orders already in place');
     await I.retry(3).see('Do you want to add another order?');
     await I.retry(3).click(this.fields.addAnotherPlacementOrder);
     await I.retry(3).click('Save and continue');
-    await I.retry(3).fillField(this.fields.placementOrderType, childDetailsPlacementOrder.placementOrderType);
+    await I.wait(4);
+    await I.retry(3).waitForText('What type of order is it?');
+    await I.retry(3).click(this.fields.placementOrderType);
     await I.retry(3).click('Save and continue');
     await I.wait(2);
     await I.retry(3).fillField(this.fields.placementOrderNumber, childDetailsPlacementOrder.placementOrderNumber);
@@ -46,7 +49,7 @@ module.exports = {
     await I.retry(3).fillField(this.fields.placementOrderDateYear, childDetailsPlacementOrder.placementOrderDateYear);
     await I.retry(3).click('Save and continue');
     await I.retry(3).see('Orders already in place');
-    await I.retry(3).see('Emergency protection order');
+    await I.retry(3).see('Adoption Order');
     await I.retry(3).see('Do you want to add another order?');
     await I.retry(3).click(this.fields.addAnotherPlacementOrderNo);
     await I.retry(3).click('Save and continue');
