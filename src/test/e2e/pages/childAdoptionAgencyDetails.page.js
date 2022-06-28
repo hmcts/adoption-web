@@ -56,7 +56,7 @@ module.exports = {
     await I.retry(3).fillField(this.adopAgency.adopAgencyAddressLine1, '41');
     await I.retry(3).fillField(this.adopAgency.adopAgencyTown, 'Leeds');
     await I.retry(3).fillField(this.adopAgency.adopAgencyPostcode, 'LS7 3HJ');
-    await I.retry(3).fillField(this.adopAgency.adopAgencyOrLaContactEmail, 'test.another@example.com');
+    await I.retry(3).fillField(this.adopAgency.adopAgencyOrLaContactEmail, 'test.another@gov.uk');
     await I.wait(2);
     await I.retry(3).click('Save and continue');
     await I.wait(2);
@@ -65,7 +65,7 @@ module.exports = {
     await I.retry(3).waitForText("Child's social worker details", 30);
     await I.retry(3).fillField(this.socialWorker.socialWorkerName, 'Social Worker');
     await I.retry(3).fillField(this.socialWorker.socialWorkerPhoneNumber, '09876543210');
-    await I.retry(3).fillField(this.socialWorker.socialWorkerEmail, 'social.worker@example.com');
+    await I.retry(3).fillField(this.socialWorker.socialWorkerEmail, 'social.workerTest@gov.uk');
     await I.retry(3).fillField(this.socialWorker.childLocalAuthority, 'CARE TAKER');
     await I.wait(2);
     await I.retry(3).click('Save and continue');
