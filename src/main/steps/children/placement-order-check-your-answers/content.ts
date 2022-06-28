@@ -1,12 +1,6 @@
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-/* import {
-  CHILDREN_PLACEMENT_ORDER_COURT,
-  CHILDREN_PLACEMENT_ORDER_DATE,
-  CHILDREN_PLACEMENT_ORDER_NUMBER,
-  CHILDREN_PLACEMENT_ORDER_TYPE,
-} from '../../../steps/urls'; */
 import {
   LA_PORTAL_CHILD_PLACEMENT_ORDER_DATE,
   LA_PORTAL_CHILD_PLACEMENT_ORDER_NUMBER,
@@ -30,7 +24,6 @@ const placementOrderListItems = (userCase, content) => {
           foundIndex !== 0
             ? [
                 {
-                  // href: `${CHILDREN_PLACEMENT_ORDER_TYPE}?change=${order.placementOrderId}`,
                   href: `${LA_PORTAL_CHILD_PLACEMENT_ORDER_TYPE}?change=${order.placementOrderId}`,
                   text: content.change,
                   visuallyHiddenText: content.orderType,
@@ -45,7 +38,6 @@ const placementOrderListItems = (userCase, content) => {
       actions: {
         items: [
           {
-            // href: `${CHILDREN_PLACEMENT_ORDER_NUMBER}?change=${order.placementOrderId}`,
             href: `${LA_PORTAL_CHILD_PLACEMENT_ORDER_NUMBER}?change=${order.placementOrderId}`,
             text: content.change,
             visuallyHiddenText: content.orderNumber,
@@ -53,26 +45,13 @@ const placementOrderListItems = (userCase, content) => {
         ],
       },
     },
-    /* {
-      key: { text: content.orderCourt },
-      value: { text: order.placementOrderCourt },
-      actions: {
-        items: [
-          {
-            href: `${CHILDREN_PLACEMENT_ORDER_COURT}?change=${order.placementOrderId}`,
-            text: content.change,
-            visuallyHiddenText: content.orderCourt,
-          },
-        ],
-      },
-    }, */
+
     {
       key: { text: content.orderDate },
       value: { text: getFormattedDate(order.placementOrderDate, content.language) },
       actions: {
         items: [
           {
-            // href: `${CHILDREN_PLACEMENT_ORDER_DATE}?change=${order.placementOrderId}`,
             href: `${LA_PORTAL_CHILD_PLACEMENT_ORDER_DATE}?change=${order.placementOrderId}`,
             text: content.change,
             visuallyHiddenText: content.orderDate,

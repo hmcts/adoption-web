@@ -11,7 +11,6 @@ const en = ({ userCase }: CommonContent) => {
   return {
     label,
     section: "The child's details",
-    // hint: "This is on the top right of the order. Ask the adoption agency or social worker if you're not sure.",
     errors: {
       placementOrderNumber: {
         required: 'Enter the serial or case number',
@@ -28,7 +27,6 @@ const cy: typeof en = ({ userCase }: CommonContent) => {
   return {
     label,
     section: 'Manylion y plentyn',
-    // hint: 'Mae hwn wedi’i nodi yng nghornel dde uchaf y gorchymyn. Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
     errors: {
       placementOrderNumber: {
         required: 'Nac ydwdwch y rhif cyfresol neu rif yr achos',
@@ -47,7 +45,6 @@ export const form: FormContent = {
         type: 'text',
         classes: 'govuk-label govuk-input--width-10',
         label: l => l.label,
-        //hint: l => l.hint,
         value: placementOrder?.placementOrderNumber,
         labelSize: 'l',
         attributes: {

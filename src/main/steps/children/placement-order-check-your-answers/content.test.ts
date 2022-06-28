@@ -63,7 +63,6 @@ describe('children > placement-order-check-your-answers > content', () => {
         actions: {
           items: [
             {
-              //href: '/children/placement-order-number?change=MOCK_ID',
               href: '/la-portal/child/placement-order-number?change=MOCK_ID',
               text: 'Change',
               visuallyHiddenText: 'Order case or serial number',
@@ -71,26 +70,13 @@ describe('children > placement-order-check-your-answers > content', () => {
           ],
         },
       },
-      /* {
-        key: { text: 'Court' },
-        value: { text: 'MOCK_COURT' },
-        actions: {
-          items: [
-            {
-              href: '/children/placement-order-court?change=MOCK_ID',
-              text: 'Change',
-              visuallyHiddenText: 'Court',
-            },
-          ],
-        },
-      }, */
+
       {
         key: { text: 'Order date' },
         value: { text: '2 November 2021' },
         actions: {
           items: [
             {
-              //href: '/children/placement-order-date?change=MOCK_ID',
               href: '/la-portal/child/placement-order-date?change=MOCK_ID',
               text: 'Change',
               visuallyHiddenText: 'Order date',
@@ -118,7 +104,6 @@ describe('children > placement-order-check-your-answers > content', () => {
         actions: {
           items: [
             {
-              //href: '/children/placement-order-type?change=MOCK_ID2',
               href: '/la-portal/child/placement-order-type?change=MOCK_ID2',
               text: 'Change',
               visuallyHiddenText: 'Type of order',
@@ -132,7 +117,6 @@ describe('children > placement-order-check-your-answers > content', () => {
         actions: {
           items: [
             {
-              //href: '/children/placement-order-number?change=MOCK_ID2',
               href: '/la-portal/child/placement-order-number?change=MOCK_ID2',
               text: 'Change',
               visuallyHiddenText: 'Order case or serial number',
@@ -140,26 +124,13 @@ describe('children > placement-order-check-your-answers > content', () => {
           ],
         },
       },
-      /* {
-        key: { text: 'Court' },
-        value: { text: 'MOCK_COURT2' },
-        actions: {
-          items: [
-            {
-              href: '/children/placement-order-court?change=MOCK_ID2',
-              text: 'Change',
-              visuallyHiddenText: 'Court',
-            },
-          ],
-        },
-      }, */
+
       {
         key: { text: 'Order date' },
         value: { text: '12 May 2020' },
         actions: {
           items: [
             {
-              //href: '/children/placement-order-date?change=MOCK_ID2',
               href: '/la-portal/child/placement-order-date?change=MOCK_ID2',
               text: 'Change',
               visuallyHiddenText: 'Order date',

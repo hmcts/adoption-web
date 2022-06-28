@@ -11,7 +11,6 @@ const en = ({ userCase }: CommonContent) => {
   return {
     label,
     section: "The child's details",
-    //label: 'What date is on the placement order?',
     hint: 'For example, 31 3 2020',
     errors: {
       placementOrderDate: {
