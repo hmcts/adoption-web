@@ -14,7 +14,7 @@ const enContent = {
   hint: 'This is the 16 digit reference number that was on the email sent to you. Please insert the numbers only, without the hyphens.',
   childNameLabel: 'Child named on the application',
   childNameHint: 'Enter their name as it appears on the email sent to you.',
-  childDateOfBirth: "Child's date of birth",
+  childrenDateOfBirth: "Child's date of birth",
   childDateOfBirthHint: 'For example, 31 3 2012.',
   continueButton: 'Continue',
   errors: {
@@ -42,7 +42,7 @@ const cyContent = {
   hint: 'This is the 16 digit reference number that was on the email sent to you. Please insert the numbers only, without the hyphens. (in welsh)',
   childNameLabel: 'Child named on the application.(in welsh)',
   childNameHint: 'Enter their name exactly as it is on their original birth certificate.(in welsh)',
-  childDateOfBirth: 'Date of birth (in welsh)',
+  childrenDateOfBirth: "Child's date of birth (in welsh)",
   childDateOfBirthHint: 'For example, 31 3 2012.',
   continueButton: 'Continue (in welsh)',
   errors: {
@@ -84,7 +84,7 @@ describe('la-portal > kba-case-ref > content', () => {
     expect(field.type).toBe('text');
     expect((field.label as Function)(generateContent(commonContent))).toBe(enContent.label);
     expect((field.hint as Function)(generateContent(commonContent))).toBe(enContent.hint);
-    expect(field.labelSize).toBe('l');
+    expect(field.labelSize).toBe('m');
     expect(field.validator).toBe(isFieldFilledIn);
   });
 
