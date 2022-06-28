@@ -45,7 +45,7 @@ const cy: typeof en = () => ({
   hint: 'This is the 16 digit reference number that was on the email sent to you. Please insert the numbers only, without the hyphens. (in welsh)',
   childNameLabel: 'Child named on the application.(in welsh)',
   childNameHint: 'Enter their name exactly as it is on their original birth certificate.(in welsh)',
-  childrenDateOfBirth: 'Date of birth (in welsh)',
+  childrenDateOfBirth: "Child's date of birth (in welsh)",
   childDateOfBirthHint: 'For example, 31 3 2012.',
   continueButton: 'Continue (in welsh)',
   errors: {
@@ -105,7 +105,6 @@ export const form: FormContent = {
       hint: l => l.childDateOfBirthHint,
       labelSize: 's',
       labelHidden: false,
-
       values: [
         {
           label: l => l.dateFormat['day'],
@@ -135,7 +134,7 @@ export const form: FormContent = {
     },
   },
   submit: {
-    text: l => l.continueButton,
+    text: l => l.continue,
   },
   saveAsDraft: {
     text: '',
