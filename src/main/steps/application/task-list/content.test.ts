@@ -65,7 +65,7 @@ const cyContent = {
     personalDetails: 'Eich manylion personol',
     contactDetails: 'Eich manylion cyswllt',
     birthCertificate: 'Manylion y dystysgrif geni',
-    childDetails: "Child's details (in welsh)",
+    childDetails: 'Manylion y plentyn',
     birthMother: 'Manylion y fam fiolegol',
     birthFather: 'Manylion y tad biolegol',
     otherParent: 'Unigolyn arall sydd â chyfrifoldeb rhiant',
