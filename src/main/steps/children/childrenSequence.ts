@@ -38,11 +38,6 @@ export const childrenSequence: Step[] = [
     getNextStep: () => Urls.CHILDREN_PLACEMENT_ORDER_SUMMARY,
   },
   {
-    url: Urls.CHILDREN_DATE_OF_BIRTH,
-    showInSection: Sections.AboutChildren,
-    getNextStep: () => Urls.CHILDREN_SEX_AT_BIRTH,
-  },
-  {
     url: Urls.CHILDREN_SEX_AT_BIRTH,
     showInSection: Sections.AboutChildren,
     getNextStep: () => Urls.CHILDREN_NATIONALITY,
@@ -59,6 +54,11 @@ export const childrenSequence: Step[] = [
   },
   {
     url: Urls.CHILDREN_FULL_NAME_AFTER_ADOPTION,
+    showInSection: Sections.AboutChildren,
+    getNextStep: () => Urls.CHILDREN_DATE_OF_BIRTH,
+  },
+  {
+    url: Urls.CHILDREN_DATE_OF_BIRTH,
     showInSection: Sections.AboutChildren,
     getNextStep: () => Urls.TASK_LIST_URL,
   },
