@@ -54,22 +54,22 @@ describe('childrenSequence', () => {
     expect(childrenSequence[10].showInSection).toBe('aboutChildren');
     expect(childrenSequence[10].getNextStep({})).toBe('/task-list');
 
-    expect(childrenSequence[11].url).toBe('/children/social-worker');
+    expect(childrenSequence[11].url).toBe('/children/local-authority');
     expect(childrenSequence[11].showInSection).toBe('aboutChildren');
-    expect(childrenSequence[11].getNextStep({})).toBe('/children/applicant-social-worker');
+    expect(childrenSequence[11].getNextStep({})).toBe('/children/other-adoption-agency');
 
-    expect(childrenSequence[12].url).toBe('/children/applicant-social-worker');
+    expect(childrenSequence[12].url).toBe('/children/other-adoption-agency');
     expect(childrenSequence[12].showInSection).toBe('aboutChildren');
-    expect(childrenSequence[12].getNextStep({})).toBe('/children/other-adoption-agency');
-
-    expect(childrenSequence[13].url).toBe('/children/other-adoption-agency');
-    expect(childrenSequence[13].showInSection).toBe('aboutChildren');
-    expect(childrenSequence[13].getNextStep({ hasAnotherAdopAgencyOrLA: YesOrNo.NO })).toBe('/task-list');
-    expect(childrenSequence[13].getNextStep({ hasAnotherAdopAgencyOrLA: YesOrNo.YES })).toBe(
+    expect(childrenSequence[12].getNextStep({ hasAnotherAdopAgencyOrLA: YesOrNo.NO })).toBe('/children/social-worker');
+    expect(childrenSequence[12].getNextStep({ hasAnotherAdopAgencyOrLA: YesOrNo.YES })).toBe(
       '/children/adoption-agency'
     );
 
-    expect(childrenSequence[14].url).toBe('/children/adoption-agency');
+    expect(childrenSequence[13].url).toBe('/children/adoption-agency');
+    expect(childrenSequence[13].showInSection).toBe('aboutChildren');
+    expect(childrenSequence[13].getNextStep({})).toBe('/children/social-worker');
+
+    expect(childrenSequence[14].url).toBe('/children/social-worker');
     expect(childrenSequence[14].showInSection).toBe('aboutChildren');
     expect(childrenSequence[14].getNextStep({})).toBe('/task-list');
 

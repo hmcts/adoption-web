@@ -10,7 +10,6 @@ const enContent = {
   section: 'Review your application',
   title: 'Review your answers',
   change: 'Change',
-  reason: 'Reason',
   submitApplication: 'Check your application',
   checkInfoBeforeSubmit:
     'Check all the information you have provided carefully. The next step is to sign a statement of truth declaring that the information provided is correct. Once this is signed and payment has been taken, your application will be submitted to the court.',
@@ -33,8 +32,7 @@ const enContent = {
     applicationDetails: 'Application details',
     adoptionagencyOrLA: 'Local authority details',
     additionalAoptionagencyOrLA: 'Adoption agency or local authority details',
-    childSocialWorkerDetails: "Child's social worker details",
-    applicantSocialWorkerDetails: 'Your social worker details',
+    socialWorkerDetails: "Child's social worker details",
     applicantDetails: "Applicant's details",
     firstApplicantDetails: "First applicant's details",
     secondApplicantDetails: "Second applicant's details",
@@ -55,6 +53,7 @@ const enContent = {
     emailAddress: 'Email address',
     nameOfContact: 'Name of contact',
     emailOfContact: 'Email address of contact',
+    childLocalAuthority: "Child's local authority",
     additionalAdoptionAgency: 'Additional adoption agency',
     fullName: 'Full name',
     previousNames: 'Previous names',
@@ -83,13 +82,6 @@ const enContent = {
     familyCourtName: 'Family court name',
     uploadedDocuments: 'Uploaded documents',
     documentsNotUploaded: 'Documents not uploaded',
-    childSocialWorkerName: "Name of child's social worker",
-    emailAddressIfKnown: 'Email address (if known)',
-    childLocalAuthority: "Child's local authority",
-    childLocalAuthorityEmail: 'Local authority email address',
-    applicantSocialWorkerName: 'Name of your social worker',
-    applicantLocalAuthority: 'Name of local authority',
-    applicantLocalAuthorityEmail: 'Your local authority email address',
   },
   errors: {
     dateChildMovedIn: {
@@ -125,8 +117,7 @@ const cyContent = {
     applicationDetails: 'Manylion y cais',
     adoptionagencyOrLA: 'Local authority details (in welsh)',
     additionalAoptionagencyOrLA: 'Adoption agency or local authority details (in welsh)',
-    childSocialWorkerDetails: 'Manylion gweithiwr cymdeithasol y plentyn',
-    applicantSocialWorkerDetails: 'Your social worker details',
+    socialWorkerDetails: 'Manylion gweithiwr cymdeithasol y plentyn',
     applicantDetails: 'Manylion y ceisydd',
     firstApplicantDetails: 'Manylion y ceisydd cyntaf',
     secondApplicantDetails: 'Manylion yr ail geisydd',
@@ -147,7 +138,7 @@ const cyContent = {
     emailAddress: 'Cyfeiriad e-bost',
     nameOfContact: 'Enw’r unigolyn cyswllt',
     emailOfContact: 'Cyfeiriad e-bost yr unigolyn cyswllt',
-    childLocalAuthority: 'Awdurdod lleol y plentyn',
+    childLocalAuthority: "Child's local authority (in welsh)",
     additionalAdoptionAgency: 'Asiantaeth fabwysiadu ychwanegol',
     fullName: 'Enw llawn',
     previousNames: 'Enwau blaenorol',
@@ -176,12 +167,6 @@ const cyContent = {
     familyCourtName: 'Enw’r llys teulu',
     uploadedDocuments: 'Dogfennau sydd wedi eu llwytho',
     documentsNotUploaded: 'Dogfennau heb eu llwytho',
-    childLocalAuthorityEmail: 'Cyfeiriad e-bost yr awdurdod lleol',
-    applicantLocalAuthorityEmail: 'Cyfeiriad e-bost eich awdurdod lleol',
-    applicantSocialWorkerName: 'Enw eich gweithiwr cymdeithasol',
-    applicantLocalAuthority: "Enw'r awdurdod lleol",
-    childSocialWorkerName: 'Enw gweithiwr cymdeithasol y plentyn',
-    emailAddressIfKnown: "Cyfeiriad e-bost (os yw'n hysbys)",
   },
   errors: {
     dateChildMovedIn: {
@@ -189,6 +174,7 @@ const cyContent = {
         'Rhaid i chi aros nes bydd 10 wythnos wedi mynd heibio ers i’r plentyn ddechrau byw gyda chi’n barhaus cyn cyflwyno eich cais',
     },
   },
+  language: 'cy',
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

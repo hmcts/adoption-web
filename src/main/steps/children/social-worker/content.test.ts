@@ -13,72 +13,54 @@ const enContent = {
   section: 'Application details',
   title: "Child's social worker details",
   line1: 'You can get these details from your local authority or adoption agency.',
-  childSocialWorkerName: "Name of child's social worker",
-  childSocialWorkerPhoneNumber: 'Phone number',
-  childSocialWorkerEmail: 'Email address (if known)',
-  childSocialWorkerEmailHint: 'The email address should be an official government email that ends in gov.uk.',
+  socialWorkerName: "Name of child's social worker",
+  socialWorkerPhoneNumber: 'Phone number',
+  socialWorkerEmail: 'Email address',
   childLocalAuthority: "Child's local authority",
-  childLocalAuthorityEmail: 'Local authority email address',
-  childLocalAuthorityEmailHint: 'The email address should be an official government email that ends in gov.uk',
   childLocalAuthorityHint:
     'This is the local authority with parental responsibility for the child. It may be different to your own local authority.',
   errors: {
-    childSocialWorkerName: {
+    socialWorkerName: {
       required: 'Enter a name',
     },
-    childSocialWorkerPhoneNumber: {
+    socialWorkerPhoneNumber: {
       required: 'Enter a UK telephone number',
       invalid: 'Enter a UK telephone number',
     },
-    childSocialWorkerEmail: {
-      invalid: 'Enter an email address that ends in gov.uk',
-      invalidGovUkEmail: 'Enter an email address that ends in gov.uk',
+    socialWorkerEmail: {
+      required: 'Enter an email address',
+      invalid: 'Enter an email address in the correct format, like name@example.com',
     },
     childLocalAuthority: {
       required: 'Enter a name',
-    },
-    childLocalAuthorityEmail: {
-      required: 'Enter an email address in the correct format, like name@gov.uk',
-      invalid: 'Enter an email address that ends in gov.uk',
-      invalidGovUkEmail: 'Enter an email address that ends in gov.uk',
     },
   },
 };
 
 const cyContent = {
-  section: 'Manylion y cais',
-  title: 'Manylion gweithiwr cymdeithasol y plentyn',
-  line1: 'Gallwch gael y manylion hyn gan eich awdurdod lleol neu asiantaeth fabwysiadu.',
-  childSocialWorkerName: 'Enw gweithiwr cymdeithasol y plentyn',
-  childSocialWorkerPhoneNumber: 'Rhif ffôn',
-  childSocialWorkerEmail: "Cyfeiriad e-bost (os yw'n hysbys)",
-  childSocialWorkerEmailHint:
-    "Dylai'r cyfeiriad e-bost fod yn e-bost swyddogol gan y llywodraeth sy'n terfynu â gov.uk.",
-  childLocalAuthority: 'Awdurdod lleol y plentyn',
-  childLocalAuthorityEmail: 'Cyfeiriad e-bost yr awdurdod lleol',
-  childLocalAuthorityEmailHint:
-    "Dylai'r cyfeiriad e-bost fod yn e-bost swyddogol gan y llywodraeth sy'n terfynu â gov.uk.",
+  section: 'Application details (in welsh)',
+  title: "Child's social worker details (in welsh)",
+  line1: 'You can get these details from your local authority or adoption agency. (in welsh)',
+  socialWorkerName: "Name of child's social worker (in welsh)",
+  socialWorkerPhoneNumber: 'Phone number (in welsh)',
+  socialWorkerEmail: 'Email address (in welsh)',
+  childLocalAuthority: "Child's local authority (in welsh)",
   childLocalAuthorityHint:
-    "Dyma'r awdurdod lleol sydd â chyfrifoldeb rhiant dros y plentyn. Gall fod yn wahanol i'ch awdurdod lleol eich hun.",
+    'This is the local authority with parental responsibility for the child. It may be different to your own local authority. (in welsh)',
   errors: {
-    childSocialWorkerName: {
-      required: 'Rhowch enw',
+    socialWorkerName: {
+      required: 'Enter a name (in welsh)',
     },
-    childSocialWorkerPhoneNumber: {
-      required: 'Rhowch rif ffôn yn y DU',
-      invalid: 'Rhowch rif ffôn yn y DU',
+    socialWorkerPhoneNumber: {
+      required: 'Enter a UK telephone number (in welsh)',
+      invalid: 'Enter a UK telephone number (in welsh)',
     },
-    childSocialWorkerEmail: {
-      invalid: "Rhowch gyfeiriad e-bost sy'n terfynu â gov.uk",
-      invalidGovUkEmail: "Rhowch gyfeiriad e-bost sy'n terfynu â gov.uk",
+    socialWorkerEmail: {
+      required: 'Enter an email address (in welsh)',
+      invalid: 'Enter an email address in the correct format, like name@example.com (in welsh)',
     },
     childLocalAuthority: {
-      required: 'Rhowch enw',
-    },
-    childLocalAuthorityEmail: {
-      required: 'Enter an email address in the correct format, like name@gov.uk (In Welsh)',
-      invalid: "Rhowch gyfeiriad e-bost sy'n terfynu â gov.uk",
-      invalidGovUkEmail: "Rhowch gyfeiriad e-bost sy'n terfynu â gov.uk",
+      required: 'Enter a name (in welsh)',
     },
   },
 };
@@ -94,44 +76,42 @@ describe('children > social-worker > content', () => {
     languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
-  it('should have an childSocialWorkerName text input field', () => {
+  it('should have an socialWorkerName text input field', () => {
     const generatedContent = generateContent(commonContent) as Record<string, never>;
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const childSocialWorkerName = fields.childSocialWorkerName;
+    const socialWorkerName = fields.socialWorkerName;
 
-    expect(childSocialWorkerName.type).toBe('text');
-    expect((childSocialWorkerName.label as LanguageLookup)(generatedContent)).toBe(enContent.childSocialWorkerName);
+    expect(socialWorkerName.type).toBe('text');
+    expect((socialWorkerName.label as LanguageLookup)(generatedContent)).toBe(enContent.socialWorkerName);
 
-    (childSocialWorkerName.validator as ValidationCheck)('MockName', {});
+    (socialWorkerName.validator as ValidationCheck)('MockName', {});
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockName', {});
   });
 
-  it('should have an childSocialWorkerPhoneNumber text input field', () => {
+  it('should have an socialWorkerPhoneNumber text input field', () => {
     const generatedContent = generateContent(commonContent) as Record<string, never>;
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const childSocialWorkerPhoneNumber = fields.childSocialWorkerPhoneNumber;
+    const socialWorkerPhoneNumber = fields.socialWorkerPhoneNumber;
 
-    expect(childSocialWorkerPhoneNumber.type).toBe('text');
-    expect((childSocialWorkerPhoneNumber.label as LanguageLookup)(generatedContent)).toBe(
-      enContent.childSocialWorkerPhoneNumber
-    );
+    expect(socialWorkerPhoneNumber.type).toBe('text');
+    expect((socialWorkerPhoneNumber.label as LanguageLookup)(generatedContent)).toBe(enContent.socialWorkerPhoneNumber);
 
-    (childSocialWorkerPhoneNumber.validator as ValidationCheck)('MockPhoneNumber', {});
+    (socialWorkerPhoneNumber.validator as ValidationCheck)('MockPhoneNumber', {});
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockPhoneNumber');
   });
 
-  it('should have an childSocialWorkerEmail text input field', () => {
+  it('should have an socialWorkerEmail text input field', () => {
     const generatedContent = generateContent(commonContent) as Record<string, never>;
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const childSocialWorkerEmail = fields.childSocialWorkerEmail;
+    const socialWorkerEmail = fields.socialWorkerEmail;
 
-    expect(childSocialWorkerEmail.type).toBe('text');
-    expect((childSocialWorkerEmail.label as LanguageLookup)(generatedContent)).toBe(enContent.childSocialWorkerEmail);
+    expect(socialWorkerEmail.type).toBe('text');
+    expect((socialWorkerEmail.label as LanguageLookup)(generatedContent)).toBe(enContent.socialWorkerEmail);
 
-    (childSocialWorkerEmail.validator as ValidationCheck)('MockEmail', {});
+    (socialWorkerEmail.validator as ValidationCheck)('MockEmail', {});
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockEmail');
   });
 
@@ -145,7 +125,7 @@ describe('children > social-worker > content', () => {
     expect((childLocalAuthority.label as LanguageLookup)(generatedContent)).toBe(enContent.childLocalAuthority);
 
     (childLocalAuthority.validator as ValidationCheck)('MockEmail', {});
-    expect(isFieldFilledIn).toHaveBeenCalled();
+    expect(isEmailValid).toHaveBeenCalledWith('MockEmail');
     (childLocalAuthority.validator as ValidationCheck)(undefined, {});
     expect(isEmailValid).not.toHaveBeenCalledWith();
   });

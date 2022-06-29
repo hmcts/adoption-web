@@ -10,7 +10,6 @@ import {
   isFieldFilledIn,
   isFieldLetters,
   isFutureDate,
-  isGovUkEmail,
   isInvalidHelpWithFeesRef,
   isInvalidPostcode,
   isLessThanAYear,
@@ -19,7 +18,6 @@ import {
   isTextAreaValid,
   isValidAccessCode,
   isValidCaseReference,
-  notSureViolation,
 } from './validation';
 
 describe('Validation', () => {
@@ -341,23 +339,5 @@ describe('isTextAreaValid()', () => {
       'abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz0987654321098765432123450abcdefghijklmnopqrstuvwxyz0987654321000000000000000000000000000000';
 
     expect(isTextAreaValid(value)).toStrictEqual('invalid');
-  });
-});
-
-describe('isGovUkEmail()', () => {
-  it.each([
-    { mockEmail: 'test@gov.uk', expected: undefined },
-    { mockEmail: 'test_123@test@test.com', expected: 'invalidGovUkEmail' },
-  ])('validates an email has gov.uk when %o', ({ mockEmail, expected }) => {
-    expect(isGovUkEmail(mockEmail)).toEqual(expected);
-  });
-});
-
-describe('notSureViolation()', () => {
-  it.each([
-    { arr: ['Not sure', 'Yes'], expected: 'notSureViolation' },
-    { arr: [], expected: undefined },
-  ])('validates an not sure violation when %o', ({ arr, expected }) => {
-    expect(notSureViolation(arr)).toEqual(expected);
   });
 });
