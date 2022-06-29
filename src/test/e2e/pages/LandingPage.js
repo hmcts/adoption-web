@@ -7,6 +7,10 @@ module.exports = {
     applyWithSomeone: 'input[id$="applyingWith-3"]',
     otherApplicantRelation: 'input[id$="otherApplicantRelation"]',
     caseRef: 'input[id$="caseRef"]',
+    childName: 'input[id$="childName"]',
+    childrenDateOfBirthDay: 'input[id$="childrenDateOfBirth-day"]',
+    childrenDateOfBirthMonth: 'input[id$="childrenDateOfBirth-month"]',
+    childrenDateOfBirthYear: 'input[id$="childrenDateOfBirth-year"]',
   },
   async seeTheLandingPage() {
     await I.wait(2);
@@ -47,8 +51,13 @@ module.exports = {
     console.log('User using the URL= ' + config.baseUrl + 'la-portal/kba-case-ref');
     await I.amOnPage(config.baseUrl + 'la-portal/kba-case-ref');
     await I.wait(5);
-    await I.retry(3).see('What is the adoption case reference number?');
+    await I.retry(3).see('Application details');
     await I.retry(3).fillField(this.fields.caseRef, caseId);
+    await I.retry(3).fillField(this.fields.childName, 'William Jacob');
+    await I.retry(3).fillField(this.fields.childrenDateOfBirthDay, '10');
+    await I.retry(3).fillField(this.fields.childrenDateOfBirthMonth, '10');
+    await I.wait(2);
+    await I.retry(3).fillField(this.fields.childrenDateOfBirthYear, '2020');
     await I.retry(3).click('Save and continue');
     await I.wait(5);
     await I.retry(3).see('Apply to adopt a child placed in your care');
