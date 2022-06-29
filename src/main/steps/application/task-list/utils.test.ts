@@ -377,6 +377,7 @@ describe('utils', () => {
       {
         data: {
           childrenSexAtBirth: Gender.OTHER,
+          childrenOtherSexAtBirth: 'MOCK_OTHER_GENDER',
           childrenNationality: undefined,
           childrenAdditionalNationalities: undefined,
         },
