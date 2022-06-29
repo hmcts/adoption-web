@@ -70,11 +70,6 @@ export const childrenSequence: Step[] = [
   {
     url: Urls.APPLICANT_SOCIAL_WORKER,
     showInSection: Sections.AboutChildren,
-    getNextStep: () => Urls.LOCAL_AUTHORITY,
-  },
-  {
-    url: Urls.LOCAL_AUTHORITY,
-    showInSection: Sections.AboutChildren,
     getNextStep: () => Urls.OTHER_ADOPTION_AGENCY,
   },
   {
