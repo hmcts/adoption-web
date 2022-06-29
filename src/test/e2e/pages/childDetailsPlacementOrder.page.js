@@ -16,7 +16,7 @@ module.exports = {
     await I.retry(3).waitForText('What is the serial or case number on the placement order?');
     await I.retry(3).fillField(this.fields.placementOrderNumber, childDetailsPlacementOrder.placementOrderNumber);
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).waitForText('What date is on the placement order?');
     await I.retry(3).fillField(this.fields.placementOrderDateDay, childDetailsPlacementOrder.placementOrderDateDay);
     await I.retry(3).fillField(this.fields.placementOrderDateMonth, childDetailsPlacementOrder.placementOrderDateMonth);
