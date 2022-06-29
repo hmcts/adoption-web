@@ -368,7 +368,6 @@ describe('utils', () => {
     test.each([
       {
         data: {
-          childrenDateOfBirth: { day: '', month: '', year: '' },
           childrenSexAtBirth: undefined,
           childrenNationality: undefined,
           childrenAdditionalNationalities: undefined,
@@ -377,7 +376,6 @@ describe('utils', () => {
       },
       {
         data: {
-          childrenDateOfBirth: { day: '1', month: '1', year: '2021' },
           childrenSexAtBirth: Gender.OTHER,
           childrenNationality: undefined,
           childrenAdditionalNationalities: undefined,
@@ -386,7 +384,6 @@ describe('utils', () => {
       },
       {
         data: {
-          childrenDateOfBirth: { day: '1', month: '1', year: '2021' },
           childrenSexAtBirth: Gender.MALE,
           childrenNationality: [Nationality.BRITHISH],
           childrenAdditionalNationalities: undefined,
@@ -395,7 +392,6 @@ describe('utils', () => {
       },
       {
         data: {
-          childrenDateOfBirth: { day: '1', month: '1', year: '2021' },
           childrenSexAtBirth: Gender.FEMALE,
           childrenNationality: [Nationality.OTHER],
           childrenAdditionalNationalities: undefined,
@@ -404,7 +400,6 @@ describe('utils', () => {
       },
       {
         data: {
-          childrenDateOfBirth: { day: '1', month: '1', year: '2021' },
           childrenSexAtBirth: Gender.OTHER,
           childrenOtherSexAtBirth: 'MOCK_OTHER_GENDER',
           childrenNationality: [Nationality.OTHER],
@@ -425,6 +420,7 @@ describe('utils', () => {
           childrenLastName: undefined,
           childrenFirstNameAfterAdoption: undefined,
           childrenLastNameAfterAdoption: undefined,
+          childrenDateOfBirth: { day: '', month: '', year: '' },
         },
         expected: NOT_STARTED,
       },
@@ -434,6 +430,7 @@ describe('utils', () => {
           childrenLastName: 'MOCK_LAST_NAME',
           childrenFirstNameAfterAdoption: 'MOCK_FIRST_NAME',
           childrenLastNameAfterAdoption: undefined,
+          childrenDateOfBirth: { day: '1', month: '1', year: '2021' },
         },
         expected: IN_PROGRESS,
       },
@@ -443,6 +440,7 @@ describe('utils', () => {
           childrenLastName: 'MOCK_LAST_NAME',
           childrenFirstNameAfterAdoption: 'MOCK_FIRST_NAME',
           childrenLastNameAfterAdoption: 'MOCK_LAST_NAME',
+          childrenDateOfBirth: { day: '1', month: '1', year: '2021' },
         },
         expected: COMPLETED,
       },

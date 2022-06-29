@@ -135,13 +135,6 @@ export const getChildrenPlacementOrderStatus = (userCase: CaseWithId): SectionSt
 };
 
 export const getChildrenBirthCertificateStatus = (userCase: CaseWithId): SectionStatus => {
-  const childrenDateOfBirth = userCase.childrenDateOfBirth as CaseDate;
-  const dateOfBirthComplete =
-    !areDateFieldsFilledIn(childrenDateOfBirth) &&
-    !isDateInputInvalid(childrenDateOfBirth) &&
-    !isFutureDate(childrenDateOfBirth) &&
-    !isMoreThan18Years(childrenDateOfBirth);
-
   const childrenSexAtBirth = userCase.childrenSexAtBirth;
   const childrenOtherSexAtBirth = userCase.childrenOtherSexAtBirth;
 
@@ -155,11 +148,11 @@ export const getChildrenBirthCertificateStatus = (userCase: CaseWithId): Section
     !!nationality.length &&
     (!nationality.includes('Other') || (!!nationalities.length && nationality.includes('Other')));
 
-  if (dateOfBirthComplete && sexAtBirthComplete && nationalityComplete) {
+  if (sexAtBirthComplete && nationalityComplete) {
     return SectionStatus.COMPLETED;
   }
 
-  if (!dateOfBirthComplete && !sexAtBirthComplete && !nationalityComplete) {
+  if (!sexAtBirthComplete && !nationalityComplete) {
     return SectionStatus.NOT_STARTED;
   }
 
@@ -171,12 +164,18 @@ export const getAdoptionCertificateDetailsStatus = (userCase: CaseWithId): Secti
   const lastName = userCase.childrenLastNameAfterAdoption;
   const childrenFirstName = userCase.childrenFirstName;
   const childrenLastName = userCase.childrenLastName;
+  const childrenDateOfBirth = userCase.childrenDateOfBirth as CaseDate;
+  const dateOfBirthComplete =
+    !areDateFieldsFilledIn(childrenDateOfBirth) &&
+    !isDateInputInvalid(childrenDateOfBirth) &&
+    !isFutureDate(childrenDateOfBirth) &&
+    !isMoreThan18Years(childrenDateOfBirth);
 
-  if (childrenFirstName && childrenLastName && firstName && lastName) {
+  if (dateOfBirthComplete && childrenFirstName && childrenLastName && firstName && lastName) {
     return SectionStatus.COMPLETED;
   }
 
-  if (!childrenFirstName && !childrenLastName && !firstName && !lastName) {
+  if (!dateOfBirthComplete && !childrenFirstName && !childrenLastName && !firstName && !lastName) {
     return SectionStatus.NOT_STARTED;
   }
 
