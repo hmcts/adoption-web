@@ -4,8 +4,11 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent } from '../../../steps/common/common.content';
 
 const en = ({ userCase }: CommonContent) => {
+  const placementOrder = userCase?.placementOrders?.find(
+    item => item.placementOrderId === userCase.selectedPlacementOrderId
+  );
   const label =
-    userCase?.placementOrders?.length === 0
+    placementOrder?.placementOrderType === undefined
       ? 'What is the serial or case number on the placement order?'
       : 'What is the serial or case number on the order?';
   return {
@@ -20,8 +23,11 @@ const en = ({ userCase }: CommonContent) => {
 };
 
 const cy: typeof en = ({ userCase }: CommonContent) => {
+  const placementOrder = userCase?.placementOrders?.find(
+    item => item.placementOrderId === userCase.selectedPlacementOrderId
+  );
   const label =
-    userCase?.placementOrders?.length === 0
+    placementOrder?.placementOrderType === undefined
       ? 'What is the serial or case number on the placement order?'
       : 'What is the serial or case number on the order?';
   return {
