@@ -323,10 +323,6 @@ export const getAdoptionAgencyDetailStatus = (userCase: CaseWithId): SectionStat
 const isAdoptionAgencyOrLaComplete = (userCase: CaseWithId): boolean => {
   if (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.YES) {
     return !!(
-      userCase.localAuthorityContactEmail &&
-      userCase.localAuthorityContactName &&
-      userCase.localAuthorityName &&
-      userCase.localAuthorityPhoneNumber &&
       userCase.adopAgencyOrLaName &&
       userCase.adopAgencyOrLaContactName &&
       userCase.adopAgencyOrLaPhoneNumber &&
@@ -342,10 +338,6 @@ const isAdoptionAgencyOrLaComplete = (userCase: CaseWithId): boolean => {
     );
   } else {
     return !!(
-      userCase.localAuthorityContactEmail &&
-      userCase.localAuthorityContactName &&
-      userCase.localAuthorityName &&
-      userCase.localAuthorityPhoneNumber &&
       userCase.hasAnotherAdopAgencyOrLA &&
       userCase.childSocialWorkerName &&
       userCase.childSocialWorkerPhoneNumber &&
@@ -362,10 +354,6 @@ const isAdoptionAgencyOrLaComplete = (userCase: CaseWithId): boolean => {
 const isAdoptionAgencyOrLaInProgress = (userCase: CaseWithId): boolean => {
   if (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.YES) {
     return !!(
-      userCase.localAuthorityContactEmail ||
-      userCase.localAuthorityContactName ||
-      userCase.localAuthorityName ||
-      userCase.localAuthorityPhoneNumber ||
       userCase.adopAgencyOrLaName ||
       userCase.adopAgencyOrLaContactName ||
       userCase.adopAgencyOrLaPhoneNumber ||
@@ -383,10 +371,6 @@ const isAdoptionAgencyOrLaInProgress = (userCase: CaseWithId): boolean => {
     );
   } else {
     return !!(
-      userCase.localAuthorityContactEmail ||
-      userCase.localAuthorityContactName ||
-      userCase.localAuthorityName ||
-      userCase.localAuthorityPhoneNumber ||
       userCase.hasAnotherAdopAgencyOrLA ||
       userCase.childSocialWorkerName ||
       userCase.childSocialWorkerEmail ||

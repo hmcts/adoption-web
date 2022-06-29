@@ -3,8 +3,8 @@ import { YesOrNo } from '../../app/case/definition';
 import { childrenSequence } from './childrenSequence';
 
 describe('childrenSequence', () => {
-  test('should contain 18 entries in children screen sequence', () => {
-    expect(childrenSequence).toHaveLength(18);
+  test('should contain 17 entries in children screen sequence', () => {
+    expect(childrenSequence).toHaveLength(17);
 
     expect(childrenSequence[0].url).toBe('/children/placement-order-type');
     expect(childrenSequence[0].showInSection).toBe('aboutChildren');
@@ -60,29 +60,25 @@ describe('childrenSequence', () => {
 
     expect(childrenSequence[12].url).toBe('/children/applicant-social-worker');
     expect(childrenSequence[12].showInSection).toBe('aboutChildren');
-    expect(childrenSequence[12].getNextStep({})).toBe('/children/local-authority');
+    expect(childrenSequence[12].getNextStep({})).toBe('/children/other-adoption-agency');
 
-    expect(childrenSequence[13].url).toBe('/children/local-authority');
+    expect(childrenSequence[13].url).toBe('/children/other-adoption-agency');
     expect(childrenSequence[13].showInSection).toBe('aboutChildren');
-    expect(childrenSequence[13].getNextStep({})).toBe('/children/other-adoption-agency');
-
-    expect(childrenSequence[14].url).toBe('/children/other-adoption-agency');
-    expect(childrenSequence[14].showInSection).toBe('aboutChildren');
-    expect(childrenSequence[14].getNextStep({ hasAnotherAdopAgencyOrLA: YesOrNo.NO })).toBe('/task-list');
-    expect(childrenSequence[14].getNextStep({ hasAnotherAdopAgencyOrLA: YesOrNo.YES })).toBe(
+    expect(childrenSequence[13].getNextStep({ hasAnotherAdopAgencyOrLA: YesOrNo.NO })).toBe('/task-list');
+    expect(childrenSequence[13].getNextStep({ hasAnotherAdopAgencyOrLA: YesOrNo.YES })).toBe(
       '/children/adoption-agency'
     );
 
-    expect(childrenSequence[15].url).toBe('/children/adoption-agency');
+    expect(childrenSequence[14].url).toBe('/children/adoption-agency');
+    expect(childrenSequence[14].showInSection).toBe('aboutChildren');
+    expect(childrenSequence[14].getNextStep({})).toBe('/task-list');
+
+    expect(childrenSequence[15].url).toBe('/children/find-placement-order-court');
     expect(childrenSequence[15].showInSection).toBe('aboutChildren');
-    expect(childrenSequence[15].getNextStep({})).toBe('/task-list');
+    expect(childrenSequence[15].getNextStep({})).toBe('/children/find-family-court');
 
-    expect(childrenSequence[16].url).toBe('/children/find-placement-order-court');
+    expect(childrenSequence[16].url).toBe('/children/find-family-court');
     expect(childrenSequence[16].showInSection).toBe('aboutChildren');
-    expect(childrenSequence[16].getNextStep({})).toBe('/children/find-family-court');
-
-    expect(childrenSequence[17].url).toBe('/children/find-family-court');
-    expect(childrenSequence[17].showInSection).toBe('aboutChildren');
-    expect(childrenSequence[17].getNextStep({})).toBe('/task-list');
+    expect(childrenSequence[16].getNextStep({})).toBe('/task-list');
   });
 });
