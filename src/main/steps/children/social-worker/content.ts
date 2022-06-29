@@ -1,111 +1,88 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { isEmailValid, isFieldFilledIn, isGovUkEmail, isPhoneNoValid } from '../../../app/form/validation';
+import { isEmailValid, isFieldFilledIn, isPhoneNoValid } from '../../../app/form/validation';
 
 const en = () => ({
   section: 'Application details',
   title: "Child's social worker details",
   line1: 'You can get these details from your local authority or adoption agency.',
-  childSocialWorkerName: "Name of child's social worker",
-  childSocialWorkerPhoneNumber: 'Phone number',
-  childSocialWorkerEmail: 'Email address (if known)',
-  childSocialWorkerEmailHint: 'The email address should be an official government email that ends in gov.uk.',
+  socialWorkerName: "Name of child's social worker",
+  socialWorkerPhoneNumber: 'Phone number',
+  socialWorkerEmail: 'Email address',
   childLocalAuthority: "Child's local authority",
-  childLocalAuthorityEmail: 'Local authority email address',
-  childLocalAuthorityEmailHint: 'The email address should be an official government email that ends in gov.uk',
   childLocalAuthorityHint:
     'This is the local authority with parental responsibility for the child. It may be different to your own local authority.',
   errors: {
-    childSocialWorkerName: {
+    socialWorkerName: {
       required: 'Enter a name',
     },
-    childSocialWorkerPhoneNumber: {
+    socialWorkerPhoneNumber: {
       required: 'Enter a UK telephone number',
       invalid: 'Enter a UK telephone number',
     },
-    childSocialWorkerEmail: {
-      invalid: 'Enter an email address that ends in gov.uk',
-      invalidGovUkEmail: 'Enter an email address that ends in gov.uk',
+    socialWorkerEmail: {
+      required: 'Enter an email address',
+      invalid: 'Enter an email address in the correct format, like name@example.com',
     },
     childLocalAuthority: {
       required: 'Enter a name',
-    },
-    childLocalAuthorityEmail: {
-      required: 'Enter an email address in the correct format, like name@gov.uk',
-      invalid: 'Enter an email address that ends in gov.uk',
-      invalidGovUkEmail: 'Enter an email address that ends in gov.uk',
     },
   },
 });
 
 const cy: typeof en = () => ({
-  section: 'Manylion y cais',
-  title: 'Manylion gweithiwr cymdeithasol y plentyn',
-  line1: 'Gallwch gael y manylion hyn gan eich awdurdod lleol neu asiantaeth fabwysiadu.',
-  childSocialWorkerName: 'Enw gweithiwr cymdeithasol y plentyn',
-  childSocialWorkerPhoneNumber: 'Rhif ffôn',
-  childSocialWorkerEmail: "Cyfeiriad e-bost (os yw'n hysbys)",
-  childSocialWorkerEmailHint:
-    "Dylai'r cyfeiriad e-bost fod yn e-bost swyddogol gan y llywodraeth sy'n terfynu â gov.uk.",
-  childLocalAuthority: 'Awdurdod lleol y plentyn',
-  childLocalAuthorityEmail: 'Cyfeiriad e-bost yr awdurdod lleol',
-  childLocalAuthorityEmailHint:
-    "Dylai'r cyfeiriad e-bost fod yn e-bost swyddogol gan y llywodraeth sy'n terfynu â gov.uk.",
+  section: 'Application details (in welsh)',
+  title: "Child's social worker details (in welsh)",
+  line1: 'You can get these details from your local authority or adoption agency. (in welsh)',
+  socialWorkerName: "Name of child's social worker (in welsh)",
+  socialWorkerPhoneNumber: 'Phone number (in welsh)',
+  socialWorkerEmail: 'Email address (in welsh)',
+  childLocalAuthority: "Child's local authority (in welsh)",
   childLocalAuthorityHint:
-    "Dyma'r awdurdod lleol sydd â chyfrifoldeb rhiant dros y plentyn. Gall fod yn wahanol i'ch awdurdod lleol eich hun.",
+    'This is the local authority with parental responsibility for the child. It may be different to your own local authority. (in welsh)',
   errors: {
-    childSocialWorkerName: {
-      required: 'Rhowch enw',
+    socialWorkerName: {
+      required: 'Enter a name (in welsh)',
     },
-    childSocialWorkerPhoneNumber: {
-      required: 'Rhowch rif ffôn yn y DU',
-      invalid: 'Rhowch rif ffôn yn y DU',
+    socialWorkerPhoneNumber: {
+      required: 'Enter a UK telephone number (in welsh)',
+      invalid: 'Enter a UK telephone number (in welsh)',
     },
-    childSocialWorkerEmail: {
-      invalid: "Rhowch gyfeiriad e-bost sy'n terfynu â gov.uk",
-      invalidGovUkEmail: "Rhowch gyfeiriad e-bost sy'n terfynu â gov.uk",
+    socialWorkerEmail: {
+      required: 'Enter an email address (in welsh)',
+      invalid: 'Enter an email address in the correct format, like name@example.com (in welsh)',
     },
     childLocalAuthority: {
-      required: 'Rhowch enw',
-    },
-    childLocalAuthorityEmail: {
-      required: 'Enter an email address in the correct format, like name@gov.uk (In Welsh)',
-      invalid: "Rhowch gyfeiriad e-bost sy'n terfynu â gov.uk",
-      invalidGovUkEmail: "Rhowch gyfeiriad e-bost sy'n terfynu â gov.uk",
+      required: 'Enter a name (in welsh)',
     },
   },
 });
 
 export const form: FormContent = {
   fields: {
-    childSocialWorkerName: {
+    socialWorkerName: {
       type: 'text',
       classes: 'govuk-label govuk-!-width-two-thirds',
-      label: l => l.childSocialWorkerName,
+      label: l => l.socialWorkerName,
       labelSize: null,
       validator: isFieldFilledIn,
     },
-    childSocialWorkerPhoneNumber: {
+    socialWorkerPhoneNumber: {
       type: 'text',
       classes: 'govuk-label govuk-input--width-10',
-      label: l => l.childSocialWorkerPhoneNumber,
+      label: l => l.socialWorkerPhoneNumber,
       labelSize: null,
       attributes: {
         maxLength: 14,
       },
       validator: value => isFieldFilledIn(value) || isPhoneNoValid(value),
     },
-    childSocialWorkerEmail: {
+    socialWorkerEmail: {
       type: 'text',
       classes: 'govuk-label govuk-!-width-two-thirds',
-      label: l => l.childSocialWorkerEmail,
-      hint: l => l.childSocialWorkerEmailHint,
+      label: l => l.socialWorkerEmail,
       labelSize: null,
-      validator: value => {
-        if (!isFieldFilledIn(value)) {
-          return isEmailValid(value) || isGovUkEmail(value);
-        }
-      },
+      validator: value => isFieldFilledIn(value) || isEmailValid(value),
     },
     childLocalAuthority: {
       type: 'text',
@@ -114,14 +91,6 @@ export const form: FormContent = {
       hint: l => l.childLocalAuthorityHint,
       labelSize: null,
       validator: isFieldFilledIn,
-    },
-    childLocalAuthorityEmail: {
-      type: 'text',
-      classes: 'govuk-label govuk-!-width-two-thirds',
-      hint: l => l.childLocalAuthorityEmailHint,
-      label: l => l.childLocalAuthorityEmail,
-      labelSize: null,
-      validator: value => isFieldFilledIn(value) || isEmailValid(value) || isGovUkEmail(value),
     },
   },
   submit: {

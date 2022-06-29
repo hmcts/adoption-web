@@ -5,17 +5,16 @@ import { ApplyingWith, DocumentType, YesNoNotsure, YesOrNo } from '../../../app/
 import { enContent } from './content';
 import {
   adoptionAgencySummaryList,
-  applicantSocialWorkerSummaryList,
   applicantSummaryList,
   applicationSummaryList,
   birthParentSummaryList,
-  childSocialWorkerSummaryList,
   childrenPlacementOrderSummaryList,
   childrenSummaryList,
   familyCourtSummaryList,
   localAuthoritySummaryList,
   otherParentSummaryList,
   siblingCourtOrderSummaryList,
+  socialWorkerSummaryList,
   uploadedDocumentSummaryList,
 } from './utils';
 
@@ -221,7 +220,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
     });
   });
 
-  describe('childWorkerSummaryList', () => {
+  describe('socialWorkerSummaryList', () => {
     test.each([
       {
         userCase: mockUserCase,
@@ -229,14 +228,14 @@ describe('review-pay-submit > check-your-answers > utils', () => {
           title: "Child's social worker details",
           rows: [
             {
-              key: { text: "Name of child's social worker" },
+              key: { text: 'Name' },
               value: { text: 'MOCK_SOCIAL_WORKER_NAME' },
               actions: {
                 items: [
                   {
                     href: '/children/social-worker?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: "Name of child's social worker",
+                    visuallyHiddenText: 'Name',
                   },
                 ],
               },
@@ -255,14 +254,14 @@ describe('review-pay-submit > check-your-answers > utils', () => {
               },
             },
             {
-              key: { text: 'Email address (if known)' },
-              value: { text: 'socialworker@gov.uk' },
+              key: { text: 'Email address' },
+              value: { text: 'socialworker@email.com' },
               actions: {
                 items: [
                   {
                     href: '/children/social-worker?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
-                    visuallyHiddenText: 'Email address (if known)',
+                    visuallyHiddenText: 'Email address',
                   },
                 ],
               },
@@ -280,104 +279,11 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                 ],
               },
             },
-            {
-              key: { text: 'Local authority email address' },
-              value: { text: 'socialworker@gov.uk' },
-              actions: {
-                items: [
-                  {
-                    href: '/children/social-worker?returnUrl=/review-pay-submit/check-your-answers',
-                    text: 'Change',
-                    visuallyHiddenText: 'Local authority email address',
-                  },
-                ],
-              },
-            },
           ],
         },
       },
     ])('return correct summary list items when %#', ({ userCase, expected }) => {
-      expect(childSocialWorkerSummaryList(enContent, userCase)).toStrictEqual(expected);
-    });
-  });
-
-  describe('applicantSocialWorkerSummaryList', () => {
-    test.each([
-      {
-        userCase: mockUserCase,
-        expected: {
-          title: 'Your social worker details',
-          rows: [
-            {
-              key: { text: 'Name of your social worker' },
-              value: { text: 'MOCK_SOCIAL_WORKER_NAME' },
-              actions: {
-                items: [
-                  {
-                    href: '/children/applicant-social-worker?returnUrl=/review-pay-submit/check-your-answers',
-                    text: 'Change',
-                    visuallyHiddenText: 'Name of your social worker',
-                  },
-                ],
-              },
-            },
-            {
-              key: { text: 'Phone number' },
-              value: { text: '01234567892' },
-              actions: {
-                items: [
-                  {
-                    href: '/children/applicant-social-worker?returnUrl=/review-pay-submit/check-your-answers',
-                    text: 'Change',
-                    visuallyHiddenText: 'Phone number',
-                  },
-                ],
-              },
-            },
-            {
-              key: { text: 'Email address (if known)' },
-              value: { text: 'socialworker@gov.uk' },
-              actions: {
-                items: [
-                  {
-                    href: '/children/applicant-social-worker?returnUrl=/review-pay-submit/check-your-answers',
-                    text: 'Change',
-                    visuallyHiddenText: 'Email address (if known)',
-                  },
-                ],
-              },
-            },
-            {
-              key: { text: 'Name of local authority' },
-              value: { text: 'MOCK_CHILD_LOCAL_AUTHORITY' },
-              actions: {
-                items: [
-                  {
-                    href: '/children/applicant-social-worker?returnUrl=/review-pay-submit/check-your-answers',
-                    text: 'Change',
-                    visuallyHiddenText: 'Name of local authority',
-                  },
-                ],
-              },
-            },
-            {
-              key: { text: 'Your local authority email address' },
-              value: { text: 'socialworker@gov.uk' },
-              actions: {
-                items: [
-                  {
-                    href: '/children/applicant-social-worker?returnUrl=/review-pay-submit/check-your-answers',
-                    text: 'Change',
-                    visuallyHiddenText: 'Your local authority email address',
-                  },
-                ],
-              },
-            },
-          ],
-        },
-      },
-    ])('return correct summary list items when %#', ({ userCase, expected }) => {
-      expect(applicantSocialWorkerSummaryList(enContent, userCase)).toStrictEqual(expected);
+      expect(socialWorkerSummaryList(enContent, userCase)).toStrictEqual(expected);
     });
   });
 

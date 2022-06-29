@@ -48,7 +48,7 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         id: 'adoption-agency',
         text: taskListItems.adoptionAgency,
         status: getAdoptionAgencyDetailStatus(userCase),
-        href: URL.SOCIAL_WORKER,
+        href: URL.LOCAL_AUTHORITY,
       },
       {
         id: 'find-family-court',

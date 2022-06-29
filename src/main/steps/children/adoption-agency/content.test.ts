@@ -47,37 +47,37 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y cais',
-  title: 'Manylion yr asiantaeth fabwysiadu neu’r awdurdod lleol',
-  adopAgencyName: "Enw'r asiantaeth fabwysiadu neu'r awdurdod lleol",
-  adopAgencyContactName: 'Enw eich cyswllt',
-  adopAgencyPhone: 'Rhif ffôn',
-  adopAgencyAddressLine1: 'Llinell gyntaf y cyfeiriad',
-  adopAgencyTown: 'Tref neu ddinas',
-  adopAgencyPostcode: 'Cod post',
-  adopAgencyContactEmail: 'Cyfeiriad e-bost eich cyswllt',
+  section: 'Application details. (in welsh)',
+  title: 'Adoption agency or local authority details. (in welsh)',
+  adopAgencyName: 'Name of adoption agency or local authority. (in welsh)',
+  adopAgencyContactName: 'Name of your contact. (in welsh)',
+  adopAgencyPhone: 'Phone number. (in welsh)',
+  adopAgencyAddressLine1: 'Address line 1. (in welsh)',
+  adopAgencyTown: 'Town or city. (in welsh)',
+  adopAgencyPostcode: 'Postcode. (in welsh)',
+  adopAgencyContactEmail: 'Email address of your contact. (in welsh)',
   errors: {
     adopAgencyOrLaName: {
-      required: 'Rhowch enw',
+      required: 'Enter a name. (in welsh)',
     },
     adopAgencyOrLaContactName: {
-      required: 'Rhowch enw',
+      required: 'Enter a name. (in welsh)',
     },
     adopAgencyOrLaPhoneNumber: {
-      required: 'Rhowch rif ffôn yn y DU',
-      invalid: 'Rhowch rif ffôn yn y DU',
+      required: 'Enter a UK telephone number. (in welsh)',
+      invalid: 'Enter a UK telephone number. (in welsh)',
     },
     adopAgencyAddressLine1: {
-      required: 'Rhowch linell gyntaf y cyfeiriad',
+      required: 'Enter the first line of the address. (in welsh)',
     },
     adopAgencyTown: {
-      required: "Rhowch enw'r dref neu'r ddinas",
+      required: 'Enter the town or city. (in welsh)',
     },
     adopAgencyPostcode: {
-      required: 'Rhowch y cod post',
+      required: 'Enter the postcode. (in welsh)',
     },
     adopAgencyOrLaContactEmail: {
-      required: 'Rhowch gyfeiriad e-bost',
+      required: 'Enter an email address. (in welsh)',
       invalid: 'Enter an email address in the correct format, like name@example.com. (in welsh)',
     },
   },

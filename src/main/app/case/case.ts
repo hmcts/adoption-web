@@ -129,17 +129,10 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   otherParentAddressNotKnownReason: 'otherParentAddressNotKnownReason',
   otherParentLastAddressDate: 'otherParentLastAddressDate',
 
-  childSocialWorkerName: 'childSocialWorkerName',
-  childSocialWorkerPhoneNumber: 'childSocialWorkerPhoneNumber',
-  childSocialWorkerEmail: 'childSocialWorkerEmail',
+  socialWorkerName: 'socialWorkerName',
+  socialWorkerPhoneNumber: 'socialWorkerPhoneNumber',
+  socialWorkerEmail: 'socialWorkerEmail',
   childLocalAuthority: 'childLocalAuthority',
-  childLocalAuthorityEmail: 'childLocalAuthorityEmail',
-
-  applicantSocialWorkerName: 'applicantSocialWorkerName',
-  applicantSocialWorkerPhoneNumber: 'applicantSocialWorkerPhoneNumber',
-  applicantSocialWorkerEmail: 'applicantSocialWorkerEmail',
-  applicantLocalAuthority: 'applicantLocalAuthority',
-  applicantLocalAuthorityEmail: 'applicantLocalAuthorityEmail',
 
   solicitorFirm: 'solicitorFirm',
   solicitorName: 'solicitorName',
@@ -338,17 +331,10 @@ export interface Case {
 
   hasAnotherAdopAgencyOrLA?: YesOrNo;
 
-  childSocialWorkerName?: string;
-  childSocialWorkerPhoneNumber?: string;
-  childSocialWorkerEmail?: string;
+  socialWorkerName?: string;
+  socialWorkerPhoneNumber?: string;
+  socialWorkerEmail?: string;
   childLocalAuthority?: string;
-  childLocalAuthorityEmail?: string;
-
-  applicantSocialWorkerName?: string;
-  applicantSocialWorkerPhoneNumber?: string;
-  applicantSocialWorkerEmail?: string;
-  applicantLocalAuthority?: string;
-  applicantLocalAuthorityEmail?: string;
 
   solicitorFirm?: string;
   solicitorName?: string;

@@ -182,77 +182,33 @@ export const adoptionAgencySummaryList = (
   };
 };
 
-export const childSocialWorkerSummaryList = (
+export const socialWorkerSummaryList = (
   { sectionTitles, keys, ...content }: SummaryListContent,
   userCase: Partial<CaseWithId>
 ): SummaryList => {
   return {
-    title: sectionTitles.childSocialWorkerDetails,
+    title: sectionTitles.socialWorkerDetails,
     rows: getSectionSummaryList(
       [
         {
-          key: keys.childSocialWorkerName,
-          value: userCase.childSocialWorkerName,
+          key: keys.name,
+          value: userCase.socialWorkerName,
           changeUrl: Urls.SOCIAL_WORKER,
         },
         {
           key: keys.phoneNumber,
-          value: userCase.childSocialWorkerPhoneNumber,
+          value: userCase.socialWorkerPhoneNumber,
           changeUrl: Urls.SOCIAL_WORKER,
         },
         {
-          key: keys.emailAddressIfKnown,
-          value: userCase.childSocialWorkerEmail,
+          key: keys.emailAddress,
+          value: userCase.socialWorkerEmail,
           changeUrl: Urls.SOCIAL_WORKER,
         },
         {
           key: keys.childLocalAuthority,
           value: userCase.childLocalAuthority,
           changeUrl: Urls.SOCIAL_WORKER,
-        },
-        {
-          key: keys.childLocalAuthorityEmail,
-          value: userCase.childLocalAuthorityEmail,
-          changeUrl: Urls.SOCIAL_WORKER,
-        },
-      ],
-      content
-    ),
-  };
-};
-
-export const applicantSocialWorkerSummaryList = (
-  { sectionTitles, keys, ...content }: SummaryListContent,
-  userCase: Partial<CaseWithId>
-): SummaryList => {
-  return {
-    title: sectionTitles.applicantSocialWorkerDetails,
-    rows: getSectionSummaryList(
-      [
-        {
-          key: keys.applicantSocialWorkerName,
-          value: userCase.applicantSocialWorkerName,
-          changeUrl: Urls.APPLICANT_SOCIAL_WORKER,
-        },
-        {
-          key: keys.phoneNumber,
-          value: userCase.applicantSocialWorkerPhoneNumber,
-          changeUrl: Urls.APPLICANT_SOCIAL_WORKER,
-        },
-        {
-          key: keys.emailAddressIfKnown,
-          value: userCase.applicantSocialWorkerEmail,
-          changeUrl: Urls.APPLICANT_SOCIAL_WORKER,
-        },
-        {
-          key: keys.applicantLocalAuthority,
-          value: userCase.applicantLocalAuthority,
-          changeUrl: Urls.APPLICANT_SOCIAL_WORKER,
-        },
-        {
-          key: keys.applicantLocalAuthorityEmail,
-          value: userCase.applicantLocalAuthorityEmail,
-          changeUrl: Urls.APPLICANT_SOCIAL_WORKER,
         },
       ],
       content
