@@ -33,9 +33,9 @@ Scenario(
     await taskListPage.verifyDateChildMovedInStatus();
 
     await taskListPage.selectChildAdoptionAgencyDetails();
-    //await childAdoptionAgencyDetailsPage.childAdoptionAgencyDetailsSectionEmpty();
+    await childAdoptionAgencyDetailsPage.childSocialWorkerDetailsSection();
+    await childAdoptionAgencyDetailsPage.yourSocialWorkerDetailsSection();
     await childAdoptionAgencyDetailsPage.childAdoptionAgencyDetailsSection();
-    await childAdoptionAgencyDetailsPage.childSocialWorkerDetails();
     await taskListPage.verifyChildAdoptionAgencyDetailsStatus;
 
     await taskListPage.selectPrimaryApplicantContactDetails();

@@ -36,6 +36,7 @@ Scenario(
     await taskListPage.selectChildChildDetails();
     await childsDetailsPage.childFullNameSection();
     await childsDetailsPage.childNameAfterAdoptionDetailsSection();
+    await childsDetailsPage.childDOBSection();
     await taskListPage.verifyChildDetailsStatus();
 
     await taskListPage.selectChildAdoptionAgencyDetails();
@@ -81,7 +82,7 @@ Scenario(
 
     await landingPage.searchForCaseInLALandingPage(caseId);
 
-    //  Add child's details
+    //  LA - Add child's details
 
     await taskListPage.selectChildrenBirthCertificate();
     await childrenBirthCertificatePage.childDetailsBirthCertificaterSection();
