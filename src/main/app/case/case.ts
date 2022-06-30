@@ -179,6 +179,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   familyCourtName: 'familyCourtName',
   familyCourtEmailId: 'familyCourtEmailId',
   hyphenatedCaseRef: 'hyphenatedCaseRef',
+  otherPlacementOrderType: 'otherPlacementOrderType',
 };
 
 export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data: InputFormat): OutputFormat {
@@ -256,6 +257,8 @@ export interface Case {
   addAnotherPlacementOrder?: YesOrNo;
   placementOrders?: PlacementOrder[];
   selectedPlacementOrderId?: string;
+  selectedPlacementOrderType?: string;
+  otherPlacementOrderType?: string;
 
   /***** Birth mother *****/
   birthMotherFirstNames?: string;

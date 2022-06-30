@@ -18,6 +18,12 @@ export default class PlacementOrderGetController extends GetController {
       redirect = true;
     } else if (req.query.change) {
       req.session.userCase.selectedPlacementOrderId = `${req.query.change}`;
+      const placementOrder = placementOrders.find(
+        item => item.placementOrderId === req.session.userCase.selectedPlacementOrderId
+      );
+      console.log('---------placementOrders in GET Controller---------' + JSON.stringify(placementOrder));
+
+      req.session.userCase.selectedPlacementOrderType = placementOrder?.placementOrderType;
       this.parseAndSetReturnUrl(req);
       delete req.query.change;
       req.url = req.url.substring(0, req.url.indexOf('?'));
@@ -50,15 +56,16 @@ export default class PlacementOrderGetController extends GetController {
     }
 
     req.session.userCase.placementOrders = placementOrders;
-
-    req.session.userCase = await this.save(
-      req,
-      {
-        placementOrders: req.session.userCase.placementOrders,
-        selectedPlacementOrderId: req.session.userCase.selectedPlacementOrderId,
-      },
-      this.getEventName(req)
-    );
+    if (!req.query.change) {
+      req.session.userCase = await this.save(
+        req,
+        {
+          placementOrders: req.session.userCase.placementOrders,
+          selectedPlacementOrderId: req.session.userCase.selectedPlacementOrderId,
+        },
+        this.getEventName(req)
+      );
+    }
 
     const callback = redirect ? undefined : () => super.get(req, res);
 

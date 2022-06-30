@@ -694,6 +694,7 @@ export interface CaseData {
   coAddNewDocuments: YesOrNo;
   coDocumentsUploaded: ListValue<AdoptionDocument>[];
   coIsEverythingInPetitionTrue: YesOrNo;
+  otherPlacementOrderType: string;
 }
 
 export interface Children {

@@ -8,6 +8,15 @@ import { Form } from '../../../app/form/Form';
 @autobind
 export default class PlacementOrderPostController extends PostController<AnyObject> {
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
+    const enum PlacementOrderTypeEnum {
+      AdoptionOrder = 'Adoption Order',
+      CareOrder = 'Care Order',
+      ContactOrder = 'Contact Order',
+      FreeingOrder = 'Freeing Order',
+      PlacementOrder = 'Placement Order',
+      SupervisionOrder = 'Supervision Order',
+      Other = 'Other',
+    }
     const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
     const form = new Form(fields);
     const { saveAndSignOut, saveBeforeSessionTimeout, _csrf, ...formData } = form.getParsedBody(req.body);
@@ -18,7 +27,11 @@ export default class PlacementOrderPostController extends PostController<AnyObje
       item => item.placementOrderId === req.session.userCase.selectedPlacementOrderId
     );
 
-    Object.assign(placementOrder!, formData);
+    if (placementOrder) {
+      placementOrder.placementOrderType = formData['selectedPlacementOrderType'] as PlacementOrderTypeEnum;
+    }
+
+    //Object.assign(placementOrder!, formData);
 
     this.filterErrorsForSaveAsDraft(req);
 

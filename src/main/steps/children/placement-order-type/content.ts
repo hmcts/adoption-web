@@ -24,10 +24,10 @@ const en = () => ({
   other: 'Other',
   otherOrder: 'Add a different type of order',
   errors: {
-    placementOrderType: {
+    selectedPlacementOrderType: {
       required: 'Enter an order type',
     },
-    placementOrderOtherType: {
+    otherPlacementOrderType: {
       required: 'Enter an order type',
     },
   },
@@ -45,44 +45,50 @@ const cy: typeof en = () => ({
   other: 'Other',
   otherOrder: 'Add a different type of order',
   errors: {
-    placementOrderType: {
+    selectedPlacementOrderType: {
       required: 'Dewiswch ateb os gwelwch yn dda',
     },
-    placementOrderOtherType: {
+    otherPlacementOrderType: {
       required: 'Nac ydwdwch yr hyn sydd wedi’i ysgrifennu ar y dystysgrif geni.',
     },
   },
 });
 
 export const form: FormContent = {
-  fields: {
-    placementOrderType: {
-      type: 'radios',
-      classes: 'govuk-radios',
-      label: l => l.label,
-      section: l => l.section,
-      values: [
-        { label: l => l.adoptionOrder, value: PlacementOrderTypeEnum.AdoptionOrder },
-        { label: l => l.careOrder, value: PlacementOrderTypeEnum.CareOrder },
-        { label: l => l.contactOrder, value: PlacementOrderTypeEnum.ContactOrder },
-        { label: l => l.freeingOrder, value: PlacementOrderTypeEnum.FreeingOrder },
-        { label: l => l.placementOrder, value: PlacementOrderTypeEnum.PlacementOrder },
-        { label: l => l.supervisionOrder, value: PlacementOrderTypeEnum.SupervisionOrder },
-        {
-          label: l => l.other,
-          value: PlacementOrderTypeEnum.Other,
-          subFields: {
-            placementOrderOtherType: {
-              type: 'text',
-              label: l => l.otherOrder,
-              labelSize: null,
-              validator: isFieldFilledIn,
+  fields: userCase => {
+    /* const placementOrder = userCase.placementOrders?.find(
+      item => item.placementOrderId === userCase.selectedPlacementOrderId
+    ); */
+    console.log('<<<<<<<<userCase>>>>>>>  ' + JSON.stringify(userCase));
+    return {
+      selectedPlacementOrderType: {
+        type: 'radios',
+        classes: 'govuk-radios',
+        label: l => l.label,
+        section: l => l.section,
+        values: [
+          { label: l => l.adoptionOrder, value: PlacementOrderTypeEnum.AdoptionOrder },
+          { label: l => l.careOrder, value: PlacementOrderTypeEnum.CareOrder },
+          { label: l => l.contactOrder, value: PlacementOrderTypeEnum.ContactOrder },
+          { label: l => l.freeingOrder, value: PlacementOrderTypeEnum.FreeingOrder },
+          { label: l => l.placementOrder, value: PlacementOrderTypeEnum.PlacementOrder },
+          { label: l => l.supervisionOrder, value: PlacementOrderTypeEnum.SupervisionOrder },
+          {
+            label: l => l.other,
+            value: PlacementOrderTypeEnum.Other,
+            subFields: {
+              otherPlacementOrderType: {
+                type: 'text',
+                label: l => l.otherOrder,
+                labelSize: null,
+                validator: isFieldFilledIn,
+              },
             },
           },
-        },
-      ],
-      validator: isFieldFilledIn,
-    },
+        ],
+        validator: isFieldFilledIn,
+      },
+    };
   },
   submit: {
     text: l => l.continue,
