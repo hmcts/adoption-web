@@ -14,7 +14,7 @@ const en = () => ({
   halfBrother: 'Half-brother',
   stepBrother: 'Step-brother',
   errors: {
-    siblingRelation: {
+    selectedSiblingRelation: {
       required: 'Please select an answer',
     },
   },
@@ -30,7 +30,7 @@ const cy: typeof en = () => ({
   halfBrother: 'Half-brother (in welsh)',
   stepBrother: 'Step-brother (in welsh)',
   errors: {
-    siblingRelation: {
+    selectedSiblingRelation: {
       required: 'Please select an answer (in welsh)',
     },
   },
@@ -40,7 +40,7 @@ export const form: FormContent = {
   fields: userCase => {
     const sibling = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
     return {
-      siblingRelation: {
+      selectedSiblingRelation: {
         type: 'radios',
         classes: 'govuk-radios',
         label: l => l.label,

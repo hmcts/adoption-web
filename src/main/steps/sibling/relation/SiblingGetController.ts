@@ -19,7 +19,7 @@ export default class SiblingGetController extends GetController {
     } else if (req.query.change) {
       this.changeSibling(req);
       redirect = true;
-      dirty = true;
+      //dirty = true;
     } else if (!req.session.userCase.selectedSiblingId) {
       //generate random id for sibling if there are no siblings
       req.session.userCase.selectedSiblingId = siblings[0]?.siblingId || `${Date.now()}`;
@@ -67,6 +67,10 @@ export default class SiblingGetController extends GetController {
 
   private changeSibling(req: AppRequest) {
     req.session.userCase.selectedSiblingId = `${req.query.change}`;
+    const changeSibling = req.session.userCase?.siblings?.find(
+      item => item.siblingId === req.session.userCase.selectedSiblingId
+    );
+    req.session.userCase.selectedSiblingRelation = changeSibling?.siblingRelation;
     this.parseAndSetReturnUrl(req);
     delete req.query.change;
     req.url = req.url.substring(0, req.url.indexOf('?'));

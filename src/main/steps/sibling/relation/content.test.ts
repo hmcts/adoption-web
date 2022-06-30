@@ -18,7 +18,7 @@ const enContent = {
   halfBrother: 'Half-brother',
   stepBrother: 'Step-brother',
   errors: {
-    siblingRelation: {
+    selectedSiblingRelation: {
       required: 'Please select an answer',
     },
   },
@@ -33,7 +33,7 @@ const cyContent = {
   halfBrother: 'Half-brother (in welsh)',
   stepBrother: 'Step-brother (in welsh)',
   errors: {
-    siblingRelation: {
+    selectedSiblingRelation: {
       required: 'Please select an answer (in welsh)',
     },
   },
@@ -69,7 +69,7 @@ describe('sibling > relation > content', () => {
     });
     form = generatedContent.form as FormContent;
     fields = form.fields as FormFields;
-    const relationField = fields.siblingRelation as FormOptions;
+    const relationField = fields.selectedSiblingRelation as FormOptions;
     expect(relationField.type).toBe('radios');
     expect(relationField.classes).toBe('govuk-radios');
     expect((relationField.label as Function)(generatedContent)).toBe(enContent.label);

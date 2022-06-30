@@ -2,6 +2,7 @@ import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
 import { Case } from '../../../app/case/case';
+import { SiblingRelationships } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
@@ -29,7 +30,8 @@ export default class SiblingPostController extends PostController<AnyObject> {
     } else {
       sibling = req.session.userCase.siblings?.find(item => item.siblingId === req.session.userCase.selectedSiblingId);
       if (sibling) {
-        Object.assign(sibling, formData);
+        // Object.assign(sibling, formData);
+        sibling.siblingRelation = formData['selectedSiblingRelation'] as SiblingRelationships;
       }
     }
 
@@ -64,11 +66,11 @@ export default class SiblingPostController extends PostController<AnyObject> {
         req.session.userCase.selectedSiblingId = `${Date.now()}`;
         req.session.userCase.siblings?.push({
           siblingId: req.session.userCase.selectedSiblingId,
-          siblingRelation: formData['siblingRelation'],
+          siblingRelation: formData['selectedSiblingRelation'] as SiblingRelationships,
         });
       } else {
         req.session.userCase.selectedSiblingId = 'addAnotherSibling';
-        req.session.userCase['siblingRelation'] = formData['siblingRelation'];
+        req.session.userCase['siblingRelation'] = formData['selectedSiblingRelation'] as SiblingRelationships;
       }
     } else {
       //store selected sibling's id in userCase

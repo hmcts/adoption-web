@@ -363,6 +363,7 @@ export interface Case {
   hasSiblingNotSureReason?: string;
   addAnotherSiblingPlacementOrder?: YesOrNo;
   selectedSiblingId?: string;
+  selectedSiblingRelation?: string;
   addAnotherSibling?: YesOrNo;
   siblingRelation?: SiblingRelationships;
 
