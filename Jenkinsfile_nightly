@@ -58,9 +58,9 @@ withNightlyPipeline(type, product, component) {
   enableCrossBrowserTest(['chrome','microsoft'])
   enableFullFunctionalTest(120)
   loadVaultSecrets(secrets)
-//  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
-//  enableFortifyScan()
-//  enableSecurityScan()
+  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
+  enableFortifyScan()
+  enableSecurityScan()
 
   after('test') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
