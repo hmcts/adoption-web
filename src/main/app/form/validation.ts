@@ -195,7 +195,7 @@ export const isTextAreaValid: Validator = value => {
 };
 
 export const isGovUkEmail: Validator = value => {
-  if ((value as string).split('@')[1].toLowerCase().endsWith('gov.uk')) {
+  if (!(value as string).split('@')[1].toLowerCase().endsWith('gov.uk')) {
     return 'invalidGovUkEmail';
   }
 };
