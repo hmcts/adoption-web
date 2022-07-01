@@ -24,10 +24,10 @@ const en = () => ({
   other: 'Other',
   otherOrder: 'Add a different type of order',
   errors: {
-    placementOrderType: {
+    selectedPlacementOrderType: {
       required: 'Enter an order type',
     },
-    placementOrderOtherType: {
+    selectedOtherPlacementOrderType: {
       required: 'Enter an order type',
     },
   },
@@ -45,10 +45,10 @@ const cy: typeof en = () => ({
   other: 'Other',
   otherOrder: 'Add a different type of order',
   errors: {
-    placementOrderType: {
+    selectedPlacementOrderType: {
       required: 'Dewiswch ateb os gwelwch yn dda',
     },
-    placementOrderOtherType: {
+    selectedOtherPlacementOrderType: {
       required: 'Nac ydwdwch yr hyn sydd wedi’i ysgrifennu ar y dystysgrif geni.',
     },
   },
@@ -56,7 +56,7 @@ const cy: typeof en = () => ({
 
 export const form: FormContent = {
   fields: {
-    placementOrderType: {
+    selectedPlacementOrderType: {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.label,
@@ -72,7 +72,7 @@ export const form: FormContent = {
           label: l => l.other,
           value: PlacementOrderTypeEnum.Other,
           subFields: {
-            placementOrderOtherType: {
+            selectedOtherPlacementOrderType: {
               type: 'text',
               label: l => l.otherOrder,
               labelSize: null,

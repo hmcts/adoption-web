@@ -29,10 +29,10 @@ const enContent = {
   other: 'Other',
   otherOrder: 'Add a different type of order',
   errors: {
-    placementOrderType: {
+    selectedPlacementOrderType: {
       required: 'Enter an order type',
     },
-    placementOrderOtherType: {
+    selectedOtherPlacementOrderType: {
       required: 'Enter an order type',
     },
   },
@@ -50,10 +50,10 @@ const cyContent = {
   other: 'Other',
   otherOrder: 'Add a different type of order',
   errors: {
-    placementOrderType: {
+    selectedPlacementOrderType: {
       required: 'Dewiswch ateb os gwelwch yn dda',
     },
-    placementOrderOtherType: {
+    selectedOtherPlacementOrderType: {
       required: 'Nac ydwdwch yr hyn sydd wedi’i ysgrifennu ar y dystysgrif geni.',
     },
   },
@@ -81,7 +81,7 @@ describe('children > placement-order-type > content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const field = fields.placementOrderType as FormOptions;
+    const field = fields.selectedPlacementOrderType as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
     expect((field.label as Function)(generatedContent)).toBe(enContent.label);
@@ -98,7 +98,7 @@ describe('children > placement-order-type > content', () => {
     expect(field.values[4].value).toBe(PlacementOrderTypeEnum.PlacementOrder);
     expect((field.values[5].label as Function)(generatedContent)).toBe(enContent.supervisionOrder);
     expect(field.values[5].value).toBe(PlacementOrderTypeEnum.SupervisionOrder);
-    const placementOrderOtherTypeField = field.values[6].subFields!.placementOrderOtherType;
+    const placementOrderOtherTypeField = field.values[6].subFields!.selectedOtherPlacementOrderType;
     expect(placementOrderOtherTypeField.type).toBe('text');
     expect((placementOrderOtherTypeField.label as Function)(generatedContent)).toBe(enContent.otherOrder);
     expect(placementOrderOtherTypeField.labelSize).toBe(null);

@@ -19,7 +19,12 @@ export default class PlacementOrderPostController extends PostController<AnyObje
     );
 
     Object.assign(placementOrder!, formData);
-
+    if (placementOrder) {
+      if (formData['selectedPlacementOrderType'] !== null || formData['selectedPlacementOrderType'] !== undefined) {
+        placementOrder.placementOrderType = formData['selectedPlacementOrderType'];
+        placementOrder.otherPlacementOrderType = formData['selectedOtherPlacementOrderType'];
+      }
+    }
     this.filterErrorsForSaveAsDraft(req);
 
     if (req.session.errors.length > 0) {
