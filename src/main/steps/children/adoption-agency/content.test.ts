@@ -47,37 +47,37 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Application details. (in welsh)',
-  title: 'Adoption agency or local authority details. (in welsh)',
-  adopAgencyName: 'Name of adoption agency or local authority. (in welsh)',
-  adopAgencyContactName: 'Name of your contact. (in welsh)',
-  adopAgencyPhone: 'Phone number. (in welsh)',
-  adopAgencyAddressLine1: 'Address line 1. (in welsh)',
-  adopAgencyTown: 'Town or city. (in welsh)',
-  adopAgencyPostcode: 'Postcode. (in welsh)',
-  adopAgencyContactEmail: 'Email address of your contact. (in welsh)',
+  section: 'Manylion y cais',
+  title: 'Manylion yr asiantaeth fabwysiadu neu’r awdurdod lleol',
+  adopAgencyName: "Enw'r asiantaeth fabwysiadu neu'r awdurdod lleol",
+  adopAgencyContactName: 'Enw eich cyswllt',
+  adopAgencyPhone: 'Rhif ffôn',
+  adopAgencyAddressLine1: 'Llinell gyntaf y cyfeiriad',
+  adopAgencyTown: 'Tref neu ddinas',
+  adopAgencyPostcode: 'Cod post',
+  adopAgencyContactEmail: 'Cyfeiriad e-bost eich cyswllt',
   errors: {
     adopAgencyOrLaName: {
-      required: 'Enter a name. (in welsh)',
+      required: 'Rhowch enw',
     },
     adopAgencyOrLaContactName: {
-      required: 'Enter a name. (in welsh)',
+      required: 'Rhowch enw',
     },
     adopAgencyOrLaPhoneNumber: {
-      required: 'Enter a UK telephone number. (in welsh)',
-      invalid: 'Enter a UK telephone number. (in welsh)',
+      required: 'Rhowch rif ffôn yn y DU',
+      invalid: 'Rhowch rif ffôn yn y DU',
     },
     adopAgencyAddressLine1: {
-      required: 'Enter the first line of the address. (in welsh)',
+      required: 'Rhowch linell gyntaf y cyfeiriad',
     },
     adopAgencyTown: {
-      required: 'Enter the town or city. (in welsh)',
+      required: "Rhowch enw'r dref neu'r ddinas",
     },
     adopAgencyPostcode: {
-      required: 'Enter the postcode. (in welsh)',
+      required: 'Rhowch y cod post',
     },
     adopAgencyOrLaContactEmail: {
-      required: 'Enter an email address. (in welsh)',
+      required: 'Rhowch gyfeiriad e-bost',
       invalid: 'Enter an email address in the correct format, like name@example.com. (in welsh)',
     },
   },

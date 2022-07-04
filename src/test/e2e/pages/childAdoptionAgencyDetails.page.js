@@ -1,13 +1,22 @@
 const { I } = inject();
 const adoptionAgencyDetails = require('../fixtures/caseData/childAdoptionAgencyDetails');
 module.exports = {
-  localAuthority: {
-    localAuthorityName: 'input[id$="localAuthorityName"]',
-    localAuthorityPhoneNumber: 'input[id$="localAuthorityPhoneNumber"]',
-    localAuthorityContactName: 'input[id$="localAuthorityContactName"]',
-    localAuthorityContactEmail: 'input[id$="localAuthorityContactEmail"]',
-    hasAnotherAdopAgencyOrLA: 'input[id$="hasAnotherAdopAgencyOrLA"]',
+  childSocialWorker: {
+    childSocialWorkerName: 'input[id$="childSocialWorkerName"]',
+    childSocialWorkerPhoneNumber: 'input[id$="childSocialWorkerPhoneNumber"]',
+    childSocialWorkerEmail: 'input[id$="childSocialWorkerEmail"]',
+    childLocalAuthority: 'input[id$="childLocalAuthority"]',
+    childLocalAuthorityEmail: 'input[id$="childLocalAuthorityEmail"]',
   },
+
+  yourSocialWorker: {
+    applicantSocialWorkerName: 'input[id$="applicantSocialWorkerName"]',
+    applicantSocialWorkerPhoneNumber: 'input[id$="applicantSocialWorkerPhoneNumber"]',
+    applicantSocialWorkerEmail: 'input[id$="applicantSocialWorkerEmail"]',
+    applicantLocalAuthority: 'input[id$="applicantLocalAuthority"]',
+    applicantLocalAuthorityEmail: 'input[id$="applicantLocalAuthorityEmail"]',
+  },
+
   adopAgency: {
     adopAgencyOrLaName: 'input[id$="adopAgencyOrLaName"]',
     adopAgencyOrLaPhoneNumber: 'input[id$="adopAgencyOrLaPhoneNumber"]',
@@ -19,31 +28,31 @@ module.exports = {
     adopAgencyPostcode: 'input[id$="adopAgencyPostcode"]',
   },
 
-  socialWorker: {
-    socialWorkerName: 'input[id$="socialWorkerName"]',
-    socialWorkerPhoneNumber: 'input[id$="socialWorkerPhoneNumber"]',
-    socialWorkerEmail: 'input[id$="socialWorkerEmail"]',
-    childLocalAuthority: 'input[id$="childLocalAuthority"]',
+  async childSocialWorkerDetailsSection() {
+    await I.retry(3).waitForText("Child's social worker details", 30);
+    await I.retry(3).fillField(this.childSocialWorker.childSocialWorkerName, 'Social Worker');
+    await I.retry(3).fillField(this.childSocialWorker.childSocialWorkerPhoneNumber, '09876543210');
+    await I.retry(3).fillField(this.childSocialWorker.childSocialWorkerEmail, 'social.workerTest@gov.uk');
+    await I.retry(3).fillField(this.childSocialWorker.childLocalAuthority, 'CARE TAKER');
+    await I.retry(3).fillField(this.childSocialWorker.childLocalAuthorityEmail, 'local.authorityTest@gov.uk');
+    await I.wait(2);
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
+  },
+
+  async yourSocialWorkerDetailsSection() {
+    await I.retry(3).waitForText('Your social worker details', 30);
+    await I.retry(3).fillField(this.yourSocialWorker.applicantSocialWorkerName, 'Your Social Worker');
+    await I.retry(3).fillField(this.yourSocialWorker.applicantSocialWorkerPhoneNumber, '09876543210');
+    await I.retry(3).fillField(this.yourSocialWorker.applicantSocialWorkerEmail, 'yoursocial.workerTest@gov.uk');
+    await I.retry(3).fillField(this.yourSocialWorker.applicantLocalAuthority, 'YOUR CARE TAKER');
+    await I.retry(3).fillField(this.yourSocialWorker.applicantLocalAuthorityEmail, 'yourlocal.authorityTest@gov.uk');
+    await I.wait(2);
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
   },
 
   async childAdoptionAgencyDetailsSection() {
-    await I.retry(3).waitForText('Local authority details', 30);
-    await I.retry(3).fillField(this.localAuthority.localAuthorityName, adoptionAgencyDetails.adopAgencyOrLaName);
-
-    await I.retry(3).fillField(
-      this.localAuthority.localAuthorityContactName,
-      adoptionAgencyDetails.adopAgencyOrLaContactName
-    );
-    await I.retry(3).fillField(
-      this.localAuthority.localAuthorityPhoneNumber,
-      adoptionAgencyDetails.adopAgencyOrLaPhoneNumber
-    );
-    await I.retry(3).fillField(
-      this.localAuthority.localAuthorityContactEmail,
-      adoptionAgencyDetails.adopAgencyOrLaContactEmail
-    );
-    await I.wait(2);
-    await I.retry(3).click('Save and continue');
     await I.retry(3).waitForText('Is there another adoption agency or local authority involved?', 30);
     await I.retry(3).click(this.adopAgency.hasAnotherAdopAgencyOrLA);
     await I.wait(2);
@@ -56,36 +65,19 @@ module.exports = {
     await I.retry(3).fillField(this.adopAgency.adopAgencyAddressLine1, '41');
     await I.retry(3).fillField(this.adopAgency.adopAgencyTown, 'Leeds');
     await I.retry(3).fillField(this.adopAgency.adopAgencyPostcode, 'LS7 3HJ');
-    await I.retry(3).fillField(this.adopAgency.adopAgencyOrLaContactEmail, 'test.another@example.com');
+    await I.retry(3).fillField(this.adopAgency.adopAgencyOrLaContactEmail, 'test.another@test.com');
     await I.wait(2);
     await I.retry(3).click('Save and continue');
     await I.wait(2);
   },
-  async childSocialWorkerDetails() {
-    await I.retry(3).waitForText("Child's social worker details", 30);
-    await I.retry(3).fillField(this.socialWorker.socialWorkerName, 'Social Worker');
-    await I.retry(3).fillField(this.socialWorker.socialWorkerPhoneNumber, '09876543210');
-    await I.retry(3).fillField(this.socialWorker.socialWorkerEmail, 'social.worker@example.com');
-    await I.retry(3).fillField(this.socialWorker.childLocalAuthority, 'CARE TAKER');
-    await I.wait(2);
-    await I.retry(3).click('Save and continue');
-    await I.wait(4);
-  },
-  async childAdoptionAgencyDetailsSaveAsDraft() {
-    await I.retry(3).fillField(this.localAuthority.localAuthorityName, adoptionAgencyDetails.adopAgencyOrLaName);
 
-    await I.retry(3).fillField(
-      this.localAuthority.localAuthorityContactName,
-      adoptionAgencyDetails.adopAgencyOrLaContactName
-    );
-    await I.retry(3).fillField(
-      this.localAuthority.localAuthorityPhoneNumber,
-      adoptionAgencyDetails.adopAgencyOrLaPhoneNumber
-    );
-    await I.retry(3).fillField(
-      this.localAuthority.localAuthorityContactEmail,
-      adoptionAgencyDetails.adopAgencyOrLaContactEmail
-    );
+  async childAdoptionAgencyDetailsSaveAsDraft() {
+    await I.retry(3).waitForText("Child's social worker details", 30);
+    await I.retry(3).fillField(this.childSocialWorker.childSocialWorkerName, 'Social Worker');
+    await I.retry(3).fillField(this.childSocialWorker.childSocialWorkerPhoneNumber, '09876543210');
+    await I.retry(3).fillField(this.childSocialWorker.childSocialWorkerEmail, 'social.workerTest@gov.uk');
+    await I.retry(3).fillField(this.childSocialWorker.childLocalAuthority, 'CARE TAKER');
+    await I.retry(3).fillField(this.childSocialWorker.childLocalAuthorityEmail, 'local.authorityTest@gov.uk');
     await I.wait(2);
     await I.retry(3).click('Save as draft');
     await I.wait(2);
