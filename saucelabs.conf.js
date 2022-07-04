@@ -8,8 +8,8 @@ const waitForTimeout = parseInt(process.env.WAIT_FOR_TIMEOUT) || 30000;
 const smartWait = parseInt(process.env.SMART_WAIT) || 30000;
 const browser = process.env.SAUCELABS_BROWSER || 'chrome';
 const defaultSauceOptions = {
-  username: process.env.SAUCE_USERNAME || 'bala.ganesan',
-  accessKey: process.env.SAUCE_ACCESS_KEY || '28a3edaf-fa52-46bd-b6a9-2bd6f37f5a44',
+  username: process.env.SAUCE_USERNAME,
+  accessKey: process.env.SAUCE_ACCESS_KEY,
   tunnelIdentifier: process.env.TUNNEL_IDENTIFIER || 'reformtunnel',
   acceptSslCerts: true,
   tags: ['Adoption'],
