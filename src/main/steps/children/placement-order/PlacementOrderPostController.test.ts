@@ -56,7 +56,12 @@ describe('PlacementOrderPostController', () => {
         req.locals.api.triggerEvent.mockResolvedValue({
           selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
           placementOrders: [
-            { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER' },
+            {
+              placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+              placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
+              placementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
+              otherPlacementOrderType: 'MOCK_PLACEMENT_OTHER_ORDER_TYPE',
+            },
           ],
         });
       });
@@ -65,7 +70,12 @@ describe('PlacementOrderPostController', () => {
         await controller.post(req, res);
         expect(req.session.errors).toEqual([]);
         expect(req.session.userCase.placementOrders).toEqual([
-          { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER' },
+          {
+            placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+            placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
+            placementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
+            otherPlacementOrderType: 'MOCK_PLACEMENT_OTHER_ORDER_TYPE',
+          },
         ]);
         expect(req.session.save).toHaveBeenCalled();
       });
@@ -141,7 +151,12 @@ describe('PlacementOrderPostController', () => {
       req.locals.api.triggerEvent.mockResolvedValue({
         selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_NUMBER',
         placementOrders: [
-          { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER' },
+          {
+            placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+            placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
+            placementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
+            otherPlacementOrderType: 'MOCK_PLACEMENT_OTHER_ORDER_TYPE',
+          },
         ],
       });
     });
@@ -150,7 +165,12 @@ describe('PlacementOrderPostController', () => {
       await controller.post(req, res);
       expect(req.session.errors).toEqual([]);
       expect(req.session.userCase.placementOrders).toEqual([
-        { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER' },
+        {
+          placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+          placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
+          placementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
+          otherPlacementOrderType: 'MOCK_PLACEMENT_OTHER_ORDER_TYPE',
+        },
       ]);
       expect(req.session.save).toHaveBeenCalled();
     });
