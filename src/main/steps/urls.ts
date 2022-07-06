@@ -158,6 +158,8 @@ export const ACCESSIBILITY_STATEMENT: PageLink = '/accessibility-statement';
 export const TERMS_AND_CONDITIONS: PageLink = '/terms-and-conditions';
 export const CONTACT_US: PageLink = '/contact-us';
 
+export const SAVE_AS_DRAFT: PageLink = '/save-as-draft';
+
 /*********************************** LA PORTAL URLS ***********************************/
 export const LA_PORTAL = '/la-portal';
 export const LA_PORTAL_KBA_CASE_REF = '/la-portal/kba-case-ref';
