@@ -33,7 +33,7 @@ module.exports = {
     await I.retry(3).click(this.fields.selectedPlacementOrderType);
     await I.retry(3).click('Save and continue');
     await I.wait(2);
-    await I.retry(3).waitForText('What is the serial or case number on the placement order?');
+    await I.retry(3).waitForText('What is the serial or case number on the order?');
     await I.retry(3).fillField(this.fields.placementOrderNumber, childDetailsPlacementOrder.placementOrderNumber);
     await I.retry(3).click('Save and continue');
     await I.wait(2);
