@@ -9,7 +9,7 @@ module.exports = {
     placementOrderDateYear: 'input[id$="placementOrderDate-year"]',
     addAnotherPlacementOrder: 'input[id$="addAnotherPlacementOrder"]',
     addAnotherPlacementOrderNo: 'input[id$="addAnotherPlacementOrder-2"]',
-    placementOrderType: 'input[id$="placementOrderType"]',
+    selectedPlacementOrderType: 'input[id$="selectedPlacementOrderType"]',
   },
 
   async childDetailsPlacementOrderSection() {
@@ -30,7 +30,7 @@ module.exports = {
     await I.retry(3).click('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText('What type of order is it?');
-    await I.retry(3).click(this.fields.placementOrderType);
+    await I.retry(3).click(this.fields.selectedPlacementOrderType);
     await I.retry(3).click('Save and continue');
     await I.wait(2);
     await I.retry(3).waitForText('What is the serial or case number on the placement order?');
