@@ -6,8 +6,13 @@ import { areDateFieldsFilledIn, isDateInputInvalid, isFutureDate } from '../../.
 import { CommonContent } from '../../../steps/common/common.content';
 
 const en = ({ userCase }: CommonContent) => {
+  const placementOrder = userCase?.placementOrders?.find(
+    item => item.placementOrderId === userCase.selectedPlacementOrderId
+  );
   const label =
-    userCase?.placementOrders?.length === 0 ? 'What date is on the placement order?' : 'What date is on the order?';
+    placementOrder?.placementOrderType === undefined
+      ? 'What date is on the placement order?'
+      : 'What date is on the order?';
   return {
     label,
     section: "The child's details",

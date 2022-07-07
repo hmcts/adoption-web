@@ -9,7 +9,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: "The child's details",
-  label: 'What date is on the order?',
+  label: 'What date is on the placement order?',
   hint: 'For example, 31 3 2020',
   errors: {
     placementOrderDate: {
