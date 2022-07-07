@@ -142,15 +142,15 @@ const setupConfig = {
     chrome: {
       browsers: getBrowserConfig('chrome'),
     },
-    firefox: {
-      browsers: getBrowserConfig('firefox'),
-    },
-    safari: {
-      browsers: getBrowserConfig('safari'),
-    },
-    safari: {
-      browsers: getBrowserConfig('webkit'),
-    },
+    // firefox: {
+    //   browsers: getBrowserConfig('firefox'),
+    // },
+    // safari: {
+    //   browsers: getBrowserConfig('safari'),
+    // },
+    // safari: {
+    //   browsers: getBrowserConfig('webkit'),
+    // },
   },
   name: 'Adoption FrontEnd Cross-Browser Tests',
 };
