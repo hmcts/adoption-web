@@ -25,7 +25,6 @@ export const getChildrenPlacementOrderStatus = (userCase: CaseWithId): SectionSt
       return (
         (index === 0 || item.placementOrderType) &&
         item.placementOrderNumber &&
-        item.placementOrderCourt &&
         !isDateInputInvalid(item.placementOrderDate as CaseDate) &&
         !isFutureDate(item.placementOrderDate as CaseDate)
       );
