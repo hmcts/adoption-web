@@ -231,19 +231,19 @@ export const getSiblingStatus = (userCase: CaseWithId): SectionStatus => {
 };
 
 export const getUploadDocumentStatus = (userCase: CaseWithId): SectionStatus => {
-  const { applicant1UploadedFiles, applicant1CannotUpload, applicant1CannotUploadDocuments } = userCase;
-  if (applicant1UploadedFiles && applicant1UploadedFiles.length > 0 && !applicant1CannotUpload) {
+  const { laUploadedFiles, laCannotUpload, laCannotUploadDocuments } = userCase;
+  if (laUploadedFiles && laUploadedFiles.length > 0 && !laCannotUpload) {
     return SectionStatus.COMPLETED;
   }
 
-  if (applicant1UploadedFiles && applicant1UploadedFiles.length > 0 && applicant1CannotUpload) {
-    if (applicant1CannotUploadDocuments && applicant1CannotUploadDocuments.length > 0) {
+  if (laUploadedFiles && laUploadedFiles.length > 0 && laCannotUpload) {
+    if (laCannotUploadDocuments && laCannotUploadDocuments.length > 0) {
       return SectionStatus.COMPLETED;
     }
     return SectionStatus.IN_PROGRESS;
   }
 
-  if (applicant1CannotUpload && applicant1CannotUploadDocuments && applicant1CannotUploadDocuments.length > 0) {
+  if (laCannotUpload && laCannotUploadDocuments && laCannotUploadDocuments.length > 0) {
     return SectionStatus.COMPLETED;
   }
 
