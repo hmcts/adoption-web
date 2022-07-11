@@ -138,6 +138,7 @@ export const BIRTH_FATHER_OCCUPATION: PageLink = `${BIRTH_FATHER}/occupation`;
 
 export const REVIEW_PAY_SUBMIT: PageLink = '/review-pay-submit';
 export const CHECK_ANSWERS_URL: PageLink = `${REVIEW_PAY_SUBMIT}/check-your-answers`;
+export const CONFIRMATION_PAGE: PageLink = `${REVIEW_PAY_SUBMIT}/confirmation`;
 export const PAY_YOUR_FEE: PageLink = `${REVIEW_PAY_SUBMIT}/payment/pay-your-fee`;
 export const PAYMENT_CALLBACK_URL: PageLink = `${REVIEW_PAY_SUBMIT}/payment/payment-callback`;
 
@@ -220,3 +221,9 @@ export const LA_PORTAL_PRIVACY_POLICY: PageLink = `${LA_PORTAL}/privacy-policy`;
 export const LA_PORTAL_ACCESSIBILITY_STATEMENT: PageLink = `${LA_PORTAL}/accessibility-statement`;
 export const LA_PORTAL_TERMS_AND_CONDITIONS: PageLink = `${LA_PORTAL}/terms-and-conditions`;
 export const LA_PORTAL_CONTACT_US: PageLink = `${LA_PORTAL}/contact-us`;
+
+export const LA_PORTAL_REVIEW_PAY_SUBMIT: PageLink = `${LA_PORTAL}${REVIEW_PAY_SUBMIT}`;
+export const LA_PORTAL_CHECK_ANSWERS_URL: PageLink = `${LA_PORTAL}${REVIEW_PAY_SUBMIT}/check-your-answers`;
+export const LA_PORTAL_CONFIRMATION_PAGE: PageLink = `${LA_PORTAL}${REVIEW_PAY_SUBMIT}/confirmation`;
+export const LA_PORTAL_PAY_YOUR_FEE: PageLink = `${LA_PORTAL}${REVIEW_PAY_SUBMIT}/payment/pay-your-fee`;
+export const LA_PORTAL_PAYMENT_CALLBACK_URL: PageLink = `${LA_PORTAL}${REVIEW_PAY_SUBMIT}/payment/payment-callback`;

@@ -24,6 +24,7 @@ const enContent = {
     placementAndCourtOrders: 'Placement and court orders',
     siblingCourtOrders: 'Sibling court order details',
     uploadDocuments: 'Upload documents',
+    checkYourAnswers: 'Check your answers',
   },
 };
 
@@ -46,6 +47,7 @@ const cyContent = {
     placementAndCourtOrders: 'Gorchmynion llys a lleoli',
     siblingCourtOrders: 'Manylion gorchymyn llys brodyr/chwiorydd',
     uploadDocuments: 'Llwytho dogfennau',
+    checkYourAnswers: 'Check your answers (in welsh)',
   },
 };
 
@@ -97,6 +99,12 @@ describe('task-list > content', () => {
             },
             { id: 'sibling-court-order-details', text: 'Sibling court order details', status: 'COMPLETED', href: '' },
             { id: 'upload-documents', text: 'Upload documents', status: 'COMPLETED', href: '' },
+            {
+              id: 'check-your-answers',
+              text: 'Check your answers',
+              status: 'NOT_STARTED',
+              href: '/la-portal/review-pay-submit/check-your-answers',
+            },
           ],
         },
       ],
@@ -148,6 +156,12 @@ describe('task-list > content', () => {
             },
             { id: 'sibling-court-order-details', text: 'Sibling court order details', status: 'COMPLETED', href: '' },
             { id: 'upload-documents', text: 'Upload documents', status: 'NOT_STARTED', href: '' },
+            {
+              id: 'check-your-answers',
+              text: 'Check your answers',
+              status: 'CAN_NOT_START_YET',
+              href: '/la-portal/task-list',
+            },
           ],
         },
       ],

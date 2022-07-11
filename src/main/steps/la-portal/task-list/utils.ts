@@ -256,3 +256,30 @@ export const getUploadDocumentStatus = (userCase: CaseWithId): SectionStatus => 
 
   return SectionStatus.NOT_STARTED;
 };
+
+const getAllSectionStatuses = (userCase: CaseWithId): SectionStatus[] => {
+  return [
+    getChildrenPlacementOrderStatus(userCase),
+    getChildrenBirthCertificateStatus(userCase),
+    getAdoptionCertificateDetailsStatus(userCase),
+    getBirthFatherDetailsStatus(userCase),
+    getBirthMotherDetailsStatus(userCase),
+    getOtherParentStatus(userCase),
+    getSiblingStatus(userCase),
+  ];
+};
+
+export const getApplicationStatus = (userCase: CaseWithId): SectionStatus => {
+  const statuses = [...getAllSectionStatuses(userCase), getUploadDocumentStatus(userCase)];
+
+  if (statuses.every(status => status === SectionStatus.COMPLETED)) {
+    // if (statementOfTruthAndPaymentStatus(userCase) === SectionStatus.IN_PROGRESS) {
+    //   return SectionStatus.IN_PROGRESS;
+    // }
+    return SectionStatus.NOT_STARTED;
+  }
+
+  return SectionStatus.CAN_NOT_START_YET;
+
+  // return SectionStatus.NOT_STARTED;
+};
