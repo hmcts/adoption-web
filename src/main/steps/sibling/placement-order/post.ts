@@ -26,6 +26,7 @@ export default class SiblingPlacementOrderPostController extends PostController<
     if (formData['selectedSiblingPoType']) {
       siblingObject.siblingPoType = formData['selectedSiblingPoType'] as SiblingPOType;
       siblingObject.siblingPlacementOtherType = formData['selectedSiblingOtherPlacementOrderType'];
+      console.log('<<<<<POST Controller siblingPlacementOtherType>>>>>: ' + siblingObject.siblingPlacementOtherType);
     }
 
     this.filterErrorsForSaveAsDraft(req);
@@ -43,6 +44,7 @@ export default class SiblingPlacementOrderPostController extends PostController<
       },
       this.getEventName(req)
     );
+    console.log('<<<<<POST Controller siblings>>>>>: ' + JSON.stringify(req.session.userCase.siblings));
 
     super.checkReturnUrlAndRedirect(req, res, this.ALLOWED_RETURN_URLS);
   }
