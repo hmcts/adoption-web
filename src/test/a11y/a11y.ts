@@ -135,6 +135,7 @@ describe('Accessibility', () => {
     urls.PAYMENT_CALLBACK_URL,
     urls.EQUALITY,
     urls.DOCUMENT_MANAGER,
+    urls.LA_DOCUMENT_MANAGER,
     urls.UPLOAD_YOUR_DOCUMENTS,
     urls.LA_PORTAL,
     urls.LA_PORTAL_TASK_LIST,

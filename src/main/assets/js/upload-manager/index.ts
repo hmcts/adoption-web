@@ -4,7 +4,7 @@ import FileInput from '@uppy/file-input';
 import ProgressBar from '@uppy/progress-bar';
 import XHRUpload from '@uppy/xhr-upload';
 
-import { DOCUMENT_MANAGER } from '../../../steps/urls';
+import { DOCUMENT_MANAGER, LA_DOCUMENT_MANAGER } from '../../../steps/urls';
 import { getById, hidden, qs } from '../selectors';
 
 import { FileUploadEvents } from './FileUploadEvents';
@@ -15,7 +15,7 @@ import '@uppy/drop-target/src/style.scss';
 import '@uppy/progress-bar/src/style.scss';
 
 const initUploadManager = (): void => {
-  const url = DOCUMENT_MANAGER;
+  const url = location.href.includes('la-portal') ? LA_DOCUMENT_MANAGER : DOCUMENT_MANAGER;
   const csrfToken = (getById('csrfToken') as HTMLInputElement)?.value;
   const locale = (getById('locale') as HTMLInputElement)?.value;
   const csrfQuery = `?_csrf=${csrfToken}`;
