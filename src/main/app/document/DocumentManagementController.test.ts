@@ -1,6 +1,6 @@
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
-import { PAY_YOUR_FEE, UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
+import { LA_PORTAL_UPLOAD_YOUR_DOCUMENTS, PAY_YOUR_FEE, UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
 import { CITIZEN_UPDATE, DocumentType, State } from '../case/definition';
 
 import { DocumentManagerController } from './DocumentManagementController';
@@ -448,7 +448,7 @@ describe('DocumentManagerController', () => {
           field1: 'laDocumentsUploaded',
           field2: 'laUploadedFiles',
         },
-        redirectUrl: UPLOAD_YOUR_DOCUMENTS,
+        redirectUrl: LA_PORTAL_UPLOAD_YOUR_DOCUMENTS,
       },
     ])(
       "redirects if browser doesn't accept JSON/has JavaScript disabled - %o",
@@ -509,7 +509,7 @@ describe('DocumentManagerController', () => {
       {
         isApplicant2: false,
         state: State.Draft,
-        redirectUrl: UPLOAD_YOUR_DOCUMENTS,
+        redirectUrl: LA_PORTAL_UPLOAD_YOUR_DOCUMENTS,
       },
     ])('redirects if no files were uploaded & JavaScript is disabled - %o', async ({ state, redirectUrl }) => {
       const req = mockRequest({
@@ -532,7 +532,7 @@ describe('DocumentManagerController', () => {
       {
         isApplicant2: false,
         state: State.Draft,
-        redirectUrl: UPLOAD_YOUR_DOCUMENTS,
+        redirectUrl: LA_PORTAL_UPLOAD_YOUR_DOCUMENTS,
       },
     ])('redirects if deleting & JavaScript is disabled - %o', async ({ state, redirectUrl }) => {
       const req = mockRequest({
@@ -563,7 +563,7 @@ describe('DocumentManagerController', () => {
           field1: 'laDocumentsUploaded',
           field2: 'laUploadedFiles',
         },
-        redirectUrl: UPLOAD_YOUR_DOCUMENTS,
+        redirectUrl: LA_PORTAL_UPLOAD_YOUR_DOCUMENTS,
       },
     ])('deletes an existing file - %o', async ({ state, uploadFields, redirectUrl }) => {
       const req = mockRequest({
@@ -623,7 +623,7 @@ describe('DocumentManagerController', () => {
           field1: 'laDocumentsUploaded',
           field2: 'laUploadedFiles',
         },
-        redirectUrl: UPLOAD_YOUR_DOCUMENTS,
+        redirectUrl: LA_PORTAL_UPLOAD_YOUR_DOCUMENTS,
       },
     ])(
       "redirects if browser doesn't accept JSON/has JavaScript disabled - %o",
@@ -658,7 +658,7 @@ describe('DocumentManagerController', () => {
       {
         isApplicant2: false,
         state: State.Draft,
-        redirectUrl: UPLOAD_YOUR_DOCUMENTS,
+        redirectUrl: LA_PORTAL_UPLOAD_YOUR_DOCUMENTS,
       },
     ])("redirects if file to deletes doesn't exist - %o", async ({ state, redirectUrl }) => {
       const req = mockRequest({

@@ -26,19 +26,6 @@ export const fromApiApplicant2 = (data: Partial<CaseData>): Partial<Case> => ({
 });
 
 export const fromApiLa = (data: Partial<CaseData>): Partial<Case> => {
-  console.log(data);
-  console.log('------------');
-  console.log({
-    laUploadedFiles:
-      data.laDocumentsUploaded?.map(file => ({
-        id: `${file.id}`,
-        name: `${file.value.documentFileName}`,
-      })) || [],
-    laDocumentsUploaded: data.laDocumentsUploaded,
-    laCannotUpload: data.laCannotUpload === YesOrNo.YES ? Checkbox.Checked : Checkbox.Unchecked,
-    laCannotUploadDocuments: data.laCannotUploadSupportingDocument,
-  });
-
   return {
     laUploadedFiles:
       data.laDocumentsUploaded?.map(file => ({

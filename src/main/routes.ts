@@ -37,9 +37,6 @@ export class Routes {
       const files = fs.readdirSync(`${step.stepDir}`);
 
       const getControllerFileName = files.find(item => /get/i.test(item) && !/test/i.test(item));
-      if (step.url.startsWith('/la-portal')) {
-        console.log(step);
-      }
       const getController = getControllerFileName
         ? require(`${step.stepDir}/${getControllerFileName}`).default
         : GetController;
