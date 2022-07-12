@@ -49,6 +49,11 @@ export default class SiblingGetController extends GetController {
       );
     }
 
+    const changeSibling = req.session.userCase?.siblings?.find(
+      item => item.siblingId === req.session.userCase.selectedSiblingId
+    );
+    req.session.userCase.selectedSiblingOtherPlacementOrderType = changeSibling?.siblingPlacementOtherType;
+
     const callback = redirect
       ? undefined
       : () => {
@@ -72,11 +77,6 @@ export default class SiblingGetController extends GetController {
     );
     req.session.userCase.selectedSiblingRelation = changeSibling?.siblingRelation;
     req.session.userCase.selectedSiblingPoType = changeSibling?.siblingPoType;
-    req.session.userCase.selectedSiblingOtherPlacementOrderType = changeSibling?.siblingPlacementOtherType;
-    console.log(
-      '<<<<<<<<<<<SiblingGetController>>>>>>>selectedSiblingOtherPlacementOrderType: ' +
-        req.session.userCase.selectedSiblingOtherPlacementOrderType
-    );
 
     this.parseAndSetReturnUrl(req);
     delete req.query.change;

@@ -34,10 +34,6 @@ export default class SiblingPlacementOrderGetController extends GetController {
     );
     req.session.userCase.selectedSiblingPoType = changeSibling?.siblingPoType;
     req.session.userCase.selectedSiblingOtherPlacementOrderType = changeSibling?.siblingPlacementOtherType;
-    console.log(
-      '<<<<<<<<<<<GET ontroller>>>>>>>>>selectedSiblingOtherPlacementOrderType: ' +
-        req.session.userCase.selectedSiblingOtherPlacementOrderType
-    );
 
     const callback = redirect ? undefined : () => super.get(req, res);
 
