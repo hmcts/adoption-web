@@ -24,8 +24,8 @@ export class DocumentManagerController {
     return new DocumentManagementClient(config.get('services.documentManagement.url'), getServiceAuthToken(), user);
   }
 
-  public async post(req: AppRequest, res: Response): Promise<void> {
-    if (![State.Draft].includes(req.session.userCase.state)) {
+  public async post(req: AppRequest, res: Response, documentInput?: DocumentInput): Promise<void> {
+    if (![State.Draft].includes(req.session.userCase.state) && (!documentInput || !documentInput.skipDraftCheck)) {
       throw new Error('Cannot upload new documents as case is not in Draft state');
     }
 
@@ -47,7 +47,7 @@ export class DocumentManagerController {
     const newUploads: ListValue<Partial<AdoptionDocument> | null>[] = filesCreated.map(file => ({
       id: generateUuid(),
       value: {
-        documentComment: 'Uploaded by applicant',
+        documentComment: documentInput ? documentInput.documentComment : 'Uploaded by applicant',
         documentFileName: file.originalDocumentName,
         documentLink: {
           document_url: file._links.self.href,
@@ -57,7 +57,7 @@ export class DocumentManagerController {
       },
     }));
 
-    const documentsKey = 'applicant1DocumentsUploaded';
+    const documentsKey = documentInput ? documentInput.documentsUploadedKey : 'applicant1DocumentsUploaded';
     const updatedDocumentsUploaded = newUploads.concat(req.session.userCase[documentsKey] || []);
 
     req.session.userCase = await req.locals.api.triggerEvent(
@@ -75,12 +75,16 @@ export class DocumentManagerController {
     });
   }
 
-  public async delete(req: AppRequest<Partial<CaseWithId>>, res: Response): Promise<void> {
-    const documentsUploadedKey = 'applicant1DocumentsUploaded';
+  public async delete(
+    req: AppRequest<Partial<CaseWithId>>,
+    res: Response,
+    documentInput?: DocumentInput
+  ): Promise<void> {
+    const documentsUploadedKey = documentInput ? documentInput.documentsUploadedKey : 'applicant1DocumentsUploaded';
     const documentsUploaded =
       (req.session.userCase[documentsUploadedKey] as ListValue<Partial<AdoptionDocument> | null>[]) ?? [];
 
-    if (![State.Draft].includes(req.session.userCase.state)) {
+    if (![State.Draft].includes(req.session.userCase.state) && (!documentInput || !documentInput.skipDraftCheck)) {
       throw new Error('Cannot delete documents as case is not in Draft state');
     }
 
@@ -111,81 +115,21 @@ export class DocumentManagerController {
   }
 
   public async postLa(req: AppRequest, res: Response): Promise<void> {
-    if (!req.files?.length) {
-      if (req.headers.accept?.includes('application/json')) {
-        throw new Error('No files were uploaded');
-      } else {
-        return res.redirect(UPLOAD_YOUR_DOCUMENTS);
-      }
-    }
-
-    const documentManagementClient = this.getDocumentManagementClient(req.session.user);
-
-    const filesCreated = await documentManagementClient.create({
-      files: req.files,
-      classification: Classification.Public,
-    });
-
-    const newUploads: ListValue<Partial<AdoptionDocument> | null>[] = filesCreated.map(file => ({
-      id: generateUuid(),
-      value: {
-        documentComment: 'Uploaded by LA',
-        documentFileName: file.originalDocumentName,
-        documentLink: {
-          document_url: file._links.self.href,
-          document_filename: file.originalDocumentName,
-          document_binary_url: file._links.binary.href,
-        },
-      },
-    }));
-
-    const documentsKey = 'laDocumentsUploaded';
-    const updatedDocumentsUploaded = newUploads.concat(req.session.userCase[documentsKey] || []);
-
-    req.session.userCase = await req.locals.api.triggerEvent(
-      req.session.userCase.id,
-      { [documentsKey]: updatedDocumentsUploaded },
-      CITIZEN_UPDATE
-    );
-
-    req.session.save(() => {
-      if (req.headers.accept?.includes('application/json')) {
-        res.json(newUploads.map(file => ({ id: file.id, name: file.value?.documentFileName })));
-      } else {
-        res.redirect(UPLOAD_YOUR_DOCUMENTS);
-      }
-    });
+    const documentInput = {
+      documentsUploadedKey: 'laDocumentsUploaded',
+      documentComment: 'Uploaded by LA',
+      skipDraftCheck: true,
+    };
+    await this.post(req, res, documentInput);
   }
 
   public async deleteLa(req: AppRequest<Partial<CaseWithId>>, res: Response): Promise<void> {
-    const documentsUploadedKey = 'laDocumentsUploaded';
-    const documentsUploaded =
-      (req.session.userCase[documentsUploadedKey] as ListValue<Partial<AdoptionDocument> | null>[]) ?? [];
-
-    const documentIndexToDelete = parseInt(req.params.index, 10);
-    const documentToDelete = documentsUploaded[documentIndexToDelete];
-    if (!documentToDelete?.value?.documentLink?.document_url) {
-      return res.redirect(UPLOAD_YOUR_DOCUMENTS);
-    }
-    const documentUrlToDelete = documentToDelete.value.documentLink.document_url;
-
-    documentsUploaded[documentIndexToDelete].value = null;
-
-    req.session.userCase = await req.locals.api.triggerEvent(
-      req.session.userCase.id,
-      { [documentsUploadedKey]: documentsUploaded },
-      CITIZEN_UPDATE
-    );
-
-    const documentManagementClient = this.getDocumentManagementClient(req.session.user);
-    await documentManagementClient.delete({ url: documentUrlToDelete });
-
-    req.session.save(err => {
-      if (err) {
-        throw err;
-      }
-      return res.redirect(UPLOAD_YOUR_DOCUMENTS);
-    });
+    const documentInput = {
+      documentsUploadedKey: 'laDocumentsUploaded',
+      documentComment: 'Uploaded by LA',
+      skipDraftCheck: true,
+    };
+    await this.delete(req, res, documentInput);
   }
 
   public async get(req: AppRequest<Partial<CaseWithId>>, res: Response): Promise<void> {
@@ -223,4 +167,10 @@ export class DocumentManagerController {
       return res.redirect(PAY_YOUR_FEE);
     });
   }
+}
+
+export interface DocumentInput {
+  documentsUploadedKey: string;
+  documentComment: string;
+  skipDraftCheck: boolean;
 }
