@@ -207,6 +207,7 @@ export const LA_PORTAL_OTHER_PARENT_FIND_ADDRESS: PageLink = `${LA_PORTAL}${OTHE
 export const LA_PORTAL_OTHER_PARENT_SELECT_ADDRESS: PageLink = `${LA_PORTAL}${OTHER_PARENT}/address/select`;
 export const LA_PORTAL_OTHER_PARENT_MANUAL_ADDRESS: PageLink = `${LA_PORTAL}${OTHER_PARENT}/address/manual`;
 export const LA_PORTAL_OTHER_PARENT_INTERNATIONAL_ADDRESS: PageLink = `${LA_PORTAL}${OTHER_PARENT}/address/international`;
+export const LA_PORTAL_OTHER_PARENT_LAST_ADDRESS_CONFIRMED: PageLink = `${LA_PORTAL}${OTHER_PARENT}/last-address-confirmed`;
 
 export const LA_PORTAL_SIBLING_EXISTS: PageLink = `${LA_PORTAL}${SIBLING}/exists`;
 export const LA_PORTAL_SIBLING_RELATION: PageLink = `${LA_PORTAL}${SIBLING}/relation`;
@@ -215,3 +216,9 @@ export const LA_PORTAL_SIBLING_ORDER_CASE_NUMBER: PageLink = `${LA_PORTAL}${SIBL
 export const LA_PORTAL_SIBLING_ORDER_SUMMARY: PageLink = `${LA_PORTAL}${SIBLING}/summary`;
 export const LA_PORTAL_SIBLING_ORDER_CHECK_YOUR_ANSWERS: PageLink = `${LA_PORTAL}${SIBLING}/placement-order-check-your-answers`;
 export const LA_PORTAL_SIBLING_REMOVE_PLACEMENT_ORDER: PageLink = `${LA_PORTAL}${SIBLING}/remove-placement-order`;
+
+export const LA_PORTAL_COOKIES_PAGE: PageLink = `${LA_PORTAL}/cookies`;
+export const LA_PORTAL_PRIVACY_POLICY: PageLink = `${LA_PORTAL}/privacy-policy`;
+export const LA_PORTAL_ACCESSIBILITY_STATEMENT: PageLink = `${LA_PORTAL}/accessibility-statement`;
+export const LA_PORTAL_TERMS_AND_CONDITIONS: PageLink = `${LA_PORTAL}/terms-and-conditions`;
+export const LA_PORTAL_CONTACT_US: PageLink = `${LA_PORTAL}/contact-us`;
