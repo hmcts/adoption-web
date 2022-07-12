@@ -30,6 +30,7 @@ describe('PlacementOrderPostController', () => {
         userCase: {
           placementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }],
           selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+          selectedPlacementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
         },
         save: jest.fn(done => done()),
       },
@@ -50,13 +51,22 @@ describe('PlacementOrderPostController', () => {
 
     describe('and when there is a selectedPlacementOrderId', () => {
       beforeEach(() => {
-        mockGetParsedBody.mockReturnValue({ placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER' });
+        mockGetParsedBody.mockReturnValue({
+          placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
+          selectedPlacementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
+        });
         mockGetErrors.mockReturnValue([]);
         controller = new PlacementOrderPostController({});
         req.locals.api.triggerEvent.mockResolvedValue({
           selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+          selectedPlacementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
           placementOrders: [
-            { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER' },
+            {
+              placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+              placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
+              placementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
+              otherPlacementOrderType: 'MOCK_PLACEMENT_OTHER_ORDER_TYPE',
+            },
           ],
         });
       });
@@ -65,7 +75,27 @@ describe('PlacementOrderPostController', () => {
         await controller.post(req, res);
         expect(req.session.errors).toEqual([]);
         expect(req.session.userCase.placementOrders).toEqual([
-          { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER' },
+          {
+            placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+            placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
+            placementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
+            otherPlacementOrderType: 'MOCK_PLACEMENT_OTHER_ORDER_TYPE',
+          },
+        ]);
+        expect(req.session.save).toHaveBeenCalled();
+      });
+
+      test('should set the formData selectedPlacementOrderType in userCase placementOrders', async () => {
+        req.selectedOtherPlacementOrderType = 'MOCK_PLACEMENT_ORDER_TYPE';
+        await controller.post(req, res);
+        expect(req.session.errors).toEqual([]);
+        expect(req.session.userCase.placementOrders).toEqual([
+          {
+            placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+            placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
+            placementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
+            otherPlacementOrderType: 'MOCK_PLACEMENT_OTHER_ORDER_TYPE',
+          },
         ]);
         expect(req.session.save).toHaveBeenCalled();
       });
@@ -141,7 +171,12 @@ describe('PlacementOrderPostController', () => {
       req.locals.api.triggerEvent.mockResolvedValue({
         selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_NUMBER',
         placementOrders: [
-          { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER' },
+          {
+            placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+            placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
+            placementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
+            otherPlacementOrderType: 'MOCK_PLACEMENT_OTHER_ORDER_TYPE',
+          },
         ],
       });
     });
@@ -150,7 +185,12 @@ describe('PlacementOrderPostController', () => {
       await controller.post(req, res);
       expect(req.session.errors).toEqual([]);
       expect(req.session.userCase.placementOrders).toEqual([
-        { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER' },
+        {
+          placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+          placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
+          placementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
+          otherPlacementOrderType: 'MOCK_PLACEMENT_OTHER_ORDER_TYPE',
+        },
       ]);
       expect(req.session.save).toHaveBeenCalled();
     });
