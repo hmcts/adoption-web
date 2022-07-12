@@ -71,6 +71,8 @@ export default class SiblingGetController extends GetController {
       item => item.siblingId === req.session.userCase.selectedSiblingId
     );
     req.session.userCase.selectedSiblingRelation = changeSibling?.siblingRelation;
+    req.session.userCase.selectedSiblingPoType = changeSibling?.siblingPoType;
+    req.session.userCase.selectedSiblingOtherPlacementOrderType = changeSibling?.siblingPlacementOtherType;
     this.parseAndSetReturnUrl(req);
     delete req.query.change;
     req.url = req.url.substring(0, req.url.indexOf('?'));

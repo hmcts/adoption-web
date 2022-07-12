@@ -16,10 +16,10 @@ const en = () => ({
   other: 'Other',
   placementOtherType: 'Add a different type of order',
   errors: {
-    siblingPoType: {
+    selectedSiblingPoType: {
       required: 'Please select an answer',
     },
-    placementOtherType: {
+    selectedSiblingOtherPlacementOrderType: {
       required: 'Enter an order type',
     },
   },
@@ -37,10 +37,10 @@ const cy: typeof en = () => ({
   other: 'Other (in welsh)',
   placementOtherType: 'Add a different type of order (in welsh)',
   errors: {
-    siblingPoType: {
+    selectedSiblingPoType: {
       required: 'Please select an answer (in welsh)',
     },
-    placementOtherType: {
+    selectedSiblingOtherPlacementOrderType: {
       required: 'Enter an order type',
     },
   },
@@ -50,7 +50,7 @@ export const form: FormContent = {
   fields: userCase => {
     const sibling = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
     return {
-      siblingPoType: {
+      selectedSiblingPoType: {
         type: 'radios',
         classes: 'govuk-radios',
         label: l => l.label,
@@ -65,7 +65,7 @@ export const form: FormContent = {
             label: l => l.other,
             value: SiblingPOType.OTHER,
             subFields: {
-              placementOtherType: {
+              selectedSiblingOtherPlacementOrderType: {
                 type: 'text',
                 label: l => l.placementOtherType,
                 labelSize: null,

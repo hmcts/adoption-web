@@ -64,7 +64,6 @@ describe('childrenSequence', () => {
 
     expect(childrenSequence[13].url).toBe('/children/other-adoption-agency');
     expect(childrenSequence[13].showInSection).toBe('aboutChildren');
-    expect(childrenSequence[13].getNextStep({ hasAnotherAdopAgencyOrLA: YesOrNo.NO })).toBe('/task-list');
     expect(childrenSequence[13].getNextStep({ hasAnotherAdopAgencyOrLA: YesOrNo.YES })).toBe(
       '/children/adoption-agency'
     );

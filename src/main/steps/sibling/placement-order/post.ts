@@ -1,7 +1,7 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
-import { Sibling } from '../../../app/case/definition';
+import { Sibling, SiblingPOType } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
@@ -23,6 +23,11 @@ export default class SiblingPlacementOrderPostController extends PostController<
     ) as Sibling;
 
     Object.assign(siblingObject, formData);
+    console.log(req.session.userCase.siblings);
+    if (formData['selectedSiblingPoType']) {
+      siblingObject.siblingPoType = formData['selectedSiblingPoType'] as SiblingPOType;
+      siblingObject.siblingPlacementOtherType = formData['selectedSiblingOtherPlacementOrderType'];
+    }
 
     this.filterErrorsForSaveAsDraft(req);
 

@@ -451,6 +451,8 @@ export interface CaseData {
   hasSiblingNotSureReason: string;
   addAnotherSiblingPlacementOrder: YesOrNo;
   selectedSiblingId: string;
+  selectedSiblingRelation: string;
+  selectedSiblingPoType: string;
 
   applicant1StatementOfTruth: YesOrNo;
   applicant2StatementOfTruth: YesOrNo;
@@ -754,6 +756,7 @@ export interface Sibling {
   siblingRelation?: SiblingRelationships;
   siblingPoType?: SiblingPOType;
   siblingPoNumber?: string;
+  siblingPlacementOtherType?: string;
 }
 
 export interface SocialWorker {
@@ -1321,12 +1324,12 @@ export const enum ServicePaymentMethod {
 }
 
 export const enum SiblingRelationships {
-  SISTER = 'sisterRelation',
-  HALF_SISTER = 'halfSisterRelation',
-  STEP_SISTER = 'stepSisterRelation',
-  BROTHER = 'brotherRelation',
-  HALF_BROTHER = 'halfBrotherRelation',
-  STEP_BROTHER = 'stepBrotherRelation',
+  SISTER = 'sister',
+  HALF_SISTER = 'halfSister',
+  STEP_SISTER = 'stepSister',
+  BROTHER = 'brother',
+  HALF_BROTHER = 'halfBrother',
+  STEP_BROTHER = 'stepBrother',
 }
 
 export const enum SiblingPOType {

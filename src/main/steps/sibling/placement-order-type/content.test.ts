@@ -20,10 +20,10 @@ const enContent = {
   other: 'Other',
   placementOtherType: 'Add a different type of order',
   errors: {
-    siblingPoType: {
+    selectedSiblingPoType: {
       required: 'Please select an answer',
     },
-    placementOtherType: {
+    selectedSiblingOtherPlacementOrderType: {
       required: 'Enter an order type',
     },
   },
@@ -41,10 +41,10 @@ const cyContent = {
   other: 'Other (in welsh)',
   placementOtherType: 'Add a different type of order (in welsh)',
   errors: {
-    siblingPoType: {
+    selectedSiblingPoType: {
       required: 'Please select an answer (in welsh)',
     },
-    placementOtherType: {
+    selectedSiblingOtherPlacementOrderType: {
       required: 'Enter an order type',
     },
   },
@@ -77,7 +77,7 @@ describe('sibling > placement-order-type > content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const field = fields.siblingPoType as FormOptions;
+    const field = fields.selectedSiblingPoType as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
     expect((field.label as Function)(generatedContent)).toBe(enContent.label);
@@ -98,7 +98,7 @@ describe('sibling > placement-order-type > content', () => {
     expect(field.attributes).toEqual({ spellcheck: false });
     expect(field.validator).toBe(isFieldFilledIn);
 
-    const placementOrderOtherType = field.values[6].subFields!.placementOtherType;
+    const placementOrderOtherType = field.values[6].subFields!.selectedSiblingOtherPlacementOrderType;
     expect(placementOrderOtherType.type).toBe('text');
     expect((placementOrderOtherType.label as Function)(generatedContent)).toBe(enContent.placementOtherType);
     expect(placementOrderOtherType.labelSize).toBe(null);
