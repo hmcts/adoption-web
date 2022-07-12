@@ -128,8 +128,8 @@ const en = (content: CommonContent) => {
     sections: [
       applicationSummaryList(enContent, userCase),
       childrenSummaryList(enContent, userCase),
-      childSocialWorkerSummaryList(cyContent, userCase),
-      applicantSocialWorkerSummaryList(cyContent, userCase),
+      childSocialWorkerSummaryList(enContent, userCase),
+      applicantSocialWorkerSummaryList(enContent, userCase),
       localAuthoritySummaryList(enContent, userCase),
       adoptionAgencySummaryList(enContent, userCase),
       familyCourtSummaryList(enContent, userCase),
