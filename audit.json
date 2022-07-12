@@ -42,5 +42,9 @@
   "10021_X-Content-Type-Options Header Missing_https://adoption-web.aat.platform.hmcts.net/robots.txt_GET": "ignore",
   "10021_X-Content-Type-Options Header Missing_https://adoption-web.aat.platform.hmcts.net/sitemap.xml_GET": "ignore",
   "10010_Cookie No HttpOnly Flag_https://adoption-web.aat.platform.hmcts.net/login_GET": "ignore",
-  "90033_Loosely Scoped Cookie_https://adoption-web.aat.platform.hmcts.net/login_GET": "ignore"
+  "90033_Loosely Scoped Cookie_https://adoption-web.aat.platform.hmcts.net/login_GET": "ignore",
+  "40035_Hidden File Found_https://adoption-web.aat.platform.hmcts.net/._darcs_GET": "ignore",
+  "40035_Hidden File Found_https://adoption-web.aat.platform.hmcts.net/.bzr_GET": "ignore",
+  "40035_Hidden File Found_https://adoption-web.aat.platform.hmcts.net/.hg_GET": "ignore",
+  "40035_Hidden File Found_https://adoption-web.aat.platform.hmcts.net/BitKeeper_GET": "ignore"
 }
