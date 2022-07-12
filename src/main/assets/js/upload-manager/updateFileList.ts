@@ -8,7 +8,8 @@ const filesUploadedEl = getById('filesUploaded');
 const content = JSON.parse(getById('uploadContent')?.textContent || '{}');
 
 export const updateFileList = (uploadedFiles: UploadedFiles): void => {
-  const url = location.href.includes('la-portal') ? LA_DOCUMENT_MANAGER : DOCUMENT_MANAGER;
+  const isLaPortal = location.href.includes('la-portal');
+  const url = isLaPortal ? LA_DOCUMENT_MANAGER : DOCUMENT_MANAGER;
   if (noFilesUploadedEl) {
     if (uploadedFiles.length) {
       noFilesUploadedEl.classList.add(hidden);
@@ -32,7 +33,7 @@ export const updateFileList = (uploadedFiles: UploadedFiles): void => {
       );
       filenameEl.textContent = file.name;
 
-      if (content.isAmendableStates || content.isClarificationAmendableState) {
+      if (content.isAmendableStates || content.isClarificationAmendableState || isLaPortal) {
         const deleteEl = document.createElement('a');
         deleteEl.classList.add('govuk-link--no-visited-state');
         deleteEl.href = `${url}/delete/${i++}`;

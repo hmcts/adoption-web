@@ -581,7 +581,7 @@ describe('utils', () => {
       { data: { ...mockUserCase }, expected: 'COMPLETED' },
       {
         data: { ...mockUserCase, laCannotUpload: Checkbox.Checked },
-        expected: 'IN_PROGRESS',
+        expected: 'COMPLETED',
       },
       {
         data: {
