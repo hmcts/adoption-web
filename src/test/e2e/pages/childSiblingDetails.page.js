@@ -3,10 +3,10 @@ const { I } = inject();
 module.exports = {
   fields: {
     hasSiblings: 'input[id$="hasSiblings"]',
-    siblingRelation: 'input[id$="siblingRelation"]',
-    siblingRelation2: 'input[id$="siblingRelation-2"]',
-    siblingPoType: 'input[id$="siblingPoType"]',
-    siblingPoType2: 'input[id$="siblingPoType-2"]',
+    siblingRelation: 'input[id$="selectedSiblingRelation"]',
+    siblingRelation2: 'input[id$="selectedSiblingRelation-2"]',
+    siblingPoType: 'input[id$="selectedSiblingPoType"]',
+    siblingPoType2: 'input[id$="selectedSiblingPoType-2"]',
     siblingPoNumber: 'input[id$="siblingPoNumber"]',
     addAnotherSiblingPlacementOrderNo: 'input[id$="addAnotherSiblingPlacementOrder-2"]',
     addAnotherSiblingPlacementOrderYES: 'input[id$="addAnotherSiblingPlacementOrder"]',
