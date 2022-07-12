@@ -3,8 +3,8 @@ import { YesOrNo } from '../../app/case/definition';
 import { applicant2Sequence } from './applicant2Sequence';
 
 describe('applicant2Sequence', () => {
-  test('should contain 5 entries in applicant 2 screen sequence', () => {
-    expect(applicant2Sequence).toHaveLength(9);
+  test('should contain 10 entries in applicant 2 screen sequence', () => {
+    expect(applicant2Sequence).toHaveLength(10);
 
     expect(applicant2Sequence[0].url).toBe('/applicant2/full-name');
     expect(applicant2Sequence[0].showInSection).toBe('aboutApplicant2');
@@ -45,6 +45,10 @@ describe('applicant2Sequence', () => {
 
     expect(applicant2Sequence[8].url).toBe('/applicant2/contact-details');
     expect(applicant2Sequence[8].showInSection).toBe('aboutApplicant2');
-    expect(applicant2Sequence[8].getNextStep({})).toBe('/task-list');
+    expect(applicant2Sequence[8].getNextStep({})).toBe('/applicant2/language-preference');
+
+    expect(applicant2Sequence[9].url).toBe('/applicant2/language-preference');
+    expect(applicant2Sequence[9].showInSection).toBe('aboutApplicant2');
+    expect(applicant2Sequence[9].getNextStep({})).toBe('/task-list');
   });
 });

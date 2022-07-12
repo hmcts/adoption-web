@@ -3,7 +3,7 @@ import advancedFormat from 'dayjs/plugin/advancedFormat';
 import { invert } from 'lodash';
 
 import { Case, Checkbox, formFieldsToCaseMapping, formatCase } from './case';
-import { CaseData, ListValue, PlacementOrder, YesOrNo } from './definition';
+import { CaseData, YesOrNo } from './definition';
 import {
   fromApiApplicant1 as uploadedFilesFromApiApplicant1,
   fromApiApplicant2 as uploadedFilesFromApiApplicant2,
@@ -30,13 +30,22 @@ const fields: FromApiConverters = {
     applicant2AdditionalNames: data.applicant2AdditionalNames?.map(item => ({ id: item.id, ...item.value })),
   }),
   birthMotherOtherNationalities: data => ({
-    birthMotherAdditionalNationalities: data.birthMotherOtherNationalities?.map(item => item.value.country),
+    birthMotherAdditionalNationalities: data.birthMotherOtherNationalities?.map(item => ({
+      id: item.id,
+      country: item.value.country,
+    })),
   }),
   birthFatherOtherNationalities: data => ({
-    birthFatherAdditionalNationalities: data.birthFatherOtherNationalities?.map(item => item.value.country),
+    birthFatherAdditionalNationalities: data.birthFatherOtherNationalities?.map(item => ({
+      id: item.id,
+      country: item.value.country,
+    })),
   }),
   childrenAdditionalNationalities: data => ({
-    childrenAdditionalNationalities: data.childrenAdditionalNationalities?.map(item => item.value.country),
+    childrenAdditionalNationalities: data.childrenAdditionalNationalities?.map(item => ({
+      id: item.id,
+      country: item.value.country,
+    })),
   }),
   placementOrders: data => ({
     placementOrders: data.placementOrders?.map(item => ({
@@ -47,16 +56,6 @@ const fields: FromApiConverters = {
   siblings: data => ({
     siblings: data.siblings?.map(sibling => ({
       ...sibling.value,
-      siblingPlacementOrders: ((sibling.value.siblingPlacementOrders || []) as ListValue<PlacementOrder>[]).map(
-        placementOrder => ({
-          ...placementOrder.value,
-        })
-      ),
-    })),
-  }),
-  adopAgencyOrLAs: data => ({
-    adopAgencyOrLAs: data.adopAgencyOrLAs?.map(item => ({
-      ...item.value,
     })),
   }),
   dateChildMovedIn: data => ({
@@ -64,6 +63,15 @@ const fields: FromApiConverters = {
   }),
   applicant1DateOfBirth: data => ({
     applicant1DateOfBirth: fromApiDate(data.applicant1DateOfBirth),
+  }),
+  birthMotherLastAddressDate: data => ({
+    birthMotherLastAddressDate: fromApiDate(data.birthMotherLastAddressDate),
+  }),
+  birthFatherLastAddressDate: data => ({
+    birthFatherLastAddressDate: fromApiDate(data.birthFatherLastAddressDate),
+  }),
+  otherParentLastAddressDate: data => ({
+    otherParentLastAddressDate: fromApiDate(data.otherParentLastAddressDate),
   }),
   applicant2DateOfBirth: data => ({
     applicant2DateOfBirth: fromApiDate(data.applicant2DateOfBirth),
@@ -83,9 +91,6 @@ const fields: FromApiConverters = {
   applicant2CannotUploadSupportingDocument: uploadedFilesFromApiApplicant2,
   dateSubmitted: data => ({
     dateSubmitted: new Date(data.dateSubmitted as string),
-  }),
-  dueDate: data => ({
-    dueDate: dayjs(data.dueDate).format('D MMMM YYYY'),
   }),
 };
 

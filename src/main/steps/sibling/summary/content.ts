@@ -1,8 +1,7 @@
-import { PlacementOrder, YesOrNo } from '../../../app/case/definition';
+import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
-import { SIBLING_NAME, SIBLING_ORDER_SUMMARY } from '../../../steps/urls';
 import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 import { placementOrderListItems } from './placement-order-summary';
@@ -16,9 +15,8 @@ const en = content => {
     incomplete: 'incomplete',
     change: 'Change',
     remove: 'Remove',
-    changeName: 'Change name',
-    label: 'Do you want to add another order for a sibling or half-sibling?',
-    hint: 'For example, a care order or supervision order. Your adoption agency or social worker can provide this information for you.',
+    label: 'Do you want to add another order?',
+    hint: 'For example, a care order or supervision order.',
     errors: {
       addAnotherSiblingPlacementOrder: {
         required: 'Please select an answer',
@@ -27,16 +25,7 @@ const en = content => {
   };
   return {
     ...enContent,
-    siblings: content.userCase.siblings?.map(item => ({
-      siblingFirstName: item.siblingFirstName,
-      siblingLastNames: item.siblingLastNames,
-      changeSiblingNameUrl: `${SIBLING_NAME}?change=${item.siblingId}&returnUrl=${SIBLING_ORDER_SUMMARY}`,
-      placementOrderListItems: placementOrderListItems(
-        item.siblingId,
-        item.siblingPlacementOrders as PlacementOrder[],
-        enContent
-      ),
-    })),
+    siblings: placementOrderListItems(content.userCase.siblings, enContent),
   };
 };
 
@@ -49,9 +38,8 @@ const cy: typeof en = content => {
     incomplete: 'anghyflawn',
     change: 'Newid',
     remove: 'Dileu',
-    changeName: 'Newid enw',
-    label: 'A ydych eisiau ychwanegu gorchymyn arall ar gyfer brawd/chwaer neu hanner frawd/hanner chwaer?',
-    hint: 'Er enghraifft, gorchymyn gofal neu neuchymyn goruchwylio. Gall eich gweithiwr cymdeithasol neu’ch asiantaeth fabwysiadau ddarparu’r wybodaeth hon ichi.',
+    label: 'Do you want to add another order? (in welsh)',
+    hint: 'For example, a care order or supervision order. (in welsh)',
     errors: {
       addAnotherSiblingPlacementOrder: {
         required: 'Dewiswch ateb os gwelwch yn dda',
@@ -60,16 +48,7 @@ const cy: typeof en = content => {
   };
   return {
     ...cyContent,
-    siblings: content.userCase.siblings?.map(item => ({
-      siblingFirstName: item.siblingFirstName,
-      siblingLastNames: item.siblingLastNames,
-      changeSiblingNameUrl: `${SIBLING_NAME}?change=${item.siblingId}&returnUrl=${SIBLING_ORDER_SUMMARY}`,
-      placementOrderListItems: placementOrderListItems(
-        item.siblingId,
-        item.siblingPlacementOrders as PlacementOrder[],
-        cyContent
-      ),
-    })),
+    siblings: placementOrderListItems(content.userCase.siblings, cyContent),
   };
 };
 

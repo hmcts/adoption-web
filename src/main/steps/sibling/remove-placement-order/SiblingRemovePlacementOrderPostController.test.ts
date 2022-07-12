@@ -32,13 +32,12 @@ describe('SiblingRemovePlacementOrderPostController', () => {
           siblings: [
             {
               siblingId: 'MOCK_SIBLING_ID',
-              siblingFirstName: '',
-              siblingLastName: '',
-              siblingPlacementOrders: [{ placementOrderId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID' }],
+              siblingRelation: '',
+              siblingPoType: '',
+              siblingPoNumber: '',
             },
           ],
           selectedSiblingId: 'MOCK_SIBLING_ID',
-          selectedSiblingPoId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID',
         },
         save: jest.fn(done => done()),
       },
@@ -48,7 +47,7 @@ describe('SiblingRemovePlacementOrderPostController', () => {
   });
 
   describe('when there are no form errors', () => {
-    describe('and when there is a selectedSiblingId and selectedSiblingPoId', () => {
+    describe('and when there is a selectedSiblingId', () => {
       beforeEach(() => {
         mockGetParsedBody.mockReturnValue({ confirm: YesOrNo.YES });
         mockGetErrors.mockReturnValue([]);
@@ -64,7 +63,7 @@ describe('SiblingRemovePlacementOrderPostController', () => {
         expect(req.session.errors).toEqual([]);
         expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(
           'MOCK_ID',
-          { selectedSiblingId: undefined, selectedSiblingPoId: undefined, siblings: [] },
+          { selectedSiblingId: undefined, siblings: [] },
           'citizen-update-application'
         );
         expect(req.session.save).toHaveBeenCalled();
@@ -77,7 +76,7 @@ describe('SiblingRemovePlacementOrderPostController', () => {
         expect(res.redirect).toHaveBeenCalledWith('/MOCK_ENDPOINT');
       });
 
-      test('should update the siblings array and save when there are more than one placement orders', async () => {
+      test('should update the siblings array and save when there are more than one sibling placement orders', async () => {
         req = mockRequest({
           session: {
             userCase: {
@@ -85,14 +84,12 @@ describe('SiblingRemovePlacementOrderPostController', () => {
               siblings: [
                 {
                   siblingId: 'MOCK_SIBLING_ID',
-                  siblingPlacementOrders: [
-                    { placementOrderId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID' },
-                    { placementOrderId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID2' },
-                  ],
+                },
+                {
+                  siblingId: 'MOCK_SIBLING_ID2',
                 },
               ],
               selectedSiblingId: 'MOCK_SIBLING_ID',
-              selectedSiblingPoId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID',
             },
             save: jest.fn(done => done()),
           },
@@ -103,11 +100,9 @@ describe('SiblingRemovePlacementOrderPostController', () => {
           'MOCK_ID',
           {
             selectedSiblingId: undefined,
-            selectedSiblingPoId: undefined,
             siblings: [
               {
-                siblingId: 'MOCK_SIBLING_ID',
-                siblingPlacementOrders: [{ placementOrderId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID2' }],
+                siblingId: 'MOCK_SIBLING_ID2',
               },
             ],
           },

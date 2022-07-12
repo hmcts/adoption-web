@@ -10,8 +10,10 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: 'Sibling details',
-  label: 'Does the child have any siblings or half siblings?',
-  hint: "Ask the adoption agency or social worker if you're not sure.",
+  label: 'Does the child have any siblings or half siblings with court orders?',
+  hint: 'For example, a care order or supervision order.',
+  conditionalText:
+    '<label class="govuk-label">You will be asked to provide each sibling court order individually.</label>',
   errors: {
     hasSiblings: {
       required: 'Please answer the question',
@@ -21,8 +23,10 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
-  label: 'A oes gan y plentyn frodyr/chwiorydd neu hanner frodyr/chwiorydd?',
-  hint: 'Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
+  label: 'Does the child have any siblings or half siblings with court orders? (in welsh)',
+  hint: 'For example, a care order or supervision order. (in welsh)',
+  conditionalText:
+    '<label class="govuk-label">You will be asked to provide each sibling court order individually.</label> (in welsh)',
   errors: {
     hasSiblings: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
@@ -60,6 +64,7 @@ describe('sibling > exists > content', () => {
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesNoNotsure.YES);
+    expect((field.values[0].conditionalText as Function)(generatedContent)).toBe(enContent.conditionalText);
     expect((field.values[1].label as Function)(commonContent)).toBe(commonContent.no);
     expect(field.values[1].value).toBe(YesNoNotsure.NO);
     expect((field.values[2].label as Function)(commonContent)).toBe(commonContent.notSure);

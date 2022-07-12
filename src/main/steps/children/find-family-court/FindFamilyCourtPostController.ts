@@ -31,7 +31,7 @@ export default class FindFamilyCourtPostController extends PostController<AnyObj
     const findFamilyCourt = req.session.userCase.findFamilyCourt;
     const familyCourtName =
       findFamilyCourt === YesOrNo.YES
-        ? req.session.userCase?.placementOrders![0]?.placementOrderCourt
+        ? req.session.userCase?.placementOrderCourt
         : req.session.userCase.familyCourtName;
     const familyCourtEmailId = getCourtEmailId(familyCourtName as string);
     logger.info(`CaseId: ${req.session.userCase.hyphenatedCaseRef} has familyCourtEmailId: ${familyCourtEmailId}`);

@@ -7,7 +7,6 @@ const en = () => ({
   section: "Birth mother's details",
   label: "Do you have the birth mother's last known address?",
   moreDetails: "Give a reason why the address is not known, for example 'no fixed address'.",
-  hint: "Ask the adoption agency or social worker if you're not sure.",
   errors: {
     birthMotherAddressKnown: {
       required: 'Please select an answer',
@@ -23,7 +22,6 @@ const cy: typeof en = () => ({
   section: 'Manylion y fam fiolegol',
   label: 'A oes gennych cyfeiriad olaf hysbys y fam fiolegol?',
   moreDetails: 'Rhowch reswm pam bod y cyfeiriad yn anhysbys, er enghraifft ‘dim cyfeiriad parhaol’.',
-  hint: 'Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
   errors: {
     birthMotherAddressKnown: {
       required: 'Dewiswch ateb os gwelwch yn dda',

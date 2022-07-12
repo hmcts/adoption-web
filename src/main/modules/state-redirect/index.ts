@@ -4,7 +4,7 @@ import { Application, NextFunction, Response } from 'express';
 
 import { ApplyingWith, SectionStatus, State } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
-import { getApplicationStatus } from '../../steps/task-list/utils';
+import { getApplicationStatus } from '../../steps/application/task-list/utils';
 import {
   ACCESSIBILITY_STATEMENT,
   APPLICANT_2,
@@ -13,6 +13,7 @@ import {
   CONTACT_US,
   COOKIES_PAGE,
   DOWNLOAD_APPLICATION_SUMMARY,
+  LA_PORTAL,
   PAYMENT_CALLBACK_URL,
   PAY_AND_SUBMIT,
   PAY_YOUR_FEE,
@@ -20,13 +21,21 @@ import {
   PageLink,
   TASK_LIST_URL,
   TERMS_AND_CONDITIONS,
+  TIMED_OUT_URL,
 } from '../../steps/urls';
 
 /**
  * Adds the state redirect middleware to redirect when application is in certain states
  */
 export class StateRedirectMiddleware {
-  FOOTER_LINKS = [COOKIES_PAGE, PRIVACY_POLICY, ACCESSIBILITY_STATEMENT, TERMS_AND_CONDITIONS, CONTACT_US];
+  FOOTER_LINKS = [
+    COOKIES_PAGE,
+    PRIVACY_POLICY,
+    ACCESSIBILITY_STATEMENT,
+    TERMS_AND_CONDITIONS,
+    CONTACT_US,
+    TIMED_OUT_URL,
+  ];
   public enableFor(app: Application): void {
     const { errorHandler } = app.locals;
     dayjs.extend(customParseFormat);
@@ -51,7 +60,8 @@ export class StateRedirectMiddleware {
         if (
           [State.Submitted, State.AwaitingDocuments, State.AwaitingHWFDecision].includes(req.session.userCase?.state) &&
           req.path !== APPLICATION_SUBMITTED &&
-          req.path !== DOWNLOAD_APPLICATION_SUMMARY
+          req.path !== DOWNLOAD_APPLICATION_SUMMARY &&
+          !req.path.startsWith(LA_PORTAL)
         ) {
           return res.redirect(APPLICATION_SUBMITTED);
         }

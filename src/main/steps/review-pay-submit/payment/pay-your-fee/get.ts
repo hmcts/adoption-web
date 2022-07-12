@@ -12,22 +12,22 @@ import { PaymentClient } from '../../../../app/payment/PaymentClient';
 import { PaymentModel } from '../../../../app/payment/PaymentModel';
 import { APPLICATION_SUBMITTED, PAYMENT_CALLBACK_URL } from '../../../urls';
 
-const logger = Logger.getLogger('PayYourFeeGetController');
+const logger = Logger.getLogger('pay-your-fee');
 
 @autobind
 export default class PayYourFeeGetController extends GetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
     if (!req.session.userCase.applicationFeeOrderSummary?.PaymentTotal) {
-      const fee = await getFee(req.locals.logger);
+      const feeResponse = await getFee(req.locals.logger);
 
-      if (fee) {
-        const total = fee.FeeAmount;
+      if (feeResponse) {
+        const total = feeResponse.FeeAmount;
         req.session.userCase = await this.save(
           req,
           {
             applicationFeeOrderSummary: {
               PaymentReference: '',
-              Fees: [{ id: generateUuid(), value: { ...fee } }],
+              Fees: [{ id: generateUuid(), value: { ...feeResponse } }],
               PaymentTotal: `${total}`,
             },
           },
@@ -48,29 +48,31 @@ export default class PayYourFeeGetController extends GetController {
 
     const applicationFeeOrderSummary = req.session.userCase.applicationFeeOrderSummary;
     const fee = applicationFeeOrderSummary?.Fees[0]?.value;
+    const caseId = req.session.userCase.id;
 
+    logger.info(`caseId=${caseId} state=${req.session.userCase.state}`);
     if (req.session.userCase.state !== State.AwaitingPayment) {
-      logger.info(`${req.session.userCase.state} state and triggering CITIZEN_SUBMIT event.`);
       req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, {}, CITIZEN_SUBMIT);
     }
 
     const payments = new PaymentModel(req.session.userCase?.payments);
-    if (payments.isPaymentInProgress()) {
-      logger.info('payment is in progress and redirecting to PAYMENT_CALLBACK_URL url.');
-      const callback = () => res.redirect(PAYMENT_CALLBACK_URL);
-      return super.saveSessionAndRedirect(req, res, callback);
+    const isPaymentInProgress = payments.isPaymentInProgress();
+    logger.info(`caseId=${caseId} isPaymentInProgress=${isPaymentInProgress}`);
+    if (isPaymentInProgress) {
+      return super.saveSessionAndRedirect(req, res, () => res.redirect(PAYMENT_CALLBACK_URL));
     }
 
+    logger.info(
+      `caseId=${caseId} paymentTotal=${
+        payments.paymentTotal
+      } applicationFeeOrderSummary=${+applicationFeeOrderSummary.PaymentTotal}`
+    );
     if (payments.paymentTotal === +applicationFeeOrderSummary.PaymentTotal) {
-      logger.info(
-        'payments.paymentTotal equals to applicationFeeOrderSummary.PaymentTotal and redirecting to APPLICATION_SUBMITTED url.'
-      );
-      const callback = () => res.redirect(APPLICATION_SUBMITTED);
-      return super.saveSessionAndRedirect(req, res, callback);
+      return super.saveSessionAndRedirect(req, res, () => res.redirect(APPLICATION_SUBMITTED));
     }
 
     const client = this.getPaymentClient(req, res);
-    logger.info('calling PAYMENT_CALLBACK_URL');
+    logger.info(`caseId=${caseId} Generating govpay link`);
     const payment = await client.create();
     const now = new Date().toISOString();
 
@@ -85,11 +87,11 @@ export default class PayYourFeeGetController extends GetController {
       transactionId: payment.external_reference,
     });
 
-    logger.info('calling req.locals.api.addPayment API');
+    logger.info(`caseId=${caseId} saving payment response in ccd`);
     req.session.userCase = await req.locals.api.addPayment(req.session.userCase?.id, payments.list);
 
+    logger.info(`caseId=${caseId} Redirecting user to govpay`);
     const callback = () => res.redirect(payment._links.next_url.href);
-    logger.info('Redirecting to payment._links.next_url.href');
     super.saveSessionAndRedirect(req, res, callback);
   }
 

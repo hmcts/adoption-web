@@ -1,25 +1,35 @@
 import { CaseWithId } from '../../../app/case/case';
-import { PlacementOrder } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { SIBLING_ORDER_CASE_NUMBER, SIBLING_ORDER_CHECK_YOUR_ANSWERS, SIBLING_ORDER_TYPE } from '../../../steps/urls';
+import {
+  SIBLING_ORDER_CASE_NUMBER,
+  SIBLING_ORDER_CHECK_YOUR_ANSWERS,
+  SIBLING_ORDER_TYPE,
+  SIBLING_RELATION,
+} from '../../../steps/urls';
 
 const placementOrderListItems = (userCase: Partial<CaseWithId>, content) => {
   const sibling = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
-  const order = sibling?.siblingPlacementOrders?.find(item => {
-    if ((item as PlacementOrder).placementOrderId === userCase.selectedSiblingPoId) {
-      return true;
-    }
-  });
 
-  const queryParams = `?change=${sibling?.siblingId}/${
-    (order as PlacementOrder).placementOrderId
-  }&returnUrl=${SIBLING_ORDER_CHECK_YOUR_ANSWERS}`;
+  const queryParams = `?change=${sibling?.siblingId}&returnUrl=${SIBLING_ORDER_CHECK_YOUR_ANSWERS}`;
 
   return [
     {
+      key: { text: content.relationship },
+      value: { text: sibling?.siblingRelation },
+      actions: {
+        items: [
+          {
+            href: `${SIBLING_RELATION}${queryParams}`,
+            text: content.change,
+            visuallyHiddenText: content.relationship,
+          },
+        ],
+      },
+    },
+    {
       key: { text: content.orderType },
-      value: { text: (order as PlacementOrder).placementOrderType },
+      value: { text: sibling?.siblingPoType },
       actions: {
         items: [
           {
@@ -32,7 +42,7 @@ const placementOrderListItems = (userCase: Partial<CaseWithId>, content) => {
     },
     {
       key: { text: content.orderNumber },
-      value: { text: (order as PlacementOrder).placementOrderNumber },
+      value: { text: sibling?.siblingPoNumber },
       actions: {
         items: [
           {
@@ -48,19 +58,15 @@ const placementOrderListItems = (userCase: Partial<CaseWithId>, content) => {
 
 const getTitle = (userCase: Partial<CaseWithId>, content): string => {
   const sibling = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
-  const placementOrder = (sibling?.siblingPlacementOrders as PlacementOrder[])?.find(
-    item => item.placementOrderId === userCase.selectedSiblingPoId
-  );
 
-  return `${placementOrder?.placementOrderType || ''} ${content.for} ${sibling?.siblingFirstName || ''} ${
-    sibling?.siblingLastNames || ''
-  }`;
+  return `${sibling?.siblingPoType || ''} ${content.for} ${sibling?.siblingRelation || ''}`;
 };
 
 const en = content => {
   const enContent = {
     section: 'Sibling details',
     for: 'for',
+    relationship: 'Relationship',
     orderType: 'Type of order',
     orderNumber: 'Order case or serial number',
     change: 'Change',
@@ -78,6 +84,7 @@ const cy: typeof en = content => {
   const cyContent = {
     section: 'Manylion y brawd/chwaer',
     for: 'ar gyfer',
+    relationship: 'Relationship (in welsh)',
     orderType: 'Math o neuchymyn',
     orderNumber: 'Rhif cyfresol neu rif yr achos ar y gorchymyn',
     change: 'Newid',

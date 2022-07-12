@@ -57,6 +57,7 @@ export const form: FormContent = {
   saveAsDraft: {
     text: '',
   },
+  hideContactHelpSection: true,
 };
 
 const languages = {

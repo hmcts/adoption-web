@@ -18,6 +18,7 @@ export const enum ValidationError {
   INVALID = 'invalid',
   NOT_UPLOADED = 'notUploaded',
   FILE_COUNT_LIMIT_EXCEEDED = 'maxTenFileUpload',
+  ADD_BUTTON_NOT_CLICKED = 'addButtonNotClicked',
 }
 
 export const isFieldFilledIn: Validator = value => {
@@ -190,5 +191,11 @@ export const isAddressSelected: Validator = value => {
 export const isTextAreaValid: Validator = value => {
   if (value && (value as string).trim?.().length > 500) {
     return ValidationError.INVALID;
+  }
+};
+
+export const isGovUkEmail: Validator = value => {
+  if (!(value as string).split('@')[1].toLowerCase().endsWith('gov.uk')) {
+    return 'invalidGovUkEmail';
   }
 };

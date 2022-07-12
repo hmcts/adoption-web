@@ -10,8 +10,6 @@ jest.mock('../../../app/form/validation');
 const enContent = {
   section: "Birth mother's details",
   title: "What is the full name of the child's birth mother?",
-  line1:
-    "This will be on the child's full birth certificate. Ask the adoption agency or social worker if you're not sure.",
   errors: {
     birthMotherFirstNames: {
       required: 'Enter their first names',
@@ -25,8 +23,6 @@ const enContent = {
 const cyContent = {
   section: 'Manylion y fam fiolegol',
   title: 'Beth yw enw llawn mam fiolegol y plentyn?',
-  line1:
-    'Bydd y rhain ar dystysgrif geni llawn y plentyn. Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
   errors: {
     birthMotherFirstNames: {
       required: 'Nac ydwdwch eu henw(au) cyntaf',

@@ -15,12 +15,18 @@ services:
     systemUsername: 'dummy_user'
     systemPassword: 'dummy_password'
   case:
-    url: ''
+    url: 'http://ccd-data-store-api-adoption-cos-api-pr-249.service.core-compute-preview.internal'
   postcodeLookup:
     url: 'https://api.os.uk/search/places/v1'
     token: 'NEED TO INSERT SECRET'
   feeLookup:
     url: ''
+  location_api:
+    url: 'https://rd-location-ref-api-aat.service.core-compute-aat.internal'
+  familyPublicLawCourt:
+    code: 'ABA3'
+  adoptionCourt:
+    code: 'ABA4'
   documentManagement:
     url: ''
   payments:
@@ -32,6 +38,10 @@ services:
     port: 4000
     tokenKey: 'SERVICE_TOKEN_KEY'
     pcqEnabled: 'false'
+  pact:
+    url: 'https://pact-broker.platform.hmcts.net'
+    tag:
+    pactDirectory: 'pact/pacts'
 health:
   timeout: 5000
   deadline: 15000

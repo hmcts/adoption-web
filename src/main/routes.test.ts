@@ -12,42 +12,6 @@ jest.mock('./steps/error/error.controller', () => {
   };
 });
 
-const mockHomeGetController = jest.fn();
-jest.mock('./steps/home/get', () => {
-  return {
-    HomeGetController: jest.fn().mockImplementation(() => {
-      return { get: mockHomeGetController };
-    }),
-  };
-});
-
-const mockSaveAndSignOutGetController = jest.fn();
-jest.mock('./steps/save-sign-out/get', () => {
-  return {
-    SaveSignOutGetController: jest.fn().mockImplementation(() => {
-      return { get: mockSaveAndSignOutGetController };
-    }),
-  };
-});
-
-const mockTimedOutGetController = jest.fn();
-jest.mock('./steps/timed-out/get', () => {
-  return {
-    TimedOutGetController: jest.fn().mockImplementation(() => {
-      return { get: mockTimedOutGetController };
-    }),
-  };
-});
-
-const mockTaskListGetController = jest.fn();
-jest.mock('./steps/task-list/get', () => {
-  return {
-    TaskListGetController: jest.fn().mockImplementation(() => {
-      return { get: mockTaskListGetController };
-    }),
-  };
-});
-
 const mockKeepAliveController = jest.fn();
 jest.mock('./app/keepalive/KeepAliveController', () => {
   return {
@@ -75,11 +39,6 @@ describe('Routes', () => {
 
   test('should setup routes', () => {
     expect(appMock.get).toHaveBeenCalledWith('/csrf-token-error', mockCSRFTokenError);
-    expect(appMock.get).toHaveBeenCalledWith('/', mockHomeGetController);
-    expect(appMock.get).toHaveBeenCalledWith('/save-and-sign-out', mockSaveAndSignOutGetController);
-    expect(appMock.get).toHaveBeenCalledWith('/timed-out', mockTimedOutGetController);
-    expect(appMock.get).toHaveBeenCalledWith('/task-list', mockTaskListGetController);
-    expect(appMock.get).toHaveBeenCalledWith('/keep-alive', mockKeepAliveController);
     expect(appMock.use).toHaveBeenCalledWith(mockNotFound);
   });
 });

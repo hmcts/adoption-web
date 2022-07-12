@@ -60,6 +60,8 @@ export default class PlacementOrderGetController extends GetController {
       this.getEventName(req)
     );
 
+    req.session.userCase.selectedPlacementOrderType = placementOrder?.placementOrderType;
+    req.session.userCase.selectedOtherPlacementOrderType = placementOrder?.otherPlacementOrderType;
     const callback = redirect ? undefined : () => super.get(req, res);
 
     super.saveSessionAndRedirect(req, res, callback);

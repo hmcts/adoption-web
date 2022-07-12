@@ -10,10 +10,9 @@ jest.mock('../../../app/form/validation');
 const enContent = {
   section: 'Sibling details',
   label: 'What is the serial or case number on the order?',
-  hint: 'Ask your social worker or adoption agency if you are not sure where to find this.',
   errors: {
-    placementOrderNumber: {
-      required: 'Enter the serial or case number',
+    siblingPoNumber: {
+      required: 'Please answer the question',
     },
   },
 };
@@ -21,10 +20,9 @@ const enContent = {
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
   label: 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn?',
-  hint: 'Gofynnwch i’ch gweithiwr cymdeithasol, neu’ch asiantaeth fabwysiadu os nad ydych yn siŵr lle i ddod o hyd i hwn.',
   errors: {
-    placementOrderNumber: {
-      required: 'Nac ydwdwch y rhif cyfresol neu rif yr achos',
+    siblingPoNumber: {
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
 };
@@ -46,19 +44,25 @@ describe('sibling > placement-order-number > content', () => {
     languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
   });
 
-  test('should contain placementOrderNumber field', () => {
-    const generatedContent = generateContent(commonContent);
+  test('should contain siblingPoNumber field', () => {
+    const generatedContent = generateContent({
+      ...commonContent,
+      userCase: {
+        siblings: [{ siblingId: 'MOCK_ID', siblingPoNumber: 'MOCK_PLACEMENT_ORDER_NUMBER' }],
+        selectedSiblingId: 'MOCK_ID',
+      },
+    });
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const placementOrderNumberField = fields.placementOrderNumber as FormOptions;
-    expect(placementOrderNumberField.type).toBe('text');
-    expect(placementOrderNumberField.classes).toBe('govuk-label govuk-input--width-10');
-    expect((placementOrderNumberField.label as Function)(generatedContent)).toBe(enContent.label);
-    expect(((placementOrderNumberField as FormInput).hint as Function)(generatedContent)).toBe(enContent.hint);
-    expect(placementOrderNumberField.labelSize).toBe('l');
-    expect(placementOrderNumberField.attributes).toEqual({ spellcheck: false });
+    const siblingPoNumberField = fields.siblingPoNumber as FormOptions;
+    expect(siblingPoNumberField.type).toBe('text');
+    expect(siblingPoNumberField.classes).toBe('govuk-label govuk-input--width-10');
+    expect((siblingPoNumberField.label as Function)(generatedContent)).toBe(enContent.label);
+    expect(siblingPoNumberField.labelSize).toBe('l');
+    expect(siblingPoNumberField.attributes).toEqual({ spellcheck: false });
+    expect((siblingPoNumberField as FormInput).value).toBe('MOCK_PLACEMENT_ORDER_NUMBER');
 
-    expect(placementOrderNumberField.validator).toBe(isFieldFilledIn);
+    expect(siblingPoNumberField.validator).toBe(isFieldFilledIn);
   });
 
   test('should contain submit button', () => {

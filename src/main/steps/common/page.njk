@@ -20,33 +20,55 @@
 {% endblock %}
 
 {% block header %}
-  {% include "../cookie-banner/template.njk" %}
-  {{ govukHeader({
+  {% include "./cookie-banner.njk" %}
+  {% if laPortal == true %}
+    {{ govukHeader({
     containerClasses: "govuk-width-container",
     serviceName: serviceName,
-    serviceUrl: (globals.basePath if globals.basePath) + "/",
-    navigation: [
-      {
-        href: "/logout" if isLoggedIn else "/",
-        text: signOut if isLoggedIn else signIn
-      }
-    ]
-  }) }}
+    serviceUrl: (globals.basePath if globals.basePath) + "/la-portal/kba-case-ref",
+    homepageUrl: "/la-portal/kba-case-ref",
+    navigation: []
+    }) }}
+  {% else %}
+    {{ govukHeader({
+      containerClasses: "govuk-width-container",
+      serviceName: serviceName,
+      serviceUrl: (globals.basePath if globals.basePath) + "/",
+      navigation: [
+        {
+          href: "/logout" if isLoggedIn else "/",
+          text: signOut if isLoggedIn else signIn
+        }
+      ]
+    }) }}
+  {% endif %}
 {% endblock %}
 
 {% block pageTitle %}
   {{ serviceName }} - {{ title if title else label}} - {{ govUk }}
 {% endblock %}
 
+{# Feedback link will be used in both CUI and la-portal with exact same behaviour with dynamic page title as query param. #}
 {% set feedbackLink = feedback | replace("PAGE_TITLE", title if title else label) %}
 
 {% block beforeContent %}
-  {{ govukPhaseBanner({
-    tag: {
-      text: phase
-    },
-    html: feedbackLink + languageToggle
-  }) }}
+
+  {% if laPortal == true %}
+      {{ govukPhaseBanner({
+      tag: {
+        text: phase
+      },
+      html: feedbackLink
+      }) }}
+  {% else %}
+      {{ govukPhaseBanner({
+      tag: {
+        text: phase
+      },
+      html: feedbackLink + languageToggle
+      }) }}
+  {% endif %}
+
   {% block backLink %}
     <a href="#" class="govuk-back-link">{{ back }}</a>
   {% endblock %}
@@ -71,41 +93,72 @@
         {% endblock %}
       {% endif %}
 
-      {# TODO uncomment this once we have contact us content #}
-      {# {% block contact_us %}
-        {% include "./contact-us.njk" %}
-      {% endblock %} #}
+      {% if not getContent(form.hideContactHelpSection) %}
+        {% block contactUs %}
+          {% include "common/form/contactForHelp.njk"%}
+        {% endblock %}
+      {% endif %}
+
     </div>
   </div>
 {% endblock %}
 
 {% block footer %}
-  {{ govukFooter({
-    meta: {
-      items: [
-        {
-          href: "/cookies",
-          text: cookies
-        },
-        {
-          href: "/privacy-policy",
-          text: privacyPolicy
-        },
-        {
-          href: "/accessibility-statement",
-          text: accessibility
-        },
-        {
-          href: "/terms-and-conditions",
-          text: termsAndConditions
-        },
-        {
-          href: "/contact-us",
-          text: contactUs
+  {% if laPortal == true %}
+    {{ govukFooter({
+        meta: {
+          items: [
+            {
+              href: "/la-portal/cookies",
+              text: cookies
+            },
+            {
+              href: "/la-portal/privacy-policy",
+              text: privacyPolicy
+            },
+            {
+              href: "/la-portal/accessibility-statement",
+              text: accessibility
+            },
+            {
+              href: "/la-portal/terms-and-conditions",
+              text: termsAndConditions
+            },
+            {
+              href: "/la-portal/contact-us",
+              text: contactUs
+            }
+          ]
         }
-      ]
-    }
-  }) }}
+      }) }}
+  {% else %}
+    {{ govukFooter({
+        meta: {
+          items: [
+            {
+              href: "/cookies",
+              text: cookies
+            },
+            {
+              href: "/privacy-policy",
+              text: privacyPolicy
+            },
+            {
+              href: "/accessibility-statement",
+              text: accessibility
+            },
+            {
+              href: "/terms-and-conditions",
+              text: termsAndConditions
+            },
+            {
+              href: "/contact-us",
+              text: contactUs
+            }
+          ]
+        }
+      }) }}
+  {% endif %}
 {% endblock %}
 
 {% block bodyEnd %}

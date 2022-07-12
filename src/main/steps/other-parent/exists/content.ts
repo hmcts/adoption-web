@@ -7,7 +7,6 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 const en = () => ({
   section: SECTION,
   label: 'Is there another person who has parental responsibility for the child?',
-  hint: 'Apart from the birth mother and father. For example, a step parent.',
   one: 'Yes',
   two: 'No',
   errors: {
@@ -20,7 +19,6 @@ const en = () => ({
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
   label: 'A oes unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn?',
-  hint: 'Oni bai am y fam a’r tad biolegol. Er enghraifft, llys-riant.',
   one: 'Ydw',
   two: 'Nac ydw',
   errors: {

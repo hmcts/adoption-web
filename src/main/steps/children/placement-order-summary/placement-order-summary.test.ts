@@ -43,7 +43,7 @@ describe('placement-order-summary', () => {
           classes: 'summary-list-actions',
           items: [
             {
-              href: '/children/placement-order-check-your-answers?change=MOCK_ID',
+              href: '/la-portal/child/placement-order-check-your-answers?change=MOCK_ID',
               text: 'Change',
               visuallyHiddenText: 'Placement Order',
             },
@@ -60,12 +60,12 @@ describe('placement-order-summary', () => {
           classes: 'summary-list-actions',
           items: [
             {
-              href: '/children/placement-order-summary?remove=MOCK_ID2',
+              href: '/la-portal/child/placement-order-summary?remove=MOCK_ID2',
               text: 'Remove',
               visuallyHiddenText: 'MOCK_TYPE2',
             },
             {
-              href: '/children/placement-order-check-your-answers?change=MOCK_ID2',
+              href: '/la-portal/child/placement-order-check-your-answers?change=MOCK_ID2',
               text: 'Change',
               visuallyHiddenText: 'MOCK_TYPE2',
             },
@@ -79,12 +79,12 @@ describe('placement-order-summary', () => {
           classes: 'summary-list-actions',
           items: [
             {
-              href: '/children/placement-order-summary?remove=MOCK_ID3',
+              href: '/la-portal/child/placement-order-summary?remove=MOCK_ID3',
               text: 'Remove',
               visuallyHiddenText: 'MOCK_TYPE3',
             },
             {
-              href: '/children/placement-order-check-your-answers?change=MOCK_ID3',
+              href: '/la-portal/child/placement-order-check-your-answers?change=MOCK_ID3',
               text: 'Change',
               visuallyHiddenText: 'MOCK_TYPE3',
             },

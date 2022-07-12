@@ -18,6 +18,7 @@
     "fortifyScan": "./test/java/gradlew -p test/java fortifyScan",
     "test:coverage": "jest --coverage",
     "test:integration": "jest -c jest.integration.config.js",
+    "test:api": "jest -c jest.api.config.js",
     "test:a11y": "echo 'a11y tests will be executed after functional tests' && exit 0",
     "test:pa11y": "NODE_TLS_REJECT_UNAUTHORIZED=0 jest -c jest.a11y.config.js --maxWorkers 1",
     "sonar-scan": "sonar-scanner",
@@ -32,7 +33,7 @@
     "test:crossbrowser": "./bin/run-crossbrowser-tests.sh",
     "test:local": "codeceptjs run-multiple parallel",
     "test:pact": "jest -c jest.pact.config.js --runInBand",
-    "pact:publish": "pact-broker publish pact/pacts --consumer-app-version=0.0.1 --broker-base-url=https://pact-broker.platform.hmcts.net/",
+    "pact:publish": "NODE_ENV=test NODE_PATH=. LOG_LEVEL=error ts-node src/test/pact/publish/publish.ts",
     "test:pact:run-and-publish": "yarn test:pact && yarn pact:publish",
     "broker": "docker-compose -f broker-compose.yaml up -d",
     "broker:stop": "docker-compose -f broker-compose.yaml down"

@@ -18,8 +18,6 @@ const en = content => {
   options.push(...getAddressItems(addresses));
 
   return {
-    line1:
-      "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email.",
     postcode: 'Postcode',
     selectAddress: 'Select an address',
     cannotFindAddress: 'Or enter address manually',
@@ -48,8 +46,6 @@ const cy = content => {
   options.push(...getAddressItems(addresses));
 
   return {
-    line1:
-      'Byddwn yn anfon yr holl bapurau llys i’r cyfeiriad hwn oni bai eich bod yn ein cynghori eich bod yn hapus i’r gorchmynion llys gael eu cyflwyno arnoch trwy e-bost.',
     postcode: 'Cod post',
     selectAddress: 'Dewiswch gyfeiriad',
     cannotFindAddress: 'Neu nodwch y cyfeiriad â llaw',

@@ -1,17 +1,15 @@
 import { AnyObject } from '../controller/PostController';
 
 import {
+  AdditionalNationality,
   Adoption,
-  AdoptionAgencyOrLocalAuthority,
   AdoptionDocument,
   ApplicationType,
   ApplyingWith,
   CaseData,
   ContactDetails,
-  DateAsString,
   DocumentType,
   Gender,
-  JurisdictionConnections,
   LanguagePreference,
   ListValue,
   Nationality,
@@ -30,10 +28,6 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   otherApplicantRelation: 'otherApplicantRelation',
   dateChildMovedIn: 'dateChildMovedIn',
   applyingWith: 'applyingWith',
-  applicant1HelpPayingNeeded: 'applicant1HWFNeedHelp',
-  applicant1AlreadyAppliedForHelpPaying: 'applicant1HWFAppliedForFees',
-  applicant1HelpWithFeesRefNo: 'applicant1HWFReferenceNumber',
-  connections: 'jurisdictionConnections',
 
   applicant1FirstNames: 'applicant1FirstName',
   applicant1LastNames: 'applicant1LastName',
@@ -68,6 +62,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant2AddressSameAsApplicant1: 'applicant2AddressSameAsApplicant1',
   applicant2ContactDetails: 'applicant2ContactDetails',
   applicant2ContactDetailsConsent: 'applicant2ContactDetailsConsent',
+  applicant2LanguagePreference: 'applicant2LanguagePreference',
 
   childrenFirstName: 'childrenFirstName',
   childrenLastName: 'childrenLastName',
@@ -98,6 +93,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   birthMotherAddressPostcode: 'birthMotherAddressPostCode',
   birthMotherAddressCountry: 'birthMotherAddressCountry',
   birthMotherAddressNotKnownReason: 'birthMotherAddressNotKnownReason',
+  birthMotherLastAddressDate: 'birthMotherLastAddressDate',
 
   birthFatherNameOnCertificate: 'birthFatherNameOnCertificate',
   birthFatherFirstNames: 'birthFatherFirstName',
@@ -116,6 +112,8 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   birthFatherAddressPostcode: 'birthFatherAddressPostCode',
   birthFatherAddressCountry: 'birthFatherAddressCountry',
   birthFatherAddressNotKnownReason: 'birthFatherAddressNotKnownReason',
+  birthFatherLastAddressDate: 'birthFatherLastAddressDate',
+  birthFatherIdentityKnown: 'birthFatherIdentityKnown',
 
   otherParentFirstNames: 'otherParentFirstName',
   otherParentLastNames: 'otherParentLastName',
@@ -129,17 +127,39 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   otherParentAddressCountry: 'otherParentAddressCountry',
   otherParentAddressKnown: 'otherParentAddressKnown',
   otherParentAddressNotKnownReason: 'otherParentAddressNotKnownReason',
+  otherParentLastAddressDate: 'otherParentLastAddressDate',
 
-  socialWorkerName: 'socialWorkerName',
-  socialWorkerPhoneNumber: 'socialWorkerPhoneNumber',
-  socialWorkerEmail: 'socialWorkerEmail',
-  socialWorkerTeamEmail: 'socialWorkerTeamEmail',
+  childSocialWorkerName: 'childSocialWorkerName',
+  childSocialWorkerPhoneNumber: 'childSocialWorkerPhoneNumber',
+  childSocialWorkerEmail: 'childSocialWorkerEmail',
+  childLocalAuthority: 'childLocalAuthority',
+  childLocalAuthorityEmail: 'childLocalAuthorityEmail',
+
+  applicantSocialWorkerName: 'applicantSocialWorkerName',
+  applicantSocialWorkerPhoneNumber: 'applicantSocialWorkerPhoneNumber',
+  applicantSocialWorkerEmail: 'applicantSocialWorkerEmail',
+  applicantLocalAuthority: 'applicantLocalAuthority',
+  applicantLocalAuthorityEmail: 'applicantLocalAuthorityEmail',
+
   solicitorFirm: 'solicitorFirm',
   solicitorName: 'solicitorName',
   solicitorPhoneNumber: 'solicitorPhoneNumber',
   solicitorEmail: 'solicitorEmail',
   solicitorHelpingWithApplication: 'solicitorHelpingWithApplication',
-  adopAgencyOrLAs: 'adopAgencyOrLAs',
+
+  localAuthorityName: 'localAuthorityName',
+  localAuthorityContactName: 'localAuthorityContactName',
+  localAuthorityPhoneNumber: 'localAuthorityPhoneNumber',
+  localAuthorityContactEmail: 'localAuthorityContactEmail',
+
+  adopAgencyOrLaName: 'adopAgencyOrLaName',
+  adopAgencyOrLaContactName: 'adopAgencyOrLaContactName',
+  adopAgencyOrLaPhoneNumber: 'adopAgencyOrLaPhoneNumber',
+  adopAgencyAddressLine1: 'adopAgencyAddressLine1',
+  adopAgencyTown: 'adopAgencyTown',
+  adopAgencyPostcode: 'adopAgencyPostcode',
+  adopAgencyOrLaContactEmail: 'adopAgencyOrLaContactEmail',
+
   siblings: 'siblings',
   payments: 'applicationPayments',
 
@@ -150,26 +170,23 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   pcqId: 'pcqId',
 
   hasAnotherAdopAgencyOrLA: 'hasAnotherAdopAgencyOrLA',
-  selectedAdoptionAgencyId: 'selectedAdoptionAgencyId',
   hasSiblings: 'hasSiblings',
   hasSiblingNotSureReason: 'hasSiblingNotSureReason',
-  hasPoForSiblings: 'hasPoForSiblings',
-  hasPoForSiblingsNotSureReason: 'hasPoForSiblingsNotSureReason',
   addAnotherSiblingPlacementOrder: 'addAnotherSiblingPlacementOrder',
   selectedSiblingId: 'selectedSiblingId',
-  selectedSiblingPoId: 'selectedSiblingPoId',
 
-  applyForFinancialOrder: 'applicant1FinancialOrder',
   applicant1DocumentsUploaded: 'applicant1DocumentsUploaded',
   applicant2DocumentsUploaded: 'applicant2DocumentsUploaded',
   documentsGenerated: 'documentsGenerated',
   applicationFeeOrderSummary: 'applicationFeeOrderSummary',
   applicant1CannotUpload: 'applicant1CannotUpload',
 
+  placementOrderCourt: 'placementOrderCourt',
   findFamilyCourt: 'findFamilyCourt',
   familyCourtName: 'familyCourtName',
   familyCourtEmailId: 'familyCourtEmailId',
   hyphenatedCaseRef: 'hyphenatedCaseRef',
+  otherPlacementOrderType: 'otherPlacementOrderType',
 };
 
 export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data: InputFormat): OutputFormat {
@@ -232,13 +249,14 @@ export interface Case {
   applicant2AddressPostcode?: string;
   applicant2ContactDetails?: ContactDetails[];
   applicant2ContactDetailsConsent?: YesOrNo;
+  applicant2LanguagePreference?: LanguagePreference;
 
   /***** Children *****/
   childrenFirstName?: string;
   childrenLastName?: string;
   childrenDateOfBirth?: CaseDate;
   childrenNationality?: Nationality[];
-  childrenAdditionalNationalities?: string[];
+  childrenAdditionalNationalities?: AdditionalNationality[];
   childrenFirstNameAfterAdoption?: string;
   childrenLastNameAfterAdoption?: string;
   childrenSexAtBirth?: Gender;
@@ -246,6 +264,8 @@ export interface Case {
   addAnotherPlacementOrder?: YesOrNo;
   placementOrders?: PlacementOrder[];
   selectedPlacementOrderId?: string;
+  selectedPlacementOrderType?: string;
+  selectedOtherPlacementOrderType?: string;
 
   /***** Birth mother *****/
   birthMotherFirstNames?: string;
@@ -253,7 +273,7 @@ export interface Case {
   birthMotherStillAlive?: YesNoNotsure;
   birthMotherNotAliveReason?: string;
   birthMotherNationality?: string[];
-  birthMotherAdditionalNationalities?: string[];
+  birthMotherAdditionalNationalities?: AdditionalNationality[];
   birthMotherOccupation?: string;
   birthMotherAddressKnown?: YesOrNo;
   birthMotherSelectAddress?: string;
@@ -265,6 +285,7 @@ export interface Case {
   birthMotherAddressPostcode?: string;
   birthMotherAddressCountry?: string;
   birthMotherAddressNotKnownReason?: string;
+  birthMotherLastAddressDate?: CaseDate;
 
   /***** Birth Father *****/
   birthFatherNameOnCertificate?: string;
@@ -273,7 +294,7 @@ export interface Case {
   birthFatherStillAlive?: string;
   birthFatherUnsureAliveReason?: string;
   birthFatherNationality?: string[];
-  birthFatherAdditionalNationalities?: string[];
+  birthFatherAdditionalNationalities?: AdditionalNationality[];
   birthFatherOccupation?: string;
   birthFatherAddressKnown?: YesOrNo;
   birthFatherSelectAddress?: string;
@@ -285,6 +306,8 @@ export interface Case {
   birthFatherAddressPostcode?: string;
   birthFatherAddressCountry?: string;
   birthFatherAddressNotKnownReason?: string;
+  birthFatherLastAddressDate?: CaseDate;
+  birthFatherIdentityKnown?: string;
 
   /***** Other Parent *****/
   otherParentFirstNames?: string;
@@ -300,15 +323,36 @@ export interface Case {
   otherParentAddressCountry?: string;
   otherParentAddressKnown?: YesOrNo;
   otherParentAddressNotKnownReason?: string;
+  otherParentLastAddressDate?: CaseDate;
 
   /***** Adoption Agency, Social Worker and Solicitor *****/
-  adopAgencyOrLAs?: AdoptionAgencyOrLocalAuthority[];
+  localAuthorityName?: string;
+  localAuthorityContactName?: string;
+  localAuthorityPhoneNumber?: string;
+  localAuthorityContactEmail?: string;
+
+  adopAgencyOrLaName?: string;
+  adopAgencyOrLaContactName?: string;
+  adopAgencyOrLaPhoneNumber?: string;
+  adopAgencyAddressLine1?: string;
+  adopAgencyTown?: string;
+  adopAgencyPostcode?: string;
+  adopAgencyOrLaContactEmail?: string;
+
   hasAnotherAdopAgencyOrLA?: YesOrNo;
-  selectedAdoptionAgencyId?: string;
-  socialWorkerName?: string;
-  socialWorkerPhoneNumber?: string;
-  socialWorkerEmail?: string;
-  socialWorkerTeamEmail?: string;
+
+  childSocialWorkerName?: string;
+  childSocialWorkerPhoneNumber?: string;
+  childSocialWorkerEmail?: string;
+  childLocalAuthority?: string;
+  childLocalAuthorityEmail?: string;
+
+  applicantSocialWorkerName?: string;
+  applicantSocialWorkerPhoneNumber?: string;
+  applicantSocialWorkerEmail?: string;
+  applicantLocalAuthority?: string;
+  applicantLocalAuthorityEmail?: string;
+
   solicitorFirm?: string;
   solicitorName?: string;
   solicitorPhoneNumber?: string;
@@ -319,11 +363,8 @@ export interface Case {
   siblings?: Sibling[];
   hasSiblings?: YesNoNotsure;
   hasSiblingNotSureReason?: string;
-  hasPoForSiblings?: YesNoNotsure;
-  hasPoForSiblingsNotSureReason?: string;
   addAnotherSiblingPlacementOrder?: YesOrNo;
   selectedSiblingId?: string;
-  selectedSiblingPoId?: string;
   addAnotherSibling?: YesOrNo;
 
   /***** Statement of truth *****/
@@ -349,27 +390,21 @@ export interface Case {
   applicant1CannotUploadDocuments?: DocumentType[];
 
   /***** Find court *****/
+  placementOrderCourt?: string;
   findFamilyCourt?: YesOrNo;
   familyCourtName?: string;
   familyCourtEmailId?: string;
 
-  applicant1HelpPayingNeeded?: YesOrNo;
-  applicant1AlreadyAppliedForHelpPaying?: YesOrNo;
-  applicant1HelpWithFeesRefNo?: string;
-  jurisdictionResidualEligible?: Checkbox;
-  connections: JurisdictionConnections[];
-
-  applyForFinancialOrder?: YesOrNo;
   applicant2UploadedFiles?: UploadedFile[];
   documentsGenerated: ListValue<AdoptionDocument>[];
   applicant2DocumentsUploaded?: ListValue<Partial<AdoptionDocument> | null>[];
   applicant2CannotUpload?: Checkbox;
   applicant2CannotUploadDocuments?: DocumentType | DocumentType[];
-  dueDate?: DateAsString;
   caseReference?: string;
   dateSubmitted?: Date;
   applicationFeeOrderSummary: OrderSummary;
   hyphenatedCaseRef?: string;
+  otherPlacementOrderType?: string;
 }
 
 export interface CaseWithId extends Case {

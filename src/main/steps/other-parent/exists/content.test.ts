@@ -1,6 +1,6 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { YesOrNo } from '../../../app/case/definition';
-import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
+import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -11,7 +11,6 @@ jest.mock('../../../app/form/validation');
 const enContent = {
   section: "Other parent's details",
   label: 'Is there another person who has parental responsibility for the child?',
-  hint: 'Apart from the birth mother and father. For example, a step parent.',
   one: 'Yes',
   two: 'No',
   errors: {
@@ -24,7 +23,6 @@ const enContent = {
 const cyContent = {
   section: 'Manylion y rhiant arall',
   label: 'A oes unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn?',
-  hint: 'Oni bai am y fam a’r tad biolegol. Er enghraifft, llys-riant.',
   one: 'Ydw',
   two: 'Nac ydw',
   errors: {
@@ -58,7 +56,6 @@ describe('other-parent > exists > content', () => {
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
     expect((field.label as Function)(generatedContent)).toBe(enContent.label);
-    expect(((field as FormInput).hint as Function)(generatedContent)).toBe(enContent.hint);
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesOrNo.YES);

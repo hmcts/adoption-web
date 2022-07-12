@@ -1,4 +1,5 @@
 import sysConfig from 'config';
+
 import { IdamUserManager } from './steps/IdamUserManager';
 
 // better handling of unhandled exceptions

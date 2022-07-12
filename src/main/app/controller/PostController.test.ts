@@ -3,7 +3,7 @@ import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import { FormContent } from '../../app/form/Form';
 import * as steps from '../../steps';
 import { SAVE_AND_SIGN_OUT } from '../../steps/urls';
-import { ApplicationType, CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE } from '../case/definition';
+import { ApplicationType, CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE, SYSTEM_USER_UPDATE } from '../case/definition';
 import { isPhoneNoValid } from '../form/validation';
 
 import { PostController } from './PostController';
@@ -79,10 +79,11 @@ describe('PostController', () => {
     const controller = new PostController(mockFormContent.fields);
 
     const req = mockRequest({ body });
+    req.session.user.isSystemUser = true;
     const res = mockResponse();
     await controller.post(req, res);
 
-    expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', body, CITIZEN_UPDATE);
+    expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', body, SYSTEM_USER_UPDATE);
   });
 
   it('redirects back to the current page with a session error if there was an problem saving data', async () => {
