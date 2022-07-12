@@ -101,16 +101,15 @@ Scenario(
 
     await taskListPage.selectChildOtherParentDetails();
     await childOtherParentDetailsPage.childOtherParentDetailsSection();
-
     // TODO in Future stories
     //await taskListPage.verifyChildOtherParentDetailsStatus();
 
-    // await taskListPage.selectChildPlacementOrderDetails();
-    // await childDetailsPlacementOrderPage.childDetailsPlacementOrderSection();
+    await taskListPage.selectChildPlacementOrderDetails();
+    await childDetailsPlacementOrderPage.childDetailsPlacementOrderSection();
 
-    await taskListPage.selectSiblingDetails();
-    await childSiblingDetailsPage.childDetailsSiblingSection();
     // TODO in Future stories
+    // await taskListPage.selectSiblingDetails();
+    // await childSiblingDetailsPage.childDetailsSiblingSection();
     // await taskListPage.verifySiblingDetailsStatus();
   }
 );

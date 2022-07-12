@@ -300,6 +300,7 @@ export interface PlacementOrder {
   placementOrderNumber?: string;
   placementOrderCourt?: string;
   placementOrderDate?: CaseDate | string;
+  otherPlacementOrderType?: string;
 }
 
 export interface CaseData {
@@ -703,6 +704,7 @@ export interface CaseData {
   coAddNewDocuments: YesOrNo;
   coDocumentsUploaded: ListValue<AdoptionDocument>[];
   coIsEverythingInPetitionTrue: YesOrNo;
+  otherPlacementOrderType: string;
 }
 
 export interface Children {

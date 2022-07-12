@@ -7,10 +7,10 @@ import { YesNoNotsure, YesOrNo } from '../../app/case/definition';
 import { laPortalSequence } from './laPortalSequence';
 
 describe('la-portal > laPortalSequence', () => {
-  test('should contain 48 entries in sibling screen sequence', () => {
+  test('should contain 47 entries in sibling screen sequence', () => {
     Date.now = jest.fn(() => +new Date('2021-01-01'));
 
-    expect(laPortalSequence).toHaveLength(48);
+    expect(laPortalSequence).toHaveLength(47);
 
     expect(laPortalSequence[0].url).toBe('/la-portal/kba-case-ref');
     expect(laPortalSequence[0].getNextStep({})).toBe('/la-portal/kba-completed');
@@ -177,7 +177,7 @@ describe('la-portal > laPortalSequence', () => {
 
     expect(laPortalSequence[36].url).toBe('/la-portal/child/placement-order-number');
     expect(laPortalSequence[36].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-number');
-    expect(laPortalSequence[36].getNextStep({})).toBe('/la-portal/child/placement-order-court');
+    expect(laPortalSequence[36].getNextStep({})).toBe('/la-portal/child/placement-order-date');
 
     expect(laPortalSequence[37].url).toBe('/la-portal/child/placement-order-court');
     expect(laPortalSequence[37].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-court');
@@ -207,7 +207,7 @@ describe('la-portal > laPortalSequence', () => {
       '/la-portal/sibling/relation'
     );
     expect(
-      laPortalSequence[40].getNextStep({ hasSiblings: YesNoNotsure.YES, siblings: [{ siblingId: 'MOCK_ID' }] })
+      laPortalSequence[41].getNextStep({ hasSiblings: YesNoNotsure.YES, siblings: [{ siblingId: 'MOCK_ID' }] })
     ).toBe('/la-portal/child/placement-order-summary');
 
     expect(laPortalSequence[42].url).toBe('/la-portal/sibling/relation');

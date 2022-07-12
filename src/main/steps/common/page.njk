@@ -48,6 +48,7 @@
   {{ serviceName }} - {{ title if title else label}} - {{ govUk }}
 {% endblock %}
 
+{# Feedback link will be used in both CUI and la-portal with exact same behaviour with dynamic page title as query param. #}
 {% set feedbackLink = feedback | replace("PAGE_TITLE", title if title else label) %}
 
 {% block beforeContent %}

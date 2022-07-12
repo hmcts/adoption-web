@@ -1,12 +1,14 @@
 import { CaseWithId } from '../../../app/case/case';
 import { areDateFieldsFilledIn, isDateInputInvalid, isFutureDate } from '../../../app/form/validation';
-import { CHILDREN_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS, CHILDREN_PLACEMENT_ORDER_SUMMARY } from '../../urls';
+import {
+  LA_PORTAL_CHILD_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS,
+  LA_PORTAL_CHILD_PLACEMENT_ORDER_SUMMARY,
+} from '../../urls';
 
 const isPlacementOrderComplete = (placementOrder, ignorePlacementOrderType) => {
   return (
     (ignorePlacementOrderType || placementOrder.placementOrderType) &&
     placementOrder.placementOrderNumber &&
-    placementOrder.placementOrderCourt &&
     areDateFieldsFilledIn(placementOrder.placementOrderDate) === undefined &&
     isDateInputInvalid(placementOrder.placementOrderDate) === undefined &&
     isFutureDate(placementOrder.placementOrderDate) === undefined
@@ -34,13 +36,13 @@ export const placementOrderListItems = (userCase: CaseWithId, content: any): any
             ? []
             : [
                 {
-                  href: `${CHILDREN_PLACEMENT_ORDER_SUMMARY}?remove=${item.placementOrderId}`,
+                  href: `${LA_PORTAL_CHILD_PLACEMENT_ORDER_SUMMARY}?remove=${item.placementOrderId}`,
                   text: content.remove,
                   visuallyHiddenText: text,
                 },
               ]),
           {
-            href: `${CHILDREN_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS}?change=${item.placementOrderId}`,
+            href: `${LA_PORTAL_CHILD_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS}?change=${item.placementOrderId}`,
             text: content.change,
             visuallyHiddenText: text,
           },

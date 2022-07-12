@@ -43,10 +43,10 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         id: 'placement-and-court-order-details',
         text: taskListItems.placementAndCourtOrders,
         status: getChildrenPlacementOrderStatus(userCase),
-        href: '', //
-        // getChildrenPlacementOrderStatus(userCase) === SectionStatus.NOT_STARTED
-        //   ? URL.LA_PORTAL_CHILD_PLACEMENT_ORDER_NUMBER
-        //   : URL.LA_PORTAL_CHILD_PLACEMENT_ORDER_SUMMARY,
+        href:
+          getChildrenPlacementOrderStatus(userCase) === SectionStatus.NOT_STARTED
+            ? URL.LA_PORTAL_CHILD_PLACEMENT_ORDER_NUMBER
+            : URL.LA_PORTAL_CHILD_PLACEMENT_ORDER_SUMMARY,
       },
       {
         id: 'sibling-court-order-details',

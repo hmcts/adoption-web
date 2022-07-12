@@ -82,8 +82,8 @@ describe('task-list > content', () => {
             {
               id: 'placement-and-court-order-details',
               text: 'Placement and court orders',
-              status: 'NOT_STARTED',
-              href: '',
+              status: 'COMPLETED',
+              href: '/la-portal/child/placement-order-summary',
             },
             {
               id: 'sibling-court-order-details',
@@ -129,7 +129,7 @@ describe('task-list > content', () => {
               id: 'placement-and-court-order-details',
               text: 'Placement and court orders',
               status: 'NOT_STARTED',
-              href: '',
+              href: '/la-portal/child/placement-order-number',
             },
             {
               id: 'sibling-court-order-details',
