@@ -76,7 +76,7 @@ export const childrenSequence: Step[] = [
     url: Urls.OTHER_ADOPTION_AGENCY,
     showInSection: Sections.AboutChildren,
     getNextStep: data =>
-      (data as Partial<CaseWithId>).hasAnotherAdopAgencyOrLA === YesOrNo.NO ? Urls.SOCIAL_WORKER : Urls.ADOPTION_AGENCY,
+      (data as Partial<CaseWithId>).hasAnotherAdopAgencyOrLA === YesOrNo.NO ? Urls.TASK_LIST_URL : Urls.ADOPTION_AGENCY,
   },
   {
     url: Urls.ADOPTION_AGENCY,

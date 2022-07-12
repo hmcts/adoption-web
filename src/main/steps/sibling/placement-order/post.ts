@@ -23,7 +23,6 @@ export default class SiblingPlacementOrderPostController extends PostController<
     ) as Sibling;
 
     Object.assign(siblingObject, formData);
-    console.log(req.session.userCase.siblings);
     if (formData['selectedSiblingPoType']) {
       siblingObject.siblingPoType = formData['selectedSiblingPoType'] as SiblingPOType;
       siblingObject.siblingPlacementOtherType = formData['selectedSiblingOtherPlacementOrderType'];
