@@ -9,10 +9,11 @@ export default class SiblingPlacementOrderGetController extends GetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
     let dirty = false;
     let redirect = false;
+
     if (req.query.change) {
       this.changeSiblingPlacementOrder(req);
       redirect = true;
-      dirty = true;
+      //dirty = true;
     } else if (req.query.remove) {
       this.removeSiblingPlacementOrder(req);
       redirect = true;
@@ -28,6 +29,11 @@ export default class SiblingPlacementOrderGetController extends GetController {
         this.getEventName(req)
       );
     }
+    const changeSibling = req.session.userCase?.siblings?.find(
+      item => item.siblingId === req.session.userCase.selectedSiblingId
+    );
+    req.session.userCase.selectedSiblingPoType = changeSibling?.siblingPoType;
+    req.session.userCase.selectedSiblingOtherPlacementOrderType = changeSibling?.siblingPlacementOtherType;
 
     const callback = redirect ? undefined : () => super.get(req, res);
 

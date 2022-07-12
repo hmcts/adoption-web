@@ -18,6 +18,7 @@ import {
   Payment,
   PlacementOrder,
   Sibling,
+  SiblingRelationships,
   State,
   YesNoNotsure,
   YesOrNo,
@@ -174,6 +175,8 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   hasSiblingNotSureReason: 'hasSiblingNotSureReason',
   addAnotherSiblingPlacementOrder: 'addAnotherSiblingPlacementOrder',
   selectedSiblingId: 'selectedSiblingId',
+  selectedSiblingRelation: 'selectedSiblingRelation',
+  selectedSiblingPoType: 'selectedSiblingPoType',
 
   applicant1DocumentsUploaded: 'applicant1DocumentsUploaded',
   applicant2DocumentsUploaded: 'applicant2DocumentsUploaded',
@@ -365,7 +368,11 @@ export interface Case {
   hasSiblingNotSureReason?: string;
   addAnotherSiblingPlacementOrder?: YesOrNo;
   selectedSiblingId?: string;
+  selectedSiblingRelation?: string;
   addAnotherSibling?: YesOrNo;
+  siblingRelation?: SiblingRelationships;
+  selectedSiblingPoType?: string;
+  selectedSiblingOtherPlacementOrderType?: string;
 
   /***** Statement of truth *****/
   applicant1IBelieveApplicationIsTrue?: Checkbox;

@@ -80,7 +80,6 @@ export const form: FormContent = {
       },
       validator: isFieldFilledIn,
     },
-
     childName: {
       type: 'text',
       classes: 'govuk-heading-m govuk-!-margin-bottom-1',

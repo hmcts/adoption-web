@@ -71,7 +71,6 @@ describe('from-api-format', () => {
       applicant2DateOfBirth: '',
       childrenDateOfBirth: '2020-01-05',
       birthMotherLastAddressDate: '2020-01-20',
-      otherParentLastAddressDate: '2020-01-20',
       applicant1StatementOfTruth: 'No',
       applicant2StatementOfTruth: '',
     } as unknown as CaseData);
@@ -85,7 +84,6 @@ describe('from-api-format', () => {
       applicant2DateOfBirth: undefined,
       childrenDateOfBirth: { day: '5', month: '1', year: '2020' },
       birthMotherLastAddressDate: { day: '20', month: '1', year: '2020' },
-      otherParentLastAddressDate: { day: '20', month: '1', year: '2020' },
       placementOrders: [
         {
           placementOrderId: 'MOCK_ID',

@@ -1,4 +1,4 @@
-import { YesOrNo } from '../../../app/case/definition';
+import { SiblingPOType, SiblingRelationships, YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -11,12 +11,28 @@ const en = content => {
     section: SECTION,
     title: 'Orders already in place for siblings and half-siblings',
     sibling: 'Sibling',
+    siblingRelation: {
+      [SiblingRelationships.SISTER]: 'Sister',
+      [SiblingRelationships.STEP_SISTER]: 'Step-sister',
+      [SiblingRelationships.HALF_SISTER]: 'Half-sister',
+      [SiblingRelationships.BROTHER]: 'Brother',
+      [SiblingRelationships.STEP_BROTHER]: 'Step-brother',
+      [SiblingRelationships.HALF_BROTHER]: 'Half-brother',
+    },
     placementOrder: 'Placement Order',
+    siblingPOType: {
+      [SiblingPOType.ADOPTION_ORDER]: 'Adoption order',
+      [SiblingPOType.CARE_ORDER]: 'Care order',
+      [SiblingPOType.CONTACT_ORDER]: 'Contact order',
+      [SiblingPOType.FREEING_ORDER]: 'Freeing order',
+      [SiblingPOType.PLACEMENT_ORDER]: 'Placement order',
+      [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order',
+      [SiblingPOType.OTHER]: 'Other',
+    },
     incomplete: 'incomplete',
     change: 'Change',
     remove: 'Remove',
     label: 'Do you want to add another order?',
-    hint: 'For example, a care order or supervision order.',
     errors: {
       addAnotherSiblingPlacementOrder: {
         required: 'Please select an answer',
@@ -34,12 +50,28 @@ const cy: typeof en = content => {
     section: SECTION_IN_WELSH,
     title: 'Gorchmynion eisoes mewn lle ar gyfer brodyr/chwiorydd a hanner brodyr/hanner chwiorydd',
     sibling: 'Brawd/chwaer',
+    siblingRelation: {
+      [SiblingRelationships.SISTER]: 'Sister (in welsh)',
+      [SiblingRelationships.STEP_SISTER]: 'Step-sister (in welsh)',
+      [SiblingRelationships.HALF_SISTER]: 'Half-sister (in welsh)',
+      [SiblingRelationships.BROTHER]: 'Brother (in welsh)',
+      [SiblingRelationships.STEP_BROTHER]: 'Step-brother (in welsh)',
+      [SiblingRelationships.HALF_BROTHER]: 'Half-brother (in welsh)',
+    },
     placementOrder: 'Gorchymyn Lleoli',
+    siblingPOType: {
+      [SiblingPOType.ADOPTION_ORDER]: 'Adoption order',
+      [SiblingPOType.CARE_ORDER]: 'Care order',
+      [SiblingPOType.CONTACT_ORDER]: 'Contact order',
+      [SiblingPOType.FREEING_ORDER]: 'Freeing order',
+      [SiblingPOType.PLACEMENT_ORDER]: 'Placement order',
+      [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order',
+      [SiblingPOType.OTHER]: 'Other',
+    },
     incomplete: 'anghyflawn',
     change: 'Newid',
     remove: 'Dileu',
     label: 'Do you want to add another order? (in welsh)',
-    hint: 'For example, a care order or supervision order. (in welsh)',
     errors: {
       addAnotherSiblingPlacementOrder: {
         required: 'Dewiswch ateb os gwelwch yn dda',
@@ -59,7 +91,6 @@ export const form: FormContent = {
       classes: 'govuk-radios govuk-radios--inline',
       label: l => l.label,
       section: l => l.section,
-      hint: l => l.hint,
       labelSize: 'm',
       values: [
         { label: l => l.yes, value: YesOrNo.YES },

@@ -7,12 +7,11 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 const en = () => ({
   section: SECTION,
   label: 'Does the child have any siblings or half siblings with court orders?',
-  hint: 'For example, a care order or supervision order.',
   conditionalText:
     '<label class="govuk-label">You will be asked to provide each sibling court order individually.</label>',
   errors: {
     hasSiblings: {
-      required: 'Please answer the question',
+      required: 'Please select an answer',
     },
   },
 });
@@ -20,12 +19,11 @@ const en = () => ({
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
   label: 'Does the child have any siblings or half siblings with court orders? (in welsh)',
-  hint: 'For example, a care order or supervision order. (in welsh)',
   conditionalText:
     '<label class="govuk-label">You will be asked to provide each sibling court order individually.</label> (in welsh)',
   errors: {
     hasSiblings: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: 'Please select an answer (in welsh)',
     },
   },
 });
