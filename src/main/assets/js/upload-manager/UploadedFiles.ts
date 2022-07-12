@@ -6,11 +6,11 @@ export class UploadedFiles {
   storeEl: HTMLInputElement;
 
   constructor() {
-    this.storeEl =
-      (getById('applicant1UploadedFiles') as HTMLInputElement) ||
-      (getById('laUploadedFiles') as HTMLInputElement) ||
-      (getById('applicant2UploadedFiles') as HTMLInputElement) ||
-      (getById('coClarificationUploadedFiles') as HTMLInputElement);
+    this.storeEl = location.href.includes('la-portal')
+      ? (getById('laUploadedFiles') as HTMLInputElement)
+      : (getById('applicant1UploadedFiles') as HTMLInputElement) ||
+        (getById('applicant2UploadedFiles') as HTMLInputElement) ||
+        (getById('coClarificationUploadedFiles') as HTMLInputElement);
     this.documents = JSON.parse(this.storeEl?.value || '[]');
   }
 
