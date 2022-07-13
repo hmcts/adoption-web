@@ -38,8 +38,8 @@ module.exports = {
     findFamilyCourtStatus: 'strong[id$="find-family-court-status"]',
   },
   uploadDocument: {
-    uploadDocumentLink: 'a[href$="upload-your-documents"]',
-    uploadDocumentStatus: 'strong[id$="upload-your-documents-status"]',
+    uploadDocumentLink: 'a[href$="upload-documents"]',
+    uploadDocumentStatus: 'strong[id$="upload-documents-status"]',
   },
 
   async goToTaskListPage() {
