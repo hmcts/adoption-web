@@ -1,3 +1,4 @@
+import { Logger } from '@hmcts/nodejs-logging';
 import config from 'config';
 import { Application, NextFunction, Response } from 'express';
 
@@ -16,10 +17,10 @@ export class OidcMiddleware {
     const protocol = app.locals.developmentMode ? 'http://' : 'https://';
     const port = app.locals.developmentMode ? `:${config.get('port')}` : '';
     const { errorHandler } = app.locals;
-
-    app.get(SIGN_IN_URL, (req, res) =>
-      res.redirect(getRedirectUrl(`${protocol}${res.locals.host}${port}`, CALLBACK_URL))
-    );
+    const logger = Logger.getLogger('index-oidc');
+    app.get(SIGN_IN_URL, (req, res) => {
+      res.redirect(getRedirectUrl(`${protocol}${res.locals.host}${port}`, CALLBACK_URL));
+    });
 
     app.get(SIGN_OUT_URL, (req, res) => req.session.destroy(() => res.redirect('/')));
 
@@ -28,10 +29,16 @@ export class OidcMiddleware {
       errorHandler(async (req, res) => {
         if (typeof req.query.code === 'string') {
           req.session.user = await getUserDetails(`${protocol}${res.locals.host}${port}`, req.query.code, CALLBACK_URL);
-          req.session.save(() => res.redirect('/'));
-        } else {
-          res.redirect(SIGN_IN_URL);
+          const role: string = config.get('services.idam.userRole');
+          logger.info('Roles are ---', req.session.user.roles);
+          if (req.session.user.roles.includes(role)) {
+            return req.session.save(() => res.redirect('/'));
+          } else {
+            req.session.user = undefined;
+            throw new Error('Unauthorized role of the user');
+          }
         }
+        res.redirect(SIGN_IN_URL);
       })
     );
 
