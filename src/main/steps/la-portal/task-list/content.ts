@@ -1,4 +1,4 @@
-import { SectionStatus } from '../../../app/case/definition';
+import { SectionStatus, YesNoNotsure } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import * as URL from '../../urls';
 
@@ -53,10 +53,10 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         id: 'sibling-court-order-details',
         text: taskListItems.siblingCourtOrders,
         status: getSiblingStatus(userCase),
-        href: '', //
-        // userCase.hasSiblings === YesNoNotsure.YES && userCase.siblings?.length
-        //   ? URL.LA_PORTAL_SIBLING_ORDER_SUMMARY
-        //   : URL.LA_PORTAL_SIBLING_EXISTS,
+        href:
+          userCase.hasSiblings === YesNoNotsure.YES && userCase.siblings?.length
+            ? URL.LA_PORTAL_SIBLING_ORDER_SUMMARY
+            : URL.LA_PORTAL_SIBLING_EXISTS,
       },
       {
         id: 'upload-documents',
