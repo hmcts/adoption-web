@@ -40,7 +40,6 @@ const initUploadManager = (): void => {
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
             'application/pdf',
             'image/jpeg',
-            'image/jpg',
             'image/tiff',
           ]
         : [
