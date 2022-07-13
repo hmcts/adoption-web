@@ -35,14 +35,18 @@ const initUploadManager = (): void => {
       maxTotalFileSize: isLaPortal ? 262144000 : 10485760,
       maxNumberOfFiles: 10, //jpg, png, pdf, doc/docx or tif
       allowedFileTypes: isLaPortal
-        ? []
-        : [
+        ? [
             'application/msword',
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
             'application/pdf',
             'image/jpeg',
             'image/jpg',
             'image/tiff',
+          ]
+        : [
+            'application/msword',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/pdf',
           ],
     },
   });
