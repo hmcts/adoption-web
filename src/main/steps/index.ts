@@ -90,10 +90,6 @@ const getStepsWithContent = (sequence: Step[] | EligibilityStep[], subDir: strin
 
   const results: StepWithContent[] = [];
   for (const step of sequence) {
-    if (step.url.includes('la-portal')) {
-      console.log(step);
-    }
-
     let stepDir = step.contentDir;
     if (!stepDir) {
       const stepUrl = step.url === '/' ? '/home' : step.url;

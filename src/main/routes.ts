@@ -26,8 +26,6 @@ export class Routes {
     app.get(`${DOCUMENT_MANAGER}/delete/:index`, errorHandler(documentManagerController.delete));
 
     for (const step of stepsWithContent) {
-      console.log(step);
-
       const files = fs.readdirSync(`${step.stepDir}`);
 
       const getControllerFileName = files.find(item => /get/i.test(item) && !/test/i.test(item));
