@@ -201,7 +201,7 @@ export const isGovUkEmail: Validator = value => {
 };
 
 export const isCaseRefTooShort: Validator = value => {
-  if (!(value as string).match(/^\d{16}$/) && !(value as string).match(/\D/g)) {
+  if (!(value as string).match(/^\d{16}$/) && !(value as string).match(/[^<>]\D/g)) {
     return 'numberTooShort';
   }
 };
