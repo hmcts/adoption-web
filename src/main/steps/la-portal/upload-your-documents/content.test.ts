@@ -46,7 +46,7 @@ const enContent = {
         'You have not provided any information or uploaded any documents. You need to provide the information or documents the court has requested. Or if you are going to post any documents in, select that option.',
       errorUploading:
         'Your file was not uploaded because the service is experiencing technical issues. Try uploading your file again.',
-      fileSizeTooBig: 'The file you have uploaded is too large. Reduce it to under 2MB and try uploading it again.',
+      fileSizeTooBig: 'The file you have uploaded is too large. Reduce it to under 25MB and try uploading it again.',
       fileWrongFormat:
         'You cannot upload that format of file. Save the file as one of the accepted formats and try uploading it again.',
       maxTenFileUpload: 'You can upload maximum 10 files.',
@@ -81,7 +81,7 @@ const cyContent = {
   orStr: 'neu',
   dragDropHere: 'Llusgwch a gollyngwch ffeiliau yma',
   fileFormats: "Rhaid i'r ffeil fod ar ffurf PDF neu MS Word Document.",
-  fileSize: 'Caniateir ichi lwytho ffeil sydd hyd at 2MB o ran maint.',
+  fileSize: 'Caniateir ichi lwytho ffeil sydd hyd at 25MB o ran maint.',
   cannotUploadDocuments: 'Ni allaf lwytho rhai o fy nogfennau / fy holl ddogfennau.',
   cannotUploadWhich: 'Pa ddogfen na allwch ei llwytho?',
   checkAllThatApply: "Dewiswch bob un sy'n berthnasol",
@@ -97,7 +97,7 @@ const cyContent = {
       errorUploading:
         'Ni chafodd eich ffeil ei llwytho oherwydd bod y gwasanaeth yn profi problemau technegol. Ceisiwch lwytho eich ffeil eto.',
       fileSizeTooBig:
-        'Mae’r ffeil yr ydych wedi ei llwytho yn rhy fawr. Ceisiwch leihau maint y ffeil i lai na 2MB a llwytho’r ffeil eto.',
+        'Mae’r ffeil yr ydych wedi ei llwytho yn rhy fawr. Ceisiwch leihau maint y ffeil i lai na 25MB a llwytho’r ffeil eto.',
       fileWrongFormat:
         'Ni allwch lwytho ffeil yn y fformat hwnnw. Cadwch y ffeil ar ffurf fformat a dderbynnir a cheisiwch ei llwytho eto.',
       maxTenFileUpload: 'Gallwch uwchlwytho uchafswm o 10 ffeil.',
