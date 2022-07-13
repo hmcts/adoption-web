@@ -99,6 +99,7 @@ const en = () => ({
     uploadDocuments: 'Upload documents',
     checkYourAnswers: 'Check your answers',
   },
+  reviewAndSubmit: 'Review and submit',
 });
 
 const cy: typeof en = () => ({
@@ -122,6 +123,7 @@ const cy: typeof en = () => ({
     uploadDocuments: 'Llwytho dogfennau',
     checkYourAnswers: 'Check your answers (in welsh)',
   },
+  reviewAndSubmit: 'Review and submit',
 });
 
 const languages = {
@@ -129,10 +131,23 @@ const languages = {
   cy,
 };
 
+const isLaDetailsNotComplete = (userCase): boolean => {
+  const statusArr = [
+    getChildrenPlacementOrderStatus(userCase),
+    getOtherParentStatus(userCase),
+    getBirthFatherDetailsStatus(userCase),
+    getBirthMotherDetailsStatus(userCase),
+    getChildrenBirthCertificateStatus(userCase),
+  ];
+
+  return !!statusArr.find(item => item !== SectionStatus.COMPLETED);
+};
+
 export const generateContent: TranslationFn = content => {
   const translations = languages[content.language]();
   return {
     ...translations,
     sections: generateTaskList(translations.sectionTitles, translations.taskListItems, content.userCase),
+    isIncomplete: isLaDetailsNotComplete(content.userCase),
   };
 };
