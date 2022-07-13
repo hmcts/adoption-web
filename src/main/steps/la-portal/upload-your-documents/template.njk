@@ -79,7 +79,6 @@
 
   <div id="uploadGroup" tabindex="0" class="uploadGroup">
     <h2 class="govuk-heading-s">{{ uploadFiles }}</h2>
-    {{userCase.laDocumentsUploaded.length}}
     <p class="govuk-body govuk-section-break govuk-section-break--visible govuk-!-padding-bottom-3{% if userCase.laDocumentsUploaded.length > 0 %} hidden {% endif %}" id="noFilesUploaded">{{ noFilesUploaded }}</p>
     <ul id="filesUploaded" class="govuk-list">
     {% for file in userCase.laDocumentsUploaded %}
