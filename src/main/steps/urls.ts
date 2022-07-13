@@ -164,6 +164,7 @@ export const SAVE_AS_DRAFT: PageLink = '/save-as-draft';
 export const LA_PORTAL = '/la-portal';
 export const LA_PORTAL_KBA_CASE_REF = '/la-portal/kba-case-ref';
 export const LA_PORTAL_KBA_CALLBACK = '/la-portal/kba-completed';
+export const LA_PORTAL_NEG_SCENARIO = '/la-portal/negative-scenario';
 export const LA_PORTAL_TASK_LIST: PageLink = `${LA_PORTAL}/task-list`;
 export const LA_PORTAL_CHILD_SEX_AT_BIRTH: PageLink = `${LA_PORTAL}/child/sex-at-birth`;
 export const LA_PORTAL_CHILD_NATIONALITY: PageLink = `${LA_PORTAL}/child/nationality`;

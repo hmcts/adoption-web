@@ -1,6 +1,6 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
-import { FormContent, FormFields } from '../../../app/form/Form';
-import { isCaseRefEmpty, isCaseRefNumeric, isCaseRefTooShort } from '../../../app/form/validation';
+import { FormContent, FormFields, ValidationCheck } from '../../../app/form/Form';
+// import { isCaseRefEmpty, isCaseRefNumeric, isCaseRefTooShort } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
@@ -89,11 +89,7 @@ describe('la-portal > kba-case-ref > content', () => {
     expect((field.label as Function)(generateContent(commonContent))).toBe(enContent.label);
     expect((field.hint as Function)(generateContent(commonContent))).toBe(enContent.hint);
     expect(field.labelSize).toBe('m');
-    // expect(field.validator as Function).toBe(isFieldFilledIn);
-
-    expect(isCaseRefEmpty).toHaveBeenCalled();
-    expect(isCaseRefTooShort).toHaveBeenCalled();
-    expect(isCaseRefNumeric).toHaveBeenCalled();
+    expect((field.validator as ValidationCheck)('1234567891234567', {})).toBe(undefined);
   });
 
   it('should contain submit button', () => {
