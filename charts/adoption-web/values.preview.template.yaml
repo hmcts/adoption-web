@@ -15,6 +15,7 @@ nodejs:
     CCD_URL: 'http://ccd-data-store-api-adoption-cos-api-pr-321.service.core-compute-preview.internal'
     CDAM_API_URL: 'http://ccd-case-document-am-api-adoption-cos-api-pr-321.service.core-compute-preview.internal'
     PCQ_ENABLED: 'true'
+    IDAM_ROLE: 'adoption-citizen-user'
 idam-pr:
   enabled: true
   redirect_uris:
