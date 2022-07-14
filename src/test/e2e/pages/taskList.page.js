@@ -38,7 +38,7 @@ module.exports = {
     findFamilyCourtStatus: 'strong[id$="find-family-court-status"]',
   },
   uploadDocument: {
-    uploadDocumentLink: 'a[href$="upload-documents"]',
+    uploadDocumentLink: 'a[id$="upload-documents"]',
     uploadDocumentStatus: 'strong[id$="upload-documents-status"]',
   },
 
