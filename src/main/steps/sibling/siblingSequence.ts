@@ -16,6 +16,16 @@ const getStepAfterSiblingExists = (data: Partial<CaseWithId>): Urls.PageLink => 
   return Urls.SIBLING_ORDER_SUMMARY;
 };
 
+const getStepAfterRemoveSibling = (data: Partial<CaseWithId>): Urls.PageLink => {
+  const count = data.siblings?.length;
+
+  if (count && count > 0) {
+    return Urls.SIBLING_ORDER_SUMMARY;
+  }
+
+  return Urls.SIBLING_EXISTS;
+};
+
 export const siblingSequence: Step[] = [
   {
     url: Urls.SIBLING_EXISTS,
@@ -43,7 +53,7 @@ export const siblingSequence: Step[] = [
     getNextStep: data =>
       (data as Partial<CaseWithId>).addAnotherSiblingPlacementOrder === YesOrNo.YES
         ? `${Urls.SIBLING_RELATION}?add=${Date.now()}`
-        : Urls.TASK_LIST_URL,
+        : Urls.LA_PORTAL_TASK_LIST,
   },
   {
     url: Urls.SIBLING_ORDER_CHECK_YOUR_ANSWERS,
@@ -53,6 +63,6 @@ export const siblingSequence: Step[] = [
   {
     url: Urls.SIBLING_REMOVE_PLACEMENT_ORDER,
     showInSection: Sections.AboutSibling,
-    getNextStep: () => `${Urls.SIBLING_ORDER_SUMMARY}`,
+    getNextStep: data => getStepAfterRemoveSibling(data as Partial<CaseWithId>),
   },
 ];
