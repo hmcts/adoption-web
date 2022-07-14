@@ -127,7 +127,7 @@ describe('utils', () => {
           childrenNationality: undefined,
           childrenAdditionalNationalities: undefined,
         },
-        expected: IN_PROGRESS,
+        expected: NOT_STARTED,
       },
       {
         data: {
@@ -580,31 +580,31 @@ describe('utils', () => {
     test.each([
       { data: { ...mockUserCase }, expected: 'COMPLETED' },
       {
-        data: { ...mockUserCase, applicant1CannotUpload: Checkbox.Checked },
-        expected: 'IN_PROGRESS',
+        data: { ...mockUserCase, laCannotUpload: Checkbox.Checked },
+        expected: 'COMPLETED',
       },
       {
         data: {
           ...mockUserCase,
-          applicant1CannotUpload: Checkbox.Checked,
-          applicant1CannotUploadDocuments: [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE],
+          laCannotUpload: Checkbox.Checked,
+          laCannotUploadDocuments: [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE],
         },
         expected: 'COMPLETED',
       },
       {
         data: {
           ...mockUserCase,
-          applicant1UploadedFiles: undefined,
-          applicant1CannotUpload: Checkbox.Checked,
-          applicant1CannotUploadDocuments: [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE],
+          laUploadedFiles: undefined,
+          laCannotUpload: Checkbox.Checked,
+          laCannotUploadDocuments: [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE],
         },
         expected: 'COMPLETED',
       },
       {
         data: {
           ...mockUserCase,
-          applicant1UploadedFiles: undefined,
-          applicant1CannotUpload: undefined,
+          laUploadedFiles: undefined,
+          laCannotUpload: undefined,
         },
         expected: 'NOT_STARTED',
       },
@@ -612,8 +612,8 @@ describe('utils', () => {
         data: {
           ...mockUserCase,
           applyingWith: undefined,
-          applicant1UploadedFiles: undefined,
-          applicant1CannotUpload: undefined,
+          laUploadedFiles: undefined,
+          laCannotUpload: undefined,
         },
         expected: 'NOT_STARTED',
       },

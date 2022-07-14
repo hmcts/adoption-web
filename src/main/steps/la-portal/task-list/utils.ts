@@ -1,12 +1,6 @@
 import { CaseDate, CaseWithId, FieldPrefix } from '../../../app/case/case';
 import { AdditionalNationality, Gender, SectionStatus, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
-import {
-  areDateFieldsFilledIn,
-  isDateInputInvalid,
-  isFutureDate,
-  isMoreThan18Years,
-  notSureViolation,
-} from '../../../app/form/validation';
+import { isDateInputInvalid, isFutureDate, notSureViolation } from '../../../app/form/validation';
 
 const addressComplete = (userCase: CaseWithId, fieldPrefix: FieldPrefix) => {
   const address1 = userCase[`${fieldPrefix}Address1`];
@@ -25,7 +19,6 @@ export const getChildrenPlacementOrderStatus = (userCase: CaseWithId): SectionSt
       return (
         (index === 0 || item.placementOrderType) &&
         item.placementOrderNumber &&
-        item.placementOrderCourt &&
         !isDateInputInvalid(item.placementOrderDate as CaseDate) &&
         !isFutureDate(item.placementOrderDate as CaseDate)
       );
@@ -56,15 +49,6 @@ export const getChildrenPlacementOrderStatus = (userCase: CaseWithId): SectionSt
 };
 
 export const getChildrenBirthCertificateStatus = (userCase: CaseWithId): SectionStatus => {
-  const childrenFirstName = userCase.childrenFirstName;
-  const childrenLastName = userCase.childrenLastName;
-  const childrenDateOfBirth = userCase.childrenDateOfBirth as CaseDate;
-  const dateOfBirthComplete =
-    !areDateFieldsFilledIn(childrenDateOfBirth) &&
-    !isDateInputInvalid(childrenDateOfBirth) &&
-    !isFutureDate(childrenDateOfBirth) &&
-    !isMoreThan18Years(childrenDateOfBirth);
-
   const childrenSexAtBirth = userCase.childrenSexAtBirth;
   const childrenOtherSexAtBirth = userCase.childrenOtherSexAtBirth;
 
@@ -78,11 +62,11 @@ export const getChildrenBirthCertificateStatus = (userCase: CaseWithId): Section
     !!nationality.length &&
     (!nationality.includes('Other') || (!!nationalities.length && nationality.includes('Other')));
 
-  if (childrenFirstName && childrenLastName && dateOfBirthComplete && sexAtBirthComplete && nationalityComplete) {
+  if (sexAtBirthComplete && nationalityComplete) {
     return SectionStatus.COMPLETED;
   }
 
-  if (!childrenFirstName && !childrenLastName && !dateOfBirthComplete && !sexAtBirthComplete && !nationalityComplete) {
+  if (!sexAtBirthComplete && !nationalityComplete) {
     return SectionStatus.NOT_STARTED;
   }
 
@@ -232,19 +216,8 @@ export const getSiblingStatus = (userCase: CaseWithId): SectionStatus => {
 };
 
 export const getUploadDocumentStatus = (userCase: CaseWithId): SectionStatus => {
-  const { applicant1UploadedFiles, applicant1CannotUpload, applicant1CannotUploadDocuments } = userCase;
-  if (applicant1UploadedFiles && applicant1UploadedFiles.length > 0 && !applicant1CannotUpload) {
-    return SectionStatus.COMPLETED;
-  }
-
-  if (applicant1UploadedFiles && applicant1UploadedFiles.length > 0 && applicant1CannotUpload) {
-    if (applicant1CannotUploadDocuments && applicant1CannotUploadDocuments.length > 0) {
-      return SectionStatus.COMPLETED;
-    }
-    return SectionStatus.IN_PROGRESS;
-  }
-
-  if (applicant1CannotUpload && applicant1CannotUploadDocuments && applicant1CannotUploadDocuments.length > 0) {
+  const { laUploadedFiles, laCannotUpload } = userCase;
+  if ((laUploadedFiles && laUploadedFiles.length > 0) || laCannotUpload) {
     return SectionStatus.COMPLETED;
   }
 

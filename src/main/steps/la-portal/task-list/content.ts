@@ -62,7 +62,7 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         id: 'upload-documents',
         text: taskListItems.uploadDocuments,
         status: getUploadDocumentStatus(userCase),
-        href: '', //getUploadDocumentStatus(userCase) === SectionStatus.CAN_NOT_START_YET ? '' : URL.UPLOAD_YOUR_DOCUMENTS,
+        href: URL.LA_PORTAL_UPLOAD_YOUR_DOCUMENTS,
       },
     ],
   },
@@ -88,6 +88,7 @@ const en = () => ({
     siblingCourtOrders: 'Sibling court order details',
     uploadDocuments: 'Upload documents',
   },
+  reviewAndSubmit: 'Review and submit',
 });
 
 const cy: typeof en = () => ({
@@ -110,6 +111,7 @@ const cy: typeof en = () => ({
     siblingCourtOrders: 'Manylion gorchymyn llys brodyr/chwiorydd',
     uploadDocuments: 'Llwytho dogfennau',
   },
+  reviewAndSubmit: 'Review and submit',
 });
 
 const languages = {
@@ -117,10 +119,23 @@ const languages = {
   cy,
 };
 
+const isLaDetailsNotComplete = (userCase): boolean => {
+  const statusArr = [
+    getChildrenPlacementOrderStatus(userCase),
+    getOtherParentStatus(userCase),
+    getBirthFatherDetailsStatus(userCase),
+    getBirthMotherDetailsStatus(userCase),
+    getChildrenBirthCertificateStatus(userCase),
+  ];
+
+  return !!statusArr.find(item => item !== SectionStatus.COMPLETED);
+};
+
 export const generateContent: TranslationFn = content => {
   const translations = languages[content.language]();
   return {
     ...translations,
     sections: generateTaskList(translations.sectionTitles, translations.taskListItems, content.userCase),
+    isIncomplete: isLaDetailsNotComplete(content.userCase),
   };
 };

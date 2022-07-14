@@ -7,6 +7,7 @@ import { CaseData, YesOrNo } from './definition';
 import {
   fromApiApplicant1 as uploadedFilesFromApiApplicant1,
   fromApiApplicant2 as uploadedFilesFromApiApplicant2,
+  fromApiLa as uploadedFilesFromApiLa,
 } from './formatter/uploaded-files';
 
 dayjs.extend(advancedFormat);
@@ -86,8 +87,10 @@ const fields: FromApiConverters = {
     applicant2IBelieveApplicationIsTrue: checkboxConverter(data.applicant2StatementOfTruth),
   }),
   applicant1DocumentsUploaded: uploadedFilesFromApiApplicant1,
+  laDocumentsUploaded: uploadedFilesFromApiLa,
   applicant2DocumentsUploaded: uploadedFilesFromApiApplicant2,
   applicant1CannotUploadSupportingDocument: uploadedFilesFromApiApplicant1,
+  laCannotUploadSupportingDocument: uploadedFilesFromApiLa,
   applicant2CannotUploadSupportingDocument: uploadedFilesFromApiApplicant2,
   dateSubmitted: data => ({
     dateSubmitted: new Date(data.dateSubmitted as string),

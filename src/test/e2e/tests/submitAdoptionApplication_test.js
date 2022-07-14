@@ -67,10 +67,6 @@ Scenario(
     await otherApplicantPersonalDetailsPage.otherApplicantPersonalDetailsSection();
     await taskListPage.verifyOtherApplicantPersonalDetailsStatus();
 
-    await taskListPage.selectUploadDocumentsDetails();
-    await uploadDocumentsDetailsPage.uploadDocumentsSectionWithCantNotUploadOption();
-    await taskListPage.verifyUploadDocumentsStatus();
-
     await taskListPage.selectReviewPayAndSubmitDetails();
     await reviewPayAndSubmitPage.selectNoPCQOption();
     await reviewPayAndSubmitPage.changeValueFromReviewYourAnswers();
@@ -111,5 +107,10 @@ Scenario(
     // await taskListPage.selectSiblingDetails();
     // await childSiblingDetailsPage.childDetailsSiblingSection();
     // await taskListPage.verifySiblingDetailsStatus();
+
+    await taskListPage.selectUploadDocumentsDetails();
+    await uploadDocumentsDetailsPage.uploadDocumentsSection();
+    // TODO in Future stories
+    // await taskListPage.verifyUploadDocumentsStatus();
   }
 );
