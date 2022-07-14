@@ -5,6 +5,7 @@ import { getNextStepUrl } from '../..';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form, FormFields } from '../../../app/form/Form';
+import { LA_PORTAL_NEG_SCENARIO } from '../../../steps/urls';
 
 @autobind
 export default class LaPortalKbaPostController<T extends AnyObject> extends PostController<AnyObject> {
@@ -21,6 +22,14 @@ export default class LaPortalKbaPostController<T extends AnyObject> extends Post
     const { _csrf, ...formData } = form.getParsedBody(req.body);
     if (!req.session.laPortalKba) {
       req.session.laPortalKba = {};
+    }
+
+    if (
+      req.session.userCase.childrenDateOfBirth !== formData.childrenDateOfBirth ||
+      req.session.userCase.childrenFirstName + ' ' + req.session.userCase.childrenLastName !== formData['childName']
+    ) {
+      req.session.destroy(() => res.redirect(LA_PORTAL_NEG_SCENARIO));
+      return;
     }
 
     Object.assign(req.session.laPortalKba, formData);
