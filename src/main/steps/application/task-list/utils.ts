@@ -473,7 +473,7 @@ export const findFamilyCourtStatus = (userCase: CaseWithId): SectionStatus => {
 };
 
 export const getApplicationStatus = (userCase: CaseWithId): SectionStatus => {
-  const statuses = [...getAllSectionStatuses(userCase), getUploadDocumentStatus(userCase)];
+  const statuses = [...getAllSectionStatuses(userCase)]; //, getUploadDocumentStatus(userCase)
 
   if (statuses.every(status => status === SectionStatus.COMPLETED)) {
     if (statementOfTruthAndPaymentStatus(userCase) === SectionStatus.IN_PROGRESS) {

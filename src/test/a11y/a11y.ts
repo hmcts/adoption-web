@@ -135,6 +135,7 @@ describe('Accessibility', () => {
     urls.PAYMENT_CALLBACK_URL,
     urls.EQUALITY,
     urls.DOCUMENT_MANAGER,
+    urls.LA_DOCUMENT_MANAGER,
     urls.UPLOAD_YOUR_DOCUMENTS,
     urls.LA_PORTAL,
     urls.LA_PORTAL_TASK_LIST,
@@ -153,6 +154,7 @@ describe('Accessibility', () => {
     urls.LA_PORTAL_SIBLING_ORDER_CHECK_YOUR_ANSWERS,
     urls.LA_PORTAL_SIBLING_REMOVE_PLACEMENT_ORDER,
     urls.LA_PORTAL_CONFIRMATION_PAGE,
+    urls.LA_PORTAL_UPLOAD_YOUR_DOCUMENTS,
   ];
   const urlsToTest = Object.values(urls).filter(url => !IGNORED_URLS.includes(url));
 

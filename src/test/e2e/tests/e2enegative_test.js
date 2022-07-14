@@ -88,9 +88,9 @@ Scenario(
     await chooseYourFamilyCourtDetailsPage.childDetailsFindFamilyCourtSection();
     await taskListPage.verifyChooseYourFamilyCourtStatus();
 
-    await taskListPage.selectUploadDocumentsDetails();
-    await uploadDocumentsDetailsPage.uploadDocumentsSectionEmpty();
-    await taskListPage.verifyUploadDocumentsStatus();
+    // await taskListPage.selectUploadDocumentsDetails();
+    // await uploadDocumentsDetailsPage.uploadDocumentsSectionEmpty();
+    // await taskListPage.verifyUploadDocumentsStatus();
 
     await taskListPage.selectReviewPayAndSubmitDetails();
     await reviewPayAndSubmitPage.selectNoPCQOption();
