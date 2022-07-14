@@ -1,10 +1,16 @@
 import { Case, Checkbox } from './case';
 import { DocumentType, SiblingPOType, SiblingRelationships, YesOrNo } from './definition';
-import { OrNull, formatApplicant1CannotUploadDocuments, toApiFormat } from './to-api-format';
+import {
+  OrNull,
+  formatApplicant1CannotUploadDocuments,
+  formatLaCannotUploadDocuments,
+  toApiFormat,
+} from './to-api-format';
 
 describe('to-api-format', () => {
   const results: OrNull<Partial<Case>> = {
     applicant1CannotUploadDocuments: [DocumentType.APPLICATION],
+    laCannotUploadDocuments: [DocumentType.APPLICATION],
     applicant2CannotUploadDocuments: [],
     applicant1HasOtherNames: YesOrNo.YES,
     applicant1AdditionalNames: [{ id: 'MOCK_ID', firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' }],
@@ -50,8 +56,10 @@ describe('to-api-format', () => {
     applicant1IBelieveApplicationIsTrue: Checkbox.Unchecked,
     applicant2IBelieveApplicationIsTrue: null,
     applicant1UploadedFiles: [],
+    laUploadedFiles: [],
     applicant2UploadedFiles: [],
     applicant1CannotUpload: Checkbox.Checked,
+    laCannotUpload: Checkbox.Checked,
     applicant2AddressSameAsApplicant1: YesOrNo.YES,
   };
 
@@ -59,7 +67,9 @@ describe('to-api-format', () => {
     const apiFormat = toApiFormat(results as Partial<Case>);
     expect(apiFormat).toStrictEqual({
       applicant1CannotUpload: 'Yes',
+      laCannotUpload: 'Yes',
       applicant1CannotUploadSupportingDocument: ['application'],
+      laCannotUploadSupportingDocument: ['application'],
       applicant1HasOtherNames: 'Yes',
       applicant1AdditionalNames: [
         { id: 'MOCK_ID', value: { firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' } },
@@ -177,6 +187,12 @@ describe('to-api-format', () => {
       },
     },
     {
+      laCannotUploadDocuments: undefined,
+      expected: {
+        laCannotUploadSupportingDocument: [],
+      },
+    },
+    {
       placementOrders: undefined,
       expected: {
         placementOrders: [],
@@ -240,10 +256,14 @@ describe('to-api-format', () => {
     expect(toApiFormat(formData as Partial<Case>)).toMatchObject(expected);
   });
 
-  test('formatApplicant1CannotUploadDocuments should return array', () => {
+  test('formatApplicant1CannotUploadDocuments & formatLaCannotUploadDocuments should return array', () => {
     expect(formatApplicant1CannotUploadDocuments({ applicant1CannotUploadDocuments: undefined })).toEqual([undefined]);
+    expect(formatLaCannotUploadDocuments({ laCannotUploadDocuments: undefined })).toEqual([undefined]);
     expect(
       formatApplicant1CannotUploadDocuments({ applicant1CannotUploadDocuments: [DocumentType.APPLICATION] })
     ).toEqual([DocumentType.APPLICATION]);
+    expect(formatLaCannotUploadDocuments({ laCannotUploadDocuments: [DocumentType.APPLICATION] })).toEqual([
+      DocumentType.APPLICATION,
+    ]);
   });
 });

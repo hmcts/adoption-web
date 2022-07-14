@@ -62,7 +62,7 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         id: 'upload-documents',
         text: taskListItems.uploadDocuments,
         status: getUploadDocumentStatus(userCase),
-        href: '', //getUploadDocumentStatus(userCase) === SectionStatus.CAN_NOT_START_YET ? '' : URL.UPLOAD_YOUR_DOCUMENTS,
+        href: URL.LA_PORTAL_UPLOAD_YOUR_DOCUMENTS,
       },
     ],
   },

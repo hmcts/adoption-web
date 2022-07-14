@@ -96,15 +96,24 @@ const fields: ToApiConverters = {
     applicant2StatementOfTruth: checkboxConverter(data.applicant2IBelieveApplicationIsTrue),
   }),
   applicant1UploadedFiles: () => ({}),
+  laUploadedFiles: () => ({}),
   applicant2UploadedFiles: () => ({}),
   applicant1CannotUploadDocuments: data => ({
     applicant1CannotUploadSupportingDocument: data.applicant1CannotUploadDocuments
       ? formatApplicant1CannotUploadDocuments(data)
       : [],
   }),
+  laCannotUploadDocuments: data => ({
+    laCannotUploadSupportingDocument: data.laCannotUploadDocuments ? formatLaCannotUploadDocuments(data) : [],
+  }),
   applicant1CannotUpload: data => {
     return {
       applicant1CannotUpload: checkboxConverter(data.applicant1CannotUpload),
+    };
+  },
+  laCannotUpload: data => {
+    return {
+      laCannotUpload: checkboxConverter(data.laCannotUpload),
     };
   },
 };
@@ -114,6 +123,11 @@ export const formatApplicant1CannotUploadDocuments = (data: Partial<Case>): any[
   return !Array.isArray(data.applicant1CannotUploadDocuments)
     ? [data.applicant1CannotUploadDocuments]
     : data.applicant1CannotUploadDocuments;
+};
+
+//eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const formatLaCannotUploadDocuments = (data: Partial<Case>): any[] => {
+  return !Array.isArray(data.laCannotUploadDocuments) ? [data.laCannotUploadDocuments] : data.laCannotUploadDocuments;
 };
 
 export const toApiDate = (date: CaseDate | undefined): string => {

@@ -133,7 +133,7 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         id: 'sibling',
         text: taskListItems.siblingCourtOrders,
         status: getSiblingStatus(userCase),
-        href: ' ', //
+        href: '', //
         // userCase.hasSiblings === YesNoNotsure.YES && userCase.siblings?.length
         //   ? URL.SIBLING_ORDER_SUMMARY
         //   : URL.SIBLING_EXISTS,
@@ -147,7 +147,7 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         id: 'upload-your-documents',
         text: taskListItems.uploadDocuments,
         status: getUploadDocumentStatus(userCase),
-        href: getUploadDocumentStatus(userCase) === SectionStatus.CAN_NOT_START_YET ? '' : URL.UPLOAD_YOUR_DOCUMENTS,
+        href: '', //getUploadDocumentStatus(userCase) === SectionStatus.CAN_NOT_START_YET ? '' : URL.UPLOAD_YOUR_DOCUMENTS,
       },
     ],
   },

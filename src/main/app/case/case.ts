@@ -180,9 +180,11 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
 
   applicant1DocumentsUploaded: 'applicant1DocumentsUploaded',
   applicant2DocumentsUploaded: 'applicant2DocumentsUploaded',
+  laDocumentsUploaded: 'laDocumentsUploaded',
   documentsGenerated: 'documentsGenerated',
   applicationFeeOrderSummary: 'applicationFeeOrderSummary',
   applicant1CannotUpload: 'applicant1CannotUpload',
+  laCannotUpload: 'laCannotUpload',
 
   placementOrderCourt: 'placementOrderCourt',
   findFamilyCourt: 'findFamilyCourt',
@@ -395,6 +397,12 @@ export interface Case {
   applicant1UploadedFiles?: UploadedFile[];
   applicant1CannotUpload?: Checkbox;
   applicant1CannotUploadDocuments?: DocumentType[];
+
+  /***** Document upload *****/
+  laDocumentsUploaded?: ListValue<Partial<AdoptionDocument> | null>[];
+  laUploadedFiles?: UploadedFile[];
+  laCannotUpload?: Checkbox;
+  laCannotUploadDocuments?: DocumentType[];
 
   /***** Find court *****/
   placementOrderCourt?: string;
