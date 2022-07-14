@@ -7,9 +7,9 @@ import { YesNoNotsure, YesOrNo } from '../../app/case/definition';
 import { laPortalSequence } from './laPortalSequence';
 
 describe('la-portal > laPortalSequence', () => {
-  test('should contain 52 entries in sibling screen sequence', () => {
+  test('should contain 54 entries in sibling screen sequence', () => {
     Date.now = jest.fn(() => +new Date('2021-01-01'));
-    expect(laPortalSequence).toHaveLength(53);
+    expect(laPortalSequence).toHaveLength(54);
 
     expect(laPortalSequence[0].url).toBe('/la-portal/kba-case-ref');
     expect(laPortalSequence[0].getNextStep({})).toBe('/la-portal/kba-completed');
@@ -232,28 +232,32 @@ describe('la-portal > laPortalSequence', () => {
     expect(laPortalSequence[46].contentDir).toBe('MOCK_BASE_DIR/../sibling/remove-placement-order');
     expect(laPortalSequence[46].getNextStep({})).toBe('/la-portal/sibling/summary');
 
-    expect(laPortalSequence[47].url).toBe('/la-portal/cookies');
-    expect(laPortalSequence[47].contentDir).toBe('MOCK_BASE_DIR/../application/cookies');
-    expect(laPortalSequence[47].getNextStep({})).toBe('/la-portal/kba-case-ref');
+    expect(laPortalSequence[47].url).toBe('/la-portal/confirmation');
+    // expect(laPortalSequence[47].contentDir).toBe('MOCK_BASE_DIR/../review-pay-submit/check-your-answers');
+    expect(laPortalSequence[47].getNextStep({})).toBe('/');
 
-    expect(laPortalSequence[48].url).toBe('/la-portal/privacy-policy');
-    expect(laPortalSequence[48].contentDir).toBe('MOCK_BASE_DIR/../application/privacy-policy');
+    expect(laPortalSequence[48].url).toBe('/la-portal/cookies');
+    expect(laPortalSequence[48].contentDir).toBe('MOCK_BASE_DIR/../application/cookies');
     expect(laPortalSequence[48].getNextStep({})).toBe('/la-portal/kba-case-ref');
 
-    expect(laPortalSequence[49].url).toBe('/la-portal/accessibility-statement');
-    expect(laPortalSequence[49].contentDir).toBe('MOCK_BASE_DIR/../application/accessibility-statement');
+    expect(laPortalSequence[49].url).toBe('/la-portal/privacy-policy');
+    expect(laPortalSequence[49].contentDir).toBe('MOCK_BASE_DIR/../application/privacy-policy');
     expect(laPortalSequence[49].getNextStep({})).toBe('/la-portal/kba-case-ref');
 
-    expect(laPortalSequence[50].url).toBe('/la-portal/terms-and-conditions');
-    expect(laPortalSequence[50].contentDir).toBe('MOCK_BASE_DIR/../application/terms-and-conditions');
+    expect(laPortalSequence[50].url).toBe('/la-portal/accessibility-statement');
+    expect(laPortalSequence[50].contentDir).toBe('MOCK_BASE_DIR/../application/accessibility-statement');
     expect(laPortalSequence[50].getNextStep({})).toBe('/la-portal/kba-case-ref');
 
-    expect(laPortalSequence[51].url).toBe('/la-portal/contact-us');
-    expect(laPortalSequence[51].contentDir).toBe('MOCK_BASE_DIR/../application/contact-us');
+    expect(laPortalSequence[51].url).toBe('/la-portal/terms-and-conditions');
+    expect(laPortalSequence[51].contentDir).toBe('MOCK_BASE_DIR/../application/terms-and-conditions');
     expect(laPortalSequence[51].getNextStep({})).toBe('/la-portal/kba-case-ref');
 
-    expect(laPortalSequence[52].url).toBe('/la-portal/la-portal/upload-your-documents');
-    expect(laPortalSequence[52].contentDir).toBe('MOCK_BASE_DIR/../la-portal/upload-your-documents');
-    expect(laPortalSequence[52].getNextStep({})).toBe('/la-portal/task-list');
+    expect(laPortalSequence[52].url).toBe('/la-portal/contact-us');
+    expect(laPortalSequence[52].contentDir).toBe('MOCK_BASE_DIR/../application/contact-us');
+    expect(laPortalSequence[52].getNextStep({})).toBe('/la-portal/kba-case-ref');
+
+    expect(laPortalSequence[53].url).toBe('/la-portal/la-portal/upload-your-documents');
+    expect(laPortalSequence[53].contentDir).toBe('MOCK_BASE_DIR/../la-portal/upload-your-documents');
+    expect(laPortalSequence[53].getNextStep({})).toBe('/la-portal/task-list');
   });
 });
