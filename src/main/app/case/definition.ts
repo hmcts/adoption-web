@@ -459,8 +459,11 @@ export interface CaseData {
   applicant2SotFullName: string;
   pcqId: string;
   applicant1DocumentsUploaded: ListValue<AdoptionDocument>[];
+  laDocumentsUploaded: ListValue<AdoptionDocument>[];
   applicant1CannotUploadSupportingDocument: DocumentType[];
+  laCannotUploadSupportingDocument: DocumentType[];
   applicant1CannotUpload: string;
+  laCannotUpload: string;
 
   placementOrderCourt: string;
   findFamilyCourt: YesOrNo;
