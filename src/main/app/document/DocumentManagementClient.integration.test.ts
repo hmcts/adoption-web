@@ -34,6 +34,23 @@ describe('DocumentManagementClient', () => {
     expect(actual).toEqual(['a-document']);
   });
 
+  it('returns empty array when there are no files', async () => {
+    const mockPost = jest.fn().mockResolvedValue({ data: { documents: null } });
+    mockedAxios.create.mockReturnValueOnce({ post: mockPost } as unknown as AxiosInstance);
+
+    const client = new DocumentManagementClient('http://localhost', 'abcd', {
+      id: 'userId',
+      accessToken: 'userAccessToken',
+    } as unknown as UserDetails);
+
+    const actual = await client.create({
+      files: [{ buffer: '123', originalname: 'a-new-file' }] as unknown as UploadedFiles,
+      classification: Classification.Private,
+    });
+
+    expect(actual).toEqual([]);
+  });
+
   it('deletes documents', async () => {
     const mockDelete = jest.fn().mockResolvedValue({ data: 'MOCKED-OK' });
     mockedAxios.create.mockReturnValueOnce({ delete: mockDelete } as unknown as AxiosInstance);
