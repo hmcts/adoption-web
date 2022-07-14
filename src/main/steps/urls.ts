@@ -223,3 +223,5 @@ export const LA_PORTAL_PRIVACY_POLICY: PageLink = `${LA_PORTAL}/privacy-policy`;
 export const LA_PORTAL_ACCESSIBILITY_STATEMENT: PageLink = `${LA_PORTAL}/accessibility-statement`;
 export const LA_PORTAL_TERMS_AND_CONDITIONS: PageLink = `${LA_PORTAL}/terms-and-conditions`;
 export const LA_PORTAL_CONTACT_US: PageLink = `${LA_PORTAL}/contact-us`;
+
+export const LA_PORTAL_CONFIRMATION_PAGE: PageLink = `${LA_PORTAL}/confirmation`;
