@@ -296,13 +296,8 @@ const siblingSequence: Step[] = [
 /******************** REVIEW AND SUBMIT *********************/
 const reviewSubmitSequence: Step[] = [
   {
-    url: Urls.LA_PORTAL_CHECK_ANSWERS_URL,
-    contentDir: path.join(__dirname, '..', 'review-pay-submit', 'check-your-answers'),
-    getNextStep: () => Urls.LA_PORTAL_CONFIRMATION_PAGE,
-  },
-  {
     url: Urls.LA_PORTAL_CONFIRMATION_PAGE,
-    contentDir: path.join(__dirname, '..', 'review-pay-submit', 'confirmation'),
+    //contentDir: path.join(__dirname, '..', 'review-pay-submit', 'confirmation'),
     getNextStep: () => Urls.HOME_URL,
   },
 ];

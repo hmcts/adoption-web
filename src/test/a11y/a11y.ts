@@ -152,11 +152,7 @@ describe('Accessibility', () => {
     urls.LA_PORTAL_SIBLING_ORDER_SUMMARY,
     urls.LA_PORTAL_SIBLING_ORDER_CHECK_YOUR_ANSWERS,
     urls.LA_PORTAL_SIBLING_REMOVE_PLACEMENT_ORDER,
-    urls.LA_PORTAL_REVIEW_PAY_SUBMIT,
-    urls.LA_PORTAL_CHECK_ANSWERS_URL,
     urls.LA_PORTAL_CONFIRMATION_PAGE,
-    urls.LA_PORTAL_PAY_YOUR_FEE,
-    urls.LA_PORTAL_PAYMENT_CALLBACK_URL,
   ];
   const urlsToTest = Object.values(urls).filter(url => !IGNORED_URLS.includes(url));
 

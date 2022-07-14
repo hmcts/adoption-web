@@ -222,8 +222,4 @@ export const LA_PORTAL_ACCESSIBILITY_STATEMENT: PageLink = `${LA_PORTAL}/accessi
 export const LA_PORTAL_TERMS_AND_CONDITIONS: PageLink = `${LA_PORTAL}/terms-and-conditions`;
 export const LA_PORTAL_CONTACT_US: PageLink = `${LA_PORTAL}/contact-us`;
 
-export const LA_PORTAL_REVIEW_PAY_SUBMIT: PageLink = `${LA_PORTAL}${REVIEW_PAY_SUBMIT}`;
-export const LA_PORTAL_CHECK_ANSWERS_URL: PageLink = `${LA_PORTAL}${REVIEW_PAY_SUBMIT}/check-your-answers`;
-export const LA_PORTAL_CONFIRMATION_PAGE: PageLink = `${LA_PORTAL}${REVIEW_PAY_SUBMIT}/confirmation`;
-export const LA_PORTAL_PAY_YOUR_FEE: PageLink = `${LA_PORTAL}${REVIEW_PAY_SUBMIT}/payment/pay-your-fee`;
-export const LA_PORTAL_PAYMENT_CALLBACK_URL: PageLink = `${LA_PORTAL}${REVIEW_PAY_SUBMIT}/payment/payment-callback`;
+export const LA_PORTAL_CONFIRMATION_PAGE: PageLink = `${LA_PORTAL}/confirmation`;

@@ -3,7 +3,7 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import * as URL from '../../urls';
 
 import {
-  getApplicationStatus,
+  //getApplicationStatus,
   getBirthFatherDetailsStatus,
   getBirthMotherDetailsStatus,
   getChildrenBirthCertificateStatus,
@@ -65,15 +65,15 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
         status: getUploadDocumentStatus(userCase),
         href: '', //getUploadDocumentStatus(userCase) === SectionStatus.CAN_NOT_START_YET ? '' : URL.UPLOAD_YOUR_DOCUMENTS,
       },
-      {
-        id: 'check-your-answers',
-        text: taskListItems.checkYourAnswers,
-        status: getApplicationStatus(userCase),
-        href:
-          getApplicationStatus(userCase) === SectionStatus.CAN_NOT_START_YET
-            ? URL.LA_PORTAL_TASK_LIST
-            : URL.LA_PORTAL_CHECK_ANSWERS_URL,
-      },
+      // {
+      //   id: 'check-your-answers',
+      //   text: taskListItems.checkYourAnswers,
+      //   status: getApplicationStatus(userCase),
+      //   href:
+      //     getApplicationStatus(userCase) === SectionStatus.CAN_NOT_START_YET
+      //       ? URL.LA_PORTAL_TASK_LIST
+      //       : URL.LA_PORTAL_CHECK_ANSWERS_URL,
+      // },
     ],
   },
 ];
@@ -97,7 +97,6 @@ const en = () => ({
     placementAndCourtOrders: 'Placement and court orders',
     siblingCourtOrders: 'Sibling court order details',
     uploadDocuments: 'Upload documents',
-    checkYourAnswers: 'Check your answers',
   },
   reviewAndSubmit: 'Review and submit',
 });
@@ -121,7 +120,6 @@ const cy: typeof en = () => ({
     placementAndCourtOrders: 'Gorchmynion llys a lleoli',
     siblingCourtOrders: 'Manylion gorchymyn llys brodyr/chwiorydd',
     uploadDocuments: 'Llwytho dogfennau',
-    checkYourAnswers: 'Check your answers (in welsh)',
   },
   reviewAndSubmit: 'Review and submit',
 });
