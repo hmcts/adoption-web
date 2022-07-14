@@ -110,6 +110,7 @@ Scenario(
 
     await taskListPage.selectUploadDocumentsDetails();
     await uploadDocumentsDetailsPage.uploadDocumentsSection();
-    await taskListPage.verifyUploadDocumentsStatus();
+    // TODO in Future stories
+    // await taskListPage.verifyUploadDocumentsStatus();
   }
 );
