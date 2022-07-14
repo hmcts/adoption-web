@@ -1,5 +1,5 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
-import { YesOrNo } from '../../../app/case/definition';
+import { SiblingPOType, SiblingRelationships, YesOrNo } from '../../../app/case/definition';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent } from '../../common/common.content';
@@ -10,7 +10,24 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: 'Sibling details',
-  label: "Are you sure you want to remove this MOCK_TYPE for child's MOCK_RELATION?",
+  siblingRelation: {
+    [SiblingRelationships.SISTER]: 'Sister',
+    [SiblingRelationships.STEP_SISTER]: 'Step-sister',
+    [SiblingRelationships.HALF_SISTER]: 'Half-sister',
+    [SiblingRelationships.BROTHER]: 'Brother',
+    [SiblingRelationships.STEP_BROTHER]: 'Step-brother',
+    [SiblingRelationships.HALF_BROTHER]: 'Half-brother',
+  },
+  siblingPOType: {
+    [SiblingPOType.ADOPTION_ORDER]: 'Adoption order',
+    [SiblingPOType.CARE_ORDER]: 'Care order',
+    [SiblingPOType.CONTACT_ORDER]: 'Contact order',
+    [SiblingPOType.FREEING_ORDER]: 'Freeing order',
+    [SiblingPOType.PLACEMENT_ORDER]: 'Placement order',
+    [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order',
+    [SiblingPOType.OTHER]: 'Other',
+  },
+  label: "Are you sure you want to remove this adoption order for child's sister?",
   errors: {
     confirm: {
       required: 'Please select an answer',
@@ -20,7 +37,24 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
-  label: "Are you sure you want to remove this MOCK_TYPE for child's MOCK_RELATION? (in welsh)",
+  siblingRelation: {
+    [SiblingRelationships.SISTER]: 'Sister (in welsh)',
+    [SiblingRelationships.STEP_SISTER]: 'Step-sister (in welsh)',
+    [SiblingRelationships.HALF_SISTER]: 'Half-sister (in welsh)',
+    [SiblingRelationships.BROTHER]: 'Brother (in welsh)',
+    [SiblingRelationships.STEP_BROTHER]: 'Step-brother (in welsh)',
+    [SiblingRelationships.HALF_BROTHER]: 'Half-brother (in welsh)',
+  },
+  siblingPOType: {
+    [SiblingPOType.ADOPTION_ORDER]: 'Adoption order (in welsh)',
+    [SiblingPOType.CARE_ORDER]: 'Care order (in welsh)',
+    [SiblingPOType.CONTACT_ORDER]: 'Contact order (in welsh)',
+    [SiblingPOType.FREEING_ORDER]: 'Freeing order (in welsh)',
+    [SiblingPOType.PLACEMENT_ORDER]: 'Placement order (in welsh)',
+    [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order (in welsh)',
+    [SiblingPOType.OTHER]: 'Other (in welsh)',
+  },
+  label: "Are you sure you want to remove this adoption order (in welsh) for child's sister (in welsh)?",
   errors: {
     confirm: {
       required: 'Dewiswch ateb os gwelwch yn dda',
@@ -36,8 +70,8 @@ describe('sibling > remove-placement-order > content', () => {
       siblings: [
         {
           siblingId: 'MOCK_SIBLING_ID',
-          siblingRelation: 'MOCK_RELATION',
-          siblingPoType: 'MOCK_TYPE',
+          siblingRelation: SiblingRelationships.SISTER,
+          siblingPoType: SiblingPOType.ADOPTION_ORDER,
           siblingPoNumber: 'MOCK_NUMBER',
         },
       ],
@@ -63,15 +97,18 @@ describe('sibling > remove-placement-order > content', () => {
       siblingId: '',
       siblingRelation: undefined,
       siblingPoType: undefined,
-      expected: { label: "Are you sure you want to remove this  for child's ?", siblingPoType: undefined },
+      expected: {
+        label: "Are you sure you want to remove this order for child's sibling?",
+        siblingPoType: undefined,
+      },
     },
     {
       siblingId: 'MOCK_SIBLING_ID',
-      siblingRelation: 'MOCK_RELATION',
-      siblingPoType: 'MOCK_TYPE',
+      siblingRelation: SiblingRelationships.SISTER,
+      siblingPoType: SiblingPOType.ADOPTION_ORDER,
       expected: {
-        label: "Are you sure you want to remove this MOCK_TYPE for child's MOCK_RELATION?",
-        siblingPoType: 'MOCK_TYPE',
+        label: "Are you sure you want to remove this adoption order for child's sister?",
+        siblingPoType: SiblingPOType.ADOPTION_ORDER,
       },
     },
   ])('should create correct label %#', ({ siblingId, siblingRelation, siblingPoType, expected }) => {
