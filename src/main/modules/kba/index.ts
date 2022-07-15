@@ -3,7 +3,13 @@ import { Application, NextFunction, Response } from 'express';
 import { getSystemUser } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
 import { AppRequest } from '../../app/controller/AppRequest';
-import { LA_PORTAL, LA_PORTAL_KBA_CALLBACK, LA_PORTAL_KBA_CASE_REF, LA_PORTAL_TASK_LIST } from '../../steps/urls';
+import {
+  LA_PORTAL,
+  LA_PORTAL_KBA_CALLBACK,
+  LA_PORTAL_KBA_CASE_REF,
+  LA_PORTAL_NEG_SCENARIO,
+  LA_PORTAL_TASK_LIST,
+} from '../../steps/urls';
 
 /**
  * Adds the KBA middleware for knowledge based authentication
@@ -36,6 +42,15 @@ export class KbaMiddleware {
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
           if (!req.session.userCase) {
             req.session.userCase = await req.locals.api.getCaseById(req.session.laPortalKba.caseRef!);
+          }
+
+          if (
+            req.session.userCase.childrenDateOfBirth !== req.session.laPortalKba['childrenDateOfBirth'] &&
+            req.session.laPortalKba['childName'] !==
+              req.session.userCase.childrenFirstName + ' ' + req.session.userCase.childrenLastName
+          ) {
+            req.session.destroy(() => res.redirect(LA_PORTAL_NEG_SCENARIO));
+            return;
           }
         }
 
