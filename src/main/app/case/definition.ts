@@ -448,10 +448,12 @@ export interface CaseData {
   siblings: ListValue<Sibling>[];
   payments: ListValue<Payment>[];
   hasAnotherAdopAgencyOrLA: YesOrNo;
-  hasSiblings: string;
+  hasSiblings: YesNoNotsure;
   hasSiblingNotSureReason: string;
   addAnotherSiblingPlacementOrder: YesOrNo;
   selectedSiblingId: string;
+  selectedSiblingRelation: string;
+  selectedSiblingPoType: string;
 
   applicant1StatementOfTruth: YesOrNo;
   applicant2StatementOfTruth: YesOrNo;
@@ -756,9 +758,10 @@ export interface AdoptionAgencyOrLocalAuthority {
 
 export interface Sibling {
   siblingId: string;
-  siblingRelation?: string;
-  siblingPoType?: string;
+  siblingRelation?: SiblingRelationships;
+  siblingPoType?: SiblingPOType;
   siblingPoNumber?: string;
+  siblingPlacementOtherType?: string;
 }
 
 export interface SocialWorker {
@@ -1323,6 +1326,25 @@ export const enum ServicePaymentMethod {
   FEE_PAY_BY_HWF = 'feePayByHelp',
   FEE_PAY_BY_PHONE = 'feePayByTelephone',
   FEE_PAY_BY_CHEQUE = 'feePayByCheque',
+}
+
+export const enum SiblingRelationships {
+  SISTER = 'sister',
+  HALF_SISTER = 'halfSister',
+  STEP_SISTER = 'stepSister',
+  BROTHER = 'brother',
+  HALF_BROTHER = 'halfBrother',
+  STEP_BROTHER = 'stepBrother',
+}
+
+export const enum SiblingPOType {
+  ADOPTION_ORDER = 'adoptionOrder',
+  CARE_ORDER = 'careOrder',
+  CONTACT_ORDER = 'contactOrder',
+  FREEING_ORDER = 'freeingOrder',
+  PLACEMENT_ORDER = 'placementOrder',
+  SUPERVIS_ORDER = 'superVisOrder',
+  OTHER = 'other',
 }
 
 export const enum SolicitorPaymentMethod {

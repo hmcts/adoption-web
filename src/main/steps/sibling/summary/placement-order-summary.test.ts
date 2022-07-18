@@ -1,4 +1,4 @@
-import { Sibling } from '../../../app/case/definition';
+import { Sibling, SiblingPOType, SiblingRelationships } from '../../../app/case/definition';
 
 import { placementOrderListItems } from './placement-order-summary';
 
@@ -6,7 +6,24 @@ describe('placement-order-summary', () => {
   const content = {
     change: 'Change',
     remove: 'Remove',
+    siblingRelation: {
+      [SiblingRelationships.SISTER]: 'Sister',
+      [SiblingRelationships.STEP_SISTER]: 'Step-sister',
+      [SiblingRelationships.HALF_SISTER]: 'Half-sister',
+      [SiblingRelationships.BROTHER]: 'Brother',
+      [SiblingRelationships.STEP_BROTHER]: 'Step-brother',
+      [SiblingRelationships.HALF_BROTHER]: 'Half-brother',
+    },
     placementOrder: 'Placement Order',
+    siblingPOType: {
+      [SiblingPOType.ADOPTION_ORDER]: 'Adoption order',
+      [SiblingPOType.CARE_ORDER]: 'Care order',
+      [SiblingPOType.CONTACT_ORDER]: 'Contact order',
+      [SiblingPOType.FREEING_ORDER]: 'Freeing order',
+      [SiblingPOType.PLACEMENT_ORDER]: 'Placement order',
+      [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order',
+      [SiblingPOType.OTHER]: 'Other',
+    },
     incomplete: 'incomplete',
   };
 
@@ -14,80 +31,109 @@ describe('placement-order-summary', () => {
     const siblings: Sibling[] = [
       {
         siblingId: 'MOCK_ID',
-        siblingRelation: 'MOCK_RELATION',
-        siblingPoType: 'MOCK_TYPE',
+        siblingRelation: SiblingRelationships.SISTER,
+        siblingPoType: SiblingPOType.ADOPTION_ORDER,
         siblingPoNumber: 'MOCK_NUMBER',
       },
       {
         siblingId: 'MOCK_ID2',
-        siblingRelation: 'MOCK_RELATION2',
-        siblingPoType: 'MOCK_TYPE2',
+        siblingRelation: SiblingRelationships.HALF_SISTER,
+        siblingPoType: SiblingPOType.CARE_ORDER,
       },
       {
         siblingId: 'MOCK_ID3',
-        siblingRelation: 'MOCK_RELATION3',
-        siblingPoType: 'MOCK_TYPE3',
+        siblingRelation: SiblingRelationships.STEP_SISTER,
+        siblingPoType: SiblingPOType.CONTACT_ORDER,
         siblingPoNumber: 'MOCK_NUMBER3',
       },
     ];
     const result = placementOrderListItems(siblings, content);
     expect(result).toEqual([
       {
-        key: { text: 'MOCK_RELATION', classes: 'font-normal' },
-        value: { classes: 'summary-list-value-left-align', html: 'MOCK_TYPE' },
-        actions: {
-          classes: 'summary-list-actions',
-          items: [
-            {
-              href: '/sibling/remove-placement-order?remove=MOCK_ID',
-              text: 'Remove',
-              visuallyHiddenText: 'MOCK_RELATION MOCK_TYPE',
-            },
-            {
-              href: '/sibling/placement-order-check-your-answers?change=MOCK_ID',
-              text: 'Change',
-              visuallyHiddenText: 'MOCK_RELATION MOCK_TYPE',
-            },
-          ],
+        key: {
+          text: `${siblings[0].siblingRelation && content.siblingRelation[siblings[0].siblingRelation]}`,
+          classes: 'font-normal',
         },
-      },
-      {
-        key: { text: 'MOCK_RELATION2', classes: 'font-normal' },
         value: {
           classes: 'summary-list-value-left-align',
-          html: 'MOCK_TYPE2 <strong class="govuk-tag govuk-tag--yellow">incomplete</strong>',
+          html: siblings[0].siblingPoType && content.siblingPOType[siblings[0].siblingPoType],
         },
         actions: {
           classes: 'summary-list-actions',
           items: [
             {
-              href: '/sibling/remove-placement-order?remove=MOCK_ID2',
+              href: '/la-portal/sibling/remove-placement-order?remove=MOCK_ID',
               text: 'Remove',
-              visuallyHiddenText: 'MOCK_RELATION2 MOCK_TYPE2',
+              visuallyHiddenText: `${
+                siblings[0].siblingRelation && content.siblingRelation[siblings[0].siblingRelation]
+              } ${siblings[0].siblingPoType && content.siblingPOType[siblings[0].siblingPoType]}`,
             },
             {
-              href: '/sibling/placement-order-check-your-answers?change=MOCK_ID2',
+              href: '/la-portal/sibling/placement-order-check-your-answers?change=MOCK_ID',
               text: 'Change',
-              visuallyHiddenText: 'MOCK_RELATION2 MOCK_TYPE2',
+              visuallyHiddenText: `${
+                siblings[0].siblingRelation && content.siblingRelation[siblings[0].siblingRelation]
+              } ${siblings[0].siblingPoType && content.siblingPOType[siblings[0].siblingPoType]}`,
             },
           ],
         },
       },
       {
-        key: { text: 'MOCK_RELATION3', classes: 'font-normal' },
-        value: { classes: 'summary-list-value-left-align', html: 'MOCK_TYPE3' },
+        key: {
+          text: `${siblings[1].siblingRelation && content.siblingRelation[siblings[1].siblingRelation]}`,
+          classes: 'font-normal',
+        },
+        value: {
+          classes: 'summary-list-value-left-align',
+          html: `${
+            siblings[1].siblingPoType && content.siblingPOType[siblings[1].siblingPoType]
+          } <strong class="govuk-tag govuk-tag--yellow">incomplete</strong>`,
+        },
         actions: {
           classes: 'summary-list-actions',
           items: [
             {
-              href: '/sibling/remove-placement-order?remove=MOCK_ID3',
+              href: '/la-portal/sibling/remove-placement-order?remove=MOCK_ID2',
               text: 'Remove',
-              visuallyHiddenText: 'MOCK_RELATION3 MOCK_TYPE3',
+              visuallyHiddenText: `${
+                siblings[1].siblingRelation && content.siblingRelation[siblings[1].siblingRelation]
+              } ${siblings[1].siblingPoType && content.siblingPOType[siblings[1].siblingPoType]}`,
             },
             {
-              href: '/sibling/placement-order-check-your-answers?change=MOCK_ID3',
+              href: '/la-portal/sibling/placement-order-check-your-answers?change=MOCK_ID2',
               text: 'Change',
-              visuallyHiddenText: 'MOCK_RELATION3 MOCK_TYPE3',
+              visuallyHiddenText: `${
+                siblings[1].siblingRelation && content.siblingRelation[siblings[1].siblingRelation]
+              } ${siblings[1].siblingPoType && content.siblingPOType[siblings[1].siblingPoType]}`,
+            },
+          ],
+        },
+      },
+      {
+        key: {
+          text: `${siblings[2].siblingRelation && content.siblingRelation[siblings[2].siblingRelation]}`,
+          classes: 'font-normal',
+        },
+        value: {
+          classes: 'summary-list-value-left-align',
+          html: siblings[2].siblingPoType && content.siblingPOType[siblings[2].siblingPoType],
+        },
+        actions: {
+          classes: 'summary-list-actions',
+          items: [
+            {
+              href: '/la-portal/sibling/remove-placement-order?remove=MOCK_ID3',
+              text: 'Remove',
+              visuallyHiddenText: `${
+                siblings[2].siblingRelation && content.siblingRelation[siblings[2].siblingRelation]
+              } ${siblings[2].siblingPoType && content.siblingPOType[siblings[2].siblingPoType]}`,
+            },
+            {
+              href: '/la-portal/sibling/placement-order-check-your-answers?change=MOCK_ID3',
+              text: 'Change',
+              visuallyHiddenText: `${
+                siblings[2].siblingRelation && content.siblingRelation[siblings[2].siblingRelation]
+              } ${siblings[2].siblingPoType && content.siblingPOType[siblings[2].siblingPoType]}`,
             },
           ],
         },

@@ -1,5 +1,6 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
-import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
+import { SiblingRelationships } from '../../../app/case/definition';
+import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -10,20 +11,30 @@ jest.mock('../../../app/form/validation');
 const enContent = {
   section: 'Sibling details',
   label: 'What is their relationship to the child being adopted?',
-  hint: 'For instance, brother or half sister',
+  sister: 'Sister',
+  halfSister: 'Half-sister',
+  stepSister: 'Step-sister',
+  brother: 'Brother',
+  halfBrother: 'Half-brother',
+  stepBrother: 'Step-brother',
   errors: {
-    siblingRelation: {
-      required: 'Please answer the question',
+    selectedSiblingRelation: {
+      required: 'Please select an answer',
     },
   },
 };
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
   label: 'What is their relationship to the child being adopted? (in welsh)',
-  hint: 'For instance, brother or half sister (in welsh)',
+  sister: 'Sister (in welsh)',
+  halfSister: 'Half-sister (in welsh)',
+  stepSister: 'Step-sister (in welsh)',
+  brother: 'Brother (in welsh)',
+  halfBrother: 'Half-brother (in welsh)',
+  stepBrother: 'Step-brother (in welsh)',
   errors: {
-    siblingRelation: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+    selectedSiblingRelation: {
+      required: 'Please select an answer (in welsh)',
     },
   },
 };
@@ -52,19 +63,28 @@ describe('sibling > relation > content', () => {
     generatedContent = generateContent({
       ...commonContent,
       userCase: {
-        siblings: [{ siblingId: 'MOCK_SIBLING_ID', siblingRelation: 'MOCK_RELATION' }],
+        siblings: [{ siblingId: 'MOCK_SIBLING_ID', siblingRelation: SiblingRelationships.BROTHER }],
         selectedSiblingId: 'MOCK_SIBLING_ID',
       },
     });
     form = generatedContent.form as FormContent;
     fields = form.fields as FormFields;
-    const relationField = fields.siblingRelation as FormOptions;
-    expect(relationField.type).toBe('text');
-    expect(relationField.classes).toBe('govuk-input govuk-input--width-20');
+    const relationField = fields.selectedSiblingRelation as FormOptions;
+    expect(relationField.type).toBe('radios');
+    expect(relationField.classes).toBe('govuk-radios');
     expect((relationField.label as Function)(generatedContent)).toBe(enContent.label);
-    expect(relationField.labelSize).toBe('l');
-    expect(((relationField as FormInput).hint as Function)(generatedContent)).toBe(enContent.hint);
-    expect((relationField as FormInput).value).toBe('MOCK_RELATION');
+    expect((relationField.values[0].label as Function)(generatedContent)).toBe(enContent.sister);
+    expect(relationField.values[0].value).toBe(SiblingRelationships.SISTER);
+    expect((relationField.values[1].label as Function)(generatedContent)).toBe(enContent.halfSister);
+    expect(relationField.values[1].value).toBe(SiblingRelationships.HALF_SISTER);
+    expect((relationField.values[2].label as Function)(generatedContent)).toBe(enContent.stepSister);
+    expect(relationField.values[2].value).toBe(SiblingRelationships.STEP_SISTER);
+    expect((relationField.values[3].label as Function)(generatedContent)).toBe(enContent.brother);
+    expect(relationField.values[3].value).toBe(SiblingRelationships.BROTHER);
+    expect((relationField.values[4].label as Function)(generatedContent)).toBe(enContent.halfBrother);
+    expect(relationField.values[4].value).toBe(SiblingRelationships.HALF_BROTHER);
+    expect((relationField.values[5].label as Function)(generatedContent)).toBe(enContent.stepBrother);
+    expect(relationField.values[5].value).toBe(SiblingRelationships.STEP_BROTHER);
     expect(relationField.validator).toBe(isFieldFilledIn);
   });
 

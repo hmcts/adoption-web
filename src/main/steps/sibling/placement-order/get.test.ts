@@ -49,7 +49,7 @@ describe('SiblingPlacementOrderGetController', () => {
     test('should set the selectedSiblingId in userCase', async () => {
       req.locals.api.triggerEvent.mockResolvedValue({ selectedSiblingId: 'MOCK_ID' });
       await controller.get(req, res);
-      expect(req.session.userCase.selectedSiblingId).toBe('MOCK_ID');
+      expect(req.session.userCase.selectedSiblingId).toBe('MOCK_SIBLING_ID');
     });
   });
 

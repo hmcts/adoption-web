@@ -302,6 +302,15 @@ const siblingSequence: Step[] = [
   },
 ];
 
+/******************** REVIEW AND SUBMIT *********************/
+const reviewSubmitSequence: Step[] = [
+  {
+    url: Urls.LA_PORTAL_CONFIRMATION_PAGE,
+    //contentDir: path.join(__dirname, '..', 'review-pay-submit', 'confirmation'),
+    getNextStep: () => Urls.HOME_URL,
+  },
+];
+
 /******************** FOOTER LINKS *********************/
 const footerLinkSequence: Step[] = [
   {
@@ -350,6 +359,7 @@ export const laPortalSequence: Step[] = [
   ...otherParentSequence,
   ...placementOrderSequence,
   ...siblingSequence,
+  ...reviewSubmitSequence,
   ...footerLinkSequence,
   ...documentSequence,
 ];
