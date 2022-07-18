@@ -60,20 +60,20 @@ const birthMotherSequence = [
   {
     url: Urls.LA_PORTAL_BIRTH_MOTHER_SELECT_ADDRESS,
     contentDir: path.join(__dirname, '..', 'birth-mother', 'address', 'select'),
-    getNextStep: () => Urls.LA_PORTAL_BIRTH_MOTER_LAST_ADDRESS_CONFIRMED,
+    getNextStep: () => Urls.LA_PORTAL_BIRTH_MOTHER_LAST_ADDRESS_CONFIRMED,
   },
   {
     url: Urls.LA_PORTAL_BIRTH_MOTHER_MANUAL_ADDRESS,
     contentDir: path.join(__dirname, '..', 'birth-mother', 'address', 'manual'),
-    getNextStep: () => Urls.LA_PORTAL_BIRTH_MOTER_LAST_ADDRESS_CONFIRMED,
+    getNextStep: () => Urls.LA_PORTAL_BIRTH_MOTHER_LAST_ADDRESS_CONFIRMED,
   },
   {
     url: Urls.LA_PORTAL_BIRTH_MOTHER_INTERNATIONAL_ADDRESS,
     contentDir: path.join(__dirname, '..', 'birth-mother', 'address', 'international'),
-    getNextStep: () => Urls.LA_PORTAL_BIRTH_MOTER_LAST_ADDRESS_CONFIRMED,
+    getNextStep: () => Urls.LA_PORTAL_BIRTH_MOTHER_LAST_ADDRESS_CONFIRMED,
   },
   {
-    url: Urls.LA_PORTAL_BIRTH_MOTER_LAST_ADDRESS_CONFIRMED,
+    url: Urls.LA_PORTAL_BIRTH_MOTHER_LAST_ADDRESS_CONFIRMED,
     contentDir: path.join(__dirname, '..', 'birth-mother', 'last-address-confirmed'),
     getNextStep: () => Urls.LA_PORTAL_TASK_LIST,
   },
@@ -322,6 +322,16 @@ const footerLinkSequence: Step[] = [
   },
 ];
 
+//console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'+path.join(__dirname, 'check-your-answers'));
+
+const ReviewYourAsnwersSequence: Step[] = [
+  {
+    url: Urls.LA_PORTAL_CHECK_YOUR_ANSWERS,
+    contentDir: path.join(__dirname, 'check-your-answers'),
+    getNextStep: () => Urls.LA_PORTAL_TASK_LIST,
+  },
+];
+
 export const laPortalSequence: Step[] = [
   {
     url: Urls.LA_PORTAL_KBA_CASE_REF,
@@ -329,7 +339,8 @@ export const laPortalSequence: Step[] = [
   },
   {
     url: Urls.LA_PORTAL_TASK_LIST,
-    getNextStep: () => Urls.HOME_URL,
+    //getNextStep: () => Urls.HOME_URL,
+    getNextStep: () => Urls.LA_PORTAL_CHECK_YOUR_ANSWERS,
   },
   ...childSequence,
   ...birthMotherSequence,
@@ -338,4 +349,5 @@ export const laPortalSequence: Step[] = [
   ...placementOrderSequence,
   ...siblingSequence,
   ...footerLinkSequence,
+  ...ReviewYourAsnwersSequence,
 ];
