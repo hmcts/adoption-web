@@ -16,6 +16,8 @@ services:
     url: FEE_LOOKUP_URL
   documentManagement:
     url: DOCUMENT_MANAGEMENT_URL
+  cdam:
+    url: CDAM_API_URL
   equalityAndDiversity:
     url: EQUALITY_URL
     tokenKey: PCQ_TOKEN
