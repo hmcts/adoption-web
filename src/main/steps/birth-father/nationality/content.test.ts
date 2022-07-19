@@ -28,7 +28,7 @@ const enContent = {
     birthFatherNationality: {
       required: 'Select if they are British, Irish, citizen of a different country or not sure',
       notSureViolation: "Select a nationality or 'Not sure'",
-      addButtonNotClicked: "Select 'Add' to save the country name",
+      addButtonNotClicked: "Select 'Add' before you continue",
     },
     addAnotherNationality: 'MOCK_ERROR_MESSAGE',
   },
@@ -43,7 +43,7 @@ const cyContent = {
     birthFatherNationality: {
       required: 'Select if they are British, Irish, citizen of a different country or not sure (in welsh)',
       notSureViolation: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
-      addButtonNotClicked: "Dewiswch ‘Ychwanegu’ i gadw enw'r wlad",
+      addButtonNotClicked: "Select 'Add' before you continue (in welsh)",
     },
     addAnotherNationality: 'MOCK_ERROR_MESSAGE',
   },
