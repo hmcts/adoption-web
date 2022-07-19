@@ -63,6 +63,7 @@ describe('FindFamilyCourtPostController', () => {
       });
 
       test('should set the formData fields in userCase placementOrders session data', async () => {
+        req.body.autoCompleteData = 'Chelmsford Family Court';
         await controller.post(req, res);
         expect(req.session.errors).toEqual([]);
         expect(req.session.userCase.placementOrderCourt).toEqual('Chelmsford Family Court');
@@ -71,6 +72,7 @@ describe('FindFamilyCourtPostController', () => {
 
       test('should redirect to correct screen', async () => {
         mockGetNextStepUrl.mockReturnValue('/MOCK_ENDPOINT');
+        req.body.autoCompleteData = 'MOCK';
         await controller.post(req, res);
         expect(mockGetNextStepUrl).toHaveBeenCalledWith(req, req.session.userCase);
         expect(res.redirect).toHaveBeenCalledWith('/MOCK_ENDPOINT');
@@ -91,7 +93,13 @@ describe('FindFamilyCourtPostController', () => {
 
     test('should save the errors in session', async () => {
       await controller.post(req, res);
-      expect(req.session.errors).toEqual(['MOCK_ERROR']);
+      expect(req.session.errors).toEqual([
+        'MOCK_ERROR',
+        {
+          errorType: 'required',
+          propertyName: 'familyCourtName',
+        },
+      ]);
       expect(req.session.save).toHaveBeenCalled();
     });
 
