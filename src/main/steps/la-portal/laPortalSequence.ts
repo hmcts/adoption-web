@@ -230,9 +230,11 @@ const placementOrderSequence = [
     }),
     getNextStep: foundIndex!==0 ? Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT : Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_DATE, */
     getNextStep: data =>
-      data.addAnotherPlacementOrder === YesOrNo.YES
-        ? Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT
-        : Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_DATE,
+      !!data.placementOrders &&
+      data.placementOrders.length > 0 &&
+      data.placementOrders[0].placementOrderId === data.selectedPlacementOrderId
+        ? Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_DATE
+        : Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT,
   },
   {
     url: Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT,

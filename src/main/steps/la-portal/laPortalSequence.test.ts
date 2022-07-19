@@ -172,7 +172,7 @@ describe('la-portal > laPortalSequence', () => {
 
     expect(laPortalSequence[35].url).toBe('/la-portal/child/placement-order-number');
     expect(laPortalSequence[35].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-number');
-    expect(laPortalSequence[35].getNextStep({})).toBe('/la-portal/child/placement-order-date');
+    expect(laPortalSequence[35].getNextStep({})).toBe('/la-portal/child/placement-order-court');
 
     expect(laPortalSequence[36].url).toBe('/la-portal/child/placement-order-court');
     expect(laPortalSequence[36].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-court');
