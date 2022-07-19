@@ -296,7 +296,7 @@ export const enum Gender {
 
 export interface PlacementOrder {
   placementOrderId: string;
-  placementOrderType?: string;
+  placementOrderType?: PlacementOrderTypeEnum;
   placementOrderNumber?: string;
   placementOrderCourt?: string;
   placementOrderDate?: CaseDate | string;
@@ -1289,6 +1289,16 @@ export const enum LegalProceedingsRelated {
   MARRIAGE = 'marriage',
   PROPERTY = 'property',
   CHILDREN = 'children',
+}
+
+export const enum PlacementOrderTypeEnum {
+  AdoptionOrder = 'Adoption Order',
+  CareOrder = 'Care Order',
+  ContactOrder = 'Contact Order',
+  FreeingOrder = 'Freeing Order',
+  PlacementOrder = 'Placement Order',
+  SupervisionOrder = 'Supervision Order',
+  Other = 'Other',
 }
 
 export const enum RefusalOption {

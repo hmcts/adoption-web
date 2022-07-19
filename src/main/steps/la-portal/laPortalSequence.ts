@@ -220,7 +220,19 @@ const placementOrderSequence = [
   {
     url: Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_NUMBER,
     contentDir: path.join(__dirname, '..', 'children', 'placement-order-number'),
-    getNextStep: () => Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_DATE,
+    //getNextStep: () => Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_DATE,
+    /* foundIndex:-1,
+    order: data => (data as Partial<CaseWithId>).placementOrders?.find((item, index)=>{
+      if (item.placementOrderId === data.selectedPlacementOrderId) {
+        foundIndex = index;
+        return true;
+      }
+    }),
+    getNextStep: foundIndex!==0 ? Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT : Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_DATE, */
+    getNextStep: data =>
+      data.addAnotherPlacementOrder === YesOrNo.YES
+        ? Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT
+        : Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_DATE,
   },
   {
     url: Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT,
