@@ -9,6 +9,7 @@ const isPlacementOrderComplete = (placementOrder, ignorePlacementOrderType) => {
   return (
     (ignorePlacementOrderType || placementOrder.placementOrderType) &&
     placementOrder.placementOrderNumber &&
+    (ignorePlacementOrderType || placementOrder.placementOrderCourt) &&
     areDateFieldsFilledIn(placementOrder.placementOrderDate) === undefined &&
     isDateInputInvalid(placementOrder.placementOrderDate) === undefined &&
     isFutureDate(placementOrder.placementOrderDate) === undefined
