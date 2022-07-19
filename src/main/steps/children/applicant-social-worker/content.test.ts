@@ -20,7 +20,8 @@ const enContent = {
   applicantSocialWorkerEmailHint: 'The email address should be an official government email that ends in gov.uk.',
   applicantLocalAuthority: 'Name of local authority',
   applicantLocalAuthorityEmail: 'Your local authority email address',
-  applicantLocalAuthorityEmailHint: 'The email address should be an official government email that ends in gov.uk',
+  applicantLocalAuthorityEmailHint:
+    'This will be used to send a notification to the local authority to progress your application so it is important that it is accurate. It should end in gov.uk.',
   applicantLocalAuthorityHint:
     'This is the local authority that your social worker works for. They will be named on the placement order if you are not sure.',
   errors: {
@@ -59,7 +60,7 @@ const cyContent = {
   applicantLocalAuthority: "Enw'r awdurdod lleol",
   applicantLocalAuthorityEmail: 'Cyfeiriad e-bost eich awdurdod lleol',
   applicantLocalAuthorityEmailHint:
-    "Dylai'r cyfeiriad e-bost fod yn e-bost swyddogol gan y llywodraeth sy'n terfynu â gov.uk.",
+    'This will be used to send a notification to the local authority to progress your application so it is important that it is accurate. It should end in gov.uk. (in welsh)',
   applicantLocalAuthorityHint:
     "Dyma'r awdurdod lleol y mae eich gweithiwr cymdeithasol yn gweithio iddo. Bydd wedi’i enwi ar y gorchymyn lleoli os nad ydych yn siŵr.",
   errors: {
