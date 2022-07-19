@@ -1,7 +1,6 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
-import { YesOrNo } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { GetController } from '../../../app/controller/GetController';
 
@@ -19,7 +18,6 @@ export default class PlacementOrderGetController extends GetController {
       redirect = true;
     } else if (req.query.change) {
       req.session.userCase.selectedPlacementOrderId = `${req.query.change}`;
-      req.session.userCase.addAnotherPlacementOrder = YesOrNo.NO;
       this.parseAndSetReturnUrl(req);
       delete req.query.change;
       req.url = req.url.substring(0, req.url.indexOf('?'));
