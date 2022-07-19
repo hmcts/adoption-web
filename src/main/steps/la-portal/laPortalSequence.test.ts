@@ -176,7 +176,15 @@ describe('la-portal > laPortalSequence', () => {
 
     expect(laPortalSequence[36].url).toBe('/la-portal/child/placement-order-court');
     expect(laPortalSequence[36].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-court');
-    expect(laPortalSequence[36].getNextStep({})).toBe('/la-portal/child/placement-order-date');
+    expect(
+      laPortalSequence[36].getNextStep({
+        placementOrders: [{ placementOrderId: 'MOCK_ID' }],
+        selectedPlacementOrderId: 'MOCK_ID',
+      })
+    ).toBe('/la-portal/child/placement-order-date');
+    expect(laPortalSequence[36].getNextStep({ placementOrders: [{ placementOrderId: 'MOCK_ID' }] })).toBe(
+      '/la-portal/child/placement-order-date'
+    );
 
     expect(laPortalSequence[37].url).toBe('/la-portal/child/placement-order-date');
     expect(laPortalSequence[37].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-date');
