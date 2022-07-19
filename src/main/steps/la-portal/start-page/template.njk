@@ -1,0 +1,56 @@
+{% extends "common/page.njk" %}
+{% block content %}
+
+  <div class="govuk-width-container">
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-xl">{{ title }}</h1>
+        <h2 class="govuk-heading-m">{{heading1}}</h2>
+
+        <p class="govuk-body">{{ line3 }}</p>
+
+        <h2 class="govuk-heading-m">{{ heading2 }}</h2>
+
+        <p class="govuk-body">{{ line4 }}</p>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>{{ line5 }}</li>
+          <li>{{ line6 }}</li>
+          <li>{{ line7 }}</li>
+          <li>{{ line8 }}</li>
+        </ul>
+
+        <p class="govuk-body">{{ line9 }}</p>
+        <p class="govuk-body">{{ line10 }}</p>
+
+        <ul class="govuk-list govuk-list--bullet">
+          <li>{{ line11 }}</li>
+          <li>{{ line12 }}</li>
+          <li>{{ line13 }}</li>
+          <li>{{ line14 }}</li>
+          <li>{{ line15 }}</li>
+          <li>{{ line16 }}</li>
+        </ul>
+
+        <p class="govuk-body">{{ line17 }}</p>
+
+        <h2 class="govuk-heading-m">{{ heading3 }}</h2>
+         
+        <p class="govuk-body">{{ line18 }}</p>
+        <p class="govuk-body">{{ line19 }}</p>
+
+
+        <a href="/la-portal/task-list" role="button" draggable="false" class="govuk-button govuk-!-margin-top-2 govuk-!-margin-bottom-8 govuk-button--start" data-module="govuk-button">
+          Start now
+          <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"/>
+          </svg>
+        </a>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
