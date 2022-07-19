@@ -7,6 +7,7 @@ module.exports = {
     adopAgencyOrLaContactName: 'input[id$="adopAgencyOrLaContactName"]',
     adopAgencyOrLaContactEmail: 'input[id$="adopAgencyOrLaContactEmail"]',
     hasAnotherAdopAgencyOrLA: 'input[id$="hasAnotherAdopAgencyOrLA"]',
+    hasAnotherAdopAgencyOrLA_NO: 'input[id$="hasAnotherAdopAgencyOrLA-2"]',
   },
   socialWorker: {
     socialWorkerName: 'input[id$="socialWorkerName"]',
@@ -32,10 +33,14 @@ module.exports = {
     );
     await I.wait(2);
     await I.retry(3).click('Save and continue');
+    await I.wait(4);
     await I.retry(3).waitForText(
       'Was there another adoption agency or local authority involved in placing the child?',
       30
     );
+  },
+
+  async childOtherAdoptionAgencyDetailsSection() {
     await I.retry(3).click(this.adopAgency.hasAnotherAdopAgencyOrLA);
     await I.wait(2);
     await I.retry(3).click('Save and continue');
@@ -58,5 +63,30 @@ module.exports = {
     await I.wait(2);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
+  },
+
+  async noOtherAdoptionDetails() {
+    await I.retry(3).click(this.adopAgency.hasAnotherAdopAgencyOrLA_NO);
+    await I.wait(2);
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
+    await I.retry(3).see("Details about the child's social worker", 'h1');
+  },
+
+  async errorWithOutSelectingAdoptionAgencyOption() {
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
+    await I.retry(3).see('Enter a name', '#adopAgencyOrLaName-error');
+    await I.retry(3).see('Enter a UK telephone number', '#adopAgencyOrLaPhoneNumber-error');
+    await I.retry(3).see('Enter a name', '#adopAgencyOrLaContactName-error');
+    await I.retry(3).see('Enter an email address', '#adopAgencyOrLaContactEmail-error');
+  },
+
+  async errorsInChildSocialWorkerPage() {
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
+    await I.retry(3).see('Enter a name', '#socialWorkerName-error');
+    await I.retry(3).see('Enter a UK telephone number', '#socialWorkerPhoneNumber-error');
+    await I.retry(3).see('Enter an email address', '#socialWorkerEmail-error');
   },
 };
