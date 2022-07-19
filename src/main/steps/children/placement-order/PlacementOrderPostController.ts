@@ -1,6 +1,7 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
+import { PlacementOrderTypeEnum } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
@@ -21,7 +22,7 @@ export default class PlacementOrderPostController extends PostController<AnyObje
     Object.assign(placementOrder!, formData);
     if (placementOrder) {
       if (formData['selectedPlacementOrderType']) {
-        placementOrder.placementOrderType = formData['selectedPlacementOrderType'];
+        placementOrder.placementOrderType = formData['selectedPlacementOrderType'] as PlacementOrderTypeEnum;
         placementOrder.otherPlacementOrderType = formData['selectedOtherPlacementOrderType'];
       }
     }

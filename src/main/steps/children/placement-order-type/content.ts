@@ -1,16 +1,7 @@
+import { PlacementOrderTypeEnum } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
-
-const enum PlacementOrderTypeEnum {
-  AdoptionOrder = 'Adoption Order',
-  CareOrder = 'Care Order',
-  ContactOrder = 'Contact Order',
-  FreeingOrder = 'Freeing Order',
-  PlacementOrder = 'Placement Order',
-  SupervisionOrder = 'Supervision Order',
-  Other = 'Other',
-}
 
 const en = () => ({
   section: "The child's details",

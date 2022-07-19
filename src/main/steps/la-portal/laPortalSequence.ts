@@ -220,7 +220,12 @@ const placementOrderSequence = [
   {
     url: Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_NUMBER,
     contentDir: path.join(__dirname, '..', 'children', 'placement-order-number'),
-    getNextStep: () => Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_DATE,
+    getNextStep: data =>
+      !!data.placementOrders &&
+      data.placementOrders.length > 0 &&
+      data.placementOrders[0].placementOrderId === data.selectedPlacementOrderId
+        ? Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_DATE
+        : Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT,
   },
   {
     url: Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT,

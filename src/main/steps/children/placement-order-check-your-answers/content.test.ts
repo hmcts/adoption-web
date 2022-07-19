@@ -124,7 +124,19 @@ describe('children > placement-order-check-your-answers > content', () => {
           ],
         },
       },
-
+      {
+        key: { text: 'Court' },
+        value: { text: 'MOCK_COURT2' },
+        actions: {
+          items: [
+            {
+              href: '/la-portal/child/placement-order-court?change=MOCK_ID2',
+              text: 'Change',
+              visuallyHiddenText: 'Court',
+            },
+          ],
+        },
+      },
       {
         key: { text: 'Order date' },
         value: { text: '12 May 2020' },

@@ -1,5 +1,5 @@
 import { Case, Checkbox } from './case';
-import { DocumentType, SiblingPOType, SiblingRelationships, YesOrNo } from './definition';
+import { DocumentType, PlacementOrderTypeEnum, SiblingPOType, SiblingRelationships, YesOrNo } from './definition';
 import {
   OrNull,
   formatApplicant1CannotUploadDocuments,
@@ -28,7 +28,7 @@ describe('to-api-format', () => {
     placementOrders: [
       {
         placementOrderId: 'MOCK_ID',
-        placementOrderType: 'MOCK_TYPE',
+        placementOrderType: PlacementOrderTypeEnum.AdoptionOrder,
         placementOrderNumber: 'MOCK_NUMBER',
         placementOrderCourt: 'MOCK_COURT',
         placementOrderDate: { day: '5', month: '1', year: '2021' },
@@ -92,7 +92,7 @@ describe('to-api-format', () => {
           id: 'MOCK_ID',
           value: {
             placementOrderId: 'MOCK_ID',
-            placementOrderType: 'MOCK_TYPE',
+            placementOrderType: PlacementOrderTypeEnum.AdoptionOrder,
             placementOrderNumber: 'MOCK_NUMBER',
             placementOrderCourt: 'MOCK_COURT',
             placementOrderDate: '2021-01-05',
