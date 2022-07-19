@@ -9,8 +9,8 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 @autobind
 export default class FindFamilyCourtPostController extends PostController<AnyObject> {
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
-    req.session.userCase.placementOrderCourt = req.body.autoCompleteData ? req.body.autoCompleteData + '' : '';
-    const isFilledPlacementOrderCourt = isFieldFilledIn(req.session.userCase.placementOrderCourt);
+    const filledPlacementOrderCourt = req.body.autoCompleteData ? req.body.autoCompleteData + '' : '';
+    const isFilledPlacementOrderCourt = isFieldFilledIn(filledPlacementOrderCourt);
     const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
     const form = new Form(fields);
     const { saveAndSignOut, saveBeforeSessionTimeout, _csrf, ...formData } = form.getParsedBody(req.body);
