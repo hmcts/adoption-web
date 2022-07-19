@@ -2,9 +2,18 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 
-const en = () => ({
+const getCourtListItems = (courtList, selectedCourt) =>
+  courtList
+    .filter(item => item.site_name !== selectedCourt)
+    .map(item => ({ text: item.site_name, value: item.site_name }));
+
+const en = content => ({
   section: "The child's details",
   label: 'Which court made the placement order?',
+  options: [
+    ...getCourtListItems(content.courtList, content.userCase.placementOrderCourt),
+    { text: content.userCase.placementOrderCourt, value: content.userCase.placementOrderCourt, selected: true },
+  ],
   errors: {
     placementOrderCourt: {
       required: 'Enter the name of the court',
@@ -12,9 +21,13 @@ const en = () => ({
   },
 });
 
-const cy: typeof en = () => ({
+const cy: typeof en = content => ({
   section: 'Manylion y plentyn',
   label: 'Pa lys wnaeth wneud y gorchymyn lleoli?',
+  options: [
+    ...getCourtListItems(content.courtList, content.userCase.placementOrderCourt),
+    { text: content.userCase.placementOrderCourt, value: content.userCase.placementOrderCourt, selected: true },
+  ],
   errors: {
     placementOrderCourt: {
       required: 'Nac ydwdwch enw’r llys',
@@ -24,14 +37,14 @@ const cy: typeof en = () => ({
 
 export const form: FormContent = {
   fields: {
-    placementOrderCourt: {
-      type: 'text',
-      classes: 'govuk-label',
+    h1: {
       label: l => l.label,
-      labelSize: 'l',
-      attributes: {
-        spellcheck: false,
-      },
+      type: 'heading',
+    },
+    placementOrderCourt: {
+      type: 'select',
+      id: 'location-picker',
+      options: l => l.options,
       validator: isFieldFilledIn,
     },
   },
@@ -49,7 +62,7 @@ const languages = {
 };
 
 export const generateContent: TranslationFn = content => {
-  const translations = languages[content.language]();
+  const translations = languages[content.language](content);
   return {
     ...translations,
     form,

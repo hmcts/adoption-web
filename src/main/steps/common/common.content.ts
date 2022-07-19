@@ -4,6 +4,7 @@ import { CaseWithId } from '../../app/case/case';
 import { Fee, State } from '../../app/case/definition';
 import { Eligibility } from '../../app/controller/AppRequest';
 import { PageContent, TranslationFn } from '../../app/controller/GetController';
+import { CourtVenue } from '../../app/court/location';
 
 const en = {
   phase: 'Beta',
@@ -226,6 +227,7 @@ export const generatePageContent = ({
   addresses = [],
   eligibility,
   fee,
+  courtList,
 }: {
   language: Language;
   pageContent?: TranslationFn;
@@ -234,6 +236,7 @@ export const generatePageContent = ({
   addresses?: [];
   eligibility?: Eligibility;
   fee?: Fee;
+  courtList?: CourtVenue[];
 }): PageContent => {
   const commonTranslations: typeof en = language === 'en' ? en : cy;
   const serviceName = getServiceName(commonTranslations);
@@ -245,6 +248,7 @@ export const generatePageContent = ({
     serviceName,
     language,
     userCase,
+    courtList,
     userEmail,
     contactEmail,
     addresses,
@@ -269,6 +273,7 @@ export type CommonContent = typeof en & {
   serviceName: string;
   pageContent?: TranslationFn;
   userCase?: Partial<CaseWithId>;
+  courtList?: CourtVenue[];
   userEmail?: string;
   contactEmail?: string;
   referenceNumber?: string;
