@@ -7,8 +7,7 @@ services:
     tokenURL: IDAM_API_URL
     clientID: IDAM_CLIENT_ID
     clientSecret: IDAM_SECRET
-    systemUsername: IDAM_SYSTEM_USER_NAME
-    systemPassword: IDAM_SYSTEM_USER_PASSWORD
+    userRole: IDAM_ROLE
   case:
     url: CCD_URL
   payments:
@@ -17,6 +16,8 @@ services:
     url: FEE_LOOKUP_URL
   documentManagement:
     url: DOCUMENT_MANAGEMENT_URL
+  cdam:
+    url: CDAM_API_URL
   equalityAndDiversity:
     url: EQUALITY_URL
     tokenKey: PCQ_TOKEN
