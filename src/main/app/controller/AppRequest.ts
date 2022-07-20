@@ -3,7 +3,7 @@ import { Session } from 'express-session';
 import type { LoggerInstance } from 'winston';
 
 import { CaseApi } from '../case/CaseApi';
-import { Case, CaseWithId } from '../case/case';
+import { Case, CaseDate, CaseWithId } from '../case/case';
 import { Fee } from '../case/definition';
 import { FormError } from '../form/Form';
 
@@ -50,5 +50,7 @@ export interface Eligibility {
 // LA Portal Knowledge Based Authentication
 export interface LaPortalKBA {
   caseRef?: string;
+  childName?: string;
+  childrenDateOfBirth?: CaseDate;
   authenticated?: boolean;
 }

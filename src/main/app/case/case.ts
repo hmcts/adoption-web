@@ -420,6 +420,9 @@ export interface Case {
   applicationFeeOrderSummary: OrderSummary;
   hyphenatedCaseRef?: string;
   otherPlacementOrderType?: string;
+
+  caseRef?: string;
+  childName?: string;
 }
 
 export interface CaseWithId extends Case {
