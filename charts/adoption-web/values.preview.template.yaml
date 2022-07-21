@@ -14,6 +14,7 @@ nodejs:
     APPINSIGHTS_KEY: '00000000-0000-0000-0000-000000000000'
     PCQ_ENABLED: 'true'
     CCD_URL: 'http://ccd-data-store-api-adoption-cos-api-pr-352.service.core-compute-preview.internal'
+
 idam-pr:
   enabled: true
   redirect_uris:

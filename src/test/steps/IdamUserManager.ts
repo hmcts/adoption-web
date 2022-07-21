@@ -14,7 +14,7 @@ export class IdamUserManager {
     this.caseWorker = '';
   }
 
-  async createUser(email: string, password: string, role = ['citizen']): Promise<void> {
+  async createUser(email: string, password: string, role = ['citizen', 'adoption-citizen-user']): Promise<void> {
     await this.create(email, password, role);
     this.users.add(email);
   }
