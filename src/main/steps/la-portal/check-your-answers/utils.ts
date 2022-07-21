@@ -326,6 +326,15 @@ export const childrenPlacementOrderSummaryList = (
               value: item.placementOrderNumber,
               changeUrl: `${Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_NUMBER}?change=${item.placementOrderId}`,
             },
+            ...(index !== 0
+              ? [
+                  {
+                    key: keys.court,
+                    value: item.placementOrderCourt,
+                    changeUrl: `${Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT}?change=${item.placementOrderId}`,
+                  },
+                ]
+              : []),
             /* {
               key: keys.court,
               value: item.placementOrderCourt,
