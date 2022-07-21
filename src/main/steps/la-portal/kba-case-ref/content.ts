@@ -4,7 +4,6 @@ import { FormContent } from '../../../app/form/Form';
 import { covertToDateObject } from '../../../app/form/parser';
 import {
   areDateFieldsFilledIn,
-  isCaseRefEmpty,
   isCaseRefNumeric,
   isCaseRefTooShort,
   isDateInputInvalid,
@@ -85,7 +84,7 @@ export const form: FormContent = {
         pattern: '[0-9]*',
         inputMode: 'numeric',
       },
-      validator: value => isCaseRefEmpty(value) || isCaseRefTooShort(value) || isCaseRefNumeric(value),
+      validator: value => isFieldFilledIn(value) || isCaseRefTooShort(value) || isCaseRefNumeric(value),
     },
 
     kbaChildName: {

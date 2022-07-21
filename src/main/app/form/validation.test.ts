@@ -5,7 +5,6 @@ import {
   atLeastOneFieldIsChecked,
   doesArrayHaveValues,
   isAddressSelected,
-  isCaseRefEmpty,
   isCaseRefNumeric,
   isCaseRefTooShort,
   isDateInputInvalid,
@@ -401,17 +400,5 @@ describe('isCaseRefNumeric()', () => {
   test('Should check if case reference is valid with letters and symbols', async () => {
     const isValid = isCaseRefNumeric('AD-4123412341234');
     expect(isValid).toStrictEqual('isNotNumeric');
-  });
-});
-
-describe('isCaseRefEmpty()', () => {
-  test('Should accept full case reference', async () => {
-    const isValid = isCaseRefEmpty('1234123412341234');
-    expect(isValid).toStrictEqual(undefined);
-  });
-
-  test('Should reject empty case reference', async () => {
-    const isValid = isCaseRefEmpty('');
-    expect(isValid).toStrictEqual('required');
   });
 });

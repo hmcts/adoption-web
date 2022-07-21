@@ -207,13 +207,7 @@ export const isCaseRefTooShort: Validator = value => {
 };
 
 export const isCaseRefNumeric: Validator = value => {
-  if (!(value as string).match(/^[0-9]*$/)) {
+  if (!(value as string).match(/^\d*$/)) {
     return 'isNotNumeric';
-  }
-};
-
-export const isCaseRefEmpty: Validator = value => {
-  if (!value || (value as string).trim?.().length === 0) {
-    return ValidationError.REQUIRED;
   }
 };
