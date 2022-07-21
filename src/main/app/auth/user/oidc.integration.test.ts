@@ -12,7 +12,7 @@ config.get = jest.fn();
 const mockedAxios = Axios as jest.Mocked<AxiosStatic>;
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvcmlhbiIsInVpZCI6IjEyMyJ9.KaDIFSDdD3ZIYCl_qavvYbQ3a4abk47iBOZhB1-9mUQ';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvcmlhbiIsInVpZCI6IjEyMyIsInJvbGVzIjpbImFkb3B0aW9uLWNpdGl6ZW4tdXNlciJdfQ.G7Na_2U6gEuPEPXBuVq3UddV9mti85Sw3Gzd0yZA-2I';
 
 describe('getRedirectUrl', () => {
   test('should create a valid URL to redirect to the login screen', () => {
@@ -44,6 +44,7 @@ describe('getUserDetails', () => {
       givenName: 'John',
       familyName: 'Dorian',
       id: '123',
+      roles: ['adoption-citizen-user'],
     });
   });
 });
@@ -64,6 +65,7 @@ describe('getCaseWorkerUser', () => {
       givenName: 'John',
       familyName: 'Dorian',
       id: '123',
+      roles: ['adoption-citizen-user'],
     });
   });
 });
