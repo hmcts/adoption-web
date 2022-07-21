@@ -34,8 +34,12 @@ const cy: typeof en = content => ({
   section: 'Manylion y plentyn',
   label: 'Pa lys wnaeth wneud y gorchymyn lleoli?',
   options: [
-    ...getCourtListItems(content.courtList, content.userCase.familyCourtName),
-    { text: content.userCase.familyCourtName, value: content.userCase.familyCourtName, selected: true },
+    ...getCourtListItems(content.courtList, getSelectedPlacementOrder(content.userCase)),
+    {
+      text: getSelectedPlacementOrder(content.userCase),
+      value: getSelectedPlacementOrder(content.userCase),
+      selected: true,
+    },
   ],
   errors: {
     placementOrderCourt: {
