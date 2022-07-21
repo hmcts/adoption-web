@@ -54,19 +54,19 @@ type SummaryListsContent = PageContent & {
 const getSectionSummaryLists = (rows: SummaryListRows[], content: PageContent): GovUKNunjucksSummary[] => {
   const returnUrlQueryParam = `returnUrl=${Urls.LA_PORTAL_CHECK_YOUR_ANSWERS}`;
   return rows.map(item => {
-    let changeUrl = item.changeUrl;
-    if (changeUrl) {
-      changeUrl += `${changeUrl.indexOf('?') === -1 ? '?' : '&'}${returnUrlQueryParam}`;
+    let changeURL = item.changeUrl;
+    if (changeURL) {
+      changeURL += `${changeURL.indexOf('?') === -1 ? '?' : '&'}${returnUrlQueryParam}`;
     }
     return {
       key: { ...(item.key ? { text: item.key } : {}), ...(item.keyHtml ? { html: item.keyHtml } : {}) },
       value: { ...(item.value ? { text: item.value } : {}), ...(item.valueHtml ? { html: item.valueHtml } : {}) },
-      ...(changeUrl
+      ...(changeURL
         ? {
             actions: {
               items: [
                 {
-                  href: changeUrl,
+                  href: changeURL,
                   text: content.change as string,
                   visuallyHiddenText: `${item.key}`,
                 },
