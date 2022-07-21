@@ -1,20 +1,12 @@
-import { FieldPrefix } from '../../../app/case/case';
+import languageAssertions from '../../../../test/unit/utils/languageAssertions';
+import mockUserCase from '../../../../test/unit/utils/mockUserCase';
 import { ApplyingWith, DocumentType, Gender, LanguagePreference, YesNoNotsure } from '../../../app/case/definition';
-import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { CommonContent } from '../../../steps/common/common.content';
+import { CommonContent, generatePageContent } from '../../common/common.content';
 
-import {
-  birthParentSummaryList,
-  caseRefSummaryList,
-  childSummaryList,
-  childrenPlacementOrderSummaryList,
-  otherParentSummaryList,
-  siblingCourtOrderSummaryList,
-  uploadedDocumentSummaryList,
-} from './utils';
+import { generateContent } from './content';
 
-export const enContent = {
+const enContent = {
   title: 'Check your answers',
   change: 'Change',
   reason: 'Reason',
@@ -77,24 +69,6 @@ export const enContent = {
     documentsNotUploaded: 'Documents not uploaded',
     caseRefNumber: 'Court case reference number',
   },
-};
-
-const en = (content: CommonContent) => {
-  const userCase = content.userCase!;
-  return {
-    ...enContent,
-    language: content.language,
-    sections: [
-      caseRefSummaryList(enContent, userCase),
-      childSummaryList(enContent, userCase),
-      birthParentSummaryList(enContent, userCase, FieldPrefix.BIRTH_MOTHER),
-      birthParentSummaryList(enContent, userCase, FieldPrefix.BIRTH_FATHER),
-      otherParentSummaryList(enContent, userCase),
-      childrenPlacementOrderSummaryList(enContent, userCase),
-      siblingCourtOrderSummaryList(enContent, userCase),
-      uploadedDocumentSummaryList(enContent, userCase),
-    ],
-  };
 };
 
 const cyContent: typeof enContent = {
@@ -162,44 +136,37 @@ const cyContent: typeof enContent = {
   },
 };
 
-const cy: typeof en = (content: CommonContent) => {
-  const userCase = content.userCase!;
-  return {
-    ...cyContent,
-    language: content.language,
-    sections: [
-      childSummaryList(cyContent, userCase),
-      birthParentSummaryList(cyContent, userCase, FieldPrefix.BIRTH_MOTHER),
-      birthParentSummaryList(cyContent, userCase, FieldPrefix.BIRTH_FATHER),
-      otherParentSummaryList(cyContent, userCase),
-      childrenPlacementOrderSummaryList(cyContent, userCase),
-      siblingCourtOrderSummaryList(cyContent, userCase),
-      uploadedDocumentSummaryList(cyContent, userCase),
-    ],
-  };
-};
+/* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
+describe('check-your-answer > content', () => {
+  const commonContent = {
+    language: 'en',
+    userCase: mockUserCase,
+  } as unknown as CommonContent;
 
-export const form: FormContent = {
-  fields: {
-    dateChildMovedIn: { type: 'hidden', hidden: true },
-  },
-  submit: {
-    text: l => l.continue,
-  },
-  saveAsDraft: {
-    text: l => l.saveAsDraft,
-  },
-};
+  test('should return correct english content', () => {
+    languageAssertions('en', enContent, () => generateContent(commonContent));
+  });
 
-const languages = {
-  en,
-  cy,
-};
+  test('should return correct welsh content', () => {
+    languageAssertions('en', cyContent, () =>
+      generateContent({
+        ...commonContent,
+        userCase: { ...mockUserCase, applyingWith: ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER },
+        language: 'cy',
+      })
+    );
+  });
 
-export const generateContent: TranslationFn = content => {
-  const translations = languages[content.language](content);
-  return {
-    ...translations,
-    form,
-  };
-};
+  test('should contain submit button', () => {
+    const generatedContent = generateContent(commonContent);
+    const form = generatedContent.form as FormContent;
+    expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
+  });
+
+  test('should contain save-as-draft button', () => {
+    const generatedContent = generateContent(commonContent);
+    const form = generatedContent.form as FormContent;
+    expect((form.saveAsDraft!.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save as draft');
+  });
+});
+/* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

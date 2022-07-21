@@ -322,8 +322,6 @@ const footerLinkSequence: Step[] = [
   },
 ];
 
-//console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'+path.join(__dirname, 'check-your-answers'));
-
 const ReviewYourAsnwersSequence: Step[] = [
   {
     url: Urls.LA_PORTAL_CHECK_YOUR_ANSWERS,

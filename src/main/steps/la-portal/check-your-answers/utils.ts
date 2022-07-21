@@ -79,6 +79,24 @@ const getSectionSummaryList = (rows: SummaryListRow[], content: PageContent): Go
   });
 };
 
+export const caseRefSummaryList = (
+  { sectionTitles, keys, ...content }: SummaryListContent,
+  userCase: Partial<CaseWithId>
+): SummaryList => {
+  return {
+    title: '',
+    rows: getSectionSummaryList(
+      [
+        {
+          key: keys.caseRefNumber,
+          value: userCase.hyphenatedCaseRef,
+        },
+      ],
+      content
+    ),
+  };
+};
+
 export const childSummaryList = (
   { sectionTitles, keys, ...content }: SummaryListContent,
   userCase: Partial<CaseWithId>
@@ -114,13 +132,14 @@ const formatNationalities = (
   return nationalities.join('<br>');
 };
 
+/* eslint-disable import/namespace */
 export const birthParentSummaryList = (
   { sectionTitles, keys, ...content }: SummaryListContent,
   userCase: Partial<CaseWithId>,
   prefix: FieldPrefix
 ): SummaryList => {
-  //const LA_PORTAL = 'LA_PORTAL_';
-  //const urlPrefix = prefix === FieldPrefix.BIRTH_MOTHER ? 'BIRTH_MOTHER_' : 'BIRTH_FATHER_';
+  const LA_PORTAL = 'LA_PORTAL_';
+  const urlPrefix = prefix === FieldPrefix.BIRTH_MOTHER ? 'BIRTH_MOTHER_' : 'BIRTH_FATHER_';
   const reasonFieldName =
     prefix === FieldPrefix.BIRTH_MOTHER ? `${prefix}NotAliveReason` : `${prefix}UnsureAliveReason`;
   return {
@@ -132,7 +151,7 @@ export const birthParentSummaryList = (
               {
                 key: keys.nameOnBirthCertificate,
                 value: content.yesNoNotsure[userCase.birthFatherNameOnCertificate!],
-                //changeUrl: Urls[`${urlPrefix}NAME_ON_CERTIFICATE`],
+                changeUrl: Urls[`${LA_PORTAL}${urlPrefix}NAME_ON_CERTIFICATE`],
               },
             ]
           : []),
@@ -141,7 +160,7 @@ export const birthParentSummaryList = (
               {
                 key: keys.fullName,
                 value: userCase[`${prefix}FirstNames`] + ' ' + userCase[`${prefix}LastNames`],
-                //changeUrl: Urls[`${urlPrefix}FULL_NAME`],
+                changeUrl: Urls[`${LA_PORTAL}${urlPrefix}FULL_NAME`],
               },
               {
                 key: keys.alive,
@@ -154,7 +173,7 @@ export const birthParentSummaryList = (
                         reasonFieldName
                       )
                     : content.yesNoNotsure[userCase[`${prefix}StillAlive`]],
-                //changeUrl: Urls[`${urlPrefix}STILL_ALIVE`],
+                changeUrl: Urls[`${LA_PORTAL}${urlPrefix}STILL_ALIVE`],
               },
               ...(userCase[`${prefix}StillAlive`] === YesOrNo.YES
                 ? [
@@ -164,12 +183,12 @@ export const birthParentSummaryList = (
                         userCase[`${prefix}Nationality`],
                         userCase[`${prefix}AdditionalNationalities`]
                       ),
-                      //changeUrl: Urls[`${urlPrefix}NATIONALITY`],
+                      changeUrl: Urls[`${LA_PORTAL}${urlPrefix}NATIONALITY`],
                     },
                     {
                       key: keys.occupation,
                       value: userCase[`${prefix}Occupation`],
-                      //changeUrl: Urls[`${urlPrefix}OCCUPATION`],
+                      changeUrl: Urls[`${LA_PORTAL}${urlPrefix}OCCUPATION`],
                     },
                     {
                       key: keys.addressKnown,
@@ -182,16 +201,16 @@ export const birthParentSummaryList = (
                               `${prefix}AddressNotKnownReason`
                             )
                           : content.yesNoNotsure[userCase[`${prefix}AddressKnown`]],
-                      //changeUrl: Urls[`${urlPrefix}ADDRESS_KNOWN`],
+                      changeUrl: Urls[`${LA_PORTAL}${urlPrefix}ADDRESS_KNOWN`],
                     },
                     ...(userCase[`${prefix}AddressKnown`] === YesOrNo.YES
                       ? [
                           {
                             key: keys.address,
                             valueHtml: getFormattedAddress(userCase, prefix),
-                            /* changeUrl: userCase[`${prefix}AddressCountry`]
-                              ? Urls[`${urlPrefix}INTERNATIONAL_ADDRESS`]
-                              : Urls[`${urlPrefix}MANUAL_ADDRESS`], */
+                            changeUrl: userCase[`${prefix}AddressCountry`]
+                              ? Urls[`${LA_PORTAL}${urlPrefix}INTERNATIONAL_ADDRESS`]
+                              : Urls[`${LA_PORTAL}${urlPrefix}MANUAL_ADDRESS`],
                           },
                         ]
                       : []),
@@ -200,7 +219,7 @@ export const birthParentSummaryList = (
                           {
                             key: keys.addressConfirmedDate,
                             valueHtml: getFormattedDate(userCase[`${prefix}LastAddressDate`], 'en'),
-                            //changeUrl: Urls[`${urlPrefix}LAST_ADDRESS_CONFIRMED`],
+                            changeUrl: Urls[`${LA_PORTAL}${urlPrefix}LAST_ADDRESS_CONFIRMED`],
                           },
                         ]
                       : []),
@@ -236,7 +255,7 @@ export const otherParentSummaryList = (
               {
                 key: keys.fullName,
                 value: userCase.otherParentFirstNames + ' ' + userCase.otherParentLastNames,
-                changeUrl: Urls.OTHER_PARENT_NAME,
+                changeUrl: Urls.LA_PORTAL_OTHER_PARENT_FULL_NAME,
               },
               {
                 key: keys.addressKnown,
@@ -249,14 +268,14 @@ export const otherParentSummaryList = (
                         'otherParentAddressNotKnownReason'
                       )
                     : content.yesNoNotsure[userCase.otherParentAddressKnown!],
-                changeUrl: Urls.OTHER_PARENT_ADDRESS_KNOWN,
+                changeUrl: Urls.LA_PORTAL_OTHER_PARENT_ADDRESS_KNOWN,
               },
               ...(userCase.otherParentAddressKnown === YesOrNo.YES
                 ? [
                     {
                       key: keys.address,
                       valueHtml: getFormattedAddress(userCase, FieldPrefix.OTHER_PARENT),
-                      changeUrl: Urls.OTHER_PARENT_MANUAL_ADDRESS,
+                      changeUrl: Urls.LA_PORTAL_OTHER_PARENT_MANUAL_ADDRESS,
                     },
                   ]
                 : []),
@@ -307,11 +326,11 @@ export const childrenPlacementOrderSummaryList = (
               value: item.placementOrderNumber,
               changeUrl: `${Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_NUMBER}?change=${item.placementOrderId}`,
             },
-            {
+            /* {
               key: keys.court,
               value: item.placementOrderCourt,
               changeUrl: `${Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT}?change=${item.placementOrderId}`,
-            },
+            }, */
             {
               key: keys.date,
               valueHtml: getFormattedDate(item.placementOrderDate as CaseDate, content.language),
@@ -391,14 +410,14 @@ export const uploadedDocumentSummaryList = (
       {
         key: keys.uploadedDocuments,
         valueHtml: formatDocuments(userCase),
-        changeUrl: Urls.UPLOAD_YOUR_DOCUMENTS,
+        changeUrl: Urls.LA_PORTAL_UPLOAD_YOUR_DOCUMENTS,
       },
       ...(userCase.applicant1CannotUpload === Checkbox.Checked
         ? [
             {
               key: keys.documentsNotUploaded,
               valueHtml: formatNotUploadedDocuments(userCase, content),
-              changeUrl: Urls.UPLOAD_YOUR_DOCUMENTS,
+              changeUrl: Urls.LA_PORTAL_UPLOAD_YOUR_DOCUMENTS,
             },
           ]
         : []),
