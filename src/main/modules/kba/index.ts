@@ -50,7 +50,8 @@ export class KbaMiddleware {
           }
 
           if (
-            req.session.userCase.childrenDateOfBirth !== req.session.laPortalKba['kbaChildrenDateOfBirth'] &&
+            JSON.stringify(req.session.userCase.childrenDateOfBirth) !==
+              JSON.stringify(req.session.laPortalKba['kbaChildrenDateOfBirth']) ||
             req.session.laPortalKba['kbaChildName'] !==
               req.session.userCase.childrenFirstName + ' ' + req.session.userCase.childrenLastName
           ) {

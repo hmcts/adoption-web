@@ -1,5 +1,5 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
-import { FormContent, FormFields, ValidationCheck } from '../../../app/form/Form';
+import { FormContent, FormFields, FormOptions, ValidationCheck } from '../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
@@ -87,6 +87,52 @@ describe('la-portal > kba-case-ref > content', () => {
     expect((field.hint as Function)(generateContent(commonContent))).toBe(enContent.hint);
     expect(field.labelSize).toBe('m');
     expect((field.validator as ValidationCheck)('1234567891234567', {})).toBe(undefined);
+  });
+
+  it('should have an kbaChildName text input field', () => {
+    const generatedContent = generateContent(commonContent);
+    const form = generatedContent.form as FormContent;
+    const fields = form.fields as FormFields;
+    const field = fields.kbaChildName;
+
+    expect(field.type).toBe('text');
+    //expect((field.label as Function)(generateContent(commonContent))).toBe(enContent.label);
+    expect((field.hint as Function)(generateContent(commonContent))).toBe(enContent.childNameHint);
+    expect(field.labelSize).toBe('m');
+    expect((field.validator as ValidationCheck)('1234567891234567', {})).toBe(undefined);
+  });
+
+  test('should contain dateOfBirth field', () => {
+    const generatedContent = generateContent(commonContent);
+    const form = generatedContent.form as FormContent;
+    const fields = form.fields as FormFields;
+    const dobField = fields.kbaChildrenDateOfBirth as FormOptions;
+
+    expect(dobField.type).toBe('date');
+    expect(dobField.classes).toBe('govuk-date-input');
+    expect((dobField.hint as Function)(generatedContent)).toBe(enContent.childDateOfBirthHint);
+
+    //expect((dobField.values[0].label as Function)(commonContent)).toBe('Day');
+    expect(dobField.values[0].name).toBe('day');
+    expect(dobField.values[0].classes).toBe('govuk-input--width-2');
+    expect(dobField.values[0].attributes?.maxLength).toBe(2);
+
+    expect(dobField.values[1].name).toBe('month');
+    expect(dobField.values[1].classes).toBe('govuk-input--width-2');
+    expect(dobField.values[1].attributes?.maxLength).toBe(2);
+
+    expect(dobField.values[2].name).toBe('year');
+    expect(dobField.values[2].classes).toBe('govuk-input--width-4');
+    expect(dobField.values[2].attributes?.maxLength).toBe(4);
+
+    expect(
+      (dobField.parser as Function)({
+        'kbaChildrenDateOfBirth-day': '21',
+        'kbaChildrenDateOfBirth-month': '12',
+        'kbaChildrenDateOfBirth-year': '2018',
+      })
+    ).toEqual({ day: '21', month: '12', year: '2018' });
+    expect((dobField.validator as Function)({ day: '21', month: '12', year: '2018' })).toBe(undefined);
   });
 
   it('should contain submit button', () => {
