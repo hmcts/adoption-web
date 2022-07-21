@@ -409,14 +409,14 @@ export const uploadedDocumentSummaryList = (
     [
       {
         key: keys.uploadedDocuments,
-        valueHtml: formatDocuments(userCase),
+        valueHtml: formatDocument(userCase),
         changeUrl: Urls.LA_PORTAL_UPLOAD_YOUR_DOCUMENTS,
       },
       ...(userCase.applicant1CannotUpload === Checkbox.Checked
         ? [
             {
               key: keys.documentsNotUploaded,
-              valueHtml: formatNotUploadedDocuments(userCase, content),
+              valueHtml: formatNotUploadedDocument(userCase, content),
               changeUrl: Urls.LA_PORTAL_UPLOAD_YOUR_DOCUMENTS,
             },
           ]
@@ -426,12 +426,12 @@ export const uploadedDocumentSummaryList = (
   ),
 });
 
-const formatDocuments = (userCase: Partial<CaseWithId>) => {
+const formatDocument = (userCase: Partial<CaseWithId>) => {
   const documentFileNames = userCase.applicant1DocumentsUploaded?.map(item => item.value?.documentFileName);
   return documentFileNames?.join('<br>');
 };
 
-const formatNotUploadedDocuments = (userCase: Partial<CaseWithId>, content: PageContent) => {
+const formatNotUploadedDocument = (userCase: Partial<CaseWithId>, content: PageContent) => {
   const documentTypes = userCase.applicant1CannotUploadDocuments?.map(
     item => (content.documentTypes as Record<string, string>)[item]
   );
