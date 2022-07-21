@@ -256,12 +256,12 @@ describe('la-portal > laPortalSequence', () => {
     expect(laPortalSequence[52].contentDir).toBe('MOCK_BASE_DIR/../application/contact-us');
     expect(laPortalSequence[52].getNextStep({})).toBe('/la-portal/kba-case-ref');
 
-    expect(laPortalSequence[53].url).toBe('/la-portal/la-portal/upload-your-documents');
-    expect(laPortalSequence[53].contentDir).toBe('MOCK_BASE_DIR/../la-portal/upload-your-documents');
+    expect(laPortalSequence[53].url).toBe('/la-portal/check-your-answers');
+    expect(laPortalSequence[53].contentDir).toBe('MOCK_BASE_DIR/check-your-answers');
     expect(laPortalSequence[53].getNextStep({})).toBe('/la-portal/task-list');
 
-    expect(laPortalSequence[54].url).toBe('/la-portal/check-your-answers');
-    expect(laPortalSequence[54].contentDir).toBe('MOCK_BASE_DIR/check-your-answers');
+    expect(laPortalSequence[54].url).toBe('/la-portal/la-portal/upload-your-documents');
+    expect(laPortalSequence[54].contentDir).toBe('MOCK_BASE_DIR/../la-portal/upload-your-documents');
     expect(laPortalSequence[54].getNextStep({})).toBe('/la-portal/task-list');
   });
 });

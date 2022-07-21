@@ -898,7 +898,7 @@ describe('uploadedDocumentSummaryList', () => {
             actions: {
               items: [
                 {
-                  href: '/la-portal/upload-your-documents?returnUrl=/la-portal/check-your-answers',
+                  href: '/la-portal/la-portal/upload-your-documents?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
                   visuallyHiddenText: 'Uploaded documents',
                 },
@@ -923,7 +923,7 @@ describe('uploadedDocumentSummaryList', () => {
             actions: {
               items: [
                 {
-                  href: '/la-portal/upload-your-documents?returnUrl=/la-portal/check-your-answers',
+                  href: '/la-portal/la-portal/upload-your-documents?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
                   visuallyHiddenText: 'Uploaded documents',
                 },
@@ -936,7 +936,7 @@ describe('uploadedDocumentSummaryList', () => {
             actions: {
               items: [
                 {
-                  href: '/la-portal/upload-your-documents?returnUrl=/la-portal/check-your-answers',
+                  href: '/la-portal/la-portal/upload-your-documents?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
                   visuallyHiddenText: 'Documents not uploaded',
                 },
