@@ -49,8 +49,8 @@ export interface Eligibility {
 
 // LA Portal Knowledge Based Authentication
 export interface LaPortalKBA {
-  caseRef?: string;
-  childName?: string;
-  childrenDateOfBirth?: CaseDate;
+  kbaCaseRef?: string;
+  kbaChildName?: string;
+  kbaChildrenDateOfBirth?: CaseDate;
   authenticated?: boolean;
 }

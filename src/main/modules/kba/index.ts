@@ -21,7 +21,7 @@ export class KbaMiddleware {
     app.get(
       LA_PORTAL_KBA_CALLBACK,
       errorHandler(async (req: AppRequest, res) => {
-        if (req.session.laPortalKba?.caseRef) {
+        if (req.session.laPortalKba?.kbaCaseRef) {
           req.session.user = await getSystemUser();
           req.session.user.isSystemUser = true;
           req.session.save(() => res.redirect(LA_PORTAL_TASK_LIST));
@@ -42,16 +42,16 @@ export class KbaMiddleware {
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
           if (!req.session.userCase) {
             try {
-            req.session.userCase = await req.locals.api.getCaseById(req.session.laPortalKba.caseRef!);
-            } catch(err){
+              req.session.userCase = await req.locals.api.getCaseById(req.session.laPortalKba.kbaCaseRef!);
+            } catch (err) {
               req.session.destroy(() => res.redirect(LA_PORTAL_NEG_SCENARIO));
               return;
             }
           }
 
           if (
-            req.session.userCase.childrenDateOfBirth !== req.session.laPortalKba['childrenDateOfBirth'] &&
-            req.session.laPortalKba['childName'] !==
+            req.session.userCase.childrenDateOfBirth !== req.session.laPortalKba['kbaChildrenDateOfBirth'] &&
+            req.session.laPortalKba['kbaChildName'] !==
               req.session.userCase.childrenFirstName + ' ' + req.session.userCase.childrenLastName
           ) {
             req.session.destroy(() => res.redirect(LA_PORTAL_NEG_SCENARIO));

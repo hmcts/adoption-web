@@ -1,6 +1,5 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, ValidationCheck } from '../../../app/form/Form';
-// import { isCaseRefEmpty, isCaseRefNumeric, isCaseRefTooShort } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
@@ -8,7 +7,6 @@ jest.mock('../../../app/form/validation');
 
 const EN = 'en';
 const enContent = {
-  //section: 'Local authority',
   title: 'Application details',
   label: 'Court Case reference number',
   hint: 'This is the 16 digit reference number that was on the email sent to you. Please insert the numbers only, without the hyphens.',
@@ -18,15 +16,15 @@ const enContent = {
   childDateOfBirthHint: 'For example, 31 3 2012.',
   continueButton: 'Continue',
   errors: {
-    caseRef: {
+    kbaCaseRef: {
       required: 'Enter the 16 digit court case reference number',
       numberTooShort: 'The number entered is too short',
       isNotNumeric: 'Enter a case reference number in the correct format',
     },
-    childName: {
+    kbaChildName: {
       required: 'Enter the full name',
     },
-    childrenDateOfBirth: {
+    kbaChildrenDateOfBirth: {
       required: 'Enter their date of birth',
       incompleteDay: 'Date of birth must include a day',
       incompleteMonth: 'Date of birth must include a month',
@@ -38,7 +36,6 @@ const enContent = {
 };
 
 const cyContent = {
-  //section: 'Local authority (in welsh)',
   title: 'Application details (in welsh)',
   label: 'Court Case reference number (in welsh)',
   hint: 'This is the 16 digit reference number that was on the email sent to you. Please insert the numbers only, without the hyphens. (in welsh)',
@@ -48,15 +45,15 @@ const cyContent = {
   childDateOfBirthHint: 'For example, 31 3 2012.',
   continueButton: 'Continue (in welsh)',
   errors: {
-    caseRef: {
+    kbaCaseRef: {
       required: 'Enter the 16 digit court case reference number (in welsh)',
       numberTooShort: 'The number entered is too short (in welsh)',
       isNotNumeric: 'Enter a case reference number in the correct format (in welsh)',
     },
-    childName: {
+    kbaChildName: {
       required: 'Enter the full name (in welsh)',
     },
-    childrenDateOfBirth: {
+    kbaChildrenDateOfBirth: {
       required: 'Enter their date of birth (in welsh)',
       incompleteDay: 'Date of birth must include a day (in welsh)',
       incompleteMonth: 'Date of birth must include a month (in welsh)',
@@ -83,7 +80,7 @@ describe('la-portal > kba-case-ref > content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const field = fields.caseRef;
+    const field = fields.kbaCaseRef;
 
     expect(field.type).toBe('text');
     expect((field.label as Function)(generateContent(commonContent))).toBe(enContent.label);

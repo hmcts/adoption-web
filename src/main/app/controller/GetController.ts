@@ -60,7 +60,7 @@ export class GetController {
     });
   }
 
-  private getPreferredLanguage(req: AppRequest) {
+  protected getPreferredLanguage(req: AppRequest): string {
     // User selected language
     const requestedLanguage = req.query['lng'] as string;
     if (LanguageToggle.supportedLanguages.includes(requestedLanguage)) {

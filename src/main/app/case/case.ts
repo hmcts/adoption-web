@@ -421,8 +421,9 @@ export interface Case {
   hyphenatedCaseRef?: string;
   otherPlacementOrderType?: string;
 
-  caseRef?: string;
-  childName?: string;
+  kbaCaseRef?: string;
+  kbaChildName?: string;
+  kbaChildrenDateOfBirth?: string;
 }
 
 export interface CaseWithId extends Case {

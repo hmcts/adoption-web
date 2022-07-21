@@ -13,7 +13,7 @@ import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { PostController } from '../../../app/controller/PostController';
 import { LA_PORTAL_KBA_CASE_REF } from '../../urls';
 
-import LaPortalKbaPostController from './LaPortalKbaPostController';
+import LaPortalKbaPostController from './post';
 
 describe('la-portal > LaPortalKbaPostController', () => {
   let req;
