@@ -5,7 +5,7 @@ import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { PageContent } from '../../../app/controller/GetController';
 import * as Urls from '../../../steps/urls';
 
-interface GovUkNunjucksSummary {
+interface GovUKNunjucksSummary {
   key: {
     text?: string;
     html?: string;
@@ -27,7 +27,7 @@ interface GovUkNunjucksSummary {
   classes?: string;
 }
 
-interface SummaryListRow {
+interface SummaryListRows {
   key?: string;
   keyHtml?: string;
   value?: string;
@@ -36,12 +36,12 @@ interface SummaryListRow {
   classes?: string;
 }
 
-interface SummaryList {
+interface SummaryLists {
   title: string;
-  rows: GovUkNunjucksSummary[];
+  rows: GovUKNunjucksSummary[];
 }
 
-type SummaryListContent = PageContent & {
+type SummaryListsContent = PageContent & {
   sectionTitles: Record<string, string>;
   keys: Record<string, string>;
   language?: string;
@@ -51,7 +51,7 @@ type SummaryListContent = PageContent & {
   languagePreference: Record<string, string>;
 };
 
-const getSectionSummaryList = (rows: SummaryListRow[], content: PageContent): GovUkNunjucksSummary[] => {
+const getSectionSummaryLists = (rows: SummaryListRows[], content: PageContent): GovUKNunjucksSummary[] => {
   const returnUrlQueryParam = `returnUrl=${Urls.LA_PORTAL_CHECK_YOUR_ANSWERS}`;
   return rows.map(item => {
     let changeUrl = item.changeUrl;
@@ -80,12 +80,12 @@ const getSectionSummaryList = (rows: SummaryListRow[], content: PageContent): Go
 };
 
 export const caseRefSummaryList = (
-  { sectionTitles, keys, ...content }: SummaryListContent,
+  { sectionTitles, keys, ...content }: SummaryListsContent,
   userCase: Partial<CaseWithId>
-): SummaryList => {
+): SummaryLists => {
   return {
     title: '',
-    rows: getSectionSummaryList(
+    rows: getSectionSummaryLists(
       [
         {
           key: keys.caseRefNumber,
@@ -98,12 +98,12 @@ export const caseRefSummaryList = (
 };
 
 export const childSummaryList = (
-  { sectionTitles, keys, ...content }: SummaryListContent,
+  { sectionTitles, keys, ...content }: SummaryListsContent,
   userCase: Partial<CaseWithId>
-): SummaryList => {
+): SummaryLists => {
   return {
     title: sectionTitles.childDetails,
-    rows: getSectionSummaryList(
+    rows: getSectionSummaryLists(
       [
         {
           key: keys.sexAtBirth,
@@ -134,17 +134,17 @@ const formatNationalities = (
 
 /* eslint-disable import/namespace */
 export const birthParentSummaryList = (
-  { sectionTitles, keys, ...content }: SummaryListContent,
+  { sectionTitles, keys, ...content }: SummaryListsContent,
   userCase: Partial<CaseWithId>,
   prefix: FieldPrefix
-): SummaryList => {
+): SummaryLists => {
   const LA_PORTAL = 'LA_PORTAL_';
   const urlPrefix = prefix === FieldPrefix.BIRTH_MOTHER ? 'BIRTH_MOTHER_' : 'BIRTH_FATHER_';
   const reasonFieldName =
     prefix === FieldPrefix.BIRTH_MOTHER ? `${prefix}NotAliveReason` : `${prefix}UnsureAliveReason`;
   return {
     title: sectionTitles[`${prefix}Details`],
-    rows: getSectionSummaryList(
+    rows: getSectionSummaryLists(
       [
         ...(prefix === FieldPrefix.BIRTH_FATHER
           ? [
@@ -238,12 +238,12 @@ const getNotSureReasonElement = (content, userCase, notSure, reasonFieldName): s
 };
 
 export const otherParentSummaryList = (
-  { sectionTitles, keys, ...content }: SummaryListContent,
+  { sectionTitles, keys, ...content }: SummaryListsContent,
   userCase: Partial<CaseWithId>
-): SummaryList => {
+): SummaryLists => {
   return {
     title: sectionTitles.otherParentDetails,
-    rows: getSectionSummaryList(
+    rows: getSectionSummaryLists(
       [
         {
           key: keys.otherParent,
@@ -297,15 +297,15 @@ export const otherParentSummaryList = (
 };
 
 export const childrenPlacementOrderSummaryList = (
-  { sectionTitles, keys, ...content }: SummaryListContent,
+  { sectionTitles, keys, ...content }: SummaryListsContent,
   userCase: Partial<CaseWithId>
-): SummaryList => {
+): SummaryLists => {
   return {
     title: sectionTitles.childPlacementAndCourtOrders,
     rows: userCase.placementOrders!.reduce(
-      (acc: GovUkNunjucksSummary[], item, index) => [
+      (acc: GovUKNunjucksSummary[], item, index) => [
         ...acc,
-        ...getSectionSummaryList(
+        ...getSectionSummaryLists(
           [
             {
               keyHtml: `<h3 class="govuk-heading-s ${index !== 0 ? 'govuk-!-margin-top-8' : ''}">${
@@ -346,10 +346,10 @@ export const childrenPlacementOrderSummaryList = (
 };
 
 export const siblingCourtOrderSummaryList = (
-  { sectionTitles, keys, ...content }: SummaryListContent,
+  { sectionTitles, keys, ...content }: SummaryListsContent,
   userCase: Partial<CaseWithId>
-): SummaryList => {
-  const siblingList = getSectionSummaryList(
+): SummaryLists => {
+  const siblingList = getSectionSummaryLists(
     [
       {
         key: keys.siblingOrHalfSibling,
@@ -363,9 +363,9 @@ export const siblingCourtOrderSummaryList = (
   const siblingCourtOrderList =
     userCase.hasSiblings === YesNoNotsure.YES
       ? userCase.siblings!.reduce(
-          (rows: GovUkNunjucksSummary[], sibling) => [
+          (rows: GovUKNunjucksSummary[], sibling) => [
             ...rows,
-            ...getSectionSummaryList(
+            ...getSectionSummaryLists(
               [
                 {
                   keyHtml: `<h3 class="govuk-heading-s govuk-!-margin-top-8">${keys.courtOrder}</h3>`,
@@ -401,11 +401,11 @@ export const siblingCourtOrderSummaryList = (
 };
 
 export const uploadedDocumentSummaryList = (
-  { sectionTitles, keys, ...content }: SummaryListContent,
+  { sectionTitles, keys, ...content }: SummaryListsContent,
   userCase: Partial<CaseWithId>
-): SummaryList => ({
+): SummaryLists => ({
   title: sectionTitles.uploadedDocuments,
-  rows: getSectionSummaryList(
+  rows: getSectionSummaryLists(
     [
       {
         key: keys.uploadedDocuments,
