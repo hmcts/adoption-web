@@ -37,6 +37,7 @@ export interface UserDetails {
   givenName: string;
   familyName: string;
   isSystemUser?: boolean;
+  roles: string[];
 }
 
 export interface Eligibility {
