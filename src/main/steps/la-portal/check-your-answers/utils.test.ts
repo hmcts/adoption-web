@@ -23,15 +23,6 @@ describe('caseRefSummaryList', () => {
           {
             key: { text: 'Court case reference number' },
             value: { text: '1234-5678-9012-3456' },
-            /* actions: {
-              items: [
-                {
-                  href: '/la-portal/child/sex-at-birth?returnUrl=/la-portal/check-your-answers',
-                  //text: 'Change',
-                  visuallyHiddenText: 'Court case reference number',
-                },
-              ],
-            }, */
           },
         ],
       },
@@ -660,19 +651,6 @@ describe('childrenPlacementOrderSummaryList', () => {
               ],
             },
           },
-          /* {
-            key: { text: 'Court' },
-            value: { text: 'MOCK_PLACEMENT_ORDER_COURT' },
-            actions: {
-              items: [
-                {
-                  href: '/la-portal/child/placement-order-court?change=MOCK_PLACEMENT_ORDER_ID&returnUrl=/la-portal/check-your-answers',
-                  text: 'Change',
-                  visuallyHiddenText: 'Court',
-                },
-              ],
-            },
-          }, */
           {
             key: { text: 'Date' },
             value: { html: '12 November 2020' },
@@ -717,7 +695,7 @@ describe('childrenPlacementOrderSummaryList', () => {
               ],
             },
           },
-          /* {
+          {
             key: { text: 'Court' },
             value: { text: 'MOCK_PLACEMENT_ORDER_COURT2' },
             actions: {
@@ -729,7 +707,7 @@ describe('childrenPlacementOrderSummaryList', () => {
                 },
               ],
             },
-          }, */
+          },
           {
             key: { text: 'Date' },
             value: { html: '10 November 2020' },
@@ -843,47 +821,6 @@ describe('siblingCourtOrderSummaryList', () => {
     expect(siblingCourtOrderSummaryList(enContent, userCase)).toStrictEqual(expected);
   });
 });
-
-/* describe('familyCourtSummaryList', () => {
-  test.each([
-    {
-      userCase: mockUserCase,
-      expected: {
-        title: 'Family court details',
-        rows: [
-          {
-            key: { text: 'Family court name' },
-            value: { text: 'MOCK_PLACEMENT_ORDER_COURT' },
-            actions: {
-              items: [
-                {
-                  href: '/children/find-placement-order-court?returnUrl=/review-pay-submit/check-your-answers',
-                  text: 'Change',
-                  visuallyHiddenText: 'Family court name',
-                },
-              ],
-            },
-          },
-          {
-            key: { text: 'Family court name' },
-            value: { text: 'MOCK_FAMILY_COURT' },
-            actions: {
-              items: [
-                {
-                  href: '/children/find-family-court?returnUrl=/review-pay-submit/check-your-answers',
-                  text: 'Change',
-                  visuallyHiddenText: 'Family court name',
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ])('return correct summary list items when %#', ({ userCase, expected }) => {
-    expect(familyCourtSummaryList(enContent, userCase)).toEqual(expected);
-  });
-}); */
 
 describe('uploadedDocumentSummaryList', () => {
   test.each([
