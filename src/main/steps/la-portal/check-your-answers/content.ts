@@ -18,9 +18,10 @@ export const enContent = {
   title: 'Check your answers',
   change: 'Change',
   reason: 'Reason',
-  submitApplication: 'Check your application',
-  checkInfoBeforeSubmit:
-    'Check all the information you have provided carefully. The next step is to sign a statement of truth declaring that the information provided is correct. Once this is signed and payment has been taken, your application will be submitted to the court.',
+  submitApplication: 'Check your answers',
+  checkInfoBeforeSubmit1:
+    'Check all the information you have provided. If you need to edit any of the answers, select the change link at the end of the relevant answer.',
+  checkInfoBeforeSubmit2: 'Once you are happy with your answers, you can submit the application to the court.',
   applyingWith: {
     [ApplyingWith.ALONE]: "I'm applying on my own",
     [ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER]: "I'm applying with my spouse or civil partner",
@@ -102,7 +103,9 @@ const cyContent: typeof enContent = {
   change: 'Newid',
   reason: 'Rheswm',
   submitApplication: 'Gwirio eich cais',
-  checkInfoBeforeSubmit:
+  checkInfoBeforeSubmit1:
+    'Gwiriwch yr holl wybodaeth yr ydych wedi’i rhoi yn ofalus. Y cam nesaf yw arwyddo’r datganiad gwirionedd i ddatgan bod yr wybodaeth a roddwyd yn gywir. Unwaith y bydd wedi’i arwyddo a’r taliad wedi’i wneud, bydd eich cais yn cael ei gyflwyno i’r llys.',
+  checkInfoBeforeSubmit2:
     'Gwiriwch yr holl wybodaeth yr ydych wedi’i rhoi yn ofalus. Y cam nesaf yw arwyddo’r datganiad gwirionedd i ddatgan bod yr wybodaeth a roddwyd yn gywir. Unwaith y bydd wedi’i arwyddo a’r taliad wedi’i wneud, bydd eich cais yn cael ei gyflwyno i’r llys.',
   applyingWith: {
     [ApplyingWith.ALONE]: 'Rwy’n gwneud cais ar fy mhen fy hun',
