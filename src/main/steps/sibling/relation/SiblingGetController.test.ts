@@ -12,7 +12,14 @@ describe('SiblingGetController', () => {
   beforeEach(() => {
     Date.now = jest.fn(() => +new Date('2021-01-01'));
     controller = new SiblingGetController(__dirname + '../../common/template', generateContent);
-    req = mockRequest({ session: { userCase: { siblings: [] } } });
+    req = mockRequest({
+      session: {
+        userCase: {
+          siblings: [{ siblingPlacementOtherType: 'MOCK_SIBLING_PLACEMENT_OTHER_TYPE' }],
+          selectedSiblingOtherPlacementOrderType: 'MOCK_SELECTED_SIBLING_PLACEMENT_OTHER_TYPE',
+        },
+      },
+    });
     res = mockResponse();
   });
 
@@ -72,7 +79,15 @@ describe('SiblingGetController', () => {
 
   describe('when there is "add" query param', () => {
     beforeEach(() => {
-      req = mockRequest({ query: { add: 'MOCK_ID' }, session: { userCase: { siblings: [] } } });
+      req = mockRequest({
+        query: { add: 'MOCK_ID' },
+        session: {
+          userCase: {
+            siblings: [],
+            selectedSiblingOtherPlacementOrderType: 'MOCK_SELECTED_SIBLING_PLACEMENT_OTHER_TYPE',
+          },
+        },
+      });
       req.url = '/request?add=MOCK_ID';
     });
 
@@ -92,6 +107,10 @@ describe('SiblingGetController', () => {
     });
 
     test('should remove the query param and redirect', async () => {
+      req.locals.api.triggerEvent.mockResolvedValue({ selectedSiblingId: 'MOCK_ID' });
+      req.locals.api.triggerEvent.mockResolvedValue({
+        selectedSiblingOtherPlacementOrderType: 'MOCK_SELECTED_SIBLING_PLACEMENT_OTHER_TYPE',
+      });
       await controller.get(req, res);
       expect(res.redirect).toHaveBeenCalledWith('/request');
     });
@@ -99,7 +118,15 @@ describe('SiblingGetController', () => {
 
   describe('when there is "change" query param', () => {
     beforeEach(() => {
-      req = mockRequest({ query: { change: 'MOCK_ID' }, session: { userCase: { siblings: [] } } });
+      req = mockRequest({
+        query: { change: 'MOCK_ID' },
+        session: {
+          userCase: {
+            siblings: [],
+            selectedSiblingOtherPlacementOrderType: 'MOCK_SELECTED_SIBLING_PLACEMENT_OTHER_TYPE',
+          },
+        },
+      });
       req.url = '/request?change=MOCK_ID';
     });
 
@@ -110,12 +137,20 @@ describe('SiblingGetController', () => {
     });
 
     test('should remove the query param and redirect', async () => {
+      req.locals.api.triggerEvent.mockResolvedValue({ selectedSiblingId: 'MOCK_ID' });
+      req.locals.api.triggerEvent.mockResolvedValue({
+        selectedSiblingOtherPlacementOrderType: 'MOCK_SELECTED_SIBLING_PLACEMENT_OTHER_TYPE',
+      });
       await controller.get(req, res);
       expect(res.redirect).toHaveBeenCalledWith('/request');
     });
   });
 
   test('saves the siblings and selectedSiblingId in session', async () => {
+    req.locals.api.triggerEvent.mockResolvedValue({ selectedSiblingId: 'MOCK_ID' });
+    req.locals.api.triggerEvent.mockResolvedValue({
+      selectedSiblingOtherPlacementOrderType: 'MOCK_SELECTED_SIBLING_PLACEMENT_OTHER_TYPE',
+    });
     await controller.get(req, res);
     expect(req.session.save).toHaveBeenCalled();
   });

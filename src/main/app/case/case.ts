@@ -18,6 +18,7 @@ import {
   Payment,
   PlacementOrder,
   Sibling,
+  SiblingRelationships,
   State,
   YesNoNotsure,
   YesOrNo,
@@ -174,12 +175,16 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   hasSiblingNotSureReason: 'hasSiblingNotSureReason',
   addAnotherSiblingPlacementOrder: 'addAnotherSiblingPlacementOrder',
   selectedSiblingId: 'selectedSiblingId',
+  selectedSiblingRelation: 'selectedSiblingRelation',
+  selectedSiblingPoType: 'selectedSiblingPoType',
 
   applicant1DocumentsUploaded: 'applicant1DocumentsUploaded',
   applicant2DocumentsUploaded: 'applicant2DocumentsUploaded',
+  laDocumentsUploaded: 'laDocumentsUploaded',
   documentsGenerated: 'documentsGenerated',
   applicationFeeOrderSummary: 'applicationFeeOrderSummary',
   applicant1CannotUpload: 'applicant1CannotUpload',
+  laCannotUpload: 'laCannotUpload',
 
   placementOrderCourt: 'placementOrderCourt',
   findFamilyCourt: 'findFamilyCourt',
@@ -366,6 +371,10 @@ export interface Case {
   addAnotherSiblingPlacementOrder?: YesOrNo;
   selectedSiblingId?: string;
   addAnotherSibling?: YesOrNo;
+  selectedSiblingRelation?: string;
+  siblingRelation?: SiblingRelationships;
+  selectedSiblingPoType?: string;
+  selectedSiblingOtherPlacementOrderType?: string;
 
   /***** Statement of truth *****/
   applicant1IBelieveApplicationIsTrue?: Checkbox;
@@ -388,6 +397,12 @@ export interface Case {
   applicant1UploadedFiles?: UploadedFile[];
   applicant1CannotUpload?: Checkbox;
   applicant1CannotUploadDocuments?: DocumentType[];
+
+  /***** Document upload *****/
+  laDocumentsUploaded?: ListValue<Partial<AdoptionDocument> | null>[];
+  laUploadedFiles?: UploadedFile[];
+  laCannotUpload?: Checkbox;
+  laCannotUploadDocuments?: DocumentType[];
 
   /***** Find court *****/
   placementOrderCourt?: string;

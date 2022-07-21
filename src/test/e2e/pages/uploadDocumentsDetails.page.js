@@ -11,7 +11,7 @@ module.exports = {
   },
 
   async uploadDocumentsSectionWithCantNotUploadOption() {
-    await I.retry(3).waitForText("Upload the child's documents", 30);
+    await I.retry(3).waitForText('Upload documents', 30);
     await I.retry(3).click(this.fields.applicant1CannotUpload);
     await I.wait(3);
     await I.retry(3).click(this.fields.applicant1CannotUploadDocuments);
@@ -36,9 +36,9 @@ module.exports = {
   },
 
   async uploadDocumentsSection() {
-    await I.retry(3).waitForText("Upload the child's documents", 30);
+    await I.retry(3).waitForText('Upload documents', 30);
     await I.retry(3).attachFile(this.fields.uploadFileButton, config.testPdfFile);
-    await I.wait(3);
+    await I.wait(5);
     await I.retry(3).waitForElement(this.fields.uploadProgressBar, 30);
     await I.wait(3);
     await I.retry(3).waitForElement(this.fields.fileUploadedOption, 30);

@@ -29,7 +29,7 @@ module.exports = {
     adoptionAgencyLink: 'a[id$="adoption-agency"]',
     adoptionAgencyDetailsStatus: 'strong[id$="adoption-agency-status"]',
     childrenPlacementOrderLink: 'a[id$="placement-and-court-order-details"]',
-    childrenSiblingLink: 'a[href$="/sibling/exists"]',
+    childrenSiblingLink: 'a[id$="sibling-court-order-details"]',
     childrenSiblingDetailsStatus: 'strong[id$="sibling-status"]',
     reviewPayAndSubmitLink: 'a[id="review-pay-and-submit"]',
     dateChildMovedInLink: 'a[id$="date-child-moved-in"]',
@@ -38,8 +38,8 @@ module.exports = {
     findFamilyCourtStatus: 'strong[id$="find-family-court-status"]',
   },
   uploadDocument: {
-    uploadDocumentLink: 'a[href$="upload-your-documents"]',
-    uploadDocumentStatus: 'strong[id$="upload-your-documents-status"]',
+    uploadDocumentLink: 'a[id$="upload-documents"]',
+    uploadDocumentStatus: 'strong[id$="upload-documents-status"]',
   },
 
   async goToTaskListPage() {

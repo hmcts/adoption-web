@@ -216,19 +216,8 @@ export const getSiblingStatus = (userCase: CaseWithId): SectionStatus => {
 };
 
 export const getUploadDocumentStatus = (userCase: CaseWithId): SectionStatus => {
-  const { applicant1UploadedFiles, applicant1CannotUpload, applicant1CannotUploadDocuments } = userCase;
-  if (applicant1UploadedFiles && applicant1UploadedFiles.length > 0 && !applicant1CannotUpload) {
-    return SectionStatus.COMPLETED;
-  }
-
-  if (applicant1UploadedFiles && applicant1UploadedFiles.length > 0 && applicant1CannotUpload) {
-    if (applicant1CannotUploadDocuments && applicant1CannotUploadDocuments.length > 0) {
-      return SectionStatus.COMPLETED;
-    }
-    return SectionStatus.IN_PROGRESS;
-  }
-
-  if (applicant1CannotUpload && applicant1CannotUploadDocuments && applicant1CannotUploadDocuments.length > 0) {
+  const { laUploadedFiles, laCannotUpload } = userCase;
+  if ((laUploadedFiles && laUploadedFiles.length > 0) || laCannotUpload) {
     return SectionStatus.COMPLETED;
   }
 
@@ -239,4 +228,25 @@ export const getUploadDocumentStatus = (userCase: CaseWithId): SectionStatus => 
   // }
 
   return SectionStatus.NOT_STARTED;
+};
+
+const getAllSectionStatuses = (userCase: CaseWithId): SectionStatus[] => {
+  return [
+    getChildrenPlacementOrderStatus(userCase),
+    getChildrenBirthCertificateStatus(userCase),
+    getAdoptionCertificateDetailsStatus(userCase),
+    getBirthFatherDetailsStatus(userCase),
+    getBirthMotherDetailsStatus(userCase),
+    getOtherParentStatus(userCase),
+    getSiblingStatus(userCase),
+  ];
+};
+
+export const getApplicationStatus = (userCase: CaseWithId): SectionStatus => {
+  const statuses = [...getAllSectionStatuses(userCase), getUploadDocumentStatus(userCase)];
+
+  if (statuses.every(status => status === SectionStatus.COMPLETED)) {
+    return SectionStatus.NOT_STARTED;
+  }
+  return SectionStatus.CAN_NOT_START_YET;
 };

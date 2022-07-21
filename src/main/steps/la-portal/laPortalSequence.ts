@@ -19,6 +19,15 @@ const childSequence = [
   },
 ];
 
+/***************************** DOCUMENTS SEQUENCE *****************************/
+const documentSequence = [
+  {
+    url: Urls.LA_PORTAL_UPLOAD_YOUR_DOCUMENTS,
+    contentDir: path.join(__dirname, '..', 'la-portal', 'upload-your-documents'),
+    getNextStep: () => Urls.LA_PORTAL_TASK_LIST,
+  },
+];
+
 /************************* BIRTH MOTHER **************************/
 const birthMotherSequence = [
   {
@@ -293,6 +302,15 @@ const siblingSequence: Step[] = [
   },
 ];
 
+/******************** REVIEW AND SUBMIT *********************/
+const reviewSubmitSequence: Step[] = [
+  {
+    url: Urls.LA_PORTAL_CONFIRMATION_PAGE,
+    //contentDir: path.join(__dirname, '..', 'review-pay-submit', 'confirmation'),
+    getNextStep: () => Urls.HOME_URL,
+  },
+];
+
 /******************** FOOTER LINKS *********************/
 const footerLinkSequence: Step[] = [
   {
@@ -346,6 +364,8 @@ export const laPortalSequence: Step[] = [
   ...otherParentSequence,
   ...placementOrderSequence,
   ...siblingSequence,
+  ...reviewSubmitSequence,
   ...footerLinkSequence,
   ...ReviewYourAsnwersSequence,
+  ...documentSequence,
 ];

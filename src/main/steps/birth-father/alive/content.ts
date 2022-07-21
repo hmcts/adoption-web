@@ -1,39 +1,93 @@
 import { YesNoNotsure } from '../../../app/case/definition';
-import { Radios } from '../../common/components/radios';
+import { TranslationFn } from '../../../app/controller/GetController';
+import { FormContent } from '../../../app/form/Form';
+import { isFieldFilledIn } from '../../../app/form/validation';
 import { SECTION, SECTION_IN_WELSH } from '../constants';
 
-import { cyNotSure, enNotSure, notSureInput } from './notSureInput/content';
-
-const fieldName = 'birthFatherStillAlive';
-
-const enContent = {
+const en = () => ({
   section: SECTION,
   label: "Is the child's birth father still alive?",
-  ...enNotSure.content,
+  moreDetails:
+    "Provide more details. For example, 'the birth father is uncontactable'. Your adoption agency or social worker can help you to complete this section.",
+  hint: 'If this person has died, you will need to provide the death certificate.',
   errors: {
-    [fieldName]: {
+    birthFatherStillAlive: {
       required: 'Please answer the question',
     },
-    ...enNotSure.errors,
+    birthFatherUnsureAliveReason: {
+      required: 'Enter more details',
+    },
   },
-};
+});
 
-const cyContent: typeof enContent = {
+const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
   label: 'A yw tad biolegol y plentyn dal yn fyw?',
-  ...cyNotSure.content,
+  moreDetails:
+    'Darparwch fwy o fanylion. Er enghraifft, ‘nid oes modd cysylltu â’r tad biolegol’. Gall eich asiantaeth fabwysiadu neu eich gweithiwr cymdeithasol eich helpu i lenwi’r rhan hon.',
+  hint: 'If this person has died, you will need to provide the death certificate.',
   errors: {
-    [fieldName]: {
+    birthFatherStillAlive: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
-    ...cyNotSure.errors,
+    birthFatherUnsureAliveReason: {
+      required: 'Rhowch fwy o fanylion',
+    },
+  },
+});
+
+export const form: FormContent = {
+  fields: {
+    birthFatherStillAlive: {
+      type: 'radios',
+      classes: 'govuk-radios',
+      label: l => l.label,
+      section: l => l.section,
+      values: [
+        { label: l => l.yes, value: YesNoNotsure.YES },
+        {
+          label: l => l.no,
+          value: YesNoNotsure.NO,
+          subFields: {
+            hint1: {
+              type: 'label',
+              label: l => l.hint,
+            },
+          },
+        },
+        {
+          label: l => l.notSure,
+          value: YesNoNotsure.NOT_SURE,
+          subFields: {
+            birthFatherUnsureAliveReason: {
+              type: 'text',
+              label: l => l.moreDetails,
+              labelSize: null,
+              validator: isFieldFilledIn,
+            },
+          },
+        },
+      ],
+      validator: isFieldFilledIn,
+    },
+  },
+  submit: {
+    text: l => l.continue,
+  },
+  saveAsDraft: {
+    text: l => l.saveAsDraft,
   },
 };
 
-const values = [
-  { key: 'yes', value: YesNoNotsure.YES },
-  { key: 'no', value: YesNoNotsure.NO },
-  { key: 'notSure', value: YesNoNotsure.NOT_SURE, subFields: [notSureInput] },
-];
+const languages = {
+  en,
+  cy,
+};
 
-export const { form, generateContent } = new Radios({ enContent, cyContent, fieldName, values, label: 'label' });
+export const generateContent: TranslationFn = content => {
+  const translations = languages[content.language]();
+  return {
+    ...translations,
+    form,
+  };
+};

@@ -1,6 +1,15 @@
 import mockUserCase from '../../../../test/unit/utils/mockUserCase';
 import { CaseWithId, Checkbox } from '../../../app/case/case';
-import { DocumentType, Gender, Nationality, State, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
+import {
+  DocumentType,
+  Gender,
+  Nationality,
+  SiblingPOType,
+  SiblingRelationships,
+  State,
+  YesNoNotsure,
+  YesOrNo,
+} from '../../../app/case/definition';
 
 import {
   getAdoptionCertificateDetailsStatus,
@@ -550,8 +559,8 @@ describe('utils', () => {
           siblings: [
             {
               siblingId: 'MOCK_SIBLING_ID',
-              siblingRelation: 'MOCK_SIBLING_RELATION',
-              siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
+              siblingRelation: SiblingRelationships.SISTER,
+              siblingPoType: SiblingPOType.ADOPTION_ORDER,
             },
           ],
         },
@@ -563,8 +572,73 @@ describe('utils', () => {
           siblings: [
             {
               siblingId: 'MOCK_SIBLING_ID',
-              siblingRelation: 'MOCK_SIBLING_RELATION',
-              siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
+              siblingRelation: SiblingRelationships.STEP_SISTER,
+              siblingPoType: SiblingPOType.CARE_ORDER,
+            },
+          ],
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          siblings: [
+            {
+              siblingId: 'MOCK_SIBLING_ID',
+              siblingRelation: SiblingRelationships.HALF_SISTER,
+              siblingPoType: SiblingPOType.CONTACT_ORDER,
+            },
+          ],
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          siblings: [
+            {
+              siblingId: 'MOCK_SIBLING_ID',
+              siblingRelation: SiblingRelationships.BROTHER,
+              siblingPoType: SiblingPOType.FREEING_ORDER,
+            },
+          ],
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          siblings: [
+            {
+              siblingId: 'MOCK_SIBLING_ID',
+              siblingRelation: SiblingRelationships.STEP_BROTHER,
+              siblingPoType: SiblingPOType.PLACEMENT_ORDER,
+            },
+          ],
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          siblings: [
+            {
+              siblingId: 'MOCK_SIBLING_ID',
+              siblingRelation: SiblingRelationships.HALF_BROTHER,
+              siblingPoType: SiblingPOType.SUPERVIS_ORDER,
+            },
+          ],
+        },
+        expected: IN_PROGRESS,
+      },
+      {
+        data: {
+          hasSiblings: YesNoNotsure.YES,
+          siblings: [
+            {
+              siblingId: 'MOCK_SIBLING_ID',
+              siblingRelation: SiblingRelationships.SISTER,
+              siblingPoType: SiblingPOType.OTHER,
               siblingPoNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
             },
           ],
@@ -580,31 +654,31 @@ describe('utils', () => {
     test.each([
       { data: { ...mockUserCase }, expected: 'COMPLETED' },
       {
-        data: { ...mockUserCase, applicant1CannotUpload: Checkbox.Checked },
-        expected: 'IN_PROGRESS',
+        data: { ...mockUserCase, laCannotUpload: Checkbox.Checked },
+        expected: 'COMPLETED',
       },
       {
         data: {
           ...mockUserCase,
-          applicant1CannotUpload: Checkbox.Checked,
-          applicant1CannotUploadDocuments: [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE],
+          laCannotUpload: Checkbox.Checked,
+          laCannotUploadDocuments: [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE],
         },
         expected: 'COMPLETED',
       },
       {
         data: {
           ...mockUserCase,
-          applicant1UploadedFiles: undefined,
-          applicant1CannotUpload: Checkbox.Checked,
-          applicant1CannotUploadDocuments: [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE],
+          laUploadedFiles: undefined,
+          laCannotUpload: Checkbox.Checked,
+          laCannotUploadDocuments: [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE],
         },
         expected: 'COMPLETED',
       },
       {
         data: {
           ...mockUserCase,
-          applicant1UploadedFiles: undefined,
-          applicant1CannotUpload: undefined,
+          laUploadedFiles: undefined,
+          laCannotUpload: undefined,
         },
         expected: 'NOT_STARTED',
       },
@@ -612,8 +686,8 @@ describe('utils', () => {
         data: {
           ...mockUserCase,
           applyingWith: undefined,
-          applicant1UploadedFiles: undefined,
-          applicant1CannotUpload: undefined,
+          laUploadedFiles: undefined,
+          laCannotUpload: undefined,
         },
         expected: 'NOT_STARTED',
       },

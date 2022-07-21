@@ -33,7 +33,12 @@ describe('siblingSequence', () => {
     expect(siblingSequence[4].getNextStep({ addAnotherSiblingPlacementOrder: YesOrNo.YES })).toBe(
       '/sibling/relation?add=1609459200000'
     );
-    expect(siblingSequence[4].getNextStep({ addAnotherSiblingPlacementOrder: YesOrNo.NO })).toBe('/task-list');
+    expect(siblingSequence[4].getNextStep({ addAnotherSiblingPlacementOrder: YesOrNo.NO })).toBe(
+      '/la-portal/task-list'
+    );
+    expect(siblingSequence[4].getNextStep({ addAnotherSiblingPlacementOrder: YesOrNo.NO })).toBe(
+      '/la-portal/task-list'
+    );
 
     expect(siblingSequence[5].url).toBe('/sibling/placement-order-check-your-answers');
     expect(siblingSequence[5].showInSection).toBe('aboutSibling');
@@ -41,6 +46,6 @@ describe('siblingSequence', () => {
 
     expect(siblingSequence[6].url).toBe('/sibling/remove-placement-order');
     expect(siblingSequence[6].showInSection).toBe('aboutSibling');
-    expect(siblingSequence[6].getNextStep({})).toBe('/sibling/summary');
+    expect(siblingSequence[6].getNextStep({})).toBe('/sibling/exists');
   });
 });

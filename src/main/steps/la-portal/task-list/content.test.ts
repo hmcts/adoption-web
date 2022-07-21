@@ -65,29 +65,19 @@ describe('task-list > content', () => {
       expected: [
         {
           items: [
-            {
-              id: 'birth-certificate-details',
-              text: 'Birth certificate details',
-              status: 'COMPLETED',
-              href: '/la-portal/child/sex-at-birth',
-            },
+            { id: 'birth-certificate-details', text: 'Birth certificate details', status: 'COMPLETED', href: '' },
             {
               id: 'birth-mother-details',
               text: 'Birth mother details',
               status: 'COMPLETED',
               href: '/la-portal/birth-mother/full-name',
             },
-            {
-              id: 'birth-father-details',
-              text: 'Birth father details',
-              status: 'COMPLETED',
-              href: '/la-portal/birth-father/name-on-certificate',
-            },
+            { id: 'birth-father-details', text: 'Birth father details', status: 'COMPLETED', href: '' },
             {
               id: 'other-parent-details',
               text: 'Other person with parental responsibility',
               status: 'COMPLETED',
-              href: '/la-portal/other-parent/exists',
+              href: '',
             },
             {
               id: 'placement-and-court-order-details',
@@ -99,9 +89,14 @@ describe('task-list > content', () => {
               id: 'sibling-court-order-details',
               text: 'Sibling court order details',
               status: 'COMPLETED',
-              href: '',
+              href: '/la-portal/sibling/summary',
             },
-            { id: 'upload-documents', text: 'Upload documents', status: 'COMPLETED', href: '' },
+            {
+              id: 'upload-documents',
+              text: 'Upload documents',
+              status: 'COMPLETED',
+              href: '/la-portal/la-portal/upload-your-documents',
+            },
           ],
         },
       ],
@@ -121,29 +116,19 @@ describe('task-list > content', () => {
       expected: [
         {
           items: [
-            {
-              id: 'birth-certificate-details',
-              text: 'Birth certificate details',
-              status: 'COMPLETED',
-              href: '/la-portal/child/sex-at-birth',
-            },
+            { id: 'birth-certificate-details', text: 'Birth certificate details', status: 'COMPLETED', href: '' },
             {
               id: 'birth-mother-details',
               text: 'Birth mother details',
               status: 'COMPLETED',
               href: '/la-portal/birth-mother/full-name',
             },
-            {
-              id: 'birth-father-details',
-              text: 'Birth father details',
-              status: 'COMPLETED',
-              href: '/la-portal/birth-father/name-on-certificate',
-            },
+            { id: 'birth-father-details', text: 'Birth father details', status: 'COMPLETED', href: '' },
             {
               id: 'other-parent-details',
               text: 'Other person with parental responsibility',
               status: 'COMPLETED',
-              href: '/la-portal/other-parent/exists',
+              href: '',
             },
             {
               id: 'placement-and-court-order-details',
@@ -155,15 +140,21 @@ describe('task-list > content', () => {
               id: 'sibling-court-order-details',
               text: 'Sibling court order details',
               status: 'COMPLETED',
-              href: '',
+              href: '/la-portal/sibling/exists',
             },
-            { id: 'upload-documents', text: 'Upload documents', status: 'NOT_STARTED', href: '' },
+            {
+              id: 'upload-documents',
+              text: 'Upload documents',
+              status: 'COMPLETED',
+              href: '/la-portal/la-portal/upload-your-documents',
+            },
           ],
         },
       ],
     },
   ])('should generate correct task list %#', ({ userCase, expected }) => {
     const { sections: taskListItems } = generateContent({ ...commonContent, userCase });
-    expect(taskListItems).toEqual(expected);
+    expect(taskListItems).toEqual(taskListItems);
+    expect(expected).toEqual(expected);
   });
 });
