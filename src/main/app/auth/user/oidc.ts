@@ -34,6 +34,7 @@ export const getUserDetails = async (
     email: jwt.sub,
     givenName: jwt.given_name,
     familyName: jwt.family_name,
+    roles: jwt.roles,
   };
 };
 
@@ -57,6 +58,7 @@ export const getSystemUser = async (): Promise<UserDetails> => {
     email: jwt.sub,
     givenName: jwt.given_name,
     familyName: jwt.family_name,
+    roles: jwt.roles,
   };
 };
 
