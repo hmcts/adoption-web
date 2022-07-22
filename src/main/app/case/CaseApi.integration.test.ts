@@ -14,6 +14,7 @@ const userDetails: UserDetails = {
   givenName: 'billy',
   familyName: 'bob',
   id: 'something',
+  roles: ['adoption-citizen-user'],
 };
 
 describe('CaseApi', () => {

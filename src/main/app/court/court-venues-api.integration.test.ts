@@ -17,6 +17,7 @@ const userDetails: UserDetails = {
   givenName: 'billy',
   familyName: 'bob',
   id: 'something',
+  roles: [],
 };
 // let mockReq: AppRequest;
 
