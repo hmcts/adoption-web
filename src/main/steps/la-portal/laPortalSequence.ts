@@ -343,11 +343,11 @@ const footerLinkSequence: Step[] = [
 export const laPortalSequence: Step[] = [
   {
     url: Urls.LA_PORTAL_KBA_CASE_REF,
-    getNextStep: () => Urls.LA_PORTAL_KBA_CALLBACK,
+    getNextStep: () => Urls.LA_PORTAL_START_PAGE,
   },
   {
     url: Urls.LA_PORTAL_START_PAGE,
-    getNextStep: () => Urls.LA_PORTAL_TASK_LIST,
+    getNextStep: () => Urls.LA_PORTAL_KBA_CALLBACK,
   },
   {
     url: Urls.LA_PORTAL_TASK_LIST,

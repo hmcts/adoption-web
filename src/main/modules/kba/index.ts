@@ -3,13 +3,7 @@ import { Application, NextFunction, Response } from 'express';
 import { getSystemUser } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
 import { AppRequest } from '../../app/controller/AppRequest';
-import {
-  LA_PORTAL,
-  LA_PORTAL_KBA_CALLBACK,
-  LA_PORTAL_KBA_CASE_REF,
-  LA_PORTAL_START_PAGE,
-  // LA_PORTAL_TASK_LIST
-} from '../../steps/urls';
+import { LA_PORTAL, LA_PORTAL_KBA_CALLBACK, LA_PORTAL_KBA_CASE_REF, LA_PORTAL_TASK_LIST } from '../../steps/urls';
 
 /**
  * Adds the KBA middleware for knowledge based authentication
@@ -24,7 +18,7 @@ export class KbaMiddleware {
         if (req.session.laPortalKba?.caseRef) {
           req.session.user = await getSystemUser();
           req.session.user.isSystemUser = true;
-          req.session.save(() => res.redirect(LA_PORTAL_START_PAGE));
+          req.session.save(() => res.redirect(LA_PORTAL_TASK_LIST));
         } else {
           res.redirect(LA_PORTAL_KBA_CASE_REF);
         }

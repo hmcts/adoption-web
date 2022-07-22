@@ -12,10 +12,10 @@ describe('la-portal > laPortalSequence', () => {
     expect(laPortalSequence).toHaveLength(55);
 
     expect(laPortalSequence[0].url).toBe('/la-portal/kba-case-ref');
-    expect(laPortalSequence[0].getNextStep({})).toBe('/la-portal/kba-completed');
+    expect(laPortalSequence[0].getNextStep({})).toBe('/la-portal/start-page');
 
     expect(laPortalSequence[1].url).toBe('/la-portal/start-page');
-    expect(laPortalSequence[1].getNextStep({})).toBe('/la-portal/task-list');
+    expect(laPortalSequence[1].getNextStep({})).toBe('/la-portal/kba-completed');
 
     expect(laPortalSequence[2].url).toBe('/la-portal/task-list');
     expect(laPortalSequence[2].getNextStep({})).toBe('/');
