@@ -19,7 +19,8 @@ const enContent = {
   childSocialWorkerEmailHint: 'The email address should be an official government email that ends in gov.uk.',
   childLocalAuthority: "Child's local authority",
   childLocalAuthorityEmail: 'Local authority email address',
-  childLocalAuthorityEmailHint: 'The email address should be an official government email that ends in gov.uk',
+  childLocalAuthorityEmailHint:
+    'This will be used to send a notification to the local authority to progress your application so it is important that it is accurate. It should end in gov.uk.',
   childLocalAuthorityHint:
     'This is the local authority with parental responsibility for the child. It may be different to your own local authority.',
   errors: {
@@ -57,7 +58,7 @@ const cyContent = {
   childLocalAuthority: 'Awdurdod lleol y plentyn',
   childLocalAuthorityEmail: 'Cyfeiriad e-bost yr awdurdod lleol',
   childLocalAuthorityEmailHint:
-    "Dylai'r cyfeiriad e-bost fod yn e-bost swyddogol gan y llywodraeth sy'n terfynu â gov.uk.",
+    'This will be used to send a notification to the local authority to progress your application so it is important that it is accurate. It should end in gov.uk. (in welsh)',
   childLocalAuthorityHint:
     "Dyma'r awdurdod lleol sydd â chyfrifoldeb rhiant dros y plentyn. Gall fod yn wahanol i'ch awdurdod lleol eich hun.",
   errors: {
