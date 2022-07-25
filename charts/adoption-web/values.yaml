@@ -19,6 +19,9 @@ nodejs:
     IDAM_WEB_URL: 'https://idam-web-public.{{ .Values.global.environment }}.platform.hmcts.net/login'
     IDAM_API_URL: 'https://idam-api.{{ .Values.global.environment }}.platform.hmcts.net/o/token'
     REDIS_HOST: 'adoption-web-session-storage-{{ .Values.global.environment }}.redis.cache.windows.net'
+    REDIS_PORT: 6380
+    REDIS_TLS: true
+    ALLOW_CONFIG_MUTATIONS: true
     SECURE_COOKIE: 'true'
     PAYMENTS_API_URL: 'http://payment-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal'
     CCD_URL: 'http://ccd-data-store-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal'
