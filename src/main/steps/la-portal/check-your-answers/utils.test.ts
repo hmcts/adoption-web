@@ -637,7 +637,7 @@ describe('childrenPlacementOrderSummaryList', () => {
             value: {},
             classes: 'govuk-summary-list__row--no-border',
           },
-          { key: { text: 'Type of order' }, value: { text: 'Placement order' } },
+          { key: { text: 'Type of order' }, value: {} },
           {
             key: { text: 'Order case or serial number' },
             value: { text: 'MOCK_PLACEMENT_ORDER_NUMBER' },
@@ -671,7 +671,7 @@ describe('childrenPlacementOrderSummaryList', () => {
           },
           {
             key: { text: 'Type of order' },
-            value: { text: 'MOCK_PLACEMENT_ORDER_TYPE2' },
+            value: {},
             actions: {
               items: [
                 {

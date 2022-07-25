@@ -51,6 +51,7 @@ type SummaryListsContent = PageContent & {
   languagePreference: Record<string, string>;
   siblingRelationships: Record<string, string>;
   siblingPlacementOrderType: Record<string, string>;
+  placementOrderType: Record<string, string>;
 };
 
 const getSectionSummaryLists = (rows: SummaryListRows[], content: PageContent): GovUKNunjucksSummary[] => {
@@ -317,7 +318,8 @@ export const childrenPlacementOrderSummaryList = (
             },
             {
               key: keys.typeOfOrder,
-              value: item.placementOrderType || keys.placementOrder,
+              value:
+                content.placementOrderType[item.placementOrderType!] || content.placementOrderType[keys.placementOrder],
               changeUrl:
                 index !== 0
                   ? `${Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_TYPE}?change=${item.placementOrderId}`
@@ -337,11 +339,6 @@ export const childrenPlacementOrderSummaryList = (
                   },
                 ]
               : []),
-            /* {
-              key: keys.court,
-              value: item.placementOrderCourt,
-              changeUrl: `${Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT}?change=${item.placementOrderId}`,
-            }, */
             {
               key: keys.date,
               valueHtml: getFormattedDate(item.placementOrderDate as CaseDate, content.language),

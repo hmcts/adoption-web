@@ -29,7 +29,7 @@ module.exports = {
     adoptionAgencyLink: 'a[id$="adoption-agency"]',
     adoptionAgencyDetailsStatus: 'strong[id$="adoption-agency-status"]',
     childrenPlacementOrderLink: 'a[id$="placement-and-court-order-details"]',
-    childrenSiblingLink: 'a[href$="/sibling/exists"]',
+    childrenSiblingLink: 'a[href$="id$="sibling-court-order-details"]',
     childrenSiblingDetailsStatus: 'strong[id$="sibling-status"]',
     reviewPayAndSubmitLink: 'a[id="review-pay-and-submit"]',
     dateChildMovedInLink: 'a[id$="date-child-moved-in"]',
