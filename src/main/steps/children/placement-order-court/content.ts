@@ -14,7 +14,7 @@ const getSelectedPlacementOrder = userCase => {
 
 const en = content => ({
   section: "The child's details",
-  label: 'Which court made the placement order?',
+  label: 'Which court made the order?',
   options: [
     ...getCourtListItems(content.courtList, getSelectedPlacementOrder(content.userCase)),
     {

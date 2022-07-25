@@ -9,7 +9,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: "The child's details",
-  label: 'Which court made the placement order?',
+  label: 'Which court made the order?',
   options: [{ text: 'MOCK', value: 'MOCK', selected: true }],
   errors: {
     placementOrderCourt: {
