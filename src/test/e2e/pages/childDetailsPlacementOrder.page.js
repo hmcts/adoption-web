@@ -10,6 +10,8 @@ module.exports = {
     addAnotherPlacementOrder: 'input[id$="addAnotherPlacementOrder"]',
     addAnotherPlacementOrderNo: 'input[id$="addAnotherPlacementOrder-2"]',
     selectedPlacementOrderType: 'input[id$="selectedPlacementOrderType"]',
+    courtList: 'input[id$="location-picker"]',
+    courtListOption: 'li[id$="location-picker__option--0"]',
   },
 
   async childDetailsPlacementOrderSection() {
@@ -39,10 +41,12 @@ module.exports = {
     await I.wait(2);
 
     await I.retry(3).waitForText('Which court made the order?');
-    await I.retry(3).fillField(this.fields.placementOrderCourt, 'Swansea');
+    await I.retry(3).fillField(this.fields.courtList, 'Swansea');
+    await I.wait(2);
+    await I.retry(3).click(this.fields.courtListOption);
+    await I.wait(2);
     await I.retry(3).click('Save and continue');
     await I.wait(2);
-
     await I.retry(3).waitForText('What date is on the order?');
     await I.retry(3).fillField(this.fields.placementOrderDateDay, childDetailsPlacementOrder.placementOrderDateDay);
     await I.retry(3).fillField(this.fields.placementOrderDateMonth, childDetailsPlacementOrder.placementOrderDateMonth);
