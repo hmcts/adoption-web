@@ -318,8 +318,7 @@ export const childrenPlacementOrderSummaryList = (
             },
             {
               key: keys.typeOfOrder,
-              value:
-                content.placementOrderType[item.placementOrderType!] || content.placementOrderType[keys.placementOrder],
+              value: content.placementOrderType[item.placementOrderType!] || keys.placementOrder,
               changeUrl:
                 index !== 0
                   ? `${Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_TYPE}?change=${item.placementOrderId}`
