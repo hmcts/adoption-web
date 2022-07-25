@@ -58,7 +58,6 @@ session:
   secret: 'local'
   redis:
     host:
-    tls: false
     key:
   secureCookie: 'true'
 e2e:
