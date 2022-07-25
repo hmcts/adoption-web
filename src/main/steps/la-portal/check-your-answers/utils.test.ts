@@ -756,7 +756,7 @@ describe('siblingCourtOrderSummaryList', () => {
           },
           {
             key: { text: 'Relationship' },
-            value: { text: 'MOCK_SIBLING_RELATION' },
+            value: {},
             actions: {
               items: [
                 {
@@ -769,7 +769,7 @@ describe('siblingCourtOrderSummaryList', () => {
           },
           {
             key: { text: 'Type of order' },
-            value: { text: 'MOCK_PLACEMENT_ORDER_TYPE' },
+            value: {},
             actions: {
               items: [
                 {
