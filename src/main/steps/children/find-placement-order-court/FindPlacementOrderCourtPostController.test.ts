@@ -15,9 +15,8 @@ jest.mock('../../../steps', () => {
 
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
-import { FormFields } from '../../../app/form/Form';
 
-import FindFamilyCourtPostController from './FindFamilyCourtPostController';
+import FindPlacementOrderCourtPostController from './FindPlacementOrderCourtPostController';
 
 describe('FindFamilyCourtPostController', () => {
   let req;
@@ -37,7 +36,7 @@ describe('FindFamilyCourtPostController', () => {
       },
     });
     res = mockResponse();
-    controller = new FindFamilyCourtPostController({});
+    controller = new FindPlacementOrderCourtPostController({});
   });
 
   describe('when there are no form errors', () => {
@@ -53,10 +52,10 @@ describe('FindFamilyCourtPostController', () => {
     describe('and when there is a findFamilyCourt=No', () => {
       beforeEach(() => {
         mockGetErrors.mockReturnValue([]);
-        controller = new FindFamilyCourtPostController({});
+        controller = new FindPlacementOrderCourtPostController({});
         req.locals.api.triggerEvent.mockResolvedValue({
           placementOrderCourt: 'Chelmsford Family Court',
-          findFamilyCourt: 'No',
+          findFamilyCourt: 'Yes',
           familyCourtName: 'Chelmsford Family Court',
           familyCourtEmailId: 'chelmsfordadoptionapplication@justice.gov.uk',
         });
@@ -66,16 +65,7 @@ describe('FindFamilyCourtPostController', () => {
         req.body.autoCompleteData = 'Chelmsford Family Court';
         await controller.post(req, res);
         expect(req.session.errors).toEqual([]);
-        expect(req.session.userCase.placementOrderCourt).toEqual('Chelmsford Family Court');
-        expect(req.session.save).toHaveBeenCalled();
-      });
-
-      test('should redirect to correct screen', async () => {
-        mockGetNextStepUrl.mockReturnValue('/MOCK_ENDPOINT');
-        req.body.autoCompleteData = 'MOCK';
-        await controller.post(req, res);
-        expect(mockGetNextStepUrl).toHaveBeenCalledWith(req, req.session.userCase);
-        expect(res.redirect).toHaveBeenCalledWith('/MOCK_ENDPOINT');
+        expect(req.session.userCase.familyCourtName).toEqual('Chelmsford Family Court');
       });
     });
   });
@@ -97,7 +87,7 @@ describe('FindFamilyCourtPostController', () => {
         'MOCK_ERROR',
         {
           errorType: 'required',
-          propertyName: 'familyCourtName',
+          propertyName: 'placementOrderCourt',
         },
       ]);
       expect(req.session.save).toHaveBeenCalled();
@@ -126,37 +116,6 @@ describe('FindFamilyCourtPostController', () => {
         //eslint-disable-next-line jest/no-conditional-expect
         expect(err).toBe('MOCK_ERROR');
       }
-    });
-  });
-
-  describe('when this.fields is a function', () => {
-    beforeEach(() => {
-      req = mockRequest({
-        session: {
-          userCase: {
-            placementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' }],
-          },
-          save: jest.fn(done => done()),
-        },
-      });
-      res = mockResponse();
-      mockGetParsedBody.mockReturnValue({ adopAgencyOrLaName: 'MOCK_ADOPTION_AGENCY_NAME' });
-      mockGetErrors.mockReturnValue([]);
-      controller = new FindFamilyCourtPostController((): FormFields => ({}));
-      req.locals.api.triggerEvent.mockResolvedValue({
-        placementOrders: [
-          { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderCourt: 'Chelmsford Family Court' },
-        ],
-      });
-    });
-
-    test('should set the formData fields in userCase placementOrders session data', async () => {
-      await controller.post(req, res);
-      expect(req.session.errors).toEqual([]);
-      expect(req.session.userCase.placementOrders).toEqual([
-        { placementOrderCourt: 'Chelmsford Family Court', placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' },
-      ]);
-      expect(req.session.save).toHaveBeenCalled();
     });
   });
 });

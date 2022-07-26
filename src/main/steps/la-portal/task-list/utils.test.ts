@@ -79,7 +79,7 @@ describe('utils', () => {
             },
             {
               placementOrderId: 'MOCK_ID2',
-              placementOrderType: '',
+              //placementOrderType: '',
               placementOrderNumber: 'MOCK_NUMBER2',
               placementOrderCourt: 'MOCK_COURT2',
               placementOrderDate: { day: '2', month: '2', year: '2002' },
@@ -100,7 +100,7 @@ describe('utils', () => {
             },
             {
               placementOrderId: 'MOCK_ID2',
-              placementOrderType: '',
+              //placementOrderType: '',
               placementOrderNumber: 'MOCK_NUMBER2',
               placementOrderCourt: 'MOCK_COURT2',
               placementOrderDate: { day: '2', month: '2', year: '2002' },
