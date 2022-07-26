@@ -52,7 +52,7 @@ export class KbaMiddleware {
           if (
             JSON.stringify(req.session.userCase.childrenDateOfBirth) !==
               JSON.stringify(req.session.laPortalKba['kbaChildrenDateOfBirth']) ||
-            req.session.laPortalKba['kbaChildName'] !==
+            req.session.laPortalKba['kbaChildName']?.trim() !==
               req.session.userCase.childrenFirstName + ' ' + req.session.userCase.childrenLastName
           ) {
             req.session.destroy(() => res.redirect(LA_PORTAL_NEG_SCENARIO));
