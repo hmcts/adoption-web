@@ -2437,12 +2437,12 @@
     "@typescript-eslint/types" "5.27.0"
     eslint-visitor-keys "^3.3.0"
 
-"@uppy/companion-client@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@uppy/companion-client/-/companion-client-2.1.0.tgz#6de2f3ba190b0e2a2afe0be020b191031ae8d299"
-  integrity sha512-1Zsag2z9kygXuVbUxqHhkTJUmEHwbejjyf7vmm+P/AiVgK3O37JINYBGOpdTJNgbC9UydLBjleXo8peDVgpg8Q==
+"@uppy/companion-client@^2.2.0":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@uppy/companion-client/-/companion-client-2.2.1.tgz#cef4b15185dd8ee6024386c8aae809e8e05dcd53"
+  integrity sha512-Y3E10NJLMfp/wjgthNhx3gJtT67fzFCPNPFwpNNRs5iJsW6PANhJ420eyMUFzfmEZ56ZzGYxr5pzJZx8YxHICQ==
   dependencies:
-    "@uppy/utils" "^4.0.7"
+    "@uppy/utils" "^4.1.0"
     namespace-emitter "^2.0.1"
 
 "@uppy/core@^2.3.0":
@@ -2494,13 +2494,13 @@
   dependencies:
     lodash.throttle "^4.1.1"
 
-"@uppy/xhr-upload@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@uppy/xhr-upload/-/xhr-upload-2.1.0.tgz#9c52154df30e6e275028d3cb66be844a150de626"
-  integrity sha512-io1uNu7lGkhIkMnt13bu3FYSAdRbBRWl8n/6njYi+727Jyr0XhKfmBYV9OiruFSxLz5Bfxkw2gTs6e0qUb63nA==
+"@uppy/xhr-upload@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@uppy/xhr-upload/-/xhr-upload-2.1.1.tgz#fe9a4cbc9f1e3b9a95e3b0f0b8040d662e4fb785"
+  integrity sha512-10cKkdMZaYxuewq7Mn0RObPCeT0fBk5gNH/PNjaRqB4TLFOi10FazhoSfDp3KSsqsxPoP1K2z1gFmubW+4CQfw==
   dependencies:
-    "@uppy/companion-client" "^2.1.0"
-    "@uppy/utils" "^4.0.7"
+    "@uppy/companion-client" "^2.2.0"
+    "@uppy/utils" "^4.1.0"
     nanoid "^3.1.25"
 
 "@wdio/config@7.20.1":
