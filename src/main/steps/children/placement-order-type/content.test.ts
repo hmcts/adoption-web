@@ -20,11 +20,11 @@ const enum PlacementOrderTypeEnum {
 const enContent = {
   section: "The child's details",
   label: 'What type of order is it?',
-  adoptionOrder: 'Adoption order',
+  adoptionOrder: 'Previous adoption order',
   careOrder: 'Care order',
-  contactOrder: 'Contact order',
-  freeingOrder: 'Freeing order',
-  placementOrder: 'Placement order',
+  contactOrder: 'Child arrangements order',
+  contactOrderHint: 'Child arrangements includes residency, contact, specific issue and prohibited steps.',
+  placementOrder: 'Previous placement order',
   supervisionOrder: 'Supervision order',
   other: 'Other',
   otherOrder: 'Add a different type of order',
@@ -41,13 +41,13 @@ const enContent = {
 const cyContent = {
   section: 'Manylion y plentyn',
   label: 'Beth oedd rhyw’r plentyn pan gafodd ei (g)eni?',
-  adoptionOrder: 'Adoption order',
-  careOrder: 'Care order',
-  contactOrder: 'Contact order',
-  freeingOrder: 'Freeing order',
-  placementOrder: 'Placement order',
-  supervisionOrder: 'Supervision order',
-  other: 'Other',
+  adoptionOrder: 'Previous adoption order (in welsh)',
+  careOrder: 'Care order (in welsh)',
+  contactOrder: 'Child arrangements order (in welsh)',
+  contactOrderHint: 'Child arrangements includes residency, contact, specific issue and prohibited steps. (in welsh)',
+  placementOrder: 'Previous placement order (in welsh)',
+  supervisionOrder: 'Supervision order (in welsh)',
+  other: 'Other (in welsh)',
   otherOrder: 'Add a different type of order',
   errors: {
     selectedPlacementOrderType: {
@@ -86,19 +86,17 @@ describe('children > placement-order-type > content', () => {
     expect(field.classes).toBe('govuk-radios');
     expect((field.label as Function)(generatedContent)).toBe(enContent.label);
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
-    expect((field.values[0].label as Function)(generatedContent)).toBe(enContent.adoptionOrder);
-    expect(field.values[0].value).toBe(PlacementOrderTypeEnum.AdoptionOrder);
-    expect((field.values[1].label as Function)(generatedContent)).toBe(enContent.careOrder);
-    expect(field.values[1].value).toBe(PlacementOrderTypeEnum.CareOrder);
-    expect((field.values[2].label as Function)(generatedContent)).toBe(enContent.contactOrder);
-    expect(field.values[2].value).toBe(PlacementOrderTypeEnum.ContactOrder);
-    expect((field.values[3].label as Function)(generatedContent)).toBe(enContent.freeingOrder);
-    expect(field.values[3].value).toBe(PlacementOrderTypeEnum.FreeingOrder);
-    expect((field.values[4].label as Function)(generatedContent)).toBe(enContent.placementOrder);
-    expect(field.values[4].value).toBe(PlacementOrderTypeEnum.PlacementOrder);
-    expect((field.values[5].label as Function)(generatedContent)).toBe(enContent.supervisionOrder);
-    expect(field.values[5].value).toBe(PlacementOrderTypeEnum.SupervisionOrder);
-    const placementOrderOtherTypeField = field.values[6].subFields!.selectedOtherPlacementOrderType;
+    expect((field.values[0].label as Function)(generatedContent)).toBe(enContent.careOrder);
+    expect(field.values[0].value).toBe(PlacementOrderTypeEnum.CareOrder);
+    expect((field.values[1].label as Function)(generatedContent)).toBe(enContent.contactOrder);
+    expect(field.values[1].value).toBe(PlacementOrderTypeEnum.ContactOrder);
+    expect((field.values[2].label as Function)(generatedContent)).toBe(enContent.adoptionOrder);
+    expect(field.values[2].value).toBe(PlacementOrderTypeEnum.AdoptionOrder);
+    expect((field.values[3].label as Function)(generatedContent)).toBe(enContent.placementOrder);
+    expect(field.values[3].value).toBe(PlacementOrderTypeEnum.PlacementOrder);
+    expect((field.values[4].label as Function)(generatedContent)).toBe(enContent.supervisionOrder);
+    expect(field.values[4].value).toBe(PlacementOrderTypeEnum.SupervisionOrder);
+    const placementOrderOtherTypeField = field.values[5].subFields!.selectedOtherPlacementOrderType;
     expect(placementOrderOtherTypeField.type).toBe('text');
     expect((placementOrderOtherTypeField.label as Function)(generatedContent)).toBe(enContent.otherOrder);
     expect(placementOrderOtherTypeField.labelSize).toBe(null);

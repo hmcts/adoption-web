@@ -32,7 +32,7 @@ const en = content => {
     incomplete: 'incomplete',
     change: 'Change',
     remove: 'Remove',
-    label: 'Do you want to add another order?',
+    label: 'Do you want to add another order for the same or another sibling?',
     errors: {
       addAnotherSiblingPlacementOrder: {
         required: 'Please select an answer',
@@ -71,7 +71,7 @@ const cy: typeof en = content => {
     incomplete: 'anghyflawn',
     change: 'Newid',
     remove: 'Dileu',
-    label: 'Do you want to add another order? (in welsh)',
+    label: 'Do you want to add another order for the same or another sibling? (in welsh)',
     errors: {
       addAnotherSiblingPlacementOrder: {
         required: 'Dewiswch ateb os gwelwch yn dda',
