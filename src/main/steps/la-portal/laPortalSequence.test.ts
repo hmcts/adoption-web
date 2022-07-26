@@ -173,19 +173,19 @@ describe('la-portal > laPortalSequence', () => {
     expect(laPortalSequence[34].contentDir).toBe('MOCK_BASE_DIR/../other-parent/last-address-confirmed');
     expect(laPortalSequence[34].getNextStep({})).toBe('/la-portal/task-list');
 
-    expect(laPortalSequence[35].url).toBe('/la-portal/child/placement-order-number');
-    expect(laPortalSequence[35].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-number');
-    expect(laPortalSequence[35].getNextStep({})).toBe('/la-portal/child/placement-order-court');
+    expect(laPortalSequence[35].url).toBe('/la-portal/child/placement-order-type');
+    expect(laPortalSequence[35].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-type');
+    expect(laPortalSequence[35].getNextStep({})).toBe('/la-portal/child/placement-order-number');
+
+    expect(laPortalSequence[36].url).toBe('/la-portal/child/placement-order-number');
+    expect(laPortalSequence[36].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-number');
+    expect(laPortalSequence[36].getNextStep({})).toBe('/la-portal/child/placement-order-court');
     expect(
-      laPortalSequence[35].getNextStep({
+      laPortalSequence[36].getNextStep({
         placementOrders: [{ placementOrderId: 'MOCK_ID' }],
         selectedPlacementOrderId: 'MOCK_ID',
       })
     ).toBe('/la-portal/child/placement-order-date');
-
-    expect(laPortalSequence[36].url).toBe('/la-portal/child/placement-order-number');
-    expect(laPortalSequence[36].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-number');
-    expect(laPortalSequence[36].getNextStep({})).toBe('/la-portal/child/placement-order-date');
 
     expect(laPortalSequence[37].url).toBe('/la-portal/child/placement-order-court');
     expect(laPortalSequence[37].contentDir).toBe('MOCK_BASE_DIR/../children/placement-order-court');
@@ -214,9 +214,11 @@ describe('la-portal > laPortalSequence', () => {
     expect(laPortalSequence[41].getNextStep({ hasSiblings: YesNoNotsure.YES, siblings: [] })).toBe(
       '/la-portal/sibling/relation'
     );
-    expect(laPortalSequence[41].getNextStep({ hasSiblings: YesNoNotsure.YES, siblings: [{ siblingId: 'MOCK_ID' }] })
+    expect(
+      laPortalSequence[41].getNextStep({ hasSiblings: YesNoNotsure.YES, siblings: [{ siblingId: 'MOCK_ID' }] })
     ).toBe('/la-portal/sibling/summary');
-    expect(laPortalSequence[42].getNextStep({ hasSiblings: YesNoNotsure.YES, siblings: [{ siblingId: 'MOCK_ID' }] })
+    expect(
+      laPortalSequence[42].getNextStep({ hasSiblings: YesNoNotsure.YES, siblings: [{ siblingId: 'MOCK_ID' }] })
     ).toBe('/la-portal/sibling/placement-order-type');
 
     expect(laPortalSequence[42].url).toBe('/la-portal/sibling/relation');
