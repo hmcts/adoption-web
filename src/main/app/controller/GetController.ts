@@ -35,6 +35,7 @@ export class GetController {
     const language = this.getPreferredLanguage(req) as Language;
     const userCase = req.session?.userCase;
     const addresses = req.session?.addresses;
+    const courtList = req.session?.courtList;
     const eligibility = req.session?.eligibility;
     const content = generatePageContent({
       language,
@@ -44,6 +45,7 @@ export class GetController {
       addresses,
       eligibility,
       fee: req.session?.fee,
+      courtList,
     });
 
     const sessionErrors = req.session?.errors || [];

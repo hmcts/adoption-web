@@ -27,7 +27,7 @@ const enContent = {
     childrenNationality: {
       required: "Select a nationality or 'Not sure'",
       notSureViolation: "Select a nationality or 'Not sure'",
-      addButtonNotClicked: "Select 'Add' to save the country name",
+      addButtonNotClicked: "Select 'Add' before you continue",
     },
     addAnotherNationality: 'MOCK_ERROR_MESSAGE',
   },
@@ -41,7 +41,7 @@ const cyContent = {
     childrenNationality: {
       required: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
       notSureViolation: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
-      addButtonNotClicked: "Dewiswch ‘Ychwanegu’ i gadw enw'r wlad",
+      addButtonNotClicked: "Select 'Add' before you continue (in welsh)",
     },
     addAnotherNationality: 'MOCK_ERROR_MESSAGE',
   },
