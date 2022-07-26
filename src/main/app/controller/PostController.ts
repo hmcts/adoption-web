@@ -2,7 +2,14 @@ import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
 import { getNextStepUrl } from '../../steps';
-import { CHECK_ANSWERS_URL, LA_PORTAL, LA_PORTAL_TASK_LIST, SAVE_AND_SIGN_OUT, SAVE_AS_DRAFT } from '../../steps/urls';
+import {
+  CHECK_ANSWERS_URL,
+  LA_PORTAL,
+  LA_PORTAL_CHECK_YOUR_ANSWERS,
+  LA_PORTAL_TASK_LIST,
+  SAVE_AND_SIGN_OUT,
+  SAVE_AS_DRAFT,
+} from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
 import { CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE, SYSTEM_USER_UPDATE } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
@@ -12,7 +19,7 @@ import { AppRequest } from './AppRequest';
 
 @autobind
 export class PostController<T extends AnyObject> {
-  protected ALLOWED_RETURN_URLS: string[] = [CHECK_ANSWERS_URL];
+  protected ALLOWED_RETURN_URLS: string[] = [CHECK_ANSWERS_URL, LA_PORTAL_CHECK_YOUR_ANSWERS];
 
   constructor(protected readonly fields: FormFields | FormFieldsFn) {}
 
