@@ -1,5 +1,14 @@
 import { FieldPrefix } from '../../../app/case/case';
-import { ApplyingWith, DocumentType, Gender, LanguagePreference, YesNoNotsure } from '../../../app/case/definition';
+import {
+  ApplyingWith,
+  DocumentType,
+  Gender,
+  LanguagePreference,
+  PlacementOrderTypeEnum,
+  SiblingPOType,
+  SiblingRelationships,
+  YesNoNotsure,
+} from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { CommonContent } from '../../../steps/common/common.content';
@@ -22,6 +31,7 @@ export const enContent = {
   checkInfoBeforeSubmit1:
     'Check all the information you have provided. If you need to edit any of the answers, select the change link at the end of the relevant answer.',
   checkInfoBeforeSubmit2: 'Once you are happy with your answers, you can submit the application to the court.',
+  continue: 'Continue',
   applyingWith: {
     [ApplyingWith.ALONE]: "I'm applying on my own",
     [ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER]: "I'm applying with my spouse or civil partner",
@@ -44,6 +54,32 @@ export const enContent = {
   languagePreference: {
     [LanguagePreference.ENGLISH]: 'English',
     [LanguagePreference.WELSH]: 'Welsh',
+  },
+  siblingRelationships: {
+    [SiblingRelationships.SISTER]: 'Sister',
+    [SiblingRelationships.HALF_SISTER]: 'Half-sister',
+    [SiblingRelationships.STEP_SISTER]: 'Step-sister',
+    [SiblingRelationships.BROTHER]: 'Brother',
+    [SiblingRelationships.HALF_BROTHER]: 'Half-brother',
+    [SiblingRelationships.STEP_BROTHER]: 'Step-brother',
+  },
+  siblingPlacementOrderType: {
+    [SiblingPOType.ADOPTION_ORDER]: 'Adoption order',
+    [SiblingPOType.CARE_ORDER]: 'Care order',
+    [SiblingPOType.CONTACT_ORDER]: 'Contact order',
+    [SiblingPOType.FREEING_ORDER]: 'Freeing order',
+    [SiblingPOType.PLACEMENT_ORDER]: 'Placement order',
+    [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order',
+    [SiblingPOType.OTHER]: 'Other',
+  },
+  placementOrderType: {
+    [PlacementOrderTypeEnum.AdoptionOrder]: 'Adoption order',
+    [PlacementOrderTypeEnum.CareOrder]: 'Care order',
+    [PlacementOrderTypeEnum.ContactOrder]: 'Contact order',
+    [PlacementOrderTypeEnum.FreeingOrder]: 'Freeing order',
+    [PlacementOrderTypeEnum.PlacementOrder]: 'Placement order',
+    [PlacementOrderTypeEnum.SupervisionOrder]: 'Supervision order',
+    [PlacementOrderTypeEnum.Other]: 'Other',
   },
   sectionTitles: {
     childDetails: "Child's details",
@@ -107,6 +143,7 @@ const cyContent: typeof enContent = {
     'Gwiriwch yr holl wybodaeth yr ydych wedi’i rhoi yn ofalus. Y cam nesaf yw arwyddo’r datganiad gwirionedd i ddatgan bod yr wybodaeth a roddwyd yn gywir. Unwaith y bydd wedi’i arwyddo a’r taliad wedi’i wneud, bydd eich cais yn cael ei gyflwyno i’r llys.',
   checkInfoBeforeSubmit2:
     'Gwiriwch yr holl wybodaeth yr ydych wedi’i rhoi yn ofalus. Y cam nesaf yw arwyddo’r datganiad gwirionedd i ddatgan bod yr wybodaeth a roddwyd yn gywir. Unwaith y bydd wedi’i arwyddo a’r taliad wedi’i wneud, bydd eich cais yn cael ei gyflwyno i’r llys.',
+  continue: 'Continue',
   applyingWith: {
     [ApplyingWith.ALONE]: 'Rwy’n gwneud cais ar fy mhen fy hun',
     [ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER]: 'Rwy’n gwneud cais gyda fy mhriod neu fy mhartner sifil',
@@ -129,6 +166,32 @@ const cyContent: typeof enContent = {
   languagePreference: {
     [LanguagePreference.ENGLISH]: 'Saesneg',
     [LanguagePreference.WELSH]: 'Cymraeg',
+  },
+  siblingRelationships: {
+    [SiblingRelationships.SISTER]: 'Sister (in welsh)',
+    [SiblingRelationships.HALF_SISTER]: 'Half-sister (in welsh)',
+    [SiblingRelationships.STEP_SISTER]: 'Step-sister (in welsh)',
+    [SiblingRelationships.BROTHER]: 'Brother (in welsh)',
+    [SiblingRelationships.HALF_BROTHER]: 'Half-brother (in welsh)',
+    [SiblingRelationships.STEP_BROTHER]: 'Step-brother (in welsh)',
+  },
+  siblingPlacementOrderType: {
+    [SiblingPOType.ADOPTION_ORDER]: 'Adoption order (in welsh)',
+    [SiblingPOType.CARE_ORDER]: 'Care order (in welsh)',
+    [SiblingPOType.CONTACT_ORDER]: 'Contact order (in welsh)',
+    [SiblingPOType.FREEING_ORDER]: 'Freeing order (in welsh)',
+    [SiblingPOType.PLACEMENT_ORDER]: 'Placement order (in welsh)',
+    [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order (in welsh)',
+    [SiblingPOType.OTHER]: 'Other',
+  },
+  placementOrderType: {
+    [PlacementOrderTypeEnum.AdoptionOrder]: 'Adoption order (in welsh)',
+    [PlacementOrderTypeEnum.CareOrder]: 'Care order (in welsh)',
+    [PlacementOrderTypeEnum.ContactOrder]: 'Contact order (in welsh)',
+    [PlacementOrderTypeEnum.FreeingOrder]: 'Freeing order (in welsh)',
+    [PlacementOrderTypeEnum.PlacementOrder]: 'Placement order (in welsh)',
+    [PlacementOrderTypeEnum.SupervisionOrder]: 'Supervision order (in welsh)',
+    [PlacementOrderTypeEnum.Other]: 'Other (in welsh)',
   },
   sectionTitles: {
     childDetails: 'Manylion y plentyn',
@@ -188,9 +251,6 @@ export const form: FormContent = {
   },
   submit: {
     text: l => l.continue,
-  },
-  saveAsDraft: {
-    text: l => l.saveAsDraft,
   },
 };
 

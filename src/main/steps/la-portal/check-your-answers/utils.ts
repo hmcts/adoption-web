@@ -49,6 +49,9 @@ type SummaryListsContent = PageContent & {
   applyingWith: Record<string, string>;
   yesNoNotsure: Record<string, string>;
   languagePreference: Record<string, string>;
+  siblingRelationships: Record<string, string>;
+  siblingPlacementOrderType: Record<string, string>;
+  placementOrderType: Record<string, string>;
 };
 
 const getSectionSummaryLists = (rows: SummaryListRows[], content: PageContent): GovUKNunjucksSummary[] => {
@@ -315,7 +318,7 @@ export const childrenPlacementOrderSummaryList = (
             },
             {
               key: keys.typeOfOrder,
-              value: item.placementOrderType || keys.placementOrder,
+              value: content.placementOrderType[item.placementOrderType!] || keys.placementOrder,
               changeUrl:
                 index !== 0
                   ? `${Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_TYPE}?change=${item.placementOrderId}`
@@ -335,11 +338,6 @@ export const childrenPlacementOrderSummaryList = (
                   },
                 ]
               : []),
-            /* {
-              key: keys.court,
-              value: item.placementOrderCourt,
-              changeUrl: `${Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT}?change=${item.placementOrderId}`,
-            }, */
             {
               key: keys.date,
               valueHtml: getFormattedDate(item.placementOrderDate as CaseDate, content.language),
@@ -382,12 +380,12 @@ export const siblingCourtOrderSummaryList = (
                 },
                 {
                   key: keys.siblingRelation,
-                  value: sibling.siblingRelation,
+                  value: content.siblingRelationships[sibling.siblingRelation!],
                   changeUrl: `${Urls.LA_PORTAL_SIBLING_RELATION}?change=${sibling.siblingId}`,
                 },
                 {
                   key: keys.typeOfOrder,
-                  value: sibling.siblingPoType,
+                  value: content.siblingPlacementOrderType[sibling.siblingPoType!],
                   changeUrl: `${Urls.LA_PORTAL_SIBLING_ORDER_TYPE}?change=${sibling.siblingId}`,
                 },
                 {
@@ -436,7 +434,7 @@ export const uploadedDocumentSummaryList = (
 });
 
 const formatDocument = (userCase: Partial<CaseWithId>) => {
-  const documentFileNames = userCase.applicant1DocumentsUploaded?.map(item => item.value?.documentFileName);
+  const documentFileNames = userCase.laUploadedFiles?.map(item => item.name);
   return documentFileNames?.join('<br>');
 };
 

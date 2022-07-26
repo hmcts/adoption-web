@@ -1,6 +1,14 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import mockUserCase from '../../../../test/unit/utils/mockUserCase';
-import { ApplyingWith, DocumentType, Gender, LanguagePreference, YesNoNotsure } from '../../../app/case/definition';
+import {
+  ApplyingWith,
+  DocumentType,
+  Gender,
+  LanguagePreference,
+  SiblingPOType,
+  SiblingRelationships,
+  YesNoNotsure,
+} from '../../../app/case/definition';
 import { FormContent } from '../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -36,6 +44,23 @@ const enContent = {
   languagePreference: {
     [LanguagePreference.ENGLISH]: 'English',
     [LanguagePreference.WELSH]: 'Welsh',
+  },
+  siblingRelationships: {
+    [SiblingRelationships.SISTER]: 'Sister',
+    [SiblingRelationships.HALF_SISTER]: 'Half-sister',
+    [SiblingRelationships.STEP_SISTER]: 'Step-sister',
+    [SiblingRelationships.BROTHER]: 'Brother',
+    [SiblingRelationships.HALF_BROTHER]: 'Half-brother',
+    [SiblingRelationships.STEP_BROTHER]: 'Step-brother',
+  },
+  siblingPlacementOrderType: {
+    [SiblingPOType.ADOPTION_ORDER]: 'Adoption order',
+    [SiblingPOType.CARE_ORDER]: 'Care order',
+    [SiblingPOType.CONTACT_ORDER]: 'Contact order',
+    [SiblingPOType.FREEING_ORDER]: 'Freeing order',
+    [SiblingPOType.PLACEMENT_ORDER]: 'Placement order',
+    [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order',
+    [SiblingPOType.OTHER]: 'Other',
   },
   sectionTitles: {
     childDetails: "Child's details",
@@ -104,6 +129,23 @@ const cyContent: typeof enContent = {
     [LanguagePreference.ENGLISH]: 'Saesneg',
     [LanguagePreference.WELSH]: 'Cymraeg',
   },
+  siblingRelationships: {
+    [SiblingRelationships.SISTER]: 'Sister (in welsh)',
+    [SiblingRelationships.HALF_SISTER]: 'Half-sister (in welsh)',
+    [SiblingRelationships.STEP_SISTER]: 'Step-sister (in welsh)',
+    [SiblingRelationships.BROTHER]: 'Brother (in welsh)',
+    [SiblingRelationships.HALF_BROTHER]: 'Half-brother (in welsh)',
+    [SiblingRelationships.STEP_BROTHER]: 'Step-brother (in welsh)',
+  },
+  siblingPlacementOrderType: {
+    [SiblingPOType.ADOPTION_ORDER]: 'Adoption order (in welsh)',
+    [SiblingPOType.CARE_ORDER]: 'Care order (in welsh)',
+    [SiblingPOType.CONTACT_ORDER]: 'Contact order (in welsh)',
+    [SiblingPOType.FREEING_ORDER]: 'Freeing order (in welsh)',
+    [SiblingPOType.PLACEMENT_ORDER]: 'Placement order (in welsh)',
+    [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order (in welsh)',
+    [SiblingPOType.OTHER]: 'Other',
+  },
   sectionTitles: {
     childDetails: 'Manylion y plentyn',
     birthMotherDetails: 'Manylion y fam fiolegol',
@@ -166,10 +208,10 @@ describe('check-your-answer > content', () => {
     expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
   });
 
-  test('should contain save-as-draft button', () => {
+  /* test('should contain save-as-draft button', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     expect((form.saveAsDraft!.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save as draft');
-  });
+  }); */
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

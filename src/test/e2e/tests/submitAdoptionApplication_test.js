@@ -103,10 +103,9 @@ Scenario(
     await taskListPage.selectChildPlacementOrderDetails();
     await childDetailsPlacementOrderPage.childDetailsPlacementOrderSection();
 
-    await taskListPage.selectSiblingDetails();
-    await childSiblingDetailsPage.childDetailsSiblingSection();
-
     // TODO in Future stories
+    await taskListPage.selectSiblingDetails();
+    await childSiblingDetailsPage.childDetailsSiblingSection;
     // await taskListPage.verifySiblingDetailsStatus();
 
     await taskListPage.selectUploadDocumentsDetails();
