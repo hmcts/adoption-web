@@ -82,7 +82,7 @@ export class PostController<T extends AnyObject> {
   }
 
   protected async save(req: AppRequest<T>, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
-    if ((req.url as string).includes('la-portal') && ![''].includes(req.url)) {
+    if ((req.url as string).includes('la-portal') && ![LA_PORTAL_TASK_LIST?.toString()].includes(req.url)) {
       await saveDraftCase(req, req.session.userCase.id || '');
       return req.session.userCase;
     } else {
