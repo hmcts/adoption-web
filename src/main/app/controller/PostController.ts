@@ -1,7 +1,7 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
-import { saveDraftCase } from '../../modules/draft-store/draft-store-service';
+import { removeCaseFromRedis, saveDraftCase } from '../../modules/draft-store/draft-store-service';
 import { getNextStepUrl } from '../../steps';
 import { CHECK_ANSWERS_URL, LA_PORTAL, LA_PORTAL_TASK_LIST, SAVE_AND_SIGN_OUT, SAVE_AS_DRAFT } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
@@ -88,6 +88,9 @@ export class PostController<T extends AnyObject> {
     } else {
       try {
         req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
+        if (![LA_PORTAL_TASK_LIST?.toString()].includes(req.url)) {
+          removeCaseFromRedis(req, req.session.userCase.id);
+        }
       } catch (err) {
         req.locals.logger.error('Error saving', err);
         req.session.errors = req.session.errors || [];
