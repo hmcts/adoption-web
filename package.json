@@ -95,6 +95,7 @@
     "negotiator": "^0.6.3",
     "nunjucks": "^3.2.3",
     "otplib": "^12.0.1",
+    "redis": "^3.1.2",
     "require-directory": "^2.1.1",
     "serve-favicon": "^2.5.0",
     "session-file-store": "^1.5.0",
