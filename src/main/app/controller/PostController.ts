@@ -1,6 +1,7 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
+import { saveDraftCase } from '../../modules/draft-store/draft-store-service';
 import { getNextStepUrl } from '../../steps';
 import { CHECK_ANSWERS_URL, LA_PORTAL, LA_PORTAL_TASK_LIST, SAVE_AND_SIGN_OUT, SAVE_AS_DRAFT } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
@@ -81,14 +82,19 @@ export class PostController<T extends AnyObject> {
   }
 
   protected async save(req: AppRequest<T>, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
-    try {
-      req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
-    } catch (err) {
-      req.locals.logger.error('Error saving', err);
-      req.session.errors = req.session.errors || [];
-      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+    if ((req.url as string).includes('la-portal') && ![''].includes(req.url)) {
+      await saveDraftCase(req, req.session.userCase.id || '');
+      return req.session.userCase;
+    } else {
+      try {
+        req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
+      } catch (err) {
+        req.locals.logger.error('Error saving', err);
+        req.session.errors = req.session.errors || [];
+        req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+      }
+      return req.session.userCase;
     }
-    return req.session.userCase;
   }
 
   protected redirect(req: AppRequest<T>, res: Response, nextUrl?: string): void {
