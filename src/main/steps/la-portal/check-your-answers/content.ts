@@ -113,6 +113,7 @@ export const enContent = {
     uploadedDocuments: 'Uploaded documents',
     documentsNotUploaded: 'Documents not uploaded',
     caseRefNumber: 'Court case reference number',
+    dateOfBirth: 'Date of birth',
   },
 };
 
@@ -225,6 +226,7 @@ const cyContent: typeof enContent = {
     uploadedDocuments: 'Dogfennau sydd wedi eu llwytho',
     documentsNotUploaded: 'Dogfennau heb eu llwytho',
     caseRefNumber: 'Court case reference number (in welsh)',
+    dateOfBirth: 'Dyddiad geni',
   },
 };
 

@@ -104,10 +104,29 @@ export const childSummaryList = (
   { sectionTitles, keys, ...content }: SummaryListsContent,
   userCase: Partial<CaseWithId>
 ): SummaryLists => {
+  console.log('-------userCase-------' + JSON.stringify(userCase));
+
   return {
     title: sectionTitles.childDetails,
     rows: getSectionSummaryLists(
       [
+        ...(!userCase.childrenFirstName && !userCase.childrenLastName
+          ? [
+              {
+                key: keys.fullName,
+                value: ' ',
+              },
+            ]
+          : [
+              {
+                key: keys.fullName,
+                value: userCase.childrenFirstName + ' ' + userCase.childrenLastName,
+              },
+            ]),
+        {
+          key: keys.dateOfBirth,
+          value: getFormattedDate(userCase.childrenDateOfBirth),
+        },
         {
           key: keys.sexAtBirth,
           value: content.gender[userCase.childrenSexAtBirth!],

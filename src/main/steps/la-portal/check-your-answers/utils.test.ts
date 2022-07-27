@@ -40,6 +40,32 @@ describe('childSummaryList', () => {
         title: "Child's details",
         rows: [
           {
+            key: { text: 'Full name' },
+            value: { text: 'CHILDREN_FIRST_NAMES CHILDREN_LAST_NAMES' },
+            /* actions: {
+              items: [
+                {
+                  href: '/children/full-name?returnUrl=/review-pay-submit/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Full name',
+                },
+              ],
+            }, */
+          },
+          {
+            key: { text: 'Date of birth' },
+            value: { text: '9 August 2020' },
+            /* actions: {
+              items: [
+                {
+                  href: '/children/date-of-birth?returnUrl=/review-pay-submit/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Date of birth',
+                },
+              ],
+            }, */
+          },
+          {
             key: { text: 'Sex at birth' },
             value: { text: 'Male' },
             actions: {
