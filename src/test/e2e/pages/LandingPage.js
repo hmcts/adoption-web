@@ -6,11 +6,11 @@ module.exports = {
     applyWithMySpouse: 'input[id$="applyingWith-2"]',
     applyWithSomeone: 'input[id$="applyingWith-3"]',
     otherApplicantRelation: 'input[id$="otherApplicantRelation"]',
-    caseRef: 'input[id$="caseRef"]',
-    childName: 'input[id$="childName"]',
-    childrenDateOfBirthDay: 'input[id$="childrenDateOfBirth-day"]',
-    childrenDateOfBirthMonth: 'input[id$="childrenDateOfBirth-month"]',
-    childrenDateOfBirthYear: 'input[id$="childrenDateOfBirth-year"]',
+    caseRef: 'input[id$="kbaCaseRef"]',
+    childName: 'input[id$="kbaChildName"]',
+    childrenDateOfBirthDay: 'input[id$="kbaChildrenDateOfBirth-day"]',
+    childrenDateOfBirthMonth: 'input[id$="kbaChildrenDateOfBirth-month"]',
+    childrenDateOfBirthYear: 'input[id$="kbaChildrenDateOfBirth-year"]',
   },
   async seeTheLandingPage() {
     await I.wait(2);
