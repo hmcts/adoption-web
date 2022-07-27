@@ -20,6 +20,8 @@ nodejs:
     IDAM_API_URL: 'https://idam-api.{{ .Values.global.environment }}.platform.hmcts.net/o/token'
     REDIS_HOST: 'adoption-web-session-storage-{{ .Values.global.environment }}.redis.cache.windows.net'
     SECURE_COOKIE: 'true'
+    REDIS_PORT: '6379'
+    REDIS_TLS: 'true'
     PAYMENTS_API_URL: 'http://payment-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal'
     CCD_URL: 'http://ccd-data-store-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal'
     FEE_LOOKUP_URL: 'http://fees-register-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal/fees-register/fees/lookup'
