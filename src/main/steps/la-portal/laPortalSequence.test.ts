@@ -7,9 +7,9 @@ import { YesNoNotsure, YesOrNo } from '../../app/case/definition';
 import { laPortalSequence } from './laPortalSequence';
 
 describe('la-portal > laPortalSequence', () => {
-  test('should contain 55 entries in sibling screen sequence', () => {
+  test('should contain 56 entries in sibling screen sequence', () => {
     Date.now = jest.fn(() => +new Date('2021-01-01'));
-    expect(laPortalSequence).toHaveLength(55);
+    expect(laPortalSequence).toHaveLength(56);
 
     expect(laPortalSequence[0].url).toBe('/la-portal/kba-case-ref');
     expect(laPortalSequence[0].getNextStep({})).toBe('/la-portal/kba-completed');
@@ -18,7 +18,10 @@ describe('la-portal > laPortalSequence', () => {
     expect(laPortalSequence[1].getNextStep({})).toBe('/la-portal/kba-case-ref');
 
     expect(laPortalSequence[2].url).toBe('/la-portal/task-list');
-    expect(laPortalSequence[2].getNextStep({})).toBe('/');
+    expect(laPortalSequence[2].getNextStep({})).toBe('/la-portal/check-your-answers');
+
+    /* expect(laPortalSequence[3].url).toBe('/la-portal/task-list');
+    expect(laPortalSequence[3].getNextStep({})).toBe('/'); */
 
     expect(laPortalSequence[3].url).toBe('/la-portal/child/sex-at-birth');
     expect(laPortalSequence[3].contentDir).toBe('MOCK_BASE_DIR/../children/sex-at-birth');
@@ -268,8 +271,12 @@ describe('la-portal > laPortalSequence', () => {
     expect(laPortalSequence[53].contentDir).toBe('MOCK_BASE_DIR/../application/contact-us');
     expect(laPortalSequence[53].getNextStep({})).toBe('/la-portal/kba-case-ref');
 
-    expect(laPortalSequence[54].url).toBe('/la-portal/la-portal/upload-your-documents');
-    expect(laPortalSequence[54].contentDir).toBe('MOCK_BASE_DIR/../la-portal/upload-your-documents');
+    expect(laPortalSequence[54].url).toBe('/la-portal/check-your-answers');
+    expect(laPortalSequence[54].contentDir).toBe('MOCK_BASE_DIR/check-your-answers');
     expect(laPortalSequence[54].getNextStep({})).toBe('/la-portal/task-list');
+
+    expect(laPortalSequence[55].url).toBe('/la-portal/la-portal/upload-your-documents');
+    expect(laPortalSequence[55].contentDir).toBe('MOCK_BASE_DIR/../la-portal/upload-your-documents');
+    expect(laPortalSequence[55].getNextStep({})).toBe('/la-portal/task-list');
   });
 });
