@@ -26,3 +26,8 @@ export const saveDraftCase = async (req: AppRequest, caseRef: string): Promise<C
 
   return dataToStore;
 };
+
+export const removeCaseFromRedis = async (req: AppRequest, caseRef: string): Promise<void> => {
+  const draftStoreClient = req.app.locals.draftStoreClient;
+  draftStoreClient.del(caseRef);
+};
