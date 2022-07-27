@@ -3,7 +3,7 @@ import ConnectRedis from 'connect-redis';
 import cookieParser from 'cookie-parser';
 import { Application } from 'express';
 import session from 'express-session';
-import { createClient } from 'redis';
+import * as redis from 'redis';
 import FileStoreFactory from 'session-file-store';
 
 const RedisStore = ConnectRedis(session);
@@ -36,20 +36,16 @@ export class SessionStorage {
   private getStore(app: Application) {
     const redisHost = config.get('session.redis.host');
     if (redisHost) {
-      const redisClient = createClient({
-        socket: {
-          host: redisHost as string,
-          port: config.get('session.redis.port'),
-          tls: config.get('session.redis.tls'),
-          connectTimeout: config.get('session.redis.connectionTimeout'),
-        },
+      const client = redis.createClient({
+        host: redisHost as string,
         password: config.get('session.redis.key') as string,
+        port: 6380,
+        tls: true,
+        connect_timeout: 15000,
       });
 
-      redisClient.connect().then(() => {
-        app.locals.redisClient = redisClient;
-        return new RedisStore({ client: redisClient });
-      });
+      app.locals.redisClient = client;
+      return new RedisStore({ client });
     }
 
     return new FileStore({ path: '/tmp' });
