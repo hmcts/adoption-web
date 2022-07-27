@@ -101,6 +101,7 @@ export default {
   birthMotherAddressCounty: 'MOCK_ADDRESS_COUNTY',
   birthMotherAddressPostcode: 'MOCK_ADDRESS_POSTCODE',
   birthMotherAddressCountry: 'MOCK_ADDRESS_COUNTRY',
+  birthMotherLastAddressDate: { day: 1, month: 4, year: 2022 },
 
   birthFatherNameOnCertificate: YesOrNo.YES,
   birthFatherFirstNames: 'BIRTH_FATHER_FIRST_NAMES',
@@ -113,6 +114,7 @@ export default {
   birthFatherAddressTown: 'MOCK_ADDRESS_TOWN',
   birthFatherAddressCounty: 'MOCK_ADDRESS_COUNTY',
   birthFatherAddressPostcode: 'MOCK_ADDRESS_POSTCODE',
+  birthFatherLastAddressDate: { day: 1, month: 4, year: 2022 },
 
   otherParentFirstNames: 'MOCK_OTHER_PARENT_FIRST_NAME',
   otherParentLastNames: 'MOCK_OTHER_PARENT_FIRST_NAME',
@@ -123,6 +125,7 @@ export default {
   otherParentAddressPostcode: 'MOCK_ADDRESS_POSTCODE',
   otherParentAddressCountry: 'MOCK_ADDRESS_COUNTRY',
   otherParentAddressKnown: YesOrNo.YES,
+  otherParentLastAddressDate: { day: 1, month: 4, year: 2022 },
 
   hasSiblings: YesNoNotsure.YES,
   siblings: [
@@ -138,6 +141,7 @@ export default {
   familyCourtName: 'MOCK_FAMILY_COURT',
   applicant1UploadedFiles: [{ id: 'MOCK_DOCUMENT_ID', name: 'MOCK_DOCUMENT_FILE_NAME' }],
   applicant1DocumentsUploaded: [{ id: 'MOCK_DOCUMENT_ID', value: { documentFileName: 'MOCK_DOCUMENT_FILE_NAME' } }],
+  hyphenatedCaseRef: '1234-5678-9012-3456',
   laUploadedFiles: [{ id: 'MOCK_DOCUMENT_ID', name: 'MOCK_DOCUMENT_FILE_NAME' }],
   laDocumentsUploaded: [{ id: 'MOCK_DOCUMENT_ID', value: { documentFileName: 'MOCK_DOCUMENT_FILE_NAME' } }],
 } as unknown as CaseWithId;
