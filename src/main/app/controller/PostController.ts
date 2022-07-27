@@ -88,7 +88,7 @@ export class PostController<T extends AnyObject> {
     } else {
       try {
         req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
-        if (![LA_PORTAL_TASK_LIST?.toString()].includes(req.url)) {
+        if ([LA_PORTAL_TASK_LIST?.toString()].includes(req.url)) {
           removeCaseFromRedis(req, req.session.userCase.id);
         }
       } catch (err) {
