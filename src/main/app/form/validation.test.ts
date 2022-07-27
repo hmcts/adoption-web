@@ -5,6 +5,8 @@ import {
   atLeastOneFieldIsChecked,
   doesArrayHaveValues,
   isAddressSelected,
+  isCaseRefNumeric,
+  isCaseRefTooShort,
   isDateInputInvalid,
   isEmailValid,
   isFieldFilledIn,
@@ -359,5 +361,44 @@ describe('notSureViolation()', () => {
     { arr: [], expected: undefined },
   ])('validates an not sure violation when %o', ({ arr, expected }) => {
     expect(notSureViolation(arr)).toEqual(expected);
+  });
+});
+
+describe('isCaseRefTooShort()', () => {
+  test('Should check if case reference is valid without hyphens', async () => {
+    const isValid = isCaseRefTooShort('1234123412341234');
+    expect(isValid).toStrictEqual(undefined);
+  });
+
+  test('Should reject invalid case reference', async () => {
+    const isValid = isCaseRefTooShort('123412341234');
+    expect(isValid).toStrictEqual('numberTooShort');
+  });
+
+  test('Should reject empty case reference', async () => {
+    const isValid = isCaseRefTooShort('');
+    expect(isValid).toStrictEqual('numberTooShort');
+  });
+});
+
+describe('isCaseRefNumeric()', () => {
+  test('Should check if case reference is valid with hyphens', async () => {
+    const isValid = isCaseRefNumeric('1234-1234-1234-1234');
+    expect(isValid).toStrictEqual('isNotNumeric');
+  });
+
+  test('Should check if case reference is valid without hyphens', async () => {
+    const isValid = isCaseRefNumeric('1234123412341234');
+    expect(isValid).toStrictEqual(undefined);
+  });
+
+  test('Should check if case reference is valid with letters', async () => {
+    const isValid = isCaseRefNumeric('AD34123412341234');
+    expect(isValid).toStrictEqual('isNotNumeric');
+  });
+
+  test('Should check if case reference is valid with letters and symbols', async () => {
+    const isValid = isCaseRefNumeric('AD-4123412341234');
+    expect(isValid).toStrictEqual('isNotNumeric');
   });
 });

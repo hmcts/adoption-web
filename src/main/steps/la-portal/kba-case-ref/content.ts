@@ -4,6 +4,8 @@ import { FormContent } from '../../../app/form/Form';
 import { covertToDateObject } from '../../../app/form/parser';
 import {
   areDateFieldsFilledIn,
+  isCaseRefNumeric,
+  isCaseRefTooShort,
   isDateInputInvalid,
   isFieldFilledIn,
   isFutureDate,
@@ -11,9 +13,8 @@ import {
 } from '../../../app/form/validation';
 
 const en = () => ({
-  //section: 'Local authority',
   title: 'Application details',
-  label: 'Court case reference number',
+  label: 'Court Case reference number',
   hint: 'This is the 16 digit reference number that was on the email sent to you. Please insert the numbers only, without the hyphens.',
   childNameLabel: 'Child named on the application',
   childNameHint: 'Enter their name as it appears on the email sent to you.',
@@ -21,67 +22,72 @@ const en = () => ({
   childDateOfBirthHint: 'For example, 31 3 2012.',
   continueButton: 'Continue',
   errors: {
-    caseRef: {
-      required: 'Enter a case reference',
+    kbaCaseRef: {
+      required: 'Enter the 16 digit court case reference number',
+      numberTooShort: 'The number entered is too short',
+      isNotNumeric: 'Enter a case reference number in the correct format',
     },
-    childName: {
-      required: 'Enter a full name',
+    kbaChildName: {
+      required: 'Enter the full name',
     },
-    childrenDateOfBirth: {
-      required: "Enter the Child's date of birth",
-      incompleteDay: 'Date must include a day',
-      incompleteMonth: 'Date must include a month',
-      incompleteYear: 'Date must include a year',
-      invalidDate: 'Enter a real date',
-      invalidDateInFuture: 'Date must be in the past',
+    kbaChildrenDateOfBirth: {
+      required: 'Enter their date of birth',
+      incompleteDay: 'Date of birth must include a day',
+      incompleteMonth: 'Date of birth must include a month',
+      incompleteYear: 'Date of birth must include a year',
+      invalidDate: 'Date of birth must be a real date',
+      invalidDateInFuture: 'Date of birth must be in the past',
     },
   },
 });
 
 const cy: typeof en = () => ({
-  //section: 'Local authority (in welsh)',
   title: 'Application details (in welsh)',
-  label: 'Court case reference number (in welsh)',
+  label: 'Court Case reference number (in welsh)',
   hint: 'This is the 16 digit reference number that was on the email sent to you. Please insert the numbers only, without the hyphens. (in welsh)',
   childNameLabel: 'Child named on the application.(in welsh)',
-  childNameHint: 'Enter their name exactly as it is on their original birth certificate.(in welsh)',
+  childNameHint: 'Enter their name as it appears on the email sent to you. (in welsh)',
   childrenDateOfBirth: "Child's date of birth (in welsh)",
   childDateOfBirthHint: 'For example, 31 3 2012.',
   continueButton: 'Continue (in welsh)',
   errors: {
-    caseRef: {
-      required: 'Enter a case reference (in welsh)',
+    kbaCaseRef: {
+      required: 'Enter the 16 digit court case reference number (in welsh)',
+      numberTooShort: 'The number entered is too short (in welsh)',
+      isNotNumeric: 'Enter a case reference number in the correct format (in welsh)',
     },
-    childName: {
-      required: 'Enter a full name (in welsh)',
+    kbaChildName: {
+      required: 'Enter the full name (in welsh)',
     },
-    childrenDateOfBirth: {
-      required: 'Enter the placement order date',
-      incompleteDay: 'Date must include a day',
-      incompleteMonth: 'Date must include a month',
-      incompleteYear: 'Date must include a year',
-      invalidDate: 'Enter a real date',
-      invalidDateInFuture: 'Date must be in the past',
+    kbaChildrenDateOfBirth: {
+      required: 'Enter their date of birth (in welsh)',
+      incompleteDay: 'Date of birth must include a day (in welsh)',
+      incompleteMonth: 'Date of birth must include a month (in welsh)',
+      incompleteYear: 'Date of birth must include a year (in welsh)',
+      invalidDate: 'Date of birth must be a real date (in welsh)',
+      invalidDateInFuture: 'Date of birth must be in the past (in welsh)',
     },
   },
 });
 
 export const form: FormContent = {
   fields: {
-    caseRef: {
+    kbaCaseRef: {
       type: 'text',
       classes: 'govuk-label',
-      //section: l => l.section,
       label: l => l.label,
       hint: l => l.hint,
       labelSize: 'm',
       attributes: {
         spellcheck: false,
+        maxLength: 16,
+        pattern: '[0-9]*',
+        inputMode: 'numeric',
       },
-      validator: isFieldFilledIn,
+      validator: value => isFieldFilledIn(value) || isCaseRefTooShort(value) || isCaseRefNumeric(value),
     },
 
-    childName: {
+    kbaChildName: {
       type: 'text',
       classes: 'govuk-heading-m govuk-!-margin-bottom-1',
       label: l => l.childNameLabel,
@@ -89,18 +95,9 @@ export const form: FormContent = {
       labelSize: 'm',
       validator: isFieldFilledIn,
     },
-    /* name123:{
-      type: 'label',
-      classes: 'govuk-date-input',
-      label: l => l.childDateOfBirth,
-      labelSize: 'l',
-    }, */
-
-    childrenDateOfBirth: {
+    kbaChildrenDateOfBirth: {
       type: 'date',
-      //classes: 'govuk-heading-s',
       classes: 'govuk-date-input',
-      //classes: 'govuk-fieldset__legend govuk-fieldset__legend--m',
       label: l => l.childrenDateOfBirth,
       hint: l => l.childDateOfBirthHint,
       labelSize: 's',
@@ -125,7 +122,7 @@ export const form: FormContent = {
           attributes: { maxLength: 4, pattern: '[0-9]*', inputMode: 'numeric' },
         },
       ],
-      parser: body => covertToDateObject('childrenDateOfBirth', body as Record<string, unknown>),
+      parser: body => covertToDateObject('kbaChildrenDateOfBirth', body as Record<string, unknown>),
       validator: value =>
         areDateFieldsFilledIn(value as CaseDate) ||
         isDateInputInvalid(value as CaseDate) ||
