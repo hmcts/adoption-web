@@ -1,9 +1,20 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
-import { removeCaseFromRedis, saveDraftCase } from '../../modules/draft-store/draft-store-service';
+import {
+  getDraftCaseFromStore,
+  removeCaseFromRedis,
+  saveDraftCase,
+} from '../../modules/draft-store/draft-store-service';
 import { getNextStepUrl } from '../../steps';
-import { CHECK_ANSWERS_URL, LA_PORTAL, LA_PORTAL_TASK_LIST, SAVE_AND_SIGN_OUT, SAVE_AS_DRAFT } from '../../steps/urls';
+import {
+  CHECK_ANSWERS_URL,
+  LA_PORTAL,
+  LA_PORTAL_CHECK_YOUR_ANSWERS,
+  LA_PORTAL_TASK_LIST,
+  SAVE_AND_SIGN_OUT,
+  SAVE_AS_DRAFT,
+} from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
 import { CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE, SYSTEM_USER_UPDATE } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
@@ -82,14 +93,28 @@ export class PostController<T extends AnyObject> {
   }
 
   protected async save(req: AppRequest<T>, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
-    if ((req.url as string).includes('la-portal') && ![LA_PORTAL_TASK_LIST?.toString()].includes(req.url)) {
-      await saveDraftCase(req, req.session.userCase.id || '');
+    if ((req.url as string).includes('la-portal') && ![LA_PORTAL_CHECK_YOUR_ANSWERS?.toString()].includes(req.url)) {
+      try {
+        await saveDraftCase(req, req.session.userCase.id || '', formData);
+        return req.session.userCase;
+      } catch (err) {
+        req.locals.logger.error('Cannot save to redis cache', err);
+        req.session.errors = req.session.errors || [];
+        req.session.errors?.push({ errorType: 'errorSaving', propertyName: '*' });
+      }
       return req.session.userCase;
     } else {
       try {
-        req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
-        if ([LA_PORTAL_TASK_LIST?.toString()].includes(req.url)) {
+        if ([LA_PORTAL_CHECK_YOUR_ANSWERS?.toString()].includes(req.url)) {
+          const modifiedValuesSet = await getDraftCaseFromStore(req, req.session.userCase.id || '');
+          req.session.userCase = await req.locals.api.triggerEvent(
+            req.session.userCase.id,
+            modifiedValuesSet,
+            eventName
+          );
           removeCaseFromRedis(req, req.session.userCase.id);
+        } else {
+          req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
         }
       } catch (err) {
         req.locals.logger.error('Error saving', err);

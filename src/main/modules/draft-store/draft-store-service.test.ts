@@ -37,7 +37,7 @@ describe('session', () => {
   });
 
   test('should successfully save data', async () => {
-    const returnData = await saveDraftCase(req, '');
+    const returnData = await saveDraftCase(req, '', {});
     expect(returnData).toBe(req.session.userCase);
   });
 
