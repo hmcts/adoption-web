@@ -11,7 +11,7 @@ export class DraftStoreClient {
     const connectionString = `${protocol}${config.get('session.redis.key')}@${config.get(
       'services.draftStore.redis.host'
     )}:${config.get('services.draftStore.redis.port')}`;
-    console.log(connectionString);
+    console.log('Connection String: ', connectionString);
 
     const client = new Redis(connectionString);
 
