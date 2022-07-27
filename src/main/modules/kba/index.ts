@@ -41,7 +41,12 @@ export class KbaMiddleware {
         if (req.session?.user) {
           res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
-          req.session.userCase = await getDraftCaseFromStore(req, req.session.laPortalKba.kbaCaseRef || '');
+          const currentUserCaseData = req.session.userCase;
+          const draftStoreUserCaseData = await getDraftCaseFromStore(req, req.session.laPortalKba.kbaCaseRef || '');
+          if (draftStoreUserCaseData) {
+            req.session.userCase = { ...(currentUserCaseData || {}), ...draftStoreUserCaseData };
+          }
+
           if (!req.session.userCase) {
             try {
               req.session.userCase = await req.locals.api.getCaseById(req.session.laPortalKba.kbaCaseRef!);
