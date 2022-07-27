@@ -220,7 +220,12 @@ const placementOrderSequence = [
   {
     url: Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_NUMBER,
     contentDir: path.join(__dirname, '..', 'children', 'placement-order-number'),
-    getNextStep: () => Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_DATE,
+    getNextStep: data =>
+      !!data.placementOrders &&
+      data.placementOrders.length > 0 &&
+      data.placementOrders[0].placementOrderId === data.selectedPlacementOrderId
+        ? Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_DATE
+        : Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT,
   },
   {
     url: Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT,
@@ -344,6 +349,10 @@ export const laPortalSequence: Step[] = [
   {
     url: Urls.LA_PORTAL_KBA_CASE_REF,
     getNextStep: () => Urls.LA_PORTAL_KBA_CALLBACK,
+  },
+  {
+    url: Urls.LA_PORTAL_NEG_SCENARIO,
+    getNextStep: () => Urls.LA_PORTAL_KBA_CASE_REF,
   },
   {
     url: Urls.LA_PORTAL_TASK_LIST,

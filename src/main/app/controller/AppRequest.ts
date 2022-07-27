@@ -2,8 +2,9 @@ import { Request } from 'express';
 import { Session } from 'express-session';
 import type { LoggerInstance } from 'winston';
 
+import { CourtVenue } from '../../app/court/location';
 import { CaseApi } from '../case/CaseApi';
-import { Case, CaseWithId } from '../case/case';
+import { Case, CaseDate, CaseWithId } from '../case/case';
 import { Fee } from '../case/definition';
 import { FormError } from '../form/Form';
 
@@ -23,6 +24,7 @@ export interface AppSession extends Session {
   userCase: CaseWithId;
   eligibility: Eligibility;
   laPortalKba: LaPortalKBA;
+  courtList: CourtVenue[];
   lang: string | undefined;
   errors: FormError[] | undefined;
   addresses: [];
@@ -50,6 +52,8 @@ export interface Eligibility {
 
 // LA Portal Knowledge Based Authentication
 export interface LaPortalKBA {
-  caseRef?: string;
+  kbaCaseRef?: string;
+  kbaChildName?: string;
+  kbaChildrenDateOfBirth?: CaseDate;
   authenticated?: boolean;
 }

@@ -15,6 +15,7 @@ jest.mock('../../../steps', () => {
 
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
+import { PlacementOrderTypeEnum } from '../../../app/case/definition';
 import { FormFields } from '../../../app/form/Form';
 
 import PlacementOrderPostController from './PlacementOrderPostController';
@@ -64,7 +65,7 @@ describe('PlacementOrderPostController', () => {
             {
               placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
               placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
-              placementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
+              placementOrderType: PlacementOrderTypeEnum.AdoptionOrder,
               otherPlacementOrderType: 'MOCK_PLACEMENT_OTHER_ORDER_TYPE',
             },
           ],
@@ -78,7 +79,7 @@ describe('PlacementOrderPostController', () => {
           {
             placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
             placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
-            placementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
+            placementOrderType: PlacementOrderTypeEnum.AdoptionOrder,
             otherPlacementOrderType: 'MOCK_PLACEMENT_OTHER_ORDER_TYPE',
           },
         ]);
@@ -93,7 +94,7 @@ describe('PlacementOrderPostController', () => {
           {
             placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
             placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
-            placementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
+            placementOrderType: PlacementOrderTypeEnum.AdoptionOrder,
             otherPlacementOrderType: 'MOCK_PLACEMENT_OTHER_ORDER_TYPE',
           },
         ]);
@@ -174,7 +175,7 @@ describe('PlacementOrderPostController', () => {
           {
             placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
             placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
-            placementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
+            placementOrderType: PlacementOrderTypeEnum.AdoptionOrder,
             otherPlacementOrderType: 'MOCK_PLACEMENT_OTHER_ORDER_TYPE',
           },
         ],
@@ -188,7 +189,7 @@ describe('PlacementOrderPostController', () => {
         {
           placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
           placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
-          placementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
+          placementOrderType: PlacementOrderTypeEnum.AdoptionOrder,
           otherPlacementOrderType: 'MOCK_PLACEMENT_OTHER_ORDER_TYPE',
         },
       ]);

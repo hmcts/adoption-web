@@ -158,6 +158,10 @@ describe('Accessibility', () => {
     urls.LA_PORTAL_SIBLING_ORDER_TYPE,
     urls.LA_PORTAL_SIBLING_ORDER_CASE_NUMBER,
     urls.LA_PORTAL_SIBLING_EXISTS,
+    urls.LA_PORTAL_KBA_CASE_REF,
+    urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT,
+    urls.CHILDREN_FIND_PLACEMENT_ORDER_COURT,
+    urls.CHILDREN_FIND_FAMILY_COURT,
   ];
   const urlsToTest = Object.values(urls).filter(url => !IGNORED_URLS.includes(url));
 

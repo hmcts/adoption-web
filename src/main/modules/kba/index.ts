@@ -4,7 +4,13 @@ import { getSystemUser } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
 import { AppRequest } from '../../app/controller/AppRequest';
 import { getDraftCaseFromStore } from '../../modules/draft-store/draft-store-service';
-import { LA_PORTAL, LA_PORTAL_KBA_CALLBACK, LA_PORTAL_KBA_CASE_REF, LA_PORTAL_TASK_LIST } from '../../steps/urls';
+import {
+  LA_PORTAL,
+  LA_PORTAL_KBA_CALLBACK,
+  LA_PORTAL_KBA_CASE_REF,
+  LA_PORTAL_NEG_SCENARIO,
+  LA_PORTAL_TASK_LIST,
+} from '../../steps/urls';
 
 /**
  * Adds the KBA middleware for knowledge based authentication
@@ -16,7 +22,7 @@ export class KbaMiddleware {
     app.get(
       LA_PORTAL_KBA_CALLBACK,
       errorHandler(async (req: AppRequest, res) => {
-        if (req.session.laPortalKba?.caseRef) {
+        if (req.session.laPortalKba?.kbaCaseRef) {
           req.session.user = await getSystemUser();
           req.session.user.isSystemUser = true;
           req.session.save(() => res.redirect(LA_PORTAL_TASK_LIST));
@@ -37,7 +43,22 @@ export class KbaMiddleware {
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
           req.session.userCase = await getDraftCaseFromStore(req, req.session.laPortalKba.caseRef || '');
           if (!req.session.userCase) {
-            req.session.userCase = await req.locals.api.getCaseById(req.session.laPortalKba.caseRef!);
+            try {
+              req.session.userCase = await req.locals.api.getCaseById(req.session.laPortalKba.kbaCaseRef!);
+            } catch (err) {
+              req.session.destroy(() => res.redirect(LA_PORTAL_NEG_SCENARIO));
+              return;
+            }
+          }
+
+          if (
+            JSON.stringify(req.session.userCase.childrenDateOfBirth) !==
+              JSON.stringify(req.session.laPortalKba['kbaChildrenDateOfBirth']) ||
+            req.session.laPortalKba['kbaChildName']?.trim() !==
+              req.session.userCase.childrenFirstName + ' ' + req.session.userCase.childrenLastName
+          ) {
+            req.session.destroy(() => res.redirect(LA_PORTAL_NEG_SCENARIO));
+            return;
           }
         }
 

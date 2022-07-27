@@ -1,4 +1,5 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
+import { PlacementOrderTypeEnum } from '../../../app/case/definition';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
@@ -6,16 +7,6 @@ import { CommonContent, generatePageContent } from '../../common/common.content'
 import { generateContent } from './content';
 
 jest.mock('../../../app/form/validation');
-
-const enum PlacementOrderTypeEnum {
-  AdoptionOrder = 'Adoption Order',
-  CareOrder = 'Care Order',
-  ContactOrder = 'Contact Order',
-  FreeingOrder = 'Freeing Order',
-  PlacementOrder = 'Placement Order',
-  SupervisionOrder = 'Supervision Order',
-  Other = 'Other',
-}
 
 const enContent = {
   section: "The child's details",
@@ -64,7 +55,9 @@ describe('children > placement-order-type > content', () => {
   const commonContent = {
     language: 'en',
     userCase: {
-      placementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderType: 'MOCK_TYPE' }],
+      placementOrders: [
+        { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderType: PlacementOrderTypeEnum.AdoptionOrder },
+      ],
       selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
     },
   } as CommonContent;
