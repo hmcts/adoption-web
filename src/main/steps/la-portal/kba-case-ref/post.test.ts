@@ -56,7 +56,7 @@ describe('la-portal > LaPortalKbaPostController', () => {
       req.originalUrl = LA_PORTAL_KBA_CASE_REF;
       await controller.post(req, res);
       expect(req.session.save).toHaveBeenCalled();
-      expect(res.redirect).toHaveBeenCalledWith('/la-portal/kba-completed');
+      expect(res.redirect).toHaveBeenCalledWith('/la-portal/start-page');
     });
   });
 
