@@ -420,6 +420,10 @@ export interface Case {
   applicationFeeOrderSummary: OrderSummary;
   hyphenatedCaseRef?: string;
   otherPlacementOrderType?: string;
+
+  kbaCaseRef?: string;
+  kbaChildName?: string;
+  kbaChildrenDateOfBirth?: string;
 }
 
 export interface CaseWithId extends Case {

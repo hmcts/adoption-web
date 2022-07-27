@@ -199,3 +199,15 @@ export const isGovUkEmail: Validator = value => {
     return 'invalidGovUkEmail';
   }
 };
+
+export const isCaseRefTooShort: Validator = value => {
+  if (!(value as string).match(/^\d{16}$/) && !(value as string).match(/[^<>]\D/g)) {
+    return 'numberTooShort';
+  }
+};
+
+export const isCaseRefNumeric: Validator = value => {
+  if (!(value as string).match(/^\d*$/)) {
+    return 'isNotNumeric';
+  }
+};
