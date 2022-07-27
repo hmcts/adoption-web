@@ -104,8 +104,6 @@ export const childSummaryList = (
   { sectionTitles, keys, ...content }: SummaryListsContent,
   userCase: Partial<CaseWithId>
 ): SummaryLists => {
-  console.log('-------userCase-------' + JSON.stringify(userCase));
-
   return {
     title: sectionTitles.childDetails,
     rows: getSectionSummaryLists(
