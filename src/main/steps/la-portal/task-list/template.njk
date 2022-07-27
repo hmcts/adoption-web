@@ -62,12 +62,11 @@
       </ol>
     </div>
     <div class="govuk-grid-column-two-thirds">
-      <form action = "" method="post">
-        <input type="hidden" name="_csrf" id="csrfToken" value="{{ csrfToken }}">
-        <input type="hidden" name="locale" id="locale" value="{{ language }}">
+      <form>
         {{ govukButton({
           text: reviewAndSubmit,
           type: "submit",
+          href:"/la-portal/check-your-answers",
           classes: "hidden" if isIncomplete
         }) }}
       </form>
