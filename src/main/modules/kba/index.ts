@@ -3,6 +3,7 @@ import { Application, NextFunction, Response } from 'express';
 import { getSystemUser } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
 import { AppRequest } from '../../app/controller/AppRequest';
+import { getDraftCaseFromStore } from '../../modules/draft-store/draft-store-service';
 import { LA_PORTAL, LA_PORTAL_KBA_CALLBACK, LA_PORTAL_KBA_CASE_REF, LA_PORTAL_TASK_LIST } from '../../steps/urls';
 
 /**
@@ -34,6 +35,7 @@ export class KbaMiddleware {
         if (req.session?.user) {
           res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
+          req.session.userCase = await getDraftCaseFromStore(req, req.session.laPortalKba.caseRef || '');
           if (!req.session.userCase) {
             req.session.userCase = await req.locals.api.getCaseById(req.session.laPortalKba.caseRef!);
           }

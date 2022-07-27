@@ -12,6 +12,7 @@ import { AppInsights } from './modules/appinsights';
 import { AuthProvider } from './modules/auth-provider';
 import { AxiosLogger } from './modules/axios-logger';
 import { CSRFToken } from './modules/csrf';
+import { DraftStoreClient } from './modules/draft-store';
 import { ErrorHandler } from './modules/error-handler';
 import { HealthCheck } from './modules/health';
 import { Helmet } from './modules/helmet';
@@ -100,6 +101,7 @@ new LanguageToggle().enableFor(app);
 new StateRedirectMiddleware().enableFor(app);
 new Routes().enableFor(app);
 new ErrorHandler().handleNextErrorsFor(app);
+new DraftStoreClient().enableFor(app);
 
 const port = config.get('port');
 const server = app.listen(port, () => {

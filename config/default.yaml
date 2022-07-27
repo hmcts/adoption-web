@@ -45,6 +45,12 @@ services:
     url: 'https://pact-broker.platform.hmcts.net'
     tag:
     pactDirectory: 'pact/pacts'
+  draftStore:
+    redis:
+      host: 'localhost'
+      port: 6379
+      key:
+      tls: false
 health:
   timeout: 5000
   deadline: 15000
