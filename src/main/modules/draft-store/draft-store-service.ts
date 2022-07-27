@@ -6,6 +6,8 @@ export const getDraftCaseFromStore = async (req: AppRequest, caseRef: string): P
   let returnData;
   if (dataFromRedis) {
     try {
+      console.log('retrived data', dataFromRedis);
+
       returnData = JSON.parse(dataFromRedis) as CaseWithId;
     } catch (err: unknown) {
       console.log(err);
@@ -20,5 +22,7 @@ export const saveDraftCase = async (req: AppRequest, caseRef: string): Promise<C
   const dataToStore = req.session.userCase;
   const draftStoreClient = req.app.locals.draftStoreClient;
   draftStoreClient.set(caseRef, JSON.stringify(dataToStore));
+  console.log(dataToStore);
+
   return dataToStore;
 };
