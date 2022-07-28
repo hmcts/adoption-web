@@ -6,12 +6,8 @@ export const getDraftCaseFromStore = async (req: AppRequest, caseRef: string): P
   let returnData;
   if (dataFromRedis) {
     try {
-      console.log('retrived data', dataFromRedis);
-
       returnData = JSON.parse(dataFromRedis) as CaseWithId;
     } catch (err: unknown) {
-      console.log(err);
-
       return returnData;
     }
   }
