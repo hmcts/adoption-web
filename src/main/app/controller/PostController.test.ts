@@ -263,8 +263,6 @@ describe('PostController', () => {
     req.session.userCase.applicationType = ApplicationType.SOLE_APPLICATION;
     const res = mockResponse();
     await controller.post(req, res);
-
-    console.log(req.session.userCase);
     expect(req.session.userCase).toStrictEqual({ applicationType: 'soleApplication', id: '1234' });
   });
 
