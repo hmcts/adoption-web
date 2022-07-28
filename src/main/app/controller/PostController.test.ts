@@ -263,7 +263,7 @@ describe('PostController', () => {
     req.session.userCase.applicationType = ApplicationType.SOLE_APPLICATION;
     const res = mockResponse();
     await controller.post(req, res);
-    expect(req.session.userCase).toStrictEqual({ applicationType: 'soleApplication', id: '1234' });
+    expect(req.session.userCase).toStrictEqual(expectedUserCaseRedis);
   });
 
   test('triggers la-portal save request check your answers', async () => {
