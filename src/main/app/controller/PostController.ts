@@ -97,7 +97,7 @@ export class PostController<T extends AnyObject> {
     if (req.url.includes('la-portal') && ![LA_PORTAL_CHECK_YOUR_ANSWERS?.toString()].includes(req.url)) {
       try {
         if (formData.selectedPlacementOrderId) {
-          formData.selectedPlacementOrderId = undefined;
+          delete formData.selectedPlacementOrderId;
         }
         await saveDraftCase(req, caseRefId || '', formData);
         return req.session.userCase;
