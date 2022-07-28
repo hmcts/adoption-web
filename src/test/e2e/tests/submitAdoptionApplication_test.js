@@ -105,7 +105,7 @@ Scenario(
 
     // TODO in Future stories
     await taskListPage.selectSiblingDetails();
-    await childSiblingDetailsPage.childDetailsSiblingSection;
+    await childSiblingDetailsPage.childDetailsSiblingSection();
     // await taskListPage.verifySiblingDetailsStatus();
 
     await taskListPage.selectUploadDocumentsDetails();
