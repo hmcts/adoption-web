@@ -14,6 +14,7 @@ const en = ({ userCase }: CommonContent) => {
   return {
     label,
     section: "The child's details",
+    hint: 'This is on the top right of the order.',
     errors: {
       placementOrderNumber: {
         required: 'Enter the serial or case number',
@@ -33,6 +34,7 @@ const cy: typeof en = ({ userCase }: CommonContent) => {
   return {
     label,
     section: 'Manylion y plentyn',
+    hint: 'This is on the top right of the order. (in welsh)',
     errors: {
       placementOrderNumber: {
         required: 'Nac ydwdwch y rhif cyfresol neu rif yr achos',
@@ -51,6 +53,7 @@ export const form: FormContent = {
         type: 'text',
         classes: 'govuk-label govuk-input--width-10',
         label: l => l.label,
+        hint: l => l.hint,
         value: placementOrder?.placementOrderNumber,
         labelSize: 'l',
         attributes: {

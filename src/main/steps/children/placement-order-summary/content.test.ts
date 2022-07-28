@@ -14,7 +14,7 @@ const enContent = {
   incomplete: 'incomplete',
   change: 'Change',
   remove: 'Remove',
-  label: 'Do you want to add another order?',
+  label: 'Does the child have any other previous or existing orders?',
   errors: {
     addAnotherPlacementOrder: {
       required: 'Please select an answer',
@@ -45,7 +45,7 @@ const cyContent = {
   incomplete: 'anghyflawn',
   change: 'Newid',
   remove: 'Dileu',
-  label: 'A ydych eisiau ychwanegu gorchymyn arall?',
+  label: 'Does the child have any other previous or existing orders? (in welsh)',
   errors: {
     addAnotherPlacementOrder: {
       required: 'Dewiswch ateb os gwelwch yn dda',
