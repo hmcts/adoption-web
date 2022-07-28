@@ -96,11 +96,7 @@ export class PostController<T extends AnyObject> {
     const caseRefId = req.session.userCase.id;
     if (req.url.includes('la-portal') && ![LA_PORTAL_CHECK_YOUR_ANSWERS?.toString()].includes(req.url)) {
       try {
-        if (formData.selectedPlacementOrderId) {
-          delete formData.selectedPlacementOrderId;
-        }
-        await saveDraftCase(req, caseRefId || '', formData);
-        return req.session.userCase;
+        return await saveDraftCase(req, caseRefId || '', formData);
       } catch (err) {
         req.locals.logger.error('Cannot save to redis cache', err);
         req.session.errors = req.session.errors || [];

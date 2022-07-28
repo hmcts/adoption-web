@@ -3,6 +3,7 @@ import { Application, NextFunction, Response } from 'express';
 import { getSystemUser } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
 import { AppRequest } from '../../app/controller/AppRequest';
+import { getDraftCaseFromStore } from '../../modules/draft-store/draft-store-service';
 import {
   LA_PORTAL,
   LA_PORTAL_KBA_CALLBACK,

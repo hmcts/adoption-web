@@ -15,6 +15,20 @@ export const getDraftCaseFromStore = async (req: AppRequest, caseRef: string): P
 };
 
 export const saveDraftCase = async (req: AppRequest, caseRef: string, formData: Partial<Case>): Promise<CaseWithId> => {
+  const fieldsToBeExcluded = [
+    'selectedOtherPlacementOrderType',
+    'selectedPlacementOrderId',
+    'selectedPlacementOrderType',
+    'selectedSiblingId',
+    'selectedSiblingOtherPlacementOrderType',
+    'selectedSiblingPoType',
+    'selectedSiblingRelation',
+  ];
+  fieldsToBeExcluded.forEach(item => {
+    if (formData[item]) {
+      delete formData[item];
+    }
+  });
   let dataToStore = formData;
   const draftCaseFromRedis = await getDraftCaseFromStore(req, caseRef);
   if (draftCaseFromRedis) {
