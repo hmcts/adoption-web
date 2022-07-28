@@ -19,7 +19,10 @@ export default class PlacementOrderPostController extends PostController<AnyObje
       item => item.placementOrderId === req.session.userCase.selectedPlacementOrderId
     );
 
-    Object.assign(placementOrder!, formData);
+    if (placementOrder) {
+      Object.assign(placementOrder!, formData);
+    }
+
     if (placementOrder) {
       if (formData['selectedPlacementOrderType']) {
         placementOrder.placementOrderType = formData['selectedPlacementOrderType'] as PlacementOrderTypeEnum;
