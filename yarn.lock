@@ -2445,10 +2445,10 @@
     "@uppy/utils" "^4.0.7"
     namespace-emitter "^2.0.1"
 
-"@uppy/core@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@uppy/core/-/core-2.3.0.tgz#3b344c75a9331d63b36b9618fd2730805c914b77"
-  integrity sha512-qGTFmaZkf1C6an6XZ6V3rWWTyk21BhcwxkFqOuQ3pNtyC5kJkVkIjZCWpcxpFDO1dLhCRSaoHvyil89+eImHGg==
+"@uppy/core@^2.3.2":
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@uppy/core/-/core-2.3.2.tgz#e31c1e9992e6712948e40e69a662ba33d5a763ec"
+  integrity sha512-CHNWn5B9trBw28SWO/BQnQzhKne/U5npSnfK9SZfnAL4A/nTFX9jrznBkmS8wulVarDpavfj8+BA9kjzExFBfg==
   dependencies:
     "@transloadit/prettier-bytes" "0.0.7"
     "@uppy/store-default" "^2.1.0"
