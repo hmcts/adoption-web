@@ -1,6 +1,7 @@
 import { defaultViewArgs } from '../../../test/unit/utils/defaultViewArgs';
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
+import * as draftStoreMock from '../../modules/draft-store/draft-store-service';
 import { generatePageContent } from '../../steps/common/common.content';
 import { Case } from '../case/case';
 import { State } from '../case/definition';
@@ -238,6 +239,25 @@ describe('GetController', () => {
 
       expect(updatedUserCase).toEqual(expectedUserCase);
       expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { ...body }, 'MOCK_EVENT');
+    });
+
+    test('Should save the users data, and return the updated userCase to redis', async () => {
+      const body = { applyingWith: 'alone' };
+      const controller = new GetController('page', () => ({}));
+      const expectedUserCaseRedis = {
+        id: '1234',
+        state: State.Draft,
+        documentsGenerated: [],
+        applicationFeeOrderSummary: { Fees: [], PaymentTotal: '' },
+      };
+      const req = mockRequest({ body });
+      req.url = '/la-portal/request';
+      const saveDraftCase = jest.spyOn(draftStoreMock, 'saveDraftCase');
+      saveDraftCase.mockResolvedValue(expectedUserCaseRedis);
+
+      const updatedUserCase = await controller.save(req, body as Partial<Case>, 'MOCK_EVENT');
+
+      expect(updatedUserCase).toEqual(expectedUserCaseRedis);
     });
 
     test('Should log error when there is an error in updating userCase', async () => {
