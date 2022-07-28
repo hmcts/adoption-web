@@ -24,6 +24,11 @@ services:
     pcqEnabled: PCQ_ENABLED
   pact:
     tag: PACT_TAG
+  draftStore:
+    redis:
+      host: REDIS_HOST
+      tls: REDIS_TLS
+      port: REDIS_PORT
 port: PORT
 session:
   redis:

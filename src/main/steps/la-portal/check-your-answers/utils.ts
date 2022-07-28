@@ -451,8 +451,10 @@ export const uploadedDocumentSummaryList = (
 });
 
 const formatDocument = (userCase: Partial<CaseWithId>) => {
-  const documentFileNames = userCase.laUploadedFiles?.map(item => item.name);
-  return documentFileNames?.join('<br>');
+  if ((userCase.laUploadedFiles as unknown as string) !== '[]') {
+    const documentFileNames = userCase.laUploadedFiles?.map(item => item.name);
+    return documentFileNames?.join('<br>');
+  }
 };
 
 const formatNotUploadedDocument = (userCase: Partial<CaseWithId>, content: PageContent) => {
