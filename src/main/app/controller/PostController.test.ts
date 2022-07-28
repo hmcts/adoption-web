@@ -1,9 +1,10 @@
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import { FormContent } from '../../app/form/Form';
+import * as draftStoreMock from '../../modules/draft-store/draft-store-service';
 import * as steps from '../../steps';
 import { LA_PORTAL_CHECK_YOUR_ANSWERS, SAVE_AND_SIGN_OUT } from '../../steps/urls';
-import { ApplicationType, CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE, SYSTEM_USER_UPDATE } from '../case/definition';
+import { ApplicationType, CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE, SYSTEM_USER_UPDATE, State } from '../case/definition';
 import { isPhoneNoValid } from '../form/validation';
 
 import { PostController } from './PostController';
@@ -12,15 +13,14 @@ jest.mock('../../modules/draft-store/draft-store-service');
 import Mock = jest.Mock;
 
 const getNextStepUrlMock = jest.spyOn(steps, 'getNextStepUrl');
-const expectedUserCaseRedis = { applicationType: 'soleApplication', id: '1234' };
-
-jest.mock('../../modules/draft-store/draft-store-service', () => {
-  jest.fn().mockResolvedValue({ applicationType: 'soleApplication', id: '1234' });
-});
-
-jest.mock('../../modules/draft-store/draft-store-service', () => {
-  jest.fn().mockResolvedValue({ applicationType: 'soleApplication', id: '1234' });
-});
+const expectedUserCaseRedis = {
+  id: '1234',
+  state: State.Draft,
+  documentsGenerated: [],
+  applicationFeeOrderSummary: { Fees: [], PaymentTotal: '' },
+};
+const getDraftCaseFromStore = jest.spyOn(draftStoreMock, 'getDraftCaseFromStore');
+const saveDraftCase = jest.spyOn(draftStoreMock, 'saveDraftCase');
 
 describe('PostController', () => {
   afterEach(() => {
@@ -253,6 +253,8 @@ describe('PostController', () => {
 
   test('triggers la-portal save request', async () => {
     getNextStepUrlMock.mockReturnValue('/next-step-url');
+    saveDraftCase.mockResolvedValue(expectedUserCaseRedis);
+    getDraftCaseFromStore.mockResolvedValue(expectedUserCaseRedis);
     const body = {};
     const controller = new PostController(mockFormContent.fields);
 
@@ -269,9 +271,12 @@ describe('PostController', () => {
   test('triggers la-portal save request check your answers', async () => {
     getNextStepUrlMock.mockReturnValue('/next-step-url');
     const body = {};
+    saveDraftCase.mockResolvedValue(expectedUserCaseRedis);
+    getDraftCaseFromStore.mockResolvedValue(expectedUserCaseRedis);
     const controller = new PostController(mockFormContent.fields);
 
     const req = mockRequest({ body });
+    (req.locals.api.triggerEvent as jest.Mock).mockResolvedValueOnce(expectedUserCaseRedis);
     req.url = LA_PORTAL_CHECK_YOUR_ANSWERS;
     req.session.userCase.applicationType = ApplicationType.SOLE_APPLICATION;
     const res = mockResponse();
@@ -281,6 +286,9 @@ describe('PostController', () => {
 
   test('triggers la-portal error response', async () => {
     getNextStepUrlMock.mockReturnValue('/next-step-url');
+
+    getDraftCaseFromStore.mockRejectedValue(new Error('some error'));
+    saveDraftCase.mockRejectedValue(expectedUserCaseRedis);
     jest.mock('../../modules/draft-store/draft-store-service', () => {
       jest.fn().mockRejectedValue({});
     });
@@ -298,9 +306,8 @@ describe('PostController', () => {
 
   test('triggers la-portal error in save request on check your answers', async () => {
     getNextStepUrlMock.mockReturnValue('/next-step-url');
-    jest.mock('../../modules/draft-store/draft-store-service', () => {
-      jest.fn().mockRejectedValue({});
-    });
+    getDraftCaseFromStore.mockRejectedValue(new Error('some error'));
+    saveDraftCase.mockResolvedValue(expectedUserCaseRedis);
 
     const body = {};
     const controller = new PostController(mockFormContent.fields);
