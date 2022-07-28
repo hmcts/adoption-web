@@ -93,9 +93,10 @@ export class PostController<T extends AnyObject> {
   }
 
   protected async save(req: AppRequest<T>, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
+    const caseRefId = req.session.userCase.id;
     if (req.url.includes('la-portal') && ![LA_PORTAL_CHECK_YOUR_ANSWERS?.toString()].includes(req.url)) {
       try {
-        await saveDraftCase(req, req.session.userCase.id || '', formData);
+        await saveDraftCase(req, caseRefId || '', formData);
         return req.session.userCase;
       } catch (err) {
         req.locals.logger.error('Cannot save to redis cache', err);
@@ -106,15 +107,11 @@ export class PostController<T extends AnyObject> {
     } else {
       try {
         if ([LA_PORTAL_CHECK_YOUR_ANSWERS?.toString()].includes(req.url)) {
-          const modifiedValuesSet = await getDraftCaseFromStore(req, req.session.userCase.id || '');
-          req.session.userCase = await req.locals.api.triggerEvent(
-            req.session.userCase.id,
-            modifiedValuesSet,
-            eventName
-          );
-          removeCaseFromRedis(req, req.session.userCase.id);
+          const modifiedValuesSet = await getDraftCaseFromStore(req, caseRefId || '');
+          req.session.userCase = await req.locals.api.triggerEvent(caseRefId, modifiedValuesSet, eventName);
+          removeCaseFromRedis(req, caseRefId);
         } else {
-          req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
+          req.session.userCase = await req.locals.api.triggerEvent(caseRefId, formData, eventName);
         }
       } catch (err) {
         req.locals.logger.error('Error saving', err);
