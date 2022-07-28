@@ -2,6 +2,7 @@ import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import {
+  LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT,
   LA_PORTAL_CHILD_PLACEMENT_ORDER_DATE,
   LA_PORTAL_CHILD_PLACEMENT_ORDER_NUMBER,
   LA_PORTAL_CHILD_PLACEMENT_ORDER_TYPE,
@@ -45,6 +46,23 @@ const placementOrderListItems = (userCase, content) => {
         ],
       },
     },
+    ...(foundIndex !== 0
+      ? [
+          {
+            key: { text: content.orderCourt },
+            value: { text: order.placementOrderCourt },
+            actions: {
+              items: [
+                {
+                  href: `${LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT}?change=${order.placementOrderId}`,
+                  text: content.change,
+                  visuallyHiddenText: content.orderCourt,
+                },
+              ],
+            },
+          },
+        ]
+      : []),
 
     {
       key: { text: content.orderDate },

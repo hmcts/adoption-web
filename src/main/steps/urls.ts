@@ -165,6 +165,7 @@ export const SAVE_AS_DRAFT: PageLink = '/save-as-draft';
 export const LA_PORTAL = '/la-portal';
 export const LA_PORTAL_KBA_CASE_REF = '/la-portal/kba-case-ref';
 export const LA_PORTAL_KBA_CALLBACK = '/la-portal/kba-completed';
+export const LA_PORTAL_NEG_SCENARIO = '/la-portal/negative-scenario';
 export const LA_PORTAL_TASK_LIST: PageLink = `${LA_PORTAL}/task-list`;
 export const LA_PORTAL_UPLOAD_YOUR_DOCUMENTS: PageLink = `${LA_PORTAL}/la-portal/upload-your-documents`;
 export const LA_PORTAL_CHILD_SEX_AT_BIRTH: PageLink = `${LA_PORTAL}/child/sex-at-birth`;
@@ -185,7 +186,7 @@ export const LA_PORTAL_BIRTH_MOTHER_FIND_ADDRESS: PageLink = `${LA_PORTAL}${BIRT
 export const LA_PORTAL_BIRTH_MOTHER_SELECT_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/address/select`;
 export const LA_PORTAL_BIRTH_MOTHER_MANUAL_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/address/manual`;
 export const LA_PORTAL_BIRTH_MOTHER_INTERNATIONAL_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/address/international`;
-export const LA_PORTAL_BIRTH_MOTER_LAST_ADDRESS_CONFIRMED: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/last-address-confirmed`;
+export const LA_PORTAL_BIRTH_MOTHER_LAST_ADDRESS_CONFIRMED: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/last-address-confirmed`;
 
 export const LA_PORTAL_BIRTH_FATHER_NAME_ON_CERTIFICATE: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/name-on-certificate`;
 export const LA_PORTAL_BIRTH_FATHER_IDENTITY_KNOWN: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/identity-known`;
@@ -223,4 +224,5 @@ export const LA_PORTAL_ACCESSIBILITY_STATEMENT: PageLink = `${LA_PORTAL}/accessi
 export const LA_PORTAL_TERMS_AND_CONDITIONS: PageLink = `${LA_PORTAL}/terms-and-conditions`;
 export const LA_PORTAL_CONTACT_US: PageLink = `${LA_PORTAL}/contact-us`;
 
+export const LA_PORTAL_CHECK_YOUR_ANSWERS: PageLink = `${LA_PORTAL}/check-your-answers`;
 export const LA_PORTAL_CONFIRMATION_PAGE: PageLink = `${LA_PORTAL}/confirmation`;
