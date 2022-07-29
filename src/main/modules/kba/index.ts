@@ -9,7 +9,7 @@ import {
   LA_PORTAL_KBA_CALLBACK,
   LA_PORTAL_KBA_CASE_REF,
   LA_PORTAL_NEG_SCENARIO,
-  LA_PORTAL_TASK_LIST,
+  LA_PORTAL_START_PAGE,
 } from '../../steps/urls';
 
 /**
@@ -25,7 +25,7 @@ export class KbaMiddleware {
         if (req.session.laPortalKba?.kbaCaseRef) {
           req.session.user = await getSystemUser();
           req.session.user.isSystemUser = true;
-          req.session.save(() => res.redirect(LA_PORTAL_TASK_LIST));
+          req.session.save(() => res.redirect(LA_PORTAL_START_PAGE));
         } else {
           res.redirect(LA_PORTAL_KBA_CASE_REF);
         }
@@ -51,8 +51,9 @@ export class KbaMiddleware {
             try {
               req.session.userCase = await req.locals.api.getCaseById(req.session.laPortalKba.kbaCaseRef!);
             } catch (err) {
-              req.session.destroy(() => res.redirect(LA_PORTAL_NEG_SCENARIO));
-              return;
+              req.session.destroy(() => {
+                throw err;
+              });
             }
           }
 

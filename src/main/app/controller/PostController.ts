@@ -24,7 +24,7 @@ import { AppRequest } from './AppRequest';
 
 @autobind
 export class PostController<T extends AnyObject> {
-  protected ALLOWED_RETURN_URLS: string[] = [CHECK_ANSWERS_URL];
+  protected ALLOWED_RETURN_URLS: string[] = [CHECK_ANSWERS_URL, LA_PORTAL_CHECK_YOUR_ANSWERS];
 
   constructor(protected readonly fields: FormFields | FormFieldsFn) {}
 

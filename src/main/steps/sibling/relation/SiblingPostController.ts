@@ -6,7 +6,12 @@ import { SiblingRelationships } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
-import { CHECK_ANSWERS_URL, SIBLING_ORDER_CHECK_YOUR_ANSWERS, SIBLING_ORDER_SUMMARY } from '../../urls';
+import {
+  CHECK_ANSWERS_URL,
+  LA_PORTAL_CHECK_YOUR_ANSWERS,
+  SIBLING_ORDER_CHECK_YOUR_ANSWERS,
+  SIBLING_ORDER_SUMMARY,
+} from '../../urls';
 
 @autobind
 export default class SiblingPostController extends PostController<AnyObject> {
@@ -14,6 +19,7 @@ export default class SiblingPostController extends PostController<AnyObject> {
     SIBLING_ORDER_SUMMARY,
     SIBLING_ORDER_CHECK_YOUR_ANSWERS,
     CHECK_ANSWERS_URL,
+    LA_PORTAL_CHECK_YOUR_ANSWERS,
   ];
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
