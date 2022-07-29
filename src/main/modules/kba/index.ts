@@ -44,8 +44,9 @@ export class KbaMiddleware {
             try {
               req.session.userCase = await req.locals.api.getCaseById(req.session.laPortalKba.kbaCaseRef!);
             } catch (err) {
-              req.session.destroy(() => res.redirect(LA_PORTAL_NEG_SCENARIO));
-              return;
+              req.session.destroy(() => {
+                throw err;
+              });
             }
           }
 
