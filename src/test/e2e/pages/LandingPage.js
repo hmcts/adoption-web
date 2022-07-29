@@ -47,7 +47,8 @@ module.exports = {
 
   async searchForCaseInLALandingPage(caseId) {
     await I.retry(3).click('Sign out');
-    await I.wait(5);
+    await I.wait(10);
+    await I.retry(3).waitForText('Sign in or create an account');
     console.log('User using the URL= ' + config.baseUrl + 'la-portal/kba-case-ref');
     await I.amOnPage(config.baseUrl + 'la-portal/kba-case-ref');
     await I.wait(5);
@@ -60,6 +61,10 @@ module.exports = {
     await I.retry(3).fillField(this.fields.childrenDateOfBirthYear, '2020');
     await I.retry(3).click('Save and continue');
     await I.wait(5);
+    await I.retry(3).see('Getting started');
+    await I.wait(2);
+    await I.retry(3).click('Start now');
+    await I.wait(3);
     await I.retry(3).see('Apply to adopt a child placed in your care');
   },
 };
