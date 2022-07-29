@@ -248,7 +248,9 @@ const cy: typeof en = (content: CommonContent) => {
 };
 
 export const form: FormContent = {
-  fields: {},
+  fields: {
+    todoVar: { type: 'hidden', hidden: true },
+  },
   submit: {
     text: l => l.continue,
   },

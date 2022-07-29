@@ -53,8 +53,8 @@ export const getCourtVenues = async (
     logger.error(
       `Error occurred while fetching court venues data from ${config.get(
         'services.location_api.url'
-      )} for ${serviceCode}`,
-      err
+      )} for ${serviceCode}`
+      // err
     );
     return [];
   }
