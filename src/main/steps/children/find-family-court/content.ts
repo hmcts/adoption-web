@@ -119,7 +119,6 @@ const languages = {
 
 export const generateContent: TranslationFn = content => {
   const translations = languages[content.language](content);
-  console.log('Family court data: ' + content.userCase?.familyCourtName);
   return {
     ...translations,
     form,

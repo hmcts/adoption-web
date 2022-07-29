@@ -27,7 +27,7 @@ module.exports = {
     await I.retry(3).click('Save and continue');
     await I.wait(4);
     await I.retry(3).see('Orders already in place');
-    await I.retry(3).see('Do you want to add another order?');
+    await I.retry(3).see('Does the child have any other previous or existing orders?');
     await I.retry(3).click(this.fields.addAnotherPlacementOrder);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
@@ -54,8 +54,8 @@ module.exports = {
     await I.retry(3).fillField(this.fields.placementOrderDateYear, childDetailsPlacementOrder.placementOrderDateYear);
     await I.retry(3).click('Save and continue');
     await I.retry(3).see('Orders already in place');
-    await I.retry(3).see('Adoption Order');
-    await I.retry(3).see('Do you want to add another order?');
+    await I.retry(3).see('Care Order');
+    await I.retry(3).see('Does the child have any other previous or existing orders?');
     await I.retry(3).click(this.fields.addAnotherPlacementOrderNo);
     await I.retry(3).click('Save and continue');
     await I.wait(3);

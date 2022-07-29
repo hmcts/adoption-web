@@ -1,4 +1,4 @@
-{% if laPortal !== true %}
+
 <article>
 
 <details class="govuk-details" data-module="govuk-details">
@@ -10,12 +10,12 @@
   <div class="govuk-details__text">
 
         <h2 class="govuk-heading-m">{{sendUsAMessage}}</h2>
-            <ul class="govuk-list">
+            <ul class="govuk-list govuk-list--bullet">
                 <li><a class="govuk-link" href="#">{{sendUsAMessageTBC}}</a></li>
                 <li>{{sendUsAMessageDetails}}</li>
             </ul>
         <h2 class="govuk-heading-m">{{telephone}}</h2>
-            <ul class="govuk-list">
+            <ul class="govuk-list govuk-list--bullet">
                 <li>{{TBC}}</li>
                 <li>{{telephoneDetails}}</li>
             </ul>
@@ -23,4 +23,3 @@
 </details>
 
 </article>
- {% endif %}

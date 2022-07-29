@@ -10,6 +10,7 @@ jest.mock('../../../app/form/validation');
 const enContent = {
   section: "The child's details",
   label: 'What is the serial or case number on the placement order?',
+  hint: 'This is on the top right of the order.',
   errors: {
     placementOrderNumber: {
       required: 'Enter the serial or case number',
@@ -20,6 +21,7 @@ const enContent = {
 const cyContent = {
   section: 'Manylion y plentyn',
   label: 'What is the serial or case number on the placement order?',
+  hint: 'This is on the top right of the order. (in welsh)',
   errors: {
     placementOrderNumber: {
       required: 'Nac ydwdwch y rhif cyfresol neu rif yr achos',

@@ -136,6 +136,8 @@ const isLaDetailsNotComplete = (userCase): boolean => {
     getBirthFatherDetailsStatus(userCase),
     getBirthMotherDetailsStatus(userCase),
     getChildrenBirthCertificateStatus(userCase),
+    getSiblingStatus(userCase),
+    getUploadDocumentStatus(userCase),
   ];
 
   return !!statusArr.find(item => item !== SectionStatus.COMPLETED);

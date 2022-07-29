@@ -249,7 +249,7 @@ const cy: typeof en = (content: CommonContent) => {
 
 export const form: FormContent = {
   fields: {
-    dateChildMovedIn: { type: 'hidden', hidden: true },
+    todoVar: { type: 'hidden', hidden: true },
   },
   submit: {
     text: l => l.continue,
