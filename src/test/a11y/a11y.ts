@@ -71,6 +71,7 @@ describe('Accessibility', () => {
     if (hasAfterAllRun) {
       return;
     }
+
     if (browser) {
       await browser.close();
     }
@@ -79,7 +80,9 @@ describe('Accessibility', () => {
     browser.on('disconnected', setup);
 
     // Login once only for other pages to reuse session
+
     const page = await browser.newPage();
+
     await page.goto(config.TEST_URL);
     await page.type('#username', process.env.CITIZEN_USERNAME);
     await page.type('#password', process.env.CITIZEN_PASSWORD);
@@ -95,48 +98,48 @@ describe('Accessibility', () => {
   });
 
   const IGNORED_URLS = [
-    urls.SIGN_IN_URL,
-    urls.SIGN_OUT_URL,
-    urls.CALLBACK_URL,
-    urls.SAVE_AND_SIGN_OUT,
-    urls.KEEP_ALIVE_URL,
-    urls.TIMED_OUT_URL,
-    urls.CSRF_TOKEN_ERROR_URL,
-    urls.RESPONDENT,
-    urls.APPLICATION_ENDED,
-    urls.APPLICANT_1,
-    urls.APPLICANT_2,
-    urls.CHILDREN,
-    urls.BIRTH_MOTHER,
-    urls.BIRTH_FATHER,
-    urls.OTHER_PARENT,
-    urls.SIBLING,
-    urls.RELATIONSHIP_DATE_URL,
-    urls.CHECK_JURISDICTION,
-    urls.WHERE_YOUR_LIVES_ARE_BASED_URL,
-    urls.JURISDICTION_INTERSTITIAL_URL,
-    urls.RESIDUAL_JURISDICTION,
-    urls.JURISDICTION_MAY_NOT_BE_ABLE_TO,
-    urls.JURISDICTION_CONNECTION_SUMMARY,
-    urls.YOUR_NAME,
-    urls.APPLY_FINANCIAL_ORDER,
-    urls.SENT_TO_APPLICANT2_FOR_REVIEW,
-    urls.PAY_AND_SUBMIT,
-    urls.NO_RESPONSE_YET,
-    urls.APPLICATION_SUBMITTED,
-    urls.SWITCH_TO_SOLE_APPLICATION,
-    urls.CONFIRM_JOINT_APPLICATION,
-    urls.HUB_PAGE,
-    urls.HOW_DO_YOU_WANT_TO_RESPOND,
-    urls.ELIGIBILITY_URL,
-    urls.INELIGIBLE_TO_ADOPT,
-    urls.REVIEW_PAY_SUBMIT,
-    urls.PAY_YOUR_FEE,
-    urls.PAYMENT_CALLBACK_URL,
-    urls.EQUALITY,
-    urls.DOCUMENT_MANAGER,
-    urls.LA_DOCUMENT_MANAGER,
-    urls.UPLOAD_YOUR_DOCUMENTS,
+    // urls.SIGN_IN_URL,
+    // urls.SIGN_OUT_URL,
+    // urls.CALLBACK_URL,
+    // urls.SAVE_AND_SIGN_OUT,
+    // urls.KEEP_ALIVE_URL,
+    // urls.TIMED_OUT_URL,
+    // urls.CSRF_TOKEN_ERROR_URL,
+    // urls.RESPONDENT,
+    // urls.APPLICATION_ENDED,
+    // urls.APPLICANT_1,
+    // urls.APPLICANT_2,
+    // urls.CHILDREN,
+    // urls.BIRTH_MOTHER,
+    // urls.BIRTH_FATHER,
+    // urls.OTHER_PARENT,
+    // urls.SIBLING,
+    // urls.RELATIONSHIP_DATE_URL,
+    // urls.CHECK_JURISDICTION,
+    // urls.WHERE_YOUR_LIVES_ARE_BASED_URL,
+    // urls.JURISDICTION_INTERSTITIAL_URL,
+    // urls.RESIDUAL_JURISDICTION,
+    // urls.JURISDICTION_MAY_NOT_BE_ABLE_TO,
+    // urls.JURISDICTION_CONNECTION_SUMMARY,
+    // urls.YOUR_NAME,
+    // urls.APPLY_FINANCIAL_ORDER,
+    // urls.SENT_TO_APPLICANT2_FOR_REVIEW,
+    // urls.PAY_AND_SUBMIT,
+    // urls.NO_RESPONSE_YET,
+    // urls.APPLICATION_SUBMITTED,
+    // urls.SWITCH_TO_SOLE_APPLICATION,
+    // urls.CONFIRM_JOINT_APPLICATION,
+    // urls.HUB_PAGE,
+    // urls.HOW_DO_YOU_WANT_TO_RESPOND,
+    // urls.ELIGIBILITY_URL,
+    // urls.INELIGIBLE_TO_ADOPT,
+    // urls.REVIEW_PAY_SUBMIT,
+    // urls.PAY_YOUR_FEE,
+    // urls.PAYMENT_CALLBACK_URL,
+    // urls.EQUALITY,
+    // urls.DOCUMENT_MANAGER,
+    // urls.LA_DOCUMENT_MANAGER,
+    // urls.UPLOAD_YOUR_DOCUMENTS,
     urls.LA_PORTAL,
     urls.LA_PORTAL_TASK_LIST,
     urls.LA_PORTAL_CHILD_NATIONALITY,
@@ -164,12 +167,13 @@ describe('Accessibility', () => {
     urls.CHILDREN_FIND_PLACEMENT_ORDER_COURT,
     urls.CHILDREN_FIND_FAMILY_COURT,
   ];
-  const urlsToTest = Object.values(urls).filter(url => !IGNORED_URLS.includes(url));
+  const urlsToTest = Object.values(urls).filter(url => IGNORED_URLS.includes(url));
 
   describe.each(urlsToTest)('Page %s', url => {
     let page;
 
     test(`Page ${url} should have no accessibility errors`, async () => {
+      console.log(url);
       page = await browser.newPage();
       await page.goto(config.TEST_URL);
       await page.setCookie(...cookies);
@@ -178,6 +182,7 @@ describe('Accessibility', () => {
 
       const result = await runPally(url, browser, page);
       const html = await htmlReporter.results(result);
+      console.log(result);
 
       const reportsDir = `${__dirname}/../../../output/pa11y${url.slice(0, url.lastIndexOf('/'))}`;
       fs.mkdirSync(reportsDir, { recursive: true });
