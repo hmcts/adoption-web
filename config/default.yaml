@@ -23,7 +23,7 @@ services:
   feeLookup:
     url: ''
   location_api:
-    url: 'http://rd-location-ref-api-aat.service.core-compute-aat.internal'
+    url: ''
   familyPublicLawCourt:
     code: 'ABA3'
   adoptionCourt:
