@@ -55,6 +55,11 @@ pactWith(
         body: CASES,
       };
 
+      const query = {
+        query: { match_all: {} },
+        sort: [{ id: { order: 'asc' } }],
+      };
+
       const getCasesRequest = {
         uponReceiving: 'a request to get cases',
         withRequest: {
@@ -67,6 +72,7 @@ pactWith(
             Accept: '*/*',
             'Content-Type': 'application/json',
           },
+          query: JSON.stringify(query),
         },
       };
 
