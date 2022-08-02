@@ -58,8 +58,8 @@ pactWith(
       const getCasesRequest = {
         uponReceiving: 'a request to get cases',
         withRequest: {
-          method: 'GET',
-          path: '/citizens/123456/jurisdictions/ADOPTION/case-types/A58/cases',
+          method: 'POST',
+          path: '/searchCases?ctid=A58',
           headers: {
             Authorization: 'Bearer mock-user-access-token',
             ServiceAuthorization: 'mock-service-auth-token',
