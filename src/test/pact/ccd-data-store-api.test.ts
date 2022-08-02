@@ -81,6 +81,8 @@ pactWith(
 
       it('returns all cases for a user', async () => {
         const cases = await caseApi.getCases();
+        console.log(cases, 'line 84');
+        console.log(CASES, 'line 85');
         expect(cases).toEqual(CASES);
       });
     });
@@ -125,11 +127,14 @@ pactWith(
           ...getCaseByIdRequest,
           willRespondWith: getCaseByIdSuccessResponse,
         };
+        console.log(provider.addInteraction(interaction), 'line 130');
         return provider.addInteraction(interaction);
       });
 
       it('returns case data by id', async () => {
         const caseResponse = await caseApi.getCaseById('45678');
+        console.log(caseResponse, 'line 136');
+        console.log(EXPECTED_CASE_DATA, 'line 137');
         expect(caseResponse).toEqual(EXPECTED_CASE_DATA);
       });
     });
@@ -219,6 +224,8 @@ pactWith(
 
       it('creates a new case and return case data in response', async () => {
         const caseResponse = await caseApi.createCase('adoption', userDetails);
+        console.log(caseResponse, 'line 136');
+        console.log(EXPECTED_CASE_DATA, 'line 137');
         expect(caseResponse).toEqual(EXPECTED_CASE_DATA);
       });
     });
@@ -265,6 +272,8 @@ pactWith(
 
       it('return case assigned user roles in response for given caseId and userId', async () => {
         const caseUserRoles = await caseApi.getCaseUserRoles('45678', userDetails.id);
+        console.log(caseUserRoles, 'line 136');
+        console.log(EXPECTED_CASE_USER_ROLES, 'line 137');
         expect(caseUserRoles).toEqual(EXPECTED_CASE_USER_ROLES);
       });
     });
@@ -362,6 +371,8 @@ pactWith(
           { applicant1FirstNames: 'Updated first name', applicant1LastNames: 'Updated last name' },
           'citizen-update-application'
         );
+        console.log(caseResponse, 'line 136');
+        console.log(EXPECTED_CASE_DATA, 'line 137');
         expect(caseResponse).toEqual(EXPECTED_CASE_DATA);
       });
     });
