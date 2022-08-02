@@ -12,6 +12,14 @@ export class DraftStoreClient {
     // const connectionString = `${protocol}${config.get('session.redis.key')}@${config.get(
     //   'services.draftStore.redis.host'
     // )}:${config.get('services.draftStore.redis.port')}`;
+    Logger.error(
+      'h: ' +
+        config.get('services.draftStore.redis.host') +
+        ' p: ' +
+        config.get('services.draftStore.redis.port') +
+        ' ' +
+        config.get('session.redis.key')
+    );
 
     const client = new Redis({
       host: config.get('services.draftStore.redis.host'),
@@ -21,7 +29,6 @@ export class DraftStoreClient {
         servername: config.get('services.draftStore.redis.host'),
       },
     });
-
     Logger.error('connection string');
 
     app.locals.draftStoreClient = client;
