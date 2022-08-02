@@ -28,7 +28,7 @@ pactWith(
       email: 'user@hmcts.net',
       givenName: 'Firstname',
       familyName: 'Surname',
-      roles: ['adoption-citizen-user'],
+      roles: ['citizen', 'adoption-citizen-user'],
     };
 
     beforeEach(() => {
@@ -36,6 +36,7 @@ pactWith(
       const logger: LoggerInstance = Logger.getLogger('server');
       when(config.get).calledWith('services.case.url').mockReturnValue(provider.mockService.baseUrl);
       caseApi = getCaseApi(userDetails, logger);
+      console.log(caseApi);
     });
 
     describe('ccd_data_store getCases API', () => {
