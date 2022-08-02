@@ -51,11 +51,12 @@ export class CaseApi {
         query: { match_all: {} },
         sort: [{ id: { order: 'asc' } }],
       };
+      console.log(this.axios, 'axios request line 54');
       const response = await this.axios.post<ES<CcdV1Response>>(
         `/searchCases?ctid=${CASE_TYPE}`,
         JSON.stringify(query)
       );
-      //this.logger.info('Case/s fetched using elastic search API :: ', response.data.cases);
+      this.logger.info('Case/s fetched using elastic search API :: ', response.data.cases);
       return response.data.cases;
     } catch (err) {
       this.logError(err);
