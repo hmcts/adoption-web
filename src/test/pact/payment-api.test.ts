@@ -1,4 +1,4 @@
-/* jest.mock('../../main/app/auth/service/get-service-auth-token', () => ({
+jest.mock('../../main/app/auth/service/get-service-auth-token', () => ({
   getServiceAuthToken: jest.fn(() => 'someServiceAuthorization'),
 }));
 
@@ -173,4 +173,3 @@ pactWith(
     });
   }
 );
- */

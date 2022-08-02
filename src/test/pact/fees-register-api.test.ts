@@ -1,4 +1,4 @@
-/* import config from 'config';
+import config from 'config';
 import { when } from 'jest-when';
 import type { LoggerInstance } from 'winston';
 
@@ -73,4 +73,3 @@ pactWith(
     });
   }
 );
- */
