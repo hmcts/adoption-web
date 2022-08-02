@@ -72,7 +72,7 @@ pactWith(
             Accept: '*/*',
             'Content-Type': 'application/json',
           },
-          query: JSON.stringify(query),
+          data: JSON.stringify(query),
         },
       };
 
