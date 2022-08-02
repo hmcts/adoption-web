@@ -11,6 +11,7 @@ module.exports = {
     childrenDateOfBirthDay: 'input[id$="kbaChildrenDateOfBirth-day"]',
     childrenDateOfBirthMonth: 'input[id$="kbaChildrenDateOfBirth-month"]',
     childrenDateOfBirthYear: 'input[id$="kbaChildrenDateOfBirth-year"]',
+    reviewAndSubmitButton: 'a[href$="/la-portal/check-your-answers"]',
   },
   async seeTheLandingPage() {
     await I.wait(2);
@@ -66,5 +67,10 @@ module.exports = {
     await I.retry(3).click('Start now');
     await I.wait(3);
     await I.retry(3).see('Apply to adopt a child placed in your care');
+  },
+
+  async VerifyReviewAndSubmit() {
+    await I.retry(3).seeElement('Review and submit');
+    await I.retry(3).seeElement(this.fields.reviewAndSubmitButton);
   },
 };

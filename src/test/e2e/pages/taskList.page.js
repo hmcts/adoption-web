@@ -29,7 +29,7 @@ module.exports = {
     adoptionAgencyLink: 'a[id$="adoption-agency"]',
     adoptionAgencyDetailsStatus: 'strong[id$="adoption-agency-status"]',
     childrenPlacementOrderLink: 'a[id$="placement-and-court-order-details"]',
-    childrenSiblingLink: 'a[href$="id$="sibling-court-order-details"]',
+    childrenSiblingLink: 'a[id$="sibling-court-order-details"]',
     childrenSiblingDetailsStatus: 'strong[id$="sibling-status"]',
     reviewPayAndSubmitLink: 'a[id="review-pay-and-submit"]',
     dateChildMovedInLink: 'a[id$="date-child-moved-in"]',
@@ -68,11 +68,11 @@ module.exports = {
     await I.wait(4);
   },
 
-  async selectFirstApplicantPersonalDetails() {
-    await I.retry(3).waitForSelector(this.primaryApplicant.contactDetailsLink, 30);
-    await I.retry(3).click(this.primaryApplicant.contactDetailsLink);
-    await I.wait(4);
-  },
+  // async selectFirstApplicantPersonalDetails() {
+  //   await I.retry(3).waitForSelector(this.primaryApplicant.contactDetailsLink, 30);
+  //   await I.retry(3).click(this.primaryApplicant.contactDetailsLink);
+  //   await I.wait(4);
+  // },
 
   async selectChildrenBirthCertificate() {
     await I.retry(3).waitForSelector(this.childDetails.childrenBirthCertificateLink, 30);
