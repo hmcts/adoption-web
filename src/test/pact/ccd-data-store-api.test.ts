@@ -4,15 +4,20 @@ jest.mock('../../main/app/auth/service/get-service-auth-token', () => ({
   getServiceAuthToken: jest.fn(() => 'mock-service-auth-token'),
 }));
 
+import axios from 'axios';
 import config from 'config';
 import { when } from 'jest-when';
 import type { LoggerInstance } from 'winston';
 
-import { getCaseApi } from '../../main/app/case/CaseApi';
+import {
+  CaseApi,
+  // getCaseApi
+} from '../../main/app/case/CaseApi';
 
 const { pactWith } = require('jest-pact');
 
 config.get = jest.fn();
+jest.mock('axios');
 
 pactWith(
   {
@@ -34,9 +39,13 @@ pactWith(
     beforeEach(() => {
       const { Logger } = require('@hmcts/nodejs-logging');
       const logger: LoggerInstance = Logger.getLogger('server');
+
+      const mockedAxios = axios as jest.Mocked<typeof axios>;
+
       when(config.get).calledWith('services.case.url').mockReturnValue(provider.mockService.baseUrl);
-      caseApi = getCaseApi(userDetails, logger);
-      console.log(caseApi);
+      // caseApi = getCaseApi(userDetails, logger);
+      caseApi = new CaseApi(mockedAxios, logger);
+      console.log(caseApi, 'line 39');
     });
 
     describe('ccd_data_store getCases API', () => {
