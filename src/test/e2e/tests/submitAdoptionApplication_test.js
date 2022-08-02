@@ -106,7 +106,7 @@ Scenario(
     // TODO bug Created for this change
     await taskListPage.selectSiblingDetails();
     await childSiblingDetailsPage.childDetailsSiblingSection();
-    await taskListPage.verifySiblingDetailsStatus();
+    //await taskListPage.verifySiblingDetailsStatus();
 
     await taskListPage.selectUploadDocumentsDetails();
     await uploadDocumentsDetailsPage.uploadDocumentsSection();
