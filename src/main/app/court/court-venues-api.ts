@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import config from 'config';
-import { LoggerInstance } from 'winston';
+import Logger, { LoggerInstance } from 'winston';
 
 import { AppRequest, UserDetails } from '../../app/controller/AppRequest';
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
@@ -28,6 +28,8 @@ export const getCourtVenues = async (
   userDetails: UserDetails,
   logger: LoggerInstance
 ): Promise<CourtVenue[]> => {
+  Logger.error('services.location_api.url: ' + config.get('services.location_api.url'));
+
   try {
     const response: AxiosResponse<LocationResponse> = await axios.get(
       `${config.get('services.location_api.url')}/refdata/location/court-venues/services`,

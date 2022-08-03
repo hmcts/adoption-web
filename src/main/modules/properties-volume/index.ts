@@ -57,6 +57,7 @@ export class PropertiesVolume {
     set(config, 'services.documentManagement.url', endpoints.dmStore);
     set(config, 'services.feeLookup.url', endpoints.feeRegister);
     set(config, 'services.payments.url', endpoints.payments);
+    set(config, 'services.location_api.url', endpoints.location_api);
     set(config, 'services.equalityAndDiversity.url', endpoints.pcq);
     set(config, 'services.cdam.url', endpoints.cdam);
   }
