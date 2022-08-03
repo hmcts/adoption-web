@@ -63,7 +63,9 @@ pactWith(
         headers: {
           'Content-Type': 'application/json',
         },
-        body: CASES,
+        body: {
+          cases: CASES,
+        },
       };
 
       const query = {
@@ -83,7 +85,7 @@ pactWith(
             Accept: '*/*',
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(query),
+          body: query,
         },
       };
 
@@ -144,7 +146,7 @@ pactWith(
           ...getCaseByIdRequest,
           willRespondWith: getCaseByIdSuccessResponse,
         };
-        console.log(provider.addInteraction(interaction), 'line 130');
+        console.log(provider, 'line 130');
         return provider.addInteraction(interaction);
       });
 
