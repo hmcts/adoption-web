@@ -33,7 +33,7 @@ pactWith(
       email: 'user@hmcts.net',
       givenName: 'Firstname',
       familyName: 'Surname',
-      roles: ['citizen', 'adoption-citizen-user'],
+      roles: ['adoption-citizen-user'],
     };
 
     beforeEach(() => {
@@ -43,6 +43,7 @@ pactWith(
       const mockedAxios = axios as jest.Mocked<typeof axios>;
 
       when(config.get).calledWith('services.case.url').mockReturnValue(provider.mockService.baseUrl);
+      console.log(provider.mockService.baseUrl, 'line 46');
       // caseApi = getCaseApi(userDetails, logger);
       caseApi = new CaseApi(mockedAxios, logger);
       console.log(caseApi, 'line 39');
