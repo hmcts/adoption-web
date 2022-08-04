@@ -35,13 +35,11 @@ pactWith(
     };
 
     beforeEach(() => {
-      when(config.get)
-        .calledWith('services.location_api.url')
-        .mockReturnValue(`${provider.mockService.baseUrl}`)
-        .calledWith('services.adoptionCourt.code')
-        .mockReturnValue('services.adoptionCourt.code')
-        .calledWith('services.familyPublicLawCourt.code')
-        .mockReturnValue('services.familyPublicLawCourt.code');
+      when(config.get).calledWith('services.location_api.url').mockReturnValue(`${provider.mockService.baseUrl}`);
+      // .calledWith('services.adoptionCourt.code')
+      // .mockReturnValue('services.adoptionCourt.code')
+      // .calledWith('services.familyPublicLawCourt.code')
+      // .mockReturnValue('services.familyPublicLawCourt.code');
     });
 
     describe('court-venue getCourtVenues API', () => {
