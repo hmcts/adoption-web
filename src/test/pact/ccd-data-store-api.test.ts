@@ -85,7 +85,7 @@ pactWith(
             Accept: '*/*',
             'Content-Type': 'application/json',
           },
-          body: query,
+          params: query,
         },
       };
 
