@@ -35,7 +35,13 @@ pactWith(
     };
 
     beforeEach(() => {
-      when(config.get).calledWith('services.location_api.url').mockReturnValue(`${provider.mockService.baseUrl}`);
+      when(config.get)
+        .calledWith('services.location_api.url')
+        .mockReturnValue(`${provider.mockService.baseUrl}`)
+        .calledWith('services.adoptionCourt.code')
+        .mockReturnValue('adoptionCourt')
+        .calledWith('services.familyPublicLawCourt.code')
+        .mockReturnValue('familyPublicLawCourt');
     });
 
     describe('court-venue getCourtVenues API', () => {
