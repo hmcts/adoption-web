@@ -101,7 +101,7 @@ pactWith(
             'Content-Type': 'application/json',
           },
           query: {
-            service_code: 'services.familyPublicLawCourt.code',
+            service_code: 'ABA3',
           },
         },
       };
@@ -210,7 +210,7 @@ pactWith(
             'Content-Type': 'application/json',
           },
           query: {
-            service_code: 'services.adoptionCourt.code',
+            service_code: 'ABA4',
           },
         },
       };
