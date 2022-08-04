@@ -39,9 +39,9 @@ pactWith(
         .calledWith('services.location_api.url')
         .mockReturnValue(`${provider.mockService.baseUrl}`)
         .calledWith('services.adoptionCourt.code')
-        .mockReturnValue('services.adoptionCourt.code')
+        .mockReturnValue('ABA4')
         .calledWith('services.familyPublicLawCourt.code')
-        .mockReturnValue('services.familyPublicLawCourt.code');
+        .mockReturnValue('ABA3');
     });
 
     describe('PL court-venue getCourtVenues API', () => {
