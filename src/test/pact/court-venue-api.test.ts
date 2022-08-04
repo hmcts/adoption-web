@@ -71,7 +71,7 @@ pactWith(
             Accept: '*/*',
             'Content-Type': 'application/json',
           },
-          params: {
+          query: {
             service_code: 'services.adoptionCourt.code',
           },
         },
@@ -96,7 +96,7 @@ pactWith(
             Accept: '*/*',
             'Content-Type': 'application/json',
           },
-          params: {
+          query: {
             service_code: 'services.familyPublicLawCourt.code',
           },
         },
