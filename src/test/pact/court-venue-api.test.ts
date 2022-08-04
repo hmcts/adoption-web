@@ -35,11 +35,13 @@ pactWith(
     };
 
     beforeEach(() => {
-      when(config.get).calledWith('services.location_api.url').mockReturnValue(`${provider.mockService.baseUrl}`);
-      // .calledWith('services.adoptionCourt.code')
-      // .mockReturnValue('services.adoptionCourt.code')
-      // .calledWith('services.familyPublicLawCourt.code')
-      // .mockReturnValue('services.familyPublicLawCourt.code');
+      when(config.get)
+        .calledWith('services.location_api.url')
+        .mockReturnValue(`${provider.mockService.baseUrl}`)
+        .calledWith('services.adoptionCourt.code')
+        .mockReturnValue('services.adoptionCourt.code')
+        .calledWith('services.familyPublicLawCourt.code')
+        .mockReturnValue('services.familyPublicLawCourt.code');
     });
 
     describe('court-venue getCourtVenues API', () => {
@@ -129,6 +131,16 @@ pactWith(
         provider.addInteraction(interaction2);
       });
 
+      it('returns correct venue list for Adoption', async () => {
+        const { Logger } = require('@hmcts/nodejs-logging');
+        const logger: LoggerInstance = Logger.getLogger('server');
+
+        const addresses = await getCourtVenues(`${config.get('services.adoptionCourt.code')}`, userDetails, logger);
+        console.log(addresses, 'line 138');
+        console.log(EXPECTED_VENUES, 'line 139');
+        expect(addresses).toEqual(EXPECTED_VENUES);
+      });
+
       it('returns correct venue list for Public Law', async () => {
         const { Logger } = require('@hmcts/nodejs-logging');
         const logger: LoggerInstance = Logger.getLogger('server');
@@ -140,16 +152,6 @@ pactWith(
         );
         console.log(addresses, 'line 148');
         console.log(EXPECTED_VENUES, 'line 149');
-        expect(addresses).toEqual(EXPECTED_VENUES);
-      });
-
-      it('returns correct venue list for Adoption', async () => {
-        const { Logger } = require('@hmcts/nodejs-logging');
-        const logger: LoggerInstance = Logger.getLogger('server');
-
-        const addresses = await getCourtVenues(`${config.get('services.adoptionCourt.code')}`, userDetails, logger);
-        console.log(addresses, 'line 138');
-        console.log(EXPECTED_VENUES, 'line 139');
         expect(addresses).toEqual(EXPECTED_VENUES);
       });
 
