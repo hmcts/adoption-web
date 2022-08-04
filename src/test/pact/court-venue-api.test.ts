@@ -35,7 +35,9 @@ pactWith(
     };
 
     beforeEach(() => {
-      when(config.get).calledWith('services.location_api.url').mockReturnValue(`${provider.mockService.baseUrl}`);
+      when(config.get)
+        .calledWith('services.location_api.url')
+        .mockReturnValue(`${provider.mockService.baseUrl}/refdata/location/court-venues/services`);
     });
 
     describe('court-venue getCourtVenues API', () => {
