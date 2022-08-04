@@ -1,5 +1,3 @@
-jest.useRealTimers();
-
 jest.mock('../../main/app/auth/service/get-service-auth-token', () => ({
   getServiceAuthToken: jest.fn(() => 'mock-service-auth-token'),
 }));
@@ -11,7 +9,7 @@ import type { LoggerInstance } from 'winston';
 // import { AppRequest, UserDetails } from '../../main/app/controller/AppRequest';
 // import { getServiceAuthToken } from '../../main/app/auth/service/get-service-auth-token';
 import { getCourtVenues } from '../../main/app/court/court-venues-api';
-// import { mockRequest } from '../unit/utils/mockRequest';
+import { mockRequest } from '../unit/utils/mockRequest';
 
 // import { CourtVenue, LocationResponse } from '../../main/app/court/location';
 
@@ -45,16 +43,7 @@ pactWith(
     });
 
     describe('PL court-venue getCourtVenues API', () => {
-      const EXPECTED_VENUES = [
-        {
-          fullAddress: 'BUCKINGHAM PALACE, LONDON, SW1A 1AA',
-          street1: 'BUCKINGHAM PALACE',
-          street2: '',
-          town: 'LONDON',
-          county: 'CITY OF WESTMINSTER',
-          postcode: 'SW1A 1AA',
-        },
-      ];
+      const EXPECTED_VENUES = [];
 
       // const courtVenueAdoptSuccessResponse = {
       //   status: 200,
@@ -86,7 +75,7 @@ pactWith(
         headers: {
           'Content-Type': 'application/json',
         },
-        body: { court_venues: {} },
+        body: { court_venues: [] },
       };
 
       const courtVenuePLRequest = {
@@ -132,13 +121,21 @@ pactWith(
       });
 
       it('returns correct venue list for Adoption', async () => {
-        const { Logger } = require('@hmcts/nodejs-logging');
-        const logger: LoggerInstance = Logger.getLogger('server');
+        // const { Logger } = require('@hmcts/nodejs-logging');
+        // const logger: LoggerInstance = Logger.getLogger('server');
+
+        const req = mockRequest({
+          session: {
+            lang: 'en',
+            user: userDetails,
+          },
+          // locals: logger
+        });
 
         const addresses = await getCourtVenues(
           `${config.get('services.familyPublicLawCourt.code')}`,
-          userDetails,
-          logger
+          req.session.user,
+          req.locals.logger
         );
         console.log(addresses, 'line 138');
         console.log(EXPECTED_VENUES, 'line 139');
@@ -179,23 +176,14 @@ pactWith(
     });
 
     describe('Adopt court-venue getCourtVenues API', () => {
-      const EXPECTED_VENUES = [
-        {
-          fullAddress: 'BUCKINGHAM PALACE, LONDON, SW1A 1AA',
-          street1: 'BUCKINGHAM PALACE',
-          street2: '',
-          town: 'LONDON',
-          county: 'CITY OF WESTMINSTER',
-          postcode: 'SW1A 1AA',
-        },
-      ];
+      const EXPECTED_VENUES = [];
 
       const courtVenueAdoptSuccessResponse = {
         status: 200,
         headers: {
           'Content-Type': 'application/json',
         },
-        body: { court_venues: {} },
+        body: { court_venues: [] },
       };
 
       const courtVenueAdoptRequest = {
