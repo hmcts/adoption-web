@@ -47,7 +47,7 @@ export const getCourtVenues = async (
     if (!response.data?.court_venues) {
       return [];
     }
-
+    console.log(JSON.stringify(response.data));
     return response.data.court_venues;
   } catch (err) {
     logger.error(
