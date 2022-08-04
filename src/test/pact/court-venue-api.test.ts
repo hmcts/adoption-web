@@ -135,7 +135,11 @@ pactWith(
         const { Logger } = require('@hmcts/nodejs-logging');
         const logger: LoggerInstance = Logger.getLogger('server');
 
-        const addresses = await getCourtVenues(`${config.get('services.adoptionCourt.code')}`, userDetails, logger);
+        const addresses = await getCourtVenues(
+          `${config.get('services.familyPublicLawCourt.code')}`,
+          userDetails,
+          logger
+        );
         console.log(addresses, 'line 138');
         console.log(EXPECTED_VENUES, 'line 139');
         expect(addresses).toEqual(EXPECTED_VENUES);
@@ -225,11 +229,7 @@ pactWith(
         const { Logger } = require('@hmcts/nodejs-logging');
         const logger: LoggerInstance = Logger.getLogger('server');
 
-        const addresses = await getCourtVenues(
-          `${config.get('services.familyPublicLawCourt.code')}`,
-          userDetails,
-          logger
-        );
+        const addresses = await getCourtVenues(`${config.get('services.adoptionCourt.code')}`, userDetails, logger);
         console.log(addresses, 'line 148');
         console.log(EXPECTED_VENUES, 'line 149');
         expect(addresses).toEqual(EXPECTED_VENUES);
