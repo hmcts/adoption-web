@@ -3,6 +3,7 @@ import { AppRequest } from '../../app/controller/AppRequest';
 
 export const getDraftCaseFromStore = async (req: AppRequest, caseRef: string): Promise<CaseWithId> => {
   const dataFromRedis = await req.app.locals.draftStoreClient.get(caseRef);
+  console.log('--------dataFromRedis-------' + JSON.stringify(dataFromRedis));
   let returnData;
   if (dataFromRedis) {
     try {

@@ -24,6 +24,8 @@ export class KbaMiddleware {
       errorHandler(async (req: AppRequest, res) => {
         if (req.session.laPortalKba?.kbaCaseRef) {
           req.session.user = await getSystemUser();
+          console.log('System User');
+
           req.session.user.isSystemUser = true;
           req.session.save(() => res.redirect(LA_PORTAL_START_PAGE));
         } else {
@@ -38,11 +40,17 @@ export class KbaMiddleware {
           return next();
         }
         res.locals.laPortal = true;
+        console.log('Inside Use Method');
+
         if (req.session?.user) {
           res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
-          const currentUserCaseData = req.session.userCase;
+          const currentUserCaseData = await req.locals.api.getCaseById(req.session.laPortalKba.kbaCaseRef!);
+          console.log('--------currentUserCaseData-------' + JSON.stringify(currentUserCaseData));
           const draftStoreUserCaseData = await getDraftCaseFromStore(req, req.session.laPortalKba.kbaCaseRef || '');
+
+          console.log('--------draftStoreUserCaseData-------' + JSON.stringify(draftStoreUserCaseData));
+
           if (draftStoreUserCaseData) {
             req.session.userCase = { ...(currentUserCaseData || {}), ...draftStoreUserCaseData };
           }
