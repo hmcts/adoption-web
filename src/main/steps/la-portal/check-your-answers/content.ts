@@ -232,6 +232,8 @@ const cyContent: typeof enContent = {
 
 const cy: typeof en = (content: CommonContent) => {
   const userCase = content.userCase!;
+  console.log('test');
+
   return {
     ...cyContent,
     language: content.language,
