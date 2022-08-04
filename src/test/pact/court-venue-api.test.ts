@@ -86,7 +86,7 @@ pactWith(
         headers: {
           'Content-Type': 'application/json',
         },
-        // body: { results: validPostcode200Response.results },
+        body: { court_venues: {} },
       };
 
       const courtVenuePLRequest = {
@@ -195,7 +195,7 @@ pactWith(
         headers: {
           'Content-Type': 'application/json',
         },
-        // body: { results: validPostcode200Response.results },
+        body: { court_venues: {} },
       };
 
       const courtVenueAdoptRequest = {
