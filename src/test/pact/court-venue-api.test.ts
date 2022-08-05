@@ -17,7 +17,7 @@ import config from 'config';
 import { when } from 'jest-when';
 // import type { LoggerInstance } from 'winston';
 
-import { getCourtVenues } from '../../main/app/court/court-venues-api';
+import { getCourtList, getCourtVenues } from '../../main/app/court/court-venues-api';
 import { mockRequest } from '../unit/utils/mockRequest';
 
 const { pactWith } = require('jest-pact');
@@ -243,11 +243,7 @@ pactWith(
           },
         });
 
-        const addresses = await getCourtVenues(
-          `${config.get('services.adoptionCourt.code')}`,
-          req.session.user,
-          req.locals.logger
-        );
+        const addresses = await getCourtList(req);
         console.log(addresses, 'line 208');
         console.log(EXPECTED_VENUES, 'line 209');
         expect(addresses).toEqual(EXPECTED_VENUES);

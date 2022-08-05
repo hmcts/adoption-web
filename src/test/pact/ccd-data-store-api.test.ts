@@ -64,11 +64,11 @@ pactWith(
 
     describe('ccd_data_store getCases API', () => {
       const CASES = [
-        {
-          id: '267491aa-b696-4235-83a6-3b9253709798',
-          state: 'Draft',
-          case_data: { applyingWith: 'alone' },
-        },
+        // {
+        //   id: '267491aa-b696-4235-83a6-3b9253709798',
+        //   state: 'Draft',
+        //   case_data: { applyingWith: 'alone' },
+        // },
       ];
 
       const getCasesSuccessResponse = {
