@@ -2,6 +2,17 @@ jest.mock('../../main/app/auth/service/get-service-auth-token', () => ({
   getServiceAuthToken: jest.fn(() => 'mock-service-auth-token'),
 }));
 
+const jwtDecodeMock = jest.fn().mockReturnValue({
+  sub: 'user@hmcts.net',
+  family_name: 'Surname',
+  given_name: 'Firstname',
+  uid: '267491aa-b696-4235-83a6-3b9253709798',
+});
+jest.mock('jwt-decode', () => ({
+  __esModule: true,
+  default: jwtDecodeMock,
+}));
+
 import config from 'config';
 import { when } from 'jest-when';
 // import type { LoggerInstance } from 'winston';
@@ -20,8 +31,8 @@ pactWith(
   },
   provider => {
     const userDetails = {
-      accessToken: 'mock-user-access-token',
-      id: '123456',
+      accessToken: 'eyJ0eXAiOiJKV1QiLCJraWQiOiJiL082T3ZWdjEre',
+      id: '267491aa-b696-4235-83a6-3b9253709798',
       email: 'user@hmcts.net',
       givenName: 'Firstname',
       familyName: 'Surname',
@@ -55,7 +66,7 @@ pactWith(
           method: 'GET',
           path: '/refdata/location/court-venues/services',
           headers: {
-            Authorization: 'Bearer mock-user-access-token',
+            Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJiL082T3ZWdjEre',
             ServiceAuthorization: 'mock-service-auth-token',
             Accept: '*/*',
             'Content-Type': 'application/json',
@@ -113,7 +124,7 @@ pactWith(
           method: 'GET',
           path: '/refdata/location/court-venues/services',
           headers: {
-            Authorization: 'Bearer mock-user-access-token',
+            Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJiL082T3ZWdjEre',
             ServiceAuthorization: 'mock-service-auth-token',
             Accept: '*/*',
             'Content-Type': 'application/json',
@@ -170,7 +181,7 @@ pactWith(
           method: 'GET',
           path: '/refdata/location/court-venues/services',
           headers: {
-            Authorization: 'Bearer mock-user-access-token',
+            Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJiL082T3ZWdjEre',
             ServiceAuthorization: 'mock-service-auth-token',
             Accept: '*/*',
             'Content-Type': 'application/json',
@@ -181,7 +192,40 @@ pactWith(
         },
       };
 
+      const courtVenuePLSuccessResponse = {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: { court_venues: [] },
+      };
+
+      const courtVenuePLRequest = {
+        uponReceiving: 'a request for court venue list',
+        withRequest: {
+          method: 'GET',
+          path: '/refdata/location/court-venues/services',
+          headers: {
+            Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJiL082T3ZWdjEre',
+            ServiceAuthorization: 'mock-service-auth-token',
+            Accept: '*/*',
+            'Content-Type': 'application/json',
+          },
+          query: {
+            service_code: 'ABA3',
+          },
+        },
+      };
+
       beforeEach(() => {
+        const interaction = {
+          state: 'Public Law Court Venues exist for the service code provided',
+          ...courtVenuePLRequest,
+          willRespondWith: courtVenuePLSuccessResponse,
+        };
+
+        provider.addInteraction(interaction);
+
         const interaction2 = {
           state: 'Adoption Court Venues exist for the service code provided',
           ...courtVenueAdoptRequest,

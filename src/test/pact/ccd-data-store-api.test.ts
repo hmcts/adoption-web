@@ -65,7 +65,7 @@ pactWith(
     describe('ccd_data_store getCases API', () => {
       const CASES = [
         {
-          id: '45678',
+          id: '267491aa-b696-4235-83a6-3b9253709798',
           state: 'Draft',
           case_data: { applyingWith: 'alone' },
         },
@@ -94,7 +94,7 @@ pactWith(
           method: 'POST',
           path: '/searchCases?ctid=A58',
           headers: {
-            Authorization: 'Bearer mock-user-access-token',
+            Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJiL082T3ZWdjEre',
             ServiceAuthorization: 'mock-service-auth-token',
             experimental: 'true',
             Accept: '*/*',
@@ -146,7 +146,7 @@ pactWith(
           method: 'GET',
           path: '/cases/45678',
           headers: {
-            Authorization: 'Bearer mock-user-access-token',
+            Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJiL082T3ZWdjEre',
             ServiceAuthorization: 'mock-service-auth-token',
             experimental: 'true',
             Accept: '*/*',
@@ -195,7 +195,7 @@ pactWith(
           method: 'GET',
           path: '/case-types/A58/event-triggers/citizen-create-application',
           headers: {
-            Authorization: 'Bearer mock-user-access-token',
+            Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJiL082T3ZWdjEre',
             ServiceAuthorization: 'mock-service-auth-token',
             experimental: 'true',
             Accept: '*/*',
@@ -222,7 +222,7 @@ pactWith(
           method: 'POST',
           path: '/case-types/A58/cases',
           headers: {
-            Authorization: 'Bearer mock-user-access-token',
+            Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJiL082T3ZWdjEre',
             ServiceAuthorization: 'mock-service-auth-token',
             experimental: 'true',
             Accept: '*/*',
@@ -266,7 +266,7 @@ pactWith(
 
     describe('ccd_data_store case-users API', () => {
       const EXPECTED_CASE_USER_ROLES = {
-        case_users: [{ case_id: '45678', user_id: '123456', case_role: 'citizen' }],
+        case_users: [{ case_id: '45678', user_id: '267491aa-b696-4235-83a6-3b9253709798', case_role: 'citizen' }],
       };
 
       const getCaseUserRolesResponse = {
@@ -275,7 +275,7 @@ pactWith(
           'Content-Type': 'application/json',
         },
         body: {
-          case_users: [{ case_id: '45678', user_id: '123456', case_role: 'citizen' }],
+          case_users: [{ case_id: '45678', user_id: '267491aa-b696-4235-83a6-3b9253709798', case_role: 'citizen' }],
         },
       };
 
@@ -285,13 +285,13 @@ pactWith(
           method: 'GET',
           path: '/case-users',
           headers: {
-            Authorization: 'Bearer mock-user-access-token',
+            Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJiL082T3ZWdjEre',
             ServiceAuthorization: 'mock-service-auth-token',
             experimental: 'true',
             Accept: '*/*',
             'Content-Type': 'application/json',
           },
-          query: 'case_ids=45678&user_ids=123456',
+          query: 'case_ids=45678&user_ids=267491aa-b696-4235-83a6-3b9253709798',
         },
       };
 
