@@ -4,15 +4,26 @@ jest.mock('../../main/app/auth/service/get-service-auth-token', () => ({
   getServiceAuthToken: jest.fn(() => 'mock-service-auth-token'),
 }));
 
+const jwtDecodeMock = jest.fn().mockReturnValue({
+  sub: 'user@hmcts.net',
+  family_name: 'Surname',
+  given_name: 'Firstname',
+  uid: '267491aa-b696-4235-83a6-3b9253709798',
+});
+jest.mock('jwt-decode', () => ({
+  __esModule: true,
+  default: jwtDecodeMock,
+}));
+
 // import axios from 'axios';
 import config from 'config';
 import { when } from 'jest-when';
-import type { LoggerInstance } from 'winston';
 
 import {
   // CaseApi,
   getCaseApi,
 } from '../../main/app/case/CaseApi';
+import { mockRequest } from '../unit/utils/mockRequest';
 
 const { pactWith } = require('jest-pact');
 
@@ -28,8 +39,8 @@ pactWith(
   provider => {
     let caseApi;
     const userDetails = {
-      accessToken: 'mock-user-access-token',
-      id: '123456',
+      accessToken: 'eyJ0eXAiOiJKV1QiLCJraWQiOiJiL082T3ZWdjEre',
+      id: '267491aa-b696-4235-83a6-3b9253709798',
       email: 'user@hmcts.net',
       givenName: 'Firstname',
       familyName: 'Surname',
@@ -37,14 +48,16 @@ pactWith(
     };
 
     beforeEach(() => {
-      const { Logger } = require('@hmcts/nodejs-logging');
-      const logger: LoggerInstance = Logger.getLogger('server');
-
-      // const mockedAxios = axios as jest.Mocked<typeof axios>;
+      const req = mockRequest({
+        session: {
+          lang: 'en',
+          user: userDetails,
+        },
+      });
 
       when(config.get).calledWith('services.case.url').mockReturnValue(provider.mockService.baseUrl);
       console.log(provider.mockService.baseUrl, 'line 46');
-      caseApi = getCaseApi(userDetails, logger);
+      caseApi = getCaseApi(req.session.user, req.locals.logger);
       // caseApi = new CaseApi(mockedAxios, logger);
       // console.log(caseApi, 'line 39');
     });
@@ -65,6 +78,8 @@ pactWith(
         },
         body: {
           cases: CASES,
+          total: 0,
+          case_types_results: [],
         },
       };
 
