@@ -26,6 +26,7 @@ export class DocumentManagerController {
   }
 
   public async post(req: AppRequest, res: Response, documentInput?: DocumentInput): Promise<void> {
+    console.log('------Inside post------');
     if (![State.Draft].includes(req.session.userCase.state) && (!documentInput || !documentInput.skipDraftCheck)) {
       throw new Error('Cannot upload new documents as case is not in Draft state');
     }
@@ -120,6 +121,8 @@ export class DocumentManagerController {
   }
 
   public async postLa(req: AppRequest, res: Response): Promise<void> {
+    console.log('------Inside postLa------');
+
     const documentInput = {
       documentsUploadedKey: 'laDocumentsUploaded',
       documentComment: 'Uploaded by LA',

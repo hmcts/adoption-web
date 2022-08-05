@@ -16,6 +16,8 @@ import '@uppy/progress-bar/src/style.scss';
 
 const initUploadManager = (): void => {
   const isLaPortal = location.href.includes('la-portal');
+  console.log('--------isLaPortal------' + isLaPortal);
+
   const url = isLaPortal ? LA_DOCUMENT_MANAGER : DOCUMENT_MANAGER;
   const csrfToken = (getById('csrfToken') as HTMLInputElement)?.value;
   const locale = (getById('locale') as HTMLInputElement)?.value;
