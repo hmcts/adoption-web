@@ -17,6 +17,7 @@ const getNextStepUrlMock = jest.spyOn(steps, 'getNextStepUrl');
 jest.mock('config');
 const mockedConfig = config as jest.Mocked<typeof config>;
 mockedConfig.get.mockReturnValue(true);
+
 const expectedUserCaseRedis = {
   id: '1234',
   state: State.Draft,
@@ -246,6 +247,16 @@ describe('PostController', () => {
     const controller = new PostController(mockFormContent.fields);
 
     const req = mockRequest({ body });
+    req.app.locals.draftStoreClient = {
+      set: null,
+      del: null,
+    };
+    req.app.locals.draftStoreClient.set = (a, b) => {
+      console.log(a, b);
+    };
+    req.app.locals.draftStoreClient.del = a => {
+      console.log(a);
+    };
     req.session.userCase.applicationType = ApplicationType.SOLE_APPLICATION;
     const res = mockResponse();
     await controller.post(req, res);
