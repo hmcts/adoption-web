@@ -454,6 +454,9 @@ const formatDocument = (userCase: Partial<CaseWithId>) => {
   if ((userCase.laUploadedFiles as unknown as string) !== '[]') {
     const documentFileNames = userCase.laUploadedFiles?.map(item => item.name);
     return documentFileNames?.join('<br>');
+  } else {
+    const documentFileNames = [];
+    return documentFileNames?.join('<br>');
   }
 };
 

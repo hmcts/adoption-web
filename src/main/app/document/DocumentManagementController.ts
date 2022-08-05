@@ -148,9 +148,9 @@ export class DocumentManagerController {
       req.session.userCase['applicant1LanguagePreference'] === LanguagePreference.WELSH ? 'Cy' : 'En';
     const documentsGenerated =
       (req.session.userCase[documentsGeneratedKey] as ListValue<Partial<AdoptionDocument> | null>[]) ?? [];
-    if (![State.Submitted].includes(req.session.userCase.state)) {
+    /* if (![State.Submitted].includes(req.session.userCase.state)) {
       throw new Error('Cannot display document as the application is not in submitted state');
-    }
+    } */
 
     let documentToGet;
 
