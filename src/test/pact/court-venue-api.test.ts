@@ -153,64 +153,61 @@ pactWith(
       });
     });
 
-    //     describe('getCourtList court-venue API', () => {
-    //       const EXPECTED_VENUES = [];
+    describe('getCourtList court-venue API', () => {
+      const EXPECTED_VENUES = [];
 
-    //       const courtVenueAdoptSuccessResponse = {
-    //         status: 200,
-    //         headers: {
-    //           'Content-Type': 'application/json',
-    //         },
-    //         body: { court_venues: [] },
-    //       };
+      const courtVenueAdoptSuccessResponse = {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: { court_venues: [] },
+      };
 
-    //       const courtVenueAdoptRequest = {
-    //         uponReceiving: 'a request for court venue list',
-    //         withRequest: {
-    //           method: 'GET',
-    //           path: '/refdata/location/court-venues/services',
-    //           headers: {
-    //             Authorization: 'Bearer mock-user-access-token',
-    //             ServiceAuthorization: 'mock-service-auth-token',
-    //             Accept: '*/*',
-    //             'Content-Type': 'application/json',
-    //           },
-    //           query: {
-    //             service_code: 'ABA4',
-    //           },
-    //         },
-    //       };
+      const courtVenueAdoptRequest = {
+        uponReceiving: 'a request for court venue list',
+        withRequest: {
+          method: 'GET',
+          path: '/refdata/location/court-venues/services',
+          headers: {
+            Authorization: 'Bearer mock-user-access-token',
+            ServiceAuthorization: 'mock-service-auth-token',
+            Accept: '*/*',
+            'Content-Type': 'application/json',
+          },
+          query: {
+            service_code: 'ABA4',
+          },
+        },
+      };
 
-    //       beforeEach(() => {
-    //         const interaction2 = {
-    //           state: 'Adoption Court Venues exist for the service code provided',
-    //           ...courtVenueAdoptRequest,
-    //           willRespondWith: courtVenueAdoptSuccessResponse,
-    //         };
+      beforeEach(() => {
+        const interaction2 = {
+          state: 'Adoption Court Venues exist for the service code provided',
+          ...courtVenueAdoptRequest,
+          willRespondWith: courtVenueAdoptSuccessResponse,
+        };
 
-    //         provider.addInteraction(interaction2);
-    //       });
+        provider.addInteraction(interaction2);
+      });
 
-    //       it('returns correct venue list for Public Law', async () => {
-    //         const { Logger } = require('@hmcts/nodejs-logging');
-    //         const logger: LoggerInstance = Logger.getLogger('server');
+      it('returns correct venue list for Public Law', async () => {
+        const req = mockRequest({
+          session: {
+            lang: 'en',
+            user: userDetails,
+          },
+        });
 
-    //         const req = mockRequest({
-    //           session: {
-    //             lang: 'en',
-    //             user: userDetails,
-    //           },
-    //         });
-
-    //         const addresses = await getCourtVenues(
-    //           `${config.get('services.adoptionCourt.code')}`,
-    //           req.session.user,
-    //           req.locals.logger
-    //         );
-    //         console.log(addresses, 'line 148');
-    //         console.log(EXPECTED_VENUES, 'line 149');
-    //         expect(addresses).toEqual(EXPECTED_VENUES);
-    //       });
-    //     });
+        const addresses = await getCourtVenues(
+          `${config.get('services.adoptionCourt.code')}`,
+          req.session.user,
+          req.locals.logger
+        );
+        console.log(addresses, 'line 208');
+        console.log(EXPECTED_VENUES, 'line 209');
+        expect(addresses).toEqual(EXPECTED_VENUES);
+      });
+    });
   }
 );
