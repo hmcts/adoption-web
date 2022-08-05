@@ -218,14 +218,6 @@ pactWith(
       };
 
       beforeEach(() => {
-        const interaction = {
-          state: 'Public Law Court Venues exist for the service code provided',
-          ...courtVenuePLRequest,
-          willRespondWith: courtVenuePLSuccessResponse,
-        };
-
-        provider.addInteraction(interaction);
-
         const interaction2 = {
           state: 'Adoption Court Venues exist for the service code provided',
           ...courtVenueAdoptRequest,
@@ -233,6 +225,14 @@ pactWith(
         };
 
         provider.addInteraction(interaction2);
+
+        const interaction = {
+          state: 'Public Law Court Venues exist for the service code provided',
+          ...courtVenuePLRequest,
+          willRespondWith: courtVenuePLSuccessResponse,
+        };
+
+        provider.addInteraction(interaction);
       });
 
       it('returns correct venue list for Public Law', async () => {

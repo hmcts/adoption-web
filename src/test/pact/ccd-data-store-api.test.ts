@@ -366,7 +366,7 @@ pactWith(
           method: 'POST',
           path: '/cases/45678/events',
           headers: {
-            Authorization: 'Bearer mock-user-access-token',
+            Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJiL082T3ZWdjEre',
             ServiceAuthorization: 'mock-service-auth-token',
             experimental: 'true',
             Accept: '*/*',
