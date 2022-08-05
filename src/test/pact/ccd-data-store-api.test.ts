@@ -336,7 +336,7 @@ pactWith(
           method: 'GET',
           path: '/cases/45678/event-triggers/citizen-update-application',
           headers: {
-            Authorization: 'Bearer mock-user-access-token',
+            Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJiL082T3ZWdjEre',
             ServiceAuthorization: 'mock-service-auth-token',
             experimental: 'true',
             Accept: '*/*',
