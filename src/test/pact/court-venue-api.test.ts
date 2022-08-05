@@ -17,7 +17,7 @@ import config from 'config';
 import { when } from 'jest-when';
 // import type { LoggerInstance } from 'winston';
 
-import { getCourtList, getCourtVenues } from '../../main/app/court/court-venues-api';
+import { getCourtVenues } from '../../main/app/court/court-venues-api';
 import { mockRequest } from '../unit/utils/mockRequest';
 
 const { pactWith } = require('jest-pact');
@@ -160,92 +160,6 @@ pactWith(
         );
         console.log(addresses, 'line 148');
         console.log(EXPECTED_VENUES, 'line 149');
-        expect(addresses).toEqual(EXPECTED_VENUES);
-      });
-    });
-
-    describe('getCourtList court-venue API', () => {
-      const EXPECTED_VENUES = [];
-
-      const courtVenueAdoptSuccessResponse = {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: { court_venues: [] },
-      };
-
-      const courtVenueAdoptRequest = {
-        uponReceiving: 'a request for court venue list',
-        withRequest: {
-          method: 'GET',
-          path: '/refdata/location/court-venues/services',
-          headers: {
-            Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJiL082T3ZWdjEre',
-            ServiceAuthorization: 'mock-service-auth-token',
-            Accept: '*/*',
-            'Content-Type': 'application/json',
-          },
-          query: {
-            service_code: 'ABA4',
-          },
-        },
-      };
-
-      const courtVenuePLSuccessResponse = {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: { court_venues: [] },
-      };
-
-      const courtVenuePLRequest = {
-        uponReceiving: 'a request for court venue list',
-        withRequest: {
-          method: 'GET',
-          path: '/refdata/location/court-venues/services',
-          headers: {
-            Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiJiL082T3ZWdjEre',
-            ServiceAuthorization: 'mock-service-auth-token',
-            Accept: '*/*',
-            'Content-Type': 'application/json',
-          },
-          query: {
-            service_code: 'ABA3',
-          },
-        },
-      };
-
-      beforeEach(() => {
-        const interaction2 = {
-          state: 'Adoption Court Venues exist for the service code provided',
-          ...courtVenueAdoptRequest,
-          willRespondWith: courtVenueAdoptSuccessResponse,
-        };
-
-        provider.addInteraction(interaction2);
-
-        const interaction = {
-          state: 'Public Law Court Venues exist for the service code provided',
-          ...courtVenuePLRequest,
-          willRespondWith: courtVenuePLSuccessResponse,
-        };
-
-        provider.addInteraction(interaction);
-      });
-
-      it('returns correct venue list for Public Law', async () => {
-        const req = mockRequest({
-          session: {
-            lang: 'en',
-            user: userDetails,
-          },
-        });
-
-        const addresses = await getCourtList(req);
-        console.log(addresses, 'line 208');
-        console.log(EXPECTED_VENUES, 'line 209');
         expect(addresses).toEqual(EXPECTED_VENUES);
       });
     });
