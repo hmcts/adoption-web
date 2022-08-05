@@ -68,12 +68,6 @@ module.exports = {
     await I.wait(4);
   },
 
-  // async selectFirstApplicantPersonalDetails() {
-  //   await I.retry(3).waitForSelector(this.primaryApplicant.contactDetailsLink, 30);
-  //   await I.retry(3).click(this.primaryApplicant.contactDetailsLink);
-  //   await I.wait(4);
-  // },
-
   async selectChildrenBirthCertificate() {
     await I.retry(3).waitForSelector(this.childDetails.childrenBirthCertificateLink, 30);
     await I.retry(3).click(this.childDetails.childrenBirthCertificateLink);
