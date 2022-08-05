@@ -30,6 +30,8 @@ export class DocumentManagerController {
       throw new Error('Cannot upload new documents as case is not in Draft state');
     }
 
+    console.log('-------req.files?.length-------' + req.files?.length);
+
     if (!req.files?.length) {
       if (req.headers.accept?.includes('application/json')) {
         throw new Error('No files were uploaded');
@@ -40,10 +42,12 @@ export class DocumentManagerController {
 
     const documentManagementClient = this.getDocumentManagementClient(req.session.user);
 
+    console.log('-------documentManagementClient.create-------');
     const filesCreated = await documentManagementClient.create({
       files: req.files,
       classification: Classification.Public,
     });
+    console.log('-------filesCreated-------' + filesCreated);
 
     const newUploads: ListValue<Partial<AdoptionDocument> | null>[] = filesCreated.map(file => ({
       id: generateUuid(),
