@@ -1,4 +1,5 @@
 import autobind from 'autobind-decorator';
+import config from 'config';
 import { Response } from 'express';
 
 import {
@@ -94,7 +95,11 @@ export class PostController<T extends AnyObject> {
 
   protected async save(req: AppRequest<T>, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
     const caseRefId = req.session.userCase.id;
-    if (req.url.includes('la-portal') && ![LA_PORTAL_CHECK_YOUR_ANSWERS?.toString()].includes(req.url)) {
+    if (
+      req.url.includes('la-portal') &&
+      ![LA_PORTAL_CHECK_YOUR_ANSWERS?.toString()].includes(req.url) &&
+      config.get('services.draftStore.redis.tls')
+    ) {
       try {
         return await saveDraftCase(req, caseRefId || '', formData);
       } catch (err) {
@@ -105,7 +110,10 @@ export class PostController<T extends AnyObject> {
       return req.session.userCase;
     } else {
       try {
-        if ([LA_PORTAL_CHECK_YOUR_ANSWERS?.toString()].includes(req.url)) {
+        if (
+          [LA_PORTAL_CHECK_YOUR_ANSWERS?.toString()].includes(req.url) &&
+          config.get('services.draftStore.redis.tls')
+        ) {
           const modifiedValuesSet = await getDraftCaseFromStore(req, caseRefId || '');
           req.session.userCase = await req.locals.api.triggerEvent(caseRefId, modifiedValuesSet, eventName);
           removeCaseFromRedis(req, caseRefId);

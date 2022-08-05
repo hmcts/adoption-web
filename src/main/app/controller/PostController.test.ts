@@ -1,3 +1,5 @@
+import config from 'config';
+
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import { FormContent } from '../../app/form/Form';
@@ -8,11 +10,13 @@ import { ApplicationType, CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE, SYSTEM_USER_UP
 import { isPhoneNoValid } from '../form/validation';
 
 import { PostController } from './PostController';
-jest.mock('../../modules/draft-store/draft-store-service');
 
 import Mock = jest.Mock;
 
 const getNextStepUrlMock = jest.spyOn(steps, 'getNextStepUrl');
+jest.mock('config');
+const mockedConfig = config as jest.Mocked<typeof config>;
+mockedConfig.get.mockReturnValue(true);
 const expectedUserCaseRedis = {
   id: '1234',
   state: State.Draft,

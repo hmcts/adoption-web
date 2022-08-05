@@ -101,7 +101,9 @@ new LanguageToggle().enableFor(app);
 new StateRedirectMiddleware().enableFor(app);
 new Routes().enableFor(app);
 new ErrorHandler().handleNextErrorsFor(app);
-new DraftStoreClient().enableFor(app);
+if (config.get('services.draftStore.redis.tls')) {
+  new DraftStoreClient().enableFor(app);
+}
 
 const port = config.get('port');
 const server = app.listen(port, () => {
