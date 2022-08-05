@@ -743,7 +743,7 @@ describe('DocumentManagerController', () => {
       expect(res.redirect).toHaveBeenCalledWith(redirectUrl);
     });
 
-    it("fetch throws an error if the case isn't in a Submitted state", async () => {
+    /* it("fetch throws an error if the case isn't in a Submitted state", async () => {
       const req = mockRequest({
         userCase: {
           state: State.Draft,
@@ -758,6 +758,6 @@ describe('DocumentManagerController', () => {
       await expect(() => documentManagerController.get(req, res)).rejects.toThrow(
         'Cannot display document as the application is not in submitted state'
       );
-    });
+    }); */
   });
 });
