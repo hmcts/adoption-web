@@ -47,14 +47,14 @@ pactWith(
       roles: ['adoption-citizen-user'],
     };
 
-    beforeEach(() => {
-      const req = mockRequest({
-        session: {
-          lang: 'en',
-          user: userDetails,
-        },
-      });
+    const req = mockRequest({
+      session: {
+        lang: 'en',
+        user: userDetails,
+      },
+    });
 
+    beforeEach(() => {
       when(config.get).calledWith('services.case.url').mockReturnValue(provider.mockService.baseUrl);
       console.log(provider.mockService.baseUrl, 'line 46');
       caseApi = getCaseApi(req.session.user, req.locals.logger);
@@ -100,7 +100,7 @@ pactWith(
             Accept: '*/*',
             'Content-Type': 'application/json',
           },
-          body: query,
+          body: JSON.stringify(query),
         },
       };
 
