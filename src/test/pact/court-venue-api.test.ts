@@ -101,8 +101,6 @@ pactWith(
           req.session.user,
           req.locals.logger
         );
-        console.log(addresses, 'line 138');
-        console.log(EXPECTED_VENUES, 'line 139');
         expect(addresses).toEqual(EXPECTED_VENUES);
       });
     });
@@ -158,8 +156,6 @@ pactWith(
           req.session.user,
           req.locals.logger
         );
-        console.log(addresses, 'line 148');
-        console.log(EXPECTED_VENUES, 'line 149');
         expect(addresses).toEqual(EXPECTED_VENUES);
       });
     });
