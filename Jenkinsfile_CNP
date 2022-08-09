@@ -65,7 +65,9 @@ withPipeline(type, product, component) {
   }
 
   before('functionalTest:preview') {
-    env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
+    //http://adoption-cos-api-pr-${CHANGE_ID}-ccd-data-store-api
+    //env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
+    env.ADOP_WEB_URL = "http://adoption-web-pr-${CHANGE_ID}"
     yarnBuilder.yarn('test:pa11y')
   }
 
@@ -76,7 +78,8 @@ withPipeline(type, product, component) {
   }
 
   before('smoketest:preview') {
-    env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
+    // env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
+    env.ADOP_WEB_URL = "http://adoption-web-pr-${CHANGE_ID}"
   }
 
   after('smoketest:preview') {
