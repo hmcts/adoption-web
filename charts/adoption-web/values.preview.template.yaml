@@ -14,7 +14,7 @@ nodejs:
     APPINSIGHTS_KEY: '00000000-0000-0000-0000-000000000000'
     PCQ_ENABLED: 'true'
     #CCD_URL: 'https://ccd-data-store-api-adoption-cos-api-pr-370.service.core-compute-preview.internal'
-    #CCD_URL: 'http://adoption-cos-api-pr-370-ccd-data-store-api'
+    CCD_URL: 'http://adoption-cos-api-pr-370-ccd-data-store-api'
     IDAM_ROLE: 'adoption-citizen-user'
 idam-pr:
   enabled: true
