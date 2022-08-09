@@ -73,7 +73,11 @@ export class OidcMiddleware {
 
         if (req.session?.user) {
           res.locals.isLoggedIn = true;
-          req.locals.api = getCaseApi(req.session.user, req.locals.logger);
+          try {
+            req.locals.api = getCaseApi(req.session.user, req.locals.logger);
+          } catch (err) {
+            console.log('Error occurred: ' + err);
+          }
           if (!req.session.userCase) {
             req.session.userCase = await req.locals.api.getOrCreateCase(res.locals.serviceType, req.session.user);
           }

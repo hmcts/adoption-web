@@ -150,6 +150,7 @@ export class CaseApi {
 }
 
 export const getCaseApi = (userDetails: UserDetails, logger: LoggerInstance): CaseApi => {
+  console.log(`XXXXX services.case.url :  ${config.get('services.case.url')}`);
   return new CaseApi(
     Axios.create({
       baseURL: config.get('services.case.url'),
