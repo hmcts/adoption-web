@@ -9,17 +9,10 @@ import {
   getAdoptionCertificateDetailsStatus,
   getApplicationStatus,
   getApplyingWithStatus,
-  getBirthFatherDetailsStatus,
-  getBirthMotherDetailsStatus,
-  getChildrenBirthCertificateStatus,
-  getChildrenPlacementOrderStatus,
   getContactDetailsStatus,
   getDateChildMovedInStatus,
-  getOtherParentStatus,
   getPersonalDetailsStatus,
   getReviewPaySubmitUrl,
-  getSiblingStatus,
-  getUploadDocumentStatus,
 } from './utils';
 
 const generateTaskList = (sectionTitles, taskListItems, userCase) => [
@@ -91,64 +84,6 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
             },
           ]
         : []),
-    ],
-  },
-  {
-    title: sectionTitles.childDetails,
-    items: [
-      {
-        id: 'children-birth-certificate-details',
-        text: taskListItems.birthCertificate,
-        status: getChildrenBirthCertificateStatus(userCase),
-        href: '', //URL.CHILDREN_DATE_OF_BIRTH,
-      },
-      {
-        id: 'birth-mother-details',
-        text: taskListItems.birthMother,
-        status: getBirthMotherDetailsStatus(userCase),
-        href: '', //URL.BIRTH_MOTHER_FULL_NAME,
-      },
-      {
-        id: 'birth-father',
-        text: taskListItems.birthFather,
-        status: getBirthFatherDetailsStatus(userCase),
-        href: '', //URL.BIRTH_FATHER_NAME_ON_CERTIFICATE,
-      },
-      {
-        id: 'other-parent',
-        text: taskListItems.otherParent,
-        status: getOtherParentStatus(userCase),
-        href: '', //URL.OTHER_PARENT_EXISTS,
-      },
-      {
-        id: 'children-placement-order-details',
-        text: taskListItems.placementAndCourtOrders,
-        status: getChildrenPlacementOrderStatus(userCase),
-        href: '', //
-        // getChildrenPlacementOrderStatus(userCase) === SectionStatus.NOT_STARTED
-        //   ? URL.CHILDREN_PLACEMENT_ORDER_NUMBER
-        //   : URL.CHILDREN_PLACEMENT_ORDER_SUMMARY,
-      },
-      {
-        id: 'sibling',
-        text: taskListItems.siblingCourtOrders,
-        status: getSiblingStatus(userCase),
-        href: '', //
-        // userCase.hasSiblings === YesNoNotsure.YES && userCase.siblings?.length
-        //   ? URL.SIBLING_ORDER_SUMMARY
-        //   : URL.SIBLING_EXISTS,
-      },
-    ],
-  },
-  {
-    title: sectionTitles.uploadDocuments,
-    items: [
-      {
-        id: 'upload-your-documents',
-        text: taskListItems.uploadDocuments,
-        status: getUploadDocumentStatus(userCase),
-        href: '', //getUploadDocumentStatus(userCase) === SectionStatus.CAN_NOT_START_YET ? '' : URL.UPLOAD_YOUR_DOCUMENTS,
-      },
     ],
   },
   {
