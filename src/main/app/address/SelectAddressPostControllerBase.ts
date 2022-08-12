@@ -42,6 +42,8 @@ export default class SelectAddressPostControllerBase extends PostController<AnyO
       }
     }
 
+    console.log('Select Address Controller', req.session.addresses, 'session address line 45', req.query.change);
+
     this.filterErrorsForSaveAsDraft(req);
 
     this.redirect(req, res);

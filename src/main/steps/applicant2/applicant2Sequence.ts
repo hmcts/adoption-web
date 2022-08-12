@@ -48,6 +48,16 @@ export const applicant2Sequence: Step[] = [
     getNextStep: () => Urls.APPLICANT_2_CONTACT_DETAILS,
   },
   {
+    url: Urls.APPLICANT_2_CHANGE_ADDRESS,
+    showInSection: Sections.AboutApplicant1,
+    getNextStep: () => Urls.APPLICANT_2_CONFIRM_CHANGE_ADDRESS,
+  },
+  {
+    url: Urls.APPLICANT_2_CONFIRM_CHANGE_ADDRESS,
+    showInSection: Sections.AboutApplicant1,
+    getNextStep: () => Urls.CHECK_ANSWERS_URL,
+  },
+  {
     url: Urls.APPLICANT_2_CONTACT_DETAILS,
     showInSection: Sections.AboutApplicant2,
     getNextStep: () => Urls.APPLICANT_2_LANGUAGE_PREFERENCE,

@@ -35,6 +35,14 @@ export default class AddressLookupPostControllerBase extends PostController<AnyO
       req.session.addresses = addresses;
     }
 
+    console.log(
+      req.session.addresses,
+      'session address',
+      req.body[`${this.fieldPrefix}AddressPostcode`],
+      'Post controller',
+      req.query.change
+    );
+
     this.redirect(req, res);
   }
 

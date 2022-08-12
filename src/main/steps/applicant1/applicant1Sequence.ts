@@ -1,5 +1,7 @@
 import { Sections, Step } from '../constants';
 import {
+  APPLICANT_1_CHANGE_ADDRESS,
+  APPLICANT_1_CONFIRM_CHANGE_ADDRESS,
   APPLICANT_1_CONTACT_DETAILS,
   APPLICANT_1_DOB,
   APPLICANT_1_FIND_ADDRESS,
@@ -9,6 +11,7 @@ import {
   APPLICANT_1_OCCUPATION,
   APPLICANT_1_OTHER_NAMES,
   APPLICANT_1_SELECT_ADDRESS,
+  CHECK_ANSWERS_URL,
   DATE_CHILD_MOVED_IN,
   TASK_LIST_URL,
   UPLOAD_YOUR_DOCUMENTS,
@@ -54,6 +57,16 @@ export const applicant1Sequence: Step[] = [
     url: APPLICANT_1_MANUAL_ADDRESS,
     showInSection: Sections.AboutApplicant1,
     getNextStep: () => APPLICANT_1_CONTACT_DETAILS,
+  },
+  {
+    url: APPLICANT_1_CHANGE_ADDRESS,
+    showInSection: Sections.AboutApplicant1,
+    getNextStep: () => APPLICANT_1_CONFIRM_CHANGE_ADDRESS,
+  },
+  {
+    url: APPLICANT_1_CONFIRM_CHANGE_ADDRESS,
+    showInSection: Sections.AboutApplicant1,
+    getNextStep: () => CHECK_ANSWERS_URL,
   },
   {
     url: APPLICANT_1_CONTACT_DETAILS,
