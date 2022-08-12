@@ -166,7 +166,6 @@ export class DocumentManagerController {
     const documentManagementClient = this.getDocumentManagementClient(req.session.user);
     const generatedDocument = await documentManagementClient.get({ url: documentToGet });
     console.log('<<<<<<<<<<<generatedDocument>>>>>>>>>' + generatedDocument);
-    console.log('<<<<<<<<<<<generatedDocument.data>>>>>>>>>' + generatedDocument.data);
 
     req.session.save(err => {
       if (err) {
