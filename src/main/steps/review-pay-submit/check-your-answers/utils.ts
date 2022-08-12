@@ -138,12 +138,12 @@ export const adoptionAgencySummaryList = (
   { sectionTitles, keys, ...content }: SummaryListContent,
   userCase: Partial<CaseWithId>
 ): SummaryList | undefined => {
-  console.log('XXXXXX: '+userCase.hasAnotherAdopAgencyOrLA);
+  console.log('XXXXXX: ' + userCase.hasAnotherAdopAgencyOrLA);
   if (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO) {
-    console.log('XXXXXX line 143: '+userCase.hasAnotherAdopAgencyOrLA);
+    console.log('XXXXXX line 143: ' + userCase.hasAnotherAdopAgencyOrLA);
     return;
   }
-  console.log('XXXXXX line 146: '+userCase.hasAnotherAdopAgencyOrLA);
+  console.log('XXXXXX line 146: ' + userCase.hasAnotherAdopAgencyOrLA);
   return {
     title: sectionTitles.additionalAoptionagencyOrLA,
     rows: getSectionSummaryList(
