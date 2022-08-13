@@ -308,7 +308,7 @@ export const applicantSummaryList = (
         {
           key: keys.address,
           valueHtml: getFormattedAddress(userCase, prefix),
-          changeUrl: Urls[`${urlPrefix}FIND_ADDRESS?change=true`],
+          changeUrl: Urls[`${urlPrefix}FIND_ADDRESS`],
         },
         {
           key: keys.emailAddress,
