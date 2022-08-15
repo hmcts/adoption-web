@@ -79,7 +79,6 @@ export class CaseApi {
       `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
     );
     const token = tokenResponse.data.token;
-    console.log('<<<<token inside createCase>>>>' + token);
 
     const event = { id: CITIZEN_CREATE };
     const data = {
@@ -117,7 +116,6 @@ export class CaseApi {
       const tokenResponse = await this.axios.get<CcdTokenResponse>(`/cases/${caseId}/event-triggers/${eventName}`);
       const token = tokenResponse.data.token;
       const event = { id: eventName };
-      console.log('<<<<token inside sendEvent>>>>' + token);
       const response: AxiosResponse<CcdV2Response> = await this.axios.post(`/cases/${caseId}/events`, {
         event,
         data,
@@ -152,8 +150,6 @@ export class CaseApi {
 }
 
 export const getCaseApi = (userDetails: UserDetails, logger: LoggerInstance): CaseApi => {
-  console.log('<<<<<userDetails.accessToken>>>>>' + userDetails.accessToken);
-  console.log('<<<<<getServiceAuthToken>>>>>' + getServiceAuthToken());
   return new CaseApi(
     Axios.create({
       baseURL: config.get('services.case.url'),

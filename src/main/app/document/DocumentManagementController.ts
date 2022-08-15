@@ -139,12 +139,9 @@ export class DocumentManagerController {
     const documentsGeneratedKey = 'documentsGenerated';
     const languagePreference =
       req.session.userCase['applicant1LanguagePreference'] === LanguagePreference.WELSH ? 'Cy' : 'En';
-    console.log('<<<<<<<languagePreference>>>>>>' + languagePreference);
 
     const documentsGenerated =
       (req.session.userCase[documentsGeneratedKey] as ListValue<Partial<AdoptionDocument> | null>[]) ?? [];
-    console.log('<<<<<<documentsGenerated>>>>>>>>' + documentsGenerated);
-    console.log('<<<<<<State>>>>>>>>' + req.session.userCase.state);
     if (![State.Submitted].includes(req.session.userCase.state)) {
       throw new Error('Cannot display document as the application is not in submitted state');
     }
@@ -155,17 +152,14 @@ export class DocumentManagerController {
       const applicationSummaryDocuments = documentsGenerated
         .map(item => item.value)
         .filter(element => element?.documentType === DocumentType.APPLICATION_SUMMARY + languagePreference);
-      console.log('<<<<<<<applicationSummaryDocuments>>>>>>>>' + applicationSummaryDocuments);
 
       if (applicationSummaryDocuments !== null && applicationSummaryDocuments.length > 0) {
         documentToGet = applicationSummaryDocuments[0]?.documentLink?.document_binary_url;
-        console.log('<<<<<<<<<<<documentToGet>>>>>>>>>' + documentToGet);
       }
     }
 
     const documentManagementClient = this.getDocumentManagementClient(req.session.user);
     const generatedDocument = await documentManagementClient.get({ url: documentToGet });
-    console.log('<<<<<<<<<<<generatedDocument>>>>>>>>>' + generatedDocument);
 
     req.session.save(err => {
       if (err) {
