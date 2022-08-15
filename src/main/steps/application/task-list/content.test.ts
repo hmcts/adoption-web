@@ -139,53 +139,6 @@ describe('task-list > content', () => {
           ],
         },
         {
-          title: "Add child's details",
-          items: [
-            {
-              id: 'children-birth-certificate-details',
-              text: 'Birth certificate details',
-              status: 'COMPLETED',
-              href: '/children/date-of-birth',
-            },
-            {
-              id: 'birth-mother-details',
-              text: 'Birth mother details',
-              status: 'COMPLETED',
-              href: '/birth-mother/full-name',
-            },
-            {
-              id: 'birth-father',
-              text: 'Birth father details',
-              status: 'COMPLETED',
-              href: '/birth-father/name-on-certificate',
-            },
-            {
-              id: 'other-parent',
-              text: 'Other person with parental responsibility',
-              status: 'COMPLETED',
-              href: '/other-parent/exists',
-            },
-            {
-              id: 'children-placement-order-details',
-              text: 'Placement and court orders',
-              status: 'COMPLETED',
-              href: '/children/placement-order-summary',
-            },
-            { id: 'sibling', text: 'Sibling court order details', status: 'COMPLETED', href: '/sibling/summary' },
-          ],
-        },
-        {
-          title: 'Upload documents',
-          items: [
-            {
-              id: 'upload-your-documents',
-              text: 'Upload documents',
-              status: 'COMPLETED',
-              href: '/upload-your-documents',
-            },
-          ],
-        },
-        {
           title: 'Review, pay and submit',
           items: [
             {
@@ -331,27 +284,6 @@ describe('task-list > content', () => {
               status: 'COMPLETED',
               href: '/applicant2/same-address',
             },
-          ],
-        },
-        {
-          title: "Add child's details",
-          items: [
-            {
-              id: 'children-birth-certificate-details',
-              text: 'Birth certificate details',
-              status: 'COMPLETED',
-              href: '',
-            },
-            { id: 'birth-mother-details', text: 'Birth mother details', status: 'COMPLETED', href: '' },
-            { id: 'birth-father', text: 'Birth father details', status: 'COMPLETED', href: '' },
-            { id: 'other-parent', text: 'Other person with parental responsibility', status: 'COMPLETED', href: '' },
-            {
-              id: 'children-placement-order-details',
-              text: 'Placement and court orders',
-              status: 'NOT_STARTED',
-              href: '',
-            },
-            { id: 'sibling', text: 'Sibling court order details', status: 'COMPLETED', href: ' ' },
           ],
         },
         {
