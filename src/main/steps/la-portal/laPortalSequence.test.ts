@@ -276,13 +276,14 @@ describe('la-portal > laPortalSequence', () => {
 
     expect(laPortalSequence[55].url).toBe('/la-portal/check-your-answers');
     expect(laPortalSequence[55].contentDir).toBe('MOCK_BASE_DIR/check-your-answers');
-    expect(laPortalSequence[55].getNextStep({})).toBe('/la-portal/task-list');
+    expect(laPortalSequence[55].getNextStep({})).toBe('/la-portal/statement-of-truth');
 
-    expect(laPortalSequence[56].url).toBe('/la-portal/la-portal/upload-your-documents');
-    expect(laPortalSequence[56].contentDir).toBe('MOCK_BASE_DIR/../la-portal/upload-your-documents');
-    expect(laPortalSequence[56].getNextStep({})).toBe('/la-portal/task-list');
+    expect(laPortalSequence[56].url).toBe('/la-portal/statement-of-truth');
+    expect(laPortalSequence[56].contentDir).toBe('MOCK_BASE_DIR/statement-of-truth');
+    expect(laPortalSequence[56].getNextStep({})).toBe('/la-portal/confirmation');
 
-    expect(laPortalSequence[57].url).toBe('/la-portal/check-your-answers');
-    expect(laPortalSequence[57].getNextStep({})).toBe('/la-portal/confirmation');
+    expect(laPortalSequence[57].url).toBe('/la-portal/la-portal/upload-your-documents');
+    expect(laPortalSequence[57].contentDir).toBe('MOCK_BASE_DIR/../la-portal/upload-your-documents');
+    expect(laPortalSequence[57].getNextStep({})).toBe('/la-portal/task-list');
   });
 });
