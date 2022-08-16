@@ -9,7 +9,7 @@ import { laPortalSequence } from './laPortalSequence';
 describe('la-portal > laPortalSequence', () => {
   test('should contain 56 entries in sibling screen sequence', () => {
     Date.now = jest.fn(() => +new Date('2021-01-01'));
-    expect(laPortalSequence).toHaveLength(57);
+    expect(laPortalSequence).toHaveLength(58);
 
     expect(laPortalSequence[0].url).toBe('/la-portal/kba-case-ref');
     expect(laPortalSequence[0].getNextStep({})).toBe('/la-portal/kba-completed');
@@ -281,5 +281,8 @@ describe('la-portal > laPortalSequence', () => {
     expect(laPortalSequence[56].url).toBe('/la-portal/la-portal/upload-your-documents');
     expect(laPortalSequence[56].contentDir).toBe('MOCK_BASE_DIR/../la-portal/upload-your-documents');
     expect(laPortalSequence[56].getNextStep({})).toBe('/la-portal/task-list');
+
+    expect(laPortalSequence[57].url).toBe('/la-portal/check-your-answers');
+    expect(laPortalSequence[57].getNextStep({})).toBe('/la-portal/confirmation');
   });
 });

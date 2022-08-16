@@ -381,4 +381,9 @@ export const laPortalSequence: Step[] = [
   ...footerLinkSequence,
   ...ReviewYourAsnwersSequence,
   ...documentSequence,
+  {
+    url: Urls.LA_PORTAL_CHECK_YOUR_ANSWERS,
+    //getNextStep: () => Urls.HOME_URL,
+    getNextStep: () => Urls.LA_PORTAL_CONFIRMATION_PAGE,
+  },
 ];

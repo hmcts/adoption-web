@@ -16,7 +16,7 @@ import {
   SAVE_AS_DRAFT,
 } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
-import { CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE, SYSTEM_USER_UPDATE } from '../case/definition';
+import { CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE, LA_SUBMIT, SYSTEM_USER_UPDATE } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
 import { ValidationError } from '../form/validation';
 
@@ -156,7 +156,9 @@ export class PostController<T extends AnyObject> {
   }
 
   protected getEventName(req: AppRequest): string {
-    if (req.session.user?.isSystemUser) {
+    if (req.session.user?.isSystemUser && req.url.includes(LA_PORTAL_CHECK_YOUR_ANSWERS)) {
+      return LA_SUBMIT;
+    } else if (req.session.user?.isSystemUser) {
       return SYSTEM_USER_UPDATE;
     }
     return CITIZEN_UPDATE;
