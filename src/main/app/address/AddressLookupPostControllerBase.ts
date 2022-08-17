@@ -33,6 +33,10 @@ export default class AddressLookupPostControllerBase extends PostController<AnyO
         addresses = await getAddressesFromPostcode(postcode, req.locals.logger);
       }
       req.session.addresses = addresses;
+
+      if (req.session.returnUrl === '/review-pay-submit/check-your-answers') {
+        req.session.userCase.checkYourAnswersReturn = true;
+      }
     }
 
     this.redirect(req, res);
