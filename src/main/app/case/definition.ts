@@ -1369,7 +1369,6 @@ export const enum State {
   AosOverdue = 'AosOverdue',
   Applicant2Approved = 'Applicant2Approved',
   AwaitingPayment = 'AwaitingPayment',
-  AwaitingAdminChecks = 'AwaitingAdminChecks',
   Rejected = 'Rejected',
   Withdrawn = 'Withdrawn',
   AwaitingDocuments = 'AwaitingDocuments',
@@ -1649,7 +1648,6 @@ export const CASE_TYPE = 'A58';
 export const JURISDICTION = 'ADOPTION';
 export const CITIZEN_SUBMIT = 'citizen-submit-application';
 export const CITIZEN_CREATE = 'citizen-create-application';
-export const LA_SUBMIT = 'local-authority-application-submit';
 export const CITIZEN_SAVE_AND_CLOSE = 'citizen-save-and-close';
 export const CITIZEN_UPDATE = 'citizen-update-application';
 export const SYSTEM_USER_UPDATE = 'system-user-update-application';

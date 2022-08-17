@@ -16,7 +16,7 @@ services:
     systemPassword: 'dummy_password'
     userRole: 'adoption-citizen-user'
   case:
-    url: 'https://ccd-data-store-api-adoption-cos-api-pr-380.service.core-compute-preview.internal'
+    url: 'https://ccd-data-store-api-adoption-cos-api-pr-249.service.core-compute-preview.internal'
   postcodeLookup:
     url: 'https://api.os.uk/search/places/v1'
     token: 'NEED TO INSERT SECRET'
@@ -48,7 +48,7 @@ services:
   draftStore:
     redis:
       host: 'localhost'
-      port: 6379
+      port: 6380
       key:
       tls: false
 health:
