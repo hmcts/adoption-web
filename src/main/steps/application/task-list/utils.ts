@@ -86,11 +86,11 @@ export const getPersonalDetailsStatus = (
   const otherNamesComplete =
     hasOtherNames === YesOrNo.NO || (hasOtherNames === YesOrNo.YES && !!additionalNames.length);
 
-  if (!lastName && !firstName && otherNamesComplete && dateOfBirthComplete && occupation) {
+  if (firstName && lastName && otherNamesComplete && dateOfBirthComplete && occupation) {
     return SectionStatus.COMPLETED;
   }
 
-  if (!lastName && !firstName && !otherNamesComplete && !dateOfBirthComplete && !occupation) {
+  if (!firstName && !lastName && !otherNamesComplete && !dateOfBirthComplete && !occupation) {
     return SectionStatus.NOT_STARTED;
   }
 
