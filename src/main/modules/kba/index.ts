@@ -43,7 +43,7 @@ export class KbaMiddleware {
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
           if (!req.session.userCase) {
             try {
-              if (req.session.laPortalKba.kbaCaseRef) {
+              if (req.session?.laPortalKba.kbaCaseRef) {
                 req.session.userCase = await req.locals.api.getCaseById(req.session.laPortalKba.kbaCaseRef);
 
                 const draftStoreUserCaseData = await getDraftCaseFromStore(
