@@ -349,12 +349,7 @@ const ReviewYourAsnwersSequence: Step[] = [
   {
     url: Urls.LA_PORTAL_CHECK_YOUR_ANSWERS,
     contentDir: path.join(__dirname, 'check-your-answers'),
-    getNextStep: () => Urls.LA_PORTAL_STATEMENT_OF_TRUTH,
-  },
-  {
-    url: Urls.LA_PORTAL_STATEMENT_OF_TRUTH,
-    contentDir: path.join(__dirname, 'statement-of-truth'),
-    getNextStep: () => Urls.LA_PORTAL_CONFIRMATION_PAGE,
+    getNextStep: () => Urls.LA_PORTAL_TASK_LIST,
   },
 ];
 

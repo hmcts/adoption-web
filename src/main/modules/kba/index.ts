@@ -41,20 +41,22 @@ export class KbaMiddleware {
         if (req.session?.user) {
           res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
+          const currentUserCaseData = req.session.userCase;
+          const draftStoreUserCaseData = await getDraftCaseFromStore(req, req.session.laPortalKba.kbaCaseRef || '');
+          if (draftStoreUserCaseData) {
+            req.session.userCase = { ...(currentUserCaseData || {}), ...draftStoreUserCaseData };
+          }
+
           if (!req.session.userCase) {
             try {
-              req.session.userCase =
-                req.session.userCase || (await req.locals.api.getCaseById(req.session.laPortalKba.kbaCaseRef!));
+              req.session.userCase = await req.locals.api.getCaseById(req.session.laPortalKba.kbaCaseRef!);
             } catch (err) {
               req.session.destroy(() => {
                 throw err;
               });
             }
           }
-          const draftStoreUserCaseData = await getDraftCaseFromStore(req, req.session.laPortalKba.kbaCaseRef || '');
-          if (draftStoreUserCaseData) {
-            req.session.userCase = { ...(req.session.userCase || {}), ...draftStoreUserCaseData };
-          }
+
           if (
             JSON.stringify(req.session.userCase.childrenDateOfBirth) !==
               JSON.stringify(req.session.laPortalKba['kbaChildrenDateOfBirth']) ||

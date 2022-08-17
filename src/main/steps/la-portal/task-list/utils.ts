@@ -56,7 +56,6 @@ export const getChildrenBirthCertificateStatus = (userCase: CaseWithId): Section
     childrenSexAtBirth === Gender.MALE ||
     childrenSexAtBirth === Gender.FEMALE ||
     (childrenSexAtBirth === Gender.OTHER && childrenOtherSexAtBirth);
-  const sexAtBirthPartialComplete = childrenSexAtBirth === Gender.OTHER && !childrenOtherSexAtBirth;
   const nationality: string[] = userCase.childrenNationality || [];
   const nationalities: AdditionalNationality[] = userCase.childrenAdditionalNationalities || [];
   const nationalityComplete =
@@ -67,7 +66,7 @@ export const getChildrenBirthCertificateStatus = (userCase: CaseWithId): Section
     return SectionStatus.COMPLETED;
   }
 
-  if (!sexAtBirthComplete && !nationalityComplete && !sexAtBirthPartialComplete) {
+  if (!sexAtBirthComplete && !nationalityComplete) {
     return SectionStatus.NOT_STARTED;
   }
 
@@ -142,17 +141,16 @@ export const getBirthFatherDetailsStatus = (userCase: CaseWithId): SectionStatus
 };
 
 export const getBirthMotherDetailsStatus = (userCase: CaseWithId): SectionStatus => {
-  const firstName = userCase.birthMotherFirstNames;
-  const lastName = userCase.birthMotherLastNames;
+  const names = userCase.birthMotherFirstNames && userCase.birthMotherLastNames;
   const stillAlive = userCase.birthMotherStillAlive;
 
   if (stillAlive === YesNoNotsure.NO) {
-    return firstName && lastName ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
+    return names ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
   }
 
   if (stillAlive === YesNoNotsure.NOT_SURE) {
     const notAliveReason = userCase.birthMotherNotAliveReason;
-    return firstName && lastName && notAliveReason ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
+    return names && notAliveReason ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
   }
 
   if (stillAlive === YesNoNotsure.YES) {
@@ -166,13 +164,10 @@ export const getBirthMotherDetailsStatus = (userCase: CaseWithId): SectionStatus
     const addressKnown = userCase.birthMotherAddressKnown;
 
     if (addressKnown === YesOrNo.NO && userCase.birthMotherAddressNotKnownReason) {
-      return firstName && lastName && nationalityComplete && occupation
-        ? SectionStatus.COMPLETED
-        : SectionStatus.IN_PROGRESS;
+      return names && nationalityComplete && occupation ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
     }
 
-    return firstName &&
-      lastName &&
+    return names &&
       nationalityComplete &&
       occupation &&
       addressKnown === YesOrNo.YES &&
@@ -181,7 +176,7 @@ export const getBirthMotherDetailsStatus = (userCase: CaseWithId): SectionStatus
       : SectionStatus.IN_PROGRESS;
   }
 
-  return firstName || lastName ? SectionStatus.IN_PROGRESS : SectionStatus.NOT_STARTED;
+  return names ? SectionStatus.IN_PROGRESS : SectionStatus.NOT_STARTED;
 };
 
 export const getOtherParentStatus = (userCase: CaseWithId): SectionStatus => {

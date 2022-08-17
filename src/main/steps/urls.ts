@@ -226,5 +226,4 @@ export const LA_PORTAL_TERMS_AND_CONDITIONS: PageLink = `${LA_PORTAL}/terms-and-
 export const LA_PORTAL_CONTACT_US: PageLink = `${LA_PORTAL}/contact-us`;
 
 export const LA_PORTAL_CHECK_YOUR_ANSWERS: PageLink = `${LA_PORTAL}/check-your-answers`;
-export const LA_PORTAL_STATEMENT_OF_TRUTH: PageLink = `${LA_PORTAL}/statement-of-truth`;
 export const LA_PORTAL_CONFIRMATION_PAGE: PageLink = `${LA_PORTAL}/confirmation`;

@@ -73,8 +73,7 @@ export const getPersonalDetailsStatus = (
   userCase: Partial<CaseWithId>,
   userType: `applicant${1 | 2}`
 ): SectionStatus => {
-  const firstName = userCase[`${userType}FirstNames`];
-  const lastName = userCase[`${userType}LastNames`];
+  const fullName = userCase[`${userType}FirstNames`] && userCase[`${userType}LastNames`];
   const hasOtherNames = userCase[`${userType}HasOtherNames`];
   const additionalNames = userCase[`${userType}AdditionalNames`] || [];
   const dateOfBirth = userCase[`${userType}DateOfBirth`];
@@ -86,11 +85,11 @@ export const getPersonalDetailsStatus = (
   const otherNamesComplete =
     hasOtherNames === YesOrNo.NO || (hasOtherNames === YesOrNo.YES && !!additionalNames.length);
 
-  if (firstName && lastName && otherNamesComplete && dateOfBirthComplete && occupation) {
+  if (fullName && otherNamesComplete && dateOfBirthComplete && occupation) {
     return SectionStatus.COMPLETED;
   }
 
-  if (!firstName && !lastName && !otherNamesComplete && !dateOfBirthComplete && !occupation) {
+  if (!fullName && !otherNamesComplete && !dateOfBirthComplete && !occupation) {
     return SectionStatus.NOT_STARTED;
   }
 

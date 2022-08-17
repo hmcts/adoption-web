@@ -12,6 +12,7 @@ import {
   isFieldFilledIn,
   isFieldLetters,
   isFutureDate,
+  isGovUkEmail,
   isInvalidHelpWithFeesRef,
   isInvalidPostcode,
   isLessThanAYear,
@@ -345,14 +346,14 @@ describe('isTextAreaValid()', () => {
   });
 });
 
-// describe('isGovUkEmail()', () => {
-//   it.each([
-//     { mockEmail: 'test@gov.uk', expected: undefined },
-//     { mockEmail: 'test_123@test@test.com', expected: 'invalidGovUkEmail' },
-//   ])('validates an email has gov.uk when %o', ({ mockEmail, expected }) => {
-//     expect(isGovUkEmail(mockEmail)).toEqual(expected);
-//   });
-// });
+describe('isGovUkEmail()', () => {
+  it.each([
+    { mockEmail: 'test@gov.uk', expected: undefined },
+    { mockEmail: 'test_123@test@test.com', expected: 'invalidGovUkEmail' },
+  ])('validates an email has gov.uk when %o', ({ mockEmail, expected }) => {
+    expect(isGovUkEmail(mockEmail)).toEqual(expected);
+  });
+});
 
 describe('notSureViolation()', () => {
   it.each([
