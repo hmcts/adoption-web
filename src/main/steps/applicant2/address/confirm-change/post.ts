@@ -19,8 +19,8 @@ export default class ConfirmChangeAddressController extends PostController<AnyOb
 
     req.session.errors = form.getErrors(formData);
 
-    req.session.returnUrl = undefined;
     req.session.userCase.checkYourAnswersReturn = false;
+    req.session.returnUrl = undefined;
     req.session.userCase.changeAddressBothApplicants = undefined;
 
     if (req.session.errors.length > 0) {

@@ -18,9 +18,8 @@ export default class ChangeAddressController extends PostController<AnyObject> {
     const form = new Form(fields);
     const { saveAndSignOut, saveBeforeSessionTimeout, _csrf, ...formData } = form.getParsedBody(req.body);
 
-    req.session.errors = form.getErrors(formData);
-
     req.session.returnUrl = undefined;
+    req.session.errors = form.getErrors(formData);
 
     if (req.session.errors.length > 0) {
       this.redirect(req, res);
