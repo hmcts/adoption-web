@@ -3,7 +3,7 @@ import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import { FormContent } from '../../app/form/Form';
 import * as draftStoreMock from '../../modules/draft-store/draft-store-service';
 import * as steps from '../../steps';
-import { LA_PORTAL_CHECK_YOUR_ANSWERS, SAVE_AND_SIGN_OUT } from '../../steps/urls';
+import { LA_PORTAL_CHECK_YOUR_ANSWERS, LA_PORTAL_STATEMENT_OF_TRUTH, SAVE_AND_SIGN_OUT } from '../../steps/urls';
 import { ApplicationType, CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE, SYSTEM_USER_UPDATE, State } from '../case/definition';
 import { isPhoneNoValid } from '../form/validation';
 
@@ -302,7 +302,7 @@ describe('PostController', () => {
     expect(req.session.errors).toHaveLength(1);
   });
 
-  test('triggers la-portal error in save request on check your answers', async () => {
+  test('triggers la-portal error in save request on LA_PORTAL_STATEMENT_OF_TRUTH', async () => {
     getNextStepUrlMock.mockReturnValue('/next-step-url');
     getDraftCaseFromStore.mockRejectedValue(new Error('some error'));
     saveDraftCase.mockResolvedValue(expectedUserCaseRedis);
@@ -311,7 +311,7 @@ describe('PostController', () => {
     const controller = new PostController(mockFormContent.fields);
 
     const req = mockRequest({ body });
-    req.url = LA_PORTAL_CHECK_YOUR_ANSWERS;
+    req.url = LA_PORTAL_STATEMENT_OF_TRUTH;
     req.session.userCase.applicationType = ApplicationType.SOLE_APPLICATION;
     const res = mockResponse();
     await controller.post(req, res);
