@@ -62,14 +62,15 @@
       </ol>
     </div>
     <div class="govuk-grid-column-two-thirds">
-      <form>
-        {{ govukButton({
-          text: reviewAndSubmit,
-          type: "submit",
-          href:"/la-portal/check-your-answers",
-          classes: "hidden" if isIncomplete
-        }) }}
-      </form>
+      {% if !isIncomplete %}
+        <form>
+          {{ govukButton({
+            text: reviewAndSubmit,
+            type: "submit",
+            href:"/la-portal/check-your-answers"
+          }) }}
+        </form>
+      {% endif %}
     </div>
   </div>
 {% endblock %}
