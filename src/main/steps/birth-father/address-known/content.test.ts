@@ -1,6 +1,6 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { YesOrNo } from '../../../app/case/definition';
-import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
+import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -12,10 +12,9 @@ const enContent = {
   section: "Birth father's details",
   label: 'Do you have the birth father’s last known address?',
   moreDetails: "Give a reason why the address is not known, for example 'no fixed address'.",
-  hint: "Ask the adoption agency or social worker if you're not sure.",
   errors: {
     birthFatherAddressKnown: {
-      required: 'Please select an answer',
+      required: 'Please answer the question',
     },
     birthFatherAddressNotKnownReason: {
       required: 'Provide a reason',
@@ -28,10 +27,9 @@ const cyContent = {
   section: 'Manylion y tad biolegol',
   label: 'A oes gennych gyfeiriad olaf hysbys y tad biolegol?',
   moreDetails: 'Rhowch reswm pam bod y cyfeiriad yn anhysbys, er enghraifft ‘dim cyfeiriad parhaol’.',
-  hint: 'Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
   errors: {
     birthFatherAddressKnown: {
-      required: 'Dewiswch ateb os gwelwch yn dda',
+      required: 'Please answer the question (in welsh)',
     },
     birthFatherAddressNotKnownReason: {
       required: 'Darparwch reswm',
@@ -66,7 +64,6 @@ describe('birth-father > address-known > content', () => {
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
     expect((field.label as Function)(generatedContent)).toBe(enContent.label);
-    expect(((field as FormInput).hint as Function)(generatedContent)).toBe(enContent.hint);
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesOrNo.YES);

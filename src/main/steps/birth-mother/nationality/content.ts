@@ -11,10 +11,12 @@ import { BIRTH_MOTHER_NATIONALITY } from '../../urls';
 const en = (nationalityContent: PageContent) => ({
   section: "Birth mother's details",
   label: "What is the nationality of the child's birth mother?",
+  hint: 'Select all options that are relevant.',
   errors: {
     birthMotherNationality: {
-      required: "Select a nationality or 'Not sure'",
+      required: 'Select if they are British, Irish, citizen of a different country or not sure',
       notSureViolation: "Select a nationality or 'Not sure'",
+      addButtonNotClicked: "Select 'Add' before you continue",
     },
     addAnotherNationality: (nationalityContent.errors as Record<string, unknown>).addAnotherNationality,
   },
@@ -24,10 +26,12 @@ const en = (nationalityContent: PageContent) => ({
 const cy: typeof en = (nationalityContent: PageContent) => ({
   section: 'Manylion y fam fiolegol',
   label: 'Beth yw cenedligrwydd mam fiolegol y plentyn?',
+  hint: 'Select all options that are relevant. (in welsh)',
   errors: {
     birthMotherNationality: {
-      required: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
+      required: 'Select if they are British, Irish, citizen of a different country or not sure (in welsh)',
       notSureViolation: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
+      addButtonNotClicked: "Select 'Add' before you continue (in welsh)",
     },
     addAnotherNationality: (nationalityContent.errors as Record<string, unknown>).addAnotherNationality,
   },

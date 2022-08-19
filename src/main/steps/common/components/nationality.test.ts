@@ -2,6 +2,7 @@
 /* eslint-disable jest/expect-expect */
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FieldPrefix } from '../../../app/case/case';
+import { AdditionalNationality } from '../../../app/case/definition';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
 import { atLeastOneFieldIsChecked, isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../common.content';
@@ -14,7 +15,7 @@ const EN = 'en';
 const fieldPrefix = FieldPrefix.BIRTH_MOTHER;
 const enContent = {
   label: 'What is your nationality?',
-  hint: 'Select all options that are relevant to you.',
+  hint: 'Select all options that are relevant.',
   british: 'British',
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish',
   irish: 'Irish',
@@ -37,7 +38,7 @@ const enContent = {
 
 const cyContent = {
   label: 'Beth yw eich cenedligrwydd?',
-  hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
+  hint: 'Select all options that are relevant. (in welsh)',
   british: 'Prydeinig',
   britishSubtext: 'gan gynnwys Saesneg, Albanaidd, Cymraeg a Gwyddelig Gogledd Iwerddon',
   irish: 'Gwyddelig',
@@ -58,7 +59,7 @@ const cyContent = {
   },
 };
 
-const commonContent = (countries: string[]) =>
+const commonContent = (countries: AdditionalNationality[]) =>
   ({ language: EN, userCase: { birthMotherAdditionalNationalities: countries } } as CommonContent);
 
 describe('nationality content', () => {
@@ -150,7 +151,10 @@ describe('nationality content', () => {
   });
 
   it("should display correct content under 'Citizen of a different country' when country array is populated", () => {
-    const populatedArray = ['country1', 'country2'];
+    const populatedArray = [
+      { id: 'mock_id1', country: 'country1' },
+      { id: 'mock_id2', country: 'country2' },
+    ];
     const generatedContent = generateContent(commonContent(populatedArray), fieldPrefix);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
@@ -164,11 +168,13 @@ describe('nationality content', () => {
 
     expect(birthMotherAdditionalNationalities?.type).toBe('summarylist');
     expect(rows).toHaveLength(2);
-    expect(rows?.[0].key.text).toStrictEqual(populatedArray[0]);
-    expect(rows?.[1].key.text).toStrictEqual(populatedArray[1]);
-    expect(rows?.[0].actions.items[0].href).toStrictEqual(`/birth-mother/nationality?remove=${populatedArray[0]}`);
+    expect(rows?.[0].key.text).toStrictEqual(populatedArray[0].country);
+    expect(rows?.[1].key.text).toStrictEqual(populatedArray[1].country);
+    expect(rows?.[0].actions.items[0].href).toStrictEqual(
+      `/la-portal/birth-mother/nationality?remove=${populatedArray[0].id}`
+    );
     expect(rows?.[0].actions.items[0].text).toStrictEqual('Remove');
-    expect(rows?.[0].actions.items[0].visuallyHiddenText).toStrictEqual(populatedArray[0]);
+    expect(rows?.[0].actions.items[0].visuallyHiddenText).toStrictEqual(populatedArray[0].country);
 
     expect(addAnotherNationalityDetails.type).toBe('details');
     expect((addAnotherNationalityDetails.label as Function)(generatedContent)).toBe(enContent.another);

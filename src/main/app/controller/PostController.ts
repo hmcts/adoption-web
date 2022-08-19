@@ -1,10 +1,22 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
+import {
+  getDraftCaseFromStore,
+  removeCaseFromRedis,
+  saveDraftCase,
+} from '../../modules/draft-store/draft-store-service';
 import { getNextStepUrl } from '../../steps';
-import { CHECK_ANSWERS_URL, SAVE_AND_SIGN_OUT, TASK_LIST_URL } from '../../steps/urls';
+import {
+  CHECK_ANSWERS_URL,
+  LA_PORTAL,
+  LA_PORTAL_CHECK_YOUR_ANSWERS,
+  LA_PORTAL_TASK_LIST,
+  SAVE_AND_SIGN_OUT,
+  SAVE_AS_DRAFT,
+} from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
-import { CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE } from '../case/definition';
+import { CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE, SYSTEM_USER_UPDATE } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
 import { ValidationError } from '../form/validation';
 
@@ -12,7 +24,7 @@ import { AppRequest } from './AppRequest';
 
 @autobind
 export class PostController<T extends AnyObject> {
-  protected ALLOWED_RETURN_URLS: string[] = [CHECK_ANSWERS_URL];
+  protected ALLOWED_RETURN_URLS: string[] = [CHECK_ANSWERS_URL, LA_PORTAL_CHECK_YOUR_ANSWERS];
 
   constructor(protected readonly fields: FormFields | FormFieldsFn) {}
 
@@ -74,20 +86,39 @@ export class PostController<T extends AnyObject> {
         item =>
           item.errorType !== ValidationError.REQUIRED &&
           item.errorType !== ValidationError.NOT_SELECTED &&
-          item.errorType !== ValidationError.NOT_UPLOADED
+          item.errorType !== ValidationError.NOT_UPLOADED &&
+          item.errorType !== ValidationError.ADD_BUTTON_NOT_CLICKED
       );
     }
   }
 
   protected async save(req: AppRequest<T>, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
-    try {
-      req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
-    } catch (err) {
-      req.locals.logger.error('Error saving', err);
-      req.session.errors = req.session.errors || [];
-      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+    const caseRefId = req.session.userCase.id;
+    if (req.url.includes('la-portal') && ![LA_PORTAL_CHECK_YOUR_ANSWERS?.toString()].includes(req.url)) {
+      try {
+        return await saveDraftCase(req, caseRefId || '', formData);
+      } catch (err) {
+        req.locals.logger.error('Cannot save to redis cache', err);
+        req.session.errors = req.session.errors || [];
+        req.session.errors?.push({ errorType: 'errorSaving', propertyName: '*' });
+      }
+      return req.session.userCase;
+    } else {
+      try {
+        if ([LA_PORTAL_CHECK_YOUR_ANSWERS?.toString()].includes(req.url)) {
+          const modifiedValuesSet = await getDraftCaseFromStore(req, caseRefId || '');
+          req.session.userCase = await req.locals.api.triggerEvent(caseRefId, modifiedValuesSet, eventName);
+          removeCaseFromRedis(req, caseRefId);
+        } else {
+          req.session.userCase = await req.locals.api.triggerEvent(caseRefId, formData, eventName);
+        }
+      } catch (err) {
+        req.locals.logger.error('Error saving', err);
+        req.session.errors = req.session.errors || [];
+        req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+      }
+      return req.session.userCase;
     }
-    return req.session.userCase;
   }
 
   protected redirect(req: AppRequest<T>, res: Response, nextUrl?: string): void {
@@ -95,7 +126,7 @@ export class PostController<T extends AnyObject> {
     if (req.body['saveAsDraft']) {
       //redirects to task-list page in case of save-as-draft button click
       req.session.returnUrl = undefined;
-      target = TASK_LIST_URL;
+      target = req.path.startsWith(LA_PORTAL) ? LA_PORTAL_TASK_LIST : SAVE_AS_DRAFT;
     } else if (req.session.errors?.length) {
       //redirects to same page in case of validation errors
       target = req.url;
@@ -124,8 +155,10 @@ export class PostController<T extends AnyObject> {
     }
   }
 
-  //eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected getEventName(req: AppRequest): string {
+    if (req.session.user?.isSystemUser) {
+      return SYSTEM_USER_UPDATE;
+    }
     return CITIZEN_UPDATE;
   }
 }

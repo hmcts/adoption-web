@@ -1,3 +1,4 @@
+import { CaseWithId } from '../../app/case/case';
 import { YesOrNo } from '../../app/case/definition';
 import { Sections, Step } from '../constants';
 import * as Urls from '../urls';
@@ -27,7 +28,7 @@ export const applicant2Sequence: Step[] = [
     url: Urls.APPLICANT_2_SAME_ADDRESS,
     showInSection: Sections.AboutApplicant2,
     getNextStep: data =>
-      data.applicant2AddressSameAsApplicant1 === YesOrNo.YES
+      (data as Partial<CaseWithId>).applicant2AddressSameAsApplicant1 === YesOrNo.YES
         ? Urls.APPLICANT_2_CONTACT_DETAILS
         : Urls.APPLICANT_2_FIND_ADDRESS,
   },
@@ -48,6 +49,11 @@ export const applicant2Sequence: Step[] = [
   },
   {
     url: Urls.APPLICANT_2_CONTACT_DETAILS,
+    showInSection: Sections.AboutApplicant2,
+    getNextStep: () => Urls.APPLICANT_2_LANGUAGE_PREFERENCE,
+  },
+  {
+    url: Urls.APPLICANT_2_LANGUAGE_PREFERENCE,
     showInSection: Sections.AboutApplicant2,
     getNextStep: () => Urls.TASK_LIST_URL,
   },

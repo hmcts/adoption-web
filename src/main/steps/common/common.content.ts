@@ -4,6 +4,7 @@ import { CaseWithId } from '../../app/case/case';
 import { Fee, State } from '../../app/case/definition';
 import { Eligibility } from '../../app/controller/AppRequest';
 import { PageContent, TranslationFn } from '../../app/controller/GetController';
+import { CourtVenue } from '../../app/court/location';
 
 const en = {
   phase: 'Beta',
@@ -74,6 +75,8 @@ const en = {
   webChatDetails:
     'All our web chat agents are busy helping other people. Please try again later or contact us using one of the ways below.',
   sendUsAMessage: 'Send us a message',
+  TBC: 'TBC',
+  sendUsAMessageTBC: 'Send us a message  (email TBC)',
   sendUsAMessageDetails: 'We aim to get back to you within 5 days.',
   telephone: 'Telephone',
   telephoneNumber: '0300 303 0642',
@@ -94,6 +97,10 @@ const en = {
     '<p class="govuk-body">You’ve accepted additional cookies. You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.</p>',
   cookiesRejectedMessage:
     '<p class="govuk-body">You’ve rejected additional cookies. You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.</p>',
+  laPortalCookiesAcceptedMessage:
+    '<p class="govuk-body">You’ve accepted additional cookies. You can <a class="govuk-link" href="/la-portal/cookies">change your cookie settings</a> at any time.</p>',
+  laPortalCookiesRejectedMessage:
+    '<p class="govuk-body">You’ve rejected additional cookies. You can <a class="govuk-link" href="la-portal/cookies">change your cookie settings</a> at any time.</p>',
   changeCookiesHeading: 'Change your cookie settings',
   allowAnalyticsCookies: 'Allow cookies that measure website use?',
   useAnalyticsCookies: 'Use cookies that measure my website use',
@@ -171,15 +178,17 @@ const cy: typeof en = {
   notSure: 'Ddim yn siŵr',
   english: 'Saesneg',
   welsh: 'Cymraeg',
-  contactUsForHelp: 'Cysylltwch â ni am gymorth',
+  contactUsForHelp: 'Cysylltwch â ni am help',
   webChat: 'Sgwrsio dros y we',
   webChatDetails:
     "Mae ein holl asiantau sgwrsio dros y we yn brysur yn helpu pobl eraill. Dewch yn ôl nes ymlaen neu cysylltwch â ni trwy un o'r dulliau uchod.",
   sendUsAMessage: 'Anfonwch neges atom',
-  sendUsAMessageDetails: 'Byddwn yn ymdrechu i ymateb o fewn 5 diwrnod.',
-  telephone: 'Ffoniwch',
+  TBC: 'TBC (in Welsh)',
+  sendUsAMessageTBC: 'Anfonwch neges atom  (email TBC)',
+  sendUsAMessageDetails: 'Byddwn yn anelu at ymateb o fewn 5 diwrnod gwaith.',
+  telephone: 'Ffôn',
   telephoneNumber: '0300 303 5171',
-  telephoneDetails: 'Dydd Llun i Ddydd Gwener, 8.30am - 5pm.',
+  telephoneDetails: 'Dydd Llun i ddydd Iau, 9am i 5pm, dydd Gwener 9am i 4.30pm.',
   cookiesHeading: 'Cwcis ymlaen',
   cookiesLine1: "Rydym yn defnyddio rhai cwcis hanfodol i wneud i'r gwasanaeth hwn weithio.",
   cookiesLine2:
@@ -192,6 +201,10 @@ const cy: typeof en = {
     '<p class="govuk-body">Rydych chi wedi derbyn cwcis ychwanegol. Gallwch chi <a class="govuk-link" href="/cookies">newid eich gosodiadau cwci</a> ar unrhyw bryd.</p>',
   cookiesRejectedMessage:
     '<p class="govuk-body">Rydych chi wedi gwrthod cwcis ychwanegol. Gallwch chi <a class="govuk-link" href="/cookies">newid eich gosodiadau cwci</a> ar unrhyw bryd.</p>',
+  laPortalCookiesAcceptedMessage:
+    '<p class="govuk-body">Rydych chi wedi derbyn cwcis ychwanegol. Gallwch chi <a class="govuk-link" href="/la-portal/cookies">newid eich gosodiadau cwci</a> ar unrhyw bryd.</p>',
+  laPortalCookiesRejectedMessage:
+    '<p class="govuk-body">Rydych chi wedi gwrthod cwcis ychwanegol. Gallwch chi <a class="govuk-link" href="/la-portal/cookies">newid eich gosodiadau cwci</a> ar unrhyw bryd.</p>',
   changeCookiesHeading: 'Newidiwch eich gosodiadau cwci',
   allowAnalyticsCookies: "Caniatáu cwcis sy'n mesur defnydd gwefan?",
   useAnalyticsCookies: "Defnyddio cwcis sy'n mesur fy nefnydd gwefan",
@@ -214,6 +227,7 @@ export const generatePageContent = ({
   addresses = [],
   eligibility,
   fee,
+  courtList,
 }: {
   language: Language;
   pageContent?: TranslationFn;
@@ -222,6 +236,7 @@ export const generatePageContent = ({
   addresses?: [];
   eligibility?: Eligibility;
   fee?: Fee;
+  courtList?: CourtVenue[];
 }): PageContent => {
   const commonTranslations: typeof en = language === 'en' ? en : cy;
   const serviceName = getServiceName(commonTranslations);
@@ -233,6 +248,7 @@ export const generatePageContent = ({
     serviceName,
     language,
     userCase,
+    courtList,
     userEmail,
     contactEmail,
     addresses,
@@ -257,6 +273,7 @@ export type CommonContent = typeof en & {
   serviceName: string;
   pageContent?: TranslationFn;
   userCase?: Partial<CaseWithId>;
+  courtList?: CourtVenue[];
   userEmail?: string;
   contactEmail?: string;
   referenceNumber?: string;

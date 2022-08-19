@@ -1,5 +1,5 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
-import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
+import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -14,8 +14,7 @@ const enContent = {
   incomplete: 'incomplete',
   change: 'Change',
   remove: 'Remove',
-  label: 'Do you want to add another order?',
-  hint: 'We need details of all orders already in place. Your social worker or adoption agency can help provide these details.',
+  label: 'Does the child have any other previous or existing orders?',
   errors: {
     addAnotherPlacementOrder: {
       required: 'Please select an answer',
@@ -29,7 +28,7 @@ const enContent = {
         classes: 'summary-list-actions',
         items: [
           {
-            href: '/children/placement-order-check-your-answers?change=MOCK_ID',
+            href: '/la-portal/child/placement-order-check-your-answers?change=MOCK_ID',
             text: 'Change',
             visuallyHiddenText: 'Placement Order',
           },
@@ -46,8 +45,7 @@ const cyContent = {
   incomplete: 'anghyflawn',
   change: 'Newid',
   remove: 'Dileu',
-  label: 'A ydych eisiau ychwanegu gorchymyn arall?',
-  hint: 'Mae arnom angen manylion y gorchmynion sydd eisoes mewn lle. Gall eich gweithiwr cymdeithasol neu’ch asiantaeth fabwysiadu eich helpu i ddarparu’r manylion hyn.',
+  label: 'Does the child have any other previous or existing orders? (in welsh)',
   errors: {
     addAnotherPlacementOrder: {
       required: 'Dewiswch ateb os gwelwch yn dda',
@@ -61,7 +59,7 @@ const cyContent = {
         classes: 'summary-list-actions',
         items: [
           {
-            href: '/children/placement-order-check-your-answers?change=MOCK_ID',
+            href: '/la-portal/child/placement-order-check-your-answers?change=MOCK_ID',
             text: 'Newid',
             visuallyHiddenText: 'Gorchymyn Lleoli',
           },
@@ -104,7 +102,6 @@ describe('children > placement-order-summary > content', () => {
     expect(addAnotherPlacementOrderField.type).toBe('radios');
     expect(addAnotherPlacementOrderField.classes).toBe('govuk-radios govuk-radios--inline');
     expect((addAnotherPlacementOrderField.label as Function)(generatedContent)).toBe(enContent.label);
-    expect(((addAnotherPlacementOrderField as FormInput).hint as Function)(generatedContent)).toBe(enContent.hint);
     expect((addAnotherPlacementOrderField.section as Function)(generatedContent)).toBe(enContent.section);
     expect((addAnotherPlacementOrderField.values[0].label as Function)({ yes: 'Yes' })).toBe('Yes');
     expect((addAnotherPlacementOrderField.values[1].label as Function)({ no: 'No' })).toBe('No');

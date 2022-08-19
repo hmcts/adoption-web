@@ -20,6 +20,7 @@ module.exports = {
     pcqNO: 'form[action="/start-page"] button[formaction="/opt-out"]',
     caseID: '.govuk-panel__body strong',
     changeChildMoveInDate: 'a[href="/date-child-moved-in?returnUrl=/review-pay-submit/check-your-answers"]',
+    cancelpayment: 'input[id$="cancel-payment"]',
   },
   async selectNoPCQOption() {
     await I.wait(5);
@@ -53,6 +54,20 @@ module.exports = {
     await I.wait(4);
   },
 
+  async statementOfTruthDetailsSectionEmpty() {
+    await I.retry(3).waitForText('Statement of truth', 30);
+    await I.retry(3).click('Confirm');
+    await I.wait(4);
+    await I.retry(3).see('Confirm your statement of truth');
+    await I.retry(3).see('Enter a full name');
+    await I.retry(3).click(this.fields.applicant1IBelieveApplicationIsTrue);
+    await I.retry(3).click(this.fields.applicant2IBelieveApplicationIsTrue);
+    await I.retry(3).fillField(this.fields.applicant1SotFullName, 'Joe Bloggs');
+    await I.retry(3).fillField(this.fields.applicant2SotFullName, 'George Thomas');
+    await I.retry(3).click('Confirm');
+    await I.wait(4);
+  },
+
   async adoptionCourtFeesByCard() {
     await I.wait(30);
     await I.retry(3).waitForText('Enter card details', 30);
@@ -73,6 +88,30 @@ module.exports = {
     await I.retry(3).click('Confirm payment');
     await I.wait(5);
     await I.retry(3).waitForText('Application Submitted', 30);
+    await I.wait(5);
+  },
+
+  async getCaseIDAfterAplicationSubmit() {
     console.log(await I.retry(3).grabTextFrom(this.fields.caseID));
+    const caseId = await I.retry(3).grabTextFrom(this.fields.caseID);
+    console.log('caseId= ' + caseId);
+    const normalizeCaseId = caseId.toString().replace(/\D/g, '');
+    console.log('normalizeCaseId= ' + normalizeCaseId);
+    return normalizeCaseId;
+  },
+
+  async paymentCancellation() {
+    await I.wait(3);
+    await I.retry(3).waitForText('Enter card details', 30);
+    await I.wait(5);
+    await I.retry(3).click('Cancel payment');
+    await I.wait(3);
+    await I.retry(3).waitForText('Your payment has been cancelled');
+    await I.retry(3).waitForText('No money has been taken from your account.');
+    await I.retry(3).click('Continue');
+    await I.wait(3);
+    await I.retry(3).waitForText('Statement of truth', 30);
+    await I.retry(3).click('Confirm');
+    await I.wait(4);
   },
 };

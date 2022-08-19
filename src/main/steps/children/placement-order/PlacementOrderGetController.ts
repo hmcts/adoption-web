@@ -3,6 +3,7 @@ import { Response } from 'express';
 
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { GetController } from '../../../app/controller/GetController';
+import { getCourtList } from '../../../app/court/court-venues-api';
 
 @autobind
 export default class PlacementOrderGetController extends GetController {
@@ -60,6 +61,10 @@ export default class PlacementOrderGetController extends GetController {
       this.getEventName(req)
     );
 
+    req.session.userCase.selectedPlacementOrderType = placementOrder?.placementOrderType;
+    req.session.userCase.selectedOtherPlacementOrderType = placementOrder?.otherPlacementOrderType;
+    const courtList = await getCourtList(req);
+    req.session.courtList = courtList;
     const callback = redirect ? undefined : () => super.get(req, res);
 
     super.saveSessionAndRedirect(req, res, callback);

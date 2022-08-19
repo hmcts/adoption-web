@@ -8,7 +8,7 @@
   "scripts": {
     "prepare": "husky install",
     "start": "NODE_ENV=production ts-node --transpile-only -r tsconfig-paths/register src/main/server.ts",
-    "start:dev": "NODE_ENV=development yarn start:watch",
+    "start:dev": "NODE_TLS_REJECT_UNAUTHORIZED=0 NODE_ENV=development yarn start:watch",
     "start:docker": "NODE_ENV=docker yarn start:watch",
     "start:watch": "concurrently --handle-input \"nodemon --config nodemon.express.json\" \"nodemon --config nodemon.assets.json\"",
     "lint": "tsc --noEmit -p tsconfig.eslint.json && eslint . --ext .js,.ts",
@@ -18,6 +18,7 @@
     "fortifyScan": "./test/java/gradlew -p test/java fortifyScan",
     "test:coverage": "jest --coverage",
     "test:integration": "jest -c jest.integration.config.js",
+    "test:api": "jest -c jest.api.config.js",
     "test:a11y": "echo 'a11y tests will be executed after functional tests' && exit 0",
     "test:pa11y": "NODE_TLS_REJECT_UNAUTHORIZED=0 jest -c jest.a11y.config.js --maxWorkers 1",
     "sonar-scan": "sonar-scanner",
@@ -32,7 +33,7 @@
     "test:crossbrowser": "./bin/run-crossbrowser-tests.sh",
     "test:local": "codeceptjs run-multiple parallel",
     "test:pact": "jest -c jest.pact.config.js --runInBand",
-    "pact:publish": "pact-broker publish pact/pacts --consumer-app-version=0.0.1 --broker-base-url=https://pact-broker.platform.hmcts.net/",
+    "pact:publish": "NODE_ENV=test NODE_PATH=. LOG_LEVEL=error ts-node src/test/pact/publish/publish.ts",
     "test:pact:run-and-publish": "yarn test:pact && yarn pact:publish",
     "broker": "docker-compose -f broker-compose.yaml up -d",
     "broker:stop": "docker-compose -f broker-compose.yaml down"
@@ -86,6 +87,7 @@
     "govuk-frontend": "^4.0.1",
     "helmet": "^4.6.0",
     "http-status-codes": "^2.2.0",
+    "ioredis": "^5.2.2",
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
     "multer": "^1.4.4",

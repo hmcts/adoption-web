@@ -27,6 +27,7 @@ describe('NationalityPostController', () => {
   const formData = { birthMotherAdditionalNationalities: [] };
 
   beforeEach(() => {
+    Date.now = jest.fn(() => +new Date('2021-01-01'));
     req = mockRequest({
       session: {
         userCase: {
@@ -81,14 +82,14 @@ describe('NationalityPostController', () => {
           expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(1);
           expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(
             'MOCK_ID',
-            { birthMotherAdditionalNationalities: ['MOCK_COUNTRY'] },
+            { birthMotherAdditionalNationalities: [{ id: '1609459200000', country: 'MOCK_COUNTRY' }] },
             'citizen-update-application'
           );
         });
       });
     });
 
-    describe('and when addButton is not pressed', () => {
+    describe('and when addButton is not clicked', () => {
       beforeEach(() => {
         mockGetParsedBody.mockReturnValue({});
         mockGetErrors.mockReturnValue([]);
@@ -104,6 +105,17 @@ describe('NationalityPostController', () => {
         expect(mockGetNextStepUrl).toHaveBeenCalledWith(req, {
           birthMotherAdditionalNationalities: [],
         });
+      });
+
+      test('should show error for not pressing add button', async () => {
+        mockGetParsedBody.mockReturnValue({ addButton: undefined, addAnotherNationality: 'MOCK_COUNTRY3' });
+        await controller.post(req, res);
+        expect(req.session.errors).toEqual([
+          {
+            errorType: 'addButtonNotClicked',
+            propertyName: 'birthMotherNationality',
+          },
+        ]);
       });
     });
   });

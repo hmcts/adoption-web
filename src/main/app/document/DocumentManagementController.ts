@@ -3,7 +3,7 @@ import config from 'config';
 import type { Response } from 'express';
 import { v4 as generateUuid } from 'uuid';
 
-import { PAY_YOUR_FEE, UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
+import { LA_PORTAL_UPLOAD_YOUR_DOCUMENTS, PAY_YOUR_FEE, UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
 import { CaseWithId } from '../case/case';
 import {
@@ -12,6 +12,7 @@ import {
   DocumentType,
   LanguagePreference,
   ListValue,
+  SYSTEM_USER_UPDATE,
   State,
 } from '../case/definition';
 import type { AppRequest, UserDetails } from '../controller/AppRequest';
@@ -24,8 +25,8 @@ export class DocumentManagerController {
     return new DocumentManagementClient(config.get('services.cdam.url'), getServiceAuthToken(), user);
   }
 
-  public async post(req: AppRequest, res: Response): Promise<void> {
-    if (![State.Draft].includes(req.session.userCase.state)) {
+  public async post(req: AppRequest, res: Response, documentInput?: DocumentInput): Promise<void> {
+    if (![State.Draft].includes(req.session.userCase.state) && (!documentInput || !documentInput.skipDraftCheck)) {
       throw new Error('Cannot upload new documents as case is not in Draft state');
     }
 
@@ -33,7 +34,7 @@ export class DocumentManagerController {
       if (req.headers.accept?.includes('application/json')) {
         throw new Error('No files were uploaded');
       } else {
-        return res.redirect(UPLOAD_YOUR_DOCUMENTS);
+        return res.redirect(documentInput ? documentInput.documentRedirectUrl : UPLOAD_YOUR_DOCUMENTS);
       }
     }
 
@@ -47,7 +48,7 @@ export class DocumentManagerController {
     const newUploads: ListValue<Partial<AdoptionDocument> | null>[] = filesCreated.map(file => ({
       id: generateUuid(),
       value: {
-        documentComment: 'Uploaded by applicant',
+        documentComment: documentInput ? documentInput.documentComment : 'Uploaded by applicant',
         documentFileName: file.originalDocumentName,
         documentLink: {
           document_url: file._links.self.href,
@@ -57,37 +58,41 @@ export class DocumentManagerController {
       },
     }));
 
-    const documentsKey = 'applicant1DocumentsUploaded';
+    const documentsKey = documentInput ? documentInput.documentsUploadedKey : 'applicant1DocumentsUploaded';
     const updatedDocumentsUploaded = newUploads.concat(req.session.userCase[documentsKey] || []);
 
     req.session.userCase = await req.locals.api.triggerEvent(
       req.session.userCase.id,
       { [documentsKey]: updatedDocumentsUploaded },
-      CITIZEN_UPDATE
+      this.getEventName(req)
     );
 
     req.session.save(() => {
       if (req.headers.accept?.includes('application/json')) {
         res.json(newUploads.map(file => ({ id: file.id, name: file.value?.documentFileName })));
       } else {
-        res.redirect(UPLOAD_YOUR_DOCUMENTS);
+        res.redirect(documentInput ? documentInput.documentRedirectUrl : UPLOAD_YOUR_DOCUMENTS);
       }
     });
   }
 
-  public async delete(req: AppRequest<Partial<CaseWithId>>, res: Response): Promise<void> {
-    const documentsUploadedKey = 'applicant1DocumentsUploaded';
+  public async delete(
+    req: AppRequest<Partial<CaseWithId>>,
+    res: Response,
+    documentInput?: DocumentInput
+  ): Promise<void> {
+    const documentsUploadedKey = documentInput ? documentInput.documentsUploadedKey : 'applicant1DocumentsUploaded';
     const documentsUploaded =
       (req.session.userCase[documentsUploadedKey] as ListValue<Partial<AdoptionDocument> | null>[]) ?? [];
 
-    if (![State.Draft].includes(req.session.userCase.state)) {
+    if (![State.Draft].includes(req.session.userCase.state) && (!documentInput || !documentInput.skipDraftCheck)) {
       throw new Error('Cannot delete documents as case is not in Draft state');
     }
 
     const documentIndexToDelete = parseInt(req.params.index, 10);
     const documentToDelete = documentsUploaded[documentIndexToDelete];
     if (!documentToDelete?.value?.documentLink?.document_url) {
-      return res.redirect(UPLOAD_YOUR_DOCUMENTS);
+      return res.redirect(documentInput ? documentInput.documentRedirectUrl : UPLOAD_YOUR_DOCUMENTS);
     }
     const documentUrlToDelete = documentToDelete.value.documentLink.document_url;
 
@@ -96,7 +101,7 @@ export class DocumentManagerController {
     req.session.userCase = await req.locals.api.triggerEvent(
       req.session.userCase.id,
       { [documentsUploadedKey]: documentsUploaded },
-      CITIZEN_UPDATE
+      this.getEventName(req)
     );
 
     const documentManagementClient = this.getDocumentManagementClient(req.session.user);
@@ -106,8 +111,28 @@ export class DocumentManagerController {
       if (err) {
         throw err;
       }
-      return res.redirect(UPLOAD_YOUR_DOCUMENTS);
+      return res.redirect(documentInput ? documentInput.documentRedirectUrl : UPLOAD_YOUR_DOCUMENTS);
     });
+  }
+
+  public async postLa(req: AppRequest, res: Response): Promise<void> {
+    const documentInput = {
+      documentsUploadedKey: 'laDocumentsUploaded',
+      documentComment: 'Uploaded by LA',
+      documentRedirectUrl: LA_PORTAL_UPLOAD_YOUR_DOCUMENTS,
+      skipDraftCheck: true,
+    };
+    await this.post(req, res, documentInput);
+  }
+
+  public async deleteLa(req: AppRequest<Partial<CaseWithId>>, res: Response): Promise<void> {
+    const documentInput = {
+      documentsUploadedKey: 'laDocumentsUploaded',
+      documentComment: 'Uploaded by LA',
+      documentRedirectUrl: LA_PORTAL_UPLOAD_YOUR_DOCUMENTS,
+      skipDraftCheck: true,
+    };
+    await this.delete(req, res, documentInput);
   }
 
   public async get(req: AppRequest<Partial<CaseWithId>>, res: Response): Promise<void> {
@@ -145,4 +170,18 @@ export class DocumentManagerController {
       return res.redirect(PAY_YOUR_FEE);
     });
   }
+
+  protected getEventName(req: AppRequest): string {
+    if (req.session.user?.isSystemUser) {
+      return SYSTEM_USER_UPDATE;
+    }
+    return CITIZEN_UPDATE;
+  }
+}
+
+export interface DocumentInput {
+  documentsUploadedKey: string;
+  documentComment: string;
+  skipDraftCheck: boolean;
+  documentRedirectUrl: string;
 }

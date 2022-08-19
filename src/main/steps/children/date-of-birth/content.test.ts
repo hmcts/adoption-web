@@ -32,16 +32,19 @@ const enContent = {
 const cyContent = {
   section: 'Manylion y plentyn',
   label: 'Beth yw dyddiad geni’r plentyn?',
-  hint: 'Er enghraifft, 31 3 2012. Dylai hyn fod ar eu tystysgrif geni Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
+  hint: 'Er enghraifft, 31 3 2012. Dylai hyn fod wedi’i nodi ar eu tystysgrif geni. Holwch gyda’r asiantaeth fabwysiadu neu’r gweithiwr cymdeithasol os nad ydych yn siŵr.',
+  day: '',
+  month: '',
+  year: '',
   errors: {
     childrenDateOfBirth: {
-      required: 'Nac ydwdwch eu dyddiad geni',
-      incompleteDay: 'Rhaid i’r dyddiad geni gynnwys diwrnod',
-      incompleteMonth: 'Rhaid i’r dyddiad geni gynnwys mis',
-      incompleteYear: 'Rhaid i’r dyddiad geni gynnwys blwyddyn',
-      invalidDate: 'Rhaid i’r dyddiad geni fod yn ddyddiad dilys',
+      required: 'Rhowch eu dyddiad geni',
+      incompleteDay: 'Mae’n rhaid i’r dyddiad geni gynnwys diwrnod',
+      incompleteMonth: 'Mae’n rhaid i’r dyddiad geni gynnwys mis',
+      incompleteYear: 'Mae’n rhaid i’r dyddiad geni gynnwys blwyddyn',
+      invalidDate: 'Mae’n rhaid i’r dyddiad geni fod yn ddyddiad go iawn',
       invalidDateInFuture: 'Rhaid i’r dyddiad geni fod yn y gorffennol',
-      invalidDateOver18: 'Mae’r plentyn dros 18 oed ac ni ellir ei fabwysiadu',
+      invalidDateOver18: 'Mae’r plentyn yn 18 oed neu’n hŷn ac ni ellir ei fabwysiadu',
     },
   },
 };

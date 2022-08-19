@@ -10,22 +10,24 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: 'Sibling details',
-  label: 'Does the child have any siblings or half siblings?',
-  hint: "Ask the adoption agency or social worker if you're not sure.",
+  label: 'Does the child have any siblings or half siblings with court orders?',
+  conditionalText:
+    '<label class="govuk-label">You will be asked to provide each sibling court order individually.</label>',
   errors: {
     hasSiblings: {
-      required: 'Please answer the question',
+      required: 'Please select an answer',
     },
   },
 };
 
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
-  label: 'A oes gan y plentyn frodyr/chwiorydd neu hanner frodyr/chwiorydd?',
-  hint: 'Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
+  label: 'Does the child have any siblings or half siblings with court orders? (in welsh)',
+  conditionalText:
+    '<label class="govuk-label">You will be asked to provide each sibling court order individually.</label> (in welsh)',
   errors: {
     hasSiblings: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: 'Please select an answer (in welsh)',
     },
   },
 };
@@ -56,10 +58,10 @@ describe('sibling > exists > content', () => {
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
     expect((field.label as Function)(generatedContent)).toBe(enContent.label);
-    expect((field.hint as Function)(generatedContent)).toBe(enContent.hint);
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesNoNotsure.YES);
+    expect((field.values[0].conditionalText as Function)(generatedContent)).toBe(enContent.conditionalText);
     expect((field.values[1].label as Function)(commonContent)).toBe(commonContent.no);
     expect(field.values[1].value).toBe(YesNoNotsure.NO);
     expect((field.values[2].label as Function)(commonContent)).toBe(commonContent.notSure);

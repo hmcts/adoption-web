@@ -6,22 +6,24 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
   section: SECTION,
-  label: 'Does the child have any siblings or half siblings?',
-  hint: "Ask the adoption agency or social worker if you're not sure.",
+  label: 'Does the child have any siblings or half siblings with court orders?',
+  conditionalText:
+    '<label class="govuk-label">You will be asked to provide each sibling court order individually.</label>',
   errors: {
     hasSiblings: {
-      required: 'Please answer the question',
+      required: 'Please select an answer',
     },
   },
 });
 
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  label: 'A oes gan y plentyn frodyr/chwiorydd neu hanner frodyr/chwiorydd?',
-  hint: 'Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
+  label: 'Does the child have any siblings or half siblings with court orders? (in welsh)',
+  conditionalText:
+    '<label class="govuk-label">You will be asked to provide each sibling court order individually.</label> (in welsh)',
   errors: {
     hasSiblings: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: 'Please select an answer (in welsh)',
     },
   },
 });
@@ -35,7 +37,7 @@ export const form: FormContent = {
       section: l => l.section,
       hint: l => l.hint,
       values: [
-        { label: l => l.yes, value: YesNoNotsure.YES },
+        { label: l => l.yes, value: YesNoNotsure.YES, conditionalText: l => l.conditionalText },
         { label: l => l.no, value: YesNoNotsure.NO },
         { label: l => l.notSure, value: YesNoNotsure.NOT_SURE },
       ],

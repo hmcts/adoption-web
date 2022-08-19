@@ -8,7 +8,7 @@ Scenario(
     taskListPage,
     childDetailsPlacementOrderPage,
     childrenBirthCertificatePage,
-    childAdoptionCertificateDetailsPage,
+    childsDetailsPage,
     childBirthMothersDetailsPage,
     childBirthFatherDetailsPage,
     childOtherParentDetailsPage,
@@ -27,14 +27,29 @@ Scenario(
     await landingPage.seeTheLandingPage();
     await landingPage.selectApplyWithMySpouseSection();
 
+    //  Add application details
+
     await taskListPage.selectDateChildMovedInDetails();
     await dateChildMovedinDetailsPage.dateChildMovedInSection('10', '10', '2020');
     await taskListPage.verifyDateChildMovedInStatus();
 
+    await taskListPage.selectChildChildDetails();
+    await childsDetailsPage.childFullNameSection();
+    await childsDetailsPage.childNameAfterAdoptionDetailsSection();
+    await childsDetailsPage.childDOBSection();
+    await taskListPage.verifyChildDetailsStatus();
+
     await taskListPage.selectChildAdoptionAgencyDetails();
+    await childAdoptionAgencyDetailsPage.childSocialWorkerDetailsSection();
+    await childAdoptionAgencyDetailsPage.yourSocialWorkerDetailsSection();
     await childAdoptionAgencyDetailsPage.childAdoptionAgencyDetailsSection();
-    await childAdoptionAgencyDetailsPage.childSocialWorkerDetails();
     await taskListPage.verifyChildAdoptionAgencyDetailsStatus;
+
+    await taskListPage.selectChooseYourFamilyCourtDetails();
+    await chooseYourFamilyCourtDetailsPage.childDetailsFindFamilyCourtSection();
+    await taskListPage.verifyChooseYourFamilyCourtStatus();
+
+    // Add applicant's details
 
     await taskListPage.selectPrimaryApplicantContactDetails();
     await primaryApplicantDetailsPage.primaryApplicantContactDetailsSection();
@@ -52,41 +67,6 @@ Scenario(
     await otherApplicantPersonalDetailsPage.otherApplicantPersonalDetailsSection();
     await taskListPage.verifyOtherApplicantPersonalDetailsStatus();
 
-    await taskListPage.selectChildrenBirthCertificate();
-    await childrenBirthCertificatePage.childDetailsBirthCertificaterSection();
-    await taskListPage.verifyChildBirthCertificateDetailsStatus();
-
-    await taskListPage.selectChildAdoptionCertificateDetails();
-    await childAdoptionCertificateDetailsPage.childNameAfterAdoptionDetailsSection();
-    await taskListPage.verifyAdoptionCertificateDetailStatus();
-
-    await taskListPage.selectChildBirthMotherDetails();
-    await childBirthMothersDetailsPage.childBirthMothersDetailsSection();
-    await taskListPage.verifyChildBirthMotherDetailsStatus();
-
-    await taskListPage.selectChildBirthFatherDetails();
-    await childBirthFatherDetailsPage.childBirthFatherDetailsSection();
-    await taskListPage.verifyChildBirthFatherDetailsStatus();
-
-    await taskListPage.selectChildOtherParentDetails();
-    await childOtherParentDetailsPage.childOtherParentDetailsSection();
-    await taskListPage.verifyChildOtherParentDetailsStatus();
-
-    await taskListPage.selectChildPlacementOrderDetails();
-    await childDetailsPlacementOrderPage.childDetailsPlacementOrderSection();
-
-    await taskListPage.selectSiblingDetails();
-    await childSiblingDetailsPage.childDetailsSiblingSection();
-    await taskListPage.verifySiblingDetailsStatus();
-
-    await taskListPage.selectChooseYourFamilyCourtDetails();
-    await chooseYourFamilyCourtDetailsPage.childDetailsFindFamilyCourtSection();
-    await taskListPage.verifyChooseYourFamilyCourtStatus();
-
-    await taskListPage.selectUploadDocumentsDetails();
-    await uploadDocumentsDetailsPage.uploadDocumentsSectionWithCantNotUploadOption();
-    await taskListPage.verifyUploadDocumentsStatus();
-
     await taskListPage.selectReviewPayAndSubmitDetails();
     await reviewPayAndSubmitPage.selectNoPCQOption();
     await reviewPayAndSubmitPage.changeValueFromReviewYourAnswers();
@@ -94,5 +74,43 @@ Scenario(
     await reviewPayAndSubmitPage.reviewYourAnswersAndContinue();
     await reviewPayAndSubmitPage.statementOfTruthDetailsSection();
     await reviewPayAndSubmitPage.adoptionCourtFeesByCard();
+    const caseId = await reviewPayAndSubmitPage.getCaseIDAfterAplicationSubmit();
+
+    await landingPage.searchForCaseInLALandingPage(caseId);
+
+    //  LA - Add child's details
+
+    await taskListPage.selectChildrenBirthCertificate();
+    await childrenBirthCertificatePage.childDetailsBirthCertificaterSection();
+    // TODO in Future stories
+    //await taskListPage.verifyChildBirthCertificateDetailsStatus();
+
+    await taskListPage.selectChildBirthMotherDetails();
+    await childBirthMothersDetailsPage.childBirthMothersDetailsSection();
+    // TODO in Future stories
+    //await taskListPage.verifyChildBirthMotherDetailsStatus();
+
+    await taskListPage.selectChildBirthFatherDetails();
+    await childBirthFatherDetailsPage.childBirthFatherDetailsSection();
+    // TODO in Future stories
+    // await taskListPage.verifyChildBirthFatherDetailsStatus();
+
+    await taskListPage.selectChildOtherParentDetails();
+    await childOtherParentDetailsPage.childOtherParentDetailsSection();
+    // TODO in Future stories
+    //await taskListPage.verifyChildOtherParentDetailsStatus();
+
+    await taskListPage.selectChildPlacementOrderDetails();
+    await childDetailsPlacementOrderPage.childDetailsPlacementOrderSection();
+
+    // TODO bug Created for this change
+    await taskListPage.selectSiblingDetails();
+    await childSiblingDetailsPage.childDetailsSiblingSection();
+    //await taskListPage.verifySiblingDetailsStatus();
+
+    await taskListPage.selectUploadDocumentsDetails();
+    await uploadDocumentsDetailsPage.uploadDocumentsSection();
+    // TODO in Future stories
+    // await taskListPage.verifyUploadDocumentsStatus();
   }
 );

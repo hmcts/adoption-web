@@ -6,6 +6,7 @@ import { YesOrNo } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
+import { isFieldFilledIn } from '../../../app/form/validation';
 
 import { getCourtEmailId } from './util';
 const logger = Logger.getLogger('FindFamilyCourtPostController');
@@ -20,18 +21,25 @@ export default class FindFamilyCourtPostController extends PostController<AnyObj
     req.session.errors = form.getErrors(formData);
 
     Object.assign(req.session.userCase, formData);
+    const findFamilyCourtName = req.body.autoCompleteData ? req.body.autoCompleteData + '' : '';
+    const findFamilyCourt = req.session.userCase.findFamilyCourt;
 
-    this.filterErrorsForSaveAsDraft(req);
+    const isFilledFamilyCourt = isFieldFilledIn(findFamilyCourtName);
+
+    if (findFamilyCourt === YesOrNo.NO && !!isFilledFamilyCourt) {
+      req.session.errors.push({ propertyName: 'familyCourtName', errorType: isFilledFamilyCourt });
+    }
 
     if (req.session.errors.length > 0) {
       this.redirect(req, res);
       return;
     }
 
-    const findFamilyCourt = req.session.userCase.findFamilyCourt;
+    this.filterErrorsForSaveAsDraft(req);
+
     const familyCourtName =
       findFamilyCourt === YesOrNo.YES
-        ? req.session.userCase?.placementOrders![0]?.placementOrderCourt
+        ? req.session.userCase?.placementOrderCourt
         : req.session.userCase.familyCourtName;
     const familyCourtEmailId = getCourtEmailId(familyCourtName as string);
     logger.info(`CaseId: ${req.session.userCase.hyphenatedCaseRef} has familyCourtEmailId: ${familyCourtEmailId}`);

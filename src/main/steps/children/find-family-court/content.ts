@@ -3,21 +3,28 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form'; //FormFieldsFn
 import { isFieldFilledIn } from '../../../app/form/validation';
 
+const getCourtListItems = (courtList, selectedCourt) =>
+  courtList
+    .filter(item => item.site_name !== selectedCourt)
+    .map(item => ({ text: item.site_name, value: item.site_name }));
+
 const en = content => ({
   section: "The child's details",
   title: 'Choose a family court',
   findFamilyCourtParagraph1:
     'There may be court hearings related to your application to adopt. The birth parents may be present at these. You do not have to attend these hearings.',
-  findFamilyCourtParagraph2: `You have told us that the court which issued the placement order was <b>${content.userCase?.placementOrders[0]?.placementOrderCourt}</b>.`,
+  findFamilyCourtParagraph2: `You have told us that the court which issued the placement order was <b>${content.userCase?.placementOrderCourt}</b>.`,
   findFamilyCourt: 'Do you want the hearings to be heard in the same court?',
   findFamilyCourtHint: 'You should discuss this with your social worker or adoption agency.',
-  familyCourtNameParagraph1:
-    '<p class="govuk-label"><a  target="_blank" href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode">Choose your family court</a></p>',
   familyCourtNameParagraph2:
-    'Find the family court in the town or region you want your application heard. The link will open in a new tab. Return to this tab to enter the court name.',
-  familyCourtNameParagraph3:
-    'Note that your request will be submitted to the judge. The judge has the final decision about where court hearings will take place.',
+    'You do not have to attend court hearings. We recommend staying with the same court so that birth parents are not alerted to your location. It is important that you discuss this with the social worker. The judge has the final decision about where court hearings take place.',
   familyCourtName: 'Enter the full name of the court',
+  familyCourtNameParagraph3:
+    '<br>If you cannot find the court you can search using the postcode in the <a class="govuk-link" href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode" target="_blank">court finder service</a>.',
+  options: [
+    ...getCourtListItems(content.courtList, content.userCase.familyCourtName),
+    { text: content.userCase.familyCourtName, value: content.userCase.familyCourtName, selected: true },
+  ],
   errors: {
     findFamilyCourt: {
       required: 'Please answer the question',
@@ -33,16 +40,18 @@ const cy: typeof en = content => ({
   title: 'Dewiswch lys teulu',
   findFamilyCourtParagraph1:
     'Efallai cynhelir gwrandawiadau llys sy’n ymwneud â’ch cais i fabwysiadu. Efallai bydd y rheini biolegol yn bresennol yn y gwrandawiadau hyn. Nid oes rhaid ichi fynychu’r gwrandawiadau hyn.',
-  findFamilyCourtParagraph2: `Rydych wedi dweud wrthym mai’r llys a gyhoeddodd y gorchymyn lleoli oedd <b>${content.userCase?.placementOrders[0]?.placementOrderCourt}</b>.`,
+  findFamilyCourtParagraph2: `Rydych wedi dweud wrthym mai’r llys a gyhoeddodd y gorchymyn lleoli oedd <b>${content.userCase?.placementOrderCourt}</b>.`,
   findFamilyCourt: 'A ydych eisiau i’r gwrandawiadau cael eu gwrando yn yr un llys?',
   findFamilyCourtHint: 'Dylech drafod hyn gyda’ch gweithiwr cymdeithasol neu’ch asiantaeth fabwysiadu.',
-  familyCourtNameParagraph1:
-    '<p class="govuk-label"><a  target="_blank" href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode?lng=cy">Dewiswch eich llys teulu</a></p>',
   familyCourtNameParagraph2:
-    'Dewch o hyd i’r llys teulu yn y dref neu’r rhanbarth rydych yn dymuno i’ch cais gael ei wrando. Bydd y ddolen yn agor mewn ffenestr newydd. Dychwelwch i’r tab yma i nodi enw’r llys.',
-  familyCourtNameParagraph3:
-    'Nac ydwdwch bydd eich cais yn cael gyflwyno i’r barnwr. Y barnwr sy’n gwneud y penderfyniad terfynol am lle bydd y gwrandawiadau llys yn cymryd rhan.',
+    "Nid oes rhaid i chi fynychu gwrandawiadau llys. Rydym yn argymell aros gyda'r un llys fel nad yw rhieni biolegol yn dod i wybod am eich lleoliad. Mae'n bwysig eich bod yn trafod hyn gyda'r gweithiwr cymdeithasol. Y barnwr fydd yn penderfynu’n derfynol ble mae gwrandawiadau llys yn cael eu cynnal.",
   familyCourtName: 'Nac ydwdwch enw llawn y llys',
+  familyCourtNameParagraph3:
+    'Os na allwch ddod o hyd i\'r llys gallwch chwilio drwy ddefnyddio\'r cod post yn y <a class="govuk-link" href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode" target="_blank">gwasanaeth dod o hyd i lysoedd.</a>.',
+  options: [
+    ...getCourtListItems(content.courtList, content.userCase.familyCourtName),
+    { text: content.userCase.familyCourtName, value: content.userCase.familyCourtName, selected: true },
+  ],
   errors: {
     findFamilyCourt: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
@@ -62,7 +71,6 @@ export const form: FormContent = {
       label: l => l.findFamilyCourt,
       hint: l => l.findFamilyCourtHint,
       labelSize: 'normal',
-
       values: [
         {
           label: l => l.yes,
@@ -72,23 +80,23 @@ export const form: FormContent = {
           label: l => l.no,
           value: YesOrNo.NO,
           subFields: {
-            p1: {
-              label: l => l.familyCourtNameParagraph1,
-              type: 'label',
-            },
             p2: {
               label: l => l.familyCourtNameParagraph2,
               type: 'label',
             },
-            p3: {
-              label: l => l.familyCourtNameParagraph3,
+            p4: {
+              label: l => l.familyCourtName,
               type: 'label',
             },
             familyCourtName: {
-              type: 'text',
-              label: l => l.familyCourtName,
-              labelSize: null,
+              type: 'select',
+              id: 'location-picker',
+              options: l => l.options,
               validator: isFieldFilledIn,
+            },
+            p3: {
+              label: l => l.familyCourtNameParagraph3,
+              type: 'label',
             },
           },
         },

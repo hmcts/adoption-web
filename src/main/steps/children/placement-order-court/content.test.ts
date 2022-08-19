@@ -1,5 +1,5 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
-import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
+import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -9,7 +9,8 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: "The child's details",
-  label: 'Which court made the placement order?',
+  label: 'Which court made the order?',
+  options: [{ text: 'MOCK', value: 'MOCK', selected: true }],
   errors: {
     placementOrderCourt: {
       required: 'Enter the name of the court',
@@ -20,6 +21,7 @@ const enContent = {
 const cyContent = {
   section: 'Manylion y plentyn',
   label: 'Pa lys wnaeth wneud y gorchymyn lleoli?',
+  options: [{ text: 'MOCK', value: 'MOCK', selected: true }],
   errors: {
     placementOrderCourt: {
       required: 'Nac ydwdwch enw’r llys',
@@ -32,9 +34,10 @@ describe('children > placement-order-court > content', () => {
   const commonContent = {
     language: 'en',
     userCase: {
-      placementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderCourt: 'MOCK_COURT' }],
+      placementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderCourt: 'MOCK' }],
       selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
     },
+    courtList: [{ site_name: 'MOCK', is_case_management_location: '', epimms_id: '', venue_name: 'MOCK' }],
   } as CommonContent;
   test('should return correct english content', () => {
     languageAssertions('en', enContent, () => generateContent(commonContent));
@@ -49,18 +52,14 @@ describe('children > placement-order-court > content', () => {
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const placementOrderCourtField = fields.placementOrderCourt as FormOptions;
-    expect(placementOrderCourtField.type).toBe('text');
-    expect(placementOrderCourtField.classes).toBe('govuk-label');
-    expect((placementOrderCourtField.label as Function)(generatedContent)).toBe(enContent.label);
-    expect((placementOrderCourtField as FormInput).value).toBe('MOCK_COURT');
-    expect(placementOrderCourtField.labelSize).toBe('l');
-    expect(placementOrderCourtField.attributes).toEqual({ spellcheck: false });
+    expect(placementOrderCourtField.type).toBe('select');
+    expect((fields.h1.label as Function)(generatedContent)).toBe(enContent.label);
 
     expect(placementOrderCourtField.validator).toBe(isFieldFilledIn);
   });
 
   test('should contain submit button', () => {
-    const generatedContent = generateContent({ ...commonContent, userCase: undefined });
+    const generatedContent = generateContent({ ...commonContent, userCase: { placementOrders: [] } });
     const form = generatedContent.form as FormContent;
     expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
   });
