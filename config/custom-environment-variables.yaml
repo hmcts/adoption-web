@@ -10,8 +10,6 @@ services:
     userRole: IDAM_ROLE
   case:
     url: CCD_URL
-  location_api:
-    url: LOCATION_API_URL
   payments:
     url: PAYMENTS_API_URL
   feeLookup:
