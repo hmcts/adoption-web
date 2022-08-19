@@ -83,30 +83,6 @@ describe('ManualAddressPostController', () => {
     });
   });
 
-  // describe('and when there is no selected address', () => {
-  //   beforeEach(() => {
-  //     mockGetParsedBody.mockReturnValue({ applicant1SelectAddress: -1 });
-  //     mockGetErrors.mockReturnValue([]);
-  //     controller = new SelectAddressPostController({}, FieldPrefix.APPLICANT1);
-  //   });
-
-  //   test('should not set the address fields in userCase session data', async () => {
-  //     await controller.post(req, res);
-  //     expect(req.session.userCase.applicant1Address1).toBe(undefined);
-  //     expect(req.session.userCase.applicant1Address2).toBe(undefined);
-  //     expect(req.session.userCase.applicant1AddressTown).toBe(undefined);
-  //     expect(req.session.userCase.applicant1AddressCounty).toBe(undefined);
-  //     expect(req.session.userCase.applicant1AddressPostcode).toBe(undefined);
-  //   });
-  // });
-  // test('should redirect to correct screen', async () => {
-  //   req = mockRequest({ session: { save: jest.fn(done => done()) } });
-  //   mockGetNextStepUrl.mockReturnValue('/MOCK_ENDPOINT');
-  //   await controller.post(req, res);
-  //   expect(mockGetNextStepUrl).toHaveBeenCalledWith(req, req.session.userCase);
-  //   expect(res.redirect).toHaveBeenCalledWith('/MOCK_ENDPOINT');
-  // });
-
   describe('when there are form errors', () => {
     beforeEach(() => {
       mockGetParsedBody.mockReturnValue({});
