@@ -22,6 +22,12 @@ services:
     token: 'NEED TO INSERT SECRET'
   feeLookup:
     url: ''
+  location_api:
+    url: ''
+  familyPublicLawCourt:
+    code: 'ABA3'
+  adoptionCourt:
+    code: 'ABA4'
   documentManagement:
     url: ''
   cdam:
