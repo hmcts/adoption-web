@@ -43,8 +43,22 @@ export class KbaMiddleware {
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
           if (!req.session.userCase) {
             try {
-              if (req.session.laPortalKba?.kbaCaseRef) {
-                req.session.userCase = await req.locals.api.getCaseById(req.session.laPortalKba.kbaCaseRef);
+              req.session.userCase = await req.locals.api.getCaseById(req.session.laPortalKba.kbaCaseRef!);
+              const draftStoreUserCaseData = await getDraftCaseFromStore(
+                req,
+                req.session.laPortalKba?.kbaCaseRef || ''
+              );
+              if (draftStoreUserCaseData) {
+                req.session.userCase = { ...(req.session.userCase || {}), ...draftStoreUserCaseData };
+              }
+              if (
+                JSON.stringify(req.session.userCase.childrenDateOfBirth) !==
+                  JSON.stringify(req.session.laPortalKba['kbaChildrenDateOfBirth']) ||
+                req.session.laPortalKba['kbaChildName']?.trim() !==
+                  req.session.userCase.childrenFirstName + ' ' + req.session.userCase.childrenLastName
+              ) {
+                req.session.destroy(() => res.redirect(LA_PORTAL_NEG_SCENARIO));
+                return;
               }
             } catch (err) {
               req.session.destroy(() => {
@@ -52,20 +66,6 @@ export class KbaMiddleware {
                 return;
               });
             }
-          }
-
-          const draftStoreUserCaseData = await getDraftCaseFromStore(req, req.session.laPortalKba.kbaCaseRef || '');
-          if (draftStoreUserCaseData) {
-            req.session.userCase = { ...(req.session.userCase || {}), ...draftStoreUserCaseData };
-          }
-          if (
-            JSON.stringify(req.session.userCase.childrenDateOfBirth) !==
-              JSON.stringify(req.session.laPortalKba['kbaChildrenDateOfBirth']) ||
-            req.session.laPortalKba['kbaChildName']?.trim() !==
-              req.session.userCase.childrenFirstName + ' ' + req.session.userCase.childrenLastName
-          ) {
-            req.session.destroy(() => res.redirect(LA_PORTAL_NEG_SCENARIO));
-            return;
           }
         }
 

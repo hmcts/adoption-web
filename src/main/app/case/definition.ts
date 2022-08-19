@@ -1373,6 +1373,7 @@ export const enum State {
   Rejected = 'Rejected',
   Withdrawn = 'Withdrawn',
   AwaitingDocuments = 'AwaitingDocuments',
+  LaSubmitted = 'LaSubmitted',
   AwaitingApplicant1Response = 'AwaitingApplicant1Response',
   AwaitingApplicant2Response = 'AwaitingApplicant2Response',
   AwaitingBailiffReferral = 'AwaitingBailiffReferral',
