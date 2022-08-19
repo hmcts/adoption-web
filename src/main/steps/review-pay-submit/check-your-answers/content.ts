@@ -9,15 +9,9 @@ import {
   applicantSocialWorkerSummaryList,
   applicantSummaryList,
   applicationSummaryList,
-  birthParentSummaryList,
   childSocialWorkerSummaryList,
-  childrenPlacementOrderSummaryList,
   childrenSummaryList,
   familyCourtSummaryList,
-  localAuthoritySummaryList,
-  otherParentSummaryList,
-  siblingCourtOrderSummaryList,
-  uploadedDocumentSummaryList,
 } from './utils';
 
 export const enContent = {
@@ -130,17 +124,10 @@ const en = (content: CommonContent) => {
       childrenSummaryList(enContent, userCase),
       childSocialWorkerSummaryList(enContent, userCase),
       applicantSocialWorkerSummaryList(enContent, userCase),
-      localAuthoritySummaryList(enContent, userCase),
       adoptionAgencySummaryList(enContent, userCase),
       familyCourtSummaryList(enContent, userCase),
       applicantSummaryList(enContent, userCase, FieldPrefix.APPLICANT1),
       applicantSummaryList(enContent, userCase, FieldPrefix.APPLICANT2),
-      birthParentSummaryList(enContent, userCase, FieldPrefix.BIRTH_MOTHER),
-      birthParentSummaryList(enContent, userCase, FieldPrefix.BIRTH_FATHER),
-      otherParentSummaryList(enContent, userCase),
-      childrenPlacementOrderSummaryList(enContent, userCase),
-      siblingCourtOrderSummaryList(enContent, userCase),
-      uploadedDocumentSummaryList(enContent, userCase),
     ],
   };
 };
@@ -256,17 +243,10 @@ const cy: typeof en = (content: CommonContent) => {
       childrenSummaryList(cyContent, userCase),
       childSocialWorkerSummaryList(cyContent, userCase),
       applicantSocialWorkerSummaryList(cyContent, userCase),
-      localAuthoritySummaryList(cyContent, userCase),
       adoptionAgencySummaryList(cyContent, userCase),
       familyCourtSummaryList(cyContent, userCase),
       applicantSummaryList(cyContent, userCase, FieldPrefix.APPLICANT1),
       applicantSummaryList(cyContent, userCase, FieldPrefix.APPLICANT2),
-      birthParentSummaryList(cyContent, userCase, FieldPrefix.BIRTH_MOTHER),
-      birthParentSummaryList(cyContent, userCase, FieldPrefix.BIRTH_FATHER),
-      otherParentSummaryList(cyContent, userCase),
-      childrenPlacementOrderSummaryList(cyContent, userCase),
-      siblingCourtOrderSummaryList(cyContent, userCase),
-      uploadedDocumentSummaryList(cyContent, userCase),
     ],
   };
 };
