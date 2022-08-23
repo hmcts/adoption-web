@@ -14,7 +14,7 @@ services:
     clientSecret: 'NEED TO INSERT SECRET'
     systemUsername: 'dummy_user'
     systemPassword: 'dummy_password'
-    userRole: 'adoption-citizen-user'
+    userRole: 'citizen'
   case:
     url: 'https://ccd-data-store-api-adoption-cos-api-pr-249.service.core-compute-preview.internal'
   postcodeLookup:

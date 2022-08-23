@@ -163,6 +163,7 @@ describe('Accessibility', () => {
     urls.LA_PORTAL_CHECK_YOUR_ANSWERS,
     urls.CHILDREN_FIND_PLACEMENT_ORDER_COURT,
     urls.CHILDREN_FIND_FAMILY_COURT,
+    urls.CHILDREN_PLACEMENT_ORDER_COURT,
   ];
   const urlsToTest = Object.values(urls).filter(url => !IGNORED_URLS.includes(url));
 
