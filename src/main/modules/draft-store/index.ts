@@ -13,12 +13,7 @@ export class DraftStoreClient {
     //   'services.draftStore.redis.host'
     // )}:${config.get('services.draftStore.redis.port')}`;
     Logger.error(
-      'h: ' +
-        config.get('services.draftStore.redis.host') +
-        ' p: ' +
-        config.get('services.draftStore.redis.port') +
-        ' ' +
-        config.get('session.redis.key')
+      'h: ' + config.get('services.draftStore.redis.host') + ' p: ' + config.get('services.draftStore.redis.port')
     );
 
     const client = new Redis({
