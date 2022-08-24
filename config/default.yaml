@@ -65,3 +65,6 @@ localCourt:
     WORCESTER_FAMILY_COURT: 'Worcesteradoptionapplication@mailinator.com'
     NEWPORT_GWENT_FAMILY_COURT: 'NewportGwentadoptionapplication@mailinator.com'
     FALLBACK_EMAIL_ID: 'adoptionproject@mailinator.com'
+    LIVERPOOL_FAMILY_COURT: 'Liverpooladoptionapplication@justice.gov.uk'
+    CENTRAL_LONDON_FAMILY_COURT: 'CentralLondonadoptionapplication@justice.gov.uk'
+    READING_FAMILY_COURT: 'Readingadoptionapplication@justice.gov.uk'

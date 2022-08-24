@@ -4,6 +4,7 @@ import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
 
 const en = () => ({
   section: 'Application details',
+  title: 'Applicant details',
   label: 'Are you applying on your own, or with someone else?',
   one: "I'm applying on my own",
   oneHint: 'For example, as a single parent.',
@@ -25,6 +26,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: 'Manylion y cais',
+  title: 'Applicant details',
   section1: 'Manylion y cais',
   label: 'A ydych yn gwneud cais ar ben eich hun, neu gyda rhywun arall?',
   one: 'Rwy’n gwneud cais ar ben fy hun',
