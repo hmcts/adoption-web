@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: ""
+  name: "adoption-web"
   annotations:
     # This must match folder-name/job-name in Jenkins.
     jenkins.io/job-full-name: cft:HMCTS_a_to_c/adoption-web
@@ -9,10 +9,10 @@ metadata:
   tags:
     - nodejs
   links:
-    - url: https://hmcts-reform.slack.com/app_redirect?channel=
-      title: " on Slack"
+    - url: https://hmcts-reform.slack.com/app_redirect?channel=adoption-tech
+      title: "#adoption-tech on Slack"
       icon: chat
 spec:
   type: service
   lifecycle: production
-  owner: 
+  owner: dts_adoption
