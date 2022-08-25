@@ -139,7 +139,19 @@ export const adoptionAgencySummaryList = (
   userCase: Partial<CaseWithId>
 ): SummaryList | undefined => {
   if (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO) {
-    return;
+    return {
+      title: sectionTitles.additionalAoptionagencyOrLA,
+      rows: getSectionSummaryList(
+        [
+          {
+            key: keys.additionalAdoptionAgency,
+            value: content.yesNoNotsure[userCase.hasAnotherAdopAgencyOrLA!],
+            changeUrl: Urls.OTHER_ADOPTION_AGENCY,
+          },
+        ],
+        content
+      ),
+    };
   }
   return {
     title: sectionTitles.additionalAoptionagencyOrLA,

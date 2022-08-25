@@ -136,7 +136,7 @@ describe('utils', () => {
           childrenNationality: undefined,
           childrenAdditionalNationalities: undefined,
         },
-        expected: NOT_STARTED,
+        expected: IN_PROGRESS,
       },
       {
         data: {
