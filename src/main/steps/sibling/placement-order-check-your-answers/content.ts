@@ -20,15 +20,6 @@ const placementOrderListItems = (userCase: Partial<CaseWithId>, content) => {
     {
       key: { text: content.siblingName },
       value: { text: `${sibling?.siblingFirstName || ''} ${sibling?.siblingLastNames || ''}` },
-      actions: {
-        items: [
-          {
-            href: `${SIBLING_ORDER_TYPE}${queryParams}`,
-            text: content.change,
-            visuallyHiddenText: content.siblingName,
-          },
-        ],
-      },
     },
     {
       key: { text: content.orderType },
