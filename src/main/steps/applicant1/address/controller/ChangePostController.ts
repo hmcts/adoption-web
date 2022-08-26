@@ -43,6 +43,8 @@ export default class ChangeAddressController extends PostController<AnyObject> {
 
     Object.assign(req.session.userCase, formData);
 
+    req.session.userCase.checkYourAnswersReturn = true;
+
     this.redirect(req, res);
   }
 }
