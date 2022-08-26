@@ -81,7 +81,7 @@ const cy: typeof en = content => {
   const cyContent = {
     section: 'Manylion y brawd/chwaer',
     for: '',
-    siblingName: 'Sibling name',
+    siblingName: 'Enw’r brawd/chwaer',
     orderType: 'Math o neuchymyn',
     orderNumber: 'Rhif cyfresol neu rif yr achos ar y gorchymyn',
     change: 'Newid',

@@ -24,7 +24,7 @@ const en = content => ({
 
 const cy: typeof en = content => ({
   section: SECTION_IN_WELSH,
-  label: 'Ydych chi’n siŵr eich bod eisiau dileu’r?',
+  label: 'Ydych chi’n siŵr eich bod eisiau dileu’r gorchymyn hwn?',
   hint: `${getSiblingName(content.userCase)}`,
   errors: {
     confirm: {

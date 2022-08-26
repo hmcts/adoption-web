@@ -21,7 +21,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
-  label: 'Ydych chi’n siŵr eich bod eisiau dileu’r?',
+  label: 'Ydych chi’n siŵr eich bod eisiau dileu’r gorchymyn hwn?',
   hint: 'MOCK_FIRST_NAME MOCK_LAST_NAMES',
   errors: {
     confirm: {
