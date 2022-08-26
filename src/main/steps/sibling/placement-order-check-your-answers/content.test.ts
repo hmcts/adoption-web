@@ -33,7 +33,6 @@ describe('sibling > placement-order-check-your-answers > content', () => {
           siblingId: 'MOCK_SIBLING_ID',
           siblingFirstName: 'MOCK_FIRST_NAME',
           siblingLastNames: 'MOCK_LAST_NAMES',
-          siblingName: 'MOCK_FIRST_NAME MOCK_LAST_NAMES',
           siblingPlacementOrders: [
             {
               placementOrderId: 'MOCK_PO_ID',
@@ -84,7 +83,7 @@ describe('sibling > placement-order-check-your-answers > content', () => {
     expect(generatedContent.placementOrderListItems).toEqual([
       {
         key: { text: 'Sibling name' },
-        value: { text: expected.siblingName },
+        value: { text: expected.firstName },
       },
       {
         key: { text: 'Type of order' },
