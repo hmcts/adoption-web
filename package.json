@@ -132,7 +132,7 @@
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.1",
     "jest": "^28.1.0",
-    "jest-circus": "^28.1.0",
+    "jest-circus": "^29.0.0",
     "jest-extended": "^2.0.0",
     "jest-html-reporter": "^3.5.0",
     "jest-pact": "^0.9.4",
