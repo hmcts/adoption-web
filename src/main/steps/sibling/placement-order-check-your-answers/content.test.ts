@@ -60,13 +60,17 @@ describe('sibling > placement-order-check-your-answers > content', () => {
       firstName: undefined,
       lastName: undefined,
       placementOrderType: undefined,
-      expected: { title: '  details', placementOrderType: undefined },
+      expected: { title: '  details', placementOrderType: undefined, siblingName: undefined },
     },
     {
       firstName: 'MOCK_FIRST_NAME',
       lastName: 'MOCK_LAST_NAME',
       placementOrderType: 'MOCK_TYPE',
-      expected: { title: 'MOCK_TYPE  details', placementOrderType: 'MOCK_TYPE' },
+      expected: {
+        title: 'MOCK_TYPE  details',
+        placementOrderType: 'MOCK_TYPE',
+        siblingName: 'MOCK_FIRST_NAME MOCK_LAST_NAME',
+      },
     },
   ])('should create correct items for summaryList when %o', ({ firstName, lastName, placementOrderType, expected }) => {
     commonContent.userCase!.siblings![0]!.siblingFirstName = firstName;
@@ -76,6 +80,10 @@ describe('sibling > placement-order-check-your-answers > content', () => {
     const generatedContent = generateContent(commonContent);
     expect(generatedContent.title).toBe(expected.title);
     expect(generatedContent.placementOrderListItems).toEqual([
+      {
+        key: { text: 'Sibling name' },
+        value: { text: expected.siblingName },
+      },
       {
         key: { text: 'Type of order' },
         value: { text: expected.placementOrderType },
