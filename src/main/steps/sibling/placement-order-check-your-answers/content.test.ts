@@ -77,10 +77,6 @@ describe('sibling > placement-order-check-your-answers > content', () => {
     expect(generatedContent.title).toBe(expected.title);
     expect(generatedContent.placementOrderListItems).toEqual([
       {
-        key: { text: 'Sibling name' },
-        value: { text: expected.placementOrderType },
-      },
-      {
         key: { text: 'Type of order' },
         value: { text: expected.placementOrderType },
         actions: {
