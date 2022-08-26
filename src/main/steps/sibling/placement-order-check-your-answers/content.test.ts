@@ -78,7 +78,7 @@ describe('sibling > placement-order-check-your-answers > content', () => {
     expect(generatedContent.placementOrderListItems).toEqual([
       {
         key: { text: 'Sibling name' },
-        value: { text: 'MOCK_FIRST_NAME MOCK_LAST_NAME' },
+        value: { text: expected.placementOrderType },
       },
       {
         key: { text: 'Type of order' },
