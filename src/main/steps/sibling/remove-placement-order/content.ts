@@ -11,15 +11,6 @@ const getSiblingName = (userCase: Partial<CaseWithId>) => {
   return `${sibling?.siblingFirstName || ''} ${sibling?.siblingLastNames || ''}`;
 };
 
-/* const getPlacementOrderType = (userCase: Partial<CaseWithId>): string => {
-  const sibling = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
-  const placementOrder = (sibling?.siblingPlacementOrders as PlacementOrder[])?.find(
-    item => item.placementOrderId === userCase.selectedSiblingPoId
-  );
-
-  return `${placementOrder?.placementOrderType || ''}`;
-}; */
-
 const en = content => ({
   section: SECTION,
   label: 'Are you sure you want to remove this order?',

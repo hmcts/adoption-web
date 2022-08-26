@@ -7,7 +7,7 @@ import { generateContent } from './content';
 
 const enContent = {
   section: 'Sibling details',
-  for: 'for',
+  for: '',
   orderType: 'Type of order',
   orderNumber: 'Order case or serial number',
   change: 'Change',
@@ -16,7 +16,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
-  for: 'ar gyfer',
+  for: '',
   orderType: 'Math o neuchymyn',
   orderNumber: 'Rhif cyfresol neu rif yr achos ar y gorchymyn',
   change: 'Newid',
@@ -76,6 +76,10 @@ describe('sibling > placement-order-check-your-answers > content', () => {
     const generatedContent = generateContent(commonContent);
     expect(generatedContent.title).toBe(expected.title);
     expect(generatedContent.placementOrderListItems).toEqual([
+      {
+        key: { text: 'Sibling name' },
+        value: { text: 'MOCK_FIRST_NAME MOCK_LAST_NAME' },
+      },
       {
         key: { text: 'Type of order' },
         value: { text: expected.placementOrderType },
