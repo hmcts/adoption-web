@@ -1,8 +1,5 @@
 {% extends "common/template.njk" %}
 
-{% block page_content %}
-  <h1 class="govuk-heading-l">{{ title }}</h1>
-{% endblock %}
 
 {% if userCase.applyingWith == 'alone' or userCase.applyingWith === 'withSpouseOrCivilPartner' or userCase.applyingWith === 'withSomeoneElse' %}
     {% block backLink %}{% endblock %}
