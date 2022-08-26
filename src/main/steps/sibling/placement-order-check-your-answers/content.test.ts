@@ -33,6 +33,7 @@ describe('sibling > placement-order-check-your-answers > content', () => {
           siblingId: 'MOCK_SIBLING_ID',
           siblingFirstName: 'MOCK_FIRST_NAME',
           siblingLastNames: 'MOCK_LAST_NAMES',
+          siblingName: 'MOCK_FIRST_NAME MOCK_LAST_NAMES',
           siblingPlacementOrders: [
             {
               placementOrderId: 'MOCK_PO_ID',
@@ -75,6 +76,7 @@ describe('sibling > placement-order-check-your-answers > content', () => {
   ])('should create correct items for summaryList when %o', ({ firstName, lastName, placementOrderType, expected }) => {
     commonContent.userCase!.siblings![0]!.siblingFirstName = firstName;
     commonContent.userCase!.siblings![0]!.siblingLastNames = lastName;
+    commonContent.userCase!.siblings![0]!.siblingName = siblingName;
     (commonContent.userCase!.siblings![0]!.siblingPlacementOrders![0] as PlacementOrder).placementOrderType =
       placementOrderType;
     const generatedContent = generateContent(commonContent);
