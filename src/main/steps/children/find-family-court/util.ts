@@ -11,9 +11,9 @@ export const getCourtEmailId = (key: string): string => {
     ['northampton family court', config.get('localCourt.emailId.NORTHAMPTON_FAMILY_COURT')],
     ['worcester family court', config.get('localCourt.emailId.WORCESTER_FAMILY_COURT')],
     ['newport (gwent) family court', config.get('localCourt.emailId.NEWPORT_GWENT_FAMILY_COURT')],
-    ['Liverpool Family court', config.get('localCourt.emailId.LIVERPOOL_FAMILY_COURT')],
-    ['Central London Family Court', config.get('localCourt.emailId.CENTRAL_LONDON_FAMILY_COURT')],
-    ['Reading Family Court', config.get('localCourt.emailId.READING_FAMILY_COURT')],
+    ['liverpool family court', config.get('localCourt.emailId.LIVERPOOL_FAMILY_COURT')],
+    ['central london family court', config.get('localCourt.emailId.CENTRAL_LONDON_FAMILY_COURT')],
+    ['reading family court', config.get('localCourt.emailId.READING_FAMILY_COURT')],
   ]);
   return map.has(courtKey) ? (map.get(courtKey) as string) : config.get('localCourt.emailId.FALLBACK_EMAIL_ID');
 };
