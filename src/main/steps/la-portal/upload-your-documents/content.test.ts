@@ -20,7 +20,6 @@ const enContent = {
   infoBullet4: 'Annex A (if available)',
   infoBullet5: "any previous adoption certificates or court orders for the child/child's siblings",
   infoBullet6: 'any additional evidence you feel is relevant such maintenance agreements or photo ID',
-  note1: 'You can upload multiple documents on this page. All certificates must be certified.',
   note2: 'The file names should correspond with what the file is for example, child birth certificate.',
   infoBulletSummary1: 'Place your document on a flat service in a well-lit room. Use a flash if you need to.',
   infoBulletSummary2: 'Take a picture of the whole document. You should be able to see its edges.',

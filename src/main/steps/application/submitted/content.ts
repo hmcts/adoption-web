@@ -9,8 +9,8 @@ const en = content => ({
   line1:
     'The court reviews your application and informs the birth parents, if applicable, of your application to adopt. Your personal details are kept strictly confidential.',
   line2:
-    "Once the adoption order is granted, an adoption certificate is created. This replaces the child's birth certificate. It can be ordered from the General Register Office for a small fee.",
-  printApplication: 'Print your application',
+    "Once the adoption order is granted, an adoption certificate is created. This replaces the child's birth certificate. It can be ordered from the <a  target='_blank' href='https://www.gov.uk/general-register-office'>General Register Office - GOV.UK (www.gov.uk)</a> for a small fee.",
+  printApplication: 'Download or print your application',
   helpUs: 'Help us improve this service',
   line3:
     'Please help us improve this service by <a  target="_blank" href="https://www.smartsurvey.co.uk/s/SurveyExit/?service=Adoption">leaving feedback</a>',
@@ -25,8 +25,8 @@ const cy: typeof en = content => ({
   line1:
     'Mae’r llys yn adolygu eich cais ac yn hysbysu’r rhieni biolegol, os yw’n berthnasol, am eich cais i fabwysiadu. Mae eich manylion personol yn cael eu cadw’n gwbl gyfrinachol.',
   line2:
-    'Unwaith bydd y gorchymyn mabwysiadu yn cael ei gymeradwyo, bydd tystysgrif mabwysiadu yn cael ei chreu. Bydd hon yn disodli tystysgrif geni’r plentyn. Gellir ei archebu o’r Swyddfa Gofrestru Gyffredinol am ffi fechan.',
-  printApplication: 'Argraffu eich cais',
+    "Once the adoption order is granted, an adoption certificate is created. This replaces the child's birth certificate. It can be ordered from the <a  target='_blank' href='https://www.gov.uk/general-register-office'>General Register Office - GOV.UK (www.gov.uk)</a> for a small fee. (in welsh)",
+  printApplication: 'Download or print your application (in welsh)',
   helpUs: 'Help us improve this service (in welsh)',
   line3:
     'Please help us improve this service by <a  target="_blank" href="https://www.smartsurvey.co.uk/s/SurveyExit/?service=Adoption">leaving feedback</a> (in welsh)',
