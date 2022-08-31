@@ -10,7 +10,7 @@ const en = ({ userCase }: CommonContent) => {
     section,
     label: 'Do you want to change the address for the other applicant?',
     errors: {
-      changeAddressBothApplicants: {
+      changeAddressBothApplicantOne: {
         required: 'Please select an answer',
       },
     },
@@ -23,7 +23,7 @@ const cy: typeof en = ({ userCase }: CommonContent) => {
     section,
     label: 'Do you want to change the address for the other applicant? (in welsh)',
     errors: {
-      changeAddressBothApplicants: {
+      changeAddressBothApplicantOne: {
         required: 'Please select an answer (in welsh)',
       },
     },
@@ -32,7 +32,7 @@ const cy: typeof en = ({ userCase }: CommonContent) => {
 
 export const form: FormContent = {
   fields: {
-    changeAddressBothApplicants: {
+    changeAddressBothApplicantOne: {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.label,

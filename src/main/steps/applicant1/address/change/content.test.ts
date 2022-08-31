@@ -12,7 +12,7 @@ const enContent = {
   section: 'First applicant',
   label: 'Do you want to change the address for the other applicant?',
   errors: {
-    changeAddressBothApplicants: {
+    changeAddressBothApplicantOne: {
       required: 'Please select an answer',
     },
   },
@@ -22,7 +22,7 @@ const cyContent = {
   section: 'First applicant (in welsh)',
   label: 'Do you want to change the address for the other applicant? (in welsh)',
   errors: {
-    changeAddressBothApplicants: {
+    changeAddressBothApplicantOne: {
       required: 'Please select an answer (in welsh)',
     },
   },
@@ -50,7 +50,7 @@ describe('applicant1 > address > change > content', () => {
 
   test('should contain changeAddressBothApplicants field', () => {
     const fields = (generatedContent.form as FormContent).fields as FormFields;
-    const field = fields.changeAddressBothApplicants as FormOptions;
+    const field = fields.changeAddressBothApplicantOne as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
     expect((field.label as Function)(generatedContent)).toBe(enContent.label);

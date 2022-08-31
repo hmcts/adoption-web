@@ -27,7 +27,7 @@ export default class ChangeAddressController extends PostController<AnyObject> {
       return;
     }
 
-    if (formData['changeAddressBothApplicants'] === YesOrNo.YES) {
+    if (formData['changeAddressBothApplicantOne'] === YesOrNo.YES) {
       req.session.userCase = await this.save(
         req,
         {
@@ -36,6 +36,18 @@ export default class ChangeAddressController extends PostController<AnyObject> {
           ['applicant2AddressTown']: req.session.userCase['applicant1AddressTown'],
           ['applicant2AddressCounty']: req.session.userCase['applicant1AddressCounty'],
           ['applicant2AddressPostcode']: req.session.userCase['applicant1AddressPostcode'],
+        },
+        this.getEventName(req)
+      );
+    } else if (formData['changeAddressBothApplicantTwo'] === YesOrNo.YES) {
+      req.session.userCase = await this.save(
+        req,
+        {
+          ['applicant1Address1']: req.session.userCase['applicant2Address1'],
+          ['applicant1Address2']: req.session.userCase['applicant2Address2'],
+          ['applicant1AddressTown']: req.session.userCase['applicant2AddressTown'],
+          ['applicant1AddressCounty']: req.session.userCase['applicant2AddressCounty'],
+          ['applicant1AddressPostcode']: req.session.userCase['applicant2AddressPostcode'],
         },
         this.getEventName(req)
       );

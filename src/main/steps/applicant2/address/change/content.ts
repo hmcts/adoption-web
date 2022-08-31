@@ -7,7 +7,7 @@ const en = () => ({
   section: 'Second applicant',
   label: 'Do you want to change the address for the other applicant?',
   errors: {
-    changeAddressBothApplicants: {
+    changeAddressBothApplicantTwo: {
       required: 'Please select an answer',
     },
   },
@@ -17,7 +17,7 @@ const cy: typeof en = () => ({
   section: 'Second applicant (in welsh)',
   label: 'Do you want to change the address for the other applicant? (in welsh)',
   errors: {
-    changeAddressBothApplicants: {
+    changeAddressBothApplicantTwo: {
       required: 'Please select an answer (in welsh)',
     },
   },
@@ -25,7 +25,7 @@ const cy: typeof en = () => ({
 
 export const form: FormContent = {
   fields: {
-    changeAddressBothApplicants: {
+    changeAddressBothApplicantTwo: {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.label,
