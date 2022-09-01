@@ -139,7 +139,19 @@ export const adoptionAgencySummaryList = (
   userCase: Partial<CaseWithId>
 ): SummaryList | undefined => {
   if (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO) {
-    return;
+    return {
+      title: sectionTitles.additionalAoptionagencyOrLA,
+      rows: getSectionSummaryList(
+        [
+          {
+            key: keys.additionalAdoptionAgency,
+            value: content.yesNoNotsure[userCase.hasAnotherAdopAgencyOrLA!],
+            changeUrl: Urls.OTHER_ADOPTION_AGENCY,
+          },
+        ],
+        content
+      ),
+    };
   }
   return {
     title: sectionTitles.additionalAoptionagencyOrLA,
@@ -361,16 +373,6 @@ export const childrenSummaryList = (
           value: userCase.childrenFirstName + ' ' + userCase.childrenLastName,
           changeUrl: Urls.CHILDREN_FULL_NAME,
         },
-        // {
-        //   key: keys.sexAtBirth,
-        //   value: content.gender[userCase.childrenSexAtBirth!],
-        //   changeUrl: Urls.CHILDREN_SEX_AT_BIRTH,
-        // },
-        // {
-        //   key: keys.nationality,
-        //   valueHtml: formatNationalities(userCase.childrenNationality!, userCase.childrenAdditionalNationalities!),
-        //   changeUrl: Urls.CHILDREN_NATIONALITY,
-        // },
         {
           key: keys.fullNameAfterAdoption,
           value: userCase.childrenFirstNameAfterAdoption + ' ' + userCase.childrenLastNameAfterAdoption,
