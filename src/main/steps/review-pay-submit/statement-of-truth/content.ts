@@ -12,9 +12,9 @@ const en = () => ({
   reviewBeforeSubmit:
     "Once you submit your application, you cannot make any further changes. You can select 'Save as draft' to review your application before you submit.",
   applicant1IBelieveApplicationIsTrue:
-    'I believe that the facts stated in this form and any additional documents are true.',
+    'The first applicant believes that the facts stated in this form and any additional documents are true.',
   applicant1IBelieveApplicationIsTrue2:
-    'The primary applicant believes that the facts stated in this form and any additional documents are true.',
+    'The first applicant believes that the facts stated in this form and any additional documents are true.',
   applicant2IBelieveApplicationIsTrue: 'I am authorised by the second applicant to sign this statement.',
   applicant1SotFullName: 'Enter your full name',
   applicant2SotFullName: "Enter the second applicant's full name (if applicable)",

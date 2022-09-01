@@ -14,7 +14,7 @@
                     <p class="govuk-body">{{ emailSentConfirmation }}</p>
                     <h2 class="govuk-heading-m">{{ nextStep }}</h2>
                     <p class="govuk-body">{{ line1 }}</p>
-                    <p class="govuk-body">{{ line2 }}</p>
+                    <p class="govuk-body">{{ line2 | safe }}</p>
                     <p class="govuk-body">
                         <a href="/download-summary?_csrf={{ csrfToken }}" class="govuk-link">{{ printApplication }}</a>
                     </p>
