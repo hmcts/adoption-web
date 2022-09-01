@@ -22,7 +22,7 @@ export default class ChangeAddressController extends PostController<AnyObject> {
 
     req.session.returnUrl = undefined;
 
-    let changeBothApplicantTrue;
+    let changeBothApplicantTrue = YesOrNo.NO;
 
     if (req.session.errors.length > 0) {
       this.redirect(req, res);
