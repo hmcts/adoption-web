@@ -10,7 +10,8 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: 'Sibling details',
-  label: 'Are you sure you want to remove this MOCK_TYPE for MOCK_FIRST_NAME MOCK_LAST_NAMES?',
+  label: 'Are you sure you want to remove this order?',
+  hint: 'MOCK_FIRST_NAME MOCK_LAST_NAMES',
   errors: {
     confirm: {
       required: 'Please select an answer',
@@ -20,7 +21,8 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
-  label: 'Ydych chi’n siŵr eich bod eisiau dileu’r MOCK_TYPE hwn ar gyfer MOCK_TYPE?',
+  label: 'Ydych chi’n siŵr eich bod eisiau dileu’r gorchymyn hwn?',
+  hint: 'MOCK_FIRST_NAME MOCK_LAST_NAMES',
   errors: {
     confirm: {
       required: 'Dewiswch ateb os gwelwch yn dda',
@@ -70,14 +72,14 @@ describe('sibling > remove-placement-order > content', () => {
       firstName: undefined,
       lastName: undefined,
       placementOrderType: undefined,
-      expected: { label: 'Are you sure you want to remove this  for  ?', placementOrderType: undefined },
+      expected: { label: 'Are you sure you want to remove this order?', placementOrderType: undefined },
     },
     {
       firstName: 'MOCK_FIRST_NAME',
       lastName: 'MOCK_LAST_NAME',
       placementOrderType: 'MOCK_TYPE',
       expected: {
-        label: 'Are you sure you want to remove this MOCK_TYPE for MOCK_FIRST_NAME MOCK_LAST_NAME?',
+        label: 'Are you sure you want to remove this order?',
         placementOrderType: 'MOCK_TYPE',
       },
     },
@@ -95,9 +97,7 @@ describe('sibling > remove-placement-order > content', () => {
     const field = fields.confirm as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
-    expect((field.label as Function)(generatedContent)).toBe(
-      'Are you sure you want to remove this MOCK_TYPE for MOCK_FIRST_NAME MOCK_LAST_NAME?'
-    );
+    expect((field.label as Function)(generatedContent)).toBe('Are you sure you want to remove this order?');
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesOrNo.YES);
