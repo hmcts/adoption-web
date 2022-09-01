@@ -22,12 +22,15 @@ export default class ChangeAddressController extends PostController<AnyObject> {
 
     req.session.returnUrl = undefined;
 
+    let changeBothApplicantTrue;
+
     if (req.session.errors.length > 0) {
       this.redirect(req, res);
       return;
     }
 
     if (formData['changeAddressBothApplicantOne'] === YesOrNo.YES) {
+      changeBothApplicantTrue = YesOrNo.YES;
       req.session.userCase = await this.save(
         req,
         {
@@ -40,6 +43,7 @@ export default class ChangeAddressController extends PostController<AnyObject> {
         this.getEventName(req)
       );
     } else if (formData['changeAddressBothApplicantTwo'] === YesOrNo.YES) {
+      changeBothApplicantTrue = YesOrNo.YES;
       req.session.userCase = await this.save(
         req,
         {
@@ -55,7 +59,7 @@ export default class ChangeAddressController extends PostController<AnyObject> {
 
     req.session.userCase.checkYourAnswersReturn = true;
 
-    Object.assign(req.session.userCase, formData);
+    Object.assign(req.session.userCase, { changeAddressBothApplicants: changeBothApplicantTrue });
 
     this.redirect(req, res);
   }
