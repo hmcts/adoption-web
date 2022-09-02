@@ -6,4 +6,7 @@ module.exports = {
   birthFatherAddressTown: 'Belvedere',
   birthFatherAddressPostcode: '99425',
   birthFatherAddressCountry: 'Germany',
+  birthFatherLastAddressDateDay: '26',
+  birthFatherLastAddressDateMonth: '06',
+  birthFatherLastAddressDateYear: '1980',
 };
