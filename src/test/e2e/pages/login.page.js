@@ -24,7 +24,6 @@ module.exports = {
     await I.wait(4);
     I.see('Are you applying on your own, or with someone else?');
   },
-
   async signInFromEligibility() {
     await I.retry(3).goToPage(config.baseUrl + 'eligibility/start');
     await I.wait(2);
