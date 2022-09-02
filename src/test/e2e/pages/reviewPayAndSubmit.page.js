@@ -62,6 +62,14 @@ module.exports = {
     await I.wait(4);
   },
 
+  async statementOfTruthDetailsSectionForSingleApplicant() {
+    await I.retry(3).waitForText('Statement of truth', 30);
+    await I.retry(3).click(this.fields.applicant1IBelieveApplicationIsTrue);
+    await I.retry(3).fillField(this.fields.applicant1SotFullName, 'Joe Bloggs');
+    await I.retry(3).click('Confirm');
+    await I.wait(4);
+  },
+
   async statementOfTruthDetailsSectionEmpty() {
     await I.retry(3).waitForText('Statement of truth', 30);
     await I.retry(3).click('Confirm');

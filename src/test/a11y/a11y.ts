@@ -75,7 +75,7 @@ describe('Accessibility', () => {
       await browser.close();
     }
 
-    browser = await puppeteer.launch({ ignoreHTTPSErrors: true });
+    browser = await puppeteer.launch({ ignoreHTTPSErrors: true, headless: true });
     browser.on('disconnected', setup);
 
     // Login once only for other pages to reuse session
@@ -137,34 +137,11 @@ describe('Accessibility', () => {
     urls.DOCUMENT_MANAGER,
     urls.LA_DOCUMENT_MANAGER,
     urls.UPLOAD_YOUR_DOCUMENTS,
-    urls.LA_PORTAL,
-    urls.LA_PORTAL_TASK_LIST,
-    urls.LA_PORTAL_CHILD_NATIONALITY,
-    urls.LA_PORTAL_CHILD_NATIONALITY,
-    urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_TYPE,
-    urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_NUMBER,
-    urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT,
-    urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_SUMMARY,
-    urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS,
-    urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_DATE,
-    urls.LA_PORTAL_BIRTH_MOTHER_NATIONALITY,
-    urls.LA_PORTAL_BIRTH_FATHER_NATIONALITY,
-    urls.LA_PORTAL_SIBLING_RELATION,
-    urls.LA_PORTAL_SIBLING_ORDER_SUMMARY,
-    urls.LA_PORTAL_SIBLING_ORDER_CHECK_YOUR_ANSWERS,
-    urls.LA_PORTAL_SIBLING_REMOVE_PLACEMENT_ORDER,
-    urls.LA_PORTAL_CONFIRMATION_PAGE,
-    urls.LA_PORTAL_UPLOAD_YOUR_DOCUMENTS,
-    urls.LA_PORTAL_SIBLING_ORDER_TYPE,
-    urls.LA_PORTAL_SIBLING_ORDER_CASE_NUMBER,
-    urls.LA_PORTAL_SIBLING_EXISTS,
-    urls.LA_PORTAL_KBA_CASE_REF,
-    urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT,
-    urls.LA_PORTAL_CHECK_YOUR_ANSWERS,
     urls.CHILDREN_FIND_PLACEMENT_ORDER_COURT,
     urls.CHILDREN_FIND_FAMILY_COURT,
+    urls.CHILDREN_PLACEMENT_ORDER_COURT,
   ];
-  const urlsToTest = Object.values(urls).filter(url => !IGNORED_URLS.includes(url));
+  const urlsToTest = Object.values(urls).filter(url => !IGNORED_URLS.includes(url) && !url.startsWith(urls.LA_PORTAL));
 
   describe.each(urlsToTest)('Page %s', url => {
     let page;
@@ -175,6 +152,77 @@ describe('Accessibility', () => {
       await page.setCookie(...cookies);
 
       await ensurePageCallWillSucceed(url);
+
+      const result = await runPally(url, browser, page);
+      const html = await htmlReporter.results(result);
+
+      const reportsDir = `${__dirname}/../../../output/pa11y${url.slice(0, url.lastIndexOf('/'))}`;
+      fs.mkdirSync(reportsDir, { recursive: true });
+      fs.writeFileSync(`${reportsDir}${url.slice(url.lastIndexOf('/'))}.html`, html);
+
+      expect(result.issues).toEqual(expect.any(Array));
+      expectNoErrors(result.issues);
+    });
+  });
+});
+
+describe('Accessibility LA portal', () => {
+  let browser;
+  let cookies;
+  let hasAfterAllRun = false;
+  let page;
+
+  const setup = async () => {
+    if (hasAfterAllRun) {
+      return;
+    }
+    if (browser) {
+      await browser.close();
+    }
+
+    browser = await puppeteer.launch({ ignoreHTTPSErrors: true, headless: true });
+    browser.on('disconnected', setup);
+    // Login once only for other pages to reuse session
+    page = await browser.newPage();
+    const relativeUrl = config.TEST_URL.endsWith('/')
+      ? config.TEST_URL.slice(0, config.TEST_URL.length - 1)
+      : config.TEST_URL;
+    await page.goto(`${relativeUrl}${urls.LA_PORTAL_KBA_CASE_REF}`);
+    await page.type('#kbaCaseRef', '1660928381607622');
+    await page.type('#kbaChildName', 'a a');
+    await page.type('#kbaChildrenDateOfBirth-day', '1');
+    await page.type('#kbaChildrenDateOfBirth-month', '1');
+    await page.type('#kbaChildrenDateOfBirth-year', '2021');
+    await page.click('button[type="submit"]');
+    cookies = await page.cookies(config.TEST_URL);
+  };
+
+  beforeAll(setup);
+
+  afterAll(async () => {
+    hasAfterAllRun = true;
+    await browser.close();
+  });
+
+  const IGNORED_URLS = [
+    urls.LA_PORTAL_KBA_CASE_REF,
+    urls.LA_PORTAL_KBA_CALLBACK,
+    urls.LA_PORTAL_UPLOAD_YOUR_DOCUMENTS,
+    urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT,
+  ];
+
+  const urlsToTest = Object.values(urls).filter(url => url.startsWith(urls.LA_PORTAL) && !IGNORED_URLS.includes(url));
+
+  describe.each(urlsToTest)('Page %s', url => {
+    test(`Page ${url} should have no accessibility errors`, async () => {
+      // await page.setCookie(...cookies);
+      console.log(cookies);
+      const relativeUrl = config.TEST_URL.endsWith('/')
+        ? config.TEST_URL.slice(0, config.TEST_URL.length - 1)
+        : config.TEST_URL;
+      await page.goto(`${relativeUrl}${urls.LA_PORTAL_START_PAGE}`);
+
+      // await ensurePageCallWillSucceed(url);
 
       const result = await runPally(url, browser, page);
       const html = await htmlReporter.results(result);
