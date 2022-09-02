@@ -66,10 +66,19 @@ module.exports = {
     await I.retry(3).click('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText('When was the last date this address was confirmed?');
-    await I.retry(3).fillField(this.fields.birthMotherLastAddressDateDay, '26');
-    await I.retry(3).fillField(this.fields.birthMotherLastAddressDateMonth, '06');
+    await I.retry(3).fillField(
+      this.fields.birthMotherLastAddressDateDay,
+      childBirthMothersDetails.birthMotherLastAddressDateDay
+    );
+    await I.retry(3).fillField(
+      this.fields.birthMotherLastAddressDateMonth,
+      childBirthMothersDetails.birthMotherLastAddressDateMonth
+    );
     await I.wait(2);
-    await I.retry(3).fillField(this.fields.birthMotherLastAddressDateYear, '1980');
+    await I.retry(3).fillField(
+      this.fields.birthMotherLastAddressDateYear,
+      childBirthMothersDetails.birthMotherLastAddressDateYear
+    );
     await I.retry(3).click('Save and continue');
     await I.wait(4);
   },

@@ -1,5 +1,6 @@
 const { I } = inject();
 const config = require('../config');
+const childBasicInitialDetails = require('../fixtures/caseData/childBasicDetails');
 module.exports = {
   fields: {
     applyingWith: 'input[id$="applyingWith"]',
@@ -54,11 +55,14 @@ module.exports = {
     await I.wait(5);
     await I.retry(3).see('Application details');
     await I.retry(3).fillField(this.fields.caseRef, caseId);
-    await I.retry(3).fillField(this.fields.childName, 'William Jacob');
-    await I.retry(3).fillField(this.fields.childrenDateOfBirthDay, '10');
-    await I.retry(3).fillField(this.fields.childrenDateOfBirthMonth, '10');
+    await I.retry(3).fillField(
+      this.fields.childName,
+      childBasicInitialDetails.childFirstNameBeforeAdoption + ' ' + childBasicInitialDetails.childLastNameBeforeAdoption
+    );
+    await I.retry(3).fillField(this.fields.childrenDateOfBirthDay, childBasicInitialDetails.dateChildMovedIn);
+    await I.retry(3).fillField(this.fields.childrenDateOfBirthMonth, childBasicInitialDetails.monthChildMovedIn);
     await I.wait(2);
-    await I.retry(3).fillField(this.fields.childrenDateOfBirthYear, '2020');
+    await I.retry(3).fillField(this.fields.childrenDateOfBirthYear, childBasicInitialDetails.yearChildMovedIn);
     await I.retry(3).click('Save and continue');
     await I.wait(5);
     await I.retry(3).see('Getting started');

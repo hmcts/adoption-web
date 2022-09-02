@@ -1,5 +1,5 @@
 const { I } = inject();
-
+const familyCourtDetails = require('../fixtures/caseData/familyCourtDetails');
 module.exports = {
   fields: {
     placementOrderCourt: 'input[id$="placementOrderCourt"]',
@@ -11,7 +11,7 @@ module.exports = {
   async childDetailsFindFamilyCourtSection() {
     await I.retry(3).waitForText('Which court made the placement order?');
 
-    await I.retry(3).fillField(this.fields.courtList, 'Swansea');
+    await I.retry(3).fillField(this.fields.courtList, familyCourtDetails.familyCourtDetails);
     await I.wait(2);
     await I.retry(3).click(this.fields.courtListOption);
     await I.wait(2);

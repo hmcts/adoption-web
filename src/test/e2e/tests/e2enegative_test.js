@@ -1,7 +1,7 @@
 Feature('E2E Negative').retry(1);
 
 Scenario(
-  'Creat full application and submit @cross-browser',
+  'Create full application and submit negative @cross-browser',
   async ({
     loginPage,
     landingPage,
@@ -29,7 +29,7 @@ Scenario(
     await landingPage.selectApplyWithMySpouseSection();
 
     await taskListPage.selectDateChildMovedInDetails();
-    await dateChildMovedinDetailsPage.dateChildMovedInSectionWithoutData('10', '10', '2020');
+    await dateChildMovedinDetailsPage.dateChildMovedInSectionWithoutData();
     await taskListPage.verifyDateChildMovedInStatus();
 
     await taskListPage.selectChildAdoptionAgencyDetails();
@@ -95,7 +95,7 @@ Scenario(
     await taskListPage.selectReviewPayAndSubmitDetails();
     await reviewPayAndSubmitPage.selectNoPCQOption();
     await reviewPayAndSubmitPage.changeValueFromReviewYourAnswers();
-    await dateChildMovedinDetailsPage.dateChildMovedInSection('10', '12', '2020');
+    await dateChildMovedinDetailsPage.editDateChildMovedInSection();
     await reviewPayAndSubmitPage.reviewYourAnswersAndContinue();
     await reviewPayAndSubmitPage.statementOfTruthDetailsSectionEmpty();
     await reviewPayAndSubmitPage.paymentCancellation();

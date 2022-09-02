@@ -1,6 +1,8 @@
-Feature('Create application').retry(1);
+Feature('check your answers').retry(1);
+const { I } = inject();
+const childBasicDetails = require('../fixtures/caseData/childBasicDetails');
 Scenario(
-  'Create full application and submit @cross-browser',
+  'Fill in the application details and review the same in check your answers page',
   async ({
     loginPage,
     landingPage,
@@ -21,6 +23,7 @@ Scenario(
     uploadDocumentsDetailsPage,
     dateChildMovedinDetailsPage,
     chooseYourFamilyCourtDetailsPage,
+    checkYourAnswersPage,
   }) => {
     await loginPage.createCitizenUserAndSignIn();
     await landingPage.seeTheLandingPage();
@@ -41,7 +44,7 @@ Scenario(
     await taskListPage.selectChildAdoptionAgencyDetails();
     await childAdoptionAgencyDetailsPage.childSocialWorkerDetailsSection();
     await childAdoptionAgencyDetailsPage.yourSocialWorkerDetailsSection();
-    await childAdoptionAgencyDetailsPage.childAdoptionAgencyDetailsSection();
+    await childAdoptionAgencyDetailsPage.childWithNoAdoptionAgencyDetailsSection();
     await taskListPage.verifyChildAdoptionAgencyDetailsStatus;
 
     await taskListPage.selectChooseYourFamilyCourtDetails();
@@ -68,48 +71,7 @@ Scenario(
 
     await taskListPage.selectReviewPayAndSubmitDetails();
     await reviewPayAndSubmitPage.selectNoPCQOption();
-    await reviewPayAndSubmitPage.changeValueFromReviewYourAnswers();
-    await dateChildMovedinDetailsPage.editDateChildMovedInSection();
-    await reviewPayAndSubmitPage.reviewYourAnswersAndContinue();
-    await reviewPayAndSubmitPage.statementOfTruthDetailsSection();
-    await reviewPayAndSubmitPage.adoptionCourtFeesByCard();
-    const caseId = await reviewPayAndSubmitPage.getCaseIDAfterAplicationSubmit();
-
-    await landingPage.searchForCaseInLALandingPage(caseId);
-
-    //  LA - Add child's details
-
-    await taskListPage.selectChildrenBirthCertificate();
-    await childrenBirthCertificatePage.childDetailsBirthCertificaterSection();
-    // TODO in Future stories
-    //await taskListPage.verifyChildBirthCertificateDetailsStatus();
-
-    await taskListPage.selectChildBirthMotherDetails();
-    await childBirthMothersDetailsPage.childBirthMothersDetailsSection();
-    // TODO in Future stories
-    //await taskListPage.verifyChildBirthMotherDetailsStatus();
-
-    await taskListPage.selectChildBirthFatherDetails();
-    await childBirthFatherDetailsPage.childBirthFatherDetailsSection();
-    // TODO in Future stories
-    // await taskListPage.verifyChildBirthFatherDetailsStatus();
-
-    await taskListPage.selectChildOtherParentDetails();
-    await childOtherParentDetailsPage.childOtherParentDetailsSection();
-    // TODO in Future stories
-    //await taskListPage.verifyChildOtherParentDetailsStatus();
-
-    await taskListPage.selectChildPlacementOrderDetails();
-    await childDetailsPlacementOrderPage.childDetailsPlacementOrderSection();
-
-    // TODO bug Created for this change
-    await taskListPage.selectSiblingDetails();
-    await childSiblingDetailsPage.childDetailsSiblingSection();
-    //await taskListPage.verifySiblingDetailsStatus();
-
-    await taskListPage.selectUploadDocumentsDetails();
-    await uploadDocumentsDetailsPage.uploadDocumentsSection();
-    // TODO in Future stories
-    // await taskListPage.verifyUploadDocumentsStatus();
+    await checkYourAnswersPage.verifyCheckYourAnswersKeys();
+    await checkYourAnswersPage.verifyCheckYourAnswersValues();
   }
 );
