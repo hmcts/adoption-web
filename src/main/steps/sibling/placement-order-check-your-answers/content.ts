@@ -18,6 +18,10 @@ const placementOrderListItems = (userCase: Partial<CaseWithId>, content) => {
 
   return [
     {
+      key: { text: content.siblingName },
+      value: { text: `${sibling?.siblingFirstName || ''} ${sibling?.siblingLastNames || ''}` },
+    },
+    {
       key: { text: content.orderType },
       value: { text: (order as PlacementOrder).placementOrderType },
       actions: {
@@ -52,15 +56,14 @@ const getTitle = (userCase: Partial<CaseWithId>, content): string => {
     item => item.placementOrderId === userCase.selectedSiblingPoId
   );
 
-  return `${placementOrder?.placementOrderType || ''} ${content.for} ${sibling?.siblingFirstName || ''} ${
-    sibling?.siblingLastNames || ''
-  }`;
+  return `${placementOrder?.placementOrderType || ''} ${content.for} details`;
 };
 
 const en = content => {
   const enContent = {
     section: 'Sibling details',
-    for: 'for',
+    for: '',
+    siblingName: 'Sibling name',
     orderType: 'Type of order',
     orderNumber: 'Order case or serial number',
     change: 'Change',
@@ -77,7 +80,8 @@ const en = content => {
 const cy: typeof en = content => {
   const cyContent = {
     section: 'Manylion y brawd/chwaer',
-    for: 'ar gyfer',
+    for: '',
+    siblingName: 'Enw’r brawd/chwaer',
     orderType: 'Math o neuchymyn',
     orderNumber: 'Rhif cyfresol neu rif yr achos ar y gorchymyn',
     change: 'Newid',

@@ -1,5 +1,5 @@
 import { CaseWithId } from '../../../app/case/case';
-import { PlacementOrder, YesOrNo } from '../../../app/case/definition';
+import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -11,20 +11,10 @@ const getSiblingName = (userCase: Partial<CaseWithId>) => {
   return `${sibling?.siblingFirstName || ''} ${sibling?.siblingLastNames || ''}`;
 };
 
-const getPlacementOrderType = (userCase: Partial<CaseWithId>): string => {
-  const sibling = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
-  const placementOrder = (sibling?.siblingPlacementOrders as PlacementOrder[])?.find(
-    item => item.placementOrderId === userCase.selectedSiblingPoId
-  );
-
-  return `${placementOrder?.placementOrderType || ''}`;
-};
-
 const en = content => ({
   section: SECTION,
-  label: `Are you sure you want to remove this ${getPlacementOrderType(content.userCase)} for ${getSiblingName(
-    content.userCase
-  )}?`,
+  label: 'Are you sure you want to remove this order?',
+  hint: `${getSiblingName(content.userCase)}`,
   errors: {
     confirm: {
       required: 'Please select an answer',
@@ -34,9 +24,8 @@ const en = content => ({
 
 const cy: typeof en = content => ({
   section: SECTION_IN_WELSH,
-  label: `Ydych chi’n siŵr eich bod eisiau dileu’r ${getPlacementOrderType(
-    content.userCase
-  )} hwn ar gyfer ${getPlacementOrderType(content.userCase)}?`,
+  label: 'Ydych chi’n siŵr eich bod eisiau dileu’r gorchymyn hwn?',
+  hint: `${getSiblingName(content.userCase)}`,
   errors: {
     confirm: {
       required: 'Dewiswch ateb os gwelwch yn dda',
@@ -51,6 +40,7 @@ export const form: FormContent = {
       classes: 'govuk-radios',
       label: l => l.label,
       section: l => l.section,
+      hint: l => l.hint,
       values: [
         { label: l => l.yes, value: YesOrNo.YES },
         { label: l => l.no, value: YesOrNo.NO },
