@@ -40,7 +40,7 @@ nodejs:
     FALLBACK_EMAIL_ID_VALUE: 'adoptionproject@mailinator.com'
     IDAM_ROLE: 'adoption-citizen-user'
     LIVERPOOL_FAMILY_COURT_EMAIL: 'adoptionsliverpoolcivilandfamilycourt@justice.gov.uk'
-    CENTRAL_LONDON_FAMILY_COURT_EMAIL: 'CentralLondonadoptionapplication@justice.gov.uk'
+    CENTRAL_LONDON_FAMILY_COURT_EMAIL: 'cfc.onlineadoptions@justice.gov.uk'
     READING_FAMILY_COURT_EMAIL: 'Readingadoptionapplication@justice.gov.uk'
 
   keyVaults:
