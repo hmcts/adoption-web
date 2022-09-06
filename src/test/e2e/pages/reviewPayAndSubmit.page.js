@@ -1,5 +1,7 @@
 const { I } = inject();
-
+const secAppPersonalDetails = require('../fixtures/caseData/secondApplicantPersonalDetails');
+const primAppPersonalDetails = require('../fixtures/caseData/primaryApplicantPersonalDetails');
+const paymentCardDetails = require('../fixtures/caseData/paymentCardDetails');
 module.exports = {
   fields: {
     applicant1IBelieveApplicationIsTrue: 'input[id$="applicant1IBelieveApplicationIsTrue"]',
@@ -48,8 +50,14 @@ module.exports = {
     await I.retry(3).waitForText('Statement of truth', 30);
     await I.retry(3).click(this.fields.applicant1IBelieveApplicationIsTrue);
     await I.retry(3).click(this.fields.applicant2IBelieveApplicationIsTrue);
-    await I.retry(3).fillField(this.fields.applicant1SotFullName, 'Joe Bloggs');
-    await I.retry(3).fillField(this.fields.applicant2SotFullName, 'George Thomas');
+    await I.retry(3).fillField(
+      this.fields.applicant1SotFullName,
+      primAppPersonalDetails.primaryApplicantFirstName + ' ' + primAppPersonalDetails.primaryApplicantSecondName
+    );
+    await I.retry(3).fillField(
+      this.fields.applicant2SotFullName,
+      secAppPersonalDetails.secondApplicantFirstName + ' ' + secAppPersonalDetails.secondApplicantSecondName
+    );
     await I.retry(3).click('Confirm');
     await I.wait(4);
   },
@@ -70,8 +78,14 @@ module.exports = {
     await I.retry(3).see('Enter a full name');
     await I.retry(3).click(this.fields.applicant1IBelieveApplicationIsTrue);
     await I.retry(3).click(this.fields.applicant2IBelieveApplicationIsTrue);
-    await I.retry(3).fillField(this.fields.applicant1SotFullName, 'Joe Bloggs');
-    await I.retry(3).fillField(this.fields.applicant2SotFullName, 'George Thomas');
+    await I.retry(3).fillField(
+      this.fields.applicant1SotFullName,
+      primAppPersonalDetails.primaryApplicantFirstName + ' ' + primAppPersonalDetails.primaryApplicantSecondName
+    );
+    await I.retry(3).fillField(
+      this.fields.applicant2SotFullName,
+      secAppPersonalDetails.secondApplicantFirstName + ' ' + secAppPersonalDetails.secondApplicantSecondName
+    );
     await I.retry(3).click('Confirm');
     await I.wait(4);
   },
@@ -79,16 +93,19 @@ module.exports = {
   async adoptionCourtFeesByCard() {
     await I.wait(30);
     await I.retry(3).waitForText('Enter card details', 30);
-    await I.retry(3).fillField(this.fields.cardNo, '4444333322221111');
-    await I.retry(3).fillField(this.fields.expiryMonth, '10');
-    await I.retry(3).fillField(this.fields.expiryYear, '28');
-    await I.retry(3).fillField(this.fields.cardholderName, 'Joe Bloggs');
-    await I.retry(3).fillField(this.fields.cvc, '123');
-    await I.retry(3).fillField(this.fields.addressLine1, '2');
-    await I.retry(3).fillField(this.fields.addressLine2, 'Chruch road');
-    await I.retry(3).fillField(this.fields.addressCity, 'Uxbridge');
-    await I.retry(3).fillField(this.fields.addressPostcode, 'UB8 3NA');
-    await I.retry(3).fillField(this.fields.email, 'simulate-delivered@notifications.service.gov.uk');
+    await I.retry(3).fillField(this.fields.cardNo, paymentCardDetails.paymentCardNumber);
+    await I.retry(3).fillField(this.fields.expiryMonth, paymentCardDetails.paymentCardExpiryMonth);
+    await I.retry(3).fillField(this.fields.expiryYear, paymentCardDetails.paymentCardExpiryYear);
+    await I.retry(3).fillField(
+      this.fields.cardholderName,
+      primAppPersonalDetails.primaryApplicantFirstName + ' ' + primAppPersonalDetails.primaryApplicantSecondName
+    );
+    await I.retry(3).fillField(this.fields.cvc, paymentCardDetails.paymentCardCVVNumber);
+    await I.retry(3).fillField(this.fields.addressLine1, paymentCardDetails.cardHolderAddressLine1);
+    await I.retry(3).fillField(this.fields.addressLine2, paymentCardDetails.cardHolderAddressLine2);
+    await I.retry(3).fillField(this.fields.addressCity, paymentCardDetails.cardHolderAddressCity);
+    await I.retry(3).fillField(this.fields.addressPostcode, paymentCardDetails.cardHolderPostCode);
+    await I.retry(3).fillField(this.fields.email, paymentCardDetails.cardHolderEmailAddress);
     await I.retry(3).click('Continue');
     await I.wait(10);
     await I.retry(3).waitForText('Confirm your payment', 30);
