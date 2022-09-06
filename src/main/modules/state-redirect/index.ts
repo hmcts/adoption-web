@@ -14,6 +14,7 @@ import {
   COOKIES_PAGE,
   DOWNLOAD_APPLICATION_SUMMARY,
   LA_PORTAL,
+  LA_PORTAL_CONFIRMATION_PAGE,
   PAYMENT_CALLBACK_URL,
   PAY_AND_SUBMIT,
   PAY_YOUR_FEE,
@@ -47,6 +48,14 @@ export class StateRedirectMiddleware {
         }
 
         if (
+          req.path.startsWith(LA_PORTAL) &&
+          req.path !== LA_PORTAL_CONFIRMATION_PAGE &&
+          [State.LaSubmitted].includes(req.session.userCase?.state)
+        ) {
+          return res.redirect(LA_PORTAL_CONFIRMATION_PAGE);
+        }
+
+        if (
           req.path.startsWith(CHECK_ANSWERS_URL) &&
           getApplicationStatus(req.session.userCase) === SectionStatus.CAN_NOT_START_YET
         ) {
@@ -58,7 +67,9 @@ export class StateRedirectMiddleware {
           return next();
         }
         if (
-          [State.Submitted, State.AwaitingDocuments, State.AwaitingHWFDecision].includes(req.session.userCase?.state) &&
+          [State.Submitted, State.AwaitingDocuments, State.AwaitingHWFDecision, State.LaSubmitted].includes(
+            req.session.userCase?.state
+          ) &&
           req.path !== APPLICATION_SUBMITTED &&
           req.path !== DOWNLOAD_APPLICATION_SUMMARY &&
           !req.path.startsWith(LA_PORTAL)

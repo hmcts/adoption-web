@@ -11,12 +11,13 @@ import {
   CHECK_ANSWERS_URL,
   LA_PORTAL,
   LA_PORTAL_CHECK_YOUR_ANSWERS,
+  LA_PORTAL_STATEMENT_OF_TRUTH,
   LA_PORTAL_TASK_LIST,
   SAVE_AND_SIGN_OUT,
   SAVE_AS_DRAFT,
 } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
-import { CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE, SYSTEM_USER_UPDATE } from '../case/definition';
+import { CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE, LA_SUBMIT, SYSTEM_USER_UPDATE } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
 import { ValidationError } from '../form/validation';
 
@@ -94,7 +95,10 @@ export class PostController<T extends AnyObject> {
 
   protected async save(req: AppRequest<T>, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
     const caseRefId = req.session.userCase.id;
-    if (req.url.includes('la-portal') && ![LA_PORTAL_CHECK_YOUR_ANSWERS?.toString()].includes(req.url)) {
+    if (
+      (req.url.includes('la-portal') && ![LA_PORTAL_STATEMENT_OF_TRUTH?.toString()].includes(req.url)) ||
+      (req.body['saveAsDraft'] && [LA_PORTAL_STATEMENT_OF_TRUTH?.toString()].includes(req.url))
+    ) {
       try {
         return await saveDraftCase(req, caseRefId || '', formData);
       } catch (err) {
@@ -105,7 +109,7 @@ export class PostController<T extends AnyObject> {
       return req.session.userCase;
     } else {
       try {
-        if ([LA_PORTAL_CHECK_YOUR_ANSWERS?.toString()].includes(req.url)) {
+        if ([LA_PORTAL_STATEMENT_OF_TRUTH?.toString()].includes(req.url)) {
           const modifiedValuesSet = await getDraftCaseFromStore(req, caseRefId || '');
           req.session.userCase = await req.locals.api.triggerEvent(caseRefId, modifiedValuesSet, eventName);
           removeCaseFromRedis(req, caseRefId);
@@ -156,7 +160,9 @@ export class PostController<T extends AnyObject> {
   }
 
   protected getEventName(req: AppRequest): string {
-    if (req.session.user?.isSystemUser) {
+    if (req.session.user?.isSystemUser && req.url.includes(LA_PORTAL_STATEMENT_OF_TRUTH)) {
+      return LA_SUBMIT;
+    } else if (req.session.user?.isSystemUser) {
       return SYSTEM_USER_UPDATE;
     }
     return CITIZEN_UPDATE;

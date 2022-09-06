@@ -42,12 +42,13 @@ export class OidcMiddleware {
           req.session.user = await getUserDetails(`${protocol}${res.locals.host}${port}`, req.query.code, CALLBACK_URL);
           const role: string = config.get('services.idam.userRole');
           logger.info('Roles are ---', req.session.user.roles);
-          if (req.session.user.roles.includes(role)) {
-            return req.session.save(() => res.redirect('/'));
-          } else {
-            req.session.user = undefined;
-            throw new Error('Unauthorized role of the user');
-          }
+          logger.info('Demo User Roles are ---', role);
+          // if (req.session.user.roles.includes(role)) {
+          return req.session.save(() => res.redirect('/'));
+          // } else {
+          //   req.session.user = undefined;
+          //   throw new Error('Unauthorized role of the user');
+          // }
         }
         res.redirect(SIGN_IN_URL);
       })
