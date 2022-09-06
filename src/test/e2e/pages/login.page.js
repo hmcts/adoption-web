@@ -10,8 +10,8 @@ module.exports = {
     under21Eligible: '#under21Eligible',
     livedUKEligible: '#livedUKEligible',
     domicileEligible: '#domicileEligible',
+    submitButton: 'input[value="Sign in"]',
   },
-  submitButton: 'input[value="Sign in"]',
 
   async createUserAndSignIn() {
     await login('citizenSingleton');

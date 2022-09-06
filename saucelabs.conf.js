@@ -114,6 +114,8 @@ const setupConfig = {
     dateChildMovedinDetailsPage: './src/test/e2e/pages/dateChildMovedinDetails.page.js',
     chooseYourFamilyCourtDetailsPage: './src/test/e2e/pages/chooseYourFamilyCourtDetails.page.js',
     saveAsDraftPage: './src/test/e2e/pages/saveAsDraft.page',
+    checkYourAnswersPage: './src/test/e2e/pages/checkYourAnswers.page.js',
+    laCheckYourAnswersPage: './src/test/e2e/pages/laCheckYourAnswers.page',
   },
   mocha: {
     reporterOptions: {
