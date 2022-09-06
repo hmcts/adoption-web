@@ -27,9 +27,9 @@ const cy: typeof en = content => ({
   line2:
     'Once the adoption order is granted, an adoption certificate is created. This replaces the child\'s birth certificate. It can be ordered from the <a href="https://www.gov.uk/general-register-office" class="govuk-link" target="_blank">General Register Office - GOV.UK (www.gov.uk)</a> for a small fee. (in welsh)',
   printApplication: 'Download or print your application (in welsh)',
-  helpUs: 'Help us improve this service (in welsh)',
+  helpUs: 'Helpwch ni i wella’r gwasanaeth hwn',
   line3:
-    'Please help us improve this service by <a  target="_blank" href="https://www.smartsurvey.co.uk/s/SurveyExit/?service=Adoption">leaving feedback</a> (in welsh)',
+    'Helpwch ni i wella’r gwasanaeth hwn trwy <a  target="_blank" href="https://www.smartsurvey.co.uk/s/SurveyExit/?service=Adoption">roi adborth.</a> Diolch.',
 });
 
 const languages = {

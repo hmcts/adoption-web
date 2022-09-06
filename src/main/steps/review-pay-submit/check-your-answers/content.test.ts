@@ -171,7 +171,7 @@ const cyContent = {
     courtOrder: 'Gorchymyn llys',
     siblingOrHalfSibling: 'Brodyr/chwiorydd neu hanner brodyr/chwiorydd y plentyn',
     siblingCourtOrders: 'Gorchmynion llys brodyr/chwiorydd',
-    siblingRelation: 'Sibling relation (in welsh)',
+    siblingRelation: 'Perthynas sy’n frawd/chwaer',
     placementCourtName: 'Placement court name (in welsh)',
     familyCourtName: 'Enw’r llys teulu',
     uploadedDocuments: 'Dogfennau sydd wedi eu llwytho',

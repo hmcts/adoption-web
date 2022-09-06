@@ -121,7 +121,7 @@ const cy: typeof en = () => ({
     siblingCourtOrders: 'Manylion gorchymyn llys brodyr/chwiorydd',
     uploadDocuments: 'Llwytho dogfennau',
   },
-  reviewAndSubmit: 'Review and submit',
+  reviewAndSubmit: 'Adolygu a chyflwyno',
 });
 
 const languages = {

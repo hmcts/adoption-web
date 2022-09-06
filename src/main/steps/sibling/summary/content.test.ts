@@ -46,12 +46,12 @@ const cyContent = {
   title: 'Gorchmynion eisoes mewn lle ar gyfer brodyr/chwiorydd a hanner brodyr/hanner chwiorydd',
   sibling: 'Brawd/chwaer',
   siblingRelation: {
-    [SiblingRelationships.SISTER]: 'Sister (in welsh)',
-    [SiblingRelationships.STEP_SISTER]: 'Step-sister (in welsh)',
-    [SiblingRelationships.HALF_SISTER]: 'Half-sister (in welsh)',
-    [SiblingRelationships.BROTHER]: 'Brother (in welsh)',
-    [SiblingRelationships.STEP_BROTHER]: 'Step-brother (in welsh)',
-    [SiblingRelationships.HALF_BROTHER]: 'Half-brother (in welsh)',
+    [SiblingRelationships.SISTER]: 'Chwaer',
+    [SiblingRelationships.STEP_SISTER]: 'Llyschwaer',
+    [SiblingRelationships.HALF_SISTER]: 'Hanner chwaer',
+    [SiblingRelationships.BROTHER]: 'Brawd',
+    [SiblingRelationships.STEP_BROTHER]: 'Llysfrawd',
+    [SiblingRelationships.HALF_BROTHER]: 'Hanner brawd',
   },
   placementOrder: 'Gorchymyn Lleoli',
   siblingPOType: {
@@ -66,7 +66,7 @@ const cyContent = {
   incomplete: 'anghyflawn',
   change: 'Newid',
   remove: 'Dileu',
-  label: 'Do you want to add another order for the same or another sibling? (in welsh)',
+  label: 'A ydych eisiau ychwanegu gorchymyn arall ar gyfer yr un brawd/chwaer neu frawd/chwaer arall?',
   errors: {
     addAnotherSiblingPlacementOrder: {
       required: 'Dewiswch ateb os gwelwch yn dda',

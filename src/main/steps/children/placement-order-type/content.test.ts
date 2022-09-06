@@ -32,14 +32,14 @@ const enContent = {
 const cyContent = {
   section: 'Manylion y plentyn',
   label: 'Beth oedd rhyw’r plentyn pan gafodd ei (g)eni?',
-  adoptionOrder: 'Previous adoption order (in welsh)',
-  careOrder: 'Care order (in welsh)',
-  contactOrder: 'Child arrangements order (in welsh)',
-  contactOrderHint: 'Child arrangements includes residency, contact, specific issue and prohibited steps. (in welsh)',
-  placementOrder: 'Previous placement order (in welsh)',
-  supervisionOrder: 'Supervision order (in welsh)',
-  other: 'Other (in welsh)',
-  otherOrder: 'Add a different type of order',
+  adoptionOrder: 'Gorchymyn mabwysiadu blaenorol',
+  careOrder: 'Gorchymyn Gofal',
+  contactOrder: 'Gorchymyn trefniadau plant',
+  contactOrderHint: 'Mae trefniadau plant yn cynnwys cyfnod preswyl, cyswllt, mater penodol a chamau gwaharddedig.',
+  placementOrder: 'Gorchymyn lleoli blaenorol',
+  supervisionOrder: 'Gorchymyn Goruchwylio',
+  other: 'Arall',
+  otherOrder: 'Ychwanegu math gwahanol o orchymyn',
   errors: {
     selectedPlacementOrderType: {
       required: 'Dewiswch ateb os gwelwch yn dda',

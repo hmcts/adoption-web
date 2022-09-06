@@ -183,8 +183,8 @@ const cy: typeof en = {
   webChatDetails:
     "Mae ein holl asiantau sgwrsio dros y we yn brysur yn helpu pobl eraill. Dewch yn ôl nes ymlaen neu cysylltwch â ni trwy un o'r dulliau uchod.",
   sendUsAMessage: 'Anfonwch neges atom',
-  TBC: 'TBC (in Welsh)',
-  sendUsAMessageTBC: 'Anfonwch neges atom  (email TBC)',
+  TBC: 'i’w gadarnhau',
+  sendUsAMessageTBC: 'Anfonwch neges atom  (email i’w gadarnhau)',
   sendUsAMessageDetails: 'Byddwn yn anelu at ymateb o fewn 5 diwrnod gwaith.',
   telephone: 'Ffôn',
   telephoneNumber: '0300 303 5171',

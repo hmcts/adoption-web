@@ -38,12 +38,12 @@ const enContent = {
 const cyContent = {
   section: 'Manylion y fam fiolegol',
   label: 'Beth yw cenedligrwydd mam fiolegol y plentyn?',
-  hint: 'Select all options that are relevant. (in welsh)',
+  hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
   errors: {
     birthMotherNationality: {
-      required: 'Select if they are British, Irish, citizen of a different country or not sure (in welsh)',
+      required: "Dewiswch os ydyn nhw'n Brydeinig, Gwyddelig, dinesydd gwlad wahanol neu ddim yn siŵr",
       notSureViolation: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
-      addButtonNotClicked: "Select 'Add' before you continue (in welsh)",
+      addButtonNotClicked: 'Dewiswch ‘Ychwanegu’ cyn ichi symud ymlaen',
     },
     addAnotherNationality: 'MOCK_ERROR_MESSAGE',
   },

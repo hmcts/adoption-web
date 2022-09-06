@@ -165,7 +165,7 @@ const cy: typeof en = () => ({
     otherParent: 'Unigolyn arall sydd â chyfrifoldeb rhiant',
     placementAndCourtOrders: 'Gorchmynion llys a lleoli',
     siblingCourtOrders: 'Manylion gorchymyn llys brodyr/chwiorydd',
-    familyCourt: 'The family court details (in welsh)',
+    familyCourt: 'Manylion y llys teulu',
     uploadDocuments: 'Llwytho dogfennau',
     reviewPayAndSubmit: 'Adolygu, talu a chyflwyno eich cais',
   },

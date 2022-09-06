@@ -58,46 +58,47 @@ const en = () => {
 
 const cy = () => {
   return {
-    title: 'Llwytho dogfennau’r plentyn',
-    youNeed:
-      'Mae arnoch angen llwytho llun digidol neu sganio tystysgrif geni llawn y plentyn (dyma’r un sy’n cynnwys manylion eu rhieni biolegol)',
-    youNeed2: 'Os yw’n berthnasol, efallai byddwch angen llwytho’r pethau canlynol hefyd:',
-    certificate: 'Tystysgrifau marwolaeth y rhieni biolegol',
-    certificateForeign: 'Unrhyw dystysgrifau mabwysiadu blaenorol',
+    title: 'Llwytho dogfennau',
+    youNeed: "Mae angen i chi uwchlwytho ffeil, llun digidol neu sganio'r dogfennau, os ydynt yn berthnasol megis:",
     warningPhoto:
-      'Gwnewch yn siŵr bod y llun neu’r sgan yn dangos y ddogfen gyfan. Gwiriwch eich bod yn gallu darllen y testun i gyd cyn llwytho’r ffeil. Os na fydd staff y llys yn gallu darllen y manylion, gall y llun gael ei wrthod.',
+      'Gwnewch yn siŵr bod y llun neu’r sgan yn dangos y ddogfen gyfan. Gwiriwch eich bod yn gallu darllen y testun i gyd cyn llwytho’r ffeil. Os na fydd staff y llys yn gallu ei ddarllen, gall gael ei wrthod.',
     infoTakePhoto: 'Gallwch dynnu llun gyda’ch ffôn a’i lwytho.',
-    infoBullet1:
+    infoBullet1: 'tystysgrif geni lawn y plentyn',
+    infoBullet2: 'Tystysgrifau marwolaeth y rhieni biolegol os yw’n briodol',
+    infoBullet3: "tystysgrifau priodas neu bartneriaeth sifil yr ceiswyr os yw'n briodol",
+    infoBullet4: 'Atodiad A (os yw ar gael)',
+    infoBullet5:
+      'unrhyw dystysgrifau mabwysiadu neu orchmynion llys blaenorol ar gyfer y plentyn neu frodyr a chwiorydd y plentyn',
+    infoBullet6:
+      'unrhyw dystiolaeth ychwanegol rydych chi’n teimlo sy’n berthnasol megis cytundebau cynnal neu ID gyda llun',
+    note1: 'Dylai’r enwau’r ffeiliau gyfateb â beth yw’r ffeil, er enghraifft, tystysgrif geni’r plentyn.',
+    infoBulletSummary1:
       'Rhowch eich dogfen ar rywbeth gwastad mewn ystafell sydd â digon o olau. Defnyddiwch fflach y camera os bydd angen.',
-    infoBullet2: "Tynnwch lun o’r ddogfen gyfan. Dylech allu gweld corneli'r ddogfen.",
-    infoBullet3: 'Gwiriwch eich bod yn gallu gweld yr ysgrifen i gyd, gan gynnwys y llawysgrifen.',
-    infoBullet4: 'Anfonwch y llun trwy e-bost neu sganiwch y ddogfen i’r ddyfais rydych yn ei defnyddio nawr.',
-    infoBullet5: 'Defnyddiwch y ddolen isod i’w lwytho.',
-    minRequirements:
-      'Dylech lwytho o leiaf un delwedd glir sy’n dangos y ddogfen gyfan. Os ydych yn meddwl y bydd yn helpu staff y llys ddarllen y manylion, gallwch lwytho sawl delwedd. Os oes gan eich dogfen mwy nac un tudalen, yna dylech lwytho o leiaf un delwedd o bob tudalen.',
+    infoBulletSummary2: "Tynnwch lun o’r ddogfen gyfan. Dylech allu gweld corneli'r ddogfen.",
+    infoBulletSummary3: 'Gwiriwch eich bod yn gallu gweld yr ysgrifen i gyd, gan gynnwys y llawysgrifen.',
+    infoBulletSummary4: 'Anfonwch y llun trwy e-bost neu sganiwch y ddogfen i’r ddyfais rydych yn ei defnyddio nawr.',
+    infoBulletSummary5: 'Defnyddiwch y ddolen isod i’w lwytho.',
+    minRequirements: 'Gallwch uwchlwytho uchafswm o 10 dogfen ar y dudalen hon. Rhaid ardystio pob tystysgrif.',
     uploadFiles: 'Ffeiliau sydd wedi cael eu llwytho',
     noFilesUploaded: 'Nid oes ffeiliau wedi cael eu llwytho',
     chooseFilePhoto: 'Dewiswch ffeil neu tynnwch lun',
     orStr: 'neu',
     dragDropHere: 'Llusgwch a gollyngwch ffeiliau yma',
-    fileFormats: "Rhaid i'r ffeil fod ar ffurf PDF neu MS Word Document.",
+    fileFormats: 'Rhaid i’r ffeil fod ar ffurf jpg, png, pdf, doc/docx neu fformat tif.',
     fileSize: 'Caniateir ichi lwytho ffeil sydd hyd at 25MB o ran maint.',
     cannotUploadDocuments: 'Ni allaf lwytho rhai o fy nogfennau / fy holl ddogfennau.',
-    cannotUploadWhich: 'Pa ddogfen na allwch ei llwytho?',
-    checkAllThatApply: "Dewiswch bob un sy'n berthnasol",
     cannotUploadYouCanPost:
-      '<p class="govuk-body govuk-!-margin-top-5">Gallwch bostio neu e-bostio eich dogfennau i’r llys. Os ydych yn eu postio, rhaid ichi anfon y dogfennau gwreiddiol neu gopïau wedi’u hardystio. Byddwch yn cael manylion am sut i’w hanfon ar ôl ichi gyflwyno’r cais hwn. </p><p class="govuk-body">Parhau gyda’ch cais.</p>',
+      '<p class="govuk-body govuk-!-margin-top-5">To avoid delays you should post or email your documents to the court. If you post them you must send the original documents or certified copies.<br><br>Continue with your application.</p>',
     birthOrAdoptionCertificate: 'Tystysgrif geni neu fabwysiadu',
-    deathCertificate: 'Tystysgrif marwolaeth',
 
     errors: {
       laUploadedFiles: {
         [ValidationError.NOT_UPLOADED]:
-          'Nid ydych wedi darparu unrhyw wybodaeth nac wedi uwchlwytho unrhyw ddogfennau. Mae angen i chi ddarparu’r wybodaeth neu’r dogfennau y mae’r llys wedi gofyn amdanynt. Neu os ydych am bostio unrhyw ddogfennau i mewn, dewiswch yr opsiwn hwnnw.',
+          'Nid ydych wedi darparu unrhyw wybodaeth neu lwytho unrhyw ddogfennau. Mae angen i chi ddarparu’r wybodaeth neu’r dogfennau y mae’r llys wedi gofyn amdani/amdanynt. Neu os ydych yn mynd i bostio unrhyw ddogfennau, dewiswch yr opsiwn hwnnw.',
         errorUploading:
           'Ni chafodd eich ffeil ei llwytho oherwydd bod y gwasanaeth yn profi problemau technegol. Ceisiwch lwytho eich ffeil eto.',
         fileSizeTooBig:
-          'Mae’r ffeil yr ydych wedi ei llwytho yn rhy fawr. Ceisiwch leihau maint y ffeil i lai na 25MB a llwytho’r ffeil eto.',
+          'Mae’r ffeil yr ydych wedi ei llwytho yn rhy fawr. Ceisiwch leihau maint y ffeil i lai na 2MB a llwytho’r ffeil eto.',
         fileWrongFormat:
           'Ni allwch lwytho ffeil yn y fformat hwnnw. Cadwch y ffeil ar ffurf fformat a dderbynnir a cheisiwch ei llwytho eto.',
         [ValidationError.FILE_COUNT_LIMIT_EXCEEDED]: 'Gallwch uwchlwytho uchafswm o 10 ffeil.',

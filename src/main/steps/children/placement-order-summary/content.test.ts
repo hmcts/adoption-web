@@ -45,7 +45,7 @@ const cyContent = {
   incomplete: 'anghyflawn',
   change: 'Newid',
   remove: 'Dileu',
-  label: 'Does the child have any other previous or existing orders? (in welsh)',
+  label: 'A oes gan y plentyn unrhyw orchmynion blaenorol neu bresennol eraill?',
   errors: {
     addAnotherPlacementOrder: {
       required: 'Dewiswch ateb os gwelwch yn dda',

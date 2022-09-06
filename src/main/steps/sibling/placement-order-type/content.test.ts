@@ -32,20 +32,20 @@ const enContent = {
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
   label: 'Pa fath o neuchymyn ydyw?',
-  adoptionOrder: 'Adoption order (in welsh)',
-  careOrder: 'Care order (in welsh)',
-  contactOrder: 'Contact order (in welsh)',
-  freeingOrder: 'Freeing order (in welsh)',
-  placementOrder: 'Placement order (in welsh)',
-  superVisOrder: 'Supervision order (in welsh)',
-  other: 'Other (in welsh)',
-  placementOtherType: 'Add a different type of order (in welsh)',
+  adoptionOrder: 'Gorchymyn Mabwysiadu',
+  careOrder: 'Gorchymyn Gofal',
+  contactOrder: 'Gorchymyn Cyswllt',
+  freeingOrder: 'Gorchymyn Rhyddhau',
+  placementOrder: 'Gorchymyn Lleoli',
+  superVisOrder: 'Gorchymyn Goruchwylio',
+  other: 'Arall',
+  placementOtherType: 'AYchwanegu math gwahanol o orchymyn',
   errors: {
     selectedSiblingPoType: {
-      required: 'Please select an answer (in welsh)',
+      required: 'Dewiswch ateb os gwelwch yn dda',
     },
     selectedSiblingOtherPlacementOrderType: {
-      required: 'Enter an order type',
+      required: 'Nodwch y math o orchymyn',
     },
   },
 };

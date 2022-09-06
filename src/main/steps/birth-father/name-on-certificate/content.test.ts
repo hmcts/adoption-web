@@ -18,11 +18,11 @@ const enContent = {
 };
 
 const cyContent = {
-  section: "Birth father's details (in welsh)",
+  section: 'Manylion y tad biolegol',
   label: 'A yw enw’r tad biolegol ar y dystysgrif geni?',
   errors: {
     birthFatherNameOnCertificate: {
-      required: 'Please answer the question (in welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
 };
