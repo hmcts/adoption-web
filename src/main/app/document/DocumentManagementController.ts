@@ -26,9 +26,12 @@ export class DocumentManagerController {
   }
 
   public async post(req: AppRequest, res: Response, documentInput?: DocumentInput): Promise<void> {
+    console.log('------Inside post------');
     if (![State.Draft].includes(req.session.userCase.state) && (!documentInput || !documentInput.skipDraftCheck)) {
       throw new Error('Cannot upload new documents as case is not in Draft state');
     }
+
+    console.log('-------req.files?.length-------' + req.files?.length);
 
     if (!req.files?.length) {
       if (req.headers.accept?.includes('application/json')) {
@@ -40,10 +43,12 @@ export class DocumentManagerController {
 
     const documentManagementClient = this.getDocumentManagementClient(req.session.user);
 
+    console.log('-------documentManagementClient.create-------');
     const filesCreated = await documentManagementClient.create({
       files: req.files,
       classification: Classification.Public,
     });
+    console.log('-------filesCreated-------' + filesCreated);
 
     const newUploads: ListValue<Partial<AdoptionDocument> | null>[] = filesCreated.map(file => ({
       id: generateUuid(),
@@ -116,6 +121,8 @@ export class DocumentManagerController {
   }
 
   public async postLa(req: AppRequest, res: Response): Promise<void> {
+    console.log('------Inside postLa------');
+
     const documentInput = {
       documentsUploadedKey: 'laDocumentsUploaded',
       documentComment: 'Uploaded by LA',
@@ -141,9 +148,9 @@ export class DocumentManagerController {
       req.session.userCase['applicant1LanguagePreference'] === LanguagePreference.WELSH ? 'Cy' : 'En';
     const documentsGenerated =
       (req.session.userCase[documentsGeneratedKey] as ListValue<Partial<AdoptionDocument> | null>[]) ?? [];
-    if (![State.Submitted].includes(req.session.userCase.state)) {
+    /* if (![State.Submitted].includes(req.session.userCase.state)) {
       throw new Error('Cannot display document as the application is not in submitted state');
-    }
+    } */
 
     let documentToGet;
 

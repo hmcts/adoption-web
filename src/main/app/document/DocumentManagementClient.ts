@@ -33,11 +33,14 @@ export class DocumentManagementClient {
 
     for (const [, file] of Object.entries(files)) {
       formData.append('files', file.buffer, file.originalname);
+      console.log('------file.originalname------' + file.originalname);
     }
     const response: AxiosResponse<DocumentManagementResponse> = await this.client.post('/cases/documents', formData, {
       headers: { ...formData.getHeaders() },
     });
-
+    console.log('------response------' + response);
+    console.log('------response.data------' + response.data);
+    console.log('------response.data?.documents------' + response.data?.documents);
     return response.data?.documents || [];
   }
 
