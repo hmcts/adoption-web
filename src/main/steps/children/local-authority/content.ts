@@ -33,7 +33,7 @@ const en = () => ({
 });
 
 const cy: typeof en = () => ({
-  section: 'Application details. (in welsh)',
+  section: 'Manylion y cais',
   title: 'Local authority details. (in welsh)',
   line1:
     'We need the details of the local authority that placed the child with you. These should be on the placement order. (in welsh)',

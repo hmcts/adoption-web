@@ -23,7 +23,7 @@ const cy: typeof en = () => ({
     '<label class="govuk-label">Gofynnir i chi ddarparu pob gorchymyn llys brodyr a chwiorydd yn unigol.</label>',
   errors: {
     hasSiblings: {
-      required: 'PDewiswch ateb os gwelwch yn dda',
+      required: 'Dewiswch ateb os gwelwch yn dda',
     },
   },
 });

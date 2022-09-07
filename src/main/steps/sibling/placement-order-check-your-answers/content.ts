@@ -118,7 +118,7 @@ const cy: typeof en = content => {
       [SiblingRelationships.SISTER]: 'Chwaer',
       [SiblingRelationships.STEP_SISTER]: 'Llyschwaer',
       [SiblingRelationships.HALF_SISTER]: 'Hanner chwaer',
-      [SiblingRelationships.BROTHER]: 'Brawd)',
+      [SiblingRelationships.BROTHER]: 'Brawd',
       [SiblingRelationships.STEP_BROTHER]: 'Llysfrawd',
       [SiblingRelationships.HALF_BROTHER]: 'Hanner brawd',
     },

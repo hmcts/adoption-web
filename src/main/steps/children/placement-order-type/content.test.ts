@@ -31,7 +31,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y plentyn',
-  label: 'Beth oedd rhyw’r plentyn pan gafodd ei (g)eni?',
+  label: 'Pa fath o orchymyn ydyw?',
   adoptionOrder: 'Gorchymyn mabwysiadu blaenorol',
   careOrder: 'Gorchymyn Gofal',
   contactOrder: 'Gorchymyn trefniadau plant',

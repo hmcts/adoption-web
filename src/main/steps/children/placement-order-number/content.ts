@@ -34,7 +34,7 @@ const cy: typeof en = ({ userCase }: CommonContent) => {
   return {
     label,
     section: 'Manylion y plentyn',
-    hint: 'TMae hwn wedi’i nodi yng nghornel dde uchaf y gorchymyn.',
+    hint: 'Mae hwn wedi’i nodi yng nghornel dde uchaf y gorchymyn.',
     errors: {
       placementOrderNumber: {
         required: 'Nac ydwdwch y rhif cyfresol neu rif yr achos',

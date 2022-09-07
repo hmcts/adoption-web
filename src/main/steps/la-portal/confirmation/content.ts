@@ -26,9 +26,9 @@ const cy: typeof en = content => ({
   line2: "Mae'r e-bost yn rhoi gwybodaeth fanylach am y llinell amser a beth sy'n digwydd nesaf.",
   line3:
     'Bydd y cais nawr yn cael ei anfon i’r llys i’w brosesu. Os na wnaethoch uwchlwytho Atodiad A fel rhan o’r dystiolaeth ar gyfer y cais, dylech wneud hynny cyn gynted â phosibl er mwyn atal oedi.',
-  line4: 'Sign into the',
-  documentUploadService: 'document upload service',
-  line5: 'to submit the annex and any additional evidence. (in welsh)',
+  line4: 'Mewngofnodwch i’r',
+  documentUploadService: 'gwasanaeth uwchlwytho dogfennau',
+  line5: 'er mwyn cyflwyno’r atodiad ac unrhyw dystiolaeth ychwanegol.',
   line6: "Fe gewch chi gopi o'r cais llawn unwaith y bydd y llys yn dechrau ei brosesu.",
 });
 

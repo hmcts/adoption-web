@@ -39,7 +39,7 @@ const cyContent = {
   placementOrder: 'Gorchymyn Lleoli',
   superVisOrder: 'Gorchymyn Goruchwylio',
   other: 'Arall',
-  placementOtherType: 'AYchwanegu math gwahanol o orchymyn',
+  placementOtherType: 'Ychwanegu math gwahanol o orchymyn',
   errors: {
     selectedSiblingPoType: {
       required: 'Dewiswch ateb os gwelwch yn dda',

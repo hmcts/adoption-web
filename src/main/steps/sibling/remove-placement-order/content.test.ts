@@ -54,7 +54,7 @@ const cyContent = {
     [SiblingPOType.SUPERVIS_ORDER]: 'Gorchymyn Goruchwylio',
     [SiblingPOType.OTHER]: 'Arall',
   },
-  label: "Are you sure you want to remove this adoption order (in welsh) for child's sister (in welsh)?",
+  label: "Are you sure you want to remove this gorchymyn mabwysiadu for child's chwaer?",
   errors: {
     confirm: {
       required: 'Dewiswch ateb os gwelwch yn dda',
