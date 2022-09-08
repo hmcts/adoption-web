@@ -708,6 +708,7 @@ export interface CaseData {
   coDocumentsUploaded: ListValue<AdoptionDocument>[];
   coIsEverythingInPetitionTrue: YesOrNo;
   otherPlacementOrderType: string;
+  status: State;
 }
 
 export interface Children {
