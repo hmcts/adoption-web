@@ -235,7 +235,7 @@ export interface Case {
   applicant1ContactDetails?: ContactDetails[];
   applicant1ContactDetailsConsent?: YesOrNo;
   applicant1LanguagePreference?: LanguagePreference;
-  status: State;
+  status?: State;
 
   /***** Applicant2 *****/
   applicant2FirstNames?: string;
