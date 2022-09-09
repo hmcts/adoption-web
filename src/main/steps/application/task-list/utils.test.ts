@@ -288,7 +288,7 @@ describe('utils', () => {
           applicant2LanguagePreference: LanguagePreference.ENGLISH,
         },
         userType: 'applicant2',
-        expected: COMPLETED,
+        expected: IN_PROGRESS,
       },
       {
         data: {
