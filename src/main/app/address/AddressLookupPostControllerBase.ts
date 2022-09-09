@@ -28,15 +28,45 @@ export default class AddressLookupPostControllerBase extends PostController<AnyO
     if (req.session.errors.length === 0) {
       const stubbedPostcode = this.checkStubbedPostcode(postcode);
       if (stubbedPostcode) {
+        console.log('hello 1');
         addresses = stubbedPostcode;
       } else {
         addresses = await getAddressesFromPostcode(postcode, req.locals.logger);
+        console.log('hello 2');
+        req.session.userCase = await this.save(
+          req,
+          {
+            [`${this.fieldPrefix}Address1`]: null,
+            [`${this.fieldPrefix}Address2`]: null,
+            [`${this.fieldPrefix}AddressTown`]: null,
+            [`${this.fieldPrefix}AddressCounty`]: null,
+            [`${this.fieldPrefix}AddressPostcode`]: postcode,
+          },
+          this.getEventName(req)
+        );
       }
       req.session.addresses = addresses;
+      console.log('hello 3' + { ...addresses });
 
       if (req.session.returnUrl === '/review-pay-submit/check-your-answers') {
         req.session.userCase.checkYourAnswersReturn = true;
       }
+    }
+
+    if (req.body.saveAsDraft) {
+      console.log('hello');
+      req.session.userCase = await this.save(
+        req,
+        {
+          [`${this.fieldPrefix}Address1`]: null,
+          [`${this.fieldPrefix}Address2`]: null,
+          [`${this.fieldPrefix}AddressTown`]: null,
+          [`${this.fieldPrefix}AddressCounty`]: null,
+          [`${this.fieldPrefix}AddressPostcode`]: postcode,
+        },
+        this.getEventName(req)
+      );
+      // req.session.userCase[`${this.fieldPrefix}AddressPostcode`] = selectedAddress.postcode;
     }
 
     this.redirect(req, res);
