@@ -1,7 +1,7 @@
 import Axios, { AxiosInstance, AxiosResponse } from 'axios';
 import FormData from 'form-data';
 
-import { CASE_TYPE, JURISDICTION, UserRole } from '../../app/case/definition';
+import { UserRole } from '../../app/case/definition';
 import type { UserDetails } from '../controller/AppRequest';
 
 export class DocumentManagementClient {
@@ -28,17 +28,15 @@ export class DocumentManagementClient {
   }): Promise<DocumentManagementFile[]> {
     const formData = new FormData();
     formData.append('classification', classification);
-    formData.append('caseTypeId', CASE_TYPE);
-    formData.append('jurisdictionId', JURISDICTION);
 
     for (const [, file] of Object.entries(files)) {
       formData.append('files', file.buffer, file.originalname);
     }
-    const response: AxiosResponse<DocumentManagementResponse> = await this.client.post('/cases/documents', formData, {
-      headers: { ...formData.getHeaders() },
+    const response: AxiosResponse<DocumentManagementResponse> = await this.client.post('/documents', formData, {
+      headers: { ...formData.getHeaders(), 'user-id': this.user.id },
     });
 
-    return response.data?.documents || [];
+    return response.data?._embedded?.documents || [];
   }
 
   async delete({ url }: { url: string }): Promise<AxiosResponse> {
@@ -54,7 +52,9 @@ export class DocumentManagementClient {
 }
 
 interface DocumentManagementResponse {
-  documents: DocumentManagementFile[];
+  _embedded: {
+    documents: DocumentManagementFile[];
+  };
 }
 
 export interface DocumentManagementFile {
@@ -63,9 +63,6 @@ export interface DocumentManagementFile {
   originalDocumentName: string;
   modifiedOn: string;
   createdOn: string;
-  createdBy: string;
-  hashToken: string;
-  lastModifiedBy: string;
   classification: Classification;
   _links: {
     self: {
