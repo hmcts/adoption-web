@@ -16,8 +16,8 @@ export default class ApplicationSubmittedGetController extends GetController {
   }
 
   public async get(req: AppRequest, res: Response): Promise<void> {
-    const flag = config.get('services.ccd_data.logging');
-    logger.info(`services.ccd_data.logging : ${flag}`);
+    const flag = config.get('services.ccddata.logging');
+    logger.info(`services.ccddata.logging : ${flag}`);
     if (flag && flag === 'true') {
       logger.inof('LA-Portal confirm page: ' + (await req.locals.api.getCaseById(req.session.userCase.id)));
     }

@@ -22,7 +22,7 @@ nodejs:
     SECURE_COOKIE: 'true'
     REDIS_PORT: 6380
     REDIS_TLS: true
-    CCD_DATA_LOGGING: true
+    CCD_DATA_LOGGING: 'true'
     PAYMENTS_API_URL: 'http://payment-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal'
     CCD_URL: 'http://ccd-data-store-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal'
     LOCATION_API_URL: 'http://rd-location-ref-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal'

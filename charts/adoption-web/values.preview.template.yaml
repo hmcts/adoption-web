@@ -15,6 +15,7 @@ nodejs:
     PCQ_ENABLED: 'true'
     CCD_URL: 'http://adoption-cos-api-pr-249-ccd-data-store-api'
     IDAM_ROLE: 'citizen'
+    CCD_DATA_LOGGING: 'true'
 idam-pr:
   enabled: true
   redirect_uris:

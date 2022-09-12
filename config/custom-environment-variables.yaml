@@ -31,7 +31,7 @@ services:
       host: REDIS_HOST
       tls: REDIS_TLS
       port: REDIS_PORT
-  ccd_data:
+  ccddata:
     loggging: CCD_DATA_LOGGING
 port: PORT
 session:

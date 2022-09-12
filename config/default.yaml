@@ -51,7 +51,7 @@ services:
       port: 6379
       key:
       tls: false
-  ccd_data:
+  ccddata:
     loggging: true
 health:
   timeout: 5000
