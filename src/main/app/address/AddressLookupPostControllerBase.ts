@@ -33,17 +33,23 @@ export default class AddressLookupPostControllerBase extends PostController<AnyO
       } else {
         addresses = await getAddressesFromPostcode(postcode, req.locals.logger);
         console.log('hello 2');
-        req.session.userCase = await this.save(
-          req,
-          {
-            [`${this.fieldPrefix}Address1`]: null,
-            [`${this.fieldPrefix}Address2`]: null,
-            [`${this.fieldPrefix}AddressTown`]: null,
-            [`${this.fieldPrefix}AddressCounty`]: null,
-            [`${this.fieldPrefix}AddressPostcode`]: postcode,
-          },
-          this.getEventName(req)
-        );
+        req.session.userCase[`${this.fieldPrefix}Address1`] = null;
+        req.session.userCase[`${this.fieldPrefix}Address2`] = null;
+        req.session.userCase[`${this.fieldPrefix}AddressTown`] = null;
+        req.session.userCase[`${this.fieldPrefix}AddressCounty`] = null;
+        req.session.userCase[`${this.fieldPrefix}AddressPostcode`] = postcode;
+
+        // req.session.userCase = await this.save(
+        //   req,
+        //   {
+        //     [`${this.fieldPrefix}Address1`]: null,
+        //     [`${this.fieldPrefix}Address2`]: null,
+        //     [`${this.fieldPrefix}AddressTown`]: null,
+        //     [`${this.fieldPrefix}AddressCounty`]: null,
+        //     [`${this.fieldPrefix}AddressPostcode`]: postcode,
+        //   },
+        //   this.getEventName(req)
+        // );
       }
       req.session.addresses = addresses;
       console.log('hello 3' + { ...addresses });
@@ -55,17 +61,22 @@ export default class AddressLookupPostControllerBase extends PostController<AnyO
 
     if (req.body.saveAsDraft) {
       console.log('hello');
-      req.session.userCase = await this.save(
-        req,
-        {
-          [`${this.fieldPrefix}Address1`]: null,
-          [`${this.fieldPrefix}Address2`]: null,
-          [`${this.fieldPrefix}AddressTown`]: null,
-          [`${this.fieldPrefix}AddressCounty`]: null,
-          [`${this.fieldPrefix}AddressPostcode`]: postcode,
-        },
-        this.getEventName(req)
-      );
+      req.session.userCase[`${this.fieldPrefix}Address1`] = null;
+      req.session.userCase[`${this.fieldPrefix}Address2`] = null;
+      req.session.userCase[`${this.fieldPrefix}AddressTown`] = null;
+      req.session.userCase[`${this.fieldPrefix}AddressCounty`] = null;
+      req.session.userCase[`${this.fieldPrefix}AddressPostcode`] = postcode;
+      // req.session.userCase = await this.save(
+      //   req,
+      //   {
+      //     [`${this.fieldPrefix}Address1`]: null,
+      //     [`${this.fieldPrefix}Address2`]: null,
+      //     [`${this.fieldPrefix}AddressTown`]: null,
+      //     [`${this.fieldPrefix}AddressCounty`]: null,
+      //     [`${this.fieldPrefix}AddressPostcode`]: postcode,
+      //   },
+      //   this.getEventName(req)
+      // );
       // req.session.userCase[`${this.fieldPrefix}AddressPostcode`] = selectedAddress.postcode;
     }
 

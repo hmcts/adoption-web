@@ -67,7 +67,14 @@ describe('AddressLookupPostControllerBase', () => {
       });
       mockGetNextStepUrl.mockReturnValue('/MOCK_ENDPOINT');
       await controller.post(req, res);
-      expect(req.session.userCase).toEqual({ id: '1234', checkYourAnswersReturn: true });
+      expect(req.session.userCase).toEqual({
+        id: '1234',
+        checkYourAnswersReturn: true,
+        applicant1Address1: null,
+        applicant1Address2: null,
+        applicant1AddressCounty: null,
+        applicant1AddressTown: null,
+      });
     });
   });
 
