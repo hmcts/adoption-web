@@ -3,10 +3,8 @@ import autobind from 'autobind-decorator';
 import config from 'config';
 import { Response } from 'express';
 
-import { State } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { GetController } from '../../../app/controller/GetController';
-import { TASK_LIST_URL } from '../../urls';
 
 import { generateContent } from './content';
 const logger = Logger.getLogger('CUIGet');
@@ -21,13 +19,8 @@ export default class ApplicationSubmittedGetController extends GetController {
     const flag = config.get('services.ccd_data.logging');
     logger.info(`services.ccd_data.logging : ${flag}`);
     if (flag && flag === 'true') {
-      logger.inof('CUI confirm page: ' + (await req.locals.api.getCaseById(req.session.userCase.id)));
+      logger.inof('LA-Portal confirm page: ' + (await req.locals.api.getCaseById(req.session.userCase.id)));
     }
-
-    if (req.session.userCase.state !== State.Submitted) {
-      return res.redirect(TASK_LIST_URL);
-    }
-
     super.get(req, res);
   }
 }
