@@ -30,7 +30,7 @@ const cy: typeof en = ({ userCase }: CommonContent) => {
   const label =
     placementOrder?.placementOrderType === undefined
       ? 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn lleoli?'
-      : 'What is the serial or case number on the order?';
+      : 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn?';
   return {
     label,
     section: 'Manylion y plentyn',

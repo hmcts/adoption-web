@@ -88,7 +88,7 @@ const cy = () => {
     fileSize: 'Caniateir ichi lwytho ffeil sydd hyd at 25MB o ran maint.',
     cannotUploadDocuments: 'Ni allaf lwytho rhai o fy nogfennau / fy holl ddogfennau.',
     cannotUploadYouCanPost:
-      '<p class="govuk-body govuk-!-margin-top-5">To avoid delays you should post or email your documents to the court. If you post them you must send the original documents or certified copies.<br><br>Continue with your application.</p>',
+      '<p class="govuk-body govuk-!-margin-top-5">Er mwyn osgoi oedi dylech bostio neu e-bostio eich dogfennau i\'r llys. Os ydych yn eu postio, rhaid ichi anfon y dogfennau gwreiddiol neu gopïau wedi’u hardystio.<br><br>Parhau â’ch cais.</p>',
     birthOrAdoptionCertificate: 'Tystysgrif geni neu fabwysiadu',
 
     errors: {

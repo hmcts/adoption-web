@@ -31,7 +31,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
-  label: 'Pa fath o neuchymyn ydyw?',
+  label: 'Pa fath o orchymyn ydyw?',
   adoptionOrder: 'Gorchymyn Mabwysiadu',
   careOrder: 'Gorchymyn Gofal',
   contactOrder: 'Gorchymyn Cyswllt',

@@ -44,7 +44,7 @@ const cy: typeof en = content => ({
     },
     applicant1EmailAddress: {
       required: 'Nac ydwdwch eich cyfeiriad e-bost',
-      invalid: 'Rhowch gyfeiriad e-bost yn y fformat cywir, er enghraifft enw@enghraifft.com',
+      invalid: 'Nodwch gyfeiriad e-bost yn y fformat cywir, fel name@example.com',
     },
     applicant1PhoneNumber: {
       required: 'Rhowch rif ffôn yn y DU',

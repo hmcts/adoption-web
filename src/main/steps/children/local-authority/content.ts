@@ -34,15 +34,15 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: 'Manylion y cais',
-  title: 'Local authority details. (in welsh)',
+  title: 'Manylion yr awdurdod lleol',
   line1:
-    'We need the details of the local authority that placed the child with you. These should be on the placement order. (in welsh)',
+    "Rydym angen manylion yr awdurdod lleol a osododd y plentyn gyda chi. Dylai'r rhain fod ar y gorchymyn lleoli.",
   localAuthorityName: 'Enw’r asiantaeth fabwysiadu neu’r awdurdod lleol',
   localAuthorityContactName: 'Enw eich cyswllt',
   localAuthorityContactNameHint:
-    'This is usually your social worker. If you do not yet have a social worker, then this is the name of the person you have the most contact with in the local authority. (in welsh)',
+    'Fel arfer, eich gweithiwr cymdeithasol fydd hwn. Os nad oes gennych weithiwr cymdeithasol eto, dyma’r unigolyn y mae gennych y mwyaf o gyswllt ag ef/hi yn yr awdurdod lleol.',
   localAuthorityPhoneNumber: 'Rhif ffôn',
-  localAuthorityPhoneNumberHint: 'This should be the number of your contact. (in welsh)',
+  localAuthorityPhoneNumberHint: 'Rhif y sawl dan sylw dylai hwn fod.',
   localAuthorityContactEmail: 'Cyfeiriad e-bost eich cyswllt',
   errors: {
     localAuthorityName: {
@@ -57,7 +57,7 @@ const cy: typeof en = () => ({
     },
     localAuthorityContactEmail: {
       required: 'Nac ydwdwch gyfeiriad e-bost',
-      invalid: 'Rhowch gyfeiriad e-bost yn y fformat cywir, er enghraifft enw@enghraifft.com',
+      invalid: 'Nodwch gyfeiriad e-bost yn y fformat cywir, fel name@example.com',
     },
   },
 });

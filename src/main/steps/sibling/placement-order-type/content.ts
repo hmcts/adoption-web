@@ -27,7 +27,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  label: 'Pa fath o neuchymyn ydyw?',
+  label: 'Pa fath o orchymyn ydyw?',
   adoptionOrder: 'Gorchymyn Mabwysiadu',
   careOrder: 'Gorchymyn Gofal',
   contactOrder: 'Gorchymyn Cyswllt',

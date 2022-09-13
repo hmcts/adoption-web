@@ -52,8 +52,8 @@ const cy: typeof en = () => ({
   continueButton: 'Pharhau',
   errors: {
     kbaCaseRef: {
-      required: 'Enter the 16 digit court case reference number (in welsh)',
-      numberTooShort: 'The number entered is too short (in welsh)',
+      required: 'Rhowch gyfeirnod 16 digid yr achos llys',
+      numberTooShort: "Mae'r rhif a nodwyd yn rhy fyr",
       isNotNumeric: 'Nodwch gyfeirnod yr achos yn y fformat cywir',
     },
     kbaChildName: {

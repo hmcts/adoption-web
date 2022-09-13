@@ -25,7 +25,7 @@ const cy: typeof en = content => ({
     "Rydym hefyd wedi anfon e-bost cadarnhau i gyfeiriadau e-bost cofrestredig yr awdurdod lleol ar gyfer y ceisydd a'r awdurdod lleol ar gyfer y plentyn. Darparwyd y cyfeiriadau e-bost hyn gan y ceisydd.",
   line2: "Mae'r e-bost yn rhoi gwybodaeth fanylach am y llinell amser a beth sy'n digwydd nesaf.",
   line3:
-    'Bydd y cais nawr yn cael ei anfon i’r llys i’w brosesu. Os na wnaethoch uwchlwytho Atodiad A fel rhan o’r dystiolaeth ar gyfer y cais, dylech wneud hynny cyn gynted â phosibl er mwyn atal oedi.',
+    "Bydd y cais nawr yn cael ei anfon i'r llys i’w brosesu. Os na wnaethoch lwytho Atodiad A fel rhan o'r dystiolaeth ar gyfer y cais, dylech wneud hyn cyn gynted â phosibl er mwyn atal oedi.",
   line4: 'Mewngofnodwch i’r',
   documentUploadService: 'gwasanaeth uwchlwytho dogfennau',
   line5: 'er mwyn cyflwyno’r atodiad ac unrhyw dystiolaeth ychwanegol.',

@@ -31,6 +31,7 @@ const enContent = {
   line18:
     'Any member of your team can access the application and add information. You should note that if two people access the application at the same time, whoever saves it may override information given by the other person.',
   line19: 'Completing and submitting your response to an application should not take longer than 30 minutes.',
+  startnow: 'Start now',
 };
 
 const cyContent = {
@@ -59,6 +60,7 @@ const cyContent = {
   line18:
     "Gall unrhyw aelod o'ch tîm gael mynediad i’r cais ac ychwanegu gwybodaeth. Dylech nodi, os bydd dau unigolyn yn cael mynediad i’r cais ar yr un pryd, y gall pwy bynnag sy’n ei gadw ddiystyru gwybodaeth a roddir gan yr unigolyn arall.",
   line19: 'Ni ddylai gymryd mwy nag 30 munud i chi lenwi a chyflwyno eich ymateb i’r cais.',
+  startnow: 'Dechrau nawr',
 };
 
 describe('eligibility > start > content', () => {
