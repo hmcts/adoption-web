@@ -11,7 +11,7 @@ const enContent = {
   orderNumber: 'Order case or serial number',
   orderCourt: 'Court',
   orderDate: 'Order date',
-  placementOrder: 'Placement Order',
+  placementOrder: 'Placement order',
   change: 'Change',
   continue: 'Continue',
 };
@@ -56,7 +56,7 @@ describe('children > placement-order-check-your-answers > content', () => {
   test('should create correct items for summaryList', () => {
     const generatedContent = generateContent(commonContent);
     expect(generatedContent.placementOrderListItems).toEqual([
-      { key: { text: 'Type of order' }, value: { text: 'Placement Order' }, actions: { items: [] } },
+      { key: { text: 'Type of order' }, value: { text: 'Placement order' }, actions: { items: [] } },
       {
         key: { text: 'Order case or serial number' },
         value: { text: 'MOCK_NUMBER' },
@@ -100,7 +100,7 @@ describe('children > placement-order-check-your-answers > content', () => {
     expect(generatedContent.placementOrderListItems).toEqual([
       {
         key: { text: 'Type of order' },
-        value: { text: 'Placement Order' },
+        value: { text: 'Placement order' },
         actions: {
           items: [
             {
