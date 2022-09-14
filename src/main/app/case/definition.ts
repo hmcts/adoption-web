@@ -1341,11 +1341,11 @@ export const enum ServicePaymentMethod {
 
 export const enum SiblingRelationships {
   SISTER = 'Sister',
-  HALF_SISTER = 'Half-Sister',
-  STEP_SISTER = 'Step-Sister',
+  HALF_SISTER = 'Half-sister',
+  STEP_SISTER = 'Step-sister',
   BROTHER = 'Brother',
-  HALF_BROTHER = 'Half-Brother',
-  STEP_BROTHER = 'Step-Brother',
+  HALF_BROTHER = 'Half-brother',
+  STEP_BROTHER = 'Step-brother',
 }
 
 export const enum SiblingPOType {
