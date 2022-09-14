@@ -5,7 +5,7 @@ describe('placement-order-summary', () => {
   const content = {
     change: 'Change',
     remove: 'Remove',
-    placementOrder: 'Placement Order',
+    placementOrder: 'Placement order',
     incomplete: 'incomplete',
   };
 
@@ -37,7 +37,7 @@ describe('placement-order-summary', () => {
     const result = placementOrderListItems(userCase, content);
     expect(result).toEqual([
       {
-        key: { text: 'Placement Order', classes: 'font-normal' },
+        key: { text: 'Placement order', classes: 'font-normal' },
         value: { classes: 'summary-list-value', html: '' },
         actions: {
           classes: 'summary-list-actions',
@@ -45,7 +45,7 @@ describe('placement-order-summary', () => {
             {
               href: '/la-portal/child/placement-order-check-your-answers?change=MOCK_ID',
               text: 'Change',
-              visuallyHiddenText: 'Placement Order',
+              visuallyHiddenText: 'Placement order',
             },
           ],
         },
