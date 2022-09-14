@@ -13,7 +13,7 @@ nodejs:
   environment:
     APPINSIGHTS_KEY: '00000000-0000-0000-0000-000000000000'
     PCQ_ENABLED: 'true'
-    CCD_URL: 'http://adoption-cos-api-pr-414-ccd-data-store-api'
+    CCD_URL: 'http://adoption-cos-api-pr-249-ccd-data-store-api'
     IDAM_ROLE: 'citizen'
 idam-pr:
   enabled: true
