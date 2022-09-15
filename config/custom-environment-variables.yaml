@@ -31,6 +31,7 @@ services:
       host: REDIS_HOST
       tls: REDIS_TLS
       port: REDIS_PORT
+      ttl: REDIS_TTL_MS
 port: PORT
 session:
   redis:
