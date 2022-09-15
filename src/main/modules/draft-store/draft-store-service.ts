@@ -26,23 +26,26 @@ export const saveDraftCase = async (req: AppRequest, caseRef: string, formData: 
     'selectedSiblingPoType',
     'selectedSiblingRelation',
   ];
-  const expireTimeInMs: number = config.get('services.draftStore.redis.ttl');
+  const expireTimeInSec: number = config.get('services.draftStore.redis.ttl');
   fieldsToBeExcluded.forEach(item => {
     if (formData[item]) {
       delete formData[item];
     }
   });
-  let ttl: number = expireTimeInMs;
   let dataToStore = formData;
   const draftCaseFromRedis = await getDraftCaseFromStore(req, caseRef);
+  let ttl = await req.app.locals.draftStoreClient.ttl(caseRef);
   if (draftCaseFromRedis) {
     dataToStore = { ...draftCaseFromRedis, ...dataToStore };
-  } else {
-    ttl = ttl - req.app.locals.draftStoreClient.ttl(caseRef);
+  } else if (ttl > 0) {
     dataToStore = { ...dataToStore };
+  } else {
+    ttl = expireTimeInSec;
+    req.session.userCase = await req.locals.api.getCaseById(caseRef);
+    dataToStore = {};
   }
   const draftStoreClient = req.app.locals.draftStoreClient;
-  draftStoreClient.set(caseRef, JSON.stringify(dataToStore), 'PX', ttl);
+  draftStoreClient.set(caseRef, JSON.stringify(dataToStore), 'EX', ttl);
 
   return req.session.userCase;
 };
