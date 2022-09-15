@@ -10,7 +10,7 @@ jest.mock('../../../app/form/validation');
 const enContent = {
   section: "The child's details",
   title: 'Orders already in place',
-  placementOrder: 'Placement Order',
+  placementOrder: 'Placement order',
   incomplete: 'incomplete',
   change: 'Change',
   remove: 'Remove',
@@ -22,7 +22,7 @@ const enContent = {
   },
   placementOrderListItems: [
     {
-      key: { text: 'Placement Order', classes: 'font-normal' },
+      key: { text: 'Placement order', classes: 'font-normal' },
       value: { classes: 'summary-list-value', html: '' },
       actions: {
         classes: 'summary-list-actions',
@@ -30,7 +30,7 @@ const enContent = {
           {
             href: '/la-portal/child/placement-order-check-your-answers?change=MOCK_ID',
             text: 'Change',
-            visuallyHiddenText: 'Placement Order',
+            visuallyHiddenText: 'Placement order',
           },
         ],
       },
