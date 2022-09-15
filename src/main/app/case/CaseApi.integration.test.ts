@@ -73,6 +73,7 @@ describe('CaseApi', () => {
     expect(userCase).toStrictEqual({
       id: '1234',
       state: State.Draft,
+      status: State.Draft,
     });
   });
 
@@ -198,7 +199,7 @@ describe('CaseApi', () => {
     });
 
     const userCase = await api.getCaseById('1234');
-    expect(userCase).toStrictEqual({ id: '1234', state: 'Draft' });
+    expect(userCase).toStrictEqual({ id: '1234', state: 'Draft', status: 'Draft' });
   });
 
   test('Should throw error when case could not be fetched', async () => {

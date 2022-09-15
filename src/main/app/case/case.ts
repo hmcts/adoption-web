@@ -29,6 +29,7 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   otherApplicantRelation: 'otherApplicantRelation',
   dateChildMovedIn: 'dateChildMovedIn',
   applyingWith: 'applyingWith',
+  status: 'status',
 
   applicant1FirstNames: 'applicant1FirstName',
   applicant1LastNames: 'applicant1LastName',
@@ -234,6 +235,7 @@ export interface Case {
   applicant1ContactDetails?: ContactDetails[];
   applicant1ContactDetailsConsent?: YesOrNo;
   applicant1LanguagePreference?: LanguagePreference;
+  status?: State;
 
   /***** Applicant2 *****/
   applicant2FirstNames?: string;

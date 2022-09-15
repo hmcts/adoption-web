@@ -9,7 +9,7 @@ const en = content => {
   const enContent = {
     section: "The child's details",
     title: 'Orders already in place',
-    placementOrder: 'Placement Order',
+    placementOrder: 'Placement order',
     incomplete: 'incomplete',
     change: 'Change',
     remove: 'Remove',

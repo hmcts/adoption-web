@@ -710,6 +710,7 @@ export interface CaseData {
   otherPlacementOrderType: string;
   checkYourAnswersReturn: false;
   changeAddressBothApplicants: YesOrNo;
+  status: State;
 }
 
 export interface Children {
@@ -1294,12 +1295,12 @@ export const enum LegalProceedingsRelated {
 }
 
 export const enum PlacementOrderTypeEnum {
-  AdoptionOrder = 'Adoption Order',
-  CareOrder = 'Care Order',
-  ContactOrder = 'Contact Order',
-  FreeingOrder = 'Freeing Order',
-  PlacementOrder = 'Placement Order',
-  SupervisionOrder = 'Supervision Order',
+  AdoptionOrder = 'Adoption order',
+  CareOrder = 'Care order',
+  ContactOrder = 'Contact order',
+  FreeingOrder = 'Freeing order',
+  PlacementOrder = 'Placement order',
+  SupervisionOrder = 'Supervision order',
   Other = 'Other',
 }
 
@@ -1341,22 +1342,22 @@ export const enum ServicePaymentMethod {
 }
 
 export const enum SiblingRelationships {
-  SISTER = 'sister',
-  HALF_SISTER = 'halfSister',
-  STEP_SISTER = 'stepSister',
-  BROTHER = 'brother',
-  HALF_BROTHER = 'halfBrother',
-  STEP_BROTHER = 'stepBrother',
+  SISTER = 'Sister',
+  HALF_SISTER = 'Half-sister',
+  STEP_SISTER = 'Step-sister',
+  BROTHER = 'Brother',
+  HALF_BROTHER = 'Half-brother',
+  STEP_BROTHER = 'Step-brother',
 }
 
 export const enum SiblingPOType {
-  ADOPTION_ORDER = 'adoptionOrder',
-  CARE_ORDER = 'careOrder',
-  CONTACT_ORDER = 'contactOrder',
-  FREEING_ORDER = 'freeingOrder',
-  PLACEMENT_ORDER = 'placementOrder',
-  SUPERVIS_ORDER = 'superVisOrder',
-  OTHER = 'other',
+  ADOPTION_ORDER = 'Adoption order',
+  CARE_ORDER = 'Care order',
+  CONTACT_ORDER = 'Contact order',
+  FREEING_ORDER = 'Freeing order',
+  PLACEMENT_ORDER = 'Placement order',
+  SUPERVIS_ORDER = 'Supervision order',
+  OTHER = 'Other',
 }
 
 export const enum SolicitorPaymentMethod {
