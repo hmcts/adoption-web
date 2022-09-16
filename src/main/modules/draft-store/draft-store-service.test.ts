@@ -16,6 +16,7 @@ describe('session', () => {
         draftStoreClient: {
           get: jest.fn().mockResolvedValue('{ "id": "MOCK" }'),
           set: jest.fn().mockResolvedValue('{ "id": "MOCK" }'),
+          ttl: jest.fn().mockResolvedValue(300),
         },
       },
       use: jest.fn(callback => callback),
