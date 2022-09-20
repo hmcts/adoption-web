@@ -2428,12 +2428,12 @@
     "@typescript-eslint/types" "5.27.0"
     eslint-visitor-keys "^3.3.0"
 
-"@uppy/companion-client@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@uppy/companion-client/-/companion-client-2.1.0.tgz#6de2f3ba190b0e2a2afe0be020b191031ae8d299"
-  integrity sha512-1Zsag2z9kygXuVbUxqHhkTJUmEHwbejjyf7vmm+P/AiVgK3O37JINYBGOpdTJNgbC9UydLBjleXo8peDVgpg8Q==
+"@uppy/companion-client@^2.2.0":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@uppy/companion-client/-/companion-client-2.2.2.tgz#c70b42fdcca728ef88b3eebf7ee3e2fa04b4923b"
+  integrity sha512-5mTp2iq97/mYSisMaBtFRry6PTgZA6SIL7LePteOV5x0/DxKfrZW3DEiQERJmYpHzy7k8johpm2gHnEKto56Og==
   dependencies:
-    "@uppy/utils" "^4.0.7"
+    "@uppy/utils" "^4.1.2"
     namespace-emitter "^2.0.1"
 
 "@uppy/core@^2.3.0":
@@ -2478,20 +2478,20 @@
   resolved "https://registry.yarnpkg.com/@uppy/store-default/-/store-default-2.1.0.tgz#3fbcac626dd515668b88762d812017bd4f9b75d4"
   integrity sha512-BkcR1wGw6Kwbvr8m1tKF9EDDWSTJoTGnVseBF/iW4bzR22assbtxZIE1iroo68UMqYEG4rv63SX4BUEtNvVjdA==
 
-"@uppy/utils@^4.0.7", "@uppy/utils@^4.1.0":
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/@uppy/utils/-/utils-4.1.0.tgz#19f3f08cd21b383cdcdf95adbec76d9c1a694b68"
-  integrity sha512-C47DUl4uLzmQZdW+VmetIgGRurXuPsvb+/pyYqh9DJn0Phep8u7AOj/tlJA5CHv4pefNHsFjXpaWfSUG3HtW3A==
+"@uppy/utils@^4.0.7", "@uppy/utils@^4.1.0", "@uppy/utils@^4.1.2":
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/@uppy/utils/-/utils-4.1.3.tgz#9d0be6ece4df25f228d30ef40be0f14208258ce3"
+  integrity sha512-nTuMvwWYobnJcytDO3t+D6IkVq/Qs4Xv3vyoEZ+Iaf8gegZP+rEyoaFT2CK5XLRMienPyqRqNbIfRuFaOWSIFw==
   dependencies:
     lodash.throttle "^4.1.1"
 
-"@uppy/xhr-upload@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@uppy/xhr-upload/-/xhr-upload-2.1.0.tgz#9c52154df30e6e275028d3cb66be844a150de626"
-  integrity sha512-io1uNu7lGkhIkMnt13bu3FYSAdRbBRWl8n/6njYi+727Jyr0XhKfmBYV9OiruFSxLz5Bfxkw2gTs6e0qUb63nA==
+"@uppy/xhr-upload@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@uppy/xhr-upload/-/xhr-upload-2.1.1.tgz#fe9a4cbc9f1e3b9a95e3b0f0b8040d662e4fb785"
+  integrity sha512-10cKkdMZaYxuewq7Mn0RObPCeT0fBk5gNH/PNjaRqB4TLFOi10FazhoSfDp3KSsqsxPoP1K2z1gFmubW+4CQfw==
   dependencies:
-    "@uppy/companion-client" "^2.1.0"
-    "@uppy/utils" "^4.0.7"
+    "@uppy/companion-client" "^2.2.0"
+    "@uppy/utils" "^4.1.0"
     nanoid "^3.1.25"
 
 "@wdio/config@7.20.1":
