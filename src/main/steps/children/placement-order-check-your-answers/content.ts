@@ -88,7 +88,7 @@ const en = content => {
     orderNumber: 'Order case or serial number',
     orderCourt: 'Court',
     orderDate: 'Order date',
-    placementOrder: 'Placement Order',
+    placementOrder: 'Placement order',
     change: 'Change',
     continue: 'Continue',
     language: content.language,

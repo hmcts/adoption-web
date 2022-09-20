@@ -19,7 +19,7 @@ const en = content => {
       [SiblingRelationships.STEP_BROTHER]: 'Step-brother',
       [SiblingRelationships.HALF_BROTHER]: 'Half-brother',
     },
-    placementOrder: 'Placement Order',
+    placementOrder: 'Placement order',
     siblingPOType: {
       [SiblingPOType.ADOPTION_ORDER]: 'Adoption order',
       [SiblingPOType.CARE_ORDER]: 'Care order',

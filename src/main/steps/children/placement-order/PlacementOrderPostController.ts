@@ -18,6 +18,7 @@ export default class PlacementOrderPostController extends PostController<AnyObje
     const placementOrder = req.session.userCase.placementOrders?.find(
       item => item.placementOrderId === req.session.userCase.selectedPlacementOrderId
     );
+
     Object.assign(placementOrder!, formData);
     if (placementOrder) {
       if (formData['selectedPlacementOrderType']) {
