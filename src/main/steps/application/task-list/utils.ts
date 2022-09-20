@@ -49,11 +49,15 @@ export const getContactDetailsStatus = (userCase: CaseWithId, fieldPrefix: Field
   const emailAddress = userCase[`${fieldPrefix}EmailAddress`];
   const phoneNumber = userCase[`${fieldPrefix}PhoneNumber`];
   const languagePreference = !!userCase[`${fieldPrefix}LanguagePreference`];
-  const applicant2AddressSameAsApplicant1 = userCase[`${fieldPrefix}AddressSameAsApplicant1`];
+  const applicant2AddressSameAsApplicant1 = userCase['Address2AddressSameAsApplicant1'];
 
   let addressAvailable = addressComplete(userCase, fieldPrefix);
   if (fieldPrefix === FieldPrefix.APPLICANT2 && applicant2AddressSameAsApplicant1 === YesOrNo.YES) {
     addressAvailable = true;
+  }
+
+  if (fieldPrefix === FieldPrefix.APPLICANT2 && applicant2AddressSameAsApplicant1 === YesOrNo.NO) {
+    addressAvailable = null;
   }
 
   const contactDetailsAvailable = !!contactDetailsConsent && !!emailAddress && !!phoneNumber;

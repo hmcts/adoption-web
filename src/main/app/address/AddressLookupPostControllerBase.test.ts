@@ -60,6 +60,22 @@ describe('AddressLookupPostControllerBase', () => {
       expect(mockGetNextStepUrl).toHaveBeenCalledWith(req, req.session.userCase);
       expect(res.redirect).toHaveBeenCalledWith('/MOCK_ENDPOINT');
     });
+
+    test('should set checkYourAnswersReturn if returnUrl present', async () => {
+      req = mockRequest({
+        session: { returnUrl: '/review-pay-submit/check-your-answers', save: jest.fn(done => done()) },
+      });
+      mockGetNextStepUrl.mockReturnValue('/MOCK_ENDPOINT');
+      await controller.post(req, res);
+      expect(req.session.userCase).toEqual({
+        id: '1234',
+        checkYourAnswersReturn: true,
+        applicant1Address1: null,
+        applicant1Address2: null,
+        applicant1AddressCounty: null,
+        applicant1AddressTown: null,
+      });
+    });
   });
 
   describe('when there are form errors', () => {

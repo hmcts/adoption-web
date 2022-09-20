@@ -708,6 +708,8 @@ export interface CaseData {
   coDocumentsUploaded: ListValue<AdoptionDocument>[];
   coIsEverythingInPetitionTrue: YesOrNo;
   otherPlacementOrderType: string;
+  checkYourAnswersReturn: false;
+  changeAddressBothApplicants: YesOrNo;
   status: State;
 }
 
