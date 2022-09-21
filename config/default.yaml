@@ -51,7 +51,7 @@ services:
       port: 6379
       key:
       tls: false
-      ttl: 300
+      ttl: 600
 health:
   timeout: 5000
   deadline: 15000
