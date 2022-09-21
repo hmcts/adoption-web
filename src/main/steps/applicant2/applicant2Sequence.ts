@@ -3,6 +3,14 @@ import { YesOrNo } from '../../app/case/definition';
 import { Sections, Step } from '../constants';
 import * as Urls from '../urls';
 
+const getStepAfterAddress = (data: Partial<CaseWithId>): Urls.PageLink => {
+  if (data.checkYourAnswersReturn) {
+    return Urls.APPLICANT_2_CHANGE_ADDRESS;
+  }
+
+  return Urls.APPLICANT_2_CONTACT_DETAILS;
+};
+
 export const applicant2Sequence: Step[] = [
   {
     url: Urls.APPLICANT_2_FULL_NAME,
@@ -40,12 +48,22 @@ export const applicant2Sequence: Step[] = [
   {
     url: Urls.APPLICANT_2_SELECT_ADDRESS,
     showInSection: Sections.AboutApplicant2,
-    getNextStep: () => Urls.APPLICANT_2_CONTACT_DETAILS,
+    getNextStep: data => getStepAfterAddress(data as Partial<CaseWithId>),
   },
   {
     url: Urls.APPLICANT_2_MANUAL_ADDRESS,
     showInSection: Sections.AboutApplicant2,
-    getNextStep: () => Urls.APPLICANT_2_CONTACT_DETAILS,
+    getNextStep: data => getStepAfterAddress(data as Partial<CaseWithId>),
+  },
+  {
+    url: Urls.APPLICANT_2_CHANGE_ADDRESS,
+    showInSection: Sections.AboutApplicant2,
+    getNextStep: () => Urls.APPLICANT_2_CONFIRM_CHANGE_ADDRESS,
+  },
+  {
+    url: Urls.APPLICANT_2_CONFIRM_CHANGE_ADDRESS,
+    showInSection: Sections.AboutApplicant2,
+    getNextStep: () => Urls.CHECK_ANSWERS_URL,
   },
   {
     url: Urls.APPLICANT_2_CONTACT_DETAILS,

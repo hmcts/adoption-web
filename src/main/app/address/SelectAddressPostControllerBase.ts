@@ -40,6 +40,10 @@ export default class SelectAddressPostControllerBase extends PostController<AnyO
 
         req.session.userCase = await this.save(req, formData, this.getEventName(req));
       }
+
+      if (req.session.returnUrl === '/review-pay-submit/check-your-answers') {
+        req.session.userCase.checkYourAnswersReturn = true;
+      }
     }
 
     this.filterErrorsForSaveAsDraft(req);
