@@ -1,8 +1,8 @@
 import { applicant1Sequence } from './applicant1Sequence';
 
 describe('applicant1Sequence', () => {
-  test('should contain 11 entries in applicant 1 screen sequence', () => {
-    expect(applicant1Sequence).toHaveLength(11);
+  test('should contain 13 entries in applicant 1 screen sequence', () => {
+    expect(applicant1Sequence).toHaveLength(13);
 
     expect(applicant1Sequence[0].url).toBe('/date-child-moved-in');
     expect(applicant1Sequence[0].showInSection).toBe('aboutApplicant1');
@@ -36,16 +36,24 @@ describe('applicant1Sequence', () => {
     expect(applicant1Sequence[7].showInSection).toBe('aboutApplicant1');
     expect(applicant1Sequence[7].getNextStep({})).toBe('/applicant1/contact-details');
 
-    expect(applicant1Sequence[8].url).toBe('/applicant1/contact-details');
+    expect(applicant1Sequence[8].url).toBe('/applicant1/address/change');
     expect(applicant1Sequence[8].showInSection).toBe('aboutApplicant1');
-    expect(applicant1Sequence[8].getNextStep({})).toBe('/applicant1/language-preference');
+    expect(applicant1Sequence[8].getNextStep({})).toBe('/applicant1/address/confirm-change');
 
-    expect(applicant1Sequence[9].url).toBe('/applicant1/language-preference');
+    expect(applicant1Sequence[9].url).toBe('/applicant1/address/confirm-change');
     expect(applicant1Sequence[9].showInSection).toBe('aboutApplicant1');
-    expect(applicant1Sequence[9].getNextStep({})).toBe('/task-list');
+    expect(applicant1Sequence[9].getNextStep({})).toBe('/review-pay-submit/check-your-answers');
 
-    expect(applicant1Sequence[10].url).toBe('/upload-your-documents');
+    expect(applicant1Sequence[10].url).toBe('/applicant1/contact-details');
     expect(applicant1Sequence[10].showInSection).toBe('aboutApplicant1');
-    expect(applicant1Sequence[10].getNextStep({})).toBe('/task-list');
+    expect(applicant1Sequence[10].getNextStep({})).toBe('/applicant1/language-preference');
+
+    expect(applicant1Sequence[11].url).toBe('/applicant1/language-preference');
+    expect(applicant1Sequence[11].showInSection).toBe('aboutApplicant1');
+    expect(applicant1Sequence[11].getNextStep({})).toBe('/task-list');
+
+    expect(applicant1Sequence[12].url).toBe('/upload-your-documents');
+    expect(applicant1Sequence[12].showInSection).toBe('aboutApplicant1');
+    expect(applicant1Sequence[12].getNextStep({})).toBe('/task-list');
   });
 });
