@@ -91,11 +91,11 @@ const cy: typeof en = content => {
 
   return {
     ...cyContent,
-    label: `Are you sure you want to remove this ${
+    label: `Ydych chi’n siwr eich bod eisiau dileu hwn ${
       !cyContent.siblingPOType[placementOrderText]
         ? 'order'
         : cyContent.siblingPOType[getPlacementOrderType(content.userCase)].toLowerCase()
-    } for child's ${
+    } ar gyfer y plentyn ${
       !cyContent.siblingRelation[siblingRelationText]
         ? 'sibling'
         : cyContent.siblingRelation[getSiblingRelation(content.userCase)].toLowerCase()
