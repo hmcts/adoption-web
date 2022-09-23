@@ -768,7 +768,7 @@ describe('siblingCourtOrderSummaryList', () => {
             actions: {
               items: [
                 {
-                  href: '/la-portal/sibling/exists?returnUrl=/la-portal/check-your-answers',
+                  href: '/la-portal/sibling/exists',
                   text: 'Change',
                   visuallyHiddenText: 'Siblings or half siblings with court orders',
                 },
@@ -833,7 +833,7 @@ describe('siblingCourtOrderSummaryList', () => {
             actions: {
               items: [
                 {
-                  href: '/la-portal/sibling/exists?returnUrl=/la-portal/check-your-answers',
+                  href: '/la-portal/sibling/exists',
                   text: 'Change',
                   visuallyHiddenText: 'Siblings or half siblings with court orders',
                 },
