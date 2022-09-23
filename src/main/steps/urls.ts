@@ -26,6 +26,8 @@ export const APPLICANT_1_CONTACT_DETAILS: PageLink = `${APPLICANT_1}/contact-det
 export const APPLICANT_1_FIND_ADDRESS: PageLink = `${APPLICANT_1}/address/lookup`;
 export const APPLICANT_1_SELECT_ADDRESS: PageLink = `${APPLICANT_1}/address/select`;
 export const APPLICANT_1_MANUAL_ADDRESS: PageLink = `${APPLICANT_1}/address/manual`;
+export const APPLICANT_1_CHANGE_ADDRESS: PageLink = `${APPLICANT_1}/address/change`;
+export const APPLICANT_1_CONFIRM_CHANGE_ADDRESS: PageLink = `${APPLICANT_1}/address/confirm-change`;
 export const APPLICANT_1_LANGUAGE_PREFERENCE: PageLink = `${APPLICANT_1}/language-preference`;
 
 export const APPLICANT_2: PageLink = '/applicant2';
@@ -37,6 +39,8 @@ export const APPLICANT_2_SAME_ADDRESS: PageLink = `${APPLICANT_2}/same-address`;
 export const APPLICANT_2_FIND_ADDRESS: PageLink = `${APPLICANT_2}/address/lookup`;
 export const APPLICANT_2_SELECT_ADDRESS: PageLink = `${APPLICANT_2}/address/select`;
 export const APPLICANT_2_MANUAL_ADDRESS: PageLink = `${APPLICANT_2}/address/manual`;
+export const APPLICANT_2_CHANGE_ADDRESS: PageLink = `${APPLICANT_2}/address/change`;
+export const APPLICANT_2_CONFIRM_CHANGE_ADDRESS: PageLink = `${APPLICANT_2}/address/confirm-change`;
 export const APPLICANT_2_CONTACT_DETAILS: PageLink = `${APPLICANT_2}/contact-details`;
 export const APPLICANT_2_LANGUAGE_PREFERENCE: PageLink = `${APPLICANT_2}/language-preference`;
 

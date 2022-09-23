@@ -423,6 +423,9 @@ export interface Case {
   hyphenatedCaseRef?: string;
   otherPlacementOrderType?: string;
 
+  checkYourAnswersReturn?: boolean;
+  changeAddressBothApplicants?: YesOrNo;
+
   kbaCaseRef?: string;
   kbaChildName?: string;
   kbaChildrenDateOfBirth?: string;

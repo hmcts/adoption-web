@@ -449,7 +449,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
               actions: {
                 items: [
                   {
-                    href: '/applicant1/address/manual?returnUrl=/review-pay-submit/check-your-answers',
+                    href: '/applicant1/address/lookup?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
                     visuallyHiddenText: 'Address',
                   },
@@ -577,7 +577,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
               actions: {
                 items: [
                   {
-                    href: '/applicant1/address/manual?returnUrl=/review-pay-submit/check-your-answers',
+                    href: '/applicant1/address/lookup?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
                     visuallyHiddenText: 'Address',
                   },
@@ -705,7 +705,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
               actions: {
                 items: [
                   {
-                    href: '/applicant2/address/manual?returnUrl=/review-pay-submit/check-your-answers',
+                    href: '/applicant2/address/lookup?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
                     visuallyHiddenText: 'Address',
                   },
