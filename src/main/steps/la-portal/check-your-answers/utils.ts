@@ -33,6 +33,7 @@ interface SummaryListRows {
   value?: string;
   valueHtml?: string;
   changeUrl?: string;
+  noRedirect?: boolean;
   classes?: string;
 }
 
@@ -58,7 +59,7 @@ const getSectionSummaryLists = (rows: SummaryListRows[], content: PageContent): 
   const returnUrlQueryParam = `returnUrl=${Urls.LA_PORTAL_CHECK_YOUR_ANSWERS}`;
   return rows.map(item => {
     let changeURL = item.changeUrl;
-    if (changeURL) {
+    if (changeURL && !item.noRedirect) {
       changeURL += `${changeURL.indexOf('?') === -1 ? '?' : '&'}${returnUrlQueryParam}`;
     }
     return {
@@ -379,6 +380,7 @@ export const siblingCourtOrderSummaryList = (
         key: keys.siblingOrHalfSibling,
         valueHtml: content.yesNoNotsure[userCase.hasSiblings!],
         changeUrl: `${Urls.LA_PORTAL_SIBLING_EXISTS}`,
+        noRedirect: true,
       },
     ],
     content
