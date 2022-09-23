@@ -42,7 +42,8 @@ export const saveDraftCase = async (req: AppRequest, caseRef: string, formData: 
   } else {
     ttl = expireTimeInSec;
     req.session.userCase = await req.locals.api.getCaseById(caseRef);
-    dataToStore = {};
+    dataToStore = { ...formData };
+    req.session.userCase = { ...req.session.userCase, ...dataToStore };
   }
   const draftStoreClient = req.app.locals.draftStoreClient;
   draftStoreClient.set(caseRef, JSON.stringify(dataToStore), 'EX', ttl);
