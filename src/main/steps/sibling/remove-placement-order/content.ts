@@ -95,11 +95,11 @@ const cy: typeof en = content => {
       !cyContent.siblingPOType[placementOrderText]
         ? 'order'
         : cyContent.siblingPOType[getPlacementOrderType(content.userCase)].toLowerCase()
-    } ar gyfer y plentyn ${
+    } ar gyfer ${
       !cyContent.siblingRelation[siblingRelationText]
         ? 'sibling'
         : cyContent.siblingRelation[getSiblingRelation(content.userCase)].toLowerCase()
-    }?`,
+    } y plentyn?`,
   };
 };
 

@@ -54,7 +54,7 @@ const cyContent = {
     [SiblingPOType.SUPERVIS_ORDER]: 'Gorchymyn Goruchwylio',
     [SiblingPOType.OTHER]: 'Arall',
   },
-  label: 'Ydych chi’n siwr eich bod eisiau dileu hwn gorchymyn mabwysiadu ar gyfer y plentyn chwaer?',
+  label: 'Ydych chi’n siwr eich bod eisiau dileu hwn gorchymyn mabwysiadu ar gyfer chwaer y plentyn?',
   errors: {
     confirm: {
       required: 'Dewiswch ateb os gwelwch yn dda',
