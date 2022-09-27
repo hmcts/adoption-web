@@ -14,7 +14,7 @@ nodejs:
     APPINSIGHTS_KEY: '00000000-0000-0000-0000-000000000000'
     PCQ_ENABLED: 'true'
     CCD_URL: 'http://adoption-cos-api-pr-450-ccd-data-store-api'
-    REDIS_TTL_MS: 2592000
+    REDIS_TTL_MS: 600
     IDAM_ROLE: 'citizen'
 idam-pr:
   enabled: true
