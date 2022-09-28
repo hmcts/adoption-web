@@ -42,30 +42,30 @@ const en = () => ({
 });
 
 const cy: typeof en = () => ({
-  title: 'Application details (in welsh)',
-  label: 'Court Case reference number (in welsh)',
-  hint: 'This is the 16 digit reference number that was on the email sent to you. Please insert the numbers only, without the hyphens. (in welsh)',
-  childNameLabel: 'Child named on the application.(in welsh)',
-  childNameHint: 'Enter their name as it appears on the email sent to you. (in welsh)',
-  childrenDateOfBirth: "Child's date of birth (in welsh)",
-  childDateOfBirthHint: 'For example, 31 3 2012.',
-  continueButton: 'Continue (in welsh)',
+  title: 'Manylion y cais',
+  label: 'Cyfeirnod yr achos llys',
+  hint: "Dyma'r cyfeirnod 16 digid oedd ar yr e-bost a anfonwyd atoch. Rhowch y rhifau yn unig, heb y cysylltnodau.",
+  childNameLabel: "Plentyn wedi'i enwi ar y cais",
+  childNameHint: "Rhowch ei enw fel mae'n ymddangos ar yr e-bost a anfonwyd atoch.",
+  childrenDateOfBirth: 'Dyddiad geni’r plentyn',
+  childDateOfBirthHint: 'Er enghraifft, 31 3 2012.',
+  continueButton: 'Pharhau',
   errors: {
     kbaCaseRef: {
-      required: 'Enter the 16 digit court case reference number (in welsh)',
-      numberTooShort: 'The number entered is too short (in welsh)',
-      isNotNumeric: 'Enter a case reference number in the correct format (in welsh)',
+      required: 'Rhowch gyfeirnod 16 digid yr achos llys',
+      numberTooShort: "Mae'r rhif a nodwyd yn rhy fyr",
+      isNotNumeric: 'Nodwch gyfeirnod yr achos yn y fformat cywir',
     },
     kbaChildName: {
-      required: 'Enter the full name (in welsh)',
+      required: 'Nodwch enw llawn',
     },
     kbaChildrenDateOfBirth: {
-      required: 'Enter their date of birth (in welsh)',
-      incompleteDay: 'Date of birth must include a day (in welsh)',
-      incompleteMonth: 'Date of birth must include a month (in welsh)',
-      incompleteYear: 'Date of birth must include a year (in welsh)',
-      invalidDate: 'Date of birth must be a real date (in welsh)',
-      invalidDateInFuture: 'Date of birth must be in the past (in welsh)',
+      required: 'Nodwch eu dyddiad geni',
+      incompleteDay: 'Mae’n rhaid i’r dyddiad geni gynnwys diwrnod',
+      incompleteMonth: 'Mae’n rhaid i’r dyddiad geni gynnwys mis',
+      incompleteYear: 'Mae’n rhaid i’r dyddiad geni gynnwys blwyddyn',
+      invalidDate: 'Mae’n rhaid i’r dyddiad geni fod yn ddyddiad go iawn',
+      invalidDateInFuture: 'Rhaid i’r dyddiad geni fod yn y gorffennol',
     },
   },
 });

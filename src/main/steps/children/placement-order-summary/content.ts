@@ -1,4 +1,4 @@
-import { YesOrNo } from '../../../app/case/definition';
+import { PlacementOrderTypeEnum, YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -14,6 +14,15 @@ const en = content => {
     change: 'Change',
     remove: 'Remove',
     label: 'Does the child have any other previous or existing orders?',
+    placementOrderType: {
+      [PlacementOrderTypeEnum.AdoptionOrder]: 'Adoption order',
+      [PlacementOrderTypeEnum.CareOrder]: 'Care order',
+      [PlacementOrderTypeEnum.ContactOrder]: 'Contact order',
+      [PlacementOrderTypeEnum.FreeingOrder]: 'Freeing order',
+      [PlacementOrderTypeEnum.PlacementOrder]: 'Placement order',
+      [PlacementOrderTypeEnum.SupervisionOrder]: 'Supervision order',
+      [PlacementOrderTypeEnum.Other]: 'Other',
+    },
     errors: {
       addAnotherPlacementOrder: {
         required: 'Please select an answer',
@@ -34,7 +43,16 @@ const cy: typeof en = content => {
     incomplete: 'anghyflawn',
     change: 'Newid',
     remove: 'Dileu',
-    label: 'Does the child have any other previous or existing orders? (in welsh)',
+    label: 'A oes gan y plentyn unrhyw orchmynion blaenorol neu bresennol eraill?',
+    placementOrderType: {
+      [PlacementOrderTypeEnum.AdoptionOrder]: 'Gorchymyn Mabwysiadu',
+      [PlacementOrderTypeEnum.CareOrder]: 'Gorchymyn Gofal',
+      [PlacementOrderTypeEnum.ContactOrder]: 'Gorchymyn Cyswllt',
+      [PlacementOrderTypeEnum.FreeingOrder]: 'Gorchymyn Rhyddhau',
+      [PlacementOrderTypeEnum.PlacementOrder]: 'Gorchymyn Lleoli',
+      [PlacementOrderTypeEnum.SupervisionOrder]: 'Gorchymyn Goruchwylio',
+      [PlacementOrderTypeEnum.Other]: 'Arall',
+    },
     errors: {
       addAnotherPlacementOrder: {
         required: 'Dewiswch ateb os gwelwch yn dda',

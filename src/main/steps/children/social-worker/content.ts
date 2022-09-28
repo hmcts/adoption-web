@@ -51,7 +51,7 @@ const cy: typeof en = () => ({
   childLocalAuthority: 'Awdurdod lleol y plentyn',
   childLocalAuthorityEmail: 'Cyfeiriad e-bost yr awdurdod lleol',
   childLocalAuthorityEmailHint:
-    'This will be used to send a notification to the local authority to progress your application so it is important that it is accurate. It should end in gov.uk. (in welsh)',
+    'Defnyddir hwn i anfon hysbysiad i’r awdurdod lleol i symud eich cais yn eiflaen, felly mae’n bwysig ei fod yn gywir. Dylai ddiweddu gyda gov.uk.',
   childLocalAuthorityHint:
     "Dyma'r awdurdod lleol sydd â chyfrifoldeb rhiant dros y plentyn. Gall fod yn wahanol i'ch awdurdod lleol eich hun.",
   errors: {
@@ -70,7 +70,7 @@ const cy: typeof en = () => ({
       required: 'Rhowch enw',
     },
     childLocalAuthorityEmail: {
-      required: 'Enter an email address in the correct format, like name@gov.uk (In Welsh)',
+      required: 'Nodwch gyfeiriad e-bost yn y fformat cywir, fel enw@gov.uk',
       invalid: "Rhowch gyfeiriad e-bost sy'n terfynu â gov.uk",
       invalidGovUkEmail: "Rhowch gyfeiriad e-bost sy'n terfynu â gov.uk",
     },

@@ -18,11 +18,11 @@ const enContent = {
 };
 
 const cyContent = {
-  section: "Birth father's details (in welsh)",
-  label: "Is the birth father's identity known? (in welsh)",
+  section: 'Manylion y tad biolegol',
+  label: 'A yw’r tad biolegol yn hysbys?',
   errors: {
     birthFatherIdentityKnown: {
-      required: 'Please answer the question (in welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
   },
 };

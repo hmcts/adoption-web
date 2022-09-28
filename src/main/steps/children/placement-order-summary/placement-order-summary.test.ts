@@ -1,3 +1,5 @@
+import { PlacementOrderTypeEnum } from '../../../app/case/definition';
+
 import { placementOrderListItems } from './placement-order-summary';
 
 describe('placement-order-summary', () => {
@@ -7,6 +9,15 @@ describe('placement-order-summary', () => {
     remove: 'Remove',
     placementOrder: 'Placement order',
     incomplete: 'incomplete',
+    placementOrderType: {
+      [PlacementOrderTypeEnum.AdoptionOrder]: 'Gorchymyn Mabwysiadu',
+      [PlacementOrderTypeEnum.CareOrder]: 'Gorchymyn Gofal',
+      [PlacementOrderTypeEnum.ContactOrder]: 'Gorchymyn Cyswllt',
+      [PlacementOrderTypeEnum.FreeingOrder]: 'Gorchymyn Rhyddhau',
+      [PlacementOrderTypeEnum.PlacementOrder]: 'Gorchymyn Lleoli',
+      [PlacementOrderTypeEnum.SupervisionOrder]: 'Gorchymyn Goruchwylio',
+      [PlacementOrderTypeEnum.Other]: 'Arall',
+    },
   };
 
   test('should return correct summary list items', () => {
@@ -14,20 +25,21 @@ describe('placement-order-summary', () => {
       placementOrders: [
         {
           placementOrderId: 'MOCK_ID',
+          placementOrderType: { placementOrderType: 'Adoption order' },
           placementOrderNumber: 'MOCK_NUMBER',
           placementOrderCourt: 'MOCK_COURT',
           placementOrderDate: { day: '12', month: '10', year: '2021' },
         },
         {
           placementOrderId: 'MOCK_ID2',
-          placementOrderType: 'MOCK_TYPE2',
+          placementOrderType: { placementOrderType: 'Adoption order' },
           placementOrderNumber: 'MOCK_NUMBER2',
           placementOrderCourt: 'MOCK_COURT2',
           placementOrderDate: { day: '2', month: '2', year: '' },
         },
         {
           placementOrderId: 'MOCK_ID3',
-          placementOrderType: 'MOCK_TYPE3',
+          placementOrderType: { placementOrderType: 'Adoption order' },
           placementOrderNumber: 'MOCK_NUMBER3',
           placementOrderCourt: 'MOCK_COURT3',
           placementOrderDate: { day: '3', month: '3', year: '2021' },
@@ -51,7 +63,7 @@ describe('placement-order-summary', () => {
         },
       },
       {
-        key: { text: 'MOCK_TYPE2', classes: 'font-normal' },
+        key: { text: 'Placement order', classes: 'font-normal' },
         value: {
           classes: 'summary-list-value',
           html: '<strong class="govuk-tag govuk-tag--yellow">incomplete</strong>',
@@ -62,18 +74,18 @@ describe('placement-order-summary', () => {
             {
               href: '/la-portal/child/placement-order-summary?remove=MOCK_ID2',
               text: 'Remove',
-              visuallyHiddenText: 'MOCK_TYPE2',
+              visuallyHiddenText: 'Placement order',
             },
             {
               href: '/la-portal/child/placement-order-check-your-answers?change=MOCK_ID2',
               text: 'Change',
-              visuallyHiddenText: 'MOCK_TYPE2',
+              visuallyHiddenText: 'Placement order',
             },
           ],
         },
       },
       {
-        key: { text: 'MOCK_TYPE3', classes: 'font-normal' },
+        key: { text: 'Placement order', classes: 'font-normal' },
         value: { classes: 'summary-list-value', html: '' },
         actions: {
           classes: 'summary-list-actions',
@@ -81,12 +93,12 @@ describe('placement-order-summary', () => {
             {
               href: '/la-portal/child/placement-order-summary?remove=MOCK_ID3',
               text: 'Remove',
-              visuallyHiddenText: 'MOCK_TYPE3',
+              visuallyHiddenText: 'Placement order',
             },
             {
               href: '/la-portal/child/placement-order-check-your-answers?change=MOCK_ID3',
               text: 'Change',
-              visuallyHiddenText: 'MOCK_TYPE3',
+              visuallyHiddenText: 'Placement order',
             },
           ],
         },

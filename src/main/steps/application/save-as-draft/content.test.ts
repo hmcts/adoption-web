@@ -9,9 +9,9 @@ const enContent = {
 };
 
 const cyContent = {
-  title: 'Your application has been saved (in welsh)',
-  continueApplication: 'Continue with your application (in welsh)',
-  signOut: 'Sign out (in welsh)',
+  title: 'Mae eich cais wedi cael ei gadw',
+  continueApplication: 'Parhau â’ch cais',
+  signOut: 'Allgofnodi',
 };
 
 describe('application-submmitted > content', () => {
