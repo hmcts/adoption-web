@@ -30,34 +30,36 @@ const enContent = {
   line11:
     'Once you submit your application, it can take up to 6 weeks before the court contacts you about a first hearing date. You do not have to attend any of the hearing dates.',
   line12: 'Updates are sent via email, or post if this is preferable.',
+  startnow: 'Start now',
 };
 
 const cyContent = {
-  title: 'Apply to adopt a child placed in your care (in welsh)',
+  title: 'Gwneud cais i fabwysiadu plentyn a osodwyd yn eich gofal',
   line1:
-    'You can apply to adopt a child who\'s in your care following a <a class="govuk-link" href="/eligibility/start">court placement order.</a> (in welsh)',
+    'Gallwch wneud cais i fabwysiadu plentyn sydd yn eich gofal yn dilyn <a class="govuk-link" href="/eligibility/start">gorchymyn lleoli gan y llys.</a>',
   line2:
-    'You can start your application at any time however, the child must have lived with you for at least 10 weeks before you can submit it. (in welsh)',
+    "Gallwch ddechrau eich cais ar unrhyw adeg fodd bynnag, mae'n rhaid i'r plentyn fod wedi byw gyda chi am o leiaf 10 wythnos cyn y gallwch gyflwyno’r cais.",
   line3:
-    "You can save your progress in the application by selecting 'save as draft'. This saves your answers so you can continue working on the application at a later date. You can only submit once all sections are complete. (in welsh)",
-  heading1: 'Before you start (in welsh)',
-  subheading1: 'Details about you (in welsh)',
-  line4: 'You need to provide details about yourself and any second applicant. (in welsh)',
+    "Gallwch gadw eich cais drwy ddewis 'save as draft'. Bydd hyn yn cadw eich atebion fel y gallwch barhau i weithio ar y cais yn hwyrach ymlaen. Dim ond unwaith y bydd pob adran wedi'i chwblhau y gallwch ei gyflwyno.",
+  heading1: 'Cyn i chi ddechrau ',
+  subheading1: 'Manylion amdanoch chi',
+  line4: 'Mae angen i chi ddarparu manylion amdanoch chi eich hun ac unrhyw ail geisydd. ',
   line5:
-    "Some of the information is needed for the Adoption Register and adoption certificate which will replace the child's birth certificate. (in welsh)",
+    "Mae angen rhywfaint o'r wybodaeth ar gyfer y Gofrestr Mabwysiadu a'r dystysgrif fabwysiadu a fydd yn disodli tystysgrif geni’r plentyn.",
   line6:
-    "You will be asked for information that is on the child's placement order. This includes the name of the local authority who placed the child in your care and the court which made the order. Your social worker or adoption agency will have this information. (in welsh)",
-  line7: 'Your personal information does not affect your application to adopt. (in welsh)',
+    "Gofynnir i chi am wybodaeth sydd ar orchymyn lleoli’r plentyn. Mae hyn yn cynnwys enw'r awdurdod lleol a osododd y plentyn yn eich gofal a'r llys a wnaeth y gorchymyn. Bydd gan eich gweithiwr cymdeithasol neu'ch asiantaeth fabwysiadu'r wybodaeth hon.",
+  line7: 'Nid yw eich gwybodaeth bersonol yn effeithio ar eich cais i fabwysiadu.',
   line8:
-    'The information you provide is only seen by the court and relevant adoption agencies or authorities. (in welsh)',
-  subheading2: 'What to expect (in welsh)',
+    'Dim ond y llys ac asiantaethau neu awdurdodau mabwysiadu perthnasol fydd yn gweld yr wybodaeth y byddwch yn ei darparu.',
+  subheading2: "Beth i'w ddisgwyl",
   line9:
-    'Your local authority will provide details about the child you wish to adopt. This includes information about their birth parents and any siblings. (in welsh)',
+    'Bydd eich awdurdod lleol yn darparu manylion am y plentyn yr hoffech ei fabwysiadu. Mae hyn yn cynnwys gwybodaeth am ei rieni genedigol ac unrhyw frodyr a chwiorydd.',
   line10:
-    'The court processing fee for an application is £MOCK_AMOUNT. Payment is due once the application is complete and ready to submit to the court. (in welsh)',
+    "Mae’n costio £MOCK_AMOUNT i’r llys brosesu’r cais. Mae disgwyl i'r taliad gael ei wneud unwaith y bydd y cais wedi'i gwblhau ac yn barod i'w gyflwyno i'r llys.",
   line11:
-    'Once you submit your application, it can take up to 6 weeks before the court contacts you about a first hearing date. You do not have to attend any of the hearing dates. (in welsh)',
-  line12: 'Updates are sent via email, or post if this is preferable. (in welsh)',
+    "Unwaith y byddwch yn cyflwyno eich cais, gall gymryd hyd at 6 wythnos cyn i'r llys gysylltu â chi am ddyddiad y gwrandawiad cyntaf. Nid oes rhaid i chi fod yn bresennol ar unrhyw un o'r dyddiadau hyn.",
+  line12: 'Anfonir diweddariadau trwy e-bost, neu drwy’r post os yw hyn yn well gennych.',
+  startnow: 'Dechrau nawr',
 };
 
 describe('eligibility > start > content', () => {

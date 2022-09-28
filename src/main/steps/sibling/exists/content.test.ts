@@ -22,12 +22,12 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
-  label: 'Does the child have any siblings or half siblings with court orders? (in welsh)',
+  label: 'A oes gan y plentyn frodyr/chwiorydd neu hanner brodyr/chwiorydd sydd â gorchmynion llys?',
   conditionalText:
-    '<label class="govuk-label">You will be asked to provide each sibling court order individually.</label> (in welsh)',
+    '<label class="govuk-label">Gofynnir i chi ddarparu pob gorchymyn llys brodyr a chwiorydd yn unigol.</label>',
   errors: {
     hasSiblings: {
-      required: 'Please select an answer (in welsh)',
+      required: 'Dewiswch ateb os gwelwch yn dda',
     },
   },
 };

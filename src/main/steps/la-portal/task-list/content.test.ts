@@ -28,7 +28,7 @@ const enContent = {
 };
 
 const cyContent = {
-  title: 'Gwneud cais i fabwysiadu plentyn a leolwyd dan eich gofal',
+  title: 'Gwneud cais i fabwysiadu plentyn a osodwyd yn eich gofal',
   statuses: {
     [SectionStatus.COMPLETED]: 'Wedi cwblhau',
     [SectionStatus.IN_PROGRESS]: 'Yn mynd rhagddo',

@@ -26,8 +26,8 @@ const cyContent = {
   enterAddressManually: 'Neu nodwch y cyfeiriad â llaw',
   errors: {
     addressPostcode: {
-      required: 'Enter a real postcode (in welsh)',
-      invalid: 'Enter a real postcode (in welsh)',
+      required: 'Nodwch god post go iawn',
+      invalid: 'Nodwch god post go iawn',
     },
   },
   manualAddressUrl: '#',

@@ -53,6 +53,7 @@
 
 {% block beforeContent %}
 
+{# ADOP-1231-LAPortal-Welsh-Translation starts
   {% if laPortal == true %}
       {{ govukPhaseBanner({
       tag: {
@@ -60,14 +61,15 @@
       },
       html: feedbackLink
       }) }}
-  {% else %}
+  {% else %} #}
       {{ govukPhaseBanner({
       tag: {
         text: phase
       },
       html: feedbackLink + languageToggle
       }) }}
-  {% endif %}
+  {# {% endif %}
+ADOP-1231-LAPortal-Welsh-Translation starts #}
 
   {% block backLink %}
     <a href="#" class="govuk-back-link">{{ back }}</a>

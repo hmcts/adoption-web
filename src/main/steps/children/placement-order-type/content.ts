@@ -27,16 +27,16 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: 'Manylion y plentyn',
-  label: 'Beth oedd rhyw’r plentyn pan gafodd ei (g)eni?',
-  hint: 'This information makes it easier for the court to link past court orders. (in welsh)',
-  adoptionOrder: 'Previous adoption order (in welsh)',
-  careOrder: 'Care order (in welsh)',
-  contactOrder: 'Child arrangements order (in welsh)',
-  contactOrderHint: 'Child arrangements includes residency, contact, specific issue and prohibited steps. (in welsh)',
-  placementOrder: 'Previous placement order (in welsh)',
-  supervisionOrder: 'Supervision order (in welsh)',
-  other: 'Other (in welsh)',
-  otherOrder: 'Add a different type of order',
+  label: 'Pa fath o orchymyn ydyw?',
+  hint: "Mae'r wybodaeth hon yn ei gwneud hi'n haws i'r llys gysylltu gorchmynion llys yn y gorffennol.",
+  adoptionOrder: 'Gorchymyn mabwysiadu blaenorol',
+  careOrder: 'Gorchymyn Gofal',
+  contactOrder: 'Gorchymyn trefniadau plant',
+  contactOrderHint: 'Mae trefniadau plant yn cynnwys cyfnod preswyl, cyswllt, mater penodol a chamau gwaharddedig.',
+  placementOrder: 'Gorchymyn lleoli blaenorol',
+  supervisionOrder: 'Gorchymyn Goruchwylio',
+  other: 'Arall',
+  otherOrder: 'Ychwanegu math gwahanol o orchymyn',
   errors: {
     selectedPlacementOrderType: {
       required: 'Dewiswch ateb os gwelwch yn dda',

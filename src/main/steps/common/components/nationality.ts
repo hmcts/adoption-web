@@ -38,7 +38,7 @@ const en = (fieldPrefix: FieldPrefix) => ({
 
 const cy: typeof en = (fieldPrefix: FieldPrefix) => ({
   label: 'Beth yw eich cenedligrwydd?',
-  hint: 'Select all options that are relevant. (in welsh)',
+  hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
   british: 'Prydeinig',
   britishSubtext: 'gan gynnwys Saesneg, Albanaidd, Cymraeg a Gwyddelig Gogledd Iwerddon',
   irish: 'Gwyddelig',

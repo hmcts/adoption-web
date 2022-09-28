@@ -39,7 +39,7 @@ const cy = () => ({
     },
     addressPostcode: {
       required: 'Nac ydwdwch y cod post',
-      invalid: 'Nac ydwdwch god post dilys',
+      invalid: 'Nodwch god post go iawn',
     },
   },
 });

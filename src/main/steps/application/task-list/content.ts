@@ -136,7 +136,7 @@ const en = () => ({
 });
 
 const cy: typeof en = () => ({
-  title: 'Gwneud cais i fabwysiadu plentyn a leolwyd dan eich gofal',
+  title: 'Gwneud cais i fabwysiadu plentyn a osodwyd yn eich gofal',
   statuses: {
     [SectionStatus.COMPLETED]: 'Wedi cwblhau',
     [SectionStatus.IN_PROGRESS]: 'Yn mynd rhagddo',
@@ -165,7 +165,7 @@ const cy: typeof en = () => ({
     otherParent: 'Unigolyn arall sydd â chyfrifoldeb rhiant',
     placementAndCourtOrders: 'Gorchmynion llys a lleoli',
     siblingCourtOrders: 'Manylion gorchymyn llys brodyr/chwiorydd',
-    familyCourt: 'The family court details (in welsh)',
+    familyCourt: 'Manylion y llys teulu',
     uploadDocuments: 'Llwytho dogfennau',
     reviewPayAndSubmit: 'Adolygu, talu a chyflwyno eich cais',
   },

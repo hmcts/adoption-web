@@ -48,7 +48,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y cais',
-  title: 'Manylion yr asiantaeth fabwysiadu neu’r awdurdod lleol',
+  title: 'Yr asiantaeth fabwysiadu neu fanylion yr awdurdod lleol',
   adopAgencyName: "Enw'r asiantaeth fabwysiadu neu'r awdurdod lleol",
   adopAgencyContactName: 'Enw eich cyswllt',
   adopAgencyPhone: 'Rhif ffôn',
@@ -78,7 +78,7 @@ const cyContent = {
     },
     adopAgencyOrLaContactEmail: {
       required: 'Rhowch gyfeiriad e-bost',
-      invalid: 'Enter an email address in the correct format, like name@example.com. (in welsh)',
+      invalid: 'Nodwch gyfeiriad e-bost yn y fformat cywir, fel name@example.com',
     },
   },
 };
