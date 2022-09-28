@@ -29,12 +29,12 @@ const cy: typeof en = ({ userCase }: CommonContent) => {
   );
   const label =
     placementOrder?.placementOrderType === undefined
-      ? 'What is the serial or case number on the placement order?'
-      : 'What is the serial or case number on the order?';
+      ? 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn lleoli?'
+      : 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn?';
   return {
     label,
     section: 'Manylion y plentyn',
-    hint: 'This is on the top right of the order. (in welsh)',
+    hint: 'Mae hwn wedi’i nodi yng nghornel dde uchaf y gorchymyn.',
     errors: {
       placementOrderNumber: {
         required: 'Nac ydwdwch y rhif cyfresol neu rif yr achos',

@@ -25,7 +25,7 @@ const cy: typeof en = () => ({
   label: 'A yw tad biolegol y plentyn dal yn fyw?',
   moreDetails:
     'Darparwch fwy o fanylion. Er enghraifft, ‘nid oes modd cysylltu â’r tad biolegol’. Gall eich asiantaeth fabwysiadu neu eich gweithiwr cymdeithasol eich helpu i lenwi’r rhan hon.',
-  hint: 'If this person has died, you will need to provide the death certificate.',
+  hint: "Os yw’r unigolyn hwn wedi marw, bydd angen i chi ddarparu'r dystysgrif marwolaeth.",
   errors: {
     birthFatherStillAlive: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',

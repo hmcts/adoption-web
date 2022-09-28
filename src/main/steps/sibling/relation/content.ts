@@ -22,16 +22,16 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  label: 'What is their relationship to the child being adopted? (in welsh)',
-  sister: 'Sister (in welsh)',
-  halfSister: 'Half-sister (in welsh)',
-  stepSister: 'Step-sister (in welsh)',
-  brother: 'Brother (in welsh)',
-  halfBrother: 'Half-brother (in welsh)',
-  stepBrother: 'Step-brother (in welsh)',
+  label: 'Beth yw eu perthynas i’r plentyn sy’n cael ei fabwysiadu?',
+  sister: 'Chwaer',
+  halfSister: 'Hanner chwaer',
+  stepSister: 'Llyschwaer',
+  brother: 'Brawd',
+  halfBrother: 'Hanner brawd',
+  stepBrother: 'Llysfrawd',
   errors: {
     selectedSiblingRelation: {
-      required: 'Please select an answer (in welsh)',
+      required: 'Dewiswch ateb os gwelwch yn dda',
     },
   },
 });

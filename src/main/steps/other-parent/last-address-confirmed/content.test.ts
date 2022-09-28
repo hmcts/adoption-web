@@ -34,16 +34,16 @@ const enContent = {
 };
 
 const cyContent = {
-  section: "Other parent's details (in welsh)",
-  title: 'When was the last date this address was confirmed?',
+  section: 'Manylion y rhiant arall',
+  title: "Pryd gafodd y dyddiad diwethaf i'r cyfeiriad yma gael ei gadarnhau?",
   errors: {
     otherParentLastAddressDate: {
-      required: 'Enter date',
-      invalidDate: 'Date must be a real date',
-      incompleteDay: 'Date must include a day',
-      incompleteMonth: 'Date must include a month',
-      incompleteYear: 'Date must include a year',
-      invalidDateInFuture: 'Date must be in the past',
+      required: 'Nodwch y dyddiad',
+      invalidDate: 'Rhaid i’r dyddiad fod yn ddyddiad dilys',
+      incompleteDay: 'Rhaid i’r dyddiad gynnwys diwrnod',
+      incompleteMonth: 'Rhaid i’r dyddiad gynnwys mis',
+      incompleteYear: 'Rhaid i’r dyddiad gynnwys blwyddyn',
+      invalidDateInFuture: 'Rhaid i’r dyddiad fod yn y gorffennol',
     },
   },
 };
@@ -118,7 +118,7 @@ describe('otherParentLastAddressDate > content', () => {
     const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);
-    expect(generatedContent1.section).toBe("Other parent's details (in welsh)");
+    expect(generatedContent1.section).toBe('Manylion y rhiant arall');
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

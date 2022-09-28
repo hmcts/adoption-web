@@ -17,16 +17,17 @@ const enContent = {
 };
 
 const cyContent = {
-  title: 'There is a problem (in welsh)',
-  line1: 'Some of the information you have given does not match what is stored in our records. (in welsh)',
-  line2: 'You should select the back link and check that spellings, dates and numbers are correct. (in welsh)',
+  title: 'Mae yna broblem',
+  line1:
+    "Nid yw rhywfaint o'r wybodaeth rydych chi wedi'i rhoi yn cyd-fynd â'r hyn sydd wedi’i storio yn ein cofnodion.",
+  line2: 'Dylech glicio ar y ddolen a gwirio bod y sillafiadau, y dyddiadau a’r rhifau yn gywir.',
   line3:
-    'If this error comes up after you have checked all your details then there might be a problem with the information provided by the applicants. In that case you should contact the caseworker: (in welsh)',
-  contactInformation: 'Contact: Name of service, eg CTSC (in welsh)',
-  telephoneNumber: 'Telephone: Telephone number (in welsh)',
-  emailAddress: 'Email: Email address (in welsh)',
-  openingHours: 'Monday to Friday, 9am to 5pm (in welsh)',
-  contactUs: 'Contact us for help (in welsh)',
+    "Os yw’r gwall hwn yn codi ar ôl i chi wirio eich holl fanylion, yna efallai bod problem gyda’r wybodaeth a ddarparwyd gan y ceiswyr. Yn yr achos hwnnw dylech gysylltu â'r gweithiwr achos:",
+  contactInformation: 'Cyswllt: Enw’r gwasanaeth, e.e. CTSC',
+  telephoneNumber: 'Rhif ffôn: Rhif ffôn',
+  emailAddress: 'E-bost: Cyfeiriad e-bost',
+  openingHours: 'Dydd Llun i ddydd Gwener, 9am i 5pm',
+  contactUs: 'Cysylltwch â ni am help',
 };
 
 describe('application-submmitted > content', () => {

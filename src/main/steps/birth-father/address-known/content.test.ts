@@ -29,7 +29,7 @@ const cyContent = {
   moreDetails: 'Rhowch reswm pam bod y cyfeiriad yn anhysbys, er enghraifft ‘dim cyfeiriad parhaol’.',
   errors: {
     birthFatherAddressKnown: {
-      required: 'Please answer the question (in welsh)',
+      required: 'Atebwch y cwestiwn os gwelwch yn dda',
     },
     birthFatherAddressNotKnownReason: {
       required: 'Darparwch reswm',

@@ -24,7 +24,7 @@ const cy: typeof en = () => ({
   label: 'A yw mam fiolegol y plentyn dal yn fyw?',
   moreDetails:
     'Darparwch fwy o fanylion. Er enghraifft, ‘nid oes modd cysylltu â’r fam fiolegol’. Gall eich asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol eich helpu i lenwi’r rhan hon. ',
-  hint: 'If this person has died, you will need to provide the death certificate. (in welsh)',
+  hint: "Os yw’r unigolyn hwn wedi marw, bydd angen i chi ddarparu'r dystysgrif marwolaeth.",
   errors: {
     birthMotherStillAlive: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',

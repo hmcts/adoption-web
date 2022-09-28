@@ -102,7 +102,7 @@ const en = () => ({
 });
 
 const cy: typeof en = () => ({
-  title: 'Gwneud cais i fabwysiadu plentyn a leolwyd dan eich gofal',
+  title: 'Gwneud cais i fabwysiadu plentyn a osodwyd yn eich gofal',
   statuses: {
     [SectionStatus.COMPLETED]: 'Wedi cwblhau',
     [SectionStatus.IN_PROGRESS]: 'Yn mynd rhagddo',
@@ -121,7 +121,7 @@ const cy: typeof en = () => ({
     siblingCourtOrders: 'Manylion gorchymyn llys brodyr/chwiorydd',
     uploadDocuments: 'Llwytho dogfennau',
   },
-  reviewAndSubmit: 'Review and submit',
+  reviewAndSubmit: 'Adolygu a chyflwyno',
 });
 
 const languages = {

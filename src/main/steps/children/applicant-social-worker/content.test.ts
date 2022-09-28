@@ -60,7 +60,7 @@ const cyContent = {
   applicantLocalAuthority: "Enw'r awdurdod lleol",
   applicantLocalAuthorityEmail: 'Cyfeiriad e-bost eich awdurdod lleol',
   applicantLocalAuthorityEmailHint:
-    'This will be used to send a notification to the local authority to progress your application so it is important that it is accurate. It should end in gov.uk. (in welsh)',
+    'Defnyddir hwn i anfon hysbysiad i’r awdurdod lleol i symud eich cais yn eiflaen, felly mae’n bwysig ei fod yn gywir. Dylai ddiweddu gyda gov.uk.',
   applicantLocalAuthorityHint:
     "Dyma'r awdurdod lleol y mae eich gweithiwr cymdeithasol yn gweithio iddo. Bydd wedi’i enwi ar y gorchymyn lleoli os nad ydych yn siŵr.",
   errors: {
@@ -72,15 +72,15 @@ const cyContent = {
       invalid: 'Rhowch rif ffôn yn y DU',
     },
     applicantSocialWorkerEmail: {
-      invalid: "Rhowch gyfeiriad e-bost sy'n terfynu â gov.uk",
+      invalid: 'Nodwch gyfeiriad e-bost yn y fformat cywir, fel enw@gov.uk',
       invalidGovUkEmail: "Rhowch gyfeiriad e-bost sy'n terfynu â gov.uk",
     },
     applicantLocalAuthority: {
       required: 'Rhowch enw',
     },
     applicantLocalAuthorityEmail: {
-      required: 'Enter an email address in the correct format, like name@gov.uk (In Welsh)',
-      invalid: "Rhowch gyfeiriad e-bost sy'n terfynu â gov.uk",
+      required: 'Nodwch gyfeiriad e-bost yn y fformat cywir, fel enw@gov.uk',
+      invalid: 'Nodwch gyfeiriad e-bost yn y fformat cywir, fel enw@gov.uk',
       invalidGovUkEmail: "Rhowch gyfeiriad e-bost sy'n terfynu â gov.uk",
     },
   },
