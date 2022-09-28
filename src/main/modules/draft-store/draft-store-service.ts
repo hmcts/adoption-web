@@ -40,7 +40,7 @@ export const saveDraftCase = async (req: AppRequest, caseRef: string, formData: 
   } else if (ttl > 0) {
     dataToStore = { ...dataToStore };
   } else {
-    ttl = expireTimeInSec;
+    ttl = expireTimeInSec * 24 * 60 * 60;
     req.session.userCase = await req.locals.api.getCaseById(caseRef);
     dataToStore = { ...formData };
     req.session.userCase = { ...req.session.userCase, ...dataToStore };

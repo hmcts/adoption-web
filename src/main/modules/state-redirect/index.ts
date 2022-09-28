@@ -13,6 +13,7 @@ import {
   CONTACT_US,
   COOKIES_PAGE,
   DOWNLOAD_APPLICATION_SUMMARY,
+  LA_DOCUMENT_MANAGER,
   LA_PORTAL,
   LA_PORTAL_CONFIRMATION_PAGE,
   PAYMENT_CALLBACK_URL,
@@ -72,6 +73,7 @@ export class StateRedirectMiddleware {
           ) &&
           req.path !== APPLICATION_SUBMITTED &&
           req.path !== DOWNLOAD_APPLICATION_SUMMARY &&
+          req.path !== LA_DOCUMENT_MANAGER &&
           !req.path.startsWith(LA_PORTAL)
         ) {
           return res.redirect(APPLICATION_SUBMITTED);
