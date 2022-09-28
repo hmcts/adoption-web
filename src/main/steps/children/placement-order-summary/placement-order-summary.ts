@@ -17,9 +17,7 @@ const isPlacementOrderComplete = (placementOrder, ignorePlacementOrderType) => {
 };
 //eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
 export const placementOrderListItems = (userCase: CaseWithId, content: any): any => {
-  //  console.log(userCase.placementOrders);
   return userCase.placementOrders?.map((item, index) => {
-    //  console.log(item);
     console.log(content);
     const text =
       (item.placementOrderType && content.placementOrderType[item.placementOrderType]) || content.placementOrder;
