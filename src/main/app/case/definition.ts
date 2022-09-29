@@ -1463,6 +1463,7 @@ export const enum DocumentType {
   APPLICATION = 'application',
   EMAIL = 'email',
   APPLICATION_SUMMARY = 'applicationSummary',
+  APPLICATION_LA_SUMMARY = 'applicationLASummary',
 }
 
 export const enum PaymentStatus {

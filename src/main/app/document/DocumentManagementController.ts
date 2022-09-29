@@ -141,21 +141,33 @@ export class DocumentManagerController {
       req.session.userCase['applicant1LanguagePreference'] === LanguagePreference.WELSH ? 'Cy' : 'En';
     const documentsGenerated =
       (req.session.userCase[documentsGeneratedKey] as ListValue<Partial<AdoptionDocument> | null>[]) ?? [];
-    if (![State.Submitted].includes(req.session.userCase.state)) {
-      throw new Error('Cannot display document as the application is not in submitted state');
-    }
 
     let documentToGet;
 
-    if (!!documentsGenerated && documentsGenerated.length > 0) {
-      const applicationSummaryDocuments = documentsGenerated
-        .map(item => item.value)
-        .filter(element => element?.documentType === DocumentType.APPLICATION_SUMMARY + languagePreference);
-      if (applicationSummaryDocuments !== null && applicationSummaryDocuments.length > 0) {
-        documentToGet = applicationSummaryDocuments[0]?.documentLink?.document_binary_url;
+    if (
+      [State.Submitted].includes(req.session.userCase.state) &&
+      ![State.LaSubmitted].includes(req.session.userCase.state)
+    ) {
+      if (!!documentsGenerated && documentsGenerated.length > 0) {
+        const applicationSummaryDocuments = documentsGenerated
+          .map(item => item.value)
+          .filter(element => element?.documentType === DocumentType.APPLICATION_SUMMARY + languagePreference);
+        if (applicationSummaryDocuments !== null && applicationSummaryDocuments.length > 0) {
+          documentToGet = applicationSummaryDocuments[0]?.documentLink?.document_binary_url;
+        }
       }
+    } else if ([State.LaSubmitted].includes(req.session.userCase.state)) {
+      if (!!documentsGenerated && documentsGenerated.length > 0) {
+        const applicationSummaryDocuments = documentsGenerated
+          .map(item => item.value)
+          .filter(element => element?.documentType === DocumentType.APPLICATION_LA_SUMMARY + languagePreference);
+        if (applicationSummaryDocuments !== null && applicationSummaryDocuments.length > 0) {
+          documentToGet = applicationSummaryDocuments[0]?.documentLink?.document_binary_url;
+        }
+      }
+    } else {
+      throw new Error('Cannot display document as the application is not in submitted state');
     }
-
     const documentManagementClient = this.getDocumentManagementClient(req.session.user);
     const generatedDocument = await documentManagementClient.get({ url: documentToGet });
 

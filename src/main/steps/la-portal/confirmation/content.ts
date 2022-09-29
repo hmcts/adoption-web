@@ -14,6 +14,7 @@ const en = content => ({
   documentUploadService: 'document upload service',
   line5: 'to submit the annex and any additional evidence.',
   line6: 'You will get a copy of the full application once the court starts to process it.',
+  printApplication: 'Download or print your application',
 });
 
 const cy: typeof en = content => ({
@@ -30,6 +31,7 @@ const cy: typeof en = content => ({
   documentUploadService: 'gwasanaeth uwchlwytho dogfennau',
   line5: 'er mwyn cyflwyno’r atodiad ac unrhyw dystiolaeth ychwanegol.',
   line6: "Fe gewch chi gopi o'r cais llawn unwaith y bydd y llys yn dechrau ei brosesu.",
+  printApplication: 'Llwytho eich cais i lawr neu ei argraffu',
 });
 
 const languages = {
