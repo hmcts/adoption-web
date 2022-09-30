@@ -1,6 +1,7 @@
 import autobind from 'autobind-decorator';
 import config from 'config';
 import type { Response } from 'express';
+import { saveDraftCase } from 'modules/draft-store/draft-store-service';
 import { v4 as generateUuid } from 'uuid';
 
 import { LA_PORTAL_UPLOAD_YOUR_DOCUMENTS, PAY_YOUR_FEE, UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
@@ -26,6 +27,7 @@ export class DocumentManagerController {
   }
 
   public async post(req: AppRequest, res: Response, documentInput?: DocumentInput): Promise<void> {
+    console.log(req.session.userCase);
     if (![State.Draft].includes(req.session.userCase.state) && (!documentInput || !documentInput.skipDraftCheck)) {
       throw new Error('Cannot upload new documents as case is not in Draft state');
     }
@@ -98,11 +100,15 @@ export class DocumentManagerController {
 
     documentsUploaded[documentIndexToDelete].value = null;
 
-    req.session.userCase = await req.locals.api.triggerEvent(
-      req.session.userCase.id,
-      { [documentsUploadedKey]: documentsUploaded },
-      this.getEventName(req)
-    );
+    // req.session.userCase = await req.locals.api.triggerEvent(
+    //   req.session.userCase.id,
+    //   { [documentsUploadedKey]: documentsUploaded },
+    //   this.getEventName(req)
+    // ); 
+
+
+    const uploadDocument = await saveDraftCase(req, req.session.userCase.id, { [documentsUploadedKey]: documentsUploaded });
+    console.log(uploadDocument);
 
     const documentManagementClient = this.getDocumentManagementClient(req.session.user);
     await documentManagementClient.delete({ url: documentUrlToDelete });
