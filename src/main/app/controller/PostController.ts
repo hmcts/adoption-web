@@ -1,11 +1,11 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
-import {
-  getDraftCaseFromStore,
-  removeCaseFromRedis,
-  saveDraftCase,
-} from '../../modules/draft-store/draft-store-service';
+// import {
+//   // getDraftCaseFromStore,
+//   // removeCaseFromRedis,
+//   saveDraftCase,
+// } from '../../modules/draft-store/draft-store-service';
 import { getNextStepUrl } from '../../steps';
 import {
   CHECK_ANSWERS_URL,
@@ -95,34 +95,34 @@ export class PostController<T extends AnyObject> {
 
   protected async save(req: AppRequest<T>, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
     const caseRefId = req.session.userCase.id;
-    if (
-      (req.url.includes('la-portal') && ![LA_PORTAL_STATEMENT_OF_TRUTH?.toString()].includes(req.url)) ||
-      (req.body['saveAsDraft'] && [LA_PORTAL_STATEMENT_OF_TRUTH?.toString()].includes(req.url))
-    ) {
+    // if (
+    //   (req.url.includes('la-portal') && ![LA_PORTAL_STATEMENT_OF_TRUTH?.toString()].includes(req.url)) ||
+    //   (req.body['saveAsDraft'] && [LA_PORTAL_STATEMENT_OF_TRUTH?.toString()].includes(req.url))
+    // ) {
+    //   try {
+    //     return await saveDraftCase(req, caseRefId || '', formData);
+    //   } catch (err) {
+    //     req.locals.logger.error('Cannot save to redis cache', err);
+    //     req.session.errors = req.session.errors || [];
+    //     req.session.errors?.push({ errorType: 'errorSaving', propertyName: '*' });
+    //   }
+    //   return req.session.userCase;
+    // } else {
       try {
-        return await saveDraftCase(req, caseRefId || '', formData);
-      } catch (err) {
-        req.locals.logger.error('Cannot save to redis cache', err);
-        req.session.errors = req.session.errors || [];
-        req.session.errors?.push({ errorType: 'errorSaving', propertyName: '*' });
-      }
-      return req.session.userCase;
-    } else {
-      try {
-        if ([LA_PORTAL_STATEMENT_OF_TRUTH?.toString()].includes(req.url)) {
-          const modifiedValuesSet = await getDraftCaseFromStore(req, caseRefId || '');
-          req.session.userCase = await req.locals.api.triggerEvent(caseRefId, modifiedValuesSet, eventName);
-          removeCaseFromRedis(req, caseRefId);
-        } else {
+        // if ([LA_PORTAL_STATEMENT_OF_TRUTH?.toString()].includes(req.url)) {
+        //   const modifiedValuesSet = await getDraftCaseFromStore(req, caseRefId || '');
+        //   req.session.userCase = await req.locals.api.triggerEvent(caseRefId, modifiedValuesSet, eventName);
+        //   removeCaseFromRedis(req, caseRefId);
+        // } else {
           req.session.userCase = await req.locals.api.triggerEvent(caseRefId, formData, eventName);
-        }
+        // }
       } catch (err) {
         req.locals.logger.error('Error saving', err);
         req.session.errors = req.session.errors || [];
         req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
       }
       return req.session.userCase;
-    }
+    // }
   }
 
   protected redirect(req: AppRequest<T>, res: Response, nextUrl?: string): void {

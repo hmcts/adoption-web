@@ -3,7 +3,7 @@ import { Application, NextFunction, Response } from 'express';
 import { getSystemUser } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
 import { AppRequest } from '../../app/controller/AppRequest';
-import { getDraftCaseFromStore } from '../../modules/draft-store/draft-store-service';
+// import { getDraftCaseFromStore } from '../../modules/draft-store/draft-store-service';
 import {
   LA_PORTAL,
   LA_PORTAL_KBA_CALLBACK,
@@ -44,13 +44,13 @@ export class KbaMiddleware {
           if (!req.session.userCase) {
             try {
               req.session.userCase = await req.locals.api.getCaseById(req.session.laPortalKba.kbaCaseRef!);
-              const draftStoreUserCaseData = await getDraftCaseFromStore(
-                req,
-                req.session.laPortalKba?.kbaCaseRef || ''
-              );
-              if (draftStoreUserCaseData) {
-                req.session.userCase = { ...(req.session.userCase || {}), ...draftStoreUserCaseData };
-              }
+              // const draftStoreUserCaseData = await getDraftCaseFromStore(
+              //   req,
+              //   req.session.laPortalKba?.kbaCaseRef || ''
+              // );
+              // if (draftStoreUserCaseData) {
+              //   req.session.userCase = { ...(req.session.userCase || {}), ...draftStoreUserCaseData };
+              // }
               if (
                 JSON.stringify(req.session.userCase.childrenDateOfBirth) !==
                   JSON.stringify(req.session.laPortalKba['kbaChildrenDateOfBirth']) ||

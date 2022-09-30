@@ -2,7 +2,7 @@ import autobind from 'autobind-decorator';
 import { Response } from 'express';
 import Negotiator from 'negotiator';
 
-import { saveDraftCase } from '../../modules/draft-store/draft-store-service';
+// import { saveDraftCase } from '../../modules/draft-store/draft-store-service';
 import { LanguageToggle } from '../../modules/i18n';
 import { CommonContent, Language, generatePageContent } from '../../steps/common/common.content';
 import * as Urls from '../../steps/urls';
@@ -90,11 +90,11 @@ export class GetController {
 
   public async save(req: AppRequest, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
     try {
-      if (req.url.includes('la-portal') && ![Urls.LA_PORTAL_CHECK_YOUR_ANSWERS?.toString()].includes(req.url)) {
-        return await saveDraftCase(req, req.session.userCase.id || '', formData);
-      } else {
+      // if (req.url.includes('la-portal') && ![Urls.LA_PORTAL_CHECK_YOUR_ANSWERS?.toString()].includes(req.url)) {
+      //   return await saveDraftCase(req, req.session.userCase.id || '', formData);
+      // } else {
         return await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
-      }
+      // }
     } catch (err) {
       req.locals.logger.error('Error saving', err);
       req.session.errors = req.session.errors || [];
