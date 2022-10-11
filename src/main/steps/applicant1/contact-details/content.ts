@@ -15,7 +15,7 @@ const en = content => ({
     'The court may want to use your email to serve you court orders. Are you happy to be served court orders by email?',
   errors: {
     applicant1ContactDetailsConsent: {
-      required: 'Please answer the question',
+      required: 'Select whether you are happy to be served court orders by email',
     },
     applicant1EmailAddress: {
       required: 'Enter your email address',
