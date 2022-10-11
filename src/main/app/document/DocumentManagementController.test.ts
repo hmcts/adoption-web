@@ -31,6 +31,7 @@ describe('DocumentManagerController', () => {
     ])('handles file uploads - %o', async ({ state, uploadFields }) => {
       const req = mockRequest({
         userCase: {
+          id: '1234',
           state,
           [uploadFields.field1]: ['an-existing-doc'],
         },
@@ -50,10 +51,10 @@ describe('DocumentManagerController', () => {
       ]);
 
       (req.locals.api.triggerEvent as jest.Mock).mockReturnValue({
+        id: '1234',
         state,
         [uploadFields.field2]: ['an-existing-doc', 'uploaded-file.jpg'],
       });
-
       await documentManagerController.post(req, res);
 
       expect(mockCreate).toHaveBeenCalledWith({
@@ -106,6 +107,7 @@ describe('DocumentManagerController', () => {
       async ({ state, uploadFields, redirectUrl }) => {
         const req = mockRequest({
           userCase: {
+            id: '1234',
             state,
             [uploadFields.field1]: ['an-existing-doc'],
           },
@@ -124,6 +126,7 @@ describe('DocumentManagerController', () => {
         ]);
 
         (req.locals.api.triggerEvent as jest.Mock).mockReturnValue({
+          id: '1234',
           state,
           [uploadFields.field2]: ['an-existing-doc', 'uploaded-file.jpg'],
         });
@@ -137,6 +140,7 @@ describe('DocumentManagerController', () => {
     it("uploading throws an error if the case isn't in a Draft state as applicant 1", async () => {
       const req = mockRequest({
         userCase: {
+          id: '1234',
           state: State.Submitted,
           applicant1DocumentsUploaded: ['an-existing-doc'],
         },
@@ -157,6 +161,7 @@ describe('DocumentManagerController', () => {
     ])('throws an error if no files were uploaded - %o', async ({ state }) => {
       const req = mockRequest({
         userCase: {
+          id: '1234',
           state,
         },
       });
@@ -180,6 +185,7 @@ describe('DocumentManagerController', () => {
     ])('redirects if no files were uploaded & JavaScript is disabled - %o', async ({ state, redirectUrl }) => {
       const req = mockRequest({
         userCase: {
+          id: '1234',
           state,
         },
       });
@@ -203,6 +209,7 @@ describe('DocumentManagerController', () => {
     ])('redirects if deleting & JavaScript is disabled - %o', async ({ state, redirectUrl }) => {
       const req = mockRequest({
         userCase: {
+          id: '1234',
           state,
         },
       });
@@ -234,6 +241,7 @@ describe('DocumentManagerController', () => {
     ])('deletes an existing file - %o', async ({ state, uploadFields, redirectUrl }) => {
       const req = mockRequest({
         userCase: {
+          id: '1234',
           state,
           [uploadFields.field1]: [
             { id: '1', value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } } },
@@ -297,6 +305,7 @@ describe('DocumentManagerController', () => {
         const req = mockRequest({
           //isApplicant2,
           userCase: {
+            id: '1234',
             state,
             [uploadFields.field1]: [
               { id: '1', value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } } },
@@ -380,6 +389,7 @@ describe('DocumentManagerController', () => {
     ])('handles file uploads - %o', async ({ state, uploadFields }) => {
       const req = mockRequest({
         userCase: {
+          id: '1234',
           state,
           [uploadFields.field1]: ['an-existing-doc'],
         },
@@ -399,6 +409,7 @@ describe('DocumentManagerController', () => {
       ]);
 
       (req.locals.api.triggerEvent as jest.Mock).mockReturnValue({
+        id: '1234',
         state,
         [uploadFields.field2]: ['an-existing-doc', 'uploaded-file.jpg'],
       });
@@ -455,6 +466,7 @@ describe('DocumentManagerController', () => {
       async ({ state, uploadFields, redirectUrl }) => {
         const req = mockRequest({
           userCase: {
+            id: '1234',
             state,
             [uploadFields.field1]: ['an-existing-doc'],
           },
@@ -473,6 +485,7 @@ describe('DocumentManagerController', () => {
         ]);
 
         (req.locals.api.triggerEvent as jest.Mock).mockReturnValue({
+          id: '1234',
           state,
           [uploadFields.field2]: ['an-existing-doc', 'uploaded-file.jpg'],
         });
