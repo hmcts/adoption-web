@@ -37,6 +37,7 @@ export const saveDraftCase = async (req: AppRequest, caseRef: string, formData: 
   let ttl = await req.app.locals.draftStoreClient.ttl(caseRef);
   if (draftCaseFromRedis) {
     dataToStore = { ...draftCaseFromRedis, ...dataToStore };
+    req.session.userCase = { ...req.session.userCase, ...dataToStore };
   } else if (ttl > 0) {
     dataToStore = { ...dataToStore };
   } else {
