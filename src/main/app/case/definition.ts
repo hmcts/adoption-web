@@ -711,6 +711,9 @@ export interface CaseData {
   checkYourAnswersReturn: false;
   changeAddressBothApplicants: YesOrNo;
   status: State;
+  laSotFullName: string;
+  laSotJobtitle: string;
+  laNameSot: string;
 }
 
 export interface Children {
