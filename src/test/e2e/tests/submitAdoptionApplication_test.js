@@ -75,25 +75,7 @@ Scenario(
     await reviewPayAndSubmitPage.statementOfTruthDetailsSection();
     await reviewPayAndSubmitPage.adoptionCourtFeesByCard();
     const caseId = await reviewPayAndSubmitPage.getCaseIDAfterAplicationSubmit();
-
-    await landingPage.searchForCaseInLALandingPage(caseId);
-
-    //  LA - Add child's details
-
-    await taskListPage.selectChildrenBirthCertificate();
-    await childrenBirthCertificatePage.childDetailsBirthCertificaterSection();
-    await taskListPage.verifyChildBirthCertificateDetailsStatus();
-
-    await taskListPage.selectChildBirthMotherDetails();
-    await childBirthMothersDetailsPage.childBirthMothersDetailsSection();
-    await taskListPage.verifyChildBirthMotherDetailsStatus();
-
-    await taskListPage.selectChildBirthFatherDetails();
-    await childBirthFatherDetailsPage.childBirthFatherDetailsSection();
-    await taskListPage.verifyChildBirthFatherDetailsStatus();
-
-    await taskListPage.selectChildOtherParentDetails();
-    await childOtherParentDetailsPage.childOtherParentDetailsSection();
+    await reviewPayAndSubmitPage.verifyDownloadDocumentlink();
 
     await taskListPage.verifyChildOtherParentDetailsStatus();
 

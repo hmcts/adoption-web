@@ -23,6 +23,8 @@ module.exports = {
     caseID: '.govuk-panel__body strong',
     changeChildMoveInDate: 'a[href="/date-child-moved-in?returnUrl=/review-pay-submit/check-your-answers"]',
     cancelpayment: 'input[id$="cancel-payment"]',
+    applicationSubmittedText: 'Application Submitted',
+    documentDownloadlink: '//a[.="Download or print your application"]',
   },
   async selectNoPCQOption() {
     await I.wait(5);
@@ -138,5 +140,9 @@ module.exports = {
     await I.retry(3).waitForText('Statement of truth', 30);
     await I.retry(3).click('Confirm');
     await I.wait(4);
+  },
+  async verifyDownloadDocumentlink() {
+    await I.retry(3).waitForText(this.fields.applicationSubmittedText);
+    await I.retry(3).waitForElement(this.fields.documentDownloadlink);
   },
 };
