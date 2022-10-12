@@ -3,6 +3,7 @@ import config from 'config';
 import type { Response } from 'express';
 import { v4 as generateUuid } from 'uuid';
 
+import { saveDraftCase } from '../../modules/draft-store/draft-store-service';
 import { LA_PORTAL_UPLOAD_YOUR_DOCUMENTS, PAY_YOUR_FEE, UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
 import { CaseWithId } from '../case/case';
@@ -66,6 +67,11 @@ export class DocumentManagerController {
       { [documentsKey]: updatedDocumentsUploaded },
       this.getEventName(req)
     );
+    const uploadDocument = await saveDraftCase(req, req.session.userCase.id, {
+      [documentsKey]: updatedDocumentsUploaded,
+    });
+
+    console.log(uploadDocument);
 
     req.session.save(() => {
       if (req.headers.accept?.includes('application/json')) {
