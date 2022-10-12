@@ -82,7 +82,7 @@ export default class PayYourFeeGetController extends GetController {
       feeCode: fee.FeeCode,
       amount: parseInt(fee.FeeAmount, 10),
       status: PaymentStatus.IN_PROGRESS,
-      channel: payment._links.next_url.href,
+      channel: payment.channel,
       reference: payment.reference,
       transactionId: payment.external_reference,
     });

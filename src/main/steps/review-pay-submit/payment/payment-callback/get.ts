@@ -37,7 +37,7 @@ export default class PaymentCallbackGetController {
     }
 
     logger.info(`caseId=${caseId} lastPaymentTransactionId=${lastPaymentAttempt.transactionId}`);
-    payments.setStatus(lastPaymentAttempt.transactionId, payment?.status);
+    payments.setStatus(lastPaymentAttempt.transactionId, payment?.status, payment?.channel);
 
     req.session.userCase = await req.locals.api.addPayment(req.session.userCase.id, payments.list);
 
