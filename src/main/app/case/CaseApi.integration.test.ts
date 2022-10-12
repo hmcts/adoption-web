@@ -32,8 +32,8 @@ describe('CaseApi', () => {
       info: jest.fn().mockImplementation((message: string) => message),
     } as unknown as LoggerInstance;
 
-    api = new CaseApi(mockedAxios, userDetails, mockLogger);
-    // api = new CaseApi(mockedAxios, mockLogger);
+    // api = new CaseApi(mockedAxios, userDetails, mockLogger);
+    api = new CaseApi(mockedAxios, mockLogger);
   });
 
   afterEach(() => {
@@ -56,12 +56,12 @@ describe('CaseApi', () => {
   });
 
   test('Should create a case if one is not found', async () => {
-    mockedAxios.get.mockResolvedValueOnce({
-      data: [],
-    });
-    // mockedAxios.post.mockResolvedValueOnce({
-    //   data: { cases: [] },
+    // mockedAxios.get.mockResolvedValueOnce({
+    //   data: [],
     // });
+    mockedAxios.post.mockResolvedValueOnce({
+      data: { cases: [] },
+    });
     const results = {
       data: {
         id: '1234',
@@ -82,12 +82,12 @@ describe('CaseApi', () => {
   });
 
   test('Should throw error when case could not be created', async () => {
-    // mockedAxios.post.mockResolvedValueOnce({
-    //   data: { cases: [] },
-    // });
-    mockedAxios.get.mockResolvedValueOnce({
-      data: [],
+    mockedAxios.post.mockResolvedValueOnce({
+      data: { cases: [] },
     });
+    // mockedAxios.get.mockResolvedValueOnce({
+    //   data: [],
+    // });
     mockedAxios.get.mockResolvedValueOnce({ data: { token: '123' } });
     mockedAxios.post.mockRejectedValue({
       config: { method: 'POST', url: 'https://example.com' },
@@ -102,12 +102,12 @@ describe('CaseApi', () => {
   test('Should throw an error if more than one cases are found', async () => {
     const mockCase = { case_data: {} };
 
-    mockedAxios.get.mockResolvedValue({
-      data: [mockCase, mockCase, mockCase],
-    });
-    // mockedAxios.post.mockResolvedValue({
-    //   data: { cases: [mockCase, mockCase, mockCase] },
+    // mockedAxios.get.mockResolvedValue({
+    //   data: [mockCase, mockCase, mockCase],
     // });
+    mockedAxios.post.mockResolvedValue({
+      data: { cases: [mockCase, mockCase, mockCase] },
+    });
 
     await expect(api.getOrCreateCase(serviceType, userDetails)).rejects.toThrow('Too many cases assigned to user.');
   });
@@ -124,12 +124,12 @@ describe('CaseApi', () => {
     //   case_data: {},
     // };
 
-    // mockedAxios.post.mockResolvedValue({
-    //   data: { cases: [firstMockCase] },
-    // });
-    mockedAxios.get.mockResolvedValue({
-      data: [firstMockCase],
+    mockedAxios.post.mockResolvedValue({
+      data: { cases: [firstMockCase] },
     });
+    // mockedAxios.get.mockResolvedValue({
+    //   data: [firstMockCase],
+    // });
 
     const userCase = await api.getOrCreateCase(serviceType, userDetails);
 
