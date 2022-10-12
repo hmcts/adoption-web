@@ -75,6 +75,7 @@ Scenario(
     await reviewPayAndSubmitPage.statementOfTruthDetailsSection();
     await reviewPayAndSubmitPage.adoptionCourtFeesByCard();
     const caseId = await reviewPayAndSubmitPage.getCaseIDAfterAplicationSubmit();
+    await reviewPayAndSubmitPage.verifyDownloadDocumentlink();
 
     await landingPage.searchForCaseInLALandingPage(caseId);
 
