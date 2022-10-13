@@ -40,7 +40,7 @@ const cy: typeof en = content => ({
     'Efallai bydd y llys eisiau defnyddio eich cyfeiriad e-bost i gyflwyno gorchmynion llys arnoch, A ydych yn hapus i neuchmynion llys gael eu cyflwyno arnoch drwy e-bost?',
   errors: {
     applicant1ContactDetailsConsent: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: 'Dewiswch a ydych yn hapus i gael eich gorchmynion llys drwy e-bost.',
     },
     applicant1EmailAddress: {
       required: 'Nac ydwdwch eich cyfeiriad e-bost',

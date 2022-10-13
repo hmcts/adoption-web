@@ -13,7 +13,7 @@ const en = {
   label: 'What language do you want to receive emails and documents in?',
   errors: {
     applicant1LanguagePreference: {
-      required: 'Please answer the question',
+      required: 'Select whether you want to receive emails and documents in English or Welsh',
     },
   },
 };
@@ -23,7 +23,7 @@ const cy = {
   label: 'Ym mha iaith yr hoffech gael negeseuon e-bost a dogfennau?',
   errors: {
     applicant1LanguagePreference: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: 'Dewiswch a ydych eisiau eich e-byst a’ch dogfennau yn Gymraeg neu’n Saesneg',
     },
   },
 };
