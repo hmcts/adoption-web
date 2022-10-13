@@ -193,6 +193,9 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   familyCourtEmailId: 'familyCourtEmailId',
   hyphenatedCaseRef: 'hyphenatedCaseRef',
   otherPlacementOrderType: 'otherPlacementOrderType',
+  laSotFullName: 'laSotFullName',
+  laSotJobtitle: 'laSotJobtitle',
+  laNameSot: 'laNameSot',
 };
 
 export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data: InputFormat): OutputFormat {
@@ -429,6 +432,10 @@ export interface Case {
   kbaCaseRef?: string;
   kbaChildName?: string;
   kbaChildrenDateOfBirth?: string;
+  /***** LA Statement of truth *****/
+  laSotFullName?: string;
+  laSotJobtitle?: string;
+  laNameSot?: string;
 }
 
 export interface CaseWithId extends Case {

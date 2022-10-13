@@ -110,6 +110,7 @@ export class PostController<T extends AnyObject> {
     } else {
       try {
         if ([LA_PORTAL_STATEMENT_OF_TRUTH?.toString()].includes(req.url)) {
+          await saveDraftCase(req, caseRefId || '', formData);
           const modifiedValuesSet = await getDraftCaseFromStore(req, caseRefId || '');
           req.session.userCase = await req.locals.api.triggerEvent(caseRefId, modifiedValuesSet, eventName);
           removeCaseFromRedis(req, caseRefId);
