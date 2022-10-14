@@ -24,10 +24,10 @@ const en = (fieldPrefix: FieldPrefix) => ({
       addButtonNotClicked: "Select 'Add' to save your previous names",
     },
     [`${fieldPrefix}OtherFirstNames`]: {
-      required: 'Enter your first names',
+      required: 'Enter your previous first names',
     },
     [`${fieldPrefix}OtherLastNames`]: {
-      required: 'Enter your last names',
+      required: 'Enter your previous last names',
     },
     addAnotherName: {
       required: 'Please answer the question',
@@ -52,10 +52,10 @@ const cy: typeof en = (fieldPrefix: FieldPrefix) => ({
       addButtonNotClicked: "Dewiswch 'Ychwanegu' i gadw eich enwau blaenorol",
     },
     [`${fieldPrefix}OtherFirstNames`]: {
-      required: 'Nac ydwdwch eich enw(au) cyntaf',
+      required: 'Rhowch eich enwau cyntaf blaenorol',
     },
     [`${fieldPrefix}OtherLastNames`]: {
-      required: 'Nac ydwdwch eich cyfenw(au)',
+      required: 'Rhowch eich enwau olaf blaenorol',
     },
     addAnotherName: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',

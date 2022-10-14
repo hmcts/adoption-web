@@ -30,7 +30,7 @@ const en = () => ({
       required: 'Enter the town or city',
     },
     adopAgencyPostcode: {
-      required: 'Enter a postcode, like AA1 1AA',
+      required: 'Enter postcode, like AA1 1AA',
     },
     adopAgencyOrLaContactEmail: {
       required: 'Enter an email address',
@@ -47,7 +47,7 @@ const cy: typeof en = () => ({
   adopAgencyPhone: 'Rhif ffôn',
   adopAgencyAddressLine1: 'Llinell gyntaf y cyfeiriad',
   adopAgencyTown: 'Tref neu ddinas',
-  adopAgencyPostcode: 'Cod post',
+  adopAgencyPostcode: 'Cod post, fel AA1 1AA',
   adopAgencyContactEmail: 'Cyfeiriad e-bost eich cyswllt',
   errors: {
     adopAgencyOrLaName: {

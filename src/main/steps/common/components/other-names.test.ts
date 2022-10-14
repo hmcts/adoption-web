@@ -29,10 +29,10 @@ const enContent = {
       addButtonNotClicked: "Select 'Add' to save your previous names",
     },
     applicant1OtherFirstNames: {
-      required: 'Enter your first names',
+      required: 'Enter your previous first names',
     },
     applicant1OtherLastNames: {
-      required: 'Enter your last names',
+      required: 'Enter your previous last names',
     },
     addAnotherName: {
       required: 'Please answer the question',
@@ -56,10 +56,10 @@ const cyContent = {
       addButtonNotClicked: "Dewiswch 'Ychwanegu' i gadw eich enwau blaenorol",
     },
     applicant1OtherFirstNames: {
-      required: 'Nac ydwdwch eich enw(au) cyntaf',
+      required: 'Rhowch eich enwau cyntaf blaenorol',
     },
     applicant1OtherLastNames: {
-      required: 'Nac ydwdwch eich cyfenw(au)',
+      required: 'Rhowch eich enwau olaf blaenorol',
     },
     addAnotherName: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
