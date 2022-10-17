@@ -457,7 +457,6 @@ const formatDocument = (userCase: Partial<CaseWithId>) => {
       documentFileNames = userCase.laUploadedFiles.map(item => item.name);
     } else {
       documentFileNames = userCase.laUploadedFiles ? JSON.parse(userCase?.laUploadedFiles).map(item => item.name) : [];
-      console.log('<<<<<<>>>>>  ' + documentFileNames);
     }
     return documentFileNames?.join('<br>');
   }
