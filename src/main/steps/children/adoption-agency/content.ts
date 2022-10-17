@@ -31,6 +31,7 @@ const en = () => ({
     },
     adopAgencyPostcode: {
       required: 'Enter postcode, like AA1 1AA',
+      invalid: 'Enter valid postcode in the correct format, like AA1 1AA',
     },
     adopAgencyOrLaContactEmail: {
       required: 'Enter an email address',
@@ -68,6 +69,7 @@ const cy: typeof en = () => ({
     },
     adopAgencyPostcode: {
       required: 'Cod post, fel AA1 1AA',
+      invalid: 'Enter valid postcode in the correct format, like AA1 1AA',
     },
     adopAgencyOrLaContactEmail: {
       required: 'Rhowch gyfeiriad e-bost',
