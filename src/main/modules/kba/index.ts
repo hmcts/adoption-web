@@ -41,13 +41,32 @@ export class KbaMiddleware {
         if (req.session?.user) {
           res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
-          //   if (!req.session.userCase) {
-          try {
-            req.session.userCase = await req.locals.api.getCaseById(req.session.laPortalKba.kbaCaseRef!);
-            const draftStoreUserCaseData = await getDraftCaseFromStore(req, req.session.laPortalKba?.kbaCaseRef || '');
-            if (draftStoreUserCaseData) {
-              req.session.userCase = { ...(req.session.userCase || {}), ...draftStoreUserCaseData };
+          if (!req.session.userCase) {
+            try {
+              req.session.userCase = await req.locals.api.getCaseById(req.session.laPortalKba.kbaCaseRef!);
+              const draftStoreUserCaseData = await getDraftCaseFromStore(
+                req,
+                req.session.laPortalKba?.kbaCaseRef || ''
+              );
+              if (draftStoreUserCaseData) {
+                req.session.userCase = { ...(req.session.userCase || {}), ...draftStoreUserCaseData };
+              }
+              if (
+                JSON.stringify(req.session.userCase.childrenDateOfBirth) !==
+                  JSON.stringify(req.session.laPortalKba['kbaChildrenDateOfBirth']) ||
+                req.session.laPortalKba['kbaChildName']?.trim() !==
+                  req.session.userCase.childrenFirstName + ' ' + req.session.userCase.childrenLastName
+              ) {
+                req.session.destroy(() => res.redirect(LA_PORTAL_NEG_SCENARIO));
+                return;
+              }
+            } catch (err) {
+              req.session.destroy(() => {
+                console.log('API error');
+                return;
+              });
             }
+          } else if (req.session.userCase) {
             if (
               JSON.stringify(req.session.userCase.childrenDateOfBirth) !==
                 JSON.stringify(req.session.laPortalKba['kbaChildrenDateOfBirth']) ||
@@ -57,15 +76,8 @@ export class KbaMiddleware {
               req.session.destroy(() => res.redirect(LA_PORTAL_NEG_SCENARIO));
               return;
             }
-          } catch (err) {
-            req.session.destroy(() => {
-              console.log('API error');
-              return;
-            });
           }
-          // }
         }
-
         return next();
       })
     );
