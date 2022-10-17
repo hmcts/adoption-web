@@ -52,7 +52,13 @@ export const areDateFieldsFilledIn: DateValidator = fields => {
 
   const someFieldsMissing = values.some(value => !value);
   if (someFieldsMissing) {
-    if (!fields.day) {
+    if (!fields.day && !fields.month) {
+      return 'incompleteDayAndMonth';
+    } else if (!fields.day && !fields.year) {
+      return 'incompleteDayAndYear';
+    } else if (!fields.month && !fields.year) {
+      return 'incompleteMonthAndYear';
+    } else if (!fields.day) {
       return 'incompleteDay';
     } else if (!fields.month) {
       return 'incompleteMonth';
