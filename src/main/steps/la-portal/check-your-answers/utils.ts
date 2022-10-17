@@ -452,7 +452,13 @@ export const uploadedDocumentSummaryList = (
 
 const formatDocument = (userCase: Partial<CaseWithId>) => {
   if ((userCase.laUploadedFiles as unknown as string) !== '[]') {
-    const documentFileNames = userCase.laUploadedFiles?.map(item => item.name);
+    let documentFileNames;
+    if (typeof userCase.laUploadedFiles === 'object') {
+      documentFileNames = userCase.laUploadedFiles.map(item => item.name);
+    } else {
+      documentFileNames = userCase.laUploadedFiles ? JSON.parse(userCase?.laUploadedFiles).map(item => item.name) : [];
+      console.log('<<<<<<>>>>>  ' + documentFileNames);
+    }
     return documentFileNames?.join('<br>');
   }
 };
