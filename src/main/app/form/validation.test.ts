@@ -59,12 +59,12 @@ describe('Validation', () => {
 
     test('Should check if day does not exist', async () => {
       const isValid = areDateFieldsFilledIn({ day: '', month: '12', year: '' });
-      expect(isValid).toStrictEqual('incompleteDay');
+      expect(isValid).toStrictEqual('incompleteDayAndYear');
     });
 
     test('Should check if month does not exist', async () => {
       const isValid = areDateFieldsFilledIn({ day: '12', month: '', year: '' });
-      expect(isValid).toStrictEqual('incompleteMonth');
+      expect(isValid).toStrictEqual('incompleteMonthAndYear');
     });
 
     test('Should check if year does not exist', async () => {

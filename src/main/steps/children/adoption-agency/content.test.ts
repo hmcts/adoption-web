@@ -38,6 +38,7 @@ const enContent = {
     },
     adopAgencyPostcode: {
       required: 'Enter postcode, like AA1 1AA',
+      invalid: 'Enter postcode, like AA1 1AA',
     },
     adopAgencyOrLaContactEmail: {
       required: 'Enter an email address',
@@ -75,6 +76,7 @@ const cyContent = {
     },
     adopAgencyPostcode: {
       required: 'Cod post, fel AA1 1AA',
+      invalid: 'Cod post, fel AA1 1AA',
     },
     adopAgencyOrLaContactEmail: {
       required: 'Rhowch gyfeiriad e-bost',
