@@ -13,7 +13,7 @@ const en = {
     line4: 'If you need support for the online adoption service, contact your social worker or adoption agency.',
   },
   [StatusCodes.INTERNAL_SERVER_ERROR]: {
-    title: 'The details provided does not match with the details that are available on our database',
+    title: 'Sorry, there is a problem with the online adoption service',
     info: 'Please try again later. We have saved your answers.',
   },
 };
