@@ -61,7 +61,6 @@ export class KbaMiddleware {
                 return;
               }
             } catch (err) {
-              //if(req.session.userCase == null)   {
               if (!req.session.userCase) {
                 req.session.destroy(() => res.redirect(LA_PORTAL_NEG_SCENARIO));
                 return;
