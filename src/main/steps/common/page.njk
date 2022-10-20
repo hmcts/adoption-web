@@ -82,12 +82,10 @@ ADOP-1231-LAPortal-Welsh-Translation starts #}
       {% block error_summary %}
         {% include "common/error/summary.njk" %}
       {% endblock %}
-     <fieldset class="govuk-fieldset">
+
       {% block page_content %}
         {% if title %}
-        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
            <h1 class="govuk-heading-l govuk-!-margin-bottom-2">{{ title }}</h1>
-        </legend>   
         {% endif %}
       {% endblock %}
 
@@ -102,9 +100,7 @@ ADOP-1231-LAPortal-Welsh-Translation starts #}
           {% include "common/form/contactForHelp.njk"%}
         {% endblock %}
       {% endif %}
-     </fieldset> 
     </div>
-  
 </div>
 {% endblock %}
 
