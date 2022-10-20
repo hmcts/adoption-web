@@ -5,7 +5,7 @@ import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
 
 const en = () => ({
   section: "Other parent's details",
-  label: 'Do you have the address of the other person with parental responsibility for the child?',
+  title: 'Do you have the address of the other person with parental responsibility for the child?',
   moreDetails: "Give a reason why the address is not known, for example 'no fixed address'.",
   errors: {
     otherParentAddressKnown: {
@@ -20,7 +20,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: 'Manylion y rhiant arall',
-  label: 'A oes gennych gyfeiriad yr unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn?',
+  title: 'A oes gennych gyfeiriad yr unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn?',
   moreDetails: 'Rhowch reswm pam bod y cyfeiriad yn anhysbys, er enghraifft ‘dim cyfeiriad parhaol’.',
   errors: {
     otherParentAddressKnown: {
@@ -38,7 +38,7 @@ export const form: FormContent = {
     otherParentAddressKnown: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.title,
       section: l => l.section,
       hint: l => l.hint,
       values: [
