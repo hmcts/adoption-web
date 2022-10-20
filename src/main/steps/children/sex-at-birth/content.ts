@@ -5,7 +5,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
   section: "The child's details",
-  label: "What was the child's sex at birth?",
+  title: "What was the child's sex at birth?",
   male: 'Male',
   female: 'Female',
   other: 'Other',
@@ -23,7 +23,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: 'Manylion y plentyn',
-  label: 'Beth oedd rhyw’r plentyn pan gafodd ei (g)eni?',
+  title: 'Beth oedd rhyw’r plentyn pan gafodd ei (g)eni?',
   male: 'Gwryw',
   female: 'Benyw',
   other: 'Arall',
@@ -44,7 +44,7 @@ export const form: FormContent = {
     childrenSexAtBirth: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.title,
       section: l => l.section,
       values: [
         { label: l => l.male, value: Gender.MALE },

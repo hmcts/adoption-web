@@ -6,7 +6,7 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
   section: SECTION,
-  label: 'Are you, and the other applicant if relevant, both aged 21 or over?',
+  title: 'Are you, and the other applicant if relevant, both aged 21 or over?',
   under21Yes: 'You must be 21 or over to adopt a child. This includes any other applicant.',
   moreInfo: 'More about adoption',
   errors: {
@@ -18,7 +18,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  label: 'Ydych chi, a’r ceisydd arall os yw’n berthnasol, yn 21 oed neu’n hŷn?',
+  title: 'Ydych chi, a’r ceisydd arall os yw’n berthnasol, yn 21 oed neu’n hŷn?',
   under21Yes: 'Rhaid i chi fod yn 21 oed o leiaf i fabwysiadu plentyn. Mae hyn yn cynnwys unrhyw geisydd arall.',
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
   errors: {
@@ -33,7 +33,7 @@ export const form: FormContent = {
     under21Eligible: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.title,
       section: l => l.section,
       labelHidden: false,
       values: [
