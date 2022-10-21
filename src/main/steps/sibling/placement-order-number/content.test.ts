@@ -9,7 +9,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: 'Sibling details',
-  label: 'What is the serial or case number on the order?',
+  title: 'What is the serial or case number on the order?',
   errors: {
     siblingPoNumber: {
       required: 'Please answer the question',
@@ -19,7 +19,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
-  label: 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn?',
+  title: 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn?',
   errors: {
     siblingPoNumber: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
@@ -57,7 +57,7 @@ describe('sibling > placement-order-number > content', () => {
     const siblingPoNumberField = fields.siblingPoNumber as FormOptions;
     expect(siblingPoNumberField.type).toBe('text');
     expect(siblingPoNumberField.classes).toBe('govuk-label govuk-input--width-10');
-    expect((siblingPoNumberField.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((siblingPoNumberField.label as Function)(generatedContent)).toBe(enContent.title);
     expect(siblingPoNumberField.labelSize).toBe('l');
     expect(siblingPoNumberField.attributes).toEqual({ spellcheck: false });
     expect((siblingPoNumberField as FormInput).value).toBe('MOCK_PLACEMENT_ORDER_NUMBER');

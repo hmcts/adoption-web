@@ -5,7 +5,7 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
   section: SECTION,
-  label: 'What is the serial or case number on the order?',
+  title: 'What is the serial or case number on the order?',
   errors: {
     siblingPoNumber: {
       required: 'Please answer the question',
@@ -15,7 +15,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  label: 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn?',
+  title: 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn?',
   errors: {
     siblingPoNumber: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
@@ -30,7 +30,7 @@ export const form: FormContent = {
       siblingPoNumber: {
         type: 'text',
         classes: 'govuk-label govuk-input--width-10',
-        label: l => l.label,
+        label: l => l.title,
         value: sibling?.siblingPoNumber,
         labelSize: 'l',
         attributes: {

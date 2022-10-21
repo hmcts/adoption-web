@@ -1,1 +1,17 @@
-{% include "./input.njk" %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+{{ govukInput({
+  id: field.id if field.id else fieldName,
+  name: fieldName,
+  type: field.type,
+  classes: field.classes,
+  hint: {
+    html: getContent(field.hint)
+  } if field.hint else undefined,
+  value: field.value if field.value !== undefined else userCase[fieldName],
+  attributes: field.attributes,
+  errorMessage: null if field.hideError else getError(fieldName),
+  formGroup: {
+    classes: "hidden " + field.id if field.hidden else field.id
+  }
+}) }}
