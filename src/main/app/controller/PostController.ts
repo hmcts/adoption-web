@@ -129,9 +129,14 @@ export class PostController<T extends AnyObject> {
   protected redirect(req: AppRequest<T>, res: Response, nextUrl?: string): void {
     let target;
     if (req.body['saveAsDraft']) {
-      //redirects to task-list page in case of save-as-draft button click
-      req.session.returnUrl = undefined;
-      target = req.path.startsWith(LA_PORTAL) ? LA_PORTAL_TASK_LIST : SAVE_AS_DRAFT;
+      if (req.session.errors?.length) {
+        //redirects to same page in case of validation errors
+        target = req.url;
+      } else {
+        //redirects to task-list page in case of save-as-draft button click
+        req.session.returnUrl = undefined;
+        target = req.path.startsWith(LA_PORTAL) ? LA_PORTAL_TASK_LIST : SAVE_AS_DRAFT;
+      }
     } else if (req.session.errors?.length) {
       //redirects to same page in case of validation errors
       target = req.url;
