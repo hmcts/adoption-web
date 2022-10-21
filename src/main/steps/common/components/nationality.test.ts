@@ -14,7 +14,7 @@ jest.mock('../../../app/form/validation');
 const EN = 'en';
 const fieldPrefix = FieldPrefix.BIRTH_MOTHER;
 const enContent = {
-  label: 'What is your nationality?',
+  title: 'What is your nationality?',
   hint: 'Select all options that are relevant.',
   british: 'British',
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish',
@@ -37,7 +37,7 @@ const enContent = {
 };
 
 const cyContent = {
-  label: 'Beth yw eich cenedligrwydd?',
+  title: 'Beth yw eich cenedligrwydd?',
   hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
   british: 'Prydeinig',
   britishSubtext: 'gan gynnwys Saesneg, Albanaidd, Cymraeg a Gwyddelig Gogledd Iwerddon',
@@ -81,7 +81,7 @@ describe('nationality content', () => {
     const { type, label, labelSize, hint, values, validator } = fields.birthMotherNationality as FormOptions;
 
     expect(type).toBe('checkboxes');
-    expect((label as Function)(generatedContent)).toBe(enContent.label);
+    expect((label as Function)(generatedContent)).toBe(enContent.title);
     expect(labelSize).toBe('l');
     expect((hint as Function)(generatedContent)).toBe(enContent.hint);
     expect(values).toHaveLength(5);
@@ -106,7 +106,7 @@ describe('nationality content', () => {
       const { type, label, labelSize, hint, values, validator } = fields.childrenNationality as FormOptions;
 
       expect(type).toBe('checkboxes');
-      expect((label as Function)(generatedContent)).toBe(enContent.label);
+      expect((label as Function)(generatedContent)).toBe(enContent.title);
       expect(labelSize).toBe('l');
       expect((hint as Function)(generatedContent)).toBe(enContent.hint);
       expect(values).toHaveLength(5);
