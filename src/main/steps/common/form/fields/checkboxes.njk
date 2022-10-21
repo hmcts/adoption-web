@@ -5,18 +5,10 @@
   <input type="hidden" value="" name="{{ checkbox.name }}">
 {% endfor %}
 
-{% set legendClasses %}govuk-fieldset__legend--{% if field.labelSize %}{{ field.labelSize }}{% else %}s{% endif %}{% endset %}
 {{ govukCheckboxes({
   classes: field.classes,
   idPrefix: field.id if field.id else fieldName,
   name: fieldName,
-  fieldset: {
-    legend: {
-      text: getContent(field.label),
-      classes: legendClasses,
-      isPageHeading: true if not title else undefined
-    }
-  } if not field.labelHidden,
   hint: {
     html: getContent(field.hint)
   } if field.hint,
