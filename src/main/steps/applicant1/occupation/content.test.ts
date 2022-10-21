@@ -9,7 +9,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: 'First applicant',
-  label: "What's your occupation?",
+  title: "What's your occupation?",
   hint: 'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’.',
   warningText: {
     text: 'This information will appear on the adoption certificate.',
@@ -69,7 +69,7 @@ describe('applicant1 > occupation > content', () => {
     const applicant1Occupation = fields.applicant1Occupation;
 
     expect(applicant1Occupation.type).toBe('text');
-    expect((applicant1Occupation.label as Function)(generateContent(commonContent))).toBe(enContent.label);
+    expect((applicant1Occupation.label as Function)(generateContent(commonContent))).toBe(enContent.title);
     expect((applicant1Occupation.hint as Function)(generateContent(commonContent))).toBe(enContent.hint);
     expect(applicant1Occupation.labelSize).toBe('l');
 
@@ -84,7 +84,7 @@ describe('applicant1 > occupation > content', () => {
     const form1 = generatedContent1.form as FormContent;
     const fields1 = form1.fields as FormFields;
     const applicant1Occupation = fields1.applicant1Occupation;
-    expect((applicant1Occupation.label as Function)(generateContent(commonContent1))).toBe(enContent.label);
+    expect((applicant1Occupation.label as Function)(generateContent(commonContent1))).toBe(enContent.title);
   });
 
   it('should have an occupation label when language: cy and  applyingWith: alone', () => {
