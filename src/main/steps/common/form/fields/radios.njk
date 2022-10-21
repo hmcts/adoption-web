@@ -4,12 +4,20 @@
     classes: field.classes,
     idPrefix: field.id if field.id else fieldName,
     name: fieldName,
+    fieldset: {
+      legend: {
+        text: getContent(field.label),
+        isPageHeading: true if not title,
+        classes: "hidden" if field.labelHidden else legendClasses
+      }
+    },
     hint: {
       html: getContent(field.hint)
-    },
+    } if field.hint else undefined,
     items: formItems(field.values, userCase[fieldName]),
     errorMessage: getError(fieldName),
     formGroup: {
-      classes: "govuk-visually-hidden " + field.id if field.hidden else field.id
+      classes: "hidden " + field.id if field.hidden else field.id
     }
   }) }}
+

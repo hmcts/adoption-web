@@ -3,6 +3,13 @@
 {{ govukDateInput({
   id: field.id if field.id else fieldName,
   namePrefix: fieldName,
+  fieldset: {
+    legend: {
+      text: getContent(field.label),
+      classes: "hidden" if field.labelHidden else "govuk-fieldset__legend--l",
+      isPageHeading: true if not title
+    }
+  },
   hint: {
     html: getContent(field.hint)
   },

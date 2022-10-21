@@ -11,7 +11,7 @@ import {
 
 const en = () => ({
   section: "The child's details",
-  label: "What is the child's date of birth?",
+  title: "What is the child's date of birth?",
   hint: "For example, 31 3 2012. This should be on their birth certificate. Ask the adoption agency or social worker if you're not sure.",
   day: '',
   month: '',
@@ -31,7 +31,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: 'Manylion y plentyn',
-  label: 'Beth yw dyddiad geni’r plentyn?',
+  title: 'Beth yw dyddiad geni’r plentyn?',
   hint: 'Er enghraifft, 31 3 2012. Dylai hyn fod wedi’i nodi ar eu tystysgrif geni. Holwch gyda’r asiantaeth fabwysiadu neu’r gweithiwr cymdeithasol os nad ydych yn siŵr.',
   day: '',
   month: '',
@@ -54,7 +54,7 @@ export const form: FormContent = {
     childrenDateOfBirth: {
       type: 'date',
       classes: 'govuk-date-input',
-      label: l => l.label,
+      label: l => l.title,
       hint: l => l.hint,
       labelSize: 'l',
       attributes: {
