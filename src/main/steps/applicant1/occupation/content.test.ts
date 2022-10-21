@@ -33,7 +33,7 @@ const enContent = {
 };
 const cyContent = {
   section: 'Ceisydd cyntaf',
-  label: 'Beth yw eich galwedigaeth?',
+  title: 'Beth yw eich galwedigaeth?',
   hint: 'Nodwch eich galwedigaeth yn llawn. Er enghraifft, ‘Athro Ysgol Uwchradd’ yn hytrach na ‘Athro’ yn unig. Os ydych yn hunangyflogedig, dywedwch hynny. Er enghraifft, ‘Saer hunangyflogedig.’',
   warningText: {
     text: 'Bydd yr wybodaeth hon yn ymddangos ar y dystysgrif mabwysiadu.',
@@ -94,7 +94,7 @@ describe('applicant1 > occupation > content', () => {
     const form1 = generatedContent1.form as FormContent;
     const fields1 = form1.fields as FormFields;
     const applicant1Occupation = fields1.applicant1Occupation;
-    expect((applicant1Occupation.label as Function)(generateContent(commonContent1))).toBe(cyContent.label);
+    expect((applicant1Occupation.label as Function)(generateContent(commonContent1))).toBe(cyContent.title);
   });
 
   it('should contain submit button', () => {

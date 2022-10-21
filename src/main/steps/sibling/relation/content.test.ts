@@ -10,7 +10,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: 'Sibling details',
-  label: 'What is their relationship to the child being adopted?',
+  title: 'What is their relationship to the child being adopted?',
   sister: 'Sister',
   halfSister: 'Half-sister',
   stepSister: 'Step-sister',
@@ -25,7 +25,7 @@ const enContent = {
 };
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
-  label: 'Beth yw eu perthynas i’r plentyn sy’n cael ei fabwysiadu?',
+  title: 'Beth yw eu perthynas i’r plentyn sy’n cael ei fabwysiadu?',
   sister: 'Chwaer',
   halfSister: 'Hanner chwaer',
   stepSister: 'Llyschwaer',
@@ -72,7 +72,7 @@ describe('sibling > relation > content', () => {
     const relationField = fields.selectedSiblingRelation as FormOptions;
     expect(relationField.type).toBe('radios');
     expect(relationField.classes).toBe('govuk-radios');
-    expect((relationField.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((relationField.label as Function)(generatedContent)).toBe(enContent.title);
     expect((relationField.values[0].label as Function)(generatedContent)).toBe(enContent.sister);
     expect(relationField.values[0].value).toBe(SiblingRelationships.SISTER);
     expect((relationField.values[1].label as Function)(generatedContent)).toBe(enContent.halfSister);
