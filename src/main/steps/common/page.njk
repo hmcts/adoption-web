@@ -78,12 +78,11 @@ ADOP-1231-LAPortal-Welsh-Translation starts #}
 
 {% block content %}
 <div class="govuk-grid-row">
-  <fieldset class="govuk-fieldset"> 
     <div class="govuk-grid-column-two-thirds">
       {% block error_summary %}
         {% include "common/error/summary.njk" %}
       {% endblock %}
-  
+
       {% block page_content %}
         {% if title %}
            <h1 class="govuk-fieldset__heading">{{ title }}</h1>
@@ -95,14 +94,13 @@ ADOP-1231-LAPortal-Welsh-Translation starts #}
           {% include "common/form/form.njk"%}
         {% endblock %}
       {% endif %}
-   
+
       {% if not getContent(form.hideContactHelpSection) %}
         {% block contactUs %}
           {% include "common/form/contactForHelp.njk"%}
         {% endblock %}
       {% endif %}
     </div>
-  </fieldset>
 </div>
 {% endblock %}
 
