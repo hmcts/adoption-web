@@ -5,7 +5,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
   section: 'Second applicant',
-  label: 'What language do you want to receive emails and documents in?',
+  title: 'What language do you want to receive emails and documents in?',
   errors: {
     applicant2LanguagePreference: {
       required: 'Please answer the question',
@@ -15,7 +15,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: 'Ail geisydd',
-  label: 'Ym mha iaith yr hoffech gael negeseuon e-bost a dogfennau?',
+  title: 'Ym mha iaith yr hoffech gael negeseuon e-bost a dogfennau?',
   errors: {
     applicant2LanguagePreference: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
@@ -28,7 +28,7 @@ export const form: FormContent = {
     applicant2LanguagePreference: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.title,
       section: l => l.section,
       values: [
         { label: l => l.english, value: LanguagePreference.ENGLISH },
