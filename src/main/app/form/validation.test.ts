@@ -57,12 +57,17 @@ describe('Validation', () => {
       expect(isValid).toStrictEqual('required');
     });
 
-    test('Should check if day does not exist', async () => {
+    test('Should check if day and year does not exist', async () => {
       const isValid = areDateFieldsFilledIn({ day: '', month: '12', year: '' });
       expect(isValid).toStrictEqual('incompleteDayAndYear');
     });
 
-    test('Should check if month does not exist', async () => {
+    test('Should check if day and month does not exist', async () => {
+      const isValid = areDateFieldsFilledIn({ day: '', month: '', year: '2001' });
+      expect(isValid).toStrictEqual('incompleteDayAndMonth');
+    });
+
+    test('Should check if month and year does not exist', async () => {
       const isValid = areDateFieldsFilledIn({ day: '12', month: '', year: '' });
       expect(isValid).toStrictEqual('incompleteMonthAndYear');
     });
@@ -70,6 +75,16 @@ describe('Validation', () => {
     test('Should check if year does not exist', async () => {
       const isValid = areDateFieldsFilledIn({ day: '21', month: '12', year: '' });
       expect(isValid).toStrictEqual('incompleteYear');
+    });
+
+    test('Should check if day does not exist', async () => {
+      const isValid = areDateFieldsFilledIn({ day: '', month: '12', year: '2021' });
+      expect(isValid).toStrictEqual('incompleteDay');
+    });
+
+    test('Should check if month does not exist', async () => {
+      const isValid = areDateFieldsFilledIn({ day: '12', month: '', year: '2021' });
+      expect(isValid).toStrictEqual('incompleteMonth');
     });
 
     test('Should check if object does not exist', async () => {
