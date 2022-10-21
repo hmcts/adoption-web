@@ -140,7 +140,6 @@ describe('Accessibility', () => {
     urls.CHILDREN_FIND_PLACEMENT_ORDER_COURT,
     urls.CHILDREN_FIND_FAMILY_COURT,
     urls.CHILDREN_PLACEMENT_ORDER_COURT,
-    urls.CHECK_ELIGIBILITY_URL_UNDER_18,
   ];
   const urlsToTest = Object.values(urls).filter(url => !IGNORED_URLS.includes(url) && !url.startsWith(urls.LA_PORTAL));
 

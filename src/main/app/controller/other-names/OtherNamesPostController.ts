@@ -16,11 +16,13 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
     const form = new Form(fields);
-    const { saveAndSignOut, saveBeforeSessionTimeout, _csrf, addButton, ...formData } = form.getParsedBody(req.body);
+    const { saveAndSignOut, saveBeforeSessionTimeout, _csrf, addButton, cancelButton, ...formData } =
+      form.getParsedBody(req.body);
 
     const addButtonClicked = req.body.addAnotherNameHidden || req.body.addButton;
-
+    console.log(addButtonClicked);
     req.session.errors = form.getErrors(req.body);
+    console.log(formData);
     Object.assign(req.session.userCase, formData);
 
     if (req.session.errors.length === 0) {
@@ -38,7 +40,6 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
           req.session.userCase[`${this.fieldPrefix}OtherFirstNames`] = '';
           req.session.userCase[`${this.fieldPrefix}OtherLastNames`] = '';
         }
-
         req.session.userCase = await this.save(
           req,
           {
@@ -47,6 +48,13 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
           },
           this.getEventName(req)
         );
+      } else if (
+        formData[`${this.fieldPrefix}OtherFirstNames`] &&
+        formData[`${this.fieldPrefix}OtherLastNames`] &&
+        cancelButton
+      ) {
+        req.session.userCase[`${this.fieldPrefix}OtherFirstNames`] = '';
+        req.session.userCase[`${this.fieldPrefix}OtherLastNames`] = '';
       } else if (formData[`${this.fieldPrefix}OtherFirstNames`] && formData[`${this.fieldPrefix}OtherLastNames`]) {
         req.session.errors.push({
           propertyName: `${this.fieldPrefix}HasOtherNames`,
@@ -56,10 +64,15 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
       } else {
         req.session.userCase = await this.save(req, formData, this.getEventName(req));
       }
+    } else if (req.session.userCase[`${this.fieldPrefix}AdditionalNames`]?.length && cancelButton) {
+      req.session.userCase[`${this.fieldPrefix}OtherFirstNames`] = '';
+      req.session.userCase[`${this.fieldPrefix}OtherLastNames`] = '';
+      req.session.errors = [];
     } else if (req.session.userCase[`${this.fieldPrefix}AdditionalNames`]?.length && !addButtonClicked) {
       // Remove validation errors when there is more than one additional name
       // and user clicked "Save and Continue" button directly without expanding the details component
       const ignoreErrorFields = [`${this.fieldPrefix}OtherFirstNames`, `${this.fieldPrefix}OtherLastNames`];
+      console.log(ignoreErrorFields);
       req.session.errors = req.session.errors.filter(item => !ignoreErrorFields.includes(item.propertyName));
     }
 
@@ -67,10 +80,9 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
       // This is required so that details component will be displayed in open state along with errors
       req.session.userCase.addAnotherNameHidden = `${!!addButtonClicked}`;
     }
-
     this.filterErrorsForSaveAsDraft(req);
 
-    if (req.session.errors.length > 0 || addButton) {
+    if (req.session.errors.length > 0 || addButton || cancelButton) {
       this.redirect(req, res, req.url);
       return;
     }

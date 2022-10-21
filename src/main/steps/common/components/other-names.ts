@@ -16,6 +16,7 @@ const en = (fieldPrefix: FieldPrefix) => ({
   [`${fieldPrefix}OtherFirstNames`]: 'Add your previous first names',
   [`${fieldPrefix}OtherLastNames`]: 'Add your previous last names',
   add: 'Add',
+  cancel: 'Cancel',
   another: 'Add another name',
   remove: 'Remove',
   errors: {
@@ -43,6 +44,7 @@ const cy: typeof en = (fieldPrefix: FieldPrefix) => ({
   no: 'Nac ydw',
   [`${fieldPrefix}OtherFirstNames`]: 'Ychwanegwch eich enw(au) cyntaf blaenorol',
   [`${fieldPrefix}OtherLastNames`]: 'Ychwanegwch eich cyfenw(au) blaenorol',
+  cancel: 'Cancel',
   add: 'Ychwanegu',
   another: 'Ychwanegu enw arall',
   remove: 'Dileu',
@@ -126,6 +128,12 @@ export const otherNamesFields = (userCase: Partial<Case>, fieldPrefix: FieldPref
                       label: l => l.add,
                       classes: 'govuk-button--secondary',
                       value: 'addButton',
+                    },
+                    cancelButton: {
+                      type: 'button',
+                      label: l => l.cancel,
+                      classes: 'govuk-button--secondary',
+                      value: 'cancelButton',
                     },
                   },
                   validator: () => doesArrayHaveValues(userCase[`${fieldPrefix}AdditionalNames`]),
