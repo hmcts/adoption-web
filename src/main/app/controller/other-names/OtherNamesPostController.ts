@@ -20,9 +20,7 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
       form.getParsedBody(req.body);
 
     const addButtonClicked = req.body.addAnotherNameHidden || req.body.addButton;
-    console.log(addButtonClicked);
     req.session.errors = form.getErrors(req.body);
-    console.log(formData);
     Object.assign(req.session.userCase, formData);
 
     if (req.session.errors.length === 0) {
@@ -72,7 +70,6 @@ export default class OtherNamesPostController extends PostController<AnyObject> 
       // Remove validation errors when there is more than one additional name
       // and user clicked "Save and Continue" button directly without expanding the details component
       const ignoreErrorFields = [`${this.fieldPrefix}OtherFirstNames`, `${this.fieldPrefix}OtherLastNames`];
-      console.log(ignoreErrorFields);
       req.session.errors = req.session.errors.filter(item => !ignoreErrorFields.includes(item.propertyName));
     }
 
