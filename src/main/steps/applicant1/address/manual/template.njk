@@ -1,1 +1,20 @@
-{% extends "common/template.njk" %}
+{% extends "common/page.njk" %}
+
+{% block page_content %}
+  {% if section %}
+    <span class="govuk-caption-l">{{ section }}</span>
+  {% endif %}
+<fieldset class="govuk-fieldset">  
+  {% if title %}
+  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+    <h1 class="govuk-fieldset__heading">{{ title }}</h1>
+  </legend>    
+  {% endif %}
+  {% if line1 %}
+    <div class="govuk-hint">{{ line1 }}</div>
+  {% endif %}
+  {% if line2 %}
+    <p class="govuk-body">{{ line2 }}</p>
+  {% endif %}
+</fieldset>  
+{% endblock %}
