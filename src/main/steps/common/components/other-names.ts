@@ -8,7 +8,7 @@ import { APPLICANT_1_OTHER_NAMES, APPLICANT_2_OTHER_NAMES } from '../../urls';
 import { CommonContent } from '../common.content';
 
 const en = (fieldPrefix: FieldPrefix) => ({
-  title: 'Have you ever legally been known by any other names?',
+  label: 'Have you ever legally been known by any other names?',
   example: 'For example, your name before marriage.',
   previousNameYes: "List each previous name separately and select 'Add'",
   yes: 'Yes',
@@ -37,7 +37,7 @@ const en = (fieldPrefix: FieldPrefix) => ({
 });
 
 const cy: typeof en = (fieldPrefix: FieldPrefix) => ({
-  title: 'A ydych erioed wedi’ch adnabod yn gyfreithiol dan unrhyw enwau eraill?',
+  label: 'A ydych erioed wedi’ch adnabod yn gyfreithiol dan unrhyw enwau eraill?',
   example: 'Er enghraifft, eich enw cyn ichi briodi.',
   previousNameYes: 'Rhestrwch bob enw blaenorol ar wahân a dewiswch ‘Ychwanegu’',
   yes: 'Ydw',
@@ -74,7 +74,7 @@ export const otherNamesFields = (userCase: Partial<Case>, fieldPrefix: FieldPref
   [`${fieldPrefix}HasOtherNames`]: {
     type: 'radios',
     classes: 'govuk-radios',
-    label: l => l.title,
+    label: l => l.label,
     hint: l => l.example,
     section: l => l.section,
     values: [

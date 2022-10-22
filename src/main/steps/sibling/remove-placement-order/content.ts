@@ -47,7 +47,7 @@ const en = content => {
 
   return {
     ...enContent,
-    title: `Are you sure you want to remove this ${
+    label: `Are you sure you want to remove this ${
       !enContent.siblingPOType[placementOrderText]
         ? 'order'
         : enContent.siblingPOType[getPlacementOrderType(content.userCase)].toLowerCase()
@@ -91,7 +91,7 @@ const cy: typeof en = content => {
 
   return {
     ...cyContent,
-    title: `Ydych chi’n siwr eich bod eisiau dileu hwn ${
+    label: `Ydych chi’n siwr eich bod eisiau dileu hwn ${
       !cyContent.siblingPOType[placementOrderText]
         ? 'order'
         : cyContent.siblingPOType[getPlacementOrderType(content.userCase)].toLowerCase()
@@ -108,7 +108,7 @@ export const form: FormContent = {
     confirm: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.title,
+      label: l => l.label,
       section: l => l.section,
       values: [
         { label: l => l.yes, value: YesOrNo.YES },

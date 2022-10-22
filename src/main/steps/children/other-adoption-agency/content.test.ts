@@ -10,7 +10,7 @@ jest.mock('../../../app/form/validation');
 
 const en = {
   section: 'Application details',
-  title: 'Is there another adoption agency or local authority involved?',
+  label: 'Is there another adoption agency or local authority involved?',
   hint: 'This would be separate from your local authority, for example it could be a private agency or a different local authority.',
   errors: {
     hasAnotherAdopAgencyOrLA: {
@@ -21,7 +21,7 @@ const en = {
 
 const cy = {
   section: 'Manylion y cais',
-  title: 'A oes asiantaeth fabwysiadu neu awdurdod lleol arall yn gysylltiedig â’r achos?',
+  label: 'A oes asiantaeth fabwysiadu neu awdurdod lleol arall yn gysylltiedig â’r achos?',
   hint: "Byddai hyn ar wahân i'ch awdurdod lleol, er enghraifft gallai fod yn asiantaeth breifat neu'n awdurdod lleol gwahanol.",
   errors: {
     hasAnotherAdopAgencyOrLA: {

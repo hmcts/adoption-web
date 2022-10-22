@@ -10,7 +10,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: 'Sibling details',
-  title: 'Does the child have any siblings or half siblings with court orders?',
+  label: 'Does the child have any siblings or half siblings with court orders?',
   conditionalText:
     '<label class="govuk-label">You will be asked to provide each sibling court order individually.</label>',
   errors: {
@@ -22,7 +22,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
-  title: 'A oes gan y plentyn frodyr/chwiorydd neu hanner brodyr/chwiorydd sydd â gorchmynion llys?',
+  label: 'A oes gan y plentyn frodyr/chwiorydd neu hanner brodyr/chwiorydd sydd â gorchmynion llys?',
   conditionalText:
     '<label class="govuk-label">Gofynnir i chi ddarparu pob gorchymyn llys brodyr a chwiorydd yn unigol.</label>',
   errors: {
@@ -57,7 +57,7 @@ describe('sibling > exists > content', () => {
     const field = fields.hasSiblings as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
-    expect((field.label as Function)(generatedContent)).toBe(enContent.title);
+    expect((field.label as Function)(generatedContent)).toBe(enContent.label);
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesNoNotsure.YES);

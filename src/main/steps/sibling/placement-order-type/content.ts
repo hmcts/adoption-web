@@ -6,7 +6,7 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
   section: SECTION,
-  title: 'What type of order is it?',
+  label: 'What type of order is it?',
   adoptionOrder: 'Adoption order',
   careOrder: 'Care order',
   contactOrder: 'Contact order',
@@ -27,7 +27,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  title: 'Pa fath o orchymyn ydyw?',
+  label: 'Pa fath o orchymyn ydyw?',
   adoptionOrder: 'Gorchymyn Mabwysiadu',
   careOrder: 'Gorchymyn Gofal',
   contactOrder: 'Gorchymyn Cyswllt',
@@ -53,7 +53,7 @@ export const form: FormContent = {
       selectedSiblingPoType: {
         type: 'radios',
         classes: 'govuk-radios',
-        label: l => l.title,
+        label: l => l.label,
         values: [
           { label: l => l.adoptionOrder, value: SiblingPOType.ADOPTION_ORDER },
           { label: l => l.careOrder, value: SiblingPOType.CARE_ORDER },

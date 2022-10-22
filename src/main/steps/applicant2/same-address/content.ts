@@ -5,7 +5,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = content => ({
   section: 'Second applicant',
-  title: 'Do you also live at this address?',
+  label: 'Do you also live at this address?',
   yes: 'Yes',
   no: 'No',
   applicant1Address: `<div class="govuk-inset-text">${content.userCase.applicant1Address1}<br>${content.userCase.applicant1AddressTown}<br>${content.userCase.applicant1AddressPostcode}</div>`,
@@ -18,7 +18,7 @@ const en = content => ({
 
 const cy: typeof en = content => ({
   section: 'Ail geisydd',
-  title: 'A ydych chi’n byw yn y cyfeiriad hwn hefyd?',
+  label: 'A ydych chi’n byw yn y cyfeiriad hwn hefyd?',
   yes: 'Ydw',
   no: 'Nac ydw',
   applicant1Address: `<div class="govuk-inset-text">${content.userCase.applicant1Address1}<br>${content.userCase.applicant1AddressTown}<br>${content.userCase.applicant1AddressPostcode}</div>`,
@@ -34,7 +34,7 @@ export const form: FormContent = {
     applicant2AddressSameAsApplicant1: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.title,
+      label: l => l.label,
       section: l => l.section,
       hint: l => l.applicant1Address,
       values: [

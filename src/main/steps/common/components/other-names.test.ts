@@ -13,7 +13,7 @@ jest.mock('../../../app/form/validation');
 
 const EN = 'en';
 const enContent = {
-  title: 'Have you ever legally been known by any other names?',
+  label: 'Have you ever legally been known by any other names?',
   example: 'For example, your name before marriage.',
   previousNameYes: "List each previous name separately and select 'Add'",
   yes: 'Yes',
@@ -40,7 +40,7 @@ const enContent = {
   },
 };
 const cyContent = {
-  title: 'A ydych erioed wedi’ch adnabod yn gyfreithiol dan unrhyw enwau eraill?',
+  label: 'A ydych erioed wedi’ch adnabod yn gyfreithiol dan unrhyw enwau eraill?',
   example: 'Er enghraifft, eich enw cyn ichi briodi.',
   previousNameYes: 'Rhestrwch bob enw blaenorol ar wahân a dewiswch ‘Ychwanegu’',
   yes: 'Ydw',
@@ -90,7 +90,7 @@ describe('other names content', () => {
 
     expect(type).toBe('radios');
     expect(classes).toBe('govuk-radios');
-    expect((label as Function)(generatedContent)).toBe(enContent.title);
+    expect((label as Function)(generatedContent)).toBe(enContent.label);
     expect((hint as Function)(generatedContent)).toBe(enContent.example);
     expect((section as Function)(generatedContent)).toBe(undefined);
     expect(values).toHaveLength(2);

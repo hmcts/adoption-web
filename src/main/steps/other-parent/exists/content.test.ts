@@ -10,7 +10,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: "Other parent's details",
-  title: 'Is there another person who has parental responsibility for the child?',
+  label: 'Is there another person who has parental responsibility for the child?',
   one: 'Yes',
   two: 'No',
   errors: {
@@ -22,7 +22,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y rhiant arall',
-  title: 'A oes unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn?',
+  label: 'A oes unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn?',
   one: 'Ydw',
   two: 'Nac ydw',
   errors: {
@@ -55,7 +55,7 @@ describe('other-parent > exists > content', () => {
     const field = fields.otherParentExists as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
-    expect((field.label as Function)(generatedContent)).toBe(enContent.title);
+    expect((field.label as Function)(generatedContent)).toBe(enContent.label);
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesOrNo.YES);

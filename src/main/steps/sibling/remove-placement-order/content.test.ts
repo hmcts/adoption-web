@@ -27,7 +27,7 @@ const enContent = {
     [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order',
     [SiblingPOType.OTHER]: 'Other',
   },
-  title: "Are you sure you want to remove this adoption order for child's sister?",
+  label: "Are you sure you want to remove this adoption order for child's sister?",
   errors: {
     confirm: {
       required: 'Please select an answer',
@@ -54,7 +54,7 @@ const cyContent = {
     [SiblingPOType.SUPERVIS_ORDER]: 'Gorchymyn Goruchwylio',
     [SiblingPOType.OTHER]: 'Arall',
   },
-  title: 'Ydych chi’n siwr eich bod eisiau dileu hwn gorchymyn mabwysiadu ar gyfer chwaer y plentyn?',
+  label: 'Ydych chi’n siwr eich bod eisiau dileu hwn gorchymyn mabwysiadu ar gyfer chwaer y plentyn?',
   errors: {
     confirm: {
       required: 'Dewiswch ateb os gwelwch yn dda',
@@ -98,7 +98,7 @@ describe('sibling > remove-placement-order > content', () => {
       siblingRelation: undefined,
       siblingPoType: undefined,
       expected: {
-        title: "Are you sure you want to remove this order for child's sibling?",
+        label: "Are you sure you want to remove this order for child's sibling?",
         siblingPoType: undefined,
       },
     },
@@ -107,7 +107,7 @@ describe('sibling > remove-placement-order > content', () => {
       siblingRelation: SiblingRelationships.SISTER,
       siblingPoType: SiblingPOType.ADOPTION_ORDER,
       expected: {
-        title: "Are you sure you want to remove this adoption order for child's sister?",
+        label: "Are you sure you want to remove this adoption order for child's sister?",
         siblingPoType: SiblingPOType.ADOPTION_ORDER,
       },
     },
@@ -116,7 +116,7 @@ describe('sibling > remove-placement-order > content', () => {
     commonContent.userCase!.siblings![0]!.siblingRelation = siblingRelation;
     commonContent.userCase!.siblings![0]!.siblingPoType = siblingPoType;
     generatedContent = generateContent(commonContent);
-    expect(generatedContent.title).toBe(expected.title);
+    expect(generatedContent.label).toBe(expected.label);
   });
 
   test('should contain confirm radio field', () => {
@@ -124,7 +124,7 @@ describe('sibling > remove-placement-order > content', () => {
     const field = fields.confirm as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
-    expect((field.label as Function)(generatedContent)).toBe(enContent.title);
+    expect((field.label as Function)(generatedContent)).toBe(enContent.label);
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesOrNo.YES);

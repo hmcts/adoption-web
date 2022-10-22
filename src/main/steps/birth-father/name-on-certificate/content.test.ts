@@ -9,7 +9,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: "Birth father's details",
-  title: "Is the birth father's name on the birth certificate?",
+  label: "Is the birth father's name on the birth certificate?",
   errors: {
     birthFatherNameOnCertificate: {
       required: 'Please answer the question',
@@ -19,7 +19,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y tad biolegol',
-  title: 'A yw enw’r tad biolegol ar y dystysgrif geni?',
+  label: 'A yw enw’r tad biolegol ar y dystysgrif geni?',
   errors: {
     birthFatherNameOnCertificate: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
@@ -52,7 +52,7 @@ describe('birth-father > still-alive > content', () => {
     const field = fields.birthFatherNameOnCertificate as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
-    expect((field.label as Function)(generatedContent)).toBe(enContent.title);
+    expect((field.label as Function)(generatedContent)).toBe(enContent.label);
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesNoNotsure.YES);

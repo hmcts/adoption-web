@@ -10,7 +10,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: "The child's details",
-  title: "What was the child's sex at birth?",
+  label: "What was the child's sex at birth?",
   male: 'Male',
   female: 'Female',
   other: 'Other',
@@ -28,7 +28,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y plentyn',
-  title: 'Beth oedd rhyw’r plentyn pan gafodd ei (g)eni?',
+  label: 'Beth oedd rhyw’r plentyn pan gafodd ei (g)eni?',
   male: 'Gwryw',
   female: 'Benyw',
   other: 'Arall',
@@ -62,7 +62,7 @@ describe('children > sex-at-birth > content', () => {
     const childrenSexAtBirthField = fields.childrenSexAtBirth as FormOptions;
     expect(childrenSexAtBirthField.type).toBe('radios');
     expect(childrenSexAtBirthField.classes).toBe('govuk-radios');
-    expect((childrenSexAtBirthField.label as Function)(generatedContent)).toBe(enContent.title);
+    expect((childrenSexAtBirthField.label as Function)(generatedContent)).toBe(enContent.label);
     expect((childrenSexAtBirthField.section as Function)(generatedContent)).toBe(enContent.section);
     expect((childrenSexAtBirthField.values[0].label as Function)(generatedContent)).toBe(enContent.male);
     expect(childrenSexAtBirthField.values[0].value).toBe(Gender.MALE);

@@ -6,7 +6,7 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
   section: SECTION,
-  title: 'Does the child have any siblings or half siblings with court orders?',
+  label: 'Does the child have any siblings or half siblings with court orders?',
   conditionalText:
     '<label class="govuk-label">You will be asked to provide each sibling court order individually.</label>',
   errors: {
@@ -18,7 +18,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  title: 'A oes gan y plentyn frodyr/chwiorydd neu hanner brodyr/chwiorydd sydd â gorchmynion llys?',
+  label: 'A oes gan y plentyn frodyr/chwiorydd neu hanner brodyr/chwiorydd sydd â gorchmynion llys?',
   conditionalText:
     '<label class="govuk-label">Gofynnir i chi ddarparu pob gorchymyn llys brodyr a chwiorydd yn unigol.</label>',
   errors: {
@@ -33,7 +33,7 @@ export const form: FormContent = {
     hasSiblings: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.title,
+      label: l => l.label,
       section: l => l.section,
       hint: l => l.hint,
       values: [

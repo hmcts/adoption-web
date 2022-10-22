@@ -10,7 +10,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: "Birth mother's details",
-  title: "Is the child's birth mother still alive?",
+  label: "Is the child's birth mother still alive?",
   moreDetails:
     "Provide more details. For example, 'the birth mother is uncontactable'. Your adoption agency or social worker can help you to complete this section.",
   errors: {
@@ -25,7 +25,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y fam fiolegol',
-  title: 'A yw mam fiolegol y plentyn dal yn fyw?',
+  label: 'A yw mam fiolegol y plentyn dal yn fyw?',
   moreDetails:
     'Darparwch fwy o fanylion. Er enghraifft, ‘nid oes modd cysylltu â’r fam fiolegol’. Gall eich asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol eich helpu i lenwi’r rhan hon. ',
   errors: {
@@ -63,7 +63,7 @@ describe('birth-mother > still-alive > content', () => {
     const field = fields.birthMotherStillAlive as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
-    expect((field.label as Function)(generatedContent)).toBe(enContent.title);
+    expect((field.label as Function)(generatedContent)).toBe(enContent.label);
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesNoNotsure.YES);

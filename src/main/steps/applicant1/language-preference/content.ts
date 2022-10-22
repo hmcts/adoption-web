@@ -8,7 +8,7 @@ const en = ({ userCase }: CommonContent) => {
   const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant' : 'First applicant';
   return {
     section,
-    title: 'What language do you want to receive emails and documents in?',
+    label: 'What language do you want to receive emails and documents in?',
     errors: {
       applicant1LanguagePreference: {
         required: 'Select whether you want to receive emails and documents in English or Welsh',
@@ -21,7 +21,7 @@ const cy: typeof en = ({ userCase }: CommonContent) => {
   const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Ceisydd' : 'Ceisydd cyntaf';
   return {
     section,
-    title: 'Ym mha iaith yr hoffech gael negeseuon e-bost a dogfennau?',
+    label: 'Ym mha iaith yr hoffech gael negeseuon e-bost a dogfennau?',
     errors: {
       applicant1LanguagePreference: {
         required: 'Dewiswch a ydych eisiau eich e-byst a’ch dogfennau yn Gymraeg neu’n Saesneg',
@@ -35,7 +35,7 @@ export const form: FormContent = {
     applicant1LanguagePreference: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.title,
+      label: l => l.label,
       section: l => l.section,
       values: [
         { label: l => l.english, value: LanguagePreference.ENGLISH },

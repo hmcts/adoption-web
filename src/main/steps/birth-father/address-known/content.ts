@@ -5,7 +5,7 @@ import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
 
 const en = () => ({
   section: "Birth father's details",
-  title: 'Do you have the birth father’s last known address?',
+  label: 'Do you have the birth father’s last known address?',
   moreDetails: "Give a reason why the address is not known, for example 'no fixed address'.",
   errors: {
     birthFatherAddressKnown: {
@@ -20,7 +20,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: 'Manylion y tad biolegol',
-  title: 'A oes gennych gyfeiriad olaf hysbys y tad biolegol?',
+  label: 'A oes gennych gyfeiriad olaf hysbys y tad biolegol?',
   moreDetails: 'Rhowch reswm pam bod y cyfeiriad yn anhysbys, er enghraifft ‘dim cyfeiriad parhaol’.',
   errors: {
     birthFatherAddressKnown: {
@@ -38,7 +38,7 @@ export const form: FormContent = {
     birthFatherAddressKnown: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.title,
+      label: l => l.label,
       section: l => l.section,
       hint: l => l.hint,
       values: [

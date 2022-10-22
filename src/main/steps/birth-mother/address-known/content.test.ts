@@ -10,7 +10,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: "Birth mother's details",
-  title: "Do you have the birth mother's last known address?",
+  label: "Do you have the birth mother's last known address?",
   moreDetails: "Give a reason why the address is not known, for example 'no fixed address'.",
   errors: {
     birthMotherAddressKnown: {
@@ -25,7 +25,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y fam fiolegol',
-  title: 'A oes gennych cyfeiriad olaf hysbys y fam fiolegol?',
+  label: 'A oes gennych cyfeiriad olaf hysbys y fam fiolegol?',
   moreDetails: 'Rhowch reswm pam bod y cyfeiriad yn anhysbys, er enghraifft ‘dim cyfeiriad parhaol’.',
   errors: {
     birthMotherAddressKnown: {
@@ -63,7 +63,7 @@ describe('birth-mother > address-known > content', () => {
     const field = fields.birthMotherAddressKnown as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
-    expect((field.label as Function)(generatedContent)).toBe(enContent.title);
+    expect((field.label as Function)(generatedContent)).toBe(enContent.label);
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesOrNo.YES);

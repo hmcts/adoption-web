@@ -5,7 +5,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
   section: "Birth father's details",
-  title: "Is the birth father's identity known? ",
+  label: "Is the birth father's identity known? ",
   errors: {
     birthFatherIdentityKnown: {
       required: 'Please answer the question',
@@ -15,7 +15,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: 'Manylion y tad biolegol',
-  title: 'A yw’r tad biolegol yn hysbys?',
+  label: 'A yw’r tad biolegol yn hysbys?',
   errors: {
     birthFatherIdentityKnown: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
@@ -28,7 +28,7 @@ export const form: FormContent = {
     birthFatherIdentityKnown: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.title,
+      label: l => l.label,
       section: l => l.section,
       values: [
         { label: l => l.yes, value: YesNoNotsure.YES },
