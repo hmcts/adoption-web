@@ -6,7 +6,7 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
   section: SECTION,
-  label: 'Is there another person who has parental responsibility for the child?',
+  title: 'Is there another person who has parental responsibility for the child?',
   one: 'Yes',
   two: 'No',
   errors: {
@@ -18,7 +18,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  label: 'A oes unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn?',
+  title: 'A oes unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn?',
   one: 'Ydw',
   two: 'Nac ydw',
   errors: {
@@ -33,7 +33,7 @@ export const form: FormContent = {
     otherParentExists: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.title,
       section: l => l.section,
       hint: l => l.hint,
       values: [

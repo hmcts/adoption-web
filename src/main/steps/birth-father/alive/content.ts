@@ -6,7 +6,7 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
   section: SECTION,
-  label: "Is the child's birth father still alive?",
+  title: "Is the child's birth father still alive?",
   moreDetails:
     "Provide more details. For example, 'the birth father is uncontactable'. Your adoption agency or social worker can help you to complete this section.",
   hint: 'If this person has died, you will need to provide the death certificate.',
@@ -22,7 +22,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  label: 'A yw tad biolegol y plentyn dal yn fyw?',
+  title: 'A yw tad biolegol y plentyn dal yn fyw?',
   moreDetails:
     'Darparwch fwy o fanylion. Er enghraifft, ‘nid oes modd cysylltu â’r tad biolegol’. Gall eich asiantaeth fabwysiadu neu eich gweithiwr cymdeithasol eich helpu i lenwi’r rhan hon.',
   hint: "Os yw’r unigolyn hwn wedi marw, bydd angen i chi ddarparu'r dystysgrif marwolaeth.",
@@ -41,7 +41,7 @@ export const form: FormContent = {
     birthFatherStillAlive: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.title,
       section: l => l.section,
       values: [
         { label: l => l.yes, value: YesNoNotsure.YES },
