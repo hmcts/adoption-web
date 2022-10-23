@@ -8,7 +8,7 @@ const en = ({ userCase }: CommonContent) => {
   const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant' : 'First applicant';
   return {
     section,
-    title: "What's your occupation?",
+    label: "What's your occupation?",
     hint: 'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’.',
     warningText: {
       text: 'This information will appear on the adoption certificate.',
@@ -36,7 +36,7 @@ const cy: typeof en = ({ userCase }: CommonContent) => {
   const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Ceisydd' : 'Ceisydd cyntaf';
   return {
     section,
-    title: 'Beth yw eich galwedigaeth?',
+    label: 'Beth yw eich galwedigaeth?',
     hint: 'Nodwch eich galwedigaeth yn llawn. Er enghraifft, ‘Athro Ysgol Uwchradd’ yn hytrach na ‘Athro’ yn unig. Os ydych yn hunangyflogedig, dywedwch hynny. Er enghraifft, ‘Saer hunangyflogedig.’',
     warningText: {
       text: 'Bydd yr wybodaeth hon yn ymddangos ar y dystysgrif mabwysiadu.',
@@ -58,7 +58,7 @@ export const form: FormContent = {
   fields: {
     applicant1Occupation: {
       type: 'text',
-      label: l => l.title,
+      label: l => l.label,
       labelSize: 'l',
       hint: l => l.hint,
       validator: isFieldFilledIn,

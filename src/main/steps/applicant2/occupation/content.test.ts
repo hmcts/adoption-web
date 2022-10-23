@@ -9,7 +9,7 @@ jest.mock('../../../app/form/validation');
 const EN = 'en';
 const enContent = {
   section: 'Second applicant',
-  title: "What's your occupation?",
+  label: "What's your occupation?",
   hint: 'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’.',
   warningText: {
     text: 'This information will appear on the adoption certificate.',
@@ -34,7 +34,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Ail geisydd',
-  title: 'Beth yw eich galwedigaeth?',
+  label: 'Beth yw eich galwedigaeth?',
   hint: 'Nac ydwdwch eich galwedigaeth yn llawn. Er enghraifft, ‘Athro Ysgol Uwchradd’ yn hytrach nac ‘Athro’ yn unig. Os ydych yn hunangyflogedig, dywedwch hynny. Er enghraifft, ‘Saer hunangyflogedig.’',
   warningText: {
     text: 'Bydd yr wybodaeth hon yn ymddangos ar y dystysgrif mabwysiadu.',
@@ -70,7 +70,7 @@ describe('applicant2 > occupation > content', () => {
     const applicant2Occupation = fields.applicant2Occupation;
 
     expect(applicant2Occupation.type).toBe('text');
-    expect((applicant2Occupation.label as Function)(generateContent(commonContent))).toBe(enContent.title);
+    expect((applicant2Occupation.label as Function)(generateContent(commonContent))).toBe(enContent.label);
     expect((applicant2Occupation.hint as Function)(generateContent(commonContent))).toBe(enContent.hint);
     expect(applicant2Occupation.labelSize).toBe('l');
 

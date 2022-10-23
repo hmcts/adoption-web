@@ -4,7 +4,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
   section: 'Second applicant',
-  title: "What's your occupation?",
+  label: "What's your occupation?",
   hint: 'Enter your full occupation. For example, ‘Secondary school teacher’ rather than just ‘Teacher’. If you’re self employed, say so. For example, ‘Self employed carpenter’.',
   warningText: {
     text: 'This information will appear on the adoption certificate.',
@@ -29,7 +29,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: 'Ail geisydd',
-  title: 'Beth yw eich galwedigaeth?',
+  label: 'Beth yw eich galwedigaeth?',
   hint: 'Nac ydwdwch eich galwedigaeth yn llawn. Er enghraifft, ‘Athro Ysgol Uwchradd’ yn hytrach nac ‘Athro’ yn unig. Os ydych yn hunangyflogedig, dywedwch hynny. Er enghraifft, ‘Saer hunangyflogedig.’',
   warningText: {
     text: 'Bydd yr wybodaeth hon yn ymddangos ar y dystysgrif mabwysiadu.',
@@ -50,7 +50,7 @@ export const form: FormContent = {
   fields: {
     applicant2Occupation: {
       type: 'text',
-      label: l => l.title,
+      label: l => l.label,
       labelSize: 'l',
       hint: l => l.hint,
       validator: isFieldFilledIn,
