@@ -80,7 +80,7 @@ module.exports = {
     await I.retry(3).waitForText('What language do you want to receive emails and documents in?');
     await I.retry(3).click('Save and continue');
     await I.wait(4);
-    await I.retry(3).see('Please answer the question');
+    await I.retry(3).see('Select whether you want to receive emails and documents in English or Welsh');
     await I.wait(4);
     await I.retry(3).click(this.fields.applicant1LanguageEnglish);
     await I.wait(4);
