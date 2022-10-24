@@ -6,8 +6,8 @@
   type: field.type,
   classes: field.classes,
   label: {
-    html: getContent(field.label) if not field.labelHidden else "",
-    classes: labelClasses,
+    html: getContent(field.label) if not field.labelHidden else undefined,
+    classes: "hidden" if field.labelHidden else labelClasses,
     isPageHeading: true if not title else undefined
   },
   hint: {
