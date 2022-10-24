@@ -143,6 +143,11 @@ describe('Accessibility', () => {
     urls.APPLICANT_1_OCCUPATION,
     urls.APPLICANT_2_OCCUPATION,
     urls.CHILDREN_PLACEMENT_ORDER_NUMBER,
+    urls.SIBLING_ORDER_CASE_NUMBER,
+    urls.BIRTH_MOTHER_OCCUPATION,
+    urls.BIRTH_FATHER_OCCUPATION,
+    urls.LA_PORTAL_BIRTH_MOTHER_OCCUPATION,
+    urls.LA_PORTAL_BIRTH_FATHER_OCCUPATION,
   ];
   const urlsToTest = Object.values(urls).filter(url => !IGNORED_URLS.includes(url) && !url.startsWith(urls.LA_PORTAL));
 
