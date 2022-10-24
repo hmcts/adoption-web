@@ -146,8 +146,6 @@ describe('Accessibility', () => {
     urls.SIBLING_ORDER_CASE_NUMBER,
     urls.BIRTH_MOTHER_OCCUPATION,
     urls.BIRTH_FATHER_OCCUPATION,
-    urls.LA_PORTAL_BIRTH_MOTHER_OCCUPATION,
-    urls.LA_PORTAL_BIRTH_FATHER_OCCUPATION,
   ];
   const urlsToTest = Object.values(urls).filter(url => !IGNORED_URLS.includes(url) && !url.startsWith(urls.LA_PORTAL));
 
@@ -217,6 +215,8 @@ describe('Accessibility LA portal', () => {
     urls.LA_PORTAL_KBA_CALLBACK,
     urls.LA_PORTAL_UPLOAD_YOUR_DOCUMENTS,
     urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT,
+    urls.LA_PORTAL_BIRTH_MOTHER_OCCUPATION,
+    urls.LA_PORTAL_BIRTH_FATHER_OCCUPATION,
   ];
 
   const urlsToTest = Object.values(urls).filter(url => url.startsWith(urls.LA_PORTAL) && !IGNORED_URLS.includes(url));
