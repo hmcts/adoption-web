@@ -77,6 +77,7 @@ export const form: FormContent = {
         attributes: {
           spellcheck: false,
         },
+        labelHidden: true,
         validator: isFieldFilledIn,
         ...sibling,
       },

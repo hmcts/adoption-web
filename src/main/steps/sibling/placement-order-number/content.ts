@@ -33,6 +33,7 @@ export const form: FormContent = {
         label: l => l.title,
         value: sibling?.siblingPoNumber,
         labelSize: 'l',
+        labelHidden: true,
         attributes: {
           spellcheck: false,
         },

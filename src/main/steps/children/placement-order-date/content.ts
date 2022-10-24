@@ -63,6 +63,7 @@ export const form: FormContent = {
         classes: 'govuk-date-input',
         label: l => l.title,
         hint: l => l.hint,
+        labelHidden: true,
         labelSize: 'l',
         attributes: {
           spellcheck: false,

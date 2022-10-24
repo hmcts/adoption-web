@@ -57,6 +57,7 @@ export const form: FormContent = {
       label: l => l.title,
       hint: l => l.hint,
       labelSize: 'l',
+      labelHidden: true,
       attributes: {
         spellcheck: false,
       },

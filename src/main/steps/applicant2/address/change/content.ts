@@ -29,6 +29,7 @@ export const form: FormContent = {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.title,
+      labelHidden: true,
       section: l => l.section,
       hint: l => l.hint,
       values: [

@@ -30,6 +30,7 @@ export const form: FormContent = {
       labelSize: 'l',
       hint: l => l.hint,
       validator: isFieldFilledIn,
+      labelHidden: true,
     },
   },
   submit: {

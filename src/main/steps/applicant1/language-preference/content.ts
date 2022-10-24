@@ -36,6 +36,7 @@ export const form: FormContent = {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.title,
+      labelHidden: true,
       section: l => l.section,
       values: [
         { label: l => l.english, value: LanguagePreference.ENGLISH },

@@ -38,7 +38,7 @@ export const form: FormContent = {
       label: l => l.title,
       section: l => l.section,
       hint: l => l.hint,
-      labelHidden: false,
+      labelHidden: true,
       values: [
         {
           label: l => l.yes,

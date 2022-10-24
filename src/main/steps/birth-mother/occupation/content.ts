@@ -29,6 +29,7 @@ export const form: FormContent = {
       label: l => l.title,
       labelSize: 'l',
       hint: l => l.hint,
+      labelHidden: true,
       validator: isFieldFilledIn,
     },
   },

@@ -76,6 +76,7 @@ export const otherNamesFields = (userCase: Partial<Case>, fieldPrefix: FieldPref
     classes: 'govuk-radios',
     label: l => l.title,
     hint: l => l.example,
+    labelHidden: true,
     section: l => l.section,
     values: [
       {

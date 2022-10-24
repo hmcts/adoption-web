@@ -30,6 +30,7 @@ export const form: FormContent = {
     hasAnotherAdopAgencyOrLA: {
       type: 'radios',
       classes: 'govuk-radios',
+      labelHidden: true,
       label: l => l.title,
       hint: l => l.hint,
       section: l => l.section,

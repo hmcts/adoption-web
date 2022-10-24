@@ -70,6 +70,7 @@ export const form: FormContent = {
       section: l => l.section,
       label: l => l.findFamilyCourt,
       hint: l => l.findFamilyCourtHint,
+      labelHidden: true,
       labelSize: 'normal',
       values: [
         {
