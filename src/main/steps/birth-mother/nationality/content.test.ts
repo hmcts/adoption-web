@@ -22,7 +22,7 @@ import { form, generateContent } from './content';
 
 const enContent = {
   section: "Birth mother's details",
-  label: "What is the nationality of the child's birth mother?",
+  title: "What is the nationality of the child's birth mother?",
   hint: 'Select all options that are relevant.',
   errors: {
     birthMotherNationality: {
@@ -37,7 +37,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y fam fiolegol',
-  label: 'Beth yw cenedligrwydd mam fiolegol y plentyn?',
+  title: 'Beth yw cenedligrwydd mam fiolegol y plentyn?',
   hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
   errors: {
     birthMotherNationality: {
