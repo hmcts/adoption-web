@@ -4,7 +4,7 @@ import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
 
 const en = () => ({
   section: 'Application details',
-  label: 'Are you applying on your own, or with someone else?',
+  title: 'Are you applying on your own, or with someone else?',
   one: "I'm applying on my own",
   oneHint: 'For example, as a single parent.',
   two: "I'm applying with my spouse or civil partner",
@@ -26,7 +26,7 @@ const en = () => ({
 const cy: typeof en = () => ({
   section: 'Manylion y cais',
   section1: 'Manylion y cais',
-  label: 'A ydych yn gwneud cais ar ben eich hun, neu gyda rhywun arall?',
+  title: 'A ydych yn gwneud cais ar ben eich hun, neu gyda rhywun arall?',
   one: 'Rwy’n gwneud cais ar ben fy hun',
   oneHint: 'Er enghraifft, fel rhiant sengl.',
   two: 'Rwy’n gwneud cais gyda fy mhriod / fy mhartner sifil',
@@ -50,7 +50,7 @@ export const form: FormContent = {
     applyingWith: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.title,
       section: l => l.section,
       values: [
         {

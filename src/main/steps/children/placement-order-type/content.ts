@@ -5,7 +5,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
   section: "The child's details",
-  label: 'What type of order is it?',
+  title: 'What type of order is it?',
   hint: 'This information makes it easier for the court to link past court orders.',
   adoptionOrder: 'Previous adoption order',
   careOrder: 'Care order',
@@ -27,7 +27,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: 'Manylion y plentyn',
-  label: 'Pa fath o orchymyn ydyw?',
+  title: 'Pa fath o orchymyn ydyw?',
   hint: "Mae'r wybodaeth hon yn ei gwneud hi'n haws i'r llys gysylltu gorchmynion llys yn y gorffennol.",
   adoptionOrder: 'Gorchymyn mabwysiadu blaenorol',
   careOrder: 'Gorchymyn Gofal',
@@ -52,7 +52,7 @@ export const form: FormContent = {
     selectedPlacementOrderType: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.title,
       section: l => l.section,
       hint: l => l.hint,
       values: [

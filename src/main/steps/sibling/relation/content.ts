@@ -6,7 +6,7 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
   section: SECTION,
-  label: 'What is their relationship to the child being adopted?',
+  title: 'What is their relationship to the child being adopted?',
   sister: 'Sister',
   halfSister: 'Half-sister',
   stepSister: 'Step-sister',
@@ -22,7 +22,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  label: 'Beth yw eu perthynas i’r plentyn sy’n cael ei fabwysiadu?',
+  title: 'Beth yw eu perthynas i’r plentyn sy’n cael ei fabwysiadu?',
   sister: 'Chwaer',
   halfSister: 'Hanner chwaer',
   stepSister: 'Llyschwaer',
@@ -43,7 +43,7 @@ export const form: FormContent = {
       selectedSiblingRelation: {
         type: 'radios',
         classes: 'govuk-radios',
-        label: l => l.label,
+        label: l => l.title,
         section: l => l.section,
         values: [
           { label: l => l.sister, value: SiblingRelationships.SISTER },

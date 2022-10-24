@@ -10,7 +10,7 @@ jest.mock('../../../app/form/validation');
 
 const en = {
   section: 'First applicant',
-  label: 'What language do you want to receive emails and documents in?',
+  title: 'What language do you want to receive emails and documents in?',
   errors: {
     applicant1LanguagePreference: {
       required: 'Select whether you want to receive emails and documents in English or Welsh',
@@ -20,7 +20,7 @@ const en = {
 
 const cy = {
   section: 'Ceisydd cyntaf',
-  label: 'Ym mha iaith yr hoffech gael negeseuon e-bost a dogfennau?',
+  title: 'Ym mha iaith yr hoffech gael negeseuon e-bost a dogfennau?',
   errors: {
     applicant1LanguagePreference: {
       required: 'Dewiswch a ydych eisiau eich e-byst a’ch dogfennau yn Gymraeg neu’n Saesneg',
@@ -54,7 +54,7 @@ describe('applicant1 > language-preference > content', () => {
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
     expect((field.section as Function)(generatedContent)).toBe(en.section);
-    expect((field.label as Function)(generatedContent)).toBe(en.label);
+    expect((field.label as Function)(generatedContent)).toBe(en.title);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.english);
     expect(field.values[0].value).toBe(LanguagePreference.ENGLISH);
     expect((field.values[1].label as Function)(commonContent)).toBe(commonContent.welsh);
