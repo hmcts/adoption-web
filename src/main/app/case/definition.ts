@@ -979,7 +979,6 @@ export interface SolicitorService {
 
 export interface ConfidentialDivorceDocument {
   confidentialDocumentsReceived: ConfidentialDocumentsReceived;
-  documentEmailContent: string;
   documentLink: Document;
   documentDateAdded: DateAsString;
   documentComment: string;
@@ -991,7 +990,6 @@ export interface AdoptionDocument {
   documentComment: string;
   documentFileName: string;
   documentType: DocumentType;
-  documentEmailContent: string;
   documentLink: Document;
 }
 

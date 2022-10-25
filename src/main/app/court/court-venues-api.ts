@@ -8,19 +8,13 @@ import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
 import { CourtVenue, LocationResponse } from './location';
 
 export async function getCourtList(req: AppRequest): Promise<CourtVenue[]> {
-  // Family Public Law:	ABA3
   // Adoption:	ABA4
-  const familyPublicLawCourtList = await getCourtVenues(
-    `${config.get('services.familyPublicLawCourt.code')}`,
-    req.session.user,
-    req.locals.logger
-  );
   const adoptionCourtList = await getCourtVenues(
     `${config.get('services.adoptionCourt.code')}`,
     req.session.user,
     req.locals.logger
   );
-  return [...familyPublicLawCourtList, ...adoptionCourtList];
+  return [...adoptionCourtList];
 }
 
 export const getCourtVenues = async (
