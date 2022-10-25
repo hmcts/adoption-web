@@ -46,7 +46,7 @@ module.exports = {
     await I.retry(3).click('Find address');
     await I.wait(2);
     await I.retry(3).see('There is a problem');
-    await I.retry(3).see('Enter a real postcode');
+    await I.retry(3).see('Enter a postcode, like AA1 1AA');
     await I.retry(3).fillField(this.fields.postcodeLookup, primaryApplicantDetails.primaryApplicantPostcode);
     await I.retry(3).click(this.fields.findAddressButton);
     await I.retry(3).waitForText('addresses found');
