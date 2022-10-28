@@ -12,6 +12,7 @@ export default class SiblingPlacementOrderGetController extends GetController {
     if (req.query.change) {
       this.changeSiblingPlacementOrder(req);
       redirect = true;
+      //dirty = true;
     } else if (req.query.remove) {
       this.removeSiblingPlacementOrder(req);
       redirect = true;

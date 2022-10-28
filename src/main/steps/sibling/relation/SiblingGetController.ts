@@ -19,6 +19,7 @@ export default class SiblingGetController extends GetController {
     } else if (req.query.change) {
       this.changeSibling(req);
       redirect = true;
+      //dirty = true;
     } else if (!req.session.userCase.selectedSiblingId) {
       //generate random id for sibling if there are no siblings
       req.session.userCase.selectedSiblingId = siblings[0]?.siblingId || `${Date.now()}`;
