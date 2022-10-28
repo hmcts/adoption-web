@@ -38,190 +38,190 @@ pactWith(
       caseApi = getCaseApi(userDetails, logger);
     });
 
-    // describe('ccd_data_store getCases API', () => {
-    //   const CASES = [
-    //     {
-    //       id: '45678',
-    //       state: 'Draft',
-    //       case_data: { applyingWith: 'alone' },
-    //     },
-    //   ];
+    describe('ccd_data_store getCases API', () => {
+      const CASES = [
+        {
+          id: '45678',
+          state: 'Draft',
+          case_data: { applyingWith: 'alone' },
+        },
+      ];
 
-    //   const getCasesSuccessResponse = {
-    //     status: 200,
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: CASES,
-    //   };
+      const getCasesSuccessResponse = {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: CASES,
+      };
 
-    //   const getCasesRequest = {
-    //     uponReceiving: 'a request to get cases',
-    //     withRequest: {
-    //       method: 'GET',
-    //       path: '/citizens/123456/jurisdictions/ADOPTION/case-types/A58/cases',
-    //       headers: {
-    //         Authorization: 'Bearer mock-user-access-token',
-    //         ServiceAuthorization: 'mock-service-auth-token',
-    //         experimental: 'true',
-    //         Accept: '*/*',
-    //         'Content-Type': 'application/json',
-    //       },
-    //     },
-    //   };
+      const getCasesRequest = {
+        uponReceiving: 'a request to get cases',
+        withRequest: {
+          method: 'GET',
+          path: '/citizens/123456/jurisdictions/ADOPTION/case-types/A58/cases',
+          headers: {
+            Authorization: 'Bearer mock-user-access-token',
+            ServiceAuthorization: 'mock-service-auth-token',
+            experimental: 'true',
+            Accept: '*/*',
+            'Content-Type': 'application/json',
+          },
+        },
+      };
 
-    //   beforeEach(() => {
-    //     const interaction = {
-    //       state: 'adoption-web makes request to get cases',
-    //       ...getCasesRequest,
-    //       willRespondWith: getCasesSuccessResponse,
-    //     };
-    //     return provider.addInteraction(interaction);
-    //   });
+      beforeEach(() => {
+        const interaction = {
+          state: 'adoption-web makes request to get cases',
+          ...getCasesRequest,
+          willRespondWith: getCasesSuccessResponse,
+        };
+        return provider.addInteraction(interaction);
+      });
 
-    //   it('returns all cases for a user', async () => {
-    //     const cases = await caseApi.getCases();
-    //     expect(cases).toEqual(CASES);
-    //   });
-    // });
+      it('returns all cases for a user', async () => {
+        const cases = await caseApi.getCases();
+        expect(cases).toEqual(CASES);
+      });
+    });
 
-    // describe('ccd_data_store getCaseById API', () => {
-    //   const EXPECTED_CASE_DATA = {
-    //     id: '45678',
-    //     state: 'Draft',
-    //     applyingWith: 'alone',
-    //   };
+    describe('ccd_data_store getCaseById API', () => {
+      const EXPECTED_CASE_DATA = {
+        id: '45678',
+        state: 'Draft',
+        applyingWith: 'alone',
+      };
 
-    //   const getCaseByIdSuccessResponse = {
-    //     status: 200,
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: {
-    //       id: '45678',
-    //       state: 'Draft',
-    //       data: { applyingWith: 'alone' },
-    //     },
-    //   };
+      const getCaseByIdSuccessResponse = {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: {
+          id: '45678',
+          state: 'Draft',
+          data: { applyingWith: 'alone' },
+        },
+      };
 
-    //   const getCaseByIdRequest = {
-    //     uponReceiving: 'a request to get case by id',
-    //     withRequest: {
-    //       method: 'GET',
-    //       path: '/cases/45678',
-    //       headers: {
-    //         Authorization: 'Bearer mock-user-access-token',
-    //         ServiceAuthorization: 'mock-service-auth-token',
-    //         experimental: 'true',
-    //         Accept: '*/*',
-    //         'Content-Type': 'application/json',
-    //       },
-    //     },
-    //   };
+      const getCaseByIdRequest = {
+        uponReceiving: 'a request to get case by id',
+        withRequest: {
+          method: 'GET',
+          path: '/cases/45678',
+          headers: {
+            Authorization: 'Bearer mock-user-access-token',
+            ServiceAuthorization: 'mock-service-auth-token',
+            experimental: 'true',
+            Accept: '*/*',
+            'Content-Type': 'application/json',
+          },
+        },
+      };
 
-    //   beforeEach(() => {
-    //     const interaction = {
-    //       state: 'adoption-web makes request to get case by id',
-    //       ...getCaseByIdRequest,
-    //       willRespondWith: getCaseByIdSuccessResponse,
-    //     };
-    //     return provider.addInteraction(interaction);
-    //   });
+      beforeEach(() => {
+        const interaction = {
+          state: 'adoption-web makes request to get case by id',
+          ...getCaseByIdRequest,
+          willRespondWith: getCaseByIdSuccessResponse,
+        };
+        return provider.addInteraction(interaction);
+      });
 
-    //   it('returns case data by id', async () => {
-    //     const caseResponse = await caseApi.getCaseById('45678');
-    //     expect(caseResponse).toEqual(EXPECTED_CASE_DATA);
-    //   });
-    // });
+      it('returns case data by id', async () => {
+        const caseResponse = await caseApi.getCaseById('45678');
+        expect(caseResponse).toEqual(EXPECTED_CASE_DATA);
+      });
+    });
 
-    // describe('ccd_data_store createCase API', () => {
-    //   const EXPECTED_CASE_DATA = {
-    //     id: '45678',
-    //     state: 'Draft',
-    //   };
+    describe('ccd_data_store createCase API', () => {
+      const EXPECTED_CASE_DATA = {
+        id: '45678',
+        state: 'Draft',
+      };
 
-    //   const createCaseEventTokenResponse = {
-    //     status: 200,
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: {
-    //       token: 'create-case-event-token',
-    //     },
-    //   };
+      const createCaseEventTokenResponse = {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: {
+          token: 'create-case-event-token',
+        },
+      };
 
-    //   const createCaseEventTokenRequest = {
-    //     uponReceiving: 'a request to get citizen-create-application event token',
-    //     withRequest: {
-    //       method: 'GET',
-    //       path: '/case-types/A58/event-triggers/citizen-create-application',
-    //       headers: {
-    //         Authorization: 'Bearer mock-user-access-token',
-    //         ServiceAuthorization: 'mock-service-auth-token',
-    //         experimental: 'true',
-    //         Accept: '*/*',
-    //         'Content-Type': 'application/json',
-    //       },
-    //     },
-    //   };
+      const createCaseEventTokenRequest = {
+        uponReceiving: 'a request to get citizen-create-application event token',
+        withRequest: {
+          method: 'GET',
+          path: '/case-types/A58/event-triggers/citizen-create-application',
+          headers: {
+            Authorization: 'Bearer mock-user-access-token',
+            ServiceAuthorization: 'mock-service-auth-token',
+            experimental: 'true',
+            Accept: '*/*',
+            'Content-Type': 'application/json',
+          },
+        },
+      };
 
-    //   const createCaseResponse = {
-    //     status: 200,
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: {
-    //       id: '45678',
-    //       state: 'Draft',
-    //       data: {},
-    //     },
-    //   };
+      const createCaseResponse = {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: {
+          id: '45678',
+          state: 'Draft',
+          data: {},
+        },
+      };
 
-    //   const createCaseRequest = {
-    //     uponReceiving: 'a request to get citizen-create-application event token',
-    //     withRequest: {
-    //       method: 'POST',
-    //       path: '/case-types/A58/cases',
-    //       headers: {
-    //         Authorization: 'Bearer mock-user-access-token',
-    //         ServiceAuthorization: 'mock-service-auth-token',
-    //         experimental: 'true',
-    //         Accept: '*/*',
-    //         'Content-Type': 'application/json',
-    //       },
-    //       body: {
-    //         data: {
-    //           applicant1FirstName: userDetails.givenName,
-    //           applicant1LastName: userDetails.familyName,
-    //           applicant1Email: userDetails.email,
-    //         },
-    //         event: { id: 'citizen-create-application' },
-    //         event_token: 'create-case-event-token',
-    //       },
-    //     },
-    //   };
+      const createCaseRequest = {
+        uponReceiving: 'a request to get citizen-create-application event token',
+        withRequest: {
+          method: 'POST',
+          path: '/case-types/A58/cases',
+          headers: {
+            Authorization: 'Bearer mock-user-access-token',
+            ServiceAuthorization: 'mock-service-auth-token',
+            experimental: 'true',
+            Accept: '*/*',
+            'Content-Type': 'application/json',
+          },
+          body: {
+            data: {
+              applicant1FirstName: userDetails.givenName,
+              applicant1LastName: userDetails.familyName,
+              applicant1Email: userDetails.email,
+            },
+            event: { id: 'citizen-create-application' },
+            event_token: 'create-case-event-token',
+          },
+        },
+      };
 
-    //   beforeEach(() => {
-    //     const interaction = {
-    //       state: 'adoption-web makes request to get citizen-create-application event token',
-    //       ...createCaseEventTokenRequest,
-    //       willRespondWith: createCaseEventTokenResponse,
-    //     };
-    //     provider.addInteraction(interaction);
+      beforeEach(() => {
+        const interaction = {
+          state: 'adoption-web makes request to get citizen-create-application event token',
+          ...createCaseEventTokenRequest,
+          willRespondWith: createCaseEventTokenResponse,
+        };
+        provider.addInteraction(interaction);
 
-    //     const interaction2 = {
-    //       state: 'adoption-web makes request to create case',
-    //       ...createCaseRequest,
-    //       willRespondWith: createCaseResponse,
-    //     };
-    //     provider.addInteraction(interaction2);
-    //   });
+        const interaction2 = {
+          state: 'adoption-web makes request to create case',
+          ...createCaseRequest,
+          willRespondWith: createCaseResponse,
+        };
+        provider.addInteraction(interaction2);
+      });
 
-    //   it('creates a new case and return case data in response', async () => {
-    //     const caseResponse = await caseApi.createCase('adoption', userDetails);
-    //     expect(caseResponse).toEqual(EXPECTED_CASE_DATA);
-    //   });
-    // });
+      it('creates a new case and return case data in response', async () => {
+        const caseResponse = await caseApi.createCase('adoption', userDetails);
+        expect(caseResponse).toEqual(EXPECTED_CASE_DATA);
+      });
+    });
 
     describe('ccd_data_store case-users API', () => {
       const EXPECTED_CASE_USER_ROLES = {
