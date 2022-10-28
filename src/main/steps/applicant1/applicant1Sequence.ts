@@ -22,7 +22,9 @@ import {
 
 const getStepAfterAddress = (data: Partial<CaseWithId>): PageLink => {
   if (data.checkYourAnswersReturn) {
-    return data.applyingWith === ApplyingWith.ALONE ? APPLICANT_1_CONFIRM_CHANGE_ADDRESS : APPLICANT_1_CHANGE_ADDRESS;
+    return (data as Partial<CaseWithId>).applyingWith === ApplyingWith.ALONE
+      ? APPLICANT_1_CONFIRM_CHANGE_ADDRESS
+      : APPLICANT_1_CHANGE_ADDRESS;
   }
 
   return APPLICANT_1_CONTACT_DETAILS;

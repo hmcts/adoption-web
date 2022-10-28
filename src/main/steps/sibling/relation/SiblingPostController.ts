@@ -36,6 +36,7 @@ export default class SiblingPostController extends PostController<AnyObject> {
     } else {
       sibling = req.session.userCase.siblings?.find(item => item.siblingId === req.session.userCase.selectedSiblingId);
       if (sibling) {
+        //Object.assign(sibling, formData);
         sibling.siblingRelation = formData['selectedSiblingRelation'] as SiblingRelationships;
       }
     }
