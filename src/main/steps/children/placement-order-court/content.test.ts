@@ -9,7 +9,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: "The child's details",
-  label: 'Which court made the order?',
+  title: 'Which court made the order?',
   options: [{ text: 'MOCK', value: 'MOCK', selected: true }],
   errors: {
     placementOrderCourt: {
@@ -20,7 +20,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y plentyn',
-  label: 'Pa lys wnaeth wneud y gorchymyn lleoli?',
+  title: 'Pa lys wnaeth wneud y gorchymyn lleoli?',
   options: [{ text: 'MOCK', value: 'MOCK', selected: true }],
   errors: {
     placementOrderCourt: {
@@ -53,7 +53,7 @@ describe('children > placement-order-court > content', () => {
     const fields = form.fields as FormFields;
     const placementOrderCourtField = fields.placementOrderCourt as FormOptions;
     expect(placementOrderCourtField.type).toBe('select');
-    expect((fields.h1.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((placementOrderCourtField.label as Function)(generatedContent)).toBe(enContent.title);
 
     expect(placementOrderCourtField.validator).toBe(isFieldFilledIn);
   });

@@ -17,8 +17,8 @@ const en = () => ({
       required: 'Enter the town or city',
     },
     addressPostcode: {
-      required: 'Enter the postcode',
-      invalid: 'Enter a real postcode',
+      required: 'Enter a postcode, like AA1 1AA',
+      invalid: 'Enter a postcode, like AA1 1AA',
     },
   },
 });

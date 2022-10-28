@@ -10,7 +10,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: 'Eligibility to apply to adopt',
-  label:
+  title:
     'Is the UK, Channel Islands or Isle of Man the main country of residence (domicile) for you and the other applicant if relevant?',
   domicileNo: 'You cannot apply to adopt a child unless you have a permanent home here.',
   moreInfo: 'More about adoption',
@@ -23,7 +23,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Gofynion cymhwysedd i wneud cais i fabwysiadu',
-  label:
+  title:
     'Ai’r DU, Ynysoedd y Sianel, neu Ynys Manaw yw’r brif wlad preswylio (domisil) i chi a’r ceisydd arall os yw’n berthnasol?',
   domicileNo: 'Ni allwch wneud cais i fabwysiadu plentyn oni bai bod gennych gartref parhaol yma.',
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
@@ -59,7 +59,7 @@ describe('eligibility > domicile > content', () => {
     const field = fields.domicileEligible as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
-    expect((field.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((field.label as Function)(generatedContent)).toBe(enContent.title);
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesNoNotsure.YES);

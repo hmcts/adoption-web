@@ -14,7 +14,7 @@ import { mapSummaryListContent } from '../functions/mapSummaryListContent';
 import { defaultButtons } from './common/default-buttons';
 
 const en = (fieldPrefix: FieldPrefix) => ({
-  label: 'What is your nationality?',
+  title: 'What is your nationality?',
   hint: 'Select all options that are relevant.',
   british: 'British',
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish',
@@ -37,7 +37,7 @@ const en = (fieldPrefix: FieldPrefix) => ({
 });
 
 const cy: typeof en = (fieldPrefix: FieldPrefix) => ({
-  label: 'Beth yw eich cenedligrwydd?',
+  title: 'Beth yw eich cenedligrwydd?',
   hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
   british: 'Prydeinig',
   britishSubtext: 'gan gynnwys Saesneg, Albanaidd, Cymraeg a Gwyddelig Gogledd Iwerddon',
@@ -68,9 +68,10 @@ const urls = {
 export const nationalityFields = (userCase: Partial<Case>, fieldPrefix: FieldPrefix): FormFields => ({
   [`${fieldPrefix}Nationality`]: {
     type: 'checkboxes',
-    label: l => l.label,
+    label: l => l.title,
     labelSize: 'l',
     hint: l => l.hint,
+    labelHidden: true,
     validator: value =>
       [FieldPrefix.APPLICANT1, FieldPrefix.APPLICANT2].includes(fieldPrefix)
         ? atLeastOneFieldIsChecked(value)

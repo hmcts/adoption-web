@@ -4,7 +4,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
   section: "Birth mother's details",
-  label: "What is the occupation of the child's birth mother?",
+  title: "What is the occupation of the child's birth mother?",
   errors: {
     birthMotherOccupation: {
       required: 'Enter an occupation',
@@ -14,7 +14,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: 'Manylion y fam fiolegol',
-  label: 'Beth yw galwedigaeth mam fiolegol y plentyn?',
+  title: 'Beth yw galwedigaeth mam fiolegol y plentyn?',
   errors: {
     birthMotherOccupation: {
       required: 'Nac ydwdwch alwedigaeth',
@@ -26,9 +26,10 @@ export const form: FormContent = {
   fields: {
     birthMotherOccupation: {
       type: 'text',
-      label: l => l.label,
+      label: l => l.title,
       labelSize: 'l',
       hint: l => l.hint,
+      labelHidden: true,
       validator: isFieldFilledIn,
     },
   },

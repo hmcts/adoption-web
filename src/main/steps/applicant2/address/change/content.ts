@@ -5,7 +5,7 @@ import { isFieldFilledIn } from '../../../../app/form/validation';
 
 const en = () => ({
   section: 'Second applicant',
-  label: 'Do you want to change the address for the other applicant?',
+  title: 'Do you want to change the address for the other applicant?',
   errors: {
     changeAddressBothApplicantTwo: {
       required: 'Please select an answer',
@@ -15,7 +15,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: 'Second applicant (in welsh)',
-  label: 'Do you want to change the address for the other applicant? (in welsh)',
+  title: 'Do you want to change the address for the other applicant? (in welsh)',
   errors: {
     changeAddressBothApplicantTwo: {
       required: 'Please select an answer (in welsh)',
@@ -28,7 +28,8 @@ export const form: FormContent = {
     changeAddressBothApplicantTwo: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.title,
+      labelHidden: true,
       section: l => l.section,
       hint: l => l.hint,
       values: [

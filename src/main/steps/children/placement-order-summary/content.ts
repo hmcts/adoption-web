@@ -73,6 +73,7 @@ export const form: FormContent = {
       label: l => l.label,
       section: l => l.section,
       labelSize: 'm',
+      labelHidden: false,
       values: [
         { label: l => l.yes, value: YesOrNo.YES },
         { label: l => l.no, value: YesOrNo.NO },

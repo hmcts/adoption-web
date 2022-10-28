@@ -5,7 +5,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
   section: "Birth mother's details",
-  label: "Is the child's birth mother still alive?",
+  title: "Is the child's birth mother still alive?",
   moreDetails:
     "Provide more details. For example, 'the birth mother is uncontactable'. Your adoption agency or social worker can help you to complete this section.",
   hint: 'If this person has died, you will need to provide the death certificate.',
@@ -21,7 +21,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: 'Manylion y fam fiolegol',
-  label: 'A yw mam fiolegol y plentyn dal yn fyw?',
+  title: 'A yw mam fiolegol y plentyn dal yn fyw?',
   moreDetails:
     'Darparwch fwy o fanylion. Er enghraifft, ‘nid oes modd cysylltu â’r fam fiolegol’. Gall eich asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol eich helpu i lenwi’r rhan hon. ',
   hint: "Os yw’r unigolyn hwn wedi marw, bydd angen i chi ddarparu'r dystysgrif marwolaeth.",
@@ -40,8 +40,9 @@ export const form: FormContent = {
     birthMotherStillAlive: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.title,
       section: l => l.section,
+      labelHidden: true,
       values: [
         { label: l => l.yes, value: YesNoNotsure.YES },
         {

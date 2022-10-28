@@ -31,7 +31,9 @@
       {{ taskStatus(item) }}
     </li>
   {% else %}
-    <p class="govuk-!-font-weight-bold govuk-!-margin-top-7 govuk-!-margin-bottom-2">{{item.text}}</p>
+  <h3>
+   <p class="govuk-!-font-weight-bold govuk-!-margin-top-7 govuk-!-margin-bottom-2">{{item.text}}</p>
+  </h3>
   {% endif %}
 {% endmacro %}
 

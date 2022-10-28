@@ -25,7 +25,7 @@ const enContent = {
     'This is the local authority with parental responsibility for the child. It may be different to your own local authority.',
   errors: {
     childSocialWorkerName: {
-      required: 'Enter a name',
+      required: 'Enter name of child’s social worker',
     },
     childSocialWorkerPhoneNumber: {
       required: 'Enter a UK telephone number',
@@ -36,7 +36,7 @@ const enContent = {
       invalidGovUkEmail: 'Enter an email address that ends in gov.uk',
     },
     childLocalAuthority: {
-      required: 'Enter a name',
+      required: 'Enter name of local authority',
     },
     childLocalAuthorityEmail: {
       required: 'Enter an email address in the correct format, like name@gov.uk',
@@ -63,7 +63,7 @@ const cyContent = {
     "Dyma'r awdurdod lleol sydd â chyfrifoldeb rhiant dros y plentyn. Gall fod yn wahanol i'ch awdurdod lleol eich hun.",
   errors: {
     childSocialWorkerName: {
-      required: 'Rhowch enw',
+      required: 'Rhowch enw gweithiwr cymdeithasol y plentyn',
     },
     childSocialWorkerPhoneNumber: {
       required: 'Rhowch rif ffôn yn y DU',
@@ -74,7 +74,7 @@ const cyContent = {
       invalidGovUkEmail: "Rhowch gyfeiriad e-bost sy'n terfynu â gov.uk",
     },
     childLocalAuthority: {
-      required: 'Rhowch enw',
+      required: 'Rhowch enw’r awdurdod lleol',
     },
     childLocalAuthorityEmail: {
       required: 'Nodwch gyfeiriad e-bost yn y fformat cywir, fel enw@gov.uk',
