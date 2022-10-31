@@ -19,8 +19,6 @@ export const getCourtEmailId = (key: string): string => {
   ]);
   for (const mKey of map.keys()) {
     if (courtKey.includes(mKey)) {
-      console.log('*********');
-      console.log(mKey);
       return map.has(mKey) ? (map.get(mKey) as string) : config.get('localCourt.emailId.FALLBACK_EMAIL_ID');
     }
   }
