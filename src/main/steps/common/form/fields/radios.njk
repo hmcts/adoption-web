@@ -1,6 +1,7 @@
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
 
 {% set legendClasses %}govuk-fieldset__legend--{% if field.labelSize %}{{ field.labelSize }}{% else %}l{% endif %}{% endset %}
+
 {{ govukRadios({
     classes: field.classes,
     idPrefix: field.id if field.id else fieldName,
@@ -11,7 +12,7 @@
         isPageHeading: true if not title,
         classes: "hidden" if field.labelHidden else legendClasses
       }
-    },
+    } if not field.labelHidden else undefined,
     hint: {
       html: getContent(field.hint)
     } if field.hint else undefined,
@@ -21,3 +22,4 @@
       classes: "hidden " + field.id if field.hidden else field.id
     }
   }) }}
+

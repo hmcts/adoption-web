@@ -10,7 +10,7 @@ import { BIRTH_MOTHER_NATIONALITY } from '../../urls';
 
 const en = (nationalityContent: PageContent) => ({
   section: "Birth mother's details",
-  label: "What is the nationality of the child's birth mother?",
+  title: "What is the nationality of the child's birth mother?",
   hint: 'Select all options that are relevant.',
   errors: {
     birthMotherNationality: {
@@ -25,7 +25,7 @@ const en = (nationalityContent: PageContent) => ({
 
 const cy: typeof en = (nationalityContent: PageContent) => ({
   section: 'Manylion y fam fiolegol',
-  label: 'Beth yw cenedligrwydd mam fiolegol y plentyn?',
+  title: 'Beth yw cenedligrwydd mam fiolegol y plentyn?',
   hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
   errors: {
     birthMotherNationality: {

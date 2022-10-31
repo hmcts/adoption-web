@@ -9,7 +9,7 @@ jest.mock('../../../app/form/validation');
 const EN = 'en';
 const enContent = {
   section: "Birth father's details",
-  label: "What is the occupation of the child's birth father?",
+  title: "What is the occupation of the child's birth father?",
   errors: {
     birthFatherOccupation: {
       required: 'Enter an occupation',
@@ -19,7 +19,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y tad biolegol',
-  label: 'Beth yw galwedigaeth tad biolegol y plentyn?',
+  title: 'Beth yw galwedigaeth tad biolegol y plentyn?',
   errors: {
     birthFatherOccupation: {
       required: 'Nac ydwdwch alwedigaeth',
@@ -46,7 +46,7 @@ describe('birth father > occupation > content', () => {
     const occupationField = fields.birthFatherOccupation;
 
     expect(occupationField.type).toBe('text');
-    expect((occupationField.label as Function)(generateContent(commonContent))).toBe(enContent.label);
+    expect((occupationField.label as Function)(generateContent(commonContent))).toBe(enContent.title);
     expect(occupationField.labelSize).toBe('l');
 
     (occupationField.validator as Function)('MockOccupation');

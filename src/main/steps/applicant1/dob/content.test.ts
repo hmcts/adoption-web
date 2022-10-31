@@ -30,6 +30,9 @@ const enContent = {
       incompleteMonth: 'Your date of birth must include a month',
       incompleteYear: 'Your date of birth must include a year',
       invalidDateInFuture: 'Your date of birth must be in the past',
+      incompleteDayAndMonth: 'Your date of birth must include a day and month',
+      incompleteDayAndYear: 'Your date of birth must include a day and year',
+      incompleteMonthAndYear: 'Your date of birth must include a month and year',
     },
   },
 };
@@ -46,6 +49,9 @@ const cyContent = {
       incompleteMonth: 'Rhaid i’ch dyddiad geni gynnwys mis',
       incompleteYear: 'Rhaid i’ch dyddiad geni gynnwys blwyddyn',
       invalidDateInFuture: 'Rhaid i’ch dyddiad geni fod yn y gorffennol',
+      incompleteDayAndMonth: 'Rhaid i’ch dyddiad geni gynnwys diwrnod a mis',
+      incompleteDayAndYear: 'Rhaid i’ch dyddiad geni gynnwys diwrnod a blwyddyn',
+      incompleteMonthAndYear: 'Rhaid i’ch dyddiad geni gynnwys mis a blwyddyn',
     },
   },
 };

@@ -6,7 +6,7 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
   section: SECTION,
-  label:
+  title:
     'Is the UK, Channel Islands or Isle of Man the main country of residence (domicile) for you and the other applicant if relevant?',
   domicileNo: 'You cannot apply to adopt a child unless you have a permanent home here.',
   moreInfo: 'More about adoption',
@@ -19,7 +19,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  label:
+  title:
     'Ai’r DU, Ynysoedd y Sianel, neu Ynys Manaw yw’r brif wlad preswylio (domisil) i chi a’r ceisydd arall os yw’n berthnasol?',
   domicileNo: 'Ni allwch wneud cais i fabwysiadu plentyn oni bai bod gennych gartref parhaol yma.',
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
@@ -35,9 +35,9 @@ export const form: FormContent = {
     domicileEligible: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.title,
       section: l => l.section,
-      labelHidden: false,
+      labelHidden: true,
       values: [
         { label: l => l.yes, value: YesOrNo.YES },
         {

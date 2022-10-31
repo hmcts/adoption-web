@@ -8,8 +8,8 @@ const en = () => ({
   enterAddressManually: 'Or enter address manually',
   errors: {
     addressPostcode: {
-      required: 'Enter a real postcode',
-      invalid: 'Enter a real postcode',
+      required: 'Enter a postcode, like AA1 1AA',
+      invalid: 'Enter a postcode, like AA1 1AA',
     },
   },
   manualAddressUrl: '#',
@@ -21,8 +21,8 @@ const cy: typeof en = () => ({
   enterAddressManually: 'Neu nodwch y cyfeiriad â llaw',
   errors: {
     addressPostcode: {
-      required: 'Nodwch god post go iawn',
-      invalid: 'Nodwch god post go iawn',
+      required: 'Cod post, fel AA1 1AA',
+      invalid: 'Cod post, fel AA1 1AA',
     },
   },
   manualAddressUrl: '#',
