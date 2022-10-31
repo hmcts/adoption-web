@@ -42,11 +42,8 @@ pactWith(
       const CASES = [
         {
           id: '123456',
-          jurisdiction: 'ADOPTION',
-          case_type_id: 'A58',
           state: 'Draft',
           case_data: { applyingWith: 'alone' },
-          status: 'Draft',
         },
       ];
 
@@ -55,7 +52,16 @@ pactWith(
         headers: {
           'Content-Type': 'application/json',
         },
-        body: CASES,
+        body: {
+          cases: [
+            {
+              id: '123456',
+              state: 'Draft',
+              case_data: { applyingWith: 'alone' },
+            },
+          ],
+          total: 1,
+        },
       };
 
       const getCasesRequest = {
@@ -76,13 +82,7 @@ pactWith(
             query: {
               match_all: {},
             },
-            sort: [
-              {
-                id: {
-                  order: 'asc',
-                },
-              },
-            ],
+            sort: [{ id: { order: 'asc' } }],
           },
         },
       };
