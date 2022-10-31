@@ -41,9 +41,12 @@ pactWith(
     describe('ccd_data_store getCases API', () => {
       const CASES = [
         {
-          id: '45678',
+          id: '123456',
+          jurisdiction: 'ADOPTION',
+          case_type_id: 'A58',
           state: 'Draft',
           case_data: { applyingWith: 'alone' },
+          status: 'Draft',
         },
       ];
 
@@ -58,14 +61,28 @@ pactWith(
       const getCasesRequest = {
         uponReceiving: 'a request to get cases',
         withRequest: {
-          method: 'GET',
-          path: '/citizens/123456/jurisdictions/ADOPTION/case-types/A58/cases',
+          method: 'POST',
+          path: '/searchCases',
+          query: 'ctid=A58',
+
           headers: {
             Authorization: 'Bearer mock-user-access-token',
             ServiceAuthorization: 'mock-service-auth-token',
             experimental: 'true',
             Accept: '*/*',
             'Content-Type': 'application/json',
+          },
+          body: {
+            query: {
+              match_all: {},
+            },
+            sort: [
+              {
+                id: {
+                  order: 'asc',
+                },
+              },
+            ],
           },
         },
       };
@@ -90,6 +107,7 @@ pactWith(
         id: '45678',
         state: 'Draft',
         applyingWith: 'alone',
+        status: 'Draft',
       };
 
       const getCaseByIdSuccessResponse = {
@@ -138,6 +156,7 @@ pactWith(
       const EXPECTED_CASE_DATA = {
         id: '45678',
         state: 'Draft',
+        status: 'Draft',
       };
 
       const createCaseEventTokenResponse = {
@@ -233,9 +252,7 @@ pactWith(
         headers: {
           'Content-Type': 'application/json',
         },
-        body: {
-          case_users: [{ case_id: '45678', user_id: '123456', case_role: 'citizen' }],
-        },
+        body: EXPECTED_CASE_USER_ROLES,
       };
 
       const getCaseUserRolesRequest = {
@@ -243,6 +260,7 @@ pactWith(
         withRequest: {
           method: 'GET',
           path: '/case-users',
+          query: 'case_ids=45678&user_ids=123456',
           headers: {
             Authorization: 'Bearer mock-user-access-token',
             ServiceAuthorization: 'mock-service-auth-token',
@@ -250,7 +268,6 @@ pactWith(
             Accept: '*/*',
             'Content-Type': 'application/json',
           },
-          query: 'case_ids=45678&user_ids=123456',
         },
       };
 
@@ -275,6 +292,7 @@ pactWith(
         state: 'Draft',
         applicant1FirstNames: 'Updated first name',
         applicant1LastNames: 'Updated last name',
+        status: 'Draft',
       };
 
       const getEventTokenResponse = {
@@ -314,6 +332,7 @@ pactWith(
             applicant1FirstName: 'Updated first name',
             applicant1LastName: 'Updated last name',
           },
+          status: 'Draft',
         },
       };
 
