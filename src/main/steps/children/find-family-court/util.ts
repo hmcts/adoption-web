@@ -2,8 +2,6 @@ import config from 'config';
 
 export const getCourtEmailId = (key: string): string => {
   const courtKey: string = key && key.trim().length > 0 ? key.trim().toLowerCase() : 'court name not provided';
-  console.log('*********');
-  console.log(courtKey);
   const map = new Map<string, string>([
     ['chelmsford', config.get('localCourt.emailId.CHELMSFORD_FAMILY_COURT')],
     ['oxford', config.get('localCourt.emailId.OXFORD_FAMILY_COURT')],
