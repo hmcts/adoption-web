@@ -106,7 +106,6 @@ export class PostController<T extends AnyObject> {
         req.session.errors = req.session.errors || [];
         req.session.errors?.push({ errorType: 'errorSaving', propertyName: '*' });
       }
-      console.log('USERCASE-NOT SOT 1', req.session.userCase);
       return req.session.userCase;
     } else {
       return this.laStateOfTruth(req, formData, caseRefId, eventName);
