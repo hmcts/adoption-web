@@ -15,10 +15,10 @@ export const getCourtEmailId = (key: string): string => {
     ['central london', config.get('localCourt.emailId.CENTRAL_LONDON_FAMILY_COURT')],
     ['reading', config.get('localCourt.emailId.READING_FAMILY_COURT')],
   ]);
-  for (const mKey of map.keys()) {
-    if (courtKey.includes(mKey)) {
-      return map.has(mKey) ? (map.get(mKey) as string) : config.get('localCourt.emailId.FALLBACK_EMAIL_ID');
-    }
-  }
-  return map.has(key) ? (map.get(key) as string) : config.get('localCourt.emailId.FALLBACK_EMAIL_ID');
+  //Creating array of arrays from map. Then filtering key from map based on input string.
+  const filteredElement = Array.from(map).filter(([mapKey]) => courtKey.includes(mapKey));
+
+  //filtered element will contain a single array item something like  [['liverpool','adoptionsliverpoolcivilandfamilycourt@justice.gov.uk' ]].
+  //Using index to get the email element.
+  return filteredElement.length ? filteredElement[0][1] : config.get('localCourt.emailId.FALLBACK_EMAIL_ID');
 };
