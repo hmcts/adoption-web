@@ -110,7 +110,6 @@ export class PostController<T extends AnyObject> {
       return req.session.userCase;
     } else {
       return this.laStateOfTruth(req, formData, caseRefId, eventName);
-      // console.log("USERCASE-SOT 3", req.session.userCase);
     }
   }
 
