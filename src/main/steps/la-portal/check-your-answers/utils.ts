@@ -180,7 +180,6 @@ function prepareSummaryList(
   urlPrefix: string,
   reasonFieldName: string
 ) {
-  console.log('METHOD EXECUTE');
   return [
     ...(prefix === FieldPrefix.BIRTH_FATHER
       ? [
