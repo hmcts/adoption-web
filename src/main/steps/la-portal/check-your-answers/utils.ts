@@ -165,93 +165,106 @@ export const birthParentSummaryList = (
   return {
     title: sectionTitles[`${prefix}Details`],
     rows: getSectionSummaryLists(
-      [
-        ...(prefix === FieldPrefix.BIRTH_FATHER
-          ? [
-              {
-                key: keys.nameOnBirthCertificate,
-                value: content.yesNoNotsure[userCase.birthFatherNameOnCertificate!],
-                changeUrl: Urls[`${LA_PORTAL}${urlPrefix}NAME_ON_CERTIFICATE`],
-              },
-            ]
-          : []),
-        ...(prefix === FieldPrefix.BIRTH_MOTHER || userCase.birthFatherNameOnCertificate === YesOrNo.YES
-          ? [
-              {
-                key: keys.fullName,
-                value: userCase[`${prefix}FirstNames`] + ' ' + userCase[`${prefix}LastNames`],
-                changeUrl: Urls[`${LA_PORTAL}${urlPrefix}FULL_NAME`],
-              },
-              {
-                key: keys.alive,
-                valueHtml:
-                  userCase[`${prefix}StillAlive`] === YesNoNotsure.NOT_SURE
-                    ? getNotSureReasonElement(
-                        content,
-                        userCase,
-                        content.yesNoNotsure[userCase[`${prefix}StillAlive`]],
-                        reasonFieldName
-                      )
-                    : content.yesNoNotsure[userCase[`${prefix}StillAlive`]],
-                changeUrl: Urls[`${LA_PORTAL}${urlPrefix}STILL_ALIVE`],
-              },
-              ...(userCase[`${prefix}StillAlive`] === YesOrNo.YES
-                ? [
-                    {
-                      key: keys.nationality,
-                      valueHtml: formatNationalities(
-                        userCase[`${prefix}Nationality`],
-                        userCase[`${prefix}AdditionalNationalities`]
-                      ),
-                      changeUrl: Urls[`${LA_PORTAL}${urlPrefix}NATIONALITY`],
-                    },
-                    {
-                      key: keys.occupation,
-                      value: userCase[`${prefix}Occupation`],
-                      changeUrl: Urls[`${LA_PORTAL}${urlPrefix}OCCUPATION`],
-                    },
-                    {
-                      key: keys.addressKnown,
-                      valueHtml:
-                        userCase[`${prefix}AddressKnown`] === YesOrNo.NO
-                          ? getNotSureReasonElement(
-                              content,
-                              userCase,
-                              content.yesNoNotsure[userCase[`${prefix}AddressKnown`]],
-                              `${prefix}AddressNotKnownReason`
-                            )
-                          : content.yesNoNotsure[userCase[`${prefix}AddressKnown`]],
-                      changeUrl: Urls[`${LA_PORTAL}${urlPrefix}ADDRESS_KNOWN`],
-                    },
-                    ...(userCase[`${prefix}AddressKnown`] === YesOrNo.YES
-                      ? [
-                          {
-                            key: keys.address,
-                            valueHtml: getFormattedAddress(userCase, prefix),
-                            changeUrl: userCase[`${prefix}AddressCountry`]
-                              ? Urls[`${LA_PORTAL}${urlPrefix}INTERNATIONAL_ADDRESS`]
-                              : Urls[`${LA_PORTAL}${urlPrefix}MANUAL_ADDRESS`],
-                          },
-                        ]
-                      : []),
-                    ...(userCase[`${prefix}AddressKnown`] === YesOrNo.YES
-                      ? [
-                          {
-                            key: keys.addressConfirmedDate,
-                            valueHtml: getFormattedDate(userCase[`${prefix}LastAddressDate`], 'en'),
-                            changeUrl: Urls[`${LA_PORTAL}${urlPrefix}LAST_ADDRESS_CONFIRMED`],
-                          },
-                        ]
-                      : []),
-                  ]
-                : []),
-            ]
-          : []),
-      ],
+      prepareSummaryList(prefix, keys, content, userCase, LA_PORTAL, urlPrefix, reasonFieldName),
       content
     ),
   };
 };
+
+function prepareSummaryList(
+  prefix: FieldPrefix,
+  keys: Record<string, string>,
+  content,
+  userCase: Partial<CaseWithId>,
+  LA_PORTAL: string,
+  urlPrefix: string,
+  reasonFieldName: string
+) {
+  console.log('METHOD EXECUTE');
+  return [
+    ...(prefix === FieldPrefix.BIRTH_FATHER
+      ? [
+          {
+            key: keys.nameOnBirthCertificate,
+            value: content.yesNoNotsure[userCase.birthFatherNameOnCertificate!],
+            changeUrl: Urls[`${LA_PORTAL}${urlPrefix}NAME_ON_CERTIFICATE`],
+          },
+        ]
+      : []),
+    ...(prefix === FieldPrefix.BIRTH_MOTHER || userCase.birthFatherNameOnCertificate === YesOrNo.YES
+      ? [
+          {
+            key: keys.fullName,
+            value: userCase[`${prefix}FirstNames`] + ' ' + userCase[`${prefix}LastNames`],
+            changeUrl: Urls[`${LA_PORTAL}${urlPrefix}FULL_NAME`],
+          },
+          {
+            key: keys.alive,
+            valueHtml:
+              userCase[`${prefix}StillAlive`] === YesNoNotsure.NOT_SURE
+                ? getNotSureReasonElement(
+                    content,
+                    userCase,
+                    content.yesNoNotsure[userCase[`${prefix}StillAlive`]],
+                    reasonFieldName
+                  )
+                : content.yesNoNotsure[userCase[`${prefix}StillAlive`]],
+            changeUrl: Urls[`${LA_PORTAL}${urlPrefix}STILL_ALIVE`],
+          },
+          ...(userCase[`${prefix}StillAlive`] === YesOrNo.YES
+            ? [
+                {
+                  key: keys.nationality,
+                  valueHtml: formatNationalities(
+                    userCase[`${prefix}Nationality`],
+                    userCase[`${prefix}AdditionalNationalities`]
+                  ),
+                  changeUrl: Urls[`${LA_PORTAL}${urlPrefix}NATIONALITY`],
+                },
+                {
+                  key: keys.occupation,
+                  value: userCase[`${prefix}Occupation`],
+                  changeUrl: Urls[`${LA_PORTAL}${urlPrefix}OCCUPATION`],
+                },
+                {
+                  key: keys.addressKnown,
+                  valueHtml:
+                    userCase[`${prefix}AddressKnown`] === YesOrNo.NO
+                      ? getNotSureReasonElement(
+                          content,
+                          userCase,
+                          content.yesNoNotsure[userCase[`${prefix}AddressKnown`]],
+                          `${prefix}AddressNotKnownReason`
+                        )
+                      : content.yesNoNotsure[userCase[`${prefix}AddressKnown`]],
+                  changeUrl: Urls[`${LA_PORTAL}${urlPrefix}ADDRESS_KNOWN`],
+                },
+                ...(userCase[`${prefix}AddressKnown`] === YesOrNo.YES
+                  ? [
+                      {
+                        key: keys.address,
+                        valueHtml: getFormattedAddress(userCase, prefix),
+                        changeUrl: userCase[`${prefix}AddressCountry`]
+                          ? Urls[`${LA_PORTAL}${urlPrefix}INTERNATIONAL_ADDRESS`]
+                          : Urls[`${LA_PORTAL}${urlPrefix}MANUAL_ADDRESS`],
+                      },
+                    ]
+                  : []),
+                ...(userCase[`${prefix}AddressKnown`] === YesOrNo.YES
+                  ? [
+                      {
+                        key: keys.addressConfirmedDate,
+                        valueHtml: getFormattedDate(userCase[`${prefix}LastAddressDate`], 'en'),
+                        changeUrl: Urls[`${LA_PORTAL}${urlPrefix}LAST_ADDRESS_CONFIRMED`],
+                      },
+                    ]
+                  : []),
+              ]
+            : []),
+        ]
+      : []),
+  ];
+}
 
 const getNotSureReasonElement = (content, userCase, notSure, reasonFieldName): string => {
   return `${notSure}<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">${content.reason}: </span>${userCase[reasonFieldName]}</p>`;
