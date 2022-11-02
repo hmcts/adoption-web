@@ -26,6 +26,22 @@ export class DocumentManagerController {
     return new DocumentManagementClient(config.get('services.cdam.url'), getServiceAuthToken(), user);
   }
 
+  private getNewUploads(filesCreated, documentInput?: DocumentInput) {
+    const newUploads: ListValue<Partial<AdoptionDocument> | null>[] = filesCreated.map(file => ({
+      id: generateUuid(),
+      value: {
+        documentComment: documentInput ? documentInput.documentComment : 'Uploaded by applicant',
+        documentFileName: file.originalDocumentName,
+        documentLink: {
+          document_url: file._links.self.href,
+          document_filename: file.originalDocumentName,
+          document_binary_url: file._links.binary.href,
+        },
+      },
+    }));
+    return newUploads;
+  }
+
   public async post(req: AppRequest, res: Response, documentInput?: DocumentInput): Promise<void> {
     if (![State.Draft].includes(req.session.userCase.state) && (!documentInput || !documentInput.skipDraftCheck)) {
       throw new Error('Cannot upload new documents as case is not in Draft state');
@@ -46,18 +62,7 @@ export class DocumentManagerController {
       classification: Classification.Public,
     });
 
-    const newUploads: ListValue<Partial<AdoptionDocument> | null>[] = filesCreated.map(file => ({
-      id: generateUuid(),
-      value: {
-        documentComment: documentInput ? documentInput.documentComment : 'Uploaded by applicant',
-        documentFileName: file.originalDocumentName,
-        documentLink: {
-          document_url: file._links.self.href,
-          document_filename: file.originalDocumentName,
-          document_binary_url: file._links.binary.href,
-        },
-      },
-    }));
+    const newUploads = this.getNewUploads(filesCreated, documentInput);
 
     const documentsKey = documentInput ? documentInput.documentsUploadedKey : 'applicant1DocumentsUploaded';
     const updatedDocumentsUploaded = newUploads.concat(req.session.userCase[documentsKey] || []);
@@ -67,12 +72,11 @@ export class DocumentManagerController {
       { [documentsKey]: updatedDocumentsUploaded },
       this.getEventName(req)
     );
-    const uploadDocument = await saveDraftCase(req, req.session.userCase.id, {
-      [documentsKey]: updatedDocumentsUploaded,
-    });
+    await saveDraftCase(req, req.session.userCase.id, { [documentsKey]: updatedDocumentsUploaded });
+    this.redirectDocumentUpload(req, res, newUploads, documentInput);
+  }
 
-    console.log(uploadDocument);
-
+  private redirectDocumentUpload(req: AppRequest, res: Response, newUploads, documentInput?: DocumentInput) {
     req.session.save(() => {
       if (req.headers.accept?.includes('application/json')) {
         res.json(newUploads.map(file => ({ id: file.id, name: file.value?.documentFileName })));
@@ -81,7 +85,6 @@ export class DocumentManagerController {
       }
     });
   }
-
   public async delete(
     req: AppRequest<Partial<CaseWithId>>,
     res: Response,
