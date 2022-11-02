@@ -108,22 +108,31 @@ export class PostController<T extends AnyObject> {
       }
       return req.session.userCase;
     } else {
-      try {
-        if ([LA_PORTAL_STATEMENT_OF_TRUTH?.toString()].includes(req.url)) {
-          await saveDraftCase(req, caseRefId || '', formData);
-          const modifiedValuesSet = await getDraftCaseFromStore(req, caseRefId || '');
-          req.session.userCase = await req.locals.api.triggerEvent(caseRefId, modifiedValuesSet, eventName);
-          removeCaseFromRedis(req, caseRefId);
-        } else {
-          req.session.userCase = await req.locals.api.triggerEvent(caseRefId, formData, eventName);
-        }
-      } catch (err) {
-        req.locals.logger.error('Error saving', err);
-        req.session.errors = req.session.errors || [];
-        req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
-      }
-      return req.session.userCase;
+      return this.laStateOfTruth(req, formData, caseRefId, eventName);
     }
+  }
+
+  protected async laStateOfTruth(
+    req: AppRequest<T>,
+    formData: Partial<Case>,
+    caseRefId: string,
+    eventName: string
+  ): Promise<CaseWithId> {
+    try {
+      if ([LA_PORTAL_STATEMENT_OF_TRUTH?.toString()].includes(req.url)) {
+        await saveDraftCase(req, caseRefId || '', formData);
+        const modifiedValuesSet = await getDraftCaseFromStore(req, caseRefId || '');
+        req.session.userCase = await req.locals.api.triggerEvent(caseRefId, modifiedValuesSet, eventName);
+        removeCaseFromRedis(req, caseRefId);
+      } else {
+        req.session.userCase = await req.locals.api.triggerEvent(caseRefId, formData, eventName);
+      }
+    } catch (err) {
+      req.locals.logger.error('Error saving', err);
+      req.session.errors = req.session.errors || [];
+      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+    }
+    return req.session.userCase;
   }
 
   protected redirect(req: AppRequest<T>, res: Response, nextUrl?: string): void {
