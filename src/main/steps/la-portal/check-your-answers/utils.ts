@@ -191,109 +191,77 @@ function prepareSummaryList(
         ]
       : []),
     ...(prefix === FieldPrefix.BIRTH_MOTHER || userCase.birthFatherNameOnCertificate === YesOrNo.YES
-      ? fieldPrefixBirthMother(keys, userCase, prefix, LA_PORTAL, urlPrefix, content, reasonFieldName)
-      : []),
-  ];
-}
-
-function fieldPrefixBirthMother(
-  keys: Record<string, string>,
-  userCase: Partial<CaseWithId>,
-  prefix: FieldPrefix,
-  LA_PORTAL: string,
-  urlPrefix: string,
-  content,
-  reasonFieldName: string
-) {
-  return [
-    {
-      key: keys.fullName,
-      value: userCase[`${prefix}FirstNames`] + ' ' + userCase[`${prefix}LastNames`],
-      changeUrl: Urls[`${LA_PORTAL}${urlPrefix}FULL_NAME`],
-    },
-    {
-      key: keys.alive,
-      valueHtml:
-        userCase[`${prefix}StillAlive`] === YesNoNotsure.NOT_SURE
-          ? getNotSureReasonElement(
-              content,
-              userCase,
-              content.yesNoNotsure[userCase[`${prefix}StillAlive`]],
-              reasonFieldName
-            )
-          : content.yesNoNotsure[userCase[`${prefix}StillAlive`]],
-      changeUrl: Urls[`${LA_PORTAL}${urlPrefix}STILL_ALIVE`],
-    },
-    ...(userCase[`${prefix}StillAlive`] === YesOrNo.YES
       ? [
           {
-            key: keys.nationality,
-            valueHtml: formatNationalities(
-              userCase[`${prefix}Nationality`],
-              userCase[`${prefix}AdditionalNationalities`]
-            ),
-            changeUrl: Urls[`${LA_PORTAL}${urlPrefix}NATIONALITY`],
+            key: keys.fullName,
+            value: userCase[`${prefix}FirstNames`] + ' ' + userCase[`${prefix}LastNames`],
+            changeUrl: Urls[`${LA_PORTAL}${urlPrefix}FULL_NAME`],
           },
           {
-            key: keys.occupation,
-            value: userCase[`${prefix}Occupation`],
-            changeUrl: Urls[`${LA_PORTAL}${urlPrefix}OCCUPATION`],
-          },
-          {
-            key: keys.addressKnown,
+            key: keys.alive,
             valueHtml:
-              userCase[`${prefix}AddressKnown`] === YesOrNo.NO
+              userCase[`${prefix}StillAlive`] === YesNoNotsure.NOT_SURE
                 ? getNotSureReasonElement(
                     content,
                     userCase,
-                    content.yesNoNotsure[userCase[`${prefix}AddressKnown`]],
-                    `${prefix}AddressNotKnownReason`
+                    content.yesNoNotsure[userCase[`${prefix}StillAlive`]],
+                    reasonFieldName
                   )
-                : content.yesNoNotsure[userCase[`${prefix}AddressKnown`]],
-            changeUrl: Urls[`${LA_PORTAL}${urlPrefix}ADDRESS_KNOWN`],
+                : content.yesNoNotsure[userCase[`${prefix}StillAlive`]],
+            changeUrl: Urls[`${LA_PORTAL}${urlPrefix}STILL_ALIVE`],
           },
-          ...(userCase[`${prefix}AddressKnown`] === YesOrNo.YES
-            ? knownAddress(keys, userCase, LA_PORTAL, prefix, urlPrefix)
-            : []),
-          ...(userCase[`${prefix}AddressKnown`] === YesOrNo.YES
-            ? lastAddressKnown(keys, userCase, LA_PORTAL, prefix, urlPrefix)
+          ...(userCase[`${prefix}StillAlive`] === YesOrNo.YES
+            ? [
+                {
+                  key: keys.nationality,
+                  valueHtml: formatNationalities(
+                    userCase[`${prefix}Nationality`],
+                    userCase[`${prefix}AdditionalNationalities`]
+                  ),
+                  changeUrl: Urls[`${LA_PORTAL}${urlPrefix}NATIONALITY`],
+                },
+                {
+                  key: keys.occupation,
+                  value: userCase[`${prefix}Occupation`],
+                  changeUrl: Urls[`${LA_PORTAL}${urlPrefix}OCCUPATION`],
+                },
+                {
+                  key: keys.addressKnown,
+                  valueHtml:
+                    userCase[`${prefix}AddressKnown`] === YesOrNo.NO
+                      ? getNotSureReasonElement(
+                          content,
+                          userCase,
+                          content.yesNoNotsure[userCase[`${prefix}AddressKnown`]],
+                          `${prefix}AddressNotKnownReason`
+                        )
+                      : content.yesNoNotsure[userCase[`${prefix}AddressKnown`]],
+                  changeUrl: Urls[`${LA_PORTAL}${urlPrefix}ADDRESS_KNOWN`],
+                },
+                ...(userCase[`${prefix}AddressKnown`] === YesOrNo.YES
+                  ? [
+                      {
+                        key: keys.address,
+                        valueHtml: getFormattedAddress(userCase, prefix),
+                        changeUrl: userCase[`${prefix}AddressCountry`]
+                          ? Urls[`${LA_PORTAL}${urlPrefix}INTERNATIONAL_ADDRESS`]
+                          : Urls[`${LA_PORTAL}${urlPrefix}MANUAL_ADDRESS`],
+                      },
+                    ]
+                  : []),
+                ...(userCase[`${prefix}AddressKnown`] === YesOrNo.YES
+                  ? [
+                      {
+                        key: keys.addressConfirmedDate,
+                        valueHtml: getFormattedDate(userCase[`${prefix}LastAddressDate`], 'en'),
+                        changeUrl: Urls[`${LA_PORTAL}${urlPrefix}LAST_ADDRESS_CONFIRMED`],
+                      },
+                    ]
+                  : []),
+              ]
             : []),
         ]
       : []),
-  ];
-}
-
-function knownAddress(
-  keys: Record<string, string>,
-  userCase: Partial<CaseWithId>,
-  LA_PORTAL: string,
-  prefix: FieldPrefix,
-  urlPrefix: string
-) {
-  return [
-    {
-      key: keys.address,
-      valueHtml: getFormattedAddress(userCase, prefix),
-      changeUrl: userCase[`${prefix}AddressCountry`]
-        ? Urls[`${LA_PORTAL}${urlPrefix}INTERNATIONAL_ADDRESS`]
-        : Urls[`${LA_PORTAL}${urlPrefix}MANUAL_ADDRESS`],
-    },
-  ];
-}
-
-function lastAddressKnown(
-  keys: Record<string, string>,
-  userCase: Partial<CaseWithId>,
-  LA_PORTAL: string,
-  prefix: FieldPrefix,
-  urlPrefix: string
-) {
-  return [
-    {
-      key: keys.addressConfirmedDate,
-      valueHtml: getFormattedDate(userCase[`${prefix}LastAddressDate`], 'en'),
-      changeUrl: Urls[`${LA_PORTAL}${urlPrefix}LAST_ADDRESS_CONFIRMED`],
-    },
   ];
 }
 
