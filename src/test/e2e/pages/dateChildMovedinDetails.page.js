@@ -22,6 +22,14 @@ module.exports = {
     await I.retry(3).see('There is a problem');
     await I.retry(3).see('Enter the date the child moved in with you');
     await I.wait(4);
+    await I.retry(3).fillField(this.fields.dateChildMovedInDay, childBasicDetails.dateChildMovedInInvalid);
+    await I.retry(3).fillField(this.fields.dateChildMovedInMonth, childBasicDetails.monthChildMovedInInvalid);
+    await I.wait(2);
+    await I.retry(3).fillField(this.fields.dateChildMovedInYear, childBasicDetails.yearChildMovedInInvalid);
+    await I.retry(3).click('Save and continue');
+    await I.retry(3).see('There is a problem');
+    await I.retry(3).see('Must be a real date');
+    await I.wait(4);
     await I.retry(3).fillField(this.fields.dateChildMovedInDay, childBasicDetails.dateChildMovedIn);
     await I.retry(3).fillField(this.fields.dateChildMovedInMonth, childBasicDetails.monthChildMovedIn);
     await I.wait(2);
