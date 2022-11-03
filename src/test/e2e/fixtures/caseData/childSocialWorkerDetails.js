@@ -4,4 +4,5 @@ module.exports = {
   childSocialWorkerEmail: 'social.workerTest@gov.uk',
   childLocalAuthority: 'CARE TAKER',
   childLocalAuthorityEmail: 'local.authorityTest@gov.uk',
+  childSocialWorkerEmailInvalid: 'social.workerTest@gmail.com',
 };
