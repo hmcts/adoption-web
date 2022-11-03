@@ -21,10 +21,10 @@ const enContent = {
   adopAgencyContactEmail: 'Email address of your contact',
   errors: {
     adopAgencyOrLaName: {
-      required: 'Enter a name',
+      required: 'Enter name of adoption agency or local authority',
     },
     adopAgencyOrLaContactName: {
-      required: 'Enter a name',
+      required: 'Enter name of your contact',
     },
     adopAgencyOrLaPhoneNumber: {
       required: 'Enter a UK telephone number',
@@ -37,7 +37,8 @@ const enContent = {
       required: 'Enter the town or city',
     },
     adopAgencyPostcode: {
-      required: 'Enter the postcode',
+      required: 'Enter postcode, like AA1 1AA',
+      invalid: 'Enter postcode, like AA1 1AA',
     },
     adopAgencyOrLaContactEmail: {
       required: 'Enter an email address',
@@ -54,14 +55,14 @@ const cyContent = {
   adopAgencyPhone: 'Rhif ffôn',
   adopAgencyAddressLine1: 'Llinell gyntaf y cyfeiriad',
   adopAgencyTown: 'Tref neu ddinas',
-  adopAgencyPostcode: 'Cod post',
+  adopAgencyPostcode: 'Cod post, fel AA1 1AA',
   adopAgencyContactEmail: 'Cyfeiriad e-bost eich cyswllt',
   errors: {
     adopAgencyOrLaName: {
-      required: 'Rhowch enw',
+      required: "Rhowch enw'r asiantaeth fabwysiadu neu’r awdurdod lleol",
     },
     adopAgencyOrLaContactName: {
-      required: 'Rhowch enw',
+      required: "Rhowch enw'ch cyswllt",
     },
     adopAgencyOrLaPhoneNumber: {
       required: 'Rhowch rif ffôn yn y DU',
@@ -74,7 +75,8 @@ const cyContent = {
       required: "Rhowch enw'r dref neu'r ddinas",
     },
     adopAgencyPostcode: {
-      required: 'Rhowch y cod post',
+      required: 'Cod post, fel AA1 1AA',
+      invalid: 'Cod post, fel AA1 1AA',
     },
     adopAgencyOrLaContactEmail: {
       required: 'Rhowch gyfeiriad e-bost',

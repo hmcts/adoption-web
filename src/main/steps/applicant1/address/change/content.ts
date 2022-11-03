@@ -8,7 +8,7 @@ const en = ({ userCase }: CommonContent) => {
   const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant' : 'First applicant';
   return {
     section,
-    label: 'Do you want to change the address for the other applicant?',
+    title: 'Do you want to change the address for the other applicant?',
     errors: {
       changeAddressBothApplicantOne: {
         required: 'Please select an answer',
@@ -21,7 +21,7 @@ const cy: typeof en = ({ userCase }: CommonContent) => {
   const section = userCase?.applyingWith === ApplyingWith.ALONE ? 'Applicant (in welsh)' : 'First applicant (in welsh)';
   return {
     section,
-    label: 'Do you want to change the address for the other applicant? (in welsh)',
+    title: 'Do you want to change the address for the other applicant? (in welsh)',
     errors: {
       changeAddressBothApplicantOne: {
         required: 'Please select an answer (in welsh)',
@@ -35,9 +35,10 @@ export const form: FormContent = {
     changeAddressBothApplicantOne: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.title,
       section: l => l.section,
       hint: l => l.hint,
+      labelHidden: true,
       values: [
         { label: l => l.yes, value: YesOrNo.YES },
         { label: l => l.no, value: YesOrNo.NO },

@@ -23,75 +23,59 @@ Scenario(
     dateChildMovedinDetailsPage,
     chooseYourFamilyCourtDetailsPage,
   }) => {
+    /*Number of applicants*/
     await loginPage.createCitizenUserAndSignIn();
     await landingPage.seeTheLandingPage();
     await landingPage.continueWithoutSelection();
     await landingPage.selectApplyWithMySpouseSection();
-
+    /*Date child moved in with you*/
     await taskListPage.selectDateChildMovedInDetails();
     await dateChildMovedinDetailsPage.dateChildMovedInSectionWithoutData();
     await taskListPage.verifyDateChildMovedInStatus();
 
+    /*Child's details*/
+    await taskListPage.selectChildChildDetails();
+    await childsDetailsPage.childFullNameSectionBlankFields();
+    await childsDetailsPage.childNameAfterAdoptionDetailsSectionBlankFields();
+    await childsDetailsPage.childDOBSectionBlankFields();
+    await taskListPage.verifyChildDetailsStatus();
+
+    /*Adoption agency and social worker*/
     await taskListPage.selectChildAdoptionAgencyDetails();
+    await childAdoptionAgencyDetailsPage.childSocialWorkerDetailsSectionWithOutDetails();
     await childAdoptionAgencyDetailsPage.childSocialWorkerDetailsSection();
+    await childAdoptionAgencyDetailsPage.yourSocialWorkerDetailsSectionWithOutDetails();
     await childAdoptionAgencyDetailsPage.yourSocialWorkerDetailsSection();
-    await childAdoptionAgencyDetailsPage.childAdoptionAgencyDetailsSection();
+    await childAdoptionAgencyDetailsPage.adoptionAgencySelectionNoDetails();
+    await childAdoptionAgencyDetailsPage.childAdoptionAgencyDetailsSectionWithOutDetails();
     await taskListPage.verifyChildAdoptionAgencyDetailsStatus;
 
+    /*First Applicant contact details*/
     await taskListPage.selectPrimaryApplicantContactDetails();
     await primaryApplicantDetailsPage.primaryApplicantContactDetailsSectionEmpty();
     await taskListPage.verifyPrimaryApplicantContactDetailsStatus();
 
+    /*First Applicant personal details*/
     await taskListPage.selectFirstApplicantPersonalDetails();
     await primaryApplicantPersonalDetailsPage.primaryApplicantPersonalDetailsSectionEmptyfields();
     await taskListPage.verifyPrimaryApplicantPersonalDetailsStatus();
 
+    /*Second Applicant contact details*/
     await taskListPage.selectOtherApplicantContactDetails();
-    await otherApplicantDetailsPage.otherApplicantContactDetailsSection();
+    await otherApplicantDetailsPage.otherApplicantContactDetailsSectionEmptyFields();
     await taskListPage.verifySecondApplicantPersonalDetailsStatus();
 
+    /*Second Applicant personal details*/
     await taskListPage.selectOtherApplicantPersonalDetails();
     await otherApplicantPersonalDetailsPage.otherApplicantPersonalDetailsSectionEmpty();
     await taskListPage.verifyOtherApplicantPersonalDetailsStatus();
 
-    //TODO in future stories
-
-    // await taskListPage.selectChildrenBirthCertificate();
-    // await childrenBirthCertificatePage.childDetailsBirthCertificaterSection();
-    // await taskListPage.verifyChildBirthCertificateDetailsStatus();
-    //
-    // await taskListPage.selectChildChildDetails();
-    // await childsDetailsPage.childFullNameSection();
-    // await childsDetailsPage.childNameAfterAdoptionDetailsSection();
-    // await taskListPage.verifyChildDetailsStatus();
-    //
-    // await taskListPage.selectChildBirthMotherDetails();
-    // await childBirthMothersDetailsPage.childBirthMothersDetailsSection();
-    // await taskListPage.verifyChildBirthMotherDetailsStatus();
-    //
-    // await taskListPage.selectChildBirthFatherDetails();
-    // await childBirthFatherDetailsPage.childBirthFatherDetailsSection();
-    // await taskListPage.verifyChildBirthFatherDetailsStatus();
-    //
-    // await taskListPage.selectChildOtherParentDetails();
-    // await childOtherParentDetailsPage.childOtherParentDetailsSection();
-    // await taskListPage.verifyChildOtherParentDetailsStatus();
-    //
-    // await taskListPage.selectChildPlacementOrderDetails();
-    // await childDetailsPlacementOrderPage.childDetailsPlacementOrderSection();
-    //
-    // await taskListPage.selectSiblingDetails();
-    // await childSiblingDetailsPage.childDetailsSiblingSection();
-    // await taskListPage.verifySiblingDetailsStatus();
-
+    /*Family Court details*/
     await taskListPage.selectChooseYourFamilyCourtDetails();
-    await chooseYourFamilyCourtDetailsPage.childDetailsFindFamilyCourtSection();
+    await chooseYourFamilyCourtDetailsPage.childDetailsFindFamilyCourtSectionEmptyFields();
     await taskListPage.verifyChooseYourFamilyCourtStatus();
 
-    // await taskListPage.selectUploadDocumentsDetails();
-    // await uploadDocumentsDetailsPage.uploadDocumentsSectionEmpty();
-    // await taskListPage.verifyUploadDocumentsStatus();
-
+    /*Payment details*/
     await taskListPage.selectReviewPayAndSubmitDetails();
     await reviewPayAndSubmitPage.selectNoPCQOption();
     await reviewPayAndSubmitPage.changeValueFromReviewYourAnswers();
@@ -101,4 +85,36 @@ Scenario(
     await reviewPayAndSubmitPage.paymentCancellation();
     await reviewPayAndSubmitPage.adoptionCourtFeesByCard();
   }
+
+  //will be covered as part of LA portal journey
+  // await taskListPage.selectChildrenBirthCertificate();
+  // await childrenBirthCertificatePage.childDetailsBirthCertificaterSection();
+  // await taskListPage.verifyChildBirthCertificateDetailsStatus();
+  //
+  // await taskListPage.selectChildChildDetails();
+  // await childsDetailsPage.childFullNameSection();
+  // await childsDetailsPage.childNameAfterAdoptionDetailsSection();
+  // await taskListPage.verifyChildDetailsStatus();
+  //
+  // await taskListPage.selectChildBirthMotherDetails();
+  // await childBirthMothersDetailsPage.childBirthMothersDetailsSection();
+  // await taskListPage.verifyChildBirthMotherDetailsStatus();
+  //
+  // await taskListPage.selectChildBirthFatherDetails();
+  // await childBirthFatherDetailsPage.childBirthFatherDetailsSection();
+  // await taskListPage.verifyChildBirthFatherDetailsStatus();
+  //
+  // await taskListPage.selectChildOtherParentDetails();
+  // await childOtherParentDetailsPage.childOtherParentDetailsSection();
+  // await taskListPage.verifyChildOtherParentDetailsStatus();
+  //
+  // await taskListPage.selectChildPlacementOrderDetails();
+  // await childDetailsPlacementOrderPage.childDetailsPlacementOrderSection();
+  //
+  // await taskListPage.selectSiblingDetails();
+  // await childSiblingDetailsPage.childDetailsSiblingSection();
+  // await taskListPage.verifySiblingDetailsStatus();
+  // await taskListPage.selectUploadDocumentsDetails();
+  // await uploadDocumentsDetailsPage.uploadDocumentsSectionEmpty();
+  // await taskListPage.verifyUploadDocumentsStatus();
 );

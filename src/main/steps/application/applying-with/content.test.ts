@@ -9,7 +9,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: 'Application details',
-  label: 'Are you applying on your own, or with someone else?',
+  title: 'Are you applying on your own, or with someone else?',
   one: "I'm applying on my own",
   oneHint: 'For example, as a single parent.',
   two: "I'm applying with my spouse or civil partner",
@@ -30,7 +30,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y cais',
-  label: 'A ydych yn gwneud cais ar ben eich hun, neu gyda rhywun arall?',
+  title: 'A ydych yn gwneud cais ar ben eich hun, neu gyda rhywun arall?',
   one: 'Rwy’n gwneud cais ar ben fy hun',
   oneHint: 'Er enghraifft, fel rhiant sengl.',
   two: 'Rwy’n gwneud cais gyda fy mhriod / fy mhartner sifil',
@@ -66,7 +66,7 @@ describe('applicant1 > applying-with > content', () => {
     const applyingWithField = fields.applyingWith as FormOptions;
     expect(applyingWithField.type).toBe('radios');
     expect(applyingWithField.classes).toBe('govuk-radios');
-    expect((applyingWithField.label as LanguageLookup)(generatedContent)).toBe(enContent.label);
+    expect((applyingWithField.label as LanguageLookup)(generatedContent)).toBe(enContent.title);
     expect((applyingWithField.section as LanguageLookup)(generatedContent)).toBe(enContent.section);
     expect((applyingWithField.values[0].label as LanguageLookup)(generatedContent)).toBe(enContent.one);
     expect((applyingWithField.values[1].label as LanguageLookup)(generatedContent)).toBe(enContent.two);

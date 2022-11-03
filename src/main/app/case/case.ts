@@ -390,6 +390,7 @@ export interface Case {
 
   /***** Common across different type of users *****/
   addButton?: string;
+  cancelButton?: string;
   addAnotherNationality?: string;
   addAnotherNameHidden?: string;
   applicationType?: ApplicationType;

@@ -7,12 +7,12 @@ const en = ({ userCase }: CommonContent) => {
   const placementOrder = userCase?.placementOrders?.find(
     item => item.placementOrderId === userCase.selectedPlacementOrderId
   );
-  const label =
+  const title =
     placementOrder?.placementOrderType === undefined
       ? 'What is the serial or case number on the placement order?'
       : 'What is the serial or case number on the order?';
   return {
-    label,
+    title,
     section: "The child's details",
     hint: 'This is on the top right of the order.',
     errors: {
@@ -27,12 +27,12 @@ const cy: typeof en = ({ userCase }: CommonContent) => {
   const placementOrder = userCase?.placementOrders?.find(
     item => item.placementOrderId === userCase.selectedPlacementOrderId
   );
-  const label =
+  const title =
     placementOrder?.placementOrderType === undefined
       ? 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn lleoli?'
       : 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn?';
   return {
-    label,
+    title,
     section: 'Manylion y plentyn',
     hint: 'Mae hwn wedi’i nodi yng nghornel dde uchaf y gorchymyn.',
     errors: {
@@ -52,13 +52,14 @@ export const form: FormContent = {
       placementOrderNumber: {
         type: 'text',
         classes: 'govuk-label govuk-input--width-10',
-        label: l => l.label,
+        label: l => l.title,
         hint: l => l.hint,
         value: placementOrder?.placementOrderNumber,
         labelSize: 'l',
         attributes: {
           spellcheck: false,
         },
+        labelHidden: true,
         validator: isFieldFilledIn,
       },
     };

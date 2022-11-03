@@ -9,12 +9,12 @@ const en = ({ userCase }: CommonContent) => {
   const placementOrder = userCase?.placementOrders?.find(
     item => item.placementOrderId === userCase.selectedPlacementOrderId
   );
-  const label =
+  const title =
     placementOrder?.placementOrderType === undefined
       ? 'What date is on the placement order?'
       : 'What date is on the order?';
   return {
-    label,
+    title,
     section: "The child's details",
     hint: 'For example, 31 3 2020',
     errors: {
@@ -31,12 +31,12 @@ const en = ({ userCase }: CommonContent) => {
 };
 
 const cy: typeof en = ({ userCase }: CommonContent) => {
-  const label =
+  const title =
     userCase?.placementOrders?.length === 0
       ? 'Pa ddyddiad sydd ar y gorchymyn lleoli?'
       : 'Pa ddyddiad sydd ar y gorchymyn lleoli?';
   return {
-    label,
+    title,
     section: 'Manylion y plentyn',
     hint: 'Er enghraifft, 31 3 2020',
     errors: {
@@ -61,8 +61,9 @@ export const form: FormContent = {
       placementOrderDate: {
         type: 'date',
         classes: 'govuk-date-input',
-        label: l => l.label,
+        label: l => l.title,
         hint: l => l.hint,
+        labelHidden: true,
         labelSize: 'l',
         attributes: {
           spellcheck: false,

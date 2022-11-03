@@ -14,7 +14,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: "The child's details",
-  label: "What is the child's date of birth?",
+  title: "What is the child's date of birth?",
   hint: "For example, 31 3 2012. This should be on their birth certificate. Ask the adoption agency or social worker if you're not sure.",
   errors: {
     childrenDateOfBirth: {
@@ -31,7 +31,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y plentyn',
-  label: 'Beth yw dyddiad geni’r plentyn?',
+  title: 'Beth yw dyddiad geni’r plentyn?',
   hint: 'Er enghraifft, 31 3 2012. Dylai hyn fod wedi’i nodi ar eu tystysgrif geni. Holwch gyda’r asiantaeth fabwysiadu neu’r gweithiwr cymdeithasol os nad ydych yn siŵr.',
   day: '',
   month: '',
@@ -73,7 +73,7 @@ describe('children > date-of-birth > content', () => {
     const childrenDateOfBirthField = fields.childrenDateOfBirth as FormOptions;
     expect(childrenDateOfBirthField.type).toBe('date');
     expect(childrenDateOfBirthField.classes).toBe('govuk-date-input');
-    expect((childrenDateOfBirthField.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((childrenDateOfBirthField.label as Function)(generatedContent)).toBe(enContent.title);
     expect(((childrenDateOfBirthField as FormInput).hint as Function)(generatedContent)).toBe(enContent.hint);
     expect(childrenDateOfBirthField.labelSize).toBe('l');
     expect(childrenDateOfBirthField.attributes?.spellcheck).toBe(false);

@@ -9,7 +9,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: "The child's details",
-  label: 'What date is on the placement order?',
+  title: 'What date is on the placement order?',
   hint: 'For example, 31 3 2020',
   errors: {
     placementOrderDate: {
@@ -25,7 +25,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y plentyn',
-  label: 'Pa ddyddiad sydd ar y gorchymyn lleoli?',
+  title: 'Pa ddyddiad sydd ar y gorchymyn lleoli?',
   hint: 'Er enghraifft, 31 3 2020',
   errors: {
     placementOrderDate: {
@@ -67,7 +67,7 @@ describe('children > placement-order-date > content', () => {
 
     expect(placementOrderDateField.type).toBe('date');
     expect(placementOrderDateField.classes).toBe('govuk-date-input');
-    expect((placementOrderDateField.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((placementOrderDateField.label as Function)(generatedContent)).toBe(enContent.title);
     expect(((placementOrderDateField as FormInput).hint as Function)(generatedContent)).toBe(enContent.hint);
     expect(placementOrderDateField.labelSize).toBe('l');
     expect(placementOrderDateField.attributes).toEqual({ spellcheck: false });

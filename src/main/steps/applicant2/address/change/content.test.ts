@@ -10,7 +10,7 @@ jest.mock('../../../../app/form/validation');
 
 const enContent = {
   section: 'Second applicant',
-  label: 'Do you want to change the address for the other applicant?',
+  title: 'Do you want to change the address for the other applicant?',
   errors: {
     changeAddressBothApplicantTwo: {
       required: 'Please select an answer',
@@ -20,7 +20,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Second applicant (in welsh)',
-  label: 'Do you want to change the address for the other applicant? (in welsh)',
+  title: 'Do you want to change the address for the other applicant? (in welsh)',
   errors: {
     changeAddressBothApplicantTwo: {
       required: 'Please select an answer (in welsh)',
@@ -53,7 +53,7 @@ describe('applicant1 > address > change > content', () => {
     const field = fields.changeAddressBothApplicantTwo as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
-    expect((field.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((field.label as Function)(generatedContent)).toBe(enContent.title);
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesOrNo.YES);

@@ -22,7 +22,7 @@ import { form, generateContent } from './content';
 
 const enContent = {
   section: "Birth father's details",
-  label: "What is the nationality of the child's birth father?",
+  title: "What is the nationality of the child's birth father?",
   hint: 'Select all options that are relevant.',
   errors: {
     birthFatherNationality: {
@@ -37,7 +37,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y tad biolegol',
-  label: 'Beth yw cenedligrwydd tad biolegol y plentyn?',
+  title: 'Beth yw cenedligrwydd tad biolegol y plentyn?',
   hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
   errors: {
     birthFatherNationality: {

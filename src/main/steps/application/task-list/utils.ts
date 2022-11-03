@@ -253,30 +253,33 @@ export const getBirthMotherDetailsStatus = (userCase: CaseWithId): SectionStatus
   }
 
   if (stillAlive === YesNoNotsure.YES) {
-    const nationality = userCase.birthMotherNationality;
-    const nationalities = userCase.birthMotherAdditionalNationalities;
-    const nationalityComplete =
-      nationality?.length &&
-      !notSureViolation(nationality) &&
-      (!nationality.includes('Other') || (nationality.includes('Other') && nationalities?.length));
-    const occupation = userCase.birthMotherOccupation;
-    const addressKnown = userCase.birthMotherAddressKnown;
-
-    if (addressKnown === YesOrNo.NO && userCase.birthMotherAddressNotKnownReason) {
-      return names && nationalityComplete && occupation ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
-    }
-
-    return names &&
-      nationalityComplete &&
-      occupation &&
-      addressKnown === YesOrNo.YES &&
-      addressComplete(userCase, FieldPrefix.BIRTH_MOTHER)
-      ? SectionStatus.COMPLETED
-      : SectionStatus.IN_PROGRESS;
+    return birthMotherStillAliveYes(userCase, names);
   }
-
   return names ? SectionStatus.IN_PROGRESS : SectionStatus.NOT_STARTED;
 };
+
+function birthMotherStillAliveYes(userCase: CaseWithId, names: string | undefined) {
+  const nationality = userCase.birthMotherNationality;
+  const nationalities = userCase.birthMotherAdditionalNationalities;
+  const nationalityComplete =
+    nationality?.length &&
+    !notSureViolation(nationality) &&
+    (!nationality.includes('Other') || (nationality.includes('Other') && nationalities?.length));
+  const occupation = userCase.birthMotherOccupation;
+  const addressKnown = userCase.birthMotherAddressKnown;
+
+  if (addressKnown === YesOrNo.NO && userCase.birthMotherAddressNotKnownReason) {
+    return names && nationalityComplete && occupation ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
+  }
+
+  return names &&
+    nationalityComplete &&
+    occupation &&
+    addressKnown === YesOrNo.YES &&
+    addressComplete(userCase, FieldPrefix.BIRTH_MOTHER)
+    ? SectionStatus.COMPLETED
+    : SectionStatus.IN_PROGRESS;
+}
 
 export const getOtherParentStatus = (userCase: CaseWithId): SectionStatus => {
   const exists = userCase.otherParentExists;

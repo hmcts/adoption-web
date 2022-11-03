@@ -84,6 +84,10 @@ module.exports = {
     await I.retry(3).see('Please answer the question');
     await I.wait(2);
     await I.retry(3).click(this.fields.applicant1HasOtherNames);
+    await I.retry(3).click('Add');
+    await I.wait(2);
+    await I.retry(3).see('Enter your previous first names');
+    await I.retry(3).see('Enter your previous last names');
     await I.retry(3).fillField(
       this.fields.applicant1OtherFirstNames,
       primaryApplicantPersonalDetails.primaryApplicantPreviousFirstName
