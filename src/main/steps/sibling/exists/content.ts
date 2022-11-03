@@ -11,7 +11,7 @@ const en = () => ({
     '<label class="govuk-label">You will be asked to provide each sibling court order individually.</label>',
   errors: {
     hasSiblings: {
-      required: 'Select whether the child has any siblings or half siblings with court orders ',
+      required: 'Select whether the child has any siblings or half siblings with court orders',
     },
   },
 });
