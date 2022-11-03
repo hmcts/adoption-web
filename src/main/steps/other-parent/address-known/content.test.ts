@@ -14,7 +14,7 @@ const enContent = {
   moreDetails: "Give a reason why the address is not known, for example 'no fixed address'.",
   errors: {
     otherParentAddressKnown: {
-      required: 'Please select an answer',
+      required: 'Select whether you have the address for the other person with parental responsibility for the child',
     },
     otherParentAddressNotKnownReason: {
       required: 'Provide a reason',
@@ -29,7 +29,7 @@ const cyContent = {
   moreDetails: 'Rhowch reswm pam bod y cyfeiriad yn anhysbys, er enghraifft ‘dim cyfeiriad parhaol’.',
   errors: {
     otherParentAddressKnown: {
-      required: 'Dewiswch ateb os gwelwch yn dda',
+      required: 'Nodwch a oes gennych gyfeiriad yr unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn',
     },
     otherParentAddressNotKnownReason: {
       required: 'Darparwch reswm',

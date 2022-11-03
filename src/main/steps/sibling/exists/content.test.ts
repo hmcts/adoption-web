@@ -15,7 +15,7 @@ const enContent = {
     '<label class="govuk-label">You will be asked to provide each sibling court order individually.</label>',
   errors: {
     hasSiblings: {
-      required: 'Select whether the child has any siblings or half siblings',
+      required: 'Select whether the child has any siblings or half siblings with court orders',
     },
   },
 };
@@ -27,7 +27,7 @@ const cyContent = {
     '<label class="govuk-label">Gofynnir i chi ddarparu pob gorchymyn llys brodyr a chwiorydd yn unigol.</label>',
   errors: {
     hasSiblings: {
-      required: 'Nodwch oes gan y plentyn frodyr/chwiorydd neu hanner brodyr/chwiorydd',
+      required: 'Nodwch a oes gan y plentyn frodyr/chwiorydd neu hanner brodyr/chwiorydd sydd â gorchmynion llys',
     },
   },
 };
