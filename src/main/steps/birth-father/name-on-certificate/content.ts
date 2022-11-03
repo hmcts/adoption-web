@@ -8,7 +8,7 @@ const en = () => ({
   title: "Is the birth father's name on the birth certificate?",
   errors: {
     birthFatherNameOnCertificate: {
-      required: 'Please answer the question',
+      required: 'Select whether the birth father’s name is on the birth certificate',
     },
   },
 });
@@ -18,7 +18,7 @@ const cy: typeof en = () => ({
   title: 'A yw enw’r tad biolegol ar y dystysgrif geni?',
   errors: {
     birthFatherNameOnCertificate: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: 'Nodwch a yw enw’r tad biolegol yw ar y dystysgrif geni',
     },
   },
 });
