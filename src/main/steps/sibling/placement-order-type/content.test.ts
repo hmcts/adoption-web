@@ -21,7 +21,7 @@ const enContent = {
   placementOtherType: 'Add a different type of order',
   errors: {
     selectedSiblingPoType: {
-      required: 'Please select an answer',
+      required: 'Select the order type',
     },
     selectedSiblingOtherPlacementOrderType: {
       required: 'Enter an order type',
@@ -42,7 +42,7 @@ const cyContent = {
   placementOtherType: 'Ychwanegu math gwahanol o orchymyn',
   errors: {
     selectedSiblingPoType: {
-      required: 'Dewiswch ateb os gwelwch yn dda',
+      required: 'Dewiswch y math o orchymyn',
     },
     selectedSiblingOtherPlacementOrderType: {
       required: 'Nodwch y math o orchymyn',
