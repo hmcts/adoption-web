@@ -19,12 +19,15 @@ const enContent = {
   errors: {
     childrenDateOfBirth: {
       required: 'Enter their date of birth',
+      invalidDate: 'Date of birth must be a real date',
+      invalidDateOver18: 'Child is 18 or over and cannot be adopted',
       incompleteDay: 'Date of birth must include a day',
       incompleteMonth: 'Date of birth must include a month',
       incompleteYear: 'Date of birth must include a year',
-      invalidDate: 'Date of birth must be a real date',
       invalidDateInFuture: 'Date of birth must be in the past',
-      invalidDateOver18: 'Child is 18 or over and cannot be adopted',
+      incompleteDayAndMonth: 'Date of birth must include a day and month',
+      incompleteDayAndYear: 'Date of birth must include a day and year',
+      incompleteMonthAndYear: 'Date of birth must include a month and year ',
     },
   },
 };
@@ -39,12 +42,15 @@ const cyContent = {
   errors: {
     childrenDateOfBirth: {
       required: 'Rhowch eu dyddiad geni',
-      incompleteDay: 'Mae’n rhaid i’r dyddiad geni gynnwys diwrnod',
-      incompleteMonth: 'Mae’n rhaid i’r dyddiad geni gynnwys mis',
-      incompleteYear: 'Mae’n rhaid i’r dyddiad geni gynnwys blwyddyn',
       invalidDate: 'Mae’n rhaid i’r dyddiad geni fod yn ddyddiad go iawn',
-      invalidDateInFuture: 'Rhaid i’r dyddiad geni fod yn y gorffennol',
       invalidDateOver18: 'Mae’r plentyn yn 18 oed neu’n hŷn ac ni ellir ei fabwysiadu',
+      incompleteDay: 'Rhaid i’r dyddiad geni gynnwys diwrnod',
+      incompleteMonth: 'Rhaid i’r dyddiad geni gynnwys mis',
+      incompleteYear: 'Rhaid i’r dyddiad geni gynnwys blwyddyn',
+      invalidDateInFuture: 'Rhaid i’ch dyddiad geni fod yn y gorffennol',
+      incompleteDayAndMonth: 'Rhaid i’r dyddiad geni gynnwys diwrnod a mis',
+      incompleteDayAndYear: 'Rhaid i’r dyddiad geni gynnwys diwrnod a blwyddyn',
+      incompleteMonthAndYear: 'Rhaid i’r dyddiad geni gynnwys mis a blwyddyn',
     },
   },
 };
