@@ -31,7 +31,7 @@ const en = (fieldPrefix: FieldPrefix) => ({
       notSureViolation: "Select a nationality or 'Not sure'",
     },
     addAnotherNationality: {
-      required: 'This is not a valid entry',
+      required: 'Enter a country name',
     },
   },
 });
