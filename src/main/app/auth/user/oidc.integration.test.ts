@@ -11,8 +11,12 @@ config.get = jest.fn();
 
 const mockedAxios = Axios as jest.Mocked<AxiosStatic>;
 
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvcmlhbiIsInVpZCI6IjEyMyIsInJvbGVzIjpbImFkb3B0aW9uLWNpdGl6ZW4tdXNlciJdfQ.G7Na_2U6gEuPEPXBuVq3UddV9mti85Sw3Gzd0yZA-2I';
+const token = config['mockData']['authToken'];
+const mockedEmail = config['mockData']['email'];
+const mockedGivenName = config['mockData']['givenName'];
+const mockedId = config['mockData']['id'];
+const mockedFamilyName = config['mockData']['familyName'];
+const mockedRoles = config['mockData']['roles'];
 
 describe('getRedirectUrl', () => {
   test('should create a valid URL to redirect to the login screen', () => {
@@ -40,11 +44,11 @@ describe('getUserDetails', () => {
     const result = await getUserDetails('http://localhost', '123', CALLBACK_URL);
     expect(result).toStrictEqual({
       accessToken: token,
-      email: 'test@test.com',
-      givenName: 'John',
-      familyName: 'Dorian',
-      id: '123',
-      roles: ['adoption-citizen-user'],
+      email: mockedEmail,
+      givenName: mockedGivenName,
+      familyName: mockedFamilyName,
+      id: mockedId,
+      roles: mockedRoles,
     });
   });
 });
@@ -61,11 +65,11 @@ describe('getCaseWorkerUser', () => {
     const result = await getSystemUser();
     expect(result).toStrictEqual({
       accessToken: token,
-      email: 'test@test.com',
-      givenName: 'John',
-      familyName: 'Dorian',
-      id: '123',
-      roles: ['adoption-citizen-user'],
+      email: mockedEmail,
+      givenName: mockedGivenName,
+      familyName: mockedFamilyName,
+      id: mockedId,
+      roles: mockedRoles,
     });
   });
 });
