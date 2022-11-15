@@ -11,7 +11,7 @@ const en = () => ({
     '<label class="govuk-label">You will be asked to provide each sibling court order individually.</label>',
   errors: {
     hasSiblings: {
-      required: 'Please select an answer',
+      required: 'Select whether the child has any siblings or half siblings with court orders',
     },
   },
 });
@@ -23,7 +23,7 @@ const cy: typeof en = () => ({
     '<label class="govuk-label">Gofynnir i chi ddarparu pob gorchymyn llys brodyr a chwiorydd yn unigol.</label>',
   errors: {
     hasSiblings: {
-      required: 'Dewiswch ateb os gwelwch yn dda',
+      required: 'Nodwch a oes gan y plentyn frodyr/chwiorydd neu hanner brodyr/chwiorydd sydd â gorchmynion llys',
     },
   },
 });

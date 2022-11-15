@@ -11,7 +11,7 @@ const en = () => ({
   hint: 'If this person has died, you will need to provide the death certificate.',
   errors: {
     birthMotherStillAlive: {
-      required: 'Please answer the question',
+      required: 'Select whether the birth mother is alive',
     },
     birthMotherNotAliveReason: {
       required: 'Enter more detail',
@@ -27,7 +27,7 @@ const cy: typeof en = () => ({
   hint: "Os yw’r unigolyn hwn wedi marw, bydd angen i chi ddarparu'r dystysgrif marwolaeth.",
   errors: {
     birthMotherStillAlive: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: 'Nodwch a yw’r fam fiolegol yn fyw.',
     },
     birthMotherNotAliveReason: {
       required: 'Rhowch fwy o fanylion',

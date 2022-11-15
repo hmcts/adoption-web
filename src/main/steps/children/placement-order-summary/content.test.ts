@@ -17,7 +17,7 @@ const enContent = {
   label: 'Does the child have any other previous or existing orders?',
   errors: {
     addAnotherPlacementOrder: {
-      required: 'Please select an answer',
+      required: 'Select whether the child has any other previous or existing orders',
     },
   },
   placementOrderListItems: [
@@ -48,7 +48,7 @@ const cyContent = {
   label: 'A oes gan y plentyn unrhyw orchmynion blaenorol neu bresennol eraill?',
   errors: {
     addAnotherPlacementOrder: {
-      required: 'Dewiswch ateb os gwelwch yn dda',
+      required: 'Nodwch a oes gan y plentyn unrhyw orchmynion blaenorol neu bresennol eraill',
     },
   },
   placementOrderListItems: [

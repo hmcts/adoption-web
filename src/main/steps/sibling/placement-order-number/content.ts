@@ -8,7 +8,7 @@ const en = () => ({
   title: 'What is the serial or case number on the order?',
   errors: {
     siblingPoNumber: {
-      required: 'Please answer the question',
+      required: 'Enter the order’s serial or case number',
     },
   },
 });
@@ -18,7 +18,7 @@ const cy: typeof en = () => ({
   title: 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn?',
   errors: {
     siblingPoNumber: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: 'Nodwch y rhif cyfresol y gorchymyn neu rif yr achos',
     },
   },
 });

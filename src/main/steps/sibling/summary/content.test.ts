@@ -36,7 +36,7 @@ const enContent = {
   label: 'Do you want to add another order for the same or another sibling?',
   errors: {
     addAnotherSiblingPlacementOrder: {
-      required: 'Please select an answer',
+      required: 'Select whether you want to add another order for the same or another sibling',
     },
   },
 };
@@ -69,7 +69,8 @@ const cyContent = {
   label: 'A ydych eisiau ychwanegu gorchymyn arall ar gyfer yr un brawd/chwaer neu frawd/chwaer arall?',
   errors: {
     addAnotherSiblingPlacementOrder: {
-      required: 'Dewiswch ateb os gwelwch yn dda',
+      required:
+        'Nodwch a oes arnoch eisiau ychwanegu gorchymyn arall ar gyfer yr un brawd/chwaer neu frawd/chwaer arall',
     },
   },
 };

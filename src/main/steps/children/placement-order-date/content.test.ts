@@ -14,11 +14,14 @@ const enContent = {
   errors: {
     placementOrderDate: {
       required: 'Enter the placement order date',
-      incompleteDay: 'Date must include a day',
-      incompleteMonth: 'Date must include a month',
-      incompleteYear: 'Date must include a year',
       invalidDate: 'Enter a real date',
       invalidDateInFuture: 'Date must be in the past',
+      incompleteDay: 'Enter a day',
+      incompleteMonth: 'Enter a month',
+      incompleteYear: 'Enter a year',
+      incompleteDayAndMonth: 'Enter a day and month',
+      incompleteMonthAndYear: 'Enter a month and year',
+      incompleteDayAndYear: 'Enter a day and year',
     },
   },
 };
@@ -30,11 +33,14 @@ const cyContent = {
   errors: {
     placementOrderDate: {
       required: 'Nac ydwdwch ddyddiad y gorchymyn lleoli',
-      incompleteDay: 'Rhaid i’r dyddiad gynnwys diwrnod',
-      incompleteMonth: 'Rhaid i’r dyddiad gynnwys mis',
-      incompleteYear: 'Rhaid i’r dyddiad gynnwys blwyddyn',
       invalidDate: 'Nac ydwdwch ddyddiad dilys',
       invalidDateInFuture: 'Rhaid i’r dyddiad fod yn y gorffennol',
+      incompleteDay: 'Nodwch ddiwrnod',
+      incompleteMonth: 'Nodwch fis',
+      incompleteYear: 'Nodwch flwyddyn',
+      incompleteDayAndMonth: 'Nodwch ddiwrnod a blwyddyn',
+      incompleteMonthAndYear: 'Nodwch fis a blwyddyn',
+      incompleteDayAndYear: 'Nodwch ddiwrnod a blwyddyn',
     },
   },
 };
