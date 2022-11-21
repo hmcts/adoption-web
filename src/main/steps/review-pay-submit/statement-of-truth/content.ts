@@ -7,6 +7,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 const en = () => ({
   section: 'Review your application, pay and send',
   title: 'Statement of truth',
+  hint: 'Payment portal is down please save as Draft till further notice',
   statement:
     'I understand that proceedings for contempt of court may be brought against anyone who makes, or causes to be made, a false statement in a document verified by a statement of truth without an honest belief in the truth.',
   reviewBeforeSubmit:
@@ -18,7 +19,7 @@ const en = () => ({
   applicant2IBelieveApplicationIsTrue: 'I am authorised by the second applicant to sign this statement.',
   applicant1SotFullName: 'Enter your full name',
   applicant2SotFullName: "Enter the second applicant's full name (if applicable)",
-  confirm: 'Confirm',
+  //confirm: 'Confirm',
   errors: {
     applicant1IBelieveApplicationIsTrue: {
       required: 'Confirm your statement of truth',
@@ -38,6 +39,7 @@ const en = () => ({
 const cy: typeof en = () => ({
   section: 'Adolygu eich cais, talu a’i anfon',
   title: 'Datganiad Gwirionedd',
+  hint: 'Payment portal is down please save as Draft till further notice',
   statement:
     'Deallaf y gellir dwyn achos dirmyg llys yn erbyn unrhyw un sy’n gwneud datganiad anwir, neu sy’n achosi i ddatganiad anwir gael ei wneud mewn dogfen a ddilysir gan ddatganiad gwirionedd heb gredu’n onest ei fod yn wir.',
   reviewBeforeSubmit:
@@ -49,7 +51,7 @@ const cy: typeof en = () => ({
   applicant2IBelieveApplicationIsTrue: 'Fe’m hawdurdodir gan yr ail geisydd i lofnodi’r datganiad hwn.',
   applicant1SotFullName: 'Nac ydwdwch eich enw llawn',
   applicant2SotFullName: 'Nac ydwdwch enw llawn yr ail geisydd (os yw’n berthnasol)',
-  confirm: 'Cadarnhau',
+  //confirm: 'Cadarnhau',
   errors: {
     applicant1IBelieveApplicationIsTrue: {
       required: 'Cadarnhewch eich datganiad gwirionedd',

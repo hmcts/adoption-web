@@ -164,6 +164,7 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
 
 const en = () => ({
   title: 'Apply to adopt a child placed in your care',
+  hint: 'Payment link is down. Please do not proceed with Payment',
   statuses: {
     [SectionStatus.COMPLETED]: 'Completed',
     [SectionStatus.IN_PROGRESS]: 'In Progress',
