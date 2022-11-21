@@ -495,9 +495,9 @@ export const getApplicationStatus = (userCase: CaseWithId): SectionStatus => {
 
   if (statuses.every(status => status === SectionStatus.COMPLETED)) {
     if (statementOfTruthAndPaymentStatus(userCase) === SectionStatus.IN_PROGRESS) {
-      return SectionStatus.IN_PROGRESS;
+      return SectionStatus.CAN_NOT_START_YET;
     }
-    return SectionStatus.NOT_STARTED;
+    return SectionStatus.CAN_NOT_START_YET;
   }
 
   return SectionStatus.CAN_NOT_START_YET;
