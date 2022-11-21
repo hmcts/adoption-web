@@ -18,7 +18,7 @@ const en = () => ({
   applicant2IBelieveApplicationIsTrue: 'I am authorised by the second applicant to sign this statement.',
   applicant1SotFullName: 'Enter your full name',
   applicant2SotFullName: "Enter the second applicant's full name (if applicable)",
-  //confirm: 'Confirm',
+  confirm: 'Confirm',
   errors: {
     applicant1IBelieveApplicationIsTrue: {
       required: 'Confirm your statement of truth',
@@ -49,7 +49,7 @@ const cy: typeof en = () => ({
   applicant2IBelieveApplicationIsTrue: 'Fe’m hawdurdodir gan yr ail geisydd i lofnodi’r datganiad hwn.',
   applicant1SotFullName: 'Nac ydwdwch eich enw llawn',
   applicant2SotFullName: 'Nac ydwdwch enw llawn yr ail geisydd (os yw’n berthnasol)',
-  //confirm: 'Cadarnhau',
+  confirm: 'Cadarnhau',
   errors: {
     applicant1IBelieveApplicationIsTrue: {
       required: 'Cadarnhewch eich datganiad gwirionedd',
