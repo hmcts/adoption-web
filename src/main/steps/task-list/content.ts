@@ -176,7 +176,7 @@ const en = () => ({
     applicantDetails: "Add applicant's details",
     childDetails: "Add child's details",
     uploadDocuments: 'Upload documents',
-    reviewPayAndSubmit: 'Review, pay and submit',
+    reviewPayAndSubmit: 'Review, pay and submit .[Payment link Temporarily Down]',
   },
   taskListItems: {
     numberOfApplicants: 'Number of applicants',
