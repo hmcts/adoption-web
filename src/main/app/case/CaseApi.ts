@@ -23,7 +23,7 @@ import { toApiFormat } from './to-api-format';
 
 export class CaseApi {
   constructor(private readonly axios: AxiosInstance, private readonly logger: LoggerInstance) {}
-
+  //const logger = Logger.getLogger('CaseApi.ts');
   public async getOrCreateCase(
     serviceType: Adoption,
     userDetails: UserDetails,
@@ -34,8 +34,9 @@ export class CaseApi {
   }
 
   private async getCase(): Promise<CaseWithId | false> {
+    this.logger.info('Inside the parent getCase');
     const cases = await this.getCases();
-
+    this.logger.info('cases length : ', cases.length);
     switch (cases.length) {
       case 0: {
         return false;
@@ -45,22 +46,25 @@ export class CaseApi {
         return { ...fromApiFormat(caseData), id: id.toString(), state };
       }
       default: {
+        this.logger.error('Too many cases assigned to users in application');
         throw new Error('Too many cases assigned to user.');
       }
     }
   }
 
   public async getCases(): Promise<CcdV1Response[]> {
+    this.logger.info('Inside the child getCases');
     try {
       const query = {
         query: { match_all: {} },
         sort: [{ id: { order: 'asc' } }],
       };
+
       const response = await this.axios.post<ES<CcdV1Response>>(
         `/searchCases?ctid=${CASE_TYPE}`,
         JSON.stringify(query)
       );
-      //this.logger.info('Case/s fetched using elastic search API :: ', response.data.cases);
+      this.logger.info('Case/s fetched using elastic search API :: ', response.data.cases);
       return response.data.cases;
     } catch (err) {
       this.logError(err);
@@ -88,6 +92,7 @@ export class CaseApi {
       `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
     );
     const token = tokenResponse.data.token;
+    this.logger.info('Token response from citizen-create event : ', token);
     const event = { id: CITIZEN_CREATE };
     const data = {
       //adoption: serviceType,
@@ -103,6 +108,8 @@ export class CaseApi {
         event,
         event_token: token,
       });
+      this.logger.info('After ccd cases api call id is : ', response.data.id);
+      this.logger.info('After ccd cases api call state is : ', response.data.state);
       return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
     } catch (err) {
       this.logError(err);

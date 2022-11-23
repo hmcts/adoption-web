@@ -32,6 +32,7 @@ export class OidcMiddleware {
           const role: string = config.get('services.idam.userRole');
           logger.info('Roles are ---', req.session.user.roles);
           if (req.session.user.roles.includes(role)) {
+            logger.info('User has the correct permisssion');
             return req.session.save(() => res.redirect('/'));
           } else {
             req.session.user = undefined;
@@ -50,6 +51,7 @@ export class OidcMiddleware {
         if (req.session?.user) {
           res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
+          logger.info('The ccd data call is set now');
           if (!req.session.userCase) {
             //This language preference will be used while creating a case
             const languagePreference =
