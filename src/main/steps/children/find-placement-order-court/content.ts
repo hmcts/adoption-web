@@ -9,6 +9,7 @@ const getCourtListItems = (courtList, selectedCourt) =>
 
 const en = content => ({
   section: "The child's details",
+  title: 'Which court made the placement order?',
   label: 'Which court made the placement order?',
   options: [
     ...getCourtListItems(content.courtList, content.userCase.placementOrderCourt),
@@ -23,6 +24,7 @@ const en = content => ({
 
 const cy: typeof en = content => ({
   section: 'Manylion y plentyn',
+  title: 'Pa lys wnaeth wneud y gorchymyn lleoli?',
   label: 'Pa lys wnaeth wneud y gorchymyn lleoli?',
   options: [
     ...getCourtListItems(content.courtList, content.userCase.placementOrderCourt),
