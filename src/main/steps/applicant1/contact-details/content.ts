@@ -15,7 +15,7 @@ const en = content => ({
     'The court may want to use your email to serve you court orders. Are you happy to be served court orders by email?',
   errors: {
     applicant1ContactDetailsConsent: {
-      required: 'Please answer the question',
+      required: 'Select whether you are happy to be served court orders by email',
     },
     applicant1EmailAddress: {
       required: 'Enter your email address',
@@ -40,7 +40,7 @@ const cy: typeof en = content => ({
     'Efallai bydd y llys eisiau defnyddio eich cyfeiriad e-bost i gyflwyno gorchmynion llys arnoch, A ydych yn hapus i neuchmynion llys gael eu cyflwyno arnoch drwy e-bost?',
   errors: {
     applicant1ContactDetailsConsent: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: 'Dewiswch a ydych yn hapus i gael eich gorchmynion llys drwy e-bost.',
     },
     applicant1EmailAddress: {
       required: 'Nac ydwdwch eich cyfeiriad e-bost',
@@ -74,7 +74,7 @@ export const form: FormContent = {
       classes: 'govuk-radios',
       label: l => l.applicant1ContactDetailsConsent,
       section: l => l.section,
-      labelHidden: true,
+      labelHidden: false,
       labelSize: 'small',
       values: [
         { label: l => l.yes, value: YesOrNo.YES },

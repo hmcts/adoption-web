@@ -33,10 +33,10 @@ const enContent = {
       required: 'Confirm your statement of truth',
     },
     applicant1SotFullName: {
-      required: 'Enter a full name',
+      required: 'Enter your full name',
     },
     applicant2SotFullName: {
-      required: 'Enter a full name',
+      required: "Enter the second applicant's full name",
     },
   },
 };

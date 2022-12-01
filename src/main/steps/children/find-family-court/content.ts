@@ -27,7 +27,7 @@ const en = content => ({
   ],
   errors: {
     findFamilyCourt: {
-      required: 'Please answer the question',
+      required: 'Select yes if you want the hearings to be heard in the same court',
     },
     familyCourtName: {
       required: 'Enter the name of the court',
@@ -54,7 +54,7 @@ const cy: typeof en = content => ({
   ],
   errors: {
     findFamilyCourt: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: "Dewiswch ie os ydych am i'r gwrandawiadau gael eu clywed yn yr un llys",
     },
     familyCourtName: {
       required: 'Nac ydwdwch enw’r llys',
@@ -70,7 +70,7 @@ export const form: FormContent = {
       section: l => l.section,
       label: l => l.findFamilyCourt,
       hint: l => l.findFamilyCourtHint,
-      labelHidden: true,
+      labelHidden: false,
       labelSize: 'normal',
       values: [
         {
