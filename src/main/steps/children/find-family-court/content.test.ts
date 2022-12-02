@@ -24,7 +24,7 @@ const enContent = {
   options: [{ text: 'MOCK', value: 'MOCK', selected: true }],
   errors: {
     findFamilyCourt: {
-      required: 'Select yes if you want the hearings to be heard in the same court',
+      required: 'Please answer the question',
     },
     familyCourtName: {
       required: 'Enter the name of the court',
