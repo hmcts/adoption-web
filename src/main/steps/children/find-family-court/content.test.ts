@@ -98,7 +98,7 @@ describe('children > find-family-court > content', () => {
     expect(field.validator).toBe(isFieldFilledIn);
 
     const field2 = field.values[1].subFields!.familyCourtName;
-    expect(field2.type).toBe('select');
+    expect(field2.type).toBe('select-dropdown');
 
     const field4 = field.values[1].subFields!.p2;
     expect((field4?.label as Function)(generatedContent)).toBe(enContent.familyCourtNameParagraph2);

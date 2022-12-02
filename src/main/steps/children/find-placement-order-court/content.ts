@@ -38,16 +38,17 @@ const cy: typeof en = content => ({
 export const form: FormContent = {
   fields: {
     // h1: {
-    //   label: l => l.title,
+    //   label: l => l.label,
     //   type: 'heading'
     // },
     placementOrderCourt: {
-      type: 'select',
+      type: 'select-dropdown',
       id: 'location-picker',
       options: l => l.options,
       validator: isFieldFilledIn,
       label: l => l.label,
-      classes: 'govuk-label--l',
+      classes: 'l',
+      labelSize: 'l',
     },
   },
   submit: {

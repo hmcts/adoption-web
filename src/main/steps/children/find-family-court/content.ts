@@ -92,12 +92,12 @@ export const form: FormContent = {
             //   type: 'label',
             // },
             familyCourtName: {
-              type: 'select',
+              type: 'select-dropdown',
               id: 'location-picker',
               options: l => l.options,
               validator: isFieldFilledIn,
-              label: l => l.title,
-              classes: 'govuk-label--s',
+              label: l => l.label,
+              classes: 's',
             },
             p3: {
               label: l => l.familyCourtNameParagraph3,

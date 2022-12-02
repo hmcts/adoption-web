@@ -55,12 +55,13 @@ export const form: FormContent = {
     //   type: 'heading',
     // },
     placementOrderCourt: {
-      type: 'select',
+      type: 'select-dropdown',
       id: 'location-picker',
       options: l => l.options,
       validator: isFieldFilledIn,
       label: l => l.label,
-      classes: 'govuk-label--l',
+      classes: 'l',
+      labelSize: 'l',
     },
   },
   submit: {

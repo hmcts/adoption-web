@@ -55,7 +55,7 @@ describe('children > find-placement-order-court > content', () => {
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const placementOrderCourtField = fields.placementOrderCourt as FormOptions;
-    expect(placementOrderCourtField.type).toBe('select');
+    expect(placementOrderCourtField.type).toBe('select-dropdown');
     expect(placementOrderCourtField.id).toBe('location-picker');
     expect((placementOrderCourtField.label as Function)(generatedContent)).toBe(enContent.label);
 
