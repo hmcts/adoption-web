@@ -46,7 +46,7 @@ export const form: FormContent = {
       id: 'location-picker',
       options: l => l.options,
       validator: isFieldFilledIn,
-      label: l => l.title,
+      label: l => l.label,
       classes: 'govuk-label--l',
     },
   },
