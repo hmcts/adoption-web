@@ -69,7 +69,7 @@ module.exports = {
     await I.wait(4);
     await I.retry(3).see('Enter your email address');
     await I.retry(3).see('Enter a UK telephone number');
-    await I.retry(3).see('Please answer the question');
+    await I.retry(3).see('Select whether you are happy to be served court orders by email.');
     await I.retry(3).fillField(this.fields.applicant2EmailAddress, secondApplicantDetails.secondApplicantEmailAddress);
     await I.retry(3).fillField(this.fields.applicant1PhoneNumber, secondApplicantDetails.secondApplicantPhoneNumber);
     await I.retry(3).click(this.fields.applicant2ContactDetailsConsent);
