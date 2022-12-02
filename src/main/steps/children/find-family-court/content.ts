@@ -11,6 +11,7 @@ const getCourtListItems = (courtList, selectedCourt) =>
 const en = content => ({
   section: "The child's details",
   title: 'Choose a family court',
+  label: 'Enter the full name of the court',
   findFamilyCourtParagraph1:
     'There may be court hearings related to your application to adopt. The birth parents may be present at these. You do not have to attend these hearings.',
   findFamilyCourtParagraph2: `You have told us that the court which issued the placement order was <b>${content.userCase?.placementOrderCourt}</b>.`,
@@ -38,6 +39,7 @@ const en = content => ({
 const cy: typeof en = content => ({
   section: 'Manylion y plentyn',
   title: 'Dewiswch lys teulu',
+  label: 'Nac ydwdwch enw llawn y llys',
   findFamilyCourtParagraph1:
     'Efallai cynhelir gwrandawiadau llys sy’n ymwneud â’ch cais i fabwysiadu. Efallai bydd y rheini biolegol yn bresennol yn y gwrandawiadau hyn. Nid oes rhaid ichi fynychu’r gwrandawiadau hyn.',
   findFamilyCourtParagraph2: `Rydych wedi dweud wrthym mai’r llys a gyhoeddodd y gorchymyn lleoli oedd <b>${content.userCase?.placementOrderCourt}</b>.`,
@@ -85,15 +87,17 @@ export const form: FormContent = {
               label: l => l.familyCourtNameParagraph2,
               type: 'label',
             },
-            p4: {
-              label: l => l.familyCourtName,
-              type: 'label',
-            },
+            // p4: {
+            //   label: l => l.familyCourtName,
+            //   type: 'label',
+            // },
             familyCourtName: {
               type: 'select',
               id: 'location-picker',
               options: l => l.options,
               validator: isFieldFilledIn,
+              label: l => l.title,
+              classes: 'govuk-label--s',
             },
             p3: {
               label: l => l.familyCourtNameParagraph3,
