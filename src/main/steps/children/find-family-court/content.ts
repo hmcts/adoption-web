@@ -87,10 +87,6 @@ export const form: FormContent = {
               label: l => l.familyCourtNameParagraph2,
               type: 'label',
             },
-            // p4: {
-            //   label: l => l.familyCourtName,
-            //   type: 'label',
-            // },
             familyCourtName: {
               type: 'select-dropdown',
               id: 'location-picker',
