@@ -63,7 +63,7 @@ withNightlyPipeline(type, product, component) {
   enableFortifyScan()
   enableSecurityScan()
 
-  afterAlways('test') {
+  after('test') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
   }
 
@@ -71,7 +71,7 @@ withNightlyPipeline(type, product, component) {
 
   }
 
-  afterAlways('crossBrowserTest') {
+  after('crossBrowserTest') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
   }
 
@@ -79,11 +79,11 @@ withNightlyPipeline(type, product, component) {
     env.PARALLEL_CHUNKS = params.FUNCTIONAL_TESTS_WORKERS
   }
 
-  afterAlways('fullFunctionalTest') {
+  after('fullFunctionalTest') {
     archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
   }
 
-  afterAlways('fortify-scan') {
+  after('fortify-scan') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: '**/Fortify Scan/**/*'
   }
 }
