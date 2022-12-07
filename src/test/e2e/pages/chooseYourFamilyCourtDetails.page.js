@@ -40,7 +40,7 @@ module.exports = {
     await I.retry(3).waitForText('Choose a family court');
     await I.retry(3).click('Save and continue');
     await I.wait(2);
-    await I.retry(3).see('Please answer the question');
+    await I.retry(3).see('Select yes if you want the hearings to be heard in the same court');
     await I.retry(3).click(this.fields.findFamilyCourt);
     await I.retry(3).click('Save and continue');
     await I.wait(4);

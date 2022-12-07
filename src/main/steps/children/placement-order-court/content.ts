@@ -14,7 +14,7 @@ const getSelectedPlacementOrder = userCase => {
 
 const en = content => ({
   section: "The child's details",
-  title: 'Which court made the order?',
+  label: 'Which court made the order?',
   options: [
     ...getCourtListItems(content.courtList, getSelectedPlacementOrder(content.userCase)),
     {
@@ -32,7 +32,7 @@ const en = content => ({
 
 const cy: typeof en = content => ({
   section: 'Manylion y plentyn',
-  title: 'Pa lys wnaeth wneud y gorchymyn lleoli?',
+  label: 'Pa lys wnaeth wneud y gorchymyn lleoli?',
   options: [
     ...getCourtListItems(content.courtList, getSelectedPlacementOrder(content.userCase)),
     {
@@ -55,11 +55,13 @@ export const form: FormContent = {
     //   type: 'heading',
     // },
     placementOrderCourt: {
-      type: 'select',
+      type: 'select-dropdown',
       id: 'location-picker',
       options: l => l.options,
       validator: isFieldFilledIn,
-      label: l => l.title,
+      label: l => l.label,
+      classes: 'l',
+      labelSize: 'l',
     },
   },
   submit: {
