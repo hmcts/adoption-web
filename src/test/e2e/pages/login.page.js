@@ -21,6 +21,7 @@ module.exports = {
   async createCitizenUserAndSignIn() {
     console.log('User using the URL= ' + config.baseUrl);
     await login('citizenSingleton');
+    await I.retry(2).click('Start now');
     await I.wait(4);
     I.see('Are you applying on your own, or with someone else?');
   },

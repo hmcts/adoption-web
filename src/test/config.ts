@@ -26,6 +26,8 @@ export const autoLogin = {
   },
   check: (I: CodeceptJS.I): void => {
     I.amOnPage(`${process.env.ADOP_WEB_URL}`);
+    I.retry(3).click('Start now');
+    I.wait(2);
     I.waitForText('Are you applying on your own, or with someone else?');
   },
 };
