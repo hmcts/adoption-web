@@ -3,7 +3,7 @@ import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import { ApplyingWith, State } from '../../app/case/definition';
 import {
   APPLICATION_SUBMITTED,
-  APPLYING_WITH_URL,
+  START_PLACEMENT_URL,
   CHECK_ANSWERS_URL,
   CONFIRM_JOINT_APPLICATION,
   HUB_PAGE,
@@ -29,7 +29,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(APPLYING_WITH_URL);
+    expect(res.redirect).toBeCalledWith(START_PLACEMENT_URL);
   });
 
   test('redirects to task list when applyingWith question has been answered', () => {
