@@ -26,8 +26,6 @@ const enContent = {
   line6:
     "You will need to provide details about yourself and any second applicant. Some of the information you provide is needed for the Adoption Register and adoption certificate which will replace the child's birth certificate. Your personal information will not affect your application to adopt.",
   line7: 'The information you provide will only be seen by the court and relevant adoption agencies or authorities.',
-  line8:
-    'The court processing fee for an application to adopt is <b>£183</b>. Payment is due once the application is complete and ready to submit to the court.',
 };
 
 const cyContent = {
@@ -52,8 +50,6 @@ const cyContent = {
     'Bydd arnoch angen darparu manylion am eich hun ac unrhyw ail geisydd. Mae rhai o’r wybodaeth a ddarperir gennych yn angenrheidiol ar gyfer y Gofrestr Fabwysiadu a’r dystysgrif fabwysiadu, a fydd yn disodli tystysgrif geni’r plentyn. Ni fydd eich gwybodaeth bersonol yn effeithio ar eich cais i fabwysiadu.',
   line7:
     'Dim ond y llys a’r asiantaethau neu awdurdodau mabwysiadu perthnasol fydd yn gweld yr wybodaeth a ddarperir gennych.',
-  line8:
-    'Y ffi prosesu llys ar gyfer cais i fabwysiadu yw <b>£183</b>. Mae taliad yn ddyledus unwaith y bydd y cais wedi’i gwblhau ac yn barod i’w gyflwyno i’r llys.',
 };
 
 describe('applicant1 > start-placement > content', () => {
