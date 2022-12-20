@@ -1,6 +1,4 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
-import { FormContent, FormFields, FormOptions, LanguageLookup, ValidationCheck } from '../../../app/form/Form';
-import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
@@ -8,94 +6,67 @@ import { generateContent } from './content';
 jest.mock('../../../app/form/validation');
 
 const enContent = {
-  section: 'Application details',
-  label: 'Are you applying on your own, or with someone else?',
-  one: "I'm applying on my own",
-  oneHint: 'For example, as a single parent.',
-  two: "I'm applying with my spouse or civil partner",
-  twoHint: 'For example, as a married couple with joint parenting responsibilities.',
-  three: "I'm applying with someone who is not my spouse or civil partner",
-  threeHint: 'For example, with a long-term partner but not in a legally binding relationship.',
-  moreDetails: 'Give a brief overview of what your relationship is with the other applicant.',
-  errors: {
-    applyingWith: {
-      required: 'Select an option which best describes who is applying',
-    },
-    otherApplicantRelation: {
-      required: 'Provide details of your relationship with the other applicant',
-      invalid: 'Overview must be 500 characters or fewer',
-    },
-  },
+  title: 'Apply to adopt a child placed in your care',
+  line1:
+    'You can apply to adopt a child who\'s in your care following a <a class="govuk-link" href="/eligibility/start">court placement order.</a>',
+  line2:
+    'The child must have lived with you for at least 10 weeks before you apply. You will not be able to submit your application until the 10 week period has passed.',
+  line3:
+    "You can start your application and save progress by selecting 'save as draft'. This will make sure your answers are saved so you can continue working on the application at a later date. You can only submit once all sections are completed.",
+  heading1: 'Before you start',
+  subheading1: 'Details about the child',
+  line4: 'You will need some documents and information about the child:',
+  bulletPoint1: "the child's full birth certificate (this includes details of the child's birth parents)",
+  bulletPoint2: "details from the child's placement order",
+  bulletPoint3: "the birth parents' names, addresses and occupations",
+  bulletPoint4:
+    "details of any previous court proceedings involving the child, or the child's siblings or half siblings",
+  line5: 'Your social worker or adoption agency can help to provide these details.',
+  subheading2: 'Details about you',
+  line6:
+    "You will need to provide details about yourself and any second applicant. Some of the information you provide is needed for the Adoption Register and adoption certificate which will replace the child's birth certificate. Your personal information will not affect your application to adopt.",
+  line7: 'The information you provide will only be seen by the court and relevant adoption agencies or authorities.',
+  line8:
+    'The court processing fee for an application to adopt is <b>£183</b>. Payment is due once the application is complete and ready to submit to the court.',
 };
 
 const cyContent = {
-  section: 'Manylion y cais',
-  label: 'A ydych yn gwneud cais ar ben eich hun, neu gyda rhywun arall?',
-  one: 'Rwy’n gwneud cais ar ben fy hun',
-  oneHint: 'Er enghraifft, fel rhiant sengl.',
-  two: 'Rwy’n gwneud cais gyda fy mhriod / fy mhartner sifil',
-  twoHint: 'Er enghraifft, fel cwpl priod gyda chyfrifoldebau rhiant ar y cyd.',
-  three: 'Rwy’n gwneud cais gyda rhywun nad ydynt yn briod neu’n bartner sifil i mi',
-  threeHint: 'Er enghraifft, gyda phartner hir dymor ond nid ydym mewn perthynas sy’n rhwymol yn gyfreithiol.',
-  moreDetails: 'Rhowch drosolwg bras o beth yw eich perthynas â’r ceisydd arall.',
-  errors: {
-    applyingWith: {
-      required: 'Dewiswch opsiwn sy’n disgrifio neuau pwy sy’n gwneud cais',
-    },
-    otherApplicantRelation: {
-      required: 'Darparwch fanylion am eich perthynas â’r ceisydd arall',
-      invalid: 'Rhaid i’r trosolwg fod yn 500 nod neu lai',
-    },
-  },
+  title: 'Gwneud cais i fabwysiadu plentyn a leolwyd dan eich gofal',
+  line1:
+    'Gallwch wneud cais i fabwysiadu plentyn sydd dan eich gofal yn dilyn <a class="govuk-link" href="/eligibility/start">gorchymyn lleoli gan lys.</a>',
+  line2:
+    'Rhaid bod y plentyn wedi byw gyda chi am o leiaf 10 wythnos cyn ichi wneud cais. Ni fyddwch yn gallu cyflwyno’ch cais nes bod y cyfnod o 10 wythnos wedi pasio.',
+  line3:
+    'Gallwch gychwyn eich cais a chadw eich cynnydd trwy glicio ar ‘cadw fel drafft’. Bydd hyn yn sicrhau bod eich atebion yn cael eu cadw fel y gallwch barhau i weithio ar y cais nes ymlaen. Gallwch ond cyflwyno’r cais pan fydd yr holl adrannau wedi’u llenwi.',
+  heading1: 'Cyn i chi ddechrau',
+  subheading1: 'Manylion am y plentyn',
+  line4: 'Bydd arnoch angen rhai dogfennau a gwybodaeth am y plentyn:',
+  bulletPoint1: 'tystysgrif geni llawn y plentyn (mae hyn yn cynnwys manylion am rieni biolegol y plentyn)',
+  bulletPoint2: 'Manylion o neuchymyn lleoli’r plentyn',
+  bulletPoint3: 'enwau, cyfeiriadau a galwedigaethau’r rhieni biolegol',
+  bulletPoint4:
+    'manylion unrhyw achosion llys blaenorol sy’n ymwneud â’r plentyn, neu frodyr/chwiorydd y plentyn neu hanner frodyr/hanner chwiorydd y plentyn',
+  line5: 'Gall eich gweithiwr cymdeithasol neu’ch asiantaeth fabwysiadu eich helpu i ddarparu’r manylion hyn.',
+  subheading2: 'Manylion amdanoch chi',
+  line6:
+    'Bydd arnoch angen darparu manylion am eich hun ac unrhyw ail geisydd. Mae rhai o’r wybodaeth a ddarperir gennych yn angenrheidiol ar gyfer y Gofrestr Fabwysiadu a’r dystysgrif fabwysiadu, a fydd yn disodli tystysgrif geni’r plentyn. Ni fydd eich gwybodaeth bersonol yn effeithio ar eich cais i fabwysiadu.',
+  line7:
+    'Dim ond y llys a’r asiantaethau neu awdurdodau mabwysiadu perthnasol fydd yn gweld yr wybodaeth a ddarperir gennych.',
+  line8:
+    'Y ffi prosesu llys ar gyfer cais i fabwysiadu yw <b>£183</b>. Mae taliad yn ddyledus unwaith y bydd y cais wedi’i gwblhau ac yn barod i’w gyflwyno i’r llys.',
 };
 
-describe('applicant1 > applying-with > content', () => {
-  const commonContent = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
+describe('applicant1 > start-placement > content', () => {
+  const commonContent = generatePageContent({
+    language: 'en',
+    userCase: {},
+  }) as CommonContent;
+
   test('should return correct english content', () => {
     languageAssertions('en', enContent, () => generateContent(commonContent));
   });
 
   test('should return correct welsh content', () => {
     languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
-  });
-
-  test('should contain applyingWith field', () => {
-    const generatedContent = generateContent(commonContent) as Record<string, never>;
-    const form = generatedContent.form as FormContent;
-    const fields = form.fields as FormFields;
-    const applyingWithField = fields.applyingWith as FormOptions;
-    expect(applyingWithField.type).toBe('radios');
-    expect(applyingWithField.classes).toBe('govuk-radios');
-    expect((applyingWithField.label as LanguageLookup)(generatedContent)).toBe(enContent.label);
-    expect((applyingWithField.section as LanguageLookup)(generatedContent)).toBe(enContent.section);
-    expect((applyingWithField.values[0].label as LanguageLookup)(generatedContent)).toBe(enContent.one);
-    expect((applyingWithField.values[1].label as LanguageLookup)(generatedContent)).toBe(enContent.two);
-    expect((applyingWithField.values[2].label as LanguageLookup)(generatedContent)).toBe(enContent.three);
-    expect(applyingWithField.validator).toBe(isFieldFilledIn);
-
-    expect((applyingWithField.values[0].hint as LanguageLookup)(generatedContent)).toBe(enContent.oneHint);
-    expect((applyingWithField.values[1].hint as LanguageLookup)(generatedContent)).toBe(enContent.twoHint);
-    expect((applyingWithField.values[2].hint as LanguageLookup)(generatedContent)).toBe(enContent.threeHint);
-
-    const field2 = applyingWithField.values[2].subFields!.otherApplicantRelation;
-    (field2.validator as ValidationCheck)('MockTextArea', {});
-    expect(isTextAreaValid).toHaveBeenCalledWith('MockTextArea');
-    expect((field2.label as LanguageLookup)(generatedContent)).toBe(enContent.moreDetails);
-  });
-
-  test('should contain submit button', () => {
-    const generatedContent = generateContent(commonContent);
-    const form = generatedContent.form as FormContent;
-    expect((form.submit.text as LanguageLookup)(generatePageContent({ language: 'en' }) as Record<string, never>)).toBe(
-      'Save and continue'
-    );
-  });
-
-  test('should contain saveAsDraft button', () => {
-    const generatedContent = generateContent(commonContent);
-    const form = generatedContent.form as FormContent;
-    expect(
-      (form.saveAsDraft?.text as LanguageLookup)(generatePageContent({ language: 'en' }) as Record<string, never>)
-    ).toBe('Save as draft');
   });
 });
