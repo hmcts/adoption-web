@@ -1,7 +1,7 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 
 const en = () => ({
-  title: 'Apply to adopt a child placed in your care ',
+  title: 'Apply to adopt a child placed in your care',
   line1:
     'You can apply to adopt a child who\'s in your care following a <a class="govuk-link" href="/eligibility/start">court placement order.</a>',
   line2:
