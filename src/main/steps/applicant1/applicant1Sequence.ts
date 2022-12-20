@@ -16,11 +16,11 @@ import {
 } from '../urls';
 
 export const applicant1Sequence: Step[] = [
-   {
-     url: START_PLACEMENT_URL,
-     showInSection: Sections.AboutApplicant1,
-     getNextStep: () => TASK_LIST_URL,
-   },
+  {
+    url: START_PLACEMENT_URL,
+    showInSection: Sections.AboutApplicant1,
+    getNextStep: () => TASK_LIST_URL,
+  },
   {
     url: APPLYING_WITH_URL,
     showInSection: Sections.AboutApplicant1,
