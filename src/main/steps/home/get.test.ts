@@ -3,12 +3,12 @@ import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import { ApplyingWith, State } from '../../app/case/definition';
 import {
   APPLICATION_SUBMITTED,
-  START_PLACEMENT_URL,
   CHECK_ANSWERS_URL,
   CONFIRM_JOINT_APPLICATION,
   HUB_PAGE,
   PAY_YOUR_FEE,
   SENT_TO_APPLICANT2_FOR_REVIEW,
+  START_PLACEMENT_URL,
   TASK_LIST_URL,
 } from '../urls';
 
