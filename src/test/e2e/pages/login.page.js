@@ -22,9 +22,10 @@ module.exports = {
     console.log('User using the URL= ' + config.baseUrl);
     await login('citizenSingleton');
     await I.wait(4);
-    await I.retry(2).click('Start now');
+    //await I.retry(2).click('Start now');
     await I.wait(4);
-    I.see('Are you applying on your own, or with someone else?');
+    I.see("Apply to adopt a child placed in your care");
+   // I.see('Are you applying on your own, or with someone else?');
   },
 
   async signInFromEligibility() {

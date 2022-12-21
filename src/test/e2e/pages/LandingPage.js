@@ -7,9 +7,9 @@ module.exports = {
    // startNowButtonLink: 'a[href$="/applying-with"]',
   },
   async seeTheLandingPage() {
-    await I.wait(2);
-    await I.retry(3).waitForText("Apply to adopt a child placed in your care");
-
+   await I.wait(2);
+   I.see("Apply to adopt a child placed in your care");
+   //await I.retry(3).click('Start now');
   },
   async seeStartPlacementAndClickPage() {
     await I.wait(2);
