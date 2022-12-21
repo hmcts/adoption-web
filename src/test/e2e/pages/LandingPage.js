@@ -4,12 +4,10 @@ module.exports = {
   fields: {
     applyingWith: 'input[id$="applyingWith"]',
     applyWithMySpouse: 'input[id$="applyingWith-2"]',
-   // startNowButtonLink: 'a[href$="/applying-with"]',
   },
   async seeTheLandingPage() {
    await I.wait(2);
    I.see("Apply to adopt a child placed in your care");
-   //await I.retry(3).click('Start now');
   },
   async seeStartPlacementAndClickPage() {
     await I.wait(2);
