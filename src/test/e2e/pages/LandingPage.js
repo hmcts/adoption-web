@@ -4,13 +4,14 @@ module.exports = {
   fields: {
     applyingWith: 'input[id$="applyingWith"]',
     applyWithMySpouse: 'input[id$="applyingWith-2"]',
-    startNowButtonLink: 'a[href$="/applying-with"]',
+   // startNowButtonLink: 'a[href$="/applying-with"]',
   },
   async seeTheLandingPage() {
    // await I.retry(2).goToPage(config.baseUrl + '/start-placement');
+    console.log('User using the URL= ' + config.baseUrl);
     //await I.wait(2);
-    //await I.retry(3).click('Start now');
-    await I.retry(3).click(this.fields.startNowButtonLink);
+    await I.retry(5).click('Start now');
+   // await I.retry(3).click(this.fields.startNowButtonLink);
     await I.wait(2);
     await I.retry(3).see('Are you applying on your own, or with someone else?');
   },
