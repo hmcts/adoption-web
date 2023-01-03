@@ -1167,10 +1167,10 @@
   integrity sha512-can9fxgQxw0ihRvjvz/+O7xbG0OiQbTcs3CCMQct41a2BPC6iIja3vgwNIy5TD2Vt52kYUq+fg2HGGybyjprTg==
 
 "@hmcts/nodejs-healthcheck@^1.7.3":
-   version "1.7.3"
-   resolved "https://registry.yarnpkg.com/@hmcts/nodejs-healthcheck/-/nodejs-healthcheck-1.7.3.tgz#895657d102ac784963b77a0886809f8699253d1b"
-   integrity sha512-BaPkkhrVluLircAODM7Z7kPRRDy50T2OzxaJlgUTJ1WWAWi01gkDIMmhPkKNw8S3wunqNP/GIzOwdti20l0+jQ==
-    dependencies:
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/@hmcts/nodejs-healthcheck/-/nodejs-healthcheck-1.7.3.tgz#895657d102ac784963b77a0886809f8699253d1b"
+  integrity sha512-BaPkkhrVluLircAODM7Z7kPRRDy50T2OzxaJlgUTJ1WWAWi01gkDIMmhPkKNw8S3wunqNP/GIzOwdti20l0+jQ==
+  dependencies:
     "@hmcts/nodejs-logging" "^4.0.4"
     js-yaml "^3.8.4"
     superagent "7"
