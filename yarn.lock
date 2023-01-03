@@ -1166,7 +1166,7 @@
   resolved "https://registry.yarnpkg.com/@hmcts/frontend/-/frontend-0.0.50-alpha.tgz#4c1f1bc87312a2929ac60e54cdd3fc28782b98f9"
   integrity sha512-can9fxgQxw0ihRvjvz/+O7xbG0OiQbTcs3CCMQct41a2BPC6iIja3vgwNIy5TD2Vt52kYUq+fg2HGGybyjprTg==
 
-"@hmcts/nodejs-healthcheck@^1.8.0":
+"@hmcts/nodejs-healthcheck@^1.7.3":
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/@hmcts/nodejs-healthcheck/-/nodejs-healthcheck-1.8.0.tgz#24e423cc696a7f9519ab09beb7f1b17da0fe55f7"
   integrity sha512-Th6RYDgGjGr4OtyX9Yn/yqH3g6rdAHSixHbogwJb8SFgFtUBnEb5lTgbuJjGY9iNgt306RM+tyaxlSwq4T2JNg==
