@@ -3,7 +3,7 @@ import { TranslationFn } from '../../../app/controller/GetController';
 const en = () => ({
   title: 'Apply to adopt a child placed in your care',
   line1:
-    'You can apply to adopt a child who\'s in your care following a <a class="govuk-link" href="/eligibility/start">court placement order.</a>',
+    'You can apply to adopt a child who\'s in your care following a <a class="govuk-link" href="/start-placement">court placement order.</a>',
   line2:
     'The child must have lived with you for at least 10 weeks before you apply. You will not be able to submit your application until the 10 week period has passed.',
   line3:
@@ -21,30 +21,32 @@ const en = () => ({
   line6:
     "You will need to provide details about yourself and any second applicant. Some of the information you provide is needed for the Adoption Register and adoption certificate which will replace the child's birth certificate. Your personal information will not affect your application to adopt.",
   line7: 'The information you provide will only be seen by the court and relevant adoption agencies or authorities.',
+  line8: 'Start now',
 });
 
 const cy: typeof en = () => ({
-  title: 'Gwneud cais i fabwysiadu plentyn a leolwyd dan eich gofal',
+  title: 'Gwneud cais i fabwysiadu plentyn yn eich gofal',
   line1:
-    'Gallwch wneud cais i fabwysiadu plentyn sydd dan eich gofal yn dilyn <a class="govuk-link" href="/eligibility/start">gorchymyn lleoli gan lys.</a>',
+    'Gallwch wneud cais i fabwysiadu plentyn sydd yn eich gofal ar ôl i’r llys <a class="govuk-link" href="/start-placement">wneud gorchymyn lleoli.</a>',
   line2:
-    'Rhaid bod y plentyn wedi byw gyda chi am o leiaf 10 wythnos cyn ichi wneud cais. Ni fyddwch yn gallu cyflwyno’ch cais nes bod y cyfnod o 10 wythnos wedi pasio.',
+    'Rhaid bod y plentyn wedi byw gyda chi am o leiaf 10 wythnos cyn ichi wneud cais. Ni fyddwch yn gallu cyflwyno’ch cais nes bod y cyfnod o 10 wythnos wedi mynd heibio.',
   line3:
-    'Gallwch gychwyn eich cais a chadw eich cynnydd trwy glicio ar ‘cadw fel drafft’. Bydd hyn yn sicrhau bod eich atebion yn cael eu cadw fel y gallwch barhau i weithio ar y cais nes ymlaen. Gallwch ond cyflwyno’r cais pan fydd yr holl adrannau wedi’u llenwi.',
-  heading1: 'Cyn i chi ddechrau',
+    'Gallwch gychwyn eich cais a chadw eich cynnydd trwy glicio ar ‘cadw fel drafft’. Bydd hyn yn sicrhau bod eich atebion yn cael eu cadw fel y gallwch barhau i weithio ar y cais yn ddiweddarach. Gallwch ond cyflwyno’r cais pan fydd yr holl adrannau wedi’u cwblhau.',
+  heading1: 'Cyn ichi ddechrau',
   subheading1: 'Manylion am y plentyn',
   line4: 'Bydd arnoch angen rhai dogfennau a gwybodaeth am y plentyn:',
-  bulletPoint1: 'tystysgrif geni llawn y plentyn (mae hyn yn cynnwys manylion am rieni biolegol y plentyn)',
-  bulletPoint2: 'Manylion o neuchymyn lleoli’r plentyn',
+  bulletPoint1: 'tystysgrif geni llawn y plentyn (mae hyn yn cynnwys manylion rheini biolegol y plentyn)',
+  bulletPoint2: 'manylion o orchymyn lleoli’r plentyn',
   bulletPoint3: 'enwau, cyfeiriadau a galwedigaethau’r rhieni biolegol',
   bulletPoint4:
-    'manylion unrhyw achosion llys blaenorol sy’n ymwneud â’r plentyn, neu frodyr/chwiorydd y plentyn neu hanner frodyr/hanner chwiorydd y plentyn',
+    'manylion unrhyw achosion llys blaenorol sy’n ymwneud â’r plentyn, neu frodyr/chwiorydd neu hanner brodyr/chwiorydd y plentyn',
   line5: 'Gall eich gweithiwr cymdeithasol neu’ch asiantaeth fabwysiadu eich helpu i ddarparu’r manylion hyn.',
-  subheading2: 'Manylion amdanoch chi',
+  subheading2: 'Eich manylion chi',
   line6:
-    'Bydd arnoch angen darparu manylion am eich hun ac unrhyw ail geisydd. Mae rhai o’r wybodaeth a ddarperir gennych yn angenrheidiol ar gyfer y Gofrestr Fabwysiadu a’r dystysgrif fabwysiadu, a fydd yn disodli tystysgrif geni’r plentyn. Ni fydd eich gwybodaeth bersonol yn effeithio ar eich cais i fabwysiadu.',
+    'Bydd arnoch angen darparu manylion am eich hun ac unrhyw ail geisydd. Bydd angen rhywfaint o’r wybodaeth byddwch yn ei darparu ar gyfer y Gofrestr  Fabwysiadu a’r dystysgrif mabwysiadu, a fydd yn disodli tystysgrif geni’r plentyn. Ni fydd eich gwybodaeth bersonol yn effeithio ar eich cais i fabwysiadu.',
   line7:
-    'Dim ond y llys a’r asiantaethau neu awdurdodau mabwysiadu perthnasol fydd yn gweld yr wybodaeth a ddarperir gennych.',
+    'Dim ond y llys fydd yn gweld yr wybodaeth a ddarperir gennych, ynghyd â’r asiantaethau mabwysiadau neu’r awdurdodau perthnasol.',
+  line8: 'Dechrau Nawr',
 });
 
 const languages = {
