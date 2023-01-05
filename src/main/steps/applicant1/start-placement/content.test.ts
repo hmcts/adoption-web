@@ -8,7 +8,7 @@ jest.mock('../../../app/form/validation');
 const enContent = {
   title: 'Apply to adopt a child placed in your care',
   line1:
-    'You can apply to adopt a child who\'s in your care following a <a class="govuk-link" href="/eligibility/start">court placement order.</a>',
+    'You can apply to adopt a child who\'s in your care following a <a class="govuk-link" href="/start-placement">court placement order.</a>',
   line2:
     'The child must have lived with you for at least 10 weeks before you apply. You will not be able to submit your application until the 10 week period has passed.',
   line3:
@@ -32,7 +32,7 @@ const enContent = {
 const cyContent = {
   title: 'Gwneud cais i fabwysiadu plentyn yn eich gofal',
   line1:
-    'Gallwch wneud cais i fabwysiadu plentyn sydd yn eich gofal ar ôl i’r llys wneud gorchymyn lleoli.</a>',
+    'Gallwch wneud cais i fabwysiadu plentyn sydd yn eich gofal ar ôl i’r llys <a class="govuk-link" href="/start-placement">wneud gorchymyn lleoli.</a>',
   line2:
     'Rhaid bod y plentyn wedi byw gyda chi am o leiaf 10 wythnos cyn ichi wneud cais. Ni fyddwch yn gallu cyflwyno’ch cais nes bod y cyfnod o 10 wythnos wedi mynd heibio.',
   line3:
