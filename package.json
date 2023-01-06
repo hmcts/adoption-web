@@ -88,7 +88,7 @@
     "http-status-codes": "^2.2.0",
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
-    "multer": "1.4.4-lts.1",
+    "multer": "^1.4.5-lts.1",
     "negotiator": "^0.6.3",
     "nunjucks": "^3.2.3",
     "otplib": "^12.0.1",
@@ -162,6 +162,9 @@
     "webpack-node-externals": "^3.0.0"
   },
   "resolutions": {
-    "minimist": "^1.2.6"
+    "minimist": "^1.2.6",
+    "@hmcts/nodejs-healthcheck/superagent/formidable/qs" : ">=6.9.7",
+    "config/json5" : ">=2.2.2",
+    "tsconfig-paths/json5" : ">=2.2.2"
   }
 }
