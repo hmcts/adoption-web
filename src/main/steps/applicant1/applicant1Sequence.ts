@@ -10,11 +10,17 @@ import {
   APPLICANT_1_SELECT_ADDRESS,
   APPLYING_WITH_URL,
   DATE_CHILD_MOVED_IN,
+  START_PLACEMENT_URL,
   TASK_LIST_URL,
   UPLOAD_YOUR_DOCUMENTS,
 } from '../urls';
 
 export const applicant1Sequence: Step[] = [
+  {
+    url: START_PLACEMENT_URL,
+    showInSection: Sections.AboutApplicant1,
+    getNextStep: () => TASK_LIST_URL,
+  },
   {
     url: APPLYING_WITH_URL,
     showInSection: Sections.AboutApplicant1,
