@@ -44,7 +44,7 @@ export const form: FormContent = {
           label: l => l.no,
           value: YesOrNo.NO,
           conditionalText: l =>
-            `<p class="govuk-label">${l.livedUKNo}</p> <p class="govuk-label"><a href="https://www.gov.uk/child-adoption">${l.moreInfo}</a></p>`,
+            `<p class="govuk-label">${l.livedUKNo}</p> <p class="govuk-label"><a href="https://www.gov.uk/child-adoption" class="govuk-link">${l.moreInfo}</a></p>`,
         },
       ],
       validator: isFieldFilledIn,

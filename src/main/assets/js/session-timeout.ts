@@ -22,7 +22,7 @@ const saveBeforeSessionTimeout = async () => {
       body: JSON.stringify(body),
     });
   }
-  window.location.href = `${TIMED_OUT_URL}?lng=${document.documentElement.lang}`;
+  window.location.href = `${TIMED_OUT_URL}?lang=${document.documentElement.lang}`;
 };
 
 const setSaveTimeout = () => {

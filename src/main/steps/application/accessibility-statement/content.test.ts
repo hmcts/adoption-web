@@ -129,7 +129,7 @@ const cy = {
     'Os ydych wedi cysylltu â ni ynghylch mater hygyrchedd ac nad ydych yn fodlon â’n hymateb, gallwch gysylltu â’r <a href="https://www.equalityadvisoryservice.com/" class="govuk-link" target="_blank">Gwasanaeth Chynghori a Chymorth Cydraddoldeb (EASS)</a>.',
   contactingUs: 'Cysylltu â ni dros y ffôn neu ymweld â ni’n bersonol',
   contactCourtDirectly:
-    "Os oes gennych gwestiwn am hygyrchedd yn ein llysoedd teulu, gallwch <a href='https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode?lng=cy' class='govuk-link' target='_blank'>gysylltu â'r llys yn uniongyrchol</a>.",
+    "Os oes gennych gwestiwn am hygyrchedd yn ein llysoedd teulu, gallwch <a href='https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode?lang=cy' class='govuk-link' target='_blank'>gysylltu â'r llys yn uniongyrchol</a>.",
   contactTextRelay:
     'Rydym yn darparu gwasanaeth cyfnewid negeseuon testun ar gyfer pobl fyddar, pobl sydd â nam ar eu clyw a phobl sydd â nam ar eu lleferydd.',
   contactInductionLoops:

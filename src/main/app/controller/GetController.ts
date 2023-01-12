@@ -65,7 +65,7 @@ export class GetController {
 
   protected getPreferredLanguage(req: AppRequest): string {
     // User selected language
-    const requestedLanguage = req.query['lng'] as string;
+    const requestedLanguage = req.query['lang'] as string;
     if (LanguageToggle.supportedLanguages.includes(requestedLanguage)) {
       return requestedLanguage;
     }
