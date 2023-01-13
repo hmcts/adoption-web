@@ -129,6 +129,11 @@
           </form>
         </noscript>
       </div>
+      {% if form %}
+        {% block form %}
+          {% include "common/form/form.njk"%}
+        {% endblock %}
+      {% endif %}
     </div>
   </div>
 
