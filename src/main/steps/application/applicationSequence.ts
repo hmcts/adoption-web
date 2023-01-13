@@ -7,6 +7,10 @@ export const applicationSequence: Step[] = [
     getNextStep: () => Urls.HOME_URL,
   },
   {
+    url: Urls.START_PLACEMENT_URL,
+    getNextStep: () => Urls.TASK_LIST_URL,
+  },
+  {
     url: Urls.APPLYING_WITH_URL,
     getNextStep: () => Urls.TASK_LIST_URL,
   },
