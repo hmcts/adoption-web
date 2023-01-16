@@ -97,7 +97,7 @@ describe('sibling > placement-order-type > content', () => {
 
     expect(field.validator).toBe(isFieldFilledIn);
 
-    const placementOrderOtherType = field.values[5].subFields?.selectedSiblingOtherPlacementOrderType ?? null;
+    const placementOrderOtherType = field.values[5].subFields!.selectedSiblingOtherPlacementOrderType;
     expect(placementOrderOtherType.type).toBe('text');
     expect((placementOrderOtherType.label as Function)(generatedContent)).toBe(enContent.placementOtherType);
     expect(placementOrderOtherType.labelSize).toBe(null);
