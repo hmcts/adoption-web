@@ -14,6 +14,8 @@ export const RESPONDENT: PageLink = '/respondent';
 export const APPLICATION_ENDED: PageLink = '/application-ended';
 export const TASK_LIST_URL: PageLink = '/task-list';
 
+export const START_PLACEMENT_URL: PageLink = '/start-placement';
+
 export const APPLYING_WITH_URL: PageLink = '/applying-with';
 export const DATE_CHILD_MOVED_IN: PageLink = '/date-child-moved-in';
 
