@@ -92,7 +92,7 @@ const en = {
   acceptAnalyticsCookies: 'Accept analytics cookies',
   rejectAnalyticsCookies: 'Reject analytics cookies',
   viewCookies: 'View cookies',
-  hideMessage: 'Hide this message',
+  hideMessage: 'Hide cookie message',
   cookiesAcceptedMessage:
     '<p class="govuk-body">You’ve accepted additional cookies. You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.</p>',
   cookiesRejectedMessage:
