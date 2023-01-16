@@ -183,6 +183,7 @@ export const LA_PORTAL_CHILD_PLACEMENT_ORDER_COURT: PageLink = `${LA_PORTAL}/chi
 export const LA_PORTAL_CHILD_PLACEMENT_ORDER_DATE: PageLink = `${LA_PORTAL}/child/placement-order-date`;
 export const LA_PORTAL_CHILD_PLACEMENT_ORDER_SUMMARY: PageLink = `${LA_PORTAL}/child/placement-order-summary`;
 export const LA_PORTAL_CHILD_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS: PageLink = `${LA_PORTAL}/child/placement-order-check-your-answers`;
+export const LA_PORTAL_CHILD_PLACEMENT_ORDER_REMOVE_PLACEMENT_ORDER: PageLink = `${LA_PORTAL}/child/remove-placement-order`;
 
 export const LA_PORTAL_BIRTH_MOTHER_FULL_NAME: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/full-name`;
 export const LA_PORTAL_BIRTH_MOTHER_STILL_ALIVE: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/still-alive`;

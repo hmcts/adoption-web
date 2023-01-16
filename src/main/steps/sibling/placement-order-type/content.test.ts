@@ -13,8 +13,8 @@ const enContent = {
   title: 'What type of order is it?',
   adoptionOrder: 'Adoption order',
   careOrder: 'Care order',
-  contactOrder: 'Contact order',
-  freeingOrder: 'Freeing order',
+  contactOrder: 'Child arrangements order',
+  contactOrderHint: 'Child arrangements includes residency, contact, specific issue and prohibited steps.',
   placementOrder: 'Placement order',
   superVisOrder: 'Supervision order',
   other: 'Other',
@@ -34,8 +34,8 @@ const cyContent = {
   title: 'Pa fath o orchymyn ydyw?',
   adoptionOrder: 'Gorchymyn Mabwysiadu',
   careOrder: 'Gorchymyn Gofal',
-  contactOrder: 'Gorchymyn Cyswllt',
-  freeingOrder: 'Gorchymyn Rhyddhau',
+  contactOrder: 'Gorchymyn trefniadau plant',
+  contactOrderHint: 'Mae trefniadau plant yn cynnwys cyfnod preswyl, cyswllt, mater penodol a chamau gwaharddedig.',
   placementOrder: 'Gorchymyn Lleoli',
   superVisOrder: 'Gorchymyn Goruchwylio',
   other: 'Arall',
@@ -87,19 +87,17 @@ describe('sibling > placement-order-type > content', () => {
     expect(field.values[1].value).toBe(SiblingPOType.CARE_ORDER);
     expect((field.values[2].label as Function)(generatedContent)).toBe(enContent.contactOrder);
     expect(field.values[2].value).toBe(SiblingPOType.CONTACT_ORDER);
-    expect((field.values[3].label as Function)(generatedContent)).toBe(enContent.freeingOrder);
-    expect(field.values[3].value).toBe(SiblingPOType.FREEING_ORDER);
-    expect((field.values[4].label as Function)(generatedContent)).toBe(enContent.placementOrder);
-    expect(field.values[4].value).toBe(SiblingPOType.PLACEMENT_ORDER);
-    expect((field.values[5].label as Function)(generatedContent)).toBe(enContent.superVisOrder);
-    expect(field.values[5].value).toBe(SiblingPOType.SUPERVIS_ORDER);
-    expect((field.values[6].label as Function)(generatedContent)).toBe(enContent.other);
-    expect(field.values[6].value).toBe(SiblingPOType.OTHER);
+    expect((field.values[3].label as Function)(generatedContent)).toBe(enContent.placementOrder);
+    expect(field.values[3].value).toBe(SiblingPOType.PLACEMENT_ORDER);
+    expect((field.values[4].label as Function)(generatedContent)).toBe(enContent.superVisOrder);
+    expect(field.values[4].value).toBe(SiblingPOType.SUPERVIS_ORDER);
+    expect((field.values[5].label as Function)(generatedContent)).toBe(enContent.other);
+    expect(field.values[5].value).toBe(SiblingPOType.OTHER);
     expect(field.attributes).toEqual({ spellcheck: false });
 
     expect(field.validator).toBe(isFieldFilledIn);
 
-    const placementOrderOtherType = field.values[6].subFields!.selectedSiblingOtherPlacementOrderType;
+    const placementOrderOtherType = field.values[5].subFields?.selectedSiblingOtherPlacementOrderType ?? null;
     expect(placementOrderOtherType.type).toBe('text');
     expect((placementOrderOtherType.label as Function)(generatedContent)).toBe(enContent.placementOtherType);
     expect(placementOrderOtherType.labelSize).toBe(null);

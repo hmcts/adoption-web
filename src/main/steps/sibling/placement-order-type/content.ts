@@ -1,4 +1,4 @@
-import { SiblingPOType } from '../../../app/case/definition';
+import { PlacementOrderTypeEnum, SiblingPOType } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -7,10 +7,11 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 const en = () => ({
   section: SECTION,
   title: 'What type of order is it?',
+  hint: 'This information makes it easier for the court to link past court orders.',
   adoptionOrder: 'Adoption order',
   careOrder: 'Care order',
-  contactOrder: 'Contact order',
-  freeingOrder: 'Freeing order',
+  contactOrder: 'Child arrangements order',
+  contactOrderHint: 'Child arrangements includes residency, contact, specific issue and prohibited steps.',
   placementOrder: 'Placement order',
   superVisOrder: 'Supervision order',
   other: 'Other',
@@ -28,10 +29,11 @@ const en = () => ({
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
   title: 'Pa fath o orchymyn ydyw?',
+  hint: "Mae'r wybodaeth hon yn ei gwneud hi'n haws i'r llys gysylltu gorchmynion llys yn y gorffennol.",
   adoptionOrder: 'Gorchymyn Mabwysiadu',
   careOrder: 'Gorchymyn Gofal',
-  contactOrder: 'Gorchymyn Cyswllt',
-  freeingOrder: 'Gorchymyn Rhyddhau',
+  contactOrder: 'Gorchymyn trefniadau plant',
+  contactOrderHint: 'Mae trefniadau plant yn cynnwys cyfnod preswyl, cyswllt, mater penodol a chamau gwaharddedig.',
   placementOrder: 'Gorchymyn Lleoli',
   superVisOrder: 'Gorchymyn Goruchwylio',
   other: 'Arall',
@@ -54,11 +56,15 @@ export const form: FormContent = {
         type: 'radios',
         classes: 'govuk-radios',
         label: l => l.title,
+        hint: l => l.hint,
         values: [
           { label: l => l.adoptionOrder, value: SiblingPOType.ADOPTION_ORDER },
           { label: l => l.careOrder, value: SiblingPOType.CARE_ORDER },
-          { label: l => l.contactOrder, value: SiblingPOType.CONTACT_ORDER },
-          { label: l => l.freeingOrder, value: SiblingPOType.FREEING_ORDER },
+          {
+            label: l => l.contactOrder,
+            value: PlacementOrderTypeEnum.ContactOrder,
+            hint: l => l.contactOrderHint,
+          },
           { label: l => l.placementOrder, value: SiblingPOType.PLACEMENT_ORDER },
           { label: l => l.superVisOrder, value: SiblingPOType.SUPERVIS_ORDER },
           {
