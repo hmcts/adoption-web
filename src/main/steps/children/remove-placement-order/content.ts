@@ -19,7 +19,6 @@ const en = content => {
     title: 'Are you sure you want to remove this ?',
   };
 };
-
 //eslint-disable-next-line @typescript-eslint/no-unused-vars
 const cy: typeof en = content => {
   const cyContent = {
