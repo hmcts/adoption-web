@@ -8,7 +8,7 @@ import { APPLICANT_1_OTHER_NAMES, APPLICANT_2_OTHER_NAMES } from '../../urls';
 import { CommonContent } from '../common.content';
 
 const en = (fieldPrefix: FieldPrefix) => ({
-  label: 'Have you ever legally been known by any other names?',
+  title: 'Have you ever legally been known by any other names?',
   example: 'For example, your name before marriage.',
   previousNameYes: "List each previous name separately and select 'Add'",
   yes: 'Yes',
@@ -16,17 +16,19 @@ const en = (fieldPrefix: FieldPrefix) => ({
   [`${fieldPrefix}OtherFirstNames`]: 'Add your previous first names',
   [`${fieldPrefix}OtherLastNames`]: 'Add your previous last names',
   add: 'Add',
+  cancel: 'Cancel',
   another: 'Add another name',
   remove: 'Remove',
   errors: {
     [`${fieldPrefix}HasOtherNames`]: {
       required: 'Please answer the question',
+      addButtonNotClicked: "Select 'Add' to save your previous names",
     },
     [`${fieldPrefix}OtherFirstNames`]: {
-      required: 'Enter your first names',
+      required: 'Enter your previous first names',
     },
     [`${fieldPrefix}OtherLastNames`]: {
-      required: 'Enter your last names',
+      required: 'Enter your previous last names',
     },
     addAnotherName: {
       required: 'Please answer the question',
@@ -35,25 +37,27 @@ const en = (fieldPrefix: FieldPrefix) => ({
 });
 
 const cy: typeof en = (fieldPrefix: FieldPrefix) => ({
-  label: 'A ydych erioed wedi’ch adnabod yn gyfreithiol dan unrhyw enwau eraill?',
+  title: 'A ydych erioed wedi’ch adnabod yn gyfreithiol dan unrhyw enwau eraill?',
   example: 'Er enghraifft, eich enw cyn ichi briodi.',
   previousNameYes: 'Rhestrwch bob enw blaenorol ar wahân a dewiswch ‘Ychwanegu’',
   yes: 'Ydw',
   no: 'Nac ydw',
   [`${fieldPrefix}OtherFirstNames`]: 'Ychwanegwch eich enw(au) cyntaf blaenorol',
   [`${fieldPrefix}OtherLastNames`]: 'Ychwanegwch eich cyfenw(au) blaenorol',
+  cancel: 'Cancel',
   add: 'Ychwanegu',
   another: 'Ychwanegu enw arall',
   remove: 'Dileu',
   errors: {
     [`${fieldPrefix}HasOtherNames`]: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      addButtonNotClicked: "Dewiswch 'Ychwanegu' i gadw eich enwau blaenorol",
     },
     [`${fieldPrefix}OtherFirstNames`]: {
-      required: 'Nac ydwdwch eich enw(au) cyntaf',
+      required: 'Rhowch eich enwau cyntaf blaenorol',
     },
     [`${fieldPrefix}OtherLastNames`]: {
-      required: 'Nac ydwdwch eich cyfenw(au)',
+      required: 'Rhowch eich enwau olaf blaenorol',
     },
     addAnotherName: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
@@ -70,8 +74,9 @@ export const otherNamesFields = (userCase: Partial<Case>, fieldPrefix: FieldPref
   [`${fieldPrefix}HasOtherNames`]: {
     type: 'radios',
     classes: 'govuk-radios',
-    label: l => l.label,
+    label: l => l.title,
     hint: l => l.example,
+    labelHidden: true,
     section: l => l.section,
     values: [
       {
@@ -124,6 +129,12 @@ export const otherNamesFields = (userCase: Partial<Case>, fieldPrefix: FieldPref
                       label: l => l.add,
                       classes: 'govuk-button--secondary',
                       value: 'addButton',
+                    },
+                    cancelButton: {
+                      type: 'button',
+                      label: l => l.cancel,
+                      classes: 'govuk-button--secondary',
+                      value: 'cancelButton',
                     },
                   },
                   validator: () => doesArrayHaveValues(userCase[`${fieldPrefix}AdditionalNames`]),

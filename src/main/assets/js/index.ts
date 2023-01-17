@@ -6,5 +6,6 @@ import './session-timeout';
 import './cookie';
 import './other-names/submit';
 import './upload-manager';
+import './accessible-autocomplete';
 
 initAll();

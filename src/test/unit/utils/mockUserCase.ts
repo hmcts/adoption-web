@@ -1,32 +1,38 @@
 import { CaseWithId } from '../../../main/app/case/case';
-import { ApplyingWith, Gender, Nationality, YesNoNotsure, YesOrNo } from '../../../main/app/case/definition';
+import {
+  ApplyingWith,
+  Gender,
+  LanguagePreference,
+  Nationality,
+  YesNoNotsure,
+  YesOrNo,
+} from '../../../main/app/case/definition';
 
 export default {
   applyingWith: ApplyingWith.ALONE,
   dateChildMovedIn: { day: 12, month: 10, year: '2020' },
-  adopAgencyOrLAs: [
-    {
-      adopAgencyOrLaId: 'MOCK_ID_1',
-      adopAgencyOrLaName: 'MOCK_AGENCY_NAME_1',
-      adopAgencyOrLaPhoneNumber: '01234567890',
-      adopAgencyOrLaContactName: 'MOCK_CONTACT_NAME_1',
-      adopAgencyOrLaContactEmail: 'contact1@email.com',
-    },
-    {
-      adopAgencyOrLaId: 'MOCK_ID_2',
-      adopAgencyOrLaName: 'MOCK_AGENCY_NAME_2',
-      adopAgencyOrLaPhoneNumber: '01234567891',
-      adopAgencyOrLaContactName: 'MOCK_CONTACT_NAME_2',
-      adopAgencyOrLaContactEmail: 'contact2@email.com',
-    },
-  ],
-
-  socialWorkerName: 'MOCK_SOCIAL_WORKER_NAME',
-  socialWorkerPhoneNumber: '01234567892',
-  socialWorkerEmail: 'socialworker@email.com',
-  socialWorkerTeamEmail: 'socialworkerteam@email.com',
+  localAuthorityName: 'laname',
+  localAuthorityContactName: 'contact name1',
+  localAuthorityPhoneNumber: '01234567890',
+  localAuthorityContactEmail: 'agency1@email.co.uk',
+  adopAgencyOrLaName: 'agency1',
+  adopAgencyOrLaContactName: 'contact name1',
+  adopAgencyOrLaPhoneNumber: '01234567890',
+  adopAgencyAddressLine1: 'address',
+  adopAgencyTown: 'town',
+  adopAgencyPostcode: 'aa14aa',
+  adopAgencyOrLaContactEmail: 'agency1@email.co.uk',
+  childSocialWorkerName: 'MOCK_SOCIAL_WORKER_NAME',
+  childSocialWorkerPhoneNumber: '01234567892',
+  childSocialWorkerEmail: 'socialworker@gov.uk',
+  childLocalAuthority: 'MOCK_CHILD_LOCAL_AUTHORITY',
+  childLocalAuthorityEmail: 'socialworker@gov.uk',
+  applicantSocialWorkerName: 'MOCK_SOCIAL_WORKER_NAME',
+  applicantSocialWorkerPhoneNumber: '01234567892',
+  applicantSocialWorkerEmail: 'socialworker@gov.uk',
+  applicantLocalAuthority: 'MOCK_CHILD_LOCAL_AUTHORITY',
+  applicantLocalAuthorityEmail: 'socialworker@gov.uk',
   hasAnotherAdopAgencyOrLA: YesOrNo.YES,
-
   applicant1FirstNames: 'MOCK_APPLICANT1_FIRST_NAMES',
   applicant1LastNames: 'MOCK_APPLICANT1_LAST_NAMES',
   applicant1HasOtherNames: YesOrNo.YES,
@@ -40,6 +46,7 @@ export default {
   applicant1AddressTown: 'MOCK_ADDRESS_TOWN',
   applicant1AddressCounty: 'MOCK_ADDRESS_COUNTY',
   applicant1AddressPostcode: 'MOCK_ADDRESS_POSTCODE',
+  applicant1LanguagePreference: LanguagePreference.ENGLISH,
 
   applicant2FirstNames: 'MOCK_APPLICANT1_FIRST_NAMES',
   applicant2LastNames: 'MOCK_APPLICANT1_LAST_NAMES',
@@ -53,13 +60,14 @@ export default {
   applicant2AddressTown: 'MOCK_ADDRESS_TOWN',
   applicant2AddressCounty: 'MOCK_ADDRESS_COUNTY',
   applicant2AddressPostcode: 'MOCK_ADDRESS_POSTCODE',
+  applicant2LanguagePreference: LanguagePreference.ENGLISH,
 
   childrenFirstName: 'CHILDREN_FIRST_NAMES',
   childrenLastName: 'CHILDREN_LAST_NAMES',
   childrenDateOfBirth: { day: 9, month: 8, year: 2020 },
   childrenSexAtBirth: Gender.MALE,
   childrenNationality: [Nationality.BRITHISH, Nationality.OTHER],
-  childrenAdditionalNationalities: ['MOCK_COUNTRY'],
+  childrenAdditionalNationalities: [{ id: 'MOCK_ID', country: 'MOCK_COUNTRY' }],
   childrenFirstNameAfterAdoption: 'MOCK_FIRST_NAME_AFTER_ADOPTION',
   childrenLastNameAfterAdoption: 'MOCK_LAST_NAME_AFTER_ADOPTION',
   placementOrders: [
@@ -83,7 +91,7 @@ export default {
   birthMotherLastNames: 'BIRTH_MOTHER_LAST_NAMES',
   birthMotherStillAlive: YesNoNotsure.YES,
   birthMotherNationality: [Nationality.BRITHISH, Nationality.OTHER],
-  birthMotherAdditionalNationalities: ['MOCK_COUNTRY'],
+  birthMotherAdditionalNationalities: [{ id: 'MOCK_ID', country: 'MOCK_COUNTRY' }],
   birthMotherOccupation: 'MOCK_OCCUPATION',
   birthMotherAddressKnown: YesOrNo.YES,
   birthMotherAddress1: 'MOCK_ADDRESS_LINE1',
@@ -93,6 +101,7 @@ export default {
   birthMotherAddressCounty: 'MOCK_ADDRESS_COUNTY',
   birthMotherAddressPostcode: 'MOCK_ADDRESS_POSTCODE',
   birthMotherAddressCountry: 'MOCK_ADDRESS_COUNTRY',
+  birthMotherLastAddressDate: { day: 1, month: 4, year: 2022 },
 
   birthFatherNameOnCertificate: YesOrNo.YES,
   birthFatherFirstNames: 'BIRTH_FATHER_FIRST_NAMES',
@@ -105,6 +114,7 @@ export default {
   birthFatherAddressTown: 'MOCK_ADDRESS_TOWN',
   birthFatherAddressCounty: 'MOCK_ADDRESS_COUNTY',
   birthFatherAddressPostcode: 'MOCK_ADDRESS_POSTCODE',
+  birthFatherLastAddressDate: { day: 1, month: 4, year: 2022 },
 
   otherParentFirstNames: 'MOCK_OTHER_PARENT_FIRST_NAME',
   otherParentLastNames: 'MOCK_OTHER_PARENT_FIRST_NAME',
@@ -115,25 +125,23 @@ export default {
   otherParentAddressPostcode: 'MOCK_ADDRESS_POSTCODE',
   otherParentAddressCountry: 'MOCK_ADDRESS_COUNTRY',
   otherParentAddressKnown: YesOrNo.YES,
+  otherParentLastAddressDate: { day: 1, month: 4, year: 2022 },
 
   hasSiblings: YesNoNotsure.YES,
-  hasPoForSiblings: YesNoNotsure.YES,
   siblings: [
     {
       siblingId: 'MOCK_SIBLING_ID',
-      siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
-      siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
-      siblingPlacementOrders: [
-        {
-          placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
-          placementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
-          placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
-        },
-      ],
+      siblingRelation: 'MOCK_SIBLING_RELATION',
+      siblingPoType: 'MOCK_PLACEMENT_ORDER_TYPE',
+      siblingPoNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
     },
   ],
+  placementOrderCourt: 'MOCK_PLACEMENT_ORDER_COURT',
   findFamilyCourt: YesOrNo.NO,
   familyCourtName: 'MOCK_FAMILY_COURT',
   applicant1UploadedFiles: [{ id: 'MOCK_DOCUMENT_ID', name: 'MOCK_DOCUMENT_FILE_NAME' }],
   applicant1DocumentsUploaded: [{ id: 'MOCK_DOCUMENT_ID', value: { documentFileName: 'MOCK_DOCUMENT_FILE_NAME' } }],
+  hyphenatedCaseRef: '1234-5678-9012-3456',
+  laUploadedFiles: [{ id: 'MOCK_DOCUMENT_ID', name: 'MOCK_DOCUMENT_FILE_NAME' }],
+  laDocumentsUploaded: [{ id: 'MOCK_DOCUMENT_ID', value: { documentFileName: 'MOCK_DOCUMENT_FILE_NAME' } }],
 } as unknown as CaseWithId;

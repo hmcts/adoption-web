@@ -9,7 +9,7 @@
       classes: "hidden" if field.labelHidden else "govuk-fieldset__legend--l",
       isPageHeading: true if not title
     }
-  },
+  } if not field.labelHidden else undefined,
   hint: {
     html: getContent(field.hint)
   },

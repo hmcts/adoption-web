@@ -38,6 +38,7 @@ describe('SelectAddressPostController', () => {
             town: 'LONDON',
           },
         ],
+        returnUrl: '/review-pay-submit/check-your-answers',
         errors: [],
       },
     });
@@ -67,7 +68,7 @@ describe('SelectAddressPostController', () => {
       };
       beforeEach(() => {
         req.body.applicant1SelectAddress = 0;
-        mockGetParsedBody.mockReturnValue({ applicant1SelectAddress: 0 });
+        mockGetParsedBody.mockReturnValue({ applicant1SelectAddress: 0, checkYourAnswersReturn: true });
         mockGetErrors.mockReturnValue([]);
         controller = new SelectAddressPostController({}, FieldPrefix.APPLICANT1);
         req.locals.api.triggerEvent.mockResolvedValue(formData);
@@ -86,6 +87,11 @@ describe('SelectAddressPostController', () => {
         await controller.post(req, res);
         expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(1);
         expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('MOCK_ID', formData, 'citizen-update-application');
+      });
+
+      test('should set checkYourAnswersReturn if returnUrl present', async () => {
+        await controller.post(req, res);
+        expect(req.session.userCase).toEqual({ ...formData, checkYourAnswersReturn: true });
       });
     });
 

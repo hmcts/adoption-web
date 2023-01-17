@@ -9,7 +9,7 @@
     html: getContent(field.label) if not field.labelHidden else "",
     classes: labelClasses,
     isPageHeading: true if not title else undefined
-  },
+  } if not field.labelHidden else undefined,
   hint: {
     html: getContent(field.hint)
   } if field.hint else undefined,

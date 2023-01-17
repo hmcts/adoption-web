@@ -6,15 +6,23 @@
   <div class="govuk-form-group float-left">
     <p class="govuk-body govuk-!-font-size-19">{{ userCase.otherParentAddressPostcode }}</p>
     <p class="govuk-body">
-      <a href="{{changePostCodeUrl}}" data-link="resetPostCodeLookup" class="govuk-link govuk-!-font-size-19" aria-label="{{ change }} {{ postcode }}">{{ change }}</a>
-    </p>
+      {% if laPortal == true %}
+        <a href="/la-portal/other-parent/address/lookup" data-link="resetPostCodeLookup" class="govuk-link govuk-!-font-size-19" aria-label="{{ change }} {{ postcode }}">{{ change }}</a>
+      {% else %}
+        <a href="{{changePostCodeUrl}}" data-link="resetPostCodeLookup" class="govuk-link govuk-!-font-size-19" aria-label="{{ change }} {{ postcode }}">{{ change }}</a>
+      {% endif %}
+     </p>
   </div>
 {% endblock %}
 
 {% block after_fields %}
   <div class="govuk-form-group">
     <p class="govuk-body">
-      <a href="{{cantFindAddressUrl}}" id="cannotFindAddress" class="govuk-link">{{ cannotFindAddress }}</a>
+      {% if laPortal == true %}
+        <a href="/la-portal/other-parent/address/manual" id="cannotFindAddress" class="govuk-link">{{ cannotFindAddress }}</a>
+      {% else %}
+        <a href="{{cantFindAddressUrl}}" id="cannotFindAddress" class="govuk-link">{{ cannotFindAddress }}</a>
+      {% endif %}
     </p>
   </div>
 {% endblock %}

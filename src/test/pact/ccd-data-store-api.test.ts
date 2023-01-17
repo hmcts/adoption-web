@@ -41,7 +41,7 @@ pactWith(
     describe('ccd_data_store getCases API', () => {
       const CASES = [
         {
-          id: '45678',
+          id: '123456',
           state: 'Draft',
           case_data: { applyingWith: 'alone' },
         },
@@ -52,20 +52,37 @@ pactWith(
         headers: {
           'Content-Type': 'application/json',
         },
-        body: CASES,
+        body: {
+          cases: [
+            {
+              id: '123456',
+              state: 'Draft',
+              case_data: { applyingWith: 'alone' },
+            },
+          ],
+          total: 1,
+        },
       };
 
       const getCasesRequest = {
         uponReceiving: 'a request to get cases',
         withRequest: {
-          method: 'GET',
-          path: '/citizens/123456/jurisdictions/ADOPTION/case-types/A58/cases',
+          method: 'POST',
+          path: '/searchCases',
+          query: 'ctid=A58',
+
           headers: {
             Authorization: 'Bearer mock-user-access-token',
             ServiceAuthorization: 'mock-service-auth-token',
             experimental: 'true',
             Accept: '*/*',
             'Content-Type': 'application/json',
+          },
+          body: {
+            query: {
+              match_all: {},
+            },
+            sort: [{ id: { order: 'asc' } }],
           },
         },
       };
@@ -90,6 +107,7 @@ pactWith(
         id: '45678',
         state: 'Draft',
         applyingWith: 'alone',
+        status: 'Draft',
       };
 
       const getCaseByIdSuccessResponse = {
@@ -138,6 +156,7 @@ pactWith(
       const EXPECTED_CASE_DATA = {
         id: '45678',
         state: 'Draft',
+        status: 'Draft',
       };
 
       const createCaseEventTokenResponse = {
@@ -223,51 +242,49 @@ pactWith(
       });
     });
 
-    // describe('ccd_data_store case-users API', () => {
-    //   const EXPECTED_CASE_USER_ROLES = {
-    //     case_users: [{ case_id: '45678', user_id: '123456', case_role: 'citizen' }],
-    //   };
+    describe('ccd_data_store case-users API', () => {
+      const EXPECTED_CASE_USER_ROLES = {
+        case_users: [{ case_id: '45678', user_id: '123456', case_role: 'citizen' }],
+      };
 
-    //   const getCaseUserRolesResponse = {
-    //     status: 200,
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: {
-    //       case_users: [{ case_id: '45678', user_id: '123456', case_role: 'citizen' }],
-    //     },
-    //   };
+      const getCaseUserRolesResponse = {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: EXPECTED_CASE_USER_ROLES,
+      };
 
-    //   const getCaseUserRolesRequest = {
-    //     uponReceiving: 'a request to get case-user roles',
-    //     withRequest: {
-    //       method: 'GET',
-    //       path: '/case-users',
-    //       headers: {
-    //         Authorization: 'Bearer mock-user-access-token',
-    //         ServiceAuthorization: 'mock-service-auth-token',
-    //         experimental: 'true',
-    //         Accept: '*/*',
-    //         'Content-Type': 'application/json',
-    //       },
-    //       query: 'case_ids=45678&user_ids=123456',
-    //     },
-    //   };
+      const getCaseUserRolesRequest = {
+        uponReceiving: 'a request to get case-user roles',
+        withRequest: {
+          method: 'GET',
+          path: '/case-users',
+          query: 'case_ids=45678&user_ids=123456',
+          headers: {
+            Authorization: 'Bearer mock-user-access-token',
+            ServiceAuthorization: 'mock-service-auth-token',
+            experimental: 'true',
+            Accept: '*/*',
+            'Content-Type': 'application/json',
+          },
+        },
+      };
 
-    //   beforeEach(() => {
-    //     const interaction = {
-    //       state: 'adoption-web makes request to get case-users roles',
-    //       ...getCaseUserRolesRequest,
-    //       willRespondWith: getCaseUserRolesResponse,
-    //     };
-    //     provider.addInteraction(interaction);
-    //   });
+      beforeEach(() => {
+        const interaction = {
+          state: 'adoption-web makes request to get case-users roles',
+          ...getCaseUserRolesRequest,
+          willRespondWith: getCaseUserRolesResponse,
+        };
+        provider.addInteraction(interaction);
+      });
 
-    //   it('return case assigned user roles in response for given caseId and userId', async () => {
-    //     const caseUserRoles = await caseApi.getCaseUserRoles('45678', userDetails.id);
-    //     expect(caseUserRoles).toEqual(EXPECTED_CASE_USER_ROLES);
-    //   });
-    // });
+      it('return case assigned user roles in response for given caseId and userId', async () => {
+        const caseUserRoles = await caseApi.getCaseUserRoles('45678', userDetails.id);
+        expect(caseUserRoles).toEqual(EXPECTED_CASE_USER_ROLES);
+      });
+    });
 
     describe('ccd_data_store sendEvent API', () => {
       const EXPECTED_CASE_DATA = {
@@ -275,6 +292,7 @@ pactWith(
         state: 'Draft',
         applicant1FirstNames: 'Updated first name',
         applicant1LastNames: 'Updated last name',
+        status: 'Draft',
       };
 
       const getEventTokenResponse = {
@@ -314,6 +332,7 @@ pactWith(
             applicant1FirstName: 'Updated first name',
             applicant1LastName: 'Updated last name',
           },
+          status: 'Draft',
         },
       };
 

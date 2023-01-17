@@ -1,0 +1,3 @@
+module.exports = {
+  familyCourtDetails: 'Swansea',
+};

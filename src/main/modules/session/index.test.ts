@@ -1,5 +1,6 @@
 jest.mock('config');
 const mockCreateClient = jest.fn(() => 'MOCK redis client');
+
 jest.mock('redis', () => {
   return {
     __esModule: true,

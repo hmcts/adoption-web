@@ -9,32 +9,38 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: "The child's details",
-  label: 'What date is on the placement order?',
+  title: 'What date is on the placement order?',
   hint: 'For example, 31 3 2020',
   errors: {
     placementOrderDate: {
       required: 'Enter the placement order date',
-      incompleteDay: 'Date must include a day',
-      incompleteMonth: 'Date must include a month',
-      incompleteYear: 'Date must include a year',
       invalidDate: 'Enter a real date',
       invalidDateInFuture: 'Date must be in the past',
+      incompleteDay: 'Enter a day',
+      incompleteMonth: 'Enter a month',
+      incompleteYear: 'Enter a year',
+      incompleteDayAndMonth: 'Enter a day and month',
+      incompleteMonthAndYear: 'Enter a month and year',
+      incompleteDayAndYear: 'Enter a day and year',
     },
   },
 };
 
 const cyContent = {
   section: 'Manylion y plentyn',
-  label: 'Pa ddyddiad sydd ar y gorchymyn lleoli?',
+  title: 'Pa ddyddiad sydd ar y gorchymyn lleoli?',
   hint: 'Er enghraifft, 31 3 2020',
   errors: {
     placementOrderDate: {
       required: 'Nac ydwdwch ddyddiad y gorchymyn lleoli',
-      incompleteDay: 'Rhaid i’r dyddiad gynnwys diwrnod',
-      incompleteMonth: 'Rhaid i’r dyddiad gynnwys mis',
-      incompleteYear: 'Rhaid i’r dyddiad gynnwys blwyddyn',
       invalidDate: 'Nac ydwdwch ddyddiad dilys',
       invalidDateInFuture: 'Rhaid i’r dyddiad fod yn y gorffennol',
+      incompleteDay: 'Nodwch ddiwrnod',
+      incompleteMonth: 'Nodwch fis',
+      incompleteYear: 'Nodwch flwyddyn',
+      incompleteDayAndMonth: 'Nodwch ddiwrnod a blwyddyn',
+      incompleteMonthAndYear: 'Nodwch fis a blwyddyn',
+      incompleteDayAndYear: 'Nodwch ddiwrnod a blwyddyn',
     },
   },
 };
@@ -67,7 +73,7 @@ describe('children > placement-order-date > content', () => {
 
     expect(placementOrderDateField.type).toBe('date');
     expect(placementOrderDateField.classes).toBe('govuk-date-input');
-    expect((placementOrderDateField.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((placementOrderDateField.label as Function)(generatedContent)).toBe(enContent.title);
     expect(((placementOrderDateField as FormInput).hint as Function)(generatedContent)).toBe(enContent.hint);
     expect(placementOrderDateField.labelSize).toBe('l');
     expect(placementOrderDateField.attributes).toEqual({ spellcheck: false });
