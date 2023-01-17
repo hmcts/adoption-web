@@ -60,9 +60,6 @@ export const form: FormContent = {
       classes: 'govuk-input--width-20',
       label: l => l.emailAddress,
       labelSize: null,
-      attributes: {
-        autocomplete: 'email',
-      },
       validator: value => isFieldFilledIn(value) || isEmailValid(value),
     },
     applicant2PhoneNumber: {
@@ -70,9 +67,6 @@ export const form: FormContent = {
       classes: 'govuk-input--width-20',
       label: l => l.phoneNumber,
       labelSize: null,
-      attributes: {
-        autocomplete: 'tel',
-      },
       validator: value => isFieldFilledIn(value) || isPhoneNoValid(value),
     },
     applicant2ContactDetailsConsent: {
