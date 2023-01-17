@@ -40,6 +40,7 @@ export class OidcMiddleware {
       errorHandler(async (req, res) => {
         if (typeof req.query.code === 'string') {
           req.session.user = await getUserDetails(`${protocol}${res.locals.host}${port}`, req.query.code, CALLBACK_URL);
+          logger.info('### ### ### ### AccessToken:', req.session.user.accessToken);
           const role: string = config.get('services.idam.userRole');
           logger.info('Roles are ---', req.session.user.roles);
           logger.info('Demo User Roles are ---', role);
