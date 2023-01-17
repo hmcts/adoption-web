@@ -25,12 +25,13 @@ export class CaseApi {
 
   public async getOrCreateCase(serviceType: Adoption, userDetails: UserDetails): Promise<CaseWithId> {
     const userCase = await this.getCase();
+    this.logger.info('######################## userCase: ', userCase);
     return userCase || this.createCase(serviceType, userDetails);
   }
 
   private async getCase(): Promise<CaseWithId | false> {
     const cases = await this.getCases();
-
+    this.logger.info('#####################  cases: ', cases);
     switch (cases.length) {
       case 0: {
         return false;
