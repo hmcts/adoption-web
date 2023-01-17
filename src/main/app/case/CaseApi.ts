@@ -52,6 +52,7 @@ export class CaseApi {
         query: { match_all: {} },
         sort: [{ id: { order: 'asc' } }],
       };
+      this.logger.info('#####################  JSON.stringify(query): ', JSON.stringify(query));
       const response = await this.axios.post<ES<CcdV1Response>>(
         `/searchCases?ctid=${CASE_TYPE}`,
         JSON.stringify(query)
