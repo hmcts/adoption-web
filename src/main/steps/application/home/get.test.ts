@@ -3,6 +3,7 @@ import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { ApplyingWith, State } from '../../../app/case/definition';
 import {
   APPLICATION_SUBMITTED,
+  APPLYING_WITH_URL,
   CHECK_ANSWERS_URL,
   CONFIRM_JOINT_APPLICATION,
   HUB_PAGE,
