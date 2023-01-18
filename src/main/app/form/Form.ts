@@ -185,6 +185,7 @@ export interface CsrfField {
 export type FormError = {
   propertyName: string;
   errorType: string;
+  id?: string;
 };
 
 interface CaseWithFormData extends CaseWithId {

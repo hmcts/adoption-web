@@ -8,10 +8,17 @@
         text: errorSaving
       }), errorList) %}
     {% else %}
+    {% if item.id != undefined %}
       {% set errorList = (errorList.push({
-        href: '#' + item.propertyName,
+           href: '#' + item.id,
         text: errors[item.propertyName][item.errorType]
       }), errorList) %}
+       {% else %}
+       {% set errorList = (errorList.push({
+           href: '#' + item.propertyName,
+        text: errors[item.propertyName][item.errorType]
+      }), errorList) %}
+      {% endif %}
     {% endif %}
   {% endfor %}
   {{ govukErrorSummary({
