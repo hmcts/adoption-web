@@ -6,11 +6,11 @@ import { form as manualAddressForm, generateContent as manualAddressGenerateCont
 
 const en = manualAddressContent => ({
   addressLine1: 'Address line 1',
-  addressLine2: 'Address line 2 (Optional)',
-  addressLine3: 'Address line 3 (Optional)',
-  town: 'Town or city (Optional)',
-  county: 'County, district, state or province (Optional)',
-  postcode: 'Postcode, zip code or area code (Optional)',
+  addressLine2: 'Address line 2 (optional)',
+  addressLine3: 'Address line 3 (optional)',
+  town: 'Town or city (optional)',
+  county: 'County, district, state or province (optional)',
+  postcode: 'Postcode, zip code or area code (optional)',
   country: 'Country',
   errors: {
     address1: manualAddressContent.errors.address1,
@@ -22,9 +22,9 @@ const en = manualAddressContent => ({
 
 const cy: typeof en = manualAddressContent => ({
   addressLine1: 'Llinell cyfeiriad 1',
-  addressLine2: 'Llinell cyfeiriad 2 (Dewisol)',
-  addressLine3: 'Llinell cyfeiriad 3 (Dewisol)',
-  town: 'Tref neu ddinas (Dewisol)',
+  addressLine2: 'Llinell cyfeiriad 2 (dewisol)',
+  addressLine3: 'Llinell cyfeiriad 3 (dewisol)',
+  town: 'Tref neu ddinas (dewisol)',
   county: 'Sir, rhanbarth, gwladwriaeth neu dalaith (dewisol)',
   postcode: 'Cod post, cod zip neu god rhanbarth (dewisol)',
   country: 'Gwlad',
