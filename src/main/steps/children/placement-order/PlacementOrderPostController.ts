@@ -34,6 +34,11 @@ export default class PlacementOrderPostController extends PostController<AnyObje
 
     if (formData['confirm'] === YesOrNo.NO) {
       req.originalUrl = req.originalUrl.substring(0, req.originalUrl.indexOf('?'));
+      delete req.query.confirm;
+    } else {
+      req.originalUrl = req.originalUrl.replace('?confirm', '?remove');
+      req.url = req.url.replace('?confirm', '?remove');
+      delete req.query.confirm;
     }
 
     req.session.userCase = await this.save(

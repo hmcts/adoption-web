@@ -38,7 +38,7 @@ export const placementOrderListItems = (userCase: CaseWithId, content: any): any
             ? []
             : [
                 {
-                  href: `${LA_PORTAL_CHILD_PLACEMENT_ORDER_REMOVE_PLACEMENT_ORDER}?remove=${item.placementOrderId}`,
+                  href: `${LA_PORTAL_CHILD_PLACEMENT_ORDER_REMOVE_PLACEMENT_ORDER}?confirm=${item.placementOrderId}`,
                   text: content.remove,
                   visuallyHiddenText: text,
                 },

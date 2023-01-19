@@ -33,7 +33,9 @@ const en = content => {
   const placementOrderText = getPlacementOrderType(content.userCase);
   return {
     ...enContent,
-    title: `Are you sure you want to remove this ${enContent.childsPOType[placementOrderText]}?`,
+    title: `Are you sure you want to remove this ${
+      !enContent.childsPOType[placementOrderText] ? 'order' : enContent.childsPOType[placementOrderText]
+    }?`,
   };
 };
 //eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -57,7 +59,9 @@ const cy: typeof en = content => {
   const placementOrderText = getPlacementOrderType(content.userCase);
   return {
     ...cyContent,
-    title: `Ydych chi'n siŵr eich bod am ddileu hwn ${cyContent.childsPOType[placementOrderText]}?`,
+    title: `Ydych chi'n siŵr eich bod am ddileu hwn ${
+      !cyContent.childsPOType[placementOrderText] ? 'order' : cyContent.childsPOType[placementOrderText]
+    }?`,
   };
 };
 
