@@ -15,14 +15,6 @@ module.exports = {
   },
   async seeTheLandingPage() {
     await I.wait(2);
-    I.see('Apply to adopt a child placed in your care');
-  },
-  async seeStartPlacementAndClickPage() {
-    await I.wait(2);
-    await I.retry(3).click('Start now');
-  },
-  async seeFirstQuestionPage() {
-    await I.wait(2);
     await I.retry(3).see('Are you applying on your own, or with someone else?');
   },
 
