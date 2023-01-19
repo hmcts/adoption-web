@@ -44,7 +44,7 @@ export class Form {
 
   private getErrorsFromField(body: Partial<Case>, id: string, field: FormField): FormError[] {
     const errorType = field.validator && field.validator(body[id], body);
-    const errors: FormError[] = errorType ? [{ errorType, propertyName: id }] : [];
+    const errors: FormError[] = errorType ? [{ errorType, propertyName: id, id: field.id }] : [];
 
     // if there are checkboxes or options, check them for errors
     if (isFormOptions(field)) {
