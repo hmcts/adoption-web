@@ -14,7 +14,7 @@ jest.mock('../../../app/form/validation');
 const EN = 'en';
 const fieldPrefix = FieldPrefix.BIRTH_MOTHER;
 const enContent = {
-  title: 'What is your nationality?',
+  title: 'What is their nationality?',
   hint: 'Select all options that are relevant.',
   british: 'British',
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish',
@@ -31,13 +31,13 @@ const enContent = {
       notSureViolation: "Select a nationality or 'Not sure'",
     },
     addAnotherNationality: {
-      required: 'This is not a valid entry',
+      required: 'Enter a country name',
     },
   },
 };
 
 const cyContent = {
-  title: 'Beth yw eich cenedligrwydd?',
+  title: 'Beth yw eu cenedligrwydd?',
   hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
   british: 'Prydeinig',
   britishSubtext: 'gan gynnwys Saesneg, Albanaidd, Cymraeg a Gwyddelig Gogledd Iwerddon',

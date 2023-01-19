@@ -15,7 +15,7 @@ const enContent = {
   two: 'No',
   errors: {
     otherParentExists: {
-      required: 'Please answer the question',
+      required: 'Select whether there is another person who has parental responsibility for the child',
     },
   },
 };
@@ -27,7 +27,7 @@ const cyContent = {
   two: 'Nac ydw',
   errors: {
     otherParentExists: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: 'Nodwch a oes unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn',
     },
   },
 };

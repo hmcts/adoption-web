@@ -14,7 +14,7 @@ import { mapSummaryListContent } from '../functions/mapSummaryListContent';
 import { defaultButtons } from './common/default-buttons';
 
 const en = (fieldPrefix: FieldPrefix) => ({
-  title: 'What is your nationality?',
+  title: 'What is their nationality?',
   hint: 'Select all options that are relevant.',
   british: 'British',
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish',
@@ -31,13 +31,13 @@ const en = (fieldPrefix: FieldPrefix) => ({
       notSureViolation: "Select a nationality or 'Not sure'",
     },
     addAnotherNationality: {
-      required: 'This is not a valid entry',
+      required: 'Enter a country name',
     },
   },
 });
 
 const cy: typeof en = (fieldPrefix: FieldPrefix) => ({
-  title: 'Beth yw eich cenedligrwydd?',
+  title: 'Beth yw eu cenedligrwydd?',
   hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
   british: 'Prydeinig',
   britishSubtext: 'gan gynnwys Saesneg, Albanaidd, Cymraeg a Gwyddelig Gogledd Iwerddon',

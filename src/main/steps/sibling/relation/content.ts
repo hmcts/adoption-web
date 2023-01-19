@@ -15,7 +15,7 @@ const en = () => ({
   stepBrother: 'Step-brother',
   errors: {
     selectedSiblingRelation: {
-      required: 'Please select an answer',
+      required: 'Select the sibling’s relationship to the child being adopted',
     },
   },
 });
@@ -31,7 +31,7 @@ const cy: typeof en = () => ({
   stepBrother: 'Llysfrawd',
   errors: {
     selectedSiblingRelation: {
-      required: 'Dewiswch ateb os gwelwch yn dda',
+      required: 'Nodwch berthynas y brawd/chwaer â’r plentyn sy’n cael ei fabwysiadu',
     },
   },
 });

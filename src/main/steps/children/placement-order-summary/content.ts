@@ -25,7 +25,7 @@ const en = content => {
     },
     errors: {
       addAnotherPlacementOrder: {
-        required: 'Please select an answer',
+        required: 'Select whether the child has any other previous or existing orders',
       },
     },
   };
@@ -55,7 +55,7 @@ const cy: typeof en = content => {
     },
     errors: {
       addAnotherPlacementOrder: {
-        required: 'Dewiswch ateb os gwelwch yn dda',
+        required: 'Nodwch a oes gan y plentyn unrhyw orchmynion blaenorol neu bresennol eraill',
       },
     },
   };

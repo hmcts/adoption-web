@@ -22,9 +22,10 @@ export default class FindFamilyCourtPostController extends PostController<AnyObj
     this.filterErrorsForSaveAsDraft(req);
 
     if (isFilledPlacementOrderCourt) {
-      req.session.errors.push({ propertyName: 'placementOrderCourt', errorType: isFilledPlacementOrderCourt });
+      if (req.session.errors.filter(e => e.propertyName === 'placementOrderCourt').length === 0) {
+        req.session.errors.push({ propertyName: 'placementOrderCourt', errorType: isFilledPlacementOrderCourt });
+      }
     }
-
     if (req.session.errors.length > 0) {
       this.redirect(req, res);
       return;

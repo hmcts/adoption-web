@@ -15,7 +15,7 @@ const enContent = {
     "Provide more details. For example, 'the birth mother is uncontactable'. Your adoption agency or social worker can help you to complete this section.",
   errors: {
     birthMotherStillAlive: {
-      required: 'Please answer the question',
+      required: 'Select whether the birth mother is alive',
     },
     birthMotherNotAliveReason: {
       required: 'Enter more detail',
@@ -30,7 +30,7 @@ const cyContent = {
     'Darparwch fwy o fanylion. Er enghraifft, ‘nid oes modd cysylltu â’r fam fiolegol’. Gall eich asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol eich helpu i lenwi’r rhan hon. ',
   errors: {
     birthMotherStillAlive: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: 'Nodwch a yw’r fam fiolegol yn fyw.',
     },
     birthMotherNotAliveReason: {
       required: 'Rhowch fwy o fanylion',

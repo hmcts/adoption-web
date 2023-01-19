@@ -23,12 +23,15 @@ const enContent = {
   title: 'When was the last date this address was confirmed?',
   errors: {
     birthFatherLastAddressDate: {
-      required: 'Enter date',
+      required: 'Enter the last date the birth father’s address was confirmed',
       invalidDate: 'Date must be a real date',
-      incompleteDay: 'Date must include a day',
-      incompleteMonth: 'Date must include a month',
-      incompleteYear: 'Date must include a year',
       invalidDateInFuture: 'Date must be in the past',
+      incompleteDay: 'Enter a day',
+      incompleteMonth: 'Enter a month',
+      incompleteYear: 'Enter a year',
+      incompleteDayAndMonth: 'Enter a day and month',
+      incompleteMonthAndYear: 'Enter a month and year',
+      incompleteDayAndYear: 'Enter a day and year',
     },
   },
 };
@@ -38,12 +41,15 @@ const cyContent = {
   title: "Pryd gafodd y dyddiad diwethaf i'r cyfeiriad yma gael ei gadarnhau?",
   errors: {
     birthFatherLastAddressDate: {
-      required: 'Nodwch y dyddiad',
+      required: 'Nodwch y dyddiad diwethaf y cafwyd cadarnhad o gyfeiriad y tad biolegol',
       invalidDate: 'Rhaid i’r dyddiad fod yn ddyddiad dilys',
-      incompleteDay: 'Rhaid i’r dyddiad gynnwys diwrnod',
-      incompleteMonth: 'Rhaid i’r dyddiad gynnwys mis',
-      incompleteYear: 'Rhaid i’r dyddiad gynnwys blwyddyn',
       invalidDateInFuture: 'Rhaid i’r dyddiad fod yn y gorffennol',
+      incompleteDay: 'Nodwch ddiwrnod',
+      incompleteMonth: 'Nodwch fis',
+      incompleteYear: 'Nodwch flwyddyn',
+      incompleteDayAndMonth: 'Nodwch ddiwrnod a blwyddyn',
+      incompleteMonthAndYear: 'Nodwch fis a blwyddyn',
+      incompleteDayAndYear: 'Nodwch ddiwrnod a blwyddyn',
     },
   },
 };
