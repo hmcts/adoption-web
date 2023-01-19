@@ -1,7 +1,7 @@
 import { Checkbox } from '../case';
 import { AdoptionDocument, DocumentType } from '../definition';
 
-import { fromApiApplicant1, fromApiApplicant2 } from './uploaded-files';
+import { fromApiApplicant1, fromApiApplicant2, fromApiLa } from './uploaded-files';
 
 describe('uploadedFilesFromApiApplicant1', () => {
   it('converts documents', async () => {
@@ -24,6 +24,30 @@ describe('uploadedFilesFromApiApplicant1', () => {
     });
 
     expect(result.applicant1CannotUpload).toBe(Checkbox.Unchecked);
+  });
+});
+
+describe('uploadedFilesFromApiLa', () => {
+  it('converts documents', async () => {
+    const result = fromApiLa({
+      laDocumentsUploaded: [
+        { id: '1', value: { documentFileName: 'filename' } as AdoptionDocument },
+        { id: '2', value: { documentFileName: 'filename' } as AdoptionDocument },
+      ],
+    });
+
+    expect(result.laUploadedFiles?.length).toBe(2);
+    expect(result.laUploadedFiles?.[0].id).toBe('1');
+    expect(result.laUploadedFiles?.[1].id).toBe('2');
+    expect(result.laCannotUpload).toBe(Checkbox.Unchecked);
+  });
+
+  it('sets cannot upload', async () => {
+    const result = fromApiLa({
+      laCannotUploadSupportingDocument: [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE],
+    });
+
+    expect(result.laCannotUpload).toBe(Checkbox.Unchecked);
   });
 });
 

@@ -10,8 +10,6 @@ jest.mock('../../../app/form/validation');
 const enContent = {
   section: "Birth father's details",
   title: "What is the full name of the child's birth father?",
-  line1:
-    "This will be on the child's full birth certificate. Ask the adoption agency or social worker if you're not sure.",
   errors: {
     birthFatherFirstNames: {
       required: 'Enter their first names',
@@ -25,8 +23,6 @@ const enContent = {
 const cyContent = {
   section: 'Manylion y tad biolegol',
   title: 'Beth yw enw llawn tad biolegol y plentyn?',
-  line1:
-    'Bydd y rhain ar dystysgrif geni llawn y plentyn. Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
   errors: {
     birthFatherFirstNames: {
       required: 'Nac ydwdwch eu henw(au) cyntaf',

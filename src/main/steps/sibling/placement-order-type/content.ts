@@ -1,4 +1,4 @@
-import { PlacementOrder } from '../../../app/case/definition';
+import { SiblingPOType } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -6,20 +6,42 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
   section: SECTION,
-  label: 'What type of order is it?',
+  title: 'What type of order is it?',
+  adoptionOrder: 'Adoption order',
+  careOrder: 'Care order',
+  contactOrder: 'Contact order',
+  freeingOrder: 'Freeing order',
+  placementOrder: 'Placement order',
+  superVisOrder: 'Supervision order',
+  other: 'Other',
+  placementOtherType: 'Add a different type of order',
   errors: {
-    placementOrderType: {
-      required: 'Please answer the question',
+    selectedSiblingPoType: {
+      required: 'Select the order type',
+    },
+    selectedSiblingOtherPlacementOrderType: {
+      required: 'Enter an order type',
     },
   },
 });
 
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  label: 'Pa fath o neuchymyn ydyw?',
+  title: 'Pa fath o orchymyn ydyw?',
+  adoptionOrder: 'Gorchymyn Mabwysiadu',
+  careOrder: 'Gorchymyn Gofal',
+  contactOrder: 'Gorchymyn Cyswllt',
+  freeingOrder: 'Gorchymyn Rhyddhau',
+  placementOrder: 'Gorchymyn Lleoli',
+  superVisOrder: 'Gorchymyn Goruchwylio',
+  other: 'Arall',
+  placementOtherType: 'Ychwanegu math gwahanol o orchymyn',
   errors: {
-    placementOrderType: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+    selectedSiblingPoType: {
+      required: 'Dewiswch y math o orchymyn',
+    },
+    selectedSiblingOtherPlacementOrderType: {
+      required: 'Nodwch y math o orchymyn',
     },
   },
 });
@@ -27,20 +49,37 @@ const cy: typeof en = () => ({
 export const form: FormContent = {
   fields: userCase => {
     const sibling = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
-    const siblingPlacementOrder = sibling?.siblingPlacementOrders?.find(
-      item => (item as PlacementOrder).placementOrderId === userCase.selectedSiblingPoId
-    );
     return {
-      placementOrderType: {
-        type: 'text',
-        classes: 'govuk-label',
-        label: l => l.label,
-        value: (siblingPlacementOrder as PlacementOrder)?.placementOrderType,
-        labelSize: 'l',
+      selectedSiblingPoType: {
+        type: 'radios',
+        classes: 'govuk-radios',
+        label: l => l.title,
+        values: [
+          { label: l => l.adoptionOrder, value: SiblingPOType.ADOPTION_ORDER },
+          { label: l => l.careOrder, value: SiblingPOType.CARE_ORDER },
+          { label: l => l.contactOrder, value: SiblingPOType.CONTACT_ORDER },
+          { label: l => l.freeingOrder, value: SiblingPOType.FREEING_ORDER },
+          { label: l => l.placementOrder, value: SiblingPOType.PLACEMENT_ORDER },
+          { label: l => l.superVisOrder, value: SiblingPOType.SUPERVIS_ORDER },
+          {
+            label: l => l.other,
+            value: SiblingPOType.OTHER,
+            subFields: {
+              selectedSiblingOtherPlacementOrderType: {
+                type: 'text',
+                label: l => l.placementOtherType,
+                labelSize: null,
+                validator: isFieldFilledIn,
+              },
+            },
+          },
+        ],
         attributes: {
           spellcheck: false,
         },
+        labelHidden: true,
         validator: isFieldFilledIn,
+        ...sibling,
       },
     };
   },

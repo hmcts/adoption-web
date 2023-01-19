@@ -1,0 +1,19 @@
+{% extends "common/form/form.njk"%}
+
+{% block before_fields %}
+
+  <p class="govuk-body govuk-!-margin-bottom-5">
+    {{statement}}
+  </p>
+  <p class="govuk-body govuk-!-margin-bottom-5">
+    {{laIBelieveApplicationIsTrue}}
+  </p>
+{% endblock %}
+
+{% block after_fields %}
+  <div class="govuk-form-group">
+    <p class="govuk-body">
+      {{reviewBeforeSubmit}}
+    </p>
+  </div>
+{% endblock %}

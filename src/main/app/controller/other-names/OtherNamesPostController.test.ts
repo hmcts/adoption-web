@@ -13,11 +13,6 @@ jest.mock('../../../steps', () => {
   return { getNextStepUrl: mockGetNextStepUrl };
 });
 
-const v4Mock = jest.fn();
-jest.mock('uuid', () => ({
-  v4: v4Mock,
-}));
-
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { FieldPrefix } from '../../case/case';
@@ -32,6 +27,7 @@ describe('OtherNamesPostController', () => {
   const formData = { applicant1AdditionalNames: [] };
 
   beforeEach(() => {
+    Date.now = jest.fn(() => +new Date('2021-01-01'));
     req = mockRequest({
       session: {
         userCase: {
@@ -65,7 +61,6 @@ describe('OtherNamesPostController', () => {
 
       describe('and when applicant1OtherFirstNames and applicant1OtherLastNames is present in formData', () => {
         beforeEach(() => {
-          v4Mock.mockReturnValue('MOCK_V4_UUID');
           mockGetParsedBody.mockReturnValue({
             addButton: 'addButton',
             applicant1OtherFirstNames: 'MOCK_OTHER_FIRST_NAME',
@@ -110,7 +105,7 @@ describe('OtherNamesPostController', () => {
               applicant1AdditionalNames: [
                 {
                   firstNames: 'MOCK_OTHER_FIRST_NAME',
-                  id: 'MOCK_V4_UUID',
+                  id: '1609459200000',
                   lastNames: 'MOCK_OTHER_LAST_NAME',
                 },
               ],
@@ -139,6 +134,29 @@ describe('OtherNamesPostController', () => {
         expect(mockGetNextStepUrl).toHaveBeenCalledWith(req, {
           applicant1AdditionalNames: [],
         });
+      });
+    });
+
+    describe('and when addButton is not pressed but data present in applicant1AdditionalNames', () => {
+      beforeEach(() => {
+        mockGetParsedBody.mockReturnValue({
+          addButton: undefined,
+          applicant1OtherFirstNames: 'MOCK_OTHER_FIRST_NAME',
+          applicant1OtherLastNames: 'MOCK_OTHER_LAST_NAME',
+        });
+        mockGetErrors.mockReturnValue([]);
+        controller = new OtherNamesPostController({}, FieldPrefix.APPLICANT1);
+        req.locals.api.triggerEvent.mockResolvedValue();
+      });
+
+      test('should show error for add button not clicked', async () => {
+        await controller.post(req, res);
+        expect(req.session.errors).toEqual([
+          {
+            errorType: 'addButtonNotClicked',
+            propertyName: 'applicant1HasOtherNames',
+          },
+        ]);
       });
     });
   });

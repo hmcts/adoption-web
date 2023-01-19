@@ -4,7 +4,7 @@ import FileInput from '@uppy/file-input';
 import ProgressBar from '@uppy/progress-bar';
 import XHRUpload from '@uppy/xhr-upload';
 
-import { DOCUMENT_MANAGER } from '../../../steps/urls';
+import { DOCUMENT_MANAGER, LA_DOCUMENT_MANAGER } from '../../../steps/urls';
 import { getById, hidden, qs } from '../selectors';
 
 import { FileUploadEvents } from './FileUploadEvents';
@@ -15,7 +15,8 @@ import '@uppy/drop-target/src/style.scss';
 import '@uppy/progress-bar/src/style.scss';
 
 const initUploadManager = (): void => {
-  const url = DOCUMENT_MANAGER;
+  const isLaPortal = location.href.includes('la-portal');
+  const url = isLaPortal ? LA_DOCUMENT_MANAGER : DOCUMENT_MANAGER;
   const csrfToken = (getById('csrfToken') as HTMLInputElement)?.value;
   const locale = (getById('locale') as HTMLInputElement)?.value;
   const csrfQuery = `?_csrf=${csrfToken}`;
@@ -30,14 +31,23 @@ const initUploadManager = (): void => {
 
   const uppy = new Uppy({
     restrictions: {
-      maxFileSize: 2097152,
-      maxTotalFileSize: 10485760,
-      maxNumberOfFiles: 10,
-      allowedFileTypes: [
-        'application/msword',
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-        'application/pdf',
-      ],
+      maxFileSize: isLaPortal ? 26214400 : 2097152,
+      maxTotalFileSize: isLaPortal ? 262144000 : 10485760,
+      maxNumberOfFiles: 10, //jpg, png, pdf, doc/docx or tif
+      allowedFileTypes: isLaPortal
+        ? [
+            'application/msword',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/pdf',
+            'image/jpeg',
+            'image/png',
+            'image/tiff',
+          ]
+        : [
+            'application/msword',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/pdf',
+          ],
     },
   });
 

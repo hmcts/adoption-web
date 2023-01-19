@@ -7,8 +7,6 @@ import { generateContent } from './address-select';
 jest.mock('../../../app/form/validation');
 
 const enContent = {
-  line1:
-    "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email.",
   postcode: 'Postcode',
   selectAddress: 'Select an address',
   cannotFindAddress: 'Or enter address manually',
@@ -22,8 +20,6 @@ const enContent = {
 };
 
 const cyContent = {
-  line1:
-    'Byddwn yn anfon yr holl bapurau llys i’r cyfeiriad hwn oni bai eich bod yn ein cynghori eich bod yn hapus i’r gorchmynion llys gael eu cyflwyno arnoch trwy e-bost.',
   postcode: 'Cod post',
   selectAddress: 'Dewiswch gyfeiriad',
   cannotFindAddress: 'Neu nodwch y cyfeiriad â llaw',
@@ -46,7 +42,6 @@ describe('common > components > address-select', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.line1).toEqual(enContent.line1);
     expect(generatedContent.postcode).toEqual(enContent.postcode);
     expect(generatedContent.selectAddress).toEqual(enContent.selectAddress);
     expect(generatedContent.cannotFindAddress).toEqual(enContent.cannotFindAddress);
@@ -67,7 +62,6 @@ describe('common > components > address-select', () => {
 
   test('should return correct welsh content', () => {
     generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.line1).toEqual(cyContent.line1);
     expect(generatedContent.postcode).toEqual(cyContent.postcode);
     expect(generatedContent.selectAddress).toEqual(cyContent.selectAddress);
     expect(generatedContent.cannotFindAddress).toEqual(cyContent.cannotFindAddress);

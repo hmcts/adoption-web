@@ -127,6 +127,7 @@ export interface FormContent {
     text: Label;
     classes?: string;
   };
+  hideContactHelpSection?: boolean;
   fields: FormFields | FormFieldsFn;
 }
 

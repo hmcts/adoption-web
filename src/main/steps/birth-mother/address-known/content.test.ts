@@ -1,6 +1,6 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { YesOrNo } from '../../../app/case/definition';
-import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
+import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -10,9 +10,8 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: "Birth mother's details",
-  label: "Do you have the birth mother's last known address?",
+  title: "Do you have the birth mother's last known address?",
   moreDetails: "Give a reason why the address is not known, for example 'no fixed address'.",
-  hint: "Ask the adoption agency or social worker if you're not sure.",
   errors: {
     birthMotherAddressKnown: {
       required: 'Please select an answer',
@@ -26,9 +25,8 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y fam fiolegol',
-  label: 'A oes gennych cyfeiriad olaf hysbys y fam fiolegol?',
+  title: 'A oes gennych cyfeiriad olaf hysbys y fam fiolegol?',
   moreDetails: 'Rhowch reswm pam bod y cyfeiriad yn anhysbys, er enghraifft ‘dim cyfeiriad parhaol’.',
-  hint: 'Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
   errors: {
     birthMotherAddressKnown: {
       required: 'Dewiswch ateb os gwelwch yn dda',
@@ -65,8 +63,7 @@ describe('birth-mother > address-known > content', () => {
     const field = fields.birthMotherAddressKnown as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
-    expect((field.label as Function)(generatedContent)).toBe(enContent.label);
-    expect(((field as FormInput).hint as Function)(generatedContent)).toBe(enContent.hint);
+    expect((field.label as Function)(generatedContent)).toBe(enContent.title);
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesOrNo.YES);

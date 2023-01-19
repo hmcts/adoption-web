@@ -10,8 +10,8 @@ module.exports = {
     under21Eligible: '#under21Eligible',
     livedUKEligible: '#livedUKEligible',
     domicileEligible: '#domicileEligible',
+    submitButton: 'input[value="Sign in"]',
   },
-  submitButton: 'input[value="Sign in"]',
 
   async createUserAndSignIn() {
     await login('citizenSingleton');
@@ -22,7 +22,7 @@ module.exports = {
     console.log('User using the URL= ' + config.baseUrl);
     await login('citizenSingleton');
     await I.wait(4);
-    I.see("Apply to adopt a child placed in your care");
+    I.see('Are you applying on your own, or with someone else?');
   },
 
   async signInFromEligibility() {

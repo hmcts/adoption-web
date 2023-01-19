@@ -5,11 +5,14 @@ import {
   atLeastOneFieldIsChecked,
   doesArrayHaveValues,
   isAddressSelected,
+  isCaseRefNumeric,
+  isCaseRefTooShort,
   isDateInputInvalid,
   isEmailValid,
   isFieldFilledIn,
   isFieldLetters,
   isFutureDate,
+  isGovUkEmail,
   isInvalidHelpWithFeesRef,
   isInvalidPostcode,
   isLessThanAYear,
@@ -18,6 +21,7 @@ import {
   isTextAreaValid,
   isValidAccessCode,
   isValidCaseReference,
+  notSureViolation,
 } from './validation';
 
 describe('Validation', () => {
@@ -53,19 +57,34 @@ describe('Validation', () => {
       expect(isValid).toStrictEqual('required');
     });
 
-    test('Should check if day does not exist', async () => {
+    test('Should check if day and year does not exist', async () => {
       const isValid = areDateFieldsFilledIn({ day: '', month: '12', year: '' });
-      expect(isValid).toStrictEqual('incompleteDay');
+      expect(isValid).toStrictEqual('incompleteDayAndYear');
     });
 
-    test('Should check if month does not exist', async () => {
+    test('Should check if day and month does not exist', async () => {
+      const isValid = areDateFieldsFilledIn({ day: '', month: '', year: '2001' });
+      expect(isValid).toStrictEqual('incompleteDayAndMonth');
+    });
+
+    test('Should check if month and year does not exist', async () => {
       const isValid = areDateFieldsFilledIn({ day: '12', month: '', year: '' });
-      expect(isValid).toStrictEqual('incompleteMonth');
+      expect(isValid).toStrictEqual('incompleteMonthAndYear');
     });
 
     test('Should check if year does not exist', async () => {
       const isValid = areDateFieldsFilledIn({ day: '21', month: '12', year: '' });
       expect(isValid).toStrictEqual('incompleteYear');
+    });
+
+    test('Should check if day does not exist', async () => {
+      const isValid = areDateFieldsFilledIn({ day: '', month: '12', year: '2021' });
+      expect(isValid).toStrictEqual('incompleteDay');
+    });
+
+    test('Should check if month does not exist', async () => {
+      const isValid = areDateFieldsFilledIn({ day: '12', month: '', year: '2021' });
+      expect(isValid).toStrictEqual('incompleteMonth');
     });
 
     test('Should check if object does not exist', async () => {
@@ -339,5 +358,62 @@ describe('isTextAreaValid()', () => {
       'abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz0987654321098765432123450abcdefghijklmnopqrstuvwxyz0987654321000000000000000000000000000000';
 
     expect(isTextAreaValid(value)).toStrictEqual('invalid');
+  });
+});
+
+describe('isGovUkEmail()', () => {
+  it.each([
+    { mockEmail: 'test@gov.uk', expected: undefined },
+    { mockEmail: 'test_123@test@test.com', expected: 'invalidGovUkEmail' },
+  ])('validates an email has gov.uk when %o', ({ mockEmail, expected }) => {
+    expect(isGovUkEmail(mockEmail)).toEqual(expected);
+  });
+});
+
+describe('notSureViolation()', () => {
+  it.each([
+    { arr: ['Not sure', 'Yes'], expected: 'notSureViolation' },
+    { arr: [], expected: undefined },
+  ])('validates an not sure violation when %o', ({ arr, expected }) => {
+    expect(notSureViolation(arr)).toEqual(expected);
+  });
+});
+
+describe('isCaseRefTooShort()', () => {
+  test('Should check if case reference is valid without hyphens', async () => {
+    const isValid = isCaseRefTooShort('1234123412341234');
+    expect(isValid).toStrictEqual(undefined);
+  });
+
+  test('Should reject invalid case reference', async () => {
+    const isValid = isCaseRefTooShort('123412341234');
+    expect(isValid).toStrictEqual('numberTooShort');
+  });
+
+  test('Should reject empty case reference', async () => {
+    const isValid = isCaseRefTooShort('');
+    expect(isValid).toStrictEqual('numberTooShort');
+  });
+});
+
+describe('isCaseRefNumeric()', () => {
+  test('Should check if case reference is valid with hyphens', async () => {
+    const isValid = isCaseRefNumeric('1234-1234-1234-1234');
+    expect(isValid).toStrictEqual('isNotNumeric');
+  });
+
+  test('Should check if case reference is valid without hyphens', async () => {
+    const isValid = isCaseRefNumeric('1234123412341234');
+    expect(isValid).toStrictEqual(undefined);
+  });
+
+  test('Should check if case reference is valid with letters', async () => {
+    const isValid = isCaseRefNumeric('AD34123412341234');
+    expect(isValid).toStrictEqual('isNotNumeric');
+  });
+
+  test('Should check if case reference is valid with letters and symbols', async () => {
+    const isValid = isCaseRefNumeric('AD-4123412341234');
+    expect(isValid).toStrictEqual('isNotNumeric');
   });
 });

@@ -1,4 +1,5 @@
 import { CaseWithId } from '../app/case/case';
+import { LaPortalKBA } from '../app/controller/AppRequest';
 
 import { PageLink } from './urls';
 
@@ -24,8 +25,9 @@ export enum Sections {
 
 export interface Step {
   url: string;
+  contentDir?: string;
   showInSection?: Sections;
   showInCompleteSection?: Sections;
   excludeFromContinueApplication?: boolean;
-  getNextStep: (data: Partial<CaseWithId>) => PageLink;
+  getNextStep: (data: Partial<CaseWithId> | LaPortalKBA) => PageLink;
 }

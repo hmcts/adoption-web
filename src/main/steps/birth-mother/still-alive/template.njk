@@ -1,0 +1,7 @@
+{% extends "common/template.njk" %}
+
+{% if userCase.birthMotherStillAlive == 'Yes' %}
+    {% block backLink %}
+        <a href="#" class="govuk-back-link">{{ back }}</a>
+    {% endblock %}
+{% endif %}

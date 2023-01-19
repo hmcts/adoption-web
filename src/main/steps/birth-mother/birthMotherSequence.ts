@@ -1,3 +1,4 @@
+import { CaseWithId } from '../../app/case/case';
 import { YesNoNotsure, YesOrNo } from '../../app/case/definition';
 import { Sections, Step } from '../constants';
 import * as Urls from '../urls';
@@ -12,7 +13,9 @@ export const birthMotherSequence: Step[] = [
     url: Urls.BIRTH_MOTHER_STILL_ALIVE,
     showInSection: Sections.AboutBirthMother,
     getNextStep: data =>
-      data.birthMotherStillAlive === YesNoNotsure.YES ? Urls.BIRTH_MOTHER_NATIONALITY : Urls.TASK_LIST_URL,
+      (data as Partial<CaseWithId>).birthMotherStillAlive === YesNoNotsure.YES
+        ? Urls.BIRTH_MOTHER_NATIONALITY
+        : Urls.TASK_LIST_URL,
   },
   {
     url: Urls.BIRTH_MOTHER_NATIONALITY,
@@ -28,7 +31,9 @@ export const birthMotherSequence: Step[] = [
     url: Urls.BIRTH_MOTHER_ADDRESS_KNOWN,
     showInSection: Sections.AboutBirthMother,
     getNextStep: data =>
-      data.birthMotherAddressKnown === YesOrNo.YES ? Urls.BIRTH_MOTHER_FIND_ADDRESS : Urls.TASK_LIST_URL,
+      (data as Partial<CaseWithId>).birthMotherAddressKnown === YesOrNo.YES
+        ? Urls.BIRTH_MOTHER_FIND_ADDRESS
+        : Urls.TASK_LIST_URL,
   },
   {
     url: Urls.BIRTH_MOTHER_FIND_ADDRESS,

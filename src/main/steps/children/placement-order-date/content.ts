@@ -3,38 +3,60 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { covertToDateObject } from '../../../app/form/parser';
 import { areDateFieldsFilledIn, isDateInputInvalid, isFutureDate } from '../../../app/form/validation';
+import { CommonContent } from '../../../steps/common/common.content';
 
-const en = () => ({
-  section: "The child's details",
-  label: 'What date is on the placement order?',
-  hint: 'For example, 31 3 2020',
-  errors: {
-    placementOrderDate: {
-      required: 'Enter the placement order date',
-      incompleteDay: 'Date must include a day',
-      incompleteMonth: 'Date must include a month',
-      incompleteYear: 'Date must include a year',
-      invalidDate: 'Enter a real date',
-      invalidDateInFuture: 'Date must be in the past',
+const en = ({ userCase }: CommonContent) => {
+  const placementOrder = userCase?.placementOrders?.find(
+    item => item.placementOrderId === userCase.selectedPlacementOrderId
+  );
+  const title =
+    placementOrder?.placementOrderType === undefined
+      ? 'What date is on the placement order?'
+      : 'What date is on the order?';
+  return {
+    title,
+    section: "The child's details",
+    hint: 'For example, 31 3 2020',
+    errors: {
+      placementOrderDate: {
+        required: 'Enter the placement order date',
+        invalidDate: 'Enter a real date',
+        invalidDateInFuture: 'Date must be in the past',
+        incompleteDay: 'Enter a day',
+        incompleteMonth: 'Enter a month',
+        incompleteYear: 'Enter a year',
+        incompleteDayAndMonth: 'Enter a day and month',
+        incompleteMonthAndYear: 'Enter a month and year',
+        incompleteDayAndYear: 'Enter a day and year',
+      },
     },
-  },
-});
+  };
+};
 
-const cy: typeof en = () => ({
-  section: 'Manylion y plentyn',
-  label: 'Pa ddyddiad sydd ar y gorchymyn lleoli?',
-  hint: 'Er enghraifft, 31 3 2020',
-  errors: {
-    placementOrderDate: {
-      required: 'Nac ydwdwch ddyddiad y gorchymyn lleoli',
-      incompleteDay: 'Rhaid i’r dyddiad gynnwys diwrnod',
-      incompleteMonth: 'Rhaid i’r dyddiad gynnwys mis',
-      incompleteYear: 'Rhaid i’r dyddiad gynnwys blwyddyn',
-      invalidDate: 'Nac ydwdwch ddyddiad dilys',
-      invalidDateInFuture: 'Rhaid i’r dyddiad fod yn y gorffennol',
+const cy: typeof en = ({ userCase }: CommonContent) => {
+  const title =
+    userCase?.placementOrders?.length === 0
+      ? 'Pa ddyddiad sydd ar y gorchymyn lleoli?'
+      : 'Pa ddyddiad sydd ar y gorchymyn lleoli?';
+  return {
+    title,
+    section: 'Manylion y plentyn',
+    hint: 'Er enghraifft, 31 3 2020',
+    errors: {
+      placementOrderDate: {
+        required: 'Nac ydwdwch ddyddiad y gorchymyn lleoli',
+        invalidDate: 'Nac ydwdwch ddyddiad dilys',
+        invalidDateInFuture: 'Rhaid i’r dyddiad fod yn y gorffennol',
+        incompleteDay: 'Nodwch ddiwrnod',
+        incompleteMonth: 'Nodwch fis',
+        incompleteYear: 'Nodwch flwyddyn',
+        incompleteDayAndMonth: 'Nodwch ddiwrnod a blwyddyn',
+        incompleteMonthAndYear: 'Nodwch fis a blwyddyn',
+        incompleteDayAndYear: 'Nodwch ddiwrnod a blwyddyn',
+      },
     },
-  },
-});
+  };
+};
 
 export const form: FormContent = {
   fields: userCase => {
@@ -45,8 +67,9 @@ export const form: FormContent = {
       placementOrderDate: {
         type: 'date',
         classes: 'govuk-date-input',
-        label: l => l.label,
+        label: l => l.title,
         hint: l => l.hint,
+        labelHidden: true,
         labelSize: 'l',
         attributes: {
           spellcheck: false,
@@ -96,7 +119,7 @@ const languages = {
 };
 
 export const generateContent: TranslationFn = content => {
-  const translations = languages[content.language]();
+  const translations = languages[content.language](content);
   return {
     ...translations,
     form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}) },

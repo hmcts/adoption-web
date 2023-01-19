@@ -10,7 +10,6 @@ jest.mock('../../../app/form/validation');
 const enContent = {
   section: "Other parent's details",
   title: 'What is the full name of the other person with parental responsibility?',
-  line1: 'If you are not sure, ask your social worker or adoption agency for help.',
   errors: {
     otherParentFirstNames: {
       required: 'Enter their first names',
@@ -24,7 +23,6 @@ const enContent = {
 const cyContent = {
   section: 'Manylion y rhiant arall',
   title: 'Beth yw enw llawn yr unigolyn arall sydd â chyfrifoldeb rhiant?',
-  line1: 'Os nad ydych yn siŵr, holwch gyda’ch gweithiwr cymdeithasol, neu’ch asiantaeth fabwysiadu i gael cymorth.',
   errors: {
     otherParentFirstNames: {
       required: 'Nac ydwdwch eu henw(au) cyntaf',

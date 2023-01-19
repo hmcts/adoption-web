@@ -1,3 +1,4 @@
+import { CaseWithId } from '../../app/case/case';
 import { YesNoNotsure, YesOrNo } from '../../app/case/definition';
 import { Sections, Step } from '../constants';
 import {
@@ -20,7 +21,9 @@ export const birthFatherSequence: Step[] = [
     url: BIRTH_FATHER_NAME_ON_CERTIFICATE,
     showInSection: Sections.AboutChildren,
     getNextStep: data =>
-      data.birthFatherNameOnCertificate === YesOrNo.YES ? BIRTH_FATHER_FULL_NAME : OTHER_PARENT_EXISTS,
+      (data as Partial<CaseWithId>).birthFatherNameOnCertificate === YesOrNo.YES
+        ? BIRTH_FATHER_FULL_NAME
+        : OTHER_PARENT_EXISTS,
   },
   {
     url: BIRTH_FATHER_FULL_NAME,
@@ -30,7 +33,10 @@ export const birthFatherSequence: Step[] = [
   {
     url: BIRTH_FATHER_STILL_ALIVE,
     showInSection: Sections.AboutChildren,
-    getNextStep: data => (data.birthFatherStillAlive === YesNoNotsure.YES ? BIRTH_FATHER_NATIONALITY : TASK_LIST_URL),
+    getNextStep: data =>
+      (data as Partial<CaseWithId>).birthFatherStillAlive === YesNoNotsure.YES
+        ? BIRTH_FATHER_NATIONALITY
+        : TASK_LIST_URL,
   },
   {
     url: BIRTH_FATHER_NATIONALITY,
@@ -45,7 +51,10 @@ export const birthFatherSequence: Step[] = [
   {
     url: BIRTH_FATHER_ADDRESS_KNOWN,
     showInSection: Sections.AboutChildren,
-    getNextStep: data => (data.birthFatherAddressKnown === YesOrNo.YES ? BIRTH_FATHER_ADDRESS_LOOKUP : TASK_LIST_URL),
+    getNextStep: data =>
+      (data as Partial<CaseWithId>).birthFatherAddressKnown === YesOrNo.YES
+        ? BIRTH_FATHER_ADDRESS_LOOKUP
+        : TASK_LIST_URL,
   },
   {
     url: BIRTH_FATHER_ADDRESS_LOOKUP,

@@ -1,14 +1,14 @@
-import { OtherName } from '../../../app/case/definition';
+import { AdditionalNationality, OtherName } from '../../../app/case/definition';
 import { SummaryListContent } from '../models/summaryListContent';
 
 export const mapSummaryListContent = (
-  values: (string | OtherName)[],
+  values: (AdditionalNationality | OtherName)[],
   actionItems: string[],
   path: string
 ): SummaryListContent => ({
   rows: values.map(v => {
-    const text = typeof v === 'string' ? v : `${v.firstNames} ${v.lastNames}`;
-    const id = typeof v === 'string' ? v : `${v.id}`;
+    const text = 'country' in v ? `${v.country}` : `${v.firstNames} ${v.lastNames}`;
+    const id = `${v.id}`;
     return {
       key: {
         text,

@@ -10,6 +10,8 @@ const EN = 'en';
 const enContent = {
   section: 'Second applicant',
   title: "What's your full name?",
+  line1:
+    'Your full name should match exactly what is on your passport or other form of authorised ID such as a driving licence. If the names do not match, this could delay your application.',
   firstNames: 'First names',
   firstHint: '(Include any given or middle names)',
   lastNames: 'Last names',
@@ -26,6 +28,8 @@ const enContent = {
 const cyContent = {
   section: 'Ail geisydd',
   title: 'Beth yw eich enw llawn?',
+  line1:
+    'Dylai eich enw llawn fod union yr un fath ag y mae ar eich pasbort neu fath arall o ddogfen adnabod awdurdodedig, er enghraifft trwydded yrru. Os nad ydynt yr un fath, gall arwain at oedi wrth ddelio â’ch cais.',
   firstNames: 'Enwau cyntaf',
   firstHint: '(Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol)',
   lastNames: 'Cyfenwau',

@@ -4,8 +4,9 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
   section: "The child's details",
-  title: "What will the child's full name be after adoption?",
-  line1: 'This will be on the adoption certificate so enter all their names as accurately as possible.',
+  title: "After adoption, what will be the child's full name?",
+  line1:
+    "If you are changing the child's name, you should enter all their names here as accurately as possible. This is what will appear on both the adoption certificate and in the adoption register. Enter both first and last names even if there is no change.",
   firstName: 'First names',
   firstNameHint: '(Include any given or middle names)',
   lastName: 'Last names',

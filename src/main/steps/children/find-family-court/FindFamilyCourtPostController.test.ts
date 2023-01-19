@@ -28,9 +28,7 @@ describe('FindFamilyCourtPostController', () => {
     req = mockRequest({
       session: {
         userCase: {
-          placementOrders: [
-            { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderCourt: 'Chelmsford Family Court' },
-          ],
+          placementOrderCourt: 'Chelmsford Family Court',
           findFamilyCourt: 'No',
           familyCourtName: 'Chelmsford Family Court',
           familyCourtEmailId: 'chelmsfordadoptionapplication@justice.gov.uk',
@@ -57,9 +55,7 @@ describe('FindFamilyCourtPostController', () => {
         mockGetErrors.mockReturnValue([]);
         controller = new FindFamilyCourtPostController({});
         req.locals.api.triggerEvent.mockResolvedValue({
-          placementOrders: [
-            { placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderCourt: 'Chelmsford Family Court' },
-          ],
+          placementOrderCourt: 'Chelmsford Family Court',
           findFamilyCourt: 'No',
           familyCourtName: 'Chelmsford Family Court',
           familyCourtEmailId: 'chelmsfordadoptionapplication@justice.gov.uk',
@@ -67,16 +63,16 @@ describe('FindFamilyCourtPostController', () => {
       });
 
       test('should set the formData fields in userCase placementOrders session data', async () => {
+        req.body.autoCompleteData = 'Chelmsford Family Court';
         await controller.post(req, res);
         expect(req.session.errors).toEqual([]);
-        expect(req.session.userCase.placementOrders).toEqual([
-          { placementOrderCourt: 'Chelmsford Family Court', placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' },
-        ]);
+        expect(req.session.userCase.placementOrderCourt).toEqual('Chelmsford Family Court');
         expect(req.session.save).toHaveBeenCalled();
       });
 
       test('should redirect to correct screen', async () => {
         mockGetNextStepUrl.mockReturnValue('/MOCK_ENDPOINT');
+        req.body.autoCompleteData = 'MOCK';
         await controller.post(req, res);
         expect(mockGetNextStepUrl).toHaveBeenCalledWith(req, req.session.userCase);
         expect(res.redirect).toHaveBeenCalledWith('/MOCK_ENDPOINT');
@@ -97,7 +93,13 @@ describe('FindFamilyCourtPostController', () => {
 
     test('should save the errors in session', async () => {
       await controller.post(req, res);
-      expect(req.session.errors).toEqual(['MOCK_ERROR']);
+      expect(req.session.errors).toEqual([
+        'MOCK_ERROR',
+        {
+          errorType: 'required',
+          propertyName: 'familyCourtName',
+        },
+      ]);
       expect(req.session.save).toHaveBeenCalled();
     });
 

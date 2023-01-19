@@ -10,7 +10,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: 'Eligibility to apply to adopt',
-  label: 'Is the child married or in a civil partnership?',
+  title: 'Is the child married or in a civil partnership?',
   hint: 'This includes any past marriages or civil partnerships. In the UK a child can get married at 16 with parental permission. In other countries this age may be lower. A child who is or ever was married or in a civil partnership cannot be adopted.',
   marriedYes: "You can only apply to adopt a child if they've not been married or in a civil partnership.",
   moreInfo: 'More about adoption',
@@ -23,7 +23,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Gofynion cymhwysedd i wneud cais i fabwysiadu',
-  label: 'A yw’r plentyn wedi priodi neu mewn partneriaeth sifil?',
+  title: 'A yw’r plentyn wedi priodi neu mewn partneriaeth sifil?',
   hint: 'Mae hyn yn cynnwys unrhyw briodasau neu bartneriaethau sifil yn y gorffennol. Yn y DU gall plentyn briodi yn 16 oed heb ganiatâd gan riant. Mewn gwledydd eraill, gan yr oedran hwn fod yn is. Ni all plentyn sydd wedi /oedd wedi priodi, neu sydd mewn / wedi bod mewn partneriaeth sifil gael ei fabwysiadu.',
   marriedYes: 'Gallwch ond wneud cais i fabwysiadu plentyn os nad ydynt wedi priodi ac ddim mewn partneriaeth sifil.',
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
@@ -59,7 +59,7 @@ describe('eligibility > married > content', () => {
     const field = fields.marriedEligible as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
-    expect((field.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((field.label as Function)(generatedContent)).toBe(enContent.title);
     expect((field.hint as Function)(generatedContent)).toBe(enContent.hint);
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
 

@@ -5,9 +5,8 @@ import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
 
 const en = () => ({
   section: "Birth mother's details",
-  label: "Do you have the birth mother's last known address?",
+  title: "Do you have the birth mother's last known address?",
   moreDetails: "Give a reason why the address is not known, for example 'no fixed address'.",
-  hint: "Ask the adoption agency or social worker if you're not sure.",
   errors: {
     birthMotherAddressKnown: {
       required: 'Please select an answer',
@@ -21,9 +20,8 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: 'Manylion y fam fiolegol',
-  label: 'A oes gennych cyfeiriad olaf hysbys y fam fiolegol?',
+  title: 'A oes gennych cyfeiriad olaf hysbys y fam fiolegol?',
   moreDetails: 'Rhowch reswm pam bod y cyfeiriad yn anhysbys, er enghraifft ‘dim cyfeiriad parhaol’.',
-  hint: 'Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
   errors: {
     birthMotherAddressKnown: {
       required: 'Dewiswch ateb os gwelwch yn dda',
@@ -40,9 +38,10 @@ export const form: FormContent = {
     birthMotherAddressKnown: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.title,
       section: l => l.section,
       hint: l => l.hint,
+      labelHidden: true,
       values: [
         { label: l => l.yes, value: YesOrNo.YES },
         {

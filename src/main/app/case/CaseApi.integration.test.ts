@@ -32,6 +32,7 @@ describe('CaseApi', () => {
       info: jest.fn().mockImplementation((message: string) => message),
     } as unknown as LoggerInstance;
 
+    // api = new CaseApi(mockedAxios, userDetails, mockLogger);
     api = new CaseApi(mockedAxios, mockLogger);
   });
 
@@ -55,6 +56,9 @@ describe('CaseApi', () => {
   });
 
   test('Should create a case if one is not found', async () => {
+    // mockedAxios.get.mockResolvedValueOnce({
+    //   data: [],
+    // });
     mockedAxios.post.mockResolvedValueOnce({
       data: { cases: [] },
     });
@@ -73,6 +77,7 @@ describe('CaseApi', () => {
     expect(userCase).toStrictEqual({
       id: '1234',
       state: State.Draft,
+      status: State.Draft,
     });
   });
 
@@ -80,6 +85,9 @@ describe('CaseApi', () => {
     mockedAxios.post.mockResolvedValueOnce({
       data: { cases: [] },
     });
+    // mockedAxios.get.mockResolvedValueOnce({
+    //   data: [],
+    // });
     mockedAxios.get.mockResolvedValueOnce({ data: { token: '123' } });
     mockedAxios.post.mockRejectedValue({
       config: { method: 'POST', url: 'https://example.com' },
@@ -94,6 +102,9 @@ describe('CaseApi', () => {
   test('Should throw an error if more than one cases are found', async () => {
     const mockCase = { case_data: {} };
 
+    // mockedAxios.get.mockResolvedValue({
+    //   data: [mockCase, mockCase, mockCase],
+    // });
     mockedAxios.post.mockResolvedValue({
       data: { cases: [mockCase, mockCase, mockCase] },
     });
@@ -116,6 +127,9 @@ describe('CaseApi', () => {
     mockedAxios.post.mockResolvedValue({
       data: { cases: [firstMockCase] },
     });
+    // mockedAxios.get.mockResolvedValue({
+    //   data: [firstMockCase],
+    // });
 
     const userCase = await api.getOrCreateCase(serviceType, userDetails);
 
@@ -198,7 +212,7 @@ describe('CaseApi', () => {
     });
 
     const userCase = await api.getCaseById('1234');
-    expect(userCase).toStrictEqual({ id: '1234', state: 'Draft' });
+    expect(userCase).toStrictEqual({ id: '1234', state: 'Draft', status: 'Draft' });
   });
 
   test('Should throw error when case could not be fetched', async () => {

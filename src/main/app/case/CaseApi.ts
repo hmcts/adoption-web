@@ -13,7 +13,6 @@ import {
   CITIZEN_ADD_PAYMENT,
   CITIZEN_CREATE,
   CaseData,
-  LanguagePreference,
   ListValue,
   Payment,
   State,
@@ -24,13 +23,9 @@ import { toApiFormat } from './to-api-format';
 export class CaseApi {
   constructor(private readonly axios: AxiosInstance, private readonly logger: LoggerInstance) {}
 
-  public async getOrCreateCase(
-    serviceType: Adoption,
-    userDetails: UserDetails,
-    languagePreference = LanguagePreference.ENGLISH
-  ): Promise<CaseWithId> {
+  public async getOrCreateCase(serviceType: Adoption, userDetails: UserDetails): Promise<CaseWithId> {
     const userCase = await this.getCase();
-    return userCase || this.createCase(serviceType, userDetails, languagePreference);
+    return userCase || this.createCase(serviceType, userDetails);
   }
 
   private async getCase(): Promise<CaseWithId | false> {
@@ -60,8 +55,12 @@ export class CaseApi {
         `/searchCases?ctid=${CASE_TYPE}`,
         JSON.stringify(query)
       );
-      //this.logger.info('Case/s fetched using elastic search API :: ', response.data.cases);
+      this.logger.info('Case/s fetched using elastic search API :: ', response.data.cases);
       return response.data.cases;
+      // const response = await this.axios.get<CcdV1Response[]>(
+      //   `/citizens/${this.userDetails.id}/jurisdictions/${JURISDICTION}/case-types/${CASE_TYPE}/cases`
+      // );
+      // return response.data;
     } catch (err) {
       this.logError(err);
       throw new Error('Case could not be retrieved.');
@@ -72,6 +71,7 @@ export class CaseApi {
     try {
       const response = await this.axios.get<CcdV2Response>(`/cases/${caseId}`);
 
+      response.data.data.status = response.data.state;
       return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
     } catch (err) {
       this.logError(err);
@@ -79,11 +79,7 @@ export class CaseApi {
     }
   }
 
-  private async createCase(
-    serviceType: Adoption,
-    userDetails: UserDetails,
-    languagePreference: LanguagePreference
-  ): Promise<CaseWithId> {
+  private async createCase(serviceType: Adoption, userDetails: UserDetails): Promise<CaseWithId> {
     const tokenResponse: AxiosResponse<CcdTokenResponse> = await this.axios.get(
       `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
     );
@@ -94,7 +90,6 @@ export class CaseApi {
       applicant1FirstName: userDetails.givenName,
       applicant1LastName: userDetails.familyName,
       applicant1Email: userDetails.email,
-      applicant1LanguagePreference: languagePreference,
     };
 
     try {
@@ -103,6 +98,7 @@ export class CaseApi {
         event,
         event_token: token,
       });
+      response.data.data.status = response.data.state;
       return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
     } catch (err) {
       this.logError(err);
@@ -131,6 +127,7 @@ export class CaseApi {
         data,
         event_token: token,
       });
+      response.data.data.status = response.data.state;
       return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
     } catch (err) {
       this.logError(err);

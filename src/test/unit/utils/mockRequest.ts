@@ -50,6 +50,11 @@ export const mockRequest = ({
           },
         ],
         ...appLocals,
+        draftStoreClient: {
+          get: jest.fn().mockResolvedValue('{ "id": "MOCK" }'),
+          set: jest.fn().mockResolvedValue('{ "id": "MOCK" }'),
+          ttl: jest.fn().mockResolvedValue(300),
+        },
       },
     },
     cookies,

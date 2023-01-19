@@ -10,6 +10,8 @@ export class DocumentManagementClient {
   constructor(baseURL: string, authToken: string, private readonly user: UserDetails) {
     this.client = Axios.create({
       baseURL,
+      maxBodyLength: 31457280,
+      maxContentLength: 31457280,
       headers: {
         Authorization: `Bearer ${user.accessToken}`,
         ServiceAuthorization: authToken,
