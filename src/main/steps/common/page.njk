@@ -167,6 +167,11 @@ ADOP-1231-LAPortal-Welsh-Translation starts #}
 {% endblock %}
 
 {% block bodyEnd %}
+  <script>
+    if(window.location.hash==="#main-content") {
+      history.replaceState("", "", window.location.pathname + window.location.search);
+    }
+  </script>
   {# Run JavaScript at end of the <body>, to avoid blocking the initial render. #}
   {% include "./webpack/js.njk" %}
 {% endblock %}
