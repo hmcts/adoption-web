@@ -10,7 +10,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: "The child's details",
-  title: 'Are you sure you want to remove this Previous adoption order ?',
+  title: 'Are you sure you want to remove this Previous adoption order?',
   errors: {
     confirm: {
       required: 'Please select an answer',
@@ -20,7 +20,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y plentyn',
-  title: "Ydych chi'n siŵr eich bod am ddileu hwn Gorchymyn mabwysiadu blaenorol ?",
+  title: "Ydych chi'n siŵr eich bod am ddileu hwn Gorchymyn mabwysiadu blaenorol?",
   errors: {
     confirm: {
       required: 'Dewiswch ateb os gwelwch yn dda',
