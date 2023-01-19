@@ -7,12 +7,12 @@ import { AppRequest } from '../../../app/controller/AppRequest';
 import { Form, FormFields } from '../../../app/form/Form';
 import {
   APPLICATION_SUBMITTED,
+  APPLYING_WITH_URL,
   CHECK_ANSWERS_URL,
   CONFIRM_JOINT_APPLICATION,
   HUB_PAGE,
   PAY_YOUR_FEE,
   SENT_TO_APPLICANT2_FOR_REVIEW,
-  START_PLACEMENT_URL,
   TASK_LIST_URL,
 } from '../../urls';
 import { form as applicant1FirstQuestionForm } from '../applying-with/content';
@@ -56,7 +56,7 @@ const applicant1RedirectPageSwitch = (caseState: State, userCase: Partial<Case>,
       return HUB_PAGE;
     }
     default: {
-      return isFirstQuestionComplete ? TASK_LIST_URL : START_PLACEMENT_URL;
+      return isFirstQuestionComplete ? TASK_LIST_URL : APPLYING_WITH_URL;
     }
   }
 };
