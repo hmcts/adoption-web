@@ -49,7 +49,7 @@ const cy: typeof en = content => ({
     "Nid oes rhaid i chi fynychu gwrandawiadau llys. Rydym yn argymell aros gyda'r un llys fel nad yw rhieni biolegol yn dod i wybod am eich lleoliad. Mae'n bwysig eich bod yn trafod hyn gyda'r gweithiwr cymdeithasol. Y barnwr fydd yn penderfynu’n derfynol ble mae gwrandawiadau llys yn cael eu cynnal.",
   familyCourtName: 'Nac ydwdwch enw llawn y llys',
   familyCourtNameParagraph3:
-    'Os na allwch ddod o hyd i\'r llys gallwch chwilio drwy ddefnyddio\'r cod post yn y <a class="govuk-link" href="https://www.gov.uk/find-court-tribunal" target="_blank">gwasanaeth dod o hyd i lysoedd (yn agor tab newydd)</a>.',
+    'Os na allwch ddod o hyd i\'r llys gallwch chwilio drwy ddefnyddio\'r cod post yn y <a class="govuk-link" href="https://www.gov.uk/chwilio-am-lys-neu-dribiwnlys" target="_blank">gwasanaeth dod o hyd i lysoedd (yn agor tab newydd)</a>.',
   options: [
     ...getCourtListItems(content.courtList, content.userCase.familyCourtName),
     { text: content.userCase.familyCourtName, value: content.userCase.familyCourtName, selected: true },
