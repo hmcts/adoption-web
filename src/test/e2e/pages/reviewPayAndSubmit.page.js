@@ -27,7 +27,6 @@ module.exports = {
   async selectNoPCQOption() {
     await I.wait(5);
     const numOfPCQElements = await I.retry(3).grabNumberOfVisibleElements(this.fields.pcqNO);
-    console.log('No of elements: ' + numOfPCQElements);
     if (numOfPCQElements === 1) {
       await I.retry(3).click("I don't want to answer these questions");
     }
@@ -119,9 +118,7 @@ module.exports = {
   async getCaseIDAfterAplicationSubmit() {
     console.log(await I.retry(3).grabTextFrom(this.fields.caseID));
     const caseId = await I.retry(3).grabTextFrom(this.fields.caseID);
-    console.log('caseId= ' + caseId);
     const normalizeCaseId = caseId.toString().replace(/\D/g, '');
-    console.log('normalizeCaseId= ' + normalizeCaseId);
     return normalizeCaseId;
   },
 

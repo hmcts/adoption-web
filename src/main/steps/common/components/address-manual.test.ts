@@ -8,10 +8,10 @@ import { generateContent } from './address-manual';
 jest.mock('../../../app/form/validation');
 
 const enContent = {
-  addressLine1: 'Building and street <span class="govuk-visually-hidden">line 1 of 2</span>',
-  addressLine2: '<span class="govuk-visually-hidden">Building and street line 2 of 2</span>',
+  addressLine1: 'Address line 1 <span class="govuk-visually-hidden">line 1 of 2</span>',
+  addressLine2: 'Address line 2 (optional) <span class="govuk-visually-hidden">line 2 of 2</span>',
   town: 'Town or city',
-  county: 'County',
+  county: 'County (optional)',
   postcode: 'Postcode',
   enterInternationalAddress: 'Enter an international address',
   errors: {
@@ -29,10 +29,10 @@ const enContent = {
 };
 
 const cyContent = {
-  addressLine1: 'Adeilad a stryd <span class="govuk-visually-hidden">llinell 1 o 2</span>',
-  addressLine2: '<span class="govuk-visually-hidden">Adeilad a stryd llinell 2 o 2</span>',
+  addressLine1: 'Llinell cyfeiriad 1 <span class="govuk-visually-hidden">llinell 1 o 2</span>',
+  addressLine2: 'Llinell cyfeiriad 2 (dewisol) <span class="govuk-visually-hidden">llinell 2 o 2</span>',
   town: 'Tref neu ddinas',
-  county: 'Sir',
+  county: 'Sir (dewisol)',
   postcode: 'Cod post',
   enterInternationalAddress: 'Nac ydwdwch gyfeiriad rhyngwladol',
   errors: {
