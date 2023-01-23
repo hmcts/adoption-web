@@ -250,6 +250,11 @@ const placementOrderSequence = [
     contentDir: path.join(__dirname, '..', 'children', 'placement-order-check-your-answers'),
     getNextStep: () => Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_SUMMARY,
   },
+  {
+    url: Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_REMOVE_PLACEMENT_ORDER,
+    contentDir: path.join(__dirname, '..', 'children', 'remove-placement-order'),
+    getNextStep: () => Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_SUMMARY,
+  },
 ];
 
 const getStepAfterSiblingExists = (data): Urls.PageLink => {

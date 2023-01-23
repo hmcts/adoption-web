@@ -55,7 +55,6 @@ export class CaseApi {
         `/searchCases?ctid=${CASE_TYPE}`,
         JSON.stringify(query)
       );
-      this.logger.info('Case/s fetched using elastic search API :: ', response.data.cases);
       return response.data.cases;
       // const response = await this.axios.get<CcdV1Response[]>(
       //   `/citizens/${this.userDetails.id}/jurisdictions/${JURISDICTION}/case-types/${CASE_TYPE}/cases`
