@@ -21,7 +21,7 @@ const en = content => ({
     'You do not have to attend court hearings. We recommend staying with the same court so that birth parents are not alerted to your location. It is important that you discuss this with the social worker. The judge has the final decision about where court hearings take place.',
   familyCourtName: 'Enter the full name of the court',
   familyCourtNameParagraph3:
-    '<br>If you cannot find the court you can search using the postcode in the <a class="govuk-link" href="https://www.gov.uk/find-court-tribunal" target="_blank">court finder service</a>.',
+    '<br>If you cannot find the court you can search using the postcode in the <a class="govuk-link" href="https://www.gov.uk/find-court-tribunal" target="_blank">court finder service (opens new tab)</a>.',
   options: [
     ...getCourtListItems(content.courtList, content.userCase.familyCourtName),
     { text: content.userCase.familyCourtName, value: content.userCase.familyCourtName, selected: true },
@@ -49,7 +49,7 @@ const cy: typeof en = content => ({
     "Nid oes rhaid i chi fynychu gwrandawiadau llys. Rydym yn argymell aros gyda'r un llys fel nad yw rhieni biolegol yn dod i wybod am eich lleoliad. Mae'n bwysig eich bod yn trafod hyn gyda'r gweithiwr cymdeithasol. Y barnwr fydd yn penderfynu’n derfynol ble mae gwrandawiadau llys yn cael eu cynnal.",
   familyCourtName: 'Nac ydwdwch enw llawn y llys',
   familyCourtNameParagraph3:
-    'Os na allwch ddod o hyd i\'r llys gallwch chwilio drwy ddefnyddio\'r cod post yn y <a class="govuk-link" href="https://www.gov.uk/find-court-tribunal" target="_blank">gwasanaeth dod o hyd i lysoedd.</a>.',
+    'Os na allwch ddod o hyd i\'r llys gallwch chwilio drwy ddefnyddio\'r cod post yn y <a class="govuk-link" href="https://www.gov.uk/chwilio-am-lys-neu-dribiwnlys" target="_blank">gwasanaeth dod o hyd i lysoedd (yn agor tab newydd)</a>.',
   options: [
     ...getCourtListItems(content.courtList, content.userCase.familyCourtName),
     { text: content.userCase.familyCourtName, value: content.userCase.familyCourtName, selected: true },
