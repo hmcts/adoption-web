@@ -92,7 +92,7 @@ const en = {
   acceptAnalyticsCookies: 'Accept analytics cookies',
   rejectAnalyticsCookies: 'Reject analytics cookies',
   viewCookies: 'View cookies',
-  hideMessage: 'Hide this message',
+  hideMessage: 'Hide cookie message',
   cookiesAcceptedMessage:
     '<p class="govuk-body">You’ve accepted additional cookies. You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.</p>',
   cookiesRejectedMessage:
@@ -196,7 +196,7 @@ const cy: typeof en = {
   acceptAnalyticsCookies: 'Derbyn cwcis dadansoddeg',
   rejectAnalyticsCookies: 'Gwrthod cwcis dadansoddeg',
   viewCookies: 'Gweld cwcis',
-  hideMessage: "Cuddio'r neges hon",
+  hideMessage: 'Cuddio neges cwci',
   cookiesAcceptedMessage:
     '<p class="govuk-body">Rydych chi wedi derbyn cwcis ychwanegol. Gallwch chi <a class="govuk-link" href="/cookies">newid eich gosodiadau cwci</a> ar unrhyw bryd.</p>',
   cookiesRejectedMessage:

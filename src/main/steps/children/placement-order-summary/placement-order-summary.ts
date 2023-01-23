@@ -2,7 +2,7 @@ import { CaseWithId } from '../../../app/case/case';
 import { areDateFieldsFilledIn, isDateInputInvalid, isFutureDate } from '../../../app/form/validation';
 import {
   LA_PORTAL_CHILD_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS,
-  LA_PORTAL_CHILD_PLACEMENT_ORDER_SUMMARY,
+  LA_PORTAL_CHILD_PLACEMENT_ORDER_REMOVE_PLACEMENT_ORDER,
 } from '../../urls';
 
 const isPlacementOrderComplete = (placementOrder, ignorePlacementOrderType) => {
@@ -18,7 +18,6 @@ const isPlacementOrderComplete = (placementOrder, ignorePlacementOrderType) => {
 //eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
 export const placementOrderListItems = (userCase: CaseWithId, content: any): any => {
   return userCase.placementOrders?.map((item, index) => {
-    console.log(content);
     const text =
       (item.placementOrderType && content.placementOrderType[item.placementOrderType]) || content.placementOrder;
     return {
@@ -39,7 +38,7 @@ export const placementOrderListItems = (userCase: CaseWithId, content: any): any
             ? []
             : [
                 {
-                  href: `${LA_PORTAL_CHILD_PLACEMENT_ORDER_SUMMARY}?remove=${item.placementOrderId}`,
+                  href: `${LA_PORTAL_CHILD_PLACEMENT_ORDER_REMOVE_PLACEMENT_ORDER}?confirm=${item.placementOrderId}`,
                   text: content.remove,
                   visuallyHiddenText: text,
                 },
