@@ -74,6 +74,9 @@ ADOP-1231-LAPortal-Welsh-Translation starts #}
   {% block backLink %}
     <a href="#" class="govuk-back-link">{{ back }}</a>
   {% endblock %}
+    {% block modal %}
+      {% include "./timeout-dialog.njk" %}
+    {% endblock %}
 {% endblock %}
 
 {% block content %}
@@ -84,7 +87,7 @@ ADOP-1231-LAPortal-Welsh-Translation starts #}
       {% endblock %}
    {% if section %}
          <span class="govuk-caption-l">{{ section }}</span>
-    {% endif %}    
+    {% endif %}
   <fieldset class="govuk-fieldset">
     <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
       {% block page_content %}
