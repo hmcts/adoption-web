@@ -12,7 +12,8 @@ const en = () => ({
   moreInfo: 'More about adoption',
   errors: {
     livedUKEligible: {
-      required: 'Please answer the question',
+      required:
+        'Select if you, and the other applicant if relevant, have lived in the UK, Channel Islands or Isle of Man for the last 12 months.',
     },
   },
 });
@@ -25,7 +26,8 @@ const cy: typeof en = () => ({
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
   errors: {
     livedUKEligible: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required:
+        "Nodwch os ydych chi, a'r ymgeisydd arall os yw'n berthnasol, wedi byw yn y DU, Ynysoedd y Sianel neu Ynys Manaw am y 12 mis diwethaf.",
     },
   },
 });

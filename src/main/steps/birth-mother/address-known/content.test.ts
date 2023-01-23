@@ -14,7 +14,7 @@ const enContent = {
   moreDetails: "Give a reason why the address is not known, for example 'no fixed address'.",
   errors: {
     birthMotherAddressKnown: {
-      required: 'Please select an answer',
+      required: "Select whether the birth mother's address is known.",
     },
     birthMotherAddressNotKnownReason: {
       required: 'Provide a reason',
@@ -29,7 +29,7 @@ const cyContent = {
   moreDetails: 'Rhowch reswm pam bod y cyfeiriad yn anhysbys, er enghraifft ‘dim cyfeiriad parhaol’.',
   errors: {
     birthMotherAddressKnown: {
-      required: 'Dewiswch ateb os gwelwch yn dda',
+      required: 'Nodwch a yw cyfeiriad y fam enedigol yn hysbys.',
     },
     birthMotherAddressNotKnownReason: {
       required: 'Darparwch reswm',

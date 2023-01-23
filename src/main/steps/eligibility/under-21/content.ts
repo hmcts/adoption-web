@@ -11,7 +11,7 @@ const en = () => ({
   moreInfo: 'More about adoption',
   errors: {
     under21Eligible: {
-      required: 'Please answer the question',
+      required: 'Select if you, and the other applicant if relevant, are both aged 21 or over.',
     },
   },
 });
@@ -23,7 +23,7 @@ const cy: typeof en = () => ({
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
   errors: {
     under21Eligible: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: "Nodwch os ydych chi, a'r ceisydd arall os yn berthnasol, yn 21 oed neu'n hŷn.",
     },
   },
 });

@@ -12,7 +12,7 @@ const en = () => ({
   moreInfo: 'More about adoption',
   errors: {
     under18Eligible: {
-      required: 'Please answer the question',
+      required: 'Select if the child will be under 18 years old on the date you submit your application.',
     },
   },
 });
@@ -24,7 +24,7 @@ const cy: typeof en = () => ({
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
   errors: {
     under18Eligible: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: 'Nodwch a fydd y plentyn o dan 18 oed ar y dyddiad y byddwch yn cyflwyno eich cais.',
     },
   },
 });
