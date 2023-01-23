@@ -4,8 +4,8 @@ import PlacementOrderPostController from '../placement-order/PlacementOrderPostC
 
 import PostController from './post';
 
-describe('children > placement-order-type post', () => {
-  test('should re-export placement-order post controller for placement-order-type', () => {
+describe('children > remove-placement-order post', () => {
+  test('should re-export placement-order post controller for remove-placement-order', () => {
     expect(PostController).toBe(PlacementOrderPostController);
   });
 });
