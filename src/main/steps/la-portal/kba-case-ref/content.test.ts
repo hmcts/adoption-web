@@ -8,7 +8,7 @@ jest.mock('../../../app/form/validation');
 const EN = 'en';
 const enContent = {
   title: 'Application details',
-  label: 'Court Case reference number',
+  label: 'Court case reference number',
   hint: 'This is the 16 digit reference number that was on the email sent to you. Please insert the numbers only, without the hyphens.',
   childNameLabel: 'Child named on the application',
   childNameHint: 'Enter their name as it appears on the email sent to you.',
