@@ -65,7 +65,7 @@ describe('eligibility > under-18 > content', () => {
     expect((field.values[1].label as Function)(commonContent)).toBe(commonContent.no);
     expect(field.values[1].value).toBe(YesNoNotsure.NO);
     expect((field.values[1].conditionalText as Function)(generatedContent)).toBe(
-      '<p class="govuk-label">You can only apply to adopt a child if they are under 18 years old on the date your application is submitted.</p> <p class="govuk-label"><a href="https://www.gov.uk/child-adoption">More about adoption</a></p>'
+      '<p class="govuk-label">You can only apply to adopt a child if they are under 18 years old on the date your application is submitted.</p> <p class="govuk-label"><a href="https://www.gov.uk/child-adoption" class="govuk-link">More about adoption</a></p>'
     );
     expect(field.validator).toBe(isFieldFilledIn);
   });

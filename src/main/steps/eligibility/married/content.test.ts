@@ -66,7 +66,7 @@ describe('eligibility > married > content', () => {
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesNoNotsure.YES);
     expect((field.values[0].conditionalText as Function)(generatedContent)).toBe(
-      '<p class="govuk-label">You can only apply to adopt a child if they\'ve not been married or in a civil partnership.</p> <p class="govuk-label"><a rel="noreferrer noopener" href="https://www.gov.uk/child-adoption">More about adoption</a></p>'
+      '<p class="govuk-label">You can only apply to adopt a child if they\'ve not been married or in a civil partnership.</p> <p class="govuk-label"><a rel="noreferrer noopener" href="https://www.gov.uk/child-adoption" class="govuk-link">More about adoption</a></p>'
     );
 
     expect((field.values[1].label as Function)(commonContent)).toBe(commonContent.no);

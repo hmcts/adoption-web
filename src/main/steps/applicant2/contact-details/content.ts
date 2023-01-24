@@ -79,7 +79,7 @@ export const form: FormContent = {
       type: 'radios',
       classes: 'govuk-radios',
       section: l => l.section,
-      labelHidden: true,
+      labelHidden: false,
       label: l => l.applicant2ContactDetailsConsent,
       labelSize: 'small',
       values: [

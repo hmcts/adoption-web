@@ -28,7 +28,11 @@ export default class FindFamilyCourtPostController extends PostController<AnyObj
 
     if (findFamilyCourt === YesOrNo.NO && !!isFilledFamilyCourt) {
       if (req.session.errors.filter(e => e.propertyName === 'familyCourtName').length === 0) {
-        req.session.errors.push({ propertyName: 'familyCourtName', errorType: isFilledFamilyCourt });
+        req.session.errors.push({
+          propertyName: 'familyCourtName',
+          errorType: isFilledFamilyCourt,
+          id: 'location-picker',
+        });
       }
     }
 
