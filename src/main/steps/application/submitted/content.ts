@@ -13,7 +13,7 @@ const en = content => ({
   printApplication: 'Download or print your application',
   helpUs: 'Help us improve this service',
   line3:
-    'Please help us improve this service by <a  target="_blank" href="https://www.smartsurvey.co.uk/s/SurveyExit/?service=Adoption">leaving feedback</a>',
+    'Please help us improve this service by <a  target="_blank" href="https://www.smartsurvey.co.uk/s/SurveyExit/?service=Adoption" class="govuk-link">leaving feedback</a>',
 });
 
 const cy: typeof en = content => ({
@@ -29,7 +29,7 @@ const cy: typeof en = content => ({
   printApplication: 'Llwytho eich cais i lawr neu ei argraffu',
   helpUs: 'Helpwch ni i wella’r gwasanaeth hwn',
   line3:
-    'Helpwch ni i wella’r gwasanaeth hwn trwy <a  target="_blank" href="https://www.smartsurvey.co.uk/s/SurveyExit/?service=Adoption">roi adborth.</a> Diolch.',
+    'Helpwch ni i wella’r gwasanaeth hwn trwy <a  target="_blank" href="https://www.smartsurvey.co.uk/s/SurveyExit/?service=Adoption" class="govuk-link">roi adborth.</a> Diolch.',
 });
 
 const languages = {

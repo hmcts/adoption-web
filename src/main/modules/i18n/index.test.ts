@@ -23,11 +23,11 @@ describe('i18n', () => {
     expect(mockNext).toHaveBeenCalled();
   });
 
-  describe('when method is GET and lng query param is present', () => {
+  describe('when method is GET and lang query param is present', () => {
     beforeEach(() => {
       req = mockRequest();
       req.method = 'GET';
-      req.query.lng = 'en';
+      req.query.lang = 'en';
     });
 
     test('should call next', () => {

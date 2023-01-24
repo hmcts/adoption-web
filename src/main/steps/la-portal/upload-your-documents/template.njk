@@ -6,126 +6,135 @@
 
 {% extends "common/page.njk" %}
 
-{% block page_content %}
-  {{ govukErrorSummary({
-    titleText: errorSummaryHeading,
-    classes: "hidden",
-    attributes: {
-      id: "uploadErrorSummary"
-    },
-    errorList: [
-      {
-        text: errors.laUploadedFiles.errorUploading,
-        href: "#upload",
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {{ govukErrorSummary({
+        titleText: errorSummaryHeading,
+        classes: "hidden",
         attributes: {
-          id: "errorGeneric",
-          class: "hidden"
-        }
-      },
+          id: "uploadErrorSummary"
+        },
+        errorList: [
+          {
+            text: errors.laUploadedFiles.errorUploading,
+            href: "#upload",
+            attributes: {
+              id: "errorGeneric",
+              class: "hidden"
+            }
+          },
+          {
+            text: errors.laUploadedFiles.fileSizeTooBig,
+            href: "#upload",
+            attributes: {
+              id: "errorFileSizeTooBig",
+              class: "hidden"
+            }
+          },
+          {
+            text: errors.laUploadedFiles.fileWrongFormat,
+            href: "#upload",
+            attributes: {
+              id: "errorFileWrongFormat",
+              class: "hidden"
+            }
+          }
+        ]
+      }) }}
+
+      <h1 class="govuk-heading-l">{{ title }}</h1>
+      <p class="govuk-body">{{ youNeed }}</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>{{ infoBullet1 }}</li>
+        <li>{{ infoBullet2 }}</li>
+        <li>{{ infoBullet3 }}</li>
+        <li>{{ infoBullet4 }}</li>
+        <li>{{ infoBullet5 }}</li>
+        <li>{{ infoBullet6 }}</li>
+      </ul>
+      <p class="govuk-body">{{ note1 }}</p>
+      {{ govukInsetText({
+        text: warningPhoto
+      }) }}
+      {% set infoTakePhotoDetails %}
+        <ol class="govuk-list govuk-list--number">
+          <li>{{ infoBulletSummary1 }}</li>
+          <li>{{ infoBulletSummary2 }}</li>
+          <li>{{ infoBulletSummary3 }}</li>
+          <li>{{ infoBulletSummary4 }}</li>
+          <li>{{ infoBulletSummary5 }}</li>
+        </ol>
+      {% endset %}
+      {{ govukDetails({
+        summaryText: infoTakePhoto,
+        html: infoTakePhotoDetails
+      }) }}
+      <p class="govuk-body">{{ minRequirements }}</p>
+
+      <script id="uploadContent" type="application/json">
       {
-        text: errors.laUploadedFiles.fileSizeTooBig,
-        href: "#upload",
-        attributes: {
-          id: "errorFileSizeTooBig",
-          class: "hidden"
-        }
-      },
-      {
-        text: errors.laUploadedFiles.fileWrongFormat,
-        href: "#upload",
-        attributes: {
-          id: "errorFileWrongFormat",
-          class: "hidden"
-        }
+        "delete": "{{ delete }}"
       }
-    ]
-  }) }}
+      </script>
 
-  <h1 class="govuk-heading-l">{{ title }}</h1>
-  <p class="govuk-body">{{ youNeed }}</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>{{ infoBullet1 }}</li>
-    <li>{{ infoBullet2 }}</li>
-    <li>{{ infoBullet3 }}</li>
-    <li>{{ infoBullet4 }}</li>
-    <li>{{ infoBullet5 }}</li>
-    <li>{{ infoBullet6 }}</li>
-  </ul>
-  <p class="govuk-body">{{ note1 }}</p>
-  {{ govukInsetText({
-    text: warningPhoto
-  }) }}
-  {% set infoTakePhotoDetails %}
-    <ol class="govuk-list govuk-list--number">
-      <li>{{ infoBulletSummary1 }}</li>
-      <li>{{ infoBulletSummary2 }}</li>
-      <li>{{ infoBulletSummary3 }}</li>
-      <li>{{ infoBulletSummary4 }}</li>
-      <li>{{ infoBulletSummary5 }}</li>
-    </ol>
-  {% endset %}
-  {{ govukDetails({
-    summaryText: infoTakePhoto,
-    html: infoTakePhotoDetails
-  }) }}
-  <p class="govuk-body">{{ minRequirements }}</p>
-
-  <script id="uploadContent" type="application/json">
-  {
-    "delete": "{{ delete }}"
-  }
-  </script>
-
-  <div id="uploadGroup" tabindex="0" class="uploadGroup">
-    <h2 class="govuk-heading-s">{{ uploadFiles }}</h2>
-    <p class="govuk-body govuk-section-break govuk-section-break--visible govuk-!-padding-bottom-3{% if userCase.laDocumentsUploaded.length > 0 %} hidden {% endif %}" id="noFilesUploaded">{{ noFilesUploaded }}</p>
-    <ul id="filesUploaded" class="govuk-list">
-    {% for file in userCase.laDocumentsUploaded %}
-    <li class="uploadedFile govuk-!-padding-top-2 govuk-!-padding-bottom-3 govuk-section-break govuk-section-break--visible">
-          {{ file.value.documentFileName }} <a href="/la-document-manager/delete/{{ loop.index0 }}?_csrf={{ csrfToken }}" class="govuk-link--no-visited-state">{{ delete }}</a>
-        </li>
-    {% endfor %}
-    </ul>
-  </div>
-
-  <p class="govuk-body">
-    {{ fileFormats }}<br>
-    {{ fileSize }}
-  </p>
-
-  <div class="govuk-form-group">
-    <div class="govuk-panel upload hidden">
-      <span class="upload-arrow-icon govuk-!-margin-bottom-5"></span>
-      <div class="govuk-form-group">
-        <p class="govuk-body govuk-!-margin-bottom-0">
-          <span id="upload"></span>
-          <strong>{{ orStr }}</strong><br>
-          {{ dragDropHere }}
-        </p>
-        <div id="uploadProgressBar"></div>
+      <div id="uploadGroup" tabindex="0" class="uploadGroup">
+        <h2 class="govuk-heading-s">{{ uploadFiles }}</h2>
+        <p class="govuk-body govuk-section-break govuk-section-break--visible govuk-!-padding-bottom-3{% if userCase.laDocumentsUploaded.length > 0 %} hidden {% endif %}" id="noFilesUploaded">{{ noFilesUploaded }}</p>
+        <ul id="filesUploaded" class="govuk-list">
+        {% for file in userCase.laDocumentsUploaded %}
+        <li class="uploadedFile govuk-!-padding-top-2 govuk-!-padding-bottom-3 govuk-section-break govuk-section-break--visible">
+              {{ file.value.documentFileName }} <a href="/la-document-manager/delete/{{ loop.index0 }}?_csrf={{ csrfToken }}" class="govuk-link govuk-link--no-visited-state">{{ delete }}</a>
+            </li>
+        {% endfor %}
+        </ul>
       </div>
-    </div>
 
-    <noscript>
-      <form action="/la-document-manager?_csrf={{ csrfToken }}" method="post" enctype="multipart/form-data">
-        {{ govukFileUpload({
-          name: "files[]",
-          attributes: {
-            multiple: true,
-            accept: "image/jpeg,image/tiff,image/png,application/pdf"
-          },
-          label: {
-            text: chooseFilePhoto
-          },
-          classes: "govuk-!-margin-bottom-4"
-        }) }}
-        {{ govukButton({
-          text: upload,
-          type: "submit",
-          classes: "govuk-button--secondary govuk-!-margin-bottom-0"
-        }) }}
-      </form>
-    </noscript>
+      <p class="govuk-body" >
+        {{ fileFormats }}<br>
+        {{ fileSize }}
+      </p>
+
+      <div class="govuk-form-group">
+        <div class="govuk-panel upload hidden">
+          <span class="upload-arrow-icon govuk-!-margin-bottom-5"></span>
+          <div class="govuk-form-group">
+            <p class="govuk-body govuk-!-margin-bottom-0">
+              <span id="upload"></span>
+              <strong>{{ orStr }}</strong><br>
+              {{ dragDropHere }}
+            </p>
+            <div id="uploadProgressBar"></div>
+          </div>
+        </div>
+
+        <noscript>
+          <form action="/la-document-manager?_csrf={{ csrfToken }}" method="post" enctype="multipart/form-data">
+            {{ govukFileUpload({
+              name: "files[]",
+              attributes: {
+                multiple: true,
+                accept: "image/jpeg,image/tiff,image/png,application/pdf"
+              },
+              label: {
+                text: chooseFilePhoto
+              },
+              classes: "govuk-!-margin-bottom-4"
+            }) }}
+            {{ govukButton({
+              text: upload,
+              type: "submit",
+              classes: "govuk-button--secondary govuk-!-margin-bottom-0"
+            }) }}
+          </form>
+        </noscript>
+      </div>
+      {% if form %}
+        {% block form %}
+          {% include "common/form/form.njk"%}
+        {% endblock %}
+      {% endif %}
+    </div>
   </div>
 
 <!--
