@@ -72,7 +72,7 @@ describe('placement-order-summary', () => {
           classes: 'summary-list-actions',
           items: [
             {
-              href: '/la-portal/child/placement-order-summary?remove=MOCK_ID2',
+              href: '/la-portal/child/remove-placement-order?confirm=MOCK_ID2',
               text: 'Remove',
               visuallyHiddenText: 'Placement order',
             },
@@ -91,7 +91,7 @@ describe('placement-order-summary', () => {
           classes: 'summary-list-actions',
           items: [
             {
-              href: '/la-portal/child/placement-order-summary?remove=MOCK_ID3',
+              href: '/la-portal/child/remove-placement-order?confirm=MOCK_ID3',
               text: 'Remove',
               visuallyHiddenText: 'Placement order',
             },

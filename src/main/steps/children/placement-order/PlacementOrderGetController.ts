@@ -23,6 +23,9 @@ export default class PlacementOrderGetController extends GetController {
       delete req.query.change;
       req.url = req.url.substring(0, req.url.indexOf('?'));
       redirect = true;
+    } else if (req.query.confirm) {
+      req.session.userCase.selectedPlacementOrderId = `${req.query.confirm}`;
+      redirect = false;
     } else if (req.query.remove) {
       placementOrders = placementOrders.filter(item => item.placementOrderId !== `${req.query.remove}`);
       req.session.userCase.selectedPlacementOrderId = placementOrders[0].placementOrderId;
