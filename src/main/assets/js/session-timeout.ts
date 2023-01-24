@@ -138,7 +138,7 @@ class SessionTimeout {
     return throttle(
       () => {
         if (!this.notificationPopupIsOpen) {
-          fetch('/active').then(() => this.scheduleSignOut());
+          fetch(KEEP_ALIVE_URL).then(() => this.scheduleSignOut());
         }
       },
       eventTimer,

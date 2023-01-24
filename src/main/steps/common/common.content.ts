@@ -5,6 +5,7 @@ import { Fee, State } from '../../app/case/definition';
 import { Eligibility } from '../../app/controller/AppRequest';
 import { PageContent, TranslationFn } from '../../app/controller/GetController';
 import { CourtVenue } from '../../app/court/location';
+import { SAVE_AND_SIGN_OUT } from '../../steps/urls';
 
 const en = {
   phase: 'Beta',
@@ -122,6 +123,7 @@ const en = {
     minutes: 'minute',
     seconds: 'seconds',
   },
+  saveAndSignOutLink: SAVE_AND_SIGN_OUT,
 };
 
 const cy: typeof en = {
@@ -226,6 +228,16 @@ const cy: typeof en = {
   apmCookiesHeadings: "Caniatáu cwcis sy'n mesur monitro perfformiad cymwysiadau gwefan?",
   useApmCookies: "Defnyddio cwcis sy'n mesur monitro perfformiad cymwysiadau gwefan",
   doNotUseApmCookies: "Peidiwch â defnyddio cwcis sy'n mesur monitro perfformiad cymwysiadau gwefan",
+  timeout: {
+    title: 'Rydych ar fin cael eich allgofnodi',
+    part1: "Rydych yn mynd i gael eich allgofnodi o'ch cais i mewn",
+    part2: 'oherwydd anweithgarwch. Mae hyn er mwyn diogelu eich gwybodaeth bersonol.',
+    buttonText: "Parhewch â'ch cais",
+    twoMinutes: '2 munudau',
+    minutes: 'munud',
+    seconds: 'eiliadau',
+  },
+  saveAndSignOutLink: SAVE_AND_SIGN_OUT,
 };
 
 export const generatePageContent = ({
