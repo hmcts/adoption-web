@@ -66,7 +66,7 @@ describe('eligibility > lived-uk > content', () => {
     expect((field.values[1].label as Function)(commonContent)).toBe(commonContent.no);
     expect(field.values[1].value).toBe(YesNoNotsure.NO);
     expect((field.values[1].conditionalText as Function)(generatedContent)).toBe(
-      '<p class="govuk-label">You cannot apply to adopt a child unless you have a permanent home here.</p> <p class="govuk-label"><a href="https://www.gov.uk/child-adoption">More about adoption</a></p>'
+      '<p class="govuk-label">You cannot apply to adopt a child unless you have a permanent home here.</p> <p class="govuk-label"><a href="https://www.gov.uk/child-adoption" class="govuk-link">More about adoption</a></p>'
     );
     expect(field.validator).toBe(isFieldFilledIn);
   });

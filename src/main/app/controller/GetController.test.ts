@@ -57,7 +57,7 @@ describe('GetController', () => {
       const language = 'cy';
       const req = mockRequest();
       const res = mockResponse();
-      req.query.lng = language;
+      req.query.lang = language;
       await controller.get(req, res);
 
       expect(res.render).toBeCalledWith('page', {
