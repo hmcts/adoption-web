@@ -45,7 +45,11 @@
 {% endblock %}
 
 {% block pageTitle %}
-  {{ serviceName }} - {{ title if title else label}} - {{ govUk }}
+    {% if sessionErrors and sessionErrors.length > 0 %}
+      Error: {{ serviceName }} - {{ title if title else label}} - {{ govUk }}
+    {% else %}
+     {{ serviceName }} - {{ title if title else label}} - {{ govUk }}
+    {% endif %}
 {% endblock %}
 
 {# Feedback link will be used in both CUI and la-portal with exact same behaviour with dynamic page title as query param. #}
