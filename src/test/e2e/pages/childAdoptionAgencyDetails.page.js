@@ -157,7 +157,6 @@ module.exports = {
   },
 
   async yourSocialWorkerDetailsSectionWithOutDetails() {
-    console.log('yourSocialWorkerDetailsSectionWithOutDetails');
     await I.retry(3).waitForText('Your social worker details', 30);
     await I.retry(3).click('Save and continue');
     await I.wait(3);
@@ -181,7 +180,6 @@ module.exports = {
   },
 
   async adoptionAgencySelectionNoDetails() {
-    console.log('async adoptionAgencySelectionNoDetails');
     await I.retry(3).waitForText('Is there another adoption agency or local authority involved?', 30);
     await I.retry(3).click('Save and continue');
     await I.wait(3);
