@@ -12,7 +12,7 @@ const en = () => ({
   moreInfo: 'More about adoption',
   errors: {
     marriedEligible: {
-      required: 'Please answer the question',
+      required: 'Select if the child is married or in a civil partnership.',
     },
   },
 });
@@ -25,7 +25,7 @@ const cy: typeof en = () => ({
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
   errors: {
     marriedEligible: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: "Nodwch a yw'r plentyn yn briod neu mewn partneriaeth sifil.",
     },
   },
 });
