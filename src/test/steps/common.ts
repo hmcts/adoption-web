@@ -24,8 +24,8 @@ After(async () => {
 
 export const iAmOnPage = (text: string): void => {
   const url = new URL(text, testConfig.TEST_URL);
-  if (!url.searchParams.has('lng')) {
-    url.searchParams.set('lng', 'en');
+  if (!url.searchParams.has('lang')) {
+    url.searchParams.set('lang', 'en');
   }
   I.amOnPage(url.toString());
 };

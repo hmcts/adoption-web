@@ -88,6 +88,7 @@ describe('FindFamilyCourtPostController', () => {
         {
           errorType: 'required',
           propertyName: 'placementOrderCourt',
+          id: 'location-picker',
         },
       ]);
       expect(req.session.save).toHaveBeenCalled();

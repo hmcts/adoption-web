@@ -26,14 +26,16 @@
 
 {% macro taskListItem(item) %}
   {% if item.id %}
-    <li class="app-task-list__item">
+    <dd class="app-task-list__item">
       {{ taskName(item) }}
       {{ taskStatus(item) }}
-    </li>
+    </dd>
   {% else %}
-  <h3>
-   <p class="govuk-!-font-weight-bold govuk-!-margin-top-7 govuk-!-margin-bottom-2">{{item.text}}</p>
-  </h3>
+  <dt>
+    <h3>
+      <p class="govuk-!-font-weight-bold govuk-!-margin-top-7 govuk-!-margin-bottom-2">{{item.text}}</p>
+    </h3>
+  </dt>
   {% endif %}
 {% endmacro %}
 
@@ -42,11 +44,11 @@
     <h2 class="app-task-list__section">
       <span class="app-task-list__section-number">{{index}}. </span>{{section.title}}
     </h2>
-    <ul class="app-task-list__items">
+    <dl class="app-task-list__items">
       {% for item in section.items %}
         {{ taskListItem(item) }}
       {% endfor %}
-    </ul>
+    </dl>
   </li>
 {% endmacro %}
 

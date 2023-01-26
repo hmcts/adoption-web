@@ -16,7 +16,7 @@ const enContent = {
   moreInfo: 'More about adoption',
   errors: {
     under18Eligible: {
-      required: 'Please answer the question',
+      required: 'Select if the child will be under 18 years old on the date you submit your application.',
     },
   },
 };
@@ -28,7 +28,7 @@ const cyContent = {
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
   errors: {
     under18Eligible: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: 'Nodwch a fydd y plentyn o dan 18 oed ar y dyddiad y byddwch yn cyflwyno eich cais.',
     },
   },
 };
@@ -65,7 +65,7 @@ describe('eligibility > under-18 > content', () => {
     expect((field.values[1].label as Function)(commonContent)).toBe(commonContent.no);
     expect(field.values[1].value).toBe(YesNoNotsure.NO);
     expect((field.values[1].conditionalText as Function)(generatedContent)).toBe(
-      '<p class="govuk-label">You can only apply to adopt a child if they are under 18 years old on the date your application is submitted.</p> <p class="govuk-label"><a href="https://www.gov.uk/child-adoption">More about adoption</a></p>'
+      '<p class="govuk-label">You can only apply to adopt a child if they are under 18 years old on the date your application is submitted.</p> <p class="govuk-label"><a href="https://www.gov.uk/child-adoption" class="govuk-link">More about adoption</a></p>'
     );
     expect(field.validator).toBe(isFieldFilledIn);
   });

@@ -73,13 +73,13 @@
   }
   </script>
 
-  <div id="uploadGroup" tabindex="0" class="uploadGroup">
+  <div id="uploadGroup" class="uploadGroup">
     <h2 class="govuk-heading-s">{{ uploadFiles }}</h2>
     <p class="govuk-body govuk-section-break govuk-section-break--visible govuk-!-padding-bottom-3{% if userCase.applicant1DocumentsUploaded|length %} hidden{% endif %}" id="noFilesUploaded">{{ noFilesUploaded }}</p>
     <ul id="filesUploaded" class="govuk-list">
       {% for file in userCase.applicant1DocumentsUploaded %}
         <li class="uploadedFile govuk-!-padding-top-2 govuk-!-padding-bottom-3 govuk-section-break govuk-section-break--visible">
-          {{ file.value.documentFileName }} <a href="/document-manager/delete/{{ loop.index0 }}?_csrf={{ csrfToken }}" class="govuk-link--no-visited-state">{{ delete }}</a>
+          {{ file.value.documentFileName }} <a href="/document-manager/delete/{{ loop.index0 }}?_csrf={{ csrfToken }}" class="govuk-link govuk-link--no-visited-state">{{ delete }}</a>
         </li>
       {% endfor %}
     </ul>

@@ -16,7 +16,8 @@ const enContent = {
   moreInfo: 'More about adoption',
   errors: {
     domicileEligible: {
-      required: 'Please answer the question',
+      required:
+        'Select if the UK, Channel Islands or Isle of Man is the main country of residence for you, and the other applicant.',
     },
   },
 };
@@ -29,7 +30,8 @@ const cyContent = {
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
   errors: {
     domicileEligible: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required:
+        "Nodwch os mai'r DU, Ynysoedd y Sianel neu Ynys Manaw yw'r brif wlad yr ydych chi a'r ymgeisydd arall yn byw ynddi.",
     },
   },
 };
@@ -66,7 +68,7 @@ describe('eligibility > domicile > content', () => {
     expect((field.values[1].label as Function)(commonContent)).toBe(commonContent.no);
     expect(field.values[1].value).toBe(YesNoNotsure.NO);
     expect((field.values[1].conditionalText as Function)(generatedContent)).toBe(
-      '<p class="govuk-label">You cannot apply to adopt a child unless you have a permanent home here.</p> <p class="govuk-label"><a href="https://www.gov.uk/child-adoption">More about adoption</a></p>'
+      '<p class="govuk-label">You cannot apply to adopt a child unless you have a permanent home here.</p> <p class="govuk-label"><a href="https://www.gov.uk/child-adoption" class="govuk-link">More about adoption</a></p>'
     );
     expect(field.validator).toBe(isFieldFilledIn);
   });

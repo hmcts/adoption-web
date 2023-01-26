@@ -12,7 +12,7 @@ const en = {
   applyForDissolution: 'Apply for adoption',
   feedback:
     'This is a new service – your <a class="govuk-link" aria-label="Feedback link, This will open a new tab. You’ll need to return to this tab and continue with your application within 60 mins so you don’t lose your progress." href="https://www.smartsurvey.co.uk/s/Adoption_Feedback/?pageurl=PAGE_TITLE" target="_blank">feedback</a> will help us to improve it.',
-  languageToggle: '<a href="?lng=cy" class="govuk-link language">Cymraeg</a>',
+  languageToggle: '<a href="?lang=cy" class="govuk-link language" lang="cy">Cymraeg</a>',
   govUk: 'GOV.UK',
   back: 'Back',
   continue: 'Save and continue',
@@ -92,7 +92,7 @@ const en = {
   acceptAnalyticsCookies: 'Accept analytics cookies',
   rejectAnalyticsCookies: 'Reject analytics cookies',
   viewCookies: 'View cookies',
-  hideMessage: 'Hide this message',
+  hideMessage: 'Hide cookie message',
   cookiesAcceptedMessage:
     '<p class="govuk-body">You’ve accepted additional cookies. You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.</p>',
   cookiesRejectedMessage:
@@ -122,7 +122,7 @@ const cy: typeof en = {
   applyForDissolution: 'Gwneud cais i fabwysiadu',
   feedback:
     'Mae hwn yn wasanaeth newydd <a class="govuk-link" aria-label="Dolen adborth, Bydd hyn yn agor tab newydd. Bydd arnoch angen dychwelyd i’r tab hwn a pharhau gyda’ch cais o fewn 60 munud fel na fyddwch yn colli eich cynnydd." href="https://www.smartsurvey.co.uk/s/Adoption_Feedback/?pageurl=PAGE_TITLE" target="_blank">Bydd adborth</a> yn ein helpu ni i’w wella.',
-  languageToggle: '<a href="?lng=en" class="govuk-link language">English</a>',
+  languageToggle: '<a href="?lang=en" class="govuk-link language" lang="en">English</a>',
   govUk: 'GOV.UK',
   back: 'Yn ôl',
   continue: 'Cadw a pharhau',
@@ -196,7 +196,7 @@ const cy: typeof en = {
   acceptAnalyticsCookies: 'Derbyn cwcis dadansoddeg',
   rejectAnalyticsCookies: 'Gwrthod cwcis dadansoddeg',
   viewCookies: 'Gweld cwcis',
-  hideMessage: "Cuddio'r neges hon",
+  hideMessage: 'Cuddio neges cwci',
   cookiesAcceptedMessage:
     '<p class="govuk-body">Rydych chi wedi derbyn cwcis ychwanegol. Gallwch chi <a class="govuk-link" href="/cookies">newid eich gosodiadau cwci</a> ar unrhyw bryd.</p>',
   cookiesRejectedMessage:
