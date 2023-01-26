@@ -3,7 +3,8 @@
 <form class="form" id="main-form" method="post" action="" novalidate="novalidate">
   <input type="hidden" name="_csrf" id="csrfToken" value="{{ csrfToken }}">
   <input type="hidden" name="locale" id="locale" value="{{ language }}">
-  
+    
+<fieldset class="govuk-fieldset govuk-!-margin-top-3">
   {% block before_fields %}{% endblock %}
 
   {% block form_content %}
@@ -11,6 +12,7 @@
   {% endblock %}
 
   {% block after_fields %}{% endblock %}
+</fieldset>
 
   <div class="govuk-form-group">
     {% block form_actions %} 
