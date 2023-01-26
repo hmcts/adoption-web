@@ -13,7 +13,7 @@ const en = () => ({
     "For example, if the child's sex was intersex when they were born, you should enter exactly what is listed on the birth certificate.",
   errors: {
     childrenSexAtBirth: {
-      required: 'Please select an answer',
+      required: "Select child's sex at birth.",
     },
     childrenOtherSexAtBirth: {
       required: 'Enter what is written on the birth certificate',
@@ -31,7 +31,7 @@ const cy: typeof en = () => ({
     'Er enghraifft, os mai rhyngrywiol oedd rhyw y plentyn pan gafodd ei eni, dylech nodi’n union yr hyn sydd wedi’i restru ar y dystysgrif geni.',
   errors: {
     childrenSexAtBirth: {
-      required: 'Dewiswch ateb os gwelwch yn dda',
+      required: 'Nodwch ryw y plentyn ar adeg ei eni/geni.',
     },
     childrenOtherSexAtBirth: {
       required: 'Nac ydwdwch yr hyn sydd wedi’i ysgrifennu ar y dystysgrif geni.',
