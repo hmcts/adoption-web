@@ -12,7 +12,8 @@ const en = () => ({
   moreInfo: 'More about adoption',
   errors: {
     domicileEligible: {
-      required: 'Please answer the question',
+      required:
+        'Select if the UK, Channel Islands or Isle of Man is the main country of residence for you, and the other applicant.',
     },
   },
 });
@@ -25,7 +26,8 @@ const cy: typeof en = () => ({
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
   errors: {
     domicileEligible: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required:
+        "Nodwch os mai'r DU, Ynysoedd y Sianel neu Ynys Manaw yw'r brif wlad yr ydych chi a'r ymgeisydd arall yn byw ynddi.",
     },
   },
 });
@@ -44,7 +46,7 @@ export const form: FormContent = {
           label: l => l.no,
           value: YesOrNo.NO,
           conditionalText: l =>
-            `<p class="govuk-label">${l.domicileNo}</p> <p class="govuk-label"><a href="https://www.gov.uk/child-adoption">${l.moreInfo}</a></p>`,
+            `<p class="govuk-label">${l.domicileNo}</p> <p class="govuk-label"><a href="https://www.gov.uk/child-adoption" class="govuk-link">${l.moreInfo}</a></p>`,
         },
       ],
       validator: isFieldFilledIn,

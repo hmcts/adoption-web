@@ -18,6 +18,7 @@ describe('Form', () => {
       },
       dateField: {
         type: 'date',
+        id: 'dateField',
         values: [
           { label: l => l.dateFormat['day'], name: 'day' },
           { label: l => l.dateFormat['month'], name: 'month' },
@@ -85,14 +86,17 @@ describe('Form', () => {
 
     expect(errors).toStrictEqual([
       {
+        id: undefined,
         propertyName: 'field',
         errorType: 'required',
       },
       {
+        id: 'dateField',
         propertyName: 'dateField',
         errorType: 'required',
       },
       {
+        id: undefined,
         propertyName: 'checkboxes',
         errorType: 'required',
       },
@@ -144,6 +148,7 @@ describe('Form', () => {
 
       expect(errors).toStrictEqual([
         {
+          id: undefined,
           propertyName: 'field',
           errorType: 'required',
         },
@@ -161,10 +166,12 @@ describe('Form', () => {
 
       expect(errors).toStrictEqual([
         {
+          id: undefined,
           errorType: 'required',
           propertyName: 'testSubField',
         },
         {
+          id: undefined,
           errorType: 'required',
           propertyName: 'checkboxes',
         },
