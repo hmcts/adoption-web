@@ -131,7 +131,7 @@ class SessionTimeout {
         body: new URLSearchParams(formData as unknown as Record<string, string>),
       });
     }
-    window.location.href = `${TIMED_OUT_URL}?lng=${document.documentElement.lang}`;
+    window.location.href = `${TIMED_OUT_URL}?lang=${document.documentElement.lang}`;
   }
 
   pingUserActive() {
