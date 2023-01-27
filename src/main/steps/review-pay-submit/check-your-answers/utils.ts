@@ -138,7 +138,8 @@ export const adoptionAgencySummaryList = (
   { sectionTitles, keys, ...content }: SummaryListContent,
   userCase: Partial<CaseWithId>
 ): SummaryList | undefined => {
-  if (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO) {
+  const exists = userCase.hasAnotherAdopAgencyOrLA;
+  if (exists === YesOrNo.NO) {
     return {
       title: sectionTitles.additionalAoptionagencyOrLA,
       rows: getSectionSummaryList(
