@@ -11,6 +11,11 @@ const addressComplete = (userCase: CaseWithId, fieldPrefix: FieldPrefix) => {
   return (address1 && addressTown && addressPostcode) || (address1 && addressCountry);
 };
 
+const isDateComplete = (userCase: CaseWithId, fieldPrefix: FieldPrefix) => {
+  const lastAddressDate = userCase[`${fieldPrefix}LastAddressDate`];
+  return !isDateInputInvalid(lastAddressDate as CaseDate) && !isFutureDate(lastAddressDate as CaseDate);
+};
+
 export const getChildrenPlacementOrderStatus = (userCase: CaseWithId): SectionStatus => {
   const addAnotherPlacementOrder = userCase.addAnotherPlacementOrder;
   const placementOrdersComplete =
@@ -136,7 +141,7 @@ export const getBirthFatherDetailsStatus = (userCase: CaseWithId): SectionStatus
   }
 
   return (birthFatherAddressKnown === YesOrNo.NO && birthFatherAddressNotKnownReason) ||
-    addressComplete(userCase, FieldPrefix.BIRTH_FATHER)
+    (addressComplete(userCase, FieldPrefix.BIRTH_FATHER) && isDateComplete(userCase, FieldPrefix.BIRTH_FATHER))
     ? SectionStatus.COMPLETED
     : SectionStatus.IN_PROGRESS;
 };
@@ -176,7 +181,8 @@ export const getBirthMotherDetailsStatus = (userCase: CaseWithId): SectionStatus
       nationalityComplete &&
       occupation &&
       addressKnown === YesOrNo.YES &&
-      addressComplete(userCase, FieldPrefix.BIRTH_MOTHER)
+      addressComplete(userCase, FieldPrefix.BIRTH_MOTHER) &&
+      isDateComplete(userCase, FieldPrefix.BIRTH_MOTHER)
       ? SectionStatus.COMPLETED
       : SectionStatus.IN_PROGRESS;
   }
@@ -198,7 +204,10 @@ export const getOtherParentStatus = (userCase: CaseWithId): SectionStatus => {
       return names ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
     }
 
-    return names && addressKnown === YesOrNo.YES && addressComplete(userCase, FieldPrefix.OTHER_PARENT)
+    return names &&
+      addressKnown === YesOrNo.YES &&
+      addressComplete(userCase, FieldPrefix.OTHER_PARENT) &&
+      isDateComplete(userCase, FieldPrefix.OTHER_PARENT)
       ? SectionStatus.COMPLETED
       : SectionStatus.IN_PROGRESS;
   }
