@@ -5,7 +5,7 @@ import { Fee, State } from '../../app/case/definition';
 import { Eligibility } from '../../app/controller/AppRequest';
 import { PageContent, TranslationFn } from '../../app/controller/GetController';
 import { CourtVenue } from '../../app/court/location';
-import { SAVE_AND_SIGN_OUT } from '../../steps/urls';
+import { SAVE_AND_RELOGIN } from '../../steps/urls';
 
 const en = {
   phase: 'Beta',
@@ -123,7 +123,7 @@ const en = {
     minutes: 'minute',
     seconds: 'seconds',
   },
-  saveAndSignOutLink: SAVE_AND_SIGN_OUT,
+  saveAndReloginLink: SAVE_AND_RELOGIN,
 };
 
 const cy: typeof en = {
@@ -237,7 +237,7 @@ const cy: typeof en = {
     minutes: 'munud',
     seconds: 'eiliadau',
   },
-  saveAndSignOutLink: SAVE_AND_SIGN_OUT,
+  saveAndReloginLink: SAVE_AND_RELOGIN,
 };
 
 export const generatePageContent = ({

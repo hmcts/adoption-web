@@ -39,5 +39,8 @@ describe('applicationSequence', () => {
 
     expect(applicationSequence[11].url).toBe('/save-as-draft');
     expect(applicationSequence[11].getNextStep({})).toBe('/task-list');
+
+    expect(applicationSequence[12].url).toBe('/save-and-relogin');
+    expect(applicationSequence[12].getNextStep({})).toBe('/login');
   });
 });
