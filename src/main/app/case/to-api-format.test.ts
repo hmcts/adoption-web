@@ -22,6 +22,7 @@ describe('to-api-format', () => {
     dateChildMovedIn: { day: '1', month: '1', year: '2021' },
     applicant1DateOfBirth: { day: '20', month: '1', year: '2000' },
     applicant2DateOfBirth: undefined,
+    birthFatherLastAddressDate: { day: '20', month: '1', year: '2020' },
     birthMotherLastAddressDate: { day: '20', month: '1', year: '2020' },
     otherParentLastAddressDate: { day: '20', month: '1', year: '2020' },
     childrenDateOfBirth: { day: '5', month: '1', year: '2020' },
@@ -85,6 +86,7 @@ describe('to-api-format', () => {
       applicant1DateOfBirth: '2000-01-20',
       applicant2DateOfBirth: '',
       childrenDateOfBirth: '2020-01-05',
+      birthFatherLastAddressDate: '2020-01-20',
       birthMotherLastAddressDate: '2020-01-20',
       otherParentLastAddressDate: '2020-01-20',
       placementOrders: [

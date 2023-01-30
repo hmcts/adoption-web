@@ -71,6 +71,7 @@ describe('from-api-format', () => {
       applicant2DateOfBirth: '',
       childrenDateOfBirth: '2020-01-05',
       birthMotherLastAddressDate: '2020-01-20',
+      birthFatherLastAddressDate: '2020-01-20',
       otherParentLastAddressDate: '2020-01-20',
       applicant1StatementOfTruth: 'No',
       applicant2StatementOfTruth: '',
@@ -85,6 +86,7 @@ describe('from-api-format', () => {
       applicant2DateOfBirth: undefined,
       childrenDateOfBirth: { day: '5', month: '1', year: '2020' },
       birthMotherLastAddressDate: { day: '20', month: '1', year: '2020' },
+      birthFatherLastAddressDate: { day: '20', month: '1', year: '2020' },
       otherParentLastAddressDate: { day: '20', month: '1', year: '2020' },
       placementOrders: [
         {
