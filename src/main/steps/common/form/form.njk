@@ -5,6 +5,7 @@
   <input type="hidden" name="locale" id="locale" value="{{ language }}">
     
 <fieldset class="govuk-fieldset govuk-!-margin-top-3">
+  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l" aria-label="{{title}}"></legend>
   {% block before_fields %}{% endblock %}
 
   {% block form_content %}
