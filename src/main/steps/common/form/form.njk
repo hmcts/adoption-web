@@ -4,8 +4,8 @@
   <input type="hidden" name="_csrf" id="csrfToken" value="{{ csrfToken }}">
   <input type="hidden" name="locale" id="locale" value="{{ language }}">
     
-<fieldset class="govuk-fieldset govuk-!-margin-top-3">
-  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l" aria-label="{{title}}"></legend>
+<fieldset class="govuk-fieldset govuk-!-margin-top-3" aria-label="{{title}}">
+  <legend class="govuk-fieldset__legend govuk-fieldset__legend--l"></legend>
   {% block before_fields %}{% endblock %}
 
   {% block form_content %}
