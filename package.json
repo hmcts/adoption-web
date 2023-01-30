@@ -168,6 +168,7 @@
     "minimist": "^1.2.6",
     "@hmcts/nodejs-healthcheck/superagent/formidable/qs": ">=6.9.7",
     "config/json5": ">=2.2.2",
-    "tsconfig-paths/json5": ">=2.2.2"
+    "tsconfig-paths/json5": ">=2.2.2",
+    "cookiejar": ">=2.1.4"
   }
 }
