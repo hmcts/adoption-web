@@ -2,7 +2,7 @@ import { applicationSequence } from './applicationSequence';
 
 describe('applicationSequence', () => {
   test('should contain 12 entries in applicant 1 screen sequence', () => {
-    expect(applicationSequence).toHaveLength(12);
+    expect(applicationSequence).toHaveLength(13);
 
     expect(applicationSequence[0].url).toBe('/');
     expect(applicationSequence[0].getNextStep({})).toBe('/');
