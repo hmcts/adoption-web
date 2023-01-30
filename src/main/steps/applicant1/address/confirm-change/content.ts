@@ -7,7 +7,7 @@ const en = ({ userCase }: CommonContent) => {
 
   return {
     section: 'First applicant',
-    label: 'Address changed',
+    title: 'Address changed',
     changeApplicantTextLabel: `${
       changeAddressBothApplicants === 'Yes'
         ? "Both applicants' addresses have now been changed"
@@ -21,7 +21,7 @@ const cy: typeof en = ({ userCase }: CommonContent) => {
 
   return {
     section: 'First applicant (in welsh)',
-    label: 'Address changed (in welsh)',
+    title: 'Address changed (in welsh)',
     changeApplicantTextLabel: `${
       changeAddressBothApplicants === 'Yes'
         ? "Both applicants' addresses have now been changed (in welsh)"
