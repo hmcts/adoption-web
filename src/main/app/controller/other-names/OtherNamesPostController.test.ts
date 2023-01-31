@@ -137,6 +137,23 @@ describe('OtherNamesPostController', () => {
       });
     });
 
+    describe('and when cancel button is selected', () => {
+      beforeEach(() => {
+        mockGetParsedBody.mockReturnValue({
+          cancelButton: 'true',
+          applicant1OtherFirstNames: 'MOCK_OTHER_FIRST_NAME',
+          applicant1OtherLastNames: 'MOCK_OTHER_LAST_NAME',
+        });
+      });
+
+      test('other names should be reset', async () => {
+        await controller.post(req, res);
+        expect(req.session.errors).toEqual([]);
+        expect(req.session.userCase.applicant1OtherFirstNames).toEqual('');
+        expect(req.session.userCase.applicant1OtherLastNames).toEqual('');
+      });
+    });
+
     describe('and when addButton is not pressed but data present in applicant1AdditionalNames', () => {
       beforeEach(() => {
         mockGetParsedBody.mockReturnValue({
