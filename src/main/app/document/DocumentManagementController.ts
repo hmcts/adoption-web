@@ -1,3 +1,4 @@
+import { Logger } from '@hmcts/nodejs-logging';
 import autobind from 'autobind-decorator';
 import config from 'config';
 import type { Response } from 'express';
@@ -20,9 +21,13 @@ import type { AppRequest, UserDetails } from '../controller/AppRequest';
 
 import { Classification, DocumentManagementClient } from './DocumentManagementClient';
 
+const logger = Logger.getLogger('document-management-controller');
+
 @autobind
 export class DocumentManagerController {
   private getDocumentManagementClient(user: UserDetails) {
+    logger.info('<<<<<<<<<<>>>>>>>>>    ' + 'CDAM URL: ' + config.get('services.cdam.url'));
+
     return new DocumentManagementClient(config.get('services.cdam.url'), getServiceAuthToken(), user);
   }
 
