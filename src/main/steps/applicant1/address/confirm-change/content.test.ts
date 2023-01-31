@@ -8,13 +8,13 @@ jest.mock('../../../../app/form/validation');
 
 const enContent = {
   section: 'First applicant',
-  label: 'Address changed',
+  title: 'Address changed',
   changeApplicantTextLabel: 'Your address has now been changed',
 };
 
 const cyContent = {
   section: 'First applicant (in welsh)',
-  label: 'Address changed (in welsh)',
+  title: 'Address changed (in welsh)',
   changeApplicantTextLabel: 'Your address has now been changed (in welsh)',
 };
 
