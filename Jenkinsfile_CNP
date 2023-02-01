@@ -50,11 +50,11 @@ withPipeline(type, product, component) {
 
 //  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
 
-  after('build') {
+  afterAlways('build') {
     yarnBuilder.yarn('build')
   }
 
-  after('test') {
+  afterAlways('test') {
     yarnBuilder.yarn('test:integration')
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
   }
@@ -64,7 +64,7 @@ withPipeline(type, product, component) {
     yarnBuilder.yarn('test:pa11y')
   }
 
-  after('functionalTest:preview') {
+  afterAlways('functionalTest:preview') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
   }
 
@@ -72,7 +72,7 @@ withPipeline(type, product, component) {
     env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
   }
 
-  after('smoketest:preview') {
+  afterAlways('smoketest:preview') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
   }
 
@@ -80,7 +80,7 @@ withPipeline(type, product, component) {
     env.ADOP_WEB_URL = "https://adoption-web-staging.service.core-compute-aat.internal/"
   }
 
-  after('smoketest:aat') {
+  afterAlways('smoketest:aat') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
   }
 
@@ -89,7 +89,7 @@ withPipeline(type, product, component) {
     yarnBuilder.yarn('test:functional:skip')
   }
 
-  after('functionalTest:aat') {
+  afterAlways('functionalTest:aat') {
     yarnBuilder.yarn('test:pa11y')
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
   }
