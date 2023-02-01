@@ -2,12 +2,12 @@
 
 {% block page_content %}
   {% if title %}
-    <h1 class="govuk-fieldset__heading">{{ title }}</h1>
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-0">{{ title }}</h1>
   {% endif %}
   {% if line1 %}
-    <div class="govuk-hint">{{ line1 }}</div>
+    <div class="govuk-hint govuk-!-margin-bottom-3">{{ line1 }}</div>
   {% endif %}
   {% if line2 %}
-    <p class="govuk-body">{{ line2 }}</p>
+    <p class="govuk-body govuk-!-margin-bottom-6">{{ line2 }}</p>
   {% endif %}
 {% endblock %}
