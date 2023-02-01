@@ -15,7 +15,7 @@ jest.mock('../../../steps', () => {
 
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
-import { PlacementOrderTypeEnum } from '../../../app/case/definition';
+import { PlacementOrderTypeEnum, YesOrNo } from '../../../app/case/definition';
 import { FormFields } from '../../../app/form/Form';
 
 import PlacementOrderPostController from './PlacementOrderPostController';
@@ -99,6 +99,31 @@ describe('PlacementOrderPostController', () => {
           },
         ]);
         expect(req.session.save).toHaveBeenCalled();
+      });
+
+      describe('and when "confirm = NO" in form data', () => {
+        test('should remove query from url', async () => {
+          mockGetParsedBody.mockReturnValue({
+            placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
+            selectedPlacementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
+            confirm: YesOrNo.NO,
+          });
+          req.originalUrl = 'MOCK_URL?MOCK_QUERY';
+          req.query.confirm = YesOrNo.NO;
+          await controller.post(req, res);
+          expect(req.session.errors).toEqual([]);
+          expect(req.session.userCase.placementOrders).toEqual([
+            {
+              placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+              placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
+              placementOrderType: PlacementOrderTypeEnum.AdoptionOrder,
+              otherPlacementOrderType: 'MOCK_PLACEMENT_OTHER_ORDER_TYPE',
+            },
+          ]);
+          expect(req.originalUrl).toEqual('MOCK_URL');
+          expect(req.query.confirm).toBeUndefined();
+          expect(req.session.save).toHaveBeenCalled();
+        });
       });
 
       test('should redirect to correct screen', async () => {
