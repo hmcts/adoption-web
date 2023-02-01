@@ -73,7 +73,7 @@ export class StateRedirectMiddleware {
           ) &&
           req.path !== APPLICATION_SUBMITTED &&
           req.path !== DOWNLOAD_APPLICATION_SUMMARY &&
-          req.path !== LA_DOCUMENT_MANAGER &&
+          !req.path.startsWith(LA_DOCUMENT_MANAGER) &&
           !req.path.startsWith(LA_PORTAL)
         ) {
           return res.redirect(APPLICATION_SUBMITTED);

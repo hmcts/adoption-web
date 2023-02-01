@@ -93,21 +93,17 @@ ADOP-1231-LAPortal-Welsh-Translation starts #}
       {% endblock %}
    {% if section %}
          <span class="govuk-caption-l">{{ section }}</span>
-    {% endif %}    
-  <fieldset class="govuk-fieldset">
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-      {% block page_content %}
-        {% if title %}
-           <h1 class="govuk-fieldset__heading">{{ title }}</h1>
-        {% endif %}
-      {% endblock %}
-    </legend>
+    {% endif %}
+            {% block page_content %}
+              {% if title %}
+                <h1 class="govuk-heading-l govuk-!-margin-bottom-0">{{ title }}</h1>
+              {% endif %}
+            {% endblock %}
       {% if form %}
         {% block form %}
           {% include "common/form/form.njk"%}
         {% endblock %}
       {% endif %}
-  </fieldset>
       {% if not getContent(form.hideContactHelpSection) %}
         {% block contactUs %}
           {% include "common/form/contactForHelp.njk"%}
