@@ -232,7 +232,9 @@ export const getSiblingStatus = (userCase: CaseWithId): SectionStatus => {
 export const getUploadDocumentStatus = (userCase: CaseWithId): SectionStatus => {
   const { laUploadedFiles, laCannotUpload } = userCase;
   if (
-    ((laUploadedFiles as unknown as string) !== '[]' && laCannotUpload === undefined) ||
+    ((laUploadedFiles as unknown as string) !== '[]' &&
+      laUploadedFiles !== undefined &&
+      laCannotUpload === undefined) ||
     laCannotUpload === Checkbox.Checked
   ) {
     return SectionStatus.COMPLETED;
