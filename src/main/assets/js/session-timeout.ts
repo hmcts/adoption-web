@@ -6,7 +6,7 @@ const eventTimer = 5 * 60 * 1000; // 5 minutes
 
 class SessionTimeout {
   TWELVE_HOURS = 12 * 60 * 60 * 1000;
-  TWENTY_MINUTES = 7 * 60 * 1000;
+  TWENTY_MINUTES = 20 * 60 * 1000;
   TIMEOUT_NOTICE = 2 * 60 * 1000; // 2 minutes
   sessionTimeoutInterval: number = this.getSessionTimeoutInterval();
   timeout;
