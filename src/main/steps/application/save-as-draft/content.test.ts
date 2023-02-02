@@ -1,6 +1,9 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
-import { CommonContent } from '../../common/common.content';
+import { FormContent, LanguageLookup } from '../../../app/form/Form';
+import { CommonContent, generatePageContent } from '../../common/common.content';
 import { generateContent } from '../save-as-draft/content';
+
+const EN = 'en';
 
 const enContent = {
   title: 'Your application has been saved',
@@ -23,5 +26,15 @@ describe('application-submmitted > content', () => {
 
   test('should return correct welsh content', () => {
     languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
+  });
+
+  test('should contain Continue Application and Sign-out button', () => {
+    const generatedContent = generateContent(commonContent);
+    const form = generatedContent.form as FormContent;
+    //     expect((form.submit?.text as LanguageLookup)(generatePageContent(
+    //       { language: EN }) as Record<string, never>)).toBe('Continue with your application');
+    expect(
+      (form.saveAsDraft?.text as LanguageLookup)(generatePageContent({ language: EN }) as Record<string, never>)
+    ).toBe('Sign out');
   });
 });

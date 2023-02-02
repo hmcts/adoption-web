@@ -131,6 +131,9 @@ describe('children > social-worker > content', () => {
 
     expect(childSocialWorkerEmail.type).toBe('text');
     expect((childSocialWorkerEmail.label as LanguageLookup)(generatedContent)).toBe(enContent.childSocialWorkerEmail);
+    expect((childSocialWorkerEmail.hint as LanguageLookup)(generatedContent)).toBe(
+      enContent.childSocialWorkerEmailHint
+    );
 
     (childSocialWorkerEmail.validator as ValidationCheck)('MockEmail', {});
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockEmail');
@@ -144,10 +147,31 @@ describe('children > social-worker > content', () => {
 
     expect(childLocalAuthority.type).toBe('text');
     expect((childLocalAuthority.label as LanguageLookup)(generatedContent)).toBe(enContent.childLocalAuthority);
+    expect((childLocalAuthority.hint as LanguageLookup)(generatedContent)).toBe(enContent.childLocalAuthorityHint);
 
     (childLocalAuthority.validator as ValidationCheck)('MockEmail', {});
     expect(isFieldFilledIn).toHaveBeenCalled();
     (childLocalAuthority.validator as ValidationCheck)(undefined, {});
+    expect(isEmailValid).not.toHaveBeenCalledWith();
+  });
+
+  it('should have an childLocalAuthorityEmail text input field', () => {
+    const generatedContent = generateContent(commonContent) as Record<string, never>;
+    const form = generatedContent.form as FormContent;
+    const fields = form.fields as FormFields;
+    const childLocalAuthorityEmail = fields.childLocalAuthorityEmail;
+
+    expect(childLocalAuthorityEmail.type).toBe('text');
+    expect((childLocalAuthorityEmail.label as LanguageLookup)(generatedContent)).toBe(
+      enContent.childLocalAuthorityEmail
+    );
+    expect((childLocalAuthorityEmail.hint as LanguageLookup)(generatedContent)).toBe(
+      enContent.childLocalAuthorityEmailHint
+    );
+
+    (childLocalAuthorityEmail.validator as ValidationCheck)('MockEmail', {});
+    expect(isFieldFilledIn).toHaveBeenCalled();
+    (childLocalAuthorityEmail.validator as ValidationCheck)(undefined, {});
     expect(isEmailValid).not.toHaveBeenCalledWith();
   });
 

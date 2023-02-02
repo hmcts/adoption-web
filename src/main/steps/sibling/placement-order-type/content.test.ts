@@ -11,6 +11,7 @@ jest.mock('../../../app/form/validation');
 const enContent = {
   section: 'Sibling details',
   title: 'What type of order is it?',
+  hint: 'This information makes it easier for the court to link past court orders.',
   adoptionOrder: 'Adoption order',
   careOrder: 'Care order',
   contactOrder: 'Child arrangements order',
@@ -32,6 +33,7 @@ const enContent = {
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
   title: 'Pa fath o orchymyn ydyw?',
+  hint: "Mae'r wybodaeth hon yn ei gwneud hi'n haws i'r llys gysylltu gorchmynion llys yn y gorffennol.",
   adoptionOrder: 'Gorchymyn Mabwysiadu',
   careOrder: 'Gorchymyn Gofal',
   contactOrder: 'Gorchymyn trefniadau plant',
@@ -81,6 +83,7 @@ describe('sibling > placement-order-type > content', () => {
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
     expect((field.label as Function)(generatedContent)).toBe(enContent.title);
+    expect((field.hint as Function)(generatedContent)).toBe(enContent.hint);
     expect((field.values[0].label as Function)(generatedContent)).toBe(enContent.adoptionOrder);
     expect(field.values[0].value).toBe(SiblingPOType.ADOPTION_ORDER);
     expect((field.values[1].label as Function)(generatedContent)).toBe(enContent.careOrder);

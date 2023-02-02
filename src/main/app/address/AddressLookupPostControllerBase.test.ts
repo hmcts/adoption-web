@@ -53,6 +53,30 @@ describe('AddressLookupPostControllerBase', () => {
       expect(req.session.addresses).toEqual([{ MOCK_KEY: 'MOCK_VALUE' }]);
     });
 
+    test('should reset session address details if saveAsDraft selected', async () => {
+      req = mockRequest({
+        session: {
+          userCase: {
+            email: 'test@example.com',
+            applicant1Address1: 'MOCK_ADDRESS1',
+            applicant1Address2: 'MOCK_ADDRESS2',
+            applicant1AddressTown: 'MOCK_ADDRESS_TOWN',
+            applicant1AddressCounty: 'MOCK_ADDRESS_COUNTY',
+          },
+        },
+        body: { saveAsDraft: true, applicant1AddressPostcode: 'MOCK_POSTCODE' },
+      });
+      await controller.post(req, res);
+      expect(req.session.userCase).toEqual({
+        email: 'test@example.com',
+        applicant1Address1: null,
+        applicant1Address2: null,
+        applicant1AddressTown: null,
+        applicant1AddressCounty: null,
+        applicant1AddressPostcode: 'MOCK_POSTCODE',
+      });
+    });
+
     test('should redirect to correct screen', async () => {
       req = mockRequest({ session: { save: jest.fn(done => done()) } });
       mockGetNextStepUrl.mockReturnValue('/MOCK_ENDPOINT');

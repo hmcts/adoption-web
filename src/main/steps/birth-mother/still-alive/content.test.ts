@@ -13,6 +13,7 @@ const enContent = {
   title: "Is the child's birth mother still alive?",
   moreDetails:
     "Provide more details. For example, 'the birth mother is uncontactable'. Your adoption agency or social worker can help you to complete this section.",
+  hint: 'If this person has died, you will need to provide the death certificate.',
   errors: {
     birthMotherStillAlive: {
       required: 'Select whether the birth mother is alive',
@@ -28,6 +29,7 @@ const cyContent = {
   title: 'A yw mam fiolegol y plentyn dal yn fyw?',
   moreDetails:
     'Darparwch fwy o fanylion. Er enghraifft, ‘nid oes modd cysylltu â’r fam fiolegol’. Gall eich asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol eich helpu i lenwi’r rhan hon. ',
+  hint: "Os yw’r unigolyn hwn wedi marw, bydd angen i chi ddarparu'r dystysgrif marwolaeth.",
   errors: {
     birthMotherStillAlive: {
       required: 'Nodwch a yw’r fam fiolegol yn fyw.',
@@ -69,6 +71,10 @@ describe('birth-mother > still-alive > content', () => {
     expect(field.values[0].value).toBe(YesNoNotsure.YES);
     expect((field.values[1].label as Function)(commonContent)).toBe(commonContent.no);
     expect(field.values[1].value).toBe(YesNoNotsure.NO);
+    const hint1 = field.values[1].subFields!.hint1;
+    expect(hint1.type).toBe('label');
+    expect((hint1.label as Function)(generatedContent)).toBe(enContent.hint);
+
     expect((field.values[2].label as Function)(commonContent)).toBe(commonContent.notSure);
     expect(field.values[2].value).toBe(YesNoNotsure.NOT_SURE);
 

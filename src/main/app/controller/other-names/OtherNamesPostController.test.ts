@@ -137,6 +137,23 @@ describe('OtherNamesPostController', () => {
       });
     });
 
+    describe('and when cancel button is selected', () => {
+      beforeEach(() => {
+        mockGetParsedBody.mockReturnValue({
+          cancelButton: 'true',
+          applicant1OtherFirstNames: 'MOCK_OTHER_FIRST_NAME',
+          applicant1OtherLastNames: 'MOCK_OTHER_LAST_NAME',
+        });
+      });
+
+      test('other names should be reset', async () => {
+        await controller.post(req, res);
+        expect(req.session.errors).toEqual([]);
+        expect(req.session.userCase.applicant1OtherFirstNames).toEqual('');
+        expect(req.session.userCase.applicant1OtherLastNames).toEqual('');
+      });
+    });
+
     describe('and when addButton is not pressed but data present in applicant1AdditionalNames', () => {
       beforeEach(() => {
         mockGetParsedBody.mockReturnValue({
@@ -183,6 +200,30 @@ describe('OtherNamesPostController', () => {
       await controller.post(req, res);
       expect(mockGetNextStepUrl).not.toHaveBeenCalled();
       expect(res.redirect).toHaveBeenCalledWith('/request');
+    });
+
+    describe('and when cancel button pressed before adding additional name', () => {
+      beforeEach(() => {
+        mockGetParsedBody.mockReturnValue({
+          cancelButton: 'true',
+          applicant1OtherFirstNames: 'MOCK_OTHER_FIRST_NAME',
+          applicant1OtherLastNames: 'MOCK_OTHER_LAST_NAME',
+          applicant1AdditionalNames: [
+            {
+              firstNames: 'MOCK_OTHER_FIRST_NAME',
+              id: 'MOCK_V4_UUID',
+              lastNames: 'MOCK_OTHER_LAST_NAME',
+            },
+          ],
+        });
+      });
+
+      test('should reset other names and errors', async () => {
+        await controller.post(req, res);
+        expect(req.session.errors).toEqual([]);
+        expect(req.session.userCase.applicant1OtherFirstNames).toEqual('');
+        expect(req.session.userCase.applicant1OtherLastNames).toEqual('');
+      });
     });
   });
 

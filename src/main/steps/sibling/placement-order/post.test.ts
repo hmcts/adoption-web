@@ -59,7 +59,10 @@ describe('SiblingPlacementOrderPostController', () => {
 
     describe('and when there is a selectedSiblingPoId', () => {
       beforeEach(() => {
-        mockGetParsedBody.mockReturnValue({ placementOrderNumber: 'MOCK_SIBLING_PLACEMENT_ORDER_NUMBER' });
+        mockGetParsedBody.mockReturnValue({
+          placementOrderNumber: 'MOCK_SIBLING_PLACEMENT_ORDER_NUMBER',
+          selectedSiblingPoType: 'MOCK_SIBLING_PLACEMENT_TYPE',
+        });
         mockGetErrors.mockReturnValue([]);
         controller = new SiblingPlacementOrderPostController({});
         req.locals.api.triggerEvent.mockResolvedValue({
@@ -79,6 +82,8 @@ describe('SiblingPlacementOrderPostController', () => {
           ],
           selectedSiblingId: 'MOCK_SIBLING_ID',
           selectedSiblingPoId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID',
+          selectedSiblingPoType: 'MOCK_SIBLING_PLACEMENT_TYPE',
+          siblingPlacementOtherType: 'MOCK_SIBLING_PLACEMENT_OTHER_TYPE',
         });
       });
 
@@ -88,6 +93,8 @@ describe('SiblingPlacementOrderPostController', () => {
         expect(req.session.userCase).toEqual({
           selectedSiblingId: 'MOCK_SIBLING_ID',
           selectedSiblingPoId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID',
+          selectedSiblingPoType: 'MOCK_SIBLING_PLACEMENT_TYPE',
+          siblingPlacementOtherType: 'MOCK_SIBLING_PLACEMENT_OTHER_TYPE',
           siblings: [
             {
               selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',

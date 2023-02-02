@@ -121,6 +121,19 @@ describe('PlacementOrderGetController', () => {
     });
   });
 
+  describe('when there is "confirm" query param', () => {
+    beforeEach(() => {
+      req = mockRequest({ query: { confirm: 'MOCK_ID' }, session: { userCase: { placementOrders: [] } } });
+      req.url = '/request?confirm=MOCK_ID';
+    });
+
+    test('should set the selectedPlacementOrderId in userCase', async () => {
+      req.locals.api.triggerEvent.mockResolvedValue({ selectedPlacementOrderId: 'MOCK_ID' });
+      await controller.get(req, res);
+      expect(req.session.userCase.selectedPlacementOrderId).toBe('MOCK_ID');
+    });
+  });
+
   describe('when there is "remove" query param', () => {
     beforeEach(() => {
       req = mockRequest({
