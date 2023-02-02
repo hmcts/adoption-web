@@ -56,6 +56,7 @@ describe('children > other-adoption-agency > content', () => {
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
     expect((field.section as Function)(generatedContent)).toBe(en.section);
+    expect((field.label as Function)(generatedContent)).toBe(en.title);
     expect((field.hint as Function)(generatedContent)).toBe(en.hint);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesOrNo.YES);

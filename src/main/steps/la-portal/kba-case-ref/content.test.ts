@@ -116,9 +116,9 @@ describe('la-portal > kba-case-ref > content', () => {
 
     expect(dobField.type).toBe('date');
     expect(dobField.classes).toBe('govuk-date-input');
+    expect((dobField.label as Function)(generatedContent)).toBe(enContent.childrenDateOfBirth);
     expect((dobField.hint as Function)(generatedContent)).toBe(enContent.childDateOfBirthHint);
 
-    //expect((dobField.values[0].label as Function)(commonContent)).toBe('Day');
     expect(dobField.values[0].name).toBe('day');
     expect(dobField.values[0].classes).toBe('govuk-input--width-2');
     expect(dobField.values[0].attributes?.maxLength).toBe(2);

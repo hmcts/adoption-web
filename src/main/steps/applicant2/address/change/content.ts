@@ -31,7 +31,6 @@ export const form: FormContent = {
       label: l => l.title,
       labelHidden: true,
       section: l => l.section,
-      hint: l => l.hint,
       values: [
         { label: l => l.yes, value: YesOrNo.YES },
         { label: l => l.no, value: YesOrNo.NO },

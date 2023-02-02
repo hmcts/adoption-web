@@ -104,6 +104,9 @@ describe('children > localAuthorityName > content', () => {
     expect((localAuthorityPhoneNumber.label as LanguageLookup)(generatedContent)).toBe(
       enContent.localAuthorityPhoneNumber
     );
+    expect((localAuthorityPhoneNumber.hint as LanguageLookup)(generatedContent)).toBe(
+      enContent.localAuthorityPhoneNumberHint
+    );
 
     (localAuthorityPhoneNumber.validator as ValidationCheck)('MockAgencyPhoneNumber', {});
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockAgencyPhoneNumber');
@@ -119,7 +122,9 @@ describe('children > localAuthorityName > content', () => {
     expect((localAuthorityContactName.label as LanguageLookup)(generatedContent)).toBe(
       enContent.localAuthorityContactName
     );
-
+    expect((localAuthorityContactName.hint as LanguageLookup)(generatedContent)).toBe(
+      enContent.localAuthorityContactNameHint
+    );
     (localAuthorityContactName.validator as ValidationCheck)('MockAgencyContactName', {});
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockAgencyContactName', {});
   });
@@ -134,7 +139,6 @@ describe('children > localAuthorityName > content', () => {
     expect((localAuthorityContactEmail.label as LanguageLookup)(generatedContent)).toBe(
       enContent.localAuthorityContactEmail
     );
-
     (localAuthorityContactEmail.validator as ValidationCheck)('MockAgencyContactEmail', {});
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockAgencyContactEmail');
   });

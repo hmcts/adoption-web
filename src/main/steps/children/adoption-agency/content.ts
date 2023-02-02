@@ -91,7 +91,6 @@ export const form: FormContent = {
       type: 'text',
       classes: 'govuk-label govuk-!-width-two-thirds',
       label: l => l.adopAgencyContactName,
-      hint: l => l.adopAgencyContactNameHint,
       labelSize: null,
       validator: isFieldFilledIn,
     },
@@ -99,7 +98,6 @@ export const form: FormContent = {
       type: 'text',
       classes: 'govuk-label govuk-input--width-10',
       label: l => l.adopAgencyPhone,
-      hint: l => l.adopAgencyPhoneHint,
       labelSize: null,
       attributes: {
         maxLength: 14,

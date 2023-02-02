@@ -54,9 +54,8 @@ describe('children > placement-order-number > content', () => {
     const placementOrderNumberField = fields.placementOrderNumber as FormOptions;
     expect(placementOrderNumberField.type).toBe('text');
     expect(placementOrderNumberField.classes).toBe('govuk-label govuk-input--width-10');
-    expect((placementOrderNumberField.label as Function)(generatedContent)).toBe(
-      'What is the serial or case number on the placement order?'
-    );
+    expect((placementOrderNumberField.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((placementOrderNumberField.hint as Function)(generatedContent)).toBe(enContent.hint);
 
     expect((placementOrderNumberField as FormInput).value).toBe('1234');
     expect(placementOrderNumberField.labelSize).toBe('l');

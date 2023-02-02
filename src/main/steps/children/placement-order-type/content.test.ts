@@ -11,6 +11,7 @@ jest.mock('../../../app/form/validation');
 const enContent = {
   section: "The child's details",
   title: 'What type of order is it?',
+  hint: 'This information makes it easier for the court to link past court orders.',
   adoptionOrder: 'Previous adoption order',
   careOrder: 'Care order',
   contactOrder: 'Child arrangements order',
@@ -32,6 +33,7 @@ const enContent = {
 const cyContent = {
   section: 'Manylion y plentyn',
   title: 'Pa fath o orchymyn ydyw?',
+  hint: "Mae'r wybodaeth hon yn ei gwneud hi'n haws i'r llys gysylltu gorchmynion llys yn y gorffennol.",
   adoptionOrder: 'Gorchymyn mabwysiadu blaenorol',
   careOrder: 'Gorchymyn Gofal',
   contactOrder: 'Gorchymyn trefniadau plant',
@@ -79,9 +81,11 @@ describe('children > placement-order-type > content', () => {
     expect(field.classes).toBe('govuk-radios');
     expect((field.label as Function)(generatedContent)).toBe(enContent.title);
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
+    expect((field.hint as Function)(generatedContent)).toBe(enContent.hint);
     expect((field.values[0].label as Function)(generatedContent)).toBe(enContent.careOrder);
     expect(field.values[0].value).toBe(PlacementOrderTypeEnum.CareOrder);
     expect((field.values[1].label as Function)(generatedContent)).toBe(enContent.contactOrder);
+    expect((field.values[1].hint as Function)(generatedContent)).toBe(enContent.contactOrderHint);
     expect(field.values[1].value).toBe(PlacementOrderTypeEnum.ContactOrder);
     expect((field.values[2].label as Function)(generatedContent)).toBe(enContent.adoptionOrder);
     expect(field.values[2].value).toBe(PlacementOrderTypeEnum.AdoptionOrder);
@@ -89,6 +93,8 @@ describe('children > placement-order-type > content', () => {
     expect(field.values[3].value).toBe(PlacementOrderTypeEnum.PlacementOrder);
     expect((field.values[4].label as Function)(generatedContent)).toBe(enContent.supervisionOrder);
     expect(field.values[4].value).toBe(PlacementOrderTypeEnum.SupervisionOrder);
+    expect((field.values[5].label as Function)(generatedContent)).toBe(enContent.other);
+    expect(field.values[5].value).toBe(PlacementOrderTypeEnum.Other);
     const placementOrderOtherTypeField = field.values[5].subFields!.selectedOtherPlacementOrderType;
     expect(placementOrderOtherTypeField.type).toBe('text');
     expect((placementOrderOtherTypeField.label as Function)(generatedContent)).toBe(enContent.otherOrder);

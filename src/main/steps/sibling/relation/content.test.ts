@@ -73,6 +73,7 @@ describe('sibling > relation > content', () => {
     expect(relationField.type).toBe('radios');
     expect(relationField.classes).toBe('govuk-radios');
     expect((relationField.label as Function)(generatedContent)).toBe(enContent.title);
+    expect((relationField.section as Function)(generatedContent)).toBe(enContent.section);
     expect((relationField.values[0].label as Function)(generatedContent)).toBe(enContent.sister);
     expect(relationField.values[0].value).toBe(SiblingRelationships.SISTER);
     expect((relationField.values[1].label as Function)(generatedContent)).toBe(enContent.halfSister);
