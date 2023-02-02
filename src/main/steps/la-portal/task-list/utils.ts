@@ -1,4 +1,4 @@
-import { CaseDate, CaseWithId, FieldPrefix } from '../../../app/case/case';
+import { CaseDate, CaseWithId, Checkbox, FieldPrefix } from '../../../app/case/case';
 import { AdditionalNationality, Gender, SectionStatus, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
 import { isDateInputInvalid, isFutureDate, notSureViolation } from '../../../app/form/validation';
 
@@ -232,8 +232,8 @@ export const getSiblingStatus = (userCase: CaseWithId): SectionStatus => {
 export const getUploadDocumentStatus = (userCase: CaseWithId): SectionStatus => {
   const { laUploadedFiles, laCannotUpload } = userCase;
   if (
-    (laUploadedFiles !== undefined && laUploadedFiles.length > 0 && laCannotUpload === undefined) ||
-    laCannotUpload === 'checked'
+    ((laUploadedFiles as unknown as string) !== '[]' && laCannotUpload === undefined) ||
+    laCannotUpload === Checkbox.Checked
   ) {
     return SectionStatus.COMPLETED;
   }
