@@ -79,7 +79,6 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
 ];
 
 const en = () => ({
-  title: 'Apply to adopt a child placed in your care',
   statuses: {
     [SectionStatus.COMPLETED]: 'Completed',
     [SectionStatus.IN_PROGRESS]: 'In Progress',
@@ -102,7 +101,6 @@ const en = () => ({
 });
 
 const cy: typeof en = () => ({
-  title: 'Gwneud cais i fabwysiadu plentyn a osodwyd yn eich gofal',
   statuses: {
     [SectionStatus.COMPLETED]: 'Wedi cwblhau',
     [SectionStatus.IN_PROGRESS]: 'Yn mynd rhagddo',
