@@ -145,9 +145,12 @@ const isLaDetailsNotComplete = (userCase): boolean => {
 
 export const generateContent: TranslationFn = content => {
   const translations = languages[content.language]();
+  const userCase = content.userCase;
+  const suffix = content.language === 'en' ? "'s details" : "'s manylion";
   return {
     ...translations,
-    sections: generateTaskList(translations.sectionTitles, translations.taskListItems, content.userCase),
-    isIncomplete: isLaDetailsNotComplete(content.userCase),
+    title: userCase!.childrenFirstName + ' ' + userCase!.childrenLastName + suffix,
+    sections: generateTaskList(translations.sectionTitles, translations.taskListItems, userCase),
+    isIncomplete: isLaDetailsNotComplete(userCase),
   };
 };
