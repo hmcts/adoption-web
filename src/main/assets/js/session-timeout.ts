@@ -1,169 +1,152 @@
 import { throttle } from 'lodash';
 
-import { KEEP_ALIVE_URL, PageLink, TIMED_OUT_URL } from '../../steps/urls';
+import { KEEP_ALIVE_URL, TIMED_OUT_URL } from '../../steps/urls';
 
-const eventTimer = 5 * 60 * 1000; // 5 minutes
+const eventTimer = 1 * 60 * 1000; // 5 minutes
+const TIMEOUT_NOTICE = 2 * 60 * 1000; // 2 minutes
+const sessionTimeoutInterval = 20 * 60 * 1000; // 20 minutes
 
-class SessionTimeout {
-  TWELVE_HOURS = 12 * 60 * 60 * 1000;
-  TWENTY_MINUTES = 20 * 60 * 1000;
-  TIMEOUT_NOTICE = 2 * 60 * 1000; // 2 minutes
-  sessionTimeoutInterval: number = this.getSessionTimeoutInterval();
-  timeout;
-  notificationTimer;
-  countdownInterval;
+let timeout;
+let notificationTimer;
+let countdownInterval;
 
-  notificationPopupIsOpen = false;
-  notificationPopup: HTMLElement | null = document.getElementById('timeout-modal-container');
-  popupCloseBtn: HTMLButtonElement | null | undefined =
-    this.notificationPopup?.querySelector('#timeout-modal-close-button');
-  countdownTimer: HTMLSpanElement | null | undefined = this.notificationPopup?.querySelector('#countdown-timer');
-  form = document.getElementById('main-form');
+let notificationPopupIsOpen = false;
+const notificationPopup: HTMLElement | null = document.getElementById('timeout-modal-container');
+const popupCloseBtn: HTMLButtonElement | null | undefined =
+  notificationPopup?.querySelector('#timeout-modal-close-button');
+const countdownTimer: HTMLSpanElement | null | undefined = notificationPopup?.querySelector('#countdown-timer');
+const form = document.getElementById('main-form');
 
-  schedule(): void {
-    this.scheduleSignOut();
-    this.onNotificationPopupClose();
-  }
-
-  onNotificationPopupClose(): void {
-    this.popupCloseBtn?.addEventListener('click', () => {
-      this.clearCountdown();
-      this.showNotificationPopup(false);
-      this.scheduleSignOut();
-      this.pingUserActive();
-    });
-  }
-
-  scheduleSignOut(): void {
-    this.scheduleNotificationPopup();
-    clearTimeout(this.timeout);
-    this.timeout = setTimeout(this.saveSessionAndRedirect, this.sessionTimeoutInterval);
-  }
-
-  scheduleNotificationPopup(): void {
-    clearTimeout(this.notificationTimer);
-    this.notificationTimer = setTimeout(
-      () => this.showNotificationPopup(true),
-      this.sessionTimeoutInterval - this.TIMEOUT_NOTICE
-    );
-  }
-
-  showNotificationPopup(visible: boolean): void {
-    if (visible) {
-      this.notificationPopup?.removeAttribute('hidden');
-      this.notificationPopupIsOpen = true;
-      this.startCountdown();
-      this.trapFocusInModal();
-    } else {
-      this.notificationPopup?.setAttribute('hidden', 'hidden');
-      this.notificationPopupIsOpen = false;
-    }
-  }
-
-  startCountdown() {
-    const startTime = new Date().getTime() + this.TIMEOUT_NOTICE;
-    this.countdownInterval = setInterval(() => {
-      const countdown = startTime - new Date().getTime();
-      if (this.countdownTimer) {
-        this.countdownTimer.innerHTML = this.convertToHumanReadableText(countdown);
-      }
-    }, 1000);
-  }
-
-  clearCountdown() {
-    if (this.countdownInterval && this.countdownTimer) {
-      clearInterval(this.countdownInterval);
-      this.countdownTimer.innerHTML = this.convertToHumanReadableText(this.TIMEOUT_NOTICE);
-    }
-  }
-
-  convertToHumanReadableText(countdown: number): string {
-    if (this.countdownTimer) {
-      const minutes = Math.floor((countdown % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((countdown % (1000 * 60)) / 1000);
-      const defaultText = this.countdownTimer.dataset.default;
-      const secondsText = this.countdownTimer.dataset.seconds;
-      const minutesText = this.countdownTimer.dataset.minutes;
-      switch (minutes) {
-        case 0:
-          return ` ${seconds} ${secondsText} `;
-        case 2:
-          return ` ${defaultText} `;
-        default:
-          return ` ${minutes} ${minutesText} ${seconds} ${secondsText} `;
-      }
-    }
-    return '';
-  }
-
-  trapFocusInModal() {
-    const firstFocusableElement: HTMLSpanElement | null | undefined =
-      this.notificationPopup?.querySelector('#timeout-modal');
-    const lastFocusableElement: HTMLAnchorElement | null | undefined =
-      this.notificationPopup?.querySelector('#timeout-signout-link');
-    firstFocusableElement?.focus();
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Tab') {
-        if (event.shiftKey) {
-          if (document.activeElement === firstFocusableElement) {
-            lastFocusableElement?.focus();
-            event.preventDefault();
-          }
-        } else {
-          if (document.activeElement === lastFocusableElement) {
-            firstFocusableElement?.focus();
-            event.preventDefault();
-          }
-        }
-      }
-    });
-  }
-
-  async saveSessionAndRedirect(): Promise<void> {
-    if (this.form) {
-      const formData = new FormData(this.form as HTMLFormElement);
-      formData.append('saveBeforeSessionTimeout', 'true');
-      const url = window.location.pathname;
-      const csrf = formData.get('_csrf') as string;
-      await fetch(url, {
-        method: 'POST',
-        headers: { 'csrf-token': csrf },
-        body: new URLSearchParams(formData as unknown as Record<string, string>),
-      });
-    }
-    window.location.href = `${TIMED_OUT_URL}?lang=${document.documentElement.lang}`;
-  }
-
-  pingUserActive() {
-    return throttle(
-      () => {
-        if (!this.notificationPopupIsOpen) {
-          fetch(KEEP_ALIVE_URL).then(() => this.scheduleSignOut());
-        }
+const saveBeforeSessionTimeout = async () => {
+  if (form) {
+    const formData = new FormData(form as HTMLFormElement);
+    formData.append('saveBeforeSessionTimeout', 'true');
+    const url = window.location.pathname;
+    const body = Object.fromEntries(formData);
+    await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        'csrf-token': body._csrf as string,
       },
-      eventTimer,
-      { trailing: false }
-    );
+      body: JSON.stringify(body),
+    });
   }
+  window.location.href = `${TIMED_OUT_URL}?lang=${document.documentElement.lang}`;
+};
 
-  getSessionTimeoutInterval(): number {
-    const timeoutParam = new URL(location.href).searchParams.get('timeout');
-    if (process.env.NODE_ENV === 'development' && timeoutParam && !isNaN(parseInt(timeoutParam))) {
-      return parseInt(timeoutParam) > this.TWENTY_MINUTES ? this.TWENTY_MINUTES : Math.abs(parseInt(timeoutParam));
+const schedule = () => {
+  setSaveTimeout();
+  onNotificationPopupClose();
+};
+
+const onNotificationPopupClose = () => {
+  popupCloseBtn?.addEventListener('click', () => {
+    clearCountdown();
+    showNotificationPopup(false);
+    setSaveTimeout();
+    pingUserActive();
+  });
+};
+
+const startCountdown = () => {
+  const startTime = new Date().getTime() + TIMEOUT_NOTICE;
+  countdownInterval = setInterval(() => {
+    const countdown = startTime - new Date().getTime();
+    if (countdownTimer) {
+      countdownTimer.innerHTML = convertToHumanReadableText(countdown);
     }
+  }, 1000);
+};
 
-    return [KEEP_ALIVE_URL, TIMED_OUT_URL].includes(window.location.pathname as PageLink)
-      ? this.TWELVE_HOURS
-      : this.TWENTY_MINUTES;
+const clearCountdown = () => {
+  if (countdownInterval && countdownTimer) {
+    clearInterval(countdownInterval);
+    countdownTimer.innerHTML = convertToHumanReadableText(TIMEOUT_NOTICE);
   }
-}
+};
 
-const sessionTimeout = new SessionTimeout();
+const showNotificationPopup = (visible: boolean) => {
+  if (visible) {
+    notificationPopup?.removeAttribute('hidden');
+    notificationPopupIsOpen = true;
+    startCountdown();
+    trapFocusInModal();
+  } else {
+    notificationPopup?.setAttribute('hidden', 'hidden');
+    notificationPopupIsOpen = false;
+  }
+};
+
+const convertToHumanReadableText = (countdown: number) => {
+  if (countdownTimer) {
+    const minutes = Math.floor((countdown % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((countdown % (1000 * 60)) / 1000);
+    const defaultText = countdownTimer.dataset.default;
+    const secondsText = countdownTimer.dataset.seconds;
+    const minutesText = countdownTimer.dataset.minutes;
+    switch (minutes) {
+      case 0:
+        return ` ${seconds} ${secondsText} `;
+      case 2:
+        return ` ${defaultText} `;
+      default:
+        return ` ${minutes} ${minutesText} ${seconds} ${secondsText} `;
+    }
+  }
+  return '';
+};
+
+const trapFocusInModal = () => {
+  const firstFocusableElement: HTMLSpanElement | null | undefined = notificationPopup?.querySelector('#timeout-modal');
+  const lastFocusableElement: HTMLAnchorElement | null | undefined =
+    notificationPopup?.querySelector('#timeout-signout-link');
+  firstFocusableElement?.focus();
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Tab') {
+      if (event.shiftKey) {
+        if (document.activeElement === firstFocusableElement) {
+          lastFocusableElement?.focus();
+          event.preventDefault();
+        }
+      } else {
+        if (document.activeElement === lastFocusableElement) {
+          firstFocusableElement?.focus();
+          event.preventDefault();
+        }
+      }
+    }
+  });
+};
+
+const scheduleNotificationPopup = () => {
+  clearTimeout(notificationTimer);
+  notificationTimer = setTimeout(() => showNotificationPopup(true), sessionTimeoutInterval - TIMEOUT_NOTICE);
+};
+
+const setSaveTimeout = () => {
+  scheduleNotificationPopup();
+  clearTimeout(timeout);
+  timeout = setTimeout(() => {
+    saveBeforeSessionTimeout();
+  }, sessionTimeoutInterval);
+};
+
+const pingUserActive = throttle(
+  () => {
+    fetch(KEEP_ALIVE_URL).then(() => {
+      if (!notificationPopupIsOpen) {
+        schedule();
+      }
+    });
+  },
+  eventTimer,
+  { trailing: false }
+);
 
 setTimeout(() => {
   ['click', 'touchstart', 'mousemove', 'keypress', 'keydown', 'scroll'].forEach(evt =>
-    document.addEventListener(evt, sessionTimeout.pingUserActive())
+    document.addEventListener(evt, pingUserActive)
   );
 }, eventTimer);
-
-sessionTimeout.schedule();
+schedule();
