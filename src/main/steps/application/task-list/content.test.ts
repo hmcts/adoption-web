@@ -28,6 +28,14 @@ const enContent = {
     secondApplicant: 'Second applicant',
     personalDetails: 'Your personal details',
     contactDetails: 'Your contact details',
+    firstApplicantPersonalDetails:
+      'Your personal details <span class="govuk-visually-hidden">First applicant personal details</span>',
+    firstApplicantContactDetails:
+      'Your contact details <span class="govuk-visually-hidden">First applicant contact details</span>',
+    secondApplicantPersonalDetails:
+      'Your personal details <span class="govuk-visually-hidden">Second applicant personal details</span>',
+    secondApplicantContactDetails:
+      'Your contact details <span class="govuk-visually-hidden">Second applicant contact details</span>',
     birthCertificate: 'Birth certificate details',
     childDetails: "Child's details",
     birthMother: 'Birth mother details',
@@ -64,6 +72,14 @@ const cyContent = {
     secondApplicant: 'Ail geisydd',
     personalDetails: 'Eich manylion personol',
     contactDetails: 'Eich manylion cyswllt',
+    firstApplicantPersonalDetails:
+      'Eich manylion personol <span class="govuk-visually-hidden">Ceisydd cyntaf manylion personol</span>',
+    firstApplicantContactDetails:
+      'Eich manylion cyswllt <span class="govuk-visually-hidden">Ceisydd cyntaf manylion cyswllt</span>',
+    secondApplicantPersonalDetails:
+      'Eich manylion personol <span class="govuk-visually-hidden">Ail geisydd manylion personol</span>',
+    secondApplicantContactDetails:
+      'Eich manylion cyswllt <span class="govuk-visually-hidden">Ail geisydd manylion cyswllt</span>',
     birthCertificate: 'Manylion y dystysgrif geni',
     childDetails: 'Manylion y plentyn',
     birthMother: 'Manylion y fam fiolegol',
