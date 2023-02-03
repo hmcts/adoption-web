@@ -112,6 +112,8 @@ export const HOW_DO_YOU_WANT_TO_RESPOND: PageLink = '/how-do-you-want-to-respond
 
 export const ELIGIBILITY_URL: PageLink = '/eligibility';
 export const START_ELIGIBILITY_URL: PageLink = `${ELIGIBILITY_URL}/start`;
+export const CHECK_ELIGIBILITY_URL_MULTIPLE_CHILDREN: PageLink = `${ELIGIBILITY_URL}/multiple-children`;
+export const CHECK_ELIGIBILITY_URL_MULTIPLE_CHILDREN_DESC: PageLink = `${ELIGIBILITY_URL}/multiple-children-desc`;
 export const CHECK_ELIGIBILITY_URL_UNDER_18: PageLink = `${ELIGIBILITY_URL}/under-18`;
 export const CHECK_ELIGIBILITY_URL_MARRIED: PageLink = `${ELIGIBILITY_URL}/married`;
 export const CHECK_ELIGIBILITY_URL_UNDER_21: PageLink = `${ELIGIBILITY_URL}/under-21`;
