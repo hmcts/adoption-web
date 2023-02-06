@@ -14,7 +14,7 @@ const enContent = {
   reason: 'Reason',
   submitApplication: 'Check your application',
   checkInfoBeforeSubmit:
-    'Check all the information you have provided carefully. The next step is to sign a statement of truth declaring that the information provided is correct. Once this is signed and payment has been taken, your application will be submitted to the court.',
+    'Check all the information you have provided carefully. The next step is to sign a statement of truth declaring that the information provided is correct. Once this is signed payment will be taken. If you are applying to adopt more than one child, payment will only be taken once.',
   applyingWith: {
     [ApplyingWith.ALONE]: "I'm applying on my own",
     [ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER]: "I'm applying with my spouse or civil partner",
