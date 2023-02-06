@@ -29,7 +29,7 @@ describe('GetController', () => {
     expect(res.render).toBeCalledWith('page', {
       ...defaultViewArgs,
       language: 'en',
-      serviceName: 'Apply to adopt a child placed in your care',
+      serviceName: 'Apply for adoption',
       isDraft: true,
       text: 'english',
       userCase: req.session.userCase,
@@ -214,7 +214,7 @@ describe('GetController', () => {
         userEmail,
         htmlLang: 'en',
         language: 'en',
-        serviceName: 'Apply to adopt a child placed in your care',
+        serviceName: 'Apply for adoption',
         contactEmail: 'todo@test.com',
         isAmendableStates: true,
         sessionErrors: [],
