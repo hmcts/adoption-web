@@ -442,6 +442,32 @@ describe('review-pay-submit > check-your-answers > utils', () => {
               },
             },
             {
+              key: { text: 'Extra support' },
+              value: { text: 'MOCK_REASONABLE_ADJUSTMENT' },
+              actions: {
+                items: [
+                  {
+                    href: '/applicant1/extra-support?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Extra support',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Details' },
+              value: { text: 'MOCK_REASONABLE_ADJUSTMENT_DETAILS' },
+              actions: {
+                items: [
+                  {
+                    href: '/applicant1/extra-support?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Details',
+                  },
+                ],
+              },
+            },
+            {
               key: { text: 'Address' },
               value: {
                 html: 'MOCK_ADDRESS_LINE_1<br>MOCK_ADDRESS_TOWN<br>MOCK_ADDRESS_COUNTY<br>MOCK_ADDRESS_POSTCODE',
@@ -570,6 +596,32 @@ describe('review-pay-submit > check-your-answers > utils', () => {
               },
             },
             {
+              key: { text: 'Extra support' },
+              value: { text: 'MOCK_REASONABLE_ADJUSTMENT' },
+              actions: {
+                items: [
+                  {
+                    href: '/applicant1/extra-support?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Extra support',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Details' },
+              value: { text: 'MOCK_REASONABLE_ADJUSTMENT_DETAILS' },
+              actions: {
+                items: [
+                  {
+                    href: '/applicant1/extra-support?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Details',
+                  },
+                ],
+              },
+            },
+            {
               key: { text: 'Address' },
               value: {
                 html: 'MOCK_ADDRESS_LINE_1<br>MOCK_ADDRESS_TOWN<br>MOCK_ADDRESS_COUNTY<br>MOCK_ADDRESS_POSTCODE',
@@ -693,6 +745,32 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                     href: '/applicant2/occupation?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
                     visuallyHiddenText: 'Occupation',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Extra support' },
+              value: { text: 'MOCK_REASONABLE_ADJUSTMENT' },
+              actions: {
+                items: [
+                  {
+                    href: '/applicant2/extra-support?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Extra support',
+                  },
+                ],
+              },
+            },
+            {
+              key: { text: 'Details' },
+              value: { text: 'MOCK_REASONABLE_ADJUSTMENT_DETAILS' },
+              actions: {
+                items: [
+                  {
+                    href: '/applicant2/extra-support?returnUrl=/review-pay-submit/check-your-answers',
+                    text: 'Change',
+                    visuallyHiddenText: 'Details',
                   },
                 ],
               },

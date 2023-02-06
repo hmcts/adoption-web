@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { FieldPrefix } from '../../../app/case/case';
 import { ApplyingWith, DocumentType, Gender, LanguagePreference, YesNoNotsure } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
@@ -76,6 +77,8 @@ export const enContent = {
     previousNames: 'Previous names',
     dateOfBirth: 'Date of birth',
     occupation: 'Occupation',
+    extraSupport: 'Extra support',
+    extraSupportDetails: 'Details',
     address: 'Address',
     contactDetailsConsent: 'Court orders served by email',
     languagePreference: 'Emails and documents language',
@@ -195,6 +198,8 @@ const cyContent: typeof enContent = {
     previousNames: 'Enwau blaenorol',
     dateOfBirth: 'Dyddiad geni',
     occupation: 'Galwedigaeth',
+    extraSupport: 'Cefnogaeth ychwanegol',
+    extraSupportDetails: 'Manylion',
     address: 'Cyfeiriad',
     contactDetailsConsent: 'Gorchmynion llys a gyflwynir drwy e-bost',
     languagePreference: 'Negeseuon e-bost a iaith y dogfennau',

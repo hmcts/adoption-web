@@ -47,6 +47,8 @@ export default {
   applicant1AddressCounty: 'MOCK_ADDRESS_COUNTY',
   applicant1AddressPostcode: 'MOCK_ADDRESS_POSTCODE',
   applicant1LanguagePreference: LanguagePreference.ENGLISH,
+  applicant1HasReasonableAdjustment: 'MOCK_REASONABLE_ADJUSTMENT',
+  applicant1ReasonableAdjustmentDetails: 'MOCK_REASONABLE_ADJUSTMENT_DETAILS',
 
   applicant2FirstNames: 'MOCK_APPLICANT1_FIRST_NAMES',
   applicant2LastNames: 'MOCK_APPLICANT1_LAST_NAMES',
@@ -61,6 +63,8 @@ export default {
   applicant2AddressCounty: 'MOCK_ADDRESS_COUNTY',
   applicant2AddressPostcode: 'MOCK_ADDRESS_POSTCODE',
   applicant2LanguagePreference: LanguagePreference.ENGLISH,
+  applicant2HasReasonableAdjustment: 'MOCK_REASONABLE_ADJUSTMENT',
+  applicant2ReasonableAdjustmentDetails: 'MOCK_REASONABLE_ADJUSTMENT_DETAILS',
 
   childrenFirstName: 'CHILDREN_FIRST_NAMES',
   childrenLastName: 'CHILDREN_LAST_NAMES',

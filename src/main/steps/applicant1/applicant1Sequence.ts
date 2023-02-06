@@ -6,6 +6,7 @@ import {
   APPLICANT_1_CONFIRM_CHANGE_ADDRESS,
   APPLICANT_1_CONTACT_DETAILS,
   APPLICANT_1_DOB,
+  APPLICANT_1_EXTRA_SUPPORT,
   APPLICANT_1_FIND_ADDRESS,
   APPLICANT_1_FULL_NAME,
   APPLICANT_1_LANGUAGE_PREFERENCE,
@@ -51,6 +52,11 @@ export const applicant1Sequence: Step[] = [
   },
   {
     url: APPLICANT_1_OCCUPATION,
+    showInSection: Sections.AboutApplicant1,
+    getNextStep: () => APPLICANT_1_EXTRA_SUPPORT,
+  },
+  {
+    url: APPLICANT_1_EXTRA_SUPPORT,
     showInSection: Sections.AboutApplicant1,
     getNextStep: () => TASK_LIST_URL,
   },

@@ -324,6 +324,8 @@ export interface CaseData {
   applicant1ContactDetails: ContactDetails[];
   applicant1ContactDetailsConsent: YesOrNo;
   applicant1LanguagePreference?: LanguagePreference;
+  applicant1HasReasonableAdjustment: YesOrNo;
+  applicant1ReasonableAdjustmentDetails: string;
 
   applicant2FirstName: string;
   applicant2LastName: string;
@@ -343,6 +345,8 @@ export interface CaseData {
   applicant2ContactDetails: ContactDetails[];
   applicant2ContactDetailsConsent: YesOrNo;
   applicant2LanguagePreference?: LanguagePreference;
+  applicant2HasReasonableAdjustment: YesOrNo;
+  applicant2ReasonableAdjustmentDetails: string;
 
   childrenFirstName: string;
   childrenLastName: string;
