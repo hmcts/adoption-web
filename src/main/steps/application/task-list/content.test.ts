@@ -18,7 +18,7 @@ const enContent = {
     applicantDetails: "Add applicant's details",
     childDetails: "Add child's details",
     uploadDocuments: 'Upload documents',
-    reviewPayAndSubmit: 'Review, pay and submit',
+    reviewPayAndSubmit: 'Review and submit',
   },
   taskListItems: {
     numberOfApplicants: 'Number of applicants',
