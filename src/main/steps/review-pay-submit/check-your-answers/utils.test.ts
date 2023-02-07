@@ -443,7 +443,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
             },
             {
               key: { text: 'Extra support' },
-              value: { text: 'MOCK_REASONABLE_ADJUSTMENT' },
+              value: { text: 'Yes' },
               actions: {
                 items: [
                   {
@@ -597,7 +597,7 @@ describe('review-pay-submit > check-your-answers > utils', () => {
             },
             {
               key: { text: 'Extra support' },
-              value: { text: 'MOCK_REASONABLE_ADJUSTMENT' },
+              value: { text: 'Yes' },
               actions: {
                 items: [
                   {
@@ -751,26 +751,13 @@ describe('review-pay-submit > check-your-answers > utils', () => {
             },
             {
               key: { text: 'Extra support' },
-              value: { text: 'MOCK_REASONABLE_ADJUSTMENT' },
+              value: { text: 'No' },
               actions: {
                 items: [
                   {
                     href: '/applicant2/extra-support?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
                     visuallyHiddenText: 'Extra support',
-                  },
-                ],
-              },
-            },
-            {
-              key: { text: 'Details' },
-              value: { text: 'MOCK_REASONABLE_ADJUSTMENT_DETAILS' },
-              actions: {
-                items: [
-                  {
-                    href: '/applicant2/extra-support?returnUrl=/review-pay-submit/check-your-answers',
-                    text: 'Change',
-                    visuallyHiddenText: 'Details',
                   },
                 ],
               },

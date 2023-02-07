@@ -94,7 +94,7 @@ export const getPersonalDetailsStatus = (
 
   const hasReasonableAdjustmentComplete =
     hasReasonableAdjustment === YesOrNo.NO ||
-    (hasReasonableAdjustment === YesOrNo.YES && !!hasReasonableAdjustmentDetails);
+    (hasReasonableAdjustment === YesOrNo.YES && !hasReasonableAdjustmentDetails);
 
   if (
     firstName &&
