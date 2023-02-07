@@ -2,11 +2,11 @@ import { throttle } from 'lodash';
 
 import { KEEP_ALIVE_URL, TIMED_OUT_URL } from '../../steps/urls';
 
-const eventTimer = 1 * 60 * 1000; // 5 minutes
+const eventTimer = 5 * 60 * 1000; // 5 minutes
 const TIMEOUT_NOTICE = 2 * 60 * 1000; // 2 minutes
 const sessionTimeoutInterval = 20 * 60 * 1000; // 20 minutes
 
-let timeout;
+// let timeout;
 let notificationTimer;
 let countdownInterval;
 
@@ -32,20 +32,19 @@ const saveBeforeSessionTimeout = async () => {
       body: JSON.stringify(body),
     });
   }
-  window.location.href = `${TIMED_OUT_URL}?lang=${document.documentElement.lang}`;
 };
 
 const schedule = () => {
-  setSaveTimeout();
+  clearCountdown();
+  showNotificationPopup(false);
+  scheduleNotificationPopup();
+  pingUserActive();
   onNotificationPopupClose();
 };
 
 const onNotificationPopupClose = () => {
   popupCloseBtn?.addEventListener('click', () => {
-    clearCountdown();
-    showNotificationPopup(false);
-    setSaveTimeout();
-    pingUserActive();
+    schedule();
   });
 };
 
@@ -53,7 +52,11 @@ const startCountdown = () => {
   const startTime = new Date().getTime() + TIMEOUT_NOTICE;
   countdownInterval = setInterval(() => {
     const countdown = startTime - new Date().getTime();
-    if (countdownTimer) {
+    const seconds = Math.floor((countdown % (1000 * 60)) / 1000);
+
+    if (seconds < 0) {
+      window.location.href = `${TIMED_OUT_URL}?lang=${document.documentElement.lang}`;
+    } else if (countdownTimer) {
       countdownTimer.innerHTML = convertToHumanReadableText(countdown);
     }
   }, 1000);
@@ -72,6 +75,7 @@ const showNotificationPopup = (visible: boolean) => {
     notificationPopupIsOpen = true;
     startCountdown();
     trapFocusInModal();
+    saveBeforeSessionTimeout();
   } else {
     notificationPopup?.setAttribute('hidden', 'hidden');
     notificationPopupIsOpen = false;
@@ -124,14 +128,6 @@ const scheduleNotificationPopup = () => {
   notificationTimer = setTimeout(() => showNotificationPopup(true), sessionTimeoutInterval - TIMEOUT_NOTICE);
 };
 
-const setSaveTimeout = () => {
-  scheduleNotificationPopup();
-  clearTimeout(timeout);
-  timeout = setTimeout(() => {
-    saveBeforeSessionTimeout();
-  }, sessionTimeoutInterval);
-};
-
 const pingUserActive = throttle(
   () => {
     fetch(KEEP_ALIVE_URL).then(() => {
@@ -144,9 +140,7 @@ const pingUserActive = throttle(
   { trailing: false }
 );
 
-setTimeout(() => {
-  ['click', 'touchstart', 'mousemove', 'keypress', 'keydown', 'scroll'].forEach(evt =>
-    document.addEventListener(evt, pingUserActive)
-  );
-}, eventTimer);
+['click', 'touchstart', 'mousemove', 'keypress', 'keydown', 'scroll'].forEach(evt =>
+  document.addEventListener(evt, pingUserActive)
+);
 schedule();
