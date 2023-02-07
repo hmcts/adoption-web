@@ -68,6 +68,10 @@ module.exports = {
     await I.wait(2);
     await I.retry(3).click('Start now');
     await I.wait(3);
-    await I.retry(3).see('Apply to adopt a child placed in your care');
+    await I.retry(3).see(
+      childBasicInitialDetails.childFirstNameBeforeAdoption +
+        ' ' +
+        childBasicInitialDetails.childLastNameBeforeAdoption.concat("'s details")
+    );
   },
 };
