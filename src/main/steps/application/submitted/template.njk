@@ -8,19 +8,29 @@
                 <form action="/version-1/check-pay-and-submit/confirmation" method="post" class="form">
                     {{  govukPanel({
                             titleText: title,
-                            html: referenceNumber
+                            html: referenceNumberAndChildName
                         })
                     }}
                     <p class="govuk-body">{{ emailSentConfirmation }}</p>
-                    <h2 class="govuk-heading-m">{{ nextStep }}</h2>
-                    <p class="govuk-body">{{ line1 }}</p>
-                    <p class="govuk-body">{{ line2 | safe }}</p>
                     <p class="govuk-body">
                         <a href="/download-summary?_csrf={{ csrfToken }}" class="govuk-link">{{ printApplication }}</a>
                     </p>
-                    <h2 class="govuk-heading-m">{{ helpUs }}</h2>
-                    <p class="govuk-body">{{ line3 | safe }}</p>
+                    <h2 class="govuk-heading-m">{{ nextStep }}</h2>
+                    <p class="govuk-body">{{ line1 }}</p>
+                    <p class="govuk-body">{{ line2 }}</p>
+                    <p class="govuk-body">{{ line3 }}</p>
+                    <p class="govuk-body">{{ line4 | safe }}</p>
+                    <p class="govuk-body">{{ line5 }}</p>
+                    <h2 class="govuk-heading-m">{{ multipleChildren }}</h2>
+                    <p class="govuk-body">{{ line6 }}</p>
+                    <p class="govuk-body">{{ line7 }}</p>
+                    <p class="govuk-body">{{ line8 }}</p>
+                    <p class="govuk-body">{{ line9 }}</p>
+                    <p class="govuk-body">{{ newApplication | safe }}</p>
                 </form>
+                {% block contactUs %}
+                    {% include "common/form/contactForHelp.njk"%}
+                {% endblock %}
             </div>
         </div>
     </div>
