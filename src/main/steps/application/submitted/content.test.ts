@@ -5,23 +5,36 @@ import { generateContent } from './content';
 
 const enContent = {
   title: 'Application Submitted',
-  referenceNumber: 'Your reference number<br><strong>1234567890123456</strong>',
+  referenceNumberAndChildName:
+    'Your reference number<br><strong>1234567890123456</strong> <br><br><strong>CHILD_FIRST_NAME CHILD_LAST_NAME</strong>',
   emailSentConfirmation:
     'We have sent you a confirmation email. If you have not received this, you should check your junk or spam folder.',
   nextStep: 'What happens next',
   line1:
-    'The court reviews your application and informs the birth parents, if applicable, of your application to adopt. Your personal details are kept strictly confidential.',
+    "Your application is sent to the local authority who will provide details of the child's birth parents and any siblings. They will send your application and a separate adoption report (Annex A) to the court. If you don't receive an email confirming this has been done within 10 working days, contact your social worker.",
   line2:
-    'Once the adoption order is granted, an adoption certificate is created. This replaces the child\'s birth certificate. It can be ordered from the <a href="https://www.gov.uk/general-register-office" class="govuk-link" target="_blank">General Register Office - GOV.UK (www.gov.uk)</a> for a small fee.',
-  printApplication: 'Download or print your application',
-  helpUs: 'Help us improve this service',
+    'The court reviews your application and informs the birth parents, if applicable, of your application to adopt. They might ask the court for leave to oppose. Your social worker should let you know if this happens and how it will affect your application to adopt.',
   line3:
-    'Please help us improve this service by <a  target="_blank" href="https://www.smartsurvey.co.uk/s/SurveyExit/?service=Adoption" class="govuk-link">leaving feedback</a>',
+    'There will be a number of court hearings involving the local authority and social workers. You do not have to attend these. Birth relatives of the child may also attend the hearings.',
+  line4:
+    'Once the adoption order is granted, an adoption certificate is created. This replaces the child\'s birth certificate. It can be ordered from the <a href="https://www.gov.uk/general-register-office" class="govuk-link" target="_blank">General Register Office</a> for a small fee.',
+  line5:
+    'You should contact your social worker for updates on your application. The adoption service cannot provide these.',
+  multipleChildren: 'Adopting more than one child',
+  line6:
+    'If you are applying for more than one child, you must complete and submit a new application for each child. This must be done before midnight on the day you submitted your first application or you will be charged an additional court fee of £183.',
+  line7: 'You will be asked the same questions. This is because each application is treated separately.',
+  line8:
+    'You might find it useful to take a note of each new reference number next to the name of the child you are applying to adopt. The emails you receive will only contain the reference number.',
+  line9: 'You must use the same email address and password for all your applications.',
+  newApplication: 'Start a new application for a different child',
+  printApplication: 'Print your application',
 };
 
 const cyContent = {
   title: 'Cais wedi’i gyflwyno',
-  referenceNumber: 'Eich cyfeirnod<br><strong>1234567890123456</strong>',
+  referenceNumberAndChildName:
+    'Eich cyfeirnod<br><strong>1234567890123456</strong> <br><br><strong>CHILD_FIRST_NAME CHILD_LAST_NAME</strong>',
   emailSentConfirmation:
     'Rydym wedi anfon neges gadarnhau drwy e-bost. Os nad ydych wedi cael y neges hon, dylech wirio eich ffolder sothach neu spam.',
   nextStep: 'Beth fydd yn digwydd nesaf',
@@ -30,13 +43,26 @@ const cyContent = {
   line2:
     'Unwaith y bydd y gorchymyn mabwysiadu yn cael ei ganiatáu, bydd tystysgrif mabwysiadu yn cael ei chreu. Bydd yn disodli tystysgrif geni\'r plentyn Gellir ei harchebu o\'r <a href="https://www.gov.uk/general-register-office" class="govuk-link" target="_blank">Swyddfa Gofrestru Gyffredinol - GOV.UK (www.gov.uk)</a> am ffi fach.',
   printApplication: 'Llwytho eich cais i lawr neu ei argraffu',
-  helpUs: 'Helpwch ni i wella’r gwasanaeth hwn',
-  line3:
-    'Helpwch ni i wella’r gwasanaeth hwn trwy <a  target="_blank" href="https://www.smartsurvey.co.uk/s/SurveyExit/?service=Adoption" class="govuk-link">roi adborth.</a> Diolch.',
+  line3: '',
+  line4: '',
+  line5: '',
+  multipleChildren: '',
+  line6: '',
+  line7: '',
+  line8: '',
+  line9: '',
+  newApplication: '',
 };
 
 describe('application-submmitted > content', () => {
-  const commonContent = { language: 'en', userCase: { hyphenatedCaseRef: '1234567890123456' } } as CommonContent;
+  const commonContent = {
+    language: 'en',
+    userCase: {
+      hyphenatedCaseRef: '1234567890123456',
+      childrenFirstName: 'CHILD_FIRST_NAME',
+      childrenLastName: 'CHILD_LAST_NAME',
+    },
+  } as CommonContent;
 
   test('should return correct english content', () => {
     languageAssertions('en', enContent, () => generateContent(commonContent));
