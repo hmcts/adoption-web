@@ -4,7 +4,7 @@
   <span class="app-task-list__task-name">
     {% if item.href %}
       <a id="{{item.id}}" class="govuk-link" href="{{item.href}}" aria-describedby="{{item.id}}-status">
-        {{item.text}}
+        {{item.text | safe}}
       </a>
     {% else %}
       <p id="{{item.id}}" class="govuk-body govuk-!-margin-bottom-0" aria-describedby="{{item.id}}-status">
