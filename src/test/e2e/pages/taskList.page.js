@@ -1,4 +1,5 @@
 const config = require('../config');
+const childBasicInitialDetails = require('../fixtures/caseData/childBasicDetails');
 
 const { I } = inject();
 
@@ -240,7 +241,11 @@ module.exports = {
   },
 
   async selectReviewAndSubmit() {
-    await I.retry(3).waitForText('Apply to adopt a child placed in your care');
+    await I.retry(3).waitForText(
+      childBasicInitialDetails.childFirstNameBeforeAdoption +
+        ' ' +
+        childBasicInitialDetails.childLastNameBeforeAdoption.concat("'s details")
+    );
     await I.retry(3).click('Review and submit');
     await I.wait(4);
   },

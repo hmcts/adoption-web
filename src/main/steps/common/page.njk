@@ -29,7 +29,7 @@
   {% if laPortal == true %}
     {{ govukHeader({
     containerClasses: "govuk-width-container",
-    serviceName: serviceName,
+    serviceName: applyForAdoptionLaPortal,
     serviceUrl: (globals.basePath if globals.basePath) + "/la-portal/kba-case-ref",
     homepageUrl: "/la-portal/kba-case-ref",
     navigation: []
@@ -37,7 +37,7 @@
   {% else %}
     {{ govukHeader({
       containerClasses: "govuk-width-container",
-      serviceName: serviceName,
+      serviceName: applyForAdoptionCui,
       serviceUrl: (globals.basePath if globals.basePath) + "/",
       navigation: [
         {
