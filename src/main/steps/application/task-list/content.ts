@@ -57,13 +57,19 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
       ...(userCase.applyingWith !== ApplyingWith.ALONE ? [{ text: taskListItems.firstApplicant }] : []),
       {
         id: 'applicant1-personal-details',
-        text: taskListItems.personalDetails,
+        text:
+          userCase.applyingWith !== ApplyingWith.ALONE
+            ? taskListItems.firstApplicantPersonalDetails
+            : taskListItems.personalDetails,
         status: getPersonalDetailsStatus(userCase, FieldPrefix.APPLICANT1),
         href: URL.APPLICANT_1_FULL_NAME,
       },
       {
         id: 'applicant1-contact-details',
-        text: taskListItems.contactDetails,
+        text:
+          userCase.applyingWith !== ApplyingWith.ALONE
+            ? taskListItems.firstApplicantContactDetails
+            : taskListItems.contactDetails,
         status: getContactDetailsStatus(userCase, FieldPrefix.APPLICANT1),
         href: URL.APPLICANT_1_FIND_ADDRESS,
       },
@@ -72,13 +78,19 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
             { text: taskListItems.secondApplicant },
             {
               id: 'applicant2-personal-details',
-              text: taskListItems.personalDetails,
+              text:
+                userCase.applyingWith !== ApplyingWith.ALONE
+                  ? taskListItems.secondApplicantPersonalDetails
+                  : taskListItems.personalDetails,
               status: getPersonalDetailsStatus(userCase, FieldPrefix.APPLICANT2),
               href: URL.APPLICANT_2_FULL_NAME,
             },
             {
               id: 'applicant2-contact-details',
-              text: taskListItems.contactDetails,
+              text:
+                userCase.applyingWith !== ApplyingWith.ALONE
+                  ? taskListItems.secondApplicantContactDetails
+                  : taskListItems.contactDetails,
               status: getContactDetailsStatus(userCase, FieldPrefix.APPLICANT2),
               href: URL.APPLICANT_2_SAME_ADDRESS,
             },
@@ -112,7 +124,7 @@ const en = () => ({
     applicantDetails: "Add applicant's details",
     childDetails: "Add child's details",
     uploadDocuments: 'Upload documents',
-    reviewPayAndSubmit: 'Review, pay and submit',
+    reviewPayAndSubmit: 'Review and submit',
   },
   taskListItems: {
     numberOfApplicants: 'Number of applicants',
@@ -122,6 +134,14 @@ const en = () => ({
     secondApplicant: 'Second applicant',
     personalDetails: 'Your personal details',
     contactDetails: 'Your contact details',
+    firstApplicantPersonalDetails:
+      'Your personal details <span class="govuk-visually-hidden">First applicant personal details</span>',
+    firstApplicantContactDetails:
+      'Your contact details <span class="govuk-visually-hidden">First applicant contact details</span>',
+    secondApplicantPersonalDetails:
+      'Your personal details <span class="govuk-visually-hidden">Second applicant personal details</span>',
+    secondApplicantContactDetails:
+      'Your contact details <span class="govuk-visually-hidden">Second applicant contact details</span>',
     birthCertificate: 'Birth certificate details',
     childDetails: "Child's details",
     birthMother: 'Birth mother details',
@@ -158,6 +178,14 @@ const cy: typeof en = () => ({
     secondApplicant: 'Ail geisydd',
     personalDetails: 'Eich manylion personol',
     contactDetails: 'Eich manylion cyswllt',
+    firstApplicantPersonalDetails:
+      'Eich manylion personol <span class="govuk-visually-hidden">Ceisydd cyntaf manylion personol</span>',
+    firstApplicantContactDetails:
+      'Eich manylion cyswllt <span class="govuk-visually-hidden">Ceisydd cyntaf manylion cyswllt</span>',
+    secondApplicantPersonalDetails:
+      'Eich manylion personol <span class="govuk-visually-hidden">Ail geisydd manylion personol</span>',
+    secondApplicantContactDetails:
+      'Eich manylion cyswllt <span class="govuk-visually-hidden">Ail geisydd manylion cyswllt</span>',
     birthCertificate: 'Manylion y dystysgrif geni',
     childDetails: 'Manylion y plentyn',
     birthMother: 'Manylion y fam fiolegol',
