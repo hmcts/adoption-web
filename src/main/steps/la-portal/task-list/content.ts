@@ -79,7 +79,6 @@ const generateTaskList = (sectionTitles, taskListItems, userCase) => [
 ];
 
 const en = () => ({
-  title: 'Apply to adopt a child placed in your care',
   statuses: {
     [SectionStatus.COMPLETED]: 'Completed',
     [SectionStatus.IN_PROGRESS]: 'In Progress',
@@ -102,7 +101,6 @@ const en = () => ({
 });
 
 const cy: typeof en = () => ({
-  title: 'Gwneud cais i fabwysiadu plentyn a osodwyd yn eich gofal',
   statuses: {
     [SectionStatus.COMPLETED]: 'Wedi cwblhau',
     [SectionStatus.IN_PROGRESS]: 'Yn mynd rhagddo',
@@ -145,9 +143,12 @@ const isLaDetailsNotComplete = (userCase): boolean => {
 
 export const generateContent: TranslationFn = content => {
   const translations = languages[content.language]();
+  const userCase = content.userCase;
+  const suffix = content.language === 'en' ? "'s details" : "'s manylion";
   return {
     ...translations,
-    sections: generateTaskList(translations.sectionTitles, translations.taskListItems, content.userCase),
-    isIncomplete: isLaDetailsNotComplete(content.userCase),
+    title: userCase!.childrenFirstName + ' ' + userCase!.childrenLastName + suffix,
+    sections: generateTaskList(translations.sectionTitles, translations.taskListItems, userCase),
+    isIncomplete: isLaDetailsNotComplete(userCase),
   };
 };

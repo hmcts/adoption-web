@@ -6,7 +6,6 @@ import { CommonContent } from '../../common/common.content';
 import { generateContent } from './content';
 
 const enContent = {
-  title: 'Apply to adopt a child placed in your care',
   statuses: {
     [SectionStatus.COMPLETED]: 'Completed',
     [SectionStatus.IN_PROGRESS]: 'In Progress',
@@ -28,7 +27,6 @@ const enContent = {
 };
 
 const cyContent = {
-  title: 'Gwneud cais i fabwysiadu plentyn a osodwyd yn eich gofal',
   statuses: {
     [SectionStatus.COMPLETED]: 'Wedi cwblhau',
     [SectionStatus.IN_PROGRESS]: 'Yn mynd rhagddo',
