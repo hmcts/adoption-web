@@ -83,10 +83,6 @@ export class OidcMiddleware {
             }
           }
           if (req.path !== HOME_URL && !req.path.startsWith(APPLYING_WITH_URL)) {
-            console.log('req.path: ' + req.path);
-
-            console.log('Inside If COndition with req.session.userCase: ' + req.session.userCase);
-
             if (!req.session.userCase) {
               req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
             }
