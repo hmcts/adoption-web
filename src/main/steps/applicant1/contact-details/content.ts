@@ -10,9 +10,10 @@ const en = content => ({
   line2:
     'We will email you updates and information about your application to adopt. You will only be contacted by telephone if the social worker or court staff need to contact you quickly.',
   emailAddress: 'Email address',
-  phoneNumber: 'UK Phone number',
+  phoneNumber: 'UK phone number',
   applicant1ContactDetailsConsent:
     'The court may want to use your email to serve you court orders. Are you happy to be served court orders by email?',
+  contactDetailsConsentNo: 'You will be served all court orders by post.',
   errors: {
     applicant1ContactDetailsConsent: {
       required: 'Select whether you are happy to be served court orders by email.',
@@ -38,6 +39,7 @@ const cy: typeof en = content => ({
   phoneNumber: 'Rhif ffôn yn y DU',
   applicant1ContactDetailsConsent:
     'Efallai bydd y llys eisiau defnyddio eich cyfeiriad e-bost i gyflwyno gorchmynion llys arnoch, A ydych yn hapus i neuchmynion llys gael eu cyflwyno arnoch drwy e-bost?',
+  contactDetailsConsentNo: '',
   errors: {
     applicant1ContactDetailsConsent: {
       required: 'Dewiswch a ydych yn hapus i gael eich gorchmynion llys drwy e-bost.',
@@ -84,7 +86,11 @@ export const form: FormContent = {
       labelSize: 'small',
       values: [
         { label: l => l.yes, value: YesOrNo.YES },
-        { label: l => l.no, value: YesOrNo.NO },
+        {
+          label: l => l.no,
+          value: YesOrNo.NO,
+          conditionalText: l => `<p class="govuk-label">${l.contactDetailsConsentNo}</p>`,
+        },
       ],
       validator: isFieldFilledIn,
     },
