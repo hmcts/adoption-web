@@ -11,6 +11,7 @@ module.exports = {
     livedUKEligible: '#livedUKEligible',
     domicileEligible: '#domicileEligible',
     submitButton: 'input[value="Sign in"]',
+    adoptMoreThanOneChildNo: '#multipleChildrenEligible-2',
   },
 
   async createUserAndSignIn() {
@@ -29,6 +30,11 @@ module.exports = {
     await I.retry(3).goToPage(config.baseUrl + 'eligibility/start');
     await I.wait(2);
     await I.retry(3).click('Start now');
+    await I.wait(2);
+    I.retry(3).see('Are you applying to adopt more than one child?');
+    I.retry(3).click(this.fields.adoptMoreThanOneChildNo);
+    await I.retry(3).click('Save and continue');
+    await I.wait(2);
     await I.retry(3).click(this.fields.under18Eligible);
     await I.retry(3).click('Save and continue');
     await I.retry(3).click(this.fields.marriedEligible);
