@@ -1,19 +1,16 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 
 const en = content => ({
-  title: 'Your response to the application has been submitted',
-  referenceNumber: `Case number<br><strong>${content.userCase.hyphenatedCaseRef}</strong>`,
-  emailSentConfirmation:
-    'An email will be sent to the applicants to let them know that their application is with the court.',
+  title: 'Your application has been submitted',
+  referenceNumber: `Application reference number<br><strong>${content.userCase.hyphenatedCaseRef}</strong>`,
+  emailSentConfirmation: 'We have sent a confirmation email to the email addresses registered. ',
   line1:
-    'We have also sent a confirmation email to the registered email addresses of the local authority for the applicant and the local authority for the child. These email addresses were provided by the applicant.',
-  line2: 'The email gives more detailed information about the timeline and what happens next.',
-  line3:
-    'The application will now be sent to the court for processing. If you did not upload Annex A as part of the evidence for the application, you should do this as soon as possible to prevent delays.',
-  line4: 'Sign into the',
-  documentUploadService: 'document upload service',
-  line5: 'to submit the annex and any additional evidence.',
-  line6: 'You will get a copy of the full application once the court starts to process it.',
+    'The application will now be sent to the court for processing. If you did not upload the Annex A as part of the evidence for the application, you should do this as soon possible to prevent delays and reminders from being sent. ',
+  line2:
+    'If you cannot upload the Annex A within 10 working days from when you submitted the application, you can email it directly to the court.',
+  line3: 'An email will be sent to the applicants to let them know that their application is with the court.',
+  line4:
+    'You should discuss any attendance at the hearings with the applicants. Particularly if there is a risk that the birth parents may be there.',
 });
 
 const cy: typeof en = content => ({
@@ -27,9 +24,6 @@ const cy: typeof en = content => ({
   line3:
     "Bydd y cais nawr yn cael ei anfon i'r llys i’w brosesu. Os na wnaethoch lwytho Atodiad A fel rhan o'r dystiolaeth ar gyfer y cais, dylech wneud hyn cyn gynted â phosibl er mwyn atal oedi.",
   line4: 'Mewngofnodwch i’r',
-  documentUploadService: 'gwasanaeth uwchlwytho dogfennau',
-  line5: 'er mwyn cyflwyno’r atodiad ac unrhyw dystiolaeth ychwanegol.',
-  line6: "Fe gewch chi gopi o'r cais llawn unwaith y bydd y llys yn dechrau ei brosesu.",
 });
 
 const languages = {
