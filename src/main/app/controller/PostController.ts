@@ -8,6 +8,7 @@ import {
 } from '../../modules/draft-store/draft-store-service';
 import { getNextStepUrl } from '../../steps';
 import {
+  APPLYING_WITH_URL,
   CHECK_ANSWERS_URL,
   LA_PORTAL,
   LA_PORTAL_CHECK_YOUR_ANSWERS,
@@ -37,6 +38,10 @@ export class PostController<T extends AnyObject> {
     const form = new Form(fields);
 
     const { saveAndSignOut, saveBeforeSessionTimeout, _csrf, ...formData } = form.getParsedBody(req.body);
+
+    if (!req.session.userCase && req.path.startsWith(APPLYING_WITH_URL)) {
+      req.session.userCase = await req.locals.api.getOrCreateCase(res.locals.serviceType, req.session.user);
+    }
 
     if (req.body.saveAndSignOut) {
       await this.saveAndSignOut(req, res, formData);

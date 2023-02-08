@@ -7,6 +7,7 @@ import { getCaseApi } from '../../app/case/CaseApi';
 import { AppRequest } from '../../app/controller/AppRequest';
 import {
   ACCESSIBILITY_STATEMENT,
+  APPLYING_WITH_URL,
   CALLBACK_URL,
   CONTACT_US,
   COOKIES_PAGE,
@@ -76,9 +77,23 @@ export class OidcMiddleware {
           res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
           if (!req.session.userCase) {
-            req.session.userCase = await req.locals.api.getOrCreateCase(res.locals.serviceType, req.session.user);
+            const userCase = await req.locals.api.getCase();
+            if (userCase) {
+              req.session.userCase = userCase;
+            }
           }
-          return next();
+          if (req.path !== HOME_URL && !req.path.startsWith(APPLYING_WITH_URL)) {
+            console.log('req.path: ' + req.path);
+
+            console.log('Inside If COndition with req.session.userCase: ' + req.session.userCase);
+
+            if (!req.session.userCase) {
+              req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
+            }
+            return next();
+          } else {
+            return next();
+          }
         }
         res.redirect(SIGN_IN_URL);
       })
