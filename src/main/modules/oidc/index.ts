@@ -83,9 +83,11 @@ export class OidcMiddleware {
             }
           }
           if (req.path !== HOME_URL && !req.path.startsWith(APPLYING_WITH_URL)) {
-            if (!req.session.userCase) {
+            // Commented out restricting case creation to happen only from Applying-With page submission
+            /* if (!req.session.userCase) {
               req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
-            }
+            } */
+
             return next();
           } else {
             return next();
