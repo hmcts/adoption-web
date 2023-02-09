@@ -14,6 +14,7 @@ import {
   LA_PORTAL_CHECK_YOUR_ANSWERS,
   LA_PORTAL_STATEMENT_OF_TRUTH,
   LA_PORTAL_TASK_LIST,
+  SAVE_AND_RELOGIN,
   SAVE_AND_SIGN_OUT,
   SAVE_AS_DRAFT,
 } from '../../steps/urls';
@@ -37,14 +38,24 @@ export class PostController<T extends AnyObject> {
     const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
     const form = new Form(fields);
 
-    const { saveAndSignOut, saveBeforeSessionTimeout, _csrf, ...formData } = form.getParsedBody(req.body);
+    const { saveAndRelogin, saveAndSignOut, saveBeforeSessionTimeout, _csrf, ...formData } = form.getParsedBody(
+      req.body
+    );
 
     if (!req.session.userCase && req.path.startsWith(APPLYING_WITH_URL)) {
       req.session.userCase = await req.locals.api.getOrCreateCase(res.locals.serviceType, req.session.user);
     }
 
+    if (req.body.saveAndRelogin) {
+      req.session.destroy(err => {
+        if (err) {
+          throw err;
+        }
+      });
+      await this.saveAndSignOut(req, res, formData, SAVE_AND_RELOGIN);
+    }
     if (req.body.saveAndSignOut) {
-      await this.saveAndSignOut(req, res, formData);
+      await this.saveAndSignOut(req, res, formData, SAVE_AND_SIGN_OUT);
     } else if (req.body.saveBeforeSessionTimeout) {
       await this.saveBeforeSessionTimeout(req, res, formData);
     } else {
@@ -52,13 +63,18 @@ export class PostController<T extends AnyObject> {
     }
   }
 
-  private async saveAndSignOut(req: AppRequest<T>, res: Response, formData: Partial<Case>): Promise<void> {
+  private async saveAndSignOut(
+    req: AppRequest<T>,
+    res: Response,
+    formData: Partial<Case>,
+    redirectUrl: string
+  ): Promise<void> {
     try {
       await this.save(req, formData, CITIZEN_SAVE_AND_CLOSE);
     } catch {
       // ignore
     }
-    res.redirect(SAVE_AND_SIGN_OUT);
+    res.redirect(redirectUrl);
   }
 
   private async saveBeforeSessionTimeout(req: AppRequest<T>, res: Response, formData: Partial<Case>): Promise<void> {
