@@ -83,6 +83,9 @@ ADOP-1231-LAPortal-Welsh-Translation starts #}
   {% block backLink %}
     <a href="#" class="govuk-back-link">{{ back }}</a>
   {% endblock %}
+    {% block modal %}
+      {% include "./timeout-dialog.njk" %}
+    {% endblock %}
 {% endblock %}
 
 {% block content %}

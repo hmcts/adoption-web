@@ -166,6 +166,7 @@ export const TERMS_AND_CONDITIONS: PageLink = '/terms-and-conditions';
 export const CONTACT_US: PageLink = '/contact-us';
 
 export const SAVE_AS_DRAFT: PageLink = '/save-as-draft';
+export const SAVE_AND_RELOGIN: PageLink = '/save-and-relogin';
 
 /*********************************** LA PORTAL URLS ***********************************/
 export const LA_PORTAL = '/la-portal';
