@@ -32,9 +32,10 @@ const enContent = {
   line2:
     'We will email you updates and information about your application to adopt. You will only be contacted by telephone if the social worker or court staff need to contact you quickly.',
   emailAddress: 'Email address',
-  phoneNumber: 'UK Phone number',
+  phoneNumber: 'UK phone number',
   applicant1ContactDetailsConsent:
     'The court may want to use your email to serve you court orders. Are you happy to be served court orders by email?',
+  contactDetailsConsentNo: 'You will be served all court orders by post.',
   errors: {
     applicant1ContactDetailsConsent: {
       required: 'Select whether you are happy to be served court orders by email.',
@@ -134,6 +135,10 @@ describe('applicant1 > contact-details > content', () => {
         never
       >)
     ).toBe(YesOrNo.NO);
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    expect((applicant1ContactDetailsConsentOptions.values[1].conditionalText as Function)(generatedContent)).toBe(
+      '<p class="govuk-label">You will be served all court orders by post.</p>'
+    );
     expect(applicant1ContactDetailsConsentField.validator).toBe(isFieldFilledIn);
 
     expect(applicant1EmailAddressField.type).toBe('text');
