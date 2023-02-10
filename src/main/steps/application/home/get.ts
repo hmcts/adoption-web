@@ -1,6 +1,7 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
+import { getCaseApi } from '../../../app/case/CaseApi';
 import { Case } from '../../../app/case/case';
 import { State } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
@@ -20,12 +21,24 @@ import { form as applicant1FirstQuestionForm } from '../applying-with/content';
 @autobind
 export default class HomeGetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
-    const firstQuestionForm = getApplicantFirstQuestionForm();
-    const isFirstQuestionComplete = firstQuestionForm.getErrors(req.session.userCase).length === 0;
-
-    res.redirect(
-      applicant1RedirectPageSwitch(req.session.userCase.state, req.session.userCase, isFirstQuestionComplete)
-    );
+    if (!req.session.userCase) {
+      req.locals.api = getCaseApi(req.session.user, req.locals.logger);
+      const userCase = await req.locals.api.getCase();
+      if (userCase) {
+        req.session.userCase = userCase;
+        const firstQuestionForm = getApplicantFirstQuestionForm();
+        const isFirstQuestionComplete = firstQuestionForm.getErrors(req.session.userCase).length === 0;
+        res.redirect(multipleChildrenRedirectPageSwitch(isFirstQuestionComplete));
+      } else {
+        res.redirect(multipleChildrenRedirectPageSwitch(false));
+      }
+    } else {
+      const firstQuestionForm = getApplicantFirstQuestionForm();
+      const isFirstQuestionComplete = firstQuestionForm.getErrors(req.session.userCase).length === 0;
+      res.redirect(
+        applicant1RedirectPageSwitch(req.session.userCase.state, req.session.userCase, isFirstQuestionComplete)
+      );
+    }
   }
 }
 
@@ -59,6 +72,10 @@ const applicant1RedirectPageSwitch = (caseState: State, userCase: Partial<Case>,
       return isFirstQuestionComplete ? TASK_LIST_URL : APPLYING_WITH_URL;
     }
   }
+};
+
+const multipleChildrenRedirectPageSwitch = (isFirstQuestionComplete: boolean) => {
+  return isFirstQuestionComplete ? TASK_LIST_URL : APPLYING_WITH_URL;
 };
 
 const getApplicantFirstQuestionForm = () => {
