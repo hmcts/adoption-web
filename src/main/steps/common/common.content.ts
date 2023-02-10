@@ -5,6 +5,7 @@ import { Fee, State } from '../../app/case/definition';
 import { Eligibility } from '../../app/controller/AppRequest';
 import { PageContent, TranslationFn } from '../../app/controller/GetController';
 import { CourtVenue } from '../../app/court/location';
+import { SAVE_AND_RELOGIN } from '../../steps/urls';
 
 const en = {
   phase: 'Beta',
@@ -115,6 +116,16 @@ const en = {
   apmCookiesHeadings: 'Allow cookies that measure website application performance monitoring?',
   useApmCookies: 'Use cookies that measure website application performance monitoring',
   doNotUseApmCookies: 'Do not use cookies that measure website application performance monitoring',
+  timeout: {
+    title: 'You are about to be signed out',
+    part1: 'You are going to be signed out of your application in',
+    part2: 'because of inactivity. This is to protect your personal information.',
+    buttonText: 'Continue with your application',
+    twoMinutes: '2 minutes',
+    minutes: 'minute',
+    seconds: 'seconds',
+  },
+  saveAndReloginLink: SAVE_AND_RELOGIN,
 };
 
 const cy: typeof en = {
@@ -221,6 +232,16 @@ const cy: typeof en = {
   apmCookiesHeadings: "Caniatáu cwcis sy'n mesur monitro perfformiad cymwysiadau gwefan?",
   useApmCookies: "Defnyddio cwcis sy'n mesur monitro perfformiad cymwysiadau gwefan",
   doNotUseApmCookies: "Peidiwch â defnyddio cwcis sy'n mesur monitro perfformiad cymwysiadau gwefan",
+  timeout: {
+    title: 'Rydych ar fin cael eich allgofnodi',
+    part1: "Rydych yn mynd i gael eich allgofnodi o'ch cais i mewn",
+    part2: 'oherwydd anweithgarwch. Mae hyn er mwyn diogelu eich gwybodaeth bersonol.',
+    buttonText: "Parhewch â'ch cais",
+    twoMinutes: '2 munudau',
+    minutes: 'munud',
+    seconds: 'eiliadau',
+  },
+  saveAndReloginLink: SAVE_AND_RELOGIN,
 };
 
 export const generatePageContent = ({
