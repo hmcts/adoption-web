@@ -31,20 +31,52 @@ export class CaseApi {
   public async getCase(): Promise<CaseWithId | false> {
     const cases = await this.getCases();
 
-    switch (cases.length) {
-      case 0: {
+    if (cases.length === 0) {
+      return false;
+    }
+
+    cases.forEach(element => {
+      console.log('CASE ID: ', element.id);
+      console.log('CASE Date: ', element.case_data.dateSubmitted);
+    });
+
+    if (
+      cases.filter(caseElement => caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted)
+        .length === cases.length
+    ) {
+      if (
+        cases.filter(caseElement => new Date(caseElement.case_data.dateSubmitted).getDay() === new Date().getDay())
+          .length !== 0
+      ) {
+        const {
+          id,
+          state,
+          case_data: caseData,
+        } = cases
+          .filter(caseElement => new Date(caseElement.case_data.dateSubmitted).getDay() === new Date().getDay())
+          .sort((a, b) => {
+            return a.case_data.dateSubmitted >= b.case_data.dateSubmitted ? -1 : 1;
+          })[0];
+
+        return { ...fromApiFormat(caseData), id: id.toString(), state };
+      } else {
         return false;
       }
-      case 1: {
-        const { id, state, case_data: caseData } = cases[0];
-        return { ...fromApiFormat(caseData), id: id.toString(), state };
-      }
-      default: {
-        //throw new Error('Too many cases assigned to user.');
-        const { id, state, case_data: caseData } = cases[0];
-        return { ...fromApiFormat(caseData), id: id.toString(), state };
-      }
     }
+
+    if (
+      !(
+        cases.filter(caseElement => caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted)
+          .length ===
+        cases.length - 1
+      ) &&
+      cases.filter(caseElement => caseElement.state === State.Draft).length === 1
+    ) {
+      throw new Error("Not all OR few cases assigned to the user aren't in right state.");
+    }
+
+    const { id, state, case_data: caseData } = cases.filter(caseElement => caseElement.state === State.Draft)[0];
+    return { ...fromApiFormat(caseData), id: id.toString(), state };
   }
 
   public async getCases(): Promise<CcdV1Response[]> {
