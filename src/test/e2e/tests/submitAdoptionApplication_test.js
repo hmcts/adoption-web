@@ -73,6 +73,7 @@ Scenario(
     await dateChildMovedinDetailsPage.editDateChildMovedInSection();
     await reviewPayAndSubmitPage.reviewYourAnswersAndContinue();
     await reviewPayAndSubmitPage.statementOfTruthDetailsSection();
+    await reviewPayAndSubmitPage.reviewAndPay();
     await reviewPayAndSubmitPage.adoptionCourtFeesByCard();
     const caseId = await reviewPayAndSubmitPage.getCaseIDAfterAplicationSubmit();
 
