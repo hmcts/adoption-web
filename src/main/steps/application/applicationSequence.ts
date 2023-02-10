@@ -50,4 +50,8 @@ export const applicationSequence: Step[] = [
     url: Urls.SAVE_AS_DRAFT,
     getNextStep: () => Urls.TASK_LIST_URL,
   },
+  {
+    url: Urls.SAVE_AND_RELOGIN,
+    getNextStep: () => Urls.SIGN_IN_URL,
+  },
 ];
