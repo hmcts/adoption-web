@@ -32,7 +32,7 @@ const en = () => {
     orStr: 'or',
     dragDropHere: 'Drag and drop files here',
     fileFormats: 'The file must be in jpg, png, pdf, doc/docx or tif format.',
-    fileSize: 'Maximum file size 25MB.',
+    fileSize: 'Maximum file size 50MB.',
     cannotUploadDocuments: 'I cannot upload some or all of my documents',
     cannotUploadYouCanPost:
       '<p class="govuk-body govuk-!-margin-top-5">To avoid delays you should post or email your documents to the court. If you post them you must send the original documents or certified copies.<br><br>Continue with your application.</p>',
@@ -44,7 +44,7 @@ const en = () => {
           'You have not provided any information or uploaded any documents. You need to provide the information or documents the court has requested. Or if you are going to post any documents in, select that option.',
         errorUploading:
           'Your file was not uploaded because the service is experiencing technical issues. Try uploading your file again.',
-        fileSizeTooBig: 'The file you have uploaded is too large. Reduce it to under 25MB and try uploading it again.',
+        fileSizeTooBig: 'The file you have uploaded is too large. Reduce it to under 50MB and try uploading it again.',
         fileWrongFormat:
           'You cannot upload that format of file. Save the file as one of the accepted formats and try uploading it again.',
         [ValidationError.FILE_COUNT_LIMIT_EXCEEDED]: 'You can upload maximum 10 files.',
@@ -85,7 +85,7 @@ const cy = () => {
     orStr: 'neu',
     dragDropHere: 'Llusgwch a gollyngwch ffeiliau yma',
     fileFormats: 'Rhaid i’r ffeil fod ar ffurf jpg, png, pdf, doc/docx neu fformat tif.',
-    fileSize: 'Caniateir ichi lwytho ffeil sydd hyd at 25MB o ran maint.',
+    fileSize: 'Caniateir ichi lwytho ffeil sydd hyd at 50MB o ran maint.',
     cannotUploadDocuments: 'Ni allaf lwytho rhai o fy nogfennau / fy holl ddogfennau.',
     cannotUploadYouCanPost:
       '<p class="govuk-body govuk-!-margin-top-5">Er mwyn osgoi oedi dylech bostio neu e-bostio eich dogfennau i\'r llys. Os ydych yn eu postio, rhaid ichi anfon y dogfennau gwreiddiol neu gopïau wedi’u hardystio.<br><br>Parhau â’ch cais.</p>',
