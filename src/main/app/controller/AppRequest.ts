@@ -43,6 +43,7 @@ export interface UserDetails {
 }
 
 export interface Eligibility {
+  multipleChildrenEligible?: string;
   under18Eligible?: string;
   marriedEligible?: string;
   livedUKEligible?: string;

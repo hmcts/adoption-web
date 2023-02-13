@@ -89,6 +89,12 @@ module.exports = {
     await I.wait(4);
   },
 
+  async reviewAndPay() {
+    await I.retry(3).see('Pay and submit');
+    await I.retry(3).click('Pay and submit application');
+    await I.wait(4);
+  },
+
   async adoptionCourtFeesByCard() {
     await I.wait(30);
     await I.retry(3).waitForText('Enter card details', 30);

@@ -76,8 +76,15 @@ export class OidcMiddleware {
           res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
           if (!req.session.userCase) {
-            req.session.userCase = await req.locals.api.getOrCreateCase(res.locals.serviceType, req.session.user);
+            const userCase = await req.locals.api.getCase();
+            if (userCase) {
+              req.session.userCase = userCase;
+            }
           }
+          // Commented out restricting case creation to happen only from Applying-With page submission
+          /* if (!req.session.userCase) {
+            req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
+          } */
           return next();
         }
         res.redirect(SIGN_IN_URL);
