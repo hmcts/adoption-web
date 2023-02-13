@@ -144,6 +144,7 @@ export const BIRTH_FATHER_OCCUPATION: PageLink = `${BIRTH_FATHER}/occupation`;
 
 export const REVIEW_PAY_SUBMIT: PageLink = '/review-pay-submit';
 export const CHECK_ANSWERS_URL: PageLink = `${REVIEW_PAY_SUBMIT}/check-your-answers`;
+export const PAY_AND_SUBMIT_URL: PageLink = `${REVIEW_PAY_SUBMIT}/pay-and-submit`;
 export const PAY_YOUR_FEE: PageLink = `${REVIEW_PAY_SUBMIT}/payment/pay-your-fee`;
 export const PAYMENT_CALLBACK_URL: PageLink = `${REVIEW_PAY_SUBMIT}/payment/payment-callback`;
 
