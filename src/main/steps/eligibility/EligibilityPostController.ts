@@ -5,6 +5,7 @@ import { AppRequest } from '../../app/controller/AppRequest';
 import { AnyObject } from '../../app/controller/PostController';
 import { Form, FormFields } from '../../app/form/Form';
 import { getNextEligibilityStepUrl } from '../../steps';
+import { HOME_URL, SIGN_IN_URL } from '../../steps/urls';
 
 @autobind
 export default class EligibilityPostController<T extends AnyObject> {
@@ -23,13 +24,22 @@ export default class EligibilityPostController<T extends AnyObject> {
     Object.assign(req.session.eligibility, formData);
     req.session.errors = form.getErrors(formData);
 
-    const nextUrl = req.session.errors.length > 0 ? req.url : getNextEligibilityStepUrl(req, req.session.eligibility);
-
-    req.session.save(err => {
-      if (err) {
-        throw err;
-      }
-      res.redirect(nextUrl);
-    });
+    let nextUrl = req.session.errors.length > 0 ? req.url : getNextEligibilityStepUrl(req, req.session.eligibility);
+    if (nextUrl === SIGN_IN_URL && req.session?.user) {
+      nextUrl = HOME_URL;
+      req.session.save(err => {
+        if (err) {
+          throw err;
+        }
+        res.redirect(nextUrl);
+      });
+    } else {
+      req.session.save(err => {
+        if (err) {
+          throw err;
+        }
+        res.redirect(nextUrl);
+      });
+    }
   }
 }
