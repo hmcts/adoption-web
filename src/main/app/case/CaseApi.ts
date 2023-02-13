@@ -28,7 +28,7 @@ export class CaseApi {
     return userCase || this.createCase(serviceType, userDetails);
   }
 
-  private async getCase(): Promise<CaseWithId | false> {
+  public async getCase(): Promise<CaseWithId | false> {
     const cases = await this.getCases();
 
     switch (cases.length) {
@@ -40,7 +40,9 @@ export class CaseApi {
         return { ...fromApiFormat(caseData), id: id.toString(), state };
       }
       default: {
-        throw new Error('Too many cases assigned to user.');
+        //throw new Error('Too many cases assigned to user.');
+        const { id, state, case_data: caseData } = cases[0];
+        return { ...fromApiFormat(caseData), id: id.toString(), state };
       }
     }
   }
@@ -78,7 +80,7 @@ export class CaseApi {
     }
   }
 
-  private async createCase(serviceType: Adoption, userDetails: UserDetails): Promise<CaseWithId> {
+  public async createCase(serviceType: Adoption, userDetails: UserDetails): Promise<CaseWithId> {
     const tokenResponse: AxiosResponse<CcdTokenResponse> = await this.axios.get(
       `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
     );
