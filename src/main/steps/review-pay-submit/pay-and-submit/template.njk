@@ -1,0 +1,23 @@
+{% extends "common/page.njk" %}
+{% block content %}
+<div class="govuk-width-container">
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+
+        <span class="govuk-caption-l">{{ section }}</span>
+        <h1 class="govuk-heading-l">{{ title }}</h1>
+
+        <p class="govuk-body">{{ line1 }}</p>
+        <p class="govuk-body">{{ line2 }}</p>
+        <p class="govuk-body">{{ line3 }}</p>
+
+         <a href="/review-pay-submit/payment/pay-your-fee" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
+          {{payandsubmit}}
+        </a>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
