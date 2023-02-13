@@ -25,7 +25,7 @@ const enContent = {
   no: 'No - I do not need any extra support at this time',
   errors: {
     applicant1HasReasonableAdjustment: {
-      required: 'Choose whether you need an extra support',
+      required: 'Select no if you do not need any extra support',
     },
     applicant1ReasonableAdjustmentDetails: {
       required: 'Give details of the support you need',
@@ -51,7 +51,7 @@ const cyContent = {
   no: 'Na - nid oes angen unrhyw gymorth ychwanegol arnaf ar hyn o bryd',
   errors: {
     applicant1HasReasonableAdjustment: {
-      required: 'Dewiswch a oes angen cymorth ychwanegol arnoch',
+      required: 'Dewiswch na os nad oes angen unrhyw gymorth ychwanegol arnoch',
     },
     applicant1ReasonableAdjustmentDetails: {
       required: 'Rhowch fanylion y cymorth sydd ei angen arnoch',
