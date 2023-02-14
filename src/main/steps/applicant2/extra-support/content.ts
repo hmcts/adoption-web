@@ -16,6 +16,8 @@ const en = content => ({
                 <li>access and mobility support if a hearing takes place in person </li>
               </ul>`,
   },
+  question1:
+    'Do you have a physical, mental or learning disability or long term health condition that means you need support during your case?',
   yes: 'Yes',
   textAreaHint: 'You can describe to us what you need',
   adjustmentDetailTextLabel: 'Tell us what support you need to request',
@@ -32,27 +34,29 @@ const en = content => ({
 
 //eslint-disable-next-line @typescript-eslint/no-unused-vars
 const cy: typeof en = content => ({
-  title: 'Cefnogaeth ychwanegol yn ystod eich achos',
-  hint: "Gwyddom fod angen cymorth ar rai pobl i gael mynediad at wybodaeth a defnyddio ein gwasanaethau. Rydym yn aml yn galw hyn yn addasiad rhesymol. Mae angen i’r barnwr neu GLlTEM gytuno ar rai addasiadau rhesymol. Gallwch drafod gyda'r tribiwnlys os bydd eich anghenion yn newid.",
+  title: 'Cymorth ychwanegol yn ystod eich achos',
+  hint: 'Gwyddwn fod rhai pobl angen cymorth i gael mynediad at wybodaeth ac i ddefnyddio ein gwasanaethau. Gelwir hyn yn aml yn addasiad rhesymol. Rhaid i rai addasiadau rhesymol gael eu cytuno arnynt gan farnwr neu GLlTEF. Gallwch drafod gyda’r llys os bydd eich anghenion yn newid.',
   details: {
-    summaryText: 'Pa gefnogaeth sydd ar gael?',
+    summaryText: 'Pa gymorth sydd ar gael?',
     html: `Gall addasiadau rhesymol gynnwys:</p>
-              <ul class="govuk-list govuk-list--bullet">
-                <li>dogfennau mewn fformatau, lliwiau a ffontiau amgen </li>
-                <li>cymorth gyda chyfathrebu, golwg, clyw, siarad a dehongli </li>
-                <li>cymorth mynediad a symudedd os cynhelir gwrandawiad yn bersonol </li>
-              </ul>`,
+                <ul class="govuk-list govuk-list--bullet">
+                  <li>dogfennau mewn fformatau, lliwiau a ffontiau eraill </li>
+                  <li>help i gyfathrebu, gweld, gwrando, siarad neu gymorth gan gyfieithydd/dehonglydd </li>
+                  <li>cymorth gyda mynediad a symudedd, os bydd gwrandawiad yn cael ei gynnal wyneb yn wyneb </li>
+                </ul>`,
   },
+  question1:
+    'A oes gennych anabledd corfforol, meddyliol neu addysgol neu gyflwr iechyd sy’n golygu bod angen cymorth arnoch yn ystod eich achos?',
   yes: 'Oes',
-  textAreaHint: 'Gallwch ddisgrifio i ni beth sydd ei angen arnoch chi',
-  adjustmentDetailTextLabel: 'Dywedwch wrthym pa gymorth sydd ei angen arnoch',
-  no: 'Na - nid oes angen unrhyw gymorth ychwanegol arnaf ar hyn o bryd',
+  textAreaHint: 'Gallwch ddisgrifio beth sydd ei angen arnoch',
+  adjustmentDetailTextLabel: 'Dywedwch wrthym pa gymorth sydd angen i chi ofyn amdano',
+  no: 'Nac oes, nid oes arnaf angen unrhyw gymorth ar hyn o bryd',
   errors: {
     applicant2HasReasonableAdjustment: {
-      required: 'Dewiswch na os nad oes angen unrhyw gymorth ychwanegol arnoch',
+      required: 'Dewiswch nac oes os nad ydych angen unrhyw gymorth ychwanegol',
     },
     applicant2ReasonableAdjustmentDetails: {
-      required: 'Rhowch fanylion y cymorth sydd ei angen arnoch',
+      required: 'Rhowch fanylion y gefnogaeth y mae arnoch ei hangen',
     },
   },
 });
