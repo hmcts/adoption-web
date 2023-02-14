@@ -99,8 +99,12 @@ describe('CaseApi', () => {
     expect(mockLogger.error).toHaveBeenCalledWith('API Error POST https://example.com');
   });
 
-  test('Should throw an error if more than one cases are found', async () => {
-    const mockCase = { case_data: {} };
+  test('Should not throw an error if more than one cases are found', async () => {
+    const mockCase = {
+      id: '1',
+      state: State.Draft,
+      case_data: {},
+    };
 
     // mockedAxios.get.mockResolvedValue({
     //   data: [mockCase, mockCase, mockCase],
@@ -109,7 +113,12 @@ describe('CaseApi', () => {
       data: { cases: [mockCase, mockCase, mockCase] },
     });
 
-    await expect(api.getOrCreateCase(serviceType, userDetails)).rejects.toThrow('Too many cases assigned to user.');
+    const userCase = await api.getOrCreateCase(serviceType, userDetails);
+
+    expect(userCase).toStrictEqual({
+      id: '1',
+      state: State.Draft,
+    });
   });
 
   test('Should retrieve the first case if two cases found', async () => {
