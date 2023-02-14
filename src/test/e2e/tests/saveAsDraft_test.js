@@ -65,12 +65,14 @@ Scenario(
 
     await taskListPage.selectFirstApplicantPersonalDetails();
     await primaryApplicantPersonalDetailsPage.primaryApplicantPersonalDetailsSection();
+    await primaryApplicantPersonalDetailsPage.additionalDetailsForApplicant1();
     await taskListPage.verifyPrimaryApplicantPersonalDetailsStatus();
 
     await taskListPage.selectReviewPayAndSubmitDetails();
     await reviewPayAndSubmitPage.selectNoPCQOption();
     await reviewPayAndSubmitPage.reviewYourAnswersAndContinue();
     await reviewPayAndSubmitPage.statementOfTruthDetailsSectionForSingleApplicant();
+    await reviewPayAndSubmitPage.reviewPay();
     await reviewPayAndSubmitPage.adoptionCourtFeesByCard();
     const caseId = await reviewPayAndSubmitPage.getCaseIDAfterAplicationSubmit();
 

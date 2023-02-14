@@ -136,4 +136,10 @@ module.exports = {
     await I.retry(3).click('Confirm');
     await I.wait(4);
   },
+
+  async reviewPay() {
+    await I.retry(3).see('Pay and submit');
+    await I.retry(3).click('Pay and submit application');
+    await I.wait(4);
+  },
 };

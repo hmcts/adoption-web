@@ -1,5 +1,6 @@
 const { I } = inject();
 const primaryApplicantPersonalDetails = require('../fixtures/caseData/primaryApplicantPersonalDetails');
+const extraSupportDetails = require('../fixtures/caseData/extraSupportDetails');
 
 module.exports = {
   fields: {
@@ -12,6 +13,10 @@ module.exports = {
     dateOfBirthMonth: 'input[id$="applicant1DateOfBirth-month"]',
     dateOfBirthYear: 'input[id$="applicant1DateOfBirth-year"]',
     applicant1Occupation: 'input[id$="applicant1Occupation"]',
+    errorName: '.govuk-error-summary__list li a',
+    applicant1extraSupportAdjustment: '#applicant1HasReasonableAdjustment',
+    applicant1extraSupportAdjustmentDetails: '#applicant1ReasonableAdjustmentDetails',
+    whatSupportIsNeeded: '.govuk-details .govuk-details__summary-text',
   },
 
   async primaryApplicantPersonalDetailsSection() {
@@ -127,5 +132,31 @@ module.exports = {
     );
     await I.retry(3).click('Save and continue');
     await I.wait(4);
+  },
+
+  async additionalDetailsForApplicant1() {
+    await I.retry(3).see('Extra support during your case');
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
+    await I.retry(3).see(extraSupportDetails.extraSupportError);
+    await I.retry(3).see(extraSupportDetails.whatSupportIsAvailable);
+    await I.retry(3).click(this.fields.whatSupportIsNeeded);
+    await I.wait(2);
+    await I.retry(3).see('Reasonable adjustments can include:');
+    await I.retry(3).see(extraSupportDetails.documentNeeds);
+    await I.retry(3).see(extraSupportDetails.communicationNeeds);
+    await I.retry(3).see(extraSupportDetails.mobilitySupport);
+    await I.retry(3).see(extraSupportDetails.whyExtraSupportIsNeeded);
+    await I.retry(3).see('Choose whether you need an extra support');
+    await I.retry(3).click(this.fields.applicant1extraSupportAdjustment);
+    await I.wait(2);
+    await I.retry(3).see(extraSupportDetails.tellWhatSupportIsNeeded);
+    await I.retry(3).click('Save and continue');
+    await I.retry(3).see(extraSupportDetails.detailsOfExtraSupportError);
+    await I.retry(3).fillField(
+      this.fields.applicant1extraSupportAdjustmentDetails,
+      primaryApplicantPersonalDetails.primaryApplicantExtraSupportDetails
+    );
+    await I.retry(3).click('Save and continue');
   },
 };
