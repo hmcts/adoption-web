@@ -15,15 +15,18 @@ const en = content => ({
     "Some of the information is needed for the Adoption Register and adoption certificate which will replace the child's birth certificate.",
   line6:
     "You will be asked for information that is on the child's placement order. This includes the name of the local authority who placed the child in your care and the court which made the order. Your social worker or adoption agency will have this information.",
-  line7: 'Your personal information does not affect your application to adopt.',
+  line7: 'You will be asked for some personal information. This does not affect your application to adopt.',
   line8: 'The information you provide is only seen by the court and relevant adoption agencies or authorities.',
   subheading2: 'What to expect',
-  line9:
-    'Your local authority will provide details about the child you wish to adopt. This includes information about their birth parents and any siblings.',
-  line10: `The court processing fee for an application is £${content.fee?.FeeAmount}. Payment is due once the application is complete and ready to submit to the court.`,
+  line9: `The court processing fee for an application is £${content.fee?.FeeAmount}. Payment is due once the application is complete and ready to submit to the court.`,
+  line10:
+    "We will notify your local authority of your application. They will provide details to the court about the child you wish to adopt. This includes information about their birth parents and any siblings. If you don't receive an email confirming this has been done within 10 working days, contact your social worker.",
   line11:
-    'Once you submit your application, it can take up to 6 weeks before the court contacts you about a first hearing date. You do not have to attend any of the hearing dates.',
-  line12: 'Updates are sent via email, or post if this is preferable.',
+    "Once your application and the information from your local authority is submitted, it can take up to 6 weeks before the court contacts you about a first hearing date. You do not have to attend any of the hearing dates. Some of the child's birth relatives can also be present at court hearings. Your social worker can discuss these hearings with you.",
+  subheading3: 'Applying for more than one child',
+  line12:
+    "If you're applying for more than one child, you must submit a new application for each child. You will not be charged if you submit these before midnight on the day of your first application. If you submit after the day of the first application, you will be charged another £183. For this reason we recommend you begin the applications early and have everything you need.",
+  line13: 'You must sign in using the same email address and password used in your first application.',
   startnow: 'Start now',
 });
 
@@ -53,6 +56,8 @@ const cy: typeof en = () => ({
   line11:
     "Unwaith y byddwch yn cyflwyno eich cais, gall gymryd hyd at 6 wythnos cyn i'r llys gysylltu â chi am ddyddiad y gwrandawiad cyntaf. Nid oes rhaid i chi fod yn bresennol ar unrhyw un o'r dyddiadau hyn.",
   line12: 'Anfonir diweddariadau trwy e-bost, neu drwy’r post os yw hyn yn well gennych.',
+  subheading3: '',
+  line13: '',
   startnow: 'Dechrau nawr',
 });
 

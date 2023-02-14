@@ -72,7 +72,7 @@ Scenario(
     await reviewPayAndSubmitPage.selectNoPCQOption();
     await reviewPayAndSubmitPage.reviewYourAnswersAndContinue();
     await reviewPayAndSubmitPage.statementOfTruthDetailsSectionForSingleApplicant();
-    await reviewPayAndSubmitPage.reviewPay();
+    await reviewPayAndSubmitPage.reviewAndPay();
     await reviewPayAndSubmitPage.adoptionCourtFeesByCard();
     const caseId = await reviewPayAndSubmitPage.getCaseIDAfterAplicationSubmit();
 

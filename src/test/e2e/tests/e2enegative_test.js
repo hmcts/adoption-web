@@ -84,9 +84,9 @@ Scenario(
     await dateChildMovedinDetailsPage.editDateChildMovedInSection();
     await reviewPayAndSubmitPage.reviewYourAnswersAndContinue();
     await reviewPayAndSubmitPage.statementOfTruthDetailsSectionEmpty();
-    await reviewPayAndSubmitPage.reviewPay();
+    await reviewPayAndSubmitPage.reviewAndPay();
     await reviewPayAndSubmitPage.paymentCancellation();
-    await reviewPayAndSubmitPage.reviewPay();
+    await reviewPayAndSubmitPage.reviewAndPay();
     await reviewPayAndSubmitPage.adoptionCourtFeesByCard();
   }
 
