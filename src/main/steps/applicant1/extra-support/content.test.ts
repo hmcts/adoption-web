@@ -41,11 +41,11 @@ const cyContent = {
   details: {
     summaryText: 'Pa gymorth sydd ar gael?',
     html: `Gall addasiadau rhesymol gynnwys:</p>
-              <ul class="govuk-list govuk-list--bullet">
-                <li>dogfennau mewn fformatau, lliwiau a ffontiau eraill </li>
-                <li>help i gyfathrebu, gweld, gwrando, siarad neu gymorth gan gyfieithydd/dehonglydd </li>
-                <li>cymorth gyda mynediad a symudedd, os bydd gwrandawiad yn cael ei gynnal wyneb yn wyneb </li>
-              </ul>`,
+                <ul class="govuk-list govuk-list--bullet">
+                  <li>dogfennau mewn fformatau, lliwiau a ffontiau eraill </li>
+                  <li>help i gyfathrebu, gweld, gwrando, siarad neu gymorth gan gyfieithydd/dehonglydd </li>
+                  <li>cymorth gyda mynediad a symudedd, os bydd gwrandawiad yn cael ei gynnal wyneb yn wyneb </li>
+                </ul>`,
   },
   question1:
     'A oes gennych anabledd corfforol, meddyliol neu addysgol neu gyflwr iechyd sy’n golygu bod angen cymorth arnoch yn ystod eich achos?',
