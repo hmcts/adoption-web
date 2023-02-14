@@ -60,19 +60,21 @@ const enContent = {
 
 const cyContent = {
   title: 'Llwytho dogfennau',
-  youNeed: "Mae angen i chi uwchlwytho ffeil, llun digidol neu sganio'r dogfennau, os ydynt yn berthnasol megis:",
+  youNeed: 'Dylech lwytho Atodiad A ac unrhyw ddogfennau ategol eraill gyda’r cais hwn, er enghraifft:',
   warningPhoto:
     'Gwnewch yn siŵr bod y llun neu’r sgan yn dangos y ddogfen gyfan. Gwiriwch eich bod yn gallu darllen y testun i gyd cyn llwytho’r ffeil. Os na fydd staff y llys yn gallu ei ddarllen, gall gael ei wrthod.',
   infoTakePhoto: 'Gallwch dynnu llun gyda’ch ffôn a’i lwytho.',
   infoBullet1: 'tystysgrif geni lawn y plentyn',
-  infoBullet2: 'Tystysgrifau marwolaeth y rhieni biolegol os yw’n briodol',
-  infoBullet3: "any previous adoption certificates or court orders for the child/child's siblings",
-  infoBullet4: 'any additional evidence you feel is relevant such as maintenance agreements',
-  note1: 'This will help speed up the court process for applicants.',
+  infoBullet2: 'tystysgrifau marwolaeth y rhieni biolegol, os yw’n briodol',
+  infoBullet3:
+    'unrhyw dystysgrifau mabwysiadu neu orchmynion llys blaenorol ar gyfer y plentyn neu frodyr a chwiorydd y plentyn',
+  infoBullet4: 'unrhyw dystiolaeth ychwanegol rydych chi’n teimlo sy’n berthnasol megis cytundebau cynhaliaeth',
+  note1: 'Bydd hyn yn helpu i gyflymu proses y llys ar gyfer ceiswyr.',
   note2:
-    'This application and supporting documents should be submitted to the court within 10 working days from when the application was received by you. If you are unable to upload Annex A within this timeframe, you should email it directly to the court asap.',
-  note3: 'You can upload a file, digital photo or scan the documents, if relevant.',
-  note4: 'The file names should correspond with what the file is for example, Williams_AnnexA_report.pdf.',
+    'Dylid cyflwyno’r cais hwn a’r dogfennau ategol i’r llys o fewn 10 diwrnod gwaith ichi gael y cais hwn. O na allwch lwytho Atodiad A o fewn yr amserlen hon, dylech ei anfon ar e-bost yn uniongyrchol i’r llys cyn gynted â phosibl.',
+  note3: 'Gallwch lwytho ffeil, llun digidol neu sganio’r dogfennau, os yw hynny’n berthnasol.',
+  note4: 'Dylai enw ffeil gyfateb i beth yw’r ffeil, er enghraifft, Williams_AtodiadA_adroddiad.pdf.',
+
   infoBulletSummary1:
     'Rhowch eich dogfen ar rywbeth gwastad mewn ystafell sydd â digon o olau. Defnyddiwch fflach y camera os bydd angen.',
   infoBulletSummary2: "Tynnwch lun o’r ddogfen gyfan. Dylech allu gweld corneli'r ddogfen.",

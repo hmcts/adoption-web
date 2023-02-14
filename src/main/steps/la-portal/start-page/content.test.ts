@@ -39,11 +39,11 @@ const cyContent = {
   title: 'Cychwyn arni',
   heading1: 'Cyflwyno ymateb i gais mabwysiadu',
   line3:
-    'Defnyddiwch y gwasanaeth hwn i lenwi ffurflen gais sydd wedi ei chyflwyno gan y darpar rieni mabwysiadol. Gallwch gadw eich ffurflen ar unrhyw adeg, fodd bynnag, rhaid i chi gyflwyno’r cais o fewn xxx o ddyddiau.',
+    'Defnyddiwch y gwasanaeth hwn i lenwi ffurflen gais sydd wedi ei chyflwyno gan y darpar rieni mabwysiadol. Gallwch gadw eich cais ar unrhyw adeg, fodd bynnag, dylech gyflwyno’r cais o fewn 10 diwrnod gwaith.',
   line4:
-    'You should upload the Annex A and any other relevant documents with the application so they can be processed together by the court. This will help prevent delays and reminders from being sent.',
+    'Dylech lwytho Atodiad A ac unrhyw ddogfennau perthnasol eraill gyda’r cais fel y gallant gael eu prosesu gyda’i gilydd gan y llys. Bydd hyn yn helpu i atal oedi a negeseuon atgoffa rhag cael eu hanfon.',
   line5:
-    'If the Annex A or other relevant documents are unavailable when you submit the application, you can email them to the court directly.',
+    'Os na fydd Atodiad A neu ddogfennau perthnasol eraill ar gael pan fyddwch yn cyflwyno’r cais, gallwch eu hanfon ar e-bost yn uniongyrchol i’r llys.',
   heading2: 'Beth fyddwch chi ei angen',
   line6: "Er mwyn llenwi'r cais a'i gyflwyno i'r llys byddwch angen:",
   line7: 'tystysgrif geni llawn y plentyn',

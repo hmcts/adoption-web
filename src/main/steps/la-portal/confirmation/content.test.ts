@@ -6,9 +6,9 @@ import { generateContent } from './content';
 const enContent = {
   title: 'Your application has been submitted',
   referenceNumber: 'Application reference number<br><strong>1234567890123456</strong>',
-  emailSentConfirmation: 'We have sent a confirmation email to the email addresses registered. ',
+  emailSentConfirmation: 'We have sent a confirmation to the email addresses registered. ',
   line1:
-    'The application will now be sent to the court for processing. If you did not upload the Annex A as part of the evidence for the application, you should do this as soon possible to prevent delays and reminders from being sent. ',
+    'The application will now be sent to the court for processing. If you did not upload the Annex A as part of the evidence for the application, you should do this within 10 working days to prevent delays and reminders from being sent. ',
   line2:
     'If you cannot upload the Annex A within 10 working days from when you submitted the application, you can email it directly to the court.',
   line3: 'An email will be sent to the applicants to let them know that their application is with the court.',
