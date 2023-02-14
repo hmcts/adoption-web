@@ -147,7 +147,6 @@ module.exports = {
     await I.retry(3).see(extraSupportDetails.communicationNeeds);
     await I.retry(3).see(extraSupportDetails.mobilitySupport);
     await I.retry(3).see(extraSupportDetails.whyExtraSupportIsNeeded);
-    await I.retry(3).see('Choose whether you need an extra support');
     await I.retry(3).click(this.fields.applicant1extraSupportAdjustment);
     await I.wait(2);
     await I.retry(3).see(extraSupportDetails.tellWhatSupportIsNeeded);
