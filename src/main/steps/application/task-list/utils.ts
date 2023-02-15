@@ -84,7 +84,7 @@ export const getPersonalDetailsStatus = (
   const dateOfBirth = userCase[`${userType}DateOfBirth`];
   const occupation = userCase[`${userType}Occupation`];
   const hasReasonableAdjustment = userCase[`${userType}HasReasonableAdjustment`];
-  const hasReasonableAdjustmentDetails = userCase[`${userType}HasReasonableAdjustmentDetails`];
+  const reasonableAdjustmentDetails = userCase[`${userType}ReasonableAdjustmentDetails`];
 
   const dateOfBirthComplete =
     !areDateFieldsFilledIn(dateOfBirth) && !isDateInputInvalid(dateOfBirth) && !isFutureDate(dateOfBirth);
@@ -94,7 +94,7 @@ export const getPersonalDetailsStatus = (
 
   const hasReasonableAdjustmentComplete =
     hasReasonableAdjustment === YesOrNo.NO ||
-    (hasReasonableAdjustment === YesOrNo.YES && !hasReasonableAdjustmentDetails);
+    (hasReasonableAdjustment === YesOrNo.YES && !!reasonableAdjustmentDetails);
 
   if (
     firstName &&
