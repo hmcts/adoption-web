@@ -78,12 +78,13 @@ const en = {
   webChatDetails:
     'All our web chat agents are busy helping other people. Please try again later or contact us using one of the ways below.',
   sendUsAMessage: 'Send us a message',
-  TBC: 'TBC',
-  sendUsAMessageTBC: 'Send us a message  (email TBC)',
-  sendUsAMessageDetails: 'We aim to get back to you within 5 days.',
+  TBC: 'Telephone: 01634 887900',
+  sendUsAMessageTBC:
+    'Email: <a href="mailto:adoptionproject@justice.gov.uk" class="govuk-link">adoptionproject@justice.gov.uk</a>',
+  sendUsAMessageDetails: 'We aim to get back to you within 5 working days',
   telephone: 'Telephone',
   telephoneNumber: '0300 303 0642',
-  telephoneDetails: 'Monday to Friday, 8am to 8pm, Saturday 8am to 2pm.',
+  telephoneDetails: 'Monday to Friday 9am to 5pm',
   habitualResidentHelpText1:
     'This may include working, owning property, having children in school, and your main family life taking place in England or Wales.',
   habitualResidentHelpText2:
