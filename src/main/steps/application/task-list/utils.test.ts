@@ -240,6 +240,22 @@ describe('utils', () => {
         userType: 'applicant1',
         expected: COMPLETED,
       },
+      {
+        data: {
+          applicant1FirstNames: 'MOCK_FIRST_NAME',
+          applicant1LastNames: 'MOCK_LAST_NAME',
+          applicant1HasOtherNames: YesOrNo.YES,
+          applicant1AdditionalNames: [
+            { firstNames: 'MOCK_ADDITIONAL_FIRST_NAME', lastNames: 'MOCK_ADDITIONAL_FIRST_NAME' },
+          ],
+          applicant1DateOfBirth: { day: '1', month: '1', year: '2021' },
+          applicant1Occupation: 'MOCK_OCCUPATION',
+          applicant1HasReasonableAdjustment: YesOrNo.YES,
+          applicant1ReasonableAdjustmentDetails: undefined,
+        },
+        userType: 'applicant1',
+        expected: IN_PROGRESS,
+      },
     ])('should return correct status %#', async ({ data, userType, expected }) => {
       expect(getPersonalDetailsStatus({ ...userCase, ...data }, <'applicant1' | 'applicant2'>userType)).toBe(expected);
     });
