@@ -8,12 +8,12 @@ import { getApplicationStatus } from '../../steps/application/task-list/utils';
 import {
   ACCESSIBILITY_STATEMENT,
   APPLICANT_2,
-  APPLICATION_SUBMITTED,
+  //   APPLICATION_SUBMITTED,
   CHECK_ANSWERS_URL,
   CONTACT_US,
   COOKIES_PAGE,
-  DOWNLOAD_APPLICATION_SUMMARY,
-  LA_DOCUMENT_MANAGER,
+  //   DOWNLOAD_APPLICATION_SUMMARY,
+  //   LA_DOCUMENT_MANAGER,
   LA_PORTAL,
   LA_PORTAL_CONFIRMATION_PAGE,
   PAYMENT_CALLBACK_URL,
@@ -67,18 +67,6 @@ export class StateRedirectMiddleware {
           //Footer links are accessible from anywhere in the application
           return next();
         }
-        if (
-          [State.Submitted, State.AwaitingDocuments, State.AwaitingHWFDecision, State.LaSubmitted].includes(
-            req.session.userCase?.state
-          ) &&
-          req.path !== APPLICATION_SUBMITTED &&
-          req.path !== DOWNLOAD_APPLICATION_SUMMARY &&
-          !req.path.startsWith(LA_DOCUMENT_MANAGER) &&
-          !req.path.startsWith(LA_PORTAL)
-        ) {
-          return res.redirect(APPLICATION_SUBMITTED);
-        }
-
         if (
           req.session.userCase?.state !== State.AwaitingPayment ||
           [PAY_YOUR_FEE, PAY_AND_SUBMIT, PAYMENT_CALLBACK_URL].includes(req.path as PageLink)
