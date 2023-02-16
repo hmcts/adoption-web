@@ -26,7 +26,9 @@
                     <p class="govuk-body">{{ line7 }}</p>
                     <p class="govuk-body">{{ line8 }}</p>
                     <p class="govuk-body">{{ line9 }}</p>
-                    <p class="govuk-body">{{ newApplication | safe }}</p>
+                    <p class="govuk-body">
+                      <a href="/new-application-redirect" class="govuk-link">{{ newApplication }}</a>
+                    </p>
                 </form>
                 {% block contactUs %}
                     {% include "common/form/contactForHelp.njk"%}
