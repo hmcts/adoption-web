@@ -83,6 +83,8 @@ export const getPersonalDetailsStatus = (
   const additionalNames = userCase[`${userType}AdditionalNames`] || [];
   const dateOfBirth = userCase[`${userType}DateOfBirth`];
   const occupation = userCase[`${userType}Occupation`];
+  const hasReasonableAdjustment = userCase[`${userType}HasReasonableAdjustment`];
+  const reasonableAdjustmentDetails = userCase[`${userType}ReasonableAdjustmentDetails`];
 
   const dateOfBirthComplete =
     !areDateFieldsFilledIn(dateOfBirth) && !isDateInputInvalid(dateOfBirth) && !isFutureDate(dateOfBirth);
@@ -90,11 +92,29 @@ export const getPersonalDetailsStatus = (
   const otherNamesComplete =
     hasOtherNames === YesOrNo.NO || (hasOtherNames === YesOrNo.YES && !!additionalNames.length);
 
-  if (firstName && lastName && otherNamesComplete && dateOfBirthComplete && occupation) {
+  const hasReasonableAdjustmentComplete =
+    hasReasonableAdjustment === YesOrNo.NO ||
+    (hasReasonableAdjustment === YesOrNo.YES && !!reasonableAdjustmentDetails);
+
+  if (
+    firstName &&
+    lastName &&
+    otherNamesComplete &&
+    dateOfBirthComplete &&
+    occupation &&
+    hasReasonableAdjustmentComplete
+  ) {
     return SectionStatus.COMPLETED;
   }
 
-  if (!firstName && !lastName && !otherNamesComplete && !dateOfBirthComplete && !occupation) {
+  if (
+    !firstName &&
+    !lastName &&
+    !otherNamesComplete &&
+    !dateOfBirthComplete &&
+    !occupation &&
+    !hasReasonableAdjustmentComplete
+  ) {
     return SectionStatus.NOT_STARTED;
   }
 

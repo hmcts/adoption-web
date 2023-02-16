@@ -57,6 +57,7 @@ Scenario(
 
     await taskListPage.selectFirstApplicantPersonalDetails();
     await primaryApplicantPersonalDetailsPage.primaryApplicantPersonalDetailsSection();
+    await primaryApplicantPersonalDetailsPage.additionalDetailsForApplicant1();
     await taskListPage.verifyPrimaryApplicantPersonalDetailsStatus();
 
     await taskListPage.selectOtherApplicantContactDetails();
@@ -65,6 +66,7 @@ Scenario(
 
     await taskListPage.selectOtherApplicantPersonalDetails();
     await otherApplicantPersonalDetailsPage.otherApplicantPersonalDetailsSection();
+    await otherApplicantPersonalDetailsPage.additionalDetailsForApplicant2();
     await taskListPage.verifyOtherApplicantPersonalDetailsStatus();
 
     await taskListPage.selectReviewPayAndSubmitDetails();

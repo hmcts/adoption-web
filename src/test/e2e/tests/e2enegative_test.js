@@ -58,6 +58,7 @@ Scenario(
     /*First Applicant personal details*/
     await taskListPage.selectFirstApplicantPersonalDetails();
     await primaryApplicantPersonalDetailsPage.primaryApplicantPersonalDetailsSectionEmptyfields();
+    await primaryApplicantPersonalDetailsPage.additionalDetailsForApplicant1();
     await taskListPage.verifyPrimaryApplicantPersonalDetailsStatus();
 
     /*Second Applicant contact details*/
@@ -68,6 +69,7 @@ Scenario(
     /*Second Applicant personal details*/
     await taskListPage.selectOtherApplicantPersonalDetails();
     await otherApplicantPersonalDetailsPage.otherApplicantPersonalDetailsSectionEmpty();
+    await otherApplicantPersonalDetailsPage.additionalDetailsForApplicant2();
     await taskListPage.verifyOtherApplicantPersonalDetailsStatus();
 
     /*Family Court details*/

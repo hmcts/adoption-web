@@ -47,6 +47,8 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant1ContactDetails: 'applicant1ContactDetails',
   applicant1ContactDetailsConsent: 'applicant1ContactDetailsConsent',
   applicant1LanguagePreference: 'applicant1LanguagePreference',
+  applicant1HasReasonableAdjustment: 'applicant1HasReasonableAdjustment',
+  applicant1ReasonableAdjustmentDetails: 'applicant1ReasonableAdjustmentDetails',
 
   applicant2FirstNames: 'applicant2FirstName',
   applicant2LastNames: 'applicant2LastName',
@@ -65,6 +67,8 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant2ContactDetails: 'applicant2ContactDetails',
   applicant2ContactDetailsConsent: 'applicant2ContactDetailsConsent',
   applicant2LanguagePreference: 'applicant2LanguagePreference',
+  applicant2HasReasonableAdjustment: 'applicant2HasReasonableAdjustment',
+  applicant2ReasonableAdjustmentDetails: 'applicant2ReasonableAdjustmentDetails',
 
   childrenFirstName: 'childrenFirstName',
   childrenLastName: 'childrenLastName',
@@ -238,6 +242,8 @@ export interface Case {
   applicant1ContactDetails?: ContactDetails[];
   applicant1ContactDetailsConsent?: YesOrNo;
   applicant1LanguagePreference?: LanguagePreference;
+  applicant1HasReasonableAdjustment?: YesOrNo;
+  applicant1ReasonableAdjustmentDetails?: string;
   status?: State;
 
   /***** Applicant2 *****/
@@ -260,6 +266,8 @@ export interface Case {
   applicant2ContactDetails?: ContactDetails[];
   applicant2ContactDetailsConsent?: YesOrNo;
   applicant2LanguagePreference?: LanguagePreference;
+  applicant2HasReasonableAdjustment?: YesOrNo;
+  applicant2ReasonableAdjustmentDetails?: string;
 
   /***** Children *****/
   childrenFirstName?: string;

@@ -1,5 +1,6 @@
 const { I } = inject();
 const secondApplicantPersonalDetails = require('../fixtures/caseData/secondApplicantPersonalDetails');
+const extraSupportDetails = require('../fixtures/caseData/extraSupportDetails');
 
 module.exports = {
   fields: {
@@ -13,6 +14,8 @@ module.exports = {
     dateOfBirthYear: 'input[id$="applicant2DateOfBirth-year"]',
     addAnotherNationality: 'input[id$="addAnotherNationality"]',
     applicant2Occupation: 'input[id$="applicant2Occupation"]',
+    applicant2extraSupportAdjustment: '#applicant2HasReasonableAdjustment',
+    applicant2extraSupportAdjustmentDetails: '#applicant2ReasonableAdjustmentDetails',
   },
 
   async otherApplicantPersonalDetailsSection() {
@@ -121,5 +124,18 @@ module.exports = {
     );
     await I.retry(3).click('Save and continue');
     await I.wait(4);
+  },
+
+  async additionalDetailsForApplicant2() {
+    await I.retry(3).see('Extra support during your case');
+    await I.wait(2);
+    await I.retry(3).click(this.fields.applicant2extraSupportAdjustment);
+    await I.wait(2);
+    await I.retry(3).see(extraSupportDetails.tellWhatSupportIsNeeded);
+    await I.retry(3).fillField(
+      this.fields.applicant2extraSupportAdjustmentDetails,
+      secondApplicantPersonalDetails.secondApplicantExtraSupportDetails
+    );
+    await I.retry(3).click('Save and continue');
   },
 };
