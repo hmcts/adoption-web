@@ -41,13 +41,11 @@ export class CaseApi {
       cases.filter(caseElement => caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted)
         .length === cases.length
     ) {
-      const dateCommited = new Date();
-      dateCommited.setDate(dateCommited.getDate() - 1);
       if (
         cases.filter(
           caseElement =>
             moment(new Date(caseElement.case_data.dateSubmitted)).format('YYYY-MM-DD') ===
-            moment(dateCommited).format('YYYY-MM-DD')
+            moment(new Date()).format('YYYY-MM-DD')
         ).length !== 0
       ) {
         const {
