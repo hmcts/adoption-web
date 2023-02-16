@@ -14,6 +14,7 @@ import {
   HUB_PAGE,
   PAY_YOUR_FEE,
   SENT_TO_APPLICANT2_FOR_REVIEW,
+  START_ELIGIBILITY_URL,
   TASK_LIST_URL,
 } from '../../urls';
 import { form as applicant1FirstQuestionForm } from '../applying-with/content';
@@ -24,7 +25,11 @@ export default class HomeGetController {
     if (!req.session.userCase) {
       req.locals.api = getCaseApi(req.session.user, req.locals.logger);
       const userCase = await req.locals.api.getCase();
-      if (userCase) {
+      req.session.flagNotsameDay = false;
+      if (userCase === null) {
+        req.session.flagNotsameDay = true;
+        res.redirect(START_ELIGIBILITY_URL);
+      } else if (userCase) {
         req.session.userCase = userCase;
         const firstQuestionForm = getApplicantFirstQuestionForm();
         const isFirstQuestionComplete = firstQuestionForm.getErrors(req.session.userCase).length === 0;

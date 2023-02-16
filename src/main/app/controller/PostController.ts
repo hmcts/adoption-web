@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
@@ -43,7 +44,12 @@ export class PostController<T extends AnyObject> {
     );
 
     if (!req.session.userCase && req.path.startsWith(APPLYING_WITH_URL)) {
-      req.session.userCase = await req.locals.api.getOrCreateCase(res.locals.serviceType, req.session.user);
+      if (req.session.flagNotsameDay === true) {
+        req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
+        req.session.flagNotsameDay = false;
+      } else {
+        req.session.userCase = await req.locals.api.getOrCreateCase(res.locals.serviceType, req.session.user);
+      }
     }
 
     if (req.body.saveAndRelogin) {

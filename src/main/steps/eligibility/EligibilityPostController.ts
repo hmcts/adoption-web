@@ -5,7 +5,7 @@ import { AppRequest } from '../../app/controller/AppRequest';
 import { AnyObject } from '../../app/controller/PostController';
 import { Form, FormFields } from '../../app/form/Form';
 import { getNextEligibilityStepUrl } from '../../steps';
-import { HOME_URL, SIGN_IN_URL } from '../../steps/urls';
+import { APPLYING_WITH_URL, HOME_URL, SIGN_IN_URL } from '../../steps/urls';
 
 @autobind
 export default class EligibilityPostController<T extends AnyObject> {
@@ -16,7 +16,6 @@ export default class EligibilityPostController<T extends AnyObject> {
    */
   public async post(req: AppRequest<T>, res: Response): Promise<void> {
     const form = new Form(this.fields);
-
     const { saveAndSignOut, saveBeforeSessionTimeout, _csrf, ...formData } = form.getParsedBody(req.body);
     if (!req.session.eligibility) {
       req.session.eligibility = {};
@@ -26,7 +25,12 @@ export default class EligibilityPostController<T extends AnyObject> {
 
     let nextUrl = req.session.errors.length > 0 ? req.url : getNextEligibilityStepUrl(req, req.session.eligibility);
     if (nextUrl === SIGN_IN_URL && req.session?.user) {
-      nextUrl = HOME_URL;
+      if (req.session.flagNotsameDay === true) {
+        nextUrl = APPLYING_WITH_URL;
+      } else {
+        nextUrl = HOME_URL;
+      }
+
       req.session.save(err => {
         if (err) {
           throw err;

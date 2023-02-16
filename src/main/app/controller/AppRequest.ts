@@ -29,6 +29,7 @@ export interface AppSession extends Session {
   errors: FormError[] | undefined;
   addresses: [];
   returnUrl?: string;
+  flagNotsameDay?: boolean;
   fee?: Fee;
 }
 
