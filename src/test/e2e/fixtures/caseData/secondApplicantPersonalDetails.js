@@ -7,4 +7,5 @@ module.exports = {
   secondApplicantMonthOfBirth: '07',
   secondApplicantYearOfBirth: '1980',
   secondApplicantOccupation: 'police',
+  secondApplicantExtraSupportDetails: 'need Wheel chair',
 };

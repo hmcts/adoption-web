@@ -30,6 +30,11 @@ export const applicant2Sequence: Step[] = [
   {
     url: Urls.APPLICANT_2_OCCUPATION,
     showInSection: Sections.AboutApplicant2,
+    getNextStep: () => Urls.APPLICANT_2_EXTRA_SUPPORT,
+  },
+  {
+    url: Urls.APPLICANT_2_EXTRA_SUPPORT,
+    showInSection: Sections.AboutApplicant2,
     getNextStep: () => Urls.TASK_LIST_URL,
   },
   {
