@@ -78,7 +78,7 @@ const en = {
   webChatDetails:
     'All our web chat agents are busy helping other people. Please try again later or contact us using one of the ways below.',
   sendUsAMessage: 'Send us a message',
-  TBC: 'Telephone: 01634 887900',
+  sendUsAMessageTelephone: 'Telephone: 01634 887900',
   sendUsAMessageTBC:
     'Email: <a href="mailto:adoptionproject@justice.gov.uk" class="govuk-link">adoptionproject@justice.gov.uk</a>',
   sendUsAMessageDetails: 'We aim to get back to you within 5 working days',
@@ -199,7 +199,7 @@ const cy: typeof en = {
   webChatDetails:
     "Mae ein holl asiantau sgwrsio dros y we yn brysur yn helpu pobl eraill. Dewch yn ôl nes ymlaen neu cysylltwch â ni trwy un o'r dulliau uchod.",
   sendUsAMessage: 'Anfonwch neges atom',
-  TBC: 'i’w gadarnhau',
+  sendUsAMessageTelephone: 'i’w gadarnhau',
   sendUsAMessageTBC: 'Anfonwch neges atom  (email i’w gadarnhau)',
   sendUsAMessageDetails: 'Byddwn yn anelu at ymateb o fewn 5 diwrnod gwaith.',
   telephone: 'Ffôn',
