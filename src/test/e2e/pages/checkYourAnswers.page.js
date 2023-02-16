@@ -45,6 +45,7 @@ module.exports = {
     await I.retry(3).see(checkYourAnswersKeyDetails.firstApplicantPreviousName);
     await I.retry(3).see(checkYourAnswersKeyDetails.firstApplicantDOB);
     await I.retry(3).see(checkYourAnswersKeyDetails.firstApplicantOccupation);
+    await I.retry(3).see(checkYourAnswersKeyDetails.firstApplicantExtraSupport);
     await I.retry(3).see(checkYourAnswersKeyDetails.firstApplicantAddress);
     await I.retry(3).see(checkYourAnswersKeyDetails.firstApplicantEmailAddress);
     await I.retry(3).see(checkYourAnswersKeyDetails.firstApplicantPhoneNumber);
@@ -56,6 +57,7 @@ module.exports = {
     await I.retry(3).see(checkYourAnswersKeyDetails.secondApplicantPreviousNames);
     await I.retry(3).see(checkYourAnswersKeyDetails.secondApplicantDOB);
     await I.retry(3).see(checkYourAnswersKeyDetails.secondApplicantOccupation);
+    await I.retry(3).see(checkYourAnswersKeyDetails.details);
     await I.retry(3).see(checkYourAnswersKeyDetails.secondApplicantAddress);
     await I.retry(3).see(checkYourAnswersKeyDetails.secondApplicantEmailAddress);
     await I.retry(3).see(checkYourAnswersKeyDetails.secondApplicantPhoneNumber);
@@ -100,6 +102,7 @@ module.exports = {
     await I.retry(3).see(primAppPersonalDetails.primaryApplicantDateOfBirth);
     await I.retry(3).see(primAppPersonalDetails.primaryApplicantYearOfBirth);
     await I.retry(3).see(primAppPersonalDetails.primaryApplicantOccupation);
+    await I.retry(3).see(primAppPersonalDetails.primaryApplicantExtraSupportDetails);
     await I.retry(3).see(primAppOtherDetails.primaryApplicantEmailAddress);
     await I.retry(3).see(primAppOtherDetails.primaryApplicantPhoneNumber);
     await I.retry(3).see(
@@ -113,6 +116,7 @@ module.exports = {
     await I.retry(3).see(secAppPersonalDetails.secondApplicantDateOfBirth);
     await I.retry(3).see(secAppPersonalDetails.secondApplicantYearOfBirth);
     await I.retry(3).see(secAppPersonalDetails.secondApplicantOccupation);
+    await I.retry(3).see(secAppPersonalDetails.secondApplicantExtraSupportDetails);
     await I.retry(3).see(secAppOtherDetails.secondApplicantEmailAddress);
     await I.retry(3).see(secAppOtherDetails.secondApplicantPhoneNumber);
   },

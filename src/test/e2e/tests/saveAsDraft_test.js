@@ -65,6 +65,7 @@ Scenario(
 
     await taskListPage.selectFirstApplicantPersonalDetails();
     await primaryApplicantPersonalDetailsPage.primaryApplicantPersonalDetailsSection();
+    await primaryApplicantPersonalDetailsPage.additionalDetailsForApplicant1();
     await taskListPage.verifyPrimaryApplicantPersonalDetailsStatus();
 
     await taskListPage.selectReviewPayAndSubmitDetails();

@@ -7,4 +7,5 @@ module.exports = {
   primaryApplicantMonthOfBirth: '06',
   primaryApplicantYearOfBirth: '1988',
   primaryApplicantOccupation: 'Teacher',
+  primaryApplicantExtraSupportDetails: 'need documents in blue colour',
 };

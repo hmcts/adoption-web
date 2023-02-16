@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { CaseDate, CaseWithId, Checkbox, FieldPrefix } from '../../../app/case/case';
 import { AdditionalNationality, ApplyingWith, Nationality, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
@@ -284,12 +285,77 @@ export const applicantSummaryList = (
 
   const urlPrefix = prefix === FieldPrefix.APPLICANT1 ? 'APPLICANT_1_' : 'APPLICANT_2_';
   let sectionTitle = sectionTitles.applicantDetails;
+  let hasReasonableAdjustment = userCase.applicant1HasReasonableAdjustment;
   if (prefix === FieldPrefix.APPLICANT1 && userCase.applyingWith !== ApplyingWith.ALONE) {
     sectionTitle = sectionTitles.firstApplicantDetails;
   } else if (prefix === FieldPrefix.APPLICANT2) {
     sectionTitle = sectionTitles.secondApplicantDetails;
+    hasReasonableAdjustment = userCase.applicant2HasReasonableAdjustment;
   }
 
+  if (hasReasonableAdjustment === YesOrNo.NO) {
+    return {
+      title: sectionTitle,
+      rows: getSectionSummaryList(
+        [
+          {
+            key: keys.fullName,
+            value: userCase[`${prefix}FirstNames`] + ' ' + userCase[`${prefix}LastNames`],
+            changeUrl: Urls[`${urlPrefix}FULL_NAME`],
+          },
+          {
+            key: keys.previousNames,
+            valueHtml:
+              userCase[`${prefix}HasOtherNames`] === YesOrNo.YES
+                ? userCase[`${prefix}AdditionalNames`]?.map(item => `${item.firstNames} ${item.lastNames}`).join('<br>')
+                : '',
+            changeUrl: Urls[`${urlPrefix}OTHER_NAMES`],
+          },
+          {
+            key: keys.dateOfBirth,
+            value: getFormattedDate(userCase[`${prefix}DateOfBirth`], content.language),
+            changeUrl: Urls[`${urlPrefix}DOB`],
+          },
+          {
+            key: keys.occupation,
+            value: userCase[`${prefix}Occupation`],
+            changeUrl: Urls[`${urlPrefix}OCCUPATION`],
+          },
+          {
+            key: keys.extraSupport,
+            value: userCase[`${prefix}HasReasonableAdjustment`],
+            changeUrl: Urls[`${urlPrefix}EXTRA_SUPPORT`],
+          },
+          {
+            key: keys.address,
+            valueHtml: getFormattedAddress(userCase, prefix),
+            changeUrl: Urls[`${urlPrefix}FIND_ADDRESS`],
+          },
+          {
+            key: keys.emailAddress,
+            value: userCase[`${prefix}EmailAddress`],
+            changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
+          },
+          {
+            key: keys.phoneNumber,
+            value: userCase[`${prefix}PhoneNumber`],
+            changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
+          },
+          {
+            key: keys.contactDetailsConsent,
+            value: userCase[`${prefix}ContactDetailsConsent`],
+            changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
+          },
+          {
+            key: keys.languagePreference,
+            value: content.languagePreference[userCase[`${prefix}LanguagePreference`]],
+            changeUrl: Urls[`${urlPrefix}LANGUAGE_PREFERENCE`],
+          },
+        ],
+        content
+      ),
+    };
+  }
   return {
     title: sectionTitle,
     rows: getSectionSummaryList(
@@ -316,6 +382,16 @@ export const applicantSummaryList = (
           key: keys.occupation,
           value: userCase[`${prefix}Occupation`],
           changeUrl: Urls[`${urlPrefix}OCCUPATION`],
+        },
+        {
+          key: keys.extraSupport,
+          value: userCase[`${prefix}HasReasonableAdjustment`],
+          changeUrl: Urls[`${urlPrefix}EXTRA_SUPPORT`],
+        },
+        {
+          key: keys.extraSupportDetails,
+          value: userCase[`${prefix}ReasonableAdjustmentDetails`],
+          changeUrl: Urls[`${urlPrefix}EXTRA_SUPPORT`],
         },
         {
           key: keys.address,

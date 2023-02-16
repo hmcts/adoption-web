@@ -1,6 +1,6 @@
 import { throttle } from 'lodash';
 
-import { KEEP_ALIVE_URL, TIMED_OUT_URL } from '../../steps/urls';
+import { KEEP_ALIVE_URL, LA_PORTAL_KBA_CASE_REF, SAVE_AND_RELOGIN, TIMED_OUT_URL } from '../../steps/urls';
 
 const eventTimer = 5 * 60 * 1000; // 5 minutes
 const TIMEOUT_NOTICE = 2 * 60 * 1000; // 2 minutes
@@ -9,8 +9,8 @@ const sessionTimeoutInterval = 20 * 60 * 1000; // 20 minutes
 // let timeout;
 let notificationTimer;
 let countdownInterval;
-
 let notificationPopupIsOpen = false;
+
 const notificationPopup: HTMLElement | null = document.getElementById('timeout-modal-container');
 const popupCloseBtn: HTMLButtonElement | null | undefined =
   notificationPopup?.querySelector('#timeout-modal-close-button');
@@ -38,12 +38,12 @@ const schedule = () => {
   clearCountdown();
   showNotificationPopup(false);
   scheduleNotificationPopup();
-  pingUserActive();
   onNotificationPopupClose();
 };
 
 const onNotificationPopupClose = () => {
   popupCloseBtn?.addEventListener('click', () => {
+    pingUserActive();
     schedule();
   });
 };
@@ -55,7 +55,7 @@ const startCountdown = () => {
     const seconds = Math.floor((countdown % (1000 * 60)) / 1000);
 
     if (seconds < 0) {
-      window.location.href = `${TIMED_OUT_URL}?lang=${document.documentElement.lang}`;
+      window.location.href = `${TIMED_OUT_URL}?lang=${document.documentElement.lang}&pageFrom=true`;
     } else if (countdownTimer) {
       countdownTimer.innerHTML = convertToHumanReadableText(countdown);
     }
@@ -140,7 +140,13 @@ const pingUserActive = throttle(
   { trailing: false }
 );
 
-['click', 'touchstart', 'mousemove', 'keypress', 'keydown', 'scroll'].forEach(evt =>
-  document.addEventListener(evt, pingUserActive)
-);
-schedule();
+if (
+  TIMED_OUT_URL !== window.location.pathname &&
+  LA_PORTAL_KBA_CASE_REF !== window.location.pathname &&
+  SAVE_AND_RELOGIN !== window.location.pathname
+) {
+  ['click', 'touchstart', 'mousemove', 'keypress', 'keydown', 'scroll'].forEach(evt =>
+    document.addEventListener(evt, pingUserActive)
+  );
+  schedule();
+}
