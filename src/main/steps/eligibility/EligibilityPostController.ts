@@ -22,6 +22,7 @@ export default class EligibilityPostController<T extends AnyObject> {
     }
     Object.assign(req.session.eligibility, formData);
     req.session.errors = form.getErrors(formData);
+    console.log('req.session.flagNotsameDay', req.session.flagNotsameDay);
 
     let nextUrl = req.session.errors.length > 0 ? req.url : getNextEligibilityStepUrl(req, req.session.eligibility);
     if (nextUrl === SIGN_IN_URL && req.session?.user) {
