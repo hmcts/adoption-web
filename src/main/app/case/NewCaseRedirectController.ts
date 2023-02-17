@@ -12,10 +12,8 @@ export class NewCaseRedirectController {
   public async get(req: AppRequest, res: Response): Promise<void> {
     req.locals.api = getCaseApi(req.session.user, req.locals.logger);
     const userCase = await req.locals.api.getCase();
-    req.session.flagNotsameDay = false;
     if (userCase === null) {
       // Applications submitted not on login day
-      req.session.flagNotsameDay = true;
       res.redirect(START_ELIGIBILITY_URL);
     } else if (userCase) {
       // Returned case may be Draft OR Submitted
@@ -23,7 +21,6 @@ export class NewCaseRedirectController {
         res.redirect(HOME_URL);
       } else {
         // Applications submitted on the login day
-        req.session.flagNotsameDay = true;
         res.redirect(CHECK_ELIGIBILITY_URL_MULTIPLE_CHILDREN_DESC);
       }
     } else {
