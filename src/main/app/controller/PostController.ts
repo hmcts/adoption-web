@@ -2,6 +2,7 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
+import { getCaseApi } from '../../app/case/CaseApi';
 import {
   getDraftCaseFromStore,
   removeCaseFromRedis,
@@ -44,9 +45,10 @@ export class PostController<T extends AnyObject> {
     );
 
     if (!req.session.userCase && req.path.startsWith(APPLYING_WITH_URL)) {
-      if (req.session.flagNotsameDay === true) {
+      req.locals.api = getCaseApi(req.session.user, req.locals.logger);
+      const userCase = await req.locals.api.getCase();
+      if (userCase === null) {
         req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
-        req.session.flagNotsameDay = false;
       } else {
         req.session.userCase = await req.locals.api.getOrCreateCase(res.locals.serviceType, req.session.user);
       }
