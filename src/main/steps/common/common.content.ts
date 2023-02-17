@@ -199,11 +199,11 @@ const cy: typeof en = {
   webChatDetails:
     "Mae ein holl asiantau sgwrsio dros y we yn brysur yn helpu pobl eraill. Dewch yn ôl nes ymlaen neu cysylltwch â ni trwy un o'r dulliau uchod.",
   sendUsAMessage: 'Anfonwch neges atom',
-  sendUsAMessageTelephone: 'Rhif ffôn: 0300 303 5171',
+  sendUsAMessageTelephone: 'Rhif ffôn: 01634 887900',
   sendUsAMessageTBC:
     'E-bost: <a href="mailto:ymholiadaucymraeg@justice.gov.uk" class="govuk-link">ymholiadaucymraeg@justice.gov.uk</a>',
   sendUsAMessageDetails: 'Byddwn yn anelu at ymateb o fewn 5 diwrnod gwaith.',
-  telephone: 'Ffôn',
+  telephone: 'Rhif ffôn',
   telephoneNumber: '0300 303 5171',
   telephoneDetails: 'Dydd Llun i ddydd Iau 9am - 5pm',
   cookiesHeading: 'Cwcis ymlaen',
