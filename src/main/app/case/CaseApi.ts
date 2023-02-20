@@ -36,11 +36,6 @@ export class CaseApi {
     if (cases.length === 0) {
       return false;
     }
-    cases.forEach(element => {
-      console.log('CASE ID: ', element.id);
-      console.log('CASE Date: ', element.case_data.dateSubmitted);
-      console.log('CASE Date: ', element.state);
-    });
 
     if (
       cases.filter(caseElement => caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted)

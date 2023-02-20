@@ -31,7 +31,7 @@ export default class EligibilityPostController<T extends AnyObject> {
       const userCase = await req.locals.api.getCase();
       if (userCase === null) {
         nextUrl = APPLYING_WITH_URL;
-      } else if (userCase && userCase.state !== State.Draft) {
+      } else if (userCase && (userCase.state === State.Submitted || userCase.state === State.LaSubmitted)) {
         nextUrl = APPLYING_WITH_URL;
       } else {
         nextUrl = HOME_URL;
