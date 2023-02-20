@@ -28,11 +28,11 @@ export class LoadTimeouts {
       });
 
       // Set the server response timeout for all HTTP requests
-      res.setTimeout(timeoutMs, () => {
+      /* res.setTimeout(timeoutMs, () => {
         console.log('timeoutMs inside response Timeout ----   ' + timeoutMs);
         const err = new HTTPError('Service Unavailable', StatusCodes.SERVICE_UNAVAILABLE);
         errorController.internalServerError(err, req as AppRequest, res);
-      });
+      }); */
 
       next();
     });
