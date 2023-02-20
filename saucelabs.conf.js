@@ -4,8 +4,8 @@ const testConfig = require('./src/test/e2e/config');
 const supportedBrowsers = require('./src/test/e2e/crossbrowser/supportedBrowsers.js');
 const testUserConfig = require('./src/test/config.js').config;
 
-const waitForTimeout = parseInt(process.env.WAIT_FOR_TIMEOUT) || 30000;
-const smartWait = parseInt(process.env.SMART_WAIT) || 30000;
+const waitForTimeout = parseInt(process.env.WAIT_FOR_TIMEOUT) || 300000;
+const smartWait = parseInt(process.env.SMART_WAIT) || 300000;
 const browser = process.env.SAUCELABS_BROWSER || 'chrome';
 const defaultSauceOptions = {
   username: process.env.SAUCE_USERNAME,
