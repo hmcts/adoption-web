@@ -2,7 +2,7 @@ security:
   referrerPolicy: 'origin'
 port: 3000
 timeout: 30000
-fileUploadTimeout: 300000
+fileUploadTimeout: 0
 services:
   authProvider:
     url: ''
