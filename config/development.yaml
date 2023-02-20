@@ -1,7 +1,7 @@
 security:
   referrerPolicy: 'origin'
 port: 3001
-timeout: 300000
+timeout: 0
 fileUploadTimeout: 0
 health:
   timeout: 5000
