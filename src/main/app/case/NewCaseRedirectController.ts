@@ -17,7 +17,7 @@ export class NewCaseRedirectController {
       res.redirect(START_ELIGIBILITY_URL);
     } else if (userCase) {
       // Returned case may be Draft OR Submitted
-      if (userCase.state === State.Draft) {
+      if (userCase.state !== State.Submitted && userCase.state !== State.LaSubmitted) {
         res.redirect(HOME_URL);
       } else {
         // Applications submitted on the login day
