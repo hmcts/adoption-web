@@ -34,6 +34,9 @@ export class LoadTimeouts {
         errorController.internalServerError(err, req as AppRequest, res);
       });
 
+      console.log('Request Path before next:     ' + req.path);
+      console.log('timeoutMs before next:     ' + timeoutMs);
+
       next();
     });
   }
