@@ -31,8 +31,8 @@ const initUploadManager = (): void => {
 
   const uppy = new Uppy({
     restrictions: {
-      maxFileSize: isLaPortal ? 26214400 : 2097152,
-      maxTotalFileSize: isLaPortal ? 262144000 : 10485760,
+      maxFileSize: isLaPortal ? 52428800 : 2097152,
+      maxTotalFileSize: isLaPortal ? 524288000 : 10485760,
       maxNumberOfFiles: 10, //jpg, png, pdf, doc/docx or tif
       allowedFileTypes: isLaPortal
         ? [
@@ -69,7 +69,12 @@ const initUploadManager = (): void => {
       target: '#uploadProgressBar',
       hideAfterFinish: true,
     })
-    .use(XHRUpload, { endpoint: `${url}${csrfQuery}`, bundle: true, headers: { accept: 'application/json' } })
+    .use(XHRUpload, {
+      endpoint: `${url}${csrfQuery}`,
+      bundle: true,
+      headers: { accept: 'application/json' },
+      timeout: 30 * 10000,
+    })
     .on('files-added', async () => {
       document.body.style.cursor = 'wait';
       try {
