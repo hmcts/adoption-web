@@ -2,7 +2,12 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isEmailValid, isFieldFilledIn, isGovUkEmail, isPhoneNoValid } from '../../../app/form/validation';
 
-const en = () => ({
+const getLocalAuthorityListItems = (localAuthorityList, selectedLocalAuthority) =>
+  localAuthorityList
+    .filter(item => item.value !== selectedLocalAuthority)
+    .map(item => ({ text: item.name, value: item.name }));
+
+const en = content => ({
   section: 'Application details',
   title: 'Your social worker details',
   line1: 'This is the social worker attached to your local authority.',
@@ -17,6 +22,10 @@ const en = () => ({
     'This will be used to send a notification to the local authority to progress your application so it is important that it is accurate. It should end in gov.uk.',
   applicantLocalAuthorityHint:
     'This is the local authority that your social worker works for. They will be named on the placement order if you are not sure.',
+  options: [
+    ...getLocalAuthorityListItems(content.localAuthorityList, content.userCase.applicantLocalAuthority),
+    { text: content.userCase.applicantLocalAuthority, value: content.userCase.applicantLocalAuthority, selected: true },
+  ],
   errors: {
     applicantSocialWorkerName: {
       required: 'Enter a name',
@@ -40,7 +49,7 @@ const en = () => ({
   },
 });
 
-const cy: typeof en = () => ({
+const cy: typeof en = content => ({
   section: 'Manylion y cais',
   title: 'Manylion eich gweithiwr cymdeithasol',
   line1: "Dyma'r gweithiwr cymdeithasol sydd yn gweithio i’ch awdurdod lleol.",
@@ -56,6 +65,10 @@ const cy: typeof en = () => ({
     'Defnyddir hwn i anfon hysbysiad i’r awdurdod lleol i symud eich cais yn eiflaen, felly mae’n bwysig ei fod yn gywir. Dylai ddiweddu gyda gov.uk.',
   applicantLocalAuthorityHint:
     "Dyma'r awdurdod lleol y mae eich gweithiwr cymdeithasol yn gweithio iddo. Bydd wedi’i enwi ar y gorchymyn lleoli os nad ydych yn siŵr.",
+  options: [
+    ...getLocalAuthorityListItems(content.localAuthorityList, content.userCase.applicantLocalAuthority),
+    { text: content.userCase.applicantLocalAuthority, value: content.userCase.applicantLocalAuthority, selected: true },
+  ],
   errors: {
     applicantSocialWorkerName: {
       required: 'Rhowch enw',
@@ -111,12 +124,15 @@ export const form: FormContent = {
         }
       },
     },
-    applicantLocalAuthority: {
-      type: 'text',
-      classes: 'govuk-label govuk-!-width-two-thirds',
+    applicantLocalAuthorityHint: {
+      type: 'hint',
       label: l => l.applicantLocalAuthority,
       hint: l => l.applicantLocalAuthorityHint,
-      labelSize: null,
+    },
+    applicantLocalAuthority: {
+      type: 'select-dropdown',
+      id: 'location-picker',
+      options: l => l.options,
       validator: isFieldFilledIn,
     },
     applicantLocalAuthorityEmail: {
@@ -142,7 +158,7 @@ const languages = {
 };
 
 export const generateContent: TranslationFn = content => {
-  const translations = languages[content.language]();
+  const translations = languages[content.language](content);
   return {
     ...translations,
     form,

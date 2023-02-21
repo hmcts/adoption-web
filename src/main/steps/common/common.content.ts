@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { capitalize } from 'lodash';
 
 import { CaseWithId } from '../../app/case/case';
 import { Fee, State } from '../../app/case/definition';
 import { Eligibility } from '../../app/controller/AppRequest';
 import { PageContent, TranslationFn } from '../../app/controller/GetController';
-import { CourtVenue } from '../../app/court/location';
+import { CourtVenue, LocalAuthorityList } from '../../app/court/location';
 import { SAVE_AND_RELOGIN } from '../../steps/urls';
 
 const en = {
@@ -253,6 +254,7 @@ export const generatePageContent = ({
   eligibility,
   fee,
   courtList,
+  localAuthorityList,
 }: {
   language: Language;
   pageContent?: TranslationFn;
@@ -262,6 +264,7 @@ export const generatePageContent = ({
   eligibility?: Eligibility;
   fee?: Fee;
   courtList?: CourtVenue[];
+  localAuthorityList?: LocalAuthorityList[];
 }): PageContent => {
   const commonTranslations: typeof en = language === 'en' ? en : cy;
   const serviceName = getServiceName(commonTranslations);
@@ -274,6 +277,7 @@ export const generatePageContent = ({
     language,
     userCase,
     courtList,
+    localAuthorityList,
     userEmail,
     contactEmail,
     addresses,
@@ -299,6 +303,7 @@ export type CommonContent = typeof en & {
   pageContent?: TranslationFn;
   userCase?: Partial<CaseWithId>;
   courtList?: CourtVenue[];
+  localAuthorityList?: LocalAuthorityList[];
   userEmail?: string;
   contactEmail?: string;
   referenceNumber?: string;
@@ -310,3 +315,4 @@ export type CommonContent = typeof en & {
 };
 
 export type Language = 'en' | 'cy';
+/* eslint-enable @typescript-eslint/no-non-null-assertion */

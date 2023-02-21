@@ -84,9 +84,13 @@ const cyContent = {
   },
 };
 
-const commonContent = { language: EN } as CommonContent;
-
 describe('children > social-worker > content', () => {
+  const commonContent = generatePageContent({
+    language: 'en',
+    userCase: { childLocalAuthority: 'MOCK', applicantLocalAuthority: 'MOCK' },
+    localAuthorityList: [{ code: 'MOCK', name: 'MOCK' }],
+  }) as CommonContent;
+
   it('should return correct english content', () => {
     languageAssertions('en', enContent, () => generateContent(commonContent));
   });
@@ -139,15 +143,13 @@ describe('children > social-worker > content', () => {
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockEmail');
   });
 
-  it('should have an childLocalAuthority text input field', () => {
+  it('should have an childLocalAuthority select-dropdown input field', () => {
     const generatedContent = generateContent(commonContent) as Record<string, never>;
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const childLocalAuthority = fields.childLocalAuthority;
 
-    expect(childLocalAuthority.type).toBe('text');
-    expect((childLocalAuthority.label as LanguageLookup)(generatedContent)).toBe(enContent.childLocalAuthority);
-    expect((childLocalAuthority.hint as LanguageLookup)(generatedContent)).toBe(enContent.childLocalAuthorityHint);
+    expect(childLocalAuthority.type).toBe('select-dropdown');
 
     (childLocalAuthority.validator as ValidationCheck)('MockEmail', {});
     expect(isFieldFilledIn).toHaveBeenCalled();

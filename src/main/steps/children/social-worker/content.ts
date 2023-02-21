@@ -2,7 +2,12 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isEmailValid, isFieldFilledIn, isGovUkEmail, isPhoneNoValid } from '../../../app/form/validation';
 
-const en = () => ({
+const getLocalAuthorityListItems = (localAuthorityList, selectedLocalAuthority) =>
+  localAuthorityList
+    .filter(item => item.value !== selectedLocalAuthority)
+    .map(item => ({ text: item.name, value: item.name }));
+
+const en = content => ({
   section: 'Application details',
   title: "Child's social worker details",
   line1: 'You can get these details from your local authority or adoption agency.',
@@ -16,6 +21,10 @@ const en = () => ({
     'This will be used to send a notification to the local authority to progress your application so it is important that it is accurate. It should end in gov.uk.',
   childLocalAuthorityHint:
     'This is the local authority with parental responsibility for the child. It may be different to your own local authority.',
+  options: [
+    ...getLocalAuthorityListItems(content.localAuthorityList, content.userCase.childLocalAuthority),
+    { text: content.userCase.childLocalAuthority, value: content.userCase.childLocalAuthority, selected: true },
+  ],
   errors: {
     childSocialWorkerName: {
       required: 'Enter name of child’s social worker',
@@ -39,7 +48,7 @@ const en = () => ({
   },
 });
 
-const cy: typeof en = () => ({
+const cy: typeof en = content => ({
   section: 'Manylion y cais',
   title: 'Manylion gweithiwr cymdeithasol y plentyn',
   line1: 'Gallwch gael y manylion hyn gan eich awdurdod lleol neu asiantaeth fabwysiadu.',
@@ -54,6 +63,10 @@ const cy: typeof en = () => ({
     'Defnyddir hwn i anfon hysbysiad i’r awdurdod lleol i symud eich cais yn eiflaen, felly mae’n bwysig ei fod yn gywir. Dylai ddiweddu gyda gov.uk.',
   childLocalAuthorityHint:
     "Dyma'r awdurdod lleol sydd â chyfrifoldeb rhiant dros y plentyn. Gall fod yn wahanol i'ch awdurdod lleol eich hun.",
+  options: [
+    ...getLocalAuthorityListItems(content.localAuthorityList, content.userCase.childLocalAuthority),
+    { text: content.userCase.childLocalAuthority, value: content.userCase.childLocalAuthority, selected: true },
+  ],
   errors: {
     childSocialWorkerName: {
       required: 'Rhowch enw gweithiwr cymdeithasol y plentyn',
@@ -108,12 +121,15 @@ export const form: FormContent = {
         }
       },
     },
-    childLocalAuthority: {
-      type: 'text',
-      classes: 'govuk-label govuk-!-width-two-thirds',
+    childLocalAuthorityLabelHint: {
+      type: 'hint',
       label: l => l.childLocalAuthority,
       hint: l => l.childLocalAuthorityHint,
-      labelSize: null,
+    },
+    childLocalAuthority: {
+      type: 'select-dropdown',
+      id: 'location-picker',
+      options: l => l.options,
       validator: isFieldFilledIn,
     },
     childLocalAuthorityEmail: {
@@ -139,7 +155,7 @@ const languages = {
 };
 
 export const generateContent: TranslationFn = content => {
-  const translations = languages[content.language]();
+  const translations = languages[content.language](content);
   return {
     ...translations,
     form,
