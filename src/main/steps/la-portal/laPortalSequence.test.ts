@@ -7,9 +7,9 @@ import { YesNoNotsure, YesOrNo } from '../../app/case/definition';
 import { laPortalSequence } from './laPortalSequence';
 
 describe('la-portal > laPortalSequence', () => {
-  test('should contain 59 entries in sibling screen sequence', () => {
+  test('should contain 61 entries in sibling screen sequence', () => {
     Date.now = jest.fn(() => +new Date('2021-01-01'));
-    expect(laPortalSequence).toHaveLength(59);
+    expect(laPortalSequence).toHaveLength(61);
     let incr = 0;
     expect(laPortalSequence[incr].url).toBe('/la-portal/kba-case-ref');
     expect(laPortalSequence[incr].getNextStep({})).toBe('/la-portal/kba-completed');
@@ -100,8 +100,19 @@ describe('la-portal > laPortalSequence', () => {
     expect(laPortalSequence[incr].contentDir).toBe('MOCK_BASE_DIR/../birth-father/alive');
     expect(laPortalSequence[incr].getNextStep({})).toBe('/la-portal/task-list');
     expect(laPortalSequence[incr].getNextStep({ birthFatherStillAlive: YesNoNotsure.YES })).toBe(
-      '/la-portal/birth-father/nationality'
+      '/la-portal/birth-father/parental-responsibility'
     );
+
+    expect(laPortalSequence[++incr].url).toBe('/la-portal/birth-father/parental-responsibility');
+    expect(laPortalSequence[incr].contentDir).toBe('MOCK_BASE_DIR/../birth-father/parental-responsibility');
+    expect(laPortalSequence[incr].getNextStep({})).toBe('/la-portal/task-list');
+    expect(laPortalSequence[incr].getNextStep({ birthFatherResponsibility: YesNoNotsure.YES })).toBe(
+      '/la-portal/birth-father/parental-responsibility/granted'
+    );
+
+    expect(laPortalSequence[++incr].url).toBe('/la-portal/birth-father/parental-responsibility/granted');
+    expect(laPortalSequence[incr].contentDir).toBe('MOCK_BASE_DIR/../birth-father/parental-responsibility/granted');
+    expect(laPortalSequence[incr].getNextStep({})).toBe('/la-portal/birth-father/nationality');
 
     expect(laPortalSequence[++incr].url).toBe('/la-portal/birth-father/nationality');
     expect(laPortalSequence[incr].contentDir).toBe('MOCK_BASE_DIR/../birth-father/nationality');

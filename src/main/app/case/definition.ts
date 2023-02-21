@@ -260,6 +260,14 @@ export const enum Nationality {
   NOT_SURE = 'Not sure',
 }
 
+export const enum ResponsibilityReasons {
+  BIRTH_CERTIFICATE = 'BirthCertificate',
+  COURT_ORDER = 'CourtOrder',
+  RESPONSIBILITY_ORDER = 'ResponsibilityOrder',
+  RESPONSIBILITY_AGREEMENT = 'ResponsibilityAgreement',
+  OTHER = 'Other',
+}
+
 export const enum ContactDetails {
   EMAIL = 'email',
   PHONE = 'phone',
@@ -385,6 +393,8 @@ export interface CaseData {
   birthFatherLastName: string;
   birthFatherStillAlive: string;
   birthFatherNotAliveReason: string;
+  birthFatherResponsibility: string;
+  birthFatherResponsibilityGranted: ResponsibilityReasons[];
   birthFatherNationality: Nationality[];
   birthFatherOtherNationalities: ListValue<AdditionalNationality>[];
   birthFatherOccupation: string;
