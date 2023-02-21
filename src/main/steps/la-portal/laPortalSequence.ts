@@ -123,11 +123,16 @@ const birthFatherSequence = [
     getNextStep: data =>
       data.birthFatherResponsibility === YesNoNotsure.YES
         ? Urls.LA_PORTAL_BIRTH_FATHER_PARENTAL_RESPONSIBILITY_GRANTED
-        : Urls.LA_PORTAL_TASK_LIST,
+        : Urls.LA_PORTAL_BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY,
   },
   {
     url: Urls.LA_PORTAL_BIRTH_FATHER_PARENTAL_RESPONSIBILITY_GRANTED,
     contentDir: path.join(__dirname, '..', 'birth-father', 'parental-responsibility', 'granted'),
+    getNextStep: () => Urls.LA_PORTAL_BIRTH_FATHER_NATIONALITY,
+  },
+  {
+    url: Urls.LA_PORTAL_BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY,
+    contentDir: path.join(__dirname, '..', 'birth-father', 'parental-responsibility', 'no-responsibility'),
     getNextStep: () => Urls.LA_PORTAL_BIRTH_FATHER_NATIONALITY,
   },
   {

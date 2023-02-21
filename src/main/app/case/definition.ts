@@ -265,6 +265,8 @@ export const enum ResponsibilityReasons {
   COURT_ORDER = 'CourtOrder',
   RESPONSIBILITY_ORDER = 'ResponsibilityOrder',
   RESPONSIBILITY_AGREEMENT = 'ResponsibilityAgreement',
+  REMOVED_BY_COURT = 'removedByCourt',
+  NEVER_OBTAINED = 'neverObtained',
   OTHER = 'Other',
 }
 
@@ -395,6 +397,7 @@ export interface CaseData {
   birthFatherNotAliveReason: string;
   birthFatherResponsibility: string;
   birthFatherResponsibilityGranted: ResponsibilityReasons[];
+  birthFatherNoResponsibility: ResponsibilityReasons[];
   birthFatherNationality: Nationality[];
   birthFatherOtherNationalities: ListValue<AdditionalNationality>[];
   birthFatherOccupation: string;

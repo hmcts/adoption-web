@@ -10,6 +10,7 @@ import {
   BIRTH_FATHER_MANUAL_ADDRESS,
   BIRTH_FATHER_NAME_ON_CERTIFICATE,
   BIRTH_FATHER_NATIONALITY,
+  BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY,
   BIRTH_FATHER_OCCUPATION,
   BIRTH_FATHER_PARENTAL_RESPONSIBILITY,
   BIRTH_FATHER_PARENTAL_RESPONSIBILITY_GRANTED,
@@ -46,10 +47,15 @@ export const birthFatherSequence: Step[] = [
     getNextStep: data =>
       (data as Partial<CaseWithId>).birthFatherResponsibility === YesNoNotsure.YES
         ? BIRTH_FATHER_PARENTAL_RESPONSIBILITY_GRANTED
-        : TASK_LIST_URL,
+        : BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY,
   },
   {
     url: BIRTH_FATHER_PARENTAL_RESPONSIBILITY_GRANTED,
+    showInSection: Sections.AboutChildren,
+    getNextStep: () => BIRTH_FATHER_NATIONALITY,
+  },
+  {
+    url: BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY,
     showInSection: Sections.AboutChildren,
     getNextStep: () => BIRTH_FATHER_NATIONALITY,
   },

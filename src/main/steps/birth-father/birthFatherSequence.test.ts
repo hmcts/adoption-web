@@ -8,6 +8,7 @@ import {
   BIRTH_FATHER_MANUAL_ADDRESS,
   BIRTH_FATHER_NAME_ON_CERTIFICATE,
   BIRTH_FATHER_NATIONALITY,
+  BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY,
   BIRTH_FATHER_OCCUPATION,
   BIRTH_FATHER_PARENTAL_RESPONSIBILITY,
   BIRTH_FATHER_PARENTAL_RESPONSIBILITY_GRANTED,
@@ -24,6 +25,7 @@ const [
   isAlive,
   parentalResponsibility,
   granted,
+  noRepsonsibility,
   nationality,
   occupation,
   isAddressKnown,
@@ -72,13 +74,21 @@ describe('birth father sequence', () => {
       expect(getNextStep({ birthFatherResponsibility: YesNoNotsure.YES })).toBe(
         BIRTH_FATHER_PARENTAL_RESPONSIBILITY_GRANTED
       );
-      expect(getNextStep({ birthFatherResponsibility: YesNoNotsure.NO })).toBe(TASK_LIST_URL);
+      expect(getNextStep({ birthFatherResponsibility: YesNoNotsure.NO })).toBe(BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY);
     });
 
     it('should be correct for granted', () => {
       const { url, showInSection, getNextStep } = granted;
 
       expect(url).toBe(BIRTH_FATHER_PARENTAL_RESPONSIBILITY_GRANTED);
+      expect(showInSection).toBe(aboutChildren);
+      expect(getNextStep({})).toBe(BIRTH_FATHER_NATIONALITY);
+    });
+
+    it('should be correct for noRepsonsibility', () => {
+      const { url, showInSection, getNextStep } = noRepsonsibility;
+
+      expect(url).toBe(BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY);
       expect(showInSection).toBe(aboutChildren);
       expect(getNextStep({})).toBe(BIRTH_FATHER_NATIONALITY);
     });
