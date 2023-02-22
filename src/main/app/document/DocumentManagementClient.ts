@@ -36,6 +36,7 @@ export class DocumentManagementClient {
     }
     const response: AxiosResponse<DocumentManagementResponse> = await this.client.post('/cases/documents', formData, {
       headers: { ...formData.getHeaders() },
+      timeout: 2 * 60 * 1000,
     });
 
     return response.data?.documents || [];
