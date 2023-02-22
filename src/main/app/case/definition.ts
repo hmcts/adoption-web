@@ -261,12 +261,12 @@ export const enum Nationality {
 }
 
 export const enum ResponsibilityReasons {
-  BIRTH_CERTIFICATE = 'BirthCertificate',
-  COURT_ORDER = 'CourtOrder',
-  RESPONSIBILITY_ORDER = 'ResponsibilityOrder',
-  RESPONSIBILITY_AGREEMENT = 'ResponsibilityAgreement',
-  REMOVED_BY_COURT = 'removedByCourt',
-  NEVER_OBTAINED = 'neverObtained',
+  BIRTH_CERTIFICATE = 'Birth certificate',
+  COURT_ORDER = 'Court order',
+  RESPONSIBILITY_ORDER = 'Parental responsibility order',
+  RESPONSIBILITY_AGREEMENT = 'Parental responsibility agreement',
+  REMOVED_BY_COURT = 'Parental responsibility removed by court',
+  NEVER_OBTAINED = 'Parental responsibility never obtained',
   OTHER = 'Other',
 }
 
@@ -396,8 +396,8 @@ export interface CaseData {
   birthFatherStillAlive: string;
   birthFatherNotAliveReason: string;
   birthFatherResponsibility: string;
-  birthFatherResponsibilityGranted: ResponsibilityReasons[];
-  birthFatherNoResponsibility: ResponsibilityReasons[];
+  birthFatherResponsibilityReason: ResponsibilityReasons[];
+  birthFatherOtherResponsibilityReason: string;
   birthFatherNationality: Nationality[];
   birthFatherOtherNationalities: ListValue<AdditionalNationality>[];
   birthFatherOccupation: string;

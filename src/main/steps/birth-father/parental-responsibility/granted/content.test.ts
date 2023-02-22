@@ -13,16 +13,16 @@ const enContent = {
   title: 'How was parental responsibility granted to the birth father?',
   hint: 'Select all options that are relevant.',
   courtOrder: 'Court order',
-  birthCert: 'Birth certificate',
+  birthCertificate: 'Birth certificate',
   responsibilityOrder: 'Parental responsibility order',
   responsibilityAgreement: 'Parental responsibility agreement',
   otherReason: 'Other',
   otherHint: 'Enter the reason how parental responsibility was granted to the birth father.',
   errors: {
-    birthFatherResponsibilityGranted: {
+    birthFatherResponsibilityReason: {
       required: 'Select how parental responsibility was granted to the birth father.',
     },
-    otherResponsibilityReason: {
+    birthFatherOtherResponsibilityReason: {
       required: 'Enter the reason how parental responsibility was granted to the birth father',
     },
   },
@@ -33,16 +33,16 @@ const cyContent = {
   title: 'Sut caniatawyd cyfrifoldeb rhiant i’r tad genedigol?',
   hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
   courtOrder: 'Gorchymyn llys',
-  birthCert: 'Tystysgrif geni',
+  birthCertificate: 'Tystysgrif geni',
   responsibilityOrder: 'Gorchymyn cyfrifoldeb rhiant',
   responsibilityAgreement: 'Cytundeb cyfrifoldeb rhiant',
   otherReason: 'Arall',
   otherHint: "Nodwch y rheswm sut y rhoddwyd cyfrifoldeb rhiant i'r tad biolegol.",
   errors: {
-    birthFatherResponsibilityGranted: {
+    birthFatherResponsibilityReason: {
       required: 'Dewiswch sut caniatawyd cyfrifoldeb rhiant i’r tad genedigol',
     },
-    otherResponsibilityReason: {
+    birthFatherOtherResponsibilityReason: {
       required: "Nodwch y rheswm sut y rhoddwyd cyfrifoldeb rhiant i'r tad biolegol.",
     },
   },
@@ -70,13 +70,13 @@ describe('birth-father > parental-responsibility > granted > content', () => {
 
   test('should display checkbox with responsibility options', () => {
     const fields = (generatedContent.form as FormContent).fields as FormFields;
-    const field = fields.birthFatherResponsibilityGranted as FormOptions;
+    const field = fields.birthFatherResponsibilityReason as FormOptions;
 
     expect(field.type).toBe('checkboxes');
     expect((field.label as Function)(generatedContent)).toBe(enContent.title);
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
     expect(field.values).toHaveLength(5);
-    expect((field.values[0].label as Function)(generatedContent)).toBe(enContent.birthCert);
+    expect((field.values[0].label as Function)(generatedContent)).toBe(enContent.birthCertificate);
     expect(field.values[0].value).toBe(ResponsibilityReasons.BIRTH_CERTIFICATE);
     expect((field.values[1].label as Function)(generatedContent)).toBe(enContent.courtOrder);
     expect(field.values[1].value).toBe(ResponsibilityReasons.COURT_ORDER);
@@ -86,6 +86,11 @@ describe('birth-father > parental-responsibility > granted > content', () => {
     expect(field.values[3].value).toBe(ResponsibilityReasons.RESPONSIBILITY_AGREEMENT);
     expect((field.values[4].label as Function)(generatedContent)).toBe(enContent.otherReason);
     expect(field.values[4].value).toBe(ResponsibilityReasons.OTHER);
+
+    expect((field.hint as Function)(generatedContent)).toBe(enContent.hint);
+    expect((field.values[4].subFields?.birthFatherOtherResponsibilityReason.label as Function)(generatedContent)).toBe(
+      enContent.otherHint
+    );
   });
 
   test('should contain submit button', () => {

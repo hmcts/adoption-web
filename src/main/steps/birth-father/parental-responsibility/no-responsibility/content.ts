@@ -13,10 +13,10 @@ const en = () => ({
   otherReason: 'Other',
   otherHint: 'Enter the reason why the birth father does not have parental responsibility',
   errors: {
-    birthFatherNoResponsibility: {
+    birthFatherResponsibilityReason: {
       required: 'Select why the birth father does not have parental responsibility.',
     },
-    otherResponsibilityReason: {
+    birthFatherOtherResponsibilityReason: {
       required: 'Enter the reason why the birth father does not have parental responsibility.',
     },
   },
@@ -31,10 +31,10 @@ const cy: typeof en = () => ({
   otherReason: 'Arall',
   otherHint: 'Nodwch y rheswm pam nad oes gan y tad genedigol gyfrifoldeb rhiant.',
   errors: {
-    birthFatherNoResponsibility: {
+    birthFatherResponsibilityReason: {
       required: 'Dewiswch pam nad oes gan y tad genedigol gyfrifoldeb rhiant.',
     },
-    otherResponsibilityReason: {
+    birthFatherOtherResponsibilityReason: {
       required: 'Nodwch y rheswm pam nad oes gan y tad genedigol gyfrifoldeb rhiant.',
     },
   },
@@ -42,7 +42,7 @@ const cy: typeof en = () => ({
 
 export const form: FormContent = {
   fields: {
-    birthFatherNoResponsibility: {
+    birthFatherResponsibilityReason: {
       type: 'checkboxes',
       label: l => l.title,
       labelSize: 'l',
@@ -52,21 +52,22 @@ export const form: FormContent = {
       validator: atLeastOneFieldIsChecked,
       values: [
         {
-          name: 'birthFatherNoResponsibility',
+          name: 'birthFatherResponsibilityReason',
           label: l => l.removedByCourt,
           value: ResponsibilityReasons.REMOVED_BY_COURT,
         },
         {
-          name: 'birthFatherNoResponsibility',
+          name: 'birthFatherResponsibilityReason',
           label: l => l.neverObtained,
           value: ResponsibilityReasons.NEVER_OBTAINED,
         },
         {
-          name: 'birthFatherNoResponsibility',
+          name: 'birthFatherResponsibilityReason',
           label: l => l.otherReason,
           value: ResponsibilityReasons.OTHER,
           subFields: {
-            otherResponsibilityReason: {
+            birthFatherOtherResponsibilityReason: {
+              name: 'birthFatherOtherResponsibilityReason',
               type: 'text',
               classes: 'govuk-!-width-two-thirds',
               label: l => l.otherHint,

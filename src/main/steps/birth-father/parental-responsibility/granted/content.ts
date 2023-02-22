@@ -9,16 +9,16 @@ const en = () => ({
   title: 'How was parental responsibility granted to the birth father?',
   hint: 'Select all options that are relevant.',
   courtOrder: 'Court order',
-  birthCert: 'Birth certificate',
+  birthCertificate: 'Birth certificate',
   responsibilityOrder: 'Parental responsibility order',
   responsibilityAgreement: 'Parental responsibility agreement',
   otherReason: 'Other',
   otherHint: 'Enter the reason how parental responsibility was granted to the birth father.',
   errors: {
-    birthFatherResponsibilityGranted: {
+    birthFatherResponsibilityReason: {
       required: 'Select how parental responsibility was granted to the birth father.',
     },
-    otherResponsibilityReason: {
+    birthFatherOtherResponsibilityReason: {
       required: 'Enter the reason how parental responsibility was granted to the birth father',
     },
   },
@@ -29,16 +29,16 @@ const cy: typeof en = () => ({
   title: 'Sut caniatawyd cyfrifoldeb rhiant i’r tad genedigol?',
   hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
   courtOrder: 'Gorchymyn llys',
-  birthCert: 'Tystysgrif geni',
+  birthCertificate: 'Tystysgrif geni',
   responsibilityOrder: 'Gorchymyn cyfrifoldeb rhiant',
   responsibilityAgreement: 'Cytundeb cyfrifoldeb rhiant',
   otherReason: 'Arall',
   otherHint: "Nodwch y rheswm sut y rhoddwyd cyfrifoldeb rhiant i'r tad biolegol.",
   errors: {
-    birthFatherResponsibilityGranted: {
+    birthFatherResponsibilityReason: {
       required: 'Dewiswch sut caniatawyd cyfrifoldeb rhiant i’r tad genedigol',
     },
-    otherResponsibilityReason: {
+    birthFatherOtherResponsibilityReason: {
       required: "Nodwch y rheswm sut y rhoddwyd cyfrifoldeb rhiant i'r tad biolegol.",
     },
   },
@@ -46,7 +46,7 @@ const cy: typeof en = () => ({
 
 export const form: FormContent = {
   fields: {
-    birthFatherResponsibilityGranted: {
+    birthFatherResponsibilityReason: {
       type: 'checkboxes',
       label: l => l.title,
       labelSize: 'l',
@@ -56,31 +56,32 @@ export const form: FormContent = {
       validator: atLeastOneFieldIsChecked,
       values: [
         {
-          name: 'birthFatherResponsibilityGranted',
-          label: l => l.birthCert,
+          name: 'birthFatherResponsibilityReason',
+          label: l => l.birthCertificate,
           value: ResponsibilityReasons.BIRTH_CERTIFICATE,
         },
         {
-          name: 'birthFatherResponsibilityGranted',
+          name: 'birthFatherResponsibilityReason',
           label: l => l.courtOrder,
           value: ResponsibilityReasons.COURT_ORDER,
         },
         {
-          name: 'birthFatherResponsibilityGranted',
+          name: 'birthFatherResponsibilityReason',
           label: l => l.responsibilityOrder,
           value: ResponsibilityReasons.RESPONSIBILITY_ORDER,
         },
         {
-          name: 'birthFatherResponsibilityGranted',
+          name: 'birthFatherResponsibilityReason',
           label: l => l.responsibilityAgreement,
           value: ResponsibilityReasons.RESPONSIBILITY_AGREEMENT,
         },
         {
-          name: 'birthFatherResponsibilityGranted',
+          name: 'birthFatherResponsibilityReason',
           label: l => l.otherReason,
           value: ResponsibilityReasons.OTHER,
           subFields: {
-            otherResponsibilityReason: {
+            birthFatherOtherResponsibilityReason: {
+              name: 'birthFatherOtherResponsibilityReason',
               type: 'text',
               classes: 'govuk-!-width-two-thirds',
               label: l => l.otherHint,

@@ -1,6 +1,12 @@
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { CaseDate, CaseWithId, Checkbox, FieldPrefix } from '../../../app/case/case';
-import { AdditionalNationality, Nationality, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
+import {
+  AdditionalNationality,
+  Nationality,
+  ResponsibilityReasons,
+  YesNoNotsure,
+  YesOrNo,
+} from '../../../app/case/definition';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { PageContent } from '../../../app/controller/GetController';
 import * as Urls from '../../../steps/urls';
@@ -52,6 +58,7 @@ type SummaryListsContent = PageContent & {
   siblingRelationships: Record<string, string>;
   siblingPlacementOrderType: Record<string, string>;
   placementOrderType: Record<string, string>;
+  responsibilityReasons: Record<string, string>;
 };
 
 const getSectionSummaryLists = (rows: SummaryListRows[], content: PageContent): GovUKNunjucksSummary[] => {
@@ -152,6 +159,23 @@ const formatNationalities = (
   return nationalities.join('<br>');
 };
 
+const formatResponsibilityReasons = (
+  responsibility: (string | ResponsibilityReasons)[],
+  otherReason: string,
+  content: { responsibilityReasons: { [x: string]: never } }
+): string => {
+  const responsibilities = responsibility.filter(item => item !== ResponsibilityReasons.OTHER);
+  const translatedResponsibilities = [];
+  responsibilities.forEach(element => translatedResponsibilities.push(content.responsibilityReasons[element]));
+
+  if (responsibility.includes(ResponsibilityReasons.OTHER) && translatedResponsibilities.length === 0) {
+    return otherReason;
+  } else if (responsibility.includes(ResponsibilityReasons.OTHER)) {
+    return translatedResponsibilities.join('<br>') + '<br>' + otherReason;
+  }
+  return translatedResponsibilities.join('<br>');
+};
+
 /* eslint-disable import/namespace */
 export const birthParentSummaryList = (
   { sectionTitles, keys, ...content }: SummaryListsContent,
@@ -226,6 +250,38 @@ function fieldPrefixBirthMother(
     },
     ...(userCase[`${prefix}StillAlive`] === YesOrNo.YES
       ? [
+          ...(prefix === FieldPrefix.BIRTH_FATHER
+            ? [
+                {
+                  key: keys.responsibility,
+                  valueHtml: userCase['birthFatherResponsibility'],
+                  changeUrl: Urls.LA_PORTAL_BIRTH_FATHER_PARENTAL_RESPONSIBILITY,
+                },
+                ...(userCase['birthFatherResponsibility'] === YesOrNo.YES
+                  ? [
+                      {
+                        key: content.reason,
+                        valueHtml: formatResponsibilityReasons(
+                          userCase['birthFatherResponsibilityReason']!,
+                          userCase['birthFatherOtherResponsibilityReason']!,
+                          content
+                        ),
+                        changeUrl: Urls.LA_PORTAL_BIRTH_FATHER_PARENTAL_RESPONSIBILITY_GRANTED,
+                      },
+                    ]
+                  : [
+                      {
+                        key: content.reason,
+                        valueHtml: formatResponsibilityReasons(
+                          userCase['birthFatherResponsibilityReason']!,
+                          userCase['birthFatherOtherResponsibilityReason']!,
+                          content
+                        ),
+                        changeUrl: Urls.LA_PORTAL_BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY,
+                      },
+                    ]),
+              ]
+            : []),
           {
             key: keys.nationality,
             valueHtml: formatNationalities(

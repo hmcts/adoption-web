@@ -17,10 +17,10 @@ const enContent = {
   otherReason: 'Other',
   otherHint: 'Enter the reason why the birth father does not have parental responsibility',
   errors: {
-    birthFatherNoResponsibility: {
+    birthFatherResponsibilityReason: {
       required: 'Select why the birth father does not have parental responsibility.',
     },
-    otherResponsibilityReason: {
+    birthFatherOtherResponsibilityReason: {
       required: 'Enter the reason why the birth father does not have parental responsibility.',
     },
   },
@@ -35,10 +35,10 @@ const cyContent = {
   otherReason: 'Arall',
   otherHint: 'Nodwch y rheswm pam nad oes gan y tad genedigol gyfrifoldeb rhiant.',
   errors: {
-    birthFatherNoResponsibility: {
+    birthFatherResponsibilityReason: {
       required: 'Dewiswch pam nad oes gan y tad genedigol gyfrifoldeb rhiant.',
     },
-    otherResponsibilityReason: {
+    birthFatherOtherResponsibilityReason: {
       required: 'Nodwch y rheswm pam nad oes gan y tad genedigol gyfrifoldeb rhiant.',
     },
   },
@@ -66,7 +66,7 @@ describe('birth-father > parental-responsibility > granted > content', () => {
 
   test('should display checkbox with responsibility options', () => {
     const fields = (generatedContent.form as FormContent).fields as FormFields;
-    const field = fields.birthFatherNoResponsibility as FormOptions;
+    const field = fields.birthFatherResponsibilityReason as FormOptions;
 
     expect(field.type).toBe('checkboxes');
     expect((field.label as Function)(generatedContent)).toBe(enContent.title);
@@ -78,6 +78,11 @@ describe('birth-father > parental-responsibility > granted > content', () => {
     expect(field.values[1].value).toBe(ResponsibilityReasons.NEVER_OBTAINED);
     expect((field.values[2].label as Function)(generatedContent)).toBe(enContent.otherReason);
     expect(field.values[2].value).toBe(ResponsibilityReasons.OTHER);
+
+    expect((field.hint as Function)(generatedContent)).toBe(enContent.hint);
+    expect((field.values[2].subFields?.birthFatherOtherResponsibilityReason.label as Function)(generatedContent)).toBe(
+      enContent.otherHint
+    );
   });
 
   test('should contain submit button', () => {
