@@ -73,7 +73,7 @@ const initUploadManager = (): void => {
       endpoint: `${url}${csrfQuery}`,
       bundle: true,
       headers: { accept: 'application/json' },
-      timeout: 0,
+      timeout: 50_000,
     })
     .on('files-added', async () => {
       document.body.style.cursor = 'wait';

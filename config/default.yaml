@@ -1,7 +1,7 @@
 security:
   referrerPolicy: 'origin'
 port: 3000
-timeout: 30000
+timeout: 300000
 services:
   authProvider:
     url: ''
