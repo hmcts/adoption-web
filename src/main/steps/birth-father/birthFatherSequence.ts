@@ -45,7 +45,7 @@ export const birthFatherSequence: Step[] = [
     url: BIRTH_FATHER_PARENTAL_RESPONSIBILITY,
     showInSection: Sections.AboutChildren,
     getNextStep: data =>
-      (data as Partial<CaseWithId>).birthFatherResponsibility === YesNoNotsure.YES
+      (data as Partial<CaseWithId>).birthFatherResponsibility === YesOrNo.YES
         ? BIRTH_FATHER_PARENTAL_RESPONSIBILITY_GRANTED
         : BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY,
   },

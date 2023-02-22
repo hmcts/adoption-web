@@ -314,7 +314,7 @@ export interface Case {
   birthFatherLastNames?: string;
   birthFatherStillAlive?: string;
   birthFatherUnsureAliveReason?: string;
-  birthFatherResponsibility?: string;
+  birthFatherResponsibility?: YesOrNo;
   birthFatherResponsibilityReason?: string[];
   birthFatherOtherResponsibilityReason?: string;
   birthFatherNationality?: string[];
