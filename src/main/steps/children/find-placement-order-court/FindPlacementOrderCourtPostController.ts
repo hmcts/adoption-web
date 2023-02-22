@@ -5,6 +5,7 @@ import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
+import { APPLICANT_SOCIAL_WORKER, CHILDREN_FIND_PLACEMENT_ORDER_COURT, SOCIAL_WORKER } from '../../urls';
 
 @autobind
 export default class FindFamilyCourtPostController extends PostController<AnyObject> {
@@ -20,14 +21,29 @@ export default class FindFamilyCourtPostController extends PostController<AnyObj
     Object.assign(req.session.userCase, formData);
 
     this.filterErrorsForSaveAsDraft(req);
-
     if (isFilledPlacementOrderCourt) {
       if (req.session.errors.filter(e => e.propertyName === 'placementOrderCourt').length === 0) {
-        req.session.errors.push({
-          id: 'location-picker',
-          errorType: isFilledPlacementOrderCourt,
-          propertyName: 'placementOrderCourt',
-        });
+        console.log('placementOrderCourt isFilledPlacementOrderCourt: ', isFilledPlacementOrderCourt);
+        console.log('placementOrderCourt isFilledPlacementOrderCourt: ', req.path);
+        if (req.path === CHILDREN_FIND_PLACEMENT_ORDER_COURT) {
+          req.session.errors.push({
+            id: 'location-picker',
+            errorType: isFilledPlacementOrderCourt,
+            propertyName: 'placementOrderCourt',
+          });
+        } else if (req.path === SOCIAL_WORKER) {
+          req.session.errors.push({
+            id: 'location-picker',
+            errorType: isFilledPlacementOrderCourt,
+            propertyName: 'childLocalAuthority',
+          });
+        } else if (req.path === APPLICANT_SOCIAL_WORKER) {
+          req.session.errors.push({
+            id: 'location-picker',
+            errorType: isFilledPlacementOrderCourt,
+            propertyName: 'applicantLocalAuthority',
+          });
+        }
       }
     }
     if (req.session.errors.length > 0) {

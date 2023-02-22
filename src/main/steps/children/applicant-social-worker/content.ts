@@ -16,7 +16,7 @@ const en = content => ({
   applicantSocialWorkerPhoneNumber: 'Phone number',
   applicantSocialWorkerEmail: 'Email address (if known)',
   applicantSocialWorkerEmailHint: 'The email address should be an official government email that ends in gov.uk.',
-  applicantLocalAuthority: 'Name of local authority',
+  applicantLocalAuthorityLabel: 'Name of local authority',
   applicantLocalAuthorityEmail: 'Your local authority email address',
   applicantLocalAuthorityEmailHint:
     'This will be used to send a notification to the local authority to progress your application so it is important that it is accurate. It should end in gov.uk.',
@@ -59,7 +59,7 @@ const cy: typeof en = content => ({
   applicantSocialWorkerEmail: "Cyfeiriad e-bost (os yw'n hysbys)",
   applicantSocialWorkerEmailHint:
     "Dylai'r cyfeiriad e-bost fod yn e-bost swyddogol gan y llywodraeth sy'n terfynu â gov.uk.",
-  applicantLocalAuthority: "Enw'r awdurdod lleol",
+  applicantLocalAuthorityLabel: "Enw'r awdurdod lleol",
   applicantLocalAuthorityEmail: 'Cyfeiriad e-bost eich awdurdod lleol',
   applicantLocalAuthorityEmailHint:
     'Defnyddir hwn i anfon hysbysiad i’r awdurdod lleol i symud eich cais yn eiflaen, felly mae’n bwysig ei fod yn gywir. Dylai ddiweddu gyda gov.uk.',
@@ -126,7 +126,7 @@ export const form: FormContent = {
     },
     applicantLocalAuthorityHint: {
       type: 'hint',
-      label: l => l.applicantLocalAuthority,
+      label: l => l.applicantLocalAuthorityLabel,
       hint: l => l.applicantLocalAuthorityHint,
     },
     applicantLocalAuthority: {
@@ -134,6 +134,9 @@ export const form: FormContent = {
       id: 'location-picker',
       options: l => l.options,
       validator: isFieldFilledIn,
+      label: l => l.label,
+      classes: 'l',
+      labelSize: 'l',
     },
     applicantLocalAuthorityEmail: {
       type: 'text',
