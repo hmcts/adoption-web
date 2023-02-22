@@ -71,10 +71,10 @@ describe('birth father sequence', () => {
 
       expect(url).toBe(BIRTH_FATHER_PARENTAL_RESPONSIBILITY);
       expect(showInSection).toBe(aboutChildren);
-      expect(getNextStep({ birthFatherResponsibility: YesNoNotsure.YES })).toBe(
+      expect(getNextStep({ birthFatherResponsibility: YesOrNo.YES })).toBe(
         BIRTH_FATHER_PARENTAL_RESPONSIBILITY_GRANTED
       );
-      expect(getNextStep({ birthFatherResponsibility: YesNoNotsure.NO })).toBe(BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY);
+      expect(getNextStep({ birthFatherResponsibility: YesOrNo.NO })).toBe(BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY);
     });
 
     it('should be correct for granted', () => {

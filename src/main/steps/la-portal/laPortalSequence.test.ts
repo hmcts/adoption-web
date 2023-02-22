@@ -105,10 +105,10 @@ describe('la-portal > laPortalSequence', () => {
 
     expect(laPortalSequence[++incr].url).toBe('/la-portal/birth-father/parental-responsibility');
     expect(laPortalSequence[incr].contentDir).toBe('MOCK_BASE_DIR/../birth-father/parental-responsibility');
-    expect(laPortalSequence[incr].getNextStep({ birthFatherResponsibility: YesNoNotsure.YES })).toBe(
+    expect(laPortalSequence[incr].getNextStep({ birthFatherResponsibility: YesOrNo.YES })).toBe(
       '/la-portal/birth-father/parental-responsibility/granted'
     );
-    expect(laPortalSequence[incr].getNextStep({ birthFatherResponsibility: YesNoNotsure.NO })).toBe(
+    expect(laPortalSequence[incr].getNextStep({ birthFatherResponsibility: YesOrNo.NO })).toBe(
       '/la-portal/birth-father/parental-responsibility/no-responsibility'
     );
 

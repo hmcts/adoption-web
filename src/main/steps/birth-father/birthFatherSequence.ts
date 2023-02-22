@@ -1,5 +1,5 @@
 import { CaseWithId } from '../../app/case/case';
-import { YesNoNotsure, YesOrNo } from '../../app/case/definition';
+import { YesOrNo } from '../../app/case/definition';
 import { Sections, Step } from '../constants';
 import {
   BIRTH_FATHER_ADDRESS_KNOWN,
@@ -37,7 +37,7 @@ export const birthFatherSequence: Step[] = [
     url: BIRTH_FATHER_STILL_ALIVE,
     showInSection: Sections.AboutChildren,
     getNextStep: data =>
-      (data as Partial<CaseWithId>).birthFatherStillAlive === YesNoNotsure.YES
+      (data as Partial<CaseWithId>).birthFatherStillAlive === YesOrNo.YES
         ? BIRTH_FATHER_PARENTAL_RESPONSIBILITY
         : TASK_LIST_URL,
   },
