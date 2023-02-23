@@ -12,7 +12,7 @@ const en = () => ({
       required: 'Select if the birth father should be sent documents or court orders.',
     },
     birthFatherNotServedWithReason: {
-      required: 'Provide a reason',
+      required: 'Enter more detail',
     },
   },
 });
@@ -26,7 +26,7 @@ const cy: typeof en = () => ({
       required: 'Dewiswch a ddylid anfon dogfennau neu orchmynion llys at y tad genedigol.',
     },
     birthFatherNotServedWithReason: {
-      required: 'Darparwch reswm',
+      required: 'Rhowch fwy o fanylion',
     },
   },
 });

@@ -12,7 +12,7 @@ const en = () => ({
       required: 'Select if the birth mother should be sent documents or court orders.',
     },
     birthMotherNotServedWithReason: {
-      required: 'Provide a reason',
+      required: 'Enter more detail',
     },
   },
 });
@@ -26,7 +26,7 @@ const cy: typeof en = () => ({
       required: 'Dewiswch a ddylid anfon dogfennau neu orchmynion llys at y fam enedigol.',
     },
     birthMotherNotServedWithReason: {
-      required: 'Darparwch reswm',
+      required: 'Rhowch fwy o fanylion',
     },
   },
 });

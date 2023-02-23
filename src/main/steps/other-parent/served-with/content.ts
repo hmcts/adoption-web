@@ -12,7 +12,7 @@ const en = () => ({
       required: 'Select if the person with parental responsibility should be sent documents or court orders',
     },
     otherParentNotServedWithReason: {
-      required: 'Provide a reason',
+      required: 'Enter more detail',
     },
   },
 });
@@ -28,7 +28,7 @@ const cy: typeof en = () => ({
         'Dewiswch a ddylid anfon dogfennau neu orchmynion llys at yr unigolyn arall sydd â chyfrifoldeb rhiant.',
     },
     otherParentNotServedWithReason: {
-      required: 'Darparwch reswm',
+      required: 'Rhowch fwy o fanylion',
     },
   },
 });
