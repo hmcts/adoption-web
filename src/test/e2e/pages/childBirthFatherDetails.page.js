@@ -1,5 +1,6 @@
 const { I } = inject();
 const childBirthFatherDetails = require('../fixtures/caseData/childBirthFatherDetails');
+const childBirthMothersDetails = require('../fixtures/caseData/childBirthMothersDetails');
 module.exports = {
   fields: {
     birthFatherNameOnCertificate: 'input[id$="birthFatherNameOnCertificate"]',
@@ -20,6 +21,9 @@ module.exports = {
     birthFatherLastAddressDateDay: 'input[id$="birthFatherLastAddressDate-day"]',
     birthFatherLastAddressDateMonth: 'input[id$="birthFatherLastAddressDate-month"]',
     birthFatherLastAddressDateYear: 'input[id$="birthFatherLastAddressDate-year"]',
+    birthFatherServeOrderYes: '#birthFatherServedWith',
+    birthFatherServeOrderNo: '#birthFatherServedWith-2',
+    birthFatherServerOrderReason: '#birthFatherNotServedWithReason',
   },
 
   async childBirthFatherDetailsSection() {
@@ -81,6 +85,21 @@ module.exports = {
     await I.retry(3).fillField(
       this.fields.birthFatherLastAddressDateYear,
       childBirthFatherDetails.birthFatherLastAddressDateYear
+    );
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
+
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
+    await I.retry(3).see(childBirthFatherDetails.birthFatherServerOrderTitle);
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
+    await I.retry(3).see(childBirthFatherDetails.serverOrderErrorMessage);
+    await I.retry(3).click(this.fields.birthFatherServeOrderYes);
+    await I.retry(3).click(this.fields.birthFatherServeOrderNo);
+    await I.retry(3).fillField(
+      this.fields.birthFatherServerOrderReason,
+      childBirthFatherDetails.reasonForNotToServeOrder
     );
     await I.retry(3).click('Save and continue');
     await I.wait(4);

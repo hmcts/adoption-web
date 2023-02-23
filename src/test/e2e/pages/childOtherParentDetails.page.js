@@ -1,6 +1,7 @@
 const { I } = inject();
 
 const childOtherParentDetails = require('../fixtures/caseData/childOtherParentDetails');
+const childBirthMothersDetails = require('../fixtures/caseData/childBirthMothersDetails');
 module.exports = {
   fields: {
     otherParentExists: 'input[id$="otherParentExists"]',
@@ -16,6 +17,9 @@ module.exports = {
     otherParentLastAddressDateDay: 'input[id$="otherParentLastAddressDate-day"]',
     otherParentLastAddressDateMonth: 'input[id$="otherParentLastAddressDate-month"]',
     otherParentLastAddressDateYear: 'input[id$="otherParentLastAddressDate-year"]',
+    otherParentServeOrderYes: '#otherParentServedWith',
+    otherParentServeOrderNo: '#otherParentServedWith-2',
+    otherParentServerOrderReason: '#otherParentNotServedWithReason',
   },
 
   async childOtherParentDetailsSection() {
@@ -65,6 +69,21 @@ module.exports = {
     await I.retry(3).fillField(
       this.fields.otherParentLastAddressDateYear,
       childOtherParentDetails.otherParentLastAddressDateYear
+    );
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
+
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
+    await I.retry(3).see(childOtherParentDetails.childOtherParentServerOrderTitle);
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
+    await I.retry(3).see(childOtherParentDetails.serverOrderErrorMessage);
+    await I.retry(3).click(this.fields.otherParentServeOrderYes);
+    await I.retry(3).click(this.fields.otherParentServeOrderNo);
+    await I.retry(3).fillField(
+      this.fields.otherParentServerOrderReason,
+      childOtherParentDetails.reasonForNotToServeOrder
     );
     await I.retry(3).click('Save and continue');
     await I.wait(4);

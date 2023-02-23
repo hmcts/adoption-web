@@ -23,6 +23,6 @@ module.exports = {
   },
 
   async laSubmitApplicationConfirmationPage() {
-    await I.retry(3).see('Your response to the application has been submitted');
+    await I.retry(3).see('Your application has been submitted');
   },
 };
