@@ -256,7 +256,7 @@ function fieldPrefixBirthMother(
             ? [
                 {
                   key: keys.responsibility,
-                  valueHtml: userCase['birthFatherResponsibility'],
+                  valueHtml: content.yesNoNotsure[userCase.birthFatherResponsibility!],
                   changeUrl: Urls.LA_PORTAL_BIRTH_FATHER_PARENTAL_RESPONSIBILITY,
                   classes: 'govuk-summary-list__row--no-border',
                 },
