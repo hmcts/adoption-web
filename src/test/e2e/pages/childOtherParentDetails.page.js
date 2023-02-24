@@ -81,6 +81,9 @@ module.exports = {
     await I.retry(3).see(childOtherParentDetails.serverOrderErrorMessage);
     await I.retry(3).click(this.fields.otherParentServeOrderYes);
     await I.retry(3).click(this.fields.otherParentServeOrderNo);
+    await I.retry(3).click('Save and continue');
+    await I.retry(3).see('Enter more detail');
+    await I.wait(2);
     await I.retry(3).fillField(
       this.fields.otherParentServerOrderReason,
       childOtherParentDetails.reasonForNotToServeOrder

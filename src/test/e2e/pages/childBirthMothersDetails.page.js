@@ -90,6 +90,9 @@ module.exports = {
     await I.retry(3).see(childBirthMothersDetails.serverOrderErrorMessage);
     await I.retry(3).click(this.fields.birthMotherServeOrderYes);
     await I.retry(3).click(this.fields.birthMotherServeOrderNo);
+    await I.retry(3).click('Save and continue');
+    await I.retry(3).see('Enter more detail');
+    await I.wait(2);
     await I.retry(3).fillField(
       this.fields.birthMotherServerOrderReason,
       childBirthMothersDetails.reasonForNotToServeOrder
