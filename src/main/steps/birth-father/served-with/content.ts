@@ -4,7 +4,7 @@ import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
 
 const en = () => ({
-  section: 'Birth father details',
+  section: "Birth father's details",
   title: 'Should the birth father be sent documents or court orders relating to this adoption?',
   hint: 'Provide more details why birth father not to be sent documents or court orders relating to this adoption',
   errors: {
