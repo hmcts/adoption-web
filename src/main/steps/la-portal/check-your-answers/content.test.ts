@@ -56,8 +56,7 @@ const enContent = {
   siblingPlacementOrderType: {
     [SiblingPOType.ADOPTION_ORDER]: 'Adoption order',
     [SiblingPOType.CARE_ORDER]: 'Care order',
-    [SiblingPOType.CONTACT_ORDER]: 'Contact order',
-    [SiblingPOType.FREEING_ORDER]: 'Freeing order',
+    [SiblingPOType.CHILD_ARRANGEMENT_ORDER]: 'Child arrangements order',
     [SiblingPOType.PLACEMENT_ORDER]: 'Placement order',
     [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order',
     [SiblingPOType.OTHER]: 'Other',
@@ -141,8 +140,7 @@ const cyContent: typeof enContent = {
   siblingPlacementOrderType: {
     [SiblingPOType.ADOPTION_ORDER]: 'Gorchymyn Mabwysiadu',
     [SiblingPOType.CARE_ORDER]: 'Gorchymyn Gofal',
-    [SiblingPOType.CONTACT_ORDER]: 'Gorchymyn Cyswllt',
-    [SiblingPOType.FREEING_ORDER]: 'Gorchymyn Rhyddhau',
+    [SiblingPOType.CHILD_ARRANGEMENT_ORDER]: 'Gorchymyn trefniadau plant',
     [SiblingPOType.PLACEMENT_ORDER]: 'Gorchymyn Lleoli',
     [SiblingPOType.SUPERVIS_ORDER]: 'Gorchymyn Goruchwylio',
     [SiblingPOType.OTHER]: 'Other',

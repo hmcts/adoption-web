@@ -66,8 +66,7 @@ export const enContent = {
   siblingPlacementOrderType: {
     [SiblingPOType.ADOPTION_ORDER]: 'Adoption order',
     [SiblingPOType.CARE_ORDER]: 'Care order',
-    [SiblingPOType.CONTACT_ORDER]: 'Contact order',
-    [SiblingPOType.FREEING_ORDER]: 'Freeing order',
+    [SiblingPOType.CHILD_ARRANGEMENT_ORDER]: 'Child arrangements order',
     [SiblingPOType.PLACEMENT_ORDER]: 'Placement order',
     [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order',
     [SiblingPOType.OTHER]: 'Other',
@@ -75,8 +74,7 @@ export const enContent = {
   placementOrderType: {
     [PlacementOrderTypeEnum.AdoptionOrder]: 'Adoption order',
     [PlacementOrderTypeEnum.CareOrder]: 'Care order',
-    [PlacementOrderTypeEnum.ContactOrder]: 'Contact order',
-    [PlacementOrderTypeEnum.FreeingOrder]: 'Freeing order',
+    [PlacementOrderTypeEnum.CHILD_ARRANGEMENT_ORDER]: 'Contact order',
     [PlacementOrderTypeEnum.PlacementOrder]: 'Placement order',
     [PlacementOrderTypeEnum.SupervisionOrder]: 'Supervision order',
     [PlacementOrderTypeEnum.Other]: 'Other',
@@ -179,8 +177,7 @@ const cyContent: typeof enContent = {
   siblingPlacementOrderType: {
     [SiblingPOType.ADOPTION_ORDER]: 'Gorchymyn Mabwysiadu',
     [SiblingPOType.CARE_ORDER]: 'Gorchymyn Gofal',
-    [SiblingPOType.CONTACT_ORDER]: 'Gorchymyn Cyswllt',
-    [SiblingPOType.FREEING_ORDER]: 'Gorchymyn Rhyddhau',
+    [SiblingPOType.CHILD_ARRANGEMENT_ORDER]: 'Gorchymyn trefniadau plant',
     [SiblingPOType.PLACEMENT_ORDER]: 'Gorchymyn Lleoli',
     [SiblingPOType.SUPERVIS_ORDER]: 'Gorchymyn Goruchwylio',
     [SiblingPOType.OTHER]: 'Other',
@@ -188,8 +185,7 @@ const cyContent: typeof enContent = {
   placementOrderType: {
     [PlacementOrderTypeEnum.AdoptionOrder]: 'Gorchymyn Mabwysiadu',
     [PlacementOrderTypeEnum.CareOrder]: 'Gorchymyn Gofal',
-    [PlacementOrderTypeEnum.ContactOrder]: 'Gorchymyn Cyswllt',
-    [PlacementOrderTypeEnum.FreeingOrder]: 'Gorchymyn Rhyddhau',
+    [PlacementOrderTypeEnum.CHILD_ARRANGEMENT_ORDER]: 'Gorchymyn Cyswllt',
     [PlacementOrderTypeEnum.PlacementOrder]: 'Gorchymyn Lleoli',
     [PlacementOrderTypeEnum.SupervisionOrder]: 'Gorchymyn Goruchwylio',
     [PlacementOrderTypeEnum.Other]: 'Arall',
