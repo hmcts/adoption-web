@@ -39,7 +39,7 @@ const cy: typeof en = () => ({
   phoneNumber: 'Rhif ffôn yn y DU',
   applicant2ContactDetailsConsent:
     'Efallai bydd y llys eisiau defnyddio eich cyfeiriad e-bost i gyflwyno gorchmynion llys arnoch, A ydych yn hapus i neuchmynion llys gael eu cyflwyno arnoch drwy e-bost?',
-  contactDetailsConsentNo: '',
+  contactDetailsConsentNo: 'Fe gyflwynir yr holl orchmynion llys arnoch drwy’r post.',
   errors: {
     applicant2ContactDetailsConsent: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
