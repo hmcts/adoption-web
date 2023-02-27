@@ -2,7 +2,14 @@
 
 {% block content %}
   <h1 class="govuk-heading-l">{{ title }}</h1>
-  <h2 class="govuk-heading-m">{{ email }}</h2>
-  <p class="govuk-body">{{ emailAddress | safe }}</p>
-
+  <h2 class="govuk-heading-m">{{sendUsAMessage}}</h2>
+      <ul class="govuk-list govuk-list--bullet">
+          <li>{{sendUsAMessageTBC | safe}}</li>
+          <li>{{sendUsAMessageDetails}}</li>
+      </ul>
+  <h2 class="govuk-heading-m">{{telephone}}</h2>
+      <ul class="govuk-list govuk-list--bullet">
+          <li>{{sendUsAMessageTelephone}}</li>
+          <li>{{telephoneDetails}}</li>
+      </ul>
 {% endblock %}
