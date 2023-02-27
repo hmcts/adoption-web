@@ -56,6 +56,12 @@ export class OidcMiddleware {
 
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
+        if (req.session?.user) {
+          // a nunjucks global variable 'isLoggedIn' has been created for the views
+          // it is assigned the value of res.locals.isLoggedIn
+          res.locals.isLoggedIn = true;
+        }
+
         if (req.path.startsWith(ELIGIBILITY_URL)) {
           return next();
         }
@@ -73,7 +79,6 @@ export class OidcMiddleware {
         }
 
         if (req.session?.user) {
-          res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
           if (!req.session.userCase) {
             const userCase = await req.locals.api.getCase();
