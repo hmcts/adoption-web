@@ -59,6 +59,8 @@ const birthMotherSequence = [
     getNextStep: data =>
       data.birthMotherAddressKnown === YesOrNo.YES
         ? Urls.LA_PORTAL_BIRTH_MOTHER_FIND_ADDRESS
+        : data.birthMotherStillAlive === YesOrNo.YES
+        ? Urls.LA_PORTAL_BIRTH_MOTHER_SERVED_WITH
         : Urls.LA_PORTAL_TASK_LIST,
   },
   {
@@ -84,6 +86,12 @@ const birthMotherSequence = [
   {
     url: Urls.LA_PORTAL_BIRTH_MOTHER_LAST_ADDRESS_CONFIRMED,
     contentDir: path.join(__dirname, '..', 'birth-mother', 'last-address-confirmed'),
+    getNextStep: data =>
+      data.birthMotherStillAlive === YesOrNo.YES ? Urls.LA_PORTAL_BIRTH_MOTHER_SERVED_WITH : Urls.LA_PORTAL_TASK_LIST,
+  },
+  {
+    url: Urls.LA_PORTAL_BIRTH_MOTHER_SERVED_WITH,
+    contentDir: path.join(__dirname, '..', 'birth-mother', 'served-with'),
     getNextStep: () => Urls.LA_PORTAL_TASK_LIST,
   },
 ];
@@ -133,6 +141,8 @@ const birthFatherSequence = [
     getNextStep: data =>
       data.birthFatherAddressKnown === YesOrNo.YES
         ? Urls.LA_PORTAL_BIRTH_FATHER_FIND_ADDRESS
+        : data.birthFatherNameOnCertificate === YesOrNo.YES || data.birthFatherIdentityKnown === YesOrNo.YES
+        ? Urls.LA_PORTAL_BIRTH_FATHER_SERVED_WITH
         : Urls.LA_PORTAL_TASK_LIST,
   },
   {
@@ -158,6 +168,14 @@ const birthFatherSequence = [
   {
     url: Urls.LA_PORTAL_BIRTH_FATHER_LAST_ADDRESS_CONFIRMED,
     contentDir: path.join(__dirname, '..', 'birth-father', 'last-address-confirmed'),
+    getNextStep: data =>
+      data.birthFatherNameOnCertificate === YesOrNo.YES || data.birthFatherIdentityKnown === YesOrNo.YES
+        ? Urls.LA_PORTAL_BIRTH_FATHER_SERVED_WITH
+        : Urls.LA_PORTAL_TASK_LIST,
+  },
+  {
+    url: Urls.LA_PORTAL_BIRTH_FATHER_SERVED_WITH,
+    contentDir: path.join(__dirname, '..', 'birth-father', 'served-with'),
     getNextStep: () => Urls.LA_PORTAL_TASK_LIST,
   },
 ];
@@ -181,6 +199,8 @@ const otherParentSequence = [
     getNextStep: data =>
       data.otherParentAddressKnown === YesOrNo.YES
         ? Urls.LA_PORTAL_OTHER_PARENT_FIND_ADDRESS
+        : data.otherParentExists === YesOrNo.YES
+        ? Urls.LA_PORTAL_OTHER_PARENT_SERVED_WITH
         : Urls.LA_PORTAL_TASK_LIST,
   },
   {
@@ -206,6 +226,12 @@ const otherParentSequence = [
   {
     url: Urls.LA_PORTAL_OTHER_PARENT_LAST_ADDRESS_CONFIRMED,
     contentDir: path.join(__dirname, '..', 'other-parent', 'last-address-confirmed'),
+    getNextStep: data =>
+      data.otherParentExists === YesOrNo.YES ? Urls.LA_PORTAL_OTHER_PARENT_SERVED_WITH : Urls.LA_PORTAL_TASK_LIST,
+  },
+  {
+    url: Urls.LA_PORTAL_OTHER_PARENT_SERVED_WITH,
+    contentDir: path.join(__dirname, '..', 'other-parent', 'served-with'),
     getNextStep: () => Urls.LA_PORTAL_TASK_LIST,
   },
 ];

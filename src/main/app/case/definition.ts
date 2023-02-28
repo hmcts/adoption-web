@@ -380,6 +380,8 @@ export interface CaseData {
   birthMotherNameOnCertificate: string;
   birthMotherAddressNotKnownReason: string;
   birthMotherLastAddressDate: string;
+  birthMotherServedWith: YesOrNo;
+  birthMotherNotServedWithReason: string;
 
   birthFatherFirstName: string;
   birthFatherLastName: string;
@@ -400,6 +402,8 @@ export interface CaseData {
   birthFatherAddressNotKnownReason: string;
   birthFatherLastAddressDate: string;
   birthFatherIdentityKnown: string;
+  birthFatherServedWith: YesOrNo;
+  birthFatherNotServedWithReason: string;
 
   otherParentFirstName: string;
   otherParentLastName: string;
@@ -417,6 +421,8 @@ export interface CaseData {
   otherParentNameOnCertificate: string;
   otherParentAddressNotKnownReason: string;
   otherParentLastAddressDate: string;
+  otherParentServedWith: YesOrNo;
+  otherParentNotServedWithReason: string;
 
   childSocialWorkerName: string;
   childSocialWorkerPhoneNumber: string;
