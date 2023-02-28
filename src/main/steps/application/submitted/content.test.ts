@@ -4,7 +4,7 @@ import { CommonContent } from '../../common/common.content';
 import { generateContent } from './content';
 
 const enContent = {
-  title: 'Application Submitted',
+  title: 'Application submitted',
   referenceNumberAndChildName:
     'Your reference number<br><strong>1234567890123456</strong> <br><br><strong>CHILD_FIRST_NAME CHILD_LAST_NAME</strong>',
   emailSentConfirmation:

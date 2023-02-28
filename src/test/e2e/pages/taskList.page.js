@@ -202,24 +202,24 @@ module.exports = {
   },
 
   async selectDateChildMovedInDetails() {
-    await I.retry(3).waitForSelector(this.childDetails.dateChildMovedInLink, 30);
+    await I.retry(3).waitForElement(this.childDetails.dateChildMovedInLink, 30);
     await I.retry(3).click(this.childDetails.dateChildMovedInLink);
     await I.wait(4);
   },
 
   async verifyDateChildMovedInStatus() {
-    await I.retry(3).waitForSelector(this.childDetails.dateChildMovedInDetailsStatus, 30);
+    await I.retry(3).waitForElement(this.childDetails.dateChildMovedInDetailsStatus, 30);
     await I.retry(3).see('COMPLETED', this.childDetails.dateChildMovedInDetailsStatus);
     await I.wait(4);
   },
 
   async verifyPrimaryApplicantContactDetailsStatus() {
-    await I.retry(3).waitForSelector(this.primaryApplicant.contactDetailsLinkStatus, 30);
+    await I.retry(3).waitForElement(this.primaryApplicant.contactDetailsLinkStatus, 30);
     await I.retry(3).see('COMPLETED', this.primaryApplicant.contactDetailsLinkStatus);
   },
 
   async verifyPrimaryApplicantPersonalDetailsStatus() {
-    await I.retry(3).waitForSelector(this.primaryApplicant.personalDetailsLinkStatus, 30);
+    await I.retry(3).waitForElement(this.primaryApplicant.personalDetailsLinkStatus, 30);
     await I.retry(3).see('COMPLETED', this.primaryApplicant.personalDetailsLinkStatus);
   },
 
