@@ -50,4 +50,5 @@ module.exports = {
   consent:
     'Check all the information you have provided carefully. The next step is to sign a statement of truth declaring that the information provided is correct. Once this is signed payment will be taken. If you are applying to adopt more than one child, payment will only be taken once.',
   numberOfApplicantsValue: "I'm applying with my spouse or civil partner",
+  anyDocumentsToServer: 'Any document or court orders to be sent?',
 };
