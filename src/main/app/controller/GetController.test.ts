@@ -33,6 +33,7 @@ describe('GetController', () => {
       isDraft: true,
       text: 'english',
       userCase: req.session.userCase,
+      eligibilityPage: false,
       userEmail,
     });
   });
@@ -47,6 +48,7 @@ describe('GetController', () => {
     expect(res.render).toBeCalledWith('page', {
       ...defaultViewArgs,
       isDraft: false,
+      eligibilityPage: false,
     });
   });
 
@@ -67,6 +69,7 @@ describe('GetController', () => {
         language: 'cy',
         htmlLang: 'cy',
         userCase: req.session.userCase,
+        eligibilityPage: false,
         isAmendableStates: false,
         userEmail,
       });
@@ -88,6 +91,7 @@ describe('GetController', () => {
         language: 'cy',
         htmlLang: 'cy',
         userCase: req.session.userCase,
+        eligibilityPage: false,
         isAmendableStates: false,
         userEmail,
       });
@@ -109,6 +113,7 @@ describe('GetController', () => {
         language: 'cy',
         htmlLang: 'cy',
         userCase: req.session.userCase,
+        eligibilityPage: false,
         isAmendableStates: false,
         userEmail,
       });
@@ -130,6 +135,7 @@ describe('GetController', () => {
         language: 'en',
         htmlLang: 'en',
         userCase: req.session.userCase,
+        eligibilityPage: false,
         isAmendableStates: false,
         userEmail,
       });
@@ -170,6 +176,7 @@ describe('GetController', () => {
       userCase: {
         id: '1234',
       },
+      eligibilityPage: false,
       text: 'english',
       userEmail,
     });
@@ -204,6 +211,7 @@ describe('GetController', () => {
         ...commonContent,
         language: 'en',
         userCase: req.session.userCase,
+        eligibilityPage: false,
         isAmendableStates: true,
         userEmail,
       });
@@ -211,6 +219,7 @@ describe('GetController', () => {
         ...defaultViewArgs,
         isDraft: true,
         userCase: req.session.userCase,
+        eligibilityPage: false,
         userEmail,
         htmlLang: 'en',
         language: 'en',

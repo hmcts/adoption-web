@@ -18,14 +18,16 @@ describe('TimedOutGetController', () => {
     req.query.pageFrom = language;
     await controller.get(req, res);
     delete req.query.pageFrom;
+
     expect(res.render).toBeCalledWith(expect.anything(), {
+      ...defaultViewArgs,
       ...generatePageContent({
         language,
         pageContent: generateContent,
         userCase,
+        eligibilityPage: false,
         userEmail: 'test@example.com',
       }),
-      ...defaultViewArgs,
     });
   });
 
