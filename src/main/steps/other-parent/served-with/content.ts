@@ -7,6 +7,7 @@ const en = () => ({
   section: "Other parent's details",
   title: 'Should the person with parental responsibility be sent documents or court orders relating to this adoption?',
   hint: 'Provide more details why person with parental responsibility not to be sent documents or court orders relating to this adoption. ',
+  label: 'Give a reason',
   errors: {
     otherParentServedWith: {
       required: 'Select if the person with parental responsibility should be sent documents or court orders',
@@ -22,6 +23,7 @@ const cy: typeof en = () => ({
   title:
     'A ddylid anfon dogfennau neu orchmynion llys yn ymwneud â’r cais i fabwysiadu hwn at yr unigolyn arall sydd â chyfrifoldeb rhiant?',
   hint: 'Rhowch ragor o fanylion pam na ddylid anfon dogfennau neu orchmynion llys sy’n ymwneud â’r cais i fabwysiadu hwn at yr unigolyn arall sydd â chyfrifoldeb rhiant. ',
+  label: 'Rhowch reswm',
   errors: {
     otherParentServedWith: {
       required:
@@ -49,8 +51,10 @@ export const form: FormContent = {
           subFields: {
             otherParentNotServedWithReason: {
               type: 'textarea',
+              label: l => l.label,
               hint: h => h.hint,
               labelSize: null,
+              labelHidden: true,
               attributes: {
                 rows: 1,
               },

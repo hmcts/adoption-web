@@ -7,6 +7,7 @@ const en = () => ({
   section: "Birth mother's details",
   title: 'Should the birth mother be sent documents or court orders relating to this adoption?',
   hint: 'Provide more details why birth mother not to be sent documents or court orders relating to this adoption',
+  label: 'Give a reason',
   errors: {
     birthMotherServedWith: {
       required: 'Select if the birth mother should be sent documents or court orders.',
@@ -21,6 +22,7 @@ const cy: typeof en = () => ({
   section: 'Manylion y fam enedigol',
   title: 'A ddylid anfon dogfennau neu orchmynion llys yn ymwneud â’r cais i fabwysiadu hwn at y fam enedigol?',
   hint: 'Rhowch ragor o fanylion pam na ddylid anfon dogfennau neu orchmynion llys sy’n ymwneud â’r cais i fabwysiadu hwn at y fam enedigol.',
+  label: 'Rhowch reswm',
   errors: {
     birthMotherServedWith: {
       required: 'Dewiswch a ddylid anfon dogfennau neu orchmynion llys at y fam enedigol.',
@@ -47,8 +49,10 @@ export const form: FormContent = {
           subFields: {
             birthMotherNotServedWithReason: {
               type: 'textarea',
+              label: l => l.label,
               hint: h => h.hint,
               labelSize: null,
+              labelHidden: true,
               attributes: {
                 rows: 1,
               },
