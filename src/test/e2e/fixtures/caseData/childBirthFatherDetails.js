@@ -9,4 +9,10 @@ module.exports = {
   birthFatherLastAddressDateDay: '26',
   birthFatherLastAddressDateMonth: '06',
   birthFatherLastAddressDateYear: '1980',
+
+  birthFatherServerOrderTitle: 'Should the birth father be sent documents or court orders relating to this adoption?',
+  serverOrderErrorMessage: 'Select if the birth father should be sent documents or court orders.',
+  serverOrderNOErrorMessage:
+    'Provide more details why birth father not to be sent documents or court orders relating to this adoption.',
+  reasonForNotToServeOrder: 'address unknown',
 };

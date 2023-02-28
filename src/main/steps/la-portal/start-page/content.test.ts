@@ -25,13 +25,12 @@ const enContent = {
   line13: "any court orders for the child  and/or child's siblings",
   line14: 'Annex A (if available)',
   line15: 'maintenance agreements or awards',
-  line16: 'any visas relating to the applicants if appropriate',
-  line17:
+  line16:
     "You will be asked questions about the child's birth parents and siblings. You can review your answers to these questions before you submit the application.",
   heading3: 'Completing your response to the application',
-  line18:
+  line17:
     'Any member of your team can access the application and add information. You should note that if two people access the application at the same time, whoever saves it may override information given by the other person.',
-  line19: 'Completing and submitting your response to an application should not take longer than 30 minutes.',
+  line18: 'Completing and submitting your response to an application should not take longer than 30 minutes.',
   startnow: 'Start now',
 };
 
@@ -55,13 +54,12 @@ const cyContent = {
   line13: 'unrhyw orchmynion llys i’r plentyn a/neu frodyr a chwiorydd y plentyn',
   line14: 'Atodiad A (os yw ar gael)',
   line15: 'cytundebau cynnal neu ddyfarniadau',
-  line16: "unrhyw fisas sy’n ymwneud â’r ceiswyr os yw'n briodol",
-  line17:
+  line16:
     "Gofynnir cwestiynau i chi am rieni biolegol a brodyr a chwiorydd y plentyn. Gallwch adolygu eich atebion i'r cwestiynau hyn cyn i chi gyflwyno'r cais.",
   heading3: "Llenwi eich ymateb i'r cais",
-  line18:
+  line17:
     "Gall unrhyw aelod o'ch tîm gael mynediad i’r cais ac ychwanegu gwybodaeth. Dylech nodi, os bydd dau unigolyn yn cael mynediad i’r cais ar yr un pryd, y gall pwy bynnag sy’n ei gadw ddiystyru gwybodaeth a roddir gan yr unigolyn arall.",
-  line19: 'Ni ddylai gymryd mwy nag 30 munud i chi lenwi a chyflwyno eich ymateb i’r cais.',
+  line18: 'Ni ddylai gymryd mwy nag 30 munud i chi lenwi a chyflwyno eich ymateb i’r cais.',
   startnow: 'Dechrau nawr',
 };
 

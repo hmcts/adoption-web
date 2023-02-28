@@ -106,6 +106,7 @@ export const getBirthFatherDetailsStatus = (userCase: CaseWithId): SectionStatus
     birthFatherOccupation,
     birthFatherAddressKnown,
     birthFatherAddressNotKnownReason,
+    birthFatherServedWith,
   } = userCase;
 
   if (birthFatherNameOnCertificate === YesOrNo.NO) {
@@ -135,13 +136,18 @@ export const getBirthFatherDetailsStatus = (userCase: CaseWithId): SectionStatus
     notSureViolation(birthFatherNationality) ||
     (birthFatherNationality.includes('Other') && !birthFatherAdditionalNationalities?.length) ||
     !birthFatherOccupation ||
-    !birthFatherAddressKnown
+    !birthFatherAddressKnown ||
+    !birthFatherServedWith ||
+    !isServedWithReason(userCase, FieldPrefix.BIRTH_FATHER)
   ) {
     return SectionStatus.IN_PROGRESS;
   }
 
   return (birthFatherAddressKnown === YesOrNo.NO && birthFatherAddressNotKnownReason) ||
-    (addressComplete(userCase, FieldPrefix.BIRTH_FATHER) && isDateComplete(userCase, FieldPrefix.BIRTH_FATHER))
+    (addressComplete(userCase, FieldPrefix.BIRTH_FATHER) &&
+      isDateComplete(userCase, FieldPrefix.BIRTH_FATHER) &&
+      birthFatherServedWith &&
+      isServedWithReason(userCase, FieldPrefix.BIRTH_FATHER))
     ? SectionStatus.COMPLETED
     : SectionStatus.IN_PROGRESS;
 };
@@ -168,21 +174,16 @@ export const getBirthMotherDetailsStatus = (userCase: CaseWithId): SectionStatus
       !notSureViolation(nationality) &&
       (!nationality.includes('Other') || (nationality.includes('Other') && nationalities?.length));
     const occupation = userCase.birthMotherOccupation;
-    const addressKnown = userCase.birthMotherAddressKnown;
 
-    if (addressKnown === YesOrNo.NO && userCase.birthMotherAddressNotKnownReason) {
-      return firstName && lastName && nationalityComplete && occupation
-        ? SectionStatus.COMPLETED
-        : SectionStatus.IN_PROGRESS;
-    }
+    const servedWith = userCase.birthMotherServedWith;
 
     return firstName &&
       lastName &&
       nationalityComplete &&
       occupation &&
-      addressKnown === YesOrNo.YES &&
-      addressComplete(userCase, FieldPrefix.BIRTH_MOTHER) &&
-      isDateComplete(userCase, FieldPrefix.BIRTH_MOTHER)
+      isAddressVerified(userCase, FieldPrefix.BIRTH_MOTHER) &&
+      servedWith &&
+      isServedWithReason(userCase, FieldPrefix.BIRTH_MOTHER)
       ? SectionStatus.COMPLETED
       : SectionStatus.IN_PROGRESS;
   }
@@ -199,15 +200,11 @@ export const getOtherParentStatus = (userCase: CaseWithId): SectionStatus => {
 
   if (exists === YesOrNo.YES) {
     const names = userCase.otherParentFirstNames && userCase.otherParentLastNames;
-    const addressKnown = userCase.otherParentAddressKnown;
-    if (addressKnown === YesOrNo.NO && userCase.otherParentAddressNotKnownReason) {
-      return names ? SectionStatus.COMPLETED : SectionStatus.IN_PROGRESS;
-    }
-
+    const servedWith = userCase.otherParentServedWith;
     return names &&
-      addressKnown === YesOrNo.YES &&
-      addressComplete(userCase, FieldPrefix.OTHER_PARENT) &&
-      isDateComplete(userCase, FieldPrefix.OTHER_PARENT)
+      isAddressVerified(userCase, FieldPrefix.OTHER_PARENT) &&
+      servedWith &&
+      isServedWithReason(userCase, FieldPrefix.OTHER_PARENT)
       ? SectionStatus.COMPLETED
       : SectionStatus.IN_PROGRESS;
   }
@@ -268,4 +265,33 @@ export const getApplicationStatus = (userCase: CaseWithId): SectionStatus => {
     return SectionStatus.NOT_STARTED;
   }
   return SectionStatus.CAN_NOT_START_YET;
+};
+
+const isAddressVerified = (userCase: CaseWithId, fieldPrefix: FieldPrefix) => {
+  return userCase[`${fieldPrefix}AddressKnown`] === YesOrNo.YES
+    ? isAddressKnown(userCase, fieldPrefix)
+    : isAddressNotKnown(userCase, fieldPrefix);
+};
+
+const isAddressNotKnown = (userCase: CaseWithId, fieldPrefix: FieldPrefix) => {
+  return userCase[`${fieldPrefix}AddressKnown`] === YesOrNo.NO && userCase[`${fieldPrefix}AddressNotKnownReason`];
+};
+
+const isAddressKnown = (userCase: CaseWithId, fieldPrefix: FieldPrefix) => {
+  return (
+    userCase[`${fieldPrefix}AddressKnown`] === YesOrNo.YES &&
+    addressComplete(userCase, fieldPrefix) &&
+    isDateComplete(userCase, fieldPrefix)
+  );
+};
+
+const isServedWithReason = (userCase: CaseWithId, fieldPrefix: FieldPrefix) => {
+  let notServedWithReason = true;
+  if (
+    userCase[`${fieldPrefix}ServedWith`] === YesOrNo.NO &&
+    userCase[`${fieldPrefix}NotServedWithReason`]?.length === 0
+  ) {
+    notServedWithReason = false;
+  }
+  return notServedWithReason;
 };
