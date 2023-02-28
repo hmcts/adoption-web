@@ -1,6 +1,7 @@
 const { I } = inject();
 const secondApplicantPersonalDetails = require('../fixtures/caseData/secondApplicantPersonalDetails');
 const extraSupportDetails = require('../fixtures/caseData/extraSupportDetails');
+const childBirthFatherDetails = require('../fixtures/caseData/childBirthFatherDetails');
 
 module.exports = {
   fields: {
@@ -137,5 +138,6 @@ module.exports = {
       secondApplicantPersonalDetails.secondApplicantExtraSupportDetails
     );
     await I.retry(3).click('Save and continue');
+    await I.wait(4);
   },
 };
