@@ -20,6 +20,9 @@ module.exports = {
     birthFatherLastAddressDateDay: 'input[id$="birthFatherLastAddressDate-day"]',
     birthFatherLastAddressDateMonth: 'input[id$="birthFatherLastAddressDate-month"]',
     birthFatherLastAddressDateYear: 'input[id$="birthFatherLastAddressDate-year"]',
+    birthFatherParentalResponsibility: '#birthFatherResponsibility',
+    birthFatherParentalResponsibilityReason: '#birthFatherResponsibilityReason-5',
+    birthFatherResponsibilityOtherReason: '#birthFatherOtherResponsibilityReason',
   },
 
   async childBirthFatherDetailsSection() {
@@ -37,6 +40,34 @@ module.exports = {
     await I.retry(3).click(this.fields.birthFatherStillAlive);
     await I.wait(2);
     await I.retry(3).click('Save and continue');
+
+    await I.wait(2);
+    await I.retry(3).see(childBirthFatherDetails.birthFatherParentalResponsibilityTitle);
+    await I.retry(3).click('Save and continue');
+    await I.wait(3);
+    await I.retry(3).see(childBirthFatherDetails.birthFatherParentalResponsibilityError);
+    await I.retry(3).click(this.fields.birthFatherParentalResponsibility);
+    await I.retry(3).click('Save and continue');
+    await I.wait(2);
+    await I.retry(3).see(childBirthFatherDetails.howResponsibilityGranted);
+    await I.retry(3).see('Birth certificate');
+    await I.retry(3).see('Parental responsibility agreement');
+    await I.retry(3).see('Other');
+    await I.wait(2);
+    await I.retry(3).click('Save and continue');
+    await I.wait(2);
+    await I.retry(3).see(childBirthFatherDetails.selectParentalResponsibilityError);
+    await I.retry(3).click(this.fields.birthFatherParentalResponsibilityReason);
+    await I.retry(3).click('Save and continue');
+    await I.wait(2);
+    await I.retry(3).see(childBirthFatherDetails.enterParentalResponsibilityError);
+    await I.retry(3).fillField(
+      this.fields.birthFatherResponsibilityOtherReason,
+      childBirthFatherDetails.birthFatherParentalResponsibilityReason
+    );
+    await I.retry(3).click('Save and continue');
+    await I.wait(2);
+
     await I.retry(3).waitForText("What is the nationality of the child's birth father?");
     await I.retry(3).click(this.fields.britishCitizen);
     await I.wait(2);
@@ -50,6 +81,7 @@ module.exports = {
     await I.retry(3).click(this.fields.birthFatherAddressKnown);
     await I.wait(2);
     await I.retry(3).click('Save and continue');
+    await I.wait(2);
     await I.retry(3).click(this.fields.enterAddressManually);
     await I.wait(2);
     await I.retry(3).click(this.fields.enterInternationalAddress);
