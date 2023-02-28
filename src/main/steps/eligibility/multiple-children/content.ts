@@ -16,10 +16,10 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  title: 'Are you applying to adopt more than one child?',
+  title: 'Ydych chi’n gwneud cais i fabwysiadu mwy nag un plentyn?',
   errors: {
     multipleChildrenEligible: {
-      required: 'Select if you are applying to adopt more than one child',
+      required: 'Dewiswch a ydych chi’n gwneud cais i fabwysiadu mwy nag un plentyn',
     },
   },
 });
