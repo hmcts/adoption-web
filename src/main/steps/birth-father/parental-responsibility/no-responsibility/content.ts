@@ -11,7 +11,7 @@ const en = () => ({
   removedByCourt: 'Parental responsibility removed by court',
   neverObtained: 'Parental responsibility never obtained',
   otherReason: 'Other',
-  otherHint: 'Enter the reason why the birth father does not have parental responsibility',
+  otherHint: 'Enter the reason why the birth father does not have parental responsibility.',
   errors: {
     birthFatherResponsibilityReason: {
       required: 'Select why the birth father does not have parental responsibility.',
