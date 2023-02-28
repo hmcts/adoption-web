@@ -200,6 +200,19 @@ describe('birthParentSummaryList', () => {
               ],
             },
           },
+          {
+            key: { text: 'Any document or court orders to be sent?' },
+            value: { html: 'Yes' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/birth-mother/served-with?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Any document or court orders to be sent?',
+                },
+              ],
+            },
+          },
         ],
       },
     },
@@ -311,6 +324,19 @@ describe('birthParentSummaryList', () => {
                   href: '/la-portal/birth-father/last-address-confirmed?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
                   visuallyHiddenText: 'Last date this address was confirmed',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Any document or court orders to be sent?' },
+            value: { html: 'Yes' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/birth-father/served-with?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Any document or court orders to be sent?',
                 },
               ],
             },
@@ -462,6 +488,19 @@ describe('birthParentSummaryList', () => {
               ],
             },
           },
+          {
+            key: { text: 'Any document or court orders to be sent?' },
+            value: { html: 'Yes' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/birth-father/served-with?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Any document or court orders to be sent?',
+                },
+              ],
+            },
+          },
         ],
       },
     },
@@ -569,6 +608,19 @@ describe('otherParentSummaryList', () => {
               ],
             },
           },
+          {
+            key: { text: 'Any document or court orders to be sent?' },
+            value: { html: 'Yes' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/other-parent/served-with?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Any document or court orders to be sent?',
+                },
+              ],
+            },
+          },
         ],
       },
     },
@@ -639,6 +691,19 @@ describe('otherParentSummaryList', () => {
                   href: '/la-portal/other-parent/address-known?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
                   visuallyHiddenText: 'Address known',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Any document or court orders to be sent?' },
+            value: { html: 'Yes' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/other-parent/served-with?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Any document or court orders to be sent?',
                 },
               ],
             },
