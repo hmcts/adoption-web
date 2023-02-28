@@ -38,6 +38,7 @@ export class GetController {
     const addresses = req.session?.addresses;
     const courtList = req.session?.courtList;
     const eligibility = req.session?.eligibility;
+    const eligibilityPage = !!req.query?.eligibility;
     const content = generatePageContent({
       language,
       pageContent: this.content,
@@ -45,6 +46,7 @@ export class GetController {
       userEmail: req.session?.user?.email,
       addresses,
       eligibility,
+      eligibilityPage,
       fee: req.session?.fee,
       courtList,
     });

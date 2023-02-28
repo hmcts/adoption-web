@@ -9,9 +9,9 @@ import {
   TIMED_OUT_URL,
 } from '../../steps/urls';
 
-const eventTimer = 0.1 * 60 * 1000; // 5 minutes
-const TIMEOUT_NOTICE = 0.3 * 60 * 1000; // 2 minutes
-const sessionTimeoutInterval = 0.4 * 60 * 1000; // 20 minutes
+const eventTimer = 5 * 60 * 1000; // 5 minutes
+const TIMEOUT_NOTICE = 2 * 60 * 1000; // 2 minutes
+const sessionTimeoutInterval = 20 * 60 * 1000; // 20 minutes
 
 // let timeout;
 let notificationTimer;
@@ -45,11 +45,8 @@ const saveBeforeSessionTimeout = async () => {
 const schedule = () => {
   clearCountdown();
   showNotificationPopup(false);
-  startCountdown();
-  if (!window.location.pathname.startsWith(ELIGIBILITY_URL)) {
-    scheduleNotificationPopup();
-    onNotificationPopupClose();
-  }
+  scheduleNotificationPopup();
+  onNotificationPopupClose();
 };
 
 const onNotificationPopupClose = () => {
@@ -64,10 +61,11 @@ const startCountdown = () => {
   countdownInterval = setInterval(() => {
     const countdown = startTime - new Date().getTime();
     const seconds = Math.floor((countdown % (1000 * 60)) / 1000);
+
     if (seconds < 0) {
       if (window.location.pathname.startsWith(ELIGIBILITY_URL)) {
         if (isLoggedIn?.textContent?.includes('Sign out')) {
-          window.location.href = `${TIMED_OUT_URL}?lang=${document.documentElement.lang}&pageFrom=true`;
+          window.location.href = `${TIMED_OUT_URL}?lang=${document.documentElement.lang}&pageFrom=true&eligibility=true`;
         } else {
           window.location.href = `${START_ELIGIBILITY_URL}?lang=${document.documentElement.lang}`;
         }
@@ -89,10 +87,13 @@ const clearCountdown = () => {
 
 const showNotificationPopup = (visible: boolean) => {
   if (visible) {
-    notificationPopup?.removeAttribute('hidden');
-    notificationPopupIsOpen = true;
-    trapFocusInModal();
-    saveBeforeSessionTimeout();
+    if (!window.location.pathname.startsWith(ELIGIBILITY_URL)) {
+      notificationPopup?.removeAttribute('hidden');
+      notificationPopupIsOpen = true;
+      trapFocusInModal();
+      saveBeforeSessionTimeout();
+    }
+    startCountdown();
   } else {
     notificationPopup?.setAttribute('hidden', 'hidden');
     notificationPopupIsOpen = false;
