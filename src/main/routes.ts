@@ -3,6 +3,7 @@ import fs from 'fs';
 import { Application, RequestHandler } from 'express';
 import multer from 'multer';
 
+import { NewCaseRedirectController } from './app/case/NewCaseRedirectController';
 import { GetController } from './app/controller/GetController';
 import { PostController } from './app/controller/PostController';
 import { DocumentManagerController } from './app/document/DocumentManagementController';
@@ -15,6 +16,7 @@ import {
   DOWNLOAD_APPLICATION_SUMMARY,
   KEEP_ALIVE_URL,
   LA_DOCUMENT_MANAGER,
+  NEW_APPLICATION_REDIRECT,
 } from './steps/urls';
 
 const handleUploads = multer();
@@ -32,6 +34,9 @@ export class Routes {
     app.post(LA_DOCUMENT_MANAGER, handleUploads.array('files[]', 5), errorHandler(documentManagerController.postLa));
     app.get(`${DOCUMENT_MANAGER}/delete/:index`, errorHandler(documentManagerController.delete));
     app.get(`${LA_DOCUMENT_MANAGER}/delete/:index`, errorHandler(documentManagerController.deleteLa));
+
+    const newCaseRedirectController = new NewCaseRedirectController();
+    app.get(NEW_APPLICATION_REDIRECT, errorHandler(newCaseRedirectController.get));
 
     for (const step of stepsWithContent) {
       const files = fs.readdirSync(`${step.stepDir}`);
