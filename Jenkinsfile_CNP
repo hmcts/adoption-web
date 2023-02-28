@@ -26,7 +26,7 @@ def secrets = [
     secret('citizen-password', 'CITIZEN_PASSWORD'),
     secret('adoption-pcq-token', 'PCQ_TOKEN'),
     secret('endpoints', 'ENDPOINTS')
-    
+
   ],
   's2s-${env}': [
     secret('microservicekey-adoption-web', 'SERVICE_AUTH_SECRET')
@@ -65,6 +65,7 @@ withPipeline(type, product, component) {
   }
 
   before('functionalTest:preview') {
+    env.PARALLEL_CHUNKS = 10
     env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
     yarnBuilder.yarn('test:pa11y')
   }
@@ -92,6 +93,7 @@ withPipeline(type, product, component) {
   }
 
   before('functionalTest:aat') {
+    env.PARALLEL_CHUNKS = 10
     env.ADOP_WEB_URL = "https://adoption-web-staging.service.core-compute-aat.internal/"
     yarnBuilder.yarn('test:functional:skip')
   }
