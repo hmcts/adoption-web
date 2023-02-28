@@ -23,7 +23,7 @@ const enContent = {
       required: 'Select how parental responsibility was granted to the birth father.',
     },
     birthFatherOtherResponsibilityReason: {
-      required: 'Enter the reason how parental responsibility was granted to the birth father',
+      required: 'Enter the reason how parental responsibility was granted to the birth father.',
     },
   },
 };

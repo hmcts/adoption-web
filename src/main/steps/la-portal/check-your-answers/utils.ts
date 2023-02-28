@@ -161,19 +161,21 @@ const formatNationalities = (
 
 const formatResponsibilityReasons = (
   responsibility: (string | ResponsibilityReasons)[],
-  otherReason: string,
-  content: { responsibilityReasons: { [x: string]: never } }
+  otherReasonText: string,
+  content: { responsibilityReasons: { [x: string]: never } },
+  reasonText: string
 ): string => {
   const responsibilities = responsibility.filter(item => item !== ResponsibilityReasons.OTHER);
   const translatedResponsibilities = [];
+  const responsibilityText = `<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">${reasonText}: </span> `;
   responsibilities.forEach(element => translatedResponsibilities.push(content.responsibilityReasons[element]));
 
   if (responsibility.includes(ResponsibilityReasons.OTHER) && translatedResponsibilities.length === 0) {
-    return otherReason;
+    return responsibilityText + otherReasonText;
   } else if (responsibility.includes(ResponsibilityReasons.OTHER)) {
-    return translatedResponsibilities.join('<br>') + '<br>' + otherReason;
+    return responsibilityText + translatedResponsibilities.join('<br>') + '<br>' + otherReasonText;
   }
-  return translatedResponsibilities.join('<br>');
+  return responsibilityText + translatedResponsibilities.join('<br>');
 };
 
 /* eslint-disable import/namespace */
@@ -254,28 +256,33 @@ function fieldPrefixBirthMother(
             ? [
                 {
                   key: keys.responsibility,
-                  valueHtml: userCase['birthFatherResponsibility'],
+                  valueHtml: content.yesNoNotsure[userCase.birthFatherResponsibility!],
                   changeUrl: Urls.LA_PORTAL_BIRTH_FATHER_PARENTAL_RESPONSIBILITY,
+                  classes: 'govuk-summary-list__row--no-border',
                 },
                 ...(userCase['birthFatherResponsibility'] === YesOrNo.YES
                   ? [
                       {
+                        keyHtml: ' ',
                         key: content.reason,
                         valueHtml: formatResponsibilityReasons(
                           userCase['birthFatherResponsibilityReason']!,
                           userCase['birthFatherOtherResponsibilityReason']!,
-                          content
+                          content,
+                          content.reason
                         ),
                         changeUrl: Urls.LA_PORTAL_BIRTH_FATHER_PARENTAL_RESPONSIBILITY_GRANTED,
                       },
                     ]
                   : [
                       {
+                        keyHtml: ' ',
                         key: content.reason,
                         valueHtml: formatResponsibilityReasons(
                           userCase['birthFatherResponsibilityReason']!,
                           userCase['birthFatherOtherResponsibilityReason']!,
-                          content
+                          content,
+                          content.reason
                         ),
                         changeUrl: Urls.LA_PORTAL_BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY,
                       },

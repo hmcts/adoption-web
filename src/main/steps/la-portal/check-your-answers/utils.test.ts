@@ -250,7 +250,10 @@ describe('birthParentSummaryList', () => {
           },
           {
             key: { text: 'Does birth father has parental responsibility?' },
-            value: { html: 'Yes' },
+            value: {
+              html: 'Yes',
+            },
+            classes: 'govuk-summary-list__row--no-border',
             actions: {
               items: [
                 {
@@ -262,8 +265,10 @@ describe('birthParentSummaryList', () => {
             },
           },
           {
-            key: { text: 'Reason' },
-            value: { html: 'Birth certificate' },
+            key: { text: 'Reason', html: ' ' },
+            value: {
+              html: '<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">Reason: </span> Birth certificate',
+            },
             actions: {
               items: [
                 {
@@ -452,6 +457,7 @@ describe('birthParentSummaryList', () => {
           {
             key: { text: 'Does birth father has parental responsibility?' },
             value: { html: 'No' },
+            classes: 'govuk-summary-list__row--no-border',
             actions: {
               items: [
                 {
@@ -463,8 +469,10 @@ describe('birthParentSummaryList', () => {
             },
           },
           {
-            key: { text: 'Reason' },
-            value: { html: 'Parental responsibility removed by court' },
+            key: { text: 'Reason', html: ' ' },
+            value: {
+              html: '<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">Reason: </span> Parental responsibility removed by court',
+            },
             actions: {
               items: [
                 {
