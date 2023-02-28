@@ -99,7 +99,7 @@ describe('CaseApi', () => {
     expect(mockLogger.error).toHaveBeenCalledWith('API Error POST https://example.com');
   });
 
-  test('Should not throw an error if more than one cases are found', async () => {
+  test('Should throw an error if more than one cases are found in Draft', async () => {
     const mockCase = {
       id: '1',
       state: State.Draft,
@@ -111,6 +111,36 @@ describe('CaseApi', () => {
     // });
     mockedAxios.post.mockResolvedValue({
       data: { cases: [mockCase, mockCase, mockCase] },
+    });
+
+    await expect(api.getOrCreateCase(serviceType, userDetails)).rejects.toThrow(
+      "Not all OR few cases assigned to the user aren't in right state."
+    );
+  });
+
+  test('Should not throw an error if more than one cases are found with only one in Draft state', async () => {
+    const mockCase = {
+      id: '1',
+      state: State.Draft,
+      case_data: {},
+    };
+
+    const mockCaseLaSubmitted = {
+      id: '2',
+      state: State.LaSubmitted,
+      case_data: {},
+    };
+
+    const mockCaseSubmitted = {
+      id: '3',
+      state: State.Submitted,
+      case_data: {},
+    };
+    // mockedAxios.get.mockResolvedValue({
+    //   data: [mockCase, mockCase, mockCase],
+    // });
+    mockedAxios.post.mockResolvedValue({
+      data: { cases: [mockCase, mockCaseLaSubmitted, mockCaseSubmitted] },
     });
 
     const userCase = await api.getOrCreateCase(serviceType, userDetails);
