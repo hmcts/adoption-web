@@ -106,6 +106,8 @@ const enContent = {
     caseRefNumber: 'Court case reference number',
     dateOfBirth: 'Date of birth',
     responsibility: 'Does birth father has parental responsibility?',
+    servedWith: 'Any document or court orders to be sent?',
+    NotServedWithReason: 'Reason',
   },
 };
 
@@ -201,6 +203,8 @@ const cyContent: typeof enContent = {
     caseRefNumber: 'Cyfeirnod yr achos llys',
     dateOfBirth: 'Dyddiad geni',
     responsibility: 'A oes gan y tad genedigol gyfrifoldeb rhiant?',
+    servedWith: 'A ddylid anfon unrhyw ddogfennau neu orchmynion llys? ',
+    NotServedWithReason: 'Rheswm',
   },
 };
 

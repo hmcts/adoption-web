@@ -321,6 +321,19 @@ function fieldPrefixBirthMother(
           ...(userCase[`${prefix}AddressKnown`] === YesOrNo.YES
             ? lastAddressKnown(keys, userCase, LA_PORTAL, prefix, urlPrefix)
             : []),
+          {
+            key: keys.servedWith,
+            valueHtml:
+              userCase[`${prefix}ServedWith`] === YesOrNo.NO
+                ? getNotSureReasonElement(
+                    content,
+                    userCase,
+                    content.yesNoNotsure[userCase[`${prefix}ServedWith`]],
+                    `${prefix}NotServedWithReason`
+                  )
+                : content.yesNoNotsure[userCase[`${prefix}ServedWith`]],
+            changeUrl: Urls[`${LA_PORTAL}${urlPrefix}SERVED_WITH`],
+          },
         ]
       : []),
   ];
@@ -415,6 +428,19 @@ export const otherParentSummaryList = (
                     },
                   ]
                 : []),
+              {
+                key: keys.servedWith,
+                valueHtml:
+                  userCase.otherParentServedWith === YesOrNo.NO
+                    ? getNotSureReasonElement(
+                        content,
+                        userCase,
+                        content.yesNoNotsure[userCase.otherParentServedWith],
+                        'otherParentNotServedWithReason'
+                      )
+                    : content.yesNoNotsure[userCase.otherParentServedWith!],
+                changeUrl: Urls.LA_PORTAL_OTHER_PARENT_SERVED_WITH,
+              },
             ]
           : []),
       ],

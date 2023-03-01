@@ -100,6 +100,8 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   birthMotherAddressCountry: 'birthMotherAddressCountry',
   birthMotherAddressNotKnownReason: 'birthMotherAddressNotKnownReason',
   birthMotherLastAddressDate: 'birthMotherLastAddressDate',
+  birthMotherServedWith: 'birthMotherServedWith',
+  birthMotherNotServedWithReason: 'birthMotherNotServedWithReason',
 
   birthFatherNameOnCertificate: 'birthFatherNameOnCertificate',
   birthFatherFirstNames: 'birthFatherFirstName',
@@ -123,6 +125,8 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   birthFatherAddressNotKnownReason: 'birthFatherAddressNotKnownReason',
   birthFatherLastAddressDate: 'birthFatherLastAddressDate',
   birthFatherIdentityKnown: 'birthFatherIdentityKnown',
+  birthFatherServedWith: 'birthFatherServedWith',
+  birthFatherNotServedWithReason: 'birthFatherNotServedWithReason',
 
   otherParentFirstNames: 'otherParentFirstName',
   otherParentLastNames: 'otherParentLastName',
@@ -137,6 +141,8 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   otherParentAddressKnown: 'otherParentAddressKnown',
   otherParentAddressNotKnownReason: 'otherParentAddressNotKnownReason',
   otherParentLastAddressDate: 'otherParentLastAddressDate',
+  otherParentServedWith: 'otherParentServedWith',
+  otherParentNotServedWithReason: 'otherParentNotServedWithReason',
 
   childSocialWorkerName: 'childSocialWorkerName',
   childSocialWorkerPhoneNumber: 'childSocialWorkerPhoneNumber',
@@ -307,6 +313,8 @@ export interface Case {
   birthMotherAddressCountry?: string;
   birthMotherAddressNotKnownReason?: string;
   birthMotherLastAddressDate?: CaseDate;
+  birthMotherServedWith?: YesOrNo;
+  birthMotherNotServedWithReason?: string;
 
   /***** Birth Father *****/
   birthFatherNameOnCertificate?: string;
@@ -332,6 +340,8 @@ export interface Case {
   birthFatherAddressNotKnownReason?: string;
   birthFatherLastAddressDate?: CaseDate;
   birthFatherIdentityKnown?: string;
+  birthFatherServedWith?: YesOrNo;
+  birthFatherNotServedWithReason?: string;
 
   /***** Other Parent *****/
   otherParentFirstNames?: string;
@@ -348,6 +358,8 @@ export interface Case {
   otherParentAddressKnown?: YesOrNo;
   otherParentAddressNotKnownReason?: string;
   otherParentLastAddressDate?: CaseDate;
+  otherParentServedWith?: YesOrNo;
+  otherParentNotServedWithReason?: string;
 
   /***** Adoption Agency, Social Worker and Solicitor *****/
   localAuthorityName?: string;

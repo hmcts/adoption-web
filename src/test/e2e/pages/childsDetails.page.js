@@ -35,7 +35,7 @@ module.exports = {
   },
 
   async childDOBSection() {
-    await I.retry(3).see("What is the child's date of birth?");
+    await I.retry(3).waitForText("What is the child's date of birth?", 30);
     await I.retry(3).fillField(this.fields.childrenDateOfBirthDay, childBasicInitialDetails.dateChildMovedIn);
     await I.retry(3).fillField(this.fields.childrenDateOfBirthMonth, childBasicInitialDetails.monthChildMovedIn);
     await I.wait(2);
