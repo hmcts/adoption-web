@@ -117,6 +117,6 @@ Scenario(
 
     await laCheckYourAnswersPage.laCheckYourAnswersContinue();
     await laCheckYourAnswersPage.laStatementOfTruthPage();
-    //await laCheckYourAnswersPage.laSubmitApplicationConfirmationPage();
+    await laCheckYourAnswersPage.laSubmitApplicationConfirmationPage();
   }
 );

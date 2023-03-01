@@ -12,8 +12,7 @@ describe('placement-order-summary', () => {
     placementOrderType: {
       [PlacementOrderTypeEnum.AdoptionOrder]: 'Gorchymyn Mabwysiadu',
       [PlacementOrderTypeEnum.CareOrder]: 'Gorchymyn Gofal',
-      [PlacementOrderTypeEnum.ContactOrder]: 'Gorchymyn Cyswllt',
-      [PlacementOrderTypeEnum.FreeingOrder]: 'Gorchymyn Rhyddhau',
+      [PlacementOrderTypeEnum.CHILD_ARRANGEMENT_ORDER]: 'Gorchymyn trefniadau plant',
       [PlacementOrderTypeEnum.PlacementOrder]: 'Gorchymyn Lleoli',
       [PlacementOrderTypeEnum.SupervisionOrder]: 'Gorchymyn Goruchwylio',
       [PlacementOrderTypeEnum.Other]: 'Arall',
@@ -49,7 +48,7 @@ describe('placement-order-summary', () => {
     const result = placementOrderListItems(userCase, content);
     expect(result).toEqual([
       {
-        key: { text: 'Placement order', classes: 'font-normal' },
+        key: { text: 'MOCK_NUMBER Placement order', classes: 'font-normal' },
         value: { classes: 'summary-list-value', html: '' },
         actions: {
           classes: 'summary-list-actions',
@@ -57,13 +56,13 @@ describe('placement-order-summary', () => {
             {
               href: '/la-portal/child/placement-order-check-your-answers?change=MOCK_ID',
               text: 'Change',
-              visuallyHiddenText: 'Placement order',
+              visuallyHiddenText: 'MOCK_NUMBER Placement order',
             },
           ],
         },
       },
       {
-        key: { text: 'Placement order', classes: 'font-normal' },
+        key: { text: 'MOCK_NUMBER2 Placement order', classes: 'font-normal' },
         value: {
           classes: 'summary-list-value',
           html: '<strong class="govuk-tag govuk-tag--yellow">incomplete</strong>',
@@ -74,18 +73,18 @@ describe('placement-order-summary', () => {
             {
               href: '/la-portal/child/remove-placement-order?confirm=MOCK_ID2',
               text: 'Remove',
-              visuallyHiddenText: 'Placement order',
+              visuallyHiddenText: 'MOCK_NUMBER2 Placement order',
             },
             {
               href: '/la-portal/child/placement-order-check-your-answers?change=MOCK_ID2',
               text: 'Change',
-              visuallyHiddenText: 'Placement order',
+              visuallyHiddenText: 'MOCK_NUMBER2 Placement order',
             },
           ],
         },
       },
       {
-        key: { text: 'Placement order', classes: 'font-normal' },
+        key: { text: 'MOCK_NUMBER3 Placement order', classes: 'font-normal' },
         value: { classes: 'summary-list-value', html: '' },
         actions: {
           classes: 'summary-list-actions',
@@ -93,12 +92,12 @@ describe('placement-order-summary', () => {
             {
               href: '/la-portal/child/remove-placement-order?confirm=MOCK_ID3',
               text: 'Remove',
-              visuallyHiddenText: 'Placement order',
+              visuallyHiddenText: 'MOCK_NUMBER3 Placement order',
             },
             {
               href: '/la-portal/child/placement-order-check-your-answers?change=MOCK_ID3',
               text: 'Change',
-              visuallyHiddenText: 'Placement order',
+              visuallyHiddenText: 'MOCK_NUMBER3 Placement order',
             },
           ],
         },

@@ -1321,8 +1321,7 @@ export const enum LegalProceedingsRelated {
 export const enum PlacementOrderTypeEnum {
   AdoptionOrder = 'Adoption order',
   CareOrder = 'Care order',
-  ContactOrder = 'Contact order',
-  FreeingOrder = 'Freeing order',
+  CHILD_ARRANGEMENT_ORDER = 'Child arrangements order',
   PlacementOrder = 'Placement order',
   SupervisionOrder = 'Supervision order',
   Other = 'Other',
@@ -1377,8 +1376,7 @@ export const enum SiblingRelationships {
 export const enum SiblingPOType {
   ADOPTION_ORDER = 'Adoption order',
   CARE_ORDER = 'Care order',
-  CONTACT_ORDER = 'Contact order',
-  FREEING_ORDER = 'Freeing order',
+  CHILD_ARRANGEMENT_ORDER = 'Child arrangements order',
   PLACEMENT_ORDER = 'Placement order',
   SUPERVIS_ORDER = 'Supervision order',
   OTHER = 'Other',
