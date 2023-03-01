@@ -65,12 +65,12 @@ const startCountdown = () => {
     if (seconds < 0) {
       if (window.location.pathname.startsWith(ELIGIBILITY_URL)) {
         if (isLoggedIn?.textContent?.includes('Sign out')) {
-          window.location.href = `${TIMED_OUT_URL}?lang=${document.documentElement.lang}&pageFrom=true&eligibility=true`;
+          window.location.href = `${TIMED_OUT_URL}?lang=${document.documentElement.lang}&eligibility=true`;
         } else {
           window.location.href = `${START_ELIGIBILITY_URL}?lang=${document.documentElement.lang}`;
         }
       } else {
-        window.location.href = `${TIMED_OUT_URL}?lang=${document.documentElement.lang}&pageFrom=true`;
+        window.location.href = `${TIMED_OUT_URL}?lang=${document.documentElement.lang}`;
       }
     } else if (countdownTimer) {
       countdownTimer.innerHTML = convertToHumanReadableText(countdown);

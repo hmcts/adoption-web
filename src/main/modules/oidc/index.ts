@@ -13,11 +13,13 @@ import {
   ELIGIBILITY_URL,
   HOME_URL,
   LA_PORTAL,
+  LA_PORTAL_KBA_CASE_REF,
   PRIVACY_POLICY,
   PageLink,
   SIGN_IN_URL,
   SIGN_OUT_URL,
   TERMS_AND_CONDITIONS,
+  TIMED_OUT_REDIRECT,
 } from '../../steps/urls';
 
 /**
@@ -66,6 +68,14 @@ export class OidcMiddleware {
           return next();
         }
 
+        if (req.path.startsWith(TIMED_OUT_REDIRECT)) {
+          if (!req.session.laPortalKba) {
+            return req.session.destroy(() => res.redirect(SIGN_IN_URL));
+          } else {
+            return req.session.destroy(() => res.redirect(LA_PORTAL_KBA_CASE_REF));
+          }
+        }
+
         if (
           [ACCESSIBILITY_STATEMENT, PRIVACY_POLICY, TERMS_AND_CONDITIONS, COOKIES_PAGE, CONTACT_US].includes(
             req.path as PageLink
@@ -75,6 +85,7 @@ export class OidcMiddleware {
         }
 
         if (req.path.startsWith(LA_PORTAL)) {
+          req.session.isEligibility = false;
           return next();
         }
 
