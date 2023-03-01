@@ -260,6 +260,16 @@ export const enum Nationality {
   NOT_SURE = 'Not sure',
 }
 
+export const enum ResponsibilityReasons {
+  BIRTH_CERTIFICATE = 'Birth certificate',
+  COURT_ORDER = 'Court order',
+  RESPONSIBILITY_ORDER = 'Parental responsibility order',
+  RESPONSIBILITY_AGREEMENT = 'Parental responsibility agreement',
+  REMOVED_BY_COURT = 'Parental responsibility removed by court',
+  NEVER_OBTAINED = 'Parental responsibility never obtained',
+  OTHER = 'Other',
+}
+
 export const enum ContactDetails {
   EMAIL = 'email',
   PHONE = 'phone',
@@ -387,6 +397,9 @@ export interface CaseData {
   birthFatherLastName: string;
   birthFatherStillAlive: string;
   birthFatherNotAliveReason: string;
+  birthFatherResponsibility: string;
+  birthFatherResponsibilityReason: ResponsibilityReasons[];
+  birthFatherOtherResponsibilityReason: string;
   birthFatherNationality: Nationality[];
   birthFatherOtherNationalities: ListValue<AdditionalNationality>[];
   birthFatherOccupation: string;
@@ -1308,8 +1321,7 @@ export const enum LegalProceedingsRelated {
 export const enum PlacementOrderTypeEnum {
   AdoptionOrder = 'Adoption order',
   CareOrder = 'Care order',
-  ContactOrder = 'Contact order',
-  FreeingOrder = 'Freeing order',
+  CHILD_ARRANGEMENT_ORDER = 'Child arrangements order',
   PlacementOrder = 'Placement order',
   SupervisionOrder = 'Supervision order',
   Other = 'Other',
@@ -1364,8 +1376,7 @@ export const enum SiblingRelationships {
 export const enum SiblingPOType {
   ADOPTION_ORDER = 'Adoption order',
   CARE_ORDER = 'Care order',
-  CONTACT_ORDER = 'Contact order',
-  FREEING_ORDER = 'Freeing order',
+  CHILD_ARRANGEMENT_ORDER = 'Child arrangements order',
   PLACEMENT_ORDER = 'Placement order',
   SUPERVIS_ORDER = 'Supervision order',
   OTHER = 'Other',

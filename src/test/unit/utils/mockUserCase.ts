@@ -4,6 +4,7 @@ import {
   Gender,
   LanguagePreference,
   Nationality,
+  ResponsibilityReasons,
   YesNoNotsure,
   YesOrNo,
 } from '../../../main/app/case/definition';
@@ -111,6 +112,8 @@ export default {
   birthFatherFirstNames: 'BIRTH_FATHER_FIRST_NAMES',
   birthFatherLastNames: 'BIRTH_FATHER_LAST_NAMES',
   birthFatherStillAlive: YesNoNotsure.YES,
+  birthFatherResponsibility: YesNoNotsure.YES,
+  birthFatherResponsibilityReason: [ResponsibilityReasons.BIRTH_CERTIFICATE],
   birthFatherNationality: [Nationality.BRITHISH],
   birthFatherOccupation: 'MOCK_OCCUPATION',
   birthFatherAddressKnown: YesOrNo.YES,

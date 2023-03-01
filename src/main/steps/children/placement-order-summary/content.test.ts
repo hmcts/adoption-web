@@ -22,7 +22,7 @@ const enContent = {
   },
   placementOrderListItems: [
     {
-      key: { text: 'Placement order', classes: 'font-normal' },
+      key: { text: 'MOCK_NUMBER Placement order', classes: 'font-normal' },
       value: { classes: 'summary-list-value', html: '' },
       actions: {
         classes: 'summary-list-actions',
@@ -30,7 +30,7 @@ const enContent = {
           {
             href: '/la-portal/child/placement-order-check-your-answers?change=MOCK_ID',
             text: 'Change',
-            visuallyHiddenText: 'Placement order',
+            visuallyHiddenText: 'MOCK_NUMBER Placement order',
           },
         ],
       },
@@ -53,7 +53,7 @@ const cyContent = {
   },
   placementOrderListItems: [
     {
-      key: { text: 'Gorchymyn Lleoli', classes: 'font-normal' },
+      key: { text: 'MOCK_NUMBER Gorchymyn Lleoli', classes: 'font-normal' },
       value: { classes: 'summary-list-value', html: '' },
       actions: {
         classes: 'summary-list-actions',
@@ -61,7 +61,7 @@ const cyContent = {
           {
             href: '/la-portal/child/placement-order-check-your-answers?change=MOCK_ID',
             text: 'Newid',
-            visuallyHiddenText: 'Gorchymyn Lleoli',
+            visuallyHiddenText: 'MOCK_NUMBER Gorchymyn Lleoli',
           },
         ],
       },

@@ -1,4 +1,4 @@
-import { PlacementOrderTypeEnum, SiblingPOType } from '../../../app/case/definition';
+import { SiblingPOType } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -10,8 +10,8 @@ const en = () => ({
   hint: 'This information makes it easier for the court to link past court orders.',
   adoptionOrder: 'Adoption order',
   careOrder: 'Care order',
-  contactOrder: 'Child arrangements order',
-  contactOrderHint: 'Child arrangements includes residency, contact, specific issue and prohibited steps.',
+  childArrangementOrder: 'Child arrangements order',
+  childArrangementOrderHint: 'Child arrangements includes residency, contact, specific issue and prohibited steps.',
   placementOrder: 'Placement order',
   superVisOrder: 'Supervision order',
   other: 'Other',
@@ -32,8 +32,9 @@ const cy: typeof en = () => ({
   hint: "Mae'r wybodaeth hon yn ei gwneud hi'n haws i'r llys gysylltu gorchmynion llys yn y gorffennol.",
   adoptionOrder: 'Gorchymyn Mabwysiadu',
   careOrder: 'Gorchymyn Gofal',
-  contactOrder: 'Gorchymyn trefniadau plant',
-  contactOrderHint: 'Mae trefniadau plant yn cynnwys cyfnod preswyl, cyswllt, mater penodol a chamau gwaharddedig.',
+  childArrangementOrder: 'Gorchymyn trefniadau plant',
+  childArrangementOrderHint:
+    'Mae trefniadau plant yn cynnwys cyfnod preswyl, cyswllt, mater penodol a chamau gwaharddedig.',
   placementOrder: 'Gorchymyn Lleoli',
   superVisOrder: 'Gorchymyn Goruchwylio',
   other: 'Arall',
@@ -61,9 +62,9 @@ export const form: FormContent = {
           { label: l => l.adoptionOrder, value: SiblingPOType.ADOPTION_ORDER },
           { label: l => l.careOrder, value: SiblingPOType.CARE_ORDER },
           {
-            label: l => l.contactOrder,
-            value: PlacementOrderTypeEnum.ContactOrder,
-            hint: l => l.contactOrderHint,
+            label: l => l.childArrangementOrder,
+            value: SiblingPOType.CHILD_ARRANGEMENT_ORDER,
+            hint: l => l.childArrangementOrderHint,
           },
           { label: l => l.placementOrder, value: SiblingPOType.PLACEMENT_ORDER },
           { label: l => l.superVisOrder, value: SiblingPOType.SUPERVIS_ORDER },
