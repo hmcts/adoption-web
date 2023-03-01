@@ -1,7 +1,7 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 
 const en = content => ({
-  title: 'Application Submitted',
+  title: 'Application submitted',
   referenceNumberAndChildName: `Your reference number<br><strong>${content.userCase.hyphenatedCaseRef}</strong> <br><br><strong>${content.userCase.childrenFirstName} ${content.userCase.childrenLastName}</strong>`,
   emailSentConfirmation:
     'We have sent you a confirmation email. If you have not received this, you should check your junk or spam folder.',

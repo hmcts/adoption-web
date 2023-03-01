@@ -94,6 +94,8 @@ const enContent = {
     documentsNotUploaded: 'Documents not uploaded',
     caseRefNumber: 'Court case reference number',
     dateOfBirth: 'Date of birth',
+    servedWith: 'Any document or court orders to be sent?',
+    NotServedWithReason: 'Reason',
   },
 };
 
@@ -178,6 +180,8 @@ const cyContent: typeof enContent = {
     documentsNotUploaded: 'Dogfennau heb eu llwytho',
     caseRefNumber: 'Cyfeirnod yr achos llys',
     dateOfBirth: 'Dyddiad geni',
+    servedWith: 'A ddylid anfon unrhyw ddogfennau neu orchmynion llys? ',
+    NotServedWithReason: 'Rheswm',
   },
 };
 
