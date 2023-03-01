@@ -108,6 +108,9 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   birthFatherLastNames: 'birthFatherLastName',
   birthFatherStillAlive: 'birthFatherStillAlive',
   birthFatherUnsureAliveReason: 'birthFatherNotAliveReason',
+  birthFatherResponsibility: 'birthFatherResponsibility',
+  birthFatherResponsibilityReason: 'birthFatherResponsibilityReason',
+  birthFatherOtherResponsibilityReason: 'birthFatherOtherResponsibilityReason',
   birthFatherNationality: 'birthFatherNationality',
   birthFatherAdditionalNationalities: 'birthFatherOtherNationalities',
   birthFatherOccupation: 'birthFatherOccupation',
@@ -319,6 +322,9 @@ export interface Case {
   birthFatherLastNames?: string;
   birthFatherStillAlive?: string;
   birthFatherUnsureAliveReason?: string;
+  birthFatherResponsibility?: YesOrNo;
+  birthFatherResponsibilityReason?: string[];
+  birthFatherOtherResponsibilityReason?: string;
   birthFatherNationality?: string[];
   birthFatherAdditionalNationalities?: AdditionalNationality[];
   birthFatherOccupation?: string;
