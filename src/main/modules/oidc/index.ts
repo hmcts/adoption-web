@@ -13,11 +13,13 @@ import {
   ELIGIBILITY_URL,
   HOME_URL,
   LA_PORTAL,
+  LA_PORTAL_KBA_CASE_REF,
   PRIVACY_POLICY,
   PageLink,
   SIGN_IN_URL,
   SIGN_OUT_URL,
   TERMS_AND_CONDITIONS,
+  TIMED_OUT_REDIRECT,
 } from '../../steps/urls';
 
 /**
@@ -56,8 +58,22 @@ export class OidcMiddleware {
 
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
+        if (req.session?.user) {
+          // a nunjucks global variable 'isLoggedIn' has been created for the views
+          // it is assigned the value of res.locals.isLoggedIn
+          res.locals.isLoggedIn = true;
+        }
+
         if (req.path.startsWith(ELIGIBILITY_URL)) {
           return next();
+        }
+
+        if (req.path.startsWith(TIMED_OUT_REDIRECT)) {
+          if (!req.session.laPortalKba) {
+            return req.session.destroy(() => res.redirect(SIGN_IN_URL));
+          } else {
+            return req.session.destroy(() => res.redirect(LA_PORTAL_KBA_CASE_REF));
+          }
         }
 
         if (
@@ -69,11 +85,11 @@ export class OidcMiddleware {
         }
 
         if (req.path.startsWith(LA_PORTAL)) {
+          req.session.isEligibility = false;
           return next();
         }
 
         if (req.session?.user) {
-          res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
           if (!req.session.userCase) {
             const userCase = await req.locals.api.getCase();

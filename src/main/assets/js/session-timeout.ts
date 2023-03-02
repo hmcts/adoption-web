@@ -1,6 +1,13 @@
 import { throttle } from 'lodash';
 
-import { KEEP_ALIVE_URL, LA_PORTAL_KBA_CASE_REF, SAVE_AND_RELOGIN, TIMED_OUT_URL } from '../../steps/urls';
+import {
+  ELIGIBILITY_URL,
+  KEEP_ALIVE_URL,
+  LA_PORTAL_KBA_CASE_REF,
+  SAVE_AND_RELOGIN,
+  START_ELIGIBILITY_URL,
+  TIMED_OUT_URL,
+} from '../../steps/urls';
 
 const eventTimer = 5 * 60 * 1000; // 5 minutes
 const TIMEOUT_NOTICE = 2 * 60 * 1000; // 2 minutes
@@ -11,6 +18,7 @@ let notificationTimer;
 let countdownInterval;
 let notificationPopupIsOpen = false;
 
+const isLoggedIn: HTMLLinkElement | null = document.querySelector('#navigation > li > a');
 const notificationPopup: HTMLElement | null = document.getElementById('timeout-modal-container');
 const popupCloseBtn: HTMLButtonElement | null | undefined =
   notificationPopup?.querySelector('#timeout-modal-close-button');
@@ -55,7 +63,15 @@ const startCountdown = () => {
     const seconds = Math.floor((countdown % (1000 * 60)) / 1000);
 
     if (seconds < 0) {
-      window.location.href = `${TIMED_OUT_URL}?lang=${document.documentElement.lang}&pageFrom=true`;
+      if (window.location.pathname.startsWith(ELIGIBILITY_URL)) {
+        if (isLoggedIn?.textContent?.includes('Sign out')) {
+          window.location.href = `${TIMED_OUT_URL}?lang=${document.documentElement.lang}&eligibility=true`;
+        } else {
+          window.location.href = `${START_ELIGIBILITY_URL}?lang=${document.documentElement.lang}`;
+        }
+      } else {
+        window.location.href = `${TIMED_OUT_URL}?lang=${document.documentElement.lang}`;
+      }
     } else if (countdownTimer) {
       countdownTimer.innerHTML = convertToHumanReadableText(countdown);
     }
@@ -71,11 +87,13 @@ const clearCountdown = () => {
 
 const showNotificationPopup = (visible: boolean) => {
   if (visible) {
-    notificationPopup?.removeAttribute('hidden');
-    notificationPopupIsOpen = true;
+    if (!window.location.pathname.startsWith(ELIGIBILITY_URL)) {
+      notificationPopup?.removeAttribute('hidden');
+      notificationPopupIsOpen = true;
+      trapFocusInModal();
+      saveBeforeSessionTimeout();
+    }
     startCountdown();
-    trapFocusInModal();
-    saveBeforeSessionTimeout();
   } else {
     notificationPopup?.setAttribute('hidden', 'hidden');
     notificationPopupIsOpen = false;
