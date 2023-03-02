@@ -599,20 +599,7 @@ describe('utils', () => {
             {
               siblingId: 'MOCK_SIBLING_ID',
               siblingRelation: SiblingRelationships.HALF_SISTER,
-              siblingPoType: SiblingPOType.CONTACT_ORDER,
-            },
-          ],
-        },
-        expected: IN_PROGRESS,
-      },
-      {
-        data: {
-          hasSiblings: YesNoNotsure.YES,
-          siblings: [
-            {
-              siblingId: 'MOCK_SIBLING_ID',
-              siblingRelation: SiblingRelationships.BROTHER,
-              siblingPoType: SiblingPOType.FREEING_ORDER,
+              siblingPoType: SiblingPOType.CHILD_ARRANGEMENT_ORDER,
             },
           ],
         },

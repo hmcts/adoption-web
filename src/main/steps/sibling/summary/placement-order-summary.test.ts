@@ -18,8 +18,7 @@ describe('placement-order-summary', () => {
     siblingPOType: {
       [SiblingPOType.ADOPTION_ORDER]: 'Adoption order',
       [SiblingPOType.CARE_ORDER]: 'Care order',
-      [SiblingPOType.CONTACT_ORDER]: 'Contact order',
-      [SiblingPOType.FREEING_ORDER]: 'Freeing order',
+      [SiblingPOType.CHILD_ARRANGEMENT_ORDER]: 'Child arrangements order',
       [SiblingPOType.PLACEMENT_ORDER]: 'Placement order',
       [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order',
       [SiblingPOType.OTHER]: 'Other',
@@ -43,7 +42,7 @@ describe('placement-order-summary', () => {
       {
         siblingId: 'MOCK_ID3',
         siblingRelation: SiblingRelationships.STEP_SISTER,
-        siblingPoType: SiblingPOType.CONTACT_ORDER,
+        siblingPoType: SiblingPOType.CHILD_ARRANGEMENT_ORDER,
         siblingPoNumber: 'MOCK_NUMBER3',
       },
     ];
@@ -51,7 +50,11 @@ describe('placement-order-summary', () => {
     expect(result).toEqual([
       {
         key: {
-          text: `${siblings[0].siblingRelation && content.siblingRelation[siblings[0].siblingRelation]}`,
+          text: `${
+            siblings[0].siblingPoNumber +
+            ' ' +
+            (siblings[0].siblingRelation && content.siblingRelation[siblings[0].siblingRelation])
+          }`,
           classes: 'font-normal',
         },
         value: {
@@ -111,7 +114,11 @@ describe('placement-order-summary', () => {
       },
       {
         key: {
-          text: `${siblings[2].siblingRelation && content.siblingRelation[siblings[2].siblingRelation]}`,
+          text: `${
+            siblings[2].siblingPoNumber +
+            ' ' +
+            (siblings[2].siblingRelation && content.siblingRelation[siblings[2].siblingRelation])
+          }`,
           classes: 'font-normal',
         },
         value: {
