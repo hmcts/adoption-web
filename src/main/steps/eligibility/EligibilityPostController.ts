@@ -2,6 +2,7 @@ import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
 import { getCaseApi } from '../../app/case/CaseApi';
+import { State } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
 import { AnyObject } from '../../app/controller/PostController';
 import { Form, FormFields } from '../../app/form/Form';
@@ -29,6 +30,8 @@ export default class EligibilityPostController<T extends AnyObject> {
       req.locals.api = getCaseApi(req.session.user, req.locals.logger);
       const userCase = await req.locals.api.getCase();
       if (userCase === null) {
+        nextUrl = APPLYING_WITH_URL;
+      } else if (userCase && (userCase.state === State.Submitted || userCase.state === State.LaSubmitted)) {
         nextUrl = APPLYING_WITH_URL;
       } else {
         nextUrl = HOME_URL;

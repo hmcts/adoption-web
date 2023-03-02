@@ -86,7 +86,7 @@ describe('children > placement-order-type > content', () => {
     expect(field.values[0].value).toBe(PlacementOrderTypeEnum.CareOrder);
     expect((field.values[1].label as Function)(generatedContent)).toBe(enContent.contactOrder);
     expect((field.values[1].hint as Function)(generatedContent)).toBe(enContent.contactOrderHint);
-    expect(field.values[1].value).toBe(PlacementOrderTypeEnum.ContactOrder);
+    expect(field.values[1].value).toBe(PlacementOrderTypeEnum.CHILD_ARRANGEMENT_ORDER);
     expect((field.values[2].label as Function)(generatedContent)).toBe(enContent.adoptionOrder);
     expect(field.values[2].value).toBe(PlacementOrderTypeEnum.AdoptionOrder);
     expect((field.values[3].label as Function)(generatedContent)).toBe(enContent.placementOrder);
