@@ -10,6 +10,7 @@ const en = () => ({
   under18No:
     'You can only apply to adopt a child if they are under 18 years old on the date your application is submitted.',
   moreInfo: 'More about adoption',
+  continue: 'Continue',
   errors: {
     under18Eligible: {
       required: 'Select if the child will be under 18 years old on the date you submit your application.',
@@ -22,6 +23,7 @@ const cy: typeof en = () => ({
   title: 'A fydd y plentyn dan 18 oed ar y dyddiad byddwch yn cyflwyno’ch cais?',
   under18No: 'Gallwch ond mabwysiadu plentyn os ydynt dan 18 oed ar y dyddiad mae eich cais yn cael ei gyflwyno.',
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
+  continue: 'Parhau',
   errors: {
     under18Eligible: {
       required: 'Nodwch a fydd y plentyn o dan 18 oed ar y dyddiad y byddwch yn cyflwyno eich cais.',

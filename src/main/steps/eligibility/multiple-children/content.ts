@@ -2,11 +2,11 @@ import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
-import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
-  section: SECTION,
+  section: 'Application details',
   title: 'Are you applying to adopt more than one child?',
+  continue: 'Continue',
   errors: {
     multipleChildrenEligible: {
       required: 'Select if you are applying to adopt more than one child',
@@ -15,8 +15,9 @@ const en = () => ({
 });
 
 const cy: typeof en = () => ({
-  section: SECTION_IN_WELSH,
+  section: 'Manylion y cais',
   title: 'Ydych chi’n gwneud cais i fabwysiadu mwy nag un plentyn?',
+  continue: 'Parhau',
   errors: {
     multipleChildrenEligible: {
       required: 'Dewiswch a ydych chi’n gwneud cais i fabwysiadu mwy nag un plentyn',

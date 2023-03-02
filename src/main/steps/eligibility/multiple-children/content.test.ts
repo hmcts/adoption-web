@@ -7,8 +7,9 @@ import { CommonContent, generatePageContent } from '../../common/common.content'
 import { generateContent } from '../multiple-children/content';
 
 const enContent = {
-  section: 'Eligibility to apply to adopt',
+  section: 'Application details',
   title: 'Are you applying to adopt more than one child?',
+  continue: 'Continue',
   errors: {
     multipleChildrenEligible: {
       required: 'Select if you are applying to adopt more than one child',
@@ -17,8 +18,9 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Gofynion cymhwysedd i wneud cais i fabwysiadu',
+  section: 'Manylion y cais',
   title: 'Ydych chi’n gwneud cais i fabwysiadu mwy nag un plentyn?',
+  continue: 'Parhau',
   errors: {
     multipleChildrenEligible: {
       required: 'Dewiswch a ydych chi’n gwneud cais i fabwysiadu mwy nag un plentyn',
