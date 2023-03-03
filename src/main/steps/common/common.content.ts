@@ -254,6 +254,7 @@ export const generatePageContent = ({
   userEmail,
   addresses = [],
   eligibility,
+  eligibilityPage,
   fee,
   courtList,
   localAuthorityList,
@@ -264,6 +265,7 @@ export const generatePageContent = ({
   userEmail?: string;
   addresses?: [];
   eligibility?: Eligibility;
+  eligibilityPage?: boolean;
   fee?: Fee;
   courtList?: CourtVenue[];
   localAuthorityList?: LocalAuthorityList[];
@@ -284,6 +286,7 @@ export const generatePageContent = ({
     contactEmail,
     addresses,
     eligibility,
+    eligibilityPage,
     fee,
     isAmendableStates,
   };
@@ -312,6 +315,7 @@ export type CommonContent = typeof en & {
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   addresses?: any[];
   eligibility?: Eligibility;
+  eligibilityPage?: boolean;
   fee?: Fee;
   isAmendableStates?: boolean;
 };

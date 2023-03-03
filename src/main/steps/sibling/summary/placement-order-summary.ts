@@ -13,7 +13,9 @@ export const placementOrderListItems = (siblings: Sibling[], content: any): any 
   return siblings?.map(item => {
     return {
       key: {
-        text: item.siblingRelation && content.siblingRelation[item.siblingRelation],
+        text: !item.siblingPoNumber
+          ? item.siblingRelation && content.siblingRelation[item.siblingRelation]
+          : item.siblingPoNumber + ' ' + (item.siblingRelation && content.siblingRelation[item.siblingRelation]),
         classes: 'font-normal',
       },
       value: {

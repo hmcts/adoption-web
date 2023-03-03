@@ -101,11 +101,14 @@ export const form: FormContent = {
       labelSize: 'm',
       validator: isFieldFilledIn,
     },
+    kbaChildrenDateOfBirthLabel: {
+      type: 'field-label',
+      label: l => l.childrenDateOfBirth,
+      hint: l => l.childDateOfBirthHint,
+    },
     kbaChildrenDateOfBirth: {
       type: 'date',
       classes: 'govuk-date-input',
-      label: l => l.childrenDateOfBirth,
-      hint: l => l.childDateOfBirthHint,
       labelSize: 's',
       labelHidden: false,
       values: [

@@ -60,7 +60,7 @@ export const form: FormContent = {
         { label: l => l.careOrder, value: PlacementOrderTypeEnum.CareOrder },
         {
           label: l => l.contactOrder,
-          value: PlacementOrderTypeEnum.ContactOrder,
+          value: PlacementOrderTypeEnum.CHILD_ARRANGEMENT_ORDER,
           hint: l => l.contactOrderHint,
         },
         { label: l => l.adoptionOrder, value: PlacementOrderTypeEnum.AdoptionOrder },
