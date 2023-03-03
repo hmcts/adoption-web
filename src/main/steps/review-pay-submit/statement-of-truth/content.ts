@@ -3,10 +3,9 @@ import { ApplyingWith } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
-// import { AppRequest } from '../../../app/controller/AppRequest';
 // import { getCaseApi } from '../../../app/case/CaseApi';
 
-const en = () => ({
+const en = content => ({
   section: 'Review your application',
   title: 'Statement of truth',
   statement:
@@ -14,12 +13,11 @@ const en = () => ({
   reviewBeforeSubmit:
     "Once you submit your application, you cannot make any further changes. You can select 'Save as draft' to review your application before you submit.",
   applicant1IBelieveApplicationIsTrue:
-    'I, the first applicant, believes that the facts stated in this form and any additional documents are true.',
+    'I, the first applicant, believe that the facts stated in this form and any additional documents are true.',
   applicant2IBelieveApplicationIsTrue: 'I am authorised by the second applicant to sign this statement.',
   applicant1SotFullName: 'Enter your full name',
   applicant2SotFullName: "Enter the second applicant's full name (if applicable)",
-  confirmAndPay: 'Confirm and pay',
-  confirmAndSubmit: 'Confirm and submit',
+  confirm: content.userCase.canPaymentIgnored ? 'Confirm and submit' : 'Confirm and pay',
   errors: {
     applicant1IBelieveApplicationIsTrue: {
       required: 'Confirm your statement of truth',
@@ -36,7 +34,7 @@ const en = () => ({
   },
 });
 
-const cy: typeof en = () => ({
+const cy: typeof en = content => ({
   section: 'Adolygu eich cais',
   title: 'Datganiad Gwirionedd',
   statement:
@@ -48,8 +46,7 @@ const cy: typeof en = () => ({
   applicant2IBelieveApplicationIsTrue: 'Fe’m hawdurdodir gan yr ail geisydd i lofnodi’r datganiad hwn.',
   applicant1SotFullName: 'Nac ydwdwch eich enw llawn',
   applicant2SotFullName: 'Nac ydwdwch enw llawn yr ail geisydd (os yw’n berthnasol)',
-  confirmAndPay: 'Cadarnhau a thalu',
-  confirmAndSubmit: 'Cadarnhau a chyflwyno',
+  confirm: content.userCase.canPaymentIgnored ? 'Cadarnhau a chyflwyno' : 'Cadarnhau a thalu',
   errors: {
     applicant1IBelieveApplicationIsTrue: {
       required: 'Cadarnhewch eich datganiad gwirionedd',
@@ -137,8 +134,7 @@ export const form: FormContent = {
     };
   },
   submit: {
-    //     text: l => isPayEnabled(request) ? l.confirmAndPay : l.confirmAndSubmit,
-    text: l => l.confirmAndPay,
+    text: l => l.confirm,
   },
   saveAsDraft: {
     text: l => l.saveAsDraft,
@@ -150,16 +146,8 @@ const languages = {
   cy,
 };
 
-// const isPayEnabled = async (req: AppRequest): Promise<boolean> => {
-//   req.locals.api = getCaseApi(req.session.user, req.locals.logger);
-//   const userCase = await req.locals.api.getCase();
-//   if(userCase === null || userCase === false)
-//     return true;
-//   return false;
-// }
-
 export const generateContent: TranslationFn = content => {
-  const translations = languages[content.language]();
+  const translations = languages[content.language](content);
   return {
     ...translations,
     form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}) },
