@@ -142,7 +142,7 @@ const cyContent: typeof enContent = {
   reason: 'Rheswm',
   submitApplication: 'Gwirio eich cais',
   checkInfoBeforeSubmit:
-    'Gwiriwch yr holl wybodaeth yr ydych wedi’i rhoi yn ofalus. Y cam nesaf yw arwyddo’r datganiad gwirionedd i ddatgan bod yr wybodaeth a roddwyd yn gywir. Unwaith y bydd wedi’i arwyddo a’r taliad wedi’i wneud, bydd eich cais yn cael ei gyflwyno i’r llys.',
+    'Gwiriwch yr holl wybodaeth rydych wedi’i darparu yn ofalus. Y cam nesaf yw arwyddo datganiad gwirionedd i ddatgan bod yr wybodaeth a roddwyd yn gywir. Unwaith y byddwch wedi’i lofnodi fe gymerir y taliad. Os ydych chi’n gwneud cais i fabwysiadu mwy nag un plentyn, dim ond unwaith y cymerir y taliad.',
   applyingWith: {
     [ApplyingWith.ALONE]: 'Rwy’n gwneud cais ar fy mhen fy hun',
     [ApplyingWith.WITH_SPOUSE_OR_CIVIL_PARTNER]: 'Rwy’n gwneud cais gyda fy mhriod neu fy mhartner sifil',
