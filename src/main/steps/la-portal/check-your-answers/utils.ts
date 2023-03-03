@@ -1,6 +1,12 @@
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { CaseDate, CaseWithId, Checkbox, FieldPrefix } from '../../../app/case/case';
-import { AdditionalNationality, Nationality, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
+import {
+  AdditionalNationality,
+  Nationality,
+  ResponsibilityReasons,
+  YesNoNotsure,
+  YesOrNo,
+} from '../../../app/case/definition';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { PageContent } from '../../../app/controller/GetController';
 import * as Urls from '../../../steps/urls';
@@ -52,6 +58,7 @@ type SummaryListsContent = PageContent & {
   siblingRelationships: Record<string, string>;
   siblingPlacementOrderType: Record<string, string>;
   placementOrderType: Record<string, string>;
+  responsibilityReasons: Record<string, string>;
 };
 
 const getSectionSummaryLists = (rows: SummaryListRows[], content: PageContent): GovUKNunjucksSummary[] => {
@@ -152,6 +159,25 @@ const formatNationalities = (
   return nationalities.join('<br>');
 };
 
+const formatResponsibilityReasons = (
+  responsibility: (string | ResponsibilityReasons)[],
+  otherReasonText: string,
+  content: { responsibilityReasons: { [x: string]: never } },
+  reasonText: string
+): string => {
+  const responsibilities = responsibility.filter(item => item !== ResponsibilityReasons.OTHER);
+  const translatedResponsibilities = [];
+  const responsibilityText = `<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">${reasonText}: </span> `;
+  responsibilities.forEach(element => translatedResponsibilities.push(content.responsibilityReasons[element]));
+
+  if (responsibility.includes(ResponsibilityReasons.OTHER) && translatedResponsibilities.length === 0) {
+    return responsibilityText + otherReasonText;
+  } else if (responsibility.includes(ResponsibilityReasons.OTHER)) {
+    return responsibilityText + translatedResponsibilities.join('<br>') + '<br>' + otherReasonText;
+  }
+  return responsibilityText + translatedResponsibilities.join('<br>');
+};
+
 /* eslint-disable import/namespace */
 export const birthParentSummaryList = (
   { sectionTitles, keys, ...content }: SummaryListsContent,
@@ -226,6 +252,43 @@ function fieldPrefixBirthMother(
     },
     ...(userCase[`${prefix}StillAlive`] === YesOrNo.YES
       ? [
+          ...(prefix === FieldPrefix.BIRTH_FATHER
+            ? [
+                {
+                  key: keys.responsibility,
+                  valueHtml: content.yesNoNotsure[userCase.birthFatherResponsibility!],
+                  changeUrl: Urls.LA_PORTAL_BIRTH_FATHER_PARENTAL_RESPONSIBILITY,
+                  classes: 'govuk-summary-list__row--no-border',
+                },
+                ...(userCase['birthFatherResponsibility'] === YesOrNo.YES
+                  ? [
+                      {
+                        keyHtml: ' ',
+                        key: content.reason,
+                        valueHtml: formatResponsibilityReasons(
+                          userCase['birthFatherResponsibilityReason']!,
+                          userCase['birthFatherOtherResponsibilityReason']!,
+                          content,
+                          content.reason
+                        ),
+                        changeUrl: Urls.LA_PORTAL_BIRTH_FATHER_PARENTAL_RESPONSIBILITY_GRANTED,
+                      },
+                    ]
+                  : [
+                      {
+                        keyHtml: ' ',
+                        key: content.reason,
+                        valueHtml: formatResponsibilityReasons(
+                          userCase['birthFatherResponsibilityReason']!,
+                          userCase['birthFatherOtherResponsibilityReason']!,
+                          content,
+                          content.reason
+                        ),
+                        changeUrl: Urls.LA_PORTAL_BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY,
+                      },
+                    ]),
+              ]
+            : []),
           {
             key: keys.nationality,
             valueHtml: formatNationalities(
@@ -258,6 +321,19 @@ function fieldPrefixBirthMother(
           ...(userCase[`${prefix}AddressKnown`] === YesOrNo.YES
             ? lastAddressKnown(keys, userCase, LA_PORTAL, prefix, urlPrefix)
             : []),
+          {
+            key: keys.servedWith,
+            valueHtml:
+              userCase[`${prefix}ServedWith`] === YesOrNo.NO
+                ? getNotSureReasonElement(
+                    content,
+                    userCase,
+                    content.yesNoNotsure[userCase[`${prefix}ServedWith`]],
+                    `${prefix}NotServedWithReason`
+                  )
+                : content.yesNoNotsure[userCase[`${prefix}ServedWith`]],
+            changeUrl: Urls[`${LA_PORTAL}${urlPrefix}SERVED_WITH`],
+          },
         ]
       : []),
   ];
@@ -352,6 +428,19 @@ export const otherParentSummaryList = (
                     },
                   ]
                 : []),
+              {
+                key: keys.servedWith,
+                valueHtml:
+                  userCase.otherParentServedWith === YesOrNo.NO
+                    ? getNotSureReasonElement(
+                        content,
+                        userCase,
+                        content.yesNoNotsure[userCase.otherParentServedWith],
+                        'otherParentNotServedWithReason'
+                      )
+                    : content.yesNoNotsure[userCase.otherParentServedWith!],
+                changeUrl: Urls.LA_PORTAL_OTHER_PARENT_SERVED_WITH,
+              },
             ]
           : []),
       ],

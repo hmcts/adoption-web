@@ -7,9 +7,9 @@ import { YesNoNotsure, YesOrNo } from '../../app/case/definition';
 import { laPortalSequence } from './laPortalSequence';
 
 describe('la-portal > laPortalSequence', () => {
-  test('should contain 59 entries in sibling screen sequence', () => {
+  test('should contain 65 entries in sibling screen sequence', () => {
     Date.now = jest.fn(() => +new Date('2021-01-01'));
-    expect(laPortalSequence).toHaveLength(59);
+    expect(laPortalSequence).toHaveLength(65);
     let incr = 0;
     expect(laPortalSequence[incr].url).toBe('/la-portal/kba-case-ref');
     expect(laPortalSequence[incr].getNextStep({})).toBe('/la-portal/kba-completed');
@@ -76,6 +76,13 @@ describe('la-portal > laPortalSequence', () => {
     expect(laPortalSequence[++incr].url).toBe('/la-portal/birth-mother/last-address-confirmed');
     expect(laPortalSequence[incr].contentDir).toBe('MOCK_BASE_DIR/../birth-mother/last-address-confirmed');
     expect(laPortalSequence[incr].getNextStep({})).toBe('/la-portal/task-list');
+    expect(laPortalSequence[incr].getNextStep({ birthMotherStillAlive: YesNoNotsure.YES })).toBe(
+      '/la-portal/birth-mother/served-with'
+    );
+
+    expect(laPortalSequence[++incr].url).toBe('/la-portal/birth-mother/served-with');
+    expect(laPortalSequence[incr].contentDir).toBe('MOCK_BASE_DIR/../birth-mother/served-with');
+    expect(laPortalSequence[incr].getNextStep({})).toBe('/la-portal/task-list');
 
     expect(laPortalSequence[++incr].url).toBe('/la-portal/birth-father/name-on-certificate');
     expect(laPortalSequence[incr].contentDir).toBe('MOCK_BASE_DIR/../birth-father/name-on-certificate');
@@ -100,8 +107,27 @@ describe('la-portal > laPortalSequence', () => {
     expect(laPortalSequence[incr].contentDir).toBe('MOCK_BASE_DIR/../birth-father/alive');
     expect(laPortalSequence[incr].getNextStep({})).toBe('/la-portal/task-list');
     expect(laPortalSequence[incr].getNextStep({ birthFatherStillAlive: YesNoNotsure.YES })).toBe(
-      '/la-portal/birth-father/nationality'
+      '/la-portal/birth-father/parental-responsibility'
     );
+
+    expect(laPortalSequence[++incr].url).toBe('/la-portal/birth-father/parental-responsibility');
+    expect(laPortalSequence[incr].contentDir).toBe('MOCK_BASE_DIR/../birth-father/parental-responsibility');
+    expect(laPortalSequence[incr].getNextStep({ birthFatherResponsibility: YesOrNo.YES })).toBe(
+      '/la-portal/birth-father/parental-responsibility/granted'
+    );
+    expect(laPortalSequence[incr].getNextStep({ birthFatherResponsibility: YesOrNo.NO })).toBe(
+      '/la-portal/birth-father/parental-responsibility/no-responsibility'
+    );
+
+    expect(laPortalSequence[++incr].url).toBe('/la-portal/birth-father/parental-responsibility/granted');
+    expect(laPortalSequence[incr].contentDir).toBe('MOCK_BASE_DIR/../birth-father/parental-responsibility/granted');
+    expect(laPortalSequence[incr].getNextStep({})).toBe('/la-portal/birth-father/nationality');
+
+    expect(laPortalSequence[++incr].url).toBe('/la-portal/birth-father/parental-responsibility/no-responsibility');
+    expect(laPortalSequence[incr].contentDir).toBe(
+      'MOCK_BASE_DIR/../birth-father/parental-responsibility/no-responsibility'
+    );
+    expect(laPortalSequence[incr].getNextStep({})).toBe('/la-portal/birth-father/nationality');
 
     expect(laPortalSequence[++incr].url).toBe('/la-portal/birth-father/nationality');
     expect(laPortalSequence[incr].contentDir).toBe('MOCK_BASE_DIR/../birth-father/nationality');
@@ -136,6 +162,16 @@ describe('la-portal > laPortalSequence', () => {
 
     expect(laPortalSequence[++incr].url).toBe('/la-portal/birth-father/last-address-confirmed');
     expect(laPortalSequence[incr].contentDir).toBe('MOCK_BASE_DIR/../birth-father/last-address-confirmed');
+    expect(laPortalSequence[incr].getNextStep({})).toBe('/la-portal/task-list');
+    expect(laPortalSequence[incr].getNextStep({ birthFatherNameOnCertificate: YesOrNo.YES })).toBe(
+      '/la-portal/birth-father/served-with'
+    );
+    expect(laPortalSequence[incr].getNextStep({ birthFatherIdentityKnown: YesOrNo.YES })).toBe(
+      '/la-portal/birth-father/served-with'
+    );
+
+    expect(laPortalSequence[++incr].url).toBe('/la-portal/birth-father/served-with');
+    expect(laPortalSequence[incr].contentDir).toBe('MOCK_BASE_DIR/../birth-father/served-with');
     expect(laPortalSequence[incr].getNextStep({})).toBe('/la-portal/task-list');
 
     expect(laPortalSequence[++incr].url).toBe('/la-portal/other-parent/exists');
@@ -174,6 +210,13 @@ describe('la-portal > laPortalSequence', () => {
 
     expect(laPortalSequence[++incr].url).toBe('/la-portal/other-parent/last-address-confirmed');
     expect(laPortalSequence[incr].contentDir).toBe('MOCK_BASE_DIR/../other-parent/last-address-confirmed');
+    expect(laPortalSequence[incr].getNextStep({})).toBe('/la-portal/task-list');
+    expect(laPortalSequence[incr].getNextStep({ otherParentExists: YesOrNo.YES })).toBe(
+      '/la-portal/other-parent/served-with'
+    );
+
+    expect(laPortalSequence[++incr].url).toBe('/la-portal/other-parent/served-with');
+    expect(laPortalSequence[incr].contentDir).toBe('MOCK_BASE_DIR/../other-parent/served-with');
     expect(laPortalSequence[incr].getNextStep({})).toBe('/la-portal/task-list');
 
     expect(laPortalSequence[++incr].url).toBe('/la-portal/child/placement-order-type');

@@ -2,6 +2,7 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
+import { getCaseApi } from '../../app/case/CaseApi';
 import {
   getDraftCaseFromStore,
   removeCaseFromRedis,
@@ -20,7 +21,7 @@ import {
   SAVE_AS_DRAFT,
 } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
-import { CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE, LA_SUBMIT, SYSTEM_USER_UPDATE } from '../case/definition';
+import { CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE, LA_SUBMIT, SYSTEM_USER_UPDATE, State } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
 import { ValidationError } from '../form/validation';
 
@@ -43,13 +44,25 @@ export class PostController<T extends AnyObject> {
       req.body
     );
 
-    if (!req.session.userCase && req.path.startsWith(APPLYING_WITH_URL)) {
-      if (req.session.flagNotsameDay === true) {
+    if (req.path.startsWith(APPLYING_WITH_URL)) {
+      req.locals.api = getCaseApi(req.session.user, req.locals.logger);
+      const userCase = await req.locals.api.getCase();
+      if (userCase === null) {
+        // Applications submitted not on login day
         req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
-        req.session.flagNotsameDay = false;
+      } else if (userCase) {
+        // Returned case may be Draft OR Submitted
+        if (userCase.state !== State.Submitted && userCase.state !== State.LaSubmitted) {
+          req.session.userCase = userCase;
+        } else {
+          // Applications submitted on the login day
+          req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
+        }
       } else {
-        req.session.userCase = await req.locals.api.getOrCreateCase(res.locals.serviceType, req.session.user);
+        // No Application for the user
+        req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
       }
+      req.session.isEligibility = false;
     }
 
     if (req.body.saveAndRelogin) {

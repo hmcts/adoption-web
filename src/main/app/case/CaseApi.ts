@@ -71,13 +71,19 @@ export class CaseApi {
       !(
         cases.filter(caseElement => caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted)
           .length ===
-          cases.length - 1 && cases.filter(caseElement => caseElement.state === State.Draft).length === 1
+        cases.length - 1
       )
     ) {
       throw new Error("Not all OR few cases assigned to the user aren't in right state.");
     }
 
-    const { id, state, case_data: caseData } = cases.filter(caseElement => caseElement.state === State.Draft)[0];
+    const {
+      id,
+      state,
+      case_data: caseData,
+    } = cases.filter(
+      caseElement => caseElement.state !== State.Submitted && caseElement.state !== State.LaSubmitted
+    )[0];
     return { ...fromApiFormat(caseData), id: id.toString(), state };
   }
 

@@ -24,7 +24,8 @@ module.exports = {
     console.log('User using the URL= ' + config.baseUrl);
     await login('citizenSingleton');
     await I.wait(4);
-    I.see('Are you applying on your own, or with someone else?');
+    await I.waitForText('Are you applying on your own, or with someone else?', 90);
+    await I.see('Are you applying on your own, or with someone else?');
   },
 
   async signInFromEligibility() {

@@ -14,8 +14,8 @@ const enContent = {
   hint: 'This information makes it easier for the court to link past court orders.',
   adoptionOrder: 'Adoption order',
   careOrder: 'Care order',
-  contactOrder: 'Child arrangements order',
-  contactOrderHint: 'Child arrangements includes residency, contact, specific issue and prohibited steps.',
+  childArrangementOrder: 'Child arrangements order',
+  childArrangementOrderHint: 'Child arrangements includes residency, contact, specific issue and prohibited steps.',
   placementOrder: 'Placement order',
   superVisOrder: 'Supervision order',
   other: 'Other',
@@ -36,8 +36,9 @@ const cyContent = {
   hint: "Mae'r wybodaeth hon yn ei gwneud hi'n haws i'r llys gysylltu gorchmynion llys yn y gorffennol.",
   adoptionOrder: 'Gorchymyn Mabwysiadu',
   careOrder: 'Gorchymyn Gofal',
-  contactOrder: 'Gorchymyn trefniadau plant',
-  contactOrderHint: 'Mae trefniadau plant yn cynnwys cyfnod preswyl, cyswllt, mater penodol a chamau gwaharddedig.',
+  childArrangementOrder: 'Gorchymyn trefniadau plant',
+  childArrangementOrderHint:
+    'Mae trefniadau plant yn cynnwys cyfnod preswyl, cyswllt, mater penodol a chamau gwaharddedig.',
   placementOrder: 'Gorchymyn Lleoli',
   superVisOrder: 'Gorchymyn Goruchwylio',
   other: 'Arall',
@@ -88,8 +89,8 @@ describe('sibling > placement-order-type > content', () => {
     expect(field.values[0].value).toBe(SiblingPOType.ADOPTION_ORDER);
     expect((field.values[1].label as Function)(generatedContent)).toBe(enContent.careOrder);
     expect(field.values[1].value).toBe(SiblingPOType.CARE_ORDER);
-    expect((field.values[2].label as Function)(generatedContent)).toBe(enContent.contactOrder);
-    expect(field.values[2].value).toBe(SiblingPOType.CONTACT_ORDER);
+    expect((field.values[2].label as Function)(generatedContent)).toBe(enContent.childArrangementOrder);
+    expect(field.values[2].value).toBe(SiblingPOType.CHILD_ARRANGEMENT_ORDER);
     expect((field.values[3].label as Function)(generatedContent)).toBe(enContent.placementOrder);
     expect(field.values[3].value).toBe(SiblingPOType.PLACEMENT_ORDER);
     expect((field.values[4].label as Function)(generatedContent)).toBe(enContent.superVisOrder);

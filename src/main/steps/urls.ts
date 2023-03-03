@@ -6,6 +6,7 @@ export const SIGN_IN_URL: PageLink = '/login';
 export const SIGN_OUT_URL: PageLink = '/logout';
 export const SAVE_AND_SIGN_OUT: PageLink = '/save-and-sign-out';
 export const TIMED_OUT_URL: PageLink = '/timed-out';
+export const TIMED_OUT_REDIRECT: PageLink = '/timed-out-redirect';
 export const KEEP_ALIVE_URL: PageLink = '/keep-alive';
 export const CSRF_TOKEN_ERROR_URL: PageLink = '/csrf-token-error';
 
@@ -105,6 +106,8 @@ export const APPLICATION_SUBMITTED: PageLink = '/application/submitted';
 
 export const DOWNLOAD_APPLICATION_SUMMARY: PageLink = '/download-summary';
 
+export const NEW_APPLICATION_REDIRECT: PageLink = '/new-application-redirect';
+
 export const SWITCH_TO_SOLE_APPLICATION: PageLink = '/switch-to-sole-application';
 
 export const CONFIRM_JOINT_APPLICATION: PageLink = '/confirm-your-joint-application';
@@ -137,6 +140,9 @@ export const BIRTH_FATHER_NAME_ON_CERTIFICATE: PageLink = `${BIRTH_FATHER}/name-
 export const BIRTH_FATHER_FULL_NAME: PageLink = `${BIRTH_FATHER}/full-name`;
 export const BIRTH_FATHER_ADDRESS_KNOWN: PageLink = `${BIRTH_FATHER}/address-known`;
 export const BIRTH_FATHER_STILL_ALIVE: PageLink = `${BIRTH_FATHER}/alive`;
+export const BIRTH_FATHER_PARENTAL_RESPONSIBILITY: PageLink = `${BIRTH_FATHER}/parental-responsibility`;
+export const BIRTH_FATHER_PARENTAL_RESPONSIBILITY_GRANTED: PageLink = `${BIRTH_FATHER}/parental-responsibility/granted`;
+export const BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY: PageLink = `${BIRTH_FATHER}/parental-responsibility/no-responsibility`;
 export const BIRTH_FATHER_ADDRESS_LOOKUP: PageLink = `${BIRTH_FATHER}/address/lookup`;
 export const BIRTH_FATHER_ADDRESS_SELECT: PageLink = `${BIRTH_FATHER}/address/select`;
 export const BIRTH_FATHER_MANUAL_ADDRESS: PageLink = `${BIRTH_FATHER}/address/manual`;
@@ -199,11 +205,15 @@ export const LA_PORTAL_BIRTH_MOTHER_SELECT_ADDRESS: PageLink = `${LA_PORTAL}${BI
 export const LA_PORTAL_BIRTH_MOTHER_MANUAL_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/address/manual`;
 export const LA_PORTAL_BIRTH_MOTHER_INTERNATIONAL_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/address/international`;
 export const LA_PORTAL_BIRTH_MOTHER_LAST_ADDRESS_CONFIRMED: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/last-address-confirmed`;
+export const LA_PORTAL_BIRTH_MOTHER_SERVED_WITH: PageLink = `${LA_PORTAL}${BIRTH_MOTHER}/served-with`;
 
 export const LA_PORTAL_BIRTH_FATHER_NAME_ON_CERTIFICATE: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/name-on-certificate`;
 export const LA_PORTAL_BIRTH_FATHER_IDENTITY_KNOWN: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/identity-known`;
 export const LA_PORTAL_BIRTH_FATHER_FULL_NAME: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/full-name`;
 export const LA_PORTAL_BIRTH_FATHER_STILL_ALIVE: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/still-alive`;
+export const LA_PORTAL_BIRTH_FATHER_PARENTAL_RESPONSIBILITY: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/parental-responsibility`;
+export const LA_PORTAL_BIRTH_FATHER_PARENTAL_RESPONSIBILITY_GRANTED: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/parental-responsibility/granted`;
+export const LA_PORTAL_BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/parental-responsibility/no-responsibility`;
 export const LA_PORTAL_BIRTH_FATHER_NATIONALITY: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/nationality`;
 export const LA_PORTAL_BIRTH_FATHER_OCCUPATION: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/occupation`;
 export const LA_PORTAL_BIRTH_FATHER_ADDRESS_KNOWN: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/address-known`;
@@ -212,6 +222,7 @@ export const LA_PORTAL_BIRTH_FATHER_SELECT_ADDRESS: PageLink = `${LA_PORTAL}${BI
 export const LA_PORTAL_BIRTH_FATHER_MANUAL_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/address/manual`;
 export const LA_PORTAL_BIRTH_FATHER_INTERNATIONAL_ADDRESS: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/address/international`;
 export const LA_PORTAL_BIRTH_FATHER_LAST_ADDRESS_CONFIRMED: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/last-address-confirmed`;
+export const LA_PORTAL_BIRTH_FATHER_SERVED_WITH: PageLink = `${LA_PORTAL}${BIRTH_FATHER}/served-with`;
 
 export const LA_PORTAL_OTHER_PARENT_EXISTS: PageLink = `${LA_PORTAL}${OTHER_PARENT}/exists`;
 export const LA_PORTAL_OTHER_PARENT_FULL_NAME: PageLink = `${LA_PORTAL}${OTHER_PARENT}/full-name`;
@@ -221,6 +232,7 @@ export const LA_PORTAL_OTHER_PARENT_SELECT_ADDRESS: PageLink = `${LA_PORTAL}${OT
 export const LA_PORTAL_OTHER_PARENT_MANUAL_ADDRESS: PageLink = `${LA_PORTAL}${OTHER_PARENT}/address/manual`;
 export const LA_PORTAL_OTHER_PARENT_INTERNATIONAL_ADDRESS: PageLink = `${LA_PORTAL}${OTHER_PARENT}/address/international`;
 export const LA_PORTAL_OTHER_PARENT_LAST_ADDRESS_CONFIRMED: PageLink = `${LA_PORTAL}${OTHER_PARENT}/last-address-confirmed`;
+export const LA_PORTAL_OTHER_PARENT_SERVED_WITH: PageLink = `${LA_PORTAL}${OTHER_PARENT}/served-with`;
 
 export const LA_PORTAL_SIBLING_EXISTS: PageLink = `${LA_PORTAL}${SIBLING}/exists`;
 export const LA_PORTAL_SIBLING_RELATION: PageLink = `${LA_PORTAL}${SIBLING}/relation`;

@@ -78,12 +78,13 @@ const en = {
   webChatDetails:
     'All our web chat agents are busy helping other people. Please try again later or contact us using one of the ways below.',
   sendUsAMessage: 'Send us a message',
-  TBC: 'TBC',
-  sendUsAMessageTBC: 'Send us a message  (email TBC)',
-  sendUsAMessageDetails: 'We aim to get back to you within 5 days.',
+  sendUsAMessageTelephone: 'Telephone: 01634 887900',
+  sendUsAMessageTBC:
+    'Email: <a href="mailto:adoptionproject@justice.gov.uk" class="govuk-link">adoptionproject@justice.gov.uk</a>',
+  sendUsAMessageDetails: 'We aim to get back to you within 5 working days',
   telephone: 'Telephone',
   telephoneNumber: '0300 303 0642',
-  telephoneDetails: 'Monday to Friday, 8am to 8pm, Saturday 8am to 2pm.',
+  telephoneDetails: 'Monday to Friday 9am to 5pm',
   habitualResidentHelpText1:
     'This may include working, owning property, having children in school, and your main family life taking place in England or Wales.',
   habitualResidentHelpText2:
@@ -198,12 +199,13 @@ const cy: typeof en = {
   webChatDetails:
     "Mae ein holl asiantau sgwrsio dros y we yn brysur yn helpu pobl eraill. Dewch yn ôl nes ymlaen neu cysylltwch â ni trwy un o'r dulliau uchod.",
   sendUsAMessage: 'Anfonwch neges atom',
-  TBC: 'i’w gadarnhau',
-  sendUsAMessageTBC: 'Anfonwch neges atom  (email i’w gadarnhau)',
+  sendUsAMessageTelephone: 'Rhif ffôn: 01634 887900',
+  sendUsAMessageTBC:
+    'E-bost: <a href="mailto:ymholiadaucymraeg@justice.gov.uk" class="govuk-link">ymholiadaucymraeg@justice.gov.uk</a>',
   sendUsAMessageDetails: 'Byddwn yn anelu at ymateb o fewn 5 diwrnod gwaith.',
-  telephone: 'Ffôn',
+  telephone: 'Rhif ffôn',
   telephoneNumber: '0300 303 5171',
-  telephoneDetails: 'Dydd Llun i ddydd Iau, 9am i 5pm, dydd Gwener 9am i 4.30pm.',
+  telephoneDetails: 'Dydd Llun i ddydd Iau 9am - 5pm',
   cookiesHeading: 'Cwcis ymlaen',
   cookiesLine1: "Rydym yn defnyddio rhai cwcis hanfodol i wneud i'r gwasanaeth hwn weithio.",
   cookiesLine2:
@@ -251,6 +253,7 @@ export const generatePageContent = ({
   userEmail,
   addresses = [],
   eligibility,
+  eligibilityPage,
   fee,
   courtList,
 }: {
@@ -260,6 +263,7 @@ export const generatePageContent = ({
   userEmail?: string;
   addresses?: [];
   eligibility?: Eligibility;
+  eligibilityPage?: boolean;
   fee?: Fee;
   courtList?: CourtVenue[];
 }): PageContent => {
@@ -278,6 +282,7 @@ export const generatePageContent = ({
     contactEmail,
     addresses,
     eligibility,
+    eligibilityPage,
     fee,
     isAmendableStates,
   };
@@ -305,6 +310,7 @@ export type CommonContent = typeof en & {
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   addresses?: any[];
   eligibility?: Eligibility;
+  eligibilityPage?: boolean;
   fee?: Fee;
   isAmendableStates?: boolean;
 };

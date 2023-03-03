@@ -1,6 +1,6 @@
 import mockUserCase from '../../../../test/unit/utils/mockUserCase';
 import { Checkbox, FieldPrefix } from '../../../app/case/case';
-import { DocumentType, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
+import { DocumentType, ResponsibilityReasons, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
 
 import { enContent } from './content';
 import {
@@ -200,6 +200,19 @@ describe('birthParentSummaryList', () => {
               ],
             },
           },
+          {
+            key: { text: 'Any document or court orders to be sent?' },
+            value: { html: 'Yes' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/birth-mother/served-with?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Any document or court orders to be sent?',
+                },
+              ],
+            },
+          },
         ],
       },
     },
@@ -244,6 +257,37 @@ describe('birthParentSummaryList', () => {
                   href: '/la-portal/birth-father/still-alive?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
                   visuallyHiddenText: 'Alive',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Does birth father has parental responsibility?' },
+            value: {
+              html: 'Yes',
+            },
+            classes: 'govuk-summary-list__row--no-border',
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/birth-father/parental-responsibility?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Does birth father has parental responsibility?',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Reason', html: ' ' },
+            value: {
+              html: '<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">Reason: </span> Birth certificate',
+            },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/birth-father/parental-responsibility/granted?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Reason',
                 },
               ],
             },
@@ -315,6 +359,19 @@ describe('birthParentSummaryList', () => {
               ],
             },
           },
+          {
+            key: { text: 'Any document or court orders to be sent?' },
+            value: { html: 'Yes' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/birth-father/served-with?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Any document or court orders to be sent?',
+                },
+              ],
+            },
+          },
         ],
       },
     },
@@ -377,6 +434,8 @@ describe('birthParentSummaryList', () => {
         ...mockUserCase,
         birthFatherAddressKnown: YesOrNo.NO,
         birthFatherAddressNotKnownReason: 'MOCK_REASON',
+        birthFatherResponsibility: YesOrNo.NO,
+        birthFatherResponsibilityReason: [ResponsibilityReasons.REMOVED_BY_COURT],
       },
       fieldPrefix: FieldPrefix.BIRTH_FATHER,
       expected: {
@@ -422,6 +481,35 @@ describe('birthParentSummaryList', () => {
             },
           },
           {
+            key: { text: 'Does birth father has parental responsibility?' },
+            value: { html: 'No' },
+            classes: 'govuk-summary-list__row--no-border',
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/birth-father/parental-responsibility?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Does birth father has parental responsibility?',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Reason', html: ' ' },
+            value: {
+              html: '<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">Reason: </span> Parental responsibility removed by court',
+            },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/birth-father/parental-responsibility/no-responsibility?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Reason',
+                },
+              ],
+            },
+          },
+          {
             key: { text: 'Nationality' },
             value: { html: 'British' },
             actions: {
@@ -458,6 +546,19 @@ describe('birthParentSummaryList', () => {
                   href: '/la-portal/birth-father/address-known?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
                   visuallyHiddenText: 'Address known',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Any document or court orders to be sent?' },
+            value: { html: 'Yes' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/birth-father/served-with?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Any document or court orders to be sent?',
                 },
               ],
             },
@@ -569,6 +670,19 @@ describe('otherParentSummaryList', () => {
               ],
             },
           },
+          {
+            key: { text: 'Any document or court orders to be sent?' },
+            value: { html: 'Yes' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/other-parent/served-with?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Any document or court orders to be sent?',
+                },
+              ],
+            },
+          },
         ],
       },
     },
@@ -639,6 +753,19 @@ describe('otherParentSummaryList', () => {
                   href: '/la-portal/other-parent/address-known?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
                   visuallyHiddenText: 'Address known',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Any document or court orders to be sent?' },
+            value: { html: 'Yes' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/other-parent/served-with?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Any document or court orders to be sent?',
                 },
               ],
             },

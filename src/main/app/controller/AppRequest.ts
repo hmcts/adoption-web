@@ -23,6 +23,7 @@ export interface AppSession extends Session {
   user: UserDetails;
   userCase: CaseWithId;
   eligibility: Eligibility;
+  isEligibility?: boolean;
   laPortalKba: LaPortalKBA;
   courtList: CourtVenue[];
   lang: string | undefined;
