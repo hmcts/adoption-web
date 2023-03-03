@@ -56,6 +56,7 @@ module.exports = {
     await I.retry(3).see('Orders already in place');
     await I.retry(3).see('Care order');
     await I.retry(3).see('Does the child have any other previous or existing orders?');
+    await I.retry(3).see(childDetailsPlacementOrder.placementOrderNumber);
     await I.retry(3).click(this.fields.addAnotherPlacementOrderNo);
     await I.retry(3).click('Save and continue');
     await I.wait(3);

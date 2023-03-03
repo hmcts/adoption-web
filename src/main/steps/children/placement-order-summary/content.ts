@@ -17,8 +17,7 @@ const en = content => {
     placementOrderType: {
       [PlacementOrderTypeEnum.AdoptionOrder]: 'Adoption order',
       [PlacementOrderTypeEnum.CareOrder]: 'Care order',
-      [PlacementOrderTypeEnum.ContactOrder]: 'Contact order',
-      [PlacementOrderTypeEnum.FreeingOrder]: 'Freeing order',
+      [PlacementOrderTypeEnum.CHILD_ARRANGEMENT_ORDER]: 'Child arrangements order',
       [PlacementOrderTypeEnum.PlacementOrder]: 'Placement order',
       [PlacementOrderTypeEnum.SupervisionOrder]: 'Supervision order',
       [PlacementOrderTypeEnum.Other]: 'Other',
@@ -47,8 +46,7 @@ const cy: typeof en = content => {
     placementOrderType: {
       [PlacementOrderTypeEnum.AdoptionOrder]: 'Gorchymyn Mabwysiadu',
       [PlacementOrderTypeEnum.CareOrder]: 'Gorchymyn Gofal',
-      [PlacementOrderTypeEnum.ContactOrder]: 'Gorchymyn Cyswllt',
-      [PlacementOrderTypeEnum.FreeingOrder]: 'Gorchymyn Rhyddhau',
+      [PlacementOrderTypeEnum.CHILD_ARRANGEMENT_ORDER]: 'Gorchymyn trefniadau plant',
       [PlacementOrderTypeEnum.PlacementOrder]: 'Gorchymyn Lleoli',
       [PlacementOrderTypeEnum.SupervisionOrder]: 'Gorchymyn Goruchwylio',
       [PlacementOrderTypeEnum.Other]: 'Arall',
