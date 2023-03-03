@@ -4,7 +4,7 @@ import { CommonContent } from '../../common/common.content';
 import { generateContent } from './content';
 
 const enContent = {
-  title: 'Application Submitted',
+  title: 'Application submitted',
   referenceNumberAndChildName:
     'Your reference number<br><strong>1234567890123456</strong> <br><br><strong>CHILD_FIRST_NAME CHILD_LAST_NAME</strong>',
   emailSentConfirmation:
@@ -36,22 +36,27 @@ const cyContent = {
   referenceNumberAndChildName:
     'Eich cyfeirnod<br><strong>1234567890123456</strong> <br><br><strong>CHILD_FIRST_NAME CHILD_LAST_NAME</strong>',
   emailSentConfirmation:
-    'Rydym wedi anfon neges gadarnhau drwy e-bost. Os nad ydych wedi cael y neges hon, dylech wirio eich ffolder sothach neu spam.',
+    'Rydym wedi anfon neges gadarnhau atoch drwy e-bost. Os nad ydych wedi cael y neges hon, dylech wirio eich ffolder sothach neu spam.',
   nextStep: 'Beth fydd yn digwydd nesaf',
   line1:
-    'Mae’r llys yn adolygu eich cais ac yn hysbysu’r rhieni biolegol, os yw’n berthnasol, am eich cais i fabwysiadu. Mae eich manylion personol yn cael eu cadw’n gwbl gyfrinachol.',
+    'Fe anfonir eich cais i’r awdurdod lleol a fydd yn darparu manylion am rieni biolegol y plentyn ac unrhyw frodyr/chwiorydd. Byddant yn anfon eich cais ac adroddiad mabwysiadu ar wahân (Atodiad A) i’r llys. Os na chewch neges e-bost yn cadarnhau bod hyn wedi’i wneud o fewn 10 diwrnod gwaith, cysylltwch â’ch gweithiwr cymdeithasol.',
   line2:
-    'Unwaith y bydd y gorchymyn mabwysiadu yn cael ei ganiatáu, bydd tystysgrif mabwysiadu yn cael ei chreu. Bydd yn disodli tystysgrif geni\'r plentyn Gellir ei harchebu o\'r <a href="https://www.gov.uk/general-register-office" class="govuk-link" target="_blank">Swyddfa Gofrestru Gyffredinol - GOV.UK (www.gov.uk)</a> am ffi fach.',
-  printApplication: 'Llwytho eich cais i lawr neu ei argraffu',
-  line3: '',
-  line4: '',
-  line5: '',
-  multipleChildren: '',
-  line6: '',
-  line7: '',
-  line8: '',
-  line9: '',
-  newApplication: '',
+    'Bydd y llys yn adolygu eich cais ac yn hysbysu’r rhieni biolegol, os yw’n berthnasol, am eich cais i fabwysiadu. Efallai y byddant yn gofyn i’r llys am ganiatâd i’w wrthwynebu. Dylai eich gweithiwr cymdeithasol adael i chi wybod os digwydd hyn a sut bydd yn effeithio ar eich cais i fabwysiadu.',
+  line3:
+    'Fe gynhelir nifer o wrandawiadau llys gyda’r awdurdod lleol a’r gweithwyr cymdeithasol. Nid oes rhaid ichi fynychu’r rhain. Efallai y bydd perthnasau biolegol y plentyn hefyd yn mynychu’r gwrandawiadau.',
+  line4:
+    'Unwaith y bydd y gorchymyn mabwysiadu yn cael ei gymeradwyo, bydd tystysgrif mabwysiadu yn cael ei chyflwyno. Bydd y dystysgrif hon yn disodli tystysgrif geni’r plentyn. Gellir ei harchebu o’r <a href="https://www.gov.uk/general-register-office" class="govuk-link" target="_blank">Swyddfa Gofrestru Gyffredinol</a> am ffi fechan.',
+  line5:
+    'Dylech gysylltu â’ch gweithiwr cymdeithasol i gael diweddariadau am eich cais. Ni all y gwasanaeth mabwysiadu roi diweddariadau i chi.',
+  multipleChildren: 'Mabwysiadu mwy nag un plentyn',
+  line6:
+    'Os ydych chi’n gwneud cais i fabwysiadu mwy nag un plentyn, mae’n rhaid i chi gwblhau a chyflwyno cais newydd ar gyfer pob plentyn. Rhaid gwneud hyn cyn hanner nos ar y dyddiad y byddwch yn cyflwyno eich cais cyntaf neu fe godir ffi llys ychwanegol arnoch o £183.',
+  line7: 'Fe ofynnir yr un cwestiynau i chi. Mae hyn oherwydd fe ymdrinnir â phob cais ar wahân.',
+  line8:
+    'Efallai y byddai’n eich helpu i nodi pob cyfeirnod newydd wrth enw’r plentyn rydych yn gwneud cais i’w fabwysiadu. Dim ond y cyfeirnod fydd wedi’i nodi ar y negeseuon e-bost a anfonir atoch.',
+  line9: 'Rhaid ichi ddefnyddio’r un cyfeiriad e-bost a chyfrinair ar gyfer pob cais.',
+  newApplication: 'Dechrau cais newydd ar gyfer plentyn arall',
+  printApplication: 'Argraffu eich cais',
 };
 
 describe('application-submmitted > content', () => {

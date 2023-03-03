@@ -4,6 +4,7 @@ import {
   Gender,
   LanguagePreference,
   Nationality,
+  ResponsibilityReasons,
   YesNoNotsure,
   YesOrNo,
 } from '../../../main/app/case/definition';
@@ -105,11 +106,14 @@ export default {
   birthMotherAddressPostcode: 'MOCK_ADDRESS_POSTCODE',
   birthMotherAddressCountry: 'MOCK_ADDRESS_COUNTRY',
   birthMotherLastAddressDate: { day: 1, month: 4, year: 2022 },
+  birthMotherServedWith: YesOrNo.YES,
 
   birthFatherNameOnCertificate: YesOrNo.YES,
   birthFatherFirstNames: 'BIRTH_FATHER_FIRST_NAMES',
   birthFatherLastNames: 'BIRTH_FATHER_LAST_NAMES',
   birthFatherStillAlive: YesNoNotsure.YES,
+  birthFatherResponsibility: YesNoNotsure.YES,
+  birthFatherResponsibilityReason: [ResponsibilityReasons.BIRTH_CERTIFICATE],
   birthFatherNationality: [Nationality.BRITHISH],
   birthFatherOccupation: 'MOCK_OCCUPATION',
   birthFatherAddressKnown: YesOrNo.YES,
@@ -118,6 +122,7 @@ export default {
   birthFatherAddressCounty: 'MOCK_ADDRESS_COUNTY',
   birthFatherAddressPostcode: 'MOCK_ADDRESS_POSTCODE',
   birthFatherLastAddressDate: { day: 1, month: 4, year: 2022 },
+  birthFatherServedWith: YesOrNo.YES,
 
   otherParentFirstNames: 'MOCK_OTHER_PARENT_FIRST_NAME',
   otherParentLastNames: 'MOCK_OTHER_PARENT_FIRST_NAME',
@@ -129,6 +134,7 @@ export default {
   otherParentAddressCountry: 'MOCK_ADDRESS_COUNTRY',
   otherParentAddressKnown: YesOrNo.YES,
   otherParentLastAddressDate: { day: 1, month: 4, year: 2022 },
+  otherParentServedWith: YesOrNo.YES,
 
   hasSiblings: YesNoNotsure.YES,
   siblings: [

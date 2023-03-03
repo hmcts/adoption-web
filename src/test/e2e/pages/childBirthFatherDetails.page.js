@@ -1,5 +1,6 @@
 const { I } = inject();
 const childBirthFatherDetails = require('../fixtures/caseData/childBirthFatherDetails');
+const childBirthMothersDetails = require('../fixtures/caseData/childBirthMothersDetails');
 module.exports = {
   fields: {
     birthFatherNameOnCertificate: 'input[id$="birthFatherNameOnCertificate"]',
@@ -20,6 +21,12 @@ module.exports = {
     birthFatherLastAddressDateDay: 'input[id$="birthFatherLastAddressDate-day"]',
     birthFatherLastAddressDateMonth: 'input[id$="birthFatherLastAddressDate-month"]',
     birthFatherLastAddressDateYear: 'input[id$="birthFatherLastAddressDate-year"]',
+    birthFatherServeOrderYes: '#birthFatherServedWith',
+    birthFatherServeOrderNo: '#birthFatherServedWith-2',
+    birthFatherServerOrderReason: '#birthFatherNotServedWithReason',
+    birthFatherParentalResponsibility: '#birthFatherResponsibility',
+    birthFatherParentalResponsibilityReason: '#birthFatherResponsibilityReason-5',
+    birthFatherResponsibilityOtherReason: '#birthFatherOtherResponsibilityReason',
   },
 
   async childBirthFatherDetailsSection() {
@@ -37,6 +44,34 @@ module.exports = {
     await I.retry(3).click(this.fields.birthFatherStillAlive);
     await I.wait(2);
     await I.retry(3).click('Save and continue');
+
+    await I.wait(2);
+    await I.retry(3).see(childBirthFatherDetails.birthFatherParentalResponsibilityTitle);
+    await I.retry(3).click('Save and continue');
+    await I.wait(3);
+    await I.retry(3).see(childBirthFatherDetails.birthFatherParentalResponsibilityError);
+    await I.retry(3).click(this.fields.birthFatherParentalResponsibility);
+    await I.retry(3).click('Save and continue');
+    await I.wait(2);
+    await I.retry(3).see(childBirthFatherDetails.howResponsibilityGranted);
+    await I.retry(3).see('Birth certificate');
+    await I.retry(3).see('Parental responsibility agreement');
+    await I.retry(3).see('Other');
+    await I.wait(2);
+    await I.retry(3).click('Save and continue');
+    await I.wait(2);
+    await I.retry(3).see(childBirthFatherDetails.selectParentalResponsibilityError);
+    await I.retry(3).click(this.fields.birthFatherParentalResponsibilityReason);
+    await I.retry(3).click('Save and continue');
+    await I.wait(2);
+    await I.retry(3).see(childBirthFatherDetails.enterParentalResponsibilityError);
+    await I.retry(3).fillField(
+      this.fields.birthFatherResponsibilityOtherReason,
+      childBirthFatherDetails.birthFatherParentalResponsibilityReason
+    );
+    await I.retry(3).click('Save and continue');
+    await I.wait(2);
+
     await I.retry(3).waitForText("What is the nationality of the child's birth father?");
     await I.retry(3).click(this.fields.britishCitizen);
     await I.wait(2);
@@ -50,6 +85,7 @@ module.exports = {
     await I.retry(3).click(this.fields.birthFatherAddressKnown);
     await I.wait(2);
     await I.retry(3).click('Save and continue');
+    await I.wait(2);
     await I.retry(3).click(this.fields.enterAddressManually);
     await I.wait(2);
     await I.retry(3).click(this.fields.enterInternationalAddress);
@@ -81,6 +117,24 @@ module.exports = {
     await I.retry(3).fillField(
       this.fields.birthFatherLastAddressDateYear,
       childBirthFatherDetails.birthFatherLastAddressDateYear
+    );
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
+
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
+    await I.retry(3).see(childBirthFatherDetails.birthFatherServerOrderTitle);
+    await I.retry(3).click('Save and continue');
+    await I.wait(4);
+    await I.retry(3).see(childBirthFatherDetails.serverOrderErrorMessage);
+    await I.retry(3).click(this.fields.birthFatherServeOrderYes);
+    await I.retry(3).click(this.fields.birthFatherServeOrderNo);
+    await I.retry(3).click('Save and continue');
+    await I.retry(3).see('Enter more detail');
+    await I.wait(2);
+    await I.retry(3).fillField(
+      this.fields.birthFatherServerOrderReason,
+      childBirthFatherDetails.reasonForNotToServeOrder
     );
     await I.retry(3).click('Save and continue');
     await I.wait(4);

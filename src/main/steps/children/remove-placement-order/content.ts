@@ -18,7 +18,7 @@ const en = content => {
     section: "The child's details",
     childsPOType: {
       [PlacementOrderTypeEnum.CareOrder]: 'Care order',
-      [PlacementOrderTypeEnum.ContactOrder]: 'Child arrangements order',
+      [PlacementOrderTypeEnum.CHILD_ARRANGEMENT_ORDER]: 'Child arrangements order',
       [PlacementOrderTypeEnum.AdoptionOrder]: 'Previous adoption order',
       [PlacementOrderTypeEnum.PlacementOrder]: 'Previous placement order',
       [PlacementOrderTypeEnum.SupervisionOrder]: 'Supervision order',
@@ -44,7 +44,7 @@ const cy: typeof en = content => {
     section: 'Manylion y plentyn',
     childsPOType: {
       [PlacementOrderTypeEnum.CareOrder]: 'Gorchymyn Gofal',
-      [PlacementOrderTypeEnum.ContactOrder]: 'Gorchymyn trefniadau plant',
+      [PlacementOrderTypeEnum.CHILD_ARRANGEMENT_ORDER]: 'Gorchymyn trefniadau plant',
       [PlacementOrderTypeEnum.AdoptionOrder]: 'Gorchymyn mabwysiadu blaenorol',
       [PlacementOrderTypeEnum.PlacementOrder]: 'Gorchymyn lleoli blaenorol',
       [PlacementOrderTypeEnum.SupervisionOrder]: 'Gorchymyn Goruchwylio',

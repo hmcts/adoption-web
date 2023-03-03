@@ -17,16 +17,16 @@ const enContent = {
 };
 
 const cyContent = {
-  title: "Mae eich ymateb i'r cais wedi cael ei gyflwyno",
-  referenceNumber: 'Rhif yr achos<br><strong>1234567890123456</strong>',
-  emailSentConfirmation:
-    'Bydd e-bost yn cael ei anfon at y ceiswyr i roi gwybod iddyn nhw bod eu cais wedi cyrraedd y llys.',
+  title: 'Mae eich cais wedi cael ei gyflwyno',
+  referenceNumber: 'Cyfeirnod y cais<br><strong>1234567890123456</strong>',
+  emailSentConfirmation: 'Rydym wedi anfon e-bost cadarnhad i’r cyfeiriadau e-bost a gofrestrwyd.',
   line1:
-    "Rydym hefyd wedi anfon e-bost cadarnhau i gyfeiriadau e-bost cofrestredig yr awdurdod lleol ar gyfer y ceisydd a'r awdurdod lleol ar gyfer y plentyn. Darparwyd y cyfeiriadau e-bost hyn gan y ceisydd.",
-  line2: "Mae'r e-bost yn rhoi gwybodaeth fanylach am y llinell amser a beth sy'n digwydd nesaf.",
-  line3:
-    "Bydd y cais nawr yn cael ei anfon i'r llys i’w brosesu. Os na wnaethoch lwytho Atodiad A fel rhan o'r dystiolaeth ar gyfer y cais, dylech wneud hyn cyn gynted â phosibl er mwyn atal oedi.",
-  line4: 'Mewngofnodwch i’r',
+    'Bydd y cais nawr yn cael ei anfon i’r llys i’w brosesu. Os na wnaethoch uwchlwytho Atodiad A fel rhan o’r dystiolaeth ar gyfer y cais, dylech wneud hynny cyn gynted â phosib ac o fewn 10 diwrnod gwaith i atal oedi a negeseuon atgoffa rhag cael eu hanfon. ',
+  line2:
+    "Os na allwch uwchlwytho Atodiad A o fewn 10 diwrnod gwaith o'r adeg y gwnaethoch gyflwyno'r cais, gallwch ei e-bostio'n uniongyrchol i'r llys. ",
+  line3: 'Fe anfonir e-bost at y ceiswyr i’w hysbysu bod eu cais wedi cyrraedd y llys. ',
+  line4:
+    'Dylech drafod unrhyw bresenoldeb yn y gwrandawiadau gyda’r ceiswyr. yn enwedig os oes risg y gallai"r rhieni genedigol fod yno.',
 };
 
 describe('application-submmitted > content', () => {
