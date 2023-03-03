@@ -125,7 +125,7 @@ const cy = {
   needMoreInformation:
     'Os ydych angen gwybodaeth sydd ar y wefan hon mewn fformat arall megis ar ffurf PDF hygyrch, print bras, fformat hawdd ei ddarllen, recordiad sain neu braille:',
   email:
-    'E-bost: <a href="mailto:ymholiadaucymraeg@justice.gov.uk" class=”govuk-link”>ymholiadaucymraeg@justice.gov.uk</a>',
+    'E-bost: <a href="mailto:ymholiadaucymraeg@justice.gov.uk" class="govuk-link">ymholiadaucymraeg@justice.gov.uk</a>',
   phone: 'Ffoniwch: 01634 887900',
   openingHours: 'Oriau agor: Dydd Llun – Dydd Gwener  9am - 5pm',
   considerYourRequest: 'Byddwn yn ystyried eich cais ac yn ymateb o fewn 10 diwrnod gwaith.',
