@@ -1,7 +1,6 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
-import { getCaseApi } from '../../../app/case/CaseApi';
 import { State } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { GetController } from '../../../app/controller/GetController';
@@ -16,15 +15,7 @@ export default class ApplicationSubmittedGetController extends GetController {
   }
 
   public async get(req: AppRequest, res: Response): Promise<void> {
-    req.locals.api = getCaseApi(req.session.user, req.locals.logger);
-    const cases = await req.locals.api.getCases();
-
-    cases.forEach(element => {
-      console.log('CASE ID: ', element.id);
-      console.log('CASE Date: ', element.case_data.dateSubmitted);
-      console.log('CASE State: ', element.state);
-    });
-
+    req.session.userCase.canPaymentIgnored = false;
     if (req.session.userCase.state !== State.Submitted) {
       return res.redirect(TASK_LIST_URL);
     }

@@ -3,7 +3,6 @@ import { ApplyingWith } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
-// import { getCaseApi } from '../../../app/case/CaseApi';
 
 const en = content => ({
   section: 'Review your application',

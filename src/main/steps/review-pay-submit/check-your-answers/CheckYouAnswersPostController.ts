@@ -28,15 +28,17 @@ export default class CheckYouAnswersPostController extends PostController<AnyObj
     }
 
     req.locals.api = getCaseApi(req.session.user, req.locals.logger);
-    const cases = await req.locals.api.getCases();
-    const { case_data: caseData } = cases.filter(
+    let cases = await req.locals.api.getCases();
+    cases = cases.filter(
       caseElement =>
         (caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted) &&
         moment(new Date(caseElement.case_data.dateSubmitted)).format('YYYY-MM-DD') ===
           moment(new Date()).format('YYYY-MM-DD')
-    )[0];
-    if (caseData) {
+    );
+    if (cases.length > 0) {
       req.session.userCase.canPaymentIgnored = true;
+      req.session.userCase.applicationFeeOrderSummary = cases[0].case_data.applicationFeeOrderSummary;
+      req.session.userCase.payments = cases[0].case_data.applicationPayments;
     }
     this.redirect(req, res, STATEMENT_OF_TRUTH);
   }

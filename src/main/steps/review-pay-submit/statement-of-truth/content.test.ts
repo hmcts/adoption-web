@@ -18,12 +18,11 @@ const enContent = {
   reviewBeforeSubmit:
     "Once you submit your application, you cannot make any further changes. You can select 'Save as draft' to review your application before you submit.",
   applicant1IBelieveApplicationIsTrue:
-    'I, the first applicant, believes that the facts stated in this form and any additional documents are true.',
+    'I, the first applicant, believe that the facts stated in this form and any additional documents are true.',
   applicant2IBelieveApplicationIsTrue: 'I am authorised by the second applicant to sign this statement.',
   applicant1SotFullName: 'Enter your full name',
   applicant2SotFullName: "Enter the second applicant's full name (if applicable)",
-  confirmAndPay: 'Confirm and pay',
-  confirmAndSubmit: 'Confirm and submit',
+  confirm: 'Confirm and pay',
   errors: {
     applicant1IBelieveApplicationIsTrue: {
       required: 'Confirm your statement of truth',
@@ -52,8 +51,7 @@ const cyContent = {
   applicant2IBelieveApplicationIsTrue: 'Fe’m hawdurdodir gan yr ail geisydd i lofnodi’r datganiad hwn.',
   applicant1SotFullName: 'Nac ydwdwch eich enw llawn',
   applicant2SotFullName: 'Nac ydwdwch enw llawn yr ail geisydd (os yw’n berthnasol)',
-  confirmAndPay: 'Cadarnhau a thalu',
-  confirmAndSubmit: 'Cadarnhau a chyflwyno',
+  confirm: 'Cadarnhau a thalu',
   errors: {
     applicant1IBelieveApplicationIsTrue: {
       required: 'Cadarnhewch eich datganiad gwirionedd',
@@ -70,7 +68,7 @@ const cyContent = {
   },
 };
 
-const commonContent = { language: EN } as CommonContent;
+const commonContent = { language: EN, userCase: { canPaymentIgnored: false } } as CommonContent;
 
 describe('review-pay-submit > statement-of-truth > content', () => {
   it('should return the correct content for language = en', () => {

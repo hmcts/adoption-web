@@ -172,10 +172,19 @@ export class PostController<T extends AnyObject> {
         req.session.userCase = await req.locals.api.triggerEvent(caseRefId, modifiedValuesSet, eventName);
         removeCaseFromRedis(req, caseRefId);
       } else {
-        console.log('req.session.userCase.canPaymentIgnored: ', req.session.userCase.canPaymentIgnored);
-        console.log('eventName: ', eventName);
+        const flag = req.session.userCase.canPaymentIgnored;
+        const feeSummary = req.session.userCase.applicationFeeOrderSummary;
+        const payments = req.session.userCase.payments;
         req.session.userCase = await req.locals.api.triggerEvent(caseRefId, formData, eventName);
-        console.log('req.session.userCase.canPaymentIgnored: ', req.session.userCase.canPaymentIgnored);
+        if (flag) {
+          req.session.userCase = await req.locals.api.triggerEvent(
+            caseRefId,
+            { applicationFeeOrderSummary: feeSummary },
+            CITIZEN_SUBMIT
+          );
+          req.session.userCase = await req.locals.api.addPayment(caseRefId, payments!);
+          req.session.userCase.canPaymentIgnored = flag;
+        }
       }
     } catch (err) {
       req.locals.logger.error('Error saving', err);
@@ -224,9 +233,6 @@ export class PostController<T extends AnyObject> {
       return LA_SUBMIT;
     } else if (req.session.user?.isSystemUser) {
       return SYSTEM_USER_UPDATE;
-    } else if (req.session.userCase.canPaymentIgnored) {
-      req.session.userCase.status = State.Submitted;
-      return CITIZEN_SUBMIT;
     }
     return CITIZEN_UPDATE;
   }
