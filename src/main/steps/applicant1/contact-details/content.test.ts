@@ -61,6 +61,7 @@ const cyContent = {
   phoneNumber: 'Rhif ffôn yn y DU',
   applicant1ContactDetailsConsent:
     'Efallai bydd y llys eisiau defnyddio eich cyfeiriad e-bost i gyflwyno gorchmynion llys arnoch, A ydych yn hapus i neuchmynion llys gael eu cyflwyno arnoch drwy e-bost?',
+  contactDetailsConsentNo: 'Fe gyflwynir yr holl orchmynion llys arnoch drwy’r post.',
   errors: {
     applicant1ContactDetailsConsent: {
       required: 'Dewiswch a ydych yn hapus i gael eich gorchmynion llys drwy e-bost.',

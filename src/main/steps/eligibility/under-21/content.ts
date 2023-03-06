@@ -9,6 +9,7 @@ const en = () => ({
   title: 'Are you, and the other applicant if relevant, both aged 21 or over?',
   under21Yes: 'You must be 21 or over to adopt a child. This includes any other applicant.',
   moreInfo: 'More about adoption',
+  continue: 'Continue',
   errors: {
     under21Eligible: {
       required: 'Select if you, and the other applicant if relevant, are both aged 21 or over.',
@@ -21,6 +22,7 @@ const cy: typeof en = () => ({
   title: 'Ydych chi, a’r ceisydd arall os yw’n berthnasol, yn 21 oed neu’n hŷn?',
   under21Yes: 'Rhaid i chi fod yn 21 oed o leiaf i fabwysiadu plentyn. Mae hyn yn cynnwys unrhyw geisydd arall.',
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
+  continue: 'Parhau',
   errors: {
     under21Eligible: {
       required: "Nodwch os ydych chi, a'r ceisydd arall os yn berthnasol, yn 21 oed neu'n hŷn.",

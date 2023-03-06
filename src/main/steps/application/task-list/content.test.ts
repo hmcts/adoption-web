@@ -62,7 +62,7 @@ const cyContent = {
     applicantDetails: 'Ychwanegu manylion y ceisydd',
     childDetails: 'Ychwanegu manylion y plentyn',
     uploadDocuments: 'Llwytho dogfennau',
-    reviewPayAndSubmit: 'Adolygu, talu a chyflwyno',
+    reviewPayAndSubmit: 'Adolygu a chyflwyno',
   },
   taskListItems: {
     numberOfApplicants: 'Nifer y ceiswyr',

@@ -45,19 +45,21 @@ const cy: typeof en = () => ({
     "Mae angen rhywfaint o'r wybodaeth ar gyfer y Gofrestr Mabwysiadu a'r dystysgrif fabwysiadu a fydd yn disodli tystysgrif geni’r plentyn.",
   line6:
     "Gofynnir i chi am wybodaeth sydd ar orchymyn lleoli’r plentyn. Mae hyn yn cynnwys enw'r awdurdod lleol a osododd y plentyn yn eich gofal a'r llys a wnaeth y gorchymyn. Bydd gan eich gweithiwr cymdeithasol neu'ch asiantaeth fabwysiadu'r wybodaeth hon.",
-  line7: 'Nid yw eich gwybodaeth bersonol yn effeithio ar eich cais i fabwysiadu.',
+  line7: 'Fe ofynnir am rywfaint o wybodaeth bersonol gennych. Nid yw hyn yn effeithio ar eich cais i fabwysiadu.',
   line8:
     'Dim ond y llys ac asiantaethau neu awdurdodau mabwysiadu perthnasol fydd yn gweld yr wybodaeth y byddwch yn ei darparu.',
   subheading2: "Beth i'w ddisgwyl",
   line9:
-    'Bydd eich awdurdod lleol yn darparu manylion am y plentyn yr hoffech ei fabwysiadu. Mae hyn yn cynnwys gwybodaeth am ei rieni genedigol ac unrhyw frodyr a chwiorydd.',
+    'Ffi prosesu’r llys ar gyfer gwneud cais yw £183. Mae’r taliad yn ddyledus unwaith y bydd y cais wedi’i gwblhau ac yn barod i’w gyflwyno i’r llys.',
   line10:
-    "Mae’n costio £MOCK_AMOUNT i’r llys brosesu’r cais. Mae disgwyl i'r taliad gael ei wneud unwaith y bydd y cais wedi'i gwblhau ac yn barod i'w gyflwyno i'r llys.",
+    'Byddwn yn hysbysu eich awdurdod lleol am eich cais. Byddant yn rhoi manylion i’r llys am y plentyn rydych yn dymuno ei fabwysiadu. Mae hyn yn cynnwys gwybodaeth am eu rhieni biolegol ac unrhyw frodyr/chwiorydd. Os na chewch neges e-bost yn cadarnhau bod hyn wedi’i wneud o fewn 10 diwrnod gwaith, cysylltwch â’ch gweithiwr cymdeithasol.',
   line11:
-    "Unwaith y byddwch yn cyflwyno eich cais, gall gymryd hyd at 6 wythnos cyn i'r llys gysylltu â chi am ddyddiad y gwrandawiad cyntaf. Nid oes rhaid i chi fod yn bresennol ar unrhyw un o'r dyddiadau hyn.",
-  line12: 'Anfonir diweddariadau trwy e-bost, neu drwy’r post os yw hyn yn well gennych.',
-  subheading3: '',
-  line13: '',
+    'Unwaith y bydd eich cais a’r wybodaeth gan eich awdurdod lleol wedi’u cyflwyno, gall gymryd hyd at 6 wythnos cyn i’r llys gysylltu â chi gyda manylion dyddiad y gwrandawiad cyntaf. Nid oes rhaid i chi fynychu unrhyw un o’r gwrandawiadau llys. Gall rhai o berthnasau biolegol y plentyn hefyd fod yn bresennol yn y gwrandawiadau llys. Gall eich gweithiwr cymdeithasol drafod y gwrandawiadau hyn gyda chi.',
+  subheading3: 'Gwneud cais i fabwysiadu mwy nag un plentyn',
+  line12:
+    'Os ydych chi’n gwneud cais i fabwysiadu mwy nag un plentyn, mae’n rhaid i chi gyflwyno cais newydd ar gyfer pob plentyn. Ni chodir ffi arall arnoch os byddwch yn cyflwyno’r ceisiadau hyn cyn hanner nos ar ddyddiad cyflwyno’ch cais cyntaf. Os byddwch yn eu cyflwyno ar ôl dyddiad cyflwyno’r cais cyntaf, yna bydd rhaid i chi dalu £183 arall. Am y rheswm hwn, argymhellwn eich bod yn dechrau eich ceisiadau yn gynnar a bod gennych bopeth rydych ei angen wrth law.',
+  line13:
+    'Mae’n rhaid ichi fewngofnodi gan ddefnyddio’r un cyfeiriad e-bost a chyfrinair a ddefnyddiwyd ar gyfer eich cais cyntaf.',
   startnow: 'Dechrau nawr',
 });
 
