@@ -6,6 +6,7 @@ export const SIGN_IN_URL: PageLink = '/login';
 export const SIGN_OUT_URL: PageLink = '/logout';
 export const SAVE_AND_SIGN_OUT: PageLink = '/save-and-sign-out';
 export const TIMED_OUT_URL: PageLink = '/timed-out';
+export const TIMED_OUT_REDIRECT: PageLink = '/timed-out-redirect';
 export const KEEP_ALIVE_URL: PageLink = '/keep-alive';
 export const CSRF_TOKEN_ERROR_URL: PageLink = '/csrf-token-error';
 

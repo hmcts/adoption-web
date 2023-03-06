@@ -5,23 +5,23 @@ import { generateContent } from '../multiple-children-desc/content';
 const enContent = {
   title: 'Applying for more than one child',
   line1:
-    "If you're applying for more than one child, you must submit a new application for each child. You will not be charged if you submit these before midnight on the day of your first application. If you submit after the day of the first application, you will be charged another £183.",
+    'If you are applying for more than one child, you will need to complete an application for each child in turn. Once you have submitted your first application, you can continue and start your next application.',
   line2:
-    'Once you have submitted your first application, you can continue from the submission confirmation page and start your next application.',
+    'You will only be charged one fee if you submit additional applications before midnight on the day you submit your first application. If you submit after the day of the first application, you will be charged another £183.',
   line3:
-    "If you sign out, you must sign in again using the same email address and password used in your first application.You can save your progress in the application by selecting 'save as draft'. This saves your answers so you can continue working on the application at a later date. You can only submit once all sections are complete.",
+    'If you sign out, you must sign in again using the same email address and password used in your first application.',
   continue: 'Continue',
 };
 
 const cyContent = {
-  title: 'Applying for more than one child',
+  title: 'Gwneud cais i fabwysiadu mwy nag un plentyn',
   line1:
-    'Gallwch wneud cais i fabwysiadu plentyn sydd yn eich gofal yn dilyn <a class="govuk-link" href="/eligibility/start">gorchymyn lleoli gan y llys.</a>',
+    'Os ydych chi’n gwneud cais i fabwysiadu mwy nag un plentyn, bydd angen i chi gyflwyno cais newydd ar gyfer pob plentyn. Unwaith y byddwch wedi cyflwyno eich cais cyntaf, gallwch barhau a chychwyn eich cais nesaf.',
   line2:
-    "Gallwch ddechrau eich cais ar unrhyw adeg fodd bynnag, mae'n rhaid i'r plentyn fod wedi byw gyda chi am o leiaf 10 wythnos cyn y gallwch gyflwyno’r cais.",
+    'Codir un ffi arnoch os byddwch yn cyflwyno unrhyw geisiadau ychwanegol cyn hanner nos ar ddyddiad cyflwyno’ch cais cyntaf.  Os byddwch yn eu cyflwyno ar ôl dyddiad cyflwyno’r cais cyntaf, yna bydd rhaid i chi dalu £183 arall.',
   line3:
-    "Gallwch gadw eich cais drwy ddewis 'save as draft'. Bydd hyn yn cadw eich atebion fel y gallwch barhau i weithio ar y cais yn hwyrach ymlaen. Dim ond unwaith y bydd pob adran wedi'i chwblhau y gallwch ei gyflwyno.",
-  continue: 'Continue',
+    'Os byddwch yn allgofnodi, bydd rhaid ichi fewngofnodi eto gan ddefnyddio’r un cyfeiriad e-bost a chyfrinair a ddefnyddiwyd ar gyfer eich cais cyntaf.',
+  continue: 'Parhau',
 };
 
 describe('number one children > 1 description page', () => {

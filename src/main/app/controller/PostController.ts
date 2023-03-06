@@ -85,6 +85,7 @@ export class PostController<T extends AnyObject> {
         // No Application for the user
         req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
       }
+      req.session.isEligibility = false;
     }
 
     if (req.body.saveAndRelogin) {
