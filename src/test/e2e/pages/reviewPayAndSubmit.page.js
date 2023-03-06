@@ -85,7 +85,7 @@ module.exports = {
       this.fields.applicant2SotFullName,
       secAppPersonalDetails.secondApplicantFirstName + ' ' + secAppPersonalDetails.secondApplicantSecondName
     );
-    await I.retry(3).click('Confirm');
+    await I.retry(3).click('Confirm and pay');
     await I.wait(4);
   },
 
