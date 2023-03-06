@@ -10,7 +10,7 @@ const en = {
   asManyAsPossibleKeyboard: 'navigate most of the website using just a keyboard',
   asManyAsPossibleSpeech: 'navigate most of the website using speech recognition software',
   asManyAsPossibleListen:
-    'listen to most of the website using a screen reader (including the most recent versions of NVDA, CCA(colour contrast Analyser) and Voiceover)',
+    'listen to most of the website using a screen reader (including the most recent versions of NVDA, CCA (colour contrast Analyser) and voiceover)',
   simpleAsPossible: "We've also made the text as simple as possible to understand.",
   abilityNet:
     '<a href="https://mcmw.abilitynet.org.uk" class="govuk-link" target="_blank" aria-label="This link will open in a new tab for AbilityNet">AbilityNet</a> has advice on making your device easier to use if you have a disability.',
@@ -164,7 +164,7 @@ const cy: typeof en = {
     'Nid yw nifer o’n dogfennau PDF a Word hŷn yn bodloni’r safonau hygyrchedd - er enghraifft, efallai nad ydynt wedi’u strwythuro fel eu bod yn hygyrch i ddarllenydd sgrin. Nid yw hyn yn bodloni WCAG 2.1 maen prawf llwyddiant 4.1.2 (Enw, Rôl, Gwerth).',
   issuesWithDocumentDescription2:
     'Mae rhai o’n dogfennau PDF a Word yn hanfodol i’r gwasanaethau a ddarparwn. Erbyn Chwefror 2024, rydym yn bwriadu i naill ai ddatrys y materion neu eu newid gyda thudalennau HTML hygyrch.  Bydd unrhyw ddogfennau PDF neu Word newydd y byddwn yn eu cyhoeddi yn bodloni’r safonau hygyrchedd.',
-  improvingAccessibility: 'Beth rydym yn ei wneud i wella hygyrchedd',
+  improvingAccessibility: 'Beth rydym yn ei wneud i wella hygyrchedd y gwasanaeth hwn',
   statementCommitted:
     'Rydym wedi ymrwymo i sicrhau bod ein gwasanaethau’n hygyrch i’n holl gwsmeriaid a’u bod yn cydymffurfio â lefel AA Canllawiau Hygyrchedd Cynnwys Gwe - WCAG 2.1.',
   statementDAC:
