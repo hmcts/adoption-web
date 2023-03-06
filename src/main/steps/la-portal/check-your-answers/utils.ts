@@ -162,13 +162,13 @@ const formatNationalities = (
 const formatResponsibilityReasons = (
   responsibility: (string | ResponsibilityReasons)[],
   otherReasonText: string,
-  content: { responsibilityReasons: { [x: string]: never } },
+  reasonsProvided,
   reasonText: string
 ): string => {
   const responsibilities = responsibility.filter(item => item !== ResponsibilityReasons.OTHER);
-  const translatedResponsibilities = [];
-  const responsibilityText = `<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">${reasonText}: </span> `;
-  responsibilities.forEach(element => translatedResponsibilities.push(content.responsibilityReasons[element]));
+  const translatedResponsibilities: string[] = [];
+  const responsibilityText = `<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">${reasonText} </span> `;
+  responsibilities.forEach(element => translatedResponsibilities.push(reasonsProvided[element]));
 
   if (responsibility.includes(ResponsibilityReasons.OTHER) && translatedResponsibilities.length === 0) {
     return responsibilityText + otherReasonText;
@@ -268,8 +268,8 @@ function fieldPrefixBirthMother(
                         valueHtml: formatResponsibilityReasons(
                           userCase['birthFatherResponsibilityReason']!,
                           userCase['birthFatherOtherResponsibilityReason']!,
-                          content,
-                          content.reason
+                          content.responsibilityReasons,
+                          content.reason + ':'
                         ),
                         changeUrl: Urls.LA_PORTAL_BIRTH_FATHER_PARENTAL_RESPONSIBILITY_GRANTED,
                       },
@@ -281,8 +281,8 @@ function fieldPrefixBirthMother(
                         valueHtml: formatResponsibilityReasons(
                           userCase['birthFatherResponsibilityReason']!,
                           userCase['birthFatherOtherResponsibilityReason']!,
-                          content,
-                          content.reason
+                          content.responsibilityReasons,
+                          content.reason + ':'
                         ),
                         changeUrl: Urls.LA_PORTAL_BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY,
                       },
@@ -396,6 +396,18 @@ export const otherParentSummaryList = (
                 key: keys.fullName,
                 value: userCase.otherParentFirstNames + ' ' + userCase.otherParentLastNames,
                 changeUrl: Urls.LA_PORTAL_OTHER_PARENT_FULL_NAME,
+              },
+              {
+                key: keys.otherParentResponsibility,
+                valueHtml: formatResponsibilityReasons(
+                  userCase.otherParentResponsibilityReason!,
+                  userCase.otherParentOtherResponsibilityReason
+                    ? content.responsibilityReasons['Other'] + '<br>' + userCase.otherParentOtherResponsibilityReason
+                    : '',
+                  content.responsibilityReasons,
+                  ''
+                ),
+                changeUrl: Urls.LA_PORTAL_OTHER_PARENT_RESPONSIBILITY_GRANTED,
               },
               {
                 key: keys.addressKnown,

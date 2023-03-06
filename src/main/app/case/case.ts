@@ -131,6 +131,8 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   otherParentFirstNames: 'otherParentFirstName',
   otherParentLastNames: 'otherParentLastName',
   otherParentExists: 'otherParentStillAlive',
+  otherParentResponsibilityReason: 'otherParentResponsibilityReason',
+  otherParentOtherResponsibilityReason: 'otherParentOtherResponsibilityReason',
   otherParentAddress1: 'otherParentAddress1',
   otherParentAddress2: 'otherParentAddress2',
   otherParentAddress3: 'otherParentAddress3',
@@ -347,6 +349,8 @@ export interface Case {
   otherParentFirstNames?: string;
   otherParentLastNames?: string;
   otherParentExists?: YesOrNo;
+  otherParentResponsibilityReason?: string[];
+  otherParentOtherResponsibilityReason?: string;
   otherParentSelectAddress?: string;
   otherParentAddress1?: string;
   otherParentAddress2?: string;
