@@ -134,8 +134,8 @@ const cy: typeof en = {
   ...en, // @TODO delete me to get a list of missing translations
   phase: 'Beta',
   applyForAdoption: 'Gwneud cais i fabwysiadu',
-  applyForAdoptionCui: 'Gwnewch gais i fabwysiadu plentyn sydd yn eich gofal',
-  applyForAdoptionLaPortal: "Cais i fabwysiadu plentyn sydd wedi'i leoli mewn gofal",
+  applyForAdoptionCui: 'Gwneud cais i fabwysiadu plentyn a roddwyd yn eich gofal',
+  applyForAdoptionLaPortal: 'Gwneud cais i fabwysiadu plentyn mewn gofal',
   applyForDissolution: 'Gwneud cais i fabwysiadu',
   feedback:
     'Mae hwn yn wasanaeth newydd <a class="govuk-link" aria-label="Dolen adborth, Bydd hyn yn agor tab newydd. Bydd arnoch angen dychwelyd i’r tab hwn a pharhau gyda’ch cais o fewn 60 munud fel na fyddwch yn colli eich cynnydd." href="https://www.smartsurvey.co.uk/s/Adoption_Feedback/?pageurl=PAGE_TITLE" target="_blank">Bydd adborth</a> yn ein helpu ni i’w wella.',
