@@ -40,7 +40,7 @@ services:
     path: '/service-endpoint'
     port: 4000
     tokenKey: 'SERVICE_TOKEN_KEY'
-    pcqEnabled: 'false'
+    pcqEnabled: 'true'
   pact:
     url: 'https://pact-broker.platform.hmcts.net'
     tag:
