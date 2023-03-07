@@ -87,6 +87,10 @@ export const form: FormContent = {
               label: l => l.otherHint,
               labelSize: null,
               validator: isFieldFilledIn,
+              parser: data =>
+                (data as Record<string, string>).otherParentResponsibilityReason.includes('Other')
+                  ? (data as Record<string, string>).otherParentOtherResponsibilityReason
+                  : '',
             },
           },
         },
