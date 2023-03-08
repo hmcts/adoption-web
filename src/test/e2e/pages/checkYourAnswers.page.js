@@ -9,6 +9,7 @@ const primAppOtherDetails = require('../fixtures/caseData/primaryApplicantDetail
 const secAppPersonalDetails = require('../fixtures/caseData/secondApplicantPersonalDetails');
 const secAppOtherDetails = require('../fixtures/caseData/secondApplicantDetails');
 const childAfterAdopDetails = require('../fixtures/caseData/childAdoptionCertificateDetails');
+const childLAPage = require('../pages/childAdoptionAgencyDetails.page');
 module.exports = {
   fields: {
     saveAndContinueButton: 'input[id$="main-form-submit"]',
