@@ -30,6 +30,12 @@ export class CaseApi {
     return userCase || this.createCase(serviceType, userDetails);
   }
 
+  public async checkOldPCQIDExists(): Promise<string | undefined> {
+    const cases = await this.getCases();
+    const caseWithPCQID = cases.find(caseElement => caseElement.case_data.pcqId !== null);
+    return caseWithPCQID?.case_data.pcqId;
+  }
+
   public async getCase(): Promise<CaseWithId | false> {
     const cases = await this.getCases();
 
