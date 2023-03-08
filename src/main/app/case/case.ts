@@ -412,6 +412,7 @@ export interface Case {
   applicant2IBelieveApplicationIsTrue?: Checkbox;
   applicant1SotFullName?: string;
   applicant2SotFullName?: string;
+  canPaymentIgnored?: boolean;
   pcqId?: string;
 
   /***** Common across different type of users *****/
