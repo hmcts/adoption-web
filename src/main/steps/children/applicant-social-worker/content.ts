@@ -133,7 +133,6 @@ export const form: FormContent = {
       type: 'select-dropdown',
       id: 'location-picker',
       options: l => l.options,
-      validator: isFieldFilledIn,
       label: l => l.label,
       classes: 'l',
       labelSize: 'l',

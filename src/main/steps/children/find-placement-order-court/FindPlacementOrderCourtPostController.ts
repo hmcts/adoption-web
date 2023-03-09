@@ -23,8 +23,6 @@ export default class FindFamilyCourtPostController extends PostController<AnyObj
     this.filterErrorsForSaveAsDraft(req);
     if (isFilledPlacementOrderCourt) {
       if (req.session.errors.filter(e => e.propertyName === 'placementOrderCourt').length === 0) {
-        console.log('placementOrderCourt isFilledPlacementOrderCourt: ', isFilledPlacementOrderCourt);
-        console.log('placementOrderCourt isFilledPlacementOrderCourt: ', req.path);
         if (req.path === CHILDREN_FIND_PLACEMENT_ORDER_COURT) {
           req.session.errors.push({
             id: 'location-picker',
