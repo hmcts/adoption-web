@@ -56,14 +56,37 @@ export class PostController<T extends AnyObject> {
       const userCase = await req.locals.api.getCase();
       if (userCase === null) {
         // Applications submitted not on login day
+        const pcqId = await req.locals.api.checkOldPCQIDExists();
         req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
+        req.session.userCase = await this.save(
+          req,
+          {
+            pcqId,
+          },
+          this.getEventName(req)
+        );
       } else if (userCase) {
         // Returned case may be Draft OR Submitted
+        const pcqId = await req.locals.api.checkOldPCQIDExists();
         if (userCase.state !== State.Submitted && userCase.state !== State.LaSubmitted) {
           req.session.userCase = userCase;
+          req.session.userCase = await this.save(
+            req,
+            {
+              pcqId,
+            },
+            this.getEventName(req)
+          );
         } else {
           // Applications submitted on the login day
           req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
+          req.session.userCase = await this.save(
+            req,
+            {
+              pcqId,
+            },
+            this.getEventName(req)
+          );
         }
       } else {
         // No Application for the user
@@ -115,7 +138,6 @@ export class PostController<T extends AnyObject> {
   private async saveAndContinue(req: AppRequest<T>, res: Response, form: Form, formData: Partial<Case>): Promise<void> {
     Object.assign(req.session.userCase, formData);
     req.session.errors = form.getErrors(formData);
-
     this.filterErrorsForSaveAsDraft(req);
 
     if (req.session.errors.length) {
