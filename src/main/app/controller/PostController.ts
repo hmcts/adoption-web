@@ -51,9 +51,9 @@ export class PostController<T extends AnyObject> {
     const { saveAndRelogin, saveAndSignOut, saveBeforeSessionTimeout, _csrf, ...formData } = form.getParsedBody(
       req.body
     );
-    req.locals.api = getCaseApi(req.session.user, req.locals.logger);
 
     if (req.path.startsWith(APPLYING_WITH_URL)) {
+      req.locals.api = getCaseApi(req.session.user, req.locals.logger);
       const userCase = await req.locals.api.getCase();
       if (userCase === null) {
         // Applications submitted not on login day
@@ -217,12 +217,9 @@ export class PostController<T extends AnyObject> {
     return req.session.userCase;
   }
 
-  protected async redirect(req: AppRequest<T>, res: Response, nextUrl?: string): Promise<void> {
-    let target;
-    if (req.body['saveAsDraft']) {
-      //redirects to task-list page in case of save-as-draft button click
-      req.session.returnUrl = undefined;
-
+  private async resetFlagForNoPayments(req: AppRequest<T>): Promise<void> {
+    try {
+      req.locals.api = getCaseApi(req.session.user, req.locals.logger);
       let cases = await req.locals.api.getCases();
       cases = cases.filter(
         caseElement =>
@@ -233,6 +230,17 @@ export class PostController<T extends AnyObject> {
       if (cases.length > 0) {
         req.session.userCase.canPaymentIgnored = true;
       }
+    } catch (e) {
+      console.log(e.message);
+    }
+  }
+
+  protected redirect(req: AppRequest<T>, res: Response, nextUrl?: string): void {
+    let target;
+    if (req.body['saveAsDraft']) {
+      //redirects to task-list page in case of save-as-draft button click
+      req.session.returnUrl = undefined;
+      this.resetFlagForNoPayments(req);
       target = req.path.startsWith(LA_PORTAL) ? LA_PORTAL_TASK_LIST : SAVE_AS_DRAFT;
     } else if (req.session.errors?.length) {
       //redirects to same page in case of validation errors
