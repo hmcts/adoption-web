@@ -52,10 +52,6 @@ export class PostController<T extends AnyObject> {
       req.body
     );
 
-    if (req.body['saveAsDraft']) {
-      await this.resetFlagForNoPayments(req);
-    }
-
     if (req.path.startsWith(APPLYING_WITH_URL)) {
       req.locals.api = getCaseApi(req.session.user, req.locals.logger);
       const userCase = await req.locals.api.getCase();
@@ -150,7 +146,9 @@ export class PostController<T extends AnyObject> {
     }
 
     req.session.userCase = await this.save(req, formData, this.getEventName(req));
-
+    if (req.body['saveAsDraft']) {
+      await this.resetFlagForNoPayments(req);
+    }
     this.checkReturnUrlAndRedirect(req, res, this.ALLOWED_RETURN_URLS);
   }
 
