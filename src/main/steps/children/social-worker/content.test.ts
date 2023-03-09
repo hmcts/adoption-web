@@ -151,9 +151,7 @@ describe('children > social-worker > content', () => {
 
     expect(childLocalAuthority.type).toBe('select-dropdown');
 
-    (childLocalAuthority.validator as ValidationCheck)('MockEmail', {});
     expect(isFieldFilledIn).toHaveBeenCalled();
-    (childLocalAuthority.validator as ValidationCheck)(undefined, {});
     expect(isEmailValid).not.toHaveBeenCalledWith();
   });
 

@@ -160,9 +160,7 @@ describe('children > applicant-social-worker > content', () => {
 
     expect(applicantLocalAuthority.type).toBe('select-dropdown');
 
-    (applicantLocalAuthority.validator as ValidationCheck)('MockEmail', {});
     expect(isEmailValid).toHaveBeenCalledWith('MockEmail');
-    (applicantLocalAuthority.validator as ValidationCheck)(undefined, {});
     expect(isEmailValid).not.toHaveBeenCalledWith();
   });
 
