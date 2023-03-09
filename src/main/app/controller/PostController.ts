@@ -52,6 +52,10 @@ export class PostController<T extends AnyObject> {
       req.body
     );
 
+    if (req.body['saveAsDraft']) {
+      await this.resetFlagForNoPayments(req);
+    }
+
     if (req.path.startsWith(APPLYING_WITH_URL)) {
       req.locals.api = getCaseApi(req.session.user, req.locals.logger);
       const userCase = await req.locals.api.getCase();
@@ -240,7 +244,6 @@ export class PostController<T extends AnyObject> {
     if (req.body['saveAsDraft']) {
       //redirects to task-list page in case of save-as-draft button click
       req.session.returnUrl = undefined;
-      this.resetFlagForNoPayments(req);
       target = req.path.startsWith(LA_PORTAL) ? LA_PORTAL_TASK_LIST : SAVE_AS_DRAFT;
     } else if (req.session.errors?.length) {
       //redirects to same page in case of validation errors
