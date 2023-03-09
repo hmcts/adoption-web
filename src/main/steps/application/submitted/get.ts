@@ -15,10 +15,10 @@ export default class ApplicationSubmittedGetController extends GetController {
   }
 
   public async get(req: AppRequest, res: Response): Promise<void> {
+    req.session.userCase.canPaymentIgnored = false;
     if (req.session.userCase.state !== State.Submitted) {
       return res.redirect(TASK_LIST_URL);
     }
-
     super.get(req, res);
   }
 }
