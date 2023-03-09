@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
-import moment from 'moment';
 
 import { getCaseApi } from '../../app/case/CaseApi';
 import {
@@ -146,9 +145,7 @@ export class PostController<T extends AnyObject> {
     }
 
     req.session.userCase = await this.save(req, formData, this.getEventName(req));
-    if (req.body['saveAsDraft']) {
-      await this.resetFlagForNoPayments(req);
-    }
+
     this.checkReturnUrlAndRedirect(req, res, this.ALLOWED_RETURN_URLS);
   }
 
@@ -217,24 +214,6 @@ export class PostController<T extends AnyObject> {
       req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
     }
     return req.session.userCase;
-  }
-
-  private async resetFlagForNoPayments(req: AppRequest<T>): Promise<void> {
-    try {
-      req.locals.api = getCaseApi(req.session.user, req.locals.logger);
-      let cases = await req.locals.api.getCases();
-      cases = cases.filter(
-        caseElement =>
-          (caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted) &&
-          moment(new Date(caseElement.case_data.dateSubmitted)).format('YYYY-MM-DD') ===
-            moment(new Date()).format('YYYY-MM-DD')
-      );
-      if (cases.length > 0) {
-        req.session.userCase.canPaymentIgnored = true;
-      }
-    } catch (e) {
-      console.log(e.message);
-    }
   }
 
   protected redirect(req: AppRequest<T>, res: Response, nextUrl?: string): void {
