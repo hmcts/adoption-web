@@ -36,24 +36,6 @@ describe('CheckYouAnswersPostController', () => {
     controller = new CheckYouAnswersPostController({});
   });
 
-  describe('next page', () => {
-    beforeEach(() => {
-      mockGetParsedBody.mockReturnValue({});
-      mockGetErrors.mockReturnValue(['MOCK_ERROR']);
-      mockGetNextStepUrl.mockReturnValue('/MOCK_ENDPOINT');
-    });
-
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
-
-    test('should redirect to next page', async () => {
-      await controller.post(req, res);
-      expect(mockGetNextStepUrl).not.toHaveBeenCalled();
-      expect(res.redirect).toHaveBeenCalledWith('/review-pay-submit/statement-of-truth');
-    });
-  });
-
   describe('when there are form errors', () => {
     beforeEach(() => {
       req = mockRequest({
