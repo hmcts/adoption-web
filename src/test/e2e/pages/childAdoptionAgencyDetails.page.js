@@ -223,9 +223,7 @@ module.exports = {
       this.adopAgency.adopAgencyOrLaContactEmail,
       adoptionAgencyDetails.adopAgencyContactEmailInvalid
     );
-    await I.retry(3).fillField(this.adopAgency.adopAgencyOrLaName, adoptionAgencyDetails.adopAgencyNameHintText);
-    await I.wait(2);
-    await I.retry(3).clcik(this.adopAgency.adoptionAgencyNamePicker);
+    await I.retry(3).fillField(this.adopAgency.adopAgencyOrLaName, adoptionAgencyDetails.adopAgencyName);
     await I.retry(3).fillField(this.adopAgency.adopAgencyAddressLine1, adoptionAgencyDetails.adopAgencyAddressLine1);
     await I.retry(3).fillField(this.adopAgency.adopAgencyTown, adoptionAgencyDetails.adopAgencyAddressTown);
     await I.retry(3).click('Save and continue');
