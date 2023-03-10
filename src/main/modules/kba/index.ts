@@ -25,9 +25,9 @@ export class KbaMiddleware {
         if (req.session.laPortalKba?.kbaCaseRef) {
           req.session.user = await getSystemUser();
           req.session.user.isSystemUser = true;
-          req.session.save(() => res.redirect(LA_PORTAL_START_PAGE));
+          req.session.save(() => res.redirect(LA_PORTAL_START_PAGE + '?lang=' + req.query.lang));
         } else {
-          res.redirect(LA_PORTAL_KBA_CASE_REF);
+          res.redirect(LA_PORTAL_KBA_CASE_REF + '?lang=' + req.query.lang);
         }
       })
     );
@@ -57,7 +57,7 @@ export class KbaMiddleware {
                 req.session.laPortalKba['kbaChildName']?.trim() !==
                   req.session.userCase.childrenFirstName + ' ' + req.session.userCase.childrenLastName
               ) {
-                req.session.destroy(() => res.redirect(LA_PORTAL_NEG_SCENARIO));
+                req.session.destroy(() => res.redirect(LA_PORTAL_NEG_SCENARIO + '?lang=' + req.query.lang));
                 return;
               }
             } catch (err) {
