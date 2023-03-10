@@ -17,6 +17,7 @@ const logger = Logger.getLogger('PCQGetController');
 export default class PCQGetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
     const tokenKey: string = config.get('services.equalityAndDiversity.tokenKey');
+    logger.info(`tokenKey in PCQGetController: ${tokenKey}`);
     const url = config.get('services.equalityAndDiversity.url');
     const pcqEnabled = config.get('services.equalityAndDiversity.pcqEnabled');
     logger.info(`PCQEnabled : ${pcqEnabled}`);
