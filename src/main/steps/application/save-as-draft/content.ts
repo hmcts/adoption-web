@@ -15,7 +15,7 @@ const cy: typeof en = content => ({
   multipleChildrenMessage: content.userCase.canPaymentIgnored
     ? 'Mae’n rhaid ichi gyflwyno unrhyw geisiadau ychwanegol cyn hanner nos ar yr un diwrnod y bu ichi gyflwyno eich cais cyntaf. Rhaid gwneud hyn i beidio â gorfod talu ffioedd gwneud cais ychwanegol.'
     : '',
-  continueApplication: 'Parhau â’ch cais',
+  continueApplication: 'Parhau gyda’ch cais',
   signOut: 'Allgofnodi',
 });
 
