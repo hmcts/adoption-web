@@ -11,20 +11,18 @@ jest.mock('../../../app/form/validation');
 const EN = 'en';
 
 const enContent = {
-  section: 'Review your application, pay and send',
+  section: 'Review your application',
   title: 'Statement of truth',
   statement:
     'I understand that proceedings for contempt of court may be brought against anyone who makes, or causes to be made, a false statement in a document verified by a statement of truth without an honest belief in the truth.',
   reviewBeforeSubmit:
     "Once you submit your application, you cannot make any further changes. You can select 'Save as draft' to review your application before you submit.",
   applicant1IBelieveApplicationIsTrue:
-    'The first applicant believes that the facts stated in this form and any additional documents are true.',
-  applicant1IBelieveApplicationIsTrue2:
-    'The first applicant believes that the facts stated in this form and any additional documents are true.',
+    'I, the first applicant, believe that the facts stated in this form and any additional documents are true.',
   applicant2IBelieveApplicationIsTrue: 'I am authorised by the second applicant to sign this statement.',
   applicant1SotFullName: 'Enter your full name',
   applicant2SotFullName: "Enter the second applicant's full name (if applicable)",
-  confirm: 'Confirm',
+  confirm: 'Confirm and pay',
   errors: {
     applicant1IBelieveApplicationIsTrue: {
       required: 'Confirm your statement of truth',
@@ -42,20 +40,18 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Adolygu eich cais, talu a’i anfon',
+  section: 'Adolygu eich cais',
   title: 'Datganiad Gwirionedd',
   statement:
     'Deallaf y gellir dwyn achos dirmyg llys yn erbyn unrhyw un sy’n gwneud datganiad anwir, neu sy’n achosi i ddatganiad anwir gael ei wneud mewn dogfen a ddilysir gan ddatganiad gwirionedd heb gredu’n onest ei fod yn wir.',
   reviewBeforeSubmit:
     'Unwaith y byddwch yn cyflwyno’ch cais, ni allwch wneud unrhyw newidiadau pellach. Gallwch ddewis ‘Cadw fel drafft’ i adolygu eich cais cyn ichi ei gyflwyno.',
   applicant1IBelieveApplicationIsTrue:
-    'Rwy’n credu bod y ffeithiau a nodir yn y ffurflen hon, ac ar unrhyw ddogfennau ychwanegol, yn wir.',
-  applicant1IBelieveApplicationIsTrue2:
-    'Mae’r prif geisydd yn credu bod y ffeithiau a nodir yn y ffurflen hon ac unrhyw ddogfennau ychwanegol yn wir.',
+    'Rwyf i, y ceisydd cyntaf, yn credu bod y ffeithiau a nodir yn y ffurflen hon ac unrhyw ddogfennau ychwanegol yn wir.',
   applicant2IBelieveApplicationIsTrue: 'Fe’m hawdurdodir gan yr ail geisydd i lofnodi’r datganiad hwn.',
   applicant1SotFullName: 'Nac ydwdwch eich enw llawn',
   applicant2SotFullName: 'Nac ydwdwch enw llawn yr ail geisydd (os yw’n berthnasol)',
-  confirm: 'Cadarnhau',
+  confirm: 'Cadarnhau a thalu',
   errors: {
     applicant1IBelieveApplicationIsTrue: {
       required: 'Cadarnhewch eich datganiad gwirionedd',
@@ -72,7 +68,7 @@ const cyContent = {
   },
 };
 
-const commonContent = { language: EN } as CommonContent;
+const commonContent = { language: EN, userCase: { canPaymentIgnored: false } } as CommonContent;
 
 describe('review-pay-submit > statement-of-truth > content', () => {
   it('should return the correct content for language = en', () => {
@@ -95,7 +91,7 @@ describe('review-pay-submit > statement-of-truth > content', () => {
     expect(labelHidden).toBe(true);
     expect((section as Function)(generatedContent)).toBe(enContent.section);
     expect(values).toHaveLength(1);
-    expect((values[0].label as Function)(generatedContent)).toBe(enContent.applicant1IBelieveApplicationIsTrue2);
+    expect((values[0].label as Function)(generatedContent)).toBe(enContent.applicant1IBelieveApplicationIsTrue);
     expect(values[0].value).toBe('checked');
 
     (applicant1IBelieveApplicationIsTrue.validator as Function)('MockName');
