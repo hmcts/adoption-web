@@ -17,7 +17,7 @@ const cyContent = {
   title: 'Mae eich cais wedi cael ei gadw',
   multipleChildrenMessage:
     'Mae’n rhaid ichi gyflwyno unrhyw geisiadau ychwanegol cyn hanner nos ar yr un diwrnod y bu ichi gyflwyno eich cais cyntaf. Rhaid gwneud hyn i beidio â gorfod talu ffioedd gwneud cais ychwanegol.',
-  continueApplication: 'Parhau â’ch cais',
+  continueApplication: 'Parhau gyda’ch cais',
   signOut: 'Allgofnodi',
 };
 
