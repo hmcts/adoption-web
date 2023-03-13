@@ -40,7 +40,7 @@ const cy: typeof en = (nationalityContent: PageContent) => ({
 
 export const form: FormContent = {
   ...nationalityForm,
-  fields: userCase => nationalityFields(userCase, FieldPrefix.BIRTH_MOTHER),
+  fields: userCase => nationalityFields(userCase, FieldPrefix.BIRTH_MOTHER, currentLanguage),
 };
 
 const languages = {
@@ -56,3 +56,5 @@ export const generateContent: TranslationFn = content => {
     ...translations,
   };
 };
+
+const currentLanguage: string = generateContent[1];
