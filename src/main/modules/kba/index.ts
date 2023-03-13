@@ -22,18 +22,20 @@ export class KbaMiddleware {
     app.get(
       LA_PORTAL_KBA_CALLBACK,
       errorHandler(async (req: AppRequest, res) => {
+        const param = req.query.lang !== undefined ? '?lang=' + req.query.lang : '';
         if (req.session.laPortalKba?.kbaCaseRef) {
           req.session.user = await getSystemUser();
           req.session.user.isSystemUser = true;
-          req.session.save(() => res.redirect(LA_PORTAL_START_PAGE + '?lang=' + req.query.lang));
+          req.session.save(() => res.redirect(LA_PORTAL_START_PAGE + param));
         } else {
-          res.redirect(LA_PORTAL_KBA_CASE_REF + '?lang=' + req.query.lang);
+          res.redirect(LA_PORTAL_KBA_CASE_REF + param);
         }
       })
     );
 
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
+        const param = req.query.lang !== undefined ? '?lang=' + req.query.lang : '';
         if (!req.path.startsWith(LA_PORTAL)) {
           return next();
         }
@@ -57,18 +59,13 @@ export class KbaMiddleware {
                 req.session.laPortalKba['kbaChildName']?.trim() !==
                   req.session.userCase.childrenFirstName + ' ' + req.session.userCase.childrenLastName
               ) {
-                req.session.destroy(() => res.redirect(LA_PORTAL_NEG_SCENARIO + '?lang=' + req.query.lang));
-                return;
+                return req.session.destroy(() => res.redirect(LA_PORTAL_NEG_SCENARIO + param));
               }
             } catch (err) {
-              req.session.destroy(() => {
-                console.log('API error');
-                return;
-              });
+              return req.session.destroy(() => res.redirect(LA_PORTAL_NEG_SCENARIO + param));
             }
           }
         }
-
         return next();
       })
     );

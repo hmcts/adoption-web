@@ -10,6 +10,7 @@ import {
   CALLBACK_URL,
   CONTACT_US,
   COOKIES_PAGE,
+  CSRF_TOKEN_ERROR_URL,
   ELIGIBILITY_URL,
   HOME_URL,
   LA_PORTAL,
@@ -66,6 +67,14 @@ export class OidcMiddleware {
 
         if (req.path.startsWith(ELIGIBILITY_URL)) {
           return next();
+        }
+
+        if (req.path.startsWith(CSRF_TOKEN_ERROR_URL)) {
+          if (!req.query.isLaPortal) {
+            return res.redirect(SIGN_IN_URL);
+          } else {
+            return res.redirect(LA_PORTAL_KBA_CASE_REF);
+          }
         }
 
         if (req.path.startsWith(TIMED_OUT_REDIRECT)) {
