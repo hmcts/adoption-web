@@ -21,7 +21,7 @@ const cy: typeof en = ({ userCase }: CommonContent) => {
 
 export const form: FormContent = {
   ...otherNamesForm,
-  fields: userCase => otherNamesFields(userCase, FieldPrefix.APPLICANT1),
+  fields: userCase => otherNamesFields(userCase, FieldPrefix.APPLICANT1, currentLanguage),
 };
 
 const languages = {
@@ -37,3 +37,5 @@ export const generateContent: TranslationFn = content => {
     ...translations,
   };
 };
+
+const currentLanguage: string = generateContent[1];

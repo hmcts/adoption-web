@@ -129,7 +129,7 @@ const cyContent = {
     adoptionagencyOrLA: 'Manylion yr awdurdod lleol',
     additionalAoptionagencyOrLA: 'Yr asiantaeth fabwysiadu neu fanylion yr awdurdod lleol',
     childSocialWorkerDetails: 'Manylion gweithiwr cymdeithasol y plentyn',
-    applicantSocialWorkerDetails: 'Your social worker details',
+    applicantSocialWorkerDetails: 'Manylion eich gweithiwr cymdeithasol',
     applicantDetails: 'Manylion y ceisydd',
     firstApplicantDetails: 'Manylion y ceisydd cyntaf',
     secondApplicantDetails: 'Manylion yr ail geisydd',
