@@ -21,7 +21,14 @@ import {
   SAVE_AS_DRAFT,
 } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
-import { CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE, LA_SUBMIT, SYSTEM_USER_UPDATE, State } from '../case/definition';
+import {
+  CITIZEN_SAVE_AND_CLOSE,
+  CITIZEN_SUBMIT,
+  CITIZEN_UPDATE,
+  LA_SUBMIT,
+  SYSTEM_USER_UPDATE,
+  State,
+} from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
 import { ValidationError } from '../form/validation';
 
@@ -187,7 +194,19 @@ export class PostController<T extends AnyObject> {
         req.session.userCase = await req.locals.api.triggerEvent(caseRefId, modifiedValuesSet, eventName);
         removeCaseFromRedis(req, caseRefId);
       } else {
+        const flag = req.session.userCase.canPaymentIgnored;
+        const feeSummary = req.session.userCase.applicationFeeOrderSummary;
+        const payments = req.session.userCase.payments;
         req.session.userCase = await req.locals.api.triggerEvent(caseRefId, formData, eventName);
+        if (flag) {
+          req.session.userCase = await req.locals.api.triggerEvent(
+            caseRefId,
+            { applicationFeeOrderSummary: feeSummary },
+            CITIZEN_SUBMIT
+          );
+          req.session.userCase = await req.locals.api.addPayment(caseRefId, payments!);
+          req.session.userCase.canPaymentIgnored = flag;
+        }
       }
     } catch (err) {
       req.locals.logger.error('Error saving', err);
