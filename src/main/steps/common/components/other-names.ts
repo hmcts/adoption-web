@@ -1,5 +1,5 @@
 import { Case, FieldPrefix } from '../../../app/case/case';
-import { LanguagePreference, YesOrNo } from '../../../app/case/definition';
+import { YesOrNo } from '../../../app/case/definition';
 import { PageContent } from '../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../app/form/Form';
 import { doesArrayHaveValues, isFieldFilledIn } from '../../../app/form/validation';
@@ -44,7 +44,7 @@ const cy: typeof en = (fieldPrefix: FieldPrefix) => ({
   no: 'Nac ydw',
   [`${fieldPrefix}OtherFirstNames`]: 'Ychwanegwch eich enw(au) cyntaf blaenorol',
   [`${fieldPrefix}OtherLastNames`]: 'Ychwanegwch eich cyfenw(au) blaenorol',
-  cancel: 'Cancel',
+  cancel: 'Canslo',
   add: 'Ychwanegu',
   another: 'Ychwanegu enw arall',
   remove: 'Dileu',
@@ -70,7 +70,7 @@ const urls = {
   [FieldPrefix.APPLICANT2]: APPLICANT_2_OTHER_NAMES,
 };
 
-export const otherNamesFields = (userCase: Partial<Case>, fieldPrefix: FieldPrefix): FormFields => ({
+export const otherNamesFields = (userCase: Partial<Case>, fieldPrefix: FieldPrefix, language: string): FormFields => ({
   [`${fieldPrefix}HasOtherNames`]: {
     type: 'radios',
     classes: 'govuk-radios',
@@ -89,7 +89,7 @@ export const otherNamesFields = (userCase: Partial<Case>, fieldPrefix: FieldPref
                   type: 'summarylist',
                   rows: mapSummaryListContent(
                     userCase[`${fieldPrefix}AdditionalNames`],
-                    [userCase.applicant1LanguagePreference === LanguagePreference.WELSH ? 'Dileu' : 'Remove'],
+                    [language === 'cy' ? 'Dileu' : 'Remove'],
                     urls[fieldPrefix]
                   ),
                 },
@@ -191,5 +191,5 @@ const languages = {
 
 export const generateContent = (content: CommonContent, fieldPrefix: FieldPrefix): PageContent => ({
   ...languages[content.language](fieldPrefix),
-  form: { ...form, fields: otherNamesFields(content.userCase!, fieldPrefix) },
+  form: { ...form, fields: otherNamesFields(content.userCase!, fieldPrefix, content.language) },
 });

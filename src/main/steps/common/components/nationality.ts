@@ -65,7 +65,7 @@ const urls = {
   [FieldPrefix.BIRTH_MOTHER]: LA_PORTAL_BIRTH_MOTHER_NATIONALITY,
 };
 
-export const nationalityFields = (userCase: Partial<Case>, fieldPrefix: FieldPrefix): FormFields => ({
+export const nationalityFields = (userCase: Partial<Case>, fieldPrefix: FieldPrefix, language: string): FormFields => ({
   [`${fieldPrefix}Nationality`]: {
     type: 'checkboxes',
     label: l => l.title,
@@ -100,7 +100,7 @@ export const nationalityFields = (userCase: Partial<Case>, fieldPrefix: FieldPre
                   values: [],
                   rows: mapSummaryListContent(
                     userCase[`${fieldPrefix}AdditionalNationalities`]!,
-                    ['Remove'],
+                    [language === 'cy' ? 'Dileu' : 'Remove'],
                     urls[fieldPrefix]
                   ),
                 },
@@ -172,5 +172,5 @@ const languages = {
 
 export const generateContent = (content: CommonContent, fieldPrefix: FieldPrefix): PageContent => ({
   ...languages[content.language](fieldPrefix),
-  form: { ...form, fields: nationalityFields(content.userCase!, fieldPrefix) },
+  form: { ...form, fields: nationalityFields(content.userCase!, fieldPrefix, content.language) },
 });
