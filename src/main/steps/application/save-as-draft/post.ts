@@ -13,6 +13,7 @@ export default class SaveAsDraftPostController extends PostController<AnyObject>
   }
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
+    req.session.userCase.canPaymentIgnored = false;
     if (req.body.saveAsDraft) {
       req.session.destroy(() => res.redirect('/'));
     } else {

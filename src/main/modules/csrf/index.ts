@@ -3,7 +3,7 @@ import type { Application } from 'express';
 import type { LoggerInstance } from 'winston';
 
 import { HttpStatus } from '../../app/case/definition';
-import { CSRF_TOKEN_ERROR_URL } from '../../steps/urls';
+import { CSRF_TOKEN_ERROR_URL, LA_PORTAL } from '../../steps/urls';
 
 const { Logger } = require('@hmcts/nodejs-logging');
 const logger: LoggerInstance = Logger.getLogger('app');
@@ -24,7 +24,7 @@ export class CSRFToken {
 
       if (error.code === 'EBADCSRFTOKEN') {
         logger.error(`${error.stack || error}`);
-        return res.redirect(CSRF_TOKEN_ERROR_URL);
+        return res.redirect(CSRF_TOKEN_ERROR_URL + req.path.startsWith(LA_PORTAL) ? '?isLaPortal=true' : '');
       }
       next();
     });
