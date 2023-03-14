@@ -2,9 +2,10 @@ import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
+import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
-  section: "Other parent's details",
+  section: SECTION,
   title: 'Do you have the address of the other person with parental responsibility for the child?',
   moreDetails: "Give a reason why the address is not known, for example 'no fixed address'.",
   errors: {
@@ -19,7 +20,7 @@ const en = () => ({
 });
 
 const cy: typeof en = () => ({
-  section: 'Manylion y rhiant arall',
+  section: SECTION_IN_WELSH,
   title: 'A oes gennych gyfeiriad yr unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn?',
   moreDetails: 'Rhowch reswm pam bod y cyfeiriad yn anhysbys, er enghraifft ‘dim cyfeiriad parhaol’.',
   errors: {

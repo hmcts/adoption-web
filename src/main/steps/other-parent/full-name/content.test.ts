@@ -8,7 +8,7 @@ import { generateContent } from './content';
 jest.mock('../../../app/form/validation');
 
 const enContent = {
-  section: "Other parent's details",
+  section: "Other person's details",
   title: 'What is the full name of the other person with parental responsibility?',
   errors: {
     otherParentFirstNames: {
@@ -21,7 +21,7 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y rhiant arall',
+  section: 'Manylion person arall',
   title: 'Beth yw enw llawn yr unigolyn arall sydd â chyfrifoldeb rhiant?',
   errors: {
     otherParentFirstNames: {

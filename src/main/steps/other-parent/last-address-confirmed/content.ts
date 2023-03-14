@@ -3,9 +3,10 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { covertToDateObject } from '../../../app/form/parser';
 import { areDateFieldsFilledIn, isDateInputInvalid, isFutureDate } from '../../../app/form/validation';
+import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
-  section: "Other parent's details",
+  section: SECTION,
   title: 'When was the last date this address was confirmed?',
   errors: {
     otherParentLastAddressDate: {
@@ -23,7 +24,7 @@ const en = () => ({
 });
 
 const cy = () => ({
-  section: 'Manylion y rhiant arall',
+  section: SECTION_IN_WELSH,
   title: "Pryd gafodd y dyddiad diwethaf i'r cyfeiriad yma gael ei gadarnhau?",
   errors: {
     otherParentLastAddressDate: {

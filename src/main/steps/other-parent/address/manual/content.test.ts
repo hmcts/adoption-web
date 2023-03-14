@@ -10,13 +10,13 @@ import { OTHER_PARENT_INTERNATIONAL_ADDRESS } from '../../../urls';
 import { generateContent } from './content';
 
 const enContent = {
-  section: "Other parent's details",
+  section: "Other person's details",
   title: "What is the other parent's last known address?",
   internationalAddressUrl: OTHER_PARENT_INTERNATIONAL_ADDRESS,
 };
 
 const cyContent = {
-  section: 'Manylion y rhiant arall',
+  section: 'Manylion person arall',
   title: 'Beth yw cyfeiriad olaf hysbys y rhiant arall?',
   internationalAddressUrl: OTHER_PARENT_INTERNATIONAL_ADDRESS,
 };

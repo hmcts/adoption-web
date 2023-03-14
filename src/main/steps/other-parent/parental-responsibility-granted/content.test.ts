@@ -9,7 +9,7 @@ import { generateContent } from './content';
 jest.mock('../../../app/form/validation');
 
 const enContent = {
-  section: SECTION,
+  section: "Other person's details",
   title: 'How parental responsibility was granted to the other person?',
   hint: 'Select all options that are relevant.',
   courtOrder: 'Court order',
@@ -29,7 +29,7 @@ const enContent = {
 };
 
 const cyContent = {
-  section: SECTION_IN_WELSH,
+  section: 'Manylion person arall',
   title: 'Sut caniatawyd cyfrifoldeb rhiant i’r unigolyn arall?',
   hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
   courtOrder: 'Gorchymyn llys',
