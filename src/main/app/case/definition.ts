@@ -422,6 +422,8 @@ export interface CaseData {
   otherParentLastName: string;
   otherParentStillAlive: string;
   otherParentNotAliveReason: string;
+  otherParentResponsibilityReason: ResponsibilityReasons[];
+  otherParentOtherResponsibilityReason: string;
   otherParentOccupation: string;
   otherParentAddressKnown: YesOrNo;
   otherParentAddress1: string;
