@@ -45,14 +45,18 @@ describe('applicant2 > other-names > content', () => {
   });
 
   test('should contain applicant2HasOtherNames field', () => {
-    const otherNamesFormFields = otherNamesFields({}, FieldPrefix.APPLICANT2) as FormFields;
+    const otherNamesFormFields = otherNamesFields({}, FieldPrefix.APPLICANT2, 'en') as FormFields;
     const fields = generatedContent.form.fields as FormFields;
     expect(fields.applicant2HasOtherNames).toEqual(otherNamesFormFields.applicant2HasOtherNames);
   });
 
   test('should call otherNamesFields when form.fields is called', () => {
     (form.fields as FormFieldsFn)(commonContent.userCase!);
-    expect(otherNamesFields).toHaveBeenCalledWith(commonContent.userCase, FieldPrefix.APPLICANT2);
+    expect(otherNamesFields).toHaveBeenCalledWith(
+      commonContent.userCase,
+      FieldPrefix.APPLICANT2,
+      commonContent.language
+    );
   });
 
   it('should contain submit button', () => {
