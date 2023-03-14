@@ -209,6 +209,11 @@ const otherParentSequence = [
   {
     url: Urls.LA_PORTAL_OTHER_PARENT_FULL_NAME,
     contentDir: path.join(__dirname, '..', 'other-parent', 'full-name'),
+    getNextStep: () => Urls.LA_PORTAL_OTHER_PARENT_RESPONSIBILITY_GRANTED,
+  },
+  {
+    url: Urls.LA_PORTAL_OTHER_PARENT_RESPONSIBILITY_GRANTED,
+    contentDir: path.join(__dirname, '..', 'other-parent', 'parental-responsibility-granted'),
     getNextStep: () => Urls.LA_PORTAL_OTHER_PARENT_ADDRESS_KNOWN,
   },
   {

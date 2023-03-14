@@ -6,14 +6,23 @@ import {
   OTHER_PARENT_MANUAL_ADDRESS,
   OTHER_PARENT_NAME,
   OTHER_PARENT_POSTCODE_LOOKUP,
+  OTHER_PARENT_RESPONSIBILITY_GRANTED,
   OTHER_PARENT_VERIFY_ADDRESS,
   TASK_LIST_URL,
 } from '../urls';
 
 import { otherParentSequence } from './otherParentSequence';
 
-const [isOnCertificate, fullName, isAddressKnown, address, addressLookUp, manualAddress, internationalAddress] =
-  otherParentSequence;
+const [
+  isOnCertificate,
+  fullName,
+  responsibilityGranted,
+  isAddressKnown,
+  address,
+  addressLookUp,
+  manualAddress,
+  internationalAddress,
+] = otherParentSequence;
 
 const otherParent = 'aboutOtherParent';
 
@@ -32,6 +41,14 @@ describe('other parent sequence', () => {
       const { url, showInSection, getNextStep } = fullName;
 
       expect(url).toBe(OTHER_PARENT_NAME);
+      expect(showInSection).toBe(otherParent);
+      expect(getNextStep({})).toBe(OTHER_PARENT_RESPONSIBILITY_GRANTED);
+    });
+
+    it('should be correct for responsibilityGranted', () => {
+      const { url, showInSection, getNextStep } = responsibilityGranted;
+
+      expect(url).toBe(OTHER_PARENT_RESPONSIBILITY_GRANTED);
       expect(showInSection).toBe(otherParent);
       expect(getNextStep({})).toBe(OTHER_PARENT_ADDRESS_KNOWN);
     });

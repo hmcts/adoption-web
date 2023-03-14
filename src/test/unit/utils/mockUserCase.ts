@@ -127,6 +127,8 @@ export default {
   otherParentFirstNames: 'MOCK_OTHER_PARENT_FIRST_NAME',
   otherParentLastNames: 'MOCK_OTHER_PARENT_FIRST_NAME',
   otherParentExists: YesOrNo.YES,
+  otherParentResponsibilityReason: [ResponsibilityReasons.BIRTH_CERTIFICATE],
+  otherParentOtherResponsibilityReason: ' ',
   otherParentAddress1: 'MOCK_ADDRESS_1',
   otherParentAddressTown: 'MOCK_ADDRESS_TOWN',
   otherParentAddressCounty: 'MOCK_ADDRESS_COUNTY',
