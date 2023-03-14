@@ -2,7 +2,6 @@ import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { ResponsibilityReasons, YesOrNo } from '../../../app/case/definition';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../common/common.content';
-import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 import { generateContent } from './content';
 
