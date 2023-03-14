@@ -37,6 +37,7 @@ export class GetController {
     const userCase = req.session?.userCase;
     const addresses = req.session?.addresses;
     const courtList = req.session?.courtList;
+    const localAuthorityList = req.session?.localAuthorityList;
     const eligibility = req.session?.eligibility;
     const eligibilityPage = !!req.session?.isEligibility;
     const content = generatePageContent({
@@ -49,6 +50,7 @@ export class GetController {
       eligibilityPage,
       fee: req.session?.fee,
       courtList,
+      localAuthorityList,
     });
 
     const sessionErrors = req.session?.errors || [];
