@@ -9,7 +9,7 @@ import { laPortalSequence } from './laPortalSequence';
 describe('la-portal > laPortalSequence', () => {
   test('should contain 65 entries in sibling screen sequence', () => {
     Date.now = jest.fn(() => +new Date('2021-01-01'));
-    expect(laPortalSequence).toHaveLength(65);
+    expect(laPortalSequence).toHaveLength(66);
     let incr = 0;
     expect(laPortalSequence[incr].url).toBe('/la-portal/kba-case-ref');
     expect(laPortalSequence[incr].getNextStep({})).toBe('/la-portal/kba-completed');
@@ -183,6 +183,10 @@ describe('la-portal > laPortalSequence', () => {
 
     expect(laPortalSequence[++incr].url).toBe('/la-portal/other-parent/full-name');
     expect(laPortalSequence[incr].contentDir).toBe('MOCK_BASE_DIR/../other-parent/full-name');
+    expect(laPortalSequence[incr].getNextStep({})).toBe('/la-portal/other-parent/parental-responsibility-granted');
+
+    expect(laPortalSequence[++incr].url).toBe('/la-portal/other-parent/parental-responsibility-granted');
+    expect(laPortalSequence[incr].contentDir).toBe('MOCK_BASE_DIR/../other-parent/parental-responsibility-granted');
     expect(laPortalSequence[incr].getNextStep({})).toBe('/la-portal/other-parent/address-known');
 
     expect(laPortalSequence[++incr].url).toBe('/la-portal/other-parent/address-known');

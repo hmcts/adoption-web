@@ -630,6 +630,21 @@ describe('otherParentSummaryList', () => {
             },
           },
           {
+            key: { text: 'Parental responsibility granted' },
+            value: {
+              html: '<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold"> </span> Birth certificate',
+            },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/other-parent/parental-responsibility-granted?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Parental responsibility granted',
+                },
+              ],
+            },
+          },
+          {
             key: { text: 'Address known' },
             value: { html: 'Yes' },
             actions: {
@@ -738,6 +753,21 @@ describe('otherParentSummaryList', () => {
                   href: '/la-portal/other-parent/full-name?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
                   visuallyHiddenText: 'Full name',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Parental responsibility granted' },
+            value: {
+              html: '<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold"> </span> Birth certificate',
+            },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/other-parent/parental-responsibility-granted?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Parental responsibility granted',
                 },
               ],
             },
