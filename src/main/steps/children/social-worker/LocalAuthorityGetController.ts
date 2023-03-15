@@ -13,6 +13,10 @@ export default class LocalAuthorityGetController extends GetController {
   }
 
   public async get(req: AppRequest, res: Response): Promise<void> {
+    //    Any new addition to the Local Authority / CFT Reference Data needs to be configured in 2 places
+    //    1. @default.yaml config - For new inclusion to test on lower environments
+    //    2. @values.yaml config - For new inclusion to test on other environments
+    //    3. The mapping to be updated @custom-environment-variables.yaml config
     const localAuthorityList: LocalAuthorityList[] = [];
     for (const [key, value] of Object.entries(config.get('fpl.localAuthority'))) {
       const localAuthority: LocalAuthorityList = {
