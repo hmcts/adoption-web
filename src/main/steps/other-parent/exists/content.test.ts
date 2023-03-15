@@ -9,7 +9,7 @@ import { generateContent } from './content';
 jest.mock('../../../app/form/validation');
 
 const enContent = {
-  section: "Other parent's details",
+  section: "Other person's details",
   title: 'Is there another person who has parental responsibility for the child?',
   one: 'Yes',
   two: 'No',
@@ -21,7 +21,7 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y rhiant arall',
+  section: 'Manylion person arall',
   title: 'A oes unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn?',
   one: 'Ydw',
   two: 'Nac ydw',

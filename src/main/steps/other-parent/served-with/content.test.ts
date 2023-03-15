@@ -9,7 +9,7 @@ jest.mock('../../../app/form/validation');
 
 const EN = 'en';
 const enContent = {
-  section: "Other parent's details",
+  section: "Other person's details",
   title: 'Should the person with parental responsibility be sent documents or court orders relating to this adoption?',
   hint: 'Provide more details why person with parental responsibility not to be sent documents or court orders relating to this adoption. ',
   errors: {
@@ -23,7 +23,7 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Unigolyn arall sydd â chyfrifoldeb rhiant',
+  section: 'Manylion person arall',
   title:
     'A ddylid anfon dogfennau neu orchmynion llys yn ymwneud â’r cais i fabwysiadu hwn at yr unigolyn arall sydd â chyfrifoldeb rhiant?',
   hint: 'Rhowch ragor o fanylion pam na ddylid anfon dogfennau neu orchmynion llys sy’n ymwneud â’r cais i fabwysiadu hwn at yr unigolyn arall sydd â chyfrifoldeb rhiant. ',

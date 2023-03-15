@@ -601,7 +601,7 @@ describe('otherParentSummaryList', () => {
     {
       userCase: mockUserCase,
       expected: {
-        title: "Other parent's details",
+        title: "Other person's details",
         rows: [
           {
             key: { text: 'Is there another person with parental responsibility?' },
@@ -704,7 +704,7 @@ describe('otherParentSummaryList', () => {
     {
       userCase: { ...mockUserCase, otherParentExists: YesOrNo.NO },
       expected: {
-        title: "Other parent's details",
+        title: "Other person's details",
         rows: [
           {
             key: { text: 'Is there another person with parental responsibility?' },
@@ -729,7 +729,7 @@ describe('otherParentSummaryList', () => {
         otherParentAddressNotKnownReason: 'MOCK_REASON',
       },
       expected: {
-        title: "Other parent's details",
+        title: "Other person's details",
         rows: [
           {
             key: { text: 'Is there another person with parental responsibility?' },

@@ -57,7 +57,7 @@ module.exports = {
     await I.wait(2);
     await I.retry(3).click(this.fields.enterInternationalAddress);
     await I.wait(2);
-    await I.retry(3).waitForText("What is the other parent's last known address?");
+    await I.retry(3).waitForText("What is the other person's last known address?");
     await I.retry(3).fillField(this.fields.otherParentAddress1, childOtherParentDetails.otherParentAddress1);
     await I.retry(3).fillField(this.fields.otherParentAddressTown, childOtherParentDetails.otherParentAddressTown);
     await I.retry(3).fillField(

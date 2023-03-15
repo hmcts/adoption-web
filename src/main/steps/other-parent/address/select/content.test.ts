@@ -10,14 +10,14 @@ import { OTHER_PARENT_MANUAL_ADDRESS, OTHER_PARENT_POSTCODE_LOOKUP } from '../..
 import { generateContent } from './content';
 
 const enContent = {
-  section: "Other parent's details",
+  section: "Other person's details",
   title: "What's their address?",
   changePostCodeUrl: OTHER_PARENT_POSTCODE_LOOKUP,
   cantFindAddressUrl: OTHER_PARENT_MANUAL_ADDRESS,
 };
 
 const cyContent = {
-  section: 'Manylion y rhiant arall',
+  section: 'Manylion person arall',
   title: 'Beth yw eu cyfeiriad?',
   changePostCodeUrl: OTHER_PARENT_POSTCODE_LOOKUP,
   cantFindAddressUrl: OTHER_PARENT_MANUAL_ADDRESS,

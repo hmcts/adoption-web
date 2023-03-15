@@ -19,7 +19,7 @@ const commonContent = {
 } as CommonContent;
 
 const enContent = {
-  section: "Other parent's details",
+  section: "Other person's details",
   title: 'When was the last date this address was confirmed?',
   errors: {
     otherParentLastAddressDate: {
@@ -37,7 +37,7 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y rhiant arall',
+  section: 'Manylion person arall',
   title: "Pryd gafodd y dyddiad diwethaf i'r cyfeiriad yma gael ei gadarnhau?",
   errors: {
     otherParentLastAddressDate: {
@@ -117,14 +117,14 @@ describe('otherParentLastAddressDate > content', () => {
     const commonContent1 = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);
-    expect(generatedContent1.section).toBe("Other parent's details");
+    expect(generatedContent1.section).toBe("Other person's details");
   });
 
   it('should have an date label when language: cy and  applyingWith: alone', () => {
     const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);
-    expect(generatedContent1.section).toBe('Manylion y rhiant arall');
+    expect(generatedContent1.section).toBe('Manylion person arall');
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

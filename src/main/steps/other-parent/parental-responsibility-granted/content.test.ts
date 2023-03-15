@@ -2,14 +2,13 @@ import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { ResponsibilityReasons, YesOrNo } from '../../../app/case/definition';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../common/common.content';
-import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 import { generateContent } from './content';
 
 jest.mock('../../../app/form/validation');
 
 const enContent = {
-  section: SECTION,
+  section: "Other person's details",
   title: 'How parental responsibility was granted to the other person?',
   hint: 'Select all options that are relevant.',
   courtOrder: 'Court order',
@@ -29,7 +28,7 @@ const enContent = {
 };
 
 const cyContent = {
-  section: SECTION_IN_WELSH,
+  section: 'Manylion person arall',
   title: 'Sut caniatawyd cyfrifoldeb rhiant i’r unigolyn arall?',
   hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
   courtOrder: 'Gorchymyn llys',
