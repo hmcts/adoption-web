@@ -2,7 +2,12 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isEmailValid, isFieldFilledIn, isGovUkEmail, isPhoneNoValid } from '../../../app/form/validation';
 
-const en = () => ({
+const getLocalAuthorityListItems = (localAuthorityList, selectedLocalAuthority) =>
+  localAuthorityList
+    .filter(item => item.value !== selectedLocalAuthority)
+    .map(item => ({ text: item.name, value: item.name }));
+
+const en = content => ({
   section: 'Application details',
   title: 'Your social worker details',
   line1: 'This is the social worker attached to your local authority.',
@@ -11,12 +16,16 @@ const en = () => ({
   applicantSocialWorkerPhoneNumber: 'Phone number',
   applicantSocialWorkerEmail: 'Email address (if known)',
   applicantSocialWorkerEmailHint: 'The email address should be an official government email that ends in gov.uk.',
-  applicantLocalAuthority: 'Name of local authority',
+  applicantLocalAuthorityLabel: 'Name of local authority',
   applicantLocalAuthorityEmail: 'Your local authority email address',
   applicantLocalAuthorityEmailHint:
     'This will be used to send a notification to the local authority to progress your application so it is important that it is accurate. It should end in gov.uk.',
   applicantLocalAuthorityHint:
     'This is the local authority that your social worker works for. They will be named on the placement order if you are not sure.',
+  options: [
+    ...getLocalAuthorityListItems(content.localAuthorityList, content.userCase.applicantLocalAuthority),
+    { text: content.userCase.applicantLocalAuthority, value: content.userCase.applicantLocalAuthority, selected: true },
+  ],
   errors: {
     applicantSocialWorkerName: {
       required: 'Enter a name',
@@ -40,7 +49,7 @@ const en = () => ({
   },
 });
 
-const cy: typeof en = () => ({
+const cy: typeof en = content => ({
   section: 'Manylion y cais',
   title: 'Manylion eich gweithiwr cymdeithasol',
   line1: "Dyma'r gweithiwr cymdeithasol sydd yn gweithio i’ch awdurdod lleol.",
@@ -50,12 +59,16 @@ const cy: typeof en = () => ({
   applicantSocialWorkerEmail: "Cyfeiriad e-bost (os yw'n hysbys)",
   applicantSocialWorkerEmailHint:
     "Dylai'r cyfeiriad e-bost fod yn e-bost swyddogol gan y llywodraeth sy'n terfynu â gov.uk.",
-  applicantLocalAuthority: "Enw'r awdurdod lleol",
+  applicantLocalAuthorityLabel: "Enw'r awdurdod lleol",
   applicantLocalAuthorityEmail: 'Cyfeiriad e-bost eich awdurdod lleol',
   applicantLocalAuthorityEmailHint:
     'Defnyddir hwn i anfon hysbysiad i’r awdurdod lleol i symud eich cais yn eiflaen, felly mae’n bwysig ei fod yn gywir. Dylai ddiweddu gyda gov.uk.',
   applicantLocalAuthorityHint:
     "Dyma'r awdurdod lleol y mae eich gweithiwr cymdeithasol yn gweithio iddo. Bydd wedi’i enwi ar y gorchymyn lleoli os nad ydych yn siŵr.",
+  options: [
+    ...getLocalAuthorityListItems(content.localAuthorityList, content.userCase.applicantLocalAuthority),
+    { text: content.userCase.applicantLocalAuthority, value: content.userCase.applicantLocalAuthority, selected: true },
+  ],
   errors: {
     applicantSocialWorkerName: {
       required: 'Rhowch enw',
@@ -111,13 +124,18 @@ export const form: FormContent = {
         }
       },
     },
-    applicantLocalAuthority: {
-      type: 'text',
-      classes: 'govuk-label govuk-!-width-two-thirds',
-      label: l => l.applicantLocalAuthority,
+    applicantLocalAuthorityHint: {
+      type: 'hint',
+      label: l => l.applicantLocalAuthorityLabel,
       hint: l => l.applicantLocalAuthorityHint,
-      labelSize: null,
-      validator: isFieldFilledIn,
+    },
+    applicantLocalAuthority: {
+      type: 'select-dropdown',
+      id: 'location-picker',
+      options: l => l.options,
+      label: l => l.label,
+      classes: 'l',
+      labelSize: 'l',
     },
     applicantLocalAuthorityEmail: {
       type: 'text',
@@ -142,7 +160,7 @@ const languages = {
 };
 
 export const generateContent: TranslationFn = content => {
-  const translations = languages[content.language]();
+  const translations = languages[content.language](content);
   return {
     ...translations,
     form,

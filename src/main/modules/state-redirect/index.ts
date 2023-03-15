@@ -44,14 +44,14 @@ export class StateRedirectMiddleware {
 
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
-        if (req.session.userCase?.applyingWith === ApplyingWith.ALONE && req.path.startsWith(APPLICANT_2)) {
+        if (req.session?.userCase?.applyingWith === ApplyingWith.ALONE && req.path.startsWith(APPLICANT_2)) {
           return res.redirect(TASK_LIST_URL);
         }
 
         if (
           req.path.startsWith(LA_PORTAL) &&
           req.path !== LA_PORTAL_CONFIRMATION_PAGE &&
-          [State.LaSubmitted].includes(req.session.userCase?.state)
+          [State.LaSubmitted].includes(req.session?.userCase?.state)
         ) {
           return res.redirect(LA_PORTAL_CONFIRMATION_PAGE);
         }
@@ -68,7 +68,7 @@ export class StateRedirectMiddleware {
           return next();
         }
         if (
-          req.session.userCase?.state !== State.AwaitingPayment ||
+          req.session?.userCase?.state !== State.AwaitingPayment ||
           [PAY_YOUR_FEE, PAY_AND_SUBMIT, PAYMENT_CALLBACK_URL].includes(req.path as PageLink)
         ) {
           return next();
