@@ -9,7 +9,7 @@ import { SECTION, SECTION_IN_WELSH } from '../../constants';
 
 const en = manualAddressContent => ({
   section: SECTION,
-  title: "What is the other parent's last known address?",
+  title: "What is the other person's last known address?",
   errors: {
     otherParentAddress1: manualAddressContent.errors.address1,
     otherParentAddressTown: manualAddressContent.errors.addressTown,
@@ -20,7 +20,7 @@ const en = manualAddressContent => ({
 
 const cy: typeof en = manualAddressContent => ({
   section: SECTION_IN_WELSH,
-  title: 'Beth yw cyfeiriad olaf hysbys y rhiant arall?',
+  title: 'Beth yw cyfeiriad olaf hysbys y person arall?',
   errors: {
     otherParentAddress1: manualAddressContent.errors.address1,
     otherParentAddressTown: manualAddressContent.errors.addressTown,
