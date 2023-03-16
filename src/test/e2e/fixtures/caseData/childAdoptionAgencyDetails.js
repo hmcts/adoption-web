@@ -1,5 +1,5 @@
 module.exports = {
-  adopAgencyName: 'Hillingdon Adoption Agency',
+  adopAgencyName: 'Gloucestershire County Council',
   adopAgencyPhoneNumber: '09876543210',
   adopAgencyContactName: 'Jake',
   adopAgencyContactEmail: 'test.another@test.com',

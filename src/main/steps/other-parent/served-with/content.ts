@@ -2,9 +2,10 @@ import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
+import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
-  section: "Other parent's details",
+  section: SECTION,
   title: 'Should the person with parental responsibility be sent documents or court orders relating to this adoption?',
   hint: 'Provide more details why person with parental responsibility not to be sent documents or court orders relating to this adoption. ',
   label: 'Give a reason',
@@ -19,7 +20,7 @@ const en = () => ({
 });
 
 const cy: typeof en = () => ({
-  section: 'Unigolyn arall sydd â chyfrifoldeb rhiant',
+  section: SECTION_IN_WELSH,
   title:
     'A ddylid anfon dogfennau neu orchmynion llys yn ymwneud â’r cais i fabwysiadu hwn at yr unigolyn arall sydd â chyfrifoldeb rhiant?',
   hint: 'Rhowch ragor o fanylion pam na ddylid anfon dogfennau neu orchmynion llys sy’n ymwneud â’r cais i fabwysiadu hwn at yr unigolyn arall sydd â chyfrifoldeb rhiant. ',

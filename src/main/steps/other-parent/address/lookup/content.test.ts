@@ -10,13 +10,13 @@ import { OTHER_PARENT_MANUAL_ADDRESS } from '../../../urls';
 import { generateContent } from './content';
 
 const enContent = {
-  section: "Other parent's details",
+  section: "Other person's details",
   title: "What's their address?",
   manualAddressUrl: OTHER_PARENT_MANUAL_ADDRESS,
 };
 
 const cyContent = {
-  section: 'Manylion y rhiant arall',
+  section: 'Manylion person arall',
   title: 'Beth yw eu cyfeiriad?',
   manualAddressUrl: OTHER_PARENT_MANUAL_ADDRESS,
 };

@@ -2,12 +2,14 @@ const { I } = inject();
 const adoptionAgencyDetails = require('../fixtures/caseData/childAdoptionAgencyDetails');
 const childSocialWorkerDetails = require('../fixtures/caseData/childSocialWorkerDetails');
 const applicantOrYourSocialWorkerDetails = require('../fixtures/caseData/applicantOrYourSocialWorkerDetails');
+
 module.exports = {
   childSocialWorker: {
     childSocialWorkerName: 'input[id$="childSocialWorkerName"]',
     childSocialWorkerPhoneNumber: 'input[id$="childSocialWorkerPhoneNumber"]',
     childSocialWorkerEmail: 'input[id$="childSocialWorkerEmail"]',
-    childLocalAuthority: 'input[id$="childLocalAuthority"]',
+    childLocalAuthority: '#location-picker',
+    childLocalAuthorityPicker: '#location-picker__option--0',
     childLocalAuthorityEmail: 'input[id$="childLocalAuthorityEmail"]',
   },
 
@@ -15,7 +17,8 @@ module.exports = {
     applicantSocialWorkerName: 'input[id$="applicantSocialWorkerName"]',
     applicantSocialWorkerPhoneNumber: 'input[id$="applicantSocialWorkerPhoneNumber"]',
     applicantSocialWorkerEmail: 'input[id$="applicantSocialWorkerEmail"]',
-    applicantLocalAuthority: 'input[id$="applicantLocalAuthority"]',
+    applicantLocalAuthority: '#location-picker',
+    applicantLocalAuthorityNamePicker: '#location-picker__option--1',
     applicantLocalAuthorityEmail: 'input[id$="applicantLocalAuthorityEmail"]',
   },
 
@@ -47,8 +50,10 @@ module.exports = {
     );
     await I.retry(3).fillField(
       this.childSocialWorker.childLocalAuthority,
-      childSocialWorkerDetails.childLocalAuthority
+      childSocialWorkerDetails.childLocalAuthorityHintText
     );
+    await I.wait(2);
+    await I.retry(3).click(this.childSocialWorker.childLocalAuthorityPicker);
     await I.retry(3).fillField(
       this.childSocialWorker.childLocalAuthorityEmail,
       childSocialWorkerDetails.childLocalAuthorityEmail
@@ -74,8 +79,10 @@ module.exports = {
     );
     await I.retry(3).fillField(
       this.yourSocialWorker.applicantLocalAuthority,
-      applicantOrYourSocialWorkerDetails.applicantLocalAuthority
+      applicantOrYourSocialWorkerDetails.applicantLocalAuthorityHintText
     );
+    await I.wait(2);
+    await I.retry(3).click(this.yourSocialWorker.applicantLocalAuthorityNamePicker);
     await I.retry(3).fillField(
       this.yourSocialWorker.applicantLocalAuthorityEmail,
       applicantOrYourSocialWorkerDetails.applicantLocalAuthorityEmail
@@ -123,8 +130,11 @@ module.exports = {
     );
     await I.retry(3).fillField(
       this.childSocialWorker.childLocalAuthority,
-      childSocialWorkerDetails.childLocalAuthority
+      childSocialWorkerDetails.childLocalAuthorityHintText
     );
+    await I.wait(2);
+    await I.retry(3).click(this.childSocialWorker.childLocalAuthorityPicker);
+
     await I.retry(3).fillField(
       this.childSocialWorker.childLocalAuthorityEmail,
       childSocialWorkerDetails.childLocalAuthorityEmail

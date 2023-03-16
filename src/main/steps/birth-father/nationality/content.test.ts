@@ -67,14 +67,18 @@ describe('birth-father > nationality > content', () => {
   });
 
   test('should contain birthFatherNationality field', () => {
-    const nationalityFormFields = nationalityFields({}, FieldPrefix.BIRTH_FATHER) as FormFields;
+    const nationalityFormFields = nationalityFields({}, FieldPrefix.BIRTH_FATHER, 'en') as FormFields;
     const fields = generatedContent.form.fields as FormFields;
     expect(fields.birthFatherNationality).toEqual(nationalityFormFields.birthFatherNationality);
   });
 
   test('should call nationalityFields when form.fields is called', () => {
     (form.fields as FormFieldsFn)(commonContent.userCase!);
-    expect(nationalityFields).toHaveBeenCalledWith(commonContent.userCase, FieldPrefix.BIRTH_FATHER);
+    expect(nationalityFields).toHaveBeenCalledWith(
+      commonContent.userCase,
+      FieldPrefix.BIRTH_FATHER,
+      commonContent.language
+    );
   });
 
   it('should contain submit button', () => {

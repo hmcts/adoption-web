@@ -9,13 +9,13 @@ import {
 import { generateContent } from './content';
 
 const enContent = {
-  section: "Other parent's details",
-  title: "What is the other parent's last known address?",
+  section: "Other person's details",
+  title: "What is the other person's last known address?",
 };
 
 const cyContent = {
-  section: 'Manylion y rhiant arall',
-  title: 'Beth yw cyfeiriad olaf hysbys y rhiant arall?',
+  section: 'Manylion person arall',
+  title: 'Beth yw cyfeiriad olaf hysbys y person arall?',
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

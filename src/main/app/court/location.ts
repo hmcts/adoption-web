@@ -14,6 +14,12 @@ export interface CourtVenue {
   venue_name: string;
 }
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export interface LocalAuthorityList {
+  code: string;
+  name?: any;
+}
+
 export interface LocationModel {
   court_venue_id: string;
   site_name: string;

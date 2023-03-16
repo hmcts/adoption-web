@@ -31,6 +31,22 @@ module.exports = {
     await I.retry(3).fillField(this.fields.otherParentLastNames, childOtherParentDetails.otherParentLastNames);
     await I.retry(3).click('Save and continue');
     await I.wait(2);
+
+    await I.retry(3).waitForText('How parental responsibility was granted to the other person?');
+
+    await I.retry(3).click('Save and continue');
+    await I.wait(2);
+    await I.retry(3).see('Select how parental responsibility was granted to the other person.');
+    await I.retry(3).click('Birth certificate');
+    await I.retry(3).click('Other');
+    await I.retry(3).see('Enter the reason how parental responsibility was granted to the other person.');
+    await I.retry(3).click('Save and continue');
+    await I.wait(2);
+    await I.retry(3).see('Enter the reason how parental responsibility was granted to the other person.');
+    await I.retry(3).fillField('Other', 'Reason not known');
+    await I.retry(3).click('Save and continue');
+    await I.wait(2);
+
     await I.retry(3).waitForText(
       'Do you have the address of the other person with parental responsibility for the child?'
     );
@@ -41,7 +57,7 @@ module.exports = {
     await I.wait(2);
     await I.retry(3).click(this.fields.enterInternationalAddress);
     await I.wait(2);
-    await I.retry(3).waitForText("What is the other parent's last known address?");
+    await I.retry(3).waitForText("What is the other person's last known address?");
     await I.retry(3).fillField(this.fields.otherParentAddress1, childOtherParentDetails.otherParentAddress1);
     await I.retry(3).fillField(this.fields.otherParentAddressTown, childOtherParentDetails.otherParentAddressTown);
     await I.retry(3).fillField(

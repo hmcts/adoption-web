@@ -15,6 +15,7 @@ jest.mock('../../../steps', () => {
 
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
+import { APPLICANT_SOCIAL_WORKER, CHILDREN_FIND_PLACEMENT_ORDER_COURT, SOCIAL_WORKER } from '../../urls';
 
 import FindPlacementOrderCourtPostController from './FindPlacementOrderCourtPostController';
 
@@ -81,13 +82,42 @@ describe('FindFamilyCourtPostController', () => {
       jest.clearAllMocks();
     });
 
-    test('should save the errors in session', async () => {
+    test('should save the errors in session for placementOrderCourt', async () => {
+      req.path = CHILDREN_FIND_PLACEMENT_ORDER_COURT;
       await controller.post(req, res);
       expect(req.session.errors).toEqual([
         'MOCK_ERROR',
         {
           errorType: 'required',
           propertyName: 'placementOrderCourt',
+          id: 'location-picker',
+        },
+      ]);
+      expect(req.session.save).toHaveBeenCalled();
+    });
+
+    test('should save the errors in session for childLocalAuthority', async () => {
+      req.path = SOCIAL_WORKER;
+      await controller.post(req, res);
+      expect(req.session.errors).toEqual([
+        'MOCK_ERROR',
+        {
+          errorType: 'required',
+          propertyName: 'childLocalAuthority',
+          id: 'location-picker',
+        },
+      ]);
+      expect(req.session.save).toHaveBeenCalled();
+    });
+
+    test('should save the errors in session for applicantLocalAuthority', async () => {
+      req.path = APPLICANT_SOCIAL_WORKER;
+      await controller.post(req, res);
+      expect(req.session.errors).toEqual([
+        'MOCK_ERROR',
+        {
+          errorType: 'required',
+          propertyName: 'applicantLocalAuthority',
           id: 'location-picker',
         },
       ]);

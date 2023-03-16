@@ -8,6 +8,7 @@ import {
   OTHER_PARENT_MANUAL_ADDRESS,
   OTHER_PARENT_NAME,
   OTHER_PARENT_POSTCODE_LOOKUP,
+  OTHER_PARENT_RESPONSIBILITY_GRANTED,
   OTHER_PARENT_VERIFY_ADDRESS,
   TASK_LIST_URL,
 } from '../../steps/urls';
@@ -25,6 +26,11 @@ export const otherParentSequence: Step[] = [
   },
   {
     url: OTHER_PARENT_NAME,
+    showInSection: Sections.AboutOtherParent,
+    getNextStep: () => OTHER_PARENT_RESPONSIBILITY_GRANTED,
+  },
+  {
+    url: OTHER_PARENT_RESPONSIBILITY_GRANTED,
     showInSection: Sections.AboutOtherParent,
     getNextStep: () => OTHER_PARENT_ADDRESS_KNOWN,
   },

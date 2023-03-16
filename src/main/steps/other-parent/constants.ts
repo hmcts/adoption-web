@@ -1,2 +1,2 @@
-export const SECTION = "Other parent's details";
-export const SECTION_IN_WELSH = 'Manylion y rhiant arall';
+export const SECTION = "Other person's details";
+export const SECTION_IN_WELSH = 'Manylion person arall';

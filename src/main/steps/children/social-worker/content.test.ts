@@ -17,7 +17,7 @@ const enContent = {
   childSocialWorkerPhoneNumber: 'Phone number',
   childSocialWorkerEmail: 'Email address (if known)',
   childSocialWorkerEmailHint: 'The email address should be an official government email that ends in gov.uk.',
-  childLocalAuthority: "Child's local authority",
+  childLocalAuthorityLabel: "Child's local authority",
   childLocalAuthorityEmail: 'Local authority email address',
   childLocalAuthorityEmailHint:
     'This will be used to send a notification to the local authority to progress your application so it is important that it is accurate. It should end in gov.uk.',
@@ -55,7 +55,7 @@ const cyContent = {
   childSocialWorkerEmail: "Cyfeiriad e-bost (os yw'n hysbys)",
   childSocialWorkerEmailHint:
     "Dylai'r cyfeiriad e-bost fod yn e-bost swyddogol gan y llywodraeth sy'n terfynu â gov.uk.",
-  childLocalAuthority: 'Awdurdod lleol y plentyn',
+  childLocalAuthorityLabel: 'Awdurdod lleol y plentyn',
   childLocalAuthorityEmail: 'Cyfeiriad e-bost yr awdurdod lleol',
   childLocalAuthorityEmailHint:
     'Defnyddir hwn i anfon hysbysiad i’r awdurdod lleol i symud eich cais yn eiflaen, felly mae’n bwysig ei fod yn gywir. Dylai ddiweddu gyda gov.uk.',
@@ -84,9 +84,13 @@ const cyContent = {
   },
 };
 
-const commonContent = { language: EN } as CommonContent;
-
 describe('children > social-worker > content', () => {
+  const commonContent = generatePageContent({
+    language: 'en',
+    userCase: { childLocalAuthority: 'MOCK', applicantLocalAuthority: 'MOCK' },
+    localAuthorityList: [{ code: 'MOCK', name: 'MOCK' }],
+  }) as CommonContent;
+
   it('should return correct english content', () => {
     languageAssertions('en', enContent, () => generateContent(commonContent));
   });
@@ -139,19 +143,15 @@ describe('children > social-worker > content', () => {
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockEmail');
   });
 
-  it('should have an childLocalAuthority text input field', () => {
+  it('should have an childLocalAuthority select-dropdown input field', () => {
     const generatedContent = generateContent(commonContent) as Record<string, never>;
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const childLocalAuthority = fields.childLocalAuthority;
 
-    expect(childLocalAuthority.type).toBe('text');
-    expect((childLocalAuthority.label as LanguageLookup)(generatedContent)).toBe(enContent.childLocalAuthority);
-    expect((childLocalAuthority.hint as LanguageLookup)(generatedContent)).toBe(enContent.childLocalAuthorityHint);
+    expect(childLocalAuthority.type).toBe('select-dropdown');
 
-    (childLocalAuthority.validator as ValidationCheck)('MockEmail', {});
     expect(isFieldFilledIn).toHaveBeenCalled();
-    (childLocalAuthority.validator as ValidationCheck)(undefined, {});
     expect(isEmailValid).not.toHaveBeenCalledWith();
   });
 

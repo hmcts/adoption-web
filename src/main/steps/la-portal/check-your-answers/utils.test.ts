@@ -601,7 +601,7 @@ describe('otherParentSummaryList', () => {
     {
       userCase: mockUserCase,
       expected: {
-        title: "Other parent's details",
+        title: "Other person's details",
         rows: [
           {
             key: { text: 'Is there another person with parental responsibility?' },
@@ -625,6 +625,21 @@ describe('otherParentSummaryList', () => {
                   href: '/la-portal/other-parent/full-name?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
                   visuallyHiddenText: 'Full name',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Parental responsibility granted' },
+            value: {
+              html: '<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold"> </span> Birth certificate',
+            },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/other-parent/parental-responsibility-granted?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Parental responsibility granted',
                 },
               ],
             },
@@ -689,7 +704,7 @@ describe('otherParentSummaryList', () => {
     {
       userCase: { ...mockUserCase, otherParentExists: YesOrNo.NO },
       expected: {
-        title: "Other parent's details",
+        title: "Other person's details",
         rows: [
           {
             key: { text: 'Is there another person with parental responsibility?' },
@@ -714,7 +729,7 @@ describe('otherParentSummaryList', () => {
         otherParentAddressNotKnownReason: 'MOCK_REASON',
       },
       expected: {
-        title: "Other parent's details",
+        title: "Other person's details",
         rows: [
           {
             key: { text: 'Is there another person with parental responsibility?' },
@@ -738,6 +753,21 @@ describe('otherParentSummaryList', () => {
                   href: '/la-portal/other-parent/full-name?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
                   visuallyHiddenText: 'Full name',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Parental responsibility granted' },
+            value: {
+              html: '<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold"> </span> Birth certificate',
+            },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/other-parent/parental-responsibility-granted?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Parental responsibility granted',
                 },
               ],
             },
