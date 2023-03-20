@@ -26,7 +26,7 @@ const cyContent = {
   contactInformation: 'Cyswllt: Enw’r gwasanaeth, e.e. CTSC',
   telephoneNumber: 'Rhif ffôn: Rhif ffôn',
   emailAddress: 'E-bost: Cyfeiriad e-bost',
-  openingHours: 'Dydd Llun i ddydd Gwener, 9am i 5pm',
+  openingHours: 'Dydd Llun i dydd Gwener 9am i 5pm',
   contactUs: 'Cysylltwch â ni am help',
 };
 

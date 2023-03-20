@@ -18,7 +18,7 @@ const cy: typeof en = {
   sendUsAMessageText: 'Byddwn yn anelu at ymateb o fewn 5 diwrnod gwaith.',
   telephoneHeading: 'Rhif ffôn',
   telephoneNumber: 'Rhif ffôn: 01634 887900',
-  telephoneText: 'Dydd Llun i ddydd Iau 9am - 5pm',
+  telephoneText: 'Dydd Llun i dydd Gwener 9am i 5pm',
 };
 
 const languages = {

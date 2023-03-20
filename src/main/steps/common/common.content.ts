@@ -206,7 +206,7 @@ const cy: typeof en = {
   sendUsAMessageDetails: 'Byddwn yn anelu at ymateb o fewn 5 diwrnod gwaith.',
   telephone: 'Rhif ffôn',
   telephoneNumber: '0300 303 5171',
-  telephoneDetails: 'Dydd Llun i ddydd Iau 9am - 5pm',
+  telephoneDetails: 'Dydd Llun i dydd Gwener 9am i 5pm',
   cookiesHeading: 'Cwcis ymlaen',
   cookiesLine1: "Rydym yn defnyddio rhai cwcis hanfodol i wneud i'r gwasanaeth hwn weithio.",
   cookiesLine2:
