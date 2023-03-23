@@ -2436,14 +2436,14 @@
     "@uppy/utils" "^4.0.7"
     namespace-emitter "^2.0.1"
 
-"@uppy/core@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@uppy/core/-/core-2.3.0.tgz#3b344c75a9331d63b36b9618fd2730805c914b77"
-  integrity sha512-qGTFmaZkf1C6an6XZ6V3rWWTyk21BhcwxkFqOuQ3pNtyC5kJkVkIjZCWpcxpFDO1dLhCRSaoHvyil89+eImHGg==
+"@uppy/core@^2.3.4":
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/@uppy/core/-/core-2.3.4.tgz#260b85b6bf3aa03cdc67da231f8c69cfbfdcc84a"
+  integrity sha512-iWAqppC8FD8mMVqewavCz+TNaet6HPXitmGXpGGREGrakZ4FeuWytVdrelydzTdXx6vVKkOmI2FLztGg73sENQ==
   dependencies:
     "@transloadit/prettier-bytes" "0.0.7"
-    "@uppy/store-default" "^2.1.0"
-    "@uppy/utils" "^4.1.0"
+    "@uppy/store-default" "^2.1.1"
+    "@uppy/utils" "^4.1.3"
     lodash.throttle "^4.1.1"
     mime-match "^1.0.2"
     namespace-emitter "^2.0.1"
@@ -2473,15 +2473,15 @@
     "@uppy/utils" "^4.0.7"
     preact "^10.5.13"
 
-"@uppy/store-default@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@uppy/store-default/-/store-default-2.1.0.tgz#3fbcac626dd515668b88762d812017bd4f9b75d4"
-  integrity sha512-BkcR1wGw6Kwbvr8m1tKF9EDDWSTJoTGnVseBF/iW4bzR22assbtxZIE1iroo68UMqYEG4rv63SX4BUEtNvVjdA==
+"@uppy/store-default@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@uppy/store-default/-/store-default-2.1.1.tgz#62a656a099bdaa012306e054d093754cb2d36e3e"
+  integrity sha512-xnpTxvot2SeAwGwbvmJ899ASk5tYXhmZzD/aCFsXePh/v8rNvR2pKlcQUH7cF/y4baUGq3FHO/daKCok/mpKqQ==
 
-"@uppy/utils@^4.0.7", "@uppy/utils@^4.1.0":
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/@uppy/utils/-/utils-4.1.0.tgz#19f3f08cd21b383cdcdf95adbec76d9c1a694b68"
-  integrity sha512-C47DUl4uLzmQZdW+VmetIgGRurXuPsvb+/pyYqh9DJn0Phep8u7AOj/tlJA5CHv4pefNHsFjXpaWfSUG3HtW3A==
+"@uppy/utils@^4.0.7", "@uppy/utils@^4.1.3":
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/@uppy/utils/-/utils-4.1.3.tgz#9d0be6ece4df25f228d30ef40be0f14208258ce3"
+  integrity sha512-nTuMvwWYobnJcytDO3t+D6IkVq/Qs4Xv3vyoEZ+Iaf8gegZP+rEyoaFT2CK5XLRMienPyqRqNbIfRuFaOWSIFw==
   dependencies:
     lodash.throttle "^4.1.1"
 
