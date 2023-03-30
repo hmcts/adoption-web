@@ -31,8 +31,8 @@ const initUploadManager = (): void => {
 
   const uppy = new Uppy({
     restrictions: {
-      maxFileSize: isLaPortal ? 52428800 : 2097152,
-      maxTotalFileSize: isLaPortal ? 524288000 : 10485760,
+      maxFileSize: isLaPortal ? 20971520 : 2097152,
+      maxTotalFileSize: isLaPortal ? 20971520 : 10485760,
       maxNumberOfFiles: 10, //jpg, png, pdf, doc/docx or tif
       allowedFileTypes: isLaPortal
         ? [
