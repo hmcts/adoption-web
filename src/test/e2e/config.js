@@ -4,7 +4,7 @@ module.exports = {
     password: process.env.CITIZEN_PASSWORD,
   },
 
-  baseUrl: process.env.ADOP_WEB_URL || 'https://adoption-web-staging.service.core-compute-aat.internal/',
+  baseUrl: process.env.ADOP_WEB_URL || 'https://adoption-web-staging.aat.platform.hmcts.net/',
 
   definition: {
     jurisdiction: 'PUBLICLAW',
