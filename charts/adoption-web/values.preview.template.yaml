@@ -12,6 +12,7 @@ nodejs:
     enabled: false
   environment:
     APPINSIGHTS_KEY: '00000000-0000-0000-0000-000000000000'
+    APPLICATIONINSIGHTS_CONNECTION_STRING: 'InstrumentationKey=00000000-0000-0000-0000-000000000000'
     PCQ_ENABLED: 'true'
     REDIS_TTL_MS: 30
     CCD_URL: 'http://adoption-cos-api-pr-677-ccd-data-store-api'
