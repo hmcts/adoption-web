@@ -177,7 +177,7 @@ nodejs:
         - s2s-secret
         - postcode-lookup-token
         - adoption-pcq-token
-        - app-insight-connection-key
+        - AppInsightsInstrumentationKey
 
 idam-pr:
   enabled: false

@@ -64,8 +64,7 @@ session:
 e2e:
   userTestPassword: ''
 appInsights:
-  #instrumentationKey:
-  connectionString:
+  instrumentationKey:
 localCourt:
   emailId:
     CHELMSFORD_FAMILY_COURT: 'chelmsfordadoptionapplication@mailinator.com'

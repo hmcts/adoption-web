@@ -14,5 +14,4 @@ session:
 e2e:
   userTestPassword: ''
 appInsights:
-  #instrumentationKey:
-  connectionString:
+  instrumentationKey:
