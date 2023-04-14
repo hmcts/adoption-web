@@ -4134,7 +4134,7 @@ co@4.6.0, co@^4.6.0:
   resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
   integrity sha1-bqa989hTrlTMuOR7+gvz+QMfsYQ=
 
-codeceptjs@^3.4.1:
+codeceptjs@^3.3.7:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/codeceptjs/-/codeceptjs-3.4.1.tgz#32154eb3ed11702131adbac898893ee1407e107a"
   integrity sha512-cwYSNORIe6w/YsiZfujDlya1wqNmOE56f+U+wROQ4Vtcc6OWGGTd8kO5ojwHnVmTzkSjdL6lue4sBziDG219xQ==
