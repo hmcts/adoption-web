@@ -1,7 +1,8 @@
 # ---- Base image ----
-FROM hmctspublic.azurecr.io/base/node:14-alpine as base
+FROM hmctspublic.azurecr.io/base/node:16-alpine as base
 COPY --chown=hmcts:hmcts . .
-RUN yarn install --production \
+RUN yarn set version berry
+RUN yarn install \
   && yarn cache clean
 
 # ---- Build image ----
@@ -11,6 +12,6 @@ RUN PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=true yarn install && yarn build:prod
 # ---- Runtime image ----
 FROM base as runtime
 RUN rm -rf webpack/ webpack.config.js
-COPY --from=build $WORKDIR/src/main ./src/main
+COPY --from=build . . 
 
 EXPOSE 3000
