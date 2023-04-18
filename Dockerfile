@@ -1,19 +1,17 @@
 # ---- Base image ----
 FROM hmctspublic.azurecr.io/base/node:16-alpine as base
-
+USER root
+RUN corepack enable
+COPY --chown=hmcts:hmcts . .
 
 # ---- Build image ----
 FROM base as build
-USER root
-RUN corepack enable
 USER hmcts
-COPY --chown=hmcts:hmcts . .
-RUN ls -a
-RUN PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=true yarn install && yarn cache clean && yarn build:prod
+RUN PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=true yarn install && yarn build:prod
 
 # ---- Runtime image ----
 FROM base as runtime
-COPY --from=build . . 
+COPY --from=build $WORKDIR/src/main ./src/main
 
 EXPOSE 3000
 

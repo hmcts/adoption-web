@@ -13,7 +13,8 @@
 !.yarnrc.yml
 !package.json
 !yarn.lock
-
+!node_modules/
+!tsconfig.eslint.json
 !tsconfig.json
 !webpack/**
 !src/main/**
