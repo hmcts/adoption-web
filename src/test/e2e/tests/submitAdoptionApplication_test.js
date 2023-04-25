@@ -25,7 +25,6 @@ Scenario(
   }) => {
     await loginPage.createCitizenUserAndSignIn();
     await landingPage.seeTheLandingPage();
-    await landingPage.seeStartPlacementAndClickPage();
     await landingPage.seeFirstQuestionPage();
     await landingPage.selectApplyWithMySpouseSection();
 
