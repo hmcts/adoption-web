@@ -24,7 +24,6 @@ Scenario(
     chooseYourFamilyCourtDetailsPage,
   }) => {
     await loginPage.createCitizenUserAndSignIn();
-    //await landingPage.seeTheLandingPage();
     await landingPage.seeFirstQuestionPage();
     await landingPage.selectApplyWithMySpouseSection();
 
