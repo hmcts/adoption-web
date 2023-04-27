@@ -56,12 +56,14 @@ const birthMotherSequence = [
   {
     url: Urls.LA_PORTAL_BIRTH_MOTHER_ADDRESS_KNOWN,
     contentDir: path.join(__dirname, '..', 'birth-mother', 'address-known'),
-    getNextStep: data =>
-      data.birthMotherAddressKnown === YesOrNo.YES
-        ? Urls.LA_PORTAL_BIRTH_MOTHER_FIND_ADDRESS
-        : data.birthMotherStillAlive === YesOrNo.YES
+    getNextStep: data => {
+      if (data.birthMotherAddressKnown === YesOrNo.YES) {
+        return Urls.LA_PORTAL_BIRTH_MOTHER_FIND_ADDRESS;
+      }
+      return data.birthMotherStillAlive === YesOrNo.YES
         ? Urls.LA_PORTAL_BIRTH_MOTHER_SERVED_WITH
-        : Urls.LA_PORTAL_TASK_LIST,
+        : Urls.LA_PORTAL_TASK_LIST;
+    },
   },
   {
     url: Urls.LA_PORTAL_BIRTH_MOTHER_FIND_ADDRESS,
@@ -156,12 +158,14 @@ const birthFatherSequence = [
   {
     url: Urls.LA_PORTAL_BIRTH_FATHER_ADDRESS_KNOWN,
     contentDir: path.join(__dirname, '..', 'birth-father', 'address-known'),
-    getNextStep: data =>
-      data.birthFatherAddressKnown === YesOrNo.YES
-        ? Urls.LA_PORTAL_BIRTH_FATHER_FIND_ADDRESS
-        : data.birthFatherNameOnCertificate === YesOrNo.YES || data.birthFatherIdentityKnown === YesOrNo.YES
+    getNextStep: data => {
+      if (data.birthFatherAddressKnown === YesOrNo.YES) {
+        return Urls.LA_PORTAL_BIRTH_FATHER_FIND_ADDRESS;
+      }
+      return data.birthFatherNameOnCertificate === YesOrNo.YES || data.birthFatherIdentityKnown === YesOrNo.YES
         ? Urls.LA_PORTAL_BIRTH_FATHER_SERVED_WITH
-        : Urls.LA_PORTAL_TASK_LIST,
+        : Urls.LA_PORTAL_TASK_LIST;
+    },
   },
   {
     url: Urls.LA_PORTAL_BIRTH_FATHER_FIND_ADDRESS,
@@ -219,12 +223,14 @@ const otherParentSequence = [
   {
     url: Urls.LA_PORTAL_OTHER_PARENT_ADDRESS_KNOWN,
     contentDir: path.join(__dirname, '..', 'other-parent', 'address-known'),
-    getNextStep: data =>
-      data.otherParentAddressKnown === YesOrNo.YES
-        ? Urls.LA_PORTAL_OTHER_PARENT_FIND_ADDRESS
-        : data.otherParentExists === YesOrNo.YES
+    getNextStep: data => {
+      if (data.otherParentAddressKnown === YesOrNo.YES) {
+        return Urls.LA_PORTAL_OTHER_PARENT_FIND_ADDRESS;
+      }
+      return data.otherParentExists === YesOrNo.YES
         ? Urls.LA_PORTAL_OTHER_PARENT_SERVED_WITH
-        : Urls.LA_PORTAL_TASK_LIST,
+        : Urls.LA_PORTAL_TASK_LIST;
+    },
   },
   {
     url: Urls.LA_PORTAL_OTHER_PARENT_FIND_ADDRESS,
