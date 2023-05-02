@@ -3,7 +3,7 @@ import { TranslationFn } from '../../../app/controller/GetController';
 const en = content => ({
   title: 'Apply to adopt a child placed in your care',
   line1:
-    'You can apply to adopt a child who\'s in your care following a <a class="govuk-link" href="/eligibility/start">court placement order.</a>',
+    'You can apply to adopt a child who\'s in your care following a <a class="govuk-link" href="https://www.gov.uk/child-adoption/applying-for-an-adoption-court-order">court placement order.</a>',
   line2:
     'You can start your application at any time however, the child must have lived with you for at least 10 weeks before you can submit it.',
   line3:
