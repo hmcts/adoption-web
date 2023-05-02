@@ -33,7 +33,7 @@ const en = content => ({
 const cy: typeof en = () => ({
   title: 'Gwneud cais i fabwysiadu plentyn a osodwyd yn eich gofal',
   line1:
-    'Gallwch wneud cais i fabwysiadu plentyn sydd yn eich gofal yn dilyn <a class="govuk-link" href="/eligibility/start">gorchymyn lleoli gan y llys.</a>',
+    'Gallwch wneud cais i fabwysiadu plentyn sydd yn eich gofal yn dilyn <a class="govuk-link" href="https://www.gov.uk/child-adoption/applying-for-an-adoption-court-order">gorchymyn lleoli gan y llys.</a>',
   line2:
     "Gallwch ddechrau eich cais ar unrhyw adeg fodd bynnag, mae'n rhaid i'r plentyn fod wedi byw gyda chi am o leiaf 10 wythnos cyn y gallwch gyflwyno’r cais.",
   line3:
