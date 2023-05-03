@@ -202,7 +202,7 @@ export class PostController<T extends AnyObject> {
         await saveDraftCase(req, caseRefId || '', formData);
         const modifiedValuesSet = await getDraftCaseFromStore(req, caseRefId || '');
         req.session.userCase = await req.locals.api.triggerEvent(caseRefId, modifiedValuesSet, eventName);
-        removeCaseFromRedis(req, caseRefId);
+        await removeCaseFromRedis(req, caseRefId);
       } else {
         const flag = req.session.userCase.canPaymentIgnored;
         const feeSummary = req.session.userCase.applicationFeeOrderSummary;

@@ -16,6 +16,6 @@ export default class TimedOutGetController extends GetController {
     if (req.query?.eligibility) {
       req.session.isEligibility = true;
     }
-    super.get(req, res);
+    await super.get(req, res);
   }
 }

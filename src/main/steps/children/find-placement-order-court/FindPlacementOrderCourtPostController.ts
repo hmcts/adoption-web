@@ -49,6 +49,6 @@ export default class FindFamilyCourtPostController extends PostController<AnyObj
       return;
     }
 
-    super.post(req, res);
+    await super.post(req, res);
   }
 }
