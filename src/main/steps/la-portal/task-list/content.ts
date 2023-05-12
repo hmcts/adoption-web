@@ -15,7 +15,7 @@ import {
 
 const generateTaskList = (sectionTitles, taskListItems, userCase) => [
   {
-    title: sectionTitles.childDetails,
+    heading: sectionTitles.childDetails,
     items: [
       {
         id: 'birth-certificate-details',
@@ -147,7 +147,7 @@ export const generateContent: TranslationFn = content => {
   const suffix = content.language === 'en' ? "'s details" : "'s manylion";
   return {
     ...translations,
-    title: userCase!.childrenFirstName + ' ' + userCase!.childrenLastName + suffix,
+    heading: userCase!.childrenFirstName + ' ' + userCase!.childrenLastName + suffix,
     sections: generateTaskList(translations.sectionTitles, translations.taskListItems, userCase),
     isIncomplete: isLaDetailsNotComplete(userCase),
   };
