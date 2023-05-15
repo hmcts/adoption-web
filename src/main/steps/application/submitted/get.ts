@@ -19,6 +19,6 @@ export default class ApplicationSubmittedGetController extends GetController {
     if (req.session.userCase.state !== State.Submitted) {
       return res.redirect(TASK_LIST_URL);
     }
-    super.get(req, res);
+    await super.get(req, res);
   }
 }

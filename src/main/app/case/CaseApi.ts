@@ -74,11 +74,9 @@ export class CaseApi {
       }
     }
     if (
-      !(
-        cases.filter(caseElement => caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted)
-          .length ===
-        cases.length - 1
-      )
+      cases.filter(caseElement => caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted)
+        .length !==
+      cases.length - 1
     ) {
       throw new Error("Not all OR few cases assigned to the user aren't in right state.");
     }

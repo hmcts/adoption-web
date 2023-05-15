@@ -26,6 +26,6 @@ export default class LocalAuthorityGetController extends GetController {
       localAuthorityList.push(localAuthority);
     }
     req.session.localAuthorityList = localAuthorityList;
-    super.get(req, res);
+    await super.get(req, res);
   }
 }

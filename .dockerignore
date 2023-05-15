@@ -3,10 +3,18 @@
 *
 
 # exceptions from `exclude all` rule
-
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+!.yarnrc.yml
 !package.json
 !yarn.lock
-
+!node_modules/
+!tsconfig.eslint.json
 !tsconfig.json
 !webpack/**
 !src/main/**

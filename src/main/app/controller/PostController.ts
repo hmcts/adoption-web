@@ -66,28 +66,10 @@ export class PostController<T extends AnyObject> {
           this.getEventName(req)
         );
       } else if (userCase) {
+        //this.getDraftOrSubmittedCase(req, userCase, res);
         // Returned case may be Draft OR Submitted
         const pcqId = await req.locals.api.checkOldPCQIDExists();
-        if (userCase.state !== State.Submitted && userCase.state !== State.LaSubmitted) {
-          req.session.userCase = userCase;
-          req.session.userCase = await this.save(
-            req,
-            {
-              pcqId,
-            },
-            this.getEventName(req)
-          );
-        } else {
-          // Applications submitted on the login day
-          req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
-          req.session.userCase = await this.save(
-            req,
-            {
-              pcqId,
-            },
-            this.getEventName(req)
-          );
-        }
+        await this.savePcqIDforDraftOrSubmittedCase(userCase, req, pcqId, res);
       } else {
         // No Application for the user
         req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
@@ -109,6 +91,34 @@ export class PostController<T extends AnyObject> {
       await this.saveBeforeSessionTimeout(req, res, formData);
     } else {
       await this.saveAndContinue(req, res, form, formData);
+    }
+  }
+
+  private async savePcqIDforDraftOrSubmittedCase(
+    userCase: CaseWithId,
+    req: AppRequest<T>,
+    pcqId: string | undefined,
+    res: Response
+  ) {
+    if (userCase.state !== State.Submitted && userCase.state !== State.LaSubmitted) {
+      req.session.userCase = userCase;
+      req.session.userCase = await this.save(
+        req,
+        {
+          pcqId,
+        },
+        this.getEventName(req)
+      );
+    } else {
+      // Applications submitted on the login day
+      req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
+      req.session.userCase = await this.save(
+        req,
+        {
+          pcqId,
+        },
+        this.getEventName(req)
+      );
     }
   }
 
@@ -192,7 +202,7 @@ export class PostController<T extends AnyObject> {
         await saveDraftCase(req, caseRefId || '', formData);
         const modifiedValuesSet = await getDraftCaseFromStore(req, caseRefId || '');
         req.session.userCase = await req.locals.api.triggerEvent(caseRefId, modifiedValuesSet, eventName);
-        removeCaseFromRedis(req, caseRefId);
+        await removeCaseFromRedis(req, caseRefId);
       } else {
         const flag = req.session.userCase.canPaymentIgnored;
         const feeSummary = req.session.userCase.applicationFeeOrderSummary;

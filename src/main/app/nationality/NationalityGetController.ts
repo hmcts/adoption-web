@@ -39,7 +39,7 @@ export default class NationalityGetController extends GetController {
 
       super.saveSessionAndRedirect(req, res);
     } else {
-      super.get(req, res);
+      await super.get(req, res);
     }
   }
 }
