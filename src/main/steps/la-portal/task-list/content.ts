@@ -147,6 +147,7 @@ export const generateContent: TranslationFn = content => {
   const suffix = content.language === 'en' ? "'s details" : "'s manylion";
   return {
     ...translations,
+    title: 'la-task-list',
     heading: userCase!.childrenFirstName + ' ' + userCase!.childrenLastName + suffix,
     sections: generateTaskList(translations.sectionTitles, translations.taskListItems, userCase),
     isIncomplete: isLaDetailsNotComplete(userCase),
