@@ -2878,10 +2878,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^17.0.4, @types/node@npm:^17.0.40":
+"@types/node@npm:*, @types/node@npm:^17.0.4":
   version: 17.0.40
   resolution: "@types/node@npm:17.0.40"
   checksum: e3b2fe876672fbe4be84ce17773944eb2f5eaba50e2c6c0536bdf6d4972ed6488581580581f154183fdc8f2d56fa42a42e3d6e83b9b71ee25adea16a84765e92
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^20.1.7":
+  version: 20.1.7
+  resolution: "@types/node@npm:20.1.7"
+  checksum: b722794290d22db1741e739c256876ca774b76ea2d647d9ec9d52c49b1b01049cc6f6332499a01ac81d641e8d078b33e4c5c59e409db80390ac6b8d7ef0c08a7
   languageName: node
   linkType: hard
 
@@ -3768,7 +3775,7 @@ __metadata:
     "@types/mini-css-extract-plugin": ^2.5.1
     "@types/multer": ^1.4.7
     "@types/negotiator": ^0.6.1
-    "@types/node": ^17.0.40
+    "@types/node": ^20.1.7
     "@types/nunjucks": ^3.2.1
     "@types/redis": ^2.8.32
     "@types/require-directory": ^2.1.2
