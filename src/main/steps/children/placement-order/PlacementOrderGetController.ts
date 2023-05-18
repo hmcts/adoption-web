@@ -3,6 +3,7 @@ import { Response } from 'express';
 
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { GetController } from '../../../app/controller/GetController';
+import { getCourtList } from '../../../app/court/court-venues-api';
 
 @autobind
 export default class PlacementOrderGetController extends GetController {
@@ -22,6 +23,8 @@ export default class PlacementOrderGetController extends GetController {
       delete req.query.change;
       req.url = req.url.substring(0, req.url.indexOf('?'));
       redirect = true;
+    } else if (req.query.confirm) {
+      req.session.userCase.selectedPlacementOrderId = `${req.query.confirm}`;
     } else if (req.query.remove) {
       placementOrders = placementOrders.filter(item => item.placementOrderId !== `${req.query.remove}`);
       req.session.userCase.selectedPlacementOrderId = placementOrders[0].placementOrderId;
@@ -60,6 +63,10 @@ export default class PlacementOrderGetController extends GetController {
       this.getEventName(req)
     );
 
+    req.session.userCase.selectedPlacementOrderType = placementOrder?.placementOrderType;
+    req.session.userCase.selectedOtherPlacementOrderType = placementOrder?.otherPlacementOrderType;
+    const courtList = await getCourtList(req);
+    req.session.courtList = courtList;
     const callback = redirect ? undefined : () => super.get(req, res);
 
     super.saveSessionAndRedirect(req, res, callback);

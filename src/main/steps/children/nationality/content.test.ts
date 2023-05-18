@@ -27,6 +27,7 @@ const enContent = {
     childrenNationality: {
       required: "Select a nationality or 'Not sure'",
       notSureViolation: "Select a nationality or 'Not sure'",
+      addButtonNotClicked: "Select 'Add' before you continue",
     },
     addAnotherNationality: 'MOCK_ERROR_MESSAGE',
   },
@@ -40,6 +41,7 @@ const cyContent = {
     childrenNationality: {
       required: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
       notSureViolation: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
+      addButtonNotClicked: 'Dewiswch ‘Ychwanegu’ cyn ichi symud ymlaen',
     },
     addAnotherNationality: 'MOCK_ERROR_MESSAGE',
   },
@@ -63,14 +65,18 @@ describe('children > nationality > content', () => {
   });
 
   test('should contain childrenNationality field', () => {
-    const nationalityFormFields = nationalityFields({}, FieldPrefix.CHILDREN) as FormFields;
+    const nationalityFormFields = nationalityFields({}, FieldPrefix.CHILDREN, 'en') as FormFields;
     const fields = generatedContent.form.fields as FormFields;
     expect(fields.childrenNationality).toEqual(nationalityFormFields.childrenNationality);
   });
 
   test('should call nationalityFields when form.fields is called', () => {
     (form.fields as FormFieldsFn)({ userCase: {} } as Partial<CaseWithId>);
-    expect(nationalityFields).toHaveBeenCalledWith({ userCase: {} }, FieldPrefix.CHILDREN);
+    expect(nationalityFields).toHaveBeenCalledWith(
+      commonContent.userCase,
+      FieldPrefix.CHILDREN,
+      commonContent.language
+    );
   });
 
   it('should contain submit button', () => {

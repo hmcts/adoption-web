@@ -9,7 +9,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: 'Second applicant',
-  label: 'Do you also live at this address?',
+  title: 'Do you also live at this address?',
   yes: 'Yes',
   no: 'No',
   errors: {
@@ -21,7 +21,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Ail geisydd',
-  label: 'A ydych chi’n byw yn y cyfeiriad hwn hefyd?',
+  title: 'A ydych chi’n byw yn y cyfeiriad hwn hefyd?',
   yes: 'Ydw',
   no: 'Nac ydw',
   errors: {
@@ -57,7 +57,7 @@ describe('applicant2 > same-address > content', () => {
     const applicant2AddressSameAsApplicant1Field = fields.applicant2AddressSameAsApplicant1 as FormOptions;
     expect(applicant2AddressSameAsApplicant1Field.type).toBe('radios');
     expect(applicant2AddressSameAsApplicant1Field.classes).toBe('govuk-radios');
-    expect((applicant2AddressSameAsApplicant1Field.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((applicant2AddressSameAsApplicant1Field.label as Function)(generatedContent)).toBe(enContent.title);
     expect((applicant2AddressSameAsApplicant1Field.section as Function)(generatedContent)).toBe(enContent.section);
     expect(((applicant2AddressSameAsApplicant1Field as FormInput).hint as Function)(generatedContent)).toBe(
       '<div class="govuk-inset-text">MOCK_ADDRESS_LINE_1<br>MOCK_ADDRESS_TOWN<br>MOCK_ADDRESS_POSTCODE</div>'

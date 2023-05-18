@@ -32,6 +32,7 @@ describe('CaseApi', () => {
       info: jest.fn().mockImplementation((message: string) => message),
     } as unknown as LoggerInstance;
 
+    // api = new CaseApi(mockedAxios, userDetails, mockLogger);
     api = new CaseApi(mockedAxios, mockLogger);
   });
 
@@ -55,6 +56,9 @@ describe('CaseApi', () => {
   });
 
   test('Should create a case if one is not found', async () => {
+    // mockedAxios.get.mockResolvedValueOnce({
+    //   data: [],
+    // });
     mockedAxios.post.mockResolvedValueOnce({
       data: { cases: [] },
     });
@@ -73,6 +77,7 @@ describe('CaseApi', () => {
     expect(userCase).toStrictEqual({
       id: '1234',
       state: State.Draft,
+      status: State.Draft,
     });
   });
 
@@ -80,6 +85,9 @@ describe('CaseApi', () => {
     mockedAxios.post.mockResolvedValueOnce({
       data: { cases: [] },
     });
+    // mockedAxios.get.mockResolvedValueOnce({
+    //   data: [],
+    // });
     mockedAxios.get.mockResolvedValueOnce({ data: { token: '123' } });
     mockedAxios.post.mockRejectedValue({
       config: { method: 'POST', url: 'https://example.com' },
@@ -91,14 +99,56 @@ describe('CaseApi', () => {
     expect(mockLogger.error).toHaveBeenCalledWith('API Error POST https://example.com');
   });
 
-  test('Should throw an error if more than one cases are found', async () => {
-    const mockCase = { case_data: {} };
+  test('Should throw an error if more than one cases are found in Draft', async () => {
+    const mockCase = {
+      id: '1',
+      state: State.Draft,
+      case_data: {},
+    };
 
+    // mockedAxios.get.mockResolvedValue({
+    //   data: [mockCase, mockCase, mockCase],
+    // });
     mockedAxios.post.mockResolvedValue({
       data: { cases: [mockCase, mockCase, mockCase] },
     });
 
-    await expect(api.getOrCreateCase(serviceType, userDetails)).rejects.toThrow('Too many cases assigned to user.');
+    await expect(api.getOrCreateCase(serviceType, userDetails)).rejects.toThrow(
+      "Not all OR few cases assigned to the user aren't in right state."
+    );
+  });
+
+  test('Should not throw an error if more than one cases are found with only one in Draft state', async () => {
+    const mockCase = {
+      id: '1',
+      state: State.Draft,
+      case_data: {},
+    };
+
+    const mockCaseLaSubmitted = {
+      id: '2',
+      state: State.LaSubmitted,
+      case_data: {},
+    };
+
+    const mockCaseSubmitted = {
+      id: '3',
+      state: State.Submitted,
+      case_data: {},
+    };
+    // mockedAxios.get.mockResolvedValue({
+    //   data: [mockCase, mockCase, mockCase],
+    // });
+    mockedAxios.post.mockResolvedValue({
+      data: { cases: [mockCase, mockCaseLaSubmitted, mockCaseSubmitted] },
+    });
+
+    const userCase = await api.getOrCreateCase(serviceType, userDetails);
+
+    expect(userCase).toStrictEqual({
+      id: '1',
+      state: State.Draft,
+    });
   });
 
   test('Should retrieve the first case if two cases found', async () => {
@@ -116,6 +166,9 @@ describe('CaseApi', () => {
     mockedAxios.post.mockResolvedValue({
       data: { cases: [firstMockCase] },
     });
+    // mockedAxios.get.mockResolvedValue({
+    //   data: [firstMockCase],
+    // });
 
     const userCase = await api.getOrCreateCase(serviceType, userDetails);
 
@@ -198,7 +251,7 @@ describe('CaseApi', () => {
     });
 
     const userCase = await api.getCaseById('1234');
-    expect(userCase).toStrictEqual({ id: '1234', state: 'Draft' });
+    expect(userCase).toStrictEqual({ id: '1234', state: 'Draft', status: 'Draft' });
   });
 
   test('Should throw error when case could not be fetched', async () => {

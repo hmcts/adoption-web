@@ -20,7 +20,7 @@ export default class NationalityGetController extends GetController {
     const remove = req.query.remove;
 
     if (remove && countries?.length) {
-      const index = countries.indexOf(remove as string);
+      const index = countries.findIndex(item => item.id === remove);
 
       if (index !== -1) {
         countries.splice(index, 1);
@@ -39,7 +39,7 @@ export default class NationalityGetController extends GetController {
 
       super.saveSessionAndRedirect(req, res);
     } else {
-      super.get(req, res);
+      await super.get(req, res);
     }
   }
 }

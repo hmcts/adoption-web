@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { CaseDate, CaseWithId, Checkbox, FieldPrefix } from '../../../app/case/case';
-import { ApplyingWith, Nationality, PlacementOrder, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
+import { AdditionalNationality, ApplyingWith, Nationality, YesNoNotsure, YesOrNo } from '../../../app/case/definition';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { PageContent } from '../../../app/controller/GetController';
 import * as Urls from '../../../steps/urls';
@@ -48,6 +49,7 @@ type SummaryListContent = PageContent & {
   gender: Record<string, string>;
   applyingWith: Record<string, string>;
   yesNoNotsure: Record<string, string>;
+  languagePreference: Record<string, string>;
 };
 
 const getSectionSummaryList = (rows: SummaryListRow[], content: PageContent): GovUkNunjucksSummary[] => {
@@ -100,87 +102,170 @@ export const applicationSummaryList = (
   ),
 });
 
-export const adoptionAgencySummaryList = (
+export const localAuthoritySummaryList = (
   { sectionTitles, keys, ...content }: SummaryListContent,
-  userCase: Partial<CaseWithId>,
-  agencyIndex = 0
+  userCase: Partial<CaseWithId>
 ): SummaryList => {
-  let adoptionAgency;
-  if (agencyIndex === 0 || (agencyIndex === 1 && userCase.hasAnotherAdopAgencyOrLA === YesOrNo.YES)) {
-    adoptionAgency = userCase.adopAgencyOrLAs![agencyIndex];
-  }
-
-  const changeUrl = `${Urls.ADOPTION_AGENCY}?change=${adoptionAgency?.adopAgencyOrLaId}`;
   return {
-    title: agencyIndex === 0 ? sectionTitles.adoptionagencyOrLA : sectionTitles.additionalAoptionagencyOrLA,
+    title: sectionTitles.adoptionagencyOrLA,
     rows: getSectionSummaryList(
       [
-        ...(agencyIndex === 1
-          ? [
-              {
-                key: keys.additionalAdoptionAgency,
-                value: content.yesNoNotsure[userCase.hasAnotherAdopAgencyOrLA!],
-                changeUrl: Urls.OTHER_ADOPTION_AGENCY,
-              },
-            ]
-          : []),
-        ...(adoptionAgency
-          ? [
-              {
-                key: keys.name,
-                value: adoptionAgency?.adopAgencyOrLaName,
-                changeUrl,
-              },
-              {
-                key: keys.phoneNumber,
-                value: adoptionAgency?.adopAgencyOrLaPhoneNumber,
-                changeUrl,
-              },
-              {
-                key: keys.nameOfContact,
-                value: adoptionAgency?.adopAgencyOrLaContactName,
-                changeUrl,
-              },
-              {
-                key: keys.emailOfContact,
-                value: adoptionAgency?.adopAgencyOrLaContactEmail,
-                changeUrl,
-              },
-            ]
-          : []),
+        {
+          key: keys.name,
+          value: userCase.localAuthorityName,
+          changeUrl: Urls.LOCAL_AUTHORITY,
+        },
+        {
+          key: keys.nameOfContact,
+          value: userCase.localAuthorityContactName,
+          changeUrl: Urls.LOCAL_AUTHORITY,
+        },
+        {
+          key: keys.phoneNumber,
+          value: userCase.localAuthorityPhoneNumber,
+          changeUrl: Urls.LOCAL_AUTHORITY,
+        },
+        {
+          key: keys.emailAddress,
+          value: userCase.localAuthorityContactEmail,
+          changeUrl: Urls.LOCAL_AUTHORITY,
+        },
+      ],
+      content
+    ),
+  };
+};
+export const adoptionAgencySummaryList = (
+  { sectionTitles, keys, ...content }: SummaryListContent,
+  userCase: Partial<CaseWithId>
+): SummaryList | undefined => {
+  if (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO) {
+    return {
+      title: sectionTitles.additionalAoptionagencyOrLA,
+      rows: getSectionSummaryList(
+        [
+          {
+            key: keys.additionalAdoptionAgency,
+            value: content.yesNoNotsure[userCase.hasAnotherAdopAgencyOrLA],
+            changeUrl: Urls.OTHER_ADOPTION_AGENCY,
+          },
+        ],
+        content
+      ),
+    };
+  }
+  return {
+    title: sectionTitles.additionalAoptionagencyOrLA,
+    rows: getSectionSummaryList(
+      [
+        {
+          key: keys.additionalAdoptionAgency,
+          value: content.yesNoNotsure[userCase.hasAnotherAdopAgencyOrLA!],
+          changeUrl: Urls.OTHER_ADOPTION_AGENCY,
+        },
+        {
+          key: keys.name,
+          value: userCase.adopAgencyOrLaName,
+          changeUrl: Urls.ADOPTION_AGENCY,
+        },
+        {
+          key: keys.nameOfContact,
+          value: userCase.adopAgencyOrLaContactName,
+          changeUrl: Urls.ADOPTION_AGENCY,
+        },
+        {
+          key: keys.phoneNumber,
+          value: userCase.adopAgencyOrLaPhoneNumber,
+          changeUrl: Urls.ADOPTION_AGENCY,
+        },
+        {
+          key: keys.address,
+          valueHtml:
+            userCase.adopAgencyAddressLine1 + '<br>' + userCase.adopAgencyTown + '<br>' + userCase.adopAgencyPostcode,
+          changeUrl: Urls.ADOPTION_AGENCY,
+        },
+        {
+          key: keys.emailAddress,
+          value: userCase.adopAgencyOrLaContactEmail,
+          changeUrl: Urls.ADOPTION_AGENCY,
+        },
       ],
       content
     ),
   };
 };
 
-export const socialWorkerSummaryList = (
+export const childSocialWorkerSummaryList = (
   { sectionTitles, keys, ...content }: SummaryListContent,
   userCase: Partial<CaseWithId>
 ): SummaryList => {
   return {
-    title: sectionTitles.socialWorkerDetails,
+    title: sectionTitles.childSocialWorkerDetails,
     rows: getSectionSummaryList(
       [
         {
-          key: keys.name,
-          value: userCase.socialWorkerName,
+          key: keys.childSocialWorkerName,
+          value: userCase.childSocialWorkerName,
           changeUrl: Urls.SOCIAL_WORKER,
         },
         {
           key: keys.phoneNumber,
-          value: userCase.socialWorkerPhoneNumber,
+          value: userCase.childSocialWorkerPhoneNumber,
           changeUrl: Urls.SOCIAL_WORKER,
         },
         {
-          key: keys.emailAddress,
-          value: userCase.socialWorkerEmail,
+          key: keys.emailAddressIfKnown,
+          value: userCase.childSocialWorkerEmail,
           changeUrl: Urls.SOCIAL_WORKER,
         },
         {
-          key: keys.teamEmailAddress,
-          value: userCase.socialWorkerTeamEmail,
+          key: keys.childLocalAuthority,
+          value: userCase.childLocalAuthority,
           changeUrl: Urls.SOCIAL_WORKER,
+        },
+        {
+          key: keys.childLocalAuthorityEmail,
+          value: userCase.childLocalAuthorityEmail,
+          changeUrl: Urls.SOCIAL_WORKER,
+        },
+      ],
+      content
+    ),
+  };
+};
+
+export const applicantSocialWorkerSummaryList = (
+  { sectionTitles, keys, ...content }: SummaryListContent,
+  userCase: Partial<CaseWithId>
+): SummaryList => {
+  return {
+    title: sectionTitles.applicantSocialWorkerDetails,
+    rows: getSectionSummaryList(
+      [
+        {
+          key: keys.applicantSocialWorkerName,
+          value: userCase.applicantSocialWorkerName,
+          changeUrl: Urls.APPLICANT_SOCIAL_WORKER,
+        },
+        {
+          key: keys.phoneNumber,
+          value: userCase.applicantSocialWorkerPhoneNumber,
+          changeUrl: Urls.APPLICANT_SOCIAL_WORKER,
+        },
+        {
+          key: keys.emailAddressIfKnown,
+          value: userCase.applicantSocialWorkerEmail,
+          changeUrl: Urls.APPLICANT_SOCIAL_WORKER,
+        },
+        {
+          key: keys.applicantLocalAuthority,
+          value: userCase.applicantLocalAuthority,
+          changeUrl: Urls.APPLICANT_SOCIAL_WORKER,
+        },
+        {
+          key: keys.applicantLocalAuthorityEmail,
+          value: userCase.applicantLocalAuthorityEmail,
+          changeUrl: Urls.APPLICANT_SOCIAL_WORKER,
         },
       ],
       content
@@ -200,12 +285,77 @@ export const applicantSummaryList = (
 
   const urlPrefix = prefix === FieldPrefix.APPLICANT1 ? 'APPLICANT_1_' : 'APPLICANT_2_';
   let sectionTitle = sectionTitles.applicantDetails;
+  let hasReasonableAdjustment = userCase.applicant1HasReasonableAdjustment;
   if (prefix === FieldPrefix.APPLICANT1 && userCase.applyingWith !== ApplyingWith.ALONE) {
     sectionTitle = sectionTitles.firstApplicantDetails;
   } else if (prefix === FieldPrefix.APPLICANT2) {
     sectionTitle = sectionTitles.secondApplicantDetails;
+    hasReasonableAdjustment = userCase.applicant2HasReasonableAdjustment;
   }
 
+  if (hasReasonableAdjustment === YesOrNo.NO) {
+    return {
+      title: sectionTitle,
+      rows: getSectionSummaryList(
+        [
+          {
+            key: keys.fullName,
+            value: userCase[`${prefix}FirstNames`] + ' ' + userCase[`${prefix}LastNames`],
+            changeUrl: Urls[`${urlPrefix}FULL_NAME`],
+          },
+          {
+            key: keys.previousNames,
+            valueHtml:
+              userCase[`${prefix}HasOtherNames`] === YesOrNo.YES
+                ? userCase[`${prefix}AdditionalNames`]?.map(item => `${item.firstNames} ${item.lastNames}`).join('<br>')
+                : '',
+            changeUrl: Urls[`${urlPrefix}OTHER_NAMES`],
+          },
+          {
+            key: keys.dateOfBirth,
+            value: getFormattedDate(userCase[`${prefix}DateOfBirth`], content.language),
+            changeUrl: Urls[`${urlPrefix}DOB`],
+          },
+          {
+            key: keys.occupation,
+            value: userCase[`${prefix}Occupation`],
+            changeUrl: Urls[`${urlPrefix}OCCUPATION`],
+          },
+          {
+            key: keys.extraSupport,
+            value: userCase[`${prefix}HasReasonableAdjustment`],
+            changeUrl: Urls[`${urlPrefix}EXTRA_SUPPORT`],
+          },
+          {
+            key: keys.address,
+            valueHtml: getFormattedAddress(userCase, prefix),
+            changeUrl: Urls[`${urlPrefix}FIND_ADDRESS`],
+          },
+          {
+            key: keys.emailAddress,
+            value: userCase[`${prefix}EmailAddress`],
+            changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
+          },
+          {
+            key: keys.phoneNumber,
+            value: userCase[`${prefix}PhoneNumber`],
+            changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
+          },
+          {
+            key: keys.contactDetailsConsent,
+            value: userCase[`${prefix}ContactDetailsConsent`],
+            changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
+          },
+          {
+            key: keys.languagePreference,
+            value: content.languagePreference[userCase[`${prefix}LanguagePreference`]],
+            changeUrl: Urls[`${urlPrefix}LANGUAGE_PREFERENCE`],
+          },
+        ],
+        content
+      ),
+    };
+  }
   return {
     title: sectionTitle,
     rows: getSectionSummaryList(
@@ -234,9 +384,19 @@ export const applicantSummaryList = (
           changeUrl: Urls[`${urlPrefix}OCCUPATION`],
         },
         {
+          key: keys.extraSupport,
+          value: userCase[`${prefix}HasReasonableAdjustment`],
+          changeUrl: Urls[`${urlPrefix}EXTRA_SUPPORT`],
+        },
+        {
+          key: keys.extraSupportDetails,
+          value: userCase[`${prefix}ReasonableAdjustmentDetails`],
+          changeUrl: Urls[`${urlPrefix}EXTRA_SUPPORT`],
+        },
+        {
           key: keys.address,
           valueHtml: getFormattedAddress(userCase, prefix),
-          changeUrl: Urls[`${urlPrefix}MANUAL_ADDRESS`],
+          changeUrl: Urls[`${urlPrefix}FIND_ADDRESS`],
         },
         {
           key: keys.emailAddress,
@@ -248,6 +408,16 @@ export const applicantSummaryList = (
           value: userCase[`${prefix}PhoneNumber`],
           changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
         },
+        {
+          key: keys.contactDetailsConsent,
+          value: userCase[`${prefix}ContactDetailsConsent`],
+          changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
+        },
+        {
+          key: keys.languagePreference,
+          value: content.languagePreference[userCase[`${prefix}LanguagePreference`]],
+          changeUrl: Urls[`${urlPrefix}LANGUAGE_PREFERENCE`],
+        },
       ],
       content
     ),
@@ -255,10 +425,13 @@ export const applicantSummaryList = (
 };
 /* eslint-enable import/namespace */
 
-const formatNationalities = (nationality: (string | Nationality)[], additionalNationalities: string[]): string => {
+const formatNationalities = (
+  nationality: (string | Nationality)[],
+  additionalNationalities: AdditionalNationality[]
+): string => {
   const nationalities = nationality.filter(item => item !== Nationality.OTHER);
   if (nationality.includes(Nationality.OTHER)) {
-    nationalities.push(...additionalNationalities);
+    nationalities.push(...additionalNationalities.map(item => item.country));
   }
   return nationalities.join('<br>');
 };
@@ -277,24 +450,14 @@ export const childrenSummaryList = (
           changeUrl: Urls.CHILDREN_FULL_NAME,
         },
         {
-          key: keys.dateOfBirth,
-          value: getFormattedDate(userCase.childrenDateOfBirth),
-          changeUrl: Urls.CHILDREN_DATE_OF_BIRTH,
-        },
-        {
-          key: keys.sexAtBirth,
-          value: content.gender[userCase.childrenSexAtBirth!],
-          changeUrl: Urls.CHILDREN_SEX_AT_BIRTH,
-        },
-        {
-          key: keys.nationality,
-          valueHtml: formatNationalities(userCase.childrenNationality!, userCase.childrenAdditionalNationalities!),
-          changeUrl: Urls.CHILDREN_NATIONALITY,
-        },
-        {
           key: keys.fullNameAfterAdoption,
           value: userCase.childrenFirstNameAfterAdoption + ' ' + userCase.childrenLastNameAfterAdoption,
           changeUrl: Urls.CHILDREN_FULL_NAME_AFTER_ADOPTION,
+        },
+        {
+          key: keys.dateOfBirth,
+          value: getFormattedDate(userCase.childrenDateOfBirth),
+          changeUrl: Urls.CHILDREN_DATE_OF_BIRTH,
         },
       ],
       content
@@ -506,63 +669,38 @@ export const siblingCourtOrderSummaryList = (
         valueHtml: content.yesNoNotsure[userCase.hasSiblings!],
         changeUrl: `${Urls.SIBLING_EXISTS}`,
       },
-      ...(userCase.hasSiblings === YesNoNotsure.YES
-        ? [
-            {
-              key: keys.siblingCourtOrders,
-              valueHtml: content.yesNoNotsure[userCase.hasPoForSiblings!],
-              changeUrl: `${Urls.SIBLING_COURT_ORDER_EXISTS}`,
-            },
-            ...(userCase.hasPoForSiblings === YesNoNotsure.YES
-              ? userCase.siblings!.map(sibling => ({
-                  key: keys.siblingName,
-                  value: sibling.siblingFirstName + ' ' + sibling.siblingLastNames,
-                  changeUrl: `${Urls.SIBLING_NAME}?change=${sibling.siblingId}`,
-                }))
-              : []),
-          ]
-        : []),
     ],
     content
   );
 
   const siblingCourtOrderList =
-    userCase.hasSiblings === YesNoNotsure.YES && userCase.hasPoForSiblings === YesNoNotsure.YES
+    userCase.hasSiblings === YesNoNotsure.YES
       ? userCase.siblings!.reduce(
           (rows: GovUkNunjucksSummary[], sibling) => [
             ...rows,
-            ...sibling.siblingPlacementOrders!.reduce(
-              (acc: GovUkNunjucksSummary[], item) => [
-                ...acc,
-                ...getSectionSummaryList(
-                  [
-                    {
-                      keyHtml: `<h3 class="govuk-heading-s govuk-!-margin-top-8">${keys.courtOrder}</h3>`,
-                      classes: 'govuk-summary-list__row--no-border',
-                    },
-                    {
-                      key: keys.siblingName,
-                      value: sibling.siblingFirstName + ' ' + sibling.siblingLastNames,
-                    },
-                    {
-                      key: keys.typeOfOrder,
-                      value: (item as PlacementOrder).placementOrderType,
-                      changeUrl: `${Urls.SIBLING_ORDER_TYPE}?change=${sibling.siblingId}/${
-                        (item as PlacementOrder).placementOrderId
-                      }`,
-                    },
-                    {
-                      key: keys.orderNumber,
-                      value: (item as PlacementOrder).placementOrderNumber,
-                      changeUrl: `${Urls.SIBLING_ORDER_CASE_NUMBER}?change=${sibling.siblingId}/${
-                        (item as PlacementOrder).placementOrderId
-                      }`,
-                    },
-                  ],
-                  content
-                ),
+            ...getSectionSummaryList(
+              [
+                {
+                  keyHtml: `<h3 class="govuk-heading-s govuk-!-margin-top-8">${keys.courtOrder}</h3>`,
+                  classes: 'govuk-summary-list__row--no-border',
+                },
+                {
+                  key: keys.siblingRelation,
+                  value: sibling.siblingRelation,
+                  changeUrl: `${Urls.SIBLING_RELATION}?change=${sibling.siblingId}`,
+                },
+                {
+                  key: keys.typeOfOrder,
+                  value: sibling.siblingPoType,
+                  changeUrl: `${Urls.SIBLING_ORDER_TYPE}?change=${sibling.siblingId}`,
+                },
+                {
+                  key: keys.orderNumber,
+                  value: sibling.siblingPoNumber,
+                  changeUrl: `${Urls.SIBLING_ORDER_CASE_NUMBER}?change=${sibling.siblingId}`,
+                },
               ],
-              []
+              content
             ),
           ],
           []
@@ -576,12 +714,17 @@ export const siblingCourtOrderSummaryList = (
 };
 
 export const familyCourtSummaryList = (
-  { sectionTitles, keys, language, ...content }: SummaryListContent,
+  { sectionTitles, keys, ...content }: SummaryListContent,
   userCase: Partial<CaseWithId>
 ): SummaryList => ({
   title: sectionTitles.familyCourtDetails,
   rows: getSectionSummaryList(
     [
+      {
+        key: keys.placementCourtName,
+        value: userCase.placementOrderCourt,
+        changeUrl: Urls.CHILDREN_FIND_PLACEMENT_ORDER_COURT,
+      },
       {
         key: keys.familyCourtName,
         value: userCase.familyCourtName,

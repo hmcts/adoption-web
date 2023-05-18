@@ -24,6 +24,14 @@ services:
     url: EQUALITY_URL
     tokenKey: PCQ_TOKEN
     pcqEnabled: PCQ_ENABLED
+  pact:
+    tag: PACT_TAG
+  draftStore:
+    redis:
+      host: REDIS_HOST
+      tls: REDIS_TLS
+      port: REDIS_PORT
+      ttl: REDIS_TTL_MS
 port: PORT
 session:
   redis:
@@ -47,3 +55,127 @@ localCourt:
     LIVERPOOL_FAMILY_COURT: LIVERPOOL_FAMILY_COURT_EMAIL
     CENTRAL_LONDON_FAMILY_COURT: CENTRAL_LONDON_FAMILY_COURT_EMAIL
     READING_FAMILY_COURT: READING_FAMILY_COURT_EMAIL
+fpl:
+  localAuthority:
+    COR: COR_VAL
+    WOL: WOL_VAL
+    SMC: SMC_VAL
+    TWB: TWB_VAL
+    SHR: SHR_VAL
+    WAL: WAL_VAL
+    BCC: BCC_VAL
+    CMB: CMB_VAL
+    LBM: LBM_VAL
+    BOL: BOL_VAL
+    HBC: HBC_VAL
+    WIR: WIR_VAL
+    GTE: GTE_VAL
+    YCC: YCC_VAL
+    BHC: BHC_VAL
+    TBC: TBC_VAL
+    DEV: DEV_VAL
+    PEM: PEM_VAL
+    BNS: BNS_VAL
+    GCC: GCC_VAL
+    NSC: NSC_VAL
+    LBC: LBC_VAL
+    NYS: NYS_VAL
+    WIC: WIC_VAL
+    PET: PET_VAL
+    SGL: SGL_VAL
+    HAM: HAM_VAL
+    VOG: VOG_VAL
+    NPT: NPT_VAL
+    NTH: NTH_VAL
+    CAR: CAR_VAL
+    GSCC: GSCC_VAL
+    LBTH: LBTH_VAL
+    BRD: BRD_VAL
+    SUF: SUF_VAL
+    WRX: WRX_VAL
+    NFK: NFK_VAL
+    NWT: NWT_VAL
+    SHF: SHF_VAL
+    ROT: ROT_VAL
+    DON: DON_VAL
+    BAR: BAR_VAL
+    IOA: IOA_VAL
+    KECH: KECH_VAL
+    WMS: WMS_VAL
+    DEN: DEN_VAL
+    CWC: CWC_VAL
+    BRE: BREv
+    CPY: CPY_VAL
+    WAR: WAR_VAL
+    BGW: BGW_VAL
+    NHB: NHB_VAL
+    STH: STH_VAL
+    MON: MON_VAL
+    DOR: DOR_VAL
+    BRO: BRO_VAL
+    KKL: KKL_VAL
+    LEE: LEE_VAL
+    BED: BED_VAL
+    GWY: GWY_VAL
+    FCC: FCC_VAL
+    CON: CON_VAL
+    SBC: SBC_VAL
+    HRW: HRW_VAL
+    HPL: HPL_VAL
+    CBF: CBF_VAL
+    SWK: SWK_VAL
+    HUL: HUL_VAL
+    BLA: BLA_VAL
+    NTY: NTY_VAL
+    KEN: KEN_VAL
+    MCC: MCC_VAL
+    CAM: CAM_VAL
+    POW: POW_VAL
+    SUN: SUN_VAL
+    IOW: IOW_VAL
+    BFO: BFO_VAL
+    WBC: WBC_VAL
+    SCF: SCF_VAL
+    WIM: WIM_VAL
+    WOK: WOK_VAL
+    TCBC: TCBC_VAL
+    STY: STY_VAL
+    KGN: KGN_VAL
+    RMD: RMD_VAL
+    SUT: SUT_VAL
+    WAD: WAD_VAL
+    GRW: GRW_VAL
+    TOR: TOR_VAL
+    PLY: PLY_VAL
+    BRA: BRA_VAL
+    CAL: CAL_VAL
+    RBC: RBC_VAL
+    SAL: SAL_VAL
+    ESX: ESX_VAL
+    HAF: HAF_VAL
+    REC: REC_VAL
+    NTHW: NTHW_VAL
+    NTHN: NTHN_VAL
+    LAM: LAM_VAL
+    ISL: ISL_VAL
+    CDN: CDN_VAL
+    LEW: LEW_VAL
+    BNT: BNT_VAL
+    HLW: HLW_VAL
+    WSX: WSX_VAL
+    BAD: BAD_VAL
+    ENF: ENF_VAL
+    WAF: WAF_VAL
+    CRY: CRY_VAL
+    RED: RED_VAL
+    HAR: HAR_VAL
+    EAL: EAL_VAL
+    BEX: BEX_VAL
+    BUR: BUR_VAL
+    THK: THK_VAL
+    ESS: ESS_VAL
+    HAC: HAC_VAL
+    COL: COL_VAL
+    HAV: HAV_VAL
+    NEW: NEW_VAL
+    RTL: RTL_VAL

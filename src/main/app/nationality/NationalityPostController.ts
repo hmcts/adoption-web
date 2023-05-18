@@ -2,6 +2,7 @@ import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
 import { FieldPrefix } from '../../app/case/case';
+import { ValidationError } from '../../app/form/validation';
 import { AppRequest } from '../controller/AppRequest';
 import { AnyObject, PostController } from '../controller/PostController';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
@@ -32,9 +33,20 @@ export default class NationalityPostController extends PostController<AnyObject>
         req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`] = [];
       }
       if (formData.addAnotherNationality) {
-        req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`]?.push(formData.addAnotherNationality);
+        req.session.userCase[`${this.fieldPrefix}AdditionalNationalities`]?.push({
+          id: `${Date.now()}`,
+          country: formData.addAnotherNationality,
+        });
         req.session.userCase.addAnotherNationality = '';
       }
+    } else if (formData.addAnotherNationality) {
+      req.session.errors.push({
+        propertyName: `${this.fieldPrefix}Nationality`,
+        errorType: ValidationError.ADD_BUTTON_NOT_CLICKED,
+      });
+      this.filterErrorsForSaveAsDraft(req);
+
+      return this.redirect(req, res, req.url);
     }
 
     req.session.userCase = await this.save(

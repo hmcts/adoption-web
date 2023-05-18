@@ -13,20 +13,18 @@ const enContent = {
   title: 'Choose a family court',
   findFamilyCourtParagraph1:
     'There may be court hearings related to your application to adopt. The birth parents may be present at these. You do not have to attend these hearings.',
-  findFamilyCourtParagraph2:
-    'You have told us that the court which issued the placement order was <b>London Court</b>.',
+  findFamilyCourtParagraph2: 'You have told us that the court which issued the placement order was <b>MOCK</b>.',
   findFamilyCourt: 'Do you want the hearings to be heard in the same court?',
   findFamilyCourtHint: 'You should discuss this with your social worker or adoption agency.',
-  familyCourtNameParagraph1:
-    '<p class="govuk-label"><a  target="_blank" href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode">Choose your family court</a></p>',
   familyCourtNameParagraph2:
-    'Find the family court in the town or region you want your application heard. The link will open in a new tab. Return to this tab to enter the court name.',
-  familyCourtNameParagraph3:
-    'Note that your request will be submitted to the judge. The judge has the final decision about where court hearings will take place.',
+    'You do not have to attend court hearings. We recommend staying with the same court so that birth parents are not alerted to your location. It is important that you discuss this with the social worker. The judge has the final decision about where court hearings take place.',
   familyCourtName: 'Enter the full name of the court',
+  familyCourtNameParagraph3:
+    '<br>If you cannot find the court you can search using the postcode in the <a class="govuk-link" href="https://www.gov.uk/find-court-tribunal" target="_blank">court finder service (opens new tab)</a>.',
+  options: [{ text: 'MOCK', value: 'MOCK', selected: true }],
   errors: {
     findFamilyCourt: {
-      required: 'Please answer the question',
+      required: 'Select yes if you want the hearings to be heard in the same court',
     },
     familyCourtName: {
       required: 'Enter the name of the court',
@@ -39,20 +37,18 @@ const cyContent = {
   title: 'Dewiswch lys teulu',
   findFamilyCourtParagraph1:
     'Efallai cynhelir gwrandawiadau llys sy’n ymwneud â’ch cais i fabwysiadu. Efallai bydd y rheini biolegol yn bresennol yn y gwrandawiadau hyn. Nid oes rhaid ichi fynychu’r gwrandawiadau hyn.',
-  findFamilyCourtParagraph2:
-    'Rydych wedi dweud wrthym mai’r llys a gyhoeddodd y gorchymyn lleoli oedd <b>London Court</b>.',
+  findFamilyCourtParagraph2: 'Rydych wedi dweud wrthym mai’r llys a gyhoeddodd y gorchymyn lleoli oedd <b>MOCK</b>.',
   findFamilyCourt: 'A ydych eisiau i’r gwrandawiadau cael eu gwrando yn yr un llys?',
   findFamilyCourtHint: 'Dylech drafod hyn gyda’ch gweithiwr cymdeithasol neu’ch asiantaeth fabwysiadu.',
-  familyCourtNameParagraph1:
-    '<p class="govuk-label"><a  target="_blank" href="https://www.find-court-tribunal.service.gov.uk/services/childcare-and-parenting/adoption/search-by-postcode?lng=cy">Dewiswch eich llys teulu</a></p>',
   familyCourtNameParagraph2:
-    'Dewch o hyd i’r llys teulu yn y dref neu’r rhanbarth rydych yn dymuno i’ch cais gael ei wrando. Bydd y ddolen yn agor mewn ffenestr newydd. Dychwelwch i’r tab yma i nodi enw’r llys.',
-  familyCourtNameParagraph3:
-    'Nac ydwdwch bydd eich cais yn cael gyflwyno i’r barnwr. Y barnwr sy’n gwneud y penderfyniad terfynol am lle bydd y gwrandawiadau llys yn cymryd rhan.',
+    "Nid oes rhaid i chi fynychu gwrandawiadau llys. Rydym yn argymell aros gyda'r un llys fel nad yw rhieni biolegol yn dod i wybod am eich lleoliad. Mae'n bwysig eich bod yn trafod hyn gyda'r gweithiwr cymdeithasol. Y barnwr fydd yn penderfynu’n derfynol ble mae gwrandawiadau llys yn cael eu cynnal.",
   familyCourtName: 'Nac ydwdwch enw llawn y llys',
+  familyCourtNameParagraph3:
+    'Os na allwch ddod o hyd i\'r llys gallwch chwilio drwy ddefnyddio\'r cod post yn y <a class="govuk-link" href="https://www.gov.uk/chwilio-am-lys-neu-dribiwnlys" target="_blank">gwasanaeth dod o hyd i lysoedd (yn agor tab newydd)</a>.',
+  options: [{ text: 'MOCK', value: 'MOCK', selected: true }],
   errors: {
     findFamilyCourt: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: "Dewiswch ie os ydych am i'r gwrandawiadau gael eu clywed yn yr un llys",
     },
     familyCourtName: {
       required: 'Nac ydwdwch enw’r llys',
@@ -64,7 +60,8 @@ const cyContent = {
 describe('children > find-family-court > content', () => {
   const commonContent = generatePageContent({
     language: 'en',
-    userCase: { placementOrders: [{ placementOrderId: '123', placementOrderCourt: 'London Court' }] },
+    userCase: { placementOrderCourt: 'MOCK', familyCourtName: 'MOCK' },
+    courtList: [{ site_name: 'MOCK', is_case_management_location: '', epimms_id: '', venue_name: 'MOCK' }],
   }) as CommonContent;
 
   let generatedContent;
@@ -81,7 +78,7 @@ describe('children > find-family-court > content', () => {
       generateContent({
         ...commonContent,
         language: 'cy',
-        userCase: { placementOrders: [{ placementOrderId: '123', placementOrderCourt: 'London Court' }] },
+        userCase: { placementOrderCourt: 'MOCK', familyCourtName: 'MOCK' },
       })
     );
   });
@@ -101,13 +98,7 @@ describe('children > find-family-court > content', () => {
     expect(field.validator).toBe(isFieldFilledIn);
 
     const field2 = field.values[1].subFields!.familyCourtName;
-    expect((field2?.label as Function)(generatedContent)).toBe(enContent.familyCourtName);
-    expect(field2.type).toBe('text');
-    expect(field2?.labelSize).toBe(null);
-
-    const field3 = field.values[1].subFields!.p1;
-    expect((field3?.label as Function)(generatedContent)).toBe(enContent.familyCourtNameParagraph1);
-    expect(field3.type).toBe('label');
+    expect(field2.type).toBe('select-dropdown');
 
     const field4 = field.values[1].subFields!.p2;
     expect((field4?.label as Function)(generatedContent)).toBe(enContent.familyCourtNameParagraph2);

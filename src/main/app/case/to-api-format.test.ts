@@ -1,34 +1,35 @@
-const v4Mock = jest.fn().mockReturnValue('MOCK_V4_UUID');
-jest.mock('uuid', () => ({
-  v4: v4Mock,
-}));
-
 import { Case, Checkbox } from './case';
-import { DocumentType, YesOrNo } from './definition';
-import { OrNull, formatApplicant1CannotUploadDocuments, toApiFormat } from './to-api-format';
+import { DocumentType, PlacementOrderTypeEnum, SiblingPOType, SiblingRelationships, YesOrNo } from './definition';
+import {
+  OrNull,
+  formatApplicant1CannotUploadDocuments,
+  formatLaCannotUploadDocuments,
+  toApiFormat,
+} from './to-api-format';
 
 describe('to-api-format', () => {
   const results: OrNull<Partial<Case>> = {
-    applicant1HelpPayingNeeded: YesOrNo.YES,
-    applicant1AlreadyAppliedForHelpPaying: YesOrNo.YES,
-    applicant1HelpWithFeesRefNo: 'HWF-123-ABC',
     applicant1CannotUploadDocuments: [DocumentType.APPLICATION],
+    laCannotUploadDocuments: [DocumentType.APPLICATION],
     applicant2CannotUploadDocuments: [],
     applicant1HasOtherNames: YesOrNo.YES,
     applicant1AdditionalNames: [{ id: 'MOCK_ID', firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' }],
     applicant2HasOtherNames: YesOrNo.YES,
     applicant2AdditionalNames: [{ id: 'MOCK_ID', firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' }],
-    childrenAdditionalNationalities: ['MOCK_COUNTRY'],
-    birthMotherAdditionalNationalities: ['MOCK_COUNTRY'],
-    birthFatherAdditionalNationalities: ['MOCK_COUNTRY'],
+    childrenAdditionalNationalities: [{ id: 'MOCK_ID', country: 'MOCK_COUNTRY' }],
+    birthMotherAdditionalNationalities: [{ id: 'MOCK_ID', country: 'MOCK_COUNTRY' }],
+    birthFatherAdditionalNationalities: [{ id: 'MOCK_ID', country: 'MOCK_COUNTRY' }],
     dateChildMovedIn: { day: '1', month: '1', year: '2021' },
     applicant1DateOfBirth: { day: '20', month: '1', year: '2000' },
     applicant2DateOfBirth: undefined,
+    birthFatherLastAddressDate: { day: '20', month: '1', year: '2020' },
+    birthMotherLastAddressDate: { day: '20', month: '1', year: '2020' },
+    otherParentLastAddressDate: { day: '20', month: '1', year: '2020' },
     childrenDateOfBirth: { day: '5', month: '1', year: '2020' },
     placementOrders: [
       {
         placementOrderId: 'MOCK_ID',
-        placementOrderType: 'MOCK_TYPE',
+        placementOrderType: PlacementOrderTypeEnum.AdoptionOrder,
         placementOrderNumber: 'MOCK_NUMBER',
         placementOrderCourt: 'MOCK_COURT',
         placementOrderDate: { day: '5', month: '1', year: '2021' },
@@ -37,31 +38,29 @@ describe('to-api-format', () => {
     siblings: [
       {
         siblingId: 'MOCK_SIBLING_ID',
-        siblingFirstName: 'MOCK_FIRST_NAMES',
-        siblingLastNames: 'MOCK_LAST_NAMES',
-        siblingPlacementOrders: [
-          {
-            placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
-            placementOrderType: 'MOCK_TYPE',
-            placementOrderNumber: 'MOCK_NUMBER',
-          },
-        ],
+        siblingRelation: SiblingRelationships.SISTER,
+        siblingPoType: SiblingPOType.ADOPTION_ORDER,
+        siblingPoNumber: 'MOCK_NUMBER',
       },
     ],
-    adopAgencyOrLAs: [
-      {
-        adopAgencyOrLaId: 'MOCK_ID',
-        adopAgencyOrLaName: 'MOCK_NAME',
-        adopAgencyOrLaPhoneNumber: 'MOCK_PHONE_NUMBER',
-        adopAgencyOrLaContactName: 'MOCK_CONTACT_NAME',
-        adopAgencyOrLaContactEmail: 'MOCK_CONTACT_EMAIL',
-      },
-    ],
+    localAuthorityName: 'laname',
+    localAuthorityContactName: 'contact name1',
+    localAuthorityPhoneNumber: '01234567890',
+    localAuthorityContactEmail: 'agency1@email.co.uk',
+    adopAgencyOrLaName: 'agency1',
+    adopAgencyOrLaContactName: 'contact name1',
+    adopAgencyOrLaPhoneNumber: '01234567890',
+    adopAgencyAddressLine1: 'address',
+    adopAgencyTown: 'town',
+    adopAgencyPostcode: 'aa14aa',
+    adopAgencyOrLaContactEmail: 'agency1@email.co.uk',
     applicant1IBelieveApplicationIsTrue: Checkbox.Unchecked,
     applicant2IBelieveApplicationIsTrue: null,
     applicant1UploadedFiles: [],
+    laUploadedFiles: [],
     applicant2UploadedFiles: [],
     applicant1CannotUpload: Checkbox.Checked,
+    laCannotUpload: Checkbox.Checked,
     applicant2AddressSameAsApplicant1: YesOrNo.YES,
   };
 
@@ -69,31 +68,33 @@ describe('to-api-format', () => {
     const apiFormat = toApiFormat(results as Partial<Case>);
     expect(apiFormat).toStrictEqual({
       applicant1CannotUpload: 'Yes',
-      applicant1HWFNeedHelp: 'Yes',
-      applicant1HWFAppliedForFees: 'Yes',
-      applicant1HWFReferenceNumber: 'HWF-123-ABC',
+      laCannotUpload: 'Yes',
       applicant1CannotUploadSupportingDocument: ['application'],
+      laCannotUploadSupportingDocument: ['application'],
       applicant1HasOtherNames: 'Yes',
       applicant1AdditionalNames: [
-        { id: 'MOCK_V4_UUID', value: { firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' } },
+        { id: 'MOCK_ID', value: { firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' } },
       ],
       applicant2HasOtherNames: 'Yes',
       applicant2AdditionalNames: [
-        { id: 'MOCK_V4_UUID', value: { firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' } },
+        { id: 'MOCK_ID', value: { firstNames: 'MOCK_FIRST_NAMES', lastNames: 'MOCK_LAST_NAMES' } },
       ],
-      childrenAdditionalNationalities: [{ id: 'MOCK_V4_UUID', value: { country: 'MOCK_COUNTRY' } }],
-      birthMotherOtherNationalities: [{ id: 'MOCK_V4_UUID', value: { country: 'MOCK_COUNTRY' } }],
-      birthFatherOtherNationalities: [{ id: 'MOCK_V4_UUID', value: { country: 'MOCK_COUNTRY' } }],
+      childrenAdditionalNationalities: [{ id: 'MOCK_ID', value: { country: 'MOCK_COUNTRY' } }],
+      birthMotherOtherNationalities: [{ id: 'MOCK_ID', value: { country: 'MOCK_COUNTRY' } }],
+      birthFatherOtherNationalities: [{ id: 'MOCK_ID', value: { country: 'MOCK_COUNTRY' } }],
       dateChildMovedIn: '2021-01-01',
       applicant1DateOfBirth: '2000-01-20',
       applicant2DateOfBirth: '',
       childrenDateOfBirth: '2020-01-05',
+      birthFatherLastAddressDate: '2020-01-20',
+      birthMotherLastAddressDate: '2020-01-20',
+      otherParentLastAddressDate: '2020-01-20',
       placementOrders: [
         {
-          id: 'MOCK_V4_UUID',
+          id: 'MOCK_ID',
           value: {
             placementOrderId: 'MOCK_ID',
-            placementOrderType: 'MOCK_TYPE',
+            placementOrderType: PlacementOrderTypeEnum.AdoptionOrder,
             placementOrderNumber: 'MOCK_NUMBER',
             placementOrderCourt: 'MOCK_COURT',
             placementOrderDate: '2021-01-05',
@@ -102,67 +103,33 @@ describe('to-api-format', () => {
       ],
       siblings: [
         {
-          id: 'MOCK_V4_UUID',
+          id: 'MOCK_SIBLING_ID',
           value: {
             siblingId: 'MOCK_SIBLING_ID',
-            siblingFirstName: 'MOCK_FIRST_NAMES',
-            siblingLastNames: 'MOCK_LAST_NAMES',
-            siblingPlacementOrders: [
-              {
-                id: 'MOCK_V4_UUID',
-                value: {
-                  placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
-                  placementOrderType: 'MOCK_TYPE',
-                  placementOrderNumber: 'MOCK_NUMBER',
-                },
-              },
-            ],
+            siblingRelation: SiblingRelationships.SISTER,
+            siblingPoType: SiblingPOType.ADOPTION_ORDER,
+            siblingPoNumber: 'MOCK_NUMBER',
           },
         },
       ],
-      adopAgencyOrLAs: [
-        {
-          id: 'MOCK_V4_UUID',
-          value: {
-            adopAgencyOrLaId: 'MOCK_ID',
-            adopAgencyOrLaName: 'MOCK_NAME',
-            adopAgencyOrLaPhoneNumber: 'MOCK_PHONE_NUMBER',
-            adopAgencyOrLaContactName: 'MOCK_CONTACT_NAME',
-            adopAgencyOrLaContactEmail: 'MOCK_CONTACT_EMAIL',
-          },
-        },
-      ],
+      localAuthorityName: 'laname',
+      localAuthorityContactName: 'contact name1',
+      localAuthorityPhoneNumber: '01234567890',
+      localAuthorityContactEmail: 'agency1@email.co.uk',
+      adopAgencyOrLaName: 'agency1',
+      adopAgencyOrLaContactName: 'contact name1',
+      adopAgencyOrLaPhoneNumber: '01234567890',
+      adopAgencyAddressLine1: 'address',
+      adopAgencyTown: 'town',
+      adopAgencyPostcode: 'aa14aa',
+      adopAgencyOrLaContactEmail: 'agency1@email.co.uk',
       applicant1StatementOfTruth: 'No',
       applicant2StatementOfTruth: null,
       applicant2AddressSameAsApplicant1: YesOrNo.YES,
     });
   });
 
-  test('handles invalid data correctly', async () => {
-    const apiFormat = toApiFormat({
-      applicant1HelpWithFeesRefNo: '123-ABC',
-    } as Partial<Case>);
-
-    expect(apiFormat).toMatchObject({
-      applicant1HWFReferenceNumber: '',
-    });
-  });
-
   test.each([
-    {
-      applicant1HelpPayingNeeded: YesOrNo.YES,
-      expected: {
-        applicant1HWFNeedHelp: YesOrNo.YES,
-      },
-    },
-    {
-      applicant1HelpPayingNeeded: YesOrNo.NO,
-      expected: {
-        applicant1HWFNeedHelp: YesOrNo.NO,
-        applicant1HWFAppliedForFees: null,
-        applicant1HWFReferenceNumber: null,
-      },
-    },
     {
       applicant1IBelieveApplicationIsTrue: Checkbox.Checked,
       expected: {
@@ -222,6 +189,12 @@ describe('to-api-format', () => {
       },
     },
     {
+      laCannotUploadDocuments: undefined,
+      expected: {
+        laCannotUploadSupportingDocument: [],
+      },
+    },
+    {
       placementOrders: undefined,
       expected: {
         placementOrders: [],
@@ -234,25 +207,65 @@ describe('to-api-format', () => {
       },
     },
     {
-      siblings: [{ siblingPlacementOrders: undefined }],
+      localAuthorityName: undefined,
+      localAuthorityContactName: undefined,
+      localAuthorityPhoneNumber: undefined,
+      localAuthorityContactEmail: undefined,
+      adopAgencyOrLaName: undefined,
+      adopAgencyOrLaContactName: undefined,
+      adopAgencyOrLaPhoneNumber: undefined,
+      adopAgencyAddressLine1: undefined,
+      adopAgencyTown: undefined,
+      adopAgencyPostcode: undefined,
+      adopAgencyOrLaContactEmail: undefined,
+      hasAnotherAdopAgencyOrLA: undefined,
+      childLocalAuthority: undefined,
+      childLocalAuthorityEmail: undefined,
+      childSocialWorkerName: undefined,
+      childSocialWorkerPhoneNumber: undefined,
+      childSocialWorkerEmail: undefined,
+      applicantLocalAuthority: undefined,
+      applicantLocalAuthorityEmail: undefined,
+      applicantSocialWorkerName: undefined,
+      applicantSocialWorkerPhoneNumber: undefined,
+      applicantSocialWorkerEmail: undefined,
       expected: {
-        siblings: [{ id: 'MOCK_V4_UUID', value: { siblingPlacementOrders: [] } }],
-      },
-    },
-    {
-      adopAgencyOrLAs: undefined,
-      expected: {
-        adopAgencyOrLAs: [],
+        localAuthorityName: undefined,
+        localAuthorityContactName: undefined,
+        localAuthorityPhoneNumber: undefined,
+        localAuthorityContactEmail: undefined,
+        adopAgencyOrLaName: undefined,
+        adopAgencyOrLaContactName: undefined,
+        adopAgencyOrLaPhoneNumber: undefined,
+        adopAgencyAddressLine1: undefined,
+        adopAgencyTown: undefined,
+        adopAgencyPostcode: undefined,
+        adopAgencyOrLaContactEmail: undefined,
+        hasAnotherAdopAgencyOrLA: undefined,
+        childLocalAuthority: undefined,
+        childLocalAuthorityEmail: undefined,
+        childSocialWorkerName: undefined,
+        childSocialWorkerPhoneNumber: undefined,
+        childSocialWorkerEmail: undefined,
+        applicantLocalAuthority: undefined,
+        applicantLocalAuthorityEmail: undefined,
+        applicantSocialWorkerName: undefined,
+        applicantSocialWorkerPhoneNumber: undefined,
+        applicantSocialWorkerEmail: undefined,
       },
     },
   ])('set unreachable answers to null if condition met', ({ expected, ...formData }) => {
     expect(toApiFormat(formData as Partial<Case>)).toMatchObject(expected);
   });
 
-  test('formatApplicant1CannotUploadDocuments should return array', () => {
+  test('formatApplicant1CannotUploadDocuments & formatLaCannotUploadDocuments should return array', () => {
     expect(formatApplicant1CannotUploadDocuments({ applicant1CannotUploadDocuments: undefined })).toEqual([undefined]);
+    expect(formatLaCannotUploadDocuments({ laCannotUploadDocuments: undefined })).toEqual([undefined]);
     expect(
       formatApplicant1CannotUploadDocuments({ applicant1CannotUploadDocuments: [DocumentType.APPLICATION] })
     ).toEqual([DocumentType.APPLICATION]);
+    expect(formatLaCannotUploadDocuments({ laCannotUploadDocuments: [DocumentType.APPLICATION] })).toEqual([
+      DocumentType.APPLICATION,
+    ]);
   });
 });

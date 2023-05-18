@@ -1,46 +1,57 @@
 import { CaseWithId } from '../../../app/case/case';
-import { PlacementOrder } from '../../../app/case/definition';
+import { SiblingPOType, SiblingRelationships } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { SIBLING_ORDER_CASE_NUMBER, SIBLING_ORDER_CHECK_YOUR_ANSWERS, SIBLING_ORDER_TYPE } from '../../../steps/urls';
+import {
+  LA_PORTAL_SIBLING_ORDER_CASE_NUMBER,
+  LA_PORTAL_SIBLING_ORDER_CHECK_YOUR_ANSWERS,
+  LA_PORTAL_SIBLING_ORDER_TYPE,
+  LA_PORTAL_SIBLING_RELATION,
+} from '../../../steps/urls';
 
 const placementOrderListItems = (userCase: Partial<CaseWithId>, content) => {
   const sibling = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
-  const order = sibling?.siblingPlacementOrders?.find(item => {
-    if ((item as PlacementOrder).placementOrderId === userCase.selectedSiblingPoId) {
-      return true;
-    }
-  });
 
-  const queryParams = `?change=${sibling?.siblingId}/${
-    (order as PlacementOrder).placementOrderId
-  }&returnUrl=${SIBLING_ORDER_CHECK_YOUR_ANSWERS}`;
+  const queryParams = `?change=${sibling?.siblingId}&returnUrl=${LA_PORTAL_SIBLING_ORDER_CHECK_YOUR_ANSWERS}`;
 
   return [
     {
-      key: { text: content.siblingName },
-      value: { text: `${sibling?.siblingFirstName || ''} ${sibling?.siblingLastNames || ''}` },
-    },
-    {
-      key: { text: content.orderType },
-      value: { text: (order as PlacementOrder).placementOrderType },
+      key: { text: content.relationship },
+      value: { text: (sibling?.siblingRelation && content.siblingRelation[sibling.siblingRelation]) || '' },
       actions: {
         items: [
           {
-            href: `${SIBLING_ORDER_TYPE}${queryParams}`,
+            href: `${LA_PORTAL_SIBLING_RELATION}${queryParams}`,
             text: content.change,
-            visuallyHiddenText: content.orderType,
+            visuallyHiddenText: `${content.relationship} ${
+              (sibling?.siblingRelation && content.siblingRelation[sibling.siblingRelation]) || ''
+            }`,
+          },
+        ],
+      },
+    },
+    {
+      key: { text: content.orderType },
+      value: { text: (sibling?.siblingPoType && content.siblingPOType[sibling.siblingPoType]) || '' },
+      actions: {
+        items: [
+          {
+            href: `${LA_PORTAL_SIBLING_ORDER_TYPE}${queryParams}`,
+            text: content.change,
+            visuallyHiddenText: `${content.orderType} ${
+              (sibling?.siblingPoType && content.siblingPOType[sibling.siblingPoType]) || ''
+            }`,
           },
         ],
       },
     },
     {
       key: { text: content.orderNumber },
-      value: { text: (order as PlacementOrder).placementOrderNumber },
+      value: { text: sibling?.siblingPoNumber },
       actions: {
         items: [
           {
-            href: `${SIBLING_ORDER_CASE_NUMBER}${queryParams}`,
+            href: `${LA_PORTAL_SIBLING_ORDER_CASE_NUMBER}${queryParams}`,
             text: content.change,
             visuallyHiddenText: content.orderNumber,
           },
@@ -52,23 +63,38 @@ const placementOrderListItems = (userCase: Partial<CaseWithId>, content) => {
 
 const getTitle = (userCase: Partial<CaseWithId>, content): string => {
   const sibling = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
-  const placementOrder = (sibling?.siblingPlacementOrders as PlacementOrder[])?.find(
-    item => item.placementOrderId === userCase.selectedSiblingPoId
-  );
 
-  return `${placementOrder?.placementOrderType || ''} ${content.for} details`;
+  return `${!sibling?.siblingPoType ? 'Order' : content.siblingPOType[sibling?.siblingPoType]} ${content.for} ${
+    !sibling?.siblingRelation ? 'sibling' : content.siblingRelation[sibling?.siblingRelation].toLowerCase()
+  }`;
 };
 
 const en = content => {
   const enContent = {
     section: 'Sibling details',
-    for: '',
-    siblingName: 'Sibling name',
+    for: 'for',
+    relationship: 'Relationship',
     orderType: 'Type of order',
     orderNumber: 'Order case or serial number',
     change: 'Change',
     continue: 'Continue',
     language: content.language,
+    siblingRelation: {
+      [SiblingRelationships.SISTER]: 'Sister',
+      [SiblingRelationships.STEP_SISTER]: 'Step-sister',
+      [SiblingRelationships.HALF_SISTER]: 'Half-sister',
+      [SiblingRelationships.BROTHER]: 'Brother',
+      [SiblingRelationships.STEP_BROTHER]: 'Step-brother',
+      [SiblingRelationships.HALF_BROTHER]: 'Half-brother',
+    },
+    siblingPOType: {
+      [SiblingPOType.ADOPTION_ORDER]: 'Adoption order',
+      [SiblingPOType.CARE_ORDER]: 'Care order',
+      [SiblingPOType.CHILD_ARRANGEMENT_ORDER]: 'Child arrangements order',
+      [SiblingPOType.PLACEMENT_ORDER]: 'Placement order',
+      [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order',
+      [SiblingPOType.OTHER]: 'Other',
+    },
   };
   return {
     ...enContent,
@@ -80,13 +106,29 @@ const en = content => {
 const cy: typeof en = content => {
   const cyContent = {
     section: 'Manylion y brawd/chwaer',
-    for: '',
-    siblingName: 'Enw’r brawd/chwaer',
+    for: 'ar gyfer',
+    relationship: 'Perthynas',
     orderType: 'Math o neuchymyn',
     orderNumber: 'Rhif cyfresol neu rif yr achos ar y gorchymyn',
     change: 'Newid',
     continue: 'Parhau',
     language: content.language,
+    siblingRelation: {
+      [SiblingRelationships.SISTER]: 'Chwaer',
+      [SiblingRelationships.STEP_SISTER]: 'Llyschwaer',
+      [SiblingRelationships.HALF_SISTER]: 'Hanner chwaer',
+      [SiblingRelationships.BROTHER]: 'Brawd',
+      [SiblingRelationships.STEP_BROTHER]: 'Llysfrawd',
+      [SiblingRelationships.HALF_BROTHER]: 'Hanner brawd',
+    },
+    siblingPOType: {
+      [SiblingPOType.ADOPTION_ORDER]: 'Gorchymyn Mabwysiadu',
+      [SiblingPOType.CARE_ORDER]: 'Gorchymyn Gofal',
+      [SiblingPOType.CHILD_ARRANGEMENT_ORDER]: 'Gorchymyn trefniadau plant',
+      [SiblingPOType.PLACEMENT_ORDER]: 'Gorchymyn Lleoli',
+      [SiblingPOType.SUPERVIS_ORDER]: 'Gorchymyn Goruchwylio',
+      [SiblingPOType.OTHER]: 'Arall',
+    },
   };
   return {
     ...cyContent,

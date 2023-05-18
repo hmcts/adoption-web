@@ -15,6 +15,7 @@ const en = (nationalityContent: PageContent) => ({
     childrenNationality: {
       required: "Select a nationality or 'Not sure'",
       notSureViolation: "Select a nationality or 'Not sure'",
+      addButtonNotClicked: "Select 'Add' before you continue",
     },
     addAnotherNationality: (nationalityContent.errors as Record<string, unknown>).addAnotherNationality,
   },
@@ -28,6 +29,7 @@ const cy: typeof en = (nationalityContent: PageContent) => ({
     childrenNationality: {
       required: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
       notSureViolation: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
+      addButtonNotClicked: 'Dewiswch ‘Ychwanegu’ cyn ichi symud ymlaen',
     },
     addAnotherNationality: (nationalityContent.errors as Record<string, unknown>).addAnotherNationality,
   },
@@ -36,7 +38,7 @@ const cy: typeof en = (nationalityContent: PageContent) => ({
 
 export const form: FormContent = {
   ...nationalityForm,
-  fields: userCase => nationalityFields(userCase, FieldPrefix.CHILDREN),
+  fields: userCase => nationalityFields(userCase, FieldPrefix.CHILDREN, currentLanguage),
 };
 
 const languages = {
@@ -52,3 +54,5 @@ export const generateContent: TranslationFn = content => {
     ...translations,
   };
 };
+
+const currentLanguage: string = generateContent[1];

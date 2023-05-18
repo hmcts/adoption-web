@@ -1,18 +1,21 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Case, FieldPrefix } from '../../../app/case/case';
-import { LanguagePreference } from '../../../app/case/definition';
 import { PageContent } from '../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../app/form/Form';
 import { atLeastOneFieldIsChecked, isFieldFilledIn, notSureViolation } from '../../../app/form/validation';
-import { BIRTH_FATHER_NATIONALITY, BIRTH_MOTHER_NATIONALITY, CHILDREN_NATIONALITY } from '../../urls';
+import {
+  LA_PORTAL_BIRTH_FATHER_NATIONALITY,
+  LA_PORTAL_BIRTH_MOTHER_NATIONALITY,
+  LA_PORTAL_CHILD_NATIONALITY,
+} from '../../urls';
 import { CommonContent } from '../common.content';
 import { mapSummaryListContent } from '../functions/mapSummaryListContent';
 
 import { defaultButtons } from './common/default-buttons';
 
 const en = (fieldPrefix: FieldPrefix) => ({
-  label: 'What is your nationality?',
-  hint: 'Select all options that are relevant to you.',
+  title: 'What is their nationality?',
+  hint: 'Select all options that are relevant.',
   british: 'British',
   britishSubtext: 'including English, Scottish, Welsh and Northern Irish',
   irish: 'Irish',
@@ -28,13 +31,13 @@ const en = (fieldPrefix: FieldPrefix) => ({
       notSureViolation: "Select a nationality or 'Not sure'",
     },
     addAnotherNationality: {
-      required: 'This is not a valid entry',
+      required: 'Enter a country name',
     },
   },
 });
 
 const cy: typeof en = (fieldPrefix: FieldPrefix) => ({
-  label: 'Beth yw eich cenedligrwydd?',
+  title: 'Beth yw eu cenedligrwydd?',
   hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
   british: 'Prydeinig',
   britishSubtext: 'gan gynnwys Saesneg, Albanaidd, Cymraeg a Gwyddelig Gogledd Iwerddon',
@@ -57,17 +60,18 @@ const cy: typeof en = (fieldPrefix: FieldPrefix) => ({
 });
 
 const urls = {
-  [FieldPrefix.CHILDREN]: CHILDREN_NATIONALITY,
-  [FieldPrefix.BIRTH_FATHER]: BIRTH_FATHER_NATIONALITY,
-  [FieldPrefix.BIRTH_MOTHER]: BIRTH_MOTHER_NATIONALITY,
+  [FieldPrefix.CHILDREN]: LA_PORTAL_CHILD_NATIONALITY,
+  [FieldPrefix.BIRTH_FATHER]: LA_PORTAL_BIRTH_FATHER_NATIONALITY,
+  [FieldPrefix.BIRTH_MOTHER]: LA_PORTAL_BIRTH_MOTHER_NATIONALITY,
 };
 
-export const nationalityFields = (userCase: Partial<Case>, fieldPrefix: FieldPrefix): FormFields => ({
+export const nationalityFields = (userCase: Partial<Case>, fieldPrefix: FieldPrefix, language: string): FormFields => ({
   [`${fieldPrefix}Nationality`]: {
     type: 'checkboxes',
-    label: l => l.label,
+    label: l => l.title,
     labelSize: 'l',
     hint: l => l.hint,
+    labelHidden: true,
     validator: value =>
       [FieldPrefix.APPLICANT1, FieldPrefix.APPLICANT2].includes(fieldPrefix)
         ? atLeastOneFieldIsChecked(value)
@@ -96,7 +100,7 @@ export const nationalityFields = (userCase: Partial<Case>, fieldPrefix: FieldPre
                   values: [],
                   rows: mapSummaryListContent(
                     userCase[`${fieldPrefix}AdditionalNationalities`]!,
-                    [userCase.applicant1LanguagePreference === LanguagePreference.WELSH ? 'Dileu' : 'Remove'],
+                    [language === 'cy' ? 'Dileu' : 'Remove'],
                     urls[fieldPrefix]
                   ),
                 },
@@ -168,5 +172,5 @@ const languages = {
 
 export const generateContent = (content: CommonContent, fieldPrefix: FieldPrefix): PageContent => ({
   ...languages[content.language](fieldPrefix),
-  form: { ...form, fields: nationalityFields(content.userCase!, fieldPrefix) },
+  form: { ...form, fields: nationalityFields(content.userCase!, fieldPrefix, content.language) },
 });

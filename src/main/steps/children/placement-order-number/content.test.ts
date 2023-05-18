@@ -10,7 +10,7 @@ jest.mock('../../../app/form/validation');
 const enContent = {
   section: "The child's details",
   label: 'What is the serial or case number on the placement order?',
-  hint: "This is on the top right of the order. Ask the adoption agency or social worker if you're not sure.",
+  hint: 'This is on the top right of the order.',
   errors: {
     placementOrderNumber: {
       required: 'Enter the serial or case number',
@@ -21,7 +21,7 @@ const enContent = {
 const cyContent = {
   section: 'Manylion y plentyn',
   label: 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn lleoli?',
-  hint: 'Mae hwn wedi’i nodi yng nghornel dde uchaf y gorchymyn. Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
+  hint: 'Mae hwn wedi’i nodi yng nghornel dde uchaf y gorchymyn.',
   errors: {
     placementOrderNumber: {
       required: 'Nac ydwdwch y rhif cyfresol neu rif yr achos',
@@ -54,12 +54,9 @@ describe('children > placement-order-number > content', () => {
     const placementOrderNumberField = fields.placementOrderNumber as FormOptions;
     expect(placementOrderNumberField.type).toBe('text');
     expect(placementOrderNumberField.classes).toBe('govuk-label govuk-input--width-10');
-    expect((placementOrderNumberField.label as Function)(generatedContent)).toBe(
-      'What is the serial or case number on the placement order?'
-    );
-    expect(((placementOrderNumberField as FormInput).hint as Function)(generatedContent)).toBe(
-      "This is on the top right of the order. Ask the adoption agency or social worker if you're not sure."
-    );
+    expect((placementOrderNumberField.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((placementOrderNumberField.hint as Function)(generatedContent)).toBe(enContent.hint);
+
     expect((placementOrderNumberField as FormInput).value).toBe('1234');
     expect(placementOrderNumberField.labelSize).toBe('l');
     expect(placementOrderNumberField.attributes).toEqual({ spellcheck: false });

@@ -2,15 +2,15 @@ import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
+import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
-  section: "Other parent's details",
-  label: 'Do you have the address of the other person with parental responsibility for the child?',
+  section: SECTION,
+  title: 'Do you have the address of the other person with parental responsibility for the child?',
   moreDetails: "Give a reason why the address is not known, for example 'no fixed address'.",
-  hint: "Ask the adoption agency or social worker if you're not sure.",
   errors: {
     otherParentAddressKnown: {
-      required: 'Please select an answer',
+      required: 'Select whether you have the address for the other person with parental responsibility for the child',
     },
     otherParentAddressNotKnownReason: {
       required: 'Provide a reason',
@@ -20,13 +20,12 @@ const en = () => ({
 });
 
 const cy: typeof en = () => ({
-  section: 'Manylion y rhiant arall',
-  label: 'A oes gennych gyfeiriad yr unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn?',
+  section: SECTION_IN_WELSH,
+  title: 'A oes gennych gyfeiriad yr unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn?',
   moreDetails: 'Rhowch reswm pam bod y cyfeiriad yn anhysbys, er enghraifft ‘dim cyfeiriad parhaol’.',
-  hint: 'Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
   errors: {
     otherParentAddressKnown: {
-      required: 'Dewiswch ateb os gwelwch yn dda',
+      required: 'Nodwch a oes gennych gyfeiriad yr unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn',
     },
     otherParentAddressNotKnownReason: {
       required: 'Darparwch reswm',
@@ -40,9 +39,9 @@ export const form: FormContent = {
     otherParentAddressKnown: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.title,
       section: l => l.section,
-      hint: l => l.hint,
+      labelHidden: true,
       values: [
         { label: l => l.yes, value: YesOrNo.YES },
         {

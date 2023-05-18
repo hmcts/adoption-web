@@ -14,34 +14,43 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: "The child's details",
-  label: "What is the child's date of birth?",
+  title: "What is the child's date of birth?",
   hint: "For example, 31 3 2012. This should be on their birth certificate. Ask the adoption agency or social worker if you're not sure.",
   errors: {
     childrenDateOfBirth: {
       required: 'Enter their date of birth',
+      invalidDate: 'Date of birth must be a real date',
+      invalidDateOver18: 'Child is 18 or over and cannot be adopted',
       incompleteDay: 'Date of birth must include a day',
       incompleteMonth: 'Date of birth must include a month',
       incompleteYear: 'Date of birth must include a year',
-      invalidDate: 'Date of birth must be a real date',
       invalidDateInFuture: 'Date of birth must be in the past',
-      invalidDateOver18: 'Child is 18 or over and cannot be adopted',
+      incompleteDayAndMonth: 'Date of birth must include a day and month',
+      incompleteDayAndYear: 'Date of birth must include a day and year',
+      incompleteMonthAndYear: 'Date of birth must include a month and year ',
     },
   },
 };
 
 const cyContent = {
   section: 'Manylion y plentyn',
-  label: 'Beth yw dyddiad geni’r plentyn?',
-  hint: 'Er enghraifft, 31 3 2012. Dylai hyn fod ar eu tystysgrif geni Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
+  title: 'Beth yw dyddiad geni’r plentyn?',
+  hint: 'Er enghraifft, 31 3 2012. Dylai hyn fod wedi’i nodi ar eu tystysgrif geni. Holwch gyda’r asiantaeth fabwysiadu neu’r gweithiwr cymdeithasol os nad ydych yn siŵr.',
+  day: '',
+  month: '',
+  year: '',
   errors: {
     childrenDateOfBirth: {
-      required: 'Nac ydwdwch eu dyddiad geni',
+      required: 'Rhowch eu dyddiad geni',
+      invalidDate: 'Mae’n rhaid i’r dyddiad geni fod yn ddyddiad go iawn',
+      invalidDateOver18: 'Mae’r plentyn yn 18 oed neu’n hŷn ac ni ellir ei fabwysiadu',
       incompleteDay: 'Rhaid i’r dyddiad geni gynnwys diwrnod',
       incompleteMonth: 'Rhaid i’r dyddiad geni gynnwys mis',
       incompleteYear: 'Rhaid i’r dyddiad geni gynnwys blwyddyn',
-      invalidDate: 'Rhaid i’r dyddiad geni fod yn ddyddiad dilys',
-      invalidDateInFuture: 'Rhaid i’r dyddiad geni fod yn y gorffennol',
-      invalidDateOver18: 'Mae’r plentyn dros 18 oed ac ni ellir ei fabwysiadu',
+      invalidDateInFuture: 'Rhaid i’ch dyddiad geni fod yn y gorffennol',
+      incompleteDayAndMonth: 'Rhaid i’r dyddiad geni gynnwys diwrnod a mis',
+      incompleteDayAndYear: 'Rhaid i’r dyddiad geni gynnwys diwrnod a blwyddyn',
+      incompleteMonthAndYear: 'Rhaid i’r dyddiad geni gynnwys mis a blwyddyn',
     },
   },
 };
@@ -70,7 +79,7 @@ describe('children > date-of-birth > content', () => {
     const childrenDateOfBirthField = fields.childrenDateOfBirth as FormOptions;
     expect(childrenDateOfBirthField.type).toBe('date');
     expect(childrenDateOfBirthField.classes).toBe('govuk-date-input');
-    expect((childrenDateOfBirthField.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((childrenDateOfBirthField.label as Function)(generatedContent)).toBe(enContent.title);
     expect(((childrenDateOfBirthField as FormInput).hint as Function)(generatedContent)).toBe(enContent.hint);
     expect(childrenDateOfBirthField.labelSize).toBe('l');
     expect(childrenDateOfBirthField.attributes?.spellcheck).toBe(false);

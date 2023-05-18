@@ -44,7 +44,7 @@ export class Form {
 
   private getErrorsFromField(body: Partial<Case>, id: string, field: FormField): FormError[] {
     const errorType = field.validator && field.validator(body[id], body);
-    const errors: FormError[] = errorType ? [{ errorType, propertyName: id }] : [];
+    const errors: FormError[] = errorType ? [{ errorType, propertyName: id, id: field.id }] : [];
 
     // if there are checkboxes or options, check them for errors
     if (isFormOptions(field)) {
@@ -127,6 +127,7 @@ export interface FormContent {
     text: Label;
     classes?: string;
   };
+  hideContactHelpSection?: boolean;
   fields: FormFields | FormFieldsFn;
 }
 
@@ -184,10 +185,12 @@ export interface CsrfField {
 export type FormError = {
   propertyName: string;
   errorType: string;
+  id?: string;
 };
 
 interface CaseWithFormData extends CaseWithId {
   _csrf: string;
+  saveAndRelogin?: string;
   saveAndSignOut?: string;
   saveBeforeSessionTimeout?: string;
   sendToApplicant2ForReview?: string;

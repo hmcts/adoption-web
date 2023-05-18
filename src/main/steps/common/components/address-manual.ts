@@ -3,10 +3,10 @@ import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn, isInvalidPostcode } from '../../../app/form/validation';
 
 const en = () => ({
-  addressLine1: 'Building and street <span class="govuk-visually-hidden">line 1 of 2</span>',
-  addressLine2: '<span class="govuk-visually-hidden">Building and street line 2 of 2</span>',
+  addressLine1: 'Address line 1 <span class="govuk-visually-hidden">line 1 of 2</span>',
+  addressLine2: 'Address line 2 (optional) <span class="govuk-visually-hidden">line 2 of 2</span>',
   town: 'Town or city',
-  county: 'County',
+  county: 'County (optional)',
   postcode: 'Postcode',
   enterInternationalAddress: 'Enter an international address',
   errors: {
@@ -17,17 +17,17 @@ const en = () => ({
       required: 'Enter the town or city',
     },
     addressPostcode: {
-      required: 'Enter the postcode',
-      invalid: 'Enter a real postcode',
+      required: 'Enter a postcode, like AA1 1AA',
+      invalid: 'Enter a postcode, like AA1 1AA',
     },
   },
 });
 
 const cy = () => ({
-  addressLine1: 'Adeilad a stryd <span class="govuk-visually-hidden">llinell 1 o 2</span>',
-  addressLine2: '<span class="govuk-visually-hidden">Adeilad a stryd llinell 2 o 2</span>',
+  addressLine1: 'Llinell cyfeiriad 1 <span class="govuk-visually-hidden">llinell 1 o 2</span>',
+  addressLine2: 'Llinell cyfeiriad 2 (dewisol) <span class="govuk-visually-hidden">llinell 2 o 2</span>',
   town: 'Tref neu ddinas',
-  county: 'Sir',
+  county: 'Sir (dewisol)',
   postcode: 'Cod post',
   enterInternationalAddress: 'Nac ydwdwch gyfeiriad rhyngwladol',
   errors: {
@@ -39,7 +39,7 @@ const cy = () => ({
     },
     addressPostcode: {
       required: 'Nac ydwdwch y cod post',
-      invalid: 'Nac ydwdwch god post dilys',
+      invalid: 'Nodwch god post go iawn',
     },
   },
 });

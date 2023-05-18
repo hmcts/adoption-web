@@ -10,12 +10,13 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: "Birth mother's details",
-  label: "Is the child's birth mother still alive?",
+  title: "Is the child's birth mother still alive?",
   moreDetails:
     "Provide more details. For example, 'the birth mother is uncontactable'. Your adoption agency or social worker can help you to complete this section.",
+  hint: 'If this person has died, you will need to provide the death certificate.',
   errors: {
     birthMotherStillAlive: {
-      required: 'Please answer the question',
+      required: 'Select whether the birth mother is alive',
     },
     birthMotherNotAliveReason: {
       required: 'Enter more detail',
@@ -25,12 +26,13 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y fam fiolegol',
-  label: 'A yw mam fiolegol y plentyn dal yn fyw?',
+  title: 'A yw mam fiolegol y plentyn dal yn fyw?',
   moreDetails:
     'Darparwch fwy o fanylion. Er enghraifft, ‘nid oes modd cysylltu â’r fam fiolegol’. Gall eich asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol eich helpu i lenwi’r rhan hon. ',
+  hint: "Os yw’r unigolyn hwn wedi marw, bydd angen i chi ddarparu'r dystysgrif marwolaeth.",
   errors: {
     birthMotherStillAlive: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: 'Nodwch a yw’r fam fiolegol yn fyw.',
     },
     birthMotherNotAliveReason: {
       required: 'Rhowch fwy o fanylion',
@@ -63,12 +65,16 @@ describe('birth-mother > still-alive > content', () => {
     const field = fields.birthMotherStillAlive as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
-    expect((field.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((field.label as Function)(generatedContent)).toBe(enContent.title);
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesNoNotsure.YES);
     expect((field.values[1].label as Function)(commonContent)).toBe(commonContent.no);
     expect(field.values[1].value).toBe(YesNoNotsure.NO);
+    const hint1 = field.values[1].subFields!.hint1;
+    expect(hint1.type).toBe('label');
+    expect((hint1.label as Function)(generatedContent)).toBe(enContent.hint);
+
     expect((field.values[2].label as Function)(commonContent)).toBe(commonContent.notSure);
     expect(field.values[2].value).toBe(YesNoNotsure.NOT_SURE);
 

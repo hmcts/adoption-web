@@ -1,0 +1,24 @@
+{% from "govuk/components/panel/macro.njk" import govukPanel %}
+{% extends "common/page.njk" %}
+
+{% block content %}
+    <div class="govuk-width-container">
+        <div class="govuk-grid-row">
+            <div class="govuk-grid-column-two-thirds">
+                    <h2 class="govuk-heading-l">{{ title }}</h2>
+                    <p class="govuk-body">{{ line1 }}</p>
+                    <p class="govuk-body">{{ line2 }}</p>
+                    <p class="govuk-body">{{ line3 }}</p>
+                    <p class="govuk-body">{{ contactInformation }}</p>
+                    <p class="govuk-body">{{ telephoneNumber }}</p>
+                    <p class="govuk-body">{{ emailAddress }}</p>
+                    <p class="govuk-body">{{ openingHours }}</p>
+                    <p class="govuk-body">
+                    {% block contactUs %}
+                      {% include "common/form/contactForHelp.njk"%}
+                    {% endblock %}
+                    </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

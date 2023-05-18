@@ -1,4 +1,5 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
+import { SiblingPOType } from '../../../app/case/definition';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
@@ -9,20 +10,45 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: 'Sibling details',
-  label: 'What type of order is it?',
+  title: 'What type of order is it?',
+  hint: 'This information makes it easier for the court to link past court orders.',
+  adoptionOrder: 'Adoption order',
+  careOrder: 'Care order',
+  childArrangementOrder: 'Child arrangements order',
+  childArrangementOrderHint: 'Child arrangements includes residency, contact, specific issue and prohibited steps.',
+  placementOrder: 'Placement order',
+  superVisOrder: 'Supervision order',
+  other: 'Other',
+  placementOtherType: 'Add a different type of order',
   errors: {
-    placementOrderType: {
-      required: 'Please answer the question',
+    selectedSiblingPoType: {
+      required: 'Select the order type',
+    },
+    selectedSiblingOtherPlacementOrderType: {
+      required: 'Enter an order type',
     },
   },
 };
 
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
-  label: 'Pa fath o neuchymyn ydyw?',
+  title: 'Pa fath o orchymyn ydyw?',
+  hint: "Mae'r wybodaeth hon yn ei gwneud hi'n haws i'r llys gysylltu gorchmynion llys yn y gorffennol.",
+  adoptionOrder: 'Gorchymyn Mabwysiadu',
+  careOrder: 'Gorchymyn Gofal',
+  childArrangementOrder: 'Gorchymyn trefniadau plant',
+  childArrangementOrderHint:
+    'Mae trefniadau plant yn cynnwys cyfnod preswyl, cyswllt, mater penodol a chamau gwaharddedig.',
+  placementOrder: 'Gorchymyn Lleoli',
+  superVisOrder: 'Gorchymyn Goruchwylio',
+  other: 'Arall',
+  placementOtherType: 'Ychwanegu math gwahanol o orchymyn',
   errors: {
-    placementOrderType: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+    selectedSiblingPoType: {
+      required: 'Dewiswch y math o orchymyn',
+    },
+    selectedSiblingOtherPlacementOrderType: {
+      required: 'Nodwch y math o orchymyn',
     },
   },
 };
@@ -35,11 +61,10 @@ describe('sibling > placement-order-type > content', () => {
       siblings: [
         {
           siblingId: 'MOCK_SIBLING_ID',
-          siblingPlacementOrders: [{ placementOrderId: 'MOCK_PLACEMENT_ORDER_ID', placementOrderType: 'MOCK_TYPE' }],
+          siblingPoType: SiblingPOType.ADOPTION_ORDER,
         },
       ],
       selectedSiblingId: 'MOCK_SIBLING_ID',
-      selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
     },
   } as CommonContent;
 
@@ -51,18 +76,36 @@ describe('sibling > placement-order-type > content', () => {
     languageAssertions('cy', cyContent, generateContent);
   });
 
-  test('should contain placementOrderType field', () => {
+  test('should contain siblingPoType field', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const field = fields.placementOrderType as FormOptions;
-    expect(field.type).toBe('text');
-    expect(field.classes).toBe('govuk-label');
-    expect((field.label as Function)(generatedContent)).toBe(enContent.label);
-    expect(field.labelSize).toBe('l');
+    const field = fields.selectedSiblingPoType as FormOptions;
+    expect(field.type).toBe('radios');
+    expect(field.classes).toBe('govuk-radios');
+    expect((field.label as Function)(generatedContent)).toBe(enContent.title);
+    expect((field.hint as Function)(generatedContent)).toBe(enContent.hint);
+    expect((field.values[0].label as Function)(generatedContent)).toBe(enContent.adoptionOrder);
+    expect(field.values[0].value).toBe(SiblingPOType.ADOPTION_ORDER);
+    expect((field.values[1].label as Function)(generatedContent)).toBe(enContent.careOrder);
+    expect(field.values[1].value).toBe(SiblingPOType.CARE_ORDER);
+    expect((field.values[2].label as Function)(generatedContent)).toBe(enContent.childArrangementOrder);
+    expect(field.values[2].value).toBe(SiblingPOType.CHILD_ARRANGEMENT_ORDER);
+    expect((field.values[3].label as Function)(generatedContent)).toBe(enContent.placementOrder);
+    expect(field.values[3].value).toBe(SiblingPOType.PLACEMENT_ORDER);
+    expect((field.values[4].label as Function)(generatedContent)).toBe(enContent.superVisOrder);
+    expect(field.values[4].value).toBe(SiblingPOType.SUPERVIS_ORDER);
+    expect((field.values[5].label as Function)(generatedContent)).toBe(enContent.other);
+    expect(field.values[5].value).toBe(SiblingPOType.OTHER);
     expect(field.attributes).toEqual({ spellcheck: false });
 
     expect(field.validator).toBe(isFieldFilledIn);
+
+    const placementOrderOtherType = field.values[5].subFields!.selectedSiblingOtherPlacementOrderType;
+    expect(placementOrderOtherType.type).toBe('text');
+    expect((placementOrderOtherType.label as Function)(generatedContent)).toBe(enContent.placementOtherType);
+    expect(placementOrderOtherType.labelSize).toBe(null);
+    expect(placementOrderOtherType.validator).toBe(isFieldFilledIn);
   });
 
   test('should contain submit button', () => {

@@ -1,4 +1,4 @@
-import { DOCUMENT_MANAGER } from '../../../steps/urls';
+import { DOCUMENT_MANAGER, LA_DOCUMENT_MANAGER } from '../../../steps/urls';
 import { getById, hidden } from '../selectors';
 
 import type { UploadedFiles } from './UploadedFiles';
@@ -8,6 +8,8 @@ const filesUploadedEl = getById('filesUploaded');
 const content = JSON.parse(getById('uploadContent')?.textContent || '{}');
 
 export const updateFileList = (uploadedFiles: UploadedFiles): void => {
+  const isLaPortal = location.href.includes('la-portal');
+  const url = isLaPortal ? LA_DOCUMENT_MANAGER : DOCUMENT_MANAGER;
   if (noFilesUploadedEl) {
     if (uploadedFiles.length) {
       noFilesUploadedEl.classList.add(hidden);
@@ -31,10 +33,11 @@ export const updateFileList = (uploadedFiles: UploadedFiles): void => {
       );
       filenameEl.textContent = file.name;
 
-      if (content.isAmendableStates || content.isClarificationAmendableState) {
+      if (content.isAmendableStates || content.isClarificationAmendableState || isLaPortal) {
         const deleteEl = document.createElement('a');
+        deleteEl.classList.add('govuk-link');
         deleteEl.classList.add('govuk-link--no-visited-state');
-        deleteEl.href = `${DOCUMENT_MANAGER}/delete/${i++}`;
+        deleteEl.href = `${url}/delete/${i++}`;
         deleteEl.textContent = content.delete;
         filenameEl.appendChild(deleteEl);
       }

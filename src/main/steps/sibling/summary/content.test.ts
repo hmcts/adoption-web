@@ -1,5 +1,6 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
-import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
+import { SiblingPOType, SiblingRelationships } from '../../../app/case/definition';
+import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -11,16 +12,30 @@ const enContent = {
   section: 'Sibling details',
   title: 'Orders already in place for siblings and half-siblings',
   sibling: 'Sibling',
-  placementOrder: 'Placement Order',
+  siblingRelation: {
+    [SiblingRelationships.SISTER]: 'Sister',
+    [SiblingRelationships.STEP_SISTER]: 'Step-sister',
+    [SiblingRelationships.HALF_SISTER]: 'Half-sister',
+    [SiblingRelationships.BROTHER]: 'Brother',
+    [SiblingRelationships.STEP_BROTHER]: 'Step-brother',
+    [SiblingRelationships.HALF_BROTHER]: 'Half-brother',
+  },
+  placementOrder: 'Placement order',
+  siblingPOType: {
+    [SiblingPOType.ADOPTION_ORDER]: 'Adoption order',
+    [SiblingPOType.CARE_ORDER]: 'Care order',
+    [SiblingPOType.CHILD_ARRANGEMENT_ORDER]: 'Child arrangements order',
+    [SiblingPOType.PLACEMENT_ORDER]: 'Placement order',
+    [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order',
+    [SiblingPOType.OTHER]: 'Other',
+  },
   incomplete: 'incomplete',
   change: 'Change',
   remove: 'Remove',
-  changeName: 'Change name',
-  label: 'Do you want to add another order for a sibling or half-sibling?',
-  hint: 'For example, a care order or supervision order. Your adoption agency or social worker can provide this information for you.',
+  label: 'Do you want to add another order for the same or another sibling?',
   errors: {
     addAnotherSiblingPlacementOrder: {
-      required: 'Please select an answer',
+      required: 'Select whether you want to add another order for the same or another sibling',
     },
   },
 };
@@ -29,16 +44,31 @@ const cyContent = {
   section: 'Manylion y brawd/chwaer',
   title: 'Gorchmynion eisoes mewn lle ar gyfer brodyr/chwiorydd a hanner brodyr/hanner chwiorydd',
   sibling: 'Brawd/chwaer',
+  siblingRelation: {
+    [SiblingRelationships.SISTER]: 'Chwaer',
+    [SiblingRelationships.STEP_SISTER]: 'Llyschwaer',
+    [SiblingRelationships.HALF_SISTER]: 'Hanner chwaer',
+    [SiblingRelationships.BROTHER]: 'Brawd',
+    [SiblingRelationships.STEP_BROTHER]: 'Llysfrawd',
+    [SiblingRelationships.HALF_BROTHER]: 'Hanner brawd',
+  },
   placementOrder: 'Gorchymyn Lleoli',
+  siblingPOType: {
+    [SiblingPOType.ADOPTION_ORDER]: 'Gorchymyn Mabwysiadu',
+    [SiblingPOType.CARE_ORDER]: 'Gorchymyn Gofal',
+    [SiblingPOType.CHILD_ARRANGEMENT_ORDER]: 'Gorchymyn trefniadau plant',
+    [SiblingPOType.PLACEMENT_ORDER]: 'Gorchymyn Lleoli',
+    [SiblingPOType.SUPERVIS_ORDER]: 'Gorchymyn Goruchwylio',
+    [SiblingPOType.OTHER]: 'Arall',
+  },
   incomplete: 'anghyflawn',
   change: 'Newid',
   remove: 'Dileu',
-  changeName: 'Newid enw',
-  label: 'A ydych eisiau ychwanegu gorchymyn arall ar gyfer brawd/chwaer neu hanner frawd/hanner chwaer?',
-  hint: 'Er enghraifft, gorchymyn gofal neu neuchymyn goruchwylio. Gall eich gweithiwr cymdeithasol neu’ch asiantaeth fabwysiadau ddarparu’r wybodaeth hon ichi.',
+  label: 'A ydych eisiau ychwanegu gorchymyn arall ar gyfer yr un brawd/chwaer neu frawd/chwaer arall?',
   errors: {
     addAnotherSiblingPlacementOrder: {
-      required: 'Dewiswch ateb os gwelwch yn dda',
+      required:
+        'Nodwch a oes arnoch eisiau ychwanegu gorchymyn arall ar gyfer yr un brawd/chwaer neu frawd/chwaer arall',
     },
   },
 };
@@ -51,14 +81,9 @@ describe('sibling > placement-order-summary > content', () => {
       addAnotherSiblingPlacementOrder: 'Yes',
       siblings: [
         {
-          siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
-          siblingLastNames: 'MOCK_SIBLING_LAST_NAME',
-          siblingPlacementOrders: [
-            {
-              placementOrderId: 'MOCK_ID',
-              placementOrderNumber: 'MOCK_NUMBER',
-            },
-          ],
+          siblingId: 'MOCK_SIBLING_ID',
+          siblingRelation: SiblingRelationships.SISTER,
+          siblingPoNumber: 'MOCK_NUMBER',
         },
       ],
     },
@@ -80,7 +105,6 @@ describe('sibling > placement-order-summary > content', () => {
     expect(addAnotherSiblingPlacementOrder.type).toBe('radios');
     expect(addAnotherSiblingPlacementOrder.classes).toBe('govuk-radios govuk-radios--inline');
     expect((addAnotherSiblingPlacementOrder.label as Function)(generatedContent)).toBe(enContent.label);
-    expect(((addAnotherSiblingPlacementOrder as FormInput).hint as Function)(generatedContent)).toBe(enContent.hint);
     expect((addAnotherSiblingPlacementOrder.section as Function)(generatedContent)).toBe(enContent.section);
     expect((addAnotherSiblingPlacementOrder.values[0].label as Function)({ yes: 'Yes' })).toBe('Yes');
     expect((addAnotherSiblingPlacementOrder.values[1].label as Function)({ no: 'No' })).toBe('No');

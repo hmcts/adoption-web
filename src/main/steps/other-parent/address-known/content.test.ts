@@ -1,6 +1,6 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { YesOrNo } from '../../../app/case/definition';
-import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
+import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
@@ -9,13 +9,12 @@ import { generateContent } from './content';
 jest.mock('../../../app/form/validation');
 
 const enContent = {
-  section: "Other parent's details",
-  label: 'Do you have the address of the other person with parental responsibility for the child?',
+  section: "Other person's details",
+  title: 'Do you have the address of the other person with parental responsibility for the child?',
   moreDetails: "Give a reason why the address is not known, for example 'no fixed address'.",
-  hint: "Ask the adoption agency or social worker if you're not sure.",
   errors: {
     otherParentAddressKnown: {
-      required: 'Please select an answer',
+      required: 'Select whether you have the address for the other person with parental responsibility for the child',
     },
     otherParentAddressNotKnownReason: {
       required: 'Provide a reason',
@@ -25,13 +24,12 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y rhiant arall',
-  label: 'A oes gennych gyfeiriad yr unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn?',
+  section: 'Manylion person arall',
+  title: 'A oes gennych gyfeiriad yr unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn?',
   moreDetails: 'Rhowch reswm pam bod y cyfeiriad yn anhysbys, er enghraifft ‘dim cyfeiriad parhaol’.',
-  hint: 'Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
   errors: {
     otherParentAddressKnown: {
-      required: 'Dewiswch ateb os gwelwch yn dda',
+      required: 'Nodwch a oes gennych gyfeiriad yr unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn',
     },
     otherParentAddressNotKnownReason: {
       required: 'Darparwch reswm',
@@ -65,8 +63,7 @@ describe('other-parent > address-known > content', () => {
     const field = fields.otherParentAddressKnown as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
-    expect((field.label as Function)(generatedContent)).toBe(enContent.label);
-    expect(((field as FormInput).hint as Function)(generatedContent)).toBe(enContent.hint);
+    expect((field.label as Function)(generatedContent)).toBe(enContent.title);
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesOrNo.YES);

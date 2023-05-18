@@ -4,6 +4,8 @@ import {
   CHECK_ELIGIBILITY_URL_DOMICILE,
   CHECK_ELIGIBILITY_URL_LIVED_UK,
   CHECK_ELIGIBILITY_URL_MARRIED,
+  CHECK_ELIGIBILITY_URL_MULTIPLE_CHILDREN,
+  CHECK_ELIGIBILITY_URL_MULTIPLE_CHILDREN_DESC,
   CHECK_ELIGIBILITY_URL_UNDER_18,
   CHECK_ELIGIBILITY_URL_UNDER_21,
   INELIGIBLE_TO_ADOPT,
@@ -18,6 +20,7 @@ export enum Sections {
 
 export interface Step {
   url: string;
+  contentDir?: string;
   showInSection?: Sections;
   showInCompleteSection?: Sections;
   excludeFromContinueApplication?: boolean;
@@ -27,6 +30,19 @@ export interface Step {
 export const eligibilitySequence: Step[] = [
   {
     url: START_ELIGIBILITY_URL,
+    showInSection: Sections.Eligibility,
+    getNextStep: () => CHECK_ELIGIBILITY_URL_MULTIPLE_CHILDREN,
+  },
+  {
+    url: CHECK_ELIGIBILITY_URL_MULTIPLE_CHILDREN,
+    showInSection: Sections.Eligibility,
+    getNextStep: data =>
+      data.multipleChildrenEligible === YesOrNo.YES
+        ? CHECK_ELIGIBILITY_URL_MULTIPLE_CHILDREN_DESC
+        : CHECK_ELIGIBILITY_URL_UNDER_18,
+  },
+  {
+    url: CHECK_ELIGIBILITY_URL_MULTIPLE_CHILDREN_DESC,
     showInSection: Sections.Eligibility,
     getNextStep: () => CHECK_ELIGIBILITY_URL_UNDER_18,
   },

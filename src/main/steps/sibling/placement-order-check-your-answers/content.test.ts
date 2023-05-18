@@ -1,5 +1,5 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
-import { PlacementOrder } from '../../../app/case/definition';
+import { SiblingPOType, SiblingRelationships } from '../../../app/case/definition';
 import { FormContent } from '../../../app/form/Form';
 import { CommonContent } from '../../common/common.content';
 
@@ -7,18 +7,50 @@ import { generateContent } from './content';
 
 const enContent = {
   section: 'Sibling details',
-  for: '',
+  for: 'for',
   orderType: 'Type of order',
   orderNumber: 'Order case or serial number',
+  siblingRelation: {
+    [SiblingRelationships.SISTER]: 'Sister',
+    [SiblingRelationships.STEP_SISTER]: 'Step-sister',
+    [SiblingRelationships.HALF_SISTER]: 'Half-sister',
+    [SiblingRelationships.BROTHER]: 'Brother',
+    [SiblingRelationships.STEP_BROTHER]: 'Step-brother',
+    [SiblingRelationships.HALF_BROTHER]: 'Half-brother',
+  },
+  siblingPOType: {
+    [SiblingPOType.ADOPTION_ORDER]: 'Adoption order',
+    [SiblingPOType.CARE_ORDER]: 'Care order',
+    [SiblingPOType.CHILD_ARRANGEMENT_ORDER]: 'Child arrangements order',
+    [SiblingPOType.PLACEMENT_ORDER]: 'Placement order',
+    [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order',
+    [SiblingPOType.OTHER]: 'Other',
+  },
   change: 'Change',
   continue: 'Continue',
 };
 
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
-  for: '',
+  for: 'ar gyfer',
   orderType: 'Math o neuchymyn',
   orderNumber: 'Rhif cyfresol neu rif yr achos ar y gorchymyn',
+  siblingRelation: {
+    [SiblingRelationships.SISTER]: 'Chwaer',
+    [SiblingRelationships.STEP_SISTER]: 'Llyschwaer',
+    [SiblingRelationships.HALF_SISTER]: 'Hanner chwaer',
+    [SiblingRelationships.BROTHER]: 'Brawd',
+    [SiblingRelationships.STEP_BROTHER]: 'Llysfrawd',
+    [SiblingRelationships.HALF_BROTHER]: 'Hanner brawd',
+  },
+  siblingPOType: {
+    [SiblingPOType.ADOPTION_ORDER]: 'Gorchymyn Mabwysiadu',
+    [SiblingPOType.CARE_ORDER]: 'Gorchymyn Gofal',
+    [SiblingPOType.CHILD_ARRANGEMENT_ORDER]: 'Gorchymyn trefniadau plant',
+    [SiblingPOType.PLACEMENT_ORDER]: 'Gorchymyn Lleoli',
+    [SiblingPOType.SUPERVIS_ORDER]: 'Gorchymyn Goruchwylio',
+    [SiblingPOType.OTHER]: 'Arall',
+  },
   change: 'Newid',
   continue: 'Parhau',
 };
@@ -31,19 +63,12 @@ describe('sibling > placement-order-check-your-answers > content', () => {
       siblings: [
         {
           siblingId: 'MOCK_SIBLING_ID',
-          siblingFirstName: 'MOCK_FIRST_NAME',
-          siblingLastNames: 'MOCK_LAST_NAMES',
-          siblingPlacementOrders: [
-            {
-              placementOrderId: 'MOCK_PO_ID',
-              placementOrderType: 'MOCK_TYPE',
-              placementOrderNumber: 'MOCK_NUMBER',
-            },
-          ],
+          siblingRelation: SiblingRelationships.SISTER,
+          siblingPoType: SiblingPOType.ADOPTION_ORDER,
+          siblingPoNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
         },
       ],
       selectedSiblingId: 'MOCK_SIBLING_ID',
-      selectedSiblingPoId: 'MOCK_PO_ID',
     },
   } as CommonContent;
 
@@ -57,60 +82,116 @@ describe('sibling > placement-order-check-your-answers > content', () => {
 
   test.each([
     {
-      firstName: undefined,
-      lastName: undefined,
-      placementOrderType: undefined,
-      expected: { title: '  details', placementOrderType: undefined },
+      siblingId: '',
+      siblingRelation: undefined,
+      siblingPoType: undefined,
+      siblingPoNumber: undefined,
+      expected: {
+        title: ' for ',
+        placementOrderListItems: [
+          {
+            key: { text: 'Relationship' },
+            value: { text: '' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/sibling/relation?change=undefined&returnUrl=/la-portal/sibling/placement-order-check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Relationship ',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Type of order' },
+            value: { text: '' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/sibling/placement-order-type?change=undefined&returnUrl=/la-portal/sibling/placement-order-check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Type of order ',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Order case or serial number' },
+            value: { text: undefined },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/sibling/placement-order-number?change=undefined&returnUrl=/la-portal/sibling/placement-order-check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Order case or serial number',
+                },
+              ],
+            },
+          },
+        ],
+      },
     },
     {
-      firstName: 'MOCK_FIRST_NAME',
-      lastName: 'MOCK_LAST_NAME',
-      placementOrderType: 'MOCK_TYPE',
+      siblingId: 'MOCK_SIBLING_ID',
+      siblingRelation: SiblingRelationships.SISTER,
+      siblingPoType: SiblingPOType.ADOPTION_ORDER,
+      siblingPoNumber: 'MOCK_NUMBER',
       expected: {
-        title: 'MOCK_TYPE  details',
-        placementOrderType: 'MOCK_TYPE',
+        title: 'Adoption order for sister',
+        placementOrderListItems: [
+          {
+            key: { text: 'Relationship' },
+            value: { text: 'Sister' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/sibling/relation?change=MOCK_SIBLING_ID&returnUrl=/la-portal/sibling/placement-order-check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Relationship Sister',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Type of order' },
+            value: { text: 'Adoption order' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/sibling/placement-order-type?change=MOCK_SIBLING_ID&returnUrl=/la-portal/sibling/placement-order-check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Type of order Adoption order',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Order case or serial number' },
+            value: { text: 'MOCK_NUMBER' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/sibling/placement-order-number?change=MOCK_SIBLING_ID&returnUrl=/la-portal/sibling/placement-order-check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Order case or serial number',
+                },
+              ],
+            },
+          },
+        ],
       },
     },
-  ])('should create correct items for summaryList when %o', ({ firstName, lastName, placementOrderType, expected }) => {
-    commonContent.userCase!.siblings![0]!.siblingFirstName = firstName;
-    commonContent.userCase!.siblings![0]!.siblingLastNames = lastName;
-    (commonContent.userCase!.siblings![0]!.siblingPlacementOrders![0] as PlacementOrder).placementOrderType =
-      placementOrderType;
-    const generatedContent = generateContent(commonContent);
-    expect(generatedContent.title).toBe(expected.title);
-    expect(generatedContent.placementOrderListItems).toEqual([
-      {
-        key: { text: 'Sibling name' },
-        value: { text: `${firstName || ''} ${lastName || ''}` },
-      },
-      {
-        key: { text: 'Type of order' },
-        value: { text: expected.placementOrderType },
-        actions: {
-          items: [
-            {
-              href: '/sibling/placement-order-type?change=MOCK_SIBLING_ID/MOCK_PO_ID&returnUrl=/sibling/placement-order-check-your-answers',
-              text: 'Change',
-              visuallyHiddenText: 'Type of order',
-            },
-          ],
-        },
-      },
-      {
-        key: { text: 'Order case or serial number' },
-        value: { text: 'MOCK_NUMBER' },
-        actions: {
-          items: [
-            {
-              href: '/sibling/placement-order-number?change=MOCK_SIBLING_ID/MOCK_PO_ID&returnUrl=/sibling/placement-order-check-your-answers',
-              text: 'Change',
-              visuallyHiddenText: 'Order case or serial number',
-            },
-          ],
-        },
-      },
-    ]);
-  });
+  ])(
+    'should create correct items for summaryList %#',
+    ({ siblingId, siblingRelation, siblingPoType, siblingPoNumber, expected }) => {
+      commonContent.userCase!.siblings![0]!.siblingId = siblingId;
+      commonContent.userCase!.siblings![0]!.siblingRelation = siblingRelation;
+      commonContent.userCase!.siblings![0]!.siblingPoType = siblingPoType;
+      commonContent.userCase!.siblings![0]!.siblingPoNumber = siblingPoNumber;
+      const generatedContent = generateContent(commonContent);
+      expect(generatedContent.placementOrderListItems).toEqual(expected.placementOrderListItems);
+    }
+  );
 
   test('should contain submit button', () => {
     const generatedContent = generateContent(commonContent);

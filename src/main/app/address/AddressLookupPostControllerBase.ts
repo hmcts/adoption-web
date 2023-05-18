@@ -31,8 +31,24 @@ export default class AddressLookupPostControllerBase extends PostController<AnyO
         addresses = stubbedPostcode;
       } else {
         addresses = await getAddressesFromPostcode(postcode, req.locals.logger);
+        req.session.userCase[`${this.fieldPrefix}Address1`] = null;
+        req.session.userCase[`${this.fieldPrefix}Address2`] = null;
+        req.session.userCase[`${this.fieldPrefix}AddressTown`] = null;
+        req.session.userCase[`${this.fieldPrefix}AddressCounty`] = null;
+        req.session.userCase[`${this.fieldPrefix}AddressPostcode`] = postcode;
       }
       req.session.addresses = addresses;
+      if (req.session.returnUrl === '/review-pay-submit/check-your-answers') {
+        req.session.userCase.checkYourAnswersReturn = true;
+      }
+    }
+
+    if (req.body.saveAsDraft) {
+      req.session.userCase[`${this.fieldPrefix}Address1`] = null;
+      req.session.userCase[`${this.fieldPrefix}Address2`] = null;
+      req.session.userCase[`${this.fieldPrefix}AddressTown`] = null;
+      req.session.userCase[`${this.fieldPrefix}AddressCounty`] = null;
+      req.session.userCase[`${this.fieldPrefix}AddressPostcode`] = postcode;
     }
 
     this.redirect(req, res);

@@ -10,12 +10,13 @@ const en = content => ({
   line2:
     'We will email you updates and information about your application to adopt. You will only be contacted by telephone if the social worker or court staff need to contact you quickly.',
   emailAddress: 'Email address',
-  phoneNumber: 'UK Phone number',
+  phoneNumber: 'UK phone number',
   applicant1ContactDetailsConsent:
     'The court may want to use your email to serve you court orders. Are you happy to be served court orders by email?',
+  contactDetailsConsentNo: 'You will be served all court orders by post.',
   errors: {
     applicant1ContactDetailsConsent: {
-      required: 'Please answer the question',
+      required: 'Select whether you are happy to be served court orders by email.',
     },
     applicant1EmailAddress: {
       required: 'Enter your email address',
@@ -38,13 +39,14 @@ const cy: typeof en = content => ({
   phoneNumber: 'Rhif ffôn yn y DU',
   applicant1ContactDetailsConsent:
     'Efallai bydd y llys eisiau defnyddio eich cyfeiriad e-bost i gyflwyno gorchmynion llys arnoch, A ydych yn hapus i neuchmynion llys gael eu cyflwyno arnoch drwy e-bost?',
+  contactDetailsConsentNo: 'Fe gyflwynir yr holl orchmynion llys arnoch drwy’r post.',
   errors: {
     applicant1ContactDetailsConsent: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: 'Dewiswch a ydych yn hapus i gael eich gorchmynion llys drwy e-bost.',
     },
     applicant1EmailAddress: {
       required: 'Nac ydwdwch eich cyfeiriad e-bost',
-      invalid: 'Rhowch gyfeiriad e-bost yn y fformat cywir, er enghraifft enw@enghraifft.com',
+      invalid: 'Nodwch gyfeiriad e-bost yn y fformat cywir, fel name@example.com',
     },
     applicant1PhoneNumber: {
       required: 'Rhowch rif ffôn yn y DU',
@@ -60,6 +62,9 @@ export const form: FormContent = {
       classes: 'govuk-input--width-20',
       label: l => l.emailAddress,
       labelSize: null,
+      attributes: {
+        autocomplete: 'email',
+      },
       validator: value => isFieldFilledIn(value) || isEmailValid(value),
     },
     applicant1PhoneNumber: {
@@ -67,6 +72,9 @@ export const form: FormContent = {
       classes: 'govuk-input--width-20',
       label: l => l.phoneNumber,
       labelSize: null,
+      attributes: {
+        autocomplete: 'tel',
+      },
       validator: value => isFieldFilledIn(value) || isPhoneNoValid(value),
     },
     applicant1ContactDetailsConsent: {
@@ -74,10 +82,15 @@ export const form: FormContent = {
       classes: 'govuk-radios',
       label: l => l.applicant1ContactDetailsConsent,
       section: l => l.section,
+      labelHidden: false,
       labelSize: 'small',
       values: [
         { label: l => l.yes, value: YesOrNo.YES },
-        { label: l => l.no, value: YesOrNo.NO },
+        {
+          label: l => l.no,
+          value: YesOrNo.NO,
+          conditionalText: l => `<p class="govuk-label">${l.contactDetailsConsentNo}</p>`,
+        },
       ],
       validator: isFieldFilledIn,
     },

@@ -6,22 +6,24 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
   section: SECTION,
-  label: 'Does the child have any siblings or half siblings?',
-  hint: "Ask the adoption agency or social worker if you're not sure.",
+  title: 'Does the child have any siblings or half siblings with court orders?',
+  conditionalText:
+    '<label class="govuk-label">You will be asked to provide each sibling court order individually.</label>',
   errors: {
     hasSiblings: {
-      required: 'Please answer the question',
+      required: 'Select whether the child has any siblings or half siblings with court orders',
     },
   },
 });
 
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  label: 'A oes gan y plentyn frodyr/chwiorydd neu hanner frodyr/chwiorydd?',
-  hint: 'Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
+  title: 'A oes gan y plentyn frodyr/chwiorydd neu hanner brodyr/chwiorydd sydd â gorchmynion llys?',
+  conditionalText:
+    '<label class="govuk-label">Gofynnir i chi ddarparu pob gorchymyn llys brodyr a chwiorydd yn unigol.</label>',
   errors: {
     hasSiblings: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: 'Nodwch a oes gan y plentyn frodyr/chwiorydd neu hanner brodyr/chwiorydd sydd â gorchmynion llys',
     },
   },
 });
@@ -31,11 +33,11 @@ export const form: FormContent = {
     hasSiblings: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.title,
       section: l => l.section,
-      hint: l => l.hint,
+      labelHidden: true,
       values: [
-        { label: l => l.yes, value: YesNoNotsure.YES },
+        { label: l => l.yes, value: YesNoNotsure.YES, conditionalText: l => l.conditionalText },
         { label: l => l.no, value: YesNoNotsure.NO },
         { label: l => l.notSure, value: YesNoNotsure.NOT_SURE },
       ],

@@ -1,6 +1,7 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
+import { PlacementOrderTypeEnum, YesOrNo } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form } from '../../../app/form/Form';
@@ -19,11 +20,25 @@ export default class PlacementOrderPostController extends PostController<AnyObje
     );
 
     Object.assign(placementOrder!, formData);
-
+    if (placementOrder) {
+      if (formData['selectedPlacementOrderType']) {
+        placementOrder.placementOrderType = formData['selectedPlacementOrderType'] as PlacementOrderTypeEnum;
+        placementOrder.otherPlacementOrderType = formData['selectedOtherPlacementOrderType'];
+      }
+    }
     this.filterErrorsForSaveAsDraft(req);
 
     if (req.session.errors.length > 0) {
       return this.redirect(req, res);
+    }
+
+    if (formData['confirm'] === YesOrNo.NO) {
+      req.originalUrl = req.originalUrl.substring(0, req.originalUrl.indexOf('?'));
+      delete req.query.confirm;
+    } else {
+      req.originalUrl = req.originalUrl.replace('?confirm', '?remove');
+      req.url = req.url.replace('?confirm', '?remove');
+      delete req.query.confirm;
     }
 
     req.session.userCase = await this.save(

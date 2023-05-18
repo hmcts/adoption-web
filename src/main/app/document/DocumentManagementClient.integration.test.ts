@@ -26,6 +26,8 @@ describe('DocumentManagementClient', () => {
     expect(mockedAxios.create).toHaveBeenCalledWith({
       baseURL: 'http://localhost',
       headers: { Authorization: 'Bearer userAccessToken', ServiceAuthorization: 'abcd' },
+      maxBodyLength: 20971520,
+      maxContentLength: 20971520,
     });
 
     expect(mockPost.mock.calls[0][0]).toEqual('/cases/documents');

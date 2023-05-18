@@ -26,6 +26,7 @@ def secrets = [
     secret('citizen-password', 'CITIZEN_PASSWORD'),
     secret('adoption-pcq-token', 'PCQ_TOKEN'),
     secret('endpoints', 'ENDPOINTS')
+
   ],
   's2s-${env}': [
     secret('microservicekey-adoption-web', 'SERVICE_AUTH_SECRET')
@@ -48,7 +49,11 @@ withPipeline(type, product, component) {
 
   loadVaultSecrets(secrets)
 
-//  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
+  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
+
+  onMaster {
+    env.PACT_TAG = 'master'
+  }
 
   afterAlways('build') {
     yarnBuilder.yarn('build')
@@ -91,6 +96,8 @@ withPipeline(type, product, component) {
 
   afterAlways('functionalTest:aat') {
     yarnBuilder.yarn('test:pa11y')
+    yarnBuilder.yarn('test:api')
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
   }
 }

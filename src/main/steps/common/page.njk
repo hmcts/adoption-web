@@ -4,6 +4,11 @@
 {% extends "govuk/template.njk" %}
 
 {% block head %}
+  <script>
+    if(window.location.hash==="#main-content") {
+      history.replaceState("", "", window.location.pathname + window.location.search);
+    }
+  </script>
   {% include "./webpack/css.njk" %}
   <!-- {{ userCase.id }} -->
   <script>
@@ -20,92 +25,153 @@
 {% endblock %}
 
 {% block header %}
-  {% include "../cookie-banner/template.njk" %}
-  {{ govukHeader({
+  {% include "./cookie-banner.njk" %}
+  {% if laPortal == true %}
+    {{ govukHeader({
     containerClasses: "govuk-width-container",
-    serviceName: serviceName,
-    serviceUrl: (globals.basePath if globals.basePath) + "/",
-    navigation: [
-      {
-        href: "/logout" if isLoggedIn else "/",
-        text: signOut if isLoggedIn else signIn
-      }
-    ]
-  }) }}
+    serviceName: applyForAdoptionLaPortal,
+    serviceUrl: (globals.basePath if globals.basePath) + "/la-portal/kba-case-ref",
+    homepageUrl: "/la-portal/kba-case-ref",
+    navigation: []
+    }) }}
+  {% else %}
+    {{ govukHeader({
+      containerClasses: "govuk-width-container",
+      serviceName: applyForAdoptionCui,
+      serviceUrl: (globals.basePath if globals.basePath) + "/",
+      navigation: [
+        {
+          href: "/logout" if isLoggedIn else "/",
+          text: signOut if isLoggedIn else signIn
+        }
+      ]
+    }) }}
+  {% endif %}
 {% endblock %}
 
 {% block pageTitle %}
-  {{ serviceName }} - {{ title if title else label}} - {{ govUk }}
+    {% if sessionErrors and sessionErrors.length > 0 %}
+      Error: {{ serviceName }} - {{ title if title else label}} - {{ govUk }}
+    {% else %}
+     {{ serviceName }} - {{ title if title else label}} - {{ govUk }}
+    {% endif %}
 {% endblock %}
 
+{# Feedback link will be used in both CUI and la-portal with exact same behaviour with dynamic page title as query param. #}
 {% set feedbackLink = feedback | replace("PAGE_TITLE", title if title else label) %}
 
 {% block beforeContent %}
-  {{ govukPhaseBanner({
-    tag: {
-      text: phase
-    },
-    html: feedbackLink + languageToggle
-  }) }}
+
+{# ADOP-1231-LAPortal-Welsh-Translation starts
+  {% if laPortal == true %}
+      {{ govukPhaseBanner({
+      tag: {
+        text: phase
+      },
+      html: feedbackLink
+      }) }}
+  {% else %} #}
+      {{ govukPhaseBanner({
+      tag: {
+        text: phase
+      },
+      html: feedbackLink + languageToggle
+      }) }}
+  {# {% endif %}
+ADOP-1231-LAPortal-Welsh-Translation starts #}
+
   {% block backLink %}
     <a href="#" class="govuk-back-link">{{ back }}</a>
   {% endblock %}
+    {% block modal %}
+      {% include "./timeout-dialog.njk" %}
+    {% endblock %}
 {% endblock %}
 
 {% block content %}
-  <div class="govuk-grid-row">
+<div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {% block error_summary %}
         {% include "common/error/summary.njk" %}
       {% endblock %}
-
-      {% block page_content %}
-        {% if title %}
-          <h1 class="govuk-heading-l govuk-!-margin-bottom-2">{{ title }}</h1>
-        {% endif %}
-      {% endblock %}
-
+   {% if section %}
+         <span class="govuk-caption-l">{{ section }}</span>
+    {% endif %}
+            {% block page_content %}
+              {% if title %}
+                <h1 class="govuk-heading-l govuk-!-margin-bottom-0">{{ title }}</h1>
+              {% endif %}
+            {% endblock %}
       {% if form %}
         {% block form %}
           {% include "common/form/form.njk"%}
         {% endblock %}
       {% endif %}
-
-      {# TODO uncomment this once we have contact us content #}
-      {# {% block contact_us %}
-        {% include "./contact-us.njk" %}
-      {% endblock %} #}
+      {% if not getContent(form.hideContactHelpSection) %}
+        {% block contactUs %}
+          {% include "common/form/contactForHelp.njk"%}
+        {% endblock %}
+      {% endif %}
     </div>
-  </div>
+</div>
 {% endblock %}
 
 {% block footer %}
-  {{ govukFooter({
-    meta: {
-      items: [
-        {
-          href: "/cookies",
-          text: cookies
-        },
-        {
-          href: "/privacy-policy",
-          text: privacyPolicy
-        },
-        {
-          href: "/accessibility-statement",
-          text: accessibility
-        },
-        {
-          href: "/terms-and-conditions",
-          text: termsAndConditions
-        },
-        {
-          href: "/contact-us",
-          text: contactUs
+  {% if laPortal == true %}
+    {{ govukFooter({
+        meta: {
+          items: [
+            {
+              href: "/la-portal/cookies",
+              text: cookies
+            },
+            {
+              href: "/la-portal/privacy-policy",
+              text: privacyPolicy
+            },
+            {
+              href: "/la-portal/accessibility-statement",
+              text: accessibility
+            },
+            {
+              href: "/la-portal/terms-and-conditions",
+              text: termsAndConditions
+            },
+            {
+              href: "/la-portal/contact-us",
+              text: contactUs
+            }
+          ]
         }
-      ]
-    }
-  }) }}
+      }) }}
+  {% else %}
+    {{ govukFooter({
+        meta: {
+          items: [
+            {
+              href: "/cookies",
+              text: cookies
+            },
+            {
+              href: "/privacy-policy",
+              text: privacyPolicy
+            },
+            {
+              href: "/accessibility-statement",
+              text: accessibility
+            },
+            {
+              href: "/terms-and-conditions",
+              text: termsAndConditions
+            },
+            {
+              href: "/contact-us",
+              text: contactUs
+            }
+          ]
+        }
+      }) }}
+  {% endif %}
 {% endblock %}
 
 {% block bodyEnd %}

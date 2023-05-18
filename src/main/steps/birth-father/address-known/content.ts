@@ -5,12 +5,11 @@ import { isFieldFilledIn, isTextAreaValid } from '../../../app/form/validation';
 
 const en = () => ({
   section: "Birth father's details",
-  label: 'Do you have the birth father’s last known address?',
+  title: 'Do you have the birth father’s last known address?',
   moreDetails: "Give a reason why the address is not known, for example 'no fixed address'.",
-  hint: "Ask the adoption agency or social worker if you're not sure.",
   errors: {
     birthFatherAddressKnown: {
-      required: 'Please select an answer',
+      required: 'Select whether the birth father’s address is known',
     },
     birthFatherAddressNotKnownReason: {
       required: 'Provide a reason',
@@ -21,12 +20,11 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: 'Manylion y tad biolegol',
-  label: 'A oes gennych gyfeiriad olaf hysbys y tad biolegol?',
+  title: 'A oes gennych gyfeiriad olaf hysbys y tad biolegol?',
   moreDetails: 'Rhowch reswm pam bod y cyfeiriad yn anhysbys, er enghraifft ‘dim cyfeiriad parhaol’.',
-  hint: 'Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
   errors: {
     birthFatherAddressKnown: {
-      required: 'Dewiswch ateb os gwelwch yn dda',
+      required: 'Nodwch a yw cyfeiriad y tad biolegol yn hysbys',
     },
     birthFatherAddressNotKnownReason: {
       required: 'Darparwch reswm',
@@ -40,9 +38,9 @@ export const form: FormContent = {
     birthFatherAddressKnown: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.title,
       section: l => l.section,
-      hint: l => l.hint,
+      labelHidden: true,
       values: [
         { label: l => l.yes, value: YesOrNo.YES },
         {

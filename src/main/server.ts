@@ -12,10 +12,12 @@ import { AppInsights } from './modules/appinsights';
 import { AuthProvider } from './modules/auth-provider';
 import { AxiosLogger } from './modules/axios-logger';
 import { CSRFToken } from './modules/csrf';
+import { DraftStoreClient } from './modules/draft-store';
 import { ErrorHandler } from './modules/error-handler';
 import { HealthCheck } from './modules/health';
 import { Helmet } from './modules/helmet';
 import { LanguageToggle } from './modules/i18n';
+import { KbaMiddleware } from './modules/kba';
 import { Nunjucks } from './modules/nunjucks';
 import { OidcMiddleware } from './modules/oidc';
 import { PropertiesVolume } from './modules/properties-volume';
@@ -91,12 +93,15 @@ new SessionStorage().enableFor(app);
 new TooBusy().enableFor(app);
 new HealthCheck().enableFor(app);
 new CSRFToken().enableFor(app);
+new LanguageToggle().enableFor(app);
 new AuthProvider().enable();
 new OidcMiddleware().enableFor(app);
+new KbaMiddleware().enableFor(app);
 new LanguageToggle().enableFor(app);
 new StateRedirectMiddleware().enableFor(app);
 new Routes().enableFor(app);
 new ErrorHandler().handleNextErrorsFor(app);
+new DraftStoreClient().enableFor(app);
 
 const port = config.get('port');
 const server = app.listen(port, () => {

@@ -10,26 +10,30 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: 'Eligibility to apply to adopt',
-  label:
+  title:
     'Have you, and the other applicant if relevant, lived in the UK, Channel Islands or Isle of Man for the last 12 months (habitually resident)?',
   livedUKNo: 'You cannot apply to adopt a child unless you have a permanent home here.',
   moreInfo: 'More about adoption',
+  continue: 'Continue',
   errors: {
     livedUKEligible: {
-      required: 'Please answer the question',
+      required:
+        'Select if you, and the other applicant if relevant, have lived in the UK, Channel Islands or Isle of Man for the last 12 months.',
     },
   },
 };
 
 const cyContent = {
   section: 'Gofynion cymhwysedd i wneud cais i fabwysiadu',
-  label:
+  title:
     'A ydych chi, a’r ceisydd arall os yw’n berthnasol, wedi byw yn y DU, Ynysoedd y Sianel neu Ynys Manaw am y 12 mis diwethaf (preswylio’n arferol)?',
   livedUKNo: 'Ni allwch wneud cais i fabwysiadu plentyn oni bai bod gennych gartref parhaol yma.',
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
+  continue: 'Parhau',
   errors: {
     livedUKEligible: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required:
+        "Nodwch os ydych chi, a'r ymgeisydd arall os yw'n berthnasol, wedi byw yn y DU, Ynysoedd y Sianel neu Ynys Manaw am y 12 mis diwethaf.",
     },
   },
 };
@@ -59,14 +63,14 @@ describe('eligibility > lived-uk > content', () => {
     const field = fields.livedUKEligible as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
-    expect((field.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((field.label as Function)(generatedContent)).toBe(enContent.title);
     expect((field.section as Function)(generatedContent)).toBe(enContent.section);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesNoNotsure.YES);
     expect((field.values[1].label as Function)(commonContent)).toBe(commonContent.no);
     expect(field.values[1].value).toBe(YesNoNotsure.NO);
     expect((field.values[1].conditionalText as Function)(generatedContent)).toBe(
-      '<p class="govuk-label">You cannot apply to adopt a child unless you have a permanent home here.</p> <p class="govuk-label"><a href="https://www.gov.uk/child-adoption">More about adoption</a></p>'
+      '<p class="govuk-label">You cannot apply to adopt a child unless you have a permanent home here.</p> <p class="govuk-label"><a href="https://www.gov.uk/child-adoption" class="govuk-link">More about adoption</a></p>'
     );
     expect(field.validator).toBe(isFieldFilledIn);
   });

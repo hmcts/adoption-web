@@ -6,26 +6,24 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
   section: SECTION,
-  label: 'Is there another person who has parental responsibility for the child?',
-  hint: 'Apart from the birth mother and father. For example, a step parent.',
+  title: 'Is there another person who has parental responsibility for the child?',
   one: 'Yes',
   two: 'No',
   errors: {
     otherParentExists: {
-      required: 'Please answer the question',
+      required: 'Select whether there is another person who has parental responsibility for the child',
     },
   },
 });
 
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  label: 'A oes unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn?',
-  hint: 'Oni bai am y fam a’r tad biolegol. Er enghraifft, llys-riant.',
+  title: 'A oes unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn?',
   one: 'Ydw',
   two: 'Nac ydw',
   errors: {
     otherParentExists: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: 'Nodwch a oes unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn',
     },
   },
 });
@@ -35,9 +33,9 @@ export const form: FormContent = {
     otherParentExists: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.title,
       section: l => l.section,
-      hint: l => l.hint,
+      labelHidden: true,
       values: [
         { label: l => l.one, value: YesOrNo.YES },
         { label: l => l.two, value: YesOrNo.NO },

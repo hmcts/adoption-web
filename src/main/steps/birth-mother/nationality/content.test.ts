@@ -22,11 +22,13 @@ import { form, generateContent } from './content';
 
 const enContent = {
   section: "Birth mother's details",
-  label: "What is the nationality of the child's birth mother?",
+  title: "What is the nationality of the child's birth mother?",
+  hint: 'Select all options that are relevant.',
   errors: {
     birthMotherNationality: {
-      required: "Select a nationality or 'Not sure'",
+      required: 'Select if they are British, Irish, citizen of a different country or not sure',
       notSureViolation: "Select a nationality or 'Not sure'",
+      addButtonNotClicked: "Select 'Add' before you continue",
     },
     addAnotherNationality: 'MOCK_ERROR_MESSAGE',
   },
@@ -35,11 +37,13 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y fam fiolegol',
-  label: 'Beth yw cenedligrwydd mam fiolegol y plentyn?',
+  title: 'Beth yw cenedligrwydd mam fiolegol y plentyn?',
+  hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
   errors: {
     birthMotherNationality: {
-      required: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
+      required: "Dewiswch os ydyn nhw'n Brydeinig, Gwyddelig, dinesydd gwlad wahanol neu ddim yn siŵr",
       notSureViolation: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
+      addButtonNotClicked: 'Dewiswch ‘Ychwanegu’ cyn ichi symud ymlaen',
     },
     addAnotherNationality: 'MOCK_ERROR_MESSAGE',
   },
@@ -63,14 +67,18 @@ describe('birth-mother > nationality > content', () => {
   });
 
   test('should contain birthMotherNationality field', () => {
-    const nationalityFormFields = nationalityFields({}, FieldPrefix.BIRTH_MOTHER) as FormFields;
+    const nationalityFormFields = nationalityFields({}, FieldPrefix.BIRTH_MOTHER, 'en') as FormFields;
     const fields = generatedContent.form.fields as FormFields;
     expect(fields.birthMotherNationality).toEqual(nationalityFormFields.birthMotherNationality);
   });
 
   test('should call nationalityFields when form.fields is called', () => {
     (form.fields as FormFieldsFn)(commonContent.userCase!);
-    expect(nationalityFields).toHaveBeenCalledWith(commonContent.userCase, FieldPrefix.BIRTH_MOTHER);
+    expect(nationalityFields).toHaveBeenCalledWith(
+      commonContent.userCase,
+      FieldPrefix.BIRTH_MOTHER,
+      commonContent.language
+    );
   });
 
   it('should contain submit button', () => {

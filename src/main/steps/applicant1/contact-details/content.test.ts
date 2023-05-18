@@ -32,12 +32,13 @@ const enContent = {
   line2:
     'We will email you updates and information about your application to adopt. You will only be contacted by telephone if the social worker or court staff need to contact you quickly.',
   emailAddress: 'Email address',
-  phoneNumber: 'UK Phone number',
+  phoneNumber: 'UK phone number',
   applicant1ContactDetailsConsent:
     'The court may want to use your email to serve you court orders. Are you happy to be served court orders by email?',
+  contactDetailsConsentNo: 'You will be served all court orders by post.',
   errors: {
     applicant1ContactDetailsConsent: {
-      required: 'Please answer the question',
+      required: 'Select whether you are happy to be served court orders by email.',
     },
     applicant1EmailAddress: {
       required: 'Enter your email address',
@@ -60,13 +61,14 @@ const cyContent = {
   phoneNumber: 'Rhif ffôn yn y DU',
   applicant1ContactDetailsConsent:
     'Efallai bydd y llys eisiau defnyddio eich cyfeiriad e-bost i gyflwyno gorchmynion llys arnoch, A ydych yn hapus i neuchmynion llys gael eu cyflwyno arnoch drwy e-bost?',
+  contactDetailsConsentNo: 'Fe gyflwynir yr holl orchmynion llys arnoch drwy’r post.',
   errors: {
     applicant1ContactDetailsConsent: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: 'Dewiswch a ydych yn hapus i gael eich gorchmynion llys drwy e-bost.',
     },
     applicant1EmailAddress: {
       required: 'Nac ydwdwch eich cyfeiriad e-bost',
-      invalid: 'Rhowch gyfeiriad e-bost yn y fformat cywir, er enghraifft enw@enghraifft.com',
+      invalid: 'Nodwch gyfeiriad e-bost yn y fformat cywir, fel name@example.com',
     },
     applicant1PhoneNumber: {
       required: 'Rhowch rif ffôn yn y DU',
@@ -134,6 +136,10 @@ describe('applicant1 > contact-details > content', () => {
         never
       >)
     ).toBe(YesOrNo.NO);
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    expect((applicant1ContactDetailsConsentOptions.values[1].conditionalText as Function)(generatedContent)).toBe(
+      '<p class="govuk-label">You will be served all court orders by post.</p>'
+    );
     expect(applicant1ContactDetailsConsentField.validator).toBe(isFieldFilledIn);
 
     expect(applicant1EmailAddressField.type).toBe('text');

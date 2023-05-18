@@ -1,31 +1,60 @@
-import { YesOrNo } from '../../../app/case/definition';
-import { Radios } from '../../common/components/radios';
-import { SECTION, SECTION_IN_WELSH } from '../constants';
+import { YesNoNotsure } from '../../../app/case/definition';
+import { TranslationFn } from '../../../app/controller/GetController';
+import { FormContent } from '../../../app/form/Form';
+import { isFieldFilledIn } from '../../../app/form/validation';
 
-const enContent = {
-  section: SECTION,
-  label: "Is the birth father's name on the birth certificate?",
-  hint: "Ask the adoption agency or social worker if you're not sure.",
-};
-
-const cyContent = {
-  section: SECTION_IN_WELSH,
-  label: 'A yw enw’r tad biolegol ar y dystysgrif geni?',
-  hint: 'Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
-};
-
-const fieldName = 'birthFatherNameOnCertificate';
-
-const values = [
-  { key: 'yes', value: YesOrNo.YES },
-  { key: 'no', value: YesOrNo.NO },
-];
-
-export const { form, generateContent } = new Radios({
-  enContent,
-  cyContent,
-  fieldName,
-  values,
-  label: 'label',
-  hint: 'hint',
+const en = () => ({
+  section: "Birth father's details",
+  title: "Is the birth father's name on the birth certificate?",
+  errors: {
+    birthFatherNameOnCertificate: {
+      required: 'Select whether the birth father’s name is on the birth certificate',
+    },
+  },
 });
+
+const cy: typeof en = () => ({
+  section: 'Manylion y tad biolegol',
+  title: 'A yw enw’r tad biolegol ar y dystysgrif geni?',
+  errors: {
+    birthFatherNameOnCertificate: {
+      required: 'Nodwch a yw enw’r tad biolegol yw ar y dystysgrif geni',
+    },
+  },
+});
+
+export const form: FormContent = {
+  fields: {
+    birthFatherNameOnCertificate: {
+      type: 'radios',
+      classes: 'govuk-radios',
+      label: l => l.title,
+      section: l => l.section,
+      labelHidden: true,
+      values: [
+        { label: l => l.yes, value: YesNoNotsure.YES },
+        { label: l => l.no, value: YesNoNotsure.NO },
+      ],
+      validator: isFieldFilledIn,
+    },
+  },
+  submit: {
+    text: l => l.continue,
+  },
+  saveAsDraft: {
+    text: l => l.saveAsDraft,
+  },
+};
+
+const languages = {
+  en,
+  cy,
+};
+
+export const generateContent: TranslationFn = content => {
+  const translations = languages[content.language]();
+  return {
+    ...translations,
+    form,
+  };
+};

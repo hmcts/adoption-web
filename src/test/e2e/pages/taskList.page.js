@@ -1,4 +1,5 @@
 const config = require('../config');
+const childBasicInitialDetails = require('../fixtures/caseData/childBasicDetails');
 
 const { I } = inject();
 
@@ -16,30 +17,31 @@ module.exports = {
     contactDetailsLinkStatus: 'strong[id$="applicant2-contact-details-status"]',
   },
   childDetails: {
-    childrenBirthCertificateLink: 'a[id$="children-birth-certificate-details"]',
+    childrenBirthCertificateLink: 'a[id$="birth-certificate-details"]',
     adoptionCertificateDetailsLink: 'a[id$="adoption-certificate-details"]',
-    childrenBirthCertificateDetailsStatus: 'strong[id$="children-birth-certificate-details-status"]',
+    childrenBirthCertificateDetailsStatus: 'strong[id$="birth-certificate-details-status"]',
     adoptionCertificateDetails: 'strong[id$="adoption-certificate-details-status"]',
     childrenBirthMotherLink: 'a[id$="birth-mother-details"]',
     childrenBirthMotherDetailsStatus: 'strong[id$="birth-mother-details-status"]',
-    childOtherParentLink: 'a[id$="other-parent"]',
-    childOtherParentDetailsStatus: 'strong[id$="other-parent-status"]',
-    childrenBirthFatherLink: 'a[id$="birth-father"]',
-    childrenBirthFatherDetailsStatus: 'strong[id$="birth-father-status"]',
+    childOtherParentLink: 'a[id$="other-parent-details"]',
+    childOtherParentDetailsStatus: 'strong[id$="other-parent-details-status"]',
+    childrenBirthFatherLink: 'a[id$="birth-father-details"]',
+    childrenBirthFatherDetailsStatus: 'strong[id$="birth-father-details-status"]',
     adoptionAgencyLink: 'a[id$="adoption-agency"]',
     adoptionAgencyDetailsStatus: 'strong[id$="adoption-agency-status"]',
-    childrenPlacementOrderLink: 'a[id$="children-placement-order-details"]',
-    childrenSiblingLink: 'a[href$="/sibling/exists"]',
-    childrenSiblingDetailsStatus: 'strong[id$="sibling-status"]',
+    childrenPlacementOrderLink: 'a[id$="placement-and-court-order-details"]',
+    childrenSiblingLink: 'a[id$="sibling-court-order-details"]',
+    childrenSiblingDetailsStatus: 'strong[id$="sibling-court-order-details-status"]',
     reviewPayAndSubmitLink: 'a[id="review-pay-and-submit"]',
     dateChildMovedInLink: 'a[id$="date-child-moved-in"]',
     dateChildMovedInDetailsStatus: 'strong[id$="date-child-moved-in-status"]',
     findFamilyCourtLink: 'a[id$="find-family-court"]',
     findFamilyCourtStatus: 'strong[id$="find-family-court-status"]',
+    childrenPlacementOrderStatus: 'strong[id$="placement-and-court-order-details-status"]',
   },
   uploadDocument: {
-    uploadDocumentLink: 'a[href$="upload-your-documents"]',
-    uploadDocumentStatus: 'strong[id$="upload-your-documents-status"]',
+    uploadDocumentLink: 'a[id$="upload-documents"]',
+    uploadDocumentStatus: 'strong[id$="upload-documents-status"]',
   },
 
   async goToTaskListPage() {
@@ -65,12 +67,6 @@ module.exports = {
   async selectChildPlacementOrderDetails() {
     await I.retry(3).waitForSelector(this.childDetails.childrenPlacementOrderLink, 30);
     await I.retry(3).click(this.childDetails.childrenPlacementOrderLink);
-    await I.wait(4);
-  },
-
-  async selectFirstApplicantPersonalDetails() {
-    await I.retry(3).waitForSelector(this.primaryApplicant.contactDetailsLink, 30);
-    await I.retry(3).click(this.primaryApplicant.contactDetailsLink);
     await I.wait(4);
   },
 
@@ -101,13 +97,13 @@ module.exports = {
     await I.wait(4);
   },
 
-  async selectChildAdoptionCertificateDetails() {
+  async selectChildChildDetails() {
     await I.retry(3).waitForSelector(this.childDetails.adoptionCertificateDetailsLink, 30);
     await I.retry(3).click(this.childDetails.adoptionCertificateDetailsLink);
     await I.wait(4);
   },
 
-  async verifyAdoptionCertificateDetailStatus() {
+  async verifyChildDetailsStatus() {
     await I.retry(3).waitForSelector(this.childDetails.adoptionCertificateDetails, 30);
     await I.retry(3).see('COMPLETED', this.childDetails.adoptionCertificateDetails);
   },
@@ -146,6 +142,11 @@ module.exports = {
     await I.retry(3).see('COMPLETED', this.childDetails.childrenBirthFatherDetailsStatus);
   },
 
+  async verifyChildBirthFatherInProgresStatus() {
+    await I.retry(3).waitForSelector(this.childDetails.childrenBirthFatherDetailsStatus, 30);
+    await I.retry(3).see('IN PROGRESS', this.childDetails.childrenBirthFatherDetailsStatus);
+  },
+
   async selectChildAdoptionAgencyDetails() {
     await I.retry(3).waitForSelector(this.childDetails.adoptionAgencyLink, 30);
     await I.retry(3).click(this.childDetails.adoptionAgencyLink);
@@ -155,6 +156,16 @@ module.exports = {
   async verifyChildAdoptionAgencyDetailsStatus() {
     await I.retry(3).waitForSelector(this.childDetails.adoptionAgencyDetailsStatus, 30);
     await I.retry(3).see('COMPLETED', this.childDetails.adoptionAgencyDetailsStatus);
+  },
+
+  async verifyChildAdoptionAgencyInProgresStatus() {
+    await I.retry(3).waitForSelector(this.childDetails.adoptionAgencyDetailsStatus, 30);
+    await I.retry(3).see('IN PROGRESS', this.childDetails.adoptionAgencyDetailsStatus);
+  },
+
+  async verifyChildPlacementOrderDetailsStatus() {
+    await I.retry(3).waitForSelector(this.childDetails.childrenPlacementOrderStatus, 30);
+    await I.retry(3).see('COMPLETED', this.childDetails.childrenPlacementOrderStatus);
   },
 
   async selectSiblingDetails() {
@@ -191,24 +202,24 @@ module.exports = {
   },
 
   async selectDateChildMovedInDetails() {
-    await I.retry(3).waitForSelector(this.childDetails.dateChildMovedInLink, 30);
+    await I.retry(3).waitForElement(this.childDetails.dateChildMovedInLink, 30);
     await I.retry(3).click(this.childDetails.dateChildMovedInLink);
     await I.wait(4);
   },
 
   async verifyDateChildMovedInStatus() {
-    await I.retry(3).waitForSelector(this.childDetails.dateChildMovedInDetailsStatus, 30);
+    await I.retry(3).waitForElement(this.childDetails.dateChildMovedInDetailsStatus, 30);
     await I.retry(3).see('COMPLETED', this.childDetails.dateChildMovedInDetailsStatus);
     await I.wait(4);
   },
 
   async verifyPrimaryApplicantContactDetailsStatus() {
-    await I.retry(3).waitForSelector(this.primaryApplicant.contactDetailsLinkStatus, 30);
+    await I.retry(3).waitForElement(this.primaryApplicant.contactDetailsLinkStatus, 30);
     await I.retry(3).see('COMPLETED', this.primaryApplicant.contactDetailsLinkStatus);
   },
 
   async verifyPrimaryApplicantPersonalDetailsStatus() {
-    await I.retry(3).waitForSelector(this.primaryApplicant.personalDetailsLinkStatus, 30);
+    await I.retry(3).waitForElement(this.primaryApplicant.personalDetailsLinkStatus, 30);
     await I.retry(3).see('COMPLETED', this.primaryApplicant.personalDetailsLinkStatus);
   },
 
@@ -226,6 +237,16 @@ module.exports = {
   async verifyChooseYourFamilyCourtStatus() {
     await I.retry(3).waitForSelector(this.childDetails.findFamilyCourtStatus, 30);
     await I.retry(3).see('COMPLETED', this.childDetails.findFamilyCourtStatus);
+    await I.wait(4);
+  },
+
+  async selectReviewAndSubmit() {
+    await I.retry(3).waitForText(
+      childBasicInitialDetails.childFirstNameBeforeAdoption +
+        ' ' +
+        childBasicInitialDetails.childLastNameBeforeAdoption.concat("'s details")
+    );
+    await I.retry(3).click('Review and submit');
     await I.wait(4);
   },
 };

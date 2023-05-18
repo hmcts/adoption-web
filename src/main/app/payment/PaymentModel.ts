@@ -40,10 +40,11 @@ export class PaymentModel {
     this.payments[paymentIdx].value = { ...this.payments[paymentIdx].value, ...details };
   }
 
-  public setStatus(transactionId: string, status: HmctsPayStatus | undefined): void {
+  public setStatus(transactionId: string, status: HmctsPayStatus | undefined, channel: string | undefined): void {
     this.update(transactionId, {
       status: status === 'Success' ? PaymentStatus.SUCCESS : PaymentStatus.ERROR,
       updated: new Date().toISOString(),
+      channel,
     });
   }
 

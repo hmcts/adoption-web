@@ -188,9 +188,7 @@ export interface Application {
   jurisdictionApplicant2Domicile: YesOrNo;
   jurisdictionApp1HabituallyResLastTwelveMonths: YesOrNo;
   jurisdictionApp1HabituallyResLastSixMonths: YesOrNo;
-  jurisdictionResidualEligible: YesOrNo;
   jurisdictionBothLastHabituallyResident: YesOrNo;
-  jurisdictionConnections: JurisdictionConnections[];
   solServiceDateOfService: DateAsString;
   solServiceDocumentsServed: string;
   solServiceOnWhomServed: string;
@@ -262,6 +260,16 @@ export const enum Nationality {
   NOT_SURE = 'Not sure',
 }
 
+export const enum ResponsibilityReasons {
+  BIRTH_CERTIFICATE = 'Birth certificate',
+  COURT_ORDER = 'Court order',
+  RESPONSIBILITY_ORDER = 'Parental responsibility order',
+  RESPONSIBILITY_AGREEMENT = 'Parental responsibility agreement',
+  REMOVED_BY_COURT = 'Parental responsibility removed by court',
+  NEVER_OBTAINED = 'Parental responsibility never obtained',
+  OTHER = 'Other',
+}
+
 export const enum ContactDetails {
   EMAIL = 'email',
   PHONE = 'phone',
@@ -285,6 +293,7 @@ export interface OtherName {
 }
 
 export interface AdditionalNationality {
+  id?: string;
   country: string;
 }
 
@@ -297,10 +306,11 @@ export const enum Gender {
 
 export interface PlacementOrder {
   placementOrderId: string;
-  placementOrderType?: string;
+  placementOrderType?: PlacementOrderTypeEnum;
   placementOrderNumber?: string;
   placementOrderCourt?: string;
   placementOrderDate?: CaseDate | string;
+  otherPlacementOrderType?: string;
 }
 
 export interface CaseData {
@@ -324,6 +334,8 @@ export interface CaseData {
   applicant1ContactDetails: ContactDetails[];
   applicant1ContactDetailsConsent: YesOrNo;
   applicant1LanguagePreference?: LanguagePreference;
+  applicant1HasReasonableAdjustment: YesOrNo;
+  applicant1ReasonableAdjustmentDetails: string;
 
   applicant2FirstName: string;
   applicant2LastName: string;
@@ -342,6 +354,9 @@ export interface CaseData {
   applicant2AddressSameAsApplicant1: string;
   applicant2ContactDetails: ContactDetails[];
   applicant2ContactDetailsConsent: YesOrNo;
+  applicant2LanguagePreference?: LanguagePreference;
+  applicant2HasReasonableAdjustment: YesOrNo;
+  applicant2ReasonableAdjustmentDetails: string;
 
   childrenFirstName: string;
   childrenLastName: string;
@@ -362,6 +377,7 @@ export interface CaseData {
   birthMotherStillAlive: string;
   birthMotherNotAliveReason: string;
   birthMotherNationality: Nationality[];
+  birthMotherOtherNationalities: ListValue<AdditionalNationality>[];
   birthMotherOccupation: string;
   birthMotherAddressKnown: YesOrNo;
   birthMotherAddress1: string;
@@ -371,15 +387,21 @@ export interface CaseData {
   birthMotherAddressCounty: string;
   birthMotherAddressPostCode: string;
   birthMotherAddressCountry: string;
-  birthMotherOtherNationalities: ListValue<AdditionalNationality>[];
   birthMotherNameOnCertificate: string;
   birthMotherAddressNotKnownReason: string;
+  birthMotherLastAddressDate: string;
+  birthMotherServedWith: YesOrNo;
+  birthMotherNotServedWithReason: string;
 
   birthFatherFirstName: string;
   birthFatherLastName: string;
   birthFatherStillAlive: string;
   birthFatherNotAliveReason: string;
+  birthFatherResponsibility: string;
+  birthFatherResponsibilityReason: ResponsibilityReasons[];
+  birthFatherOtherResponsibilityReason: string;
   birthFatherNationality: Nationality[];
+  birthFatherOtherNationalities: ListValue<AdditionalNationality>[];
   birthFatherOccupation: string;
   birthFatherAddressKnown: YesOrNo;
   birthFatherAddress1: string;
@@ -389,14 +411,19 @@ export interface CaseData {
   birthFatherAddressCounty: string;
   birthFatherAddressPostCode: string;
   birthFatherAddressCountry: string;
-  birthFatherOtherNationalities: ListValue<AdditionalNationality>[];
   birthFatherNameOnCertificate: string;
   birthFatherAddressNotKnownReason: string;
+  birthFatherLastAddressDate: string;
+  birthFatherIdentityKnown: string;
+  birthFatherServedWith: YesOrNo;
+  birthFatherNotServedWithReason: string;
 
   otherParentFirstName: string;
   otherParentLastName: string;
   otherParentStillAlive: string;
   otherParentNotAliveReason: string;
+  otherParentResponsibilityReason: ResponsibilityReasons[];
+  otherParentOtherResponsibilityReason: string;
   otherParentOccupation: string;
   otherParentAddressKnown: YesOrNo;
   otherParentAddress1: string;
@@ -408,28 +435,50 @@ export interface CaseData {
   otherParentAddressCountry: string;
   otherParentNameOnCertificate: string;
   otherParentAddressNotKnownReason: string;
+  otherParentLastAddressDate: string;
+  otherParentServedWith: YesOrNo;
+  otherParentNotServedWithReason: string;
 
-  socialWorkerName: string;
-  socialWorkerPhoneNumber: string;
-  socialWorkerEmail: string;
-  socialWorkerTeamEmail: string;
+  childSocialWorkerName: string;
+  childSocialWorkerPhoneNumber: string;
+  childSocialWorkerEmail: string;
+  childLocalAuthority: string;
+  childLocalAuthorityEmail: string;
+
+  applicantSocialWorkerName: string;
+  applicantSocialWorkerPhoneNumber: string;
+  applicantSocialWorkerEmail: string;
+  applicantLocalAuthority: string;
+  applicantLocalAuthorityEmail: string;
+
   solicitorFirm: string;
   solicitorName: string;
   solicitorPhoneNumber: string;
   solicitorEmail: string;
   solicitorHelpingWithApplication: YesOrNo;
-  adopAgencyOrLAs: ListValue<AdoptionAgencyOrLocalAuthority>[];
+
+  localAuthorityName: string;
+  localAuthorityContactName: string;
+  localAuthorityPhoneNumber: string;
+  localAuthorityContactEmail: string;
+
+  adopAgencyOrLaName: string;
+  adopAgencyOrLaContactName: string;
+  adopAgencyOrLaPhoneNumber: string;
+  adopAgencyAddressLine1: string;
+  adopAgencyTown: string;
+  adopAgencyPostcode: string;
+  adopAgencyOrLaContactEmail: string;
+
   siblings: ListValue<Sibling>[];
   payments: ListValue<Payment>[];
   hasAnotherAdopAgencyOrLA: YesOrNo;
-  selectedAdoptionAgencyId: string;
-  hasSiblings: string;
+  hasSiblings: YesNoNotsure;
   hasSiblingNotSureReason: string;
-  hasPoForSiblings: string;
-  hasPoForSiblingsNotSureReason: string;
   addAnotherSiblingPlacementOrder: YesOrNo;
   selectedSiblingId: string;
-  selectedSiblingPoId: string;
+  selectedSiblingRelation: string;
+  selectedSiblingPoType: string;
 
   applicant1StatementOfTruth: YesOrNo;
   applicant2StatementOfTruth: YesOrNo;
@@ -437,9 +486,13 @@ export interface CaseData {
   applicant2SotFullName: string;
   pcqId: string;
   applicant1DocumentsUploaded: ListValue<AdoptionDocument>[];
+  laDocumentsUploaded: ListValue<AdoptionDocument>[];
   applicant1CannotUploadSupportingDocument: DocumentType[];
+  laCannotUploadSupportingDocument: DocumentType[];
   applicant1CannotUpload: string;
+  laCannotUpload: string;
 
+  placementOrderCourt: string;
   findFamilyCourt: YesOrNo;
   familyCourtName: string;
   familyCourtEmailId: string;
@@ -512,9 +565,7 @@ export interface CaseData {
   jurisdictionApplicant2Domicile: YesOrNo;
   jurisdictionApp1HabituallyResLastTwelveMonths: YesOrNo;
   jurisdictionApp1HabituallyResLastSixMonths: YesOrNo;
-  jurisdictionResidualEligible: YesOrNo;
   jurisdictionBothLastHabituallyResident: YesOrNo;
-  jurisdictionConnections: JurisdictionConnections[];
   solServiceDateOfService: DateAsString;
   solServiceDocumentsServed: string;
   solServiceOnWhomServed: string;
@@ -656,7 +707,6 @@ export interface CaseData {
   confidentialDocumentsUploaded: ListValue<ConfidentialDivorceDocument>[];
   generalOrders: ListValue<DivorceGeneralOrder>[];
   previousCaseId: CaseLink;
-  dueDate: DateAsString;
   notes: ListValue<CaseNote>[];
   note: string;
   bulkListCaseReference: string;
@@ -682,6 +732,13 @@ export interface CaseData {
   coAddNewDocuments: YesOrNo;
   coDocumentsUploaded: ListValue<AdoptionDocument>[];
   coIsEverythingInPetitionTrue: YesOrNo;
+  otherPlacementOrderType: string;
+  checkYourAnswersReturn: false;
+  changeAddressBothApplicants: YesOrNo;
+  status: State;
+  laSotFullName: string;
+  laSotJobtitle: string;
+  laNameSot: string;
 }
 
 export interface Children {
@@ -713,26 +770,37 @@ export interface Parent {
   NameOnCertificate: string;
 }
 
+export interface LocalAuthority {
+  localAuthorityName: string;
+  localAuthorityContactName: string;
+  localAuthorityPhoneNumber: string;
+  localAuthorityContactEmail: string;
+}
+
 export interface AdoptionAgencyOrLocalAuthority {
-  adopAgencyOrLaId: string;
   adopAgencyOrLaName?: string;
-  adopAgencyOrLaPhoneNumber?: string;
   adopAgencyOrLaContactName?: string;
+  adopAgencyOrLaPhoneNumber?: string;
+  adopAgencyAddressLine1?: string;
+  adopAgencyTown?: string;
+  adopAgencyPostcode?: string;
   adopAgencyOrLaContactEmail?: string;
 }
 
 export interface Sibling {
   siblingId: string;
-  siblingFirstName?: string;
-  siblingLastNames?: string;
-  siblingPlacementOrders?: (PlacementOrder | ListValue<PlacementOrder>)[];
+  siblingRelation?: SiblingRelationships;
+  siblingPoType?: SiblingPOType;
+  siblingPoNumber?: string;
+  siblingPlacementOtherType?: string;
 }
 
 export interface SocialWorker {
   socialWorkerName: string;
   socialWorkerPhoneNumber: string;
   socialWorkerEmail: string;
-  socialWorkerTeamEmail: string;
+  localAuthority: string;
+  localAuthorityEmail: string;
 }
 
 export interface Solicitor {
@@ -852,7 +920,6 @@ export interface Jurisdiction {
   App1HabituallyResLastSixMonths: YesOrNo;
   ResidualEligible: YesOrNo;
   BothLastHabituallyResident: YesOrNo;
-  Connections: JurisdictionConnections[];
 }
 
 export interface LabelContent {
@@ -937,7 +1004,6 @@ export interface SolicitorService {
 
 export interface ConfidentialDivorceDocument {
   confidentialDocumentsReceived: ConfidentialDocumentsReceived;
-  documentEmailContent: string;
   documentLink: Document;
   documentDateAdded: DateAsString;
   documentComment: string;
@@ -949,7 +1015,6 @@ export interface AdoptionDocument {
   documentComment: string;
   documentFileName: string;
   documentType: DocumentType;
-  documentEmailContent: string;
   documentLink: Document;
 }
 
@@ -1244,62 +1309,6 @@ export const enum JudgeCostsClaimGranted {
   ADJOURN = 'Adjourn',
 }
 
-/**
- * Values:
- * - `J` - APP_1_RESIDENT_JOINT
- * - `A` - APP_1_APP_2_RESIDENT
- * - `B` - APP_1_APP_2_LAST_RESIDENT
- * - `C` - APP_2_RESIDENT
- * - `D` - APP_1_RESIDENT_TWELVE_MONTHS
- * - `E` - APP_1_RESIDENT_SIX_MONTHS
- * - `F` - APP_1_APP_2_DOMICILED
- * - `G` - APP_1_DOMICILED
- * - `H` - APP_2_DOMICILED
- * - `I` - RESIDUAL_JURISDICTION
- */
-export const enum JurisdictionConnections {
-  /**
-   * APP_1_RESIDENT_JOINT
-   */
-  APP_1_RESIDENT_JOINT = 'J',
-  /**
-   * APP_1_APP_2_RESIDENT
-   */
-  APP_1_APP_2_RESIDENT = 'A',
-  /**
-   * APP_1_APP_2_LAST_RESIDENT
-   */
-  APP_1_APP_2_LAST_RESIDENT = 'B',
-  /**
-   * APP_2_RESIDENT
-   */
-  APP_2_RESIDENT = 'C',
-  /**
-   * APP_1_RESIDENT_TWELVE_MONTHS
-   */
-  APP_1_RESIDENT_TWELVE_MONTHS = 'D',
-  /**
-   * APP_1_RESIDENT_SIX_MONTHS
-   */
-  APP_1_RESIDENT_SIX_MONTHS = 'E',
-  /**
-   * APP_1_APP_2_DOMICILED
-   */
-  APP_1_APP_2_DOMICILED = 'F',
-  /**
-   * APP_1_DOMICILED
-   */
-  APP_1_DOMICILED = 'G',
-  /**
-   * APP_2_DOMICILED
-   */
-  APP_2_DOMICILED = 'H',
-  /**
-   * RESIDUAL_JURISDICTION
-   */
-  RESIDUAL_JURISDICTION = 'I',
-}
-
 export const enum LanguagePreference {
   ENGLISH = 'ENGLISH',
   WELSH = 'WELSH',
@@ -1309,6 +1318,15 @@ export const enum LegalProceedingsRelated {
   MARRIAGE = 'marriage',
   PROPERTY = 'property',
   CHILDREN = 'children',
+}
+
+export const enum PlacementOrderTypeEnum {
+  AdoptionOrder = 'Adoption order',
+  CareOrder = 'Care order',
+  CHILD_ARRANGEMENT_ORDER = 'Child arrangements order',
+  PlacementOrder = 'Placement order',
+  SupervisionOrder = 'Supervision order',
+  Other = 'Other',
 }
 
 export const enum RefusalOption {
@@ -1348,6 +1366,24 @@ export const enum ServicePaymentMethod {
   FEE_PAY_BY_CHEQUE = 'feePayByCheque',
 }
 
+export const enum SiblingRelationships {
+  SISTER = 'Sister',
+  HALF_SISTER = 'Half-sister',
+  STEP_SISTER = 'Step-sister',
+  BROTHER = 'Brother',
+  HALF_BROTHER = 'Half-brother',
+  STEP_BROTHER = 'Step-brother',
+}
+
+export const enum SiblingPOType {
+  ADOPTION_ORDER = 'Adoption order',
+  CARE_ORDER = 'Care order',
+  CHILD_ARRANGEMENT_ORDER = 'Child arrangements order',
+  PLACEMENT_ORDER = 'Placement order',
+  SUPERVIS_ORDER = 'Supervision order',
+  OTHER = 'Other',
+}
+
 export const enum SolicitorPaymentMethod {
   FEE_PAY_BY_ACCOUNT = 'feePayByAccount',
   FEES_HELP_WITH = 'feesHelpWith',
@@ -1360,9 +1396,11 @@ export const enum State {
   AosOverdue = 'AosOverdue',
   Applicant2Approved = 'Applicant2Approved',
   AwaitingPayment = 'AwaitingPayment',
+  AwaitingAdminChecks = 'AwaitingAdminChecks',
   Rejected = 'Rejected',
   Withdrawn = 'Withdrawn',
   AwaitingDocuments = 'AwaitingDocuments',
+  LaSubmitted = 'LaSubmitted',
   AwaitingApplicant1Response = 'AwaitingApplicant1Response',
   AwaitingApplicant2Response = 'AwaitingApplicant2Response',
   AwaitingBailiffReferral = 'AwaitingBailiffReferral',
@@ -1634,41 +1672,14 @@ export const enum HttpStatus {
   NOT_EXTENDED = 'NOT_EXTENDED',
   NETWORK_AUTHENTICATION_REQUIRED = 'NETWORK_AUTHENTICATION_REQUIRED',
 }
+
 export const CASE_TYPE = 'A58';
 export const JURISDICTION = 'ADOPTION';
 export const CITIZEN_SUBMIT = 'citizen-submit-application';
-export const CITIZEN_INVITE_APPLICANT_2 = 'citizen-invite-applicant2';
 export const CITIZEN_CREATE = 'citizen-create-application';
-export const APPLICANT_2_APPROVE = 'applicant2-approve';
-export const APPLICANT_2_CONFIRM_RECEIPT = 'applicant2-confirm-receipt';
-export const CITIZEN_UPDATE_CONTACT_DETAILS = 'citizen-update-contact-details';
+export const LA_SUBMIT = 'local-authority-application-submit';
 export const CITIZEN_SAVE_AND_CLOSE = 'citizen-save-and-close';
-export const APPLICANT_2_NOT_BROKEN = 'applicant2-not-broken';
 export const CITIZEN_UPDATE = 'citizen-update-application';
-export const CITIZEN_APPLICANT_2_REQUEST_CHANGES = 'applicant2-request-changes';
+export const SYSTEM_USER_UPDATE = 'system-user-update-application';
 export const SWITCH_TO_SOLE = 'switch-to-sole';
-export const APPLICANT_1_CONFIRM_RECEIPT = 'applicant1-confirm-receipt';
-export const APPLICANT_1_RESUBMIT = 'applicant1-resubmit';
 export const CITIZEN_ADD_PAYMENT = 'citizen-add-payment';
-export const CITIZEN_APPLICANT2_UPDATE = 'citizen-applicant2-update-application';
-export const UPDATE_AOS = 'update-aos';
-export const DRAFT_CONDITIONAL_ORDER = 'draft-conditional-order';
-export const UPDATE_CONDITIONAL_ORDER = 'update-conditional-order';
-export const SUBMIT_CONDITIONAL_ORDER = 'submit-conditional-order';
-export const SUBMIT_AOS = 'submit-aos';
-export const DRAFT_AOS = 'draft-aos';
-export const SYSTEM_REMIND_APPLICANT2 = 'system-remind-applicant2';
-export const SYSTEM_UPDATE_CASE_PRONOUNCEMENT_JUDGE = 'system-update-case-pronouncement-judge';
-export const SYSTEM_LINK_APPLICANT_2 = 'system-link-applicant2';
-export const SYSTEM_PRONOUNCE_CASE = 'system-pronounce-case';
-export const SYSTEM_UPDATE_CASE_COURT_HEARING = 'system-update-case-court-hearing';
-export const SYSTEM_REMIND_APPLICANT_1_APPLICATION_REVIEWED = 'system-remind-applicant1';
-export const SYSTEM_MIGRATE_CASE = 'system-migrate-case';
-export const SYSTEM_LINK_WITH_BULK_CASE = 'system-link-with-bulk-case';
-export const SYSTEM_ISSUE_SOLICITOR_SERVICE_PACK = 'system-issue-solicitor-service-pack';
-export const SYSTEM_PROGRESS_HELD_CASE = 'system-progress-held-case';
-export const SYSTEM_REMOVE_BULK_CASE = 'system-remove-bulk-case';
-export const SYSTEM_NOTIFY_APPLICANT1_CONDITIONAL_ORDER = 'system-notify-applicant1-conditional-order';
-export const SYSTEM_APPLICATION_NOT_REVIEWED = 'system-application-not-reviewed';
-export const SYSTEM_PROGRESS_TO_AOS_OVERDUE = 'system-progress-to-aos-overdue';
-export const CASEWORKER_SYSTEM_USER_UPDATE_ISSUE_DATE = 'system-update-issue-date';

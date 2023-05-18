@@ -1,0 +1,114 @@
+{% from "govuk/components/cookie-banner/macro.njk" import govukCookieBanner %}
+
+{% set html %}
+  <input type="hidden" name="cookie_locale" id="cookie_locale" value="{{ language }}">
+  <p class="govuk-body">{{cookiesLine1}}</p>
+  <p class="govuk-body">{{ cookiesLine2 }}</p>
+{% endset %}
+{% if laPortal == true %}
+  {{ govukCookieBanner({
+    classes: 'cookie-banner',
+    ariaLabel: cookiesHeading + " " + serviceName,
+    hidden: true,
+    messages: [
+      {
+        classes: 'cookie-banner-message',
+        headingText: cookiesHeading + " " + serviceName,
+        html: html,
+        actions: [
+          {
+            classes: 'cookie-banner-accept-button',
+            text: acceptAnalyticsCookies,
+            type: "button"
+          },
+          {
+            classes: 'cookie-banner-reject-button',
+            text: rejectAnalyticsCookies,
+            type: "button"
+          },
+          {
+            text: viewCookies,
+            href: "/la-portal/cookies"
+          }
+        ]
+      },
+      {
+        classes: 'cookie-banner-accept-message',
+        html: laPortalCookiesAcceptedMessage,
+        role: "alert",
+        hidden: true,
+        actions: [
+          {
+            classes: 'cookie-banner-hide-button',
+            text: hideMessage
+          }
+        ]
+      },
+      {
+        classes: 'cookie-banner-reject-message',
+        html: laPortalCookiesRejectedMessage,
+        role: "alert",
+        hidden: true,
+        actions: [
+          {
+            classes: 'cookie-banner-hide-button',
+            text: hideMessage
+          }
+      ]
+      }
+    ]
+  }) }}
+{% else %}
+  {{ govukCookieBanner({
+      classes: 'cookie-banner',
+      ariaLabel: cookiesHeading + " " + serviceName,
+      hidden: true,
+      messages: [
+        {
+          classes: 'cookie-banner-message',
+          headingText: cookiesHeading + " " + serviceName,
+          html: html,
+          actions: [
+            {
+              classes: 'cookie-banner-accept-button',
+              text: acceptAnalyticsCookies,
+              type: "button"
+            },
+            {
+              classes: 'cookie-banner-reject-button',
+              text: rejectAnalyticsCookies,
+              type: "button"
+            },
+            {
+              text: viewCookies,
+              href: "/cookies"
+            }
+          ]
+        },
+        {
+          classes: 'cookie-banner-accept-message',
+          html: cookiesAcceptedMessage,
+          role: "alert",
+          hidden: true,
+          actions: [
+            {
+              classes: 'cookie-banner-hide-button',
+              text: hideMessage
+            }
+          ]
+        },
+        {
+          classes: 'cookie-banner-reject-message',
+          html: cookiesRejectedMessage,
+          role: "alert",
+          hidden: true,
+          actions: [
+            {
+              classes: 'cookie-banner-hide-button',
+              text: hideMessage
+            }
+          ]
+        }
+      ]
+    }) }}
+{% endif %}

@@ -1,24 +1,37 @@
 import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent, FormFieldsFn } from '../../../app/form/Form';
-import { isEmailValid, isFieldFilledIn, isPhoneNoValid } from '../../../app/form/validation';
+import { FormContent } from '../../../app/form/Form';
+import { isEmailValid, isFieldFilledIn, isInvalidPostcode, isPhoneNoValid } from '../../../app/form/validation';
 
 const en = () => ({
-  section: 'Your adoption agency or local authority details',
+  section: 'Application details',
   title: 'Adoption agency or local authority details',
   adopAgencyName: 'Name of adoption agency or local authority',
-  adopAgencyPhone: 'Phone number',
   adopAgencyContactName: 'Name of your contact',
+  adopAgencyPhone: 'Phone number',
+  adopAgencyAddressLine1: 'Address line 1',
+  adopAgencyTown: 'Town or city',
+  adopAgencyPostcode: 'Postcode',
   adopAgencyContactEmail: 'Email address of your contact',
   errors: {
     adopAgencyOrLaName: {
-      required: 'Enter a name',
+      required: 'Enter name of adoption agency or local authority',
+    },
+    adopAgencyOrLaContactName: {
+      required: 'Enter name of your contact',
     },
     adopAgencyOrLaPhoneNumber: {
       required: 'Enter a UK telephone number',
       invalid: 'Enter a UK telephone number',
     },
-    adopAgencyOrLaContactName: {
-      required: 'Enter a name',
+    adopAgencyAddressLine1: {
+      required: 'Enter the first line of the address',
+    },
+    adopAgencyTown: {
+      required: 'Enter the town or city',
+    },
+    adopAgencyPostcode: {
+      required: 'Enter postcode, like AA1 1AA',
+      invalid: 'Enter postcode, like AA1 1AA',
     },
     adopAgencyOrLaContactEmail: {
       required: 'Enter an email address',
@@ -28,72 +41,100 @@ const en = () => ({
 });
 
 const cy: typeof en = () => ({
-  section: 'Manylion eich asiantaeth fabwysiadu neu’ch awdurdod lleol',
-  title: 'Manylion yr asiantaeth fabwysiadu neu’r awdurdod lleol',
-  adopAgencyName: 'Enw’r asiantaeth fabwysiadu neu’r awdurdod lleol',
-  adopAgencyPhone: 'Rhif ffôn',
+  section: 'Manylion y cais',
+  title: 'Yr asiantaeth fabwysiadu neu fanylion yr awdurdod lleol',
+  adopAgencyName: "Enw'r asiantaeth fabwysiadu neu'r awdurdod lleol",
   adopAgencyContactName: 'Enw eich cyswllt',
+  adopAgencyPhone: 'Rhif ffôn',
+  adopAgencyAddressLine1: 'Llinell gyntaf y cyfeiriad',
+  adopAgencyTown: 'Tref neu ddinas',
+  adopAgencyPostcode: 'Cod post, fel AA1 1AA',
   adopAgencyContactEmail: 'Cyfeiriad e-bost eich cyswllt',
   errors: {
     adopAgencyOrLaName: {
-      required: 'Nac ydwdwch enw',
+      required: "Rhowch enw'r asiantaeth fabwysiadu neu’r awdurdod lleol",
+    },
+    adopAgencyOrLaContactName: {
+      required: "Rhowch enw'ch cyswllt",
     },
     adopAgencyOrLaPhoneNumber: {
       required: 'Rhowch rif ffôn yn y DU',
       invalid: 'Rhowch rif ffôn yn y DU',
     },
-    adopAgencyOrLaContactName: {
-      required: 'Nac ydwdwch enw',
+    adopAgencyAddressLine1: {
+      required: 'Rhowch linell gyntaf y cyfeiriad',
+    },
+    adopAgencyTown: {
+      required: "Rhowch enw'r dref neu'r ddinas",
+    },
+    adopAgencyPostcode: {
+      required: 'Cod post, fel AA1 1AA',
+      invalid: 'Cod post, fel AA1 1AA',
     },
     adopAgencyOrLaContactEmail: {
-      required: 'Nac ydwdwch gyfeiriad e-bost',
-      invalid: 'Rhowch gyfeiriad e-bost yn y fformat cywir, er enghraifft enw@enghraifft.com',
+      required: 'Rhowch gyfeiriad e-bost',
+      invalid: 'Nodwch gyfeiriad e-bost yn y fformat cywir, fel name@example.com',
     },
   },
 });
 
 export const form: FormContent = {
-  fields: userCase => {
-    const adopAgency = userCase.adopAgencyOrLAs?.find(
-      item => item.adopAgencyOrLaId === userCase.selectedAdoptionAgencyId
-    );
-    return {
-      adopAgencyOrLaName: {
-        type: 'text',
-        classes: 'govuk-label govuk-!-width-two-thirds',
-        label: l => l.adopAgencyName,
-        value: adopAgency?.adopAgencyOrLaName,
-        labelSize: null,
-        validator: isFieldFilledIn,
+  fields: {
+    adopAgencyOrLaName: {
+      type: 'text',
+      classes: 'govuk-label govuk-!-width-two-thirds',
+      label: l => l.adopAgencyName,
+      labelSize: null,
+      validator: isFieldFilledIn,
+    },
+    adopAgencyOrLaContactName: {
+      type: 'text',
+      classes: 'govuk-label govuk-!-width-two-thirds',
+      label: l => l.adopAgencyContactName,
+      labelSize: null,
+      validator: isFieldFilledIn,
+    },
+    adopAgencyOrLaPhoneNumber: {
+      type: 'text',
+      classes: 'govuk-label govuk-input--width-10',
+      label: l => l.adopAgencyPhone,
+      labelSize: null,
+      attributes: {
+        maxLength: 14,
       },
-      adopAgencyOrLaPhoneNumber: {
-        type: 'text',
-        classes: 'govuk-label govuk-input--width-10',
-        label: l => l.adopAgencyPhone,
-        value: adopAgency?.adopAgencyOrLaPhoneNumber,
-        labelSize: null,
-        attributes: {
-          maxLength: 14,
-        },
-        validator: value => isFieldFilledIn(value) || isPhoneNoValid(value),
+      validator: value => isFieldFilledIn(value) || isPhoneNoValid(value),
+    },
+    adopAgencyAddressLine1: {
+      type: 'text',
+      classes: 'govuk-label',
+      label: l => l.adopAgencyAddressLine1,
+      labelSize: null,
+      validator: isFieldFilledIn,
+    },
+    adopAgencyTown: {
+      type: 'text',
+      classes: 'govuk-label govuk-!-width-two-thirds',
+      label: l => l.adopAgencyTown,
+      labelSize: null,
+      validator: isFieldFilledIn,
+    },
+    adopAgencyPostcode: {
+      type: 'text',
+      classes: 'govuk-label govuk-input--width-10',
+      label: l => l.adopAgencyPostcode,
+      labelSize: null,
+      attributes: {
+        maxLength: 14,
       },
-      adopAgencyOrLaContactName: {
-        type: 'text',
-        classes: 'govuk-label govuk-!-width-two-thirds',
-        label: l => l.adopAgencyContactName,
-        value: adopAgency?.adopAgencyOrLaContactName,
-        labelSize: null,
-        validator: isFieldFilledIn,
-      },
-      adopAgencyOrLaContactEmail: {
-        type: 'text',
-        classes: 'govuk-label govuk-!-width-two-thirds',
-        label: l => l.adopAgencyContactEmail,
-        value: adopAgency?.adopAgencyOrLaContactEmail,
-        labelSize: null,
-        validator: value => isFieldFilledIn(value) || isEmailValid(value),
-      },
-    };
+      validator: isInvalidPostcode,
+    },
+    adopAgencyOrLaContactEmail: {
+      type: 'text',
+      classes: 'govuk-label govuk-!-width-two-thirds',
+      label: l => l.adopAgencyContactEmail,
+      labelSize: null,
+      validator: value => isFieldFilledIn(value) || isEmailValid(value),
+    },
   },
   submit: {
     text: l => l.continue,
@@ -112,6 +153,6 @@ export const generateContent: TranslationFn = content => {
   const translations = languages[content.language]();
   return {
     ...translations,
-    form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}) },
+    form,
   };
 };

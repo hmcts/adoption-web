@@ -14,7 +14,11 @@
 {% block after_fields %}
   <div class="govuk-form-group">
     <p class="govuk-body">
+    {% if userCase.checkYourAnswersReturn %}
+      <a href="{{cantFindAddressUrl + '?returnUrl=/review-pay-submit/check-your-answers'}}" id="cannotFindAddress" class="govuk-link">{{ cannotFindAddress }}</a>
+    {% else %}
       <a href="{{cantFindAddressUrl}}" id="cannotFindAddress" class="govuk-link">{{ cannotFindAddress }}</a>
+    {% endif %}
     </p>
   </div>
 {% endblock %}

@@ -3,7 +3,7 @@ import 'jest-extended';
 import { mockRequest } from '../../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../../test/unit/utils/mockResponse';
 import { ApplicationType, PaymentStatus, State } from '../../../../app/case/definition';
-import { APPLICATION_SUBMITTED, CHECK_ANSWERS_URL, TASK_LIST_URL } from '../../../urls';
+import { APPLICATION_SUBMITTED, CHECK_ANSWERS_URL, STATEMENT_OF_TRUTH } from '../../../urls';
 
 import PaymentCallbackGetController from './get';
 
@@ -121,7 +121,7 @@ describe('PaymentCallbackGetController', () => {
 
       expect(req.locals.api.addPayment).toHaveBeenCalledWith('1234', expect.any(Array));
 
-      expect(res.redirect).toHaveBeenCalledWith(TASK_LIST_URL);
+      expect(res.redirect).toHaveBeenCalledWith(STATEMENT_OF_TRUTH);
     });
   });
 });

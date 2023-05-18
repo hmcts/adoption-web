@@ -1,0 +1,28 @@
+{% extends "common/template.njk" %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+
+{% block content %}
+{% block errorSummary %}
+  {% include "common/error/summary.njk" %}
+{% endblock %}
+
+<h1 class="govuk-heading-xl govuk-!-margin-bottom-4 ">{{ title }}</h1>
+
+{{ govukInsetText({text: hint}) }}
+
+{{ govukDetails(getContent(details)) }}
+
+<legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+    {{question1}}
+</legend>
+
+{% block form %}
+  {% include "common/form/form.njk"%}
+{% endblock %}
+
+{% block contactUs %}
+  {% include "common/form/contactForHelp.njk"%}
+{% endblock %}
+
+{% endblock %}

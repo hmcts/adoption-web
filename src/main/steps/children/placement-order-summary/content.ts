@@ -1,4 +1,4 @@
-import { YesOrNo } from '../../../app/case/definition';
+import { PlacementOrderTypeEnum, YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -9,15 +9,22 @@ const en = content => {
   const enContent = {
     section: "The child's details",
     title: 'Orders already in place',
-    placementOrder: 'Placement Order',
+    placementOrder: 'Placement order',
     incomplete: 'incomplete',
     change: 'Change',
     remove: 'Remove',
-    label: 'Do you want to add another order?',
-    hint: 'We need details of all orders already in place. Your social worker or adoption agency can help provide these details.',
+    label: 'Does the child have any other previous or existing orders?',
+    placementOrderType: {
+      [PlacementOrderTypeEnum.AdoptionOrder]: 'Adoption order',
+      [PlacementOrderTypeEnum.CareOrder]: 'Care order',
+      [PlacementOrderTypeEnum.CHILD_ARRANGEMENT_ORDER]: 'Child arrangements order',
+      [PlacementOrderTypeEnum.PlacementOrder]: 'Placement order',
+      [PlacementOrderTypeEnum.SupervisionOrder]: 'Supervision order',
+      [PlacementOrderTypeEnum.Other]: 'Other',
+    },
     errors: {
       addAnotherPlacementOrder: {
-        required: 'Please select an answer',
+        required: 'Select whether the child has any other previous or existing orders',
       },
     },
   };
@@ -35,11 +42,18 @@ const cy: typeof en = content => {
     incomplete: 'anghyflawn',
     change: 'Newid',
     remove: 'Dileu',
-    label: 'A ydych eisiau ychwanegu gorchymyn arall?',
-    hint: 'Mae arnom angen manylion y gorchmynion sydd eisoes mewn lle. Gall eich gweithiwr cymdeithasol neu’ch asiantaeth fabwysiadu eich helpu i ddarparu’r manylion hyn.',
+    label: 'A oes gan y plentyn unrhyw orchmynion blaenorol neu bresennol eraill?',
+    placementOrderType: {
+      [PlacementOrderTypeEnum.AdoptionOrder]: 'Gorchymyn Mabwysiadu',
+      [PlacementOrderTypeEnum.CareOrder]: 'Gorchymyn Gofal',
+      [PlacementOrderTypeEnum.CHILD_ARRANGEMENT_ORDER]: 'Gorchymyn trefniadau plant',
+      [PlacementOrderTypeEnum.PlacementOrder]: 'Gorchymyn Lleoli',
+      [PlacementOrderTypeEnum.SupervisionOrder]: 'Gorchymyn Goruchwylio',
+      [PlacementOrderTypeEnum.Other]: 'Arall',
+    },
     errors: {
       addAnotherPlacementOrder: {
-        required: 'Dewiswch ateb os gwelwch yn dda',
+        required: 'Nodwch a oes gan y plentyn unrhyw orchmynion blaenorol neu bresennol eraill',
       },
     },
   };
@@ -56,8 +70,8 @@ export const form: FormContent = {
       classes: 'govuk-radios govuk-radios--inline',
       label: l => l.label,
       section: l => l.section,
-      hint: l => l.hint,
       labelSize: 'm',
+      labelHidden: false,
       values: [
         { label: l => l.yes, value: YesOrNo.YES },
         { label: l => l.no, value: YesOrNo.NO },

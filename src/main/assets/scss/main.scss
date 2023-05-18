@@ -7,6 +7,8 @@
 @import './cookie-banner';
 @import './task-list';
 @import './upload-documents';
+@import './accessible-autocomplete';
+@import './timeout-modal';
 
 .hmcts-button-link,
 .uppy-FileInput-btn {
@@ -50,6 +52,10 @@ section {
   @include govuk-media-query($from: tablet) {
     text-align: right;
   }
+}
+
+.summary-list-value-left-align {
+  text-align: left;
 }
 
 .summary-list-actions {

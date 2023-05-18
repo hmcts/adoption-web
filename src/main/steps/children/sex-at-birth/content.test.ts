@@ -10,7 +10,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   section: "The child's details",
-  label: "What was the child's sex at birth?",
+  title: "What was the child's sex at birth?",
   male: 'Male',
   female: 'Female',
   other: 'Other',
@@ -18,7 +18,7 @@ const enContent = {
     "For example, if the child's sex was intersex when they were born, you should enter exactly what is listed on the birth certificate.",
   errors: {
     childrenSexAtBirth: {
-      required: 'Please select an answer',
+      required: "Select child's sex at birth.",
     },
     childrenOtherSexAtBirth: {
       required: 'Enter what is written on the birth certificate',
@@ -28,7 +28,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion y plentyn',
-  label: 'Beth oedd rhyw’r plentyn pan gafodd ei (g)eni?',
+  title: 'Beth oedd rhyw’r plentyn pan gafodd ei (g)eni?',
   male: 'Gwryw',
   female: 'Benyw',
   other: 'Arall',
@@ -36,7 +36,7 @@ const cyContent = {
     'Er enghraifft, os mai rhyngrywiol oedd rhyw y plentyn pan gafodd ei eni, dylech nodi’n union yr hyn sydd wedi’i restru ar y dystysgrif geni.',
   errors: {
     childrenSexAtBirth: {
-      required: 'Dewiswch ateb os gwelwch yn dda',
+      required: 'Nodwch ryw y plentyn ar adeg ei eni/geni.',
     },
     childrenOtherSexAtBirth: {
       required: 'Nac ydwdwch yr hyn sydd wedi’i ysgrifennu ar y dystysgrif geni.',
@@ -62,7 +62,7 @@ describe('children > sex-at-birth > content', () => {
     const childrenSexAtBirthField = fields.childrenSexAtBirth as FormOptions;
     expect(childrenSexAtBirthField.type).toBe('radios');
     expect(childrenSexAtBirthField.classes).toBe('govuk-radios');
-    expect((childrenSexAtBirthField.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((childrenSexAtBirthField.label as Function)(generatedContent)).toBe(enContent.title);
     expect((childrenSexAtBirthField.section as Function)(generatedContent)).toBe(enContent.section);
     expect((childrenSexAtBirthField.values[0].label as Function)(generatedContent)).toBe(enContent.male);
     expect(childrenSexAtBirthField.values[0].value).toBe(Gender.MALE);

@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 import Axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import config from 'config';
+import moment from 'moment';
 import { LoggerInstance } from 'winston';
 
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
@@ -13,7 +15,6 @@ import {
   CITIZEN_ADD_PAYMENT,
   CITIZEN_CREATE,
   CaseData,
-  LanguagePreference,
   ListValue,
   Payment,
   State,
@@ -24,30 +25,70 @@ import { toApiFormat } from './to-api-format';
 export class CaseApi {
   constructor(private readonly axios: AxiosInstance, private readonly logger: LoggerInstance) {}
 
-  public async getOrCreateCase(
-    serviceType: Adoption,
-    userDetails: UserDetails,
-    languagePreference = LanguagePreference.ENGLISH
-  ): Promise<CaseWithId> {
+  public async getOrCreateCase(serviceType: Adoption, userDetails: UserDetails): Promise<CaseWithId> {
     const userCase = await this.getCase();
-    return userCase || this.createCase(serviceType, userDetails, languagePreference);
+    return userCase || this.createCase(serviceType, userDetails);
   }
 
-  private async getCase(): Promise<CaseWithId | false> {
+  public async checkOldPCQIDExists(): Promise<string | undefined> {
+    const cases = await this.getCases();
+    const caseWithPCQID = cases.find(caseElement => caseElement.case_data.pcqId !== null);
+    return caseWithPCQID?.case_data.pcqId;
+  }
+
+  public async getCase(): Promise<CaseWithId | false> {
     const cases = await this.getCases();
 
-    switch (cases.length) {
-      case 0: {
-        return false;
-      }
-      case 1: {
-        const { id, state, case_data: caseData } = cases[0];
+    if (cases.length === 0) {
+      return false;
+    }
+
+    if (
+      cases.filter(caseElement => caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted)
+        .length === cases.length
+    ) {
+      if (
+        cases.filter(
+          caseElement =>
+            moment(new Date(caseElement.case_data.dateSubmitted)).format('YYYY-MM-DD') ===
+            moment(new Date()).format('YYYY-MM-DD')
+        ).length !== 0
+      ) {
+        const {
+          id,
+          state,
+          case_data: caseData,
+        } = cases
+          .filter(
+            caseElement =>
+              moment(new Date(caseElement.case_data.dateSubmitted)).format('YYYY-MM-DD') ===
+              moment(new Date()).format('YYYY-MM-DD')
+          )
+          .sort((a, b) => {
+            return a.case_data.dateSubmitted >= b.case_data.dateSubmitted ? -1 : 1;
+          })[0];
+
         return { ...fromApiFormat(caseData), id: id.toString(), state };
-      }
-      default: {
-        throw new Error('Too many cases assigned to user.');
+      } else {
+        return null as any;
       }
     }
+    if (
+      cases.filter(caseElement => caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted)
+        .length !==
+      cases.length - 1
+    ) {
+      throw new Error("Not all OR few cases assigned to the user aren't in right state.");
+    }
+
+    const {
+      id,
+      state,
+      case_data: caseData,
+    } = cases.filter(
+      caseElement => caseElement.state !== State.Submitted && caseElement.state !== State.LaSubmitted
+    )[0];
+    return { ...fromApiFormat(caseData), id: id.toString(), state };
   }
 
   public async getCases(): Promise<CcdV1Response[]> {
@@ -60,8 +101,11 @@ export class CaseApi {
         `/searchCases?ctid=${CASE_TYPE}`,
         JSON.stringify(query)
       );
-      //this.logger.info('Case/s fetched using elastic search API :: ', response.data.cases);
       return response.data.cases;
+      // const response = await this.axios.get<CcdV1Response[]>(
+      //   `/citizens/${this.userDetails.id}/jurisdictions/${JURISDICTION}/case-types/${CASE_TYPE}/cases`
+      // );
+      // return response.data;
     } catch (err) {
       this.logError(err);
       throw new Error('Case could not be retrieved.');
@@ -72,6 +116,7 @@ export class CaseApi {
     try {
       const response = await this.axios.get<CcdV2Response>(`/cases/${caseId}`);
 
+      response.data.data.status = response.data.state;
       return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
     } catch (err) {
       this.logError(err);
@@ -79,11 +124,7 @@ export class CaseApi {
     }
   }
 
-  private async createCase(
-    serviceType: Adoption,
-    userDetails: UserDetails,
-    languagePreference: LanguagePreference
-  ): Promise<CaseWithId> {
+  public async createCase(serviceType: Adoption, userDetails: UserDetails): Promise<CaseWithId> {
     const tokenResponse: AxiosResponse<CcdTokenResponse> = await this.axios.get(
       `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
     );
@@ -94,7 +135,6 @@ export class CaseApi {
       applicant1FirstName: userDetails.givenName,
       applicant1LastName: userDetails.familyName,
       applicant1Email: userDetails.email,
-      applicant1LanguagePreference: languagePreference,
     };
 
     try {
@@ -103,6 +143,7 @@ export class CaseApi {
         event,
         event_token: token,
       });
+      response.data.data.status = response.data.state;
       return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
     } catch (err) {
       this.logError(err);
@@ -131,6 +172,7 @@ export class CaseApi {
         data,
         event_token: token,
       });
+      response.data.data.status = response.data.state;
       return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
     } catch (err) {
       this.logError(err);
@@ -195,3 +237,4 @@ interface CcdV2Response {
 interface CcdTokenResponse {
   token: string;
 }
+/* eslint-enable @typescript-eslint/ban-types */

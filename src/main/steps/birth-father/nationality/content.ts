@@ -1,5 +1,5 @@
 import { FieldPrefix } from '../../../app/case/case';
-import { TranslationFn } from '../../../app/controller/GetController';
+import { PageContent, TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import {
   nationalityFields,
@@ -7,41 +7,40 @@ import {
   generateContent as nationalityGenerateContent,
 } from '../../common/components/nationality';
 import { BIRTH_FATHER_NATIONALITY } from '../../urls';
-import { SECTION, SECTION_IN_WELSH } from '../constants';
 
-const en = () => ({
-  section: SECTION,
-  label: "What is the nationality of the child's birth father?",
-  url: BIRTH_FATHER_NATIONALITY,
+const en = (nationalityContent: PageContent) => ({
+  section: "Birth father's details",
+  title: "What is the nationality of the child's birth father?",
+  hint: 'Select all options that are relevant.',
   errors: {
-    [`${FieldPrefix.BIRTH_FATHER}Nationality`]: {
-      required: "Select a nationality or 'Not sure'",
+    birthFatherNationality: {
+      required: 'Select if they are British, Irish, citizen of a different country or not sure',
       notSureViolation: "Select a nationality or 'Not sure'",
+      addButtonNotClicked: "Select 'Add' before you continue",
     },
-    addAnotherNationality: {
-      required: 'This is not a valid entry',
-    },
+    addAnotherNationality: (nationalityContent.errors as Record<string, unknown>).addAnotherNationality,
   },
+  url: BIRTH_FATHER_NATIONALITY,
 });
 
-const cy: typeof en = () => ({
-  section: SECTION_IN_WELSH,
-  label: 'Beth yw cenedligrwydd tad biolegol y plentyn?',
-  url: BIRTH_FATHER_NATIONALITY,
+const cy: typeof en = (nationalityContent: PageContent) => ({
+  section: 'Manylion y tad biolegol',
+  title: 'Beth yw cenedligrwydd tad biolegol y plentyn?',
+  hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
   errors: {
-    [`${FieldPrefix.BIRTH_FATHER}Nationality`]: {
-      required: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
+    birthFatherNationality: {
+      required: "Dewiswch os ydyn nhw'n Brydeinig, Gwyddelig, dinesydd gwlad wahanol neu ddim yn siŵr",
       notSureViolation: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
+      addButtonNotClicked: 'Dewiswch ‘Ychwanegu’ cyn ichi symud ymlaen',
     },
-    addAnotherNationality: {
-      required: 'Nid yw hyn yn gofnod dilys',
-    },
+    addAnotherNationality: (nationalityContent.errors as Record<string, unknown>).addAnotherNationality,
   },
+  url: BIRTH_FATHER_NATIONALITY,
 });
 
 export const form: FormContent = {
   ...nationalityForm,
-  fields: userCase => nationalityFields(userCase, FieldPrefix.BIRTH_FATHER),
+  fields: userCase => nationalityFields(userCase, FieldPrefix.BIRTH_FATHER, currentLanguage),
 };
 
 const languages = {
@@ -51,9 +50,11 @@ const languages = {
 
 export const generateContent: TranslationFn = content => {
   const nationalityContent = nationalityGenerateContent(content, FieldPrefix.BIRTH_FATHER);
-  const translations = languages[content.language]();
+  const translations = languages[content.language](nationalityContent);
   return {
     ...nationalityContent,
     ...translations,
   };
 };
+
+const currentLanguage: string = generateContent[1];

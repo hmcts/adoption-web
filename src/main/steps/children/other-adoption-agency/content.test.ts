@@ -9,8 +9,9 @@ import { generateContent } from './content';
 jest.mock('../../../app/form/validation');
 
 const en = {
-  section: 'Your adoption agency or local authority details',
-  label: 'Was there another adoption agency or local authority involved in placing the child?',
+  section: 'Application details',
+  title: 'Is there another adoption agency or local authority involved?',
+  hint: 'This would be separate from your local authority, for example it could be a private agency or a different local authority.',
   errors: {
     hasAnotherAdopAgencyOrLA: {
       required: 'Please answer the question',
@@ -19,8 +20,9 @@ const en = {
 };
 
 const cy = {
-  section: 'Manylion eich asiantaeth fabwysiadu neu’ch awdurdod lleol',
-  label: 'A oedd asiantaeth fabwysiadu neu awdurdod lleol arall wedi chwarae rhan mewn lleoli’r plentyn?',
+  section: 'Manylion y cais',
+  title: 'A oes asiantaeth fabwysiadu neu awdurdod lleol arall yn gysylltiedig â’r achos?',
+  hint: "Byddai hyn ar wahân i'ch awdurdod lleol, er enghraifft gallai fod yn asiantaeth breifat neu'n awdurdod lleol gwahanol.",
   errors: {
     hasAnotherAdopAgencyOrLA: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',
@@ -53,8 +55,9 @@ describe('children > other-adoption-agency > content', () => {
     const field = fields.hasAnotherAdopAgencyOrLA as FormOptions;
     expect(field.type).toBe('radios');
     expect(field.classes).toBe('govuk-radios');
-    expect((field.label as Function)(generatedContent)).toBe(en.label);
     expect((field.section as Function)(generatedContent)).toBe(en.section);
+    expect((field.label as Function)(generatedContent)).toBe(en.title);
+    expect((field.hint as Function)(generatedContent)).toBe(en.hint);
     expect((field.values[0].label as Function)(commonContent)).toBe(commonContent.yes);
     expect(field.values[0].value).toBe(YesOrNo.YES);
     expect((field.values[1].label as Function)(commonContent)).toBe(commonContent.no);

@@ -1,0 +1,15 @@
+{% extends "common/page.njk" %}
+
+{% block content %}
+  <h1 class="govuk-heading-l">{{ title }}</h1>
+  <h2 class="govuk-heading-m">{{sendUsAMessageHeading}}</h2>
+      <ul class="govuk-list govuk-list--bullet">
+          <li>{{email | safe}}</li>
+          <li>{{sendUsAMessageText}}</li>
+      </ul>
+  <h2 class="govuk-heading-m">{{telephoneHeading}}</h2>
+      <ul class="govuk-list govuk-list--bullet">
+          <li>{{telephoneNumber}}</li>
+          <li>{{telephoneText}}</li>
+      </ul>
+{% endblock %}

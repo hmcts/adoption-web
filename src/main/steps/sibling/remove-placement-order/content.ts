@@ -1,46 +1,114 @@
 import { CaseWithId } from '../../../app/case/case';
-import { YesOrNo } from '../../../app/case/definition';
+import { SiblingPOType, SiblingRelationships, YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { defaultButtons } from '../../../steps/common/components/common/default-buttons';
 import { SECTION, SECTION_IN_WELSH } from '../constants';
 
-const getSiblingName = (userCase: Partial<CaseWithId>) => {
+export const getSiblingRelation = (userCase: Partial<CaseWithId>): string => {
   const sibling = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
-  return `${sibling?.siblingFirstName || ''} ${sibling?.siblingLastNames || ''}`;
+  return `${sibling?.siblingRelation}`;
 };
 
-const en = content => ({
-  section: SECTION,
-  label: 'Are you sure you want to remove this order?',
-  hint: `${getSiblingName(content.userCase)}`,
-  errors: {
-    confirm: {
-      required: 'Please select an answer',
-    },
-  },
-});
+export const getPlacementOrderType = (userCase: Partial<CaseWithId>): string => {
+  const sibling = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
+  return `${sibling?.siblingPoType}`;
+};
 
-const cy: typeof en = content => ({
-  section: SECTION_IN_WELSH,
-  label: 'Ydych chi’n siŵr eich bod eisiau dileu’r gorchymyn hwn?',
-  hint: `${getSiblingName(content.userCase)}`,
-  errors: {
-    confirm: {
-      required: 'Dewiswch ateb os gwelwch yn dda',
+const en = content => {
+  const enContent = {
+    section: SECTION,
+    siblingRelation: {
+      [SiblingRelationships.SISTER]: 'Sister',
+      [SiblingRelationships.STEP_SISTER]: 'Step-sister',
+      [SiblingRelationships.HALF_SISTER]: 'Half-sister',
+      [SiblingRelationships.BROTHER]: 'Brother',
+      [SiblingRelationships.STEP_BROTHER]: 'Step-brother',
+      [SiblingRelationships.HALF_BROTHER]: 'Half-brother',
     },
-  },
-});
+    siblingPOType: {
+      [SiblingPOType.ADOPTION_ORDER]: 'Adoption order',
+      [SiblingPOType.CARE_ORDER]: 'Care order',
+      [SiblingPOType.CHILD_ARRANGEMENT_ORDER]: 'Child arrangements order',
+      [SiblingPOType.PLACEMENT_ORDER]: 'Placement order',
+      [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order',
+      [SiblingPOType.OTHER]: 'Other',
+    },
+    errors: {
+      confirm: {
+        required: 'Please select an answer',
+      },
+    },
+  };
+  const placementOrderText = getPlacementOrderType(content.userCase);
+  const siblingRelationText = getSiblingRelation(content.userCase);
+
+  return {
+    ...enContent,
+    title: `Are you sure you want to remove this ${
+      !enContent.siblingPOType[placementOrderText]
+        ? 'order'
+        : enContent.siblingPOType[getPlacementOrderType(content.userCase)].toLowerCase()
+    } for child's ${
+      !enContent.siblingRelation[siblingRelationText]
+        ? 'sibling'
+        : enContent.siblingRelation[getSiblingRelation(content.userCase)].toLowerCase()
+    }?`,
+  };
+};
+
+const cy: typeof en = content => {
+  const cyContent = {
+    section: SECTION_IN_WELSH,
+    siblingRelation: {
+      [SiblingRelationships.SISTER]: 'Chwaer',
+      [SiblingRelationships.STEP_SISTER]: 'Llyschwaer',
+      [SiblingRelationships.HALF_SISTER]: 'Hanner chwaer',
+      [SiblingRelationships.BROTHER]: 'Brawd',
+      [SiblingRelationships.STEP_BROTHER]: 'Llysfrawd',
+      [SiblingRelationships.HALF_BROTHER]: 'Hanner brawd',
+    },
+    siblingPOType: {
+      [SiblingPOType.ADOPTION_ORDER]: 'Gorchymyn Mabwysiadu',
+      [SiblingPOType.CARE_ORDER]: 'Gorchymyn Gofal',
+      [SiblingPOType.CHILD_ARRANGEMENT_ORDER]: 'Gorchymyn trefniadau plant',
+      [SiblingPOType.PLACEMENT_ORDER]: 'Gorchymyn Lleoli',
+      [SiblingPOType.SUPERVIS_ORDER]: 'Gorchymyn Goruchwylio',
+      [SiblingPOType.OTHER]: 'Arall',
+    },
+    errors: {
+      confirm: {
+        required: 'Dewiswch ateb os gwelwch yn dda',
+      },
+    },
+  };
+
+  const placementOrderText = getPlacementOrderType(content.userCase);
+  const siblingRelationText = getSiblingRelation(content.userCase);
+
+  return {
+    ...cyContent,
+    title: `Ydych chi’n siwr eich bod eisiau dileu hwn ${
+      !cyContent.siblingPOType[placementOrderText]
+        ? 'order'
+        : cyContent.siblingPOType[getPlacementOrderType(content.userCase)].toLowerCase()
+    } ar gyfer ${
+      !cyContent.siblingRelation[siblingRelationText]
+        ? 'sibling'
+        : cyContent.siblingRelation[getSiblingRelation(content.userCase)].toLowerCase()
+    } y plentyn?`,
+  };
+};
 
 export const form: FormContent = {
   fields: {
     confirm: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.title,
+      labelHidden: true,
       section: l => l.section,
-      hint: l => l.hint,
       values: [
         { label: l => l.yes, value: YesOrNo.YES },
         { label: l => l.no, value: YesOrNo.NO },

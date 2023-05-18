@@ -6,7 +6,6 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 const en = () => ({
   section: SECTION,
   title: 'What is the full name of the other person with parental responsibility?',
-  line1: 'If you are not sure, ask your social worker or adoption agency for help.',
   errors: {
     otherParentFirstNames: {
       required: 'Enter their first names',
@@ -20,7 +19,6 @@ const en = () => ({
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
   title: 'Beth yw enw llawn yr unigolyn arall sydd â chyfrifoldeb rhiant?',
-  line1: 'Os nad ydych yn siŵr, holwch gyda’ch gweithiwr cymdeithasol, neu’ch asiantaeth fabwysiadu i gael cymorth.',
   errors: {
     otherParentFirstNames: {
       required: 'Nac ydwdwch eu henw(au) cyntaf',

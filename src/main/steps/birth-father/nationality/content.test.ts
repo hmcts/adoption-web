@@ -12,43 +12,42 @@ jest.mock('../../common/components/nationality', () => {
 });
 
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
-import { CaseWithId, FieldPrefix } from '../../../app/case/case';
+import { FieldPrefix } from '../../../app/case/case';
 import { FormContent, FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { CommonContent } from '../../common/common.content';
 import { nationalityFields } from '../../common/components/nationality';
 import { BIRTH_FATHER_NATIONALITY } from '../../urls';
-import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 import { form, generateContent } from './content';
 
 const enContent = {
-  section: SECTION,
-  label: "What is the nationality of the child's birth father?",
-  url: BIRTH_FATHER_NATIONALITY,
+  section: "Birth father's details",
+  title: "What is the nationality of the child's birth father?",
+  hint: 'Select all options that are relevant.',
   errors: {
-    [`${FieldPrefix.BIRTH_FATHER}Nationality`]: {
-      required: "Select a nationality or 'Not sure'",
+    birthFatherNationality: {
+      required: 'Select if they are British, Irish, citizen of a different country or not sure',
       notSureViolation: "Select a nationality or 'Not sure'",
+      addButtonNotClicked: "Select 'Add' before you continue",
     },
-    addAnotherNationality: {
-      required: 'This is not a valid entry',
-    },
+    addAnotherNationality: 'MOCK_ERROR_MESSAGE',
   },
+  url: BIRTH_FATHER_NATIONALITY,
 };
 
 const cyContent = {
-  section: SECTION_IN_WELSH,
-  label: 'Beth yw cenedligrwydd tad biolegol y plentyn?',
-  url: BIRTH_FATHER_NATIONALITY,
+  section: 'Manylion y tad biolegol',
+  title: 'Beth yw cenedligrwydd tad biolegol y plentyn?',
+  hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
   errors: {
-    [`${FieldPrefix.BIRTH_FATHER}Nationality`]: {
-      required: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
+    birthFatherNationality: {
+      required: "Dewiswch os ydyn nhw'n Brydeinig, Gwyddelig, dinesydd gwlad wahanol neu ddim yn siŵr",
       notSureViolation: 'Dewiswch genedligrwydd neu ‘Ddim yn siŵr’',
+      addButtonNotClicked: 'Dewiswch ‘Ychwanegu’ cyn ichi symud ymlaen',
     },
-    addAnotherNationality: {
-      required: 'Nid yw hyn yn gofnod dilys',
-    },
+    addAnotherNationality: 'MOCK_ERROR_MESSAGE',
   },
+  url: BIRTH_FATHER_NATIONALITY,
 };
 
 describe('birth-father > nationality > content', () => {
@@ -68,14 +67,18 @@ describe('birth-father > nationality > content', () => {
   });
 
   test('should contain birthFatherNationality field', () => {
-    const nationalityFormFields = nationalityFields({}, FieldPrefix.CHILDREN) as FormFields;
+    const nationalityFormFields = nationalityFields({}, FieldPrefix.BIRTH_FATHER, 'en') as FormFields;
     const fields = generatedContent.form.fields as FormFields;
     expect(fields.birthFatherNationality).toEqual(nationalityFormFields.birthFatherNationality);
   });
 
   test('should call nationalityFields when form.fields is called', () => {
-    (form.fields as FormFieldsFn)({ userCase: {} } as Partial<CaseWithId>);
-    expect(nationalityFields).toHaveBeenCalledWith({ userCase: {} }, FieldPrefix.BIRTH_FATHER);
+    (form.fields as FormFieldsFn)(commonContent.userCase!);
+    expect(nationalityFields).toHaveBeenCalledWith(
+      commonContent.userCase,
+      FieldPrefix.BIRTH_FATHER,
+      commonContent.language
+    );
   });
 
   it('should contain submit button', () => {

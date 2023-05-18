@@ -2,11 +2,12 @@ import autobind from 'autobind-decorator';
 import { Response } from 'express';
 import Negotiator from 'negotiator';
 
+import { saveDraftCase } from '../../modules/draft-store/draft-store-service';
 import { LanguageToggle } from '../../modules/i18n';
 import { CommonContent, Language, generatePageContent } from '../../steps/common/common.content';
 import * as Urls from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
-import { CITIZEN_UPDATE, State } from '../case/definition';
+import { CITIZEN_UPDATE, SYSTEM_USER_UPDATE, State } from '../case/definition';
 
 import { AppRequest } from './AppRequest';
 
@@ -35,7 +36,10 @@ export class GetController {
     const language = this.getPreferredLanguage(req) as Language;
     const userCase = req.session?.userCase;
     const addresses = req.session?.addresses;
+    const courtList = req.session?.courtList;
+    const localAuthorityList = req.session?.localAuthorityList;
     const eligibility = req.session?.eligibility;
+    const eligibilityPage = !!req.session?.isEligibility;
     const content = generatePageContent({
       language,
       pageContent: this.content,
@@ -43,6 +47,10 @@ export class GetController {
       userEmail: req.session?.user?.email,
       addresses,
       eligibility,
+      eligibilityPage,
+      fee: req.session?.fee,
+      courtList,
+      localAuthorityList,
     });
 
     const sessionErrors = req.session?.errors || [];
@@ -59,9 +67,9 @@ export class GetController {
     });
   }
 
-  private getPreferredLanguage(req: AppRequest) {
+  protected getPreferredLanguage(req: AppRequest): string {
     // User selected language
-    const requestedLanguage = req.query['lng'] as string;
+    const requestedLanguage = req.query['lang'] as string;
     if (LanguageToggle.supportedLanguages.includes(requestedLanguage)) {
       return requestedLanguage;
     }
@@ -86,7 +94,11 @@ export class GetController {
 
   public async save(req: AppRequest, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
     try {
-      return await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
+      if (req.url.includes('la-portal') && ![Urls.LA_PORTAL_CHECK_YOUR_ANSWERS?.toString()].includes(req.url)) {
+        return await saveDraftCase(req, req.session.userCase.id || '', formData);
+      } else {
+        return await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
+      }
     } catch (err) {
       req.locals.logger.error('Error saving', err);
       req.session.errors = req.session.errors || [];
@@ -109,8 +121,10 @@ export class GetController {
     });
   }
 
-  //eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected getEventName(req: AppRequest): string {
+  public getEventName(req: AppRequest): string {
+    if (req.session.user?.isSystemUser) {
+      return SYSTEM_USER_UPDATE;
+    }
     return CITIZEN_UPDATE;
   }
 }

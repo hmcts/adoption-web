@@ -1,0 +1,10 @@
+{% extends "common/page.njk" %}
+{% from "govuk/components/panel/macro.njk" import govukPanel %}
+
+{% block page_content %}
+    {{  govukPanel({
+            titleText: title
+        })
+    }}
+  <p class="govuk-body">{{ multipleChildrenMessage }}</p>
+{% endblock %}

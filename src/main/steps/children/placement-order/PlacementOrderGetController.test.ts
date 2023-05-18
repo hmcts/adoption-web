@@ -92,6 +92,9 @@ describe('PlacementOrderGetController', () => {
     });
 
     test('should remove the query param and redirect', async () => {
+      req.locals.api.triggerEvent.mockResolvedValue({
+        selectedPlacementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
+      });
       await controller.get(req, res);
       expect(res.redirect).toHaveBeenCalledWith('/request');
     });
@@ -110,8 +113,24 @@ describe('PlacementOrderGetController', () => {
     });
 
     test('should remove the query param and redirect', async () => {
+      req.locals.api.triggerEvent.mockResolvedValue({
+        selectedPlacementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
+      });
       await controller.get(req, res);
       expect(res.redirect).toHaveBeenCalledWith('/request');
+    });
+  });
+
+  describe('when there is "confirm" query param', () => {
+    beforeEach(() => {
+      req = mockRequest({ query: { confirm: 'MOCK_ID' }, session: { userCase: { placementOrders: [] } } });
+      req.url = '/request?confirm=MOCK_ID';
+    });
+
+    test('should set the selectedPlacementOrderId in userCase', async () => {
+      req.locals.api.triggerEvent.mockResolvedValue({ selectedPlacementOrderId: 'MOCK_ID' });
+      await controller.get(req, res);
+      expect(req.session.userCase.selectedPlacementOrderId).toBe('MOCK_ID');
     });
   });
 
@@ -152,18 +171,26 @@ describe('PlacementOrderGetController', () => {
     });
 
     test('should reset the addAnotherPlacementOrder in userCase', async () => {
-      req.locals.api.triggerEvent.mockResolvedValue({});
+      req.locals.api.triggerEvent.mockResolvedValue({
+        selectedPlacementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
+      });
       await controller.get(req, res);
       expect(req.session.userCase.addAnotherPlacementOrder).toBeUndefined();
     });
 
     test('should remove the query param and redirect', async () => {
+      req.locals.api.triggerEvent.mockResolvedValue({
+        selectedPlacementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
+      });
       await controller.get(req, res);
       expect(res.redirect).toHaveBeenCalledWith('/request');
     });
   });
 
   test('saves the placementOrders and selectedPlacementOrderId in session', async () => {
+    req.locals.api.triggerEvent.mockResolvedValue({
+      selectedPlacementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE',
+    });
     await controller.get(req, res);
     expect(req.session.save).toHaveBeenCalled();
   });

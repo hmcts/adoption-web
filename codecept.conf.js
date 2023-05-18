@@ -19,7 +19,7 @@ exports.config = {
           return sets;
         };
 
-        const buckets = parseInt(process.env.PARALLEL_CHUNKS || '1');
+        const buckets = parseInt(process.env.PARALLEL_CHUNKS || '5');
         const slowTests = lodash.filter(files, file => file.includes('@slow'));
         const otherTests = lodash.difference(files, slowTests);
 
@@ -81,7 +81,7 @@ exports.config = {
     primaryApplicantPersonalDetailsPage: './src/test/e2e/pages/primaryApplicantPersonalDetails.page.js',
     childrenBirthCertificatePage: './src/test/e2e/pages/childrenBirthCertificate.page.js',
     otherApplicantPersonalDetailsPage: './src/test/e2e/pages/otherApplicantPersonalDetails.page.js',
-    childAdoptionCertificateDetailsPage: './src/test/e2e/pages/childAdoptionCertificateDetails.page.js',
+    childsDetailsPage: './src/test/e2e/pages/childsDetails.page.js',
     childBirthMothersDetailsPage: './src/test/e2e/pages/childBirthMothersDetails.page.js',
     childOtherParentDetailsPage: './src/test/e2e/pages/childOtherParentDetails.page.js',
     childBirthFatherDetailsPage: './src/test/e2e/pages/childBirthFatherDetails.page.js',
@@ -91,6 +91,9 @@ exports.config = {
     uploadDocumentsDetailsPage: './src/test/e2e/pages/uploadDocumentsDetails.page.js',
     dateChildMovedinDetailsPage: './src/test/e2e/pages/dateChildMovedinDetails.page.js',
     chooseYourFamilyCourtDetailsPage: './src/test/e2e/pages/chooseYourFamilyCourtDetails.page.js',
+    saveAsDraftPage: './src/test/e2e/pages/saveAsDraft.page',
+    checkYourAnswersPage: './src/test/e2e/pages/checkYourAnswers.page.js',
+    laCheckYourAnswersPage: './src/test/e2e/pages/laCheckYourAnswers.page',
   },
   plugins: {
     autoLogin: testConfig.AutoLogin,

@@ -1,8 +1,7 @@
-import { PlacementOrder, YesOrNo } from '../../../app/case/definition';
+import { SiblingPOType, SiblingRelationships, YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
-import { SIBLING_NAME, SIBLING_ORDER_SUMMARY } from '../../../steps/urls';
 import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 import { placementOrderListItems } from './placement-order-summary';
@@ -12,31 +11,36 @@ const en = content => {
     section: SECTION,
     title: 'Orders already in place for siblings and half-siblings',
     sibling: 'Sibling',
-    placementOrder: 'Placement Order',
+    siblingRelation: {
+      [SiblingRelationships.SISTER]: 'Sister',
+      [SiblingRelationships.STEP_SISTER]: 'Step-sister',
+      [SiblingRelationships.HALF_SISTER]: 'Half-sister',
+      [SiblingRelationships.BROTHER]: 'Brother',
+      [SiblingRelationships.STEP_BROTHER]: 'Step-brother',
+      [SiblingRelationships.HALF_BROTHER]: 'Half-brother',
+    },
+    placementOrder: 'Placement order',
+    siblingPOType: {
+      [SiblingPOType.ADOPTION_ORDER]: 'Adoption order',
+      [SiblingPOType.CARE_ORDER]: 'Care order',
+      [SiblingPOType.CHILD_ARRANGEMENT_ORDER]: 'Child arrangements order',
+      [SiblingPOType.PLACEMENT_ORDER]: 'Placement order',
+      [SiblingPOType.SUPERVIS_ORDER]: 'Supervision order',
+      [SiblingPOType.OTHER]: 'Other',
+    },
     incomplete: 'incomplete',
     change: 'Change',
     remove: 'Remove',
-    changeName: 'Change name',
-    label: 'Do you want to add another order for a sibling or half-sibling?',
-    hint: 'For example, a care order or supervision order. Your adoption agency or social worker can provide this information for you.',
+    label: 'Do you want to add another order for the same or another sibling?',
     errors: {
       addAnotherSiblingPlacementOrder: {
-        required: 'Please select an answer',
+        required: 'Select whether you want to add another order for the same or another sibling',
       },
     },
   };
   return {
     ...enContent,
-    siblings: content.userCase.siblings?.map(item => ({
-      siblingFirstName: item.siblingFirstName,
-      siblingLastNames: item.siblingLastNames,
-      changeSiblingNameUrl: `${SIBLING_NAME}?change=${item.siblingId}&returnUrl=${SIBLING_ORDER_SUMMARY}`,
-      placementOrderListItems: placementOrderListItems(
-        item.siblingId,
-        item.siblingPlacementOrders as PlacementOrder[],
-        enContent
-      ),
-    })),
+    siblings: placementOrderListItems(content.userCase.siblings, enContent),
   };
 };
 
@@ -45,31 +49,37 @@ const cy: typeof en = content => {
     section: SECTION_IN_WELSH,
     title: 'Gorchmynion eisoes mewn lle ar gyfer brodyr/chwiorydd a hanner brodyr/hanner chwiorydd',
     sibling: 'Brawd/chwaer',
+    siblingRelation: {
+      [SiblingRelationships.SISTER]: 'Chwaer',
+      [SiblingRelationships.STEP_SISTER]: 'Llyschwaer',
+      [SiblingRelationships.HALF_SISTER]: 'Hanner chwaer',
+      [SiblingRelationships.BROTHER]: 'Brawd',
+      [SiblingRelationships.STEP_BROTHER]: 'Llysfrawd',
+      [SiblingRelationships.HALF_BROTHER]: 'Hanner brawd',
+    },
     placementOrder: 'Gorchymyn Lleoli',
+    siblingPOType: {
+      [SiblingPOType.ADOPTION_ORDER]: 'Gorchymyn Mabwysiadu',
+      [SiblingPOType.CARE_ORDER]: 'Gorchymyn Gofal',
+      [SiblingPOType.CHILD_ARRANGEMENT_ORDER]: 'Gorchymyn trefniadau plant',
+      [SiblingPOType.PLACEMENT_ORDER]: 'Gorchymyn Lleoli',
+      [SiblingPOType.SUPERVIS_ORDER]: 'Gorchymyn Goruchwylio',
+      [SiblingPOType.OTHER]: 'Arall',
+    },
     incomplete: 'anghyflawn',
     change: 'Newid',
     remove: 'Dileu',
-    changeName: 'Newid enw',
-    label: 'A ydych eisiau ychwanegu gorchymyn arall ar gyfer brawd/chwaer neu hanner frawd/hanner chwaer?',
-    hint: 'Er enghraifft, gorchymyn gofal neu neuchymyn goruchwylio. Gall eich gweithiwr cymdeithasol neu’ch asiantaeth fabwysiadau ddarparu’r wybodaeth hon ichi.',
+    label: 'A ydych eisiau ychwanegu gorchymyn arall ar gyfer yr un brawd/chwaer neu frawd/chwaer arall?',
     errors: {
       addAnotherSiblingPlacementOrder: {
-        required: 'Dewiswch ateb os gwelwch yn dda',
+        required:
+          'Nodwch a oes arnoch eisiau ychwanegu gorchymyn arall ar gyfer yr un brawd/chwaer neu frawd/chwaer arall',
       },
     },
   };
   return {
     ...cyContent,
-    siblings: content.userCase.siblings?.map(item => ({
-      siblingFirstName: item.siblingFirstName,
-      siblingLastNames: item.siblingLastNames,
-      changeSiblingNameUrl: `${SIBLING_NAME}?change=${item.siblingId}&returnUrl=${SIBLING_ORDER_SUMMARY}`,
-      placementOrderListItems: placementOrderListItems(
-        item.siblingId,
-        item.siblingPlacementOrders as PlacementOrder[],
-        cyContent
-      ),
-    })),
+    siblings: placementOrderListItems(content.userCase.siblings, cyContent),
   };
 };
 
@@ -80,12 +90,12 @@ export const form: FormContent = {
       classes: 'govuk-radios govuk-radios--inline',
       label: l => l.label,
       section: l => l.section,
-      hint: l => l.hint,
       labelSize: 'm',
       values: [
         { label: l => l.yes, value: YesOrNo.YES },
         { label: l => l.no, value: YesOrNo.NO },
       ],
+      labelHidden: false,
       validator: isFieldFilledIn,
     },
   },

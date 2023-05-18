@@ -6,25 +6,27 @@ import { SECTION, SECTION_IN_WELSH } from '../constants';
 
 const en = () => ({
   section: SECTION,
-  label: 'Will the child be under 18 years old on the date you submit your application?',
+  title: 'Will the child be under 18 years old on the date you submit your application?',
   under18No:
     'You can only apply to adopt a child if they are under 18 years old on the date your application is submitted.',
   moreInfo: 'More about adoption',
+  continue: 'Continue',
   errors: {
     under18Eligible: {
-      required: 'Please answer the question',
+      required: 'Select if the child will be under 18 years old on the date you submit your application.',
     },
   },
 });
 
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  label: 'A fydd y plentyn dan 18 oed ar y dyddiad byddwch yn cyflwyno’ch cais?',
+  title: 'A fydd y plentyn dan 18 oed ar y dyddiad byddwch yn cyflwyno’ch cais?',
   under18No: 'Gallwch ond mabwysiadu plentyn os ydynt dan 18 oed ar y dyddiad mae eich cais yn cael ei gyflwyno.',
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
+  continue: 'Parhau',
   errors: {
     under18Eligible: {
-      required: 'Atebwch y cwestiwn os gwelwch yn dda',
+      required: 'Nodwch a fydd y plentyn o dan 18 oed ar y dyddiad y byddwch yn cyflwyno eich cais.',
     },
   },
 });
@@ -34,16 +36,16 @@ export const form: FormContent = {
     under18Eligible: {
       type: 'radios',
       classes: 'govuk-radios',
-      label: l => l.label,
+      label: l => l.title,
       section: l => l.section,
-      labelHidden: false,
+      labelHidden: true,
       values: [
         { label: l => l.yes, value: YesOrNo.YES },
         {
           label: l => l.no,
           value: YesOrNo.NO,
           conditionalText: l =>
-            `<p class="govuk-label">${l.under18No}</p> <p class="govuk-label"><a href="https://www.gov.uk/child-adoption">${l.moreInfo}</a></p>`,
+            `<p class="govuk-label">${l.under18No}</p> <p class="govuk-label"><a href="https://www.gov.uk/child-adoption" class="govuk-link">${l.moreInfo}</a></p>`,
         },
       ],
       validator: isFieldFilledIn,
@@ -55,6 +57,7 @@ export const form: FormContent = {
   saveAsDraft: {
     text: '',
   },
+  hideContactHelpSection: true,
 };
 
 const languages = {
