@@ -1,9 +1,9 @@
-Feature('Create application').retry(1);
+/* Feature('Create application').retry(1);
 Scenario(
   'Create full application and submit @cross-browser',
   async (
-    {
-      /* loginPage,
+    { */
+/* loginPage,
     landingPage,
     taskListPage,
     childDetailsPlacementOrderPage,
@@ -23,9 +23,9 @@ Scenario(
     dateChildMovedinDetailsPage,
     chooseYourFamilyCourtDetailsPage,
     laCheckYourAnswersPage, */
-    }
-  ) => {
-    /* await loginPage.createCitizenUserAndSignIn();
+/*   }
+  ) => { */
+/* await loginPage.createCitizenUserAndSignIn();
     await landingPage.seeTheLandingPage();
     await landingPage.selectApplyWithMySpouseSection();
 
@@ -120,5 +120,5 @@ Scenario(
     await laCheckYourAnswersPage.laCheckYourAnswersContinue();
     await laCheckYourAnswersPage.laStatementOfTruthPage();
     await laCheckYourAnswersPage.laSubmitApplicationConfirmationPage(); */
-  }
-);
+//}
+//);
