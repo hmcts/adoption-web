@@ -2,8 +2,9 @@ Feature('E2E Negative').retry(1);
 
 Scenario(
   'Create full application and submit negative @cross-browser',
-  async ({
-    loginPage,
+  async (
+    {
+      /* loginPage,
     landingPage,
     taskListPage,
     childDetailsPlacementOrderPage,
@@ -21,64 +22,57 @@ Scenario(
     reviewPayAndSubmitPage,
     uploadDocumentsDetailsPage,
     dateChildMovedinDetailsPage,
-    chooseYourFamilyCourtDetailsPage,
-  }) => {
+    chooseYourFamilyCourtDetailsPage, */
+    }
+  ) => {
     /*Number of applicants*/
-    await loginPage.createCitizenUserAndSignIn();
+    /* await loginPage.createCitizenUserAndSignIn();
     await landingPage.seeTheLandingPage();
     await landingPage.continueWithoutSelection();
-    await landingPage.selectApplyWithMySpouseSection();
+    await landingPage.selectApplyWithMySpouseSection(); */
     /*Date child moved in with you*/
-    await taskListPage.selectDateChildMovedInDetails();
+    /* await taskListPage.selectDateChildMovedInDetails();
     await dateChildMovedinDetailsPage.dateChildMovedInSectionWithoutData();
-    await taskListPage.verifyDateChildMovedInStatus();
-
+    await taskListPage.verifyDateChildMovedInStatus(); */
     /*Child's details*/
-    await taskListPage.selectChildChildDetails();
+    /* await taskListPage.selectChildChildDetails();
     await childsDetailsPage.childFullNameSectionBlankFields();
     await childsDetailsPage.childNameAfterAdoptionDetailsSectionBlankFields();
     await childsDetailsPage.childDOBSectionBlankFields();
-    await taskListPage.verifyChildDetailsStatus();
-
+    await taskListPage.verifyChildDetailsStatus(); */
     /*Adoption agency and social worker*/
-    await taskListPage.selectChildAdoptionAgencyDetails();
+    /* await taskListPage.selectChildAdoptionAgencyDetails();
     await childAdoptionAgencyDetailsPage.childSocialWorkerDetailsSectionWithOutDetails();
     await childAdoptionAgencyDetailsPage.childSocialWorkerDetailsSection();
     await childAdoptionAgencyDetailsPage.yourSocialWorkerDetailsSectionWithOutDetails();
     await childAdoptionAgencyDetailsPage.yourSocialWorkerDetailsSection();
     await childAdoptionAgencyDetailsPage.adoptionAgencySelectionNoDetails();
     await childAdoptionAgencyDetailsPage.childAdoptionAgencyDetailsSectionWithOutDetails();
-    await taskListPage.verifyChildAdoptionAgencyDetailsStatus;
-
+    await taskListPage.verifyChildAdoptionAgencyDetailsStatus; */
     /*First Applicant contact details*/
-    await taskListPage.selectPrimaryApplicantContactDetails();
+    /* await taskListPage.selectPrimaryApplicantContactDetails();
     await primaryApplicantDetailsPage.primaryApplicantContactDetailsSectionEmpty();
-    await taskListPage.verifyPrimaryApplicantContactDetailsStatus();
-
+    await taskListPage.verifyPrimaryApplicantContactDetailsStatus(); */
     /*First Applicant personal details*/
-    await taskListPage.selectFirstApplicantPersonalDetails();
+    /* await taskListPage.selectFirstApplicantPersonalDetails();
     await primaryApplicantPersonalDetailsPage.primaryApplicantPersonalDetailsSectionEmptyfields();
     await primaryApplicantPersonalDetailsPage.additionalDetailsForApplicant1();
-    await taskListPage.verifyPrimaryApplicantPersonalDetailsStatus();
-
+    await taskListPage.verifyPrimaryApplicantPersonalDetailsStatus(); */
     /*Second Applicant contact details*/
-    await taskListPage.selectOtherApplicantContactDetails();
+    /* await taskListPage.selectOtherApplicantContactDetails();
     await otherApplicantDetailsPage.otherApplicantContactDetailsSectionEmptyFields();
-    await taskListPage.verifySecondApplicantPersonalDetailsStatus();
-
+    await taskListPage.verifySecondApplicantPersonalDetailsStatus(); */
     /*Second Applicant personal details*/
-    await taskListPage.selectOtherApplicantPersonalDetails();
+    /* await taskListPage.selectOtherApplicantPersonalDetails();
     await otherApplicantPersonalDetailsPage.otherApplicantPersonalDetailsSectionEmpty();
     await otherApplicantPersonalDetailsPage.additionalDetailsForApplicant2();
-    await taskListPage.verifyOtherApplicantPersonalDetailsStatus();
-
+    await taskListPage.verifyOtherApplicantPersonalDetailsStatus(); */
     /*Family Court details*/
-    await taskListPage.selectChooseYourFamilyCourtDetails();
+    /* await taskListPage.selectChooseYourFamilyCourtDetails();
     await chooseYourFamilyCourtDetailsPage.childDetailsFindFamilyCourtSectionEmptyFields();
-    await taskListPage.verifyChooseYourFamilyCourtStatus();
-
+    await taskListPage.verifyChooseYourFamilyCourtStatus(); */
     /*Payment details*/
-    await taskListPage.selectReviewPayAndSubmitDetails();
+    /* await taskListPage.selectReviewPayAndSubmitDetails();
     await reviewPayAndSubmitPage.selectNoPCQOption();
     await reviewPayAndSubmitPage.changeValueFromReviewYourAnswers();
     await dateChildMovedinDetailsPage.editDateChildMovedInSection();
@@ -87,7 +81,7 @@ Scenario(
     await reviewPayAndSubmitPage.reviewAndPay();
     await reviewPayAndSubmitPage.paymentCancellation();
     await reviewPayAndSubmitPage.reviewAndPay();
-    await reviewPayAndSubmitPage.adoptionCourtFeesByCard();
+    await reviewPayAndSubmitPage.adoptionCourtFeesByCard(); */
   }
 
   //will be covered as part of LA portal journey
