@@ -203,6 +203,7 @@ module.exports = {
     await I.retry(3).waitForText('Adoption agency or local authority details', 30);
     await I.wait(2);
     await I.retry(3).click('Save and continue');
+    await I.retry(3).waitForText('Enter name of adoption agency or local authority', 30);
     await I.retry(3).see('Enter name of adoption agency or local authority');
     await I.retry(3).see('Enter name of your contact');
     await I.retry(3).see('Enter a UK telephone number');
