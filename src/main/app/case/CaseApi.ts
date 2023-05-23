@@ -101,6 +101,10 @@ export class CaseApi {
         `/searchCases?ctid=${CASE_TYPE}`,
         JSON.stringify(query)
       );
+
+      console.log('Cases Length: ------------------   ' + response.data.cases.length);
+      console.log('Cases JSON: ------------------   ' + JSON.stringify(response.data.cases));
+
       return response.data.cases;
       // const response = await this.axios.get<CcdV1Response[]>(
       //   `/citizens/${this.userDetails.id}/jurisdictions/${JURISDICTION}/case-types/${CASE_TYPE}/cases`
