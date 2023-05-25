@@ -36,22 +36,22 @@ module.exports = {
     await I.retry(3).click(this.fields.birthMotherStillAlive);
     await I.wait(2);
     await I.retry(3).click('Save and continue');
-    await I.retry(3).waitForText("What is the nationality of the child's birth mother?");
+    await I.retry(3).waitForText("What is the nationality of the child's birth mother?", 30);
     await I.retry(3).click(this.fields.britishCitizen);
     await I.wait(2);
     await I.retry(3).click('Save and continue');
     await I.wait(2);
-    await I.retry(3).waitForText("What is the occupation of the child's birth mother?");
+    await I.retry(3).waitForText("What is the occupation of the child's birth mother?", 30);
     await I.retry(3).fillField(this.fields.birthMotherOccupation, childBirthMothersDetails.birthMotherOccupation);
     await I.wait(2);
     await I.retry(3).click('Save and continue');
     await I.wait(2);
-    await I.retry(3).waitForText("Do you have the birth mother's last known address?");
+    await I.retry(3).waitForText("Do you have the birth mother's last known address?", 30);
     await I.retry(3).click(this.fields.birthMotherAddressKnown);
     await I.wait(2);
     await I.retry(3).click('Save and continue');
     await I.wait(2);
-    await I.retry(3).waitForText("What is the birth mother's last known address?");
+    await I.retry(3).waitForText("What is the birth mother's last known address?", 30);
     await I.retry(3).click(this.fields.enterAddressManually);
     await I.wait(2);
     await I.retry(3).click(this.fields.enterInternationalAddress);
@@ -68,7 +68,7 @@ module.exports = {
     await I.wait(2);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
-    await I.retry(3).waitForText('When was the last date this address was confirmed?');
+    await I.retry(3).waitForText('When was the last date this address was confirmed?', 30);
     await I.retry(3).fillField(
       this.fields.birthMotherLastAddressDateDay,
       childBirthMothersDetails.birthMotherLastAddressDateDay
