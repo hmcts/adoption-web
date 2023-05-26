@@ -36,6 +36,7 @@ module.exports = {
     await I.retry(3).click(this.fields.birthMotherStillAlive);
     await I.wait(2);
     await I.retry(3).click('Save and continue');
+    await I.wait(3);
     await I.retry(3).waitForText("What is the nationality of the child's birth mother?", 30);
     await I.retry(3).click(this.fields.britishCitizen);
     await I.wait(2);

@@ -116,7 +116,7 @@ module.exports = {
     await I.retry(3).waitForText('Confirm your payment', 30);
     await I.retry(3).waitForText('£183.00', 30);
     await I.retry(3).click('Confirm payment');
-    await I.wait(5);
+    await I.wait(9);
     await I.retry(3).waitForText('Application submitted', 30);
     await I.wait(5);
   },

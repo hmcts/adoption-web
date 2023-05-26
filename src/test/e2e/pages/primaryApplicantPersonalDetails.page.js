@@ -29,7 +29,7 @@ module.exports = {
       primaryApplicantPersonalDetails.primaryApplicantSecondName
     );
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).waitForText('Have you ever legally been known by any other names?');
     await I.retry(3).click(this.fields.applicant1HasOtherNames);
     await I.retry(3).fillField(
@@ -43,7 +43,7 @@ module.exports = {
     await I.retry(3).click('Add');
     await I.wait(2);
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).waitForText("What's your date of birth?");
     await I.retry(3).fillField(this.fields.dateOfBirthDay, primaryApplicantPersonalDetails.primaryApplicantDateOfBirth);
     await I.retry(3).fillField(
@@ -81,7 +81,7 @@ module.exports = {
       primaryApplicantPersonalDetails.primaryApplicantSecondName
     );
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).waitForText('Have you ever legally been known by any other names?');
     await I.retry(3).click('Save and continue');
     await I.wait(2);
@@ -104,7 +104,7 @@ module.exports = {
     await I.retry(3).click('Add');
     await I.wait(2);
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).waitForText("What's your date of birth?");
     await I.retry(3).click('Save and continue');
     await I.wait(2);
