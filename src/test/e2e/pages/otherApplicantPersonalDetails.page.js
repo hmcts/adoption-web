@@ -65,7 +65,7 @@ module.exports = {
     await I.retry(3).fillField(this.fields.applicant2FirstNames, '');
     await I.retry(3).fillField(this.fields.applicant2LastNames, '');
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).see('There is a problem');
     await I.retry(3).see('Enter your first names');
     await I.retry(3).see('Enter your last names');
@@ -117,7 +117,7 @@ module.exports = {
     await I.retry(3).click('Save and continue');
     await I.retry(3).waitForText("What's your occupation?");
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).see('There is a problem');
     await I.retry(3).see('Enter your occupation');
     await I.retry(3).fillField(
