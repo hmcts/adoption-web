@@ -104,9 +104,9 @@ module.exports = {
     await I.wait(4);
     await I.retry(3).waitForText("What's your date of birth?");
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
-    await I.retry(3).see('There is a problem');
-    await I.retry(3).see('Enter your date of birth');
+    await I.wait(4);
+    await I.retry(3).waitForText('There is a problem', 30);
+    await I.retry(3).waitForText('Enter your date of birth', 30);
     await I.retry(3).fillField(this.fields.dateOfBirthDay, secondApplicantPersonalDetails.secondApplicantDateOfBirth);
     await I.retry(3).fillField(
       this.fields.dateOfBirthMonth,

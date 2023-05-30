@@ -156,7 +156,8 @@ module.exports = {
   async childSocialWorkerDetailsSectionWithOutDetails() {
     await I.retry(3).waitForText("Child's social worker details", 30);
     await I.retry(3).click('Save and continue');
-    await I.retry(3).see('Enter name of child’s social worker');
+    await I.wait(4);
+    await I.retry(3).waitForText('Enter name of child’s social worker');
     await I.retry(3).see('Enter a UK telephone number');
     await I.retry(3).see('Enter name of local authority');
     await I.retry(3).see('Enter an email address in the correct format, like name@gov.uk');
