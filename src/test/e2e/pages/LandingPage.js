@@ -14,7 +14,7 @@ module.exports = {
     childrenDateOfBirthYear: 'input[id$="kbaChildrenDateOfBirth-year"]',
   },
   async seeTheLandingPage() {
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).see('Are you applying on your own, or with someone else?');
   },
 

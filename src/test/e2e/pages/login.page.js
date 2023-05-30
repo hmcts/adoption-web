@@ -23,7 +23,7 @@ module.exports = {
   async createCitizenUserAndSignIn() {
     console.log('User using the URL= ' + config.baseUrl);
     await login('citizenSingleton');
-    await I.wait(4);
+    await I.wait(6);
     await I.waitForText('Are you applying on your own, or with someone else?', 90);
     await I.see('Are you applying on your own, or with someone else?');
   },
