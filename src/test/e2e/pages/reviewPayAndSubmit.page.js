@@ -73,7 +73,7 @@ module.exports = {
     await I.retry(3).waitForText('Statement of truth', 30);
     await I.retry(3).click('Confirm');
     await I.wait(4);
-    await I.retry(3).see('Confirm your statement of truth');
+    await I.retry(3).waitForText('Confirm your statement of truth', 30);
     await I.retry(3).see('Enter your full name');
     await I.retry(3).click(this.fields.applicant1IBelieveApplicationIsTrue);
     await I.retry(3).click(this.fields.applicant2IBelieveApplicationIsTrue);

@@ -96,7 +96,7 @@ module.exports = {
     await I.retry(3).see(childOtherParentDetails.childOtherParentServerOrderTitle);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
-    await I.retry(3).see(childOtherParentDetails.serverOrderErrorMessage);
+    await I.retry(3).waitForText(childOtherParentDetails.serverOrderErrorMessage);
     await I.retry(3).click(this.fields.otherParentServeOrderYes);
     await I.retry(3).click(this.fields.otherParentServeOrderNo);
     await I.retry(3).click('Save and continue');
