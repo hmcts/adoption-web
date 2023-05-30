@@ -19,7 +19,7 @@ module.exports = {
   async dateChildMovedInSectionWithoutData() {
     await I.retry(3).waitForText('When did the child move in with you?', 30);
     await I.retry(3).click('Save and continue');
-    await I.retry(3).see('There is a problem');
+    await I.retry(3).waitForText('There is a problem');
     await I.retry(3).see('Enter the date the child moved in with you');
     await I.wait(4);
     await I.retry(3).fillField(this.fields.dateChildMovedInDay, childBasicDetails.dateChildMovedInInvalid);
