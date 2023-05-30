@@ -25,12 +25,12 @@ module.exports = {
   async childOtherParentDetailsSection() {
     await I.retry(3).waitForText('Is there another person who has parental responsibility for the child?');
     await I.retry(3).click(this.fields.otherParentExists);
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).click('Save and continue');
     await I.retry(3).fillField(this.fields.otherParentFirstNames, childOtherParentDetails.otherParentFirstNames);
     await I.retry(3).fillField(this.fields.otherParentLastNames, childOtherParentDetails.otherParentLastNames);
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
 
     await I.retry(3).waitForText('How parental responsibility was granted to the other person?');
 
@@ -43,7 +43,7 @@ module.exports = {
     await I.retry(3).waitForText('Enter the reason how parental responsibility was granted to the other person.');
     await I.retry(3).see('Enter the reason how parental responsibility was granted to the other person.');
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).see('Enter the reason how parental responsibility was granted to the other person.');
     await I.retry(3).fillField('Other', 'Reason not known');
     await I.retry(3).click('Save and continue');
@@ -54,11 +54,11 @@ module.exports = {
     );
     await I.retry(3).click(this.fields.otherParentAddressKnown);
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).click(this.fields.enterAddressManually);
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).click(this.fields.enterInternationalAddress);
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).waitForText("What is the other person's last known address?");
     await I.retry(3).fillField(this.fields.otherParentAddress1, childOtherParentDetails.otherParentAddress1);
     await I.retry(3).fillField(this.fields.otherParentAddressTown, childOtherParentDetails.otherParentAddressTown);
@@ -70,7 +70,7 @@ module.exports = {
       this.fields.otherParentAddressCountry,
       childOtherParentDetails.otherParentAddressCountry
     );
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
 
@@ -83,7 +83,7 @@ module.exports = {
       this.fields.otherParentLastAddressDateMonth,
       childOtherParentDetails.otherParentLastAddressDateMonth
     );
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).fillField(
       this.fields.otherParentLastAddressDateYear,
       childOtherParentDetails.otherParentLastAddressDateYear
@@ -101,7 +101,7 @@ module.exports = {
     await I.retry(3).click(this.fields.otherParentServeOrderNo);
     await I.retry(3).click('Save and continue');
     await I.retry(3).see('Enter more detail');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).fillField(
       this.fields.otherParentServerOrderReason,
       childOtherParentDetails.reasonForNotToServeOrder

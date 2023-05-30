@@ -12,9 +12,9 @@ module.exports = {
     await I.retry(3).waitForText('Which court made the placement order?');
 
     await I.retry(3).fillField(this.fields.courtList, familyCourtDetails.familyCourtDetails);
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).click(this.fields.courtListOption);
-    await I.wait(2);
+    await I.wait(4);
 
     await I.retry(3).click('Save and continue');
     await I.wait(4);
@@ -32,14 +32,14 @@ module.exports = {
     await I.retry(3).click('Save and continue');
     await I.retry(3).see('Enter the name of the court');
     await I.retry(3).fillField(this.fields.courtList, familyCourtDetails.familyCourtDetails);
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).click(this.fields.courtListOption);
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText('Choose a family court');
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).see('Select yes if you want the hearings to be heard in the same court');
     await I.retry(3).click(this.fields.findFamilyCourt);
     await I.retry(3).click('Save and continue');

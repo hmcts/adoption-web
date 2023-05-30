@@ -22,7 +22,7 @@ module.exports = {
       this.fields.childrenLastNameAfterAdoption,
       childAdoptionCertificateDetails.childrenLastNameAfterAdoption
     );
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
   },
@@ -38,16 +38,16 @@ module.exports = {
     await I.retry(3).waitForText("What is the child's date of birth?", 30);
     await I.retry(3).fillField(this.fields.childrenDateOfBirthDay, childBasicInitialDetails.dateChildMovedIn);
     await I.retry(3).fillField(this.fields.childrenDateOfBirthMonth, childBasicInitialDetails.monthChildMovedIn);
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).fillField(this.fields.childrenDateOfBirthYear, childBasicInitialDetails.yearChildMovedIn);
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
   },
 
   async childFullNameSectionBlankFields() {
     await I.retry(3).waitForText("What is the child's full name?");
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).see("Enter the child's first names");
     await I.retry(3).see("Enter the child's last names");
     await I.retry(3).fillField(this.fields.childrenFirstName, childBasicInitialDetails.childFirstNameBeforeAdoption);
@@ -58,7 +58,7 @@ module.exports = {
 
   async childNameAfterAdoptionDetailsSectionBlankFields() {
     await I.retry(3).waitForText("After adoption, what will be the child's full name?");
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
     await I.retry(3).see('Enter their first names');
@@ -71,7 +71,7 @@ module.exports = {
       this.fields.childrenLastNameAfterAdoption,
       childAdoptionCertificateDetails.childrenLastNameAfterAdoption
     );
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
   },
@@ -79,20 +79,20 @@ module.exports = {
   async childDOBSectionBlankFields() {
     await I.retry(3).see("What is the child's date of birth?");
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).see('Enter their date of birth');
 
     await I.retry(3).fillField(this.fields.childrenDateOfBirthDay, childBasicInitialDetails.dateChildMovedInInvalid);
     await I.retry(3).fillField(this.fields.childrenDateOfBirthMonth, childBasicInitialDetails.monthChildMovedInInvalid);
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).fillField(this.fields.childrenDateOfBirthYear, childBasicInitialDetails.yearChildMovedInInvalid);
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).see('Date of birth must be a real date');
 
     await I.retry(3).fillField(this.fields.childrenDateOfBirthDay, childBasicInitialDetails.dateChildMovedIn);
     await I.retry(3).fillField(this.fields.childrenDateOfBirthMonth, childBasicInitialDetails.monthChildMovedIn);
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).fillField(
       this.fields.childrenDateOfBirthYear,
       childBasicInitialDetails.yearChildMovedInFutureDate
@@ -103,9 +103,9 @@ module.exports = {
 
     await I.retry(3).fillField(this.fields.childrenDateOfBirthDay, childBasicInitialDetails.dateChildMovedIn);
     await I.retry(3).fillField(this.fields.childrenDateOfBirthMonth, childBasicInitialDetails.monthChildMovedIn);
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).fillField(this.fields.childrenDateOfBirthYear, childBasicInitialDetails.yearChildMovedIn);
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
   },
 };

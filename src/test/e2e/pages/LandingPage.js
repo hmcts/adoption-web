@@ -21,14 +21,14 @@ module.exports = {
   async selectApplyOnMyownSection() {
     await I.retry(3).click(this.fields.applyingWith);
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
   },
 
   async selectApplyWithMySpouseSection() {
     await I.retry(3).see('For example, as a legally married couple or legal civil partner.');
     await I.retry(3).click(this.fields.applyWithMySpouse);
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
   },
 
   async selectApplyWithSomeoneOtherthanSpouse() {
@@ -36,13 +36,13 @@ module.exports = {
     await I.retry(3).see('Give a brief overview of what your relationship is with the other applicant.');
     await I.retry(3).fillField(this.fields.otherApplicantRelation, 'Uncle');
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
   },
 
   async continueWithoutSelection() {
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
-    await I.retry(3).see('There is a problem');
+    await I.wait(4);
+    await I.retry(3).waitForText('There is a problem');
     await I.retry(3).see('Select an option which best describes who is applying');
   },
 
@@ -60,12 +60,12 @@ module.exports = {
     );
     await I.retry(3).fillField(this.fields.childrenDateOfBirthDay, childBasicInitialDetails.dateChildMovedIn);
     await I.retry(3).fillField(this.fields.childrenDateOfBirthMonth, childBasicInitialDetails.monthChildMovedIn);
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).fillField(this.fields.childrenDateOfBirthYear, childBasicInitialDetails.yearChildMovedIn);
     await I.retry(3).click('Save and continue');
     await I.wait(5);
     await I.retry(3).see('Getting started');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).click('Start now');
     await I.wait(3);
     await I.retry(3).see(

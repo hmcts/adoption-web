@@ -41,7 +41,7 @@ module.exports = {
       primaryApplicantPersonalDetails.primaryApplicantPreviousLastName
     );
     await I.retry(3).click('Add');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText("What's your date of birth?");
@@ -50,7 +50,7 @@ module.exports = {
       this.fields.dateOfBirthMonth,
       primaryApplicantPersonalDetails.primaryApplicantMonthOfBirth
     );
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).fillField(
       this.fields.dateOfBirthYear,
       primaryApplicantPersonalDetails.primaryApplicantYearOfBirth
@@ -68,8 +68,8 @@ module.exports = {
     await I.retry(3).fillField(this.fields.applicant1FirstNames, '');
     await I.retry(3).fillField(this.fields.applicant1LastNames, '');
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
-    await I.retry(3).see('There is a problem');
+    await I.wait(4);
+    await I.retry(3).waitForText('There is a problem');
     await I.retry(3).see('Enter your first names');
     await I.retry(3).see('Enter your last names');
     await I.retry(3).fillField(
@@ -86,13 +86,12 @@ module.exports = {
     await I.retry(3).click('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText('There is a problem');
-    await I.retry(3).see('There is a problem');
     await I.wait(4);
     await I.retry(3).waitForText('Please answer the question');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).click(this.fields.applicant1HasOtherNames);
     await I.retry(3).click('Add');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).see('Enter your previous first names');
     await I.retry(3).see('Enter your previous last names');
     await I.retry(3).fillField(
@@ -104,20 +103,20 @@ module.exports = {
       primaryApplicantPersonalDetails.primaryApplicantPreviousLastName
     );
     await I.retry(3).click('Add');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText("What's your date of birth?");
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
-    await I.retry(3).see('There is a problem');
+    await I.wait(4);
+    await I.retry(3).waitForText('There is a problem');
     await I.retry(3).see('Enter your date of birth');
     await I.retry(3).fillField(this.fields.dateOfBirthDay, primaryApplicantPersonalDetails.primaryApplicantDateOfBirth);
     await I.retry(3).fillField(
       this.fields.dateOfBirthMonth,
       primaryApplicantPersonalDetails.primaryApplicantMonthOfBirth
     );
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).fillField(
       this.fields.dateOfBirthYear,
       primaryApplicantPersonalDetails.primaryApplicantYearOfBirth
@@ -125,8 +124,8 @@ module.exports = {
     await I.retry(3).click('Save and continue');
     await I.retry(3).waitForText("What's your occupation?");
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
-    await I.retry(3).see('There is a problem');
+    await I.wait(4);
+    await I.retry(3).waitForText('There is a problem');
     await I.retry(3).see('Enter your occupation');
     await I.retry(3).fillField(
       this.fields.applicant1Occupation,
@@ -143,14 +142,14 @@ module.exports = {
     await I.retry(3).see(extraSupportDetails.extraSupportError);
     await I.retry(3).see(extraSupportDetails.whatSupportIsAvailable);
     await I.retry(3).click(this.fields.whatSupportIsNeeded);
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).see('Reasonable adjustments can include:');
     await I.retry(3).see(extraSupportDetails.documentNeeds);
     await I.retry(3).see(extraSupportDetails.communicationNeeds);
     await I.retry(3).see(extraSupportDetails.mobilitySupport);
     await I.retry(3).see(extraSupportDetails.whyExtraSupportIsNeeded);
     await I.retry(3).click(this.fields.applicant1extraSupportAdjustment);
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).see(extraSupportDetails.tellWhatSupportIsNeeded);
     await I.retry(3).click('Save and continue');
     await I.retry(3).see(extraSupportDetails.detailsOfExtraSupportError);

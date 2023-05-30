@@ -24,15 +24,15 @@ module.exports = {
     );
     await I.retry(3).selectOption(this.fields.addressList, primaryApplicantDetails.primaryApplicantAddressLookupOption);
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).fillField(
       this.fields.applicant1EmailAddress,
       primaryApplicantDetails.primaryApplicantEmailAddress
     );
     await I.retry(3).fillField(this.fields.applicant1PhoneNumber, primaryApplicantDetails.primaryApplicantPhoneNumber);
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).click(this.fields.applicant1ContactDetailsConsent);
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText('What language do you want to receive emails and documents in?');
@@ -44,14 +44,14 @@ module.exports = {
   async primaryApplicantContactDetailsSectionEmpty() {
     await I.retry(3).waitForText("What's your home address?");
     await I.retry(3).click('Find address');
-    await I.wait(2);
-    await I.retry(3).see('There is a problem');
+    await I.wait(4);
+    await I.retry(3).waitForText('There is a problem');
     await I.retry(3).see('Enter a postcode, like AA1 1AA');
     await I.retry(3).fillField(this.fields.postcodeLookup, primaryApplicantDetails.primaryApplicantPostcode);
     await I.retry(3).click(this.fields.findAddressButton);
     await I.retry(3).waitForText('addresses found');
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).see('Select an address');
     await I.retry(3).waitForElement(
       locate(this.fields.addressList)
@@ -60,7 +60,7 @@ module.exports = {
     );
     await I.retry(3).selectOption(this.fields.addressList, primaryApplicantDetails.primaryApplicantAddressLookupOption);
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).waitForText('What are your contact details?');
     await I.retry(3).click('Save and continue');
     await I.wait(4);

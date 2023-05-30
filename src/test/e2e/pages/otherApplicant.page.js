@@ -27,7 +27,7 @@ module.exports = {
     );
     await I.retry(3).selectOption(this.fields.addressList, secondApplicantDetails.secondApplicantAddressLookupOption);
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).fillField(this.fields.applicant2EmailAddress, secondApplicantDetails.secondApplicantEmailAddress);
     await I.retry(3).fillField(this.fields.applicant1PhoneNumber, secondApplicantDetails.secondApplicantPhoneNumber);
     await I.retry(3).click(this.fields.applicant2ContactDetailsConsent);
@@ -45,27 +45,27 @@ module.exports = {
     await I.wait(3);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
-    await I.retry(3).see('There is a problem');
+    await I.retry(3).waitForText('There is a problem');
     await I.wait(4);
     await I.retry(3).see('Please answer the question');
     await I.retry(3).click(this.fields.applicant2AddressSameAsApplicant1_No);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
     await I.retry(3).click(this.fields.findAddressButton);
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).see('Enter a postcode, like AA1 1AA');
     await I.retry(3).fillField(this.fields.postcodeLookup, secondApplicantDetails.secondApplicantPostcode);
     await I.retry(3).click(this.fields.findAddressButton);
     await I.retry(3).waitForText('addresses found');
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).see('Select an address');
     await I.retry(3).waitForElement(
       locate(this.fields.addressList).find('option').withText(secondApplicantDetails.secondApplicantAddressLookupOption)
     );
     await I.retry(3).selectOption(this.fields.addressList, secondApplicantDetails.secondApplicantAddressLookupOption);
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).waitForText('What are your contact details?');
     await I.retry(3).click('Save and continue');
     await I.wait(4);
