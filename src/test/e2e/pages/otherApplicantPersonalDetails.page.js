@@ -81,8 +81,9 @@ module.exports = {
     await I.wait(4);
     await I.retry(3).waitForText('Have you ever legally been known by any other names?');
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).see('There is a problem');
+    await I.wait(4);
     await I.retry(3).see('Please answer the question');
     await I.wait(2);
     await I.retry(3).click(this.fields.applicant2HasOtherNames);

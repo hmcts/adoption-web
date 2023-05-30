@@ -93,6 +93,7 @@ module.exports = {
   },
 
   async childAdoptionAgencyDetailsSection() {
+    await I.wait(4);
     await I.retry(3).waitForText('Is there another adoption agency or local authority involved?', 30);
     await I.retry(3).click(this.adopAgency.hasAnotherAdopAgencyOrLA);
     await I.wait(2);
@@ -145,6 +146,7 @@ module.exports = {
   },
 
   async childWithNoAdoptionAgencyDetailsSection() {
+    await I.wait(4);
     await I.retry(3).waitForText('Is there another adoption agency or local authority involved?', 30);
     await I.retry(3).click(this.adopAgency.hasNoAdopAgencyOrLA);
     await I.retry(3).click('Save and continue');
@@ -190,9 +192,10 @@ module.exports = {
   },
 
   async adoptionAgencySelectionNoDetails() {
+    await I.wait(4);
     await I.retry(3).waitForText('Is there another adoption agency or local authority involved?', 30);
     await I.retry(3).click('Save and continue');
-    await I.wait(3);
+    await I.wait(4);
     await I.retry(3).see('Please answer the question');
     await I.retry(3).click(this.adopAgency.hasAnotherAdopAgencyOrLA);
     await I.wait(2);
