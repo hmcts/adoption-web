@@ -48,8 +48,8 @@ module.exports = {
     await I.retry(3).waitForText("What is the child's full name?");
     await I.retry(3).click('Save and continue');
     await I.wait(4);
-    await I.retry(3).see("Enter the child's first names");
-    await I.retry(3).see("Enter the child's last names");
+    await I.retry(3).waitForText("Enter the child's first names");
+    await I.retry(3).waitForText("Enter the child's last names");
     await I.retry(3).fillField(this.fields.childrenFirstName, childBasicInitialDetails.childFirstNameBeforeAdoption);
     await I.retry(3).fillField(this.fields.childrenLastName, childBasicInitialDetails.childLastNameBeforeAdoption);
     await I.retry(3).click('Save and continue');
