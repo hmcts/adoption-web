@@ -123,6 +123,7 @@ module.exports = {
     );
     await I.retry(3).click('Save and continue');
     await I.retry(3).waitForText("What's your occupation?");
+    await I.wait(4);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText('There is a problem');
