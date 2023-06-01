@@ -143,7 +143,7 @@ export const form: FormContent = {
       hint: l => l.applicantLocalAuthorityEmailHint,
       label: l => l.applicantLocalAuthorityEmail,
       labelSize: null,
-      validator: value => isFieldFilledIn(value) || isEmailValid(value) || isGovUkEmail(value),
+      validator: value => isFieldFilledIn(value) || isEmailValid(value),
     },
   },
   submit: {
