@@ -15,7 +15,7 @@ module.exports = {
   },
   async seeTheLandingPage() {
     await I.wait(4);
-    await I.retry(3).see('Are you applying on your own, or with someone else?');
+    await I.retry(3).waitForText('Are you applying on your own, or with someone else?');
   },
 
   async selectApplyOnMyownSection() {
