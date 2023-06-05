@@ -1,6 +1,6 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
-import { isFieldFilledIn } from '../../../app/form/validation';
+import { isChildrenNameValid } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
@@ -19,9 +19,11 @@ const enContent = {
   errors: {
     childrenFirstName: {
       required: "Enter the child's first names",
+      isValidChildName: "Enter valid child's first name",
     },
     childrenLastName: {
       required: "Enter the child's last names",
+      isValidChildName: "Enter valid child's last name",
     },
   },
 };
@@ -38,9 +40,11 @@ const cyContent = {
   errors: {
     childrenFirstName: {
       required: 'Nac ydwdwch enw(au) cyntaf y plentyn',
+      isValidChildName: 'Rhowch enw cyntaf plentyn dilys',
     },
     childrenLastName: {
       required: 'Nac ydwdwch gyfenw(au)’r plentyn',
+      isValidChildName: 'Rhowch enw olaf plentyn dilys',
     },
   },
 };
@@ -72,7 +76,7 @@ describe('children > full-name > content', () => {
     expect((childrenFirstNameField.label as Function)(generatedContent)).toBe(enContent.firstName);
     expect(((childrenFirstNameField as FormInput).hint as Function)(generatedContent)).toBe(enContent.firstNameHint);
     expect(childrenFirstNameField.labelSize).toBe(null);
-    expect(childrenFirstNameField.validator).toBe(isFieldFilledIn);
+    expect(childrenFirstNameField.validator).toBe(isChildrenNameValid);
   });
 
   test('should contain childrenLastName field', () => {
@@ -82,7 +86,7 @@ describe('children > full-name > content', () => {
     expect((childrenLastNameField.label as Function)(generatedContent)).toBe(enContent.lastName);
     expect(((childrenLastNameField as FormInput).hint as Function)(generatedContent)).toBe(enContent.lastNameHint);
     expect(childrenLastNameField.labelSize).toBe(null);
-    expect(childrenLastNameField.validator).toBe(isFieldFilledIn);
+    expect(childrenLastNameField.validator).toBe(isChildrenNameValid);
   });
 
   test('should contain submit button', () => {
