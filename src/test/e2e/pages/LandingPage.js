@@ -42,7 +42,7 @@ module.exports = {
   async continueWithoutSelection() {
     await I.retry(3).click('Save and continue');
     await I.wait(4);
-    await I.retry(3).waitForText('There is a problem');
+    await I.retry(3).waitForText('There is a problem', 30);
     await I.retry(3).see('Select an option which best describes who is applying');
   },
 

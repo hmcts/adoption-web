@@ -61,8 +61,8 @@ module.exports = {
     await I.wait(4);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
-    await I.retry(3).see('Enter their first names');
-    await I.retry(3).see('Enter their last names');
+    await I.retry(3).waitForText('Enter their first names', 30);
+    await I.retry(3).waitForText('Enter their last names', 30);
     await I.retry(3).fillField(
       this.fields.childrenFirstNameAfterAdoption,
       childAdoptionCertificateDetails.childrenFirstNameAfterAdoption

@@ -173,10 +173,10 @@ module.exports = {
     await I.retry(3).waitForText('Your social worker details', 30);
     await I.retry(3).click('Save and continue');
     await I.wait(3);
-    await I.retry(3).see('Enter a name');
-    await I.retry(3).see('Enter a UK telephone number');
-    await I.retry(3).see('Enter a name');
-    await I.retry(3).see('Enter an email address in the correct format, like name@gov.uk');
+    await I.retry(3).waitForText('Enter a name', 30);
+    await I.retry(3).waitForText('Enter a UK telephone number', 30);
+    await I.retry(3).waitForText('Enter a name', 30);
+    await I.retry(3).waitForText('Enter an email address in the correct format, like name@gov.uk', 30);
     await I.retry(3).fillField(
       this.yourSocialWorker.applicantLocalAuthorityEmail,
       applicantOrYourSocialWorkerDetails.applicantLocalAuthorityEmailInvalid

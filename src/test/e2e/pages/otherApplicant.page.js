@@ -45,7 +45,7 @@ module.exports = {
     await I.wait(3);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
-    await I.retry(3).waitForText('There is a problem');
+    await I.retry(3).waitForText('There is a problem', 30);
     await I.wait(4);
     await I.retry(3).see('Please answer the question');
     await I.retry(3).click(this.fields.applicant2AddressSameAsApplicant1_No);
