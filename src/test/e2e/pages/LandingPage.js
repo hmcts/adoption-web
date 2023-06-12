@@ -12,10 +12,11 @@ module.exports = {
     childrenDateOfBirthDay: 'input[id$="kbaChildrenDateOfBirth-day"]',
     childrenDateOfBirthMonth: 'input[id$="kbaChildrenDateOfBirth-month"]',
     childrenDateOfBirthYear: 'input[id$="kbaChildrenDateOfBirth-year"]',
+    saveAndContinue: 'input[id$="main-form-submit"]',
   },
   async seeTheLandingPage() {
     await I.wait(4);
-    await I.retry(3).see('Are you applying on your own, or with someone else?');
+    await I.retry(3).waitForText('Are you applying on your own, or with someone else?', 30);
   },
 
   async selectApplyOnMyownSection() {
@@ -25,7 +26,7 @@ module.exports = {
   },
 
   async selectApplyWithMySpouseSection() {
-    await I.retry(3).see('For example, as a legally married couple or legal civil partner.');
+    await I.retry(3).waitForText('For example, as a legally married couple or legal civil partner.', 30);
     await I.retry(3).click(this.fields.applyWithMySpouse);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
@@ -33,17 +34,18 @@ module.exports = {
 
   async selectApplyWithSomeoneOtherthanSpouse() {
     await I.retry(3).click(this.fields.applyWithSomeone);
-    await I.retry(3).see('Give a brief overview of what your relationship is with the other applicant.');
+    await I.retry(3).waitForText('Give a brief overview of what your relationship is with the other applicant.', 30);
     await I.retry(3).fillField(this.fields.otherApplicantRelation, 'Uncle');
     await I.retry(3).click('Save and continue');
     await I.wait(4);
   },
 
   async continueWithoutSelection() {
+    await I.retry(3).waitForSelector(this.fields.saveAndContinue, 30);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText('There is a problem', 30);
-    await I.retry(3).see('Select an option which best describes who is applying');
+    await I.retry(3).waitForText('Select an option which best describes who is applying', 30);
   },
 
   async searchForCaseInLALandingPage(caseId) {
@@ -52,7 +54,7 @@ module.exports = {
     await I.retry(3).waitForText('Sign in or create an account');
     await I.amOnPage(config.baseUrl + 'la-portal/kba-case-ref');
     await I.wait(5);
-    await I.retry(3).see('Application details');
+    await I.retry(3).waitForText('Application details', 30);
     await I.retry(3).fillField(this.fields.caseRef, caseId);
     await I.retry(3).fillField(
       this.fields.childName,
@@ -64,7 +66,7 @@ module.exports = {
     await I.retry(3).fillField(this.fields.childrenDateOfBirthYear, childBasicInitialDetails.yearChildMovedIn);
     await I.retry(3).click('Save and continue');
     await I.wait(5);
-    await I.retry(3).see('Getting started');
+    await I.retry(3).waitForText('Getting started', 30);
     await I.wait(4);
     await I.retry(3).click('Start now');
     await I.wait(3);

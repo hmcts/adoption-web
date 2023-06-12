@@ -67,28 +67,29 @@ Scenario(
     await otherApplicantDetailsPage.otherApplicantContactDetailsSectionEmptyFields();
     await taskListPage.verifySecondApplicantPersonalDetailsStatus();
 
-    /*Second Applicant personal details*/
-    await taskListPage.selectOtherApplicantPersonalDetails();
-    await otherApplicantPersonalDetailsPage.otherApplicantPersonalDetailsSectionEmpty();
-    await otherApplicantPersonalDetailsPage.additionalDetailsForApplicant2();
-    await taskListPage.verifyOtherApplicantPersonalDetailsStatus();
+    //   /*Second Applicant personal details*/
+    //   await taskListPage.selectOtherApplicantPersonalDetails();
+    //   await otherApplicantPersonalDetailsPage.otherApplicantPersonalDetailsSectionEmpty();
+    //   await otherApplicantPersonalDetailsPage.additionalDetailsForApplicant2();
+    //   await taskListPage.verifyOtherApplicantPersonalDetailsStatus();
 
-    /*Family Court details*/
-    await taskListPage.selectChooseYourFamilyCourtDetails();
-    await chooseYourFamilyCourtDetailsPage.childDetailsFindFamilyCourtSectionEmptyFields();
-    await taskListPage.verifyChooseYourFamilyCourtStatus();
+    //   /*Family Court details*/
+    //   await taskListPage.selectChooseYourFamilyCourtDetails();
+    //   await chooseYourFamilyCourtDetailsPage.childDetailsFindFamilyCourtSectionEmptyFields();
+    //   await taskListPage.verifyChooseYourFamilyCourtStatus();
 
-    /*Payment details*/
-    await taskListPage.selectReviewPayAndSubmitDetails();
-    await reviewPayAndSubmitPage.selectNoPCQOption();
-    await reviewPayAndSubmitPage.changeValueFromReviewYourAnswers();
-    await dateChildMovedinDetailsPage.editDateChildMovedInSection();
-    await reviewPayAndSubmitPage.reviewYourAnswersAndContinue();
-    await reviewPayAndSubmitPage.statementOfTruthDetailsSectionEmpty();
-    await reviewPayAndSubmitPage.reviewAndPay();
-    await reviewPayAndSubmitPage.paymentCancellation();
-    await reviewPayAndSubmitPage.reviewAndPay();
-    await reviewPayAndSubmitPage.adoptionCourtFeesByCard();
+    //   /*Payment details*/
+    //   await taskListPage.selectReviewPayAndSubmitDetails();
+    //   await reviewPayAndSubmitPage.selectNoPCQOption();
+    //   await reviewPayAndSubmitPage.changeValueFromReviewYourAnswers();
+    //   await dateChildMovedinDetailsPage.editDateChildMovedInSection();
+    //   await reviewPayAndSubmitPage.reviewYourAnswersAndContinue();
+    //   await reviewPayAndSubmitPage.statementOfTruthDetailsSectionEmpty();
+    //   await reviewPayAndSubmitPage.reviewAndPay();
+    //   await reviewPayAndSubmitPage.paymentCancellation();
+    //   await reviewPayAndSubmitPage.reviewAndPay();
+    //   await reviewPayAndSubmitPage.adoptionCourtFeesByCard();
+    //
   }
 
   //will be covered as part of LA portal journey

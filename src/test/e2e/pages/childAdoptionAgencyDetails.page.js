@@ -11,6 +11,7 @@ module.exports = {
     childLocalAuthority: '#location-picker',
     childLocalAuthorityPicker: '#location-picker__option--0',
     childLocalAuthorityEmail: 'input[id$="childLocalAuthorityEmail"]',
+    saveAndContinue: 'input[id$="main-form-submit"]',
   },
 
   yourSocialWorker: {
@@ -155,9 +156,11 @@ module.exports = {
 
   async childSocialWorkerDetailsSectionWithOutDetails() {
     await I.retry(3).waitForText("Child's social worker details", 30);
+    await I.wait(4);
+    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue, 30);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
-    await I.retry(3).waitForText('Enter name of child’s social worker');
+    await I.retry(3).see('Enter name of child’s social worker');
     await I.retry(3).see('Enter a UK telephone number');
     await I.retry(3).see('Enter name of local authority');
     await I.retry(3).see('Enter an email address in the correct format, like name@gov.uk');
@@ -165,12 +168,14 @@ module.exports = {
       this.childSocialWorker.childLocalAuthorityEmail,
       childSocialWorkerDetails.childSocialWorkerEmailInvalid
     );
+    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue, 30);
     await I.retry(3).click('Save and continue');
     await I.retry(3).see('Enter an email address that ends in gov.uk');
   },
 
   async yourSocialWorkerDetailsSectionWithOutDetails() {
     await I.retry(3).waitForText('Your social worker details', 30);
+    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue, 30);
     await I.retry(3).click('Save and continue');
     await I.wait(3);
     await I.retry(3).waitForText('Enter a name', 30);
@@ -186,6 +191,7 @@ module.exports = {
       applicantOrYourSocialWorkerDetails.applicantSocialWorkerPhoneNumberInvalid
     );
     await I.wait(4);
+    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue, 30);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
     await I.retry(3).see('Enter an email address that ends in gov.uk');
@@ -195,17 +201,20 @@ module.exports = {
   async adoptionAgencySelectionNoDetails() {
     await I.wait(4);
     await I.retry(3).waitForText('Is there another adoption agency or local authority involved?', 30);
+    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue, 30);
     await I.retry(3).click('Save and continue');
-    await I.wait(4);
+    await I.wait(6);
     await I.retry(3).see('Please answer the question');
     await I.retry(3).click(this.adopAgency.hasAnotherAdopAgencyOrLA);
     await I.wait(4);
+    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue, 30);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
   },
   async childAdoptionAgencyDetailsSectionWithOutDetails() {
     await I.retry(3).waitForText('Adoption agency or local authority details', 30);
     await I.wait(4);
+    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue, 30);
     await I.retry(3).click('Save and continue');
     await I.retry(3).waitForText('Enter name of adoption agency or local authority', 30);
     await I.retry(3).see('Enter name of adoption agency or local authority');
@@ -243,6 +252,7 @@ module.exports = {
       adoptionAgencyDetails.adopAgencyContactEmail
     );
     await I.wait(4);
+    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue, 30);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
   },

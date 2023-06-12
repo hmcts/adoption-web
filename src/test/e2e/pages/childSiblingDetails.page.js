@@ -16,7 +16,7 @@ module.exports = {
   async childDetailsSiblingSection() {
     await I.retry(3).waitForText('Does the child have any siblings or half siblings with court orders?', 30);
     await I.retry(3).click(this.fields.hasSiblings);
-    await I.retry(3).see('You will be asked to provide each sibling court order individually.');
+    await I.retry(3).waitForText('You will be asked to provide each sibling court order individually.', 30);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText('What is their relationship to the child being adopted?', 30);
