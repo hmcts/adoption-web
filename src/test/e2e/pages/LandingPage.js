@@ -16,7 +16,7 @@ module.exports = {
   },
   async seeTheLandingPage() {
     await I.wait(4);
-    await I.retry(3).waitForText('Are you applying on your own, or with someone else?', 30);
+    await I.retry(3).see('Are you applying on your own, or with someone else?');
   },
 
   async selectApplyOnMyownSection() {
@@ -26,7 +26,7 @@ module.exports = {
   },
 
   async selectApplyWithMySpouseSection() {
-    await I.retry(3).waitForText('For example, as a legally married couple or legal civil partner.', 30);
+    await I.retry(3).see('For example, as a legally married couple or legal civil partner.');
     await I.retry(3).click(this.fields.applyWithMySpouse);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
@@ -34,7 +34,7 @@ module.exports = {
 
   async selectApplyWithSomeoneOtherthanSpouse() {
     await I.retry(3).click(this.fields.applyWithSomeone);
-    await I.retry(3).waitForText('Give a brief overview of what your relationship is with the other applicant.', 30);
+    await I.retry(3).see('Give a brief overview of what your relationship is with the other applicant.');
     await I.retry(3).fillField(this.fields.otherApplicantRelation, 'Uncle');
     await I.retry(3).click('Save and continue');
     await I.wait(4);
