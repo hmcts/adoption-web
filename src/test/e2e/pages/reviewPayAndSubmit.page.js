@@ -34,12 +34,14 @@ module.exports = {
   },
 
   async changeValueFromReviewYourAnswers() {
+    await I.wait('6');
     await I.retry(3).waitForText('Review your answers', 30);
     await I.retry(3).click(this.fields.changeChildMoveInDate);
     await I.wait(5);
   },
 
   async reviewYourAnswersAndContinue() {
+    await I.wait('6');
     await I.retry(3).waitForText('Review your answers', 30);
     await I.retry(3).click('Save and continue');
     await I.wait(5);

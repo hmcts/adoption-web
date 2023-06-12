@@ -19,7 +19,7 @@ exports.config = {
           return sets;
         };
 
-        const buckets = parseInt(process.env.PARALLEL_CHUNKS || '5');
+        const buckets = parseInt(process.env.PARALLEL_CHUNKS || '1');
         const slowTests = lodash.filter(files, file => file.includes('@slow'));
         const otherTests = lodash.difference(files, slowTests);
 
