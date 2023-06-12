@@ -63,6 +63,10 @@ export default class PlacementOrderGetController extends GetController {
       this.getEventName(req)
     );
 
+    if (!req.session.userCase.selectedPlacementOrderId) {
+      req.session.userCase.selectedPlacementOrderId = placementOrders[0]?.placementOrderId;
+    }
+
     req.session.userCase.selectedPlacementOrderType = placementOrder?.placementOrderType;
     req.session.userCase.selectedOtherPlacementOrderType = placementOrder?.otherPlacementOrderType;
     const courtList = await getCourtList(req);
