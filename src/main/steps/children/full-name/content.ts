@@ -48,6 +48,7 @@ export const form: FormContent = {
       label: l => l.firstName,
       hint: l => l.firstNameHint,
       labelSize: null,
+      parser: data => (data as Record<string, string>).childrenFirstName?.trim(),
       validator: isFieldFilledIn,
     },
     childrenLastName: {
@@ -56,6 +57,7 @@ export const form: FormContent = {
       label: l => l.lastName,
       hint: l => l.lastNameHint,
       labelSize: null,
+      parser: data => (data as Record<string, string>).childrenLastName?.trim(),
       validator: isFieldFilledIn,
     },
   },
