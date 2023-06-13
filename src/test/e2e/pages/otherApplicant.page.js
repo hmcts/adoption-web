@@ -12,7 +12,7 @@ module.exports = {
     applicant1PhoneNumber: 'input[id$="applicant2PhoneNumber"]',
     applicant2LanguageEnglish: 'input[id$="applicant2LanguagePreference"]',
     applicant2LanguageWelsh: 'input[id$="applicant2LanguagePreference-2ss"]',
-    saveAndContinue: 'input[id$="main-form-submit"]',
+    saveAndContinue: '//*[@id="main-form-submit"]',
   },
 
   async otherApplicantContactDetailsSection() {

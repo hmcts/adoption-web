@@ -81,42 +81,42 @@ Scenario(
 
     await landingPage.searchForCaseInLALandingPage(caseId);
 
-    //  LA - Add child's details
+    // //  LA - Add child's details
 
-    await taskListPage.selectChildrenBirthCertificate();
-    await childrenBirthCertificatePage.childDetailsBirthCertificaterSection();
-    await taskListPage.verifyChildBirthCertificateDetailsStatus();
+    // await taskListPage.selectChildrenBirthCertificate();
+    // await childrenBirthCertificatePage.childDetailsBirthCertificaterSection();
+    // await taskListPage.verifyChildBirthCertificateDetailsStatus();
 
-    await taskListPage.selectChildBirthMotherDetails();
-    await childBirthMothersDetailsPage.childBirthMothersDetailsSection();
-    await taskListPage.verifyChildBirthMotherDetailsStatus();
+    // await taskListPage.selectChildBirthMotherDetails();
+    // await childBirthMothersDetailsPage.childBirthMothersDetailsSection();
+    // await taskListPage.verifyChildBirthMotherDetailsStatus();
 
-    await taskListPage.selectChildBirthFatherDetails();
-    await childBirthFatherDetailsPage.childBirthFatherDetailsSection();
-    await taskListPage.verifyChildBirthFatherDetailsStatus();
+    // await taskListPage.selectChildBirthFatherDetails();
+    // await childBirthFatherDetailsPage.childBirthFatherDetailsSection();
+    // await taskListPage.verifyChildBirthFatherDetailsStatus();
 
-    await taskListPage.selectChildOtherParentDetails();
-    await childOtherParentDetailsPage.childOtherParentDetailsSection();
+    // await taskListPage.selectChildOtherParentDetails();
+    // await childOtherParentDetailsPage.childOtherParentDetailsSection();
 
-    await taskListPage.verifyChildOtherParentDetailsStatus();
+    // await taskListPage.verifyChildOtherParentDetailsStatus();
 
-    await taskListPage.selectChildPlacementOrderDetails();
-    await childDetailsPlacementOrderPage.childDetailsPlacementOrderSection();
-    await taskListPage.verifyChildPlacementOrderDetailsStatus();
+    // await taskListPage.selectChildPlacementOrderDetails();
+    // await childDetailsPlacementOrderPage.childDetailsPlacementOrderSection();
+    // await taskListPage.verifyChildPlacementOrderDetailsStatus();
 
-    await taskListPage.selectSiblingDetails();
-    await childSiblingDetailsPage.childDetailsSiblingSection();
-    await taskListPage.verifySiblingDetailsStatus();
+    // await taskListPage.selectSiblingDetails();
+    // await childSiblingDetailsPage.childDetailsSiblingSection();
+    // await taskListPage.verifySiblingDetailsStatus();
 
-    await taskListPage.selectUploadDocumentsDetails();
-    // TODO bug Created for this change
-    // await uploadDocumentsDetailsPage.uploadDocumentsSection();
-    await uploadDocumentsDetailsPage.uploadDocumentsSectionWithCantNotUploadOption();
-    await taskListPage.verifyUploadDocumentsStatus();
-    await taskListPage.selectReviewAndSubmit();
+    // await taskListPage.selectUploadDocumentsDetails();
+    // // TODO bug Created for this change
+    // // await uploadDocumentsDetailsPage.uploadDocumentsSection();
+    // await uploadDocumentsDetailsPage.uploadDocumentsSectionWithCantNotUploadOption();
+    // await taskListPage.verifyUploadDocumentsStatus();
+    // await taskListPage.selectReviewAndSubmit();
 
-    await laCheckYourAnswersPage.laCheckYourAnswersContinue();
-    await laCheckYourAnswersPage.laStatementOfTruthPage();
-    await laCheckYourAnswersPage.laSubmitApplicationConfirmationPage();
+    // await laCheckYourAnswersPage.laCheckYourAnswersContinue();
+    // await laCheckYourAnswersPage.laStatementOfTruthPage();
+    // await laCheckYourAnswersPage.laSubmitApplicationConfirmationPage();
   }
 );

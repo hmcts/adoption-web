@@ -11,11 +11,11 @@ module.exports = {
     childLocalAuthority: '#location-picker',
     childLocalAuthorityPicker: '#location-picker__option--0',
     childLocalAuthorityEmail: 'input[id$="childLocalAuthorityEmail"]',
-    saveAndContinue: 'input[id$="main-form-submit"]',
+    saveAndContinue: '//*[@id="main-form-submit"]',
   },
 
   yourSocialWorker: {
-    applicantSocialWorkerName: 'input[id$="applicantSocialWorkerName"]',
+    applicantSocialWorkerName: '//*[@id="applicantSocialWorkerName"]',
     applicantSocialWorkerPhoneNumber: 'input[id$="applicantSocialWorkerPhoneNumber"]',
     applicantSocialWorkerEmail: 'input[id$="applicantSocialWorkerEmail"]',
     applicantLocalAuthority: '#location-picker',

@@ -17,7 +17,7 @@ module.exports = {
     applicant1extraSupportAdjustment: '#applicant1HasReasonableAdjustment',
     applicant1extraSupportAdjustmentDetails: '#applicant1ReasonableAdjustmentDetails',
     whatSupportIsNeeded: '.govuk-details .govuk-details__summary-text',
-    saveAndContinue: 'input[id$="main-form-submit"]',
+    saveAndContinue: '//*[@id="main-form-submit"]',
   },
 
   async primaryApplicantPersonalDetailsSection() {

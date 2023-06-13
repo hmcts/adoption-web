@@ -27,6 +27,7 @@ module.exports = {
     birthFatherParentalResponsibility: '#birthFatherResponsibility',
     birthFatherParentalResponsibilityReason: '#birthFatherResponsibilityReason-5',
     birthFatherResponsibilityOtherReason: '#birthFatherOtherResponsibilityReason',
+    saveAndContinue: '//*[@id="main-form-submit"]',
   },
 
   async childBirthFatherDetailsSection() {
@@ -124,7 +125,8 @@ module.exports = {
     await I.retry(3).click('Save and continue');
     await I.wait(4);
     await I.retry(3).see(childBirthFatherDetails.birthFatherServerOrderTitle);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).waitForSelector(this.fields.saveAndContinue, 30);
+    await I.retry(3).click(this.fields.saveAndContinue);
     await I.wait(4);
     await I.retry(3).waitForText(childBirthFatherDetails.serverOrderErrorMessage);
     await I.retry(3).click(this.fields.birthFatherServeOrderYes);

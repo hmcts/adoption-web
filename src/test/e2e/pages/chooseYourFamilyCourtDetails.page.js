@@ -6,7 +6,7 @@ module.exports = {
     findFamilyCourt: 'input[id$="findFamilyCourt"]',
     courtList: 'input[id$="location-picker"]',
     courtListOption: 'li[id$="location-picker__option--0"]',
-    saveAndContinue: 'input[id$="main-form-submit"]',
+    saveAndContinue: '//*[@id="main-form-submit"]',
   },
 
   async childDetailsFindFamilyCourtSection() {

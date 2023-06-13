@@ -12,7 +12,7 @@ module.exports = {
     childrenDateOfBirthDay: 'input[id$="kbaChildrenDateOfBirth-day"]',
     childrenDateOfBirthMonth: 'input[id$="kbaChildrenDateOfBirth-month"]',
     childrenDateOfBirthYear: 'input[id$="kbaChildrenDateOfBirth-year"]',
-    saveAndContinue: 'input[id$="main-form-submit"]',
+    saveAndContinue: '//*[@id="main-form-submit"]',
   },
   async seeTheLandingPage() {
     await I.wait(4);

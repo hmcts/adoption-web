@@ -10,7 +10,7 @@ module.exports = {
     childrenDateOfBirthDay: 'input[id$="childrenDateOfBirth-day"]',
     childrenDateOfBirthMonth: 'input[id$="childrenDateOfBirth-month"]',
     childrenDateOfBirthYear: 'input[id$="childrenDateOfBirth-year"]',
-    saveAndContinue: 'input[id$="main-form-submit"]',
+    saveAndContinue: '//*[@id="main-form-submit"]',
   },
 
   async childNameAfterAdoptionDetailsSection() {
