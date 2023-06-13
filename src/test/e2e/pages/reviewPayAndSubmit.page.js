@@ -4,25 +4,26 @@ const primAppPersonalDetails = require('../fixtures/caseData/primaryApplicantPer
 const paymentCardDetails = require('../fixtures/caseData/paymentCardDetails');
 module.exports = {
   fields: {
-    applicant1IBelieveApplicationIsTrue: 'input[id$="applicant1IBelieveApplicationIsTrue"]',
-    applicant2IBelieveApplicationIsTrue: 'input[id$="applicant2IBelieveApplicationIsTrue"]',
-    applicant1SotFullName: 'input[id$="applicant1SotFullName"]',
-    applicant2SotFullName: 'input[id$="applicant2SotFullName"]',
-    paymentTypeCard: 'input[id$="paymentType"]',
-    cardNo: 'input[id$="card-no"]',
-    expiryMonth: 'input[id$="expiry-month"]',
-    expiryYear: 'input[id$="expiry-year"]',
-    cardholderName: 'input[id$="cardholder-name"]',
-    cvc: 'input[id$="cvc"]',
-    addressLine1: 'input[id$="address-line-1"]',
-    addressLine2: 'input[id$="address-line-2"]',
-    addressCity: 'input[id$="address-city"]',
-    addressPostcode: 'input[id$="address-postcode"]',
-    email: 'input[id$="email"]',
+    applicant1IBelieveApplicationIsTrue: '//*[@id="applicant1IBelieveApplicationIsTrue"]',
+    applicant2IBelieveApplicationIsTrue: '//*[@id="applicant2IBelieveApplicationIsTrue"]',
+    applicant1SotFullName: '//*[@id="applicant1SotFullName"]',
+    applicant2SotFullName: '//*[@id="applicant2SotFullName"]',
+    paymentTypeCard: '//*[@id="paymentType"]',
+    cardNo: '//*[@id="card-no"]',
+    expiryMonth: '//*[@id="expiry-month"]',
+    expiryYear: '//*[@id="expiry-year"]',
+    cardholderName: '//*[@id="cardholder-name"]',
+    cvc: '//*[@id="cvc"]',
+    addressLine1: '//*[@id="address-line-1"]',
+    addressLine2: '//*[@id="address-line-2"]',
+    addressCity: '//*[@id="address-city"]',
+    addressPostcode: '//*[@id="address-postcode"]',
+    email: '//*[@id="email"]',
     pcqNO: 'form[action="/start-page"] button[formaction="/opt-out"]',
     caseID: '.govuk-panel__body strong',
     changeChildMoveInDate: 'a[href="/date-child-moved-in?returnUrl=/review-pay-submit/check-your-answers"]',
-    cancelpayment: 'input[id$="cancel-payment"]',
+    cancelpayment: '//*[@id="cancel-payment"]',
+    saveAndContinueButton: '//*[@id="main-form-submit"]',
   },
   async selectNoPCQOption() {
     await I.wait(5);
@@ -34,14 +35,16 @@ module.exports = {
   },
 
   async changeValueFromReviewYourAnswers() {
+    await I.wait('6');
     await I.retry(3).waitForText('Review your answers', 30);
     await I.retry(3).click(this.fields.changeChildMoveInDate);
     await I.wait(5);
   },
 
   async reviewYourAnswersAndContinue() {
+    await I.wait('6');
     await I.retry(3).waitForText('Review your answers', 30);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).click(this.fields.saveAndContinueButton);
     await I.wait(5);
   },
 
@@ -73,8 +76,8 @@ module.exports = {
     await I.retry(3).waitForText('Statement of truth', 30);
     await I.retry(3).click('Confirm');
     await I.wait(4);
-    await I.retry(3).see('Confirm your statement of truth');
-    await I.retry(3).see('Enter your full name');
+    await I.retry(3).waitForText('Confirm your statement of truth', 30);
+    await I.retry(3).waitForText('Enter your full name', 30);
     await I.retry(3).click(this.fields.applicant1IBelieveApplicationIsTrue);
     await I.retry(3).click(this.fields.applicant2IBelieveApplicationIsTrue);
     await I.retry(3).fillField(
@@ -90,7 +93,7 @@ module.exports = {
   },
 
   async reviewAndPay() {
-    await I.retry(3).see('Pay and submit');
+    await I.retry(3).waitForText('Pay and submit', 30);
     await I.retry(3).click('Pay and submit application');
     await I.wait(4);
   },
@@ -116,7 +119,7 @@ module.exports = {
     await I.retry(3).waitForText('Confirm your payment', 30);
     await I.retry(3).waitForText('£183.00', 30);
     await I.retry(3).click('Confirm payment');
-    await I.wait(5);
+    await I.wait(9);
     await I.retry(3).waitForText('Application submitted', 30);
     await I.wait(5);
   },
@@ -144,7 +147,7 @@ module.exports = {
   },
 
   async reviewPay() {
-    await I.retry(3).see('Pay and submit');
+    await I.retry(3).waitForText('Pay and submit', 30);
     await I.retry(3).click('Pay and submit application');
     await I.wait(4);
   },

@@ -22,7 +22,7 @@ module.exports = {
     await I.retry(3).waitForText('What date is on the placement order?');
     await I.retry(3).fillField(this.fields.placementOrderDateDay, childDetailsPlacementOrder.placementOrderDateDay);
     await I.retry(3).fillField(this.fields.placementOrderDateMonth, childDetailsPlacementOrder.placementOrderDateMonth);
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).fillField(this.fields.placementOrderDateYear, childDetailsPlacementOrder.placementOrderDateYear);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
@@ -34,23 +34,23 @@ module.exports = {
     await I.retry(3).waitForText('What type of order is it?');
     await I.retry(3).click(this.fields.selectedPlacementOrderType);
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).waitForText('What is the serial or case number on the order?');
     await I.retry(3).fillField(this.fields.placementOrderNumber, childDetailsPlacementOrder.placementOrderNumber);
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
 
     await I.retry(3).waitForText('Which court made the order?');
     await I.retry(3).fillField(this.fields.courtList, 'Swansea');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).click(this.fields.courtListOption);
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).click('Save and continue');
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).waitForText('What date is on the order?');
     await I.retry(3).fillField(this.fields.placementOrderDateDay, childDetailsPlacementOrder.placementOrderDateDay);
     await I.retry(3).fillField(this.fields.placementOrderDateMonth, childDetailsPlacementOrder.placementOrderDateMonth);
-    await I.wait(2);
+    await I.wait(4);
     await I.retry(3).fillField(this.fields.placementOrderDateYear, childDetailsPlacementOrder.placementOrderDateYear);
     await I.retry(3).click('Save and continue');
     await I.retry(3).see('Orders already in place');

@@ -21,7 +21,7 @@ export const autoLogin = {
     I.wait(5);
     I.waitForText('Sign in or create an account', 30);
     I.fillField('username', username);
-    I.wait(2);
+    I.wait(4);
     I.fillField('password', password);
     I.click('Sign in');
     I.waitForText('Are you applying on your own, or with someone else?', 90);

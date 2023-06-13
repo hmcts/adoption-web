@@ -12,10 +12,11 @@ const childAfterAdopDetails = require('../fixtures/caseData/childAdoptionCertifi
 const childLAPage = require('../pages/childAdoptionAgencyDetails.page');
 module.exports = {
   fields: {
-    saveAndContinueButton: 'input[id$="main-form-submit"]',
-    saveAsDraftButton: 'input[id$="main-form-save-as-draft"]',
+    saveAndContinueButton: '//*[@id="main-form-submit"]',
+    saveAsDraftButton: '//*[@id="main-form-save-as-draft"]',
   },
   async verifyCheckYourAnswersKeys() {
+    await I.wait('6');
     await I.retry(3).see(checkYourAnswersKeyDetails.reviewYourApplication);
     await I.retry(3).see(checkYourAnswersKeyDetails.reviewYourAnswers);
     await I.retry(3).see(checkYourAnswersKeyDetails.applicationDetails);
