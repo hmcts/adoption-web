@@ -34,6 +34,7 @@ interface SummaryListRow {
   value?: string;
   valueHtml?: string;
   changeUrl?: string;
+  visuallyHiddenText?: string;
   classes?: string;
 }
 
@@ -45,6 +46,7 @@ interface SummaryList {
 type SummaryListContent = PageContent & {
   sectionTitles: Record<string, string>;
   keys: Record<string, string>;
+  visuallyHiddenTexts: Record<string, string>;
   language?: string;
   gender: Record<string, string>;
   applyingWith: Record<string, string>;
@@ -69,7 +71,7 @@ const getSectionSummaryList = (rows: SummaryListRow[], content: PageContent): Go
                 {
                   href: changeUrl,
                   text: content.change as string,
-                  visuallyHiddenText: `${item.key}`,
+                  visuallyHiddenText: item.visuallyHiddenText ? `${item.visuallyHiddenText}` : `${item.key}`,
                 },
               ],
             },
@@ -136,7 +138,7 @@ export const localAuthoritySummaryList = (
   };
 };
 export const adoptionAgencySummaryList = (
-  { sectionTitles, keys, ...content }: SummaryListContent,
+  { sectionTitles, keys, visuallyHiddenTexts, ...content }: SummaryListContent,
   userCase: Partial<CaseWithId>
 ): SummaryList | undefined => {
   if (userCase.hasAnotherAdopAgencyOrLA === YesOrNo.NO) {
@@ -167,27 +169,32 @@ export const adoptionAgencySummaryList = (
           key: keys.name,
           value: userCase.adopAgencyOrLaName,
           changeUrl: Urls.ADOPTION_AGENCY,
+          visuallyHiddenText: visuallyHiddenTexts.adopAgencyOrLaName,
         },
         {
           key: keys.nameOfContact,
           value: userCase.adopAgencyOrLaContactName,
           changeUrl: Urls.ADOPTION_AGENCY,
+          visuallyHiddenText: visuallyHiddenTexts.adopAgencyOrLaContactName,
         },
         {
           key: keys.phoneNumber,
           value: userCase.adopAgencyOrLaPhoneNumber,
           changeUrl: Urls.ADOPTION_AGENCY,
+          visuallyHiddenText: visuallyHiddenTexts.adopAgencyOrLaPhoneNumber,
         },
         {
           key: keys.address,
           valueHtml:
             userCase.adopAgencyAddressLine1 + '<br>' + userCase.adopAgencyTown + '<br>' + userCase.adopAgencyPostcode,
           changeUrl: Urls.ADOPTION_AGENCY,
+          visuallyHiddenText: visuallyHiddenTexts.adopAgencyAddress,
         },
         {
           key: keys.emailAddress,
           value: userCase.adopAgencyOrLaContactEmail,
           changeUrl: Urls.ADOPTION_AGENCY,
+          visuallyHiddenText: visuallyHiddenTexts.adopAgencyOrLaContactEmail,
         },
       ],
       content
@@ -196,7 +203,7 @@ export const adoptionAgencySummaryList = (
 };
 
 export const childSocialWorkerSummaryList = (
-  { sectionTitles, keys, ...content }: SummaryListContent,
+  { sectionTitles, keys, visuallyHiddenTexts, ...content }: SummaryListContent,
   userCase: Partial<CaseWithId>
 ): SummaryList => {
   return {
@@ -212,11 +219,13 @@ export const childSocialWorkerSummaryList = (
           key: keys.phoneNumber,
           value: userCase.childSocialWorkerPhoneNumber,
           changeUrl: Urls.SOCIAL_WORKER,
+          visuallyHiddenText: visuallyHiddenTexts.childSocialWorkerPhoneNumber,
         },
         {
           key: keys.emailAddressIfKnown,
           value: userCase.childSocialWorkerEmail,
           changeUrl: Urls.SOCIAL_WORKER,
+          visuallyHiddenText: visuallyHiddenTexts.childSocialWorkerEmail,
         },
         {
           key: keys.childLocalAuthority,
@@ -235,7 +244,7 @@ export const childSocialWorkerSummaryList = (
 };
 
 export const applicantSocialWorkerSummaryList = (
-  { sectionTitles, keys, ...content }: SummaryListContent,
+  { sectionTitles, keys, visuallyHiddenTexts, ...content }: SummaryListContent,
   userCase: Partial<CaseWithId>
 ): SummaryList => {
   return {
@@ -251,11 +260,13 @@ export const applicantSocialWorkerSummaryList = (
           key: keys.phoneNumber,
           value: userCase.applicantSocialWorkerPhoneNumber,
           changeUrl: Urls.APPLICANT_SOCIAL_WORKER,
+          visuallyHiddenText: visuallyHiddenTexts.applicantSocialWorkerPhoneNumber,
         },
         {
           key: keys.emailAddressIfKnown,
           value: userCase.applicantSocialWorkerEmail,
           changeUrl: Urls.APPLICANT_SOCIAL_WORKER,
+          visuallyHiddenText: visuallyHiddenTexts.applicantSocialWorkerEmail,
         },
         {
           key: keys.applicantLocalAuthority,
@@ -275,7 +286,7 @@ export const applicantSocialWorkerSummaryList = (
 
 /* eslint-disable import/namespace */
 export const applicantSummaryList = (
-  { sectionTitles, keys, ...content }: SummaryListContent,
+  { sectionTitles, keys, visuallyHiddenTexts, ...content }: SummaryListContent,
   userCase: Partial<CaseWithId>,
   prefix: FieldPrefix
 ): SummaryList | undefined => {
@@ -284,6 +295,7 @@ export const applicantSummaryList = (
   }
 
   const urlPrefix = prefix === FieldPrefix.APPLICANT1 ? 'APPLICANT_1_' : 'APPLICANT_2_';
+  const visHidPrefix = prefix === FieldPrefix.APPLICANT1 ? keys.firstApplicantvisPrefix : keys.secondApplicantvisPrefix;
   let sectionTitle = sectionTitles.applicantDetails;
   let hasReasonableAdjustment = userCase.applicant1HasReasonableAdjustment;
   if (prefix === FieldPrefix.APPLICANT1 && userCase.applyingWith !== ApplyingWith.ALONE) {
@@ -302,6 +314,7 @@ export const applicantSummaryList = (
             key: keys.fullName,
             value: userCase[`${prefix}FirstNames`] + ' ' + userCase[`${prefix}LastNames`],
             changeUrl: Urls[`${urlPrefix}FULL_NAME`],
+            visuallyHiddenText: visHidPrefix + keys.fullName.toLowerCase(),
           },
           {
             key: keys.previousNames,
@@ -310,46 +323,55 @@ export const applicantSummaryList = (
                 ? userCase[`${prefix}AdditionalNames`]?.map(item => `${item.firstNames} ${item.lastNames}`).join('<br>')
                 : '',
             changeUrl: Urls[`${urlPrefix}OTHER_NAMES`],
+            visuallyHiddenText: visHidPrefix + keys.previousNames.toLowerCase(),
           },
           {
             key: keys.dateOfBirth,
             value: getFormattedDate(userCase[`${prefix}DateOfBirth`], content.language),
             changeUrl: Urls[`${urlPrefix}DOB`],
+            visuallyHiddenText: visHidPrefix + keys.dateOfBirth.toLowerCase(),
           },
           {
             key: keys.occupation,
             value: userCase[`${prefix}Occupation`],
             changeUrl: Urls[`${urlPrefix}OCCUPATION`],
+            visuallyHiddenText: visHidPrefix + keys.occupation.toLowerCase(),
           },
           {
             key: keys.extraSupport,
             value: userCase[`${prefix}HasReasonableAdjustment`],
             changeUrl: Urls[`${urlPrefix}EXTRA_SUPPORT`],
+            visuallyHiddenText: visHidPrefix + keys.extraSupport.toLowerCase(),
           },
           {
             key: keys.address,
             valueHtml: getFormattedAddress(userCase, prefix),
             changeUrl: Urls[`${urlPrefix}FIND_ADDRESS`],
+            visuallyHiddenText: visHidPrefix + keys.address.toLowerCase(),
           },
           {
             key: keys.emailAddress,
             value: userCase[`${prefix}EmailAddress`],
             changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
+            visuallyHiddenText: visHidPrefix + keys.emailAddress.toLowerCase(),
           },
           {
             key: keys.phoneNumber,
             value: userCase[`${prefix}PhoneNumber`],
             changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
+            visuallyHiddenText: visHidPrefix + keys.phoneNumber.toLowerCase(),
           },
           {
             key: keys.contactDetailsConsent,
             value: userCase[`${prefix}ContactDetailsConsent`],
             changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
+            visuallyHiddenText: visHidPrefix + keys.contactDetailsConsent.toLowerCase(),
           },
           {
             key: keys.languagePreference,
             value: content.languagePreference[userCase[`${prefix}LanguagePreference`]],
             changeUrl: Urls[`${urlPrefix}LANGUAGE_PREFERENCE`],
+            visuallyHiddenText: visHidPrefix + keys.languagePreference.toLowerCase(),
           },
         ],
         content
@@ -364,6 +386,7 @@ export const applicantSummaryList = (
           key: keys.fullName,
           value: userCase[`${prefix}FirstNames`] + ' ' + userCase[`${prefix}LastNames`],
           changeUrl: Urls[`${urlPrefix}FULL_NAME`],
+          visuallyHiddenText: visHidPrefix + keys.fullName.toLowerCase(),
         },
         {
           key: keys.previousNames,
@@ -372,51 +395,61 @@ export const applicantSummaryList = (
               ? userCase[`${prefix}AdditionalNames`]?.map(item => `${item.firstNames} ${item.lastNames}`).join('<br>')
               : '',
           changeUrl: Urls[`${urlPrefix}OTHER_NAMES`],
+          visuallyHiddenText: visHidPrefix + keys.previousNames.toLowerCase(),
         },
         {
           key: keys.dateOfBirth,
           value: getFormattedDate(userCase[`${prefix}DateOfBirth`], content.language),
           changeUrl: Urls[`${urlPrefix}DOB`],
+          visuallyHiddenText: visHidPrefix + keys.dateOfBirth.toLowerCase(),
         },
         {
           key: keys.occupation,
           value: userCase[`${prefix}Occupation`],
           changeUrl: Urls[`${urlPrefix}OCCUPATION`],
+          visuallyHiddenText: visHidPrefix + keys.occupation.toLowerCase(),
         },
         {
           key: keys.extraSupport,
           value: userCase[`${prefix}HasReasonableAdjustment`],
           changeUrl: Urls[`${urlPrefix}EXTRA_SUPPORT`],
+          visuallyHiddenText: visHidPrefix + keys.extraSupport.toLowerCase(),
         },
         {
           key: keys.extraSupportDetails,
           value: userCase[`${prefix}ReasonableAdjustmentDetails`],
           changeUrl: Urls[`${urlPrefix}EXTRA_SUPPORT`],
+          visuallyHiddenText: visHidPrefix + keys.extraSupportDetails.toLowerCase(),
         },
         {
           key: keys.address,
           valueHtml: getFormattedAddress(userCase, prefix),
           changeUrl: Urls[`${urlPrefix}FIND_ADDRESS`],
+          visuallyHiddenText: visHidPrefix + keys.address.toLowerCase(),
         },
         {
           key: keys.emailAddress,
           value: userCase[`${prefix}EmailAddress`],
           changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
+          visuallyHiddenText: visHidPrefix + keys.emailAddress.toLowerCase(),
         },
         {
           key: keys.phoneNumber,
           value: userCase[`${prefix}PhoneNumber`],
           changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
+          visuallyHiddenText: visHidPrefix + keys.phoneNumber.toLowerCase(),
         },
         {
           key: keys.contactDetailsConsent,
           value: userCase[`${prefix}ContactDetailsConsent`],
           changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
+          visuallyHiddenText: visHidPrefix + keys.contactDetailsConsent.toLowerCase(),
         },
         {
           key: keys.languagePreference,
           value: content.languagePreference[userCase[`${prefix}LanguagePreference`]],
           changeUrl: Urls[`${urlPrefix}LANGUAGE_PREFERENCE`],
+          visuallyHiddenText: visHidPrefix + keys.languagePreference.toLowerCase(),
         },
       ],
       content
@@ -437,7 +470,7 @@ const formatNationalities = (
 };
 
 export const childrenSummaryList = (
-  { sectionTitles, keys, ...content }: SummaryListContent,
+  { sectionTitles, keys, visuallyHiddenTexts, ...content }: SummaryListContent,
   userCase: Partial<CaseWithId>
 ): SummaryList => {
   return {
@@ -448,16 +481,19 @@ export const childrenSummaryList = (
           key: keys.fullName,
           value: userCase.childrenFirstName + ' ' + userCase.childrenLastName,
           changeUrl: Urls.CHILDREN_FULL_NAME,
+          visuallyHiddenText: visuallyHiddenTexts.fullName,
         },
         {
           key: keys.fullNameAfterAdoption,
           value: userCase.childrenFirstNameAfterAdoption + ' ' + userCase.childrenLastNameAfterAdoption,
           changeUrl: Urls.CHILDREN_FULL_NAME_AFTER_ADOPTION,
+          visuallyHiddenText: visuallyHiddenTexts.fullNameAfterAdoption,
         },
         {
           key: keys.dateOfBirth,
           value: getFormattedDate(userCase.childrenDateOfBirth),
           changeUrl: Urls.CHILDREN_DATE_OF_BIRTH,
+          visuallyHiddenText: visuallyHiddenTexts.dateOfBirth,
         },
       ],
       content
