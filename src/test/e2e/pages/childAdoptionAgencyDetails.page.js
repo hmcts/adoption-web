@@ -170,7 +170,9 @@ module.exports = {
     );
     await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue, 30);
     await I.retry(3).click('Save and continue');
-    await I.retry(3).see('Enter an email address that ends in gov.uk');
+    await I.retry(3).see(
+      'You have not entered an email address, please contact your social worker or representative to confirm the correct email for use.'
+    );
   },
 
   async yourSocialWorkerDetailsSectionWithOutDetails() {
@@ -194,7 +196,9 @@ module.exports = {
     await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue, 30);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
-    await I.retry(3).see('Enter an email address that ends in gov.uk');
+    await I.retry(3).see(
+      'You have not entered an email address, please contact your social worker or representative to confirm the correct email for use.'
+    );
     await I.retry(3).see('Enter a UK telephone number');
   },
 
