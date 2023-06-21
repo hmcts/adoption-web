@@ -240,3 +240,5 @@ fpl:
     CYG: CYG_VAL
     CSYM: CSYM_VAL
     GWC: GWC_VAL
+socialWorker:
+  supportedDomains: SOCIAL_WORKER_SUPPORTED_DOMAINS

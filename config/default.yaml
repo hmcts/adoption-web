@@ -264,3 +264,20 @@ fpl:
     CYG: 'Cyngor Gwynedd'
     CSYM: 'Cyngor Sir Ynys Mon'
     GWC: 'Gwynedd Council'
+socialWorker:
+  supportedDomains:
+    - gov.uk
+    - pathfinderlegal.co.uk
+    - nctrust.co.uk
+    - birminghamchildrenstrust.co.uk
+    - shropshire.cjsm.net
+    - aspireadoption.co.uk
+    - invicta.law
+    - togetherforchildren.org.uk
+    - dcstrust.co.uk
+    - cumbriacs.cjsm.net
+    - flintshire.nwalescls.com
+    - conwy.nwalescls.com
+    - gwynedd.llyw.cymru
+    - brighterfuturesforchildren.org
+    - achievingforchildren.org.uk

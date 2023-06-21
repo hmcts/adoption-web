@@ -1,3 +1,4 @@
+import config from 'config';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { validate as isValidEmail } from 'email-validator';
@@ -201,7 +202,8 @@ export const isTextAreaValid: Validator = value => {
 };
 
 export const isGovUkEmail: Validator = value => {
-  if (!(value as string).split('@')[1].toLowerCase().endsWith('gov.uk')) {
+  const supportedDomains: string[] = config.get('socialWorker.supportedDomains');
+  if (!supportedDomains.includes((value as string).split('@')[1].toLowerCase())) {
     return 'invalidGovUkEmail';
   }
 };
