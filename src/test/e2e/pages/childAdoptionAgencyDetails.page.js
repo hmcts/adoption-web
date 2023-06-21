@@ -163,7 +163,9 @@ module.exports = {
     await I.retry(3).see('Enter name of child’s social worker');
     await I.retry(3).see('Enter a UK telephone number');
     await I.retry(3).see('Enter name of local authority');
-    await I.retry(3).see('Enter an email address in the correct format, like name@gov.uk');
+    await I.retry(3).see(
+      'You have not entered an email address, please contact your social worker or representative to confirm the correct email for use.'
+    );
     await I.retry(3).fillField(
       this.childSocialWorker.childLocalAuthorityEmail,
       childSocialWorkerDetails.childSocialWorkerEmailInvalid
@@ -183,7 +185,10 @@ module.exports = {
     await I.retry(3).waitForText('Enter a name', 30);
     await I.retry(3).waitForText('Enter a UK telephone number', 30);
     await I.retry(3).waitForText('Enter a name', 30);
-    await I.retry(3).waitForText('Enter an email address in the correct format, like name@gov.uk', 30);
+    await I.retry(3).waitForText(
+      'You have not entered an email address, please contact your social worker or representative to confirm the correct email for use.',
+      30
+    );
     await I.retry(3).fillField(
       this.yourSocialWorker.applicantLocalAuthorityEmail,
       applicantOrYourSocialWorkerDetails.applicantLocalAuthorityEmailInvalid

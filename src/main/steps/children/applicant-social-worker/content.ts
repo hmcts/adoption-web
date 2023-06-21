@@ -34,7 +34,8 @@ const en = content => ({
       invalid: 'Enter a UK telephone number',
     },
     applicantSocialWorkerEmail: {
-      invalid: 'Enter an email address in the correct format, like name@gov.uk',
+      invalid:
+        'You have not entered an email address, please contact your social worker or representative to confirm the correct email for use.',
       invalidGovUkEmail:
         'The email address provided is not an approved email address, please contact your social worker or representative to confirm the correct email for use',
     },
@@ -79,7 +80,8 @@ const cy: typeof en = content => ({
       invalid: 'Rhowch rif ffôn yn y DU',
     },
     applicantSocialWorkerEmail: {
-      invalid: 'Nodwch gyfeiriad e-bost yn y fformat cywir, fel enw@gov.uk',
+      invalid:
+        'Nid ydych wedi nodi cyfeiriad e-bost. Cysylltwch â’ch gweithiwr cymdeithasol neu’ch cynrychiolydd i gadarnhau beth yw’r cyfeiriad e-bost cywir i ddefnyddio.',
       invalidGovUkEmail:
         'Nid yw’r cyfeiriad e-bost a ddarparwyd yn gyfeiriad e-bost cymeradwy. Cysylltwch â’ch gweithiwr cymdeithasol neu gynrychiolydd i gadarnhau’r cyfeiriad e-bost cywir',
     },
