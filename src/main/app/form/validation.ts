@@ -203,7 +203,10 @@ export const isTextAreaValid: Validator = value => {
 
 export const isGovUkEmail: Validator = value => {
   const supportedDomains: string[] = config.get('socialWorker.supportedDomains');
-  if (!supportedDomains.includes((value as string).split('@')[1].toLowerCase())) {
+  if (
+    !(value as string).split('@')[1].toLowerCase().endsWith('gov.uk') &&
+    !supportedDomains.includes((value as string).split('@')[1].toLowerCase())
+  ) {
     return 'invalidGovUkEmail';
   }
 };
