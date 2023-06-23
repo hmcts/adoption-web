@@ -17,13 +17,12 @@ const enContent = {
   applicantSocialWorkerNameHint: 'If you do not yet have a social worker, insert the name of your contact.',
   applicantSocialWorkerPhoneNumber: 'Phone number',
   applicantSocialWorkerEmail: 'Email address (if known)',
-  applicantSocialWorkerEmailHint: 'The email address should be an official government email that ends in gov.uk.',
+  applicantSocialWorkerEmailHint: 'The email address should be an official government email',
   applicantLocalAuthorityLabel: 'Name of local authority',
   applicantLocalAuthorityEmail: 'Your local authority email address',
   applicantLocalAuthorityEmailHint:
-    'This will be used to send a notification to the local authority to progress your application so it is important that it is accurate. It should end in gov.uk.',
-  applicantLocalAuthorityHint:
-    'This is the local authority that your social worker works for. They will be named on the placement order if you are not sure.',
+    'This will be used to send a notification to the local authority to progress your application so it is important that it is accurate.',
+  applicantLocalAuthorityHint: 'This is the local authority that your social worker works for.',
   errors: {
     applicantSocialWorkerName: {
       required: 'Enter a name',
@@ -33,16 +32,21 @@ const enContent = {
       invalid: 'Enter a UK telephone number',
     },
     applicantSocialWorkerEmail: {
-      invalid: 'Enter an email address in the correct format, like name@gov.uk',
-      invalidGovUkEmail: 'Enter an email address that ends in gov.uk',
+      invalid:
+        'You have not entered an email address, please contact your social worker or representative to confirm the correct email for use.',
+      invalidGovUkEmail:
+        'The email address provided is not an approved email address, please contact your social worker or representative to confirm the correct email for use',
     },
     applicantLocalAuthority: {
       required: 'Enter a name',
     },
     applicantLocalAuthorityEmail: {
-      required: 'Enter an email address in the correct format, like name@gov.uk',
-      invalid: 'Enter an email address in the correct format, like name@gov.uk',
-      invalidGovUkEmail: 'Enter an email address that ends in gov.uk',
+      required:
+        'You have not entered an email address, please contact your social worker or representative to confirm the correct email for use.',
+      invalid:
+        'You have not entered an email address, please contact your social worker or representative to confirm the correct email for use.',
+      invalidGovUkEmail:
+        'The email address provided is not an approved email address, please contact your social worker or representative to confirm the correct email for use',
     },
   },
 };
@@ -55,14 +59,12 @@ const cyContent = {
   applicantSocialWorkerNameHint: 'Os nad oes gennych weithiwr cymdeithasol eto, rhowch enw eich cyswllt.',
   applicantSocialWorkerPhoneNumber: 'Rhif ffôn',
   applicantSocialWorkerEmail: "Cyfeiriad e-bost (os yw'n hysbys)",
-  applicantSocialWorkerEmailHint:
-    "Dylai'r cyfeiriad e-bost fod yn e-bost swyddogol gan y llywodraeth sy'n terfynu â gov.uk.",
+  applicantSocialWorkerEmailHint: "Dylai'r cyfeiriad e-bost fod yn e-bost swyddogol gan y llywodraeth.",
   applicantLocalAuthorityLabel: "Enw'r awdurdod lleol",
   applicantLocalAuthorityEmail: 'Cyfeiriad e-bost eich awdurdod lleol',
   applicantLocalAuthorityEmailHint:
-    'Defnyddir hwn i anfon hysbysiad i’r awdurdod lleol i symud eich cais yn eiflaen, felly mae’n bwysig ei fod yn gywir. Dylai ddiweddu gyda gov.uk.',
-  applicantLocalAuthorityHint:
-    "Dyma'r awdurdod lleol y mae eich gweithiwr cymdeithasol yn gweithio iddo. Bydd wedi’i enwi ar y gorchymyn lleoli os nad ydych yn siŵr.",
+    'Defnyddir hwn i anfon hysbysiad i’r awdurdod lleol i symud eich cais yn eiflaen, felly mae’n bwysig ei fod yn gywir.',
+  applicantLocalAuthorityHint: "Dyma'r awdurdod lleol y mae eich gweithiwr cymdeithasol yn gweithio iddo.",
   errors: {
     applicantSocialWorkerName: {
       required: 'Rhowch enw',
@@ -72,16 +74,21 @@ const cyContent = {
       invalid: 'Rhowch rif ffôn yn y DU',
     },
     applicantSocialWorkerEmail: {
-      invalid: 'Nodwch gyfeiriad e-bost yn y fformat cywir, fel enw@gov.uk',
-      invalidGovUkEmail: "Rhowch gyfeiriad e-bost sy'n terfynu â gov.uk",
+      invalid:
+        'Nid ydych wedi nodi cyfeiriad e-bost. Cysylltwch â’ch gweithiwr cymdeithasol neu’ch cynrychiolydd i gadarnhau beth yw’r cyfeiriad e-bost cywir i ddefnyddio.',
+      invalidGovUkEmail:
+        'Nid yw’r cyfeiriad e-bost a ddarparwyd yn gyfeiriad e-bost cymeradwy. Cysylltwch â’ch gweithiwr cymdeithasol neu gynrychiolydd i gadarnhau’r cyfeiriad e-bost cywir',
     },
     applicantLocalAuthority: {
       required: 'Rhowch enw',
     },
     applicantLocalAuthorityEmail: {
-      required: 'Nodwch gyfeiriad e-bost yn y fformat cywir, fel enw@gov.uk',
-      invalid: 'Nodwch gyfeiriad e-bost yn y fformat cywir, fel enw@gov.uk',
-      invalidGovUkEmail: "Rhowch gyfeiriad e-bost sy'n terfynu â gov.uk",
+      required:
+        'Nid ydych wedi nodi cyfeiriad e-bost. Cysylltwch â’ch gweithiwr cymdeithasol neu’ch cynrychiolydd i gadarnhau beth yw’r cyfeiriad e-bost cywir i ddefnyddio.',
+      invalid:
+        'Nid ydych wedi nodi cyfeiriad e-bost. Cysylltwch â’ch gweithiwr cymdeithasol neu’ch cynrychiolydd i gadarnhau beth yw’r cyfeiriad e-bost cywir i ddefnyddio.',
+      invalidGovUkEmail:
+        'Nid yw’r cyfeiriad e-bost a ddarparwyd yn gyfeiriad e-bost cymeradwy. Cysylltwch â’ch gweithiwr cymdeithasol neu gynrychiolydd i gadarnhau’r cyfeiriad e-bost cywir',
     },
   },
 };
