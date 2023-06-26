@@ -105,7 +105,7 @@ module.exports = {
     await I.retry(3).click('Save and continue');
     await I.wait(4);
 
-    await I.retry(3).waitForText('When was the last date this address was confirmed?');
+    await I.retry(3).see('When was the last date this address was confirmed?');
     await I.retry(3).fillField(
       this.fields.birthFatherLastAddressDateDay,
       childBirthFatherDetails.birthFatherLastAddressDateDay
@@ -128,7 +128,7 @@ module.exports = {
     await I.retry(3).waitForSelector(this.fields.saveAndContinue, 30);
     await I.retry(3).click(this.fields.saveAndContinue);
     await I.wait(4);
-    await I.retry(3).waitForText(childBirthFatherDetails.serverOrderErrorMessage);
+    await I.retry(3).see(childBirthFatherDetails.serverOrderErrorMessage);
     await I.retry(3).click(this.fields.birthFatherServeOrderYes);
     await I.retry(3).click(this.fields.birthFatherServeOrderNo);
     await I.retry(3).click('Save and continue');
@@ -142,7 +142,7 @@ module.exports = {
     await I.wait(4);
   },
   async childBirthFatherDetailsSaveAsDraft() {
-    await I.retry(3).waitForText("Is the birth father's name on the birth certificate?");
+    await I.retry(3).see("Is the birth father's name on the birth certificate?");
     await I.retry(3).click(this.fields.birthFatherNameOnCertificate);
     await I.wait(4);
     await I.retry(3).click('Save as draft');
