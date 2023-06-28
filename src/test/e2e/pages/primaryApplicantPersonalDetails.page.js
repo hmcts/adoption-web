@@ -150,8 +150,8 @@ module.exports = {
     await I.retry(3).waitForSelector(this.fields.saveAndContinue, 30);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
-    await I.retry(3).waitForText(extraSupportDetails.extraSupportError);
-    await I.retry(3).waitForText(extraSupportDetails.whatSupportIsAvailable);
+    await I.retry(3).waitForText(extraSupportDetails.extraSupportError, 30);
+    await I.retry(3).waitForText(extraSupportDetails.whatSupportIsAvailable, 30);
     await I.retry(3).click(this.fields.whatSupportIsNeeded);
     await I.wait(4);
     await I.retry(3).waitForText('Reasonable adjustments can include:', 30);

@@ -38,12 +38,12 @@ module.exports = {
     await I.wait('6');
     await I.retry(3).waitForText('Review your answers', 30);
     await I.retry(3).click(this.fields.changeChildMoveInDate);
-    await I.wait(5);
+    await I.wait(6);
   },
 
   async reviewYourAnswersAndContinue() {
-    await I.wait('6');
     await I.retry(3).waitForText('Review your answers', 30);
+    await I.retry(3).waitForElement(this.fields.saveAndContinueButton);
     await I.retry(3).click(this.fields.saveAndContinueButton);
     await I.wait(5);
   },
