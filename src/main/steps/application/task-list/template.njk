@@ -31,11 +31,7 @@
       {{ taskStatus(item) }}
     </dd>
   {% else %}
-  <dt>
-    <h3>
-      <p class="govuk-!-font-weight-bold govuk-!-margin-top-7 govuk-!-margin-bottom-2">{{item.text}}</p>
-    </h3>
-  </dt>
+      <dt class="govuk-!-font-weight-bold govuk-!-margin-top-7 govuk-!-margin-bottom-2 app-task-list-sub-heading" >{{item.text}}</dt>
   {% endif %}
 {% endmacro %}
 

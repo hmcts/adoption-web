@@ -48,6 +48,20 @@ const enContent = {
     familyCourtDetails: 'Family court details',
     uploadedDocuments: 'Uploaded documents',
   },
+  visuallyHiddenTexts: {
+    fullName: "Child's full name",
+    fullNameAfterAdoption: "Child's full name after adoption",
+    dateOfBirth: "Child's date of birth",
+    childSocialWorkerPhoneNumber: "child's social worker phone number",
+    childSocialWorkerEmail: "child's social worker email address (if known)",
+    applicantSocialWorkerPhoneNumber: 'Your social worker phone number',
+    applicantSocialWorkerEmail: 'Your social worker email address (if known)',
+    adopAgencyOrLaName: 'Adoption agency or local authority name',
+    adopAgencyOrLaContactName: 'Adoption agency or local authority name of contact',
+    adopAgencyOrLaPhoneNumber: 'Adoption agency or local authority phone number',
+    adopAgencyAddress: 'Adoption agency or local authority address',
+    adopAgencyOrLaContactEmail: 'Adoption agency or local authority email address',
+  },
   keys: {
     noOfApplicants: 'Number of applicants',
     dateChildMovedIn: 'Date child moved in',
@@ -93,6 +107,8 @@ const enContent = {
     applicantSocialWorkerName: 'Name of your social worker',
     applicantLocalAuthority: 'Name of local authority',
     applicantLocalAuthorityEmail: 'Your local authority email address',
+    firstApplicantvisPrefix: "First applicant's ",
+    secondApplicantvisPrefix: "Second applicant's ",
   },
   errors: {
     dateChildMovedIn: {
@@ -142,6 +158,20 @@ const cyContent = {
     familyCourtDetails: 'Manylion y llys teulu',
     uploadedDocuments: 'Dogfennau sydd wedi eu llwytho',
   },
+  visuallyHiddenTexts: {
+    fullName: 'Enw llawn yplentyn',
+    fullNameAfterAdoption: 'Enw llawn ar ôl mabwysiadu',
+    dateOfBirth: 'Dyddiad geni plentyn ',
+    childSocialWorkerPhoneNumber: 'gweithiwr cymdeithasol plentyn rhif ffôn',
+    childSocialWorkerEmail: "gweithiwr cymdeithasol plentyn cyfeiriad e-bost (os yw'n hysbys)	",
+    applicantSocialWorkerPhoneNumber: 'eich gweithiwr cymdeithasol rhif ffôn',
+    applicantSocialWorkerEmail: "eich gweithiwr cymdeithasol cyfeiriad e-bost (os yw'n hysbys)",
+    adopAgencyOrLaName: 'asiantaeth fabwysiadu neu awdurdod lleol enw',
+    adopAgencyOrLaContactName: 'asiantaeth fabwysiadu neu awdurdod lleol enw’r unigolyn cyswllt',
+    adopAgencyOrLaPhoneNumber: 'asiantaeth fabwysiadu neu awdurdod lleol rhif ffôn',
+    adopAgencyAddress: 'asiantaeth fabwysiadu neu awdurdod lleol cyfeiriad',
+    adopAgencyOrLaContactEmail: 'asiantaeth fabwysiadu neu awdurdod lleol cyfeiriad e-bost',
+  },
   keys: {
     noOfApplicants: 'Nifer y ceiswyr',
     dateChildMovedIn: 'Dyddiad wnaeth y plentyn symud i fyw gyda chi',
@@ -187,6 +217,8 @@ const cyContent = {
     applicantLocalAuthority: "Enw'r awdurdod lleol",
     childSocialWorkerName: 'Enw gweithiwr cymdeithasol y plentyn',
     emailAddressIfKnown: "Cyfeiriad e-bost (os yw'n hysbys)",
+    firstApplicantvisPrefix: 'ceisydd cyntaf ',
+    secondApplicantvisPrefix: 'ail geisydd',
   },
   errors: {
     dateChildMovedIn: {
