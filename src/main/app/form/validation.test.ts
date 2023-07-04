@@ -7,6 +7,7 @@ import {
   isAddressSelected,
   isCaseRefNumeric,
   isCaseRefTooShort,
+  isChildrenNameValid,
   isDateInputInvalid,
   isEmailValid,
   isFieldFilledIn,
@@ -43,6 +44,18 @@ describe('Validation', () => {
       const isValid = isFieldFilledIn('    ');
 
       expect(isValid).toStrictEqual('required');
+    });
+
+    test('Should check if value no special characters', async () => {
+      const isValidChildName = isChildrenNameValid('<abc*>');
+
+      expect(isValidChildName).toStrictEqual('isValidChildName');
+    });
+
+    test('Should check if value no empty characters', async () => {
+      const isValidChildName = isChildrenNameValid('    ');
+
+      expect(isValidChildName).toStrictEqual('required');
     });
   });
 
