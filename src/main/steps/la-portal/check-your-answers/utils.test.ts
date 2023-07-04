@@ -73,7 +73,7 @@ describe('childSummaryList', () => {
                 {
                   href: '/la-portal/child/sex-at-birth?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Sex at birth',
+                  visuallyHiddenText: "Child's sex at birth",
                 },
               ],
             },
@@ -86,7 +86,7 @@ describe('childSummaryList', () => {
                 {
                   href: '/la-portal/child/nationality?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Nationality',
+                  visuallyHiddenText: "Child's nationality",
                 },
               ],
             },
@@ -115,7 +115,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-mother/full-name?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Full name',
+                  visuallyHiddenText: 'Birth mother full name',
                 },
               ],
             },
@@ -128,7 +128,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-mother/still-alive?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Alive',
+                  visuallyHiddenText: 'Birth mother alive',
                 },
               ],
             },
@@ -141,7 +141,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-mother/nationality?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Nationality',
+                  visuallyHiddenText: 'Birth mother nationality',
                 },
               ],
             },
@@ -154,7 +154,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-mother/occupation?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Occupation',
+                  visuallyHiddenText: 'Birth mother occupation',
                 },
               ],
             },
@@ -167,7 +167,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-mother/address-known?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Address known',
+                  visuallyHiddenText: 'Birth mother address known',
                 },
               ],
             },
@@ -182,7 +182,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-mother/address/international?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Address',
+                  visuallyHiddenText: 'Birth mother address',
                 },
               ],
             },
@@ -195,7 +195,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-mother/last-address-confirmed?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Last date this address was confirmed',
+                  visuallyHiddenText: 'Last date this address was confirmed by birth mother',
                 },
               ],
             },
@@ -208,7 +208,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-mother/served-with?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Any document or court orders to be sent?',
+                  visuallyHiddenText: 'Any document or court orders to be sent by birth mother?',
                 },
               ],
             },
@@ -230,7 +230,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/name-on-certificate?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Name on birth certificate',
+                  visuallyHiddenText: 'Birth father name on birth certificate',
                 },
               ],
             },
@@ -243,7 +243,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/full-name?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Full name',
+                  visuallyHiddenText: 'Birth father full name',
                 },
               ],
             },
@@ -256,7 +256,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/still-alive?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Alive',
+                  visuallyHiddenText: 'Birth father alive',
                 },
               ],
             },
@@ -287,7 +287,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/parental-responsibility/granted?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Reason',
+                  visuallyHiddenText: 'Birth father parental responsibility reason',
                 },
               ],
             },
@@ -300,7 +300,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/nationality?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Nationality',
+                  visuallyHiddenText: 'Birth father nationality',
                 },
               ],
             },
@@ -313,7 +313,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/occupation?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Occupation',
+                  visuallyHiddenText: 'Birth father occupation',
                 },
               ],
             },
@@ -326,7 +326,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/address-known?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Address known',
+                  visuallyHiddenText: 'Birth father address known',
                 },
               ],
             },
@@ -341,7 +341,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/address/manual?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Address',
+                  visuallyHiddenText: 'Birth father address',
                 },
               ],
             },
@@ -354,7 +354,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/last-address-confirmed?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Last date this address was confirmed',
+                  visuallyHiddenText: 'Last date this address was confirmed by birth father',
                 },
               ],
             },
@@ -367,7 +367,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/served-with?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Any document or court orders to be sent?',
+                  visuallyHiddenText: 'Any document or court orders to be sent by birth father?',
                 },
               ],
             },
@@ -393,7 +393,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/name-on-certificate?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Name on birth certificate',
+                  visuallyHiddenText: 'Birth father name on birth certificate',
                 },
               ],
             },
@@ -406,7 +406,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/full-name?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Full name',
+                  visuallyHiddenText: 'Birth father full name',
                 },
               ],
             },
@@ -421,7 +421,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/still-alive?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Alive',
+                  visuallyHiddenText: 'Birth father alive',
                 },
               ],
             },
@@ -449,7 +449,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/name-on-certificate?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Name on birth certificate',
+                  visuallyHiddenText: 'Birth father name on birth certificate',
                 },
               ],
             },
@@ -462,7 +462,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/full-name?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Full name',
+                  visuallyHiddenText: 'Birth father full name',
                 },
               ],
             },
@@ -475,7 +475,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/still-alive?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Alive',
+                  visuallyHiddenText: 'Birth father alive',
                 },
               ],
             },
@@ -504,7 +504,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/parental-responsibility/no-responsibility?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Reason',
+                  visuallyHiddenText: 'Birth father parental responsibility reason',
                 },
               ],
             },
@@ -517,7 +517,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/nationality?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Nationality',
+                  visuallyHiddenText: 'Birth father nationality',
                 },
               ],
             },
@@ -530,7 +530,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/occupation?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Occupation',
+                  visuallyHiddenText: 'Birth father occupation',
                 },
               ],
             },
@@ -545,7 +545,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/address-known?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Address known',
+                  visuallyHiddenText: 'Birth father address known',
                 },
               ],
             },
@@ -558,7 +558,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/served-with?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Any document or court orders to be sent?',
+                  visuallyHiddenText: 'Any document or court orders to be sent by birth father?',
                 },
               ],
             },
@@ -583,7 +583,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/name-on-certificate?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Name on birth certificate',
+                  visuallyHiddenText: 'Birth father name on birth certificate',
                 },
               ],
             },
@@ -624,7 +624,7 @@ describe('otherParentSummaryList', () => {
                 {
                   href: '/la-portal/other-parent/full-name?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Full name',
+                  visuallyHiddenText: 'Other parent full name',
                 },
               ],
             },
@@ -639,7 +639,7 @@ describe('otherParentSummaryList', () => {
                 {
                   href: '/la-portal/other-parent/parental-responsibility-granted?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Parental responsibility granted',
+                  visuallyHiddenText: 'Other person parental responsibility granted',
                 },
               ],
             },
@@ -652,7 +652,7 @@ describe('otherParentSummaryList', () => {
                 {
                   href: '/la-portal/other-parent/address-known?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Address known',
+                  visuallyHiddenText: 'Other parent address known',
                 },
               ],
             },
@@ -667,7 +667,7 @@ describe('otherParentSummaryList', () => {
                 {
                   href: '/la-portal/other-parent/address/manual?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Address',
+                  visuallyHiddenText: 'Other parent address',
                 },
               ],
             },
@@ -680,7 +680,7 @@ describe('otherParentSummaryList', () => {
                 {
                   href: '/la-portal/other-parent/last-address-confirmed?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Last date this address was confirmed',
+                  visuallyHiddenText: 'Last date other parent address was confirmed',
                 },
               ],
             },
@@ -693,7 +693,7 @@ describe('otherParentSummaryList', () => {
                 {
                   href: '/la-portal/other-parent/served-with?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Any document or court orders to be sent?',
+                  visuallyHiddenText: 'Any document or court orders to be sent by other parent?',
                 },
               ],
             },
@@ -752,7 +752,7 @@ describe('otherParentSummaryList', () => {
                 {
                   href: '/la-portal/other-parent/full-name?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Full name',
+                  visuallyHiddenText: 'Other parent full name',
                 },
               ],
             },
@@ -767,7 +767,7 @@ describe('otherParentSummaryList', () => {
                 {
                   href: '/la-portal/other-parent/parental-responsibility-granted?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Parental responsibility granted',
+                  visuallyHiddenText: 'Other person parental responsibility granted',
                 },
               ],
             },
@@ -782,7 +782,7 @@ describe('otherParentSummaryList', () => {
                 {
                   href: '/la-portal/other-parent/address-known?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Address known',
+                  visuallyHiddenText: 'Other parent address known',
                 },
               ],
             },
@@ -795,7 +795,7 @@ describe('otherParentSummaryList', () => {
                 {
                   href: '/la-portal/other-parent/served-with?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Any document or court orders to be sent?',
+                  visuallyHiddenText: 'Any document or court orders to be sent by other parent?',
                 },
               ],
             },
@@ -842,7 +842,7 @@ describe('childrenPlacementOrderSummaryList', () => {
                 {
                   href: '/la-portal/child/placement-order-date?change=MOCK_PLACEMENT_ORDER_ID&returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Date',
+                  visuallyHiddenText: 'Placement order date',
                 },
               ],
             },
@@ -899,7 +899,7 @@ describe('childrenPlacementOrderSummaryList', () => {
                 {
                   href: '/la-portal/child/placement-order-date?change=MOCK_PLACEMENT_ORDER_ID2&returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Date',
+                  visuallyHiddenText: 'Placement order date',
                 },
               ],
             },
@@ -945,7 +945,7 @@ describe('siblingCourtOrderSummaryList', () => {
                 {
                   href: '/la-portal/sibling/relation?change=MOCK_SIBLING_ID&returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Relationship',
+                  visuallyHiddenText: 'Relationship with child',
                 },
               ],
             },

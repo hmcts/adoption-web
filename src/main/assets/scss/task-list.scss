@@ -31,6 +31,9 @@
     padding-left: govuk-spacing(6);
   }
 }
+.app-task-list-sub-heading {
+  @include govuk-font($size: 19);
+}
 
 .app-task-list__item {
   border-bottom: 1px solid $govuk-border-colour;

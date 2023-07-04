@@ -40,6 +40,7 @@ interface SummaryListRows {
   valueHtml?: string;
   changeUrl?: string;
   classes?: string;
+  visuallyHiddenText?: string;
 }
 
 interface SummaryLists {
@@ -59,6 +60,7 @@ type SummaryListsContent = PageContent & {
   siblingPlacementOrderType: Record<string, string>;
   placementOrderType: Record<string, string>;
   responsibilityReasons: Record<string, string>;
+  visuallyHiddenTexts: Record<string, string>;
 };
 
 const getSectionSummaryLists = (rows: SummaryListRows[], content: PageContent): GovUKNunjucksSummary[] => {
@@ -78,7 +80,7 @@ const getSectionSummaryLists = (rows: SummaryListRows[], content: PageContent): 
                 {
                   href: changeURL,
                   text: content.change as string,
-                  visuallyHiddenText: `${item.key}`,
+                  visuallyHiddenText: item.visuallyHiddenText ? `${item.visuallyHiddenText}` : `${item.key}`,
                 },
               ],
             },
@@ -108,7 +110,7 @@ export const caseRefSummaryList = (
 };
 
 export const childSummaryList = (
-  { sectionTitles, keys, ...content }: SummaryListsContent,
+  { sectionTitles, keys, visuallyHiddenTexts, ...content }: SummaryListsContent,
   userCase: Partial<CaseWithId>
 ): SummaryLists => {
   return {
@@ -136,11 +138,13 @@ export const childSummaryList = (
           key: keys.sexAtBirth,
           value: content.gender[userCase.childrenSexAtBirth!],
           changeUrl: Urls.LA_PORTAL_CHILD_SEX_AT_BIRTH,
+          visuallyHiddenText: visuallyHiddenTexts.childrenSexAtBirth,
         },
         {
           key: keys.nationality,
           valueHtml: formatNationalities(userCase.childrenNationality!, userCase.childrenAdditionalNationalities!),
           changeUrl: Urls.LA_PORTAL_CHILD_NATIONALITY,
+          visuallyHiddenText: visuallyHiddenTexts.childrenNationality,
         },
       ],
       content
@@ -180,7 +184,7 @@ const formatResponsibilityReasons = (
 
 /* eslint-disable import/namespace */
 export const birthParentSummaryList = (
-  { sectionTitles, keys, ...content }: SummaryListsContent,
+  { sectionTitles, keys, visuallyHiddenTexts, ...content }: SummaryListsContent,
   userCase: Partial<CaseWithId>,
   prefix: FieldPrefix
 ): SummaryLists => {
@@ -191,7 +195,7 @@ export const birthParentSummaryList = (
   return {
     title: sectionTitles[`${prefix}Details`],
     rows: getSectionSummaryLists(
-      prepareSummaryList(prefix, keys, content, userCase, LA_PORTAL, urlPrefix, reasonFieldName),
+      prepareSummaryList(prefix, keys, visuallyHiddenTexts, content, userCase, LA_PORTAL, urlPrefix, reasonFieldName),
       content
     ),
   };
@@ -200,6 +204,7 @@ export const birthParentSummaryList = (
 function prepareSummaryList(
   prefix: FieldPrefix,
   keys: Record<string, string>,
+  visuallyHiddenTexts: Record<string, string>,
   content,
   userCase: Partial<CaseWithId>,
   LA_PORTAL: string,
@@ -211,19 +216,30 @@ function prepareSummaryList(
       ? [
           {
             key: keys.nameOnBirthCertificate,
+            visuallyHiddenText: visuallyHiddenTexts.birthFatherNameOnCertificate,
             value: content.yesNoNotsure[userCase.birthFatherNameOnCertificate!],
             changeUrl: Urls[`${LA_PORTAL}${urlPrefix}NAME_ON_CERTIFICATE`],
           },
         ]
       : []),
     ...(prefix === FieldPrefix.BIRTH_MOTHER || userCase.birthFatherNameOnCertificate === YesOrNo.YES
-      ? fieldPrefixBirthMother(keys, userCase, prefix, LA_PORTAL, urlPrefix, content, reasonFieldName)
+      ? fieldPrefixBirthMother(
+          keys,
+          visuallyHiddenTexts,
+          userCase,
+          prefix,
+          LA_PORTAL,
+          urlPrefix,
+          content,
+          reasonFieldName
+        )
       : []),
   ];
 }
 
 function fieldPrefixBirthMother(
   keys: Record<string, string>,
+  visuallyHiddenTexts: Record<string, string>,
   userCase: Partial<CaseWithId>,
   prefix: FieldPrefix,
   LA_PORTAL: string,
@@ -236,9 +252,11 @@ function fieldPrefixBirthMother(
       key: keys.fullName,
       value: userCase[`${prefix}FirstNames`] + ' ' + userCase[`${prefix}LastNames`],
       changeUrl: Urls[`${LA_PORTAL}${urlPrefix}FULL_NAME`],
+      visuallyHiddenText: visuallyHiddenTexts[`${prefix}FullName`],
     },
     {
       key: keys.alive,
+      visuallyHiddenText: visuallyHiddenTexts[`${prefix}StillAlive`],
       valueHtml:
         userCase[`${prefix}StillAlive`] === YesNoNotsure.NOT_SURE
           ? getNotSureReasonElement(
@@ -265,6 +283,7 @@ function fieldPrefixBirthMother(
                       {
                         keyHtml: ' ',
                         key: content.reason,
+                        visuallyHiddenText: visuallyHiddenTexts.birthFatherResponsibilityReason,
                         valueHtml: formatResponsibilityReasons(
                           userCase['birthFatherResponsibilityReason']!,
                           userCase['birthFatherOtherResponsibilityReason']!,
@@ -278,6 +297,7 @@ function fieldPrefixBirthMother(
                       {
                         keyHtml: ' ',
                         key: content.reason,
+                        visuallyHiddenText: visuallyHiddenTexts.birthFatherResponsibilityReason,
                         valueHtml: formatResponsibilityReasons(
                           userCase['birthFatherResponsibilityReason']!,
                           userCase['birthFatherOtherResponsibilityReason']!,
@@ -291,6 +311,7 @@ function fieldPrefixBirthMother(
             : []),
           {
             key: keys.nationality,
+            visuallyHiddenText: visuallyHiddenTexts[`${prefix}Nationality`],
             valueHtml: formatNationalities(
               userCase[`${prefix}Nationality`],
               userCase[`${prefix}AdditionalNationalities`]
@@ -299,11 +320,13 @@ function fieldPrefixBirthMother(
           },
           {
             key: keys.occupation,
+            visuallyHiddenText: visuallyHiddenTexts[`${prefix}Occupation`],
             value: userCase[`${prefix}Occupation`],
             changeUrl: Urls[`${LA_PORTAL}${urlPrefix}OCCUPATION`],
           },
           {
             key: keys.addressKnown,
+            visuallyHiddenText: visuallyHiddenTexts[`${prefix}AddressKnown`],
             valueHtml:
               userCase[`${prefix}AddressKnown`] === YesOrNo.NO
                 ? getNotSureReasonElement(
@@ -316,13 +339,14 @@ function fieldPrefixBirthMother(
             changeUrl: Urls[`${LA_PORTAL}${urlPrefix}ADDRESS_KNOWN`],
           },
           ...(userCase[`${prefix}AddressKnown`] === YesOrNo.YES
-            ? knownAddress(keys, userCase, LA_PORTAL, prefix, urlPrefix)
+            ? knownAddress(keys, visuallyHiddenTexts, userCase, LA_PORTAL, prefix, urlPrefix)
             : []),
           ...(userCase[`${prefix}AddressKnown`] === YesOrNo.YES
-            ? lastAddressKnown(keys, userCase, LA_PORTAL, prefix, urlPrefix)
+            ? lastAddressKnown(keys, visuallyHiddenTexts, userCase, LA_PORTAL, prefix, urlPrefix)
             : []),
           {
             key: keys.servedWith,
+            visuallyHiddenText: visuallyHiddenTexts[`${prefix}ServedWith`],
             valueHtml:
               userCase[`${prefix}ServedWith`] === YesOrNo.NO
                 ? getNotSureReasonElement(
@@ -341,6 +365,7 @@ function fieldPrefixBirthMother(
 
 function knownAddress(
   keys: Record<string, string>,
+  visuallyHiddenTexts: Record<string, string>,
   userCase: Partial<CaseWithId>,
   LA_PORTAL: string,
   prefix: FieldPrefix,
@@ -349,6 +374,7 @@ function knownAddress(
   return [
     {
       key: keys.address,
+      visuallyHiddenText: visuallyHiddenTexts[`${prefix}Address`],
       valueHtml: getFormattedAddress(userCase, prefix),
       changeUrl: userCase[`${prefix}AddressCountry`]
         ? Urls[`${LA_PORTAL}${urlPrefix}INTERNATIONAL_ADDRESS`]
@@ -359,6 +385,7 @@ function knownAddress(
 
 function lastAddressKnown(
   keys: Record<string, string>,
+  visuallyHiddenTexts: Record<string, string>,
   userCase: Partial<CaseWithId>,
   LA_PORTAL: string,
   prefix: FieldPrefix,
@@ -366,6 +393,7 @@ function lastAddressKnown(
 ) {
   return [
     {
+      visuallyHiddenText: visuallyHiddenTexts[`${prefix}LastAddressDate`],
       key: keys.addressConfirmedDate,
       valueHtml: getFormattedDate(userCase[`${prefix}LastAddressDate`], 'en'),
       changeUrl: Urls[`${LA_PORTAL}${urlPrefix}LAST_ADDRESS_CONFIRMED`],
@@ -378,7 +406,7 @@ const getNotSureReasonElement = (content, userCase, notSure, reasonFieldName): s
 };
 
 export const otherParentSummaryList = (
-  { sectionTitles, keys, ...content }: SummaryListsContent,
+  { sectionTitles, keys, visuallyHiddenTexts, ...content }: SummaryListsContent,
   userCase: Partial<CaseWithId>
 ): SummaryLists => {
   return {
@@ -394,11 +422,13 @@ export const otherParentSummaryList = (
           ? [
               {
                 key: keys.fullName,
+                visuallyHiddenText: visuallyHiddenTexts.otherParentFullName,
                 value: userCase.otherParentFirstNames + ' ' + userCase.otherParentLastNames,
                 changeUrl: Urls.LA_PORTAL_OTHER_PARENT_FULL_NAME,
               },
               {
                 key: keys.otherParentResponsibility,
+                visuallyHiddenText: visuallyHiddenTexts.otherParentResponsibilityReason,
                 valueHtml: formatResponsibilityReasons(
                   userCase.otherParentResponsibilityReason!,
                   userCase.otherParentOtherResponsibilityReason
@@ -411,6 +441,7 @@ export const otherParentSummaryList = (
               },
               {
                 key: keys.addressKnown,
+                visuallyHiddenText: visuallyHiddenTexts.otherParentAddressKnown,
                 valueHtml:
                   userCase.otherParentAddressKnown === YesOrNo.NO
                     ? getNotSureReasonElement(
@@ -426,6 +457,7 @@ export const otherParentSummaryList = (
                 ? [
                     {
                       key: keys.address,
+                      visuallyHiddenText: visuallyHiddenTexts.otherParentAddress,
                       valueHtml: getFormattedAddress(userCase, FieldPrefix.OTHER_PARENT),
                       changeUrl: Urls.LA_PORTAL_OTHER_PARENT_MANUAL_ADDRESS,
                     },
@@ -435,6 +467,7 @@ export const otherParentSummaryList = (
                 ? [
                     {
                       key: keys.addressConfirmedDate,
+                      visuallyHiddenText: visuallyHiddenTexts.otherParentLastAddressDate,
                       valueHtml: getFormattedDate(userCase.otherParentLastAddressDate, 'en'),
                       changeUrl: Urls.LA_PORTAL_OTHER_PARENT_LAST_ADDRESS_CONFIRMED,
                     },
@@ -442,6 +475,7 @@ export const otherParentSummaryList = (
                 : []),
               {
                 key: keys.servedWith,
+                visuallyHiddenText: visuallyHiddenTexts.otherParentServedWith,
                 valueHtml:
                   userCase.otherParentServedWith === YesOrNo.NO
                     ? getNotSureReasonElement(
@@ -462,7 +496,7 @@ export const otherParentSummaryList = (
 };
 
 export const childrenPlacementOrderSummaryList = (
-  { sectionTitles, keys, ...content }: SummaryListsContent,
+  { sectionTitles, keys, visuallyHiddenTexts, ...content }: SummaryListsContent,
   userCase: Partial<CaseWithId>
 ): SummaryLists => {
   return {
@@ -502,6 +536,7 @@ export const childrenPlacementOrderSummaryList = (
               : []),
             {
               key: keys.date,
+              visuallyHiddenText: visuallyHiddenTexts.placementOrderDate,
               valueHtml: getFormattedDate(item.placementOrderDate as CaseDate, content.language),
               changeUrl: `${Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_DATE}?change=${item.placementOrderId}`,
             },
@@ -515,7 +550,7 @@ export const childrenPlacementOrderSummaryList = (
 };
 
 export const siblingCourtOrderSummaryList = (
-  { sectionTitles, keys, ...content }: SummaryListsContent,
+  { sectionTitles, keys, visuallyHiddenTexts, ...content }: SummaryListsContent,
   userCase: Partial<CaseWithId>
 ): SummaryLists => {
   const siblingList = getSectionSummaryLists(
@@ -542,6 +577,7 @@ export const siblingCourtOrderSummaryList = (
                 },
                 {
                   key: keys.siblingRelation,
+                  visuallyHiddenText: visuallyHiddenTexts.siblingRelation,
                   value: content.siblingRelationships[sibling.siblingRelation!],
                   changeUrl: `${Urls.LA_PORTAL_SIBLING_RELATION}?change=${sibling.siblingId}`,
                 },
