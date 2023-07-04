@@ -1,6 +1,6 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { isFieldFilledIn } from '../../../app/form/validation';
+import { isChildrenNameValid } from '../../../app/form/validation';
 
 const en = () => ({
   section: "The child's details",
@@ -14,9 +14,11 @@ const en = () => ({
   errors: {
     childrenFirstName: {
       required: "Enter the child's first names",
+      isValidChildName: "Enter valid child's first name",
     },
     childrenLastName: {
       required: "Enter the child's last names",
+      isValidChildName: "Enter valid child's last name",
     },
   },
 });
@@ -33,9 +35,11 @@ const cy: typeof en = () => ({
   errors: {
     childrenFirstName: {
       required: 'Nac ydwdwch enw(au) cyntaf y plentyn',
+      isValidChildName: 'Rhowch enw cyntaf plentyn dilys',
     },
     childrenLastName: {
       required: 'Nac ydwdwch gyfenw(au)’r plentyn',
+      isValidChildName: 'Rhowch enw olaf plentyn dilys',
     },
   },
 });
@@ -49,7 +53,7 @@ export const form: FormContent = {
       hint: l => l.firstNameHint,
       labelSize: null,
       parser: data => (data as Record<string, string>).childrenFirstName?.trim(),
-      validator: isFieldFilledIn,
+      validator: isChildrenNameValid,
     },
     childrenLastName: {
       type: 'text',
@@ -58,7 +62,7 @@ export const form: FormContent = {
       hint: l => l.lastNameHint,
       labelSize: null,
       parser: data => (data as Record<string, string>).childrenLastName?.trim(),
-      validator: isFieldFilledIn,
+      validator: isChildrenNameValid,
     },
   },
   submit: {
