@@ -217,3 +217,14 @@ export const isCaseRefNumeric: Validator = value => {
     return 'isNotNumeric';
   }
 };
+
+export const isChildrenNameValid: Validator = value => {
+  if (isFieldFilledIn(value) !== undefined) {
+    return ValidationError.REQUIRED;
+  } else {
+    // eslint-disable-next-line
+    if ((value as string).match(/[ !"&*:;<=>?[\\\ \/\]^_`{|}~]/)) {
+      return 'isValidChildName';
+    }
+  }
+};
