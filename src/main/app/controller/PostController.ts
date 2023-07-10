@@ -57,14 +57,7 @@ export class PostController<T extends AnyObject> {
       if (userCase === null) {
         // Applications submitted not on login day
         const pcqId = await req.locals.api.checkOldPCQIDExists();
-        //if(!req.session.userCase.caseCreationProcessStarted){
-        //req.session.userCase.caseCreationProcessStarted = true;
-        console.log('Inside condition-1. process started');
-
         req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
-        //req.session.userCase.caseCreationProcessStarted = false;
-        console.log('Inside condition-1. process completed');
-        //}
         req.session.userCase = await this.save(
           req,
           {
