@@ -32,6 +32,7 @@ export interface AppSession extends Session {
   addresses: [];
   returnUrl?: string;
   fee?: Fee;
+  caseCreationProcessStarted?: boolean;
 }
 
 export interface UserDetails {

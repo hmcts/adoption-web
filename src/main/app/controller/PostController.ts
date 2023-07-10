@@ -57,7 +57,14 @@ export class PostController<T extends AnyObject> {
       if (userCase === null) {
         // Applications submitted not on login day
         const pcqId = await req.locals.api.checkOldPCQIDExists();
+        //if(!req.session.userCase.caseCreationProcessStarted){
+        //req.session.userCase.caseCreationProcessStarted = true;
+        console.log('Inside condition-1. process started');
+
         req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
+        //req.session.userCase.caseCreationProcessStarted = false;
+        console.log('Inside condition-1. process completed');
+        //}
         req.session.userCase = await this.save(
           req,
           {
@@ -72,7 +79,16 @@ export class PostController<T extends AnyObject> {
         await this.savePcqIDforDraftOrSubmittedCase(userCase, req, pcqId, res);
       } else {
         // No Application for the user
-        req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
+        console.log('session: ' + JSON.stringify(req.session));
+        console.log('caseCreationProcessStarted: ' + JSON.stringify(req.session.caseCreationProcessStarted));
+
+        if (req.session.caseCreationProcessStarted === undefined || !req.session.caseCreationProcessStarted) {
+          req.session.caseCreationProcessStarted = true;
+          console.log('Inside condition-2. process started');
+          req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
+          req.session.caseCreationProcessStarted = false;
+          console.log('Inside condition-2. process completed');
+        }
       }
       req.session.isEligibility = false;
     }
