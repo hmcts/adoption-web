@@ -53,6 +53,11 @@ export class GetController {
       localAuthorityList,
     });
 
+    console.log('Get Controller called-- we can reset the session value here');
+    if (req.session.caseCreationProcessStarted !== undefined && req.session.caseCreationProcessStarted) {
+      req.session.caseCreationProcessStarted = false;
+    }
+
     const sessionErrors = req.session?.errors || [];
 
     if (req.session?.errors) {
