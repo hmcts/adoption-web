@@ -85,17 +85,17 @@ export class PostController<T extends AnyObject> {
         // No Application for the user
         console.log('caseCreationProcessStarted: ' + JSON.stringify(req.session.caseCreationProcessStarted));
 
-        try {
-          if (req.session.caseCreationProcessStarted === undefined || !req.session.caseCreationProcessStarted) {
-            req.session.caseCreationProcessStarted = true;
-            console.log('Inside condition-2. process started');
-            req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
-            req.session.caseCreationProcessStarted = false;
-            console.log('Inside condition-2. process completed');
-          }
-        } finally {
+        /*  try { */
+        if (req.session.caseCreationProcessStarted === undefined || !req.session.caseCreationProcessStarted) {
+          req.session.caseCreationProcessStarted = true;
+          console.log('Inside condition-2. process started');
+          req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
           req.session.caseCreationProcessStarted = false;
+          console.log('Inside condition-2. process completed');
         }
+        /* } finally {
+          req.session.caseCreationProcessStarted = false;
+        } */
       }
       req.session.isEligibility = false;
     }
