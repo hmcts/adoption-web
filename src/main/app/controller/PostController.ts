@@ -54,25 +54,10 @@ export class PostController<T extends AnyObject> {
     if (req.path.startsWith(APPLYING_WITH_URL)) {
       req.locals.api = getCaseApi(req.session.user, req.locals.logger);
       const userCase = await req.locals.api.getCase();
-      console.log('caseCreationProcessStarted: ' + JSON.stringify(req.session.caseCreationProcessStarted));
-      if (req.session.caseCreationProcessStarted === undefined) {
-        req.session.caseCreationProcessStarted = false;
-      }
       if (userCase === null) {
         // Applications submitted not on login day
         const pcqId = await req.locals.api.checkOldPCQIDExists();
-        try {
-          if (req.session.caseCreationProcessStarted === undefined || !req.session.caseCreationProcessStarted) {
-            req.session.caseCreationProcessStarted = true;
-            console.log('Inside condition-1. process started');
-            req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
-            req.session.caseCreationProcessStarted = false;
-            console.log('Inside condition-1. process completed');
-          }
-        } finally {
-          req.session.caseCreationProcessStarted = false;
-        }
-
+        req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
         req.session.userCase = await this.save(
           req,
           {
@@ -87,18 +72,7 @@ export class PostController<T extends AnyObject> {
         await this.savePcqIDforDraftOrSubmittedCase(userCase, req, pcqId, res);
       } else {
         // No Application for the user
-
-        /*  try { */
-        if (!req.session.caseCreationProcessStarted) {
-          req.session.caseCreationProcessStarted = true;
-          console.log('Inside condition-2. process started');
-          req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
-          req.session.caseCreationProcessStarted = false;
-          console.log('Inside condition-2. process completed');
-        }
-        /* } finally {
-          req.session.caseCreationProcessStarted = false;
-        } */
+        req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
       }
       req.session.isEligibility = false;
     }
