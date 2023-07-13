@@ -7,6 +7,6 @@ import './cookie';
 import './other-names/submit';
 import './upload-manager';
 import './accessible-autocomplete';
-import './buttonTest';
+import './applying-with-button-disable';
 
 initAll();
