@@ -228,7 +228,7 @@ export const isChildrenNameValid: Validator = value => {
     return ValidationError.REQUIRED;
   } else {
     // eslint-disable-next-line
-    if ((value as string).match(/[ !"&*:;<=>?[\\\ \/\]^_`{|}~]/)) {
+    if ((value as string).match(/[!"&*:;<=>?[\/\][\\\]^_`{|}~]/)) {
       return 'isValidChildName';
     }
   }
