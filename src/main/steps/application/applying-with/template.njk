@@ -1,6 +1,90 @@
 {% extends "common/template.njk" %}
-
+{% from "govuk/components/button/macro.njk" import govukButton %}
 
 {% if userCase.applyingWith == 'alone' or userCase.applyingWith === 'withSpouseOrCivilPartner' or userCase.applyingWith === 'withSomeoneElse' %}
     {% block backLink %}{% endblock %}
 {% endif %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% block error_summary %}
+        {% include "common/error/summary.njk" %}
+      {% endblock %}
+   {% if section %}
+         <span class="govuk-caption-l">{{ section }}</span>
+    {% endif %}
+            {% block page_content %}
+              {% if title %}
+                <h1 class="govuk-heading-l govuk-!-margin-bottom-0">{{ title }}</h1>
+              {% endif %}
+            {% endblock %}
+      {% if form %}
+        {% block form %}
+          {% from "govuk/components/button/macro.njk" import govukButton %}
+
+            <form class="form" id="main-form" method="post" action="" novalidate="novalidate">
+            <input type="hidden" name="_csrf" id="csrfToken" value="{{ csrfToken }}">
+            <input type="hidden" name="locale" id="locale" value="{{ language }}">
+
+            <fieldset class="govuk-fieldset govuk-!-margin-top-3" aria-label="{{title}}">
+            <legend class="govuk-fieldset__legend govuk-fieldset__legend--l"></legend>
+            {% block before_fields %}{% endblock %}
+
+            {% block form_content %}
+            {% include "../../common/form/fields.njk" %}
+            {% endblock %}
+
+            {% block after_fields %}{% endblock %}
+            </fieldset>
+
+            <div class="govuk-form-group">
+            {% block form_actions %} 
+                <div class="govuk-button-group">
+                {{ 
+                    govukButton({
+                    text: getContent(form.submit.text),
+                    classes: form.submit.classes,
+                    type: "submit",
+                    preventDoubleClick: true,
+                    attributes: {
+                        id: 'applying-with-form-submit'
+                    }
+                    }) if getContent(form.submit.text)
+                }}
+
+                {{ 
+                    govukButton({
+                    text: getContent(form.saveAsDraft.text),
+                    classes: "govuk-button--secondary",
+                    preventDoubleClick: true,
+                    type: "submit",
+                    name: "saveAsDraft",
+                    value: true,
+                    attributes: {
+                        id: 'main-form-save-as-draft'
+                    }
+                    }) if getContent(form.saveAsDraft.text)
+                }}
+                </div>
+            {% endblock %}
+            {% block after_form %}{% endblock %}
+
+            {# TODO uncomment this once we have save as draft fuctionality #}
+            {# <p class="govuk-body">
+                <button class="hmcts-button-link" type="submit" name="saveandsignout" value="true" data-prevent-double-click="true" data-module="govuk-button"/>
+                {{ saveAsDraft }}
+                </button> 
+            </p>#}
+            </div>
+            </form>
+        {% endblock %}
+      {% endif %}
+      {% if not getContent(form.hideContactHelpSection) %}
+        {% block contactUs %}
+          {% include "common/form/contactForHelp.njk"%}
+        {% endblock %}
+      {% endif %}
+    </div>
+</div>
+{% endblock %}
