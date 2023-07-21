@@ -32,9 +32,9 @@ export default class PaymentCallbackGetController {
     const payment = await paymentClient.get(lastPaymentAttempt.reference);
 
     logger.info(`caseId=${caseId} lastPaymentStatus=${payment?.status}`);
-    if (payment?.status === 'Initiated') {
+    /* if (payment?.status === 'Initiated') {
       return res.redirect(lastPaymentAttempt.channel);
-    }
+    } */
 
     logger.info(`caseId=${caseId} lastPaymentTransactionId=${lastPaymentAttempt.transactionId}`);
     payments.setStatus(lastPaymentAttempt.transactionId, payment?.status, payment?.channel);
