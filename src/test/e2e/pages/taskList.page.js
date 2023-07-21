@@ -202,6 +202,7 @@ module.exports = {
   },
 
   async selectDateChildMovedInDetails() {
+    await I.wait(4);
     await I.retry(3).waitForElement(this.childDetails.dateChildMovedInLink, 30);
     await I.wait(4);
     await I.retry(3).click(this.childDetails.dateChildMovedInLink);
