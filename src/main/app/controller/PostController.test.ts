@@ -217,6 +217,7 @@ describe('PostController', () => {
     const controller = new PostController(mockFormContent.fields);
 
     const req = mockRequest({ body });
+    req.session.userCase.canPaymentIgnored = true;
     req.session.user.isSystemUser = true;
     const res = mockResponse();
     await controller.post(req, res);
