@@ -209,7 +209,7 @@ export class PostController<T extends AnyObject> {
         req.locals.api = getCaseApi(req.session.user, req.locals.logger);
         let cases = await req.locals.api.getCases();
 
-        if (cases.length !== 0) {
+        if (cases.length !== 0 && req.session.userCase.canPaymentIgnored === true) {
           cases = cases.filter(
             caseElement =>
               (caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted) &&

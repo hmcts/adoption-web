@@ -430,10 +430,11 @@ describe('PostController', () => {
       }),
       triggerEvent: jest.fn(() => {
         return {
-          applicant1AdditionalNames: [
-            { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
-          ],
-          applicant1HasOtherNames: 'Yes',
+          day: '1',
+          id: '1234',
+          month: '1',
+          year: '2000',
+          canPaymentIgnored: true,
         };
       }),
       addPayment: jest.fn(() => {

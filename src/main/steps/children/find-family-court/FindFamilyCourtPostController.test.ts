@@ -85,6 +85,7 @@ describe('FindFamilyCourtPostController', () => {
                 { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
               ],
               applicant1HasOtherNames: 'Yes',
+              placementOrderCourt: 'Chelmsford Family Court',
             };
           }),
           addPayment: jest.fn(() => {
@@ -196,6 +197,9 @@ describe('FindFamilyCourtPostController', () => {
               { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
             ],
             applicant1HasOtherNames: 'Yes',
+            placementOrders: [
+              { placementOrderCourt: 'Chelmsford Family Court', placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' },
+            ],
           };
         }),
         addPayment: jest.fn(() => {

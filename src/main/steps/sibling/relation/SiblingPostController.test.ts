@@ -87,10 +87,14 @@ describe('SiblingPostController', () => {
           }),
           triggerEvent: jest.fn(() => {
             return {
-              applicant1AdditionalNames: [
-                { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+              selectedSiblingId: 'addAnotherSibling',
+              siblings: [
+                {
+                  siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+                  siblingId: 'MOCK_SIBLING_ID',
+                  siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
+                },
               ],
-              applicant1HasOtherNames: 'Yes',
             };
           }),
           addPayment: jest.fn(() => {
@@ -195,10 +199,14 @@ describe('SiblingPostController', () => {
         }),
         triggerEvent: jest.fn(() => {
           return {
-            applicant1AdditionalNames: [
-              { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+            selectedSiblingId: 'addAnotherSibling',
+            siblings: [
+              {
+                siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+                siblingId: 'MOCK_SIBLING_ID',
+                siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
+              },
             ],
-            applicant1HasOtherNames: 'Yes',
           };
         }),
         addPayment: jest.fn(() => {
@@ -274,14 +282,8 @@ describe('SiblingPostController', () => {
         }),
         triggerEvent: jest.fn(() => {
           return {
-            applicant1AdditionalNames: [
-              { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
-            ],
-            applicant1HasOtherNames: 'Yes',
+            selectedSiblingId: 'addAnotherSibling',
           };
-        }),
-        addPayment: jest.fn(() => {
-          return { selectedSiblingId: 'addAnotherSibling' };
         }),
       };
       (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);

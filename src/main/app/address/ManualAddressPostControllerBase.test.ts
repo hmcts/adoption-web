@@ -79,7 +79,11 @@ describe('ManualAddressPostController', () => {
             {
               id: '123456',
               state: 'Submitted',
-              case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+              case_data: {
+                applyingWith: 'alone',
+                dateSubmitted: moment(new Date()).format('YYYY-MM-DD'),
+                canPaymentIgnored: true,
+              },
             },
           ];
         }),
@@ -90,6 +94,11 @@ describe('ManualAddressPostController', () => {
             ],
             applicant1HasOtherNames: 'Yes',
             applicant1Address1: '102 MINISTRY OF JUSTICE, SEVENTH FLOOR, PETTY FRANCE',
+            canPaymentIgnored: true,
+            applicant1Address2: '',
+            applicant1AddressTown: 'LONDON',
+            applicant1AddressCounty: 'CITY OF WESTMINSTER',
+            applicant1AddressPostcode: 'SW1H 9AJ',
           };
         }),
         addPayment: jest.fn(() => {
@@ -104,6 +113,7 @@ describe('ManualAddressPostController', () => {
             applicant1Address2: '',
             applicant1AddressTown: 'LONDON',
             applicant1SelectAddress: 0,
+            canPaymentIgnored: true,
           };
         }),
       };
@@ -123,7 +133,11 @@ describe('ManualAddressPostController', () => {
             {
               id: '123456',
               state: 'Submitted',
-              case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+              case_data: {
+                applyingWith: 'alone',
+                dateSubmitted: moment(new Date()).format('YYYY-MM-DD'),
+                canPaymentIgnored: true,
+              },
             },
           ];
         }),
@@ -156,7 +170,7 @@ describe('ManualAddressPostController', () => {
       };
       (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
       await controller.post(req, res);
-      expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(2);
+      expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(1);
       expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('MOCK_ID', formData, 'citizen-update-application');
     });
   });

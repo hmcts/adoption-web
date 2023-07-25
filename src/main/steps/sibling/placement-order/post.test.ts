@@ -105,10 +105,25 @@ describe('SiblingPlacementOrderPostController', () => {
           }),
           triggerEvent: jest.fn(() => {
             return {
-              applicant1AdditionalNames: [
-                { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+              siblings: [
+                {
+                  siblingId: 'MOCK_SIBLING_ID',
+                  siblingFirstName: '',
+                  siblingLastName: '',
+                  siblingPlacementOrders: [
+                    {
+                      placementOrderId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID',
+                      placementOrderNumber: 'MOCK_SIBLING_PLACEMENT_ORDER_NUMBER',
+                    },
+                  ],
+                  selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+                },
               ],
-              applicant1HasOtherNames: 'Yes',
+              selectedSiblingId: 'MOCK_SIBLING_ID',
+              selectedSiblingPoId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID',
+              selectedSiblingPoType: 'MOCK_SIBLING_PLACEMENT_TYPE',
+              siblingPlacementOtherType: 'MOCK_SIBLING_PLACEMENT_OTHER_TYPE',
+              canPaymentIgnored: true,
             };
           }),
           addPayment: jest.fn(() => {
@@ -280,10 +295,23 @@ describe('SiblingPlacementOrderPostController', () => {
         }),
         triggerEvent: jest.fn(() => {
           return {
-            applicant1AdditionalNames: [
-              { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+            siblings: [
+              {
+                siblingId: 'MOCK_SIBLING_ID',
+                siblingFirstName: '',
+                siblingLastName: '',
+                siblingPlacementOrders: [
+                  {
+                    placementOrderId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID',
+                    placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
+                  },
+                ],
+                selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+              },
             ],
-            applicant1HasOtherNames: 'Yes',
+            selectedSiblingId: 'MOCK_SIBLING_ID',
+            selectedSiblingPoId: 'MOCK_SIBLING_PLACEMENT_ORDER_NUMBER',
+            canPaymentIgnored: true,
           };
         }),
         addPayment: jest.fn(() => {

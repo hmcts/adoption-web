@@ -90,10 +90,11 @@ describe('applicant2 > other-names > OtherNamesPostController', () => {
           }),
           triggerEvent: jest.fn(() => {
             return {
-              applicant1AdditionalNames: [
-                { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
-              ],
-              applicant1HasOtherNames: 'Yes',
+              applicant2Address1: '101',
+              applicant2Address2: 'xyz palace',
+              applicant2AddressTown: 'London',
+              applicant2AddressCounty: 'London',
+              applicant2AddressPostcode: 'TW7 AAA',
             };
           }),
           addPayment: jest.fn(() => {

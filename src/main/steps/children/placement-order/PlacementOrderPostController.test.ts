@@ -90,10 +90,14 @@ describe('PlacementOrderPostController', () => {
           }),
           triggerEvent: jest.fn(() => {
             return {
-              applicant1AdditionalNames: [
-                { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+              placementOrders: [
+                {
+                  otherPlacementOrderType: 'MOCK_PLACEMENT_OTHER_ORDER_TYPE',
+                  placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+                  placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
+                  placementOrderType: 'Adoption order',
+                },
               ],
-              applicant1HasOtherNames: 'Yes',
             };
           }),
           addPayment: jest.fn(() => {
@@ -257,10 +261,14 @@ describe('PlacementOrderPostController', () => {
         }),
         triggerEvent: jest.fn(() => {
           return {
-            applicant1AdditionalNames: [
-              { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+            placementOrders: [
+              {
+                otherPlacementOrderType: 'MOCK_PLACEMENT_OTHER_ORDER_TYPE',
+                placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+                placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
+                placementOrderType: 'Adoption order',
+              },
             ],
-            applicant1HasOtherNames: 'Yes',
           };
         }),
         addPayment: jest.fn(() => {

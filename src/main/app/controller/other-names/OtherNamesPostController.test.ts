@@ -102,7 +102,7 @@ describe('OtherNamesPostController', () => {
             triggerEvent: jest.fn(() => {
               return {
                 applicant1AdditionalNames: [
-                  { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+                  { id: 'MOCK_V4_UUID', firstNames: 'MOCK_OTHER_FIRST_NAME', lastNames: 'MOCK_OTHER_LAST_NAME' },
                 ],
                 applicant1HasOtherNames: 'Yes',
               };
@@ -153,7 +153,7 @@ describe('OtherNamesPostController', () => {
           };
           (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
           await controller.post(req, res);
-          expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(2);
+          expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(1);
           expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(
             'MOCK_ID',
             {
@@ -194,14 +194,16 @@ describe('OtherNamesPostController', () => {
           }),
           triggerEvent: jest.fn(() => {
             return {
-              applicant1AdditionalNames: [
-                { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
-              ],
-              applicant1HasOtherNames: 'Yes',
+              applicant1AdditionalNames: [],
+              canPaymentIgnored: true,
             };
           }),
           addPayment: jest.fn(() => {
-            return { applicant1AdditionalNames: [] };
+            return {
+              applicant1AdditionalNames: [
+                { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+              ],
+            };
           }),
         };
         (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);

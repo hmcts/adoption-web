@@ -80,14 +80,8 @@ describe('FindFamilyCourtPostController', () => {
           }),
           triggerEvent: jest.fn(() => {
             return {
-              applicant1AdditionalNames: [
-                { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
-              ],
-              applicant1HasOtherNames: 'Yes',
+              familyCourtName: 'Chelmsford Family Court',
             };
-          }),
-          addPayment: jest.fn(() => {
-            return { familyCourtName: 'Chelmsford Family Court' };
           }),
         };
         (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);

@@ -115,7 +115,7 @@ describe('SelectAddressPostController', () => {
         };
         (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
         await controller.post(req, res);
-        expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(2);
+        expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(1);
         expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('MOCK_ID', formData, 'citizen-update-application');
       });
 
@@ -132,10 +132,14 @@ describe('SelectAddressPostController', () => {
           }),
           triggerEvent: jest.fn(() => {
             return {
-              applicant1AdditionalNames: [
-                { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
-              ],
-              applicant1HasOtherNames: 'Yes',
+              applicant1Address1: '102 MINISTRY OF JUSTICE, SEVENTH FLOOR, PETTY FRANCE',
+              applicant1Address2: '',
+              applicant1AddressCounty: 'CITY OF WESTMINSTER',
+              applicant1AddressPostcode: 'SW1H 9AJ',
+              applicant1AddressTown: 'LONDON',
+              applicant1SelectAddress: 0,
+              id: 'MOCK_ID',
+              canPaymentIgnored: true,
             };
           }),
           addPayment: jest.fn(() => {

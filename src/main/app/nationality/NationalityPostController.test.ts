@@ -97,14 +97,8 @@ describe('NationalityPostController', () => {
             }),
             triggerEvent: jest.fn(() => {
               return {
-                applicant1AdditionalNames: [
-                  { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
-                ],
-                applicant1HasOtherNames: 'Yes',
+                birthMotherAdditionalNationalities: ['MOCK_COUNTRY'],
               };
-            }),
-            addPayment: jest.fn(() => {
-              return { birthMotherAdditionalNationalities: ['MOCK_COUNTRY'] };
             }),
           };
           (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
@@ -148,7 +142,7 @@ describe('NationalityPostController', () => {
           };
           (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
           await controller.post(req, res);
-          expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(2);
+          expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(1);
           expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(
             'MOCK_ID',
             { birthMotherAdditionalNationalities: [{ id: '1609459200000', country: 'MOCK_COUNTRY' }] },
@@ -188,14 +182,9 @@ describe('NationalityPostController', () => {
           }),
           triggerEvent: jest.fn(() => {
             return {
-              applicant1AdditionalNames: [
-                { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
-              ],
-              applicant1HasOtherNames: 'Yes',
+              birthMotherAdditionalNationalities: [],
+              canPaymentIgnored: true,
             };
-          }),
-          addPayment: jest.fn(() => {
-            return { birthMotherAdditionalNationalities: [] };
           }),
         };
         (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
@@ -306,10 +295,7 @@ describe('NationalityPostController', () => {
         }),
         triggerEvent: jest.fn(() => {
           return {
-            applicant1AdditionalNames: [
-              { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
-            ],
-            applicant1HasOtherNames: 'Yes',
+            birthMotherAdditionalNationalities: ['MOCK_COUNTRY'],
           };
         }),
         addPayment: jest.fn(() => {
