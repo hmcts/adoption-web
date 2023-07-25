@@ -165,6 +165,65 @@ describe('PostController', () => {
     expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', body, SYSTEM_USER_UPDATE);
   });
 
+  test('Check for scenario canPaymentIgnored is false', async () => {
+    getNextStepUrlMock.mockReturnValue('/next-step-url');
+    const body = {};
+
+    const caseApiMockFn = {
+      getCases: jest.fn(() => {
+        return [
+          {
+            id: '12345',
+            state: 'Submitted',
+            case_data: {
+              applyingWith: 'alone',
+              dateSubmitted: moment(new Date().setMonth(new Date().getMonth() - 1)).format('YYYY-MM-DD'),
+            },
+          },
+          {
+            id: '67890',
+            state: 'Submitted',
+            case_data: {
+              applyingWith: 'alone',
+              dateSubmitted: moment(new Date().setMonth(new Date().getMonth() - 1)).format('YYYY-MM-DD'),
+            },
+          },
+        ];
+      }),
+      unlinkStaleDraftCaseIfFound: jest.fn(() => {
+        return undefined;
+      }),
+      checkOldPCQIDExists: jest.fn(() => {
+        return '12345';
+      }),
+      createCase: jest.fn(() => {
+        return { id: '123456789', state: State.Draft, applyingWith: ApplyingWith.ALONE };
+      }),
+      triggerEvent: jest.fn(() => {
+        return {
+          MOCK_KEY: 'MOCK_VALUE',
+          applyingWith: 'alone',
+          canPaymentIgnored: true,
+          id: '123456789',
+          state: 'Draft',
+        };
+      }),
+      addPayment: jest.fn(() => {
+        return { id: '123456789', state: State.Draft, applyingWith: ApplyingWith.ALONE, MOCK_KEY: 'MOCK_VALUE' };
+      }),
+    };
+    (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
+
+    const controller = new PostController(mockFormContent.fields);
+
+    const req = mockRequest({ body });
+    req.session.user.isSystemUser = true;
+    const res = mockResponse();
+    await controller.post(req, res);
+
+    expect(res.redirect).toHaveBeenCalledWith('/next-step-url');
+  });
+
   test('When Request contains applyting with URL', async () => {
     getNextStepUrlMock.mockReturnValue('/next-step-url');
     const caseApiMockFn = {
