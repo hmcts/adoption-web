@@ -13,11 +13,16 @@ jest.mock('../../../steps', () => {
   return { getNextStepUrl: mockGetNextStepUrl };
 });
 
+import moment from 'moment';
+
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
+import * as caseApi from '../../../app/case/CaseApi';
 import { YesOrNo } from '../../../app/case/definition';
 
 import SiblingRemovePlacementOrderPostController from './SiblingRemovePlacementOrderPostController';
+
+const getCaseApiMock = jest.spyOn(caseApi, 'getCaseApi');
 
 describe('SiblingRemovePlacementOrderPostController', () => {
   let req;
@@ -59,6 +64,29 @@ describe('SiblingRemovePlacementOrderPostController', () => {
       });
 
       test('should update the siblings array and save', async () => {
+        const caseApiMockFn = {
+          getCases: jest.fn(() => {
+            return [
+              {
+                id: '123456',
+                state: 'Submitted',
+                case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+              },
+            ];
+          }),
+          triggerEvent: jest.fn(() => {
+            return {
+              applicant1AdditionalNames: [
+                { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+              ],
+              applicant1HasOtherNames: 'Yes',
+            };
+          }),
+          addPayment: jest.fn(() => {
+            return { familyCourtName: 'Chelmsford Family Court' };
+          }),
+        };
+        (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
         await controller.post(req, res);
         expect(req.session.errors).toEqual([]);
         expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(
@@ -94,6 +122,29 @@ describe('SiblingRemovePlacementOrderPostController', () => {
             save: jest.fn(done => done()),
           },
         });
+        const caseApiMockFn = {
+          getCases: jest.fn(() => {
+            return [
+              {
+                id: '123456',
+                state: 'Submitted',
+                case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+              },
+            ];
+          }),
+          triggerEvent: jest.fn(() => {
+            return {
+              applicant1AdditionalNames: [
+                { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+              ],
+              applicant1HasOtherNames: 'Yes',
+            };
+          }),
+          addPayment: jest.fn(() => {
+            return { familyCourtName: 'Chelmsford Family Court' };
+          }),
+        };
+        (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
         await controller.post(req, res);
         expect(req.session.errors).toEqual([]);
         expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(

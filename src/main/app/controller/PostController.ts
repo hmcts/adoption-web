@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
+import moment from 'moment';
 
 import { getCaseApi } from '../../app/case/CaseApi';
 import {
@@ -204,18 +205,37 @@ export class PostController<T extends AnyObject> {
         req.session.userCase = await req.locals.api.triggerEvent(caseRefId, modifiedValuesSet, eventName);
         await removeCaseFromRedis(req, caseRefId);
       } else {
-        const flag = req.session.userCase.canPaymentIgnored;
-        const feeSummary = req.session.userCase.applicationFeeOrderSummary;
-        const payments = req.session.userCase.payments;
-        req.session.userCase = await req.locals.api.triggerEvent(caseRefId, formData, eventName);
-        if (flag) {
-          req.session.userCase = await req.locals.api.triggerEvent(
-            caseRefId,
-            { applicationFeeOrderSummary: feeSummary },
-            CITIZEN_SUBMIT
+        //const flag = req.session.userCase.canPaymentIgnored;
+        req.locals.api = getCaseApi(req.session.user, req.locals.logger);
+        let cases = await req.locals.api.getCases();
+
+        if (cases.length !== 0) {
+          cases = cases.filter(
+            caseElement =>
+              (caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted) &&
+              moment(new Date(caseElement.case_data.dateSubmitted)).format('YYYY-MM-DD') ===
+                moment(new Date()).format('YYYY-MM-DD')
           );
-          req.session.userCase = await req.locals.api.addPayment(caseRefId, payments!);
-          req.session.userCase.canPaymentIgnored = flag;
+
+          if (cases.length > 0) {
+            const feeSummary = cases[0].case_data.applicationFeeOrderSummary;
+            const payments = cases[0].case_data.applicationPayments;
+            req.session.userCase = await req.locals.api.triggerEvent(caseRefId, formData, eventName);
+            req.session.userCase = await req.locals.api.triggerEvent(
+              caseRefId,
+              { applicationFeeOrderSummary: feeSummary },
+              CITIZEN_SUBMIT
+            );
+            req.session.userCase = await req.locals.api.addPayment(caseRefId, payments!);
+            req.session.userCase.canPaymentIgnored = true;
+          } else {
+            req.session.userCase.canPaymentIgnored = false;
+            req.session.userCase.redirectToSOT = true;
+            //write code to redirect to SOT with updated button;
+            //this.redirect(req, );
+          }
+        } else {
+          req.session.userCase = await req.locals.api.triggerEvent(caseRefId, formData, eventName);
         }
       }
     } catch (err) {
