@@ -1,3 +1,13 @@
+import moment from 'moment';
+
+import { mockRequest } from '../../../../test/unit/utils/mockRequest';
+import { mockResponse } from '../../../../test/unit/utils/mockResponse';
+import * as caseApi from '../../../app/case/CaseApi';
+import { YesOrNo } from '../../../app/case/definition';
+import { PostController } from '../../../app/controller/PostController';
+
+import SameAddressPostController from './SameAddressPostController';
+
 const mockGetParsedBody = jest.fn();
 const mockGetErrors = jest.fn();
 jest.mock('../../../app/form/Form', () => {
@@ -7,13 +17,7 @@ jest.mock('../../../app/form/Form', () => {
     }),
   };
 });
-
-import { mockRequest } from '../../../../test/unit/utils/mockRequest';
-import { mockResponse } from '../../../../test/unit/utils/mockResponse';
-import { YesOrNo } from '../../../app/case/definition';
-import { PostController } from '../../../app/controller/PostController';
-
-import SameAddressPostController from './SameAddressPostController';
+const getCaseApiMock = jest.spyOn(caseApi, 'getCaseApi');
 
 describe('applicant2 > other-names > OtherNamesPostController', () => {
   let req;
@@ -74,6 +78,36 @@ describe('applicant2 > other-names > OtherNamesPostController', () => {
       });
 
       test('should set the formData fields in userCase applicant1Address session data', async () => {
+        const caseApiMockFn = {
+          getCases: jest.fn(() => {
+            return [
+              {
+                id: '123456',
+                state: 'Submitted',
+                case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+              },
+            ];
+          }),
+          triggerEvent: jest.fn(() => {
+            return {
+              applicant1AdditionalNames: [
+                { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+              ],
+              applicant1HasOtherNames: 'Yes',
+            };
+          }),
+          addPayment: jest.fn(() => {
+            return {
+              birthMotherAdditionalNationalities: ['MOCK_COUNTRY'],
+              applicant2Address1: '101',
+              applicant2Address2: 'xyz palace',
+              applicant2AddressTown: 'London',
+              applicant2AddressCounty: 'London',
+              applicant2AddressPostcode: 'TW7 AAA',
+            };
+          }),
+        };
+        (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
         await controller.post(req, res);
         expect(req.session.errors).toEqual([]);
         expect(req.session.userCase.applicant2Address1).toEqual('101');

@@ -13,13 +13,18 @@ jest.mock('../../steps', () => {
   return { getNextStepUrl: mockGetNextStepUrl };
 });
 
+import moment from 'moment';
+
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
+import * as caseApi from '../../app/case/CaseApi';
 import { FieldPrefix } from '../case/case';
+import { ApplyingWith, State } from '../case/definition';
 import { FormFields } from '../form/Form';
 
 import NationalityPostController from './NationalityPostController';
 
+const getCaseApiMock = jest.spyOn(caseApi, 'getCaseApi');
 describe('NationalityPostController', () => {
   let req;
   let res;
@@ -71,6 +76,38 @@ describe('NationalityPostController', () => {
         });
 
         test('should add the country in userCase birthMotherAdditionalNationalities session data', async () => {
+          const caseApiMockFn = {
+            getCases: jest.fn(() => {
+              return [
+                {
+                  id: '123456',
+                  state: 'Submitted',
+                  case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+                },
+              ];
+            }),
+            unlinkStaleDraftCaseIfFound: jest.fn(() => {
+              return undefined;
+            }),
+            checkOldPCQIDExists: jest.fn(() => {
+              return '12345';
+            }),
+            createCase: jest.fn(() => {
+              return { id: '123456789', state: State.Draft, applyingWith: ApplyingWith.ALONE };
+            }),
+            triggerEvent: jest.fn(() => {
+              return {
+                applicant1AdditionalNames: [
+                  { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+                ],
+                applicant1HasOtherNames: 'Yes',
+              };
+            }),
+            addPayment: jest.fn(() => {
+              return { birthMotherAdditionalNationalities: ['MOCK_COUNTRY'] };
+            }),
+          };
+          (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
           await controller.post(req, res);
           expect(req.session.errors).toEqual([]);
           expect(req.session.userCase.birthMotherAdditionalNationalities).toEqual(['MOCK_COUNTRY']);
@@ -78,8 +115,40 @@ describe('NationalityPostController', () => {
         });
 
         test('should call save with correct params', async () => {
+          const caseApiMockFn = {
+            getCases: jest.fn(() => {
+              return [
+                {
+                  id: '123456',
+                  state: 'Submitted',
+                  case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+                },
+              ];
+            }),
+            unlinkStaleDraftCaseIfFound: jest.fn(() => {
+              return undefined;
+            }),
+            checkOldPCQIDExists: jest.fn(() => {
+              return '12345';
+            }),
+            createCase: jest.fn(() => {
+              return { id: '123456789', state: State.Draft, applyingWith: ApplyingWith.ALONE };
+            }),
+            triggerEvent: jest.fn(() => {
+              return {
+                applicant1AdditionalNames: [
+                  { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+                ],
+                applicant1HasOtherNames: 'Yes',
+              };
+            }),
+            addPayment: jest.fn(() => {
+              return { birthMotherAdditionalNationalities: [] };
+            }),
+          };
+          (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
           await controller.post(req, res);
-          expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(1);
+          expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(2);
           expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(
             'MOCK_ID',
             { birthMotherAdditionalNationalities: [{ id: '1609459200000', country: 'MOCK_COUNTRY' }] },
@@ -98,12 +167,45 @@ describe('NationalityPostController', () => {
       });
 
       test('should add the country in userCase birthMotherAdditionalNationalities session data', async () => {
+        const caseApiMockFn = {
+          getCases: jest.fn(() => {
+            return [
+              {
+                id: '123456',
+                state: 'Submitted',
+                case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+              },
+            ];
+          }),
+          unlinkStaleDraftCaseIfFound: jest.fn(() => {
+            return undefined;
+          }),
+          checkOldPCQIDExists: jest.fn(() => {
+            return '12345';
+          }),
+          createCase: jest.fn(() => {
+            return { id: '123456789', state: State.Draft, applyingWith: ApplyingWith.ALONE };
+          }),
+          triggerEvent: jest.fn(() => {
+            return {
+              applicant1AdditionalNames: [
+                { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+              ],
+              applicant1HasOtherNames: 'Yes',
+            };
+          }),
+          addPayment: jest.fn(() => {
+            return { birthMotherAdditionalNationalities: [] };
+          }),
+        };
+        (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
         await controller.post(req, res);
         expect(req.session.errors).toEqual([]);
         expect(req.session.userCase.birthMotherAdditionalNationalities).toEqual([]);
         expect(req.session.save).toHaveBeenCalled();
         expect(mockGetNextStepUrl).toHaveBeenCalledWith(req, {
           birthMotherAdditionalNationalities: [],
+          canPaymentIgnored: true,
         });
       });
 
@@ -183,6 +285,43 @@ describe('NationalityPostController', () => {
     });
 
     test('should set the formData fields in userCase birthMotherAdditionalNationalities session data', async () => {
+      const caseApiMockFn = {
+        getCases: jest.fn(() => {
+          return [
+            {
+              id: '123456',
+              state: 'Submitted',
+              case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+            },
+          ];
+        }),
+        unlinkStaleDraftCaseIfFound: jest.fn(() => {
+          return undefined;
+        }),
+        checkOldPCQIDExists: jest.fn(() => {
+          return '12345';
+        }),
+        createCase: jest.fn(() => {
+          return { id: '123456789', state: State.Draft, applyingWith: ApplyingWith.ALONE };
+        }),
+        triggerEvent: jest.fn(() => {
+          return {
+            applicant1AdditionalNames: [
+              { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+            ],
+            applicant1HasOtherNames: 'Yes',
+          };
+        }),
+        addPayment: jest.fn(() => {
+          return {
+            id: '123456789',
+            state: State.Draft,
+            applyingWith: ApplyingWith.ALONE,
+            birthMotherAdditionalNationalities: ['MOCK_COUNTRY'],
+          };
+        }),
+      };
+      (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
       await controller.post(req, res);
       expect(req.session.errors).toEqual([]);
       expect(req.session.userCase.birthMotherAdditionalNationalities).toEqual(['MOCK_COUNTRY']);

@@ -13,11 +13,16 @@ jest.mock('../../../steps', () => {
   return { getNextStepUrl: mockGetNextStepUrl };
 });
 
+import moment from 'moment';
+
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
+import * as caseApi from '../../../app/case/CaseApi';
 import { FormFields } from '../../../app/form/Form';
 
 import SiblingPlacementOrderPostController from './post';
+
+const getCaseApiMock = jest.spyOn(caseApi, 'getCaseApi');
 
 describe('SiblingPlacementOrderPostController', () => {
   let req;
@@ -88,9 +93,52 @@ describe('SiblingPlacementOrderPostController', () => {
       });
 
       test('should set the formData fields in userCase placementOrders session data', async () => {
+        const caseApiMockFn = {
+          getCases: jest.fn(() => {
+            return [
+              {
+                id: '123456',
+                state: 'Submitted',
+                case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+              },
+            ];
+          }),
+          triggerEvent: jest.fn(() => {
+            return {
+              applicant1AdditionalNames: [
+                { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+              ],
+              applicant1HasOtherNames: 'Yes',
+            };
+          }),
+          addPayment: jest.fn(() => {
+            return {
+              siblings: [
+                {
+                  siblingId: 'MOCK_SIBLING_ID',
+                  siblingFirstName: '',
+                  siblingLastName: '',
+                  siblingPlacementOrders: [
+                    {
+                      placementOrderId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID',
+                      placementOrderNumber: 'MOCK_SIBLING_PLACEMENT_ORDER_NUMBER',
+                    },
+                  ],
+                  selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+                },
+              ],
+              selectedSiblingId: 'MOCK_SIBLING_ID',
+              selectedSiblingPoId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID',
+              selectedSiblingPoType: 'MOCK_SIBLING_PLACEMENT_TYPE',
+              siblingPlacementOtherType: 'MOCK_SIBLING_PLACEMENT_OTHER_TYPE',
+            };
+          }),
+        };
+        (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
         await controller.post(req, res);
         expect(req.session.errors).toEqual([]);
         expect(req.session.userCase).toEqual({
+          canPaymentIgnored: true,
           selectedSiblingId: 'MOCK_SIBLING_ID',
           selectedSiblingPoId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID',
           selectedSiblingPoType: 'MOCK_SIBLING_PLACEMENT_TYPE',
@@ -220,9 +268,50 @@ describe('SiblingPlacementOrderPostController', () => {
     });
 
     test('should set the formData fields in userCase placementOrders session data', async () => {
+      const caseApiMockFn = {
+        getCases: jest.fn(() => {
+          return [
+            {
+              id: '123456',
+              state: 'Submitted',
+              case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+            },
+          ];
+        }),
+        triggerEvent: jest.fn(() => {
+          return {
+            applicant1AdditionalNames: [
+              { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+            ],
+            applicant1HasOtherNames: 'Yes',
+          };
+        }),
+        addPayment: jest.fn(() => {
+          return {
+            siblings: [
+              {
+                siblingId: 'MOCK_SIBLING_ID',
+                siblingFirstName: '',
+                siblingLastName: '',
+                siblingPlacementOrders: [
+                  {
+                    placementOrderId: 'MOCK_SIBLING_PLACEMENT_ORDER_ID',
+                    placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
+                  },
+                ],
+                selectedPlacementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+              },
+            ],
+            selectedSiblingId: 'MOCK_SIBLING_ID',
+            selectedSiblingPoId: 'MOCK_SIBLING_PLACEMENT_ORDER_NUMBER',
+          };
+        }),
+      };
+      (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
       await controller.post(req, res);
       expect(req.session.errors).toEqual([]);
       expect(req.session.userCase).toEqual({
+        canPaymentIgnored: true,
         siblings: [
           {
             siblingId: 'MOCK_SIBLING_ID',

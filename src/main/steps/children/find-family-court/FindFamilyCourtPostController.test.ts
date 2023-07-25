@@ -13,11 +13,16 @@ jest.mock('../../../steps', () => {
   return { getNextStepUrl: mockGetNextStepUrl };
 });
 
+import moment from 'moment';
+
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
+import * as caseApi from '../../../app/case/CaseApi';
 import { FormFields } from '../../../app/form/Form';
 
 import FindFamilyCourtPostController from './FindFamilyCourtPostController';
+
+const getCaseApiMock = jest.spyOn(caseApi, 'getCaseApi');
 
 describe('FindFamilyCourtPostController', () => {
   let req;
@@ -64,6 +69,29 @@ describe('FindFamilyCourtPostController', () => {
 
       test('should set the formData fields in userCase placementOrders session data', async () => {
         req.body.autoCompleteData = 'Chelmsford Family Court';
+        const caseApiMockFn = {
+          getCases: jest.fn(() => {
+            return [
+              {
+                id: '123456',
+                state: 'Submitted',
+                case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+              },
+            ];
+          }),
+          triggerEvent: jest.fn(() => {
+            return {
+              applicant1AdditionalNames: [
+                { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+              ],
+              applicant1HasOtherNames: 'Yes',
+            };
+          }),
+          addPayment: jest.fn(() => {
+            return { placementOrderCourt: 'Chelmsford Family Court' };
+          }),
+        };
+        (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
         await controller.post(req, res);
         expect(req.session.errors).toEqual([]);
         expect(req.session.userCase.placementOrderCourt).toEqual('Chelmsford Family Court');
@@ -152,6 +180,33 @@ describe('FindFamilyCourtPostController', () => {
     });
 
     test('should set the formData fields in userCase placementOrders session data', async () => {
+      const caseApiMockFn = {
+        getCases: jest.fn(() => {
+          return [
+            {
+              id: '123456',
+              state: 'Submitted',
+              case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+            },
+          ];
+        }),
+        triggerEvent: jest.fn(() => {
+          return {
+            applicant1AdditionalNames: [
+              { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+            ],
+            applicant1HasOtherNames: 'Yes',
+          };
+        }),
+        addPayment: jest.fn(() => {
+          return {
+            placementOrders: [
+              { placementOrderCourt: 'Chelmsford Family Court', placementOrderId: 'MOCK_PLACEMENT_ORDER_ID' },
+            ],
+          };
+        }),
+      };
+      (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
       await controller.post(req, res);
       expect(req.session.errors).toEqual([]);
       expect(req.session.userCase.placementOrders).toEqual([
