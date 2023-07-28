@@ -2,6 +2,7 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 import moment from 'moment';
+import moment_timezone from 'moment-timezone';
 
 import { getCaseApi } from '../../app/case/CaseApi';
 import {
@@ -214,7 +215,11 @@ export class PostController<T extends AnyObject> {
             caseElement =>
               (caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted) &&
               moment(new Date(caseElement.case_data.dateSubmitted)).format('YYYY-MM-DD') ===
-                moment(new Date()).format('YYYY-MM-DD')
+                moment_timezone.tz(new Date(), 'Europe/London').format('YYYY-MM-DD')
+          );
+
+          console.log(
+            'Current Date and Time: ' + moment_timezone.tz(new Date(), 'Europe/London').format('YYYY-MM-DD hh:mm:ss a')
           );
 
           if (cases.length > 0) {
