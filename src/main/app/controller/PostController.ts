@@ -221,7 +221,11 @@ export class PostController<T extends AnyObject> {
             'Current Date and Time: ' + moment_timezone.tz(new Date(), 'Europe/London').format('YYYY-MM-DD hh:mm:ss a')
           );
 
+          console.log('Cases.length : ' + cases.length);
+
           if (cases.length > 0) {
+            console.log('Payment ignored = true');
+
             const feeSummary = cases[0].case_data.applicationFeeOrderSummary;
             const payments = cases[0].case_data.applicationPayments;
             req.session.userCase = await req.locals.api.triggerEvent(caseRefId, formData, eventName);
@@ -233,6 +237,7 @@ export class PostController<T extends AnyObject> {
             req.session.userCase = await req.locals.api.addPayment(caseRefId, payments!);
             req.session.userCase.canPaymentIgnored = true;
           } else {
+            console.log('Payment ignored = false');
             req.session.userCase.canPaymentIgnored = false;
             req.session.userCase.redirectToSOT = true;
             //write code to redirect to SOT with updated button;
