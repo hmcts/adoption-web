@@ -417,6 +417,7 @@ export interface Case {
   applicant1SotFullName?: string;
   applicant2SotFullName?: string;
   canPaymentIgnored?: boolean;
+  redirectToSOT?: boolean;
   pcqId?: string;
 
   /***** Common across different type of users *****/

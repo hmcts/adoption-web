@@ -37,8 +37,10 @@ export default class CheckYouAnswersPostController extends PostController<AnyObj
     );
     if (cases.length > 0) {
       req.session.userCase.canPaymentIgnored = true;
-      req.session.userCase.applicationFeeOrderSummary = cases[0].case_data.applicationFeeOrderSummary;
-      req.session.userCase.payments = cases[0].case_data.applicationPayments;
+      //req.session.userCase.applicationFeeOrderSummary = cases[0].case_data.applicationFeeOrderSummary;
+      //req.session.userCase.payments = cases[0].case_data.applicationPayments;
+    } else {
+      req.session.userCase.canPaymentIgnored = false;
     }
     this.redirect(req, res, STATEMENT_OF_TRUTH);
   }

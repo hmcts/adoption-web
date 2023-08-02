@@ -13,12 +13,17 @@ jest.mock('../../steps', () => {
   return { getNextStepUrl: mockGetNextStepUrl };
 });
 
+import moment from 'moment';
+
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
+import * as caseApi from '../../app/case/CaseApi';
 import { FieldPrefix } from '../case/case';
+import { ApplyingWith, State } from '../case/definition';
 
 import ManualAddressPostController from './ManualAddressPostControllerBase';
 
+const getCaseApiMock = jest.spyOn(caseApi, 'getCaseApi');
 describe('ManualAddressPostController', () => {
   let req;
   let res;
@@ -68,6 +73,51 @@ describe('ManualAddressPostController', () => {
     });
 
     test('should set the address fields in userCase session data', async () => {
+      const caseApiMockFn = {
+        getCases: jest.fn(() => {
+          return [
+            {
+              id: '123456',
+              state: 'Submitted',
+              case_data: {
+                applyingWith: 'alone',
+                dateSubmitted: moment(new Date()).format('YYYY-MM-DD'),
+                canPaymentIgnored: true,
+              },
+            },
+          ];
+        }),
+        triggerEvent: jest.fn(() => {
+          return {
+            applicant1AdditionalNames: [
+              { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+            ],
+            applicant1HasOtherNames: 'Yes',
+            applicant1Address1: '102 MINISTRY OF JUSTICE, SEVENTH FLOOR, PETTY FRANCE',
+            canPaymentIgnored: true,
+            applicant1Address2: '',
+            applicant1AddressTown: 'LONDON',
+            applicant1AddressCounty: 'CITY OF WESTMINSTER',
+            applicant1AddressPostcode: 'SW1H 9AJ',
+          };
+        }),
+        addPayment: jest.fn(() => {
+          return {
+            id: '1234567891',
+            state: State.Draft,
+            applyingWith: ApplyingWith.ALONE,
+            birthMotherAdditionalNationalities: [],
+            applicant1AddressCounty: 'CITY OF WESTMINSTER',
+            applicant1AddressPostcode: 'SW1H 9AJ',
+            applicant1Address1: '102 MINISTRY OF JUSTICE, SEVENTH FLOOR, PETTY FRANCE',
+            applicant1Address2: '',
+            applicant1AddressTown: 'LONDON',
+            applicant1SelectAddress: 0,
+            canPaymentIgnored: true,
+          };
+        }),
+      };
+      (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
       await controller.post(req, res);
       expect(req.session.userCase.applicant1Address1).toBe('102 MINISTRY OF JUSTICE, SEVENTH FLOOR, PETTY FRANCE');
       expect(req.session.userCase.applicant1Address2).toBe('');
@@ -77,6 +127,48 @@ describe('ManualAddressPostController', () => {
     });
 
     test('should call save with correct params', async () => {
+      const caseApiMockFn = {
+        getCases: jest.fn(() => {
+          return [
+            {
+              id: '123456',
+              state: 'Submitted',
+              case_data: {
+                applyingWith: 'alone',
+                dateSubmitted: moment(new Date()).format('YYYY-MM-DD'),
+                canPaymentIgnored: true,
+              },
+            },
+          ];
+        }),
+        unlinkStaleDraftCaseIfFound: jest.fn(() => {
+          return undefined;
+        }),
+        checkOldPCQIDExists: jest.fn(() => {
+          return '12345';
+        }),
+        createCase: jest.fn(() => {
+          return { id: '123456789', state: State.Draft, applyingWith: ApplyingWith.ALONE };
+        }),
+        triggerEvent: jest.fn(() => {
+          return {
+            applicant1AdditionalNames: [
+              { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+            ],
+            applicant1HasOtherNames: 'Yes',
+            applicant1Address1: '102 MINISTRY OF JUSTICE, SEVENTH FLOOR, PETTY FRANCE',
+          };
+        }),
+        addPayment: jest.fn(() => {
+          return {
+            id: '123456789',
+            state: State.Draft,
+            applyingWith: ApplyingWith.ALONE,
+            birthMotherAdditionalNationalities: [],
+          };
+        }),
+      };
+      (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
       await controller.post(req, res);
       expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(1);
       expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('MOCK_ID', formData, 'citizen-update-application');

@@ -15,6 +15,10 @@ describe('reviewPaySubmitSequence', () => {
     expect(reviewPaySubmitSequence[2].url).toBe('/review-pay-submit/statement-of-truth');
     expect(reviewPaySubmitSequence[2].showInSection).toBe('reviewPaySubmit');
     expect(reviewPaySubmitSequence[2].getNextStep({})).toBe('/review-pay-submit/pay-and-submit');
+    expect(reviewPaySubmitSequence[2].getNextStep({ canPaymentIgnored: true })).toBe('/application/submitted');
+    expect(reviewPaySubmitSequence[2].getNextStep({ canPaymentIgnored: false, redirectToSOT: true })).toBe(
+      '/review-pay-submit/statement-of-truth'
+    );
 
     expect(reviewPaySubmitSequence[3].url).toBe('/review-pay-submit/pay-and-submit');
     expect(reviewPaySubmitSequence[3].showInSection).toBe('reviewPaySubmit');

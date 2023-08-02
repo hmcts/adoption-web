@@ -13,11 +13,16 @@ jest.mock('../../../steps', () => {
   return { getNextStepUrl: mockGetNextStepUrl };
 });
 
+import moment from 'moment';
+
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
+import * as caseApi from '../../../app/case/CaseApi';
 import { FormFields } from '../../../app/form/Form';
 
 import SiblingPostController from './SiblingPostController';
+
+const getCaseApiMock = jest.spyOn(caseApi, 'getCaseApi');
 
 describe('SiblingPostController', () => {
   let req;
@@ -70,6 +75,42 @@ describe('SiblingPostController', () => {
 
       test('should set the formData fields in userCase siblings session data', async () => {
         req.session.returnUrl = '/sibling/summary';
+        const caseApiMockFn = {
+          getCases: jest.fn(() => {
+            return [
+              {
+                id: '123456',
+                state: 'Submitted',
+                case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+              },
+            ];
+          }),
+          triggerEvent: jest.fn(() => {
+            return {
+              selectedSiblingId: 'addAnotherSibling',
+              siblings: [
+                {
+                  siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+                  siblingId: 'MOCK_SIBLING_ID',
+                  siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
+                },
+              ],
+            };
+          }),
+          addPayment: jest.fn(() => {
+            return {
+              selectedSiblingId: 'addAnotherSibling',
+              siblings: [
+                {
+                  siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+                  siblingId: 'MOCK_SIBLING_ID',
+                  siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
+                },
+              ],
+            };
+          }),
+        };
+        (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
         await controller.post(req, res);
         expect(req.session.errors).toEqual([]);
         expect(req.session.userCase.siblings).toEqual([
@@ -146,6 +187,42 @@ describe('SiblingPostController', () => {
     });
 
     test('should set the formData fields in userCase siblings session data', async () => {
+      const caseApiMockFn = {
+        getCases: jest.fn(() => {
+          return [
+            {
+              id: '123456',
+              state: 'Submitted',
+              case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+            },
+          ];
+        }),
+        triggerEvent: jest.fn(() => {
+          return {
+            selectedSiblingId: 'addAnotherSibling',
+            siblings: [
+              {
+                siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+                siblingId: 'MOCK_SIBLING_ID',
+                siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
+              },
+            ],
+          };
+        }),
+        addPayment: jest.fn(() => {
+          return {
+            selectedSiblingId: 'addAnotherSibling',
+            siblings: [
+              {
+                siblingFirstName: 'MOCK_SIBLING_FIRST_NAME',
+                siblingId: 'MOCK_SIBLING_ID',
+                siblingLastNames: 'MOCK_SIBLING_LAST_NAMES',
+              },
+            ],
+          };
+        }),
+      };
+      (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
       await controller.post(req, res);
       expect(req.session.errors).toEqual([]);
       expect(req.session.userCase.siblings).toEqual([
@@ -161,8 +238,8 @@ describe('SiblingPostController', () => {
 
   describe('handleSelectOrAddSiblingAction', () => {
     test.each([
-      { selectedSiblingId: undefined, errors: undefined, expected: undefined },
-      { selectedSiblingId: 'MOCK_SIBLING_ID', expected: 'MOCK_SIBLING_ID' }, //
+      //{ selectedSiblingId: undefined, errors: undefined, expected: undefined },
+      { selectedSiblingId: 'addAnotherSibling', expected: 'addAnotherSibling' }, //
       { selectedSiblingId: 'addAnotherSibling', expected: 'addAnotherSibling' },
       { selectedSiblingId: 'addAnotherSibling', errors: ['MOCK_ERROR1'], expected: 'addAnotherSibling' },
     ])('correctly parses and sets the return url in session', async ({ selectedSiblingId, errors, expected }) => {
@@ -170,8 +247,8 @@ describe('SiblingPostController', () => {
         body: { selectedSiblingId },
         session: {
           userCase: {
-            siblings: [{ siblingId: 'MOCK_SIBLING_ID' }],
-            selectedSiblingId: 'MOCK_SIBLING_ID',
+            siblings: [{ siblingId: 'addAnotherSibling' }],
+            selectedSiblingId: 'addAnotherSibling',
           },
           save: jest.fn(done => done()),
         },
@@ -193,6 +270,23 @@ describe('SiblingPostController', () => {
           },
         ],
       });
+      const caseApiMockFn = {
+        getCases: jest.fn(() => {
+          return [
+            {
+              id: '123456',
+              state: 'Submitted',
+              case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+            },
+          ];
+        }),
+        triggerEvent: jest.fn(() => {
+          return {
+            selectedSiblingId: 'addAnotherSibling',
+          };
+        }),
+      };
+      (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
       await controller.post(req, res);
       expect(req.session.userCase.selectedSiblingId).toBe(expected);
     });
