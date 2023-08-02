@@ -13,12 +13,17 @@ jest.mock('../../../steps', () => {
   return { getNextStepUrl: mockGetNextStepUrl };
 });
 
+import moment from 'moment';
+
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
+import * as caseApi from '../../../app/case/CaseApi';
 import { FieldPrefix } from '../../case/case';
 import { FormFields } from '../../form/Form';
 
 import OtherNamesPostController from './OtherNamesPostController';
+
+const getCaseApiMock = jest.spyOn(caseApi, 'getCaseApi');
 
 describe('OtherNamesPostController', () => {
   let req;
@@ -84,6 +89,33 @@ describe('OtherNamesPostController', () => {
 
         test('should add the otherName object in userCase applicant1AdditionalNames session data', async () => {
           req.session.userCase.applicant1AdditionalNames = undefined;
+          const caseApiMockFn = {
+            getCases: jest.fn(() => {
+              return [
+                {
+                  id: '123456',
+                  state: 'Submitted',
+                  case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+                },
+              ];
+            }),
+            triggerEvent: jest.fn(() => {
+              return {
+                applicant1AdditionalNames: [
+                  { id: 'MOCK_V4_UUID', firstNames: 'MOCK_OTHER_FIRST_NAME', lastNames: 'MOCK_OTHER_LAST_NAME' },
+                ],
+                applicant1HasOtherNames: 'Yes',
+              };
+            }),
+            addPayment: jest.fn(() => {
+              return {
+                applicant1AdditionalNames: [
+                  { id: 'MOCK_V4_UUID', firstNames: 'MOCK_OTHER_FIRST_NAME', lastNames: 'MOCK_OTHER_LAST_NAME' },
+                ],
+              };
+            }),
+          };
+          (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
           await controller.post(req, res);
           expect(req.session.errors).toEqual([]);
           expect(req.session.userCase.applicant1AdditionalNames).toEqual([
@@ -97,6 +129,29 @@ describe('OtherNamesPostController', () => {
         });
 
         test('should call save with correct params', async () => {
+          const caseApiMockFn = {
+            getCases: jest.fn(() => {
+              return [
+                {
+                  id: '123456',
+                  state: 'Submitted',
+                  case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+                },
+              ];
+            }),
+            triggerEvent: jest.fn(() => {
+              return {
+                applicant1AdditionalNames: [
+                  { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+                ],
+                applicant1HasOtherNames: 'Yes',
+              };
+            }),
+            addPayment: jest.fn(() => {
+              return { applicant1AdditionalNames: [] };
+            }),
+          };
+          (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
           await controller.post(req, res);
           expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(1);
           expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(
@@ -127,12 +182,38 @@ describe('OtherNamesPostController', () => {
       });
 
       test('should not add the additionalNames in userCase applicant1AdditionalNames session data', async () => {
+        const caseApiMockFn = {
+          getCases: jest.fn(() => {
+            return [
+              {
+                id: '123456',
+                state: 'Submitted',
+                case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+              },
+            ];
+          }),
+          triggerEvent: jest.fn(() => {
+            return {
+              applicant1AdditionalNames: [],
+              canPaymentIgnored: true,
+            };
+          }),
+          addPayment: jest.fn(() => {
+            return {
+              applicant1AdditionalNames: [
+                { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+              ],
+            };
+          }),
+        };
+        (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
         await controller.post(req, res);
         expect(req.session.errors).toEqual([]);
         expect(req.session.userCase.applicant1AdditionalNames).toEqual([]);
         expect(req.session.save).toHaveBeenCalled();
         expect(mockGetNextStepUrl).toHaveBeenCalledWith(req, {
           applicant1AdditionalNames: [],
+          canPaymentIgnored: true,
         });
       });
     });

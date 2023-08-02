@@ -13,12 +13,17 @@ jest.mock('../../../steps', () => {
   return { getNextStepUrl: mockGetNextStepUrl };
 });
 
+import moment from 'moment';
+
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
+import * as caseApi from '../../../app/case/CaseApi';
 import { PlacementOrderTypeEnum, YesOrNo } from '../../../app/case/definition';
 import { FormFields } from '../../../app/form/Form';
 
 import PlacementOrderPostController from './PlacementOrderPostController';
+
+const getCaseApiMock = jest.spyOn(caseApi, 'getCaseApi');
 
 describe('PlacementOrderPostController', () => {
   let req;
@@ -73,6 +78,42 @@ describe('PlacementOrderPostController', () => {
       });
 
       test('should set the formData fields in userCase placementOrders session data', async () => {
+        const caseApiMockFn = {
+          getCases: jest.fn(() => {
+            return [
+              {
+                id: '123456',
+                state: 'Submitted',
+                case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+              },
+            ];
+          }),
+          triggerEvent: jest.fn(() => {
+            return {
+              placementOrders: [
+                {
+                  otherPlacementOrderType: 'MOCK_PLACEMENT_OTHER_ORDER_TYPE',
+                  placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+                  placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
+                  placementOrderType: 'Adoption order',
+                },
+              ],
+            };
+          }),
+          addPayment: jest.fn(() => {
+            return {
+              placementOrders: [
+                {
+                  otherPlacementOrderType: 'MOCK_PLACEMENT_OTHER_ORDER_TYPE',
+                  placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+                  placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
+                  placementOrderType: 'Adoption order',
+                },
+              ],
+            };
+          }),
+        };
+        (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
         await controller.post(req, res);
         expect(req.session.errors).toEqual([]);
         expect(req.session.userCase.placementOrders).toEqual([
@@ -208,6 +249,42 @@ describe('PlacementOrderPostController', () => {
     });
 
     test('should set the formData fields in userCase placementOrders session data', async () => {
+      const caseApiMockFn = {
+        getCases: jest.fn(() => {
+          return [
+            {
+              id: '123456',
+              state: 'Submitted',
+              case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+            },
+          ];
+        }),
+        triggerEvent: jest.fn(() => {
+          return {
+            placementOrders: [
+              {
+                otherPlacementOrderType: 'MOCK_PLACEMENT_OTHER_ORDER_TYPE',
+                placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+                placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
+                placementOrderType: 'Adoption order',
+              },
+            ],
+          };
+        }),
+        addPayment: jest.fn(() => {
+          return {
+            placementOrders: [
+              {
+                otherPlacementOrderType: 'MOCK_PLACEMENT_OTHER_ORDER_TYPE',
+                placementOrderId: 'MOCK_PLACEMENT_ORDER_ID',
+                placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER',
+                placementOrderType: 'Adoption order',
+              },
+            ],
+          };
+        }),
+      };
+      (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
       await controller.post(req, res);
       expect(req.session.errors).toEqual([]);
       expect(req.session.userCase.placementOrders).toEqual([
