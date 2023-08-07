@@ -1,6 +1,6 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
-<form class="form" id="main-form" method="post" action="" novalidate="novalidate">
+<form class="form" id="main-form" method="post" action="" novalidate="novalidate" autocomplete="off">
   <input type="hidden" name="_csrf" id="csrfToken" value="{{ csrfToken }}">
   <input type="hidden" name="locale" id="locale" value="{{ language }}">
     
