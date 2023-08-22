@@ -10,7 +10,7 @@ import { CourtVenue } from './location';
 export async function getCourtList(req: AppRequest): Promise<CourtVenue[]> {
   // Adoption:	ABA4
   const adoptionCourtList = await getCourtVenues();
-  req.session.user;
+  console.log(req.locals.lang);
   /* `${config.get('services.adoptionCourt.code')}`,
     req.session.user,
     req.locals.logger */
