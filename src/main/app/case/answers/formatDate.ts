@@ -8,3 +8,8 @@ export const getFormattedDate = (date: CaseDate | undefined, locale = 'en'): str
   date && !isDateInputInvalid(date)
     ? dayjs(`${date.day}-${date.month}-${date.year}`, 'D-M-YYYY').locale(locale).format('D MMMM YYYY')
     : '';
+
+export const getFormattedDateInSingleDigits = (date: CaseDate | undefined, locale = 'en'): string =>
+  date && !isDateInputInvalid(date)
+    ? dayjs(`${date.day}-${date.month}-${date.year}`, 'D-M-YYYY').locale(locale).format('D-M-YYYY')
+    : '';
