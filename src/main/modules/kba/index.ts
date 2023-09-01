@@ -2,6 +2,7 @@ import { Application, NextFunction, Response } from 'express';
 
 import { getSystemUser } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
+import { getFormattedDateInSingleDigits } from '../../app/case/answers/formatDate';
 import { AppRequest } from '../../app/controller/AppRequest';
 import { getDraftCaseFromStore } from '../../modules/draft-store/draft-store-service';
 import {
@@ -58,9 +59,15 @@ export class KbaMiddleware {
               if (draftStoreUserCaseData) {
                 req.session.userCase = { ...(req.session.userCase || {}), ...draftStoreUserCaseData };
               }
+
+              const childDOBEnteredByLA = getFormattedDateInSingleDigits(
+                req.session.laPortalKba['kbaChildrenDateOfBirth']
+              );
+              const childDOBEnteredByApplicant = getFormattedDateInSingleDigits(
+                req.session.userCase.childrenDateOfBirth
+              );
               if (
-                JSON.stringify(req.session.userCase.childrenDateOfBirth) !==
-                  JSON.stringify(req.session.laPortalKba['kbaChildrenDateOfBirth']) ||
+                childDOBEnteredByApplicant !== childDOBEnteredByLA ||
                 req.session.laPortalKba['kbaChildName']?.trim() !==
                   req.session.userCase.childrenFirstName?.trim() + ' ' + req.session.userCase.childrenLastName?.trim()
               ) {
