@@ -1,4 +1,4 @@
-import { ApplyingWith, YesOrNo } from '../../../app/case/definition';
+import { ApplyingWith } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isEmailValid, isFieldFilledIn, isPhoneNoValid } from '../../../app/form/validation';
@@ -8,9 +8,10 @@ const en = content => ({
   title: 'What are your contact details?',
   line1: 'We need both a contact email and telephone number for you.',
   line2:
-    'We will email you updates and information about your application to adopt. You will only be contacted by telephone if the social worker or court staff need to contact you quickly.',
+    'Some courts will email you updates and information about your application to adopt. You will only be contacted by telephone if the social worker or court staff need to contact you quickly.',
   emailAddress: 'Email address',
   phoneNumber: 'UK phone number',
+  line3: 'The court will send all court orders and notices by post to your home address.',
   applicant1ContactDetailsConsent:
     'The court may want to use your email to serve you court orders. Are you happy to be served court orders by email?',
   contactDetailsConsentNo: 'You will be served all court orders by post.',
@@ -32,11 +33,12 @@ const en = content => ({
 const cy: typeof en = content => ({
   section: content.userCase.applyingWith === ApplyingWith.ALONE ? 'Ceisydd' : 'Ceisydd cyntaf',
   title: 'Beth yw eich manylion cyswllt?',
-  line1: 'Mae arnom angen cyfeiriad e-bost cyswllt a rhif ffôn cyswllt ar eich cyfer.',
+  line1: 'Mae arnom angen e-bost a rhif ffôn i gysylltu â chi.',
   line2:
-    'Byddwn yn anfon diweddariadau a gwybodaeth am eich cais i fabwysiadu trwy e-bost. Cysylltir â chi dros y ffôn dim ond os yw’r gweithiwr cymdeithasol neu staff y llys eisiau cysylltu â chi ar frys.',
+    'Bydd rhai llysoedd yn e-bostio diweddariadau a gwybodaeth ichi am eich cais i fabwysiadu. Dim ond os bydd y gweithiwr cymdeithasol neu staff y llys angen cysylltu â chi ar fyrder y byddant yn eich ffonio.',
   emailAddress: 'Cyfeiriad e-bost',
   phoneNumber: 'Rhif ffôn yn y DU',
+  line3: 'Bydd y llys yn anfon pob hysbysiad a gorchymyn llys drwy’r post i’ch cyfeiriad cartref.',
   applicant1ContactDetailsConsent:
     'Efallai bydd y llys eisiau defnyddio eich cyfeiriad e-bost i gyflwyno gorchmynion llys arnoch, A ydych yn hapus i neuchmynion llys gael eu cyflwyno arnoch drwy e-bost?',
   contactDetailsConsentNo: 'Fe gyflwynir yr holl orchmynion llys arnoch drwy’r post.',
@@ -78,21 +80,10 @@ export const form: FormContent = {
       validator: value => isFieldFilledIn(value) || isPhoneNoValid(value),
     },
     applicant1ContactDetailsConsent: {
-      type: 'radios',
-      classes: 'govuk-radios',
-      label: l => l.applicant1ContactDetailsConsent,
-      section: l => l.section,
-      labelHidden: false,
-      labelSize: 'small',
-      values: [
-        { label: l => l.yes, value: YesOrNo.YES },
-        {
-          label: l => l.no,
-          value: YesOrNo.NO,
-          conditionalText: l => `<p class="govuk-label">${l.contactDetailsConsentNo}</p>`,
-        },
-      ],
-      validator: isFieldFilledIn,
+      type: 'label',
+      classes: 'govuk-input--width-20',
+      label: l => l.line3,
+      labelSize: null,
     },
   },
   submit: {
