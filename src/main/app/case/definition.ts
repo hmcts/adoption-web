@@ -332,6 +332,7 @@ export interface CaseData {
   applicant1AddressCountry: string;
   applicant1AddressPostCode: string;
   applicant1ContactDetails: ContactDetails[];
+  applicant1ContactDetailsConsent: YesOrNo;
   applicant1LanguagePreference?: LanguagePreference;
   applicant1HasReasonableAdjustment: YesOrNo;
   applicant1ReasonableAdjustmentDetails: string;
@@ -352,6 +353,7 @@ export interface CaseData {
   applicant2AddressPostCode: string;
   applicant2AddressSameAsApplicant1: string;
   applicant2ContactDetails: ContactDetails[];
+  applicant2ContactDetailsConsent: YesOrNo;
   applicant2LanguagePreference?: LanguagePreference;
   applicant2HasReasonableAdjustment: YesOrNo;
   applicant2ReasonableAdjustmentDetails: string;
