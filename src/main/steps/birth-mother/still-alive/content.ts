@@ -20,11 +20,14 @@ const en = () => ({
 });
 
 const cy: typeof en = () => ({
-  section: 'Manylion y fam fiolegol',
-  title: 'A yw mam fiolegol y plentyn dal yn fyw?',
+  section: 'Manylion y fam enedigol',
+  title: 'A yw mam enedigol y plentyn dal yn fyw?',
   moreDetails:
-    'Darparwch fwy o fanylion. Er enghraifft, ‘nid oes modd cysylltu â’r fam fiolegol’. Gall eich asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol eich helpu i lenwi’r rhan hon. ',
+    'Darparwch fwy o fanylion. Er enghraifft, ‘nid oes modd cysylltu â’r fam enedigol’. Gall eich asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol eich helpu i lenwi’r rhan hon. ',
   hint: "Os yw’r unigolyn hwn wedi marw, bydd angen i chi ddarparu'r dystysgrif marwolaeth.",
+  yes: 'Ydy',
+  no: 'Nac ydy',
+  notSure: 'Ddim yn siŵr',
   errors: {
     birthMotherStillAlive: {
       required: 'Nodwch a yw’r fam fiolegol yn fyw.',

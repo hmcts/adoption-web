@@ -17,7 +17,7 @@ const en = internationalAddressContent => ({
 
 const cy: typeof en = internationalAddressContent => ({
   section: SECTION_IN_WELSH,
-  title: 'Beth yw cyfeiriad olaf hysbys y tad biolegol?',
+  title: 'Beth yw cyfeiriad olaf hysbys y tad genedigol?',
   errors: {
     birthFatherAddress1: internationalAddressContent.errors.address1,
     birthFatherAddressCountry: internationalAddressContent.errors.addressCountry,

@@ -36,8 +36,8 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y fam fiolegol',
-  title: 'Beth yw cenedligrwydd mam fiolegol y plentyn?',
+  section: 'Manylion y fam enedigol',
+  title: 'Beth yw cenedligrwydd mam enedigol y plentyn?',
   hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
   errors: {
     birthMotherNationality: {

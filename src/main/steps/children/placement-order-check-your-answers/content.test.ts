@@ -19,7 +19,7 @@ const enContent = {
 const cyContent = {
   section: 'Manylion y plentyn',
   title: 'Gorchmynion sydd eisoes mewn lle',
-  orderType: 'Math o neuchymyn',
+  orderType: 'Math o orchymyn',
   orderNumber: 'Rhif cyfresol neu rif yr achos ar y gorchymyn',
   orderCourt: 'Llys',
   orderDate: 'Dyddiad y gorchymyn',

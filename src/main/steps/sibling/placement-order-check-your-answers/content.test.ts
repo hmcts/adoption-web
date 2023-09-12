@@ -33,7 +33,7 @@ const enContent = {
 const cyContent = {
   section: 'Manylion y brawd/chwaer',
   for: 'ar gyfer',
-  orderType: 'Math o neuchymyn',
+  orderType: 'Math o orchymyn',
   orderNumber: 'Rhif cyfresol neu rif yr achos ar y gorchymyn',
   siblingRelation: {
     [SiblingRelationships.SISTER]: 'Chwaer',

@@ -14,8 +14,8 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y tad biolegol',
-  title: 'Beth yw cyfeiriad olaf hysbys y tad biolegol?',
+  section: 'Manylion y tad genedigol',
+  title: 'Beth yw cyfeiriad olaf hysbys y tad genedigol?',
 };
 
 /* eslint-disable @typescript-eslint/ban-types */

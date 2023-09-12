@@ -36,8 +36,8 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y tad biolegol',
-  title: 'Beth yw cenedligrwydd tad biolegol y plentyn?',
+  section: 'Manylion y tad genedigol',
+  title: 'Beth yw cenedligrwydd tad genedigol y plentyn?',
   hint: 'Dewiswch bob opsiwn sy’n berthnasol i chi.',
   errors: {
     birthFatherNationality: {

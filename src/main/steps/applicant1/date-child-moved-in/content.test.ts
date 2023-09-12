@@ -49,7 +49,7 @@ const enContent = {
 const cyContent = {
   section: 'Manylion y cais',
   title: 'Pryd wnaeth y plentyn symud i fyw gyda chi?',
-  hint: 'Nac ydwdwch y dyddiad wnaethon nhw ddechrau byw gyda chi yn barhaus. Er enghraifft, 31 3 2020.',
+  hint: 'Nodwch y dyddiad wnaethon nhw ddechrau byw gyda chi yn barhaus. Er enghraifft, 31 3 2020.',
   warning:
     'Gallwch gychwyn eich cais unrhyw dro, ond gallwch ond cyflwyno’ch cais 10 wythnos ar ôl y dyddiad wnaeth y plentyn ddechrau byw gyda chi’n barhaus. ',
   errors: {

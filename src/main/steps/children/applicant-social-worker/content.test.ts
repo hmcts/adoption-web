@@ -63,7 +63,7 @@ const cyContent = {
   applicantLocalAuthorityLabel: "Enw'r awdurdod lleol",
   applicantLocalAuthorityEmail: 'Cyfeiriad e-bost eich awdurdod lleol',
   applicantLocalAuthorityEmailHint:
-    'Defnyddir hwn i anfon hysbysiad i’r awdurdod lleol i symud eich cais yn eiflaen, felly mae’n bwysig ei fod yn gywir.',
+    'Defnyddir hwn i anfon hysbysiad i’r awdurdod lleol i symud eich cais yn ei flaen, felly mae’n bwysig ei fod yn gywir.',
   applicantLocalAuthorityHint: "Dyma'r awdurdod lleol y mae eich gweithiwr cymdeithasol yn gweithio iddo.",
   errors: {
     applicantSocialWorkerName: {

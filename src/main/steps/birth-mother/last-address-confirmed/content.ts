@@ -23,8 +23,8 @@ const en = () => ({
 });
 
 const cy = () => ({
-  section: 'Manylion y fam fiolegol',
-  title: "Pryd gafodd y dyddiad diwethaf i'r cyfeiriad yma gael ei gadarnhau?",
+  section: 'Manylion y fam enedigol',
+  title: 'Beth oedd y dyddiad gafodd y cyfeiriad hwn ei gadarnhau ddiwethaf?',
   errors: {
     birthMotherLastAddressDate: {
       required: 'Nodwch y dyddiad',

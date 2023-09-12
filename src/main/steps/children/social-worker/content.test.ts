@@ -62,7 +62,7 @@ const cyContent = {
   childLocalAuthorityLabel: 'Awdurdod lleol y plentyn',
   childLocalAuthorityEmail: 'Cyfeiriad e-bost yr awdurdod lleol',
   childLocalAuthorityEmailHint:
-    'Defnyddir hwn i anfon hysbysiad i’r awdurdod lleol i symud eich cais yn eiflaen, felly mae’n bwysig ei fod yn gywir.',
+    'Defnyddir hwn i anfon hysbysiad i’r awdurdod lleol i symud eich cais yn ei flaen, felly mae’n bwysig ei fod yn gywir.',
   childLocalAuthorityHint:
     "Dyma'r awdurdod lleol sydd â chyfrifoldeb rhiant dros y plentyn. Gall fod yn wahanol i'ch awdurdod lleol eich hun. Bydd wedi’i enwi ar y gorchymyn lleoli os nad ydych yn siŵr.",
   errors: {

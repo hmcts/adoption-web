@@ -18,8 +18,10 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y tad biolegol',
-  title: 'A yw enw’r tad biolegol ar y dystysgrif geni?',
+  section: 'Manylion y tad genedigol',
+  title: 'A yw enw’r tad genedigol ar y dystysgrif geni?',
+  yes: 'Ydy',
+  no: 'Nac ydy',
   errors: {
     birthFatherNameOnCertificate: {
       required: 'Nodwch a yw enw’r tad biolegol yw ar y dystysgrif geni',

@@ -30,7 +30,7 @@ const cyContent = {
   section: 'Manylion y plentyn',
   title: 'Beth fydd enw llawn y plentyn ar ôl mabwysiadu?',
   line1:
-    'Bydd hwn wedi’i nodi ar y dystysgrif geni, felly sicrhewch bod eu henwau wedi’u nodi mor gywir ac sy’n bosib.',
+    'Os ydych yn newid enw’r plentyn, dylech nodi pob enw yma mor gywir â phosibl. Bydd hwn wedi’i nodi ar y dystysgrif geni, felly sicrhewch bod eu henwau wedi’u nodi mor gywir ac sy’n bosib.',
   firstName: 'Enwau cyntaf',
   firstNameHint: '(Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol)',
   lastName: 'Cyfenwau',

@@ -16,8 +16,8 @@ const en = () => ({
 });
 
 const cy: typeof en = () => ({
-  section: 'Manylion y fam fiolegol',
-  title: 'Beth yw enw llawn mam fiolegol y plentyn?',
+  section: 'Manylion y fam enedigol',
+  title: 'Beth yw enw llawn mam enedigol y plentyn?',
   errors: {
     birthMotherFirstNames: {
       required: 'Nac ydwdwch eu henw(au) cyntaf',
