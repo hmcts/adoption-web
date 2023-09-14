@@ -23,6 +23,8 @@ const cy: typeof en = () => ({
   under21Yes: 'Rhaid i chi fod yn 21 oed o leiaf i fabwysiadu plentyn. Mae hyn yn cynnwys unrhyw geisydd arall.',
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
   continue: 'Parhau',
+  yes: 'Ydy',
+  no: 'Nac ydy',
   errors: {
     under21Eligible: {
       required: "Nodwch os ydych chi, a'r ceisydd arall os yn berthnasol, yn 21 oed neu'n hŷn.",

@@ -112,8 +112,8 @@ const cy: typeof en = () => ({
   },
   taskListItems: {
     birthCertificate: 'Manylion y dystysgrif geni',
-    birthMother: 'Manylion y fam fiolegol',
-    birthFather: 'Manylion y tad biolegol',
+    birthMother: 'Manylion y fam enedigol',
+    birthFather: 'Manylion y tad genedigol',
     otherParent: 'Unigolyn arall sydd â chyfrifoldeb rhiant',
     placementAndCourtOrders: 'Gorchmynion llys a lleoli',
     siblingCourtOrders: 'Manylion gorchymyn llys brodyr/chwiorydd',

@@ -25,6 +25,8 @@ const cy: typeof en = () => ({
   marriedYes: 'Gallwch ond wneud cais i fabwysiadu plentyn os nad ydynt wedi priodi ac ddim mewn partneriaeth sifil.',
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
   continue: 'Parhau',
+  yes: 'Ydy',
+  no: 'Nac ydy',
   errors: {
     marriedEligible: {
       required: "Nodwch a yw'r plentyn yn briod neu mewn partneriaeth sifil.",

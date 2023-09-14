@@ -245,8 +245,8 @@ const cyContent: typeof enContent = {
   },
   sectionTitles: {
     childDetails: 'Manylion y plentyn',
-    birthMotherDetails: 'Manylion y fam fiolegol',
-    birthFatherDetails: 'Manylion y tad biolegol',
+    birthMotherDetails: 'Manylion y fam enedigol',
+    birthFatherDetails: 'Manylion y tad genedigol',
     otherParentDetails: 'Manylion person arall',
     childPlacementAndCourtOrders: 'Lleoliad y plentyn a gorchmynion llys',
     siblingCourtOrders: 'Gorchmynion llys brodyr/chwiorydd',

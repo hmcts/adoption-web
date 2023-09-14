@@ -37,8 +37,8 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y fam fiolegol',
-  title: "Pryd gafodd y dyddiad diwethaf i'r cyfeiriad yma gael ei gadarnhau?",
+  section: 'Manylion y fam enedigol',
+  title: 'Beth oedd y dyddiad gafodd y cyfeiriad hwn ei gadarnhau ddiwethaf?',
   errors: {
     birthMotherLastAddressDate: {
       required: 'Nodwch y dyddiad',
@@ -124,7 +124,7 @@ describe('birthMotherLastAddressDate > content', () => {
     const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);
-    expect(generatedContent1.section).toBe('Manylion y fam fiolegol');
+    expect(generatedContent1.section).toBe('Manylion y fam enedigol');
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

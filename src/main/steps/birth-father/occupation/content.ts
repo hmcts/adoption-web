@@ -13,8 +13,8 @@ const en = () => ({
 });
 
 const cy: typeof en = () => ({
-  section: 'Manylion y tad biolegol',
-  title: 'Beth yw galwedigaeth tad biolegol y plentyn?',
+  section: 'Manylion y tad genedigol',
+  title: 'Beth yw galwedigaeth tad genedigol y plentyn?',
   errors: {
     birthFatherOccupation: {
       required: 'Nac ydwdwch alwedigaeth',

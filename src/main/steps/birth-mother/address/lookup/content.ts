@@ -17,8 +17,8 @@ const en = addressLookupContent => ({
 });
 
 const cy: typeof en = addressLookupContent => ({
-  section: 'Manylion y fam fiolegol',
-  title: 'Beth yw cyfeiriad olaf hysbys y fam fiolegol?',
+  section: 'Manylion y fam enedigol',
+  title: 'Beth yw cyfeiriad olaf hysbys y fam enedigol?',
   line1: null,
   errors: {
     birthMotherAddressPostcode: addressLookupContent.errors.addressPostcode,

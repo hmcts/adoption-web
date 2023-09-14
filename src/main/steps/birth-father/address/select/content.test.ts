@@ -17,8 +17,8 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y tad biolegol',
-  title: 'Beth yw cyfeiriad olaf hysbys y tad biolegol?',
+  section: 'Manylion y tad genedigol',
+  title: 'Beth yw cyfeiriad olaf hysbys y tad genedigol?',
   changePostCodeUrl: BIRTH_FATHER_ADDRESS_LOOKUP,
   cantFindAddressUrl: BIRTH_FATHER_MANUAL_ADDRESS,
 };

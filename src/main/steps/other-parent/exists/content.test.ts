@@ -23,8 +23,8 @@ const enContent = {
 const cyContent = {
   section: 'Manylion person arall',
   title: 'A oes unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn?',
-  one: 'Ydw',
-  two: 'Nac ydw',
+  one: 'Oes',
+  two: 'Nac oes',
   errors: {
     otherParentExists: {
       required: 'Nodwch a oes unigolyn arall sydd â chyfrifoldeb rhiant dros y plentyn',

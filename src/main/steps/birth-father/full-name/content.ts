@@ -18,7 +18,7 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  title: 'Beth yw enw llawn tad biolegol y plentyn?',
+  title: 'Beth yw enw llawn tad genedigol y plentyn?',
   errors: {
     birthFatherFirstNames: {
       required: 'Nac ydwdwch eu henw(au) cyntaf',
