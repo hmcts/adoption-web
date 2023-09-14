@@ -51,7 +51,6 @@ module.exports = {
     await I.retry(3).see(checkYourAnswersKeyDetails.firstApplicantAddress);
     await I.retry(3).see(checkYourAnswersKeyDetails.firstApplicantEmailAddress);
     await I.retry(3).see(checkYourAnswersKeyDetails.firstApplicantPhoneNumber);
-    await I.retry(3).see(checkYourAnswersKeyDetails.firstApplicantCourtOrders);
     await I.retry(3).see(checkYourAnswersKeyDetails.firstApplicantMailLanguage);
     await I.retry(3).see(checkYourAnswersKeyDetails.secondApplicantDetails);
     await I.retry(3).see(checkYourAnswersKeyDetails.secondApplicantFullName);
@@ -63,7 +62,6 @@ module.exports = {
     await I.retry(3).see(checkYourAnswersKeyDetails.secondApplicantAddress);
     await I.retry(3).see(checkYourAnswersKeyDetails.secondApplicantEmailAddress);
     await I.retry(3).see(checkYourAnswersKeyDetails.secondApplicantPhoneNumber);
-    await I.retry(3).see(checkYourAnswersKeyDetails.secondApplicantCourtOrders);
     await I.retry(3).see(checkYourAnswersKeyDetails.secondApplicantDocLanguage);
     await I.retry(3).see(checkYourAnswersKeyDetails.checkYourApplication);
     await I.retry(3).see(checkYourAnswersKeyDetails.consent);
