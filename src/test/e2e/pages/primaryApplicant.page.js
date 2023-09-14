@@ -6,7 +6,6 @@ module.exports = {
     postcodeLookup: 'input[id$="applicant1AddressPostcode"]',
     addressList: 'select[id$="applicant1SelectAddress"]',
     findAddressButton: 'Find address',
-    applicant1ContactDetailsConsent: 'input[id$="applicant1ContactDetailsConsent"]',
     applicant1EmailAddress: 'input[id$="applicant1EmailAddress"]',
     applicant1PhoneNumber: 'input[id$="applicant1PhoneNumber"]',
     applicant1LanguageEnglish: 'input[id$="applicant1LanguagePreference"]',
@@ -30,8 +29,6 @@ module.exports = {
       primaryApplicantDetails.primaryApplicantEmailAddress
     );
     await I.retry(3).fillField(this.fields.applicant1PhoneNumber, primaryApplicantDetails.primaryApplicantPhoneNumber);
-    await I.wait(4);
-    await I.retry(3).click(this.fields.applicant1ContactDetailsConsent);
     await I.wait(4);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
@@ -74,7 +71,6 @@ module.exports = {
     );
     await I.retry(3).fillField(this.fields.applicant1PhoneNumber, primaryApplicantDetails.primaryApplicantPhoneNumber);
     await I.wait(4);
-    await I.retry(3).click(this.fields.applicant1ContactDetailsConsent);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText('What language do you want to receive emails and documents in?');

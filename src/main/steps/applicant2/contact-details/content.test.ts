@@ -11,9 +11,8 @@ jest.mock('../../../app/form/validation', () => ({
 }));
 
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
-import { ApplyingWith, YesOrNo } from '../../../app/case/definition';
-import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
-import { isFieldFilledIn } from '../../../app/form/validation';
+import { ApplyingWith } from '../../../app/case/definition';
+import { FormContent, FormFields } from '../../../app/form/Form';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
@@ -23,7 +22,8 @@ const enContent = {
   title: 'What are your contact details?',
   line1: 'We need both a contact email and telephone number for you.',
   line2:
-    'We will email you updates and information about your application to adopt. You will only be contacted by telephone if the social worker or court staff need to contact you quickly.',
+    'Some courts will email you updates and information about your application to adopt. You will only be contacted by telephone if the social worker or court staff need to contact you quickly.',
+  line3: 'The court will send all court orders and notices by post to your home address.',
   emailAddress: 'Email address',
   phoneNumber: 'UK phone number',
   applicant2ContactDetailsConsent:
@@ -47,9 +47,10 @@ const enContent = {
 const cyContent = {
   section: 'Ail geisydd',
   title: 'Beth yw eich manylion cyswllt?',
-  line1: 'Mae arnom angen cyfeiriad e-bost cyswllt a rhif ffôn cyswllt ar eich cyfer.',
+  line1: 'Mae arnom angen e-bost a rhif ffôn i gysylltu â chi.',
   line2:
-    'Byddwn yn anfon diweddariadau a gwybodaeth am eich cais i fabwysiadu trwy e-bost. Cysylltir â chi dros y ffôn dim ond os yw’r gweithiwr cymdeithasol neu staff y llys eisiau cysylltu â chi ar frys.',
+    'Bydd rhai llysoedd yn e-bostio diweddariadau a gwybodaeth ichi am eich cais i fabwysiadu. Dim ond os bydd y gweithiwr cymdeithasol neu staff y llys angen cysylltu â chi ar fyrder y byddant yn eich ffonio.',
+  line3: 'Bydd y llys yn anfon pob hysbysiad a gorchymyn llys drwy’r post i’ch cyfeiriad cartref.',
   emailAddress: 'Cyfeiriad e-bost',
   phoneNumber: 'Rhif ffôn yn y DU',
   applicant2ContactDetailsConsent:
@@ -96,23 +97,10 @@ describe('applicant2> contact-details > content', () => {
     const applicant2EmailAddressField = fields.applicant2EmailAddress as FormFields;
     const applicant2PhoneNumberField = fields.applicant2PhoneNumber as FormFields;
 
-    expect(applicant2ContactDetailsConsentField.type).toBe('radios');
-    expect(applicant2ContactDetailsConsentField.classes).toBe('govuk-radios');
+    expect(applicant2ContactDetailsConsentField.type).toBe('label');
+    expect(applicant2ContactDetailsConsentField.classes).toBe('govuk-input--width-20');
 
-    const applicant2ContactDetailsConsentOptions = fields.applicant2ContactDetailsConsent as FormOptions;
-    expect(((fields.applicant2ContactDetailsConsent as FormInput).label as Function)(generatedContent)).toBe(
-      enContent.applicant2ContactDetailsConsent
-    );
-    expect(((fields.applicant2ContactDetailsConsent as FormInput).section as Function)(generatedContent)).toBe(
-      enContent.section
-    );
-    expect((applicant2ContactDetailsConsentOptions.values[0].label as Function)({ yes: 'Yes' })).toBe(YesOrNo.YES);
-    expect((applicant2ContactDetailsConsentOptions.values[1].label as Function)({ no: 'No' })).toBe(YesOrNo.NO);
     // eslint-disable-next-line @typescript-eslint/ban-types
-    expect((applicant2ContactDetailsConsentOptions.values[1].conditionalText as Function)(generatedContent)).toBe(
-      '<p class="govuk-label">You will be served all court orders by post.</p>'
-    );
-    expect(applicant2ContactDetailsConsentField.validator as Function).toBe(isFieldFilledIn);
 
     expect(applicant2EmailAddressField.type).toBe('text');
     expect(applicant2EmailAddressField.classes).toBe('govuk-input--width-20');
