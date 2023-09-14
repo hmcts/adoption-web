@@ -14,8 +14,8 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y fam fiolegol',
-  title: 'Beth yw cyfeiriad olaf hysbys y fam fiolegol?',
+  section: 'Manylion y fam enedigol',
+  title: 'Beth yw cyfeiriad olaf hysbys y fam enedigol?',
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

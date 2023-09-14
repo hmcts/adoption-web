@@ -65,7 +65,7 @@ const cyContent = {
     'Gwnewch yn siŵr bod y llun neu’r sgan yn dangos y ddogfen gyfan. Gwiriwch eich bod yn gallu darllen y testun i gyd cyn llwytho’r ffeil. Os na fydd staff y llys yn gallu ei ddarllen, gall gael ei wrthod.',
   infoTakePhoto: 'Gallwch dynnu llun gyda’ch ffôn a’i lwytho.',
   infoBullet1: 'tystysgrif geni lawn y plentyn',
-  infoBullet2: 'tystysgrifau marwolaeth y rhieni biolegol, os yw’n briodol',
+  infoBullet2: 'tystysgrifau marwolaeth y rhieni genedigol, os yw’n briodol',
   infoBullet3:
     'unrhyw dystysgrifau mabwysiadu neu orchmynion llys blaenorol ar gyfer y plentyn neu frodyr a chwiorydd y plentyn',
   infoBullet4: 'unrhyw dystiolaeth ychwanegol rydych chi’n teimlo sy’n berthnasol megis cytundebau cynhaliaeth',

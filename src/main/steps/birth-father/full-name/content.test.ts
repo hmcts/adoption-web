@@ -21,8 +21,8 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y tad biolegol',
-  title: 'Beth yw enw llawn tad biolegol y plentyn?',
+  section: 'Manylion y tad genedigol',
+  title: 'Beth yw enw llawn tad genedigol y plentyn?',
   errors: {
     birthFatherFirstNames: {
       required: 'Nac ydwdwch eu henw(au) cyntaf',

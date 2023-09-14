@@ -37,7 +37,7 @@ const cy: typeof en = ({ userCase }: CommonContent) => {
   return {
     section,
     title: 'Beth yw eich galwedigaeth?',
-    hint: 'Nodwch eich galwedigaeth yn llawn. Er enghraifft, ‘Athro Ysgol Uwchradd’ yn hytrach na ‘Athro’ yn unig. Os ydych yn hunangyflogedig, dywedwch hynny. Er enghraifft, ‘Saer hunangyflogedig.’',
+    hint: 'Nodwch eich galwedigaeth yn llawn. Er enghraifft, ‘Athro Ysgol Uwchradd’ yn hytrach nac ‘Athro’ yn unig. Os ydych yn hunangyflogedig, dywedwch hynny. Er enghraifft, ‘Saer hunangyflogedig.’',
     warningText: {
       text: 'Bydd yr wybodaeth hon yn ymddangos ar y dystysgrif mabwysiadu.',
       iconFallbackText: 'Rhybudd',

@@ -19,7 +19,7 @@ const en = selectAddressContent => ({
 
 const cy = selectAddressContent => ({
   section: SECTION_IN_WELSH,
-  title: 'Beth yw cyfeiriad olaf hysbys y tad biolegol?',
+  title: 'Beth yw cyfeiriad olaf hysbys y tad genedigol?',
   errors: {
     birthFatherSelectAddress: selectAddressContent.errors.selectAddress,
   },

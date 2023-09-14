@@ -82,6 +82,8 @@ const cy: typeof en = content => {
         required: 'Dewiswch ateb os gwelwch yn dda',
       },
     },
+    yes: 'Ydw',
+    no: 'Nac ydw',
   };
 
   const placementOrderText = getPlacementOrderType(content.userCase);

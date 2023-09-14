@@ -38,7 +38,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Manylion person arall',
-  title: "Pryd gafodd y dyddiad diwethaf i'r cyfeiriad yma gael ei gadarnhau?",
+  title: 'Beth oedd y dyddiad gafodd y cyfeiriad hwn ei gadarnhau ddiwethaf?',
   errors: {
     otherParentLastAddressDate: {
       required: 'Nodwch y dyddiad',

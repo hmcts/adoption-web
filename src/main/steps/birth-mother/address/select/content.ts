@@ -18,8 +18,8 @@ const en = selectAddressContent => ({
 });
 
 const cy: typeof en = selectAddressContent => ({
-  section: 'Manylion y fam fiolegol',
-  title: 'Beth yw cyfeiriad olaf hysbys y fam fiolegol?',
+  section: 'Manylion y fam enedigol',
+  title: 'Beth yw cyfeiriad olaf hysbys y fam enedigol?',
   line1: null,
   errors: {
     birthMotherSelectAddress: selectAddressContent.errors.selectAddress,

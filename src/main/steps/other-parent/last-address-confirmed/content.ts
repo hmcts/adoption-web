@@ -25,7 +25,7 @@ const en = () => ({
 
 const cy = () => ({
   section: SECTION_IN_WELSH,
-  title: "Pryd gafodd y dyddiad diwethaf i'r cyfeiriad yma gael ei gadarnhau?",
+  title: 'Beth oedd y dyddiad gafodd y cyfeiriad hwn ei gadarnhau ddiwethaf?',
   errors: {
     otherParentLastAddressDate: {
       required: 'Nodwch y dyddiad',

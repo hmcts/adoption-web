@@ -22,10 +22,13 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: SECTION_IN_WELSH,
-  title: 'A yw tad biolegol y plentyn dal yn fyw?',
+  title: 'A yw tad genedigol y plentyn dal yn fyw?',
   moreDetails:
-    'Darparwch fwy o fanylion. Er enghraifft, ‘nid oes modd cysylltu â’r tad biolegol’. Gall eich asiantaeth fabwysiadu neu eich gweithiwr cymdeithasol eich helpu i lenwi’r rhan hon.',
+    'Darparwch fwy o fanylion. Er enghraifft, ‘nid oes modd cysylltu â’r tad genedigol’. Gall eich asiantaeth fabwysiadu neu eich gweithiwr cymdeithasol eich helpu i lenwi’r rhan hon.',
   hint: "Os yw’r unigolyn hwn wedi marw, bydd angen i chi ddarparu'r dystysgrif marwolaeth.",
+  yes: 'Oes',
+  no: 'Nac oes',
+  notSure: 'Ddim yn siŵr',
   errors: {
     birthFatherStillAlive: {
       required: 'Nodwch a yw’r tad biolegol yn fyw',
