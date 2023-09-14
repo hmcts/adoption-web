@@ -24,8 +24,8 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y tad biolegol',
-  title: 'A oes gennych gyfeiriad olaf hysbys y tad biolegol?',
+  section: 'Manylion y tad genedigol',
+  title: 'A oes gennych gyfeiriad olaf hysbys y tad genedigol?',
   moreDetails: 'Rhowch reswm pam bod y cyfeiriad yn anhysbys, er enghraifft ‘dim cyfeiriad parhaol’.',
   errors: {
     birthFatherAddressKnown: {

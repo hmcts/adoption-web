@@ -108,7 +108,7 @@ const cy: typeof en = content => {
     section: 'Manylion y brawd/chwaer',
     for: 'ar gyfer',
     relationship: 'Perthynas',
-    orderType: 'Math o neuchymyn',
+    orderType: 'Math o orchymyn',
     orderNumber: 'Rhif cyfresol neu rif yr achos ar y gorchymyn',
     change: 'Newid',
     continue: 'Parhau',

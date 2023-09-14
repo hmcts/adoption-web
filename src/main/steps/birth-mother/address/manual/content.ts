@@ -18,8 +18,8 @@ const en = manualAddressContent => ({
 });
 
 const cy: typeof en = manualAddressContent => ({
-  section: 'Manylion y fam fiolegol',
-  title: 'Beth yw cyfeiriad olaf hysbys y fam fiolegol?',
+  section: 'Manylion y fam enedigol',
+  title: 'Beth yw cyfeiriad olaf hysbys y fam enedigol?',
   errors: {
     birthMotherAddress1: manualAddressContent.errors.address1,
     birthMotherAddressTown: manualAddressContent.errors.addressTown,

@@ -18,8 +18,8 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y fam fiolegol',
-  label: 'Beth yw galwedigaeth mam fiolegol y plentyn?',
+  section: 'Manylion y fam enedigol',
+  label: 'Beth yw galwedigaeth mam enedigol y plentyn?',
   errors: {
     birthMotherOccupation: {
       required: 'Nac ydwdwch alwedigaeth',

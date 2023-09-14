@@ -37,8 +37,8 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y tad biolegol',
-  title: "Pryd gafodd y dyddiad diwethaf i'r cyfeiriad yma gael ei gadarnhau?",
+  section: 'Manylion y tad genedigol',
+  title: 'Beth oedd y dyddiad gafodd y cyfeiriad hwn ei gadarnhau ddiwethaf?',
   errors: {
     birthFatherLastAddressDate: {
       required: 'Nodwch y dyddiad diwethaf y cafwyd cadarnhad o gyfeiriad y tad biolegol',
@@ -124,7 +124,7 @@ describe('birthFatherLastAddressDate > content', () => {
     const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);
-    expect(generatedContent1.section).toBe('Manylion y tad biolegol');
+    expect(generatedContent1.section).toBe('Manylion y tad genedigol');
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

@@ -21,6 +21,8 @@ const cyContent = {
   section: 'Manylion y cais',
   title: 'Ydych chi’n gwneud cais i fabwysiadu mwy nag un plentyn?',
   continue: 'Parhau',
+  yes: 'Ydw',
+  no: 'Nac ydw',
   errors: {
     multipleChildrenEligible: {
       required: 'Dewiswch a ydych chi’n gwneud cais i fabwysiadu mwy nag un plentyn',

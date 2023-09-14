@@ -46,8 +46,8 @@ const cyContent = {
   heading2: 'Beth fyddwch chi ei angen',
   line6: "Er mwyn llenwi'r cais a'i gyflwyno i'r llys byddwch angen:",
   line7: 'tystysgrif geni llawn y plentyn',
-  line8: "tystysgrifau marwolaeth y rhieni biolegol (os yw'n briodol)",
-  line9: 'cyfeiriadau hysbys olaf y rhieni biolegol',
+  line8: "tystysgrifau marwolaeth y rhieni genedigol (os yw'n briodol)",
+  line9: 'cyfeiriadau hysbys olaf y rhieni genedigol',
   line10: 'Rhaid bod tystysgrifau wedi’u hardystio.',
   line11: 'Gallwch hefyd ddarparu tystiolaeth ychwanegol fel:',
   line12: 'gorchymyn lleoli wedi’i selio neu ei ardystio ar gyfer y plentyn',
@@ -55,7 +55,7 @@ const cyContent = {
   line14: 'Atodiad A (os yw ar gael)',
   line15: 'cytundebau cynnal neu ddyfarniadau',
   line16:
-    "Gofynnir cwestiynau i chi am rieni biolegol a brodyr a chwiorydd y plentyn. Gallwch adolygu eich atebion i'r cwestiynau hyn cyn i chi gyflwyno'r cais.",
+    "Gofynnir cwestiynau i chi am rieni genedigol a brodyr a chwiorydd y plentyn. Gallwch adolygu eich atebion i'r cwestiynau hyn cyn i chi gyflwyno'r cais.",
   heading3: "Llenwi eich ymateb i'r cais",
   line17:
     "Gall unrhyw aelod o'ch tîm gael mynediad i’r cais ac ychwanegu gwybodaeth. Dylech nodi, os bydd dau unigolyn yn cael mynediad i’r cais ar yr un pryd, y gall pwy bynnag sy’n ei gadw ddiystyru gwybodaeth a roddir gan yr unigolyn arall.",

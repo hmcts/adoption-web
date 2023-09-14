@@ -24,6 +24,8 @@ const cy: typeof en = () => ({
   under18No: 'Gallwch ond mabwysiadu plentyn os ydynt dan 18 oed ar y dyddiad mae eich cais yn cael ei gyflwyno.',
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
   continue: 'Parhau',
+  yes: 'Bydd',
+  no: 'Na fydd',
   errors: {
     under18Eligible: {
       required: 'Nodwch a fydd y plentyn o dan 18 oed ar y dyddiad y byddwch yn cyflwyno eich cais.',

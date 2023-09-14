@@ -49,8 +49,8 @@ const cyContent = {
   applicant1IBelieveApplicationIsTrue:
     'Rwyf i, y ceisydd cyntaf, yn credu bod y ffeithiau a nodir yn y ffurflen hon ac unrhyw ddogfennau ychwanegol yn wir.',
   applicant2IBelieveApplicationIsTrue: 'Fe’m hawdurdodir gan yr ail geisydd i lofnodi’r datganiad hwn.',
-  applicant1SotFullName: 'Nac ydwdwch eich enw llawn',
-  applicant2SotFullName: 'Nac ydwdwch enw llawn yr ail geisydd (os yw’n berthnasol)',
+  applicant1SotFullName: 'Nodwch eich enw llawn',
+  applicant2SotFullName: 'Nodwch enw llawn yr ail geisydd (os yw’n berthnasol)',
   confirm: 'Cadarnhau a thalu',
   errors: {
     applicant1IBelieveApplicationIsTrue: {
