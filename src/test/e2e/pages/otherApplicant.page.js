@@ -8,7 +8,6 @@ module.exports = {
     addressList: 'select[id$="applicant2SelectAddress"]',
     findAddressButton: 'Find address',
     applicant2EmailAddress: 'input[id$="applicant2EmailAddress"]',
-    applicant2ContactDetailsConsent: 'input[id$="applicant2ContactDetailsConsent"]',
     applicant1PhoneNumber: 'input[id$="applicant2PhoneNumber"]',
     applicant2LanguageEnglish: 'input[id$="applicant2LanguagePreference"]',
     applicant2LanguageWelsh: 'input[id$="applicant2LanguagePreference-2ss"]',
@@ -31,7 +30,6 @@ module.exports = {
     await I.wait(4);
     await I.retry(3).fillField(this.fields.applicant2EmailAddress, secondApplicantDetails.secondApplicantEmailAddress);
     await I.retry(3).fillField(this.fields.applicant1PhoneNumber, secondApplicantDetails.secondApplicantPhoneNumber);
-    await I.retry(3).click(this.fields.applicant2ContactDetailsConsent);
     await I.wait(4);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
@@ -76,7 +74,6 @@ module.exports = {
     await I.retry(3).waitForText('Please answer the question', 30);
     await I.retry(3).fillField(this.fields.applicant2EmailAddress, secondApplicantDetails.secondApplicantEmailAddress);
     await I.retry(3).fillField(this.fields.applicant1PhoneNumber, secondApplicantDetails.secondApplicantPhoneNumber);
-    await I.retry(3).click(this.fields.applicant2ContactDetailsConsent);
     await I.wait(4);
     await I.retry(3).click('Save and continue');
     await I.wait(4);

@@ -45,7 +45,6 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant1AddressCounty: 'applicant1AddressCountry',
   applicant1AddressPostcode: 'applicant1AddressPostCode',
   applicant1ContactDetails: 'applicant1ContactDetails',
-  applicant1ContactDetailsConsent: 'applicant1ContactDetailsConsent',
   applicant1LanguagePreference: 'applicant1LanguagePreference',
   applicant1HasReasonableAdjustment: 'applicant1HasReasonableAdjustment',
   applicant1ReasonableAdjustmentDetails: 'applicant1ReasonableAdjustmentDetails',
@@ -65,7 +64,6 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant2AddressPostcode: 'applicant2AddressPostCode',
   applicant2AddressSameAsApplicant1: 'applicant2AddressSameAsApplicant1',
   applicant2ContactDetails: 'applicant2ContactDetails',
-  applicant2ContactDetailsConsent: 'applicant2ContactDetailsConsent',
   applicant2LanguagePreference: 'applicant2LanguagePreference',
   applicant2HasReasonableAdjustment: 'applicant2HasReasonableAdjustment',
   applicant2ReasonableAdjustmentDetails: 'applicant2ReasonableAdjustmentDetails',
@@ -251,7 +249,7 @@ export interface Case {
   applicant1AddressCounty?: string;
   applicant1AddressPostcode?: string;
   applicant1ContactDetails?: ContactDetails[];
-  applicant1ContactDetailsConsent?: YesOrNo;
+  applicant1ContactDetailsConsent?: string;
   applicant1LanguagePreference?: LanguagePreference;
   applicant1HasReasonableAdjustment?: YesOrNo;
   applicant1ReasonableAdjustmentDetails?: string;
@@ -275,7 +273,7 @@ export interface Case {
   applicant2AddressCounty?: string;
   applicant2AddressPostcode?: string;
   applicant2ContactDetails?: ContactDetails[];
-  applicant2ContactDetailsConsent?: YesOrNo;
+  applicant2ContactDetailsConsent?: string;
   applicant2LanguagePreference?: LanguagePreference;
   applicant2HasReasonableAdjustment?: YesOrNo;
   applicant2ReasonableAdjustmentDetails?: string;
