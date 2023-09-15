@@ -170,5 +170,5 @@
     "tsconfig-paths/json5": ">=2.2.2",
     "cookiejar": ">=2.1.4"
   },
-  "packageManager": "yarn@3.6.0"
+  "packageManager": "yarn@3.6.3"
 }
