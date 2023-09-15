@@ -2705,15 +2705,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/connect-redis@npm:^0.0.18":
-  version: 0.0.18
-  resolution: "@types/connect-redis@npm:0.0.18"
+"@types/connect-redis@npm:^0.0.21":
+  version: 0.0.21
+  resolution: "@types/connect-redis@npm:0.0.21"
   dependencies:
     "@types/express": "*"
     "@types/express-session": "*"
-    "@types/ioredis": "*"
     "@types/redis": ^2.8.0
-  checksum: d65f0e4686cf482c3d580ebaba49817102578ed7cec1dd754132b097b320c7d1baae6b0e47a653b282b177d96807306fd59bb3b1af0a3875e6177fe4fb6d161b
+    ioredis: ^5.3.0
+  checksum: edd9158f37b2e6aed30946b6e166a311cb7c4bd12dcdd3b41b9a9e1176bf48a59d601be980d11c0e04aab817dd71172a57a49b0d3a95cd0f1cdbdd474c2eabb1
   languageName: node
   linkType: hard
 
@@ -2875,15 +2875,6 @@ __metadata:
   version: 4.0.1
   resolution: "@types/http-cache-semantics@npm:4.0.1"
   checksum: 1048aacf627829f0d5f00184e16548205cd9f964bf0841c29b36bc504509230c40bc57c39778703a1c965a6f5b416ae2cbf4c1d4589c889d2838dd9dbfccf6e9
-  languageName: node
-  linkType: hard
-
-"@types/ioredis@npm:*":
-  version: 4.28.1
-  resolution: "@types/ioredis@npm:4.28.1"
-  dependencies:
-    "@types/node": "*"
-  checksum: 2d5adc6ce3078a0dc59911b6e50214fbcedf7bf139b6fde8e466132d8f15c90b3f55ecbd1d16e93541dc0abaa666ce924608d6e34ed4d0ee9903aab51d1c9900
   languageName: node
   linkType: hard
 
@@ -3911,7 +3902,7 @@ __metadata:
     "@pact-foundation/pact": ^9.17.3
     "@types/autobind-decorator": ^2.1.0
     "@types/config": ^0.0.41
-    "@types/connect-redis": ^0.0.18
+    "@types/connect-redis": ^0.0.21
     "@types/cookie-parser": ^1.4.3
     "@types/copy-webpack-plugin": ^10.1.0
     "@types/csurf": ^1.11.2
@@ -6265,7 +6256,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"denque@npm:^2.0.1":
+"denque@npm:^2.0.1, denque@npm:^2.1.0":
   version: 2.1.0
   resolution: "denque@npm:2.1.0"
   checksum: 1d4ae1d05e59ac3a3481e7b478293f4b4c813819342273f3d5b826c7ffa9753c520919ba264f377e09108d24ec6cf0ec0ac729a5686cbb8f32d797126c5dae74
@@ -8698,6 +8689,23 @@ __metadata:
     redis-parser: ^3.0.0
     standard-as-callback: ^2.1.0
   checksum: 8d650326063de4e37ec7ab38f00dde555284d9fc99fcbe698a4b0d65214920b8cb0f9483c0390fef8d81e9ee26e65380c93113cdedee184206815787bf88cec7
+  languageName: node
+  linkType: hard
+
+"ioredis@npm:^5.3.0":
+  version: 5.3.2
+  resolution: "ioredis@npm:5.3.2"
+  dependencies:
+    "@ioredis/commands": ^1.1.1
+    cluster-key-slot: ^1.1.0
+    debug: ^4.3.4
+    denque: ^2.1.0
+    lodash.defaults: ^4.2.0
+    lodash.isarguments: ^3.1.0
+    redis-errors: ^1.2.0
+    redis-parser: ^3.0.0
+    standard-as-callback: ^2.1.0
+  checksum: 9a23559133e862a768778301efb68ae8c2af3c33562174b54a4c2d6574b976e85c75a4c34857991af733e35c48faf4c356e7daa8fb0a3543d85ff1768c8754bc
   languageName: node
   linkType: hard
 
