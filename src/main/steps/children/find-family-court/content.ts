@@ -39,15 +39,15 @@ const en = content => ({
 const cy: typeof en = content => ({
   section: 'Manylion y plentyn',
   title: 'Dewiswch lys teulu',
-  label: 'Nac ydwdwch enw llawn y llys',
+  label: 'Nodwch enw llawn y llys',
   findFamilyCourtParagraph1:
-    'Efallai cynhelir gwrandawiadau llys sy’n ymwneud â’ch cais i fabwysiadu. Efallai bydd y rheini biolegol yn bresennol yn y gwrandawiadau hyn. Nid oes rhaid ichi fynychu’r gwrandawiadau hyn.',
+    'Efallai cynhelir gwrandawiadau llys sy’n ymwneud â’ch cais i fabwysiadu. Efallai bydd y rheini genedigol yn bresennol yn y gwrandawiadau hyn. Nid oes rhaid ichi fynychu’r gwrandawiadau hyn.',
   findFamilyCourtParagraph2: `Rydych wedi dweud wrthym mai’r llys a gyhoeddodd y gorchymyn lleoli oedd <b>${content.userCase?.placementOrderCourt}</b>.`,
-  findFamilyCourt: 'A ydych eisiau i’r gwrandawiadau cael eu gwrando yn yr un llys?',
+  findFamilyCourt: 'A ydych eisiau i’r gwrandawiadau gael eu gwrando yn yr un llys?',
   findFamilyCourtHint: 'Dylech drafod hyn gyda’ch gweithiwr cymdeithasol neu’ch asiantaeth fabwysiadu.',
   familyCourtNameParagraph2:
-    "Nid oes rhaid i chi fynychu gwrandawiadau llys. Rydym yn argymell aros gyda'r un llys fel nad yw rhieni biolegol yn dod i wybod am eich lleoliad. Mae'n bwysig eich bod yn trafod hyn gyda'r gweithiwr cymdeithasol. Y barnwr fydd yn penderfynu’n derfynol ble mae gwrandawiadau llys yn cael eu cynnal.",
-  familyCourtName: 'Nac ydwdwch enw llawn y llys',
+    "Nid oes rhaid i chi fynychu gwrandawiadau llys. Rydym yn argymell aros gyda'r un llys fel nad yw rhieni genedigol yn dod i wybod am eich lleoliad. Mae'n bwysig eich bod yn trafod hyn gyda'r gweithiwr cymdeithasol. Y barnwr fydd yn penderfynu’n derfynol ble mae gwrandawiadau llys yn cael eu cynnal.",
+  familyCourtName: 'Nodwch enw llawn y llys',
   familyCourtNameParagraph3:
     'Os na allwch ddod o hyd i\'r llys gallwch chwilio drwy ddefnyddio\'r cod post yn y <a class="govuk-link" href="https://www.gov.uk/chwilio-am-lys-neu-dribiwnlys" target="_blank">gwasanaeth dod o hyd i lysoedd (yn agor tab newydd)</a>.',
   options: [

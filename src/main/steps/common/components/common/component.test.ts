@@ -19,7 +19,7 @@ const enContent = {
 
 const cyContent = {
   section: 'Rhan hon',
-  label: 'A yw enw’r tad biolegol ar y dystysgrif geni?',
+  label: 'A yw enw’r tad genedigol ar y dystysgrif geni?',
   hint: 'Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
   yes: 'Ydy',
   no: 'Nac ydy',

@@ -509,19 +509,6 @@ describe('review-pay-submit > check-your-answers > utils', () => {
               },
             },
             {
-              key: { text: 'Court orders served by email' },
-              value: { text: 'Yes' },
-              actions: {
-                items: [
-                  {
-                    href: '/applicant1/contact-details?returnUrl=/review-pay-submit/check-your-answers',
-                    text: 'Change',
-                    visuallyHiddenText: "First applicant's court orders served by email",
-                  },
-                ],
-              },
-            },
-            {
               key: { text: 'Emails and documents language' },
               value: { text: 'English' },
               actions: {
@@ -663,19 +650,6 @@ describe('review-pay-submit > check-your-answers > utils', () => {
               },
             },
             {
-              key: { text: 'Court orders served by email' },
-              value: { text: 'Yes' },
-              actions: {
-                items: [
-                  {
-                    href: '/applicant1/contact-details?returnUrl=/review-pay-submit/check-your-answers',
-                    text: 'Change',
-                    visuallyHiddenText: "First applicant's court orders served by email",
-                  },
-                ],
-              },
-            },
-            {
               key: { text: 'Emails and documents language' },
               value: { text: 'English' },
               actions: {
@@ -799,19 +773,6 @@ describe('review-pay-submit > check-your-answers > utils', () => {
                     href: '/applicant2/contact-details?returnUrl=/review-pay-submit/check-your-answers',
                     text: 'Change',
                     visuallyHiddenText: "Second applicant's phone number",
-                  },
-                ],
-              },
-            },
-            {
-              key: { text: 'Court orders served by email' },
-              value: { text: 'Yes' },
-              actions: {
-                items: [
-                  {
-                    href: '/applicant2/contact-details?returnUrl=/review-pay-submit/check-your-answers',
-                    text: 'Change',
-                    visuallyHiddenText: "Second applicant's court orders served by email",
                   },
                 ],
               },

@@ -19,8 +19,8 @@ const en = () => ({
 });
 
 const cy: typeof en = () => ({
-  section: 'Manylion y fam fiolegol',
-  title: 'A oes gennych cyfeiriad olaf hysbys y fam fiolegol?',
+  section: 'Manylion y fam enedigol',
+  title: 'A oes gennych cyfeiriad olaf hysbys y fam enedigol?',
   moreDetails: 'Rhowch reswm pam bod y cyfeiriad yn anhysbys, er enghraifft ‘dim cyfeiriad parhaol’.',
   errors: {
     birthMotherAddressKnown: {

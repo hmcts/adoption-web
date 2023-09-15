@@ -27,6 +27,8 @@ const cyContent = {
   title:
     'A ddylid anfon dogfennau neu orchmynion llys yn ymwneud â’r cais i fabwysiadu hwn at yr unigolyn arall sydd â chyfrifoldeb rhiant?',
   hint: 'Rhowch ragor o fanylion pam na ddylid anfon dogfennau neu orchmynion llys sy’n ymwneud â’r cais i fabwysiadu hwn at yr unigolyn arall sydd â chyfrifoldeb rhiant. ',
+  yes: 'Dylid',
+  no: 'Na ddylid',
   errors: {
     otherParentServedWith: {
       required:

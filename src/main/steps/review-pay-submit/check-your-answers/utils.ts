@@ -362,12 +362,6 @@ export const applicantSummaryList = (
             visuallyHiddenText: visHidPrefix + keys.phoneNumber.toLowerCase(),
           },
           {
-            key: keys.contactDetailsConsent,
-            value: userCase[`${prefix}ContactDetailsConsent`],
-            changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
-            visuallyHiddenText: visHidPrefix + keys.contactDetailsConsent.toLowerCase(),
-          },
-          {
             key: keys.languagePreference,
             value: content.languagePreference[userCase[`${prefix}LanguagePreference`]],
             changeUrl: Urls[`${urlPrefix}LANGUAGE_PREFERENCE`],
@@ -438,12 +432,6 @@ export const applicantSummaryList = (
           value: userCase[`${prefix}PhoneNumber`],
           changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
           visuallyHiddenText: visHidPrefix + keys.phoneNumber.toLowerCase(),
-        },
-        {
-          key: keys.contactDetailsConsent,
-          value: userCase[`${prefix}ContactDetailsConsent`],
-          changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
-          visuallyHiddenText: visHidPrefix + keys.contactDetailsConsent.toLowerCase(),
         },
         {
           key: keys.languagePreference,

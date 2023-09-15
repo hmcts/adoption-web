@@ -14,7 +14,7 @@ const en = () => ({
 });
 
 const cy: typeof en = () => ({
-  section: 'Manylion y tad biolegol',
+  section: 'Manylion y tad genedigol',
   title: 'A yw’r tad biolegol yn hysbys?',
   errors: {
     birthFatherIdentityKnown: {

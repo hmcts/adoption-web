@@ -33,7 +33,6 @@ module.exports = {
   firstApplicantAddress: 'Address',
   firstApplicantEmailAddress: 'Email address',
   firstApplicantPhoneNumber: 'Phone number',
-  firstApplicantCourtOrders: 'Court orders served by email',
   firstApplicantMailLanguage: 'Emails and documents language',
   secondApplicantDetails: "Second applicant's details",
   secondApplicantFullName: 'Full name',
@@ -44,7 +43,6 @@ module.exports = {
   secondApplicantAddress: 'Address',
   secondApplicantEmailAddress: 'Email address',
   secondApplicantPhoneNumber: 'Phone number',
-  secondApplicantCourtOrders: 'Court orders served by email',
   secondApplicantDocLanguage: 'Emails and documents language',
   checkYourApplication: 'Check your application',
   consent:

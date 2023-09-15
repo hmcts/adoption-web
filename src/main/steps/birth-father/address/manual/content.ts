@@ -20,7 +20,7 @@ const en = manualAddressContent => ({
 
 const cy: typeof en = manualAddressContent => ({
   section: SECTION_IN_WELSH,
-  title: 'Beth yw cyfeiriad olaf hysbys y tad biolegol?',
+  title: 'Beth yw cyfeiriad olaf hysbys y tad genedigol?',
   errors: {
     birthFatherAddress1: manualAddressContent.errors.address1,
     birthFatherAddressTown: manualAddressContent.errors.addressTown,

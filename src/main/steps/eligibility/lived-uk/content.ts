@@ -26,6 +26,8 @@ const cy: typeof en = () => ({
   livedUKNo: 'Ni allwch wneud cais i fabwysiadu plentyn oni bai bod gennych gartref parhaol yma.',
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
   continue: 'Parhau',
+  yes: 'Do',
+  no: 'Naddo',
   errors: {
     livedUKEligible: {
       required:

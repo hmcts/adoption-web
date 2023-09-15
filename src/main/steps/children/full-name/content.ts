@@ -27,7 +27,7 @@ const cy: typeof en = () => ({
   section: 'Manylion y plentyn',
   title: 'Beth yw enw llawn y plentyn?',
   line1:
-    'Nac ydwdwch enw llawn y plentyn, fel y mae wedi’i ysgrifennu ar eu tystysgrif geni. Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
+    'Nodwch enw llawn y plentyn, fel y mae wedi’i ysgrifennu ar eu tystysgrif geni. Gofynnwch i’r asiantaeth fabwysiadu neu’ch gweithiwr cymdeithasol os nad ydych yn siŵr.',
   firstName: 'Enwau cyntaf',
   firstNameHint: '(Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol)',
   lastName: 'Cyfenwau',
