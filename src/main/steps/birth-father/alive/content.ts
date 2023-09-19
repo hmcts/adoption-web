@@ -26,8 +26,8 @@ const cy: typeof en = () => ({
   moreDetails:
     'Darparwch fwy o fanylion. Er enghraifft, ‘nid oes modd cysylltu â’r tad genedigol’. Gall eich asiantaeth fabwysiadu neu eich gweithiwr cymdeithasol eich helpu i lenwi’r rhan hon.',
   hint: "Os yw’r unigolyn hwn wedi marw, bydd angen i chi ddarparu'r dystysgrif marwolaeth.",
-  yes: 'Oes',
-  no: 'Nac oes',
+  yes: 'Ydy',
+  no: 'Nac ydy',
   notSure: 'Ddim yn siŵr',
   errors: {
     birthFatherStillAlive: {
