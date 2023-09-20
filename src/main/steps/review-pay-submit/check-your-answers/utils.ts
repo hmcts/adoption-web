@@ -51,6 +51,7 @@ type SummaryListContent = PageContent & {
   gender: Record<string, string>;
   applyingWith: Record<string, string>;
   yesNoNotsure: Record<string, string>;
+  yesNoExtraSupport: Record<string, string>;
   languagePreference: Record<string, string>;
 };
 
@@ -148,7 +149,7 @@ export const adoptionAgencySummaryList = (
         [
           {
             key: keys.additionalAdoptionAgency,
-            value: content.yesNoNotsure[userCase.hasAnotherAdopAgencyOrLA],
+            value: content.yesNoExtraSupport[userCase.hasAnotherAdopAgencyOrLA],
             changeUrl: Urls.OTHER_ADOPTION_AGENCY,
           },
         ],
@@ -162,7 +163,7 @@ export const adoptionAgencySummaryList = (
       [
         {
           key: keys.additionalAdoptionAgency,
-          value: content.yesNoNotsure[userCase.hasAnotherAdopAgencyOrLA!],
+          value: content.yesNoExtraSupport[userCase.hasAnotherAdopAgencyOrLA!],
           changeUrl: Urls.OTHER_ADOPTION_AGENCY,
         },
         {
@@ -339,7 +340,7 @@ export const applicantSummaryList = (
           },
           {
             key: keys.extraSupport,
-            value: userCase[`${prefix}HasReasonableAdjustment`],
+            value: content.yesNoExtraSupport[userCase[`${prefix}HasReasonableAdjustment`]],
             changeUrl: Urls[`${urlPrefix}EXTRA_SUPPORT`],
             visuallyHiddenText: visHidPrefix + keys.extraSupport.toLowerCase(),
           },
@@ -405,7 +406,7 @@ export const applicantSummaryList = (
         },
         {
           key: keys.extraSupport,
-          value: userCase[`${prefix}HasReasonableAdjustment`],
+          value: content.yesNoExtraSupport[userCase[`${prefix}HasReasonableAdjustment`]],
           changeUrl: Urls[`${urlPrefix}EXTRA_SUPPORT`],
           visuallyHiddenText: visHidPrefix + keys.extraSupport.toLowerCase(),
         },
