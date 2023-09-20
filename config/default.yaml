@@ -315,6 +315,7 @@ fpl:
     CYG: 'Cyngor Gwynedd'
     CSYM: 'Cyngor Sir Ynys Mon'
     GWC: 'Gwynedd Council'
+
 socialWorker:
   supportedDomains:
     - gov.uk
@@ -343,6 +344,7 @@ socialWorker:
     - adoptionwest.co.uk
     - ssafa.org.uk
     - adoptionmatters.org
+    - caritascare.org.uk
 
 adoption:
   family-court:

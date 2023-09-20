@@ -38,6 +38,10 @@ export const enContent = {
     [YesNoNotsure.NO]: 'No',
     [YesNoNotsure.NOT_SURE]: 'Not sure',
   },
+  yesNoExtraSupport: {
+    [YesNoNotsure.YES]: 'Yes',
+    [YesNoNotsure.NO]: 'No',
+  },
   documentTypes: {
     [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE]: 'Birth or adoption certificate',
     [DocumentType.DEATH_CERTIFICATE]: 'Death certiticate',
@@ -172,6 +176,10 @@ const cyContent: typeof enContent = {
     [YesNoNotsure.YES]: 'Ydy',
     [YesNoNotsure.NO]: 'Nac ydy',
     [YesNoNotsure.NOT_SURE]: 'Ddim yn siŵr',
+  },
+  yesNoExtraSupport: {
+    [YesNoNotsure.YES]: 'Oes',
+    [YesNoNotsure.NO]: 'Nac oes',
   },
   documentTypes: {
     [DocumentType.BIRTH_OR_ADOPTION_CERTIFICATE]: 'Tystysgrif geni neu dystysgrif mabwysiadu',
