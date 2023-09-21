@@ -2637,12 +2637,14 @@ __metadata:
   linkType: hard
 
 "@pact-foundation/pact@npm:^9.17.3":
-  version: 9.17.3
-  resolution: "@pact-foundation/pact@npm:9.17.3"
+  version: 9.18.1
+  resolution: "@pact-foundation/pact@npm:9.18.1"
   dependencies:
     "@pact-foundation/pact-node": ^10.17.2
     "@types/bluebird": ^3.5.20
     "@types/express": ^4.17.11
+    "@types/http-proxy": ^1.17.9
+    axios: ^0.27.2
     bluebird: ~3.5.1
     body-parser: ^1.18.2
     cli-color: ^1.1.0
@@ -2661,8 +2663,9 @@ __metadata:
     pino: ^6.5.1
     pino-pretty: ^4.1.0
     pkginfo: ^0.4.1
-    popsicle: ^9.2.0
-  checksum: 452025ebb705506d0be4c75724450653217c89d3d0345ebf1cff566f98b5cdc1386fa5acc1f0ac8957291b1cb8a6fbf554cf2d17385c818b917f16435c1db72e
+    ramda: ^0.27.2
+    randexp: ^0.5.3
+  checksum: a20d958a239a10465e14028840eacdfa3bb5b1c68d60e59dc26a41080b300e366242b03120f5b2e2bce60075378565e0ddbe2407ce63767bbb9c1ac2f5b8d722
   languageName: node
   linkType: hard
 
@@ -3083,6 +3086,15 @@ __metadata:
   version: 4.0.1
   resolution: "@types/http-cache-semantics@npm:4.0.1"
   checksum: 1048aacf627829f0d5f00184e16548205cd9f964bf0841c29b36bc504509230c40bc57c39778703a1c965a6f5b416ae2cbf4c1d4589c889d2838dd9dbfccf6e9
+  languageName: node
+  linkType: hard
+
+"@types/http-proxy@npm:^1.17.9":
+  version: 1.17.12
+  resolution: "@types/http-proxy@npm:1.17.12"
+  dependencies:
+    "@types/node": "*"
+  checksum: 89700c8e3c8f2c59c87c8db8e7a070c97a3b30a4a38223aca6b8b817e6f2ca931f5a500e16ecadc1ebcfed2676cc60e073d8f887e621d84420298728ec6fd000
   languageName: node
   linkType: hard
 
@@ -5914,7 +5926,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"concat-stream@npm:^1.4.7, concat-stream@npm:^1.5.2":
+"concat-stream@npm:^1.5.2":
   version: 1.6.2
   resolution: "concat-stream@npm:1.6.2"
   dependencies:
@@ -6696,6 +6708,13 @@ __metadata:
     no-case: ^3.0.4
     tslib: ^2.0.3
   checksum: a65e3519414856df0228b9f645332f974f2bf5433370f544a681122eab59e66038fc3349b4be1cdc47152779dac71a5864f1ccda2f745e767c46e9c6543b1169
+  languageName: node
+  linkType: hard
+
+"drange@npm:^1.0.2":
+  version: 1.1.1
+  resolution: "drange@npm:1.1.1"
+  checksum: 7e6ed639f9ab4d826e79717e2b0685a7ab02ecd39dac6483305dcc43ea2a27dc78b538e10adaba35c086efab216ef1f53f22bc402abfd0d29454b1c5f48fecd1
   languageName: node
   linkType: hard
 
@@ -7824,7 +7843,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"form-data@npm:^2.0.0, form-data@npm:^2.5.0":
+"form-data@npm:^2.5.0":
   version: 2.5.1
   resolution: "form-data@npm:2.5.1"
   dependencies:
@@ -10760,16 +10779,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"make-error-cause@npm:^1.2.1":
-  version: 1.2.2
-  resolution: "make-error-cause@npm:1.2.2"
-  dependencies:
-    make-error: ^1.2.0
-  checksum: 04c3534363be3dfa473ab081501765ce4c2280006d7d961eb4c45a9a3fa7beaedd5e7fa8ab59e1386ecf3e0cd710501d0605dd8b9bd0cd4183e364bf3627a2f4
-  languageName: node
-  linkType: hard
-
-"make-error@npm:1.x, make-error@npm:^1.1.1, make-error@npm:^1.2.0":
+"make-error@npm:1.x, make-error@npm:^1.1.1":
   version: 1.3.6
   resolution: "make-error@npm:1.3.6"
   checksum: b86e5e0e25f7f777b77fabd8e2cbf15737972869d852a22b7e73c17623928fccb826d8e46b9951501d3f20e51ad74ba8c59ed584f610526a48f8ccf88aaec402
@@ -12489,18 +12499,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"popsicle@npm:^9.2.0":
-  version: 9.2.0
-  resolution: "popsicle@npm:9.2.0"
-  dependencies:
-    concat-stream: ^1.4.7
-    form-data: ^2.0.0
-    make-error-cause: ^1.2.1
-    tough-cookie: ^2.0.0
-  checksum: cb35bcc974492e37db300fa82492f7e1a2ad37b1ce579161bef5282d6bda6690b0984dd0934d9d9a5f6f70ef1f26ee6ae9094318f608746aa88f53c159457452
-  languageName: node
-  linkType: hard
-
 "postcss-modules-extract-imports@npm:^3.0.0":
   version: 3.0.0
   resolution: "postcss-modules-extract-imports@npm:3.0.0"
@@ -12752,13 +12750,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"psl@npm:^1.1.28":
-  version: 1.8.0
-  resolution: "psl@npm:1.8.0"
-  checksum: 6150048ed2da3f919478bee8a82f3828303bc0fc730fb015a48f83c9977682c7b28c60ab01425a72d82a2891a1681627aa530a991d50c086b48a3be27744bde7
-  languageName: node
-  linkType: hard
-
 "pstree.remy@npm:^1.1.8":
   version: 1.1.8
   resolution: "pstree.remy@npm:1.1.8"
@@ -12776,7 +12767,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"punycode@npm:^2.1.0, punycode@npm:^2.1.1":
+"punycode@npm:^2.1.0":
   version: 2.1.1
   resolution: "punycode@npm:2.1.1"
   checksum: 823bf443c6dd14f669984dea25757b37993f67e8d94698996064035edd43bed8a5a17a9f12e439c2b35df1078c6bec05a6c86e336209eb1061e8025c481168e8
@@ -12880,6 +12871,23 @@ __metadata:
   version: 5.1.1
   resolution: "quick-lru@npm:5.1.1"
   checksum: a516faa25574be7947969883e6068dbe4aa19e8ef8e8e0fd96cddd6d36485e9106d85c0041a27153286b0770b381328f4072aa40d3b18a19f5f7d2b78b94b5ed
+  languageName: node
+  linkType: hard
+
+"ramda@npm:^0.27.2":
+  version: 0.27.2
+  resolution: "ramda@npm:0.27.2"
+  checksum: 28d6735dd1eea1a796c56cf6111f3673c6105bbd736e521cdd7826c46a18eeff337c2dba4668f6eed990d539b9961fd6db19aa46ccc1530ba67a396c0a9f580d
+  languageName: node
+  linkType: hard
+
+"randexp@npm:^0.5.3":
+  version: 0.5.3
+  resolution: "randexp@npm:0.5.3"
+  dependencies:
+    drange: ^1.0.2
+    ret: ^0.2.0
+  checksum: 9a4011b4b012debea545fc379a18208876fffc1179d2ac211351caf7626a3956efc4bc41e329bc5b241a671553eda58e0703933a9bcfdf90dde501ba1a2cf40a
   languageName: node
   linkType: hard
 
@@ -13419,6 +13427,13 @@ __metadata:
     onetime: ^5.1.0
     signal-exit: ^3.0.2
   checksum: f877dd8741796b909f2a82454ec111afb84eb45890eb49ac947d87991379406b3b83ff9673a46012fca0d7844bb989f45cc5b788254cf1a39b6b5a9659de0630
+  languageName: node
+  linkType: hard
+
+"ret@npm:^0.2.0":
+  version: 0.2.2
+  resolution: "ret@npm:0.2.2"
+  checksum: 774964bb413a3525e687bca92d81c1cd75555ec33147c32ecca22f3d06409e35df87952cfe3d57afff7650a0f7e42139cf60cb44e94c29dde390243bc1941f16
   languageName: node
   linkType: hard
 
@@ -14794,16 +14809,6 @@ __metadata:
   bin:
     nodetouch: ./bin/nodetouch.js
   checksum: e0be589cb5b0e6dbfce6e7e077d4a0d5f0aba558ef769c6d9c33f635e00d73d5be49da6f8631db302ee073919d82b5b7f56da2987feb28765c95a7673af68647
-  languageName: node
-  linkType: hard
-
-"tough-cookie@npm:^2.0.0":
-  version: 2.5.0
-  resolution: "tough-cookie@npm:2.5.0"
-  dependencies:
-    psl: ^1.1.28
-    punycode: ^2.1.1
-  checksum: 16a8cd090224dd176eee23837cbe7573ca0fa297d7e468ab5e1c02d49a4e9a97bb05fef11320605eac516f91d54c57838a25864e8680e27b069a5231d8264977
   languageName: node
   linkType: hard
 
