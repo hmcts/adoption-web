@@ -113,7 +113,7 @@ nodejs:
     TEESSIDE_FAMILY_COURT_EMAIL: 'teessideadoptionapplication@mailinator.com'
     YORK_FAMILY_COURT_EMAIL: 'yorkadoptionapplication@mailinator.com'
     SHEFFIELD_FAMILY_COURT_EMAIL: 'sheffieldadoptionapplication@mailinator.com'
-    #CHESTER_FAMILY_COURT_EMAIL: 'chesteradoptionapplication@mailinator.com'
+    CHESTER_FAMILY_COURT_EMAIL: 'chesteradoptionapplication@mailinator.com'
     BARROW-IN-FURNESS_FAMILY_COURT_EMAIL: 'barrow-in-furnessadoptionapplication@mailinator.com'
     BLACKBURN_FAMILY_COURT_EMAIL: 'blackburnadoptionapplication@mailinator.com'
     CARLISLE_FAMILY_COURT_EMAIL: 'carlisleadoptionapplication@mailinator.com'
