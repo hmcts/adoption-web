@@ -5,7 +5,7 @@ import { emptyPostcode200Response } from '../../../test/unit/utils/mockPostcodeR
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { AppRequest, UserDetails } from '../../app/controller/AppRequest';
 
-import { getCourtList, getCourtVenues } from './court-venues-api';
+import { getCourtListFromAPI, getCourtVenuesFromAPI } from './court-venues-api';
 
 jest.mock('axios');
 
@@ -35,7 +35,7 @@ describe('Court Lookup', () => {
   it('returns an empty array when there are no results getCourtVenues', async () => {
     mockedAxios.get.mockResolvedValueOnce({ data: emptyPostcode200Response });
 
-    const actual = await getCourtVenues('ABA3', userDetails, mockLogger);
+    const actual = await getCourtVenuesFromAPI('ABA3', userDetails, mockLogger);
 
     expect(mockLogger.error).not.toHaveBeenCalled();
     expect(actual).toEqual([]);
@@ -44,7 +44,7 @@ describe('Court Lookup', () => {
   it('returns an empty array when there are no results getCourtList', async () => {
     mockedAxios.get.mockResolvedValueOnce({ data: emptyPostcode200Response });
 
-    const actual = await getCourtList(mockReq);
+    const actual = await getCourtListFromAPI(mockReq);
 
     expect(mockLogger.error).not.toHaveBeenCalled();
     expect(actual).toEqual([]);
