@@ -36,20 +36,20 @@ module.exports = {
 
   async changeValueFromReviewYourAnswers() {
     await I.wait('6');
-    await I.retry(3).waitForText('Review your answers', 30);
+    await I.retry(3).waitForText('Review your answers');
     await I.retry(3).click(this.fields.changeChildMoveInDate);
     await I.wait(6);
   },
 
   async reviewYourAnswersAndContinue() {
-    await I.retry(3).waitForText('Review your answers', 30);
+    await I.retry(3).waitForText('Review your answers');
     await I.retry(3).waitForElement(this.fields.saveAndContinueButton);
     await I.retry(3).click(this.fields.saveAndContinueButton);
     await I.wait(5);
   },
 
   async statementOfTruthDetailsSection() {
-    await I.retry(3).waitForText('Statement of truth', 30);
+    await I.retry(3).waitForText('Statement of truth');
     await I.retry(3).click(this.fields.applicant1IBelieveApplicationIsTrue);
     await I.retry(3).click(this.fields.applicant2IBelieveApplicationIsTrue);
     await I.retry(3).fillField(
@@ -65,7 +65,7 @@ module.exports = {
   },
 
   async statementOfTruthDetailsSectionForSingleApplicant() {
-    await I.retry(3).waitForText('Statement of truth', 30);
+    await I.retry(3).waitForText('Statement of truth');
     await I.retry(3).click(this.fields.applicant1IBelieveApplicationIsTrue);
     await I.retry(3).fillField(this.fields.applicant1SotFullName, 'Joe Bloggs');
     await I.retry(3).click('Confirm');
@@ -73,11 +73,11 @@ module.exports = {
   },
 
   async statementOfTruthDetailsSectionEmpty() {
-    await I.retry(3).waitForText('Statement of truth', 30);
+    await I.retry(3).waitForText('Statement of truth');
     await I.retry(3).click('Confirm');
     await I.wait(4);
-    await I.retry(3).waitForText('Confirm your statement of truth', 30);
-    await I.retry(3).waitForText('Enter your full name', 30);
+    await I.retry(3).waitForText('Confirm your statement of truth');
+    await I.retry(3).waitForText('Enter your full name');
     await I.retry(3).click(this.fields.applicant1IBelieveApplicationIsTrue);
     await I.retry(3).click(this.fields.applicant2IBelieveApplicationIsTrue);
     await I.retry(3).fillField(
@@ -93,14 +93,14 @@ module.exports = {
   },
 
   async reviewAndPay() {
-    await I.retry(3).waitForText('Pay and submit', 30);
+    await I.retry(3).waitForText('Pay and submit');
     await I.retry(3).click('Pay and submit application');
     await I.wait(4);
   },
 
   async adoptionCourtFeesByCard() {
     await I.wait(30);
-    await I.retry(3).waitForText('Enter card details', 30);
+    await I.retry(3).waitForText('Enter card details');
     await I.retry(3).fillField(this.fields.cardNo, paymentCardDetails.paymentCardNumber);
     await I.retry(3).fillField(this.fields.expiryMonth, paymentCardDetails.paymentCardExpiryMonth);
     await I.retry(3).fillField(this.fields.expiryYear, paymentCardDetails.paymentCardExpiryYear);
@@ -116,11 +116,11 @@ module.exports = {
     await I.retry(3).fillField(this.fields.email, paymentCardDetails.cardHolderEmailAddress);
     await I.retry(3).click('Continue');
     await I.wait(10);
-    await I.retry(3).waitForText('Confirm your payment', 30);
-    await I.retry(3).waitForText('£183.00', 30);
+    await I.retry(3).waitForText('Confirm your payment');
+    await I.retry(3).waitForText('£183.00');
     await I.retry(3).click('Confirm payment');
     await I.wait(9);
-    await I.retry(3).waitForText('Application submitted', 30);
+    await I.retry(3).waitForText('Application submitted');
     await I.wait(5);
   },
 
@@ -133,7 +133,7 @@ module.exports = {
 
   async paymentCancellation() {
     await I.wait(3);
-    await I.retry(3).waitForText('Enter card details', 30);
+    await I.retry(3).waitForText('Enter card details');
     await I.wait(5);
     await I.retry(3).click('Cancel payment');
     await I.wait(3);
@@ -141,13 +141,13 @@ module.exports = {
     await I.retry(3).waitForText('No money has been taken from your account.');
     await I.retry(3).click('Continue');
     await I.wait(3);
-    await I.retry(3).waitForText('Statement of truth', 30);
+    await I.retry(3).waitForText('Statement of truth');
     await I.retry(3).click('Confirm');
     await I.wait(4);
   },
 
   async reviewPay() {
-    await I.retry(3).waitForText('Pay and submit', 30);
+    await I.retry(3).waitForText('Pay and submit');
     await I.retry(3).click('Pay and submit application');
     await I.wait(4);
   },

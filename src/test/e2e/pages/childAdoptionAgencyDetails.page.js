@@ -36,7 +36,7 @@ module.exports = {
   },
 
   async childSocialWorkerDetailsSection() {
-    await I.retry(3).waitForText("Child's social worker details", 30);
+    await I.retry(3).waitForText("Child's social worker details");
     await I.retry(3).fillField(
       this.childSocialWorker.childSocialWorkerName,
       childSocialWorkerDetails.childSocialWorkerName
@@ -65,7 +65,7 @@ module.exports = {
   },
 
   async yourSocialWorkerDetailsSection() {
-    await I.retry(3).waitForText('Your social worker details', 30);
+    await I.retry(3).waitForText('Your social worker details');
     await I.retry(3).fillField(
       this.yourSocialWorker.applicantSocialWorkerName,
       applicantOrYourSocialWorkerDetails.applicantSocialWorkerName
@@ -95,12 +95,12 @@ module.exports = {
 
   async childAdoptionAgencyDetailsSection() {
     await I.wait(4);
-    await I.retry(3).waitForText('Is there another adoption agency or local authority involved?', 30);
+    await I.retry(3).waitForText('Is there another adoption agency or local authority involved?');
     await I.retry(3).click(this.adopAgency.hasAnotherAdopAgencyOrLA);
     await I.wait(4);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
-    await I.retry(3).waitForText('Adoption agency or local authority details', 30);
+    await I.retry(3).waitForText('Adoption agency or local authority details');
     await I.retry(3).fillField(this.adopAgency.adopAgencyOrLaName, adoptionAgencyDetails.adopAgencyName);
     await I.retry(3).fillField(this.adopAgency.adopAgencyOrLaContactName, adoptionAgencyDetails.adopAgencyContactName);
     await I.retry(3).fillField(this.adopAgency.adopAgencyOrLaPhoneNumber, adoptionAgencyDetails.adopAgencyPhoneNumber);
@@ -117,7 +117,7 @@ module.exports = {
   },
 
   async childAdoptionAgencyDetailsSaveAsDraft() {
-    await I.retry(3).waitForText("Child's social worker details", 30);
+    await I.retry(3).waitForText("Child's social worker details");
     await I.retry(3).fillField(
       this.childSocialWorker.childSocialWorkerName,
       childSocialWorkerDetails.childSocialWorkerName
@@ -148,16 +148,16 @@ module.exports = {
 
   async childWithNoAdoptionAgencyDetailsSection() {
     await I.wait(4);
-    await I.retry(3).waitForText('Is there another adoption agency or local authority involved?', 30);
+    await I.retry(3).waitForText('Is there another adoption agency or local authority involved?');
     await I.retry(3).click(this.adopAgency.hasNoAdopAgencyOrLA);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
   },
 
   async childSocialWorkerDetailsSectionWithOutDetails() {
-    await I.retry(3).waitForText("Child's social worker details", 30);
+    await I.retry(3).waitForText("Child's social worker details");
     await I.wait(4);
-    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue, 30);
+    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
     await I.retry(3).see('Enter name of child’s social worker');
@@ -170,7 +170,7 @@ module.exports = {
       this.childSocialWorker.childLocalAuthorityEmail,
       childSocialWorkerDetails.childSocialWorkerEmailInvalid
     );
-    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue, 30);
+    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue);
     await I.retry(3).click('Save and continue');
     await I.retry(3).see(
       'You have not entered an email address, please contact your social worker or representative to confirm the correct email for use.'
@@ -178,13 +178,13 @@ module.exports = {
   },
 
   async yourSocialWorkerDetailsSectionWithOutDetails() {
-    await I.retry(3).waitForText('Your social worker details', 30);
-    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue, 30);
+    await I.retry(3).waitForText('Your social worker details');
+    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue);
     await I.retry(3).click('Save and continue');
     await I.wait(3);
-    await I.retry(3).waitForText('Enter a name', 30);
-    await I.retry(3).waitForText('Enter a UK telephone number', 30);
-    await I.retry(3).waitForText('Enter a name', 30);
+    await I.retry(3).waitForText('Enter a name');
+    await I.retry(3).waitForText('Enter a UK telephone number');
+    await I.retry(3).waitForText('Enter a name');
     await I.retry(3).waitForText(
       'You have not entered an email address, please contact your social worker or representative to confirm the correct email for use.',
       30
@@ -198,7 +198,7 @@ module.exports = {
       applicantOrYourSocialWorkerDetails.applicantSocialWorkerPhoneNumberInvalid
     );
     await I.wait(4);
-    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue, 30);
+    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
     await I.retry(3).see(
@@ -209,23 +209,23 @@ module.exports = {
 
   async adoptionAgencySelectionNoDetails() {
     await I.wait(4);
-    await I.retry(3).waitForText('Is there another adoption agency or local authority involved?', 30);
-    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue, 30);
+    await I.retry(3).waitForText('Is there another adoption agency or local authority involved?');
+    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue);
     await I.retry(3).click('Save and continue');
     await I.wait(6);
     await I.retry(3).see('Please answer the question');
     await I.retry(3).click(this.adopAgency.hasAnotherAdopAgencyOrLA);
     await I.wait(4);
-    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue, 30);
+    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
   },
   async childAdoptionAgencyDetailsSectionWithOutDetails() {
-    await I.retry(3).waitForText('Adoption agency or local authority details', 30);
+    await I.retry(3).waitForText('Adoption agency or local authority details');
     await I.wait(4);
-    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue, 30);
+    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue);
     await I.retry(3).click('Save and continue');
-    await I.retry(3).waitForText('Enter name of adoption agency or local authority', 30);
+    await I.retry(3).waitForText('Enter name of adoption agency or local authority');
     await I.retry(3).see('Enter name of adoption agency or local authority');
     await I.retry(3).see('Enter name of your contact');
     await I.retry(3).see('Enter a UK telephone number');
@@ -261,7 +261,7 @@ module.exports = {
       adoptionAgencyDetails.adopAgencyContactEmail
     );
     await I.wait(4);
-    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue, 30);
+    await I.retry(3).waitForSelector(this.childSocialWorker.saveAndContinue);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
   },
