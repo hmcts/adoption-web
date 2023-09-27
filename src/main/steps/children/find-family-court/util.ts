@@ -31,6 +31,7 @@ export const getCourtEmailId = (key: string): string => {
     ['truro', config.get('localCourt.emailId.TRURO_FAMILY_COURT')],
     ['bournemouth', config.get('localCourt.emailId.BOURNEMOUTH_FAMILY_COURT')],
     ['bristol', config.get('localCourt.emailId.BRISTOL_FAMILY_COURT')],
+    ['gloucestershire', config.get('localCourt.emailId.GLOUCESTERSHIRE_FAMILY_COURT')],
     //West London
     /* ['west london', config.get('localCourt.emailId.WEST_LONDON_FAMILY_COURT')],
     ['barnet', config.get('localCourt.emailId.BARNET_FAMILY_COURT')],
