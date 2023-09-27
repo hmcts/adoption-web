@@ -18,7 +18,7 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y brawd/chwaer',
+  section: 'Manylion brodyr/chwiorydd',
   title: 'Beth yw’r rhif cyfresol neu rif yr achos ar y gorchymyn?',
   errors: {
     siblingPoNumber: {

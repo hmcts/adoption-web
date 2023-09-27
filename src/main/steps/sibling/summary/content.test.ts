@@ -41,7 +41,7 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y brawd/chwaer',
+  section: 'Manylion brodyr/chwiorydd',
   title: 'Gorchmynion eisoes mewn lle ar gyfer brodyr/chwiorydd a hanner brodyr/hanner chwiorydd',
   sibling: 'Brawd/chwaer',
   siblingRelation: {

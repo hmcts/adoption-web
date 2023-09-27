@@ -130,7 +130,7 @@ const cy = {
   openingHours: 'Oriau agor: Dydd Llun – Dydd Gwener  9am - 5pm',
   considerYourRequest: 'Byddwn yn ystyried eich cais ac yn ymateb o fewn 10 diwrnod gwaith.',
   reportingAccessibility: "Riportio problemau hygyrchedd gyda'r wefan hon",
-  accessibilityPhoneNumber: 'Rhif ffôn: 01634 887900',
+  accessibilityPhoneNumber: 'Rhif ffôn: 03003035171',
   accessibilityOpeningHours: 'Oriau agor: Dydd Llun – Dydd Gwener  9am - 5pm',
   improveAccessibility:
     'Rydym wastad yn ceisio gwella hygyrchedd y wefan hon. Os byddwch yn cael unrhyw broblemau nad ydynt yn cael eu crybwyll ar y dudalen hon, neu os ydych yn credu nad ydym yn bodloni gofynion y rheoliadau hygyrchedd, cysylltwch â:',

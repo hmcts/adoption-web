@@ -31,7 +31,7 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y brawd/chwaer',
+  section: 'Manylion brodyr/chwiorydd',
   for: 'ar gyfer',
   orderType: 'Math o orchymyn',
   orderNumber: 'Rhif cyfresol neu rif yr achos ar y gorchymyn',

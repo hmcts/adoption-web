@@ -35,7 +35,7 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y brawd/chwaer',
+  section: 'Manylion brodyr/chwiorydd',
   siblingRelation: {
     [SiblingRelationships.SISTER]: 'Chwaer',
     [SiblingRelationships.STEP_SISTER]: 'Llyschwaer',
@@ -52,7 +52,7 @@ const cyContent = {
     [SiblingPOType.SUPERVIS_ORDER]: 'Gorchymyn Goruchwylio',
     [SiblingPOType.OTHER]: 'Arall',
   },
-  title: 'Ydych chi’n siwr eich bod eisiau dileu hwn gorchymyn mabwysiadu ar gyfer chwaer y plentyn?',
+  title: 'Ydych chi’n siŵr eich bod eisiau dileu’r gorchymyn mabwysiadu ar gyfer chwaer y plentyn?',
   errors: {
     confirm: {
       required: 'Dewiswch ateb os gwelwch yn dda',

@@ -24,7 +24,7 @@ const enContent = {
   },
 };
 const cyContent = {
-  section: 'Manylion y brawd/chwaer',
+  section: 'Manylion brodyr/chwiorydd',
   title: 'Beth yw eu perthynas i’r plentyn sy’n cael ei fabwysiadu?',
   sister: 'Chwaer',
   halfSister: 'Hanner chwaer',

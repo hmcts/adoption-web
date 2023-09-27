@@ -91,13 +91,13 @@ const cy: typeof en = content => {
 
   return {
     ...cyContent,
-    title: `Ydych chi’n siwr eich bod eisiau dileu hwn ${
+    title: `Ydych chi’n siŵr eich bod eisiau dileu’r ${
       !cyContent.siblingPOType[placementOrderText]
-        ? 'order'
+        ? 'gorchymyn hwn'
         : cyContent.siblingPOType[getPlacementOrderType(content.userCase)].toLowerCase()
     } ar gyfer ${
       !cyContent.siblingRelation[siblingRelationText]
-        ? 'sibling'
+        ? 'brawd neu chwaer'
         : cyContent.siblingRelation[getSiblingRelation(content.userCase)].toLowerCase()
     } y plentyn?`,
   };

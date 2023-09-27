@@ -105,7 +105,7 @@ const en = content => {
 
 const cy: typeof en = content => {
   const cyContent = {
-    section: 'Manylion y brawd/chwaer',
+    section: 'Manylion brodyr/chwiorydd',
     for: 'ar gyfer',
     relationship: 'Perthynas',
     orderType: 'Math o orchymyn',
