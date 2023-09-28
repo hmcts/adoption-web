@@ -66,9 +66,9 @@ module.exports = {
     await I.retry(3).fillField(this.fields.applicant2LastNames, '');
     await I.retry(3).click('Save and continue');
     await I.wait(4);
-    await I.retry(3).waitForText('There is a problem', 30);
-    await I.retry(3).waitForText('Enter your first names', 30);
-    await I.retry(3).waitForText('Enter your last names', 30);
+    await I.retry(3).waitForText('There is a problem');
+    await I.retry(3).waitForText('Enter your first names');
+    await I.retry(3).waitForText('Enter your last names');
     await I.retry(3).fillField(
       this.fields.applicant2FirstNames,
       secondApplicantPersonalDetails.secondApplicantFirstName
@@ -82,14 +82,14 @@ module.exports = {
     await I.retry(3).waitForText('Have you ever legally been known by any other names?');
     await I.retry(3).click('Save and continue');
     await I.wait(4);
-    await I.retry(3).waitForText('There is a problem', 30);
+    await I.retry(3).waitForText('There is a problem');
     await I.wait(4);
-    await I.retry(3).waitForText('Please answer the question', 30);
+    await I.retry(3).waitForText('Please answer the question');
     await I.wait(4);
     await I.retry(3).click(this.fields.applicant2HasOtherNames);
     await I.retry(3).click('Add');
-    await I.retry(3).waitForText('Enter your previous first names', 30);
-    await I.retry(3).waitForText('Enter your previous last names', 30);
+    await I.retry(3).waitForText('Enter your previous first names');
+    await I.retry(3).waitForText('Enter your previous last names');
     await I.retry(3).fillField(
       this.fields.applicant2OtherFirstNames,
       secondApplicantPersonalDetails.secondApplicantPreviousFirstName
@@ -105,8 +105,8 @@ module.exports = {
     await I.retry(3).waitForText("What's your date of birth?");
     await I.retry(3).click('Save and continue');
     await I.wait(4);
-    // await I.retry(3).waitForText('There is a problem', 30);
-    await I.retry(3).waitForText('Enter your date of birth', 30);
+    // await I.retry(3).waitForText('There is a problem');
+    await I.retry(3).waitForText('Enter your date of birth');
     await I.retry(3).fillField(this.fields.dateOfBirthDay, secondApplicantPersonalDetails.secondApplicantDateOfBirth);
     await I.retry(3).fillField(
       this.fields.dateOfBirthMonth,
@@ -119,7 +119,7 @@ module.exports = {
     await I.wait(4);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
-    await I.retry(3).waitForText('There is a problem', 30);
+    await I.retry(3).waitForText('There is a problem');
     await I.retry(3).waitForText('Enter your occupation');
     await I.retry(3).fillField(
       this.fields.applicant2Occupation,
@@ -130,11 +130,11 @@ module.exports = {
   },
 
   async additionalDetailsForApplicant2() {
-    await I.retry(3).waitForText('Extra support during your case', 30);
+    await I.retry(3).waitForText('Extra support during your case');
     await I.wait(4);
     await I.retry(3).click(this.fields.applicant2extraSupportAdjustment);
     await I.wait(4);
-    await I.retry(3).waitForText(extraSupportDetails.tellWhatSupportIsNeeded, 30);
+    await I.retry(3).waitForText(extraSupportDetails.tellWhatSupportIsNeeded);
     await I.retry(3).fillField(
       this.fields.applicant2extraSupportAdjustmentDetails,
       secondApplicantPersonalDetails.secondApplicantExtraSupportDetails

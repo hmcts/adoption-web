@@ -41,11 +41,11 @@ module.exports = {
   },
 
   async continueWithoutSelection() {
-    await I.retry(3).waitForSelector(this.fields.saveAndContinue, 30);
+    await I.retry(3).waitForSelector(this.fields.saveAndContinue);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
-    await I.retry(3).waitForText('There is a problem', 30);
-    await I.retry(3).waitForText('Select an option which best describes who is applying', 30);
+    await I.retry(3).waitForText('There is a problem');
+    await I.retry(3).waitForText('Select an option which best describes who is applying');
   },
 
   async searchForCaseInLALandingPage(caseId) {
@@ -54,7 +54,7 @@ module.exports = {
     await I.retry(3).waitForText('Sign in or create an account');
     await I.amOnPage(config.baseUrl + 'la-portal/kba-case-ref');
     await I.wait(5);
-    await I.retry(3).waitForText('Application details', 30);
+    await I.retry(3).waitForText('Application details');
     await I.retry(3).fillField(this.fields.caseRef, caseId);
     await I.retry(3).fillField(
       this.fields.childName,
@@ -66,7 +66,7 @@ module.exports = {
     await I.retry(3).fillField(this.fields.childrenDateOfBirthYear, childBasicInitialDetails.yearChildMovedIn);
     await I.retry(3).click('Save and continue');
     await I.wait(5);
-    await I.retry(3).waitForText('Getting started', 30);
+    await I.retry(3).waitForText('Getting started');
     await I.wait(4);
     await I.retry(3).click('Start now');
     await I.wait(3);
