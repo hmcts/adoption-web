@@ -10059,11 +10059,11 @@ __metadata:
   linkType: hard
 
 "jest-when@npm:^3.5.1":
-  version: 3.5.1
-  resolution: "jest-when@npm:3.5.1"
+  version: 3.6.0
+  resolution: "jest-when@npm:3.6.0"
   peerDependencies:
     jest: ">= 25"
-  checksum: 1efb9f497f7c846fe8b0f4125d5f449c4a4d78d5d0afa910d134b301ae4c119ea52c9465db38d2146269d42808afe8f3a4328d1d656878a9a69458ee653f6499
+  checksum: ed32ed84e5802bb6fec98966cdf862ce59677551be33d3795e6ac7a6207acf467ed559573d671c8d94c59f7fc0780cf358d2d165d81cdc7d9611250d975ee024
   languageName: node
   linkType: hard
 
