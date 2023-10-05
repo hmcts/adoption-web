@@ -16,8 +16,6 @@ export class PaymentModel {
   public get lastPayment(): Payment {
     const idx = this.payments.length - 1;
     const successPayment = this.payments.filter(item => item.value.status === PaymentStatus.SUCCESS);
-    console.log('successPayment.length:  ' + successPayment.length);
-
     if (successPayment.length > 0) {
       console.log('successful Payment found');
       return { ...successPayment[0].value, transactionId: successPayment[0].id };
