@@ -19,8 +19,7 @@ export class PaymentModel {
     console.log('successPayment.length:  ' + successPayment.length);
 
     if (successPayment.length > 0) {
-      console.log('successPayment123:  ' + JSON.stringify(successPayment));
-
+      console.log('successful Payment found having');
       return { ...successPayment[0].value, transactionId: successPayment[0].id };
     }
     return { ...this.payments[idx].value, transactionId: this.payments[idx].id };
