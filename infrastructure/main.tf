@@ -22,6 +22,9 @@ module "adoption-web-session-storage" {
   business_area = "cft"
   public_network_access_enabled = false
   common_tags  = var.common_tags
+  sku_name                      = var.sku_name
+family                        = var.family
+capacity                      = var.capacity
 }
 
 data "azurerm_key_vault" "adoption_key_vault" {
