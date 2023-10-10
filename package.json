@@ -108,6 +108,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",
+    "@babel/eslint-parser": "^7.11.0",
     "@babel/preset-env": "^7.18.2",
     "@pact-foundation/absolute-version": "^0.0.4",
     "@pact-foundation/pact": "^9.17.3",
@@ -119,7 +120,6 @@
     "@typescript-eslint/parser": "^5.26.0",
     "allure-commandline": "^2.17.2",
     "axios-debug-log": "^0.8.4",
-    "@babel/eslint-parser": "^7.11.0",
     "babel-loader": "^9.1.2",
     "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
