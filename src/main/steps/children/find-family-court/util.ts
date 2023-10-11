@@ -33,20 +33,20 @@ export const getCourtEmailId = (key: string): string => {
     ['bristol', config.get('localCourt.emailId.BRISTOL_FAMILY_COURT')],
     ['gloucestershire', config.get('localCourt.emailId.GLOUCESTERSHIRE_FAMILY_COURT')],
     //West London
-    /* ['west london', config.get('localCourt.emailId.WEST_LONDON_FAMILY_COURT')],
+    ['west london', config.get('localCourt.emailId.WEST_LONDON_FAMILY_COURT')],
     ['barnet', config.get('localCourt.emailId.BARNET_FAMILY_COURT')],
     ['bromley', config.get('localCourt.emailId.BROMLEY_FAMILY_COURT')],
     ['central', config.get('localCourt.emailId.CENTRAL_FAMILY_COURT')],
     ['croydon', config.get('localCourt.emailId.CROYDON_FAMILY_COURT')],
-    ['east london', config.get('localCourt.emailId.EAST_LONDON_FAMILY_COURT')], */
+    ['east london', config.get('localCourt.emailId.EAST_LONDON_FAMILY_COURT')],
     //South East
-    /* ['luton', config.get('localCourt.emailId.LUTON_FAMILY_COURT')],
+    ['luton', config.get('localCourt.emailId.LUTON_FAMILY_COURT')],
     ['norwich', config.get('localCourt.emailId.NORWICH_FAMILY_COURT')],
     ['watford', config.get('localCourt.emailId.WATFORD_FAMILY_COURT')],
     ['peterborough', config.get('localCourt.emailId.PETERBOROUGH_FAMILY_COURT')],
     ['brighton', config.get('localCourt.emailId.BRIGHTON_FAMILY_COURT')],
     ['guildford', config.get('localCourt.emailId.GUILDFORD_FAMILY_COURT')],
-    ['milton keynes', config.get('localCourt.emailId.MILTON_KEYNES_FAMILY_COURT')], */
+    ['milton keynes', config.get('localCourt.emailId.MILTON_KEYNES_FAMILY_COURT')],
     //North East
     ['kingston-upon-hull', config.get('localCourt.emailId.KINGSTON_UPON_HULL_FAMILY_COURT')],
     ['newcastle upon tyne', config.get('localCourt.emailId.NEWCASTLE_UPON_TYNE_FAMILY_COURT')],
