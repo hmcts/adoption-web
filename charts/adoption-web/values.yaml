@@ -259,6 +259,8 @@ nodejs:
       - adoptionmatters.org
       - caritascare.org.uk
       - stmargaretsadoption.org.uk
+      - westernbayadoption.org
+      - stdavidscs.org
 
     # Family Court List
     LEICESTER_VAL: 'Leicester County Court'
