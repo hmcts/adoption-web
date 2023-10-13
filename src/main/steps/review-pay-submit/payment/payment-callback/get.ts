@@ -11,7 +11,8 @@ const logger = Logger.getLogger('payment-callback');
 
 export default class PaymentCallbackGetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
-    if (req.session.userCase.state === State.Draft) {
+    const payments = new PaymentModel(req.session.userCase.payments);
+    if (req.session.userCase.state === State.Draft && payments.wasLastPaymentSuccessful) {
       req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, {}, CITIZEN_SUBMIT);
     }
     if (req.session.userCase.state !== State.AwaitingPayment) {
@@ -24,7 +25,6 @@ export default class PaymentCallbackGetController {
     const returnUrl = `${protocol}${res.locals.host}${port}${PAYMENT_CALLBACK_URL}`;
 
     const paymentClient = new PaymentClient(req.session, returnUrl);
-    const payments = new PaymentModel(req.session.userCase.payments);
 
     logger.info(`caseId=${caseId} hasPayment=${payments.hasPayment}`);
     if (!payments.hasPayment) {
