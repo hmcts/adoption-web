@@ -261,6 +261,7 @@ nodejs:
       - stmargaretsadoption.org.uk
       - westernbayadoption.org
       - stdavidscs.org
+      - scottishadoption.org
 
     # Family Court List
     LEICESTER_VAL: 'Leicester County Court'
