@@ -36,7 +36,7 @@ module.exports = {
   },
 
   async childDOBSection() {
-    await I.retry(3).waitForText("What is the child's date of birth?", 30);
+    await I.retry(3).waitForText("What is the child's date of birth?");
     await I.retry(3).fillField(this.fields.childrenDateOfBirthDay, childBasicInitialDetails.dateChildMovedIn);
     await I.retry(3).fillField(this.fields.childrenDateOfBirthMonth, childBasicInitialDetails.monthChildMovedIn);
     await I.wait(4);
@@ -47,7 +47,7 @@ module.exports = {
 
   async childFullNameSectionBlankFields() {
     await I.retry(3).waitForText("What is the child's full name?");
-    await I.retry(3).waitForSelector(this.fields.saveAndContinue, 30);
+    await I.retry(3).waitForSelector(this.fields.saveAndContinue);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText("Enter the child's first names");
@@ -61,12 +61,12 @@ module.exports = {
   async childNameAfterAdoptionDetailsSectionBlankFields() {
     await I.retry(3).waitForText("After adoption, what will be the child's full name?");
     await I.wait(4);
-    await I.retry(3).waitForSelector(this.fields.saveAndContinue, 30);
+    await I.retry(3).waitForSelector(this.fields.saveAndContinue);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
-    await I.retry(3).waitForText('There is a problem', 30);
-    await I.retry(3).waitForText('Enter their first names', 30);
-    await I.retry(3).waitForText('Enter their last names', 30);
+    await I.retry(3).waitForText('There is a problem');
+    await I.retry(3).waitForText('Enter their first names');
+    await I.retry(3).waitForText('Enter their last names');
     await I.retry(3).fillField(
       this.fields.childrenFirstNameAfterAdoption,
       childAdoptionCertificateDetails.childrenFirstNameAfterAdoption
@@ -81,20 +81,20 @@ module.exports = {
   },
 
   async childDOBSectionBlankFields() {
-    await I.retry(3).waitForText("What is the child's date of birth?", 30);
-    await I.retry(3).waitForSelector(this.fields.saveAndContinue, 30);
+    await I.retry(3).waitForText("What is the child's date of birth?");
+    await I.retry(3).waitForSelector(this.fields.saveAndContinue);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
-    await I.retry(3).waitForText('Enter their date of birth', 30);
+    await I.retry(3).waitForText('Enter their date of birth');
 
     await I.retry(3).fillField(this.fields.childrenDateOfBirthDay, childBasicInitialDetails.dateChildMovedInInvalid);
     await I.retry(3).fillField(this.fields.childrenDateOfBirthMonth, childBasicInitialDetails.monthChildMovedInInvalid);
     await I.wait(4);
     await I.retry(3).fillField(this.fields.childrenDateOfBirthYear, childBasicInitialDetails.yearChildMovedInInvalid);
-    await I.retry(3).waitForSelector(this.fields.saveAndContinue, 30);
+    await I.retry(3).waitForSelector(this.fields.saveAndContinue);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
-    await I.retry(3).waitForText('Date of birth must be a real date', 30);
+    await I.retry(3).waitForText('Date of birth must be a real date');
     await I.retry(3).fillField(this.fields.childrenDateOfBirthDay, childBasicInitialDetails.dateChildMovedIn);
     await I.retry(3).fillField(this.fields.childrenDateOfBirthMonth, childBasicInitialDetails.monthChildMovedIn);
     await I.wait(4);
@@ -102,16 +102,16 @@ module.exports = {
       this.fields.childrenDateOfBirthYear,
       childBasicInitialDetails.yearChildMovedInFutureDate
     );
-    await I.retry(3).waitForSelector(this.fields.saveAndContinue, 30);
+    await I.retry(3).waitForSelector(this.fields.saveAndContinue);
     await I.retry(3).click('Save and continue');
     await page.keyboard.type('\n');
     await I.wait(4);
-    await I.retry(3).waitForText('Date of birth must be in the past', 30);
+    await I.retry(3).waitForText('Date of birth must be in the past');
     await I.retry(3).fillField(this.fields.childrenDateOfBirthDay, childBasicInitialDetails.dateChildMovedIn);
     await I.retry(3).fillField(this.fields.childrenDateOfBirthMonth, childBasicInitialDetails.monthChildMovedIn);
     await I.wait(4);
     await I.retry(3).fillField(this.fields.childrenDateOfBirthYear, childBasicInitialDetails.yearChildMovedIn);
-    await I.retry(3).waitForSelector(this.fields.saveAndContinue, 30);
+    await I.retry(3).waitForSelector(this.fields.saveAndContinue);
     await I.retry(3).click('Save and continue');
     await I.wait(4);
   },

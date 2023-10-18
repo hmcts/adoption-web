@@ -8,12 +8,12 @@ module.exports = {
     laStatementOfTruth: 'input[id$="laStatementOfTruth"]',
   },
   async laCheckYourAnswersContinue() {
-    await I.retry(3).waitForText('Check your answers', 30);
+    await I.retry(3).waitForText('Check your answers');
     await I.retry(3).click('Continue');
     await I.wait(4);
   },
   async laStatementOfTruthPage() {
-    await I.retry(3).waitForText('Statement of truth', 30);
+    await I.retry(3).waitForText('Statement of truth');
     await I.retry(3).fillField(this.fields.laSotFullName, 'La Full Name');
     await I.retry(3).fillField(this.fields.laSotJobtitle, 'Local Authority');
     await I.retry(3).fillField(this.fields.laNameSot, 'Swansea');
