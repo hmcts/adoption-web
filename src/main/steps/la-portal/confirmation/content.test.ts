@@ -21,7 +21,7 @@ const cyContent = {
   referenceNumber: 'Cyfeirnod y cais<br><strong>1234567890123456</strong>',
   emailSentConfirmation: 'Rydym wedi anfon e-bost cadarnhad i’r cyfeiriadau e-bost a gofrestrwyd.',
   line1:
-    'Bydd y cais nawr yn cael ei anfon i’r llys i’w brosesu. Os na wnaethoch uwchlwytho Atodiad A fel rhan o’r dystiolaeth ar gyfer y cais, dylech e-bostio hwn yn uniongyrchol i’r llys cyn gynted â phosib i atal oedi a negeseuon atgoffa rhag cael eu hanfon. ',
+    'Bydd y cais nawr yn cael ei anfon i’r llys i’w brosesu. Os na wnaethoch uwchlwytho Atodiad A fel rhan o’r dystiolaeth ar gyfer y cais, dylech e-bostio hwn yn uniongyrchol i’r llys cyn gynted â phosib i atal oedi a negeseuon atgoffa rhag cael eu hanfon.',
   /* line2:
     "Os na allwch uwchlwytho Atodiad A o fewn 10 diwrnod gwaith o'r adeg y gwnaethoch gyflwyno'r cais, gallwch ei e-bostio'n uniongyrchol i'r llys. ", */
   line3: 'Fe anfonir e-bost at y ceiswyr i’w hysbysu bod eu cais wedi cyrraedd y llys. ',

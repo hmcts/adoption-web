@@ -61,11 +61,19 @@ const placementOrderListItems = (userCase: Partial<CaseWithId>, content) => {
   ];
 };
 
-const getTitle = (userCase: Partial<CaseWithId>, content): string => {
+const getTitleEN = (userCase: Partial<CaseWithId>, content): string => {
   const sibling = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
 
   return `${!sibling?.siblingPoType ? 'Order' : content.siblingPOType[sibling?.siblingPoType]} ${content.for} ${
     !sibling?.siblingRelation ? 'sibling' : content.siblingRelation[sibling?.siblingRelation].toLowerCase()
+  }`;
+};
+
+const getTitleCY = (userCase: Partial<CaseWithId>, content): string => {
+  const sibling = userCase.siblings?.find(item => item.siblingId === userCase.selectedSiblingId);
+
+  return `${!sibling?.siblingPoType ? 'Gorchmynion' : content.siblingPOType[sibling?.siblingPoType]} ${content.for} ${
+    !sibling?.siblingRelation ? 'brodyr/chwiorydd' : content.siblingRelation[sibling?.siblingRelation].toLowerCase()
   }`;
 };
 
@@ -98,7 +106,7 @@ const en = content => {
   };
   return {
     ...enContent,
-    title: getTitle(content.userCase, enContent),
+    title: getTitleEN(content.userCase, enContent),
     placementOrderListItems: placementOrderListItems(content.userCase, enContent),
   };
 };
@@ -132,7 +140,7 @@ const cy: typeof en = content => {
   };
   return {
     ...cyContent,
-    title: getTitle(content.userCase, cyContent),
+    title: getTitleCY(content.userCase, cyContent),
     placementOrderListItems: placementOrderListItems(content.userCase, cyContent),
   };
 };
