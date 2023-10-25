@@ -15,14 +15,14 @@ export const getCourtEmailId = (key: string): string => {
     ['central london', config.get('localCourt.emailId.CENTRAL_LONDON_FAMILY_COURT')],
     ['reading', config.get('localCourt.emailId.READING_FAMILY_COURT')],
     //Midlands
-    /* ['stoke-on-trent', config.get('localCourt.emailId.STOKE-ON-TRENT_FAMILY_COURT')],
+    ['stoke-on-trent', config.get('localCourt.emailId.STOKE-ON-TRENT_FAMILY_COURT')],
     ['leicester', config.get('localCourt.emailId.LEICESTER_FAMILY_COURT')],
     ['lincoln', config.get('localCourt.emailId.LINCOLN_FAMILY_COURT')],
     ['nottingham', config.get('localCourt.emailId.NOTTINGHAM_FAMILY_COURT')],
     ['derby', config.get('localCourt.emailId.DERBY_FAMILY_COURT')],
     ['coventry', config.get('localCourt.emailId.COVENTRY_FAMILY_COURT')],
     ['birmingham', config.get('localCourt.emailId.BIRMINGHAM_FAMILY_COURT')],
-    ['wolverhampton', config.get('localCourt.emailId.WOLVERHAMPTON_FAMILY_COURT')], */
+    ['wolverhampton', config.get('localCourt.emailId.WOLVERHAMPTON_FAMILY_COURT')],
     //South West
     ['swindon', config.get('localCourt.emailId.SWINDON_FAMILY_COURT')],
     ['exeter', config.get('localCourt.emailId.EXETER_FAMILY_COURT')],
@@ -54,12 +54,12 @@ export const getCourtEmailId = (key: string): string => {
     ['york', config.get('localCourt.emailId.YORK_FAMILY_COURT')],
     ['sheffield', config.get('localCourt.emailId.SHEFFIELD_FAMILY_COURT')],
     //North West
-    /* ['chester', config.get('localCourt.emailId.CHESTER_FAMILY_COURT')],
+    ['chester', config.get('localCourt.emailId.CHESTER_FAMILY_COURT')],
     ['barrow-in-furness', config.get('localCourt.emailId.BARROW-IN-FURNESS_FAMILY_COURT')],
     ['blackburn', config.get('localCourt.emailId.BLACKBURN_FAMILY_COURT')],
     ['carlisle', config.get('localCourt.emailId.CARLISLE_FAMILY_COURT')],
     ['west cumbria', config.get('localCourt.emailId.WEST_CUMBRIA_FAMILY_COURT')],
-    ['manchester', config.get('localCourt.emailId.MANCHESTER_FAMILY_COURT')], */
+    ['manchester', config.get('localCourt.emailId.MANCHESTER_FAMILY_COURT')],
     //Wales
     ['aberystwyth', config.get('localCourt.emailId.ABERYSTWYTH_FAMILY_COURT')],
     ['caernarfon', config.get('localCourt.emailId.CAERNARFON_FAMILY_COURT')],
