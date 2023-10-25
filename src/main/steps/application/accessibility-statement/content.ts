@@ -107,7 +107,7 @@ const cy: typeof en = {
   contactInductionLoops:
     'Mae gan y llysoedd teulu ddolenni sain a gallwch hefyd ofyn am gael mynediad heb risiau, cyfieithydd iaith arwyddion neu gyfieithydd iaith dramor.',
   contactFindOutHowToContactUs:
-    'Find out how to contact us at <a href="https://www.gov.uk/find-court-tribunal" class="govuk-link" target="blank">Find a Court or Tribunal service</a>',
+    'Gallwch gael rhagor o wybodaeth am sut i gysylltu â ni yn <a href="https://www.gov.uk/find-court-tribunal" class="govuk-link" target="blank">Chwilio am lys neu dribiwnlys</a>',
   technicalInfo: 'Gwybodaeth dechnegol am hygyrchedd y wefan hon',
   hmctsIsCommitted:
     'Mae GLlTEM wedi ymrwymo i sicrhau bod ei wefannau yn hygyrch, a hynny yn unol â Rheoliadau Hygyrchedd Cyrff y Sector Gyhoeddus (Gwefannau a Rhaglenni Symudol) (Rhif 2) 2018.',
