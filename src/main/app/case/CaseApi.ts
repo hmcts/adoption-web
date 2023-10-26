@@ -222,7 +222,7 @@ interface ES<T> {
   total: number;
 }
 
-interface CcdV1Response {
+export interface CcdV1Response {
   id: string;
   state: State;
   case_data: CaseData;

@@ -26,9 +26,9 @@ export const getTokenFromApi = async (): Promise<string> => {
   return token;
 };
 
-export const initAuthToken = (): void => {
+export const initAuthToken = async (): Promise<void> => {
   getTokenFromApi();
-  setInterval(getTokenFromApi, 1000 * 60 * 60);
+  setInterval(await getTokenFromApi, 1000 * 60 * 60);
 };
 
 export const getServiceAuthToken = (): string => {

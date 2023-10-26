@@ -4,7 +4,7 @@ import { Response } from 'express';
 import moment from 'moment';
 import moment_timezone from 'moment-timezone';
 
-import { getCaseApi } from '../../app/case/CaseApi';
+import { CcdV1Response, getCaseApi } from '../../app/case/CaseApi';
 import {
   getDraftCaseFromStore,
   removeCaseFromRedis,
@@ -221,23 +221,7 @@ export class PostController<T extends AnyObject> {
             'Current Date and Time: ' + moment_timezone.tz(new Date(), 'Europe/London').format('YYYY-MM-DD hh:mm:ss a')
           );
 
-          if (cases.length > 0) {
-            const feeSummary = cases[0].case_data.applicationFeeOrderSummary;
-            const payments = cases[0].case_data.applicationPayments;
-            req.session.userCase = await req.locals.api.triggerEvent(caseRefId, formData, eventName);
-            req.session.userCase = await req.locals.api.triggerEvent(
-              caseRefId,
-              { applicationFeeOrderSummary: feeSummary },
-              CITIZEN_SUBMIT
-            );
-            req.session.userCase = await req.locals.api.addPayment(caseRefId, payments!);
-            req.session.userCase.canPaymentIgnored = true;
-          } else {
-            req.session.userCase.canPaymentIgnored = false;
-            req.session.userCase.redirectToSOT = true;
-            //write code to redirect to SOT with updated button;
-            //this.redirect(req, );
-          }
+          await this.fetchPaymentDetailsBasedOnCaseLength(cases, req, caseRefId, formData, eventName);
         } else {
           req.session.userCase = await req.locals.api.triggerEvent(caseRefId, formData, eventName);
         }
@@ -248,6 +232,32 @@ export class PostController<T extends AnyObject> {
       req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
     }
     return req.session.userCase;
+  }
+
+  private async fetchPaymentDetailsBasedOnCaseLength(
+    cases: CcdV1Response[],
+    req: AppRequest<T>,
+    caseRefId: string,
+    formData: Partial<Case>,
+    eventName: string
+  ) {
+    if (cases.length > 0) {
+      const feeSummary = cases[0].case_data.applicationFeeOrderSummary;
+      const payments = cases[0].case_data.applicationPayments;
+      req.session.userCase = await req.locals.api.triggerEvent(caseRefId, formData, eventName);
+      req.session.userCase = await req.locals.api.triggerEvent(
+        caseRefId,
+        { applicationFeeOrderSummary: feeSummary },
+        CITIZEN_SUBMIT
+      );
+      req.session.userCase = await req.locals.api.addPayment(caseRefId, payments!);
+      req.session.userCase.canPaymentIgnored = true;
+    } else {
+      req.session.userCase.canPaymentIgnored = false;
+      req.session.userCase.redirectToSOT = true;
+      //write code to redirect to SOT with updated button;
+      //this.redirect(req, );
+    }
   }
 
   protected redirect(req: AppRequest<T>, res: Response, nextUrl?: string): void {
