@@ -1026,6 +1026,28 @@ describe('utils', () => {
         },
         expected: '/application/submitted',
       },
+      {
+        data: {
+          ...mockUserCase,
+          state: State.Draft,
+          payments: [
+            {
+              id: 'MOCK_ID',
+              value: {
+                created: 'MOCK_DATE',
+                updated: 'MOCK_DATE',
+                feeCode: 'MOCK_FEE_CODE',
+                amount: 100,
+                status: PaymentStatus.SUCCESS,
+                channel: 'MOCK_CHANNEL',
+                reference: 'MOCK_REF',
+                transactionId: 'MOCK_TRANSACTION_ID',
+              },
+            },
+          ],
+        },
+        expected: '/review-pay-submit/payment/payment-callback',
+      },
     ])('should return correct url %#', async ({ data, expected }) => {
       expect(getReviewPaySubmitUrl(data)).toBe(expected);
     });
