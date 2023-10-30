@@ -3510,12 +3510,12 @@ __metadata:
   linkType: hard
 
 "@types/session-file-store@npm:^1.2.2":
-  version: 1.2.3
-  resolution: "@types/session-file-store@npm:1.2.3"
+  version: 1.2.4
+  resolution: "@types/session-file-store@npm:1.2.4"
   dependencies:
     "@types/express": "*"
     "@types/express-session": "*"
-  checksum: b7d57206da8abd74f7dd8e5e47673cec0c0bf25446c3c3981aaa80b03bb1a8d92402f7dbba2631aa7a23dda79b0786bdbaa9a7daaa734880c883234f1c0bc838
+  checksum: 58896f2b42ecd5ddbe0e53a31ede52a21c6b2c9d783d35ee162567df476be258311058ecc74472eb4b3efad2f836fe6bcae46b674075cd31bb227ad98915f103
   languageName: node
   linkType: hard
 
