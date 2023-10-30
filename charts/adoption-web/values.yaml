@@ -264,7 +264,7 @@ nodejs:
       - scottishadoption.org
       - bradfordcft.org.uk
       - yorkshireadoptionagency.org.uk
-      - adoptionlancashireblackpool.org
+      - adoptionlancashireblackpool.org.uk
 
     # Family Court List
     LEICESTER_VAL: 'Leicester County Court'
