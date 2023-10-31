@@ -3534,9 +3534,9 @@ __metadata:
   linkType: hard
 
 "@types/toobusy-js@npm:^0.5.2":
-  version: 0.5.2
-  resolution: "@types/toobusy-js@npm:0.5.2"
-  checksum: 6bf4df7da76e79a5b26d39d4fac3c809e563ab8a76a1a9d39632ce8035147291c68dfd26c3cf40206946a4efe6d64c05d7234e632d9e33b88a56a2d2e67a5568
+  version: 0.5.3
+  resolution: "@types/toobusy-js@npm:0.5.3"
+  checksum: 2a67f619de147ecea54eabb8542301b3bb9190b339949543c1d0d3ba3d874b8012ba8f25d51d87bb46f12f667950954a1726417b9d116e81e0c13ae2bed95b87
   languageName: node
   linkType: hard
 
