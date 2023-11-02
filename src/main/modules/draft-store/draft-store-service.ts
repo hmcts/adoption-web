@@ -25,6 +25,7 @@ export const saveDraftCase = async (req: AppRequest, caseRef: string, formData: 
     'selectedSiblingOtherPlacementOrderType',
     'selectedSiblingPoType',
     'selectedSiblingRelation',
+    'laDocumentsUploaded',
   ];
   const expireTimeInSec: number = config.get('services.draftStore.redis.ttl');
   fieldsToBeExcluded.forEach(item => {
