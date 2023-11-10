@@ -101,7 +101,7 @@ export class OidcMiddleware {
         if (req.session?.user) {
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
           if (!req.session.userCase) {
-            const userCase = await req.locals.api.getCase();
+            const userCase = (await req.locals.api.getCaseDetails()).userCase;
             if (userCase) {
               req.session.userCase = userCase;
             }

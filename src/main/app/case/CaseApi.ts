@@ -26,19 +26,21 @@ export class CaseApi {
   constructor(private readonly axios: AxiosInstance, private readonly logger: LoggerInstance) {}
 
   public async getOrCreateCase(serviceType: Adoption, userDetails: UserDetails): Promise<CaseWithId> {
-    const userCase = await this.getCase();
+    const userCase = (await this.getCaseDetails()).userCase;
     return userCase || this.createCase(serviceType, userDetails);
   }
 
-  public async checkOldPCQIDExists(): Promise<string | undefined> {
-    const cases = await this.getCases();
+  public async checkOldPCQIDExists(cases: CcdV1Response[]): Promise<string | undefined> {
     const caseWithPCQID = cases.find(caseElement => caseElement.case_data.pcqId !== null);
     return caseWithPCQID?.case_data.pcqId;
   }
 
-  public async getCase(): Promise<CaseWithId | false> {
+  public async getCaseDetails(): Promise<{ userCase: CaseWithId | false; cases: CcdV1Response[] }> {
     const cases = await this.getCases();
+    return { userCase: await this.getCase(cases), cases };
+  }
 
+  async getCase(cases: CcdV1Response[]): Promise<CaseWithId | false> {
     if (cases.length === 0) {
       return false;
     }
@@ -222,7 +224,7 @@ interface ES<T> {
   total: number;
 }
 
-interface CcdV1Response {
+export interface CcdV1Response {
   id: string;
   state: State;
   case_data: CaseData;

@@ -228,11 +228,20 @@ describe('PostController', () => {
   test('When Request contains applyting with URL', async () => {
     getNextStepUrlMock.mockReturnValue('/next-step-url');
     const caseApiMockFn = {
-      getCase: jest.fn(() => {
+      getCaseDetails: jest.fn(() => {
         return {
-          id: '123456',
-          state: 'Submitted',
-          case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+          userCase: {
+            id: '123456',
+            state: 'Submitted',
+            case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+          },
+          cases: [
+            {
+              id: '123456',
+              state: 'Submitted',
+              case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+            },
+          ],
         };
       }),
       unlinkStaleDraftCaseIfFound: jest.fn(() => {
@@ -265,14 +274,14 @@ describe('PostController', () => {
     res.locals.serviceType = Adoption.ADOPTION;
     await controller.post(req, res);
 
-    expect(res.redirect).toBeCalledWith('/request');
+    expect(res.redirect).toBeCalledWith('/next-step-url');
   });
 
   test('When Request contains applyting with URL and user case is empty', async () => {
     getNextStepUrlMock.mockReturnValue('/next-step-url');
     const caseApiMockFn = {
-      getCase: jest.fn(() => {
-        return null;
+      getCaseDetails: jest.fn(() => {
+        return { userCase: null, cases: null };
       }),
       unlinkStaleDraftCaseIfFound: jest.fn(() => {
         return undefined;

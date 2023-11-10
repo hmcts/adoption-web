@@ -4,7 +4,7 @@ import { Response } from 'express';
 import moment from 'moment';
 import moment_timezone from 'moment-timezone';
 
-import { getCaseApi } from '../../app/case/CaseApi';
+import { CcdV1Response, getCaseApi } from '../../app/case/CaseApi';
 import {
   getDraftCaseFromStore,
   removeCaseFromRedis,
@@ -52,26 +52,30 @@ export class PostController<T extends AnyObject> {
     const { saveAndRelogin, saveAndSignOut, saveBeforeSessionTimeout, _csrf, ...formData } = form.getParsedBody(
       req.body
     );
+    let userCaseList;
 
     if (req.path.startsWith(APPLYING_WITH_URL)) {
       req.locals.api = getCaseApi(req.session.user, req.locals.logger);
-      const userCase = await req.locals.api.getCase();
+      const { userCase, cases } = await req.locals.api.getCaseDetails();
+      userCaseList = cases;
+
       if (userCase === null) {
         // Applications submitted not on login day
-        const pcqId = await req.locals.api.checkOldPCQIDExists();
+        const pcqId = await req.locals.api.checkOldPCQIDExists(userCaseList);
         req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
         req.session.userCase = await this.save(
           req,
           {
             pcqId,
           },
-          this.getEventName(req)
+          this.getEventName(req),
+          userCaseList
         );
       } else if (userCase) {
         //this.getDraftOrSubmittedCase(req, userCase, res);
         // Returned case may be Draft OR Submitted
-        const pcqId = await req.locals.api.checkOldPCQIDExists();
-        await this.savePcqIDforDraftOrSubmittedCase(userCase, req, pcqId, res);
+        const pcqId = await req.locals.api.checkOldPCQIDExists(userCaseList);
+        await this.savePcqIDforDraftOrSubmittedCase(userCase, req, pcqId, res, userCaseList);
       } else {
         // No Application for the user
         req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
@@ -85,14 +89,14 @@ export class PostController<T extends AnyObject> {
           throw err;
         }
       });
-      await this.saveAndSignOut(req, res, formData, SAVE_AND_RELOGIN);
+      await this.saveAndSignOut(req, res, formData, SAVE_AND_RELOGIN, userCaseList);
     }
     if (req.body.saveAndSignOut) {
-      await this.saveAndSignOut(req, res, formData, SAVE_AND_SIGN_OUT);
+      await this.saveAndSignOut(req, res, formData, SAVE_AND_SIGN_OUT, userCaseList);
     } else if (req.body.saveBeforeSessionTimeout) {
-      await this.saveBeforeSessionTimeout(req, res, formData);
+      await this.saveBeforeSessionTimeout(req, res, formData, userCaseList);
     } else {
-      await this.saveAndContinue(req, res, form, formData);
+      await this.saveAndContinue(req, res, form, formData, userCaseList);
     }
   }
 
@@ -100,7 +104,8 @@ export class PostController<T extends AnyObject> {
     userCase: CaseWithId,
     req: AppRequest<T>,
     pcqId: string | undefined,
-    res: Response
+    res: Response,
+    userCaseList: CcdV1Response[]
   ) {
     if (userCase.state !== State.Submitted && userCase.state !== State.LaSubmitted) {
       req.session.userCase = userCase;
@@ -109,7 +114,8 @@ export class PostController<T extends AnyObject> {
         {
           pcqId,
         },
-        this.getEventName(req)
+        this.getEventName(req),
+        userCaseList
       );
     } else {
       // Applications submitted on the login day
@@ -119,7 +125,8 @@ export class PostController<T extends AnyObject> {
         {
           pcqId,
         },
-        this.getEventName(req)
+        this.getEventName(req),
+        userCaseList
       );
     }
   }
@@ -128,26 +135,38 @@ export class PostController<T extends AnyObject> {
     req: AppRequest<T>,
     res: Response,
     formData: Partial<Case>,
-    redirectUrl: string
+    redirectUrl: string,
+    userCaseList?: CcdV1Response[]
   ): Promise<void> {
     try {
-      await this.save(req, formData, CITIZEN_SAVE_AND_CLOSE);
+      await this.save(req, formData, CITIZEN_SAVE_AND_CLOSE, userCaseList);
     } catch {
       // ignore
     }
     res.redirect(redirectUrl);
   }
 
-  private async saveBeforeSessionTimeout(req: AppRequest<T>, res: Response, formData: Partial<Case>): Promise<void> {
+  private async saveBeforeSessionTimeout(
+    req: AppRequest<T>,
+    res: Response,
+    formData: Partial<Case>,
+    userCaseList?: CcdV1Response[]
+  ): Promise<void> {
     try {
-      await this.save(req, formData, this.getEventName(req));
+      await this.save(req, formData, this.getEventName(req), userCaseList);
     } catch {
       // ignore
     }
     res.end();
   }
 
-  private async saveAndContinue(req: AppRequest<T>, res: Response, form: Form, formData: Partial<Case>): Promise<void> {
+  private async saveAndContinue(
+    req: AppRequest<T>,
+    res: Response,
+    form: Form,
+    formData: Partial<Case>,
+    userCaseList?: CcdV1Response[]
+  ): Promise<void> {
     Object.assign(req.session.userCase, formData);
     req.session.errors = form.getErrors(formData);
     this.filterErrorsForSaveAsDraft(req);
@@ -156,7 +175,7 @@ export class PostController<T extends AnyObject> {
       return this.redirect(req, res);
     }
 
-    req.session.userCase = await this.save(req, formData, this.getEventName(req));
+    req.session.userCase = await this.save(req, formData, this.getEventName(req), userCaseList);
 
     this.checkReturnUrlAndRedirect(req, res, this.ALLOWED_RETURN_URLS);
   }
@@ -174,7 +193,12 @@ export class PostController<T extends AnyObject> {
     }
   }
 
-  protected async save(req: AppRequest<T>, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
+  protected async save(
+    req: AppRequest<T>,
+    formData: Partial<Case>,
+    eventName: string,
+    userCaseList?: CcdV1Response[]
+  ): Promise<CaseWithId> {
     const caseRefId = req.session.userCase.id;
     if (
       (req.url.includes('la-portal') && ![LA_PORTAL_STATEMENT_OF_TRUTH?.toString()].includes(req.url)) ||
@@ -189,7 +213,7 @@ export class PostController<T extends AnyObject> {
       }
       return req.session.userCase;
     } else {
-      return this.laStateOfTruth(req, formData, caseRefId, eventName);
+      return this.laStateOfTruth(req, formData, caseRefId, eventName, userCaseList);
     }
   }
 
@@ -197,7 +221,8 @@ export class PostController<T extends AnyObject> {
     req: AppRequest<T>,
     formData: Partial<Case>,
     caseRefId: string,
-    eventName: string
+    eventName: string,
+    userCaseList: CcdV1Response[] | undefined
   ): Promise<CaseWithId> {
     try {
       if ([LA_PORTAL_STATEMENT_OF_TRUTH?.toString()].includes(req.url)) {
@@ -208,7 +233,7 @@ export class PostController<T extends AnyObject> {
       } else {
         //const flag = req.session.userCase.canPaymentIgnored;
         req.locals.api = getCaseApi(req.session.user, req.locals.logger);
-        let cases = await req.locals.api.getCases();
+        let cases = userCaseList !== undefined ? userCaseList : await req.locals.api.getCases();
 
         if (cases.length !== 0 && req.session.userCase.canPaymentIgnored === true) {
           cases = cases.filter(
