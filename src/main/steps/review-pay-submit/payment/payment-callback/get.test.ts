@@ -2,7 +2,7 @@ import 'jest-extended';
 
 import { mockRequest } from '../../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../../test/unit/utils/mockResponse';
-import { ApplicationType, PaymentStatus, State } from '../../../../app/case/definition';
+import { ApplicationType, CITIZEN_SUBMIT, PaymentStatus, State } from '../../../../app/case/definition';
 import { APPLICATION_SUBMITTED, CHECK_ANSWERS_URL, STATEMENT_OF_TRUTH } from '../../../urls';
 
 import PaymentCallbackGetController from './get';
@@ -67,6 +67,42 @@ describe('PaymentCallbackGetController', () => {
 
       expect(mockGet).not.toHaveBeenCalled();
       expect(req.locals.api.addPayment).not.toHaveBeenCalled();
+      expect(res.redirect).toHaveBeenCalledWith(CHECK_ANSWERS_URL);
+    });
+
+    it('gets userCase and redirects to the home page if the state is draft and last payment was successful', async () => {
+      const req = mockRequest({
+        userCase: {
+          state: State.Draft,
+          payments: [
+            {
+              id: 'mock payment id',
+              value: {
+                amount: 55000,
+                channel: 'mock payment provider',
+                feeCode: 'FEE0002',
+                reference: 'mock ref',
+                status: PaymentStatus.SUCCESS,
+                transactionId: 'mock payment id',
+              },
+            },
+          ],
+        },
+      });
+      (req.locals.api.triggerEvent as jest.Mock).mockResolvedValueOnce({
+        draft: State.Draft,
+        applicationFeeOrderSummary: {
+          PaymentTotal: '100',
+          Fees: [{ id: 'MOCK_V4_UUID', value: { FeeAmount: '4321' } }],
+        },
+      });
+      const res = mockResponse();
+
+      await paymentController.get(req, res);
+
+      expect(mockGet).not.toHaveBeenCalled();
+      expect(req.locals.api.addPayment).not.toHaveBeenCalled();
+      expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', {}, CITIZEN_SUBMIT);
       expect(res.redirect).toHaveBeenCalledWith(CHECK_ANSWERS_URL);
     });
 

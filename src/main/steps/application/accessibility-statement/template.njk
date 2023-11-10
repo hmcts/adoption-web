@@ -5,7 +5,7 @@
   <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">{{ title }}</h1>
 
-      <p class="govuk-body">{{ websiteRanBy }}</p>
+      <p class="govuk-body">{{ websiteRanBy | safe }}</p>
       <p class="govuk-body">{{ asManyAsPossible }}</p>
       <ul class="govuk-list govuk-list--bullet">
         <li>{{ asManyAsPossibleColours }}</li>
@@ -21,31 +21,31 @@
       <p class="govuk-body">{{ somePartsNot }}</p>
       <ul class="govuk-list govuk-list--bullet">
         <li>{{ somePartsNotReflow }}</li>
-        <li>{{ somePartsNotSpacing }}</li>
-        <li>{{ somePartsNotFooter }}</li>
       </ul>
 
       <h3 class="govuk-heading-s">{{ feedbackAndContactInformation }}</h3>
       <p class="govuk-body">{{ needMoreInformation }}</p>
-      <p class="govuk-body">{{ email | safe }}</p>
-      <p class="govuk-body">{{ phone }}</p>
-      <p class="govuk-body">{{ openingHours }}</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>{{ email | safe }}</li>
+        <li>{{ phone }}<br>{{ openingHours }}</li>
+      </ul>
       <p class="govuk-body">{{ considerYourRequest }}</p>
 
       <h3 class="govuk-heading-s">{{ reportingAccessibility }}</h3>
       <p class="govuk-body">{{ improveAccessibility | safe }}</p>
-      <p class="govuk-body">{{ email | safe }}</p>
-      <p class="govuk-body">{{ accessibilityPhoneNumber }}</p>
-      <p class="govuk-body">{{ accessibilityOpeningHours }}</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>{{ email | safe }}</li>
+        <li>{{ accessibilityPhoneNumber }}<br>{{ accessibilityOpeningHours }}</li>
+      </ul>
 
       <h3 class="govuk-heading-s">{{ enforcementProcedure }}</h3>
       <p class="govuk-body">{{ humanRightsCommission | safe }}</p>
       <p class="govuk-body">{{ notHappy | safe }}</p>
 
       <h2 class="govuk-heading-m">{{ contactingUs }}</h2>
-      <p class="govuk-body">{{ contactCourtDirectly | safe }}</p>
       <p class="govuk-body">{{ contactTextRelay }}</p>
       <p class="govuk-body">{{ contactInductionLoops }}</p>
+      <p class="govuk-body">{{ contactFindOutHowToContactUs | safe }}</p>
 
       <h2 class="govuk-heading-m">{{ technicalInfo }}</h2>
       <p class="govuk-body">{{ hmctsIsCommitted }}</p>
@@ -55,30 +55,12 @@
 
       <h2 class="govuk-heading-m">{{ nonAccessibleContent }}</h2>
       <p class="govuk-body">{{ accessibilityIssues }}</p>
-      <p class="govuk-body">{{ issuesWithMobile }}</p>
+      <h2 class="govuk-heading-s">{{ issuesWithMobile }}</h2>
       <p class="govuk-body">{{ linkTextIssues }}</p>
-      <p class="govuk-body">{{ colourComboIssue }}</p>
-      <p class="govuk-body">{{ welshTranslationIssues }}</p>
-      <p class="govuk-body">{{ planToFix }}</p>
-
-      <h2 class="govuk-heading-m">{{ contentNotInScope }}</h2>
-
-      <p class="govuk-body">{{ issuesWithDocumentDescription1 }}</p>
-      <p class="govuk-body">{{ issuesWithDocumentDescription2 }}</p>
 
       <h2 class="govuk-heading-m">{{ improvingAccessibility }}</h2>
       <p class="govuk-body">{{ statementCommitted }}</p>
-      <p class="govuk-body">{{ statementDAC | safe }}</p>
-      <p class="govuk-body">{{ DACAudit }}</p>
-      <ul class="govuk-list govuk-list--bullet">
-        <li>{{ DACImprovement1 }}</li>
-        <li>{{ DACImprovement2 }}</li>
-        <li>{{ DACImprovement3 }}</li>
-        <li>{{ DACImprovement4 }}</li>
-        <li>{{ DACImprovement5 }}</li>
-        <li>{{ DACImprovement6 }}</li>
-        <li>{{ DACImprovement7 }}</li>
-      </ul>
+      <p class="govuk-body">{{ statementDAC }}</p>
 
       <h2 class="govuk-heading-m">{{ preparationAccessibilityStatement }}</h2>
       <p class="govuk-body">{{ statementPreparationDate }}</p>
