@@ -72,7 +72,6 @@ export const getCourtEmailId = (key: string): string => {
     ['wrexham', config.get('localCourt.emailId.WREXHAM_FAMILY_COURT')],
   ]);
   //Creating array of arrays from map. Then filtering key from map based on input string.
-  //const filteredElement = Array.from(map).filter(([mapKey]) => courtKey.includes(mapKey));
   const filteredElement = Array.from(map).filter(([mapKey]) => courtKey.startsWith(mapKey));
 
   //filtered element will contain a single array item something like  [['liverpool','adoptionsliverpoolcivilandfamilycourt@justice.gov.uk' ]].
