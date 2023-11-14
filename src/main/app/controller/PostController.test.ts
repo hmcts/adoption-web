@@ -12,6 +12,7 @@ import {
   LA_PORTAL_STATEMENT_OF_TRUTH,
   SAVE_AND_SIGN_OUT,
 } from '../../steps/urls';
+import { CaseWithId } from '../case/case';
 import {
   Adoption,
   ApplicationType,
@@ -171,26 +172,6 @@ describe('PostController', () => {
     const body = {};
 
     const caseApiMockFn = {
-      getCases: jest.fn(() => {
-        return [
-          {
-            id: '12345',
-            state: 'Submitted',
-            case_data: {
-              applyingWith: 'alone',
-              dateSubmitted: moment(new Date().setMonth(new Date().getMonth() - 1)).format('YYYY-MM-DD'),
-            },
-          },
-          {
-            id: '67890',
-            state: 'Submitted',
-            case_data: {
-              applyingWith: 'alone',
-              dateSubmitted: moment(new Date().setMonth(new Date().getMonth() - 1)).format('YYYY-MM-DD'),
-            },
-          },
-        ];
-      }),
       unlinkStaleDraftCaseIfFound: jest.fn(() => {
         return undefined;
       }),
@@ -220,6 +201,24 @@ describe('PostController', () => {
     const req = mockRequest({ body });
     req.session.userCase.canPaymentIgnored = true;
     req.session.user.isSystemUser = true;
+    req.session.userCaseList = [
+      {
+        id: '12345',
+        state: 'Submitted' as State,
+        case_data: {
+          applyingWith: 'alone' as ApplyingWith,
+          dateSubmitted: moment(new Date().setMonth(new Date().getMonth() - 1)).format('YYYY-MM-DD'),
+        } as CaseData,
+      },
+      {
+        id: '67890',
+        state: 'Submitted' as State,
+        case_data: {
+          applyingWith: 'alone' as ApplyingWith,
+          dateSubmitted: moment(new Date().setMonth(new Date().getMonth() - 1)).format('YYYY-MM-DD'),
+        } as CaseData,
+      },
+    ];
     const res = mockResponse();
     await controller.post(req, res);
 
@@ -295,6 +294,7 @@ describe('PostController', () => {
     const req = mockRequest({ body });
     req.path = APPLYING_WITH_URL;
     req.session.user.isSystemUser = false;
+    req.session.userCase = null as unknown as CaseWithId;
     const res = mockResponse();
     res.locals.serviceType = Adoption.ADOPTION;
     await controller.post(req, res);
@@ -302,6 +302,47 @@ describe('PostController', () => {
     expect(res.redirect).toBeCalledWith('/next-step-url');
   });
 
+  test('When Request contains applying with URL and no application for user', async () => {
+    getNextStepUrlMock.mockReturnValue('/next-step-url');
+    const caseApiMockFn = {
+      getCaseDetails: jest.fn(() => {
+        return { userCase: null, cases: null };
+      }),
+      unlinkStaleDraftCaseIfFound: jest.fn(() => {
+        return undefined;
+      }),
+      checkOldPCQIDExists: jest.fn(() => {
+        return '12345';
+      }),
+      createCase: jest.fn(() => {
+        return { id: '123456789', state: State.Draft, applyingWith: ApplyingWith.ALONE };
+      }),
+      triggerEvent: jest.fn(() => {
+        return {
+          applicant1AdditionalNames: [
+            { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+          ],
+          applicant1HasOtherNames: 'Yes',
+        };
+      }),
+    };
+    (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
+    const body = {};
+
+    const controller = new PostController(mockFormContent.fields);
+
+    const req = mockRequest({ body });
+    req.path = APPLYING_WITH_URL;
+    req.session.user.isSystemUser = false;
+    req.session.userCase = false as unknown as CaseWithId;
+    const res = mockResponse();
+    res.locals.serviceType = Adoption.ADOPTION;
+    await controller.post(req, res);
+
+    expect(res.redirect).toBeCalledWith('/next-step-url');
+    expect(caseApiMockFn.createCase).toHaveBeenCalled();
+    expect(caseApiMockFn.checkOldPCQIDExists).not.toHaveBeenCalled();
+  });
   /* it('redirects back to the current page with a session error if there was an problem saving data', async () => {
     beforeEach(() => {
       mockGetParsedBody.mockReturnValue({});
