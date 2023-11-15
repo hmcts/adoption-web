@@ -12,7 +12,6 @@ export const getCourtEmailId = (key: string): string => {
     ['worcester', config.get('localCourt.emailId.WORCESTER_FAMILY_COURT')],
     ['newport', config.get('localCourt.emailId.NEWPORT_GWENT_FAMILY_COURT')],
     ['liverpool', config.get('localCourt.emailId.LIVERPOOL_FAMILY_COURT')],
-    ['central london', config.get('localCourt.emailId.CENTRAL_LONDON_FAMILY_COURT')],
     ['reading', config.get('localCourt.emailId.READING_FAMILY_COURT')],
     //Midlands
     ['stoke-on-trent', config.get('localCourt.emailId.STOKE-ON-TRENT_FAMILY_COURT')],
@@ -67,13 +66,13 @@ export const getCourtEmailId = (key: string): string => {
     ['haverfordwest', config.get('localCourt.emailId.HAVERFORDWEST_FAMILY_COURT')],
     ['llanelli', config.get('localCourt.emailId.LLANELLI_FAMILY_COURT')],
     ['pontypridd', config.get('localCourt.emailId.PONTYPRIDD_FAMILY_COURT')],
-    ['port-talbot', config.get('localCourt.emailId.PORT_TALBOT_FAMILY_COURT')],
+    ['port talbot', config.get('localCourt.emailId.PORT_TALBOT_FAMILY_COURT')],
     ['prestatyn', config.get('localCourt.emailId.PRESTATYN_FAMILY_COURT')],
     ['swansea', config.get('localCourt.emailId.SWANSEA_FAMILY_COURT')],
     ['wrexham', config.get('localCourt.emailId.WREXHAM_FAMILY_COURT')],
   ]);
   //Creating array of arrays from map. Then filtering key from map based on input string.
-  const filteredElement = Array.from(map).filter(([mapKey]) => courtKey.includes(mapKey));
+  const filteredElement = Array.from(map).filter(([mapKey]) => courtKey.startsWith(mapKey));
 
   //filtered element will contain a single array item something like  [['liverpool','adoptionsliverpoolcivilandfamilycourt@justice.gov.uk' ]].
   //Using index to get the email element.
