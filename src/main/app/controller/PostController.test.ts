@@ -23,7 +23,7 @@ import {
   SYSTEM_USER_UPDATE,
   State,
 } from '../case/definition';
-import { isPhoneNoValid } from '../form/validation';
+import { isFieldFilledIn, isPhoneNoValid } from '../form/validation';
 
 import { PostController } from './PostController';
 jest.mock('../../modules/draft-store/draft-store-service');
@@ -393,36 +393,34 @@ describe('PostController', () => {
     ]);
   });   */
 
-  /* describe('when there are form errors', () => {
-    beforeEach(() => {
-      const mockGetErrors = jest.fn();
-      const mockGetParsedBody = jest.fn();
-      jest.mock('../form/Form', () => {
-        return {
-          Form: jest.fn().mockImplementation(() => {
-            return { getParsedBody: mockGetParsedBody, getErrors: mockGetErrors };
-          }),
-        };
-      });
-      mockGetParsedBody.mockReturnValue({});
-      mockGetErrors.mockReturnValue(['MOCK_ERROR']);
-      getNextStepUrlMock.mockReturnValue('/MOCK_ENDPOINT');
-    });
-
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
-
+  describe('when there are form errors', () => {
     test('should redirect to same page', async () => {
-      const controller = new PostController({});
-      const req = mockRequest({});
-      req.session.cases = [{ id: 'MOCK_ID', state: State.Draft, case_data: {} as CaseData }];
+      const body = {
+        applicant1FirstNames: undefined,
+        errors: [
+          {
+            errorType: 'required',
+            propertyName: 'applicant1FirstNames',
+          },
+        ],
+      };
+      const mockFormContentWithError = {
+        fields: {
+          applicant1FirstNames: {
+            type: 'text',
+            validator: isFieldFilledIn,
+          },
+        },
+      } as unknown as FormContent;
+
+      const controller = new PostController(mockFormContentWithError.fields);
+      const req = mockRequest({ body });
       const res = mockResponse();
       await controller.post(req, res);
       expect(getNextStepUrlMock).not.toHaveBeenCalled();
       expect(res.redirect).toHaveBeenCalledWith('/request');
     });
-  }); */
+  });
 
   /* test('rejects with an error when unable to save session data', async () => {
     getNextStepUrlMock.mockReturnValue('/next-step-url');
