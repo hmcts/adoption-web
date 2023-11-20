@@ -24,7 +24,7 @@ const en = () => ({
 const cy: typeof en = () => ({
   title: 'Cyn ichi ddechrau',
   line1:
-    'Gellir defnyddio’r gwasanaeth ar-lein hwn i wneud ceisiadau mabwysiadu ar ôl lleoliad yn unig. Mae hyn yn golygu mabwysiadu plentyn sydd wedi cael ei roi dan eich gofal gan awdurdod lleol. Rhaid i chi <a class="govuk-link" href="https://www.gov.uk/government/publications/form-a58-application-for-an-adoption-order-section-46-adoption-and-children-act-2002">wneud cais am orchymyn mabwysiadu</a> i fabwysiadu llysblentyn, plentyn o dramor neu faban y mae ei rieni wedi cytuno i’w roi i ffwrdd.',
+    'Gellir defnyddio’r gwasanaeth ar-lein hwn i wneud ceisiadau mabwysiadu ar ôl lleoliad yn unig. Mae hyn yn golygu mabwysiadu plentyn sydd wedi cael ei roi dan eich gofal gan awdurdod lleol. <a class="govuk-link" href="https://www.gov.uk/government/publications/form-a58-application-for-an-adoption-order-section-46-adoption-and-children-act-2002">Rhaid i chi wneud cais am orchymyn mabwysiadu</a> i fabwysiadu llysblentyn, plentyn o dramor neu faban y mae ei rieni wedi cytuno i’w roi i ffwrdd.',
   line2:
     "Gallwch ddechrau eich cais ar unrhyw adeg fodd bynnag, mae'n rhaid i'r plentyn fod wedi byw gyda chi am o leiaf 10 wythnos cyn y gallwch gyflwyno’r cais.",
   subheading1: 'Manylion amdanoch chi',
