@@ -11,7 +11,7 @@ import { State } from './definition';
 export class NewCaseRedirectController {
   public async get(req: AppRequest, res: Response): Promise<void> {
     req.locals.api = getCaseApi(req.session.user, req.locals.logger);
-    const userCase = await req.locals.api.getCase();
+    const userCase = (await req.locals.api.getCaseDetails()).userCase;
     if (userCase === null) {
       // Applications submitted not on login day
       res.redirect(START_ELIGIBILITY_URL);

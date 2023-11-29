@@ -1,5 +1,7 @@
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
+import * as caseApi from '../../../app/case/CaseApi';
+import { CaseWithId } from '../../../app/case/case';
 import { ApplyingWith, State } from '../../../app/case/definition';
 import {
   APPLICATION_SUBMITTED,
@@ -9,10 +11,13 @@ import {
   HUB_PAGE,
   PAY_YOUR_FEE,
   SENT_TO_APPLICANT2_FOR_REVIEW,
+  START_ELIGIBILITY_URL,
   TASK_LIST_URL,
 } from '../../urls';
 
 import HomeGetController from './get';
+
+const getCaseApiMock = jest.spyOn(caseApi, 'getCaseApi');
 
 describe('HomeGetController', () => {
   const controller = new HomeGetController();
@@ -195,5 +200,53 @@ describe('HomeGetController', () => {
     controller.get(req, res);
 
     expect(res.redirect).toBeCalledWith(HUB_PAGE);
+  });
+
+  test('redirects to eligibility start screen if usercase is null', async () => {
+    const caseApiMockFn = {
+      getCaseDetails: jest.fn(() => {
+        return { userCase: null, cases: null };
+      }),
+    };
+    (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
+
+    const req = mockRequest();
+    req.session.userCase = null as unknown as CaseWithId;
+    const res = mockResponse();
+    await controller.get(req, res);
+
+    expect(res.redirect).toBeCalledWith(START_ELIGIBILITY_URL);
+  });
+
+  test('redirects to task list if usercase is found with applyingWith value set', async () => {
+    const caseApiMockFn = {
+      getCaseDetails: jest.fn(() => {
+        return { userCase: { applyingWith: 'alone' }, cases: null };
+      }),
+    };
+    (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
+
+    const req = mockRequest();
+    req.session.userCase = null as unknown as CaseWithId;
+    const res = mockResponse();
+    await controller.get(req, res);
+
+    expect(res.redirect).toBeCalledWith(TASK_LIST_URL);
+  });
+
+  test('redirects to applying-with screen if usercase is not found', async () => {
+    const caseApiMockFn = {
+      getCaseDetails: jest.fn(() => {
+        return { userCase: false, cases: null };
+      }),
+    };
+    (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
+
+    const req = mockRequest();
+    req.session.userCase = null as unknown as CaseWithId;
+    const res = mockResponse();
+    await controller.get(req, res);
+
+    expect(res.redirect).toBeCalledWith(APPLYING_WITH_URL);
   });
 });
