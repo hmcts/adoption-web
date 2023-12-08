@@ -28,7 +28,9 @@ export default class EligibilityPostController<T extends AnyObject> {
     let nextUrl = req.session.errors.length > 0 ? req.url : getNextEligibilityStepUrl(req, req.session.eligibility);
     if (nextUrl === SIGN_IN_URL && req.session?.user) {
       req.locals.api = getCaseApi(req.session.user, req.locals.logger);
-      const userCase = (await req.locals.api.getCaseDetails()).userCase;
+      const userCaseDetails = await req.locals.api.getCaseDetails();
+      const userCase = userCaseDetails.userCase;
+      req.session.userCaseList = userCaseDetails.cases;
       if (userCase === null) {
         nextUrl = APPLYING_WITH_URL;
       } else if (userCase && (userCase.state === State.Submitted || userCase.state === State.LaSubmitted)) {
