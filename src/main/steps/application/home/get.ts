@@ -24,7 +24,7 @@ export default class HomeGetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
     if (!req.session.userCase) {
       req.locals.api = getCaseApi(req.session.user, req.locals.logger);
-      const userCase = await req.locals.api.getCase();
+      const userCase = (await req.locals.api.getCaseDetails()).userCase;
       if (userCase === null) {
         res.redirect(START_ELIGIBILITY_URL);
       } else if (userCase) {
