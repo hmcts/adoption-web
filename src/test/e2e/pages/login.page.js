@@ -30,7 +30,7 @@ module.exports = {
   async signInFromEligibility() {
     await I.retry(3).goToPage(config.baseUrl + 'eligibility/start');
     await I.wait(4);
-    await I.retry(3).click('Start now');
+    await I.retry(3).click('Continue');
     await I.wait(4);
     await I.retry(3).see('Are you applying to adopt more than one child?');
     await I.retry(3).click('Continue');
