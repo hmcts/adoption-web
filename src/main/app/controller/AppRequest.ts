@@ -3,7 +3,7 @@ import { Session } from 'express-session';
 import type { LoggerInstance } from 'winston';
 
 import { CourtVenue, LocalAuthorityList } from '../../app/court/location';
-import { CaseApi } from '../case/CaseApi';
+import { CaseApi, CcdV1Response } from '../case/CaseApi';
 import { Case, CaseDate, CaseWithId } from '../case/case';
 import { Fee } from '../case/definition';
 import { FormError } from '../form/Form';
@@ -32,6 +32,7 @@ export interface AppSession extends Session {
   addresses: [];
   returnUrl?: string;
   fee?: Fee;
+  userCaseList: CcdV1Response[];
 }
 
 export interface UserDetails {

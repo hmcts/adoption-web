@@ -55,10 +55,10 @@ export class PostController<T extends AnyObject> {
 
     if (req.path.startsWith(APPLYING_WITH_URL)) {
       req.locals.api = getCaseApi(req.session.user, req.locals.logger);
-      const userCase = await req.locals.api.getCase();
-      if (userCase === null) {
+
+      if (req.session.userCase === null) {
         // Applications submitted not on login day
-        const pcqId = await req.locals.api.checkOldPCQIDExists();
+        const pcqId = await req.locals.api.checkOldPCQIDExists(req.session.userCaseList);
         req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
         req.session.userCase = await this.save(
           req,
@@ -67,11 +67,11 @@ export class PostController<T extends AnyObject> {
           },
           this.getEventName(req)
         );
-      } else if (userCase) {
+      } else if (req.session.userCase) {
         //this.getDraftOrSubmittedCase(req, userCase, res);
         // Returned case may be Draft OR Submitted
-        const pcqId = await req.locals.api.checkOldPCQIDExists();
-        await this.savePcqIDforDraftOrSubmittedCase(userCase, req, pcqId, res);
+        const pcqId = await req.locals.api.checkOldPCQIDExists(req.session.userCaseList);
+        await this.savePcqIDforDraftOrSubmittedCase(req.session.userCase, req, pcqId, res);
       } else {
         // No Application for the user
         req.session.userCase = await req.locals.api.createCase(res.locals.serviceType, req.session.user);
@@ -208,9 +208,9 @@ export class PostController<T extends AnyObject> {
       } else {
         //const flag = req.session.userCase.canPaymentIgnored;
         req.locals.api = getCaseApi(req.session.user, req.locals.logger);
-        let cases = await req.locals.api.getCases();
+        let cases = req.session.userCaseList;
 
-        if (cases.length !== 0 && req.session.userCase.canPaymentIgnored === true) {
+        if (cases !== undefined && cases.length !== 0 && req.session.userCase.canPaymentIgnored === true) {
           cases = cases.filter(
             caseElement =>
               (caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted) &&

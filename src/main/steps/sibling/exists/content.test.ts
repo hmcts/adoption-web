@@ -21,7 +21,7 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y brawd/chwaer',
+  section: 'Manylion brodyr/chwiorydd',
   title: 'A oes gan y plentyn frodyr/chwiorydd neu hanner brodyr/chwiorydd sydd â gorchmynion llys?',
   conditionalText:
     '<label class="govuk-label">Gofynnir i chi ddarparu pob gorchymyn llys brodyr a chwiorydd yn unigol.</label>',

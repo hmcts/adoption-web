@@ -31,7 +31,7 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Manylion y brawd/chwaer',
+  section: 'Manylion brodyr/chwiorydd',
   title: 'Pa fath o orchymyn ydyw?',
   hint: "Mae'r wybodaeth hon yn ei gwneud hi'n haws i'r llys gysylltu gorchmynion llys yn y gorffennol.",
   adoptionOrder: 'Gorchymyn Mabwysiadu',

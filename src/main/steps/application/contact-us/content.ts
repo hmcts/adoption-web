@@ -17,7 +17,7 @@ const cy: typeof en = {
     'E-bost: <a href="mailto:ymholiadaucymraeg@justice.gov.uk" class="govuk-link">ymholiadaucymraeg@justice.gov.uk</a>',
   sendUsAMessageText: 'Byddwn yn anelu at ymateb o fewn 5 diwrnod gwaith.',
   telephoneHeading: 'Rhif ffôn',
-  telephoneNumber: 'Rhif ffôn: 01634 887900',
+  telephoneNumber: 'Rhif ffôn: 03003035171',
   telephoneText: 'Dydd Llun i ddydd Iau 9am - 5pm',
 };
 
