@@ -11,6 +11,7 @@ const en = () => ({
     'You can only apply to adopt a child if they are under 18 years old on the date your application is submitted.',
   moreInfo: 'More about adoption',
   continue: 'Continue',
+  url: 'https://www.gov.uk/child-adoption',
   errors: {
     under18Eligible: {
       required: 'Select if the child will be under 18 years old on the date you submit your application.',
@@ -24,6 +25,7 @@ const cy: typeof en = () => ({
   under18No: 'Gallwch ond mabwysiadu plentyn os ydynt dan 18 oed ar y dyddiad mae eich cais yn cael ei gyflwyno.',
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
   continue: 'Parhau',
+  url: 'https://www.gov.uk/mabwysiadu-plentyn',
   yes: 'Bydd',
   no: 'Na fydd',
   errors: {
@@ -47,7 +49,7 @@ export const form: FormContent = {
           label: l => l.no,
           value: YesOrNo.NO,
           conditionalText: l =>
-            `<p class="govuk-label">${l.under18No}</p> <p class="govuk-label"><a href="https://www.gov.uk/child-adoption" class="govuk-link">${l.moreInfo}</a></p>`,
+            `<p class="govuk-label">${l.under18No}</p> <p class="govuk-label"><a href=${l.url} class="govuk-link">${l.moreInfo}</a></p>`,
         },
       ],
       validator: isFieldFilledIn,

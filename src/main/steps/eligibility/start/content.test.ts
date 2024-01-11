@@ -33,13 +33,13 @@ const enContent = {
   line12:
     "If you're applying for more than one child, you must submit a new application for each child. You will not be charged if you submit these before midnight on the day of your first application. If you submit after the day of the first application, you will be charged another £183. For this reason we recommend you begin the applications early and have everything you need.",
   line13: 'You must sign in using the same email address and password used in your first application.',
-  startnow: 'Start now',
+  startnow: 'Continue',
 };
 
 const cyContent = {
   title: 'Gwneud cais i fabwysiadu plentyn a osodwyd yn eich gofal',
   line1:
-    'Gallwch wneud cais i fabwysiadu plentyn sydd yn eich gofal yn dilyn <a class="govuk-link" href="https://www.gov.uk/child-adoption/applying-for-an-adoption-court-order">gorchymyn lleoli gan y llys.</a>',
+    'Gallwch wneud cais i fabwysiadu plentyn sydd yn eich gofal yn dilyn <a class="govuk-link" href="https://www.gov.uk/mabwysiadu-plentyn/gwneud-cais-am-orchymyn-llys-mabwysiadu">gorchymyn lleoli gan y llys.</a>',
   line2:
     "Gallwch ddechrau eich cais ar unrhyw adeg fodd bynnag, mae'n rhaid i'r plentyn fod wedi byw gyda chi am o leiaf 10 wythnos cyn y gallwch gyflwyno’r cais.",
   line3:
@@ -66,7 +66,7 @@ const cyContent = {
     'Os ydych chi’n gwneud cais i fabwysiadu mwy nag un plentyn, mae’n rhaid i chi gyflwyno cais newydd ar gyfer pob plentyn. Ni chodir ffi arall arnoch os byddwch yn cyflwyno’r ceisiadau hyn cyn hanner nos ar ddyddiad cyflwyno’ch cais cyntaf. Os byddwch yn eu cyflwyno ar ôl dyddiad cyflwyno’r cais cyntaf, yna bydd rhaid i chi dalu £183 arall. Am y rheswm hwn, argymhellwn eich bod yn dechrau eich ceisiadau yn gynnar a bod gennych bopeth rydych ei angen wrth law.',
   line13:
     'Mae’n rhaid ichi fewngofnodi gan ddefnyddio’r un cyfeiriad e-bost a chyfrinair a ddefnyddiwyd ar gyfer eich cais cyntaf.',
-  startnow: 'Dechrau nawr',
+  startnow: 'Parhau',
 };
 
 describe('eligibility > start > content', () => {

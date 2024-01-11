@@ -11,6 +11,7 @@ const en = () => ({
   livedUKNo: 'You cannot apply to adopt a child unless you have a permanent home here.',
   moreInfo: 'More about adoption',
   continue: 'Continue',
+  url: 'https://www.gov.uk/child-adoption',
   errors: {
     livedUKEligible: {
       required:
@@ -26,6 +27,7 @@ const cy: typeof en = () => ({
   livedUKNo: 'Ni allwch wneud cais i fabwysiadu plentyn oni bai bod gennych gartref parhaol yma.',
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
   continue: 'Parhau',
+  url: 'https://www.gov.uk/mabwysiadu-plentyn',
   yes: 'Do',
   no: 'Naddo',
   errors: {
@@ -50,7 +52,7 @@ export const form: FormContent = {
           label: l => l.no,
           value: YesOrNo.NO,
           conditionalText: l =>
-            `<p class="govuk-label">${l.livedUKNo}</p> <p class="govuk-label"><a href="https://www.gov.uk/child-adoption" class="govuk-link">${l.moreInfo}</a></p>`,
+            `<p class="govuk-label">${l.livedUKNo}</p> <p class="govuk-label"><a href=${l.url} class="govuk-link">${l.moreInfo}</a></p>`,
         },
       ],
       validator: isFieldFilledIn,
