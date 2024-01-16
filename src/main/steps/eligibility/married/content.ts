@@ -11,6 +11,7 @@ const en = () => ({
   marriedYes: "You can only apply to adopt a child if they've not been married or in a civil partnership.",
   moreInfo: 'More about adoption',
   continue: 'Continue',
+  url: 'https://www.gov.uk/child-adoption',
   errors: {
     marriedEligible: {
       required: 'Select if the child is married or in a civil partnership.',
@@ -25,6 +26,7 @@ const cy: typeof en = () => ({
   marriedYes: 'Gallwch ond wneud cais i fabwysiadu plentyn os nad ydynt wedi priodi ac ddim mewn partneriaeth sifil.',
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
   continue: 'Parhau',
+  url: 'https://www.gov.uk/mabwysiadu-plentyn',
   yes: 'Ydy',
   no: 'Nac ydy',
   errors: {
@@ -48,7 +50,7 @@ export const form: FormContent = {
           label: l => l.yes,
           value: YesOrNo.YES,
           conditionalText: l =>
-            `<p class="govuk-label">${l.marriedYes}</p> <p class="govuk-label"><a rel="noreferrer noopener" href="https://www.gov.uk/child-adoption" class="govuk-link">${l.moreInfo}</a></p>`,
+            `<p class="govuk-label">${l.marriedYes}</p> <p class="govuk-label"><a rel="noreferrer noopener" href=${l.url} class="govuk-link">${l.moreInfo}</a></p>`,
         },
         { label: l => l.no, value: YesOrNo.NO },
       ],
