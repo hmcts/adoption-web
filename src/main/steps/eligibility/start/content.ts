@@ -1,9 +1,9 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 
 const en = () => ({
-  title: 'Before you start',
+  title: 'Apply to adopt a child placed in your care',
   line1:
-    'This online service can only be used to apply for post placement adoptions. This means adopting a child who has been placed in your care by a local authority. To adopt a step-child, a child from overseas or a baby that has been willingly given up by the birth parents, you must <a class="govuk-link" href="https://www.gov.uk/government/publications/form-a58-application-for-an-adoption-order-section-46-adoption-and-children-act-2002">apply for an adoption order.</a>',
+    'You can apply to adopt a child who\'s in your care following a <a class="govuk-link" href="https://www.gov.uk/child-adoption/applying-for-an-adoption-court-order">court placement order.</a>',
   line2:
     'You can start your application at any time however, the child must have lived with you for at least 10 weeks before you can submit it.',
   subheading1: 'Details about you',
@@ -22,9 +22,9 @@ const en = () => ({
 });
 
 const cy: typeof en = () => ({
-  title: 'Cyn ichi ddechrau',
+  title: 'Gwneud cais i fabwysiadu plentyn a osodwyd yn eich gofal',
   line1:
-    'Gellir defnyddio’r gwasanaeth ar-lein hwn i wneud ceisiadau mabwysiadu ar ôl lleoliad yn unig. Mae hyn yn golygu mabwysiadu plentyn sydd wedi cael ei roi dan eich gofal gan awdurdod lleol. <a class="govuk-link" href="https://www.gov.uk/government/publications/form-a58-application-for-an-adoption-order-section-46-adoption-and-children-act-2002">Rhaid i chi wneud cais am orchymyn mabwysiadu</a> i fabwysiadu llysblentyn, plentyn o dramor neu faban y mae ei rieni wedi cytuno i’w roi i ffwrdd.',
+    'Gallwch wneud cais i fabwysiadu plentyn sydd yn eich gofal yn dilyn <a class="govuk-link" href="https://www.gov.uk/child-adoption/applying-for-an-adoption-court-order">gorchymyn lleoli gan y llys.</a>',
   line2:
     "Gallwch ddechrau eich cais ar unrhyw adeg fodd bynnag, mae'n rhaid i'r plentyn fod wedi byw gyda chi am o leiaf 10 wythnos cyn y gallwch gyflwyno’r cais.",
   subheading1: 'Manylion amdanoch chi',
