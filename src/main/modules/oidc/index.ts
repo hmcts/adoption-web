@@ -101,9 +101,10 @@ export class OidcMiddleware {
         if (req.session?.user) {
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
           if (!req.session.userCase) {
-            const userCase = await req.locals.api.getCase();
-            if (userCase) {
-              req.session.userCase = userCase;
+            const userCaseDetails = await req.locals.api.getCaseDetails();
+            if (userCaseDetails.userCase) {
+              req.session.userCase = userCaseDetails.userCase;
+              req.session.userCaseList = userCaseDetails.cases;
             }
           }
           // Commented out restricting case creation to happen only from Applying-With page submission
