@@ -20,7 +20,9 @@ export default class SaveSignOutGetController extends GetController {
         throw err;
       }
 
-      super.get(req, res);
+      super.get(req, res).catch(error => {
+        throw error;
+      });
     });
   }
 }

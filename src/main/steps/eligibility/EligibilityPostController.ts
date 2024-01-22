@@ -36,20 +36,12 @@ export default class EligibilityPostController<T extends AnyObject> {
       } else {
         nextUrl = HOME_URL;
       }
-
-      req.session.save(err => {
-        if (err) {
-          throw err;
-        }
-        res.redirect(nextUrl);
-      });
-    } else {
-      req.session.save(err => {
-        if (err) {
-          throw err;
-        }
-        res.redirect(nextUrl);
-      });
     }
+    req.session.save(err => {
+      if (err) {
+        throw err;
+      }
+      res.redirect(nextUrl);
+    });
   }
 }

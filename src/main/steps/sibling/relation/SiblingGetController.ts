@@ -55,7 +55,9 @@ export default class SiblingGetController extends GetController {
     const callback = redirect
       ? undefined
       : () => {
-          super.get(req, res);
+          super.get(req, res).catch(error => {
+            throw error;
+          });
         };
 
     super.saveSessionAndRedirect(req, res, callback);

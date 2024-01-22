@@ -1,16 +1,34 @@
+import moment from 'moment';
+
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
+import * as caseApi from '../../app/case/CaseApi';
 import { FormContent } from '../../app/form/Form';
 import * as draftStoreMock from '../../modules/draft-store/draft-store-service';
 import * as steps from '../../steps';
-import { LA_PORTAL_CHECK_YOUR_ANSWERS, LA_PORTAL_STATEMENT_OF_TRUTH, SAVE_AND_SIGN_OUT } from '../../steps/urls';
-import { ApplicationType, CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE, SYSTEM_USER_UPDATE, State } from '../case/definition';
+import {
+  APPLYING_WITH_URL,
+  LA_PORTAL_CHECK_YOUR_ANSWERS,
+  LA_PORTAL_STATEMENT_OF_TRUTH,
+  SAVE_AND_SIGN_OUT,
+} from '../../steps/urls';
+import {
+  Adoption,
+  ApplicationType,
+  ApplyingWith,
+  CITIZEN_SAVE_AND_CLOSE,
+  CITIZEN_UPDATE,
+  SYSTEM_USER_UPDATE,
+  State,
+} from '../case/definition';
 import { isPhoneNoValid } from '../form/validation';
 
 import { PostController } from './PostController';
 jest.mock('../../modules/draft-store/draft-store-service');
 
 import Mock = jest.Mock;
+
+const getCaseApiMock = jest.spyOn(caseApi, 'getCaseApi');
 
 const getNextStepUrlMock = jest.spyOn(steps, 'getNextStepUrl');
 const expectedUserCaseRedis = {
@@ -94,6 +112,88 @@ describe('PostController', () => {
     await controller.post(req, res);
 
     expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', body, SYSTEM_USER_UPDATE);
+  });
+
+  test('When Request contains applyting with URL', async () => {
+    getNextStepUrlMock.mockReturnValue('/next-step-url');
+    const caseApiMockFn = {
+      getCase: jest.fn(() => {
+        return {
+          id: '123456',
+          state: 'Submitted',
+          case_data: { applyingWith: 'alone', dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+        };
+      }),
+      unlinkStaleDraftCaseIfFound: jest.fn(() => {
+        return undefined;
+      }),
+      checkOldPCQIDExists: jest.fn(() => {
+        return '12345';
+      }),
+      createCase: jest.fn(() => {
+        return { id: '123456789', state: State.Draft, applyingWith: ApplyingWith.ALONE };
+      }),
+      triggerEvent: jest.fn(() => {
+        return {
+          applicant1AdditionalNames: [
+            { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+          ],
+          applicant1HasOtherNames: 'Yes',
+        };
+      }),
+    };
+    (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
+    const body = {};
+
+    const controller = new PostController(mockFormContent.fields);
+
+    const req = mockRequest({ body });
+    req.path = APPLYING_WITH_URL;
+    req.session.user.isSystemUser = false;
+    const res = mockResponse();
+    res.locals.serviceType = Adoption.ADOPTION;
+    await controller.post(req, res);
+
+    expect(res.redirect).toBeCalledWith('/next-step-url');
+  });
+
+  test('When Request contains applyting with URL and user case is empty', async () => {
+    getNextStepUrlMock.mockReturnValue('/next-step-url');
+    const caseApiMockFn = {
+      getCase: jest.fn(() => {
+        return null;
+      }),
+      unlinkStaleDraftCaseIfFound: jest.fn(() => {
+        return undefined;
+      }),
+      checkOldPCQIDExists: jest.fn(() => {
+        return '12345';
+      }),
+      createCase: jest.fn(() => {
+        return { id: '123456789', state: State.Draft, applyingWith: ApplyingWith.ALONE };
+      }),
+      triggerEvent: jest.fn(() => {
+        return {
+          applicant1AdditionalNames: [
+            { id: 'MOCK_ID2', firstNames: 'MOCK_FIRST_NAMES2', lastNames: 'MOCK_LAST_NAMES2' },
+          ],
+          applicant1HasOtherNames: 'Yes',
+        };
+      }),
+    };
+    (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
+    const body = {};
+
+    const controller = new PostController(mockFormContent.fields);
+
+    const req = mockRequest({ body });
+    req.path = APPLYING_WITH_URL;
+    req.session.user.isSystemUser = false;
+    const res = mockResponse();
+    res.locals.serviceType = Adoption.ADOPTION;
+    await controller.post(req, res);
+
+    expect(res.redirect).toBeCalledWith('/next-step-url');
   });
 
   it('redirects back to the current page with a session error if there was an problem saving data', async () => {

@@ -15,6 +15,6 @@ export default class FindPlacementOrderCourtGetController extends GetController 
     const courtList = await getCourtList(req);
     req.session.courtList = courtList;
 
-    super.get(req, res);
+    await super.get(req, res);
   }
 }

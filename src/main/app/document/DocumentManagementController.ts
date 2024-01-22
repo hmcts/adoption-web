@@ -55,6 +55,10 @@ export class DocumentManagerController {
       }
     }
 
+    if (req.session.userCase.laUploadedFiles?.length === 10) {
+      throw new Error('Max number of allowed files upload reached');
+    }
+
     const documentManagementClient = this.getDocumentManagementClient(req.session.user);
 
     const filesCreated = await documentManagementClient.create({

@@ -16,7 +16,7 @@ export default class SaveAsDraftGetController extends GetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
     await this.resetFlagForNoPayments(req);
 
-    super.get(req, res);
+    await super.get(req, res);
   }
   private async resetFlagForNoPayments(req: AppRequest): Promise<void> {
     try {
