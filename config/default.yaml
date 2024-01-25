@@ -16,7 +16,7 @@ services:
     systemPassword: 'dummy_password'
     userRole: 'citizen'
   case:
-    url: 'http://ccd-data-store-api-aat.service.core-compute-aat.internal'
+    url: 'http://adoption-cos-api-pr-910-ccd-data-store-api'
   postcodeLookup:
     url: 'https://api.os.uk/search/places/v1'
     token: 'NEED TO INSERT SECRET'
