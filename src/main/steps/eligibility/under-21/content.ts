@@ -10,6 +10,7 @@ const en = () => ({
   under21Yes: 'You must be 21 or over to adopt a child. This includes any other applicant.',
   moreInfo: 'More about adoption',
   continue: 'Continue',
+  url: 'https://www.gov.uk/child-adoption',
   errors: {
     under21Eligible: {
       required: 'Select if you, and the other applicant if relevant, are both aged 21 or over.',
@@ -23,6 +24,7 @@ const cy: typeof en = () => ({
   under21Yes: 'Rhaid i chi fod yn 21 oed o leiaf i fabwysiadu plentyn. Mae hyn yn cynnwys unrhyw geisydd arall.',
   moreInfo: 'Mwy o wybodaeth am fabwysiadu',
   continue: 'Parhau',
+  url: 'https://www.gov.uk/mabwysiadu-plentyn',
   yes: 'Ydy',
   no: 'Nac ydy',
   errors: {
@@ -46,7 +48,7 @@ export const form: FormContent = {
           label: l => l.no,
           value: YesOrNo.NO,
           conditionalText: l =>
-            `<p class="govuk-label">${l.under21Yes}</p> <p class="govuk-label"><a href="https://www.gov.uk/child-adoption" class="govuk-link">${l.moreInfo}</a></p>`,
+            `<p class="govuk-label">${l.under21Yes}</p> <p class="govuk-label"><a href=${l.url} class="govuk-link">${l.moreInfo}</a></p>`,
         },
       ],
       validator: isFieldFilledIn,
