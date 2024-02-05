@@ -9,7 +9,7 @@ export default class SiblingGetController extends GetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
     let dirty = false;
 
-    // req.session.userCase.siblings is initialised as an empty array
+    // req.session.userCase.siblings is an empty array before siblings added.
     const siblings = req.session.userCase.siblings ?? [];
 
     let redirect = false;
