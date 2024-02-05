@@ -74,7 +74,7 @@ export class IdamUserManager {
     try {
       await Promise.all(users.map(user => this.client.delete(user)));
     } catch (err) {
-      console.log('Error deleting users');
+      console.log(`Error deleting users: ${err}`);
     }
 
     this.users = new Set([firstUser]);

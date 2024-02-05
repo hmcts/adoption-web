@@ -68,6 +68,7 @@ module.exports = class BrowserHelpers extends Helper {
         return await helper.waitForElement(locator, waitTimeout);
       }
     } catch (error) {
+      console.log(`error in waitForAnySelector: ${err}`)
       return undefined;
     }
   }
@@ -82,6 +83,7 @@ module.exports = class BrowserHelpers extends Helper {
       const numVisible = await helper.grabNumberOfVisibleElements(selector);
       return !!numVisible;
     } catch (err) {
+      console.log(`error in canSee: ${err}`)
       return false;
     }
   }
