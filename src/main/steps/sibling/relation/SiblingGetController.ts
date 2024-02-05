@@ -9,7 +9,8 @@ export default class SiblingGetController extends GetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
     let dirty = false;
 
-    const siblings = req.session.userCase.siblings || [];
+    // req.session.userCase.siblings is initialised as an empty array
+    const siblings = req.session.userCase.siblings ?? [];
 
     let redirect = false;
     if (req.query.add) {
