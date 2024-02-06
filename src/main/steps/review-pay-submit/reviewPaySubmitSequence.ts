@@ -16,12 +16,16 @@ export const reviewPaySubmitSequence: Step[] = [
   {
     url: Urls.STATEMENT_OF_TRUTH,
     showInSection: Sections.ReviewPaySubmit,
-    getNextStep: data =>
-      (data as Partial<CaseWithId>).canPaymentIgnored
-        ? Urls.APPLICATION_SUBMITTED
-        : (data as Partial<CaseWithId>).redirectToSOT
-        ? Urls.STATEMENT_OF_TRUTH
-        : Urls.PAY_AND_SUBMIT_URL,
+    getNextStep: data => {
+      const caseData = data as Partial<CaseWithId>;
+      if (caseData.canPaymentIgnored) {
+        return Urls.APPLICATION_SUBMITTED;
+      } else if (caseData.redirectToSOT) {
+        return Urls.STATEMENT_OF_TRUTH;
+      } else {
+        return Urls.PAY_AND_SUBMIT_URL;
+      }
+    }
   },
   {
     url: Urls.PAY_AND_SUBMIT_URL,
