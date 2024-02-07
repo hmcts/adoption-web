@@ -67,7 +67,7 @@ module.exports = class BrowserHelpers extends Helper {
         const waitTimeout = sec ? sec : helper.options.waitForTimeout;
         return await helper.waitForElement(locator, waitTimeout);
       }
-    } catch (error) {
+    } catch (err) {
       console.log(`error in waitForAnySelector: ${err}`)
       return undefined;
     }
