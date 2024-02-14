@@ -17,7 +17,7 @@ Ensure the prerequisites are met.
 #### Running the application for the first time
 
 * *(Optional)* Install Redis:<br>
-This provides tools for monitoring and changing the cache during the LA journey.
+This provides CLI tools for monitoring and changing the cache during the LA journey.
 
 ```bash
 brew install redis
