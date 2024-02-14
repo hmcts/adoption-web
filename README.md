@@ -4,42 +4,95 @@
 
 ### Prerequisites
 
-Running the application requires the following tools to be installed in your environment
+Running the application requires the following tools to be installed in your environment:
 
-- [Node.js](https://nodejs.org/) v12.0.0 or later
+- [Node.js](https://nodejs.org/) v12.0.0 to 18.15.0
 - [yarn](https://yarnpkg.com/)
 - [Docker](https://www.docker.com)
 
 ### Running the application
 
-Log in to azure from the same terminal where you are going to launch the application. Run below command and follow the instructions (this is needed bacause we load secrets from `adoption-aat` while running the application locally)
+Ensure the prerequisites are met.
+
+#### Running the application for the first time
+
+* *(Optional)* Install Redis:<br>
+This provides tools for monitoring and changing the cache during the LA journey.
+
+```bash
+brew install redis
+```
+
+* Connect to F5 VPN:<br>
+Go to the webpage https://portal.platform.hmcts.net/ and follow the instruction to connect to F5 VPN.<br>
+(This is needed because we connect to APIs deployed in AAT environment while running the application locally.)
+
+* Log in to Azure:<br>
+Use the terminal where you are going to launch the application. Run below command and follow the instructions<br>
+(This is needed bacause we load secrets from `adoption-aat` while running the application locally.)
 
 ```bash
 az login --use-device-code
 ```
 
-Connect to VPN<br>
-Go to the webpage https://portal.platform.hmcts.net/ and follow the instruction to connect to F5 VPN (this is needed because we connect to APIs deployed in AAT environment while running the application locally)
+* Run a local version of Draft Store in a Docker container with a Redis image:
 
-Install dependencies by executing the following command:
+```bash
+docker-compose -f ./draft-store.yml up -d
+```
+
+* Comment out code that isn't used when running Draft Store locally:<br>
+Go to this file: src/main/modules/draft-store/index.ts and comment out like this:
+
+```typescript
+    const client = new Redis({
+      host: config.get('services.draftStore.redis.host'),
+      port: config.get('services.draftStore.redis.port'),
+      /* password: config.get('session.redis.key'),
+      tls: {
+        servername: config.get('services.draftStore.redis.host'),
+      }, */
+    });
+```
+
+* Install dependencies:
 
 ```bash
 $ yarn install
 ```
 
-Bundle:
+> Troubleshooting:
+> If you have issues check your Node version and use Node Version Manager to change to a supported version if required:
+>
+> ```bash
+> $ nvm use 18.15.0
+> ```
+
+* Bundle:
 
 ```bash
 $ yarn webpack
 ```
 
-Run:
+* Run:
 
 ```bash
 $ yarn start:dev
 ```
 
-The applications's home page will be available at http://localhost:3000
+* The application's home page will be available at http://localhost:3000
+
+#### Running the application subsequently
+
+* Connect to F5 VPN
+
+* Start the Docker container
+
+* Run:
+
+```bash
+$ yarn start:dev
+```
 
 ### Running with Docker
 
