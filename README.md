@@ -20,7 +20,7 @@ Ensure the prerequisites are met.
 This provides CLI tools for monitoring and changing the cache during the LA journey.
 
 ```bash
-brew install redis
+   brew install redis
 ```
 
 * Connect to F5 VPN:<br>
@@ -32,13 +32,13 @@ Use the terminal where you are going to launch the application. Run below comman
 (This is needed bacause we load secrets from `adoption-aat` while running the application locally.)
 
 ```bash
-az login --use-device-code
+   az login --use-device-code
 ```
 
 * Run a local version of Draft Store in a Docker container with a Redis image:
 
 ```bash
-docker-compose -f ./draft-store.yml up -d
+   docker-compose -f ./draft-store.yml up -d
 ```
 
 * Comment out code that isn't used when running Draft Store locally:<br>
@@ -58,29 +58,29 @@ Go to this file: src/main/modules/draft-store/index.ts and comment out like this
 * Install dependencies:
 
 ```bash
-$ yarn install
+   yarn install
 ```
 
 > Troubleshooting:
 > If you have issues check your Node version and use Node Version Manager to change to a supported version if required:
 >
 > ```bash
-> $ nvm use 18.15.0
+> nvm use 18.15.0
 > ```
 
 * Bundle:
 
 ```bash
-$ yarn webpack
+   yarn webpack
 ```
 
 * Run:
 
 ```bash
-$ yarn start:dev
+   yarn start:dev
 ```
 
-* The application's home page will be available at http://localhost:3000
+* The application's home page will be available at http://localhost:3001
 
 #### Running the application subsequently
 
@@ -91,28 +91,8 @@ $ yarn start:dev
 * Run:
 
 ```bash
-$ yarn start:dev
+   yarn start:dev
 ```
-
-### Running with Docker
-
-Create docker image:
-
-```bash
-  docker-compose build
-```
-
-Run the application by executing the following command:
-
-```bash
-  docker-compose up
-```
-
-This will start the frontend container exposing the application's port
-(set to `3000` in this template app).
-
-In order to test if the application is up, you can visit https://localhost:3000 in your browser.
-You should get a very basic home page (no styles, etc.).
 
 ## Developing
 
