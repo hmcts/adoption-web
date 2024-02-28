@@ -29,6 +29,9 @@ const enContent = {
   line9: 'You must use the same email address and password for all your applications.',
   newApplication: 'Start a new application for a different child',
   printApplication: 'Print your application',
+  hearYourThoughts: "We'd like to hear your thoughts",
+  completeSurvey: 'Complete this short, 5-minute survey to help improve our services for you and others.',
+  leaveFeedback: 'Please leave your feedback here',
 };
 
 const cyContent = {
@@ -57,6 +60,10 @@ const cyContent = {
   line9: 'Rhaid ichi ddefnyddio’r un cyfeiriad e-bost a chyfrinair ar gyfer pob cais.',
   newApplication: 'Dechrau cais newydd ar gyfer plentyn arall',
   printApplication: 'Argraffu eich cais',
+  hearYourThoughts: 'Hoffwn gael adborth gennych',
+  completeSurvey:
+    'Cwblhewch yr arolwg byr hwn fydd ond yn cymryd 5 munud o’ch amser i’n helpu i wella ein gwasanaethau i chi ac eraill.',
+  leaveFeedback: 'Rhowch eich adborth yma',
 };
 
 describe('application-submmitted > content', () => {

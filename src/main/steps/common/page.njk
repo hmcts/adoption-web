@@ -32,6 +32,7 @@
     serviceName: applyForAdoptionLaPortal,
     serviceUrl: (globals.basePath if globals.basePath) + "/la-portal/kba-case-ref",
     homepageUrl: "/la-portal/kba-case-ref",
+    useTudorCrown: true,
     navigation: []
     }) }}
   {% else %}
@@ -39,6 +40,7 @@
       containerClasses: "govuk-width-container",
       serviceName: applyForAdoptionCui,
       serviceUrl: (globals.basePath if globals.basePath) + "/",
+      useTudorCrown: true,
       navigation: [
         {
           href: "/logout" if isLoggedIn else "/",
@@ -58,7 +60,11 @@
 {% endblock %}
 
 {# Feedback link will be used in both CUI and la-portal with exact same behaviour with dynamic page title as query param. #}
-{% set feedbackLink = feedback | replace("PAGE_TITLE", title if title else label) %}
+{% if laPortal == true %}
+  {% set feedbackLink = laFeedback %}
+{% else %}
+  {% set feedbackLink = feedback | replace("PAGE_TITLE", title if title else label) %}
+{% endif %}
 
 {% block beforeContent %}
 

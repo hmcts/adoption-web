@@ -7,7 +7,12 @@
                 <span class="govuk-caption-l">{{section}}</span>
                 <h1 class="govuk-heading-l">{{ title }}</h1>
                 <p class="govuk-body govuk-!-margin-top-4">{{line1}}</p>
+                {% if language == 'en' %}
                     <a href="https://www.gov.uk/child-adoption" class="govuk-link">{{line2}}</a>
+                {% else %}
+                    <a href="https://www.gov.uk/mabwysiadu-plentyn" class="govuk-link">{{line2}}</a>
+                {% endif %}
+                    
 
             </div>
         </div>
