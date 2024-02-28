@@ -32,6 +32,7 @@
     serviceName: applyForAdoptionLaPortal,
     serviceUrl: (globals.basePath if globals.basePath) + "/la-portal/kba-case-ref",
     homepageUrl: "/la-portal/kba-case-ref",
+    useTudorCrown: true,
     navigation: []
     }) }}
   {% else %}
@@ -39,6 +40,7 @@
       containerClasses: "govuk-width-container",
       serviceName: applyForAdoptionCui,
       serviceUrl: (globals.basePath if globals.basePath) + "/",
+      useTudorCrown: true,
       navigation: [
         {
           href: "/logout" if isLoggedIn else "/",
