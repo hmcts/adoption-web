@@ -55,7 +55,7 @@ const en = {
   theWeb: 'the web browser you use',
   storingYourData: 'Storing your data',
   savedInformation:
-    'Information you enter in the online adoption service is saved until you decide to submit it. This allows you to save what you are doing and continue later. Saved information that you do not submit will be deleted after 180 days.',
+    'Information you enter in the online adoption service is saved until you decide to submit it. This allows you to save what you are doing and continue later. Saved information that you do not submit will be deleted after 90 days.',
   postSubmissionData:
     'After you submit your application, the information you entered will be stored for 100 years and then deleted.',
   sharingYourData: 'Sharing your data',
@@ -171,7 +171,7 @@ const cy: typeof en = {
   theWeb: 'y porwr gwe rydych yn ei ddefnyddio',
   storingYourData: 'Storio eich data',
   savedInformation:
-    "Caiff yr wybodaeth rydych yn ei rhoi yn eich cais i fabwysiadu ar-lein ei storio hyd nes y byddwch yn penderfynu cyflwyno’ch cais. Bydd hyn yn eich galluogi i arbed beth ydych yn ei wneud a pharhau â'ch cais yn hwyrach ymlaen. Bydd gwybodaeth sydd wedi cael ei storio nad ydych yn ei chyflwyno yn cael ei dileu ar ôl 180 diwrnod.",
+    "Caiff yr wybodaeth rydych yn ei rhoi yn eich cais i fabwysiadu ar-lein ei storio hyd nes y byddwch yn penderfynu cyflwyno’ch cais. Bydd hyn yn eich galluogi i arbed beth ydych yn ei wneud a pharhau â'ch cais yn hwyrach ymlaen. Bydd gwybodaeth sydd wedi cael ei storio nad ydych yn ei chyflwyno yn cael ei dileu ar ôl 90 diwrnod.",
   postSubmissionData:
     "Ar ôl i chi gyflwyno’ch cais, bydd yr wybodaeth a roesoch yn cael ei storio am 100 mlynedd ac yna'n cael ei dileu.",
   sharingYourData: 'Rhannu eich data',
