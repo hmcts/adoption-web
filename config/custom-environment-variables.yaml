@@ -38,7 +38,7 @@ session:
     host: REDIS_HOST
   secureCookie: SECURE_COOKIE
 e2e:
-  userTestPassword: TEST_PASSWORD
+  userTestPassword: ''
 appInsights:
   instrumentationKey: APPINSIGHTS_KEY
 localCourt:
