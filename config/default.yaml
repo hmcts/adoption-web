@@ -13,7 +13,7 @@ services:
     clientID: 'adoption-web'
     clientSecret: 'NEED TO INSERT SECRET'
     systemUsername: 'dummy_user'
-    systemPassword: 'dummy_password'
+    systemPassword: ''
     userRole: 'citizen'
   case:
     url: 'http://ccd-data-store-api-aat.service.core-compute-aat.internal'
