@@ -3,7 +3,7 @@ appVersion: '1.0'
 description: A Helm chart for adoption-web App
 name: adoption-web
 home: https://github.com/hmcts/adoption-web
-version: 0.0.54
+version: 0.0.55
 dependencies:
   - name: nodejs
     version: 3.0.1
