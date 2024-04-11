@@ -69,7 +69,9 @@ export class KbaMiddleware {
               if (
                 childDOBEnteredByApplicant !== childDOBEnteredByLA ||
                 req.session.laPortalKba['kbaChildName']?.trim() !==
-                  req.session.userCase.childrenFirstName?.trim() + ' ' + req.session.userCase.childrenLastName?.trim()
+                  req.session.userCase.childrenFirstName?.replace(/\s{2,}/g, ' ').trim() +
+                    ' ' +
+                    req.session.userCase.childrenLastName?.replace(/\s{2,}/g, ' ').trim()
               ) {
                 return req.session.destroy(() => res.redirect(LA_PORTAL_NEG_SCENARIO + param));
               }
