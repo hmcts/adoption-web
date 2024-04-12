@@ -11,22 +11,24 @@ import { generateContent } from './content';
 
 describe('GetMultipleChildrenDescController', () => {
   const controller = new GetMultipleChildrenDescController(__dirname + './template', generateContent);
-  let req = mockRequest({ userCase: {} });
+  let req: any;
   const res = mockResponse();
+
+  beforeEach(() => {
+    req = mockRequest({ userCase: {} });
+  });
 
   afterEach(() => {
     mockGetFee.mockClear();
   });
 
   it('should call the fee lookup api', async () => {
-    req = mockRequest({ userCase: {} });
-    mockGetFee.mockResolvedValue({ FeeAmount: '4321' });
+    mockGetFee.mockResolvedValue({ FeeAmount: 'a fee amount' });
     await controller.get(req, res);
     expect(mockGetFee).toHaveBeenCalledWith(req.locals.logger);
   });
 
   it('should save the fee response in session', async () => {
-    req = mockRequest({ userCase: {} });
     mockGetFee.mockResolvedValue({
       FeeCode: 'MOCK_CODE',
       FeeDescription: 'MOCK_DESCRIPTION',
@@ -43,7 +45,6 @@ describe('GetMultipleChildrenDescController', () => {
   });
 
   it('should throw error when feel lookup api fails', async () => {
-    req = mockRequest({ userCase: {} });
     mockGetFee.mockReturnValue(undefined);
     try {
       await controller.get(req, res);
