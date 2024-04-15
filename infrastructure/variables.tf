@@ -54,3 +54,13 @@ variable "capacity" {
   default     = "1"
   description = "The size of the Redis cache to deploy. Valid values are 1, 2, 3, 4, 5"
 }
+
+variable "rdb_backup_enabled" {
+  type    = bool
+  default = false
+}
+
+variable "redis_backup_frequency" {
+  default     = "360"
+  description = "The Backup Frequency in Minutes. Only supported on Premium SKUs. Possible values are: 15, 30, 60, 360, 720 and 1440"
+}
