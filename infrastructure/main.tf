@@ -27,7 +27,7 @@ module "adoption-web-session-storage" {
   capacity                        = var.capacity
   rdb_backup_enabled              = var.rdb_backup_enabled
   rdb_backup_frequency            = var.redis_backup_frequency
-  rdb_storage_account_name_prefix = var.product
+  rdb_storage_account_name_prefix = var.raw_product
 }
 
 data "azurerm_key_vault" "adoption_key_vault" {
