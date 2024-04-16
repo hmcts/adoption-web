@@ -99,6 +99,7 @@ export const form: FormContent = {
       label: l => l.childNameLabel,
       hint: l => l.childNameHint,
       labelSize: 'm',
+      parser: data => (data as Record<string, string>).kbaChildName?.replace(/\s{2,}/g, ' ').trim(),
       validator: isFieldFilledIn,
     },
     kbaChildrenDateOfBirthLabel: {
