@@ -80,7 +80,7 @@ withNightlyPipeline(type, product, component) {
   }
 
 afterAlways('fullFunctionalTest') {
-        stage('Functional Tests Nightly') {
+        stage('Playwright Tests Nightly') {
             try {
                 yarnBuilder.yarn('test:functional-nightly')
             } catch (Error) {
@@ -97,7 +97,7 @@ afterAlways('fullFunctionalTest') {
                 steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
             }
         }
-        stage('Accessibility Tests Nightly') {
+        stage('Playwright Accessibility Tests Nightly') {
             try {
                 yarnBuilder.yarn('test:accessibility-nightly')
             } catch (Error) {
