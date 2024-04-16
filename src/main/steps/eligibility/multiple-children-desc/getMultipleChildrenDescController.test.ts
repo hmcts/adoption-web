@@ -5,13 +5,15 @@ jest.mock('../../../app/fee/fee-lookup-api', () => ({
 
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
+import { Case } from '../../../app/case/case';
+import { AppRequest } from '../../../app/controller/AppRequest';
 
-import GetMultipleChildrenDescController from './getMultipleChildrenDescController';
 import { generateContent } from './content';
+import GetMultipleChildrenDescController from './getMultipleChildrenDescController';
 
 describe('GetMultipleChildrenDescController', () => {
   const controller = new GetMultipleChildrenDescController(__dirname + './template', generateContent);
-  let req: any;
+  let req: AppRequest<Partial<Case>>;
   const res = mockResponse();
 
   beforeEach(() => {
