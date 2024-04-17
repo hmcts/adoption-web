@@ -92,7 +92,7 @@ afterAlways('fullFunctionalTest') {
                     keepAll: true,
                     reportDir: 'playwright-report',
                     reportFiles: 'index.html',
-                    reportName: 'UI Functional Test Report'
+                    reportName: 'Playwright UI Functional Test Report'
                 ])
                 steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
             }
@@ -109,7 +109,7 @@ afterAlways('fullFunctionalTest') {
                     keepAll: true,
                     reportDir: "playwright-report",
                     reportFiles: 'index.html',
-                    reportName: 'Accessibility Functional Test Report'
+                    reportName: 'Playwright Accessibility Functional Test Report'
                 ])
                 steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
             }
