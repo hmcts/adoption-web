@@ -3,11 +3,12 @@ jest.mock('../../../app/fee/fee-lookup-api', () => ({
   getFee: mockGetFee,
 }));
 
+import { mockRequest } from '../../../../test/unit/utils/mockRequest';
+import { mockResponse } from '../../../../test/unit/utils/mockResponse';
+
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { Case } from '../../../app/case/case';
 import { State } from '../../../app/case/definition';
-import { mockRequest } from '../../../../test/unit/utils/mockRequest';
-import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { TASK_LIST_URL } from '../../urls';
 import GetSubmittedController from './getSubmittedController';
 
