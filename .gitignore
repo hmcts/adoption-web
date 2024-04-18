@@ -33,3 +33,7 @@ tsconfig.lint.json
 
 output/
 **/pacts/*
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
