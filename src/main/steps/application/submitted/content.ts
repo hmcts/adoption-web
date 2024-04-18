@@ -18,7 +18,7 @@ const en = content => ({
     'You should contact your social worker for updates on your application. The adoption service cannot provide these.',
   multipleChildren: 'Adopting more than one child',
   line6:
-    'If you are applying for more than one child, you must complete and submit a new application for each child. This must be done before midnight on the day you submitted your first application or you will be charged an additional court fee of £183.',
+    `If you are applying for more than one child, you must complete and submit a new application for each child. This must be done before midnight on the day you submitted your first application or you will be charged an additional court fee of £${content.fee?.FeeAmount}.`,
   line7: 'You will be asked the same questions. This is because each application is treated separately.',
   line8:
     'You might find it useful to take a note of each new reference number next to the name of the child you are applying to adopt. The emails you receive will only contain the reference number.',
@@ -48,7 +48,7 @@ const cy: typeof en = content => ({
     'Dylech gysylltu â’ch gweithiwr cymdeithasol i gael diweddariadau am eich cais. Ni all y gwasanaeth mabwysiadu roi diweddariadau i chi.',
   multipleChildren: 'Mabwysiadu mwy nag un plentyn',
   line6:
-    'Os ydych chi’n gwneud cais i fabwysiadu mwy nag un plentyn, mae’n rhaid i chi gwblhau a chyflwyno cais newydd ar gyfer pob plentyn. Rhaid gwneud hyn cyn hanner nos ar y dyddiad y byddwch yn cyflwyno eich cais cyntaf neu fe godir ffi llys ychwanegol arnoch o £183.',
+    `Os ydych chi’n gwneud cais i fabwysiadu mwy nag un plentyn, mae’n rhaid i chi gwblhau a chyflwyno cais newydd ar gyfer pob plentyn. Rhaid gwneud hyn cyn hanner nos ar y dyddiad y byddwch yn cyflwyno eich cais cyntaf neu fe godir ffi llys ychwanegol arnoch o £${content.fee?.FeeAmount}.`,
   line7: 'Fe ofynnir yr un cwestiynau i chi. Mae hyn oherwydd fe ymdrinnir â phob cais ar wahân.',
   line8:
     'Efallai y byddai’n eich helpu i nodi pob cyfeirnod newydd wrth enw’r plentyn rydych yn gwneud cais i’w fabwysiadu. Dim ond y cyfeirnod fydd wedi’i nodi ar y negeseuon e-bost a anfonir atoch.',

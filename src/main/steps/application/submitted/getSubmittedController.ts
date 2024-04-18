@@ -1,15 +1,19 @@
+import { Logger } from '@hmcts/nodejs-logging';
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
 import { State } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { GetController } from '../../../app/controller/GetController';
+import { getFee } from '../../../app/fee/fee-lookup-api';
 import { TASK_LIST_URL } from '../../urls';
 
 import { generateContent } from './content';
 
+const logger = Logger.getLogger('GetSubmittedController');
+
 @autobind
-export default class ApplicationSubmittedGetController extends GetController {
+export default class GetSubmittedController extends GetController {
   constructor() {
     super(__dirname + '/template', generateContent);
   }
@@ -19,6 +23,16 @@ export default class ApplicationSubmittedGetController extends GetController {
     if (req.session.userCase.state !== State.Submitted) {
       return res.redirect(TASK_LIST_URL);
     }
-    await super.get(req, res);
-  }
+    const feeResponse = await getFee(req.locals.logger);
+    if (feeResponse) {
+      req.session.fee = feeResponse;
+
+      const callback = () => super.get(req, res);
+      super.saveSessionAndRedirect(req, res, callback);
+    } else {
+      logger.error('GetSubmittedController unable to get fee from fee-register API');
+      throw new Error('GetSubmittedController unable to get fee from fee-register API');
+    }
+  } 
 }
+
