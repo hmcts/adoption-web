@@ -3,13 +3,12 @@ jest.mock('../../../app/fee/fee-lookup-api', () => ({
   getFee: mockGetFee,
 }));
 
+import { AppRequest } from '../../../app/controller/AppRequest';
+import { Case } from '../../../app/case/case';
+import { State } from '../../../app/case/definition';
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
-import { State } from '../../../app/case/definition';
 import { TASK_LIST_URL } from '../../urls';
-import { Case } from '../../../app/case/case';
-import { AppRequest } from '../../../app/controller/AppRequest';
-
 import GetSubmittedController from './getSubmittedController';
 
 describe('GetSubmittedController', () => {
@@ -66,5 +65,4 @@ describe('GetSubmittedController', () => {
       /* eslint-enable jest/no-conditional-expect */
     }
   });
-
 });

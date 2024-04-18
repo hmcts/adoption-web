@@ -33,6 +33,5 @@ export default class GetSubmittedController extends GetController {
       logger.error('GetSubmittedController unable to get fee from fee-register API');
       throw new Error('GetSubmittedController unable to get fee from fee-register API');
     }
-  } 
+  }
 }
-
