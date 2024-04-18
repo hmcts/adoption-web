@@ -5,11 +5,11 @@ jest.mock('../../../app/fee/fee-lookup-api', () => ({
 
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
-
-import { AppRequest } from '../../../app/controller/AppRequest';
 import { Case } from '../../../app/case/case';
 import { State } from '../../../app/case/definition';
+import { AppRequest } from '../../../app/controller/AppRequest';
 import { TASK_LIST_URL } from '../../urls';
+
 import GetSubmittedController from './getSubmittedController';
 
 describe('GetSubmittedController', () => {
