@@ -1,15 +1,15 @@
-# Playwright End to End suite
+# 🎭 Playwright End-to-End UI Testing Suite
 
-End to End testing suite using:
+End to end UI testing suite using:
 
 - Playwright https://playwright.dev/
 - TypeScript https://www.typescriptlang.org/
 
-## 🤖 Starting up
+## 🤖 Getting Started
 
-For all options take a look at https://playwright.dev/docs/running-tests
+To begin, familiarise yourself with the options available for running tests by visiting Playwright's documentation https://playwright.dev/docs/running-tests.
 
-To execute the 'smoke-test.spec.ts' individually from the Terminal, use the command `yarn playwright test smoke-test.spec.ts`.
+To execute the 'smoke-test.spec.ts' individually from the terminal,  simply use the following command: `yarn playwright test smoke-test.spec.ts`.
 
 ## 📁 Structure
 
@@ -19,5 +19,5 @@ To execute the 'smoke-test.spec.ts' individually from the Terminal, use the comm
 |-|- settings # essential settings for the framework, such as user credentials and URLs.
 |-|- tests # Here is where you can do your magic. 🧙‍♂️
 
- playwright.config.ts # This sits outside playwright-e2e folder, but is the config file for playwright only tests.
+ playwright.config.ts # This sits outside playwright-e2e folder in the projects root. It is the config file for playwright only tests.
 ```

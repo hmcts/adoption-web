@@ -12,12 +12,12 @@ test('Verify eligibility to adopt one child.', async ({ page }) => {
   await eligibility.isEligible();
 });
 
-test('Verify you can only apply to adopt a child if they are under 18 years old', async ({ page }) => {
+test('Verify you can only apply to adopt a child if they are under 18 years old.', async ({ page }) => {
   const eligibility = new Eligibility(page);
   await eligibility.isNotover18();
 });
 
-test("Verify you can only apply to adopt a child if they've not been married or in a civil partnership", async ({
+test("Verify you can only apply to adopt a child if they've not been married or in a civil partnership.", async ({
   page,
 }) => {
   const eligibility = new Eligibility(page);
@@ -36,7 +36,7 @@ test('Verify you cannot apply to adopt a child unless you have a permanent home 
   await eligibility.notUKResident();
 });
 
-test('Verify you cannot apply to adopt a child unless you have a lived in the UK, Channel Islands or Isle of Man for the last 12 months (habitually resident)', async ({
+test('Verify you cannot apply to adopt a child unless you have a lived in the UK, Channel Islands or Isle of Man for the last 12 months (habitually resident).', async ({
   page,
 }) => {
   const eligibility = new Eligibility(page);
