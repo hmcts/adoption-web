@@ -17,7 +17,7 @@ test('Verify you can only apply to adopt a child if they are under 18 years old'
   await eligibility.isNotover18();
 });
 
-test('Verify you can only apply to adopt a child if they\'ve not been married or in a civil partnership', async ({
+test("Verify you can only apply to adopt a child if they've not been married or in a civil partnership", async ({
   page,
 }) => {
   const eligibility = new Eligibility(page);
