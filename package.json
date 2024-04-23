@@ -44,7 +44,7 @@
     "@axe-core/playwright": "^4.9.0",
     "@hmcts/cookie-manager": "^1.0.0",
     "@hmcts/frontend": "^0.0.50-alpha",
-    "@hmcts/nodejs-healthcheck": "^1.7.3",
+    "@hmcts/nodejs-healthcheck": "^1.8.4",
     "@hmcts/nodejs-logging": "^4.0.4",
     "@hmcts/properties-volume": "^1.0.0",
     "@types/autobind-decorator": "^2.1.0",
@@ -170,7 +170,8 @@
     "minimist": "^1.2.6",
     "config/json5": ">=2.2.2",
     "tsconfig-paths/json5": ">=2.2.2",
-    "cookiejar": ">=2.1.4"
+    "cookiejar": ">=2.1.4",
+    "formidable": "^3.2.4"
   },
   "packageManager": "yarn@3.6.4"
 }
