@@ -14,9 +14,9 @@ nodejs:
     APPINSIGHTS_KEY: '00000000-0000-0000-0000-000000000000'
     PCQ_ENABLED: 'true'
     REDIS_TTL_MS: 30
-    CCD_URL: 'http://ccd-data-store-api-aat.service.core-compute-aat.internal'
+    CCD_URL: 'http://adoption-cos-api-pr-927-ccd-data-store-api'
     IDAM_ROLE: 'citizen'
-    CDAM_API_URL: 'http://ccd-case-document-am-api-aat.service.core-compute-aat.internal'
+    CDAM_API_URL: 'http://adoption-cos-api-pr-927-ccd-case-document-am-api'
     # Family Court List
     LEICESTER_VAL: 'Leicester County Court'
     STOKE-ON-TRENT_VAL: 'Stoke-on-Trent Combined Court'
