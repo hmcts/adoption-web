@@ -221,3 +221,9 @@ ADOP_WEB_URL=https://adoption-web.aat.platform.hmcts.net/ SHOW_BROWSER_WINDOW=fa
 ```$bash
 ADOP_WEB_URL=https://adoption-web-pr-146.service.core-compute-preview.internal/ SHOW_BROWSER_WINDOW=false CITIZEN_PASSWORD=Adoption12 yarn test:local --grep 'Verify apply my own option'
 ```
+
+## Step controllers
+src/main/app/controller contains default controllers.  These will be used if no controllers are specified alongside content in the steps folders.
+If a step needs additional functionality, add a controller alongside the content.ts, which inherits the default controller.  Get and post controllers
+need 'get' or 'post' in their filenames.
+
