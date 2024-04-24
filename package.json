@@ -31,6 +31,8 @@
     "test:functional:skip": "echo 'Not running functional cases in Master' && exit 0",
     "test:crossbrowser-e2e": "MOCHAWESOME_REPORTFILENAME=crossbrowser codeceptjs run-multiple --grep '@cross-browser' ${BROWSER_GROUP:-'--all'} -c saucelabs.conf.js --reporter mocha-multi",
     "test:crossbrowser": "./bin/run-crossbrowser-tests.sh",
+    "test:functional-nightly": "yarn playwright install chromium && yarn playwright install firefox && yarn playwright install webkit && yarn playwright test --project=chromium --project=webkit --project=firefox",
+    "test:accessibility-nightly": "yarn playwright install chromium && yarn playwright install firefox && yarn playwright install webkit && yarn playwright test --grep @accessibility",
     "test:local": "codeceptjs run-multiple parallel",
     "test:pact": "jest -c jest.pact.config.js --runInBand",
     "pact:publish": "NODE_ENV=test NODE_PATH=. LOG_LEVEL=error ts-node src/test/pact/publish/publish.ts",
@@ -39,9 +41,10 @@
     "broker:stop": "docker-compose -f broker-compose.yaml down"
   },
   "dependencies": {
+    "@axe-core/playwright": "^4.9.0",
     "@hmcts/cookie-manager": "^1.0.0",
     "@hmcts/frontend": "^0.0.50-alpha",
-    "@hmcts/nodejs-healthcheck": "^1.7.3",
+    "@hmcts/nodejs-healthcheck": "^1.8.4",
     "@hmcts/nodejs-logging": "^4.0.4",
     "@hmcts/properties-volume": "^1.0.0",
     "@types/autobind-decorator": "^2.1.0",
@@ -111,6 +114,7 @@
     "@babel/preset-env": "^7.18.2",
     "@pact-foundation/absolute-version": "^0.0.4",
     "@pact-foundation/pact": "^9.17.3",
+    "@playwright/test": "^1.43.1",
     "@types/copy-webpack-plugin": "^10.1.0",
     "@types/jest": "^28.1.1",
     "@types/mini-css-extract-plugin": "^2.5.1",
@@ -150,7 +154,6 @@
     "nodemon": "^2.0.22",
     "npm-run-all": "^4.1.5",
     "pa11y": "^6.2.3",
-    "playwright": "^1.32.0",
     "prettier": "^2.6.2",
     "sass-loader": "^13.0.0",
     "sonar-scanner": "^3.1.0",
@@ -167,7 +170,8 @@
     "minimist": "^1.2.6",
     "config/json5": ">=2.2.2",
     "tsconfig-paths/json5": ">=2.2.2",
-    "cookiejar": ">=2.1.4"
+    "cookiejar": ">=2.1.4",
+    "formidable": "^3.2.4"
   },
   "packageManager": "yarn@3.6.4"
 }
