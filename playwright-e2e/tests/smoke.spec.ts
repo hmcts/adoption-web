@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
-import { urlConfig } from '../settings/urls';
+import { urlConfig } from '../utils/urls';
 
 test.describe('Adoption', () => {
   test('should not have any automatically detectable accessibility issues @accessibility', async ({ page }) => {
