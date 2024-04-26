@@ -40,5 +40,5 @@ test('Verify you cannot apply to adopt a child unless you have a lived in the UK
   page,
 }) => {
   const eligibility = new Eligibility(page);
-  await eligibility.notUKResident();
+  await eligibility.notUKResident12Months();
 });
