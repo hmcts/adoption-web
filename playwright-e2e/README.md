@@ -15,7 +15,7 @@ To execute the 'smoke-test.spec.ts' individually from the terminal,  simply use 
 
 ## 📁 Structure
 
-
+```sh
 |- playwright-e2e
 |-|- fixtures # Predefined components like page, context, browser, and browserName that you can use across different test cases.
 |-|- pages # Where to keep page classes with respective locators and methods. We utilise POM (Page Object Modeling).
@@ -23,7 +23,7 @@ To execute the 'smoke-test.spec.ts' individually from the terminal,  simply use 
 |-|- utils # Essential items for the framework, such as user credentials and URLs.
 
  playwright.config.ts # This sits outside playwright-e2e folder in the projects root. It is the config file for playwright only tests.
-
+```
 
 Feel free to explore and customise according to your project's needs!
 
