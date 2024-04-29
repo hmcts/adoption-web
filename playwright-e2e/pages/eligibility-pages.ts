@@ -143,6 +143,7 @@ export class Eligibility {
     await this.uKCountryOfResidenceYes.check();
     await this.continueButton.click();
     await this.uKCountryOfResidence12MonthsYes.check();
+    await this.uKCountryOfResidence12MonthsNo.check();
     await expect(this.labelWarningYouCanOnly).toContainText([
       'You cannot apply to adopt a child unless you have a permanent home here.',
     ]);

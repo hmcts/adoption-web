@@ -9,6 +9,8 @@ End to end UI testing suite using:
 
 Before diving in, make sure to explore the various options available for running tests in Playwright by referring to the [official documentation.](https://playwright.dev/docs/running-tests) 
 
+To begin, familiarise yourself with the options available for running tests by visiting Playwright's documentation https://playwright.dev/docs/running-tests.
+
 To execute the 'smoke-test.spec.ts' individually from the terminal,  simply use the following command: `yarn playwright test smoke-test.spec.ts`.
 
 ## 📁 Structure
@@ -24,3 +26,4 @@ To execute the 'smoke-test.spec.ts' individually from the terminal,  simply use 
 
 ```
 Feel free to explore and customise according to your project's needs!
+
