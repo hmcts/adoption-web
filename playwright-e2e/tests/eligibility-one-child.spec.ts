@@ -83,7 +83,7 @@ test(
   { tag: ['@eligibility', '@citizen', '@accessibility'] },
   async ({ page, makeAxeBuilder }, testInfo) => {
     const eligibility = new Eligibility(page);
-    await eligibility.notUKResident();
+    await eligibility.notUKResident12Months();
 
     const accessibilityScanResults = await makeAxeBuilder().analyze();
     await attachTestInfo(testInfo, accessibilityScanResults);
