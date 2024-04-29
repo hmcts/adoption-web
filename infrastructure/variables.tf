@@ -63,7 +63,7 @@ variable "rdb_backup_enabled" {
 
 variable "rdb_backup_max_snapshot_count" {
   type    = string
-  default = "5"
+  default = "1"
 }
 
 variable "redis_backup_frequency" {
