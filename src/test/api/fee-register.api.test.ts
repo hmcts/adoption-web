@@ -6,7 +6,7 @@ describe('fees-register API', () => {
     code: 'FEE0310',
     description: 'Application/permission to apply for adoption',
     version: 2,
-    fee_amount: 183,
+    fee_amount: 201,
   };
 
   it('returns an adoption application fee', async () => {
