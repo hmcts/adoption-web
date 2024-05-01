@@ -20,7 +20,7 @@ pactWith(
         FeeCode: 'FEE0310',
         FeeDescription: 'Adoption application fee',
         FeeVersion: '2',
-        FeeAmount: '183',
+        FeeAmount: '201',
       };
 
       const successResponse = {
@@ -32,7 +32,7 @@ pactWith(
           code: somethingLike('FEE0310'),
           description: like('Adoption application fee'),
           version: like(2),
-          fee_amount: like(183.0),
+          fee_amount: like(201.0),
         },
       };
 
