@@ -72,7 +72,7 @@ pactWith(
             ccd_case_number: '1234567891011123',
             description: 'Apply for adoption',
             currency: 'GBP',
-            fees: [{ calculated_amount: '201', code: 'FEE0310', version: '2' }],
+            fees: [{ calculated_amount: '201', code: 'FEE0310', version: '3' }],
             language: '',
           },
         },
@@ -92,7 +92,7 @@ pactWith(
           userCase: {
             id: '1234567891011123',
             applicationFeeOrderSummary: {
-              Fees: [{ value: { FeeAmount: 201, FeeCode: 'FEE0310', FeeVersion: '2' } }],
+              Fees: [{ value: { FeeAmount: 201, FeeCode: 'FEE0310', FeeVersion: '3' } }],
             },
           },
           session: { lang: 'en' },
@@ -161,7 +161,7 @@ pactWith(
           userCase: {
             id: '1234',
             applicationFeeOrderSummary: {
-              Fees: [{ value: { FeeAmount: 1234, FeeCode: 'FEE0310', FeeVersion: '2' } }],
+              Fees: [{ value: { FeeAmount: 1234, FeeCode: 'FEE0310', FeeVersion: '3' } }],
             },
           },
         });
