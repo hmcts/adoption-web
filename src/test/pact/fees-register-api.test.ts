@@ -19,7 +19,7 @@ pactWith(
       const EXPECTED_RESPONSE = {
         FeeCode: 'FEE0310',
         FeeDescription: 'Adoption application fee',
-        FeeVersion: '2',
+        FeeVersion: '3',
         FeeAmount: '201',
       };
 
@@ -31,7 +31,7 @@ pactWith(
         body: {
           code: somethingLike('FEE0310'),
           description: like('Adoption application fee'),
-          version: like(2),
+          version: like(3),
           fee_amount: like(201.0),
         },
       };
