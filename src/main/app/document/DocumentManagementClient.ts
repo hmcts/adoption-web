@@ -1,13 +1,21 @@
+import { Logger } from '@hmcts/nodejs-logging';
 import Axios, { AxiosInstance, AxiosResponse } from 'axios';
 import FormData from 'form-data';
 
 import { CASE_TYPE, JURISDICTION, UserRole } from '../../app/case/definition';
 import type { UserDetails } from '../controller/AppRequest';
 
+const logger = Logger.getLogger('DocumentManagementClient');
+
 export class DocumentManagementClient {
   client: AxiosInstance;
+  serviceToken: string;
+  userToken: string;
 
   constructor(baseURL: string, authToken: string, private readonly user: UserDetails) {
+    this.serviceToken = authToken;
+    this.userToken = `Bearer ${user.accessToken}`;
+
     this.client = Axios.create({
       baseURL,
       maxBodyLength: 20971520,
@@ -42,6 +50,7 @@ export class DocumentManagementClient {
   }
 
   async delete({ url }: { url: string }): Promise<AxiosResponse> {
+    logger.info(`service header is ${this.serviceToken}, usertoken is ${this.userToken}`);
     return this.client.delete(url, { headers: { 'user-id': this.user.id } });
   }
 
