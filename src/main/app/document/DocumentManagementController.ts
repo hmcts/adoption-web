@@ -1,9 +1,9 @@
 import autobind from 'autobind-decorator';
-import { LoggerInstance } from 'winston';
 import config from 'config';
 import type { Response } from 'express';
 import { v4 as generateUuid } from 'uuid';
 
+import { Logger } from '@hmcts/nodejs-logging';
 import { saveDraftCase } from '../../modules/draft-store/draft-store-service';
 import { LA_PORTAL_UPLOAD_YOUR_DOCUMENTS, PAY_YOUR_FEE, UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
@@ -20,6 +20,8 @@ import {
 import type { AppRequest, UserDetails } from '../controller/AppRequest';
 
 import { Classification, DocumentManagementClient } from './DocumentManagementClient';
+
+const logger = Logger.getLogger('DocumentManagementController');
 
 @autobind
 export class DocumentManagerController {
@@ -91,7 +93,6 @@ export class DocumentManagerController {
     });
   }
   public async delete(
-    logger: LoggerInstance,
     req: AppRequest<Partial<CaseWithId>>,
     res: Response,
     documentInput?: DocumentInput
@@ -143,14 +144,14 @@ export class DocumentManagerController {
     await this.post(req, res, documentInput);
   }
 
-  public async deleteLa(logger: LoggerInstance, req: AppRequest<Partial<CaseWithId>>, res: Response): Promise<void> {
+  public async deleteLa(req: AppRequest<Partial<CaseWithId>>, res: Response): Promise<void> {
     const documentInput = {
       documentsUploadedKey: 'laDocumentsUploaded',
       documentComment: 'Uploaded by LA',
       documentRedirectUrl: LA_PORTAL_UPLOAD_YOUR_DOCUMENTS,
       skipDraftCheck: true,
     };
-    await this.delete(logger, req, res, documentInput);
+    await this.delete(req, res, documentInput);
   }
 
   public async get(req: AppRequest<Partial<CaseWithId>>, res: Response): Promise<void> {
