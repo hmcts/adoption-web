@@ -1,3 +1,4 @@
+const { Helper } = require('codeceptjs');
 const fs = require('fs');
 const { clearString, screenshotOutputFolder } = require('codeceptjs/lib/utils');
 
@@ -28,7 +29,7 @@ function stringify(value) {
 
 module.exports = class HooksHelpers extends Helper {
   async _failed(test) {
-    const helper = this.helpers['Puppeteer'] || this.helpers['WebDriver'];
+    const helper = this.helpers['Playwright'] || this.helpers['WebDriver'];
     let logs = await helper.grabBrowserLogs();
     if (logs !== undefined) {
       logs = logs.map(log => {

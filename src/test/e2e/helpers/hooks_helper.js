@@ -1,3 +1,4 @@
+const { Helper } = require('codeceptjs');
 const recorder = require('codeceptjs').recorder;
 const output = require('codeceptjs').output;
 const lodash = require('lodash');
@@ -8,9 +9,9 @@ const retryableErrors = [
   'net::ERR_ABORTED',
 ];
 
-module.exports = class HooksHelpers extends Helper {
+module.exports = class HooksHelper extends Helper {
   getHelper() {
-    return this.helpers['Puppeteer'] || this.helpers['WebDriver'];
+    return this.helpers['Playwright'] || this.helpers['WebDriver'];
   }
 
   _beforeSuite() {

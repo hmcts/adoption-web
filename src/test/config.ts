@@ -12,12 +12,12 @@ const endpoints = JSON.parse(decoded.toString());
 
 const generateTestUsername = () => `adoption.web.automationTest.${new Date().getTime()}@hmcts.net`;
 const TestUser = generateTestUsername();
-const TestPass = process.env.CITIZEN_PASSWORD || sysConfig.get('e2e.userTestPassword') || '';
+const TestPass = process.env.CITIZEN_PASSWORD || sysConfig.get('e2e.userTestPassword') || 'Password1234';
 const idamUserManager = new IdamUserManager(endpoints.idamToken);
 
 export const autoLogin = {
   login: (I, username = TestUser, password = TestPass): void => {
-    I.amOnPage(`${process.env.ADOP_WEB_URL}`);
+    I.amOnPage(`https://adoption-web.aat.platform.hmcts.net`);
     I.wait(5);
     I.waitForText('Sign in or create an account', 30);
     I.fillField('username', username);
@@ -27,13 +27,13 @@ export const autoLogin = {
     I.waitForText('Are you applying on your own, or with someone else?', 90);
   },
   check: (I: CodeceptJS.I): void => {
-    I.amOnPage(`${process.env.ADOP_WEB_URL}`);
+    I.amOnPage(`https://adoption-web.aat.platform.hmcts.net`);
     I.waitForText('Are you applying on your own, or with someone else?');
   },
 };
 
 export const config = {
-  TEST_URL: process.env.ADOP_WEB_URL || 'http://localhost:3001/',
+  TEST_URL: process.env.ADOP_WEB_URL || 'https://adoption-web.aat.platform.hmcts.net',
   TestHeadlessBrowser: process.env.TEST_HEADLESS ? process.env.TEST_HEADLESS === 'true' : true,
   TestSlowMo: 250,
   WaitForTimeout: 10000,
