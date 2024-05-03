@@ -1,9 +1,9 @@
+import { Logger } from '@hmcts/nodejs-logging';
 import autobind from 'autobind-decorator';
 import config from 'config';
 import type { Response } from 'express';
 import { v4 as generateUuid } from 'uuid';
 
-import { Logger } from '@hmcts/nodejs-logging';
 import { saveDraftCase } from '../../modules/draft-store/draft-store-service';
 import { LA_PORTAL_UPLOAD_YOUR_DOCUMENTS, PAY_YOUR_FEE, UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
@@ -127,7 +127,9 @@ export class DocumentManagerController {
 
     req.session.save(err => {
       if (err) {
-        logger.error(`Error deleting document from case ${req.session.userCase.id}.  Document URL: ${documentUrlToDelete}`);
+        logger.error(
+          `Error deleting document from case ${req.session.userCase.id}.  Document URL: ${documentUrlToDelete}`
+        );
         throw err;
       }
       return res.redirect(documentInput ? documentInput.documentRedirectUrl : UPLOAD_YOUR_DOCUMENTS);
