@@ -1,4 +1,5 @@
 import autobind from 'autobind-decorator';
+import { LoggerInstance } from 'winston';
 import config from 'config';
 import type { Response } from 'express';
 import { v4 as generateUuid } from 'uuid';
@@ -90,6 +91,7 @@ export class DocumentManagerController {
     });
   }
   public async delete(
+    logger: LoggerInstance,
     req: AppRequest<Partial<CaseWithId>>,
     res: Response,
     documentInput?: DocumentInput
@@ -108,6 +110,8 @@ export class DocumentManagerController {
       return res.redirect(documentInput ? documentInput.documentRedirectUrl : UPLOAD_YOUR_DOCUMENTS);
     }
     const documentUrlToDelete = documentToDelete.value.documentLink.document_url;
+    req.session.userCase.id;
+    logger.info(`Deleting document from case ${req.session.userCase.id}.  Document URL: ${documentUrlToDelete}`);
 
     documentsUploaded[documentIndexToDelete].value = null;
 
@@ -122,6 +126,7 @@ export class DocumentManagerController {
 
     req.session.save(err => {
       if (err) {
+        logger.error(`Error deleting document from case ${req.session.userCase.id}.  Document URL: ${documentUrlToDelete}`);
         throw err;
       }
       return res.redirect(documentInput ? documentInput.documentRedirectUrl : UPLOAD_YOUR_DOCUMENTS);
@@ -138,14 +143,14 @@ export class DocumentManagerController {
     await this.post(req, res, documentInput);
   }
 
-  public async deleteLa(req: AppRequest<Partial<CaseWithId>>, res: Response): Promise<void> {
+  public async deleteLa(logger: LoggerInstance, req: AppRequest<Partial<CaseWithId>>, res: Response): Promise<void> {
     const documentInput = {
       documentsUploadedKey: 'laDocumentsUploaded',
       documentComment: 'Uploaded by LA',
       documentRedirectUrl: LA_PORTAL_UPLOAD_YOUR_DOCUMENTS,
       skipDraftCheck: true,
     };
-    await this.delete(req, res, documentInput);
+    await this.delete(logger, req, res, documentInput);
   }
 
   public async get(req: AppRequest<Partial<CaseWithId>>, res: Response): Promise<void> {
