@@ -21,7 +21,9 @@ export class Nunjucks {
       return typeof prop === 'function' ? prop(this.ctx) : prop;
     });
 
-    env.addGlobal('currentEnv', app.locals?.settings?.env?.toLowerCase());
+    if (process.env.NODE_ENV !== undefined) {
+      env.addGlobal('currentEnv', process.env.NODE_ENV.toLowerCase());
+    }
 
     env.addGlobal('getError', function (fieldName: string): { text?: string } | boolean {
       const { /*form,*/ sessionErrors, errors } = this.ctx;
