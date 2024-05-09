@@ -1,5 +1,13 @@
 {% from "govuk/components/cookie-banner/macro.njk" import govukCookieBanner %}
 
+{% block head %}
+  {% if ["aat"] in currentHost %}
+    <script type="text/javascript"
+      src="https://js-cdn.dynatrace.com/jstag/17177a07246/bf24054dsx/fb3a85222a00a995_complete.js"
+      crossorigin="anonymous"></script>
+  {% endif %}
+{% endblock %}
+
 {% set html %}
   <input type="hidden" name="cookie_locale" id="cookie_locale" value="{{ language }}">
   <p class="govuk-body">{{cookiesLine1}}</p>
