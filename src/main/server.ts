@@ -43,7 +43,7 @@ app.use((req, res, next) => {
 });
 
 if (process.env.NODE_ENV !== undefined) {
-  app.locals.developmentMode = !['production','aat','preview'].includes(process.env.NODE_ENV);
+  app.locals.developmentMode = !['production', 'aat', 'preview'].includes(process.env.NODE_ENV);
 } else {
   app.locals.developmentMode = false;
 }

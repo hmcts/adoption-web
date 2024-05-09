@@ -1,6 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const devMode = !['production','aat','preview'].includes(process.env.NODE_ENV);
+const devMode = !['production', 'aat', 'preview'].includes(process.env.NODE_ENV);
 const fileNameSuffix = devMode ? '-dev' : '.[contenthash]';
 const filename = `[name]${fileNameSuffix}.css`;
 
