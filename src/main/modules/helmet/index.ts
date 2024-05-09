@@ -47,7 +47,6 @@ export class Helmet {
       azureBlob,
       ...tagManager,
       googleAnalyticsDomain,
-      dynaTraceDomain,
       'data:',
       'https://ssl.gstatic.com',
       'https://www.gstatic.com',
