@@ -11,6 +11,7 @@ nodejs:
   ingressHost: adoption-web.{{ .Values.global.environment }}.platform.hmcts.net
 
   environment:
+    NODE_ENV: production
     RUNNING_ENV: {{ .Values.global.environment }}
     REFORM_TEAM: adoption
     REFORM_SERVICE_NAME: adoption-web
