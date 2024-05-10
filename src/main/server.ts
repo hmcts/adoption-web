@@ -42,11 +42,7 @@ app.use((req, res, next) => {
   next();
 });
 
-if (process.env.NODE_ENV !== undefined) {
-  app.locals.developmentMode = !['production', 'aat', 'preview'].includes(process.env.NODE_ENV);
-} else {
-  app.locals.developmentMode = false;
-}
+app.locals.developmentMode = process.env.NODE_ENV !== 'production';
 app.use(favicon(path.join(__dirname, '/public/assets/images/favicon.ico')));
 app.use(bodyParser.json() as RequestHandler);
 app.use(bodyParser.urlencoded({ extended: false }) as RequestHandler);

@@ -1,4 +1,5 @@
 port: 80 # set to 80 to cause a crash if any tests try to open a port s
+runningEnv: 'test'
 mockData:
   authToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvcmlhbiIsInVpZCI6IjEyMyIsInJvbGVzIjpbImFkb3B0aW9uLWNpdGl6ZW4tdXNlciJdfQ.G7Na_2U6gEuPEPXBuVq3UddV9mti85Sw3Gzd0yZA-2I'
   email: 'test@test.com'

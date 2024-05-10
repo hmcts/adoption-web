@@ -6,7 +6,5 @@ nodejs:
   devmemoryRequests: 512Mi
   devcpuLimits: 1000m
   devcpuRequests: 500m
-environment:
-    NODE_ENV: aat
 idam-pr:
   enabled: false
