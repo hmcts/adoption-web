@@ -142,9 +142,9 @@ const setupConfig = {
     microsoft: {
       browsers: getBrowserConfig('microsoft'),
     },
-    // chrome: {
-    //   browsers: getBrowserConfig('chrome'),
-    // },
+    chrome: {
+      browsers: getBrowserConfig('chrome'),
+    },
     // firefox: {
     //   browsers: getBrowserConfig('firefox'),
     // },
