@@ -13,7 +13,7 @@ const defaultSauceOptions = {
   tunnelIdentifier: process.env.TUNNEL_IDENTIFIER || 'reformtunnel',
   acceptSslCerts: true,
   tags: ['Adoption'],
-  maxDuration: 4000,
+  maxDuration: 1800,
 };
 
 function merge(intoObject, fromObject) {
@@ -70,22 +70,22 @@ const setupConfig = {
       require: './src/test/e2e/helpers/stepListener.js',
     },
     Mochawesome: {
-      uniqueScreenshotNames: true,
+      uniqueScreenshotNames: false,
     },
   },
   plugins: {
     autoLogin: testUserConfig.AutoLogin,
     retryFailedStep: {
       enabled: true,
-      retries: 2,
+      retries: 3,
     },
     autoDelay: {
       enabled: true,
       delayAfter: 1000,
     },
     screenshotOnFail: {
-      enabled: true,
-      fullPageScreenshots: true,
+      enabled: false,
+      fullPageScreenshots: false,
     },
   },
   include: {
@@ -142,9 +142,9 @@ const setupConfig = {
     microsoft: {
       browsers: getBrowserConfig('microsoft'),
     },
-    chrome: {
-      browsers: getBrowserConfig('chrome'),
-    },
+    // chrome: {
+    //   browsers: getBrowserConfig('chrome'),
+    // },
     // firefox: {
     //   browsers: getBrowserConfig('firefox'),
     // },
