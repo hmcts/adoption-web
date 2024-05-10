@@ -26,15 +26,15 @@ module.exports = {
     await I.retry(3).waitForText('Is there another person who has parental responsibility for the child?');
     await I.retry(3).click(this.fields.otherParentExists);
     await I.wait(4);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.retry(3).fillField(this.fields.otherParentFirstNames, childOtherParentDetails.otherParentFirstNames);
     await I.retry(3).fillField(this.fields.otherParentLastNames, childOtherParentDetails.otherParentLastNames);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
 
     await I.retry(3).waitForText('How parental responsibility was granted to the other person?');
 
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText('Select how parental responsibility was granted to the other person.');
     await I.retry(3).see('Select how parental responsibility was granted to the other person.');
@@ -42,18 +42,18 @@ module.exports = {
     await I.retry(3).click('Other');
     await I.retry(3).waitForText('Enter the reason how parental responsibility was granted to the other person.');
     await I.retry(3).see('Enter the reason how parental responsibility was granted to the other person.');
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).see('Enter the reason how parental responsibility was granted to the other person.');
     await I.retry(3).fillField('Other', 'Reason not known');
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
 
     await I.retry(3).waitForText(
       'Do you have the address of the other person with parental responsibility for the child?'
     );
     await I.retry(3).click(this.fields.otherParentAddressKnown);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).click(this.fields.enterAddressManually);
     await I.wait(4);
@@ -71,7 +71,7 @@ module.exports = {
       childOtherParentDetails.otherParentAddressCountry
     );
     await I.wait(4);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
 
     await I.retry(3).waitForText('When was the last date this address was confirmed?');
@@ -88,25 +88,25 @@ module.exports = {
       this.fields.otherParentLastAddressDateYear,
       childOtherParentDetails.otherParentLastAddressDateYear
     );
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
 
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).see(childOtherParentDetails.childOtherParentServerOrderTitle);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText(childOtherParentDetails.serverOrderErrorMessage);
     await I.retry(3).click(this.fields.otherParentServeOrderYes);
     await I.retry(3).click(this.fields.otherParentServeOrderNo);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.retry(3).see('Enter more detail');
     await I.wait(4);
     await I.retry(3).fillField(
       this.fields.otherParentServerOrderReason,
       childOtherParentDetails.reasonForNotToServeOrder
     );
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
   },
 };

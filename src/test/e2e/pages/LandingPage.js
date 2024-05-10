@@ -21,7 +21,7 @@ module.exports = {
 
   async selectApplyOnMyownSection() {
     await I.retry(3).click(this.fields.applyingWith);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
   },
 

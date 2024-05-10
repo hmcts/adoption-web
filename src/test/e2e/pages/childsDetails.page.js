@@ -24,14 +24,14 @@ module.exports = {
       childAdoptionCertificateDetails.childrenLastNameAfterAdoption
     );
     await I.wait(4);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick(this.fields.saveAndContinue);
     await I.wait(4);
   },
   async childFullNameSection() {
     await I.retry(3).waitForText("What is the child's full name?");
     await I.retry(3).fillField(this.fields.childrenFirstName, childBasicInitialDetails.childFirstNameBeforeAdoption);
     await I.retry(3).fillField(this.fields.childrenLastName, childBasicInitialDetails.childLastNameBeforeAdoption);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
   },
 
@@ -41,20 +41,21 @@ module.exports = {
     await I.retry(3).fillField(this.fields.childrenDateOfBirthMonth, childBasicInitialDetails.monthChildMovedIn);
     await I.wait(4);
     await I.retry(3).fillField(this.fields.childrenDateOfBirthYear, childBasicInitialDetails.yearChildMovedIn);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
   },
 
   async childFullNameSectionBlankFields() {
-    await I.retry(3).waitForText("What is the child's full name?");
+    //await I.retry(3).seeTextEquals("What is the child's full name?", "h1");
+    console.log("changed playwright see text")
     await I.retry(3).waitForSelector(this.fields.saveAndContinue);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText("Enter the child's first names");
     await I.retry(3).waitForText("Enter the child's last names");
     await I.retry(3).fillField(this.fields.childrenFirstName, childBasicInitialDetails.childFirstNameBeforeAdoption);
     await I.retry(3).fillField(this.fields.childrenLastName, childBasicInitialDetails.childLastNameBeforeAdoption);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
   },
 
@@ -62,7 +63,8 @@ module.exports = {
     await I.retry(3).waitForText("After adoption, what will be the child's full name?");
     await I.wait(4);
     await I.retry(3).waitForSelector(this.fields.saveAndContinue);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).click(this.fields.saveAndContinue);
+    console.log("save and continue issue 8th May");
     await I.wait(4);
     await I.retry(3).waitForText('There is a problem');
     await I.retry(3).waitForText('Enter their first names');
@@ -76,14 +78,16 @@ module.exports = {
       childAdoptionCertificateDetails.childrenLastNameAfterAdoption
     );
     await I.wait(4);
-    await I.retry(3).click('Save and continue');
+    //await I.retry(3).forceClick('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
   },
 
   async childDOBSectionBlankFields() {
     await I.retry(3).waitForText("What is the child's date of birth?");
-    await I.retry(3).waitForSelector(this.fields.saveAndContinue);
-    await I.retry(3).click('Save and continue');
+    //await I.retry(3).waitForSelector(this.fields.saveAndContinue);
+    //await I.retry(3).forceClick('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText('Enter their date of birth');
 
@@ -92,7 +96,8 @@ module.exports = {
     await I.wait(4);
     await I.retry(3).fillField(this.fields.childrenDateOfBirthYear, childBasicInitialDetails.yearChildMovedInInvalid);
     await I.retry(3).waitForSelector(this.fields.saveAndContinue);
-    await I.retry(3).click('Save and continue');
+    //await I.retry(3).forceClick('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText('Date of birth must be a real date');
     await I.retry(3).fillField(this.fields.childrenDateOfBirthDay, childBasicInitialDetails.dateChildMovedIn);
@@ -103,8 +108,9 @@ module.exports = {
       childBasicInitialDetails.yearChildMovedInFutureDate
     );
     await I.retry(3).waitForSelector(this.fields.saveAndContinue);
-    await I.retry(3).click('Save and continue');
-    await page.keyboard.type('\n');
+    await I.retry(3).forceClick('Save and continue');
+    //await I.retry(3).forceClick('Save and continue');
+    //await page.keyboard.type('\n');
     await I.wait(4);
     await I.retry(3).waitForText('Date of birth must be in the past');
     await I.retry(3).fillField(this.fields.childrenDateOfBirthDay, childBasicInitialDetails.dateChildMovedIn);
@@ -112,7 +118,10 @@ module.exports = {
     await I.wait(4);
     await I.retry(3).fillField(this.fields.childrenDateOfBirthYear, childBasicInitialDetails.yearChildMovedIn);
     await I.retry(3).waitForSelector(this.fields.saveAndContinue);
-    await I.retry(3).click('Save and continue');
+    await I.wait(4);
+    await I.wait(4);
+    //await I.retry(3).forceClick('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
   },
 };

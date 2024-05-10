@@ -15,35 +15,35 @@ module.exports = {
     await I.retry(3).waitForText("What was the child's sex at birth?");
     await I.wait(4);
     await I.retry(3).click(this.fields.childrenSexAtBirth);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(3);
     await I.retry(3).click(this.fields.britishCitizen);
     await I.retry(3).click(this.fields.citizenOfDifferentCountry);
     await I.retry(3).fillField(this.fields.addAnotherNationality, childBirthCertificateDetails.childOtherNationality);
     await I.retry(3).click('Add');
     await I.wait(4);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
   },
 
   async childDetailsBirthCertificaterSectionEmpty() {
     await I.retry(3).waitForText("What is the child's full name?");
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText("Enter the child's first names");
     await I.retry(3).waitForText("Enter the child's last names");
     await I.retry(3).fillField(this.fields.childrenFirstName, childBasicInitialDetails.childFirstNameBeforeAdoption);
     await I.retry(3).fillField(this.fields.childrenLastName, childBasicInitialDetails.childLastNameBeforeAdoption);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).click(this.fields.childrenSexAtBirth);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.retry(3).click(this.fields.britishCitizen);
     await I.retry(3).click(this.fields.citizenOfDifferentCountry);
     await I.retry(3).fillField(this.fields.addAnotherNationality, childBirthCertificateDetails.childOtherNationality);
     await I.retry(3).click('Add');
     await I.wait(4);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
   },
 };
