@@ -1,6 +1,7 @@
 import { type Locator, type Page, expect } from '@playwright/test';
+
 import { BasePage } from './base-page';
-export class Eligibility extends BasePage{
+export class Eligibility extends BasePage {
   readonly h1: Locator;
   readonly mainContent: Locator;
   readonly applyMoreThanOneChildNo: Locator;
@@ -156,9 +157,7 @@ export class Eligibility extends BasePage{
     await this.clickContinue(); //second 'click continue' is need to produce the error message
     await this.clickContinue();
     await expect(this.problemErrorMessage).toBeVisible;
-    await expect(this.selectErrorMessage).toContainText([
-      'Select if you are applying to adopt more than one child',
-    ]);
+    await expect(this.selectErrorMessage).toContainText(['Select if you are applying to adopt more than one child']);
     await this.applyMoreThanOneChildNo.check();
     await this.clickContinue();
     await this.clickContinue();
@@ -170,9 +169,7 @@ export class Eligibility extends BasePage{
     await this.clickContinue();
     await this.clickContinue();
     await expect(this.problemErrorMessage).toBeVisible;
-    await expect(this.selectErrorMessage).toContainText([
-      'Select if the child is married or in a civil partnership.',
-    ]);
+    await expect(this.selectErrorMessage).toContainText(['Select if the child is married or in a civil partnership.']);
     await this.isChildMarriedOrCivilPartnershipNo.check();
     await this.clickContinue();
     await this.clickContinue();
