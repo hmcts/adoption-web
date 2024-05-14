@@ -153,7 +153,7 @@ export class Eligibility extends BasePage{
 
   //Error checking tests
   async errorCheck(): Promise<void> {
-    await this.clickContinue();
+    await this.clickContinue(); //second 'click continue' is need to produce the error message
     await this.clickContinue();
     await expect(this.problemErrorMessage).toBeVisible;
     await expect(this.selectErrorMessage).toContainText([
