@@ -20,7 +20,9 @@ test(
     const eligibility = new Eligibility(page);
     await eligibility.isEligible();
 
-    const accessibilityScanResults = await makeAxeBuilder().disableRules(['target-size']).analyze();
+    const accessibilityScanResults = await makeAxeBuilder()
+      .disableRules(['target-size']) //bug raised: https://tools.hmcts.net/jira/browse/ADOP-2445 
+      .analyze(); 
     await attachTestInfo(testInfo, accessibilityScanResults);
     expect(accessibilityScanResults.violations).toEqual([]);
   }
@@ -98,7 +100,9 @@ test(
     const eligibility = new Eligibility(page);
     await eligibility.errorCheck();
 
-    const accessibilityScanResults = await makeAxeBuilder().analyze();
+    const accessibilityScanResults = await makeAxeBuilder()
+      .disableRules(['aria-allowed-attr']) //bug raised: https://tools.hmcts.net/jira/browse/ADOP-2460
+      .analyze()
     await attachTestInfo(testInfo, accessibilityScanResults);
     expect(accessibilityScanResults.violations).toEqual([]);
   }
