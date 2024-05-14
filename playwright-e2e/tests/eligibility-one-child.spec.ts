@@ -90,3 +90,16 @@ test(
     expect(accessibilityScanResults.violations).toEqual([]);
   }
 );
+
+test(
+  'Error check throughout eligibility journey to ensure user selects an option for every question',
+  { tag: ['@eligibility', '@citizen', '@accessibility'] },
+  async ({ page, makeAxeBuilder }, testInfo) => {
+    const eligibility = new Eligibility(page);
+    await eligibility.errorCheck();
+
+    const accessibilityScanResults = await makeAxeBuilder().analyze();
+    await attachTestInfo(testInfo, accessibilityScanResults);
+    expect(accessibilityScanResults.violations).toEqual([]);
+  }
+);
