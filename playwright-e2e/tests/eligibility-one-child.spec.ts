@@ -101,7 +101,7 @@ test(
     await eligibility.errorCheck();
 
     const accessibilityScanResults = await makeAxeBuilder()
-      .disableRules(['aria-allowed-attr']) //bug raised: https://tools.hmcts.net/jira/browse/ADOP-2460
+      .disableRules(['aria-allowed-attr']) //axe-core triggers known GDS issue (https://github.com/alphagov/govuk-frontend/issues/979) on conditional radio buttons (https://design-system.service.gov.uk/components/radios/conditional-reveal/)
       .analyze();
     await attachTestInfo(testInfo, accessibilityScanResults);
     expect(accessibilityScanResults.violations).toEqual([]);
