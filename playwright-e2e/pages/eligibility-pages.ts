@@ -154,7 +154,10 @@ export class Eligibility extends BasePage {
 
   //Error checking test
   async errorCheck(): Promise<void> {
-    await this.handleFormError('Select if you are applying to adopt more than one child', this.applyMoreThanOneChildNo);
+    await this.handleFormError(
+      'Select if you are applying to adopt more than one child', 
+      this.applyMoreThanOneChildNo
+    );
     await this.handleFormError(
       'Select if the child will be under 18 years old on the date you submit your application.',
       this.childUnder18Yes
