@@ -20,7 +20,9 @@ test(
     const eligibility = new Eligibility(page);
     await eligibility.isEligible();
 
-    const accessibilityScanResults = await makeAxeBuilder().disableRules(['target-size']).analyze();
+    const accessibilityScanResults = await makeAxeBuilder()
+      .disableRules(['target-size']) //bug raised: https://tools.hmcts.net/jira/browse/ADOP-2445
+      .analyze();
     await attachTestInfo(testInfo, accessibilityScanResults);
     expect(accessibilityScanResults.violations).toEqual([]);
   }
@@ -86,6 +88,21 @@ test(
     await eligibility.notUKResident12Months();
 
     const accessibilityScanResults = await makeAxeBuilder().analyze();
+    await attachTestInfo(testInfo, accessibilityScanResults);
+    expect(accessibilityScanResults.violations).toEqual([]);
+  }
+);
+
+test(
+  'Error check throughout eligibility journey to ensure user selects an option for every question',
+  { tag: ['@eligibility', '@citizen', '@accessibility'] },
+  async ({ page, makeAxeBuilder }, testInfo) => {
+    const eligibility = new Eligibility(page);
+    await eligibility.errorCheck();
+
+    const accessibilityScanResults = await makeAxeBuilder()
+      .disableRules(['aria-allowed-attr']) //axe-core triggers known GDS issue (https://github.com/alphagov/govuk-frontend/issues/979) on conditional radio buttons (https://design-system.service.gov.uk/components/radios/conditional-reveal/)
+      .analyze();
     await attachTestInfo(testInfo, accessibilityScanResults);
     expect(accessibilityScanResults.violations).toEqual([]);
   }
