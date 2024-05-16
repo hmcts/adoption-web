@@ -1,7 +1,7 @@
 import { test } from '../fixtures/fixtures';
 import { Eligibility } from '../pages/eligibility-pages';
-import { urlConfig } from '../utils/urls';
 import { runAccessibilityScan } from '../utils/accessibility-helper';
+import { urlConfig } from '../utils/urls';
 
 test.beforeEach(async ({ page }) => {
   await page.goto(urlConfig.citizenStartUrl);
@@ -28,7 +28,7 @@ test(
     await runAccessibilityScan(makeAxeBuilder, testInfo);
   }
 );
- 
+
 test(
   'Verify you can only apply to adopt a child if they are under 18 years old.',
   eligibilityTestTags,
@@ -129,13 +129,8 @@ test(
   }
 );
 
-test(
-  'Verify eligibility to adopt one child.',
-  eligibilityTestTags,
-  async ({ page, makeAxeBuilder }, testInfo) => {
-    const eligibility = new Eligibility(page);
-    await eligibility.isEligible(eligibility.applyMoreThanOneChildNo);
-    await runAccessibilityScan(makeAxeBuilder, testInfo);
-  }
-);
-
+test('Verify eligibility to adopt one child.', eligibilityTestTags, async ({ page, makeAxeBuilder }, testInfo) => {
+  const eligibility = new Eligibility(page);
+  await eligibility.isEligible(eligibility.applyMoreThanOneChildNo);
+  await runAccessibilityScan(makeAxeBuilder, testInfo);
+});

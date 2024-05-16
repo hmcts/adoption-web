@@ -42,7 +42,7 @@ export class Eligibility extends BasePage {
     this.uKCountryOfResidence12MonthsNo = page.getByLabel('No');
     this.signInText = page.locator('#skiplinktarget');
     this.problemErrorMessage = page.getByRole('heading', { name: 'There is a problem', exact: true });
-    this.selectErrorMessage = page.getByRole('link', { name: 'Select'});
+    this.selectErrorMessage = page.getByRole('link', { name: 'Select' });
   }
   //tests can take input of applying for multiple children or a single child
   async isEligible(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
