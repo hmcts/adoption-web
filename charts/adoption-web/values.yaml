@@ -271,6 +271,7 @@ nodejs:
       - coram.org.uk
       - barnardos.org.uk
       - adoptersforadoption.com
+      - diagrama.org
 
     # Family Court List
     LEICESTER_VAL: 'Leicester County Court'
