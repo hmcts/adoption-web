@@ -63,7 +63,7 @@ export class Eligibility extends BasePage {
     await this.uKCountryOfResidence12MonthsYes.check();
     await this.clickContinue();
     await expect(this.signInText).toContainText('Sign in or create an account');
-}
+  }
 
   async isNotover18(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
     await this.clickContinue();
