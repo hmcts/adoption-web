@@ -24,7 +24,7 @@ export class Eligibility extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.h1 = page.getByRole('heading', { name: 'Apply to adopt a child placed in your care' });
+    this.h1 = page.getByRole('heading', { name: 'Apply to adopt a child placed in your care', exact: true });
     this.mainContent = page.locator('#main-content');
     this.applyMoreThanOneChildNo = page.getByLabel('No');
     this.applyMoreThanOneChildYes = page.getByLabel('Yes');
@@ -33,7 +33,7 @@ export class Eligibility extends BasePage {
     this.isChildMarriedOrCivilPartnershipYes = page.getByLabel('Yes');
     this.isChildMarriedOrCivilPartnershipNo = page.getByLabel('No');
     this.labelWarningYouCanOnly = page.getByText('You ');
-    this.moreAboutAdoptionLink = page.getByRole('link', { name: 'More about adoption' });
+    this.moreAboutAdoptionLink = page.getByRole('link', { name: 'More about adoption', exact: true });
     this.areYouAndApplicantOver21Yes = page.getByLabel('Yes');
     this.areYouAndApplicantOver21No = page.getByLabel('No');
     this.uKCountryOfResidenceYes = page.getByLabel('Yes');
@@ -41,8 +41,8 @@ export class Eligibility extends BasePage {
     this.uKCountryOfResidence12MonthsYes = page.getByLabel('Yes');
     this.uKCountryOfResidence12MonthsNo = page.getByLabel('No');
     this.signInText = page.locator('#skiplinktarget');
-    this.problemErrorMessage = page.getByRole('heading', { name: 'There is a problem' });
-    this.selectErrorMessage = page.getByRole('link', { name: 'Select' });
+    this.problemErrorMessage = page.getByRole('heading', { name: 'There is a problem', exact: true });
+    this.selectErrorMessage = page.getByRole('link', { name: 'Select'});
   }
   //tests can take input of applying for multiple children or a single child
   async isEligible(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
