@@ -106,7 +106,7 @@ test(
 );
 
 test(
-  'Verify you must be 21 or over to adopt multple children. This includes any other applicant.',
+  'Verify you must be 21 or over to adopt multiple children. This includes any other applicant.',
   eligibilityTestTags,
   async ({ page, makeAxeBuilder }, testInfo) => {
     await runEligibilityTest(page, makeAxeBuilder, testInfo, async eligibility => {
