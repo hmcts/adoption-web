@@ -2,6 +2,7 @@ security:
   referrerPolicy: 'origin'
 port: 3000
 timeout: 30000
+runningEnv: 'production'
 services:
   authProvider:
     url: ''
@@ -358,6 +359,7 @@ socialWorker:
     - coram.org.uk
     - barnardos.org.uk
     - adoptersforadoption.com
+    - diagrama.org
 
 adoption:
   family-court:

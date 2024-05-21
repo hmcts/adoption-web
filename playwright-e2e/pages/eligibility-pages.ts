@@ -24,7 +24,7 @@ export class Eligibility extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.h1 = page.getByRole('heading', { name: 'Apply to adopt a child placed in your care' });
+    this.h1 = page.getByRole('heading', { name: 'Apply to adopt a child placed in your care', exact: true });
     this.mainContent = page.locator('#main-content');
     this.applyMoreThanOneChildNo = page.getByLabel('No');
     this.applyMoreThanOneChildYes = page.getByLabel('Yes');
@@ -33,7 +33,7 @@ export class Eligibility extends BasePage {
     this.isChildMarriedOrCivilPartnershipYes = page.getByLabel('Yes');
     this.isChildMarriedOrCivilPartnershipNo = page.getByLabel('No');
     this.labelWarningYouCanOnly = page.getByText('You ');
-    this.moreAboutAdoptionLink = page.getByRole('link', { name: 'More about adoption' });
+    this.moreAboutAdoptionLink = page.getByRole('link', { name: 'More about adoption', exact: true });
     this.areYouAndApplicantOver21Yes = page.getByLabel('Yes');
     this.areYouAndApplicantOver21No = page.getByLabel('No');
     this.uKCountryOfResidenceYes = page.getByLabel('Yes');
@@ -41,14 +41,17 @@ export class Eligibility extends BasePage {
     this.uKCountryOfResidence12MonthsYes = page.getByLabel('Yes');
     this.uKCountryOfResidence12MonthsNo = page.getByLabel('No');
     this.signInText = page.locator('#skiplinktarget');
-    this.problemErrorMessage = page.getByRole('heading', { name: 'There is a problem' });
+    this.problemErrorMessage = page.getByRole('heading', { name: 'There is a problem', exact: true });
     this.selectErrorMessage = page.getByRole('link', { name: 'Select' });
   }
-
-  async isEligible(): Promise<void> {
+  //tests can take input of applying for multiple children or a single child
+  async isEligible(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
     await this.clickContinue();
-    await this.applyMoreThanOneChildNo.check();
+    await applyMoreThanOneChild.check();
     await this.clickContinue();
+    if (this.applyMoreThanOneChildYes === applyMoreThanOneChild) {
+      await this.clickContinue();
+    }
     await this.childUnder18Yes.check();
     await this.clickContinue();
     await this.isChildMarriedOrCivilPartnershipNo.check();
@@ -62,10 +65,13 @@ export class Eligibility extends BasePage {
     await expect(this.signInText).toContainText('Sign in or create an account');
   }
 
-  async isNotover18(): Promise<void> {
+  async isNotover18(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
     await this.clickContinue();
-    await this.applyMoreThanOneChildNo.check();
+    await applyMoreThanOneChild.check();
     await this.clickContinue();
+    if (this.applyMoreThanOneChildYes === applyMoreThanOneChild) {
+      await this.clickContinue();
+    }
     await this.childUnder18No.check();
     await expect(this.labelWarningYouCanOnly).toContainText([
       'You can only apply to adopt a child if they are under 18 years old on the date your application is submitted.',
@@ -77,10 +83,13 @@ export class Eligibility extends BasePage {
     ]);
   }
 
-  async isMarriedOrCivilPartnership(): Promise<void> {
+  async isMarriedOrCivilPartnership(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
     await this.clickContinue();
-    await this.applyMoreThanOneChildNo.check();
+    await applyMoreThanOneChild.check();
     await this.clickContinue();
+    if (this.applyMoreThanOneChildYes === applyMoreThanOneChild) {
+      await this.clickContinue();
+    }
     await this.childUnder18Yes.check();
     await this.clickContinue();
     await this.isChildMarriedOrCivilPartnershipYes.check();
@@ -94,10 +103,13 @@ export class Eligibility extends BasePage {
     ]);
   }
 
-  async youAndApplicantUnder21(): Promise<void> {
+  async youAndApplicantUnder21(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
     await this.clickContinue();
-    await this.applyMoreThanOneChildNo.check();
+    await applyMoreThanOneChild.check();
     await this.clickContinue();
+    if (this.applyMoreThanOneChildYes === applyMoreThanOneChild) {
+      await this.clickContinue();
+    }
     await this.childUnder18Yes.check();
     await this.clickContinue();
     await this.isChildMarriedOrCivilPartnershipNo.check();
@@ -113,9 +125,12 @@ export class Eligibility extends BasePage {
     ]);
   }
 
-  async notUKResident(): Promise<void> {
+  async notUKResident(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
     await this.clickContinue();
-    await this.applyMoreThanOneChildNo.check();
+    await applyMoreThanOneChild.check();
+    if (this.applyMoreThanOneChildYes === applyMoreThanOneChild) {
+      await this.clickContinue();
+    }
     await this.clickContinue();
     await this.childUnder18Yes.check();
     await this.clickContinue();
@@ -132,9 +147,12 @@ export class Eligibility extends BasePage {
     await expect(this.mainContent).toContainText(['You cannot apply to adopt']);
   }
 
-  async notUKResident12Months(): Promise<void> {
+  async notUKResident12Months(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
     await this.clickContinue();
-    await this.applyMoreThanOneChildNo.check();
+    await applyMoreThanOneChild.check();
+    if (this.applyMoreThanOneChildYes === applyMoreThanOneChild) {
+      await this.clickContinue();
+    }
     await this.clickContinue();
     await this.childUnder18Yes.check();
     await this.clickContinue();
@@ -152,44 +170,38 @@ export class Eligibility extends BasePage {
     await expect(this.mainContent).toContainText(['You cannot apply to adopt']);
   }
 
-  //Error checking tests
+  //Error checking test
   async errorCheck(): Promise<void> {
-    await this.clickContinue(); //second 'click continue' is need to produce the error message
-    await this.clickContinue();
-    await expect(this.problemErrorMessage).toBeVisible;
-    await expect(this.selectErrorMessage).toContainText(['Select if you are applying to adopt more than one child']);
-    await this.applyMoreThanOneChildNo.check();
-    await this.clickContinue();
-    await this.clickContinue();
-    await expect(this.problemErrorMessage).toBeVisible;
-    await expect(this.selectErrorMessage).toContainText([
+    await this.handleFormError('Select if you are applying to adopt more than one child', this.applyMoreThanOneChildNo);
+    await this.handleFormError(
       'Select if the child will be under 18 years old on the date you submit your application.',
-    ]);
-    await this.childUnder18Yes.check();
-    await this.clickContinue();
-    await this.clickContinue();
-    await expect(this.problemErrorMessage).toBeVisible;
-    await expect(this.selectErrorMessage).toContainText(['Select if the child is married or in a civil partnership.']);
-    await this.isChildMarriedOrCivilPartnershipNo.check();
-    await this.clickContinue();
-    await this.clickContinue();
-    await expect(this.problemErrorMessage).toBeVisible;
-    await expect(this.selectErrorMessage).toContainText([
+      this.childUnder18Yes
+    );
+    await this.handleFormError(
+      'Select if the child is married or in a civil partnership.',
+      this.isChildMarriedOrCivilPartnershipNo
+    );
+    await this.handleFormError(
       'Select if you, and the other applicant if relevant, are both aged 21 or over.',
-    ]);
-    await this.areYouAndApplicantOver21Yes.check();
-    await this.clickContinue();
-    await this.clickContinue();
-    await expect(this.problemErrorMessage).toBeVisible;
-    await expect(this.selectErrorMessage).toContainText([
+      this.areYouAndApplicantOver21Yes
+    );
+    await this.handleFormError(
       'Select if the UK, Channel Islands or Isle of Man is the main country of residence for you, and the other applicant.',
-    ]);
-    await this.uKCountryOfResidenceYes.check();
+      this.uKCountryOfResidenceYes
+    );
+    await this.handleFormError(
+      'Select if you, and the other applicant if relevant, have lived in the UK, Channel Islands or Isle of Man for the last 12 months.',
+      this.uKCountryOfResidence12MonthsYes
+    );
+    await this.clickContinue();
+    await expect(this.signInText).toContainText('Sign in or create an account');
+  }
+
+  async handleFormError(errorMessage: string, eligibilityElement: { check: () => Promise<void> }): Promise<void> {
     await this.clickContinue();
     await this.clickContinue();
     await expect(this.problemErrorMessage).toBeVisible;
-    await expect(this.selectErrorMessage).toContainText([
-      'Select if you, and the other applicant if relevant, have lived in the UK, Channel Islands or Isle of Man for the last 12 months.',
-    ]);
+    await expect(this.selectErrorMessage).toContainText([errorMessage]);
+    await eligibilityElement.check();
   }
 }

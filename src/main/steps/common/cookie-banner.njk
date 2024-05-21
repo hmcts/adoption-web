@@ -1,5 +1,15 @@
 {% from "govuk/components/cookie-banner/macro.njk" import govukCookieBanner %}
 
+<p hidden>Current env: {{currentEnv}} </p>
+
+{% block head %}
+
+  {% if ['aat'].includes(currentEnv) %}
+      <p hidden> Dynatrace JS to go here </p>
+  {% endif %}
+
+{% endblock %}
+
 {% set html %}
   <input type="hidden" name="cookie_locale" id="cookie_locale" value="{{ language }}">
   <p class="govuk-body">{{cookiesLine1}}</p>
