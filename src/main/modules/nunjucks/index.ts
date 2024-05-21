@@ -1,5 +1,6 @@
 import path from 'path';
 
+import config from 'config';
 import express from 'express';
 import nunjucks from 'nunjucks';
 
@@ -20,6 +21,8 @@ export class Nunjucks {
     env.addGlobal('getContent', function (prop): string {
       return typeof prop === 'function' ? prop(this.ctx) : prop;
     });
+
+    env.addGlobal('currentEnv', config.get('runningEnv') as string);
 
     env.addGlobal('getError', function (fieldName: string): { text?: string } | boolean {
       const { /*form,*/ sessionErrors, errors } = this.ctx;

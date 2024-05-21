@@ -11,7 +11,7 @@ const tagManager = ['*.googletagmanager.com', 'https://tagmanager.google.com'];
 const azureBlob = '*.blob.core.windows.net';
 const doubleclick = 'stats.g.doubleclick.net';
 const self = "'self'";
-
+const dynaTraceDomain = '*.dynatrace.com';
 /**
  * Module that enables helmet in the application
  */
@@ -31,6 +31,7 @@ export class Helmet {
       self,
       ...tagManager,
       googleAnalyticsDomain,
+      dynaTraceDomain,
       "'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU='",
       "'sha256-gpnWB3ld/ux/M3KURJluvKNOUQ82MPOtzVeCtqK7gmE='",
       "'sha256-ZjdUCAt//TDpVjTXX+6bDfZNwte/RfSYJDgtfQtaoXs='",
@@ -39,7 +40,7 @@ export class Helmet {
       "'sha256-LjVehCSGxwoOR2kQY7kJOjr0bXprxquxKYwhGGzFO2s='",
     ];
 
-    const connectSrc = [self, googleAnalyticsDomain, doubleclick];
+    const connectSrc = [self, dynaTraceDomain, googleAnalyticsDomain, doubleclick];
 
     const imgSrc = [
       self,
