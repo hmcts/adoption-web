@@ -26,7 +26,8 @@ const cy: typeof en = {
   findCourtTribunalDetailsLA:
     'Defnyddiwch y <a href="https://www.gov.uk/find-court-tribunal" class="govuk-link" target="blank">y gwasanaeth Dod o hyd i lys neu dribiwnlys</a> ' +
     ' i ddod o hyd i’ch llys agosaf sy’n delio â mabwysiadu.',
-  askIfUnsure: 'Os ydych yn dal yn ansicr pa lys i gysylltu ag ef, gallwch ofyn i’ch gweithiwr cymdeithasol am gymorth.',
+  askIfUnsure:
+    'Os ydych yn dal yn ansicr pa lys i gysylltu ag ef, gallwch ofyn i’ch gweithiwr cymdeithasol am gymorth.',
   email:
     'E-bost: <a href="mailto:ymholiadaucymraeg@justice.gov.uk" class="govuk-link">ymholiadaucymraeg@justice.gov.uk</a>',
   sendUsAMessageText: 'Byddwn yn anelu at ymateb o fewn 5 diwrnod gwaith.',
