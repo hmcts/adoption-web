@@ -91,7 +91,7 @@ const cy: typeof en = {
   needMoreInformation:
     'Os ydych angen gwybodaeth sydd ar y wefan hon mewn fformat arall megis ar ffurf PDF hygyrch, print bras, fformat hawdd ei ddarllen, recordiad sain neu braille:',
   findCourtTribunalDetails:
-    'Defnyddiwch y <a href="https://www.gov.uk/find-court-tribunal" class="govuk-link" target="blank">y gwasanaeth Dod o hyd i lys neu dribiwnlys</a>' +
+    'Defnyddiwch y <a href="https://www.gov.uk/find-court-tribunal" class="govuk-link" target="blank">gwasanaeth Dod o hyd i lys neu dribiwnlys</a>' +
     ' i ddod o hyd i’ch llys agosaf sy’n delio â mabwysiadu. Efallai nad hwn yw’r un llys a wnaeth eich gorchymyn lleoli.',
   askIfUnsure:
     'Os ydych yn dal yn ansicr pa lys i gysylltu ag ef, gallwch ofyn i’ch gweithiwr cymdeithasol am gymorth.',
