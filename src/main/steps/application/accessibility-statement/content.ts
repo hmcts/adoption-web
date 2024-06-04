@@ -104,7 +104,7 @@ const cy: typeof en = {
   accessibilityPhoneNumber: 'Ffoniwch: 01634 887900',
   accessibilityOpeningHours: 'Yr oriau agor  yw dydd Llun i ddydd Gwener 9am - 5pm',
   improveAccessibility:
-    'Rydym wastad yn ceisio gwella hygyrchedd y wefan hon. Os byddwch yn cael unrhyw broblemau nad ydynt yn cael eu crybwyll ar y dudalen hon, neu os ydych yn credu nad ydym yn bodloni gofynion y rheoliadau hygyrchedd, cysylltwch â:',
+    'Rydym bob amser yn ceisio gwella hygyrchedd y wefan hon. Os byddwch yn cael unrhyw broblemau nad ydynt wedi’u cynnwys ar y dudalen hon, neu’n credu nad ydym yn bodloni’r gofynion o ran hygyrchedd, cysylltwch â ni:',
   enforcementProcedure: 'Y Weithdrefn Orfodi',
   humanRightsCommission:
     'Y Comisiwn Cydraddoldeb a Hawliau Dynol (EHRC) sy’n gyfrifol am orfodi Rheoliadau Hygyrchedd Cyrff y Sector Cyhoeddus (Gwefannau a Rhaglenni Symudol) (Rhif 2) 2018 (y ‘rheoliadau hygyrchedd’).',
