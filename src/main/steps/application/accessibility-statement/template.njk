@@ -25,17 +25,13 @@
 
       <h3 class="govuk-heading-s">{{ feedbackAndContactInformation }}</h3>
       <p class="govuk-body">{{ needMoreInformation }}</p>
-      <ul class="govuk-list govuk-list--bullet">
-        <li>{{ email | safe }}</li>
-        <li>{{ phone }}<br>{{ openingHours }}</li>
-      </ul>
-      <p class="govuk-body">{{ considerYourRequest }}</p>
+      <p class="govuk-body">{{ findCourtTribunalDetails | safe  }}</p>
+      <p class="govuk-body">{{ askIfUnsure }}</p>
 
       <h3 class="govuk-heading-s">{{ reportingAccessibility }}</h3>
       <p class="govuk-body">{{ improveAccessibility | safe }}</p>
       <ul class="govuk-list govuk-list--bullet">
         <li>{{ email | safe }}</li>
-        <li>{{ accessibilityPhoneNumber }}<br>{{ accessibilityOpeningHours }}</li>
       </ul>
 
       <h3 class="govuk-heading-s">{{ enforcementProcedure }}</h3>
