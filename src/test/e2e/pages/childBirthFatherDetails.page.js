@@ -34,58 +34,58 @@ module.exports = {
     await I.retry(3).waitForText("Is the birth father's name on the birth certificate?");
     await I.retry(3).click(this.fields.birthFatherNameOnCertificate);
     await I.wait(4);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.retry(3).waitForText("What is the full name of the child's birth father?");
     await I.retry(3).fillField(this.fields.birthFatherFirstNames, childBirthFatherDetails.birthFatherFirstNames);
     await I.retry(3).fillField(this.fields.birthFatherLastNames, childBirthFatherDetails.birthFatherLastNames);
     await I.wait(4);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText("Is the child's birth father still alive?");
     await I.retry(3).click(this.fields.birthFatherStillAlive);
     await I.wait(4);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
 
     await I.wait(4);
     await I.retry(3).see(childBirthFatherDetails.birthFatherParentalResponsibilityTitle);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(3);
     await I.retry(3).see(childBirthFatherDetails.birthFatherParentalResponsibilityError);
     await I.retry(3).click(this.fields.birthFatherParentalResponsibility);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).see(childBirthFatherDetails.howResponsibilityGranted);
     await I.retry(3).see('Birth certificate');
     await I.retry(3).see('Parental responsibility agreement');
     await I.retry(3).see('Other');
     await I.wait(4);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).see(childBirthFatherDetails.selectParentalResponsibilityError);
     await I.retry(3).click(this.fields.birthFatherParentalResponsibilityReason);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).see(childBirthFatherDetails.enterParentalResponsibilityError);
     await I.retry(3).fillField(
       this.fields.birthFatherResponsibilityOtherReason,
       childBirthFatherDetails.birthFatherParentalResponsibilityReason
     );
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
 
     await I.retry(3).waitForText("What is the nationality of the child's birth father?");
     await I.retry(3).click(this.fields.britishCitizen);
     await I.wait(4);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText("What is the occupation of the child's birth father?");
     await I.retry(3).fillField(this.fields.birthFatherOccupation, childBirthFatherDetails.birthFatherOccupation);
     await I.wait(4);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.retry(3).waitForText('Do you have the birth father’s last known address?');
     await I.retry(3).click(this.fields.birthFatherAddressKnown);
     await I.wait(4);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).click(this.fields.enterAddressManually);
     await I.wait(4);
@@ -102,7 +102,7 @@ module.exports = {
       childBirthFatherDetails.birthFatherAddressCountry
     );
     await I.wait(4);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
 
     await I.retry(3).see('When was the last date this address was confirmed?');
@@ -119,10 +119,10 @@ module.exports = {
       this.fields.birthFatherLastAddressDateYear,
       childBirthFatherDetails.birthFatherLastAddressDateYear
     );
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
 
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).see(childBirthFatherDetails.birthFatherServerOrderTitle);
     await I.retry(3).waitForSelector(this.fields.saveAndContinue, 30);
@@ -131,14 +131,14 @@ module.exports = {
     await I.retry(3).see(childBirthFatherDetails.serverOrderErrorMessage);
     await I.retry(3).click(this.fields.birthFatherServeOrderYes);
     await I.retry(3).click(this.fields.birthFatherServeOrderNo);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.retry(3).see('Enter more detail');
     await I.wait(4);
     await I.retry(3).fillField(
       this.fields.birthFatherServerOrderReason,
       childBirthFatherDetails.reasonForNotToServeOrder
     );
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
   },
   async childBirthFatherDetailsSaveAsDraft() {

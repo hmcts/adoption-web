@@ -20,7 +20,8 @@ module.exports = {
 
   async dateChildMovedInSectionWithoutData() {
     await I.retry(3).waitForText('When did the child move in with you?');
-    await I.retry(3).click('Save and continue');
+    await I.wait(4);
+    await I.retry(3).forceClick(this.fields.saveAndContinue);
     await I.retry(3).waitForText('There is a problem');
     await I.retry(3).see('Enter the date the child moved in with you');
     await I.wait(4);
@@ -28,7 +29,7 @@ module.exports = {
     await I.retry(3).fillField(this.fields.dateChildMovedInMonth, childBasicDetails.monthChildMovedInInvalid);
     await I.wait(4);
     await I.retry(3).fillField(this.fields.dateChildMovedInYear, childBasicDetails.yearChildMovedInInvalid);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick(this.fields.saveAndContinue);
     await I.retry(3).waitForText('There is a problem');
     await I.retry(3).waitForText('Must be a real date');
     await I.wait(4);
@@ -36,7 +37,7 @@ module.exports = {
     await I.retry(3).fillField(this.fields.dateChildMovedInMonth, childBasicDetails.monthChildMovedIn);
     await I.wait(4);
     await I.retry(3).fillField(this.fields.dateChildMovedInYear, childBasicDetails.yearChildMovedIn);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick(this.fields.saveAndContinue);
     await I.wait(4);
   },
 
@@ -46,7 +47,7 @@ module.exports = {
     await I.retry(3).fillField(this.fields.dateChildMovedInMonth, childBasicDetails.monthChildMovedInEdited);
     await I.wait(4);
     await I.retry(3).fillField(this.fields.dateChildMovedInYear, childBasicDetails.yearChildMovedInEdited);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick(this.fields.saveAndContinue);
     await I.wait(4);
   },
 };

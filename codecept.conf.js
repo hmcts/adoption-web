@@ -39,15 +39,10 @@ exports.config = {
     },
   },
   helpers: {
-    Puppeteer: {
-      show: process.env.SHOW_BROWSER_WINDOW || false,
-      waitForTimeout: parseInt(process.env.WAIT_FOR_TIMEOUT || '20000'),
-      chrome: {
-        ignoreHTTPSErrors: true,
-        args: process.env.DISABLE_WEB_SECURITY === 'true' ? ['--disable-web-security'] : [],
-        devtools: process.env.SHOW_BROWSER_WINDOW || false,
-      },
-      windowSize: '1280x960',
+    Playwright: {
+      show: true,
+      browser: 'chromium',
+      waitForNavigation: "networkidle0"
     },
     HooksHelper: {
       require: './src/test/e2e/helpers/hooks_helper.js',

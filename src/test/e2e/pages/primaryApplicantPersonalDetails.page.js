@@ -29,7 +29,7 @@ module.exports = {
       this.fields.applicant1LastNames,
       primaryApplicantPersonalDetails.primaryApplicantSecondName
     );
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText('Have you ever legally been known by any other names?');
     await I.retry(3).click(this.fields.applicant1HasOtherNames);
@@ -43,7 +43,7 @@ module.exports = {
     );
     await I.retry(3).click('Add');
     await I.wait(4);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText("What's your date of birth?");
     await I.retry(3).fillField(this.fields.dateOfBirthDay, primaryApplicantPersonalDetails.primaryApplicantDateOfBirth);
@@ -56,12 +56,12 @@ module.exports = {
       this.fields.dateOfBirthYear,
       primaryApplicantPersonalDetails.primaryApplicantYearOfBirth
     );
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.retry(3).fillField(
       this.fields.applicant1Occupation,
       primaryApplicantPersonalDetails.primaryApplicantOccupation
     );
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
   },
 
@@ -69,7 +69,7 @@ module.exports = {
     await I.retry(3).fillField(this.fields.applicant1FirstNames, '');
     await I.retry(3).fillField(this.fields.applicant1LastNames, '');
     await I.retry(3).waitForSelector(this.fields.saveAndContinue);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText('There is a problem');
     await I.retry(3).waitForText('Enter your first names');
@@ -83,11 +83,11 @@ module.exports = {
       primaryApplicantPersonalDetails.primaryApplicantSecondName
     );
     await I.retry(3).waitForSelector(this.fields.saveAndContinue);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText('Have you ever legally been known by any other names?');
     await I.retry(3).waitForSelector(this.fields.saveAndContinue);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick(this.fields.saveAndContinue);
     await I.wait(4);
     await I.retry(3).waitForText('There is a problem');
     await I.wait(4);
@@ -109,11 +109,11 @@ module.exports = {
     await I.retry(3).click('Add');
     await I.wait(4);
     await I.retry(3).waitForSelector(this.fields.saveAndContinue);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText("What's your date of birth?");
     await I.retry(3).waitForSelector(this.fields.saveAndContinue);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText('There is a problem');
     await I.retry(3).waitForText('Enter your date of birth');
@@ -128,11 +128,11 @@ module.exports = {
       primaryApplicantPersonalDetails.primaryApplicantYearOfBirth
     );
     await I.retry(3).waitForSelector(this.fields.saveAndContinue);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.retry(3).waitForText("What's your occupation?");
     await I.wait(4);
     await I.retry(3).waitForSelector(this.fields.saveAndContinue);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText('There is a problem');
     await I.retry(3).waitForText('Enter your occupation');
@@ -141,14 +141,14 @@ module.exports = {
       primaryApplicantPersonalDetails.primaryApplicantOccupation
     );
     await I.retry(3).waitForSelector(this.fields.saveAndContinue);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
   },
 
   async additionalDetailsForApplicant1() {
     await I.retry(3).waitForText('Extra support during your case');
     await I.retry(3).waitForSelector(this.fields.saveAndContinue);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick(this.fields.saveAndContinue);
     await I.wait(4);
     await I.retry(3).waitForText(extraSupportDetails.extraSupportError);
     await I.retry(3).waitForText(extraSupportDetails.whatSupportIsAvailable);
@@ -162,12 +162,12 @@ module.exports = {
     await I.retry(3).click(this.fields.applicant1extraSupportAdjustment);
     await I.wait(4);
     await I.retry(3).waitForText(extraSupportDetails.tellWhatSupportIsNeeded);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.retry(3).waitForText(extraSupportDetails.detailsOfExtraSupportError);
     await I.retry(3).fillField(
       this.fields.applicant1extraSupportAdjustmentDetails,
       primaryApplicantPersonalDetails.primaryApplicantExtraSupportDetails
     );
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
   },
 };

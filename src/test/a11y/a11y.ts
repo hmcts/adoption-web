@@ -2,7 +2,7 @@ import fs from 'fs';
 
 import Axios from 'axios';
 import htmlReporter from 'pa11y/lib/reporters/html';
-import puppeteer from 'puppeteer';
+import playwright from 'playwright';
 
 import * as urls from '../../main/steps/urls';
 import { config } from '../config';
@@ -75,7 +75,7 @@ describe('Accessibility', () => {
       await browser.close();
     }
 
-    browser = await puppeteer.launch({ ignoreHTTPSErrors: true, headless: true });
+    browser = await playwright.chromium.launch({ headless: true });
     browser.on('disconnected', setup);
 
     // Login once only for other pages to reuse session
@@ -186,7 +186,7 @@ describe('Accessibility LA portal', () => {
       await browser.close();
     }
 
-    browser = await puppeteer.launch({ ignoreHTTPSErrors: true, headless: true });
+    browser = await playwright.chromium.launch({ headless: true });
     browser.on('disconnected', setup);
     // Login once only for other pages to reuse session
     page = await browser.newPage();

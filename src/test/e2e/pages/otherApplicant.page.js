@@ -17,7 +17,7 @@ module.exports = {
   async otherApplicantContactDetailsSection() {
     await I.wait(3);
     await I.retry(3).click(this.fields.applicant2AddressSameAsApplicant1_No);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).fillField(this.fields.postcodeLookup, secondApplicantDetails.secondApplicantPostcode);
     await I.retry(3).click(this.fields.findAddressButton);
@@ -26,29 +26,30 @@ module.exports = {
       locate(this.fields.addressList).find('option').withText(secondApplicantDetails.secondApplicantAddressLookupOption)
     );
     await I.retry(3).selectOption(this.fields.addressList, secondApplicantDetails.secondApplicantAddressLookupOption);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).fillField(this.fields.applicant2EmailAddress, secondApplicantDetails.secondApplicantEmailAddress);
     await I.retry(3).fillField(this.fields.applicant1PhoneNumber, secondApplicantDetails.secondApplicantPhoneNumber);
     await I.wait(4);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText('What language do you want to receive emails and documents in?');
     await I.retry(3).click(this.fields.applicant2LanguageEnglish);
     await I.wait(4);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
   },
 
   async otherApplicantContactDetailsSectionEmptyFields() {
     await I.wait(3);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText('There is a problem');
     await I.wait(4);
     await I.retry(3).waitForText('Please answer the question');
     await I.retry(3).click(this.fields.applicant2AddressSameAsApplicant1_No);
-    await I.retry(3).click('Save and continue');
+    //await I.retry(3).forceClick('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).click(this.fields.findAddressButton);
     await I.wait(4);
@@ -56,18 +57,19 @@ module.exports = {
     await I.retry(3).fillField(this.fields.postcodeLookup, secondApplicantDetails.secondApplicantPostcode);
     await I.retry(3).click(this.fields.findAddressButton);
     await I.retry(3).waitForText('addresses found');
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText('Select an address');
     await I.retry(3).waitForElement(
       locate(this.fields.addressList).find('option').withText(secondApplicantDetails.secondApplicantAddressLookupOption)
     );
     await I.retry(3).selectOption(this.fields.addressList, secondApplicantDetails.secondApplicantAddressLookupOption);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('#main-form-submit');
     await I.wait(4);
     await I.retry(3).waitForText('What are your contact details?');
     await I.retry(3).waitForSelector(this.fields.saveAndContinue);
-    await I.retry(3).click('Save and continue');
+    await I.wait(4);
+    await I.retry(3).forceClick('#main-form-submit');
     await I.wait(4);
     await I.retry(3).waitForText('Enter your email address');
     await I.retry(3).waitForText('Enter a UK telephone number');
@@ -75,14 +77,16 @@ module.exports = {
     await I.retry(3).fillField(this.fields.applicant2EmailAddress, secondApplicantDetails.secondApplicantEmailAddress);
     await I.retry(3).fillField(this.fields.applicant1PhoneNumber, secondApplicantDetails.secondApplicantPhoneNumber);
     await I.wait(4);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
     await I.retry(3).waitForText('What language do you want to receive emails and documents in?');
-    await I.retry(3).click('Save and continue');
+    await I.wait(4);
+    await I.retry(3).forceClick('Save and continue');
+    await I.wait(4);
     await I.retry(3).waitForText('Select whether you want to receive emails and documents in English or Welsh');
     await I.retry(3).click(this.fields.applicant2LanguageEnglish);
     await I.wait(4);
-    await I.retry(3).click('Save and continue');
+    await I.retry(3).forceClick('Save and continue');
     await I.wait(4);
   },
 };
