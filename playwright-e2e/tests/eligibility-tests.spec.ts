@@ -1,7 +1,9 @@
 import { test } from '../fixtures/fixtures';
-import { Eligibility } from '../pages/eligibility-pages';
-import { runAccessibilityScan } from '../utils/accessibility-helper';
+import { Eligibility } from '../pages/eligibility.page';
+import { runAccessibilityScan } from '../helpers/accessibilityHelper';
 import { urlConfig } from '../utils/urls';
+
+test.describe('Eligibility journey e2e tests', () => {
 
 test.beforeEach(async ({ page }) => {
   await page.goto(urlConfig.citizenStartUrl);
@@ -139,4 +141,5 @@ test('Verify eligibility to adopt one child.', eligibilityTestTags, async ({ pag
   await runEligibilityTest(page, makeAxeBuilder, testInfo, async eligibility => {
     await eligibility.youAndApplicantUnder21(eligibility.applyMoreThanOneChildNo);
   });
+});
 });
