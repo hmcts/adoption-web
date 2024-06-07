@@ -1,49 +1,34 @@
 import { test } from '@playwright/test';
-import { createCitizenUser, deleteCitizenUser, getAccessToken } from '../helpers/idam-test-api-helpers';
 import * as dotenv from 'dotenv';
 import App from '../pages/app.page';
+import { setupUser } from '../hooks/createDeleteUser.hook'
+import { teardownUser } from '../hooks/createDeleteUser.hook'
 
 dotenv.config();
 
 test.describe(
   'e2e submit journeys',
-  {
-    tag: '@submit',
-  },
-  () => {
+  { tag: '@submit'}, () => {
     let userEmail: string;
     let userPassword: string;
     let userId: string;
 
     test.beforeEach(async ({ page }) => {
-      const token = await getAccessToken();
-      if (token) {
-        const { email, password, id } = await createCitizenUser(token);
-        userEmail = email;
-        userPassword = password;
-        userId = id;
-      } else {
-        console.error('Failed to retrieve bearer token. User creation skipped.');
+      const userInfo = await setupUser(page);
+      if (userInfo) {
+        userEmail = userInfo.email;
+        userPassword = userInfo.password;
+        userId = userInfo.id;
       }
     });
 
     test.afterEach('Status check', async ({ page }) => {
-      const token = await getAccessToken();
-      if (token) {
-        try {
-          await deleteCitizenUser(token, userId);
-          console.info(`User with ID: ${userId} deleted request has been sent successfully, please allow 24 hrs.`);
-        } catch (error) {
-          console.error(`Failed to delete user with ID: ${userId}`, error);
-        }
-      } else {
-        console.error('Failed to retrieve bearer token. User deletion skipped.');
-      }
+      await teardownUser(page, userId);
     });
 
     test('submitting application with spouse or civil partner', async ({ page }) => {
-      // Navigate to the start page
       const app = new App(page);
+
 
       await app.signIn.signIn(userEmail, userPassword);
       await app.numberOfApplicants.applyWithSpouseOrCivil();
@@ -88,10 +73,10 @@ test.describe(
       await app.addApplicants.otherNamesSelectNo();
       await app.basePage.clickSaveAndContinue();
       await app.addApplicants.dob();
-      // await app.basePage.clickSaveAndContinue();
-      // await page.locator('#applicant1Occupation').click();
-      // await page.locator('#applicant1Occupation').fill('teacher');
-      // await app.basePage.clickSaveAndContinue();
+      await app.basePage.clickSaveAndContinue();
+      await app.addApplicants.addOccupation();
+      await app.basePage.clickSaveAndContinue();
+
       // await page.getByLabel('No - I do not need any extra').check();
       // await app.basePage.clickSaveAndContinue();
 
@@ -155,3 +140,11 @@ test.describe(
     });
   }
 );
+function axeBuilder(testInfo: any) {
+  throw new Error('Function not implemented.');
+}
+
+function makeAxeBuilderFunction(testInfo: any) {
+  throw new Error('Function not implemented.');
+}
+
