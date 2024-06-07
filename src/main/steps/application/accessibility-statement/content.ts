@@ -21,6 +21,10 @@ const en = {
   feedbackAndContactInformation: 'Feedback and contact information',
   needMoreInformation:
     'If you need information on this website in a different format like accessible PDF, large print, easy read, audio recording or braille:',
+  findCourtTribunalDetails:
+    'Use the <a href="https://www.gov.uk/find-court-tribunal" class="govuk-link" target="blank">Find a Court or Tribunal service</a>' +
+    ' to locate your nearest court that deals with adoption. This may not be the same court that made your placement order.',
+  askIfUnsure: 'If you are still unsure which court to contact, you can ask your social worker for help.',
   email:
     'email: <a href="mailto:adoptionproject@justice.gov.uk" class="govuk-link" aria-label="This link will open in a new email to adoptionproject@justice.gov.uk">adoptionproject@justice.gov.uk</a>',
   phone: 'Call: 01634 887900',
@@ -86,6 +90,11 @@ const cy: typeof en = {
   feedbackAndContactInformation: 'Adborth a gwybodaeth gyswllt',
   needMoreInformation:
     'Os ydych angen gwybodaeth sydd ar y wefan hon mewn fformat arall megis ar ffurf PDF hygyrch, print bras, fformat hawdd ei ddarllen, recordiad sain neu braille:',
+  findCourtTribunalDetails:
+    'Defnyddiwch y <a href="https://www.gov.uk/find-court-tribunal" class="govuk-link" target="blank">gwasanaeth Dod o hyd i lys neu dribiwnlys</a>' +
+    ' i ddod o hyd i’ch llys agosaf sy’n delio â mabwysiadu. Efallai nad hwn yw’r un llys a wnaeth eich gorchymyn lleoli.',
+  askIfUnsure:
+    'Os ydych yn dal yn ansicr pa lys i gysylltu ag ef, gallwch ofyn i’ch gweithiwr cymdeithasol am gymorth.',
   email:
     'E-bost: <a href="mailto:ymholiadaucymraeg@justice.gov.uk" class="govuk-link">ymholiadaucymraeg@justice.gov.uk</a>',
   phone: 'Ffoniwch: 01634 887900',
@@ -95,7 +104,7 @@ const cy: typeof en = {
   accessibilityPhoneNumber: 'Ffoniwch: 01634 887900',
   accessibilityOpeningHours: 'Yr oriau agor  yw dydd Llun i ddydd Gwener 9am - 5pm',
   improveAccessibility:
-    'Rydym wastad yn ceisio gwella hygyrchedd y wefan hon. Os byddwch yn cael unrhyw broblemau nad ydynt yn cael eu crybwyll ar y dudalen hon, neu os ydych yn credu nad ydym yn bodloni gofynion y rheoliadau hygyrchedd, cysylltwch â:',
+    'Rydym bob amser yn ceisio gwella hygyrchedd y wefan hon. Os byddwch yn cael unrhyw broblemau nad ydynt wedi’u cynnwys ar y dudalen hon, neu’n credu nad ydym yn bodloni’r gofynion o ran hygyrchedd, cysylltwch â ni:',
   enforcementProcedure: 'Y Weithdrefn Orfodi',
   humanRightsCommission:
     'Y Comisiwn Cydraddoldeb a Hawliau Dynol (EHRC) sy’n gyfrifol am orfodi Rheoliadau Hygyrchedd Cyrff y Sector Cyhoeddus (Gwefannau a Rhaglenni Symudol) (Rhif 2) 2018 (y ‘rheoliadau hygyrchedd’).',
