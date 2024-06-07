@@ -1,13 +1,13 @@
 import { type Page } from '@playwright/test';
-import BasePage from '../pages/base-page';
-import SignIn from '../pages/sign-in.page';
-import NumberOfApplicants from '../pages/number-of-applicants.page';
-import ChildDetails from '../pages/child-details.page';
-import Tasklist from '../pages/task-list.page';
-import DateChildMoved from '../pages/date-child-moved.page';
-import AdoptionAgency from '../pages/adoption-agency-and-social-worker.page';
-import FamilyCourt from '../pages/family-court-details.page';
-import AddApplicants from '../pages/applicants-details.page';
+import BasePage from './basePage.page';
+import SignIn from './signInPage.page';
+import NumberOfApplicants from './numberOfApplicants.page';
+import ChildDetails from './childDetails.page';
+import Tasklist from './taskList.page';
+import DateChildMoved from './dateChildMoved.page';
+import AdoptionAgency from './adoptionAgency.page';
+import FamilyCourt from './familyCourtDetails.page';
+import AddApplicants from './applicantsDetails.page';
 
 export default class App {
   readonly page: Page;

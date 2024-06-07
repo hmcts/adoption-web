@@ -1,6 +1,6 @@
 import { type Locator, type Page } from '@playwright/test';
 
-export default class FamilyCourt {
+export default class FamilyCourtDetails {
   readonly whichCourt: Locator;
   readonly locationPicker: Locator;
   readonly locationPickerOption: Locator;
