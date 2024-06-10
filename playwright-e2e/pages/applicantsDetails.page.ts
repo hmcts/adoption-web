@@ -8,14 +8,16 @@ export default class AddApplicants {
   readonly dayField: Locator;
   readonly monthField: Locator;
   readonly yearField: Locator;
-  readonly occupation: Locator;
+  readonly occupationFirst: Locator;
+  readonly occupationSecond: Locator;
 
   constructor(page: Page) {
     this.otherNamesNo = page.getByLabel('No', { exact: true });
     this.dayField = page.getByLabel('Day');
     this.monthField = page.getByLabel('Month');
     this.yearField = page.getByLabel('Year');
-    this.occupation = page.locator('#applicant1Occupation');
+    this.occupationFirst = page.locator('#applicant1Occupation');
+    this.occupationSecond = page.locator('#applicant2Occupation');
   }
 
   async otherNamesSelectNo(): Promise<void> {
@@ -37,7 +39,10 @@ export default class AddApplicants {
     await this.yearField.fill(yearString);
   }
 
-  async addOccupation(): Promise<void> {
-    await this.occupation.fill(jobTitle);
+  async addOccupationFirst(): Promise<void> {
+    await this.occupationFirst.fill(jobTitle);
+  }
+  async addOccupationSecond(){
+    await this.occupationSecond.fill(jobTitle);
   }
 }

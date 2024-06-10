@@ -41,11 +41,11 @@ test.describe(
 
       // Child's details before adoption
       await app.tasklist.childsDetails.click();
-      await app.childDetails.childsName();
+      await app.basePage.fillFirstLastName();
       await app.basePage.clickSaveAndContinue();
 
       // Child's details after adoption
-      await app.childDetails.childsName();
+      await app.basePage.fillFirstLastName();
       await app.basePage.clickSaveAndContinue();
       await app.childDetails.childsDob();
       await app.basePage.clickSaveAndContinue();
@@ -74,34 +74,35 @@ test.describe(
       await app.basePage.clickSaveAndContinue();
       await app.addApplicants.dob();
       await app.basePage.clickSaveAndContinue();
-      await app.addApplicants.addOccupation();
+      await app.addApplicants.addOccupationFirst();
+      await app.basePage.clickSaveAndContinue();
+      
+      await app.extraSupport.noSupportNeeded();
       await app.basePage.clickSaveAndContinue();
 
-      // await page.getByLabel('No - I do not need any extra').check();
-      // await app.basePage.clickSaveAndContinue();
-
-      // // First applicant Your contact details
+      // First applicant Your contact details
       // await page.getByRole('link', { name: 'Your contact details  First' }).click();
-      // await page.getByLabel('Postcode').click();
-      // await page.getByLabel('Postcode').click();
-      // await page.getByLabel('Postcode').fill('SW1H 9AJ');
-      // await page.getByRole('button', { name: 'Find address' }).click();
-      // await page.getByLabel('Select an address').selectOption('0');
-      // await app.basePage.clickSaveAndContinue();
-      // await page.getByLabel('Email address').click();
-      // await page.getByLabel('Email address').fill('1234567890@domain.com');
-      // await page.getByLabel('UK phone number').click();
-      // await page.getByLabel('UK phone number').fill('0800800800');
-      // await app.basePage.clickSaveAndContinue();
-      // await page.getByLabel('English').check();
-      // await app.basePage.clickSaveAndContinue();
+      await app.tasklist.firstApplicantContactDetails.click();
+      await app.basePage.postcodeFindAddress('BN26 6AL', '0');
+      await app.basePage.clickSaveAndContinue();
+      await app.contactDetails.fillContactDetails('1234567890@domain.com', '0800800800');
+      await app.basePage.clickSaveAndContinue();
+      await app.contactDetails.englishLang.check();
+      await app.basePage.clickSaveAndContinue();
+      await app.addApplicants.otherNamesNo.check();
+      await app.basePage.clickSaveAndContinue();
+      await app.addApplicants.dob();
+      await app.basePage.clickSaveAndContinue();
 
       // // Second applicant Your personal details
-      // await page.getByRole('link', { name: 'Your personal details  Second' }).click();
-      // await page.getByLabel('First names').click();
-      // await page.getByLabel('First names').fill('first name');
-      // await page.getByLabel('Last names').click();
-      // await page.getByLabel('Last names').fill('surname');
+      await app.tasklist.secondApplicantPersonalDetails.click();
+      await app.basePage.fillFirstLastName();
+      await app.basePage.clickSaveAndContinue();
+      await app.addApplicants.dob();
+      await app.basePage.clickSaveAndContinue();
+      await app.addApplicants.addOccupationSecond();
+      await app.basePage.clickSaveAndContinue();
+      await app.extraSupport.noSupportNeeded();
       // await page.getByRole('button', { name: 'Save and continue' }).click();
       // await page.getByLabel('No', { exact: true }).check();
       // await page.getByRole('button', { name: 'Save and continue' }).click();
