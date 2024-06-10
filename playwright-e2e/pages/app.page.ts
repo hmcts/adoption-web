@@ -8,6 +8,8 @@ import DateChildMoved from './dateChildMoved.page';
 import AdoptionAgency from './adoptionAgency.page';
 import FamilyCourt from './familyCourtDetails.page';
 import AddApplicants from './applicantsDetails.page';
+import ExtraSupport from './extraSupport.page';
+import ContactDetails from './contactDetails';
 
 export default class App {
   readonly page: Page;
@@ -20,6 +22,8 @@ export default class App {
   readonly adoptionAgency: AdoptionAgency;
   readonly familyCourt: FamilyCourt;
   readonly addApplicants: AddApplicants;
+  readonly extraSupport: ExtraSupport;
+  readonly contactDetails: ContactDetails;
 
   constructor(page: Page) {
     this.page = page;
@@ -32,5 +36,7 @@ export default class App {
     this.adoptionAgency = new AdoptionAgency(page);
     this.familyCourt = new FamilyCourt(page);
     this.addApplicants = new AddApplicants(page);
+    this.extraSupport = new ExtraSupport(page);
+    this.contactDetails = new ContactDetails(page);
   }
 }
