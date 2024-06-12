@@ -30,7 +30,7 @@ const cy: typeof en = ({ userCase }: CommonContent) => {
     section,
     title: 'Beth yw eich enw llawn?',
     warning:
-      'TODO',
+      'Os nad yw eich enw\'n cyd-fynd â\'ch ID, gallai hyn ohirio eich cais a’r broses o gyhoeddi tystysgrif geni newydd.',
     firstNamesHint: '(Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol. Dylai eich enw llawn fod union yr un fath ag y mae ar eich pasbort neu fath arall o ddogfen adnabod awdurdodedig, er enghraifft trwydded yrru. Os nad ydynt yr un fath, gall arwain at oedi wrth ddelio â’ch cais.)',
     lastNamesHint: '(Cofiwch gynnwys cyfenw neu enwau teuluol. Dylai eich enw llawn fod union yr un fath ag y mae ar eich pasbort neu fath arall o ddogfen adnabod awdurdodedig, er enghraifft trwydded yrru. Os nad ydynt yr un fath, gall arwain at oedi wrth ddelio â’ch cais.)',
     errors: {
