@@ -1,4 +1,5 @@
 import { type Locator, type Page } from '@playwright/test';
+import { expect } from '@playwright/test';
 
 export default class ExtraSupport {
   readonly h1: Locator;
@@ -10,6 +11,7 @@ export default class ExtraSupport {
     }
 
     async noSupportNeeded(){
+        expect(this.h1).toBeVisible();
         await this.extraSupportNo.check();
     }
 
