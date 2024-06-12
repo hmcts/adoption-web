@@ -11,7 +11,7 @@ config.get = jest.fn();
 
 const mockedAxios = Axios as jest.Mocked<AxiosStatic>;
 
-const token: string = config.get('mockData.authToken');
+const token = config['mockData']['authToken'];
 const mockedEmail = config['mockData']['email'];
 const mockedGivenName = config['mockData']['givenName'];
 const mockedId = config['mockData']['id'];
