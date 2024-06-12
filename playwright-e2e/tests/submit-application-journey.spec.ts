@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv';
 import App from '../pages/app.page';
 import { setupUser } from '../hooks/createDeleteUser.hook'
 import { teardownUser } from '../hooks/createDeleteUser.hook'
+import { faker } from '@faker-js/faker';
 
 dotenv.config();
 
@@ -30,6 +31,15 @@ test.describe(
       const app = new App(page);
 
 
+      const appOneFirstName = faker.person.firstName();
+      const appOneLastName = faker.person.lastName();
+      const appTwoFirstName = faker.person.firstName();
+      const appTwoLastName = faker.person.lastName();
+      const appOneFullname = appOneFirstName + ' ' + appOneLastName;
+      const appTwoFullname = appTwoFirstName + ' ' + appTwoLastName;
+      const childFirstName = faker.person.firstName();
+      const childLastName = faker.person.lastName();
+      
       await app.signIn.signIn(userEmail, userPassword);
       await app.numberOfApplicants.applyWithSpouseOrCivil();
       await app.basePage.clickSaveAndContinue();
@@ -41,11 +51,11 @@ test.describe(
 
       // Child's details before adoption
       await app.tasklist.childsDetails.click();
-      await app.basePage.fillFirstLastName();
+      await app.basePage.fillFirstLastName(appOneFirstName, appOneLastName);
       await app.basePage.clickSaveAndContinue();
 
       // Child's details after adoption
-      await app.basePage.fillFirstLastName();
+      await app.basePage.fillFirstLastName(childFirstName, childLastName);
       await app.basePage.clickSaveAndContinue();
       await app.childDetails.childsDob();
       await app.basePage.clickSaveAndContinue();
@@ -76,7 +86,6 @@ test.describe(
       await app.basePage.clickSaveAndContinue();
       await app.addApplicants.addOccupationFirst();
       await app.basePage.clickSaveAndContinue();
-      
       await app.extraSupport.noSupportNeeded();
       await app.basePage.clickSaveAndContinue();
 
@@ -89,47 +98,36 @@ test.describe(
       await app.basePage.clickSaveAndContinue();
       await app.contactDetails.englishLang.check();
       await app.basePage.clickSaveAndContinue();
-      await app.addApplicants.otherNamesNo.check();
-      await app.basePage.clickSaveAndContinue();
-      await app.addApplicants.dob();
-      await app.basePage.clickSaveAndContinue();
 
-      // // Second applicant Your personal details
+      //Second applicant personal details
       await app.tasklist.secondApplicantPersonalDetails.click();
-      await app.basePage.fillFirstLastName();
+      await app.basePage.fillFirstLastName(appTwoFirstName, appTwoLastName);
+      await app.basePage.clickSaveAndContinue();
+      await app.addApplicants.otherNamesNo.check();
       await app.basePage.clickSaveAndContinue();
       await app.addApplicants.dob();
       await app.basePage.clickSaveAndContinue();
       await app.addApplicants.addOccupationSecond();
       await app.basePage.clickSaveAndContinue();
       await app.extraSupport.noSupportNeeded();
-      // await page.getByRole('button', { name: 'Save and continue' }).click();
-      // await page.getByLabel('No', { exact: true }).check();
-      // await page.getByRole('button', { name: 'Save and continue' }).click();
-      // await page.getByLabel('Day').click();
-      // await page.getByLabel('Day').fill('30');
-      // await page.getByLabel('Month').click();
-      // await page.getByLabel('Month').fill('05');
-      // await page.getByLabel('Year').click();
-      // await page.getByLabel('Year').fill('2024');
-      // await app.basePage.clickSaveAndContinue();
-      // await page.locator('#applicant2Occupation').click();
-      // await page.locator('#applicant2Occupation').fill('teacher');
-      // await app.basePage.clickSaveAndContinue();
-      // await page.getByLabel('No - I do not need any extra').check();
-      // await app.basePage.clickSaveAndContinue();
-
-      // // Second applicant Your contact details
-      // await page.getByRole('link', { name: 'Your contact details  Second' }).click();
-      // await page.getByLabel('Yes').check();
-      // await app.basePage.clickSaveAndContinue();
-      // await page.getByLabel('Email address').click();
-      // await page.getByLabel('Email address').fill('firstname+lastname@domain.com');
-      // await page.getByLabel('UK phone number').click();
-      // await page.getByLabel('UK phone number').fill('0800800800');
-      // await app.basePage.clickSaveAndContinue();
-      // await page.getByLabel('English').check();
       await app.basePage.clickSaveAndContinue();
+
+      // Second applicant contact details
+      await app.tasklist.secondApplicantContactDetails.click()
+      await app.page.getByLabel('Yes').check(); //do you live at the same address?
+      await app.basePage.clickSaveAndContinue();
+      await app.contactDetails.fillContactDetails('abcdefg@domain.com', '0800800800');
+      await app.basePage.clickSaveAndContinue();
+      await app.contactDetails.englishLang.check();
+      await app.basePage.clickSaveAndContinue();
+
+      //submit
+      await app.tasklist.reviewAndSubmit.click();
+      //need to add pcq questions
+      await app.reviewSubmit.reviewAnswers();
+      await app.basePage.clickSaveAndContinue();
+      await app.reviewSubmit.statementOfTruth(appOneFullname, appTwoFullname);
+     
     });
 
     test('submitting application with someone who is not my spouse or civil partner', async ({ page }) => {
