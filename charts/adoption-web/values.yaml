@@ -12,6 +12,7 @@ nodejs:
 
   environment:
     NODE_ENV: production
+    RUNNING_ENV: '{{ .Values.global.environment }}'
     REFORM_TEAM: adoption
     REFORM_SERVICE_NAME: adoption-web
     REDIS_TTL_MS: 30
@@ -270,6 +271,9 @@ nodejs:
       - arcadoptionne.org.uk
       - coram.org.uk
       - barnardos.org.uk
+      - adoptersforadoption.com
+      - diagrama.org
+      - sloughchildrenfirst.co.uk
 
     # Family Court List
     LEICESTER_VAL: 'Leicester County Court'

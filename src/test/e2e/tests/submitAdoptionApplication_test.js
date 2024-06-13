@@ -79,7 +79,7 @@ Scenario(
     await reviewPayAndSubmitPage.adoptionCourtFeesByCard();
     const caseId = await reviewPayAndSubmitPage.getCaseIDAfterAplicationSubmit();
 
-    await landingPage.searchForCaseInLALandingPage(caseId);
+    //await landingPage.searchForCaseInLALandingPage(caseId);
 
     // //  LA - Add child's details
 

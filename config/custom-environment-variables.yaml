@@ -33,6 +33,7 @@ services:
       port: REDIS_PORT
       ttl: REDIS_TTL_MS
 port: PORT
+runningEnv: RUNNING_ENV
 session:
   redis:
     host: REDIS_HOST

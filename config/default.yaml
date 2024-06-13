@@ -2,6 +2,7 @@ security:
   referrerPolicy: 'origin'
 port: 3000
 timeout: 30000
+runningEnv: 'production'
 services:
   authProvider:
     url: ''
@@ -357,6 +358,9 @@ socialWorker:
     - arcadoptionne.org.uk
     - coram.org.uk
     - barnardos.org.uk
+    - adoptersforadoption.com
+    - diagrama.org
+    - sloughchildrenfirst.co.uk
 
 adoption:
   family-court:
