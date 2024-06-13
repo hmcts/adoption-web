@@ -3,15 +3,9 @@ import moment from 'moment';
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import * as caseApi from '../../app/case/CaseApi';
-import { FormContent } from '../../app/form/Form';
 import * as draftStoreMock from '../../modules/draft-store/draft-store-service';
 import * as steps from '../../steps';
-import {
-  APPLYING_WITH_URL,
-  LA_PORTAL_CHECK_YOUR_ANSWERS,
-  LA_PORTAL_STATEMENT_OF_TRUTH,
-  SAVE_AND_SIGN_OUT,
-} from '../../steps/urls';
+import { LA_PORTAL_CHECK_YOUR_ANSWERS, LA_PORTAL_STATEMENT_OF_TRUTH, SAVE_AND_SIGN_OUT } from '../../steps/urls';
 import { CaseWithId } from '../case/case';
 import {
   Adoption,
@@ -23,6 +17,7 @@ import {
   SYSTEM_USER_UPDATE,
   State,
 } from '../case/definition';
+import { FormContent } from '../form/Form';
 import { isFieldFilledIn, isPhoneNoValid } from '../form/validation';
 
 import { PostController } from './PostController';
@@ -252,7 +247,6 @@ describe('PostController', () => {
     const controller = new PostController(mockFormContent.fields);
 
     const req = mockRequest({ body });
-    req.path = APPLYING_WITH_URL;
     req.session.user.isSystemUser = false;
     req.session.userCaseList = [{ id: 'MOCK_ID', state: State.Draft, case_data: {} as CaseData }];
     const res = mockResponse();
@@ -292,7 +286,6 @@ describe('PostController', () => {
     const controller = new PostController(mockFormContent.fields);
 
     const req = mockRequest({ body });
-    req.path = APPLYING_WITH_URL;
     req.session.user.isSystemUser = false;
     req.session.userCase = null as unknown as CaseWithId;
     const res = mockResponse();
@@ -332,7 +325,6 @@ describe('PostController', () => {
     const controller = new PostController(mockFormContent.fields);
 
     const req = mockRequest({ body });
-    req.path = APPLYING_WITH_URL;
     req.session.user.isSystemUser = false;
     req.session.userCase = false as unknown as CaseWithId;
     const res = mockResponse();
@@ -354,8 +346,8 @@ describe('PostController', () => {
       getCases: jest.fn(() => {
         return [];
       }),
-      
-      
+
+
     };
     (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
     const body = { MOCK_KEY: 'MOCK_VALUE' };
@@ -366,7 +358,7 @@ describe('PostController', () => {
           validator: isPhoneNoValid,
         },
       },
-    } as unknown as FormContent; 
+    } as unknown as FormContent;
     const controller = new PostController({});
     //const mockSave = jest.fn(done => done('An error while saving session'));
 
