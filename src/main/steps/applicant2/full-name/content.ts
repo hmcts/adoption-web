@@ -11,6 +11,8 @@ const en = () => ({
   firstHint: '(Include any given or middle names)',
   lastNames: 'Last names',
   lastHint: '(Include surname or family names)',
+  warning:
+      'If your name does not match your ID, this may delay your application and the issue of a new birth certificate.',
   errors: {
     applicant2FirstNames: {
       required: 'Enter your first names',
@@ -30,6 +32,8 @@ const cy: typeof en = () => ({
   firstHint: '(Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol)',
   lastNames: 'Cyfenwau',
   lastHint: '(Cofiwch gynnwys cyfenw neu enwau teuluol)',
+  warning:
+      'Os nad yw eich enw\'n cyd-fynd â\'ch ID, gallai hyn ohirio eich cais a’r broses o gyhoeddi tystysgrif geni newydd.',
   errors: {
     applicant2FirstNames: {
       required: 'Nac ydwdwch eich enw(au) cyntaf',
