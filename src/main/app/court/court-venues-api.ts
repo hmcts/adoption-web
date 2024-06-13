@@ -24,7 +24,7 @@ export async function getCourtListFromAPI(req: AppRequest): Promise<CourtVenue[]
   return [...adoptionCourtList];
 }
 
-/* This is used to get all the court list refdata API call. 
+/* This is used to get all the court list refdata API call.
 Commenting it out for now to fetch the list from static data */
 
 export const getCourtVenuesFromAPI = async (
@@ -70,7 +70,7 @@ export const getCourtVenuesFromAPI = async (
 export const getCourtVenues = async (): Promise<CourtVenue[]> => {
   Logger.error('services.location_api.url: ' + config.get('services.location_api.url'));
   const courtVenueList: CourtVenue[] = [];
-  for (const [key, value] of Object.entries(config.get('adoption.family-court'))) {
+  for (const [key, value] of Object.entries(config.get('adoption.family-court') as object)) {
     const courtVenue: CourtVenue = {
       epimms_id: key,
       site_name: value as string,
