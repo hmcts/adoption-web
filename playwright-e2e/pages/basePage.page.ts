@@ -33,7 +33,6 @@ export default class BasePage {
     this.monthField = page.getByLabel('Month');
     this.yearField = page.getByLabel('Year');
     this.locationPicker = page.locator('#location-picker');
-    
   }
 
   async postcodeFindAddress(postcode: string, selectAdd: string){

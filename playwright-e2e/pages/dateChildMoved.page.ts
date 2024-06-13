@@ -1,5 +1,4 @@
 import { type Locator, type Page } from '@playwright/test';
-
 export default class DateChildMoved {
   readonly text1: Locator;
   readonly h1: Locator;
