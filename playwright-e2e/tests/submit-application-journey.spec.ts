@@ -127,9 +127,6 @@ test.describe(
       await app.pcq.noPcqAnswers();
       await app.basePage.clickSaveAndContinue();
       await app.page.pause();
-      await app.reviewSubmit.reviewAnswers();
-      await app.page.pause();
-      await app.basePage.clickSaveAndContinue();
       await app.reviewSubmit.statementOfTruth(appOneFullname, appTwoFullname);
       
      
