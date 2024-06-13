@@ -12,6 +12,9 @@ export default class BasePage {
   readonly selectAddress: Locator;
   readonly firstName: Locator;
   readonly lastName: Locator;
+  readonly dayField: Locator;
+  readonly monthField: Locator;
+  readonly yearField: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -25,6 +28,9 @@ export default class BasePage {
     this.selectAddress = page.getByLabel('Select an address');
     this.firstName = page.getByLabel('First names');
     this.lastName = page.getByLabel('Last names');
+    this.dayField = page.getByLabel('Day');
+    this.monthField = page.getByLabel('Month');
+    this.yearField = page.getByLabel('Year');
   }
 
   async clickContinue(): Promise<void> {
@@ -42,7 +48,19 @@ export default class BasePage {
   }
 
   async fillFirstLastName(firstName, lastName){
+    await this.firstName.click(); //reduce flakiness of filling out name
     await this.firstName.fill(firstName);
     await this.lastName.fill(lastName);
+  }
+
+  async enterDate(amendYear): Promise<void> {
+    const today = new Date();
+    const dayString = `${today.getDate()}`;
+    const monthString = `${today.getMonth()}`;
+    const yearString = `${today.getFullYear() + amendYear}`;
+
+    await this.dayField.fill(dayString);
+    await this.monthField.fill(monthString);
+    await this.yearField.fill(yearString);
   }
 }
