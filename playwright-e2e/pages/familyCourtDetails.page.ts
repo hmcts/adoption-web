@@ -1,26 +1,23 @@
 import { type Locator, type Page } from '@playwright/test';
-
+import { expect } from '@playwright/test';
 export default class FamilyCourtDetails {
   readonly whichCourt: Locator;
-  readonly locationPicker: Locator;
-  readonly locationPickerOption: Locator;
   readonly hearingInSameCourt: Locator;
+  readonly locationPickerCourt: Locator;
 
   constructor(page: Page) {
     this.whichCourt = page.getByLabel('Which court made the placement order?');
-    this.locationPicker = page.locator('#location-picker');
-    this.locationPickerOption = page.getByRole('option', { name: 'Luton Justice Centre' });
     this.hearingInSameCourt = page.getByLabel('Yes');
-  }
-
-  async selectWhichCourt(): Promise<void> {
-    await this.locationPicker.focus();
-    await this.locationPicker.fill('Luton');
-    await this.locationPicker.press('Enter');
-    await this.locationPickerOption.click;
+    this.locationPickerCourt = page.getByLabel('Which court made the');
   }
 
   async sameCourtYes(): Promise<void> {
     await this.hearingInSameCourt.click();
+  }
+
+  async courtLocation(location){
+    await expect(this.locationPickerCourt).toBeEditable();
+    await this.locationPickerCourt.fill(location);
+    await this.locationPickerCourt.press('Enter');
   }
 }

@@ -45,98 +45,98 @@ export class Eligibility extends BasePage {
   }
   //tests can take input of applying for multiple children or a single child
   async isEligible(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
-    await this.clickContinue();
+    await this.continueButton.click();
     await applyMoreThanOneChild.check();
-    await this.clickContinue();
+    await this.continueButton.click();
     if (this.applyMoreThanOneChildYes === applyMoreThanOneChild) {
-      await this.clickContinue();
+      await this.continueButton.click();
     }
     await this.childUnder18Yes.check();
-    await this.clickContinue();
+    await this.continueButton.click();
     await this.isChildMarriedOrCivilPartnershipNo.check();
-    await this.clickContinue();
+    await this.continueButton.click();
     await this.areYouAndApplicantOver21Yes.check();
-    await this.clickContinue();
+    await this.continueButton.click();
     await this.uKCountryOfResidenceYes.check();
-    await this.clickContinue();
+    await this.continueButton.click();
     await this.uKCountryOfResidence12MonthsYes.check();
-    await this.clickContinue();
+    await this.continueButton.click();
     await expect(this.signInText).toContainText('Sign in or create an account');
   }
 
   async isNotover18(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
-    await this.clickContinue();
+    await this.continueButton.click();
     await applyMoreThanOneChild.check();
-    await this.clickContinue();
+    await this.continueButton.click();
     if (this.applyMoreThanOneChildYes === applyMoreThanOneChild) {
-      await this.clickContinue();
+      await this.continueButton.click();
     }
     await this.childUnder18No.check();
     await expect(this.labelWarningYouCanOnly).toContainText([
       'You can only apply to adopt a child if they are under 18 years old on the date your application is submitted.',
     ]);
     await expect(this.moreAboutAdoptionLink).toBeVisible();
-    await this.clickContinue();
+    await this.continueButton.click();
     await expect(this.mainContent).toContainText([
       "Check you're eligible to adopt You cannot apply to adopt You cannot apply to adopt the child because they’re 18 or over. More about adoption",
     ]);
   }
 
   async isMarriedOrCivilPartnership(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
-    await this.clickContinue();
+    await this.continueButton.click();
     await applyMoreThanOneChild.check();
-    await this.clickContinue();
+    await this.continueButton.click();
     if (this.applyMoreThanOneChildYes === applyMoreThanOneChild) {
-      await this.clickContinue();
+      await this.continueButton.click();
     }
     await this.childUnder18Yes.check();
-    await this.clickContinue();
+    await this.continueButton.click();
     await this.isChildMarriedOrCivilPartnershipYes.check();
     await expect(this.labelWarningYouCanOnly).toContainText([
       "You can only apply to adopt a child if they've not been married or in a civil partnership.",
     ]);
     await expect(this.moreAboutAdoptionLink).toBeVisible();
-    await this.clickContinue();
+    await this.continueButton.click();
     await expect(this.mainContent).toContainText([
       "Check you're eligible to adopt You cannot apply to adopt You cannot apply to adopt the child because they've been married or in a civil partnership. More about adoption",
     ]);
   }
 
   async youAndApplicantUnder21(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
-    await this.clickContinue();
+    await this.continueButton.click();
     await applyMoreThanOneChild.check();
-    await this.clickContinue();
+    await this.continueButton.click();
     if (this.applyMoreThanOneChildYes === applyMoreThanOneChild) {
-      await this.clickContinue();
+      await this.continueButton.click();
     }
     await this.childUnder18Yes.check();
-    await this.clickContinue();
+    await this.continueButton.click();
     await this.isChildMarriedOrCivilPartnershipNo.check();
-    await this.clickContinue();
+    await this.continueButton.click();
     await this.areYouAndApplicantOver21No.check();
     await expect(this.labelWarningYouCanOnly).toContainText([
       'You must be 21 or over to adopt a child. This includes any other applicant.',
     ]);
     await expect(this.moreAboutAdoptionLink).toBeVisible();
-    await this.clickContinue();
+    await this.continueButton.click();
     await expect(this.mainContent).toContainText([
       "Check you're eligible to adopt You cannot apply to adopt You cannot apply to adopt the child until you, and your partner if applicable, are 21. More about adoption",
     ]);
   }
 
   async notUKResident(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
-    await this.clickContinue();
+    await this.continueButton.click();
     await applyMoreThanOneChild.check();
     if (this.applyMoreThanOneChildYes === applyMoreThanOneChild) {
-      await this.clickContinue();
+      await this.continueButton.click();
     }
-    await this.clickContinue();
+    await this.continueButton.click();
     await this.childUnder18Yes.check();
-    await this.clickContinue();
+    await this.continueButton.click();
     await this.isChildMarriedOrCivilPartnershipNo.check();
-    await this.clickContinue();
+    await this.continueButton.click();
     await this.areYouAndApplicantOver21Yes.check();
-    await this.clickContinue();
+    await this.continueButton.click();
     await this.uKCountryOfResidenceNo.check();
     await expect(this.labelWarningYouCanOnly).toContainText([
       'You cannot apply to adopt a child unless you have a permanent home here.',
@@ -147,25 +147,25 @@ export class Eligibility extends BasePage {
   }
 
   async notUKResident12Months(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
-    await this.clickContinue();
+    await this.continueButton.click();
     await applyMoreThanOneChild.check();
     if (this.applyMoreThanOneChildYes === applyMoreThanOneChild) {
-      await this.clickContinue();
+      await this.continueButton.click();
     }
-    await this.clickContinue();
+    await this.continueButton.click();
     await this.childUnder18Yes.check();
-    await this.clickContinue();
+    await this.continueButton.click();
     await this.isChildMarriedOrCivilPartnershipNo.check();
-    await this.clickContinue();
+    await this.continueButton.click();
     await this.areYouAndApplicantOver21Yes.check();
-    await this.clickContinue();
+    await this.continueButton.click();
     await this.uKCountryOfResidenceYes.check();
-    await this.clickContinue();
+    await this.continueButton.click();
     await this.uKCountryOfResidence12MonthsNo.check();
     await expect(this.labelWarningYouCanOnly).toContainText([
       'You cannot apply to adopt a child unless you have a permanent home here.',
     ]);
-    await this.clickContinue();
+    await this.continueButton.click();
     await expect(this.mainContent).toContainText(['You cannot apply to adopt']);
   }
 
@@ -192,13 +192,13 @@ export class Eligibility extends BasePage {
       'Select if you, and the other applicant if relevant, have lived in the UK, Channel Islands or Isle of Man for the last 12 months.',
       this.uKCountryOfResidence12MonthsYes
     );
-    await this.clickContinue();
+    await this.continueButton.click();
     await expect(this.signInText).toContainText('Sign in or create an account');
   }
 
   async handleFormError(errorMessage: string, eligibilityElement: { check: () => Promise<void> }): Promise<void> {
-    await this.clickContinue();
-    await this.clickContinue();
+    await this.continueButton.click();
+    await this.continueButton.click();
     await expect(this.problemErrorMessage).toBeVisible;
     await expect(this.selectErrorMessage).toContainText([errorMessage]);
     await eligibilityElement.check();
