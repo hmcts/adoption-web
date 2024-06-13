@@ -141,11 +141,5 @@ test.describe(
     });
   }
 );
-function axeBuilder(testInfo: any) {
-  throw new Error('Function not implemented.');
-}
 
-function makeAxeBuilderFunction(testInfo: any) {
-  throw new Error('Function not implemented.');
-}
 
