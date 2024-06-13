@@ -1,5 +1,4 @@
 import { type Locator, type Page } from '@playwright/test';
-
 export default class ContactDetails {
   readonly h1: Locator;
   readonly email: Locator;

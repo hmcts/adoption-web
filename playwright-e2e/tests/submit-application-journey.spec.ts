@@ -87,7 +87,6 @@ test.describe(
       await app.basePage.saveAndContinue.click();
 
       // First applicant Your contact details
-      // await page.getByRole('link', { name: 'Your contact details  First' }).click();
       await app.tasklist.firstApplicantContactDetails.click();
       await app.basePage.postcodeFindAddress('BN26 6AL', '0');
       await app.basePage.saveAndContinue.click();
@@ -118,8 +117,6 @@ test.describe(
       await app.contactDetails.englishLang.check();
       await app.basePage.saveAndContinue.click();
 
-      //submit
-      
       await app.tasklist.reviewAndSubmit.click();
       await app.pcq.noPcqAnswers();
       await app.basePage.saveAndContinue.click();

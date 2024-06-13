@@ -5,7 +5,6 @@ export default class Pcq {
   readonly h1: Locator;
   readonly noContinueQuestionsButton: Locator
   
-  
     constructor(page: Page) {
         this.h1 = page.getByRole('heading', { name: 'Equality and diversity questions' });
         this.noContinueQuestionsButton = page.getByRole('button', { name: 'I don\'t want to answer these questions' });

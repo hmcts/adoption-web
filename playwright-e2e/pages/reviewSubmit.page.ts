@@ -51,7 +51,6 @@ export default class ReviewSubmit extends BasePage{
 
     async reviewAnswers(){
         await expect(this.h1).toBeVisible();
-        // await expect(this.applyWithSpouseText).toBeVisible();
     }
 
     async statementOfTruth(applicantOne, applicantTwo){
@@ -79,6 +78,5 @@ export default class ReviewSubmit extends BasePage{
         await this.appEmail.fill(email);
         await this.continueButton.click();
         await this.confirmPaymentButton.click();
-
     }
 }

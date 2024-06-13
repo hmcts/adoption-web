@@ -1,5 +1,4 @@
 import { type Locator, type Page } from '@playwright/test';
-
 export default class SignIn {
   readonly heading: Locator;
   readonly heading2: Locator;

@@ -1,5 +1,4 @@
 import { type Locator, type Page } from '@playwright/test';
-
 export default class Tasklist {
   readonly heading: Locator;
   readonly heading1: Locator;
@@ -32,8 +31,4 @@ export default class Tasklist {
     this.secondApplicantContactDetails = page.getByRole('link', { name: 'Your contact details  Second' });
     this.reviewAndSubmit = page.getByRole('link', { name: 'Review, pay and submit your' });
   }
-
-  // async dateChildMovedInLink(): Promise<void> {
-  //   await this.dateChildMovedIn.click();
-  // }
 }
