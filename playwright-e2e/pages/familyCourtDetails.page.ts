@@ -16,7 +16,7 @@ export default class FamilyCourtDetails {
   async selectWhichCourt(): Promise<void> {
     await this.locationPicker.focus();
     await this.locationPicker.fill('Luton');
-    await this.locationPickerOption.focus();
+    await this.locationPicker.press('Enter');
     await this.locationPickerOption.click;
   }
 

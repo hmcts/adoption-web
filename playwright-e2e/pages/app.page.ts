@@ -11,6 +11,7 @@ import AddApplicants from './applicantsDetails.page';
 import ExtraSupport from './extraSupport.page';
 import ContactDetails from './contactDetails.page';
 import ReviewSubmit from './reviewSubmit.page';
+import Pcq from './pcq.page';
 
 export default class App {
   readonly page: Page;
@@ -26,6 +27,7 @@ export default class App {
   readonly extraSupport: ExtraSupport;
   readonly contactDetails: ContactDetails;
   readonly reviewSubmit: ReviewSubmit;
+  readonly pcq: Pcq;
 
   constructor(page: Page) {
     this.page = page;
@@ -41,5 +43,6 @@ export default class App {
     this.extraSupport = new ExtraSupport(page);
     this.contactDetails = new ContactDetails(page);
     this.reviewSubmit = new ReviewSubmit(page);
+    this.pcq = new Pcq(page);
   }
 }

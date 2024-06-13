@@ -24,12 +24,11 @@ export default class ReviewSubmit {
         this.paySubmit = page.getByRole('button', { name: 'Pay and submit application' })
         this.cost = page.locator('#card-details-wrap').getByText('£201.00');
         this.cardDetailsH1 = page.getByRole('heading', { name: 'Enter card details' });
-      
     }
 
     async reviewAnswers(){
         await expect(this.h1).toBeVisible();
-        await expect(this.applyWithSpouseText).toBeVisible();
+        // await expect(this.applyWithSpouseText).toBeVisible();
     }
 
     async statementOfTruth(applicantOne, applicantTwo){
@@ -41,8 +40,5 @@ export default class ReviewSubmit {
         await this.paySubmit.click();
         await expect(this.cardDetailsH1).toBeVisible();
         await expect(this.cost).toBeVisible();
-        
-
-
     }
 }

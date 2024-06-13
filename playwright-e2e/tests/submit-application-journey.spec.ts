@@ -46,7 +46,7 @@ test.describe(
 
       // Date child moved in with you
       await app.tasklist.dateChildMovedIn.click();
-      await app.dateChildMoved.dateChildMovedInToday();
+      await app.basePage.enterDate(-2);
       await app.basePage.clickSaveAndContinue();
 
       // Child's details before adoption
@@ -57,7 +57,7 @@ test.describe(
       // Child's details after adoption
       await app.basePage.fillFirstLastName(childFirstName, childLastName);
       await app.basePage.clickSaveAndContinue();
-      await app.childDetails.childsDob();
+      await app.basePage.enterDate(-2);
       await app.basePage.clickSaveAndContinue();
 
       // Adoption agency and social worker
@@ -82,7 +82,7 @@ test.describe(
       await app.basePage.clickSaveAndContinue();
       await app.addApplicants.otherNamesSelectNo();
       await app.basePage.clickSaveAndContinue();
-      await app.addApplicants.dob();
+      await app.basePage.enterDate(-22);
       await app.basePage.clickSaveAndContinue();
       await app.addApplicants.addOccupationFirst();
       await app.basePage.clickSaveAndContinue();
@@ -105,7 +105,7 @@ test.describe(
       await app.basePage.clickSaveAndContinue();
       await app.addApplicants.otherNamesNo.check();
       await app.basePage.clickSaveAndContinue();
-      await app.addApplicants.dob();
+      await app.basePage.enterDate(-22);
       await app.basePage.clickSaveAndContinue();
       await app.addApplicants.addOccupationSecond();
       await app.basePage.clickSaveAndContinue();
@@ -122,11 +122,16 @@ test.describe(
       await app.basePage.clickSaveAndContinue();
 
       //submit
+      
       await app.tasklist.reviewAndSubmit.click();
-      //need to add pcq questions
+      await app.pcq.noPcqAnswers();
+      await app.basePage.clickSaveAndContinue();
+      await app.page.pause();
       await app.reviewSubmit.reviewAnswers();
+      await app.page.pause();
       await app.basePage.clickSaveAndContinue();
       await app.reviewSubmit.statementOfTruth(appOneFullname, appTwoFullname);
+      
      
     });
 

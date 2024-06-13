@@ -1,5 +1,6 @@
 import { type Locator, type Page } from '@playwright/test';
 import { faker } from '@faker-js/faker';
+import { expect } from '@playwright/test';
 
 const randomFullName = faker.person.fullName();
 const randomPhoneNumber = faker.helpers.fromRegExp(/[1-7]{11}/);
@@ -13,7 +14,7 @@ export default class AdoptionAgency {
   readonly emailAddress: Locator;
   readonly locationPicker: Locator;
   readonly localAuthorityEmail: Locator;
-  readonly locationPickerOption: Locator;
+  // readonly locationPickerOption: Locator;
   readonly nameOfYourSocialWorker: Locator;
   readonly anotherAdoptionAgency: Locator;
 
@@ -24,7 +25,7 @@ export default class AdoptionAgency {
     this.emailAddress = page.getByLabel('Email address (if known)');
     this.locationPicker = page.locator('#location-picker');
     this.localAuthorityEmail = page.getByLabel('Local authority email address');
-    this.locationPickerOption = page.getByRole('option', { name: 'Sandwell Metropolitan Council' });
+    // this.locationPickerOption = page.getByRole('option', { name: 'Sandwell Metropolitan Council' });
     this.nameOfYourSocialWorker = page.getByLabel('Name of your social worker');
     this.anotherAdoptionAgency = page.getByLabel('No', { exact: true });
   }
@@ -33,8 +34,9 @@ export default class AdoptionAgency {
     await this.nameOfChildsSocialWorker.fill(randomFullName);
     await this.phoneNumber.fill(randomPhoneNumber);
     await this.emailAddress.fill(randomSocialWorkerEmail);
+    await expect(this.locationPicker).toBeEditable();
     await this.locationPicker.fill("sand");
-    await this.locationPickerOption.focus();
+    await this.locationPicker.press('Enter');
     await this.localAuthorityEmail.fill(randomAuthorityEmail);
   }
 
@@ -42,8 +44,9 @@ export default class AdoptionAgency {
     await this.nameOfYourSocialWorker.fill(randomFullName);
     await this.phoneNumber.fill(randomPhoneNumber);
     await this.emailAddress.fill(randomSocialWorkerEmail);
+    await expect(this.locationPicker).toBeEditable();
     await this.locationPicker.fill("sand");
-    await this.locationPickerOption.click();
+    await this.locationPicker.press('Enter');
     await this.localAuthorityEmail.fill(randomAuthorityEmail);
   }
 
