@@ -1,5 +1,5 @@
 import { type Locator, type Page } from '@playwright/test';
-
+import { expect } from '@playwright/test';
 export default class BasePage {
   readonly page: Page;
   readonly continueButton: Locator;
@@ -15,6 +15,7 @@ export default class BasePage {
   readonly dayField: Locator;
   readonly monthField: Locator;
   readonly yearField: Locator;
+  readonly locationPicker: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -31,14 +32,8 @@ export default class BasePage {
     this.dayField = page.getByLabel('Day');
     this.monthField = page.getByLabel('Month');
     this.yearField = page.getByLabel('Year');
-  }
-
-  async clickContinue(): Promise<void> {
-    await this.continueButton.click();
-  }
-
-  async clickSaveAndContinue(): Promise<void> {
-    await this.saveAndContinue.click();
+    this.locationPicker = page.locator('#location-picker');
+    
   }
 
   async postcodeFindAddress(postcode: string, selectAdd: string){
@@ -62,5 +57,11 @@ export default class BasePage {
     await this.dayField.fill(dayString);
     await this.monthField.fill(monthString);
     await this.yearField.fill(yearString);
+  }
+
+  async selectLocation(location): Promise<void> {
+    await expect(this.locationPicker).toBeEditable();
+    await this.locationPicker.fill(location);
+    await this.locationPicker.press('Enter');
   }
 }
