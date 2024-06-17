@@ -1,3 +1,4 @@
+import { Logger } from '@hmcts/nodejs-logging';
 import autobind from 'autobind-decorator';
 import config from 'config';
 import type { Response } from 'express';
@@ -19,6 +20,8 @@ import {
 import type { AppRequest, UserDetails } from '../controller/AppRequest';
 
 import { Classification, DocumentManagementClient } from './DocumentManagementClient';
+
+const logger = Logger.getLogger('DocumentManagementController');
 
 @autobind
 export class DocumentManagerController {
@@ -108,6 +111,8 @@ export class DocumentManagerController {
       return res.redirect(documentInput ? documentInput.documentRedirectUrl : UPLOAD_YOUR_DOCUMENTS);
     }
     const documentUrlToDelete = documentToDelete.value.documentLink.document_url;
+    req.session.userCase.id;
+    logger.info(`Deleting document from case ${req.session.userCase.id}.  Document URL: ${documentUrlToDelete}`);
 
     documentsUploaded[documentIndexToDelete].value = null;
 
@@ -122,6 +127,9 @@ export class DocumentManagerController {
 
     req.session.save(err => {
       if (err) {
+        logger.error(
+          `Error deleting document from case ${req.session.userCase.id}.  Document URL: ${documentUrlToDelete}`
+        );
         throw err;
       }
       return res.redirect(documentInput ? documentInput.documentRedirectUrl : UPLOAD_YOUR_DOCUMENTS);
