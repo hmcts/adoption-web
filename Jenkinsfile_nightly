@@ -81,12 +81,8 @@ withNightlyPipeline(type, product, component) {
 
 afterAlways('fullFunctionalTest') {
         stage('Playwright Tests Nightly') {
-            try {
                 yarnBuilder.yarn('test:functional-nightly')
-            } catch (Error) {
-                 currentBuild.result = "FAILURE"
-                 throw new Exception(Error.toString())
-            } finally {
+          
                 publishHTML([
                     allowMissing: true,
                     alwaysLinkToLastBuild: true,
@@ -96,7 +92,7 @@ afterAlways('fullFunctionalTest') {
                     reportName: 'Playwright UI Functional Test Report'
                 ])
                 steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
-            }
+            
         }
         stage('Playwright Accessibility Tests Nightly') {
             try {
