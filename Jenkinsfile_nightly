@@ -84,7 +84,8 @@ afterAlways('fullFunctionalTest') {
             try {
                 yarnBuilder.yarn('test:functional-nightly')
             } catch (Error) {
-                 error "${STAGE_NAME} is unstable: " + Error.toString()
+                 currentBuild.result = "FAILURE"
+                 throw new Exception(Error.toString())
             } finally {
                 publishHTML([
                     allowMissing: true,
