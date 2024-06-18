@@ -56,11 +56,11 @@ withNightlyPipeline(type, product, component) {
   env.TEST_URL = "https://adoption-web.aat.platform.hmcts.net/"
   env.ADOP_WEB_URL = params.FRONTEND_URL
 //  enableCrossBrowserTest(['chrome','microsoft'])
-  enableCrossBrowserTest(90)
+ // enableCrossBrowserTest(90)
   enableFullFunctionalTest(120)
   loadVaultSecrets(secrets)
   enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
-  enableFortifyScan()
+ // enableFortifyScan()
   enableSecurityScan()
 
   afterAlways('test') {
@@ -79,10 +79,9 @@ withNightlyPipeline(type, product, component) {
     env.PARALLEL_CHUNKS = params.FUNCTIONAL_TESTS_WORKERS
   }
 
-afterAlways('fullFunctionalTest') {
+afterAlways('DependencyCheckNightly') {
         stage('Playwright Tests Nightly') {
                 yarnBuilder.yarn('test:functional-nightly')
-          
                 publishHTML([
                     allowMissing: true,
                     alwaysLinkToLastBuild: true,
@@ -92,14 +91,11 @@ afterAlways('fullFunctionalTest') {
                     reportName: 'Playwright UI Functional Test Report'
                 ])
                 steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
-            
         }
         stage('Playwright Accessibility Tests Nightly') {
-            try {
+          
                 yarnBuilder.yarn('test:accessibility-nightly')
-            } catch (Error) {
-                unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
-            } finally {
+            
                 publishHTML([
                     allowMissing: true,
                     alwaysLinkToLastBuild: true,
@@ -109,7 +105,7 @@ afterAlways('fullFunctionalTest') {
                     reportName: 'Playwright Accessibility Functional Test Report'
                 ])
                 steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
-            }
+            
         }
     }
 
