@@ -14,6 +14,8 @@ const enContent = {
   firstHint: '(Include any given or middle names. Your full name should match exactly what is on your passport or other form of authorised ID such as a driving licence. If the names do not match, this could delay your application.)',
   lastNames: 'Last names',
   lastHint: '(Include surname or family names. Your full name should match exactly what is on your passport or other form of authorised ID such as a driving licence. If the names do not match, this could delay your application.)',
+  warning:
+      'If your name does not match your ID, this may delay your application and the issue of a new birth certificate.',
   errors: {
     applicant2FirstNames: {
       required: 'Enter your first names',
