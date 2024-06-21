@@ -10,8 +10,8 @@ jest.mock('../../../app/form/validation');
 const enContent = {
   section: 'First applicant',
   title: "What's your full name?",
-  line1:
-    'Your full name should match exactly what is on your passport or other form of authorised ID such as a driving licence. If the names do not match, this could delay your application.',
+  warning:
+      'If your name does not match your ID, this may delay your application and the issue of a new birth certificate.',
   errors: {
     applicant1FirstNames: {
       required: 'Enter your first names',
@@ -24,8 +24,8 @@ const enContent = {
 const cyContent = {
   section: 'Ceisydd cyntaf',
   title: 'Beth yw eich enw llawn?',
-  line1:
-    'Dylai eich enw llawn fod union yr un fath ag y mae ar eich pasbort neu fath arall o ddogfen adnabod awdurdodedig, er enghraifft trwydded yrru. Os nad ydynt yr un fath, gall arwain at oedi wrth ddelio â’ch cais.',
+  warning:
+      'Os nad yw eich enw\'n cyd-fynd â\'ch ID, gallai hyn ohirio eich cais a’r broses o gyhoeddi tystysgrif geni newydd.',
   errors: {
     applicant1FirstNames: {
       required: 'Nodwch eich enw(au) cyntaf',
