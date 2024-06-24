@@ -1,5 +1,6 @@
 import { type Locator, type Page } from '@playwright/test';
 import { expect } from '@playwright/test';
+
 export default class BasePage {
   readonly page: Page;
   readonly continueButton: Locator;
@@ -58,9 +59,13 @@ export default class BasePage {
     await this.yearField.fill(yearString);
   }
 
-  async selectLocation(location): Promise<void> {
+  async selectLocation(location: string): Promise<void> {
+    await this.locationPicker.waitFor({ state: 'visible' });
     await expect(this.locationPicker).toBeEditable();
     await this.locationPicker.fill(location);
+    await expect(this.locationPicker).toHaveValue(location);
     await this.locationPicker.press('Enter');
   }
 }
+
+
