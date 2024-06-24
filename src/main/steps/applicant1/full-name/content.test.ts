@@ -11,7 +11,7 @@ const enContent = {
   section: 'First applicant',
   title: "What's your full name?",
   warning:
-      'If your name does not match your ID, this may delay your application and the issue of a new birth certificate.',
+    'If your name does not match your ID, this may delay your application and the issue of a new birth certificate.',
   errors: {
     applicant1FirstNames: {
       required: 'Enter your first names',
@@ -25,7 +25,7 @@ const cyContent = {
   section: 'Ceisydd cyntaf',
   title: 'Beth yw eich enw llawn?',
   warning:
-      'Os nad yw eich enw\'n cyd-fynd â\'ch ID, gallai hyn ohirio eich cais a’r broses o gyhoeddi tystysgrif geni newydd.',
+    "Os nad yw eich enw'n cyd-fynd â'ch ID, gallai hyn ohirio eich cais a’r broses o gyhoeddi tystysgrif geni newydd.",
   errors: {
     applicant1FirstNames: {
       required: 'Nodwch eich enw(au) cyntaf',
