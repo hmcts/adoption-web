@@ -28,6 +28,7 @@ test.describe(
     });
 
     test('submitting application with spouse or civil partner', async ({ page }) => {
+      test.slow();
       const app = new App(page);
       const appOneFirstName = faker.person.firstName();
       const appOneLastName = faker.person.lastName();
@@ -120,7 +121,6 @@ test.describe(
       await app.tasklist.reviewAndSubmit.click();
       await app.pcq.noPcqAnswers();
       await app.basePage.saveAndContinue.click();
-      await app.page.pause();
       await app.reviewSubmit.statementOfTruth(appOneFullname, appTwoFullname);
       await app.reviewSubmit.fillCardDetails(appOneFullname, 'abcdefg@domain.com');
     });
