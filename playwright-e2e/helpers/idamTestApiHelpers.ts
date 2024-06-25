@@ -47,7 +47,7 @@ export async function createCitizenUser(token: string): Promise<{ email: string;
   const password = process.env.PASSWORD as string;
   const email = `TEST_ADOPTION_USER_citizen-user.${uniqueId}@test.local`;
 
-  console.log('Token:', token);
+  // console.log('Token:', token);
   const userCreationOptions: AxiosRequestConfig = {
     method: 'POST',
     headers: {
@@ -69,10 +69,10 @@ export async function createCitizenUser(token: string): Promise<{ email: string;
 
   try {
     const response = await axios(userCreationOptions);
-    console.log('User created:', response.data);
+    // console.log('User created:', response.data);
     return { email, password, id: response.data.id };
   } catch (error) {
-    console.error('Error creating user:', error);
+    // console.error('Error creating user:', error);
     throw new Error('Failed to create user, could be that you are not connected to the VPN');
   }
 }
@@ -95,7 +95,7 @@ export async function deleteCitizenUser(token: string, id: string): Promise<void
 
   try {
     await axios(userDeletionOptions);
-    console.info('Deleted user', id);
+    // console.info('Deleted user', id);
   } catch (error) {
     console.error('Error deleting user', id, error.response ? error.response.data : error.message);
     throw new Error(`Failed to delete user with ID ${id}`);

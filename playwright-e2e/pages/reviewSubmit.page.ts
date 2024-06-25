@@ -73,7 +73,6 @@ export default class ReviewSubmit extends BasePage{
         await this.securityCode.fill('123');
         await this.addressLineOne.fill('55 HART READE');
         await this.town.fill('POLEGATE');
-        await this.country.fill('UK');
         await this.postcode.fill('BN26 6AL');
         await this.appEmail.fill(email);
         await this.continueButton.click();
