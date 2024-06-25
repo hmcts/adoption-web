@@ -59,11 +59,10 @@ export default class BasePage {
     await this.yearField.fill(yearString);
   }
 
-  async selectLocation(location: string): Promise<void> {
-    await this.locationPicker.waitFor({ state: 'visible' });
-    await expect(this.locationPicker).toBeEditable();
-    await this.locationPicker.fill(location);
-    await expect(this.locationPicker).toHaveValue(location);
+  async selectLocation(location, locationPickerA) {
+    await expect(locationPickerA).toBeEditable();
+    await locationPickerA.pressSequentially(location, { delay: 10 }); 
+    await expect(locationPickerA).toHaveValue(location);
     await this.locationPicker.press('Enter');
   }
 }

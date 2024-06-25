@@ -31,16 +31,16 @@ export default class AdoptionAgency extends BasePage{
     await this.nameOfChildsSocialWorker.fill(randomFullName);
     await this.phoneNumber.fill(randomPhoneNumber);
     await this.emailAddress.fill(randomSocialWorkerEmail);
-    await this.selectLocation(location);
     await this.localAuthorityEmail.fill(randomAuthorityEmail);
+    await this.selectLocation(location, this.locationPicker);
   }
 
   async childsYourSocialWorkerDetails(location): Promise<void> {
     await this.nameOfYourSocialWorker.fill(randomFullName);
     await this.phoneNumber.fill(randomPhoneNumber);
     await this.emailAddress.fill(randomSocialWorkerEmail);
-    await this.selectLocation(location);
     await this.localAuthorityEmail.fill(randomAuthorityEmail);
+    await this.selectLocation(location);
   }
 
   async anotherAdoptionAgencyNo(): Promise<void> {

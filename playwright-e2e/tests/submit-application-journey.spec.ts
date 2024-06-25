@@ -61,17 +61,20 @@ test.describe(
 
       // Adoption agency and social worker
       await app.tasklist.adoptionAgency.click();
-      await app.adoptionAgency.childsChildSocialWorkerDetails('sandwell'); 
+      await app.adoptionAgency.childsChildSocialWorkerDetails('Sandwell Metropolitan Council'); 
       await app.basePage.saveAndContinue.click();
-      await app.adoptionAgency.childsYourSocialWorkerDetails('sandwell');
+      await app.adoptionAgency.childsYourSocialWorkerDetails('Sandwell Metropolitan Council');
       await app.basePage.saveAndContinue.click();
       await app.adoptionAgency.anotherAdoptionAgencyNo();
       await app.basePage.saveAndContinue.click();
 
       // The family court details
       await app.tasklist.familyCourtDetails.click();
-      await app.familyCourt.courtLocation('luton');
-      await app.basePage.saveAndContinue.click();
+      await Promise.all([
+         app.basePage.selectLocation('Leicester County Court', app.adoptionAgency.locationPickerCourt),
+         app.basePage.saveAndContinue.click()
+      ]);
+      
       await app.familyCourt.sameCourtYes();
       await app.basePage.saveAndContinue.click();
 
@@ -126,7 +129,7 @@ test.describe(
     });
 
     test('submitting application with someone who is not my spouse or civil partner', async ({ page }) => {
-      console.log('what is this ?' + process.env.IDAM_TESTING_SUPPORT_USERS_URL);
+      // console.log('what is this ?' + process.env.IDAM_TESTING_SUPPORT_USERS_URL);
     });
 
     test('submitting application on my own', async ({ page }) => {
