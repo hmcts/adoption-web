@@ -10,12 +10,14 @@ const EN = 'en';
 const enContent = {
   section: 'Second applicant',
   title: "What's your full name?",
-  line1:
-    'Your full name should match exactly what is on your passport or other form of authorised ID such as a driving licence. If the names do not match, this could delay your application.',
   firstNames: 'First names',
-  firstHint: '(Include any given or middle names)',
+  firstHint:
+    '(Include any given or middle names. Your full name should match exactly what is on your passport or other form of authorised ID such as a driving licence. If the names do not match, this could delay your application.)',
   lastNames: 'Last names',
-  lastHint: '(Include surname or family names)',
+  lastHint:
+    '(Include surname or family names. Your full name should match exactly what is on your passport or other form of authorised ID such as a driving licence. If the names do not match, this could delay your application.)',
+  warning:
+    'If your name does not match your ID, this may delay your application and the issue of a new birth certificate.',
   errors: {
     applicant2FirstNames: {
       required: 'Enter your first names',
@@ -28,12 +30,14 @@ const enContent = {
 const cyContent = {
   section: 'Ail geisydd',
   title: 'Beth yw eich enw llawn?',
-  line1:
-    'Dylai eich enw llawn fod union yr un fath ag y mae ar eich pasbort neu fath arall o ddogfen adnabod awdurdodedig, er enghraifft trwydded yrru. Os nad ydynt yr un fath, gall arwain at oedi wrth ddelio â’ch cais.',
   firstNames: 'Enwau cyntaf',
-  firstHint: '(Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol)',
+  firstHint:
+    "(Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol. Dylai eich enw llawn gyd-fynd yn union â'r hyn sydd ar eich pasbort neu fath arall o ID awdurdodedig fel trwydded yrru. Os nad yw'r enwau'n cyd-fynd, gallai hyn ohirio eich cais.)",
   lastNames: 'Cyfenwau',
-  lastHint: '(Cofiwch gynnwys cyfenw neu enwau teuluol)',
+  lastHint:
+    "(Cofiwch gynnwys cyfenw neu enwau teuluol. Dylai eich enw llawn gyd-fynd yn union â'r hyn sydd ar eich pasbort neu fath arall o ID awdurdodedig fel trwydded yrru. Os nad yw'r enwau'n cyd-fynd, gallai hyn ohirio eich cais.)",
+  warning:
+    "Os nad yw eich enw'n cyd-fynd â'ch ID, gallai hyn ohirio eich cais a’r broses o gyhoeddi tystysgrif geni newydd.",
   errors: {
     applicant2FirstNames: {
       required: 'Nac ydwdwch eich enw(au) cyntaf',
