@@ -70,6 +70,14 @@ withPipeline(type, product, component) {
     yarnBuilder.yarn('test:integration')
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
   }
+  
+  before('crossBrowserTest') {
+
+  }
+
+  afterAlways('crossBrowserTest') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+  }
 
   before('functionalTest:preview') {
     env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.preview.platform.hmcts.net/"
