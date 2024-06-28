@@ -70,22 +70,22 @@ const setupConfig = {
       require: './src/test/e2e/helpers/stepListener.js',
     },
     Mochawesome: {
-      uniqueScreenshotNames: false,
+      uniqueScreenshotNames: true,
     },
   },
   plugins: {
     autoLogin: testUserConfig.AutoLogin,
     retryFailedStep: {
       enabled: true,
-      retries: 3,
+      retries: 2,
     },
     autoDelay: {
       enabled: true,
       delayAfter: 1000,
     },
     screenshotOnFail: {
-      enabled: false,
-      fullPageScreenshots: false,
+      enabled: true,
+      fullPageScreenshots: true,
     },
   },
   include: {

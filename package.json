@@ -42,7 +42,6 @@
   },
   "dependencies": {
     "@axe-core/playwright": "^4.9.0",
-    "@azure/msal-node": "^2.9.2",
     "@hmcts/cookie-manager": "^1.0.0",
     "@hmcts/frontend": "^0.0.50-alpha",
     "@hmcts/nodejs-healthcheck": "^1.8.4",
@@ -172,8 +171,7 @@
     "config/json5": ">=2.2.2",
     "tsconfig-paths/json5": ">=2.2.2",
     "cookiejar": ">=2.1.4",
-    "formidable": "^3.2.4",
-    "semver": "^7.5.2"
+    "formidable": "^3.2.4"
   },
   "packageManager": "yarn@3.6.4"
 }
