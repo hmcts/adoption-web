@@ -26,7 +26,7 @@ export class KbaMiddleware {
         const langCode = req.query.lang !== undefined ? req.query.lang : '';
         let param = '';
         const supportedLang = ['en', 'cy'];
-        let idx = supportedLang.indexOf(langCode as string);
+        const idx = supportedLang.indexOf(langCode as string);
         if (idx > 0) {
           param = '?lang=' + supportedLang[idx];
         }
