@@ -37,3 +37,4 @@ output/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+playwright-e2e/tests/test-results/

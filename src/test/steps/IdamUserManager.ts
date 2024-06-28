@@ -52,7 +52,7 @@ export class IdamUserManager {
     try {
       await this.client.delete(`/testing-support/accounts/${email}`);
       this.users.delete(email);
-      console.info('Deleted user', email);
+      // console.info('Deleted user', email);
     } catch (e) {
       console.info('Error deleting user', email, e);
     }
