@@ -26,8 +26,9 @@ export class KbaMiddleware {
         const langCode = req.query.lang !== undefined ? req.query.lang : '';
         let param = '';
         const supportedLang = ['en', 'cy'];
-        if (langCode !== null && supportedLang.includes(langCode as string)) {
-          param = '?lang=' + langCode;
+        let idx = supportedLang.indexOf(langCode as string);
+        if (idx > 0) {
+          param = '?lang=' + supportedLang[idx];
         }
         if (req.session.laPortalKba?.kbaCaseRef) {
           req.session.user = await getSystemUser();
