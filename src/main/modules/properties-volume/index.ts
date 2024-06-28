@@ -18,7 +18,6 @@ export class PropertiesVolume {
       this.setSecret('secrets.adoption.s2s-secret', 'services.authProvider.secret');
       this.setSecret('secrets.adoption.postcode-lookup-token', 'services.postcodeLookup.token');
       this.setSecret('secrets.adoption.adoption-pcq-token', 'services.equalityAndDiversity.tokenKey');
-      this.setSecret('secrets.adoption.adoption-web-auth-token', 'mockData.authToken');
     } else {
       this.setLocalSecret('idam-secret', 'services.idam.clientSecret');
       this.setLocalSecret('s2s-secret', 'services.authProvider.secret');
@@ -27,7 +26,6 @@ export class PropertiesVolume {
       this.setLocalSecret('idam-system-user-password', 'services.idam.systemPassword');
       // this.setLocalSecret('e2e-test-user-password', 'e2e.userTestPassword');
       this.setLocalSecret('adoption-pcq-token', 'services.equalityAndDiversity.tokenKey');
-      this.setLocalSecret('adoption-web-auth-token', 'mockData.authToken');
       this.setLocalEndpoints();
     }
   }
