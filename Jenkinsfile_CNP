@@ -53,7 +53,7 @@ withPipeline(type, product, component) {
   enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
 
   before('test') {
-    env.AUTH_TOKEN = "${AUTH_TOKEN}"
+    setupSecretsForIntegrationTests(pipelineConf)
   }
 
   onMaster {
@@ -104,5 +104,13 @@ withPipeline(type, product, component) {
     yarnBuilder.yarn('test:api')
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+  }
+}
+
+def setupSecretsForIntegrationTests(pipelineConf) {
+  withSubscription('nonprod') {
+    withTeamSecrets(pipelienConf, 'aat') {
+      env.AUTH_TOKEN = "${AUTH_TOKEN}"
+    }
   }
 }
