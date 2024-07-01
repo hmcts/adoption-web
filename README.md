@@ -116,6 +116,14 @@ the following command:
 $ yarn test
 ```
 
+**NOTE** - the oidc integration tests may fail locally, unless you create a file in `config/local.yaml` with the content:
+```
+mockData:
+  authToken: 'VALUE_FROM_AAT_KEYVAULT'
+```
+Replacing VALUE_FROM_AAT_KEYVAULT with the contents of the secret `adoption-web-auth-token` found in `adoption-aat`.
+
+
 Here's how to run functional tests (the template contains just one sample test):
 
 ```bash

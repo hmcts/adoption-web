@@ -8,6 +8,7 @@ export const mockRequest = ({
   userCase = {},
   appLocals = {},
   query = {},
+  path = '/request',
 } = {}): AppRequest =>
   ({
     headers: { 'accept-language': 'en', ...headers },
@@ -58,7 +59,7 @@ export const mockRequest = ({
       },
     },
     cookies,
-    path: '/request',
+    path,
     url: '/request',
     originalUrl: '/request',
     logout: jest.fn(),
