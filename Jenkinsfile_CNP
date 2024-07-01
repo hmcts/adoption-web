@@ -67,6 +67,8 @@ withPipeline(type, product, component) {
   afterAlways('test') {
     yarnBuilder.yarn('test:integration')
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
+    // teardown test secrets
+    env.AUTH_TOKEN = ''
   }
 
   before('functionalTest:preview') {
