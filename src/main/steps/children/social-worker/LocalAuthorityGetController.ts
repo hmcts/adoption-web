@@ -18,7 +18,7 @@ export default class LocalAuthorityGetController extends GetController {
     //    2. @values.yaml config - For new inclusion to test on other environments
     //    3. The mapping to be updated @custom-environment-variables.yaml config
     const localAuthorityList: LocalAuthorityList[] = [];
-    for (const [key, value] of Object.entries(config.get('fpl.localAuthority'))) {
+    for (const [key, value] of Object.entries(config.get('fpl.localAuthority') as object)) {
       const localAuthority: LocalAuthorityList = {
         code: key,
         name: value,
