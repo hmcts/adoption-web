@@ -28,13 +28,6 @@ def secrets = [
     secret('endpoints', 'ENDPOINTS'),
     secret('idam-system-user-password', 'TEST_PASSWORD'),
     secret('adoption-web-auth-token', 'AUTH_TOKEN'),
-
-
-
-
-
-
-
   ],
   's2s-${env}': [
     secret('microservicekey-adoption-web', 'SERVICE_AUTH_SECRET')
@@ -42,7 +35,7 @@ def secrets = [
 ]
 
 def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
-def branchesToSync = ['demo', 'perftest']
+def branchesToSync = ['demo', 'ithc', 'perftest']
 
 def pipelineConf = new AppPipelineConfig()
 pipelineConf.vaultSecrets = secrets
@@ -59,6 +52,10 @@ withPipeline(type, product, component) {
 
   enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
 
+  before('test') {
+    setupSecretsForIntegrationTests(pipelineConf)
+  }
+
   onMaster {
     env.PACT_TAG = 'master'
   }
@@ -70,6 +67,8 @@ withPipeline(type, product, component) {
   afterAlways('test') {
     yarnBuilder.yarn('test:integration')
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
+    // teardown test secrets
+    env.AUTH_TOKEN = ''
   }
 
   before('functionalTest:preview') {
@@ -107,5 +106,13 @@ withPipeline(type, product, component) {
     yarnBuilder.yarn('test:api')
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+  }
+}
+
+def setupSecretsForIntegrationTests(pipelineConf) {
+  withSubscription('nonprod') {
+    withTeamSecrets(pipelineConf, 'aat') {
+      env.AUTH_TOKEN = "${AUTH_TOKEN}"
+    }
   }
 }

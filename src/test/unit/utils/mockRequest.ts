@@ -1,5 +1,4 @@
 import { AppRequest } from '../../../main/app/controller/AppRequest';
-import { APPLYING_WITH_URL } from '../../../main/steps/urls';
 
 export const mockRequest = ({
   headers = {},
@@ -9,6 +8,7 @@ export const mockRequest = ({
   userCase = {},
   appLocals = {},
   query = {},
+  path = '/request',
 } = {}): AppRequest =>
   ({
     headers: { 'accept-language': 'en', ...headers },
@@ -59,7 +59,7 @@ export const mockRequest = ({
       },
     },
     cookies,
-    path: APPLYING_WITH_URL,
+    path,
     url: '/request',
     originalUrl: '/request',
     logout: jest.fn(),
