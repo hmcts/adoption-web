@@ -32,7 +32,7 @@ export default class AdoptionAgency extends BasePage{
     await this.phoneNumber.fill(randomPhoneNumber);
     await this.emailAddress.fill(randomSocialWorkerEmail);
     await this.localAuthorityEmail.fill(randomAuthorityEmail);
-    await this.selectLocation(location, this.locationPicker);
+    await this.selectLocation(location);
   }
 
   async childsYourSocialWorkerDetails(location): Promise<void> {

@@ -71,7 +71,7 @@ test.describe(
       // The family court details
       await app.tasklist.familyCourtDetails.click();
       await Promise.all([
-         app.basePage.selectLocation('Leicester County Court', app.adoptionAgency.locationPickerCourt),
+         app.basePage.selectLocation('Leicester County Court'),
          app.basePage.saveAndContinue.click()
       ]);
       
