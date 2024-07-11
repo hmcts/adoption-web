@@ -5,15 +5,15 @@ export default class ContactDetails {
   readonly phoneNumber: Locator;
   readonly englishLang: Locator;
 
-    constructor(page: Page) {
-        this.h1 = page.getByRole('heading', { name: 'Extra support during your case' });
-        this.email = page.getByLabel('Email address');
-        this.phoneNumber = page.getByLabel('UK phone number');
-        this.englishLang = page.getByLabel('English');
-    }
+  constructor(page: Page) {
+    this.h1 = page.getByRole('heading', { name: 'Extra support during your case' });
+    this.email = page.getByLabel('Email address');
+    this.phoneNumber = page.getByLabel('UK phone number');
+    this.englishLang = page.getByLabel('English');
+  }
 
-    async fillContactDetails(fillEmail, fillPhoneNumber){
-        await this.email.fill(fillEmail); //
-        await this.phoneNumber.fill(fillPhoneNumber);//
-    }
+  async fillContactDetails(fillEmail, fillPhoneNumber) {
+    await this.email.fill(fillEmail); //
+    await this.phoneNumber.fill(fillPhoneNumber); //
+  }
 }

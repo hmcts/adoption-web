@@ -13,10 +13,10 @@ export default class SignIn {
     this.password = page.getByText('Password', { exact: true });
     this.signinButton = page.getByRole('button', { name: 'Sign in' });
     page.goto(
-      `https://idam-web-public.aat.platform.hmcts.net/login?client_id=adoption-web&response_type=code&redirect_uri=https://adoption-web.aat.platform.hmcts.net/receiver`
+      'https://idam-web-public.aat.platform.hmcts.net/login?client_id=adoption-web&response_type=code&redirect_uri=https://adoption-web.aat.platform.hmcts.net/receiver'
     );
   }
-  
+
   async signIn(email: string, password: string): Promise<void> {
     await this.email.fill(email);
     await this.password.fill(password);

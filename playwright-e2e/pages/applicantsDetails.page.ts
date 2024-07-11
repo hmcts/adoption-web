@@ -1,5 +1,5 @@
-import { type Locator, type Page } from '@playwright/test';
 import { faker } from '@faker-js/faker';
+import { type Locator, type Page } from '@playwright/test';
 
 const jobTitle = faker.person.jobTitle();
 export default class AddApplicants {
@@ -24,7 +24,7 @@ export default class AddApplicants {
   async addOccupationFirst(): Promise<void> {
     await this.occupationFirst.fill(jobTitle);
   }
-  async addOccupationSecond(){
+  async addOccupationSecond() {
     await this.occupationSecond.fill(jobTitle);
   }
 }

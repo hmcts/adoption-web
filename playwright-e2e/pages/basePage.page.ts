@@ -36,13 +36,13 @@ export default class BasePage {
     this.locationPickerA = page.locator('#location-picker');
   }
 
-  async postcodeFindAddress(postcode: string, selectAdd: string){
+  async postcodeFindAddress(postcode: string, selectAdd: string) {
     await this.postcode.fill(postcode);
     await this.findAddress.click();
     await this.selectAddress.selectOption(selectAdd);
   }
 
-  async fillFirstLastName(firstName, lastName){
+  async fillFirstLastName(firstName, lastName) {
     await this.firstName.click(); //reduce flakiness of filling out name
     await this.firstName.fill(firstName);
     await this.lastName.fill(lastName);
@@ -61,10 +61,8 @@ export default class BasePage {
 
   async selectLocation(location) {
     await expect(this.locationPickerA).toBeEditable();
-    await this.locationPickerA.pressSequentially(location, { delay: 10 }); 
+    await this.locationPickerA.pressSequentially(location, { delay: 10 });
     await expect(this.locationPickerA).toHaveValue(location);
     await this.locationPickerA.press('Enter');
   }
 }
-
-
