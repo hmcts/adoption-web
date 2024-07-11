@@ -1,5 +1,5 @@
-import { type Locator, type Page } from '@playwright/test';
 import { faker } from '@faker-js/faker';
+import { type Locator, type Page } from '@playwright/test';
 
 const randomFullName = faker.person.fullName();
 const randomPhoneNumber = faker.helpers.fromRegExp(/[1-7]{11}/);
@@ -19,7 +19,7 @@ export default class AdoptionAgency {
 
   constructor(page: Page) {
     this.heading = page.getByRole('heading', { name: "Child's social worker details" });
-    this.nameOfChildsSocialWorker = page.getByLabel('Name of child\'s social worker');
+    this.nameOfChildsSocialWorker = page.getByLabel("Name of child's social worker");
     this.phoneNumber = page.getByLabel('Phone number');
     this.emailAddress = page.getByLabel('Email address (if known)');
     this.locationPicker = page.locator('#location-picker');
@@ -33,7 +33,7 @@ export default class AdoptionAgency {
     await this.nameOfChildsSocialWorker.fill(randomFullName);
     await this.phoneNumber.fill(randomPhoneNumber);
     await this.emailAddress.fill(randomSocialWorkerEmail);
-    await this.locationPicker.fill("sand");
+    await this.locationPicker.fill('sand');
     await this.locationPickerOption.focus();
     await this.localAuthorityEmail.fill(randomAuthorityEmail);
   }
@@ -42,7 +42,7 @@ export default class AdoptionAgency {
     await this.nameOfYourSocialWorker.fill(randomFullName);
     await this.phoneNumber.fill(randomPhoneNumber);
     await this.emailAddress.fill(randomSocialWorkerEmail);
-    await this.locationPicker.fill("sand");
+    await this.locationPicker.fill('sand');
     await this.locationPickerOption.click();
     await this.localAuthorityEmail.fill(randomAuthorityEmail);
   }
@@ -50,5 +50,4 @@ export default class AdoptionAgency {
   async anotherAdoptionAgencyNo(): Promise<void> {
     await this.anotherAdoptionAgency.click();
   }
-
 }

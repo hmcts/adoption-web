@@ -4,15 +4,14 @@ import { expect } from '@playwright/test';
 export default class ExtraSupport {
   readonly h1: Locator;
   readonly extraSupportNo: Locator;
-  
-    constructor(page: Page) {
-        this.h1 = page.getByRole('heading', { name: 'Extra support during your case' });
-        this.extraSupportNo = page.getByLabel('No - I do not need any extra');
-    }
 
-    async noSupportNeeded(){
-        expect(this.h1).toBeVisible();
-        await this.extraSupportNo.check();
-    }
+  constructor(page: Page) {
+    this.h1 = page.getByRole('heading', { name: 'Extra support during your case' });
+    this.extraSupportNo = page.getByLabel('No - I do not need any extra');
+  }
 
+  async noSupportNeeded(): Promise<void> {
+    expect(this.h1).toBeVisible();
+    await this.extraSupportNo.check();
+  }
 }

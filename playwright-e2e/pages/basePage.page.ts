@@ -35,13 +35,13 @@ export default class BasePage {
     await this.saveAndContinue.click();
   }
 
-  async postcodeFindAddress(postcode: string, selectAdd: string){
+  async postcodeFindAddress(postcode: string, selectAdd: string): Promise<void> {
     await this.postcode.fill(postcode);
     await this.findAddress.click();
     await this.selectAddress.selectOption(selectAdd);
   }
 
-  async fillFirstLastName(firstName, lastName){
+  async fillFirstLastName(firstName: string, lastName: string): Promise<void> {
     await this.firstName.fill(firstName);
     await this.lastName.fill(lastName);
   }

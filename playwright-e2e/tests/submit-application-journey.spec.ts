@@ -12,8 +12,8 @@ test.describe('e2e submit journeys', { tag: '@submit' }, () => {
   let userPassword: string;
   let userId: string;
 
-  test.beforeEach(async ({ page }) => {
-    const userInfo = await setupUser(page);
+  test.beforeEach(async () => {
+    const userInfo = await setupUser();
     if (userInfo) {
       userEmail = userInfo.email;
       userPassword = userInfo.password;
@@ -21,8 +21,8 @@ test.describe('e2e submit journeys', { tag: '@submit' }, () => {
     }
   });
 
-  test.afterEach('Status check', async ({ page }) => {
-    await teardownUser(page, userId);
+  test.afterEach('Status check', async () => {
+    await teardownUser(userId);
   });
 
   test('submitting application with spouse or civil partner', async ({ page }) => {
