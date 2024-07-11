@@ -16,7 +16,7 @@ export default class BasePage {
   readonly dayField: Locator;
   readonly monthField: Locator;
   readonly yearField: Locator;
-  readonly locationPicker: Locator;
+  readonly locationPickerA: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -33,7 +33,7 @@ export default class BasePage {
     this.dayField = page.getByLabel('Day');
     this.monthField = page.getByLabel('Month');
     this.yearField = page.getByLabel('Year');
-    this.locationPicker = page.locator('#location-picker');
+    this.locationPickerA = page.locator('#location-picker');
   }
 
   async postcodeFindAddress(postcode: string, selectAdd: string){
@@ -59,11 +59,11 @@ export default class BasePage {
     await this.yearField.fill(yearString);
   }
 
-  async selectLocation(location, locationPickerA) {
-    await expect(locationPickerA).toBeEditable();
-    await locationPickerA.pressSequentially(location, { delay: 10 }); 
-    await expect(locationPickerA).toHaveValue(location);
-    await this.locationPicker.press('Enter');
+  async selectLocation(location) {
+    await expect(this.locationPickerA).toBeEditable();
+    await this.locationPickerA.pressSequentially(location, { delay: 10 }); 
+    await expect(this.locationPickerA).toHaveValue(location);
+    await this.locationPickerA.press('Enter');
   }
 }
 
