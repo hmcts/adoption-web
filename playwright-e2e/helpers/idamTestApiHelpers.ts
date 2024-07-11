@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import * as dotenv from 'dotenv';
 import qs from 'qs';
 import { v4 as uuidv4 } from 'uuid';
+import * as dotenv from 'dotenv';
 
 dotenv.config();
 /**
@@ -38,7 +38,7 @@ export async function getAccessToken(): Promise<string | null> {
  * Function to create a citizen user
  * @param {string} token The access token
  */
-export async function createCitizenUser(token: string): Promise<{ email: string; password: string; id: string }> {
+export async function createCitizenUser(token: string): Promise<{ email: string; password: string; id: string;}> {
   if (!process.env.PASSWORD) {
     throw new Error('PASSWORD environment variable is not defined');
   }
@@ -87,7 +87,7 @@ export async function deleteCitizenUser(token: string, id: string): Promise<void
   const userDeletionOptions: AxiosRequestConfig = {
     method: 'DELETE',
     headers: {
-      Authorization: `Bearer ${token}`,
+      'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
     url: `${process.env.IDAM_TESTING_SUPPORT_USERS_URL}/${id}` as string,

@@ -252,8 +252,6 @@ describe('PostController', () => {
     const controller = new PostController(mockFormContent.fields);
 
     const req = mockRequest({ body });
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore: TS2540
     req.path = APPLYING_WITH_URL;
     req.session.user.isSystemUser = false;
     req.session.userCaseList = [{ id: 'MOCK_ID', state: State.Draft, case_data: {} as CaseData }];
@@ -294,8 +292,6 @@ describe('PostController', () => {
     const controller = new PostController(mockFormContent.fields);
 
     const req = mockRequest({ body });
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore: TS2540
     req.path = APPLYING_WITH_URL;
     req.session.user.isSystemUser = false;
     req.session.userCase = null as unknown as CaseWithId;
@@ -336,8 +332,6 @@ describe('PostController', () => {
     const controller = new PostController(mockFormContent.fields);
 
     const req = mockRequest({ body });
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore: TS2540
     req.path = APPLYING_WITH_URL;
     req.session.user.isSystemUser = false;
     req.session.userCase = false as unknown as CaseWithId;

@@ -213,8 +213,6 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
 
 export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data: InputFormat): OutputFormat {
   const result = {};
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore: This type parameter might need an `extends object` constraint.
   for (const field of Object.keys(data)) {
     const value = fields[field];
 

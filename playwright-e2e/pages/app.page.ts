@@ -1,18 +1,17 @@
 import { type Page } from '@playwright/test';
-
-import AdoptionAgency from './adoptionAgency.page';
-import AddApplicants from './applicantsDetails.page';
 import BasePage from './basePage.page';
-import ChildDetails from './childDetails.page';
-import ContactDetails from './contactDetails.page';
-import DateChildMoved from './dateChildMoved.page';
-import ExtraSupport from './extraSupport.page';
-import FamilyCourt from './familyCourtDetails.page';
-import NumberOfApplicants from './numberOfApplicants.page';
-import Pcq from './pcq.page';
-import ReviewSubmit from './reviewSubmit.page';
 import SignIn from './signInPage.page';
+import NumberOfApplicants from './numberOfApplicants.page';
+import ChildDetails from './childDetails.page';
 import Tasklist from './taskList.page';
+import DateChildMoved from './dateChildMoved.page';
+import AdoptionAgency from './adoptionAgency.page';
+import FamilyCourt from './familyCourtDetails.page';
+import AddApplicants from './applicantsDetails.page';
+import ExtraSupport from './extraSupport.page';
+import ContactDetails from './contactDetails.page';
+import ReviewSubmit from './reviewSubmit.page';
+import Pcq from './pcq.page';
 
 export default class App {
   readonly page: Page;

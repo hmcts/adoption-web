@@ -15,7 +15,7 @@ export default class FamilyCourtDetails {
     await this.hearingInSameCourt.click();
   }
 
-  async courtLocation(location, locationPickerCourt) {
+  async courtLocation(location, locationPickerCourt){
     await expect(this.locationPickerCourt).toBeEditable();
     await this.locationPickerCourt.fill(location);
     await this.locationPickerCourt.press('Enter');

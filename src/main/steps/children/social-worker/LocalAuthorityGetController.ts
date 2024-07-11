@@ -18,8 +18,6 @@ export default class LocalAuthorityGetController extends GetController {
     //    2. @values.yaml config - For new inclusion to test on other environments
     //    3. The mapping to be updated @custom-environment-variables.yaml config
     const localAuthorityList: LocalAuthorityList[] = [];
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore: TS2769
     for (const [key, value] of Object.entries(config.get('fpl.localAuthority'))) {
       const localAuthority: LocalAuthorityList = {
         code: key,

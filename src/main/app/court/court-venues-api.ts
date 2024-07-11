@@ -70,8 +70,6 @@ export const getCourtVenuesFromAPI = async (
 export const getCourtVenues = async (): Promise<CourtVenue[]> => {
   Logger.error('services.location_api.url: ' + config.get('services.location_api.url'));
   const courtVenueList: CourtVenue[] = [];
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore: TS2769
   for (const [key, value] of Object.entries(config.get('adoption.family-court'))) {
     const courtVenue: CourtVenue = {
       epimms_id: key,
