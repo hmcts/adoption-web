@@ -13,13 +13,6 @@ export default class FamilyCourtDetails {
     this.hearingInSameCourt = page.getByLabel('Yes');
   }
 
-  async selectWhichCourt(): Promise<void> {
-    await this.locationPicker.focus();
-    await this.locationPicker.fill('Luton');
-    await this.locationPickerOption.focus();
-    await this.locationPickerOption.click;
-  }
-
   async sameCourtYes(): Promise<void> {
     await this.hearingInSameCourt.click();
   }

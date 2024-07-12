@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { type Locator, type Page } from '@playwright/test';
+import { expect } from '@playwright/test';
 
 const randomFullName = faker.person.fullName();
 const randomPhoneNumber = faker.helpers.fromRegExp(/[1-7]{11}/);
@@ -13,7 +14,6 @@ export default class AdoptionAgency {
   readonly emailAddress: Locator;
   readonly locationPicker: Locator;
   readonly localAuthorityEmail: Locator;
-  readonly locationPickerOption: Locator;
   readonly nameOfYourSocialWorker: Locator;
   readonly anotherAdoptionAgency: Locator;
 
@@ -24,27 +24,30 @@ export default class AdoptionAgency {
     this.emailAddress = page.getByLabel('Email address (if known)');
     this.locationPicker = page.locator('#location-picker');
     this.localAuthorityEmail = page.getByLabel('Local authority email address');
-    this.locationPickerOption = page.getByRole('option', { name: 'Sandwell Metropolitan Council' });
     this.nameOfYourSocialWorker = page.getByLabel('Name of your social worker');
     this.anotherAdoptionAgency = page.getByLabel('No', { exact: true });
   }
 
-  async childsChildSocialWorkerDetails(): Promise<void> {
+  async selectLocation(location: string): Promise<void> {
+    await expect(this.locationPicker).toBeEditable();
+    await this.locationPicker.pressSequentially(location, { delay: 10 });
+    await this.locationPicker.press('Enter');
+  }
+
+  async childsChildSocialWorkerDetails(location: string): Promise<void> {
     await this.nameOfChildsSocialWorker.fill(randomFullName);
     await this.phoneNumber.fill(randomPhoneNumber);
     await this.emailAddress.fill(randomSocialWorkerEmail);
-    await this.locationPicker.fill('sand');
-    await this.locationPickerOption.focus();
     await this.localAuthorityEmail.fill(randomAuthorityEmail);
+    await this.selectLocation(location);
   }
 
-  async childsYourSocialWorkerDetails(): Promise<void> {
+  async childsYourSocialWorkerDetails(location: string): Promise<void> {
     await this.nameOfYourSocialWorker.fill(randomFullName);
     await this.phoneNumber.fill(randomPhoneNumber);
     await this.emailAddress.fill(randomSocialWorkerEmail);
-    await this.locationPicker.fill('sand');
-    await this.locationPickerOption.click();
     await this.localAuthorityEmail.fill(randomAuthorityEmail);
+    await this.selectLocation(location);
   }
 
   async anotherAdoptionAgencyNo(): Promise<void> {

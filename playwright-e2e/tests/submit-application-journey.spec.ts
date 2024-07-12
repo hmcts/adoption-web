@@ -56,19 +56,17 @@ test.describe('e2e submit journeys', { tag: '@submit' }, () => {
     await app.childDetails.childsDob();
     await app.basePage.clickSaveAndContinue();
 
-    // Adoption agency and social worker
     await app.tasklist.adoptionAgency.click();
-    await app.adoptionAgency.childsChildSocialWorkerDetails();
-    await app.basePage.clickSaveAndContinue();
-    await app.adoptionAgency.childsYourSocialWorkerDetails();
-    await app.basePage.clickSaveAndContinue();
+    await app.adoptionAgency.childsChildSocialWorkerDetails('Sandwell Metropolitan Council');
+    await app.basePage.saveAndContinue.click();
+    await app.adoptionAgency.childsYourSocialWorkerDetails('Sandwell Metropolitan Council');
+    await app.basePage.saveAndContinue.click();
     await app.adoptionAgency.anotherAdoptionAgencyNo();
-    await app.basePage.clickSaveAndContinue();
+    await app.basePage.saveAndContinue.click();
 
     // The family court details
     await app.tasklist.familyCourtDetails.click();
-
-    await app.familyCourt.selectWhichCourt();
+    await app.basePage.selectLocation('Leicester County Court');
     await app.basePage.clickSaveAndContinue();
     await app.familyCourt.sameCourtYes();
     await app.basePage.clickSaveAndContinue();
@@ -118,9 +116,10 @@ test.describe('e2e submit journeys', { tag: '@submit' }, () => {
 
     //submit
     await app.tasklist.reviewAndSubmit.click();
-    //need to add pcq questions
+    await app.pcq.noPcqAnswers();
     await app.reviewSubmit.reviewAnswers();
     await app.basePage.clickSaveAndContinue();
     await app.reviewSubmit.statementOfTruth(appOneFullname, appTwoFullname);
+    await app.reviewSubmit.fillCardDetails(appOneFullname, 'abcdefg@domain.com');
   });
 });

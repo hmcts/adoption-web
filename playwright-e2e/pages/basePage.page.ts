@@ -1,5 +1,5 @@
 import { type Locator, type Page } from '@playwright/test';
-
+import { expect } from '@playwright/test';
 export default class BasePage {
   readonly page: Page;
   readonly continueButton: Locator;
@@ -12,6 +12,7 @@ export default class BasePage {
   readonly selectAddress: Locator;
   readonly firstName: Locator;
   readonly lastName: Locator;
+  readonly locationPicker: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -25,6 +26,7 @@ export default class BasePage {
     this.selectAddress = page.getByLabel('Select an address');
     this.firstName = page.getByLabel('First names');
     this.lastName = page.getByLabel('Last names');
+    this.locationPicker = page.locator('#location-picker');
   }
 
   async clickContinue(): Promise<void> {
@@ -44,5 +46,12 @@ export default class BasePage {
   async fillFirstLastName(firstName: string, lastName: string): Promise<void> {
     await this.firstName.fill(firstName);
     await this.lastName.fill(lastName);
+  }
+
+  async selectLocation(location: string): Promise<void> {
+    await expect(this.locationPicker).toBeEditable();
+    await this.locationPicker.fill(location);
+    await expect(this.locationPicker).toHaveValue(location);
+    await this.locationPicker.press('Enter');
   }
 }
