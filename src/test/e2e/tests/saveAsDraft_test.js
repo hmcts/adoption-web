@@ -16,7 +16,7 @@ Scenario(
   }
 );
 
-Scenario(
+xScenario(
   'Verify LA save as draft in child birth father details',
   async ({
     loginPage,

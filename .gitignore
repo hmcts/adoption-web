@@ -37,3 +37,4 @@ output/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+config/local.yaml
