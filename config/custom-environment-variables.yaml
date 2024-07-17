@@ -357,3 +357,5 @@ adoption:
     family-court-Prestatyn: PRESTATYN_VAL
     family-court-Swansea: SWANSEA_VAL
     family-court-Wrexham: WREXHAM_VAL
+mockData:
+  authToken: AUTH_TOKEN

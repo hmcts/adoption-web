@@ -16,46 +16,46 @@ Ensure the prerequisites are met.
 
 #### Running the application for the first time
 
-* *(Optional)* Install Redis:<br>
-This provides CLI tools for monitoring and changing the cache during the LA journey.
+- _(Optional)_ Install Redis:<br>
+  This provides CLI tools for monitoring and changing the cache during the LA journey.
 
 ```bash
    brew install redis
 ```
 
-* Connect to F5 VPN:<br>
-Go to the webpage https://portal.platform.hmcts.net/ and follow the instruction to connect to F5 VPN.<br>
-(This is needed because we connect to APIs deployed in AAT environment while running the application locally.)
+- Connect to F5 VPN:<br>
+  Go to the webpage https://portal.platform.hmcts.net/ and follow the instruction to connect to F5 VPN.<br>
+  (This is needed because we connect to APIs deployed in AAT environment while running the application locally.)
 
-* Log in to Azure:<br>
-Use the terminal where you are going to launch the application. Run below command and follow the instructions<br>
-(This is needed bacause we load secrets from `adoption-aat` while running the application locally.)
+- Log in to Azure:<br>
+  Use the terminal where you are going to launch the application. Run below command and follow the instructions<br>
+  (This is needed bacause we load secrets from `adoption-aat` while running the application locally.)
 
 ```bash
    az login --use-device-code
 ```
 
-* Run a local version of Draft Store in a Docker container with a Redis image:
+- Run a local version of Draft Store in a Docker container with a Redis image:
 
 ```bash
    docker-compose -f ./draft-store.yml up -d
 ```
 
-* Comment out code that isn't used when running Draft Store locally:<br>
-Go to this file: src/main/modules/draft-store/index.ts and comment out like this:
+- Comment out code that isn't used when running Draft Store locally:<br>
+  Go to this file: src/main/modules/draft-store/index.ts and comment out like this:
 
 ```typescript
-    const client = new Redis({
-      host: config.get('services.draftStore.redis.host'),
-      port: config.get('services.draftStore.redis.port'),
-      /* password: config.get('session.redis.key'),
+const client = new Redis({
+  host: config.get('services.draftStore.redis.host'),
+  port: config.get('services.draftStore.redis.port'),
+  /* password: config.get('session.redis.key'),
       tls: {
         servername: config.get('services.draftStore.redis.host'),
       }, */
-    });
+});
 ```
 
-* Install dependencies:
+- Install dependencies:
 
 ```bash
    yarn install
@@ -68,27 +68,27 @@ Go to this file: src/main/modules/draft-store/index.ts and comment out like this
 > nvm use 18.15.0
 > ```
 
-* Bundle:
+- Bundle:
 
 ```bash
    yarn webpack
 ```
 
-* Run:
+- Run:
 
 ```bash
    yarn start:dev
 ```
 
-* The application's home page will be available at http://localhost:3001
+- The application's home page will be available at http://localhost:3001
 
 #### Running the application subsequently
 
-* Connect to F5 VPN
+- Connect to F5 VPN
 
-* Start the Docker container
+- Start the Docker container
 
-* Run:
+- Run:
 
 ```bash
    yarn start:dev
@@ -115,6 +115,15 @@ the following command:
 ```bash
 $ yarn test
 ```
+
+**NOTE** - the oidc integration tests may fail locally, unless you create a file in `config/local.yaml` with the content:
+
+```
+mockData:
+  authToken: 'VALUE_FROM_AAT_KEYVAULT'
+```
+
+Replacing VALUE_FROM_AAT_KEYVAULT with the contents of the secret `adoption-web-auth-token` found in `adoption-aat`.
 
 Here's how to run functional tests (the template contains just one sample test):
 
@@ -223,7 +232,7 @@ ADOP_WEB_URL=https://adoption-web-pr-146.service.core-compute-preview.internal/ 
 ```
 
 ## Step controllers
-src/main/app/controller contains default controllers.  These will be used if no controllers are specified alongside content in the steps folders.
-If a step needs additional functionality, add a controller alongside the content.ts, which inherits the default controller.  Get and post controllers
-need 'get' or 'post' in their filenames.
 
+src/main/app/controller contains default controllers. These will be used if no controllers are specified alongside content in the steps folders.
+If a step needs additional functionality, add a controller alongside the content.ts, which inherits the default controller. Get and post controllers
+need 'get' or 'post' in their filenames.
