@@ -27,13 +27,7 @@ def secrets = [
     secret('adoption-pcq-token', 'PCQ_TOKEN'),
     secret('endpoints', 'ENDPOINTS'),
     secret('idam-system-user-password', 'TEST_PASSWORD'),
-
-
-
-
-
-
-
+    secret('adoption-web-auth-token', 'AUTH_TOKEN'),
   ],
   's2s-${env}': [
     secret('microservicekey-adoption-web', 'SERVICE_AUTH_SECRET')
