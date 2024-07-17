@@ -174,7 +174,7 @@
     "tsconfig-paths/json5": ">=2.2.2",
     "cookiejar": ">=2.1.4",
     "formidable": "^3.2.4",
-    "semver": "^7.5.2",
+    "semver": ">=7.5.2",
     "ws": "^8.17.1"
   },
   "packageManager": "yarn@3.6.4"
