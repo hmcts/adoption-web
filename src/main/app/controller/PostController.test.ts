@@ -3,7 +3,6 @@ import moment from 'moment';
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import * as caseApi from '../../app/case/CaseApi';
-import { FormContent } from '../../app/form/Form';
 import * as draftStoreMock from '../../modules/draft-store/draft-store-service';
 import * as steps from '../../steps';
 import {
@@ -23,6 +22,7 @@ import {
   SYSTEM_USER_UPDATE,
   State,
 } from '../case/definition';
+import { FormContent } from '../form/Form';
 import { isFieldFilledIn, isPhoneNoValid } from '../form/validation';
 
 import { PostController } from './PostController';
@@ -340,7 +340,7 @@ describe('PostController', () => {
     expect(caseApiMockFn.createCase).toHaveBeenCalled();
     expect(caseApiMockFn.checkOldPCQIDExists).not.toHaveBeenCalled();
   });
-  /* it('redirects back to the current page with a session error if there was an problem saving data', async () => {
+  /* it('redirects back to the current page with a session error if there was a problem saving data', async () => {
     beforeEach(() => {
       mockGetParsedBody.mockReturnValue({});
       mockGetErrors.mockReturnValue(['MOCK_ERROR']);

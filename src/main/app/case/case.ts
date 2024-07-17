@@ -216,7 +216,7 @@ export function formatCase<InputFormat extends object, OutputFormat>(
   data: InputFormat
 ): OutputFormat {
   const result = {};
-  for (const field of Object.keys(data)) {
+  for (const field of Object.keys(data as object)) {
     const value = fields[field];
 
     if (typeof value === 'function') {
