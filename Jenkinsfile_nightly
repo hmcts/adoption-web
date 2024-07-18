@@ -45,7 +45,8 @@ def secrets = [
     secret('adoption-pcq-token', 'PCQ_TOKEN'),
     secret('endpoints', 'ENDPOINTS'), 
     secret('adoption-web-auth-token', 'AUTH_TOKEN'),
-    secret('idam-token-url', 'IDAM_TOKEN_URL')
+    secret('idam-token-url', 'IDAM_TOKEN_URL'), 
+    secret('idam-citizen-user-password', 'IDAM_CITIZEN_USER_PASSWORD')
    
   ],
   's2s-${env}': [
@@ -82,6 +83,7 @@ withNightlyPipeline(type, product, component) {
   before('fullFunctionalTest') {
     env.PARALLEL_CHUNKS = params.FUNCTIONAL_TESTS_WORKERS
     env.IDAM_TOKEN_URL = "${IDAM_TOKEN_URL}"
+    env.IDAM_CITIZEN_USER_PASSWORD = "${IDAM_CITIZEN_USER_PASSWORD}"
   }
 
 afterAlways('fullFunctionalTest') {

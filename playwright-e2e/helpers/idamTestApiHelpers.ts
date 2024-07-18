@@ -39,12 +39,12 @@ export async function getAccessToken(): Promise<string | null> {
  * @param {string} token The access token
  */
 export async function createCitizenUser(token: string): Promise<{ email: string; password: string; id: string }> {
-  if (!process.env.PASSWORD) {
+  if (!process.env.IDAM_CITIZEN_USER_PASSWORD) {
     throw new Error('PASSWORD environment variable is not defined');
   }
   const uniqueId = uuidv4();
   const id = uniqueId;
-  const password = process.env.PASSWORD as string;
+  const password = process.env.IDAM_CITIZEN_USER_PASSWORD as string;
   const email = `TEST_ADOPTION_USER_citizen-user.${uniqueId}@test.local`;
 
   console.log('Token:', token);
