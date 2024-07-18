@@ -5,6 +5,7 @@ properties([
   pipelineTriggers([cron('H 8 * * 1-5')]),
   parameters([
     string(name: 'FRONTEND_URL', defaultValue: 'https://adoption-web.aat.platform.hmcts.net/', description: 'The URL you want to run tests against'),
+    string(name: 'IDAM_TOKEN_URL', defaultValue: 'https://idam-web-public.aat.platform.hmcts.net/o/token', description: 'The URL you want to use idam user creation'),
     string(name: 'FUNCTIONAL_TESTS_WORKERS',
       defaultValue: '2',
       description: 'Number of workers running functional tests'),
@@ -43,7 +44,8 @@ def secrets = [
     secret('citizen-password', 'CITIZEN_PASSWORD'),
     secret('adoption-pcq-token', 'PCQ_TOKEN'),
     secret('endpoints', 'ENDPOINTS'), 
-    secret('adoption-web-auth-token', 'AUTH_TOKEN')
+    secret('adoption-web-auth-token', 'AUTH_TOKEN'),
+    secret('idam-token-url', 'IDAM_TOKEN_URL')
   ],
   's2s-${env}': [
     secret('microservicekey-adoption-web', 'SERVICE_AUTH_SECRET')
