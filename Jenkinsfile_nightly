@@ -80,6 +80,7 @@ withNightlyPipeline(type, product, component) {
 
   before('fullFunctionalTest') {
     env.PARALLEL_CHUNKS = params.FUNCTIONAL_TESTS_WORKERS
+    env.IDAM_TOKEN_URL = "${IDAM_TOKEN_URL}"
   }
 
 afterAlways('fullFunctionalTest') {
