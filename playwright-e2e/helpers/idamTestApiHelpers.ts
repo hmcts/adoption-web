@@ -12,10 +12,10 @@ dotenv.config();
 export async function getAccessToken(): Promise<string | null> {
   try {
     const data = {
-      grant_type: process.env.GRANT_TYPE,
-      client_id: process.env.CLIENT_ID,
-      client_secret: process.env.CLIENT_SECRET,
-      scope: process.env.SCOPE,
+      grant_type: 'client_credentials',
+      client_id: 'adoption-web',
+      client_secret: process.env.IDAM_SECRET,
+      scope: 'profile roles',
     };
 
     const options: AxiosRequestConfig = {
