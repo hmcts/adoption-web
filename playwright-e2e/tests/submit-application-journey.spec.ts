@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { test as base, expect } from '@playwright/test';
+import { test as base} from '@playwright/test';
 import { runAccessibilityScan } from '../helpers/accessibilityHelper';
 import * as dotenv from 'dotenv';
 import { setupUser, teardownUser } from '../hooks/createDeleteUser.hook';
