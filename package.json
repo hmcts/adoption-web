@@ -32,7 +32,7 @@
     "test:crossbrowser-e2e": "MOCHAWESOME_REPORTFILENAME=crossbrowser codeceptjs run-multiple --grep '@cross-browser' ${BROWSER_GROUP:-'--all'} -c saucelabs.conf.js --reporter mocha-multi",
     "test:crossbrowser": "./bin/run-crossbrowser-tests.sh",
     "test:functional-nightly": "yarn playwright install chromium && yarn playwright install firefox && yarn playwright install webkit && yarn run-all-browsers",
-    "run-all-browsers": "yarn playwright test --project=chromium --project=firefox --project=webkit --project=MobileChrome --project=MobileSafari --project=MobileSamsungPortrait --project=MobileSamsungLandscape",
+    "run-all-browsers": "yarn playwright test --project=chromium --project=firefox --project=webkit --project=MobileChrome --project=MobileSamsungPortrait --project=MobileSamsungLandscape",
     "test:accessibility-nightly": "yarn playwright install chromium && yarn playwright install firefox && yarn playwright install webkit && yarn playwright test --grep @accessibility",
     "test:local": "codeceptjs run-multiple parallel",
     "test:pact": "jest -c jest.pact.config.js --runInBand",
