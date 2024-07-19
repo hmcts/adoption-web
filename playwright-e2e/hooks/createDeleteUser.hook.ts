@@ -7,7 +7,7 @@ export async function setupUser(): Promise<{ email: string; password: string; id
     return { email, password, id };
   } else {
     console.error('Failed to retrieve bearer token. User creation skipped.');
-    return { email: 'null', password: 'null', id: 'null' };
+    throw new Error('Failed to retrieve bearer token. User creation skipped.');
   }
 }
 
