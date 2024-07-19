@@ -71,14 +71,6 @@ withNightlyPipeline(type, product, component) {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
   }
 
-  // before('crossBrowserTest') {
-
-  // }
-
-  // afterAlways('crossBrowserTest') {
-  //   steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
-  // }
-
   before('fullFunctionalTest') {
     env.PARALLEL_CHUNKS = params.FUNCTIONAL_TESTS_WORKERS
     env.IDAM_TOKEN_URL = "${IDAM_TOKEN_URL}"
