@@ -1,14 +1,21 @@
 import { faker } from '@faker-js/faker';
-import { test } from '@playwright/test';
+import { test as base, expect } from '@playwright/test';
 import { runAccessibilityScan } from '../helpers/accessibilityHelper';
 import * as dotenv from 'dotenv';
-
 import { setupUser, teardownUser } from '../hooks/createDeleteUser.hook';
 import App from '../pages/app.page';
+import AxeBuilder from '@axe-core/playwright';
 
 dotenv.config();
 
-test.describe('e2e submit journeys', { tag: '@submit' }, () => {
+const test = base.extend<{ makeAxeBuilder: () => AxeBuilder }>({
+  makeAxeBuilder: async ({ page }, use) => {
+    await use(() => new AxeBuilder({ page }));
+  },
+});
+
+test.describe('e2e submit journeys',
+  () => {
   let userEmail: string;
   let userPassword: string;
   let userId: string;
@@ -31,9 +38,8 @@ test.describe('e2e submit journeys', { tag: '@submit' }, () => {
   test(
     'submitting application with spouse or civil partner', 
     e2eTestTags,
-    async ({ page }, testInfo) => {
+    async ({ page, makeAxeBuilder }, testInfo) => {
       const app = new App(page);
-
       const appOneFirstName = faker.person.firstName();
       const appOneLastName = faker.person.lastName();
       const appTwoFirstName = faker.person.firstName();
@@ -127,7 +133,6 @@ test.describe('e2e submit journeys', { tag: '@submit' }, () => {
       await app.basePage.clickSaveAndContinue();
       await app.reviewSubmit.statementOfTruth(appOneFullname, appTwoFullname);
       await app.reviewSubmit.fillCardDetails(appOneFullname, 'abcdefg@domain.com');
-
       await runAccessibilityScan(makeAxeBuilder, testInfo);
     });
 });
