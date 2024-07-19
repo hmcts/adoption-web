@@ -19,3 +19,4 @@ export async function runAccessibilityScan(makeAxeBuilder: MakeAxeBuilder, testI
   await attachTestInfo(testInfo, accessibilityScanResults);
   expect(accessibilityScanResults.violations).toEqual([]);
 }
+export { expect } from "@playwright/test";
