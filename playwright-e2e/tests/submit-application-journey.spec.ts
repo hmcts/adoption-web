@@ -1,10 +1,11 @@
+import AxeBuilder from '@axe-core/playwright';
 import { faker } from '@faker-js/faker';
-import { test as base} from '@playwright/test';
-import { runAccessibilityScan } from '../helpers/accessibilityHelper';
+import { test as base } from '@playwright/test';
 import * as dotenv from 'dotenv';
+
+import { runAccessibilityScan } from '../helpers/accessibilityHelper';
 import { setupUser, teardownUser } from '../hooks/createDeleteUser.hook';
 import App from '../pages/app.page';
-import AxeBuilder from '@axe-core/playwright';
 
 dotenv.config();
 
@@ -14,8 +15,7 @@ const test = base.extend<{ makeAxeBuilder: () => AxeBuilder }>({
   },
 });
 
-test.describe('e2e submit journeys',
-  () => {
+test.describe('e2e submit journeys', () => {
   let userEmail: string;
   let userPassword: string;
   let userId: string;
@@ -32,11 +32,11 @@ test.describe('e2e submit journeys',
   test.afterEach('Status check', async () => {
     await teardownUser(userId);
   });
-  
+
   const e2eTestTags = { tag: ['@e2e', '@citizen', '@accessibility'] };
-  
+
   test(
-    'submitting application with spouse or civil partner', 
+    'submitting application with spouse or civil partner',
     e2eTestTags,
     async ({ page, makeAxeBuilder }, testInfo) => {
       const app = new App(page);
@@ -134,5 +134,6 @@ test.describe('e2e submit journeys',
       await app.reviewSubmit.statementOfTruth(appOneFullname, appTwoFullname);
       await app.reviewSubmit.fillCardDetails(appOneFullname, 'abcdefg@domain.com');
       await runAccessibilityScan(makeAxeBuilder, testInfo);
-    });
+    }
+  );
 });
