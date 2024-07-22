@@ -18,7 +18,6 @@ export async function setupUser(): Promise<{ email: string; password: string; id
   }
 }
 
-
 export async function teardownUser(userId: string): Promise<void> {
   const token = await getAccessToken();
   if (token) {
