@@ -1,15 +1,23 @@
 import { createCitizenUser, deleteCitizenUser, getAccessToken } from '../helpers/idamTestApiHelpers';
 
 export async function setupUser(): Promise<{ email: string; password: string; id: string }> {
-  const token = await getAccessToken();
-  if (token) {
-    const { email, password, id } = await createCitizenUser(token);
+  try {
+    const token = await getAccessToken();
+    if (!token) {
+      const errorMessage = 'Failed to retrieve bearer token. User creation skipped.';
+      console.error(errorMessage);
+      throw new Error(errorMessage);
+    }
+    const user = await createCitizenUser(token);
+    const { email, password, id } = user;
+
     return { email, password, id };
-  } else {
-    console.error('Failed to retrieve bearer token. User creation skipped.');
-    throw new Error('Failed to retrieve bearer token. User creation skipped.');
+  } catch (error) {
+    console.error('Error during user setup:', error);
+    throw error;
   }
 }
+
 
 export async function teardownUser(userId: string): Promise<void> {
   const token = await getAccessToken();
