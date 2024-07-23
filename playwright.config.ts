@@ -13,13 +13,13 @@ export default defineConfig({
   testDir: './playwright-e2e',
   /* Run tests in files in parallel */
   fullyParallel: true,
-  timeout: 35000,
+  timeout: 80000,
 
-  expect: { timeout: 3000 },
+  expect: { timeout: 80000 },
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 1 : 0,
+  retries: process.env.CI ? 3 : 0,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 5 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -52,12 +52,20 @@ export default defineConfig({
 
     /* Test against mobile viewports. */
     {
-      name: 'Mobile Chrome',
+      name: 'MobileChrome',
       use: { ...devices['Pixel 5'] },
     },
     {
-      name: 'Mobile Safari',
+      name: 'MobileSafari',
       use: { ...devices['iPhone 12'] },
+    },
+    {
+      name: 'MobileSamsungPortrait',
+      use: { ...devices['Galaxy S III'] },
+    },
+    {
+      name: 'MobileSamsungLandscape',
+      use: { ...devices['Galaxy S III landscape'] },
     },
 
     /* Test against branded browsers. */

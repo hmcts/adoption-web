@@ -1,6 +1,6 @@
 import { type Locator, type Page, expect } from '@playwright/test';
 
-import { BasePage } from './base-page';
+import BasePage from './basePage.page';
 export class Eligibility extends BasePage {
   readonly h1: Locator;
   readonly mainContent: Locator;

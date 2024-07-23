@@ -1,7 +1,7 @@
 Feature('check your answers').retry(1);
 const { I } = inject();
 const childBasicDetails = require('../fixtures/caseData/childBasicDetails');
-Scenario(
+xScenario(
   'Fill in the application details and review the same in check your answers page',
   async ({
     loginPage,

@@ -3,7 +3,6 @@ import moment from 'moment';
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import * as caseApi from '../../app/case/CaseApi';
-import { FormContent } from '../../app/form/Form';
 import * as draftStoreMock from '../../modules/draft-store/draft-store-service';
 import * as steps from '../../steps';
 import {
@@ -23,6 +22,7 @@ import {
   SYSTEM_USER_UPDATE,
   State,
 } from '../case/definition';
+import { FormContent } from '../form/Form';
 import { isFieldFilledIn, isPhoneNoValid } from '../form/validation';
 
 import { PostController } from './PostController';
@@ -251,8 +251,7 @@ describe('PostController', () => {
 
     const controller = new PostController(mockFormContent.fields);
 
-    const req = mockRequest({ body });
-    req.path = APPLYING_WITH_URL;
+    const req = mockRequest({ body, path: APPLYING_WITH_URL });
     req.session.user.isSystemUser = false;
     req.session.userCaseList = [{ id: 'MOCK_ID', state: State.Draft, case_data: {} as CaseData }];
     const res = mockResponse();
@@ -291,8 +290,7 @@ describe('PostController', () => {
 
     const controller = new PostController(mockFormContent.fields);
 
-    const req = mockRequest({ body });
-    req.path = APPLYING_WITH_URL;
+    const req = mockRequest({ body, path: APPLYING_WITH_URL });
     req.session.user.isSystemUser = false;
     req.session.userCase = null as unknown as CaseWithId;
     const res = mockResponse();
@@ -331,8 +329,7 @@ describe('PostController', () => {
 
     const controller = new PostController(mockFormContent.fields);
 
-    const req = mockRequest({ body });
-    req.path = APPLYING_WITH_URL;
+    const req = mockRequest({ body, path: APPLYING_WITH_URL });
     req.session.user.isSystemUser = false;
     req.session.userCase = false as unknown as CaseWithId;
     const res = mockResponse();
@@ -343,7 +340,7 @@ describe('PostController', () => {
     expect(caseApiMockFn.createCase).toHaveBeenCalled();
     expect(caseApiMockFn.checkOldPCQIDExists).not.toHaveBeenCalled();
   });
-  /* it('redirects back to the current page with a session error if there was an problem saving data', async () => {
+  /* it('redirects back to the current page with a session error if there was a problem saving data', async () => {
     beforeEach(() => {
       mockGetParsedBody.mockReturnValue({});
       mockGetErrors.mockReturnValue(['MOCK_ERROR']);
@@ -354,8 +351,8 @@ describe('PostController', () => {
       getCases: jest.fn(() => {
         return [];
       }),
-      
-      
+
+
     };
     (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
     const body = { MOCK_KEY: 'MOCK_VALUE' };
@@ -366,7 +363,7 @@ describe('PostController', () => {
           validator: isPhoneNoValid,
         },
       },
-    } as unknown as FormContent; 
+    } as unknown as FormContent;
     const controller = new PostController({});
     //const mockSave = jest.fn(done => done('An error while saving session'));
 
