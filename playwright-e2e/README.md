@@ -31,35 +31,19 @@ This repository contains automation tests that can be run locally. To set up the
 1. Create a .env file in the root directory of this project if it doesn't already exist.
 
 2. Add the following environment variables to the .env file: (ask a team mate for details/values can be found in Azure Keyvault)
-   - Can set ENVIRONMENT to use the default URLs for that environment (aat/demo/perftest/ithc) + skip manually defining the following 4
 
-3. Enable WA tests by setting WA_ENABLED to true (if testing on demo, or after WA release)
+   IDAM_SECRET=
+   IDAM_TOKEN_URL=
+   IDAM_TESTING_SUPPORT_USERS_URL=
+   IDAM_START_PAGE=
+   IDAM_CITIZEN_USER_PASSWORD=
 
-```
-# URLs
-ENVIRONMENT=aat
-FE_BASE_URL=https://example.com/login
-AAT_BASE_URL=https://example.com
-IDAM_API_URL=https://example.com
-CASE_SERVICE_URL=https://example.com
-
-
-# Enable WA Tests (disabled by default)
-WA_ENABLED=true
-
-# Ports
-SERVER_PORT=
-```
-
-Replace the placeholder URLs and passwords with the actual values relevant to your environment.
 
 ## User creation 
 
 Citizen user are created on the fly using IDAM API endpoints. You can use the [idamTestApiHelper.ts](./playwright-e2e/helpers/idamTestApiHelpers.ts) to create the user. 
 Remember you must be connected to the VPN to create users using the API endpoint.
 
-
-`FE_BASE_URL=` Can be used to toggle between PR environment and AAT or other environments.
 
 3. Save the .env file.
 
