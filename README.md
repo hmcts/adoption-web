@@ -139,6 +139,8 @@ $ yarn test:a11y
 
 Make sure all the paths in your application are covered by accessibility tests (see [a11y.ts](src/test/a11y/a11y.ts)).
 
+Accessibility tests are also covered in playwright e2e tests using AXE-CORE. 
+
 ### Security
 
 #### CSRF prevention
@@ -158,6 +160,8 @@ included in this template app. Your njk file would look like this:
 </form>
 ...
 ```
+##### Fortify Scan
+Fortify scan is run in the nighly pipeline. See [Fortify Scan Setup confluence page](https://tools.hmcts.net/confluence/display/DATS/1C+-+Fortify+Scan+Setup+in+nightly+pipelines) for more details on set up
 
 #### Helmet
 
@@ -194,10 +198,17 @@ e.g. the ones verifying the state of each service it depends on.
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 ## Testing:
+Test is moving to playwright framework but old tests still exist.
 
 E2E tests are configured to run in parallel in 5 headless browsers by default.
 
 To run e2e tests enter `yarn test:local` in the command line.
+
+## Testing E2E - Playwright
+
+We use Playwright with TypeScript. All the details can be found in the [E2E README.md](./playwright-e2e/README.md).
+
+To run playwright tests, use command: 'yarn playwright test`
 
 ### Optional configuration
 
@@ -236,3 +247,4 @@ ADOP_WEB_URL=https://adoption-web-pr-146.service.core-compute-preview.internal/ 
 src/main/app/controller contains default controllers. These will be used if no controllers are specified alongside content in the steps folders.
 If a step needs additional functionality, add a controller alongside the content.ts, which inherits the default controller. Get and post controllers
 need 'get' or 'post' in their filenames.
+
