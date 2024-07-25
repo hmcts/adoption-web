@@ -15,6 +15,8 @@ export default class Tasklist {
   readonly secondApplicantPersonalDetails: Locator;
   readonly secondApplicantContactDetails: Locator;
   readonly reviewAndSubmit: Locator;
+  readonly yourPersonalDetails: Locator;
+  readonly yourContactDetails: Locator;
 
   constructor(page: Page) {
     this.heading = page.getByRole('heading', { name: 'Apply to adopt a child placed in your care' });
@@ -26,6 +28,8 @@ export default class Tasklist {
     this.childsDetails = page.getByRole('link', { name: "Child's details" });
     this.adoptionAgency = page.getByRole('link', { name: 'Adoption agency and social' });
     this.familyCourtDetails = page.getByRole('link', { name: 'The family court details' });
+    this.yourPersonalDetails = page.getByRole('link', { name: 'Your personal details' });
+    this.yourContactDetails = page.getByRole('link', { name: 'Your contact details' });
     this.firstApplicantPersonalDetails = page.getByRole('link', { name: 'Your personal details  First' });
     this.firstApplicantContactDetails = page.getByRole('link', { name: 'Your contact details  First' });
     this.secondApplicantPersonalDetails = page.getByRole('link', { name: 'Your personal details  Second' });
