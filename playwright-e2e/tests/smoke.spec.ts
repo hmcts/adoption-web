@@ -34,7 +34,6 @@ test.describe('smoke test', () => {
   });
 
   const smokeTestTags = { tag: ['@smoke', '@citizen', '@accessibility'] };
-
   async function submitSingleApplicationJourney(page, 
     makeAxeBuilder, 
     testInfo, 
@@ -45,53 +44,36 @@ test.describe('smoke test', () => {
     telephone1) {
     const app = new App(page);
 
-    await app.applicantOneNameCreate();
-    await app.childNameCreate();
+    const appOneName = await app.applicantOneNameCreate();
+    const childNames = await app.childNameCreate();
     
     await app.signIn.signIn(userEmail, userPassword);
     await app.numberOfApplicants.numberOfApplication(applicantNumber);
     await app.basePage.clickSaveAndContinue();
-
-    // Date child moved in with you
-    await app.childMoveIn();
-    // Child's details before adoption
-    await app.fillChildDetails(prevChildFirstName, prevChildLastName, newChildFirstName, newChildLastName);
-    //fill social worker location
-    await app.fillSocialWorkerLocation1(socialWorkLocation);
-
-    // The family court details
-    await app.fillFamilyCourtLocation(familyCourtLocation);
     
-    // First applicant Your personal details
-    await app.tasklist.yourPersonalDetails.click();
-    await app.basePage.clickSaveAndContinue();
-    await app.addApplicants.otherNamesSelectNo();
-    await app.basePage.clickSaveAndContinue();
-    await app.addApplicants.dob();
-    await app.basePage.clickSaveAndContinue();
-    await app.addApplicants.addOccupationFirst();
-    await app.basePage.clickSaveAndContinue();
-    await app.extraSupport.noSupportNeeded();
-    await app.basePage.clickSaveAndContinue();
-
-    // First applicant Your contact details
+    await app.childMoveIn(); // Date child moved in with you
+   
+    
+    await app.fillChildDetails(childNames.prevChildFirstName, childNames.prevChildLastName, childNames.newChildFirstName, childNames.newChildLastName);// Child's details before adoption
+    
+    await app.fillSocialWorkerLocation1(socialWorkLocation);//fill social worker location
+    await app.fillFamilyCourtLocation(familyCourtLocation);// The family court details
+    
+    // Fill personal details
+    await app.tasklist.yourPersonalDetails.click(); 
+    await app.fillPersonalDetails();
     await app.tasklist.yourContactDetails.click();
-    await app.basePage.postcodeFindAddress(postcode1, '0');
-    await app.basePage.clickSaveAndContinue();
-    await app.contactDetails.fillContactDetails('test@local.com', telephone1);
-    await app.basePage.clickSaveAndContinue();
-    await app.contactDetails.englishLang.check();
-    await app.basePage.clickSaveAndContinue();
-
+    await app.fillContactDetails(postcode1, telephone1);
     
     // Submit
-    await app.tasklist.reviewAndSubmit.click();
+    await app.tasklist.reviewAndSubmit.click(); 
     await app.pcq.noPcqAnswers();
     await app.reviewSubmit.reviewAnswers(applicantNumber);
     await app.basePage.clickSaveAndContinue();
-    await app.reviewSubmit.statementOfTruthOne(appOneFullname)
-    await app.reviewSubmit.fillCardDetails(appOneFullname, userEmail, postcode1);
-    await runAccessibilityScan(makeAxeBuilder, testInfo);
+    await app.reviewSubmit.statementOfTruthOne(appOneName.appOneFullname)
+    await app.reviewSubmit.fillCardDetails(appOneName.appOneFullname, userEmail, postcode1);
+    
+    await runAccessibilityScan(makeAxeBuilder, testInfo);//Axe-core accessibility scan using helper function
   }
 
   test(

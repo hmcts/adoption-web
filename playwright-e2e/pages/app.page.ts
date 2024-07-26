@@ -54,10 +54,13 @@ export default class App {
     await this.basePage.clickSaveAndContinue();
   }
 
-  async applicantOneNameCreate(): Promise<void>{
+  async applicantOneNameCreate(): Promise<{appOneFirstName: string, appOneLastName: string, appOneFullname: string}>{
     const appOneFirstName = faker.person.firstName();
     const appOneLastName = faker.person.lastName();
     const appOneFullname = appOneFirstName + ' ' + appOneLastName;
+
+    return { appOneFirstName, appOneLastName, appOneFullname };
+
   }
 
   async childNameCreate(): Promise<{prevChildFirstName: string, prevChildLastName: string, newChildFirstName: string, newChildLastName: string}> {
@@ -65,12 +68,10 @@ export default class App {
     const prevChildLastName = faker.person.lastName();
     const newChildFirstName = faker.person.firstName();
     const newChildLastName = faker.person.lastName();
-
     return { prevChildFirstName, prevChildLastName, newChildFirstName, newChildLastName };
   }
 
-  async fillChildDetails(prevChildFirstName, prevChildLastName, newChildFirstName, newChildLastName): Promise<void>{
-    
+  async fillChildDetails(prevChildFirstName:string, prevChildLastName:string, newChildFirstName:string, newChildLastName:string): Promise<void>{
     await this.tasklist.childsDetails.click();
     await this.basePage.fillFirstLastName(prevChildFirstName, prevChildLastName);
     await this.basePage.clickSaveAndContinue();
@@ -82,13 +83,12 @@ export default class App {
     await this.basePage.clickSaveAndContinue();
   }
 
-
   async fillSocialWorkerLocation1(socialWorkLocation1){
     await this.tasklist.adoptionAgency.click();
     await this.adoptionAgency.childsChildSocialWorkerDetails(socialWorkLocation1);
     await this.basePage.saveAndContinue.click();
     await this.adoptionAgency.childsYourSocialWorkerDetails(socialWorkLocation1);
-    await this..basePage.saveAndContinue.click();
+    await this.basePage.saveAndContinue.click();
     await this.adoptionAgency.anotherAdoptionAgencyNo();
     await this.basePage.saveAndContinue.click();
   }
@@ -100,4 +100,25 @@ export default class App {
     await this.familyCourt.sameCourtYes();
     await this.basePage.clickSaveAndContinue();
 }
+  // function used to fill applicant details
+  async fillPersonalDetails(){
+    await this.basePage.clickSaveAndContinue();
+    await this.addApplicants.otherNamesSelectNo();
+    await this.basePage.clickSaveAndContinue();
+    await this.addApplicants.dob();
+    await this.basePage.clickSaveAndContinue();
+    await this.addApplicants.addOccupationFirst();
+    await this.basePage.clickSaveAndContinue();
+    await this.extraSupport.noSupportNeeded();
+    await this.basePage.clickSaveAndContinue();
+  }
+
+  async fillContactDetails(postcode1, telephone1){
+    await this.basePage.postcodeFindAddress(postcode1, '0');
+    await this.basePage.clickSaveAndContinue();
+    await this.contactDetails.fillContactDetails('test@local.com', telephone1);
+    await this.basePage.clickSaveAndContinue();
+    await this.contactDetails.englishLang.check();
+    await this.basePage.clickSaveAndContinue();
+  } 
 }
