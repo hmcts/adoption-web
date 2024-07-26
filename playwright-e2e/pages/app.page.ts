@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import { type Page } from '@playwright/test';
 
 import AdoptionAgency from './adoptionAgency.page';
@@ -13,7 +14,6 @@ import Pcq from './pcq.page';
 import ReviewSubmit from './reviewSubmit.page';
 import SignIn from './signInPage.page';
 import Tasklist from './taskList.page';
-import { faker } from '@faker-js/faker';
 
 export default class App {
   readonly page: Page;
@@ -48,22 +48,26 @@ export default class App {
     this.pcq = new Pcq(page);
   }
 
-  async childMoveIn(): Promise<void>{
+  async childMoveIn(): Promise<void> {
     await this.tasklist.dateChildMovedIn.click();
     await this.dateChildMoved.dateChildMovedInToday();
     await this.basePage.clickSaveAndContinue();
   }
 
-  async applicantOneNameCreate(): Promise<{appOneFirstName: string, appOneLastName: string, appOneFullname: string}>{
+  async applicantOneNameCreate(): Promise<{ appOneFirstName: string; appOneLastName: string; appOneFullname: string }> {
     const appOneFirstName = faker.person.firstName();
     const appOneLastName = faker.person.lastName();
     const appOneFullname = appOneFirstName + ' ' + appOneLastName;
 
     return { appOneFirstName, appOneLastName, appOneFullname };
-
   }
 
-  async childNameCreate(): Promise<{prevChildFirstName: string, prevChildLastName: string, newChildFirstName: string, newChildLastName: string}> {
+  async childNameCreate(): Promise<{
+    prevChildFirstName: string;
+    prevChildLastName: string;
+    newChildFirstName: string;
+    newChildLastName: string;
+  }> {
     const prevChildFirstName = faker.person.firstName();
     const prevChildLastName = faker.person.lastName();
     const newChildFirstName = faker.person.firstName();
@@ -71,7 +75,12 @@ export default class App {
     return { prevChildFirstName, prevChildLastName, newChildFirstName, newChildLastName };
   }
 
-  async fillChildDetails(prevChildFirstName:string, prevChildLastName:string, newChildFirstName:string, newChildLastName:string): Promise<void>{
+  async fillChildDetails(
+    prevChildFirstName: string,
+    prevChildLastName: string,
+    newChildFirstName: string,
+    newChildLastName: string
+  ): Promise<void> {
     await this.tasklist.childsDetails.click();
     await this.basePage.fillFirstLastName(prevChildFirstName, prevChildLastName);
     await this.basePage.clickSaveAndContinue();
@@ -83,7 +92,7 @@ export default class App {
     await this.basePage.clickSaveAndContinue();
   }
 
-  async fillSocialWorkerLocation1(socialWorkLocation1){
+  async fillSocialWorkerLocation1(socialWorkLocation1: string): Promise<void> {
     await this.tasklist.adoptionAgency.click();
     await this.adoptionAgency.childsChildSocialWorkerDetails(socialWorkLocation1);
     await this.basePage.saveAndContinue.click();
@@ -93,15 +102,15 @@ export default class App {
     await this.basePage.saveAndContinue.click();
   }
 
-  async fillFamilyCourtLocation(familyCourtLocation){
+  async fillFamilyCourtLocation(familyCourtLocation: string): Promise<void> {
     await this.tasklist.familyCourtDetails.click();
     await this.basePage.selectLocation(familyCourtLocation);
     await this.basePage.clickSaveAndContinue();
     await this.familyCourt.sameCourtYes();
     await this.basePage.clickSaveAndContinue();
-}
+  }
   // function used to fill applicant details
-  async fillPersonalDetails(){
+  async fillPersonalDetails(): Promise<void> {
     await this.basePage.clickSaveAndContinue();
     await this.addApplicants.otherNamesSelectNo();
     await this.basePage.clickSaveAndContinue();
@@ -113,12 +122,12 @@ export default class App {
     await this.basePage.clickSaveAndContinue();
   }
 
-  async fillContactDetails(postcode1, telephone1){
+  async fillContactDetails(postcode1: string, telephone1: string): Promise<void> {
     await this.basePage.postcodeFindAddress(postcode1, '0');
     await this.basePage.clickSaveAndContinue();
     await this.contactDetails.fillContactDetails('test@local.com', telephone1);
     await this.basePage.clickSaveAndContinue();
     await this.contactDetails.englishLang.check();
     await this.basePage.clickSaveAndContinue();
-  } 
+  }
 }

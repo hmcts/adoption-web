@@ -31,7 +31,7 @@ export default class ReviewSubmit extends BasePage {
     super(page);
     this.h1 = page.getByRole('heading', { name: 'Review your answers' });
     this.applyWithSpouseText = page.getByText("I'm applying with my spouse");
-    this.applyOnOwn = page.getByText('I\'m applying on my own');
+    this.applyOnOwn = page.getByText("I'm applying on my own");
     this.firstApplicantTruthStatement = page.getByLabel('I, the first applicant,');
     this.secondApplicantTruthStatment = page.getByLabel('I am authorised by the second');
     this.appOneName = page.getByLabel('Enter your full name');
@@ -53,16 +53,15 @@ export default class ReviewSubmit extends BasePage {
     this.confirmPaymentButton = page.getByRole('button', { name: 'Confirm payment' });
   }
 
-  async reviewAnswers(applicantNumber): Promise<void> {
+  async reviewAnswers(applicantNumber: string): Promise<void> {
     await expect(this.h1).toBeVisible();
-    if (applicantNumber == 'alone'){
+    if (applicantNumber === 'alone') {
       await expect(this.applyOnOwn).toBeVisible();
-    }
-    else if (applicantNumber = 'spouseOrCivilPartner'){
+    } else if (applicantNumber === 'spouseOrCivilPartner') {
       await expect(this.applyWithSpouseText).toBeVisible();
     }
   }
-  async statementOfTruthOne(applicantOne: string): Promise<void>{
+  async statementOfTruthOne(applicantOne: string): Promise<void> {
     await this.firstApplicantTruthStatement.check();
     await this.appOneName.fill(applicantOne);
     await this.confirmPay.click();
@@ -93,7 +92,7 @@ export default class ReviewSubmit extends BasePage {
     await this.securityCode.fill('123');
     await this.addressLineOne.fill('55 HART READE');
     await this.town.fill('POLEGATE');
-    await this.postcode.fill('BN26 6AL');
+    await this.postcode.fill(postcode);
     await this.appEmail.fill(email);
     await this.continueButton.click();
     await this.confirmPaymentButton.click();
