@@ -18,7 +18,6 @@ export default class DateChildMoved {
   }
 
   async dateChildMovedInToday(): Promise<void> {
-    
     const today = new Date();
     const dayMoveIn = String(today.getDate());
     const monthMoveIn = String(today.getMonth() + 1); //getMonth() uses zero-based index so + 1 is needed to convert it to correct month for inputting in test
