@@ -19,7 +19,13 @@ export default class NumberOfApplicants {
     );
   }
 
-  async applyWithSpouseOrCivil(): Promise<void> {
-    await this.withSpouseCivilRadio.click();
+  async numberOfApplication(option: string): Promise<void> {
+    if (option === 'alone') {
+      await this.applyOnOwnRadio.click();
+    } else if (option === 'spouseOrCivilPartner') {
+      await this.withSpouseCivilRadio.click();
+    } else if (option === 'notSpouseOrCivilPartner') {
+      await this.withNotSpouseCivilRadio.click();
+    }
   }
 }

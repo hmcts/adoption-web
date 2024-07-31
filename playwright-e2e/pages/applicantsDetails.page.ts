@@ -30,9 +30,9 @@ export default class AddApplicants {
 
   async dob(): Promise<void> {
     const today = new Date();
-    const dayString = `${today.getDate()}`;
-    const monthString = `${today.getMonth()}`;
-    const yearString = `${today.getFullYear() - 21}`;
+    const dayString = String(today.getDate());
+    const monthString = String(today.getMonth() + 1); //getMonth() uses zero-based index so + 1 is needed to convert it to correct month for inputting in test
+    const yearString = String(today.getFullYear() - 21);
 
     await this.dayField.fill(dayString);
     await this.monthField.fill(monthString);
