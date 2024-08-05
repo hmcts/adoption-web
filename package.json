@@ -178,5 +178,5 @@
     "semver": ">=7.5.2",
     "ws": "^8.17.1"
   },
-  "packageManager": "yarn@3.6.4"
+  "packageManager": "yarn@3.8.4"
 }
