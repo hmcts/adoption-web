@@ -178,7 +178,8 @@
     "semver": ">=7.5.2",
     "ws": "^8.17.1",
     "codeceptjs/axios": "1.7.4",
-    "express": "^4.21.0"
+    "express": "^4.21.0",
+    "serve-static": "^1.16.0"
   },
   "packageManager": "yarn@3.6.4"
 }
