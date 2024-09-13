@@ -45,7 +45,15 @@ export class DocumentManagementClient {
     return this.client.delete(url, { headers: { 'user-id': this.user.id } });
   }
 
-  async get({ url }: { url: string }): Promise<AxiosResponse> {
+  async get({ documentFileId }: { documentFileId: string }): Promise<AxiosResponse> {
+    return this.client.get(`/documentToGet/${documentFileId}/binary`, {
+      responseType: 'arraybuffer',
+      headers: { 'user-id': this.user.id, 'user-roles': UserRole.ADOPTION_GENERIC },
+    });
+  }
+
+  //TODO remove
+  async getFromDocStore({ url }: { url: string }): Promise<AxiosResponse> {
     return this.client.get(url, {
       responseType: 'arraybuffer',
       headers: { 'user-id': this.user.id, 'user-roles': UserRole.ADOPTION_GENERIC },

@@ -165,12 +165,14 @@ export class DocumentManagerController {
         .map(item => item.value)
         .filter(element => element?.documentType === DocumentType.APPLICATION_SUMMARY + languagePreference);
       if (applicationSummaryDocuments !== null && applicationSummaryDocuments.length > 0) {
-        documentToGet = applicationSummaryDocuments[0]?.documentLink?.document_binary_url;
+        documentToGet = applicationSummaryDocuments[0]?.documentFileId;
+        //documentToGet = applicationSummaryDocuments[0]?.documentLink?.document_binary_url;
       }
     }
 
     const documentManagementClient = this.getDocumentManagementClient(req.session.user);
-    const generatedDocument = await documentManagementClient.get({ url: documentToGet });
+    const generatedDocument = await documentManagementClient.get({ documentFileId: documentToGet });
+    //const generatedDocument = await documentManagementClient.get({ url: documentToGet });
 
     req.session.save(err => {
       if (err) {
