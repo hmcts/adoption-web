@@ -32,6 +32,7 @@ export class DocumentManagerController {
       value: {
         documentComment: documentInput ? documentInput.documentComment : 'Uploaded by applicant',
         documentFileName: file.originalDocumentName,
+        //documentFileId: file._links.self.href.substring(file._links.self.href.length()-35), // <--- TODO
         documentLink: {
           document_url: file._links.self.href,
           document_filename: file.originalDocumentName,
@@ -104,10 +105,13 @@ export class DocumentManagerController {
 
     const documentIndexToDelete = parseInt(req.params.index, 10);
     const documentToDelete = documentsUploaded[documentIndexToDelete];
-    if (!documentToDelete?.value?.documentLink?.document_url) {
+    if (!documentToDelete?.value?.documentLink?.document_url) {  // <--- ?
+    //if (!documentToDelete?.value?.documentFileId) {
       return res.redirect(documentInput ? documentInput.documentRedirectUrl : UPLOAD_YOUR_DOCUMENTS);
     }
     const documentUrlToDelete = documentToDelete.value.documentLink.document_url;
+    const documentFileIdToDelete = documentUrlToDelete.substring(documentUrlToDelete.lastIndexOf('/') + 1);
+    //TODO: check documentFileIdToDelete?
 
     documentsUploaded[documentIndexToDelete].value = null;
 
@@ -118,7 +122,8 @@ export class DocumentManagerController {
     );
 
     const documentManagementClient = this.getDocumentManagementClient(req.session.user);
-    await documentManagementClient.delete({ url: documentUrlToDelete });
+    await documentManagementClient.delete({ documentFileId: documentFileIdToDelete });
+    //await documentManagementClient.delete({ url: documentUrlToDelete });
 
     req.session.save(err => {
       if (err) {

@@ -41,20 +41,14 @@ export class DocumentManagementClient {
     return response.data?.documents || [];
   }
 
-  async delete({ url }: { url: string }): Promise<AxiosResponse> {
-    return this.client.delete(url, { headers: { 'user-id': this.user.id } });
-  }
-
-  async get({ documentFileId }: { documentFileId: string }): Promise<AxiosResponse> {
-    return this.client.get(`/documentToGet/${documentFileId}/binary`, {
-      responseType: 'arraybuffer',
-      headers: { 'user-id': this.user.id, 'user-roles': UserRole.ADOPTION_GENERIC },
+  async delete({ documentFileId }: { documentFileId: string }): Promise<AxiosResponse> {
+    return this.client.delete(`/cases/documents/${documentFileId}?permanent=true`, {
+      headers: { 'user-id': this.user.id }
     });
   }
 
-  //TODO remove
-  async getFromDocStore({ url }: { url: string }): Promise<AxiosResponse> {
-    return this.client.get(url, {
+  async get({ documentFileId }: { documentFileId: string }): Promise<AxiosResponse> {
+    return this.client.get(`/cases/documents/${documentFileId}/binary`, {
       responseType: 'arraybuffer',
       headers: { 'user-id': this.user.id, 'user-roles': UserRole.ADOPTION_GENERIC },
     });
