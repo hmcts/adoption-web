@@ -53,33 +53,3 @@ async function changePageLanguage(
   await languageLinkLocator.click();
   await page.waitForLoadState(state);
 }
-
-// test.describe('Start application details e2e journey in English', () => {
-//   test.beforeEach(async ({ browser }) => {
-//     const context = await browser.newContext({
-//       locale: 'en',
-//     });
-
-//     const page = await context.newPage();
-
-//     await page.goto(urlConfig.citizenStartUrl);
-//   });
-
-//   test('Start up journey url is equal to the initial url', async ({ page }) => {
-//     await expect(page).toHaveURL(urlConfig.citizenStartUrl);
-//   });
-
-//   test('Start up journey default langauge is in English', async ({ browser }) => {
-//     const context = await browser.newContext({
-//       locale: 'en',
-//     });
-
-//     const page = await context.newPage();
-
-//     await page.goto(urlConfig.citizenStartUrl);
-
-//     const htmlLang = await page.evaluate(() => document.documentElement.lang);
-
-//     expect(htmlLang).toBe('en');
-//   });
-// });
