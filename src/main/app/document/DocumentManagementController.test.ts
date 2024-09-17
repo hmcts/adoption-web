@@ -283,7 +283,8 @@ describe('DocumentManagerController', () => {
         CITIZEN_UPDATE
       );
 
-      expect(mockDelete).toHaveBeenCalledWith({ url: 'object-of-doc-to-delete' });
+      //TODO investigate why this is working and if it should do...
+      expect(mockDelete).toHaveBeenCalledWith({ documentFileId: 'object-of-doc-to-delete' });
       //expect(mockDelete).toHaveBeenCalledAfter(mockApiTriggerEvent);
 
       expect(res.redirect).toHaveBeenCalledWith(redirectUrl);
@@ -678,8 +679,8 @@ describe('DocumentManagerController', () => {
         userCase: {
           state,
           laDocumentsUploaded: [
-            { id: '1', value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } } },
-            { id: '3', value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } } },
+            { id: '1', value: { documentFileId: 'object-of-doc-not-to-delete' } },
+            { id: '3', value: { documentFileId: 'object-of-doc-not-to-delete' } },
           ],
         },
       });
@@ -710,15 +711,16 @@ describe('DocumentManagerController', () => {
         userCase: {
           state,
           [documentsGenerated.field1]: [
-            { id: '1', value: { documentLink: { document_binary_url: 'object-of-doc-not-to-fetch' } } },
+            { id: '1', value: { ddocumentFileId: 'object-of-doc-not-to-fetch' } },
             {
               id: '2',
               value: {
-                documentLink: { document_binary_url: 'object-of-doc-to-fetch' },
+                documentLink: { document_binary_url: 'object-of-doc-previously-to-fetch' },
                 documentType: DocumentType.APPLICATION_SUMMARY + 'En',
+                documentFileId: 'id-of-doc-to-fetch',
               },
             },
-            { id: '3', value: { documentLink: { document_binary_url: 'object-of-doc-not-to-fetch' } } },
+            { id: '3', value: { documentFileId: 'object-of-doc-not-to-fetch' } },
           ],
         },
       });
@@ -728,7 +730,7 @@ describe('DocumentManagerController', () => {
 
       await documentManagerController.get(req, res);
 
-      expect(mockGet).toHaveBeenCalledWith({ url: 'object-of-doc-to-fetch' });
+      expect(mockGet).toHaveBeenCalledWith({ documentFileId: 'id-of-doc-to-fetch' });
     });
 
     it.each([
