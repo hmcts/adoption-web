@@ -32,7 +32,6 @@ export class DocumentManagerController {
       value: {
         documentComment: documentInput ? documentInput.documentComment : 'Uploaded by applicant',
         documentFileName: file.originalDocumentName,
-        //documentFileId: file._links.self.href.substring(file._links.self.href.length()-35), // <--- TODO
         documentLink: {
           document_url: file._links.self.href,
           document_filename: file.originalDocumentName,
