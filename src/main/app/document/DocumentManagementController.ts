@@ -105,13 +105,11 @@ export class DocumentManagerController {
 
     const documentIndexToDelete = parseInt(req.params.index, 10);
     const documentToDelete = documentsUploaded[documentIndexToDelete];
-    if (!documentToDelete?.value?.documentLink?.document_url) {  // <--- ?
-    //if (!documentToDelete?.value?.documentFileId) {
+    if (!documentToDelete?.value?.documentLink?.document_url) {
       return res.redirect(documentInput ? documentInput.documentRedirectUrl : UPLOAD_YOUR_DOCUMENTS);
     }
     const documentUrlToDelete = documentToDelete.value.documentLink.document_url;
     const documentFileIdToDelete = documentUrlToDelete.substring(documentUrlToDelete.lastIndexOf('/') + 1);
-    //TODO: check documentFileIdToDelete?
 
     documentsUploaded[documentIndexToDelete].value = null;
 
@@ -123,7 +121,6 @@ export class DocumentManagerController {
 
     const documentManagementClient = this.getDocumentManagementClient(req.session.user);
     await documentManagementClient.delete({ documentFileId: documentFileIdToDelete });
-    //await documentManagementClient.delete({ url: documentUrlToDelete });
 
     req.session.save(err => {
       if (err) {
@@ -171,13 +168,11 @@ export class DocumentManagerController {
         .filter(element => element?.documentType === DocumentType.APPLICATION_SUMMARY + languagePreference);
       if (applicationSummaryDocuments !== null && applicationSummaryDocuments.length > 0) {
         documentToGet = applicationSummaryDocuments[0]?.documentFileId;
-        //documentToGet = applicationSummaryDocuments[0]?.documentLink?.document_binary_url;
       }
     }
 
     const documentManagementClient = this.getDocumentManagementClient(req.session.user);
     const generatedDocument = await documentManagementClient.get({ documentFileId: documentToGet });
-    //const generatedDocument = await documentManagementClient.get({ url: documentToGet });
 
     req.session.save(err => {
       if (err) {
