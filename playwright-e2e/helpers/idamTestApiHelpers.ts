@@ -26,7 +26,7 @@ export async function getAccessToken(): Promise<string | null> {
       url: process.env.IDAM_TOKEN_URL as string,
     };
 
-    const response = await axios(options);
+    const response = await axios.post(options.url!, options.data, options);
     return response.data.access_token;
   } catch (error) {
     console.error('Error fetching access token:', error);
@@ -68,7 +68,7 @@ export async function createCitizenUser(token: string): Promise<{ email: string;
   };
 
   try {
-    const response = await axios(userCreationOptions);
+    const response = await axios.post(userCreationOptions.url!, userCreationOptions.data, userCreationOptions);
     console.log('User created:', response.data);
     return { email, password, id: response.data.id };
   } catch (error) {
