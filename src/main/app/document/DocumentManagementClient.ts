@@ -43,7 +43,7 @@ export class DocumentManagementClient {
 
   async delete({ documentFileId }: { documentFileId: string }): Promise<AxiosResponse> {
     return this.client.delete(`/cases/documents/${documentFileId}?permanent=true`, {
-      headers: { 'user-id': this.user.id }
+      headers: { 'user-id': this.user.id },
     });
   }
 
