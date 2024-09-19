@@ -35,6 +35,14 @@ test.describe('e2e submit journeys', () => {
 
   const e2eTestTags = { tag: ['@e2e', '@citizen', '@accessibility'] };
 
+  // test(
+  //   'submitting application where spouse is not a partner',
+  //   e2eTestTags,
+  //   async({ page, makeAxeBuilder}, testInfo) => {
+  //     const app = new App(page);
+  //   }
+  // );
+
   test(
     'submitting application with spouse or civil partner',
     e2eTestTags,
