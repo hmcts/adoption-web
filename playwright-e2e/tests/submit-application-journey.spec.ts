@@ -35,13 +35,24 @@ test.describe('e2e submit journeys', () => {
 
   const e2eTestTags = { tag: ['@e2e', '@citizen', '@accessibility'] };
 
-  // test(
-  //   'submitting application where spouse is not a partner',
-  //   e2eTestTags,
-  //   async({ page, makeAxeBuilder}, testInfo) => {
-  //     const app = new App(page);
-  //   }
-  // );
+  test(
+    'submitting application where spouse is not a partner',
+    e2eTestTags,
+    async({ page, makeAxeBuilder}, testInfo) => {
+      const app = new App(page);
+      const appOneFirstName = faker.person.firstName();
+      const appOneLastName = faker.person.lastName();
+      const appTwoFirstName = faker.person.firstName();
+      const appTwoLastName = faker.person.lastName();
+      const appOneFullname = appOneFirstName + ' ' + appOneLastName;
+      const appTwoFullname = appTwoFirstName + ' ' + appTwoFirstName;
+      const childFirstName = faker.person.firstName();
+      const childLastName = faker.person.lastName();
+      await app.signIn.signIn(userEmail, userPassword);
+      await app.numberOfApplicants.numberOfApplication('notSpouseOrCivilPartner');
+      await app.numberOfApplicants.fillNotSpouseOrCivilPartnerDetails('Text to be randomly generated');
+    }
+  );
 
   test(
     'submitting application with spouse or civil partner',
