@@ -254,4 +254,4 @@ export const LA_PORTAL_CHECK_YOUR_ANSWERS: PageLink = `${LA_PORTAL}/check-your-a
 export const LA_PORTAL_STATEMENT_OF_TRUTH: PageLink = `${LA_PORTAL}/statement-of-truth`;
 export const LA_PORTAL_CONFIRMATION_PAGE: PageLink = `${LA_PORTAL}/confirmation`;
 
-export const TEST_REQUEST: PageLink = `/request`; // todo - remove this and update generic tests to use a valid URL
+export const TEST_REQUEST: PageLink = '/request'; // todo - remove this and update generic tests to use a valid URL
