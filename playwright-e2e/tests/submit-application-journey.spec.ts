@@ -49,7 +49,7 @@ test.describe('e2e submit journeys', () => {
       const childFirstName = faker.person.firstName();
       const childLastName = faker.person.lastName();
       await app.signIn.signIn(userEmail, userPassword);
-      await app.numberOfApplicants.applyWithSpouseOrCivil();
+      await app.numberOfApplicants.numberOfApplication('spouseOrCivilPartner');
       await app.basePage.clickSaveAndContinue();
 
       // Date child moved in with you
@@ -129,10 +129,10 @@ test.describe('e2e submit journeys', () => {
       //submit
       await app.tasklist.reviewAndSubmit.click();
       await app.pcq.noPcqAnswers();
-      await app.reviewSubmit.reviewAnswers();
+      await app.reviewSubmit.reviewAnswers('spouseOrCivilPartner');
       await app.basePage.clickSaveAndContinue();
-      await app.reviewSubmit.statementOfTruth(appOneFullname, appTwoFullname);
-      await app.reviewSubmit.fillCardDetails(appOneFullname, 'abcdefg@domain.com');
+      await app.reviewSubmit.statementOfTruthTwo(appOneFullname, appTwoFullname);
+      await app.reviewSubmit.fillCardDetails(appOneFullname, 'abcdefg@domain.com', 'BN26 6AL');
       await runAccessibilityScan(makeAxeBuilder, testInfo);
     }
   );

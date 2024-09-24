@@ -62,9 +62,9 @@ describe('DocumentManagementClient', () => {
       accessToken: 'userAccessToken',
     } as unknown as UserDetails);
 
-    const actual = await client.delete({ url: 'http://localhost/doc' });
+    const actual = await client.delete({ documentFileId: 'docId' });
 
-    expect(mockDelete.mock.calls[0][0]).toEqual('http://localhost/doc');
+    expect(mockDelete.mock.calls[0][0]).toEqual('/cases/documents/docId?permanent=true');
     expect(mockDelete.mock.calls[0][1].headers['user-id']).toEqual('userId');
     expect(actual).toEqual({ data: 'MOCKED-OK' });
   });

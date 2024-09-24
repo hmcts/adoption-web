@@ -21,8 +21,8 @@ export default class ChildDetails {
 
   async childsDob(): Promise<void> {
     const today = new Date();
-    const day = String(today.getDate()).padStart(2, '0');
-    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate());
+    const month = String(today.getMonth() + 1); //getMonth() uses zero-based index so + 1 is needed to convert it to correct month for inputting in test
     const year = String(today.getFullYear() - 5);
 
     await this.day.fill(day);
