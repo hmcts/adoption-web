@@ -244,9 +244,9 @@ describe('DocumentManagerController', () => {
           id: '1234',
           state,
           [uploadFields.field1]: [
-            { id: '1', value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } } },
-            { id: '2', value: { documentLink: { document_url: 'object-of-doc-to-delete' } } },
-            { id: '3', value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } } },
+            { id: '1', value: { documentLink: { document_url: 'url/doc-not-to-delete' } } },
+            { id: '2', value: { documentLink: { document_url: 'u/r/l/doc-to-delete' } } },
+            { id: '3', value: { documentLink: { document_url: 'u/r/l/doc-not-to-delete' } } },
           ],
         },
         appLocals: {
@@ -268,7 +268,7 @@ describe('DocumentManagerController', () => {
           [uploadFields.field1]: [
             {
               id: '1',
-              value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } },
+              value: { documentLink: { document_url: 'url/doc-not-to-delete' } },
             },
             {
               id: '2',
@@ -276,14 +276,14 @@ describe('DocumentManagerController', () => {
             },
             {
               id: '3',
-              value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } },
+              value: { documentLink: { document_url: 'u/r/l/doc-not-to-delete' } },
             },
           ],
         },
         CITIZEN_UPDATE
       );
 
-      expect(mockDelete).toHaveBeenCalledWith({ url: 'object-of-doc-to-delete' });
+      expect(mockDelete).toHaveBeenCalledWith({ documentFileId: 'doc-to-delete' });
       //expect(mockDelete).toHaveBeenCalledAfter(mockApiTriggerEvent);
 
       expect(res.redirect).toHaveBeenCalledWith(redirectUrl);
@@ -308,9 +308,9 @@ describe('DocumentManagerController', () => {
             id: '1234',
             state,
             [uploadFields.field1]: [
-              { id: '1', value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } } },
-              { id: '2', value: { documentLink: { document_url: 'object-of-doc-to-delete' } } },
-              { id: '3', value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } } },
+              { id: '1', value: { documentLink: { document_url: 'url/doc-not-to-delete' } } },
+              { id: '2', value: { documentLink: { document_url: 'url/doc-not-to-delete' } } },
+              { id: '3', value: { documentLink: { document_url: 'url/doc-not-to-delete' } } },
             ],
           },
           appLocals: {
@@ -340,8 +340,8 @@ describe('DocumentManagerController', () => {
         userCase: {
           state,
           applicant1DocumentsUploaded: [
-            { id: '1', value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } } },
-            { id: '3', value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } } },
+            { id: '1', value: { documentLink: { document_url: 'url/object-of-doc-not-to-delete' } } },
+            { id: '3', value: { documentLink: { document_url: 'url/object-of-doc-not-to-delete' } } },
           ],
         },
       });
@@ -362,8 +362,8 @@ describe('DocumentManagerController', () => {
         userCase: {
           state: State.Submitted,
           applicant1DocumentsUploaded: [
-            { id: '1', value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } } },
-            { id: '3', value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } } },
+            { id: '1', value: { documentLink: { document_url: 'url/object-of-doc-not-to-delete' } } },
+            { id: '3', value: { documentLink: { document_url: 'url/object-of-doc-not-to-delete' } } },
           ],
         },
       });
@@ -583,9 +583,9 @@ describe('DocumentManagerController', () => {
         userCase: {
           state,
           [uploadFields.field1]: [
-            { id: '1', value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } } },
-            { id: '2', value: { documentLink: { document_url: 'object-of-doc-to-delete' } } },
-            { id: '3', value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } } },
+            { id: '1', value: { documentLink: { document_url: 'url/doc-not-to-delete' } } },
+            { id: '2', value: { documentLink: { document_url: 'u/r/l/doc-to-delete' } } },
+            { id: '3', value: { documentLink: { document_url: 'url/doc-not-to-delete' } } },
           ],
         },
         appLocals: {
@@ -607,7 +607,7 @@ describe('DocumentManagerController', () => {
           [uploadFields.field1]: [
             {
               id: '1',
-              value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } },
+              value: { documentLink: { document_url: 'url/doc-not-to-delete' } },
             },
             {
               id: '2',
@@ -615,14 +615,14 @@ describe('DocumentManagerController', () => {
             },
             {
               id: '3',
-              value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } },
+              value: { documentLink: { document_url: 'url/doc-not-to-delete' } },
             },
           ],
         },
         CITIZEN_UPDATE
       );
 
-      expect(mockDelete).toHaveBeenCalledWith({ url: 'object-of-doc-to-delete' });
+      expect(mockDelete).toHaveBeenCalledWith({ documentFileId: 'doc-to-delete' });
       //expect(mockDelete).toHaveBeenCalledAfter(mockApiTriggerEvent);
 
       expect(res.redirect).toHaveBeenCalledWith(redirectUrl);
@@ -646,9 +646,9 @@ describe('DocumentManagerController', () => {
           userCase: {
             state,
             [uploadFields.field1]: [
-              { id: '1', value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } } },
-              { id: '2', value: { documentLink: { document_url: 'object-of-doc-to-delete' } } },
-              { id: '3', value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } } },
+              { id: '1', value: { documentLink: { document_url: 'url/doc-not-to-delete' } } },
+              { id: '2', value: { documentLink: { document_url: 'url/doc-to-delete' } } },
+              { id: '3', value: { documentLink: { document_url: 'url/doc-not-to-delete' } } },
             ],
           },
           appLocals: {
@@ -678,8 +678,8 @@ describe('DocumentManagerController', () => {
         userCase: {
           state,
           laDocumentsUploaded: [
-            { id: '1', value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } } },
-            { id: '3', value: { documentLink: { document_url: 'object-of-doc-not-to-delete' } } },
+            { id: '1', value: { documentFileId: 'url/doc-not-to-delete' } },
+            { id: '3', value: { documentFileId: 'url/doc-not-to-delete' } },
           ],
         },
       });
@@ -710,15 +710,16 @@ describe('DocumentManagerController', () => {
         userCase: {
           state,
           [documentsGenerated.field1]: [
-            { id: '1', value: { documentLink: { document_binary_url: 'object-of-doc-not-to-fetch' } } },
+            { id: '1', value: { ddocumentFileId: 'url/doc-not-to-fetch' } },
             {
               id: '2',
               value: {
-                documentLink: { document_binary_url: 'object-of-doc-to-fetch' },
+                documentLink: { document_binary_url: 'url/doc-to-fetch' },
                 documentType: DocumentType.APPLICATION_SUMMARY + 'En',
+                documentFileId: 'id-of-doc-to-fetch',
               },
             },
-            { id: '3', value: { documentLink: { document_binary_url: 'object-of-doc-not-to-fetch' } } },
+            { id: '3', value: { documentFileId: 'url/doc-not-to-fetch' } },
           ],
         },
       });
@@ -728,7 +729,7 @@ describe('DocumentManagerController', () => {
 
       await documentManagerController.get(req, res);
 
-      expect(mockGet).toHaveBeenCalledWith({ url: 'object-of-doc-to-fetch' });
+      expect(mockGet).toHaveBeenCalledWith({ documentFileId: 'id-of-doc-to-fetch' });
     });
 
     it.each([
@@ -744,8 +745,8 @@ describe('DocumentManagerController', () => {
         userCase: {
           state: State.Submitted,
           applicant1DocumentsUploaded: [
-            { id: '1', value: { documentLink: { document_url: 'object-of-doc-not-to-fetch' } } },
-            { id: '3', value: { documentLink: { document_url: 'object-of-doc-not-to-fetch' } } },
+            { id: '1', value: { documentLink: { document_url: 'url/doc-not-to-fetch' } } },
+            { id: '3', value: { documentLink: { document_url: 'url/doc-not-to-fetch' } } },
           ],
         },
       });
@@ -761,8 +762,8 @@ describe('DocumentManagerController', () => {
         userCase: {
           state: State.Draft,
           documentsGenerated: [
-            { id: '1', value: { documentLink: { document_url: 'object-of-doc-not-to-fetch' } } },
-            { id: '3', value: { documentLink: { document_url: 'object-of-doc-not-to-fetch' } } },
+            { id: '1', value: { documentLink: { document_url: 'url/doc-not-to-fetch' } } },
+            { id: '3', value: { documentLink: { document_url: 'url/doc-not-to-fetch' } } },
           ],
         },
       });
