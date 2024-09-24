@@ -25,9 +25,9 @@ export class KbaMiddleware {
       errorHandler(async (req: AppRequest, res) => {
         let param = '';
         const supportedLang = ['en', 'cy'];
-        if (req.query.lang !== null
-          && req.query.lang !== undefined
-          && supportedLang.includes(req.query.lang as string)) {
+        if (req.query.lang !== null &&
+          req.query.lang !== undefined &&
+          supportedLang.includes(req.query.lang as string)) {
           param = '?lang=' + req.query.lang;
         }
         if (req.session.laPortalKba?.kbaCaseRef) {
