@@ -23,11 +23,12 @@ export class KbaMiddleware {
     app.get(
       LA_PORTAL_KBA_CALLBACK,
       errorHandler(async (req: AppRequest, res) => {
-        const langCode = req.query.lang !== undefined ? req.query.lang : '';
         let param = '';
         const supportedLang = ['en', 'cy'];
-        if (langCode !== null && supportedLang.includes(langCode as string)) {
-          param = '?lang=' + langCode;
+        if (req.query.lang !== null
+          && req.query.lang !== undefined
+          && supportedLang.includes(req.query.lang as string)) {
+          param = '?lang=' + req.query.lang;
         }
         if (req.session.laPortalKba?.kbaCaseRef) {
           req.session.user = await getSystemUser();
