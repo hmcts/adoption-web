@@ -200,6 +200,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Testing:
 Test is moving to playwright framework but old tests still exist.
 
+#Old Tests:
 E2E tests are configured to run in parallel in 5 headless browsers by default.
 
 To run e2e tests enter `yarn test:local` in the command line.
