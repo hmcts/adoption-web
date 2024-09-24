@@ -76,7 +76,7 @@
     "accessible-autocomplete": "^2.0.4",
     "applicationinsights": "^2.5.1",
     "autobind-decorator": "^2.4.0",
-    "axios": "^0.27.2",
+    "axios": "^0.28.0",
     "config": "^3.3.7",
     "connect-redis": "^6.1.1",
     "cookie-parser": "^1.4.5",
@@ -84,7 +84,7 @@
     "dayjs": "^1.11.3",
     "dotenv": "^16.4.5",
     "email-validator": "^2.0.4",
-    "express": "^4.18.1",
+    "express": "^4.21.0",
     "express-http-proxy": "^1.6.3",
     "express-session": "^1.17.3",
     "form-data": "^4.0.0",
@@ -164,7 +164,7 @@
     "ts-jest": "^28.0.4",
     "ts-loader": "^9.3.0",
     "webdriverio": "^7.19.7",
-    "webpack": "^5.79.0",
+    "webpack": "^5.94.0",
     "webpack-cli": "^4.9.2",
     "webpack-dev-middleware": "^5.3.3",
     "webpack-node-externals": "^3.0.0"
@@ -176,7 +176,10 @@
     "cookiejar": ">=2.1.4",
     "formidable": "^3.2.4",
     "semver": ">=7.5.2",
-    "ws": "^8.17.1"
+    "ws": "^8.17.1",
+    "codeceptjs/axios": "1.7.4",
+    "express": "^4.21.0",
+    "serve-static": "^1.16.0"
   },
   "packageManager": "yarn@3.6.4"
 }
