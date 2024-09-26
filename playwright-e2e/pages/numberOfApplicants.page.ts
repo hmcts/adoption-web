@@ -28,4 +28,8 @@ export default class NumberOfApplicants {
       await this.withNotSpouseCivilRadio.click();
     }
   }
+
+  async fillNotSpouseOrCivilPartnerDetails(description: string): Promise<void> {
+    await this.briefOverview.fill(description);
+  }
 }
