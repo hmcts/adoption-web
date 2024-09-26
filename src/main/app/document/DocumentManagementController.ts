@@ -108,6 +108,7 @@ export class DocumentManagerController {
       return res.redirect(documentInput ? documentInput.documentRedirectUrl : UPLOAD_YOUR_DOCUMENTS);
     }
     const documentUrlToDelete = documentToDelete.value.documentLink.document_url;
+    const documentFileIdToDelete = documentUrlToDelete.substring(documentUrlToDelete.lastIndexOf('/') + 1);
 
     documentsUploaded[documentIndexToDelete].value = null;
 
@@ -118,7 +119,7 @@ export class DocumentManagerController {
     );
 
     const documentManagementClient = this.getDocumentManagementClient(req.session.user);
-    await documentManagementClient.delete({ url: documentUrlToDelete });
+    await documentManagementClient.delete({ documentFileId: documentFileIdToDelete });
 
     req.session.save(err => {
       if (err) {
@@ -165,12 +166,12 @@ export class DocumentManagerController {
         .map(item => item.value)
         .filter(element => element?.documentType === DocumentType.APPLICATION_SUMMARY + languagePreference);
       if (applicationSummaryDocuments !== null && applicationSummaryDocuments.length > 0) {
-        documentToGet = applicationSummaryDocuments[0]?.documentLink?.document_binary_url;
+        documentToGet = applicationSummaryDocuments[0]?.documentFileId;
       }
     }
 
     const documentManagementClient = this.getDocumentManagementClient(req.session.user);
-    const generatedDocument = await documentManagementClient.get({ url: documentToGet });
+    const generatedDocument = await documentManagementClient.get({ documentFileId: documentToGet });
 
     req.session.save(err => {
       if (err) {

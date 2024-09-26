@@ -1014,6 +1014,7 @@ export interface AdoptionDocument {
   documentDateAdded: DateAsString;
   documentComment: string;
   documentFileName: string;
+  documentFileId: string;
   documentType: DocumentType;
   documentLink: Document;
 }
