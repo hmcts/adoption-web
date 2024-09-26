@@ -1,6 +1,6 @@
 jest.mock('config');
 const mockCreateClient = jest.fn(() => 'MOCK redis client');
-const mockSecret = jest.fn(() => 'mock-secret')
+const mockSecret = jest.fn(() => 'mock-secret');
 
 jest.mock('redis', () => {
   return {
