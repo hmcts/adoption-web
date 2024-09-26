@@ -1,5 +1,6 @@
 jest.mock('config');
 const mockCreateClient = jest.fn(() => 'MOCK redis client');
+const mockSecret = jest.fn(() => 'mock-secret')
 
 jest.mock('redis', () => {
   return {
@@ -48,7 +49,7 @@ describe('session', () => {
   let mockApp;
 
   beforeEach(() => {
-    config.get = jest.fn().mockImplementationOnce(() => 'MOCK_SECRET');
+    config.get = jest.fn().mockImplementationOnce(() => mockSecret);
     mockApp = {
       locals: {
         developmentMode: false,
@@ -68,7 +69,7 @@ describe('session', () => {
       name: 'adoption-web-session',
       resave: false,
       saveUninitialized: false,
-      secret: 'MOCK_SECRET',
+      secret: mockSecret,
       cookie: {
         httpOnly: true,
         maxAge: 1260000,
@@ -84,7 +85,7 @@ describe('session', () => {
     beforeEach(() => {
       config.get = jest
         .fn()
-        .mockImplementationOnce(() => 'MOCK_SECRET')
+        .mockImplementationOnce(() => mockSecret)
         .mockImplementationOnce(() => 'true')
         .mockImplementationOnce(() => 'MOCK_REDIS_HOST')
         .mockImplementationOnce(() => 'MOCK_REDIS_KEY');
