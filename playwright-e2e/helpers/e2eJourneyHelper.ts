@@ -1,12 +1,29 @@
 import App from '../pages/app.page';
 
-export async function citizenAdoptionSignIn(app: App, userEmail: string, userPassword: string): Promise<void> {
+export async function citizenAdoptionSignInWithNoPartner(
+  app: App,
+  userEmail: string,
+  userPassword: string,
+  locator: string
+): Promise<void> {
   await app.signIn.signIn(userEmail, userPassword);
-  await app.numberOfApplicants.numberOfApplication('notSpouseOrCivilPartner');
+  await app.numberOfApplicants.numberOfApplication(locator);
   await app.numberOfApplicants.fillNotSpouseOrCivilPartnerDetails('Text to be randomly generated');
- 
+
   await app.basePage.clickSaveAndContinue();
 }
+
+export async function citizenAdoptionSignInWithPartner(
+  app: App,
+  userEmail: string,
+  userPassword: string,
+  locator: string
+): Promise<void> {
+  await app.signIn.signIn(userEmail, userPassword);
+  await app.numberOfApplicants.numberOfApplication(locator);
+  await app.basePage.clickSaveAndContinue();
+}
+
 export async function citizenAdoptionDateChildMovedIn(app: App): Promise<void> {
   await app.tasklist.dateChildMovedIn.click();
   await app.dateChildMoved.dateChildMovedInToday();
@@ -75,7 +92,7 @@ export async function citizenAdoptionApplicantContactDetails(app: App): Promise<
   await app.basePage.clickSaveAndContinue();
 }
 
-export async function citizenAdoptionSecondApplicantContactDetails(
+export async function citizenAdoptionSecondApplicantPersonalDetails(
   app: App,
   firstname: string,
   lastName: string
@@ -91,4 +108,27 @@ export async function citizenAdoptionSecondApplicantContactDetails(
   await app.basePage.clickSaveAndContinue();
   await app.extraSupport.noSupportNeeded();
   await app.basePage.clickSaveAndContinue();
+}
+
+export async function citizenAdoptionSecondApplicantContactDetails(app: App): Promise<void> {
+  await app.tasklist.secondApplicantContactDetails.click();
+  await app.page.getByLabel('Yes').check(); //do you live at the same address?
+  await app.basePage.clickSaveAndContinue();
+  await app.contactDetails.fillContactDetails('abcdefg@domain.com', '0800800800');
+  await app.basePage.clickSaveAndContinue();
+  await app.contactDetails.englishLang.check();
+  await app.basePage.clickSaveAndContinue();
+}
+
+export async function citizenAdoptionSubmitApplication(
+  app: App,
+  appOneFullname: string,
+  appTwoFullname: string
+): Promise<void> {
+  await app.tasklist.reviewAndSubmit.click();
+  await app.pcq.noPcqAnswers();
+  await app.reviewSubmit.reviewAnswers('notSpouseOrCivilPartner');
+  await app.basePage.clickSaveAndContinue();
+  await app.reviewSubmit.statementOfTruthTwo(appOneFullname, appTwoFullname);
+  await app.reviewSubmit.fillCardDetails(appOneFullname, 'abcdefg@domain.com', 'BN26 6AL');
 }
