@@ -7,7 +7,6 @@ import { runAccessibilityScan } from '../helpers/accessibilityHelper';
 import * as e2eJourneyHelper from '../helpers/e2eJourneyHelper';
 import { setupUser, teardownUser } from '../hooks/createDeleteUser.hook';
 import App from '../pages/app.page';
-import { getPersonalDetailsStatus } from 'steps/application/task-list/utils';
 
 dotenv.config();
 
