@@ -123,11 +123,12 @@ export async function citizenAdoptionSecondApplicantContactDetails(app: App): Pr
 export async function citizenAdoptionSubmitApplication(
   app: App,
   appOneFullname: string,
-  appTwoFullname: string
+  appTwoFullname: string,
+  locator: string
 ): Promise<void> {
   await app.tasklist.reviewAndSubmit.click();
   await app.pcq.noPcqAnswers();
-  await app.reviewSubmit.reviewAnswers('notSpouseOrCivilPartner');
+  await app.reviewSubmit.reviewAnswers(locator);
   await app.basePage.clickSaveAndContinue();
   await app.reviewSubmit.statementOfTruthTwo(appOneFullname, appTwoFullname);
   await app.reviewSubmit.fillCardDetails(appOneFullname, 'abcdefg@domain.com', 'BN26 6AL');
