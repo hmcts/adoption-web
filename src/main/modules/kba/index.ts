@@ -27,7 +27,7 @@ export class KbaMiddleware {
         let param = '';
         const supportedLang = ['en', 'cy'];
         if (langCode !== null && supportedLang.includes(langCode as string)) {
-          param = '?lang=' + langCode;
+          param = '?lang=' + supportedLang.find(item => item === langCode);
         }
         if (req.session.laPortalKba?.kbaCaseRef) {
           req.session.user = await getSystemUser();
