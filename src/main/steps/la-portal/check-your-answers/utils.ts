@@ -1,4 +1,4 @@
-import { sanitizeHtmlArray } from '../../../steps/common/functions/sanitize';
+import { sanitizeHtml, sanitizeHtmlArray } from '../../../steps/common/functions/sanitize';
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { CaseDate, CaseWithId, Checkbox, FieldPrefix } from '../../../app/case/case';
 import {
@@ -170,15 +170,16 @@ const formatResponsibilityReasons = (
   reasonsProvided,
   reasonText: string
 ): string => {
+  const safeOtherReasonText = sanitizeHtml(otherReasonText);
   const responsibilities = responsibility.filter(item => item !== ResponsibilityReasons.OTHER);
   const translatedResponsibilities: string[] = [];
-  const responsibilityText = `<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">${reasonText} </span> `;
+  const responsibilityText = `<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">${reasonText} </span> </br>`;
   responsibilities.forEach(element => translatedResponsibilities.push(reasonsProvided[element]));
 
   if (responsibility.includes(ResponsibilityReasons.OTHER) && translatedResponsibilities.length === 0) {
-    return responsibilityText + otherReasonText;
+    return responsibilityText + safeOtherReasonText;
   } else if (responsibility.includes(ResponsibilityReasons.OTHER)) {
-    return responsibilityText + translatedResponsibilities.join('<br>') + '<br>' + otherReasonText;
+    return responsibilityText + translatedResponsibilities.join('<br>') + '<br>' + safeOtherReasonText;
   }
   return responsibilityText + translatedResponsibilities.join('<br>');
 };
