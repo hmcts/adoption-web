@@ -434,7 +434,7 @@ export const otherParentSummaryList = (
                 valueHtml: formatResponsibilityReasons(
                   userCase.otherParentResponsibilityReason!,
                   userCase.otherParentOtherResponsibilityReason
-                    ? content.responsibilityReasons['Other'] + '<br>' + userCase.otherParentOtherResponsibilityReason
+                    ? userCase.otherParentOtherResponsibilityReason
                     : '',
                   content.responsibilityReasons,
                   ''
