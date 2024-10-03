@@ -404,7 +404,7 @@ function lastAddressKnown(
 }
 
 const getNotSureReasonElement = (content, userCase, notSure, reasonFieldName): string => {
-  return `${notSure}<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">${content.reason}: </span>${userCase[reasonFieldName]}</p>`;
+  return `${notSure}<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">${content.reason}: </span>${sanitizeHtml(userCase[reasonFieldName])}</p>`;
 };
 
 export const otherParentSummaryList = (
