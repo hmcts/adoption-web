@@ -11,7 +11,10 @@ export function sanitizeHtml(input: string) {
     };
     const reg = /[&<>"'`=/]/gi;
   
-    return input.replace(reg, (match) => map[match]);
+    if(input) {
+      return input.replace(reg, (match) => map[match]);
+    }
+    return input;
   }
 
   export function sanitizeHtmlArray(input: string[]) {
