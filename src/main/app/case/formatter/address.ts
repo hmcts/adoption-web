@@ -1,3 +1,4 @@
+import { sanitizeHtmlArray } from '../../../steps/common/functions/sanitize';
 import { Case, FieldPrefix } from '../case';
 
 export const getFormattedAddress = (data: Partial<Case>, prefix: FieldPrefix): string => {
@@ -13,6 +14,8 @@ export const getFormattedAddress = (data: Partial<Case>, prefix: FieldPrefix): s
 
   //remove empty items
   address = address.filter(item => !!item);
+
+  address = sanitizeHtmlArray(address);
 
   return address.join('<br>');
 };
