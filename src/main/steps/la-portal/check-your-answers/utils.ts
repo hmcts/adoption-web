@@ -173,7 +173,7 @@ const formatResponsibilityReasons = (
   const safeOtherReasonText = sanitizeHtml(otherReasonText);
   const responsibilities = responsibility.filter(item => item !== ResponsibilityReasons.OTHER);
   const translatedResponsibilities: string[] = [];
-  const responsibilityText = `<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">${reasonText} </span> </br>`;
+  const responsibilityText = `<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">${reasonText} </span> `;
   responsibilities.forEach(element => translatedResponsibilities.push(reasonsProvided[element]));
 
   if (responsibility.includes(ResponsibilityReasons.OTHER) && translatedResponsibilities.length === 0) {
