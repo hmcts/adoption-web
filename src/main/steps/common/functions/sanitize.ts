@@ -13,3 +13,7 @@ export function sanitizeHtml(input: string) {
   
     return input.replace(reg, (match) => map[match]);
   }
+
+  export function sanitizeHtmlArray(input: string[]) {
+    return input.map(item => sanitizeHtml(item));
+  }

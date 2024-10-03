@@ -1,3 +1,4 @@
+import { sanitizeHtmlArray } from '../../../steps/common/functions/sanitize';
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { CaseDate, CaseWithId, Checkbox, FieldPrefix } from '../../../app/case/case';
 import {
@@ -160,7 +161,7 @@ const formatNationalities = (
   if (nationality.includes(Nationality.OTHER)) {
     nationalities.push(...additionalNationalities.map(item => item.country));
   }
-  return nationalities.join('<br>');
+  return sanitizeHtmlArray(nationalities).join('<br>');
 };
 
 const formatResponsibilityReasons = (
