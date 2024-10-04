@@ -273,73 +273,6 @@ export const applicantSummaryList = (
     hasReasonableAdjustment = userCase.applicant2HasReasonableAdjustment;
   }
 
-  if (hasReasonableAdjustment === YesOrNo.NO) {
-    return {
-      title: sectionTitle,
-      rows: getSectionSummaryList(
-        [
-          {
-            key: keys.fullName,
-            value: userCase[`${prefix}FirstNames`] + ' ' + userCase[`${prefix}LastNames`],
-            changeUrl: Urls[`${urlPrefix}FULL_NAME`],
-            visuallyHiddenText: visHidPrefix + keys.fullName.toLowerCase(),
-          },
-          {
-            key: keys.previousNames,
-            valueHtml:
-              userCase[`${prefix}HasOtherNames`] === YesOrNo.YES
-                ? userCase[`${prefix}AdditionalNames`]?.map(item => `${item.firstNames} ${item.lastNames}`).join('<br>')
-                : '',
-            changeUrl: Urls[`${urlPrefix}OTHER_NAMES`],
-            visuallyHiddenText: visHidPrefix + keys.previousNames.toLowerCase(),
-          },
-          {
-            key: keys.dateOfBirth,
-            value: getFormattedDate(userCase[`${prefix}DateOfBirth`], content.language),
-            changeUrl: Urls[`${urlPrefix}DOB`],
-            visuallyHiddenText: visHidPrefix + keys.dateOfBirth.toLowerCase(),
-          },
-          {
-            key: keys.occupation,
-            value: userCase[`${prefix}Occupation`],
-            changeUrl: Urls[`${urlPrefix}OCCUPATION`],
-            visuallyHiddenText: visHidPrefix + keys.occupation.toLowerCase(),
-          },
-          {
-            key: keys.extraSupport,
-            value: content.yesNoExtraSupport[userCase[`${prefix}HasReasonableAdjustment`]],
-            changeUrl: Urls[`${urlPrefix}EXTRA_SUPPORT`],
-            visuallyHiddenText: visHidPrefix + keys.extraSupport.toLowerCase(),
-          },
-          {
-            key: keys.address,
-            valueHtml: getFormattedAddress(userCase, prefix),
-            changeUrl: Urls[`${urlPrefix}FIND_ADDRESS`],
-            visuallyHiddenText: visHidPrefix + keys.address.toLowerCase(),
-          },
-          {
-            key: keys.emailAddress,
-            value: userCase[`${prefix}EmailAddress`],
-            changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
-            visuallyHiddenText: visHidPrefix + keys.emailAddress.toLowerCase(),
-          },
-          {
-            key: keys.phoneNumber,
-            value: userCase[`${prefix}PhoneNumber`],
-            changeUrl: Urls[`${urlPrefix}CONTACT_DETAILS`],
-            visuallyHiddenText: visHidPrefix + keys.phoneNumber.toLowerCase(),
-          },
-          {
-            key: keys.languagePreference,
-            value: content.languagePreference[userCase[`${prefix}LanguagePreference`]],
-            changeUrl: Urls[`${urlPrefix}LANGUAGE_PREFERENCE`],
-            visuallyHiddenText: visHidPrefix + keys.languagePreference.toLowerCase(),
-          },
-        ],
-        content
-      ),
-    };
-  }
   return {
     title: sectionTitle,
     rows: getSectionSummaryList(
@@ -377,12 +310,16 @@ export const applicantSummaryList = (
           changeUrl: Urls[`${urlPrefix}EXTRA_SUPPORT`],
           visuallyHiddenText: visHidPrefix + keys.extraSupport.toLowerCase(),
         },
-        {
-          key: keys.extraSupportDetails,
-          value: userCase[`${prefix}ReasonableAdjustmentDetails`],
-          changeUrl: Urls[`${urlPrefix}EXTRA_SUPPORT`],
-          visuallyHiddenText: visHidPrefix + keys.extraSupportDetails.toLowerCase(),
-        },
+        ...(hasReasonableAdjustment === YesOrNo.YES
+          ? [
+            {
+              key: keys.extraSupportDetails,
+              value: userCase[`${prefix}ReasonableAdjustmentDetails`],
+              changeUrl: Urls[`${urlPrefix}EXTRA_SUPPORT`],
+              visuallyHiddenText: visHidPrefix + keys.extraSupportDetails.toLowerCase(),
+            },
+          ]
+          : []),
         {
           key: keys.address,
           valueHtml: getFormattedAddress(userCase, prefix),
