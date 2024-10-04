@@ -1,16 +1,19 @@
+import { FieldPrefix } from '../../../app/case/case';
 import { YesOrNo } from '../../../app/case/definition';
+import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
-import { FieldPrefix } from '../../../app/case/case';
-import { getFormattedAddress } from '../../../app/case/formatter/address';
 
 const en = content => ({
   section: 'Second applicant',
   title: 'Do you also live at this address?',
   yes: 'Yes',
   no: 'No',
-  applicant1Address: `<div class="govuk-inset-text">${getFormattedAddress(content.userCase, FieldPrefix.APPLICANT1)}</div>`,
+  applicant1Address: `<div class="govuk-inset-text">${getFormattedAddress(
+    content.userCase,
+    FieldPrefix.APPLICANT1
+  )}</div>`,
   errors: {
     applicant2AddressSameAsApplicant1: {
       required: 'Please answer the question',
@@ -23,7 +26,10 @@ const cy: typeof en = content => ({
   title: 'A ydych chi’n byw yn y cyfeiriad hwn hefyd?',
   yes: 'Ydw',
   no: 'Nac ydw',
-  applicant1Address: `<div class="govuk-inset-text">${getFormattedAddress(content.userCase, FieldPrefix.APPLICANT1)}</div>`,
+  applicant1Address: `<div class="govuk-inset-text">${getFormattedAddress(
+    content.userCase,
+    FieldPrefix.APPLICANT1
+  )}</div>`,
   errors: {
     applicant2AddressSameAsApplicant1: {
       required: 'Atebwch y cwestiwn os gwelwch yn dda',

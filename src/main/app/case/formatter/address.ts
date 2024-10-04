@@ -4,7 +4,7 @@ import { Case, FieldPrefix } from '../case';
 export const getFormattedAddress = (data: Partial<Case>, prefix: FieldPrefix): string => {
   let address: string[] = [];
 
-  if(prefix === FieldPrefix.OTHER_ADOPTION_AGENCY) {
+  if (prefix === FieldPrefix.OTHER_ADOPTION_AGENCY) {
     address.push(data[`${prefix}AddressLine1`] || '');
     address.push(data[`${prefix}Town`] || '');
     address.push(data[`${prefix}Postcode`] || '');

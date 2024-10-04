@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { sanitizeHtml } from '../../../steps/common/functions/sanitize';
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { CaseWithId, FieldPrefix } from '../../../app/case/case';
 import { ApplyingWith, YesOrNo } from '../../../app/case/definition';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { PageContent } from '../../../app/controller/GetController';
+import { sanitizeHtml } from '../../../steps/common/functions/sanitize';
 import * as Urls from '../../../steps/urls';
 
 interface GovUkNunjucksSummary {
@@ -154,8 +154,7 @@ export const adoptionAgencySummaryList = (
         },
         {
           key: keys.address,
-          valueHtml:
-            getFormattedAddress(userCase, FieldPrefix.OTHER_ADOPTION_AGENCY),
+          valueHtml: getFormattedAddress(userCase, FieldPrefix.OTHER_ADOPTION_AGENCY),
           changeUrl: Urls.ADOPTION_AGENCY,
           visuallyHiddenText: visuallyHiddenTexts.adopAgencyAddress,
         },
@@ -288,8 +287,9 @@ export const applicantSummaryList = (
           key: keys.previousNames,
           valueHtml:
             userCase[`${prefix}HasOtherNames`] === YesOrNo.YES
-              ? userCase[`${prefix}AdditionalNames`]?.map(item => 
-                sanitizeHtml(`${item.firstNames} ${item.lastNames}`)).join('<br>')
+              ? userCase[`${prefix}AdditionalNames`]
+                  ?.map(item => sanitizeHtml(`${item.firstNames} ${item.lastNames}`))
+                  .join('<br>')
               : '',
           changeUrl: Urls[`${urlPrefix}OTHER_NAMES`],
           visuallyHiddenText: visHidPrefix + keys.previousNames.toLowerCase(),
@@ -314,13 +314,13 @@ export const applicantSummaryList = (
         },
         ...(hasReasonableAdjustment === YesOrNo.YES
           ? [
-            {
-              key: keys.extraSupportDetails,
-              value: userCase[`${prefix}ReasonableAdjustmentDetails`],
-              changeUrl: Urls[`${urlPrefix}EXTRA_SUPPORT`],
-              visuallyHiddenText: visHidPrefix + keys.extraSupportDetails.toLowerCase(),
-            },
-          ]
+              {
+                key: keys.extraSupportDetails,
+                value: userCase[`${prefix}ReasonableAdjustmentDetails`],
+                changeUrl: Urls[`${urlPrefix}EXTRA_SUPPORT`],
+                visuallyHiddenText: visHidPrefix + keys.extraSupportDetails.toLowerCase(),
+              },
+            ]
           : []),
         {
           key: keys.address,

@@ -1,4 +1,3 @@
-import { sanitizeHtml, sanitizeHtmlArray } from '../../../steps/common/functions/sanitize';
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { CaseDate, CaseWithId, Checkbox, FieldPrefix } from '../../../app/case/case';
 import {
@@ -10,6 +9,7 @@ import {
 } from '../../../app/case/definition';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { PageContent } from '../../../app/controller/GetController';
+import { sanitizeHtml, sanitizeHtmlArray } from '../../../steps/common/functions/sanitize';
 import * as Urls from '../../../steps/urls';
 
 interface GovUKNunjucksSummary {
@@ -404,7 +404,8 @@ function lastAddressKnown(
 }
 
 const getNotSureReasonElement = (content, userCase, notSure, reasonFieldName): string => {
-  return `${notSure}<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">${content.reason}: </span>${sanitizeHtml(userCase[reasonFieldName])}</p>`;
+  return `${notSure}<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">
+  ${content.reason}: </span>${sanitizeHtml(userCase[reasonFieldName])}</p>`;
 };
 
 export const otherParentSummaryList = (
@@ -433,9 +434,7 @@ export const otherParentSummaryList = (
                 visuallyHiddenText: visuallyHiddenTexts.otherParentResponsibilityReason,
                 valueHtml: formatResponsibilityReasons(
                   userCase.otherParentResponsibilityReason!,
-                  userCase.otherParentOtherResponsibilityReason
-                    ? userCase.otherParentOtherResponsibilityReason
-                    : '',
+                  userCase.otherParentOtherResponsibilityReason ? userCase.otherParentOtherResponsibilityReason : '',
                   content.responsibilityReasons,
                   ''
                 ),
