@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { sanitizeHtml } from '../../../steps/common/functions/sanitize';
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { CaseWithId, FieldPrefix } from '../../../app/case/case';
 import { ApplyingWith, YesOrNo } from '../../../app/case/definition';
@@ -287,7 +288,8 @@ export const applicantSummaryList = (
           key: keys.previousNames,
           valueHtml:
             userCase[`${prefix}HasOtherNames`] === YesOrNo.YES
-              ? userCase[`${prefix}AdditionalNames`]?.map(item => `${item.firstNames} ${item.lastNames}`).join('<br>')
+              ? userCase[`${prefix}AdditionalNames`]?.map(item => 
+                sanitizeHtml(`${item.firstNames} ${item.lastNames}`)).join('<br>')
               : '',
           changeUrl: Urls[`${urlPrefix}OTHER_NAMES`],
           visuallyHiddenText: visHidPrefix + keys.previousNames.toLowerCase(),
