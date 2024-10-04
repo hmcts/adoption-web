@@ -154,7 +154,7 @@ export const adoptionAgencySummaryList = (
         {
           key: keys.address,
           valueHtml:
-            userCase.adopAgencyAddressLine1 + '<br>' + userCase.adopAgencyTown + '<br>' + userCase.adopAgencyPostcode,
+            getFormattedAddress(userCase, FieldPrefix.OTHER_ADOPTION_AGENCY),
           changeUrl: Urls.ADOPTION_AGENCY,
           visuallyHiddenText: visuallyHiddenTexts.adopAgencyAddress,
         },
