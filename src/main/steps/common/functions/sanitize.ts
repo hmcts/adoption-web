@@ -18,5 +18,8 @@ export function sanitizeHtml(input: string): string {
 }
 
 export function sanitizeHtmlArray(input: string[]): string[] {
-  return input.map(item => sanitizeHtml(item));
+  if (input) {
+    return input.map(item => sanitizeHtml(item));
+  }
+  return input;
 }

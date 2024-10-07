@@ -21,6 +21,11 @@ test('Returns empty array when passed empty array', () => {
   expect(sanitizeHtmlArray(testArray)).toStrictEqual([]);
 });
 
+test('Return undefined where array is undefined', () => {
+  let testArray;
+  expect(sanitizeHtmlArray(testArray)).toStrictEqual(undefined);
+});
+
 test('Escapes special characters when input array contains HTML', () => {
   const testArray = ['<h2>HTML Injection</h2>', "321 St Christopher-Walden's", 'Nothing to see here'];
   const expected = [
