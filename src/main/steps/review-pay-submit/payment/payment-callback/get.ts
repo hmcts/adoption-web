@@ -31,6 +31,15 @@ export default class PaymentCallbackGetController {
       return res.redirect(CHECK_ANSWERS_URL);
     }
 
+    // payments.list.reverse().forEach(function (p) {
+    //   const payment = await paymentClient.get(p.value.reference);
+    //   logger.info(`caseId=${caseId} lastPaymentStatus=${payment?.status}`); //TODO think about logging
+    //   //if payment?.status === success
+    //   //do everything (or set successfulPayment)
+    //   //and return
+    //   }
+    // );
+
     const lastPaymentAttempt = payments.lastPayment;
     const payment = await paymentClient.get(lastPaymentAttempt.reference);
 
@@ -41,6 +50,10 @@ export default class PaymentCallbackGetController {
 
     logger.info(`caseId=${caseId} lastPaymentTransactionId=${lastPaymentAttempt.transactionId}`);
     payments.setStatus(lastPaymentAttempt.transactionId, payment?.status, payment?.channel);
+
+    if(payment?.status != PaymentStatus.SUCCESS && payments.isPaymentInProgress()) {
+      //try again?  Didn't like me puting await in a loop. Maybe just need a new function to check how many in progress.
+    }
 
     req.session.userCase = await req.locals.api.addPayment(req.session.userCase.id, payments.list);
 

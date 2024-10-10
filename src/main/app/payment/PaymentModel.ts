@@ -20,7 +20,15 @@ export class PaymentModel {
       console.log('successful Payment found');
       return { ...successPayment[0].value, transactionId: successPayment[0].id };
     }
-    return { ...this.payments[idx].value, transactionId: this.payments[idx].id };
+
+    const inProgressPayments = this.payments.filter(item => item.value.status === PaymentStatus.IN_PROGRESS);
+    if (inProgressPayments.length > 0) {
+      const idx = inProgressPayments.length - 1;
+      //return latest and add check to see if any more payments on controller?
+      return { ...inProgressPayments[idx].value, transactionId: inProgressPayments[idx].id }; 
+    }
+    
+  return { ...this.payments[idx].value, transactionId: this.payments[idx].id };
   }
 
   public get wasLastPaymentSuccessful(): boolean {
