@@ -9,6 +9,7 @@ import {
 } from '../../../app/case/definition';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { PageContent } from '../../../app/controller/GetController';
+import { sanitizeHtml, sanitizeHtmlArray } from '../../../steps/common/functions/sanitize';
 import * as Urls from '../../../steps/urls';
 
 interface GovUKNunjucksSummary {
@@ -160,7 +161,7 @@ const formatNationalities = (
   if (nationality.includes(Nationality.OTHER)) {
     nationalities.push(...additionalNationalities.map(item => item.country));
   }
-  return nationalities.join('<br>');
+  return sanitizeHtmlArray(nationalities).join('<br>');
 };
 
 const formatResponsibilityReasons = (
@@ -169,15 +170,16 @@ const formatResponsibilityReasons = (
   reasonsProvided,
   reasonText: string
 ): string => {
+  const safeOtherReasonText = sanitizeHtml(otherReasonText);
   const responsibilities = responsibility.filter(item => item !== ResponsibilityReasons.OTHER);
   const translatedResponsibilities: string[] = [];
   const responsibilityText = `<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">${reasonText} </span> `;
   responsibilities.forEach(element => translatedResponsibilities.push(reasonsProvided[element]));
 
   if (responsibility.includes(ResponsibilityReasons.OTHER) && translatedResponsibilities.length === 0) {
-    return responsibilityText + otherReasonText;
+    return responsibilityText + safeOtherReasonText;
   } else if (responsibility.includes(ResponsibilityReasons.OTHER)) {
-    return responsibilityText + translatedResponsibilities.join('<br>') + '<br>' + otherReasonText;
+    return responsibilityText + translatedResponsibilities.join('<br>') + '<br>' + safeOtherReasonText;
   }
   return responsibilityText + translatedResponsibilities.join('<br>');
 };
@@ -402,7 +404,9 @@ function lastAddressKnown(
 }
 
 const getNotSureReasonElement = (content, userCase, notSure, reasonFieldName): string => {
-  return `${notSure}<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">${content.reason}: </span>${userCase[reasonFieldName]}</p>`;
+  return `${notSure}<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">${
+    content.reason
+  }: </span>${sanitizeHtml(userCase[reasonFieldName])}</p>`;
 };
 
 export const otherParentSummaryList = (
@@ -431,9 +435,7 @@ export const otherParentSummaryList = (
                 visuallyHiddenText: visuallyHiddenTexts.otherParentResponsibilityReason,
                 valueHtml: formatResponsibilityReasons(
                   userCase.otherParentResponsibilityReason!,
-                  userCase.otherParentOtherResponsibilityReason
-                    ? content.responsibilityReasons['Other'] + '<br>' + userCase.otherParentOtherResponsibilityReason
-                    : '',
+                  userCase.otherParentOtherResponsibilityReason ? userCase.otherParentOtherResponsibilityReason : '',
                   content.responsibilityReasons,
                   ''
                 ),
