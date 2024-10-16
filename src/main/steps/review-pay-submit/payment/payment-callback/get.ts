@@ -2,7 +2,7 @@ import { Logger } from '@hmcts/nodejs-logging';
 import config from 'config';
 import { Response } from 'express';
 
-import { CITIZEN_SUBMIT, PaymentStatus, State } from '../../../../app/case/definition';
+import { CITIZEN_SUBMIT, State } from '../../../../app/case/definition';
 import { AppRequest } from '../../../../app/controller/AppRequest';
 import { PaymentClient } from '../../../../app/payment/PaymentClient';
 import { PaymentModel } from '../../../../app/payment/PaymentModel';
