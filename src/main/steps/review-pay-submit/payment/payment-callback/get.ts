@@ -31,26 +31,35 @@ export default class PaymentCallbackGetController {
       return res.redirect(CHECK_ANSWERS_URL);
     }
 
-    const lastPaymentAttempt = payments.lastPayment;
-    const payment = await paymentClient.get(lastPaymentAttempt.reference);
+    //const lastPaymentAttempt = payments.lastPayment; //TODO remove
+    
+    for await (const element of payments.list.reverse()) {
 
-    logger.info(`caseId=${caseId} lastPaymentStatus=${payment?.status}`);
-    /* if (payment?.status === 'Initiated') {
-      return res.redirect(lastPaymentAttempt.channel);
-    } */
+      const payment = await paymentClient.get(element.value.reference);
 
-    logger.info(`caseId=${caseId} lastPaymentTransactionId=${lastPaymentAttempt.transactionId}`);
-    payments.setStatus(lastPaymentAttempt.transactionId, payment?.status, payment?.channel);
+      logger.info(`caseId=${caseId} lastPaymentStatus=${payment?.status}`);
+      /* if (payment?.status === 'Initiated') {
+        return res.redirect(lastPaymentAttempt.channel);
+      } */
+      logger.info(`caseId=${caseId} lastPaymentTransactionId=${element.id}`);
+
+      payments.setStatus(element.id, payment?.status, payment?.channel);
+
+      if (payment?.status === 'Success') { //TODO? payments.get.this.status === PaymentStatus.SUCCESS (add helper method to payment model)
+        break;
+      }
+    } // TODO error handling.....?
 
     req.session.userCase = await req.locals.api.addPayment(req.session.userCase.id, payments.list);
 
     req.session.save(() => {
       logger.info(`caseId=${caseId} wasLastPaymentSuccessful=${payments.wasLastPaymentSuccessful}`);
-      if (payments.wasLastPaymentSuccessful) {
-        return res.redirect(APPLICATION_SUBMITTED);
-      }
 
-      res.redirect(req.query.back ? CHECK_ANSWERS_URL : STATEMENT_OF_TRUTH);
+    if (payments.wasLastPaymentSuccessful) { //TODO change check?
+      return res.redirect(APPLICATION_SUBMITTED);
+    }
+
+    res.redirect(req.query.back ? CHECK_ANSWERS_URL : STATEMENT_OF_TRUTH);
     });
   }
 }
