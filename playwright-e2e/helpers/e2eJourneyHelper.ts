@@ -13,18 +13,7 @@ export async function citizenAdoptionSignInWithNoPartner(
   await app.basePage.clickSaveAndContinue();
 }
 
-export async function citizenAdoptionSignInSingleParent(
-  app: App,
-  userEmail: string,
-  userPassword: string,
-  locator: string
-): Promise<void> {
-  await app.signIn.signIn(userEmail, userPassword);
-  await app.numberOfApplicants.numberOfApplication(locator);
-  await app.basePage.clickSaveAndContinue();
-}
-
-export async function citizenAdoptionSignInWithPartner(
+export async function citizenAdoptionSignIn(
   app: App,
   userEmail: string,
   userPassword: string,

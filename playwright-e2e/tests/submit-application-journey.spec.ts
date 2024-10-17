@@ -46,12 +46,7 @@ test.describe('e2e submit journeys', () => {
     const stringNumberOfApplicationLocator = 'alone';
 
     // Sign in
-    await e2eJourneyHelper.citizenAdoptionSignInSingleParent(
-      app,
-      userEmail,
-      userPassword,
-      stringNumberOfApplicationLocator
-    );
+    await e2eJourneyHelper.citizenAdoptionSignIn(app, userEmail, userPassword, stringNumberOfApplicationLocator);
 
     // Date child move in with you
     await e2eJourneyHelper.citizenAdoptionDateChildMovedIn(app);
@@ -162,12 +157,7 @@ test.describe('e2e submit journeys', () => {
       const stringNumberOfApplicationLocator = 'spouseOrCivilPartner';
 
       // Sign in
-      await e2eJourneyHelper.citizenAdoptionSignInWithPartner(
-        app,
-        userEmail,
-        userPassword,
-        stringNumberOfApplicationLocator
-      );
+      await e2eJourneyHelper.citizenAdoptionSignIn(app, userEmail, userPassword, stringNumberOfApplicationLocator);
 
       // Date child moved in with you
       await e2eJourneyHelper.citizenAdoptionDateChildMovedIn(app);
