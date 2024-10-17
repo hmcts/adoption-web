@@ -13,6 +13,7 @@ export async function citizenAdoptionSignInWithNoPartner(
   await app.basePage.clickSaveAndContinue();
 }
 
+
 export async function citizenAdoptionSignInSingleParent(
   app: App,
   userEmail: string,
@@ -92,6 +93,7 @@ export async function citizenAdoptionApplicationSingleParentPersonalDetails(app:
   await app.extraSupport.noSupportNeeded();
   await app.basePage.clickSaveAndContinue();
 }
+
 export async function citizenAdoptionApplicantPersonalDetails(app: App): Promise<void> {
   await app.tasklist.firstApplicantPersonalDetails.click();
   await app.basePage.clickSaveAndContinue();
