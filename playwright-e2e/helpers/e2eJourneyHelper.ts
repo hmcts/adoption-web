@@ -13,7 +13,6 @@ export async function citizenAdoptionSignInWithNoPartner(
   await app.basePage.clickSaveAndContinue();
 }
 
-
 export async function citizenAdoptionSignInSingleParent(
   app: App,
   userEmail: string,
