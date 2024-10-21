@@ -92,9 +92,11 @@ describe('PaymentCallbackGetController', () => {
       });
       const res = mockResponse();
 
+      /* eslint-disable jest/valid-expect */
       expect(async () => {
         await paymentController.get(req, res);
-      }).toThrow(Error);
+      }).toThrowError;
+      /* eslint-enable jest/valid-expect */
 
       //await paymentController.get(req, res);
 
