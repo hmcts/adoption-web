@@ -10,7 +10,6 @@ import { APPLICATION_SUBMITTED, CHECK_ANSWERS_URL, PAYMENT_CALLBACK_URL, STATEME
 const logger = Logger.getLogger('payment-callback');
 
 export default class PaymentCallbackGetController {
-
   public async get(req: AppRequest, res: Response): Promise<void> {
     const payments = new PaymentModel(req.session.userCase.payments);
     if (req.session.userCase.state === State.Draft && payments.wasLastPaymentSuccessful) {

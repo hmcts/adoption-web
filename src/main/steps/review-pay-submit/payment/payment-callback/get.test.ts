@@ -92,8 +92,10 @@ describe('PaymentCallbackGetController', () => {
       });
       const res = mockResponse();
 
-      expect(async () => {await paymentController.get(req, res)}).toThrowError;
-      
+      expect(async () => {
+        await paymentController.get(req, res);
+      }).toThrow(Error);
+
       //await paymentController.get(req, res);
 
       // expect(mockGet).toHaveBeenCalled();
