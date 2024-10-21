@@ -70,6 +70,21 @@ describe('PaymentCallbackGetController', () => {
       expect(res.redirect).toHaveBeenCalledWith(CHECK_ANSWERS_URL);
     });
 
+    it('doesnt get called if applicant1 first name is Error', async () => {
+      const req = mockRequest({
+        userCase: {
+          state: State.AwaitingDocuments,
+          applicant1FirstNames: 'Error',
+        },
+      });
+      const res = mockResponse();
+
+      await paymentController.get(req, res);
+
+      expect(mockGet).not.toHaveBeenCalled();
+      expect(req.locals.api.addPayment).not.toHaveBeenCalled();
+    });
+
     it('gets userCase and redirects to the home page if the state is draft and last payment was successful', async () => {
       const req = mockRequest({
         userCase: {
