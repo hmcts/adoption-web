@@ -45,7 +45,7 @@ export default class PaymentCallbackGetController {
 
       payments.setStatus(element.id, payment?.status, payment?.channel);
 
-      if (payment?.status === 'Success') { //TODO? payments.get.this.status === PaymentStatus.SUCCESS (add helper method to payment model)
+      if (payment?.status === 'Success') { //TODO? payments.get(element.id).status === PaymentStatus.SUCCESS (add helper method to payment model)
         break;
       }
     } // TODO error handling.....?
@@ -55,11 +55,11 @@ export default class PaymentCallbackGetController {
     req.session.save(() => {
       logger.info(`caseId=${caseId} wasLastPaymentSuccessful=${payments.wasLastPaymentSuccessful}`);
 
-    if (payments.wasLastPaymentSuccessful) { //TODO change check?
-      return res.redirect(APPLICATION_SUBMITTED);
-    }
+      if (payments.wasLastPaymentSuccessful) {
+        return res.redirect(APPLICATION_SUBMITTED);
+      }
 
-    res.redirect(req.query.back ? CHECK_ANSWERS_URL : STATEMENT_OF_TRUTH);
+      res.redirect(req.query.back ? CHECK_ANSWERS_URL : STATEMENT_OF_TRUTH);
     });
   }
 }
