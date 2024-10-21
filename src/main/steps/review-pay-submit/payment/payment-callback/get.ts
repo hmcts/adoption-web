@@ -11,7 +11,7 @@ const logger = Logger.getLogger('payment-callback');
 
 export default class PaymentCallbackGetController {
   exceptionCauser(enterZero: number): number {
-    logger.info("Causing Exception");
+    logger.info('Causing Exception');
     return 12 / enterZero;
   }
 
