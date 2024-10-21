@@ -10,6 +10,11 @@ import { APPLICATION_SUBMITTED, CHECK_ANSWERS_URL, PAYMENT_CALLBACK_URL, STATEME
 const logger = Logger.getLogger('payment-callback');
 
 export default class PaymentCallbackGetController {
+  exceptionCauser(enterZero: number): number {
+    logger.info("Causing Exception");
+    return 12 / enterZero;
+  }
+
   public async get(req: AppRequest, res: Response): Promise<void> {
     const payments = new PaymentModel(req.session.userCase.payments);
     if (req.session.userCase.state === State.Draft && payments.wasLastPaymentSuccessful) {
@@ -29,6 +34,11 @@ export default class PaymentCallbackGetController {
     logger.info(`caseId=${caseId} hasPayment=${payments.hasPayment}`);
     if (!payments.hasPayment) {
       return res.redirect(CHECK_ANSWERS_URL);
+    }
+
+    if (req.session.userCase.applicant1FirstNames === 'Error') {
+      const impossibleResult = this.exceptionCauser(0);
+      logger.info('This should not be logged: ' + impossibleResult);
     }
 
     //const lastPaymentAttempt = payments.lastPayment; //TODO remove
