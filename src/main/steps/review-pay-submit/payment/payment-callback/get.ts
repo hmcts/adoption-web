@@ -32,9 +32,8 @@ export default class PaymentCallbackGetController {
     }
 
     //const lastPaymentAttempt = payments.lastPayment; //TODO remove
-    
-    for await (const element of payments.list.reverse()) {
 
+    for await (const element of payments.list.reverse()) {
       const payment = await paymentClient.get(element.value.reference);
 
       logger.info(`caseId=${caseId} lastPaymentStatus=${payment?.status}`);
@@ -45,7 +44,8 @@ export default class PaymentCallbackGetController {
 
       payments.setStatus(element.id, payment?.status, payment?.channel);
 
-      if (payment?.status === 'Success') { //TODO? payments.get(element.id).status === PaymentStatus.SUCCESS (add helper method to payment model)
+      //TODO? payments.get(element.id).status === PaymentStatus.SUCCESS (add helper method to payment model)
+      if (payment?.status === 'Success') {
         break;
       }
     } // TODO error handling.....?
