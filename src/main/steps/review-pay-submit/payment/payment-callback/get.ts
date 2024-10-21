@@ -31,21 +31,34 @@ export default class PaymentCallbackGetController {
       return res.redirect(CHECK_ANSWERS_URL);
     }
 
-    const lastPaymentAttempt = payments.lastPayment;
-    const payment = await paymentClient.get(lastPaymentAttempt.reference);
+    if (req.session.userCase.applicant1FirstNames === 'Error') {
+      throw new Error('Error: applicant1FirstNames == Error');
+    }
 
-    logger.info(`caseId=${caseId} lastPaymentStatus=${payment?.status}`);
-    /* if (payment?.status === 'Initiated') {
-      return res.redirect(lastPaymentAttempt.channel);
-    } */
+    //const lastPaymentAttempt = payments.lastPayment; //TODO remove
 
-    logger.info(`caseId=${caseId} lastPaymentTransactionId=${lastPaymentAttempt.transactionId}`);
-    payments.setStatus(lastPaymentAttempt.transactionId, payment?.status, payment?.channel);
+    for await (const element of payments.list.reverse()) {
+      const payment = await paymentClient.get(element.value.reference);
+
+      logger.info(`caseId=${caseId} lastPaymentStatus=${payment?.status}`);
+      /* if (payment?.status === 'Initiated') {
+        return res.redirect(lastPaymentAttempt.channel);
+      } */
+      logger.info(`caseId=${caseId} lastPaymentTransactionId=${element.id}`);
+
+      payments.setStatus(element.id, payment?.status, payment?.channel);
+
+      //TODO? payments.get(element.id).status === PaymentStatus.SUCCESS (add helper method to payment model)
+      if (payment?.status === 'Success') {
+        break;
+      }
+    } // TODO error handling.....?
 
     req.session.userCase = await req.locals.api.addPayment(req.session.userCase.id, payments.list);
 
     req.session.save(() => {
       logger.info(`caseId=${caseId} wasLastPaymentSuccessful=${payments.wasLastPaymentSuccessful}`);
+
       if (payments.wasLastPaymentSuccessful) {
         return res.redirect(APPLICATION_SUBMITTED);
       }
