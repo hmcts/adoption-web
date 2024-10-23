@@ -20,7 +20,7 @@ describe('PaymentCallbackGetController', () => {
   });
 
   describe('callback', () => {
-    it('saves and redirects to the submitted page if only payment was successful', async () => {
+    it('saves and redirects to the submitted page if the only payment was successful', async () => {
       const req = mockRequest({
         userCase: {
           state: State.AwaitingPayment,
@@ -122,7 +122,7 @@ describe('PaymentCallbackGetController', () => {
       expect(res.redirect).toHaveBeenCalledWith(APPLICATION_SUBMITTED);
     });
 
-    it('saves and redirects to the submitted page if last payment was successful', async () => {
+    it('saves and redirects to the submitted page if the last payment was successful', async () => {
       const req = mockRequest({
         userCase: {
           state: State.AwaitingPayment,
@@ -230,7 +230,7 @@ describe('PaymentCallbackGetController', () => {
       //expect(req).toThrowError;
     });
 
-    it('gets userCase and redirects to the home page if the state is draft and last payment was successful', async () => {
+    it('gets userCase and redirects to the home page if the state is draft and payment was successful', async () => {
       const req = mockRequest({
         userCase: {
           state: State.Draft,
@@ -266,7 +266,7 @@ describe('PaymentCallbackGetController', () => {
       expect(res.redirect).toHaveBeenCalledWith(CHECK_ANSWERS_URL);
     });
 
-    it('redirects to the home page if there is no last payment', async () => {
+    it('redirects to the home page if there is no payment', async () => {
       const req = mockRequest({
         userCase: {
           state: State.AwaitingPayment,
