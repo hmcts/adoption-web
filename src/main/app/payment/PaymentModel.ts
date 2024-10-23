@@ -55,7 +55,9 @@ export class PaymentModel {
 
   public isPaymentInProgress(): boolean {
     return (
-      this.hasPayment && this.successfulOrLastPayment.status === PaymentStatus.IN_PROGRESS && this.successfulOrLastPayment.reference !== null
+      this.hasPayment &&
+      this.successfulOrLastPayment.status === PaymentStatus.IN_PROGRESS &&
+      this.successfulOrLastPayment.reference !== null
     );
   }
 }
