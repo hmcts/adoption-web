@@ -12,7 +12,7 @@ const logger = Logger.getLogger('payment-callback');
 export default class PaymentCallbackGetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
     const payments = new PaymentModel(req.session.userCase.payments);
-    if (req.session.userCase.state === State.Draft && payments.wasLastPaymentSuccessful) {
+    if (req.session.userCase.state === State.Draft && payments.hasSuccessfulPayment) {
       req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, {}, CITIZEN_SUBMIT);
     }
     if (req.session.userCase.state !== State.AwaitingPayment) {
@@ -52,9 +52,9 @@ export default class PaymentCallbackGetController {
     req.session.userCase = await req.locals.api.addPayment(req.session.userCase.id, payments.list);
 
     req.session.save(() => {
-      logger.info(`caseId=${caseId} wasLastPaymentSuccessful=${payments.wasLastPaymentSuccessful}`);
+      logger.info(`caseId=${caseId} hasSuccessfulPayment=${payments.hasSuccessfulPayment}`);
 
-      if (payments.wasLastPaymentSuccessful) {
+      if (payments.hasSuccessfulPayment) {
         return res.redirect(APPLICATION_SUBMITTED);
       }
 

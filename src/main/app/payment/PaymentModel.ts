@@ -13,7 +13,7 @@ export class PaymentModel {
     return this.payments.length > 0;
   }
 
-  public get lastPayment(): Payment {
+  public get successfulOrLastPayment(): Payment {
     const idx = this.payments.length - 1;
     const successPayment = this.payments.filter(item => item.value.status === PaymentStatus.SUCCESS);
     if (successPayment.length > 0) {
@@ -23,8 +23,8 @@ export class PaymentModel {
     return { ...this.payments[idx].value, transactionId: this.payments[idx].id };
   }
 
-  public get wasLastPaymentSuccessful(): boolean {
-    return this.lastPayment?.status === PaymentStatus.SUCCESS;
+  public get hasSuccessfulPayment(): boolean {
+    return this.successfulOrLastPayment?.status === PaymentStatus.SUCCESS;
   }
 
   public get paymentTotal(): number {
@@ -55,7 +55,7 @@ export class PaymentModel {
 
   public isPaymentInProgress(): boolean {
     return (
-      this.hasPayment && this.lastPayment.status === PaymentStatus.IN_PROGRESS && this.lastPayment.reference !== null
+      this.hasPayment && this.successfulOrLastPayment.status === PaymentStatus.IN_PROGRESS && this.successfulOrLastPayment.reference !== null
     );
   }
 }
