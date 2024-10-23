@@ -31,28 +31,23 @@ export default class PaymentCallbackGetController {
       return res.redirect(CHECK_ANSWERS_URL);
     }
 
+    //TODO remove
     if (req.session.userCase.applicant1FirstNames === 'Error') {
       throw new Error('Error: applicant1FirstNames == Error');
     }
 
-    //const lastPaymentAttempt = payments.lastPayment; //TODO remove
-
-    for await (const element of payments.list.reverse()) {
+    for (let i = payments.list.length - 1; i >= 0; i--) {
+      const element = payments.list[i];
       const payment = await paymentClient.get(element.value.reference);
 
-      logger.info(`caseId=${caseId} lastPaymentStatus=${payment?.status}`);
-      /* if (payment?.status === 'Initiated') {
-        return res.redirect(lastPaymentAttempt.channel);
-      } */
-      logger.info(`caseId=${caseId} lastPaymentTransactionId=${element.id}`);
+      logger.info(`caseId=${caseId} lastPaymentStatus=${payment?.status} lastPaymentTransactionId=${element.id}`);
 
       payments.setStatus(element.id, payment?.status, payment?.channel);
 
-      //TODO? payments.get(element.id).status === PaymentStatus.SUCCESS (add helper method to payment model)
       if (payment?.status === 'Success') {
         break;
       }
-    } // TODO error handling.....?
+    }
 
     req.session.userCase = await req.locals.api.addPayment(req.session.userCase.id, payments.list);
 
