@@ -31,11 +31,6 @@ export default class PaymentCallbackGetController {
       return res.redirect(CHECK_ANSWERS_URL);
     }
 
-    //TODO remove
-    if (req.session.userCase.applicant1FirstNames === 'Error') {
-      throw new Error('Error: applicant1FirstNames == Error');
-    }
-
     for (let i = payments.list.length - 1; i >= 0; i--) {
       const element = payments.list[i];
       const payment = await paymentClient.get(element.value.reference);
