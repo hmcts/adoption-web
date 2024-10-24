@@ -415,7 +415,7 @@ const isAdoptionAgencyOrLaInProgress = (userCase: CaseWithId): boolean => {
 export const getReviewPaySubmitUrl = (userCase: CaseWithId): string => {
   const payments = new PaymentModel(userCase.payments);
   if (payments.hasPayment) {
-    if (payments.wasLastPaymentSuccessful) {
+    if (payments.hasSuccessfulPayment) {
       if (userCase.state === State.Draft) {
         return urls.PAYMENT_CALLBACK_URL;
       }

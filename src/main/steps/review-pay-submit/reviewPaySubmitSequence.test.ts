@@ -1,3 +1,5 @@
+import { State } from '../../app/case/definition';
+
 import { reviewPaySubmitSequence } from './reviewPaySubmitSequence';
 
 describe('reviewPaySubmitSequence', () => {
@@ -11,6 +13,12 @@ describe('reviewPaySubmitSequence', () => {
     expect(reviewPaySubmitSequence[1].url).toBe('/review-pay-submit/check-your-answers');
     expect(reviewPaySubmitSequence[1].showInSection).toBe('reviewPaySubmit');
     expect(reviewPaySubmitSequence[1].getNextStep({})).toBe('/review-pay-submit/statement-of-truth');
+    expect(reviewPaySubmitSequence[1].getNextStep({ state: State.Draft })).toBe(
+      '/review-pay-submit/statement-of-truth'
+    );
+    expect(reviewPaySubmitSequence[1].getNextStep({ state: State.AwaitingPayment })).toBe(
+      '/review-pay-submit/pay-and-submit'
+    );
 
     expect(reviewPaySubmitSequence[2].url).toBe('/review-pay-submit/statement-of-truth');
     expect(reviewPaySubmitSequence[2].showInSection).toBe('reviewPaySubmit');

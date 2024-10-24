@@ -14,7 +14,7 @@ describe('PaymentModel', () => {
       { id: '123', value: { data: 'mock' } as unknown as Payment },
       { id: '456', value: { data: 'last one' } as unknown as Payment },
     ]);
-    expect(payment.lastPayment).toEqual({ transactionId: '456', data: 'last one' });
+    expect(payment.successfulOrLastPayment).toEqual({ transactionId: '456', data: 'last one' });
   });
 
   it('returns the total of successful payments', async () => {
