@@ -44,6 +44,11 @@ export class PaymentClient {
     };
 
     try {
+      //TODO remove
+      if (this.session.userCase.applicant1LastNames === 'Error') {
+        throw new Error('Error: applicant1LastNames == Error');
+      }
+
       const response = await this.client.post<Payment>('/card-payments', body);
       logger.info(`Generated govpay link for caseId=${caseId}`);
 
