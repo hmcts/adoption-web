@@ -1,5 +1,3 @@
-import { State } from '../../app/case/definition';
-
 import { reviewPaySubmitSequence } from './reviewPaySubmitSequence';
 
 describe('reviewPaySubmitSequence', () => {
