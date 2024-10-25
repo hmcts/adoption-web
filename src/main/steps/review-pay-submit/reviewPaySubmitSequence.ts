@@ -1,5 +1,4 @@
 import { CaseWithId } from '../../app/case/case';
-import { State } from '../../app/case/definition';
 import { Sections, Step } from '../constants';
 import * as Urls from '../urls';
 
@@ -12,8 +11,7 @@ export const reviewPaySubmitSequence: Step[] = [
   {
     url: Urls.CHECK_ANSWERS_URL,
     showInSection: Sections.ReviewPaySubmit,
-    getNextStep: data =>
-      (data as Partial<CaseWithId>).state === State.AwaitingPayment ? Urls.PAY_AND_SUBMIT_URL : Urls.STATEMENT_OF_TRUTH,
+    getNextStep: () => Urls.STATEMENT_OF_TRUTH,
   },
   {
     url: Urls.STATEMENT_OF_TRUTH,
