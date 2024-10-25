@@ -17,7 +17,7 @@ export default class PaymentCallbackGetController {
     }
     if (req.session.userCase.state === State.Submitted || req.session.userCase.state === State.LaSubmitted) {
       return res.redirect(APPLICATION_SUBMITTED);
-    } else if (req.session.userCase.state === State.Draft) {
+    } else if (req.session.userCase.state !== State.AwaitingPayment) {
       return res.redirect(CHECK_ANSWERS_URL);
     }
 
