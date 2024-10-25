@@ -15,7 +15,9 @@ export default class PaymentCallbackGetController {
     if (req.session.userCase.state === State.Draft && payments.hasSuccessfulPayment) {
       req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, {}, CITIZEN_SUBMIT);
     }
-    if (req.session.userCase.state !== State.AwaitingPayment) {
+    if (req.session.userCase.state === State.Submitted || req.session.userCase.state === State.LaSubmitted) {
+      return res.redirect(APPLICATION_SUBMITTED);
+    } else if (req.session.userCase.state === State.Draft) {
       return res.redirect(CHECK_ANSWERS_URL);
     }
 
