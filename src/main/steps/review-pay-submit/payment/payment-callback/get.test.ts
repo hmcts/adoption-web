@@ -245,6 +245,36 @@ describe('PaymentCallbackGetController', () => {
       expect(res.redirect).toHaveBeenCalledWith(CHECK_ANSWERS_URL);
     });
 
+    it('redirects to the application submitted page if the application has been submitted', async () => {
+      const req = mockRequest({
+        userCase: {
+          state: State.Submitted,
+        },
+      });
+      const res = mockResponse();
+
+      await paymentController.get(req, res);
+
+      expect(mockGet).not.toHaveBeenCalled();
+      expect(req.locals.api.addPayment).not.toHaveBeenCalled();
+      expect(res.redirect).toHaveBeenCalledWith(APPLICATION_SUBMITTED);
+    });
+
+    it('redirects to the application submitted page if the application has been submitted by the LA', async () => {
+      const req = mockRequest({
+        userCase: {
+          state: State.LaSubmitted,
+        },
+      });
+      const res = mockResponse();
+
+      await paymentController.get(req, res);
+
+      expect(mockGet).not.toHaveBeenCalled();
+      expect(req.locals.api.addPayment).not.toHaveBeenCalled();
+      expect(res.redirect).toHaveBeenCalledWith(APPLICATION_SUBMITTED);
+    });
+
     it('saves and redirects to the pay your fee page if payment was unsuccessful', async () => {
       const userCase = {
         state: State.AwaitingPayment,
