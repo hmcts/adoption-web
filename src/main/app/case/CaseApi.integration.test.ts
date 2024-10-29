@@ -322,7 +322,7 @@ describe('CaseApi', () => {
           case_data: {
             pcqId: '1234',
           },
-        }
+        },
       ];
 
       await expect(api.checkOldPCQIDExists(ccdResponse)).resolves.toBe('1234');
@@ -334,7 +334,7 @@ describe('CaseApi', () => {
           id: '1234',
           state: State.Draft,
           case_data: {},
-        }
+        },
       ];
 
       await expect(api.checkOldPCQIDExists(ccdResponse)).resolves.toBe(undefined);
