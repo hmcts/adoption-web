@@ -320,12 +320,12 @@ describe('CaseApi', () => {
           id: '1234',
           state: State.Submitted,
           case_data: {
-            pcqId: '1234',
+            pcqId: 'oldPcqId',
           },
         },
       ];
 
-      await expect(api.checkOldPCQIDExists(ccdResponse)).resolves.toBe('1234');
+      await expect(api.checkOldPCQIDExists(ccdResponse)).resolves.toBe('oldPcqId');
     });
 
     test('Should return undefined if no past cases have pcqIds', async () => {
