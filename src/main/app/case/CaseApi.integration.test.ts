@@ -312,6 +312,40 @@ describe('CaseApi', () => {
 
     expect(mockLogger.error).toHaveBeenCalledWith('API Error', 'Error');
   });
+
+  describe('checkOldPCQIDExists', () => {
+    test('Should return PCQ ID if past case has one', async () => {
+      const ccdResponse = [
+        {
+          id: '1234',
+          state: State.Submitted,
+          case_data: {
+            pcqId: '1234',
+          },
+        }
+      ];
+
+      await expect(api.checkOldPCQIDExists(ccdResponse)).resolves.toBe('1234');
+    });
+
+    test('Should return undefined if no past cases have pcqIds', async () => {
+      const ccdResponse = [
+        {
+          id: '1234',
+          state: State.Draft,
+          case_data: {},
+        }
+      ];
+
+      await expect(api.checkOldPCQIDExists(ccdResponse)).resolves.toBe(undefined);
+    });
+
+    test('Should return undefined if no past cases', async () => {
+      const ccdResponse = undefined;
+
+      await expect(api.checkOldPCQIDExists(ccdResponse)).resolves.toBe(undefined);
+    });
+  });
 });
 
 describe('getCaseApi', () => {
