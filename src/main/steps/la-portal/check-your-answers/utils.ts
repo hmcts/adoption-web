@@ -227,7 +227,7 @@ function prepareSummaryList(
     ...(prefix === FieldPrefix.BIRTH_MOTHER ||
     userCase.birthFatherNameOnCertificate === YesOrNo.YES ||
     userCase.birthFatherIdentityKnown === YesOrNo.YES
-      ? fieldPrefixBirthMotherOrBirthFather(
+      ? fieldPrefixBirthMother(
           keys,
           visuallyHiddenTexts,
           userCase,
@@ -241,7 +241,8 @@ function prepareSummaryList(
   ];
 }
 
-function fieldPrefixBirthMotherOrBirthFather(
+//Also used for BirthFather
+function fieldPrefixBirthMother(
   keys: Record<string, string>,
   visuallyHiddenTexts: Record<string, string>,
   userCase: Partial<CaseWithId>,
