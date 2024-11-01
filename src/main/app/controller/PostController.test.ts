@@ -508,7 +508,7 @@ describe('PostController', () => {
     const body = { MOCK_KEY: 'MOCK_VALUE', saveBeforeSessionTimeout: true };
     const controller = new PostController(mockFormContent.fields);
 
-    const req = mockRequest({ body });
+    const req = mockRequest({ body, path: LA_PORTAL_CHECK_YOUR_ANSWERS });
     const res = mockResponse();
     await controller.post(req, res);
 

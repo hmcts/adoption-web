@@ -21,6 +21,7 @@ import {
   SAVE_AND_RELOGIN,
   SAVE_AND_SIGN_OUT,
   SAVE_AS_DRAFT,
+  STATEMENT_OF_TRUTH,
 } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
 import {
@@ -139,10 +140,12 @@ export class PostController<T extends AnyObject> {
   }
 
   private async saveBeforeSessionTimeout(req: AppRequest<T>, res: Response, formData: Partial<Case>): Promise<void> {
-    try {
-      await this.save(req, formData, this.getEventName(req));
-    } catch {
-      // ignore
+    if (!req.path.includes(STATEMENT_OF_TRUTH) && !req.path.includes(LA_PORTAL_STATEMENT_OF_TRUTH)) {
+      try {
+        await this.save(req, formData, this.getEventName(req));
+      } catch {
+        // ignore
+      }
     }
     res.end();
   }
