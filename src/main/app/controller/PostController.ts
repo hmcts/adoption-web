@@ -133,8 +133,8 @@ export class PostController<T extends AnyObject> {
   ): Promise<void> {
     try {
       await this.save(req, formData, CITIZEN_SAVE_AND_CLOSE);
-    } catch {
-      // ignore
+    } catch (err) {
+      req.locals.logger.error(`saveAndSignOut Error saving caseId ${req.session?.userCase?.id} from ${req.path}`, err);
     }
     res.redirect(redirectUrl);
   }
@@ -143,8 +143,11 @@ export class PostController<T extends AnyObject> {
     if (!req.path.includes(STATEMENT_OF_TRUTH) && !req.path.includes(LA_PORTAL_STATEMENT_OF_TRUTH)) {
       try {
         await this.save(req, formData, this.getEventName(req));
-      } catch {
-        // ignore
+      } catch (err) {
+        req.locals.logger.error(
+          `saveBeforeSessionTimeout Error saving caseId ${req.session?.userCase?.id} from ${req.path}`,
+          err
+        );
       }
     }
     res.end();
