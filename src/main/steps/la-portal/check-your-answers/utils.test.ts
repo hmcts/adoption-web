@@ -262,7 +262,7 @@ describe('birthParentSummaryList', () => {
             },
           },
           {
-            key: { text: 'Does birth father has parental responsibility?' },
+            key: { text: 'Does birth father have parental responsibility?' },
             value: {
               html: 'Yes',
             },
@@ -272,7 +272,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/parental-responsibility?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Does birth father has parental responsibility?',
+                  visuallyHiddenText: 'Does birth father have parental responsibility?',
                 },
               ],
             },
@@ -481,7 +481,7 @@ describe('birthParentSummaryList', () => {
             },
           },
           {
-            key: { text: 'Does birth father has parental responsibility?' },
+            key: { text: 'Does birth father have parental responsibility?' },
             value: { html: 'No' },
             classes: 'govuk-summary-list__row--no-border',
             actions: {
@@ -489,7 +489,7 @@ describe('birthParentSummaryList', () => {
                 {
                   href: '/la-portal/birth-father/parental-responsibility?returnUrl=/la-portal/check-your-answers',
                   text: 'Change',
-                  visuallyHiddenText: 'Does birth father has parental responsibility?',
+                  visuallyHiddenText: 'Does birth father have parental responsibility?',
                 },
               ],
             },
@@ -570,6 +570,7 @@ describe('birthParentSummaryList', () => {
       userCase: {
         ...mockUserCase,
         birthFatherNameOnCertificate: YesOrNo.NO,
+        birthFatherIdentityKnown: YesOrNo.NO,
       },
       fieldPrefix: FieldPrefix.BIRTH_FATHER,
       expected: {
@@ -591,6 +592,170 @@ describe('birthParentSummaryList', () => {
         ],
       },
     },
+    {
+      userCase: {
+        ...mockUserCase,
+        birthFatherNameOnCertificate: YesOrNo.NO,
+        birthFatherIdentityKnown: YesOrNo.YES,
+      },
+      fieldPrefix: FieldPrefix.BIRTH_FATHER,
+      expected: {
+        title: "Birth father's details",
+        rows: [
+          {
+            key: { text: 'Name on birth certificate' },
+            value: { text: 'No' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/birth-father/name-on-certificate?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Birth father name on birth certificate',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Full name' },
+            value: { text: 'BIRTH_FATHER_FIRST_NAMES BIRTH_FATHER_LAST_NAMES' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/birth-father/full-name?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Birth father full name',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Alive' },
+            value: { html: 'Yes' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/birth-father/still-alive?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Birth father alive',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Does birth father have parental responsibility?' },
+            value: {
+              html: 'Yes',
+            },
+            classes: 'govuk-summary-list__row--no-border',
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/birth-father/parental-responsibility?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Does birth father have parental responsibility?',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Reason', html: ' ' },
+            value: {
+              html: '<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">Reason: </span> Birth certificate',
+            },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/birth-father/parental-responsibility/granted?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Birth father parental responsibility reason',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Nationality' },
+            value: { html: 'British' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/birth-father/nationality?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Birth father nationality',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Occupation' },
+            value: { text: 'MOCK_OCCUPATION' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/birth-father/occupation?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Birth father occupation',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Address known' },
+            value: { html: 'Yes' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/birth-father/address-known?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Birth father address known',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Address' },
+            value: {
+              html: 'MOCK_ADDRESS_LINE1<br>MOCK_ADDRESS_TOWN<br>MOCK_ADDRESS_COUNTY<br>MOCK_ADDRESS_POSTCODE',
+            },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/birth-father/address/manual?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Birth father address',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Last date this address was confirmed' },
+            value: { html: '1 April 2022' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/birth-father/last-address-confirmed?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Last date this address was confirmed by birth father',
+                },
+              ],
+            },
+          },
+          {
+            key: { text: 'Any document or court orders to be sent?' },
+            value: { html: 'Yes' },
+            actions: {
+              items: [
+                {
+                  href: '/la-portal/birth-father/served-with?returnUrl=/la-portal/check-your-answers',
+                  text: 'Change',
+                  visuallyHiddenText: 'Any document or court orders to be sent by birth father?',
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    //TODO add tests here
   ])('return correct summary list items when %#', ({ userCase, fieldPrefix, expected }) => {
     expect(birthParentSummaryList(enContent, userCase, fieldPrefix)).toStrictEqual(expected);
   });
