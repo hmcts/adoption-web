@@ -1,6 +1,8 @@
 import { type Locator, type Page } from '@playwright/test';
 
-export default class LASignInPage {
+import BasePage from '../../pages/basePage.page';
+
+export class LASignInPage extends BasePage {
   readonly applicationDetailsHeading: Locator;
   readonly courtCaseReferenceNumberHeading: Locator;
   readonly childNameOnApplicationHeading: Locator;
@@ -15,6 +17,8 @@ export default class LASignInPage {
   readonly saveAndContinueButton: Locator;
 
   constructor(page: Page) {
+    super(page);
+
     this.applicationDetailsHeading = page.getByRole('heading', { name: 'Application details' });
     this.courtCaseReferenceNumberHeading = page.getByRole('heading', { name: 'Court case reference number' });
     this.childNameOnApplicationHeading = page.getByRole('heading', { name: 'Child named on the application' });
@@ -43,6 +47,6 @@ export default class LASignInPage {
     await this.childDateOfBirthMonth.fill(month);
     await this.childDateOfBirthYear.fill(year);
 
-    await this.saveAndContinueButton.click();
+    await super.clickSaveAndContinue();
   }
 }
