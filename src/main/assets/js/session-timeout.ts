@@ -9,9 +9,9 @@ import {
   TIMED_OUT_URL,
 } from '../../steps/urls';
 
-const eventTimer = 5 * 6 * 1000; // 5 minutes
-const TIMEOUT_NOTICE = 2 * 6 * 1000; // 2 minutes
-const sessionTimeoutInterval = 20 * 6 * 1000; // 20 minutes
+const eventTimer = 5 * 60 * 1000; // 5 minutes
+const TIMEOUT_NOTICE = 2 * 60 * 1000; // 2 minutes
+const sessionTimeoutInterval = 20 * 60 * 1000; // 20 minutes
 
 // let timeout;
 let notificationTimer;
