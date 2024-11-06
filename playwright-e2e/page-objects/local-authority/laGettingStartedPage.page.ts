@@ -1,6 +1,6 @@
-import { Locator, Page } from "@playwright/test";
+import { Locator, Page } from '@playwright/test';
 
-export default class LAGettingStartedPage {
+export class LAGettingStartedPage {
   readonly gettingStartedHeading: Locator;
   readonly submittingResponseHeading: Locator;
   readonly whatYouWillNeedHeading: Locator;
