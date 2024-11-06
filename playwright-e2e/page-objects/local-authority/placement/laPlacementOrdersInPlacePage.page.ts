@@ -1,6 +1,8 @@
 import { Locator, Page } from '@playwright/test';
 
-export class LAPlacementOrdersInPlacePage {
+import BasePage from '../../../pages/basePage.page';
+
+export class LAPlacementOrdersInPlacePage extends BasePage {
   readonly placementOrdersInPlaceHeading: Locator;
 
   readonly yesRadioButton: Locator;
@@ -10,6 +12,8 @@ export class LAPlacementOrdersInPlacePage {
   readonly saveAsDraftButton: Locator;
 
   constructor(page: Page) {
+    super(page);
+
     this.placementOrdersInPlaceHeading = page.getByRole('heading', { name: 'Orders already in place' });
 
     this.yesRadioButton = page.getByLabel('Yes');
@@ -17,21 +21,5 @@ export class LAPlacementOrdersInPlacePage {
 
     this.saveAndContinueButton = page.getByRole('button', { name: 'Save and continue' });
     this.saveAsDraftButton = page.getByRole('button', { name: 'Save as draft' });
-  }
-
-  async checkYesRadioButton(): Promise<void> {
-    await this.yesRadioButton.check();
-  }
-
-  async checkNoRadioButton(): Promise<void> {
-    await this.noRadioButton.check();
-  }
-
-  async clickSaveAndContinueButton(): Promise<void> {
-    await this.saveAndContinueButton.click();
-  }
-
-  async clickSaveAsDraftButton(): Promise<void> {
-    await this.saveAsDraftButton.click();
   }
 }
