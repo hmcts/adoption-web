@@ -1,6 +1,8 @@
 import { Locator, Page } from '@playwright/test';
 
-export class LAChildHasOtherSiblingsPage {
+import BasePage from '../../../pages/basePage.page';
+
+export class LAChildHasOtherSiblingsPage extends BasePage {
   readonly childHasOtherSiblingsHeading: Locator;
 
   readonly yesRadioButton: Locator;
@@ -11,6 +13,8 @@ export class LAChildHasOtherSiblingsPage {
   readonly saveAsDraftButton: Locator;
 
   constructor(page: Page) {
+    super(page);
+
     this.childHasOtherSiblingsHeading = page.getByRole('heading', { name: 'Does the child have any' });
 
     this.yesRadioButton = page.getByLabel('Yes');
@@ -19,25 +23,5 @@ export class LAChildHasOtherSiblingsPage {
 
     this.saveAndContinueButton = page.getByRole('button', { name: 'Save and continue' });
     this.saveAsDraftButton = page.getByRole('button', { name: 'Save as draft' });
-  }
-
-  async checkYesRadioButton(): Promise<void> {
-    await this.yesRadioButton.check();
-  }
-
-  async checkNoRadioButton(): Promise<void> {
-    await this.noRadioButton.check();
-  }
-
-  async checkNotSureRadioButton(): Promise<void> {
-    await this.notSureRadioButton.check();
-  }
-
-  async clickSaveAndContinueButton(): Promise<void> {
-    await this.saveAndContinueButton.click();
-  }
-
-  async clickSaveAsDraftButton(): Promise<void> {
-    await this.saveAsDraftButton.click();
   }
 }
