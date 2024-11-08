@@ -21,13 +21,17 @@ import { LABirthMotherLastKnownAddressPage } from '../page-objects/local-authori
 import { LABirthMotherNamePage } from '../page-objects/local-authority/birth-mother/laBirthMotherNamePage.page';
 import { LABirthMotherNationalityPage } from '../page-objects/local-authority/birth-mother/laBirthMotherNationalityPage.page';
 import { LABirthMotherOccupationPage } from '../page-objects/local-authority/birth-mother/laBirthMotherOccupationPage.page';
+import { LAUploadDocumentsPage } from '../page-objects/local-authority/document-upload/laUploadDocuments.page';
+import { LACheckYourAnswerPage } from '../page-objects/local-authority/laCheckYourAnswer.page';
 import { LAChildDetailsPage } from '../page-objects/local-authority/laChildDetailsPage.page';
 import { LAGettingStartedPage } from '../page-objects/local-authority/laGettingStartedPage.page';
 import { LASignInPage } from '../page-objects/local-authority/laSignInPage.page';
+import { LAStatementOfTruthPage } from '../page-objects/local-authority/laStatementOfTruth.page';
 import { LAOtherPersonResponsibilityPage } from '../page-objects/local-authority/other-person/laOtherPersonResponsibilityPage.page';
 import { LAPlacementDateOfOrderPage } from '../page-objects/local-authority/placement/laPlacementDateOfOrderPage.page';
 import { LAPlacementOrderNumberPage } from '../page-objects/local-authority/placement/laPlacementOrderNumberPage.page';
 import { LAPlacementOrdersInPlacePage } from '../page-objects/local-authority/placement/laPlacementOrdersInPlacePage.page';
+import { LAChildHasOtherSiblingsPage } from '../page-objects/local-authority/siblings/laSiblingCourtDetailsSection.page';
 
 type CreateFixtures = {
   laSignInPage: LASignInPage;
@@ -58,6 +62,10 @@ type CreateFixtures = {
   laPlacementOrderNumberPage: LAPlacementOrderNumberPage;
   laPlacementDateOfOrderPage: LAPlacementDateOfOrderPage;
   laPlacementOrdersInPlacePage: LAPlacementOrdersInPlacePage;
+  laChildHasOtherSiblingsPage: LAChildHasOtherSiblingsPage;
+  laUploadDocumentsPage: LAUploadDocumentsPage;
+  laCheckYourAnswerPage: LACheckYourAnswerPage;
+  laStatementOfTruthPage: LAStatementOfTruthPage;
 };
 
 export const test = base.extend<CreateFixtures>({
@@ -144,5 +152,17 @@ export const test = base.extend<CreateFixtures>({
   },
   laPlacementOrdersInPlacePage: async ({ page }, use) => {
     await use(new LAPlacementOrdersInPlacePage(page));
+  },
+  laChildHasOtherSiblingsPage: async ({ page }, use) => {
+    await use(new LAChildHasOtherSiblingsPage(page));
+  },
+  laUploadDocumentsPage: async ({ page }, use) => {
+    await use(new LAUploadDocumentsPage(page));
+  },
+  laCheckYourAnswerPage: async ({ page }, use) => {
+    await use(new LACheckYourAnswerPage(page));
+  },
+  laStatementOfTruthPage: async ({ page }, use) => {
+    await use(new LAStatementOfTruthPage(page));
   },
 });
