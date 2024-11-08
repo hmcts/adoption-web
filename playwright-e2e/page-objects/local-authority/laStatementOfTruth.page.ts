@@ -1,6 +1,8 @@
 import { Locator, Page } from '@playwright/test';
 
-export class LAStatementOfTruthPage {
+import BasePage from '../../pages/basePage.page';
+
+export class LAStatementOfTruthPage extends BasePage {
   readonly statementOfTruthHeading: Locator;
 
   readonly fullNameLabel: Locator;
@@ -13,6 +15,8 @@ export class LAStatementOfTruthPage {
   readonly saveAsDraftButton: Locator;
 
   constructor(page: Page) {
+    super(page);
+
     this.statementOfTruthHeading = page.getByRole('heading', { name: 'Statement of truth' });
 
     this.fullNameLabel = page.getByLabel('Your full name');
@@ -41,11 +45,7 @@ export class LAStatementOfTruthPage {
     await this.truthStatementCheckbox.check();
   }
 
-  async clickConfirmButton(): Promise<void> {
+  async clickConfirm(): Promise<void> {
     await this.confirmButton.click();
-  }
-
-  async clickSaveAsDraftButton(): Promise<void> {
-    await this.saveAsDraftButton.click();
   }
 }
