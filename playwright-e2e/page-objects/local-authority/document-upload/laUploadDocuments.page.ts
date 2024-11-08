@@ -1,6 +1,8 @@
 import { Locator, Page } from '@playwright/test';
 
-export class LAUploadDocumentsPage {
+import BasePage from '../../../pages/basePage.page';
+
+export class LAUploadDocumentsPage extends BasePage {
   readonly uploadDocumentsHeading: Locator;
 
   readonly cannotUploadDocumentsCheckbox: Locator;
@@ -9,6 +11,8 @@ export class LAUploadDocumentsPage {
   readonly saveAsDraftButton: Locator;
 
   constructor(page: Page) {
+    super(page);
+
     this.uploadDocumentsHeading = page.getByRole('heading', { name: 'Upload documents' });
 
     this.cannotUploadDocumentsCheckbox = page.getByLabel('I cannot upload some or all');
@@ -19,13 +23,5 @@ export class LAUploadDocumentsPage {
 
   async checkCannotUploadDocumentsCheckbox(): Promise<void> {
     await this.cannotUploadDocumentsCheckbox.check();
-  }
-
-  async clickSaveAndContinueButton(): Promise<void> {
-    await this.saveAndContinueButton.click();
-  }
-
-  async clickSaveAsDraftButton(): Promise<void> {
-    await this.saveAsDraftButton.click();
   }
 }
