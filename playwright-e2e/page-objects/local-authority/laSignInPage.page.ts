@@ -31,8 +31,10 @@ export class LASignInPage extends BasePage {
     this.childDateOfBirthYear = page.getByLabel('Year');
 
     this.saveAndContinueButton = page.getByRole('button', { name: 'Save and continue' });
+  }
 
-    page.goto('https://adoption-web.aat.platform.hmcts.net/la-portal/kba-case-ref');
+  async navigateTo(): Promise<void> {
+    await this.page.goto('https://adoption-web.aat.platform.hmcts.net/la-portal/kba-case-ref');
   }
 
   async startLAJourney(caseRefNo: string, childFullName: string): Promise<void> {
