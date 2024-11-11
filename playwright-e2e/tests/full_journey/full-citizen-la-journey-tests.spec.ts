@@ -22,13 +22,14 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
   let userPassword: string;
   let userId: string;
 
-  test.beforeEach(async () => {
+  test.beforeEach(async ({ signIn }) => {
     const userInfo = await setupUser();
     if (userInfo) {
       userEmail = userInfo.email;
       userPassword = userInfo.password;
       userId = userInfo.id;
     }
+    await signIn.navigateTo();
   });
 
   test.afterEach('Status check', async () => {
@@ -92,6 +93,8 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       const stringNumberOfApplicationLocator = 'notSpouseOrCivilPartner';
 
       // Sign in
+      // await signIn.navigateTo();
+      // await signIn.signIn(userEmail, userPassword);
       await e2eJourneyHelper.citizenAdoptionSignInWithNoPartner(
         app,
         userEmail,
@@ -141,10 +144,7 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       let referenceNum: string = await element.textContent();
       referenceNum = referenceNum.replace(/-/g, '');
 
-      // Start LA Journey
-      // const laSignInPage = new LASignInPage(page);
-      // await laSignInPage.startLAJourney(referenceNum, childFullname);
-
+      await laSignInPage.navigateTo();
       await laSignInPage.startLAJourney(referenceNum, childFullname);
       await laGettingStartedPage.laGettingStarted();
       await laChildDetailsPage.clickBirthCertificateDetailsSection();
@@ -156,6 +156,9 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       // Child nationality page
       await laChildNationalityPage.checkBritishCheckbox();
       await laChildNationalityPage.clickSaveAndContinue();
+
+      // Back to main naviagation page
+      laChildDetailsPage.clickBirthMotherDetailsLink();
 
       // Mother section
       // Mother name page
@@ -195,7 +198,7 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       await laBirthMotherDocumentsPage.clickSaveAndContinue();
 
       // Back to the main navigation page
-      await laChildDetailsPage.clickBirthCertificateDetailsSection();
+      await laChildDetailsPage.clickBirthFatherDetailsLink();
 
       // Father on certificate
       await laBirthFatherOnCertificatePage.checkYesRadioButton();
