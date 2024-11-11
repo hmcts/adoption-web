@@ -84,9 +84,6 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       const childFullname = childFirstName + ' ' + childLastName;
       const stringNumberOfApplicationLocator = 'notSpouseOrCivilPartner';
 
-      // Sign in
-      // await signIn.navigateTo();
-      // await signIn.signIn(userEmail, userPassword);
       await e2eJourneyHelper.citizenAdoptionSignInWithNoPartner(
         app,
         userEmail,
