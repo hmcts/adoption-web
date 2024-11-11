@@ -1,21 +1,13 @@
-import AxeBuilder from '@axe-core/playwright';
 import { faker } from '@faker-js/faker';
-import { test as base } from '@playwright/test';
 import * as dotenv from 'dotenv';
 
-import { test, expect } from '../../fixtures/fixtures';
+import { test } from '../../fixtures/fixtures';
 import { runAccessibilityScan } from '../../helpers/accessibilityHelper';
 import * as e2eJourneyHelper from '../../helpers/e2eJourneyHelper';
 import { setupUser, teardownUser } from '../../hooks/createDeleteUser.hook';
 import App from '../../pages/app.page';
 
 dotenv.config();
-
-// const test = base.extend<{ makeAxeBuilder: () => AxeBuilder }>({
-//   makeAxeBuilder: async ({ page }, use) => {
-//     await use(() => new AxeBuilder({ page }));
-//   },
-// });
 
 test.describe('e2e citzen submit citizen and la journeys', () => {
   let userEmail: string;
@@ -141,8 +133,12 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       const element = await app.page
         .locator('.govuk-panel.govuk-panel--confirmation .govuk-panel__body strong')
         .first();
-      let referenceNum: string = await element.textContent();
-      referenceNum = referenceNum.replace(/-/g, '');
+      let referenceNum: string | null = await element.textContent();
+      if (referenceNum !== null) {
+        referenceNum = referenceNum.replace(/-/g, '');
+      } else {
+        referenceNum = '';
+      }
 
       await laSignInPage.navigateTo();
       await laSignInPage.startLAJourney(referenceNum, childFullname);
