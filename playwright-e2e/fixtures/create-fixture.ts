@@ -32,8 +32,10 @@ import { LAPlacementDateOfOrderPage } from '../page-objects/local-authority/plac
 import { LAPlacementOrderNumberPage } from '../page-objects/local-authority/placement/laPlacementOrderNumberPage.page';
 import { LAPlacementOrdersInPlacePage } from '../page-objects/local-authority/placement/laPlacementOrdersInPlacePage.page';
 import { LAChildHasOtherSiblingsPage } from '../page-objects/local-authority/siblings/laSiblingCourtDetailsSection.page';
+import SignIn from '../pages/signInPage.page';
 
 type CreateFixtures = {
+  signIn: SignIn;
   laSignInPage: LASignInPage;
   laGettingStartedPage: LAGettingStartedPage;
   laChildSexAtBirthPage: LAChildSexAtBirthPage;
@@ -69,6 +71,9 @@ type CreateFixtures = {
 };
 
 export const test = base.extend<CreateFixtures>({
+  signIn: async ({ page }, use) => {
+    await use(new SignIn(page));
+  },
   laSignInPage: async ({ page }, use) => {
     await use(new LASignInPage(page));
   },
