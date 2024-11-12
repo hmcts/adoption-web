@@ -6,9 +6,6 @@ import { runAccessibilityScan } from '../helpers/accessibilityHelper';
 import { setupUser, teardownUser } from '../hooks/createDeleteUser.hook';
 import App from '../pages/app.page';
 
-import { TranslationFn } from '../../src/main/app/controller/GetController';
-import { text } from 'stream/consumers';
-
 dotenv.config();
 
 const test = base.extend<{ makeAxeBuilder: () => AxeBuilder }>({
