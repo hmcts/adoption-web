@@ -134,7 +134,7 @@ const enContent = {
     documentsNotUploaded: 'Documents not uploaded',
     caseRefNumber: 'Court case reference number',
     dateOfBirth: 'Date of birth',
-    responsibility: 'Does birth father has parental responsibility?',
+    responsibility: 'Does birth father have parental responsibility?',
     otherParentResponsibility: 'Parental responsibility granted',
     servedWith: 'Any document or court orders to be sent?',
     NotServedWithReason: 'Reason',

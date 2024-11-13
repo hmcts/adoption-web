@@ -116,7 +116,8 @@ export class GetController {
       if (callback) {
         callback();
       } else {
-        res.redirect(req.url);
+        const redirectUrl = Object.values(Urls).find(item => item === req.url);
+        res.redirect(redirectUrl ?? Urls.HOME_URL);
       }
     });
   }
