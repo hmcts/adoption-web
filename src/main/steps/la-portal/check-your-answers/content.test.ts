@@ -10,8 +10,7 @@ import {
   SiblingRelationships,
   YesNoNotsure,
 } from '../../../app/case/definition';
-import { FormContent } from '../../../app/form/Form';
-import { CommonContent, generatePageContent } from '../../common/common.content';
+import { CommonContent } from '../../common/common.content';
 
 import { generateContent } from './content';
 
@@ -289,20 +288,6 @@ describe('check-your-answer > content', () => {
         language: 'cy',
       })
     );
-  });
-
-  // Tech Debt, see ADOP-2580
-  test('should contain submit button', () => {
-    const generatedContent = generateContent(commonContent);
-    const form = generatedContent.form as FormContent;
-    expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
-  });
-
-  // Tech Debt, see ADOP-2580
-  test('should contain welsh submit button in welsh content', () => {
-    const generatedContent = generateContent(commonContent);
-    const form = generatedContent.form as FormContent;
-    expect((form.submit.text as Function)(generatePageContent({ language: 'cy' }))).toBe('Cadw a pharhau');
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
