@@ -12,9 +12,6 @@ export class LAChildNationalityPage extends BasePage {
 
   readonly countryNameLabel: Locator;
 
-  readonly saveAndContinueButton: Locator;
-  readonly saveAsDraftButton: Locator;
-
   constructor(page: Page) {
     super(page);
 
@@ -26,8 +23,5 @@ export class LAChildNationalityPage extends BasePage {
     this.notSureCheckbox = page.getByLabel('Not sure');
 
     this.countryNameLabel = page.getByLabel('Country name');
-
-    this.saveAndContinueButton = page.getByRole('button', { name: 'Save and continue' });
-    this.saveAsDraftButton = page.getByRole('button', { name: 'Save as draft' });
   }
 }
