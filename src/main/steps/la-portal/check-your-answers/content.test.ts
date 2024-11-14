@@ -10,8 +10,7 @@ import {
   SiblingRelationships,
   YesNoNotsure,
 } from '../../../app/case/definition';
-import { FormContent } from '../../../app/form/Form';
-import { CommonContent, generatePageContent } from '../../common/common.content';
+import { CommonContent } from '../../common/common.content';
 
 import { generateContent } from './content';
 
@@ -19,6 +18,7 @@ const enContent = {
   title: 'Check your answers',
   change: 'Change',
   reason: 'Reason',
+  continue: 'Continue',
   submitApplication: 'Check your answers',
   checkInfoBeforeSubmit1:
     'Check all the information you have provided. If you need to edit any of the answers, select the change link at the end of the relevant answer.',
@@ -145,6 +145,7 @@ const cyContent: typeof enContent = {
   title: 'Adolygu eich atebion',
   change: 'Newid',
   reason: 'Rheswm',
+  continue: 'Parhau',
   submitApplication: 'Gwirio eich cais',
   checkInfoBeforeSubmit1:
     'Gwiriwch yr holl wybodaeth yr ydych wedi’i rhoi yn ofalus. Y cam nesaf yw arwyddo’r datganiad gwirionedd i ddatgan bod yr wybodaeth a roddwyd yn gywir. Unwaith y bydd wedi’i arwyddo a’r taliad wedi’i wneud, bydd eich cais yn cael ei gyflwyno i’r llys.',
@@ -288,17 +289,5 @@ describe('check-your-answer > content', () => {
       })
     );
   });
-
-  test('should contain submit button', () => {
-    const generatedContent = generateContent(commonContent);
-    const form = generatedContent.form as FormContent;
-    expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
-  });
-
-  /* test('should contain save-as-draft button', () => {
-    const generatedContent = generateContent(commonContent);
-    const form = generatedContent.form as FormContent;
-    expect((form.saveAsDraft!.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save as draft');
-  }); */
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
