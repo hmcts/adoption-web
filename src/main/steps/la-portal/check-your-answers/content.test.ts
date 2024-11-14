@@ -291,12 +291,14 @@ describe('check-your-answer > content', () => {
     );
   });
 
+  // Tech Debt, see ADOP-2580
   test('should contain submit button', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
   });
 
+  // Tech Debt, see ADOP-2580
   test('should contain welsh submit button in welsh content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
