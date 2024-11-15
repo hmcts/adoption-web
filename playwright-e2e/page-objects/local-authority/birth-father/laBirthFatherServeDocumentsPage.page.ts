@@ -2,7 +2,7 @@ import { Locator, Page } from '@playwright/test';
 
 import BasePage from '../../../pages/basePage.page';
 
-export class LABirthFatherDocumentsPage extends BasePage {
+export class LABirthFatherServeDocumentsPage extends BasePage {
   readonly birthFatherDocumentHeading: Locator;
 
   readonly yesRadioButton: Locator;
