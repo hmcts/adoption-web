@@ -11,9 +11,6 @@ export class LABirthFatherParentalResponsibilityGrantedPage extends BasePage {
   readonly parentalResponsibilityAgreementCheckbox: Locator;
   readonly otherCheckbox: Locator;
 
-  readonly saveAndContinueButton: Locator;
-  readonly saveAsDraftButton: Locator;
-
   constructor(page: Page) {
     super(page);
 
@@ -24,9 +21,6 @@ export class LABirthFatherParentalResponsibilityGrantedPage extends BasePage {
     this.parentalResponsibilityOrderCheckbox = page.getByLabel('Parental responsibility order');
     this.parentalResponsibilityAgreementCheckbox = page.getByLabel('Parental responsibility agreement');
     this.otherCheckbox = page.getByLabel('Other');
-
-    this.saveAndContinueButton = page.getByRole('button', { name: 'Save and continue' });
-    this.saveAsDraftButton = page.getByRole('button', { name: 'Save as draft' });
   }
 
   async checkBirthCertificateCheckbox(): Promise<void> {
