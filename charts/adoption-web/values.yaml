@@ -1,7 +1,6 @@
 nodejs:
   image: 'hmctspublic.azurecr.io/adoption/web:latest'
   applicationPort: 3000
-  readinessDelay: 130
   livenessDelay: 130
   aadIdentityName: adoption
   ingressHost: adoption-web.{{ .Values.global.environment }}.platform.hmcts.net
