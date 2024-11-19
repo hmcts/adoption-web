@@ -4,6 +4,8 @@ nodejs:
   ingressHost: ${SERVICE_FQDN}
   ingressIP: ${INGRESS_IP}
   consulIP: ${CONSUL_LB_IP}
+  autoscaling:
+    enabled: false
   environment:
     APPINSIGHTS_KEY: '00000000-0000-0000-0000-000000000000'
     PCQ_ENABLED: 'true'
