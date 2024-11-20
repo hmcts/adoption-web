@@ -151,7 +151,7 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       await laChildNationalityPage.clickSaveAndContinue();
 
       // Back to main naviagation page
-      laChildDetailsPage.clickBirthMotherDetailsLink();
+      await laChildDetailsPage.clickBirthMotherDetailsLink();
 
       // Mother section
       // Mother name page
@@ -163,7 +163,7 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       await laBirthMotherAliveStatusPage.clickSaveAndContinue();
 
       // Mother nationality page
-      await laBirthMotherNationalityPage.checkMotherNationalityBritishCheckbox();
+      await laBirthMotherNationalityPage.checkBritishCheckbox();
       await laBirthMotherNationalityPage.clickSaveAndContinue();
 
       // Mother occupation page
