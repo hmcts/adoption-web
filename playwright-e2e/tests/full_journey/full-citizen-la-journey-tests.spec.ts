@@ -186,7 +186,7 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       await laBirthMotherLastDateConfirmedAddressPage.fillYearLabel('2020');
       await laBirthMotherLastDateConfirmedAddressPage.clickSaveAndContinue();
 
-      // Moother documents page
+      // Mother documents page
       await laBirthMotherDocumentsPage.checkYesRadioButton();
       await laBirthMotherDocumentsPage.clickSaveAndContinue();
 
