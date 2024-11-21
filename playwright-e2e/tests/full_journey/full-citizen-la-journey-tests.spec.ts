@@ -254,7 +254,7 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
 
       // courts order number page
       await laPlacementOrderNumberPage.fillOrderNumberLabel('abc');
-      laPlacementOrderNumberPage.clickSaveAndContinue();
+      await laPlacementOrderNumberPage.clickSaveAndContinue();
 
       // courts date page
       await laPlacementDateOfOrderPage.fillDayLabel('01');
