@@ -9,9 +9,6 @@ export class LABirthMotherAliveStatusPage extends BasePage {
   readonly birthMotherAliveNoRadioButton: Locator;
   readonly birthMotherAliveNotSureRadioButton: Locator;
 
-  readonly saveAndContinueButton: Locator;
-  readonly saveAsDraftButton: Locator;
-
   constructor(page: Page) {
     super(page);
     this.birthMotherStillAliveHeading = page.getByRole('heading', { name: "Is the child's birth mother" });
@@ -19,9 +16,6 @@ export class LABirthMotherAliveStatusPage extends BasePage {
     this.birthMotherAliveYesRadioButton = page.getByLabel('Yes');
     this.birthMotherAliveNoRadioButton = page.getByLabel('No');
     this.birthMotherAliveNotSureRadioButton = page.getByLabel('Not sure');
-
-    this.saveAndContinueButton = page.getByRole('button', { name: 'Save and continue' });
-    this.saveAsDraftButton = page.getByRole('button', { name: 'Save as draft' });
   }
 
   async checkBirthMotherAliveYesRadioButton(): Promise<void> {

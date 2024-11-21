@@ -11,9 +11,6 @@ export class LAChildSexAtBirthPage extends BasePage {
 
   readonly otherSexLabel: Locator;
 
-  readonly saveAndContinueButton: Locator;
-  readonly saveAsDraftButton: Locator;
-
   constructor(page: Page) {
     super(page);
 
@@ -24,9 +21,6 @@ export class LAChildSexAtBirthPage extends BasePage {
     this.otherRadioButton = page.getByLabel('Other', { exact: true });
 
     this.otherSexLabel = page.getByLabel("For example, if the child's");
-
-    this.saveAndContinueButton = page.getByRole('button', { name: 'Save and continue' });
-    this.saveAsDraftButton = page.getByRole('button', { name: 'Save as draft' });
   }
 
   async checkMaleRadioButton(): Promise<void> {

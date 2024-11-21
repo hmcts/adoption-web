@@ -10,9 +10,6 @@ export class LABirthMotherLastKnownAddressPage extends BasePage {
 
   readonly selectAnAddressLabel: Locator;
 
-  readonly saveAndContinueButton: Locator;
-  readonly saveAsDraftButton: Locator;
-
   constructor(page: Page) {
     super(page);
 
@@ -22,9 +19,6 @@ export class LABirthMotherLastKnownAddressPage extends BasePage {
     this.findAddressButton = page.getByRole('button', { name: 'Find address' });
 
     this.selectAnAddressLabel = page.getByLabel('Select an address');
-
-    this.saveAndContinueButton = page.getByRole('button', { name: 'Save and continue' });
-    this.saveAsDraftButton = page.getByRole('button', { name: 'Save as draft' });
   }
 
   async fillPostCodeLabel(postcode: string): Promise<void> {

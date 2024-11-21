@@ -7,18 +7,12 @@ export class LAUploadDocumentsPage extends BasePage {
 
   readonly cannotUploadDocumentsCheckbox: Locator;
 
-  readonly saveAndContinueButton: Locator;
-  readonly saveAsDraftButton: Locator;
-
   constructor(page: Page) {
     super(page);
 
     this.uploadDocumentsHeading = page.getByRole('heading', { name: 'Upload documents' });
 
     this.cannotUploadDocumentsCheckbox = page.getByLabel('I cannot upload some or all');
-
-    this.saveAndContinueButton = page.getByRole('button', { name: 'Save and continue' });
-    this.saveAsDraftButton = page.getByRole('button', { name: 'Save as draft' });
   }
 
   async checkCannotUploadDocumentsCheckbox(): Promise<void> {

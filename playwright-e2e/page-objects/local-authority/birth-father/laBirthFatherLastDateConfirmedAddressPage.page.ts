@@ -9,9 +9,6 @@ export class LABirthFatherLastDateConfirmedAddressPage extends BasePage {
   readonly monthLabel: Locator;
   readonly yearLabel: Locator;
 
-  readonly saveAndContinueButton: Locator;
-  readonly saveAsDraftButton: Locator;
-
   constructor(page: Page) {
     super(page);
 
@@ -22,9 +19,6 @@ export class LABirthFatherLastDateConfirmedAddressPage extends BasePage {
     this.dayLabel = page.getByLabel('Day');
     this.monthLabel = page.getByLabel('Month');
     this.yearLabel = page.getByLabel('Year');
-
-    this.saveAndContinueButton = page.getByRole('button', { name: 'Save and continue' });
-    this.saveAsDraftButton = page.getByRole('button', { name: 'Save as draft' });
   }
   async fillDayLabel(day: string): Promise<void> {
     await this.dayLabel.fill(day);

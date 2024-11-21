@@ -8,9 +8,6 @@ export class LABirthMotherNamePage extends BasePage {
   readonly birthMotherFirstNameLabel: Locator;
   readonly birthMotherLastNameLabel: Locator;
 
-  readonly saveAndContinueButton: Locator;
-  readonly saveAsDraftButton: Locator;
-
   constructor(page: Page) {
     super(page);
 
@@ -18,9 +15,6 @@ export class LABirthMotherNamePage extends BasePage {
 
     this.birthMotherFirstNameLabel = page.getByLabel('First names');
     this.birthMotherLastNameLabel = page.getByLabel('Last names');
-
-    this.saveAndContinueButton = page.getByRole('button', { name: 'Save and continue' });
-    this.saveAsDraftButton = page.getByRole('button', { name: 'Save as draft' });
   }
 
   async fillBirthMotherNames(firstNames: string, lastNames: string): Promise<void> {
