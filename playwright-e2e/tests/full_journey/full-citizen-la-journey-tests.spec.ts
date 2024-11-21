@@ -48,7 +48,7 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
         laBirthMotherLastKnownAddressBranchPage,
         laBirthMotherLastKnownAddressPage,
         laBirthMotherLastDateConfirmedAddressPage,
-        laBirthMotherDocumentsPage,
+        laBirthMotherServeDocumentsPage,
         laBirthFatherOnCertificatePage,
         laBirthFatherNamePage,
         laBirthFatherStillAliveStatusPage,
@@ -187,8 +187,8 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       await laBirthMotherLastDateConfirmedAddressPage.clickSaveAndContinue();
 
       // Mother documents page
-      await laBirthMotherDocumentsPage.checkYesRadioButton();
-      await laBirthMotherDocumentsPage.clickSaveAndContinue();
+      await laBirthMotherServeDocumentsPage.checkYesRadioButton();
+      await laBirthMotherServeDocumentsPage.clickSaveAndContinue();
 
       // Back to the main navigation page
       await laChildDetailsPage.clickBirthFatherDetailsLink();

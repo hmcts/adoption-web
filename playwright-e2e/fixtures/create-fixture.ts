@@ -14,13 +14,13 @@ import { LABirthFatherServeDocumentsPage } from '../page-objects/local-authority
 import { LABirthFatherStillAliveStatusPage } from '../page-objects/local-authority/birth-father/laBirthFatherStillAliveStatusPage.page';
 import { LABirthFatherLastKnownAddressPage } from '../page-objects/local-authority/birth-father/lsBirthFatherLastKnownAddressPage.page';
 import { LABirthMotherAliveStatusPage } from '../page-objects/local-authority/birth-mother/laBirthMotherAliveStatusPage.page';
-import { LABirthMotherDocumentsPage } from '../page-objects/local-authority/birth-mother/laBirthMotherDocumentsPage.page';
 import { LABirthMotherLastDateConfirmedAddressPage } from '../page-objects/local-authority/birth-mother/laBirthMotherLastDateConfirmedAddressPage.page';
 import { LABirthMotherLastKnownAddressBranchPage } from '../page-objects/local-authority/birth-mother/laBirthMotherLastKnownAddressBranchPage.page';
 import { LABirthMotherLastKnownAddressPage } from '../page-objects/local-authority/birth-mother/laBirthMotherLastKnownAddressPage.page';
 import { LABirthMotherNamePage } from '../page-objects/local-authority/birth-mother/laBirthMotherNamePage.page';
 import { LABirthMotherNationalityPage } from '../page-objects/local-authority/birth-mother/laBirthMotherNationalityPage.page';
 import { LABirthMotherOccupationPage } from '../page-objects/local-authority/birth-mother/laBirthMotherOccupationPage.page';
+import { LABirthMotherServeDocumentsPage } from '../page-objects/local-authority/birth-mother/laBirthMotherServeDocumentsPage.page';
 import { LAUploadDocumentsPage } from '../page-objects/local-authority/document-upload/laUploadDocuments.page';
 import { LACheckYourAnswerPage } from '../page-objects/local-authority/laCheckYourAnswer.page';
 import { LAChildDetailsPage } from '../page-objects/local-authority/laChildDetailsPage.page';
@@ -48,7 +48,7 @@ type CreateFixtures = {
   laBirthMotherLastKnownAddressBranchPage: LABirthMotherLastKnownAddressBranchPage;
   laBirthMotherLastKnownAddressPage: LABirthMotherLastKnownAddressPage;
   laBirthMotherLastDateConfirmedAddressPage: LABirthMotherLastDateConfirmedAddressPage;
-  laBirthMotherDocumentsPage: LABirthMotherDocumentsPage;
+  laBirthMotherServeDocumentsPage: LABirthMotherServeDocumentsPage;
   laBirthFatherOnCertificatePage: LABirthFatherOnCertficatePage;
   laBirthFatherNamePage: LABirthFatherNamePage;
   laBirthFatherStillAliveStatusPage: LABirthFatherStillAliveStatusPage;
@@ -110,8 +110,8 @@ export const test = base.extend<CreateFixtures>({
   laBirthMotherLastDateConfirmedAddressPage: async ({ page }, use) => {
     await use(new LABirthMotherLastDateConfirmedAddressPage(page));
   },
-  laBirthMotherDocumentsPage: async ({ page }, use) => {
-    await use(new LABirthMotherDocumentsPage(page));
+  laBirthMotherServeDocumentsPage: async ({ page }, use) => {
+    await use(new LABirthMotherServeDocumentsPage(page));
   },
   laBirthFatherOnCertificatePage: async ({ page }, use) => {
     await use(new LABirthFatherOnCertficatePage(page));
