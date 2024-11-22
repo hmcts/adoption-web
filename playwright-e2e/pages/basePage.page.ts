@@ -24,7 +24,7 @@ export default class BasePage {
   constructor(page: Page) {
     this.page = page;
     this.yesRadioButton = page.getByLabel('Yes');
-    this.noRadioButton = page.getByLabel('No');
+    this.noRadioButton = page.getByLabel('No', { exact: true });
     this.britishCheckbox = page.getByLabel('British');
     this.irishCheckbox = page.getByLabel('Irish');
     this.differentCountryCheckbox = page.getByLabel('Citizen of a different country');

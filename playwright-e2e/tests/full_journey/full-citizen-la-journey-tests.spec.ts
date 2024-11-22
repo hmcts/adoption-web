@@ -36,6 +36,7 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
     async (
       {
         page,
+        ctzSubmittedPage,
         laSignInPage,
         laGettingStartedPage,
         laChildDetailsPage,
@@ -126,16 +127,11 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
         stringNumberOfApplicationLocator
       );
 
-      // acquire reference number
-      const element = await app.page
-        .locator('.govuk-panel.govuk-panel--confirmation .govuk-panel__body strong')
-        .first();
-      let referenceNum: string | null = await element.textContent();
-      if (referenceNum !== null) {
-        referenceNum = referenceNum.replace(/-/g, '');
-      } else {
-        referenceNum = '';
-      }
+      // citizen submitted page
+      await ctzSubmittedPage.initialiseReferenceNumber(page);
+      const referenceNum = ctzSubmittedPage.referenceNumber;
+      // sign out to ensure full citizen experience
+      // await ctzSubmittedPage.clickSignOutLink();
 
       await laSignInPage.navigateTo();
       await laSignInPage.startLAJourney(referenceNum, childFullname);
