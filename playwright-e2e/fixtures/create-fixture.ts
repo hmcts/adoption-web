@@ -25,6 +25,7 @@ import { LABirthMotherServeDocumentsPage } from '../page-objects/local-authority
 import { LAUploadDocumentsPage } from '../page-objects/local-authority/document-upload/laUploadDocuments.page';
 import { LACheckYourAnswerPage } from '../page-objects/local-authority/laCheckYourAnswer.page';
 import { LAChildDetailsPage } from '../page-objects/local-authority/laChildDetailsPage.page';
+import { LAConfirmationPage } from '../page-objects/local-authority/laConfirmationPage.page';
 import { LAGettingStartedPage } from '../page-objects/local-authority/laGettingStartedPage.page';
 import { LASignInPage } from '../page-objects/local-authority/laSignInPage.page';
 import { LAStatementOfTruthPage } from '../page-objects/local-authority/laStatementOfTruth.page';
@@ -70,6 +71,7 @@ type CreateFixtures = {
   laUploadDocumentsPage: LAUploadDocumentsPage;
   laCheckYourAnswerPage: LACheckYourAnswerPage;
   laStatementOfTruthPage: LAStatementOfTruthPage;
+  laConfirmationPage: LAConfirmationPage;
 };
 
 export const test = base.extend<CreateFixtures>({
@@ -174,5 +176,9 @@ export const test = base.extend<CreateFixtures>({
   },
   laStatementOfTruthPage: async ({ page }, use) => {
     await use(new LAStatementOfTruthPage(page));
+  },
+  // eslint-disable-next-line no-empty-pattern
+  laConfirmationPage: async ({}, use) => {
+    await use(new LAConfirmationPage());
   },
 });

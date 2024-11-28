@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import * as dotenv from 'dotenv';
 
-import { test } from '../../fixtures/fixtures';
+import { expect, test } from '../../fixtures/fixtures';
 import { runAccessibilityScan } from '../../helpers/accessibilityHelper';
 import * as e2eJourneyHelper from '../../helpers/e2eJourneyHelper';
 import { setupUser, teardownUser } from '../../hooks/createDeleteUser.hook';
@@ -69,6 +69,7 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
         laUploadDocumentsPage,
         laCheckYourAnswerPage,
         laStatementOfTruthPage,
+        laConfirmationPage,
         makeAxeBuilder,
       },
       testInfo
@@ -288,6 +289,10 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       await laStatementOfTruthPage.fillLocalAuthorityRepresentationLabel('KCC');
       await laStatementOfTruthPage.checkTruthStatementCheckbox();
       await laStatementOfTruthPage.clickConfirm();
+
+      // Check that confirmation has been reached
+      const expected = laConfirmationPage.pageURL;
+      await expect(page).toHaveURL(expected);
 
       await runAccessibilityScan(makeAxeBuilder, testInfo);
     }
