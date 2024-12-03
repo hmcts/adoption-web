@@ -32,7 +32,7 @@ import { LAStatementOfTruthPage } from '../page-objects/local-authority/laStatem
 import { LAOtherPersonResponsibilityPage } from '../page-objects/local-authority/other-person/laOtherPersonResponsibilityPage.page';
 import { LAPlacementDateOfOrderPage } from '../page-objects/local-authority/placement/laPlacementDateOfOrderPage.page';
 import { LAPlacementOrderNumberPage } from '../page-objects/local-authority/placement/laPlacementOrderNumberPage.page';
-import { LAPlacementOrdersInPlacePage } from '../page-objects/local-authority/placement/laPlacementOrdersInPlacePage.page';
+import { LAPlacementOrdersSummaryPage } from '../page-objects/local-authority/placement/laPlacementOrdersSummaryPage.page';
 import { LAChildHasOtherSiblingsPage } from '../page-objects/local-authority/siblings/laSiblingCourtDetailsSection.page';
 import SignIn from '../pages/signInPage.page';
 
@@ -66,7 +66,7 @@ type CreateFixtures = {
   laOtherPersonResponsibilityPage: LAOtherPersonResponsibilityPage;
   laPlacementOrderNumberPage: LAPlacementOrderNumberPage;
   laPlacementDateOfOrderPage: LAPlacementDateOfOrderPage;
-  laPlacementOrdersInPlacePage: LAPlacementOrdersInPlacePage;
+  laPlacementOrdersSummaryPage: LAPlacementOrdersSummaryPage;
   laChildHasOtherSiblingsPage: LAChildHasOtherSiblingsPage;
   laUploadDocumentsPage: LAUploadDocumentsPage;
   laCheckYourAnswerPage: LACheckYourAnswerPage;
@@ -162,8 +162,8 @@ export const test = base.extend<CreateFixtures>({
   laPlacementDateOfOrderPage: async ({ page }, use) => {
     await use(new LAPlacementDateOfOrderPage(page));
   },
-  laPlacementOrdersInPlacePage: async ({ page }, use) => {
-    await use(new LAPlacementOrdersInPlacePage(page));
+  laPlacementOrdersSummaryPage: async ({ page }, use) => {
+    await use(new LAPlacementOrdersSummaryPage(page));
   },
   laChildHasOtherSiblingsPage: async ({ page }, use) => {
     await use(new LAChildHasOtherSiblingsPage(page));

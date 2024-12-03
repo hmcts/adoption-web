@@ -64,7 +64,7 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
         laOtherPersonResponsibilityPage,
         laPlacementOrderNumberPage,
         laPlacementDateOfOrderPage,
-        laPlacementOrdersInPlacePage,
+        laPlacementOrdersSummaryPage,
         laChildHasOtherSiblingsPage,
         laUploadDocumentsPage,
         laCheckYourAnswerPage,
@@ -260,8 +260,8 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       await laPlacementDateOfOrderPage.clickSaveAndContinue();
 
       // court orders already in place
-      await laPlacementOrdersInPlacePage.checkNoRadioButton();
-      await laPlacementOrdersInPlacePage.clickSaveAndContinue();
+      await laPlacementOrdersSummaryPage.checkNoRadioButton();
+      await laPlacementOrdersSummaryPage.clickSaveAndContinue();
 
       // Back to main navigation page
       await laChildDetailsPage.clickSiblingCourtOrderDetailsLink();
