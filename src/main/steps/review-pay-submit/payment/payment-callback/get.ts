@@ -12,10 +12,12 @@ const logger = Logger.getLogger('payment-callback');
 export default class PaymentCallbackGetController {
   public async get(req: AppRequest, res: Response): Promise<void> {
     const payments = new PaymentModel(req.session.userCase.payments);
-    if (req.session.userCase.state === State.Draft && payments.wasLastPaymentSuccessful) {
+    if (req.session.userCase.state === State.Draft && payments.hasSuccessfulPayment) {
       req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, {}, CITIZEN_SUBMIT);
     }
-    if (req.session.userCase.state !== State.AwaitingPayment) {
+    if (req.session.userCase.state === State.Submitted || req.session.userCase.state === State.LaSubmitted) {
+      return res.redirect(APPLICATION_SUBMITTED);
+    } else if (req.session.userCase.state !== State.AwaitingPayment) {
       return res.redirect(CHECK_ANSWERS_URL);
     }
 
@@ -31,22 +33,25 @@ export default class PaymentCallbackGetController {
       return res.redirect(CHECK_ANSWERS_URL);
     }
 
-    const lastPaymentAttempt = payments.lastPayment;
-    const payment = await paymentClient.get(lastPaymentAttempt.reference);
+    for (let i = payments.list.length - 1; i >= 0; i--) {
+      const element = payments.list[i];
+      const payment = await paymentClient.get(element.value.reference);
 
-    logger.info(`caseId=${caseId} lastPaymentStatus=${payment?.status}`);
-    /* if (payment?.status === 'Initiated') {
-      return res.redirect(lastPaymentAttempt.channel);
-    } */
+      logger.info(`caseId=${caseId} lastPaymentStatus=${payment?.status} lastPaymentTransactionId=${element.id}`);
 
-    logger.info(`caseId=${caseId} lastPaymentTransactionId=${lastPaymentAttempt.transactionId}`);
-    payments.setStatus(lastPaymentAttempt.transactionId, payment?.status, payment?.channel);
+      payments.setStatus(element.id, payment?.status, payment?.channel);
+
+      if (payment?.status === 'Success') {
+        break;
+      }
+    }
 
     req.session.userCase = await req.locals.api.addPayment(req.session.userCase.id, payments.list);
 
     req.session.save(() => {
-      logger.info(`caseId=${caseId} wasLastPaymentSuccessful=${payments.wasLastPaymentSuccessful}`);
-      if (payments.wasLastPaymentSuccessful) {
+      logger.info(`caseId=${caseId} hasSuccessfulPayment=${payments.hasSuccessfulPayment}`);
+
+      if (payments.hasSuccessfulPayment) {
         return res.redirect(APPLICATION_SUBMITTED);
       }
 

@@ -2,9 +2,9 @@ nodejs:
   # Don't modify below here
   image: ${IMAGE_NAME}
   ingressHost: ${SERVICE_FQDN}
-  devmemoryLimits: 2Gi
+  devmemoryLimits: 1536Mi
   devmemoryRequests: 512Mi
-  devcpuLimits: 1000m
-  devcpuRequests: 500m
+  devcpuLimits: 500m
+  devcpuRequests: 50m
 idam-pr:
   enabled: false

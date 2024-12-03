@@ -10,6 +10,7 @@ import {
   LA_PORTAL_CHECK_YOUR_ANSWERS,
   LA_PORTAL_STATEMENT_OF_TRUTH,
   SAVE_AND_SIGN_OUT,
+  STATEMENT_OF_TRUTH,
 } from '../../steps/urls';
 import { CaseWithId } from '../case/case';
 import {
@@ -508,11 +509,39 @@ describe('PostController', () => {
     const body = { MOCK_KEY: 'MOCK_VALUE', saveBeforeSessionTimeout: true };
     const controller = new PostController(mockFormContent.fields);
 
-    const req = mockRequest({ body });
+    const req = mockRequest({ body, path: LA_PORTAL_CHECK_YOUR_ANSWERS });
     const res = mockResponse();
     await controller.post(req, res);
 
     expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { MOCK_KEY: 'MOCK_VALUE' }, CITIZEN_UPDATE);
+
+    expect(res.end).toBeCalled();
+  });
+
+  test('Should NOT save the users data and end response for session timeout where path is LA SOT', async () => {
+    mockCaseApi();
+    const body = { MOCK_KEY: 'MOCK_VALUE', saveBeforeSessionTimeout: true };
+    const controller = new PostController(mockFormContent.fields);
+
+    const req = mockRequest({ body, path: LA_PORTAL_STATEMENT_OF_TRUTH });
+    const res = mockResponse();
+    await controller.post(req, res);
+
+    expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(0);
+
+    expect(res.end).toBeCalled();
+  });
+
+  test('Should NOT save the users data and end response for session timeout where path is SOT', async () => {
+    mockCaseApi();
+    const body = { MOCK_KEY: 'MOCK_VALUE', saveBeforeSessionTimeout: true };
+    const controller = new PostController(mockFormContent.fields);
+
+    const req = mockRequest({ body, path: STATEMENT_OF_TRUTH });
+    const res = mockResponse();
+    await controller.post(req, res);
+
+    expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(0);
 
     expect(res.end).toBeCalled();
   });
