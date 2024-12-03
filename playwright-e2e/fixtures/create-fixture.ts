@@ -1,6 +1,6 @@
 import { test as base } from '@playwright/test';
 
-import { CTZSubmittedPage } from '../page-objects/citizen/payments/ctzSubmittedPage.page';
+import { CITSubmittedPage } from '../page-objects/citizen/payments/citSubmittedPage.page';
 import { LAChildNationalityPage } from '../page-objects/local-authority/birth-certificate/laChildNationalityPage.page';
 import { LAChildSexAtBirthPage } from '../page-objects/local-authority/birth-certificate/laChildSexAtBirthPage.page';
 import { LABirthFatherLastDateConfirmedAddressPage } from '../page-objects/local-authority/birth-father/laBirthFatherLastDateConfirmedAddressPage.page';
@@ -38,7 +38,7 @@ import SignIn from '../pages/signInPage.page';
 
 type CreateFixtures = {
   signIn: SignIn;
-  ctzSubmittedPage: CTZSubmittedPage;
+  citSubmittedPage: CITSubmittedPage;
   laSignInPage: LASignInPage;
   laGettingStartedPage: LAGettingStartedPage;
   laChildSexAtBirthPage: LAChildSexAtBirthPage;
@@ -78,8 +78,8 @@ export const test = base.extend<CreateFixtures>({
   signIn: async ({ page }, use) => {
     await use(new SignIn(page));
   },
-  ctzSubmittedPage: async ({ page }, use) => {
-    await use(new CTZSubmittedPage(page));
+  citSubmittedPage: async ({ page }, use) => {
+    await use(new CITSubmittedPage(page));
   },
   laSignInPage: async ({ page }, use) => {
     await use(new LASignInPage(page));

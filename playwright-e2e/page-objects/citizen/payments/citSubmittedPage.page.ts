@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 
-export class CTZSubmittedPage {
+export class CITSubmittedPage {
   referenceNumber!: string;
 
   readonly signOutLink: Locator;

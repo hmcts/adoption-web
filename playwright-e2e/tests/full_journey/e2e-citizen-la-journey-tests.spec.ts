@@ -36,7 +36,7 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
     async (
       {
         page,
-        ctzSubmittedPage,
+        citSubmittedPage,
         laSignInPage,
         laGettingStartedPage,
         laChildDetailsPage,
@@ -129,10 +129,10 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       );
 
       // citizen submitted page
-      await ctzSubmittedPage.initialiseReferenceNumber(page);
-      const referenceNum = ctzSubmittedPage.referenceNumber;
+      await citSubmittedPage.initialiseReferenceNumber(page);
+      const referenceNum = citSubmittedPage.referenceNumber;
       // sign out to ensure full citizen experience
-      // await ctzSubmittedPage.clickSignOutLink();
+      await citSubmittedPage.clickSignOutLink();
 
       await laSignInPage.navigateTo();
       await laSignInPage.startLAJourney(referenceNum, childFullname);
