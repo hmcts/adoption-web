@@ -23,6 +23,7 @@ export class LAChildDetailsPage {
     this.siblingCourtOrderDetailsLink = page.getByRole('link', { name: 'Sibling court order details' });
     this.uploadDocumentLink = page.getByRole('link', { name: 'Upload documents' });
 
+    // This button should not be visible until all sections are completed
     this.reviewAndSubmitButton = page.getByRole('button', { name: 'Review and submit' });
   }
 
