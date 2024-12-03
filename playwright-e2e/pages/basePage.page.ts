@@ -51,26 +51,6 @@ export default class BasePage {
     await this.noRadioButton.check();
   }
 
-  async checkBritishCheckbox(): Promise<void> {
-    await this.britishCheckbox.check();
-  }
-
-  async checkIrishCheckbox(): Promise<void> {
-    await this.irishCheckbox.check();
-  }
-
-  async checkDifferentCountryCheckbox(): Promise<void> {
-    await this.differentCountryCheckbox.check();
-  }
-
-  async fillCounrtyNameLabel(country: string): Promise<void> {
-    await this.countryNameLabel.fill(country);
-  }
-
-  async checkNotSureCheckbox(): Promise<void> {
-    await this.notSureCheckbox.check();
-  }
-
   async clickContinue(): Promise<void> {
     await this.continueButton.click();
   }
