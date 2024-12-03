@@ -31,8 +31,11 @@ export class CaseApi {
   }
 
   public async checkOldPCQIDExists(cases: CcdV1Response[]): Promise<string | undefined> {
-    const caseWithPCQID = cases.find(caseElement => caseElement.case_data.pcqId !== null);
-    return caseWithPCQID?.case_data.pcqId;
+    if (cases) {
+      const caseWithPCQID = cases.find(caseElement => caseElement.case_data.pcqId !== null);
+      return caseWithPCQID?.case_data.pcqId;
+    }
+    return undefined;
   }
 
   public async getCaseDetails(): Promise<{ userCase: CaseWithId | false; cases: CcdV1Response[] }> {
