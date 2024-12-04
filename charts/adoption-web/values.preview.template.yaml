@@ -4,10 +4,10 @@ nodejs:
   ingressHost: ${SERVICE_FQDN}
   ingressIP: ${INGRESS_IP}
   consulIP: ${CONSUL_LB_IP}
-  devmemoryLimits: 2Gi
+  devmemoryLimits: 1536Mi
   devmemoryRequests: 512Mi
-  devcpuLimits: 1000m
-  devcpuRequests: 500m
+  devcpuLimits: 500m
+  devcpuRequests: 50m
   autoscaling:
     enabled: false
   environment:
