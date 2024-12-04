@@ -105,6 +105,22 @@ export const isFutureDate: DateValidator = date => {
   }
 };
 
+export const isMoreThan21Years: DateValidator = date => {
+  if (!date) {
+    return;
+  }
+
+  const enteredDate = new Date(+date.year, +date.month - 1, +date.day);
+  const currentDate = new Date();
+
+  const diffInMilliseconds = Math.abs(currentDate.getTime() - enteredDate.getTime());
+  const diffInYears = diffInMilliseconds / (1000 * 60 * 60 * 24 * 365.25);
+
+  if (diffInYears < 21) {
+    return 'invalidDateUnder21';
+  }
+};
+
 export const isLessThanAYear: DateValidator = date => {
   if (!date) {
     return;
