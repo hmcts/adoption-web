@@ -5,8 +5,8 @@
 {% block head %}
 
   {% if ['aat'].includes(currentEnv) %}
-    <script type="text/javascript" src=https://js-cdn.dynatrace.com/jstag/17177a07246/bf24054dsx/fb3a85222a00a995_complete.js crossorigin="anonymous"></script>
-  {% elif ['production'].includes(currentEnv) %}
+    <script type="text/javascript" src="https://js-cdn.dynatrace.com/jstag/17177a07246/bf24054dsx/fb3a85222a00a995_complete.js" crossorigin="anonymous"></script>
+  {% elif ['prod'].includes(currentEnv) %}
     <script type="text/javascript" src="https://js-cdn.dynatrace.com/jstag/17177a07246/bf00910jpo/5f55faf7cef058ac_complete.js" crossorigin="anonymous"></script>
   {% endif %}
 
