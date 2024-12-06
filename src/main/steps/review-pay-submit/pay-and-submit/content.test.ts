@@ -30,7 +30,7 @@ const cyContent = {
   line3:
     'Os na fyddwch yn mynd ymlaen i’r dudalen gyda’ch cyfeirnod ac nad ydych yn derbyn e-bost yn cadarnhau bod eich cais wedi’i gyflwyno, allgofnodwch a mewngofnodwch eto hwyrach ymlaen. Os na chewch gadarnhad ei fod wedi’i gyflwyno o fewn 2 diwrnod gwaith, <a class="govuk-link" href="/contact-us">cysylltwch â’ch llys lleol</a>.',
   line4:
-    "Os ydych chi’n gwneud cais i fabwysiadu mwy nag un plentyn, mae’n rhaid i chi gyflwyno cais newydd ar gyfer pob plentyn. Ni chodir ffi arall arnoch os byddwch yn cyflwyno’r ceisiadau hyn cyn hanner nos ar ddyddiad cyflwyno’ch cais cyntaf. Os byddwch yn eu cyflwyno ar ôl dyddiad cyflwyno’r cais cyntaf, yna bydd rhaid i chi dalu £undefined arall. Mae’n rhaid ichi fewngofnodi gan ddefnyddio’r un cyfeiriad e-bost a chyfrinair a ddefnyddiwyd ar gyfer eich cais cyntaf.",
+    'Os ydych chi’n gwneud cais i fabwysiadu mwy nag un plentyn, mae’n rhaid i chi gyflwyno cais newydd ar gyfer pob plentyn. Ni chodir ffi arall arnoch os byddwch yn cyflwyno’r ceisiadau hyn cyn hanner nos ar ddyddiad cyflwyno’ch cais cyntaf. Os byddwch yn eu cyflwyno ar ôl dyddiad cyflwyno’r cais cyntaf, yna bydd rhaid i chi dalu £undefined arall. Mae’n rhaid ichi fewngofnodi gan ddefnyddio’r un cyfeiriad e-bost a chyfrinair a ddefnyddiwyd ar gyfer eich cais cyntaf.',
   line5: 'Fe anfonir e-bost cadarnhau ar wahân atoch ar gyfer eich taliad.',
   payandsubmit: 'Talu a chyflwyno cais',
 };
