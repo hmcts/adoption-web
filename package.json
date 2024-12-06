@@ -84,7 +84,7 @@
     "dayjs": "^1.11.3",
     "dotenv": "^16.4.5",
     "email-validator": "^2.0.4",
-    "express": "4.21.2",
+    "express": "^4.21.2",
     "express-http-proxy": "^1.6.3",
     "express-session": "^1.17.3",
     "form-data": "^4.0.0",
@@ -178,7 +178,7 @@
     "semver": ">=7.5.2",
     "ws": "^8.17.1",
     "codeceptjs/axios": "1.7.4",
-    "express": "4.21.2",
+    "express": "^4.21.2",
     "serve-static": "^1.16.0",
     "cookie": "^0.7.0"
   },
