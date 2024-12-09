@@ -1,29 +1,71 @@
-# 🎭 Playwright End-to-End UI Testing Suite
+# Playwright End to End suite
 
-End to end UI testing suite using:
+End to End testing suite using:
 
 - Playwright https://playwright.dev/
 - TypeScript https://www.typescriptlang.org/
 
-## 🤖 Getting Started
+## 🤖 Starting up
 
-Before diving in, make sure to explore the various options available for running tests in Playwright by referring to the [official documentation.](https://playwright.dev/docs/running-tests) 
+For all options take a look at https://playwright.dev/docs/running-tests
 
-To begin, familiarise yourself with the options available for running tests by visiting Playwright's documentation https://playwright.dev/docs/running-tests.
-
-To execute the 'smoke-test.spec.ts' individually from the terminal,  simply use the following command: `yarn playwright test smoke-test.spec.ts`.
+To execute the 'smoke-test.spec.ts' individually from the Terminal, use the command `yarn playwright test smoke-test.spec.ts`.
 
 ## 📁 Structure
 
 ```sh
 |- playwright-e2e
-|-|- fixtures # Predefined components like page, context, browser, and browserName that you can use across different test cases.
+|-|- fixtures # With fixtures, you can group tests based on their meaning, instead of their common setup.
 |-|- pages # Where to keep page classes with respective locators and methods. We utilise POM (Page Object Modeling).
+|-|- settings # essential settings for the framework, such as user credentials and URLs.
 |-|- tests # Here is where you can do your magic. 🧙‍♂️
-|-|- utils # Essential items for the framework, such as user credentials and URLs.
 
- playwright.config.ts # This sits outside playwright-e2e folder in the projects root. It is the config file for playwright only tests.
+ playwright.config.ts # This sits outside playwright-e2e folder, but is the config file for playwright only tests.
+ .env # This sits outside playwright-e2e folder, this is required to run your tests locally. See Setup Environment Variables below.
 ```
 
-Feel free to explore and customise according to your project's needs!
+## 🔐 Setup Environment Variables
 
+This repository contains automation tests that can be run locally. To set up the environment variables for configuring URLs and passwords, follow the instructions below:
+
+1. Create a .env file in the root directory of this project if it doesn't already exist.
+
+2. Add the following environment variables to the .env file: (ask a team mate for details/values can be found in Azure Keyvault)
+
+   IDAM_SECRET=
+   IDAM_TOKEN_URL=
+   IDAM_TESTING_SUPPORT_USERS_URL=
+   IDAM_START_PAGE=
+   IDAM_CITIZEN_USER_PASSWORD=
+
+
+## User creation 
+
+Citizen user are created on the fly using IDAM API endpoints. You can use the [idamTestApiHelper.ts](./playwright-e2e/helpers/idamTestApiHelpers.ts) to create the user. 
+Remember you must be connected to the VPN to create users using the API endpoint.
+
+
+3. Save the .env file.
+
+.env file is excluded from version control using Git's .gitignore.
+
+## Install Dependencies
+
+Before running the automation tests, ensure that all necessary dependencies are installed. You can do this by running:
+
+```
+yarn install
+```
+
+## Running Tests
+
+Once the environment variables are configured and dependencies are installed, you can run the automation tests using the following command:
+```
+yarn playwright test smoke-test.spec.ts
+```
+
+## 🎬 Debugging
+
+Playwright provides a couple of great debugging capabilities at all levels. The ones that you will probably find most useful are:
+
+For all options take a look at https://playwright.dev/docs/debug
