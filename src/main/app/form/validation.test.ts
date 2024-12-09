@@ -18,6 +18,7 @@ import {
   isInvalidPostcode,
   isLessThanAYear,
   isMoreThan18Years,
+  isMoreThan21Years,
   isPhoneNoValid,
   isTextAreaValid,
   isValidAccessCode,
@@ -125,6 +126,54 @@ describe('Validation', () => {
       isValid = isFutureDate(date);
 
       expect(isValid).toStrictEqual('invalidDateInFuture');
+    });
+  });
+
+  describe('isMoreThan21Years()', () => {
+    test('Should check if date entered is less than 21 years difference', async () => {
+      const dateObj = new Date();
+      const date = {
+        day: dateObj.getUTCDate().toString(),
+        month: dateObj.getUTCMonth().toString(),
+        year: (dateObj.getUTCFullYear() - 1).toString(),
+      };
+
+      const isInvalid = isMoreThan21Years(date);
+
+      expect(isInvalid).toStrictEqual('invalidDateUnder21');
+    });
+
+    test('Should check if date entered is more than 21 years difference', async () => {
+      const dateObj = new Date();
+      const date = {
+        day: dateObj.getUTCDate().toString(),
+        month: dateObj.getUTCMonth().toString(),
+        year: (dateObj.getUTCFullYear() - 30).toString(),
+      };
+
+      const isValid = isMoreThan21Years(date);
+
+      expect(isValid).toStrictEqual(undefined);
+    });
+
+    test('Should check if leap year date entered is more than 21 years difference', async () => {
+      const dateObj = new Date(2000, 1, 29);
+      const date = {
+        day: dateObj.getUTCDate().toString(),
+        month: dateObj.getUTCMonth().toString(),
+        year: (dateObj.getUTCFullYear() - 30).toString(),
+      };
+
+      // allows jest to override read-only properties
+      Object.defineProperty(global, 'performance', {
+        writable: true,
+      });
+
+      jest.useFakeTimers().setSystemTime(new Date('2024-02-29'));
+
+      const isValid = isMoreThan21Years(date);
+
+      expect(isValid).toStrictEqual(undefined);
     });
   });
 
