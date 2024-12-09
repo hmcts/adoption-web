@@ -10,7 +10,9 @@
 
         <p class="govuk-body">{{ line1 }}</p>
         <p class="govuk-body">{{ line2 }}</p>
-        <p class="govuk-body">{{ line3 }}</p>
+        <p class="govuk-body">{{ line3 | safe }}</p>
+        <p class="govuk-body">{{ line4 }}</p>
+        <p class="govuk-body">{{ line5 }}</p>
 
          <a href="/review-pay-submit/payment/pay-your-fee" role="button" draggable="false" class="govuk-button" data-module="govuk-button">
           {{payandsubmit}}
