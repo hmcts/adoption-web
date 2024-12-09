@@ -9,11 +9,15 @@ export class CITApplyingWithPage extends BasePage {
   readonly applyingWithGroup: Locator;
 
   readonly applyingOnMyOwnRadioButton: Locator;
-  readonly applyingWithCivilPartnerRadioButton: Locator;
+  readonly applyingWithSpouseRadioButton: Locator;
   readonly applyingWithPartnerNotSpouseRadioButton: Locator;
 
   readonly contactUsForHelpDropdownLink: Locator;
   readonly contactACourtHeading: Locator;
+
+  readonly languageLink: Locator;
+
+  readonly errorSummary: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -23,19 +27,23 @@ export class CITApplyingWithPage extends BasePage {
     this.applyingWithGroup = page.getByRole('group', { name: 'Are you applying on your own, or with someone else?' });
 
     this.applyingOnMyOwnRadioButton = this.applyingWithGroup.getByLabel("I'm applying on my own");
-    this.applyingWithCivilPartnerRadioButton = this.applyingWithGroup.getByLabel("I'm applying with my spouse");
+    this.applyingWithSpouseRadioButton = this.applyingWithGroup.getByLabel("I'm applying with my spouse");
     this.applyingWithPartnerNotSpouseRadioButton = this.applyingWithGroup.getByLabel("I'm applying with someone who");
 
     this.contactUsForHelpDropdownLink = page.locator('summary') || page.getByText('Contact us for help');
     this.contactACourtHeading = page.getByRole('heading', { name: 'Contact a court that deals' });
+
+    this.languageLink = page.locator('a.govuk-link.language');
+
+    this.errorSummary = page.locator('div.govuk-error-summar');
   }
 
   async checkApplyingOnMyOwnRadioButton(): Promise<void> {
     await this.applyingOnMyOwnRadioButton.check();
   }
 
-  async checkApplyingWithCivilPartnerRadioButton(): Promise<void> {
-    await this.applyingWithCivilPartnerRadioButton.check();
+  async checkApplyingWithSpouseRadioButton(): Promise<void> {
+    await this.applyingWithSpouseRadioButton.check();
   }
 
   async checkApplyingWithPartnerNotSpouseRadioButton(): Promise<void> {
@@ -44,5 +52,9 @@ export class CITApplyingWithPage extends BasePage {
 
   async clickContactUsForHelpDropDownLink(): Promise<void> {
     await this.contactACourtHeading.click();
+  }
+
+  async clickLanguageLink(): Promise<void> {
+    await this.languageLink.click();
   }
 }
