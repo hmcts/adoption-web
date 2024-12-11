@@ -15,8 +15,6 @@ export class CITApplyingWithPage extends BasePage {
   readonly contactUsForHelpDropdownLink: Locator;
   readonly contactACourtHeading: Locator;
 
-  readonly languageLink: Locator;
-
   readonly errorSummary: Locator;
 
   constructor(page: Page) {
@@ -32,8 +30,6 @@ export class CITApplyingWithPage extends BasePage {
 
     this.contactUsForHelpDropdownLink = page.locator('summary') || page.getByText('Contact us for help');
     this.contactACourtHeading = page.getByRole('heading', { name: 'Contact a court that deals' });
-
-    this.languageLink = page.locator('a.govuk-link.language');
 
     this.errorSummary = page.locator('div.govuk-error-summar');
   }
@@ -52,9 +48,5 @@ export class CITApplyingWithPage extends BasePage {
 
   async clickContactUsForHelpDropDownLink(): Promise<void> {
     await this.contactACourtHeading.click();
-  }
-
-  async clickLanguageLink(): Promise<void> {
-    await this.languageLink.click();
   }
 }
