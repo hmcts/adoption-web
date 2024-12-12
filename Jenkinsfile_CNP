@@ -73,6 +73,14 @@ withPipeline(type, product, component) {
     // teardown test secrets
     env.AUTH_TOKEN = ''
   }
+  
+  before('crossBrowserTest') {
+
+  }
+
+  afterAlways('crossBrowserTest') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+  }
 
   before('functionalTest:preview') {
     env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.preview.platform.hmcts.net/"
