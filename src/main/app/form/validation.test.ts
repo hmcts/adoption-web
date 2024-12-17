@@ -175,6 +175,39 @@ describe('Validation', () => {
 
       expect(isValid).toStrictEqual(undefined);
     });
+
+    test('Should check if date entered is exactly 21 years difference', async () => {
+      const dateObj = new Date();
+      const date = {
+        day: dateObj.getUTCDate().toString(),
+        month: dateObj.getUTCMonth().toString(),
+        year: (dateObj.getUTCFullYear() - 21).toString(),
+      };
+
+      const isValid = isMoreThan21Years(date);
+
+      expect(isValid).toStrictEqual(undefined);
+    });
+
+    test('Should check if leap year date entered is exactly 21 years difference', async () => {
+      const dateObj = new Date();
+      const date = {
+        day: dateObj.getUTCDate().toString(),
+        month: dateObj.getUTCMonth().toString(),
+        year: (dateObj.getUTCFullYear() - 21).toString(),
+      };
+
+      // allows jest to override read-only properties
+      Object.defineProperty(global, 'performance', {
+        writable: true,
+      });
+
+      jest.useFakeTimers().setSystemTime(new Date('2024-02-29'));
+
+      const isValid = isMoreThan21Years(date);
+
+      expect(isValid).toStrictEqual(undefined);
+    });
   });
 
   describe('isLessThanAYear()', () => {
