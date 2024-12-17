@@ -2,6 +2,13 @@ import { type Locator, type Page } from '@playwright/test';
 import { expect } from '@playwright/test';
 export default class BasePage {
   readonly page: Page;
+  readonly yesRadioButton: Locator;
+  readonly noRadioButton: Locator;
+  readonly britishCheckbox: Locator;
+  readonly irishCheckbox: Locator;
+  readonly differentCountryCheckbox: Locator;
+  readonly countryNameLabel: Locator;
+  readonly notSureCheckbox: Locator;
   readonly continueButton: Locator;
   readonly saveAndContinue: Locator;
   readonly saveAsDraft: Locator;
@@ -16,6 +23,13 @@ export default class BasePage {
 
   constructor(page: Page) {
     this.page = page;
+    this.yesRadioButton = page.getByLabel('Yes');
+    this.noRadioButton = page.getByLabel('No', { exact: true });
+    this.britishCheckbox = page.getByLabel('British');
+    this.irishCheckbox = page.getByLabel('Irish');
+    this.differentCountryCheckbox = page.getByLabel('Citizen of a different country');
+    this.countryNameLabel = page.getByLabel('Country name');
+    this.notSureCheckbox = page.getByLabel('Not sure');
     this.continueButton = page.getByRole('button', { name: 'Continue' });
     this.saveAndContinue = page.getByRole('button', { name: 'Save and continue' });
     this.saveAsDraft = page.getByRole('button', { name: 'Save as draft' });
@@ -29,12 +43,24 @@ export default class BasePage {
     this.locationPicker = page.locator('#location-picker');
   }
 
+  async checkYesRadioButton(): Promise<void> {
+    await this.yesRadioButton.check();
+  }
+
+  async checkNoRadioButton(): Promise<void> {
+    await this.noRadioButton.check();
+  }
+
   async clickContinue(): Promise<void> {
     await this.continueButton.click();
   }
 
   async clickSaveAndContinue(): Promise<void> {
     await this.saveAndContinue.click();
+  }
+
+  async clickSaveAsDraft(): Promise<void> {
+    await this.saveAsDraft.click();
   }
 
   async postcodeFindAddress(postcode: string, selectAdd: string): Promise<void> {
