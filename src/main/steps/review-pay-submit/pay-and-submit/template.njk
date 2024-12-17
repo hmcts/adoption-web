@@ -1,3 +1,4 @@
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
 {% extends "common/page.njk" %}
 {% block content %}
 <div class="govuk-width-container">
@@ -10,7 +11,9 @@
 
         <p class="govuk-body">{{ line1 }}</p>
         <p class="govuk-body">{{ line2 }}</p>
-        <p class="govuk-body">{{ line3 | safe }}</p>
+
+        {{ govukInsetText( {text: line3 | safe }) }}
+        
         <p class="govuk-body">{{ line4 }}</p>
         <p class="govuk-body">{{ line5 }}</p>
 
