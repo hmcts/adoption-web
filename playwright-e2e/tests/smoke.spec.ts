@@ -48,6 +48,7 @@ test.describe('smoke test', () => {
     const appOneName = await app.applicantOneNameCreate();
     const childNames = await app.childNameCreate();
 
+    await app.signIn.navigateTo();
     await app.signIn.signIn(userEmail, userPassword);
     await app.numberOfApplicants.numberOfApplication(applicantNumber);
     await app.basePage.clickSaveAndContinue();
