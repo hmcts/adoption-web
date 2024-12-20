@@ -6,6 +6,7 @@ export async function citizenAdoptionSignInWithNoPartner(
   userPassword: string,
   locator: string
 ): Promise<void> {
+  await app.signIn.navigateTo();
   await app.signIn.signIn(userEmail, userPassword);
   await app.numberOfApplicants.numberOfApplication(locator);
   await app.numberOfApplicants.fillNotSpouseOrCivilPartnerDetails('Text to be randomly generated');
@@ -19,6 +20,7 @@ export async function citizenAdoptionSignInWithPartner(
   userPassword: string,
   locator: string
 ): Promise<void> {
+  await app.signIn.navigateTo();
   await app.signIn.signIn(userEmail, userPassword);
   await app.numberOfApplicants.numberOfApplication(locator);
   await app.basePage.clickSaveAndContinue();
