@@ -38,7 +38,7 @@ def secrets = [
 ]
 
 def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
-def branchesToSync = ['ithc', 'perftest']
+def branchesToSync = ['demo', 'ithc', 'perftest']
 
 def pipelineConf = new AppPipelineConfig()
 pipelineConf.vaultSecrets = secrets
