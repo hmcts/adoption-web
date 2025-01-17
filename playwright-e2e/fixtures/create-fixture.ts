@@ -1,6 +1,5 @@
 import { test as base } from '@playwright/test';
 
-
 import { CITApplyingWithPage } from '../page-objects/citizen/applying/citApplyingWithPage.page';
 import { CITSubmittedPage } from '../page-objects/citizen/payments/citSubmittedPage.page';
 import { LAChildNationalityPage } from '../page-objects/local-authority/birth-certificate/laChildNationalityPage.page';

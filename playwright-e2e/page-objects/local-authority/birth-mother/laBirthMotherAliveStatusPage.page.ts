@@ -5,9 +5,7 @@ import BasePage from '../../../pages/basePage.page';
 export class LABirthMotherAliveStatusPage extends BasePage {
   readonly birthMotherStillAliveHeading: Locator;
 
-
   readonly birthMotherGroup: Locator;
-
 
   readonly birthMotherAliveYesRadioButton: Locator;
   readonly birthMotherAliveNoRadioButton: Locator;
@@ -22,12 +20,7 @@ export class LABirthMotherAliveStatusPage extends BasePage {
     this.birthMotherAliveNoRadioButton = page.getByLabel('No');
     this.birthMotherAliveNotSureRadioButton = page.getByLabel('Not sure');
 
-
     this.birthMotherGroup = page.getByRole('group', { name: "Is the child's birth mother still alive?" });
-
-
-
-
   }
 
   async checkBirthMotherAliveYesRadioButton(): Promise<void> {

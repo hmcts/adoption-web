@@ -135,7 +135,6 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       // sign out to ensure full citizen experience
       await citSubmittedPage.clickSignOutLink();
 
-
       await laSignInPage.navigateTo();
       await laSignInPage.startLAJourney(referenceNum, childFullname);
       await laGettingStartedPage.laGettingStarted();

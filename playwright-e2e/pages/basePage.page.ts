@@ -53,14 +53,6 @@ export default class BasePage {
     await this.noRadioButton.check();
   }
 
-  async checkYesRadioButton(): Promise<void> {
-    await this.yesRadioButton.check();
-  }
-
-  async checkNoRadioButton(): Promise<void> {
-    await this.noRadioButton.check();
-  }
-
   async clickContinue(): Promise<void> {
     await this.continueButton.click();
   }
