@@ -131,8 +131,10 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       // citizen submitted page
       await citSubmittedPage.initialiseReferenceNumber(page);
       const referenceNum = citSubmittedPage.referenceNumber;
+
       // sign out to ensure full citizen experience
       await citSubmittedPage.clickSignOutLink();
+
 
       await laSignInPage.navigateTo();
       await laSignInPage.startLAJourney(referenceNum, childFullname);

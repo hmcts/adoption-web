@@ -86,7 +86,7 @@ export default class ReviewSubmit extends BasePage {
     await expect(this.cardDetailsH1).toBeVisible();
     await expect(this.cost).toBeVisible();
     await this.cardNumber.fill('4444333322221111');
-    await this.expMonth.fill(`${today.getMonth()}`);
+    await this.expMonth.fill(`${today.getMonth() + 1}`);
     await this.expYear.fill(`${today.getFullYear() + 2}`);
     await this.cardName.fill(name);
     await this.securityCode.fill('123');
