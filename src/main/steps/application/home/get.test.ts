@@ -97,6 +97,21 @@ describe('HomeGetController', () => {
     expect(res.redirect).toBeCalledWith(APPLICATION_SUBMITTED);
   });
 
+  test('redirects to application submitted page for applicant 1 users in LaSubmitted state', () => {
+    const req = mockRequest({
+      session: {
+        userCase: {
+          id: '123',
+          state: State.LaSubmitted,
+        },
+      },
+    });
+    const res = mockResponse();
+    controller.get(req, res);
+
+    expect(res.redirect).toBeCalledWith(APPLICATION_SUBMITTED);
+  });
+
   test('redirects to the check your answers page for applicant 1 users in awaitingApplicant1Response state', () => {
     const req = mockRequest({
       session: {

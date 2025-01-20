@@ -20,7 +20,7 @@ export default class GetSubmittedController extends GetController {
 
   public async get(req: AppRequest, res: Response): Promise<void> {
     req.session.userCase.canPaymentIgnored = false;
-    if (req.session.userCase.state !== State.Submitted) {
+    if (req.session.userCase.state !== State.Submitted && req.session.userCase.state !== State.LaSubmitted) {
       return res.redirect(TASK_LIST_URL);
     }
     const feeResponse = await getFee(req.locals.logger);
