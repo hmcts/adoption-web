@@ -14,13 +14,13 @@ export class LABirthMotherAliveStatusPage extends BasePage {
   constructor(page: Page) {
     super(page);
 
-    this.birthMotherGroup = page.getByRole('group', { name: "Is the child's birth mother still alive?" });
-
     this.birthMotherStillAliveHeading = page.getByRole('heading', { name: "Is the child's birth mother" });
 
-    this.birthMotherAliveYesRadioButton = this.birthMotherGroup.getByLabel('Yes');
-    this.birthMotherAliveNoRadioButton = this.birthMotherGroup.getByLabel('No');
-    this.birthMotherAliveNotSureRadioButton = this.birthMotherGroup.getByLabel('Not sure');
+    this.birthMotherAliveYesRadioButton = page.getByLabel('Yes');
+    this.birthMotherAliveNoRadioButton = page.getByLabel('No');
+    this.birthMotherAliveNotSureRadioButton = page.getByLabel('Not sure');
+
+    this.birthMotherGroup = page.getByRole('group', { name: "Is the child's birth mother still alive?" });
   }
 
   async checkBirthMotherAliveYesRadioButton(): Promise<void> {

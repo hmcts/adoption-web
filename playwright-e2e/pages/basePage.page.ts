@@ -20,6 +20,7 @@ export default class BasePage {
   readonly firstName: Locator;
   readonly lastName: Locator;
   readonly locationPicker: Locator;
+  readonly signOutLink: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -41,6 +42,7 @@ export default class BasePage {
     this.firstName = page.getByLabel('First names');
     this.lastName = page.getByLabel('Last names');
     this.locationPicker = page.locator('#location-picker');
+    this.signOutLink = page.getByRole('link', { name: 'Sign out' });
   }
 
   async checkYesRadioButton(): Promise<void> {
@@ -79,5 +81,9 @@ export default class BasePage {
     await this.locationPicker.fill(location);
     await expect(this.locationPicker).toHaveValue(location);
     await this.locationPicker.press('Enter');
+  }
+
+  async clickSignOutLink(): Promise<void> {
+    await this.signOutLink.click();
   }
 }
