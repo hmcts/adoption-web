@@ -97,7 +97,7 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       await e2eJourneyHelper.citizenAdoptionDateChildMovedIn(app);
 
       //  Child's details before adoption
-      await e2eJourneyHelper.citzenAdoptionChildDetailsBeforeAdoption(app, appOneFirstName, appOneLastName);
+      await e2eJourneyHelper.citzenAdoptionChildDetailsBeforeAdoption(app, childFirstName, childLastName);
 
       // Child's details after adoption
       await e2eJourneyHelper.citizenAdoptionChildDetailsAfterAdoption(app, childFirstName, childLastName);
