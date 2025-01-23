@@ -1,5 +1,6 @@
 import { test as base } from '@playwright/test';
 
+import { CITApplyingWithPage } from '../page-objects/citizen/applying/citApplyingWithPage.page';
 import { CITSubmittedPage } from '../page-objects/citizen/payments/citSubmittedPage.page';
 import { LAChildNationalityPage } from '../page-objects/local-authority/birth-certificate/laChildNationalityPage.page';
 import { LAChildSexAtBirthPage } from '../page-objects/local-authority/birth-certificate/laChildSexAtBirthPage.page';
@@ -38,6 +39,8 @@ import SignIn from '../pages/signInPage.page';
 
 type CreateFixtures = {
   signIn: SignIn;
+
+  citApplyingWithPage: CITApplyingWithPage;
   citSubmittedPage: CITSubmittedPage;
   laSignInPage: LASignInPage;
   laGettingStartedPage: LAGettingStartedPage;
@@ -77,6 +80,10 @@ type CreateFixtures = {
 export const test = base.extend<CreateFixtures>({
   signIn: async ({ page }, use) => {
     await use(new SignIn(page));
+  },
+
+  citApplyingWithPage: async ({ page }, use) => {
+    await use(new CITApplyingWithPage(page));
   },
   citSubmittedPage: async ({ page }, use) => {
     await use(new CITSubmittedPage(page));
