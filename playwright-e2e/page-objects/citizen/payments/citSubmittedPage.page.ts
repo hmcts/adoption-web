@@ -4,9 +4,11 @@ export class CITSubmittedPage {
   referenceNumber!: string;
 
   readonly signOutLink: Locator;
+  readonly menuDropdownLink: Locator;
 
   constructor(page: Page) {
     this.signOutLink = page.getByRole('link', { name: 'Sign out' });
+    this.menuDropdownLink = page.getByText('Menu');
   }
 
   async initialiseReferenceNumber(page: Page): Promise<void> {
@@ -21,5 +23,9 @@ export class CITSubmittedPage {
 
   async clickSignOutLink(): Promise<void> {
     await this.signOutLink.click();
+  }
+
+  async clickMenuDropdownLink(): Promise<void> {
+    await this.menuDropdownLink.click();
   }
 }
