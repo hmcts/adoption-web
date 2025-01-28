@@ -2,6 +2,13 @@ import { type Locator, type Page } from '@playwright/test';
 import { expect } from '@playwright/test';
 export default class BasePage {
   readonly page: Page;
+  readonly yesRadioButton: Locator;
+  readonly noRadioButton: Locator;
+  readonly britishCheckbox: Locator;
+  readonly irishCheckbox: Locator;
+  readonly differentCountryCheckbox: Locator;
+  readonly countryNameLabel: Locator;
+  readonly notSureCheckbox: Locator;
   readonly continueButton: Locator;
   readonly saveAndContinue: Locator;
   readonly saveAsDraft: Locator;
@@ -13,9 +20,19 @@ export default class BasePage {
   readonly firstName: Locator;
   readonly lastName: Locator;
   readonly locationPicker: Locator;
+  readonly signOutLink: Locator;
+
+  readonly languageLink: Locator;
 
   constructor(page: Page) {
     this.page = page;
+    this.yesRadioButton = page.getByLabel('Yes');
+    this.noRadioButton = page.getByLabel('No', { exact: true });
+    this.britishCheckbox = page.getByLabel('British');
+    this.irishCheckbox = page.getByLabel('Irish');
+    this.differentCountryCheckbox = page.getByLabel('Citizen of a different country');
+    this.countryNameLabel = page.getByLabel('Country name');
+    this.notSureCheckbox = page.getByLabel('Not sure');
     this.continueButton = page.getByRole('button', { name: 'Continue' });
     this.saveAndContinue = page.getByRole('button', { name: 'Save and continue' });
     this.saveAsDraft = page.getByRole('button', { name: 'Save as draft' });
@@ -27,6 +44,17 @@ export default class BasePage {
     this.firstName = page.getByLabel('First names');
     this.lastName = page.getByLabel('Last names');
     this.locationPicker = page.locator('#location-picker');
+    this.signOutLink = page.getByRole('link', { name: 'Sign out' });
+
+    this.languageLink = page.locator('a.govuk-link.language');
+  }
+
+  async checkYesRadioButton(): Promise<void> {
+    await this.yesRadioButton.check();
+  }
+
+  async checkNoRadioButton(): Promise<void> {
+    await this.noRadioButton.check();
   }
 
   async clickContinue(): Promise<void> {
@@ -35,6 +63,10 @@ export default class BasePage {
 
   async clickSaveAndContinue(): Promise<void> {
     await this.saveAndContinue.click();
+  }
+
+  async clickSaveAsDraft(): Promise<void> {
+    await this.saveAsDraft.click();
   }
 
   async postcodeFindAddress(postcode: string, selectAdd: string): Promise<void> {
@@ -53,5 +85,13 @@ export default class BasePage {
     await this.locationPicker.fill(location);
     await expect(this.locationPicker).toHaveValue(location);
     await this.locationPicker.press('Enter');
+  }
+
+  async clickSignOutLink(): Promise<void> {
+    await this.signOutLink.click();
+  }
+
+  async clickLanguageLink(): Promise<void> {
+    await this.languageLink.click();
   }
 }
