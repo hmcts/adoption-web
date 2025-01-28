@@ -1,6 +1,6 @@
-import { expect, test } from '../../fixtures/fixtures';
-import { setupUser, teardownUser } from '../../hooks/createDeleteUser.hook';
-test.describe('Citizen Journey child details test single parent', () => {
+import { expect, test } from '../../../fixtures/fixtures';
+import { setupUser, teardownUser } from '../../../hooks/createDeleteUser.hook';
+test.describe('Citizen Journey child name test single parent', () => {
   let userEmail: string;
   let userPassword: string;
   let userId: string;

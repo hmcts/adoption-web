@@ -32,7 +32,7 @@ export class CITChildFullNameAfterAdoptionPage extends BasePage {
     this.errorLastNameSummary = page.getByRole('link', { name: "Enter the child's last names" });
   }
 
-  async fillFistNameLabel(firstName: string): Promise<void> {
+  async fillFirstNameLabel(firstName: string): Promise<void> {
     await this.firstName.fill(firstName);
   }
 
