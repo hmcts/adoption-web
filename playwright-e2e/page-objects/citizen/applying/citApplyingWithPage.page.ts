@@ -16,7 +16,6 @@ export class CITApplyingWithPage extends BasePage {
   readonly contactACourtHeading: Locator;
 
   readonly languageLink: Locator;
-
   readonly errorSummary: Locator;
 
   constructor(page: Page) {

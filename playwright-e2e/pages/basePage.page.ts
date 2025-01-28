@@ -22,6 +22,8 @@ export default class BasePage {
   readonly locationPicker: Locator;
   readonly signOutLink: Locator;
 
+  readonly languageLink: Locator;
+
   constructor(page: Page) {
     this.page = page;
     this.yesRadioButton = page.getByLabel('Yes');
@@ -43,6 +45,8 @@ export default class BasePage {
     this.lastName = page.getByLabel('Last names');
     this.locationPicker = page.locator('#location-picker');
     this.signOutLink = page.getByRole('link', { name: 'Sign out' });
+
+    this.languageLink = page.locator('a.govuk-link.language');
   }
 
   async checkYesRadioButton(): Promise<void> {
@@ -85,5 +89,9 @@ export default class BasePage {
 
   async clickSignOutLink(): Promise<void> {
     await this.signOutLink.click();
+  }
+
+  async clickLanguageLink(): Promise<void> {
+    await this.languageLink.click();
   }
 }
