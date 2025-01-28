@@ -28,15 +28,15 @@ export class CITChildFullNameAfterAdoptionPage extends BasePage {
     this.contactACourtHeading = page.getByRole('heading', { name: 'Contact a court that deals' });
     this.findACourtLink = page.getByRole('link', { name: 'Find a Court or Tribunal' });
 
-    this.errorFirstNameSummary = page.getByRole('link', { name: "Enter the child's first names" });
-    this.errorLastNameSummary = page.getByRole('link', { name: "Enter the child's last names" });
+    this.errorFirstNameSummary = page.getByRole('link', { name: 'Enter their first names' });
+    this.errorLastNameSummary = page.getByRole('link', { name: 'Enter their last names' });
   }
 
   async fillFirstNameLabel(firstName: string): Promise<void> {
     await this.firstName.fill(firstName);
   }
 
-  async lastNameLabel(lastName: string): Promise<void> {
+  async fillLastNameLabel(lastName: string): Promise<void> {
     await this.lastName.fill(lastName);
   }
 }
