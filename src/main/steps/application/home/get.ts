@@ -56,6 +56,7 @@ const applicant1RedirectPageSwitch = (caseState: State, userCase: Partial<Case>,
     case State.Applicant2Approved: {
       return CONFIRM_JOINT_APPLICATION;
     }
+    case State.LaSubmitted:
     case State.Submitted: {
       return APPLICATION_SUBMITTED;
     }
