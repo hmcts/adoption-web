@@ -105,6 +105,9 @@ export const test = base.extend<CreateFixtures>({
   citChildFullNameAfterAdoptionPage: async ({ page }, use) => {
     await use(new CITChildFullNameAfterAdoptionPage(page));
   },
+  citChildDoBPage: async ({ page }, use) => {
+    await use(new CITChildDoBPage(page));
+  },
   citSubmittedPage: async ({ page }, use) => {
     await use(new CITSubmittedPage(page));
   },
