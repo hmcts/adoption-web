@@ -1,6 +1,7 @@
 import { test as base } from '@playwright/test';
 
 import { CITApplyingWithPage } from '../page-objects/citizen/applying/citApplyingWithPage.page';
+import { CITChildDoBPage } from '../page-objects/citizen/child-details/citChildDoBPage.page';
 import { CITChildFullNameAfterAdoptionPage } from '../page-objects/citizen/child-details/citChildFullNameAfterAdoptionPage.page';
 import { CITChildFullNamePage } from '../page-objects/citizen/child-details/citChildFullNamePage.page';
 import { CITDateChildMovedInPage } from '../page-objects/citizen/date-child-moved-in/citDateChildMovedInPage.page';
@@ -48,6 +49,7 @@ type CreateFixtures = {
   citDateChildMovedInPage: CITDateChildMovedInPage;
   citChildFullNamePage: CITChildFullNamePage;
   citChildFullNameAfterAdoptionPage: CITChildFullNameAfterAdoptionPage;
+  citChildDoBPage: CITChildDoBPage;
   citSubmittedPage: CITSubmittedPage;
   laSignInPage: LASignInPage;
   laGettingStartedPage: LAGettingStartedPage;
