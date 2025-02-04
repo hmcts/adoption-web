@@ -14,6 +14,10 @@ export class CITChildDoBPage extends BasePage {
   readonly monthLabel: Locator;
   readonly yearLabel: Locator;
 
+  readonly contactUsForHelpDropdownLink: Locator;
+  readonly contactACourtHeading: Locator;
+  readonly findACourtLink: Locator;
+
   readonly errorDateSummary: Locator;
   readonly errorDaySummary: Locator;
   readonly errorMonthSummary: Locator;
@@ -22,6 +26,8 @@ export class CITChildDoBPage extends BasePage {
   readonly errorDayYearSummary: Locator;
   readonly errorMonthYearSummary: Locator;
   readonly realDateSummary: Locator;
+  readonly errorOver18Summary: Locator;
+  readonly errorDateInPastSummary: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -36,6 +42,10 @@ export class CITChildDoBPage extends BasePage {
     this.monthLabel = page.getByRole('textbox', { name: 'Month' });
     this.yearLabel = page.getByRole('textbox', { name: 'Year' });
 
+    this.contactUsForHelpDropdownLink = page.getByText('Contact us for help');
+    this.contactACourtHeading = page.getByRole('heading', { name: 'Contact a court that deals' });
+    this.findACourtLink = page.getByRole('link', { name: 'Find a Court or Tribunal' });
+
     this.errorDateSummary = page.getByRole('link', { name: 'Enter their date of birth' });
     this.errorDaySummary = page.getByRole('link', { name: 'Date of birth must include a day' });
     this.errorMonthSummary = page.getByRole('link', { name: 'Date of birth must include a month' });
@@ -44,6 +54,8 @@ export class CITChildDoBPage extends BasePage {
     this.errorDayYearSummary = page.getByRole('link', { name: 'Date of birth must include a day and year' });
     this.errorMonthYearSummary = page.getByRole('link', { name: 'Date of birth must include a month and year' });
     this.realDateSummary = page.getByRole('link', { name: 'Date of birth must be a real date' });
+    this.errorOver18Summary = page.getByRole('link', { name: 'Child is 18 or over and cannot be adopted' });
+    this.errorDateInPastSummary = page.getByRole('link', { name: 'Date of birth must be in the past' });
   }
 
   async fillDayLabel(day: string): Promise<void> {
