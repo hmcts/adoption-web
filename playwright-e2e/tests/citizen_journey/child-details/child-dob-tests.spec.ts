@@ -322,6 +322,12 @@ test.describe('Citizen Journey child DoB test single parent', () => {
     await citChildDoBPage.fillDayLabel('01');
     await citChildDoBPage.fillMonthLabel('01');
     await citChildDoBPage.fillYearLabel('2020');
-    
+
+    await citChildDoBPage.clickSaveAndContinue();
+
+    const exepctedUrl = 'https://adoption-web.aat.platform.hmcts.net/task-list';
+    const actualUrl = page.url();
+
+    await expect(actualUrl).toBe(exepctedUrl);
   });
 });
