@@ -300,8 +300,8 @@ test.describe('Citizen Journey child DoB test single parent', () => {
 
     await page.goBack();
 
-    const expectedDayValue = '01';
-    const expectedMonthValue = '01';
+    const expectedDayValue = '1';
+    const expectedMonthValue = '1';
     const expectedYearValue = '2020';
 
     const actualDayValue = await citChildDoBPage.dayLabel.inputValue();
