@@ -40,7 +40,9 @@
     "broker": "docker-compose -f broker-compose.yaml up -d",
     "broker:stop": "docker-compose -f broker-compose.yaml down",
     "test:functional-nightly": "yarn playwright install chromium && yarn playwright install firefox && yarn playwright install webkit && yarn run-all-browsers",
-    "test:functional-nightly-chromium": "yarn playwright install chromium && yarn playwright test --project=chromium"
+    "test:functional-nightly-chromium": "yarn playwright install chromium && yarn playwright test --project=chromium --project=MobileChrome --project=MobileSamsungPortrait --project=MobileSamsungLandscape",
+    "test:functional-nightly-firefox": "yarn playwright install firefox && yarn playwright test --project=firefox",
+    "test:functional-nightly-webkit": "yarn playwright install webkit && yarn playwright test --project=webkit --project=MobileSafari"
   },
   "dependencies": {
     "@axe-core/playwright": "^4.9.0",
