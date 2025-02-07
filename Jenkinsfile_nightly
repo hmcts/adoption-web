@@ -91,10 +91,44 @@ afterAlways('fullFunctionalTest') {
                     keepAll: true,
                     reportDir: 'playwright-report',
                     reportFiles: 'index.html',
-                    reportName: 'Playwright UI Functional Test Report'
+                    reportName: 'Playwright Chromium UI Functional Test Report'
                 ])
                 steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
             }
+        }
+        stage('UI Tests - firefox') {
+          try {
+            yarnBuilder.yarn('test:functional-nightly-firefox')
+          } catch (Error) {
+            unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
+          } finally {
+            publishHTML([
+              allowMissing: true,
+              alwaysLinkToLastBuild: true,
+              keepAll: true,
+              reportDir: 'playwright-report',
+              reportFiles: 'index.html',
+              reportName: 'Playwright Firefox UI Functional Test Report'
+            ])
+            steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
+          }
+        }
+        stage('UI Tests - webkit') {
+          try {
+            yarnBuilder.yarn('test:functional-nightly-webkit')
+          } catch (Error) {
+            unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
+          } finally {
+            publishHTML([
+              allowMissing: true,
+              alwaysLinkToLastBuild: true,
+              keepAll: true,
+              reportDir: 'playwright-report',
+              reportFiles: 'index.html',
+              reportName: 'Playwright Webkit UI Functional Test Report'
+            ])
+            steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
+          }
         }
     }
 
