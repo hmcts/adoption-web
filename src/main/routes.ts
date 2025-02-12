@@ -6,6 +6,7 @@ import multer from 'multer';
 import { NewCaseRedirectController } from './app/case/NewCaseRedirectController';
 import { GetController } from './app/controller/GetController';
 import { PostController } from './app/controller/PostController';
+import { TestingPostController } from './app/controller/TestingPostController';
 import { DocumentManagerController } from './app/document/DocumentManagementController';
 import { KeepAliveController } from './app/keepalive/KeepAliveController';
 import { stepsWithContent } from './steps';
@@ -17,6 +18,7 @@ import {
   KEEP_ALIVE_URL,
   LA_DOCUMENT_MANAGER,
   NEW_APPLICATION_REDIRECT,
+  TESTING_SUPPORT_POPULATE_DATA,
 } from './steps/urls';
 
 const handleUploads = multer();
@@ -58,6 +60,12 @@ export class Routes {
     }
 
     app.get(KEEP_ALIVE_URL, errorHandler(new KeepAliveController().get));
+
+    const enabled = true;
+    if (enabled) {
+      const testingPostController = new TestingPostController();
+      app.post(TESTING_SUPPORT_POPULATE_DATA, errorHandler(testingPostController.populate));
+    }
 
     app.use(errorController.notFound as unknown as RequestHandler);
   }

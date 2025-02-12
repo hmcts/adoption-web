@@ -21,6 +21,7 @@ import {
   SIGN_OUT_URL,
   TERMS_AND_CONDITIONS,
   TIMED_OUT_REDIRECT,
+  TESTING_SUPPORT,
 } from '../../steps/urls';
 
 /**
@@ -95,6 +96,9 @@ export class OidcMiddleware {
 
         if (req.path.startsWith(LA_PORTAL)) {
           req.session.isEligibility = false;
+          return next();
+        }
+        if (req.path.startsWith(TESTING_SUPPORT)) {
           return next();
         }
 

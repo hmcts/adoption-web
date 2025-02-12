@@ -3,7 +3,7 @@ import type { Application } from 'express';
 import type { LoggerInstance } from 'winston';
 
 import { HttpStatus } from '../../app/case/definition';
-import { CSRF_TOKEN_ERROR_URL, LA_PORTAL } from '../../steps/urls';
+import { CSRF_TOKEN_ERROR_URL, LA_PORTAL, TESTING_SUPPORT } from '../../steps/urls';
 
 const { Logger } = require('@hmcts/nodejs-logging');
 const logger: LoggerInstance = Logger.getLogger('app');
@@ -20,6 +20,10 @@ export class CSRFToken {
     app.use((error, req, res, next) => {
       if (dynatraceMonitorPaths.includes(req.path)) {
         return res.sendStatus(HttpStatus.OK);
+      }
+
+      if (req.path.startsWith(TESTING_SUPPORT)) {
+        return next();
       }
 
       if (error.code === 'EBADCSRFTOKEN') {
