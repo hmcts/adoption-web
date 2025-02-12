@@ -63,11 +63,33 @@ export default defineConfig({
     },
     {
       name: 'MobileSamsungPortrait',
-      use: { ...devices['Galaxy S III'] },
+      use: {
+        userAgent:
+          'Mozilla/5.0 (Linux; U; Android 4.0; en-us; GT-I9300 Build/IMM76D) AppleWebKit/534.30 (KHTML, like Gecko) Version/17.4 Mobile Safari/534.30',
+        viewport: {
+          width: 360,
+          height: 640,
+        },
+        deviceScaleFactor: 2,
+        isMobile: true,
+        hasTouch: true,
+        defaultBrowserType: 'webkit',
+      },
     },
     {
       name: 'MobileSamsungLandscape',
-      use: { ...devices['Galaxy S III landscape'] },
+      use: {
+        userAgent:
+          'Mozilla/5.0 (Linux; U; Android 4.0; en-us; GT-I9300 Build/IMM76D) AppleWebKit/534.30 (KHTML, like Gecko) Version/17.4 Mobile Safari/534.30',
+        viewport: {
+          width: 640,
+          height: 360,
+        },
+        deviceScaleFactor: 2,
+        isMobile: true,
+        hasTouch: true,
+        defaultBrowserType: 'webkit',
+      },
     },
 
     /* Test against branded browsers. */
