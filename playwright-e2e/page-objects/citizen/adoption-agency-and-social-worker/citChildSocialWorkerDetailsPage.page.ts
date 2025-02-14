@@ -31,6 +31,7 @@ export class CITChildSocialWorkerDetailsPage extends BasePage {
   readonly errorNoOptionalEmailSummary: Locator;
   readonly errorNoEmailSummary: Locator;
   readonly errorEnterLocalAuthoritySummary: Locator;
+  readonly errorNonGovernmentEmail: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -59,9 +60,12 @@ export class CITChildSocialWorkerDetailsPage extends BasePage {
 
     this.errorNameOfChildSocialWorkerSummary = page.getByRole('link', { name: 'Enter name of child’s social worker' });
     this.errorEnterUKPhoneNumberSummary = page.getByRole('link', { name: 'Enter a UK telephone number' });
-    this.errorNoOptionalEmailSummary = page.getByRole('link', { name: /childSocialWorkerEmail/i });
-    this.errorNoEmailSummary = page.getByRole('link', { name: /childLocalAuthorityEmail/i });
+    this.errorNoOptionalEmailSummary = page.locator('a[href="#childSocialWorkerEmail"]');
+    this.errorNoEmailSummary = page.locator('a[href="#childLocalAuthorityEmail"]');
     this.errorEnterLocalAuthoritySummary = page.getByRole('link', { name: 'Enter name of local authority' });
+    this.errorNonGovernmentEmail = page.getByRole('link', {
+      name: 'The email address provided is not an approved email address',
+    });
   }
 
   async fillNameOfChildSocialWorkerLabel(name: string): Promise<void> {
