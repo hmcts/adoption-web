@@ -2,7 +2,12 @@ import { CaseDate } from '../../../app/case/case';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { covertToDateObject } from '../../../app/form/parser';
-import { areDateFieldsFilledIn, isDateInputInvalid, isFutureDate } from '../../../app/form/validation';
+import {
+  areDateFieldsFilledIn,
+  isDateInputInvalid,
+  isFutureDate,
+  isMoreThan21Years,
+} from '../../../app/form/validation';
 
 const en = () => ({
   section: 'Second applicant',
@@ -16,6 +21,7 @@ const en = () => ({
       incompleteMonth: 'Date of birth must include a month',
       incompleteYear: 'Date of birth must include a year',
       invalidDateInFuture: 'Date of birth must be in the past',
+      invalidDateUnder21: 'Applicant must be at least 21 years old',
       incompleteDayAndMonth: 'Date of birth must include a day and month',
       incompleteDayAndYear: 'Date of birth must include a day and year',
       incompleteMonthAndYear: 'Date of birth must include a month and year ',
@@ -35,6 +41,7 @@ const cy: typeof en = () => ({
       incompleteMonth: 'Rhaid i’r dyddiad geni gynnwys mis',
       incompleteYear: 'Rhaid i’r dyddiad geni gynnwys blwyddyn',
       invalidDateInFuture: 'Rhaid i’ch dyddiad geni fod yn y gorffennol',
+      invalidDateUnder21: 'Rhaid i ymgeiswyr fod o leiaf 21 oed',
       incompleteDayAndMonth: 'Rhaid i’r dyddiad geni gynnwys diwrnod a mis',
       incompleteDayAndYear: 'Rhaid i’r dyddiad geni gynnwys diwrnod a blwyddyn',
       incompleteMonthAndYear: 'Rhaid i’r dyddiad geni gynnwys mis a blwyddyn',
@@ -74,7 +81,8 @@ export const form: FormContent = {
       validator: value =>
         areDateFieldsFilledIn(value as CaseDate) ||
         isDateInputInvalid(value as CaseDate) ||
-        isFutureDate(value as CaseDate),
+        isFutureDate(value as CaseDate) ||
+        isMoreThan21Years(value as CaseDate),
     },
   },
   submit: {
