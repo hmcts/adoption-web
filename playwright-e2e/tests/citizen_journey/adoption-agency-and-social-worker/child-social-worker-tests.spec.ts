@@ -160,7 +160,7 @@ test.describe('Citizen Journey child social worker test single parent', () => {
     expect(test.info().errors).toHaveLength(0);
   });
 
-  test('check inserting correct data then pressing save and continue advances to the next step', async ({ 
+  test('check inserting correct data then pressing save and continue advances to the next step', async ({
     page,
     citChildSocialWorkerDetailsPage,
   }) => {
