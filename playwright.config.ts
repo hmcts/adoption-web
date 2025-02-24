@@ -32,7 +32,6 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
   },
 
   /* Configure projects for major browsers */
@@ -60,6 +59,14 @@ export default defineConfig({
     {
       name: 'MobileSafari',
       use: { ...devices['iPhone 12'] },
+    },
+    {
+      name: 'MobileSamsungPortrait',
+      use: { ...devices['Galaxy S III'] },
+    },
+    {
+      name: 'MobileSamsungLandscape',
+      use: { ...devices['Galaxy S III landscape'] },
     },
 
     /* Test against branded browsers. */

@@ -6,14 +6,12 @@ export class LABirthMotherAliveStatusPage extends BasePage {
   readonly birthMotherStillAliveHeading: Locator;
 
   readonly birthMotherGroup: Locator;
-
   readonly birthMotherAliveYesRadioButton: Locator;
   readonly birthMotherAliveNoRadioButton: Locator;
   readonly birthMotherAliveNotSureRadioButton: Locator;
 
   constructor(page: Page) {
     super(page);
-
     this.birthMotherStillAliveHeading = page.getByRole('heading', { name: "Is the child's birth mother" });
 
     this.birthMotherAliveYesRadioButton = page.getByLabel('Yes');

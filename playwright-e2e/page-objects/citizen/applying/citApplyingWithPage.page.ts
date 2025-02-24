@@ -33,7 +33,6 @@ export class CITApplyingWithPage extends BasePage {
     this.contactACourtHeading = page.getByRole('heading', { name: 'Contact a court that deals' });
 
     this.languageLink = page.locator('a.govuk-link.language');
-
     this.errorSummary = page.locator('div.govuk-error-summar');
   }
 
