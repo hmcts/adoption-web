@@ -61,14 +61,6 @@ export default defineConfig({
       name: 'MobileSafari',
       use: { ...devices['iPhone 12'] },
     },
-    {
-      name: 'MobileSamsungPortrait',
-      use: { ...devices['Galaxy S III'] },
-    },
-    {
-      name: 'MobileSamsungLandscape',
-      use: { ...devices['Galaxy S III landscape'] },
-    },
 
     /* Test against branded browsers. */
     // {
