@@ -23,7 +23,7 @@ test.describe('Citizen Journey child social worker test single parent', () => {
     await teardownUser(userId);
   });
 
-  test('chekc default page is in English', async ({ page }) => {
+  test('check default page is in English', async ({ page }) => {
     const langAttribute = await page.getAttribute('html', 'lang');
 
     expect(langAttribute).toMatch(/^en/);
@@ -50,8 +50,8 @@ test.describe('Citizen Journey child social worker test single parent', () => {
     await expect.soft(citChildSocialWorkerDetailsPage.emailAddressText).toBeVisible();
     await expect.soft(citChildSocialWorkerDetailsPage.emailAddressLabel).toBeVisible();
     await expect.soft(citChildSocialWorkerDetailsPage.childLocalAuthorityText).toBeVisible();
-    await expect.soft(citChildSocialWorkerDetailsPage.childLocalAuthorityInputLabel).toBeVisible();
-    await expect.soft(citChildSocialWorkerDetailsPage.childLocalAuthorityDropdown).toBeHidden({ timeout: 500 });
+    await expect.soft(citChildSocialWorkerDetailsPage.localAuthorityInputLabel).toBeVisible();
+    await expect.soft(citChildSocialWorkerDetailsPage.localAuthorityDropdown).toBeHidden({ timeout: 500 });
     await expect.soft(citChildSocialWorkerDetailsPage.localAuthorityEmailText).toBeVisible();
     await expect.soft(citChildSocialWorkerDetailsPage.localAuthorityEmailLabel).toBeVisible();
     await expect.soft(citChildSocialWorkerDetailsPage.contactUsForHelpDropdownLink).toBeVisible();
@@ -60,8 +60,8 @@ test.describe('Citizen Journey child social worker test single parent', () => {
 
     await expect.soft(citChildSocialWorkerDetailsPage.errorNameOfChildSocialWorkerSummary).toBeHidden({ timeout: 500 });
     await expect.soft(citChildSocialWorkerDetailsPage.errorEnterUKPhoneNumberSummary).toBeHidden({ timeout: 500 });
-    await expect.soft(citChildSocialWorkerDetailsPage.errorNoOptionalEmailSummary).toBeHidden({ timeout: 500 });
-    await expect.soft(citChildSocialWorkerDetailsPage.errorNoEmailSummary).toBeHidden({ timeout: 500 });
+    await expect.soft(citChildSocialWorkerDetailsPage.errorNoOptionalChildEmailSummary).toBeHidden({ timeout: 500 });
+    await expect.soft(citChildSocialWorkerDetailsPage.errorNoChildEmailSummary).toBeHidden({ timeout: 500 });
     await expect.soft(citChildSocialWorkerDetailsPage.errorEnterLocalAuthoritySummary).toBeHidden({ timeout: 500 });
     await expect.soft(citChildSocialWorkerDetailsPage.errorNonGovernmentEmail).toBeHidden({ timeout: 500 });
 
@@ -78,8 +78,8 @@ test.describe('Citizen Journey child social worker test single parent', () => {
 
     await expect.soft(citChildSocialWorkerDetailsPage.errorNameOfChildSocialWorkerSummary).toBeVisible();
     await expect.soft(citChildSocialWorkerDetailsPage.errorEnterUKPhoneNumberSummary).toBeVisible();
-    await expect.soft(citChildSocialWorkerDetailsPage.errorNoOptionalEmailSummary).toBeHidden({ timeout: 500 });
-    await expect.soft(citChildSocialWorkerDetailsPage.errorNoEmailSummary).toBeVisible();
+    await expect.soft(citChildSocialWorkerDetailsPage.errorNoOptionalChildEmailSummary).toBeHidden({ timeout: 500 });
+    await expect.soft(citChildSocialWorkerDetailsPage.errorNoChildEmailSummary).toBeVisible();
     await expect.soft(citChildSocialWorkerDetailsPage.errorEnterLocalAuthoritySummary).toBeVisible();
     await expect.soft(citChildSocialWorkerDetailsPage.errorNonGovernmentEmail).toBeHidden({ timeout: 500 });
 
@@ -94,8 +94,8 @@ test.describe('Citizen Journey child social worker test single parent', () => {
 
     await expect.soft(citChildSocialWorkerDetailsPage.errorNameOfChildSocialWorkerSummary).toBeVisible();
     await expect.soft(citChildSocialWorkerDetailsPage.errorEnterUKPhoneNumberSummary).toBeVisible();
-    await expect.soft(citChildSocialWorkerDetailsPage.errorNoOptionalEmailSummary).toBeVisible();
-    await expect.soft(citChildSocialWorkerDetailsPage.errorNoEmailSummary).toBeVisible();
+    await expect.soft(citChildSocialWorkerDetailsPage.errorNoOptionalChildEmailSummary).toBeVisible();
+    await expect.soft(citChildSocialWorkerDetailsPage.errorNoChildEmailSummary).toBeVisible();
     await expect.soft(citChildSocialWorkerDetailsPage.errorEnterLocalAuthoritySummary).toBeVisible();
     await expect.soft(citChildSocialWorkerDetailsPage.errorNonGovernmentEmail).toBeHidden({ timeout: 500 });
 
@@ -149,7 +149,7 @@ test.describe('Citizen Journey child social worker test single parent', () => {
 
     const actualSocialWorkerValue = await citChildSocialWorkerDetailsPage.nameOfChildSocialWorkerLabel.inputValue();
     const actualPhoneNumberValue = await citChildSocialWorkerDetailsPage.phoneNumberLabel.inputValue();
-    const actualLocalAuthorityValue = await citChildSocialWorkerDetailsPage.childLocalAuthorityInputLabel.inputValue();
+    const actualLocalAuthorityValue = await citChildSocialWorkerDetailsPage.localAuthorityInputLabel.inputValue();
     const actualLocalAuthorityEmailValue = await citChildSocialWorkerDetailsPage.localAuthorityEmailLabel.inputValue();
 
     await expect.soft(actualSocialWorkerValue).toBe(expectedSocialWorkerValue);
