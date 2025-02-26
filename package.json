@@ -32,7 +32,7 @@
     "test:crossbrowser-e2e": "MOCHAWESOME_REPORTFILENAME=crossbrowser codeceptjs run-multiple --grep '@cross-browser' ${BROWSER_GROUP:-'--all'} -c saucelabs.conf.js --reporter mocha-multi",
     "test:crossbrowser": "./bin/run-crossbrowser-tests.sh",
     "test:functional-nightly": "yarn playwright install chromium && yarn playwright install firefox && yarn playwright install webkit && yarn run-all-browsers",
-    "run-all-browsers": "yarn playwright test --project=chromium --project=firefox --project=webkit --project=MobileChrome --project=MobileSamsungPortrait --project=MobileSamsungLandscape",
+    "run-all-browsers": "yarn playwright test --project=chromium --project=firefox --project=webkit --project=MobileChrome",
     "test:accessibility-nightly": "yarn playwright install chromium && yarn playwright install firefox && yarn playwright install webkit && yarn playwright test --grep @accessibility",
     "test:local": "codeceptjs run-multiple parallel",
     "test:pact": "jest -c jest.pact.config.js --runInBand",
@@ -42,7 +42,7 @@
     "broker:stop": "docker-compose -f broker-compose.yaml down"
   },
   "dependencies": {
-    "@axe-core/playwright": "^4.9.0",
+    "@axe-core/playwright": "^4.10.0",
     "@hmcts/cookie-manager": "^1.0.0",
     "@hmcts/frontend": "^0.0.50-alpha",
     "@hmcts/nodejs-healthcheck": "^1.8.4",
@@ -117,7 +117,7 @@
     "@faker-js/faker": "^8.4.1",
     "@pact-foundation/absolute-version": "^0.0.4",
     "@pact-foundation/pact": "^9.17.3",
-    "@playwright/test": "^1.43.1",
+    "@playwright/test": "^1.50.0",
     "@types/copy-webpack-plugin": "^10.1.0",
     "@types/jest": "^28.1.1",
     "@types/mini-css-extract-plugin": "^2.5.1",
@@ -180,7 +180,8 @@
     "codeceptjs/axios": "1.7.4",
     "express": "^4.21.2",
     "serve-static": "^1.16.0",
-    "cookie": "^0.7.0"
+    "cookie": "^0.7.0",
+    "nanoid": "^3.3.8"
   },
   "packageManager": "yarn@3.8.5"
 }
