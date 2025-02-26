@@ -97,7 +97,7 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       await e2eJourneyHelper.citizenAdoptionDateChildMovedIn(app);
 
       //  Child's details before adoption
-      await e2eJourneyHelper.citzenAdoptionChildDetailsBeforeAdoption(app, appOneFirstName, appOneLastName);
+      await e2eJourneyHelper.citzenAdoptionChildDetailsBeforeAdoption(app, childFirstName, childLastName);
 
       // Child's details after adoption
       await e2eJourneyHelper.citizenAdoptionChildDetailsAfterAdoption(app, childFirstName, childLastName);
@@ -131,6 +131,14 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       // citizen submitted page
       await citSubmittedPage.initialiseReferenceNumber(page);
       const referenceNum = citSubmittedPage.referenceNumber;
+
+      // sign out to ensure full citizen experience
+      const userAgent = await page.evaluate(() => navigator.userAgent);
+      const isMobile = /Mobile|Android|iPhone|iPad/i.test(userAgent);
+      if (isMobile) {
+        await citSubmittedPage.clickMenuDropdownLink();
+      }
+      await citSubmittedPage.clickSignOutLink();
 
       await laSignInPage.navigateTo();
       await laSignInPage.startLAJourney(referenceNum, childFullname);
