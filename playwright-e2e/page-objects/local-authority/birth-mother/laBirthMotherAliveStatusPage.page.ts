@@ -6,6 +6,7 @@ export class LABirthMotherAliveStatusPage extends BasePage {
   readonly birthMotherStillAliveHeading: Locator;
 
   readonly birthMotherGroup: Locator;
+
   readonly birthMotherAliveYesRadioButton: Locator;
   readonly birthMotherAliveNoRadioButton: Locator;
   readonly birthMotherAliveNotSureRadioButton: Locator;
