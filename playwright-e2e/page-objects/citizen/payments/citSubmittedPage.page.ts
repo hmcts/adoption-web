@@ -4,6 +4,7 @@ export class CITSubmittedPage {
   referenceNumber!: string;
 
   readonly signOutLink: Locator;
+
   readonly menuDropdownLink: Locator;
 
   constructor(page: Page) {
