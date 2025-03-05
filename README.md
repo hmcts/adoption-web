@@ -147,7 +147,7 @@ mockData:
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvcmlhbiIsInVpZCI6IjEyMyIsInJvbGVzIjpbImFkb3B0aW9uLWNpdGl6ZW4tdXNlciJdfQ.G7Na_2U6gEuPEPXBuVq3UddV9mti85Sw3Gzd0yZA-2I
 ```
 
-Functional and accessibility tests are now run using Playwright as [described below](## Testing E2E - Playwright).
+Functional and accessibility tests are now run using Playwright as [described below](README.md#testing-e2e---playwright).
 
 Make sure all the paths in your application are covered by accessibility tests (see [a11y.ts](src/test/a11y/a11y.ts)).
 
