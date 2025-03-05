@@ -143,7 +143,7 @@
     "jest": "^28.1.0",
     "jest-circus": "^28.1.0",
     "jest-extended": "^2.0.0",
-    "jest-html-reporter": "^3.5.0",
+    "jest-html-reporter": "^4.0.1",
     "jest-pact": "^0.11.0",
     "jest-when": "^3.5.1",
     "lint-staged": "^13.0.0",
