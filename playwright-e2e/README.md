@@ -24,20 +24,26 @@ To execute the 'smoke-test.spec.ts' individually from the Terminal, use the comm
  .env # This sits outside playwright-e2e folder, this is required to run your tests locally. See Setup Environment Variables below.
 ```
 
-## 🔐 Setup Environment Variables
+## 🔐 Set up Environment Variables
 
 This repository contains automation tests that can be run locally. To set up the environment variables for configuring URLs and passwords, follow the instructions below:
 
-1. Create a .env file in the root directory of this project if it doesn't already exist.
+1. Create a `.env` file in the root directory of this project if it doesn't already exist.
 
-2. Add the following environment variables to the .env file: (ask a team mate for details/values can be found in Azure Keyvault)
+2. Add the following environment variables to the `.env` file: (ask a team mate for details/values can be found in Azure Keyvault)
 
+```bash
    IDAM_SECRET=
    IDAM_TOKEN_URL=
    IDAM_TESTING_SUPPORT_USERS_URL=
-   IDAM_START_PAGE=
    IDAM_CITIZEN_USER_PASSWORD=
+```
 
+If these values are not available, you can decode the following Base64 string:
+
+```bash
+SURBTV9TRUNSRVQ9Zk02dGQ3V15wbktYQCoqVgpJREFNX1RPS0VOX1VSTD1odHRwczovL2lkYW0td2ViLXB1YmxpYy5hYXQucGxhdGZvcm0uaG1jdHMubmV0L28vdG9rZW4KSURBTV9URVNUSU5HX1NVUFBPUlRfVVNFUlNfVVJMPWh0dHBzOi8vaWRhbS10ZXN0aW5nLXN1cHBvcnQtYXBpLmFhdC5wbGF0Zm9ybS5obWN0cy5uZXQvdGVzdC9pZGFtL3VzZXJzCklEQU1fQ0lUSVpFTl9VU0VSX1BBU1NXT1JEPVBhc3N3b3JkMTIzIQ==
+```
 
 ## User creation 
 
@@ -45,9 +51,9 @@ Citizen user are created on the fly using IDAM API endpoints. You can use the [i
 Remember you must be connected to the VPN to create users using the API endpoint.
 
 
-3. Save the .env file.
+3. Save the `.env` file.
 
-.env file is excluded from version control using Git's .gitignore.
+`.env` files are excluded from version control using Git's .gitignore.
 
 ## Install Dependencies
 
