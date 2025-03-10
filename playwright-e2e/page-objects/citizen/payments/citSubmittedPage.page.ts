@@ -6,6 +6,8 @@ export class CITSubmittedPage {
   readonly signOutLink: Locator;
   readonly menuDropdownLink: Locator;
 
+  readonly menuDropdownLink: Locator;
+
   constructor(page: Page) {
     this.signOutLink = page.getByRole('link', { name: 'Sign out' });
     this.menuDropdownLink = page.getByText('Menu');
