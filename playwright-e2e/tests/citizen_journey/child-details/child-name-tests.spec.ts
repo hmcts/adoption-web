@@ -40,6 +40,7 @@ test.describe('Citizen Journey child name test single parent', () => {
   test('check if page components are in correct visible state', async ({ citChildFullNamePage }) => {
     await expect.soft(citChildFullNamePage.childDetailsTitle).toBeVisible();
     await expect.soft(citChildFullNamePage.childFullNameHeading).toBeVisible();
+    await expect.soft(citChildFullNamePage.childHeadingTip).toBeVisible();
     await expect.soft(citChildFullNamePage.firstName).toBeVisible();
     await expect.soft(citChildFullNamePage.lastName).toBeVisible();
     await expect.soft(citChildFullNamePage.contactUsForHelpDropdownLink).toBeVisible();
@@ -144,7 +145,7 @@ test.describe('Citizen Journey child name test single parent', () => {
     expect(test.info().errors).toHaveLength(0);
   });
 
-  test('check inserting valid name data then pressing save and conitnue advances to next step', async ({
+  test('check inserting valid name data then pressing save and continue advances to next step', async ({
     page,
     citChildFullNamePage,
   }) => {
