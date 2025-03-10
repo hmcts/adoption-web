@@ -1,6 +1,8 @@
 import { test as base } from '@playwright/test';
 
 import { CITApplyingWithPage } from '../page-objects/citizen/applying/citApplyingWithPage.page';
+import { CITChildDoBPage } from '../page-objects/citizen/child-details/citChildDoBPage.page';
+import { CITChildFullNameAfterAdoptionPage } from '../page-objects/citizen/child-details/citChildFullNameAfterAdoptionPage.page';
 import { CITChildFullNamePage } from '../page-objects/citizen/child-details/citChildFullNamePage.page';
 import { CITDateChildMovedInPage } from '../page-objects/citizen/date-child-moved-in/citDateChildMovedInPage.page';
 import { CITSubmittedPage } from '../page-objects/citizen/payments/citSubmittedPage.page';
@@ -46,6 +48,8 @@ type CreateFixtures = {
   citTaskListPage: CITTaskListPage;
   citDateChildMovedInPage: CITDateChildMovedInPage;
   citChildFullNamePage: CITChildFullNamePage;
+  citChildFullNameAfterAdoptionPage: CITChildFullNameAfterAdoptionPage;
+  citChildDoBPage: CITChildDoBPage;
   citSubmittedPage: CITSubmittedPage;
   laSignInPage: LASignInPage;
   laGettingStartedPage: LAGettingStartedPage;
@@ -97,6 +101,12 @@ export const test = base.extend<CreateFixtures>({
   },
   citChildFullNamePage: async ({ page }, use) => {
     await use(new CITChildFullNamePage(page));
+  },
+  citChildFullNameAfterAdoptionPage: async ({ page }, use) => {
+    await use(new CITChildFullNameAfterAdoptionPage(page));
+  },
+  citChildDoBPage: async ({ page }, use) => {
+    await use(new CITChildDoBPage(page));
   },
   citSubmittedPage: async ({ page }, use) => {
     await use(new CITSubmittedPage(page));
