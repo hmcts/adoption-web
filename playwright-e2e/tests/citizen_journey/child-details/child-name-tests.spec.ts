@@ -1,5 +1,6 @@
 import { expect, test } from '../../../fixtures/fixtures';
 import { setupUser, teardownUser } from '../../../hooks/createDeleteUser.hook';
+import { runChangePageLanguageTest, runPageLanguageTest } from '../test-utils';
 test.describe('Citizen Journey child name test single parent', () => {
   let userEmail: string;
   let userPassword: string;
@@ -23,18 +24,12 @@ test.describe('Citizen Journey child name test single parent', () => {
     await teardownUser(userId);
   });
 
-  test('check default page is in English', async ({ page }) => {
-    const langAttribute = await page.getAttribute('html', 'lang');
-
-    expect(langAttribute).toMatch(/^en/);
+  test('check default page is in English', async ({ citChildFullNamePage }) => {
+    await runPageLanguageTest('en', citChildFullNamePage);
   });
 
-  test('check page is in Welsh after clicking Welsh language link', async ({ page, citChildFullNamePage }) => {
-    await citChildFullNamePage.clickLanguageLink();
-
-    const langAttribute = await page.getAttribute('html', 'lang');
-
-    expect(langAttribute).toMatch(/^cy/);
+  test('check page is in Welsh after clicking Welsh language link', async ({ citChildFullNamePage }) => {
+    await runChangePageLanguageTest('cy', citChildFullNamePage);
   });
 
   test('check if page components are in correct visible state', async ({ citChildFullNamePage }) => {
@@ -133,6 +128,39 @@ test.describe('Citizen Journey child name test single parent', () => {
     await expect(actualUrl).toBe(expectedUrl);
 
     await page.goBack();
+
+    const expectedFirstNameLabelValue = 'Joe';
+    const expectedLastNameLabelValue = 'Smith';
+    const actualFirstNameLabelValue = await citChildFullNamePage.firstName.inputValue();
+    const actualLastNameLabelValue = await citChildFullNamePage.lastName.inputValue();
+
+    await expect.soft(actualFirstNameLabelValue).toBe(expectedFirstNameLabelValue);
+    await expect.soft(actualLastNameLabelValue).toBe(expectedLastNameLabelValue);
+
+    expect(test.info().errors).toHaveLength(0);
+  });
+
+  test('check pressing draft button then continuing with application maintains filled first name and last name labels', async ({
+    page,
+    citSaveAsDraftPage,
+    citTaskListPage,
+    citChildFullNamePage,
+  }) => {
+    await citChildFullNamePage.fillFirstNameLabel('Joe');
+    await citChildFullNamePage.fillLastNameLabel('Smith');
+    await citChildFullNamePage.clickSaveAsDraft();
+
+    let expectedUrl = 'https://adoption-web.aat.platform.hmcts.net/save-as-draft';
+    let actualUrl = page.url();
+    await expect(actualUrl).toBe(expectedUrl);
+
+    await citSaveAsDraftPage.clickContinueWithYourApplicationButton();
+
+    expectedUrl = 'https://adoption-web.aat.platform.hmcts.net/task-list';
+    actualUrl = page.url();
+    await expect(actualUrl).toBe(expectedUrl);
+
+    await citTaskListPage.clickChildDetailsLink();
 
     const expectedFirstNameLabelValue = 'Joe';
     const expectedLastNameLabelValue = 'Smith';

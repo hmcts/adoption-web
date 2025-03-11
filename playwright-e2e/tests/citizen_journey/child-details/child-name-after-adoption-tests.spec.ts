@@ -1,5 +1,6 @@
 import { expect, test } from '../../../fixtures/fixtures';
 import { setupUser, teardownUser } from '../../../hooks/createDeleteUser.hook';
+import { runChangePageLanguageTest, runPageLanguageTest } from '../test-utils';
 test.describe('Citizen Journey child name after adoption test single parent', () => {
   let userEmail: string;
   let userPassword: string;
@@ -26,21 +27,12 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
     await teardownUser(userId);
   });
 
-  test('check default page is in English', async ({ page }) => {
-    const langAttribute = await page.getAttribute('html', 'lang');
-
-    expect(langAttribute).toMatch(/^en/);
+  test('check default page is in English', async ({ citChildFullNameAfterAdoptionPage }) => {
+    await runPageLanguageTest('en', citChildFullNameAfterAdoptionPage);
   });
 
-  test('check page is in Welsh after clicking Welsh language link', async ({
-    page,
-    citChildFullNameAfterAdoptionPage,
-  }) => {
-    await citChildFullNameAfterAdoptionPage.clickLanguageLink();
-
-    const langAttribute = await page.getAttribute('html', 'lang');
-
-    expect(langAttribute).toMatch(/^cy/);
+  test('check page is in Welsh after clicking Welsh language link', async ({ citChildFullNameAfterAdoptionPage }) => {
+    await runChangePageLanguageTest('cy', citChildFullNameAfterAdoptionPage);
   });
 
   test('check if page components are in correct visible state', async ({ citChildFullNameAfterAdoptionPage }) => {
