@@ -177,7 +177,7 @@
     "formidable": "^3.2.4",
     "semver": ">=7.5.2",
     "ws": "^8.17.1",
-    "codeceptjs/axios": "1.7.4",
+    "codeceptjs/axios": "1.8.2",
     "express": "^4.21.2",
     "serve-static": "^1.16.0",
     "cookie": "^0.7.0",
