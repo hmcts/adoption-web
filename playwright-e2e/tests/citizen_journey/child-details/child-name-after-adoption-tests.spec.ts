@@ -38,6 +38,7 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
   test('check if page components are in correct visible state', async ({ citChildFullNameAfterAdoptionPage }) => {
     await expect.soft(citChildFullNameAfterAdoptionPage.childDetailsTitle).toBeVisible();
     await expect.soft(citChildFullNameAfterAdoptionPage.childFullNameAfterAdoptionHeading).toBeVisible();
+    await expect.soft(citChildFullNameAfterAdoptionPage.childFullNameAfterAdoptionTooltip).toBeVisible();
     await expect.soft(citChildFullNameAfterAdoptionPage.firstName).toBeVisible();
     await expect.soft(citChildFullNameAfterAdoptionPage.lastName).toBeVisible();
     await expect.soft(citChildFullNameAfterAdoptionPage.contactUsForHelpDropdownLink).toBeVisible();
@@ -136,6 +137,42 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
     await expect(actualUrl).toBe(expectedUrl);
 
     await page.goBack();
+
+    const expectedFirstNameLabelValue = 'Joe';
+    const expectedLastNameLabelValue = 'Smith';
+    const actualFirstNameLabelValue = await citChildFullNameAfterAdoptionPage.firstName.inputValue();
+    const actualLastNameLabelValue = await citChildFullNameAfterAdoptionPage.lastName.inputValue();
+
+    await expect.soft(actualFirstNameLabelValue).toBe(expectedFirstNameLabelValue);
+    await expect.soft(actualLastNameLabelValue).toBe(expectedLastNameLabelValue);
+
+    expect(test.info().errors).toHaveLength(0);
+  });
+
+  test('check pressing draft button then continuing with application maintains first name and last name labels', async ({
+    page,
+    citSaveAsDraftPage,
+    citTaskListPage,
+    citChildFullNamePage,
+    citChildFullNameAfterAdoptionPage,
+  }) => {
+    await citChildFullNameAfterAdoptionPage.fillFirstNameLabel('Joe');
+    await citChildFullNameAfterAdoptionPage.fillLastNameLabel('Smith');
+    await citChildFullNameAfterAdoptionPage.clickSaveAsDraft();
+
+    let expectedUrl = 'https://adoption-web.aat.platform.hmcts.net/save-as-draft';
+    let actualUrl = page.url();
+    await expect(actualUrl).toBe(expectedUrl);
+
+    await citSaveAsDraftPage.clickContinueWithYourApplicationButton();
+
+    expectedUrl = 'https://adoption-web.aat.platform.hmcts.net/task-list';
+    actualUrl = page.url();
+    await expect(actualUrl).toBe(expectedUrl);
+
+    await citTaskListPage.clickChildDetailsLink();
+
+    await citChildFullNamePage.clickSaveAndContinue();
 
     const expectedFirstNameLabelValue = 'Joe';
     const expectedLastNameLabelValue = 'Smith';

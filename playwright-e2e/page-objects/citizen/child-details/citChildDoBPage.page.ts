@@ -5,6 +5,7 @@ import BasePage from '../../../pages/basePage.page';
 export class CITChildDoBPage extends BasePage {
   readonly childDetailsTitle: Locator;
   readonly childDoBHeading: Locator;
+  readonly childDoBTooltip: Locator;
 
   readonly dayText: Locator;
   readonly monthText: Locator;
@@ -33,6 +34,7 @@ export class CITChildDoBPage extends BasePage {
     super(page);
     this.childDetailsTitle = page.getByText("The child's details");
     this.childDoBHeading = page.getByRole('heading', { name: "What is the child's date of" });
+    this.childDoBTooltip = page.getByText('For example, 31 3 2012');
 
     this.dayText = page.getByText('Day');
     this.monthText = page.getByText('Month', { exact: true });
