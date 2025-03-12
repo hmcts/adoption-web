@@ -36,6 +36,8 @@ test.describe('Citizen Journey child name test single parent', () => {
     await expect.soft(citChildFullNamePage.childDetailsTitle).toBeVisible();
     await expect.soft(citChildFullNamePage.childFullNameHeading).toBeVisible();
     await expect.soft(citChildFullNamePage.childHeadingTip).toBeVisible();
+    await expect.soft(citChildFullNamePage.firstNameTooltip).toBeVisible();
+    await expect.soft(citChildFullNamePage.lastNameTooltip).toBeVisible();
     await expect.soft(citChildFullNamePage.firstName).toBeVisible();
     await expect.soft(citChildFullNamePage.lastName).toBeVisible();
     await expect.soft(citChildFullNamePage.contactUsForHelpDropdownLink).toBeVisible();
