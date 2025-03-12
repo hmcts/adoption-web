@@ -141,11 +141,7 @@ mockData:
   authToken: 'VALUE_FROM_AAT_KEYVAULT'
 ```
 
-(This file will be ignored by `git`, so it is safe to leave it there afterwards.)  Replace `VALUE_FROM_AAT_KEYVAULT` with the contents of the secret `adoption-web-auth-token` found in `adoption-aat`.  If that isn't available, you can use this JWT:
-
-```bash
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvcmlhbiIsInVpZCI6IjEyMyIsInJvbGVzIjpbImFkb3B0aW9uLWNpdGl6ZW4tdXNlciJdfQ.G7Na_2U6gEuPEPXBuVq3UddV9mti85Sw3Gzd0yZA-2I
-```
+(This file will be ignored by `git`, so it is safe to leave it there afterwards.)  Replace `VALUE_FROM_AAT_KEYVAULT` with the contents of the secret `adoption-web-auth-token` found in `adoption-aat`.
 
 Functional and accessibility tests are now run using Playwright as [described below](README.md#testing-e2e---playwright).
 
@@ -209,10 +205,13 @@ We use Playwright with TypeScript. All the details can be found in the [E2E READ
 
 To install Playwright: `yarn playwright install`.
 
-You then need to create a root-level `.env` file with the following information (decode the Base64 string first):
+You then need to create a root-level `.env` file with the following information (to be provided by the developers):
 
 ```bash
-SURBTV9TRUNSRVQ9Zk02dGQ3V15wbktYQCoqVgpJREFNX1RPS0VOX1VSTD1odHRwczovL2lkYW0td2ViLXB1YmxpYy5hYXQucGxhdGZvcm0uaG1jdHMubmV0L28vdG9rZW4KSURBTV9URVNUSU5HX1NVUFBPUlRfVVNFUlNfVVJMPWh0dHBzOi8vaWRhbS10ZXN0aW5nLXN1cHBvcnQtYXBpLmFhdC5wbGF0Zm9ybS5obWN0cy5uZXQvdGVzdC9pZGFtL3VzZXJzCklEQU1fQ0lUSVpFTl9VU0VSX1BBU1NXT1JEPVBhc3N3b3JkMTIzIQ==
+IDAM_SECRET=[ask the developers]
+IDAM_TOKEN_URL=https://idam-web-public.aat.platform.hmcts.net/o/token
+IDAM_TESTING_SUPPORT_USERS_URL=https://idam-testing-support-api.aat.platform.hmcts.net/test/idam/users
+IDAM_CITIZEN_USER_PASSWORD=[ask the developers]
 ```
 
 This file will be ignored by `git`, so it is safe to leave it there afterwards.
