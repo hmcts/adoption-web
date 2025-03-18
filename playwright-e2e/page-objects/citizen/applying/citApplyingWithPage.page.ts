@@ -16,6 +16,7 @@ export class CITApplyingWithPage extends BasePage {
   readonly contactACourtHeading: Locator;
 
   readonly languageLink: Locator;
+
   readonly errorSummary: Locator;
 
   constructor(page: Page) {
@@ -33,6 +34,7 @@ export class CITApplyingWithPage extends BasePage {
     this.contactACourtHeading = page.getByRole('heading', { name: 'Contact a court that deals' });
 
     this.languageLink = page.locator('a.govuk-link.language');
+
     this.errorSummary = page.locator('div.govuk-error-summar');
   }
 
