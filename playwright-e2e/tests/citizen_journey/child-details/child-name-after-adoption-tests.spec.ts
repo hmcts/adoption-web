@@ -73,7 +73,7 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
     await citChildFullNameAfterAdoptionPage.clickSaveAndContinue();
 
     await expect.soft(citChildFullNameAfterAdoptionPage.errorFirstNameSummary).toBeHidden({ timeout: 500 });
-    await expect.soft(citChildFullNameAfterAdoptionPage);
+    await expect.soft(citChildFullNameAfterAdoptionPage.errorLastNameSummary).toBeVisible();
 
     expect(test.info().errors).toHaveLength(0);
   });
