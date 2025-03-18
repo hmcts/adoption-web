@@ -19,6 +19,7 @@
     "test:coverage": "jest --coverage",
     "test:integration": "jest -c jest.integration.config.js",
     "test:api": "jest -c jest.api.config.js",
+    "test:a11y": "echo 'a11y tests are replaced by Playwright; will be executed after functional tests' && exit 0",
     "sonar-scan": "sonar-scanner",
     "test:smoke:e2e": "MOCHAWESOME_REPORTFILENAME=smoke codeceptjs run --grep '${SMOKE_TESTS_SELECTOR:=@smoke-tests}' --reporter mocha-multi",
     "test:smoke:downstream": "NODE_TLS_REJECT_UNAUTHORIZED=0 jest -c jest.smoke.config.js",
