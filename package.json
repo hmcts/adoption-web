@@ -25,6 +25,7 @@
     "test:smoke:downstream": "NODE_TLS_REJECT_UNAUTHORIZED=0 jest -c jest.smoke.config.js",
     "test:smoke": "run-p test:smoke:downstream test:smoke:e2e",
     "test:fullfunctional": "run-p test:functional",
+    "test:functional": "yarn playwright install chromium && yarn playwright install firefox && yarn playwright install webkit && playwright test tests/smoke.spec.ts3",
     "cichecks": "yarn && run-p build lint test",
     "test:functional:skip": "echo 'Not running functional cases in Master' && exit 0",
     "test:crossbrowser-e2e": "MOCHAWESOME_REPORTFILENAME=crossbrowser codeceptjs run-multiple --grep '@cross-browser' ${BROWSER_GROUP:-'--all'} -c saucelabs.conf.js --reporter mocha-multi",
