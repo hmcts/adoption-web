@@ -133,4 +133,3 @@ def setupSecretsForIntegrationTests(pipelineConf) {
     }
   }
 }
-}
