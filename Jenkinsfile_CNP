@@ -100,17 +100,44 @@ withPipeline(type, product, component) {
   }
 
   before('functionalTest:aat') {
-    env.ADOP_WEB_URL = "https://adoption-web-staging.aat.platform.hmcts.net/"
-    yarnBuilder.yarn('test:functional:skip')
+    env.PARALLEL_CHUNKS = parans.FUNCTIONAL_TESTS_WORKERS
+    env.IDAM_TOKEN_URL = "${IDAM_TOKEN_URL}"
+    env.IDAM_CITIZEN_USER_PASSWORD = "${IDAM_CITIZEN_USER_PASSWORD}"
+    env.IDAM_TESTING_SUPPORT_USERS_URL = "${IDAM_TESTING_SUPPORT_USERS_URL}"
   }
 
   afterAlways('functionalTest:aat') {
-    yarnBuilder.yarn('test:pa11y')
-    yarnBuilder.yarn('test:api')
-    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
-    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+    stage('UI Tests') {
+      try {
+        yarnBuilder.yarn('test:functional-nightly')
+      } catch (Error) {
+        unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
+      } finally {
+        publishHTML([
+          allowMissing: true,
+          alwaysLinkToLastBuild: true,
+          keepAll: true,
+          reportDir: 'playwright-report',
+          reportFiles: 'index.html',
+          reportName: 'Playwright UI Functional Test Report'
+        ])
+        steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
+      }
+    }
   }
-}
+
+//   before('functionalTest:aat') {
+//     env.ADOP_WEB_URL = "https://adoption-web-staging.aat.platform.hmcts.net/"
+//     yarnBuilder.yarn('test:functional:skip')
+//   }
+
+//   afterAlways('functionalTest:aat') {
+//     yarnBuilder.yarn('test:pa11y')
+//     yarnBuilder.yarn('test:api')
+//     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
+//     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+//   }
+// }
 
 def setupSecretsForIntegrationTests(pipelineConf) {
   withSubscription('nonprod') {
