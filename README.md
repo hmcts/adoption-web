@@ -131,16 +131,6 @@ Here's how to run functional tests (the template contains just one sample test):
 $ yarn test:routes
 ```
 
-Running accessibility tests:
-
-```bash
-$ yarn test:a11y
-```
-
-Make sure all the paths in your application are covered by accessibility tests (see [a11y.ts](src/test/a11y/a11y.ts)).
-
-Accessibility tests are also covered in playwright e2e tests using AXE-CORE. 
-
 ### Security
 
 #### CSRF prevention
