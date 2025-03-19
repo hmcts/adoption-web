@@ -92,9 +92,9 @@ withPipeline(type, product, component) {
           allowMissing: true,
           alwaysLinkToLastBuild: true,
           keepAll: true,
-          reportDir: 'playwright-report',
+          reportDir: '../test-results/functionalTest',
           reportFiles: 'index.html',
-          reportName: 'Playwright UI Functional Test Report'
+          reportName: 'UI Functional Test Report'
         ])
         steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
       }
