@@ -30,20 +30,16 @@ This repository contains automation tests that can be run locally. To set up the
 
 1. Create a `.env` file in the root directory of this project if it doesn't already exist.
 
-2. Add the following environment variables to the `.env` file: (ask a team mate for details/values can be found in Azure Keyvault)
+2. Add the following environment variables to the `.env` file: (ask a team mate for the missin values or look in Azure Keyvault)
 
 ```bash
-   IDAM_SECRET=
-   IDAM_TOKEN_URL=
-   IDAM_TESTING_SUPPORT_USERS_URL=
-   IDAM_CITIZEN_USER_PASSWORD=
+IDAM_SECRET=[ask the developers]
+IDAM_TOKEN_URL=https://idam-web-public.aat.platform.hmcts.net/o/token
+IDAM_TESTING_SUPPORT_USERS_URL=https://idam-testing-support-api.aat.platform.hmcts.net/test/idam/users
+IDAM_CITIZEN_USER_PASSWORD=[ask the developers]
 ```
 
-If these values are not available, you can decode the following Base64 string:
-
-```bash
-SURBTV9TRUNSRVQ9Zk02dGQ3V15wbktYQCoqVgpJREFNX1RPS0VOX1VSTD1odHRwczovL2lkYW0td2ViLXB1YmxpYy5hYXQucGxhdGZvcm0uaG1jdHMubmV0L28vdG9rZW4KSURBTV9URVNUSU5HX1NVUFBPUlRfVVNFUlNfVVJMPWh0dHBzOi8vaWRhbS10ZXN0aW5nLXN1cHBvcnQtYXBpLmFhdC5wbGF0Zm9ybS5obWN0cy5uZXQvdGVzdC9pZGFtL3VzZXJzCklEQU1fQ0lUSVpFTl9VU0VSX1BBU1NXT1JEPVBhc3N3b3JkMTIzIQ==
-```
+This file will be ignored by `git`, so it is safe to leave it there afterwards.
 
 ## User creation 
 
