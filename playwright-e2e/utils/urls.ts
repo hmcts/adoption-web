@@ -1,3 +1,7 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 // aat, demo, perftest, ithc
 const env = process.env.ENVIRONMENT || 'aat';
 
@@ -14,3 +18,13 @@ export const urlConfig: UrlConfig = {
   laPortalUrl: process.env.LA_BASE_URL || `https://adoption-web.${env}.platform.hmcts.net/la-portal/kba-case-ref/`,
   // You can add other URLs as needed
 };
+
+export class Config {
+  public static readonly citizenFrontendBaseUrl: string = Config.ensureTrailingSlash(
+    process.env.ADOP_WEB_URL || 'https://adoption-web.aat.platform.hmcts.net/'
+  );
+
+  private static ensureTrailingSlash(url: string): string {
+    return url.endsWith('/') ? url : `${url}/`;
+  }
+}
