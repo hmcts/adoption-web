@@ -141,6 +141,13 @@ mockData:
   authToken: 'VALUE_FROM_AAT_KEYVAULT'
 ```
 
+Replacing VALUE_FROM_AAT_KEYVAULT with the contents of the secret `adoption-web-auth-token` found in `adoption-aat`.
+
+Here's how to run functional tests (the template contains just one sample test):
+
+```bash
+$ yarn test:routes
+```
 (This file will be ignored by `git`, so it is safe to leave it there afterwards.)  Replace `VALUE_FROM_AAT_KEYVAULT` with the contents of the secret `adoption-web-auth-token` found in `adoption-aat`.
 
 Functional and accessibility tests are now run using Playwright as [described below](README.md#testing-e2e---playwright).

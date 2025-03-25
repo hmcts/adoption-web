@@ -29,7 +29,8 @@ def secrets = [
     secret('idam-system-user-password', 'TEST_PASSWORD'),
     secret('adoption-web-auth-token', 'AUTH_TOKEN'),
     secret('idam-token-url', 'IDAM_TOKEN_URL'), 
-    secret('idam-citizen-user-password', 'IDAM_CITIZEN_USER_PASSWORD')
+    secret('idam-citizen-user-password', 'IDAM_CITIZEN_USER_PASSWORD'),
+    secret('idam-testing-support-users-url', 'IDAM_TESTING_SUPPORT_USERS_URL')
 
   ],
   's2s-${env}': [
@@ -75,12 +76,30 @@ withPipeline(type, product, component) {
   }
 
   before('functionalTest:preview') {
-    env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.preview.platform.hmcts.net/"
-    yarnBuilder.yarn('test:pa11y')
+    env.PARALLEL_CHUNKS = params.FUNCTIONAL_TESTS_WORKERS
+    env.IDAM_TOKEN_URL = "${IDAM_TOKEN_URL}"
+    env.IDAM_CITIZEN_USER_PASSWORD = "${IDAM_CITIZEN_USER_PASSWORD}"
+    env.IDAM_TESTING_SUPPORT_USERS_URL = "${IDAM_TESTING_SUPPORT_USERS_URL}"
   }
 
   afterAlways('functionalTest:preview') {
-    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+        stage('UI Tests') {
+      try {
+        yarnBuilder.yarn('test:functional')
+      } catch (Error) {
+        unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
+      } finally {
+        publishHTML([
+          allowMissing: true,
+          alwaysLinkToLastBuild: true,
+          keepAll: true,
+          reportDir: '../test-results/functionalTest',
+          reportFiles: 'index.html',
+          reportName: 'UI Functional Test Report'
+        ])
+        steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
+      }
+    }
   }
 
   before('smoketest:preview') {
@@ -100,15 +119,30 @@ withPipeline(type, product, component) {
   }
 
   before('functionalTest:aat') {
-    env.ADOP_WEB_URL = "https://adoption-web-staging.aat.platform.hmcts.net/"
-    yarnBuilder.yarn('test:functional:skip')
+    env.PARALLEL_CHUNKS = params.FUNCTIONAL_TESTS_WORKERS
+    env.IDAM_TOKEN_URL = "${IDAM_TOKEN_URL}"
+    env.IDAM_CITIZEN_USER_PASSWORD = "${IDAM_CITIZEN_USER_PASSWORD}"
+    env.IDAM_TESTING_SUPPORT_USERS_URL = "${IDAM_TESTING_SUPPORT_USERS_URL}"
   }
 
   afterAlways('functionalTest:aat') {
-    yarnBuilder.yarn('test:pa11y')
-    yarnBuilder.yarn('test:api')
-    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
-    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+    stage('UI Tests') {
+      try {
+        yarnBuilder.yarn('test:functional-nightly')
+      } catch (Error) {
+        unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
+      } finally {
+        publishHTML([
+          allowMissing: true,
+          alwaysLinkToLastBuild: true,
+          keepAll: true,
+          reportDir: 'playwright-report',
+          reportFiles: 'index.html',
+          reportName: 'Playwright UI Functional Test Report'
+        ])
+        steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
+      }
+    }
   }
 }
 
