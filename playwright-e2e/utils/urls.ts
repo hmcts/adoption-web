@@ -21,7 +21,7 @@ export const urlConfig: UrlConfig = {
 
 export class Config {
   public static readonly citizenFrontendBaseUrl: string = Config.ensureTrailingSlash(
-    process.env.ADOP_WEB_URL || 'https://adoption-web.aat.platform.hmcts.net/'
+    process.env.ADOP_WEB_URL || 'https://adoption-web.aat.platform.hmcts.net'
   );
 
   private static ensureTrailingSlash(url: string): string {
