@@ -1,5 +1,11 @@
-import { defineConfig, devices } from '@playwright/test';
+import path from 'path';
 
+import { defineConfig, devices } from '@playwright/test';
+// playwright.config.ts
+import dotenv from 'dotenv';
+
+// Read from ".env" file
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
