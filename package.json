@@ -6,6 +6,8 @@
     "node": ">=14.0.0"
   },
   "scripts": {
+    "setup": "./playwright-e2e/scripts/get_secrets.sh && yarn playwright install &&  yarn playwright install webkit && yarn install firefox",
+    "setup-env": "./playwright-e2e/scripts/get_secrets.sh",
     "prepare": "husky install",
     "start": "NODE_ENV=production ts-node --transpile-only -r tsconfig-paths/register src/main/server.ts",
     "start:dev": "NODE_TLS_REJECT_UNAUTHORIZED=0 NODE_ENV=development yarn start:watch",
@@ -83,7 +85,7 @@
     "cookie-parser": "^1.4.5",
     "csurf": "^1.11.0",
     "dayjs": "^1.11.3",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.4.7",
     "email-validator": "^2.0.4",
     "express": "^4.21.2",
     "express-http-proxy": "^1.6.3",

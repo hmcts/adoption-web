@@ -1,5 +1,6 @@
 import { expect, test } from '../../../fixtures/fixtures';
 import { setupUser, teardownUser } from '../../../hooks/createDeleteUser.hook';
+import { Config } from '../../../utils/urls';
 import { runChangePageLanguageTest, runPageLanguageTest } from '../test-utils';
 test.describe('Citizen Journey child DoB test single parent', () => {
   let userEmail: string;
@@ -290,7 +291,7 @@ test.describe('Citizen Journey child DoB test single parent', () => {
     await citChildDoBPage.fillYearLabel('2020');
     await citChildDoBPage.clickSaveAsDraft();
 
-    const expectedUrl = 'https://adoption-web.aat.platform.hmcts.net/save-as-draft';
+    const expectedUrl = `${Config.citizenFrontendBaseUrl}save-as-draft`;
     const actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
@@ -324,13 +325,13 @@ test.describe('Citizen Journey child DoB test single parent', () => {
     await citChildDoBPage.fillYearLabel('2020');
     await citChildDoBPage.clickSaveAsDraft();
 
-    let expectedUrl = 'https://adoption-web.aat.platform.hmcts.net/save-as-draft';
+    let expectedUrl = `${Config.citizenFrontendBaseUrl}save-as-draft`;
     let actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
     await citSaveAsDraftPage.clickContinueWithYourApplicationButton();
 
-    expectedUrl = 'https://adoption-web.aat.platform.hmcts.net/task-list';
+    expectedUrl = `${Config.citizenFrontendBaseUrl}task-list`;
     actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
@@ -365,7 +366,7 @@ test.describe('Citizen Journey child DoB test single parent', () => {
 
     await citChildDoBPage.clickSaveAndContinue();
 
-    const exepctedUrl = 'https://adoption-web.aat.platform.hmcts.net/task-list';
+    const exepctedUrl = `${Config.citizenFrontendBaseUrl}task-list`;
     const actualUrl = page.url();
 
     await expect(actualUrl).toBe(exepctedUrl);

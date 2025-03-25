@@ -1,5 +1,7 @@
 import { type Locator, type Page } from '@playwright/test';
 
+import { Config } from '../utils/urls';
+
 export default class SignIn {
   readonly page: Page;
   readonly heading: Locator;
@@ -18,10 +20,7 @@ export default class SignIn {
   }
 
   async navigateTo(): Promise<void> {
-    await this.page.goto(
-      'https://idam-web-public.aat.platform.hmcts.net/login?client_id=adoption-web&response_type=code&redirect_uri=https://adoption-web.aat.platform.hmcts.net/receiver',
-      { waitUntil: 'load', timeout: 3000 }
-    );
+    await this.page.goto(Config.citizenFrontendBaseUrl, { waitUntil: 'load', timeout: 3000 });
   }
 
   async signIn(email: string, password: string): Promise<void> {
