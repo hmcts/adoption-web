@@ -9,6 +9,7 @@ Running the application requires the following tools to be installed in your env
 - [Node.js](https://nodejs.org/) v12.0.0 to 18.15.0
 - [yarn](https://yarnpkg.com/)
 - [Docker](https://www.docker.com)
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)
 
 ### Running the application
 
@@ -24,12 +25,12 @@ Ensure the prerequisites are met.
 ```
 
 - Connect to F5 VPN:<br>
-  Go to the webpage https://portal.platform.hmcts.net/ and follow the instruction to connect to F5 VPN.<br>
-  (This is needed because we connect to APIs deployed in AAT environment while running the application locally.)
+  Go to the webpage https://portal.platform.hmcts.net/ and follow the instructions to connect to F5 VPN.  Once the F5 scan has taken place and you are taken to the F5 landing page, **make sure you click the VPN button** to actually start the VPN.<br>
+  (This is needed because we connect to APIs deployed in the AAT environment while running the application locally.)
 
 - Log in to Azure:<br>
-  Use the terminal where you are going to launch the application. Run below command and follow the instructions<br>
-  (This is needed bacause we load secrets from `adoption-aat` while running the application locally.)
+  Use the terminal where you are going to launch the application from. Run the Azure CLI command below and follow the instructions. When prompted in the terminal, enter the number corresponding to the subscription named `DCD-CNP-DEV` (the tenant should always be `CJS Common Platform`).<br>
+  (This is needed because we load secrets from `adoption-aat` while running the application locally.)
 
 ```bash
    az login --use-device-code
@@ -42,7 +43,7 @@ Ensure the prerequisites are met.
 ```
 
 - Comment out code that isn't used when running Draft Store locally:<br>
-  Go to this file: src/main/modules/draft-store/index.ts and comment out like this:
+  Go to the file `src/main/modules/draft-store/index.ts` and comment out like this:
 
 ```typescript
 const client = new Redis({
@@ -54,6 +55,8 @@ const client = new Redis({
       }, */
 });
 ```
+
+Remember to uncomment this code before you commit any changes.
 
 - Install dependencies:
 
@@ -80,7 +83,23 @@ const client = new Redis({
    yarn start:dev
 ```
 
-- The application's home page will be available at http://localhost:3001
+- The application's home page will be available at http://localhost:3001. This will redirect to the IDAM log-in page in AAT.  Use the test account with e-mail address `test-citizen-dc5@mailinator.com` and password `Password12` to log in as a Citizen user.<br>
+If you see a message saying "As you've not logged in for at least 90 days, you need to reset your password." then you need to recreate the test account using `curl` as follows:
+
+```bash
+   curl --location 'https://idam-api.aat.platform.hmcts.net/testing-support/accounts' \
+   --header 'Content-Type: application/json' \
+   --data-raw '{
+     "email": "test-citizen-dc5@mailinator.com",
+     "forename": "Test",
+     "surname": "Citizen",
+     "password": "Password12",
+     "roles":
+       [
+         { "code": "citizen" }
+       ]
+     }'
+```
 
 #### Running the application subsequently
 
@@ -101,7 +120,7 @@ const client = new Redis({
 We use [ESLint](https://github.com/typescript-eslint/typescript-eslint)
 alongside [sass-lint](https://github.com/sasstools/sass-lint)
 
-Running the linting with auto fix:
+Running the linting with auto-fix (don't do this unless you are planning to submit your code-changes aftewards):
 
 ```bash
 $ yarn lint --fix
@@ -109,46 +128,30 @@ $ yarn lint --fix
 
 ### Running the tests
 
-This template app uses [Jest](https://jestjs.io//) as the test engine. You can run unit tests by executing
-the following command:
+This template app uses [Jest](https://jestjs.io//) as the test engine. You can run unit tests by executing the following command:
 
 ```bash
 $ yarn test
 ```
 
-**NOTE** - the oidc integration tests may fail locally, unless you create a file in `config/local.yaml` with the content:
+**NOTE** - the OIDC integration tests may fail locally, unless you create a `config/local.yaml` file with the content:
 
 ```
 mockData:
   authToken: 'VALUE_FROM_AAT_KEYVAULT'
 ```
 
-Replacing VALUE_FROM_AAT_KEYVAULT with the contents of the secret `adoption-web-auth-token` found in `adoption-aat`.
+(This file will be ignored by `git`, so it is safe to leave it there afterwards.)  Replace `VALUE_FROM_AAT_KEYVAULT` with the contents of the secret `adoption-web-auth-token` found in `adoption-aat`.
 
-Here's how to run functional tests (the template contains just one sample test):
-
-```bash
-$ yarn test:routes
-```
-
-Running accessibility tests:
-
-```bash
-$ yarn test:a11y
-```
+Functional and accessibility tests are now run using Playwright as [described below](README.md#testing-e2e---playwright).
 
 Make sure all the paths in your application are covered by accessibility tests (see [a11y.ts](src/test/a11y/a11y.ts)).
-
-Accessibility tests are also covered in playwright e2e tests using AXE-CORE. 
 
 ### Security
 
 #### CSRF prevention
 
-[Cross-Site Request Forgery](https://github.com/pillarjs/understanding-csrf) prevention has already been
-set up in this template, at the application level. However, you need to make sure that CSRF token
-is present in every HTML form that requires it. For that purpose you can use the `csrfProtection` macro,
-included in this template app. Your njk file would look like this:
+[Cross-Site Request Forgery](https://github.com/pillarjs/understanding-csrf) prevention has already been set up in this template, at the application level. However, you need to make sure that CSRF token is present in every HTML form that requires it. For that purpose you can use the `csrfProtection` macro, included in this template app. Your `.njk` file would look like this:
 
 ```
 {% from "macros/csrf.njk" import csrfProtection %}
@@ -161,12 +164,11 @@ included in this template app. Your njk file would look like this:
 ...
 ```
 ##### Fortify Scan
-Fortify scan is run in the nighly pipeline. See [Fortify Scan Setup confluence page](https://tools.hmcts.net/confluence/display/DATS/1C+-+Fortify+Scan+Setup+in+nightly+pipelines) for more details on set up
+The Fortify scan is run in the nightly pipeline. See [Fortify Scan Setup Confluence page](https://tools.hmcts.net/confluence/display/DATS/1C+-+Fortify+Scan+Setup+in+nightly+pipelines) for more details on how to set this up.
 
 #### Helmet
 
-This application uses [Helmet](https://helmetjs.github.io/), which adds various security-related HTTP headers
-to the responses. Apart from default Helmet functions, following headers are set:
+This application uses [Helmet](https://helmetjs.github.io/), which adds various security-related HTTP headers to the responses. Apart from default Helmet functions, following headers are set:
 
 - [Referrer-Policy](https://helmetjs.github.io/docs/referrer-policy/)
 - [Content-Security-Policy](https://helmetjs.github.io/docs/csp/)
@@ -197,55 +199,69 @@ e.g. the ones verifying the state of each service it depends on.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
-## Testing:
-Test is moving to playwright framework but old tests still exist.
-
-#Old Tests:
-E2E tests are configured to run in parallel in 5 headless browsers by default.
-
-To run e2e tests enter `yarn test:local` in the command line.
-
 ## Testing E2E - Playwright
 
 We use Playwright with TypeScript. All the details can be found in the [E2E README.md](./playwright-e2e/README.md).
 
-To run playwright tests, use command: 'yarn playwright test`
+To install Playwright: `yarn playwright install`.
+
+You then need to create a root-level `.env` file with the following information (to be provided by the developers):
+
+```bash
+IDAM_SECRET=[ask the developers]
+IDAM_TOKEN_URL=https://idam-web-public.aat.platform.hmcts.net/o/token
+IDAM_TESTING_SUPPORT_USERS_URL=https://idam-testing-support-api.aat.platform.hmcts.net/test/idam/users
+IDAM_CITIZEN_USER_PASSWORD=[ask the developers]
+```
+
+This file will be ignored by `git`, so it is safe to leave it there afterwards.
+
+To run Playwright tests, use command `yarn playwright test`.  Note that these take about 15 minutes to run in total.
+
+### Old tests
+
+E2E tests were configured to run in parallel in 5 headless browsers by default.
+
+To run old E2E tests, enter `yarn test:local` in the command line.  However, be warned that these may no longer work.
 
 ### Optional configuration
 
-To run all tests only in one browser please set `PARALLEL_CHUNKS` environment variable to `1`. By default 5 chunks are enabled.
+To run all old tests only in one browser please set `PARALLEL_CHUNKS` environment variable to `1`. By default 5 chunks are enabled.
 
 ```$bash
-PARALLEL_CHUNKS=1 yarn test:local
+PARALLEL_CHUNKS=1
+yarn test:local
 ```
 
-To show tests in browser window as they run please set `SHOW_BROWSER_WINDOW` environment variable to `true`. By default browser window is hidden.
+To show old tests in browser window as they run please set `SHOW_BROWSER_WINDOW` environment variable to `true`. By default browser window is hidden.
 
 ```$bash
-SHOW_BROWSER_WINDOW=true yarn test:local
+SHOW_BROWSER_WINDOW=true
+yarn test:local
 ```
 
 To disable chrome web security
 
 ```$bash
-DISABLE_SECURITY=true yarn test:local
+DISABLE_SECURITY=true
+yarn test:local
 ```
 
-## Running E2E against AAT environment
+### Running E2E against AAT environment
 
 ```$bash
-ADOP_WEB_URL=https://adoption-web.aat.platform.hmcts.net/ SHOW_BROWSER_WINDOW=false CITIZEN_PASSWORD=Adoption12 yarn test:local --grep 'Verify apply my own option'
+ADOP_WEB_URL=https://adoption-web.aat.platform.hmcts.net/ SHOW_BROWSER_WINDOW=false CITIZEN_PASSWORD=Adoption12
+yarn test:local --grep 'Verify apply my own option'
 ```
 
-## Running E2E against PR enviroment
+### Running E2E against PR enviroment
 
 ```$bash
-ADOP_WEB_URL=https://adoption-web-pr-146.service.core-compute-preview.internal/ SHOW_BROWSER_WINDOW=false CITIZEN_PASSWORD=Adoption12 yarn test:local --grep 'Verify apply my own option'
+ADOP_WEB_URL=https://adoption-web-pr-146.service.core-compute-preview.internal/ SHOW_BROWSER_WINDOW=false CITIZEN_PASSWORD=Adoption12
+yarn test:local --grep 'Verify apply my own option'
 ```
 
-## Step controllers
+### Step controllers
 
-src/main/app/controller contains default controllers. These will be used if no controllers are specified alongside content in the steps folders.
-If a step needs additional functionality, add a controller alongside the content.ts, which inherits the default controller. Get and post controllers
-need 'get' or 'post' in their filenames.
-
+`src/main/app/controller` contains default controllers. These will be used if no controllers are specified alongside content in the steps folders.<br>
+If a step needs additional functionality, add a controller alongside the content.ts, which inherits the default controller. Get and post controllers need 'get' or 'post' in their filenames.
