@@ -63,7 +63,7 @@ describe('PaymentCallbackGetController', () => {
             {
               id: 'mock payment id',
               value: {
-                amount: 201,
+                amount: 207,
                 channel: null,
                 feeCode: 'FEE0310',
                 reference: 'mock ref',
@@ -74,7 +74,7 @@ describe('PaymentCallbackGetController', () => {
             {
               id: 'mock payment id',
               value: {
-                amount: 201,
+                amount: 207,
                 channel: 'mock payment provider',
                 feeCode: 'FEE0310',
                 reference: 'mock ref',
@@ -85,7 +85,7 @@ describe('PaymentCallbackGetController', () => {
             {
               id: 'mock payment id',
               value: {
-                amount: 201,
+                amount: 207,
                 channel: 'mock payment provider',
                 feeCode: 'FEE0310',
                 reference: 'mock ref',
@@ -130,7 +130,7 @@ describe('PaymentCallbackGetController', () => {
             {
               id: 'mock payment id',
               value: {
-                amount: 201,
+                amount: 207,
                 channel: 'mock payment provider',
                 feeCode: 'FEE0310',
                 reference: 'mock ref',
@@ -141,7 +141,7 @@ describe('PaymentCallbackGetController', () => {
             {
               id: 'mock payment id',
               value: {
-                amount: 201,
+                amount: 207,
                 channel: 'mock payment provider',
                 feeCode: 'FEE0310',
                 reference: 'mock ref',
@@ -152,7 +152,7 @@ describe('PaymentCallbackGetController', () => {
             {
               id: 'mock payment id',
               value: {
-                amount: 201,
+                amount: 207,
                 channel: 'mock payment provider',
                 feeCode: 'FEE0310',
                 reference: 'mock ref',
