@@ -20,14 +20,5 @@ export const urlConfig: UrlConfig = {
 };
 
 export class Config {
-  public static readonly citizenFrontendBaseUrl: string = Config.ensureTrailingSlash(
-    process.env.ADOP_WEB_URL ??
-      (() => {
-        throw new Error('ADOP_WEB_URL is not defined');
-      })()
-  );
-
-  private static ensureTrailingSlash(url: string): string {
-    return url.endsWith('/') ? url : `${url}/`;
-  }
+  citizenFrontendBaseUrl = process.env.ADOP_WEB_URL as string;
 }
