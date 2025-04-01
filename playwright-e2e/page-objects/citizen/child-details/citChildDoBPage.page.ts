@@ -6,6 +6,8 @@ export class CITChildDoBPage extends BasePage {
   readonly childDetailsTitle: Locator;
   readonly childDoBHeading: Locator;
 
+  readonly childDoBTooltip: Locator;
+
   readonly dayText: Locator;
   readonly monthText: Locator;
   readonly yearText: Locator;
@@ -34,6 +36,8 @@ export class CITChildDoBPage extends BasePage {
     this.childDetailsTitle = page.getByText("The child's details");
     this.childDoBHeading = page.getByRole('heading', { name: "What is the child's date of" });
 
+    this.childDoBTooltip = page.getByText('For example, 31 3 2012');
+
     this.dayText = page.getByText('Day');
     this.monthText = page.getByText('Month', { exact: true });
     this.yearText = page.getByText('Year', { exact: true });
@@ -46,10 +50,11 @@ export class CITChildDoBPage extends BasePage {
     this.contactACourtHeading = page.getByRole('heading', { name: 'Contact a court that deals' });
     this.findACourtLink = page.getByRole('link', { name: 'Find a Court or Tribunal' });
 
-    this.errorDateSummary = page.getByRole('link', { name: 'Enter their date of birth' });
-    this.errorDaySummary = page.getByRole('link', { name: 'Date of birth must include a day' });
-    this.errorMonthSummary = page.getByRole('link', { name: 'Date of birth must include a month' });
-    this.errorYearSummary = page.getByRole('link', { name: 'Date of birth must include a year' });
+    this.errorDateSummary = page.getByRole('link', { name: 'Enter their date of birth', exact: true });
+    this.errorDaySummary = page.getByRole('link', { name: 'Date of birth must include a day', exact: true });
+    this.errorMonthSummary = page.getByRole('link', { name: 'Date of birth must include a month', exact: true });
+    this.errorYearSummary = page.getByRole('link', { name: 'Date of birth must include a year', exact: true });
+
     this.errorDayMonthSummary = page.getByRole('link', { name: 'Date of birth must include a day and month' });
     this.errorDayYearSummary = page.getByRole('link', { name: 'Date of birth must include a day and year' });
     this.errorMonthYearSummary = page.getByRole('link', { name: 'Date of birth must include a month and year' });

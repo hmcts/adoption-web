@@ -1,5 +1,9 @@
 import { expect, test } from '../../../fixtures/fixtures';
 import { setupUser, teardownUser } from '../../../hooks/createDeleteUser.hook';
+
+import { Config } from '../../../utils/urls';
+import { runChangePageLanguageTest, runPageLanguageTest } from '../test-utils';
+
 test.describe('Citizen Journey child DoB test single parent', () => {
   let userEmail: string;
   let userPassword: string;
@@ -50,11 +54,19 @@ test.describe('Citizen Journey child DoB test single parent', () => {
     const langAttribute = await page.getAttribute('html', 'lang');
 
     expect(langAttribute).toMatch(/^cy/);
+
+  test('check default page is in English', async ({ citChildDoBPage }) => {
+    await runPageLanguageTest('en', citChildDoBPage);
+  });
+
+  test('check page is in Welsh after clicking Welsh language link', async ({ citChildDoBPage }) => {
+    await runChangePageLanguageTest('cy', citChildDoBPage);
   });
 
   test('check if page components are in correct visible state', async ({ citChildDoBPage }) => {
     await expect.soft(citChildDoBPage.childDetailsTitle).toBeVisible();
     await expect.soft(citChildDoBPage.childDoBHeading).toBeVisible();
+    await expect.soft(citChildDoBPage.childDoBTooltip).toBeVisible();
     await expect.soft(citChildDoBPage.dayText).toBeVisible();
     await expect.soft(citChildDoBPage.monthText).toBeVisible();
     await expect.soft(citChildDoBPage.yearText).toBeVisible();
@@ -204,7 +216,7 @@ test.describe('Citizen Journey child DoB test single parent', () => {
     expect(test.info().errors).toHaveLength(0);
   });
 
-  test('check filling day only then clicking save and continue button results in day and month summary error', async ({
+  test('check filling day only then clicking save and continue button results in day and year summary error', async ({
     citChildDoBPage,
   }) => {
     await citChildDoBPage.fillDayLabel('01');
@@ -285,7 +297,7 @@ test.describe('Citizen Journey child DoB test single parent', () => {
     await expect.soft(citChildDoBPage.errorDateInPastSummary).toBeVisible();
   });
 
-  test('check fill in correct date, saving draft then going back to page preerves date data', async ({
+  test('check fill in correct date, saving draft then going back to page prerves date data', async ({
     page,
     citChildDoBPage,
   }) => {
@@ -294,11 +306,56 @@ test.describe('Citizen Journey child DoB test single parent', () => {
     await citChildDoBPage.fillYearLabel('2020');
     await citChildDoBPage.clickSaveAsDraft();
 
-    const expectedUrl = 'https://adoption-web.aat.platform.hmcts.net/save-as-draft';
+    const expectedUrl = `${Config.citizenFrontendBaseUrl}save-as-draft`;
+
     const actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
     await page.goBack();
+
+    const expectedDayValue = '1';
+    const expectedMonthValue = '1';
+    const expectedYearValue = '2020';
+
+    const actualDayValue = await citChildDoBPage.dayLabel.inputValue();
+    const actualMonthValue = await citChildDoBPage.monthLabel.inputValue();
+    const actualYearValue = await citChildDoBPage.yearLabel.inputValue();
+
+    await expect.soft(actualDayValue).toBe(expectedDayValue);
+    await expect.soft(actualMonthValue).toBe(expectedMonthValue);
+    await expect.soft(actualYearValue).toBe(expectedYearValue);
+
+    expect(test.info().errors).toHaveLength(0);
+  });
+
+  test('check pressing draft button then continuing with application maintains filled in date labels', async ({
+    page,
+    citSaveAsDraftPage,
+    citTaskListPage,
+    citChildFullNamePage,
+    citChildFullNameAfterAdoptionPage,
+    citChildDoBPage,
+  }) => {
+    await citChildDoBPage.fillDayLabel('01');
+    await citChildDoBPage.fillMonthLabel('01');
+    await citChildDoBPage.fillYearLabel('2020');
+    await citChildDoBPage.clickSaveAsDraft();
+
+    let expectedUrl = `${Config.citizenFrontendBaseUrl}save-as-draft`;
+    let actualUrl = page.url();
+    await expect(actualUrl).toBe(expectedUrl);
+
+    await citSaveAsDraftPage.clickContinueWithYourApplicationButton();
+
+    expectedUrl = `${Config.citizenFrontendBaseUrl}task-list`;
+    actualUrl = page.url();
+    await expect(actualUrl).toBe(expectedUrl);
+
+    await citTaskListPage.clickChildDetailsLink();
+
+    await citChildFullNamePage.clickSaveAndContinue();
+
+    await citChildFullNameAfterAdoptionPage.clickSaveAndContinue();
 
     const expectedDayValue = '1';
     const expectedMonthValue = '1';
@@ -325,7 +382,8 @@ test.describe('Citizen Journey child DoB test single parent', () => {
 
     await citChildDoBPage.clickSaveAndContinue();
 
-    const exepctedUrl = 'https://adoption-web.aat.platform.hmcts.net/task-list';
+    const exepctedUrl = `${Config.citizenFrontendBaseUrl}task-list`;
+
     const actualUrl = page.url();
 
     await expect(actualUrl).toBe(exepctedUrl);

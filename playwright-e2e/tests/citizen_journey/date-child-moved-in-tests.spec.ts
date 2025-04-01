@@ -1,5 +1,8 @@
 import { expect, test } from '../../fixtures/fixtures';
 import { setupUser, teardownUser } from '../../hooks/createDeleteUser.hook';
+
+import { Config } from '../../utils/urls';
+
 test.describe('Citizen Journey date child moved in page test single parent', () => {
   let userEmail: string;
   let userPassword: string;
@@ -133,7 +136,7 @@ test.describe('Citizen Journey date child moved in page test single parent', () 
     citDateChildMovedInPage,
   }) => {
     const expectedState = 'Completed';
-    const expectedUrl = 'https://adoption-web.aat.platform.hmcts.net/task-list';
+    const expectedUrl = `${Config.citizenFrontendBaseUrl}task-list`;
 
     await citDateChildMovedInPage.fillDayLabel('01');
     await citDateChildMovedInPage.fillMonthLabel('01');

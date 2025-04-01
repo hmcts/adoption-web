@@ -1,5 +1,8 @@
 import { expect, test } from '../../../fixtures/fixtures';
 import { setupUser, teardownUser } from '../../../hooks/createDeleteUser.hook';
+import { Config } from '../../../utils/urls';
+import { runChangePageLanguageTest, runPageLanguageTest } from '../test-utils';
+
 test.describe('Citizen Journey child name after adoption test single parent', () => {
   let userEmail: string;
   let userPassword: string;
@@ -26,26 +29,22 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
     await teardownUser(userId);
   });
 
-  test('check default page is in English', async ({ page }) => {
-    const langAttribute = await page.getAttribute('html', 'lang');
-
-    expect(langAttribute).toMatch(/^en/);
+  test('check default page is in English', async ({ citChildFullNameAfterAdoptionPage }) => {
+    await runPageLanguageTest('en', citChildFullNameAfterAdoptionPage);
   });
 
-  test('check page is in Welsh after clicking Welsh language link', async ({
-    page,
-    citChildFullNameAfterAdoptionPage,
-  }) => {
-    await citChildFullNameAfterAdoptionPage.clickLanguageLink();
-
-    const langAttribute = await page.getAttribute('html', 'lang');
-
-    expect(langAttribute).toMatch(/^cy/);
+  test('check page is in Welsh after clicking Welsh language link', async ({ citChildFullNameAfterAdoptionPage }) => {
+    await runChangePageLanguageTest('cy', citChildFullNameAfterAdoptionPage);
   });
 
   test('check if page components are in correct visible state', async ({ citChildFullNameAfterAdoptionPage }) => {
     await expect.soft(citChildFullNameAfterAdoptionPage.childDetailsTitle).toBeVisible();
     await expect.soft(citChildFullNameAfterAdoptionPage.childFullNameAfterAdoptionHeading).toBeVisible();
+
+    await expect.soft(citChildFullNameAfterAdoptionPage.childFullNameAfterAdoptionTooltip).toBeVisible();
+    await expect.soft(citChildFullNameAfterAdoptionPage.firstNameTooltip).toBeVisible();
+    await expect.soft(citChildFullNameAfterAdoptionPage.lastNameTooltip).toBeVisible();
+
     await expect.soft(citChildFullNameAfterAdoptionPage.firstName).toBeVisible();
     await expect.soft(citChildFullNameAfterAdoptionPage.lastName).toBeVisible();
     await expect.soft(citChildFullNameAfterAdoptionPage.contactUsForHelpDropdownLink).toBeVisible();
@@ -78,7 +77,7 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
     await citChildFullNameAfterAdoptionPage.clickSaveAndContinue();
 
     await expect.soft(citChildFullNameAfterAdoptionPage.errorFirstNameSummary).toBeHidden({ timeout: 500 });
-    await expect.soft(citChildFullNameAfterAdoptionPage);
+    await expect.soft(citChildFullNameAfterAdoptionPage.errorLastNameSummary).toBeVisible();
 
     expect(test.info().errors).toHaveLength(0);
   });
@@ -102,7 +101,7 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
     await citChildFullNameAfterAdoptionPage.fillFirstNameLabel('Joe');
     await citChildFullNameAfterAdoptionPage.clickSaveAsDraft();
 
-    const expectedUrl = 'https://adoption-web.aat.platform.hmcts.net/save-as-draft';
+    const expectedUrl = `${Config.citizenFrontendBaseUrl}save-as-draft`;
     const actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
@@ -120,7 +119,7 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
     await citChildFullNameAfterAdoptionPage.fillLastNameLabel('Smith');
     await citChildFullNameAfterAdoptionPage.clickSaveAsDraft();
 
-    const expectedUrl = 'https://adoption-web.aat.platform.hmcts.net/save-as-draft';
+    const expectedUrl = `${Config.citizenFrontendBaseUrl}save-as-draft`;
     const actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
@@ -139,11 +138,47 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
     await citChildFullNameAfterAdoptionPage.fillLastNameLabel('Smith');
     await citChildFullNameAfterAdoptionPage.clickSaveAsDraft();
 
-    const expectedUrl = 'https://adoption-web.aat.platform.hmcts.net/save-as-draft';
+    const expectedUrl = `${Config.citizenFrontendBaseUrl}save-as-draft`;
     const actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
     await page.goBack();
+
+    const expectedFirstNameLabelValue = 'Joe';
+    const expectedLastNameLabelValue = 'Smith';
+    const actualFirstNameLabelValue = await citChildFullNameAfterAdoptionPage.firstName.inputValue();
+    const actualLastNameLabelValue = await citChildFullNameAfterAdoptionPage.lastName.inputValue();
+
+    await expect.soft(actualFirstNameLabelValue).toBe(expectedFirstNameLabelValue);
+    await expect.soft(actualLastNameLabelValue).toBe(expectedLastNameLabelValue);
+
+    expect(test.info().errors).toHaveLength(0);
+  });
+
+  test('check pressing draft button then continuing with application maintains first name and last name labels', async ({
+    page,
+    citSaveAsDraftPage,
+    citTaskListPage,
+    citChildFullNamePage,
+    citChildFullNameAfterAdoptionPage,
+  }) => {
+    await citChildFullNameAfterAdoptionPage.fillFirstNameLabel('Joe');
+    await citChildFullNameAfterAdoptionPage.fillLastNameLabel('Smith');
+    await citChildFullNameAfterAdoptionPage.clickSaveAsDraft();
+
+    let expectedUrl = `${Config.citizenFrontendBaseUrl}save-as-draft`;
+    let actualUrl = page.url();
+    await expect(actualUrl).toBe(expectedUrl);
+
+    await citSaveAsDraftPage.clickContinueWithYourApplicationButton();
+
+    expectedUrl = `${Config.citizenFrontendBaseUrl}task-list`;
+    actualUrl = page.url();
+    await expect(actualUrl).toBe(expectedUrl);
+
+    await citTaskListPage.clickChildDetailsLink();
+
+    await citChildFullNamePage.clickSaveAndContinue();
 
     const expectedFirstNameLabelValue = 'Joe';
     const expectedLastNameLabelValue = 'Smith';
@@ -165,7 +200,7 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
 
     await citChildFullNameAfterAdoptionPage.clickSaveAndContinue();
 
-    const expectedUrl = 'https://adoption-web.aat.platform.hmcts.net/children/date-of-birth';
+    const expectedUrl = `${Config.citizenFrontendBaseUrl}children/date-of-birth`;
     const actualUrl = page.url();
 
     expect(actualUrl).toBe(expectedUrl);
