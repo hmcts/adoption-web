@@ -29,7 +29,8 @@ def secrets = [
     secret('idam-system-user-password', 'TEST_PASSWORD'),
     secret('adoption-web-auth-token', 'AUTH_TOKEN'),
     secret('idam-token-url', 'IDAM_TOKEN_URL'),
-    secret('idam-citizen-user-password', 'IDAM_CITIZEN_USER_PASSWORD')
+    secret('idam-citizen-user-password', 'IDAM_CITIZEN_USER_PASSWORD'),
+    secret('idam-testing-support-users-url', 'IDAM_TESTING_SUPPORT_USERS_URL')
 
   ],
   's2s-${env}': [
