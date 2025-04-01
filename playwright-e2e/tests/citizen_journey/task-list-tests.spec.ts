@@ -1,6 +1,6 @@
 import { expect, test } from '../../fixtures/fixtures';
 import { setupUser, teardownUser } from '../../hooks/createDeleteUser.hook';
-import { Config } from '../../utils/urls';
+import { urlConfig } from '../../utils/urls';
 test.describe('Citizen Journey task list page test single parent', () => {
   let userEmail: string;
   let userPassword: string;
@@ -109,7 +109,7 @@ test.describe('Citizen Journey task list page test single parent', () => {
   });
 
   test('check number of applicants link goes to expected URL', async ({ citTaskListPage, page }) => {
-    const expected = `${Config.citizenFrontendBaseUrl}applying-with`;
+    const expected = `${urlConfig.citizenFrontendBaseUrl}applying-with`;
 
     await citTaskListPage.clickNumberOfApplicantsLink();
 
@@ -117,7 +117,7 @@ test.describe('Citizen Journey task list page test single parent', () => {
   });
 
   test('check date child moved in link goes to expected URL', async ({ citTaskListPage, page }) => {
-    const expected = `${Config.citizenFrontendBaseUrl}date-child-moved-in`;
+    const expected = `${urlConfig.citizenFrontendBaseUrl}date-child-moved-in`;
 
     await citTaskListPage.clickDateChildMovedInLink();
 
@@ -125,7 +125,7 @@ test.describe('Citizen Journey task list page test single parent', () => {
   });
 
   test('check child details link goes to expected URL', async ({ citTaskListPage, page }) => {
-    const expected = `${Config.citizenFrontendBaseUrl}children/full-name`;
+    const expected = `${urlConfig.citizenFrontendBaseUrl}children/full-name`;
 
     await citTaskListPage.clickChildDetailsLink();
 
@@ -133,7 +133,7 @@ test.describe('Citizen Journey task list page test single parent', () => {
   });
 
   test('check adoption agency link goes to expected URL', async ({ citTaskListPage, page }) => {
-    const expected = `${Config.citizenFrontendBaseUrl}children/social-worker`;
+    const expected = `${urlConfig.citizenFrontendBaseUrl}children/social-worker`;
 
     await citTaskListPage.clickAdoptionAgencyLink();
 
@@ -141,7 +141,7 @@ test.describe('Citizen Journey task list page test single parent', () => {
   });
 
   test('check family court link goes to expected URL', async ({ citTaskListPage, page }) => {
-    const expected = `${Config.citizenFrontendBaseUrl}children/find-placement-order-court`;
+    const expected = `${urlConfig.citizenFrontendBaseUrl}children/find-placement-order-court`;
 
     await citTaskListPage.clickFamilyCourtLink();
 
@@ -149,7 +149,7 @@ test.describe('Citizen Journey task list page test single parent', () => {
   });
 
   test('check applicant 1 personal details link goes to expected URL', async ({ citTaskListPage, page }) => {
-    const expected = `${Config.citizenFrontendBaseUrl}applicant1/full-name`;
+    const expected = `${urlConfig.citizenFrontendBaseUrl}applicant1/full-name`;
 
     await citTaskListPage.clickFirstApplicantPersonalDetailsLink();
 
@@ -157,7 +157,7 @@ test.describe('Citizen Journey task list page test single parent', () => {
   });
 
   test('check applicant 1 contact details link goes to expected URL', async ({ citTaskListPage, page }) => {
-    const expected = `${Config.citizenFrontendBaseUrl}applicant1/address/lookup`;
+    const expected = `${urlConfig.citizenFrontendBaseUrl}applicant1/address/lookup`;
 
     await citTaskListPage.clickFirstAppicantContactDetailsLink();
 

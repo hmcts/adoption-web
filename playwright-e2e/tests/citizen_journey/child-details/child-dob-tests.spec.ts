@@ -1,6 +1,6 @@
 import { expect, test } from '../../../fixtures/fixtures';
 import { setupUser, teardownUser } from '../../../hooks/createDeleteUser.hook';
-import { Config } from '../../../utils/urls';
+import { urlConfig } from '../../../utils/urls';
 import { runChangePageLanguageTest, runPageLanguageTest } from '../test-utils';
 test.describe('Citizen Journey child DoB test single parent', () => {
   let userEmail: string;
@@ -291,7 +291,7 @@ test.describe('Citizen Journey child DoB test single parent', () => {
     await citChildDoBPage.fillYearLabel('2020');
     await citChildDoBPage.clickSaveAsDraft();
 
-    const expectedUrl = `${Config.citizenFrontendBaseUrl}save-as-draft`;
+    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}save-as-draft`;
     const actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
@@ -325,13 +325,13 @@ test.describe('Citizen Journey child DoB test single parent', () => {
     await citChildDoBPage.fillYearLabel('2020');
     await citChildDoBPage.clickSaveAsDraft();
 
-    let expectedUrl = `${Config.citizenFrontendBaseUrl}save-as-draft`;
+    let expectedUrl = `${urlConfig.citizenFrontendBaseUrl}save-as-draft`;
     let actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
     await citSaveAsDraftPage.clickContinueWithYourApplicationButton();
 
-    expectedUrl = `${Config.citizenFrontendBaseUrl}task-list`;
+    expectedUrl = `${urlConfig.citizenFrontendBaseUrl}task-list`;
     actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
@@ -366,7 +366,7 @@ test.describe('Citizen Journey child DoB test single parent', () => {
 
     await citChildDoBPage.clickSaveAndContinue();
 
-    const exepctedUrl = `${Config.citizenFrontendBaseUrl}task-list`;
+    const exepctedUrl = `${urlConfig.citizenFrontendBaseUrl}task-list`;
     const actualUrl = page.url();
 
     await expect(actualUrl).toBe(exepctedUrl);

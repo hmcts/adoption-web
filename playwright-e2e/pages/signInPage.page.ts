@@ -1,6 +1,6 @@
 import { type Locator, type Page } from '@playwright/test';
 
-import { Config } from '../utils/urls';
+import { urlConfig } from '../utils/urls';
 
 export default class SignIn {
   readonly page: Page;
@@ -20,7 +20,7 @@ export default class SignIn {
   }
 
   async navigateTo(): Promise<void> {
-    await this.page.goto(Config.citizenFrontendBaseUrl, { waitUntil: 'load', timeout: 3000 });
+    await this.page.goto(urlConfig.citizenFrontendBaseUrl, { waitUntil: 'load', timeout: 3000 });
   }
 
   async signIn(email: string, password: string): Promise<void> {
