@@ -5,6 +5,7 @@ import BasePage from '../../../pages/basePage.page';
 export class CITChildFullNamePage extends BasePage {
   readonly childDetailsTitle: Locator;
   readonly childFullNameHeading: Locator;
+
   readonly childHeadingTip: Locator;
 
   readonly firstName: Locator;
@@ -23,6 +24,7 @@ export class CITChildFullNamePage extends BasePage {
   constructor(page: Page) {
     super(page);
     this.childDetailsTitle = page.getByText("The child's details");
+
     this.childFullNameHeading = page.getByLabel("What is the child's full name?");
     this.childHeadingTip = page.getByText("Enter the child's full name,");
 

@@ -1,6 +1,8 @@
 import { expect, test } from '../../fixtures/fixtures';
 import { setupUser, teardownUser } from '../../hooks/createDeleteUser.hook';
+
 import { Config } from '../../utils/urls';
+
 test.describe('Citizen Journey date child moved in page test single parent', () => {
   let userEmail: string;
   let userPassword: string;

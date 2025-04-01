@@ -1,7 +1,9 @@
 import { expect, test } from '../../../fixtures/fixtures';
 import { setupUser, teardownUser } from '../../../hooks/createDeleteUser.hook';
+
 import { Config } from '../../../utils/urls';
 import { runChangePageLanguageTest, runPageLanguageTest } from '../test-utils';
+
 test.describe('Citizen Journey child DoB test single parent', () => {
   let userEmail: string;
   let userPassword: string;
@@ -39,6 +41,19 @@ test.describe('Citizen Journey child DoB test single parent', () => {
   test.afterEach('Status check', async () => {
     await teardownUser(userId);
   });
+
+  test('check default page is in English', async ({ page }) => {
+    const langAttribute = await page.getAttribute('html', 'lang');
+
+    expect(langAttribute).toMatch(/^en/);
+  });
+
+  test('check page is in Welsh after clicking Welsh language link', async ({ page, citChildDoBPage }) => {
+    await citChildDoBPage.clickLanguageLink();
+
+    const langAttribute = await page.getAttribute('html', 'lang');
+
+    expect(langAttribute).toMatch(/^cy/);
 
   test('check default page is in English', async ({ citChildDoBPage }) => {
     await runPageLanguageTest('en', citChildDoBPage);
@@ -292,6 +307,7 @@ test.describe('Citizen Journey child DoB test single parent', () => {
     await citChildDoBPage.clickSaveAsDraft();
 
     const expectedUrl = `${Config.citizenFrontendBaseUrl}save-as-draft`;
+
     const actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
@@ -367,6 +383,7 @@ test.describe('Citizen Journey child DoB test single parent', () => {
     await citChildDoBPage.clickSaveAndContinue();
 
     const exepctedUrl = `${Config.citizenFrontendBaseUrl}task-list`;
+
     const actualUrl = page.url();
 
     await expect(actualUrl).toBe(exepctedUrl);
