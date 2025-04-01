@@ -79,8 +79,6 @@ test.describe('smoke test', () => {
     await app.reviewSubmit.statementOfTruthOne(appOneName.appOneFullname);
     await app.reviewSubmit.fillCardDetails(appOneName.appOneFullname, userEmail, postcode1);
 
-    await app.page.pause();
-
     await runAccessibilityScan(makeAxeBuilder, testInfo); //Axe-core accessibility scan using helper function
   }
 
