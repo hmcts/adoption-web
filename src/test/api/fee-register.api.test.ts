@@ -5,7 +5,7 @@ describe('fees-register API', () => {
   const EXPECTED_RESPONSE = {
     code: 'FEE0310',
     description: 'Application/permission to apply for adoption',
-    version: 4,
+    version: 5,
     fee_amount: 207,
   };
 
