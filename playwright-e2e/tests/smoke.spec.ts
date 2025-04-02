@@ -5,6 +5,7 @@ import * as dotenv from 'dotenv';
 import { runAccessibilityScan } from '../helpers/accessibilityHelper';
 import { setupUser, teardownUser } from '../hooks/createDeleteUser.hook';
 import App from '../pages/app.page';
+import { toggleConfig } from '../utils/toggles';
 
 dotenv.config();
 
@@ -73,7 +74,9 @@ test.describe('smoke test', () => {
 
     // Submit
     await app.tasklist.reviewAndSubmit.click();
-    await app.pcq.noPcqAnswers();
+    if (toggleConfig.pcqTestsEnabled) {
+      await app.pcq.noPcqAnswers();
+    }
     await app.reviewSubmit.reviewAnswers(applicantNumber);
     await app.basePage.clickSaveAndContinue();
     await app.reviewSubmit.statementOfTruthOne(appOneName.appOneFullname);
