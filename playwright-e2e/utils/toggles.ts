@@ -7,5 +7,5 @@ interface ToggleConfig {
 }
 
 export const toggleConfig: ToggleConfig = {
-  pcqTestsEnabled: process.env.PCQ_TESTS_ENABLED || true,
+  pcqTestsEnabled: (process.env.PCQ_TESTS_ENABLED || 'true') === 'true',
 };
