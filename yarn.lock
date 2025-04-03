@@ -4912,7 +4912,7 @@ __metadata:
     express-session: ^1.17.3
     form-data: ^4.0.0
     glob: ^8.0.3
-    govuk-frontend: ^4.8.0
+    govuk-frontend: 5.0.0
     helmet: ^4.6.0
     html-webpack-plugin: ^5.5.0
     http-status-codes: ^2.2.0
@@ -10240,10 +10240,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"govuk-frontend@npm:^4.8.0":
-  version: 4.8.0
-  resolution: "govuk-frontend@npm:4.8.0"
-  checksum: e255f924f399319e109347ec4993e0441fc5847a6a73ba44a465b1599c7d03e85c29212743b081ccd60e19224c6301143c77540b8e4bfe615fcb3e162b8663f4
+"govuk-frontend@npm:5.0.0":
+  version: 5.0.0
+  resolution: "govuk-frontend@npm:5.0.0"
+  checksum: 8ef384f6bc9edc250b27f156aaf06a65b95386822c1922c71cd8ac7e3be6cc644ed6a0d4617624b30c497ac7424affce86c24f5138e51514ceca1f70d5819afd
   languageName: node
   linkType: hard
 
