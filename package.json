@@ -27,7 +27,7 @@
     "test:smoke:e2e": "MOCHAWESOME_REPORTFILENAME=smoke codeceptjs run --grep '${SMOKE_TESTS_SELECTOR:=@smoke-tests}' --reporter mocha-multi",
     "test:smoke:downstream": "NODE_TLS_REJECT_UNAUTHORIZED=0 jest -c jest.smoke.config.js",
     "test:smoke": "yarn playwright install && yarn playwright test --grep @smoke --project chromium --retries=2",
-    "test:functional": "yarn playwright install && yarn playwright test --grep --project chromium --retries=2",
+    "test:functional": "yarn playwright install && yarn playwright test --project chromium --retries=2",
     "test:fullfunctional": "echo 'To be replaced by Playwright in ADOP-2648' && exit 0",
     "cichecks": "yarn && run-p build lint test",
     "test:functional:skip": "echo 'Not running functional cases in Master' && exit 0",
