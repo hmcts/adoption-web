@@ -85,10 +85,31 @@ withPipeline(type, product, component) {
 
   before('smoketest:preview') {
     env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.preview.platform.hmcts.net/"
+    env.PARALLEL_CHUNKS = 2
+    env.IDAM_TOKEN_URL = "${IDAM_TOKEN_URL}"
+    env.IDAM_CITIZEN_USER_PASSWORD = "${IDAM_CITIZEN_USER_PASSWORD}"
+    env.IDAM_TESTING_SUPPORT_USERS_URL = "${IDAM_TESTING_SUPPORT_USERS_URL}"
   }
 
   afterAlways('smoketest:preview') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+    stage('smoketest:preview') {
+      try {
+        yarnBuilder.yarn('test:smoke')
+      } catch (Error) {
+        unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
+      } finally {
+        publishHTML([
+          allowMissing: true,
+          alwaysLinkToLastBuild: true,
+          keepAll: true,
+          reportDir: 'playwright-report',
+          reportFiles: 'index.html',
+          reportName: 'Playwright Preview smoke Test Report'
+        ])
+        steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
+      }
+    }
   }
 
   before('smoketest:aat') {
