@@ -119,21 +119,6 @@ withPipeline(type, product, component) {
   afterAlways('smoketest:aat') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'test-results/**/*'
-    try {
-      yarnBuilder.yarn('test:smoke')
-    } catch (Error) {
-      unstable(message "${STAGE_NAME} is unstable " + Error.toString())
-    } finally {
-      publishHTML([
-        allowMissing: true,
-        alwaysLinkToLastBuild: true,
-        keepAll: true,
-        reportDir: 'playwright-report',
-        reportFiles: 'index.html',
-        reportName: 'Playwright Preview Smoke Test'
-      ])
-      steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
-    }
   }
 
   before('functionalTest:aat') {
