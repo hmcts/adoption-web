@@ -98,6 +98,131 @@ afterAlways('fullFunctionalTest') {
                 steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
             }
         }
+        stage('Chromium UI Tests') {
+          try {
+            yarnBuilder.yarn('test:functional-chromium')
+          } catch (Error) {
+            unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
+          } finally {
+            publishHTML([
+              allowMissing: true,
+              alwaysLinkToLastBuild: true,
+              keepAll: true,
+              reportDir: 'playwright-report',
+              reportFiles: 'index.html',
+              reportName: 'Playwright Chromium UI Functional Test Report'
+            ])
+            steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
+          }
+        }
+
+        stage('Firefox UI Tests') {
+          try {
+            yarnBuilder.yarn('test:functional-firefox')
+          } catch (Error) {
+            unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
+          } finally {
+            publishHTML([
+              allowMissing: true,
+              alwaysLinkToLastBuild: true,
+              keepAll: true,
+              reportDir: 'playwright-report',
+              reportFiles: 'index.html',
+              reportName: 'Playwright Firefox UI Functional Test Report'
+            ])
+            steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
+          }
+        }
+
+        stage('Webkit UI Tests') {
+          try {
+            yarnBuilder.yarn('test:functional-webkit')
+          } catch (Error) {
+            unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
+          } finally {
+            publishHTML([
+              allowMissing: true,
+              alwaysLinkToLastBuild: true,
+              keepAll: true,
+              reportDir: 'playwright-report',
+              reportFiles: 'index.html',
+              reportName: 'Playwright Webkit UI Functional Test Report'
+            ])
+            steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
+          }
+        }
+
+        stage('Mobile Chrome UI Tests') {
+          try {
+            yarnBuilder.yarn('test:functional-mobileChrome')
+          } catch (Error) {
+            unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
+          } finally {
+            publishHTML([
+              allowMissing: true,
+              alwaysLinkToLastBuild: true,
+              keepAll: true,
+              reportDir: 'playwright-report',
+              reportFiles: 'index.html',
+              reportName: 'Playwright Mobile Chrome UI Functional Test Report'
+            ])
+            steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
+          }
+        }
+
+        stage('Mobile Safari UI Tests') {
+          try {
+            yarnBuilder.yarn('test:functional-mobileSafari')
+          } catch (Error) {
+            unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
+          } finally {
+            publishHTML([
+              allowMissing: true,
+              alwaysLinkToLastBuild: true,
+              keepAll: true,
+              reportDir: 'playwright-report',
+              reportFiles: 'index.html',
+              reportName: 'Playwright Mobile Safari UI Functional Test Report'
+            ])
+            steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
+          }
+        }
+
+        stage('Samsung Landscape UI Tests') {
+          try {
+            yarnBuilder.yarn('test:functional-mobileSamsungLandscape')
+          } catch (Error) {
+            unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
+          } finally {
+            publishHTML([
+              allowMissing: true,
+              alwaysLinkToLastBuild: true,
+              keepAll: true,
+              reportDir: 'playwright-report',
+              reportFiles: 'index.html',
+              reportName: 'Playwright Mobile Samsung Landscape UI Functional Test Report'
+            ])
+            steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
+          }
+        }
+
+        stage('Samsung Portrait UI Tests') {
+          try {
+            yarnBuilder.yarn('test:functional-mobileSamsungPortrait')
+          } catch (Error) {
+            unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
+          } finally {
+            publishHTML([
+              allowMissing: true,
+              alwaysLinkToLastBuild: true,
+              keepAll: true,
+              reportDir: 'playwright-report',
+              reportFiles: 'index.html',
+              reportName: 'Playwright Mobile Samsung Portrait UI Functional Test Report'
+            ])
+            steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
+          }
+        }
     }
 
   afterAlways('fortify-scan') {
