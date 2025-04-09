@@ -115,7 +115,6 @@ const cy = () => {
 
 export const form: FormContent = {
   fields: userCase => {
-
     return {
       laUploadedFiles: {
         type: 'hidden',
