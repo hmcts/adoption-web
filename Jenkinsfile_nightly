@@ -81,23 +81,6 @@ withNightlyPipeline(type, product, component) {
   }
 
 afterAlways('fullFunctionalTest') {
-        stage('UI Tests') {
-            try {
-                yarnBuilder.yarn('test:functional-nightly')
-            } catch (Error) {
-                unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
-            } finally {
-                publishHTML([
-                    allowMissing: true,
-                    alwaysLinkToLastBuild: true,
-                    keepAll: true,
-                    reportDir: 'playwright-report',
-                    reportFiles: 'index.html',
-                    reportName: 'Playwright UI Functional Test Report'
-                ])
-                steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
-            }
-        }
         stage('Chromium UI Tests') {
           try {
             yarnBuilder.yarn('test:functional-chromium')
