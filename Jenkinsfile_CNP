@@ -84,8 +84,6 @@ withPipeline(type, product, component) {
   }
 
   afterAlways('functionalTest:preview') {
-    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
-    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'test-results/**/*'
     try {
       yarnBuilder.yarn('test:functional')
     } catch (Error) {

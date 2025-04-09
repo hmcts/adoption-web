@@ -98,7 +98,7 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
     await citChildFullNameAfterAdoptionPage.fillFirstNameLabel('Joe');
     await citChildFullNameAfterAdoptionPage.clickSaveAsDraft();
 
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}save-as-draft`;
+    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
     const actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
@@ -116,7 +116,7 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
     await citChildFullNameAfterAdoptionPage.fillLastNameLabel('Smith');
     await citChildFullNameAfterAdoptionPage.clickSaveAsDraft();
 
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}save-as-draft`;
+    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
     const actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
@@ -135,7 +135,7 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
     await citChildFullNameAfterAdoptionPage.fillLastNameLabel('Smith');
     await citChildFullNameAfterAdoptionPage.clickSaveAsDraft();
 
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}save-as-draft`;
+    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
     const actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
@@ -163,13 +163,13 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
     await citChildFullNameAfterAdoptionPage.fillLastNameLabel('Smith');
     await citChildFullNameAfterAdoptionPage.clickSaveAsDraft();
 
-    let expectedUrl = `${urlConfig.citizenFrontendBaseUrl}save-as-draft`;
+    let expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
     let actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
     await citSaveAsDraftPage.clickContinueWithYourApplicationButton();
 
-    expectedUrl = `${urlConfig.citizenFrontendBaseUrl}task-list`;
+    expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/task-list`;
     actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
@@ -197,7 +197,7 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
 
     await citChildFullNameAfterAdoptionPage.clickSaveAndContinue();
 
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}children/date-of-birth`;
+    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/children/date-of-birth`;
     const actualUrl = page.url();
 
     expect(actualUrl).toBe(expectedUrl);
