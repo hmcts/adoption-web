@@ -16,5 +16,5 @@ export const urlConfig: UrlConfig = {
     process.env.CIT_SIGNIN_URL ||
     `https://idam-web-public.${env}.platform.hmcts.net/login?client_id=adoption-web&response_type=code&redirect_uri=https://adoption-web.${env}.platform.hmcts.net/receiver`,
   laPortalUrl: process.env.LA_BASE_URL || `https://adoption-web.${env}.platform.hmcts.net/la-portal/kba-case-ref/`,
-  citizenFrontendBaseUrl: process.env.TEST_URL || `https://adoption-web.${env}.platform.hmcts.net/`,
+  citizenFrontendBaseUrl: process.env.TEST_URL || `https://adoption-web.${env}.platform.hmcts.net`,
 };

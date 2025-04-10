@@ -92,7 +92,7 @@ test.describe('Citizen Journey child name test single parent', () => {
     await citChildFullNamePage.fillFirstNameLabel('Joe');
     await citChildFullNamePage.clickSaveAsDraft();
 
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}save-as-draft`;
+    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
     const actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
@@ -107,7 +107,7 @@ test.describe('Citizen Journey child name test single parent', () => {
     await citChildFullNamePage.fillLastNameLabel('Smith');
     await citChildFullNamePage.clickSaveAsDraft();
 
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}save-as-draft`;
+    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
     const actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
@@ -126,7 +126,7 @@ test.describe('Citizen Journey child name test single parent', () => {
     await citChildFullNamePage.fillLastNameLabel('Smith');
     await citChildFullNamePage.clickSaveAsDraft();
 
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}save-as-draft`;
+    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
     const actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
@@ -153,13 +153,13 @@ test.describe('Citizen Journey child name test single parent', () => {
     await citChildFullNamePage.fillLastNameLabel('Smith');
     await citChildFullNamePage.clickSaveAsDraft();
 
-    let expectedUrl = `${urlConfig.citizenFrontendBaseUrl}save-as-draft`;
+    let expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
     let actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
     await citSaveAsDraftPage.clickContinueWithYourApplicationButton();
 
-    expectedUrl = `${urlConfig.citizenFrontendBaseUrl}task-list`;
+    expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/task-list`;
     actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
@@ -185,7 +185,7 @@ test.describe('Citizen Journey child name test single parent', () => {
 
     await citChildFullNamePage.clickSaveAndContinue();
 
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}children/full-name-after-adoption`;
+    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/children/full-name-after-adoption`;
     const actualUrl = page.url();
 
     expect(actualUrl).toBe(expectedUrl);

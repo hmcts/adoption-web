@@ -134,7 +134,7 @@ test.describe('Citizen Journey date child moved in page test single parent', () 
     citDateChildMovedInPage,
   }) => {
     const expectedState = 'Completed';
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}task-list`;
+    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/task-list`;
 
     await citDateChildMovedInPage.fillDayLabel('01');
     await citDateChildMovedInPage.fillMonthLabel('01');
