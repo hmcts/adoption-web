@@ -28,8 +28,9 @@ def secrets = [
     secret('endpoints', 'ENDPOINTS'),
     secret('idam-system-user-password', 'TEST_PASSWORD'),
     secret('adoption-web-auth-token', 'AUTH_TOKEN'),
-    secret('idam-token-url', 'IDAM_TOKEN_URL'), 
-    secret('idam-citizen-user-password', 'IDAM_CITIZEN_USER_PASSWORD')
+    secret('idam-token-url', 'IDAM_TOKEN_URL'),
+    secret('idam-citizen-user-password', 'IDAM_CITIZEN_USER_PASSWORD'),
+    secret('idam-testing-support-users-url', 'IDAM_TESTING_SUPPORT_USERS_URL')
 
   ],
   's2s-${env}': [
@@ -76,27 +77,81 @@ withPipeline(type, product, component) {
 
   before('functionalTest:preview') {
     env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.preview.platform.hmcts.net/"
-    yarnBuilder.yarn('test:pa11y')
+    env.PARALLEL_CHUNKS = 2
+    env.IDAM_TOKEN_URL = "${IDAM_TOKEN_URL}"
+    env.IDAM_CITIZEN_USER_PASSWORD = "${IDAM_CITIZEN_USER_PASSWORD}"
+    env.IDAM_TESTING_SUPPORT_USERS_URL = "${IDAM_TESTING_SUPPORT_USERS_URL}"
   }
 
   afterAlways('functionalTest:preview') {
-    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+    try {
+      yarnBuilder.yarn('test:functional')
+    } catch (Error) {
+      unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
+    } finally {
+      publishHTML([
+        allowMissing: true,
+        alwaysLinkToLastBuild: true,
+        keepAll: true,
+        reportDir: 'playwright-report',
+        reportFiles: 'index.html',
+        reportName: 'Playwright Preview Functional Test Report'
+      ])
+      steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
+    }
   }
 
   before('smoketest:preview') {
     env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.preview.platform.hmcts.net/"
+    env.PARALLEL_CHUNKS = 2
+    env.IDAM_TOKEN_URL = "${IDAM_TOKEN_URL}"
+    env.IDAM_CITIZEN_USER_PASSWORD = "${IDAM_CITIZEN_USER_PASSWORD}"
+    env.IDAM_TESTING_SUPPORT_USERS_URL = "${IDAM_TESTING_SUPPORT_USERS_URL}"
   }
 
   afterAlways('smoketest:preview') {
-    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+    try {
+      yarnBuilder.yarn('test:smoke')
+    } catch (Error) {
+      unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
+    } finally {
+      publishHTML([
+        allowMissing: true,
+        alwaysLinkToLastBuild: true,
+        keepAll: true,
+        reportDir: 'playwright-report',
+        reportFiles: 'index.html',
+        reportName: 'Playwright Preview Smoke Test Report'
+      ])
+      steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
+    }
   }
 
   before('smoketest:aat') {
     env.ADOP_WEB_URL = "https://adoption-web-staging.aat.platform.hmcts.net/"
+    env.PCQ_TESTS_ENABLED = "false"
+    env.PARALLEL_CHUNKS = 2
+    env.IDAM_TOKEN_URL = "${IDAM_TOKEN_URL}"
+    env.IDAM_CITIZEN_USER_PASSWORD = "${IDAM_CITIZEN_USER_PASSWORD}"
+    env.IDAM_TESTING_SUPPORT_USERS_URL = "${IDAM_TESTING_SUPPORT_USERS_URL}"
   }
 
   afterAlways('smoketest:aat') {
-    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+    try {
+      yarnBuilder.yarn('test:smoke')
+    } catch (Error) {
+      unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
+    } finally {
+      publishHTML([
+        allowMissing: true,
+        alwaysLinkToLastBuild: true,
+        keepAll: true,
+        reportDir: 'playwright-report',
+        reportFiles: 'index.html',
+        reportName: 'Playwright Smoke Test Report'
+      ])
+      steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
+    }
   }
 
   before('functionalTest:aat') {
@@ -105,7 +160,6 @@ withPipeline(type, product, component) {
   }
 
   afterAlways('functionalTest:aat') {
-    yarnBuilder.yarn('test:pa11y')
     yarnBuilder.yarn('test:api')
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
