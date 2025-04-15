@@ -32,6 +32,7 @@
     "test:functional:skip": "echo 'Not running functional cases in Master' && exit 0",
     "test:crossbrowser-e2e": "MOCHAWESOME_REPORTFILENAME=crossbrowser codeceptjs run-multiple --grep '@cross-browser' ${BROWSER_GROUP:-'--all'} -c saucelabs.conf.js --reporter mocha-multi",
     "test:crossbrowser": "./bin/run-crossbrowser-tests.sh",
+    "test:fullfunctional": "echo 'full functional replaced by modularised functional tests' && exit 0",
     "test:functional-chromium": "yarn playwright install && yarn playwright test --project chromium",
     "test:functional-firefox": "yarn playwright install && yarn playwright test --project firefox",
     "test:functional-webkit": "yarn playwright install && yarn playwright test --project webkit",
