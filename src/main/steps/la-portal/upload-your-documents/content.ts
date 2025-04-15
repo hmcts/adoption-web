@@ -1,7 +1,6 @@
 import { isObject } from 'lodash';
 
 import { Checkbox } from '../../../app/case/case';
-//import { DocumentType } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { ValidationError } from '../../../app/form/validation';
