@@ -41,19 +41,6 @@ test.describe('Citizen Journey child DoB test single parent', () => {
     await teardownUser(userId);
   });
 
-  test('check default page is in English', async ({ page }) => {
-    const langAttribute = await page.getAttribute('html', 'lang');
-
-    expect(langAttribute).toMatch(/^en/);
-  });
-
-  test('check page is in Welsh after clicking Welsh language link', async ({ page, citChildDoBPage }) => {
-    await citChildDoBPage.clickLanguageLink();
-
-    const langAttribute = await page.getAttribute('html', 'lang');
-
-    expect(langAttribute).toMatch(/^cy/);
-
   test('check default page is in English', async ({ citChildDoBPage }) => {
     await runPageLanguageTest('en', citChildDoBPage);
   });

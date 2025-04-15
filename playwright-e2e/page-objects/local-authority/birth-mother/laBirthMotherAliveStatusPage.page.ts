@@ -18,7 +18,7 @@ export class LABirthMotherAliveStatusPage extends BasePage {
     this.birthMotherAliveYesRadioButton = page.getByLabel('Yes');
     this.birthMotherAliveNoRadioButton = page.getByLabel('No');
     this.birthMotherAliveNotSureRadioButton = page.getByLabel('Not sure');
-  
+
     this.birthMotherGroup = page.getByRole('group', { name: "Is the child's birth mother still alive?" });
   }
 

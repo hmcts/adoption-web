@@ -6,9 +6,6 @@ export class CITChildFullNameAfterAdoptionPage extends BasePage {
   readonly childDetailsTitle: Locator;
   readonly childFullNameAfterAdoptionHeading: Locator;
 
-  readonly firstName: Locator;
-  readonly lastName: Locator;
-
   readonly childFullNameAfterAdoptionTooltip: Locator;
 
   readonly firstName: Locator;
