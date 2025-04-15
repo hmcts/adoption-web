@@ -293,6 +293,7 @@ export const generatePageContent = ({
   const serviceName = getServiceName(commonTranslations);
   const contactEmail = 'todo@test.com';
   const isAmendableStates = userCase && [State.Draft].includes(userCase.state!);
+  const bodyClasses = 'govuk-frontend-supported';
 
   const content: CommonContent = {
     ...commonTranslations,
@@ -308,6 +309,7 @@ export const generatePageContent = ({
     eligibilityPage,
     fee,
     isAmendableStates,
+    bodyClasses,
   };
 
   if (pageContent) {
@@ -337,6 +339,7 @@ export type CommonContent = typeof en & {
   eligibilityPage?: boolean;
   fee?: Fee;
   isAmendableStates?: boolean;
+  bodyClasses?: string;
 };
 
 export type Language = 'en' | 'cy';
