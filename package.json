@@ -85,7 +85,7 @@
     "accessible-autocomplete": "^2.0.4",
     "applicationinsights": "^2.5.1",
     "autobind-decorator": "^2.4.0",
-    "axios": "^0.28.0",
+    "axios": "^0.30.0",
     "config": "^3.3.7",
     "connect-redis": "^6.1.1",
     "cookie-parser": "^1.4.5",
