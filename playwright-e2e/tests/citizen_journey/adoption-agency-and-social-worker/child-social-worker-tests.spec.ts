@@ -93,13 +93,15 @@ test.describe('Citizen Journey child social worker test single parent', () => {
     expect(test.info().errors).toHaveLength(0);
   });
 
-  test('check incorrect government email results then pressing save and continue button results in relevant errors', async ({
+  test('check adding non approved emails then pressing save and continue button results in relevant errors', async ({
     citChildSocialWorkerDetailsPage,
   }) => {
     await citChildSocialWorkerDetailsPage.fillEmailAddressLabel('test@mailnator.com');
+    await citChildSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('test@mailnator.com');
     await citChildSocialWorkerDetailsPage.clickSaveAndContinue();
 
-    await expect(citChildSocialWorkerDetailsPage.errorNonGovernmentEmail).toBeVisible();
+    await expect(citChildSocialWorkerDetailsPage.errorNonGovernmentEmail.nth(0)).toBeVisible();
+    await expect(citChildSocialWorkerDetailsPage.errorNonGovernmentEmail.nth(1)).toBeVisible();
   });
 
   test('check adding incorrect phone number then pressing save and continue button results in UK telephone number error', async ({
