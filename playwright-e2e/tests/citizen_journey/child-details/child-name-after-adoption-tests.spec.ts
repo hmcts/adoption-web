@@ -2,6 +2,7 @@ import { expect, test } from '../../../fixtures/fixtures';
 import { setupUser, teardownUser } from '../../../hooks/createDeleteUser.hook';
 import { urlConfig } from '../../../utils/urls';
 import { runChangePageLanguageTest, runPageLanguageTest } from '../test-utils';
+
 test.describe('Citizen Journey child name after adoption test single parent', () => {
   let userEmail: string;
   let userPassword: string;
@@ -39,9 +40,11 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
   test('check if page components are in correct visible state', async ({ citChildFullNameAfterAdoptionPage }) => {
     await expect.soft(citChildFullNameAfterAdoptionPage.childDetailsTitle).toBeVisible();
     await expect.soft(citChildFullNameAfterAdoptionPage.childFullNameAfterAdoptionHeading).toBeVisible();
+
     await expect.soft(citChildFullNameAfterAdoptionPage.childFullNameAfterAdoptionTooltip).toBeVisible();
     await expect.soft(citChildFullNameAfterAdoptionPage.firstNameTooltip).toBeVisible();
     await expect.soft(citChildFullNameAfterAdoptionPage.lastNameTooltip).toBeVisible();
+
     await expect.soft(citChildFullNameAfterAdoptionPage.firstName).toBeVisible();
     await expect.soft(citChildFullNameAfterAdoptionPage.lastName).toBeVisible();
     await expect.soft(citChildFullNameAfterAdoptionPage.contactUsForHelpDropdownLink).toBeVisible();

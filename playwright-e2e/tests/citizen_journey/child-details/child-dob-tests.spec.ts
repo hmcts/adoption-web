@@ -2,6 +2,7 @@ import { expect, test } from '../../../fixtures/fixtures';
 import { setupUser, teardownUser } from '../../../hooks/createDeleteUser.hook';
 import { urlConfig } from '../../../utils/urls';
 import { runChangePageLanguageTest, runPageLanguageTest } from '../test-utils';
+
 test.describe('Citizen Journey child DoB test single parent', () => {
   let userEmail: string;
   let userPassword: string;
@@ -290,7 +291,6 @@ test.describe('Citizen Journey child DoB test single parent', () => {
     await citChildDoBPage.fillMonthLabel('01');
     await citChildDoBPage.fillYearLabel('2020');
     await citChildDoBPage.clickSaveAsDraft();
-
     const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
     const actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
