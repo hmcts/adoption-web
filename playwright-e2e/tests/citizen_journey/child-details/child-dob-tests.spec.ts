@@ -2,6 +2,7 @@ import { expect, test } from '../../../fixtures/fixtures';
 import { setupUser, teardownUser } from '../../../hooks/createDeleteUser.hook';
 import { urlConfig } from '../../../utils/urls';
 import { runChangePageLanguageTest, runPageLanguageTest } from '../test-utils';
+
 test.describe('Citizen Journey child DoB test single parent', () => {
   let userEmail: string;
   let userPassword: string;
@@ -282,7 +283,7 @@ test.describe('Citizen Journey child DoB test single parent', () => {
     await expect.soft(citChildDoBPage.errorDateInPastSummary).toBeVisible();
   });
 
-  test('check fill in correct date, saving draft then going back to page prerves date data', async ({
+  test('check fill in correct date, saving draft then going back to page preserves date data', async ({
     page,
     citChildDoBPage,
   }) => {
@@ -290,8 +291,7 @@ test.describe('Citizen Journey child DoB test single parent', () => {
     await citChildDoBPage.fillMonthLabel('01');
     await citChildDoBPage.fillYearLabel('2020');
     await citChildDoBPage.clickSaveAsDraft();
-
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}save-as-draft`;
+    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
     const actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
@@ -325,13 +325,13 @@ test.describe('Citizen Journey child DoB test single parent', () => {
     await citChildDoBPage.fillYearLabel('2020');
     await citChildDoBPage.clickSaveAsDraft();
 
-    let expectedUrl = `${urlConfig.citizenFrontendBaseUrl}save-as-draft`;
+    let expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
     let actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
     await citSaveAsDraftPage.clickContinueWithYourApplicationButton();
 
-    expectedUrl = `${urlConfig.citizenFrontendBaseUrl}task-list`;
+    expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/task-list`;
     actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
@@ -366,7 +366,7 @@ test.describe('Citizen Journey child DoB test single parent', () => {
 
     await citChildDoBPage.clickSaveAndContinue();
 
-    const exepctedUrl = `${urlConfig.citizenFrontendBaseUrl}task-list`;
+    const exepctedUrl = `${urlConfig.citizenFrontendBaseUrl}/task-list`;
     const actualUrl = page.url();
 
     await expect(actualUrl).toBe(exepctedUrl);

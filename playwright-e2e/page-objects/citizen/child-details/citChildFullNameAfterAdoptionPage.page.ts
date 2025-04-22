@@ -5,6 +5,7 @@ import BasePage from '../../../pages/basePage.page';
 export class CITChildFullNameAfterAdoptionPage extends BasePage {
   readonly childDetailsTitle: Locator;
   readonly childFullNameAfterAdoptionHeading: Locator;
+
   readonly childFullNameAfterAdoptionTooltip: Locator;
 
   readonly firstName: Locator;
@@ -24,6 +25,7 @@ export class CITChildFullNameAfterAdoptionPage extends BasePage {
     super(page);
     this.childDetailsTitle = page.getByText("The child's details");
     this.childFullNameAfterAdoptionHeading = page.getByRole('heading', { name: 'After adoption, what will be' });
+
     this.childFullNameAfterAdoptionTooltip = page.getByText('If you are changing the child');
 
     this.firstName = page.getByLabel('First names');

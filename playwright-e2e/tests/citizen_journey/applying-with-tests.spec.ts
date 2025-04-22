@@ -122,7 +122,7 @@ test.describe('Citizen Journey Applying with page test', () => {
   }) => {
     await citApplyingWithPage.clickSaveAsDraft();
 
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}save-as-draft`;
+    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
 
     expect(page.url()).toBe(expectedUrl);
   });
@@ -134,7 +134,7 @@ test.describe('Citizen Journey Applying with page test', () => {
     await citApplyingWithPage.checkApplyingOnMyOwnRadioButton();
     await citApplyingWithPage.clickSaveAndContinue();
 
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}task-list`;
+    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/task-list`;
 
     expect(page.url()).toBe(expectedUrl);
   });
