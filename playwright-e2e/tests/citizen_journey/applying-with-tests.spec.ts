@@ -1,5 +1,6 @@
 import { expect, test } from '../../fixtures/fixtures';
 import { setupUser, teardownUser } from '../../hooks/createDeleteUser.hook';
+import { urlConfig } from '../../utils/urls';
 
 test.describe('Citizen Journey Applying with page test', () => {
   let userEmail: string;
@@ -121,7 +122,7 @@ test.describe('Citizen Journey Applying with page test', () => {
   }) => {
     await citApplyingWithPage.clickSaveAsDraft();
 
-    const expectedUrl = 'https://adoption-web.aat.platform.hmcts.net/save-as-draft';
+    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
 
     expect(page.url()).toBe(expectedUrl);
   });
@@ -133,7 +134,7 @@ test.describe('Citizen Journey Applying with page test', () => {
     await citApplyingWithPage.checkApplyingOnMyOwnRadioButton();
     await citApplyingWithPage.clickSaveAndContinue();
 
-    const expectedUrl = 'https://adoption-web.aat.platform.hmcts.net/task-list';
+    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/task-list`;
 
     expect(page.url()).toBe(expectedUrl);
   });

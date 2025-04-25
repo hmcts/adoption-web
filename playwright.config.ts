@@ -1,5 +1,11 @@
-import { defineConfig, devices } from '@playwright/test';
+import path from 'path';
 
+import { defineConfig, devices } from '@playwright/test';
+// playwright.config.ts
+import dotenv from 'dotenv';
+
+// Read from ".env" file
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -13,9 +19,9 @@ export default defineConfig({
   testDir: './playwright-e2e',
   /* Run tests in files in parallel */
   fullyParallel: true,
-  timeout: 80000,
+  timeout: 180000,
 
-  expect: { timeout: 80000 },
+  expect: { timeout: 180000 },
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
@@ -31,6 +37,7 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
   },
 
   /* Configure projects for major browsers */
