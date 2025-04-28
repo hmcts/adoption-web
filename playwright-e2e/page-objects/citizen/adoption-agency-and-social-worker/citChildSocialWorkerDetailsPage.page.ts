@@ -1,19 +1,14 @@
 import { Locator, Page } from '@playwright/test';
-import { SocialWorkerPage } from './socialWorkerPage.page';
 
-export class CITChildSocialWorkerDetailsPage extends SocialWorkerPage {
-  readonly childSocialWorkerTitle: Locator;
+import BasePage from '../../../pages/basePage.page';
+
+export class CITChildSocialWorkerDetailsPage extends BasePage {
   readonly applicationDetailsTitle: Locator;
+  readonly childSocialWorkerTitle: Locator;
   readonly childSocialWorkerSubtitle: Locator;
 
   readonly nameOfChildSocialWorkerText: Locator;
   readonly nameOfChildSocialWorkerLabel: Locator;
-
-  readonly childLocalAuthorityText: Locator;
-
-  readonly errorNameOfChildSocialWorkerSummary: Locator;
-  readonly errorNoOptionalChildEmailSummary: Locator;
-  readonly errorNoChildEmailSummary: Locator;
 
   readonly phoneNumberText: Locator;
   readonly phoneNumberLabel: Locator;
