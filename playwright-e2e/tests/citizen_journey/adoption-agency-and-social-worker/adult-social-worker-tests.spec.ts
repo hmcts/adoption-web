@@ -1,5 +1,7 @@
 import { expect, test } from '../../../fixtures/fixtures';
 import { setupUser, teardownUser } from '../../../hooks/createDeleteUser.hook';
+import { urlConfig } from '../../../utils/urls';
+import { runChangePageLanguageTest, runPageLanguageTest } from '../test-utils';
 test.describe('Citizen Journey adult social worker test single parent', () => {
   let userEmail: string;
   let userPassword: string;
@@ -29,21 +31,12 @@ test.describe('Citizen Journey adult social worker test single parent', () => {
     await teardownUser(userId);
   });
 
-  test('check default page is in English', async ({ page }) => {
-    const langAttribute = await page.getAttribute('html', 'lang');
-
-    expect(langAttribute).toMatch(/^en/);
+  test('check default page is in English', async ({ citAdultSocialWorkerDetailsPage }) => {
+    await runPageLanguageTest('en', citAdultSocialWorkerDetailsPage);
   });
 
-  test('check page is in Welsh after clicking Welsh language link', async ({
-    page,
-    citAdultSocialWorkerDetailsPage,
-  }) => {
-    await citAdultSocialWorkerDetailsPage.clickLanguageLink();
-
-    const langAttribute = await page.getAttribute('html', 'lang');
-
-    expect(langAttribute).toMatch(/^cy/);
+  test('check page is in Welsh after clicking Welsh language link', async ({ citAdultSocialWorkerDetailsPage }) => {
+    await runChangePageLanguageTest('cy', citAdultSocialWorkerDetailsPage);
   });
 
   test('check if page components are in correct visible state', async ({ citAdultSocialWorkerDetailsPage }) => {
@@ -86,7 +79,6 @@ test.describe('Citizen Journey adult social worker test single parent', () => {
     await expect.soft(citAdultSocialWorkerDetailsPage.errorEnterUKPhoneNumberSummary).toBeVisible();
     await expect.soft(citAdultSocialWorkerDetailsPage.errorNoOptionalAdultEmailSummary).toBeHidden({ timeout: 500 });
     await expect.soft(citAdultSocialWorkerDetailsPage.errorNoAdultEmailSummary).toBeVisible();
-    // await expect.soft(citAdultSocialWorkerDetailsPage.errorEnterLocalAuthoritySummary).toBeVisible();
     await expect.soft(citAdultSocialWorkerDetailsPage.errorNonGovernmentEmail).toBeHidden({ timeout: 500 });
 
     expect(test.info().errors).toHaveLength(0);
@@ -102,19 +94,15 @@ test.describe('Citizen Journey adult social worker test single parent', () => {
     await expect.soft(citAdultSocialWorkerDetailsPage.errorEnterUKPhoneNumberSummary).toBeVisible();
     await expect.soft(citAdultSocialWorkerDetailsPage.errorNoOptionalAdultEmailSummary).toBeVisible();
     await expect.soft(citAdultSocialWorkerDetailsPage.errorNoAdultEmailSummary).toBeVisible();
-    // await expect.soft(citAdultSocialWorkerDetailsPage.errorEnterLocalAuthoritySummary).toBeVisible();
     await expect.soft(citAdultSocialWorkerDetailsPage.errorNonGovernmentEmail).toBeHidden({ timeout: 500 });
 
     expect(test.info().errors).toHaveLength(0);
   });
 
-  test('check adding incorrect phone number then pressing save and continue button results in UK relphone number error', async ({
+  test('check adding incorrect phone number then pressing save and continue button results in UK telephone number error', async ({
     citAdultSocialWorkerDetailsPage,
   }) => {
-    await citAdultSocialWorkerDetailsPage.fillNameOfAdultSocialWorkerLabel('test');
     await citAdultSocialWorkerDetailsPage.fillPhoneNumberLabel('01622');
-    await citAdultSocialWorkerDetailsPage.selectLocalAuthority('Sandwell');
-    await citAdultSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('ASTS@justice.gov.uk');
     await citAdultSocialWorkerDetailsPage.clickSaveAndContinue();
 
     await expect(citAdultSocialWorkerDetailsPage.errorEnterUKPhoneNumberSummary).toBeVisible();
@@ -123,9 +111,6 @@ test.describe('Citizen Journey adult social worker test single parent', () => {
   test('check adding non approved government email address then pressing save and continue button is non approved error', async ({
     citAdultSocialWorkerDetailsPage,
   }) => {
-    await citAdultSocialWorkerDetailsPage.fillNameOfAdultSocialWorkerLabel('test');
-    await citAdultSocialWorkerDetailsPage.fillPhoneNumberLabel('01622 123456');
-    await citAdultSocialWorkerDetailsPage.selectLocalAuthority('Sandwell');
     await citAdultSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('ASTS@mailnator.com');
     await citAdultSocialWorkerDetailsPage.clickSaveAndContinue();
 
@@ -142,7 +127,7 @@ test.describe('Citizen Journey adult social worker test single parent', () => {
     await citAdultSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('austen.stevens@justice.gov.uk');
     await citAdultSocialWorkerDetailsPage.clickSaveAsDraft();
 
-    const expectedUrl = 'https://adoption-web.aat.platform.hmcts.net/save-as-draft';
+    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
     const actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
@@ -176,7 +161,7 @@ test.describe('Citizen Journey adult social worker test single parent', () => {
     await citAdultSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('austen.stevens@justice.gov.uk');
     await citAdultSocialWorkerDetailsPage.clickSaveAndContinue();
 
-    const expectedUrl = 'https://adoption-web.aat.platform.hmcts.net/children/other-adoption-agency';
+    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/children/other-adoption-agency`;
     const actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
   });
