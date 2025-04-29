@@ -132,7 +132,7 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
     await citChildFullNameAfterAdoptionPage.fillFirstNameLabel('Joe');
     await citChildFullNameAfterAdoptionPage.fillLastNameLabel('Smith');
     await citChildFullNameAfterAdoptionPage.clickSaveAsDraft();
- 
+
     const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
 
     const actualUrl = page.url();

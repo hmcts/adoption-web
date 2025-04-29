@@ -10,18 +10,23 @@ export class SocialWorkerPage extends BasePage {
 
   readonly emailAddressText: Locator;
   readonly emailAddressLabel: Locator;
+  readonly emailAddressHint: Locator;
 
   readonly localAuthorityInputLabel: Locator;
   readonly localAuthorityDropdown: Locator;
 
   readonly localAuthorityEmailText: Locator;
   readonly localAuthorityEmailLabel: Locator;
+  readonly localAuthorityEmailHint: Locator;
 
   readonly contactUsForHelpDropdownLink: Locator;
   readonly contactACourtHeading: Locator;
   readonly findACourtLink: Locator;
 
+  readonly errorNameOfChildSocialWorkerSummary: Locator;
   readonly errorEnterUKPhoneNumberSummary: Locator;
+  readonly errorEmailFormatOptionalEmailSummary: Locator;
+  readonly errorNoEmailSummary: Locator;
   readonly errorEnterLocalAuthoritySummary: Locator;
   readonly errorNonGovernmentEmail: Locator;
 
@@ -34,18 +39,23 @@ export class SocialWorkerPage extends BasePage {
 
     this.emailAddressText = page.getByText('Email address (if known)');
     this.emailAddressLabel = page.getByRole('textbox', { name: 'Email address (if known)' });
+    this.emailAddressHint = page.getByText('The email address should be an official government email');
 
     this.localAuthorityInputLabel = page.locator('#location-picker');
     this.localAuthorityDropdown = page.locator('.autocomplete__menu');
 
     this.localAuthorityEmailText = page.getByText('Local authority email address');
     this.localAuthorityEmailLabel = page.getByRole('textbox', { name: 'Local authority email address' });
+    this.localAuthorityEmailHint = page.getByText('This will be used to send a notification to the local authority');
 
     this.contactUsForHelpDropdownLink = page.getByText('Contact us for help');
     this.contactACourtHeading = page.getByRole('heading', { name: 'Contact a court that deals' });
     this.findACourtLink = page.getByRole('link', { name: 'Find a Court or Trbunal' });
 
+    this.errorNameOfChildSocialWorkerSummary = page.getByRole('link', { name: 'Enter name of child’s social worker' });
     this.errorEnterUKPhoneNumberSummary = page.getByRole('link', { name: 'Enter a UK telephone number' });
+    this.errorEmailFormatOptionalEmailSummary = page.locator('a[href="#childSocialWorkerEmail"]');
+    this.errorNoEmailSummary = page.locator('a[href="#childLocalAuthorityEmail"]');
     this.errorEnterLocalAuthoritySummary = page.getByRole('link', { name: 'Enter name of local authority' });
     this.errorNonGovernmentEmail = page.getByRole('link', {
       name: 'The email address provided is not an approved email address',
