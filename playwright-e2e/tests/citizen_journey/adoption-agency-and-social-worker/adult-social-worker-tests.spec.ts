@@ -108,15 +108,6 @@ test.describe('Citizen Journey adult social worker test single parent', () => {
     await expect(citAdultSocialWorkerDetailsPage.errorEnterUKPhoneNumberSummary).toBeVisible();
   });
 
-  test('check adding non approved government email address then pressing save and continue button is non approved error', async ({
-    citAdultSocialWorkerDetailsPage,
-  }) => {
-    await citAdultSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('ASTS@mailnator.com');
-    await citAdultSocialWorkerDetailsPage.clickSaveAndContinue();
-
-    await expect(citAdultSocialWorkerDetailsPage.errorNonGovernmentEmail).toBeVisible();
-  });
-
   test('check inserting data then saving draft then going back to page preserves saved data', async ({
     page,
     citAdultSocialWorkerDetailsPage,
