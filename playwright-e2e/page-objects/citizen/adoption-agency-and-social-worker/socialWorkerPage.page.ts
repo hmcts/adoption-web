@@ -50,7 +50,7 @@ export class SocialWorkerPage extends BasePage {
 
     this.contactUsForHelpDropdownLink = page.getByText('Contact us for help');
     this.contactACourtHeading = page.getByRole('heading', { name: 'Contact a court that deals' });
-    this.findACourtLink = page.getByRole('link', { name: 'Find a Court or Trbunal' });
+    this.findACourtLink = page.getByRole('link', { name: 'Find a Court or Tribunal' });
 
     this.errorNameOfChildSocialWorkerSummary = page.getByRole('link', { name: 'Enter name of child’s social worker' });
     this.errorEnterUKPhoneNumberSummary = page.getByRole('link', { name: 'Enter a UK telephone number' });

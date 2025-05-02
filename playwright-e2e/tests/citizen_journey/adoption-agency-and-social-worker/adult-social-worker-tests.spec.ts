@@ -70,7 +70,7 @@ test.describe('Citizen Journey adult social worker test single parent', () => {
     expect(test.info().errors).toHaveLength(0);
   });
 
-  test('check if pressing save and continue button wihtout filling required field results in relevant errors', async ({
+  test('check if pressing save and continue button without filling required field results in relevant errors', async ({
     citAdultSocialWorkerDetailsPage,
   }) => {
     await citAdultSocialWorkerDetailsPage.clickSaveAndContinue();
