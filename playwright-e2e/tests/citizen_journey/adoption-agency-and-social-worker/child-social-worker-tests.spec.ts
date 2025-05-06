@@ -1,5 +1,6 @@
 import { expect, test } from '../../../fixtures/fixtures';
 import { setupUser, teardownUser } from '../../../hooks/createDeleteUser.hook';
+import { urlConfig } from '../../../utils/urls';
 test.describe('Citizen Journey child social worker test single parent', () => {
   let userEmail: string;
   let userPassword: string;
@@ -123,7 +124,7 @@ test.describe('Citizen Journey child social worker test single parent', () => {
     await citChildSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('austen.stevens@justice.gov.uk');
     await citChildSocialWorkerDetailsPage.clickSaveAsDraft();
 
-    const expectedUrl = 'https://adoption-web.aat.platform.hmcts.net/save-as-draft';
+    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
     const actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
 
@@ -158,7 +159,7 @@ test.describe('Citizen Journey child social worker test single parent', () => {
     await citChildSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('austen.stevens@justice.gov.uk');
     await citChildSocialWorkerDetailsPage.clickSaveAndContinue();
 
-    const expectedUrl = 'https://adoption-web.aat.platform.hmcts.net/children/applicant-social-worker';
+    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/children/applicant-social-worker`;
     const actualUrl = page.url();
     await expect(actualUrl).toBe(expectedUrl);
   });
