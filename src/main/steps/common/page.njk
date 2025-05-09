@@ -113,6 +113,7 @@ ADOP-1231-LAPortal-Welsh-Translation starts #}
          <span class="govuk-caption-l">{{ section }}</span>
     {% endif %}
             {% block page_content %}
+              {% include "./notification-banner.njk" %}
               {% if title %}
                 <h1 class="govuk-heading-l govuk-!-margin-bottom-0">{{ title }}</h1>
               {% endif %}
