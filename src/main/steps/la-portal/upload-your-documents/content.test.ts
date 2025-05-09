@@ -179,10 +179,6 @@ describe('laCannotUpload', () => {
     expect((laCannotUpload.values[0].label as Function)(generateContent(commonContent))).toBe(
       enContent.cannotUploadDocuments
     );
-
-    const laCannotUploadDocuments = laCannotUpload.values[0].subFields!.laCannotUploadDocuments as FormOptions;
-    expect(laCannotUploadDocuments.type).toBe('checkboxes');
-    expect(laCannotUploadDocuments.values).toHaveLength(0);
   });
 });
 

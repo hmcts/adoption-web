@@ -1,7 +1,6 @@
 import { isObject } from 'lodash';
 
 import { Checkbox } from '../../../app/case/case';
-import { DocumentType } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { ValidationError } from '../../../app/form/validation';
@@ -115,8 +114,6 @@ const cy = () => {
 
 export const form: FormContent = {
   fields: userCase => {
-    const checkboxes: { id: string; value: DocumentType }[] = [];
-
     return {
       laUploadedFiles: {
         type: 'hidden',
@@ -142,30 +139,12 @@ export const form: FormContent = {
         type: 'checkboxes',
         label: l => l.cannotUploadDocuments,
         labelHidden: true,
-        //validator: (value, formData) => isValidCannotUpload(value, formData),
-        // validator: (value, formData) => {
-        //   if ((value as string[])?.includes(Checkbox.Checked)) {
-        //     return atLeastOneFieldIsChecked(formData?.laCannotUploadDocuments);
-        //   }
-        // },
         values: [
           {
             name: 'laCannotUpload',
             label: l => l.cannotUploadDocuments,
             value: Checkbox.Checked,
-            subFields: {
-              laCannotUploadDocuments: {
-                type: 'checkboxes',
-                label: l => l.cannotUploadWhich,
-                hint: l => l.checkAllThatApply,
-                values: checkboxes.map(checkbox => ({
-                  name: 'laCannotUploadDocuments',
-                  label: l => l[checkbox.id],
-                  value: checkbox.value,
-                })),
-                subtext: l => l.cannotUploadYouCanPost,
-              },
-            },
+            conditionalText: l => l.cannotUploadYouCanPost,
           },
         ],
       },
