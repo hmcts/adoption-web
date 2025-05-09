@@ -181,7 +181,7 @@
     "config/json5": ">=2.2.2",
     "tsconfig-paths/json5": ">=2.2.2",
     "cookiejar": ">=2.1.4",
-    "formidable": "^3.2.4",
+    "formidable": "^3.5.3",
     "semver": ">=7.5.2",
     "ws": "^8.17.1",
     "codeceptjs/axios": "1.8.2",
