@@ -18,7 +18,6 @@ import {
   DATE_CHILD_MOVED_IN,
   PageLink,
   TASK_LIST_URL,
-  UPLOAD_YOUR_DOCUMENTS,
 } from '../urls';
 
 const getStepAfterAddress = (data: Partial<CaseWithId>): PageLink => {
@@ -92,11 +91,6 @@ export const applicant1Sequence: Step[] = [
   },
   {
     url: APPLICANT_1_LANGUAGE_PREFERENCE,
-    showInSection: Sections.AboutApplicant1,
-    getNextStep: () => TASK_LIST_URL,
-  },
-  {
-    url: UPLOAD_YOUR_DOCUMENTS,
     showInSection: Sections.AboutApplicant1,
     getNextStep: () => TASK_LIST_URL,
   },
