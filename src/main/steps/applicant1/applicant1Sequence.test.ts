@@ -1,8 +1,8 @@
 import { applicant1Sequence } from './applicant1Sequence';
 
 describe('applicant1Sequence', () => {
-  test('should contain 14 entries in applicant 1 screen sequence', () => {
-    expect(applicant1Sequence).toHaveLength(14);
+  test('should contain 13 entries in applicant 1 screen sequence', () => {
+    expect(applicant1Sequence).toHaveLength(13);
     let incr = 0;
     expect(applicant1Sequence[incr].url).toBe('/date-child-moved-in');
     expect(applicant1Sequence[incr].showInSection).toBe('aboutApplicant1');
@@ -53,10 +53,6 @@ describe('applicant1Sequence', () => {
     expect(applicant1Sequence[incr].getNextStep({})).toBe('/applicant1/language-preference');
 
     expect(applicant1Sequence[++incr].url).toBe('/applicant1/language-preference');
-    expect(applicant1Sequence[incr].showInSection).toBe('aboutApplicant1');
-    expect(applicant1Sequence[incr].getNextStep({})).toBe('/task-list');
-
-    expect(applicant1Sequence[++incr].url).toBe('/upload-your-documents');
     expect(applicant1Sequence[incr].showInSection).toBe('aboutApplicant1');
     expect(applicant1Sequence[incr].getNextStep({})).toBe('/task-list');
   });

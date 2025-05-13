@@ -17,7 +17,9 @@
 
 {% macro taskStatus(item) %}
   {% set statusClass = "" %}
-  {%if item.status == 'IN_PROGRESS' %}
+  {% if item.status == 'IN_PROGRESS' %}
+    {% set statusClass = "govuk-tag--light-blue" %}
+  {% elif item.status == 'COMPLETED' %}
     {% set statusClass = "govuk-tag--blue" %}
   {% elif item.status == 'NOT_STARTED' or item.status == 'CAN_NOT_START_YET' %}
     {% set statusClass = "govuk-tag--grey"%}
