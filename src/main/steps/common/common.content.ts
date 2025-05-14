@@ -136,6 +136,11 @@ const en = {
     minutes: 'minute',
     seconds: 'seconds',
   },
+  banner: {
+    enabled: true,
+    titleText: 'You are using a new service',
+    messageHtml: 'Hello, this is a new service. Your feedback will help us to improve it.',
+  },
   saveAndReloginLink: SAVE_AND_RELOGIN,
 };
 
@@ -262,6 +267,11 @@ const cy: typeof en = {
     twoMinutes: '2 munudau',
     minutes: 'munud',
     seconds: 'eiliadau',
+  },
+  banner: {
+    enabled: true,
+    titleText: 'Welsh: You are using a new service',
+    messageHtml: 'Welsh: Hello, this is a new service. Your feedback will help us to improve it.',
   },
   saveAndReloginLink: SAVE_AND_RELOGIN,
 };
