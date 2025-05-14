@@ -1,5 +1,6 @@
 {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
 {% from "govuk/components/footer/macro.njk" import govukFooter %}
+{% from "govuk/components/notification-banner/macro.njk" import govukNotificationBanner %}
 
 {% extends "govuk/template.njk" %}
 
@@ -98,6 +99,13 @@ ADOP-1231-LAPortal-Welsh-Translation starts #}
   {% block backLink %}
     <a href="#" class="govuk-back-link">{{ back }}</a>
   {% endblock %}
+
+  {% if banner.enabled == true %}
+    {% block notificationBanner %}
+      {% include "./notification-banner.njk" %}
+    {% endblock %}
+  {% endif %}
+
     {% block modal %}
       {% include "./timeout-dialog.njk" %}
     {% endblock %}
@@ -113,7 +121,6 @@ ADOP-1231-LAPortal-Welsh-Translation starts #}
          <span class="govuk-caption-l">{{ section }}</span>
     {% endif %}
             {% block page_content %}
-              {% include "./notification-banner.njk" %}
               {% if title %}
                 <h1 class="govuk-heading-l govuk-!-margin-bottom-0">{{ title }}</h1>
               {% endif %}
