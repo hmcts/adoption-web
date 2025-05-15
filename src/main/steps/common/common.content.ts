@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { capitalize } from 'lodash';
+import config from 'config';
 
 import { CaseWithId } from '../../app/case/case';
 import { Fee, State } from '../../app/case/definition';
@@ -137,9 +138,9 @@ const en = {
     seconds: 'seconds',
   },
   banner: {
-    enabled: true,
-    titleText: 'You are using a new service',
-    messageHtml: 'Hello, this is a new service. Your feedback will help us to improve it.',
+    enabled: () => config.get('notificationBanner.enabled'),
+    titleText: () => config.get('notificationBanner.titleText.en'),
+    messageHtml: () => config.get('notificationBanner.messageHtml.en'),
   },
   saveAndReloginLink: SAVE_AND_RELOGIN,
 };
@@ -269,9 +270,9 @@ const cy: typeof en = {
     seconds: 'eiliadau',
   },
   banner: {
-    enabled: true,
-    titleText: 'Welsh: You are using a new service',
-    messageHtml: 'Welsh: Hello, this is a new service. Your feedback will help us to improve it.',
+    enabled: () => config.get('notificationBanner.enabled'),
+    titleText: () => config.get('notificationBanner.titleText.cy'),
+    messageHtml: () => config.get('notificationBanner.messageHtml.cy'),
   },
   saveAndReloginLink: SAVE_AND_RELOGIN,
 };
