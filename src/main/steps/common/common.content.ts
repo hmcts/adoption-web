@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { capitalize } from 'lodash';
 import config from 'config';
+import { capitalize } from 'lodash';
 
 import { CaseWithId } from '../../app/case/case';
 import { Fee, State } from '../../app/case/definition';
