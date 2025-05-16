@@ -130,8 +130,8 @@ nodejs:
     SWANSEA_FAMILY_COURT_EMAIL: 'swanseaadoptionapplication@mailinator.com'
     WREXHAM_FAMILY_COURT_EMAIL: 'wrexhamadoptionapplication@mailinator.com'
     FALLBACK_EMAIL_ID_VALUE: 'adoptionproject@mailinator.com'
-
-    BANNER_ENABLED: true
+    # Notification Banner
+    BANNER_ENABLED: 'true'
     BANNER_TITLE_TEXT_EN: 'Scheduled Maintenance'
     BANNER_TITLE_TEXT_CY: 'Cynhelir cynnal a chadw'
     BANNER_MESSAGE_HTML_EN: 'Scheduled maintenance on 28th September 2024 from 8:00 AM to 9:00 AM. The service will be unavailable during this time.'

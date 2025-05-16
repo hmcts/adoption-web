@@ -426,7 +426,7 @@ adoption:
     family-court-Wrexham: 'Wrexham County & Family Court'
 
 notificationBanner:
-  enabled: false
+  enabled: 'false'
   titleText:
     en: 'Important'
     cy: 'Pwysig'
