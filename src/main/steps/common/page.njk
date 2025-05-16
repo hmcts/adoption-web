@@ -100,7 +100,7 @@ ADOP-1231-LAPortal-Welsh-Translation starts #}
     <a href="#" class="govuk-back-link">{{ back }}</a>
   {% endblock %}
 
-  {% if banner.enabled() == true %}
+  {% if banner.enabled() == "true" %}
     {% block notificationBanner %}
       {% include "./notification-banner.njk" %}
     {% endblock %}
