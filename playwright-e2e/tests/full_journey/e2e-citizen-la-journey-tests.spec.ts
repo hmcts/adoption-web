@@ -144,8 +144,8 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       await laSignInPage.navigateTo();
 
       if (toggleBanner.bannerEnabled) {
-        await expect(app.basePage.banner.bannerTitle).toBeVisible({timeout: 500});
-        await expect(app.basePage.banner.bannerText).toBeVisible({timeout: 500});
+        await expect(app.basePage.banner.bannerTitle).toBeVisible({ timeout: 500 });
+        await expect(app.basePage.banner.bannerText).toBeVisible({ timeout: 500 });
       }
 
       await laSignInPage.startLAJourney(referenceNum, childFullname);

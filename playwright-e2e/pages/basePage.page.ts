@@ -1,5 +1,6 @@
 import { type Locator, type Page } from '@playwright/test';
 import { expect } from '@playwright/test';
+
 import Banner from '../components/banner';
 export default class BasePage {
   readonly page: Page;
