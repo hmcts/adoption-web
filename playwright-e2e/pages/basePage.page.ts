@@ -1,5 +1,6 @@
 import { type Locator, type Page } from '@playwright/test';
 import { expect } from '@playwright/test';
+import Banner from '../components/banner';
 export default class BasePage {
   readonly page: Page;
   readonly yesRadioButton: Locator;
@@ -14,6 +15,7 @@ export default class BasePage {
   readonly saveAsDraft: Locator;
   readonly continueWithYourApplication: Locator;
   readonly backLink: Locator;
+  readonly banner: Banner;
   readonly postcode: Locator;
   readonly findAddress: Locator;
   readonly selectAddress: Locator;
@@ -38,6 +40,7 @@ export default class BasePage {
     this.saveAsDraft = page.getByRole('button', { name: 'Save as draft' });
     this.continueWithYourApplication = page.getByRole('button', { name: 'Save as draft' });
     this.backLink = page.getByRole('link', { name: 'Back', exact: true });
+    this.banner = new Banner(page);
     this.postcode = page.getByLabel('Postcode');
     this.findAddress = page.getByRole('button', { name: 'Find address' });
     this.selectAddress = page.getByLabel('Select an address');

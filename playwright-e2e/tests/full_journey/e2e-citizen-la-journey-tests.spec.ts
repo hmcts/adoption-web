@@ -6,6 +6,7 @@ import { runAccessibilityScan } from '../../helpers/accessibilityHelper';
 import * as e2eJourneyHelper from '../../helpers/e2eJourneyHelper';
 import { setupUser, teardownUser } from '../../hooks/createDeleteUser.hook';
 import App from '../../pages/app.page';
+import { toggleBanner } from '../../utils/toggles';
 
 dotenv.config();
 
@@ -141,6 +142,12 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       await citSubmittedPage.clickSignOutLink();
 
       await laSignInPage.navigateTo();
+
+      if (toggleBanner.bannerEnabled) {
+        await expect(app.basePage.banner.bannerTitle).toBeVisible({timeout: 500});
+        await expect(app.basePage.banner.bannerText).toBeVisible({timeout: 500});
+      }
+
       await laSignInPage.startLAJourney(referenceNum, childFullname);
       await laGettingStartedPage.laGettingStarted();
       await laChildDetailsPage.clickBirthCertificateDetailsSection();
