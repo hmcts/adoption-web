@@ -6,7 +6,7 @@ import { expect } from '../fixtures/fixtures';
 import { runAccessibilityScan } from '../helpers/accessibilityHelper';
 import { setupUser, teardownUser } from '../hooks/createDeleteUser.hook';
 import App from '../pages/app.page';
-import { toggleConfig } from '../utils/toggles';
+import { toggleBanner, toggleConfig } from '../utils/toggles';
 import { urlConfig } from '../utils/urls';
 
 dotenv.config();
@@ -52,7 +52,7 @@ test.describe('smoke test', () => {
     const childNames = await app.childNameCreate();
 
     await app.page.goto(urlConfig.citizenStartUrl);
-    if (toggleConfig.bannerEnabled) {
+    if (toggleBanner.bannerEnabled) {
       await expect(app.basePage.banner.bannerTitle).toBeVisible({ timeout: 500 });
       await expect(app.basePage.banner.bannerText).toBeVisible({ timeout: 500 });
     }
