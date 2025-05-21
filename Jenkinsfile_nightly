@@ -10,6 +10,7 @@ properties([
       defaultValue: '2',
       description: 'Number of workers running functional tests'),
     string(name: 'ENVIRONMENT', defaultValue: 'aat', description: 'The environment you would like to point Playwright at'),
+    string(name: 'BANNER_ENABLED', defaultValue: 'false', description: 'enable if required to test notification banner'),
   ])
 ])
 
