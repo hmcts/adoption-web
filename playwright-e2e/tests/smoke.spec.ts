@@ -2,7 +2,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { test as base } from '@playwright/test';
 import * as dotenv from 'dotenv';
 
-import { expect } from '../fixtures/fixtures'
+import { expect } from '../fixtures/fixtures';
 import { runAccessibilityScan } from '../helpers/accessibilityHelper';
 import { setupUser, teardownUser } from '../hooks/createDeleteUser.hook';
 import App from '../pages/app.page';
@@ -53,10 +53,10 @@ test.describe('smoke test', () => {
 
     await app.page.goto(urlConfig.citizenStartUrl);
     if (toggleConfig.bannerEnabled) {
-      await expect(app.basePage.banner.bannerTitle).toBeVisible({timeout: 500});
-      await expect(app.basePage.banner.bannerText).toBeVisible({timeout: 500});
+      await expect(app.basePage.banner.bannerTitle).toBeVisible({ timeout: 500 });
+      await expect(app.basePage.banner.bannerText).toBeVisible({ timeout: 500 });
     }
-    
+
     await app.signIn.navigateTo();
     await app.signIn.signIn(userEmail, userPassword);
     await app.numberOfApplicants.numberOfApplication(applicantNumber);
