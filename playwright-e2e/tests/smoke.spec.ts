@@ -49,6 +49,8 @@ test.describe('smoke test', () => {
     const appOneName = await app.applicantOneNameCreate();
     const childNames = await app.childNameCreate();
 
+    // navigate to eligibility/start
+
     await app.signIn.navigateTo();
     await app.signIn.signIn(userEmail, userPassword);
     await app.numberOfApplicants.numberOfApplication(applicantNumber);
@@ -82,10 +84,6 @@ test.describe('smoke test', () => {
     await app.reviewSubmit.statementOfTruthOne(appOneName.appOneFullname);
     await app.reviewSubmit.fillCardDetails(appOneName.appOneFullname, userEmail, postcode1);
 
-    // const caseIdLocator = app.page.locator('.govuk-panel__body strong');
-    const element = await app.page.locator('.govuk-panel.govuk-panel--confirmation .govuk-panel__body strong').first();
-    const someText = await element.textContent();
-    console.log(someText);
     await app.page.pause();
 
     await runAccessibilityScan(makeAxeBuilder, testInfo); //Axe-core accessibility scan using helper function
