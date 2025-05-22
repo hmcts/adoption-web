@@ -8,6 +8,7 @@ import { CITChildDoBPage } from '../page-objects/citizen/child-details/citChildD
 import { CITChildFullNameAfterAdoptionPage } from '../page-objects/citizen/child-details/citChildFullNameAfterAdoptionPage.page';
 import { CITChildFullNamePage } from '../page-objects/citizen/child-details/citChildFullNamePage.page';
 import { CITDateChildMovedInPage } from '../page-objects/citizen/date-child-moved-in/citDateChildMovedInPage.page';
+import { StartPage } from '../page-objects/citizen/eligibility/start.page';
 import { CITSubmittedPage } from '../page-objects/citizen/payments/citSubmittedPage.page';
 import { CITSaveAsDraftPage } from '../page-objects/citizen/save-as-draft/citSaveAsDraftPage.page';
 import { CITTaskListPage } from '../page-objects/citizen/task-list/citTaskListPage.page';
@@ -47,6 +48,7 @@ import { LAChildHasOtherSiblingsPage } from '../page-objects/local-authority/sib
 import SignIn from '../pages/signInPage.page';
 
 type CreateFixtures = {
+  startPage: StartPage;
   signIn: SignIn;
   citSaveAsDraftPage: CITSaveAsDraftPage;
   citApplyingWithPage: CITApplyingWithPage;
@@ -95,6 +97,9 @@ type CreateFixtures = {
 };
 
 export const test = base.extend<CreateFixtures>({
+  startPage: async ({ page }, use) => {
+    await use(new StartPage(page));
+  },
   signIn: async ({ page }, use) => {
     await use(new SignIn(page));
   },
