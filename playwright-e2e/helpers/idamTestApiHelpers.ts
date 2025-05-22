@@ -4,12 +4,19 @@ import qs from 'qs';
 import { v4 as uuidv4 } from 'uuid';
 
 dotenv.config();
+
+// Cached access token
+let cachedAccessToken: string | null = null;
+
 /**
  * Function to get an access token from the IDAM service
  * @returns {Promise<string | null>} The access token if successful, otherwise null
  */
-
 export async function getAccessToken(): Promise<string | null> {
+  if (cachedAccessToken) {
+    console.log('Returning cached token');
+    return cachedAccessToken;
+  }
   try {
     const data = {
       grant_type: 'client_credentials',
@@ -27,7 +34,8 @@ export async function getAccessToken(): Promise<string | null> {
     };
 
     const response = await axios.post(options.url!, options.data, options);
-    return response.data.access_token;
+    cachedAccessToken = response.data.access_token; // Cache the token
+    return cachedAccessToken;
   } catch (error) {
     console.error('Error fetching access token:', error);
     return null;
@@ -47,7 +55,6 @@ export async function createCitizenUser(token: string): Promise<{ email: string;
   const password = process.env.IDAM_CITIZEN_USER_PASSWORD as string;
   const email = `TEST_ADOPTION_USER_citizen-user.${uniqueId}@test.local`;
 
-  console.log('Token:', token);
   const userCreationOptions: AxiosRequestConfig = {
     method: 'POST',
     headers: {

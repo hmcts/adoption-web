@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import config from 'config';
 import { capitalize } from 'lodash';
 
 import { CaseWithId } from '../../app/case/case';
@@ -136,6 +137,11 @@ const en = {
     minutes: 'minute',
     seconds: 'seconds',
   },
+  banner: {
+    enabled: () => config.get('notificationBanner.enabled'),
+    titleText: () => config.get('notificationBanner.titleText.en'),
+    messageHtml: () => config.get('notificationBanner.messageHtml.en'),
+  },
   saveAndReloginLink: SAVE_AND_RELOGIN,
 };
 
@@ -263,6 +269,11 @@ const cy: typeof en = {
     minutes: 'munud',
     seconds: 'eiliadau',
   },
+  banner: {
+    enabled: () => config.get('notificationBanner.enabled'),
+    titleText: () => config.get('notificationBanner.titleText.cy'),
+    messageHtml: () => config.get('notificationBanner.messageHtml.cy'),
+  },
   saveAndReloginLink: SAVE_AND_RELOGIN,
 };
 
@@ -293,6 +304,7 @@ export const generatePageContent = ({
   const serviceName = getServiceName(commonTranslations);
   const contactEmail = 'todo@test.com';
   const isAmendableStates = userCase && [State.Draft].includes(userCase.state!);
+  const bodyClasses = 'govuk-frontend-supported';
 
   const content: CommonContent = {
     ...commonTranslations,
@@ -308,6 +320,7 @@ export const generatePageContent = ({
     eligibilityPage,
     fee,
     isAmendableStates,
+    bodyClasses,
   };
 
   if (pageContent) {
@@ -337,6 +350,7 @@ export type CommonContent = typeof en & {
   eligibilityPage?: boolean;
   fee?: Fee;
   isAmendableStates?: boolean;
+  bodyClasses?: string;
 };
 
 export type Language = 'en' | 'cy';

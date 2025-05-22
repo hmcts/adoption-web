@@ -382,6 +382,12 @@ nodejs:
     SWANSEA_FAMILY_COURT_EMAIL: 'swanseaadoptionapplication@mailinator.com'
     WREXHAM_FAMILY_COURT_EMAIL: 'wrexhamadoptionapplication@mailinator.com'
 
+    BANNER_ENABLED: 'false'
+    BANNER_TITLE_TEXT_EN: 'Important'
+    BANNER_TITLE_TEXT_CY: 'Pwysig'
+    BANNER_MESSAGE_HTML_EN: 'Scheduled maintenance on 28th September 2023 from 8:00 AM to 9:00 AM. The service will be unavailable during this time.'
+    BANNER_MESSAGE_HTML_CY: 'Cynhelir cynnal a chadw ar 28ain Medi 2023 rhwng 8:00 AM a 9:00 AM. Bydd y gwasanaeth ar gael yn ystod y cyfnod hwn.'
+
   keyVaults:
     adoption:
       secrets:

@@ -2,9 +2,12 @@ import AxeBuilder from '@axe-core/playwright';
 import { test as base } from '@playwright/test';
 import * as dotenv from 'dotenv';
 
+import { expect } from '../fixtures/fixtures';
 import { runAccessibilityScan } from '../helpers/accessibilityHelper';
 import { setupUser, teardownUser } from '../hooks/createDeleteUser.hook';
 import App from '../pages/app.page';
+import { toggleBanner, toggleConfig } from '../utils/toggles';
+import { urlConfig } from '../utils/urls';
 
 dotenv.config();
 
@@ -48,6 +51,12 @@ test.describe('smoke test', () => {
     const appOneName = await app.applicantOneNameCreate();
     const childNames = await app.childNameCreate();
 
+    await app.page.goto(urlConfig.citizenStartUrl);
+    if (toggleBanner.bannerEnabled) {
+      await expect(app.basePage.banner.bannerTitle).toBeVisible({ timeout: 500 });
+      await expect(app.basePage.banner.bannerText).toBeVisible({ timeout: 500 });
+    }
+
     await app.signIn.navigateTo();
     await app.signIn.signIn(userEmail, userPassword);
     await app.numberOfApplicants.numberOfApplication(applicantNumber);
@@ -73,16 +82,14 @@ test.describe('smoke test', () => {
 
     // Submit
     await app.tasklist.reviewAndSubmit.click();
-    await app.pcq.noPcqAnswers();
+    if (toggleConfig.pcqTestsEnabled) {
+      await app.pcq.noPcqAnswers();
+    }
     await app.reviewSubmit.reviewAnswers(applicantNumber);
     await app.basePage.clickSaveAndContinue();
     await app.reviewSubmit.statementOfTruthOne(appOneName.appOneFullname);
     await app.reviewSubmit.fillCardDetails(appOneName.appOneFullname, userEmail, postcode1);
 
-    // const caseIdLocator = app.page.locator('.govuk-panel__body strong');
-    const element = await app.page.locator('.govuk-panel.govuk-panel--confirmation .govuk-panel__body strong').first();
-    const someText = await element.textContent();
-    console.log(someText);
     await app.page.pause();
 
     await runAccessibilityScan(makeAxeBuilder, testInfo); //Axe-core accessibility scan using helper function

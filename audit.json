@@ -56,5 +56,8 @@
   "10112_Session Management Response Identified_https://adoption-web.aat.platform.hmcts.net/sitemap.xml_GET": "ignore",
   "10049_Non-Storable Content_https://adoption-web.aat.platform.hmcts.net/_GET": "ignore",
   "10049_Non-Storable Content_https://adoption-web.aat.platform.hmcts.net/robots.txt_GET": "ignore",
-  "10049_Non-Storable Content_https://adoption-web.aat.platform.hmcts.net/sitemap.xml_GET": "ignore"
+  "10049_Non-Storable Content_https://adoption-web.aat.platform.hmcts.net/sitemap.xml_GET": "ignore",
+  "10096_Timestamp Disclosure - Unix_https://adoption-web.aat.platform.hmcts.net_GET": "ignore",
+  "10049_Non-Storable Content_https://adoption-web.aat.platform.hmcts.net_GET": "ignore",
+  "10112_Session Management Response Identified_https://adoption-web.aat.platform.hmcts.net_GET": "ignore"
 }

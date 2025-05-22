@@ -1,7 +1,16 @@
 import { test as base } from '@playwright/test';
 
+import { CITAdultSocialWorkerDetailsPage } from '../page-objects/citizen/adoption-agency-and-social-worker/citAdultSocialWorkerDetailsPage.page';
+import { CITChildSocialWorkerDetailsPage } from '../page-objects/citizen/adoption-agency-and-social-worker/citChildSocialWorkerDetailsPage.page';
+import { CITOtherAdoptionAgencyPage } from '../page-objects/citizen/adoption-agency-and-social-worker/citOtherAdoptionAgencyPage.page';
 import { CITApplyingWithPage } from '../page-objects/citizen/applying/citApplyingWithPage.page';
+import { CITChildDoBPage } from '../page-objects/citizen/child-details/citChildDoBPage.page';
+import { CITChildFullNameAfterAdoptionPage } from '../page-objects/citizen/child-details/citChildFullNameAfterAdoptionPage.page';
+import { CITChildFullNamePage } from '../page-objects/citizen/child-details/citChildFullNamePage.page';
+import { CITDateChildMovedInPage } from '../page-objects/citizen/date-child-moved-in/citDateChildMovedInPage.page';
+import { StartPage } from '../page-objects/citizen/eligibility/start.page';
 import { CITSubmittedPage } from '../page-objects/citizen/payments/citSubmittedPage.page';
+import { CITSaveAsDraftPage } from '../page-objects/citizen/save-as-draft/citSaveAsDraftPage.page';
 import { CITTaskListPage } from '../page-objects/citizen/task-list/citTaskListPage.page';
 import { LAChildNationalityPage } from '../page-objects/local-authority/birth-certificate/laChildNationalityPage.page';
 import { LAChildSexAtBirthPage } from '../page-objects/local-authority/birth-certificate/laChildSexAtBirthPage.page';
@@ -39,9 +48,18 @@ import { LAChildHasOtherSiblingsPage } from '../page-objects/local-authority/sib
 import SignIn from '../pages/signInPage.page';
 
 type CreateFixtures = {
+  startPage: StartPage;
   signIn: SignIn;
+  citSaveAsDraftPage: CITSaveAsDraftPage;
   citApplyingWithPage: CITApplyingWithPage;
   citTaskListPage: CITTaskListPage;
+  citDateChildMovedInPage: CITDateChildMovedInPage;
+  citChildFullNamePage: CITChildFullNamePage;
+  citChildFullNameAfterAdoptionPage: CITChildFullNameAfterAdoptionPage;
+  citChildDoBPage: CITChildDoBPage;
+  citChildSocialWorkerDetailsPage: CITChildSocialWorkerDetailsPage;
+  citAdultSocialWorkerDetailsPage: CITAdultSocialWorkerDetailsPage;
+  citOtherAdoptionAgencyPage: CITOtherAdoptionAgencyPage;
   citSubmittedPage: CITSubmittedPage;
   laSignInPage: LASignInPage;
   laGettingStartedPage: LAGettingStartedPage;
@@ -79,14 +97,41 @@ type CreateFixtures = {
 };
 
 export const test = base.extend<CreateFixtures>({
+  startPage: async ({ page }, use) => {
+    await use(new StartPage(page));
+  },
   signIn: async ({ page }, use) => {
     await use(new SignIn(page));
+  },
+  citSaveAsDraftPage: async ({ page }, use) => {
+    await use(new CITSaveAsDraftPage(page));
   },
   citApplyingWithPage: async ({ page }, use) => {
     await use(new CITApplyingWithPage(page));
   },
   citTaskListPage: async ({ page }, use) => {
     await use(new CITTaskListPage(page));
+  },
+  citDateChildMovedInPage: async ({ page }, use) => {
+    await use(new CITDateChildMovedInPage(page));
+  },
+  citChildFullNamePage: async ({ page }, use) => {
+    await use(new CITChildFullNamePage(page));
+  },
+  citChildFullNameAfterAdoptionPage: async ({ page }, use) => {
+    await use(new CITChildFullNameAfterAdoptionPage(page));
+  },
+  citChildDoBPage: async ({ page }, use) => {
+    await use(new CITChildDoBPage(page));
+  },
+  citChildSocialWorkerDetailsPage: async ({ page }, use) => {
+    await use(new CITChildSocialWorkerDetailsPage(page));
+  },
+  citAdultSocialWorkerDetailsPage: async ({ page }, use) => {
+    await use(new CITAdultSocialWorkerDetailsPage(page));
+  },
+  citOtherAdoptionAgencyPage: async ({ page }, use) => {
+    await use(new CITOtherAdoptionAgencyPage(page));
   },
   citSubmittedPage: async ({ page }, use) => {
     await use(new CITSubmittedPage(page));
