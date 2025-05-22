@@ -6,6 +6,6 @@ export default class Banner {
 
   constructor(page: Page) {
     this.bannerTitle = page.getByRole('heading', { name: 'Important', exact: true });
-    this.bannerText = page.getByText('Scheduled maintenance');
+    this.bannerText = page.getByText('Scheduled maintenance on');
   }
 }
