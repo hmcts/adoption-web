@@ -5,7 +5,7 @@ export default class Banner {
   readonly bannerText: Locator;
 
   constructor(page: Page) {
-    this.bannerTitle = page.getByRole('heading', { name: 'Important', exact: true });
+    this.bannerTitle = page.getByRole('heading', { name: 'Important' });
     this.bannerText = page.getByText('Scheduled maintenance');
   }
 }
