@@ -78,6 +78,8 @@ export class CaseApi {
         return null as any;
       }
     }
+
+    //TODO: remove this
     if (
       cases.filter(caseElement => caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted)
         .length !==
@@ -86,6 +88,8 @@ export class CaseApi {
       throw new Error("Not all OR few cases assigned to the user aren't in right state.");
     }
 
+    //TODO alter this logic to return the oldest case that is not in Submitted or LaSubmitted state
+    // log.error where there is more than one case in the list
     const {
       id,
       state,
