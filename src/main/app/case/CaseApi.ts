@@ -44,6 +44,7 @@ export class CaseApi {
   }
 
   async getCase(cases: CcdV1Response[]): Promise<CaseWithId | false> {
+    //TODO comment out if statement to create multiple cases for the same user
     if (cases.length === 0) {
       return false;
     }
