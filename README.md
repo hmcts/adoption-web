@@ -11,6 +11,10 @@ Running the application requires the following tools to be installed in your env
 - [Docker](https://www.docker.com)
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)
 
+Request the following files from a colleague:
+- .env
+- config/local.yaml
+
 ### Running the application
 
 Ensure the prerequisites are met.
@@ -27,6 +31,9 @@ Ensure the prerequisites are met.
 - Connect to F5 VPN:<br>
   Go to the webpage https://portal.platform.hmcts.net/ and follow the instructions to connect to F5 VPN.  Once the F5 scan has taken place and you are taken to the F5 landing page, **make sure you click the VPN button** to actually start the VPN.<br>
   (This is needed because we connect to APIs deployed in the AAT environment while running the application locally.)
+
+  Warning: You may need to **disconnect from the GlobalConnect VPN** as it can conflict. The F5 VPN will then appear to be working but you'll be unable to access idam, etc. Example error:
+  `[service-auth-token] Error in refreshing service auth token  getaddrinfo ENOTFOUND rpe-service-auth-provider-aat.service.core-compute-aat.internal undefined`
 
 - Log in to Azure:<br>
   Use the terminal where you are going to launch the application from. Run the Azure CLI command below and follow the instructions. When prompted in the terminal, enter the number corresponding to the subscription named `DCD-CNP-DEV` (the tenant should always be `CJS Common Platform`).<br>
@@ -64,8 +71,15 @@ Remember to uncomment this code before you commit any changes.
    yarn install
 ```
 
-> Troubleshooting:
-> If you have issues check your Node version and use Node Version Manager to change to a supported version if required:
+> ##### Troubleshooting:
+>
+> Node Sass installation issues are generally because Python 3.12+ doesn't include distutils.  The replacement is setuptools:
+>
+> ```bash
+> brew install python-setuptools
+> ```
+>
+> If you have other issues check your Node version and use Node Version Manager to change to a supported version if required:
 >
 > ```bash
 > nvm use 18.15.0
