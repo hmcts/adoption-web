@@ -6,7 +6,7 @@
 
 Running the application requires the following tools to be installed in your environment:
 
-- [Node.js](https://nodejs.org/) v12.0.0 to 18.15.0
+- [Node.js](https://nodejs.org/) v12.0.0 to 18.15.0, 22.15.0
 - [yarn](https://yarnpkg.com/)
 - [Docker](https://www.docker.com)
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)
@@ -82,7 +82,7 @@ Remember to uncomment this code before you commit any changes.
 > If you have other issues check your Node version and use Node Version Manager to change to a supported version if required:
 >
 > ```bash
-> nvm use 18.15.0
+> nvm use 22.15.0
 > ```
 
 - Bundle:
