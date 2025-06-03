@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import config from 'config';
 import { capitalize } from 'lodash';
 
 import { CaseWithId } from '../../app/case/case';
@@ -136,6 +137,11 @@ const en = {
     minutes: 'minute',
     seconds: 'seconds',
   },
+  banner: {
+    enabled: () => config.get('notificationBanner.enabled'),
+    titleText: () => config.get('notificationBanner.titleText.en'),
+    messageHtml: () => config.get('notificationBanner.messageHtml.en'),
+  },
   saveAndReloginLink: SAVE_AND_RELOGIN,
 };
 
@@ -262,6 +268,11 @@ const cy: typeof en = {
     twoMinutes: '2 munudau',
     minutes: 'munud',
     seconds: 'eiliadau',
+  },
+  banner: {
+    enabled: () => config.get('notificationBanner.enabled'),
+    titleText: () => config.get('notificationBanner.titleText.cy'),
+    messageHtml: () => config.get('notificationBanner.messageHtml.cy'),
   },
   saveAndReloginLink: SAVE_AND_RELOGIN,
 };
