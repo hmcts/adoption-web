@@ -65,7 +65,7 @@ export class CaseApi {
         );
         const { id, state, case_data: caseData } = sortedCasesByDateSubmittedDesc[0];
         return { ...fromApiFormat(caseData), id: id.toString(), state };
-      } 
+      }
       if (submittedCasesCount === cases.length) {
         return null as any; //return false?
       }
@@ -73,10 +73,16 @@ export class CaseApi {
 
     const nonSubmittedCasesSortedByOldest = cases
       .filter(caseElement => !isSubmittedOrLaSubmitted(caseElement))
-      .sort((a, b) => a.case_data.createdDate <= b.case_data.createdDate ? -1 : 1);
+      .sort((a, b) => (a.case_data.createdDate <= b.case_data.createdDate ? -1 : 1));
 
     if (nonSubmittedCasesSortedByOldest.length > 1) {
-      this.logger.error('More than one non-submitted case found for the user.');
+      const caseIds = nonSubmittedCasesSortedByOldest
+        .map(c => c.case_data.hyphenatedCaseRef?.replace(/-/g, ''))
+        .filter(Boolean)
+        .join(', ');
+      this.logger.error(
+        `More than one case that has not been Submitted or LaSubmitted found for user. caseIds: ${caseIds}`
+      );
     }
     // Return the oldest case that is not in Submitted or LaSubmitted state
     const { id, state, case_data: caseData } = nonSubmittedCasesSortedByOldest[0];
