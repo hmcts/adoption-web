@@ -44,60 +44,42 @@ export class CaseApi {
   }
 
   async getCase(cases: CcdV1Response[]): Promise<CaseWithId | false> {
-    //TODO comment out if statement to create multiple cases for the same user
     if (cases.length === 0) {
       return false;
     }
 
-    if (
-      cases.filter(caseElement => caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted)
-        .length === cases.length
-    ) {
-      if (
-        cases.filter(
-          caseElement =>
-            moment(new Date(caseElement.case_data.dateSubmitted)).format('YYYY-MM-DD') ===
-            moment(new Date()).format('YYYY-MM-DD')
-        ).length !== 0
-      ) {
-        const {
-          id,
-          state,
-          case_data: caseData,
-        } = cases
-          .filter(
-            caseElement =>
-              moment(new Date(caseElement.case_data.dateSubmitted)).format('YYYY-MM-DD') ===
-              moment(new Date()).format('YYYY-MM-DD')
-          )
-          .sort((a, b) => {
-            return a.case_data.dateSubmitted >= b.case_data.dateSubmitted ? -1 : 1;
-          })[0];
+    const isSubmittedOrLaSubmitted = (caseElement: CcdV1Response) =>
+      caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted;
 
+    const isSubmittedToday = (caseElement: CcdV1Response) =>
+      moment(new Date(caseElement.case_data.dateSubmitted)).format('YYYY-MM-DD') ===
+      moment(new Date()).format('YYYY-MM-DD');
+
+    const submittedCasesCount = cases.filter(isSubmittedOrLaSubmitted).length;
+
+    if (submittedCasesCount > 0) {
+      const casesSubmittedToday = cases.filter(isSubmittedToday);
+      if (casesSubmittedToday.length > 0) {
+        const sortedCasesByDateSubmittedDesc = casesSubmittedToday.sort((a, b) =>
+          a.case_data.dateSubmitted >= b.case_data.dateSubmitted ? -1 : 1
+        );
+        const { id, state, case_data: caseData } = sortedCasesByDateSubmittedDesc[0];
         return { ...fromApiFormat(caseData), id: id.toString(), state };
-      } else {
-        return null as any;
+      } 
+      if (submittedCasesCount === cases.length) {
+        return null as any; //return false?
       }
     }
 
-    //TODO: remove this
-    if (
-      cases.filter(caseElement => caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted)
-        .length !==
-      cases.length - 1
-    ) {
-      throw new Error("Not all OR few cases assigned to the user aren't in right state.");
-    }
+    const nonSubmittedCases = cases.filter(
+      caseElement => !isSubmittedOrLaSubmitted(caseElement)
+    );
 
-    //TODO alter this logic to return the oldest case that is not in Submitted or LaSubmitted state
-    // log.error where there is more than one case in the list
-    const {
-      id,
-      state,
-      case_data: caseData,
-    } = cases.filter(
-      caseElement => caseElement.state !== State.Submitted && caseElement.state !== State.LaSubmitted
-    )[0];
+    if (nonSubmittedCases.length > 1) {
+      this.logger.error('More than one non-submitted case found for the user.');
+    }
+    // Return the oldest case that is not in Submitted or LaSubmitted state
+    const { id, state, case_data: caseData } = nonSubmittedCases[0];
     return { ...fromApiFormat(caseData), id: id.toString(), state };
   }
 
