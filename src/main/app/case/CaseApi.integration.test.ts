@@ -99,22 +99,25 @@ describe('CaseApi', () => {
     expect(mockLogger.error).toHaveBeenCalledWith('API Error POST https://example.com');
   });
 
-  test('Should throw an error if more than one cases are found in Draft', async () => {
+  test('Should log an error if more than one cases are found in Draft', async () => {
     const mockCase = {
       id: '1',
       state: State.Draft,
-      case_data: {},
+      case_data: {
+        hyphenatedCaseRef: '1234-5678-9101-1121',
+      },
     };
 
-    // mockedAxios.get.mockResolvedValue({
-    //   data: [mockCase, mockCase, mockCase],
-    // });
     mockedAxios.post.mockResolvedValue({
       data: { cases: [mockCase, mockCase, mockCase] },
     });
 
-    await expect(api.getOrCreateCase(serviceType, userDetails)).rejects.toThrow(
-      "Not all OR few cases assigned to the user aren't in right state."
+    await api.getOrCreateCase(serviceType, userDetails);
+
+    expect(mockLogger.error).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'More than one case that has not been Submitted or LaSubmitted found for user. caseIds: 1234567891011121, 1234567891011121, 1234567891011121'
+      )
     );
   });
 
