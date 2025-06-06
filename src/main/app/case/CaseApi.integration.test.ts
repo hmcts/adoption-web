@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 import { LoggerInstance } from 'winston';
 
 import { UserDetails } from '../controller/AppRequest';
@@ -154,31 +155,56 @@ describe('CaseApi', () => {
     });
   });
 
-  test('Should retrieve the first case if two cases found', async () => {
+  test('Should retrieve the most recently submitted case if two Submitted cases found', async () => {
     const firstMockCase = {
       id: '1',
-      state: State.Draft,
-      case_data: {},
+      state: State.LaSubmitted,
+      case_data: {
+        dateSubmitted: moment().set({ hour: 9, minute: 0, second: 0, millisecond: 0 }).format('YYYY-MM-DD HH:mm:ss'),
+      },
     };
-    // const secondMockCase = {
-    //   id: '2',
-    //   state: State.Draft,
-    //   case_data: {},
-    // };
+    const secondMockCase = {
+      id: '2',
+      state: State.Submitted,
+      case_data: {
+        dateSubmitted: moment().set({ hour: 14, minute: 0, second: 0, millisecond: 0 }).format('YYYY-MM-DD HH:mm:ss'),
+      },
+    };
 
     mockedAxios.post.mockResolvedValue({
-      data: { cases: [firstMockCase] },
+      data: { cases: [firstMockCase, secondMockCase] },
     });
-    // mockedAxios.get.mockResolvedValue({
-    //   data: [firstMockCase],
-    // });
 
     const userCase = await api.getOrCreateCase(serviceType, userDetails);
 
-    expect(userCase).toStrictEqual({
+    expect(userCase.id).toBe('2');
+    expect(userCase.state).toBe(State.Submitted);
+  });
+
+  test('Should retrieve the most oldest created case if two non-Submitted cases found', async () => {
+    const firstMockCase = {
       id: '1',
+      state: State.AwaitingPayment,
+      case_data: {
+        createdDate: moment().set({ hour: 9, minute: 0, second: 0, millisecond: 0 }).format('YYYY-MM-DD HH:mm:ss'),
+      },
+    };
+    const secondMockCase = {
+      id: '2',
       state: State.Draft,
+      case_data: {
+        createdDate: moment().set({ hour: 14, minute: 0, second: 0, millisecond: 0 }).format('YYYY-MM-DD HH:mm:ss'),
+      },
+    };
+
+    mockedAxios.post.mockResolvedValue({
+      data: { cases: [firstMockCase, secondMockCase] },
     });
+
+    const userCase = await api.getOrCreateCase(serviceType, userDetails);
+
+    expect(userCase.id).toBe('1');
+    expect(userCase.state).toBe(State.AwaitingPayment);
   });
 
   test('Should update case', async () => {
