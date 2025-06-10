@@ -73,7 +73,7 @@ export class CaseApi {
 
     const nonSubmittedCasesSortedByOldest = cases
       .filter(caseElement => !isSubmittedOrLaSubmitted(caseElement))
-      .sort((a, b) => (a.case_data.createdDate <= b.case_data.createdDate ? -1 : 1));
+      .sort((a, b) => (a.created_date <= b.created_date ? -1 : 1));
 
     if (nonSubmittedCasesSortedByOldest.length > 1) {
       const caseIds = nonSubmittedCasesSortedByOldest
@@ -223,6 +223,7 @@ interface ES<T> {
 export interface CcdV1Response {
   id: string;
   state: State;
+  created_date: string;
   case_data: CaseData;
 }
 
