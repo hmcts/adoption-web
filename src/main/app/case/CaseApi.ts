@@ -57,7 +57,7 @@ export class CaseApi {
 
     const submittedCasesCount = cases.filter(isSubmittedOrLaSubmitted).length;
 
-    if (submittedCasesCount > 0) {
+    if (submittedCasesCount === cases.length) {
       const casesSubmittedToday = cases.filter(isSubmittedToday);
       if (casesSubmittedToday.length > 0) {
         const sortedCasesByDateSubmittedDesc = casesSubmittedToday.sort((a, b) =>
@@ -66,9 +66,7 @@ export class CaseApi {
         const { id, state, case_data: caseData } = sortedCasesByDateSubmittedDesc[0];
         return { ...fromApiFormat(caseData), id: id.toString(), state };
       }
-      if (submittedCasesCount === cases.length) {
-        return null as any; //return false?
-      }
+      return null as any; // TODO return false?
     }
 
     const nonSubmittedCasesSortedByOldest = cases
