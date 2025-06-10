@@ -52,26 +52,27 @@ export class CaseApi {
       caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted;
 
     const isSubmittedToday = (caseElement: CcdV1Response) =>
-      moment(new Date(caseElement.case_data.dateSubmitted)).format('YYYY-MM-DD') ===
-      moment(new Date()).format('YYYY-MM-DD');
+      !!caseElement.case_data.dateSubmitted && moment(caseElement.case_data.dateSubmitted).isSame(moment(), 'day');
 
     const submittedCasesCount = cases.filter(isSubmittedOrLaSubmitted).length;
 
+    // If all cases are Submitted/LaSubmitted return either the last submitted case today or null
     if (submittedCasesCount === cases.length) {
       const casesSubmittedToday = cases.filter(isSubmittedToday);
       if (casesSubmittedToday.length > 0) {
-        const sortedCasesByDateSubmittedDesc = casesSubmittedToday.sort((a, b) =>
-          a.case_data.dateSubmitted >= b.case_data.dateSubmitted ? -1 : 1
-        );
-        const { id, state, case_data: caseData } = sortedCasesByDateSubmittedDesc[0];
+        const casesSubmittedTodayByOldest = casesSubmittedToday
+          .slice()
+          .sort((a, b) => moment(b.case_data.dateSubmitted).valueOf() - moment(a.case_data.dateSubmitted).valueOf());
+        const { id, state, case_data: caseData } = casesSubmittedTodayByOldest[0];
         return { ...fromApiFormat(caseData), id: id.toString(), state };
       }
-      return null as any; // TODO return false?
+      // Applications submitted but not on login day (null required by NewCaseRedirectController)
+      return null as any;
     }
 
     const nonSubmittedCasesSortedByOldest = cases
       .filter(caseElement => !isSubmittedOrLaSubmitted(caseElement))
-      .sort((a, b) => (a.created_date <= b.created_date ? -1 : 1));
+      .sort((a, b) => moment(a.created_date).valueOf() - moment(b.created_date).valueOf());
 
     if (nonSubmittedCasesSortedByOldest.length > 1) {
       const caseIds = nonSubmittedCasesSortedByOldest
