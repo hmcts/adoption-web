@@ -185,16 +185,14 @@ describe('CaseApi', () => {
     const firstMockCase = {
       id: '1',
       state: State.AwaitingPayment,
-      case_data: {
-        createdDate: moment().set({ hour: 9, minute: 0, second: 0, millisecond: 0 }).format('YYYY-MM-DD HH:mm:ss'),
-      },
+      created_date: moment().set({ hour: 9, minute: 0, second: 0, millisecond: 0 }).format('YYYY-MM-DD HH:mm:ss'),
+      case_data: {},
     };
     const secondMockCase = {
       id: '2',
       state: State.Draft,
-      case_data: {
-        createdDate: moment().set({ hour: 14, minute: 0, second: 0, millisecond: 0 }).format('YYYY-MM-DD HH:mm:ss'),
-      },
+      created_date: moment().set({ hour: 14, minute: 0, second: 0, millisecond: 0 }).format('YYYY-MM-DD HH:mm:ss'),
+      case_data: {},
     };
 
     mockedAxios.post.mockResolvedValue({
