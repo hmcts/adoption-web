@@ -159,15 +159,17 @@ describe('CaseApi', () => {
     const firstMockCase = {
       id: '1',
       state: State.LaSubmitted,
+      created_date: moment().set({ hour: 9, minute: 0, second: 0, millisecond: 0 }).format('YYYY-MM-DD HH:mm:ss'),
       case_data: {
-        dateSubmitted: moment().set({ hour: 9, minute: 0, second: 0, millisecond: 0 }).format('YYYY-MM-DD HH:mm:ss'),
+        dateSubmitted: moment().format('YYYY-MM-DD'),
       },
     };
     const secondMockCase = {
       id: '2',
       state: State.Submitted,
+      created_date: moment().set({ hour: 15, minute: 0, second: 0, millisecond: 0 }).format('YYYY-MM-DD HH:mm:ss'),
       case_data: {
-        dateSubmitted: moment().set({ hour: 14, minute: 0, second: 0, millisecond: 0 }).format('YYYY-MM-DD HH:mm:ss'),
+        dateSubmitted: moment().format('YYYY-MM-DD'),
       },
     };
 
