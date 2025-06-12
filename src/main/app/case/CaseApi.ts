@@ -62,7 +62,7 @@ export class CaseApi {
       if (casesSubmittedToday.length > 0) {
         const casesSubmittedTodayByOldest = casesSubmittedToday
           .slice()
-          .sort((a, b) => moment(b.case_data.dateSubmitted).valueOf() - moment(a.case_data.dateSubmitted).valueOf());
+          .sort((a, b) => moment(b.created_date).valueOf() - moment(a.created_date).valueOf());
         const { id, state, case_data: caseData } = casesSubmittedTodayByOldest[0];
         return { ...fromApiFormat(caseData), id: id.toString(), state };
       }
