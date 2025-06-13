@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 import { LoggerInstance } from 'winston';
 
 import { UserDetails } from '../controller/AppRequest';
@@ -99,22 +100,25 @@ describe('CaseApi', () => {
     expect(mockLogger.error).toHaveBeenCalledWith('API Error POST https://example.com');
   });
 
-  test('Should throw an error if more than one cases are found in Draft', async () => {
+  test('Should log an error if more than one cases are found in Draft', async () => {
     const mockCase = {
       id: '1',
       state: State.Draft,
-      case_data: {},
+      case_data: {
+        hyphenatedCaseRef: '1234-5678-9101-1121',
+      },
     };
 
-    // mockedAxios.get.mockResolvedValue({
-    //   data: [mockCase, mockCase, mockCase],
-    // });
     mockedAxios.post.mockResolvedValue({
       data: { cases: [mockCase, mockCase, mockCase] },
     });
 
-    await expect(api.getOrCreateCase(serviceType, userDetails)).rejects.toThrow(
-      "Not all OR few cases assigned to the user aren't in right state."
+    await api.getOrCreateCase(serviceType, userDetails);
+
+    expect(mockLogger.error).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'More than one case that has not been Submitted or LaSubmitted found for user. caseIds: 1234567891011121, 1234567891011121, 1234567891011121'
+      )
     );
   });
 
@@ -151,31 +155,56 @@ describe('CaseApi', () => {
     });
   });
 
-  test('Should retrieve the first case if two cases found', async () => {
+  test('Should retrieve the most recently submitted case if two Submitted cases found', async () => {
     const firstMockCase = {
       id: '1',
-      state: State.Draft,
-      case_data: {},
+      state: State.LaSubmitted,
+      created_date: moment().set({ hour: 9, minute: 0, second: 0, millisecond: 0 }).format('YYYY-MM-DD HH:mm:ss'),
+      case_data: {
+        dateSubmitted: moment().format('YYYY-MM-DD'),
+      },
     };
-    // const secondMockCase = {
-    //   id: '2',
-    //   state: State.Draft,
-    //   case_data: {},
-    // };
+    const secondMockCase = {
+      id: '2',
+      state: State.Submitted,
+      created_date: moment().set({ hour: 15, minute: 0, second: 0, millisecond: 0 }).format('YYYY-MM-DD HH:mm:ss'),
+      case_data: {
+        dateSubmitted: moment().format('YYYY-MM-DD'),
+      },
+    };
 
     mockedAxios.post.mockResolvedValue({
-      data: { cases: [firstMockCase] },
+      data: { cases: [firstMockCase, secondMockCase] },
     });
-    // mockedAxios.get.mockResolvedValue({
-    //   data: [firstMockCase],
-    // });
 
     const userCase = await api.getOrCreateCase(serviceType, userDetails);
 
-    expect(userCase).toStrictEqual({
+    expect(userCase.id).toBe('2');
+    expect(userCase.state).toBe(State.Submitted);
+  });
+
+  test('Should retrieve the most oldest created case if two non-Submitted cases found', async () => {
+    const firstMockCase = {
       id: '1',
+      state: State.AwaitingPayment,
+      created_date: moment().set({ hour: 9, minute: 0, second: 0, millisecond: 0 }).format('YYYY-MM-DD HH:mm:ss'),
+      case_data: {},
+    };
+    const secondMockCase = {
+      id: '2',
       state: State.Draft,
+      created_date: moment().set({ hour: 14, minute: 0, second: 0, millisecond: 0 }).format('YYYY-MM-DD HH:mm:ss'),
+      case_data: {},
+    };
+
+    mockedAxios.post.mockResolvedValue({
+      data: { cases: [firstMockCase, secondMockCase] },
     });
+
+    const userCase = await api.getOrCreateCase(serviceType, userDetails);
+
+    expect(userCase.id).toBe('1');
+    expect(userCase.state).toBe(State.AwaitingPayment);
   });
 
   test('Should update case', async () => {

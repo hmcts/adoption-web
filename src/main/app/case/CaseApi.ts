@@ -48,51 +48,43 @@ export class CaseApi {
       return false;
     }
 
-    if (
-      cases.filter(caseElement => caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted)
-        .length === cases.length
-    ) {
-      if (
-        cases.filter(
-          caseElement =>
-            moment(new Date(caseElement.case_data.dateSubmitted)).format('YYYY-MM-DD') ===
-            moment(new Date()).format('YYYY-MM-DD')
-        ).length !== 0
-      ) {
-        const {
-          id,
-          state,
-          case_data: caseData,
-        } = cases
-          .filter(
-            caseElement =>
-              moment(new Date(caseElement.case_data.dateSubmitted)).format('YYYY-MM-DD') ===
-              moment(new Date()).format('YYYY-MM-DD')
-          )
-          .sort((a, b) => {
-            return a.case_data.dateSubmitted >= b.case_data.dateSubmitted ? -1 : 1;
-          })[0];
+    const isSubmittedOrLaSubmitted = (caseElement: CcdV1Response) =>
+      caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted;
 
+    const isSubmittedToday = (caseElement: CcdV1Response) =>
+      !!caseElement.case_data.dateSubmitted && moment(caseElement.case_data.dateSubmitted).isSame(moment(), 'day');
+
+    const submittedCasesCount = cases.filter(isSubmittedOrLaSubmitted).length;
+
+    // If all cases are Submitted/LaSubmitted return either the last submitted case today or null
+    if (submittedCasesCount === cases.length) {
+      const casesSubmittedToday = cases.filter(isSubmittedToday);
+      if (casesSubmittedToday.length > 0) {
+        const casesSubmittedTodayByOldest = casesSubmittedToday
+          .slice()
+          .sort((a, b) => moment(b.created_date).valueOf() - moment(a.created_date).valueOf());
+        const { id, state, case_data: caseData } = casesSubmittedTodayByOldest[0];
         return { ...fromApiFormat(caseData), id: id.toString(), state };
-      } else {
-        return null as any;
       }
-    }
-    if (
-      cases.filter(caseElement => caseElement.state === State.Submitted || caseElement.state === State.LaSubmitted)
-        .length !==
-      cases.length - 1
-    ) {
-      throw new Error("Not all OR few cases assigned to the user aren't in right state.");
+      // Applications submitted but not on login day (null required by NewCaseRedirectController)
+      return null as any;
     }
 
-    const {
-      id,
-      state,
-      case_data: caseData,
-    } = cases.filter(
-      caseElement => caseElement.state !== State.Submitted && caseElement.state !== State.LaSubmitted
-    )[0];
+    const nonSubmittedCasesSortedByOldest = cases
+      .filter(caseElement => !isSubmittedOrLaSubmitted(caseElement))
+      .sort((a, b) => moment(a.created_date).valueOf() - moment(b.created_date).valueOf());
+
+    if (nonSubmittedCasesSortedByOldest.length > 1) {
+      const caseIds = nonSubmittedCasesSortedByOldest
+        .map(c => c.case_data.hyphenatedCaseRef?.replace(/-/g, ''))
+        .filter(Boolean)
+        .join(', ');
+      this.logger.error(
+        `More than one case that has not been Submitted or LaSubmitted found for user. caseIds: ${caseIds}`
+      );
+    }
+    // Return the oldest case that is not in Submitted or LaSubmitted state
+    const { id, state, case_data: caseData } = nonSubmittedCasesSortedByOldest[0];
     return { ...fromApiFormat(caseData), id: id.toString(), state };
   }
 
@@ -230,6 +222,7 @@ interface ES<T> {
 export interface CcdV1Response {
   id: string;
   state: State;
+  created_date: string;
   case_data: CaseData;
 }
 
