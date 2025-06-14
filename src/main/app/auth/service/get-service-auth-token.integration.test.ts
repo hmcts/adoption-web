@@ -1,6 +1,5 @@
 jest.mock('axios');
 jest.mock('@hmcts/nodejs-logging');
-jest.useFakeTimers();
 import { Logger } from '@hmcts/nodejs-logging';
 const logger = {
   info: jest.fn(),
