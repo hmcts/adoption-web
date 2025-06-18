@@ -1,11 +1,10 @@
-import axios, { AxiosResponse } from 'axios'
+import axios, { AxiosResponse } from 'axios';
 import * as dotenv from 'dotenv';
 import qs from 'qs';
 
 import { urlConfig } from '../utils/urls';
 
 dotenv.config();
-
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getAccessToken = async ({ user }: { user: any }): Promise<AxiosResponse<unknown> | undefined> => {
