@@ -47,7 +47,7 @@ import { LAPlacementOrdersSummaryPage } from '../page-objects/local-authority/pl
 import { LAChildHasOtherSiblingsPage } from '../page-objects/local-authority/siblings/laSiblingCourtDetailsSection.page';
 import SignIn from '../pages/signInPage.page';
 
-type CreateFixtures = {
+export type PageFixtures = {
   startPage: StartPage;
   signIn: SignIn;
   citSaveAsDraftPage: CITSaveAsDraftPage;
@@ -96,7 +96,7 @@ type CreateFixtures = {
   laConfirmationPage: LAConfirmationPage;
 };
 
-export const test = base.extend<CreateFixtures>({
+export const test = base.extend<PageFixtures>({
   startPage: async ({ page }, use) => {
     await use(new StartPage(page));
   },

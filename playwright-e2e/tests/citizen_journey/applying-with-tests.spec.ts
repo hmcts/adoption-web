@@ -1,25 +1,18 @@
 import { expect, test } from '../../fixtures/fixtures';
-import { setupUser, teardownUser } from '../../hooks/createDeleteUser.hook';
 import { urlConfig } from '../../utils/urls';
 
 test.describe('Citizen Journey Applying with page test', () => {
   let userEmail: string;
   let userPassword: string;
-  let userId: string;
 
-  test.beforeEach(async ({ signIn }) => {
-    const userInfo = await setupUser();
+  test.beforeEach(async ({ signIn, citizenUserUtils }) => {
+    const userInfo = await citizenUserUtils.createUser();
     if (userInfo) {
       userEmail = userInfo.email;
       userPassword = userInfo.password;
-      userId = userInfo.id;
     }
     await signIn.navigateTo();
     await signIn.signIn(userEmail, userPassword);
-  });
-
-  test.afterEach('Status check', async () => {
-    await teardownUser(userId);
   });
 
   test('check default page is in English', async ({ page }) => {

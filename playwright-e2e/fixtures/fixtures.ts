@@ -1,8 +1,12 @@
-import { mergeExpects, mergeTests } from '@playwright/test';
+import { test as baseTest } from '@playwright/test';
 
-import { expect as a11yExpect, test as a11yTest } from '../utils/axe-test';
+import { PageFixtures } from '../fixtures/page-fixtures';
+import { UtilsFixtures, utilsFixtures } from '../utils/utils.fixtures';
 
-import { test as create } from './create-fixture';
+export type CustomFixtures = UtilsFixtures & PageFixtures;
+export const test = baseTest.extend<CustomFixtures>({
+  ...utilsFixtures,
+});
 
-export const test = mergeTests(create, a11yTest);
-export const expect = mergeExpects(a11yExpect);
+// If you were extending assertions, you would also import the "expect" property from this file
+export const expect = test.expect;

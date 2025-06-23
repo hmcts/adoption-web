@@ -1,0 +1,25 @@
+import { setup as setup } from '../fixtures/fixtures';
+/**
+ * Sets up test sessions for all required user roles and stores session data.
+ *
+ * This setup script can be reused for each user type individually.
+ * Note: Manually signing out duiring tests will invalidate the stored session.
+ * For ExUI users, sessions are currently valid for 8 hours.
+ */
+setup.describe('Set up users and retrieve tokens', () => {
+  /**
+   * Retrieve an IDAM bearer token at the beginning of the test run
+   *
+   * This token is used to authorise user creation and is stored as an
+   * environment variable (`CREATE_USER_BEARER_TOKEN`) for reuse across the test suite
+   */
+  setup.beforeAll('Retrieve IDAM token for citizen user creation', async ({ idamUtils }) => {
+    const token = await idamUtils.generateIdamToken({
+      grantType: 'client_credentials',
+      clientId: 'adoption-web',
+      clientSecret: process.env.IDAM_SECRET as string,
+      scope: 'profile roles',
+    });
+    process.env.CREATE_USER_BEARER_TOKEN = token;
+  });
+});
