@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
-import { test } from '../fixtures/fixtures.ts';
 import * as dotenv from 'dotenv';
 
+import { test } from '../fixtures/fixtures.ts';
 import * as e2eJourneyHelper from '../helpers/e2eJourneyHelper.ts';
 import App from '../pages/app.page.ts';
 
