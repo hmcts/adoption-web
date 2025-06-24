@@ -1,29 +1,22 @@
-import { expect, test } from '../../../fixtures/fixtures';
-import { setupUser, teardownUser } from '../../../hooks/createDeleteUser.hook';
-import { urlConfig } from '../../../utils/urls';
-import { runChangePageLanguageTest, runPageLanguageTest } from '../test-utils';
+import { expect, test } from '../../../fixtures/fixtures.ts';
+import { urlConfig } from '../../../utils/urls.ts';
+import { runChangePageLanguageTest, runPageLanguageTest } from '../test-utils.ts';
 
 test.describe('Citizen Journey other adoption agency single parent test', () => {
   let userEmail: string;
   let userPassword: string;
-  let userId: string;
 
-  test.beforeEach(async ({ page, signIn, citApplyingWithPage }) => {
-    const userInfo = await setupUser();
+  test.beforeEach(async ({ page, citizenUserUtils, signIn, citApplyingWithPage }) => {
+    const userInfo = await citizenUserUtils.createUser();
     if (userInfo) {
       userEmail = userInfo.email;
       userPassword = userInfo.password;
-      userId = userInfo.id;
     }
     await signIn.navigateTo();
     await signIn.signIn(userEmail, userPassword);
     await citApplyingWithPage.checkApplyingOnMyOwnRadioButton();
     await citApplyingWithPage.clickSaveAndContinue();
     await page.goto('https://adoption-web.aat.platform.hmcts.net/children/other-adoption-agency');
-  });
-
-  test.afterEach('Status check', async () => {
-    await teardownUser(userId);
   });
 
   test('check default page is in English', async ({ citOtherAdoptionAgencyPage }) => {

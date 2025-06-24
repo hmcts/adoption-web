@@ -1,27 +1,20 @@
-import { expect, test } from '../../fixtures/fixtures';
-import { setupUser, teardownUser } from '../../hooks/createDeleteUser.hook';
-import { urlConfig } from '../../utils/urls';
+import { expect, test } from '../../fixtures/fixtures.ts';
+import { urlConfig } from '../../utils/urls.ts';
 
 test.describe('Citizen Journey task list page test single parent', () => {
   let userEmail: string;
   let userPassword: string;
-  let userId: string;
 
-  test.beforeEach(async ({ signIn, citApplyingWithPage }) => {
-    const userInfo = await setupUser();
+  test.beforeEach(async ({ signIn, citizenUserUtils, citApplyingWithPage }) => {
+    const userInfo = await citizenUserUtils.createUser();
     if (userInfo) {
       userEmail = userInfo.email;
       userPassword = userInfo.password;
-      userId = userInfo.id;
     }
     await signIn.navigateTo();
     await signIn.signIn(userEmail, userPassword);
     await citApplyingWithPage.checkApplyingOnMyOwnRadioButton();
     await citApplyingWithPage.clickSaveAndContinue();
-  });
-
-  test.afterEach('Status check', async () => {
-    await teardownUser(userId);
   });
 
   test('check default page is in English', async ({ page }) => {

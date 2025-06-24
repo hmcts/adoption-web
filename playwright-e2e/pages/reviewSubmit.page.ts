@@ -1,7 +1,7 @@
 import { type Locator, type Page } from '@playwright/test';
 import { expect } from '@playwright/test';
 
-import BasePage from './basePage.page';
+import BasePage from './basePage.page.ts';
 
 export default class ReviewSubmit extends BasePage {
   readonly h1: Locator;

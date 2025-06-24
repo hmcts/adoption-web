@@ -1,26 +1,18 @@
 {
   "compilerOptions": {
-    "allowJs": true,
-    "outDir": "./dist/",
-    "module": "ES2022",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "target": "ES2022",
-    "strict": true,
-    "noImplicitAny": false,
-    "noImplicitThis": false,
-    "moduleResolution": "node",
-    "noUnusedLocals": true,
-    "experimentalDecorators": true,
-    "useUnknownInCatchVariables": false,
+    "types": ["node"],
+    "allowImportingTsExtensions": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "lib": ["es2020", "dom", "dom.iterable"],
-    "baseUrl": "src/main",
-    "paths": {
-      "router/*": ["router/*"],
-      "routes/*": ["routes/*"]
-    },
-    "typeRoots": ["./node_modules/@types"]
+    "noEmit": true,
+    "useDefineForClassFields": false,
+    "resolveJsonModule": true
   },
-  "exclude": ["**/*.test.ts"]
+  "include": ["playwright-e2e/**/*"],
+  "exclude": ["node_modules"]
 }

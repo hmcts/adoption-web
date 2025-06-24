@@ -1,19 +1,19 @@
 import { faker } from '@faker-js/faker';
 import { type Page } from '@playwright/test';
 
-import AdoptionAgency from './adoptionAgency.page';
-import AddApplicants from './applicantsDetails.page';
-import BasePage from './basePage.page';
-import ChildDetails from './childDetails.page';
-import ContactDetails from './contactDetails.page';
-import DateChildMoved from './dateChildMoved.page';
-import ExtraSupport from './extraSupport.page';
-import FamilyCourt from './familyCourtDetails.page';
-import NumberOfApplicants from './numberOfApplicants.page';
-import Pcq from './pcq.page';
-import ReviewSubmit from './reviewSubmit.page';
-import SignIn from './signInPage.page';
-import Tasklist from './taskList.page';
+import AdoptionAgency from './adoptionAgency.page.ts';
+import AddApplicants from './applicantsDetails.page.ts';
+import BasePage from './basePage.page.ts';
+import ChildDetails from './childDetails.page.ts';
+import ContactDetails from './contactDetails.page.ts';
+import DateChildMoved from './dateChildMoved.page.ts';
+import ExtraSupport from './extraSupport.page.ts';
+import FamilyCourt from './familyCourtDetails.page.ts';
+import NumberOfApplicants from './numberOfApplicants.page.ts';
+import Pcq from './pcq.page.ts';
+import ReviewSubmit from './reviewSubmit.page.ts';
+import SignIn from './signInPage.page.ts';
+import Tasklist from './taskList.page.ts';
 
 export default class App {
   readonly page: Page;

@@ -1,29 +1,21 @@
-import { expect, test } from '../../../fixtures/fixtures';
-import { setupUser, teardownUser } from '../../../hooks/createDeleteUser.hook';
-import { urlConfig } from '../../../utils/urls';
-import { runChangePageLanguageTest, runPageLanguageTest } from '../test-utils';
+import { expect, test } from '../../../fixtures/fixtures.ts';
+import { urlConfig } from '../../../utils/urls.ts';
+import { runChangePageLanguageTest, runPageLanguageTest } from '../test-utils.ts';
 
 test.describe('Citizen Journey child name test single parent', () => {
   let userEmail: string;
   let userPassword: string;
-  let userId: string;
-
-  test.beforeEach(async ({ signIn, citApplyingWithPage, citTaskListPage }) => {
-    const userInfo = await setupUser();
+  test.beforeEach(async ({ signIn, citizenUserUtils, citApplyingWithPage, citTaskListPage }) => {
+    const userInfo = await citizenUserUtils.createUser();
     if (userInfo) {
       userEmail = userInfo.email;
       userPassword = userInfo.password;
-      userId = userInfo.id;
     }
     await signIn.navigateTo();
     await signIn.signIn(userEmail, userPassword);
     await citApplyingWithPage.checkApplyingOnMyOwnRadioButton();
     await citApplyingWithPage.clickSaveAndContinue();
     await citTaskListPage.clickChildDetailsLink();
-  });
-
-  test.afterEach('Status check', async () => {
-    await teardownUser(userId);
   });
 
   test('check default page is in English', async ({ citChildFullNamePage }) => {

@@ -5,7 +5,7 @@ import { defineConfig } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './playwright-e2e',
+  testDir: './playwright-e2e/tests',
   snapshotDir: './playwright-e2e/snapshots',
   ...CommonConfig.recommended,
   expect: { timeout: 180000 },

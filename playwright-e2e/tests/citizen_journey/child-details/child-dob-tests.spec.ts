@@ -1,26 +1,24 @@
-import { expect, test } from '../../../fixtures/fixtures';
-import { setupUser, teardownUser } from '../../../hooks/createDeleteUser.hook';
-import { urlConfig } from '../../../utils/urls';
-import { runChangePageLanguageTest, runPageLanguageTest } from '../test-utils';
+import { expect, test } from '../../../fixtures/fixtures.ts';
+import { urlConfig } from '../../../utils/urls.ts';
+import { runChangePageLanguageTest, runPageLanguageTest } from '../test-utils.ts';
 
 test.describe('Citizen Journey child DoB test single parent', () => {
   let userEmail: string;
   let userPassword: string;
-  let userId: string;
 
   test.beforeEach(
     async ({
+      citizenUserUtils,
       signIn,
       citApplyingWithPage,
       citTaskListPage,
       citChildFullNamePage,
       citChildFullNameAfterAdoptionPage,
     }) => {
-      const userInfo = await setupUser();
+      const userInfo = await citizenUserUtils.createUser();
       if (userInfo) {
         userEmail = userInfo.email;
         userPassword = userInfo.password;
-        userId = userInfo.id;
       }
       await signIn.navigateTo();
       await signIn.signIn(userEmail, userPassword);
@@ -36,10 +34,6 @@ test.describe('Citizen Journey child DoB test single parent', () => {
       await citChildFullNameAfterAdoptionPage.clickSaveAndContinue();
     }
   );
-
-  test.afterEach('Status check', async () => {
-    await teardownUser(userId);
-  });
 
   test('check default page is in English', async ({ citChildDoBPage }) => {
     await runPageLanguageTest('en', citChildDoBPage);

@@ -1,6 +1,6 @@
 import { type Locator, type Page } from '@playwright/test';
 
-import { urlConfig } from '../utils/urls';
+import { urlConfig } from '../utils/urls.ts';
 
 export default class SignIn {
   readonly page: Page;

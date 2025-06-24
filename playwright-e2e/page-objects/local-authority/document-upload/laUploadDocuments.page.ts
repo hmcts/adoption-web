@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 
-import BasePage from '../../../pages/basePage.page';
+import BasePage from '../../../pages/basePage.page.ts';
 
 export class LAUploadDocumentsPage extends BasePage {
   readonly uploadDocumentsHeading: Locator;

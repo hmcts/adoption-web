@@ -1,5 +1,5 @@
-import { expect, test } from '../../fixtures/fixtures';
-import { urlConfig } from '../../utils/urls';
+import { expect, test } from '../../fixtures/fixtures.ts';
+import { urlConfig } from '../../utils/urls.ts';
 
 test.describe('Citizen Journey Applying with page test', () => {
   let userEmail: string;

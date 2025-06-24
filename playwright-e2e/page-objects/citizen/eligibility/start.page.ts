@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 
-import BasePage from '../../../pages/basePage.page';
+import BasePage from '../../../pages/basePage.page.ts';
 
 export class StartPage extends BasePage {
   readonly heading: Locator;

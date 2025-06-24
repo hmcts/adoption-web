@@ -1,4 +1,4 @@
-import App from '../pages/app.page';
+import App from '../pages/app.page.ts';
 
 export async function citizenAdoptionSignInWithNoPartner(
   app: App,

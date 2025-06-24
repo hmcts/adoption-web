@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 
-import BasePage from './basePage.page';
+import BasePage from './basePage.page.ts';
 
 export class NationalityPage extends BasePage {
   readonly britishCheckbox: Locator;

@@ -1,32 +1,24 @@
 import { faker } from '@faker-js/faker';
 import * as dotenv from 'dotenv';
 
-import { expect, test } from '../../fixtures/fixtures';
-import { runAccessibilityScan } from '../../helpers/accessibilityHelper';
-import * as e2eJourneyHelper from '../../helpers/e2eJourneyHelper';
-import { setupUser, teardownUser } from '../../hooks/createDeleteUser.hook';
-import App from '../../pages/app.page';
-import { toggleBanner } from '../../utils/toggles';
+import { expect, test } from '../../fixtures/fixtures.ts';
+import * as e2eJourneyHelper from '../../helpers/e2eJourneyHelper.ts';
+import App from '../../pages/app.page.ts';
+import { toggleBanner } from '../../utils/toggles.ts';
 
 dotenv.config();
 
 test.describe('e2e citzen submit citizen and la journeys', () => {
   let userEmail: string;
   let userPassword: string;
-  let userId: string;
 
-  test.beforeEach(async ({ signIn }) => {
-    const userInfo = await setupUser();
+  test.beforeEach(async ({ citizenUserUtils, signIn }) => {
+    const userInfo = await citizenUserUtils.createUser();
     if (userInfo) {
       userEmail = userInfo.email;
       userPassword = userInfo.password;
-      userId = userInfo.id;
     }
     await signIn.navigateTo();
-  });
-
-  test.afterEach('Status check', async () => {
-    await teardownUser(userId);
   });
 
   const e2eTestTags = { tag: ['@e2e', '@citizen', '@accessibility'] };
@@ -71,7 +63,7 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
         laCheckYourAnswerPage,
         laStatementOfTruthPage,
         laConfirmationPage,
-        makeAxeBuilder,
+        axeUtils,
       },
       testInfo
     ) => {
@@ -307,7 +299,7 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       const expected = laConfirmationPage.pageURL;
       await expect(page).toHaveURL(expected);
 
-      await runAccessibilityScan(makeAxeBuilder, testInfo);
+      await axeUtils.audit();
     }
   );
 });

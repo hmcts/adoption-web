@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 
-import { NationalityPage } from '../../../pages/nationality.page';
+import { NationalityPage } from '../../../pages/nationality.page.ts';
 
 export class LABirthFatherNationalityPage extends NationalityPage {
   readonly laBirthFatherNationalityHeader: Locator;

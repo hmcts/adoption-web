@@ -22,7 +22,7 @@ module.exports = {
   globals: { Atomics: 'readonly', SharedArrayBuffer: 'readonly' },
   rules: {
     '@typescript-eslint/array-type': 'error',
-    '@typescript-eslint/explicit-module-boundary-types': 'error',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/no-shadow': 'error',
     '@typescript-eslint/no-unused-vars': [

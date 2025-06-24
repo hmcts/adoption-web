@@ -1,10 +1,11 @@
 import { test as baseTest } from '@playwright/test';
 
-import { PageFixtures } from '../fixtures/page-fixtures';
-import { UtilsFixtures, utilsFixtures } from '../utils/utils.fixtures';
+import { PageFixtures, pageFixtures } from '../fixtures/page-fixtures.ts';
+import { UtilsFixtures, utilsFixtures } from '../utils/utils.fixtures.ts';
 
 export type CustomFixtures = UtilsFixtures & PageFixtures;
 export const test = baseTest.extend<CustomFixtures>({
+  ...pageFixtures,
   ...utilsFixtures,
 });
 
