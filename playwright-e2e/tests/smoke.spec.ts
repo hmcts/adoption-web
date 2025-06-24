@@ -1,9 +1,9 @@
 import * as dotenv from 'dotenv';
 
-import { expect, test } from '../fixtures/fixtures.ts';
-import App from '../pages/app.page.ts';
-import { toggleBanner, toggleConfig } from '../utils/toggles.ts';
-import { urlConfig } from '../utils/urls.ts';
+import { expect, test } from '../fixtures/fixtures';
+import App from '../pages/app.page';
+import { toggleBanner, toggleConfig } from '../utils/toggles';
+import { urlConfig } from '../utils/urls';
 
 dotenv.config();
 

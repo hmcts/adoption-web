@@ -1,10 +1,10 @@
 import { faker } from '@faker-js/faker';
 import * as dotenv from 'dotenv';
 
-import { expect, test } from '../../fixtures/fixtures.ts';
-import * as e2eJourneyHelper from '../../helpers/e2eJourneyHelper.ts';
-import App from '../../pages/app.page.ts';
-import { toggleBanner } from '../../utils/toggles.ts';
+import { expect, test } from '../../fixtures/fixtures';
+import * as e2eJourneyHelper from '../../helpers/e2eJourneyHelper';
+import App from '../../pages/app.page';
+import { toggleBanner } from '../../utils/toggles';
 
 dotenv.config();
 

@@ -1,5 +1,5 @@
-import { expect, test } from '../../fixtures/fixtures.ts';
-import { urlConfig } from '../../utils/urls.ts';
+import { expect, test } from '../../fixtures/fixtures';
+import { urlConfig } from '../../utils/urls';
 
 test.describe('Citizen Journey date child moved in page test single parent', () => {
   let userEmail: string;

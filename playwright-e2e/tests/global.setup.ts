@@ -1,4 +1,4 @@
-import { test as setup } from '../fixtures/fixtures.ts';
+import { test as setup } from '../fixtures/fixtures';
 /**
  * Sets up test sessions for all required user roles and stores session data.
  *

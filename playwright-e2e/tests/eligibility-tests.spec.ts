@@ -1,6 +1,6 @@
-import { test } from '../fixtures/fixtures.ts';
-import { Eligibility } from '../pages/eligibility.page.ts';
-import { urlConfig } from '../utils/urls.ts';
+import { test } from '../fixtures/fixtures';
+import { Eligibility } from '../pages/eligibility.page';
+import { urlConfig } from '../utils/urls';
 
 test.describe('Eligibility journey e2e tests', () => {
   test.beforeEach(async ({ page }) => {

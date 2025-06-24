@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 
-import { SocialWorkerPage } from './socialWorkerPage.page.ts';
+import { SocialWorkerPage } from './socialWorkerPage.page';
 
 export class CITChildSocialWorkerDetailsPage extends SocialWorkerPage {
   readonly childSocialWorkerTitle: Locator;

@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 
-import BasePage from '../../../pages/basePage.page.ts';
+import BasePage from '../../../pages/basePage.page';
 
 export class CITApplyingWithPage extends BasePage {
   readonly applicationDetailsTitle: Locator;

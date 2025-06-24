@@ -1,6 +1,6 @@
 import { AxeUtils, IdamUtils } from '@hmcts/playwright-common';
 
-import { CitizenUserUtils } from './citizen-user.utils.ts';
+import { CitizenUserUtils } from './citizen-user.utils';
 
 export interface UtilsFixtures {
   idamUtils: IdamUtils;

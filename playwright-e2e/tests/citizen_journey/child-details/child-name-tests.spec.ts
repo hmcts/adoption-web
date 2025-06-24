@@ -1,6 +1,6 @@
-import { expect, test } from '../../../fixtures/fixtures.ts';
-import { urlConfig } from '../../../utils/urls.ts';
-import { runChangePageLanguageTest, runPageLanguageTest } from '../test-utils.ts';
+import { expect, test } from '../../../fixtures/fixtures';
+import { urlConfig } from '../../../utils/urls';
+import { runChangePageLanguageTest, runPageLanguageTest } from '../test-utils';
 
 test.describe('Citizen Journey child name test single parent', () => {
   let userEmail: string;

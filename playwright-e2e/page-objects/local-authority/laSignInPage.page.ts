@@ -1,6 +1,6 @@
 import { type Locator, type Page } from '@playwright/test';
 
-import BasePage from '../../pages/basePage.page.ts';
+import BasePage from '../../pages/basePage.page';
 
 export class LASignInPage extends BasePage {
   readonly applicationDetailsHeading: Locator;

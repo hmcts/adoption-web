@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test';
 
-import BasePage from '../../../pages/basePage.page.ts';
+import BasePage from '../../../pages/basePage.page';
 
 export class CITTaskListPage extends BasePage {
   readonly applyToAdoptAChildHeading: Locator;

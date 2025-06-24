@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 
-import BasePage from '../../pages/basePage.page.ts';
+import BasePage from '../../pages/basePage.page';
 
 export async function runPageLanguageTest(expectedLanguage: string, basePage: BasePage): Promise<void> {
   const langAttribute = await basePage.page.getAttribute('html', 'lang');
