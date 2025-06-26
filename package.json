@@ -5,6 +5,7 @@
   "engines": {
     "node": ">=14.0.0"
   },
+  "type": "module",
   "scripts": {
     "setup": "./playwright-e2e/scripts/get_secrets.sh && yarn playwright install &&  yarn playwright install webkit && yarn install firefox",
     "setup-env": "./playwright-e2e/scripts/get_secrets.sh",
@@ -54,7 +55,7 @@
     "@hmcts/cookie-manager": "^1.0.0",
     "@hmcts/nodejs-healthcheck": "^1.8.4",
     "@hmcts/nodejs-logging": "^4.0.4",
-    "@hmcts/playwright-common": "^1.0.27",
+    "@hmcts/playwright-common": "/Users/abigailsmith/HMCTS/playwright-common/package.tgz",
     "@hmcts/properties-volume": "^1.0.0",
     "@types/autobind-decorator": "^2.1.0",
     "@types/config": "^0.0.41",

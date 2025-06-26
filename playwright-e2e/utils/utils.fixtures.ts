@@ -1,4 +1,4 @@
-import { AxeUtils, IdamUtils } from '@hmcts/playwright-common';
+import { AxeUtils, IdamUtils, CaseUtils } from '@hmcts/playwright-common';
 
 import { CitizenUserUtils } from './citizen-user.utils';
 
@@ -6,6 +6,7 @@ export interface UtilsFixtures {
   idamUtils: IdamUtils;
   citizenUserUtils: CitizenUserUtils;
   axeUtils: AxeUtils;
+  caseUtils: CaseUtils;
 }
 
 export const utilsFixtures = {
@@ -19,4 +20,7 @@ export const utilsFixtures = {
   axeUtils: async ({ page }, use) => {
     await use(new AxeUtils(page));
   },
+  caseUtils: async ({ idamUtils }, use) => {
+    await use(new CaseUtils(idamUtils));
+  }
 };

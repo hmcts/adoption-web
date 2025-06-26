@@ -31,6 +31,9 @@ export class CitizenUserUtils {
         roleNames: ['citizen'],
       },
     });
+    if (process.env.PWDEBUG) {
+      console.log(user);
+    }
 
     return {
       email: user.email,
