@@ -33,17 +33,27 @@ export default class PaymentCallbackGetController {
       return res.redirect(CHECK_ANSWERS_URL);
     }
 
+    let hasInitiatedOrUndefinedPayment = false;
+
     for (let i = payments.list.length - 1; i >= 0; i--) {
       const element = payments.list[i];
-      const payment = await paymentClient.get(element.value.reference);
 
-      logger.info(`caseId=${caseId} lastPaymentStatus=${payment?.status} lastPaymentTransactionId=${element.id}`);
+      try {
+        const payment = await paymentClient.getCompletedPayment(element.value.reference, caseId);
 
-      payments.setStatus(element.id, payment?.status, payment?.channel);
+        logger.info(`caseId=${caseId} lastPaymentStatus=${payment?.status} lastPaymentTransactionId=${element.id}`);
 
-      if (payment?.status === 'Success') {
-        break;
+        payments.setStatus(element.id, payment?.status, payment?.channel);
+
+        if (payment?.status === 'Success') {
+          break;
+        }
+      } catch (e) {
+        logger.error(`caseId=${caseId} Unable to fetch final payment status for reference ${element.value.reference}. Checking for other payments.`, e);
+        hasInitiatedOrUndefinedPayment = true;
+        continue; // Check other payments
       }
+      
     }
 
     req.session.userCase = await req.locals.api.addPayment(req.session.userCase.id, payments.list);
@@ -53,6 +63,12 @@ export default class PaymentCallbackGetController {
 
       if (payments.hasSuccessfulPayment) {
         return res.redirect(APPLICATION_SUBMITTED);
+      }
+
+      if (hasInitiatedOrUndefinedPayment) {
+        // TODO Hand control back to the user
+        // throwing should redirect to the INTERNAL_SERVER_ERROR error page?
+        throw new Error(`caseId=${caseId} Unable to fetch final payment status of payment. Please try again later.`);
       }
 
       res.redirect(req.query.back ? CHECK_ANSWERS_URL : STATEMENT_OF_TRUTH);
