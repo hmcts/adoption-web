@@ -51,7 +51,6 @@ export default class PaymentCallbackGetController {
       } catch (e) {
         logger.error(`caseId=${caseId} Unable to fetch final payment status for reference ${element.value.reference}. Checking for other payments.`, e);
         hasInitiatedOrUndefinedPayment = true;
-        continue; // Check other payments
       }
       
     }
