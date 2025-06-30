@@ -40,6 +40,8 @@ const expectedUserCaseRedis = {
 const getDraftCaseFromStore = jest.spyOn(draftStoreMock, 'getDraftCaseFromStore');
 const saveDraftCase = jest.spyOn(draftStoreMock, 'saveDraftCase');
 
+const dateNow = moment(new Date()).format('YYYY-MM-DD');
+
 function mockCaseApi() {
   const caseApiMockFn = {
     getCases: jest.fn(() => {
@@ -206,6 +208,7 @@ describe('PostController', () => {
       {
         id: '12345',
         state: 'Submitted' as State,
+        created_date: dateNow,
         case_data: {
           applyingWith: 'alone' as ApplyingWith,
           dateSubmitted: moment(new Date().setMonth(new Date().getMonth() - 1)).format('YYYY-MM-DD'),
@@ -214,6 +217,7 @@ describe('PostController', () => {
       {
         id: '67890',
         state: 'Submitted' as State,
+        created_date: dateNow,
         case_data: {
           applyingWith: 'alone' as ApplyingWith,
           dateSubmitted: moment(new Date().setMonth(new Date().getMonth() - 1)).format('YYYY-MM-DD'),
@@ -254,7 +258,9 @@ describe('PostController', () => {
 
     const req = mockRequest({ body, path: APPLYING_WITH_URL });
     req.session.user.isSystemUser = false;
-    req.session.userCaseList = [{ id: 'MOCK_ID', state: State.Draft, case_data: {} as CaseData }];
+    req.session.userCaseList = [
+      { id: 'MOCK_ID', state: State.Draft, created_date: dateNow, case_data: {} as CaseData },
+    ];
     const res = mockResponse();
     res.locals.serviceType = Adoption.ADOPTION;
     await controller.post(req, res);
