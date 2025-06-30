@@ -6,14 +6,14 @@
     classes: field.classes,
     idPrefix: field.id if field.id else fieldName,
     name: fieldName,
+    attributes: {
+      "data-testid": "someValue"
+    },
     fieldset: {
       legend: {
         text: getContent(field.label),
         isPageHeading: true if not title,
-        classes: "hidden" if field.labelHidden else legendClasses,
-        attributes: {
-          "data-testid": "someValue"
-        }
+        classes: "hidden" if field.labelHidden else legendClasses
       }
     } if not field.labelHidden else undefined,
     hint: {
