@@ -1,4 +1,5 @@
 import { Locator, Page } from '@playwright/test';
+
 import BasePage from '../../../pages/basePage.page';
 
 export class CITAnotherAdoptionAgencyPage extends BasePage {
@@ -7,7 +8,7 @@ export class CITAnotherAdoptionAgencyPage extends BasePage {
   readonly anotherAdoptionAgencyHeading: Locator;
   readonly anotherAdoptionAgencyDescription: Locator;
 
-  readonly anotherAdoptionAgencyGroup: Locator;
+  readonly radioButtonGroup: Locator;
   readonly yesRadioButton: Locator;
   readonly noRadioButton: Locator;
 
@@ -19,5 +20,11 @@ export class CITAnotherAdoptionAgencyPage extends BasePage {
 
     this.anotherAdoptionAgencyHeading = page.locator('h1.govuk-heading-l');
     this.anotherAdoptionAgencyDescription = page.locator('#hasAnotherAdopAgencyOrLA-hint');
+
+    this.radioButtonGroup = page.locator('');
+    this.yesRadioButton = page.locator('');
+    this.noRadioButton = page.locator('');
+
+    this.errorAnswerQuestionSummary = page.locator('');
   }
 }
