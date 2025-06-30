@@ -6,10 +6,10 @@
     classes: field.classes,
     idPrefix: field.id if field.id else fieldName,
     name: fieldName,
-    attributes: {
-      "data-testid": "someValue"
-    },
     fieldset: {
+      attributes: {
+        "data-testid": "someValue"
+      },
       legend: {
         text: getContent(field.label),
         isPageHeading: true if not title,
