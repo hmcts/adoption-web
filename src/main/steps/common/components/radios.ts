@@ -25,9 +25,6 @@ export const generateRadiosField = (values: RadiosValues): Record<string, FormFi
     values: values.values.map(({ key, value, subFields }) => ({
       label: l => l[key],
       value,
-      attributes: {
-        'data-testid': `radio-${value}`,
-      } as any,
       subFields: subFields ? renderSubFields(subFields) : undefined,
     })),
     validator: isFieldFilledIn,
