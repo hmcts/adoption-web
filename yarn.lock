@@ -4119,13 +4119,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/es6-promisify@npm:^6.0.1":
-  version: 6.0.4
-  resolution: "@types/es6-promisify@npm:6.0.4"
-  checksum: 1df492c95d43eee2f16f5f196d56869c5c44229a35488dced5f47a518cb17532d05407b5046b964fc51fffb94761c9d5206f320a3f816e9a5276ec2edb36dc0e
-  languageName: node
-  linkType: hard
-
 "@types/estree@npm:^1.0.5":
   version: 1.0.5
   resolution: "@types/estree@npm:1.0.5"
@@ -5312,7 +5305,6 @@ __metadata:
     "@types/cookie-parser": ^1.4.3
     "@types/copy-webpack-plugin": ^10.1.0
     "@types/csurf": ^1.11.2
-    "@types/es6-promisify": ^6.0.1
     "@types/express": ^4.17.13
     "@types/express-session": ^1.17.4
     "@types/glob": ^7.2.0
