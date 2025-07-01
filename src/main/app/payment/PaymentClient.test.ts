@@ -1,13 +1,19 @@
+import { mockRequest } from '../../../test/unit/utils/mockRequest';
+import { Case } from '../case/case';
+import { AppRequest } from '../controller/AppRequest';
+
 import { PaymentClient } from './PaymentClient';
 
 jest.useFakeTimers();
 
 describe('PaymentClient.getCompletedPayment', () => {
   let client: PaymentClient;
+  let req: AppRequest<Partial<Case>>;
   let mockGet: jest.SpyInstance;
 
   beforeEach(() => {
-    client = new PaymentClient({ userCase: {}, user: { accessToken: '' } } as any, 'http://return-url');
+    req = mockRequest();
+    client = new PaymentClient(req.session, 'http://return-url');
     mockGet = jest.spyOn(client, 'get');
   });
 
@@ -16,7 +22,7 @@ describe('PaymentClient.getCompletedPayment', () => {
   });
 
   it('returns payment immediately if status is not Initiated or undefined', async () => {
-    mockGet.mockResolvedValueOnce({ status: 'Success' } as any);
+    mockGet.mockResolvedValueOnce({ status: 'Success' });
 
     const result = await client.getCompletedPayment('ref', 'caseId');
     expect(result).toEqual({ status: 'Success' });
@@ -24,9 +30,7 @@ describe('PaymentClient.getCompletedPayment', () => {
   });
 
   it('retries until payment is not Initiated', async () => {
-    mockGet
-      .mockResolvedValueOnce({ status: 'Initiated' } as any)
-      .mockResolvedValueOnce({ status: 'Success' } as any);
+    mockGet.mockResolvedValueOnce({ status: 'Initiated' }).mockResolvedValueOnce({ status: 'Success' });
 
     const promise = client.getCompletedPayment('ref', 'caseId');
     // Fast-forward timers for setTimeout
@@ -38,7 +42,7 @@ describe('PaymentClient.getCompletedPayment', () => {
   });
 
   it('returns undefined after maxRetries if payment remains Initiated', async () => {
-    mockGet.mockResolvedValue({ status: 'Initiated' } as any);
+    mockGet.mockResolvedValue({ status: 'Initiated' });
 
     const promise = client.getCompletedPayment('ref', 'caseId', 2);
     await jest.runAllTimersAsync();
