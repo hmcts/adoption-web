@@ -97,7 +97,7 @@ export class PaymentClient {
       retry++;
     }
 
-    throw new Error(`PaymentClient.getCompletedPayment unable to fetch payment final status after ${maxRetries} retries. caseId=${caseId}, paymentReference=${paymentReference}`);
+    logger.error(`PaymentClient.getCompletedPayment unable to fetch payment final status after ${maxRetries} retries. caseId=${caseId}, paymentReference=${paymentReference}`);
   }
 }
 
