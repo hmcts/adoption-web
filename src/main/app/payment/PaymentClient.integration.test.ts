@@ -100,7 +100,7 @@ describe('PaymentClient', () => {
 
     const client = new PaymentClient(req.session, 'http://return-url');
 
-    const actual = await client.get('1234');
+    const actual = await client.get('1234', 'case-ref');
 
     expect(mockGet).toHaveBeenCalledWith('/card-payments/1234');
 
@@ -114,7 +114,7 @@ describe('PaymentClient', () => {
 
     const client = new PaymentClient(req.session, 'http://return-url');
 
-    await client.get('1234');
+    await client.get('1234', 'case-ref');
 
     expect(mockLogger.error).toBeCalledWith('Error fetching payment', { some: 'error' });
   });
