@@ -75,7 +75,6 @@ export class PaymentClient {
   /**
    * Attempts to fetch a payment until the payment status is no longer 'Initiated' or undefined.
    * @param maxRetries (default 2)
-   * @throws Error if payment remains in 'Initiated' or undefined state after maxRetries.
    */
   public async getCompletedPayment(paymentReference: string, caseId: string, maxRetries = 2): Promise<Payment | undefined> {
     let paymentStateInitiatedOrUnknown = true;
