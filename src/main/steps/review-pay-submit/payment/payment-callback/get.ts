@@ -35,7 +35,7 @@ export default class PaymentCallbackGetController {
 
     for (let i = payments.list.length - 1; i >= 0; i--) {
       const element = payments.list[i];
- 
+
       const payment = await paymentClient.getCompletedPayment(element.value.reference, caseId);
 
       logger.info(`caseId=${caseId} lastPaymentStatus=${payment?.status} lastPaymentTransactionId=${element.id}`);

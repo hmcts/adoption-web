@@ -76,13 +76,18 @@ export class PaymentClient {
    * Attempts to fetch a payment until the payment status is no longer 'Initiated' or undefined.
    * @param maxRetries (default 2)
    */
-  public async getCompletedPayment(paymentReference: string, caseId: string, maxRetries = 2): Promise<Payment | undefined> {
+  public async getCompletedPayment(
+    paymentReference: string,
+    caseId: string,
+    maxRetries = 2
+  ): Promise<Payment | undefined> {
     let paymentStateInitiatedOrUnknown = true;
     let retry = 0;
     let delay = 1000; // Start with a 1 second delay
 
-    while (paymentStateInitiatedOrUnknown && retry <= maxRetries) {
+    while (paymentStateInitiatedOrUnknown) {
       const payment = await this.get(paymentReference, caseId);
+
       if (payment) {
         paymentStateInitiatedOrUnknown = payment.status === 'Initiated' || payment.status === undefined;
         if (!paymentStateInitiatedOrUnknown) {
@@ -90,13 +95,21 @@ export class PaymentClient {
         }
       }
 
-      logger.info(`PaymentClient: Payment status = ${payment?.status} for caseId=${caseId}, paymentReference=${paymentReference}. Retrying in ${delay}ms...`);
+      if (retry >= maxRetries) {
+        break;
+      }
+
+      logger.info(
+        `PaymentClient: Payment status = ${payment?.status} for caseId=${caseId}, paymentReference=${paymentReference}. Retrying in ${delay}ms...`
+      );
       await new Promise(resolve => setTimeout(resolve, delay));
       delay *= 2; // Exponential backoff
       retry++;
     }
 
-    logger.error(`PaymentClient.getCompletedPayment unable to fetch payment final status after ${maxRetries} retries. caseId=${caseId}, paymentReference=${paymentReference}`);
+    logger.error(
+      `PaymentClient.getCompletedPayment unable to fetch payment final status after ${maxRetries} retries. caseId=${caseId}, paymentReference=${paymentReference}`
+    );
   }
 }
 
