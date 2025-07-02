@@ -2054,13 +2054,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hmcts/playwright-common@file:/Users/abigailsmith/HMCTS/playwright-common/package.tgz::locator=adoption-web%40workspace%3A.":
-  version: 1.0.27
-  resolution: "@hmcts/playwright-common@file:/Users/abigailsmith/HMCTS/playwright-common/package.tgz::locator=adoption-web%40workspace%3A."
+"@hmcts/playwright-common@npm:1.0.28":
+  version: 1.0.28
+  resolution: "@hmcts/playwright-common@npm:1.0.28"
   dependencies:
     "@axe-core/playwright": ^4.10.0
     "@eslint/js": ^9.11.1
-    "@types/node": ^22.6.1
     "@typescript-eslint/eslint-plugin": ^8.8.0
     eslint: ^9.11.1
     eslint-plugin-playwright: ^1.6.2
@@ -2070,7 +2069,9 @@ __metadata:
     playwright-lighthouse: ^4.0.0
     typescript: ^5.6.2
     typescript-eslint: ^8.8.0
-  checksum: 5549a418e6b7f2560349fb1f60bb69c8129898f4356e2b19161d57999db04d1e07991c7c8239577bf00da424524b269f0a46ebc337a803e837c7e60f982132fd
+  peerDependencies:
+    "@playwright/test": ^1.53.0
+  checksum: 0c59c6235bac57cf863f5c1c0ed87fed81d581e1a568e816c7d85acb658299f553f9b5b2785e68b02783d8748b9d227de88d9e4453410ccc3d684aac8503fcb9
   languageName: node
   linkType: hard
 
@@ -3953,15 +3954,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.6.1":
-  version: 22.15.32
-  resolution: "@types/node@npm:22.15.32"
-  dependencies:
-    undici-types: ~6.21.0
-  checksum: 0e26f227a91e0b50dc79d5b7ad2705060598da4a418ea1c612609e6a72fcdbcbcc5b285214619973dc509aeec9cdff5ca016e642efd09d572b877151e591c01a
-  languageName: node
-  linkType: hard
-
 "@types/normalize-package-data@npm:^2.4.0":
   version: 2.4.4
   resolution: "@types/normalize-package-data@npm:2.4.4"
@@ -4939,7 +4931,7 @@ __metadata:
     "@hmcts/cookie-manager": ^1.0.0
     "@hmcts/nodejs-healthcheck": ^1.8.4
     "@hmcts/nodejs-logging": ^4.0.4
-    "@hmcts/playwright-common": /Users/abigailsmith/HMCTS/playwright-common/package.tgz
+    "@hmcts/playwright-common": 1.0.28
     "@hmcts/properties-volume": ^1.0.0
     "@pact-foundation/absolute-version": ^0.0.4
     "@pact-foundation/pact": ^9.17.3
@@ -18619,13 +18611,6 @@ __metadata:
   version: 5.26.5
   resolution: "undici-types@npm:5.26.5"
   checksum: 3192ef6f3fd5df652f2dc1cd782b49d6ff14dc98e5dced492aa8a8c65425227da5da6aafe22523c67f035a272c599bb89cfe803c1db6311e44bed3042fc25487
-  languageName: node
-  linkType: hard
-
-"undici-types@npm:~6.21.0":
-  version: 6.21.0
-  resolution: "undici-types@npm:6.21.0"
-  checksum: 46331c7d6016bf85b3e8f20c159d62f5ae471aba1eb3dc52fff35a0259d58dcc7d592d4cc4f00c5f9243fa738a11cfa48bd20203040d4a9e6bc25e807fab7ab3
   languageName: node
   linkType: hard
 

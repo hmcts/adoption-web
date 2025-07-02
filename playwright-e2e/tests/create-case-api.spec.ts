@@ -1,21 +1,20 @@
 import { test } from '../fixtures/fixtures';
 
- test.describe('Create case', () => {
-    let userEmail: string;
-    let userPassword: string;
-    test.beforeEach(async ({ page, citizenUserUtils }) => {
-    const userInfo = await citizenUserUtils.createUser();
-    if (userInfo) {
-      userEmail = userInfo.email;
-      userPassword = userInfo.password;
-    }
-   });
- 
-   test(
-    'create citizen case',
-    async ({ caseUtils }) => {
-       let token = await caseUtils.createCase();
-       console.log(token);
-    }
-   );
+test.describe('Create case', () => {
+  let userInfo: { email: string; password: string };
+
+  test.beforeEach(async ({ citizenUserUtils }) => {
+    userInfo = await citizenUserUtils.createUser();
+  });
+
+  test('create citizen case', async ({ caseHelperUtils }) => {
+    const data = {
+      applicant1FirstName: 'Mary',
+      applicant1LastName: 'Jane',
+      applicant1Email: userInfo.email,
+    };
+
+    const res = await caseHelperUtils.createCase('CITIZEN_CREATE', data);
+    console.log(res);
+  });
 });

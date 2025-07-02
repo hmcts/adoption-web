@@ -55,7 +55,7 @@
     "@hmcts/cookie-manager": "^1.0.0",
     "@hmcts/nodejs-healthcheck": "^1.8.4",
     "@hmcts/nodejs-logging": "^4.0.4",
-    "@hmcts/playwright-common": "/Users/abigailsmith/HMCTS/playwright-common/package.tgz",
+    "@hmcts/playwright-common": "1.0.28",
     "@hmcts/properties-volume": "^1.0.0",
     "@types/autobind-decorator": "^2.1.0",
     "@types/config": "^0.0.41",

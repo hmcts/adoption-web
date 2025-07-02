@@ -20,4 +20,6 @@ export const urlConfig: UrlConfig = {
   idam_web_url: process.env.IDAM_WEB_URL || `https://idam-web-public.${env}.platform.hmcts.net`,
   idam_testing_url:
     process.env.IDAM_TESTING_SUPPORT_URL || `https://idam-testing-support-api.${env}.platform.hmcts.net`,
+  service_auth_url:
+    process.env.IDAM_S2S_URL || `http://rpe-service-auth-provider-${env}.service.core-compute-${env}.internal/testing-support/lease`,
 };

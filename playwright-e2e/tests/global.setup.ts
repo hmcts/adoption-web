@@ -36,17 +36,11 @@ setup.describe('Set up users and retrieve tokens', () => {
   process.env.CREATE_CASE_TOKEN = authToken; 
   });
 
-  setup('Retrieve IDAM token for case creation', async ({ idamUtils }) => {
-    const authToken = await idamUtils.generateIdamToken({
-      grantType: "password",
-      username: process.env.CCD_DATA_STORE_CLIENT_USERNAME as string,
-      password: process.env.CCD_DATA_STORE_CLIENT_PASSWORD as string,
-      clientId: 'adoption-web',
-      clientSecret: process.env.IDAM_SECRET as string,
-      scope: "openid profile roles",
-      redirectUri: process.env.MANAGE_CASE_REDIRECT_URI as string,
+  setup('Retrieve s2s token for case creation', async ({ idamUtils }) => {
+    const s2sToken = await idamUtils.retrieveServiceAuthToken({
+      microservice: process.env.CCD_DATA_STORE_CLIENT_ID as string
     });
-  process.env.CREATE_CASE_TOKEN = authToken; 
+  process.env.S2S_TOKEN = s2sToken; 
+  console.log(s2sToken);
   });
-
 });
