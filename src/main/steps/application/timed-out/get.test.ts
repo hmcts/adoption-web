@@ -18,7 +18,7 @@ describe('TimedOutGetController', () => {
     await controller.get(req, res);
     delete req.query.pageFrom;
 
-    expect(res.render).toBeCalledWith(expect.anything(), {
+    expect(res.render).toHaveBeenCalledWith(expect.anything(), {
       ...defaultViewArgs,
       ...generatePageContent({
         language,

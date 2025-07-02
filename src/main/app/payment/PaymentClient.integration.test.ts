@@ -90,7 +90,7 @@ describe('PaymentClient', () => {
 
     await expect(() => client.create()).rejects.toThrow('Error creating payment');
 
-    expect(mockLogger.error).toBeCalledWith('Error creating payment', { mockPayment: 'data, but missing _links' });
+    expect(mockLogger.error).toHaveBeenCalledWith('Error creating payment', { mockPayment: 'data, but missing _links' });
   });
 
   it('gets payment data', async () => {
@@ -116,6 +116,6 @@ describe('PaymentClient', () => {
 
     await client.get('1234');
 
-    expect(mockLogger.error).toBeCalledWith('Error fetching payment', { some: 'error' });
+    expect(mockLogger.error).toHaveBeenCalledWith('Error fetching payment', { some: 'error' });
   });
 });

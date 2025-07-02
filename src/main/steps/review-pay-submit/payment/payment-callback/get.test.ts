@@ -115,7 +115,7 @@ describe('PaymentCallbackGetController', () => {
       await paymentController.get(req, res);
 
       expect(mockGet).toHaveBeenCalledWith('mock ref');
-      expect(mockGet).toBeCalledTimes(3);
+      expect(mockGet).toHaveBeenCalledTimes(3);
 
       expect(req.locals.api.addPayment).toHaveBeenCalledWith('1234', expect.any(Array));
 
@@ -371,7 +371,7 @@ describe('PaymentCallbackGetController', () => {
       await paymentController.get(req, res);
 
       expect(mockGet).toHaveBeenCalledWith('mock ref');
-      expect(mockGet).toBeCalledTimes(3);
+      expect(mockGet).toHaveBeenCalledTimes(3);
 
       expect(req.locals.api.addPayment).toHaveBeenCalledWith('1234', expect.any(Array));
 

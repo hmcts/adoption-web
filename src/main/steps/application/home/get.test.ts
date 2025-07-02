@@ -34,7 +34,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(APPLYING_WITH_URL);
+    expect(res.redirect).toHaveBeenCalledWith(APPLYING_WITH_URL);
   });
 
   test('redirects to task list when applyingWith question has been answered', () => {
@@ -49,7 +49,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(TASK_LIST_URL);
+    expect(res.redirect).toHaveBeenCalledWith(TASK_LIST_URL);
   });
 
   test('redirects to application sent for review page for applicant 1 users in awaitingApplicant2 state', () => {
@@ -64,7 +64,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(SENT_TO_APPLICANT2_FOR_REVIEW);
+    expect(res.redirect).toHaveBeenCalledWith(SENT_TO_APPLICANT2_FOR_REVIEW);
   });
 
   test('redirects to confirmation page for applicant 1 users in applicant2Approved state', () => {
@@ -79,7 +79,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(CONFIRM_JOINT_APPLICATION);
+    expect(res.redirect).toHaveBeenCalledWith(CONFIRM_JOINT_APPLICATION);
   });
 
   test('redirects to application submitted page for applicant 1 users in submitted state', () => {
@@ -94,7 +94,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(APPLICATION_SUBMITTED);
+    expect(res.redirect).toHaveBeenCalledWith(APPLICATION_SUBMITTED);
   });
 
   test('redirects to application submitted page for applicant 1 users in LaSubmitted state', () => {
@@ -109,7 +109,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(APPLICATION_SUBMITTED);
+    expect(res.redirect).toHaveBeenCalledWith(APPLICATION_SUBMITTED);
   });
 
   test('redirects to the check your answers page for applicant 1 users in awaitingApplicant1Response state', () => {
@@ -124,7 +124,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(CHECK_ANSWERS_URL);
+    expect(res.redirect).toHaveBeenCalledWith(CHECK_ANSWERS_URL);
   });
 
   test('redirects to the pay your fee page for applicant 1 users for sole application in awaitingPayment state', () => {
@@ -139,7 +139,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(PAY_YOUR_FEE);
+    expect(res.redirect).toHaveBeenCalledWith(PAY_YOUR_FEE);
   });
 
   test('redirects to the hub page for applicant 1 users in holding state', () => {
@@ -154,7 +154,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(HUB_PAGE);
+    expect(res.redirect).toHaveBeenCalledWith(HUB_PAGE);
   });
 
   test('redirects to application AwaitingAos page for applicant 1 users in submitted state', () => {
@@ -169,7 +169,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(HUB_PAGE);
+    expect(res.redirect).toHaveBeenCalledWith(HUB_PAGE);
   });
 
   test('redirects to application AwaitingConditionalOrder page for applicant 1 users in submitted state', () => {
@@ -184,7 +184,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(HUB_PAGE);
+    expect(res.redirect).toHaveBeenCalledWith(HUB_PAGE);
   });
 
   test('redirects to application AosDrafted page for applicant 1 users in submitted state', () => {
@@ -199,7 +199,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(HUB_PAGE);
+    expect(res.redirect).toHaveBeenCalledWith(HUB_PAGE);
   });
 
   test('redirects to application AosOverdue page for applicant 1 users in submitted state', () => {
@@ -214,7 +214,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(HUB_PAGE);
+    expect(res.redirect).toHaveBeenCalledWith(HUB_PAGE);
   });
 
   test('redirects to eligibility start screen if usercase is null', async () => {
@@ -230,7 +230,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     await controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(START_ELIGIBILITY_URL);
+    expect(res.redirect).toHaveBeenCalledWith(START_ELIGIBILITY_URL);
   });
 
   test('redirects to task list if usercase is found with applyingWith value set', async () => {
@@ -246,7 +246,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     await controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(TASK_LIST_URL);
+    expect(res.redirect).toHaveBeenCalledWith(TASK_LIST_URL);
   });
 
   test('redirects to applying-with screen if usercase is not found', async () => {
@@ -262,6 +262,6 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     await controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(APPLYING_WITH_URL);
+    expect(res.redirect).toHaveBeenCalledWith(APPLYING_WITH_URL);
   });
 });

@@ -105,7 +105,7 @@ describe('PostController', () => {
 
     expect(req.locals.api.triggerEvent).not.toHaveBeenCalled();
     expect(getNextStepUrlMock).not.toHaveBeenCalled();
-    expect(res.redirect).toBeCalledWith(req.path);
+    expect(res.redirect).toHaveBeenCalledWith(req.path);
     expect(req.session.errors).toEqual(errors);
   });
 
@@ -151,8 +151,8 @@ describe('PostController', () => {
     expect(req.session.userCase).toEqual(expectedUserCase);
     expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { ...body }, CITIZEN_UPDATE);
 
-    expect(getNextStepUrlMock).toBeCalledWith(req, expectedUserCase);
-    expect(res.redirect).toBeCalledWith('/next-step-url');
+    expect(getNextStepUrlMock).toHaveBeenCalledWith(req, expectedUserCase);
+    expect(res.redirect).toHaveBeenCalledWith('/next-step-url');
     expect(req.session.errors).toStrictEqual([]);
   });
 
@@ -265,7 +265,7 @@ describe('PostController', () => {
     res.locals.serviceType = Adoption.ADOPTION;
     await controller.post(req, res);
 
-    expect(res.redirect).toBeCalledWith('/next-step-url');
+    expect(res.redirect).toHaveBeenCalledWith('/next-step-url');
   });
 
   test('When Request contains applyting with URL and user case is empty', async () => {
@@ -304,7 +304,7 @@ describe('PostController', () => {
     res.locals.serviceType = Adoption.ADOPTION;
     await controller.post(req, res);
 
-    expect(res.redirect).toBeCalledWith('/next-step-url');
+    expect(res.redirect).toHaveBeenCalledWith('/next-step-url');
   });
 
   test('When Request contains applying with URL and no application for user', async () => {
@@ -343,7 +343,7 @@ describe('PostController', () => {
     res.locals.serviceType = Adoption.ADOPTION;
     await controller.post(req, res);
 
-    expect(res.redirect).toBeCalledWith('/next-step-url');
+    expect(res.redirect).toHaveBeenCalledWith('/next-step-url');
     expect(caseApiMockFn.createCase).toHaveBeenCalled();
     expect(caseApiMockFn.checkOldPCQIDExists).not.toHaveBeenCalled();
   });
@@ -386,8 +386,8 @@ describe('PostController', () => {
     expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { MOCK_KEY: 'MOCK_VALUE' }, CITIZEN_UPDATE);
 
     expect(getNextStepUrlMock).not.toHaveBeenCalled();
-    expect(res.redirect).toBeCalledWith('/request');
-    expect(logger.error).toBeCalledWith('Error saving', 'Error saving');
+    expect(res.redirect).toHaveBeenCalledWith('/request');
+    expect(logger.error).toHaveBeenCalledWith('Error saving', 'Error saving');
 
     expect(req.session.errors).toEqual([
       {
@@ -442,7 +442,7 @@ describe('PostController', () => {
       ...body,
     };
     expect(mockSave).toHaveBeenCalled();
-    expect(getNextStepUrlMock).toBeCalledWith(req, userCase);
+    expect(getNextStepUrlMock).toHaveBeenCalledWith(req, userCase);
     expect(res.redirect).not.toHaveBeenCalled();
     expect(req.session.errors).toStrictEqual([]);
   }); */
@@ -505,8 +505,8 @@ describe('PostController', () => {
       CITIZEN_UPDATE
     );
 
-    expect(getNextStepUrlMock).toBeCalledWith(req, expectedUserCase);
-    expect(res.redirect).toBeCalledWith('/next-step-url');
+    expect(getNextStepUrlMock).toHaveBeenCalledWith(req, expectedUserCase);
+    expect(res.redirect).toHaveBeenCalledWith('/next-step-url');
     expect(req.session.errors).toStrictEqual([]);
   });
 
@@ -521,7 +521,7 @@ describe('PostController', () => {
 
     expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { MOCK_KEY: 'MOCK_VALUE' }, CITIZEN_UPDATE);
 
-    expect(res.end).toBeCalled();
+    expect(res.end).toHaveBeenCalled();
   });
 
   test('Should NOT save the users data and end response for session timeout where path is LA SOT', async () => {
@@ -535,7 +535,7 @@ describe('PostController', () => {
 
     expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(0);
 
-    expect(res.end).toBeCalled();
+    expect(res.end).toHaveBeenCalled();
   });
 
   test('Should NOT save the users data and end response for session timeout where path is SOT', async () => {
@@ -549,7 +549,7 @@ describe('PostController', () => {
 
     expect(req.locals.api.triggerEvent).toHaveBeenCalledTimes(0);
 
-    expect(res.end).toBeCalled();
+    expect(res.end).toHaveBeenCalled();
   });
 
   it('saves and signs out even if there are errors', async () => {

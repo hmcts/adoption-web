@@ -117,7 +117,7 @@ describe('EligibilityPostController', () => {
 
     expect(req.locals.api.triggerEvent).not.toHaveBeenCalled();
     expect(getNextStepUrlMock).not.toHaveBeenCalled();
-    expect(res.redirect).toBeCalledWith(req.path);
+    expect(res.redirect).toHaveBeenCalledWith(req.path);
     expect(req.session.errors).toEqual(errors);
   });
 

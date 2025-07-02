@@ -26,7 +26,7 @@ describe('GetController', () => {
     const res = mockResponse();
     await controller.get(req, res);
 
-    expect(res.render).toBeCalledWith('page', {
+    expect(res.render).toHaveBeenCalledWith('page', {
       ...defaultViewArgs,
       language: 'en',
       serviceName: 'Apply for adoption',
@@ -45,7 +45,7 @@ describe('GetController', () => {
     const res = mockResponse();
     await controller.get(req, res);
 
-    expect(res.render).toBeCalledWith('page', {
+    expect(res.render).toHaveBeenCalledWith('page', {
       ...defaultViewArgs,
       isDraft: false,
       eligibilityPage: false,
@@ -62,7 +62,7 @@ describe('GetController', () => {
       req.query.lang = language;
       await controller.get(req, res);
 
-      expect(res.render).toBeCalledWith('page', {
+      expect(res.render).toHaveBeenCalledWith('page', {
         ...defaultViewArgs,
         ...generatePageContent({ language, pageContent: generateContent, userEmail }),
         text: 'welsh',
@@ -84,7 +84,7 @@ describe('GetController', () => {
       req.session.lang = language;
       await controller.get(req, res);
 
-      expect(res.render).toBeCalledWith('page', {
+      expect(res.render).toHaveBeenCalledWith('page', {
         ...defaultViewArgs,
         ...generatePageContent({ language, pageContent: generateContent, userEmail }),
         text: 'welsh',
@@ -106,7 +106,7 @@ describe('GetController', () => {
       //req.query.lng = language;
       await controller.get(req, res);
 
-      expect(res.render).toBeCalledWith('page', {
+      expect(res.render).toHaveBeenCalledWith('page', {
         ...defaultViewArgs,
         ...generatePageContent({ language, pageContent: generateContent, userEmail }),
         text: 'welsh',
@@ -128,7 +128,7 @@ describe('GetController', () => {
       //req.query.lng = language;
       await controller.get(req, res);
 
-      expect(res.render).toBeCalledWith('page', {
+      expect(res.render).toHaveBeenCalledWith('page', {
         ...defaultViewArgs,
         ...generatePageContent({ language, pageContent: generateContent, userEmail }),
         text: 'english',
@@ -171,7 +171,7 @@ describe('GetController', () => {
     const res = mockResponse();
     await controller.get(req, res);
 
-    expect(res.render).toBeCalledWith('page', {
+    expect(res.render).toHaveBeenCalledWith('page', {
       ...defaultViewArgs,
       userCase: {
         id: '1234',
@@ -215,7 +215,7 @@ describe('GetController', () => {
         isAmendableStates: true,
         userEmail,
       });
-      expect(res.render).toBeCalledWith('page', {
+      expect(res.render).toHaveBeenCalledWith('page', {
         ...defaultViewArgs,
         isDraft: true,
         userCase: req.session.userCase,
@@ -291,8 +291,8 @@ describe('GetController', () => {
       const req = mockRequest();
       const res = mockResponse();
       controller.saveSessionAndRedirect(req, res);
-      expect(req.session.save).toBeCalled();
-      expect(res.redirect).toBeCalledWith('/request');
+      expect(req.session.save).toHaveBeenCalled();
+      expect(res.redirect).toHaveBeenCalledWith('/request');
     });
 
     test('should throw an error and not redirect when session can not be saved', () => {
@@ -309,7 +309,7 @@ describe('GetController', () => {
         //eslint-disable-next-line jest/no-conditional-expect
         expect(err).toBe('MOCK_ERROR');
       }
-      expect(res.redirect).not.toBeCalledWith('/request');
+      expect(res.redirect).not.toHaveBeenCalledWith('/request');
     });
   });
 

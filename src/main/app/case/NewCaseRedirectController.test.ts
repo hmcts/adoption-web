@@ -21,7 +21,7 @@ describe('NewCaseRedirecController', () => {
     const res = mockResponse();
     await controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith('/eligibility/start');
+    expect(res.redirect).toHaveBeenCalledWith('/eligibility/start');
   });
 
   test('redirects to home url if usercase is found and state is not Submitted or LaSubmitted', async () => {
@@ -36,7 +36,7 @@ describe('NewCaseRedirecController', () => {
     const res = mockResponse();
     await controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith('/');
+    expect(res.redirect).toHaveBeenCalledWith('/');
   });
 
   test('redirects to multiple children eligibility description screen if usercase is found and state is Submitted', async () => {
@@ -51,7 +51,7 @@ describe('NewCaseRedirecController', () => {
     const res = mockResponse();
     await controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith('/eligibility/multiple-children-desc');
+    expect(res.redirect).toHaveBeenCalledWith('/eligibility/multiple-children-desc');
   });
 
   test('redirects to home url if there is no application for the user', async () => {
@@ -66,6 +66,6 @@ describe('NewCaseRedirecController', () => {
     const res = mockResponse();
     await controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith('/');
+    expect(res.redirect).toHaveBeenCalledWith('/');
   });
 });
