@@ -69,11 +69,12 @@ export class PaymentClient {
       logger.info(`PaymentClient.get: response = ${JSON.stringify(response.data)}`);
       return response.data;
     } catch (e) {
-      if (e.name === "TimeoutError") {
-        logger.error(`PaymentClient.get: Timeout: It took >2 seconds to fetch the payment (reference ${paymentReference}) for caseId=${caseId}`);
+      let errMsg = `PaymentClient.get: Error fetching payment (reference ${paymentReference}) for caseId=${caseId}`;
+
+      if (e.name === 'TimeoutError') {
+        errMsg = `PaymentClient.get: Timeout: It took >2 seconds to fetch the payment (reference ${paymentReference}) for caseId=${caseId}`;
       }
 
-      const errMsg = `PaymentClient.get: Error fetching payment (reference ${paymentReference}) for caseId=${caseId}`;
       logger.error(errMsg, e.data);
     }
   }
