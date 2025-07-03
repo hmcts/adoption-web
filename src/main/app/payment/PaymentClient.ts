@@ -63,10 +63,16 @@ export class PaymentClient {
 
   public async get(paymentReference: string, caseId: string): Promise<Payment | undefined> {
     try {
-      const response = await this.client.get<Payment>(`/card-payments/${paymentReference}`);
+      const response = await this.client.get<Payment>(`/card-payments/${paymentReference}`, {
+        signal: AbortSignal.timeout(2000), // 2 second timeout
+      });
       logger.info(`PaymentClient.get: response = ${JSON.stringify(response.data)}`);
       return response.data;
     } catch (e) {
+      if (e.name === "TimeoutError") {
+        logger.error(`PaymentClient.get: Timeout: It took >2 seconds to fetch the payment (reference ${paymentReference}) for caseId=${caseId}`);
+      }
+
       const errMsg = `PaymentClient.get: Error fetching payment (reference ${paymentReference}) for caseId=${caseId}`;
       logger.error(errMsg, e.data);
     }
