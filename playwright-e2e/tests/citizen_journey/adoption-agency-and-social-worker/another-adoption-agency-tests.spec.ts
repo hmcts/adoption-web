@@ -64,7 +64,7 @@ test.describe('Citizen Journey another adoption agency test single parent', () =
 
   test('check filling valid data then clicking save and continue goes to task list page', async ({
     citAnotherAdoptionAgencyPage,
-    page
+    page,
   }) => {
     await citAnotherAdoptionAgencyPage.fillAdoptionAgencyLabel('agency');
     await citAnotherAdoptionAgencyPage.fillNameOfYourContactLabel('test contact');
