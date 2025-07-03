@@ -4049,12 +4049,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.15.0":
-  version: 18.19.115
-  resolution: "@types/node@npm:18.19.115"
+"@types/node@npm:^20.19.3":
+  version: 20.19.4
+  resolution: "@types/node@npm:20.19.4"
   dependencies:
-    undici-types: ~5.26.4
-  checksum: fc39f51a17364c00fdfda35494dc71b84d3eef2d5f8ee97103a9af55492784c20963bbc21b5b7f419b29fe97eecf9276cdf766673036efa3660b241396189a1b
+    undici-types: ~6.21.0
+  checksum: affe7c1d01d3067c2e1ef923a7970ed047124c6b50573e6d1191d8cd824992b460514b4d90a389a87632e1ea64a99d8998946343d0d8ecb38b302cacf172f0d8
   languageName: node
   linkType: hard
 
@@ -4988,7 +4988,7 @@ __metadata:
     "@types/mini-css-extract-plugin": ^2.5.1
     "@types/multer": ^1.4.7
     "@types/negotiator": ^0.6.1
-    "@types/node": ^18.15.0
+    "@types/node": ^20.19.3
     "@types/nunjucks": ^3.2.1
     "@types/redis": ^2.8.32
     "@types/require-directory": ^2.1.2
@@ -18745,6 +18745,13 @@ __metadata:
   version: 5.26.5
   resolution: "undici-types@npm:5.26.5"
   checksum: 3192ef6f3fd5df652f2dc1cd782b49d6ff14dc98e5dced492aa8a8c65425227da5da6aafe22523c67f035a272c599bb89cfe803c1db6311e44bed3042fc25487
+  languageName: node
+  linkType: hard
+
+"undici-types@npm:~6.21.0":
+  version: 6.21.0
+  resolution: "undici-types@npm:6.21.0"
+  checksum: 46331c7d6016bf85b3e8f20c159d62f5ae471aba1eb3dc52fff35a0259d58dcc7d592d4cc4f00c5f9243fa738a11cfa48bd20203040d4a9e6bc25e807fab7ab3
   languageName: node
   linkType: hard
 
