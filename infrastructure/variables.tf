@@ -56,8 +56,8 @@ variable "capacity" {
 }
 
 variable "rdb_backup_enabled" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
 }
 
 variable "redis_backup_frequency" {
