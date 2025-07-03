@@ -104,7 +104,7 @@ describe('PaymentClient', () => {
 
     const actual = await client.get('1234', 'case-ref');
 
-    expect(mockGet).toHaveBeenCalledWith('/card-payments/1234');
+    expect(mockGet).toHaveBeenCalledWith('/card-payments/1234', { signal: expect.any(AbortSignal) });
 
     expect(actual).toEqual({ mockPayment: 'data' });
   });
