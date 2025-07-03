@@ -1,46 +1,44 @@
 import { APIRequestContext, request } from '@playwright/test';
-
+import { urlConfig } from './urls';
 export class CaseHelperUtils {
-  private requestContext!: APIRequestContext;
-
   constructor(
-    private caseType: string,
-    private accessToken: string,
-    private serviceToken: string
+    private caseType: string = 'A58',
+    private accessToken: string = process.env.CREATE_CASE_TOKEN || '',
+    private serviceToken: string = process.env.IDAM_S2S_TOKEN || '',
   ) {}
 
-  private async ensureContext(): Promise<APIRequestContext> {
-    if (!this.requestContext) {
-      this.requestContext = await request.newContext();
-    }
-    return this.requestContext;
+  private async createApiContext(): Promise<APIRequestContext> {
+    return await request.newContext({});
   }
 
-  private getHeaders() {
+  private getHeaders(): Record<string, string> {
     return {
       Authorization: `Bearer ${this.accessToken}`,
       ServiceAuthorization: this.serviceToken,
-      experimental: 'true',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
-      Accept: '*/*',
+      experimental: 'true',
     };
   }
 
-  private async fetchEventToken(url: string): Promise<string> {
-    const context = await this.ensureContext();
-    const response = await context.get(url, { headers: this.getHeaders() });
+  private async fetchEventToken(triggerUrl: string): Promise<string> {
+    console.log(triggerUrl);
+    const context = await this.createApiContext();
+    const response = await context.get(triggerUrl);
+
     if (!response.ok()) {
       throw new Error(`Failed to fetch event token: ${response.status()}`);
     }
+
     const json = await response.json();
-    console.log(json.token)
     return json.token;
-    
   }
 
-  async createCase(eventId: string, caseData: Record<string, any>) {
-    const context = await this.ensureContext();
-    const token = await this.fetchEventToken(`/case-types/${this.caseType}/event-triggers/${eventId}`);
+  async createCase(caseData: Record<string, any>) {
+    const eventId = 'citizen-create-application';
+    const context = await this.createApiContext();
+    console.log(urlConfig.ccd_data_api_url + `/case-types/${this.caseType}/event-triggers/${eventId}`);
+    const token = await this.fetchEventToken(urlConfig.ccd_data_api_url + `/case-types/${this.caseType}/event-triggers/'citizen-create-application'`);
 
     const response = await context.post(`/case-types/${this.caseType}/cases`, {
       headers: this.getHeaders(),
@@ -54,11 +52,14 @@ export class CaseHelperUtils {
     if (!response.ok()) {
       throw new Error(`Failed to create case: ${response.status()}`);
     }
-    return response.json();
+
+    const json = await response.json();
+    json.data.status = json.state;
+    return json;
   }
 
   async triggerEvent(caseId: string, eventId: string, eventData: Record<string, any>) {
-    const context = await this.ensureContext();
+    const context = await this.createApiContext();
     const token = await this.fetchEventToken(`/cases/${caseId}/event-triggers/${eventId}`);
 
     const response = await context.post(`/cases/${caseId}/events`, {
@@ -81,13 +82,11 @@ export class CaseHelperUtils {
     caseId: string,
     events: { eventName: string; eventData: Record<string, any> }[]
   ): Promise<any[]> {
-    const responses = [];
-
+    const results: any[] = [];
     for (const { eventName, eventData } of events) {
-      const eventResponse = await this.triggerEvent(caseId, eventName, eventData);
-      responses.push(eventResponse);
+      const result = await this.triggerEvent(caseId, eventName, eventData);
+      results.push(result);
     }
-
-    return responses;
+    return results;
   }
 }

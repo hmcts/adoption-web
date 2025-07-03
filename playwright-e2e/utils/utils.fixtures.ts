@@ -2,7 +2,6 @@ import { AxeUtils, IdamUtils } from '@hmcts/playwright-common';
 import { CitizenUserUtils } from './citizen-user.utils';
 import { CaseHelperUtils } from './case-helper.utils';
 import { urlConfig } from './urls';
-
 export interface UtilsFixtures {
   idamUtils: IdamUtils;
   citizenUserUtils: CitizenUserUtils;
