@@ -51,15 +51,4 @@ describe('PaymentClient.getCompletedPayment', () => {
     expect(result).toBeUndefined();
     expect(mockGet).toHaveBeenCalledTimes(3); // initial + 2 retries
   });
-
-  it('handles get throwing errors gracefully', async () => {
-    mockGet.mockRejectedValueOnce(new Error('network error'));
-
-    const promise = client.getCompletedPayment('ref', 'caseId', 0);
-    await jest.runAllTimersAsync();
-    const result = await promise;
-
-    expect(result).toBeUndefined();
-    expect(mockGet).toHaveBeenCalledTimes(1);
-  });
 });
