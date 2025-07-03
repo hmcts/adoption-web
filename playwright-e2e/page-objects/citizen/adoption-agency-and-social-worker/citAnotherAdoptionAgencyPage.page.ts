@@ -28,6 +28,8 @@ export class CITAnotherAdoptionAgencyPage extends BasePage {
   readonly emailAddressHeading: Locator;
   readonly emailAddressLabel: Locator;
 
+  readonly errorSummary: Locator;
+
   constructor(page: Page) {
     super(page);
     this.applicationDetailsTitle = page.getByText('Application details');
@@ -56,5 +58,35 @@ export class CITAnotherAdoptionAgencyPage extends BasePage {
 
     this.emailAddressHeading = page.getByText('Email address of your contact');
     this.emailAddressLabel = page.getByRole('textbox', { name: 'Email address of your contact' });
+
+    this.errorSummary = page.locator('div').filter({ hasText: 'There is a problem Enter name' }).nth(3);
+  }
+
+  async fillAdoptionAgencyLabel(agency: string): Promise<void> {
+    await this.nameOfAdoptionAgencyLabel.fill(agency);
+  }
+
+  async fillNameOfYourContactLabel(name: string): Promise<void> {
+    await this.nameOfYourContactLabel.fill(name);
+  }
+
+  async fillPhoneNumberLabel(number: string): Promise<void> {
+    await this.phoneNumberLabel.fill(number);
+  }
+
+  async fillAddressOneLabel(address: string): Promise<void> {
+    await this.addressLineOneHeading.fill(address);
+  }
+
+  async fillTownOrCityLabel(town: string): Promise<void> {
+    await this.townOrCityLabel.fill(town);
+  }
+
+  async fillPostcodeLabel(postcode: string): Promise<void> {
+    await this.postcodeLabel.fill(postcode);
+  }
+
+  async fillEmailAddressLabel(email: string): Promise<void> {
+    await this.emailAddressLabel.fill(email);
   }
 }
