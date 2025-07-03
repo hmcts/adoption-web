@@ -13,7 +13,7 @@ data "azurerm_subnet" "core_infra_redis_subnet" {
 }
 
 module "adoption-web-session-storage" {
-  source                        = "git@github.com:hmcts/cnp-module-redis?ref=master"
+  source                        = "git@github.com:hmcts/cnp-module-redis?ref=DTSPO-17012-data-persistency"
   product                       = "${var.product}-${var.component}-session-storage"
   location                      = var.location
   env                           = var.env
@@ -25,6 +25,9 @@ module "adoption-web-session-storage" {
   sku_name                      = var.sku_name
   family                        = var.family
   capacity                      = var.capacity
+  rdb_backup_enabled              = var.rdb_backup_enabled
+  rdb_backup_frequency            = var.redis_backup_frequency
+  rdb_storage_account_name_prefix = var.raw_product
 }
 
 data "azurerm_key_vault" "adoption_key_vault" {
