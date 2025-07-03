@@ -4040,19 +4040,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^17.0.40":
-  version: 17.0.45
-  resolution: "@types/node@npm:17.0.45"
-  checksum: aa04366b9103b7d6cfd6b2ef64182e0eaa7d4462c3f817618486ea0422984c51fc69fd0d436eae6c9e696ddfdbec9ccaa27a917f7c2e8c75c5d57827fe3d95e8
-  languageName: node
-  linkType: hard
-
 "@types/node@npm:^18.0.0":
   version: 18.19.40
   resolution: "@types/node@npm:18.19.40"
   dependencies:
     undici-types: ~5.26.4
   checksum: 1308501c9c1f1c189786d3500bb90497e6ad9d6eb30b33a705806c32169bfb85e50da1d7f13536551c79b597fdb207f302778d0e84e93db59a08a575ed304956
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^18.15.0":
+  version: 18.19.115
+  resolution: "@types/node@npm:18.19.115"
+  dependencies:
+    undici-types: ~5.26.4
+  checksum: fc39f51a17364c00fdfda35494dc71b84d3eef2d5f8ee97103a9af55492784c20963bbc21b5b7f419b29fe97eecf9276cdf766673036efa3660b241396189a1b
   languageName: node
   linkType: hard
 
@@ -4986,7 +4988,7 @@ __metadata:
     "@types/mini-css-extract-plugin": ^2.5.1
     "@types/multer": ^1.4.7
     "@types/negotiator": ^0.6.1
-    "@types/node": ^17.0.40
+    "@types/node": ^18.15.0
     "@types/nunjucks": ^3.2.1
     "@types/redis": ^2.8.32
     "@types/require-directory": ^2.1.2
