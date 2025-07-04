@@ -17,6 +17,7 @@
     "baseUrl": "src/main",
     "paths": {
       "router/*": ["router/*"],
+      "routes/*": ["routes/*"]
     },
     "typeRoots": ["./node_modules/@types"]
   },

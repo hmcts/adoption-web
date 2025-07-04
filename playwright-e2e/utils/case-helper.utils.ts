@@ -20,32 +20,64 @@ export class CaseHelperUtils {
       experimental: 'true',
     };
   }
-
-  private async fetchEventToken(triggerUrl: string): Promise<string> {
-    console.log(triggerUrl);
-    const context = await this.createApiContext();
-    const response = await context.get(triggerUrl);
-
-    if (!response.ok()) {
-      throw new Error(`Failed to fetch event token: ${response.status()}`);
+  /**
+ * Function to retrieve the event for a given event ID.
+ * @param {APIRequestContext} apiContext api context required to make the API requests
+ * @param {string} bearerToken token required for Authorization of the API requests
+ * @param {string} s2sToken token required for Service Authorization of the API requests
+ * @param {string} userID user ID of the user that is requesting the event token
+ * @param {string} caseEvent the ID of the case event
+ * @param {string} caseID the ID of the case
+ * @returns {Promise<string>} the event token for the given event
+ */
+  private async  getEventToken(
+    apiContext: APIRequestContext,
+    bearerToken: string,
+    s2sToken: string,
+    eventId: string,
+  ): Promise<string> {
+    let eventToken: string = "";
+    const url: string = urlConfig.ccd_data_api_url + `/case-types/${this.caseType}/event-triggers/${eventId}`;
+    const response = await apiContext.get(url, {
+      headers: {
+        Authorization: `Bearer ${bearerToken}`,
+        "Content-Type": "application/json",
+        ServiceAuthorization: `Bearer ${s2sToken}`,
+      },
+    });
+    if (response.ok()) {
+      const responseBody = await response.json();
+      if (responseBody) {
+        eventToken = responseBody.token;
+      } else {
+        throw new Error("Failed to get event token");
+      }
+    } else {
+      throw new Error(
+        `Failed to get event token for event: ${caseEvent}: Received the following response: ${response.status()} - ${response.statusText()}`,
+      );
     }
-
-    const json = await response.json();
-    return json.token;
+    return eventToken;
   }
 
   async createCase(caseData: Record<string, any>) {
-    const eventId = 'citizen-create-application';
+    const eventId = 'citizen-create-application' as string;
     const context = await this.createApiContext();
     console.log(urlConfig.ccd_data_api_url + `/case-types/${this.caseType}/event-triggers/${eventId}`);
-    const token = await this.fetchEventToken(urlConfig.ccd_data_api_url + `/case-types/${this.caseType}/event-triggers/'citizen-create-application'`);
-
+    //const token = await this.fetchEventToken(urlConfig.ccd_data_api_url + `/case-types/${this.caseType}/event-triggers/${eventId}`);
+    const eventToken: string = await this.getEventToken(
+      context,
+      process.env.CREATE_CASE_TOKEN as string,
+      process.env.S2S_TOKEN as string,
+      'citizen-create-application',
+    );
+    console.log(eventToken)
     const response = await context.post(`/case-types/${this.caseType}/cases`, {
       headers: this.getHeaders(),
       data: {
         data: caseData,
         event: { id: eventId },
-        event_token: token,
+        event_token: eventToken,
       },
     });
 

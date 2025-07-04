@@ -5,7 +5,6 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "type": "module",
   "scripts": {
     "setup": "./playwright-e2e/scripts/get_secrets.sh && yarn playwright install &&  yarn playwright install webkit && yarn install firefox",
     "setup-env": "./playwright-e2e/scripts/get_secrets.sh",
@@ -52,10 +51,11 @@
     "broker:stop": "docker-compose -f broker-compose.yaml down"
   },
   "dependencies": {
+    "@axe-core/playwright": "^4.10.0",
     "@hmcts/cookie-manager": "^1.0.0",
     "@hmcts/nodejs-healthcheck": "^1.8.4",
     "@hmcts/nodejs-logging": "^4.0.4",
-    "@hmcts/playwright-common": "1.0.28",
+    "@hmcts/playwright-common": "1.0.29",
     "@hmcts/properties-volume": "^1.0.0",
     "@types/autobind-decorator": "^2.1.0",
     "@types/config": "^0.0.41",
@@ -116,7 +116,7 @@
     "toobusy-js": "^0.5.1",
     "ts-node": "^10.8.1",
     "tsconfig-paths": "^4.0.0",
-    "typescript": "^5.0.0",
+    "typescript": "^5.4.5",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

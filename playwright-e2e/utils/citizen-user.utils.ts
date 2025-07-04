@@ -2,6 +2,7 @@ import { IdamUtils } from '@hmcts/playwright-common';
 import { v4 as uuidv4 } from 'uuid';
 
 type UserInfo = {
+  id: string;
   email: string;
   password: string;
   forename: string;
@@ -36,6 +37,7 @@ export class CitizenUserUtils {
     }
 
     return {
+      id: user.id,
       email: user.email,
       password: user.password,
       forename,
