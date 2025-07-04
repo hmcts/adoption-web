@@ -9,14 +9,14 @@ import PaymentCallbackGetController from './get';
 
 jest.mock('../../../../app/payment/PaymentClient');
 
-const { mockCreate, mockGet } = require('../../../../app/payment/PaymentClient');
+const { mockCreate, mockGetCompletedPayment } = require('../../../../app/payment/PaymentClient');
 
 describe('PaymentCallbackGetController', () => {
   const paymentController = new PaymentCallbackGetController();
 
   beforeEach(() => {
     mockCreate.mockClear();
-    mockGet.mockClear();
+    mockGetCompletedPayment.mockClear();
   });
 
   describe('callback', () => {
@@ -41,14 +41,14 @@ describe('PaymentCallbackGetController', () => {
       });
       const res = mockResponse();
 
-      (mockGet as jest.Mock).mockReturnValueOnce({
+      (mockGetCompletedPayment as jest.Mock).mockReturnValueOnce({
         payment_id: 'mock payment id',
         status: 'Success',
       });
 
       await paymentController.get(req, res);
 
-      expect(mockGet).toHaveBeenCalledWith('mock ref');
+      expect(mockGetCompletedPayment).toHaveBeenCalledWith('mock ref', '1234');
 
       expect(req.locals.api.addPayment).toHaveBeenCalledWith('1234', expect.any(Array));
 
@@ -98,7 +98,7 @@ describe('PaymentCallbackGetController', () => {
       });
       const res = mockResponse();
 
-      (mockGet as jest.Mock)
+      (mockGetCompletedPayment as jest.Mock)
         .mockReturnValueOnce({
           payment_id: 'mock payment id 3',
           status: 'Error',
@@ -114,8 +114,8 @@ describe('PaymentCallbackGetController', () => {
 
       await paymentController.get(req, res);
 
-      expect(mockGet).toHaveBeenCalledWith('mock ref');
-      expect(mockGet).toBeCalledTimes(3);
+      expect(mockGetCompletedPayment).toHaveBeenCalledWith('mock ref', '1234');
+      expect(mockGetCompletedPayment).toBeCalledTimes(3);
 
       expect(req.locals.api.addPayment).toHaveBeenCalledWith('1234', expect.any(Array));
 
@@ -165,14 +165,14 @@ describe('PaymentCallbackGetController', () => {
       });
       const res = mockResponse();
 
-      (mockGet as jest.Mock).mockReturnValueOnce({
+      (mockGetCompletedPayment as jest.Mock).mockReturnValueOnce({
         payment_id: 'mock payment id 3',
         status: 'Success',
       });
 
       await paymentController.get(req, res);
 
-      expect(mockGet).toHaveBeenCalledWith('mock ref');
+      expect(mockGetCompletedPayment).toHaveBeenCalledWith('mock ref', '1234');
 
       expect(req.locals.api.addPayment).toHaveBeenCalledWith('1234', expect.any(Array));
 
@@ -189,7 +189,7 @@ describe('PaymentCallbackGetController', () => {
 
       await paymentController.get(req, res);
 
-      expect(mockGet).not.toHaveBeenCalled();
+      expect(mockGetCompletedPayment).not.toHaveBeenCalled();
       expect(req.locals.api.addPayment).not.toHaveBeenCalled();
       expect(res.redirect).toHaveBeenCalledWith(CHECK_ANSWERS_URL);
     });
@@ -224,7 +224,7 @@ describe('PaymentCallbackGetController', () => {
 
       await paymentController.get(req, res);
 
-      expect(mockGet).not.toHaveBeenCalled();
+      expect(mockGetCompletedPayment).not.toHaveBeenCalled();
       expect(req.locals.api.addPayment).not.toHaveBeenCalled();
       expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', {}, CITIZEN_SUBMIT);
       expect(res.redirect).toHaveBeenCalledWith(CHECK_ANSWERS_URL);
@@ -240,7 +240,7 @@ describe('PaymentCallbackGetController', () => {
 
       await paymentController.get(req, res);
 
-      expect(mockGet).not.toHaveBeenCalled();
+      expect(mockGetCompletedPayment).not.toHaveBeenCalled();
       expect(req.locals.api.addPayment).not.toHaveBeenCalled();
       expect(res.redirect).toHaveBeenCalledWith(CHECK_ANSWERS_URL);
     });
@@ -255,7 +255,7 @@ describe('PaymentCallbackGetController', () => {
 
       await paymentController.get(req, res);
 
-      expect(mockGet).not.toHaveBeenCalled();
+      expect(mockGetCompletedPayment).not.toHaveBeenCalled();
       expect(req.locals.api.addPayment).not.toHaveBeenCalled();
       expect(res.redirect).toHaveBeenCalledWith(APPLICATION_SUBMITTED);
     });
@@ -270,7 +270,7 @@ describe('PaymentCallbackGetController', () => {
 
       await paymentController.get(req, res);
 
-      expect(mockGet).not.toHaveBeenCalled();
+      expect(mockGetCompletedPayment).not.toHaveBeenCalled();
       expect(req.locals.api.addPayment).not.toHaveBeenCalled();
       expect(res.redirect).toHaveBeenCalledWith(APPLICATION_SUBMITTED);
     });
@@ -300,14 +300,14 @@ describe('PaymentCallbackGetController', () => {
       req.locals.api.addPayment = jest.fn().mockReturnValue(userCase);
       const res = mockResponse();
 
-      (mockGet as jest.Mock).mockReturnValueOnce({
+      (mockGetCompletedPayment as jest.Mock).mockReturnValueOnce({
         payment_id: 'mock payment id',
         status: 'Failed',
       });
 
       await paymentController.get(req, res);
 
-      expect(mockGet).toHaveBeenCalledWith('mock ref');
+      expect(mockGetCompletedPayment).toHaveBeenCalledWith('mock ref', '1234');
 
       expect(req.locals.api.addPayment).toHaveBeenCalledWith('1234', expect.any(Array));
 
@@ -363,15 +363,15 @@ describe('PaymentCallbackGetController', () => {
       req.locals.api.addPayment = jest.fn().mockReturnValue(userCase);
       const res = mockResponse();
 
-      (mockGet as jest.Mock).mockReturnValue({
+      (mockGetCompletedPayment as jest.Mock).mockReturnValue({
         payment_id: 'mock payment id',
         status: 'Error',
       });
 
       await paymentController.get(req, res);
 
-      expect(mockGet).toHaveBeenCalledWith('mock ref');
-      expect(mockGet).toBeCalledTimes(3);
+      expect(mockGetCompletedPayment).toHaveBeenCalledWith('mock ref', '1234');
+      expect(mockGetCompletedPayment).toBeCalledTimes(3);
 
       expect(req.locals.api.addPayment).toHaveBeenCalledWith('1234', expect.any(Array));
 

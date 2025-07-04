@@ -167,7 +167,7 @@ pactWith(
         });
 
         const client = new PaymentClient(req.session, '/review-pay-submit/payment/payment-callback');
-        await client.get('654321ABC');
+        await client.get('654321ABC', 'case-ref');
         provider.verify();
       });
     });
