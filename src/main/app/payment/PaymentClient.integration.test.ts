@@ -90,7 +90,9 @@ describe('PaymentClient', () => {
 
     await expect(() => client.create()).rejects.toThrow('Error creating payment');
 
-    expect(mockLogger.error).toBeCalledWith('Error creating payment', { mockPayment: 'data, but missing _links' });
+    expect(mockLogger.error).toBeCalledWith('PaymentClient: Error creating payment for caseId=1234', {
+      mockPayment: 'data, but missing _links',
+    });
   });
 
   it('gets payment data', async () => {
@@ -100,9 +102,9 @@ describe('PaymentClient', () => {
 
     const client = new PaymentClient(req.session, 'http://return-url');
 
-    const actual = await client.get('1234');
+    const actual = await client.get('1234', 'case-ref');
 
-    expect(mockGet).toHaveBeenCalledWith('/card-payments/1234');
+    expect(mockGet).toHaveBeenCalledWith('/card-payments/1234', { signal: expect.any(AbortSignal) });
 
     expect(actual).toEqual({ mockPayment: 'data' });
   });
@@ -114,8 +116,11 @@ describe('PaymentClient', () => {
 
     const client = new PaymentClient(req.session, 'http://return-url');
 
-    await client.get('1234');
+    await client.get('1234', '4321');
 
-    expect(mockLogger.error).toBeCalledWith('Error fetching payment', { some: 'error' });
+    expect(mockLogger.error).toBeCalledWith(
+      'PaymentClient.get: Error fetching payment (reference 1234) for caseId=4321',
+      { some: 'error' }
+    );
   });
 });

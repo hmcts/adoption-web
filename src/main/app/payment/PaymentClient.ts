@@ -27,7 +27,7 @@ export class PaymentClient {
     const caseId = userCase.id.toString();
 
     const total = userCase.applicationFeeOrderSummary.Fees.reduce((sum, item) => sum + +item.value.FeeAmount, 0);
-    logger.info(`caseId=${caseId} total=${total}`);
+    logger.info(`PaymentClient: caseId=${caseId} total=${total}`);
 
     const body = {
       case_type: CASE_TYPE,
@@ -45,30 +45,78 @@ export class PaymentClient {
 
     try {
       const response = await this.client.post<Payment>('/card-payments', body);
-      logger.info(`Generated govpay link for caseId=${caseId}`);
+      logger.info(`PaymentClient: Generated govpay link for caseId=${caseId}`);
 
       if (!response.data || !response.data._links?.next_url.href) {
+        logger.error(`PaymentClient: No data or no next_url in response for caseId=${caseId}`);
         throw response;
       }
 
       return response.data;
     } catch (e) {
       logger.error(e);
-      const errMsg = 'Error creating payment';
+      const errMsg = `PaymentClient: Error creating payment for caseId=${caseId}`;
       logger.error(errMsg, e.data);
       throw new Error(errMsg);
     }
   }
 
-  public async get(paymentReference: string): Promise<Payment | undefined> {
+  public async get(paymentReference: string, caseId: string): Promise<Payment | undefined> {
     try {
-      const response = await this.client.get<Payment>(`/card-payments/${paymentReference}`);
-      logger.info(JSON.stringify(response.data));
+      const response = await this.client.get<Payment>(`/card-payments/${paymentReference}`, {
+        signal: AbortSignal.timeout(2000), // 2 second timeout
+      });
+      logger.info(`PaymentClient.get: response = ${JSON.stringify(response.data)}`);
       return response.data;
     } catch (e) {
-      const errMsg = 'Error fetching payment';
+      let errMsg = `PaymentClient.get: Error fetching payment (reference ${paymentReference}) for caseId=${caseId}`;
+
+      if (e.name === 'TimeoutError') {
+        errMsg = `PaymentClient.get: Timeout: It took >2 seconds to fetch the payment (reference ${paymentReference}) for caseId=${caseId}`;
+      }
+
       logger.error(errMsg, e.data);
     }
+  }
+
+  /**
+   * Attempts to fetch a payment until the payment status is no longer 'Initiated' or undefined.
+   * @param maxRetries (default 2)
+   */
+  public async getCompletedPayment(
+    paymentReference: string,
+    caseId: string,
+    maxRetries = 2
+  ): Promise<Payment | undefined> {
+    let paymentStateInitiatedOrUnknown = true;
+    let retry = 0;
+    let delay = 1000; // Start with a 1 second delay
+
+    while (paymentStateInitiatedOrUnknown) {
+      const payment = await this.get(paymentReference, caseId);
+
+      if (payment) {
+        paymentStateInitiatedOrUnknown = payment.status === 'Initiated' || payment.status === undefined;
+        if (!paymentStateInitiatedOrUnknown) {
+          return payment;
+        }
+      }
+
+      if (retry >= maxRetries) {
+        break;
+      }
+
+      logger.info(
+        `PaymentClient: Payment status = ${payment?.status} for caseId=${caseId}, paymentReference=${paymentReference}. Retrying in ${delay}ms...`
+      );
+      await new Promise(resolve => setTimeout(resolve, delay));
+      delay *= 2; // Exponential backoff
+      retry++;
+    }
+
+    logger.error(
+      `PaymentClient.getCompletedPayment unable to fetch payment final status after ${maxRetries} retries. caseId=${caseId}, paymentReference=${paymentReference}`
+    );
   }
 }
 
