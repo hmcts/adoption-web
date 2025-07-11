@@ -22,16 +22,15 @@ export const utilsFixtures = {
   axeUtils: async ({ page }, use) => {
     await use(new AxeUtils(page));
   },
-  caseHelperUtils: async ({ request }, use) => {
+  caseHelperUtils: async ({ idamUtils }, use) => {
     const caseType = 'A58';
-    const accessToken = process.env.CREATE_CASE_TOKEN;
     const serviceToken = process.env.S2S_TOKEN;
-
-    if (!accessToken || !serviceToken) {
+ 
+    if (!serviceToken) {
       throw new Error('Missing ACCESS_TOKEN or SERVICE_TOKEN in environment');
     }
 
-    const helper = new CaseHelperUtils(caseType, accessToken, serviceToken);
+    const helper = new CaseHelperUtils(caseType, serviceToken, idamUtils);
     await use(helper);
   },
 };
