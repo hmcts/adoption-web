@@ -3805,13 +3805,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/es6-promisify@npm:^6.0.1":
-  version: 6.0.4
-  resolution: "@types/es6-promisify@npm:6.0.4"
-  checksum: 1df492c95d43eee2f16f5f196d56869c5c44229a35488dced5f47a518cb17532d05407b5046b964fc51fffb94761c9d5206f320a3f816e9a5276ec2edb36dc0e
-  languageName: node
-  linkType: hard
-
 "@types/estree@npm:^1.0.5":
   version: 1.0.5
   resolution: "@types/estree@npm:1.0.5"
@@ -3849,16 +3842,6 @@ __metadata:
     "@types/qs": "*"
     "@types/serve-static": "*"
   checksum: fb238298630370a7392c7abdc80f495ae6c716723e114705d7e3fb67e3850b3859bbfd29391463a3fb8c0b32051847935933d99e719c0478710f8098ee7091c5
-  languageName: node
-  linkType: hard
-
-"@types/glob@npm:^7.2.0":
-  version: 7.2.0
-  resolution: "@types/glob@npm:7.2.0"
-  dependencies:
-    "@types/minimatch": "*"
-    "@types/node": "*"
-  checksum: 6ae717fedfdfdad25f3d5a568323926c64f52ef35897bcac8aca8e19bc50c0bd84630bbd063e5d52078b2137d8e7d3c26eabebd1a2f03ff350fff8a91e79fc19
   languageName: node
   linkType: hard
 
@@ -3992,7 +3975,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/minimatch@npm:*, @types/minimatch@npm:^5.1.2":
+"@types/minimatch@npm:^5.1.2":
   version: 5.1.2
   resolution: "@types/minimatch@npm:5.1.2"
   checksum: 0391a282860c7cb6fe262c12b99564732401bdaa5e395bee9ca323c312c1a0f45efbf34dce974682036e857db59a5c9b1da522f3d6055aeead7097264c8705a8
@@ -4118,15 +4101,6 @@ __metadata:
     "@types/tough-cookie": "*"
     form-data: ^2.5.0
   checksum: 0b7754941e08205dce51635d894ec524df276d2b83ca13b9aab723f9281acecf1108841e9554494cb1cb60f6d6ddbb47ebea97392bcf2bf607f035b3a9b4af45
-  languageName: node
-  linkType: hard
-
-"@types/require-directory@npm:^2.1.2":
-  version: 2.1.6
-  resolution: "@types/require-directory@npm:2.1.6"
-  dependencies:
-    "@types/node": "*"
-  checksum: 7c4a9408e04d106d968a911af913ea4cad6d3c4f17eef7fa7c948835173ce596b24baf36d495575fbd975cb2aaea66de7b660292766ecc3c6168a6f5b897bde9
   languageName: node
   linkType: hard
 
@@ -4986,10 +4960,8 @@ __metadata:
     "@types/cookie-parser": ^1.4.3
     "@types/copy-webpack-plugin": ^10.1.0
     "@types/csurf": ^1.11.2
-    "@types/es6-promisify": ^6.0.1
     "@types/express": ^4.17.13
     "@types/express-session": ^1.17.4
-    "@types/glob": ^7.2.0
     "@types/jest": ^29.0.0
     "@types/lodash": ^4.14.182
     "@types/mini-css-extract-plugin": ^2.5.1
@@ -4998,7 +4970,6 @@ __metadata:
     "@types/node": ^20.19.3
     "@types/nunjucks": ^3.2.1
     "@types/redis": ^2.8.32
-    "@types/require-directory": ^2.1.2
     "@types/serve-favicon": ^2.5.3
     "@types/session-file-store": ^1.2.2
     "@types/toobusy-js": ^0.5.2
@@ -5037,7 +5008,6 @@ __metadata:
     eslint-plugin-jest: ^26.5.3
     eslint-plugin-prettier: ^4.0.0
     express: ^4.21.2
-    express-http-proxy: ^1.6.3
     express-session: ^1.17.3
     form-data: ^4.0.0
     glob: ^8.0.3
@@ -5053,7 +5023,6 @@ __metadata:
     jest-html-reporter: ^3.5.0
     jest-pact: ^0.11.0
     jest-when: ^3.5.1
-    js-yaml: ^4.1.0
     jwt-decode: ^3.1.2
     lint-staged: ^13.0.0
     lodash: ^4.17.21
@@ -5072,7 +5041,6 @@ __metadata:
     otplib: ^12.0.1
     prettier: ^2.6.2
     redis: ^3.1.2
-    require-directory: ^2.1.1
     sass-loader: ^13.0.0
     serve-favicon: ^2.5.0
     session-file-store: ^1.5.0
@@ -5082,7 +5050,6 @@ __metadata:
     ts-jest: ^29.0.0
     ts-loader: ^9.3.0
     ts-node: ^10.8.1
-    tsconfig-paths: ^4.0.0
     typescript: ^5.4.5
     uuid: ^8.3.2
     webdriverio: ^7.19.7
@@ -7908,7 +7875,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:^3.0.1, debug@npm:^3.2.6, debug@npm:^3.2.7":
+"debug@npm:^3.2.6, debug@npm:^3.2.7":
   version: 3.2.7
   resolution: "debug@npm:3.2.7"
   dependencies:
@@ -9340,17 +9307,6 @@ __metadata:
   version: 3.1.1
   resolution: "exponential-backoff@npm:3.1.1"
   checksum: 3d21519a4f8207c99f7457287291316306255a328770d320b401114ec8481986e4e467e854cb9914dd965e0a1ca810a23ccb559c642c88f4c7f55c55778a9b48
-  languageName: node
-  linkType: hard
-
-"express-http-proxy@npm:^1.6.3":
-  version: 1.6.3
-  resolution: "express-http-proxy@npm:1.6.3"
-  dependencies:
-    debug: ^3.0.1
-    es6-promise: ^4.1.1
-    raw-body: ^2.3.0
-  checksum: 67fa357a29404e22778cfa59e60cdf410d876caeeaab7d34946d40ac6555cfcc666a0fd28fc087149b1f9bbb8349b057ad575485331126b1b99b696ab2528488
   languageName: node
   linkType: hard
 
@@ -16106,7 +16062,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"raw-body@npm:2.5.2, raw-body@npm:^2.3.0":
+"raw-body@npm:2.5.2":
   version: 2.5.2
   resolution: "raw-body@npm:2.5.2"
   dependencies:
@@ -18432,17 +18388,6 @@ __metadata:
     minimist: ^1.2.6
     strip-bom: ^3.0.0
   checksum: 59f35407a390d9482b320451f52a411a256a130ff0e7543d18c6f20afab29ac19fbe55c360a93d6476213cc335a4d76ce90f67df54c4e9037f7d240920832201
-  languageName: node
-  linkType: hard
-
-"tsconfig-paths@npm:^4.0.0":
-  version: 4.2.0
-  resolution: "tsconfig-paths@npm:4.2.0"
-  dependencies:
-    json5: ^2.2.2
-    minimist: ^1.2.6
-    strip-bom: ^3.0.0
-  checksum: 28c5f7bbbcabc9dabd4117e8fdc61483f6872a1c6b02a4b1c4d68c5b79d06896c3cc9547610c4c3ba64658531caa2de13ead1ea1bf321c7b53e969c4752b98c7
   languageName: node
   linkType: hard
 
