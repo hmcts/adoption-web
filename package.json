@@ -108,6 +108,7 @@
     "session-file-store": "^1.5.0",
     "toobusy-js": "^0.5.1",
     "ts-node": "^10.8.1",
+    "tsconfig-paths": "^4.0.0",
     "typescript": "^5.4.5",
     "uuid": "^8.3.2"
   },
