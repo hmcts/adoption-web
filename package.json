@@ -114,7 +114,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",
-    "@babel/preset-env": "^7.18.2",
+    "@babel/eslint-parser": "^7.11.0",
     "@faker-js/faker": "^8.4.1",
     "@pact-foundation/absolute-version": "^0.0.4",
     "@pact-foundation/pact": "^9.17.3",
