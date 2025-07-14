@@ -19,7 +19,7 @@ test.describe('Citizen Journey other adoption agency single parent test', () => 
     await signIn.signIn(userEmail, userPassword);
     await citApplyingWithPage.checkApplyingOnMyOwnRadioButton();
     await citApplyingWithPage.clickSaveAndContinue();
-    await page.goto('https://adoption-web.aat.platform.hmcts.net/children/other-adoption-agency');
+    await page.goto(`${urlConfig.citizenFrontendBaseUrl}/children/other-adoption-agency`);
   });
 
   test.afterEach('Status check', async () => {
