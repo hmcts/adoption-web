@@ -14,7 +14,7 @@ export class CitizenUserUtils {
   constructor(private idamUtils: IdamUtils) {}
 
   async createUser(): Promise<UserInfo> {
-    const token = process.env.CREATE_USER_BEARER_TOKEN as string;
+    const token = process.env.AUTH_TOKEN as string;
     const password = process.env.IDAM_CITIZEN_USER_PASSWORD as string;
     const uniqueId = uuidv4();
 

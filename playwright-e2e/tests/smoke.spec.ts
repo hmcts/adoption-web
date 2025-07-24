@@ -77,7 +77,8 @@ test.describe('smoke test', () => {
     await app.reviewSubmit.fillCardDetails(appOneName.appOneFullname, userEmail, postcode1);
 
 
-    await axeUtils.audit(); //Axe-core accessibility scan using helper function  }
+    await axeUtils.audit(); //Axe-core accessibility scan using helper function
+  }
 
     test(
       'smoke test: single person submits an adoption application',
@@ -95,4 +96,4 @@ test.describe('smoke test', () => {
         );
       }
     );
-  }})
+  })
