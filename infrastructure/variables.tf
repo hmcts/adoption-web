@@ -58,6 +58,12 @@ variable "capacity" {
 variable "rdb_backup_enabled" {
   type        = bool
   default     = false
+  description = "The maximum number of snapshots to create as a backup. Only supported for Premium SKUs."
+}
+
+variable "rdb_backup_max_snapshot_count" {
+  type    = string
+  default = "5"
 }
 
 variable "redis_backup_frequency" {
