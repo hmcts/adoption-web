@@ -9,7 +9,7 @@
     "noImplicitAny": false,
     "noImplicitThis": false,
     "moduleResolution": "node",
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "experimentalDecorators": true,
     "useUnknownInCatchVariables": false,
     "skipLibCheck": true,
