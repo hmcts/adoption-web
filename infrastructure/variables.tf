@@ -62,7 +62,7 @@ variable "rdb_backup_enabled" {
 
 variable "rdb_backup_max_snapshot_count" {
   type        = string
-  default     = "5"
+  default     = "1"
   description = "The maximum number of snapshots to create as a backup. Only supported for Premium SKUs."
 }
 
