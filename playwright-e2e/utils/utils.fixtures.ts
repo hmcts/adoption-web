@@ -31,11 +31,11 @@ export const utilsFixtures = {
     const caseType = 'A58';
     const serviceToken = process.env.S2S_TOKEN;
 
-    if (!serviceToken) {
-      throw new Error('Missing ACCESS_TOKEN or SERVICE_TOKEN in environment');
-    }
+    // if (!serviceToken) {
+    //   throw new Error('Missing ACCESS_TOKEN or SERVICE_TOKEN in environment');
+    // }
 
-    const helper = new CaseHelperUtils(caseType, serviceToken, idamUtils);
+    const helper = new CaseHelperUtils(caseType, idamUtils);
     await use(helper);
   },
 };
