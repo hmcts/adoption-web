@@ -1,35 +1,29 @@
 import { expect, test } from '../../../fixtures/fixtures';
-import { setupUser, teardownUser } from '../../../hooks/createDeleteUser.hook';
 import { urlConfig } from '../../../utils/urls';
 import { runChangePageLanguageTest, runPageLanguageTest } from '../test-utils';
 test.describe('Citizen Journey adult social worker test single parent', () => {
   let userEmail: string;
   let userPassword: string;
-  let userId: string;
 
-  test.beforeEach(async ({ signIn, citApplyingWithPage, citTaskListPage, citChildSocialWorkerDetailsPage }) => {
-    const userInfo = await setupUser();
-    if (userInfo) {
-      userEmail = userInfo.email;
-      userPassword = userInfo.password;
-      userId = userInfo.id;
+  test.beforeEach(
+    async ({ signIn, citizenUserUtils, citApplyingWithPage, citTaskListPage, citChildSocialWorkerDetailsPage }) => {
+      const userInfo = await citizenUserUtils.createUser();
+      if (userInfo) {
+        userEmail = userInfo.email;
+        userPassword = userInfo.password;
+      }
+      await signIn.navigateTo();
+      await signIn.signIn(userEmail, userPassword);
+      await citApplyingWithPage.checkApplyingOnMyOwnRadioButton();
+      await citApplyingWithPage.clickSaveAndContinue();
+      await citTaskListPage.clickAdoptionAgencyLink();
+      await citChildSocialWorkerDetailsPage.fillNameOfChildSocialWorkerLabel('test');
+      await citChildSocialWorkerDetailsPage.fillPhoneNumberLabel('01622 123456');
+      await citChildSocialWorkerDetailsPage.selectLocalAuthority('Sandwell');
+      await citChildSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('austen.stevens@justice.gov.uk');
+      await citChildSocialWorkerDetailsPage.clickSaveAndContinue();
     }
-    await signIn.navigateTo();
-    await signIn.signIn(userEmail, userPassword);
-    await citApplyingWithPage.checkApplyingOnMyOwnRadioButton();
-    await citApplyingWithPage.clickSaveAndContinue();
-    await citTaskListPage.clickAdoptionAgencyLink();
-
-    await citChildSocialWorkerDetailsPage.fillNameOfChildSocialWorkerLabel('test');
-    await citChildSocialWorkerDetailsPage.fillPhoneNumberLabel('01622 123456');
-    await citChildSocialWorkerDetailsPage.selectLocalAuthority('Sandwell');
-    await citChildSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('austen.stevens@justice.gov.uk');
-    await citChildSocialWorkerDetailsPage.clickSaveAndContinue();
-  });
-
-  test.afterEach('Status check', async () => {
-    await teardownUser(userId);
-  });
+  );
 
   test('check default page is in English', async ({ citAdultSocialWorkerDetailsPage }) => {
     await runPageLanguageTest('en', citAdultSocialWorkerDetailsPage);

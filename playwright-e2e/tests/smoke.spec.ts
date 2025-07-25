@@ -1,44 +1,30 @@
-import AxeBuilder from '@axe-core/playwright';
-import { test as base } from '@playwright/test';
 import * as dotenv from 'dotenv';
 
-import { expect } from '../fixtures/fixtures';
-import { runAccessibilityScan } from '../helpers/accessibilityHelper';
-import { setupUser, teardownUser } from '../hooks/createDeleteUser.hook';
+import { expect, test } from '../fixtures/fixtures';
 import App from '../pages/app.page';
 import { toggleBanner, toggleConfig } from '../utils/toggles';
 import { urlConfig } from '../utils/urls';
 
 dotenv.config();
 
-const test = base.extend<{ makeAxeBuilder: () => AxeBuilder }>({
-  makeAxeBuilder: async ({ page }, use) => {
-    await use(() => new AxeBuilder({ page }));
-  },
-});
-
 test.describe('smoke test', () => {
   let userEmail: string;
   let userPassword: string;
-  let userId: string;
 
-  test.beforeEach(async () => {
-    const userInfo = await setupUser();
+  // eslint-disable-next-line no-empty-pattern
+  test.beforeEach(async ({ citizenUserUtils }) => {
+
+    const userInfo = await citizenUserUtils.createUser();
     if (userInfo) {
       userEmail = userInfo.email;
       userPassword = userInfo.password;
-      userId = userInfo.id;
     }
-  });
-
-  test.afterEach('Status check', async () => {
-    await teardownUser(userId);
   });
 
   const smokeTestTags = { tag: ['@smoke', '@citizen', '@accessibility'] };
   async function submitSingleApplicationJourney(
     page,
-    makeAxeBuilder,
+    axeUtils,
     testInfo,
     applicantNumber,
     socialWorkLocation,
@@ -90,25 +76,24 @@ test.describe('smoke test', () => {
     await app.reviewSubmit.statementOfTruthOne(appOneName.appOneFullname);
     await app.reviewSubmit.fillCardDetails(appOneName.appOneFullname, userEmail, postcode1);
 
-    await app.page.pause();
 
-    await runAccessibilityScan(makeAxeBuilder, testInfo); //Axe-core accessibility scan using helper function
+    await axeUtils.audit(); //Axe-core accessibility scan using helper function
   }
 
-  test(
-    'smoke test: single person submits an adoption application',
-    smokeTestTags,
-    async ({ page, makeAxeBuilder }, testInfo) => {
-      await submitSingleApplicationJourney(
-        page,
-        makeAxeBuilder,
-        testInfo,
-        'alone',
-        'Sandwell Metropolitan Council',
-        'Leicester County Court',
-        'BN26 6AL',
-        '0800800800'
-      );
-    }
-  );
-});
+    test(
+      'smoke test: single person submits an adoption application',
+      smokeTestTags,
+      async ({ page, axeUtils }, testInfo) => {
+        await submitSingleApplicationJourney(
+          page,
+          axeUtils,
+          testInfo,
+          'alone',
+          'Sandwell Metropolitan Council',
+          'Leicester County Court',
+          'BN26 6AL',
+          '08008008000'
+        );
+      }
+    );
+  })
