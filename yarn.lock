@@ -5875,7 +5875,7 @@ __metadata:
     eslint-plugin-prettier: ^4.0.0
     express: ^4.21.2
     express-http-proxy: ^1.6.3
-    express-session: ^1.18.2
+    express-session: ^1.17.3
     form-data: ^4.0.4
     glob: ^8.0.3
     govuk-frontend: ^5.9.0
@@ -6507,14 +6507,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.8.2":
-  version: 1.8.2
-  resolution: "axios@npm:1.8.2"
+"axios@npm:1.11.0":
+  version: 1.11.0
+  resolution: "axios@npm:1.11.0"
   dependencies:
     follow-redirects: ^1.15.6
-    form-data: ^4.0.0
+    form-data: ^4.0.4
     proxy-from-env: ^1.1.0
-  checksum: c47a43b79a058aa9e53a65bec9ade35c9f6e76a3999c795a79a2d205fb5f803fd4245497a0209a9727cbbe4f558791dd852ad2c168c5fc030259c11598ed8fd7
+  checksum: 0a33dc600b588bfd3111b198d5985527ed89f722817455d7cdb66c1d055e5f8859cc2bebb7320888957fc8458ebe77d5f83af02af9cd260217c91c4e92b6dfb6
   languageName: node
   linkType: hard
 
@@ -9888,7 +9888,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express-session@npm:^1.18.2":
+"express-session@npm:^1.17.3":
   version: 1.18.2
   resolution: "express-session@npm:1.18.2"
   dependencies:
