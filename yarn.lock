@@ -3600,11 +3600,11 @@ __metadata:
   linkType: hard
 
 "@types/autobind-decorator@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "@types/autobind-decorator@npm:2.1.0"
+  version: 2.1.4
+  resolution: "@types/autobind-decorator@npm:2.1.4"
   dependencies:
     autobind-decorator: "*"
-  checksum: 8612dc12e558949d35c4a2e9510081ae4ec6b827ddeb02f93d8e2effed2982015ce44656c298b10950b8de34f93578cc59f614115eaa8b138b7494b91be1d37e
+  checksum: 4e090d68937abba65f3a6ae61ab1c6e71903551092ca82abd913982f2b146b7aa6f51bc338fcbdb3550ef242873b3dd3ef34b058f894133d3250e17a48e0b1f5
   languageName: node
   linkType: hard
 
