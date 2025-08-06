@@ -8,10 +8,8 @@ import { urlConfig } from './urls';
 import { getServiceAuthToken } from '../../src/main/app/auth/service/get-service-auth-token';
 
 export class CaseHelperUtils {
-  constructor(
-    private caseType: string = 'A58',
-    private idamUtils: IdamUtils
-  ) {}
+  [x: string]: any;
+  constructor(private caseType: string = 'A58', private idamUtils: IdamUtils) {}
 
   private async createApiContext(): Promise<APIRequestContext> {
     return request.newContext({});
@@ -71,26 +69,6 @@ export class CaseHelperUtils {
     return json;
   }
 
-  private async getServiceToken(): Promise<string> {
-   // logger.info('Refreshing service auth token');
-    let token: string = '';
-    const url = `${urlConfig.ccd_data_api_url}/case-types/A58/event-triggers/citizen-create-application`;
-    const microservice: string = 'adoption_web';
-    const secret: string = '';
-    const oneTimePassword = authenticator.generate(secret);
-    const body = { microservice, oneTimePassword };
-
-    try {
-      const response = await Axios.post(url, body);
-      //logger.info('Service auth token refreshed');
-      token = response.data;
-    } catch (err) {
-      console.error('Error in refreshing service auth token ', err.message, err.response?.status, err.response?.data);
-    }
-
-    return token;
-  };
-
   // private async getEventToken1(userId: string, bearerToken: string, eventId: string): Promise<string> {
   //   let s2sAuthRequest = await Axios.post(`http://rpe-service-auth-provider-aat.service.core-compute-aat.internal/lease`, { "microservice": 'adoption_web', "oneTimePassword": oneTimePassword }, { httpsAgent: agent });
   //   s2sAuth = s2sAuthRequest.data;
@@ -131,7 +109,7 @@ export class CaseHelperUtils {
    */
   private async getEventToken(userId: string, bearerToken: string, eventId: string): Promise<string> {
     let eventToken = '';
-    let serviceToken = await this.getServiceToken();
+    let serviceToken = await this.getServiceAuthToken();
     const context = await this.createApiContext();
     //<ccd-data-store-api>/{party}/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/{caseid}/event-triggers/DEFENDANT_RESPONSE_SPEC/token
     const url = `${urlConfig.ccd_data_api_url}/case-types/A58/event-triggers/citizen-create-application`;
