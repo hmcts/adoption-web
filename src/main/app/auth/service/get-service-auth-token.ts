@@ -10,8 +10,8 @@ export const getTokenFromApi = async (): Promise<string> => {
   logger.info('Refreshing service auth token');
 
   const url: string = config.get('services.authProvider.url') + '/lease';
-  const microservice: string = config.get('services.authProvider.microservice');
-  const secret: string = config.get('services.authProvider.secret');
+  const microservice: string = 'adoption_web';
+  const secret: any = process.env.IDAM_SECRET;
   const oneTimePassword = authenticator.generate(secret);
   const body = { microservice, oneTimePassword };
 
