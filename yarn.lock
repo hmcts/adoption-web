@@ -4756,12 +4756,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"accessible-autocomplete@npm:^2.0.4":
-  version: 2.0.4
-  resolution: "accessible-autocomplete@npm:2.0.4"
-  dependencies:
-    preact: ^8.3.1
-  checksum: e1eeff2785476bb37be022a1a149e68f3bacd4e29a264b442ddd2d6c94fe900ecaf109a87098791e55774fe7ec9d93e6d55039390c9e82207d3ebb18576f182a
+"accessible-autocomplete@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "accessible-autocomplete@npm:3.0.1"
+  peerDependencies:
+    preact: ^8.0.0
+  peerDependenciesMeta:
+    preact:
+      optional: true
+  checksum: 0b4802253cec1488c147c9bde20432e815619fdb5173b7aa5f95b2e2bb0a12dbba8810a162a205f74166b6ae2e43df18085b37a80e012ac05d00d689bc9d2a8f
   languageName: node
   linkType: hard
 
@@ -4881,7 +4884,7 @@ __metadata:
     "@uppy/file-input": ^2.1.0
     "@uppy/progress-bar": ^2.1.0
     "@uppy/xhr-upload": ^2.1.0
-    accessible-autocomplete: ^2.0.4
+    accessible-autocomplete: ^3.0.0
     applicationinsights: ^2.9.7
     autobind-decorator: ^2.4.0
     axios: ^0.28.0
@@ -14785,13 +14788,6 @@ __metadata:
   version: 10.22.1
   resolution: "preact@npm:10.22.1"
   checksum: 8762645766b1c057eaf9a58ff904b6659ffa7a7d33eb94dc2b96ff1ba08743855c3ade913dfbe9e8da994777aa9f4f5e9f23d39886340f23eaebcd98f5e107e5
-  languageName: node
-  linkType: hard
-
-"preact@npm:^8.3.1":
-  version: 8.5.3
-  resolution: "preact@npm:8.5.3"
-  checksum: 1a2d90816abdc62673842190b819b7ce2f552b4b412cc0d2118395d8167e79f4e988229993079700277a0cae6b7fd895b3bfe5a43091bbc1f4df43903b04d1e7
   languageName: node
   linkType: hard
 
