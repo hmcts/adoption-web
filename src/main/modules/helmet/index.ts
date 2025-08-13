@@ -3,7 +3,7 @@ import { Express, RequestHandler } from 'express';
 import helmet = require('helmet');
 
 export interface HelmetConfig {
-  referrerPolicy: string;
+  referrerPolicy: ReferrerPolicyToken;
 }
 
 const googleAnalyticsDomain = '*.google-analytics.com';
