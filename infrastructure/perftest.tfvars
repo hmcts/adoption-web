@@ -1,5 +1,4 @@
-sku_name               = "Premium"
-family                 = "P"
-capacity               = "1"
-rdb_backup_enabled     = true
-redis_backup_frequency = "15"
+sku_name           = "Basic"
+family             = "C"
+capacity           = "1"
+rdb_backup_enabled = false
