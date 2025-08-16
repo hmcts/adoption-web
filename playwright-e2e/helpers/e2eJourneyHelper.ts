@@ -14,7 +14,7 @@ export async function citizenAdoptionSignInWithNoPartner(
   await app.basePage.clickSaveAndContinue();
 }
 
-export async function citizenAdoptionSignInWithPartner(
+export async function citizenAdoptionSignIn(
   app: App,
   userEmail: string,
   userPassword: string,
@@ -71,6 +71,19 @@ export async function citizenAdoptionFamilyCourtDetails(app: App): Promise<void>
   await app.basePage.clickSaveAndContinue();
 }
 
+export async function citizenAdoptionApplicationSingleParentPersonalDetails(app: App): Promise<void> {
+  await app.tasklist.yourPersonalDetails.click();
+  await app.basePage.clickSaveAndContinue();
+  await app.addApplicants.otherNamesSelectNo();
+  await app.basePage.clickSaveAndContinue();
+  await app.addApplicants.dob();
+  await app.basePage.clickSaveAndContinue();
+  await app.addApplicants.addOccupationFirst();
+  await app.basePage.clickSaveAndContinue();
+  await app.extraSupport.noSupportNeeded();
+  await app.basePage.clickSaveAndContinue();
+}
+
 export async function citizenAdoptionApplicantPersonalDetails(app: App): Promise<void> {
   await app.tasklist.firstApplicantPersonalDetails.click();
   await app.basePage.clickSaveAndContinue();
@@ -81,6 +94,16 @@ export async function citizenAdoptionApplicantPersonalDetails(app: App): Promise
   await app.addApplicants.addOccupationFirst();
   await app.basePage.clickSaveAndContinue();
   await app.extraSupport.noSupportNeeded();
+  await app.basePage.clickSaveAndContinue();
+}
+
+export async function citizenAdoptionApplicantSingleParentContactDetails(app: App): Promise<void> {
+  await app.tasklist.yourContactDetails.click();
+  await app.basePage.postcodeFindAddress('BN26 6AL', '0');
+  await app.basePage.clickSaveAndContinue();
+  await app.contactDetails.fillContactDetails('1234567890@domain.com', '0800800800');
+  await app.basePage.clickSaveAndContinue();
+  await app.contactDetails.englishLang.check();
   await app.basePage.clickSaveAndContinue();
 }
 
@@ -133,5 +156,18 @@ export async function citizenAdoptionSubmitApplication(
   await app.reviewSubmit.reviewAnswers(locator);
   await app.basePage.clickSaveAndContinue();
   await app.reviewSubmit.statementOfTruthTwo(appOneFullname, appTwoFullname);
+  await app.reviewSubmit.fillCardDetails(appOneFullname, 'abcdefg@domain.com', 'BN26 6AL');
+}
+
+export async function citizenAdoptionSubmitApplicationSingleParent(
+  app: App,
+  appOneFullname: string,
+  locator: string
+): Promise<void> {
+  await app.tasklist.reviewAndSubmit.click();
+  await app.pcq.noPcqAnswers();
+  await app.reviewSubmit.reviewAnswers(locator);
+  await app.basePage.clickSaveAndContinue();
+  await app.reviewSubmit.statementOfTruthOne(appOneFullname);
   await app.reviewSubmit.fillCardDetails(appOneFullname, 'abcdefg@domain.com', 'BN26 6AL');
 }
