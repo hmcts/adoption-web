@@ -30,7 +30,7 @@ export class CitizenUserUtils {
         email,
         forename,
         surname,
-        roleNames: ['citizen'],
+        roleNames: ['citizen', 'adoption-citizen-user'],
       },
     });
     if (process.env.PWDEBUG) {
