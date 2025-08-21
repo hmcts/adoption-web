@@ -1,7 +1,14 @@
-import { test } from '../fixtures/fixtures';
 import { runAccessibilityScan } from '../helpers/accessibilityHelper';
 import { Eligibility } from '../pages/eligibility.page';
 import { urlConfig } from '../utils/urls';
+import { test as base } from 'playwright/types/test';
+import AxeBuilder from '@axe-core/playwright';
+
+const test = base.extend<{ makeAxeBuilder: () => AxeBuilder }>({
+  makeAxeBuilder: async ({ page }, use) => {
+    await use(() => new AxeBuilder({ page }));
+  },
+});
 
 test.describe('Eligibility journey e2e tests', () => {
   test.beforeEach(async ({ page }) => {
