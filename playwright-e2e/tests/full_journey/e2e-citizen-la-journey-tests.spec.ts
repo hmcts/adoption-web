@@ -10,6 +10,8 @@ import { toggleBanner } from '../../utils/toggles';
 
 dotenv.config();
 
+
+
 test.describe('e2e citzen submit citizen and la journeys', () => {
   let userEmail: string;
   let userPassword: string;
@@ -71,7 +73,7 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
         laCheckYourAnswerPage,
         laStatementOfTruthPage,
         laConfirmationPage,
-        makeAxeBuilder,
+        axeUtils,
       },
       testInfo
     ) => {
@@ -307,7 +309,7 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       const expected = laConfirmationPage.pageURL;
       await expect(page).toHaveURL(expected);
 
-      await runAccessibilityScan(makeAxeBuilder, testInfo);
+      await axeUtils.audit();
     }
   );
 });
