@@ -5,7 +5,7 @@ import { authenticator } from 'otplib';
 import { getAccessToken } from '../helpers/caseCreaterHelper';
 
 import { urlConfig } from './urls';
-import { getServiceAuthToken } from '../../src/main/app/auth/service/get-service-auth-token';
+import { getServiceAuthToken, getTokenFromApi } from '../../src/main/app/auth/service/get-service-auth-token';
 
 export class CaseHelperUtils {
   [x: string]: any;
@@ -109,17 +109,24 @@ export class CaseHelperUtils {
    */
   private async getEventToken(userId: string, bearerToken: string, eventId: string): Promise<string> {
     let eventToken = '';
-    let serviceToken = await this.getServiceAuthToken();
+    let serviceToken = await getTokenFromApi();
     const context = await this.createApiContext();
     //<ccd-data-store-api>/{party}/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/{caseid}/event-triggers/DEFENDANT_RESPONSE_SPEC/token
     const url = `${urlConfig.ccd_data_api_url}/case-types/A58/event-triggers/citizen-create-application`;
     //const url: string = `${urlConfig.ccd_data_api_url}/citizens/${userId}/jurisdictions/ADOPTION/case-types/${this.caseType}/event-triggers/${eventId}/token`;
 
+    // const response = await context.get(url, {
+    //   headers: {
+    //     Authorization: `Bearer ${bearerToken}`,
+    //     'Content-Type': 'application/json',
+    //     ServiceAuthorization: `${serviceToken}`,
+    //   },
     const response = await context.get(url, {
       headers: {
+        accept: 'application/vnd.uk.gov.hmcts.ccd-data-store-api.start-case-trigger.v2+json;charset=UTF-8',
         Authorization: `Bearer ${bearerToken}`,
-        'Content-Type': 'application/json',
-        ServiceAuthorization: `Bearer ${serviceToken}`,
+        experimental: 'true',
+        ServiceAuthorization: `${serviceToken}`,
       },
     });
     if (response.ok()) {
