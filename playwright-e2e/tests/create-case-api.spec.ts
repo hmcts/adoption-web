@@ -3,7 +3,7 @@ import { test } from '../fixtures/fixtures';
 test.describe('Create case', () => {
   let userInfo: { id: string; email: string; password: string };
 
-  test.beforeEach(async ({ citizenUserUtils, idamUtils }) => {
+  test.beforeEach(async ({ citizenUserUtils }) => {
     userInfo = await citizenUserUtils.createUser();
   });
 

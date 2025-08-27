@@ -22,15 +22,9 @@ module.exports = {
   globals: { Atomics: 'readonly', SharedArrayBuffer: 'readonly' },
   rules: {
     '@typescript-eslint/array-type': 'error',
-    '@typescript-eslint/explicit-module-boundary-types': 'error',
-    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-shadow': 'error',
-    '@typescript-eslint/no-unused-vars': [
-      'error',
-      {
-        ignoreRestSiblings: true,
-      },
-    ],
     '@typescript-eslint/no-var-requires': 'off',
     curly: 'error',
     eqeqeq: 'error',

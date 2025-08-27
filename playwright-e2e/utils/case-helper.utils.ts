@@ -1,11 +1,11 @@
 import { IdamUtils } from '@hmcts/playwright-common';
 import { APIRequestContext, request } from '@playwright/test';
-import Axios, { AxiosResponse } from 'axios';
-import { authenticator } from 'otplib';
+import { AxiosResponse } from 'axios';
+
+import { getServiceAuthToken, getTokenFromApi } from '../../src/main/app/auth/service/get-service-auth-token';
 import { getAccessToken } from '../helpers/caseCreaterHelper';
 
 import { urlConfig } from './urls';
-import { getServiceAuthToken, getTokenFromApi } from '../../src/main/app/auth/service/get-service-auth-token';
 
 export class CaseHelperUtils {
   [x: string]: any;
@@ -43,8 +43,7 @@ export class CaseHelperUtils {
     const eventToken: string = await this.getEventToken(userId, authToken, eventId);
     const accessToken: AxiosResponse<string> | undefined = await getAccessToken(userEmail, userPassword);
     const context = await this.createApiContext();
-    let serviceToken = getServiceAuthToken();
-    console.log(eventToken);
+    const serviceToken = getServiceAuthToken();
     const response = await context.post(`/case-types/${this.caseType}/cases`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -109,7 +108,7 @@ export class CaseHelperUtils {
    */
   private async getEventToken(userId: string, bearerToken: string, eventId: string): Promise<string> {
     let eventToken = '';
-    let serviceToken = await getTokenFromApi();
+    const serviceToken = await getTokenFromApi();
     const context = await this.createApiContext();
     //<ccd-data-store-api>/{party}/{uid}/jurisdictions/{jid}/case-types/{ctid}/cases/{caseid}/event-triggers/DEFENDANT_RESPONSE_SPEC/token
     const url = `${urlConfig.ccd_data_api_url}/case-types/A58/event-triggers/citizen-create-application`;
@@ -152,7 +151,7 @@ export class CaseHelperUtils {
   ): Promise<string> {
     const context = await this.createApiContext();
     const token = await this.getEventToken(userId, process.env.CREATE_CASE_TOKEN as string, eventId);
-    let serviceToken = await this.getServiceToken();
+    const serviceToken = await this.getServiceToken();
     const response = await context.post(`/cases/${caseId}/events`, {
       headers: {
         Authorization: `Bearer ${process.env.CREATE_CASE_TOKEN}`,

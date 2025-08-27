@@ -1,5 +1,6 @@
 import { IdamUtils } from '@hmcts/playwright-common';
 import { v4 as uuidv4 } from 'uuid';
+
 import { getAccessToken } from '../helpers/idamTestApiHelpers';
 
 type UserInfo = {
@@ -24,7 +25,7 @@ export class CitizenUserUtils {
     const surname = 'sn_' + uniqueId.split('-')[1];
 
     const user = await this.idamUtils.createUser({
-      bearerToken: token? token: '',
+      bearerToken: token || '',
       password,
       user: {
         email,
