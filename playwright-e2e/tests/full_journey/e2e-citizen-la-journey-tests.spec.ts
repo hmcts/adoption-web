@@ -10,8 +10,6 @@ import { toggleBanner } from '../../utils/toggles';
 
 dotenv.config();
 
-
-
 test.describe('e2e citzen submit citizen and la journeys', () => {
   let userEmail: string;
   let userPassword: string;

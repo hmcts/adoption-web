@@ -13,7 +13,6 @@ test.describe('smoke test', () => {
 
   // eslint-disable-next-line no-empty-pattern
   test.beforeEach(async ({ citizenUserUtils }) => {
-
     const userInfo = await citizenUserUtils.createUser();
     if (userInfo) {
       userEmail = userInfo.email;
@@ -76,24 +75,23 @@ test.describe('smoke test', () => {
     await app.reviewSubmit.statementOfTruthOne(appOneName.appOneFullname);
     await app.reviewSubmit.fillCardDetails(appOneName.appOneFullname, userEmail, postcode1);
 
-
     await axeUtils.audit(); //Axe-core accessibility scan using helper function
   }
 
-    test(
-      'smoke test: single person submits an adoption application',
-      smokeTestTags,
-      async ({ page, axeUtils }, testInfo) => {
-        await submitSingleApplicationJourney(
-          page,
-          axeUtils,
-          testInfo,
-          'alone',
-          'Sandwell Metropolitan Council',
-          'Leicester County Court',
-          'BN26 6AL',
-          '08008008000'
-        );
-      }
-    );
-  })
+  test(
+    'smoke test: single person submits an adoption application',
+    smokeTestTags,
+    async ({ page, axeUtils }, testInfo) => {
+      await submitSingleApplicationJourney(
+        page,
+        axeUtils,
+        testInfo,
+        'alone',
+        'Sandwell Metropolitan Council',
+        'Leicester County Court',
+        'BN26 6AL',
+        '08008008000'
+      );
+    }
+  );
+});
