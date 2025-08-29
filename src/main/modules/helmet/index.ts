@@ -3,7 +3,7 @@ import { Express, RequestHandler } from 'express';
 import helmet = require('helmet');
 
 export interface HelmetConfig {
-  referrerPolicy: string;
+  referrerPolicy: ReferrerPolicyToken;
 }
 
 const googleAnalyticsDomain = '*.google-analytics.com';
@@ -12,6 +12,18 @@ const azureBlob = '*.blob.core.windows.net';
 const doubleclick = 'stats.g.doubleclick.net';
 const self = "'self'";
 const dynaTraceDomain = '*.dynatrace.com';
+
+type ReferrerPolicyToken =
+  | 'no-referrer'
+  | 'no-referrer-when-downgrade'
+  | 'same-origin'
+  | 'origin'
+  | 'strict-origin'
+  | 'origin-when-cross-origin'
+  | 'strict-origin-when-cross-origin'
+  | 'unsafe-url'
+  | '';
+
 /**
  * Module that enables helmet in the application
  */
@@ -71,7 +83,7 @@ export class Helmet {
     );
   }
 
-  private setReferrerPolicy(app: express.Express, policy: string): void {
+  private setReferrerPolicy(app: express.Express, policy: ReferrerPolicyToken): void {
     if (!policy) {
       throw new Error('Referrer policy configuration is required');
     }
