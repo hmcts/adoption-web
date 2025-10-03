@@ -1,5 +1,3 @@
-import { test as base } from '@playwright/test';
-
 import { CITAdultSocialWorkerDetailsPage } from '../page-objects/citizen/adoption-agency-and-social-worker/citAdultSocialWorkerDetailsPage.page';
 import { CITAnotherAdoptionAgencyPage } from '../page-objects/citizen/adoption-agency-and-social-worker/citAnotherAdoptionAgencyPage.page';
 import { CITChildSocialWorkerDetailsPage } from '../page-objects/citizen/adoption-agency-and-social-worker/citChildSocialWorkerDetailsPage.page';
@@ -48,7 +46,7 @@ import { LAPlacementOrdersSummaryPage } from '../page-objects/local-authority/pl
 import { LAChildHasOtherSiblingsPage } from '../page-objects/local-authority/siblings/laSiblingCourtDetailsSection.page';
 import SignIn from '../pages/signInPage.page';
 
-type CreateFixtures = {
+export interface PageFixtures {
   startPage: StartPage;
   signIn: SignIn;
   citSaveAsDraftPage: CITSaveAsDraftPage;
@@ -96,9 +94,9 @@ type CreateFixtures = {
   laCheckYourAnswerPage: LACheckYourAnswerPage;
   laStatementOfTruthPage: LAStatementOfTruthPage;
   laConfirmationPage: LAConfirmationPage;
-};
+}
 
-export const test = base.extend<CreateFixtures>({
+export const pageFixtures = {
   startPage: async ({ page }, use) => {
     await use(new StartPage(page));
   },
@@ -241,4 +239,4 @@ export const test = base.extend<CreateFixtures>({
   laConfirmationPage: async ({}, use) => {
     await use(new LAConfirmationPage());
   },
-});
+};
