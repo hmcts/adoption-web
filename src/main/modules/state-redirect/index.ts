@@ -15,7 +15,12 @@ import {
   //   DOWNLOAD_APPLICATION_SUMMARY,
   //   LA_DOCUMENT_MANAGER,
   LA_PORTAL,
+  LA_PORTAL_ACCESSIBILITY_STATEMENT,
   LA_PORTAL_CONFIRMATION_PAGE,
+  LA_PORTAL_CONTACT_US,
+  LA_PORTAL_COOKIES_PAGE,
+  LA_PORTAL_PRIVACY_POLICY,
+  LA_PORTAL_TERMS_AND_CONDITIONS,
   PAYMENT_CALLBACK_URL,
   PAY_AND_SUBMIT,
   PAY_YOUR_FEE,
@@ -37,6 +42,11 @@ export class StateRedirectMiddleware {
     TERMS_AND_CONDITIONS,
     CONTACT_US,
     TIMED_OUT_URL,
+    LA_PORTAL_COOKIES_PAGE,
+    LA_PORTAL_PRIVACY_POLICY,
+    LA_PORTAL_ACCESSIBILITY_STATEMENT,
+    LA_PORTAL_TERMS_AND_CONDITIONS,
+    LA_PORTAL_CONTACT_US,
   ];
   public enableFor(app: Application): void {
     const { errorHandler } = app.locals;
@@ -48,6 +58,10 @@ export class StateRedirectMiddleware {
           return res.redirect(TASK_LIST_URL);
         }
 
+        if (this.FOOTER_LINKS.find(item => req.path.startsWith(item))) {
+          //Footer links are accessible from anywhere in the application
+          return next();
+        }
         if (
           req.path.startsWith(LA_PORTAL) &&
           req.path !== LA_PORTAL_CONFIRMATION_PAGE &&
@@ -62,10 +76,6 @@ export class StateRedirectMiddleware {
         ) {
           // can not go to check-your-answers page before completing all the sections
           return res.redirect(TASK_LIST_URL);
-        }
-        if (this.FOOTER_LINKS.find(item => req.path.startsWith(item))) {
-          //Footer links are accessible from anywhere in the application
-          return next();
         }
         if (
           req.session?.userCase?.state !== State.AwaitingPayment ||
