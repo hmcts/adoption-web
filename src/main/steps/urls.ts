@@ -10,9 +10,9 @@ export const TIMED_OUT_REDIRECT: PageLink = '/timed-out-redirect';
 export const KEEP_ALIVE_URL: PageLink = '/keep-alive';
 export const CSRF_TOKEN_ERROR_URL: PageLink = '/csrf-token-error';
 
-export const RESPONDENT: PageLink = '/respondent';
+//export const RESPONDENT: PageLink = '/respondent';
 
-export const APPLICATION_ENDED: PageLink = '/application-ended';
+//export const APPLICATION_ENDED: PageLink = '/application-ended';
 export const TASK_LIST_URL: PageLink = '/task-list';
 
 export const APPLYING_WITH_URL: PageLink = '/applying-with';
@@ -48,16 +48,19 @@ export const APPLICANT_2_CONTACT_DETAILS: PageLink = `${APPLICANT_2}/contact-det
 export const APPLICANT_2_LANGUAGE_PREFERENCE: PageLink = `${APPLICANT_2}/language-preference`;
 
 export const CHILDREN: PageLink = '/children';
-export const CHILDREN_PLACEMENT_ORDER_TYPE: PageLink = `${CHILDREN}/placement-order-type`;
-export const CHILDREN_PLACEMENT_ORDER_NUMBER: PageLink = `${CHILDREN}/placement-order-number`;
-export const CHILDREN_PLACEMENT_ORDER_COURT: PageLink = `${CHILDREN}/placement-order-court`;
-export const CHILDREN_PLACEMENT_ORDER_DATE: PageLink = `${CHILDREN}/placement-order-date`;
-export const CHILDREN_PLACEMENT_ORDER_SUMMARY: PageLink = `${CHILDREN}/placement-order-summary`;
-export const CHILDREN_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS: PageLink = `${CHILDREN}/placement-order-check-your-answers`;
+// export const CHILDREN_PLACEMENT_ORDER_TYPE: PageLink = `${CHILDREN}/placement-order-type`;
+// export const CHILDREN_PLACEMENT_ORDER_NUMBER: PageLink = `${CHILDREN}/placement-order-number`;
+// export const CHILDREN_PLACEMENT_ORDER_COURT: PageLink = `${CHILDREN}/placement-order-court`;
+// export const CHILDREN_PLACEMENT_ORDER_DATE: PageLink = `${CHILDREN}/placement-order-date`;
+// export const CHILDREN_PLACEMENT_ORDER_SUMMARY: PageLink = `${CHILDREN}/placement-order-summary`;
+// export const CHILDREN_PLACEMENT_ORDER_CHECK_YOUR_ANSWERS: PageLink = `${CHILDREN}/placement-order-check-your-answers`;
 
 export const CHILDREN_FULL_NAME: PageLink = `${CHILDREN}/full-name`;
 export const CHILDREN_DATE_OF_BIRTH: PageLink = `${CHILDREN}/date-of-birth`;
-export const CHILDREN_SEX_AT_BIRTH: PageLink = `${CHILDREN}/sex-at-birth`;
+//export const CHILDREN_SEX_AT_BIRTH: PageLink = `${CHILDREN}/sex-at-birth`;
+/**
+* @deprecated
+*/
 export const CHILDREN_NATIONALITY: PageLink = `${CHILDREN}/nationality`;
 export const CHILDREN_FULL_NAME_AFTER_ADOPTION: PageLink = `${CHILDREN}/full-name-after-adoption`;
 export const CHILDREN_FIND_PLACEMENT_ORDER_COURT: PageLink = `${CHILDREN}/find-placement-order-court`;
