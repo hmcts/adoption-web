@@ -6,7 +6,6 @@ import { ApplyingWith, State } from '../../../app/case/definition';
 import {
   APPLICATION_SUBMITTED,
   APPLYING_WITH_URL,
-  CHECK_ANSWERS_URL,
   LA_PORTAL_CONFIRMATION_PAGE,
   LA_PORTAL_TASK_LIST,
   PAY_YOUR_FEE,
@@ -115,21 +114,6 @@ describe('HomeGetController', () => {
     controller.get(req, res);
 
     expect(res.redirect).toHaveBeenCalledWith(APPLICATION_SUBMITTED);
-  });
-
-  test('redirects to the check your answers page for applicant 1 users in awaitingApplicant1Response state', () => {
-    const req = mockRequest({
-      session: {
-        userCase: {
-          id: '123',
-          state: State.AwaitingApplicant1Response,
-        },
-      },
-    });
-    const res = mockResponse();
-    controller.get(req, res);
-
-    expect(res.redirect).toHaveBeenCalledWith(CHECK_ANSWERS_URL);
   });
 
   test('redirects to the pay your fee page for applicant 1 users for sole application in awaitingPayment state', () => {

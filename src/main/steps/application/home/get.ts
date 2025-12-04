@@ -9,7 +9,6 @@ import { Form, FormFields } from '../../../app/form/Form';
 import {
   APPLICATION_SUBMITTED,
   APPLYING_WITH_URL,
-  CHECK_ANSWERS_URL,
   LA_PORTAL_CONFIRMATION_PAGE,
   LA_PORTAL_TASK_LIST,
   PAY_YOUR_FEE,
@@ -35,7 +34,7 @@ export default class HomeGetController {
         res.redirect(multipleChildrenRedirectPageSwitch(false));
       }
     } else if (req.session.user?.isSystemUser) {
-      laRedirectPageSwitch(req.session.userCase.state);
+      res.redirect(laRedirectPageSwitch(req.session.userCase.state));
     } else {
       const firstQuestionForm = getApplicantFirstQuestionForm();
       const isFirstQuestionComplete = firstQuestionForm.getErrors(req.session.userCase).length === 0;
