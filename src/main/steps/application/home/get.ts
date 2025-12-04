@@ -10,6 +10,8 @@ import {
   APPLICATION_SUBMITTED,
   APPLYING_WITH_URL,
   CHECK_ANSWERS_URL,
+  LA_PORTAL_CONFIRMATION_PAGE,
+  LA_PORTAL_TASK_LIST,
   PAY_YOUR_FEE,
   START_ELIGIBILITY_URL,
   TASK_LIST_URL,
@@ -32,6 +34,8 @@ export default class HomeGetController {
       } else {
         res.redirect(multipleChildrenRedirectPageSwitch(false));
       }
+    } else if (req.session.user?.isSystemUser) {
+      laRedirectPageSwitch(req.session.userCase.state);
     } else {
       const firstQuestionForm = getApplicantFirstQuestionForm();
       const isFirstQuestionComplete = firstQuestionForm.getErrors(req.session.userCase).length === 0;
@@ -44,9 +48,6 @@ export default class HomeGetController {
 
 const applicant1RedirectPageSwitch = (caseState: State, userCase: Partial<Case>, isFirstQuestionComplete: boolean) => {
   switch (caseState) {
-    case State.AwaitingApplicant1Response: {
-      return CHECK_ANSWERS_URL;
-    }
     case State.LaSubmitted:
     case State.Submitted: {
       return APPLICATION_SUBMITTED;
@@ -58,6 +59,10 @@ const applicant1RedirectPageSwitch = (caseState: State, userCase: Partial<Case>,
       return isFirstQuestionComplete ? TASK_LIST_URL : APPLYING_WITH_URL;
     }
   }
+};
+
+const laRedirectPageSwitch = (caseState: State) => {
+  return caseState === State.LaSubmitted ? LA_PORTAL_CONFIRMATION_PAGE : LA_PORTAL_TASK_LIST;
 };
 
 const multipleChildrenRedirectPageSwitch = (isFirstQuestionComplete: boolean) => {
