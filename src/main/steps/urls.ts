@@ -158,29 +158,50 @@ export const CHECK_ELIGIBILITY_URL_LIVED_UK: PageLink = `${ELIGIBILITY_URL}/live
 export const INELIGIBLE_TO_ADOPT: PageLink = `${ELIGIBILITY_URL}/cannot-apply`;
 
 export const OTHER_PARENT: PageLink = '/other-parent';
-export const OTHER_PARENT_EXISTS: PageLink = `${OTHER_PARENT}/exists`;
-export const OTHER_PARENT_NAME: PageLink = `${OTHER_PARENT}/full-name`;
-export const OTHER_PARENT_RESPONSIBILITY_GRANTED: PageLink = `${OTHER_PARENT}/parental-responsibility-granted`;
-export const OTHER_PARENT_ADDRESS_KNOWN: PageLink = `${OTHER_PARENT}/address-known`;
+// export const OTHER_PARENT_EXISTS: PageLink = `${OTHER_PARENT}/exists`;
+// export const OTHER_PARENT_NAME: PageLink = `${OTHER_PARENT}/full-name`;
+// export const OTHER_PARENT_RESPONSIBILITY_GRANTED: PageLink = `${OTHER_PARENT}/parental-responsibility-granted`;
+// export const OTHER_PARENT_ADDRESS_KNOWN: PageLink = `${OTHER_PARENT}/address-known`;
+/**
+* @deprecated OTHER_PARENT section has been moved to LA Portal
+*/
 export const OTHER_PARENT_POSTCODE_LOOKUP: PageLink = `${OTHER_PARENT}/address/lookup`;
-export const OTHER_PARENT_VERIFY_ADDRESS: PageLink = `${OTHER_PARENT}/address/select`;
+// export const OTHER_PARENT_VERIFY_ADDRESS: PageLink = `${OTHER_PARENT}/address/select`;
+/**
+* @deprecated OTHER_PARENT section has been moved to LA Portal
+*/
 export const OTHER_PARENT_MANUAL_ADDRESS: PageLink = `${OTHER_PARENT}/address/manual`;
+/**
+* @deprecated OTHER_PARENT section has been moved to LA Portal
+*/
 export const OTHER_PARENT_INTERNATIONAL_ADDRESS: PageLink = `${OTHER_PARENT}/address/international`;
 
 export const BIRTH_FATHER = '/birth-father';
-export const BIRTH_FATHER_NAME_ON_CERTIFICATE: PageLink = `${BIRTH_FATHER}/name-on-certificate`;
-export const BIRTH_FATHER_FULL_NAME: PageLink = `${BIRTH_FATHER}/full-name`;
-export const BIRTH_FATHER_ADDRESS_KNOWN: PageLink = `${BIRTH_FATHER}/address-known`;
-export const BIRTH_FATHER_STILL_ALIVE: PageLink = `${BIRTH_FATHER}/alive`;
-export const BIRTH_FATHER_PARENTAL_RESPONSIBILITY: PageLink = `${BIRTH_FATHER}/parental-responsibility`;
-export const BIRTH_FATHER_PARENTAL_RESPONSIBILITY_GRANTED: PageLink = `${BIRTH_FATHER}/parental-responsibility/granted`;
-export const BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY: PageLink = `${BIRTH_FATHER}/parental-responsibility/no-responsibility`;
+// export const BIRTH_FATHER_NAME_ON_CERTIFICATE: PageLink = `${BIRTH_FATHER}/name-on-certificate`;
+// export const BIRTH_FATHER_FULL_NAME: PageLink = `${BIRTH_FATHER}/full-name`;
+// export const BIRTH_FATHER_ADDRESS_KNOWN: PageLink = `${BIRTH_FATHER}/address-known`;
+// export const BIRTH_FATHER_STILL_ALIVE: PageLink = `${BIRTH_FATHER}/alive`;
+// export const BIRTH_FATHER_PARENTAL_RESPONSIBILITY: PageLink = `${BIRTH_FATHER}/parental-responsibility`;
+// export const BIRTH_FATHER_PARENTAL_RESPONSIBILITY_GRANTED: PageLink = `${BIRTH_FATHER}/parental-responsibility/granted`;
+// export const BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY: PageLink = `${BIRTH_FATHER}/parental-responsibility/no-responsibility`;
+/**
+* @deprecated BIRTH_FATHER section has been moved to LA Portal
+*/
 export const BIRTH_FATHER_ADDRESS_LOOKUP: PageLink = `${BIRTH_FATHER}/address/lookup`;
-export const BIRTH_FATHER_ADDRESS_SELECT: PageLink = `${BIRTH_FATHER}/address/select`;
+//export const BIRTH_FATHER_ADDRESS_SELECT: PageLink = `${BIRTH_FATHER}/address/select`;
+/**
+* @deprecated BIRTH_FATHER section has been moved to LA Portal
+*/
 export const BIRTH_FATHER_MANUAL_ADDRESS: PageLink = `${BIRTH_FATHER}/address/manual`;
+/**
+* @deprecated BIRTH_FATHER section has been moved to LA Portal
+*/
 export const BIRTH_FATHER_INTERNATIONAL_ADDRESS: PageLink = `${BIRTH_FATHER}/address/international`;
+/**
+* @deprecated BIRTH_FATHER section has been moved to LA Portal
+*/
 export const BIRTH_FATHER_NATIONALITY: PageLink = `${BIRTH_FATHER}/nationality`;
-export const BIRTH_FATHER_OCCUPATION: PageLink = `${BIRTH_FATHER}/occupation`;
+//export const BIRTH_FATHER_OCCUPATION: PageLink = `${BIRTH_FATHER}/occupation`;
 
 export const REVIEW_PAY_SUBMIT: PageLink = '/review-pay-submit';
 export const CHECK_ANSWERS_URL: PageLink = `${REVIEW_PAY_SUBMIT}/check-your-answers`;

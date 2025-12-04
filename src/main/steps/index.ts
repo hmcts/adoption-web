@@ -8,21 +8,17 @@ import { FormContent } from '../app/form/Form';
 import { applicant1Sequence } from './applicant1/applicant1Sequence';
 import { applicant2Sequence } from './applicant2/applicant2Sequence';
 import { applicationSequence } from './application/applicationSequence';
-import { birthFatherSequence } from './birth-father/birthFatherSequence';
 import { childrenSequence } from './children/childrenSequence';
 import { Step } from './constants';
 import { Step as EligibilityStep, eligibilitySequence } from './eligibility/eligibilitySequence';
 import { laPortalSequence } from './la-portal/laPortalSequence';
-import { otherParentSequence } from './other-parent/otherParentSequence';
 import { reviewPaySubmitSequence } from './review-pay-submit/reviewPaySubmitSequence';
 import {
   APPLICANT_1,
   APPLICANT_2,
-  BIRTH_FATHER,
   CHECK_ANSWERS_URL,
   CHILDREN,
   LA_PORTAL,
-  OTHER_PARENT,
   REVIEW_PAY_SUBMIT,
   TASK_LIST_URL,
 } from './urls';
@@ -37,8 +33,6 @@ export const getNextStepUrl = (req: AppRequest, data: Partial<CaseWithId> | LaPo
     ...applicant1Sequence,
     ...applicant2Sequence,
     ...childrenSequence,
-    ...birthFatherSequence,
-    ...otherParentSequence,
     ...reviewPaySubmitSequence,
     ...laPortalSequence,
   ].find(s => s.url === path);
@@ -101,8 +95,6 @@ export const stepsWithContentApplication = getStepsWithContent(applicationSequen
 export const stepsWithContentApplicant1 = getStepsWithContent(applicant1Sequence, APPLICANT_1);
 export const stepsWithContentApplicant2 = getStepsWithContent(applicant2Sequence, APPLICANT_2);
 export const stepsWithContentChildren = getStepsWithContent(childrenSequence, CHILDREN);
-export const stepsWithContentBirthFather = getStepsWithContent(birthFatherSequence, BIRTH_FATHER);
-export const stepsWithContentOtherParent = getStepsWithContent(otherParentSequence, OTHER_PARENT);
 export const stepsWithContentReviewPaySubmit = getStepsWithContent(reviewPaySubmitSequence, REVIEW_PAY_SUBMIT);
 export const stepsWithContentLaPortal = getStepsWithContent(laPortalSequence, LA_PORTAL);
 export const stepsWithContent = [
@@ -111,8 +103,6 @@ export const stepsWithContent = [
   ...stepsWithContentApplicant1,
   ...stepsWithContentApplicant2,
   ...stepsWithContentChildren,
-  ...stepsWithContentBirthFather,
-  ...stepsWithContentOtherParent,
   ...stepsWithContentReviewPaySubmit,
   ...stepsWithContentLaPortal,
 ];
