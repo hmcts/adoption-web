@@ -59,7 +59,7 @@ export const CHILDREN_FULL_NAME: PageLink = `${CHILDREN}/full-name`;
 export const CHILDREN_DATE_OF_BIRTH: PageLink = `${CHILDREN}/date-of-birth`;
 //export const CHILDREN_SEX_AT_BIRTH: PageLink = `${CHILDREN}/sex-at-birth`;
 /**
-* @deprecated
+* @deprecated CHILDREN_NATIONALITY has been moved to LA Portal
 */
 export const CHILDREN_NATIONALITY: PageLink = `${CHILDREN}/nationality`;
 export const CHILDREN_FULL_NAME_AFTER_ADOPTION: PageLink = `${CHILDREN}/full-name-after-adoption`;
@@ -67,13 +67,20 @@ export const CHILDREN_FIND_PLACEMENT_ORDER_COURT: PageLink = `${CHILDREN}/find-p
 export const CHILDREN_FIND_FAMILY_COURT: PageLink = `${CHILDREN}/find-family-court`;
 
 export const SIBLING: PageLink = '/sibling';
-export const SIBLING_EXISTS: PageLink = `${SIBLING}/exists`;
-export const SIBLING_RELATION: PageLink = `${SIBLING}/relation`;
-export const SIBLING_ORDER_TYPE: PageLink = `${SIBLING}/placement-order-type`;
-export const SIBLING_ORDER_CASE_NUMBER: PageLink = `${SIBLING}/placement-order-number`;
+
+// export const SIBLING_EXISTS: PageLink = `${SIBLING}/exists`;
+// export const SIBLING_RELATION: PageLink = `${SIBLING}/relation`;
+// export const SIBLING_ORDER_TYPE: PageLink = `${SIBLING}/placement-order-type`;
+// export const SIBLING_ORDER_CASE_NUMBER: PageLink = `${SIBLING}/placement-order-number`;
+/**
+* @deprecated SIBLING has been moved to LA Portal
+*/
 export const SIBLING_ORDER_SUMMARY: PageLink = `${SIBLING}/summary`;
+/**
+* @deprecated SIBLING has been moved to LA Portal
+*/
 export const SIBLING_ORDER_CHECK_YOUR_ANSWERS: PageLink = `${SIBLING}/placement-order-check-your-answers`;
-export const SIBLING_REMOVE_PLACEMENT_ORDER: PageLink = `${SIBLING}/remove-placement-order`;
+// export const SIBLING_REMOVE_PLACEMENT_ORDER: PageLink = `${SIBLING}/remove-placement-order`;
 
 export const BIRTH_MOTHER: PageLink = '/birth-mother';
 export const BIRTH_MOTHER_FULL_NAME: PageLink = `${BIRTH_MOTHER}/full-name`;

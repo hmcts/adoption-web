@@ -16,7 +16,6 @@ import { Step as EligibilityStep, eligibilitySequence } from './eligibility/elig
 import { laPortalSequence } from './la-portal/laPortalSequence';
 import { otherParentSequence } from './other-parent/otherParentSequence';
 import { reviewPaySubmitSequence } from './review-pay-submit/reviewPaySubmitSequence';
-import { siblingSequence } from './sibling/siblingSequence';
 import {
   APPLICANT_1,
   APPLICANT_2,
@@ -27,7 +26,6 @@ import {
   LA_PORTAL,
   OTHER_PARENT,
   REVIEW_PAY_SUBMIT,
-  SIBLING,
   TASK_LIST_URL,
 } from './urls';
 
@@ -45,7 +43,6 @@ export const getNextStepUrl = (req: AppRequest, data: Partial<CaseWithId> | LaPo
     ...birthFatherSequence,
     ...otherParentSequence,
     ...reviewPaySubmitSequence,
-    ...siblingSequence,
     ...laPortalSequence,
   ].find(s => s.url === path);
 
@@ -110,7 +107,6 @@ export const stepsWithContentChildren = getStepsWithContent(childrenSequence, CH
 export const stepsWithContentBirthFather = getStepsWithContent(birthFatherSequence, BIRTH_FATHER);
 export const stepsWithContentBirthMother = getStepsWithContent(birthMotherSequence, BIRTH_MOTHER);
 export const stepsWithContentOtherParent = getStepsWithContent(otherParentSequence, OTHER_PARENT);
-export const stepsWithContentSibling = getStepsWithContent(siblingSequence, SIBLING);
 export const stepsWithContentReviewPaySubmit = getStepsWithContent(reviewPaySubmitSequence, REVIEW_PAY_SUBMIT);
 export const stepsWithContentLaPortal = getStepsWithContent(laPortalSequence, LA_PORTAL);
 export const stepsWithContent = [
@@ -123,6 +119,5 @@ export const stepsWithContent = [
   ...stepsWithContentBirthMother,
   ...stepsWithContentOtherParent,
   ...stepsWithContentReviewPaySubmit,
-  ...stepsWithContentSibling,
   ...stepsWithContentLaPortal,
 ];
