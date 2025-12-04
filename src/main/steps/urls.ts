@@ -120,15 +120,18 @@ export const WHERE_YOUR_LIVES_ARE_BASED_URL: PageLink = '/where-your-lives-are-b
 //export const JURISDICTION_MAY_NOT_BE_ABLE_TO: PageLink = '/you-may-not-be-able-to-england-and-wales';
 //export const JURISDICTION_CONNECTION_SUMMARY: PageLink = '/connection-summary';
 
-export const YOUR_NAME: PageLink = '/enter-your-name';
+//export const YOUR_NAME: PageLink = '/enter-your-name';
 
-export const APPLY_FINANCIAL_ORDER: PageLink = '/do-you-want-to-apply-financial-order';
+//export const APPLY_FINANCIAL_ORDER: PageLink = '/do-you-want-to-apply-financial-order';
 
-export const SENT_TO_APPLICANT2_FOR_REVIEW: PageLink = '/application-sent-for-review';
+//export const SENT_TO_APPLICANT2_FOR_REVIEW: PageLink = '/application-sent-for-review';
 
+/**
+* @deprecated use REVIEW_PAY_SUBMIT section URLs instead
+*/
 export const PAY_AND_SUBMIT: PageLink = '/pay-and-submit';
 
-export const NO_RESPONSE_YET: PageLink = '/no-response-yet';
+//export const NO_RESPONSE_YET: PageLink = '/no-response-yet';
 
 export const APPLICATION_SUBMITTED: PageLink = '/application/submitted';
 
@@ -136,12 +139,12 @@ export const DOWNLOAD_APPLICATION_SUMMARY: PageLink = '/download-summary';
 
 export const NEW_APPLICATION_REDIRECT: PageLink = '/new-application-redirect';
 
-export const SWITCH_TO_SOLE_APPLICATION: PageLink = '/switch-to-sole-application';
+//export const SWITCH_TO_SOLE_APPLICATION: PageLink = '/switch-to-sole-application';
 
-export const CONFIRM_JOINT_APPLICATION: PageLink = '/confirm-your-joint-application';
+//export const CONFIRM_JOINT_APPLICATION: PageLink = '/confirm-your-joint-application';
 
-export const HUB_PAGE: PageLink = '/hub-page';
-export const HOW_DO_YOU_WANT_TO_RESPOND: PageLink = '/how-do-you-want-to-respond';
+//export const HUB_PAGE: PageLink = '/hub-page';
+//export const HOW_DO_YOU_WANT_TO_RESPOND: PageLink = '/how-do-you-want-to-respond';
 
 export const ELIGIBILITY_URL: PageLink = '/eligibility';
 export const START_ELIGIBILITY_URL: PageLink = `${ELIGIBILITY_URL}/start`;

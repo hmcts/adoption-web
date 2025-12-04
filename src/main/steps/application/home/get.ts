@@ -10,10 +10,7 @@ import {
   APPLICATION_SUBMITTED,
   APPLYING_WITH_URL,
   CHECK_ANSWERS_URL,
-  CONFIRM_JOINT_APPLICATION,
-  HUB_PAGE,
   PAY_YOUR_FEE,
-  SENT_TO_APPLICANT2_FOR_REVIEW,
   START_ELIGIBILITY_URL,
   TASK_LIST_URL,
 } from '../../urls';
@@ -50,27 +47,12 @@ const applicant1RedirectPageSwitch = (caseState: State, userCase: Partial<Case>,
     case State.AwaitingApplicant1Response: {
       return CHECK_ANSWERS_URL;
     }
-    case State.AwaitingApplicant2Response: {
-      return SENT_TO_APPLICANT2_FOR_REVIEW;
-    }
-    case State.Applicant2Approved: {
-      return CONFIRM_JOINT_APPLICATION;
-    }
     case State.LaSubmitted:
     case State.Submitted: {
       return APPLICATION_SUBMITTED;
     }
     case State.AwaitingPayment: {
       return PAY_YOUR_FEE;
-    }
-    case State.AwaitingAos:
-    case State.AwaitingConditionalOrder:
-    case State.AosDrafted:
-    case State.AosOverdue:
-    case State.Holding:
-    case State.PendingDispute:
-    case State.Disputed: {
-      return HUB_PAGE;
     }
     default: {
       return isFirstQuestionComplete ? TASK_LIST_URL : APPLYING_WITH_URL;
