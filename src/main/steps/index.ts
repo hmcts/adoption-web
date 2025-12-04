@@ -9,7 +9,6 @@ import { applicant1Sequence } from './applicant1/applicant1Sequence';
 import { applicant2Sequence } from './applicant2/applicant2Sequence';
 import { applicationSequence } from './application/applicationSequence';
 import { birthFatherSequence } from './birth-father/birthFatherSequence';
-import { birthMotherSequence } from './birth-mother/birthMotherSequence';
 import { childrenSequence } from './children/childrenSequence';
 import { Step } from './constants';
 import { Step as EligibilityStep, eligibilitySequence } from './eligibility/eligibilitySequence';
@@ -20,7 +19,6 @@ import {
   APPLICANT_1,
   APPLICANT_2,
   BIRTH_FATHER,
-  BIRTH_MOTHER,
   CHECK_ANSWERS_URL,
   CHILDREN,
   LA_PORTAL,
@@ -39,7 +37,6 @@ export const getNextStepUrl = (req: AppRequest, data: Partial<CaseWithId> | LaPo
     ...applicant1Sequence,
     ...applicant2Sequence,
     ...childrenSequence,
-    ...birthMotherSequence,
     ...birthFatherSequence,
     ...otherParentSequence,
     ...reviewPaySubmitSequence,
@@ -105,7 +102,6 @@ export const stepsWithContentApplicant1 = getStepsWithContent(applicant1Sequence
 export const stepsWithContentApplicant2 = getStepsWithContent(applicant2Sequence, APPLICANT_2);
 export const stepsWithContentChildren = getStepsWithContent(childrenSequence, CHILDREN);
 export const stepsWithContentBirthFather = getStepsWithContent(birthFatherSequence, BIRTH_FATHER);
-export const stepsWithContentBirthMother = getStepsWithContent(birthMotherSequence, BIRTH_MOTHER);
 export const stepsWithContentOtherParent = getStepsWithContent(otherParentSequence, OTHER_PARENT);
 export const stepsWithContentReviewPaySubmit = getStepsWithContent(reviewPaySubmitSequence, REVIEW_PAY_SUBMIT);
 export const stepsWithContentLaPortal = getStepsWithContent(laPortalSequence, LA_PORTAL);
@@ -116,7 +112,6 @@ export const stepsWithContent = [
   ...stepsWithContentApplicant2,
   ...stepsWithContentChildren,
   ...stepsWithContentBirthFather,
-  ...stepsWithContentBirthMother,
   ...stepsWithContentOtherParent,
   ...stepsWithContentReviewPaySubmit,
   ...stepsWithContentLaPortal,

@@ -83,24 +83,42 @@ export const SIBLING_ORDER_CHECK_YOUR_ANSWERS: PageLink = `${SIBLING}/placement-
 // export const SIBLING_REMOVE_PLACEMENT_ORDER: PageLink = `${SIBLING}/remove-placement-order`;
 
 export const BIRTH_MOTHER: PageLink = '/birth-mother';
-export const BIRTH_MOTHER_FULL_NAME: PageLink = `${BIRTH_MOTHER}/full-name`;
-export const BIRTH_MOTHER_STILL_ALIVE: PageLink = `${BIRTH_MOTHER}/still-alive`;
+// export const BIRTH_MOTHER_FULL_NAME: PageLink = `${BIRTH_MOTHER}/full-name`;
+// export const BIRTH_MOTHER_STILL_ALIVE: PageLink = `${BIRTH_MOTHER}/still-alive`;
+/**
+* @deprecated BIRTH_MOTHER section has been moved to LA Portal
+*/
 export const BIRTH_MOTHER_NATIONALITY: PageLink = `${BIRTH_MOTHER}/nationality`;
-export const BIRTH_MOTHER_OCCUPATION: PageLink = `${BIRTH_MOTHER}/occupation`;
-export const BIRTH_MOTHER_ADDRESS_KNOWN: PageLink = `${BIRTH_MOTHER}/address-known`;
+// export const BIRTH_MOTHER_OCCUPATION: PageLink = `${BIRTH_MOTHER}/occupation`;
+// export const BIRTH_MOTHER_ADDRESS_KNOWN: PageLink = `${BIRTH_MOTHER}/address-known`;
+/**
+* @deprecated BIRTH_MOTHER section has been moved to LA Portal
+*/
 export const BIRTH_MOTHER_FIND_ADDRESS: PageLink = `${BIRTH_MOTHER}/address/lookup`;
-export const BIRTH_MOTHER_SELECT_ADDRESS: PageLink = `${BIRTH_MOTHER}/address/select`;
+// export const BIRTH_MOTHER_SELECT_ADDRESS: PageLink = `${BIRTH_MOTHER}/address/select`;
+/**
+* @deprecated BIRTH_MOTHER section has been moved to LA Portal
+*/
 export const BIRTH_MOTHER_MANUAL_ADDRESS: PageLink = `${BIRTH_MOTHER}/address/manual`;
+/**
+* @deprecated BIRTH_MOTHER section has been moved to LA Portal
+*/
 export const BIRTH_MOTHER_INTERNATIONAL_ADDRESS: PageLink = `${BIRTH_MOTHER}/address/international`;
 
+/**
+* @deprecated
+*/
 export const RELATIONSHIP_DATE_URL: PageLink = '/date-from-certificate';
 
-export const CHECK_JURISDICTION: PageLink = '/check-jurisdiction';
+//export const CHECK_JURISDICTION: PageLink = '/check-jurisdiction';
+/**
+* @deprecated
+*/
 export const WHERE_YOUR_LIVES_ARE_BASED_URL: PageLink = '/where-your-lives-are-based';
-export const JURISDICTION_INTERSTITIAL_URL: PageLink = '/you-can-use-english-welsh-courts';
-export const RESIDUAL_JURISDICTION: PageLink = '/are-you-eligible-for-residual-jurisdiction';
-export const JURISDICTION_MAY_NOT_BE_ABLE_TO: PageLink = '/you-may-not-be-able-to-england-and-wales';
-export const JURISDICTION_CONNECTION_SUMMARY: PageLink = '/connection-summary';
+//export const JURISDICTION_INTERSTITIAL_URL: PageLink = '/you-can-use-english-welsh-courts';
+//export const RESIDUAL_JURISDICTION: PageLink = '/are-you-eligible-for-residual-jurisdiction';
+//export const JURISDICTION_MAY_NOT_BE_ABLE_TO: PageLink = '/you-may-not-be-able-to-england-and-wales';
+//export const JURISDICTION_CONNECTION_SUMMARY: PageLink = '/connection-summary';
 
 export const YOUR_NAME: PageLink = '/enter-your-name';
 
