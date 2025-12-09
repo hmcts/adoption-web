@@ -1,8 +1,4 @@
-import {
-  PAYMENT_CALLBACK_URL,
-  PAY_AND_SUBMIT,
-  PAY_YOUR_FEE,
-} from '../../steps/urls';
+import { PAYMENT_CALLBACK_URL, PAY_AND_SUBMIT, PAY_YOUR_FEE } from '../../steps/urls';
 
 const backLink: HTMLAnchorElement | null = document.querySelector('.govuk-back-link');
 if (backLink) {

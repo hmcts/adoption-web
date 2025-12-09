@@ -16,16 +16,16 @@ import {
   CONTACT_US,
   COOKIES_PAGE,
   CSRF_TOKEN_ERROR_URL,
-  ELIGIBILITY_URL,
   DOWNLOAD_APPLICATION_SUMMARY,
+  ELIGIBILITY_URL,
   HOME_URL,
   KEEP_ALIVE_URL,
+  LA_DOCUMENT_MANAGER,
   LA_PORTAL,
   LA_PORTAL_ACCESSIBILITY_STATEMENT,
   LA_PORTAL_CONFIRMATION_PAGE,
   LA_PORTAL_CONTACT_US,
   LA_PORTAL_COOKIES_PAGE,
-  LA_DOCUMENT_MANAGER,
   LA_PORTAL_PRIVACY_POLICY,
   LA_PORTAL_TERMS_AND_CONDITIONS,
   NEW_APPLICATION_REDIRECT,
@@ -86,7 +86,6 @@ export class StateRedirectMiddleware {
 
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
-
         logger.info(`StateRedirectMiddleware: Current path is ${req.path}`);
         logger.info(`StateRedirectMiddleware: Current state is ${req.session?.userCase?.state}`);
 

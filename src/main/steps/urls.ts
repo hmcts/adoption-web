@@ -5,8 +5,8 @@ export const CALLBACK_URL: PageLink = '/receiver';
 export const SIGN_IN_URL: PageLink = '/login';
 export const SIGN_OUT_URL: PageLink = '/logout';
 /**
-* @deprecated see SAVE_AND_RELOGIN
-*/
+ * @deprecated see SAVE_AND_RELOGIN
+ */
 export const SAVE_AND_SIGN_OUT: PageLink = '/save-and-sign-out';
 export const TIMED_OUT_URL: PageLink = '/timed-out';
 export const TIMED_OUT_REDIRECT: PageLink = '/timed-out-redirect';
@@ -52,8 +52,8 @@ export const CHILDREN: PageLink = '/children';
 export const CHILDREN_FULL_NAME: PageLink = `${CHILDREN}/full-name`;
 export const CHILDREN_DATE_OF_BIRTH: PageLink = `${CHILDREN}/date-of-birth`;
 /**
-* @deprecated CHILDREN_NATIONALITY has been moved to LA Portal
-*/
+ * @deprecated CHILDREN_NATIONALITY has been moved to LA Portal
+ */
 export const CHILDREN_NATIONALITY: PageLink = `${CHILDREN}/nationality`;
 export const CHILDREN_FULL_NAME_AFTER_ADOPTION: PageLink = `${CHILDREN}/full-name-after-adoption`;
 export const CHILDREN_FIND_PLACEMENT_ORDER_COURT: PageLink = `${CHILDREN}/find-placement-order-court`;
@@ -61,45 +61,45 @@ export const CHILDREN_FIND_FAMILY_COURT: PageLink = `${CHILDREN}/find-family-cou
 
 export const SIBLING: PageLink = '/sibling';
 /**
-* @deprecated SIBLING has been moved to LA Portal
-*/
+ * @deprecated SIBLING has been moved to LA Portal
+ */
 export const SIBLING_ORDER_SUMMARY: PageLink = `${SIBLING}/summary`;
 /**
-* @deprecated SIBLING has been moved to LA Portal
-*/
+ * @deprecated SIBLING has been moved to LA Portal
+ */
 export const SIBLING_ORDER_CHECK_YOUR_ANSWERS: PageLink = `${SIBLING}/placement-order-check-your-answers`;
 
 export const BIRTH_MOTHER: PageLink = '/birth-mother';
 /**
-* @deprecated BIRTH_MOTHER section has been moved to LA Portal
-*/
+ * @deprecated BIRTH_MOTHER section has been moved to LA Portal
+ */
 export const BIRTH_MOTHER_NATIONALITY: PageLink = `${BIRTH_MOTHER}/nationality`;
 /**
-* @deprecated BIRTH_MOTHER section has been moved to LA Portal
-*/
+ * @deprecated BIRTH_MOTHER section has been moved to LA Portal
+ */
 export const BIRTH_MOTHER_FIND_ADDRESS: PageLink = `${BIRTH_MOTHER}/address/lookup`;
 /**
-* @deprecated BIRTH_MOTHER section has been moved to LA Portal
-*/
+ * @deprecated BIRTH_MOTHER section has been moved to LA Portal
+ */
 export const BIRTH_MOTHER_MANUAL_ADDRESS: PageLink = `${BIRTH_MOTHER}/address/manual`;
 /**
-* @deprecated BIRTH_MOTHER section has been moved to LA Portal
-*/
+ * @deprecated BIRTH_MOTHER section has been moved to LA Portal
+ */
 export const BIRTH_MOTHER_INTERNATIONAL_ADDRESS: PageLink = `${BIRTH_MOTHER}/address/international`;
 
 /**
-* @deprecated
-*/
+ * @deprecated
+ */
 export const RELATIONSHIP_DATE_URL: PageLink = '/date-from-certificate';
 
 /**
-* @deprecated
-*/
+ * @deprecated
+ */
 export const WHERE_YOUR_LIVES_ARE_BASED_URL: PageLink = '/where-your-lives-are-based';
 
 /**
-* @deprecated use REVIEW_PAY_SUBMIT section URLs instead
-*/
+ * @deprecated use REVIEW_PAY_SUBMIT section URLs instead
+ */
 export const PAY_AND_SUBMIT: PageLink = '/pay-and-submit';
 
 export const APPLICATION_SUBMITTED: PageLink = '/application/submitted';
@@ -121,34 +121,34 @@ export const INELIGIBLE_TO_ADOPT: PageLink = `${ELIGIBILITY_URL}/cannot-apply`;
 
 export const OTHER_PARENT: PageLink = '/other-parent';
 /**
-* @deprecated OTHER_PARENT section has been moved to LA Portal
-*/
+ * @deprecated OTHER_PARENT section has been moved to LA Portal
+ */
 export const OTHER_PARENT_POSTCODE_LOOKUP: PageLink = `${OTHER_PARENT}/address/lookup`;
 /**
-* @deprecated OTHER_PARENT section has been moved to LA Portal
-*/
+ * @deprecated OTHER_PARENT section has been moved to LA Portal
+ */
 export const OTHER_PARENT_MANUAL_ADDRESS: PageLink = `${OTHER_PARENT}/address/manual`;
 /**
-* @deprecated OTHER_PARENT section has been moved to LA Portal
-*/
+ * @deprecated OTHER_PARENT section has been moved to LA Portal
+ */
 export const OTHER_PARENT_INTERNATIONAL_ADDRESS: PageLink = `${OTHER_PARENT}/address/international`;
 
 export const BIRTH_FATHER = '/birth-father';
 /**
-* @deprecated BIRTH_FATHER section has been moved to LA Portal
-*/
+ * @deprecated BIRTH_FATHER section has been moved to LA Portal
+ */
 export const BIRTH_FATHER_ADDRESS_LOOKUP: PageLink = `${BIRTH_FATHER}/address/lookup`;
 /**
-* @deprecated BIRTH_FATHER section has been moved to LA Portal
-*/
+ * @deprecated BIRTH_FATHER section has been moved to LA Portal
+ */
 export const BIRTH_FATHER_MANUAL_ADDRESS: PageLink = `${BIRTH_FATHER}/address/manual`;
 /**
-* @deprecated BIRTH_FATHER section has been moved to LA Portal
-*/
+ * @deprecated BIRTH_FATHER section has been moved to LA Portal
+ */
 export const BIRTH_FATHER_INTERNATIONAL_ADDRESS: PageLink = `${BIRTH_FATHER}/address/international`;
 /**
-* @deprecated BIRTH_FATHER section has been moved to LA Portal
-*/
+ * @deprecated BIRTH_FATHER section has been moved to LA Portal
+ */
 export const BIRTH_FATHER_NATIONALITY: PageLink = `${BIRTH_FATHER}/nationality`;
 
 export const REVIEW_PAY_SUBMIT: PageLink = '/review-pay-submit';
@@ -166,12 +166,12 @@ export const STATEMENT_OF_TRUTH: PageLink = `${REVIEW_PAY_SUBMIT}/statement-of-t
 export const EQUALITY: PageLink = `${REVIEW_PAY_SUBMIT}/equality`;
 
 /**
-* @deprecated see LA_PORTAL_UPLOAD_YOUR_DOCUMENTS
-*/
+ * @deprecated see LA_PORTAL_UPLOAD_YOUR_DOCUMENTS
+ */
 export const UPLOAD_YOUR_DOCUMENTS: PageLink = '/upload-your-documents';
 /**
-* @deprecated see LA_DOCUMENT_MANAGER
-*/
+ * @deprecated see LA_DOCUMENT_MANAGER
+ */
 export const DOCUMENT_MANAGER: PageLink = '/document-manager';
 export const LA_DOCUMENT_MANAGER: PageLink = '/la-document-manager';
 
