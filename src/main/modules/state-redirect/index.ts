@@ -39,6 +39,7 @@ import {
   SIGN_OUT_URL,
   TASK_LIST_URL,
   TERMS_AND_CONDITIONS,
+  TEST_REQUEST,
   TIMED_OUT_REDIRECT,
   TIMED_OUT_URL,
 } from '../../steps/urls';
@@ -79,6 +80,7 @@ export class StateRedirectMiddleware {
     SIGN_IN_URL,
     SIGN_OUT_URL,
     TIMED_OUT_REDIRECT,
+    TEST_REQUEST, // currently required for tests
   ];
   public enableFor(app: Application): void {
     const { errorHandler } = app.locals;
