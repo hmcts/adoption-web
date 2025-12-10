@@ -95,7 +95,7 @@ export class StateRedirectMiddleware {
           return res.redirect(TASK_LIST_URL);
         }
 
-        if (this.PUBLIC_LINKS.find(item => req.path.startsWith(item))) {
+        if (this.PUBLIC_LINKS.some(item => req.path.startsWith(item))) {
           //Footer links are accessible from anywhere in the application
           return next();
         }
@@ -104,18 +104,24 @@ export class StateRedirectMiddleware {
           req.path !== LA_PORTAL_CONFIRMATION_PAGE &&
           [State.LaSubmitted].includes(req.session?.userCase?.state)
         ) {
+          logger.warn(
+            `user id ${req.session.user?.id} tried to access ${req.path} \
+             after caseId ${req.session?.userCase?.id} LA Submitted`
+          );
           return res.redirect(LA_PORTAL_CONFIRMATION_PAGE);
         }
 
-        const result = this.CITIZEN_SUBMITTED_CASE_URLS.find(item => req.path.startsWith(item));
+        const result = this.CITIZEN_SUBMITTED_CASE_URLS.some(item => req.path.startsWith(item));
         logger.info(`StateRedirectMiddleware: Path included in URLS? ${result}`);
         if (
           [State.Submitted, State.LaSubmitted].includes(req.session?.userCase?.state) &&
           req.path !== HOME_URL &&
-          undefined === this.CITIZEN_SUBMITTED_CASE_URLS.find(item => req.path.startsWith(item))
+          false === this.CITIZEN_SUBMITTED_CASE_URLS.some(item => req.path.startsWith(item))
         ) {
-          // TODO throw error?
-          logger.info('Application already Citizen submitted - redirecting');
+          logger.warn(
+            `user id ${req.session.user?.id} tried to access ${req.path} \
+             but caseId ${req.session?.userCase?.id} in state ${req.session?.userCase?.state}`
+          );
           return res.redirect(HOME_URL);
         }
 

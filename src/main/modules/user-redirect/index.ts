@@ -1,3 +1,4 @@
+import { UserRole } from 'app/case/definition';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { Application, NextFunction, Response } from 'express';
@@ -32,7 +33,6 @@ import {
   TIMED_OUT_REDIRECT,
   TIMED_OUT_URL,
 } from '../../steps/urls';
-import { UserRole } from 'app/case/definition';
 
 const { Logger } = require('@hmcts/nodejs-logging');
 const logger: LoggerInstance = Logger.getLogger('app');
@@ -90,7 +90,8 @@ export class UserRedirectMiddleware {
         if (req.session.user?.roles.includes(UserRole.CITIZEN)) {
           if (this.LA_URLS.some(item => req.path.startsWith(item))) {
             logger.warn(
-              `Citizen user id ${req.session.user?.id} tried to access: ${req.path} (caseId ${req.session?.userCase?.id})`
+              `Citizen user id ${req.session.user?.id} tried to access ${req.path} \
+              (caseId ${req.session?.userCase?.id})`
             );
             return errorController.notFound(req, res);
           }
@@ -111,13 +112,15 @@ export class UserRedirectMiddleware {
             return next();
           }
           logger.warn(
-            `LA user id ${req.session.user?.id} tried to access: ${req.path} (caseId ${req.session?.userCase?.id})`
+            `LA user id ${req.session.user?.id} tried to access ${req.path} \
+            (caseId ${req.session?.userCase?.id})`
           );
           return errorController.notFound(req, res);
         }
 
         logger.warn(
-          `Unauthorised user id ${req.session.user?.id} tried to access: ${req.path} (caseId ${req.session?.userCase?.id})`
+          `Unauthorised user id ${req.session.user?.id} tried to access ${req.path} \
+          (caseId ${req.session?.userCase?.id})`
         );
         return errorController.notFound(req, res);
       })
