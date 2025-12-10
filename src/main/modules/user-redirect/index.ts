@@ -1,9 +1,9 @@
-import { UserRole } from 'app/case/definition';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { Application, NextFunction, Response } from 'express';
 import type { LoggerInstance } from 'winston';
 
+import { UserRole } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
 import { ErrorController } from '../../steps/error/error.controller';
 import {
