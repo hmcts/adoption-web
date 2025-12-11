@@ -5,7 +5,7 @@ import type { LoggerInstance } from 'winston';
 
 import { UserRole } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
-import { ErrorController } from '../../steps/error/error.controller';
+import { UserPathError } from '../../steps/error/error.controller';
 import {
   ACCESSIBILITY_STATEMENT,
   CALLBACK_URL,
@@ -75,6 +75,8 @@ export class UserRedirectMiddleware {
 
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
+        let errMsg = '';
+
         //TODO remove logging
         logger.info(`UserRedirectMiddleware: Current path is ${req.path}`);
         logger.info(`UserRedirectMiddleware: User
@@ -84,16 +86,13 @@ export class UserRedirectMiddleware {
           email: ${req.session.user?.email}`);
         logger.info(`UserRedirectMiddleware: Current case is ${req.session?.userCase?.id}`);
 
-        const errorController = new ErrorController();
-
         // Citizen Users (all LA Portal links are notFound)
         if (req.session.user?.roles.includes(UserRole.CITIZEN)) {
           if (this.LA_URLS.some(item => req.path.startsWith(item))) {
-            logger.warn(
-              `Citizen user id ${req.session.user?.id} tried to access ${req.path} \
-              (caseId ${req.session?.userCase?.id})`
-            );
-            return errorController.notFound(req, res);
+            errMsg = `Citizen user id ${req.session.user?.id} tried to access ${req.path} \
+              (caseId ${req.session?.userCase?.id})`;
+            logger.warn(errMsg);
+            throw new UserPathError(errMsg);
           }
           return next();
         }
@@ -111,18 +110,16 @@ export class UserRedirectMiddleware {
           ) {
             return next();
           }
-          logger.warn(
-            `LA user id ${req.session.user?.id} tried to access ${req.path} \
-            (caseId ${req.session?.userCase?.id})`
-          );
-          return errorController.notFound(req, res);
+          errMsg = `LA user id ${req.session.user?.id} tried to access ${req.path} \
+            (caseId ${req.session?.userCase?.id})`;
+          logger.warn(errMsg);
+          throw new UserPathError(errMsg);
         }
 
-        logger.warn(
-          `Unauthorised user id ${req.session.user?.id} tried to access ${req.path} \
-          (caseId ${req.session?.userCase?.id})`
-        );
-        return errorController.notFound(req, res);
+        errMsg = `Unauthorised user id ${req.session.user?.id} tried to access ${req.path} \
+          (caseId ${req.session?.userCase?.id})`;
+        logger.warn(errMsg);
+        throw new UserPathError(errMsg);
       })
     );
   }
