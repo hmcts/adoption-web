@@ -36,7 +36,7 @@ export class ErrorHandler {
   public handleNextErrorsFor(app: Application): void {
     app.use((err: Error | string | undefined, req: Request, res: Response, next: NextFunction) => {
       if (err) {
-        if (err === typeof(UserPathError)) {
+        if (err === typeof UserPathError) {
           return errorController.notFound(req as AppRequest, res);
         }
         return errorController.internalServerError(err, req as AppRequest, res);
