@@ -5,7 +5,7 @@ import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import { generatePageContent } from '../common/common.content';
 
 import { errorContent } from './content';
-import { ErrorController, HTTPError } from './error.controller';
+import { ErrorController, HTTPError, UserPathError } from './error.controller';
 
 import Mock = jest.Mock;
 
@@ -68,6 +68,22 @@ describe('ErrorController', () => {
     expect(res.render).toBeCalledWith('error/error', {
       ...generatePageContent({ language: 'en', userEmail: 'test@example.com' }),
       ...errorContent.en[400],
+    });
+  });
+
+  test('UserPathError renders the error page with 404 code and logs the details', async () => {
+    //Note: UserPathError is normally handled by error-handler middleware & uses notFound()
+    const err = new UserPathError('Not Found');
+    const req = mockRequest();
+    const res = mockResponse();
+    await controller.internalServerError(err, req, res);
+    const logger = req.locals.logger as unknown as MockedLogger;
+
+    expect(logger.error.mock.calls[0][0]).toContain('UserPathError: Not Found');
+    expect(res.statusCode).toBe(404);
+    expect(res.render).toBeCalledWith('error/error', {
+      ...generatePageContent({ language: 'en', userEmail: 'test@example.com' }),
+      ...errorContent.en[404],
     });
   });
 
