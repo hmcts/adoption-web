@@ -38,7 +38,7 @@ const { Logger } = require('@hmcts/nodejs-logging');
 const logger: LoggerInstance = Logger.getLogger('app');
 
 /**
- * Adds the state redirect middleware to redirect when application is in certain states
+ * Adds the user redirect middleware to limit access to certain URLs by user type.
  */
 export class UserRedirectMiddleware {
   PUBLIC_LINKS = [
