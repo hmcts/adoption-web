@@ -1,7 +1,7 @@
+import { Logger } from '@hmcts/nodejs-logging';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { Application, NextFunction, Response } from 'express';
-import type { LoggerInstance } from 'winston';
 
 import { UserRole } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
@@ -34,8 +34,7 @@ import {
   TIMED_OUT_URL,
 } from '../../steps/urls';
 
-const { Logger } = require('@hmcts/nodejs-logging');
-const logger: LoggerInstance = Logger.getLogger('app');
+const logger = Logger.getLogger('user-redirect');
 
 /**
  * Adds the user redirect middleware to limit access to certain URLs by user type.
@@ -91,7 +90,7 @@ export class UserRedirectMiddleware {
           if (this.LA_URLS.some(item => req.path.startsWith(item))) {
             errMsg = `Citizen user id ${req.session.user?.id} tried to access ${req.path} \
               (caseId ${req.session?.userCase?.id})`;
-            logger.warn(errMsg);
+            logger.error(errMsg);
             throw new UserPathError(errMsg);
           }
           return next();
@@ -112,13 +111,13 @@ export class UserRedirectMiddleware {
           }
           errMsg = `LA user id ${req.session.user?.id} tried to access ${req.path} \
             (caseId ${req.session?.userCase?.id})`;
-          logger.warn(errMsg);
+          logger.error(errMsg);
           throw new UserPathError(errMsg);
         }
 
         errMsg = `Unauthorised user id ${req.session.user?.id} tried to access ${req.path} \
           (caseId ${req.session?.userCase?.id})`;
-        logger.warn(errMsg);
+        logger.error(errMsg);
         throw new UserPathError(errMsg);
       })
     );

@@ -1,7 +1,7 @@
+import { Logger } from '@hmcts/nodejs-logging';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { Application, NextFunction, Response } from 'express';
-import type { LoggerInstance } from 'winston';
 
 import { ApplyingWith, SectionStatus, State } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
@@ -44,8 +44,7 @@ import {
   TIMED_OUT_URL,
 } from '../../steps/urls';
 
-const { Logger } = require('@hmcts/nodejs-logging');
-const logger: LoggerInstance = Logger.getLogger('app');
+const logger = Logger.getLogger('state-redirect');
 
 /**
  * Adds the state redirect middleware to redirect when application is in certain states
@@ -104,22 +103,20 @@ export class StateRedirectMiddleware {
           req.path !== LA_PORTAL_CONFIRMATION_PAGE &&
           [State.LaSubmitted].includes(req.session?.userCase?.state)
         ) {
-          logger.warn(
-            `user id ${req.session.user?.id} tried to access ${req.path} \
+          logger.error(
+            `User id ${req.session.user?.id} tried to access ${req.path} \
              after caseId ${req.session?.userCase?.id} LA Submitted`
           );
           return res.redirect(LA_PORTAL_CONFIRMATION_PAGE);
         }
 
-        const result = this.CITIZEN_SUBMITTED_CASE_URLS.some(item => req.path.startsWith(item));
-        logger.info(`StateRedirectMiddleware: Path included in URLS? ${result}`);
         if (
           [State.Submitted, State.LaSubmitted].includes(req.session?.userCase?.state) &&
           req.path !== HOME_URL &&
           false === this.CITIZEN_SUBMITTED_CASE_URLS.some(item => req.path.startsWith(item))
         ) {
-          logger.warn(
-            `user id ${req.session.user?.id} tried to access ${req.path} \
+          logger.error(
+            `User id ${req.session.user?.id} tried to access ${req.path} \
              but caseId ${req.session?.userCase?.id} in state ${req.session?.userCase?.state}`
           );
           return res.redirect(HOME_URL);
