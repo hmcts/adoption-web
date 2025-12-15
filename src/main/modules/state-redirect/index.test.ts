@@ -120,7 +120,7 @@ describe('user-redirect', () => {
     expect(res.redirect).toHaveBeenCalledWith('/');
   });
 
-  test('should redirect single applications from APPLICANT2 links', async () => {
+  test('should redirect single applicant from APPLICANT2 links', async () => {
     req.path = APPLICANT_2_SAME_ADDRESS;
     req.session = {
       userCase: {
