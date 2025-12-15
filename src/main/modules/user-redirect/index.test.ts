@@ -72,7 +72,7 @@ describe('user-redirect', () => {
     await expect(t).rejects.toThrow(/Unauthorised user id undefined tried to access/);
   });
 
-  test('should call next for citizen users acessing citizen links', () => {
+  test('should call next for citizen users accessing citizen links', () => {
     req.session = {
       user: {
         id: 'user-123',
@@ -87,7 +87,7 @@ describe('user-redirect', () => {
     expect(mockNext).toHaveBeenCalled();
   });
 
-  test('should throw for citizen users acessing LA links', async () => {
+  test('should throw for citizen users accessing LA links', async () => {
     req.session = {
       user: {
         id: 'user-123',
@@ -104,7 +104,7 @@ describe('user-redirect', () => {
     await expect(t).rejects.toThrow(/Citizen user id user-123 tried to access/);
   });
 
-  test('should call next for LA users acessing LA links', () => {
+  test('should call next for LA users accessing LA links', () => {
     req.session = {
       user: {
         id: 'la-123',
@@ -120,7 +120,7 @@ describe('user-redirect', () => {
     expect(mockNext).toHaveBeenCalled();
   });
 
-  test('should throw for LA users acessing citizen links', async () => {
+  test('should throw for LA users accessing citizen links', async () => {
     req.session = {
       user: {
         id: 'la-123',
