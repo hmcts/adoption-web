@@ -74,52 +74,57 @@ export class UserRedirectMiddleware {
 
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
-        let errMsg = '';
-
-        //TODO remove logging
-        logger.info(`UserRedirectMiddleware: Current path is ${req.path}`);
-        logger.info(`UserRedirectMiddleware: User
-          id ${req.session.user?.id}, 
-          roles: ${req.session.user?.roles}, 
-          isSystemUser: ${req.session.user?.isSystemUser}, 
-          email: ${req.session.user?.email}`);
-        logger.info(`UserRedirectMiddleware: Current case is ${req.session?.userCase?.id}`);
-
-        // Citizen Users (all LA Portal links are notFound)
-        if (req.session.user?.roles.includes(UserRole.CITIZEN)) {
-          if (this.LA_URLS.some(item => req.path.startsWith(item))) {
-            errMsg = `Citizen user id ${req.session.user?.id} tried to access ${req.path} \
-              (caseId ${req.session?.userCase?.id})`;
-            logger.error(errMsg);
-            throw new UserPathError(errMsg);
-          }
+        if (this.isCitizen(req)) {
+          this.throwIfInvalidUrlForCitizenUser(req, this.buildErrMsg(req, 'Citizen'));
           return next();
         }
 
-        // Public links
-        if (req.path === HOME_URL || this.PUBLIC_LINKS.some(item => req.path.startsWith(item))) {
+        if (this.isPublicLink(req)) {
           return next();
         }
 
-        // LA Users
-        if (req.session.user?.isSystemUser) {
-          if (
-            this.LA_URLS.some(item => req.path.startsWith(item)) ||
-            this.CITIZEN_AND_LA_URLS.some(item => req.path.startsWith(item))
-          ) {
-            return next();
-          }
-          errMsg = `LA user id ${req.session.user?.id} tried to access ${req.path} \
-            (caseId ${req.session?.userCase?.id})`;
-          logger.error(errMsg);
-          throw new UserPathError(errMsg);
+        if (this.isLAUser(req)) {
+          this.throwIfInvalidUrlForLaUser(req, this.buildErrMsg(req, 'LA'));
+          return next();
         }
 
-        errMsg = `Unauthorised user id ${req.session.user?.id} tried to access ${req.path} \
-          (caseId ${req.session?.userCase?.id})`;
+        const errMsg = this.buildErrMsg(req, 'Unauthorised');
         logger.error(errMsg);
         throw new UserPathError(errMsg);
       })
     );
+  }
+
+  private isCitizen(req: AppRequest): boolean {
+    return Array.isArray(req.session.user?.roles) && req.session.user.roles.includes(UserRole.CITIZEN);
+  }
+
+  private isLAUser(req: AppRequest): boolean {
+    return !!req.session.user?.isSystemUser;
+  }
+
+  private isPublicLink(req: AppRequest): boolean {
+    return req.path === HOME_URL || this.PUBLIC_LINKS.some(item => req.path.startsWith(item));
+  }
+
+  private throwIfInvalidUrlForCitizenUser(req: AppRequest, errMsg: string): void {
+    if (this.LA_URLS.some(item => req.path.startsWith(item))) {
+      logger.error(errMsg);
+      throw new UserPathError(errMsg);
+    }
+  }
+
+  private throwIfInvalidUrlForLaUser(req: AppRequest, errMsg: string): void {
+    if (
+      false === this.LA_URLS.some(item => req.path.startsWith(item)) &&
+      false === this.CITIZEN_AND_LA_URLS.some(item => req.path.startsWith(item))
+    ) {
+      logger.error(errMsg);
+      throw new UserPathError(errMsg);
+    }
+  }
+
+  private buildErrMsg(req: AppRequest, prefix: string): string {
+    return `${prefix} user id ${req.session.user?.id} tried to access ${req.path} (caseId ${req.session?.userCase?.id})`;
   }
 }
