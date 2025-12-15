@@ -3,10 +3,10 @@ jest.mock('@hmcts/nodejs-logging');
 import { Logger } from '@hmcts/nodejs-logging';
 import { Application } from 'express';
 
-import { UserPathError } from '../../steps/error/error.controller';
-import { UserRole } from '../../app/case/definition';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
-import { KEEP_ALIVE_URL, LA_PORTAL_TASK_LIST, TASK_LIST_URL} from '../../steps/urls';
+import { UserRole } from '../../app/case/definition';
+import { UserPathError } from '../../steps/error/error.controller';
+import { KEEP_ALIVE_URL, LA_PORTAL_TASK_LIST, TASK_LIST_URL } from '../../steps/urls';
 
 import { UserRedirectMiddleware } from '.';
 
@@ -19,7 +19,8 @@ describe('user-redirect', () => {
   const mockNext = jest.fn();
   let middlewareUnderTest: UserRedirectMiddleware;
   let mockApp;
-  let registeredMiddleware: any; //TODO type
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  let registeredMiddleware: any;
 
   const mockLogger = {
     info: jest.fn(),
@@ -32,7 +33,9 @@ describe('user-redirect', () => {
     jest.clearAllMocks();
 
     mockApp = {
-      use: jest.fn(fn => { registeredMiddleware = fn; }),
+      use: jest.fn(fn => {
+        registeredMiddleware = fn;
+      }),
       locals: {
         errorHandler: jest.fn(callback => callback),
       },
@@ -49,31 +52,34 @@ describe('user-redirect', () => {
     expect(mockNext).toHaveBeenCalled();
   });
 
-  test('should throw for Citizen internal links when no session.user', () => {
+  test('should throw for Citizen internal links when no session.user', async () => {
     req.path = TASK_LIST_URL;
 
-    return registeredMiddleware(req, res, mockNext).catch((err) => {
-      expect(err).toBeInstanceOf(UserPathError);
-      expect(err.message).toMatch(/Unauthorised user id undefined tried to access/);
-    });
+    const t = async () => {
+      await registeredMiddleware(req, res, mockNext);
+    };
+    await expect(t).rejects.toThrow(UserPathError);
+    await expect(t).rejects.toThrow(/Unauthorised user id undefined tried to access/);
   });
 
-  test('should throw for LA internal links when no session.user', () => {
+  test('should throw for LA internal links when no session.user', async () => {
     req.path = LA_PORTAL_TASK_LIST;
 
-    return registeredMiddleware(req, res, mockNext).catch((err) => {
-      expect(err).toBeInstanceOf(UserPathError);
-      expect(err.message).toMatch(/Unauthorised user id undefined tried to access/);
-    });
+    const t = async () => {
+      await registeredMiddleware(req, res, mockNext);
+    };
+    await expect(t).rejects.toThrow(UserPathError);
+    await expect(t).rejects.toThrow(/Unauthorised user id undefined tried to access/);
   });
 
   test('should call next for citizen users acessing citizen links', () => {
-    req.session = { 
+    req.session = {
       user: {
         id: 'user-123',
         roles: [UserRole.CITIZEN],
-      }, 
-      userCase: { id: '123' } };
+      },
+      userCase: { id: '123' },
+    };
     req.path = TASK_LIST_URL;
 
     registeredMiddleware(req, res, mockNext);
@@ -81,29 +87,32 @@ describe('user-redirect', () => {
     expect(mockNext).toHaveBeenCalled();
   });
 
-  test('should throw for citizen users acessing LA links', () => {
-    req.session = { 
+  test('should throw for citizen users acessing LA links', async () => {
+    req.session = {
       user: {
         id: 'user-123',
         roles: [UserRole.CITIZEN],
-      }, 
-      userCase: { id: '123' } };
+      },
+      userCase: { id: '123' },
+    };
     req.path = LA_PORTAL_TASK_LIST;
 
-    return registeredMiddleware(req, res, mockNext).catch((err) => {
-      expect(err).toBeInstanceOf(UserPathError);
-      expect(err.message).toMatch(/Citizen user id user-123 tried to access/);
-    });
+    const t = async () => {
+      await registeredMiddleware(req, res, mockNext);
+    };
+    await expect(t).rejects.toThrow(UserPathError);
+    await expect(t).rejects.toThrow(/Citizen user id user-123 tried to access/);
   });
 
   test('should call next for LA users acessing LA links', () => {
-    req.session = { 
+    req.session = {
       user: {
         id: 'la-123',
         roles: [UserRole.CASE_WORKER],
         isSystemUser: true,
-      }, 
-      userCase: { id: '123' } };
+      },
+      userCase: { id: '123' },
+    };
     req.path = LA_PORTAL_TASK_LIST;
 
     registeredMiddleware(req, res, mockNext);
@@ -111,19 +120,21 @@ describe('user-redirect', () => {
     expect(mockNext).toHaveBeenCalled();
   });
 
-  test('should throw for LA users acessing citizen links', () => {
-    req.session = { 
+  test('should throw for LA users acessing citizen links', async () => {
+    req.session = {
       user: {
         id: 'la-123',
         roles: [UserRole.CASE_WORKER],
         isSystemUser: true,
-      }, 
-      userCase: { id: '123' } };
+      },
+      userCase: { id: '123' },
+    };
     req.path = TASK_LIST_URL;
 
-    return registeredMiddleware(req, res, mockNext).catch((err) => {
-      expect(err).toBeInstanceOf(UserPathError);
-      expect(err.message).toMatch(/LA user id la-123 tried to access/);
-    });
+    const t = async () => {
+      await registeredMiddleware(req, res, mockNext);
+    };
+    await expect(t).rejects.toThrow(UserPathError);
+    await expect(t).rejects.toThrow(/LA user id la-123 tried to access/);
   });
 });
