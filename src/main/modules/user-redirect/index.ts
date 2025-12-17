@@ -74,12 +74,12 @@ export class UserRedirectMiddleware {
 
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
-        if (this.isCitizen(req)) {
-          this.throwIfInvalidUrlForCitizenUser(req, this.buildErrMsg(req, 'Citizen'));
+        if (this.isPublicLink(req)) {
           return next();
         }
 
-        if (this.isPublicLink(req)) {
+        if (this.isCitizen(req)) {
+          this.throwIfInvalidUrlForCitizenUser(req, this.buildErrMsg(req, 'Citizen'));
           return next();
         }
 
