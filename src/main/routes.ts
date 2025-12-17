@@ -1,6 +1,7 @@
 import fs from 'fs';
 
 import { Application, RequestHandler } from 'express';
+import rateLimit from 'express-rate-limit';
 import multer from 'multer';
 
 import { NewCaseRedirectController } from './app/case/NewCaseRedirectController';
@@ -16,10 +17,17 @@ import {
   DOWNLOAD_APPLICATION_SUMMARY,
   KEEP_ALIVE_URL,
   LA_DOCUMENT_MANAGER,
+  LA_PORTAL_KBA_CASE_REF,
   NEW_APPLICATION_REDIRECT,
 } from './steps/urls';
 
 const handleUploads = multer();
+
+const rateLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 5,
+  message: 'Too many requests from this IP, please try again later.',
+});
 
 export class Routes {
   public enableFor(app: Application): void {
@@ -37,6 +45,8 @@ export class Routes {
 
     const newCaseRedirectController = new NewCaseRedirectController();
     app.get(NEW_APPLICATION_REDIRECT, errorHandler(newCaseRedirectController.get));
+
+    app.post(LA_PORTAL_KBA_CASE_REF, rateLimiter);
 
     for (const step of stepsWithContent) {
       const files = fs.readdirSync(`${step.stepDir}`);

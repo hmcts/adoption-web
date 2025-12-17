@@ -5334,6 +5334,7 @@ __metadata:
     eslint-plugin-jest: ^26.5.3
     eslint-plugin-prettier: ^4.0.0
     express: ^4.21.2
+    express-rate-limit: 8.2.1
     express-session: ^1.18.2
     form-data: ^4.0.4
     glob: ^8.0.3
@@ -9574,6 +9575,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"express-rate-limit@npm:8.2.1":
+  version: 8.2.1
+  resolution: "express-rate-limit@npm:8.2.1"
+  dependencies:
+    ip-address: 10.0.1
+  peerDependencies:
+    express: ">= 4.11"
+  checksum: 6fe9f589432b3b304412183ee057b91d108a5d5987d29b6526203936f3cd11ba3e69954ff040153ed5553af57e797bcb35d1901793067665175c6ac1e461358c
+  languageName: node
+  linkType: hard
+
 "express-session@npm:^1.18.2":
   version: 1.18.2
   resolution: "express-session@npm:1.18.2"
@@ -11413,6 +11425,13 @@ __metadata:
     redis-parser: ^3.0.0
     standard-as-callback: ^2.1.0
   checksum: 92210294f75800febe7544c27b07e4892480172363b11971aa575be5b68f023bfed4bc858abc9792230c153aa80409047a358f174062c14d17536aa4499fe10b
+  languageName: node
+  linkType: hard
+
+"ip-address@npm:10.0.1":
+  version: 10.0.1
+  resolution: "ip-address@npm:10.0.1"
+  checksum: 525d5391cfd31a91f80f5857e98487aeaa8474e860a6725a0b6461ac8e436c7f8c869774dece391c8f8e7486306a34a4d1c094778c4c583a3f1f2cd905e5ed50
   languageName: node
   linkType: hard
 
