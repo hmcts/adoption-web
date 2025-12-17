@@ -73,4 +73,12 @@ export class HTTPError extends Error {
   }
 }
 
-export type Errors = Error | HTTPError | AxiosError | string | undefined;
+export class UserPathError extends Error {
+  constructor(public message: string, public status = StatusCodes.NOT_FOUND) {
+    super(message);
+    this.name = 'UserPathError';
+    this.status = status;
+  }
+}
+
+export type Errors = Error | HTTPError | AxiosError | UserPathError | string | undefined;

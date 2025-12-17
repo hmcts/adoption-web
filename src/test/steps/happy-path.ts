@@ -1,20 +1,8 @@
 import { State } from '../../main/app/case/definition';
-import { APPLY_FINANCIAL_ORDER } from '../../main/steps/urls';
 
 import { checkOptionFor, iAmOnPage, iClearTheForm, iClick, iSetTheUsersCaseTo } from './common';
 
 const { I } = inject();
-
-Given("I've already completed the form using the fixture {string}", async (fixture: string) => {
-  const fixtureJson = require(`../functional/fixtures/${fixture}`)[fixture];
-
-  await iSetTheUsersCaseTo(fixtureJson);
-
-  const url = await I.grabCurrentUrl();
-  I.amOnPage(APPLY_FINANCIAL_ORDER);
-  iClick('Continue');
-  I.amOnPage(url);
-});
 
 Given('I set the case state to {string}', async (state: State) => {
   iSetTheUsersCaseTo({

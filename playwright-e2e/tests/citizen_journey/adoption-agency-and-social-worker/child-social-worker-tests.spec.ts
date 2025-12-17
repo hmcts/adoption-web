@@ -121,7 +121,7 @@ test.describe('Citizen Journey child social worker test single parent', () => {
     await citChildSocialWorkerDetailsPage.fillNameOfChildSocialWorkerLabel('test');
     await citChildSocialWorkerDetailsPage.fillPhoneNumberLabel('01622 123456');
     await citChildSocialWorkerDetailsPage.selectLocalAuthority('Sandwell');
-    await citChildSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('austen.stevens@justice.gov.uk');
+    await citChildSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('test@justice.gov.uk');
     await citChildSocialWorkerDetailsPage.clickSaveAsDraft();
 
     const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
@@ -133,7 +133,7 @@ test.describe('Citizen Journey child social worker test single parent', () => {
     const expectedSocialWorkerValue = 'test';
     const expectedPhoneNumberValue = '01622 123456';
     const expectedLocalAuthoritValue = 'Sandwell Metropolitan Council';
-    const expectedLocalAuthorityEmailValue = 'austen.stevens@justice.gov.uk';
+    const expectedLocalAuthorityEmailValue = 'test@justice.gov.uk';
 
     const actualSocialWorkerValue = await citChildSocialWorkerDetailsPage.nameOfChildSocialWorkerLabel.inputValue();
     const actualPhoneNumberValue = await citChildSocialWorkerDetailsPage.phoneNumberLabel.inputValue();
@@ -154,9 +154,9 @@ test.describe('Citizen Journey child social worker test single parent', () => {
   }) => {
     await citChildSocialWorkerDetailsPage.fillNameOfChildSocialWorkerLabel('test');
     await citChildSocialWorkerDetailsPage.fillPhoneNumberLabel('01622 123456');
-    await citChildSocialWorkerDetailsPage.fillEmailAddressLabel('austen.stevens@justice.gov.uk');
+    await citChildSocialWorkerDetailsPage.fillEmailAddressLabel('test@justice.gov.uk');
     await citChildSocialWorkerDetailsPage.selectLocalAuthority('Sandwell');
-    await citChildSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('austen.stevens@justice.gov.uk');
+    await citChildSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('test@justice.gov.uk');
     await citChildSocialWorkerDetailsPage.clickSaveAndContinue();
 
     const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/children/applicant-social-worker`;
