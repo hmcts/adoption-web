@@ -53,9 +53,10 @@ export class Helmet {
       'https://ssl.gstatic.com',
       'https://www.gstatic.com',
     ];
-    if (app.locals.developmentMode) {
-      scriptSrc.push("'unsafe-eval'");
-    }
+
+    // if (app.locals.developmentMode) {
+    //   scriptSrc.push("'unsafe-eval'");
+    // }
 
     app.use(
       helmet.contentSecurityPolicy({
