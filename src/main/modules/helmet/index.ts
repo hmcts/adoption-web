@@ -85,7 +85,7 @@ export class Helmet {
     if (!policy) {
       throw new Error('Cross-Origin Resource Policy configuration is required');
     }
-    
+
     app.use(helmet.crossOriginResourcePolicy({ policy }) as RequestHandler);
   }
 }
