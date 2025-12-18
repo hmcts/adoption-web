@@ -54,9 +54,9 @@ export class Helmet {
       'https://www.gstatic.com',
     ];
 
-    // if (app.locals.developmentMode) {
-    //   scriptSrc.push("'unsafe-eval'");
-    // }
+    if (app.locals.developmentMode) {
+      scriptSrc.push("'unsafe-eval'");
+    }
 
     app.use(
       helmet.contentSecurityPolicy({
@@ -87,6 +87,6 @@ export class Helmet {
       throw new Error('Cross-Origin Resource Policy configuration is required');
     }
 
-    app.use(helmet.crossOriginResourcePolicy({ policy }) as RequestHandler);
+    //app.use(helmet.crossOriginResourcePolicy({ policy }) as RequestHandler);
   }
 }
