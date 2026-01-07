@@ -23,7 +23,7 @@ test.describe('Citizen Journey adult social worker test single parent', () => {
     await citChildSocialWorkerDetailsPage.fillNameOfChildSocialWorkerLabel('test');
     await citChildSocialWorkerDetailsPage.fillPhoneNumberLabel('01622 123456');
     await citChildSocialWorkerDetailsPage.selectLocalAuthority('Sandwell');
-    await citChildSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('austen.stevens@justice.gov.uk');
+    await citChildSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('test@justice.gov.uk');
     await citChildSocialWorkerDetailsPage.clickSaveAndContinue();
   });
 
@@ -115,7 +115,7 @@ test.describe('Citizen Journey adult social worker test single parent', () => {
     await citAdultSocialWorkerDetailsPage.fillNameOfAdultSocialWorkerLabel('test');
     await citAdultSocialWorkerDetailsPage.fillPhoneNumberLabel('01622 123456');
     await citAdultSocialWorkerDetailsPage.selectLocalAuthority('Sandwell');
-    await citAdultSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('austen.stevens@justice.gov.uk');
+    await citAdultSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('test@justice.gov.uk');
     await citAdultSocialWorkerDetailsPage.clickSaveAsDraft();
 
     const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
@@ -127,7 +127,7 @@ test.describe('Citizen Journey adult social worker test single parent', () => {
     const expectedSocialWorkerValue = 'test';
     const expectedPhoneNumberValue = '01622 123456';
     const expectedLocalAuthorityValue = 'Sandwell Metropolitan Council';
-    const expectedLocalAuthorityEmailValue = 'austen.stevens@justice.gov.uk';
+    const expectedLocalAuthorityEmailValue = 'test@justice.gov.uk';
 
     const actualSocialWorkerValue = await citAdultSocialWorkerDetailsPage.nameOfAdultSocialWorkerLabel.inputValue();
     const actualPhoneNumberValue = await citAdultSocialWorkerDetailsPage.phoneNumberLabel.inputValue();
@@ -149,7 +149,7 @@ test.describe('Citizen Journey adult social worker test single parent', () => {
     await citAdultSocialWorkerDetailsPage.fillNameOfAdultSocialWorkerLabel('test');
     await citAdultSocialWorkerDetailsPage.fillPhoneNumberLabel('01622 123456');
     await citAdultSocialWorkerDetailsPage.selectLocalAuthority('Sandwell');
-    await citAdultSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('austen.stevens@justice.gov.uk');
+    await citAdultSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('test@justice.gov.uk');
     await citAdultSocialWorkerDetailsPage.clickSaveAndContinue();
 
     const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/children/other-adoption-agency`;
