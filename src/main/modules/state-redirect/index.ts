@@ -83,9 +83,6 @@ export class StateRedirectMiddleware {
 
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
-        logger.info(`StateRedirectMiddleware: Current path is ${req.path}`);
-        logger.info(`StateRedirectMiddleware: Current state is ${req.session?.userCase?.state}`);
-
         if (this.isPublicLink(req)) {
           return next();
         }
