@@ -25,6 +25,7 @@ import { SessionStorage } from './modules/session';
 import { StateRedirectMiddleware } from './modules/state-redirect';
 import { LoadTimeouts } from './modules/timeouts';
 import { TooBusy } from './modules/too-busy';
+import { UserRedirectMiddleware } from './modules/user-redirect';
 import { Webpack } from './modules/webpack';
 import { Routes } from './routes';
 
@@ -98,6 +99,7 @@ new AuthProvider().enable();
 new OidcMiddleware().enableFor(app);
 new KbaMiddleware().enableFor(app);
 new LanguageToggle().enableFor(app);
+new UserRedirectMiddleware().enableFor(app);
 new StateRedirectMiddleware().enableFor(app);
 new Routes().enableFor(app);
 new ErrorHandler().handleNextErrorsFor(app);
