@@ -4,6 +4,7 @@ import helmet = require('helmet');
 
 export interface HelmetConfig {
   referrerPolicy: string;
+  crossOriginResourcePolicy: string;
 }
 
 const googleAnalyticsDomain = '*.google-analytics.com';
@@ -24,6 +25,7 @@ export class Helmet {
 
     this.setContentSecurityPolicy(app);
     this.setReferrerPolicy(app, this.config.referrerPolicy);
+    this.setCrossOriginResourcePolicy(app, this.config.crossOriginResourcePolicy);
   }
 
   private setContentSecurityPolicy(app: express.Express): void {
@@ -51,6 +53,7 @@ export class Helmet {
       'https://ssl.gstatic.com',
       'https://www.gstatic.com',
     ];
+
     if (app.locals.developmentMode) {
       scriptSrc.push("'unsafe-eval'");
     }
@@ -77,5 +80,13 @@ export class Helmet {
     }
 
     app.use(helmet.referrerPolicy({ policy }) as RequestHandler);
+  }
+
+  private setCrossOriginResourcePolicy(app: express.Express, policy: string): void {
+    if (!policy) {
+      throw new Error('Cross-Origin Resource Policy configuration is required');
+    }
+
+    app.use(helmet.crossOriginResourcePolicy({ policy }) as RequestHandler);
   }
 }
