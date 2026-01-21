@@ -1,8 +1,9 @@
 import fs from 'fs';
 
 import { Application, RequestHandler } from 'express';
-import rateLimit from 'express-rate-limit';
+import rateLimit, { Options } from 'express-rate-limit';
 import multer from 'multer';
+import { RedisStore, type RedisReply } from 'rate-limit-redis'
 
 import { NewCaseRedirectController } from './app/case/NewCaseRedirectController';
 import { GetController } from './app/controller/GetController';
@@ -21,13 +22,8 @@ import {
   NEW_APPLICATION_REDIRECT,
 } from './steps/urls';
 
-const handleUploads = multer();
 
-const rateLimiter = rateLimit({
-  windowMs: 60 * 1000,
-  max: 5,
-  message: 'Too many requests from this IP, please try again later.',
-});
+const handleUploads = multer();
 
 export class Routes {
   public enableFor(app: Application): void {
@@ -46,6 +42,21 @@ export class Routes {
     const newCaseRedirectController = new NewCaseRedirectController();
     app.get(NEW_APPLICATION_REDIRECT, errorHandler(newCaseRedirectController.get));
 
+    let rateLimiterConfig: Partial<Options> = {
+      windowMs: 60 * 1000,
+      max: 1,
+      message: 'Too many requests from this IP, please try again later.',
+    };
+    if (app.locals.redisClient) {
+      rateLimiterConfig = {
+        ...rateLimiterConfig,
+        store: new RedisStore({
+          sendCommand: (command: string, ...args: string[]) =>
+          app.locals.draftStoreClient.call(command, ...args) as Promise<RedisReply>,
+      }),
+      };
+    }
+    const rateLimiter = rateLimit(rateLimiterConfig);
     app.post(LA_PORTAL_KBA_CASE_REF, rateLimiter);
 
     for (const step of stepsWithContent) {
