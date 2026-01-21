@@ -3,7 +3,7 @@ import fs from 'fs';
 import { Application, RequestHandler } from 'express';
 import rateLimit, { Options } from 'express-rate-limit';
 import multer from 'multer';
-import { RedisStore, type RedisReply } from 'rate-limit-redis'
+import { type RedisReply, RedisStore } from 'rate-limit-redis';
 
 import { NewCaseRedirectController } from './app/case/NewCaseRedirectController';
 import { GetController } from './app/controller/GetController';
@@ -21,7 +21,6 @@ import {
   LA_PORTAL_KBA_CASE_REF,
   NEW_APPLICATION_REDIRECT,
 } from './steps/urls';
-
 
 const handleUploads = multer();
 
@@ -52,8 +51,8 @@ export class Routes {
         ...rateLimiterConfig,
         store: new RedisStore({
           sendCommand: (command: string, ...args: string[]) =>
-          app.locals.draftStoreClient.call(command, ...args) as Promise<RedisReply>,
-      }),
+            app.locals.draftStoreClient.call(command, ...args) as Promise<RedisReply>,
+        }),
       };
     }
     const rateLimiter = rateLimit(rateLimiterConfig);

@@ -105,7 +105,6 @@ new DraftStoreClient().enableFor(app);
 new Routes().enableFor(app);
 new ErrorHandler().handleNextErrorsFor(app);
 
-
 const port = config.get('port');
 const server = app.listen(port, () => {
   logger.info(`Application started: http://localhost:${port}`);
