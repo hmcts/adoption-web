@@ -64,6 +64,11 @@ app.get('/sitemap.xml', (req, res) => {
   res.send('User-agent: *\nDisallow: /');
 });
 
+//TODO Remove after testing
+app.get('/ip', (request, response) => {
+  response.send('Request IP: ' + request.ip + ' Header:' + (request.headers['x-forwarded-for']));
+});
+
 app.disable('x-powered-by');
 app.disable('X-Powered-By');
 
