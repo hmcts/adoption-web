@@ -1,6 +1,6 @@
 #!groovy
 
-@Library('Infrastructure')
+@Library('Infrastructure@yarn-audit-v3-fix')
 
 import uk.gov.hmcts.contino.AppPipelineConfig
 import uk.gov.hmcts.contino.AppPipelineDsl
