@@ -75,7 +75,7 @@ withPipeline(type, product, component) {
     env.AUTH_TOKEN = ''
   }
 
-  before('functionalTest:preview') {
+  before('fullFunctionalTest:preview') {
     env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.preview.platform.hmcts.net/"
     env.PARALLEL_CHUNKS = 2
     env.IDAM_TOKEN_URL = "${IDAM_TOKEN_URL}"
@@ -83,24 +83,25 @@ withPipeline(type, product, component) {
     env.IDAM_TESTING_SUPPORT_USERS_URL = "${IDAM_TESTING_SUPPORT_USERS_URL}"
   }
 
-  afterAlways('functionalTest:preview') {
-    try {
-      yarnBuilder.yarn('test:functional-chromium')
-    } catch (Error) {
-      unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
-    } finally {
-      publishHTML([
-        allowMissing: true,
-        alwaysLinkToLastBuild: true,
-        keepAll: true,
-        reportDir: 'playwright-report',
-        reportFiles: 'index.html',
-        reportName: 'Playwright Preview Functional Test Report'
-      ])
-      steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
+  afterAlways('fullFunctionalTest:preview') {
+    stage('Chromium UI Tests') {
+      try {
+        yarnBuilder.yarn('test:functional-chromium')
+      } catch (Error) {
+        unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
+      } finally {
+        publishHTML([
+          allowMissing         : true,
+          alwaysLinkToLastBuild: true,
+          keepAll              : true,
+          reportDir            : 'playwright-report',
+          reportFiles          : 'index.html',
+          reportName           : 'Playwright Preview Functional Test Report'
+        ])
+        steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
+      }
     }
   }
-
   before('smoketest:preview') {
     env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.preview.platform.hmcts.net/"
     env.PARALLEL_CHUNKS = 2
