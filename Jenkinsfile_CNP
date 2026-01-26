@@ -85,7 +85,7 @@ withPipeline(type, product, component) {
 
   afterAlways('functionalTest:preview') {
     try {
-      yarnBuilder.yarn('test:functional')
+      yarnBuilder.yarn('test:functional-chromium')
     } catch (Error) {
       unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
     } finally {
