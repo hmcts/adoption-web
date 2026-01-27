@@ -33,7 +33,8 @@ const { Logger } = require('@hmcts/nodejs-logging');
 const logger: LoggerInstance = Logger.getLogger('server');
 const app = express();
 
-app.set('trust proxy', 3);
+//app.set('trust proxy', 3);
+app.set('trust proxy', true);
 
 app.use((req, res, next) => {
   req['startTime'] = Date.now();
