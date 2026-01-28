@@ -33,7 +33,6 @@ const { Logger } = require('@hmcts/nodejs-logging');
 const logger: LoggerInstance = Logger.getLogger('server');
 const app = express();
 
-//app.set('trust proxy', 3);
 app.set('trust proxy', true);
 
 app.use((req, res, next) => {
@@ -63,11 +62,6 @@ app.get('/robots.txt', (req, res) => {
 app.get('/sitemap.xml', (req, res) => {
   res.type('text/xml');
   res.send('User-agent: *\nDisallow: /');
-});
-
-//TODO Remove after testing
-app.get('/ip', (request, response) => {
-  response.send('Request IP: ' + request.ip + ' Header:' + request.headers['x-forwarded-for']);
 });
 
 app.disable('x-powered-by');
