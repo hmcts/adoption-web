@@ -74,7 +74,7 @@ export class UserRedirectMiddleware {
 
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
-        if (req.path === LA_PORTAL_KBA_CASE_REF && this.isCitizenOrLAUser(req)) {
+        if (req.path.startsWith(LA_PORTAL_KBA_CASE_REF) && this.isCitizenOrLAUser(req)) {
           return res.redirect(HOME_URL);
         }
 
