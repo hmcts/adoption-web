@@ -50,8 +50,10 @@ export class ErrorController {
   /**
    * Catch all for Rate Limiting errors
    */
-  public TooManyRequestsError(req: AppRequest, res: Response): void {
-    req.locals.logger.error('LA KBA: Too Many Requests from IP'); //TODO figure out if logging IP address is possible without breaching GDPR
+  public tooManyRequestsError(error: Errors, req: AppRequest, res: Response): void {
+    const { message = error } = typeof error === 'object' ? error : {};
+
+    req.locals.logger.error(`${message || 'Too Many Requests from this IP address'}`);
 
     res.statusCode = StatusCodes.TOO_MANY_REQUESTS;
     this.render(req, res);

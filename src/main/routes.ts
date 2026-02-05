@@ -45,7 +45,7 @@ export class Routes {
       windowMs: 60 * 1000,
       max: 1,
       handler: (_req, _res, next) => {
-        next(new TooManyRequestsError('Too many requests'));
+        next(new TooManyRequestsError('Too many requests')); //TODO figure out if logging IP address is possible without breaching GDPR
       },
     };
     if (app.locals.redisClient) {

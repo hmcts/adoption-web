@@ -41,7 +41,7 @@ export class ErrorHandler {
         }
 
         if (err instanceof TooManyRequestsError) {
-          return errorController.TooManyRequestsError(req as AppRequest, res);
+          return errorController.tooManyRequestsError(err, req as AppRequest, res);
         }
 
         return errorController.internalServerError(err, req as AppRequest, res);
