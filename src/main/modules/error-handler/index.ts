@@ -2,7 +2,7 @@ import { Application, NextFunction, Request, Response } from 'express';
 import { LoggerInstance } from 'winston';
 
 import { AppRequest } from '../../app/controller/AppRequest';
-import { ErrorController, UserPathError } from '../../steps/error/error.controller';
+import { ErrorController, TooManyRequestsError, UserPathError } from '../../steps/error/error.controller';
 
 const setupErrorHandler =
   renderError =>
@@ -36,9 +36,14 @@ export class ErrorHandler {
   public handleNextErrorsFor(app: Application): void {
     app.use((err: Error | string | undefined, req: Request, res: Response, next: NextFunction) => {
       if (err) {
-        if (err === typeof UserPathError) {
+        if (err instanceof UserPathError) {
           return errorController.notFound(req as AppRequest, res);
         }
+        
+        if (err instanceof TooManyRequestsError) {
+          return errorController.TooManyRequestsError(req as AppRequest, res);
+        }
+        
         return errorController.internalServerError(err, req as AppRequest, res);
       }
       next();

@@ -18,8 +18,8 @@ const en = {
   },
   [StatusCodes.TOO_MANY_REQUESTS]: {
     title: 'Sorry, there was a problem',
-    line1: 'Too many requests from this IP, please try again later.',
-  }
+    line1: 'Too many requests from this IP address, please try again later.',
+  },
 };
 
 const cy: typeof en = {
@@ -39,10 +39,11 @@ const cy: typeof en = {
     title: 'Yn anffodus, rydym yn cael problemau technegol',
     info: 'Rhowch gynnig arall arni ymhen ychydig funudau',
   },
-  [StatusCodes.TOO_MANY_REQUESTS]: { //TODO Welsh translation
+  [StatusCodes.TOO_MANY_REQUESTS]: {
+    //TODO Welsh translation
     title: 'Sorry, there was a problem',
-    line1: 'Too many requests from this IP, please try again later.',
-  }
+    line1: 'Too many requests from this IP address, please try again later.',
+  },
 };
 
 export const errorContent = { en, cy };

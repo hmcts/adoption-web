@@ -11,7 +11,7 @@ import { PostController } from './app/controller/PostController';
 import { DocumentManagerController } from './app/document/DocumentManagementController';
 import { KeepAliveController } from './app/keepalive/KeepAliveController';
 import { stepsWithContent } from './steps';
-import { ErrorController } from './steps/error/error.controller';
+import { ErrorController, TooManyRequestsError } from './steps/error/error.controller';
 import {
   CSRF_TOKEN_ERROR_URL,
   DOCUMENT_MANAGER,
@@ -44,9 +44,8 @@ export class Routes {
     let rateLimiterConfig: Partial<Options> = {
       windowMs: 60 * 1000,
       max: 1,
-      //message: 'Too many requests from this IP, please try again later.',
-      handler: (req, res) => {
-        errorController.TooManyRequestsError(req as any, res);
+      handler: (_req, _res, next) => {
+        next(new TooManyRequestsError('Too many requests'));
       },
     };
     if (app.locals.redisClient) {

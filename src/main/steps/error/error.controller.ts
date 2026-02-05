@@ -83,6 +83,14 @@ export class HTTPError extends Error {
   }
 }
 
+export class TooManyRequestsError extends Error {
+  constructor(public message: string, public status = StatusCodes.TOO_MANY_REQUESTS) {
+    super(message);
+    this.name = 'TooManyRequestsError';
+    this.status = status;
+  }
+}
+
 export class UserPathError extends Error {
   constructor(public message: string, public status = StatusCodes.NOT_FOUND) {
     super(message);
@@ -91,4 +99,4 @@ export class UserPathError extends Error {
   }
 }
 
-export type Errors = Error | HTTPError | AxiosError | UserPathError | string | undefined;
+export type Errors = Error | HTTPError | AxiosError | TooManyRequestsError | UserPathError | string | undefined;
