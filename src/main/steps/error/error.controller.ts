@@ -47,6 +47,16 @@ export class ErrorController {
     this.render(req, res);
   }
 
+  /**
+   * Catch all for Rate Limiting errors
+   */
+  public TooManyRequestsError(req: AppRequest, res: Response): void {
+    req.locals.logger.error('LA KBA: Too Many Requests from IP'); //TODO figure out if logging IP address is possible without breaching GDPR
+
+    res.statusCode = StatusCodes.TOO_MANY_REQUESTS;
+    this.render(req, res);
+  }
+
   private render(req: AppRequest, res: Response) {
     if (res.locals.isError || res.headersSent) {
       // If there's an async error, it wil have already rendered an error page upstream,

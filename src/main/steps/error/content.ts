@@ -16,6 +16,10 @@ const en = {
     title: 'Sorry, there is a problem with the online adoption service',
     info: 'Please try again later. We have saved your answers.',
   },
+  [StatusCodes.TOO_MANY_REQUESTS]: {
+    title: 'Sorry, there was a problem',
+    line1: 'Too many requests from this IP, please try again later.',
+  }
 };
 
 const cy: typeof en = {
@@ -35,6 +39,10 @@ const cy: typeof en = {
     title: 'Yn anffodus, rydym yn cael problemau technegol',
     info: 'Rhowch gynnig arall arni ymhen ychydig funudau',
   },
+  [StatusCodes.TOO_MANY_REQUESTS]: { //TODO Welsh translation
+    title: 'Sorry, there was a problem',
+    line1: 'Too many requests from this IP, please try again later.',
+  }
 };
 
 export const errorContent = { en, cy };
