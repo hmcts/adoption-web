@@ -33,7 +33,7 @@ const { Logger } = require('@hmcts/nodejs-logging');
 const logger: LoggerInstance = Logger.getLogger('server');
 const app = express();
 
-app.set('trust proxy', true);
+app.set('trust proxy', 3);
 
 app.use((req, res, next) => {
   req['startTime'] = Date.now();
@@ -52,6 +52,11 @@ app.use((req, res, next) => {
   res.setHeader('X-Robots-Tag', 'noindex');
   res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
   next();
+});
+
+//TODO Remove after testing
+app.get('/ip', (request, response) => {
+  response.send('Request IP: ' + request.ip + ' x-forwarded-for Header:' + (request.headers['x-forwarded-for']));
 });
 
 app.get('/robots.txt', (req, res) => {
