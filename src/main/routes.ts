@@ -44,8 +44,9 @@ export class Routes {
     let rateLimiterConfig: Partial<Options> = {
       windowMs: 60 * 1000,
       max: 1,
-      handler: (_req, _res, next) => {
-        next(new TooManyRequestsError('Too many requests')); //TODO figure out if logging IP address is possible without breaching GDPR
+      skipSuccessfulRequests: true,
+      handler: (req, _res, next) => {
+        next(new TooManyRequestsError(`LA KBA: Too many unsuccessful requests from ${req.ip}`));
       },
     };
     if (app.locals.redisClient) {
