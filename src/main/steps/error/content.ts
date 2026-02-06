@@ -40,9 +40,8 @@ const cy: typeof en = {
     info: 'Rhowch gynnig arall arni ymhen ychydig funudau',
   },
   [StatusCodes.TOO_MANY_REQUESTS]: {
-    //TODO Welsh translation
-    title: 'Sorry, there was a problem',
-    line1: 'Too many requests from this IP address, please try again later.',
+    title: 'Mae’n ddrwg gennym, roedd problem',
+    line1: 'Cafwyd gormod o geisiadau gan y cyfeiriad IP hwn, rhowch gynnig arall arni yn hwyrach ymlaen.',
   },
 };
 
