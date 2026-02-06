@@ -56,7 +56,9 @@ app.use((req, res, next) => {
 
 //TODO Remove after testing
 app.get('/ip', (request, response) => {
-  response.send('Request IP: ' + request.ip + ' x-forwarded-for Header:' + request.headers['x-forwarded-for']);
+  response.send(
+    `Request IP: ${request.ip} | x-forwarded-for Header: ${request.headers['x-forwarded-for']} | socket.remoteAddress: ${request.socket.remoteAddress}`
+  );
 });
 
 app.get('/robots.txt', (req, res) => {
