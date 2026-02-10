@@ -10,6 +10,7 @@ import {
   LA_PORTAL_KBA_CALLBACK,
   LA_PORTAL_KBA_CASE_REF,
   LA_PORTAL_NEG_SCENARIO,
+  LA_PORTAL_SIGN_OUT_URL,
   LA_PORTAL_START_PAGE,
 } from '../../steps/urls';
 
@@ -38,6 +39,8 @@ export class KbaMiddleware {
         }
       })
     );
+
+    app.get(LA_PORTAL_SIGN_OUT_URL, (req, res) => req.session.destroy(() => res.redirect(LA_PORTAL_KBA_CASE_REF)));
 
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
