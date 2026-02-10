@@ -189,6 +189,7 @@ export const LA_PORTAL = '/la-portal';
 export const LA_PORTAL_KBA_CASE_REF = '/la-portal/kba-case-ref';
 export const LA_PORTAL_KBA_CALLBACK = '/la-portal/kba-completed';
 export const LA_PORTAL_NEG_SCENARIO = '/la-portal/negative-scenario';
+export const LA_PORTAL_SIGN_OUT_URL: PageLink = `${LA_PORTAL}/logout`;
 export const LA_PORTAL_START_PAGE: PageLink = `${LA_PORTAL}/start-page`;
 export const LA_PORTAL_TASK_LIST: PageLink = `${LA_PORTAL}/task-list`;
 export const LA_PORTAL_UPLOAD_YOUR_DOCUMENTS: PageLink = `${LA_PORTAL}/la-portal/upload-your-documents`;
