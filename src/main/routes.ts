@@ -46,7 +46,7 @@ export class Routes {
       max: 1,
       skipSuccessfulRequests: true,
       handler: (req, _res, next) => {
-        next(new TooManyRequestsError(`LA KBA: Too many unsuccessful requests from ${req.ip}`));
+        next(new TooManyRequestsError(`${req.path}: Too many unsuccessful requests from ${req.ip}`));
       },
     };
     if (app.locals.redisClient) {
