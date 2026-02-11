@@ -6,7 +6,7 @@ import { Application } from 'express';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import { UserRole } from '../../app/case/definition';
 import { UserPathError } from '../../steps/error/error.controller';
-import { KEEP_ALIVE_URL, LA_PORTAL_TASK_LIST, TASK_LIST_URL } from '../../steps/urls';
+import { KEEP_ALIVE_URL, LA_PORTAL_KBA_CASE_REF, LA_PORTAL_TASK_LIST, TASK_LIST_URL } from '../../steps/urls';
 
 import { UserRedirectMiddleware } from '.';
 
@@ -136,5 +136,36 @@ describe('user-redirect', () => {
     };
     await expect(t).rejects.toThrow(UserPathError);
     await expect(t).rejects.toThrow(/LA user id la-123 tried to access/);
+  });
+
+  test('should redirect citizen users from LA Login to Home', async () => {
+    req.session = {
+      user: {
+        id: 'user-123',
+        roles: [UserRole.CITIZEN],
+      },
+      userCase: { id: '123' },
+    };
+    req.path = LA_PORTAL_KBA_CASE_REF;
+
+    await registeredMiddleware(req, res, mockNext);
+
+    expect(res.redirect).toHaveBeenCalledWith('/');
+  });
+
+  test('should redirect logged in LA users from LA Login to Home', async () => {
+    req.session = {
+      user: {
+        id: 'la-123',
+        roles: [UserRole.CASE_WORKER],
+        isSystemUser: true,
+      },
+      userCase: { id: '123' },
+    };
+    req.path = LA_PORTAL_KBA_CASE_REF;
+
+    await registeredMiddleware(req, res, mockNext);
+
+    expect(res.redirect).toHaveBeenCalledWith('/');
   });
 });
