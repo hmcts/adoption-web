@@ -4,6 +4,7 @@ import { Application, RequestHandler } from 'express';
 import rateLimit, { Options } from 'express-rate-limit';
 import multer from 'multer';
 import { type RedisReply, RedisStore } from 'rate-limit-redis';
+import type { LoggerInstance } from 'winston';
 
 import { NewCaseRedirectController } from './app/case/NewCaseRedirectController';
 import { GetController } from './app/controller/GetController';
@@ -23,6 +24,9 @@ import {
 } from './steps/urls';
 
 const handleUploads = multer();
+
+const { Logger } = require('@hmcts/nodejs-logging');
+const logger: LoggerInstance = Logger.getLogger('server');
 
 export class Routes {
   public enableFor(app: Application): void {
@@ -46,6 +50,10 @@ export class Routes {
       max: 1,
       skipSuccessfulRequests: true,
       handler: (req, _res, next) => {
+        const xForwardedFor = req.headers['x-forwarded-for'];
+        const commaCount = typeof xForwardedFor === 'string' ? (xForwardedFor.match(/,/g) || []).length : 999;
+
+        logger.info(`x-forwarded-for Header: ${xForwardedFor}, ${commaCount}`);
         next(new TooManyRequestsError(`${req.path}: Too many unsuccessful requests from ${req.ip}`));
       },
     };
