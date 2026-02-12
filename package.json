@@ -80,7 +80,7 @@
     "@uppy/progress-bar": "^2.1.0",
     "@uppy/xhr-upload": "^2.1.0",
     "accessible-autocomplete": "^3.0.0",
-    "applicationinsights": "^2.9.7",
+    "applicationinsights": "^3.0.0",
     "autobind-decorator": "^2.4.0",
     "axios": "^0.28.0",
     "config": "^3.3.7",
