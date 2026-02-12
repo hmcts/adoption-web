@@ -183,5 +183,5 @@
     "cookie": "^0.7.0",
     "nanoid": "^3.3.8"
   },
-  "packageManager": "yarn@3.8.5"
+  "packageManager": "yarn@3.8.7"
 }
