@@ -47,6 +47,18 @@ export class ErrorController {
     this.render(req, res);
   }
 
+  /**
+   * Catch all for Rate Limiting errors
+   */
+  public tooManyRequestsError(error: Errors, req: AppRequest, res: Response): void {
+    const { message = error } = typeof error === 'object' ? error : {};
+
+    req.locals.logger.error(`${message || 'Too Many Requests from this IP address'}`);
+
+    res.statusCode = StatusCodes.TOO_MANY_REQUESTS;
+    this.render(req, res);
+  }
+
   private render(req: AppRequest, res: Response) {
     if (res.locals.isError || res.headersSent) {
       // If there's an async error, it wil have already rendered an error page upstream,
@@ -73,6 +85,14 @@ export class HTTPError extends Error {
   }
 }
 
+export class TooManyRequestsError extends Error {
+  constructor(public message: string, public status = StatusCodes.TOO_MANY_REQUESTS) {
+    super(message);
+    this.name = 'TooManyRequestsError';
+    this.status = status;
+  }
+}
+
 export class UserPathError extends Error {
   constructor(public message: string, public status = StatusCodes.NOT_FOUND) {
     super(message);
@@ -81,4 +101,4 @@ export class UserPathError extends Error {
   }
 }
 
-export type Errors = Error | HTTPError | AxiosError | UserPathError | string | undefined;
+export type Errors = Error | HTTPError | AxiosError | TooManyRequestsError | UserPathError | string | undefined;

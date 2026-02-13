@@ -1,7 +1,10 @@
 import fs from 'fs';
 
 import { Application, RequestHandler } from 'express';
+import rateLimit, { Options } from 'express-rate-limit';
 import multer from 'multer';
+import { type RedisReply, RedisStore } from 'rate-limit-redis';
+import type { LoggerInstance } from 'winston';
 
 import { NewCaseRedirectController } from './app/case/NewCaseRedirectController';
 import { GetController } from './app/controller/GetController';
@@ -9,17 +12,21 @@ import { PostController } from './app/controller/PostController';
 import { DocumentManagerController } from './app/document/DocumentManagementController';
 import { KeepAliveController } from './app/keepalive/KeepAliveController';
 import { stepsWithContent } from './steps';
-import { ErrorController } from './steps/error/error.controller';
+import { ErrorController, TooManyRequestsError } from './steps/error/error.controller';
 import {
   CSRF_TOKEN_ERROR_URL,
   DOCUMENT_MANAGER,
   DOWNLOAD_APPLICATION_SUMMARY,
   KEEP_ALIVE_URL,
   LA_DOCUMENT_MANAGER,
+  LA_PORTAL_KBA_CASE_REF,
   NEW_APPLICATION_REDIRECT,
 } from './steps/urls';
 
 const handleUploads = multer();
+
+const { Logger } = require('@hmcts/nodejs-logging');
+const logger: LoggerInstance = Logger.getLogger('server');
 
 export class Routes {
   public enableFor(app: Application): void {
@@ -37,6 +44,30 @@ export class Routes {
 
     const newCaseRedirectController = new NewCaseRedirectController();
     app.get(NEW_APPLICATION_REDIRECT, errorHandler(newCaseRedirectController.get));
+
+    let rateLimiterConfig: Partial<Options> = {
+      windowMs: 60 * 1000,
+      max: 1,
+      skipSuccessfulRequests: true,
+      handler: (req, _res, next) => {
+        const xForwardedFor = req.headers['x-forwarded-for'];
+        const commaCount = typeof xForwardedFor === 'string' ? (xForwardedFor.match(/,/g) || []).length : 999;
+
+        logger.info(`x-forwarded-for Header: ${xForwardedFor}, ${commaCount}`);
+        next(new TooManyRequestsError(`${req.path}: Too many unsuccessful requests from ${req.ip}`));
+      },
+    };
+    if (app.locals.redisClient) {
+      rateLimiterConfig = {
+        ...rateLimiterConfig,
+        store: new RedisStore({
+          sendCommand: (command: string, ...args: string[]) =>
+            app.locals.draftStoreClient.call(command, ...args) as Promise<RedisReply>,
+        }),
+      };
+    }
+    const rateLimiter = rateLimit(rateLimiterConfig);
+    app.post(LA_PORTAL_KBA_CASE_REF, rateLimiter);
 
     for (const step of stepsWithContent) {
       const files = fs.readdirSync(`${step.stepDir}`);

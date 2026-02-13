@@ -33,7 +33,7 @@ const { Logger } = require('@hmcts/nodejs-logging');
 const logger: LoggerInstance = Logger.getLogger('server');
 const app = express();
 
-app.enable('trust proxy');
+app.set('trust proxy', 3);
 
 app.use((req, res, next) => {
   req['startTime'] = Date.now();
@@ -101,9 +101,9 @@ new KbaMiddleware().enableFor(app);
 new LanguageToggle().enableFor(app);
 new UserRedirectMiddleware().enableFor(app);
 new StateRedirectMiddleware().enableFor(app);
+new DraftStoreClient().enableFor(app);
 new Routes().enableFor(app);
 new ErrorHandler().handleNextErrorsFor(app);
-new DraftStoreClient().enableFor(app);
 
 const port = config.get('port');
 const server = app.listen(port, () => {
