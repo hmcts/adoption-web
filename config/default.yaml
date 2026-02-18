@@ -436,8 +436,7 @@ notificationBanner:
     cy: 'Cynhelir cynnal a chadw ar 28ain Medi 2022 rhwng 8:00 AM a 9:00 AM. Bydd y gwasanaeth ar gael yn ystod yr amser hwn.'
 
 rateLimit:
-  enabled: false
+  enabled: true
   windowSeconds: 60
   maxRequests: 1
-#express:
-  #numberOfTrustProxies: 3
+numberOfTrustProxies: 3

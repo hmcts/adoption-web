@@ -372,8 +372,7 @@ rateLimit:
   enabled: RATE_LIMIT_ENABLED
   windowSeconds: RATE_LIMIT_WINDOW_SECONDS
   maxRequests: RATE_LIMIT_MAX_REQUESTS
-#express:
-  #numberOfTrustProxies: EXPRESS_NUMBER_TRUST_PROXIES
+numberOfTrustProxies: EXPRESS_NUMBER_TRUST_PROXIES
 
 mockData:
   authToken: AUTH_TOKEN
