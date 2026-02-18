@@ -368,5 +368,7 @@ notificationBanner:
     en: BANNER_MESSAGE_HTML_EN
     cy: BANNER_MESSAGE_HTML_CY
 
+numberOfTrustProxies: EXPRESS_NUMBER_TRUST_PROXIES
+
 mockData:
   authToken: AUTH_TOKEN
