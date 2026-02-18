@@ -28,6 +28,7 @@ import { TooBusy } from './modules/too-busy';
 import { UserRedirectMiddleware } from './modules/user-redirect';
 import { Webpack } from './modules/webpack';
 import { Routes } from './routes';
+import { UserPathError } from './steps/error/error.controller';
 
 const { Logger } = require('@hmcts/nodejs-logging');
 const logger: LoggerInstance = Logger.getLogger('server');
@@ -87,6 +88,27 @@ app.use(
 );
 
 new ErrorHandler().enableFor(app, logger);
+
+app.get('/eligibility/np', (req, _res, next) => {
+  const xForwardedFor = req.headers['x-forwarded-for'];
+
+  if (xForwardedFor) {
+    const commaCount = typeof xForwardedFor === 'string' ? (xForwardedFor.match(/,/g) || []).length : 999;
+    logger.info(`x-forwarded-for Header: ${xForwardedFor}, contains ${commaCount + 1} IP addresses`);
+
+    //TODO: Remove?
+    if (process.env.NODE_ENV !== 'production') {
+      logger.info(
+        `Request IP: ${req.ip} | x-forwarded-for Header: ${req.headers['x-forwarded-for']} | socket.remoteAddress: ${req.socket.remoteAddress}`
+      );
+    }
+  } else {
+    logger.info('x-forwarded-for Header: no proxies detected');
+  }
+
+  next(new UserPathError(`Someone accessed ${req.path}`));
+});
+
 new LoadTimeouts().enableFor(app);
 new Nunjucks().enableFor(app);
 new Webpack().enableFor(app);
