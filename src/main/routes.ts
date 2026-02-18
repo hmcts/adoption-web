@@ -1,10 +1,11 @@
 import fs from 'fs';
 
+import config from 'config';
 import { Application, RequestHandler } from 'express';
 import rateLimit, { Options } from 'express-rate-limit';
 import multer from 'multer';
 import { type RedisReply, RedisStore } from 'rate-limit-redis';
-import type { LoggerInstance } from 'winston';
+//import type { LoggerInstance } from 'winston';
 
 import { NewCaseRedirectController } from './app/case/NewCaseRedirectController';
 import { GetController } from './app/controller/GetController';
@@ -25,8 +26,8 @@ import {
 
 const handleUploads = multer();
 
-const { Logger } = require('@hmcts/nodejs-logging');
-const logger: LoggerInstance = Logger.getLogger('server');
+//const { Logger } = require('@hmcts/nodejs-logging');
+//const logger: LoggerInstance = Logger.getLogger('server');
 
 export class Routes {
   public enableFor(app: Application): void {
@@ -45,29 +46,28 @@ export class Routes {
     const newCaseRedirectController = new NewCaseRedirectController();
     app.get(NEW_APPLICATION_REDIRECT, errorHandler(newCaseRedirectController.get));
 
-    let rateLimiterConfig: Partial<Options> = {
-      windowMs: 60 * 1000,
-      max: 1,
-      skipSuccessfulRequests: true,
-      handler: (req, _res, next) => {
-        const xForwardedFor = req.headers['x-forwarded-for'];
-        const commaCount = typeof xForwardedFor === 'string' ? (xForwardedFor.match(/,/g) || []).length : 999;
-
-        logger.info(`x-forwarded-for Header: ${xForwardedFor}, ${commaCount}`);
-        next(new TooManyRequestsError(`${req.path}: Too many unsuccessful requests from ${req.ip}`));
-      },
-    };
-    if (app.locals.redisClient) {
-      rateLimiterConfig = {
-        ...rateLimiterConfig,
-        store: new RedisStore({
-          sendCommand: (command: string, ...args: string[]) =>
-            app.locals.draftStoreClient.call(command, ...args) as Promise<RedisReply>,
-        }),
+    //if (String(config.get('rateLimit.enabled')).toLowerCase() === 'true') {
+    if (config.get('rateLimit.enabled')) {
+      let rateLimiterConfig: Partial<Options> = {
+        windowMs: Number(config.get('rateLimit.windowSeconds')) * 1000,
+        max: Number(config.get('rateLimit.maxRequests')), //TODO deprecated
+        handler: (req, _res, next) => {
+          next(new TooManyRequestsError(`${req.path}: Too many unsuccessful requests from ${req.ip}`));
+        },
       };
+      if (app.locals.redisClient) {
+        rateLimiterConfig = {
+          ...rateLimiterConfig,
+          store: new RedisStore({
+            sendCommand: (command: string, ...args: string[]) =>
+              app.locals.draftStoreClient.call(command, ...args) as Promise<RedisReply>,
+          }),
+        };
+      }
+      const rateLimiter = rateLimit(rateLimiterConfig);
+
+      app.post(LA_PORTAL_KBA_CASE_REF, rateLimiter);
     }
-    const rateLimiter = rateLimit(rateLimiterConfig);
-    app.post(LA_PORTAL_KBA_CASE_REF, rateLimiter);
 
     for (const step of stepsWithContent) {
       const files = fs.readdirSync(`${step.stepDir}`);
