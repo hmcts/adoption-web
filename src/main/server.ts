@@ -38,7 +38,7 @@ app.locals.developmentMode = process.env.NODE_ENV !== 'production'; //new
 //new AxiosLogger().enableFor(app); //new
 new PropertiesVolume().enableFor(app); //new
 
-app.set('trust proxy', 3 /*config.get('numberOfTrustProxies')*/);
+app.set('trust proxy', /* 3 */ config.get('numberOfTrustProxies'));
 
 app.use((req, res, next) => {
   req['startTime'] = Date.now();
