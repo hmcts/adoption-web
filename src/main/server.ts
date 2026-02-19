@@ -33,12 +33,12 @@ const { Logger } = require('@hmcts/nodejs-logging');
 const logger: LoggerInstance = Logger.getLogger('server');
 const app = express();
 
-app.locals.developmentMode = process.env.NODE_ENV !== 'production';
+app.locals.developmentMode = process.env.NODE_ENV !== 'production'; //new
 
-new AxiosLogger().enableFor(app);
-new PropertiesVolume().enableFor(app);
+//new AxiosLogger().enableFor(app); //new
+//new PropertiesVolume().enableFor(app); //new
 
-app.set('trust proxy', config.get('numberOfTrustProxies'));
+app.set('trust proxy', 3 /*config.get('numberOfTrustProxies')*/);
 
 app.use((req, res, next) => {
   req['startTime'] = Date.now();
@@ -48,6 +48,7 @@ app.use((req, res, next) => {
   next();
 });
 
+//app.locals.developmentMode = process.env.NODE_ENV !== 'production'; //old
 app.use(favicon(path.join(__dirname, '/public/assets/images/favicon.ico')));
 app.use(bodyParser.json() as RequestHandler);
 app.use(bodyParser.urlencoded({ extended: false }) as RequestHandler);
@@ -86,6 +87,8 @@ app.use(
   })
 );
 
+new AxiosLogger().enableFor(app); //old
+new PropertiesVolume().enableFor(app); //old
 new ErrorHandler().enableFor(app, logger);
 new LoadTimeouts().enableFor(app);
 new Nunjucks().enableFor(app);
