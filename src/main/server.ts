@@ -28,7 +28,7 @@ import { TooBusy } from './modules/too-busy';
 import { UserRedirectMiddleware } from './modules/user-redirect';
 import { Webpack } from './modules/webpack';
 import { Routes } from './routes';
-import { UserPathError } from './steps/error/error.controller';
+//import { UserPathError } from './steps/error/error.controller';
 
 const { Logger } = require('@hmcts/nodejs-logging');
 const logger: LoggerInstance = Logger.getLogger('server');
