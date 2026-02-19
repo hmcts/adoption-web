@@ -36,7 +36,6 @@ const app = express();
 
 app.locals.developmentMode = process.env.NODE_ENV !== 'production';
 
-new AxiosLogger().enableFor(app);
 new PropertiesVolume().enableFor(app);
 
 app.set('trust proxy', config.get('numberOfTrustProxies'));
@@ -102,6 +101,7 @@ app.get('/eligibility/np', (req, _res, next) => {
   next(new UserPathError(`Someone accessed ${req.path}`));
 });
 
+new AxiosLogger().enableFor(app);
 new LoadTimeouts().enableFor(app);
 new Nunjucks().enableFor(app);
 new Webpack().enableFor(app);
