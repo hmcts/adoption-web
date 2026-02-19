@@ -36,7 +36,7 @@ const app = express();
 app.locals.developmentMode = process.env.NODE_ENV !== 'production'; //new
 
 //new AxiosLogger().enableFor(app); //new
-//new PropertiesVolume().enableFor(app); //new
+new PropertiesVolume().enableFor(app); //new
 
 app.set('trust proxy', 3 /*config.get('numberOfTrustProxies')*/);
 
@@ -88,7 +88,7 @@ app.use(
 );
 
 new AxiosLogger().enableFor(app); //old
-new PropertiesVolume().enableFor(app); //old
+//new PropertiesVolume().enableFor(app); //old
 new ErrorHandler().enableFor(app, logger);
 new LoadTimeouts().enableFor(app);
 new Nunjucks().enableFor(app);
