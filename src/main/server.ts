@@ -88,7 +88,7 @@ app.use(
 
 new AxiosLogger().enableFor(app);
 new ErrorHandler().enableFor(app, logger);
-
+/*
 app.get('/eligibility/np', (req, _res, next) => {
   const xForwardedFor = req.headers['x-forwarded-for'];
 
@@ -101,7 +101,7 @@ app.get('/eligibility/np', (req, _res, next) => {
 
   next(new UserPathError(`Someone accessed ${req.path}`));
 });
-
+*/
 new LoadTimeouts().enableFor(app);
 new Nunjucks().enableFor(app);
 new Webpack().enableFor(app);
