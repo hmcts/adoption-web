@@ -94,16 +94,9 @@ app.get('/eligibility/np', (req, _res, next) => {
 
   if (xForwardedFor) {
     const commaCount = typeof xForwardedFor === 'string' ? (xForwardedFor.match(/,/g) || []).length : 999;
-    logger.info(`x-forwarded-for Header: ${xForwardedFor}, contains ${commaCount + 1} IP addresses`);
-
-    //TODO: Remove?
-    if (process.env.NODE_ENV !== 'production') {
-      logger.info(
-        `Request IP: ${req.ip} | x-forwarded-for Header: ${req.headers['x-forwarded-for']} | socket.remoteAddress: ${req.socket.remoteAddress}`
-      );
-    }
+    logger.info(`x-forwarded-for Header contains ${commaCount + 1} IP addresses`);
   } else {
-    logger.info('x-forwarded-for Header: no proxies detected');
+    logger.info('No x-forwarded-for Header');
   }
 
   next(new UserPathError(`Someone accessed ${req.path}`));
