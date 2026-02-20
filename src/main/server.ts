@@ -39,7 +39,7 @@ app.locals.developmentMode = process.env.NODE_ENV !== 'production'; //new
 new PropertiesVolume().enableFor(app); //new
 //new Nunjucks().enableFor(app); //new
 
-const letNumOfProxies = config.get('numberOfTrustProxies');
+const letNumOfProxies = Number(config.get('numberOfTrustProxies'));
 app.set('trust proxy', /* 3  config.get('numberOfTrustProxies')*/ letNumOfProxies);
 
 app.use((req, res, next) => {
