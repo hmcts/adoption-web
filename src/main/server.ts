@@ -38,7 +38,7 @@ app.locals.developmentMode = process.env.NODE_ENV !== 'production';
 
 new PropertiesVolume().enableFor(app);
 
-app.set('trust proxy', config.get('numberOfTrustProxies'));
+app.set('trust proxy', Number(config.get('numberOfTrustProxies')));
 
 app.use((req, res, next) => {
   req['startTime'] = Date.now();
