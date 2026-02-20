@@ -37,6 +37,7 @@ app.locals.developmentMode = process.env.NODE_ENV !== 'production'; //new
 
 //new AxiosLogger().enableFor(app); //new
 new PropertiesVolume().enableFor(app); //new
+new Nunjucks().enableFor(app); //new
 
 app.set('trust proxy', /* 3 */ config.get('numberOfTrustProxies'));
 
@@ -91,7 +92,7 @@ new AxiosLogger().enableFor(app); //old
 //new PropertiesVolume().enableFor(app); //old
 new ErrorHandler().enableFor(app, logger);
 new LoadTimeouts().enableFor(app);
-new Nunjucks().enableFor(app);
+//new Nunjucks().enableFor(app); //old
 new Webpack().enableFor(app);
 new Helmet(config.get('security')).enableFor(app);
 new AppInsights().enable();
