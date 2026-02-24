@@ -50,7 +50,7 @@ export class Routes {
     if (config.get('rateLimit.enabled')) {
       let rateLimiterConfig: Partial<Options> = {
         windowMs: Number(config.get('rateLimit.windowSeconds')) * 1000,
-        max: Number(config.get('rateLimit.maxRequests')), //TODO deprecated
+        limit: Number(config.get('rateLimit.maxRequests')),
         handler: (req, _res, next) => {
           next(new TooManyRequestsError(`${req.path}: Too many unsuccessful requests from ${req.ip}`));
         },
