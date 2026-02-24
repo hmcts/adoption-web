@@ -1,11 +1,10 @@
-import fs from 'fs';
+import fs from 'node:fs';
 
 import config from 'config';
 import { Application, RequestHandler } from 'express';
 import rateLimit, { Options } from 'express-rate-limit';
 import multer from 'multer';
 import { type RedisReply, RedisStore } from 'rate-limit-redis';
-//import type { LoggerInstance } from 'winston';
 
 import { NewCaseRedirectController } from './app/case/NewCaseRedirectController';
 import { GetController } from './app/controller/GetController';
@@ -26,9 +25,6 @@ import {
 
 const handleUploads = multer();
 
-//const { Logger } = require('@hmcts/nodejs-logging');
-//const logger: LoggerInstance = Logger.getLogger('server');
-
 export class Routes {
   public enableFor(app: Application): void {
     const { errorHandler } = app.locals;
@@ -46,7 +42,6 @@ export class Routes {
     const newCaseRedirectController = new NewCaseRedirectController();
     app.get(NEW_APPLICATION_REDIRECT, errorHandler(newCaseRedirectController.get));
 
-    //if (String(config.get('rateLimit.enabled')).toLowerCase() === 'true') {
     if (config.get('rateLimit.enabled')) {
       let rateLimiterConfig: Partial<Options> = {
         windowMs: Number(config.get('rateLimit.windowSeconds')) * 1000,
