@@ -438,5 +438,5 @@ notificationBanner:
 rateLimit:
   enabled: true
   windowSeconds: 60
-  maxRequests: 5
+  maxRequests: 6
 numberOfTrustProxies: 3

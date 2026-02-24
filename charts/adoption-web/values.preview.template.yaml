@@ -139,7 +139,7 @@ nodejs:
 
     RATE_LIMIT_ENABLED: true
     RATE_LIMIT_WINDOW_SECONDS: 60
-    RATE_LIMIT_MAX_REQUESTS: 5
+    RATE_LIMIT_MAX_REQUESTS: 6
 
 idam-pr:
   enabled: true
