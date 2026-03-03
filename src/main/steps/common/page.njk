@@ -42,7 +42,12 @@
     serviceUrl: (globals.basePath if globals.basePath) + "/la-portal/kba-case-ref",
     homepageUrl: "/la-portal/kba-case-ref",
     useTudorCrown: true,
-    navigation: []
+    navigation: [
+        {
+          href: "/la-portal/logout" if isLoggedIn,
+          text: signOut if isLoggedIn
+        }
+    ]
     }) }}
   {% else %}
     {{ govukHeader({
