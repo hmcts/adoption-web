@@ -368,5 +368,11 @@ notificationBanner:
     en: BANNER_MESSAGE_HTML_EN
     cy: BANNER_MESSAGE_HTML_CY
 
+rateLimit:
+  enabled: RATE_LIMIT_ENABLED
+  windowSeconds: RATE_LIMIT_WINDOW_SECONDS
+  maxRequests: RATE_LIMIT_MAX_REQUESTS
+numberOfTrustProxies: EXPRESS_NUMBER_TRUST_PROXIES
+
 mockData:
   authToken: AUTH_TOKEN
