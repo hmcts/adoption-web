@@ -1,4 +1,3 @@
-version: '2'
 services:
   draft-store:
     image: redis:6.2.6-alpine

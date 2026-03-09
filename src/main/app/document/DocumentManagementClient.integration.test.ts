@@ -10,7 +10,9 @@ describe('DocumentManagementClient', () => {
   });
 
   it('creates documents', async () => {
-    nock('http://localhost').post('/cases/documents').reply(200, { documents: ['a-document'] });
+    nock('http://localhost')
+      .post('/cases/documents')
+      .reply(200, { documents: ['a-document'] });
 
     const client = new DocumentManagementClient('http://localhost', 'abcd', {
       id: 'userId',

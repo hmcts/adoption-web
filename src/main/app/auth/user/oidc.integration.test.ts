@@ -1,6 +1,6 @@
 import config from 'config';
-import nock from 'nock';
 import { when } from 'jest-when';
+import nock from 'nock';
 
 import { CALLBACK_URL } from '../../../steps/urls';
 
@@ -47,12 +47,10 @@ describe('getUserDetails', () => {
       .calledWith('services.idam.tokenURL')
       .mockReturnValue('http://idam-service/o/token');
 
-    nock('http://idam-service')
-      .post('/o/token')
-      .reply(200, {
-        access_token: token,
-        id_token: token,
-      });
+    nock('http://idam-service').post('/o/token').reply(200, {
+      access_token: token,
+      id_token: token,
+    });
 
     const result = await getUserDetails('http://localhost', '123', CALLBACK_URL);
     expect(result).toStrictEqual({
@@ -84,12 +82,10 @@ describe('getCaseWorkerUser', () => {
       .calledWith('services.idam.systemPassword')
       .mockReturnValue('system-pass');
 
-    nock('http://idam-service')
-      .post('/o/token')
-      .reply(200, {
-        access_token: token,
-        id_token: token,
-      });
+    nock('http://idam-service').post('/o/token').reply(200, {
+      access_token: token,
+      id_token: token,
+    });
 
     const result = await getSystemUser();
     expect(result).toStrictEqual({

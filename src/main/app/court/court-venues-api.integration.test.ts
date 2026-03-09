@@ -11,9 +11,15 @@ import { getCourtListFromAPI, getCourtVenuesFromAPI } from './court-venues-api';
 jest.mock('../auth/service/get-service-auth-token');
 
 config.get = jest.fn().mockImplementation((key: string) => {
-  if (key === 'services.location_api.url') return 'http://location-api';
-  if (key === 'services.adoptionCourt.code') return 'ABA4';
-  if (key === 'adoption.family-court') return {};
+  if (key === 'services.location_api.url') {
+    return 'http://location-api';
+  }
+  if (key === 'services.adoptionCourt.code') {
+    return 'ABA4';
+  }
+  if (key === 'adoption.family-court') {
+    return {};
+  }
   return '';
 });
 
@@ -44,10 +50,7 @@ describe('Court Lookup', () => {
   });
 
   it('returns an empty array when there are no results getCourtVenues', async () => {
-    nock('http://location-api')
-      .get('/refdata/location/court-venues/services')
-      .query(true)
-      .reply(200, {});
+    nock('http://location-api').get('/refdata/location/court-venues/services').query(true).reply(200, {});
 
     const actual = await getCourtVenuesFromAPI('ABA3', userDetails, mockLogger);
 
@@ -56,10 +59,7 @@ describe('Court Lookup', () => {
   });
 
   it('returns an empty array when there are no results getCourtList', async () => {
-    nock('http://location-api')
-      .get('/refdata/location/court-venues/services')
-      .query(true)
-      .reply(200, {});
+    nock('http://location-api').get('/refdata/location/court-venues/services').query(true).reply(200, {});
 
     const actual = await getCourtListFromAPI(mockReq);
 

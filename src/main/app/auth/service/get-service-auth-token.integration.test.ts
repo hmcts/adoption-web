@@ -5,9 +5,9 @@ const logger = {
   error: jest.fn(),
 };
 Logger.getLogger.mockReturnValue(logger);
-import nock from 'nock';
 import config from 'config';
 import { when } from 'jest-when';
+import nock from 'nock';
 
 import { getServiceAuthToken, getTokenFromApi, initAuthToken } from './get-service-auth-token';
 
@@ -36,17 +36,13 @@ describe('initAuthToken', () => {
 
   test('Should log errors', async () => {
     nock('http://rpe-service-auth-provider').post('/lease').reply(500, 'Error');
-    try {
-      await getTokenFromApi();
-    } catch (err) {
-      //eslint-disable-next-line jest/no-conditional-expect
-      expect(logger.error).toHaveBeenCalledWith(
-        'Error in refreshing service auth token ',
-        expect.any(String),
-        500,
-        'Error'
-      );
-    }
+    await getTokenFromApi();
+    expect(logger.error).toHaveBeenCalledWith(
+      'Error in refreshing service auth token ',
+      expect.any(String),
+      500,
+      'Error'
+    );
   });
 });
 

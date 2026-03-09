@@ -51,9 +51,7 @@ describe('CaseApi', () => {
     nock('http://ccd-test-api')
       .get('/case-types/A58/event-triggers/citizen-create-application')
       .reply(200, { token: '123' });
-    nock('http://ccd-test-api')
-      .post('/case-types/A58/cases')
-      .reply(200, { id: '1234', state: State.Draft, data: {} });
+    nock('http://ccd-test-api').post('/case-types/A58/cases').reply(200, { id: '1234', state: State.Draft, data: {} });
 
     const userCase = await api.getOrCreateCase(serviceType, userDetails);
 
@@ -210,9 +208,7 @@ describe('CaseApi', () => {
   });
 
   test('Should update case when adding payment', async () => {
-    nock('http://ccd-test-api')
-      .get('/cases/1234/event-triggers/citizen-add-payment')
-      .reply(200, { token: '123' });
+    nock('http://ccd-test-api').get('/cases/1234/event-triggers/citizen-add-payment').reply(200, { token: '123' });
     nock('http://ccd-test-api')
       .post('/cases/1234/events')
       .reply(200, { id: '1234', state: State.Draft, data: { id: '1234' } });

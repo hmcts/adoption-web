@@ -24,10 +24,7 @@ describe('Postcode Lookup', () => {
   });
 
   it('correctly returns an array of a addresses from a given postcode', async () => {
-    nock('https://api.os.uk')
-      .get('/search/places/v1/postcode')
-      .query(true)
-      .reply(200, validPostcode200Response);
+    nock('https://api.os.uk').get('/search/places/v1/postcode').query(true).reply(200, validPostcode200Response);
 
     const actual = await getAddressesFromPostcode('AB1 2CD', mockLogger);
 
