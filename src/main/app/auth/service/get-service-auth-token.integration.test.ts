@@ -33,9 +33,13 @@ describe('initAuthToken', () => {
   afterAll(() => clearInterval(interval));
 
   test('Should set an interval to start fetching a token', async () => {
+    const setIntervalSpy = jest.spyOn(global, 'setInterval');
     nock('http://rpe-service-auth-provider').post('/lease').reply(200, 'token');
 
     interval = initAuthToken();
+
+    expect(setIntervalSpy).toHaveBeenCalledWith(expect.any(Function), 1000 * 60 * 60);
+    setIntervalSpy.mockRestore();
     // Flush pending promises so the async getTokenFromApi() call inside initAuthToken()
     // completes before afterEach cleans nock interceptors, preventing leakage into next test
     await new Promise(resolve => setImmediate(resolve));
