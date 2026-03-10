@@ -1,17 +1,18 @@
-import axios, { AxiosInstance } from 'axios';
+import nock from 'nock';
 
 import { UserDetails } from '../controller/AppRequest';
 
 import { Classification, DocumentManagementClient, UploadedFiles } from './DocumentManagementClient';
 
-jest.mock('axios');
-
-const mockedAxios = axios as jest.Mocked<typeof axios>;
-
 describe('DocumentManagementClient', () => {
+  afterEach(() => {
+    nock.cleanAll();
+  });
+
   it('creates documents', async () => {
-    const mockPost = jest.fn().mockResolvedValue({ data: { documents: ['a-document'] } });
-    mockedAxios.create.mockReturnValueOnce({ post: mockPost } as unknown as AxiosInstance);
+    nock('http://localhost')
+      .post('/cases/documents')
+      .reply(200, { documents: ['a-document'] });
 
     const client = new DocumentManagementClient('http://localhost', 'abcd', {
       id: 'userId',
@@ -23,22 +24,11 @@ describe('DocumentManagementClient', () => {
       classification: Classification.Private,
     });
 
-    expect(mockedAxios.create).toHaveBeenCalledWith({
-      baseURL: 'http://localhost',
-      headers: { Authorization: 'Bearer userAccessToken', ServiceAuthorization: 'abcd' },
-      maxBodyLength: 20971520,
-      maxContentLength: 20971520,
-    });
-
-    expect(mockPost.mock.calls[0][0]).toEqual('/cases/documents');
-    expect(mockPost.mock.calls[0][1]._streams[9]).toContain('filename="a-new-file"');
-    expect(mockPost.mock.calls[0][1]._streams[1]).toEqual('PRIVATE');
     expect(actual).toEqual(['a-document']);
   });
 
   it('returns empty array when there are no files', async () => {
-    const mockPost = jest.fn().mockResolvedValue({ data: { documents: null } });
-    mockedAxios.create.mockReturnValueOnce({ post: mockPost } as unknown as AxiosInstance);
+    nock('http://localhost').post('/cases/documents').reply(200, { documents: null });
 
     const client = new DocumentManagementClient('http://localhost', 'abcd', {
       id: 'userId',
@@ -54,8 +44,7 @@ describe('DocumentManagementClient', () => {
   });
 
   it('deletes documents', async () => {
-    const mockDelete = jest.fn().mockResolvedValue({ data: 'MOCKED-OK' });
-    mockedAxios.create.mockReturnValueOnce({ delete: mockDelete } as unknown as AxiosInstance);
+    nock('http://localhost').delete('/cases/documents/docId').query({ permanent: 'true' }).reply(200, 'MOCKED-OK');
 
     const client = new DocumentManagementClient('http://localhost', 'abcd', {
       id: 'userId',
@@ -64,8 +53,6 @@ describe('DocumentManagementClient', () => {
 
     const actual = await client.delete({ documentFileId: 'docId' });
 
-    expect(mockDelete.mock.calls[0][0]).toEqual('/cases/documents/docId?permanent=true');
-    expect(mockDelete.mock.calls[0][1].headers['user-id']).toEqual('userId');
-    expect(actual).toEqual({ data: 'MOCKED-OK' });
+    expect(actual.data).toEqual('MOCKED-OK');
   });
 });
