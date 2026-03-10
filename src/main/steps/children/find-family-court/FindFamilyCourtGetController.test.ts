@@ -1,10 +1,13 @@
+const mockGetCourtList = jest.fn();
+jest.mock('../../../app/court/court-venues-api', () => ({
+  getCourtListFromStaticList: (...args: unknown[]) => mockGetCourtList(...args),
+}));
+
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 
 import FindFamilyCourtGetController from './FindFamilyCourtGetController';
 import { generateContent } from './content';
-
-const mockGetCourtList = jest.fn();
 
 describe('children > find-family-court > FindFamilyCourtGetController', () => {
   let controller;
@@ -13,7 +16,7 @@ describe('children > find-family-court > FindFamilyCourtGetController', () => {
 
   beforeEach(() => {
     controller = new FindFamilyCourtGetController(__dirname + '../../common/template', generateContent);
-    mockGetCourtList.mockReturnValue([{ site_name: 'MOCK' }]);
+    mockGetCourtList.mockResolvedValue([{ site_name: 'MOCK' }]);
     req = mockRequest({
       session: {
         userCase: {
