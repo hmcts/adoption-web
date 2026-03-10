@@ -28,10 +28,13 @@ describe('initAuthToken', () => {
     nock.cleanAll();
   });
 
-  test('Should set an interval to start fetching a token', () => {
+  test('Should set an interval to start fetching a token', async () => {
     nock('http://rpe-service-auth-provider').post('/lease').reply(200, 'token');
 
     initAuthToken();
+    // Flush pending promises so the async getTokenFromApi() call inside initAuthToken()
+    // completes before afterEach cleans nock interceptors, preventing leakage into next test
+    await new Promise(resolve => setImmediate(resolve));
   });
 
   test('Should log errors', async () => {
