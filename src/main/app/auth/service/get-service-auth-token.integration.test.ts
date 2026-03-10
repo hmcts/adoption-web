@@ -14,6 +14,8 @@ import { getServiceAuthToken, getTokenFromApi, initAuthToken } from './get-servi
 config.get = jest.fn();
 
 describe('initAuthToken', () => {
+  let interval: ReturnType<typeof setInterval>;
+
   beforeEach(() => {
     when(config.get)
       .calledWith('services.authProvider.url')
@@ -28,10 +30,12 @@ describe('initAuthToken', () => {
     nock.cleanAll();
   });
 
+  afterAll(() => clearInterval(interval));
+
   test('Should set an interval to start fetching a token', async () => {
     nock('http://rpe-service-auth-provider').post('/lease').reply(200, 'token');
 
-    initAuthToken();
+    interval = initAuthToken();
     // Flush pending promises so the async getTokenFromApi() call inside initAuthToken()
     // completes before afterEach cleans nock interceptors, preventing leakage into next test
     await new Promise(resolve => setImmediate(resolve));
