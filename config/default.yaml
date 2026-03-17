@@ -427,10 +427,10 @@ adoption:
     family-court-Wrexham: 'Wrexham County & Family Court'
 
 notificationBanner:
-  enabled: 'false'
+  enabled: 'true'
   titleText:
     en: 'Important'
     cy: 'Pwysig'
   messageHtml:
-    en: 'Scheduled maintence on 28th September 2022 from 8:00 AM to 9:00 AM. The service will be unavailable during this time.'
+    en: 'From 4th August 2026 you will need an Access Code to log in. If the email you were sent does not include an Access Code and you do not submit the application in time, you will need to <a href="/la-portal/contact-us">contact us</a> to request one.'
     cy: 'Cynhelir cynnal a chadw ar 28ain Medi 2022 rhwng 8:00 AM a 9:00 AM. Bydd y gwasanaeth ar gael yn ystod yr amser hwn.'
