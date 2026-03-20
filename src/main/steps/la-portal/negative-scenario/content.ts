@@ -4,7 +4,8 @@ const en = () => ({
   title: 'There is a problem',
   line1: 'Some of the information you have given does not match what is stored in our records.',
   line2: 'You should select the back link and check that spellings, dates and numbers are correct.',
-  line3:
+  line3: 'If you think your Access Code has expired, you can contact us to request a new one.',
+  line4:
     'If this error comes up after you have checked all your details then there might be a problem with the information provided by the applicants. In that case you should contact the caseworker:',
 
   contactUs: 'Contact us for help',
@@ -15,7 +16,8 @@ const cy: typeof en = () => ({
   line1:
     "Nid yw rhywfaint o'r wybodaeth rydych chi wedi'i rhoi yn cyd-fynd â'r hyn sydd wedi’i storio yn ein cofnodion.",
   line2: 'Dylech glicio ar y ddolen a gwirio bod y sillafiadau, y dyddiadau a’r rhifau yn gywir.',
-  line3:
+  line3: '',
+  line4:
     "Os yw’r gwall hwn yn codi ar ôl i chi wirio eich holl fanylion, yna efallai bod problem gyda’r wybodaeth a ddarparwyd gan y ceiswyr. Yn yr achos hwnnw dylech gysylltu â'r gweithiwr achos:",
 
   contactUs: 'Cysylltwch â ni am help',
