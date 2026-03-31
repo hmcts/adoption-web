@@ -5435,7 +5435,7 @@ __metadata:
     eslint-plugin-jest: ^26.5.3
     eslint-plugin-prettier: ^4.0.0
     express: ^4.22.1
-    express-rate-limit: 8.2.1
+    express-rate-limit: ^8.3.1
     express-session: ^1.18.2
     form-data: ^4.0.4
     glob: ^8.0.3
@@ -5468,7 +5468,7 @@ __metadata:
     nunjucks: ^3.2.4
     otplib: ^12.0.1
     prettier: ^2.6.2
-    rate-limit-redis: 4.3.1
+    rate-limit-redis: ^4.3.1
     redis: ^3.1.2
     sass-loader: ^13.0.0
     serve-favicon: ^2.5.0
@@ -9698,14 +9698,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express-rate-limit@npm:8.2.1":
-  version: 8.2.1
-  resolution: "express-rate-limit@npm:8.2.1"
+"express-rate-limit@npm:^8.3.1":
+  version: 8.3.2
+  resolution: "express-rate-limit@npm:8.3.2"
   dependencies:
-    ip-address: 10.0.1
+    ip-address: 10.1.0
   peerDependencies:
     express: ">= 4.11"
-  checksum: 6fe9f589432b3b304412183ee057b91d108a5d5987d29b6526203936f3cd11ba3e69954ff040153ed5553af57e797bcb35d1901793067665175c6ac1e461358c
+  checksum: b9a93a79702dd48b9f5751c2fac079cd3625eee532ca06ea577d379642c458b570bdb790d04545f72ecb5c284607c3ac80ba2aecb5e6b401dc9c5738766bfc56
   languageName: node
   linkType: hard
 
@@ -11561,10 +11561,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ip-address@npm:10.0.1":
-  version: 10.0.1
-  resolution: "ip-address@npm:10.0.1"
-  checksum: 525d5391cfd31a91f80f5857e98487aeaa8474e860a6725a0b6461ac8e436c7f8c869774dece391c8f8e7486306a34a4d1c094778c4c583a3f1f2cd905e5ed50
+"ip-address@npm:10.1.0":
+  version: 10.1.0
+  resolution: "ip-address@npm:10.1.0"
+  checksum: 76b1abcdf52a32e2e05ca1f202f3a8ab8547e5651a9233781b330271bd7f1a741067748d71c4cbb9d9906d9f1fa69e7ddc8b4a11130db4534fdab0e908c84e0d
   languageName: node
   linkType: hard
 
@@ -16437,7 +16437,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rate-limit-redis@npm:4.3.1":
+"rate-limit-redis@npm:^4.3.1":
   version: 4.3.1
   resolution: "rate-limit-redis@npm:4.3.1"
   peerDependencies:
