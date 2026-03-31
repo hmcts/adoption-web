@@ -17,6 +17,9 @@ nodejs:
     CCD_URL: 'http://ccd-data-store-api-aat.service.core-compute-aat.internal'
     IDAM_ROLE: 'citizen'
     CDAM_API_URL: 'http://ccd-case-document-am-api-aat.service.core-compute-aat.internal'
+    SOCIAL_WORKER_SUPPORTED_DOMAINS:
+      - gov.uk
+      - mailinator.com # For testing purposes only 
     # Family Court List
     LEICESTER_VAL: 'Leicester County Court'
     STOKE-ON-TRENT_VAL: 'Stoke-on-Trent Combined Court'
