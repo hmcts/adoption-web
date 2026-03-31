@@ -322,6 +322,7 @@ fpl:
 socialWorker:
   supportedDomains:
     - gov.uk
+    #- mailinator.com # Uncomment for testing locally.
     - pathfinderlegal.co.uk
     - nctrust.co.uk
     - birminghamchildrenstrust.co.uk
