@@ -19,10 +19,11 @@ export class DraftStoreClient {
     const client = new Redis({
       host: config.get('services.draftStore.redis.host'),
       port: config.get('services.draftStore.redis.port'),
+      //password and tls disabled for local dev (no auth on local Docker Redis)
       password: config.get('session.redis.key'),
-      tls: {
-        servername: config.get('services.draftStore.redis.host'),
-      },
+       tls: {
+         servername: config.get('services.draftStore.redis.host'),
+       },
     });
     Logger.error('connection string');
 
