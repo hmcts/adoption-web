@@ -5497,7 +5497,7 @@ __metadata:
     mochawesome: ^7.1.3
     moment: ^2.29.4
     moment-timezone: 0.5.43
-    multer: ^2.1.0
+    multer: ^2.1.1
     negotiator: ^0.6.3
     nock: ^14.0.11
     node-sass: ^9.0.0
@@ -14639,15 +14639,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"multer@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "multer@npm:2.1.0"
+"multer@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "multer@npm:2.1.1"
   dependencies:
     append-field: ^1.0.0
     busboy: ^1.6.0
     concat-stream: ^2.0.0
     type-is: ^1.6.18
-  checksum: 507de11b93fe97859899042e9532d8484f4b4ae9746181478d452191bcfda18b77d38cb85197d9257fb6596f933fe51e5592daf393b2861dcdc8e2207384b78c
+  checksum: 1d2f4ad42a318b3881afe01d3ea2c16af5822c55a65151eaf94b7f807df0e72ac7bb11c174b65b1815bd814f5f60b06f8b95e2a074d77e0af5cb5b6f2a426aff
   languageName: node
   linkType: hard
 
