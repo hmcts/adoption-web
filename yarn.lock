@@ -5453,7 +5453,7 @@ __metadata:
     accessible-autocomplete: ^3.0.0
     applicationinsights: ^2.9.7
     autobind-decorator: ^2.4.0
-    axios: ^0.30.2
+    axios: ^1.12.0
     axios-debug-log: ^0.8.4
     babel-loader: ^9.1.2
     codeceptjs: ^3.7.5
@@ -6132,27 +6132,6 @@ __metadata:
   peerDependencies:
     axios: ">=0.17.0"
   checksum: 529222882e58d97e74df5be82904763e6df8673c005d82aff4310a9e7f28aff75d9f33e3e8ea96c1e944e85346d0c64fd591d48d43590bee70a47cf25bd13e88
-  languageName: node
-  linkType: hard
-
-"axios@npm:^0.27.2":
-  version: 0.27.2
-  resolution: "axios@npm:0.27.2"
-  dependencies:
-    follow-redirects: ^1.14.9
-    form-data: ^4.0.0
-  checksum: 38cb7540465fe8c4102850c4368053c21683af85c5fdf0ea619f9628abbcb59415d1e22ebc8a6390d2bbc9b58a9806c874f139767389c862ec9b772235f06854
-  languageName: node
-  linkType: hard
-
-"axios@npm:^0.30.2":
-  version: 0.30.2
-  resolution: "axios@npm:0.30.2"
-  dependencies:
-    follow-redirects: ^1.15.4
-    form-data: ^4.0.4
-    proxy-from-env: ^1.1.0
-  checksum: c21a17bab1385c1b9aad0d3a293397be418a24d16ef02b34bb332a40c4ae645ce4e06ff2cf44acd5fb3cacea6fe6e6ea018ed581e0cd21fdfbd74e4e94f54f92
   languageName: node
   linkType: hard
 
@@ -10153,26 +10132,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.14.9":
-  version: 1.15.9
-  resolution: "follow-redirects@npm:1.15.9"
-  peerDependenciesMeta:
-    debug:
-      optional: true
-  checksum: 859e2bacc7a54506f2bf9aacb10d165df78c8c1b0ceb8023f966621b233717dab56e8d08baadc3ad3b9db58af290413d585c999694b7c146aaf2616340c3d2a6
-  languageName: node
-  linkType: hard
-
-"follow-redirects@npm:^1.15.4":
-  version: 1.15.11
-  resolution: "follow-redirects@npm:1.15.11"
-  peerDependenciesMeta:
-    debug:
-      optional: true
-  checksum: 20bf55e9504f59e6cc3743ba27edb2ebf41edea1baab34799408f2c050f73f0c612728db21c691276296d2795ea8a812dc532a98e8793619fcab91abe06d017f
-  languageName: node
-  linkType: hard
-
 "for-each@npm:^0.3.3":
   version: 0.3.3
   resolution: "for-each@npm:0.3.3"
@@ -10216,7 +10175,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"form-data@npm:^4.0.0, form-data@npm:^4.0.4":
+"form-data@npm:^4.0.4":
   version: 4.0.4
   resolution: "form-data@npm:4.0.4"
   dependencies:

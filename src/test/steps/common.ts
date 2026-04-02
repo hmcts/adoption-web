@@ -1,4 +1,4 @@
-import Axios, { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import sysConfig from 'config';
 import jwt_decode from 'jwt-decode';
 import { Logger, transports } from 'winston';
@@ -234,7 +234,7 @@ export const iGetTheTestUser = async (user: { username: string; password: string
   const headers = { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' };
   const data = `grant_type=password&username=${user.username}&password=${user.password}&client_id=${id}&client_secret=${secret}&scope=openid%20profile%20roles%20openid%20roles%20profile`;
 
-  const response: AxiosResponse<OidcResponse> = await Axios.post(tokenUrl, data, { headers });
+  const response: AxiosResponse<OidcResponse> = await axios.post(tokenUrl, data, { headers });
 
   const jwt = jwt_decode(response.data.id_token) as {
     uid: string;

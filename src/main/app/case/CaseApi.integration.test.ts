@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import moment from 'moment';
 import nock from 'nock';
 import { LoggerInstance } from 'winston';
@@ -30,7 +30,7 @@ describe('CaseApi', () => {
       info: jest.fn().mockImplementation((message: string) => message),
     } as unknown as LoggerInstance;
 
-    api = new CaseApi(Axios.create({ baseURL: 'http://ccd-test-api' }), mockLogger);
+    api = new CaseApi(axios.create({ baseURL: 'http://ccd-test-api' }), mockLogger);
   });
 
   afterEach(() => {
