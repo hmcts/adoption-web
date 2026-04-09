@@ -6,7 +6,7 @@ module.exports = {
     '^.+\\.ts$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'json'],
-  setupFilesAfterEnv: ['jest-extended'],
+  setupFilesAfterEnv: ['jest-extended', '<rootDir>/src/test/integration/setup.ts'],
   moduleNameMapper: {
     '@hmcts/nodejs-logging': '<rootDir>/src/test/unit/mocks/hmcts/nodejs-logging',
   },
@@ -20,7 +20,4 @@ module.exports = {
       },
     ],
   ],
-  fakeTimers: {
-    enableGlobally: true,
-  },
 };
