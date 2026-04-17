@@ -96,7 +96,7 @@
     "ioredis": "^5.2.2",
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.23",
-    "multer": "^2.1.0",
+    "multer": "^2.1.1",
     "negotiator": "^0.6.3",
     "nunjucks": "^3.2.4",
     "otplib": "^12.0.1",
@@ -174,7 +174,8 @@
     "lodash": "^4.17.23",
     "serve-static": "^1.16.0",
     "cookie": "^0.7.0",
-    "nanoid": "^3.3.8"
+    "nanoid": "^3.3.8",
+    "glob": "^10.5.0"
   },
   "packageManager": "yarn@3.8.5"
 }
