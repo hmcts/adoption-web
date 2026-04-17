@@ -137,13 +137,16 @@ export const childSummaryList = (
         },
         {
           key: keys.sexAtBirth,
-          value: content.gender[userCase.childrenSexAtBirth!],
+          value: userCase.childrenSexAtBirth ? content.gender[userCase.childrenSexAtBirth] : '',
           changeUrl: Urls.LA_PORTAL_CHILD_SEX_AT_BIRTH,
           visuallyHiddenText: visuallyHiddenTexts.childrenSexAtBirth,
         },
         {
           key: keys.nationality,
-          valueHtml: formatNationalities(userCase.childrenNationality!, userCase.childrenAdditionalNationalities!),
+          valueHtml: formatNationalities(
+            userCase.childrenNationality ?? [],
+            userCase.childrenAdditionalNationalities ?? []
+          ),
           changeUrl: Urls.LA_PORTAL_CHILD_NATIONALITY,
           visuallyHiddenText: visuallyHiddenTexts.childrenNationality,
         },
@@ -219,7 +222,9 @@ function prepareSummaryList(
           {
             key: keys.nameOnBirthCertificate,
             visuallyHiddenText: visuallyHiddenTexts.birthFatherNameOnCertificate,
-            value: content.yesNoNotsure[userCase.birthFatherNameOnCertificate!],
+            value: userCase.birthFatherNameOnCertificate
+              ? content.yesNoNotsure[userCase.birthFatherNameOnCertificate]
+              : '',
             changeUrl: Urls[`${LA_PORTAL}${urlPrefix}NAME_ON_CERTIFICATE`],
           },
         ]
@@ -279,7 +284,9 @@ function fieldPrefixBirthMother(
             ? [
                 {
                   key: keys.responsibility,
-                  valueHtml: content.yesNoNotsure[userCase.birthFatherResponsibility!],
+                  valueHtml: userCase.birthFatherResponsibility
+                    ? content.yesNoNotsure[userCase.birthFatherResponsibility]
+                    : '',
                   changeUrl: Urls.LA_PORTAL_BIRTH_FATHER_PARENTAL_RESPONSIBILITY,
                   classes: 'govuk-summary-list__row--no-border',
                 },
@@ -290,8 +297,8 @@ function fieldPrefixBirthMother(
                         key: content.reason,
                         visuallyHiddenText: visuallyHiddenTexts.birthFatherResponsibilityReason,
                         valueHtml: formatResponsibilityReasons(
-                          userCase['birthFatherResponsibilityReason']!,
-                          userCase['birthFatherOtherResponsibilityReason']!,
+                          userCase['birthFatherResponsibilityReason'] ?? [],
+                          userCase['birthFatherOtherResponsibilityReason'] ?? '',
                           content.responsibilityReasons,
                           content.reason + ':'
                         ),
@@ -304,8 +311,8 @@ function fieldPrefixBirthMother(
                         key: content.reason,
                         visuallyHiddenText: visuallyHiddenTexts.birthFatherResponsibilityReason,
                         valueHtml: formatResponsibilityReasons(
-                          userCase['birthFatherResponsibilityReason']!,
-                          userCase['birthFatherOtherResponsibilityReason']!,
+                          userCase['birthFatherResponsibilityReason'] ?? [],
+                          userCase['birthFatherOtherResponsibilityReason'] ?? '',
                           content.responsibilityReasons,
                           content.reason + ':'
                         ),
@@ -422,7 +429,7 @@ export const otherParentSummaryList = (
       [
         {
           key: keys.otherParent,
-          value: content.yesNoNotsure[userCase.otherParentExists!],
+          value: userCase.otherParentExists ? content.yesNoNotsure[userCase.otherParentExists] : '',
           changeUrl: Urls.LA_PORTAL_OTHER_PARENT_EXISTS,
         },
         ...(userCase.otherParentExists === YesOrNo.YES
@@ -437,7 +444,7 @@ export const otherParentSummaryList = (
                 key: keys.otherParentResponsibility,
                 visuallyHiddenText: visuallyHiddenTexts.otherParentResponsibilityReason,
                 valueHtml: formatResponsibilityReasons(
-                  userCase.otherParentResponsibilityReason!,
+                  userCase.otherParentResponsibilityReason ?? [],
                   userCase.otherParentOtherResponsibilityReason ? userCase.otherParentOtherResponsibilityReason : '',
                   content.responsibilityReasons,
                   ''
@@ -455,7 +462,9 @@ export const otherParentSummaryList = (
                         content.yesNoNotsure[userCase.otherParentAddressKnown],
                         'otherParentAddressNotKnownReason'
                       )
-                    : content.yesNoNotsure[userCase.otherParentAddressKnown!],
+                    : userCase.otherParentAddressKnown
+                    ? content.yesNoNotsure[userCase.otherParentAddressKnown]
+                    : '',
                 changeUrl: Urls.LA_PORTAL_OTHER_PARENT_ADDRESS_KNOWN,
               },
               ...(userCase.otherParentAddressKnown === YesOrNo.YES
@@ -489,7 +498,9 @@ export const otherParentSummaryList = (
                         content.yesNoNotsure[userCase.otherParentServedWith],
                         'otherParentNotServedWithReason'
                       )
-                    : content.yesNoNotsure[userCase.otherParentServedWith!],
+                    : userCase.otherParentServedWith
+                    ? content.yesNoNotsure[userCase.otherParentServedWith]
+                    : '',
                 changeUrl: Urls.LA_PORTAL_OTHER_PARENT_SERVED_WITH,
               },
             ]
@@ -506,7 +517,7 @@ export const childrenPlacementOrderSummaryList = (
 ): SummaryLists => {
   return {
     title: sectionTitles.childPlacementAndCourtOrders,
-    rows: userCase.placementOrders!.reduce(
+    rows: (userCase.placementOrders ?? []).reduce(
       (acc: GovUKNunjucksSummary[], item, index) => [
         ...acc,
         ...getSectionSummaryLists(
@@ -519,7 +530,9 @@ export const childrenPlacementOrderSummaryList = (
             },
             {
               key: keys.typeOfOrder,
-              value: content.placementOrderType[item.placementOrderType!] || keys.placementOrder,
+              value: item.placementOrderType
+                ? content.placementOrderType[item.placementOrderType]
+                : keys.placementOrder,
               changeUrl:
                 index !== 0
                   ? `${Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_TYPE}?change=${item.placementOrderId}`
@@ -562,7 +575,7 @@ export const siblingCourtOrderSummaryList = (
     [
       {
         key: keys.siblingOrHalfSibling,
-        valueHtml: content.yesNoNotsure[userCase.hasSiblings!],
+        valueHtml: userCase.hasSiblings ? content.yesNoNotsure[userCase.hasSiblings] : '',
         changeUrl: `${Urls.LA_PORTAL_SIBLING_EXISTS}`,
       },
     ],
@@ -571,7 +584,7 @@ export const siblingCourtOrderSummaryList = (
 
   const siblingCourtOrderList =
     userCase.hasSiblings === YesNoNotsure.YES
-      ? userCase.siblings!.reduce(
+      ? (userCase.siblings ?? []).reduce(
           (rows: GovUKNunjucksSummary[], sibling) => [
             ...rows,
             ...getSectionSummaryLists(
@@ -583,12 +596,12 @@ export const siblingCourtOrderSummaryList = (
                 {
                   key: keys.siblingRelation,
                   visuallyHiddenText: visuallyHiddenTexts.siblingRelation,
-                  value: content.siblingRelationships[sibling.siblingRelation!],
+                  value: sibling.siblingRelation ? content.siblingRelationships[sibling.siblingRelation] : '',
                   changeUrl: `${Urls.LA_PORTAL_SIBLING_RELATION}?change=${sibling.siblingId}`,
                 },
                 {
                   key: keys.typeOfOrder,
-                  value: content.siblingPlacementOrderType[sibling.siblingPoType!],
+                  value: sibling.siblingPoType ? content.siblingPlacementOrderType[sibling.siblingPoType] : '',
                   changeUrl: `${Urls.LA_PORTAL_SIBLING_ORDER_TYPE}?change=${sibling.siblingId}`,
                 },
                 {

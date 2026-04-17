@@ -1,10 +1,13 @@
+import moment from 'moment';
+
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
+import * as caseApi from '../../../app/case/CaseApi';
 
 import SaveAsDraftGetController from './SaveAsDraftGetController';
 import { generateContent } from './content';
 
-const mockGetCourtList = jest.fn();
+const getCaseApiMock = jest.spyOn(caseApi, 'getCaseApi');
 
 describe('application > save-as-draft > SaveAsDraftGetController', () => {
   let controller;
@@ -13,7 +16,6 @@ describe('application > save-as-draft > SaveAsDraftGetController', () => {
 
   beforeEach(() => {
     controller = new SaveAsDraftGetController(__dirname + '../../common/template', generateContent);
-    mockGetCourtList.mockReturnValue([{ site_name: 'MOCK' }]);
     req = mockRequest({
       session: {
         userCase: { canPaymentIgnored: false },
@@ -21,10 +23,31 @@ describe('application > save-as-draft > SaveAsDraftGetController', () => {
       },
     });
     res = mockResponse();
+
+    (getCaseApiMock as jest.Mock).mockReturnValue({
+      getCases: jest.fn().mockResolvedValue([]),
+    });
   });
 
-  test('should call super constructor with correct params', async () => {
+  test('should not set canPaymentIgnored when no submitted cases found today', async () => {
     await controller.get(req, res);
-    expect(!req.session.userCase.canPaymentIgnored).toBeTruthy();
+    expect(req.session.userCase.canPaymentIgnored).toBeFalsy();
+    expect(res.render).toHaveBeenCalled();
+  });
+
+  test('should set canPaymentIgnored when a submitted case is found today', async () => {
+    (getCaseApiMock as jest.Mock).mockReturnValue({
+      getCases: jest.fn().mockResolvedValue([
+        {
+          id: '1234',
+          state: 'Submitted',
+          case_data: { dateSubmitted: moment(new Date()).format('YYYY-MM-DD') },
+        },
+      ]),
+    });
+
+    await controller.get(req, res);
+    expect(req.session.userCase.canPaymentIgnored).toBe(true);
+    expect(res.render).toHaveBeenCalled();
   });
 });

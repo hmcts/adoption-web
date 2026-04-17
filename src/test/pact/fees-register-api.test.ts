@@ -1,18 +1,19 @@
+import { MatchersV2 } from '@pact-foundation/pact';
+import type { InteractionObject } from '@pact-foundation/pact/src/dsl/interaction';
 import config from 'config';
+import { pactWith } from 'jest-pact';
 import { when } from 'jest-when';
 import type { LoggerInstance } from 'winston';
 
 import { getFee } from '../../main/app/fee/fee-lookup-api';
 
-const { Matchers } = require('@pact-foundation/pact');
-const { pactWith } = require('jest-pact');
-const { somethingLike, like } = Matchers;
+const { like } = MatchersV2;
 
 pactWith(
   {
     consumer: 'adoption-web',
     provider: 'feeRegister_lookUp',
-    logLevel: 'DEBUG',
+    logLevel: 'debug',
   },
   provider => {
     describe('fees-register API', () => {
@@ -29,7 +30,7 @@ pactWith(
           'content-type': 'application/json',
         },
         body: {
-          code: somethingLike('FEE0310'),
+          code: like('FEE0310'),
           description: like('Adoption application fee'),
           version: like(5),
           fee_amount: like(207.0),
@@ -53,14 +54,13 @@ pactWith(
         config.get = jest.fn();
         when(config.get)
           .calledWith('services.feeLookup.url')
-          .mockReturnValue(`${provider.mockService.baseUrl}/fees-register/fees/lookup`);
+          .mockReturnValue(`http://127.0.0.1:${provider.opts.port}/fees-register/fees/lookup`);
 
-        const interaction = {
+        return provider.addInteraction({
           state: 'service is registered in Fee registry',
           ...feeLookupRequest,
           willRespondWith: successResponse,
-        };
-        return provider.addInteraction(interaction);
+        } as unknown as InteractionObject);
       });
 
       it('returns an adoption application fee', async () => {

@@ -11,7 +11,7 @@ pactWith(
   {
     consumer: 'adoption-web',
     provider: 'postcode-lookup',
-    logLevel: 'DEBUG',
+    logLevel: 'debug',
   },
   provider => {
     describe('postcode-lookup API', () => {
@@ -82,11 +82,7 @@ pactWith(
           headers: {
             accept: 'application/json',
           },
-          params: {
-            key: 'ssshhh',
-            lr: 'EN',
-            postcode: 'SW1A 1AB',
-          },
+          query: 'key=ssshhh&lr=EN&postcode=SW1A%201AB',
         },
       };
 
@@ -94,16 +90,15 @@ pactWith(
         config.get = jest.fn();
         when(config.get)
           .calledWith('services.postcodeLookup.url')
-          .mockReturnValue(`${provider.mockService.baseUrl}/search/places/v1`)
+          .mockReturnValue(`http://127.0.0.1:${provider.opts.port}/search/places/v1`)
           .calledWith('services.postcodeLookup.token')
           .mockReturnValue('ssshhh');
 
-        const interaction = {
+        return provider.addInteraction({
           state: 'adoption-web makes request to get addresses from postcode-lookup',
           ...postcodeLookupRequest,
           willRespondWith: postcodeLookupSuccessResponse,
-        };
-        return provider.addInteraction(interaction);
+        });
       });
 
       it('returns a successful body', async () => {

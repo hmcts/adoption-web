@@ -18,7 +18,7 @@ pactWith(
   {
     consumer: 'adoption-web',
     provider: 'ccdDataStoreAPI_Cases',
-    logLevel: 'DEBUG',
+    logLevel: 'debug',
   },
   provider => {
     let caseApi;
@@ -34,7 +34,7 @@ pactWith(
     beforeEach(() => {
       const { Logger } = require('@hmcts/nodejs-logging');
       const logger: LoggerInstance = Logger.getLogger('server');
-      when(config.get).calledWith('services.case.url').mockReturnValue(provider.mockService.baseUrl);
+      when(config.get).calledWith('services.case.url').mockReturnValue(`http://127.0.0.1:${provider.opts.port}`);
       caseApi = getCaseApi(userDetails, logger);
     });
 
@@ -88,12 +88,11 @@ pactWith(
       };
 
       beforeEach(() => {
-        const interaction = {
+        return provider.addInteraction({
           state: 'adoption-web makes request to get cases',
           ...getCasesRequest,
           willRespondWith: getCasesSuccessResponse,
-        };
-        return provider.addInteraction(interaction);
+        });
       });
 
       it('returns all cases for a user', async () => {
@@ -138,12 +137,11 @@ pactWith(
       };
 
       beforeEach(() => {
-        const interaction = {
+        return provider.addInteraction({
           state: 'adoption-web makes request to get case by id',
           ...getCaseByIdRequest,
           willRespondWith: getCaseByIdSuccessResponse,
-        };
-        return provider.addInteraction(interaction);
+        });
       });
 
       it('returns case data by id', async () => {
@@ -221,19 +219,17 @@ pactWith(
       };
 
       beforeEach(() => {
-        const interaction = {
+        provider.addInteraction({
           state: 'adoption-web makes request to get citizen-create-application event token',
           ...createCaseEventTokenRequest,
           willRespondWith: createCaseEventTokenResponse,
-        };
-        provider.addInteraction(interaction);
+        });
 
-        const interaction2 = {
+        provider.addInteraction({
           state: 'adoption-web makes request to create case',
           ...createCaseRequest,
           willRespondWith: createCaseResponse,
-        };
-        provider.addInteraction(interaction2);
+        });
       });
 
       it('creates a new case and return case data in response', async () => {
@@ -272,12 +268,11 @@ pactWith(
       };
 
       beforeEach(() => {
-        const interaction = {
+        provider.addInteraction({
           state: 'adoption-web makes request to get case-users roles',
           ...getCaseUserRolesRequest,
           willRespondWith: getCaseUserRolesResponse,
-        };
-        provider.addInteraction(interaction);
+        });
       });
 
       it('return case assigned user roles in response for given caseId and userId', async () => {
@@ -360,19 +355,17 @@ pactWith(
       };
 
       beforeEach(() => {
-        const interaction = {
+        provider.addInteraction({
           state: 'adoption-web makes request to get citizen-update-application event token',
           ...getEventTokenRequest,
           willRespondWith: getEventTokenResponse,
-        };
-        provider.addInteraction(interaction);
+        });
 
-        const interaction2 = {
+        provider.addInteraction({
           state: 'adoption-web makes request to send case event',
           ...sendCaseEventRequest,
           willRespondWith: sendCaseEventResponse,
-        };
-        provider.addInteraction(interaction2);
+        });
       });
 
       it('updates case and return case data in response', async () => {

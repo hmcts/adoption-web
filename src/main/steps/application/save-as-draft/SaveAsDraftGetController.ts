@@ -32,7 +32,7 @@ export default class SaveAsDraftGetController extends GetController {
         req.session.userCase.canPaymentIgnored = true;
       }
     } catch (e) {
-      console.log(e.message);
+      req.locals.logger.error(e.message);
     }
   }
 }

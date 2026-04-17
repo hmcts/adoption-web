@@ -191,5 +191,5 @@ const languages = {
 
 export const generateContent = (content: CommonContent, fieldPrefix: FieldPrefix): PageContent => ({
   ...languages[content.language](fieldPrefix),
-  form: { ...form, fields: otherNamesFields(content.userCase!, fieldPrefix, content.language) },
+  form: { ...form, fields: otherNamesFields(content.userCase ?? {}, fieldPrefix, content.language) },
 });

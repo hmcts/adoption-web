@@ -85,14 +85,14 @@ describe('children > date-of-birth > content', () => {
     expect(childrenDateOfBirthField.attributes?.spellcheck).toBe(false);
 
     expect(
-      childrenDateOfBirthField.parser!({
+      childrenDateOfBirthField.parser?.({
         'childrenDateOfBirth-day': '12',
         'childrenDateOfBirth-month': '10',
         'childrenDateOfBirth-year': '2015',
       })
     ).toEqual({ day: '12', month: '10', year: '2015' });
 
-    childrenDateOfBirthField.validator!({ day: '12', month: '10', year: '2015' }, {});
+    childrenDateOfBirthField.validator?.({ day: '12', month: '10', year: '2015' }, {});
     expect(areDateFieldsFilledIn).toHaveBeenCalledWith({ day: '12', month: '10', year: '2015' });
     expect(isDateInputInvalid).toHaveBeenCalledWith({ day: '12', month: '10', year: '2015' });
     expect(isFutureDate).toHaveBeenCalledWith({ day: '12', month: '10', year: '2015' });

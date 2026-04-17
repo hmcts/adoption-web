@@ -77,10 +77,10 @@ describe('applicant1 > applying-with > content', () => {
     expect((applyingWithField.values[1].hint as LanguageLookup)(generatedContent)).toBe(enContent.twoHint);
     expect((applyingWithField.values[2].hint as LanguageLookup)(generatedContent)).toBe(enContent.threeHint);
 
-    const field2 = applyingWithField.values[2].subFields!.otherApplicantRelation;
-    (field2.validator as ValidationCheck)('MockTextArea', {});
+    const field2 = applyingWithField.values[2].subFields?.otherApplicantRelation;
+    (field2?.validator as ValidationCheck)('MockTextArea', {});
     expect(isTextAreaValid).toHaveBeenCalledWith('MockTextArea');
-    expect((field2.label as LanguageLookup)(generatedContent)).toBe(enContent.moreDetails);
+    expect((field2?.label as LanguageLookup)(generatedContent)).toBe(enContent.moreDetails);
   });
 
   test('should contain submit button', () => {

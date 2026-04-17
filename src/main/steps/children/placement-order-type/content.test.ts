@@ -95,11 +95,11 @@ describe('children > placement-order-type > content', () => {
     expect(field.values[4].value).toBe(PlacementOrderTypeEnum.SupervisionOrder);
     expect((field.values[5].label as Function)(generatedContent)).toBe(enContent.other);
     expect(field.values[5].value).toBe(PlacementOrderTypeEnum.Other);
-    const placementOrderOtherTypeField = field.values[5].subFields!.selectedOtherPlacementOrderType;
-    expect(placementOrderOtherTypeField.type).toBe('text');
-    expect((placementOrderOtherTypeField.label as Function)(generatedContent)).toBe(enContent.otherOrder);
-    expect(placementOrderOtherTypeField.labelSize).toBe(null);
-    expect(placementOrderOtherTypeField.validator).toBe(isFieldFilledIn);
+    const placementOrderOtherTypeField = field.values[5].subFields?.selectedOtherPlacementOrderType;
+    expect(placementOrderOtherTypeField?.type).toBe('text');
+    expect((placementOrderOtherTypeField?.label as Function)(generatedContent)).toBe(enContent.otherOrder);
+    expect(placementOrderOtherTypeField?.labelSize).toBe(null);
+    expect(placementOrderOtherTypeField?.validator).toBe(isFieldFilledIn);
   });
 
   test('should contain submit button', () => {

@@ -2,15 +2,16 @@ jest.mock('../../main/app/auth/service/get-service-auth-token', () => ({
   getServiceAuthToken: jest.fn(() => 'someServiceAuthorization'),
 }));
 
+import { MatchersV2 } from '@pact-foundation/pact';
+import type { InteractionObject } from '@pact-foundation/pact/src/dsl/interaction';
 import config from 'config';
+import { pactWith } from 'jest-pact';
 import { when } from 'jest-when';
 
 import { PaymentClient } from '../../main/app/payment/PaymentClient';
 import { mockRequest } from '../unit/utils/mockRequest';
 
-const { Matchers } = require('@pact-foundation/pact');
-const { pactWith } = require('jest-pact');
-const { like } = Matchers;
+const { like } = MatchersV2;
 
 config.get = jest.fn();
 
@@ -18,11 +19,11 @@ pactWith(
   {
     consumer: 'adoption-web',
     provider: 'payment_cardPayment',
-    logLevel: 'DEBUG',
+    logLevel: 'debug',
   },
   provider => {
     beforeEach(() => {
-      when(config.get).calledWith('services.payments.url').mockReturnValue(provider.mockService.baseUrl);
+      when(config.get).calledWith('services.payments.url').mockReturnValue(`http://127.0.0.1:${provider.opts.port}`);
     });
 
     describe('create payment API', () => {
@@ -79,12 +80,11 @@ pactWith(
       };
 
       beforeEach(() => {
-        const interaction = {
+        return provider.addInteraction({
           state: 'A Payment is posted for a case',
           ...createPaymentRequest,
           willRespondWith: createPaymentSuccessResponse,
-        };
-        return provider.addInteraction(interaction);
+        } as unknown as InteractionObject);
       });
 
       it('returns a successful response', async () => {
@@ -148,12 +148,11 @@ pactWith(
       };
 
       beforeEach(() => {
-        const interaction = {
+        return provider.addInteraction({
           state: 'A payment reference exists',
           ...getPaymentRequest,
           willRespondWith: getPaymentSuccessResponse,
-        };
-        return provider.addInteraction(interaction);
+        } as unknown as InteractionObject);
       });
 
       it('returns a successful payment details', async () => {
