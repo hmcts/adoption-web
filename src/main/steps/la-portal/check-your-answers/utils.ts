@@ -247,6 +247,41 @@ function prepareSummaryList(
 }
 
 //Also used for BirthFather
+function getBirthFatherResponsibilityRows(
+  keys: Record<string, string>,
+  visuallyHiddenTexts: Record<string, string>,
+  userCase: Partial<CaseWithId>,
+  content
+) {
+  const responsibilityReasonChangeUrl =
+    userCase['birthFatherResponsibility'] === YesOrNo.YES
+      ? Urls.LA_PORTAL_BIRTH_FATHER_PARENTAL_RESPONSIBILITY_GRANTED
+      : Urls.LA_PORTAL_BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY;
+
+  return [
+    {
+      key: keys.responsibility,
+      valueHtml: userCase.birthFatherResponsibility
+        ? content.yesNoNotsure[userCase.birthFatherResponsibility]
+        : '',
+      changeUrl: Urls.LA_PORTAL_BIRTH_FATHER_PARENTAL_RESPONSIBILITY,
+      classes: 'govuk-summary-list__row--no-border',
+    },
+    {
+      keyHtml: ' ',
+      key: content.reason,
+      visuallyHiddenText: visuallyHiddenTexts.birthFatherResponsibilityReason,
+      valueHtml: formatResponsibilityReasons(
+        userCase['birthFatherResponsibilityReason'] ?? [],
+        userCase['birthFatherOtherResponsibilityReason'] ?? '',
+        content.responsibilityReasons,
+        content.reason + ':'
+      ),
+      changeUrl: responsibilityReasonChangeUrl,
+    },
+  ];
+}
+
 function fieldPrefixBirthMother(
   keys: Record<string, string>,
   visuallyHiddenTexts: Record<string, string>,
@@ -281,45 +316,7 @@ function fieldPrefixBirthMother(
     ...(userCase[`${prefix}StillAlive`] === YesOrNo.YES
       ? [
           ...(prefix === FieldPrefix.BIRTH_FATHER
-            ? [
-                {
-                  key: keys.responsibility,
-                  valueHtml: userCase.birthFatherResponsibility
-                    ? content.yesNoNotsure[userCase.birthFatherResponsibility]
-                    : '',
-                  changeUrl: Urls.LA_PORTAL_BIRTH_FATHER_PARENTAL_RESPONSIBILITY,
-                  classes: 'govuk-summary-list__row--no-border',
-                },
-                ...(userCase['birthFatherResponsibility'] === YesOrNo.YES
-                  ? [
-                      {
-                        keyHtml: ' ',
-                        key: content.reason,
-                        visuallyHiddenText: visuallyHiddenTexts.birthFatherResponsibilityReason,
-                        valueHtml: formatResponsibilityReasons(
-                          userCase['birthFatherResponsibilityReason'] ?? [],
-                          userCase['birthFatherOtherResponsibilityReason'] ?? '',
-                          content.responsibilityReasons,
-                          content.reason + ':'
-                        ),
-                        changeUrl: Urls.LA_PORTAL_BIRTH_FATHER_PARENTAL_RESPONSIBILITY_GRANTED,
-                      },
-                    ]
-                  : [
-                      {
-                        keyHtml: ' ',
-                        key: content.reason,
-                        visuallyHiddenText: visuallyHiddenTexts.birthFatherResponsibilityReason,
-                        valueHtml: formatResponsibilityReasons(
-                          userCase['birthFatherResponsibilityReason'] ?? [],
-                          userCase['birthFatherOtherResponsibilityReason'] ?? '',
-                          content.responsibilityReasons,
-                          content.reason + ':'
-                        ),
-                        changeUrl: Urls.LA_PORTAL_BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY,
-                      },
-                    ]),
-              ]
+            ? getBirthFatherResponsibilityRows(keys, visuallyHiddenTexts, userCase, content)
             : []),
           {
             key: keys.nationality,
@@ -419,6 +416,85 @@ const getNotSureReasonElement = (content, userCase, notSure, reasonFieldName): s
   }: </span>${sanitizeHtml(userCase[reasonFieldName])}</p>`;
 };
 
+function getOtherParentRows(
+  keys: Record<string, string>,
+  visuallyHiddenTexts: Record<string, string>,
+  userCase: Partial<CaseWithId>,
+  content
+) {
+  const addressKnownValueHtml =
+    userCase.otherParentAddressKnown === YesOrNo.NO
+      ? getNotSureReasonElement(
+          content,
+          userCase,
+          content.yesNoNotsure[userCase.otherParentAddressKnown],
+          'otherParentAddressNotKnownReason'
+        )
+      : (userCase.otherParentAddressKnown && content.yesNoNotsure[userCase.otherParentAddressKnown]) || '';
+
+  const servedWithValueHtml =
+    userCase.otherParentServedWith === YesOrNo.NO
+      ? getNotSureReasonElement(
+          content,
+          userCase,
+          content.yesNoNotsure[userCase.otherParentServedWith],
+          'otherParentNotServedWithReason'
+        )
+      : (userCase.otherParentServedWith && content.yesNoNotsure[userCase.otherParentServedWith]) || '';
+
+  return [
+    {
+      key: keys.fullName,
+      visuallyHiddenText: visuallyHiddenTexts.otherParentFullName,
+      value: userCase.otherParentFirstNames + ' ' + userCase.otherParentLastNames,
+      changeUrl: Urls.LA_PORTAL_OTHER_PARENT_FULL_NAME,
+    },
+    {
+      key: keys.otherParentResponsibility,
+      visuallyHiddenText: visuallyHiddenTexts.otherParentResponsibilityReason,
+      valueHtml: formatResponsibilityReasons(
+        userCase.otherParentResponsibilityReason ?? [],
+        userCase.otherParentOtherResponsibilityReason ?? '',
+        content.responsibilityReasons,
+        ''
+      ),
+      changeUrl: Urls.LA_PORTAL_OTHER_PARENT_RESPONSIBILITY_GRANTED,
+    },
+    {
+      key: keys.addressKnown,
+      visuallyHiddenText: visuallyHiddenTexts.otherParentAddressKnown,
+      valueHtml: addressKnownValueHtml,
+      changeUrl: Urls.LA_PORTAL_OTHER_PARENT_ADDRESS_KNOWN,
+    },
+    ...(userCase.otherParentAddressKnown === YesOrNo.YES
+      ? [
+          {
+            key: keys.address,
+            visuallyHiddenText: visuallyHiddenTexts.otherParentAddress,
+            valueHtml: getFormattedAddress(userCase, FieldPrefix.OTHER_PARENT),
+            changeUrl: Urls.LA_PORTAL_OTHER_PARENT_MANUAL_ADDRESS,
+          },
+        ]
+      : []),
+    ...(userCase.otherParentAddressKnown === YesOrNo.YES
+      ? [
+          {
+            key: keys.addressConfirmedDate,
+            visuallyHiddenText: visuallyHiddenTexts.otherParentLastAddressDate,
+            valueHtml: getFormattedDate(userCase.otherParentLastAddressDate, 'en'),
+            changeUrl: Urls.LA_PORTAL_OTHER_PARENT_LAST_ADDRESS_CONFIRMED,
+          },
+        ]
+      : []),
+    {
+      key: keys.servedWith,
+      visuallyHiddenText: visuallyHiddenTexts.otherParentServedWith,
+      valueHtml: servedWithValueHtml,
+      changeUrl: Urls.LA_PORTAL_OTHER_PARENT_SERVED_WITH,
+    },
+  ];
+}
+
 export const otherParentSummaryList = (
   { sectionTitles, keys, visuallyHiddenTexts, ...content }: SummaryListsContent,
   userCase: Partial<CaseWithId>
@@ -433,77 +509,7 @@ export const otherParentSummaryList = (
           changeUrl: Urls.LA_PORTAL_OTHER_PARENT_EXISTS,
         },
         ...(userCase.otherParentExists === YesOrNo.YES
-          ? [
-              {
-                key: keys.fullName,
-                visuallyHiddenText: visuallyHiddenTexts.otherParentFullName,
-                value: userCase.otherParentFirstNames + ' ' + userCase.otherParentLastNames,
-                changeUrl: Urls.LA_PORTAL_OTHER_PARENT_FULL_NAME,
-              },
-              {
-                key: keys.otherParentResponsibility,
-                visuallyHiddenText: visuallyHiddenTexts.otherParentResponsibilityReason,
-                valueHtml: formatResponsibilityReasons(
-                  userCase.otherParentResponsibilityReason ?? [],
-                  userCase.otherParentOtherResponsibilityReason ? userCase.otherParentOtherResponsibilityReason : '',
-                  content.responsibilityReasons,
-                  ''
-                ),
-                changeUrl: Urls.LA_PORTAL_OTHER_PARENT_RESPONSIBILITY_GRANTED,
-              },
-              {
-                key: keys.addressKnown,
-                visuallyHiddenText: visuallyHiddenTexts.otherParentAddressKnown,
-                valueHtml:
-                  userCase.otherParentAddressKnown === YesOrNo.NO
-                    ? getNotSureReasonElement(
-                        content,
-                        userCase,
-                        content.yesNoNotsure[userCase.otherParentAddressKnown],
-                        'otherParentAddressNotKnownReason'
-                      )
-                    : userCase.otherParentAddressKnown
-                    ? content.yesNoNotsure[userCase.otherParentAddressKnown]
-                    : '',
-                changeUrl: Urls.LA_PORTAL_OTHER_PARENT_ADDRESS_KNOWN,
-              },
-              ...(userCase.otherParentAddressKnown === YesOrNo.YES
-                ? [
-                    {
-                      key: keys.address,
-                      visuallyHiddenText: visuallyHiddenTexts.otherParentAddress,
-                      valueHtml: getFormattedAddress(userCase, FieldPrefix.OTHER_PARENT),
-                      changeUrl: Urls.LA_PORTAL_OTHER_PARENT_MANUAL_ADDRESS,
-                    },
-                  ]
-                : []),
-              ...(userCase.otherParentAddressKnown === YesOrNo.YES
-                ? [
-                    {
-                      key: keys.addressConfirmedDate,
-                      visuallyHiddenText: visuallyHiddenTexts.otherParentLastAddressDate,
-                      valueHtml: getFormattedDate(userCase.otherParentLastAddressDate, 'en'),
-                      changeUrl: Urls.LA_PORTAL_OTHER_PARENT_LAST_ADDRESS_CONFIRMED,
-                    },
-                  ]
-                : []),
-              {
-                key: keys.servedWith,
-                visuallyHiddenText: visuallyHiddenTexts.otherParentServedWith,
-                valueHtml:
-                  userCase.otherParentServedWith === YesOrNo.NO
-                    ? getNotSureReasonElement(
-                        content,
-                        userCase,
-                        content.yesNoNotsure[userCase.otherParentServedWith],
-                        'otherParentNotServedWithReason'
-                      )
-                    : userCase.otherParentServedWith
-                    ? content.yesNoNotsure[userCase.otherParentServedWith]
-                    : '',
-                changeUrl: Urls.LA_PORTAL_OTHER_PARENT_SERVED_WITH,
-              },
-            ]
+          ? getOtherParentRows(keys, visuallyHiddenTexts, userCase, content)
           : []),
       ],
       content
