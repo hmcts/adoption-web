@@ -50,4 +50,14 @@ describe('application > save-as-draft > SaveAsDraftGetController', () => {
     expect(req.session.userCase.canPaymentIgnored).toBe(true);
     expect(res.render).toHaveBeenCalled();
   });
+
+  test('should log error and still render when getCases rejects', async () => {
+    (getCaseApiMock as jest.Mock).mockReturnValue({
+      getCases: jest.fn().mockRejectedValue(new Error('API failure')),
+    });
+
+    await controller.get(req, res);
+    expect(req.locals.logger.error).toHaveBeenCalledWith('API failure');
+    expect(res.render).toHaveBeenCalled();
+  });
 });
