@@ -261,9 +261,7 @@ function getBirthFatherResponsibilityRows(
   return [
     {
       key: keys.responsibility,
-      valueHtml: userCase.birthFatherResponsibility
-        ? content.yesNoNotsure[userCase.birthFatherResponsibility]
-        : '',
+      valueHtml: userCase.birthFatherResponsibility ? content.yesNoNotsure[userCase.birthFatherResponsibility] : '',
       changeUrl: Urls.LA_PORTAL_BIRTH_FATHER_PARENTAL_RESPONSIBILITY,
       classes: 'govuk-summary-list__row--no-border',
     },
