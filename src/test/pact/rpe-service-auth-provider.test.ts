@@ -1,4 +1,3 @@
-import { MatchersV2 } from '@pact-foundation/pact';
 import type { InteractionObject } from '@pact-foundation/pact/src/dsl/interaction';
 import config from 'config';
 import { pactWith } from 'jest-pact';
@@ -6,7 +5,7 @@ import { when } from 'jest-when';
 
 import { getTokenFromApi } from '../../main/app/auth/service/get-service-auth-token';
 
-const { string } = MatchersV2;
+
 
 jest.mock('otplib', () => ({
   authenticator: {
@@ -31,7 +30,7 @@ pactWith(
         headers: {
           'Content-Type': 'text/plain;charset=ISO-8859-1',
         },
-        body: string('someMicroServiceToken'),
+        body: 'someMicroServiceToken',
       };
 
       const serviceAuthTokenRequest = {
