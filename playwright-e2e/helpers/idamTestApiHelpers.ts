@@ -13,10 +13,6 @@ let cachedAccessToken: string | null = null;
  * @returns {Promise<string | null>} The access token if successful, otherwise null
  */
 export async function getAccessToken(): Promise<string | null> {
-  if (cachedAccessToken) {
-    console.log('Returning cached token');
-    return cachedAccessToken;
-  }
   try {
     const data = {
       grant_type: 'client_credentials',
