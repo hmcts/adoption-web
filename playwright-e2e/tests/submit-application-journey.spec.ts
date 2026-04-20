@@ -36,6 +36,49 @@ test.describe('e2e submit journeys', () => {
 
   const e2eTestTags = { tag: ['@e2e', '@citizen', '@accessibility'] };
 
+  test('submitting application as single parent', e2eTestTags, async ({ page, makeAxeBuilder }, testInfo) => {
+    const app = new App(page);
+    const appOneFirstName = faker.person.firstName();
+    const appOneLastName = faker.person.lastName();
+    const appOneFullname = appOneFirstName + ' ' + appOneLastName;
+    const childFirstName = faker.person.firstName();
+    const childLastName = faker.person.lastName();
+    const stringNumberOfApplicationLocator = 'alone';
+
+    // Sign in
+    await e2eJourneyHelper.citizenAdoptionSignIn(app, userEmail, userPassword, stringNumberOfApplicationLocator);
+
+    // Date child move in with you
+    await e2eJourneyHelper.citizenAdoptionDateChildMovedIn(app);
+
+    // Child's details before adoption
+    await e2eJourneyHelper.citzenAdoptionChildDetailsBeforeAdoption(app, appOneFirstName, appOneLastName);
+
+    // Child details after adoption
+    await e2eJourneyHelper.citizenAdoptionChildDetailsAfterAdoption(app, childFirstName, childLastName);
+
+    // Social Worker Details
+    await e2eJourneyHelper.citizenAdoptionSocialWorkDetails(app);
+
+    // The family court details
+    await e2eJourneyHelper.citizenAdoptionFamilyCourtDetails(app);
+
+    // First applicant Your personal details
+    await e2eJourneyHelper.citizenAdoptionApplicationSingleParentPersonalDetails(app);
+
+    // First applicant Your contact details
+    await e2eJourneyHelper.citizenAdoptionApplicantSingleParentContactDetails(app);
+
+    // submit
+    await e2eJourneyHelper.citizenAdoptionSubmitApplicationSingleParent(
+      app,
+      appOneFullname,
+      stringNumberOfApplicationLocator
+    );
+
+    await runAccessibilityScan(makeAxeBuilder, testInfo);
+  });
+
   test(
     'submitting application where spouse is not a partner',
     e2eTestTags,
@@ -114,12 +157,7 @@ test.describe('e2e submit journeys', () => {
       const stringNumberOfApplicationLocator = 'spouseOrCivilPartner';
 
       // Sign in
-      await e2eJourneyHelper.citizenAdoptionSignInWithPartner(
-        app,
-        userEmail,
-        userPassword,
-        stringNumberOfApplicationLocator
-      );
+      await e2eJourneyHelper.citizenAdoptionSignIn(app, userEmail, userPassword, stringNumberOfApplicationLocator);
 
       // Date child moved in with you
       await e2eJourneyHelper.citizenAdoptionDateChildMovedIn(app);
