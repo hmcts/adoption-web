@@ -45,8 +45,15 @@ pactWith(
           headers: {
             accept: 'application/json',
           },
-          query:
-            'application_type=all&channel=default&event=issue&jurisdiction1=family&jurisdiction2=family+court&keyword=ApplyAdoption&service=adoption',
+          query: {
+            application_type: 'all',
+            channel: 'default',
+            event: 'issue',
+            jurisdiction1: 'family',
+            jurisdiction2: 'family court',
+            keyword: 'ApplyAdoption',
+            service: 'adoption',
+          },
         },
       };
 
