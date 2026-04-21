@@ -5,7 +5,8 @@ import type { LoggerInstance } from 'winston';
 import { getAddressesFromPostcode } from '../../main/app/postcode/postcode-lookup-api';
 import { validPostcode200Response } from '../unit/utils/mockPostcodeResponses';
 
-const { pactWith } = require('jest-pact');
+import { pactWith } from 'jest-pact';
+import type { InteractionObject } from '@pact-foundation/pact/src/dsl/interaction';
 
 pactWith(
   {
@@ -82,7 +83,7 @@ pactWith(
           headers: {
             accept: 'application/json',
           },
-          query: 'key=ssshhh&lr=EN&postcode=SW1A%201AB',
+          query: { key: 'ssshhh', lr: 'EN', postcode: 'SW1A 1AB' },
         },
       };
 
@@ -98,7 +99,7 @@ pactWith(
           state: 'adoption-web makes request to get addresses from postcode-lookup',
           ...postcodeLookupRequest,
           willRespondWith: postcodeLookupSuccessResponse,
-        });
+        } as unknown as InteractionObject);
       });
 
       it('returns a successful body', async () => {
