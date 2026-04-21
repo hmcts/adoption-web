@@ -1,12 +1,11 @@
+import type { InteractionObject } from '@pact-foundation/pact/src/dsl/interaction';
 import config from 'config';
+import { pactWith } from 'jest-pact';
 import { when } from 'jest-when';
 import type { LoggerInstance } from 'winston';
 
 import { getAddressesFromPostcode } from '../../main/app/postcode/postcode-lookup-api';
 import { validPostcode200Response } from '../unit/utils/mockPostcodeResponses';
-
-import { pactWith } from 'jest-pact';
-import type { InteractionObject } from '@pact-foundation/pact/src/dsl/interaction';
 
 pactWith(
   {

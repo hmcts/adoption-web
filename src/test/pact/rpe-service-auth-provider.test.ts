@@ -5,8 +5,6 @@ import { when } from 'jest-when';
 
 import { getTokenFromApi } from '../../main/app/auth/service/get-service-auth-token';
 
-
-
 jest.mock('otplib', () => ({
   authenticator: {
     generate: jest.fn(() => '784467'),

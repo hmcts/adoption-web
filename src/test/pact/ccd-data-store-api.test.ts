@@ -4,10 +4,11 @@ jest.mock('../../main/app/auth/service/get-service-auth-token', () => ({
   getServiceAuthToken: jest.fn(() => 'mock-service-auth-token'),
 }));
 
+import * as path from 'path';
+
 import { MatchersV3, PactV3 } from '@pact-foundation/pact';
 import config from 'config';
 import { when } from 'jest-when';
-import * as path from 'path';
 import type { LoggerInstance } from 'winston';
 
 import { getCaseApi } from '../../main/app/case/CaseApi';
