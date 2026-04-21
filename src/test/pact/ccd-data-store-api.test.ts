@@ -4,378 +4,330 @@ jest.mock('../../main/app/auth/service/get-service-auth-token', () => ({
   getServiceAuthToken: jest.fn(() => 'mock-service-auth-token'),
 }));
 
+import { MatchersV3, PactV3 } from '@pact-foundation/pact';
 import config from 'config';
 import { when } from 'jest-when';
+import * as path from 'path';
 import type { LoggerInstance } from 'winston';
 
 import { getCaseApi } from '../../main/app/case/CaseApi';
+import { Adoption } from '../../main/app/case/definition';
 
-const { pactWith } = require('jest-pact');
+const { like } = MatchersV3;
 
 config.get = jest.fn();
 
-pactWith(
-  {
-    consumer: 'adoption-web',
-    provider: 'ccdDataStoreAPI_Cases',
-    logLevel: 'debug',
-  },
-  provider => {
-    let caseApi;
-    const userDetails = {
-      accessToken: 'mock-user-access-token',
-      id: '123456',
-      email: 'user@hmcts.net',
-      givenName: 'Firstname',
-      familyName: 'Surname',
-      roles: ['adoption-citizen-user'],
+const userDetails = {
+  accessToken: 'mock-user-access-token',
+  id: '123456',
+  email: 'user@hmcts.net',
+  givenName: 'Firstname',
+  familyName: 'Surname',
+  roles: ['adoption-citizen-user'],
+};
+
+const pactOptions = {
+  consumer: 'adoption-web',
+  provider: 'ccdDataStoreAPI_Cases',
+  logLevel: 'debug' as const,
+  dir: path.resolve(process.cwd(), 'pact/pacts'),
+};
+
+jest.setTimeout(30000);
+
+describe('Pact between adoption-web and ccdDataStoreAPI_Cases', () => {
+  describe('ccd_data_store getCases API', () => {
+    const CASES = [
+      {
+        id: '123456',
+        state: 'Draft',
+        case_data: { applyingWith: 'alone' },
+      },
+    ];
+
+    it('returns all cases for a user', async () => {
+      const provider = new PactV3(pactOptions);
+
+      await provider
+        .addInteraction({
+          states: [{ description: 'adoption-web makes request to get cases' }],
+          uponReceiving: 'a request to get cases',
+          withRequest: {
+            method: 'POST',
+            path: '/searchCases',
+            query: { ctid: 'A58' },
+            headers: {
+              Authorization: 'Bearer mock-user-access-token',
+              ServiceAuthorization: 'mock-service-auth-token',
+              experimental: 'true',
+              Accept: '*/*',
+              'Content-Type': 'application/json',
+            },
+            body: {
+              query: { match_all: {} },
+              sort: [{ id: { order: 'asc' } }],
+            },
+          },
+          willRespondWith: {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' },
+            body: like({
+              cases: [{ id: '123456', state: 'Draft', case_data: { applyingWith: 'alone' } }],
+              total: 1,
+            }),
+          },
+        })
+        .executeTest(async mockServer => {
+          const { Logger } = require('@hmcts/nodejs-logging');
+          const logger: LoggerInstance = Logger.getLogger('server');
+          when(config.get).calledWith('services.case.url').mockReturnValue(mockServer.url);
+          const caseApi = getCaseApi(userDetails, logger);
+          const cases = await caseApi.getCases();
+          expect(cases).toEqual(CASES);
+        });
+    });
+  });
+
+  describe('ccd_data_store getCaseById API', () => {
+    const EXPECTED_CASE_DATA = {
+      id: '45678',
+      state: 'Draft',
+      applyingWith: 'alone',
+      status: 'Draft',
     };
 
-    beforeEach(() => {
-      const { Logger } = require('@hmcts/nodejs-logging');
-      const logger: LoggerInstance = Logger.getLogger('server');
-      when(config.get).calledWith('services.case.url').mockReturnValue(`http://127.0.0.1:${provider.opts.port}`);
-      caseApi = getCaseApi(userDetails, logger);
-    });
+    it('returns case data by id', async () => {
+      const provider = new PactV3(pactOptions);
 
-    describe('ccd_data_store getCases API', () => {
-      const CASES = [
-        {
-          id: '123456',
-          state: 'Draft',
-          case_data: { applyingWith: 'alone' },
-        },
-      ];
-
-      const getCasesSuccessResponse = {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: {
-          cases: [
-            {
-              id: '123456',
+      await provider
+        .addInteraction({
+          states: [{ description: 'adoption-web makes request to get case by id' }],
+          uponReceiving: 'a request to get case by id',
+          withRequest: {
+            method: 'GET',
+            path: '/cases/45678',
+            headers: {
+              Authorization: 'Bearer mock-user-access-token',
+              ServiceAuthorization: 'mock-service-auth-token',
+              experimental: 'true',
+              Accept: '*/*',
+              'Content-Type': 'application/json',
+            },
+          },
+          willRespondWith: {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' },
+            body: like({
+              id: '45678',
               state: 'Draft',
-              case_data: { applyingWith: 'alone' },
+              data: { applyingWith: 'alone' },
+            }),
+          },
+        })
+        .executeTest(async mockServer => {
+          const { Logger } = require('@hmcts/nodejs-logging');
+          const logger: LoggerInstance = Logger.getLogger('server');
+          when(config.get).calledWith('services.case.url').mockReturnValue(mockServer.url);
+          const caseApi = getCaseApi(userDetails, logger);
+          const caseResponse = await caseApi.getCaseById('45678');
+          expect(caseResponse).toEqual(EXPECTED_CASE_DATA);
+        });
+    });
+  });
+
+  describe('ccd_data_store createCase API', () => {
+    const EXPECTED_CASE_DATA = {
+      id: '45678',
+      state: 'Draft',
+      status: 'Draft',
+    };
+
+    it('creates a new case and return case data in response', async () => {
+      const provider = new PactV3(pactOptions);
+
+      await provider
+        .addInteraction({
+          states: [{ description: 'adoption-web makes request to get citizen-create-application event token' }],
+          uponReceiving: 'a request to get citizen-create-application event token',
+          withRequest: {
+            method: 'GET',
+            path: '/case-types/A58/event-triggers/citizen-create-application',
+            headers: {
+              Authorization: 'Bearer mock-user-access-token',
+              ServiceAuthorization: 'mock-service-auth-token',
+              experimental: 'true',
+              Accept: '*/*',
+              'Content-Type': 'application/json',
             },
-          ],
-          total: 1,
-        },
-      };
-
-      const getCasesRequest = {
-        uponReceiving: 'a request to get cases',
-        withRequest: {
-          method: 'POST',
-          path: '/searchCases',
-          query: 'ctid=A58',
-
-          headers: {
-            Authorization: 'Bearer mock-user-access-token',
-            ServiceAuthorization: 'mock-service-auth-token',
-            experimental: 'true',
-            Accept: '*/*',
-            'Content-Type': 'application/json',
           },
-          body: {
-            query: {
-              match_all: {},
+          willRespondWith: {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' },
+            body: like({ token: 'create-case-event-token' }),
+          },
+        })
+        .addInteraction({
+          states: [{ description: 'adoption-web makes request to create case' }],
+          uponReceiving: 'a request to create a new case',
+          withRequest: {
+            method: 'POST',
+            path: '/case-types/A58/cases',
+            headers: {
+              Authorization: 'Bearer mock-user-access-token',
+              ServiceAuthorization: 'mock-service-auth-token',
+              experimental: 'true',
+              Accept: '*/*',
+              'Content-Type': 'application/json',
             },
-            sort: [{ id: { order: 'asc' } }],
-          },
-        },
-      };
-
-      beforeEach(() => {
-        return provider.addInteraction({
-          state: 'adoption-web makes request to get cases',
-          ...getCasesRequest,
-          willRespondWith: getCasesSuccessResponse,
-        });
-      });
-
-      it('returns all cases for a user', async () => {
-        const cases = await caseApi.getCases();
-        expect(cases).toEqual(CASES);
-      });
-    });
-
-    describe('ccd_data_store getCaseById API', () => {
-      const EXPECTED_CASE_DATA = {
-        id: '45678',
-        state: 'Draft',
-        applyingWith: 'alone',
-        status: 'Draft',
-      };
-
-      const getCaseByIdSuccessResponse = {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: {
-          id: '45678',
-          state: 'Draft',
-          data: { applyingWith: 'alone' },
-        },
-      };
-
-      const getCaseByIdRequest = {
-        uponReceiving: 'a request to get case by id',
-        withRequest: {
-          method: 'GET',
-          path: '/cases/45678',
-          headers: {
-            Authorization: 'Bearer mock-user-access-token',
-            ServiceAuthorization: 'mock-service-auth-token',
-            experimental: 'true',
-            Accept: '*/*',
-            'Content-Type': 'application/json',
-          },
-        },
-      };
-
-      beforeEach(() => {
-        return provider.addInteraction({
-          state: 'adoption-web makes request to get case by id',
-          ...getCaseByIdRequest,
-          willRespondWith: getCaseByIdSuccessResponse,
-        });
-      });
-
-      it('returns case data by id', async () => {
-        const caseResponse = await caseApi.getCaseById('45678');
-        expect(caseResponse).toEqual(EXPECTED_CASE_DATA);
-      });
-    });
-
-    describe('ccd_data_store createCase API', () => {
-      const EXPECTED_CASE_DATA = {
-        id: '45678',
-        state: 'Draft',
-        status: 'Draft',
-      };
-
-      const createCaseEventTokenResponse = {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: {
-          token: 'create-case-event-token',
-        },
-      };
-
-      const createCaseEventTokenRequest = {
-        uponReceiving: 'a request to get citizen-create-application event token',
-        withRequest: {
-          method: 'GET',
-          path: '/case-types/A58/event-triggers/citizen-create-application',
-          headers: {
-            Authorization: 'Bearer mock-user-access-token',
-            ServiceAuthorization: 'mock-service-auth-token',
-            experimental: 'true',
-            Accept: '*/*',
-            'Content-Type': 'application/json',
-          },
-        },
-      };
-
-      const createCaseResponse = {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: {
-          id: '45678',
-          state: 'Draft',
-          data: {},
-        },
-      };
-
-      const createCaseRequest = {
-        uponReceiving: 'a request to get citizen-create-application event token',
-        withRequest: {
-          method: 'POST',
-          path: '/case-types/A58/cases',
-          headers: {
-            Authorization: 'Bearer mock-user-access-token',
-            ServiceAuthorization: 'mock-service-auth-token',
-            experimental: 'true',
-            Accept: '*/*',
-            'Content-Type': 'application/json',
-          },
-          body: {
-            data: {
-              applicant1FirstName: userDetails.givenName,
-              applicant1LastName: userDetails.familyName,
-              applicant1Email: userDetails.email,
+            body: {
+              data: {
+                applicant1FirstName: userDetails.givenName,
+                applicant1LastName: userDetails.familyName,
+                applicant1Email: userDetails.email,
+              },
+              event: { id: 'citizen-create-application' },
+              event_token: 'create-case-event-token',
             },
-            event: { id: 'citizen-create-application' },
-            event_token: 'create-case-event-token',
           },
-        },
-      };
-
-      beforeEach(() => {
-        provider.addInteraction({
-          state: 'adoption-web makes request to get citizen-create-application event token',
-          ...createCaseEventTokenRequest,
-          willRespondWith: createCaseEventTokenResponse,
+          willRespondWith: {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' },
+            body: like({ id: '45678', state: 'Draft', data: {} }),
+          },
+        })
+        .executeTest(async mockServer => {
+          const { Logger } = require('@hmcts/nodejs-logging');
+          const logger: LoggerInstance = Logger.getLogger('server');
+          when(config.get).calledWith('services.case.url').mockReturnValue(mockServer.url);
+          const caseApi = getCaseApi(userDetails, logger);
+          const caseResponse = await caseApi.createCase(Adoption.ADOPTION, userDetails);
+          expect(caseResponse).toEqual(EXPECTED_CASE_DATA);
         });
-
-        provider.addInteraction({
-          state: 'adoption-web makes request to create case',
-          ...createCaseRequest,
-          willRespondWith: createCaseResponse,
-        });
-      });
-
-      it('creates a new case and return case data in response', async () => {
-        const caseResponse = await caseApi.createCase('adoption', userDetails);
-        expect(caseResponse).toEqual(EXPECTED_CASE_DATA);
-      });
     });
+  });
 
-    describe('ccd_data_store case-users API', () => {
-      const EXPECTED_CASE_USER_ROLES = {
-        case_users: [{ case_id: '45678', user_id: '123456', case_role: 'citizen' }],
-      };
+  describe('ccd_data_store case-users API', () => {
+    const EXPECTED_CASE_USER_ROLES = {
+      case_users: [{ case_id: '45678', user_id: '123456', case_role: 'citizen' }],
+    };
 
-      const getCaseUserRolesResponse = {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: EXPECTED_CASE_USER_ROLES,
-      };
+    it('return case assigned user roles in response for given caseId and userId', async () => {
+      const provider = new PactV3(pactOptions);
 
-      const getCaseUserRolesRequest = {
-        uponReceiving: 'a request to get case-user roles',
-        withRequest: {
-          method: 'GET',
-          path: '/case-users',
-          query: 'case_ids=45678&user_ids=123456',
-          headers: {
-            Authorization: 'Bearer mock-user-access-token',
-            ServiceAuthorization: 'mock-service-auth-token',
-            experimental: 'true',
-            Accept: '*/*',
-            'Content-Type': 'application/json',
-          },
-        },
-      };
-
-      beforeEach(() => {
-        provider.addInteraction({
-          state: 'adoption-web makes request to get case-users roles',
-          ...getCaseUserRolesRequest,
-          willRespondWith: getCaseUserRolesResponse,
-        });
-      });
-
-      it('return case assigned user roles in response for given caseId and userId', async () => {
-        const caseUserRoles = await caseApi.getCaseUserRoles('45678', userDetails.id);
-        expect(caseUserRoles).toEqual(EXPECTED_CASE_USER_ROLES);
-      });
-    });
-
-    describe('ccd_data_store sendEvent API', () => {
-      const EXPECTED_CASE_DATA = {
-        id: '45678',
-        state: 'Draft',
-        applicant1FirstNames: 'Updated first name',
-        applicant1LastNames: 'Updated last name',
-        status: 'Draft',
-      };
-
-      const getEventTokenResponse = {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: {
-          token: 'update-case-event-token',
-        },
-      };
-
-      const getEventTokenRequest = {
-        uponReceiving: 'a request to get citizen-update-application event token',
-        withRequest: {
-          method: 'GET',
-          path: '/cases/45678/event-triggers/citizen-update-application',
-          headers: {
-            Authorization: 'Bearer mock-user-access-token',
-            ServiceAuthorization: 'mock-service-auth-token',
-            experimental: 'true',
-            Accept: '*/*',
-            'Content-Type': 'application/json',
-          },
-        },
-      };
-
-      const sendCaseEventResponse = {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: {
-          id: '45678',
-          state: 'Draft',
-          data: {
-            applicant1FirstName: 'Updated first name',
-            applicant1LastName: 'Updated last name',
-          },
-          status: 'Draft',
-        },
-      };
-
-      const sendCaseEventRequest = {
-        uponReceiving: 'a request to send citizen-update-application event',
-        withRequest: {
-          method: 'POST',
-          path: '/cases/45678/events',
-          headers: {
-            Authorization: 'Bearer mock-user-access-token',
-            ServiceAuthorization: 'mock-service-auth-token',
-            experimental: 'true',
-            Accept: '*/*',
-            'Content-Type': 'application/json',
-          },
-          body: {
-            data: {
-              applicant1FirstNames: 'Updated first name',
-              applicant1LastNames: 'Updated last name',
+      await provider
+        .addInteraction({
+          states: [{ description: 'adoption-web makes request to get case-users roles' }],
+          uponReceiving: 'a request to get case-user roles',
+          withRequest: {
+            method: 'GET',
+            path: '/case-users',
+            query: { case_ids: '45678', user_ids: '123456' },
+            headers: {
+              Authorization: 'Bearer mock-user-access-token',
+              ServiceAuthorization: 'mock-service-auth-token',
+              experimental: 'true',
+              Accept: '*/*',
+              'Content-Type': 'application/json',
             },
-            event: { id: 'citizen-update-application' },
-            event_token: 'update-case-event-token',
           },
-        },
-      };
-
-      beforeEach(() => {
-        provider.addInteraction({
-          state: 'adoption-web makes request to get citizen-update-application event token',
-          ...getEventTokenRequest,
-          willRespondWith: getEventTokenResponse,
+          willRespondWith: {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' },
+            body: like(EXPECTED_CASE_USER_ROLES),
+          },
+        })
+        .executeTest(async mockServer => {
+          const { Logger } = require('@hmcts/nodejs-logging');
+          const logger: LoggerInstance = Logger.getLogger('server');
+          when(config.get).calledWith('services.case.url').mockReturnValue(mockServer.url);
+          const caseApi = getCaseApi(userDetails, logger);
+          const caseUserRoles = await caseApi.getCaseUserRoles('45678', userDetails.id);
+          expect(caseUserRoles).toEqual(EXPECTED_CASE_USER_ROLES);
         });
-
-        provider.addInteraction({
-          state: 'adoption-web makes request to send case event',
-          ...sendCaseEventRequest,
-          willRespondWith: sendCaseEventResponse,
-        });
-      });
-
-      it('updates case and return case data in response', async () => {
-        const caseResponse = await caseApi.sendEvent(
-          '45678',
-          { applicant1FirstNames: 'Updated first name', applicant1LastNames: 'Updated last name' },
-          'citizen-update-application'
-        );
-        expect(caseResponse).toEqual(EXPECTED_CASE_DATA);
-      });
     });
-  }
-);
+  });
+
+  describe('ccd_data_store sendEvent API', () => {
+    const EXPECTED_CASE_DATA = {
+      id: '45678',
+      state: 'Draft',
+      applicant1FirstNames: 'Updated first name',
+      applicant1LastNames: 'Updated last name',
+      status: 'Draft',
+    };
+
+    it('updates case and return case data in response', async () => {
+      const provider = new PactV3(pactOptions);
+
+      await provider
+        .addInteraction({
+          states: [{ description: 'adoption-web makes request to get citizen-update-application event token' }],
+          uponReceiving: 'a request to get citizen-update-application event token',
+          withRequest: {
+            method: 'GET',
+            path: '/cases/45678/event-triggers/citizen-update-application',
+            headers: {
+              Authorization: 'Bearer mock-user-access-token',
+              ServiceAuthorization: 'mock-service-auth-token',
+              experimental: 'true',
+              Accept: '*/*',
+              'Content-Type': 'application/json',
+            },
+          },
+          willRespondWith: {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' },
+            body: like({ token: 'update-case-event-token' }),
+          },
+        })
+        .addInteraction({
+          states: [{ description: 'adoption-web makes request to send case event' }],
+          uponReceiving: 'a request to send citizen-update-application event',
+          withRequest: {
+            method: 'POST',
+            path: '/cases/45678/events',
+            headers: {
+              Authorization: 'Bearer mock-user-access-token',
+              ServiceAuthorization: 'mock-service-auth-token',
+              experimental: 'true',
+              Accept: '*/*',
+              'Content-Type': 'application/json',
+            },
+            body: {
+              data: {
+                applicant1FirstName: 'Updated first name',
+                applicant1LastName: 'Updated last name',
+              },
+              event: { id: 'citizen-update-application' },
+              event_token: 'update-case-event-token',
+            },
+          },
+          willRespondWith: {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' },
+            body: like({
+              id: '45678',
+              state: 'Draft',
+              data: {
+                applicant1FirstName: 'Updated first name',
+                applicant1LastName: 'Updated last name',
+              },
+              status: 'Draft',
+            }),
+          },
+        })
+        .executeTest(async mockServer => {
+          const { Logger } = require('@hmcts/nodejs-logging');
+          const logger: LoggerInstance = Logger.getLogger('server');
+          when(config.get).calledWith('services.case.url').mockReturnValue(mockServer.url);
+          const caseApi = getCaseApi(userDetails, logger);
+          const caseResponse = await caseApi.triggerEvent(
+            '45678',
+            { applicant1FirstNames: 'Updated first name', applicant1LastNames: 'Updated last name' },
+            'citizen-update-application'
+          );
+          expect(caseResponse).toEqual(EXPECTED_CASE_DATA);
+        });
+    });
+  });
+});
