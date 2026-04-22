@@ -246,7 +246,6 @@ function prepareSummaryList(
   ];
 }
 
-//Also used for BirthFather
 function getBirthFatherResponsibilityRows(
   keys: Record<string, string>,
   visuallyHiddenTexts: Record<string, string>,
@@ -279,7 +278,7 @@ function getBirthFatherResponsibilityRows(
     },
   ];
 }
-
+//Also used for BirthFather
 function fieldPrefixBirthMother(
   keys: Record<string, string>,
   visuallyHiddenTexts: Record<string, string>,
