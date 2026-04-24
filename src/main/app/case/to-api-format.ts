@@ -40,7 +40,7 @@ const fields: ToApiConverters = {
     applicant1AdditionalNames:
       data.applicant1HasOtherNames === YesOrNo.YES
         ? (data.applicant1AdditionalNames || []).map(item => ({
-            id: item.id!,
+            id: item.id ?? '',
             value: { firstNames: `${item.firstNames}`, lastNames: `${item.lastNames}` },
           }))
         : [],
@@ -49,26 +49,26 @@ const fields: ToApiConverters = {
     applicant2AdditionalNames:
       data.applicant2HasOtherNames === YesOrNo.YES
         ? (data.applicant2AdditionalNames || []).map(item => ({
-            id: item.id!,
+            id: item.id ?? '',
             value: { firstNames: `${item.firstNames}`, lastNames: `${item.lastNames}` },
           }))
         : [],
   }),
   birthMotherAdditionalNationalities: data => ({
     birthMotherOtherNationalities: (data.birthMotherAdditionalNationalities || []).map(item => ({
-      id: item.id!,
+      id: item.id ?? '',
       value: { country: `${item.country}` },
     })),
   }),
   birthFatherAdditionalNationalities: data => ({
     birthFatherOtherNationalities: (data.birthFatherAdditionalNationalities || []).map(item => ({
-      id: item.id!,
+      id: item.id ?? '',
       value: { country: `${item.country}` },
     })),
   }),
   childrenAdditionalNationalities: data => ({
     childrenAdditionalNationalities: (data.childrenAdditionalNationalities || []).map(item => ({
-      id: item.id!,
+      id: item.id ?? '',
       value: { country: `${item.country}` },
     })),
   }),

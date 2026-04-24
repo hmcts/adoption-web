@@ -88,13 +88,15 @@ describe('children > placement-order-check-your-answers > content', () => {
   });
 
   test('should create correct items for summaryList when there are more than one placement order', () => {
-    commonContent.userCase!.placementOrders!.push({
+    commonContent.userCase?.placementOrders?.push({
       placementOrderId: 'MOCK_ID2',
       placementOrderNumber: 'MOCK_NUMBER2',
       placementOrderCourt: 'MOCK_COURT2',
       placementOrderDate: { day: '12', month: '05', year: '2020' },
     });
-    commonContent.userCase!.selectedPlacementOrderId = 'MOCK_ID2';
+    if (commonContent.userCase) {
+      commonContent.userCase.selectedPlacementOrderId = 'MOCK_ID2';
+    }
 
     const generatedContent = generateContent(commonContent);
     expect(generatedContent.placementOrderListItems).toEqual([

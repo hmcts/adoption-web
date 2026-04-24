@@ -73,7 +73,7 @@ describe('birth-mother > nationality > content', () => {
   });
 
   test('should call nationalityFields when form.fields is called', () => {
-    (form.fields as FormFieldsFn)(commonContent.userCase!);
+    (form.fields as FormFieldsFn)(commonContent.userCase ?? {});
     expect(nationalityFields).toHaveBeenCalledWith(
       commonContent.userCase,
       FieldPrefix.BIRTH_MOTHER,

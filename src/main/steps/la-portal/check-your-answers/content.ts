@@ -160,7 +160,7 @@ export const enContent = {
 };
 
 const en = (content: CommonContent) => {
-  const userCase = content.userCase!;
+  const userCase = content.userCase ?? {};
   return {
     ...enContent,
     language: content.language,
@@ -314,7 +314,7 @@ const cyContent: typeof enContent = {
 };
 
 const cy: typeof en = (content: CommonContent) => {
-  const userCase = content.userCase!;
+  const userCase = content.userCase ?? {};
   return {
     ...cyContent,
     language: content.language,

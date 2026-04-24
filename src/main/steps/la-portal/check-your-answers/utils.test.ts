@@ -97,6 +97,12 @@ describe('childSummaryList', () => {
   ])('return correct summary list items when %#', ({ userCase, expected }) => {
     expect(childSummaryList(enContent, userCase)).toStrictEqual(expected);
   });
+
+  it('shows placeholder full name row when childrenFirstName and childrenLastName are absent', () => {
+    const userCase = { ...mockUserCase, childrenFirstName: undefined, childrenLastName: undefined };
+    const result = childSummaryList(enContent, userCase);
+    expect(result.rows[0]).toStrictEqual({ key: { text: 'Full name' }, value: { text: ' ' } });
+  });
 });
 
 describe('birthParentSummaryList', () => {
@@ -759,6 +765,45 @@ describe('birthParentSummaryList', () => {
   ])('return correct summary list items when %#', ({ userCase, fieldPrefix, expected }) => {
     expect(birthParentSummaryList(enContent, userCase, fieldPrefix)).toStrictEqual(expected);
   });
+
+  it('shows servedWith NO with reason for birth mother', () => {
+    const userCase = {
+      ...mockUserCase,
+      birthMotherServedWith: YesOrNo.NO,
+      birthMotherNotServedWithReason: 'MOCK_REASON',
+    };
+    const result = birthParentSummaryList(enContent, userCase, FieldPrefix.BIRTH_MOTHER);
+    const servedWithRow = result.rows.find(r => r.key?.text === 'Any document or court orders to be sent?');
+    expect(servedWithRow?.value?.html).toBe(
+      'No<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">Reason: </span>MOCK_REASON</p>'
+    );
+  });
+
+  it('renders OTHER-only responsibility reasons for birth father', () => {
+    const userCase = {
+      ...mockUserCase,
+      birthFatherResponsibilityReason: [ResponsibilityReasons.OTHER],
+      birthFatherOtherResponsibilityReason: 'MOCK_OTHER_REASON',
+    };
+    const result = birthParentSummaryList(enContent, userCase, FieldPrefix.BIRTH_FATHER);
+    const reasonRow = result.rows.find(r => r.key?.text === 'Reason' && r.key?.html === ' ');
+    expect(reasonRow?.value?.html).toBe(
+      '<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">Reason: </span> MOCK_OTHER_REASON'
+    );
+  });
+
+  it('renders OTHER combined with other responsibility reasons for birth father', () => {
+    const userCase = {
+      ...mockUserCase,
+      birthFatherResponsibilityReason: [ResponsibilityReasons.BIRTH_CERTIFICATE, ResponsibilityReasons.OTHER],
+      birthFatherOtherResponsibilityReason: 'MOCK_OTHER_REASON',
+    };
+    const result = birthParentSummaryList(enContent, userCase, FieldPrefix.BIRTH_FATHER);
+    const reasonRow = result.rows.find(r => r.key?.text === 'Reason' && r.key?.html === ' ');
+    expect(reasonRow?.value?.html).toBe(
+      '<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">Reason: </span> Birth certificate<br>MOCK_OTHER_REASON'
+    );
+  });
 });
 
 describe('otherParentSummaryList', () => {
@@ -970,6 +1015,19 @@ describe('otherParentSummaryList', () => {
     },
   ])('return correct summary list items when %#', ({ userCase, expected }) => {
     expect(otherParentSummaryList(enContent, userCase)).toStrictEqual(expected);
+  });
+
+  it('shows servedWith NO with reason for other parent', () => {
+    const userCase = {
+      ...mockUserCase,
+      otherParentServedWith: YesOrNo.NO,
+      otherParentNotServedWithReason: 'MOCK_REASON',
+    };
+    const result = otherParentSummaryList(enContent, userCase);
+    const servedWithRow = result.rows.find(r => r.key?.text === 'Any document or court orders to be sent?');
+    expect(servedWithRow?.value?.html).toBe(
+      'No<p class="govuk-!-margin-top-0"><span class="govuk-!-font-weight-bold">Reason: </span>MOCK_REASON</p>'
+    );
   });
 });
 
