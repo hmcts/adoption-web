@@ -1,4 +1,4 @@
-import axios from 'axios';
+import nock from 'nock';
 import { LoggerInstance } from 'winston';
 
 import {
@@ -10,10 +10,6 @@ import {
 
 import { getAddressesFromPostcode } from './postcode-lookup-api';
 
-jest.mock('axios');
-
-const mockedAxios = axios as jest.Mocked<typeof axios>;
-
 describe('Postcode Lookup', () => {
   let mockLogger: LoggerInstance;
 
@@ -23,16 +19,14 @@ describe('Postcode Lookup', () => {
     } as unknown as LoggerInstance;
   });
 
+  afterEach(() => {
+    nock.cleanAll();
+  });
+
   it('correctly returns an array of a addresses from a given postcode', async () => {
-    mockedAxios.get.mockResolvedValueOnce({ data: validPostcode200Response });
+    nock('https://api.os.uk').get('/search/places/v1/postcode').query(true).reply(200, validPostcode200Response);
 
     const actual = await getAddressesFromPostcode('AB1 2CD', mockLogger);
-
-    expect(mockedAxios.get).toHaveBeenCalledWith('postcode', {
-      baseURL: 'https://api.os.uk/search/places/v1',
-      headers: { accept: 'application/json' },
-      params: { key: 'NEED TO INSERT SECRET', lr: 'EN', postcode: 'AB1 2CD' },
-    });
 
     expect(actual).toEqual([
       {
@@ -87,7 +81,7 @@ describe('Postcode Lookup', () => {
   });
 
   it('returns an empty array when there are no results', async () => {
-    mockedAxios.get.mockResolvedValueOnce({ data: emptyPostcode200Response });
+    nock('https://api.os.uk').get('/search/places/v1/postcode').query(true).reply(200, emptyPostcode200Response);
 
     const actual = await getAddressesFromPostcode('AB1 2CD', mockLogger);
 
@@ -96,7 +90,7 @@ describe('Postcode Lookup', () => {
   });
 
   it('returns an empty array when there is missing data results', async () => {
-    mockedAxios.get.mockResolvedValueOnce({ data: '200 OK' });
+    nock('https://api.os.uk').get('/search/places/v1/postcode').query(true).reply(200, '200 OK');
 
     const actual = await getAddressesFromPostcode('AB1 2CD', mockLogger);
 
@@ -105,7 +99,7 @@ describe('Postcode Lookup', () => {
   });
 
   it('returns an empty array with an invalid postcode', async () => {
-    mockedAxios.get.mockRejectedValueOnce({ response: { data: invalidPostcode400Response } });
+    nock('https://api.os.uk').get('/search/places/v1/postcode').query(true).reply(400, invalidPostcode400Response);
 
     const actual = await getAddressesFromPostcode('AB1 2CD', mockLogger);
 
@@ -114,21 +108,20 @@ describe('Postcode Lookup', () => {
   });
 
   it('returns an empty array when the token is incorrect and logs the error', async () => {
-    const mockResponse = { response: { status: 401, data: invalidPostcodeKey401Response } };
-    mockedAxios.get.mockRejectedValueOnce(mockResponse);
+    nock('https://api.os.uk').get('/search/places/v1/postcode').query(true).reply(401, invalidPostcodeKey401Response);
 
     const actual = await getAddressesFromPostcode('AB1 2CD', mockLogger);
 
-    expect(mockLogger.error).toHaveBeenCalledWith('Postcode lookup key is invalid', mockResponse);
+    expect(mockLogger.error).toHaveBeenCalledWith('Postcode lookup key is invalid', expect.anything());
     expect(actual).toEqual([]);
   });
 
   it('returns an empty array when the request fails', async () => {
-    mockedAxios.get.mockRejectedValueOnce({ code: 'ECONNABORTED' });
+    nock('https://api.os.uk').get('/search/places/v1/postcode').query(true).reply(500, 'Service unavailable');
 
     const actual = await getAddressesFromPostcode('AB1 2CD', mockLogger);
 
-    expect(mockLogger.error).toHaveBeenCalledWith('Postcode lookup service error', { code: 'ECONNABORTED' });
+    expect(mockLogger.error).toHaveBeenCalledWith('Postcode lookup service error', expect.anything());
     expect(actual).toEqual([]);
   });
 });

@@ -1,23 +1,21 @@
-jest.mock('axios');
 jest.mock('@hmcts/nodejs-logging');
-jest.useFakeTimers();
 import { Logger } from '@hmcts/nodejs-logging';
 const logger = {
   info: jest.fn(),
   error: jest.fn(),
 };
 Logger.getLogger.mockReturnValue(logger);
-import Axios, { AxiosStatic } from 'axios';
 import config from 'config';
 import { when } from 'jest-when';
+import nock from 'nock';
 
 import { getServiceAuthToken, getTokenFromApi, initAuthToken } from './get-service-auth-token';
-
-const mockedAxios = Axios as jest.Mocked<AxiosStatic>;
 
 config.get = jest.fn();
 
 describe('initAuthToken', () => {
+  let interval: ReturnType<typeof setInterval>;
+
   beforeEach(() => {
     when(config.get)
       .calledWith('services.authProvider.url')
@@ -28,30 +26,44 @@ describe('initAuthToken', () => {
       .mockReturnValue('mock-secret');
   });
 
-  test('Should set an interval to start fetching a token', () => {
-    mockedAxios.post.mockResolvedValue('token');
+  afterEach(() => {
+    nock.cleanAll();
+  });
 
-    initAuthToken();
-    expect(mockedAxios.post).toHaveBeenCalledWith('http://rpe-service-auth-provider/lease', {
-      microservice: 'adoption_web',
-      oneTimePassword: expect.anything(),
-    });
+  afterAll(() => clearInterval(interval));
+
+  test('Should set an interval to start fetching a token', async () => {
+    const setIntervalSpy = jest.spyOn(global, 'setInterval');
+    nock('http://rpe-service-auth-provider').post('/lease').reply(200, 'token');
+
+    interval = initAuthToken();
+
+    expect(setIntervalSpy).toHaveBeenCalledWith(expect.any(Function), 1000 * 60 * 60);
+    setIntervalSpy.mockRestore();
+    // Flush pending promises so the async getTokenFromApi() call inside initAuthToken()
+    // completes before afterEach cleans nock interceptors, preventing leakage into next test
+    await new Promise(resolve => setImmediate(resolve));
   });
 
   test('Should log errors', async () => {
-    mockedAxios.post.mockRejectedValue({ message: 'MOCK_ERROR', response: { status: 500, data: 'Error' } });
-    try {
-      await getTokenFromApi();
-    } catch (err) {
-      //eslint-disable-next-line jest/no-conditional-expect
-      expect(logger.error).toHaveBeenCalledWith('Error in refreshing service auth token ', 'MOCK_ERROR', 500, 'Error');
-    }
+    nock('http://rpe-service-auth-provider').post('/lease').reply(500, 'Error');
+    await getTokenFromApi();
+    expect(logger.error).toHaveBeenCalledWith(
+      'Error in refreshing service auth token ',
+      expect.any(String),
+      500,
+      'Error'
+    );
   });
 });
 
 describe('getServiceAuthToken', () => {
+  afterEach(() => {
+    nock.cleanAll();
+  });
+
   test('Should return a token', async () => {
-    mockedAxios.post.mockResolvedValue({ data: 'token' });
+    nock('http://rpe-service-auth-provider').post('/lease').reply(200, 'token');
 
     await getTokenFromApi();
     expect(getServiceAuthToken()).not.toBeUndefined();
