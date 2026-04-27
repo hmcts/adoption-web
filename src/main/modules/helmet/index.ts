@@ -2,10 +2,28 @@ import * as express from 'express';
 import { Express, RequestHandler } from 'express';
 import helmet from 'helmet';
 
-type ReferrerPolicyToken = 'no-referrer' | 'no-referrer-when-downgrade' | 'same-origin' | 'origin' | 'strict-origin' | 'origin-when-cross-origin' | 'strict-origin-when-cross-origin' | 'unsafe-url' | '';
+type ReferrerPolicyToken =
+  | 'no-referrer'
+  | 'no-referrer-when-downgrade'
+  | 'same-origin'
+  | 'origin'
+  | 'strict-origin'
+  | 'origin-when-cross-origin'
+  | 'strict-origin-when-cross-origin'
+  | 'unsafe-url'
+  | '';
 
 export interface HelmetConfig {
-  referrerPolicy: 'no-referrer' | 'no-referrer-when-downgrade' | 'same-origin' | 'origin' | 'strict-origin' | 'origin-when-cross-origin' | 'strict-origin-when-cross-origin' | 'unsafe-url' | '';
+  referrerPolicy:
+    | 'no-referrer'
+    | 'no-referrer-when-downgrade'
+    | 'same-origin'
+    | 'origin'
+    | 'strict-origin'
+    | 'origin-when-cross-origin'
+    | 'strict-origin-when-cross-origin'
+    | 'unsafe-url'
+    | '';
   crossOriginResourcePolicy: 'same-origin' | 'same-site' | 'cross-origin';
 }
 
@@ -84,7 +102,10 @@ export class Helmet {
     app.use(helmet.referrerPolicy({ policy }) as RequestHandler);
   }
 
-  private setCrossOriginResourcePolicy(app: express.Express, policy: 'same-origin' | 'same-site' | 'cross-origin'): void {
+  private setCrossOriginResourcePolicy(
+    app: express.Express,
+    policy: 'same-origin' | 'same-site' | 'cross-origin'
+  ): void {
     if (!policy) {
       throw new Error('Cross-Origin Resource Policy configuration is required');
     }
