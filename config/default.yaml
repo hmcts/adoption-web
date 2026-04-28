@@ -435,3 +435,9 @@ notificationBanner:
   messageHtml:
     en: 'Scheduled maintence on 28th September 2022 from 8:00 AM to 9:00 AM. The service will be unavailable during this time.'
     cy: 'Cynhelir cynnal a chadw ar 28ain Medi 2022 rhwng 8:00 AM a 9:00 AM. Bydd y gwasanaeth ar gael yn ystod yr amser hwn.'
+
+rateLimit:
+  enabled: true
+  windowSeconds: 60
+  maxRequests: 6
+numberOfTrustProxies: 3
