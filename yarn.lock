@@ -5486,7 +5486,7 @@ __metadata:
     jest-circus: ^29.0.0
     jest-extended: ^2.0.0
     jest-html-reporter: ^3.5.0
-    jest-pact: ^0.11.0
+    jest-pact: ^0.13.0
     jest-when: ^3.5.1
     jwt-decode: ^3.1.2
     lint-staged: ^13.0.0
@@ -12417,13 +12417,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-pact@npm:^0.11.0":
-  version: 0.11.1
-  resolution: "jest-pact@npm:0.11.1"
+"jest-pact@npm:^0.13.0":
+  version: 0.13.0
+  resolution: "jest-pact@npm:0.13.0"
   peerDependencies:
-    "@pact-foundation/pact": ^v10.0.0-beta.61 || ^10.0.2 || ^11.0.2 || ^12.0.0 || ^13.0.0
-    jest: ^24.0.0 || ^25.0.0 || ^26.0.0 || ^27.0.0 || ^28.0.0 || ^29.0.0
-  checksum: 4eb0ae7f74e7c24da1e77affb40f8f5203c2fe6b475efd1dc26d616351eba2dcfad1b4307364b1551d259995b7eeab4f5dca66c4a704d7fd552298c3e10c25af
+    "@pact-foundation/pact": ^16.0.0
+    jest: ^24.0.0 || ^25.0.0 || ^26.0.0 || ^27.0.0 || ^28.0.0 || ^29.0.0 || ^30.0.0
+  checksum: 4317f4034073749ee2cb6971e45a26d39077023bd6f1e19a935bb10b43842d6e79755119a42ab741bef6d3738ce2f5f7e324d3e10fd30231774286efb19fa4bc
   languageName: node
   linkType: hard
 
