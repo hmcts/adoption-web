@@ -1,4 +1,4 @@
-import Axios, { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import config from 'config';
 import jwt_decode from 'jwt-decode';
 
@@ -25,7 +25,7 @@ export const getUserDetails = async (
   const code = encodeURIComponent(rawCode);
   const data = `client_id=${id}&client_secret=${secret}&grant_type=authorization_code&redirect_uri=${callbackUrl}&code=${code}`;
   const headers = { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' };
-  const response: AxiosResponse<OidcResponse> = await Axios.post(tokenUrl, data, { headers });
+  const response: AxiosResponse<OidcResponse> = await axios.post(tokenUrl, data, { headers });
   const jwt = jwt_decode(response.data.id_token) as IdTokenJwtPayload;
 
   return {
@@ -49,7 +49,7 @@ export const getSystemUser = async (): Promise<UserDetails> => {
   const headers = { Accept: 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' };
   const data = `grant_type=password&username=${systemUsername}&password=${systemPassword}&client_id=${id}&client_secret=${secret}&scope=openid%20profile%20roles%20openid%20roles%20profile`;
 
-  const response: AxiosResponse<OidcResponse> = await Axios.post(tokenUrl, data, { headers });
+  const response: AxiosResponse<OidcResponse> = await axios.post(tokenUrl, data, { headers });
   const jwt = jwt_decode(response.data.id_token) as IdTokenJwtPayload;
 
   return {

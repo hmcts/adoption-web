@@ -76,6 +76,11 @@ describe('SelectAddressPostController', () => {
         mockGetParsedBody.mockReturnValue({ applicant1SelectAddress: 0, checkYourAnswersReturn: true });
         mockGetErrors.mockReturnValue([]);
         controller = new SelectAddressPostController({}, FieldPrefix.APPLICANT1);
+        (getCaseApiMock as jest.Mock).mockReturnValue({
+          triggerEvent: jest.fn().mockResolvedValue(formData),
+          addPayment: jest.fn().mockResolvedValue(formData),
+          getCases: jest.fn().mockReturnValue([]),
+        });
         req.locals.api.triggerEvent.mockResolvedValue(formData);
       });
 

@@ -137,13 +137,16 @@ export const childSummaryList = (
         },
         {
           key: keys.sexAtBirth,
-          value: content.gender[userCase.childrenSexAtBirth!],
+          value: userCase.childrenSexAtBirth ? content.gender[userCase.childrenSexAtBirth] : '',
           changeUrl: Urls.LA_PORTAL_CHILD_SEX_AT_BIRTH,
           visuallyHiddenText: visuallyHiddenTexts.childrenSexAtBirth,
         },
         {
           key: keys.nationality,
-          valueHtml: formatNationalities(userCase.childrenNationality!, userCase.childrenAdditionalNationalities!),
+          valueHtml: formatNationalities(
+            userCase.childrenNationality ?? [],
+            userCase.childrenAdditionalNationalities ?? []
+          ),
           changeUrl: Urls.LA_PORTAL_CHILD_NATIONALITY,
           visuallyHiddenText: visuallyHiddenTexts.childrenNationality,
         },
@@ -219,7 +222,9 @@ function prepareSummaryList(
           {
             key: keys.nameOnBirthCertificate,
             visuallyHiddenText: visuallyHiddenTexts.birthFatherNameOnCertificate,
-            value: content.yesNoNotsure[userCase.birthFatherNameOnCertificate!],
+            value: userCase.birthFatherNameOnCertificate
+              ? content.yesNoNotsure[userCase.birthFatherNameOnCertificate]
+              : '',
             changeUrl: Urls[`${LA_PORTAL}${urlPrefix}NAME_ON_CERTIFICATE`],
           },
         ]
@@ -241,6 +246,38 @@ function prepareSummaryList(
   ];
 }
 
+function getBirthFatherResponsibilityRows(
+  keys: Record<string, string>,
+  visuallyHiddenTexts: Record<string, string>,
+  userCase: Partial<CaseWithId>,
+  content
+) {
+  const responsibilityReasonChangeUrl =
+    userCase['birthFatherResponsibility'] === YesOrNo.YES
+      ? Urls.LA_PORTAL_BIRTH_FATHER_PARENTAL_RESPONSIBILITY_GRANTED
+      : Urls.LA_PORTAL_BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY;
+
+  return [
+    {
+      key: keys.responsibility,
+      valueHtml: userCase.birthFatherResponsibility ? content.yesNoNotsure[userCase.birthFatherResponsibility] : '',
+      changeUrl: Urls.LA_PORTAL_BIRTH_FATHER_PARENTAL_RESPONSIBILITY,
+      classes: 'govuk-summary-list__row--no-border',
+    },
+    {
+      keyHtml: ' ',
+      key: content.reason,
+      visuallyHiddenText: visuallyHiddenTexts.birthFatherResponsibilityReason,
+      valueHtml: formatResponsibilityReasons(
+        userCase['birthFatherResponsibilityReason'] ?? [],
+        userCase['birthFatherOtherResponsibilityReason'] ?? '',
+        content.responsibilityReasons,
+        content.reason + ':'
+      ),
+      changeUrl: responsibilityReasonChangeUrl,
+    },
+  ];
+}
 //Also used for BirthFather
 function fieldPrefixBirthMother(
   keys: Record<string, string>,
@@ -276,43 +313,7 @@ function fieldPrefixBirthMother(
     ...(userCase[`${prefix}StillAlive`] === YesOrNo.YES
       ? [
           ...(prefix === FieldPrefix.BIRTH_FATHER
-            ? [
-                {
-                  key: keys.responsibility,
-                  valueHtml: content.yesNoNotsure[userCase.birthFatherResponsibility!],
-                  changeUrl: Urls.LA_PORTAL_BIRTH_FATHER_PARENTAL_RESPONSIBILITY,
-                  classes: 'govuk-summary-list__row--no-border',
-                },
-                ...(userCase['birthFatherResponsibility'] === YesOrNo.YES
-                  ? [
-                      {
-                        keyHtml: ' ',
-                        key: content.reason,
-                        visuallyHiddenText: visuallyHiddenTexts.birthFatherResponsibilityReason,
-                        valueHtml: formatResponsibilityReasons(
-                          userCase['birthFatherResponsibilityReason']!,
-                          userCase['birthFatherOtherResponsibilityReason']!,
-                          content.responsibilityReasons,
-                          content.reason + ':'
-                        ),
-                        changeUrl: Urls.LA_PORTAL_BIRTH_FATHER_PARENTAL_RESPONSIBILITY_GRANTED,
-                      },
-                    ]
-                  : [
-                      {
-                        keyHtml: ' ',
-                        key: content.reason,
-                        visuallyHiddenText: visuallyHiddenTexts.birthFatherResponsibilityReason,
-                        valueHtml: formatResponsibilityReasons(
-                          userCase['birthFatherResponsibilityReason']!,
-                          userCase['birthFatherOtherResponsibilityReason']!,
-                          content.responsibilityReasons,
-                          content.reason + ':'
-                        ),
-                        changeUrl: Urls.LA_PORTAL_BIRTH_FATHER_NO_PARENTAL_RESPONSIBILITY,
-                      },
-                    ]),
-              ]
+            ? getBirthFatherResponsibilityRows(keys, visuallyHiddenTexts, userCase, content)
             : []),
           {
             key: keys.nationality,
@@ -412,6 +413,85 @@ const getNotSureReasonElement = (content, userCase, notSure, reasonFieldName): s
   }: </span>${sanitizeHtml(userCase[reasonFieldName])}</p>`;
 };
 
+function getOtherParentRows(
+  keys: Record<string, string>,
+  visuallyHiddenTexts: Record<string, string>,
+  userCase: Partial<CaseWithId>,
+  content
+) {
+  const addressKnownValueHtml =
+    userCase.otherParentAddressKnown === YesOrNo.NO
+      ? getNotSureReasonElement(
+          content,
+          userCase,
+          content.yesNoNotsure[userCase.otherParentAddressKnown],
+          'otherParentAddressNotKnownReason'
+        )
+      : (userCase.otherParentAddressKnown && content.yesNoNotsure[userCase.otherParentAddressKnown]) || '';
+
+  const servedWithValueHtml =
+    userCase.otherParentServedWith === YesOrNo.NO
+      ? getNotSureReasonElement(
+          content,
+          userCase,
+          content.yesNoNotsure[userCase.otherParentServedWith],
+          'otherParentNotServedWithReason'
+        )
+      : (userCase.otherParentServedWith && content.yesNoNotsure[userCase.otherParentServedWith]) || '';
+
+  return [
+    {
+      key: keys.fullName,
+      visuallyHiddenText: visuallyHiddenTexts.otherParentFullName,
+      value: userCase.otherParentFirstNames + ' ' + userCase.otherParentLastNames,
+      changeUrl: Urls.LA_PORTAL_OTHER_PARENT_FULL_NAME,
+    },
+    {
+      key: keys.otherParentResponsibility,
+      visuallyHiddenText: visuallyHiddenTexts.otherParentResponsibilityReason,
+      valueHtml: formatResponsibilityReasons(
+        userCase.otherParentResponsibilityReason ?? [],
+        userCase.otherParentOtherResponsibilityReason ?? '',
+        content.responsibilityReasons,
+        ''
+      ),
+      changeUrl: Urls.LA_PORTAL_OTHER_PARENT_RESPONSIBILITY_GRANTED,
+    },
+    {
+      key: keys.addressKnown,
+      visuallyHiddenText: visuallyHiddenTexts.otherParentAddressKnown,
+      valueHtml: addressKnownValueHtml,
+      changeUrl: Urls.LA_PORTAL_OTHER_PARENT_ADDRESS_KNOWN,
+    },
+    ...(userCase.otherParentAddressKnown === YesOrNo.YES
+      ? [
+          {
+            key: keys.address,
+            visuallyHiddenText: visuallyHiddenTexts.otherParentAddress,
+            valueHtml: getFormattedAddress(userCase, FieldPrefix.OTHER_PARENT),
+            changeUrl: Urls.LA_PORTAL_OTHER_PARENT_MANUAL_ADDRESS,
+          },
+        ]
+      : []),
+    ...(userCase.otherParentAddressKnown === YesOrNo.YES
+      ? [
+          {
+            key: keys.addressConfirmedDate,
+            visuallyHiddenText: visuallyHiddenTexts.otherParentLastAddressDate,
+            valueHtml: getFormattedDate(userCase.otherParentLastAddressDate, 'en'),
+            changeUrl: Urls.LA_PORTAL_OTHER_PARENT_LAST_ADDRESS_CONFIRMED,
+          },
+        ]
+      : []),
+    {
+      key: keys.servedWith,
+      visuallyHiddenText: visuallyHiddenTexts.otherParentServedWith,
+      valueHtml: servedWithValueHtml,
+      changeUrl: Urls.LA_PORTAL_OTHER_PARENT_SERVED_WITH,
+    },
+  ];
+}
+
 export const otherParentSummaryList = (
   { sectionTitles, keys, visuallyHiddenTexts, ...content }: SummaryListsContent,
   userCase: Partial<CaseWithId>
@@ -422,77 +502,11 @@ export const otherParentSummaryList = (
       [
         {
           key: keys.otherParent,
-          value: content.yesNoNotsure[userCase.otherParentExists!],
+          value: userCase.otherParentExists ? content.yesNoNotsure[userCase.otherParentExists] : '',
           changeUrl: Urls.LA_PORTAL_OTHER_PARENT_EXISTS,
         },
         ...(userCase.otherParentExists === YesOrNo.YES
-          ? [
-              {
-                key: keys.fullName,
-                visuallyHiddenText: visuallyHiddenTexts.otherParentFullName,
-                value: userCase.otherParentFirstNames + ' ' + userCase.otherParentLastNames,
-                changeUrl: Urls.LA_PORTAL_OTHER_PARENT_FULL_NAME,
-              },
-              {
-                key: keys.otherParentResponsibility,
-                visuallyHiddenText: visuallyHiddenTexts.otherParentResponsibilityReason,
-                valueHtml: formatResponsibilityReasons(
-                  userCase.otherParentResponsibilityReason!,
-                  userCase.otherParentOtherResponsibilityReason ? userCase.otherParentOtherResponsibilityReason : '',
-                  content.responsibilityReasons,
-                  ''
-                ),
-                changeUrl: Urls.LA_PORTAL_OTHER_PARENT_RESPONSIBILITY_GRANTED,
-              },
-              {
-                key: keys.addressKnown,
-                visuallyHiddenText: visuallyHiddenTexts.otherParentAddressKnown,
-                valueHtml:
-                  userCase.otherParentAddressKnown === YesOrNo.NO
-                    ? getNotSureReasonElement(
-                        content,
-                        userCase,
-                        content.yesNoNotsure[userCase.otherParentAddressKnown],
-                        'otherParentAddressNotKnownReason'
-                      )
-                    : content.yesNoNotsure[userCase.otherParentAddressKnown!],
-                changeUrl: Urls.LA_PORTAL_OTHER_PARENT_ADDRESS_KNOWN,
-              },
-              ...(userCase.otherParentAddressKnown === YesOrNo.YES
-                ? [
-                    {
-                      key: keys.address,
-                      visuallyHiddenText: visuallyHiddenTexts.otherParentAddress,
-                      valueHtml: getFormattedAddress(userCase, FieldPrefix.OTHER_PARENT),
-                      changeUrl: Urls.LA_PORTAL_OTHER_PARENT_MANUAL_ADDRESS,
-                    },
-                  ]
-                : []),
-              ...(userCase.otherParentAddressKnown === YesOrNo.YES
-                ? [
-                    {
-                      key: keys.addressConfirmedDate,
-                      visuallyHiddenText: visuallyHiddenTexts.otherParentLastAddressDate,
-                      valueHtml: getFormattedDate(userCase.otherParentLastAddressDate, 'en'),
-                      changeUrl: Urls.LA_PORTAL_OTHER_PARENT_LAST_ADDRESS_CONFIRMED,
-                    },
-                  ]
-                : []),
-              {
-                key: keys.servedWith,
-                visuallyHiddenText: visuallyHiddenTexts.otherParentServedWith,
-                valueHtml:
-                  userCase.otherParentServedWith === YesOrNo.NO
-                    ? getNotSureReasonElement(
-                        content,
-                        userCase,
-                        content.yesNoNotsure[userCase.otherParentServedWith],
-                        'otherParentNotServedWithReason'
-                      )
-                    : content.yesNoNotsure[userCase.otherParentServedWith!],
-                changeUrl: Urls.LA_PORTAL_OTHER_PARENT_SERVED_WITH,
-              },
-            ]
+          ? getOtherParentRows(keys, visuallyHiddenTexts, userCase, content)
           : []),
       ],
       content
@@ -506,7 +520,7 @@ export const childrenPlacementOrderSummaryList = (
 ): SummaryLists => {
   return {
     title: sectionTitles.childPlacementAndCourtOrders,
-    rows: userCase.placementOrders!.reduce(
+    rows: (userCase.placementOrders ?? []).reduce(
       (acc: GovUKNunjucksSummary[], item, index) => [
         ...acc,
         ...getSectionSummaryLists(
@@ -519,7 +533,9 @@ export const childrenPlacementOrderSummaryList = (
             },
             {
               key: keys.typeOfOrder,
-              value: content.placementOrderType[item.placementOrderType!] || keys.placementOrder,
+              value: item.placementOrderType
+                ? content.placementOrderType[item.placementOrderType]
+                : keys.placementOrder,
               changeUrl:
                 index !== 0
                   ? `${Urls.LA_PORTAL_CHILD_PLACEMENT_ORDER_TYPE}?change=${item.placementOrderId}`
@@ -562,7 +578,7 @@ export const siblingCourtOrderSummaryList = (
     [
       {
         key: keys.siblingOrHalfSibling,
-        valueHtml: content.yesNoNotsure[userCase.hasSiblings!],
+        valueHtml: userCase.hasSiblings ? content.yesNoNotsure[userCase.hasSiblings] : '',
         changeUrl: `${Urls.LA_PORTAL_SIBLING_EXISTS}`,
       },
     ],
@@ -571,7 +587,7 @@ export const siblingCourtOrderSummaryList = (
 
   const siblingCourtOrderList =
     userCase.hasSiblings === YesNoNotsure.YES
-      ? userCase.siblings!.reduce(
+      ? (userCase.siblings ?? []).reduce(
           (rows: GovUKNunjucksSummary[], sibling) => [
             ...rows,
             ...getSectionSummaryLists(
@@ -583,12 +599,12 @@ export const siblingCourtOrderSummaryList = (
                 {
                   key: keys.siblingRelation,
                   visuallyHiddenText: visuallyHiddenTexts.siblingRelation,
-                  value: content.siblingRelationships[sibling.siblingRelation!],
+                  value: sibling.siblingRelation ? content.siblingRelationships[sibling.siblingRelation] : '',
                   changeUrl: `${Urls.LA_PORTAL_SIBLING_RELATION}?change=${sibling.siblingId}`,
                 },
                 {
                   key: keys.typeOfOrder,
-                  value: content.siblingPlacementOrderType[sibling.siblingPoType!],
+                  value: sibling.siblingPoType ? content.siblingPlacementOrderType[sibling.siblingPoType] : '',
                   changeUrl: `${Urls.LA_PORTAL_SIBLING_ORDER_TYPE}?change=${sibling.siblingId}`,
                 },
                 {

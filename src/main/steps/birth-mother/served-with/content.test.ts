@@ -65,16 +65,16 @@ describe('birth mother > served-with > content', () => {
     expect(field.values[1].value).toBe(YesOrNo.NO);
     expect(field.validator).toBe(isFieldFilledIn);
 
-    const field2 = (fields.birthMotherServedWith as FormOptions).values[1].subFields!.birthMotherNotServedWithReason;
+    const field2 = (fields.birthMotherServedWith as FormOptions).values[1].subFields?.birthMotherNotServedWithReason;
     //expect((field2?.label as Function)(generatedContent)).toBe(enContent.moreDetails);
-    expect(field2.type).toBe('textarea');
+    expect(field2?.type).toBe('textarea');
     expect(field2?.labelSize).toBe(null);
 
-    (field2.validator as Function)('MockTextArea');
+    (field2?.validator as Function)('MockTextArea');
     expect(isFieldFilledIn).toHaveBeenCalledWith('MockTextArea');
     expect(isTextAreaValid).toHaveBeenCalledWith('MockTextArea');
 
-    expect((field2.attributes as HTMLTextAreaElement).rows).toBe(1);
+    expect((field2?.attributes as HTMLTextAreaElement)?.rows).toBe(1);
   });
 
   it('should contain submit button', () => {

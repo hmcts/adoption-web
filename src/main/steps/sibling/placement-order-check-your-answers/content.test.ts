@@ -184,10 +184,13 @@ describe('sibling > placement-order-check-your-answers > content', () => {
   ])(
     'should create correct items for summaryList %#',
     ({ siblingId, siblingRelation, siblingPoType, siblingPoNumber, expected }) => {
-      commonContent.userCase!.siblings![0]!.siblingId = siblingId;
-      commonContent.userCase!.siblings![0]!.siblingRelation = siblingRelation;
-      commonContent.userCase!.siblings![0]!.siblingPoType = siblingPoType;
-      commonContent.userCase!.siblings![0]!.siblingPoNumber = siblingPoNumber;
+      const sibling = commonContent.userCase?.siblings?.[0];
+      if (sibling) {
+        sibling.siblingId = siblingId;
+        sibling.siblingRelation = siblingRelation;
+        sibling.siblingPoType = siblingPoType;
+        sibling.siblingPoNumber = siblingPoNumber;
+      }
       const generatedContent = generateContent(commonContent);
       expect(generatedContent.placementOrderListItems).toEqual(expected.placementOrderListItems);
     }
