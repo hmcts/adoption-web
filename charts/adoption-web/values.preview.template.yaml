@@ -15,10 +15,10 @@ nodejs:
     PCQ_ENABLED: 'true'
     REDIS_TTL_MS: 30
     #CCD_URL: 'http://ccd-data-store-api-aat.service.core-compute-aat.internal'
-    CCD_URL:  'http://adoption-cos-api-pr-1061-ccd-data-store-api'
+    CCD_URL:  'http://adoption-cos-api-pr-1064-ccd-data-store-api'
     IDAM_ROLE: 'citizen'
     #CDAM_API_URL: 'http://ccd-case-document-am-api-aat.service.core-compute-aat.internal'
-    CDAM_API_URL: 'http://adoption-cos-api-pr-1061-ccd-case-document-am-api'
+    CDAM_API_URL: 'http://adoption-cos-api-pr-1064-ccd-case-document-am-api'
     SOCIAL_WORKER_SUPPORTED_DOMAINS:
       - gov.uk
       - mailinator.com # For testing purposes only
