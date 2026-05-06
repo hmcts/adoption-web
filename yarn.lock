@@ -4995,7 +4995,7 @@ __metadata:
     accessible-autocomplete: ^3.0.0
     applicationinsights: ^2.9.7
     autobind-decorator: ^2.4.0
-    axios: ^1.15.0
+    axios: ^1.15.2
     axios-debug-log: ^1.0.0
     babel-loader: ^9.1.2
     concurrently: ^7.2.1
@@ -5517,7 +5517,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.12.2, axios@npm:^1.15.0":
+"axios@npm:^1.12.2":
   version: 1.15.2
   resolution: "axios@npm:1.15.2"
   dependencies:
@@ -5525,6 +5525,17 @@ __metadata:
     form-data: ^4.0.5
     proxy-from-env: ^2.1.0
   checksum: e7d208b751959c7c6936417b870d6286979e0dff17784ae230d3988e754b6322682cb136e25669b534072b6f44c08715801ab961227eb8cc075323d9fda8ad43
+  languageName: node
+  linkType: hard
+
+"axios@npm:^1.15.2":
+  version: 1.16.0
+  resolution: "axios@npm:1.16.0"
+  dependencies:
+    follow-redirects: ^1.16.0
+    form-data: ^4.0.5
+    proxy-from-env: ^2.1.0
+  checksum: 93e810968167fea59750d28f458e6860973a573c14bd60fe57ee07b5241f4c16991b149ae9ce65d79765081e3004743c9e158c438edba75af6f4612197e6834b
   languageName: node
   linkType: hard
 
@@ -8252,7 +8263,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.15.11":
+"follow-redirects@npm:^1.15.11, follow-redirects@npm:^1.16.0":
   version: 1.16.0
   resolution: "follow-redirects@npm:1.16.0"
   peerDependenciesMeta:
