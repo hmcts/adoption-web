@@ -97,16 +97,16 @@ describe('children > find-family-court > content', () => {
     expect(field.values[1].value).toBe(YesOrNo.NO);
     expect(field.validator).toBe(isFieldFilledIn);
 
-    const field2 = field.values[1].subFields!.familyCourtName;
-    expect(field2.type).toBe('select-dropdown');
+    const field2 = field.values[1].subFields?.familyCourtName;
+    expect(field2?.type).toBe('select-dropdown');
 
-    const field4 = field.values[1].subFields!.p2;
+    const field4 = field.values[1].subFields?.p2;
     expect((field4?.label as Function)(generatedContent)).toBe(enContent.familyCourtNameParagraph2);
-    expect(field4.type).toBe('label');
+    expect(field4?.type).toBe('label');
 
-    const field5 = field.values[1].subFields!.p3;
+    const field5 = field.values[1].subFields?.p3;
     expect((field5?.label as Function)(generatedContent)).toBe(enContent.familyCourtNameParagraph3);
-    expect(field5.type).toBe('label');
+    expect(field5?.type).toBe('label');
   });
 
   test('should contain submit button', () => {
