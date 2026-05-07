@@ -93,7 +93,7 @@ describe('nationality content', () => {
     expect((values[2].label as Function)(generatedContent)).toBe(enContent.differentCountry);
     expect(values[2].value).toBe('Other');
 
-    validator!(['British'], {});
+    validator?.(['British'], {});
     expect(atLeastOneFieldIsChecked).toHaveBeenCalledWith(['British']);
   });
 
@@ -121,7 +121,7 @@ describe('nationality content', () => {
       expect((values[4].label as Function)(generatedContent)).toBe(enContent.notSure);
       expect(values[4].value).toBe('Not sure');
 
-      validator!(['British'], {});
+      validator?.(['British'], {});
       expect(atLeastOneFieldIsChecked).toHaveBeenCalledWith(['British']);
     });
   });

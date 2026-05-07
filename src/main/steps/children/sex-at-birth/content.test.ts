@@ -72,11 +72,11 @@ describe('children > sex-at-birth > content', () => {
     expect(childrenSexAtBirthField.values[2].value).toBe(Gender.OTHER);
     expect(childrenSexAtBirthField.validator).toBe(isFieldFilledIn);
 
-    const childrenOtherSexAtBirthField = childrenSexAtBirthField.values[2].subFields!.childrenOtherSexAtBirth;
-    expect(childrenOtherSexAtBirthField.type).toBe('text');
-    expect((childrenOtherSexAtBirthField.label as Function)(generatedContent)).toBe(enContent.childrenOtherSexAtBirth);
-    expect(childrenOtherSexAtBirthField.labelSize).toBe(null);
-    expect(childrenOtherSexAtBirthField.validator).toBe(isFieldFilledIn);
+    const childrenOtherSexAtBirthField = childrenSexAtBirthField.values[2].subFields?.childrenOtherSexAtBirth;
+    expect(childrenOtherSexAtBirthField?.type).toBe('text');
+    expect((childrenOtherSexAtBirthField?.label as Function)(generatedContent)).toBe(enContent.childrenOtherSexAtBirth);
+    expect(childrenOtherSexAtBirthField?.labelSize).toBe(null);
+    expect(childrenOtherSexAtBirthField?.validator).toBe(isFieldFilledIn);
   });
 
   test('should contain submit button', () => {

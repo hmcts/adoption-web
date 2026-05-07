@@ -207,6 +207,38 @@ describe('to-api-format', () => {
       },
     },
     {
+      applicant1HasOtherNames: YesOrNo.YES,
+      applicant1AdditionalNames: [{ firstNames: 'MOCK_FIRST', lastNames: 'MOCK_LAST' }],
+      expected: {
+        applicant1AdditionalNames: [{ id: '', value: { firstNames: 'MOCK_FIRST', lastNames: 'MOCK_LAST' } }],
+      },
+    },
+    {
+      applicant2HasOtherNames: YesOrNo.YES,
+      applicant2AdditionalNames: [{ firstNames: 'MOCK_FIRST', lastNames: 'MOCK_LAST' }],
+      expected: {
+        applicant2AdditionalNames: [{ id: '', value: { firstNames: 'MOCK_FIRST', lastNames: 'MOCK_LAST' } }],
+      },
+    },
+    {
+      birthMotherAdditionalNationalities: [{ country: 'MOCK_COUNTRY' }],
+      expected: {
+        birthMotherOtherNationalities: [{ id: '', value: { country: 'MOCK_COUNTRY' } }],
+      },
+    },
+    {
+      birthFatherAdditionalNationalities: [{ country: 'MOCK_COUNTRY' }],
+      expected: {
+        birthFatherOtherNationalities: [{ id: '', value: { country: 'MOCK_COUNTRY' } }],
+      },
+    },
+    {
+      childrenAdditionalNationalities: [{ country: 'MOCK_COUNTRY' }],
+      expected: {
+        childrenAdditionalNationalities: [{ id: '', value: { country: 'MOCK_COUNTRY' } }],
+      },
+    },
+    {
       localAuthorityName: undefined,
       localAuthorityContactName: undefined,
       localAuthorityPhoneNumber: undefined,
