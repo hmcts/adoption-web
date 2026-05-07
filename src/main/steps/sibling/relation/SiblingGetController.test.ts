@@ -144,6 +144,16 @@ describe('SiblingGetController', () => {
       await controller.get(req, res);
       expect(res.redirect).toHaveBeenCalledWith('/request');
     });
+
+    test('should set selectedSiblingRelation and selectedSiblingPoType when a matching sibling is found', async () => {
+      req.session.userCase.siblings = [
+        { siblingId: 'MOCK_ID', siblingRelation: 'MOCK_RELATION', siblingPoType: 'MOCK_PO_TYPE' },
+      ];
+      req.locals.api.triggerEvent.mockResolvedValue({ selectedSiblingId: 'MOCK_ID' });
+      await controller.get(req, res);
+      expect(req.session.userCase.selectedSiblingRelation).toBe('MOCK_RELATION');
+      expect(req.session.userCase.selectedSiblingPoType).toBe('MOCK_PO_TYPE');
+    });
   });
 
   test('saves the siblings and selectedSiblingId in session', async () => {

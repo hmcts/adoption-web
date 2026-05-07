@@ -223,7 +223,7 @@ export class PostController<T extends AnyObject> {
               moment(new Date(caseElement.case_data.dateSubmitted)).format('YYYY-MM-DD') ===
                 moment_timezone.tz(new Date(), 'Europe/London').format('YYYY-MM-DD')
           );
-          console.log(
+          req.locals.logger.info(
             'Current Date and Time: ' + moment_timezone.tz(new Date(), 'Europe/London').format('YYYY-MM-DD hh:mm:ss a')
           );
 

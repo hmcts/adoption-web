@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-import Axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import config from 'config';
 import moment from 'moment';
 import { LoggerInstance } from 'winston';
@@ -23,7 +23,7 @@ import { fromApiFormat } from './from-api-format';
 import { toApiFormat } from './to-api-format';
 
 export class CaseApi {
-  constructor(private readonly axios: AxiosInstance, private readonly logger: LoggerInstance) {}
+  constructor(private readonly axiosInstance: AxiosInstance, private readonly logger: LoggerInstance) {}
 
   public async getOrCreateCase(serviceType: Adoption, userDetails: UserDetails): Promise<CaseWithId> {
     const userCase = (await this.getCaseDetails()).userCase;
@@ -94,12 +94,12 @@ export class CaseApi {
         query: { match_all: {} },
         sort: [{ id: { order: 'asc' } }],
       };
-      const response = await this.axios.post<ES<CcdV1Response>>(
+      const response = await this.axiosInstance.post<ES<CcdV1Response>>(
         `/searchCases?ctid=${CASE_TYPE}`,
         JSON.stringify(query)
       );
       return response.data.cases;
-      // const response = await this.axios.get<CcdV1Response[]>(
+      // const response = await this.axiosInstance.get<CcdV1Response[]>(
       //   `/citizens/${this.userDetails.id}/jurisdictions/${JURISDICTION}/case-types/${CASE_TYPE}/cases`
       // );
       // return response.data;
@@ -111,7 +111,7 @@ export class CaseApi {
 
   public async getCaseById(caseId: string): Promise<CaseWithId> {
     try {
-      const response = await this.axios.get<CcdV2Response>(`/cases/${caseId}`);
+      const response = await this.axiosInstance.get<CcdV2Response>(`/cases/${caseId}`);
 
       response.data.data.status = response.data.state;
       return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
@@ -122,7 +122,7 @@ export class CaseApi {
   }
 
   public async createCase(serviceType: Adoption, userDetails: UserDetails): Promise<CaseWithId> {
-    const tokenResponse: AxiosResponse<CcdTokenResponse> = await this.axios.get(
+    const tokenResponse: AxiosResponse<CcdTokenResponse> = await this.axiosInstance.get(
       `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
     );
     const token = tokenResponse.data.token;
@@ -135,7 +135,7 @@ export class CaseApi {
     };
 
     try {
-      const response = await this.axios.post<CcdV2Response>(`/case-types/${CASE_TYPE}/cases`, {
+      const response = await this.axiosInstance.post<CcdV2Response>(`/case-types/${CASE_TYPE}/cases`, {
         data,
         event,
         event_token: token,
@@ -150,7 +150,9 @@ export class CaseApi {
 
   public async getCaseUserRoles(caseId: string, userId: string): Promise<CaseAssignedUserRoles> {
     try {
-      const response = await this.axios.get<CaseAssignedUserRoles>(`case-users?case_ids=${caseId}&user_ids=${userId}`);
+      const response = await this.axiosInstance.get<CaseAssignedUserRoles>(
+        `case-users?case_ids=${caseId}&user_ids=${userId}`
+      );
       return response.data;
     } catch (err) {
       this.logError(err);
@@ -160,11 +162,13 @@ export class CaseApi {
 
   private async sendEvent(caseId: string, data: Partial<CaseData>, eventName: string): Promise<CaseWithId> {
     try {
-      const tokenResponse = await this.axios.get<CcdTokenResponse>(`/cases/${caseId}/event-triggers/${eventName}`);
+      const tokenResponse = await this.axiosInstance.get<CcdTokenResponse>(
+        `/cases/${caseId}/event-triggers/${eventName}`
+      );
       const token = tokenResponse.data.token;
       const event = { id: eventName };
 
-      const response: AxiosResponse<CcdV2Response> = await this.axios.post(`/cases/${caseId}/events`, {
+      const response: AxiosResponse<CcdV2Response> = await this.axiosInstance.post(`/cases/${caseId}/events`, {
         event,
         data,
         event_token: token,
@@ -200,7 +204,7 @@ export class CaseApi {
 
 export const getCaseApi = (userDetails: UserDetails, logger: LoggerInstance): CaseApi => {
   return new CaseApi(
-    Axios.create({
+    axios.create({
       baseURL: config.get('services.case.url'),
       headers: {
         Authorization: 'Bearer ' + userDetails.accessToken,

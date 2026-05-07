@@ -64,7 +64,7 @@ describe('applicant1 > other-names > content', () => {
   });
 
   test('should call otherNamesFields when form.fields is called', () => {
-    (form.fields as FormFieldsFn)(commonContent.userCase!);
+    (form.fields as FormFieldsFn)(commonContent.userCase ?? {});
     expect(otherNamesFields).toHaveBeenCalledWith(
       commonContent.userCase,
       FieldPrefix.APPLICANT1,

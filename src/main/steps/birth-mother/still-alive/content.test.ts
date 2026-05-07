@@ -74,18 +74,18 @@ describe('birth-mother > still-alive > content', () => {
     expect(field.values[0].value).toBe(YesNoNotsure.YES);
     expect((field.values[1].label as Function)(commonContent)).toBe(commonContent.no);
     expect(field.values[1].value).toBe(YesNoNotsure.NO);
-    const hint1 = field.values[1].subFields!.hint1;
-    expect(hint1.type).toBe('label');
-    expect((hint1.label as Function)(generatedContent)).toBe(enContent.hint);
+    const hint1 = field.values[1].subFields?.hint1;
+    expect(hint1?.type).toBe('label');
+    expect((hint1?.label as Function)(generatedContent)).toBe(enContent.hint);
 
     expect((field.values[2].label as Function)(commonContent)).toBe(commonContent.notSure);
     expect(field.values[2].value).toBe(YesNoNotsure.NOT_SURE);
 
-    const birthMotherNotAliveReason = field.values[2].subFields!.birthMotherNotAliveReason;
-    expect(birthMotherNotAliveReason.type).toBe('text');
-    expect((birthMotherNotAliveReason.label as Function)(generatedContent)).toBe(enContent.moreDetails);
-    expect(birthMotherNotAliveReason.labelSize).toBe(null);
-    expect(birthMotherNotAliveReason.validator).toBe(isFieldFilledIn);
+    const birthMotherNotAliveReason = field.values[2].subFields?.birthMotherNotAliveReason;
+    expect(birthMotherNotAliveReason?.type).toBe('text');
+    expect((birthMotherNotAliveReason?.label as Function)(generatedContent)).toBe(enContent.moreDetails);
+    expect(birthMotherNotAliveReason?.labelSize).toBe(null);
+    expect(birthMotherNotAliveReason?.validator).toBe(isFieldFilledIn);
 
     expect(field.validator).toBe(isFieldFilledIn);
   });
