@@ -13,6 +13,7 @@ nodejs:
   environment:
     APPINSIGHTS_KEY: '00000000-0000-0000-0000-000000000000'
     PCQ_ENABLED: 'true'
+    EQUALITY_URL: 'https://pcq-frontend-pr-1877.preview.platform.hmcts.net/'
     REDIS_TTL_MS: 30
     CCD_URL: 'http://ccd-data-store-api-aat.service.core-compute-aat.internal'
     IDAM_ROLE: 'citizen'
