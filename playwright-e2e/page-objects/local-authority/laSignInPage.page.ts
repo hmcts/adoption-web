@@ -1,6 +1,7 @@
 import { type Locator, type Page } from '@playwright/test';
 
 import BasePage from '../../pages/basePage.page';
+import { urlConfig } from '../../utils/urls';
 
 export class LASignInPage extends BasePage {
   readonly applicationDetailsHeading: Locator;
@@ -34,7 +35,10 @@ export class LASignInPage extends BasePage {
   }
 
   async navigateTo(): Promise<void> {
-    await this.page.goto('https://adoption-web.aat.platform.hmcts.net/la-portal/kba-case-ref');
+    await this.page.goto(`${urlConfig.citizenFrontendBaseUrl}/la-portal/kba-case-ref`, {
+      waitUntil: 'load',
+      timeout: 3000,
+    });
   }
 
   async startLAJourney(caseRefNo: string, childFullName: string): Promise<void> {
