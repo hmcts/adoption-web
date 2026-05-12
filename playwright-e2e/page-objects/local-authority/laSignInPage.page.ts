@@ -35,7 +35,7 @@ export class LASignInPage extends BasePage {
   }
 
   async navigateTo(): Promise<void> {
-    await this.page.goto(urlConfig.laFrontendBaseUrl, { waitUntil: 'load', timeout: 3000 });
+    await this.page.goto(urlConfig.laPortalUrl, { waitUntil: 'load', timeout: 3000 });
   }
 
   async startLAJourney(caseRefNo: string, childFullName: string): Promise<void> {
