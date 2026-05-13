@@ -19,7 +19,7 @@ nodejs:
     CDAM_API_URL: 'http://ccd-case-document-am-api-aat.service.core-compute-aat.internal'
     SOCIAL_WORKER_SUPPORTED_DOMAINS:
       - gov.uk
-      - mailinator.com # For testing purposes only
+      - mailinator.com # For testing purposes only 
     # Family Court List
     LEICESTER_VAL: 'Leicester County Court'
     STOKE-ON-TRENT_VAL: 'Stoke-on-Trent Combined Court'
