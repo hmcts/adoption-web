@@ -4,6 +4,7 @@ import {
   Gender,
   LanguagePreference,
   Nationality,
+  PlacementOrderTypeEnum,
   ResponsibilityReasons,
   YesNoNotsure,
   YesOrNo,
@@ -83,7 +84,7 @@ export default {
     },
     {
       placementOrderId: 'MOCK_PLACEMENT_ORDER_ID2',
-      placementOrderType: 'MOCK_PLACEMENT_ORDER_TYPE2',
+      placementOrderType: PlacementOrderTypeEnum.PlacementOrder,
       placementOrderNumber: 'MOCK_PLACEMENT_ORDER_NUMBER2',
       placementOrderCourt: 'MOCK_PLACEMENT_ORDER_COURT2',
       placementOrderDate: { day: 10, month: 11, year: 2020 },

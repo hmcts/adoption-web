@@ -347,55 +347,6 @@ describe('PostController', () => {
     expect(caseApiMockFn.createCase).toHaveBeenCalled();
     expect(caseApiMockFn.checkOldPCQIDExists).not.toHaveBeenCalled();
   });
-  /* it('redirects back to the current page with a session error if there was a problem saving data', async () => {
-    beforeEach(() => {
-      mockGetParsedBody.mockReturnValue({});
-      mockGetErrors.mockReturnValue(['MOCK_ERROR']);
-      //mockGetNextStepUrl.mockReturnValue('/MOCK_ENDPOINT');
-    });
-
-    const caseApiMockFn = {
-      getCases: jest.fn(() => {
-        return [];
-      }),
-
-
-    };
-    (getCaseApiMock as jest.Mock).mockReturnValue(caseApiMockFn);
-    const body = { MOCK_KEY: 'MOCK_VALUE' };
-    const mockPhoneNumberFormContent = {
-      fields: {
-        applicant1PhoneNumber: {
-          type: 'tel',
-          validator: isPhoneNoValid,
-        },
-      },
-    } as unknown as FormContent;
-    const controller = new PostController({});
-    //const mockSave = jest.fn(done => done('An error while saving session'));
-
-    const req = mockRequest({ body });
-    //(req.locals.api.triggerEvent as jest.Mock).mockRejectedValue('Error saving');
-    const logger = req.locals.logger as unknown as MockedLogger;
-    const res = mockResponse();
-    await controller.post(req, res);
-
-    expect(req.session.userCase).toEqual({
-      errorType: 'Error saving'
-    });
-    expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { MOCK_KEY: 'MOCK_VALUE' }, CITIZEN_UPDATE);
-
-    expect(getNextStepUrlMock).not.toHaveBeenCalled();
-    expect(res.redirect).toBeCalledWith('/request');
-    expect(logger.error).toBeCalledWith('Error saving', 'Error saving');
-
-    expect(req.session.errors).toEqual([
-      {
-        errorType: 'errorSaving',
-        propertyName: '*',
-      },
-    ]);
-  });   */
 
   describe('when there are form errors', () => {
     test('should redirect to same page', async () => {
@@ -425,27 +376,6 @@ describe('PostController', () => {
       expect(res.redirect).toHaveBeenCalledWith('/request');
     });
   });
-
-  /* test('rejects with an error when unable to save session data', async () => {
-    getNextStepUrlMock.mockReturnValue('/next-step-url');
-    const body = { MOCK_KEY: 'MOCK_VALUE' };
-    const controller = new PostController(mockFormContent.fields);
-
-    const mockSave = jest.fn(done => done('An error while saving session'));
-    const req = mockRequest({ body, session: { save: mockSave } });
-    (req.locals.api.triggerEvent as jest.Mock).mockResolvedValueOnce({ MOCK_KEY: 'MOCK_VALUE' });
-    const res = mockResponse();
-    await expect(controller.post(req, res)).rejects.toEqual('An error while saving session');
-
-    const userCase = {
-      ...req.session.userCase,
-      ...body,
-    };
-    expect(mockSave).toHaveBeenCalled();
-    expect(getNextStepUrlMock).toBeCalledWith(req, userCase);
-    expect(res.redirect).not.toHaveBeenCalled();
-    expect(req.session.errors).toStrictEqual([]);
-  }); */
 
   test('Should save the users data and redirect to the next page if the form is valid with parsed body', async () => {
     getNextStepUrlMock.mockReturnValue('/next-step-url');

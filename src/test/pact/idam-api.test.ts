@@ -9,20 +9,21 @@ jest.mock('jwt-decode', () => ({
   default: jwtDecodeMock,
 }));
 
+import { MatchersV2 } from '@pact-foundation/pact';
+import type { InteractionObject } from '@pact-foundation/pact/src/dsl/interaction';
 import config from 'config';
+import { pactWith } from 'jest-pact';
 import { when } from 'jest-when';
 
 import { getSystemUser } from '../../main/app/auth/user/oidc';
 
-const { Matchers } = require('@pact-foundation/pact');
-const { pactWith } = require('jest-pact');
-const { like } = Matchers;
+const { like } = MatchersV2;
 
 pactWith(
   {
     consumer: 'adoption-web',
     provider: 'idamApi_oidc',
-    logLevel: 'DEBUG',
+    logLevel: 'debug',
   },
   provider => {
     describe('idam-get-system-user-details API', () => {
@@ -63,7 +64,7 @@ pactWith(
         config.get = jest.fn();
         when(config.get)
           .calledWith('services.idam.tokenURL')
-          .mockReturnValue(`${provider.mockService.baseUrl}/o/token`)
+          .mockReturnValue(`http://127.0.0.1:${provider.opts.port}/o/token`)
           .calledWith('services.idam.clientID')
           .mockReturnValue('adoption-web')
           .calledWith('services.idam.clientSecret')
@@ -73,12 +74,11 @@ pactWith(
           .calledWith('services.idam.systemPassword')
           .mockReturnValue('mock_password');
 
-        const interaction = {
+        return provider.addInteraction({
           state: 'a token is requested',
           ...getUserDetailsRequest,
           willRespondWith: getUserDetailsSuccessResponse,
-        };
-        return provider.addInteraction(interaction);
+        } as unknown as InteractionObject);
       });
 
       it('returns user details', async () => {

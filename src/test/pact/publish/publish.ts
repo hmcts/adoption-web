@@ -1,33 +1,45 @@
-'use strict';
-
 /* eslint no-console: 0 */
-const path = require('path');
+import { spawnSync } from 'child_process';
+import path from 'path';
 
-const pact = require('@pact-foundation/pact-node');
-const config = require('config');
-const git = require('git-rev-sync');
+import config from 'config';
+import git from 'git-rev-sync';
 
 if (process.env.PACT_TAG === 'master') {
   console.log('Publishing Pact contract');
-  const opts = {
-    pactFilesOrDirs: [path.resolve(process.cwd(), config.services.pact.pactDirectory)],
-    pactBroker: config.services.pact.url,
-    consumerVersion: git.short(),
-    tags: config.services.pact.tag,
-  };
 
   const certPath = path.resolve(__dirname, './ca-bundle.crt');
   console.log('cert path = ' + certPath);
   process.env.SSL_CERT_FILE = certPath;
 
-  pact
-    .publishPacts(opts)
-    .then(() => {
-      console.log('Pact contract publishing complete!');
-    })
-    .catch(e => {
-      console.log('Pact contract publishing failed: ', e);
-    });
+  const pactDir = path.resolve(process.cwd(), config.get<string>('services.pact.pactDirectory'));
+  const brokerUrl = config.get<string>('services.pact.url');
+  const version = git.short();
+  const tag = config.get<string>('services.pact.tag');
+
+  // Publish via the pact-broker CLI shipped with @pact-foundation/pact-cli
+  const pactBrokerBin = require.resolve('@pact-foundation/pact-cli/bin/pact-broker.js');
+  const result = spawnSync(
+    process.execPath,
+    [
+      pactBrokerBin,
+      'publish',
+      pactDir,
+      '--broker-base-url',
+      brokerUrl,
+      '--consumer-app-version',
+      version,
+      '--tag',
+      tag,
+    ],
+    { stdio: 'inherit' }
+  );
+
+  if (result.error) {
+    console.log('Pact contract publishing failed: ', result.error);
+  } else {
+    console.log('Pact contract publishing complete!');
+  }
 } else {
   console.log('Not publishing Pact contract on non-master branch');
 }

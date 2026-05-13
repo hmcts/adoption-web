@@ -28,7 +28,7 @@ export default class SiblingGetController extends GetController {
 
     if (!sibling) {
       sibling = {
-        siblingId: req.session.userCase.selectedSiblingId!,
+        siblingId: req.session.userCase.selectedSiblingId ?? '',
       };
 
       siblings.push(sibling);

@@ -1,11 +1,9 @@
+import type { InteractionObject } from '@pact-foundation/pact/src/dsl/interaction';
 import config from 'config';
+import { pactWith } from 'jest-pact';
 import { when } from 'jest-when';
 
 import { getTokenFromApi } from '../../main/app/auth/service/get-service-auth-token';
-
-const { Matchers } = require('@pact-foundation/pact');
-const { pactWith } = require('jest-pact');
-const { string } = Matchers;
 
 jest.mock('otplib', () => ({
   authenticator: {
@@ -19,7 +17,7 @@ pactWith(
   {
     consumer: 'adoption-web',
     provider: 's2s_auth',
-    logLevel: 'DEBUG',
+    logLevel: 'debug',
   },
   provider => {
     describe('rpe-service-auth-provider API', () => {
@@ -30,7 +28,7 @@ pactWith(
         headers: {
           'Content-Type': 'text/plain;charset=ISO-8859-1',
         },
-        body: string('someMicroServiceToken'),
+        body: 'someMicroServiceToken',
       };
 
       const serviceAuthTokenRequest = {
@@ -51,18 +49,17 @@ pactWith(
       beforeEach(() => {
         when(config.get)
           .calledWith('services.authProvider.url')
-          .mockReturnValue(provider.mockService.baseUrl)
+          .mockReturnValue(`http://127.0.0.1:${provider.opts.port}`)
           .calledWith('services.authProvider.microservice')
           .mockReturnValue('microserviceName')
           .calledWith('services.authProvider.secret')
           .mockReturnValue('mock-secret');
 
-        const interaction = {
+        return provider.addInteraction({
           state: 'microservice with valid credentials',
           ...serviceAuthTokenRequest,
           willRespondWith: successResponse,
-        };
-        return provider.addInteraction(interaction);
+        } as unknown as InteractionObject);
       });
 
       it('returns a service auth token', async () => {
