@@ -1,5 +1,5 @@
 nodejs:
-  image: 'hmctspublic.azurecr.io/adoption/web:latest'
+  image: 'hmctsprod.azurecr.io/adoption/web:latest'
   applicationPort: 3000
   aadIdentityName: adoption
   ingressHost: adoption-web.{{ .Values.global.environment }}.platform.hmcts.net

@@ -14,6 +14,7 @@ let cachedAccessToken: string | null = null;
  */
 export async function getAccessToken(): Promise<string | null> {
   if (cachedAccessToken) {
+    // eslint-disable-next-line no-console
     console.log('Returning cached token');
     return cachedAccessToken;
   }
@@ -33,10 +34,11 @@ export async function getAccessToken(): Promise<string | null> {
       url: process.env.IDAM_TOKEN_URL as string,
     };
 
-    const response = await axios.post(options.url!, options.data, options);
+    const response = await axios.post(options.url ?? '', options.data, options);
     cachedAccessToken = response.data.access_token; // Cache the token
     return cachedAccessToken;
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Error fetching access token:', error);
     return null;
   }
@@ -75,10 +77,12 @@ export async function createCitizenUser(token: string): Promise<{ email: string;
   };
 
   try {
-    const response = await axios.post(userCreationOptions.url!, userCreationOptions.data, userCreationOptions);
+    const response = await axios.post(userCreationOptions.url ?? '', userCreationOptions.data, userCreationOptions);
+    // eslint-disable-next-line no-console
     console.log('User created:', response.data);
     return { email, password, id: response.data.id };
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Error creating user:', error);
     throw new Error('Failed to create user, could be that you are not connected to the VPN');
   }
@@ -102,8 +106,10 @@ export async function deleteCitizenUser(token: string, id: string): Promise<void
 
   try {
     await axios(userDeletionOptions);
+    // eslint-disable-next-line no-console
     console.info('Deleted user', id);
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Error deleting user', id, error.response ? error.response.data : error.message);
     throw new Error(`Failed to delete user with ID ${id}`);
   }

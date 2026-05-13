@@ -1,4 +1,4 @@
-import Axios, { AxiosInstance, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import FormData from 'form-data';
 
 import { CASE_TYPE, JURISDICTION, UserRole } from '../../app/case/definition';
@@ -8,7 +8,7 @@ export class DocumentManagementClient {
   client: AxiosInstance;
 
   constructor(baseURL: string, authToken: string, private readonly user: UserDetails) {
-    this.client = Axios.create({
+    this.client = axios.create({
       baseURL,
       maxBodyLength: 20971520,
       maxContentLength: 20971520,
