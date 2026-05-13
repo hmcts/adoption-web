@@ -4,6 +4,6 @@ export class LAConfirmationPage {
   readonly pageURL: string;
 
   constructor() {
-    this.pageURL = urlConfig.laPortalUrl;
+    this.pageURL = urlConfig.laPortalUrl + '/confirmation';
   }
 }
