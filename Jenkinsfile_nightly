@@ -62,6 +62,7 @@ withNightlyPipeline(type, product, component) {
   env.TEST_URL = params.FRONTEND_URL
   env.ENVIRONMENT = params.ENVIRONMENT
   env.BANNER_ENABLED = params.BANNER_ENABLED
+  env.IDAM_TOKEN_URL= params.IDAM_TOKEN_URL
   env.IDAM_TESTING_SUPPORT_USERS_URL = "http://idam-api-${params.ENVIRONMENT}.platform.hmcts.net/testing-support"
   enableFullFunctionalTest(120)
   loadVaultSecrets(secrets)
@@ -75,7 +76,6 @@ withNightlyPipeline(type, product, component) {
 
   before('fullFunctionalTest') {
     env.PARALLEL_CHUNKS = params.FUNCTIONAL_TESTS_WORKERS
-    env.IDAM_TOKEN_URL = "${IDAM_TOKEN_URL}"
     env.IDAM_CITIZEN_USER_PASSWORD = "${IDAM_CITIZEN_USER_PASSWORD}"
   }
 
