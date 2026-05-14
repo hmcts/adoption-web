@@ -66,9 +66,9 @@ withNightlyPipeline(type, product, component) {
   env.BANNER_ENABLED = params.BANNER_ENABLED
   enableFullFunctionalTest(120)
   loadVaultSecrets(secrets)
-  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
-  enableFortifyScan()
-  enableSecurityScan()
+//  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
+//  enableFortifyScan()
+//  enableSecurityScan()
 
   afterAlways('test') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'

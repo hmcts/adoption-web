@@ -20,10 +20,12 @@ export default class SignIn {
   }
 
   async navigateTo(): Promise<void> {
+    console.log('url: '+urlConfig.citizenFrontendBaseUrl);
     await this.page.goto(urlConfig.citizenFrontendBaseUrl, { waitUntil: 'load', timeout: 3000 });
   }
 
   async signIn(email: string, password: string): Promise<void> {
+    console.log('signIn details: ', email);
     await this.email.fill(email);
     await this.password.fill(password);
     await this.signinButton.click();
