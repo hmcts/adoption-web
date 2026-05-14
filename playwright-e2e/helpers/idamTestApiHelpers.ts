@@ -80,6 +80,7 @@ export async function createCitizenUser(token: string): Promise<{ email: string;
     const response = await axios.post(userCreationOptions.url ?? '', userCreationOptions.data, userCreationOptions);
     // eslint-disable-next-line no-console
     console.log('User created:', response.data);
+    console.log('User url:', userCreationOptions.url);
     return { email, password, id: response.data.id };
   } catch (error) {
     // eslint-disable-next-line no-console
