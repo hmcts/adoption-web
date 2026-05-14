@@ -66,6 +66,9 @@ withNightlyPipeline(type, product, component) {
   env.BANNER_ENABLED = params.BANNER_ENABLED
   enableFullFunctionalTest(120)
   loadVaultSecrets(secrets)
+  //  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
+//  enableFortifyScan()
+//  enableSecurityScan()
 
   afterAlways('test') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
@@ -75,7 +78,7 @@ withNightlyPipeline(type, product, component) {
     env.PARALLEL_CHUNKS = params.FUNCTIONAL_TESTS_WORKERS
     env.IDAM_TOKEN_URL = "${IDAM_TOKEN_URL}"
     env.IDAM_CITIZEN_USER_PASSWORD = "${IDAM_CITIZEN_USER_PASSWORD}"
-    env.IDAM_TESTING_SUPPORT_USERS_URL = "${IDAM_TESTING_SUPPORT_USERS_URL}"
+    env.IDAM_TESTING_SUPPORT_URL = "http://idam-api-${env.ENVIRONMENT}.platform.hmcts.net/testing-support"
   }
 
 afterAlways('fullFunctionalTest') {
