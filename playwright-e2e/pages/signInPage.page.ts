@@ -20,7 +20,7 @@ export default class SignIn {
   }
 
   async navigateTo(): Promise<void> {
-    console.log('url: '+urlConfig.citizenFrontendBaseUrl);
+    console.log('url: ' + urlConfig.citizenFrontendBaseUrl);
     await this.page.goto(urlConfig.citizenFrontendBaseUrl, { waitUntil: 'load', timeout: 3000 });
   }
 
