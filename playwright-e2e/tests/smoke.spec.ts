@@ -4,7 +4,7 @@ import * as dotenv from 'dotenv';
 
 import { expect } from '../fixtures/fixtures';
 import { runAccessibilityScan } from '../helpers/accessibilityHelper';
-import { setupUser, teardownUser } from '../hooks/createDeleteUser.hook';
+import { setupUser } from '../hooks/createDeleteUser.hook';
 import App from '../pages/app.page';
 import { toggleBanner, toggleConfig } from '../utils/toggles';
 
@@ -19,19 +19,17 @@ const test = base.extend<{ makeAxeBuilder: () => AxeBuilder }>({
 test.describe('smoke test', () => {
   let userEmail: string;
   let userPassword: string;
-  let userId: string;
 
   test.beforeEach(async () => {
     const userInfo = await setupUser();
     if (userInfo) {
       userEmail = userInfo.email;
       userPassword = userInfo.password;
-      userId = userInfo.id;
     }
   });
 
   test.afterEach('Status check', async () => {
-    await teardownUser(userId);
+    //await teardownUser(userId);
   });
 
   const smokeTestTags = { tag: ['@smoke', '@citizen', '@accessibility'] };
