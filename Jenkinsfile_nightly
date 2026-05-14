@@ -63,7 +63,8 @@ withNightlyPipeline(type, product, component) {
   env.ENVIRONMENT = params.ENVIRONMENT
   env.BANNER_ENABLED = params.BANNER_ENABLED
   env.IDAM_TOKEN_URL= params.IDAM_TOKEN_URL
-  env.IDAM_TESTING_SUPPORT_USERS_URL = "http://idam-api-${params.ENVIRONMENT}.platform.hmcts.net/testing-support"
+  env.IDAM_TESTING_SUPPORT_USERS_URL = "https://idam-testing-support-api.${params.ENVIRONMENT}.platform.hmcts.net/test/idam/users"
+
   enableFullFunctionalTest(120)
   loadVaultSecrets(secrets)
   //  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
