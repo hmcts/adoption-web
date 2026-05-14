@@ -62,7 +62,6 @@ pipelineConf.vaultSecrets = secrets
 
 withNightlyPipeline(type, product, component) {
   env.TEST_URL = params.FRONTEND_URL
-  env.ADOP_WEB_URL = params.FRONTEND_URL
   env.ENVIRONMENT = params.ENVIRONMENT
   env.BANNER_ENABLED = params.BANNER_ENABLED
   enableFullFunctionalTest(120)
