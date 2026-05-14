@@ -91,7 +91,7 @@ test.describe('smoke test', () => {
   }
 
   test(
-    'smoke test: single person submits an adoption application @test',
+    'smoke test: single person submits an adoption application',
     smokeTestTags,
     async ({ page, makeAxeBuilder }, testInfo) => {
       await submitSingleApplicationJourney(
