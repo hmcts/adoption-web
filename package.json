@@ -47,11 +47,11 @@
     "broker:stop": "docker-compose -f broker-compose.yaml down"
   },
   "dependencies": {
-    "@axe-core/playwright": "^4.10.0",
+    "@axe-core/playwright": "^4.11.3",
     "@hmcts/cookie-manager": "^1.0.0",
     "@hmcts/nodejs-healthcheck": "^1.8.6",
     "@hmcts/nodejs-logging": "^4.0.4",
-    "@hmcts/playwright-common": "^1.0.32",
+    "@hmcts/playwright-common": "^1.1.2",
     "@hmcts/properties-volume": "^1.4.0",
     "@types/autobind-decorator": "^2.1.0",
     "@types/config": "^0.0.41",
@@ -116,7 +116,7 @@
     "@faker-js/faker": "^8.4.1",
     "@pact-foundation/pact": "^16.3.0",
     "@pact-foundation/pact-cli": "^18.0.0",
-    "@playwright/test": "^1.50.0",
+    "@playwright/test": "^1.60.0",
     "@types/copy-webpack-plugin": "^10.1.0",
     "@types/jest": "^29.0.0",
     "@types/mini-css-extract-plugin": "^2.5.1",
