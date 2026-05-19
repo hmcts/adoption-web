@@ -46,10 +46,10 @@ export class Routes {
     const newCaseRedirectController = new NewCaseRedirectController();
     app.get(NEW_APPLICATION_REDIRECT, errorHandler(newCaseRedirectController.get));
 
-    if (config.get('rateLimit.enabled')) {
+    if (config.get<boolean>('rateLimit.enabled')) {
       let rateLimiterConfig: Partial<Options> = {
-        windowMs: Number(config.get('rateLimit.windowSeconds')) * 1000,
-        limit: Number(config.get('rateLimit.maxRequests')),
+        windowMs: config.get<number>('rateLimit.windowSeconds') * 1000,
+        limit: config.get<number>('rateLimit.maxRequests'),
         handler: (req, _res, next) => {
           this.logNumberOfCommasInXForwardedForHeader(req);
           next(new TooManyRequestsError(`${req.path}: Too many unsuccessful requests from ${req.ip}`));
