@@ -50,13 +50,12 @@ test.describe('smoke test', () => {
     const appOneName = await app.applicantOneNameCreate();
     const childNames = await app.childNameCreate();
 
+    await app.signIn.navigateTo();
+    await app.signIn.signIn(userEmail, userPassword);
     if (toggleBanner.bannerEnabled) {
       await expect(app.basePage.banner.bannerTitle).toBeVisible({ timeout: 500 });
       await expect(app.basePage.banner.bannerText).toBeVisible({ timeout: 500 });
     }
-
-    await app.signIn.navigateTo();
-    await app.signIn.signIn(userEmail, userPassword);
     await app.numberOfApplicants.numberOfApplication(applicantNumber);
     await app.basePage.clickSaveAndContinue();
 
