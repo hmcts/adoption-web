@@ -175,5 +175,5 @@
     "cookie": "^0.7.0",
     "nanoid": "^3.3.8"
   },
-  "packageManager": "yarn@4.14.1"
+  "packageManager": "yarn@4.15.0"
 }
