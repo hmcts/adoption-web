@@ -26,6 +26,7 @@ export class Helmet {
     this.setContentSecurityPolicy(app);
     this.setReferrerPolicy(app, this.config.referrerPolicy);
     this.setCrossOriginResourcePolicy(app, this.config.crossOriginResourcePolicy);
+    this.setPermissionsPolicy(app);
   }
 
   private setContentSecurityPolicy(app: express.Express): void {
@@ -88,5 +89,15 @@ export class Helmet {
     }
 
     app.use(helmet.crossOriginResourcePolicy({ policy }) as RequestHandler);
+  }
+
+  private setPermissionsPolicy(app: express.Express): void {
+    app.use((req, res, next) => {
+      res.setHeader(
+        'Permissions-Policy',
+        'camera=(), microphone=(), geolocation=(), payment=(), usb=(), fullscreen=(self)'
+      );
+      next();
+    });
   }
 }
