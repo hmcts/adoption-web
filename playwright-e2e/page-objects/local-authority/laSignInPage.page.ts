@@ -1,6 +1,7 @@
 import { type Locator, type Page } from '@playwright/test';
 
 import BasePage from '../../pages/basePage.page';
+import { urlConfig } from '../../utils/urls';
 
 export class LASignInPage extends BasePage {
   readonly applicationDetailsHeading: Locator;
@@ -34,7 +35,7 @@ export class LASignInPage extends BasePage {
   }
 
   async navigateTo(): Promise<void> {
-    await this.page.goto('https://adoption-web.aat.platform.hmcts.net/la-portal/kba-case-ref');
+    await this.page.goto(urlConfig.laPortalUrl + '/kba-case-ref');
   }
 
   async startLAJourney(caseRefNo: string, childFullName: string): Promise<void> {
@@ -42,13 +43,11 @@ export class LASignInPage extends BasePage {
     const day = String(today.getDate());
     const month = String(today.getMonth() + 1);
     const year = String(today.getFullYear() - 5);
-
     await this.courtCaseReferenceNumber.fill(caseRefNo);
     await this.childNameOnApplication.fill(childFullName);
     await this.childDateOfBirthDay.fill(day);
     await this.childDateOfBirthMonth.fill(month);
     await this.childDateOfBirthYear.fill(year);
-
     await super.clickSaveAndContinue();
   }
 }

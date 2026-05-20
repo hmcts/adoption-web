@@ -11,7 +11,7 @@ export default class ExtraSupport {
   }
 
   async noSupportNeeded(): Promise<void> {
-    expect(this.h1).toBeVisible();
+    await expect(this.h1).toBeVisible();
     await this.extraSupportNo.check();
   }
 }
