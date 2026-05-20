@@ -15,14 +15,13 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
   let userPassword: string;
   let userId: string;
 
-  test.beforeEach(async ({ signIn }) => {
+  test.beforeEach(async () => {
     const userInfo = await setupUser();
     if (userInfo) {
       userEmail = userInfo.email;
       userPassword = userInfo.password;
       userId = userInfo.id;
     }
-    await signIn.navigateTo();
   });
 
   test.afterEach('Status check', async () => {

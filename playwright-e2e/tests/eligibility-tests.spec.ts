@@ -5,7 +5,7 @@ import { urlConfig } from '../utils/urls';
 
 test.describe('Eligibility journey e2e tests', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(urlConfig.citizenStartUrl);
+    await page.goto(urlConfig.citizenFrontendBaseUrl + '/eligibility/start');
   });
 
   const eligibilityTestTags = { tag: ['@eligibility', '@citizen', '@accessibility'] };
