@@ -5233,7 +5233,7 @@ __metadata:
     nunjucks: "npm:^3.2.4"
     otplib: "npm:^12.0.1"
     prettier: "npm:^2.6.2"
-    rate-limit-redis: "npm:^4.3.1"
+    rate-limit-redis: "npm:^5.0.0"
     redis: "npm:^3.1.2"
     sass: "npm:^1.86.0"
     sass-loader: "npm:^13.0.0"
@@ -12918,12 +12918,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rate-limit-redis@npm:^4.3.1":
-  version: 4.3.1
-  resolution: "rate-limit-redis@npm:4.3.1"
+"rate-limit-redis@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "rate-limit-redis@npm:5.0.0"
   peerDependencies:
-    express-rate-limit: ">= 6"
-  checksum: 10/84da75986ae5375e592ff07ca3f11b82532a0671e2c5463dcca11fa3a61a684fffc875a060879804bf8920ce7f28e50d116a32130b41cd3f480826e2fb8b4d0b
+    express-rate-limit: ">= 8.5.0"
+  checksum: 10/7bece632d05f74cd0b9ef876008ed0f8c5a0ddc304a722338fb3335c696f5ef1677daa3d4482a1e1afdcf981408933bd407dc9ad7a47d1c7a4d5c53974e9cc0a
   languageName: node
   linkType: hard
 
