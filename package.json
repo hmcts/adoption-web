@@ -116,7 +116,7 @@
     "@faker-js/faker": "^8.4.1",
     "@pact-foundation/pact": "^16.3.0",
     "@pact-foundation/pact-cli": "^18.0.0",
-    "@playwright/test": "^1.50.0",
+    "@playwright/test": "^1.60.0",
     "@types/copy-webpack-plugin": "^10.1.0",
     "@types/jest": "^29.0.0",
     "@types/mini-css-extract-plugin": "^2.5.1",
