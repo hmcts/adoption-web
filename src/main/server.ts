@@ -54,16 +54,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/robots.txt', (req, res) => {
-  res.type('text/plain');
-  res.send('User-agent: *\nDisallow: /');
-});
-
-app.get('/sitemap.xml', (req, res) => {
-  res.type('text/xml');
-  res.send('User-agent: *\nDisallow: /');
-});
-
 app.disable('x-powered-by');
 app.disable('X-Powered-By');
 
@@ -89,6 +79,17 @@ new LoadTimeouts().enableFor(app);
 new Nunjucks().enableFor(app);
 new Webpack().enableFor(app);
 new Helmet(config.get('security')).enableFor(app);
+
+app.get('/robots.txt', (req, res) => {
+  res.type('text/plain');
+  res.send('User-agent: *\nDisallow: /');
+});
+
+app.get('/sitemap.xml', (req, res) => {
+  res.type('text/xml');
+  res.send('User-agent: *\nDisallow: /');
+});
+
 new AppInsights().enable();
 new SessionStorage().enableFor(app);
 new TooBusy().enableFor(app);
