@@ -2,6 +2,7 @@ import * as path from 'path';
 
 import * as express from 'express';
 import { Request, Response, NextFunction } from 'express';
+import helmet = require('helmet');
 
 jest.mock('helmet', () => {
   const helmetMock = jest.fn(() => jest.fn());
@@ -35,6 +36,10 @@ function makeMockRes(): Response & { setHeader: jest.Mock } {
 }
 
 describe('Helmet module', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   describe('enableFor', () => {
     it('registers middleware on the app', () => {
       const { app } = makeMockApp();
@@ -47,6 +52,46 @@ describe('Helmet module', () => {
       new Helmet(config).enableFor(app);
       // base + CSP + referrer + CORP + permissions-policy = 5 minimum
       expect(capturedMiddlewares.length).toBeGreaterThanOrEqual(4);
+    });
+  });
+
+  describe('Content-Security-Policy directives', () => {
+    function getCspDirectives(): Record<string, string[]> {
+      const { app } = makeMockApp();
+      new Helmet(config).enableFor(app);
+
+      const cspMock = helmet.contentSecurityPolicy as unknown as jest.Mock;
+      expect(cspMock).toHaveBeenCalled();
+      return cspMock.mock.calls[0][0].directives as Record<string, string[]>;
+    }
+
+    it("does not include 'unsafe-inline' in style-src", () => {
+      const directives = getCspDirectives();
+      expect(directives.styleSrc).not.toContain("'unsafe-inline'");
+    });
+
+    it('keeps required non-inline style-src entries', () => {
+      const directives = getCspDirectives();
+      expect(directives.styleSrc).toEqual(
+        expect.arrayContaining([
+          "'self'",
+          '*.googletagmanager.com',
+          'https://tagmanager.google.com',
+          'https://fonts.googleapis.com',
+        ])
+      );
+    });
+
+    it('keeps telemetry script-src entries', () => {
+      const directives = getCspDirectives();
+      expect(directives.scriptSrc).toEqual(
+        expect.arrayContaining([
+          '*.googletagmanager.com',
+          'https://tagmanager.google.com',
+          '*.google-analytics.com',
+          '*.dynatrace.com',
+        ])
+      );
     });
   });
 

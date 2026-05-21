@@ -69,7 +69,7 @@ export class Helmet {
           manifestSrc: [self],
           objectSrc: [self],
           scriptSrc,
-          styleSrc: [self, ...tagManager, "'unsafe-inline'", 'https://fonts.googleapis.com'],
+          styleSrc: [self, ...tagManager, 'https://fonts.googleapis.com'],
         },
       }) as RequestHandler
     );

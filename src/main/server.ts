@@ -47,7 +47,21 @@ app.locals.developmentMode = process.env.NODE_ENV !== 'production';
 app.use(favicon(path.join(__dirname, '/public/assets/images/favicon.ico')));
 app.use(bodyParser.json() as RequestHandler);
 app.use(bodyParser.urlencoded({ extended: false }) as RequestHandler);
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {
+  setHeaders: (res, staticPath) => {
+    const fileName = path.basename(staticPath).toLowerCase();
+    const isJsOrCssAsset = /\.(js|css)$/i.test(fileName);
+    const hasFingerprint = /[a-f0-9]{8,}/i.test(fileName);
+    const isDevBundle = fileName.endsWith('-dev.js') || fileName.endsWith('-dev.css');
+
+    const cacheHeader =
+      isJsOrCssAsset && hasFingerprint && !isDevBundle
+        ? 'public, max-age=31536000, immutable'
+        : 'public, max-age=3600, must-revalidate';
+
+    res.setHeader('Cache-Control', cacheHeader);
+  },
+}));
 app.use((req, res, next) => {
   res.setHeader('X-Robots-Tag', 'noindex');
   res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');

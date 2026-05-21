@@ -195,7 +195,7 @@ Here's an example setup:
 
 ```json
     "security": {
-      "referrerPolicy": "origin",
+      "referrerPolicy": "strict-origin-when-cross-origin",
     }
 ```
 

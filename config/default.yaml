@@ -1,5 +1,5 @@
 security:
-  referrerPolicy: 'origin'
+  referrerPolicy: 'strict-origin-when-cross-origin'
   crossOriginResourcePolicy: 'same-origin'
 port: 3000
 timeout: 30000
