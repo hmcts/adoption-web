@@ -5202,7 +5202,7 @@ __metadata:
     eslint-plugin-jest: "npm:^26.5.3"
     eslint-plugin-prettier: "npm:^4.0.0"
     express: "npm:^4.22.1"
-    express-rate-limit: "npm:^8.3.2"
+    express-rate-limit: "npm:^8.5.2"
     express-session: "npm:^1.18.2"
     form-data: "npm:^4.0.4"
     git-rev-sync: "npm:^3.0.2"
@@ -8214,7 +8214,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express-rate-limit@npm:^8.3.2":
+"express-rate-limit@npm:^8.5.2":
   version: 8.5.2
   resolution: "express-rate-limit@npm:8.5.2"
   dependencies:
