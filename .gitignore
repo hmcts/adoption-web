@@ -39,3 +39,4 @@ output/
 /playwright/.cache/
 playwright-e2e/tests/test-results/
 config/local.yaml
+.claude/
