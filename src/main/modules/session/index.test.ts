@@ -73,7 +73,7 @@ describe('session', () => {
       cookie: {
         httpOnly: true,
         maxAge: 1260000,
-        sameSite: 'lax',
+        sameSite: 'strict',
       },
       rolling: true,
       store: mockSessionFileStore,
