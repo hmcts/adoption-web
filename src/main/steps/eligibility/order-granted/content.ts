@@ -30,27 +30,28 @@ const en = () => ({
 
 const cy: typeof en = () => ({
   section: 'Manylion y cais',
-  title: 'Ydych chi’n gwneud cais i fabwysiadu mwy nag un plentyn?',
+  title: 'A yw’r plentyn yr ydych yn gwneud cais i’w fabwysiadu yn destun Gorchymyn Lleoli a ganiatawyd gan y llys?',
   orderGrantedNo:
-    '(Welsh) - Unfortunately you cannot use the online adoption application.  You must apply by post for all other types of adoption such as:',
-  stepChild: 'adopting a stepchild',
+    "Yn anffodus, ni allwch ddefnyddio'r cais mabwysiadu ar-lein. Mae'n rhaid i chi wneud cais drwy'r post ar gyfer pob math arall o fabwysiadu fel:",
+  stepChild: 'mabwysiadu llysblentyn',
   stepChildUrl: 'https://www.gov.uk/mabwysiadu-plentyn/mabwysiadu-llysblentyn',
-  overseaChild: 'adopting a child from overseas',
+  overseaChild: 'mabwysiadu plentyn o wlad dramor',
   overseaChildUrl: 'https://www.gov.uk/mabwysiadu-plentyn/mabwysiadu-plentyn-o-wlad-dramor',
-  specialGuardian1: 'adopting a child when you’re their ',
-  specialGuardian2: 'special guardian',
+  specialGuardian1: 'mabwysiadu plentyn pan ydych yn',
+  specialGuardian2: 'warcheidwad arbennig iddynt',
   specialGuardianUrl: 'https://www.gov.uk/apply-special-guardian',
-  ageSixWeeks: 'adopting a child under the age of 6 weeks whose parents have asked for the adoption',
-  moreInfo1: 'You can find more information',
-  moreInfo2: 'here',
-  moreInfo3: 'or contact your social worker for support.',
+  ageSixWeeks: "mabwysiadu plentyn o dan 6 wythnos oed y mae'r rhieni wedi gofyn i'r plentyn gael ei fabwysiadu",
+  moreInfo1: 'Gallwch ddod o hyd i fwy o wybodaeth',
+  moreInfo2: 'yma',
+  moreInfo3: "neu gysylltu gyda'r gweithiwr cymdeithasol am gefnogaeth.",
   moreInfoUrl: 'https://www.gov.uk/mabwysiadu-plentyn',
   continue: 'Parhau',
   yes: 'Ydw',
   no: 'Nac ydw',
   errors: {
     orderGrantedEligible: {
-      required: 'Dewiswch a ydych chi’n gwneud cais i fabwysiadu mwy nag un plentyn',
+      required:
+        'Dewiswch a ydych yw’r plentyn yr ydych yn gwneud cais i’w fabwysiadu yn destun Gorchymyn Lleoli a ganiatawyd gan y llys.',
     },
   },
 });
