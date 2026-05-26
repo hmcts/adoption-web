@@ -51,37 +51,34 @@ test.describe('Citizen Journey other adoption agency single parent test', () => 
     await expect(citOtherAdoptionAgencyPage.errorSummary).toBeVisible();
   });
 
-  test('check clicking save and draft goes to save as draft page', async ({ citOtherAdoptionAgencyPage, page }) => {
+  test('check clicking save and draft goes to save as draft page', async ({
+    citOtherAdoptionAgencyPage
+  }) => {
     await citOtherAdoptionAgencyPage.clickSaveAsDraft();
-
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
-    const actualUrl = page.url();
-    await expect(actualUrl).toBe(expectedUrl);
+    await expect(
+      citOtherAdoptionAgencyPage.page.getByRole('heading', { name: 'Your application has been saved' })
+    ).toBeVisible();
   });
 
   test('check clicking no radio button then save and continuing returns to task list page', async ({
     citOtherAdoptionAgencyPage,
-    page,
   }) => {
     await citOtherAdoptionAgencyPage.checkNoRadioButton();
 
     await citOtherAdoptionAgencyPage.clickSaveAndContinue();
-
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/task-list`;
-    const actualUrl = page.url();
-    await expect(actualUrl).toBe(expectedUrl);
+    await expect(
+      citOtherAdoptionAgencyPage.page.getByRole('heading', { name: 'Apply to adopt a child placed in your care' })
+    ).toBeVisible();
   });
 
   test('check clicking yes radio button then save and continue goes to adoption agency page', async ({
     citOtherAdoptionAgencyPage,
-    page,
   }) => {
     await citOtherAdoptionAgencyPage.checkYesRadioButton();
 
     await citOtherAdoptionAgencyPage.clickSaveAndContinue();
-
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/children/adoption-agency`;
-    const actualUrl = page.url();
-    await expect(actualUrl).toBe(expectedUrl);
+    await expect(
+      citOtherAdoptionAgencyPage.page.getByRole('heading', { name: 'Adoption agency or local authority details' })
+    ).toBeVisible();
   });
 });
