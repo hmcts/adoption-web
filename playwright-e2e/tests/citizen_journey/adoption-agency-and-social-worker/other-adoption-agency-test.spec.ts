@@ -51,9 +51,7 @@ test.describe('Citizen Journey other adoption agency single parent test', () => 
     await expect(citOtherAdoptionAgencyPage.errorSummary).toBeVisible();
   });
 
-  test('check clicking save and draft goes to save as draft page', async ({
-    citOtherAdoptionAgencyPage
-  }) => {
+  test('check clicking save and draft goes to save as draft page', async ({ citOtherAdoptionAgencyPage }) => {
     await citOtherAdoptionAgencyPage.clickSaveAsDraft();
     await expect(
       citOtherAdoptionAgencyPage.page.getByRole('heading', { name: 'Your application has been saved' })
