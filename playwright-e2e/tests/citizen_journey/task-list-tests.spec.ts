@@ -109,7 +109,7 @@ test.describe('Citizen Journey task list page test single parent', () => {
     expect(actual).toBe(expected);
   });
 
-  test.only('check number of applicants link goes to expected URL', async ({ citTaskListPage }) => {
+  test('check number of applicants link goes to expected URL', async ({ citTaskListPage }) => {
     await citTaskListPage.clickNumberOfApplicantsLink();
     await expect(
       citTaskListPage.page.getByRole('heading', { name: 'Are you applying on your own, or with someone else?' })
