@@ -5234,7 +5234,7 @@ __metadata:
     ts-node: "npm:^10.8.1"
     tsconfig-paths: "npm:^4.0.0"
     typescript: "npm:<5.2.0"
-    uuid: "npm:^12.0.1"
+    uuid: "npm:^8.3.2"
     webpack: "npm:^5.94.0"
     webpack-cli: "npm:^4.9.2"
     webpack-dev-middleware: "npm:^5.3.3"
@@ -15049,16 +15049,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:^12.0.1":
-  version: 12.0.1
-  resolution: "uuid@npm:12.0.1"
-  bin:
-    uuid: dist/bin/uuid
-  checksum: 10/949407b5ef655432b94a445a66ddfa6b063e5a2efa70e73dbb3ac53a784dd4dfb3b4b18075d5f9ea028130af4aacf6f6307bc5078e705d28c0d98af67c3f0812
-  languageName: node
-  linkType: hard
-
-"uuid@npm:^8.3.0":
+"uuid@npm:^8.3.0, uuid@npm:^8.3.2":
   version: 8.3.2
   resolution: "uuid@npm:8.3.2"
   bin:
