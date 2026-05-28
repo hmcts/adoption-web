@@ -1,7 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import * as dotenv from 'dotenv';
 import qs from 'qs';
-import { v4 as uuidv4 } from 'uuid';
 
 dotenv.config();
 
@@ -52,6 +51,8 @@ export async function createCitizenUser(token: string): Promise<{ email: string;
   if (!process.env.IDAM_CITIZEN_USER_PASSWORD) {
     throw new Error('PASSWORD environment variable is not defined');
   }
+  // eslint-disable-next-line import/no-unresolved
+  const { v4: uuidv4 } = await import('uuid');
   const uniqueId = uuidv4();
   const id = uniqueId;
   const password = process.env.IDAM_CITIZEN_USER_PASSWORD as string;
