@@ -1,7 +1,6 @@
 import autobind from 'autobind-decorator';
 import config from 'config';
 import type { Response } from 'express';
-// eslint-disable-next-line import/no-unresolved
 import { v4 as generateUuid } from 'uuid';
 
 import { saveDraftCase } from '../../modules/draft-store/draft-store-service';
