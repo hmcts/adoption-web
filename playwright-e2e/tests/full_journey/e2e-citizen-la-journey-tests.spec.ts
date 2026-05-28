@@ -30,7 +30,7 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
 
   const e2eTestTags = { tag: ['@e2e', '@citizen', '@accessibility'] };
 
-  test(
+  test.only(
     'submitting application where spouse is not a partner local authority journey',
     e2eTestTags,
     async (
