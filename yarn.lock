@@ -7169,9 +7169,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.5.328":
-  version: 1.5.363
-  resolution: "electron-to-chromium@npm:1.5.363"
-  checksum: 10/2a2a0e32b9e8a3264839d7f174d1f945007fc3e11f0ce68bf47be31ad5bbd912ad562d15cbcfada9e886d0489a3f039b1fac6fcecf46d75ef1a54425ceb2fadd
+  version: 1.5.364
+  resolution: "electron-to-chromium@npm:1.5.364"
+  checksum: 10/2d498239abc5f9891eb8b6a7c872e5ace9c1aa6094f42a4adf5a2b386cadd4e1a0ee93b5ffe042db5b6320562e9a07fa83adb435f3ed580d8a2fafff580025d2
   languageName: node
   linkType: hard
 
@@ -7487,14 +7487,14 @@ __metadata:
   linkType: hard
 
 "eslint-module-utils@npm:^2.12.1":
-  version: 2.12.1
-  resolution: "eslint-module-utils@npm:2.12.1"
+  version: 2.13.0
+  resolution: "eslint-module-utils@npm:2.13.0"
   dependencies:
     debug: "npm:^3.2.7"
   peerDependenciesMeta:
     eslint:
       optional: true
-  checksum: 10/bd25d6610ec3abaa50e8f1beb0119541562bbb8dd02c035c7e887976fe1e0c5dd8175f4607ca8d86d1146df24d52a071bd3d1dd329f6902bd58df805a8ca16d3
+  checksum: 10/cecb2c341bddc85314b3cf3cf9354e894b9af3047c28db248ad498166847029c710caf605dc43f903086edb0ce9bd83a61b21ed217eb2237807c742d33ccf7fb
   languageName: node
   linkType: hard
 
@@ -8739,11 +8739,11 @@ __metadata:
   linkType: hard
 
 "hasown@npm:^2.0.2, hasown@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "hasown@npm:2.0.3"
+  version: 2.0.4
+  resolution: "hasown@npm:2.0.4"
   dependencies:
     function-bind: "npm:^1.1.2"
-  checksum: 10/619526379cda755409d856cbf3c65b82ea342151719a0a550920cf7d6a7f58f7cf079e5a78f3acd162324fc784a3d3d6f6f61aff613b47a0163c16fbe09ea89f
+  checksum: 10/13823863ae48161068b4c51606a3128451c66f14545a5169d667fe9fca168dcd38c27570c7a299e32ef844b8da3d55def7fe88602f8970d4311fb543ee88001a
   languageName: node
   linkType: hard
 
@@ -9011,9 +9011,9 @@ __metadata:
   linkType: hard
 
 "immutable@npm:^5.1.5":
-  version: 5.1.5
-  resolution: "immutable@npm:5.1.5"
-  checksum: 10/7aec2740239772ec8e92e793c991bd809203a97694f4ff3a18e50e28f9a6b02393ad033d87b458037bdf8c0ea37d4446d640e825f6171df3405cf6cf300ce028
+  version: 5.1.6
+  resolution: "immutable@npm:5.1.6"
+  checksum: 10/4ba416dac4cc9d1cab4155bd6aefa54d5ca25e56bfee8a1d4edc3f23115b599486edafe76e91f83d22961bd065754fd705b04f052809ec967ccd71817c8dac2a
   languageName: node
   linkType: hard
 
