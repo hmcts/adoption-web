@@ -109,59 +109,49 @@ test.describe('Citizen Journey task list page test single parent', () => {
     expect(actual).toBe(expected);
   });
 
-  test('check number of applicants link goes to expected URL', async ({ citTaskListPage, page }) => {
-    const expected = `${urlConfig.citizenFrontendBaseUrl}/applying-with`;
-
+  test('check number of applicants link navigate to Number of applicant page', async ({ citTaskListPage }) => {
     await citTaskListPage.clickNumberOfApplicantsLink();
-
-    expect(page.url()).toBe(expected);
+    await expect(
+      citTaskListPage.page.getByRole('heading', { name: 'Are you applying on your own, or with someone else?' })
+    ).toBeVisible();
   });
 
-  test('check date child moved in link goes to expected URL', async ({ citTaskListPage, page }) => {
-    const expected = `${urlConfig.citizenFrontendBaseUrl}/date-child-moved-in`;
-
+  test('check date child moved in link navigate to child moved in details page', async ({ citTaskListPage }) => {
     await citTaskListPage.clickDateChildMovedInLink();
-
-    expect(page.url()).toBe(expected);
+    await expect(
+      citTaskListPage.page.getByRole('heading', { name: 'When did the child move in with you?' })
+    ).toBeVisible();
   });
 
-  test('check child details link goes to expected URL', async ({ citTaskListPage, page }) => {
-    const expected = `${urlConfig.citizenFrontendBaseUrl}/children/full-name`;
-
+  test('check child details link navigate to child details page', async ({ citTaskListPage }) => {
     await citTaskListPage.clickChildDetailsLink();
-
-    expect(page.url()).toBe(expected);
+    await expect(citTaskListPage.page.getByRole('heading', { name: "What is the child's full name?" })).toBeVisible();
   });
 
-  test('check adoption agency link goes to expected URL', async ({ citTaskListPage, page }) => {
-    const expected = `${urlConfig.citizenFrontendBaseUrl}/children/social-worker`;
-
+  test('check Adoption agency and social worker  link navigate to social workers details page', async ({
+    citTaskListPage,
+  }) => {
     await citTaskListPage.clickAdoptionAgencyLink();
-
-    expect(page.url()).toBe(expected);
+    await expect(citTaskListPage.page.getByRole('heading', { name: "Child's social worker details" })).toBeVisible();
   });
 
-  test('check family court link goes to expected URL', async ({ citTaskListPage, page }) => {
-    const expected = `${urlConfig.citizenFrontendBaseUrl}/children/find-placement-order-court`;
-
+  test('check family court link navigate to order details page', async ({ citTaskListPage }) => {
     await citTaskListPage.clickFamilyCourtLink();
-
-    expect(page.url()).toBe(expected);
+    await expect(
+      citTaskListPage.page.getByRole('heading', { name: 'Which court made the placement order?' })
+    ).toBeVisible();
   });
 
-  test('check applicant 1 personal details link goes to expected URL', async ({ citTaskListPage, page }) => {
-    const expected = `${urlConfig.citizenFrontendBaseUrl}/applicant1/full-name`;
-
+  test('check applicant 1 personal details link navigate to applicant1 details page', async ({ citTaskListPage }) => {
     await citTaskListPage.clickFirstApplicantPersonalDetailsLink();
-
-    expect(page.url()).toBe(expected);
+    await citTaskListPage.page.waitForURL(`${urlConfig.citizenFrontendBaseUrl}/applicant1/full-name`);
+    await expect(citTaskListPage.page.getByRole('heading', { name: "What's your full name?" })).toBeVisible();
   });
 
-  test('check applicant 1 contact details link goes to expected URL', async ({ citTaskListPage, page }) => {
-    const expected = `${urlConfig.citizenFrontendBaseUrl}/applicant1/address/lookup`;
-
+  test('check applicant 1 contact details link navigate to applicant1 contact details page', async ({
+    citTaskListPage,
+  }) => {
     await citTaskListPage.clickFirstAppicantContactDetailsLink();
-
-    expect(page.url()).toBe(expected);
+    await expect(citTaskListPage.page.getByRole('heading', { name: "What's your home address?" })).toBeVisible();
   });
 });
