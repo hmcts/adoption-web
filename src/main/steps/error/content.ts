@@ -16,6 +16,10 @@ const en = {
     title: 'Sorry, there is a problem with the online adoption service',
     info: 'Please try again later. We have saved your answers.',
   },
+  [StatusCodes.TOO_MANY_REQUESTS]: {
+    title: 'Sorry, there was a problem',
+    line1: 'Too many requests from this IP address, please try again later.',
+  },
 };
 
 const cy: typeof en = {
@@ -34,6 +38,10 @@ const cy: typeof en = {
   [StatusCodes.INTERNAL_SERVER_ERROR]: {
     title: 'Yn anffodus, rydym yn cael problemau technegol',
     info: 'Rhowch gynnig arall arni ymhen ychydig funudau',
+  },
+  [StatusCodes.TOO_MANY_REQUESTS]: {
+    title: 'Mae’n ddrwg gennym, roedd problem',
+    line1: 'Cafwyd gormod o geisiadau gan y cyfeiriad IP hwn, rhowch gynnig arall arni yn hwyrach ymlaen.',
   },
 };
 
