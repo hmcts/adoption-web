@@ -110,9 +110,12 @@ describe('sibling > remove-placement-order > content', () => {
       },
     },
   ])('should create correct label %#', ({ siblingId, siblingRelation, siblingPoType, expected }) => {
-    commonContent.userCase!.siblings![0]!.siblingId = siblingId;
-    commonContent.userCase!.siblings![0]!.siblingRelation = siblingRelation;
-    commonContent.userCase!.siblings![0]!.siblingPoType = siblingPoType;
+    const sibling = commonContent.userCase?.siblings?.[0];
+    if (sibling) {
+      sibling.siblingId = siblingId;
+      sibling.siblingRelation = siblingRelation;
+      sibling.siblingPoType = siblingPoType;
+    }
     generatedContent = generateContent(commonContent);
     expect(generatedContent.title).toBe(expected.label);
   });

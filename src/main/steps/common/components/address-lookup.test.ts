@@ -59,7 +59,7 @@ describe('common > components > address-lookup > content', () => {
     expect(addressPostcodeField.classes).toBe('govuk-label govuk-input--width-10');
     expect((addressPostcodeField.label as Function)(generatedContent)).toBe('Postcode');
     expect(addressPostcodeField.labelSize).toBe('m');
-    expect(addressPostcodeField.attributes!.maxLength).toBe(14);
+    expect(addressPostcodeField.attributes?.maxLength).toBe(14);
     expect(addressPostcodeField.validator).toBe(isInvalidPostcode);
   });
 

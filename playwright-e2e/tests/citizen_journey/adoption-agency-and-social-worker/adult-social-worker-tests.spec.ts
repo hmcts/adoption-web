@@ -1,6 +1,5 @@
 import { expect, test } from '../../../fixtures/fixtures';
 import { setupUser, teardownUser } from '../../../hooks/createDeleteUser.hook';
-import { urlConfig } from '../../../utils/urls';
 import { runChangePageLanguageTest, runPageLanguageTest } from '../test-utils';
 test.describe('Citizen Journey adult social worker test single parent', () => {
   let userEmail: string;
@@ -118,9 +117,9 @@ test.describe('Citizen Journey adult social worker test single parent', () => {
     await citAdultSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('test@justice.gov.uk');
     await citAdultSocialWorkerDetailsPage.clickSaveAsDraft();
 
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
-    const actualUrl = page.url();
-    await expect(actualUrl).toBe(expectedUrl);
+    await expect(
+      citAdultSocialWorkerDetailsPage.page.getByRole('heading', { name: 'Your application has been saved' })
+    ).toBeVisible();
 
     await page.goBack();
 
@@ -143,7 +142,6 @@ test.describe('Citizen Journey adult social worker test single parent', () => {
   });
 
   test('check inserting correct data then pressing save and continue advances to the next step', async ({
-    page,
     citAdultSocialWorkerDetailsPage,
   }) => {
     await citAdultSocialWorkerDetailsPage.fillNameOfAdultSocialWorkerLabel('test');
@@ -152,8 +150,10 @@ test.describe('Citizen Journey adult social worker test single parent', () => {
     await citAdultSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('test@justice.gov.uk');
     await citAdultSocialWorkerDetailsPage.clickSaveAndContinue();
 
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/children/other-adoption-agency`;
-    const actualUrl = page.url();
-    await expect(actualUrl).toBe(expectedUrl);
+    await expect(
+      citAdultSocialWorkerDetailsPage.page.getByRole('heading', {
+        name: 'Is there another adoption agency or local authority involved?',
+      })
+    ).toBeVisible();
   });
 });

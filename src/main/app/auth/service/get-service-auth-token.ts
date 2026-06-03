@@ -1,5 +1,5 @@
 import { Logger } from '@hmcts/nodejs-logging';
-import Axios from 'axios';
+import axios from 'axios';
 import config from 'config';
 import { authenticator } from 'otplib';
 
@@ -16,7 +16,7 @@ export const getTokenFromApi = async (): Promise<string> => {
   const body = { microservice, oneTimePassword };
 
   try {
-    const response = await Axios.post(url, body);
+    const response = await axios.post(url, body);
     logger.info('Service auth token refreshed');
     token = response.data;
   } catch (err) {
