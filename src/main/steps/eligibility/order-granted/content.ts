@@ -2,6 +2,7 @@ import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
+import { Language } from '../../common/common.content';
 
 const en = () => ({
   section: 'Application details',
@@ -56,6 +57,23 @@ const cy: typeof en = () => ({
   },
 });
 
+const languages = {
+  en,
+  cy,
+};
+
+export const orderGrantedNotEligibleText = (language: Language): string => notEligibleText(languages[language]());
+
+const notEligibleText = (l: Record<string, never> | ReturnType<typeof en>): string =>
+  `<p class="govuk-label">${l.orderGrantedNo}</p>` +
+  '<ul class="govuk-list govuk-list--bullet">' +
+  `<li><a class="govuk-link" href="${l.stepChildUrl}">${l.stepChild}</a></li>` +
+  `<li><a class="govuk-link" href="${l.overseaChildUrl}">${l.overseaChild}</a></li>` +
+  `<li>${l.specialGuardian1} <a class="govuk-link" href="${l.specialGuardianUrl}">${l.specialGuardian2}</a></li>` +
+  `<li>${l.ageSixWeeks}</li>` +
+  '</ul>' +
+  `<p class="govuk-label">${l.moreInfo1} <a class="govuk-link" href="${l.moreInfoUrl}">${l.moreInfo2}</a> ${l.moreInfo3}</p>`;
+
 export const form: FormContent = {
   fields: {
     orderGrantedEligible: {
@@ -69,15 +87,7 @@ export const form: FormContent = {
         {
           label: l => l.no,
           value: YesOrNo.NO,
-          conditionalText: l =>
-            `<p class="govuk-label">${l.orderGrantedNo}</p>` +
-            '<ul class="govuk-list govuk-list--bullet">' +
-            `<li><a class="govuk-link" href="${l.stepChildUrl}">${l.stepChild}</a></li>` +
-            `<li><a class="govuk-link" href="${l.overseaChildUrl}">${l.overseaChild}</a></li>` +
-            `<li>${l.specialGuardian1} <a class="govuk-link" href="${l.specialGuardianUrl}">${l.specialGuardian2}</a></li>` +
-            `<li>${l.ageSixWeeks}</li>` +
-            '</ul>' +
-            `<p class="govuk-label">${l.moreInfo1} <a class="govuk-link" href="${l.moreInfoUrl}">${l.moreInfo2}</a> ${l.moreInfo3}</p>`,
+          conditionalText: notEligibleText,
         },
       ],
       validator: isFieldFilledIn,
@@ -90,11 +100,6 @@ export const form: FormContent = {
     text: '',
   },
   hideContactHelpSection: true,
-};
-
-const languages = {
-  en,
-  cy,
 };
 
 export const generateContent: TranslationFn = content => {

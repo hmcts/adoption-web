@@ -1,5 +1,6 @@
 import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
+import { orderGrantedNotEligibleText } from '../order-granted/content';
 
 const en = content => ({
   section: "Check you're eligible to adopt",
@@ -16,6 +17,9 @@ const en = content => ({
       : ''
   }`,
   line2: 'More about adoption',
+  messageBlock: `${
+    content.eligibility.orderGrantedEligible === YesOrNo.NO ? orderGrantedNotEligibleText(content.language) : ''
+  }`,
 });
 
 const cy = content => ({
@@ -33,6 +37,9 @@ const cy = content => ({
       : ''
   }`,
   line2: 'Mwy o wybodaeth am fabwysiadu',
+  messageBlock: `${
+    content.eligibility.orderGrantedEligible === YesOrNo.NO ? orderGrantedNotEligibleText(content.language) : ''
+  }`,
 });
 
 const languages = {
