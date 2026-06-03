@@ -62,9 +62,9 @@ const languages = {
   cy,
 };
 
-export const orderGrantedNotEligibleText = (language: Language): string => notEligibleText(languages[language]());
+export const orderGrantedNotEligibleMessage = (language: Language): string => notEligibleMessage(languages[language]());
 
-const notEligibleText = (l: Record<string, never> | ReturnType<typeof en>): string =>
+const notEligibleMessage = (l: Record<string, never> | ReturnType<typeof en>): string =>
   `<p class="govuk-label">${l.orderGrantedNo}</p>` +
   '<ul class="govuk-list govuk-list--bullet">' +
   `<li><a class="govuk-link" href="${l.stepChildUrl}">${l.stepChild}</a></li>` +
@@ -87,7 +87,7 @@ export const form: FormContent = {
         {
           label: l => l.no,
           value: YesOrNo.NO,
-          conditionalText: notEligibleText,
+          conditionalText: notEligibleMessage,
         },
       ],
       validator: isFieldFilledIn,
