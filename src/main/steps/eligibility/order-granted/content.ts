@@ -19,7 +19,7 @@ const en = () => ({
   moreInfo1: 'You can find more information',
   moreInfo2: 'here',
   moreInfo3: 'or contact your social worker for support.',
-  moreInfoUrl: 'https://www.gov.uk/child-adoption',
+  moreInfoUrl: 'https://www.gov.uk/child-adoption/applying-for-an-adoption-court-order',
   continue: 'Continue',
   errors: {
     orderGrantedEligible: {
@@ -44,10 +44,10 @@ const cy: typeof en = () => ({
   moreInfo1: 'Gallwch ddod o hyd i fwy o wybodaeth',
   moreInfo2: 'yma',
   moreInfo3: "neu gysylltu gyda'r gweithiwr cymdeithasol am gefnogaeth.",
-  moreInfoUrl: 'https://www.gov.uk/mabwysiadu-plentyn',
+  moreInfoUrl: 'https://www.gov.uk/mabwysiadu-plentyn/gwneud-cais-am-orchymyn-mabwysiadu-gan-y-llys',
   continue: 'Parhau',
-  yes: 'Ydw',
-  no: 'Nac ydw',
+  yes: 'Ydy',
+  no: 'Nac ydy',
   errors: {
     orderGrantedEligible: {
       required:
