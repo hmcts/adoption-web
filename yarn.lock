@@ -3346,66 +3346,66 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pact-foundation/pact-core-darwin-arm64@npm:19.1.0":
-  version: 19.1.0
-  resolution: "@pact-foundation/pact-core-darwin-arm64@npm:19.1.0"
+"@pact-foundation/pact-core-darwin-arm64@npm:19.2.0":
+  version: 19.2.0
+  resolution: "@pact-foundation/pact-core-darwin-arm64@npm:19.2.0"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@pact-foundation/pact-core-darwin-x64@npm:19.1.0":
-  version: 19.1.0
-  resolution: "@pact-foundation/pact-core-darwin-x64@npm:19.1.0"
+"@pact-foundation/pact-core-darwin-x64@npm:19.2.0":
+  version: 19.2.0
+  resolution: "@pact-foundation/pact-core-darwin-x64@npm:19.2.0"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@pact-foundation/pact-core-linux-arm64-glibc@npm:19.1.0":
-  version: 19.1.0
-  resolution: "@pact-foundation/pact-core-linux-arm64-glibc@npm:19.1.0"
+"@pact-foundation/pact-core-linux-arm64-glibc@npm:19.2.0":
+  version: 19.2.0
+  resolution: "@pact-foundation/pact-core-linux-arm64-glibc@npm:19.2.0"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@pact-foundation/pact-core-linux-arm64-musl@npm:19.1.0":
-  version: 19.1.0
-  resolution: "@pact-foundation/pact-core-linux-arm64-musl@npm:19.1.0"
+"@pact-foundation/pact-core-linux-arm64-musl@npm:19.2.0":
+  version: 19.2.0
+  resolution: "@pact-foundation/pact-core-linux-arm64-musl@npm:19.2.0"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@pact-foundation/pact-core-linux-x64-glibc@npm:19.1.0":
-  version: 19.1.0
-  resolution: "@pact-foundation/pact-core-linux-x64-glibc@npm:19.1.0"
+"@pact-foundation/pact-core-linux-x64-glibc@npm:19.2.0":
+  version: 19.2.0
+  resolution: "@pact-foundation/pact-core-linux-x64-glibc@npm:19.2.0"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@pact-foundation/pact-core-linux-x64-musl@npm:19.1.0":
-  version: 19.1.0
-  resolution: "@pact-foundation/pact-core-linux-x64-musl@npm:19.1.0"
+"@pact-foundation/pact-core-linux-x64-musl@npm:19.2.0":
+  version: 19.2.0
+  resolution: "@pact-foundation/pact-core-linux-x64-musl@npm:19.2.0"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@pact-foundation/pact-core-windows-x64@npm:19.1.0":
-  version: 19.1.0
-  resolution: "@pact-foundation/pact-core-windows-x64@npm:19.1.0"
+"@pact-foundation/pact-core-windows-x64@npm:19.2.0":
+  version: 19.2.0
+  resolution: "@pact-foundation/pact-core-windows-x64@npm:19.2.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@pact-foundation/pact-core@npm:^19.1.0":
-  version: 19.1.0
-  resolution: "@pact-foundation/pact-core@npm:19.1.0"
+"@pact-foundation/pact-core@npm:^19.2.0":
+  version: 19.2.0
+  resolution: "@pact-foundation/pact-core@npm:19.2.0"
   dependencies:
-    "@pact-foundation/pact-core-darwin-arm64": "npm:19.1.0"
-    "@pact-foundation/pact-core-darwin-x64": "npm:19.1.0"
-    "@pact-foundation/pact-core-linux-arm64-glibc": "npm:19.1.0"
-    "@pact-foundation/pact-core-linux-arm64-musl": "npm:19.1.0"
-    "@pact-foundation/pact-core-linux-x64-glibc": "npm:19.1.0"
-    "@pact-foundation/pact-core-linux-x64-musl": "npm:19.1.0"
-    "@pact-foundation/pact-core-windows-x64": "npm:19.1.0"
+    "@pact-foundation/pact-core-darwin-arm64": "npm:19.2.0"
+    "@pact-foundation/pact-core-darwin-x64": "npm:19.2.0"
+    "@pact-foundation/pact-core-linux-arm64-glibc": "npm:19.2.0"
+    "@pact-foundation/pact-core-linux-arm64-musl": "npm:19.2.0"
+    "@pact-foundation/pact-core-linux-x64-glibc": "npm:19.2.0"
+    "@pact-foundation/pact-core-linux-x64-musl": "npm:19.2.0"
+    "@pact-foundation/pact-core-windows-x64": "npm:19.2.0"
     check-types: "npm:11.2.3"
     detect-libc: "npm:^2.0.3"
     node-gyp-build: "npm:^4.6.0"
@@ -3427,16 +3427,16 @@ __metadata:
       optional: true
     "@pact-foundation/pact-core-windows-x64":
       optional: true
-  checksum: 10/0c103d5460b55855a33ff792c88102f5bd9c145547a3e4e301ecb70410df145e3d3c5cec7aa284a34c92d9c5679b1c69cf55a48b77ea60bdfca898c84ee56764
+  checksum: 10/e2076858012c4e06dfdab5fde06f7fc5ba0e0ede1558777c28d7fa0bf98903b916d3d3401716c86634b4b7180ff910dd514d296daab7823ac8c3b00441b8a861
   conditions: (os=darwin | os=linux | os=win32) & (cpu=x64 | cpu=ia32 | cpu=arm64)
   languageName: node
   linkType: hard
 
-"@pact-foundation/pact@npm:^16.3.0":
-  version: 16.3.1
-  resolution: "@pact-foundation/pact@npm:16.3.1"
+"@pact-foundation/pact@npm:^16.5.0":
+  version: 16.5.0
+  resolution: "@pact-foundation/pact@npm:16.5.0"
   dependencies:
-    "@pact-foundation/pact-core": "npm:^19.1.0"
+    "@pact-foundation/pact-core": "npm:^19.2.0"
     axios: "npm:^1.12.2"
     body-parser: "npm:^2.2.0"
     chalk: "npm:4.1.2"
@@ -3444,14 +3444,14 @@ __metadata:
     graphql: "npm:^16.11.0"
     graphql-tag: "npm:^2.12.6"
     http-proxy: "npm:^1.18.1"
-    https-proxy-agent: "npm:^7.0.6"
+    https-proxy-agent: "npm:^9.0.0"
     js-base64: "npm:^3.7.8"
     lodash: "npm:^4.17.21"
     ramda: "npm:^0.32.0"
     randexp: "npm:^0.5.3"
     router: "npm:^2.2.0"
     stack-utils: "npm:^2.0.6"
-  checksum: 10/c1dd6dbde8e682e950c242302493f7a2d536fd231c415c1c58e1a21874d4b9d88c5344221e7443c79abfa092a7a43e268ba6bf1b462eef232c7f0bb436e62dcf
+  checksum: 10/aa58c26aecb472f40b00d6ba25cf907377753067b9c63bfb00fe1c6e696f4b8c4db7323f77c379d7b77032fd4bd33f07f95105e2b25153b45b67cf091fa03159
   languageName: node
   linkType: hard
 
@@ -4103,10 +4103,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4.14.182":
-  version: 4.17.7
-  resolution: "@types/lodash@npm:4.17.7"
-  checksum: 10/b8177f19cf962414a66989837481b13f546afc2e98e8d465bec59e6ac03a59c584eb7053ce511cde3a09c5f3096d22a5ae22cfb56b23f3b0da75b0743b6b1a44
+"@types/lodash@npm:^4.17.24":
+  version: 4.17.24
+  resolution: "@types/lodash@npm:4.17.24"
+  checksum: 10/0f2082565f60f9787eefc046edc38458054512be5a8b3584ef0bad5fd9e85d0ab55ec5a1fbfae1ed6ba015cf1f9e837d5fb4da1f99fc60b8f74b2a46146fb00f
   languageName: node
   linkType: hard
 
@@ -5138,7 +5138,7 @@ __metadata:
     "@hmcts/nodejs-logging": "npm:^4.0.4"
     "@hmcts/playwright-common": "npm:^1.1.2"
     "@hmcts/properties-volume": "npm:^1.4.0"
-    "@pact-foundation/pact": "npm:^16.3.0"
+    "@pact-foundation/pact": "npm:^16.5.0"
     "@pact-foundation/pact-cli": "npm:^18.0.0"
     "@playwright/test": "npm:^1.58.0"
     "@types/autobind-decorator": "npm:^2.1.0"
@@ -5150,7 +5150,7 @@ __metadata:
     "@types/express": "npm:^4.17.13"
     "@types/express-session": "npm:^1.18.2"
     "@types/jest": "npm:^29.0.0"
-    "@types/lodash": "npm:^4.14.182"
+    "@types/lodash": "npm:^4.17.24"
     "@types/mini-css-extract-plugin": "npm:^2.5.1"
     "@types/multer": "npm:^2.0.0"
     "@types/negotiator": "npm:^0.6.1"
@@ -5198,7 +5198,7 @@ __metadata:
     glob: "npm:^8.0.3"
     govuk-frontend: "npm:^5.9.0"
     helmet: "npm:^4.6.0"
-    html-webpack-plugin: "npm:^5.5.0"
+    html-webpack-plugin: "npm:^5.6.7"
     http-status-codes: "npm:^2.2.0"
     husky: "npm:^8.0.1"
     ioredis: "npm:^5.2.2"
@@ -5210,7 +5210,7 @@ __metadata:
     jest-when: "npm:^3.5.1"
     jwt-decode: "npm:^3.1.2"
     lint-staged: "npm:^13.0.0"
-    lodash: "npm:^4.17.23"
+    lodash: "npm:^4.18.1"
     mini-css-extract-plugin: "npm:^2.6.0"
     moment: "npm:^2.29.4"
     moment-timezone: "npm:0.5.43"
@@ -5243,6 +5243,13 @@ __metadata:
     webpack-node-externals: "npm:^3.0.0"
   languageName: unknown
   linkType: soft
+
+"agent-base@npm:9.0.0":
+  version: 9.0.0
+  resolution: "agent-base@npm:9.0.0"
+  checksum: 10/3a61414cd10dbb17fa8dae35124ffaa55fbb00f495004b2e7a8f4eca3a2b6ed9879474d4e2ebc27ee2f4207265652341525b4154e85c4d479be4854acd786bfb
+  languageName: node
+  linkType: hard
 
 "agent-base@npm:^7.0.2, agent-base@npm:^7.1.0, agent-base@npm:^7.1.1":
   version: 7.1.1
@@ -9199,9 +9206,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-webpack-plugin@npm:^5.5.0":
-  version: 5.6.0
-  resolution: "html-webpack-plugin@npm:5.6.0"
+"html-webpack-plugin@npm:^5.6.7":
+  version: 5.6.7
+  resolution: "html-webpack-plugin@npm:5.6.7"
   dependencies:
     "@types/html-minifier-terser": "npm:^6.0.0"
     html-minifier-terser: "npm:^6.0.2"
@@ -9216,7 +9223,7 @@ __metadata:
       optional: true
     webpack:
       optional: true
-  checksum: 10/d651f3a88a7c932c72c6a30f0fdd610b49a864a69f1ddb34562c750f1602ea471e27fd8fc32c01adadd484b38fa6b74f055d1ccce26e5f8fcf814ee0d398a121
+  checksum: 10/fc81e1c2d3ef5d709b700b53bb31feef200a08d9b31a819d4623c80dcf412245939a9d6014e574dc5bed7388b3119e29d047d9e712c4889b8d7270dc25990a8d
   languageName: node
   linkType: hard
 
@@ -9330,6 +9337,16 @@ __metadata:
     agent-base: "npm:^7.1.2"
     debug: "npm:4"
   checksum: 10/784b628cbd55b25542a9d85033bdfd03d4eda630fb8b3c9477959367f3be95dc476ed2ecbb9836c359c7c698027fc7b45723a302324433590f45d6c1706e8c13
+  languageName: node
+  linkType: hard
+
+"https-proxy-agent@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "https-proxy-agent@npm:9.0.0"
+  dependencies:
+    agent-base: "npm:9.0.0"
+    debug: "npm:^4.3.4"
+  checksum: 10/27457d671278c8c1074cc901fe305b70d1e340127433219124c4aefc44153a179a8921e4b16d67beb2868a3a39b6b7ec84d91d8f24f2ec1d39cf4ac385351a92
   languageName: node
   linkType: hard
 
@@ -11063,10 +11080,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.23":
-  version: 4.17.23
-  resolution: "lodash@npm:4.17.23"
-  checksum: 10/82504c88250f58da7a5a4289f57a4f759c44946c005dd232821c7688b5fcfbf4a6268f6a6cdde4b792c91edd2f3b5398c1d2a0998274432cff76def48735e233
+"lodash@npm:^4.18.1":
+  version: 4.18.1
+  resolution: "lodash@npm:4.18.1"
+  checksum: 10/306fea53dfd39dad1f03d45ba654a2405aebd35797b673077f401edb7df2543623dc44b9effbb98f69b32152295fff725a4cec99c684098947430600c6af0c3f
   languageName: node
   linkType: hard
 
