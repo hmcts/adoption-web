@@ -23,7 +23,7 @@ const enContent = {
   moreInfo1: 'You can find more information',
   moreInfo2: 'here',
   moreInfo3: 'or contact your social worker for support.',
-  moreInfoUrl: 'https://www.gov.uk/child-adoption',
+  moreInfoUrl: 'https://www.gov.uk/child-adoption/applying-for-an-adoption-court-order',
   continue: 'Continue',
   errors: {
     orderGrantedEligible: {
@@ -48,10 +48,10 @@ const cyContent = {
   moreInfo1: 'Gallwch ddod o hyd i fwy o wybodaeth',
   moreInfo2: 'yma',
   moreInfo3: "neu gysylltu gyda'r gweithiwr cymdeithasol am gefnogaeth.",
-  moreInfoUrl: 'https://www.gov.uk/mabwysiadu-plentyn',
+  moreInfoUrl: 'https://www.gov.uk/mabwysiadu-plentyn/gwneud-cais-am-orchymyn-mabwysiadu-gan-y-llys',
   continue: 'Parhau',
-  yes: 'Ydw',
-  no: 'Nac ydw',
+  yes: 'Ydy',
+  no: 'Nac ydy',
   errors: {
     orderGrantedEligible: {
       required:
@@ -100,7 +100,7 @@ describe('order granted', () => {
         '<li>adopting a child when you’re their <a class="govuk-link" href="https://www.gov.uk/apply-special-guardian">special guardian</a></li>' +
         '<li>adopting a child under the age of 6 weeks whose parents have asked for the adoption</li>' +
         '</ul>' +
-        '<p class="govuk-label">You can find more information <a class="govuk-link" href="https://www.gov.uk/child-adoption">here</a> or contact your social worker for support.</p>'
+        '<p class="govuk-label">You can find more information <a class="govuk-link" href="https://www.gov.uk/child-adoption/applying-for-an-adoption-court-order">here</a> or contact your social worker for support.</p>'
     );
     expect(field.validator).toBe(isFieldFilledIn);
   });
