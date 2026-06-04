@@ -1,6 +1,5 @@
 import { expect, test } from '../../fixtures/fixtures';
 import { setupUser, teardownUser } from '../../hooks/createDeleteUser.hook';
-import { urlConfig } from '../../utils/urls';
 
 test.describe('Citizen Journey Applying with page test', () => {
   let userEmail: string;
@@ -117,25 +116,21 @@ test.describe('Citizen Journey Applying with page test', () => {
   });
 
   test('check default page clicking save as draft buttons transfer to task list page', async ({
-    page,
     citApplyingWithPage,
   }) => {
     await citApplyingWithPage.clickSaveAsDraft();
-
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
-
-    expect(page.url()).toBe(expectedUrl);
+    await expect(
+      citApplyingWithPage.page.getByRole('heading', { name: 'Your application has been saved' })
+    ).toBeVisible();
   });
 
   test('check page transfer to task list page after checking applying for own radio button', async ({
-    page,
     citApplyingWithPage,
   }) => {
     await citApplyingWithPage.checkApplyingOnMyOwnRadioButton();
     await citApplyingWithPage.clickSaveAndContinue();
-
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/task-list`;
-
-    expect(page.url()).toBe(expectedUrl);
+    await expect(
+      citApplyingWithPage.page.getByRole('heading', { name: 'Apply to adopt a child placed in your care' })
+    ).toBeVisible();
   });
 });
