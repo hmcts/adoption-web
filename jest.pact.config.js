@@ -5,5 +5,8 @@ module.exports = {
   transform: {
     '^.+\\.ts$': 'ts-jest',
   },
+  transformIgnorePatterns: [
+    'node_modules/(?!(@pact-foundation|https-proxy-agent|agent-base)/)',
+  ],
   moduleFileExtensions: ['ts', 'js', 'json'],
 };
