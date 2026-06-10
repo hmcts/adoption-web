@@ -3452,6 +3452,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/config@npm:^0.0.41":
+  version: 0.0.41
+  resolution: "@types/config@npm:0.0.41"
+  checksum: 10/528eb5e5d60c48cf82a2b0988ee1e5e088472698ad25944131b0ba87b2e3bb0989f3b4d45edb9d49eefcc8bf158c267905c386aaec15857b9fb24be449c3f27c
+  languageName: node
+  linkType: hard
+
 "@types/connect-redis@npm:^0.0.23":
   version: 0.0.23
   resolution: "@types/connect-redis@npm:0.0.23"
@@ -4642,6 +4649,7 @@ __metadata:
     "@pact-foundation/pact": "npm:^16.3.0"
     "@pact-foundation/pact-cli": "npm:^18.0.0"
     "@playwright/test": "npm:^1.58.0"
+    "@types/config": "npm:^0.0.41"
     "@types/connect-redis": "npm:^0.0.23"
     "@types/cookie-parser": "npm:^1.4.3"
     "@types/csurf": "npm:^1.11.2"
