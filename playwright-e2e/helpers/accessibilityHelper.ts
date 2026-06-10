@@ -1,9 +1,9 @@
-import AxeBuilder from '@axe-core/playwright';
+import axeBuilder from '@axe-core/playwright';
 import { TestInfo } from '@playwright/test';
 
 import { expect } from '../fixtures/fixtures';
 
-type MakeAxeBuilder = () => AxeBuilder;
+type MakeAxeBuilder = () => axeBuilder;
 export async function attachTestInfo(testInfo: TestInfo, data: object): Promise<void> {
   await testInfo.attach('accessibility-scan-results', {
     body: JSON.stringify(data, null, 2),

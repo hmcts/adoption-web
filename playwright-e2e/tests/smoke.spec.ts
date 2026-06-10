@@ -1,4 +1,4 @@
-import AxeBuilder from '@axe-core/playwright';
+import axeBuilder from '@axe-core/playwright';
 import { test as base } from '@playwright/test';
 import * as dotenv from 'dotenv';
 
@@ -10,9 +10,9 @@ import { toggleBanner, toggleConfig } from '../utils/toggles';
 
 dotenv.config();
 
-const test = base.extend<{ makeAxeBuilder: () => AxeBuilder }>({
+const test = base.extend<{ makeAxeBuilder: () => axeBuilder }>({
   makeAxeBuilder: async ({ page }, use) => {
-    await use(() => new AxeBuilder({ page }));
+    await use(() => new axeBuilder({ page }));
   },
 });
 
