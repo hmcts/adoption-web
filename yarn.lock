@@ -5197,7 +5197,7 @@ __metadata:
     git-rev-sync: "npm:^3.0.2"
     glob: "npm:^8.0.3"
     govuk-frontend: "npm:^5.9.0"
-    helmet: "npm:^4.6.0"
+    helmet: "npm:^8.0.0"
     html-webpack-plugin: "npm:^5.5.0"
     http-status-codes: "npm:^2.2.0"
     husky: "npm:^8.0.1"
@@ -9154,10 +9154,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"helmet@npm:^4.6.0":
-  version: 4.6.0
-  resolution: "helmet@npm:4.6.0"
-  checksum: 10/47129c540dc815a30274b687699738e7dd9acdeeaa5eb4682cba8d364a381fb502b140c7fef5b8d5f9a01d9d17ed8a17ef62c884816bd9e4535d750ce3a9a6be
+"helmet@npm:^8.0.0":
+  version: 8.1.0
+  resolution: "helmet@npm:8.1.0"
+  checksum: 10/262e678d340bb102158f4e6ba1469a7cda1643329a50863f8fe704d5b60d9ebe6ea1e7793ed51224ae464f197dedf2fe8035df278c042e32ebc95b237fa41ad0
   languageName: node
   linkType: hard
 

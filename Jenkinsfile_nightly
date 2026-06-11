@@ -59,6 +59,8 @@ def pipelineConf = new AppPipelineConfig()
 pipelineConf.vaultSecrets = secrets
 
 withNightlyPipeline(type, product, component) {
+  // ZAP security scan target — nightly scans AAT; ensure fixes are deployed to AAT before expecting this to pass
+  env.ADOP_WEB_URL = params.FRONTEND_URL
   env.TEST_URL = params.FRONTEND_URL
   env.ENVIRONMENT = params.ENVIRONMENT
   env.BANNER_ENABLED = params.BANNER_ENABLED
