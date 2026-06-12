@@ -2,7 +2,7 @@ import fs from 'node:fs';
 
 import config from 'config';
 import { Application, RequestHandler } from 'express';
-import limiter, { Options } from 'express-rate-limit';
+import { type Options, rateLimit } from 'express-rate-limit';
 import multer from 'multer';
 import { type RedisReply, RedisStore } from 'rate-limit-redis';
 import type { LoggerInstance } from 'winston';
@@ -64,7 +64,7 @@ export class Routes {
           }),
         };
       }
-      const rateLimiter = limiter(rateLimiterConfig);
+      const rateLimiter = rateLimit(rateLimiterConfig);
 
       app.post(LA_PORTAL_KBA_CASE_REF, rateLimiter);
     }
