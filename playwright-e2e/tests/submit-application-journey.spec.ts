@@ -1,4 +1,4 @@
-import axeBuilder from '@axe-core/playwright';
+import { AxeBuilder } from '@axe-core/playwright';
 import { faker } from '@faker-js/faker';
 import { test as base } from '@playwright/test';
 import * as dotenv from 'dotenv';
@@ -10,9 +10,9 @@ import App from '../pages/app.page';
 
 dotenv.config();
 
-const test = base.extend<{ makeAxeBuilder: () => axeBuilder }>({
+const test = base.extend<{ makeAxeBuilder: () => AxeBuilder }>({
   makeAxeBuilder: async ({ page }, use) => {
-    await use(() => new axeBuilder({ page }));
+    await use(() => new AxeBuilder({ page }));
   },
 });
 
