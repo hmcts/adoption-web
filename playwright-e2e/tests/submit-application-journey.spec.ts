@@ -1,4 +1,4 @@
-import AxeBuilder from '@axe-core/playwright';
+import { AxeBuilder } from '@axe-core/playwright';
 import { faker } from '@faker-js/faker';
 import { test as base } from '@playwright/test';
 import * as dotenv from 'dotenv';
