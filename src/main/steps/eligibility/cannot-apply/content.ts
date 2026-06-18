@@ -3,8 +3,16 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { orderGrantedNotEligibleMessage } from '../order-granted/content';
 
 const en = content => ({
-  section: "Check you're eligible to adopt",
-  title: 'You cannot apply to adopt',
+  section: `${
+    content.eligibility.orderGrantedEligible === YesOrNo.NO
+      ? "Check you're eligible to apply online"
+      : "Check you're eligible to adopt"
+  }`,
+  title: `${
+    content.eligibility.orderGrantedEligible === YesOrNo.NO
+      ? 'You cannot apply online to adopt'
+      : 'You cannot apply to adopt'
+  }`,
   line1: `${
     content.eligibility.orderGrantedEligible === YesOrNo.NO
       ? orderGrantedNotEligibleMessage(content.language)
@@ -22,8 +30,16 @@ const en = content => ({
 });
 
 const cy = content => ({
-  section: 'Gwiriwch eich bod yn gymwys i fabwysiadu',
-  title: 'Ni allwch wneud cais i fabwysiadu',
+  section: `${
+    content.eligibility.orderGrantedEligible === YesOrNo.NO
+      ? 'Gwiriwch eich bod yn gymwys i wneud casi ar-lein'
+      : 'Gwiriwch eich bod yn gymwys i fabwysiadu'
+  }`,
+  title: `${
+    content.eligibility.orderGrantedEligible === YesOrNo.NO
+      ? 'Ni allwch wneud cais ar-lein i fabwysiadu'
+      : 'Ni allwch wneud cais i fabwysiadu'
+  }`,
   line1: `${
     content.eligibility.orderGrantedEligible === YesOrNo.NO
       ? orderGrantedNotEligibleMessage(content.language)
