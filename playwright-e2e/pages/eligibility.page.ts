@@ -48,7 +48,7 @@ export class Eligibility extends BasePage {
     this.childIsSubjectOfPlacementOrder = page.getByRole('group', {
       name: 'Is the child you are applying to adopt the subject of a court granted Placement Order?',
     });
-    this.orderGrandedEligiblility =page.locator('#conditional-orderGrantedEligible-2');
+    this.orderGrandedEligiblility = page.locator('#conditional-orderGrantedEligible-2');
   }
   //tests can take input of applying for multiple children or a single child
   async isEligible(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
@@ -81,7 +81,9 @@ export class Eligibility extends BasePage {
     await expect(this.page.getByRole('link', { name: 'special guardian' })).toBeVisible();
     await expect(this.page.getByRole('link', { name: 'here' })).toBeVisible();
     await this.clickContinue();
-    await expect(this.mainContent).toContainText('Check you\'re eligible to apply online You cannot apply online to adopt Unfortunately you cannot use the online adoption application. You must apply by post for all other types of adoption such as:adopting a stepchildadopting a child from overseasadopting a child when you’re their special guardianadopting a child under the age of 6 weeks whose parents have asked for the adoptionYou can find more information here or contact your social worker for support. More about adoption');
+    await expect(this.mainContent).toContainText(
+      "Check you're eligible to apply online You cannot apply online to adopt Unfortunately you cannot use the online adoption application. You must apply by post for all other types of adoption such as:adopting a stepchildadopting a child from overseasadopting a child when you’re their special guardianadopting a child under the age of 6 weeks whose parents have asked for the adoptionYou can find more information here or contact your social worker for support. More about adoption"
+    );
   }
 
   async isNotover18(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
