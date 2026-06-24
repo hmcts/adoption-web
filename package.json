@@ -76,7 +76,7 @@
     "accessible-autocomplete": "^3.0.0",
     "applicationinsights": "^2.9.7",
     "autobind-decorator": "^2.4.0",
-    "axios": "^1.15.2",
+    "axios": "^1.18.1",
     "config": "^3.3.7",
     "connect-redis": "^6.1.1",
     "cookie-parser": "^1.4.5",
@@ -87,7 +87,7 @@
     "express": "^4.22.1",
     "express-rate-limit": "^8.5.2",
     "express-session": "^1.18.2",
-    "form-data": "^4.0.4",
+    "form-data": "^4.0.6",
     "glob": "^8.0.3",
     "govuk-frontend": "^5.9.0",
     "helmet": "^4.6.0",
@@ -95,7 +95,7 @@
     "ioredis": "^5.2.2",
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.23",
-    "multer": "^2.1.1",
+    "multer": "^2.2.0",
     "negotiator": "^0.6.3",
     "nunjucks": "^3.2.4",
     "otplib": "^12.0.1",
@@ -175,7 +175,9 @@
     "lodash": "^4.17.23",
     "serve-static": "^1.16.0",
     "cookie": "^0.7.0",
-    "nanoid": "^3.3.8"
+    "nanoid": "^3.3.8",
+    "form-data": "^4.0.6",
+    "js-yaml": "^4.1.1"
   },
   "packageManager": "yarn@4.14.1"
 }
