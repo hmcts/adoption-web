@@ -244,6 +244,7 @@ fpl:
     WSC: WSC_VAL
     SBCO: SBCO_VAL
     SCCO: SCCO_VAL
+    NSC: NSC_VAL
     BCPC: BCPC_VAL
     DCCO: DCCO_VAL
     LBH: LBH_VAL
