@@ -1,12 +1,7 @@
 import { mockRequest } from '../../test/unit/utils/mockRequest';
 import { AppRequest } from '../app/controller/AppRequest';
 
-import {
-  APPLYING_WITH_URL,
-  CHECK_ELIGIBILITY_URL_MULTIPLE_CHILDREN,
-  START_ELIGIBILITY_URL,
-  TASK_LIST_URL,
-} from './urls';
+import { APPLYING_WITH_URL, CHECK_ELIGIBILITY_URL_ORDER_GRANTED, START_ELIGIBILITY_URL, TASK_LIST_URL } from './urls';
 
 import { getNextEligibilityStepUrl, getNextStepUrl } from './index';
 
@@ -28,7 +23,7 @@ describe('Steps', () => {
       const data = {
         eligibility: { under18Eligible: 'yes', marriedEligible: 'no', livedUKEligible: 'yes', under21Eligible: 'yes' },
       };
-      expect(getNextEligibilityStepUrl(mockReq, data.eligibility)).toBe(CHECK_ELIGIBILITY_URL_MULTIPLE_CHILDREN);
+      expect(getNextEligibilityStepUrl(mockReq, data.eligibility)).toBe(CHECK_ELIGIBILITY_URL_ORDER_GRANTED);
     });
 
     it('moves into a dead end when the response matches', () => {
