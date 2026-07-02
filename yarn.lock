@@ -3620,7 +3620,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4.14.182":
+"@types/lodash@npm:^4.17.24":
   version: 4.17.24
   resolution: "@types/lodash@npm:4.17.24"
   checksum: 10/0f2082565f60f9787eefc046edc38458054512be5a8b3584ef0bad5fd9e85d0ab55ec5a1fbfae1ed6ba015cf1f9e837d5fb4da1f99fc60b8f74b2a46146fb00f
@@ -4656,7 +4656,8 @@ __metadata:
     "@types/express": "npm:^4.17.13"
     "@types/express-session": "npm:^1.18.2"
     "@types/jest": "npm:^29.0.0"
-    "@types/lodash": "npm:^4.14.182"
+    "@types/lodash": "npm:^4.17.24"
+    "@types/mini-css-extract-plugin": "npm:^2.5.1"
     "@types/multer": "npm:^2.0.0"
     "@types/negotiator": "npm:^0.6.1"
     "@types/node": "npm:^20.19.3"
@@ -4702,7 +4703,7 @@ __metadata:
     glob: "npm:^8.0.3"
     govuk-frontend: "npm:^5.9.0"
     helmet: "npm:^4.6.0"
-    html-webpack-plugin: "npm:^5.5.0"
+    html-webpack-plugin: "npm:^5.6.6"
     http-status-codes: "npm:^2.2.0"
     husky: "npm:^8.0.1"
     ioredis: "npm:^5.2.2"
@@ -4714,7 +4715,7 @@ __metadata:
     jest-when: "npm:^3.5.1"
     jwt-decode: "npm:^3.1.2"
     lint-staged: "npm:^13.0.0"
-    lodash: "npm:^4.17.23"
+    lodash: "npm:^4.18.1"
     mini-css-extract-plugin: "npm:^2.6.0"
     moment: "npm:^2.29.4"
     moment-timezone: "npm:0.5.43"
@@ -8484,9 +8485,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-webpack-plugin@npm:^5.5.0":
-  version: 5.6.7
-  resolution: "html-webpack-plugin@npm:5.6.7"
+"html-webpack-plugin@npm:^5.6.6":
+  version: 5.6.6
+  resolution: "html-webpack-plugin@npm:5.6.6"
   dependencies:
     "@types/html-minifier-terser": "npm:^6.0.0"
     html-minifier-terser: "npm:^6.0.2"
@@ -8501,7 +8502,7 @@ __metadata:
       optional: true
     webpack:
       optional: true
-  checksum: 10/fc81e1c2d3ef5d709b700b53bb31feef200a08d9b31a819d4623c80dcf412245939a9d6014e574dc5bed7388b3119e29d047d9e712c4889b8d7270dc25990a8d
+  checksum: 10/819ebee079466029a771236fdadcbcfe0aaf110eac1b74c0983a0318a7f99f3c69adcf1d617e218769a8c8e96ea17de2df30759bd950ec391d0c5676d480894e
   languageName: node
   linkType: hard
 
@@ -10298,7 +10299,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.23":
+"lodash@npm:^4.17.14, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.18.0, lodash@npm:^4.18.1":
   version: 4.18.1
   resolution: "lodash@npm:4.18.1"
   checksum: 10/306fea53dfd39dad1f03d45ba654a2405aebd35797b673077f401edb7df2543623dc44b9effbb98f69b32152295fff725a4cec99c684098947430600c6af0c3f
