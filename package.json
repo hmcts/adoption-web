@@ -102,7 +102,6 @@
     "@pact-foundation/pact": "^16.3.0",
     "@pact-foundation/pact-cli": "^18.0.0",
     "@playwright/test": "^1.58.0",
-    "@types/autobind-decorator": "^2.1.0",
     "@types/config": "^0.0.41",
     "@types/connect-redis": "^0.0.23",
     "@types/cookie-parser": "^1.4.3",

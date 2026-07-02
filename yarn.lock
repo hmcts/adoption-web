@@ -3401,15 +3401,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/autobind-decorator@npm:^2.1.0":
-  version: 2.1.4
-  resolution: "@types/autobind-decorator@npm:2.1.4"
-  dependencies:
-    autobind-decorator: "npm:*"
-  checksum: 10/4e090d68937abba65f3a6ae61ab1c6e71903551092ca82abd913982f2b146b7aa6f51bc338fcbdb3550ef242873b3dd3ef34b058f894133d3250e17a48e0b1f5
-  languageName: node
-  linkType: hard
-
 "@types/babel__core@npm:^7.1.14":
   version: 7.20.5
   resolution: "@types/babel__core@npm:7.20.5"
@@ -4658,7 +4649,6 @@ __metadata:
     "@pact-foundation/pact": "npm:^16.3.0"
     "@pact-foundation/pact-cli": "npm:^18.0.0"
     "@playwright/test": "npm:^1.58.0"
-    "@types/autobind-decorator": "npm:^2.1.0"
     "@types/config": "npm:^0.0.41"
     "@types/connect-redis": "npm:^0.0.23"
     "@types/cookie-parser": "npm:^1.4.3"
@@ -5161,7 +5151,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autobind-decorator@npm:*, autobind-decorator@npm:^2.4.0":
+"autobind-decorator@npm:^2.4.0":
   version: 2.4.0
   resolution: "autobind-decorator@npm:2.4.0"
   checksum: 10/9e24cb18f2ca5ff0753cbf29f5616a344779bd212a79995bf9e5ab0e008c9c83772b380e88d68525e6ec08ceedb807c16d60b57f249d4e77fd4888e94a3aee21
