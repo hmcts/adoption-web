@@ -46,6 +46,7 @@ export interface UserDetails {
 }
 
 export interface Eligibility {
+  orderGrantedEligible?: string;
   multipleChildrenEligible?: string;
   under18Eligible?: string;
   marriedEligible?: string;
