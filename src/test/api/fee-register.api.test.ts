@@ -5,8 +5,8 @@ describe('fees-register API', () => {
   const EXPECTED_RESPONSE = {
     code: 'FEE0310',
     description: 'Application/permission to apply for adoption',
-    version: 5,
-    fee_amount: 207,
+    version: 6,
+    fee_amount: 212,
   };
 
   it('returns an adoption application fee', async () => {
