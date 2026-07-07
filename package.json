@@ -45,7 +45,7 @@
     "test:pact:run-and-publish": "yarn test:pact && yarn pact:publish",
     "broker": "docker-compose -f broker-compose.yaml up -d",
     "broker:stop": "docker-compose -f broker-compose.yaml down",
-
+    "test :playwright-local": "yarn playwright install && yarn playwright test --project chromium"
   },
   "dependencies": {
     "@hmcts/cookie-manager": "^1.0.0",
