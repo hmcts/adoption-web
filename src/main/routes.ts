@@ -2,7 +2,7 @@ import fs from 'node:fs';
 
 import config from 'config';
 import { Application, RequestHandler } from 'express';
-import rateLimit, { Options } from 'express-rate-limit';
+import { type Options, rateLimit } from 'express-rate-limit';
 import multer from 'multer';
 import { type RedisReply, RedisStore } from 'rate-limit-redis';
 import type { LoggerInstance } from 'winston';
