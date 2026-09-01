@@ -10,7 +10,7 @@ export class Form {
   /**
    * Pass the form body to any fields with a parser and return mutated body;
    */
-  public getParsedBody(body: AnyObject, checkFields?: FormContent['fields']): Partial<CaseWithFormData> {
+  public getParsedBody(body: AnyObject, checkFields?: FormFields): Partial<CaseWithFormData> {
     const fields = checkFields || this.fields;
 
     const parsedBody = Object.entries(fields)
@@ -32,7 +32,10 @@ export class Form {
         });
     }
 
-    return { ...body, ...subFieldsParsedBody, ...Object.fromEntries(parsedBody) };
+    const parsedForm = { ...body, ...subFieldsParsedBody, ...Object.fromEntries(parsedBody) };
+    const allowedFieldNames = this.getFieldNames(fields);
+
+    return Object.fromEntries(Object.entries(parsedForm).filter(([fieldName]) => allowedFieldNames.has(fieldName)));
   }
 
   /**
@@ -65,8 +68,7 @@ export class Form {
     return errors;
   }
 
-  public getFieldNames(): Set<string> {
-    const fields = this.fields;
+  public getFieldNames(fields: FormFields = this.fields): Set<string> {
     const fieldNames: Set<string> = new Set();
     for (const fieldKey in fields) {
       const stepField = fields[fieldKey] as FormOptions;
@@ -78,7 +80,7 @@ export class Form {
             fieldNames.add(fieldKey);
           }
           if (value.subFields) {
-            for (const field of Object.keys(value.subFields)) {
+            for (const field of this.getFieldNames(value.subFields)) {
               fieldNames.add(field);
             }
           }

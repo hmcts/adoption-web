@@ -196,6 +196,9 @@ describe('Form', () => {
       'dateField-month': '1',
       'dateField-year': '2000',
       checkboxes: ['', '', 'checkbox1', 'checkbox2'],
+      id: '1234567890123456',
+      state: 'Submitted',
+      unexpectedField: 'unexpected value',
     };
 
     expect(form.getParsedBody(body)).toStrictEqual({
@@ -207,6 +210,19 @@ describe('Form', () => {
       },
       checkboxes: ['checkbox1', 'checkbox2'],
     });
+  });
+
+  test('Should only return fields defined by the form', () => {
+    const parsedBody = form.getParsedBody({
+      field: YesOrNo.YES,
+      id: '1234567890123456',
+      state: 'Submitted',
+      _csrf: 'token',
+    });
+
+    expect(parsedBody).not.toHaveProperty('id');
+    expect(parsedBody).not.toHaveProperty('state');
+    expect(parsedBody).not.toHaveProperty('_csrf');
   });
 
   describe('checks if the form is complete', () => {
