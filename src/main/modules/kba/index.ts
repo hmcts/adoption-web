@@ -7,6 +7,7 @@ import { CaseDate, CaseWithId } from '../../app/case/case';
 import { AppRequest } from '../../app/controller/AppRequest';
 import { getDraftCaseFromStore } from '../../modules/draft-store/draft-store-service';
 import {
+  LA_DOCUMENT_MANAGER,
   LA_PORTAL,
   LA_PORTAL_KBA_CALLBACK,
   LA_PORTAL_KBA_CASE_REF,
@@ -73,7 +74,7 @@ export class KbaMiddleware {
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
         const param = req.query.lang !== undefined ? '?lang=' + req.query.lang : '';
-        if (!req.path.startsWith(LA_PORTAL)) {
+        if (!req.path.startsWith(LA_PORTAL) && !req.path.startsWith(LA_DOCUMENT_MANAGER)) {
           return next();
         }
         res.locals.laPortal = true;

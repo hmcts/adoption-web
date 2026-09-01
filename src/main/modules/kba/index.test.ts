@@ -19,6 +19,7 @@ import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import { State } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
 import {
+  LA_DOCUMENT_MANAGER,
   LA_PORTAL_KBA_CALLBACK,
   LA_PORTAL_KBA_CASE_REF,
   LA_PORTAL_NEG_SCENARIO,
@@ -169,6 +170,26 @@ describe('KbaMiddleware', () => {
 
     expect(destroy).toHaveBeenCalled();
     expect(res.redirect).toHaveBeenCalledWith(LA_PORTAL_KBA_CASE_REF);
+    expect(next).not.toHaveBeenCalled();
+  });
+
+  test('enforces the authenticated case binding on LA document requests', async () => {
+    const destroy = jest.fn(done => done());
+    const req = mockRequest({
+      path: LA_DOCUMENT_MANAGER,
+      session: {
+        user: { ...systemUser, isSystemUser: true },
+        userCase: { ...userCase, id: '9999999999999999' },
+        laPortalKba: { authenticated: true, kbaCaseRef: caseRef },
+        destroy,
+      },
+    });
+    const res = mockResponse();
+    const next = jest.fn();
+
+    await registeredMiddleware(req, res, next);
+
+    expect(destroy).toHaveBeenCalled();
     expect(next).not.toHaveBeenCalled();
   });
 
