@@ -1,5 +1,5 @@
 import { Case, CaseDate } from '../case/case';
-import { YesOrNo } from '../case/definition';
+import { State, YesOrNo } from '../case/definition';
 
 import { Form, FormContent, FormFields, FormFieldsFn } from './Form';
 import { covertToDateObject } from './parser';
@@ -196,9 +196,6 @@ describe('Form', () => {
       'dateField-month': '1',
       'dateField-year': '2000',
       checkboxes: ['', '', 'checkbox1', 'checkbox2'],
-      id: '1234567890123456',
-      state: 'Submitted',
-      unexpectedField: 'unexpected value',
     };
 
     expect(form.getParsedBody(body)).toStrictEqual({
@@ -212,17 +209,17 @@ describe('Form', () => {
     });
   });
 
-  test('Should only return fields defined by the form', () => {
+  test('Should remove case identity fields from a parsed form body', () => {
     const parsedBody = form.getParsedBody({
       field: YesOrNo.YES,
       id: '1234567890123456',
-      state: 'Submitted',
-      _csrf: 'token',
+      state: State.Submitted,
+      additionalField: 'additional value',
     });
 
     expect(parsedBody).not.toHaveProperty('id');
     expect(parsedBody).not.toHaveProperty('state');
-    expect(parsedBody).not.toHaveProperty('_csrf');
+    expect(parsedBody).toHaveProperty('additionalField', 'additional value');
   });
 
   describe('checks if the form is complete', () => {

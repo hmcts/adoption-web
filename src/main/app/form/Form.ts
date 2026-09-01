@@ -10,7 +10,7 @@ export class Form {
   /**
    * Pass the form body to any fields with a parser and return mutated body;
    */
-  public getParsedBody(body: AnyObject, checkFields?: FormFields): Partial<CaseWithFormData> {
+  public getParsedBody(body: AnyObject, checkFields?: FormContent['fields']): Partial<CaseWithFormData> {
     const fields = checkFields || this.fields;
 
     const parsedBody = Object.entries(fields)
@@ -32,10 +32,11 @@ export class Form {
         });
     }
 
-    const parsedForm = { ...body, ...subFieldsParsedBody, ...Object.fromEntries(parsedBody) };
-    const allowedFieldNames = this.getFieldNames(fields);
+    const parsedForm: AnyObject = { ...body, ...subFieldsParsedBody, ...Object.fromEntries(parsedBody) };
+    delete parsedForm.id;
+    delete parsedForm.state;
 
-    return Object.fromEntries(Object.entries(parsedForm).filter(([fieldName]) => allowedFieldNames.has(fieldName)));
+    return parsedForm;
   }
 
   /**
@@ -68,7 +69,8 @@ export class Form {
     return errors;
   }
 
-  public getFieldNames(fields: FormFields = this.fields): Set<string> {
+  public getFieldNames(): Set<string> {
+    const fields = this.fields;
     const fieldNames: Set<string> = new Set();
     for (const fieldKey in fields) {
       const stepField = fields[fieldKey] as FormOptions;
@@ -80,7 +82,7 @@ export class Form {
             fieldNames.add(fieldKey);
           }
           if (value.subFields) {
-            for (const field of this.getFieldNames(value.subFields)) {
+            for (const field of Object.keys(value.subFields)) {
               fieldNames.add(field);
             }
           }

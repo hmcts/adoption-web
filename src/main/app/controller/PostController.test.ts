@@ -78,12 +78,7 @@ describe('PostController', () => {
   });
 
   const mockFormContent = {
-    fields: {
-      MOCK_KEY: { type: 'text' },
-      day: { type: 'text' },
-      month: { type: 'text' },
-      year: { type: 'text' },
-    },
+    fields: {},
   } as unknown as FormContent;
 
   test('Should redirect back to the current page with the form data on errors', async () => {
@@ -169,6 +164,7 @@ describe('PostController', () => {
 
     const req = mockRequest({ body });
     req.session.user.isSystemUser = true;
+    req.session.laPortalKba = { authenticated: true, kbaCaseRef: req.session.userCase.id };
     const res = mockResponse();
     await controller.post(req, res);
 
@@ -209,6 +205,7 @@ describe('PostController', () => {
     const req = mockRequest({ body });
     req.session.userCase.canPaymentIgnored = true;
     req.session.user.isSystemUser = true;
+    req.session.laPortalKba = { authenticated: true, kbaCaseRef: req.session.userCase.id };
     req.session.userCaseList = [
       {
         id: '12345',
@@ -568,6 +565,27 @@ describe('PostController', () => {
     const res = mockResponse();
     await controller.post(req, res);
     expect(req.session.userCase).toStrictEqual(expectedUserCaseRedis);
+  });
+
+  test('uses the LA session case reference when saving submitted form data', async () => {
+    const authenticatedCaseRef = '1234567890123456';
+    const submittedCaseRef = '9999999999999999';
+    saveDraftCase.mockResolvedValue({ ...expectedUserCaseRedis, id: authenticatedCaseRef });
+    const controller = new PostController(mockFormContent.fields);
+    const req = mockRequest({
+      body: { id: submittedCaseRef, state: State.Submitted, MOCK_KEY: 'MOCK_VALUE' },
+      session: {
+        user: { isSystemUser: true },
+        userCase: { ...expectedUserCaseRedis, id: authenticatedCaseRef },
+        laPortalKba: { authenticated: true, kbaCaseRef: authenticatedCaseRef },
+      },
+    });
+    req.url = '/la-portal/request';
+
+    await controller.post(req, mockResponse());
+
+    expect(saveDraftCase).toHaveBeenCalledWith(req, authenticatedCaseRef, { MOCK_KEY: 'MOCK_VALUE' });
+    expect(req.session.userCase.id).toBe(authenticatedCaseRef);
   });
 
   test('triggers la-portal save request check your answers', async () => {
