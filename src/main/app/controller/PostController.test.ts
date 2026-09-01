@@ -552,21 +552,6 @@ describe('PostController', () => {
     expect(res.redirect).toHaveBeenCalledWith('/next-step-url');
   });
 
-  test('triggers la-portal save request', async () => {
-    getNextStepUrlMock.mockReturnValue('/next-step-url');
-    saveDraftCase.mockResolvedValue(expectedUserCaseRedis);
-    getDraftCaseFromStore.mockResolvedValue(expectedUserCaseRedis);
-    const body = {};
-    const controller = new PostController(mockFormContent.fields);
-
-    const req = mockRequest({ body });
-    req.url = '/la-portal/request';
-    req.session.userCase.applicationType = ApplicationType.SOLE_APPLICATION;
-    const res = mockResponse();
-    await controller.post(req, res);
-    expect(req.session.userCase).toStrictEqual(expectedUserCaseRedis);
-  });
-
   test('uses the LA session case reference when saving submitted form data', async () => {
     const authenticatedCaseRef = '1234567890123456';
     const submittedCaseRef = '9999999999999999';

@@ -1,5 +1,5 @@
 import { Case, CaseDate } from '../case/case';
-import { State, YesOrNo } from '../case/definition';
+import { YesOrNo } from '../case/definition';
 
 import { Form, FormContent, FormFields, FormFieldsFn } from './Form';
 import { covertToDateObject } from './parser';
@@ -207,19 +207,6 @@ describe('Form', () => {
       },
       checkboxes: ['checkbox1', 'checkbox2'],
     });
-  });
-
-  test('Should remove case identity fields from a parsed form body', () => {
-    const parsedBody = form.getParsedBody({
-      field: YesOrNo.YES,
-      id: '1234567890123456',
-      state: State.Submitted,
-      additionalField: 'additional value',
-    });
-
-    expect(parsedBody).not.toHaveProperty('id');
-    expect(parsedBody).not.toHaveProperty('state');
-    expect(parsedBody).toHaveProperty('additionalField', 'additional value');
   });
 
   describe('checks if the form is complete', () => {

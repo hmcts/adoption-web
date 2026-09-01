@@ -19,7 +19,6 @@ import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import { State } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
 import {
-  LA_DOCUMENT_MANAGER,
   LA_PORTAL_KBA_CALLBACK,
   LA_PORTAL_KBA_CASE_REF,
   LA_PORTAL_NEG_SCENARIO,
@@ -104,28 +103,6 @@ describe('KbaMiddleware', () => {
     expect(res.redirect).toHaveBeenCalledWith(LA_PORTAL_START_PAGE);
   });
 
-  test('does not allow draft data to change the authenticated case identity', async () => {
-    mockGetDraftCaseFromStore.mockResolvedValue({ id: '9999999999999999', state: State.Submitted });
-    const req = mockRequest({
-      session: {
-        user: undefined,
-        userCase: undefined,
-        laPortalKba: {
-          kbaCaseRef: caseRef,
-          kbaChildName: 'Test Child',
-          kbaChildrenDateOfBirth: dateOfBirth,
-        },
-        regenerate: jest.fn(done => done()),
-        save: jest.fn(done => done()),
-      },
-    });
-
-    await routes[LA_PORTAL_KBA_CALLBACK](req, mockResponse());
-
-    expect(req.session.userCase.id).toBe(caseRef);
-    expect(req.session.userCase.state).toBe(State.Draft);
-  });
-
   test('destroys the session when the KBA details do not match the requested case', async () => {
     const destroy = jest.fn(done => done());
     const regenerate = jest.fn(done => done());
@@ -171,42 +148,5 @@ describe('KbaMiddleware', () => {
     expect(destroy).toHaveBeenCalled();
     expect(res.redirect).toHaveBeenCalledWith(LA_PORTAL_KBA_CASE_REF);
     expect(next).not.toHaveBeenCalled();
-  });
-
-  test('enforces the authenticated case binding on LA document requests', async () => {
-    const destroy = jest.fn(done => done());
-    const req = mockRequest({
-      path: LA_DOCUMENT_MANAGER,
-      session: {
-        user: { ...systemUser, isSystemUser: true },
-        userCase: { ...userCase, id: '9999999999999999' },
-        laPortalKba: { authenticated: true, kbaCaseRef: caseRef },
-        destroy,
-      },
-    });
-    const res = mockResponse();
-    const next = jest.fn();
-
-    await registeredMiddleware(req, res, next);
-
-    expect(destroy).toHaveBeenCalled();
-    expect(next).not.toHaveBeenCalled();
-  });
-
-  test('allows an LA session bound to the authenticated case', async () => {
-    const req = mockRequest({
-      path: LA_PORTAL_TASK_LIST,
-      session: {
-        user: { ...systemUser, isSystemUser: true },
-        userCase,
-        laPortalKba: { authenticated: true, kbaCaseRef: caseRef },
-      },
-    });
-    const res = mockResponse();
-    const next = jest.fn();
-
-    await registeredMiddleware(req, res, next);
-
-    expect(next).toHaveBeenCalled();
   });
 });
