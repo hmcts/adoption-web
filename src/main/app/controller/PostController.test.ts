@@ -78,7 +78,12 @@ describe('PostController', () => {
   });
 
   const mockFormContent = {
-    fields: {},
+    fields: {
+      MOCK_KEY: { type: 'text' },
+      day: { type: 'text' },
+      month: { type: 'text' },
+      year: { type: 'text' },
+    },
   } as unknown as FormContent;
 
   test('Should redirect back to the current page with the form data on errors', async () => {
