@@ -15,7 +15,7 @@ import { Application, NextFunction, Response } from 'express';
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import { AppRequest } from '../../app/controller/AppRequest';
-import { HOME_URL, LA_PORTAL_START_PAGE } from '../../steps/urls';
+import { HOME_URL } from '../../steps/urls';
 
 import { OidcMiddleware } from '.';
 
@@ -55,7 +55,7 @@ describe('OidcMiddleware', () => {
 
     expect(mockGetCaseApi).not.toHaveBeenCalled();
     expect(mockGetCaseDetails).not.toHaveBeenCalled();
-    expect(res.redirect).toHaveBeenCalledWith(LA_PORTAL_START_PAGE);
-    expect(next).not.toHaveBeenCalled();
+    expect(res.redirect).not.toHaveBeenCalled();
+    expect(next).toHaveBeenCalled();
   });
 });

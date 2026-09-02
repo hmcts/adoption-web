@@ -15,7 +15,6 @@ import {
   HOME_URL,
   LA_PORTAL,
   LA_PORTAL_KBA_CASE_REF,
-  LA_PORTAL_START_PAGE,
   PRIVACY_POLICY,
   PageLink,
   SIGN_IN_URL,
@@ -95,11 +94,6 @@ export class OidcMiddleware {
         }
 
         if (req.session?.user?.isSystemUser) {
-          if (req.path === HOME_URL) {
-            return res.redirect(LA_PORTAL_START_PAGE);
-          }
-
-          req.locals.api = getCaseApi(req.session.user, req.locals.logger);
           return next();
         }
 
