@@ -1,10 +1,30 @@
 import * as express from 'express';
 import { Express, RequestHandler } from 'express';
-import helmet = require('helmet');
+import helmet from 'helmet';
+
+type ReferrerPolicyToken =
+  | 'no-referrer'
+  | 'no-referrer-when-downgrade'
+  | 'same-origin'
+  | 'origin'
+  | 'strict-origin'
+  | 'origin-when-cross-origin'
+  | 'strict-origin-when-cross-origin'
+  | 'unsafe-url'
+  | '';
 
 export interface HelmetConfig {
-  referrerPolicy: string;
-  crossOriginResourcePolicy: string;
+  referrerPolicy:
+    | 'no-referrer'
+    | 'no-referrer-when-downgrade'
+    | 'same-origin'
+    | 'origin'
+    | 'strict-origin'
+    | 'origin-when-cross-origin'
+    | 'strict-origin-when-cross-origin'
+    | 'unsafe-url'
+    | '';
+  crossOriginResourcePolicy: 'same-origin' | 'same-site' | 'cross-origin';
 }
 
 const googleAnalyticsDomain = '*.google-analytics.com';
@@ -74,7 +94,7 @@ export class Helmet {
     );
   }
 
-  private setReferrerPolicy(app: express.Express, policy: string): void {
+  private setReferrerPolicy(app: express.Express, policy: ReferrerPolicyToken): void {
     if (!policy) {
       throw new Error('Referrer policy configuration is required');
     }
@@ -82,7 +102,10 @@ export class Helmet {
     app.use(helmet.referrerPolicy({ policy }) as RequestHandler);
   }
 
-  private setCrossOriginResourcePolicy(app: express.Express, policy: string): void {
+  private setCrossOriginResourcePolicy(
+    app: express.Express,
+    policy: 'same-origin' | 'same-site' | 'cross-origin'
+  ): void {
     if (!policy) {
       throw new Error('Cross-Origin Resource Policy configuration is required');
     }
