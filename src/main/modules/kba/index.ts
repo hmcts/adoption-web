@@ -78,18 +78,21 @@ export class KbaMiddleware {
           return next();
         }
         res.locals.laPortal = true;
-        if (req.session?.user) {
-          if (
-            !req.session.user.isSystemUser ||
-            !req.session.laPortalKba?.authenticated ||
-            req.session.laPortalKba.kbaCaseRef !== req.session.userCase?.id
-          ) {
-            return req.session.destroy(() => res.redirect(LA_PORTAL_KBA_CASE_REF + param));
-          }
-
-          res.locals.isLoggedIn = true;
-          req.locals.api = getCaseApi(req.session.user, req.locals.logger);
+        if (!req.session?.user?.isSystemUser) {
+          // Citizen and anonymous sessions are handled by the user redirect middleware
+          return next();
         }
+
+        if (
+          req.path.startsWith(LA_PORTAL_KBA_CASE_REF) ||
+          !req.session.laPortalKba?.authenticated ||
+          req.session.laPortalKba.kbaCaseRef !== req.session.userCase?.id
+        ) {
+          return req.session.destroy(() => res.redirect(LA_PORTAL_KBA_CASE_REF + param));
+        }
+
+        res.locals.isLoggedIn = true;
+        req.locals.api = getCaseApi(req.session.user, req.locals.logger);
         return next();
       })
     );

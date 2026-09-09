@@ -149,4 +149,47 @@ describe('KbaMiddleware', () => {
     expect(res.redirect).toHaveBeenCalledWith(LA_PORTAL_KBA_CASE_REF);
     expect(next).not.toHaveBeenCalled();
   });
+
+  test('destroys an authenticated LA session when the user returns to the KBA page', async () => {
+    const destroy = jest.fn(done => done());
+    const req = mockRequest({
+      path: LA_PORTAL_KBA_CASE_REF,
+      session: {
+        user: { ...systemUser, isSystemUser: true },
+        userCase,
+        laPortalKba: { authenticated: true, kbaCaseRef: caseRef },
+        destroy,
+      },
+    });
+    const res = mockResponse();
+    const next = jest.fn();
+
+    await registeredMiddleware(req, res, next);
+
+    expect(destroy).toHaveBeenCalled();
+    expect(res.redirect).toHaveBeenCalledWith(LA_PORTAL_KBA_CASE_REF);
+    expect(next).not.toHaveBeenCalled();
+  });
+
+  test('leaves a citizen session intact on the KBA page so the user redirect middleware can handle it', async () => {
+    const destroy = jest.fn(done => done());
+    const req = mockRequest({
+      path: LA_PORTAL_KBA_CASE_REF,
+      session: {
+        user: { id: 'citizen', roles: ['citizen'] },
+        userCase,
+        laPortalKba: undefined,
+        destroy,
+      },
+    });
+    const res = mockResponse();
+    const next = jest.fn();
+
+    await registeredMiddleware(req, res, next);
+
+    expect(destroy).not.toHaveBeenCalled();
+    expect(res.redirect).not.toHaveBeenCalled();
+    expect(res.locals.isLoggedIn).toBeUndefined();
+    expect(next).toHaveBeenCalled();
+  });
 });

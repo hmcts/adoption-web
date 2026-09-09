@@ -153,7 +153,7 @@ describe('user-redirect', () => {
     expect(res.redirect).toHaveBeenCalledWith('/');
   });
 
-  test('should redirect logged in LA users from LA Login to Home', async () => {
+  test('should allow logged in LA users through to LA Login', async () => {
     req.session = {
       user: {
         id: 'la-123',
@@ -166,6 +166,7 @@ describe('user-redirect', () => {
 
     await registeredMiddleware(req, res, mockNext);
 
-    expect(res.redirect).toHaveBeenCalledWith('/');
+    expect(res.redirect).not.toHaveBeenCalled();
+    expect(mockNext).toHaveBeenCalled();
   });
 });

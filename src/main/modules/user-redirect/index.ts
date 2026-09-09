@@ -74,7 +74,7 @@ export class UserRedirectMiddleware {
 
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
-        if (req.path.startsWith(LA_PORTAL_KBA_CASE_REF) && this.isCitizenOrLAUser(req)) {
+        if (req.path.startsWith(LA_PORTAL_KBA_CASE_REF) && this.isCitizen(req)) {
           return res.redirect(HOME_URL);
         }
 
@@ -105,10 +105,6 @@ export class UserRedirectMiddleware {
 
   private isLAUser(req: AppRequest): boolean {
     return !!req.session.user?.isSystemUser;
-  }
-
-  private isCitizenOrLAUser(req: AppRequest): boolean {
-    return this.isCitizen(req) || this.isLAUser(req);
   }
 
   private isPublicLink(req: AppRequest): boolean {
