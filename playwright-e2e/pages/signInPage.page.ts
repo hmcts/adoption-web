@@ -20,7 +20,9 @@ export default class SignIn {
   }
 
   async navigateTo(): Promise<void> {
-    await this.page.goto(urlConfig.citizenFrontendBaseUrl, { waitUntil: 'load', timeout: 3000 });
+    //ADOP-2904 Temporary workaround to reduce redirects until all envs moved to HMCTS Access
+    //await this.page.goto(urlConfig.citizenFrontendBaseUrl, { waitUntil: 'load', timeout: 3000 });
+    await this.page.goto(urlConfig.citizenFrontendSignInUrl, { waitUntil: 'load', timeout: 3000 });
   }
 
   async signIn(email: string, password: string): Promise<void> {

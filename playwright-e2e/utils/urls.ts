@@ -11,4 +11,5 @@ interface UrlConfig {
 export const urlConfig: UrlConfig = {
   laPortalUrl: process.env.TEST_URL + '/la-portal' || `https://adoption-web.${env}.platform.hmcts.net/la-portal`,
   citizenFrontendBaseUrl: process.env.TEST_URL || `https://adoption-web.${env}.platform.hmcts.net`,
+  citizenFrontendSignInUrl: process.env.SIGN_IN_URL || `https://adoption-web.${env}.platform.hmcts.net/sign-in`,
 };
