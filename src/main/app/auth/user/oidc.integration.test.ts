@@ -24,11 +24,13 @@ describe('getRedirectUrl', () => {
     when(config.get)
       .calledWith('services.idam.clientID')
       .mockReturnValue('adoption-web')
+      .calledWith('services.idam.authorizationScope')
+      .mockReturnValue('openid profile roles')
       .calledWith('services.idam.authorizationURL')
-      .mockReturnValue('https://idam-web-public/login');
+      .mockReturnValue('https://idam-web-public/o/authorize');
 
     expect(getRedirectUrl('http://localhost', CALLBACK_URL)).toBe(
-      'https://idam-web-public/login?client_id=adoption-web&response_type=code&redirect_uri=http://localhost/receiver'
+      'https://idam-web-public/o/authorize?client_id=adoption-web&response_type=code&redirect_uri=http://localhost/receiver&scope=openid%20profile%20roles'
     );
   });
 });

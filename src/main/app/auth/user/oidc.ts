@@ -9,8 +9,9 @@ export const getRedirectUrl = (serviceUrl: string, callbackUrlPageLink: PageLink
   const id: string = config.get('services.idam.clientID');
   const loginUrl: string = config.get('services.idam.authorizationURL');
   const callbackUrl = encodeURI(serviceUrl + callbackUrlPageLink);
+  const scope = encodeURIComponent(config.get('services.idam.authorizationScope'));
 
-  return `${loginUrl}?client_id=${id}&response_type=code&redirect_uri=${callbackUrl}`;
+  return `${loginUrl}?client_id=${id}&response_type=code&redirect_uri=${callbackUrl}&scope=${scope}`;
 };
 
 export const getUserDetails = async (

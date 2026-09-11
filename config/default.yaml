@@ -11,6 +11,7 @@ services:
     secret: 'NEED TO INSERT SECRET'
   idam:
     authorizationURL: ''
+    authorizationScope: 'openid profile roles'
     tokenURL: ''
     clientID: 'adoption-web'
     clientSecret: 'NEED TO INSERT SECRET'
