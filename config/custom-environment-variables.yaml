@@ -4,11 +4,10 @@ services:
     secret: SERVICE_AUTH_SECRET
   idam:
     authorizationURL: IDAM_WEB_URL
+    authorizationScope: IDAM_WEB_AUTHORIZATION_SCOPE
     tokenURL: IDAM_API_URL
     clientID: IDAM_CLIENT_ID
     clientSecret: IDAM_SECRET
-    hmctsAccess:
-      url: IDAM_WEB_URL
     userRole: IDAM_ROLE
   case:
     url: CCD_URL

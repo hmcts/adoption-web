@@ -14,7 +14,7 @@ export class HealthCheck {
       : null;
 
     const idamUrl = config.get('services.idam.tokenURL') as string;
-    const hmctsAccessUrl = config.get('services.idam.hmctsAccess.url') as string;
+    const hmctsAccessUrl = config.get('services.idam.authorizationURL') as string;
 
     healthcheck.addTo(app, {
       checks: {

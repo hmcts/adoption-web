@@ -11,11 +11,10 @@ services:
     secret: 'NEED TO INSERT SECRET'
   idam:
     authorizationURL: ''
+    authorizationScope: 'openid profile roles'
     tokenURL: ''
     clientID: 'adoption-web'
     clientSecret: 'NEED TO INSERT SECRET'
-    hmctsAccess:
-      url: 'https://idam-web-public.aat.platform.hmcts.net/o/authorize'
     systemUsername: 'dummy_user'
     systemPassword: ''
     userRole: 'citizen'
