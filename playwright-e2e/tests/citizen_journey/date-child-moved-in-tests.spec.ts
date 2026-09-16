@@ -1,6 +1,5 @@
 import { expect, test } from '../../fixtures/fixtures';
 import { setupUser, teardownUser } from '../../hooks/createDeleteUser.hook';
-import { urlConfig } from '../../utils/urls';
 
 test.describe('Citizen Journey date child moved in page test single parent', () => {
   let userEmail: string;
@@ -130,23 +129,21 @@ test.describe('Citizen Journey date child moved in page test single parent', () 
   });
 
   test('check when entering real date and clicking save and continue it returns to task list page with state completed', async ({
-    page,
     citTaskListPage,
     citDateChildMovedInPage,
   }) => {
     const expectedState = 'Completed';
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/task-list`;
 
     await citDateChildMovedInPage.fillDayLabel('01');
     await citDateChildMovedInPage.fillMonthLabel('01');
     await citDateChildMovedInPage.fillYearLabel('2020');
     await citDateChildMovedInPage.clickSaveAndContinue();
-
-    const actualState = await citTaskListPage.dateChildMovedInStatus.textContent();
-    const actualUrl = page.url();
-
-    await expect.soft(actualState).toContain(expectedState);
-    await expect.soft(actualUrl).toBe(expectedUrl);
+    await expect(
+      citDateChildMovedInPage.page.getByRole('heading', {
+        name: 'Apply to adopt a child placed in your care',
+      })
+    ).toBeVisible();
+    await expect(citTaskListPage.dateChildMovedInStatus).toHaveText(expectedState);
 
     expect(test.info().errors).toHaveLength(0);
   });

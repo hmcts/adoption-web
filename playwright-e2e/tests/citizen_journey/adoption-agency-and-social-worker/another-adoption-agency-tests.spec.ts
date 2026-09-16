@@ -64,7 +64,6 @@ test.describe('Citizen Journey another adoption agency test single parent', () =
 
   test('check filling valid data then clicking save and continue goes to task list page', async ({
     citAnotherAdoptionAgencyPage,
-    page,
   }) => {
     await citAnotherAdoptionAgencyPage.fillAdoptionAgencyLabel('agency');
     await citAnotherAdoptionAgencyPage.fillNameOfYourContactLabel('test contact');
@@ -75,10 +74,10 @@ test.describe('Citizen Journey another adoption agency test single parent', () =
     await citAnotherAdoptionAgencyPage.fillEmailAddressLabel('test@justice.gov.uk');
 
     await citAnotherAdoptionAgencyPage.clickSaveAndContinue();
-
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/task-list`;
-    const actualUrl = page.url();
-
-    await expect(actualUrl).toBe(expectedUrl);
+    await expect(
+      citAnotherAdoptionAgencyPage.page.getByRole('heading', {
+        name: 'Apply to adopt a child placed in your care',
+      })
+    ).toBeVisible();
   });
 });

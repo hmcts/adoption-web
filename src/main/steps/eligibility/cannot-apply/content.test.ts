@@ -71,6 +71,25 @@ describe('eligibility > cannot-apply > content', () => {
     );
   });
 
+  test('should return correct string due to order not granted', () => {
+    const generatedContent = generateContent({ ...commonContent, eligibility: { orderGrantedEligible: 'No' } });
+    expect(generatedContent.section).toEqual("Check you're eligible to apply online");
+    expect(generatedContent.title).toEqual('You cannot apply online to adopt');
+    expect(generatedContent.line1).toEqual(
+      '<p class="govuk-label">Unfortunately you cannot use the online adoption application. You must apply by post for all other types of adoption such as:</p><ul class="govuk-list govuk-list--bullet"><li><a class="govuk-link" href="https://www.gov.uk/child-adoption/adopting-a-stepchild">adopting a stepchild</a></li><li><a class="govuk-link" href="https://www.gov.uk/child-adoption/adopting-a-child-from-overseas">adopting a child from overseas</a></li><li>adopting a child when you’re their <a class="govuk-link" href="https://www.gov.uk/apply-special-guardian">special guardian</a></li><li>adopting a child under the age of 6 weeks whose parents have asked for the adoption</li></ul><p class="govuk-label">You can find more information <a class="govuk-link" href="https://www.gov.uk/child-adoption/applying-for-an-adoption-court-order">here</a> or contact your social worker for support.</p>'
+    );
+    const welshGeneratedContent = generateContent({
+      ...commonContent,
+      language: 'cy',
+      eligibility: { orderGrantedEligible: 'No' },
+    });
+    expect(welshGeneratedContent.section).toEqual('Gwiriwch eich bod yn gymwys i wneud casi ar-lein');
+    expect(welshGeneratedContent.title).toEqual('Ni allwch wneud cais ar-lein i fabwysiadu');
+    expect(welshGeneratedContent.line1).toEqual(
+      '<p class="govuk-label">Yn anffodus, ni allwch ddefnyddio\'r cais mabwysiadu ar-lein. Mae\'n rhaid i chi wneud cais drwy\'r post ar gyfer pob math arall o fabwysiadu fel:</p><ul class="govuk-list govuk-list--bullet"><li><a class="govuk-link" href="https://www.gov.uk/mabwysiadu-plentyn/mabwysiadu-llysblentyn">mabwysiadu llysblentyn</a></li><li><a class="govuk-link" href="https://www.gov.uk/mabwysiadu-plentyn/mabwysiadu-plentyn-o-wlad-dramor">mabwysiadu plentyn o wlad dramor</a></li><li>mabwysiadu plentyn pan ydych yn <a class="govuk-link" href="https://www.gov.uk/apply-special-guardian">warcheidwad arbennig iddynt</a></li><li>mabwysiadu plentyn o dan 6 wythnos oed y mae\'r rhieni wedi gofyn i\'r plentyn gael ei fabwysiadu</li></ul><p class="govuk-label">Gallwch ddod o hyd i fwy o wybodaeth <a class="govuk-link" href="https://www.gov.uk/mabwysiadu-plentyn/gwneud-cais-am-orchymyn-mabwysiadu-gan-y-llys">yma</a> neu gysylltu gyda\'r gweithiwr cymdeithasol am gefnogaeth.</p>'
+    );
+  });
+
   test('should return empty string if none of the conditions are met', () => {
     const generatedContent = generateContent({ ...commonContent, eligibility: {} });
     expect(generatedContent.line1).toEqual('');

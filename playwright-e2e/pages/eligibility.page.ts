@@ -21,6 +21,8 @@ export class Eligibility extends BasePage {
   readonly signInText: Locator;
   readonly problemErrorMessage: Locator;
   readonly selectErrorMessage: Locator;
+  readonly childIsSubjectOfPlacementOrder: Locator;
+  readonly orderGrandedEligiblility: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -43,6 +45,10 @@ export class Eligibility extends BasePage {
     this.signInText = page.locator('#skiplinktarget');
     this.problemErrorMessage = page.getByRole('heading', { name: 'There is a problem', exact: true });
     this.selectErrorMessage = page.getByRole('link', { name: 'Select' });
+    this.childIsSubjectOfPlacementOrder = page.getByRole('group', {
+      name: 'Is the child you are applying to adopt the subject of a court granted Placement Order?',
+    });
+    this.orderGrandedEligiblility = page.locator('#conditional-orderGrantedEligible-2');
   }
   //tests can take input of applying for multiple children or a single child
   async isEligible(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
@@ -64,8 +70,25 @@ export class Eligibility extends BasePage {
     await this.clickContinue();
     await expect(this.signInText).toContainText('Sign in or create an account');
   }
+  async isChildSubjectOfPlacementOrder(): Promise<void> {
+    await this.clickContinue();
+    await this.childIsSubjectOfPlacementOrder.getByLabel('No').click();
+    await expect(this.orderGrandedEligiblility).toContainText(
+      'Unfortunately you cannot use the online adoption application. You must apply by post for all other types of adoption such as:adopting a stepchildadopting a child from overseasadopting a child when you’re their special guardianadopting a child under the age of 6 weeks whose parents have asked for the adoptionYou can find more information here or contact your social worker for support.'
+    );
+    await expect(this.page.getByRole('link', { name: 'adopting a stepchild' })).toBeVisible();
+    await expect(this.page.getByRole('link', { name: 'adopting a child from overseas' })).toBeVisible();
+    await expect(this.page.getByRole('link', { name: 'special guardian' })).toBeVisible();
+    await expect(this.page.getByRole('link', { name: 'here' })).toBeVisible();
+    await this.clickContinue();
+    await expect(this.mainContent).toContainText(
+      "Check you're eligible to apply online You cannot apply online to adopt Unfortunately you cannot use the online adoption application. You must apply by post for all other types of adoption such as:adopting a stepchildadopting a child from overseasadopting a child when you’re their special guardianadopting a child under the age of 6 weeks whose parents have asked for the adoptionYou can find more information here or contact your social worker for support. More about adoption"
+    );
+  }
 
   async isNotover18(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
+    await this.clickContinue();
+    await this.childIsSubjectOfPlacementOrder.getByLabel('Yes').click();
     await this.clickContinue();
     await applyMoreThanOneChild.check();
     await this.clickContinue();
@@ -84,6 +107,8 @@ export class Eligibility extends BasePage {
   }
 
   async isMarriedOrCivilPartnership(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
+    await this.clickContinue();
+    await this.childIsSubjectOfPlacementOrder.getByLabel('Yes').click();
     await this.clickContinue();
     await applyMoreThanOneChild.check();
     await this.clickContinue();
@@ -104,6 +129,8 @@ export class Eligibility extends BasePage {
   }
 
   async youAndApplicantUnder21(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
+    await this.clickContinue();
+    await this.childIsSubjectOfPlacementOrder.getByLabel('Yes').click();
     await this.clickContinue();
     await applyMoreThanOneChild.check();
     await this.clickContinue();
@@ -127,6 +154,8 @@ export class Eligibility extends BasePage {
 
   async notUKResident(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
     await this.clickContinue();
+    await this.childIsSubjectOfPlacementOrder.getByLabel('Yes').click();
+    await this.clickContinue();
     await applyMoreThanOneChild.check();
     if (this.applyMoreThanOneChildYes === applyMoreThanOneChild) {
       await this.clickContinue();
@@ -148,6 +177,8 @@ export class Eligibility extends BasePage {
   }
 
   async notUKResident12Months(applyMoreThanOneChild: { check: () => Promise<void> }): Promise<void> {
+    await this.clickContinue();
+    await this.childIsSubjectOfPlacementOrder.getByLabel('Yes').click();
     await this.clickContinue();
     await applyMoreThanOneChild.check();
     if (this.applyMoreThanOneChildYes === applyMoreThanOneChild) {
@@ -172,6 +203,11 @@ export class Eligibility extends BasePage {
 
   //Error checking test
   async errorCheck(): Promise<void> {
+    await this.handleFormError(
+      'Select if the child you are applying to adopt the subject of a court granted Placement Order',
+      this.childIsSubjectOfPlacementOrder.getByLabel('Yes')
+    );
+
     await this.handleFormError('Select if you are applying to adopt more than one child', this.applyMoreThanOneChildNo);
     await this.handleFormError(
       'Select if the child will be under 18 years old on the date you submit your application.',

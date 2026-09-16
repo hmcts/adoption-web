@@ -27,6 +27,7 @@ const enContent = {
     kbaChildrenDateOfBirth: {
       required: 'Enter their date of birth',
       invalidDate: 'Date of birth must be a real date',
+      invalidDateOver18: 'Please enter the correct date of birth',
       incompleteDay: 'Date of birth must include a day',
       incompleteMonth: 'Date of birth must include a month',
       incompleteYear: 'Date of birth must include a year',
@@ -59,6 +60,7 @@ const cyContent = {
     kbaChildrenDateOfBirth: {
       required: 'Nodwch eu dyddiad geni',
       invalidDate: 'Mae’n rhaid i’r dyddiad geni fod yn ddyddiad go iawn',
+      invalidDateOver18: 'Nodwch y dyddiad geni cywir',
       incompleteDay: 'Rhaid i’r dyddiad geni gynnwys diwrnod',
       incompleteMonth: 'Rhaid i’r dyddiad geni gynnwys mis',
       incompleteYear: 'Rhaid i’r dyddiad geni gynnwys blwyddyn',

@@ -1,6 +1,5 @@
 import { expect, test } from '../../../fixtures/fixtures';
 import { setupUser, teardownUser } from '../../../hooks/createDeleteUser.hook';
-import { urlConfig } from '../../../utils/urls';
 test.describe('Citizen Journey child social worker test single parent', () => {
   let userEmail: string;
   let userPassword: string;
@@ -124,9 +123,9 @@ test.describe('Citizen Journey child social worker test single parent', () => {
     await citChildSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('test@justice.gov.uk');
     await citChildSocialWorkerDetailsPage.clickSaveAsDraft();
 
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
-    const actualUrl = page.url();
-    await expect(actualUrl).toBe(expectedUrl);
+    await expect(
+      citChildSocialWorkerDetailsPage.page.getByRole('heading', { name: 'Your application has been saved' })
+    ).toBeVisible();
 
     await page.goBack();
 
@@ -149,7 +148,6 @@ test.describe('Citizen Journey child social worker test single parent', () => {
   });
 
   test('check inserting correct data then pressing save and continue advances to the next step', async ({
-    page,
     citChildSocialWorkerDetailsPage,
   }) => {
     await citChildSocialWorkerDetailsPage.fillNameOfChildSocialWorkerLabel('test');
@@ -158,9 +156,9 @@ test.describe('Citizen Journey child social worker test single parent', () => {
     await citChildSocialWorkerDetailsPage.selectLocalAuthority('Sandwell');
     await citChildSocialWorkerDetailsPage.fillLocalAuthorityEmailLabel('test@justice.gov.uk');
     await citChildSocialWorkerDetailsPage.clickSaveAndContinue();
-
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/children/applicant-social-worker`;
-    const actualUrl = page.url();
-    await expect(actualUrl).toBe(expectedUrl);
+    await expect.soft(citChildSocialWorkerDetailsPage.page.getByText('Application details')).toBeVisible();
+    await expect(
+      citChildSocialWorkerDetailsPage.page.getByRole('heading', { name: 'Your social worker details' })
+    ).toBeVisible();
   });
 });
