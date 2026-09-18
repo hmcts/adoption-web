@@ -1,7 +1,6 @@
 import * as express from 'express';
 import { Express, RequestHandler } from 'express';
 import helmet from 'helmet';
-import { getIdamUrl } from '../../app/auth/user/oidc';
 
 import { getIdamUrl } from '../../app/auth/user/oidc';
 
