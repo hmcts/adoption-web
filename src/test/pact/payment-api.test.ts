@@ -51,11 +51,11 @@ describe('Pact between adoption-web and payment_cardPayment', () => {
             },
             body: {
               case_type: 'A58',
-              amount: 207,
+              amount: 212,
               ccd_case_number: '1234567891011123',
               description: 'Apply for adoption',
               currency: 'GBP',
-              fees: [{ calculated_amount: '207', code: 'FEE0310', version: '5' }],
+              fees: [{ calculated_amount: '212', code: 'FEE0310', version: '6' }],
               language: '',
             },
           },
@@ -72,7 +72,7 @@ describe('Pact between adoption-web and payment_cardPayment', () => {
             userCase: {
               id: '1234567891011123',
               applicationFeeOrderSummary: {
-                Fees: [{ value: { FeeAmount: 207, FeeCode: 'FEE0310', FeeVersion: '5' } }],
+                Fees: [{ value: { FeeAmount: 212, FeeCode: 'FEE0310', FeeVersion: '6' } }],
               },
             },
             session: { lang: 'en' },
