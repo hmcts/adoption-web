@@ -5,6 +5,7 @@ services:
   idam:
     authorizationURL: IDAM_WEB_URL
     authorizationScope: IDAM_WEB_AUTHORIZATION_SCOPE
+    endSessionURL: IDAM_END_SESSION_URL
     tokenURL: IDAM_API_URL
     clientID: IDAM_CLIENT_ID
     clientSecret: IDAM_SECRET

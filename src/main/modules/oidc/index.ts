@@ -2,7 +2,7 @@ import { Logger } from '@hmcts/nodejs-logging';
 import config from 'config';
 import { Application, NextFunction, Response } from 'express';
 
-import { getRedirectUrl, getUserDetails } from '../../app/auth/user/oidc';
+import { getEndGlobalSessionUrl, getRedirectUrl, getUserDetails } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
 import { AppRequest } from '../../app/controller/AppRequest';
 import {
@@ -12,7 +12,6 @@ import {
   COOKIES_PAGE,
   CSRF_TOKEN_ERROR_URL,
   ELIGIBILITY_URL,
-  HOME_URL,
   LA_PORTAL,
   LA_PORTAL_KBA_CASE_REF,
   PRIVACY_POLICY,
@@ -36,7 +35,12 @@ export class OidcMiddleware {
       res.redirect(getRedirectUrl(`${protocol}${res.locals.host}${port}`, CALLBACK_URL));
     });
 
-    app.get(SIGN_OUT_URL, (req, res) => req.session.destroy(() => res.redirect(HOME_URL)));
+    app.get(SIGN_OUT_URL, (req, res) => {
+      const serviceUrl = `${protocol}${res.locals.host}${port}`;
+      const endSessionUrl = getEndGlobalSessionUrl(serviceUrl);
+
+      req.session.destroy(() => res.redirect(endSessionUrl));
+    });
 
     app.get(
       CALLBACK_URL,

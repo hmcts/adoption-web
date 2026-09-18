@@ -14,6 +14,13 @@ export const getRedirectUrl = (serviceUrl: string, callbackUrlPageLink: PageLink
   return `${loginUrl}?client_id=${id}&response_type=code&redirect_uri=${callbackUrl}&scope=${scope}`;
 };
 
+export const getEndGlobalSessionUrl = (serviceUrl: string): string => {
+  const endSessionUrl: string = config.get('services.idam.endSessionURL');
+  const postLogoutRedirectUri = encodeURIComponent(serviceUrl);
+
+  return `${endSessionUrl}?post_logout_redirect_uri=${postLogoutRedirectUri}`;
+};
+
 export const getUserDetails = async (
   serviceUrl: string,
   rawCode: string,

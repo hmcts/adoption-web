@@ -13,6 +13,7 @@ services:
     authorizationURL: ''
     authorizationScope: 'openid profile roles'
     tokenURL: ''
+    endSessionURL: ''
     clientID: 'adoption-web'
     clientSecret: 'NEED TO INSERT SECRET'
     systemUsername: 'dummy_user'
