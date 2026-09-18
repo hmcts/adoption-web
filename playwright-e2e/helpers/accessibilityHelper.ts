@@ -1,4 +1,4 @@
-import AxeBuilder from '@axe-core/playwright';
+import type { AxeBuilder } from '@axe-core/playwright';
 import { TestInfo } from '@playwright/test';
 
 import { expect } from '../fixtures/fixtures';

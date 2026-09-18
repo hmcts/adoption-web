@@ -5,7 +5,7 @@ import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import { generatePageContent } from '../common/common.content';
 
 import { errorContent } from './content';
-import { ErrorController, HTTPError, UserPathError } from './error.controller';
+import { ErrorController, HTTPError, TooManyRequestsError, UserPathError } from './error.controller';
 
 import Mock = jest.Mock;
 
@@ -20,7 +20,7 @@ describe('ErrorController', () => {
 
     expect(logger.info.mock.calls[0][0]).toContain('404 Not Found: /request');
     expect(res.statusCode).toBe(404);
-    expect(res.render).toBeCalledWith('error/error', {
+    expect(res.render).toHaveBeenCalledWith('error/error', {
       ...generatePageContent({ language: 'en', userEmail: 'test@example.com' }),
       ...errorContent.en[404],
     });
@@ -35,7 +35,7 @@ describe('ErrorController', () => {
 
     expect(logger.error.mock.calls[0][0]).toContain('Bad request');
     expect(res.statusCode).toBe(err.status);
-    expect(res.render).toBeCalledWith('error/error', {
+    expect(res.render).toHaveBeenCalledWith('error/error', {
       ...generatePageContent({ language: 'en', userEmail: 'test@example.com' }),
       ...errorContent.en[400],
     });
@@ -50,7 +50,7 @@ describe('ErrorController', () => {
 
     expect(logger.error.mock.calls[0][0]).toContain('Bad request');
     expect(res.statusCode).toBe(500);
-    expect(res.render).toBeCalledWith('error/error', {
+    expect(res.render).toHaveBeenCalledWith('error/error', {
       ...generatePageContent({ language: 'en', userEmail: 'test@example.com' }),
       ...errorContent.en[500],
     });
@@ -65,7 +65,7 @@ describe('ErrorController', () => {
 
     expect(logger.error.mock.calls[0][0]).toContain('HTTPError: Bad request');
     expect(res.statusCode).toBe(400);
-    expect(res.render).toBeCalledWith('error/error', {
+    expect(res.render).toHaveBeenCalledWith('error/error', {
       ...generatePageContent({ language: 'en', userEmail: 'test@example.com' }),
       ...errorContent.en[400],
     });
@@ -81,9 +81,24 @@ describe('ErrorController', () => {
 
     expect(logger.error.mock.calls[0][0]).toContain('UserPathError: Not Found');
     expect(res.statusCode).toBe(404);
-    expect(res.render).toBeCalledWith('error/error', {
+    expect(res.render).toHaveBeenCalledWith('error/error', {
       ...generatePageContent({ language: 'en', userEmail: 'test@example.com' }),
       ...errorContent.en[404],
+    });
+  });
+
+  test('TooManyRequestsError renders the error page with 429 code and logs the details', async () => {
+    const err = new TooManyRequestsError('Too many requests');
+    const req = mockRequest();
+    const res = mockResponse();
+    await controller.tooManyRequestsError(err, req, res);
+    const logger = req.locals.logger as unknown as MockedLogger;
+
+    expect(logger.error.mock.calls[0][0]).toContain('Too many requests');
+    expect(res.statusCode).toBe(429);
+    expect(res.render).toHaveBeenCalledWith('error/error', {
+      ...generatePageContent({ language: 'en', userEmail: 'test@example.com' }),
+      ...errorContent.en[429],
     });
   });
 
@@ -95,7 +110,7 @@ describe('ErrorController', () => {
 
     expect(logger.error.mock.calls[0][0]).toContain('CSRF Token Failed');
     expect(res.statusCode).toBe(400);
-    expect(res.render).toBeCalledWith('error/error', {
+    expect(res.render).toHaveBeenCalledWith('error/error', {
       ...generatePageContent({ language: 'en', userEmail: 'test@example.com' }),
       ...errorContent.en[400],
     });
@@ -113,7 +128,7 @@ describe('ErrorController', () => {
     expect(logger.error.mock.calls[0][0]).toBe('Internal Server Error');
     expect(res.statusCode).toBe(500);
     expect(res.render).toHaveBeenCalledTimes(1);
-    expect(res.render).toBeCalledWith('error/error', {
+    expect(res.render).toHaveBeenCalledWith('error/error', {
       ...generatePageContent({ language: 'en', userEmail: 'test@example.com' }),
       ...errorContent.en[500],
     });
@@ -144,7 +159,7 @@ describe('ErrorController', () => {
       error: 'invalid_grant',
     });
     expect(res.statusCode).toBe(500);
-    expect(res.render).toBeCalledWith('error/error', {
+    expect(res.render).toHaveBeenCalledWith('error/error', {
       ...generatePageContent({ language: 'en' }),
       ...errorContent.en[500],
     });

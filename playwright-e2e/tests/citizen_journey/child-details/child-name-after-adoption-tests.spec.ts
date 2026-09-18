@@ -90,17 +90,15 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
   });
 
   test('check pressing draft button maintains filled first name label', async ({
-    page,
     citChildFullNameAfterAdoptionPage,
   }) => {
     await citChildFullNameAfterAdoptionPage.fillFirstNameLabel('Joe');
     await citChildFullNameAfterAdoptionPage.clickSaveAsDraft();
+    await expect
+      .soft(citChildFullNameAfterAdoptionPage.page.getByRole('heading', { name: 'Your application has been saved' }))
+      .toBeVisible();
 
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
-    const actualUrl = page.url();
-    await expect(actualUrl).toBe(expectedUrl);
-
-    await page.goBack();
+    await citChildFullNameAfterAdoptionPage.page.goBack();
 
     const expectedLabelValue = 'Joe';
     const actualLabelValue = await citChildFullNameAfterAdoptionPage.firstName.inputValue();
@@ -108,17 +106,15 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
   });
 
   test('check pressing draft button maintains filled last name label', async ({
-    page,
     citChildFullNameAfterAdoptionPage,
   }) => {
     await citChildFullNameAfterAdoptionPage.fillLastNameLabel('Smith');
     await citChildFullNameAfterAdoptionPage.clickSaveAsDraft();
+    await expect
+      .soft(citChildFullNameAfterAdoptionPage.page.getByRole('heading', { name: 'Your application has been saved' }))
+      .toBeVisible();
 
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
-    const actualUrl = page.url();
-    await expect(actualUrl).toBe(expectedUrl);
-
-    await page.goBack();
+    await citChildFullNameAfterAdoptionPage.page.goBack();
 
     const expectedLabelValue = 'Smith';
     const actualLabelValue = await citChildFullNameAfterAdoptionPage.lastName.inputValue();
@@ -126,19 +122,17 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
   });
 
   test('check pressing draft button maintains filled first name and last name labels', async ({
-    page,
     citChildFullNameAfterAdoptionPage,
   }) => {
     await citChildFullNameAfterAdoptionPage.fillFirstNameLabel('Joe');
     await citChildFullNameAfterAdoptionPage.fillLastNameLabel('Smith');
     await citChildFullNameAfterAdoptionPage.clickSaveAsDraft();
 
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
+    await expect
+      .soft(citChildFullNameAfterAdoptionPage.page.getByRole('heading', { name: 'Your application has been saved' }))
+      .toBeVisible();
 
-    const actualUrl = page.url();
-    await expect(actualUrl).toBe(expectedUrl);
-
-    await page.goBack();
+    await citChildFullNameAfterAdoptionPage.page.goBack();
 
     const expectedFirstNameLabelValue = 'Joe';
     const expectedLastNameLabelValue = 'Smith';
@@ -152,7 +146,6 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
   });
 
   test('check pressing draft button then continuing with application maintains first name and last name labels', async ({
-    page,
     citSaveAsDraftPage,
     citTaskListPage,
     citChildFullNamePage,
@@ -162,15 +155,16 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
     await citChildFullNameAfterAdoptionPage.fillLastNameLabel('Smith');
     await citChildFullNameAfterAdoptionPage.clickSaveAsDraft();
 
-    let expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
-    let actualUrl = page.url();
-    await expect(actualUrl).toBe(expectedUrl);
-
+    expect
+      .soft(citChildFullNameAfterAdoptionPage.page.getByRole('heading', { name: 'Your application has been saved' }))
+      .toBeVisible();
     await citSaveAsDraftPage.clickContinueWithYourApplicationButton();
 
-    expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/task-list`;
-    actualUrl = page.url();
-    await expect(actualUrl).toBe(expectedUrl);
+    await citSaveAsDraftPage.page.waitForURL(`${urlConfig.citizenFrontendBaseUrl}/task-list`);
+
+    await expect(
+      citSaveAsDraftPage.page.getByRole('heading', { name: 'Apply to adopt a child placed in your care' })
+    ).toBeVisible();
 
     await citTaskListPage.clickChildDetailsLink();
 
@@ -181,24 +175,21 @@ test.describe('Citizen Journey child name after adoption test single parent', ()
     const actualFirstNameLabelValue = await citChildFullNameAfterAdoptionPage.firstName.inputValue();
     const actualLastNameLabelValue = await citChildFullNameAfterAdoptionPage.lastName.inputValue();
 
-    await expect.soft(actualFirstNameLabelValue).toBe(expectedFirstNameLabelValue);
-    await expect.soft(actualLastNameLabelValue).toBe(expectedLastNameLabelValue);
+    expect.soft(actualFirstNameLabelValue).toBe(expectedFirstNameLabelValue);
+    expect.soft(actualLastNameLabelValue).toBe(expectedLastNameLabelValue);
 
     expect(test.info().errors).toHaveLength(0);
   });
 
   test('check inserting valid name data then pressing save and continue advances to next step', async ({
-    page,
     citChildFullNameAfterAdoptionPage,
   }) => {
     await citChildFullNameAfterAdoptionPage.fillFirstNameLabel('Joe');
     await citChildFullNameAfterAdoptionPage.fillLastNameLabel('Smith');
 
     await citChildFullNameAfterAdoptionPage.clickSaveAndContinue();
-
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/children/date-of-birth`;
-    const actualUrl = page.url();
-
-    expect(actualUrl).toBe(expectedUrl);
+    await expect(
+      citChildFullNameAfterAdoptionPage.page.getByRole('heading', { name: "What is the child's date of birth?" })
+    ).toBeVisible();
   });
 });

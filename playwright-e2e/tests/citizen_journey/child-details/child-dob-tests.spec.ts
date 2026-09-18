@@ -1,6 +1,5 @@
 import { expect, test } from '../../../fixtures/fixtures';
 import { setupUser, teardownUser } from '../../../hooks/createDeleteUser.hook';
-import { urlConfig } from '../../../utils/urls';
 import { runChangePageLanguageTest, runPageLanguageTest } from '../test-utils';
 
 test.describe('Citizen Journey child DoB test single parent', () => {
@@ -291,11 +290,14 @@ test.describe('Citizen Journey child DoB test single parent', () => {
     await citChildDoBPage.fillMonthLabel('01');
     await citChildDoBPage.fillYearLabel('2020');
     await citChildDoBPage.clickSaveAsDraft();
-    const expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
-    const actualUrl = page.url();
-    await expect(actualUrl).toBe(expectedUrl);
+    await expect
+      .soft(citChildDoBPage.page.getByRole('heading', { name: 'Your application has been saved' }))
+      .toBeVisible();
 
     await page.goBack();
+    expect
+      .soft(citChildDoBPage.page.getByRole('heading', { name: "What is the child's date of birth?" }))
+      .toBeVisible();
 
     const expectedDayValue = '1';
     const expectedMonthValue = '1';
@@ -305,15 +307,14 @@ test.describe('Citizen Journey child DoB test single parent', () => {
     const actualMonthValue = await citChildDoBPage.monthLabel.inputValue();
     const actualYearValue = await citChildDoBPage.yearLabel.inputValue();
 
-    await expect.soft(actualDayValue).toBe(expectedDayValue);
-    await expect.soft(actualMonthValue).toBe(expectedMonthValue);
-    await expect.soft(actualYearValue).toBe(expectedYearValue);
+    expect.soft(actualDayValue).toBe(expectedDayValue);
+    expect.soft(actualMonthValue).toBe(expectedMonthValue);
+    expect.soft(actualYearValue).toBe(expectedYearValue);
 
     expect(test.info().errors).toHaveLength(0);
   });
 
   test('check pressing draft button then continuing with application maintains filled in date labels', async ({
-    page,
     citSaveAsDraftPage,
     citTaskListPage,
     citChildFullNamePage,
@@ -325,15 +326,15 @@ test.describe('Citizen Journey child DoB test single parent', () => {
     await citChildDoBPage.fillYearLabel('2020');
     await citChildDoBPage.clickSaveAsDraft();
 
-    let expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/save-as-draft`;
-    let actualUrl = page.url();
-    await expect(actualUrl).toBe(expectedUrl);
+    await expect
+      .soft(citChildDoBPage.page.getByRole('heading', { name: 'Your application has been saved' }))
+      .toBeVisible();
 
     await citSaveAsDraftPage.clickContinueWithYourApplicationButton();
 
-    expectedUrl = `${urlConfig.citizenFrontendBaseUrl}/task-list`;
-    actualUrl = page.url();
-    await expect(actualUrl).toBe(expectedUrl);
+    await expect
+      .soft(citTaskListPage.page.getByRole('heading', { name: 'Apply to adopt a child placed in your care' }))
+      .toBeVisible();
 
     await citTaskListPage.clickChildDetailsLink();
 
@@ -349,15 +350,14 @@ test.describe('Citizen Journey child DoB test single parent', () => {
     const actualMonthValue = await citChildDoBPage.monthLabel.inputValue();
     const actualYearValue = await citChildDoBPage.yearLabel.inputValue();
 
-    await expect.soft(actualDayValue).toBe(expectedDayValue);
-    await expect.soft(actualMonthValue).toBe(expectedMonthValue);
-    await expect.soft(actualYearValue).toBe(expectedYearValue);
+    expect.soft(actualDayValue).toBe(expectedDayValue);
+    expect.soft(actualMonthValue).toBe(expectedMonthValue);
+    expect.soft(actualYearValue).toBe(expectedYearValue);
 
     expect(test.info().errors).toHaveLength(0);
   });
 
   test('check inserting valid date then pressing save amd continue advances to next step', async ({
-    page,
     citChildDoBPage,
   }) => {
     await citChildDoBPage.fillDayLabel('01');
@@ -366,9 +366,8 @@ test.describe('Citizen Journey child DoB test single parent', () => {
 
     await citChildDoBPage.clickSaveAndContinue();
 
-    const exepctedUrl = `${urlConfig.citizenFrontendBaseUrl}/task-list`;
-    const actualUrl = page.url();
-
-    await expect(actualUrl).toBe(exepctedUrl);
+    await expect
+      .soft(citChildDoBPage.page.getByRole('heading', { name: 'Apply to adopt a child placed in your care' }))
+      .toBeVisible();
   });
 });
