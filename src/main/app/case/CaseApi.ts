@@ -143,7 +143,7 @@ export class CaseApi {
       this.logger.info('createCase payload data', data);
       this.logger.info('createCase response id', response.data.id);
       response.data.data.status = response.data.state;
-      return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
+      return { id: '', state: response.data.state, ...fromApiFormat(response.data.data) };
     } catch (err) {
       this.logError(err);
       throw new Error('Case could not be created.');
