@@ -64,7 +64,7 @@ export class Helmet {
       "'sha256-LjVehCSGxwoOR2kQY7kJOjr0bXprxquxKYwhGGzFO2s='",
     ];
 
-    const connectSrc = [self, dynaTraceDomain, googleAnalyticsDomain, doubleclick, getIdamUrl()];
+    const connectSrc = [self, dynaTraceDomain, googleAnalyticsDomain, doubleclick];
 
     const imgSrc = [
       self,
