@@ -54,7 +54,6 @@ describe('CaseApi', () => {
     nock('http://ccd-test-api').post('/case-types/A58/cases').reply(200, { id: '1234', state: State.Draft, data: {} });
 
     const userCase = await api.getOrCreateCase(serviceType, userDetails);
-
     expect(userCase).toStrictEqual({
       id: '1234',
       state: State.Draft,
