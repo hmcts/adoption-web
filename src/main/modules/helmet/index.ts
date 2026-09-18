@@ -1,6 +1,7 @@
 import * as express from 'express';
 import { Express, RequestHandler } from 'express';
 import helmet from 'helmet';
+import { getIdamUrl } from '../../app/auth/user/oidc';
 
 type ReferrerPolicyToken =
   | 'no-referrer'
@@ -74,6 +75,8 @@ export class Helmet {
       'https://www.gstatic.com',
     ];
 
+    const formAction = [self, getIdamUrl()];
+
     if (app.locals.developmentMode) {
       scriptSrc.push("'unsafe-eval'");
     }
@@ -89,6 +92,7 @@ export class Helmet {
           objectSrc: [self],
           scriptSrc,
           styleSrc: [self, ...tagManager, "'unsafe-inline'", 'https://fonts.googleapis.com'],
+          formAction,
         },
       }) as RequestHandler
     );
