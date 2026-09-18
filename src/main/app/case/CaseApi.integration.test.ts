@@ -55,7 +55,7 @@ describe('CaseApi', () => {
 
     const userCase = await api.getOrCreateCase(serviceType, userDetails);
     expect(userCase).toStrictEqual({
-      id: '',
+      id: '1234',
       state: State.Draft,
       status: State.Draft,
     });
