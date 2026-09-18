@@ -51,7 +51,7 @@ export class SessionStorage {
       return new RedisStore({ client });
     }
 
-    return new FileStore({ 
+    return new FileStore({
       path: '/tmp',
       retries: 1, // Number of times to retry on failure
       logFn: (...args: unknown[]) => {
