@@ -18,6 +18,7 @@ import {
   PageLink,
   SIGN_IN_URL,
   SIGN_OUT_URL,
+  START_ELIGIBILITY_URL,
   TERMS_AND_CONDITIONS,
   TIMED_OUT_REDIRECT,
 } from '../../steps/urls';
@@ -35,11 +36,18 @@ export class OidcMiddleware {
       res.redirect(getRedirectUrl(`${protocol}${res.locals.host}${port}`, CALLBACK_URL));
     });
 
-    app.get(SIGN_OUT_URL, (req, res) => {
+    app.get(SIGN_OUT_URL, (req, res, next) => {
       const serviceUrl = `${protocol}${res.locals.host}${port}`;
-      const endSessionUrl = getEndGlobalSessionUrl(serviceUrl);
+      const endSessionUrl = getEndGlobalSessionUrl(serviceUrl, START_ELIGIBILITY_URL);
 
-      req.session.destroy(() => res.redirect(endSessionUrl));
+      req.session.destroy(err => {
+        if (err) {
+          logger.error('Error destroying session', err);
+          return next(err);
+        }
+
+        return res.redirect(endSessionUrl);
+      });
     });
 
     app.get(

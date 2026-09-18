@@ -14,10 +14,11 @@ export const getRedirectUrl = (serviceUrl: string, callbackUrlPageLink: PageLink
   return `${loginUrl}?client_id=${id}&response_type=code&redirect_uri=${callbackUrl}&scope=${scope}`;
 };
 
-export const getEndGlobalSessionUrl = (serviceUrl: string): string => {
+export const getEndGlobalSessionUrl = (serviceUrl: string, callbackUrlPageLink: PageLink): string => {
   const endSessionUrl: string = config.get('services.idam.endSessionURL');
-  const postLogoutRedirectUri = encodeURIComponent(serviceUrl);
-
+  const postLogoutRedirectUri = encodeURIComponent(serviceUrl + callbackUrlPageLink);
+  //const postLogoutRedirectUri = new URL(String(callbackUrlPageLink), serviceUrl).toString();
+  
   return `${endSessionUrl}?post_logout_redirect_uri=${postLogoutRedirectUri}`;
 };
 
