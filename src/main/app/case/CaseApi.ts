@@ -141,7 +141,7 @@ export class CaseApi {
         event_token: token,
       });
       response.data.data.status = response.data.state;
-      return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
+      return { id: '', state: response.data.state, ...fromApiFormat(response.data.data) };
     } catch (err) {
       this.logError(err);
       throw new Error('Case could not be created.');
