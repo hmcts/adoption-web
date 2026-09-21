@@ -32,6 +32,7 @@ export class OidcMiddleware {
     const port = app.locals.developmentMode ? `:${config.get('port')}` : '';
     const { errorHandler } = app.locals;
     const logger = Logger.getLogger('index-oidc');
+    
     app.get(SIGN_IN_URL, (req, res) => {
       res.redirect(getRedirectUrl(`${protocol}${res.locals.host}${port}`, CALLBACK_URL));
     });
