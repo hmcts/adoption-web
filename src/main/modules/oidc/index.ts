@@ -37,7 +37,7 @@ export class OidcMiddleware {
     const destroySessionsAndRedirect = (req, res, next: NextFunction, redirectPage: PageLink) => {
       const serviceUrl = `${protocol}${res.locals.host}${port}`;
       const endGlobalSessionUrl = getEndGlobalSessionUrl(serviceUrl, redirectPage);
-      
+
       req.session.destroy(err => {
         if (err) {
           logger.error('Error destroying local session', err);
@@ -47,7 +47,7 @@ export class OidcMiddleware {
         return res.redirect(endGlobalSessionUrl);
       });
     };
-    
+
     app.get(SIGN_IN_URL, (req, res) => {
       res.redirect(getRedirectUrl(`${protocol}${res.locals.host}${port}`, CALLBACK_URL));
     });
