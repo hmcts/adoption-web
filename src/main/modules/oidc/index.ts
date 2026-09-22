@@ -86,6 +86,9 @@ export class OidcMiddleware {
         if (req.path.startsWith(ELIGIBILITY_URL)) {
           return next();
         }
+        if (req.path.startsWith(TIMED_OUT_URL)) {
+          return next();
+        }
 
         if (req.path.startsWith(CSRF_TOKEN_ERROR_URL)) {
           if (!req.query.isLaPortal) {
