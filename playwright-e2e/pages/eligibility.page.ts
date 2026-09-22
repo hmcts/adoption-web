@@ -18,11 +18,11 @@ export class Eligibility extends BasePage {
   readonly uKCountryOfResidenceNo: Locator;
   readonly uKCountryOfResidence12MonthsYes: Locator;
   readonly uKCountryOfResidence12MonthsNo: Locator;
-  readonly signInText: Locator;
   readonly problemErrorMessage: Locator;
   readonly selectErrorMessage: Locator;
   readonly childIsSubjectOfPlacementOrder: Locator;
   readonly orderGrandedEligiblility: Locator;
+  readonly signInScreenHeader: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -42,7 +42,7 @@ export class Eligibility extends BasePage {
     this.uKCountryOfResidenceNo = page.getByLabel('No');
     this.uKCountryOfResidence12MonthsYes = page.getByLabel('Yes');
     this.uKCountryOfResidence12MonthsNo = page.getByLabel('No');
-    this.signInText = page.locator('#skiplinktarget');
+    this.signInScreenHeader = page.getByRole('heading', { name: 'Sign in or create an account' });
     this.problemErrorMessage = page.getByRole('heading', { name: 'There is a problem', exact: true });
     this.selectErrorMessage = page.getByRole('link', { name: 'Select' });
     this.childIsSubjectOfPlacementOrder = page.getByRole('group', {
@@ -68,7 +68,7 @@ export class Eligibility extends BasePage {
     await this.clickContinue();
     await this.uKCountryOfResidence12MonthsYes.check();
     await this.clickContinue();
-    await expect(this.signInText).toContainText('Sign in or create an account');
+    await expect(this.signInScreenHeader).toBeVisible();
   }
   async isChildSubjectOfPlacementOrder(): Promise<void> {
     await this.clickContinue();
@@ -230,13 +230,13 @@ export class Eligibility extends BasePage {
       this.uKCountryOfResidence12MonthsYes
     );
     await this.clickContinue();
-    await expect(this.signInText).toContainText('Sign in or create an account');
+    await expect(this.signInScreenHeader).toBeVisible();
   }
 
   async handleFormError(errorMessage: string, eligibilityElement: { check: () => Promise<void> }): Promise<void> {
     await this.clickContinue();
     await this.clickContinue();
-    await expect(this.problemErrorMessage).toBeVisible;
+    expect(this.problemErrorMessage).toBeVisible;
     await expect(this.selectErrorMessage).toContainText([errorMessage]);
     await eligibilityElement.check();
   }
