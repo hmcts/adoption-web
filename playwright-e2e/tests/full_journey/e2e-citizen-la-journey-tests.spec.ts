@@ -10,7 +10,7 @@ import { toggleBanner } from '../../utils/toggles';
 
 dotenv.config();
 
-test.describe('e2e citzen submit citizen and la journeys', () => {
+test.describe.only('e2e citzen submit citizen and la journeys', () => {
   let userEmail: string;
   let userPassword: string;
   let userId: string;
@@ -21,10 +21,12 @@ test.describe('e2e citzen submit citizen and la journeys', () => {
       userEmail = userInfo.email;
       userPassword = userInfo.password;
       userId = userInfo.id;
+      console.log('userid', userId);
     }
   });
 
   test.afterEach('Status check', async () => {
+    console.log('teardown user id', userId);
     await teardownUser(userId);
   });
 
