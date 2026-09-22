@@ -21,6 +21,7 @@ import {
   START_ELIGIBILITY_URL,
   TERMS_AND_CONDITIONS,
   TIMED_OUT_REDIRECT,
+  TIMED_OUT_URL,
 } from '../../steps/urls';
 
 /**
@@ -32,23 +33,27 @@ export class OidcMiddleware {
     const port = app.locals.developmentMode ? `:${config.get('port')}` : '';
     const { errorHandler } = app.locals;
     const logger = Logger.getLogger('index-oidc');
+
+    const destroySessionsAndRedirect = (req, res, next: NextFunction, redirectPage: PageLink) => {
+      const serviceUrl = `${protocol}${res.locals.host}${port}`;
+      const endGlobalSessionUrl = getEndGlobalSessionUrl(serviceUrl, redirectPage);
+      
+      req.session.destroy(err => {
+        if (err) {
+          logger.error('Error destroying local session', err);
+          return next(err);
+        }
+
+        return res.redirect(endGlobalSessionUrl);
+      });
+    };
     
     app.get(SIGN_IN_URL, (req, res) => {
       res.redirect(getRedirectUrl(`${protocol}${res.locals.host}${port}`, CALLBACK_URL));
     });
 
     app.get(SIGN_OUT_URL, (req, res, next) => {
-      const serviceUrl = `${protocol}${res.locals.host}${port}`;
-      const endSessionUrl = getEndGlobalSessionUrl(serviceUrl, START_ELIGIBILITY_URL);
-
-      req.session.destroy(err => {
-        if (err) {
-          logger.error('Error destroying session', err);
-          return next(err);
-        }
-
-        return res.redirect(endSessionUrl);
-      });
+      destroySessionsAndRedirect(req, res, next, START_ELIGIBILITY_URL);
     });
 
     app.get(
@@ -92,9 +97,11 @@ export class OidcMiddleware {
 
         if (req.path.startsWith(TIMED_OUT_REDIRECT)) {
           if (!req.session.laPortalKba) {
-            return req.session.destroy(() => res.redirect(SIGN_IN_URL));
+            logger.info('Citizen session has timed out'); // TODO remove
+            return destroySessionsAndRedirect(req, res, next, TIMED_OUT_URL);
           } else {
-            return req.session.destroy(() => res.redirect(LA_PORTAL_KBA_CASE_REF));
+            logger.info('LA session has timed out'); //TODO remove
+            return destroySessionsAndRedirect(req, res, next, LA_PORTAL_KBA_CASE_REF);
           }
         }
 
