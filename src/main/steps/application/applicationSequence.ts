@@ -42,10 +42,10 @@ export const applicationSequence: Step[] = [
     url: Urls.SAVE_AND_SIGN_OUT,
     getNextStep: () => Urls.SIGN_IN_URL,
   },
-  // {
-  //   url: Urls.TIMED_OUT_URL,
-  //   getNextStep: () => Urls.SIGN_IN_URL,
-  // },
+  {
+    url: Urls.TIMED_OUT_URL,
+    getNextStep: () => Urls.SIGN_IN_URL,
+  },
   {
     url: Urls.SAVE_AS_DRAFT,
     getNextStep: () => Urls.TASK_LIST_URL,

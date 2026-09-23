@@ -1,8 +1,8 @@
 import { applicationSequence } from './applicationSequence';
 
 describe('applicationSequence', () => {
-  test('should contain 12 entries in applicant 1 screen sequence', () => {
-    expect(applicationSequence).toHaveLength(12);
+  test('should contain 13 entries in applicant 1 screen sequence', () => {
+    expect(applicationSequence).toHaveLength(13);
 
     expect(applicationSequence[0].url).toBe('/');
     expect(applicationSequence[0].getNextStep({})).toBe('/');
@@ -34,13 +34,13 @@ describe('applicationSequence', () => {
     expect(applicationSequence[9].url).toBe('/save-and-sign-out');
     expect(applicationSequence[9].getNextStep({})).toBe('/login');
 
-    // expect(applicationSequence[10].url).toBe('/timed-out');
-    // expect(applicationSequence[10].getNextStep({})).toBe('/login');
+    expect(applicationSequence[10].url).toBe('/timed-out');
+    expect(applicationSequence[10].getNextStep({})).toBe('/login');
 
-    expect(applicationSequence[10].url).toBe('/save-as-draft');
-    expect(applicationSequence[10].getNextStep({})).toBe('/task-list');
+    expect(applicationSequence[11].url).toBe('/save-as-draft');
+    expect(applicationSequence[11].getNextStep({})).toBe('/task-list');
 
-    expect(applicationSequence[11].url).toBe('/save-and-relogin');
-    expect(applicationSequence[11].getNextStep({})).toBe('/login');
+    expect(applicationSequence[12].url).toBe('/save-and-relogin');
+    expect(applicationSequence[12].getNextStep({})).toBe('/login');
   });
 });
