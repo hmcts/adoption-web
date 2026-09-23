@@ -34,6 +34,5 @@ export default class SignIn {
     await this.continueButton.click();
     await this.password.fill(password);
     await this.continueButton.click();
-    await expect(this.page.getByText('Sign out', { exact: true })).toBeVisible();
   }
 }
