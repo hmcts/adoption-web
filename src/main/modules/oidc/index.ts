@@ -44,6 +44,8 @@ export class OidcMiddleware {
           return next(err);
         }
 
+        res.clearCookie('adoption-web-session');
+
         return res.redirect(endGlobalSessionUrl);
       });
     };
@@ -86,9 +88,6 @@ export class OidcMiddleware {
         if (req.path.startsWith(ELIGIBILITY_URL)) {
           return next();
         }
-        if (req.path.startsWith(TIMED_OUT_URL)) {
-          return next();
-        }
 
         if (req.path.startsWith(CSRF_TOKEN_ERROR_URL)) {
           if (!req.query.isLaPortal) {
@@ -100,12 +99,16 @@ export class OidcMiddleware {
 
         if (req.path.startsWith(TIMED_OUT_REDIRECT)) {
           if (!req.session.laPortalKba) {
-            logger.info('Citizen session has timed out'); // TODO remove
-            return destroySessionsAndRedirect(req, res, next, TIMED_OUT_URL);
+            const lang = req.query.lang as string | undefined;
+            logger.info('Citizen session has timed out. Lang = ', lang); // TODO remove
+            return destroySessionsAndRedirect(req, res, next, `${TIMED_OUT_URL}?lang=${lang}`);
           } else {
             logger.info('LA session has timed out'); //TODO remove
             return destroySessionsAndRedirect(req, res, next, LA_PORTAL_KBA_CASE_REF);
           }
+        }
+        if (req.path.startsWith(TIMED_OUT_URL)) {
+          return next();
         }
 
         if (
