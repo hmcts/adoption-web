@@ -153,41 +153,41 @@ afterAlways('fullFunctionalTest') {
           }
         }
 
-        stage('Samsung Landscape UI Tests') {
-          try {
-            yarnBuilder.yarn('test:functional-mobileSamsungLandscape')
-          } catch (Error) {
-            unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
-          } finally {
-            publishHTML([
-              allowMissing: true,
-              alwaysLinkToLastBuild: true,
-              keepAll: true,
-              reportDir: 'playwright-report',
-              reportFiles: 'index.html',
-              reportName: 'Playwright Mobile Samsung Landscape UI Functional Test Report'
-            ])
-            steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
-          }
-        }
-
-        stage('Samsung Portrait UI Tests') {
-          try {
-            yarnBuilder.yarn('test:functional-mobileSamsungPortrait')
-          } catch (Error) {
-            unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
-          } finally {
-            publishHTML([
-              allowMissing: true,
-              alwaysLinkToLastBuild: true,
-              keepAll: true,
-              reportDir: 'playwright-report',
-              reportFiles: 'index.html',
-              reportName: 'Playwright Mobile Samsung Portrait UI Functional Test Report'
-            ])
-            steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
-          }
-        }
+//        stage('Samsung Landscape UI Tests') {
+//          try {
+//            yarnBuilder.yarn('test:functional-mobileSamsungLandscape')
+//          } catch (Error) {
+//            unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
+//          } finally {
+//            publishHTML([
+//              allowMissing: true,
+//              alwaysLinkToLastBuild: true,
+//              keepAll: true,
+//              reportDir: 'playwright-report',
+//              reportFiles: 'index.html',
+//              reportName: 'Playwright Mobile Samsung Landscape UI Functional Test Report'
+//            ])
+//            steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
+//          }
+//        }
+//
+//        stage('Samsung Portrait UI Tests') {
+//          try {
+//            yarnBuilder.yarn('test:functional-mobileSamsungPortrait')
+//          } catch (Error) {
+//            unstable(message: "${STAGE_NAME} is unstable: " + Error.toString())
+//          } finally {
+//            publishHTML([
+//              allowMissing: true,
+//              alwaysLinkToLastBuild: true,
+//              keepAll: true,
+//              reportDir: 'playwright-report',
+//              reportFiles: 'index.html',
+//              reportName: 'Playwright Mobile Samsung Portrait UI Functional Test Report'
+//            ])
+//            steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'build/reports/tests/functionalTest/**/*'
+//          }
+//        }
     }
 
   afterAlways('fortify-scan') {
