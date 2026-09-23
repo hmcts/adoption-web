@@ -51,16 +51,6 @@ export class SessionStorage {
       return new RedisStore({ client });
     }
 
-    return new FileStore({
-      path: '/tmp',
-      retries: 1, // Number of times to retry on failure
-      logFn: (...args: unknown[]) => {
-        logger.warn('[session-file-store]', ...args);
-      },
-      fallbackSessionFn: () => {
-        logger.warn('Session file read failed; using empty fallback session object');
-        return {};
-      },
-    });
+    return new FileStore({ path: '/tmp' });
   }
 }
