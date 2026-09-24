@@ -1,7 +1,7 @@
+import { Logger } from '@hmcts/nodejs-logging';
 import config from 'config';
 import { Application, NextFunction, Response } from 'express';
 
-import { Logger } from '../../../test/unit/mocks/hmcts/nodejs-logging';
 import { getEndGlobalSessionUrl, getSystemUser } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
 import { getFormattedDateInSingleDigits } from '../../app/case/answers/formatDate';
