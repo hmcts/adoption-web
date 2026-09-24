@@ -55,7 +55,7 @@ export async function createCitizenUser(token: string): Promise<{ email: string;
   const uniqueId = uuidv4();
   const id = uniqueId;
   const password = process.env.IDAM_CITIZEN_USER_PASSWORD as string;
-  const email = `TEST_ADOPTION_USER_citizen-user.${uniqueId}@test.local`;
+  const email = `TESTADOPTIONUSERCITIZEN.${uniqueId}@test.local`;
 
   const userCreationOptions: AxiosRequestConfig = {
     method: 'POST',
@@ -79,7 +79,6 @@ export async function createCitizenUser(token: string): Promise<{ email: string;
   try {
     const response = await axios.post(userCreationOptions.url ?? '', userCreationOptions.data, userCreationOptions);
     // eslint-disable-next-line no-console
-    console.log('User created:', response.data);
     return { email, password, id: response.data.id };
   } catch (error) {
     // eslint-disable-next-line no-console
