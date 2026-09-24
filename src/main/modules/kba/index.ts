@@ -1,6 +1,7 @@
-import { Application, NextFunction, Response } from 'express';
 import config from 'config';
+import { Application, NextFunction, Response } from 'express';
 
+import { Logger } from '../../../test/unit/mocks/hmcts/nodejs-logging';
 import { getEndGlobalSessionUrl, getSystemUser } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
 import { getFormattedDateInSingleDigits } from '../../app/case/answers/formatDate';
@@ -15,7 +16,6 @@ import {
   LA_PORTAL_START_PAGE,
   PageLink,
 } from '../../steps/urls';
-import { Logger } from '../../../test/unit/mocks/hmcts/nodejs-logging';
 
 /**
  * Adds the KBA middleware for knowledge based authentication
@@ -26,23 +26,23 @@ export class KbaMiddleware {
     const port = app.locals.developmentMode ? `:${config.get('port')}` : '';
     const { errorHandler } = app.locals;
     const logger = Logger.getLogger('index-kba');
-    
+
     //If updating this function also consider updating in the OidcMiddleware
     const destroySessionsAndRedirect = (req, res, next: NextFunction, redirectPage: PageLink) => {
-          const serviceUrl = `${protocol}${res.locals.host}${port}`;
-          const endGlobalSessionUrl = getEndGlobalSessionUrl(serviceUrl, redirectPage);
-    
-          req.session.destroy(err => {
-            if (err) {
-              logger.error('Error destroying local LA session', err);
-              return next(err);
-            }
-    
-            res.clearCookie('adoption-web-session');
-    
-            return res.redirect(endGlobalSessionUrl);
-          });
-        };
+      const serviceUrl = `${protocol}${res.locals.host}${port}`;
+      const endGlobalSessionUrl = getEndGlobalSessionUrl(serviceUrl, redirectPage);
+
+      req.session.destroy(err => {
+        if (err) {
+          logger.error('Error destroying local LA session', err);
+          return next(err);
+        }
+
+        res.clearCookie('adoption-web-session');
+
+        return res.redirect(endGlobalSessionUrl);
+      });
+    };
 
     app.get(
       LA_PORTAL_KBA_CALLBACK,
@@ -63,7 +63,9 @@ export class KbaMiddleware {
       })
     );
 
-    app.get(LA_PORTAL_SIGN_OUT_URL, (req, res, next) => destroySessionsAndRedirect(req, res, next, LA_PORTAL_KBA_CASE_REF));
+    app.get(LA_PORTAL_SIGN_OUT_URL, (req, res, next) =>
+      destroySessionsAndRedirect(req, res, next, LA_PORTAL_KBA_CASE_REF)
+    );
 
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {

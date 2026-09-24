@@ -34,6 +34,7 @@ export class OidcMiddleware {
     const { errorHandler } = app.locals;
     const logger = Logger.getLogger('index-oidc');
 
+    //If updating this function also consider updating in the KbaMiddleware
     const destroySessionsAndRedirect = (req, res, next: NextFunction, redirectPage: PageLink) => {
       const serviceUrl = `${protocol}${res.locals.host}${port}`;
       const endGlobalSessionUrl = getEndGlobalSessionUrl(serviceUrl, redirectPage);
