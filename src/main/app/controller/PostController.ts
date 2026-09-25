@@ -81,6 +81,7 @@ export class PostController<T extends AnyObject> {
     }
 
     if (req.body.saveAndRelogin) {
+      // deprecated: this block will be removed in future versions
       req.session.destroy(err => {
         if (err) {
           throw err;
