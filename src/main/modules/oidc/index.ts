@@ -114,7 +114,8 @@ export class OidcMiddleware {
 
         if (req.path.startsWith(SAVE_AND_RELOGIN)) {
           if (req.session?.user) {
-            return destroySessionsAndRedirect(req, res, next, `${SAVE_AND_RELOGIN}?lang=${lang}`);
+            const isLa = req.session?.laPortalKba ? true : false;
+            return destroySessionsAndRedirect(req, res, next, `${SAVE_AND_RELOGIN}?lang=${lang}&isLa=${isLa}`);
           } else {
             return next();
           }
