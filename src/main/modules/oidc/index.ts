@@ -16,6 +16,7 @@ import {
   LA_PORTAL_KBA_CASE_REF,
   PRIVACY_POLICY,
   PageLink,
+  SAVE_AND_RELOGIN,
   SIGN_IN_URL,
   SIGN_OUT_URL,
   START_ELIGIBILITY_URL,
@@ -98,9 +99,9 @@ export class OidcMiddleware {
           }
         }
 
+        const lang = req.query.lang as string | undefined;
         if (req.path.startsWith(TIMED_OUT_REDIRECT)) {
           if (!req.session.laPortalKba) {
-            const lang = req.query.lang as string | undefined;
             logger.info('Citizen session has timed out. Lang = ', lang); // TODO remove
             return destroySessionsAndRedirect(req, res, next, `${TIMED_OUT_URL}?lang=${lang}`);
           } else {
@@ -108,8 +109,17 @@ export class OidcMiddleware {
             return destroySessionsAndRedirect(req, res, next, LA_PORTAL_KBA_CASE_REF);
           }
         }
+
         if (req.path.startsWith(TIMED_OUT_URL)) {
           return next();
+        }
+
+        if (req.path.startsWith(SAVE_AND_RELOGIN)) {
+          if (req.session?.user) {
+            return destroySessionsAndRedirect(req, res, next, `${SAVE_AND_RELOGIN}?lang=${lang}`);
+          } else {
+            return next();
+          }
         }
 
         if (
