@@ -102,10 +102,8 @@ export class OidcMiddleware {
         const lang = req.query.lang as string | undefined;
         if (req.path.startsWith(TIMED_OUT_REDIRECT)) {
           if (!req.session.laPortalKba) {
-            logger.info('Citizen session has timed out. Lang = ', lang); // TODO remove
             return destroySessionsAndRedirect(req, res, next, `${TIMED_OUT_URL}?lang=${lang}`);
           } else {
-            logger.info('LA session has timed out'); //TODO remove
             return destroySessionsAndRedirect(req, res, next, LA_PORTAL_KBA_CASE_REF);
           }
         }
