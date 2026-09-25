@@ -2,7 +2,7 @@ import { Logger } from '@hmcts/nodejs-logging';
 import config from 'config';
 import { Application, NextFunction, Response } from 'express';
 
-import { getRedirectUrl, getUserDetails } from '../../app/auth/user/oidc';
+import { getEndGlobalSessionUrl, getRedirectUrl, getUserDetails } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
 import { AppRequest } from '../../app/controller/AppRequest';
 import {
@@ -12,15 +12,17 @@ import {
   COOKIES_PAGE,
   CSRF_TOKEN_ERROR_URL,
   ELIGIBILITY_URL,
-  HOME_URL,
   LA_PORTAL,
   LA_PORTAL_KBA_CASE_REF,
   PRIVACY_POLICY,
   PageLink,
+  SAVE_AND_RELOGIN,
   SIGN_IN_URL,
   SIGN_OUT_URL,
+  START_ELIGIBILITY_URL,
   TERMS_AND_CONDITIONS,
   TIMED_OUT_REDIRECT,
+  TIMED_OUT_URL,
 } from '../../steps/urls';
 
 /**
@@ -32,11 +34,31 @@ export class OidcMiddleware {
     const port = app.locals.developmentMode ? `:${config.get('port')}` : '';
     const { errorHandler } = app.locals;
     const logger = Logger.getLogger('index-oidc');
+
+    //If updating this function also consider updating in the KbaMiddleware
+    const destroySessionsAndRedirect = (req, res, next: NextFunction, redirectPage: PageLink) => {
+      const serviceUrl = `${protocol}${res.locals.host}${port}`;
+      const endGlobalSessionUrl = getEndGlobalSessionUrl(serviceUrl, redirectPage);
+
+      req.session.destroy(err => {
+        if (err) {
+          logger.error('Error destroying local session', err);
+          return next(err);
+        }
+
+        res.clearCookie('adoption-web-session');
+
+        return res.redirect(endGlobalSessionUrl);
+      });
+    };
+
     app.get(SIGN_IN_URL, (req, res) => {
       res.redirect(getRedirectUrl(`${protocol}${res.locals.host}${port}`, CALLBACK_URL));
     });
 
-    app.get(SIGN_OUT_URL, (req, res) => req.session.destroy(() => res.redirect(HOME_URL)));
+    app.get(SIGN_OUT_URL, (req, res, next) => {
+      destroySessionsAndRedirect(req, res, next, START_ELIGIBILITY_URL);
+    });
 
     app.get(
       CALLBACK_URL,
@@ -77,11 +99,25 @@ export class OidcMiddleware {
           }
         }
 
+        const lang = req.query.lang as string | undefined;
         if (req.path.startsWith(TIMED_OUT_REDIRECT)) {
           if (!req.session.laPortalKba) {
-            return req.session.destroy(() => res.redirect(SIGN_IN_URL));
+            return destroySessionsAndRedirect(req, res, next, `${TIMED_OUT_URL}?lang=${lang}`);
           } else {
-            return req.session.destroy(() => res.redirect(LA_PORTAL_KBA_CASE_REF));
+            return destroySessionsAndRedirect(req, res, next, LA_PORTAL_KBA_CASE_REF);
+          }
+        }
+
+        if (req.path.startsWith(TIMED_OUT_URL)) {
+          return next();
+        }
+
+        if (req.path.startsWith(SAVE_AND_RELOGIN)) {
+          if (req.session?.user) {
+            const isLa = !!req.session?.laPortalKba;
+            return destroySessionsAndRedirect(req, res, next, `${SAVE_AND_RELOGIN}?lang=${lang}&isLa=${isLa}`);
+          } else {
+            return next();
           }
         }
 

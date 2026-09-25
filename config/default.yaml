@@ -11,7 +11,9 @@ services:
     secret: 'NEED TO INSERT SECRET'
   idam:
     authorizationURL: ''
+    authorizationScope: 'openid profile roles'
     tokenURL: ''
+    endSessionURL: 'https://idam-web-public.aat.platform.hmcts.net/o/endSession'
     clientID: 'adoption-web'
     clientSecret: 'NEED TO INSERT SECRET'
     systemUsername: 'dummy_user'
