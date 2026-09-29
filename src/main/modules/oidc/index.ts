@@ -114,9 +114,11 @@ export class OidcMiddleware {
 
         if (req.path.startsWith(SAVE_AND_RELOGIN)) {
           if (req.session?.user) {
-            const redirectPage = (req.session?.laPortalKba
-            ? `${SAVE_AND_RELOGIN}?lang=${lang}&isLa=true`
-            : `${SAVE_AND_RELOGIN}?lang=${lang}`) as PageLink;
+            const redirectPage = (
+              req.session?.laPortalKba
+                ? `${SAVE_AND_RELOGIN}?lang=${lang}&isLa=true`
+                : `${SAVE_AND_RELOGIN}?lang=${lang}`
+            ) as PageLink;
 
             return destroySessionsAndRedirect(req, res, next, redirectPage);
           } else {
