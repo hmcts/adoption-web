@@ -1714,10 +1714,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@faker-js/faker@npm:^8.4.1":
-  version: 8.4.1
-  resolution: "@faker-js/faker@npm:8.4.1"
-  checksum: 10/5983c2ea64f26055ad6648de748878e11ebe2fb751e3c7435ae141cdffabc2dccfe4c4f49da69a3d2add71e21b415c683ac5fba196fab0d5ed6779fbec436c80
+"@faker-js/faker@npm:^10.0.0":
+  version: 10.6.0
+  resolution: "@faker-js/faker@npm:10.6.0"
+  checksum: 10/f45220ceae76133d831dee8c8f5c8566767bfd857b7f872b5ec58866b68da889dabe96e805a598e095a6c58eae250363a7f335aa0afc513cb2ad5fe69e2a967f
   languageName: node
   linkType: hard
 
@@ -4640,7 +4640,7 @@ __metadata:
     "@babel/core": "npm:^7.18.2"
     "@babel/eslint-parser": "npm:^7.11.0"
     "@babel/preset-env": "npm:^7.18.2"
-    "@faker-js/faker": "npm:^8.4.1"
+    "@faker-js/faker": "npm:^10.0.0"
     "@hmcts/cookie-manager": "npm:^1.0.0"
     "@hmcts/nodejs-healthcheck": "npm:^1.8.6"
     "@hmcts/nodejs-logging": "npm:^4.0.4"
