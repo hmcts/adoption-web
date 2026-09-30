@@ -11,7 +11,8 @@ nodejs:
   autoscaling:
     enabled: false
   environment:
-    APPINSIGHTS_KEY: '00000000-0000-0000-0000-000000000000'
+    APP_INSIGHTS_KEY: ${APP_INSIGHTS_KEY}
+    APPLICATIONINSIGHTS_CONNECTION_STRING: ${APP_INSIGHTS_CONNECTION_KEY}
     PCQ_ENABLED: 'true'
     REDIS_TTL_MS: 30
     CCD_URL: 'http://ccd-data-store-api-aat.service.core-compute-aat.internal'
@@ -19,7 +20,7 @@ nodejs:
     CDAM_API_URL: 'http://ccd-case-document-am-api-aat.service.core-compute-aat.internal'
     SOCIAL_WORKER_SUPPORTED_DOMAINS:
       - gov.uk
-      - mailinator.com # For testing purposes only 
+      - mailinator.com # For testing purposes only
     # Family Court List
     LEICESTER_VAL: 'Leicester County Court'
     STOKE-ON-TRENT_VAL: 'Stoke-on-Trent Combined Court'
@@ -143,6 +144,28 @@ nodejs:
     RATE_LIMIT_ENABLED: false
     RATE_LIMIT_WINDOW_SECONDS: 60
     RATE_LIMIT_MAX_REQUESTS: 2
+
+  keyVaults:
+    adoption:
+      secrets:
+        - name: idam-secret
+          alias: IDAM_CLIENT_SECRET
+        - name: idam-system-user-name
+          alias: IDAM_SYSTEM_UPDATE_USERNAME
+        - name: idam-system-user-password
+          alias: IDAM_SYSTEM_UPDATE_PASSWORD
+        - name: redis-access-key
+          alias: REDIS_ACCESS_KEY
+        - name: s2s-secret
+          alias: S2S_SECRET
+        - name: postcode-lookup-token
+          alias: POSTCODE_LOOKUP_TOKEN
+        - name: adoption-pcq-token
+          alias: PCQ_TOKEN
+        - name: AppInsightsInstrumentationKey-Preview-New
+          alias: APP_INSIGHTS_KEY
+        - name: app-insight-connection-key-preview
+          alias: APP_INSIGHTS_CONNECTION_KEY
 
 idam-pr:
   enabled: true
