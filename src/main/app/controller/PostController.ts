@@ -212,6 +212,7 @@ export class PostController<T extends AnyObject> {
         req.session.userCase = await req.locals.api.triggerEvent(caseRefId, modifiedValuesSet, eventName);
         await removeCaseFromRedis(req, caseRefId);
       } else {
+        // Citizen Journey
         //const flag = req.session.userCase.canPaymentIgnored;
         req.locals.api = getCaseApi(req.session.user, req.locals.logger);
         let cases = req.session.userCaseList;
