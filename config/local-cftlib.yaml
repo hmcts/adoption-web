@@ -1,0 +1,19 @@
+port: 8899
+timeout: 30000
+runningEnv: 'development'
+health:
+  timeout: 5000
+  deadline: 15000
+session:
+  secret: 'local'
+  redis:
+    host:
+    key:
+  secureCookie: false
+e2e:
+  userTestPassword: ''
+appInsights:
+  instrumentationKey:
+services:
+  case:
+    url: http://localhost:4452
