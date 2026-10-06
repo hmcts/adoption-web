@@ -20,7 +20,6 @@ test.describe('Eligibility journey e2e tests', () => {
     'Error check throughout eligibility journey to ensure user selects an option for every question',
     eligibilityTestTags,
     async ({ page, makeAxeBuilder }, testInfo) => {
-      await page.pause();
       await runEligibilityTest(page, makeAxeBuilder, testInfo, async eligibility => {
         await eligibility.errorCheck();
       });
