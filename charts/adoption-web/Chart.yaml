@@ -6,5 +6,5 @@ home: https://github.com/hmcts/adoption-web
 version: 0.0.67
 dependencies:
   - name: nodejs
-    version: 3.2.0
+    version: 3.3.1
     repository: 'oci://hmctsprod.azurecr.io/helm'
