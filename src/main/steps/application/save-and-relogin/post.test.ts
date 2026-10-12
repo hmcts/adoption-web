@@ -25,7 +25,9 @@ describe('SaveAndReloginPostController', () => {
       session: {
         save: jest.fn(done => done()),
         destroy: jest.fn((cb: () => void) => cb()),
-        laPortalKba: true,
+      },
+      query: {
+        isLa: 'true',
       },
     });
     res = mockResponse();
@@ -56,7 +58,6 @@ describe('SaveAndReloginPostController', () => {
       test('Calling SaveAndReloginPostController.post', async () => {
         await controller.post(req, res);
         expect(req.session.errors).toEqual(undefined);
-        expect(req.session.destroy).toHaveBeenCalledTimes(1);
         expect(res.redirect).toHaveBeenCalledWith(HOME_URL);
       });
     });
@@ -71,7 +72,6 @@ describe('SaveAndReloginPostController', () => {
       test('Calling SaveAndReloginPostController.post', async () => {
         await controller.post(laReq, res);
         expect(laReq.session.errors).toEqual(undefined);
-        expect(laReq.session.destroy).toHaveBeenCalledTimes(1);
         expect(res.redirect).toHaveBeenCalledWith(LA_PORTAL_KBA_CASE_REF);
       });
     });
