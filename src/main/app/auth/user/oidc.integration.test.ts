@@ -37,9 +37,7 @@ describe('getRedirectUrl', () => {
 
 describe('getEndGlobalSessionUrl', () => {
   test('should create a valid URL to end global session', () => {
-    when(config.get)
-      .calledWith('services.idam.endSessionURL')
-      .mockReturnValue('https://test/endSession')
+    when(config.get).calledWith('services.idam.endSessionURL').mockReturnValue('https://test/endSession');
 
     const result = getEndGlobalSessionUrl('http://localhost', CALLBACK_URL);
 
