@@ -123,8 +123,13 @@ If you see a message saying "As you've not logged in for at least 90 days, you n
 
 - Run:
 
+Running adoption-web standalone, port:3001 (using AAT for everything else):
 ```bash
    yarn start:dev
+```
+Running adoption-web with adoption-cos-api locally, port:8899 (using AAT for Docmosis, Idam)
+```bash
+   yarn start:cftLib
 ```
 
 ## Developing
