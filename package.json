@@ -30,7 +30,7 @@
     "cichecks": "yarn && run-p build lint test",
     "test:functional:skip": "echo 'Not running functional cases in Master' && exit 0",
     "test:fullfunctional": "echo 'full functional replaced by modularised functional tests' && exit 0",
-    "test:functional-chromium": "yarn playwright install && yarn playwright test --project chromium",
+    "test:functional-chromium": "yarn playwright install && yarn playwright test --project chromium ",
     "test:functional-firefox": "yarn playwright install && yarn playwright test --project firefox",
     "test:functional-webkit": "yarn playwright install && yarn playwright test --project webkit",
     "test:functional-mobileChrome": "yarn playwright install && yarn playwright test --project=MobileChrome",
