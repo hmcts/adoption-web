@@ -7,6 +7,7 @@ import { GetController } from '../../../app/controller/GetController';
 import { generateContent } from './content';
 
 @autobind
+/** @deprecated('This controller will be removed in future versions.') */
 export default class SaveSignOutGetController extends GetController {
   constructor() {
     super(__dirname + '/template', generateContent);

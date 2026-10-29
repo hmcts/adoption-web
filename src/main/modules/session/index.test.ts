@@ -1,5 +1,9 @@
 jest.mock('config');
-const mockCreateClient = jest.fn(() => 'MOCK redis client');
+
+const mockRedisClient = {
+  on: jest.fn(),
+};
+const mockCreateClient = jest.fn(() => mockRedisClient);
 const mockSecret = jest.fn(() => 'mock-secret');
 
 jest.mock('redis', () => {
@@ -108,8 +112,12 @@ describe('session', () => {
     });
 
     test('should use session middleware with SessionStore', () => {
-      expect(mockApp.locals.redisClient).toEqual('MOCK redis client');
+      expect(mockApp.locals.redisClient).toEqual(mockRedisClient);
       expect(mockApp.use).toHaveBeenNthCalledWith(2, 'MOCK session');
+    });
+
+    test('should register redis error handler', () => {
+      expect(mockRedisClient.on).toHaveBeenCalledWith('error', expect.any(Function));
     });
   });
 });
