@@ -6,6 +6,7 @@ import {
   LA_PORTAL_KBA_CASE_REF,
   SAVE_AND_RELOGIN,
   START_ELIGIBILITY_URL,
+  TIMED_OUT_REDIRECT,
   TIMED_OUT_URL,
 } from '../../steps/urls';
 
@@ -65,12 +66,12 @@ const startCountdown = () => {
     if (seconds < 0) {
       if (window.location.pathname.startsWith(ELIGIBILITY_URL)) {
         if (isLoggedIn?.textContent?.includes('Sign out')) {
-          window.location.href = `${TIMED_OUT_URL}?lang=${document.documentElement.lang}&eligibility=true`;
+          window.location.href = `${TIMED_OUT_REDIRECT}?lang=${document.documentElement.lang}&eligibility=true`;
         } else {
           window.location.href = `${START_ELIGIBILITY_URL}?lang=${document.documentElement.lang}`;
         }
       } else {
-        window.location.href = `${TIMED_OUT_URL}?lang=${document.documentElement.lang}`;
+        window.location.href = `${TIMED_OUT_REDIRECT}?lang=${document.documentElement.lang}`;
       }
     } else if (countdownTimer) {
       countdownTimer.innerHTML = convertToHumanReadableText(countdown);
