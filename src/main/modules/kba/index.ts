@@ -1,6 +1,8 @@
+import { Logger } from '@hmcts/nodejs-logging';
+import config from 'config';
 import { Application, NextFunction, Response } from 'express';
 
-import { getSystemUser } from '../../app/auth/user/oidc';
+import { getEndGlobalSessionUrl, getSystemUser } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
 import { getFormattedDateInSingleDigits } from '../../app/case/answers/formatDate';
 import { AppRequest } from '../../app/controller/AppRequest';
@@ -12,6 +14,7 @@ import {
   LA_PORTAL_NEG_SCENARIO,
   LA_PORTAL_SIGN_OUT_URL,
   LA_PORTAL_START_PAGE,
+  PageLink,
 } from '../../steps/urls';
 
 /**
@@ -19,7 +22,27 @@ import {
  */
 export class KbaMiddleware {
   public enableFor(app: Application): void {
+    const protocol = app.locals.developmentMode ? 'http://' : 'https://';
+    const port = app.locals.developmentMode ? `:${config.get('port')}` : '';
     const { errorHandler } = app.locals;
+    const logger = Logger.getLogger('index-kba');
+
+    //If updating this function also consider updating in the OidcMiddleware
+    const destroySessionsAndRedirect = (req, res, next: NextFunction, redirectPage: PageLink) => {
+      const serviceUrl = `${protocol}${res.locals.host}${port}`;
+      const endGlobalSessionUrl = getEndGlobalSessionUrl(serviceUrl, redirectPage);
+
+      req.session.destroy(err => {
+        if (err) {
+          logger.error('Error destroying local LA session', err);
+          return next(err);
+        }
+
+        res.clearCookie('adoption-web-session');
+
+        return res.redirect(endGlobalSessionUrl);
+      });
+    };
 
     app.get(
       LA_PORTAL_KBA_CALLBACK,
@@ -40,7 +63,9 @@ export class KbaMiddleware {
       })
     );
 
-    app.get(LA_PORTAL_SIGN_OUT_URL, (req, res) => req.session.destroy(() => res.redirect(LA_PORTAL_KBA_CASE_REF)));
+    app.get(LA_PORTAL_SIGN_OUT_URL, (req, res, next) =>
+      destroySessionsAndRedirect(req, res, next, LA_PORTAL_KBA_CASE_REF)
+    );
 
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
@@ -76,10 +101,10 @@ export class KbaMiddleware {
                     ' ' +
                     req.session.userCase.childrenLastName?.replace(/\s{2,}/g, ' ').trim()
               ) {
-                return req.session.destroy(() => res.redirect(LA_PORTAL_NEG_SCENARIO + param));
+                return destroySessionsAndRedirect(req, res, next, `${LA_PORTAL_NEG_SCENARIO}${param}`);
               }
             } catch (err) {
-              return req.session.destroy(() => res.redirect(LA_PORTAL_NEG_SCENARIO + param));
+              return destroySessionsAndRedirect(req, res, next, `${LA_PORTAL_NEG_SCENARIO}${param}`);
             }
           }
         }

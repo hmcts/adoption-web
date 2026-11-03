@@ -13,10 +13,10 @@ export default class SaveAsDraftPostController extends PostController<AnyObject>
   }
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
-    if (!req.session.laPortalKba) {
-      req.session.destroy(() => res.redirect(HOME_URL));
+    if (!req.query.isLa) {
+      res.redirect(HOME_URL);
     } else {
-      req.session.destroy(() => res.redirect(LA_PORTAL_KBA_CASE_REF));
+      res.redirect(LA_PORTAL_KBA_CASE_REF);
     }
   }
 }

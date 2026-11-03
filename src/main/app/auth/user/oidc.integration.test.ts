@@ -4,7 +4,7 @@ import nock from 'nock';
 
 import { CALLBACK_URL } from '../../../steps/urls';
 
-import { getRedirectUrl, getSystemUser, getUserDetails } from './oidc';
+import { getEndGlobalSessionUrl, getRedirectUrl, getSystemUser, getUserDetails } from './oidc';
 
 config.get = jest.fn();
 
@@ -24,12 +24,26 @@ describe('getRedirectUrl', () => {
     when(config.get)
       .calledWith('services.idam.clientID')
       .mockReturnValue('adoption-web')
+      .calledWith('services.idam.authorizationScope')
+      .mockReturnValue('openid profile roles')
       .calledWith('services.idam.authorizationURL')
-      .mockReturnValue('https://idam-web-public/login');
+      .mockReturnValue('https://idam-web-public/o/authorize');
 
     expect(getRedirectUrl('http://localhost', CALLBACK_URL)).toBe(
-      'https://idam-web-public/login?client_id=adoption-web&response_type=code&redirect_uri=http://localhost/receiver'
+      'https://idam-web-public/o/authorize?client_id=adoption-web&response_type=code&redirect_uri=http://localhost/receiver&scope=openid%20profile%20roles'
     );
+  });
+});
+
+describe('getEndGlobalSessionUrl', () => {
+  test('should create a valid URL to end global session', () => {
+    when(config.get).calledWith('services.idam.endSessionURL').mockReturnValue('https://test/endSession');
+
+    const result = getEndGlobalSessionUrl('http://localhost', CALLBACK_URL);
+
+    const url = new URL(result);
+    expect(`${url.origin}${url.pathname}`).toBe('https://test/endSession');
+    expect(url.searchParams.get('post_logout_redirect_uri')).toBe('http://localhost/receiver');
   });
 });
 
