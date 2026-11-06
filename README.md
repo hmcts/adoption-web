@@ -97,7 +97,7 @@ Remember to uncomment this code before you commit any changes.
    yarn start:dev
 ```
 
-- The application's home page will be available at http://localhost:3001. This will redirect to the IDAM log-in page in AAT.  Use the test account with e-mail address `test-citizen-dc5@mailinator.com` and password `Password12` to log in as a Citizen user.<br>
+- The application's home page will be available at http://localhost:3001 (http://localhost:8899 if you are running `yarn start:cftLib` in local). This will redirect to the IDAM log-in page in AAT.  Use the test account with e-mail address `test-citizen-dc5@mailinator.com` and password `Password12` to log in as a Citizen user.<br>
 If you see a message saying "As you've not logged in for at least 90 days, you need to reset your password." then you need to recreate the test account using `curl` as follows:
 
 ```bash
@@ -208,7 +208,7 @@ Make sure you have those values set correctly for your application.
 
 ### Healthcheck
 
-The application exposes a health endpoint (https://localhost:3000/health), created with the use of
+The application exposes a health endpoint (https://localhost:3001/health, port could be 8899 if you are running `yarn start:cftLib` in local), created with the use of
 [Nodejs Healthcheck](https://github.com/hmcts/nodejs-healthcheck) library. This endpoint is defined
 in [health.ts](src/main/routes/health.ts) file. Make sure you adjust it correctly in your application.
 In particular, remember to replace the sample check with checks specific to your frontend app,
