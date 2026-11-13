@@ -76,6 +76,7 @@ withPipeline(type, product, component) {
   }
 
   before('fullFunctionalTest:preview') {
+    // ZAP security scan target — PR scans the preview deployment for this specific PR change
     env.ADOP_WEB_URL = "https://adoption-web-pr-${CHANGE_ID}.preview.platform.hmcts.net/"
     env.PARALLEL_CHUNKS = 2
     env.IDAM_TOKEN_URL = "${IDAM_TOKEN_URL}"
