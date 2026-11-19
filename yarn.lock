@@ -7761,14 +7761,14 @@ __metadata:
   linkType: hard
 
 "express-rate-limit@npm:^8.7.3":
-  version: 8.7.3
-  resolution: "express-rate-limit@npm:8.7.3"
+  version: 8.7.5
+  resolution: "express-rate-limit@npm:8.7.5"
   dependencies:
     debug: "npm:^4.4.3"
     ip-address: "npm:^10.2.0"
   peerDependencies:
     express: ">= 4.11"
-  checksum: 10/a92c767dfa5fb86bb68cf789d0c789c429c8fc273d27218e9fff498049cdc7138b7d07fa29ac9185dc8f50fe320dfa51bbe461d9c5b8e9cf823e783b5787c3aa
+  checksum: 10/c34a1d17e57081ac11b0d039fc4b29cbab83b7e10c7ae0ebe2504412959186106c291044b3f7b06575956765912acb43c86cb42d70a90a20f2c1bdbb2c24daef
   languageName: node
   linkType: hard
 
