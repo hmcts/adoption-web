@@ -179,5 +179,5 @@
     "js-yaml": "^4.3.0",
     "follow-redirects": "1.16.3"
   },
-  "packageManager": "yarn@4.14.1"
+  "packageManager": "yarn@4.18.1"
 }
