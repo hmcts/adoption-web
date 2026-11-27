@@ -3832,11 +3832,11 @@ __metadata:
   linkType: hard
 
 "@types/multer@npm:^2.0.0":
-  version: 2.1.0
-  resolution: "@types/multer@npm:2.1.0"
+  version: 2.3.0
+  resolution: "@types/multer@npm:2.3.0"
   dependencies:
     "@types/express": "npm:*"
-  checksum: 10/405298b6b0b6f4007c87b7bcd69074a96fba8d5a0efcc149788af9bdb45fb9d0ab367ddebec4840eaaa45d05ba682b2a8c3a71101e9e51d6cfaa624034339c1a
+  checksum: 10/93ba37a3301e551c2babc1cc11450a8918db54cfec2265441550ea917f62d862ef7b26094926f61ca612e08bfe24d3477bb52b016502172a9e6ab127967a1c25
   languageName: node
   linkType: hard
 
