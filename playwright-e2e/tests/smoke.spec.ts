@@ -99,7 +99,7 @@ test.describe('smoke test', () => {
         testInfo,
         'alone',
         'Sandwell Metropolitan Council',
-        'Leicester County Court',
+        'Swansea Civil Justice Centre',
         'BN26 6AL',
         '0800800800'
       );
