@@ -65,7 +65,7 @@ export async function citizenAdoptionSocialWorkDetails(app: App): Promise<void> 
 
 export async function citizenAdoptionFamilyCourtDetails(app: App): Promise<void> {
   await app.tasklist.familyCourtDetails.click();
-  await app.basePage.selectLocation('Leicester County Court');
+  await app.basePage.selectLocation('Swansea Civil Justice Centre');
   await app.basePage.clickSaveAndContinue();
   await app.familyCourt.sameCourtYes();
   await app.basePage.clickSaveAndContinue();
